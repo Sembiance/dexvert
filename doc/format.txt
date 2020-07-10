@@ -22,6 +22,8 @@ export.meta =
   weakMagic      : true                             # [*] If true, only match if magic matches AND either ext or filename matches
 
   program        : "somebin"						# [*] If set, then exports.steps isn't necessary and program will be used
+
+  notes          : "Some notes go here"				# [*] You can specify various notes here
 }
 
 # [*] This should return an array of step functions to follow

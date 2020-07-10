@@ -46,7 +46,7 @@ tiptoe(
 	},
 	function printResults(state)
 	{
-		if(verbose===0)
+		if(verbose<2)
 			return this();
 		
 		console.log(util.inspect(state, {colors : true, depth : Infinity}));

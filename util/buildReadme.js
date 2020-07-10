@@ -57,11 +57,11 @@ dexvert.identify(inputFilePath, cb);
 WIP
 
 ## Programs
-Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). The Use Flags are what is set on my system, not all may be required for proper functioning. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
+Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
 
-Package | Program | Overlay | Use Flags
-------- | ------- | ------- | ---------
-${programs.multiSort([p => p.meta.gentooPackage, p => p.bin()]).map(p => (`${p.meta.gentooPackage} | [${p.bin()}](${p.meta.website}) | ${(p.meta.gentooOverlay || "")} | ${(p.meta.gentooUseFlags || "")}`)).join("\n")}
+Package | Program | Overlay
+------- | ------- | -------
+${programs.multiSort([p => p.meta.gentooPackage, p => p.bin()]).map(p => (`${p.meta.gentooPackage} | [${p.bin()}](${p.meta.website}) | ${(p.meta.gentooOverlay || "")}`)).join("\n")}
 
 Gentoo users can install all the above with this single command:
 \`\`\`

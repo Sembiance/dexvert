@@ -60,31 +60,31 @@ dexvert.identify(inputFilePath, cb);
 WIP
 
 ## Programs
-Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). The Use Flags are what is set on my system, not all may be required for proper functioning. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
+Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
 
-Package | Program | Overlay | Use Flags
-------- | ------- | ------- | ---------
-app-arch/amitools | [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | dexvert | 
-app-arch/ancient | [ancient](https://github.com/temisu/ancient_format_decompressor) | dexvert | 
-app-arch/arc | [arc](http://arc.sourceforge.net) |  | 
-app-arch/bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) |  | 
-app-arch/decrmtool | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) | dexvert | 
-app-arch/extract-adf | [extract-adf](https://github.com/mist64/extract-adf) | dexvert | 
-app-arch/fido | [fido](https://openpreservation.org/products/fido/) | dexvert | 
-app-arch/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert | 
-app-arch/gzip | [gunzip](https://www.gnu.org/software/gzip/) |  | 
-app-arch/lbrate | [lbrate](http://www.svgalib.org/rus/lbrate.html) | dexvert | 
-app-arch/lha | [lha](https://github.com/jca02266/lha) |  | 
-app-arch/p7zip | [7z](http://p7zip.sourceforge.net/) |  | pch
-app-arch/tar | [tar](https://www.gnu.org/software/tar/) |  | acl nls xattr
-app-arch/trid | [trid](https://mark0.net/soft-trid-e.html) | dexvert | 
-app-arch/unar | [unar](https://unarchiver.c3.cx/) |  | 
-app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) |  | 
-app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert | bzip2 natspec smith unicode
-media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) |  | X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib
-sys-apps/file | [file](https://www.darwinsys.com/file/) |  | bzip2 lzma seccomp zlib
-x11-base/xorg-server | [Xvfb](https://www.x.org/wiki/) |  | libglvnd xorg xvfb
-x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) |  | 
+Package | Program | Overlay
+------- | ------- | -------
+app-arch/amitools | [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | dexvert
+app-arch/ancient | [ancient](https://github.com/temisu/ancient_format_decompressor) | dexvert
+app-arch/arc | [arc](http://arc.sourceforge.net) | 
+app-arch/bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) | 
+app-arch/decrmtool | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) | dexvert
+app-arch/extract-adf | [extract-adf](https://github.com/mist64/extract-adf) | dexvert
+app-arch/fido | [fido](https://openpreservation.org/products/fido/) | dexvert
+app-arch/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert
+app-arch/gzip | [gunzip](https://www.gnu.org/software/gzip/) | 
+app-arch/lbrate | [lbrate](http://www.svgalib.org/rus/lbrate.html) | dexvert
+app-arch/lha | [lha](https://github.com/jca02266/lha) | 
+app-arch/p7zip | [7z](http://p7zip.sourceforge.net/) | 
+app-arch/tar | [tar](https://www.gnu.org/software/tar/) | 
+app-arch/trid | [trid](https://mark0.net/soft-trid-e.html) | dexvert
+app-arch/unar | [unar](https://unarchiver.c3.cx/) | 
+app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
+app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
+media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
+sys-apps/file | [file](https://www.darwinsys.com/file/) | 
+x11-base/xorg-server | [Xvfb](https://www.x.org/wiki/) | 
+x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) | 
 
 Gentoo users can install all the above with this single command:
 ```

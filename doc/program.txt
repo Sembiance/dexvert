@@ -1,0 +1,20 @@
+# Documentation for files in lib/program/*.js
+# Those marked as [*] are OPTIONAL
+
+export.meta = 
+{
+  website        : "program.com"		# Website URL for the program
+
+  gentooOverlay  : "dexvert"			# [*] Which Gentoo overlay the package is found in, if applicable
+
+  gentooPackage  : "app-arch/program"	# Which Gentoo package contains this program
+
+  gentooUseFlags : "png jpg midi"       # [*] Which gento USE flags should be set
+
+  gentooNotes    : "Blah blah"			# [*] Additional notes about the gentoo package version
+
+  informational  : true					# [*] If true, program is just informational that changes state. No files are produced
+}
+
+exports.bin  = state => "prog"			# A function that returns the name of the binary to run
+exports.args = state => ([arg1, arg2])	# A function that returns an array of arguments to pass to the binary

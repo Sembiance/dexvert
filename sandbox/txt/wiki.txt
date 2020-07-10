@@ -1,0 +1,26 @@
+{{FormatInfo
+|formattype=electronic
+|subcat=Help files
+|extensions={{ext|hlp}}
+|released=1985
+}}
+
+== Identification ==
+GX2 files begin with ASCII "{{magic|GX2}}".
+
+== Software ==
+* [[FFmpeg]]
+* [[ImageMagick]]
+* [[XnView]]
+* {{Deark}}
+* [http://snisurset.net/code/abydos/ abydos]
+
+
+
+
+#REDIRECT [[AmigaGuide]]
+
+
+== Sample files ==
+* https://telparia.com/fileFormatSamples/archive/Glossary.drx
+* https://telparia.com/unsupportedFileFormatSamples/image/gx1/ → *.GX1

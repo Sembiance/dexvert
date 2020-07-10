@@ -1,0 +1,33 @@
+# Documentation for files in lib/format/<family>/*.js
+# Those marked as [*] are OPTIONAL
+
+export.meta = 
+{
+  name           : "Format Name"					# Human friendly name of this format
+
+  ext            : [".ext", ".ext2"]				# [*] Array of extensions this format may have. First ext should be the primary
+                                                          Extensions are case insensitive matches, so only specific lowercase
+  
+  forbidExtMatch : [".not", ".otherExt"]			# [*] Array of extensions the file must NOT have in order to match this format
+                                                          Extensions are case insensitive matches, so only specific lowercase
+
+  magic          : ["Some Magic", /^More Magic$/]	# [*] Array of magics to test against. Can be strings (startsWith) or regexes
+  
+  forbiddenMagic : ["Not Magic", /^Not This$/]		# [*] Array of magics the file must NOT have in order to match this format
+
+  filename       : [/^filename$/i]    				# [*] Array of filenames this format may have. Strings (equals) or regexes
+
+  priority       : C.PRIORITY.HIGH				    # [*] If a file matches many formats in 1 family, priority order for processing
+
+  weakMagic      : true                             # [*] If true, only match if magic matches AND either ext or filename matches
+
+  program        : "somebin"						# [*] If set, then exports.steps isn't necessary and program will be used
+}
+
+# [*] This should return an array of step functions to follow
+exports.steps = function steps(state, p)
+{
+	return [
+		...
+	];
+}

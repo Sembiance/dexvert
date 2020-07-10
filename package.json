@@ -1,0 +1,21 @@
+{
+	"name"         : "dexvert",
+	"version"      : "0.1.0",
+	"description"  : "Decompress, Extract and Convert many file formats",
+	"author"       : "Robert Schultz <robert@cosmicrealms.com>",
+	"homepage"     : "https://github.com/Sembiance/dexvert",
+	"license"      : "MIT",
+	"repository"   : {
+		"type" : "git",
+		"url"  : "https://github.com/Sembiance/dexvert"
+	},
+	"engines"      : { "node" : ">=14" },
+	"main"         : "./lib/dexvert.js",
+	"bin"          : { "dexvert" : "./bin/dexvert", "dexid" : "./bin/dexid" },
+	"dependencies" : {
+		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",
+		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
+		"minimist"         : "~1.2.5",
+		"tiptoe"           : "file:/mnt/compendium/DevLab/node-modules/tiptoe"
+	}
+}

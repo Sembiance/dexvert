@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+"use strict";
+const XU = require("@sembiance/xu"),
+	path = require("path"),
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	tiptoe = require("tiptoe"),
+	printUtil = require("@sembiance/xutil").print,
+	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js"));
+
+function usage()
+{
+	XU.log`${XU.c.fg.cyan + "Usage:"} dexid [options] <inputFilePath>
+
+Identifies <inputFilePath>. Like an advanced 'file' command
+
+${XU.c.fg.cyan + "Options:"}
+  ${XU.c.fg.yellow + "--help"}
+    Display help/usage
+  
+  ${XU.c.fg.yellow + "--json"}
+    Output JSON`;
+	process.exit(0);
+}
+
+if(argv.help || argv._.length<1)
+	usage();
+
+tiptoe(
+	function performIdentification()
+	{
+		dexvert.identify(argv._[0], this);
+	},
+	function processIdentification(results)
+	{
+		if(argv.json)
+		{
+			console.log(JSON.stringify(results));
+		}
+		else
+		{
+			console.log(printUtil.columnizeObjects(results, {
+				colNames   : ["confidence", "from", "magic", "extensions"],
+				colNameMap : {confidence : "%"},
+				formatter(colName, val) { return (colName==="confidence" ? (val ? val + "%" : "") : (colName==="extensions" ? (val || []).join(", ") : val || "")); }}));
+		}
+	},
+	XU.FINISH
+);

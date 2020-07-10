@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+"use strict";
+const XU = require("@sembiance/xu"),
+	path = require("path"),
+	tiptoe = require("tiptoe"),
+	C = require(path.join(__dirname, "..", "lib", "C.js")),
+	util = require("util"),
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js"));
+
+function usage()
+{
+	XU.log`${XU.c.fg.cyan + "Usage:"} dexvert [options] <inputFilePath> <outputDirPath>
+
+Processes <inputFilePath> converting or extracting files into <outputDirPath>
+
+${XU.c.fg.cyan + "Options:"}
+  ${XU.c.fg.yellow + "--verbose=<level>"}
+    Show additional info when processing. Levels 1 to 5 where 5 is most verbose
+
+   ${XU.c.fg.yellow + "--brute=<family>,<family>"}
+    If unable to identify <inputFilePath>, try converting anyways
+    Pass a comma delimited list of families to brute force try
+    Valid families: ${C.FAMILIES.join(" ")} or ${"all"}
+    Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
+    WARNING: Multiple successes could use a lot of disk space
+
+   ${XU.c.fg.yellow + "--tmpDirPath=/mnt/tmp"}
+    Use a different tmp dir (default is os.tmpdir())
+  
+   ${XU.c.fg.yellow + "--help"}
+    Displays this usage message`;
+	process.exit(0);
+}
+
+if(argv.help || argv._.length<2)
+	usage();
+
+const verbose = argv.verbose || 0;
+
+tiptoe(
+	function runProcess()
+	{
+		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute};
+		dexvert.process(argv._[0], argv._[1], processOptions, this);
+	},
+	function printResults(state)
+	{
+		if(verbose===0)
+			return this();
+		
+		console.log(util.inspect(state, {colors : true, depth : Infinity}));
+
+		this();
+	},
+	XU.FINISH
+);

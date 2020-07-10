@@ -64,10 +64,12 @@ Gentoo users can simply install the packages below, some are available in my Gen
 
 Package | Program | Overlay
 ------- | ------- | -------
+app-arch/amigadepacker | [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | dexvert
 app-arch/amitools | [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | dexvert
 app-arch/ancient | [ancient](https://github.com/temisu/ancient_format_decompressor) | dexvert
 app-arch/arc | [arc](http://arc.sourceforge.net) | 
 app-arch/bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) | 
+app-arch/deark | [deark](https://entropymine.com/deark/) | dexvert
 app-arch/decrmtool | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) | dexvert
 app-arch/extract-adf | [extract-adf](https://github.com/mist64/extract-adf) | dexvert
 app-arch/fido | [fido](https://openpreservation.org/products/fido/) | dexvert
@@ -75,10 +77,13 @@ app-arch/gameextractor | [gameextractor](http://www.watto.org/game_extractor.htm
 app-arch/gzip | [gunzip](https://www.gnu.org/software/gzip/) | 
 app-arch/lbrate | [lbrate](http://www.svgalib.org/rus/lbrate.html) | dexvert
 app-arch/lha | [lha](https://github.com/jca02266/lha) | 
+app-arch/mscompress | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) | 
 app-arch/p7zip | [7z](http://p7zip.sourceforge.net/) | 
 app-arch/tar | [tar](https://www.gnu.org/software/tar/) | 
 app-arch/trid | [trid](https://mark0.net/soft-trid-e.html) | dexvert
+app-arch/ttdecomp | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | dexvert
 app-arch/unar | [unar](https://unarchiver.c3.cx/) | 
+app-arch/unpcx | [unpcx](http://www.ctpax-x.org/?goto=files&show=104) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
@@ -88,6 +93,6 @@ x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/decrmtool app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/p7zip app-arch/tar app-arch/trid app-arch/unar app-arch/unrar app-arch/unzip media-video/ffmpeg sys-apps/file x11-base/xorg-server x11-misc/hsetroot
+USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip media-video/ffmpeg sys-apps/file x11-base/xorg-server x11-misc/hsetroot
 ```
 		

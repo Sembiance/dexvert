@@ -23,6 +23,9 @@ Options:
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
+   --keepGoing
+    When brute forcing, don't stop at the first success. Try them all.
+
    --tmpDirPath=/mnt/tmp
     Use a different tmp dir (default is os.tmpdir())
   

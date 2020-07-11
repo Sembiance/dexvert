@@ -25,6 +25,9 @@ ${XU.c.fg.cyan + "Options:"}
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
+   ${XU.c.fg.yellow + "--keepGoing"}
+    When brute forcing, don't stop at the first success. Try them all.
+
    ${XU.c.fg.yellow + "--tmpDirPath=/mnt/tmp"}
     Use a different tmp dir (default is os.tmpdir())
   
@@ -41,7 +44,7 @@ const verbose = argv.verbose || 0;
 tiptoe(
 	function runProcess()
 	{
-		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute};
+		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute, keepGoing : argv.keepGoing};
 		dexvert.process(argv._[0], argv._[1], processOptions, this);
 	},
 	function printResults(state)

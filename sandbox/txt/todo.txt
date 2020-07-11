@@ -1,7 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add fixPerms to end of archive.js
+* Add 'kernel' meta to program/uniso.js
+
+* Update doc/format.txt and doc/program.txt with updated fields
 
 * Finish up adding all the 'archive' files.
   - Use this instead of DOSBox: https://github.com/copy/v86  (If that is awesome, offer to donate (see the github page))

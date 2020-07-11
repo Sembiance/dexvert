@@ -23,6 +23,9 @@ tiptoe(
 		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});
 		programs.push({bin() { return "ffmpeg"; }, meta : {gentooPackage : "media-video/ffmpeg", website : "https://ffmpeg.org/", gentooUseFlags : "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib"}});
 
+		// unicodeUtils.fixDirEncodings
+		programs.push({bin() { return "convmv"; }, meta : {gentooPackage : "app-text/convmv", website : "https://www.j3e.de/linux/convmv/"}});
+
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
 		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));
 		programs.filterInPlace(p => !Array.isArray(p.meta.gentooPackage));

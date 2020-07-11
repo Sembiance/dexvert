@@ -7,6 +7,9 @@ export.meta =
 
   ext            : [".ext", ".ext2"]				# [*] Array of extensions this format may have. First ext should be the primary
                                                           Extensions are case insensitive matches, so only specific lowercase
+
+  safeExt(state) { return ".safe"; }				# [*] If present, the returned extension will be the safe extension instead of
+														  the first extension in .ext[]
   
   forbidExtMatch : [".not", ".otherExt"]			# [*] Array of extensions the file must NOT have in order to match this format
                                                           Extensions are case insensitive matches, so only specific lowercase
@@ -22,8 +25,11 @@ export.meta =
   weakMagic      : true                             # [*] If true, only match if magic matches AND either ext or filename matches
 
   program        : "somebin"						# [*] If set, then exports.steps isn't necessary and program will be used
+                                                          This can also be an array of programs to execute in serial
 
   notes          : "Some notes go here"				# [*] You can specify various notes here
+
+  bruteUnsafe    : true								# [*] Set to true if this format isn't safe to be brute forced
 }
 
 # [*] This should return an array of step functions to follow
@@ -32,4 +38,15 @@ exports.steps = function steps(state, p)
 	return [
 		...
 	];
+}
+
+# [*] This will get executed after the steps have been run
+exports.post = (state, p, cb) =>
+{
+
+}
+
+exports.updateProcessed = (State, p, cb) =>
+{
+
 }

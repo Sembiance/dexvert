@@ -30,7 +30,7 @@ tiptoe(
 		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));
 		programs.filterInPlace(p => !Array.isArray(p.meta.gentooPackage));
 
-		multiProgs.forEach(multiProg => programs.push(...multiProg.meta.gentooPackage.map((subGentooPackage, i) => ({ bin() { return multiProg.meta.bin[i]; }, meta : {gentooPackage : subGentooPackage, website : multiProg.meta.website[i] || ""} }))));
+		multiProgs.forEach(multiProg => programs.push(...multiProg.meta.gentooPackage.map((subGentooPackage, i) => ({ bin() { return multiProg.meta.bin[i]; }, meta : {kernel : multiProg.meta.kernel || undefined, gentooPackage : subGentooPackage, website : multiProg.meta.website[i] || ""} }))));
 
 		fs.writeFile(path.join(__dirname, "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 
@@ -61,7 +61,28 @@ dexvert.identify(inputFilePath, cb);
 # Requirements
 
 ## Kernel
-WIP
+\`\`\`
+File systems  --->
+      CD-ROM/DVD Filesystems  --->
+	    <*> ISO 9660 CDROM file system support
+	    [*]   Microsoft Joliet CDROM extensions
+	    [*]   Transparent decompression extension
+	    <*>   UDF file system support
+	  DOS/FAT/EXFAT/NT Filesystems  --->
+	    <*> MSDOS fs support
+	    <*> VFAT (Windows-95) fs support
+	    (iso8859-1) Default iocharset for FAT
+	    <*> exFAT filesystem support
+  [*] Miscellaneous filesystems  --->
+        <*> Amiga FFS file system support
+		<*> Apple Macintosh file system support
+		<*> Apple Extended HFS file system support
+  -*- Native language support  --->
+        <*> Codepage 437 (United States, Canada)
+		<*> ASCII (United States)
+		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
+		-*- NLS UTF-8
+\`\`\`
 
 ## Programs
 Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.

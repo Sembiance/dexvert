@@ -1,17 +1,18 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add 'kernel' meta to program/uniso.js
+* Make a dexvert/wine/ folder and stick /opt/unpcx/unpcxgx.exe in it
+  Create a lib/program/wine/ program that will do all the things that wineUtil.js does (set up a different env, etc)
+  Change pcx.js to just run wine instead of call 'unpcx' and remove program/unpcx.js
+  Now unmerge 'unpcx' and remove it from the overlay and from the DISTFILES
+  Now remove wineUtil from xutil and anything that calls it
 
-* Update doc/format.txt and doc/program.txt with updated fields
+* Find anything that calls archiveUtil.extract() and update it to call dexvert.process() instead
 
-* Finish up adding all the 'archive' files.
-  - Use this instead of DOSBox: https://github.com/copy/v86  (If that is awesome, offer to donate (see the github page))
-
-* For ffmpeg program have both 'video' args and 'image' args and a way to switch between them easily
-
-* Move xutil:archiveUtil to legacy and update all my code to use dexvert.process() instead.
-  Also, at this point I should also move xutil:dosUtil to legacy and update anything that uses it in favor of the new @sembiance/DOS
+* Creating a dexvert/dos/ folder and stick my hd.img in there and also a dos/prog/ where all progs, used and un-used will go in their original glory.
+  Have the hd.img start without any custom apps on there at all
+  Now create a lib/program/dos.js that will work similar to my old DOSUtil, but isntead use: https://github.com/copy/v86
+  Once tscomp working well, move the xutil/dosUtil and xutil/dos stuff to legacy and then update any code that uses dosUtil
 
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
   Ensure every program can work just by being called Ensure  abydos 0.2.0
@@ -19,6 +20,7 @@
 * Add PNG support. It will automatically mark itself as processed so long as the png.inputMeta() (or image.inputMeta()) meta info came back what I expect. Update process.updateProcessedFlag() to call p.formats[state.id.family][state.id.formatid].updateProcessed() if it is present.
 
 * Now add all the rest of the 'image' files
+  For ffmpeg program have both 'video' args and 'image' args and a way to switch between them easily
 
 * Add a document next, something that uses unoconv to convert. Create an init.d folder and unoconv-server and ensure it daemonizes and automatically will restart it if the process crashes. Make sure if I use daemonize that I include it as a gentoo package that I need to have installed
 
@@ -69,7 +71,7 @@
 >>> Here are the apps I unmerged
 amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk unoconv djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
-abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb unmbox imageInfo
+abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:
 retrovert pcl2pdf wavduration
 >>> I removed symlinks from compendium/bin:

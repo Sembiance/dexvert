@@ -60,7 +60,28 @@ dexvert.identify(inputFilePath, cb);
 # Requirements
 
 ## Kernel
-WIP
+```
+File systems  --->
+      CD-ROM/DVD Filesystems  --->
+	    <*> ISO 9660 CDROM file system support
+	    [*]   Microsoft Joliet CDROM extensions
+	    [*]   Transparent decompression extension
+	    <*>   UDF file system support
+	  DOS/FAT/EXFAT/NT Filesystems  --->
+	    <*> MSDOS fs support
+	    <*> VFAT (Windows-95) fs support
+	    (iso8859-1) Default iocharset for FAT
+	    <*> exFAT filesystem support
+  [*] Miscellaneous filesystems  --->
+        <*> Amiga FFS file system support
+		<*> Apple Macintosh file system support
+		<*> Apple Extended HFS file system support
+  -*- Native language support  --->
+        <*> Codepage 437 (United States, Canada)
+		<*> ASCII (United States)
+		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
+		-*- NLS UTF-8
+```
 
 ## Programs
 Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
@@ -92,6 +113,7 @@ app-arch/unpcx | [unpcx](http://www.ctpax-x.org/?goto=files&show=104) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
+app-cdr/nrg2iso | [nrg2iso](http://gregory.kokanosky.free.fr/v4/linux/nrg2iso.en.html) | 
 app-shells/bash | [bash](http://tiswww.case.edu/php/chet/bash/bashtop.html) | 
 app-text/convmv | [convmv](https://www.j3e.de/linux/convmv/) | 
 dev-lang/amostools | [dumpamos](https://github.com/kyz/amostools/) | dexvert
@@ -106,6 +128,6 @@ x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip app-cdr/bchunk app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport media-video/ffmpeg sys-apps/file sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot
+USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport media-video/ffmpeg sys-apps/file sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot
 ```
 		

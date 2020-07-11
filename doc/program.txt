@@ -8,13 +8,31 @@ export.meta =
   gentooOverlay  : "dexvert"			# [*] Which Gentoo overlay the package is found in, if applicable
 
   gentooPackage  : "app-arch/program"	# Which Gentoo package contains this program
+                                          Can be an array of packages. If so, meta.website and meta.bin must be an array too.
+
+  bin            : ["bchunk", "sudo"]	# [*] Only set this if gentooPackages is an array
 
   gentooUseFlags : "png jpg midi"       # [*] Which gento USE flags should be set
 
   gentooNotes    : "Blah blah"			# [*] Additional notes about the gentoo package version
 
   informational  : true					# [*] If true, program is just informational that changes state. No files are produced
+
+  bruteUnsafe    : true					# [*] If true, this program won't be executed in brute force mode
 }
 
 exports.bin  = state => "prog"			# A function that returns the name of the binary to run
+
 exports.args = state => ([arg1, arg2])	# A function that returns an array of arguments to pass to the binary
+
+# [*] If set, the return result will be the new CWD
+exports.cwd = state => state.output.absolute
+
+# [*] This will be executed directly before the program is run
+exports.pre = (state, p, cb) => {}
+
+# [*] This will be executed directly after the program has finished running
+exports.post = (state, p, cb) => {}
+
+# [*] Can return an object of run options to be passed into runUtil.run
+exports.runOptions = state => ({virtualX : true})

@@ -67,6 +67,7 @@ Gentoo users can simply install the packages below, some are available in my Gen
 
 Package | Program | Overlay
 ------- | ------- | -------
+app-admin/sudo | [sudo](https://www.sudo.ws/) | 
 app-arch/amigadepacker | [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | dexvert
 app-arch/amitools | [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | dexvert
 app-arch/ancient | [ancient](https://github.com/temisu/ancient_format_decompressor) | dexvert
@@ -74,6 +75,7 @@ app-arch/arc | [arc](http://arc.sourceforge.net) |
 app-arch/bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) | 
 app-arch/deark | [deark](https://entropymine.com/deark/) | dexvert
 app-arch/decrmtool | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) | dexvert
+app-arch/drxtract | [undirector](https://github.com/System25/drxtract) | dexvert
 app-arch/extract-adf | [extract-adf](https://github.com/mist64/extract-adf) | dexvert
 app-arch/fido | [fido](https://openpreservation.org/products/fido/) | dexvert
 app-arch/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert
@@ -89,13 +91,20 @@ app-arch/unar | [unar](https://unarchiver.c3.cx/) |
 app-arch/unpcx | [unpcx](http://www.ctpax-x.org/?goto=files&show=104) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
+app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
+app-shells/bash | [bash](http://tiswww.case.edu/php/chet/bash/bashtop.html) | 
+dev-lang/amostools | [dumpamos](https://github.com/kyz/amostools/) | dexvert
+dev-lang/amostools | [listamos](https://github.com/kyz/amostools/) | dexvert
+dev-util/stackimport | [stackimport](https://github.com/uliwitness/stackimport/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
 sys-apps/file | [file](https://www.darwinsys.com/file/) | 
+sys-fs/hfsutils | [*](https://www.mars.org/home/rob/proj/hfs/) | 
+sys-process/parallel | [parallel](https://www.gnu.org/software/parallel) | 
 x11-base/xorg-server | [Xvfb](https://www.x.org/wiki/) | 
 x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) | 
 
 Gentoo users can install all the above with this single command:
 ```
-USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip media-video/ffmpeg sys-apps/file x11-base/xorg-server x11-misc/hsetroot
+USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip app-cdr/bchunk app-shells/bash dev-lang/amostools dev-util/stackimport media-video/ffmpeg sys-apps/file sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot
 ```
 		

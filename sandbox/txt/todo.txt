@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add fixPerms to end of archive.js
+
 * Finish up adding all the 'archive' files.
   - Use this instead of DOSBox: https://github.com/copy/v86  (If that is awesome, offer to donate (see the github page))
 
@@ -49,6 +51,8 @@
 	unoconv: Need a way to launch unoconv as a server process in the background. Will need to think about the best way to do that so that I can run multiple 'dexvert' commands CLI
 	ancient: ADD this as a program and ensure it's included in the --try
 
+* Add sid and ogg support and then get rid of my DevLab/apps for these
+
 * Add the unsupported formats. Mark them as exports.meta.unsupported : true. The notes I took in unsupported.txt should be added to exports.meta.notes = ``. Also add unsupported samples to test/sample/ and update the test suite to skip any formats that are 'unsupported'. Update the unsupported notes with the new info from magnus.bergman@snisurset.net on robert@telparia
 
 * Create a util/buildSupported.js and a util/buildUnsupported.js that will create a SUPPORTED.md and UNSUPPORTED.md files that lists all the formats. Ensure I include the notes field too and a "5 sample files" hyperlink to the appropriate test/sample subdir. Also hyperlink the format name to the website (if specified)
@@ -61,13 +65,13 @@
 
 >>> LEGACY INFO, DELETE AS I GO!!!
 >>> Here are the apps I unmerged
-amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms nrg2iso shed dosemu uade virtio-win binwalk unoconv djview ghostpcl-bin grotag writerperfect ab2ascii amosbank amostools stackimport nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
+amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk unoconv djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
 abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb unmbox imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:
-retrovert pcl2pdf unnrg unpcx* undirector wavduration
+retrovert pcl2pdf wavduration
 >>> I removed symlinks from compendium/bin:
-mod2wav mikmodInfo midistar2mid modInfo unmbox imageInfo abydosconvert tridDefToMagic
+mod2wav mikmodInfo midistar2mid modInfo imageInfo abydosconvert tridDefToMagic
 
 
 

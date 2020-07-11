@@ -6,6 +6,7 @@ const XU = require("@sembiance/xu"),
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
+	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fs = require("fs"),
@@ -25,6 +26,15 @@ Options:
   --record              Take the results of the identifications and save them as the future expected results`;
 	process.exit(0);
 }
+
+// Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
+const SHA1_IGNORE_FILES =
+{
+	archive :
+	{
+		director : [/.png$/]
+	}
+};
 
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
@@ -112,7 +122,11 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(err)
 				return this(undefined, "FAIL", err.toString(), err);
 
-			const newTestData = {processed : !!results.processed, inputMeta : results.input.meta};
+			const newTestData = {processed : !!results.processed};
+			if(results.unsupported)
+				newTestData.unsupported = true;
+			if(results.input.meta)
+				newTestData.inputMeta = results.input.meta;
 			if(results.processed && results.output.files)
 			{
 				newTestData.files = {};
@@ -129,7 +143,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", "No test data for this file", newTestData);
 
 			const sampleTestData = testData[sampleSubFilePath];
-			if(results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq
+			if(!!results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq
 				return this(undefined, "FAIL", `Expected processed to be ${XU.c.fg.white + sampleTestData.processed + XU.c.fg.orange} but got ${XU.c.fg.white + results.processed + XU.c.fg.orange} instead`);
 
 			if(!Object.equals(sampleTestData.inputMeta, results.input.meta))
@@ -142,13 +156,23 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected to have no files but found ${XU.c.fg.white + results.output.files.length + XU.c.fg.orange} instead`);
 			
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
+			if(results.output.files && expectedFiles.length!==results.output.files.length)
+				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but only got ${XU.c.fg.white + results.output.files.length}`);
+
+			const {family, formatid} = results.id;
 			(results.output.files || []).forEach(outSubFilePath =>
 			{
+				if(SHA1_IGNORE_FILES[family] && SHA1_IGNORE_FILES[family][formatid] && SHA1_IGNORE_FILES[family][formatid].some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))
+				{
+					expectedFiles.removeOnce(outSubFilePath);
+					return;
+				}
+
 				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
 					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath}`);
 				
 				if(hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath)))!==sampleTestData.files[outSubFilePath])
-					return this(undefined, "FAIL", "SHA1 sum mistmatch");
+					return this(undefined, "FAIL", "SHA1 sum mistmatch", outSubFilePath);
 
 				expectedFiles.removeOnce(outSubFilePath);
 			});

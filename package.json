@@ -11,11 +11,19 @@
 	},
 	"engines"      : { "node" : ">=14" },
 	"main"         : "./lib/dexvert.js",
-	"bin"          : { "dexvert" : "./bin/dexvert", "dexid" : "./bin/dexid" },
+	"bin"          :
+	{
+		"dexvert"  : "./bin/dexvert",
+		"dexid"    : "./bin/dexid",
+		"uniso"    : "./bin/uniso",
+		"fixPerms" : "./bin/fixPerms"
+	},
 	"dependencies" : {
 		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",
 		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
+		"cue-parser"       : "~0.2.1",
 		"minimist"         : "~1.2.5",
+		"posix"            : "~4.2.0",
 		"tiptoe"           : "file:/mnt/compendium/DevLab/node-modules/tiptoe"
 	}
 }

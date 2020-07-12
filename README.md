@@ -28,6 +28,7 @@ Options:
 
    --tmpDirPath=/mnt/tmp
     Use a different tmp dir (default is os.tmpdir())
+	I suggest setting this to a 'tmpfs' mounted RAM disk.
   
    --help
     Displays this usage message
@@ -109,11 +110,11 @@ app-arch/tar | [tar](https://www.gnu.org/software/tar/) |
 app-arch/trid | [trid](https://mark0.net/soft-trid-e.html) | dexvert
 app-arch/ttdecomp | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | dexvert
 app-arch/unar | [unar](https://unarchiver.c3.cx/) | 
-app-arch/unpcx | [unpcx](http://www.ctpax-x.org/?goto=files&show=104) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/nrg2iso | [nrg2iso](http://gregory.kokanosky.free.fr/v4/linux/nrg2iso.en.html) | 
+app-emulation/wine-vanilla | [wine](https://www.winehq.org/) | 
 app-shells/bash | [bash](http://tiswww.case.edu/php/chet/bash/bashtop.html) | 
 app-text/convmv | [convmv](https://www.j3e.de/linux/convmv/) | 
 dev-lang/amostools | [dumpamos](https://github.com/kyz/amostools/) | dexvert
@@ -128,6 +129,6 @@ x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unpcx app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport media-video/ffmpeg sys-apps/file sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot
+USE="acl alsa amr bzip2 encode fontconfig gpl iconv jpeg2k libglvnd lzma mp3 natspec network nls opengl openssl opus pch postproc seccomp smith svg theora threads truetype unicode v4l vaapi vdpau vorbis vpx webp X x264 xattr xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport media-video/ffmpeg sys-apps/file sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot
 ```
 		

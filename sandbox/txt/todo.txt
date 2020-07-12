@@ -1,18 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Make a dexvert/wine/ folder and stick /opt/unpcx/unpcxgx.exe in it
-  Create a lib/program/wine/ program that will do all the things that wineUtil.js does (set up a different env, etc)
-  Change pcx.js to just run wine instead of call 'unpcx' and remove program/unpcx.js
-  Now unmerge 'unpcx' and remove it from the overlay and from the DISTFILES
-  Now remove wineUtil from xutil and anything that calls it
-
-* Find anything that calls archiveUtil.extract() and update it to call dexvert.process() instead
-
 * Creating a dexvert/dos/ folder and stick my hd.img in there and also a dos/prog/ where all progs, used and un-used will go in their original glory.
-  Have the hd.img start without any custom apps on there at all
-  Now create a lib/program/dos.js that will work similar to my old DOSUtil, but isntead use: https://github.com/copy/v86
-  Once tscomp working well, move the xutil/dosUtil and xutil/dos stuff to legacy and then update any code that uses dosUtil
+  Have the hd.img start without any custom apps on there at all (see sandbox/wip/dos*)
+  Now create a lib/util/dos.js that will work similar to my old DOSUtil, but instead use: https://github.com/copy/v86
 
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
   Ensure every program can work just by being called Ensure  abydos 0.2.0

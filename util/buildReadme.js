@@ -26,6 +26,9 @@ tiptoe(
 		// unicodeUtils.fixDirEncodings
 		programs.push({bin() { return "convmv"; }, meta : {gentooPackage : "app-text/convmv", website : "https://www.j3e.de/linux/convmv/"}});
 
+		// lib/util/wine.js
+		programs.push({bin() { return "wine"; }, meta : {gentooPackage : "app-emulation/wine-vanilla", website : "https://www.winehq.org/"}});
+
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
 		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));
 		programs.filterInPlace(p => !Array.isArray(p.meta.gentooPackage));

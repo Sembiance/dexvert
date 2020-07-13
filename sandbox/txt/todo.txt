@@ -59,11 +59,9 @@
 
 * Add support for the new abydos images formats that are part of the new version of the abydos test suite and new abydos version
 
-
-
 >>> LEGACY INFO, DELETE AS I GO!!!
 >>> Here are the apps I unmerged
-amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk unoconv djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
+amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
 abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:
@@ -73,11 +71,10 @@ mod2wav mikmodInfo midistar2mid modInfo imageInfo abydosconvert tridDefToMagic
 
 
 
-
 /---------------\
 | High Priority |
 \---------------/
-
+* Once retromission is back up and scanning CD's, respond to email on robert@telparia.com and also http://fileformats.archiveteam.org/wiki/Talk:RIFF_STYL
 
 /-----------------\
 | Medium Priority |

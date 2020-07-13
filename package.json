@@ -21,6 +21,8 @@
 		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",
 		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
 		"cue-parser"       : "~0.2.1",
+		"fastify"          : "~3.0.2",
+		"ioctl"            : "~2.0.2",
 		"minimist"         : "~1.2.5",
 		"posix"            : "~4.2.0",
 		"tiptoe"           : "file:/mnt/compendium/DevLab/node-modules/tiptoe"

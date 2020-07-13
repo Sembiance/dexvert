@@ -18,6 +18,12 @@ tiptoe(
 	{
 		const programs = programFilePaths.map(programFilePath => require(programFilePath));	// eslint-disable-line node/global-require
 
+		// dexserv
+		programs.push({bin() { return "unoconv"; }, meta : {gentooPackage : "app-office/unoconv", website : "http://dag.wiee.rs/home-made/unoconv/"}});
+
+		// uniso
+		programs.push({bin() { return "mount"; }, meta : {gentooPackage : "sys-apps/util-linux", website : "https://www.kernel.org/pub/linux/utils/util-linux/"}});
+
 		// runUtil.run
 		programs.push({bin() { return "Xvfb"; }, meta : {gentooPackage : "x11-base/xorg-server", website : "https://www.x.org/wiki/", gentooUseFlags : "libglvnd xorg xvfb"}});
 		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});

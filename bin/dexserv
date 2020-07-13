@@ -1,0 +1,96 @@
+#!/usr/bin/env node
+"use strict";
+const XU = require("@sembiance/xu"),
+	path = require("path"),
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	tiptoe = require("tiptoe"),
+	C = require(path.join(__dirname, "..", "lib", "C.js")),
+	runUtil = require("@sembiance/xutil").run,
+	fastify = require("fastify")({logger : true});
+
+function usage()
+{
+	XU.log`${XU.c.fg.cyan + "Usage:"} dexserv [options]
+
+Starts a background service to assist dexvert
+
+${XU.c.fg.cyan + "Options:"}
+  ${XU.c.fg.yellow + "--help"}
+    Display help/usage`;
+	process.exit(0);
+}
+
+if(argv.help)
+	usage();
+
+let unoconvCP = null;
+let shuttingDown = false;
+
+function shutdown()
+{
+	if(!unoconvCP || unoconvCP.killed)
+		process.exit(0);
+
+	XU.log`Shutting down dexserv...`;
+	shuttingDown = true;
+	unoconvCP.on("exit", () => process.exit(0));
+
+	unoconvCP.kill();
+}
+
+process.on("SIGINT", () =>
+{
+	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Interrupt caught.`;
+	shutdown();
+});
+
+process.on("uncaughtException", err =>
+{
+	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Uncaught exception.`;
+	console.error(err);
+	shutdown();
+});
+
+function startUnoconvServer()
+{
+	if(unoconvCP!==null)
+		return;
+
+	XU.log`Starting up unoconv server on port ${C.UNOCONV_PORT}`;
+
+	unoconvCP = runUtil.run("unoconv", ["-p", C.UNOCONV_PORT, "-l"], {silent : true, detached : true});
+	unoconvCP.on("exit", () =>
+	{
+		if(shuttingDown)
+			return;
+		XU.log`Unoconv server has exited, restarting...`;
+		unoconvCP = null;
+		startUnoconvServer();
+	});
+}
+
+tiptoe(
+	function runUnoconvServer()
+	{
+		startUnoconvServer();
+
+		XU.log`Registering routes...`;
+
+		fastify.get("/status", (request, reply) => reply.send({status : (unoconvCP ? C.DEXSERV_OK_RESPONSE : "error: unoconv server no longer running!")}));
+
+		fastify.ready(this);
+	},
+	function startServer()
+	{
+		console.log(fastify.printRoutes());
+		fastify.listen({port : C.DEXSERV_PORT, host : C.DEXSERV_HOST}, this);
+	},
+	function finish(err)
+	{
+		if(err)
+		{
+			console.error(err);
+			process.exit(1);
+		}
+	}
+);

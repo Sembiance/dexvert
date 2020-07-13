@@ -22,6 +22,7 @@ Will test all sample files to ensure dexvert.process() works correctly.
 Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
+  --file=<subFilePath>	Only process the given sample subFilePath
   --full                Run ALL tests, even long running ones
   --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
   --record              Take the results of the identifications and save them as the future expected results`;
@@ -57,7 +58,7 @@ tiptoe(
 		testData = JSON.parse(_testData);
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
-		this.data.sampleFilePaths = sampleFilePaths.shuffle();
+		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
 
 		if(argv.format)
 			this.data.sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(argv.format));

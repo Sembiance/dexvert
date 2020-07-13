@@ -9,6 +9,7 @@ const XU = require("@sembiance/xu"),
 	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fileUtil = require("@sembiance/xutil").file,
+	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	fs = require("fs"),
 	runUtil = require("@sembiance/xutil").run;
 
@@ -110,15 +111,18 @@ function extractISOFile(isoFilePath, cb)
 				return extractHFSISO(isoFilePath, this.finish);
 
 			// Just a regular ISO, mount it and copy the files over
-			runUtil.run("sudo", ["mount", isoFilePath, mountDirPath], runUtil.SILENT, this);
+			this.data.loopNum = dexUtil.allocateLoopDev(isoFilePath);
+			
+			runUtil.run("sudo", ["mount", "/dev/loop" + this.data.loopNum, mountDirPath], {liveOutput : true}, this);
 		},
 		function copyFiles()
 		{
-			runUtil.run("cp", ["-r", "*", `"${path.resolve(outDirPath)}/"`], {silent : true, shell : "/bin/bash", cwd : mountDirPath}, this);
+			runUtil.run("cp", ["-r", "*", `"${path.resolve(outDirPath)}/"`], {liveOutput : true, shell : "/bin/bash", cwd : mountDirPath}, this);
 		},
 		function fixPermissionsAndUnmount()
 		{
-			runUtil.run("sudo", ["umount", mountDirPath], runUtil.SILENT, this);
+			runUtil.run("sudo", ["umount", mountDirPath], {liveOutput : true}, this);
+			dexUtil.freeLoopDev(this.data.loopNum);
 		},
 		cb
 	);

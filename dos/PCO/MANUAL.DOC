@@ -1,0 +1,1181 @@
+
+                      PC-Outline Version 3.34
+
+                  ORGANIZATION AT YOUR FINGERTIPS
+
+
+
+
+                   Copyright (C) Brown Bag Software 1987
+
+                         2155 South Bascom Ave
+                          Campbell  Ca 95008
+                               U. S. A.
+
+
+                          Tel:  (408) 559 4545
+
+
+
+
+
+                      Disk Based Documentation
+
+     This document contains the "Getting Started" sections from
+         the actual PC-Outline manual.  It is designed, in
+     combination with the PC-Outline user interface, to get you
+     up and running and doing useful things with PC-Outline in
+        a very short time.  It does not, however, contain a
+      detailed description of all the PC-Outline commands nor
+          pretend to be a comprehensive tutorial or user's
+        reference.  Registered users can receive the actual
+          PC-Outline manual which does contain a complete
+      description of all commands.  Details on registering are
+           in the last section titled registration form.
+
+
+                         TABLE OF CONTENTS
+                         -----------------
+
+     Item                                                  Page
+     ----                                                  ----
+
+     THE SHAREWARE CONCEPT . . . . . . . . . . . . . . . . . 4
+     WHAT YOU CAN DO WITH PC-Outline . . . . . . . . . . . . 5
+     PC-Outline FACTS  . . . . . . . . . . . . . . . . . . . 6
+     GETTING STARTED . . . . . . . . . . . . . . . . . . . . 7
+          Making A Backup  . . . . . . . . . . . . . . . . . 7
+          For Floppy Use . . . . . . . . . . . . . . . . . . 7
+          For Hard Disk Use  . . . . . . . . . . . . . . . . 7
+          For Use As A Memory Resident Program . . . . . . . 7
+     THE FIRST SCREEN  . . . . . . . . . . . . . . . . . . . 8
+     THE OPENING MENU  . . . . . . . . . . . . . . . . . . . 8
+          Open a New Outline . . . . . . . . . . . . . . . . 9
+          Load an Existing Outline . . . . . . . . . . . . . 9
+          Change Drive/Directory . . . . . . . . . . . . . . 9
+          Quit . . . . . . . . . . . . . . . . . . . . . . . 9
+     OTHER COMMAND PARAMETER STARTUP OPTIONS . . . . . . . . 9
+     THE WORKING SCREEN  . . . . . . . . . . . . . . . . . .11
+     HOW TO USE THE MENUS  . . . . . . . . . . . . . . . . .11
+          The Easy Way . . . . . . . . . . . . . . . . . . .12
+          The Quick Way #1 . . . . . . . . . . . . . . . . .12
+          The Quick Way #2 . . . . . . . . . . . . . . . . .12
+          Shortcut Keystrokes  . . . . . . . . . . . . . . .12
+     HOW TO USE OPTION BOXES . . . . . . . . . . . . . . . .12
+          Numbers  . . . . . . . . . . . . . . . . . . . . .13
+          Choices  . . . . . . . . . . . . . . . . . . . . .13
+          Strings  . . . . . . . . . . . . . . . . . . . . .14
+     CREATING YOUR FIRST OUTLINE . . . . . . . . . . . . . .15
+          Entering Text Into Your First Outline  . . . . . .15
+          Creating The Second Outline Element  . . . . . . .15
+          Positioning The Second Outline Element . . . . . .15
+          Hiding Outline Elements  . . . . . . . . . . . . .16
+          Hiding Text  . . . . . . . . . . . . . . . . . . .16
+     HELP SCREEN . . . . . . . . . . . . . . . . . . . . . .17
+     TABLE OF SHORTCUT KEYSTROKES  . . . . . . . . . . . . .18
+     ABOUT PRINTER SUPPORT . . . . . . . . . . . . . . . . .20
+     USING PC-Outline ON A HARD DISK . . . . . . . . . . . .20
+     SITE LICENSES / BUNDLING ARRANGEMENTS . . . . . . . . .22
+     REGISTRATION FORM . . . . . . . . . . . . . . . . . . .23
+
+     
+
+
+
+
+
+
+
+
+
+
+                                   3
+
+                       THE SHAREWARE CONCEPT
+                       ---------------------
+
+     Copyright 1987 Telemarketing Resources DBA Brown Bag Software. All
+     rights reserved world wide. Both the PC-Outline program and
+     documentation is copyrighted. It can not be disassembled or
+     modified without our express written consent.
+
+     PC-Outline is distributed on a ShareWare basis. You may use
+     PC-Outline without charge for the purposes of evaluating it's
+     suitability for your use. We suggest that this evaluation period be
+     limited to 30 days of actual use. If you find that PC-Outline is
+     worth continuing to use, then you are required to pay for it. We
+     call the payment a "Registration Fee". Simply complete the
+     registration form and mail it in to use with your payment. If your
+     company requires an invoice, we suggest that you use a copy of this
+     registration as the pro forma invoice. When you register your copy
+     of PC-Outline, you'll receive the latest version of the program,
+     along with a comprehensive printed user manual and free unlimited
+     technical support for one year. We aggressively develop our
+     products, and as a registered user you'll be entitled to upgrades to
+     the newest versions as they are released, at a greatly reduced
+     price. Most importantly though, by registering your copy of
+     PC-Outline (or any ShareWare product), you'll ensure the survival of
+     the convenient and risk free distribution method that brought you
+     PC-Outline in the first place.
+
+     If you have received this copy from a Users' Group, "Software
+     Library" or "SIG", and have paid a small fee (usually $3 to $10),
+     you have NOT acquired the registered rights or continued right to
+     use PC-Outline. This fee was for the convenience of obtaining the
+     diskette with PC-Outline on it. The fee does NOT apply to the
+     registration fee. If you have obtained a "ShareWare" copy of
+     PC-Outline from Brown Bag Software, and have paid a small fee, this
+     fee IS applicable towards registration if you register your copy
+     within 90 days.
+
+     If you don't know whether or not your copy of PC-Outline is
+     registered or not, then look for an original diskette with a printed
+     Brown Bag Software diskette label. If in doubt, just call us or
+     write us. As of October 1987, Brown Bag Software has offices in
+     London, Copenhagen, Amsterdam, Cologne and Zurich. Our products are
+     available locally in these cities with local technical support,
+     payable in local currency and shipped from within the EEC without
+     duty. If this version of PC-Outline does NOT support the European
+     keyboard, then you will receive a version that DOES support the
+     keyboard WHEN YOU REGISTER.
+
+     You may freely copy PC-Outline for distribution under the ShareWare
+     concept, without charge.
+
+     You may NOT charge any fee for the PC-Outline program or
+     documentation without our WRITTEN APPROVAL (usually granted).
+
+     You may NOT distribute PC-Outline or it's documentation in
+     connection with ANY commercial venture, product, publication or
+     service without our written approval.
+
+                                   4
+
+                  WHAT YOU CAN DO WITH PC-Outline
+                  -------------------------------
+
+     PC-Outline is an outlining and planning program.  It
+     allows you to randomly enter information of almost any
+     type (thoughts, plans, ideas, etc.) and then organize it
+     into a hierarchial structure.  Once in the hierarchial
+     structure, you can view the information in many powerful
+     ways.  For example, using the hide/unhide feature, you
+     can view just down to any level of detail in the outline
+     that you want.  With a single keystroke, you can go from
+     viewing the lowest level of detail to a view that shows
+     you only the highest, most important topics.
+
+     With another few keystrokes, you can print the outline,
+     send it to a file compatible with your word processor,
+     copy it into another outline, or paste it directly into
+     your word processor.
+
+     PC-Outline is particularly appropriate for list making.
+     Tasks like making todo lists or planning a project are
+     ideally suited for PC-Outline.
+
+     For an example of how the hierarchical structure works
+     and how you can hide and unhide parts of the outline,
+     start PC-Outline and load the outline titled HIDING. The
+     text in the outline will help show you what PC-Outline
+     can do.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   5
+
+                         PC-Outline FACTS
+                         ----------------
+
+     For those of your who like statistics or lists, here are
+     a few about PC-Outline.
+
+          Standard PC-Outline outlining features include:
+
+             - hierarchical outline structure
+             - structured indenting
+             - hide/unhide (collapse/expand) any portion of the outline
+             - powerful outline rearrangement functions
+
+          Advanced PC-Outline features include:
+
+             - automatic numbering, including choice of numbering style
+               (alphabetic, numeric, roman, bullets, or none)
+             - easy, pull-down menus
+             - multi-line outline entries
+             - automatic paragraph reformatting
+             - margin control
+             - centering, left and right justification
+             - hanging indents
+             - search and replace
+             - on screen page break display
+             - conditional and hard page breaks
+             - block copies, moves, and deletes
+             - tab stop settings
+             - send printer control strings
+             - printer formatting: underline, boldface, italics,
+               sub/superscript, double strike
+             - windowing: up to 9 outlines open/on screen at once in
+               user-defined windows
+             - zoom any window to full screen with a single keystroke
+             - copy or move outline or text directly between windows
+             - customizable printer drivers
+             - sorting
+             - user defined macros/key redifinition
+             - live date and time stamps
+             - full support for dos 2.0 and above
+             - read/write other file formats including: ascii, Wordstar,
+               ThinkTank/Ready!
+             - data transfer with other programs including cut and paste
+               to other active programs while memory resident
+             - configuration file to set startup defaults
+             - compatible with other memory resident programs (like
+               SideKick, ProKey, etc.)
+             - freely mix outlines and text: titles, skip numbering, start
+               new numbering, move placement right and left
+             - return to dos without leaving PC-Outline
+
+          PC-Outline requires dos 2.0 or greater, one floppy disk drive,
+     128k RAM, and an IBM PC/XT/AT or compatible, and can be configured to
+     occupy as little as 80k when memory resident.
+
+                                   6
+
+                          GETTING STARTED
+                          ---------------
+
+                          MAKING A BACKUP
+                          ---------------
+
+     Before using PC-Outline, make a backup copy of the program
+     and all of its documentation files.  Put this backup away
+     in a safe place for emergency use only if something were
+     to happen to your original.
+
+                          FOR FLOPPY USE
+                          --------------
+     
+     Insert the PC-Outline disk into the default drive and type
+     PCO to the dos prompt.
+
+
+                         FOR HARD DISK USE
+                         -----------------
+
+     Create a directory where you would like to keep all of
+     your outline files.  Copy the file PCO.EXE from the floppy
+     program disk to this directory.  Set the current logged
+     directory to your outline directory and type PCO to the
+     dos prompt.
+
+     To be able to use PC-Outline from any directory on your
+     hard disk see the appendix on USING PC-Outline ON A HARD
+     DISK.
+
+               FOR USE AS A MEMORY RESIDENT PROGRAM
+               ------------------------------------
+
+     To use PC-Outline as a memory resident program (where it
+     is always instantly available at the touch of a key),
+     start the program with PCO/r instead of just PCO.  This
+     tells PC-Outline that you want to load the memory resident
+     version instead.  You will get a brief copyright message
+     and PC-Outline will be permanently resident in memory.  To
+     start PC-Outline just press ^\ (control backslash).  The
+     invoke key can be changed to anything you like using the
+     separate program KEYSET.COM.
+
+     You may want to place the command PCO/r in your
+     autoexec.bat file so that PC-Outline is automatically
+     loaded each time you boot your computer.  See the
+     following section on other command parameter startup
+     options to adjust the amount of memory that PC-Outline
+     will use.  The default is about 128k but can be adjusted
+     as low as 90k.
+
+
+
+                                   7
+
+     If you are using PC-Outline in the memory resident mode,
+     you should regularly save your work.  If one of the other
+     programs that you are running should hang or cause your
+     computer to crash, you will lose any un-saved outlines.
+     It is a good practice to save your outlines before
+     returning to your main application (the single keystroke
+     ^S will accomplish this).
+
+     PC-Outline is designed to be compatible with as many other
+     memory-resident programs as possible.  Because all memory
+     resident programs have their own way of being memory
+     resident, some conflicts are bound to exist.  When you
+     have problems, experiment with the order the programs are
+     loaded.   Although we cannot tell you how PC-Outline will
+     interact with all other memory-resident programs, we do
+     know that PC-Outline itself will be the most reliable when
+     it is loaded last.  If another program also says that it
+     wants to be loaded last, then you may need to experiment
+     with the correct loading order for the two programs to
+     work with one another.  In general, you should load
+     PC-Outline after keyboard enhancers like Prokey.  If you
+     load PC-Outline after SideKick, both programs will
+     function fine except that you will not be able to invoke
+     PC-Outline from within SideKick.
+
+
+                        THE FIRST SCREEN
+                         ----------------
+
+     Once the program starts, the first screen is a message
+     explaining the shareware distribution concept, how it
+     works, how you can most benefit from it, and how you can
+     help support it.  To continue past this screen, press any
+     key.
+
+     In the future, you may start the program by typing PCO /q
+     to the dos prompt instead of just PCO and you will bypass
+     the opening screen.  It may be helpful to create a batch
+     file that types the PCO /q for you each time.  We do ask,
+     however, that if you copy the program for someone, please
+     do not supply them with the batch file that bypasses the
+     shareware screen.  It is to both our and your advantage to
+     help as many users as possible both learn about and
+     support the shareware concept.
+
+                         THE OPENING MENU
+                         ----------------
+
+     The opening menu offers you four choices.  To choose one
+     of the four options, either use the up and down arrow keys
+     to select the option you want and press RET or just press
+     the first letter of the desired option (i.e. press "o" to
+     choose Open a New Outline).  Pressing the ESC key will
+     always abort the current operation.
+
+
+                                   8
+
+                         OPEN A NEW OUTLINE
+                         ------------------
+
+     Enter any legal dos path or path and filename except do
+     not use an extension on the eight character name.
+     PC-Outline will automatically add the extension .PCO.  If
+     you do not type a filename, then the file will be created
+     in the directory listed on the bottom line of the screen
+     (known as the current directory).  If you type the name of
+     an outline that already exists, then it will be loaded
+     rather than creating a new one with the same name.
+
+                      LOAD AN EXISTING OUTLINE
+                      ------------------------
+
+     Choose one of the existing outlines to load by pointing to
+     it with the arrows and pressing RET.  If no outlines exist
+     in the current directory, then PC-Outline will assume that
+     you must want to create a new outline and will prompt you
+     accordingly.  If you realize that you are logged into the
+     wrong directory or you change your mind for some other
+     reason, you can always press ESC to back up a step.
+
+                      CHANGE DRIVE/DIRECTORY
+                      ----------------------
+
+     Enter the new current directory.  This command obeys most
+     of the same rules as dos.  If you enter a full path name,
+     then that becomes your new current directory.  If you
+     enter just a sub-directory name, then that is appended
+     onto the existing directory path.  To just change logged
+     drives, just type "d:" where d is the desired drive.
+
+                               QUIT
+                               ----
+
+     Choose this option to exit PC-Outline and return to dos.
+
+
+              OTHER COMMAND PARAMETER STARTUP OPTIONS
+              ---------------------------------------
+
+     A command parameter option is a sequence of special
+     characters typed after the program name when starting a
+     program from dos.  In the sections above we already
+     introduced the command parameters "/r" and "/q".  There
+     are a number of other command parameters:
+
+     /b - forces the display to black and white
+     /s - makes screen activity faster on most non-IBM screens
+     /m = xxx specifies how much memory to reserve for outline
+          data in the memory resident version.  For example
+          /m=22 would reserve 22k for outline data.  Since the
+          program itself will occupy about 60k, this would be a
+
+                                   9
+
+          grand total of 82k.  The default is /m=64.
+     /d - causes PC-Outline to ignore the starting directory
+          that you may have entered in the ADVANCED
+          CONFIGURATION menu and instead use the current
+          directory when PC-Outline was started.  This is
+          useful if you keep most of your outlines in one
+          directory (so you set the starting directory), but
+          sometimes you want to start out with the current
+          directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   10
+
+                        THE WORKING SCREEN
+                        ------------------
+
+     There are a number of parts to the normal working screen.
+
+     The bottom line usually contains a message indicating some
+     of your current options.  The end of the bottom row tells
+     you how much free memory you have.
+
+     The 2nd line from the bottom show the current ruler with
+     left and right margins, tab stops and the current cursor
+     position.
+     
+     The next to last column is a status column that tells you
+     information about the current line.
+     
+     A blank means this line ends in wordwrap.
+     A period means this line is past the end of the outline.
+     A dash means this line is the last line in an outline
+     entry and there are no sub-entries.
+     A down arrow means this line is the last line in an
+     outline entry and there are sub-entries.
+     A chevron means that this line ends in a hard carriage
+     return.
+     Reverse video means that this outline entry has either its
+     children or its text hidden.
+     
+     The second column is a page break indication column.  The
+     last line of each page will show a square block.
+     
+     The second row is a status line that lists the following:
+     
+       -  The current path/filename (only the last 20
+               characters are show here).  The full filename
+               can always be seen with the WINDOW LIST command.
+       -  The amount of memory the outline occupies so far in
+               K-bytes.
+       -  The status of Insert/Overwrite for editing.
+       -  Page, line, and column information.
+       -  The current system time.
+       -  The window number.
+     
+     The top line shows the top level menu options.
+     
+     
+                       HOW TO USE THE MENUS
+                       --------------------
+
+     The menu system is designed to be both easy to learn for
+     the novice and quick to use for the experienced user.
+     Because of this, there are several ways to invoke and use
+     the menus - each method varies in speed and ease of use.
+
+
+
+                                   11
+
+     THE EASY WAY
+
+     The easiest way to use the menus is to press the INS key.
+     This will start up the FILE menu.  To choose one of the
+     other menus, use the right and left arrow keys to position
+     the menu along the menu bar.  Within any one of the menus
+     you may make a selection by either pointing to the desired
+     option and pressing RET or by pressing the first letter of
+     the desired option.  Pressing the ESC key will always exit
+     the current menu.
+     
+     THE QUICK WAY #1
+
+     To start directly in one of the menus, press the "/" key
+     (forward slash) and then the first letter of the desired
+     menu.  Thus, to go immediately to the DISPLAY menu you
+     would type /d or immediately to the OUTLINE menu would be
+     /o.  In order to actually use the / key in your text, just
+     type it twice.  Note that this key can be changed to
+     whatever you like using the setup program called
+     KEYSET.COM.
+     
+     THE QUICK WAY #2
+
+     An alternate way to start directly in one of the menus is
+     to press Alt and the first letter of the desired menu.
+     For example Alt-d would start the DISPLAY menu and Alt-o
+     would start the OUTLINE menu.
+     
+     SHORTCUT KEYSTROKES
+     
+     In addition to choosing items through menus, many of the
+     more common functions have single key shortcuts.  If a
+     menu item can also be accomplished with a shortcut
+     keystroke, then that keystroke will be listed in
+     parentheses in the menu.  For example, in the OUTLINE
+     menu, the option CREATE NEW OUTLINE ENTRY can also be done
+     by just typing a control-N.  In addition to the
+     pre-defined shortcut keystrokes, you can create your own
+     by using keyboard macros.  See the section on macros in
+     the description of the ADVANCED menu for more information.
+     
+                      HOW TO USE OPTION BOXES
+                      -----------------------
+     
+     Some menu selections will lead you to an option box where
+     you will be presented with a number of different options
+     to choose from.  For example, selecting PARAGRAPH STYLE
+     from the display menu, brings up an option box with the
+     choices left margin, right margin, paragraph alignment,
+     and first line alignment.  To change one of the options,
+     use the up and down arrow keys to position the cursor in
+
+
+
+                                   12
+
+     the desired option.  The bottom line of the screen should
+     indicate what to do next depending upon what type of
+     option it is.
+
+     When you have correctly specified one of the options, you
+     can press RET to enter that new option and leave the
+     option box or you can use the up and down arrow keys to
+     set another option.  If you use the up or down arrow keys
+     to move to another option, the option you just changed
+     will be updated and set and a mark will indicate you have
+     changed that item.  The item is already changed; pressing
+     ESC will still leave that item changed.
+     
+     If you are in the middle of changing an option and you
+     decide you don't want to change it after all, you can
+     press the ESC key.  If that item has not yet been marked
+     as changed, that particular option will remain unchanged
+     and you will exit the option box.
+     
+     The startup values for most of the parameters in the
+     option boxes are contained in a special configuration file
+     called PCO.CFG.  Each time PC-Outline is started it reads
+     this file and loads the startup values from it.  To set
+     new default parameters, press the F10 key while in an
+     option box and those parameters will be saved to the
+     configuration file as they are listed in the option box.
+     
+     Note that, when saving new values to the configuration
+     file, PC-Outline will look for the PCO.CFG file in the
+     current directory from when you started PC-Outline.  If it
+     is not there, then it will create one.  If the current
+     directory is not where you want the configuration file to
+     normally be then you can enter a file/path name in the
+     CONFIGURATION option box in the ADVANCED menu to direct
+     where it will go.
+     
+     There are basically three types of options:
+     
+     NUMBERS
+     
+     An option like a left margin requires a number.  To change
+     the left margin, simply enter a new number.
+     
+     CHOICES
+     
+     Some options offer you a series of choices.  To change the
+     option, you must pick a new choice.  For example,
+     paragraph alignment can be one of four choices:  left
+     aligned, right aligned, justified, centered.  To toggle
+     through the different choices, press the space bar.  The
+     left and right arrows also work for toggling.  The right
+     arrow works just like the space bar and the left arrow
+     goes the reverse order through the choices.
+     
+
+                                   13
+
+     If you already know which choice you want, you can just
+     press the first letter of the desired choice.  For
+     example, pressing the letter "j" would select justified in
+     the above example.  Note that this can be useful when
+     defining a macro because you can select a specific option
+     without knowing what it was previously set to.
+
+     STRINGS
+
+     Some options require you to input some series of
+     characters.  One such example would be a filename.  In
+     this case, you are free to edit the name as you type.  The
+     following keys are active:  Home, End, INS, DEL,
+     Backspace, Left Arrow, and Right Arrow.
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   14
+
+                    CREATING YOUR FIRST OUTLINE
+                    ---------------------------
+
+        ENTERING INFORMATION INTO THE FIRST OUTLINE ELEMENT
+        ---------------------------------------------------
+
+     Once you have loaded PC-Outline, passed the shareware
+     screen, and started an outline file from the opening menu,
+     you are ready to create an outline.  The screen will show
+     an "A." and then the cursor.  The "A." indicates you are
+     in the first outline element.  To enter information into
+     this first outline element, just type.  The information in
+     an outline element can be anything from a single word to a
+     multi-page document.  If you type enough words to get to
+     the right margin, the cursor will automatically wrap
+     around and start the next line.
+
+                CREATING THE SECOND OUTLINE ELEMENT
+                -----------------------------------
+
+     When you are ready to start a second outline element,
+     press the INS key.  This starts the FILE menu.  Press the
+     right arrow key to enter the OUTLINE menu.  Now choose
+     CREATE NEW OUTLINE ENTRY (note that you can also do this
+     with the shortcut keystroke ^N or ^RET).
+
+     This will present you with a reverse video "B." positioned
+     one line after the last piece of text in "A.".  Notice
+     that the bottom line of the screen now contains the
+     message: "ENTER TEXT OR PRESS ARROWS TO MOVE THIS NEW
+     ENTRY."
+
+              POSITIONING THE SECOND OUTLINE ELEMENT
+              --------------------------------------
+
+     Before typing any other characters, you can make this new
+     entry a sub-entry of "A." by pressing the right arrow.  If
+     it was already a sub-entry, you could promote it up a
+     level by pressing the left arrow.  You could also switch
+     places with "A." by pressing the up arrow.  The down arrow
+     will switch back again.  As soon as you type any
+     characters, the "B." will change back to normal video and
+     you can no longer move the entry in this manner and the
+     message at the bottom of the screen will change back to
+     the message about menus.  There are other commands for
+     moving the entry once you have typed characters.
+
+     By repeating this process of typing text and choosing
+     CREATE NEW OUTLINE ENTRY, you can create as simple or
+     complex an outline structure as you want.
+
+
+
+
+
+                                   15
+
+                      HIDING OUTLINE ELEMENTS
+                      -----------------------
+
+     A major advantage of organizing information in an outline
+     structure is that you can hide levels of detail.  Supposed
+     we had the example outline listed below.  If we position
+     the cursor in element B. and select CURRENT ENTRY'S
+     CHILDREN from the HIDE menu, the sub-entries (from now on
+     referred to as children) of B. will disappear.  Select
+     CURRENT ENTRY'S CHILDREN from the SHOW menu and they will
+     reappear.  The GRAY PLUS key on the right side of the
+     keyboard can be used as a shortcut to toggle the
+     hide/unhide status of children.
+     
+     Before hiding the children of B.
+     
+     A. ---
+     B. ---              Cursor position in this entry.
+        1. ---
+        2. ---
+        3. ---
+     C. ---
+     
+     After hiding the children of B.
+     
+     A. ---
+     B. ---
+     C. ---
+     
+     After showing the children of B. again:
+     
+     A. ---
+     B. ---
+        1. ---
+        2. ---
+        3. ---
+     C. ---
+     
+                            HIDING TEXT
+                            -----------
+     
+     Within any given outline element, you have three viewing
+     choices.  You may either see the entire entry (the default
+     case), you may see either just the first line of the entry
+     (we say the text is hidden), or the entire entry might be
+     hidden as in the above section.  To see just the first
+     line of a multi-line entry, choose CURRENT ENTRY'S TEXT
+     from the HIDE menu.  To see the rest of the lines again,
+     choose CURRENT ENTRY'S TEXT from the SHOW menu.  The ^PgDn
+     key works as a shortcut toggle to alternately hide and
+     show the multiple lines.  Note also that typing any
+     character (including a right arrow) in an entry
+     automatically shows the multiple lines.
+
+
+                                   16
+
+
+     Before hiding the text of B.
+     
+     A. ---
+     B. --- --- --- ---- ---- ------- ---- ---- - ----- ---
+        ---- ---- --- ---  ---- --- --- --- -- --- --- --- --
+        -- - - - -- - ---- ----- --- - - - --- -----
+        1. ---
+        2. ---
+        3. ---
+     C. ---
+     
+     After hiding the text of B.
+
+     A. ---
+     B. --- --- --- ---- ---- ------- ---- ---- - ----- ---
+        1. ---
+        2. ---
+        3. ---
+     C. ---
+     
+     
+                            HELP SCREEN
+                            -----------
+
+     While in the main editing mode (not in any menus),
+     pressing the F1 key will bring up a help screen that will
+     list many of the keystrokes for outline editing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   17
+
+                        QUICK KEY REFERENCE
+                        -------------------
+
+     ^A - Find String Again
+     ^B - Move Block
+     ^C - Copy Block
+     ^D - Delete Outline Family
+     ^E - Delete Block
+     ^F - Find String
+     ^G - Insert/Overwrite Toggle
+     ^H - Hide Children
+     ^I - Indent Paragraph
+     ^J - Join Outline Elements
+     ^K - Key Define
+     ^L - Hide Level Children
+     ^M - Move Outline Elements
+     ^N - New Outline Element
+     ^O - Indent and Hang
+     ^P - Print
+     ^Q - Copy Family
+     ^R - Find and Replace
+     ^S - Save Outline
+     ^T - Paragraph Style
+     ^U - Divide Outline Element
+     ^V - Center a paragraph
+     ^W - Move Family
+     ^X - Unindent a paragraph
+     ^Y - Delete Line
+     ^Z - List Windows
+     
+     F1 - Help Screen
+     F2 - Mark/Unmark
+     F3 - User Defined with macros
+     F4 - User Defined with macros
+     F5 - Promote current entry
+     F6 - Indent current entry
+     F7 - Promote marks
+     F8 - Indent marks
+     F9 - Copy marks to current location
+     F10- Move marks to current location
+     
+     ^F1 - Begin Underline
+     ^F2 - End Underline
+     ^F3 - Begin Boldface
+     ^F4 - End Boldface
+     ^F5 - Begin Italics
+     ^F6 - End Italics
+     ^F7 - Superscript
+     ^F8 - Subscript
+     ^F9 - End Both Scripts
+     ^F10- Insert Non-Break Space
+
+
+
+
+                                   18
+
+     Alt F1 - Toggle Code Display
+     Alt F2 - Clear all marks
+     Alt F3 -
+     Alt F4 -
+     Alt F5 -
+     Alt F6 -
+     Alt F7 -
+     Alt F8 -
+     Alt F9 - Copy all marks to be children of the current entry
+     Alt F10- Move all marks to be children of the current entry
+
+     Shift F1 - Insert Static Date
+     Shift F2 - Insert Live Date
+     Shift F3 - Insert Static Time
+     Shift F4 - Insert Live Time
+     Shift F5 - Begin Doublestrike
+     Shift F6 - End Doublestrike
+     Shift F7 -
+     Shift F8 -
+     Shift F9 -
+     Shift F10-
+     
+     Shift Right - Word right
+     Shift Left  - Word left
+     Shift Up    - Up one outline entry on same level
+     Shift Down  - Down one outline entry on same level
+     Shift Home  - Top File
+     Shift End   - End File
+     Shift PgUp  - Paragraph Up
+     Shift PgDn  - Paragraph Down
+     Shift DEL   - Delete too end of line
+     Shift INS   - Ins/Overwrite toggle
+     
+     ^Right - Delete word right
+     ^Left  - Delete word left
+     ^Home  - Top File
+     ^End   - End File
+     ^PgUp  - Jump to parent
+     ^PgDn  - Text hide toggle
+     
+     Gray Plus - Children Hide/Unhide Toggle
+     Gray Minus - Zoom
+     Alt 1-9 - Switch directly to Window #
+     
+
+
+
+
+
+
+
+
+
+
+
+                                   19
+
+                          ABOUT PRINTERS
+                          --------------
+
+     PC-Outline uses a printer driver in order to have the
+     capability of supporting a number of different printers.
+     Each printer driver is a special file format containing
+     the printer codes for the desired printer for the print
+     features that PC-Outline uses.  The disk that PC-Outline
+     comes on has as many printer drivers as we currently have
+     available.   To find out if your printer is supported, run
+     the program on the disk called PCPRINT.COM by typing
+     PCPRINT to the dos prompt.  If your printer is not
+     specified in the list, then you have two choices:
+     
+     1)   You may choose to not use any special print features.
+          Normal printing will most likely work even if your
+          printer is not specifically supported.
+     
+     2)   You may create your own printer driver by entering
+          the codes yourself in the PRINT CONFIGURATION menu in
+          PC-Outline and saving them to a new printer driver
+          file.  Note you should change the printer driver name
+          also to avoid conflicts with the already existing
+          drivers.
+
+
+                  USING PC-Outline ON A HARD DISK
+                  -------------------------------
+
+     It is possible to set up PC-Outline so that you can start
+     it from anywhere on your hard disk by just typing a simple
+     three letter name.  You will never again need to worry
+     about which directory you are in when you want to run
+     PC-Outline.  Dos will automatically find the program, run
+     it, and PC-Outline will set the starting directory as
+     desired.  To accomplish this, follow these steps:
+
+     1)   Set up a directory on your hard disk where you wish
+          to keep your PC-Outline files.  For purposes of
+          explanation, I will refer to a directory called
+          C:\OUTLINE (you can use any name you want).
+
+     2)   Copy the files PCO.EXE, PCO.CFG, PCO.ECT and the
+          appropriate printer driver to the C:\OUTLINE directory.
+
+     3)   Add the following command to your autoexec.bat file:
+          SET PCO=C:\OUTLINE\PCO.CFG.
+
+     4)   Set a path to the outline directory (preferably in
+          your autoexec.bat file so it is always set).  For
+          example, use the command "PATH C:\OUTLINE".
+
+     5)   Now, from anywhere on your hard disk, you can type
+          PCO.  The DOS path will find the batch file PCO.EXE
+
+                                   20
+
+          and run it.  PC-Outline will look in the dos
+          environment (where the SET PCO= command is stored)
+          and find out where to look for the configuration
+          file & Shareware screen file (PCO.ECT).  The confi-
+          guration file will tell PC-Outline
+          what directory to start off with for outline files
+          (set in the CONFIGURATION option box in the ADVANCED
+          menu.  It sounds complicated, but once you have set
+          it up, all you have to type is "PCO" and your path,
+          the SET command, and the configuration file will do
+          all the rest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   21
+
+              SITE LICENSES AND BUNDLING ARRANGEMENTS
+              ---------------------------------------
+
+     Corporate site licenses and bundling arrangements are
+     available direct from Brown Bag Software.
+
+     Site licenses can be used to distribute large quantities of
+     PC-Outline and its documentation within a specific
+     organization at very reasonable prices (hundreds of dollars
+     less per copy than competing products).  All users under a
+     site license can become registered users at no extra fee and
+     are automatically notified of updates.
+
+     Bundling arrangements can be used to distribute copies of
+     PC-Outline in order to promote some other product or
+     service.
+
+     Note that neither of these activities is permitted under the
+     limited license granted to all users of PC-Outline without
+     the expressed written consent of Brown Bag Software.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   22
+
+

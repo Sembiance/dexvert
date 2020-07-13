@@ -1,0 +1,16 @@
+AT&T 6300 High Res;640x400 2 color;1ATT;640 400 1; ;
+Hercules Monochrome;720x348 (0);1HER;720 348 0; ;
+Hercules Monochrome;720x348 (1);1HER;720 348 1; ;
+IBM Color Card;320x200 4 color;2TWO;320 200 1; ;
+IBM Color Card;640x200 2 color;1IBM;640 200 1; ;
+IBM Enhanced Card;320x200 4 color;2TWO;320 200 5; ;
+IBM Enhanced Card;640x200 2 color;1IBM;640 200 2; ;
+IBM Enhanced Card;High Res 16 color;1EGA;640 350 4; ;
+IBM Enhanced Card;High Res B/W;1EGA;640 350 1; ;
+IBM Enhanced Card;640x200 16 color;1EGA;640 200 4; ;
+IBM Personal System 2;640x480 2 color;1CN1;640 480 1; ;
+IBM Personal System 2;640x480 4 color;1CNQ;640 480 2; ;
+IBM Personal System 2;640x480 16 color;1CNQ;640 480 4; ;
+IBM Personal System 2;320x200 256 color;8CN8;320 200 1; ;
+Olivetti PC High Res;640x400 2 color;1ATT;640 400 1; ;
+

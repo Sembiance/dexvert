@@ -1,0 +1,118 @@
+TurShow:  DOS NAPLPS Viewing Program Version 1.05
+(c) Copyright 1993 Shawn Rhoads, ALL RIGHTS RESERVED
+(c) Copyright 1993 Software @ Work, ALL RIGHTS RESERVED
+
+Legal Notice
+
+End User License
+
+THIS AGREEMENT IS YOUR PERMANENT RECORD OF THE LICENSE AGREEMENT
+YOU HAVE ACCEPTED BY USING THIS SOFTWARE.  IF YOU DO NOT AGREE
+WITH ALL TERMS AND CONDITIONS, PROMPTLY RETURN THE PACKAGE FOR
+REFUND OF YOUR USER LICENSE FEE.  SOFTWARE @ WORK.
+
+NON-EXCLUSIVE LICENSE
+
+You may use the software and any related documentation an a
+single computer.  You may maintain a single copy for backup
+purposes or operation from a hard disk.  You may not sell, rent
+sublicense, assign or otherwise transfer this software or this
+license.  SOFTWARE @ WORK retains title to and ownership of the
+software and to all constituent parts at all times.  If any part
+of this agreement is held invalid or unenforceable, the other
+parts will remain valid.  You agree that the software(s)
+licensed herein constitute trade secrets of Software @ Work which
+are covered by copyright.
+
+TERM
+
+This license is effective until terminated.  This license will
+terminate if you fail to comply with any term or condition of this
+agreement.  Upon termination, you agree to destroy the software
+together with all copies in any form in your possession.
+
+YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT AND CLEARLY
+UNDERSTAND IT AND AGREE TO BE BOUND BY IT.  YOU AGREE THAT IT IS
+THE COMPLETE AND EXCLUSIVE STATEMENT OF THE AGREEMENT BETWEEN
+YOURSELF AND SOFTWARE @ WORK WHICH SUPERSEDES ANY PRIOR
+REPRESENTATIONS EITHER WRITTEN OR ORAL.
+
+(Software @ Work, P.O. Box 566491, Atlanta, GA 31156 USA)
+
+COPYRIGHT NOTICE
+
+THE SOFTWARE AND DOCUMENTATION IS COPYRIGHT SOFTWARE @ WORK.  ALL
+RIGHTS RESERVED.  REPRODUCTION BY MEANS OF SOFTWARE OR DOCUMENTATION
+IS SPECIFICALLY PROHIBITED EXCEPT AS PROVIDED IN THE LICENSE AGREEMENT.
+
+WARNING
+
+ABUSE OF SOFTWARE @ WORK'S COPYRIGHT OR FAILURE TO COMPLY WITH THE
+TERMS OF LICENSE MAY MAKE YOU LIABLE TO CRIMINAL AND/OR CIVIL PROSECUTION.
+
+Registration of your TurShow license:
+
+This is a demonstration program.  You are permitted to use this
+program for an evaluation period of 30 days.  If you decide to keep the
+program past the evaulation period, you must register your copy for $25.00.
+
+To register, contact Software @ Work with the following information:
+
+           Name:  __________________________________________
+
+        Address:  __________________________________________
+
+           City:  ______________ State: ________ Zip: ______
+
+          Phone:  __________________________________________
+
+    Credit Card:  __________________________________________  
+
+    Expire Date:  ________________  VISA or MASTERCARD    or
+ 
+      Signiture:  __________________________________________
+
+Amount enclosed:  __________________________________________
+
+       Comments:  __________________________________________
+
+Mail to:
+
+Software @ Work
+P.O. Box 566491
+Atlanta, GA 31156
+
+This software may not be included with any other package without the
+express written permission of Software @ Work.  For more information about
+packaging this software, contact the above address.
+
+Instructions
+
+TurShow is a CGA/EGA/VGA compatible NAPLPS viewing program for a DOS based
+machine with one of the above cards.  To view a NAPLPS frame, simply type:
+
+TURSHOW <filename> <options>
+
+Where <filename> is the DOS path and filename of the file you wish to
+display on the screen.
+
+<options> are one of:
+
+-cga      Display in CGA graphics mode.
+-ega      Display in EGA graphics mode.
+-vga      Display in VGA graphics mode.
+-cbios    Display using the BIOS interface.
+
+TurShow will automatically detect which display you are using and use that
+display's drivers to show the NAPLPS frame.  If you want to force a
+different display driver, use one of the above switches.
+
+Once the file has displayed, you may either hit the spacebar to return to
+DOS or wait 20 seconds.
+
+For the latest version and any upgrades contact PC Atlanta! BBS system at:
+404/395-6326 (most likely connection) or
+404/395-6327 (high speed connection)
+
+Enjoy TurShow!
+

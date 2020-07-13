@@ -43,7 +43,7 @@ tiptoe(
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 
-		sampleFilePaths.parallelForEach(testSampleFile, this, os.cpus().length);
+		sampleFilePaths.shuffle().parallelForEach(testSampleFile, this, os.cpus().length);
 	},
 	function saveTestDataIfNeeded()
 	{

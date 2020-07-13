@@ -1,0 +1,131 @@
+
+ÕÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+³ Creative Music System  Version 3.20 Æ¸
+ÔÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾³
+ ÔÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾
+   This read.me file is organised into three sections. They are:
+
+     1. Files on this disk
+     2. Enhancements and changes
+     3. Installation note
+
+   
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ 1. Files on this disk ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+   The following files are contained on this disk:
+
+     CMSDRV.COM     : C/MS music driver
+     DEFINST.COM    : program to define instrument
+     HELP.COM       : program to read CMSHELP.TXT 
+     README.COM     : program to read READ.ME file
+     ABCR.EXE       : program to generate Auto-Bass-Chord
+     COMPOSE.EXE    : song composer program
+     INSTALL.EXE    : program to install CMSDRV.COM address
+     PLAYER.EXE     : program to play songs store as .CMS files
+                      
+     PRESET.PST     : data file containing defined instruments
+     READ.ME        : text file for README.COM
+     CMSHELP.TXT    : text file for HELP.COM
+
+   Also included on this disk are groups of files having special file 
+   types/extensions. They have the following meanings:
+
+     .ABC           : sample files for Auto-Bass-Chord generation
+     .BCD           : Bass-Chord-Definition files
+     .CMS           : sample music files for C/MS
+     .THM           : sample theme files of C/MS
+
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ 2. Enhancements and changes ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Enhancements and changes made in this release include:
+
+  - Enhanced version of C/MS Utilities Disk
+        
+    Programs  such as APLAY.EXE, PACK.EXE and UNPACK.EXE  have  been 
+    upgraded to support monochrome graphic. Refer to the README file  
+    in the Utilities Disk for more details.
+
+    A  new utility, CAPTURE.COM is now included in this package  for 
+    you to capture CGA or MGA graphic in C/MS format. Graphics  that 
+    are  captured  can   be used in C/MS graphic  programs  such  as 
+    APLAY.
+
+
+  - CMSDRV.COM version 3.10
+
+    This  version of CMSDRV can be uninstalled from the system.  You 
+    can   enter  the following command to remove CMSDRV  which   has     
+    been installed in your system:
+
+          CMSDRV /U
+
+    If  your  system is installed with earlier versions  of  CMSDRV, 
+    this  switch   will   not  work.  It will  only  uninstall   the  
+    installed CMSDRV which is version 3.10 or later. 
+
+    Ensure  that  you  replace all CMSDRV.COM  you  have  with  this 
+    version.
+
+
+  - PLAYER.EXE version 3.11
+
+    This version of PLAYER is updated to work with the new version 
+    of CMSDRV.
+
+
+  - INSTALL.EXE version 3.10
+
+    This  version  of INSTALL program has been  simplified.
+    Refer to next section for more details.
+
+
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ 3. Installation note ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The C/MS Music Card is shipped with I/O addresses set at 220 hex  to 22F  
+hex.   You   need   to  re-install your  C/MS   Music   Card   and   the 
+CMSDRV.COM   if  your system has any other adapter card using  the  same 
+addresses.
+
+Before   you  run the INSTALL program, you need to change   the   jumper 
+setting on the C/MS music card to another address.
+
+To run the INSTALL program, place your C/MS Master Disk in drive A:  and 
+enter:
+          INSTALL
+
+Following screen is shown:
+
+     ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+     ³     CMSDRV INSTALL PROGRAM  Version 3.10                 ³
+     ³                                                          ³
+     ³         [1]  I/O port hex 210                            ³
+     ³         [2]  I/O port hex 220                            ³
+     ³         [3]  I/O port hex 230                            ³
+     ³         [4]  I/O port hex 240                            ³
+     ³         [5]  I/O port hex 250                            ³
+     ³         [6]  I/O port hex 260                            ³
+     ³       [Esc]  Abort the change                            ³
+     ³     [Enter]  Save the change                             ³
+     ³                                                          ³
+     ³  New I/O Port : 220                                      ³                            ³
+     ³                                                          ³
+     ³  Option:                                                 ³
+     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Select  the port number which corresponds to the new jumper address  set
+on the C/MS Music Card.
+
+Then hit [Enter] to save the change or [Esc] to abort the change.
+
+After  installing your CMSDRV.COM, re-boot your system and  execute  the 
+CMSDRV.COM again. 
+
+

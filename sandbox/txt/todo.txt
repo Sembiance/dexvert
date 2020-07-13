@@ -1,9 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Creating a dexvert/dos/ folder and stick my hd.img in there and also a dos/prog/ where all progs, used and un-used will go in their original glory.
-  Have the hd.img start without any custom apps on there at all (see sandbox/wip/dos*)
-  Now create a lib/util/dos.js that will work similar to my old DOSUtil, but instead use: https://github.com/copy/v86
+* Figure out why archive/iso full doesn't work
+
+* Go through unsupported.txt and anything in there that is entirely unsupported, create a format.js for with unsupported : true
+  For those that remain partially unsupported, prioritize doing those next
 
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
   Ensure every program can work just by being called Ensure  abydos 0.2.0
@@ -34,6 +35,8 @@
   - Possibly set a 'probability' rating. Can test the entropy of the image (solid vs static vs actual image) or Audio could measure static vs melodic vs silence, etc. I should probably have this 'opt in' as it may be expensive to calculate
   - Animated cursors and other formats that produce a bunch of individual frame images should be converted to an animated GIF
   - Remove from formatsToDoASAP.txt
+  - If some files are partially unsupported, make sure I have an unsupportedNotes : ""
+  - If entirely unsupported and something that would be useful to support in the future, have unsupported : true
 
 >>> Specific format notes:
 	BSAVE: Consider introducing exports.meta.try : true and adding support for when dexvert is called with --try to also run it through any format marked as 'try' since the program chances so greatly based on the input

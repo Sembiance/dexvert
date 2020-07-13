@@ -1,0 +1,2623 @@
+
+
+                  The SPUTTER Sound System for the PC
+                                v1.11
+
+                              VersaWare
+                            30 Jennifer St
+                          Littleton, MA 01460
+                             508-486-3083
+
+
+  SPUTTER is a set of programs, that form a full featured sound system that
+  allows you to manage and play back many different types of sound files, on
+  a variety of different devices.  All conversions are handled automatically,
+  regardless of the type of device used to create the sound file.
+
+  These are some of the major features of the SPUTTER Sound System:
+
+        * Point-and-Play shell with pull-down menus and complete file
+          management capabilities to let you play digitized sound
+          files, synthesized music files, and text to speech files all
+          from within the same program.
+
+        * Allows you to attach any of these types of sound files to events
+          on your PC such as Program Execution, File access, Disk access,
+          Alarm clock settings and replacing the original beep sound.
+
+        * Supports many different output devices, including the PC internal
+          speaker, Speech Thing, Voice Master, Sound Master, Sound Blaster,
+          AdLib Music Card and any other Digital to Analog Converter.
+
+        * Supports many different digitized sound file formats including
+          Covox (Speech Thing, Voice Master, Sound Master), Creative Labs
+          (Sound Blaster), Tandy, Macintosh, Amiga and IBM CVSD files.
+          Also supports .ROL synthesized music files (Adlib & Sound Blaster)
+          and text to speech synthesized sound.
+
+        * Can randomly select sound files to provide variation without
+          having to change batch files regularly.
+
+        * Can resample digitized sound files, to change the playback rate
+          of a file so that it can be played on slower machines.
+
+        * Includes enhanced support for DESQview and runs as a well-behaved
+          program in a DESQview window.
+
+
+  The documentation is divided into the following sections:
+
+        1. Installation Guide
+
+        2. Quick Start User Guide
+
+        3. Reference Manual
+
+           3.1  SPUTTER  - File Manager
+           3.2  SPUTMON  - Event Monitor
+           3.3  SPUT     - Sound & Text Player Utility
+           3.4  SPUTROL  - ROL File Player Utility
+           3.5  SPUTWAVE - Waveform Viewer
+           3.6  SPUTST   - SmoothTalker Utility
+
+        4. Miscellaneous
+
+
+  *************************************************************************
+                       SECTION 1 - INSTALLATION GUIDE
+  *************************************************************************
+
+  Installation of SPUTTER is very simple, just execute the following steps.
+
+  1) Place all of the Sputter programs and required files in a directory
+     that is contained in your PATH statement.  Those files are as follows:
+
+        SPUTTER.COM             File Manager
+        SPUTMON.COM             Event Monitor
+        SPUT.COM                Sound & Text file player
+        SPUTROL.COM             ROL file player
+        SPUT.PHD                Voice file for text-to-speech
+        SPUT.DIC                Sample Dictionary file for text-to-speech
+        SPUTMON.DEF             Sample Event definition file
+        SP-PIF.DVP              DESQview PIF for player window
+
+  The following files are required if you will be playing ROL files, and
+  are included with the Sputter Demonstration files:
+
+        SOUND.COM               AdLib Sound driver
+        STANDARD.BNK            AdLib Instrument Bank file
+
+  The following files are also included in the distribution, but are not
+  necessary for execution:
+
+        SPUTTER.DOC             Sputter documentation file
+        PHONES.TXT              List of Phonemes from the Doc file
+        SAMPLES.TXT             Samples of the Phoneme-functions
+        WHATS.NEW               Description of the latest changes
+        FUTURE.TXT              What's planned for future releases
+        USES.TXT                Some ideas for using Sputter
+
+  2) Add a line to your AUTOEXEC.BAT file to define the path in which
+     your sound files are stored similar to the following example:
+
+                SET SPUTDIR=C:\SND
+
+  3) If you are using any sound device other than the PC Internal Speaker,
+     you must add a line to define the port address of your sound board:
+
+     For VoiceMasterKey I     SET SPUTARG=/P1          (or 2,3,4)
+     For VoiceMasterKey II    SET SPUTARG=/P5          (or 6,7,8)
+     For SpeechThing          SET SPUTARG=/P5          (or 6,7,8)
+     For SoundBlaster         SET SPUTARG=/P220-S/IR3  (or 230,240,250,260)
+     For AdLib card           SET SPUTARG=/P388-A
+
+     You may also include any permanent switches you want to define for
+     the sound file player:
+
+                SET SPUTARG=/Q2
+
+  4) If you are using a SoundBlaster or AdLib card, add a line to define
+     the path to your ROL files:
+
+                SET SROLDIR=C:\ROL
+     
+     and you may optionally add a line to define any permanent switches
+     you want to define for the ROL file player:
+
+                SET SROLARG=/Q2
+
+  *************************************************************************
+                    SECTION 2 - QUICK START USER GUIDE
+  *************************************************************************
+
+  SPUTTER File Manager:
+
+  To start the Sputter Sound System, you must be at the DOS prompt.  Type
+  'SPUTTER ' followed by the drive:directory that contains your sound files
+  or ROL files, then press the ENTER key:
+
+                SPUTTER C:\SND <enter>
+
+  From the File Manager, just place the highlight bar on the file you want
+  played and press the ENTER key.  Many other functions are available
+  within the File Manager, which can all be found in the pull-down menus.
+
+
+  SPUTMON Event Monitor:
+
+  To setup the Event Monitor, you must first create an event definition file.
+  A sample event definition file SPUTMON.DEF has been included in the
+  distribution which may be modified to your preferences.
+    
+  To load the Event Monitor, type 'SPUTMON ' followed by the name of the
+  event definition file, then press the ENTER key:
+
+                SPUTMON SPUTMON.DEF <enter>
+
+
+  Now you can enjoy your sound files!
+
+  *************************************************************************
+                        SECTION 3 - REFERENCE MANUAL
+  *************************************************************************
+  *************************************************************************
+                     SECTION 3.1 - SPUTTER File Manager
+  *************************************************************************
+
+  This section describes the point-and-play file manager named SPUTTER.
+  From the File Manager, sound files can be played, viewed in waveform,
+  viewed in ascii/hex mode, copied, renamed, moved and deleted, either
+  individually or in tagged groups.
+
+        SPUTTER [d:] [\directory] [/E] [/S] [/D] [/T] [/O]
+
+  To start the File Manager, simply type 'SPUTTER' at the DOS prompt and
+  SPUTTER presents an alphabetized listing of the current directory with
+  a menu on the right.  An optional drive and directory may be specified
+  as the directory to be used, instead of the current directory.
+
+  Optionally, the /E,/S,/D,/T and /O command line switches sort the
+  initial directory listing by Extension, Size, Date (/D and/T are the
+  same), or Original DOS order.  Once on screen, function keys can be
+  used for subsequent sorts.
+
+  Once started, SPUTTER will initialize the display as follows:
+
+        . The top line is the Menu line, and is activated with the F10
+          function key or the slash key (/).
+
+        . The second line shows the currently displayed drive & directory.
+
+        . The large window on the left is the directory window and contains
+          a list of files in the current directory.
+          The file attributes (Archive, Hidden, Read-only and System) are
+          shown by the appropriate letters to the right of the time for
+          each listed file.  A period is displayed for any file attributes
+          that are not set.
+
+        . The mid-sized window on the upper right is the info window and
+          contains various counters, and the state of the toggle switches.
+
+        . The smaller window on the lower right is the preview window
+          and gives a peek at the contents of the currently highlighted file.
+
+        . The line below the windows is the message line and displays
+          various prompts and messages.
+
+        . The next line is the input line, used for entering data.
+
+        . The last line is the function key menu.
+
+
+  DOS wildcards ? and * are supported for COPY, MOVE and DELETE operations.
+
+  Once SPUTTER has been started, the following keys have meaning:
+
+  A-Z
+        Pressing a letter, moves the highlight bar to the first (then sub-
+        sequent) filename beginning with that letter.
+
+  Up & Down
+        The Up and Down arrow key moves the highlight bar up or down one
+        line at a time.
+
+  Home & End
+        The Home and End keys go to either the first or last file in the
+        directory.
+
+  PgDn & PgUp
+        The Page-Up and Page-Down keys allow you to scroll up and down
+        through the entire directory.
+
+  Ctrl-PgDn & Ctrl-PgUp
+        The Ctrl-Page-Up and Ctrl-Page-Down move to the top and bottom of
+        the current display page (21 files).
+
+  Left-Arrow & Right-Arrow or Grey+ & Grey-
+        These keys are used to mark and unmark files.  After marking or
+        unmarking a file, the highlight bar is automatically moved in the
+        same direction that it was moved last.
+        Multiple files may be tagged for group playing, viewing, copying,
+        moving or deleting.
+
+  F1 (Help)
+        This key activates the Help pull-down menu.
+
+  F2 (Args)
+        This key displays the SPUT help screen.
+
+  F3 (Dir)
+        This key will cause SPUTTER to reread the current directory.
+        This is useful if files have been created or added to the
+        current directory since starting SPUTTER.
+
+  F4 (Chdir)
+        This key provides a way to change the current drive and
+        directory without leaving SPUTTER.
+
+  F5 (Mark)
+        This key will cause all previously unmarked files to be marked.
+        Files with an asterick are considered marked.  To remark files
+        with an asterick, press F6 to clear all marks, then F5 to mark
+        all files.
+
+  F6 (Clear)
+        This key will unmark all files including those with astericks.
+
+  F7 (Pause)
+        This key will toggle the state of the Pause-after-output switch.
+
+  F8 (Output)
+        This key will toggle the state of the Output switch.
+
+  F9
+        This key is currently unused.
+
+  F10 (Menu)
+        This key invokes the top line menu.
+
+  ESCAPE
+        Pressing this key exits SPUTTER, and returns to the DOS prompt.
+
+  F10+File or Alt-F
+        This key activates the File menu.
+
+  F10+Sound or Alt-S
+        This key activates the Sound menu.
+
+  F10+Options or Alt-O
+        This key activates the Options menu.
+
+  F10+Help or Alt-H
+        This key activates the Help menu.
+
+  F10+Quit or Alt-Q
+        This key activates the Quit menu.
+
+  F10+Sound+Play or Enter
+        The Play function initiates the playback process for either
+        the highlighted or marked file(s).  This option requires the
+        appropriate player program to be located in a directory that is
+        listed in your PATH statement.
+
+        The player programs used are SPUT.COM for digitized sound files,
+        and text to speech files and SPUTROL.COM for .ROL synthesized
+        music files.
+
+        When a marked file is successfully played, it's marker arrow is
+        replaced by an asterisk.
+
+  F10+Sound+Quick or Ctrl-Enter
+        The Play with Quick-arguments function initiates playback for the
+        highlighted file, after prompting for an argument string.
+        The prompt will appear in the message line, and you can enter
+        any valid player switch with slashes. (See the appropriate
+        section of the documentation for SPUT and SPUTROL switches).
+
+        Note that if the /W switch to SPUT is used to create an 8-bit PCM
+        file, or the COPY function is used to create files in the same
+        directory, those files will not appear in the directory listing
+        until you press F3 to re-read the current directory.
+
+  F10+Sound+Last or Ctrl-P
+        The Play with Last-arguments function initiates playback for the
+        highlighted file, using the previously defined argument string.
+
+  F10+Sound+Argument or Ctrl-A
+        This key invokes the Argument selection menu.  CTRL-A will invoke
+        the Argument selection screen for sound files.
+
+  F10+Sound+Clear
+        This key clear any previously defined argument string.
+
+  F10+Sound+Text
+        This key invokes the interactive text-to-speech mode.
+
+  F10+Sound+Information or Ctrl-I
+        Displays complete file information without playback, for the
+        highlighted or marked file(s).  Requires SPUT.COM to be in a
+        directory that is listed in your PATH statement.
+
+  F10+Sound+Wave or Ctrl-W
+        Views the highlighted or marked file(s) as a wave form using the
+        SPUTWAVE utility.  Requires SPUTWAVE.EXE to be located in a
+        directory that is listed in your PATH statement.
+
+  F10+File+Copy or Ctrl-C
+        Initiates the copy process for the highlighted or marked file(s),
+        after prompting for a destination.  Wildcards ? and * are supported
+        and renaming while copying is permitted.
+
+        When a marked file is successfully copied, it's marker arrow is
+        replaced by an asterisk.  If the target disk(ette) becomes
+        filled, during a copy operation, SPUTTER automatically attempts
+        to find other marked files that will fit, stopping when there are
+        none.  Changing the target diskette, and hitting F1 again, will
+        copy the remaining marked files.
+
+  F10+File+Move or Ctrl-M
+        Moves the highlighted or marked file(s), after prompting for a
+        destination.  Wildcards ? and * are supported and renaming while
+        moving is permitted.
+
+        When a marked file is successfully moved, it's marker arrow is
+        replaced by an asterisk.  If the target disk(ette) becomes
+        filled, during a move operation, SPUTTER automatically attempts
+        to find other marked files that will fit, stopping when there are
+        none.  Changing the target diskette, and hitting F1 again, will
+        move the remaining marked files.
+
+  F10+File+Rename or Ctrl-R
+        Renames the highlighted file, after prompting for a new filename.
+
+  F10+File+Delete or Ctrl-D or Delete
+        Deletes the highlighted or marked file(s), after prompting for
+        verification.  Wildcards ? and * are supported.
+
+  F10+File+View or Ctrl-V
+        Views the highlighted or marked file(s).  Requires LIST.COM to
+        be located in the PATH.
+
+  F10+File+marK or Ctrl-K or F5
+        Marks any files that were previously unmarked.
+
+  F10+File+cLear or Ctrl-L or F6
+        Clears marks on all files.
+
+  F10+Options+Output or Ctrl-O or F8
+        Enables or disables the option of seeing the output from the player
+        utility during playback.  When a file is played with this option
+        enabled, the center of the screen is cleared and the player utility
+        output is displayed there.  Pressing this key a second time disables
+        the option and it defaults to enabled.  
+
+  F10+Options+Pause or F7
+        This toggles the state of the Pause-after-playback option.
+
+  F10+Options+snoW
+        This toggles the state of the Video-snow-suppression option.
+
+  F10+Options+Verify
+        This toggles the state of the Verify-after-copy option.
+        
+  F10+Options+Unsorted or Ctrl-U
+        Displays the directory in it's original unsorted order.
+
+  F10+Options+Name or Ctrl-N
+        Sorts the directory list by filename.
+
+  F10+Options+Extension or Ctrl-E
+        Sorts the directory list by extension.
+
+  F10+Options+Size or Ctrl-Z
+        Sorts the directory list by file size.
+
+  F10+Options+Date or Ctrl-T
+        Sorts the directory list by date.
+
+  F10+Help+Short
+        Displays a help screen of short cut keys.
+
+  F10+Help+Function
+        Displays a help screen of function keys F1 thru F10.
+
+  F10+Help+Navigation
+        Displays a help screen of keys used for moving the highlight bar
+        within the directory window.
+
+  F10+Help+Player or Ctrl-S or F2
+        Displays the SPUT help screen.  Requires SPUT.COM to be in a
+        directory that is listed in your PATH statement.
+
+
+  ***************************************************************************
+                      SECTION 3.2 - SPUTMON Event Monitor
+  ***************************************************************************
+
+  This section describes the program named SPUTMON, which stands for (SPUT)ter
+  Event (MON)itor.  SPUTMON is a small memory resident utility (under 5k)
+  that lets you attach sound files to events that occur on your PC.
+  
+  Typing 'SPUTMON ?' at the DOS prompt, will display the program version and
+  an abbreviated help screen.
+
+  When using SPUTMON the Event Monitor, it is recommended that you keep a
+  copy of the player utilities SPUT.COM and SPUTROL.COM on a RAM disk.
+  This will reduce system overhead associated with playback at the time
+  the events occur.
+
+
+  ----------------------------
+  SPUTMON SWITCHES & OPERATION
+  ----------------------------
+
+  ?
+        Entering a question mark on the command line, will tell SPUTMON
+        to display a short help screen.
+
+  /B
+        This switch toggles the state of the bells-on-error & retry option
+        and defaults to enabled.
+
+        When this feature is enabled and SPUTMON is unable to play a file
+        at the time an event occurs, a high-pitched bell will sound every 30
+        seconds to alert you that what you are doing is preventing playback
+        to occur.
+
+        If the retry feature has been disabled with the /R switch, SPUTMON
+        will play a low pitched buzzer to indicate that playback has been
+        cancelled for that event only.
+
+        Entering a number after the /B switch, will change the frequency of
+        the error/retry bells from 30 seconds to the new value.  Setting
+        the value to 0, disables all bells.
+
+  /C
+        This switch toggles the state of the command-line playback feature
+        and defaults to enabled.  This method of playback is only used if
+        DESQview is not running, or the /W window playback feature is
+        disabled.
+
+        When at the DOS prompt, you are actually running COMMAND.COM which
+        allocates all of memory to itself.  If an event is triggered, there
+        is no available memory for the player program to run or load the
+        sound file.  This feature causes the player program to be run from
+        the DOS prompt (although you won't actually see the command).
+
+        If you are in the middle of typing a line when an event is triggered,
+        SPUTMON will not interrupt you.  The playback will just be delayed
+        until you enter a carriage return.
+
+        If you are idle at the DOS prompt, SPUTMON will print the following
+        message on the screen
+
+  <SPUTMON is ready to play, press <CTRL-SHIFT> to cancel, <CTRL-ALT> to begin>
+
+        then SPUTMON will wait approximately 5 seconds.  If you do nothing,
+        or press <CTRL-ALT>, playback will occur.  If you press <CTRL-SHIFT>
+        playback for that particular event only will be cancelled.
+
+        In both cases, a new DOS prompt will appear, and you may continue
+        as usual.
+
+  /D
+        This switch will disable event monitoring, and SPUTMON will
+        remain in memory.
+
+  /E
+        This switch will reenable event monitoring.
+
+  /G
+        This switch controls weather the DESQview player window will run
+        in the foreground or background.  The default is background.
+
+  /I
+        This switch is used to reinitialize the event table.  All counters
+        are reset to zero, and any events that were marked for playback
+        are cancelled.
+
+  /M
+        This switch toggles the state of the multiple event triggering
+        feature, and defaults to disabled.
+
+        Normally, when an event occurs, SPUTMON searches the event table
+        for a match.  If a match is found, the remainder of the table
+        is not checked.  Enabling this feature, tells SPUTMON to check
+        the entire table for additional matches.
+
+        This switch normally will not affect type T timer events, since
+        many clock interrupts will occur for each actual second of time.
+
+        Example: If you have the following events defined in your event file
+
+                P  DX.EXE  SHEESH.SND
+                P  *       AHH.SND
+
+        With /M disabled, running DX would only play SHEESH.SND.  With
+        /M enabled, running DX would play SHEESH.SND and AHH.SND.
+
+  /Q
+        This switch toggles the quiet screen output feature, and defaults
+        to enabled.
+
+        Normally SPUTMON sends the appropriate switch to the player program
+        to suppress screen output.  Disabling this feature will cause all
+        screen output from the player program to be displayed.  This can
+        be very useful while writing event definition files.
+
+  /R
+        This switch toggles the state of the retry playback feature and
+        defaults to enabled.
+
+        When an event occurs, and SPUTMON is unable to play the sound file,
+        in the normal way, or using the /W (DV window) or /C (command line)
+        methods, it looks at this switch to decide how to handle the event.
+
+        If the retry feature is enabled, SPUTMON will remember that the
+        file should be played, and will keep retrying playback until
+        successful.  A short high pitched jingle will be heard every 30
+        seconds to remind you that a playback is pending.
+
+        If the retry feature is disabled, playback will be skipped for
+        that particular event only, and you will hear a low pitched buzzer
+        if the beep-on-error feature is enabled with /B.
+
+  /S
+        This switch prints the event table on the screen, which is a list
+        of all events being monitored.
+
+          TRIGG - is the number of times the event has triggered playback.
+          ERROR - is the number of times playback has failed.
+          CODE  - is the error code encountered during the last attempted
+                  playback.  The first 2 digits are a number representing
+                  the process that encountered the error.  A 10xx indicates
+                  a player program error.  Any other number is the
+                  number of the interrupt handler that encountered the error.
+                  (ie: 2108 means playback was attempted by the INT21 handler
+                  but failed because of insufficient memory).
+          ST    - is the status of the event, with 01 meaning that the event
+                  has been marked for playback.
+          T     - is the type of file to be played where:
+                  1 = Sound file for SPUT.COM  (blank or #S)
+                  2 = ROL file for SPUTROL.COM (#R)
+                  3 = Text file for SPUT.COM   (blank or #T)
+                  4 = Command for COMMAND.COM  (#C)
+
+        INT AH AL Disp Trigg Error Code St T Filename     Arguments
+        ---------------------------------------------------------------------
+         29 FF 07 0C91 00000 00000 0000 00 1 e:\snd\spc\*.ani
+         08 FF FF 0C98 00000 00000 0000 00 1 10-19-1990 13:15 255 *.tun
+         08 FF FF 0C98 00000 00000 0000 00 1 10-19-1990 13:30 255 *.*
+         08 FF FF 0C98 00000 00000 0000 00 1 10-19-1990 12:45 255 *.sfx
+         08 FF FF 0C98 00000 00000 0000 00 1 10-19-1990 13:0 255 /ti/r145
+         08 FF FF 0C98 00000 00000 0000 00 2 10-19-1990 12:45 255 *
+         08 FF FF 0C98 00000 00000 0000 00 2 10-20-1990 12:0 1 bumblbee
+         08 FF FF 0C98 00000 00000 0000 00 2 10-19-1990 17:0 1 airnite
+         08 FF FF 0C98 00000 00000 0000 00 1 10-20-1990 0:0 1 bed1a
+         08 FF FF 0C98 00000 00000 0000 00 1 10-20-1990 0:15 8 bed2a
+         08 FF FF 0C98 00000 00000 0000 00 1 10-20-1990 2:0 30 timeup
+         21 4B FF 0E07 00000 00000 0000 00 1 CP.EXE       certnly
+         21 4B FF 0E07 00000 00000 0000 00 1 DC.EXE       sheesh
+         21 4B FF 0E07 00000 00000 0000 00 1 DIRNOTES.COM exc2
+         21 4B FF 0E07 00000 00000 0000 00 1 DX.EXE       notsfast
+         21 4B FF 0E07 00000 00000 0000 00 1 FGREP.COM    gotit
+         21 4B FF 0E07 00000 00000 0000 00 1 LINK.EXE     goodheav
+         21 4B FF 0E07 00000 00000 0000 00 1 LIST.COM     heynot
+         21 4B FF 0E07 00000 00000 0000 00 1 MAPMEM.EXE   theyrehe
+         21 4B FF 0E07 00000 00000 0000 00 1 MASM.EXE     ridic
+         21 4B FF 0E07 00000 00000 0000 00 1 MV.EXE       yeah
+         21 4B FF 0E07 00000 00000 0000 00 1 NU.EXE       fearnot
+         21 4B FF 0E07 00000 00000 0000 00 1 PKUNZIP.EXE  waitmin
+         21 4B FF 0E07 00000 00000 0000 00 1 Q.EXE        mistaks
+         21 4B FF 0E07 00000 00000 0000 00 1 QU.EXE       hereicom
+         21 FF FF 0E53 00000 00000 0000 00 1 *            ahh
+        
+    Enabled: MONITOR BELLS:30 RETRY QUIET WINDOW/BG COMMAND þ Disabled: MULTI
+    Date/Time: 10-19-1990 12:31:58.10 þ Active Timers: 10
+
+  /U
+        This switch will cause SPUTMON to remove itself from memory.
+        This can only be done successfully, if no other programs have
+        become memory resident since SPUTMON was loaded.
+
+  /W
+        This switch toggles the state of the DESQview player window
+        feature and defaults to enabled.
+
+        This section is only applicable when DESQview is running.
+
+        If this feature is enabled when an event occurs, a separate
+        DESQview window will be started in which to run the player program.
+        This window will run in the background, and close when playback is
+        finished.  It will appear as a 2x2 character box in the upper left
+        hand corner of the screen.
+
+        All of the attributes of the DV player window can be changed by
+        using the DESQview "Change A Program" utility to modify the DVP
+        template file SP-PIF.DVP that comes with SPUTTER.  This DVP file
+        must be located somewhere in the PATH, in order for SPUTMON to find
+        it when becomming memory resident.
+
+        Disabling this feature will cause playback to occur in the same
+        window in which the event occurred.
+
+  <eventfile>
+        This is the name of the event definition file.  If no filename is
+        specified, the default of SPUTMON.DEF will be used.  If no directory
+        is specified, the current directory is searched, and then the PATH.
+
+
+  -----------------
+  EVENT FILE FORMAT
+  -----------------
+
+  The event definition file is a simple ascii file, that can be modified
+  with any text editor.  The maximum size of the file is limited to 64k
+  bytes, including comments.
+
+  Each line in the event file defines a single event.  The first "word" of
+  each line, defines the event type and the remainder of the line describes
+  the particular event to trigger on.
+
+
+  -----------
+  EVENT TYPES
+  -----------
+
+        B <soundfile>
+                This is the BEEP event, and will trigger playback of the    
+                specified soundfile in place of the normal speaker beep.
+
+                Example: 'B CHICK.SND' plays a short clip of peeping chicks
+                         instead of the normal speaker beep.
+
+        T <sdate> <stime> <idate> <itime> <repeat> <soundfile>
+
+                The TIMER event will trigger playback whenever the set time
+                <sdate><stime> occurs.  Then the repeat <repeat> is
+                decremented, and the increment <idate><itime> is added to
+                the set time to create the next alarm setting.
+
+                Alarms and repeat counts are reset automatically.
+
+        Examples:
+                T 00-00-00 12:00 00-00-00 00:00 0 YEAH.TUN
+                  at noon every day
+                T 06-25-90 17:00 00-00-00 00:05 5 WOW.TUN
+                  from 5:00pm to 5:25 every 5 minutes on 06-25-90
+                T 07-11-90 00:00 00-00-00 00:01 0 wow.tun
+                  every min for 1 day
+                T 07-11-90 12:00 00-01-00 00:00 2 wow.tun
+                  at noon for 2 days
+                T 07-00-00 12:00 00-01-00 00:00 0 wow.tun
+                  at noon every day in July
+                T 00-11-00 12:00 01-00-00 00:00 0 wow.tun
+                  at noon on the 11th of every month
+                T 07-00-90 00:00 00-00-00 01:00 0 wow.tun
+                  every hour in July
+                T 00-11-00 00:00 00-00-00 01:00 0 wow.tun
+                  every hour on every 11th day
+
+        P  <progname> <soundfile>
+                The PROGRAM execution event will trigger playback whenever
+                the specified program is run.  The program name follows the
+                same rules for filenames.
+
+                Example: 'P Q.EXE MISTAKS.V8' plays Stooge Moe saying "Now
+                         don't make any more mistakes!" when Qedit is run.
+                     or: 'P LIST.COM DOC.TUN' plays Bugs Bunny saying "Whats
+                         up Doc?" whenever LIST is used to view a file.
+
+        FO <filename> <soundfile>
+                The FILE-OPEN event will trigger playback whenever the
+                specified file is opened in read-only mode.
+
+                Example: 'FO * CERTNLY.V8' plays Stooge Curly saying
+                         "Certainly!" when any file is opened for reading.
+
+        FC <filename> <soundfile>
+                The FILE-CREATE event will trigger playback whenever the
+                specified file is opened for write access.  The DOS COPY
+                command will not trigger this event because of insufficient
+                memory.
+
+                Example: 'FC CONFIG.SYS HEYNOT.V8' plays Stooge Curly saying
+                         "Hey not that!" when any program attemps to open
+                          CONFIG.SYS for write access.
+
+        FR <filename> <soundfile>
+                The FILE-RENAME event will trigger playback whenever the
+                specified file is renamed.  The DOS REName command will not
+                trigger this event.
+
+                Example: 'FR AUTOEXEC.BAT MEANING.TUN" plays Bugs Bunny
+                         saying "Whats the meaning of this?" when any program
+                         attempts to rename AUTOEXEC.BAT.
+
+        FD <filename> <soundfile>
+                The FILE-DELETE event will trigger playback whenever the
+                specified file is deleted.  The DOS DELete command will not
+                trigger this event.
+
+                Example: 'FD * AHH.TUN' plays Yosemite Sam yelling "Ahhhhh"
+                         whenever any file is deleted by any program.
+
+
+        The following events are called the INT events.  They are more
+        complex to setup than the above events, but are much more powerful.
+        As a reference, I highly recommend "The Interrupt List" by
+        Ralf Brown.  It is available on most BBS's as INTER290.ZIP.
+
+
+        I  <int> <ah> <al> <soundfile>
+                The vanilla INT event will trigger playback whenever the
+                specified interrupt <int> occurs, with <ah> matching the AH
+                register and <al> matching the AL register.
+
+                Example:  'I 21 4C FF THATS.TUN' plays Bugs Bunny saying
+                          "That's that" whenever a program terminates.
+
+        IA <int> <ah> <al> <filename> <soundfile>
+                The INT-ASCIZ event will trigger playback whenever the
+                specified interrupt <int> occurs, with <ah> matching the AH
+                register and <al> matching the AL register.  An additional
+                check is done between <filename> and the filename pointed
+                to by the DS:DX register.
+
+                Example:  'IA 21 43 01 MYFILE CERTNLY.V8' plays Stooge Curly
+                          saying "Certainly!" whenever the file attributes of
+                          the file named MYFILE are set.
+
+        IF <int> <ah> <al> <filename> <soundfile>
+                The INT-FCB event will trigger playback whenever the
+                specified interrupt <int> occurs, with <ah> matching the AH
+                register and <al> matching the AL register.  An additional
+                check is done between <filename> and the filename in the
+                File-Control-Block pointed to by the DS:DX register.
+
+                Example:  'IF 21 15 FF MYFILE HEYNOT.V8' plays Stooge Curly
+                          saying "Hey, not that!" whenever a sequential
+                          write is done to the file MYFILE.
+
+        ID <int> <ah> <al> <drive> <soundfile>
+                The INT-DISK event will trigger playback whenever the
+                specified interrupt <int> occurs, with <ah> matching the
+                AH register and <al> matching the AL register.  An additional
+                check is done between <drive> and the DL register.
+
+                Example:  'ID 13 05 ff 01 WARNING.V8' plays the Robot from Lost
+                          in Space saying "Warning Warning" anytime a format
+                          disk track is executed on the A drive.
+
+
+  --------------------
+  EVENT FILE ARGUMENTS
+  --------------------
+
+  The event type is followed by additional arguments that describe the event
+  on which to trigger playback.
+
+  Arguments may be separated by commas or any number of spaces.  They may
+  appear in upper or lower case.
+
+  The arguments used are different for each event type.  All are described
+  below:
+
+  <filename>
+        A filename that may be up to 12 characters in length, and must
+        include a period and extension.  It may be a single * to indicate
+        a match of any filename.
+
+  <soundfile>
+        The name of the soundfile to be played at the time the event occurs.
+        It may include a full path specification and any valid player
+        switches.  If the sound file will be played using SPUT, you may
+        also use *.* to invoke random soundfile selection.
+
+  <int>
+        This is the interrupt number in hexadecimal to monitor.      
+        Only interrupts 13 and 21 are supported at this time.
+
+  <ah>
+        This is the hexadecimal contents of the AH register to be
+        checked at the time of the interrupt.  Use FF to indicate
+        a match on all values.
+
+  <al>
+        This is the hexadecimal contents of the AL register to be
+        checked at the time of the interrupt.  Use FF to indicate
+        a match on all values.
+
+  <drive>
+        This is the hexadecimal driver number, with 0 being the
+        A drive, and 1 the B drive.  Use FF to indicate a match on
+        any drive. 
+
+  <sdate>
+        This is the first date that the alarm should trigger in the
+        format MM-DD-YY.  00 in any field, matches every value.
+        06-00-90 means every day in June 1990.
+
+  <stime>
+        This is the first time that the alarm should trigger in the
+        format HH:MM. 00:00 means midnight.                                   
+
+  <idate>
+        This is the increment to add to <sdate> to determine the
+        next date that the alarm should trigger.  The format is
+        MM-DD-YY.  01-00-00 means add 1 to the month for the next
+        alarm date.  00-00-01 means add 1 to the year.
+
+  <itime>
+        This is the increment to add to <stime> to determine the
+        next time that the alarm should trigger.  The format is
+        HH:MM.  00:05 means 5 minutes later.  01:00 means 1 hour
+        later.
+
+  <repeat>
+        This is the number of times to add the increment to the
+        set time and reset the alarm.  A value of 0 means non-stop.
+
+
+  -------------------------------------------------------------
+  USING SPUTROL.COM FOR FM MUSIC ON SOUND BLASTER & ADLIB CARDS
+  -------------------------------------------------------------
+
+  To use SPUTROL to play a ROL file when an event occurs, just insert '#R'
+  before the <soundfile> argument.
+        
+        Example:  'P MYPROG.EXE #R LINUS.ROL'
+             or:  'T 00-00-00 12:00 00-00-00 00:00 1 #R LINUS.ROL'
+
+        SPUTROL.COM will be used to play LINUS.ROL whenever MYPROG.EXE is
+        executed, and every day at 12:00 noon.
+
+  This does not require that the sound driver SOUND.COM already be loaded,
+  SPUTROL can automatically load SOUND.COM and unload it when playback is
+  completed thereby saving valuable memory.  If you plan to use this feature,
+  it is recommended that you keep SOUND.COM on a RAMdisk for quicker access.
+
+        SOUND.COM v1.51 is Copyright by Ad Lib Inc.
+
+
+  ------------------------------------------------
+  TRIGGERING OTHER PLAYERS, PROGRAMS & BATCH FILES
+  ------------------------------------------------
+
+  The Event Monitor also has the ability to start other sound file players,
+  programs and batch files when an event occurs.
+
+  To use this feature, just preceed the <soundfile> argument with '#C'.
+
+        Example:  'FD DEMO.TMP #C TEST.BAT'
+                  runs TEST.BAT when the file DEMO.TMP is deleted.
+
+
+  -----------------------------------------
+  USING SMOOTH TALKER SOFTWARE WITH SPUTMON
+  -----------------------------------------
+
+  To use Smooth Talker text to speech software, you must add the following
+  line to your CONFIG.SYS file and reboot your system:
+
+         'DEVICE=STDRIVER.SYS SV3 CRE TTD'
+
+  Then load SPEECHV3 into memory.  (If using SPEECHV2, you must enter SV2
+  instead of SV3 on the above line added to CONFIG.SYS).
+  
+  Now you can use the #C file type to convert text files to synthesized speech
+  using your Smooth Talker Software.
+
+  Example: 'FD DEMO.TMP #C COPY MESSAGE.TXT ST'
+                 
+           Smooth Talker will convert the text file MESSAGE.TXT to synthesized
+           speech whenever the file DEMO.TMP is deleted.
+
+  If your STDRIVER is also used by other software supporting Smooth Talker
+  and gets set into a different mode so that the COPY command no longer works,
+  you can use the SPUTST utility to reset it without having to reboot your
+  system.  Just type the following command at the DOS prompt:
+
+        'SPUTST SV3 CRE TTD'
+
+  SmoothTalker is Copyright by First Byte Software.
+
+
+  ---------------------------
+  USING SPUTMON WITH DESQVIEW
+  ---------------------------
+
+  SPUTMON can be run in any DESQview window, and will only see events that
+  occur in the same window.  Separate event definition files can be created
+  for each application that runs in a DESQview window, or all windows can
+  use the same event definition file.
+
+  All timer events can be monitored from a single DESQview window.
+
+  If the DESQview player window feature is enabled (/W), a separate window
+  will be started in which to run the player.  This window will run in the
+  background, and close when the player exits.
+
+  If the player program runs too slowly in a background window, you can use
+  /W to disable the window-player feature.  This will cause playback to occur
+  in the same window that the event occured, and should then be at the correct
+  playback speed.
+
+  Currently, SPUTMON does not run properly when loaded before DESQview.
+
+
+  ---------------------
+  SPUTMON Error messages
+  ---------------------
+
+  Not Installed
+  Cannot Uninstall
+  Uninstalled
+  Already Installed
+  Event table initialized
+  Event Monitoring enabled
+  Event Monitoring disabled
+  Bells on error & retry enabled
+  Bells on error & retry disabled
+  Bells frequency changed to every N seconds
+  Retry playback enabled
+  Retry playback disabled
+  Quiet screen enabled
+  Quiet screen disabled
+  Multiple triggers enabled
+  Multiple triggers disabled
+  DESQview player window enabled
+  DESQview player window disabled
+  Command line playback enabled
+  Command line playback disabled
+  Background window enabled
+  Foreground window enabled
+  Invalid Filespec
+  Failed to find SPUT.COM in current path
+  Failed to find Event file
+  Event file read error
+  No events found
+  Syntax error - on line n of Event Definition File
+  Invalid hexadecimal number - on line n of Event Definition File
+  Invalid decimal number - on line n of Event Definition File
+  Invalid event definition type - on line n of Event Definition File
+  Invalid program or filename - on line n of Event Definition File
+  Invalid soundfile argument - on line n of Event Definition File
+  Invalid date/time format - on line n of Event Definition File
+  Invalid date/time increment - on line n of Event Definition File
+  DVP file not found - DESQview player window disabled
+  DVP file read error
+
+  -----------------------------------------------
+  TROUBLE SHOOTING PROBLEMS WITH EVENT TRIGGERING
+  -----------------------------------------------
+
+  ** No playback occurs at the defined event
+
+  If playback does not occur when you expect it should, try the following
+  steps to isolate the problem:
+
+        1)  Enable the beep-on-error option with the command 'SPUTMON/B'.
+            (You can check the state of the switch with SPUTMON/S)
+        2)  Reinitialize the event table counters with the command 'SPUTMON/I'
+        2)  Perform the same sequence of commands that should cause
+            playback to occur.
+        3)  Display a status with the command 'SPUTMON/S' and make a note
+            of the CODE field.  This is the error code.
+        4)  Continue reading to find the problem.
+
+
+  ** Hear a buzzer instead of playback and Error Code = xx02
+
+  An error code of xx02 indicates that SPUTMON could not run the player  
+  utility.  When SPUTMON is initially loaded, it searches the current
+  PATH found in the environment, to find all of the player utilities.
+  If these files are later moved or deleted, SPUTMON will no longer be able
+  to call upon them to play soundfiles.
+
+  To resolve this problem, replace the player program that was moved
+  or deleted, or unload and reload SPUTMON.
+
+  The supported player programs are SPUT.COM, PLAYROL.EXE, TRAN.EXE and
+  COMMAND.COM.
+
+
+  ** Hear a buzzer instead of playback and Error Code = xx08
+
+  An error code of xx08 indicates insufficient memory.  This means that
+  the currently running program already has all of available memory
+  allocated to it, and there is not enough remaining memory to run the
+  player utility.
+
+  This error will only occur if you have disabled the DESQview-player-
+  window feature (/W) and the command-line-playback feature (/C) and
+  the retry feature (/R).  Reenabling any of these features will solve
+  this problem.
+
+  If you choose not to enable these features, an alternative solution 
+  is to use the PROGRAM execution event to trigger playback when the
+  offending program is run, instead of triggering on what the program
+  is doing.  Other than this, nothing else can be done to solve this
+  problem, unless you have access to the source code of the offending
+  program.
+
+
+  ** Buzzer instead of playback and Error Code = 10xx
+
+  An error code of 10xx indicates that SPUTMON ran the player utility, but
+  the player encountered an error.  Refer to the section on the SPUT utility
+  for a list of SPUT error numbers and messages.
+
+  Normally, SPUTMON runs the player utility with the proper switches so
+  there will be no screen output while other programs are running.
+  Disabling this feature with the /Q switch, will allow the player to
+  display all it's normal screen output, including error messages.
+
+
+  ** No playback when event is caused by any of the SPUTTER utilities
+
+  This has been done intentionally, otherwise invoking any of the SPUTTER
+  utilities causes multiple soundfiles to be played.  Enough is enough I say.
+  All SPUTTER utilities issue a special command to SPUTMON to temporarily
+  disable triggering of events caused by the SPUTTER utilities.
+  Triggering and playback of type T timer events will continue uninterrupted.
+
+
+  ** Here is a list of other possible error codes that can be returned from
+     DOS when attempting to execute the Player Utility SPUT:
+
+        01h function number invalid
+        02h file not found
+        03h path not found
+        04h too many open files (no handles available)
+        05h access denied
+        06h invalid handle
+        07h memory control block destroyed
+        08h insufficient memory
+        09h memory block address invalid
+        0Ah environment invalid (usually >32K in length)
+        0Bh format invalid
+        0Ch access code invalid
+        0Dh data invalid
+        0Fh invalid drive
+        10h attempted to remove current directory
+        11h not same device
+        12h no more files
+        13h disk write-protected
+        14h unknown unit
+        15h drive not ready
+        16h unknown command
+        17h data error (CRC)
+        18h bad request structure length
+        19h seek error
+        1Ah unknwon media type (non-DOS disk)
+        1Bh sector not found
+        1Ch printer out of paper
+        1Dh write fault
+        1Eh read fault
+        1Fh general failure
+        20h sharing violation
+        21h lock violation
+        22h disk change invalid
+        23h FCB unavailable
+        24h sharing buffer overflow
+        25h reserved
+        26h (LANtastic) cannot complete file operation
+        27h-31h reserved
+        32h Network request not supported (DOS 3.1 + MS Networks)
+        33h Remote computer not listening
+        34h Duplicate name on network
+        35h Network name not found
+        36h Network busy
+        37h Network device no longer exists
+        38h Network BIOS command limit exceeded
+        39h Network adapter hardware error
+        3Ah Incorrect response from network
+        3Bh Unexpected network error
+        3Ch Incompatible remote adapter
+        3Dh Print queue full
+        3Eh Queue not full
+        3Fh Not enough space to print file
+        40h Network name was deleted
+        41h Network: Access denied
+        42h Network device type incorrect
+        43h Network name not found
+        44h Network name limit exceeded
+        45h Network BIOS session limit exceeded
+        46h Temporarily paused
+        47h Network request not accepted
+        48h (DOS 3.1 + MS Networks) Print/disk redirection paused
+        49h (LANtastic) invalid network version
+        4Ah (LANtastic) account expired
+        4Bh (LANtastic) password expired
+        4Ch (LANtastic) login attempt invalid at this time
+        4Dh-4Fh reserved
+        50h file exists
+        51h reserved
+        52h cannot make directory
+        53h fail on INT 24h
+        54h (DOS 3.3+) too many redirections
+        55h (DOS 3.3+) duplicate redirection
+        56h (DOS 3.3+) invalid password
+        57h (DOS 3.3+) invalid parameter
+        58h (DOS 3.3+) network write fault
+        59h (LANtastic) function not supported on network
+        5Ah (LANtastic) required system component not installed
+
+
+  **************************************************************************
+                 SECTION 3.3 - SPUT Soundfile Player UTility
+  **************************************************************************
+
+  This section describes the program named SPUT, which stands for (S)oundfile
+  (P)layer (UT)ility.  SPUT is the foundation of the entire SPUTTER Sound
+  System.
+
+  Typing 'SPUT' with no arguments at the DOS prompt, will print the version
+  number and a short help screen.
+
+  If you are an unregistered user, you will also see the following message
+  whenever playback is completed
+
+              ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+              ³                                                   ³
+              ³   Thank you for trying The Sputter Sound System   ³
+              ³        If you use Sputter, please register        ³
+              ³                                                   ³
+              ³   Registration will remove this message & delay   ³
+              ³          and give you additional features         ³
+              ³                                                   ³
+              ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+  ---------------------
+  SPUT FILE INFORMATION
+  ---------------------
+
+  SPUT displays the following information on the screen each time it
+  is run.
+
+        SPUT v1.11 Player Utility - Copyright 1990, VersaWare / Adrienne Cousins
+        File:E:\SND\TRYAGN.V8   Size:9439/9423  Form:0008/0  Port:022F  Driv:1
+        Rate:180  Over:1  Freq:15495hz  Ampl:0+  Time:0.6s
+        Samples Output:9423  Silence groups:0  Timer Adjust:11
+
+  or for Macintosh files, the Title from the header is included:
+
+        SPUT v1.11 Player Utility - Copyright 1990, VersaWare / Adrienne Cousins
+        File:.\HOWYA.SND   Size:11648/11008  Form:0038/0  Port:022F  Driv:1
+        Rate:152  Over:1  Freq:11363hz  Ampl:0+  Time:1.0s  Title:HowYouDoin'?
+        Samples Output:11008  Silence groups:0  Timer Adjust:17
+
+  or silence encoding statistics are shown when applicable:
+
+        SPUT v1.11 Player Utility - Copyright 1990, VersaWare / Adrienne Cousins
+        File:F:\SND\EXECUTE.V4S   Size:2682/2666  Form:0084/0  Port:022F  Driv:1
+        Rate:152  Over:1  Freq:11363hz  Time:0.2s
+        Samples Output:12675  Silence groups:10  Timer Adjust:20
+
+
+  File:
+        This is the name of the file entered on the command line to SPUT.
+
+  Size:
+        The first number is the size of the file in bytes, the second
+        is the actual byte size of the data to be played.
+
+  Form:
+        The first number is the file format (see /F for definitions)
+        The second number indicates Macintosh file compression:
+
+                0 - non-compression
+                1 - run length encoding (RLE)
+                2 - Dynamic Lempel-Ziv,Weiss compression
+                3 - Huffman compression
+
+  Port:
+        This is the hex address of the port being used for output.
+
+  Driv:
+        This is the driver number used to drive the output device.
+
+  Rate:
+        This is the playback rate, specified on the command line, or taken
+        from the header record, or recalculated for oversampling.
+
+  Over:
+        This is the oversampling factor currently being used.
+
+  Freq:
+        This is the frequency (samples per second) that the file is being
+        played at.
+
+  Time:        
+        This is the approximate time it will take to playback the file
+        at the current settings.
+
+  Title:
+        This only appears when playing Macintosh sound files and comes
+        from the internal header record of the sound file.
+
+  Samples Output:
+        This is a count of the bytes actually sent to the output device and
+        includes all bytes reconstructed as a result of silence encoding,
+        and compression.  In third example above, the file uses only 6508
+        bytes of disk space to store a file that originally contained
+        12126 bytes of sound.
+
+  Silence groups:
+        This is how many periods of silence were found in the file, and
+        expanded back to their original length.
+
+
+  --------------------------
+  SPUT ENVIRONMENT VARIABLES
+  --------------------------
+
+  SPUTARG
+        This allows you to setup any permanent switches that you would
+        like SPUT to use every time it's run, without having to enter
+        them on the command line.  Any switches specified on the command
+        line, will override the switches in the SPUTARG variable.
+
+        You can set this value at the DOS prompt, or by including a line
+        in your AUTOEXEC.BAT file with the following command:
+
+                set sputarg=/p220s/ir7
+
+        This tells SPUT to send all output to a Sound Blaster card
+        at port 220 (hex), using interrupt number 7.
+
+
+  SPUTDIR
+        This defines the default directory to find sound files.  If a
+        filename is given on the command line with no drive or directory,
+        SPUT will look for the file in the directory defined by the
+        SPUTDIR variable.
+
+        You can set this value at the DOS prompt, or from your AUTOEXEC.BAT
+        file with the following command:
+
+                set sputdir=c:\sound
+
+        This would tell SPUT to look in the SOUND directory on the
+        C: drive for all sound files.
+
+        To force SPUT to play a file in the current directory without
+        having to enter the complete path, use the following command:
+
+                sput .\filename
+
+
+  ------------------------
+  SPUT SYNTAX AND SWITCHES
+  ------------------------
+
+  Syntax:  SPUT <soundfile> [/switches]
+
+  ESCAPE key
+        Pressing the ESCAPE key during file playback, will cause SPUT to
+        immediately stop playback and exit.  This will not disturb any
+        type ahead already in the keyboard buffer.
+
+  ?
+        Entering a question mark on the command line, will tell SPUT to
+        display a short help screen.
+
+  <soundfile>
+        This is the name of the sound file to be played.  If no directory
+        is specified, the directory specified by the environment variable
+        SPUTDIR will be used.  If the SPUTDIR variable does not exist, the
+        current directory is assumed.
+
+        Specifying a directory as part of the filename, will override
+        any directory specified by the SPUTDIR environment variable.  Use
+        ".\filename" to indicate the current directory and ignore the
+        SPUTDIR environment variable.
+
+        Wildcards within the filename, tell SPUT to randomly select and
+        play a file that matches the wildcard mask.  This provides a
+        way to have SPUT vary the sound files that are played without
+        always having to change your batch files.
+
+        Sound files can be categorized in two different ways, the first
+        is by directory, where sound files are categorized and stored in
+        separate directories, with a different directory for each category.
+        To randomly play any file of a particularily category, just specify
+        the directory.  The command "SPUT \SND\CARTOONS\*.*" would randomly
+        select and play a file from the CARTOONS sub-directory and the
+        command "SPUT \SND\ERRORS\*.*" would randomly select and play a
+        file from the ERRORS sub-directory.
+
+        The other method of categorization is by file extension.  This
+        method keeps all sound files in the same directory, with files of
+        the same category having the same file extension.  Then the command
+        "SPUT \SND\*.MUS" would randomly select one of the files with the
+        .MUS extension from the SND directory.  The command "SPUT *.*"
+        would then select and play a file from any category.
+
+        Note that the filename and extension hold no special meaning
+        for SPUT.  Any information needed for playback is retrieved
+        from within the file.  Any reference to extensions within the
+        SPUTTER documentation, is simply to aid you in determining the
+        file format.  SPUT can always determine the file format from
+        the contents of the file regardless of the filename & extension.
+
+  /An
+        This switch will enhance the amplitude, or volume, of a soundfile.
+        Using this switch, causes more processing to be performed on each
+        sample of the soundfile, and may actually slow down the playback
+        speed on slower processors.  The higher the N value, the more
+        processing being done on each sample.
+
+        If using this switch, slows the playback speed on your system, 
+        you can use the /A switch in conjunction with the /W switch to
+        write the file to disk.  The new file will play properly with
+        no switches, and the amplitude will be elevated.
+
+        Another alternative is to resample the file to a lower playback
+        rate using the /U and /W switches.  Then you can replay the new
+        file using the /A switch without bogging down your system.
+
+  /Cn
+        This will cause the selected file to be played N times, in a
+        continous loop.  A value of 0 will play indefinetly, until a
+        key is struck.  This is most useful for listening to the quality
+        of a very short sound clip, or can be used as an alarm
+        triggered SPUTMON the Event Monitor.
+
+  /Dn
+        This switch is used to select the method of output to be used
+        on the currently selected output device.
+
+        The Internal Speaker has 4 drivers, the default is #1.
+
+          1 - This method uses a software timing loop to drive the
+              8253 Programmable Interval Timer chip.  The routine
+              calibrates itself by polling the Timer chip while
+              outputting the first 64 bytes of the file.
+              This driver gives the best results, since no additional
+              background noise is caused by interrupts or sampling.
+              It will not cause crashes on slower systems, but it's
+              speed is slightly less accurate than the other methods.
+
+          2 - This method polls the Timer chip while outputting the
+              sound file.  It's speed is accurate, and like method 1
+              will not cause crashes on slower systems, but it generates
+              slightly more noise than method 3 (interrupts).
+
+          3 - This method uses Timer interrupts to output the sound file.
+              It's speed is accurate, it generates slightly more noise
+              than method 1 (software timing), but it may crash slower
+              systems when using too fast a speed or oversampling factor.
+              When this method is used in DESQview, the keyboard is
+              automatically disabled to prevent crashing the system.
+
+          4 - This method uses the 8255 Peripheral Interface Controller
+              to generate sound.  It's speed is accurate, but the sound
+              quality is appreciably lower than the other methods, since
+              only a single bit of each 8-bit sample is actually output.
+
+        The Sound Blaster has 2 drivers, the default is #1.
+
+              SPUT will automatically select the correct Sound Blaster
+              driver depending on the environment it is running in, and
+              the file format that is being played.
+
+          1 - This driver uses the direct mode of output to the Sound
+              Blaster DAC port.  This is completely CPU driven and can
+              be interrupted by background processing in a multitasking
+              environment.
+
+              This driver has the capability of sending ANY file format
+              from any other source to the Sound Blaster card, but does
+              NOT support formats 42,44,45.
+
+          2 - This driver uses the DMA mode of the Sound Blaster DAC port.
+              It cannot be used in a multitasking environment, since there
+              would be a conflict between the DMA and memory paging.
+              This is also true of the VOUT.EXE utility that comes with the
+              Sound Blaster card.  (This will be resolved in a future
+              release of SPUT.)
+
+              This driver can handle formats 42,44,45,48 and any other 8-bit
+              file format (08,28,38), and provides the /SHELL function,
+              but does NOT support any of the other compressed file formats
+              (01-04,11,21,31,81-84).
+
+  /DE
+        Normally SPUT assumes that other processes already running, are
+        more important than sound playback, so if other tasks are running
+        when SPUT attempts to play a file, playback may be slightly slower
+        than expected.  This is done mainly to not disrupt any communications
+        tasks that might be running when SPUT is started.
+
+        You may use /DE to force SPUT to run in dedicated mode and pause all
+        other tasks in order to play the soundfile correctly.
+
+  /DI
+        This switch is used to specify an alternate dictionary file.  The
+        default dictionary filename is SPUT.DIC.  The file is assumed to be
+        located in the current directory or in the PATH.
+        This file is used during text-to-speech translation and contains
+        any pronounciation corrections or user definitions.
+        See the next section for a description of this file.
+
+  /Fnn
+        The /F switch is used to force SPUT to use a specific file
+        format.  This may be necessary when the file is missing a
+        proper header record, which SPUT needs to determine the
+        file format automatically.
+
+        If you play a file with no switches, and it does not playback
+        correctly, try using all possible /F switches until the file
+        plays correctly.  If SPUT still fails to playback the file
+        with any of the /F switches, you may have a file format that
+        SPUT doesn't know about.
+
+        SPUT has the capability of playing ANY file format on ANY device
+        that it supports, not just the device that the file format may
+        have been created on.  The only exception to this are formats
+        42,44,45 which can only be played on a Sound Blaster card.
+
+        If you find a file format that SPUT doesn't understand, please
+        send me a copy of the file and any others similar to it, so that
+        I can try to decipher the format and add it to a future release
+        of SPUTTER.
+
+        File formats:
+ 
+        01 - Covox 1-bit ADPCM with 16-byte header (.V1)
+
+             Adaptive Differential Pulse Code Modulation is a technique
+             of encoding the original waveform into a smaller file.
+             This format uses a series of 16 byte groups with the first
+             byte being an amplitude byte and the remaining 15 bytes
+             are data.  Each data byte contains 8 1-bit samples.  Each
+             of these 16-byte groups decodes into 120 8-bit samples.
+             This format yields a 1:8 or 1/8 compression ratio.
+
+        02 - Covox 2-bit ADPCM with 16-byte header (.V2)
+
+             This format uses a series of 2 byte groups where 1 bit of
+             each of the two bytes is combined to form a 2-bit sample.
+             Each two byte group contains 8 of these 2-bit samples.
+             The 2-bit samples are then decoded into 8-bit samples before
+             playback.  This format yields a 2:8 or 1/4 compression ratio.
+
+        03 - Covox 3-bit ADPCM with 16-byte header (.V3)
+
+             This format uses a series of 3 byte groups where 1 bit of
+             each of the three bytes is combined to form a 3-bit sample.
+             Each three byte group contains 8 of these 3-bit samples.
+             The 3-bit samples are then decoded into 8-bit samples before
+             playback.  This format yields a 3:8 or 3/8 compression ratio.
+
+        04 - Covox 4-bit ADPCM with 16-byte header (.V4)
+
+             This format uses a series of 4 byte groups where 1 bit of
+             each of the four bytes is combined to form a 4-bit sample.
+             Each four byte group contains 8 of these 4-bit samples.
+             The 4-bit samples are then decoded into 8-bit samples before
+             playback.  This format yields a 4:8 or 1/2 compression ratio.
+
+        08 - Covox 8-bit PCM with 16-byte header (.V8)
+             or Covox 8-bit PCM with 128-byte header (.VMF)
+             or Covox 8-bit PCM with no header (.VMD)
+             or any other 8-bit PCM file
+
+             Uniform Pulse Code Modulation stores a waveform as a
+             sequence of 8-bit numbers representing different amplitudes.
+             Amplitude levels -128 to -1 are represented by the numbers
+             0  to 127, level 0 is represented by 128 and levels 1 to 128
+             are represented by the numbers 129 to 255. 
+
+             Programs that use this format:
+             .  Deskmate Software by Tandy for 1000SL/TL/2s computers.
+             .  Tandy Sound Digitizer by KSH Software.
+
+        10 - Text files
+
+             Any text file to be translated into speech.
+
+        11 - IBM 1-bit CVSD format files
+
+             Continously Variable Slope Delta Modulation records the
+             direction of the waveform bit by bit.  If the wave goes up
+             from the previous sample, a "1" bit is recorded otherwise
+             a "0" bit is recorded.  Absolute silence is recorded as
+             "01010101...".  The bit stream is stored from right to
+             left in each data byte.
+             This format yields a 1:8 or 1/8 compression ratio.
+
+             Programs that use this format:
+             .  IBM's education software such as "Writing to Read"
+                with a 128-byte header.
+             .  Compton's Multimedia Encyclopedia program on CD ROM.
+
+        21 - Digicorder 1-bit CVSD format files
+
+             This format is similar to format 11, except that the bit
+             stream is stored from left to right within each data byte.
+             This format yields a 1:8 or 1/8 compression ratio.
+
+             Programs that use this format:
+             .  Digicorder & Mimic by Eletech Electronics with a numeric
+                extension indicating the recording rate in bits-per-second,
+                and no header record.
+
+        28 - Amiga 8-bit PCM with 8SVX variable length header (.SND)
+             or Amiga 8-bit PCM with Sonix 64-byte header (.SND)
+             or Atari 8-bit PCM files (.SND)
+
+             This format is similar to 8-bit PCM, but stores the actual
+             amplitude level with polarity intact.  Negative amplitudes
+             are represented by -128 to -1, level 0 is represented by 0
+             and positive amplitudes are represented by +1 to +128.
+
+             Programs that use this format:
+             .  Perfect Sound by Sunrize Industries for the Amiga
+                with a 128-byte 8SVX style header record.
+             .  Audio Master for the Amiga, with a 128-byte 8SVX header.
+             .  Sonix for the Amiga, with a 64-byte header record.
+
+        31 - Voice Toolkit 1-bit format files
+
+             This format simply takes bit-4 of each original 8-bit sample
+             and stores the bit stream from left to right within each
+             data byte.
+             This format yields a 1:8 or 1/8 compression ratio.
+
+             Programs that use this format:
+             .  Digitized Voice Toolkit for the PC, by Farpoint
+                Software; Alan D. Jones, with a .VOI extension.
+                NOTE: This shareware package includes the schematics
+                for a build-it-yourself digitizer that is attached to
+                any COM port for recording.
+
+        38 - Macintosh 8-bit PCM with MacBinary FSSD 128-byte header (.SND)
+
+             This file format is the same as format 08, with a different
+             type of header record.  No compression is currently supported.
+
+        42 - Creative Labs 2-bit ADPCM with 16-byte header (.VOC)
+
+             This is a compressed file format, that is automatically
+             decompressed by the hardware, and can only be played
+             on a Sound Blaster card.
+
+        44 - Creative Labs 4-bit ADPCM with 16-byte header (.VOC)
+
+             This is a compressed file format, that is automatically
+             decompressed by the hardware, and can only be played
+             on a Sound Blaster card.
+
+        45 - Creative Labs 2.5-bit ADPCM with 16-byte header (.VOC)
+
+             This is a compressed file format, that is automatically
+             decompressed by the hardware, and can only be played
+             on a Sound Blaster card.
+
+        48 - Creative Labs 8-bit PCM with 16-byte header (.VOC)
+
+             This format is the same as format 08, with a different type
+             of header record, and can be played on any device.
+
+             This format is used by the Sound Blaster and Game Blaster
+             cards from Creative Labs.
+
+        81 - Covox 1-bit ADPCM with silence encoding (.V1S)
+
+             This format is the same as format 01, but includes the use
+             of silence encoding.
+
+             Silence encoding is a form of compression that uses 3 bytes
+             to represent up to 32640 multiple continous bytes of silence.
+             This technique can save a considerable amount of disk space
+             without affecting the sound quality.  Many periods of silence
+             occur between words and syllables and at the beginning and end
+             of sound files.
+        
+             DEMO123.V8S is an example of a silence encoded file.  You can
+             play it back with no switches for normal playback, or you can
+             use the /F8 switch to hear just the non-silent passages.  The
+             little cracks you'll hear with the /F8 switch are the places
+             where silence has been encoded into just a few bytes.         
+
+             Currently, only sound files created by Covox programs have
+             silence encoding, but a future release of SPUTTER, will include
+             a utility to rewrite any sound files using silence encoding.
+
+        82 - Covox 2-bit ADPCM with silence encoding (.V2S)
+
+             This format is the same as format 02, but includes the use
+             of silence encoding.
+
+        83 - Covox 3-bit ADPCM with silence encoding (.V3S)
+
+             This format is the same as format 03, but includes the use
+             of silence encoding.
+
+        84 - Covox 4-bit ADPCM with silence encoding (.V4S)
+
+             This format is the same as format 04, but includes the use
+             of silence encoding.
+
+        88 - Covox 8-bit PCM with silence encoding (.V8S)
+
+             This format is the same as format 08, but includes the use
+             of silence encoding.
+
+  /Hi,r
+        This switch will cause high-pass filtering to be applied to the
+        data before being played.  This technique is known as Differential
+        Quantization & is based on the fact that there is considerable
+        correlation between adjacent speech samples.  The interval <i>,
+        determines the distance between samples to be differentiated.
+        Using a repeat value <r> greater than 1 will heighten the effect.
+
+        This switch can only be used on 8-bit PCM data with no compression
+        or silence encoding.  Using the switch with any other file format
+        will produce an error message.  To apply high-pass filtering to
+        any other file format, you must first use the /W switch to write
+        the desired file out into 8-bit PCM format, and then use the /H
+        switch on the new file.
+
+  /I
+        This switch will display on screen, all the file information that
+        is normally displayed when the file is played, but without any
+        playback occurring.
+
+  /IRn
+        This switch allows you to specify the Interrupt Request line that
+        your Sound Blaster card is set for.  The default is 3, with valid
+        values being 2,3,5,7.
+
+  /K
+        This switch will cause SPUT to ignore all keyboard input while
+        playing a soundfile.
+
+  /Li,r
+        This switch will cause low-pass filtering to be applied to the
+        data before being played.  This technique is known as Integration.
+        The interval <i> determines the distance between samples to be
+        integrated.  Using a repeat value <r> greater than 1 will heighten
+        the effect.
+
+        This switch can only be used on 8-bit PCM data with no compression
+        or silence encoding.  See /H for directions on applying low-pass
+        filtering to other file formats.
+
+  /N
+        This switch will generate very low-level noise in place of dead
+        silence, when playing back files with silence encoding.
+        Sometimes, when periods of silence are obvious, this can help
+        make it more natural sounding.
+
+  /On
+        The /O switch is used to invoke the oversampling option for the
+        internal speaker only.  This can be used to help eliminate
+        sampling whine in files that were recorded at a sampling rate
+        below 12000 samples-per-second.
+  
+        When the /O switch is used alone, or before the /R switch on
+        the command line, SPUT will use the specified playback rate to
+        calculate a new playback rate to be used while oversampling.
+
+        For example, if a file plays correctly at a rate of 132 (9622hz)
+        but yields high sampling whine, using the /O2/R132 switches will
+        cause SPUT to double the playback rate from 9622hz to 19244hz
+        and oversample by a factor of 2.  This causes the file to be played
+        back twice as fast, but each byte is being played twice now, so
+        it sounds the same with the sampling whine removed.
+
+        The switch is ignored, when sending output to any port other
+        than the internal speaker.
+
+  /Pnnn
+        This switch allows selection of the desired output port.
+
+        Port Values:
+
+            0     - Internal speaker (default)
+            1-4   - Voice Master (VM0-3)
+            5-8   - Speech Thing (LPT1-4)
+            9     - Sound Master (SM)
+            nnn   - hex port address of any other Digital to Analog Converter
+            nnn-A - hex port address of an AdLib music card
+            nnn-S - hex port address of a Sound Blaster card
+
+  /PH
+        This switch will cause SPUT to display the phonemes used to
+        form words during text-to-speech translation.
+
+  /Qn
+        This switch is used to set the desired level of screen output.
+                /Q0     display all output
+                /Q1     display none
+                /Q2     display errors only
+
+  /Rnnn
+        The /R switch is used to force SPUT to use a specific playback
+        rate.  This may be necessary when the file is missing a proper
+        header record, or the playback or record rate is not available.
+
+        When the playback rate is not available, it will default to
+        152 for Macintosh files and 182 for all other files.
+
+        When the /R switch appears before the /O switch on the command
+        line, SPUT will use the specified playback rate for oversampling
+        and not perform any other calculation.
+            
+        When the /O switch appears before the /R switch on the command
+        line, SPUT will use the specified playback rate to calculate
+        a new playback rate to be used while oversampling.  See the /O
+        switch for details.
+
+        Rate Frequency Approximations:
+
+               1  4679hz   152 11473hz   202 22096hz  
+              66  6279hz   161 12559hz   212 27118hz
+             110  8172hz   171 14037hz   222 35094hz
+             132  9622hz   182 16124hz   232 49716hz
+             140 10286hz   192 18643hz   242 85227hz
+
+  /RSnnn
+        This switch tells SPUT to resample the selected sound file
+        while writing it to disk.  It is only applicable when used in
+        conjunction with the /W switch.
+
+        Resampling is a process where the playback rate of the specified
+        soundfile is changed to the rate you specify with the /RS switch.
+
+        Now virtually any sound file can be played on virtually any
+        machine, no matter what the speed of the machine.  If a file
+        will not play properly on a slower machine, just resample it
+        down to a rate that runs properly on that machine.
+
+        Resampling also has the pleasant side effect of reducing the
+        size of the sound file.  The greater the reduction in playback
+        rate, the greater the reduction in file size.
+
+  /RU
+        This switch will cause SPUT to display the rule numbers used
+        when forming words during text-to-speech translation.
+
+  /SH
+        You lucky Sound Blaster owners can use this switch to shell to
+        the DOS prompt while SPUT is playing your sound file in the
+        background.
+
+        As soon as playback is started, SPUT will start a DOS shell and
+        print the following message:
+
+                ** Type EXIT anytime to return to SPUT **
+
+        You will then see the familiar DOS prompt where you can run any
+        program, to do whatever you like (including running SPUT as long
+        as you access a different sound port).
+        Whenever you decide to quit the shell, just type 'EXIT' at the DOS
+        prompt and you will return to SPUT.
+
+        If playback is finished, SPUT will end and return to whatever
+        task it was called by, otherwise SPUT will display the following
+        message and wait for playback to complete before exiting:
+
+        ** Waiting for playback to finish (press ESCAPE to abort) **
+
+  /T
+        Use this switch to enhance treble output of a sound file.
+
+        This uses 3 level non-uniform quantization, which divides the
+        entire amplitude range into 3 ranges and assigns the same amplitude
+        value to all samples falling in the upper and lower ranges.
+        All samples in the low range are set to 0, all samples in the
+        high range are set to 255 and all samples falling in the middle
+        range are doubled up to 127.  Samples in the middle range above
+        127 are clipped.
+
+  /TI
+        This switch will cause SPUT to digitize the current time.
+
+  /TX
+        This will cause SPUT to enter interactive text mode and display
+        a prompt (>).  Any words typed will be digitized when the
+        ENTER key is pressed.  Press CTRL-C to exit interactive text
+        mode and return to the DOS prompt.
+
+        During interactive text mode, phonemes and phoneme-functions may
+        be entered along with regular text to be digitized.  
+
+  /V<f>
+        This switch is used to specify an alternate voice file.  The
+        default voice filename is SPUT.PHD.  The file is assumed to be
+        located in the current directory or in the PATH.
+
+  /W<f> 
+        This switch will cause all output to be redirected to a disk file
+        instead of being played.  The format of the output file is
+        always 8-bit PCM with a 16-byte Covox style header record.
+
+        All file formats are converted to 8-bit PCM just before being
+        output to the selected device.  This switch causes that 8-bit
+        PCM data to be captured to a disk file, which can then be
+        manipulated much more easily than the other file formats.
+
+        The captured file can be replayed with SPUT using the /H and
+        /L switches for high/low-pass filtering, or the waveform of the
+        file can be viewed with SPUTWAVE, or the file can be edited
+        with a sound file editor.
+
+        Keep in mind that the samples in the output file will reflect
+        all switches that were active at the time the file was created.
+        If /T is used for treble enhancement, then playing the new file
+        with no switch will sound the same as playing the original with
+        the /T switch.
+
+
+  ---------------------------
+  SPUT DICTIONARY FILE FORMAT
+  ---------------------------
+
+        The dictionary file is used to correct SPUT's pronounciation
+        errors or change any other attributes of a word like volume or
+        speed.  You can also use the dictionary to translate words and
+        abbreviations into complete words and phrases. 
+
+        The format of the file is straight ascii created with any text
+        editor program.  Each entry is 2 lines.
+
+        The first line is the english word and may be in any case.
+        The second line is the correct phoneme string to be used to
+        pronounce the word, and may also contain simple text, Smooth
+        Talker style phonemes and any special phoneme functions that
+        are described in the following section.
+
+        The following is an example of a simple phoneme definition to
+        correct a mis-pronounciation:
+
+                COW
+                ~k-ow
+
+        The following example uses SmoothTalker style phonemes:
+
+                diaper
+                <<~dAY4EYp3ER>>
+
+        The following example uses phoneme-functions to make the second
+        syllable louder:
+
+                FANTASTIC
+                ~f-ae-n-a3+-t-ae-s-a0-t-ih-k
+
+        The following example uses phoneme-functions to make the entire
+        word softer:
+
+                WHISPER
+                ~a4--wh-ih-s-p-er-a0
+
+        The following example uses simple text to define an abbreviation
+        expansion:
+
+                DAC
+                digital to analog converter
+
+
+  ------------------------
+  SPUT PHONEME DEFINITIONS
+  ------------------------
+
+  Phoneme strings always start with the tilde character (~) followed by each
+  of the phonemes separated by dashes.  A space or any control character
+  ends the word.  (eg.  ~v-ey-p-er is the word VAPOR)
+  SPUT phonemes are not case sensitive, and are compatible with TRAN phonemes.
+
+  SmoothTalker phonemes are supported so that any files that already contain
+  SmoothTalker phonemes will be interpreted correctly by SPUT.
+  
+  Many of the SmoothTalker phonemes have the same name as the SPUT
+  phonemes, but those marked with an asterisk (*) are differrent.
+  To create a SmoothTalker phoneme string, start the word with 2 less than
+  signs, followed by the tilde character, then the string of phonemes,
+  followed by 2 greater than signs to end the word. (eg. <<~vEYpER>> )
+  SmoothTalker phonemes are case sensitive.
+
+------------------------------------------------------------------------------
+        SPUT Phonemes                   SMOOTH TALKER Phonemes
+------------------------------------------------------------------------------
+        AE   fAt                        AE      short 'a' last
+        AH   fAther                    *AA      short 'o' cot
+        AW   lAWn                      *AO      intermediate 'o' caught
+        AY   hIde                       AY      dipthong ice
+        B    soB                        b       plosive in bin
+        BB   Back                      
+        CH   CHurCH                     CH      in chin
+        D    soD                        d       plosive in din
+        DD   Dime                      
+        DH   eiTHer                     DH      'th' in then
+        EE   bEEt                      *IY      long 'e' beet
+        EH   gEt                        EH      short 'e' best
+        ER   mURdER                     ER      'ur' 'er' in further
+        EY   gAte                       EY      dipthong in ace
+        F    Fault                      f       fricative in fin
+        G    doG                        g       plosive in give
+        GG   Goat                      
+        H    How                        h       in hit
+        IH   bIt                        IH      short 'i' fit
+        JJ   Jar                        j       in jin or jug
+        J    juDGe                     
+        K    Coat                       k       plosive in kin
+        L    Laugh                      l       in light or love
+        MM   Moat                      
+        M    suM                        m       nasal in might
+        NN   Note                      
+        N    suN                        n       nasal in night
+        NG   suNG                       NG      nasal in sing
+        OH   lOne                      *OW      long 'o' dose
+        OO   fOOl                      *UW      long 'u' lute
+        OR   fOR                       
+        OW   hOW                       *AW      dipthong loud
+        OY   tOY                        OY      dipthong noise
+        P    Pack                       p       plosive in pin
+        R    Rate                       r       in rate
+        S    Sue                        s       silibant in sin
+        SH   SHoe                       SH      silibant in shin
+        T    Time                       t       plosive in tin
+        TH   eTHer                      TH      fricative in thin
+        U    fUll                      *UH      'u' sound in book
+        UH   About                     *AH      short 'u' up
+        V    Vault                      v       in vim
+        W    Wear                       w       in wait or water
+        WH   WHere                      WH      in which or where
+        Y    Young                      y       in yet or yes
+        Z    Zoo                        z       in zen
+        ZH   lieSure                    ZH      in pleasure
+        SPACE
+
+   The following SmoothTalker phonemes (on the right) have no SPUT
+   equivalents, so the closest sounding phonemes have been substituted.
+
+        UH                              AX      schwa 'a' in against
+        EH                              IX      duration tween IH,AX in David
+        T                               DX      't' in butter
+        K                               KX      non-aspirated 'k' ice cold
+        T                               TX      non-aspirated 't' misstate
+        T                               PX      non-aspirated 't' white spot
+
+
+   ----------------------
+   SPUT PHONEME FUNCTIONS
+   ----------------------
+
+   The special phoneme-functions may be used at the > prompt, in a text file
+   or in the exception dictionary.  The changes caused by a phoneme-function
+   remain in effect until another matching phoneme-function is processed.
+
+   They may appear alone as in the following example:
+        ~A2 loud ~A3 louder ~A3 even louder ~A0 back to normal
+   or as part of a phoneme string as in this example:
+        ~F-AE-N-A3+-T-AE-S-A0-T-IH-K.
+
+
+   An   The amplitude function is used to vary the amplitude or volume
+        of the created speech.
+
+        Use n or n+ to increase the amplitude
+            n- to decrease the amplitude
+            0 to return to normal amplitude
+
+        ~A1+ or ~A1 increases the volume 1 step.
+        ~A1- decreases the volume 1 step.
+        ~A0 sets the volume back to normal.
+
+        Example:  At the > prompt type "this is ~a3 louder"
+                  or "this is ~a3- softer"
+                  or "this is loudly"  (LOUDLY is in the dictionary file)
+                  or type "SPUT .\SAMPLES.TXT" to hear more examples.
+
+   Rn   The rate function is used to vary the rate of the speech.
+
+        Use n to set a new rate
+            n+ to increase the current rate
+            n- to decrease the current rate
+            0 to return to the normal rate
+
+        ~R10+ increases the rate by 10 (relative to current rate)
+        ~R10- decreases the rate by 10 (relative to current rate)
+        ~R202 sets the rate to 202 (absolute setting)
+        ~R0 set the rate back to normal.
+
+        Example:  At the > prompt type "this is ~r10+ faster"
+                  or "this is ~r10- slower"
+                  or type "SPUT .\SAMPLES.TXT" for more examples.
+
+   Mn   The mode function is used to change between word and letter modes.
+
+        Use 1 to switch to letter mode
+            0 to switch to word mode (default)        
+
+        Example:  At the > prompt type "this is ~M1 letter mode"
+                  or "~M0 this is word mode again"
+                  or type "SPUT .\SAMPLES.TXT" for more examples.
+
+   Pn   The punctuation function is used to change the amount of punctuation
+        that will be pronounced.
+
+        Use 0 to pronounce no punctuation (none)
+
+            1 to pronounce some punctuation (default)
+                 # $ % & = @ + < > ! /
+                 and . (point) if followed by a character
+
+            2 to pronounce most punctuation
+                 all level 1 punctuation and
+                 " ' ( ) * , - : ; ? [ \ ] ^ _ ` { | } ~
+                 and . (period)                   
+
+            3 to pronounce all punctuation
+                 all level 1+2 punctuation
+                 and all control characters (not yet implemented)
+
+
+  -------------------
+  SPUT ERROR MESSAGES
+  -------------------
+
+  (01) Command syntax error, type 'SPUT<enter>' for help
+  (02) Invalid amplitude, use /An or /An- n=1-255
+  (03) Invalid playback rate, use 1-255 default=182/152
+  (04) Invalid file format, use 1-88 default=8
+  (05) Invalid oversample value, use 1-10 default=1
+  (06) Invalid port, use 0-9 or any hex address
+  (07) Invalid high-pass filter, use /Hi,r where i=interval and r=repeat
+  (08) Invalid low-pass filter, use /Li,r where i=interval and r=repeat
+  (09) Invalid continous play value, use 1-254 0-infinite
+  (0A) Filtering disabled, only applicable for 8-bit PCM files
+  (0B) Not enough memory available, file will be truncated
+  (0C) Invalid data length in header record, file has been truncated
+  (0D) Error releasing unused memory
+  (0E) Memory allocation failure
+  (0F) Sound file not found <filename>
+  (10) File read error
+  (11) Error opening output file
+  (12) Error writing header
+  (13) Error writing file
+  (14) Unknown file format, default format 08 may be incorrect
+  (15) Oversampling calculation error, use a smaller Rate or Oversample value
+  (16) File format not supported for this device
+  (17) Invalid driver, for SPKR use 1(software) 2(polling) 3(ints) 4(8255)
+                       for SOUND BLASTER use 1(direct) 2(dma)
+  (18) New rate must be smaller than old playback rate
+  (19) New frequency is too small (max frequency reduction is half)
+  (1A) Voice file not found - <filename>
+  (1B) Insufficient memory to load Voice file
+  (1C) Voice file read error
+  (1D) Sound Blaster initialization failure
+  (1E) Text to phoneme translation error
+  (1F) Dictionary file not found - <filename>
+  (22) Macintosh Resource Fork is missing, default rate of 152 may be incorrect
+  (23) Missing or unknown header record, default rate of 182 may be incorrect
+  (24) Digitizing text files is only available to registered users
+  (25) Another SPUTTER player utility is already running
+
+
+  ---------------------------------------
+  TROUBLE SHOOTING PROBLEMS WITH PLAYBACK
+  ---------------------------------------
+
+  ** File plays too slowly (with or without any optional switches)
+
+  This is simply the result of trying to play a file with too high a
+  playback rate on too slow of a machine.  A RATE of 180 seems to be
+  the fastest rate that an 8mhz AT machine can play, with no SPUT switches.
+  Adding switches causes more processing to be done, and will slowdown
+  playback even further.
+
+  The solution is to run the file through SPUT with the /RS and /W switches
+  to resample the file down to a lower playback rate that the machine
+  can handle (ie: SPUT file/RS100/Wfile2).  If the new file still plays
+  too slowly, then try the process again using a lower playback rate.
+
+
+  ****************************************************************************
+                 SECTION 3.4 - SPUTROL ROL File Player Utility
+  ****************************************************************************
+
+  This section describes the ROL file player program named SPUTROL.
+
+  Very little memory is required to run SPUTROL, only 12k for the program,
+  and enough additional memory to read the BANK file and the ROL file.
+  That's it!  To play a 5k ROL file with a 10k BANK file requires only 27k
+  of memory.  If you plan on letting SPUTROL load the AdLib sound driver
+  SOUND.COM, then an additional 18k of memory will be required, but only
+  for the duration of the song playing.  All memory is released when the
+  song is finished.
+
+  Another feature of SPUTROL is intelligent instrument substitution.  When
+  an instrument is not found in the Bank file, SPUTROL will attempt to find
+  a close match instead of defaulting to PIANO1.  You can also specify
+  your own instrument substitutions if you prefer.
+
+  Typing 'SPUTROL' with no arguments at the DOS prompt, will print the
+  version number and a short help screen.
+
+  If you are an unregistered user, you will also see the following message
+  whenever playback is completed.
+
+              ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+              ³                                                   ³
+              ³   Thank you for trying The Sputter Sound System   ³
+              ³        If you use Sputter, please register        ³
+              ³                                                   ³
+              ³   Registration will remove this message & delay   ³
+              ³          and give you additional features         ³
+              ³                                                   ³
+              ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+  ------------------------
+  SPUTROL FILE INFORMATION
+  ------------------------
+
+  SPUTROL displays the following information on the screen each time it
+  is run.
+
+  SPUTROL v1.11 ROL Player - Copyright 1990, VersaWare / Adrienne Cousins
+  Sound driver V1.51 (C) Ad Lib Inc. 1987, 1989
+  Sound driver successfully installed.
+  BNK File: D:\VOX\STANDARD.BNK v1.0 253/256 entries
+  ROL File: E:\ROL\BUMBLBEE.CLS  Mode:0  TPB:8  BPM:2  Tempo:152  TemEvents:1
+  Voice Length Inst  Instrument Names  (VolumeChanges/PitchChanges)
+  ---------------------------------------------------------------------------
+      1  1572    11  VIOLIN1 SYN4 ELGUIT1 CLAR1 SYNBASS1 CLAR1 (38/60)
+      2  1498     8  CLAR1 ELGUIT1 SYN4 VIOLIN1 CLAR1 SYN4 (35/58)
+      3  1608     6  ELGUIT2 ELGUIT2 MARIMBA2 ELGUIT2 MARIMBA2 ELGUIT2 (58/1)
+      4  1592     6  ELGUIT2 ELGUIT2 MARIMBA2 ELGUIT2 MARIMBA2 ELGUIT2 (49/1)
+      5  1592     6  ELGUIT2 ELGUIT2 MARIMBA2 ELGUIT2 MARIMBA2 ELGUIT2 (38/1)
+      6  1608     5  ELGUIT2 ELGUIT2 PIANO1 MARIMBA2 ELGUIT2 (22/1)
+      7  1608     5  ELGUIT2 ELPIANO2 PIANO1 ELPIANO2 PIANO1 (15/5)
+      8  1346     2  ELGUIT2 SYN2 (3/1)
+      9  1251     3  PIANO1 TRUMPET4 SYN4 (7/1)
+     10     0     1  PIANO1 (1/1)
+     11     0     1  PIANO1 (1/1)
+   Time to play: 1:19 þ Loading song into driver þ Playback has started 
+
+  1st line:
+        This is the program title, version and copyright statement.
+
+  2nd and 3rd lines:
+        These lines will only be displayed when the AdLib sound driver
+        SOUND.COM has not been loaded prior to running SPUTROL.  In this
+        case, SPUTROL will automatically find and load SOUND.COM and then
+        remove it from memory when playback is completed.  When using this
+        feature, it is recommended that you keep a copy of SOUND.COM on a
+        RAMdisk if available.  The sound driver should also be in a
+        directory that is in the current path statement.
+        
+  BNK File:
+        This is the name of the bank file that is being used for playback.
+        Also displayed is the version number of the bank file format, and
+        the number of used/total entries in the bank file.  The PATH is
+        automatically searched to find STANDARD.BNK if a bank file is not
+        specified on the command line.
+
+  ROL File:
+        This is the name of the ROL file that is being played.
+        The extension is not required when specifying a file to be played,
+        and files may be renamed using any convenient extension.
+
+  Mode:
+        This is the mode of the file being played.  Zero is melodic mode
+        which uses voices 1-8 and one is percussive mode, which uses voices
+        1-6 in melodic mode and voices 7-11 in percussive mode.
+
+  TPB:
+        This is the number of ticks-per-beat defined for this song.
+
+  BPM:
+        This is the number of beats-per-measure defined for this song.
+
+  Tempo:
+        This is the tempo that the song is being played at, and may be
+        changed with the /T switch.
+
+  TemEvents:
+        This is the total number of tempo changes that occur in the song.
+
+  Voice Length Inst Instrument Names (VolumeChanges/PitchChanges)
+        One line of information is printed for each of the 11 voices and
+        contains the following information:
+        Voice - the voice number.
+        Length - the length of the voice in ticks.
+        Inst - the number of instrument changes for this voice.
+        Instrument Names - The names of the instruments for this voice.
+                An instrument name followed by a slash and another instrument
+                names indicates that a substitution has been made.
+        (VolChanges/PitChanges) - The number of volume and pitch changes.
+
+  Time to play:
+        This is the estimated time that the song will take to play.
+
+  Loading song into driver:
+        This indicates that SPUTROL is in the process of loading the song
+        into the AdLib sound driver.
+
+  Playback has started: 
+        This indicates that SPUTROL has filled the AdLib sound driver
+        buffer and the driver has started to play the song.
+
+
+  -----------------------------
+  SPUTROL ENVIRONMENT VARIABLES
+  -----------------------------
+
+  SROLARG
+        This allows you to setup any permanent switches that you would
+        like SPUTROL to use every time it's run, without having to enter
+        them on the command line.  Any switches specified on the command
+        line, will override the switches in the SROLARG variable.
+
+        You can set this value at the DOS prompt, or by including a line
+        in your AUTOEXEC.BAT file with the following command:
+
+                set srolarg=/q2
+
+
+  SROLDIR
+        This defines the default directory to find ROL files.  If a
+        filename is given on the command line with no drive or directory,
+        SPUTROL will look for the file in the directory defined by the
+        SROLDIR variable.
+
+        You can set this value at the DOS prompt, or from your AUTOEXEC.BAT
+        file with the following command:
+
+                set sroldir=c:\rol
+
+        This tells SPUTROL to look in the ROL directory on the
+        C: drive for all ROL files.
+
+        To force SPUTROL to play a file in the current directory without
+        having to enter the complete path, use the following command:
+
+                sputrol .\filename
+
+
+  -------------------------
+  SPUTROL SYNTAX & SWITCHES
+  -------------------------
+
+  Syntax:  SPUTROL <rolfile> [<bankfile>] [/switches]
+
+  <rolfile>
+        This is the name of the ROL file to be played.  Any valid DOS
+        wildcards may be used to have SPUTROL randomly select a ROL file.
+        The extension is not required, and ROL files may be renamed using
+        any convenient extension.
+
+        If no path is specified, the drive:directory specified by the
+        SROLDIR environment variable will be searched, otherwise the
+        current directory is assumed.
+
+        Specifying a directory as part of the filename, will override
+        any directory specified by the SROLDIR environment variable.  Use
+        ".\filename" to indicate the current directory and ignore the
+        SROLDIR environment variable.
+
+  [<bankfile>]
+        This argument is optional, and if used is the name of the bank file
+        to be used.  The default name is STANDARD.BNK in the current
+        directory, or any directory in the PATH statement.
+
+  [/switches]
+        All switches are optional.  The SROLARG environment variable is
+        checked first for any permanent switches.  Any switches given on
+        the command line will then override the SROLARG switches.
+        The valid switches are listed below.
+
+  ESCAPE key
+        Pressing the ESCAPE key during file playback, will cause SPUTROL to
+        immediately stop playback and exit.  This will not disturb any
+        type ahead already in the keyboard buffer.
+
+  ?
+        Entering a question mark on the command line, will tell SPUTROL to
+        display a short help screen.
+
+  /An
+        This switch can be used to modify the amplitude or volume of
+        a song.  Using a positive number (/An or /An+) will increase the
+        volume, and a negative number (/An- ) will decrease the volume.
+
+  /Cn
+        This will cause the song file to be played N times, in a
+        continous loop.  A value of 0 will play indefinetly, until the
+        ESCAPE key is struck.
+
+  /I
+        This switch will display on screen, all the file information that
+        is normally displayed when the file is played, but without any
+        playback occurring.
+
+  /IF
+        Normally when SPUTROL detects an invalid ROL file, an error message
+        is displayed and the song is not played.  This switch can be used
+        to force SPUTROL to play an invalid ROL file format.
+
+  /ISold1=new1,old2=new2
+        This switch is used to specify instrument substitutions, where
+        OLD1 is the name of the original instrument and NEW1 is the name
+        of the instrument to be used in its place.  Up to 5 substitutions
+        may be specified, separated by commas.
+
+  /IN
+        Normally, only the first 6 instruments are displayed for each voice
+        so that the file information will all fit on a single screen.
+        Use this switch to force SPUTROL to display all instruments used
+        for each of the voices.
+
+  /K
+        This switch causes SPUTROL to kill the song that was left playing
+        in the background.
+
+  /Mn
+        This switch can be used to change the mode of the song.  Zero is
+        melodic and uses voices 1-8, and one is percussive and uses voices
+        1-6 in melodic mode and voices 7-11 in percussive mode.
+
+  /NW
+        This is the NOWAIT switch tells SPUTROL to exit as soon as the
+        entire song is loaded into the SOUND driver, and leave the song
+        playing in the background.  This switch can only be used if the
+        AdLib sound driver SOUND.COM was already loaded before SPUTROL was
+        run.
+
+  /Pnnn
+        This switch allows selection of the disired output port.  The
+        default port address is 388 hex.  No switch is required for
+        either the AdLib or SoundBlaster cards.
+
+  /Qn
+        This switch is used to set the desired level of screen output.
+                /Q0       display everything
+                /Q1       display nothing
+                /Q2       display errors only
+
+  /Tn
+        This switch can be used to change the default tempo of the song.
+
+  /Vnnn
+        This switch can be used to specify a single voice or list of voices
+        to play.  /V246 would play only voices 2, 4 and 6.  This is most
+        useful for proofreading music while creating ROL files, and
+        hearing the balance between instruments.  It is also handy for
+        determining which voice is playing a particular part for which
+        you may want to change an instrument.
+
+
+  ----------------------
+  SPUTROL ERROR MESSAGES
+  ----------------------
+
+  (01) Error releasing unused memory
+  (02) Insufficient memory to load ROL file
+  (03) ROL file not found - <filename>
+  (04) ROL file read error
+  (05) Invalid ROL file format - <filename>
+  (06) BANK file not found - <filename>
+  (07) BANK file read error
+  (08) Invalid BANK file
+  (09) Insufficient memory to load BANK file
+  (10) Command syntax error, type 'SPUTROL<enter>' for help
+  (11) Instrument not found <instrument>
+  (12) SOUND.COM driver not loaded, loading temporarily
+  (13) Invalid amplitude, use /An or /An- (n=1-255)
+  (14) Error loading Tempo Events
+  (15) Error loading Instrument Events
+  (16) Error loading Volume Events
+  (17) Error loading Pitch Events
+  (18) Insufficient memory to load instruments
+  (19) Another SPUTTER player utility is already running
+  (20) Insufficient memory to load SOUND driver
+  (21) Error loading SOUND driver
+
+
+  ****************************************************************************
+                    SECTION 3.5 - SPUTWAVE Waveform viewer
+  ****************************************************************************
+
+  This section describes the utility SPUTWAVE, which displays an 8-bit
+  PCM sound file as a wave form on the screen.  An EGA display adapter
+  or better is required and it supports the following syntax & switches:
+
+        sputwave [<drive:>]<filename> [/On] [/Ln]
+
+  /On
+        N is a byte offset into file where display should start. 
+  /Ln
+        N is the length of data to display in bytes.  This number must
+        be at least the pixel width of the current screen mode
+        (usually 640), and must not be a value that would exceed the
+        end of the file or a run-time error will occur.  The default data
+        length displayed is 1 meg.
+
+
+  ****************************************************************************
+                  SECTION 3.6 - SPUTST Smooth Talker Utility
+  ****************************************************************************
+
+  This section describes the Smooth Talker Device Driver utility named
+  SPUTST.  This program can be used to send commands to the Smooth Talker
+  Device Driver called STDRIVER.SYS loaded in the CONFIG.SYS file.
+
+  Simply type 'SPUTST' at the DOS prompt followed by any of the allowed
+  three letter commands, separated by spaces.
+
+                SPUTST cm1 cm2 cm3
+
+  Typing just 'SPUTST' or 'SPUTST ?' will print a short help screen.
+
+  SPUTST v1.11 Smooth Talker Utility - (C) 1990 VersaWare / Adrienne Cousins
+  Voice Master Mode Commands:
+          EVM     enable Voice Master Mode (digitized data)
+          RDH     read VMF file header (supress playback)
+          PLY     playback data file in buffer
+          SPE     set playback speed 0-255
+          VOL     set playback volume 1-8
+          CKE     use 8253 timer for playback speed
+          CKD     use software timing for playback speed
+          DAC     enable alternate port address 0-65535 (def 408+409)
+          WRA     set repeat playback 1-255 0=key
+          USR     use alternate user address 100h-1FFh
+  Smooth Talker Mode Commands:
+          SV2     enable Smooth Talker Mode (SPEECHV2)
+          SV3     enable Smooth Talker Mode (SPEECHV3)
+          ENG     input will be English strings
+          PHO     input will be phonetic strings
+          XEP     convert next string from English to Phonetics
+          TTE     enable echo of string data to screen
+          TTD     disable echo of string data to screen
+          CRE     enable carriage returns as string terminator
+          CRD     disable carriage returns as string terminator
+          FLU     flush the 255 byte string buffer
+          TON     set voice tone 0=low 1=high
+          SPE     set speed of playback 0-9
+          PIT     set pitch of playback 0-9
+          VOL     set volume of playback 0-9
+  Use "COPY <filename> ST" for text files in Smooth Talker Mode
+  Use "COPY <filename>/B ST" for digitized files in Voice Master Mode
+
+  ****************************************************************************
+                        SECTION 4 - MISCELLANEOUS
+  ****************************************************************************
+
+  ----------------
+  ACKNOWLEDGEMENTS
+  ----------------
+
+  I'd like to thank the following people for their wonderful suggestions
+  and help, without whom the SPUTTER Sound System would not be what it is
+  today.
+
+        Marty Peter, who first got me thinking about writing my own
+        playback program, instead of relying on other player programs
+        to play my custom sound files.  And for his great suggestion
+        about a point-and-shoot interface that gave birth to the
+        SPUTTER File Manager.
+
+        Rich Wilson, for his suggestion of adding the BEEP event type to
+        SPUTMON the Event Monitor, his suggestion to invoke playback from
+        the DOS prompt, and for his support and friendship.
+
+        Bernie Parent and Randy Bechtel, who's feedback made me realize
+        the need to support the slower machines running at 4 and 8mhz.
+        This prompted me to develop additional internal speaker drivers
+        to support these machines.
+        
+        Tom Peters, for his sound clips and text files that mentioned the
+        technique of resampling sound files.  This gave me the idea to
+        implement the resampling algorithym, so that the playback rate
+        of a soundfile can be changed so that it can be played on ANY
+        speed machine.
+
+        Dan Dubbs, for his suggestions to support the Sound Blaster,
+        and AdLib music cards, the ability to spawn user defined programs
+        and batch files from SPUTMON the Event Monitor, and offering many
+        other neat suggestions.
+
+        Bruce Tomlin, the author of SoundMaster for the Macintosh, for
+        his help in locating the playback rate in Macintosh sound files.
+
+
+                              Thank you all !!
+
+
+  ---------------------------
+  SPUTTER FUTURE ENHANCEMENTS
+  ---------------------------
+
+  See the file FUTURE.TXT for a list of enhancements that I'm planning on
+  implementing in future releases.
+
+
+  ----------------------
+  SOURCES OF SOUND FILES
+  ----------------------
+
+  Check out the Amiga & Macintosh conferences of your favorite BBS.
+  These areas are usually chuck full of sound files.  Both types of files
+  usually have the playback rate stored within the file.
+
+  Some of my favorites are Exec-PC in Milwaukee WI at 414-789-4210 and
+  Channel 1 in Cambridge MA at 617-354-8873.  I can always be reached
+  on either of these systems.
+
+  If you find an especially good source of sound files, let me know and
+  I'll add it to this section, so others can enjoy them too.
+
+
+  ----------------------
+  SPEAKER OUTPUT QUALITY
+  ----------------------
+
+  If the output volume of your speaker is so low that you can't hear much,
+  the solution is to attach an inexpensive amplified speaker similar to
+  those sold by Radio Shack.  These usually have a volume control knob, and
+  some also have a tone control knob.  Most run on batteries, and some can
+  use an optional AC adapter.  All you need to do is attach the two wires
+  from the external speaker to the two wires on the internal speaker, or
+  you can attach mini jacks.
+
+  For even better playback quality, you can purchase any of the Digital to
+  Analog Converters available on the market.  Let me know if you have a board
+  that Sputter doesn't already support, and I'll see about adding support for
+  it.
+
+
+  ------------
+  REGISTRATION
+  ------------
+
+  You may use the SPUTTER Sound System free of charge for a period of
+  10 days.  If after that period of time, you find it useful and
+  continue to use it, a $25 registration fee is required.
+
+  During this evaluation period, the SPUT and SPUTROL Player Utilities
+  will display a shareware message and pause for a few seconds after 
+  playback of each file.  
+
+  When you register, you will receive your own registration number and
+  instructions for unlocking the SPUTTER Sound System and removing this 
+  message and delay.  You will also be able to unlock all future shareware
+  releases of The SPUTTER Sound System.
+
+  I always appreciate any feedback you might have about the SPUTTER Sound
+  System, and would be interested in seeing any files that SPUTTER is not
+  able to playback correctly.  You can either mail them to me, or upload
+  them to one of the BBSs listed in the above sections.
+
+
+  ----------
+  DISCLAIMER
+  ----------
+
+  All of the SPUTTER programs and this documentation are Copyright 1990
+  by VersaWare and Adrienne Cousins, all rights reserved.
+
+  VersaWare hereby disclaims all warranties relating to this product,
+  whether express or implied, including without limitation any implied
+  warranties of merchantability or fitness for a particular purpose.
+  VersaWare cannot and will not be liable for any special, incidental,
+  consequential, indirect or similar damages due to loss of data or any
+  other reason, even if VersaWare or an authorized VersaWare agent has
+  been advised of the possibility of such damages.  In no event shall the
+  liability for any damages ever exceed the price paid for the license to
+  use software, regardless of the form and/or extent of the claim.  The
+  person using the software bears all risk as to the quality and performance
+  of the software.
+
+
+                 -------------------------------------------
+
+
+

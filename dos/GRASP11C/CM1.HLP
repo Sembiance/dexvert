@@ -1,0 +1,23 @@
+ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ     GRASP - Command Summary Listing                       Page 1 of 3    บ
+ฬออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออน
+บ BOX x,y,x2,y2,<width>                - draw a box in drawing color       บ
+บ CFADE #,x,y,<buffer>,<speed>,<delay> - fade a clipping to screen         บ
+บ CFREE buffer,<buffer>,...            - free up clipping buffer(s)        บ
+บ CHGCOLOR from,to,<from,to>...        - EGA mode change color indexing    บ
+บ CIRCLE x,y,rx,<ry>                   - draw an ellipse in drawing color  บ
+บ CLEARSCR                             - clear screen to drawing color     บ
+บ CLOAD clipping_filename,<buffer>     - load a clipping                   บ
+บ COLOR color1,color2                  - set drawing color2                บ
+บ EXEC program,parameters              - run program from within GRASP     บ
+บ EXIT                                 - quit program (not required)       บ
+บ FFREE                                - free up the font buffer           บ
+บ FGAPS char_gap,space_gap             - set gaps for text command         บ
+บ FLOAD character_set_filename         - load a font                       บ
+บ FLOAT xs,ys,xe,ye,step,delay,clp1... - float clipping across the screen  บ
+บ FLY xs,ys,xe,ye,step,delay,clp1...   - fly clippings across the screen   บ
+บ FSTYLE style                         - text command style                บ
+ฬออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออน
+บ            Press ENTER for more help...ESC to return to editor           บ
+ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+

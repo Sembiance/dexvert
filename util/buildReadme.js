@@ -18,7 +18,7 @@ tiptoe(
 	{
 		const programs = programFilePaths.map(programFilePath => require(programFilePath));	// eslint-disable-line node/global-require
 
-		// These programs are used by virtualXRun
+		// runUtil.run
 		programs.push({bin() { return "Xvfb"; }, meta : {gentooPackage : "x11-base/xorg-server", website : "https://www.x.org/wiki/", gentooUseFlags : "libglvnd xorg xvfb"}});
 		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});
 		programs.push({bin() { return "ffmpeg"; }, meta : {gentooPackage : "media-video/ffmpeg", website : "https://ffmpeg.org/", gentooUseFlags : "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib"}});
@@ -28,6 +28,10 @@ tiptoe(
 
 		// lib/util/wine.js
 		programs.push({bin() { return "wine"; }, meta : {gentooPackage : "app-emulation/wine-vanilla", website : "https://www.winehq.org/"}});
+
+		// dosUtil
+		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});
+		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
 
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
 		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));

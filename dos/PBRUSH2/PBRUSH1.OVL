@@ -1,0 +1,77 @@
+16000:Not Enough Memory
+001:Run PAINT or install PC Paintbrush
+002:Error - No Mouse Detected
+003:FRIEZE was not previously loaded\n Continue anyway?
+004:Device Driver: %s unavailable\n
+005:Check your disk
+006:Unknown card combination\n
+007:Re-PCINSTAL or run PAINT
+008:Out of synch buffers, run again
+009:Can't build icons
+010:The file %s must be on the default disk.\n
+011:Please try again.\n
+012:Enter stick speed
+013:Not a valid speed
+014:Invalid scan selection
+015:System error 1
+016:Invalid strip size
+017:System error 2
+018:Can't change palette
+019:Default font not found
+020:File not found
+021:Invalid picture file
+022:Write error
+023:Write over\nexisting file?
+024:Save Canceled
+025:Can't open file
+026:No cutout name
+027:No file selected
+028:Not a path or drive
+029:Unable to create file
+030:Unable to create temp file
+031:Temp file seek error
+032:Temp file read error
+033:Temp file write error
+034:Out of temp disk space
+036:Out of table space
+037:No band available
+038:Can't find menus
+039:Invalid menu overlay
+040:Font not found
+041:Can't change palette
+042: UNDO 
+043:QUIT:  Are you sure?\nPress YES to quit
+044:ERROR
+045:Picture too big
+046:FRIEZE unavailable
+047:Load PIC
+048:Save as...
+049:Load from...
+050:Cutout is...
+051:Font is...
+052:Get Patterns from...
+053:Save Patterns to...
+054:Missing 16x16 font
+055:No Info available
+056:Info about Picture File:
+057:Info about Cutout File:
+058:Size: %dx%d
+059:Colors: %d
+060:Planes: %d
+066:Scanner initialization fails
+067:Scanner not available
+068:Error opening page
+069:Error during image read
+070:  Insert page 
+071:  in scanner...  
+072:Error initiating scan
+073:  Scanning...   
+074:  Please wait   
+076:Error closing scanner 
+077:  Scan terminated 
+078:  by user request
+079:  Printing...
+080:  Press ESC to stop
+081:No Show Screen with this tool
+082:Invalid res/color mode
+

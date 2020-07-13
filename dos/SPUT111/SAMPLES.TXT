@@ -1,0 +1,39 @@
+
+This file demonstrates Sputters capability to read an ascii file from disk
+and speak it.
+
+These are examples of word mode and letter mode    
+numbers in word mode 12 34 567
+numbers in ~d-ih-g-ih-t mode ~m1 12 34 567 ~m0
+this is word mode SPUTTER
+this is letter mode ~m1 SPUTTER ~m0
+this is word mode again
+                
+These are examples of amplitude or volume changes    
+normal ~a1 louder ~a2 louder ~a3 louder ~a4 louder
+~a0 normal
+~a1- softer ~a2- softer ~a3- softer ~a4- softer
+                
+These are examples of speed changes    
+relative ~r10+ faster ~r10+ faster ~r10+ faster ~r10+ faster
+~r0 relative ~r10- slower ~r10- slower ~r10- slower ~r10- slower
+~r0 absolute ~r135 faster ~r145 faster ~r155 faster ~r165 faster
+~r0 absolute ~r115 slower ~r110 slower ~r100 slower ~r90 slower
+                
+These are examples of different punctuation levels    
+~P3 level 3 pronounces all punctuation
+
+~P2 level 2 pronounces most punctuation like
+     end of sentence.  4.5  8.  
+     " ' ( ) * , - . : ; ? [ \ ] ^ _ ` { | } ~
+
+~P1 level 1 pronounces some punctuation like
+     end of sentence.  4.5  8.  
+     # $ % & = @ + < > ! / .
+     but not these   " ' ( ) * , - . : ; ? [ \ ] ^ _ ` { | } ~
+
+~P0 level 0 pronounces no punctuation 
+     end of sentence.  4.5  8.
+     " ' ( ) * , - . : ; ? [ \ ] ^ _ ` { | } ~
+     # $ % & = @ + < > ! / .
+

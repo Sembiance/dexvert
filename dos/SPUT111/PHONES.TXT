@@ -1,0 +1,133 @@
+
+  ------------------------
+  SPUT PHONEME DEFINITIONS
+  ------------------------
+
+   Phoneme strings always start with the tilde character (~) followed by each
+   of the phonemes separated by dashes.  A space or any control character
+   ends the word.  (eg.  ~v-ey-p-er is the word VAPOR)
+   SPUT phonemes are not case sensitive, and are compatible with TRAN phonemes.
+
+   SmoothTalker phonemes are supported so that any files that already contain
+   SmoothTalker phonemes will be interpreted correctly by SPUT.
+  
+   Many of the SmoothTalker phonemes have the same name as the SPUT
+   phonemes, but those marked with an asterisk (*) are differrent.
+   To create a SmoothTalker phoneme string, start the word with 2 less than
+   signs, followed by the tilde character, then the string of phonemes,
+   followed by 2 greater than signs to end the word. (eg. <<~vEYpER>> )
+   SmoothTalker phonemes are case sensitive.
+
+------------------------------------------------------------------------------
+        SPUT Phonemes                   SMOOTH TALKER Phonemes
+------------------------------------------------------------------------------
+        AE   fAt                        AE      short 'a' last
+        AH   fAther                    *AA      short 'o' cot
+        AW   lAWn                      *AO      intermediate 'o' caught
+        AY   hIde                       AY      dipthong ice
+        B    soB                        b       plosive in bin
+        BB   Back                      
+        CH   CHurCH                     CH      in chin
+        D    soD                        d       plosive in din
+        DD   Dime                      
+        DH   eiTHer                     DH      'th' in then
+        EE   bEEt                      *IY      long 'e' beet
+        EH   gEt                        EH      short 'e' best
+        ER   mURdER                     ER      'ur' 'er' in further
+        EY   gAte                       EY      dipthong in ace
+        F    Fault                      f       fricative in fin
+        G    doG                        g       plosive in give
+        GG   Goat                      
+        H    How                        h       in hit
+        IH   bIt                        IH      short 'i' fit
+        JJ   Jar                        j       in jin or jug
+        J    juDGe                     
+        K    Coat                       k       plosive in kin
+        L    Laugh                      l       in light or love
+        MM   Moat                      
+        M    suM                        m       nasal in might
+        NN   Note                      
+        N    suN                        n       nasal in night
+        NG   suNG                       NG      nasal in sing
+        OH   lOne                      *OW      long 'o' dose
+        OO   fOOl                      *UW      long 'u' lute
+        OR   fOR                       
+        OW   hOW                       *AW      dipthong loud
+        OY   tOY                        OY      dipthong noise
+        P    Pack                       p       plosive in pin
+        R    Rate                       r       in rate
+        S    Sue                        s       silibant in sin
+        SH   SHoe                       SH      silibant in shin
+        T    Time                       t       plosive in tin
+        TH   eTHer                      TH      fricative in thin
+        U    fUll                      *UH      'u' sound in book
+        UH   About                     *AH      short 'u' up
+        V    Vault                      v       in vim
+        W    Wear                       w       in wait or water
+        WH   WHere                      WH      in which or where
+        Y    Young                      y       in yet or yes
+        Z    Zoo                        z       in zen
+        ZH   lieSure                    ZH      in pleasure
+        SPACE
+
+   The following SmoothTalker phonemes (on the right) have no SPUT
+   equivalents, so the closest sounding phonemes have been substituted.
+
+        UH                              AX      schwa 'a' in against
+        EH                              IX      duration tween IH,AX in David
+        T                               DX      't' in butter
+        K                               KX      non-aspirated 'k' ice cold
+        T                               TX      non-aspirated 't' misstate
+        T                               PX      non-aspirated 't' white spot
+
+
+   ----------------------
+   SPUT PHONEME FUNCTIONS
+   ----------------------
+
+   The special phoneme-functions may be used at the > prompt, in a text file
+   or in the exception dictionary.  The changes caused by a phoneme-function
+   remain in effect until another matching phoneme-function is processed.
+
+   They may appear alone as in the following example:
+        ~A2 loud ~A3 louder ~A3 even louder ~A0 back to normal
+   or as part of a phoneme string as in this example:
+        ~F-AE-N-A3+-T-AE-S-A0-T-IH-K.
+
+
+   An+/-   amplitude change   (n or n+ increase / n- decrease / 0 normal)
+
+        ~A1+ or ~A1 increases the volume 1 step.
+        ~A1- decreases the volume 1 step.
+        ~A0 sets the volume back to normal.
+
+        Example:  At the > prompt type "this is ~a3 louder"
+                  or "this is ~a3- softer"
+                  or "this is loudly"  (this line will play louder)
+                                     (because it's in the dictionary)
+                  or type "SPUT .\PHFUNA.TXT" to hear more samples.
+                
+
+   Rn+/-   rate change  (n new-rate / n+ increase / n- decrease/ 0 normal)
+
+        ~R10+ increases the rate by 10 (relative to current rate)
+        ~R10- decreases the rate by 10 (relative to current rate)
+        ~R202 sets the rate to 202 (absolute setting)
+        ~R0 set the rate back to normal.
+
+        Example:  At the > prompt type "this is ~r10+ faster"
+                  or "this is ~r10- slower"
+                  or type "SPUT .\SAMPLES.TXT" for more samples.
+
+   Mn   mode  (0=word(default) 1=letter)        
+
+   Pn   punctuation level  (0=none 1=some(default) 2=most 3=all)
+        0  pronounces no punctuation
+        1  pronounces # $ % & = @ + < > ! /
+                      and . (point) if followed by a character
+        2  pronounces all level 1 punctuation and
+                      " ' ( ) * , - : ; ? [ \ ] ^ _ ` { | } ~
+                      and . (period)                   
+        3  pronounces all level 1+2 punctuation
+                      and all control characters (not yet implemented)
+

@@ -11,8 +11,7 @@
 	},
 	"engines"      : { "node" : ">=14" },
 	"main"         : "./lib/dexvert.js",
-	"bin"          :
-	{
+	"bin"          : {
 		"dexvert"  : "./bin/dexvert",
 		"dexid"    : "./bin/dexid",
 		"uniso"    : "./bin/uniso",

@@ -23,9 +23,12 @@ Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
   --full                Run ALL tests, even long running ones
+  --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
   --record              Take the results of the identifications and save them as the future expected results`;
 	process.exit(0);
 }
+
+//setTimeout(() => console.log("hehe"), XU.HOUR);
 
 // Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
 const SHA1_IGNORE_FILES =
@@ -53,14 +56,15 @@ tiptoe(
 	{
 		testData = JSON.parse(_testData);
 
-		this.data.sampleFilePaths = sampleFilePaths;
+		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
+		this.data.sampleFilePaths = sampleFilePaths.shuffle();
 
 		if(argv.format)
-			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(argv.format));
+			this.data.sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(argv.format));
 
-		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
+		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 
-		sampleFilePaths.parallelForEach((sampleFilePath, subcb) => testSampleFile(sampleFilePath, false, subcb), this, cpuCount);
+		this.data.sampleFilePaths.parallelForEach((sampleFilePath, subcb) => testSampleFile(sampleFilePath, false, subcb), this, cpuCount);
 	},
 	function saveTestDataIfNeeded()
 	{
@@ -82,6 +86,9 @@ tiptoe(
 
 function testParallel(sampleFilePath, cb)
 {
+	if(argv.verbose)
+		XU.log`Testing in parallel: ${sampleFilePath}`;
+
 	tiptoe(
 		function runManyInParallel()
 		{
@@ -115,7 +122,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		{
 			this.capture();
 
-			dexvert.process(sampleFilePath, outDirPath, {tmpDirPath, verbose : false}, this);
+			dexvert.process(sampleFilePath, outDirPath, {tmpDirPath, verbose : argv.verbose}, this);
 		},
 		function validateResults(err, results)
 		{
@@ -184,7 +191,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		},
 		function cleanup(status, msg="", ...args)
 		{
-			if(!silent)
+			if(!silent || status!=="PASS")
 				testUtil.logResult(status, sampleSubFilePath, msg, ...args);
 
 			this.parallel()(undefined, status==="PASS");

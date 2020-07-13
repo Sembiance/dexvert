@@ -1,0 +1,209 @@
+These 9 utility programs are included for your convenience.  Except for 
+MTCONV.EXE, they are not connected in any way with PC-OUTLINE.  They were 
+written by the developers of PC-OUTLINE for their own convenience and are 
+shared with you in hopes that they will likewise make your life a little 
+easier.  Who said you never get SOMETHING for NOTHING? 
+
+
+                       9 UTILITY PROGRAMS
+                       ==================
+
+
+1)  GLOBAL.COM - for doing any dos function on an entire directory
+                 tree at once.  Useful for finding lost files or deleting
+                 all .BAK files, etc. across many directory boundaries.
+
+2)  CPY.COM    - for backing up a series of files to floppy.  You can list
+                 the files to be backed up in a separate file and CPY will
+                 automatically prompt you on when to insert a new disk.
+
+3)  DIRS.COM   - gives the total disk space occupied by a set of files.
+                 Useful for seeing how much disk space a bunch of files
+                 are taking up.  For example, "DIRS *.wks" would tell you
+                 how much space all of your .wks files in the current
+                 directory occupy.
+
+4)  MOVE.COM   - Allows you to actually move a file from one directory to
+                 another without an intermediate copy.
+
+5)  MEM.COM    - Shows the amount of free memory without waiting for a time
+                 consuming CHKDSK.
+
+6)  BEEP.COM   - Generates a beep.  Useful for batch files to indicate errors
+                 or completion.
+
+7)  PUSHDIR.COM- Saves the current directory from a batch file.
+
+8)  POPDIR.COM - Restores the current directory from the previous
+                 PUSHDIR.
+
+9)  MTCONV.EXE - Converts a Maxthink outline into Structured File Format, which 
+                 may then be loaded into PC-Outline.
+
+===============================================================================
+===============================================================================
+
+                       DETAILED DESCRIPTIONS:
+
+GLOBAL.COM
+----------
+
+USAGE:    GLOBAL <any dos command or executable program>
+
+Global executes any dos command or program on an entire directory tree.
+
+For example, if you log to the root directory and execute "GLOBAL DIR" then
+you will see a directory listing of every directory and sub-directory on
+your hard disk.
+
+If you execute "GLOBAL DIR PLAY.DOC", then you will find all occurences of
+PLAY.DOC on your hard disk.
+
+You can even use non-dos commands like "GLOBAL DIRS *.WKS" would show you the
+total disk space occupied by all .wks files in each directory on your hard
+disk.
+
+Global.com starts from the current directory and goes down the directory tree.
+To cover the whole disk, start in the root directory.  To just cover part of the
+hard disk, start in a sub-directory.
+
+===============================================================================
+
+CPY.COM
+-------
+
+USAGE #1:    CPY <same dos parameters as the COPY command> OR
+USAGE #2     CPY @<filename> destination path
+
+USAGE #1:
+
+CPY can be a direct replacement for the copy command in dos with the added
+benefit that it will not quit when a floppy fills up.  Instead it will,
+stop, erase the partial file, prompt you for a new floppy and continue on
+its way.
+
+For example:  "CPY c:\*.wks a:" would copy all .wks files in the root
+directory of c: to a:.  If the floppy in drive a: filled up during the copy,
+the partially copied file would be erased from the destination floppy and
+you would be prompted for a new floppy.
+
+USAGE #2:
+
+This usage of the CPY commmand allows you to specify a series of filenames
+to be copied to the same location.  Simply create an ascii file (let's use
+a file named CPYFILES for the sake of this example) with each file to be copied
+listed, one per line (wildcards are allowed).  Then to copy all of those files
+to a new location simply type "CPY CPYFILES A:" and one by one all the files
+listed in the CPYFILES will be copied to a:.  Again, if the floppy fills up
+you will be prompted to insert a new one.
+
+The can be extremely useful for backing up to floppy a standard set of files
+that doesn't easily conform to a simple dos wildcard.
+
+===============================================================================
+
+DIRS.COM
+--------
+
+USAGE:    DIRS <any dos path/filename>       (wildcards permitted)
+
+DIRS works just like DIR except instead of displaying each of the files, it
+simply adds the sizes of all of the files that would have been displayed
+had it been the DIR command.  DIRS uses the space actually occupied on the
+disk, not just the listed file size in the DIR listing.  NOTE:  hard disk
+space is allocated in 4k increments on the XT so that a file that shows up
+as 7 bytes like BEEP.COM actually takes up 4k on the hard disk.  DIRS takes
+this into account.
+
+For example "DIRS *.WKS" would show you how much space all your .wks files were
+occupying.  Or  "DIRS *.BAK" would show you how much space would be freed if
+you erased all the .BAK files.
+
+===============================================================================
+
+MOVE.COM
+--------
+
+USAGE:     MOVE <source path/filename> <destination path/filename>
+
+MOVE will move a file from one directory to another without making an
+intermediate copy.  The two names must be on the same disk drive.
+
+For example, "MOVE C:\PLAY\TEMP C:\TEST" will move the file c:\play\temp to
+a new location and name c:\test.
+
+===============================================================================
+
+MEM.COM
+-------
+
+USAGE:    MEM
+
+MEM lists the amount of free memory in your computer as reported by dos
+without having to wait for the painstakingly slow CHKDSK command.
+
+===============================================================================
+
+BEEP.COM
+--------
+
+USAGE:    BEEP
+
+BEEP makes a beeping noise on the speaker.  This can be very useful in batch
+files to indicate either an error condition or completion of some long task.
+
+===============================================================================
+
+PUSHDIR.COM
+-----------
+
+USAGE:    PUSHDIR <optional pathname>
+
+PUSHDIR allows you to save the current directory from a batch file, switch to
+another current directory and switch back to the original later in the batch
+file (by using its companion POPDIR).  For example, if 123 was located in a
+directory called c:\123, then you could create a batch file like the following:
+
+PUSHDIR C:\123
+123
+POPDIR
+
+Assuming you had pathed to the batch file, you could then start 123 from
+anywhere on you hard disk and when you left 123, your current directory would
+automatically be restored as if you never left it.  Note that this is different
+than just pathing to 123 because 123 (like many other programs) needs the
+current directory to be set properly so that it can find its support files
+(configuration files and drivers).
+
+The first time you use PUSHDIR a small piece of it will remain resident (about
+400 bytes).  This is the storage area used to save the current directory.
+Subsequent PUSHDIR's and POPDIR's do not use any more memory.
+
+PUSHDIR's and POPDIR's can be nested up to 6 levels deep.  Each PUSHDIR will
+save the latest current directory and each POPDIR will restore the last one
+saved.
+
+===============================================================================
+
+POPDIR.COM
+----------
+
+USAGE:    POPDIR
+
+POPDIR is just the counterpart to PUSHDIR.  After a PUSHDIR, POPDIR will
+restore the previous current directory.  See the documentation on PUSHDIR for
+more information.  Note:  POPDIR is of absolutely no use without first doing a
+PUSHDIR.
+
+===============================================================================
+
+MTCONV.EXE
+__________
+
+USAGE:     MTCONV input.fil <optional output.fil>
+
+Takes an outline written on Maxthink and converts it into the Structured file 
+format, which can be read into PC-Outline, using the File Input Structured 
+command from the menu.  This enables information to be transferred easity from 
+Maxthink to PC-Outline.
+

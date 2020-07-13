@@ -1,0 +1,319 @@
+                       PC-Outline  Version 3.34
+        Copyright (C) 1986,87 Brown Bag Software, All Rights Reserved
+
+These are the files on this disk (Archive):
+
+PCO.EXE      - executable file for running PC-Outline
+PCO.ECT      - shareware screen file
+README.1     - the latest notes about PC-Outline not included in the manual
+README.2     - descriptions of the utility programs included on the disk
+
+GLOBAL.COM   - utility program #1 (see README.2)
+CPY.COM      - utility program #2 (see README.2)
+DIRS.COM     - utility program #3 (see README.2)
+MOVE.COM     - utility program #4 (see README.2)
+MEM.COM      - utility program #5 (see README.2)
+BEEP.COM     - utility program #6 (see README.2)
+PUSHDIR.COM  - utility program #7 (see README.2)
+POPDIR.COM   - utility program #8 (see README.2)
+MTCONV.EXE   - utility progran #9 (see README.2)
+
+MANUAL.DOC   - brief documentation in printable form
+PRINTDOC.BAT - a batch file that will print MANUAL.DOC to LPT1
+
+PCPRINT.COM  - a program for changing printer drivers
+KEYSET.COM   - a program for customizing the PC-Outline invoke key
+
+*.PCO        - sample outlines covering many of PC-Outline's features.
+*.CFG        - various printer drivers
+
+GOODCLK.COM  - a program to make the time display in PC-Outline work
+               correctly on some compatibles (AT&T, EPSON, and others).
+               To use it, just run it in your autoexec.bat file (or any
+               time before loading PC-Outline).
+
+Last minute notes about PC-Outline:
+
+A couple of the most recently added features of PC-Outline are as follows:
+
+1)   NEW WAY OF SPECIFYING WHERE THE CONFIGURATION FILE IS FOR USE ON
+     A HARD DISK:  Instead of using the /l=<configuration file/path
+     name> as a command parameter option, you may put the command
+     SET PCO=<configuration file/path name> in your autoexec.bat
+     file.  PC-Outline will first look in the current directory for
+     the configuration file PCO.CFG.  If it is not found there and
+     there was no /l=.....  command parameter, then PC-Outline will
+     try the file/path set in the environment with the dos SET
+     command.  By using this feature, you can start PC-Outline from
+     anywhere on your hard disk simply by pathing to the directory
+     that contains PCO.EXE.  PC-Outline will do the rest of the work,
+     automatically finding its configuration files.
+
+2)   NEW /d COMMAND PARAMETER FOR CONTROLLING THE STARTING CURRENT
+     DIRECTORY IN PC-Outline:  The configuration file PCO.CFG
+     (created from the ADVANCED CONFIGURATION menu) can contain a
+     starting directory.  If it does, then each time PC-Outline
+     starts it will automatically start with that directory as the
+     current directory for outline files.  If it does not contain a
+     starting directory, (the entry in the ADVANCED CONFIGURATION
+     menu for starting directory is blank), then PC-Outline will use
+     the current DOS directory as its starting directory.  If you set
+     a current directory in the above menu because you keep most of
+     your outline files in one particular location, but sometimes you
+     want to start up PC-Outline with a different directory, then you
+     can log to the directory you want and type PCO.EXE /d.  The /d
+     will tell PC-Outline to ignore the starting directory set in the
+     configuration file and use the DOS current directory.
+
+3)   PC-Outline now supports the creation of a printer substitution table
+     allowing you to print graphics characters on some printers.  Note:
+     Graphics characters will print exactly as seen on the screen on an
+     IBM printer.  On epson printers and most other printers, however, you
+     must do a little extra work to get some graphics characters to print
+     correctly.
+
+     For example, if you choose bullet numbering for your outlines, an
+     epson printer will not correctly print the bullet.  To fix this,
+     create an ascii file named PCOPRN$.CFG and place the following line
+     in it (this file exists on the PC-Outline system disk):
+
+     char(254)=143
+
+     The bullet character on screen is 254 and the epson printer character
+     for a bullet is 143.  This command tells PC-Outline that whenever it
+     is about to print a character 254, print a 143 instead.  You can
+     place as many printer substitutions as you like.  The string to
+     substitute can be more than one character if desired.  For example
+     you could redefine the tilde character (~) to turn boldface on (for
+     an epson printer) by inserting the following line.
+
+     char('~')=27,'E'
+
+     This would substitute ESC G for every occurence of a tilde character.
+
+     Note that there are two ways to insert a value, by placing a
+     character in single quotes ('D') or by entering the decimal
+     representation for the ascii value of the character (123).  Each
+     entry must be separated by a comma.  Following are some valid
+     entries:
+
+     char(132)='a'
+     char('f')='ABC',32
+     char(34)=255,'abc',27,'G'
+
+     Any line in the file that begins with a semicolon will be ignored
+     (useful for inserting comments).  Lines in the substitution file may
+     be no longer than 80 characters.  To continue a line on the next
+     line, end the line with a plus sign.  For example:
+
+     char('~')='ABCEFGHIJKLMNOP',+
+     'QRSTUVWXYZ'
+
+     This command would print the entire alphabet everytime the tilde
+     ('~') was encountered in a file.
+
+     PC-Outline will look for the file PCOPRN$.CFG in the same directory
+     as the configuration file.  If you have not used either the
+     l=<filename> command parameter or the SET PCO=<filename> command to
+     specify where the configuration file is located, then PC-Outline will
+     just look for PCOPRN$.CFG in the current directory.
+
+
+ITEMS ADDED TO PC-Outline SINCE THE DOCUMENTATION RELEASE.
+----------------------------------------------------------
+
+ADDED IN VERSION 1.02:
+
+1)   DE-INSTALL - While using PC-Outline in memory resident mode, you may
+     deinstall it from memory by pressing Control-Backspace three times in
+     a row from the main editing mode.  If there were no memory resident
+     programs loaded after PC-Outline, you will recover all the memory
+     that PC-Outline was allocated.  If you load any memory resident
+     programs after PC-Outline, the memory PC-Outline occupied will be
+     freed, but it will not be available for dos to use to run other
+     programs in.
+
+     Note:     ONLY USE THE DEINSTALL COMMAND AFTER INVOKING PC-Outline
+               FROM THE DOS PROMPT AND ONLY AFTER YOU HAVE SAVED ALL OF
+               YOUR OUTLINES.  YOU MUST BE IN THE MAIN EDITING MODE OF
+               PC-Outline FOR THE DEINSTALL TO WORK (not the opening
+               menu).
+
+ADDED IN VERSION 1.03:
+
+1)   The "Lose Changes" prompt now looks at all open windows.  It used to
+     only look at changes in the current window.
+
+2)   With the /K command parameter option you can force PC-Outline to take
+     its keys directly from the keyboard buffer without going through
+     BIOS.  This allows you to bypass keyboard enhancers.
+
+     MAIN USE:  If you have a whole bunch of keys redefined for your word
+     processor and you don't want those key definitions for PC-Outline,
+     you can use the /K option and the keyboard enhancer will be active in
+     your main program, but not when you invoke PC-Outline.  When you
+     return back to your word processor, the keyboard enhancer will
+     automatically be active again.  It is likely you will only find use
+     for this option when using PC-Outline in its memory resident mode.
+
+     For those of you following the progression of versions, all
+     non-memory resident versions get their keys through BIOS.  For the
+     memory resident version, 1.00 and 1.01 got keys directly from
+     keyboard buffer, 1.02 got keys through BIOS and 1.03 gives you the
+     choice with /K (default through BIOS).
+
+ADDED IN VERSION 1.04:
+
+1)   A few small changes to make 1.03 work how it was supposed to.
+
+ADDED IN VERSION 1.05:
+
+1)   DELETE OUTLINE ENTRY PROMPT:  The delete outline entry command now
+     contains a prompt that asks you to confirm whether you really want to
+     delete the entire outline family.  This was added in response to
+     complaints that the ^D command was too dangerous.  You could delete
+     your whole outline with a single keystroke.  If you do not want this
+     prompt, then you can use the command parameter /P when first loading
+     PC-Outline and the prompt will be skipped.  Note you could also
+     define a macro for ^D to be ^DY (^D and then a Y to answer yes to the
+     delete prompt).
+
+2)   SNOW ON MONITORS:  The /T command parameter will fix a problem with
+     snow on the screen that some monitors may have.  On some IBM color
+     graphics adapters, you may see a small amount of snow on the left
+     edge of the screen.  Using the /T command parameter should eliminate
+     that.  The problem also occurs on some Hercules clone video cards.
+     If you have the IBM monochrome adapter, an EGA card, or a COMPAQ
+     card, you should not need this option.  Using the /T parameter has a
+     slight disadvantage (so you should not use it unless you need it).
+     With /T enabled, the on screen time and the CAPS and NUM indicators
+     will only be updated whenever you press a key.  Consequently, the
+     time and the shift status may not be correct if you have not pressed
+     a  key for a while.  Note:  this option is not the same as video
+     retrace in the ADVANCED CONFIGURATION menu.  If you see snow on the
+     screen, you should first make sure that this option is set to YES.
+     Only if that does not fix the problem should you use /T.  You may
+     also want to use this option if you have a Hercules clone and you see
+     unwanted background snow all the time.
+
+3)   LOW INTENSITY VIDEO:  The /I command parameter will force PC-Outline
+     to use low intensity video instead of high intensity video (in
+     response to users with a monochrome display).
+
+4)   SAME KEY INVOKE/DE-INVOKE:  When using PC-Outline in memory resident
+     mode, the same key that you use to invoke PC-Outline (the default is
+     Control-Backslash, but you can change it using KEYSET.COM) will also
+     exit PC-Outline and return you back to your other application.
+
+5)   CORRECT TIME ON COMPATIBLES:  A utility program called GOODCLK.COM is
+     now included on the disk that will allow PC-Outline to correctly
+     display the time on some compatibles.  To use it, just run it any
+     time before loading PC-Outline (preferably in your autoexec.bat
+     file).  It does not remain memory resident so you lose no memory by
+     running it.  All it does is set the BIOS time to be the same as the
+     DOS time.  PC-Outline gets its time from BIOS (because it is so much
+     quicker), but some compatibles with clock cards (AT&T, EPSON, ...)
+     set the DOS time correctly on boot up, but not the BIOS time.  You
+     should not need this if you have an IBM or a COMPAQ.
+
+6)   Pressing the ESC key after hitting the menu key ("/") will now just
+     cancel the menu key instead of asking you if you want to quit
+     PC-Outline.
+
+ADDED IN VERSION 1.06:
+
+1)   A few small changes to make the memory resident version work with
+     more programs.
+
+2)   Bug fixes in the key re-definition part of the program.
+
+ADDED IN VERSION 1.07:
+
+1)   Small bug fixes relating to hiding and unhiding text.
+
+2)   New shareware policy (on the opening shareware screen).
+
+ADDED IN VERSION 1.08:
+
+1)   You can now set all 8 levels of numbering in the Global
+     Outline Style menu.  Also fixed some problems with
+     getting the numbering saved correctly to the PCO.CFG
+     file.
+
+2)   Fixed bug that occurs only when copying more than 255
+     outline elements from one window to another.
+
+3)   Fixed bug that can occur only on an 80286 machine (we
+     discovered one of the incompatibilities between the
+     8088 and 80286) in the following situations:
+
+     a)   Adding text to a lower window number outline with
+          more than 64k of outlines above it in higher
+          window numbers.
+     b)   Copying text or outline elements from a higher
+          window # down to a lower window # with more than
+          64k of outlines in between.
+
+ADDED IN VERSIONS 1.08A AND 1.08B:
+
+1)   Added direct support for Prokey and Superkey so that if you use the
+     /K command parameter option, PC-Outline will detect their presence
+     and use their internal functions for putting them to sleep while
+     using PC-Outline instead of going directly to the keyboard buffer to
+     try to accomplish the same thing.  This method is considerably more
+     reliable and is compatible with the expanded keyboard buffers that
+     the above products offer.  If you do not use the /K parameter,
+     PC-Outline behaves exactly as before.
+
+ADDED IN VERSION 3.24:
+
+1)   PC-Outline now uses an external ShareWare file called "PCO.ECT".
+     The file should be present in the current directory.
+
+ADDED IN VERSION 3.25:
+
+1)   PC-Outline did not work correctly with characters above 127.
+     This has  been fixed in this version in the following areas:
+
+        DELETE LINE
+        DELETE WORD LEFT-RIGHT
+        BLOCK OPERATIONS.
+        WORD WRAP
+        INPORT/EXPORT.
+
+
+ADDED IN VERSION 3.30 & 3.31: (NOT FOR THE INTERNATIONAL VERSION)
+
+1)   PC-Outline now supports the foriegn keyboard drivers
+
+ADDED IN VERSION 3.32 & 3.33:
+
+1)   Search path for shareware screen file is changed, PC-Outline now
+     first searches the current directory, then tries to use the
+     drive/path from the enviroment variable called "PCO".
+     This means that if the command in your autoexec.bat is:
+
+         SET PCO=C:\PCO\PCO.CFG
+
+     then PC-Outline will first look for "PCO.ECT" in the current directory,
+     and then if this failes, it will look for "C:\PCO\PCO.ECT".
+
+2)   Export block to Lotus 123 V 2.0 now fixed.
+
+3)   Bug relate to "E - Even Right Margins" & "R - Range Paragraph Style"
+     fixed, now only the paragraphs marked by the block will be changed.
+
+4)   (NB! ONLY VALID FOR INTERNATIONAL VERSION) a new shareware screen has been
+     added, the screen now consists of several screens, with the posibility to
+     print out the documentation and a registration form. For the form the user
+     can select the laguage he wants, and the level he wants. The correct
+     address and price will the be printed in the form.
+
+
+ADDED IN VERSION 3.34:
+
+1)   ShareWare screen file "PCO.ECT" has been updated.
+
+
+Have Fun!
+

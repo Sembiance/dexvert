@@ -1,0 +1,37 @@
+16000:Error linking to graphics routines - run Frieze
+001:Unknown video card combination
+002:Could not load PAL file
+003:Not Enough Memory
+004:ERROR
+005:Too many system fonts
+006:Font not found
+007:No file name selected
+008:Not a path or drive
+009:Icon file not found
+010:Menu overlay file not found
+011:Invalid menu overlay file
+012: OK 
+013: CANCEL 
+014: INFO 
+015:Dialog box overlay file not found
+016:Invalid dialog box overlay file
+101:Error connecting to mouse
+102:Icon error:  %s
+103:Icon error:  %s
+104:System font error:  %s
+105:Menu overlay error:  %s
+111:PC Paintbrush picture file:
+112:Size: %dx%d
+113:Colors: %d
+114:Planes: %d
+115:Windows Paint picture file:
+116:Select source file...
+117:Select destination file...
+118:File write error
+119:File read error
+120:Not enough memory for dir box
+122:File Not Found
+123:Not a picture
+124:Invalid header
+
+

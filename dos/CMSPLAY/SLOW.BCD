@@ -1,0 +1,6 @@
+; slow rythm defination file
+
+B |[p=3]C 1 0 5  0   | 1 0 3 0 |
+C |[p=4,v=180]C 0zzz/ 0zzz/| 0zzz/ 0/zz//zz/|
+R |[v=180] 0x0x/ 0w0w/| 0y0y/0xxx/ |
+

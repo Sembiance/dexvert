@@ -1,0 +1,86 @@
+15-050: Undo
+-060:Accept
+-099: Undo
+-070: Undo
+-071:Accept
+-072:Copy
+-073:Paste
+-100:Pick
+101:NY*Rotate
+102:NY*Flip Horiz
+103:NY*Flip Vertic
+104:NY*Inverse
+105:NN0
+106:NY*Shrink+Grow
+107:NY*Tilt
+108:NN0
+109:NY#Clear
+-200:Edit
+201:NY*Cut
+202:NY*Copy
+203:NY*Paste
+204:NN0
+205:NY*Cutout is...
+206:NN0(        )
+-300: Page
+301:NY*Save as...
+302:NY*Load from...
+330:NY*Save GX1...
+331:NY*Load GX1...
+303:NY*Show Screen
+304:NY*Print
+305:NN0
+306:NY*Clear
+307:NN0
+308:NY*Quit
+-400:Style
+401:NY*Font is...
+402:NN0(Roman   )
+403:NN0
+404:NY#Proportional
+405:NY#Opaque
+-500:Style
+501:NY*Font is...
+502:NN0(ROMAN   )
+503:NN0
+504:NY1Light
+505:YY1Medium
+506:NY1Bold
+507:NN0
+508:NY#Italic
+509:NY#Underline
+510:NY#Outline
+511:NY#Kerning
+512:NY#Shadow
+-600:Size
+601:NY1  5  Point
+602:NY1  7  Point
+603:NY1  9  Point
+604:YY1 14  Point
+605:NY1 18  Point
+606:NY1 24  Point
+607:NY1 36  Point
+608:NY1 50  Point
+609:NY1 72  Point
+-700:Size
+701:YY1X x 1
+702:NY1X x 2
+703:NY1X x 3
+704:NY1X x 4
+705:NN0
+706:YY2Y x 1
+707:NY2Y x 2
+708:NY2Y x 3
+709:NY2Y x 4
+-800:Misc
+802:NY*zoom-in
+803:NY*ZOOM-in
+310:NY*zoom-out
+804:NY*Brush Shapes
+805:NY*Edit Pattern
+806:NY*Get Patterns
+807:NY*Save Patterns
+808:NY*Adj. Palette
+809:NY*Adj. Aspect
+-999:END
+

@@ -1,0 +1,56 @@
+;------------------------------------------------------------------------
+; All of the following event definitions were given as examples in the
+; Sputter documentation file SPUTTER.DOC
+;------------------------------------------------------------------------
+
+; Replace the normal speaker BEEP with something more pleasant
+b                       chick.ani               ;chicks peeping
+
+; Whenever Qedit is started - play "Now don't make any more mistakes!"
+p       q.exe           mistaks.v8
+
+; Whenever LIST is started - play Bugs Bunny "What's up Doc?"
+p       list.com        doc.tun
+
+; When any file is opened for read access - play Curly "Certainly!"
+fo      *               certnly.v8
+
+; When any program attempts to open CONFIG.SYS for write access
+fc      config.sys      heynot.v8               ;Curly "Hey not that!"
+
+; When any programs renames AUTOEXEC.BAT - play Bugs Bunny
+fd      autoexec.bat    meaning.tun             ;"Whats the meaning of this?"
+
+; When any file is deleted - play Yosemite Sam yelling "AHHHHhhhhhh"
+fd      *               ahh.tun
+
+; When any program terminates - play Bugs Bunny saying "That's that!"
+i 21 4c ff              thats.tun
+
+; When the file attributes MYFILE are changed - play Curly
+ia 21 43 01 myfile      certnly.v8              ;"Certainly!"
+
+; When a sequential write to MYFILE occurs - play Curly
+if 21 15 ff myfile      heynot.v8               ;"Hey not that!"
+
+; When a format track is executed for any drive - play Lost in Space Robot
+id 13 05 ff ff          warning.v8              ;"Warning, Warning"
+
+; A bunch of miscellaneous timer event examples
+;t 07-11-90 00:00 00-00-00 00:01 0 wow.tun       ;every min for 1 day
+;t 07-11-90 12:00 00-01-00 00:00 2 wow.tun       ;at noon for 2 days
+;t 07-00-00 12:00 00-01-00 00:00 0 wow.tun       ;at noon every day in July
+;t 00-11-00 12:00 01-00-00 00:00 0 wow.tun       ;at noon every 11th
+;t 07-00-90 00:00 00-00-00 01:00 0 wow.tun       ;every hour in July
+;t 00-11-00 00:00 00-00-00 01:00 0 wow.tun       ;every hour on every 11th
+;t 00-00-00 00:15 00-00-00 01:00 0 sheesh.tun    ;15 past the hour
+;t 00-00-00 00:00 00-00-00 00:30 0 youagain.tun  ;every half hour
+;t 00-00-00 00:45 00-00-00 01:00 0 yeah.tun      ;45 past the hour
+;t 00-00-00 00:00 00-00-00 01:00 0 #t -p lpt1 -c ;every hour
+;t 00-00-00 12:00 00-00-00 00:00 1 #c rol f:\rol\cantina.rol
+;t 00-00-00 17:00 00-00-00 00:00 1 #r f:\rol\axel-f.rol
+;t 00-00-00 00:00 00-00-00 00:00 1 bed1.snd      ;midnight
+;t 00-00-00 00:15 00-00-00 00:15 8  bed2.snd     ;midnight+
+;t 00-00-00 02:00 00-00-00 00:01 15 timeup.snd   ;Sorry, Time's up!
+
+

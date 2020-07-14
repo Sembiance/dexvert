@@ -29,8 +29,6 @@ Options:
 	process.exit(0);
 }
 
-//setTimeout(() => console.log("hehe"), XU.HOUR);
-
 // Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
 const SHA1_IGNORE_FILES =
 {

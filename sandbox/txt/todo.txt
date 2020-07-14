@@ -1,6 +1,46 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Find any use of format.meta.program and support an array here (use Array.force)
+also support the fact that each item in the array may be an object {name||bin€|id||program : "name", args : ?}
+and add support to util.program.run that detcts an arra6 was passwed and is handled accordingly and uodate archive.js to be simpoler and also formst.director snd other formats
+
+create a family/image.js and insert:
+
+function checkShouldContinue(state)
+{
+	return !!state.output.files;
+}
+
+exports.steps = function steps(state, p)
+{
+	const format = p.formats[state.id.family][state.id.formatid];
+
+	return [exports.pre,
+			p.util.flow.batchRepeatUntil([
+			exports.processNextImage,
+			p.util.file.findValidOutputFiles(),
+			exports.checkForValidOutputImages], checkShouldContinue];
+};
+
+exports.pre = function pre()
+{
+	state.imageProgs = format.programs.slice();
+};
+
+exports.processNextImage = processNextImage()
+{
+	util.prgram.run(programs.shift.bin)
+};
+
+exports.findValidOutputImages = function findValidOutputImages()
+{
+	// check state.output.files to see if valid images (see retromission/image.js handler)
+	// any invalid image, remove it from state.output.files
+	// make sure to delete state.output.files if empty
+};
+For the util.program.run thing, figure out a way to handle objects that have program/args/runOptions fields, or array of such objects. Maybe have it return an array of fns to call rather than a single cb fn. hrm.
+
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
   Ensure every program can work just by being called Ensure  abydos 0.2.0 also updated to
 * Add PNG support. Have it have a inputMeta() that will call imageUtil.getInfo()

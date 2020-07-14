@@ -1,20 +1,17 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Figure out why archive/iso full doesn't work
-
-* Go through unsupported.txt and anything in there that is entirely unsupported, create a format.js for with unsupported : true
-  For those that remain partially unsupported, prioritize doing those next
-
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
-  Ensure every program can work just by being called Ensure  abydos 0.2.0
-
-* Add PNG support. It will automatically mark itself as processed so long as the png.inputMeta() (or image.inputMeta()) meta info came back what I expect. Update process.updateProcessedFlag() to call p.formats[state.id.family][state.id.formatid].updateProcessed() if it is present.
+  Ensure every program can work just by being called Ensure  abydos 0.2.0 also updated to
+* Add PNG support. Have it have a inputMeta() that will call imageUtil.getInfo()
+  Then add a lib/family/image.js::updateProcessed() which will set processed to true if inputMeta.png.width&&height exist
 
 * Now add all the rest of the 'image' files
   For ffmpeg program have both 'video' args and 'image' args and a way to switch between them easily
 
-* Add a document next, something that uses unoconv to convert. Create an init.d folder and unoconv-server and ensure it daemonizes and automatically will restart it if the process crashes. Make sure if I use daemonize that I include it as a gentoo package that I need to have installed
+* Convert documents next. Start with 'wordMac' as it uses unoconv.
+
+* Convert database files next.
 
 * Add all the previously 'supported' file formats
 

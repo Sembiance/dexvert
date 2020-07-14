@@ -5,14 +5,19 @@ export.meta =
 {
   name           : "Format Name"					# Human friendly name of this format
 
+  website        : ""								# [*] A link to the details of this file format
+
   ext            : [".ext", ".ext2"]				# [*] Array of extensions this format may have. First ext should be the primary
                                                           Extensions are case insensitive matches, so only specific lowercase
 
   safeExt(state) { return ".safe"; }				# [*] If present, the returned extension will be the safe extension instead of
 														  the first extension in .ext[]
+
+  mimeType       : "image/some-mime"                # [*] Used by some programs like abydos to convert the file
+
+  forbidExtMatch : true								# [*] Set to try to forbid ext matching
   
-  forbidExtMatch : [".not", ".otherExt"]			# [*] Array of extensions the file must NOT have in order to match this format
-                                                          Extensions are case insensitive matches, so only specific lowercase
+  unsupported    : true								# [*] Set to try to say that this file can be identified but not processed
 
   magic          : ["Some Magic", /^More Magic$/]	# [*] Array of magics to test against. Can be strings (startsWith) or regexes
   

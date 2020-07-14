@@ -1,0 +1,19 @@
+#!/sbin/openrc-run
+
+depend() {
+    need net
+    use dns
+    after sshd
+}
+
+start() {
+    ebegin "Starting dexserv"
+    start-stop-daemon --chdir /mnt/compendium/DevLab/dexvert/bin --user sembiance --start --quiet --background --make-pidfile --pidfile /var/run/dexserv.pid --exec /mnt/compendium/DevLab/dexvert/bin/dexserv
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping dexserv"
+    kill `cat /var/run/dexserv.pid`
+    eend $?
+}

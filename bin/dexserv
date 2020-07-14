@@ -12,7 +12,7 @@ function usage()
 {
 	XU.log`${XU.c.fg.cyan + "Usage:"} dexserv [options]
 
-Starts a background service to assist dexvert
+Starts a server to assist dexvert. Required for 'unoconv' doc conversion.
 
 ${XU.c.fg.cyan + "Options:"}
   ${XU.c.fg.yellow + "--help"}
@@ -37,6 +37,12 @@ function shutdown()
 
 	unoconvCP.kill();
 }
+
+process.on("SIGTERM", () =>
+{
+	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Terminate caught.`;
+	shutdown();
+});
 
 process.on("SIGINT", () =>
 {
@@ -63,6 +69,7 @@ function startUnoconvServer()
 	{
 		if(shuttingDown)
 			return;
+
 		XU.log`Unoconv server has exited, restarting...`;
 		unoconvCP = null;
 		startUnoconvServer();

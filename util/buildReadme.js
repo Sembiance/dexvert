@@ -13,8 +13,9 @@ tiptoe(
 		fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "*.js", {nodir : true}, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexid"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), ["--help"], runUtil.SILENT, this.parallel());
+		runUtil.run(path.join(__dirname, "..", "bin", "dexserv"), ["--help"], runUtil.SILENT, this.parallel());
 	},
-	function generateReadme(programFilePaths, dexidUsage, dexvertUsage)
+	function generateReadme(programFilePaths, dexidUsage, dexvertUsage, dexservUsage)
 	{
 		const programs = programFilePaths.map(programFilePath => require(programFilePath));	// eslint-disable-line node/global-require
 
@@ -56,6 +57,11 @@ dexvert requires a LOT of programs and some kernel options to be set. See Requir
 ## Usage
 \`\`\`
 ${dexvertUsage}
+\`\`\`
+
+In order for documents to convert correctly, a single 'unoconv' daemon needs to be running. So 'dexserv' must be running in the background.
+\`\`\`
+${dexservUsage}
 \`\`\`
 
 \`\`\`

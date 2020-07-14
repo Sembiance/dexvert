@@ -19,7 +19,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio database 3d font video image other executable text or all
+    Valid families: archive document audio database 3d font video image other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
@@ -32,6 +32,18 @@ Options:
   
    --help
     Displays this usage message
+
+```
+
+In order for documents to convert correctly, a single 'unoconv' daemon needs to be running. So 'dexserv' must be running in the background.
+```
+Usage: dexserv [options]
+
+Starts a server to assist dexvert. Required for 'unoconv' doc conversion.
+
+Options:
+  --help
+    Display help/usage
 
 ```
 
@@ -124,7 +136,7 @@ dev-util/stackimport | [stackimport](https://github.com/uliwitness/stackimport/)
 games-emulation/dosbox | [dosbox](http://dosbox.sourceforge.net/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
 sys-apps/file | [file](https://www.darwinsys.com/file/) | 
-sys-apps/util-linux | [mount](https://www.kernel.org/pub/linux/utils/util-linux/ https://github.com/karelzak/util-linux) | 
+sys-apps/util-linux | [mount](https://www.kernel.org/pub/linux/utils/util-linux/) | 
 sys-fs/hfsutils | [*](https://www.mars.org/home/rob/proj/hfs/) | 
 sys-process/parallel | [parallel](https://www.gnu.org/software/parallel) | 
 x11-base/xorg-server | [Xvfb](https://www.x.org/wiki/) | 

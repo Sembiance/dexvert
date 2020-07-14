@@ -12,10 +12,11 @@
 	"engines"      : { "node" : ">=14" },
 	"main"         : "./lib/dexvert.js",
 	"bin"          : {
-		"dexvert"  : "./bin/dexvert",
 		"dexid"    : "./bin/dexid",
-		"uniso"    : "./bin/uniso",
-		"fixPerms" : "./bin/fixPerms"
+		"dexserv"  : "./bin/dexserv",
+		"dexvert"  : "./bin/dexvert",
+		"fixPerms" : "./bin/fixPerms",
+		"uniso"    : "./bin/uniso"
 	},
 	"dependencies" : {
 		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",

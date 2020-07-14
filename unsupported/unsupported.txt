@@ -4,122 +4,7 @@
 
 
 
-
-
-
-
-
-
 >>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TO PROCESS
-/----\
-| 3D |
-\----/
->>> iffTDDD - 591d2978c0f66951294eff3573b46a59decd19ac
-A 3D rendering file format. Some of these files may have been created by "Impulse 3D"
-I've never bothered trying to convert or render these into anything else
-
->>> sculpt3DScene - 591d2978c0f66951294eff3573b46a59decd19ac
-A 3D rendering file format. I didn't bother investigating it.
-
->>> vrml - http://fileformats.archiveteam.org/wiki/VRML    http://snisurset.net/code/abydos/samples.html
-A 3D rendering file format meant for the web. I didn't bother investigating it.
-
-
-/---------\
-| Archive |
-\---------/
->>> corelThumbnails - b6678647b0bfd7e427999f16152fedfc70903569
-Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. It talks a tiny bit about it here: http://fileformats.archiveteam.org/wiki/CorelDRAW
-Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed.
-Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back.
-
->>> ted5Archive - eb633cf45813912fcb35c8aee8f633b6d6682e20
-An archive format created by TED5: http://www.shikadi.net/moddingwiki/TED5
-Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
-
->>> iffLIST - 591d2978c0f66951294eff3573b46a59decd19ac
-The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file.
-In theory I could parse this file, and "extract" out by creating seperate files for each major FORM entry inside, making sure to also copy into these files the 'shared' entries, adjusting the resulting FORM lengths as needed.
-Couldn't find any real documentation on the LIST/SSETPROP format. See: https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF
-
->>> ttw - 591d2978c0f66951294eff3573b46a59decd19ac
-Amiga xfdmaster can supposedly decrunch this. `vamos` won't run it right.
-Could emulate an amiga to support this. aminet.net/package/util/pack/xfdmaster
-
->>> viacomNewMedia - 038c5d078312d98c571d8528f2d138f8448c5c6d
-An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them:
-https://github.com/jmcclell/vnmgf-exporter
-http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format
-Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
-
-
-/-------\
-| Audio |
-\-------/
->>> adLibInstrumentBank - 
-These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music.
-Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. http://vgmpf.com/Wiki/index.php?title=BNK
-
->>> inverseFrequency - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
-Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
-
->>> quattroProSound - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
-Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
-
->>> siff - 038c5d078312d98c571d8528f2d138f8448c5c6d
-The .son files are technically supported by libavformat and ffmpeg/cvlc, yet for these files the WAVs they procude are very distorted
-My hunch is the decompression algo doesn't quite work with these particular SIFF files. I couldn't locate ANY OTHER converters.
-
->>> sonixInstrument && sonixSoundSample - 591d2978c0f66951294eff3573b46a59decd19ac
-The .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds.
-These files are used as the instruments in .smus files.
-In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file.
-Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
-
->>> v8 - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
-These are COVOX ADPCM audio files as detailed here: https://wiki.multimedia.cx/index.php/Covox_ADPCM
-I've tried using C:\APP\COVOXCONV.EXE but it could never get the WAV output at the correct sample rate, despire me trying different ones
-I also tried C:\SPUT111\SPUT.COM but it appears only output more COVOX formats.
-According to that wiki, mplayer might be able to play these, but I couldn't get it to play any of them.
-
-
-/----------\
-| Database |
-\----------/
->>> infoFile - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
-
->>> clarionDatabase - eb633cf45813912fcb35c8aee8f633b6d6682e20
-Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
-
->>> pcFile - eb633cf45813912fcb35c8aee8f633b6d6682e20
-Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
-
-
-/----------\
-| Document |
-\----------/
->>> envisionPublisherDoc - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Envision Publisher for MSDOS doesn't have an "Export" option.
-I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
-
->>> helpLibrarian - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
-Help Librarian files. No information about them could be found anywhere.
-
-
-/------\
-| Font |
-\------/
->>> amigaBitmapFont - 
-Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
-
->>> envisionPublisherFont - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
-
->>> gemFont - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
-
-
 /---------\
 | Ignored |
 \---------/
@@ -130,15 +15,6 @@ These are executables created by DOS Micorosoft BASIC. In theory, it might be po
 /-------\
 | Image |
 \-------/
->>> gx1 - eb633cf45813912fcb35c8aee8f633b6d6682e20
-Loadable by the DOS version of "Microsoft Paintbrush 2.0" which can be run here: C:\PBRUSH2\PAINT.BAT
-But it doesn't support keyboard shortcuts, so to convert and save as PCX it's all via the menus.
-I don't have mouse support yet for dosUtil, so skipping this for now.
-
->>> gx2 - eb633cf45813912fcb35c8aee8f633b6d6682e20
-No known converter. File format is detailed though in sandbox/unsupported/image/gx2/GX2SPEC.DOC
-So in theory I could create my own converter program if I wanted to.
-
 >>> iffILBM - 591d2978c0f66951294eff3573b46a59decd19ac
 Some ILBM files don't get converted correctly by my current image conversion programs, usually just a black canvas.
 I've already fixed some using my iffILBMFixer, which removes EMPTY CMAP palettes so that the program falls back on a default palette
@@ -146,56 +22,14 @@ However there are more ILBM files that have different chunks that are seemingly 
 CRNG - Used for color shifting. None of the programs I use seem to support this (used by Deluxe Paint)
 DPPS - Couldn't find info on this, but it's probably a "Deluxe Paint" custom chunk that the programs might not deal with correctly
 
->>> mldfbmhd - eb633cf45813912fcb35c8aee8f633b6d6682e20
-It's probably an image format. IFF format FORM with MLDFBMHD. Could not loacate any info online about it. So didn't pursuse further.
-
 >>> naplps - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
 Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images. I should improve this maybe.
 
->>> naplpsSCript - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
+>>> naplpsScript - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
 The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note: fileid doesn't identify this file yet, but if I can find more samples, it's totally possible to write an identifier as it has tons of unique scripting strings in it. Note I learned a little bit about this format from README.EXE in: http://dev.retromission.com/explore/cdrom/d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1/World's%20Best%20Butts%20(1995).iso/viewers/eag2nap.zip
-
->>> neoPaintPattern - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Identified via magic as a Pallette "NeoPaint Palette" they appear to be actual "patterns" used as stamps in the MSDOS Neopaint program
-In theory I could convert these to images. Maybe opening up Neopaint, selecting the pattern, stamp it once and then save the image
-
->>> picturePack - 591d2978c0f66951294eff3573b46a59decd19ac    http://snisurset.net/code/abydos/samples.html
-abydos is the only one that I could find that is supposed to support these file formats. Yet trying to convert any just yields a core dump in the plugins/atari/stos.c file. I located this "st2bmp" wiki page about a tool that can convert them to BMP: http://www.atari-wiki.com/index.php/ST2BMP
-However it links to the Atari Forums which are down and can't find another copy of it anywhere, including github.
-Wayback machine has it: https://web.archive.org/web/20130217085228/http://www.atari-forum.com/viewtopic.php?p=177293
-But because the forums required a login, the actual attached files and SOURCE CODE are not available :(
-Found a post talking about it here: http://eab.abime.net/showthread.php?t=78790
-I registered there and will make a post there asking about the tools/source code.
 
 >>> qtif - http://snisurset.net/code/abydos/samples.html
 Several of the 'animation/video' versions of the Quicktime qtif files won't convert. ffmpeg doesn't work either. Didn't research more.
-
->>> theDraw - http://fileformats.archiveteam.org/wiki/TheDraw_Save_File      http://snisurset.net/code/abydos/samples.html
-ANSI Art drawing program for DOS. I couldn't come up with any converter programs for it nor could I locate a file format doc.
-I did locate MysticDraw for windows, which is supposed to be the successor, but I didn't try it and don't know if it can load TheDraw files and if it can, don't know if it can save em
-
-
-/-------\
-| Music |
-\-------/
->>> cms
-Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it.
-Only way to play them is within DOSBOX by setting this in the DOSBOX config:
-[sblaster]
-sbtype  = gb
-sbbase  = 220
-irq     = 7
-dma     = 1
-hdma    = 5
-sbmixer = true
-oplmode = cms
-oplemu  = default
-oplrate = 22050
-Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE
-However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
-
->>> digiTrekker - 591d2978c0f66951294eff3573b46a59decd19ac
-Couldn't locate a player or converter. Tried milkytracker, but it wouldn't play it.
 
 
 /-------\
@@ -205,25 +39,12 @@ Couldn't locate a player or converter. Tried milkytracker, but it wouldn't play 
 So I DO currently convert these, with xanim, but xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound
 Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 
->>> deluxeVideo - 591d2978c0f66951294eff3573b46a59decd19ac
-Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
-
 >>> fantavision - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
 I currently do convert these video files by recording DOSBOX playing them with fantavisions' player.exe
 However player.exe loops the video over and over, so I just record 1 minute of video and then stop.
 Also I don't know when the video 'starts', so it also records DOSBox launching.
 Lastly, there is sound too but my dosUtil doesn't support sound, nor does xRun.js so it's not recorded into the video
 
->>> grasp - eb633cf45813912fcb35c8aee8f633b6d6682e20_results
-This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players.
-However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
-
 >>> quicktime - 0e1e93564ee32da4ad9d37337d80c40992fc507e
 Some of these converted ok, but others I think rely on their resource fork.
 Since that's been seperated out, ffmpeg/deark doesn't work with these. There is probably some magical way to merge the resource fork  resources that are needed for the video into the main video file but simple concatenating them together in either order is no help.
-
->>> riffANIM - 038c5d078312d98c571d8528f2d138f8448c5c6d
-Couldn't find any evidence of this out in the public. Could very well be a proprietary formay
-
->>> riffMultimediaMovie - 038c5d078312d98c571d8528f2d138f8448c5c6d
-Couldn't find a converter or player for it. Some info here: http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie

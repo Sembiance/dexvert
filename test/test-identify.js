@@ -71,7 +71,7 @@ function testSampleFile(sampleFilePath, cb)
 		function validateIdentification(err, ids)
 		{
 			if(err)
-				return testUtil.logResult("FAIL", sampleSubFilePath, err.toString()), this();
+				return testUtil.logResult("FAIL", sampleSubFilePath, err.toString(), err), this();
 			
 			if(!ids)
 				return testUtil.logResult("FAIL", sampleSubFilePath, "No id results returned"), this();

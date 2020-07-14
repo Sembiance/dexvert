@@ -1,40 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create a family/image.js and insert:
+* Need jpg to be left alone
 
-function checkShouldContinue(state)
-{
-	return !!state.output.files;
-}
-
-exports.steps = function steps(state, p)
-{
-	const format = p.formats[state.id.family][state.id.formatid];
-
-	return [exports.pre,
-			p.util.flow.batchRepeatUntil([
-			exports.processNextImage,
-			p.util.file.findValidOutputFiles(),
-			exports.checkForValidOutputImages], checkShouldContinue];
-};
-
-exports.pre = function pre()
-{
-	state.imageProgs = format.programs.slice();
-};
-
-exports.processNextImage = processNextImage()
-{
-	util.prgram.run(programs.shift.bin)
-};
-
-exports.findValidOutputImages = function findValidOutputImages()
-{
-	// check state.output.files to see if valid images (see retromission/image.js handler)
-	// any invalid image, remove it from state.output.files
-	// make sure to delete state.output.files if empty
-};
 For the util.program.run thing, figure out a way to handle objects that have program/args/runOptions fields, or array of such objects. Maybe have it return an array of fns to call rather than a single cb fn. hrm.
 
 * Add process support for 'pcx' next. This is when I should add program support for deark, nconvert, recoil2png, convert, ffmpeg, etc
@@ -95,11 +63,11 @@ For the util.program.run thing, figure out a way to handle objects that have pro
 
 >>> LEGACY INFO, DELETE AS I GO!!!
 >>> Here are the apps I unmerged
-amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert recoil abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
+amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
 abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:
-pcl2pdf wavduration
+retrovert pcl2pdf wavduration
 >>> I removed symlinks from compendium/bin:
 mod2wav mikmodInfo midistar2mid modInfo imageInfo abydosconvert tridDefToMagic
 

@@ -2413,6 +2413,441 @@ Misc. Types
 	Speech BASIC
 	Turtle BASIC
 
+>>> recoil2png
+Platform	Extension	Description	Resolution	Depth	Frames
+Amiga	ABK	AMOS			1
+Amiga	ACBM	Amiga Continuous Bitmap			1
+Amiga DCTV	DCT, DCTV	DCTV			1
+Amiga	DEEP	TVPaint		16777216 colors	1
+Amiga	FLF	Turbo Rascal Syntax Error	320x200		1
+Amiga	HAM, HAM6	Hold-And-Modify 6		4096 colors	1
+Amiga	HAM8	Hold-And-Modify 8		16777216 colors	1
+Amiga	IFF, 256	Interchange File Format			1
+Amiga HAM-E	IFF	HAM-E	up to 384x480	184320 colors	1
+Amiga	INFO	Icon		8 colors	1
+Amiga	LBM, ILBM	Interleaved Bitmap			1
+Amiga	DHR, DR, MP, BEAM	Multi-palette		4096 colors	1
+Amiga	RGB8	Turbo Silver		16777216 colors	1
+Amiga	RGBN	Turbo Silver		4096 colors	1
+Amiga	SHAM	Sliced HAM		4096 colors	1
+Amstrad CPC	CM5+GFX	Mode 5	288x256	27 colors	1
+Amstrad CPC	FNT	8x8 font		mono	1
+Amstrad CPC	HGB	HinterGrundBild	512x256	mono	1
+Amstrad CPC	PPH+ODD+EVE	Perfect Pix	up to 384x272		2
+Amstrad CPC	SCR+PAL	Advanced OCP Art Studio			1
+Amstrad CPC	SGX	SymbOS graphic		16 colors	1
+Amstrad CPC	WIN+PAL	Advanced OCP Art Studio			1
+Apple II	HGR	High Resolution	280x192	mono	1
+Apple II	SPR	Sprites		mono	1
+Apple IIe	DHGR, DHR	Double High-Resolution	560x192	mono	1
+Apple IIGS	SH3		320x200	3200 colors	1
+Apple IIGS	SHR		320x200	256 colors	1
+Apple Macintosh	MAC, PNT, PNTG	MacPaint	576x720	mono	1
+Atari 8-bit	256, AP2		80x96	256 colors	1
+Atari 8-bit	4MI	AtariTools-800 4 missiles			1
+Atari 8-bit	4PL	AtariTools-800 4 players			1
+Atari 8-bit	4PM	AtariTools-800 4 players and 4 missiles			1
+Atari 8-bit	A4R	Anime 4ever	80x256	16-level grayscale	1
+Atari 8-bit	ACS	AtariTools-800 font		4 colors	1
+Atari 8-bit	AGP	AtariTools-800 graphic			1
+Atari 8-bit	AGS	Atari Graphics Studio			1
+Atari 8-bit	ALL	Graph	160x192	5 colors	1
+Atari 8-bit	AP3, APV, DGI, DGP, ESC, ILC, PZM		80x192	256 colors	2
+Atari 8-bit	APA, APC, PLM		80x96	256 colors	1
+Atari 8-bit	APL	Atari Player Editor		4 colors	1
+Atari 8-bit	APP	Apac3 Linker-Viewer (SFDN compressed)	80x192	256 colors	2
+Atari 8-bit	APS	Any Point, Any Color (SFDN compressed)	80x96	256 colors	1
+Atari 8-bit	ART	Ascii-Art Editor	up to 64x24 characters	mono	1
+Atari 8-bit	ART (arbitrary)	Artist by David Eaton	160x80	4 colors	1
+Atari 8-bit	BG9, G09		160x192	16-level grayscale	1
+Atari 8-bit	BGP	Bugbiter APAC239i	80x239	256 colors	2
+Atari 8-bit	BKG	Movie Maker background	160x96	4 colors	1
+Atari 8-bit	CCI	Champions' Interlace (compressed)	160x192		2
+Atari 8-bit	CHR	Blazing Paddles font		mono	1
+Atari 8-bit	CIN	Champions' Interlace	up to 160x200		2
+Atari 8-bit	CPI	Marco Pixel Editor	160x192	4 colors	1
+Atari 8-bit	CPR	Trzmiel (compressed)	320x192	mono	1
+Atari 8-bit	CUT	Cut Creator	96x99	mono	1
+Atari 8-bit VBXE	DAP	SlideShow for VBXE	320x240	256 colors	1
+Atari 8-bit	DIN		320x192	10 colors	2
+Atari 8-bit	DIT (arbitrary)	DrawIt	160x96	4 colors	1
+Atari 8-bit	DLM	Dir Logo Maker	11x16 characters	mono	1
+Atari 8-bit	DRG	Atari CAD	320x160	mono	1
+Atari 8-bit	F80	The Last Word font		mono	1
+Atari 8-bit	FGE	Floor Designer	64x40	16-level grayscale	1
+Atari 8-bit	FN2	Atari FontMaker		mono	1
+Atari 8-bit	FNT	8x8 font		mono	1
+Atari 8-bit	FWA	Fun with Art	160x192	128 colors	1
+Atari 8-bit	G10	Graphics 10	up to 80x240	9 colors	1
+Atari 8-bit	G11	Graphics 11	up to 80x240	16 colors	1
+Atari 8-bit	G2F	Graph2Font	up to 336x240	256 colors	1
+Atari 8-bit	G9S, SFD	Graphics 9 (SFDN compressed)	up to 80x240	16-level grayscale	1
+Atari 8-bit	GED	GED	160x200	128 colors	1
+Atari 8-bit	GHG	Gephard Hires Graphics	up to 320x200	mono	1
+Atari 8-bit	GR1	Mad Studio	20x24 characters	4 colors	1
+Atari 8-bit	GR2	Mad Studio	20x12 characters	4 colors	1
+Atari 8-bit	GR3	Mad Studio	40x24	4 colors	1
+Atari 8-bit	GR7	Graphics 7	up to 160x120	4 colors	1
+Atari 8-bit	GR8	Graphics 8	up to 320x240	mono	1
+Atari 8-bit	GR9	Graphics 9	up to 80x240	16-level grayscale	1
+Atari 8-bit	GR9P	Graphics 9+	80x60	16-level grayscale	1
+Atari 8-bit	HCI, HR2		320x200	5 colors	2
+Atari 8-bit	HCM	Hard Color Map	128x192	9 colors	1
+Atari 8-bit	HIP	Hard Interlace Picture	160x200	30-level grayscale	2
+Atari 8-bit	HPM	Grass' Slideshow	160x192	4 colors	1
+Atari 8-bit	HPS	Hard Interlace Picture (SFDN compressed)	160x200	30-level grayscale	2
+Atari 8-bit	HR		256x239	3 colors	2
+Atari 8-bit	ICE	Interlace Character Editor font			2
+Atari 8-bit	ICN	ICE CIN	160x192	80 colors	2
+Atari 8-bit	IGE	Interlace Graphics Editor	128x96	16 colors	2
+Atari 8-bit	ILD	Interlace Logo Designer	128x128	7 colors	2
+Atari 8-bit	ILS	APACVIEW (SFDN compressed)	80x192	256 colors	2
+Atari 8-bit	IMN	ICE MIN	160x192	80 colors	2
+Atari 8-bit	ING	ING 15	160x200	7 colors	2
+Atari 8-bit	INP	InterPainter	160x200	7 colors	2
+Atari 8-bit	INS	InterPainter (SFDN compressed)	160x200	7 colors	2
+Atari 8-bit	INT	INT95a	up to 160x239	16 colors	2
+Atari 8-bit	IP2	ICE PCIN+	160x192	45 colors	2
+Atari 8-bit	IPC	ICE PCIN	160x192	35 colors	2
+Atari 8-bit	IR2	Super IRG 2	160x192	25 colors	2
+Atari 8-bit	IRG	Super IRG	160x192	15 colors	2
+Atari 8-bit	IST	Interlace Studio	160x200		2
+Atari 8-bit	JGP	Jet Graphics Planner		4 colors	1
+Atari 8-bit	KPR	Kompresor do Animatora		4 colors	1
+Atari 8-bit	KSS (arbitrary)	KSS-Paint	160x160	4 colors	1
+Atari 8-bit	LDM	Ludek Maker		4 colors	1
+Atari 8-bit	LEO	Larka Edytor Obiektów trybu $4+		5 colors	1
+Atari 8-bit	LUM+COL	Technicolor Dream	80x119	256 colors	1
+Atari 8-bit	KFX		56x60	mono	1
+Atari 8-bit	MAP	Envision			1
+Atari 8-bit	MAP	EnvisionPC			1
+Atari 8-bit	MAX	XL-Paint MAX	160x192		2
+Atari 8-bit	MBG	Mad Designer	512x256	mono	1
+Atari 8-bit	MCH	Graph2Font	up to 336x240	256 colors	1
+Atari 8-bit	MCP	McPainter	160x200	16 colors	2
+Atari 8-bit	MCPP	Paradox	160x100	16 colors	1
+Atari 8-bit	MCS		160x192	9 colors	1
+Atari 8-bit	MGP (arbitrary)	Magic Painter	160x96		1
+Atari 8-bit	MIC	Micro Illustrator / Graphics 15	up to 160x240	4 colors	1
+Atari 8-bit	MIC (arbitrary)	AtariGraphics	160x192	4 colors	1
+Atari 8-bit	MIC+COL	Graph2Font	160x240	128 colors	1
+Atari 8-bit	MIS	AtariTools-800 missile	2x240	mono	1
+Atari 8-bit	NLQ	Daisy-Dot font		mono	1
+Atari 8-bit	PGR	PowerGraphics	up to 336x240	256 colors	1
+Atari 8-bit	PIC	Graphic Arts Department	160x96	128 colors	1
+Atari 8-bit	PIC	Koala MicroIllustrator	160x192	4 colors	1
+Atari 8-bit	PLA	AtariTools-800 player	8x240	mono	1
+Atari 8-bit	PLS	Plama 256 (SFDN compressed)	80x96	256 colors	1
+Atari 8-bit	PMD	PMG Designer by Henryk Karpowicz			1
+Atari 8-bit	RAP	Vidig Paint	80x192	16 colors	1
+Atari 8-bit	RAW	XL-Paint MAX	160x192	16 colors	2
+Atari 8-bit	RGB	ColorViewSquash	up to 160x192		3
+Atari 8-bit	RIP	Rocky Interlace Picture	up to 320x239		1 or 2
+Atari 8-bit	RM0	Rambrandt	160x96	99 colors	1
+Atari 8-bit	RM1	Rambrandt	80x192	256 colors	1
+Atari 8-bit	RM2	Rambrandt	80x192	104 colors	1
+Atari 8-bit	RM3	Rambrandt	80x192	128 colors	1
+Atari 8-bit	RM4	Rambrandt	160x192	99 colors	1
+Atari 8-bit	RYS	Mamut	160x96	4 colors	1
+Atari 8-bit	SG3	Standard Graphics 3	40x24	4 colors	1
+Atari 8-bit	SGE	Semi-Graphic logos Editor	40x24 characters	mono	1
+Atari 8-bit	SHC	SAMAR Hi-res Interlace with Map of Colours	320x192		2
+Atari 8-bit	SHP	Blazing Paddles shape table		mono	1
+Atari 8-bit	SHP	Movie Maker shapes	160x96	4 colors	1
+Atari 8-bit	SIF	Super-IRG Font		4 colors	2
+Atari 8-bit	SKP	Sketch-PadDles	160x192	mono	1
+Atari 8-bit	SPC	The Graphics Magician Picture Painter	160x192	128 colors	1
+Atari 8-bit	SXS	16x16 font		mono	1
+Atari 8-bit	TIP	Taquart Interlace Picture	up to 160x119		2
+Atari 8-bit	TX0	Texture Maker0 16x16x16	16x16	16 colors	1
+Atari 8-bit	TXE	Texture Editor by Mikey	80x96	16-level grayscale	1
+Atari 8-bit	TXS		16x16	16-level grayscale	1
+Atari 8-bit	VZI	VertiZontal Interlacing	160x200	31-level grayscale	2
+Atari 8-bit	WND	Blazing Paddles window	up to 160x192	4 colors	1
+Atari 8-bit	XLP	XL-Paint	up to 160x200	7 colors	2
+Atari Portfolio	PGC		240x64	mono	1
+Atari Portfolio	PGF		240x64	mono	1
+Atari ST/STE	ART	Art Director	320x200	16 colors	1
+Atari ST/STE	ART	GFA Artist	320x200	16 colors	1
+Atari ST/STE	ART	Palette Master	320x200	512 colors	1
+Atari ST/STE	BL1	DEGAS Elite block		16 colors	1
+Atari ST/STE	BL2	DEGAS Elite block		4 colors	1
+Atari ST/STE	BL3	DEGAS Elite block		mono	1
+Atari ST/STE	BLD	MegaPaint		mono	1
+Atari ST/STE	BRU	DEGAS Elite brush	8x8	mono	1
+Atari ST/STE	CA1	CrackArt	320x200	16 colors	1
+Atari ST/STE	CA2	CrackArt	640x200	4 colors	1
+Atari ST/STE	CA3	CrackArt	640x400	mono	1
+Atari ST/STE	CE1	ComputerEyes	320x200	262144 colors	1
+Atari ST/STE	CE2	ComputerEyes	640x200	32768 colors	1
+Atari ST/STE	CE3	ComputerEyes	640x400	192-level grayscale	1
+Atari ST/STE	CEL	Cyber Paint Cell	up to 320x200	16 colors	1
+Atari ST/STE	CMP	Public Painter	up to 640x800	mono	1
+Atari ST/STE	CP3	Picworks	640x400	mono	1
+Atari ST/STE	CPT	Canvas (compressed)			1
+Atari ST/STE	CPT+HBL	Canvas (raster)	up to 640x200		1
+Atari ST/STE	CRG	Calamus Raster Graphic		mono	1
+Atari ST/STE	DA4	PaintShop	640x800	mono	1
+Atari ST/STE	DOO	Doodle	640x400	mono	1
+Atari ST/STE	DU1, DUO		416x273	136 colors	2
+Atari ST/STE	DU2		832x273	10 colors	2
+Atari ST/STE	EZA	EZ-Art Professional	320x200	16 colors	1
+Atari ST/STE	FNT	8x16 font		mono	1
+Atari ST/STE	FNT	GDOS font		mono	1
+Atari ST/STE	FUL	Canvas (raster)	up to 640x200		1
+Atari ST/STE	GFB	DeskPic			1
+Atari ST/STE	HPK	Dali (compressed)	640x400	mono	1
+Atari ST/STE	HRM	HighresMedium	640x200		2
+Atari ST/STE	IC1	Imagic	320x200	16 colors	1
+Atari ST/STE	IC2	Imagic	640x200	4 colors	1
+Atari ST/STE	IC3	Imagic	640x400	mono	1
+Atari ST/STE	ICN	DEGAS Elite icon		mono	1
+Atari ST/STE	IFF	Interchange File Format			1
+Atari ST/STE	IMG	GEM Bit Image			1
+Atari ST/STE	KID	Fullscreen Construction Kit	448x272	16 colors	1
+Atari ST/STE	LPK	Dali (compressed)	320x200	16 colors	1
+Atari ST/STE	MPK	Dali (compressed)	640x200	4 colors	1
+Atari ST/STE	MPP	Multi Palette Picture	up to 416x273		1 or 2
+Atari ST/STE	MUR+PAL	C.O.L.R. Object Editor	320x200	16 colors	1
+Atari ST/STE	NEO	NEOchrome			1
+Atari ST/STE	NEO	NEOchrome Master		512 colors	1
+Atari ST/STE	NEO+RST	NEOchrome Master	320x200	512 colors	1
+Atari ST/STE	P3C	D-GRAPH (compressed)	320x200	136 colors	2
+Atari ST/STE	PA3	Pablo Paint 2.5	640x400	mono	1
+Atari ST/STE	PAC	STAD	640x400	mono	1
+Atari ST/STE	PBX	QuantumPaint			1
+Atari ST/STE	PC1	DEGAS Elite	320x200	16 colors	1
+Atari ST/STE	PC2	DEGAS Elite	640x200	4 colors	1
+Atari ST/STE	PC3	DEGAS Elite	640x400	mono	1
+Atari ST/STE	PCI	Tobias Richter Fullscreen Slideshow	352x278		2
+Atari ST/STE	PCS	PhotoChrome	320x199		1 or 2
+Atari ST/STE	PG0	Paintworks	320x400	16 colors	1
+Atari ST/STE	PG1	Graphics Processor	320x200	16 colors	1
+Atari ST/STE	PG1	Paintworks	640x400	4 colors	1
+Atari ST/STE	PG2	Graphics Processor	640x200	4 colors	1
+Atari ST/STE	PG2	Paintworks	640x800	mono	1
+Atari ST/STE	PG3	Graphics Processor	640x400	mono	1
+Atari ST/STE	PI1	DEGAS	up to 416x560	16 colors	1
+Atari ST/STE	PI2	DEGAS	640x200	4 colors	1
+Atari ST/STE	PI3, SUH	DEGAS	640x400	mono	1
+Atari ST/STE	PIC	PaintPro ST			1
+Atari ST/STE	PL4		320x200	256 colors	2
+Atari ST/STE	PPP	Pablo Paint 1.1	320x200	16 colors	1
+Atari ST/STE	PSC	PaintShop (compressed)	640x400	mono	1
+Atari ST/STE	RGB	RGB Intermediate	320x200	4096 colors	3
+Atari ST/STE	RGH	ZZ_ROUGH	320x200	16 colors	1
+Atari ST/STE	CL0, SC0	Paintworks	320x200	16 colors	1
+Atari ST/STE	CL1, SC1	Paintworks	640x200	4 colors	1
+Atari ST/STE	CL2, SC2	Paintworks	640x400	mono	1
+Atari ST/STE	SD0	Dali	320x200	16 colors	1
+Atari ST/STE	SD1	Dali	640x200	4 colors	1
+Atari ST/STE	SD2	Dali	640x400	mono	1
+Atari ST/STE	SPC	Spectrum 512 (compressed)	320x199	4096 colors	1
+Atari ST/STE	SPS	Spectrum 512 (smooshed)	320x199	512 colors	1
+Atari ST/STE	SPU	Spectrum 512	320x199	4096 colors	1
+Atari ST/STE	SPU	Spectrum 512 (enhanced)	320x199	29791 colors	2
+Atari ST/STE	SPX	Spectrum 512 (extended)	320x199	4096 colors	1
+Atari ST/STE	SRT	Synthetic Arts	640x200	4 colors	1
+Atari ST/STE	SSB	Sinbad Slideshow	320x200	16 colors	1
+Atari ST/STE	TN1, TN4	Tiny Stuff	320x200	16 colors	1
+Atari ST/STE	TN2, TN5	Tiny Stuff	640x200	4 colors	1
+Atari ST/STE	TN3, TN6	Tiny Stuff	640x400	mono	1
+Atari ST/STE	TNY	Tiny Stuff			1
+Atari ST/STE	XIMG	Extended GEM Bit Image			1
+Atari TT	PI4		320x480	256 colors	1
+Atari TT	PI5		640x480	16 colors	1
+Atari TT	PI6		1280x960	mono	1
+Atari Falcon	B&W, B_W	ImageLab		256-level grayscale	1
+Atari Falcon	DC1	DuneGraph (compressed)	320x200	256 colors	1
+Atari Falcon	DEL	DelmPaint	320x240	256 colors	1
+Atari Falcon	DG1	DuneGraph	320x200	256 colors	1
+Atari Falcon	DPH	DelmPaint	640x480	256 colors	1
+Atari Falcon	ESM	TmS Cranach Paint/Studio			1
+Atari Falcon	FTC	Falcon True Color	384x240	65536 colors	1
+Atari Falcon	FUN	Funny Paint			1
+Atari Falcon	GOD	GodPaint		65536 colors	1
+Atari Falcon	HIR	Print-Technik		128-level grayscale	1
+Atari Falcon	IB3	ICDRAW icon	32x32	16 colors	1
+Atari Falcon	IBI	ICDRAW icon	32x32	16 colors	1
+Atari Falcon	IIM	InShape			1
+Atari Falcon	PI4, PI7, PI9	Fuckpaint	up to 640x480	256 colors	1
+Atari Falcon	PIX	PixArt			1
+Atari Falcon	PNT, TPI	Prism Paint			1
+Atari Falcon	RAG	RAG-D			1
+Atari Falcon	RAW, RWH, RWL	IMG Scan	up to 640x400	256-level grayscale	1
+Atari Falcon	TCP	Rembrandt		65536 colors	1
+Atari Falcon	TG1	COKE		65536 colors	1
+Atari Falcon	TIMG			32768 colors	1
+Atari Falcon	TRE	Spooky Sprites (compressed)		65536 colors	1
+Atari Falcon	TRP	EggPaint		65536 colors	1
+Atari Falcon	TRP	Spooky Sprites		65536 colors	1
+Atari Falcon	TRU	IndyPaint		65536 colors	1
+Atari Falcon	XGA			65536 colors	1
+BBC Micro	BB0	Mode 0	640x256	mono	1
+BBC Micro	BB1	Mode 1	320x256	4 colors	1
+BBC Micro	BB2	Mode 2	160x256	8 colors	1
+BBC Micro	BB4	Mode 4	320x256	mono	1
+BBC Micro	BB5	Mode 5	160x256	4 colors	1
+BBC Micro	BBG	LdPic	up to 640x256		1
+Commodore VIC-20	FLF	Turbo Rascal Syntax Error		8 colors	1
+Commodore 16	P4I		up to 320x200	121 colors	1
+Commodore 64	4BT	GoDot	320x200	16 colors	1
+Commodore 64	64C	8x8 font		mono	1
+Commodore 64	A	SEUCK sprites		16 colors	1
+Commodore 64	A64, WIG	Wigmore Artist 64	160x200	16 colors	1
+Commodore 64	AAS, ART	Art Studio	320x200	16 colors	1
+Commodore 64	AFL	AFLI-editor v2.0 by Topaz Beerlin	296x200	16 colors	1
+Commodore 64	AMI	Amica Paint	160x200	16 colors	1
+Commodore 64	BFLI	Big FLI	148x400	16 colors	1
+Commodore 64	BML, FLI	FLI Graph 2.2 by Blackmail	148x200	16 colors	1
+Commodore 64	CDU	CDU-Paint	160x200	16 colors	1
+Commodore 64	CHE	Cheese	160x200	16 colors	1
+Commodore 64	CWG	Create with Garfield	160x200	16 colors	1
+Commodore 64	DD	Doodle	320x200	16 colors	1
+Commodore 64	DOL	Dolphin Ed	160x200	16 colors	1
+Commodore 64	DRL, DLP	Drazlace	up to 320x200		2
+Commodore 64	DRZ, DRP	Drazpaint	160x200	16 colors	1
+Commodore 64	ECI	ECI Graphic Editor	296x200		2
+Commodore 64	ECP	ECI Graphic Editor (compressed)	296x200		2
+Commodore 64	FBI	Flip	148x200	16 colors	1
+Commodore 64	FCP, FPT	Face Painter	160x200	16 colors	1
+Commodore 64	FD2	FLI Designer	148x200	16 colors	1
+Commodore 64	FFLI		148x200		2
+Commodore 64	FLF	Turbo Rascal Syntax Error		16 colors	1
+Commodore 64	FLI	FLI	148x200	16 colors	1
+Commodore 64	FUN, FP2	Funpaint	296x200		2
+Commodore 64	FPR	FLI Profi	160x200	16 colors	1
+Commodore 64	G	SEUCK font		mono	1
+Commodore 64	GCD, MON		320x200	mono	1
+Commodore 64	GG	Koala Painter (compressed)	320x200	16 colors	1
+Commodore 64	GUN, IFL	Gunpaint	296x200		2
+Commodore 64	HBM, HIR, HPI, GIH, FGS	Hires-Bitmap	320x200	mono	1
+Commodore 64	HED	Hi-Eddi	320x200	16 colors	1
+Commodore 64	HFC	Hires FLI by Crest	296x112	16 colors	1
+Commodore 64	HIM	Hires Manager by Cosmos	296x192	16 colors	1
+Commodore 64	HLF	Hires Interlace by Feniks	320x200		2
+Commodore 64	HPC	Hi-Pic Creator	320x200	16 colors	1
+Commodore 64	IHE	Interlace Hires Editor	320x200	3 colors	2
+Commodore 64	IPH	Interpaint	320x200	16 colors	1
+Commodore 64	IPT	Interpaint	160x200	16 colors	1
+Commodore 64	ISM	Image System	160x200	16 colors	1
+Commodore 64	JJ	Doodle (compressed)	320x200	16 colors	1
+Commodore 64	GIG, KLA, KOA	Koala Painter	160x200	16 colors	1
+Commodore 64	LP3	Logo Painter 3/3+	160x400	4 colors	1
+Commodore 64	MCI	True Paint	320x200		2
+Commodore 64	MIL	Micro Illustrator	160x200	16 colors	1
+Commodore 64	MLE	Multi-Lace Editor	320x56	10 colors	2
+Commodore 64	OCP	Advanced Art Studio	160x200	16 colors	1
+Commodore 64	P64	Picasso 64	160x200	16 colors	1
+Commodore 64	PET	PETSCII Editor	40x25 characters	16 colors	1
+Commodore 64	PI	Blazing Paddles	160x200	16 colors	1
+Commodore 64	PMG	Paint Magic	160x200	16 colors	1
+Commodore 64	PP	Pixel Perfect	296x200		2
+Commodore 64	PPP	Pixel Perfect (compressed)	296x200		2
+Commodore 64	RP	Rainbow Painter	160x200	16 colors	1
+Commodore 64	RPM	Run Paint	160x200	16 colors	1
+Commodore 64	SAR	Saracen Paint	160x200	16 colors	1
+Commodore 64	SCR+COL	PETSCII Editor	40x25 characters	16 colors	1
+Commodore 64	SPD	SpritePad			1
+Commodore 64	VIC		up to 320x200	16 colors	1
+Commodore 64	VID	Vidcom 64Paint	160x200	16 colors	1
+Commodore 128	BM, VBM	VDC BitMap		mono	1
+Commodore 128	BRUS, PICT	BASIC 8		mono	1
+Commodore 128	IP	I Paint		16 colors	1
+Electronika BK	PIC		256x256	4 colors	1
+FM Towns	PI				1
+FM Towns	PIC				1
+MSX	MIG	MIG	up to 512x424		1 or 2
+MSX	SC2, GRP	Screen 2	256x192	15 colors	1
+MSX	SC3	Screen 3	64x48	15 colors	1
+MSX2	FNT	Dynamic Publisher font	512x160	mono	1
+MSX2	GL5+PL5			16 colors	1
+MSX2	GL6+PL6			4 colors	1
+MSX2	GL7+PL7			16 colors	1
+MSX2	GL8			256 colors	1
+MSX2	MAG, MAX	Maki-chan Graphics			1
+MSX2	PCT	Dynamic Publisher screen	512x704	mono	1
+MSX2	PI				1
+MSX2	PIC	YPIC	up to 256x212		1
+MSX2	SC4	Screen 4	256x192	16 colors	1
+MSX2	SC5, GE5	Screen 5	up to 256x212	16 colors	1
+MSX2	SC5+S15	Screen 5 interlaced	up to 256x424	16 colors	2
+MSX2	SC6	Screen 6	up to 512x212	4 colors	1
+MSX2	SC6+S16	Screen 6 interlaced	up to 512x424	4 colors	2
+MSX2	SC7, GE7	Screen 7	512x212	16 colors	1
+MSX2	SC7+S17	Screen 7 interlaced	512x424	16 colors	2
+MSX2	SC8, GE8, PIC	Screen 8	256x212	256 colors	1
+MSX2	SC8+S18	Screen 8 interlaced	256x424	256 colors	2
+MSX2	SR5+PL5	Graph Saurus	up to 256x212	16 colors	1
+MSX2	SR6+PL6	Graph Saurus	up to 512x212	4 colors	1
+MSX2	SR7+PL7	Graph Saurus	512x212	16 colors	1
+MSX2	SR8	Graph Saurus	256x212	256 colors	1
+MSX2	SRI+PL7	Graph Saurus	512x424	16 colors	2
+MSX2	STP	Dynamic Publisher stamp		mono	1
+MSX2+ V9990 VDP	G9B	GFX9k		32768 colors	1
+MSX2+	GLA+PLA			12515 colors	1
+MSX2+	GLC, GLS			19268 colors	1
+MSX2+	SCA	Screen 10	256x212	12515 colors	1
+MSX2+	SCA+S1A	Screen 10 interlaced	256x424	12515 colors	2
+MSX2+	SCC, SRS, YJK	Screen 12	up to 256x212	19268 colors	1
+MSX2+	SCC+S1C	Screen 12 interlaced	up to 256x424	19268 colors	2
+NEC PC-80	MAG	Maki-chan Graphics	up to 640x200	8 colors	1
+NEC PC-88	MAG	Maki-chan Graphics		8 colors	1
+NEC PC-88	PI			8 colors	1
+NEC PC-88 VA	MAG	Maki-chan Graphics	up to 640x400		1
+NEC PC-88 VA	PIC		up to 640x400		1
+NEC PC-98	MAG, MKI	Maki-chan Graphics		256 colors	1
+NEC PC-98	PI			256 colors	1
+NEC PC-98	Q4	XLD4	640x400	16 colors	1
+NEC PC-98	ZIM	Z's Staff Kid98		16 colors	1
+Oric	CHS	6x8 font		mono	1
+Oric	HIR, HRS		240x200	8 colors	1
+PC	EPA	Award BIOS logo			1
+PC	HS2	Handy Scanner 2000 POSTERING		mono	1
+PC	FNT	Image 72 font		mono	1
+PC	MSP	Microsoft Paint version 1 or 2		mono	1
+PlayStation	TIM	TIM		32768 colors	1
+Psion Series 3	PIC, ICN			mono	1
+SAM Coupe	SCS4, SS4	Mode 4	256x192	16 colors	1
+Sharp X68000	MAG	Maki-chan Graphics		16 colors	1
+Sharp X68000	PIC			65536 colors	1
+Timex 2048	HRG	Hi-res Gigascreen	512x192	4 colors	2
+Timex 2048	SCR	Hi-color	256x192	15 colors	1
+Timex 2048	SCR	Hi-res	512x192	mono	1
+TRS-80	HR		640x240	mono	1
+TRS-80	RLE	CompuServe RLE	256x192	mono	1
+TRS-80	SHR	MagicDraw	640x240	mono	1
+TRS-80 Color Computer	CLP		40x56	mono	1
+TRS-80 Color Computer	GRF, MAX, P41, PIX		256x192	mono	1
+TRS-80 Color Computer	P11		128x96	4 colors	1
+ZX81	P	Sinclair BASIC	32x24 characters	mono	1
+ZX81	RAW	ZXPaintyONE v2.0	32x24 characters	mono	1
+ZX81	ZP1 (arbitrary)	ZXpaintyONE	32x24 characters	mono	1
+ZX Spectrum	3		256x192	8 colors	3
+ZX Spectrum	ATR	Attributes	32x24 characters	15 colors	1
+ZX Spectrum	BMC4	Border Screen Multicolor 8x4	384x304	15 colors	1
+ZX Spectrum	BSC	Border Screen	384x304	15 colors	1
+ZX Spectrum	CH$	CHR$			1 or 2
+ZX Spectrum	CH4	4x8 font		mono	1
+ZX Spectrum	CH6	6x8 font		mono	1
+ZX Spectrum	CH8	8x8 font		mono	1
+ZX Spectrum	HLR	Attributes Gigascreen	32x24 characters		2
+ZX Spectrum	IFL	Multicolor 8x2	256x192	15 colors	1
+ZX Spectrum	IMG	Gigascreen	256x192		2
+ZX Spectrum	MC	Multicolor 8x1	256x192	15 colors	1
+ZX Spectrum	MG1	MultiArtist 8x1	256x192		2
+ZX Spectrum	MG2	MultiArtist 8x2	256x192		2
+ZX Spectrum	MG4	MultiArtist 8x4	256x192		2
+ZX Spectrum	MG8	MultiArtist 8x8	256x192		2
+ZX Spectrum	MLT		256x192	15 colors	1
+ZX Spectrum	RGB		256x192	8 colors	3
+ZX Spectrum	SCR		256x192	15 colors	1
+ZX Spectrum ULAplus	SCR	ULAplus	256x192	64 colors	1
+ZX Spectrum	STL	Stellar	64x48		2
+ZX Spectrum Evolution	SXG	Speccy eXtended Graphics		256 colors	1
+ZX Spectrum	ZXP	ZX-Paintbrush	256x192	15 colors	1
+
+
 >>> GameExtractor (v3.10) - GAME ARCHIVES (http://www.watto.org/game_extractor.html https://sourceforge.net/projects/gameextractor/files/)
 Write	Game	Archives	Previews and/or Thumbnails
  	!Dead Pixels Adventure!	*.win	*.png *.wav

@@ -35,6 +35,10 @@ const SHA1_IGNORE_FILES =
 	archive :
 	{
 		director : [/.png$/]
+	},
+	image :
+	{
+		"3dCK" : [/.png$/]	// Due to the way it's rendered in DOSBox, the image isn't guaranteed to be identical
 	}
 };
 
@@ -191,10 +195,11 @@ function testSampleFile(sampleFilePath, silent, cb)
 		function cleanup(status, msg="", ...args)
 		{
 			if(!silent || status!=="PASS")
-				testUtil.logResult(status, sampleSubFilePath, msg, ...args);
+				testUtil.logResult(status, sampleSubFilePath, msg, ...args, outDirPath);
 
 			this.parallel()(undefined, status==="PASS");
-			fileUtil.unlink(outDirPath, this.parallel());
+			if(status!=="FAIL")
+				fileUtil.unlink(outDirPath, this.parallel());
 		},
 		cb
 	);

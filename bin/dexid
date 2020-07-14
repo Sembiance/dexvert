@@ -14,6 +14,9 @@ function usage()
 Identifies <inputFilePath>. Like an advanced 'file' command
 
 ${XU.c.fg.cyan + "Options:"}
+  ${XU.c.fg.yellow + "--verbose=<level>"}
+    Show additional info when identifying. Levels 1 to 5 where 5 is most verbose
+
   ${XU.c.fg.yellow + "--help"}
     Display help/usage
   
@@ -28,7 +31,7 @@ if(argv.help || argv._.length<1)
 tiptoe(
 	function performIdentification()
 	{
-		dexvert.identify(argv._[0], this);
+		dexvert.identify(argv._[0], {verbose : argv.verbose || 0}, this);
 	},
 	function processIdentification(results)
 	{

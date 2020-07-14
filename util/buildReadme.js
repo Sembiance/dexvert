@@ -59,11 +59,12 @@ dexvert requires a LOT of programs and some kernel options to be set. See Requir
 ${dexvertUsage}
 \`\`\`
 
-In order for documents to convert correctly, a single 'unoconv' daemon needs to be running. So 'dexserv' must be running in the background.
+In order for documents to convert correctly, a single 'unoconv' daemon needs to be running. So 'dexserv' must be running in the background:
 \`\`\`
 ${dexservUsage}
 \`\`\`
 
+You can also just 'identify' what a file is, without processing it by running 'dexid':
 \`\`\`
 ${dexidUsage}
 \`\`\`
@@ -74,7 +75,7 @@ Use as a nodejs module:
 const dexvert = require("dexvert");
 
 dexvert.process(inputFilePath, outputDirPath, options, cb);
-dexvert.identify(inputFilePath, cb);
+dexvert.identify(inputFilePath, options, cb);
 \`\`\`
 
 # Requirements

@@ -19,7 +19,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio database 3d font video image other executable rom text or all
+    Valid families: archive document audio database video image 3d font other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 

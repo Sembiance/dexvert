@@ -1,11 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Find any use of format.meta.program and support an array here (use Array.force)
-also support the fact that each item in the array may be an object {name||bin€|id||program : "name", args : ?}
-and add support to util.program.run that detcts an arra6 was passwed and is handled accordingly and uodate archive.js to be simpoler and also formst.director snd other formats
-
-create a family/image.js and insert:
+* Create a family/image.js and insert:
 
 function checkShouldContinue(state)
 {

@@ -29,21 +29,17 @@ export.meta =
 
   weakMagic      : true                             # [*] If true, only match if magic matches AND either ext or filename matches
 
-  program        : "somebin"						# [*] If set, then exports.steps isn't necessary and program will be used
-                                                          This can also be an array of programs to execute in serial
-
   notes          : "Some notes go here"				# [*] You can specify various notes here
 
   bruteUnsafe    : true								# [*] Set to true if this format isn't safe to be brute forced
 }
 
 # [*] This should return an array of step functions to follow
-exports.steps = function steps(state, p)
-{
-	return [
-		...
-	];
-}
+exports.steps =
+[
+	(state, p) => (state, p, cb) => {},
+	...
+]
 
 # [*] This will get executed after the steps have been run
 exports.post = (state, p, cb) =>
@@ -51,7 +47,7 @@ exports.post = (state, p, cb) =>
 
 }
 
-exports.updateProcessed = (State, p, cb) =>
+exports.updateProcessed = (state, p, cb) =>
 {
 
 }

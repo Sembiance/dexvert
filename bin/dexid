@@ -9,18 +9,18 @@ const XU = require("@sembiance/xu"),
 
 function usage()
 {
-	XU.log`${XU.c.fg.cyan + "Usage:"} dexid [options] <inputFilePath>
+	XU.log`${XU.cf.fg.cyan("Usage:")} dexid [options] <inputFilePath>
 
 Identifies <inputFilePath>. Like an advanced 'file' command
 
-${XU.c.fg.cyan + "Options:"}
-  ${XU.c.fg.yellow + "--verbose=<level>"}
+${XU.cf.fg.cyan("Options:")}
+  ${XU.cf.fg.yellow("--verbose=<level>")}
     Show additional info when identifying. Levels 1 to 5 where 5 is most verbose
 
-  ${XU.c.fg.yellow + "--help"}
+  ${XU.cf.fg.yellow("--help")}
     Display help/usage
   
-  ${XU.c.fg.yellow + "--json"}
+  ${XU.cf.fg.yellow("--json")}
     Output JSON`;
 	process.exit(0);
 }
@@ -44,7 +44,7 @@ tiptoe(
 			console.log(printUtil.columnizeObjects(results, {
 				colNames   : ["confidence", "from", "magic", "extensions"],
 				colNameMap : {confidence : "%"},
-				formatter(colName, val) { return (colName==="confidence" ? (val ? val + "%" : "") : (colName==="extensions" ? (val || []).join(", ") : val || "")); }}));
+				formatter(colName, val) { return (colName==="confidence" ? (val ? `${val}%` : "") : (colName==="extensions" ? (val || []).join(", ") : val || "")); }}));
 		}
 	},
 	XU.FINISH

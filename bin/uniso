@@ -18,11 +18,11 @@ function usage(msg) { process.exit(XU.log`Usage: ${"uniso"} ${"<input.iso>"} ${"
 if(argv._.length!==2)
 	return usage();
 
-const inputFilePath = "" + argv._[0];
+const inputFilePath = `${argv._[0]}`;
 if(!fileUtil.existsSync(inputFilePath))
 	return usage(`Input file ${inputFilePath} does not exist.`);
 
-const outDirPath = "" + argv._[1];
+const outDirPath = `${argv._[1]}`;
 
 const tmpDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
 const mountDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
@@ -72,7 +72,7 @@ tiptoe(
 		
 		this.data.matchingCue = matchingCue;
 
-		runUtil.run("bchunk", ["-w", path.relative(outDirPath, inputFilePath), path.relative(outDirPath, matchingCue.cueFilePath), path.basename(inputFilePath, path.extname(inputFilePath)) + "_track"], {verbose : true, cwd : outDirPath}, this);
+		runUtil.run("bchunk", ["-w", path.relative(outDirPath, inputFilePath), path.relative(outDirPath, matchingCue.cueFilePath), `${path.basename(inputFilePath, path.extname(inputFilePath))}_track`], {verbose : true, cwd : outDirPath}, this);
 	},
 	function findResultingISOs()
 	{
@@ -113,7 +113,7 @@ function extractISOFile(isoFilePath, cb)
 			// Just a regular ISO, mount it and copy the files over
 			this.data.loopNum = dexUtil.allocateLoopDev(isoFilePath);
 			
-			runUtil.run("sudo", ["mount", "/dev/loop" + this.data.loopNum, mountDirPath], {liveOutput : true}, this);
+			runUtil.run("sudo", ["mount", `/dev/loop${this.data.loopNum}`, mountDirPath], {liveOutput : true}, this);
 		},
 		function copyFiles()
 		{
@@ -165,7 +165,7 @@ function extractHFSISO(isoFilePath, cb)
 					tiptoe(
 						function changeDir()
 						{
-							runUtil.run("hcdnum", [""+(lineNum+1)], runOptions, this);
+							runUtil.run("hcdnum", [`${(lineNum+1)}`], runOptions, this);
 						},
 						function recurseIntoDir()
 						{

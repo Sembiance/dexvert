@@ -157,7 +157,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected processed to be ${XU.c.fg.white + sampleTestData.processed + XU.c.fg.orange} but got ${XU.c.fg.white + results.processed + XU.c.fg.orange} instead`);
 
 			if(!Object.equals(sampleTestData.inputMeta, results.input.meta))
-				return this(undefined, "FAIL", "input.meta does not match expected result: " + diffUtil.diff(sampleTestData.inputMeta, results.input.meta));
+				return this(undefined, "FAIL", `input.meta does not match expected result: ${diffUtil.diff(sampleTestData.inputMeta, results.input.meta)}`);
 
 			if(sampleTestData.files && !results.output.files)
 				return this(undefined, "FAIL", `Expected to have ${XU.c.fg.white + Object.keys(sampleTestData.files).length + XU.c.fg.orange} files but didn't find any`);

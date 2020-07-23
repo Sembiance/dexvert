@@ -10,12 +10,12 @@ const XU = require("@sembiance/xu"),
 
 function usage()
 {
-	XU.log`${XU.c.fg.cyan + "Usage:"} dexserv [options]
+	XU.log`${XU.cf.fg.cyan("Usage:")} dexserv [options]
 
 Starts a server to assist dexvert. Required for 'unoconv' doc conversion.
 
-${XU.c.fg.cyan + "Options:"}
-  ${XU.c.fg.yellow + "--help"}
+${XU.cf.fg.cyan("Options:")}
+  ${XU.cf.fg.yellow("--help")}
     Display help/usage`;
 	process.exit(0);
 }
@@ -40,19 +40,19 @@ function shutdown()
 
 process.on("SIGTERM", () =>
 {
-	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Terminate caught.`;
+	XU.log`${XU.c.blink + XU.cf.fg.red("***")} Terminate caught.`;
 	shutdown();
 });
 
 process.on("SIGINT", () =>
 {
-	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Interrupt caught.`;
+	XU.log`${XU.c.blink + XU.cf.fg.red("***")} Interrupt caught.`;
 	shutdown();
 });
 
 process.on("uncaughtException", err =>
 {
-	XU.log`${XU.c.blink + XU.c.fg.red + "***"} Uncaught exception.`;
+	XU.log`${XU.c.blink + XU.cf.fg.red("***")} Uncaught exception.`;
 	console.error(err);
 	shutdown();
 });

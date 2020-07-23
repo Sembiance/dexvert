@@ -29,7 +29,7 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 
 exports.logResult = function logResult(status, sampleSubFilePath, msg="", ...args)
 {
-	XU.log`${XU.c.fg.cyan + "["}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.c.fg.cyan + "]"} ${XU.c.reset + XU.c.bold + sampleSubFilePath} ${XU.c.fg.orange + msg} ${args.length ? args : ""}`;
+	XU.log`${XU.cf.fg.cyan("[")}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.cf.fg.cyan("]")} ${XU.c.reset + XU.c.bold + sampleSubFilePath} ${XU.c.fg.orange + msg} ${args.length ? args : ""}`;
 
 	return true;
 };

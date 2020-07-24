@@ -19,7 +19,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio database video image vector 3d font other executable rom text or all
+    Valid families: archive document audio database video image 3d font other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
@@ -148,6 +148,7 @@ media-gfx/imagemagick | [convert](https://www.imagemagick.org/) |
 media-gfx/imagemagick | [identify](https://www.imagemagick.org/) | 
 media-gfx/nconvert | [nconvert](https://www.xnview.com/en/nconvert/) | dexvert
 media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
+media-gfx/xcftools | [xcf2png](http://henning.makholm.net/software) | dexvert
 media-libs/libbpg | [bpgdec](http://bellard.org/bpg/) | dexvert
 media-libs/libwebp | [webpinfo](https://developers.google.com/speed/webp/download) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
@@ -162,6 +163,6 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="acl alsa amr bzip2 cxx encode fontconfig fpx gif gpl heif iconv jbig jpeg jpeg2k libglvnd lzma mp3 natspec network nls opengl openmp openssl opus pch png postproc postscript seccomp smith svg theora threads tiff truetype unicode v4l vaapi vdpau vorbis vpx webp wmf X x264 xattr xml xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-libs/libbpg media-libs/libwebp media-video/ffmpeg sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="acl alsa amr bzip2 cxx encode fontconfig fpx gif gpl heif iconv jbig jpeg jpeg2k libglvnd lzma mp3 natspec network nls opengl openmp openssl opus pch png postproc postscript seccomp smith svg theora threads tiff truetype unicode v4l vaapi vdpau vorbis vpx webp wmf X x264 xattr xml xorg xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv dev-lang/amostools dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libbpg media-libs/libwebp media-video/ffmpeg sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
 ```
 		

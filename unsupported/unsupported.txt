@@ -19,8 +19,6 @@ These are executables created by DOS Micorosoft BASIC. In theory, it might be po
 Some ILBM files don't get converted correctly by my current image conversion programs, usually just a black canvas.
 I've already fixed some using my iffILBMFixer, which removes EMPTY CMAP palettes so that the program falls back on a default palette
 However there are more ILBM files that have different chunks that are seemingly not supported:
-CRNG - Used for color shifting. None of the programs I use seem to support this (used by Deluxe Paint)
-DPPS - Couldn't find info on this, but it's probably a "Deluxe Paint" custom chunk that the programs might not deal with correctly
 
 >>> naplps - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
 Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images. I should improve this maybe.

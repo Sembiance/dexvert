@@ -41,7 +41,7 @@ tiptoe(
 		testData = JSON.parse(_testData);
 
 		if(argv.format)
-			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(argv.format));
+			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 

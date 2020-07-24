@@ -38,7 +38,8 @@ const SHA1_IGNORE_FILES =
 	},
 	image :
 	{
-		"3dCK" : [/.png$/]	// Due to the way it's rendered in DOSBox, the image isn't guaranteed to be identical
+		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
+		"3dCK" : [/.png$/]
 	}
 };
 
@@ -63,7 +64,7 @@ tiptoe(
 		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
 
 		if(argv.format)
-			this.data.sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(argv.format));
+			this.data.sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 
@@ -158,7 +159,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(argv.record)
 			{
 				testData[sampleSubFilePath] = newTestData;
-				return this(undefined, "SKIP", "Skipped because we are recording");
+				return this(undefined, "SKIP", `Skipped because we are recording${!results.processed ? XU.cf.fg.red(" WARNING! processed is FALSE!") : ""}${!results.output.files ? XU.cf.fg.red(" WARNING! No output files detected!") : ""}`);
 			}
 
 			if(!testData.hasOwnProperty(sampleSubFilePath))

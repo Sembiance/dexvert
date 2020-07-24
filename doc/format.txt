@@ -15,7 +15,7 @@ export.meta =
 
   mimeType       : "image/some-mime"                # [*] Used by some programs like abydos to convert the file
 
-  forbidExtMatch : true								# [*] Set to try to forbid ext matching
+  forbidExtMatch : true								# [*] Set to forbid ext matching
   
   unsupported    : true								# [*] Set to try to say that this file can be identified but not processed
 

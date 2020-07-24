@@ -45,6 +45,18 @@ tiptoe(
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 
+		if(!argv.format)
+		{
+			Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
+			{
+				XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
+				if(argv.record)
+					delete testData[extraFilePath];
+			});
+
+			console.log("");
+		}
+
 		sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).parallelForEach(testSampleFile, this, os.cpus().length);
 	},
 	function saveTestDataIfNeeded()

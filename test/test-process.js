@@ -67,6 +67,18 @@ tiptoe(
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 
+		if(!argv.format)
+		{
+			Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
+			{
+				XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
+				if(argv.record)
+					delete testData[extraFilePath];
+			});
+
+			console.log("");
+		}
+
 		this.data.sampleFilePaths.parallelForEach((sampleFilePath, subcb) => testSampleFile(sampleFilePath, false, subcb), this, cpuCount);
 	},
 	function saveTestDataIfNeeded()

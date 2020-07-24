@@ -35,7 +35,6 @@ ansilove
 >>> Specific format notes:
 	BSAVE: Consider introducing exports.meta.try : true and adding support for when dexvert is called with --try to also run it through any format marked as 'try' since the program chances so greatly based on the input
 	ISO: iso-info
-	GIF: whether it's animated or not
 	GRASP: If it's some sort of powerpoint, maybe I should reclassify it as 'document' instead of 'archive'
 	ANI: Ensure that the animated cursor is extracted out into an animated GIF, rather than individual frames of animation images
 

@@ -145,6 +145,7 @@ media-gfx/abydosconvert | [abydosconvert](https://github.com/Sembiance/abydoscon
 media-gfx/ansilove | [ansilove](https://www.ansilove.org/) | dexvert
 media-gfx/gifsicle | [gifsicle](https://www.lcdf.org/~eddietwo/gifsicle/) | 
 media-gfx/imagemagick | [convert](https://www.imagemagick.org/) | 
+media-gfx/imagemagick | [identify](https://www.imagemagick.org/) | 
 media-gfx/nconvert | [nconvert](https://www.xnview.com/en/nconvert/) | dexvert
 media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
 media-libs/libbpg | [bpgdec](http://bellard.org/bpg/) | dexvert

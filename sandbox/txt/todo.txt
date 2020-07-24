@@ -1,8 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* image decoders still to do:
-bpgdec
+* Image decoders still to do:
 ansilove
 
 * Now add all the rest of the 'image' files
@@ -24,11 +23,10 @@ ansilove
 
 >>> For every new format:
   - Remember that filename is now case sensitive. So if you want case insensitive use a /regex/i
-  - Return as much 'input.meta' info about the file as I can including using 'extract' from media-libs/libextractor
+  - Return as much 'input.meta' info about the file as I can
   - Include at least 1 sample file in test/sample. Certainly include additional format samples that are 'edge cases' or different
   - For images, first convert with every image converter program and deduce the appropriate priority order based on those results
   - Try and validate whether the conversion worked as much as possible
-  - Possibly set a 'probability' rating. Can test the entropy of the image (solid vs static vs actual image) or Audio could measure static vs melodic vs silence, etc. I should probably have this 'opt in' as it may be expensive to calculate
   - Animated cursors and other formats that produce a bunch of individual frame images should be converted to an animated GIF
   - Remove from formatsToDoASAP.txt
   - If some files are partially unsupported, make sure I have an unsupportedNotes : ""
@@ -44,6 +42,8 @@ ansilove
 >>> Specific program notes:
 	unoconv: Need a way to launch unoconv as a server process in the background. Will need to think about the best way to do that so that I can run multiple 'dexvert' commands CLI
 	ancient: ADD this as a program and ensure it's included in the --try
+
+* Possibly set a 'probability' rating for conversions of certain families. Can test the entropy of the image (solid vs static vs actual image) or Audio could measure static vs melodic vs silence, etc. I should probably have this 'opt in' as it may be expensive to calculate
 
 * Add sid and ogg support and then get rid of my DevLab/apps for these
 

@@ -10,7 +10,7 @@ const XU = require("@sembiance/xu"),
 tiptoe(
 	function findPrograms()
 	{
-		fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "*.js", {nodir : true}, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "**/*.js", {nodir : true}, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexid"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexserv"), ["--help"], runUtil.SILENT, this.parallel());

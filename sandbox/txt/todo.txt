@@ -7,7 +7,9 @@ ansilove
 * Now add all the rest of the 'image' files
   New abydos supports several unsupported images (gx1, gx2, picturePacker). See email from magnus.bergman@snisurset.net on telparia
 
-* Convert documents next. Start with 'wordMac' as it uses unoconv.
+* Convert video files next, as that will allow me to get rid of unsupported.txt file
+
+* Convert documents next. Start with 'wordMac'
 
 * Convert database files next.
 

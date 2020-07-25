@@ -13,24 +13,6 @@ These are executables created by DOS Micorosoft BASIC. In theory, it might be po
 
 
 /-------\
-| Image |
-\-------/
->>> iffILBM - 591d2978c0f66951294eff3573b46a59decd19ac
-Some ILBM files don't get converted correctly by my current image conversion programs, usually just a black canvas.
-I've already fixed some using my iffILBMFixer, which removes EMPTY CMAP palettes so that the program falls back on a default palette
-However there are more ILBM files that have different chunks that are seemingly not supported:
-
->>> naplps - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images. I should improve this maybe.
-
->>> naplpsScript - d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1
-The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note: fileid doesn't identify this file yet, but if I can find more samples, it's totally possible to write an identifier as it has tons of unique scripting strings in it. Note I learned a little bit about this format from README.EXE in: http://dev.retromission.com/explore/cdrom/d0bb6084a1b0d0205c6e5c47e66fe3eb9deb7aa1/World's%20Best%20Butts%20(1995).iso/viewers/eag2nap.zip
-
->>> qtif - http://snisurset.net/code/abydos/samples.html
-Several of the 'animation/video' versions of the Quicktime qtif files won't convert. ffmpeg doesn't work either. Didn't research more.
-
-
-/-------\
 | Video |
 \-------/
 >>> movieSetter - 591d2978c0f66951294eff3573b46a59decd19ac

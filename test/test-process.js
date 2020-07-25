@@ -150,6 +150,8 @@ function testSampleFile(sampleFilePath, silent, cb)
 				newTestData.unsupported = true;
 			if(results.input.meta)
 				newTestData.inputMeta = results.input.meta;
+			if(results.converter && results.converter.program)
+				newTestData.converter = results.converter.program;
 			if(results.processed && results.output.files)
 			{
 				newTestData.files = {};
@@ -177,6 +179,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			if(!sampleTestData.files && results.output.files)
 				return this(undefined, "FAIL", `Expected to have no files but found ${XU.c.fg.white + results.output.files.length + XU.c.fg.orange} instead`);
+			
+			if(sampleTestData.converter && !newTestData.converter)
+				return this(undefined, "FAIL", `Expected converter ${sampleTestData.converter} but did not find one in results.`);
+
+			if(!sampleTestData.converter && newTestData.converter)
+				return this(undefined, "FAIL", `Expected no converter but found in results ${newTestData.converter}`);
+
+			if(sampleTestData.converter && newTestData.converter && sampleTestData.converter!==newTestData.converter)
+				return this(undefined, "FAIL", `converter does not match expected result: ${sampleTestData.converter} vs ${testData.converter}`);
 			
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
 			if(results.output.files && expectedFiles.length!==results.output.files.length)

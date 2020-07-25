@@ -1,11 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Image decoders still to do:
-ansilove
-
-* Now add all the rest of the 'image' files
-  New abydos supports several unsupported images (gx1, gx2, picturePacker). See email from magnus.bergman@snisurset.net on telparia
+* Go through all the remaining image/abydos/* test suite files and add support to dexvert for them
 
 * Convert video files next, as that will allow me to get rid of unsupported.txt file
 

@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require(path.join(__dirname, "testUtil.js")),
@@ -42,6 +43,9 @@ tiptoe(
 
 		if(argv.format)
 			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
+		
+		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
+		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 
@@ -115,11 +119,11 @@ function testSampleFile(sampleFilePath, cb)
 				if(finished)
 					return;
 
-				const previd = testData[sampleSubFilePath].find(v => v.magic===id.magic);
+				const previd = testData[sampleSubFilePath].find(v => v.formatid===id.formatid);
 				if(!previd)
 					finished = testUtil.logResult("FAIL", sampleSubFilePath, "New identification detected", id);
 				else if(previd.confidence!==id.confidence)
-					finished = testUtil.logResult("FAIL", sampleSubFilePath, `Confidence level changed for ${XU.c.fg.white + id.magic + XU.c.fg.orange} was ${XU.c.fg.white + previd.confidence + XU.c.fg.orange} and now ${XU.c.fg.white + id.confidence}`);
+					finished = testUtil.logResult("FAIL", sampleSubFilePath, `Confidence level changed for ${XU.c.fg.white + id.formatid + XU.c.fg.orange} was ${XU.c.fg.white + previd.confidence + XU.c.fg.orange} and now ${XU.c.fg.white + id.confidence}`);
 			});
 
 			if(finished)
@@ -130,7 +134,7 @@ function testSampleFile(sampleFilePath, cb)
 				if(finished)
 					return;
 
-				const id = ids.find(v => v.magic===previd.magic);
+				const id = ids.find(v => v.formatid===previd.formatid);
 				if(!id)
 					finished = testUtil.logResult("FAIL", sampleSubFilePath, "Previous identification not detected", previd);
 			});

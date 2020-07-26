@@ -47,6 +47,8 @@ tiptoe(
 
 This is a nodejs based program that can decompress, extract and convert a wide variety of old file formats to modern day equilivants.
 
+See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
+
 ## Install
 dexvert requires a LOT of programs and some kernel options to be set. See Requirements below. Once satisified, install with:
 \`npm install dexvert -g\`

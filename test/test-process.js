@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require(path.join(__dirname, "testUtil.js")),
@@ -59,6 +60,9 @@ tiptoe(
 	function testSampleFiles(_testData, sampleFilePaths)
 	{
 		testData = JSON.parse(_testData);
+
+		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
+		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
 		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));

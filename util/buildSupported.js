@@ -14,7 +14,7 @@ tiptoe(
 	function generateReadme(formatFilePaths)
 	{
 		const formats = formatFilePaths.map(formatFilePath => ({family : path.basename(path.dirname(formatFilePath)), ...require(formatFilePath).meta}));
-		formats.filterInPlace(f => !f.unsupported);
+		formats.filterInPlace(f => f.name && !f.unsupported);
 
 		fs.writeFile(path.join(__dirname, "..", "SUPPORTED.md"), `# Supported File Formats
 

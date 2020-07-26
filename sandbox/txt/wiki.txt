@@ -1,3 +1,7 @@
+>>> Sample links
+Archive: http://fileformats.archiveteam.org/wiki/TSComp
+
+>>> Snippets:
 {{FormatInfo
 |formattype=electronic
 |subcat=Help files

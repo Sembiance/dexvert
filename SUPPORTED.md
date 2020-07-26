@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 128 file formats are support by dexvert.
+The following 127 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -14,7 +14,7 @@ archive | BOLT Game Data Archive | .blt |
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | 
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | 
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | 
-archive | Genus Graphics Library Compressed Archive | .gx .gxl | 
+archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | 
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl |  This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
 archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip | 
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | 
@@ -42,13 +42,12 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
-format | undefined |  | 
-image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/PCX) | .run | 
+image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | 
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | 
-image | [AMOS Picture Bank](http://fleformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
+image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
@@ -57,7 +56,7 @@ image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) 
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | 
-image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/PCX) | .cmx | 
+image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 | 
 image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | 
@@ -83,7 +82,7 @@ image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | 
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | 
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | 
-image | [Koala Paint](http://fileformats.archiveteam.org/wiki/PCX) | .gig .koa .kla | 
+image | Koala Paint | .gig .koa .kla | 
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | 
 image | [LEADTools Compressed Image](http://fileformats.archiveteam.org/wiki/CMP) | .cmp | 
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | 
@@ -95,7 +94,7 @@ image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | 
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | 
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
-image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/PCX) | .mng | 
+image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap |  Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo | 
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | 
@@ -111,7 +110,7 @@ image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm
 image | [Portable Network Graphic](http://fileformats.archiveteam.org/wiki/PNG) | .png | 
 image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats) | .ppm | 
 image | [QuickBasic BSAVE Image](http://fileformats.archiveteam.org/wiki/BSAVE_Image) | .pic .scn .bsv .cgx | 
-image | [QuickTime Image Format](http://fileformats.archiveteam.org/wiki/PCX) | .qtif .qif | Not all QTIF sub formats are not supported.
+image | [QuickTime Image Format](http://fileformats.archiveteam.org/wiki/QTIF) | .qtif .qif | Not all QTIF sub formats are not supported.
 image | [Scalable Vectory Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | 
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | 
 image | [Spectrum 512 Compressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spc | 

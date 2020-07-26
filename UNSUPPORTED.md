@@ -25,7 +25,7 @@ audio | Sonix Sound Sample | .ss |  The .instr files appear to be 'meta' files t
 database | Clarion Database File | .dat | Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
 database | InfoFile Database File | .flr | Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
 database | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
-document | Envision Publisher Document | .evp .evt |  Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
+document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt |  Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | Help Librarian files. No information about them could be found anywhere.
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
 font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
@@ -37,7 +37,7 @@ font | LaserJet Soft Font | .sfl .sfp .sft |
 font | LinkWay Font | .fmf | 
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | 
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | 
-image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) |  |  There is no known 'signature' to have a magic match against. The extension is way to generic to match on. And the converter programs will convert anything you throw at it. So while abydos and ansilove support this, it's not safe to actually try and convert.
+image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin |  There is no known 'signature' to have a magic match against. The extension is way to generic to match on. And the converter programs will convert anything you throw at it. So while abydos and ansilove support this, it's not safe to actually try and convert.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not loacate any info online about it. So didn't pursuse further.
 image | NeoPaint Pattern | .pat |  Identified via magic as a Pallette "NeoPaint Palette" they appear to be actual "patterns" used as stamps in the MSDOS Neopaint program In theory I could convert these to images. Maybe opening up Neopaint, selecting the pattern, stamp it once and then save the image
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td |  ANSI Art drawing program for DOS. I couldn't come up with any converter programs for it nor could I locate a file format doc. I did locate MysticDraw for windows, which is supposed to be the successor, but I didn't try it and don't know if it can load TheDraw files and if it can, don't know if it can save em

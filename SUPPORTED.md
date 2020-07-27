@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 129 file formats are support by dexvert.
+The following 138 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -133,3 +133,12 @@ image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp 
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | 
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | 
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | 
+video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | 
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | 
+video | Fantavision Movie | .mve |  PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 1 minute and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. Lastly, I just cheat by running DOSbox and recording the screen, so there is dosbox video at the start heh.
+video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
+video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | 
+video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | 
+video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi |  Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
+video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | 
+video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | 

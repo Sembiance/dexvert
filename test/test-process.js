@@ -41,6 +41,12 @@ const SHA1_IGNORE_FILES =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK" : [/.png$/]
+	},
+	video :
+	{
+		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
+		"movieSetter" : [/.mp4$/],
+		"fantavision" : [/.mp4$/]
 	}
 };
 
@@ -74,7 +80,7 @@ tiptoe(
 
 		Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			if(!extraFilePath.startsWith(argv.format))
+			if(!extraFilePath.startsWith(`${argv.format}/`))
 				return;
 			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
 			if(argv.record)
@@ -190,7 +196,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected no converter but found in results ${newTestData.converter}`);
 
 			if(sampleTestData.converter && newTestData.converter && sampleTestData.converter!==newTestData.converter)
-				return this(undefined, "FAIL", `converter does not match expected result: ${sampleTestData.converter} vs ${testData.converter}`);
+				return this(undefined, "FAIL", `converter ${newTestData.converter} does not match expected ${sampleTestData.converter}`);
 			
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
 			if(results.output.files && expectedFiles.length!==results.output.files.length)
@@ -204,15 +210,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			(results.output.files || []).forEach(outSubFilePath =>
 			{
+				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
+					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath}`);
+
 				if(SHA1_IGNORE_FILES[family] && SHA1_IGNORE_FILES[family][formatid] && SHA1_IGNORE_FILES[family][formatid].some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))
 				{
 					expectedFiles.removeOnce(outSubFilePath);
 					return;
 				}
 
-				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
-					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath}`);
-				
 				if(hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath)))!==sampleTestData.files[outSubFilePath])
 					return this(undefined, "FAIL", "SHA1 sum mistmatch", outSubFilePath);
 

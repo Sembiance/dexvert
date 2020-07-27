@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-This is a nodejs based program that can decompress, extract and convert a wide variety of old file formats to modern day equilivants.
+Convert old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 

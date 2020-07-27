@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 127 file formats are support by dexvert.
+The following 129 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -66,6 +66,7 @@ image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.or
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | 
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | 
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | 
+image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | 
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | 
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
@@ -127,6 +128,7 @@ image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | 
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp | 
+image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | 
 image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp | 
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | 
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | 

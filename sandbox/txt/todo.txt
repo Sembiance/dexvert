@@ -1,11 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Go through all the remaining image/abydos/* test suite files and add support to dexvert for them
-  Also ensure I support:
-    https://filesamples.com/categories/image
-	https://stackoverflow.com/questions/46211985/different-image-file-format-samples
-
 * Convert video files next
   Sample file formats: http://samples.mplayerhq.hu/
 >>> movieSetter - 591d2978c0f66951294eff3573b46a59decd19ac
@@ -22,8 +17,6 @@ Lastly, there is sound too but my dosUtil doesn't support sound, nor does xRun.j
 Some of these converted ok, but others I think rely on their resource fork.
 Since that's been seperated out, ffmpeg/deark doesn't work with these. There is probably some magical way to merge the resource fork  resources that are needed for the video into the main video file but simple concatenating them together in either order is no help.
 
-
-
 * Convert documents next. Start with 'wordMac'
 
 * Convert database files next.
@@ -39,14 +32,13 @@ Since that's been seperated out, ffmpeg/deark doesn't work with these. There is 
   - Remove it from the 'LEGACY INFO' listed below
 
 >>> For every new format:
+  - Update ArvhiveTeam Wiki with details and sample file links
   - Remember that filename is now case sensitive. So if you want case insensitive use a /regex/i
   - Return as much 'input.meta' info about the file as I can
-  - Include at least 1 sample file in test/sample. Certainly include additional format samples that are 'edge cases' or different
-  - For images, first convert with every image converter program and deduce the appropriate priority order based on those results
   - Try and validate whether the conversion worked as much as possible
   - Animated cursors and other formats that produce a bunch of individual frame images should be converted to an animated GIF
   - Remove from formatsToDoASAP.txt
-  - If some files are partially unsupported, make sure I have an unsupportedNotes : ""
+  - If some files are partially unsupported, make sure I document it in notes : ""
   - If entirely unsupported and something that would be useful to support in the future, have unsupported : true
 
 >>> Specific format notes:

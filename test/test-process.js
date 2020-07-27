@@ -72,17 +72,14 @@ tiptoe(
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 
-		if(!argv.format)
+		Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
-			{
-				XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
-				if(argv.record)
-					delete testData[extraFilePath];
-			});
-
-			console.log("");
-		}
+			if(!extraFilePath.startsWith(argv.format))
+				return;
+			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
+			if(argv.record)
+				delete testData[extraFilePath];
+		});
 
 		this.data.sampleFilePaths.parallelForEach((sampleFilePath, subcb) => testSampleFile(sampleFilePath, false, subcb), this, cpuCount);
 	},
@@ -130,6 +127,8 @@ function testParallel(sampleFilePath, cb)
 function testSampleFile(sampleFilePath, silent, cb)
 {
 	const sampleSubFilePath = path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath);
+	const diskFamily = path.basename(path.dirname(path.dirname(sampleSubFilePath)));
+	const diskFormatid = path.basename(path.dirname(sampleSubFilePath));
 	const tmpDirPath = fileUtil.existsSync("/mnt/ram/tmp") ? "/mnt/ram/tmp" : os.tmpdir();
 	const outDirPath = fileUtil.generateTempFilePath(tmpDirPath, "test-process");
 
@@ -198,6 +197,11 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but only got ${XU.c.fg.white + results.output.files.length}`);
 
 			const {family, formatid} = results.id;
+			if(results.processed && diskFamily!==family)
+				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
+			if(results.processed && diskFormatid!==formatid)
+				return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
+
 			(results.output.files || []).forEach(outSubFilePath =>
 			{
 				if(SHA1_IGNORE_FILES[family] && SHA1_IGNORE_FILES[family][formatid] && SHA1_IGNORE_FILES[family][formatid].some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))

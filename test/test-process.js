@@ -35,7 +35,13 @@ const SHA1_IGNORE_FILES =
 {
 	archive :
 	{
+		// Not sure why, but the director extraction program produces different PNG files each time
 		director : [/.png$/]
+	},
+	document :
+	{
+		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
+		"*" : [/.pdf$/]
 	},
 	image :
 	{
@@ -213,7 +219,9 @@ function testSampleFile(sampleFilePath, silent, cb)
 				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
 					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath}`);
 
-				if(SHA1_IGNORE_FILES[family] && SHA1_IGNORE_FILES[family][formatid] && SHA1_IGNORE_FILES[family][formatid].some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))
+				if(SHA1_IGNORE_FILES[family] &&
+				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) &&
+				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))
 				{
 					expectedFiles.removeOnce(outSubFilePath);
 					return;

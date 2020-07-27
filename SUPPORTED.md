@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 138 file formats are support by dexvert.
+The following 147 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -42,6 +42,14 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
+document | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/PDF) | .html .htm .xhtml .xht | 
+document | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/PDF) | .json | 
+document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | 
+document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | 
+document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | 
+document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | 
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | 
+document | [WRich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | 
 image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 
@@ -57,6 +65,7 @@ image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp |
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | 
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
+image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 | 
 image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | 

@@ -26,5 +26,5 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 
 
 == Sample files ==
-* https://telparia.com/fileFormatSamples/archive/Glossary.drx
+* https://telparia.com/fileFormatSamples/document/wp/
 * https://telparia.com/unsupportedFileFormatSamples/image/gx1/ → *.GX1

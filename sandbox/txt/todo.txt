@@ -1,14 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add --brutePrograms that just tries all programs. Make sure to mark unoconv and ansilove as bruteUnsafe
-  Test with an unknown abydos image
-
-* Make sure the video meta is input.meta.video and image is input,meta.image. Mod will be input.meta.mod and generic audio will be input.meta.audio
-Only specific format stuff should be meta,formatid like animated, archive comments, etc
-
-* Add ISO meta with iso-info program
-
 * Add audio formats (and music AS audio)
   Make sure to gather audio meta with either soxi or modInfo.
 

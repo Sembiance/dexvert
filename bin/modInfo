@@ -1,0 +1,215 @@
+#!/usr/bin/env node
+"use strict";
+/* eslint-disable brace-style */
+
+const XU = require("@sembiance/xu"),
+	tiptoe = require("tiptoe"),
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	fileUtil = require("@sembiance/xutil").file,
+	printUtil = require("@sembiance/xutil").print,
+	runUtil = require("@sembiance/xutil").run;
+
+function usage(msg) { process.exit(XU.log`Usage: ${"modinfo"} ${"<input.mod>"}\n${XU.c.fg.red + msg}`); }
+
+if(argv._.length!==1)
+	return usage();
+
+const inputFilePath = `${argv._[0]}`;
+if(!fileUtil.existsSync(inputFilePath))
+	return usage(`Input file ${inputFilePath} does not exist.`);
+
+tiptoe(
+	function runCommands()
+	{
+		const runOptions = {timeout : XU.MINUTE, silent : true};
+
+		runUtil.run("xmp", ["-Cv", "-o", "/dev/null", inputFilePath], runOptions, this.parallel());
+		runUtil.run("uade123", ["-g", inputFilePath], Object.assign({"ignore-stderr" : true}, runOptions), this.parallel());
+		runUtil.run("openmpt123", ["--info", inputFilePath], runOptions, this.parallel());
+		runUtil.run("mikmodInfo", [inputFilePath], runOptions, this.parallel());
+		runUtil.run("timidity", ["-Ow", "-o", "/dev/null", inputFilePath], runOptions, this.parallel());
+	},
+	function parseModInfo(xmpInfoRaw, uadeInfoRaw, openMPTInfoRaw, mikmodInfoRaw, timidityInfoRaw)
+	{
+		const modInfo = {};
+
+		const infos = {};
+		try { infos.xmp = parseXMP(xmpInfoRaw); } catch(parseErr) {}
+		try { infos.uade = parseUADE(uadeInfoRaw); } catch(parseErr) {}
+		try { infos.openMPT = parseOpenMPT(openMPTInfoRaw); } catch(parseErr) {}
+		try { infos.mikmod = parseMikmod(mikmodInfoRaw); } catch(parseErr) {}
+		try { infos.timidity = parseTimidity(timidityInfoRaw); } catch(parseErr) {}
+
+		["title", "type", "tracker", "patternCount", "sampleCount", "trackCount"].forEach(propName =>
+		{
+			if(modInfo.hasOwnProperty(propName))
+				return;
+
+			Object.values(infos).forEach(subInfo =>
+			{
+				if(subInfo[propName])
+					modInfo[propName] = subInfo[propName];
+			});
+		});
+
+		if(argv.jsonOutput)
+			console.log(JSON.stringify(modInfo));
+		else
+			console.log(printUtil.columnizeObject(modInfo));
+
+		this();
+	},
+	XU.FINISH
+);
+
+function parseXMP(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+	
+	const info = {instruments : []};
+	let instrumentSection = false;
+	let instrumentNameEndLoc = null;
+
+	lines.forEach(line =>
+	{
+		if(line.startsWith("Instruments:"))
+		{
+			instrumentSection = true;
+			return;
+		}
+
+		if(instrumentSection)
+		{
+			if(instrumentNameEndLoc===null)
+				instrumentNameEndLoc = line.match(/(?<precursor>\s+Instrument name\s+).*/).groups.precursor.length;
+			else
+				info.instruments.push(line.substring(2, instrumentNameEndLoc).trim());
+		}
+		else
+		{
+			Object.forEach({
+				title : {re : /^Module name[^:]+:\s(?<value>.+)$/},
+				type : {re : /^Module type[^:]+:\s(?<value>.+)$/},
+				patternCount : {re : /^Patterns[^:]+:\s(?<value>\d+)$/, num : true},
+				sampleCount : {re : /^Samples[^:]+:\s(?<value>\d+)$/, num : true},
+				trackCount : {re : /^Channels[^:]+:\s(?<value>\d+).*$/, num : true}}, (propKey, propInfo) =>
+			{
+				const matchProps = line.match(propInfo.re);
+				if(!matchProps)
+					return;
+				
+				info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
+			});
+		}
+	});
+
+	info.instruments = info.instruments.filterEmpty();
+	if(info.instruments.length===0)
+		delete info.instruments;
+
+	return info;
+}
+
+function parseUADE(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+	
+	const info = {};
+	lines.forEach(line =>
+	{
+		Object.forEach({
+			title : {re : /^modulename:\s(?<value>.+)$/},
+			type : {re : /^playername:\s(?<value>.+)$/}}, (propKey, propInfo) =>
+		{
+			const matchProps = line.match(propInfo.re);
+			if(!matchProps)
+				return;
+			
+			info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
+		});
+	});
+
+	return info;
+}
+
+function parseOpenMPT(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+	
+	const info = {};
+	lines.forEach(line =>
+	{
+		Object.forEach({
+			title : {re : /^Title\.*:\s(?<value>.+)$/},
+			type : {re : /^Type\.*:\s(?<value>.+)$/},
+			tracker : {re : /^Tracker\.*:\s(?<value>.+)$/},
+			trackCount : {re : /^Channels\.*:\s(?<value>.+)$/, num : true},
+			patternCount : {re : /^Patterns\.*:\s(?<value>.+)$/, num : true},
+			sampleCount : {re : /^Samples\.*:\s(?<value>.+)$/, num : true}}, (propKey, propInfo) =>
+		{
+			const matchProps = line.match(propInfo.re);
+			if(!matchProps)
+				return;
+			
+			info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
+		});
+	});
+
+	return info;
+}
+
+function parseMikmod(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+	
+	const info = {};
+	lines.forEach(line =>
+	{
+		Object.forEach({
+			title : {re : /^name:(?<value>.+)$/},
+			type : {re : /^type:(?<value>.+)$/},
+			trackCount : {re : /^channels:(?<value>.+)$/, num : true},
+			patternCount : {re : /^patterns:(?<value>.+)$/, num : true},
+			sampleCount : {re : /^samples:(?<value>.+)$/, num : true}}, (propKey, propInfo) =>
+		{
+			const matchProps = line.match(propInfo.re);
+			if(!matchProps)
+				return;
+			
+			info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
+		});
+	});
+
+	return info;
+}
+
+function parseTimidity(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+	
+	const info = {};
+	lines.forEach(line =>
+	{
+		Object.forEach({
+			title : {re : /^\((?<value>[^)]+)\).*$/}}, (propKey, propInfo) =>
+		{
+			const matchProps = line.match(propInfo.re);
+			if(!matchProps)
+				return;
+			
+			info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
+		});
+	});
+
+	return info;
+}

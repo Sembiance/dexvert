@@ -48,6 +48,10 @@ const SHA1_IGNORE_FILES =
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK" : [/.png$/]
 	},
+	music :
+	{
+		"med" : [/juanidance.flac$/]
+	},
 	video :
 	{
 		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.

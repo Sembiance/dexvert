@@ -1,15 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add all the previously 'supported' file formats
+* Add ISO meta with iso-info program
 
->>> For every new program:
-  - If a custom ebuild, move to dexvert and upgrade to latest version (ancient, gameextractor, etc)
-    Make sure to save a copy of the files in DISTFILES just in case
-	If something that is updated, add it to system_update.txt Less Often section to check for new updates in the future
-  - If a custom C program, make a custom native node module instead of a C app
-  - If the program requires certain kernel options to be set ('mount' for example) then add exports.meta.kernelOptions = ["CONFIG_X"];
-  - Remove it from the 'LEGACY INFO' listed below
+* Add audio formats (and music AS audio)
+  Make sure to gather audio meta with either soxi or modInfo.
+
+* Add SID and OGG support and then get rid of my DevLab/apps for these
+
+* Add text formats, strongly consider just make them all 'documents'
 
 >>> For every new format:
   - See if any additional 'sample' files can be found:
@@ -17,39 +16,20 @@
 	http://samples.mplayerhq.hu/
 	/mnt/compendium/DevLab/dexvert/sandbox/abydos/
   - Update ArvhiveTeam Wiki with details and sample file links
-  - Remember that filename is now case sensitive. So if you want case insensitive use a /regex/i
   - Return as much 'input.meta' info about the file as I can
   - Try and validate whether the conversion worked as much as possible
   - Animated cursors and other formats that produce a bunch of individual frame images should be converted to an animated GIF
-  - Remove from formatsToDoASAP.txt
   - If some files are partially unsupported, make sure I document it in notes : ""
   - If entirely unsupported and something that would be useful to support in the future, have unsupported : true
 
->>> Specific format notes:
-	BSAVE: Consider introducing exports.meta.try : true and adding support for when dexvert is called with --try to also run it through any format marked as 'try' since the program chances so greatly based on the input
-	ISO: iso-info
-	GRASP: If it's some sort of powerpoint, maybe I should reclassify it as 'document' instead of 'archive'
-	ANI: Ensure that the animated cursor is extracted out into an animated GIF, rather than individual frames of animation images
-
->>> Specific program notes:
-	unoconv: Need a way to launch unoconv as a server process in the background. Will need to think about the best way to do that so that I can run multiple 'dexvert' commands CLI
-	ancient: ADD this as a program and ensure it's included in the --try
-
 * Possibly set a 'probability' rating for conversions of certain families. Can test the entropy of the image (solid vs static vs actual image) or Audio could measure static vs melodic vs silence, etc. I should probably have this 'opt in' as it may be expensive to calculate
-
-* Add sid and ogg support and then get rid of my DevLab/apps for these
-
-* Add the unsupported formats. Mark them as exports.meta.unsupported : true. The notes I took in unsupported.txt should be added to exports.meta.notes = ``. Also add unsupported samples to test/sample/ and update the test suite to skip any formats that are 'unsupported'. Update the unsupported notes with the new info from magnus.bergman@snisurset.net on robert@telparia
-
-* Create a util/buildSupported.js and a util/buildUnsupported.js that will create a SUPPORTED.md and UNSUPPORTED.md files that lists all the formats. Ensure I include the notes field too and a "5 sample files" hyperlink to the appropriate test/sample subdir. Also hyperlink the format name to the website (if specified)
-
-* Update archiveteam wiki and change all the sample file links to point to the github repo
 
 * Add support for the new abydos images formats that are part of the new version of the abydos test suite and new abydos version
 
 >>> LEGACY INFO, DELETE AS I GO!!!
+>>> ONCE DONE WITH ABOVE, MOVE THIS SECTION TO A SANDBOX program list.txt
 >>> Here are the apps I unmerged
-amigadepacker helpdeco jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin grotag writerperfect ab2ascii amosbank nconvert abydos libbpg rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp xanim mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats ansilove netpbm physfs
+jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin writerperfect amosbank rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
 abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:
@@ -58,11 +38,11 @@ retrovert pcl2pdf wavduration
 mod2wav mikmodInfo midistar2mid modInfo imageInfo abydosconvert tridDefToMagic
 
 
-
 /---------------\
 | High Priority |
 \---------------/
-* Once retromission is back up and scanning CD's, respond to email on robert@telparia.com and also http://fileformats.archiveteam.org/wiki/Talk:RIFF_STYL
+* Once retromission is back up and scanning CD's, respond to abydos email on robert@telparia.com and also http://fileformats.archiveteam.org/wiki/Talk:RIFF_STYL
+
 
 /-----------------\
 | Medium Priority |
@@ -71,24 +51,22 @@ mod2wav mikmodInfo midistar2mid modInfo imageInfo abydosconvert tridDefToMagic
 
 * Create a 'dexvert-remote' NPM  package that will provide the same 'dexvert inputFilePath outputDirPath' command line tool but it will upload the file to the website and then download the results all seamlessly (with progress bar)
 
-* Possible JS based amiga emulator: http://scriptedamigaemulator.net/
-  Could be useful for better ADF extraction support or maybe some of the file formats I mentioned in unsupported.txt
-
 * Create a copy of every single .instr and .ss file from every item into smus2wav/StandardInstruments (would have to check for naming collisions (where the files have different checksums) and potentially support that if there are a lot.
 Then the conversion app would have a much higher chance at being able to convert the files.
 I could then create a retryFiles.js that would find all items and files that have processed false that match a given criteria (magic probably) and the re-run processFile for that item (which would likely mean breaking processFile fun into its on file, that shouldn't be too hard.)
-
-* Create a NodeJS based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
-  http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
-  Then figure out what to do with it. Do I introduce a way to "verify" "ignored" files and add that to text.js? I could then mark it in A.HANDLER.text.imf: verify : true, weak : false    or something like this?
 
 * Add 'audio' support for videos recorded with runUtil. I think it just involves creating a snd_aloop device, but need to do a ton more research:
   https://trac.ffmpeg.org/wiki/Capture/ALSA#Recordaudiofromanapplication
   https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture#Virtual_sound_device_using_snd-aloop
 
+
 /--------------\
 | Low Priority |
 \--------------/
+* Create a NodeJS based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
+  http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
+  Then figure out what to do with it. Do I introduce a way to "verify" "ignored" files and add that to text.js? I could then mark it in A.HANDLER.text.imf: verify : true, weak : false    or something like this?
+
 * Convert bitmap fonts to more usable vector fonts by trying to "autotrace" the fonts, or utilize a pro tool like: https://www.fontlab.com/font-editor/bitfonter/   or   https://www.fontlab.com/font-converter/transtype/
 
 * Create native C nodejs module for imagemagick/recoil and other libs for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native

@@ -114,6 +114,11 @@ tiptoe(
 		XU.log`\nTesting parallel friendlyness with ${cpuCount} at once for each sample file...`;
 		this.data.sampleFilePaths.serialForEach(testParallel, this);
 	},
+	function outputResults()
+	{
+		testUtil.logFinish();
+		this();
+	},
 	XU.FINISH
 );
 

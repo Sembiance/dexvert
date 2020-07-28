@@ -68,6 +68,11 @@ tiptoe(
 		else
 			this();
 	},
+	function outputResults()
+	{
+		testUtil.logFinish();
+		this();
+	},
 	XU.FINISH
 );
 

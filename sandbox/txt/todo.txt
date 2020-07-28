@@ -1,16 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add proper website and extensions to every music format and update the WIKI with sample file links
+* Add SID and OGG support and then get rid of my conversion DevLab/apps for these
 
-* Add final PASS/FAIL counts to end of test-identify and test-process
-
-* Add audio formats (and music AS audio)
-  Make sure to gather audio meta with either soxi or modInfo.
-
-* Add SID and OGG support and then get rid of my DevLab/apps for these
-
-* Add text formats, strongly consider just make them all 'documents'
+* Add text formats
 
 >>> For every new format:
   - See if any additional 'sample' files can be found:

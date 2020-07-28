@@ -37,6 +37,10 @@ ${XU.cf.fg.cyan("Options:")}
 
    ${XU.cf.fg.yellow("--brutePrograms")}
     If unable to identify <inputFilePath> just run every available program on it
+
+   ${XU.cf.fg.yellow("--midiFont=<midiFont>")}
+    Convert MIDI files with a specific midi font. Default: eaw
+	Other available fonts: fluid, roland, creative, freepats, windows
   
    ${XU.cf.fg.yellow("--help")}
     Displays this usage message`;
@@ -51,7 +55,7 @@ const verbose = argv.verbose || 0;
 tiptoe(
 	function runProcess()
 	{
-		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms};
+		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms, midiFont : argv.midiFont};
 		dexvert.process(argv._[0], argv._[1], processOptions, this);
 	},
 	function printResults(state)

@@ -21,7 +21,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio video image 3d font other executable rom text or all
+    Valid families: archive document audio music video image 3d font other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
@@ -37,6 +37,10 @@ Options:
 
    --brutePrograms
     If unable to identify <inputFilePath> just run every available program on it
+
+   --midiFont=<midiFont>
+    Convert MIDI files with a specific midi font. Default: eaw
+	Other available fonts: fluid, roland, creative, freepats, windows
   
    --help
     Displays this usage message
@@ -139,6 +143,8 @@ app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) |
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/nrg2iso | [nrg2iso](http://gregory.kokanosky.free.fr/v4/linux/nrg2iso.en.html) | 
+app-emulation/uade | [uade](http://zakalwe.fi/uade) | 
+app-emulation/uade | [uade123](http://zakalwe.fi/uade) | 
 app-emulation/wine-vanilla | [wine](https://www.winehq.org/) | 
 app-office/unoconv | [unoconv](http://dag.wiee.rs/home-made/unoconv/) | 
 app-shells/bash | [bash](http://tiswww.case.edu/php/chet/bash/bashtop.html) | 
@@ -164,8 +170,21 @@ media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
 media-gfx/xcftools | [xcf2png](http://henning.makholm.net/software) | dexvert
 media-libs/libbpg | [bpgdec](http://bellard.org/bpg/) | dexvert
 media-libs/libwebp | [webpinfo](https://developers.google.com/speed/webp/download) | 
+media-sound/adplay | [adplay](https://github.com/adplug/adplay-unix) | 
+media-sound/fluid-soundfont | [*](http://musescore.org/en/handbook/soundfont) | 
+media-sound/midistar2mid | [midistar2mid](https://github.com/Sembiance/midistar2mid) | dexvert
+media-sound/mikmod2wav | [mikmod2wav](https://github.com/Sembiance/mikmod2wav) | dexvert
+media-sound/mikmodInfo | [mikmodInfo](https://github.com/Sembiance/mikmodInfo) | 
+media-sound/openmpt123 | [openmpt123](https://lib.openmpt.org/libopenmpt/) | 
+media-sound/openmpt123 | [openmpt123](https://lib.openmpt.org/libopenmpt/) | 
 media-sound/sox | [sox](http://sox.sourceforge.net) | 
 media-sound/sox | [soxi](http://sox.sourceforge.net) | 
+media-sound/timidity-eawpatches | [undefined](http://www.stardate.bc.ca/eawpatches/html/default.htm) | 
+media-sound/timidity-freepats | [*](http://freepats.opensrc.org) | 
+media-sound/timidity++ | [timidity](http://timidity.sourceforge.net/) | 
+media-sound/timidity++ | [timidity](http://timidity.sourceforge.net/) | 
+media-sound/xmp | [xmp](http://xmp.sourceforge.net/) | dexvert
+media-sound/xmp | [xmp](http://xmp.sourceforge.net/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
 media-video/mplayer | [mplayer](http://www.mplayerhq.hu/) | 
@@ -180,6 +199,6 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="a52 acl alsa amr bzip2 cairo cddb cdio curl cxx dga dts dv dvd dvdnav enca encode flac fontconfig fpx gif gpl heif iconv id3tag introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith sndfile svg tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau vorbis vpx wavpack webp wmf X x264 xattr xinerama xml xorg xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libbpg media-libs/libwebp media-sound/sox media-video/ffmpeg media-video/mplayer media-video/xanim sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl alsa amr bzip2 cairo cddb cdio curl cxx dga dts dv dvd dvdnav enca encode flac fontconfig fpx gif gpl heif iconv id3tag introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith sndfile svg tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau vorbis vpx wavpack webp wmf X x264 xattr xinerama xml xorg xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/uade app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libbpg media-libs/libwebp media-sound/adplay media-sound/fluid-soundfont media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mplayer media-video/xanim sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
 ```
 		

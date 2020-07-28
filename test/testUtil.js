@@ -3,6 +3,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	fileUtil = require("@sembiance/xutil").file,
+	printUtil = require("@sembiance/xutil").print,
 	tiptoe = require("tiptoe");
 
 exports.DATA_DIR_PATH = path.join(__dirname, "data");
@@ -27,9 +28,22 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 	);
 };
 
+const logCounts = {};
+
 exports.logResult = function logResult(status, sampleSubFilePath, msg="", ...args)
 {
+	if(!logCounts.hasOwnProperty(status))
+		logCounts[status] = 0;
+
+	logCounts[status] = logCounts[status] + 1;
+
 	XU.log`${XU.cf.fg.cyan("[")}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.cf.fg.cyan("]")} ${XU.c.reset + XU.c.bold + sampleSubFilePath} ${XU.c.fg.orange + msg} ${args.length ? args : ""}`;
 
 	return true;
+};
+
+exports.logFinish = function logFinish()
+{
+	printUtil.minorHeader("Test Results", {prefix : "\n"});
+	Object.forEach(logCounts, (status, statusCount) => XU.log`${XU.cf.fg.cyan("[")}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.cf.fg.cyan("]")} => ${statusCount.toLocaleString()}`);
 };

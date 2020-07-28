@@ -34,6 +34,9 @@ ${XU.cf.fg.cyan("Options:")}
    ${XU.cf.fg.yellow("--tmpDirPath=/mnt/tmp")}
     Use a different tmp dir (default is os.tmpdir())
 	I suggest setting this to a 'tmpfs' mounted RAM disk.
+
+   ${XU.cf.fg.yellow("--brutePrograms")}
+    If unable to identify <inputFilePath> just run every available program on it
   
    ${XU.cf.fg.yellow("--help")}
     Displays this usage message`;
@@ -48,7 +51,7 @@ const verbose = argv.verbose || 0;
 tiptoe(
 	function runProcess()
 	{
-		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute};
+		const processOptions = {tmpDirPath : argv.tmpDirPath, verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms};
 		dexvert.process(argv._[0], argv._[1], processOptions, this);
 	},
 	function printResults(state)

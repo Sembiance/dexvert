@@ -34,6 +34,9 @@ Options:
    --tmpDirPath=/mnt/tmp
     Use a different tmp dir (default is os.tmpdir())
 	I suggest setting this to a 'tmpfs' mounted RAM disk.
+
+   --brutePrograms
+    If unable to identify <inputFilePath> just run every available program on it
   
    --help
     Displays this usage message

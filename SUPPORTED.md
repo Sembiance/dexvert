@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 147 file formats are support by dexvert.
+The following 156 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -42,14 +42,23 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
-document | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/PDF) | .html .htm .xhtml .xht | 
-document | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/PDF) | .json | 
+document | AmigaBASIC Source Code | .bas | 
+document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | 
+document | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | 
+document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | 
+document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | 
+document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | 
+document | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | 
+document | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json | 
+document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | 
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | 
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | 
+document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | 
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | 
+document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | 
+document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | 
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | 
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | 
-document | [WRich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | 
 image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 

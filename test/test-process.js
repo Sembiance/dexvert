@@ -241,7 +241,12 @@ function testSampleFile(sampleFilePath, silent, cb)
 		function cleanup(status, msg="", ...args)
 		{
 			if(!silent || status!=="PASS")
-				testUtil.logResult(status, sampleSubFilePath, msg, ...args, outDirPath);
+			{
+				const extraArgs = Array.from(args);
+				if(status!=="PASS")
+					extraArgs.push(outDirPath);
+				testUtil.logResult(status, sampleSubFilePath, msg, ...extraArgs);
+			}
 
 			this.parallel()(undefined, status==="PASS");
 			if(status!=="FAIL")

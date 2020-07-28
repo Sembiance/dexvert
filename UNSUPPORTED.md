@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 41 file formats are NOT currently supported by dexvert.
+The following 42 file formats are NOT currently supported by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -22,11 +22,12 @@ audio | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
 audio | Sonix Sound Sample | .ss |  The .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
-database | Clarion Database File | .dat | Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
-database | InfoFile Database File | .flr | Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
-database | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
+document | Clarion Database File | .dat | Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt |  Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | Help Librarian files. No information about them could be found anywhere.
+document | InfoFile Database File | .flr | Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
+document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg |  With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
+document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
 font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
 font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 

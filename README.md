@@ -21,7 +21,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio database video image 3d font other executable rom text or all
+    Valid families: archive document audio video image 3d font other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 
@@ -123,6 +123,7 @@ app-arch/extract-adf | [extract-adf](https://github.com/mist64/extract-adf) | de
 app-arch/fido | [fido](https://openpreservation.org/products/fido/) | dexvert
 app-arch/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert
 app-arch/gzip | [gunzip](https://www.gnu.org/software/gzip/) | 
+app-arch/helpdeco | [helpdeco](https://sourceforge.net/projects/helpdeco/) | dexvert
 app-arch/lbrate | [lbrate](http://www.svgalib.org/rus/lbrate.html) | dexvert
 app-arch/lha | [lha](https://github.com/jca02266/lha) | 
 app-arch/mscompress | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) | 
@@ -139,7 +140,11 @@ app-emulation/wine-vanilla | [wine](https://www.winehq.org/) |
 app-office/unoconv | [unoconv](http://dag.wiee.rs/home-made/unoconv/) | 
 app-shells/bash | [bash](http://tiswww.case.edu/php/chet/bash/bashtop.html) | 
 app-text/convmv | [convmv](https://www.j3e.de/linux/convmv/) | 
+app-text/djvu | [ddjvu](http://djvu.sourceforge.net/) | 
+app-text/ghostpcl-bin | [gpcl6](https://www.ghostscript.com/download/gpcldnld.html) | dexvert
+app-text/grotag | [grotag](http://grotag.sourceforge.net/) | dexvert
 app-text/poppler | [pdfinfo](https://poppler.freedesktop.org/) | 
+dev-lang/ab2ascii | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) | dexvert
 dev-lang/amostools | [dumpamos](https://github.com/kyz/amostools/) | dexvert
 dev-lang/amostools | [listamos](https://github.com/kyz/amostools/) | dexvert
 dev-util/stackimport | [stackimport](https://github.com/uliwitness/stackimport/) | 
@@ -168,6 +173,6 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="a52 acl alsa amr bzip2 cairo cdio curl cxx dga dts dv dvd dvdnav enca encode fontconfig fpx gif gpl heif iconv introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith svg tga theora threads tiff truetype unicode utils v4l vaapi vcd vdpau vorbis vpx webp wmf X x264 xattr xinerama xml xorg xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/poppler dev-lang/amostools dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libbpg media-libs/libwebp media-video/ffmpeg media-video/mplayer media-video/xanim sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl alsa amr bzip2 cairo cdio curl cxx dga dts dv dvd dvdnav enca encode fontconfig fpx gif gpl heif iconv introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith svg tga theora threads tiff truetype unicode utils v4l vaapi vcd vdpau vorbis vpx webp wmf X x264 xattr xinerama xml xorg xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/poppler dev-lang/ab2ascii dev-lang/amostools dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libbpg media-libs/libwebp media-video/ffmpeg media-video/mplayer media-video/xanim sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
 ```
 		

@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Convert documents next. Start with 'wordMac'
-
-* Convert database files next.
-
 * Add all the previously 'supported' file formats
 
 >>> For every new program:

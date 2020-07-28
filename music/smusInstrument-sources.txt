@@ -1,0 +1,9 @@
+The standard instruments collected here are from the following amiga disks:
+Aegis Sonix v1.3
+Aegis Sonix v1.4
+Aegis Sonix v2.0
+Sonix Data Disk 3
+Sonix Data Disk 6
+Sonix Data Disk 10
+
+There probably exists Sonix Data Disks 1, 2, 4, 5, 7, 8, 9 but I can't locate these anywhere

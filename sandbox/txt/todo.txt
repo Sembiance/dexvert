@@ -17,36 +17,19 @@
   - If some files are partially unsupported, make sure I document it in notes : ""
   - If entirely unsupported and something that would be useful to support in the future, have unsupported : true
 
-* Possibly set a 'probability' rating for conversions of certain families. Can test the entropy of the image (solid vs static vs actual image) or Audio could measure static vs melodic vs silence, etc. I should probably have this 'opt in' as it may be expensive to calculate
-
-* Add support for the new abydos images formats that are part of the new version of the abydos test suite and new abydos version
-
->>> LEGACY INFO, DELETE AS I GO!!!
->>> ONCE DONE WITH ABOVE, MOVE THIS SECTION TO A SANDBOX program list.txt
->>> Here are the apps I unmerged
-jhove ppunpack rsrce sharutils tika xdms shed dosemu virtio-win binwalk djview ghostpcl-bin writerperfect rtmidi adplay vgmstream mpack xwud xautomation physfs
->>> Here are DevLab/apps/* that I moved to legacy:
-midstar2mid recordxvfb
->>> I moved from compendium/bin to DevLab/legacy:
-pcl2pdf wavduration
->>> I removed symlinks from compendium/bin:
-midistar2mid tridDefToMagic
-
 
 /---------------\
 | High Priority |
 \---------------/
 * Once retromission is back up and scanning CD's, respond to abydos email on robert@telparia.com and also http://fileformats.archiveteam.org/wiki/Talk:RIFF_STYL
 
+* Add support for the new abydos images formats that are part of the new version of the abydos test suite and new abydos version
+
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Create retrovert.com with a 'Browse' button that allows you to upload files including a REST API
-
-* Create a 'dexvert-remote' NPM  package that will provide the same 'dexvert inputFilePath outputDirPath' command line tool but it will upload the file to the website and then download the results all seamlessly (with progress bar)
-
-* Create a copy of every single .instr and .ss file from every item into smus2wav/StandardInstruments (would have to check for naming collisions (where the files have different checksums) and potentially support that if there are a lot.
+* Create a copy of every single .instr and .ss file from every item into music/smusInstruments (would have to check for naming collisions (where the files have different checksums) and potentially support that if there are a lot.
 Then the conversion app would have a much higher chance at being able to convert the files.
 I could then create a retryFiles.js that would find all items and files that have processed false that match a given criteria (magic probably) and the re-run processFile for that item (which would likely mean breaking processFile fun into its on file, that shouldn't be too hard.)
 
@@ -58,6 +41,10 @@ I could then create a retryFiles.js that would find all items and files that hav
 /--------------\
 | Low Priority |
 \--------------/
+* Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
+
+* Create a 'dexvert-remote' NPM  package that will provide the same 'dexvert inputFilePath outputDirPath' command line tool but it will upload the file to the website and then download the results all seamlessly (with progress bar)
+
 * Create a NodeJS based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   Then figure out what to do with it. Do I introduce a way to "verify" "ignored" files and add that to text.js? I could then mark it in A.HANDLER.text.imf: verify : true, weak : false    or something like this?

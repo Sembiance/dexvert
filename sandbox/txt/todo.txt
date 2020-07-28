@@ -27,7 +27,7 @@
 >>> LEGACY INFO, DELETE AS I GO!!!
 >>> ONCE DONE WITH ABOVE, MOVE THIS SECTION TO A SANDBOX program list.txt
 >>> Here are the apps I unmerged
-jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin writerperfect amosbank rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats physfs
+jhove ppunpack rsrce sharutils tika xdms shed dosemu uade virtio-win binwalk djview ghostpcl-bin writerperfect rtmidi adplay mikmod openmpt123 timidity++ vgmstream xmp mpack xwud xautomation media-sound/fluid-soundfont media-sound/timidity-freepats physfs
 >>> Here are DevLab/apps/* that I moved to legacy:
 abydosconvert midstar2mid mikmodInfo mod2wav modInfo recordxvfb imageInfo
 >>> I moved from compendium/bin to DevLab/legacy:

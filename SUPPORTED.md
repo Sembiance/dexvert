@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 156 file formats are support by dexvert.
+The following 164 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -42,6 +42,14 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
+audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | Some 8SVX files don't have a sample rate in the file. In these cases I try multiple different common sample rates.
+audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | 
+audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | 
+audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son |  The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
+audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | 
+audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | 
+audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | 
+audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | 
 document | AmigaBASIC Source Code | .bas | 
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | 
 document | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | 

@@ -5,5 +5,6 @@ dexvert.code-workspace
 sandbox/abydos/
 sandbox/triddefs/
 sandbox/app/
+sandbox/legacy/
 test/sample/
 music/midiInstrument/roland/*.sf2

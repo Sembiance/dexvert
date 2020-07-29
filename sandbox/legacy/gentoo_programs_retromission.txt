@@ -1,5 +1,0 @@
->>> Here are the apps I unmerged
-jhove ppunpack rsrce sharutils tika xdms shed dosemu virtio-win binwalk djview ghostpcl-bin writerperfect rtmidi vgmstream mpack xwud xautomation physfs
-
->>> I moved from compendium/bin to DevLab/legacy:
-tridDefToMagic

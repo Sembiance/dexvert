@@ -1,9 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Double check that all videos created are 'browserFriendly'
+
 * Add SID and OGG support and then get rid of my conversion DevLab/apps for these
 
-* Add text formats
+* See what else is finalized in finalizeItem to see if I should do any in dexvert
+
+* See what else is gathered for a CAT from gatherCATMeta before doing retromission
 
 >>> For every new format:
   - See if any additional 'sample' files can be found:

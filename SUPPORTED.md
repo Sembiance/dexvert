@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 184 file formats are support by dexvert.
+The following 204 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -56,7 +56,6 @@ document | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | 
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | 
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | 
-document | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | 
 document | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json | 
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | 
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | 
@@ -179,6 +178,27 @@ music | [Sidmon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .si
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | 
 music | [Star Tracker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | 
 music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) | .p61 .p61a .p60 .p60a .p50 .p50a .p41 .p40 p40a .p40b .p30 p30a .p22 .p22a | 
+text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | 
+text | AMOS Source Code | .amossourcecode | 
+text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | 
+text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | 
+text | [C Source or Header File](http://fileformats.archiveteam.org/wiki/C) | .c .h | 
+text | [C++ Source File](http://fileformats.archiveteam.org/wiki/AIFF) | .cpp .cxx .cc .c++ .hpp | 
+text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css | 
+text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | 
+text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | 
+text | File List | .bbs .lst .lis .dir .ind | 
+text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | 
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | 
+text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | 
+text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | 
+text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | 
+text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | 
+text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | 
+text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
+text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | 
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | 
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | 
 video | Fantavision Movie | .mve |  PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 1 minute and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. Lastly, I just cheat by running DOSbox and recording the screen, so there is dosbox video at the start heh.

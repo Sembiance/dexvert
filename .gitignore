@@ -2,7 +2,8 @@
 node_modules/
 pnpm-lock.yaml
 dexvert.code-workspace
-sandbox/wip/
+sandbox/abydos/
+sandbox/triddefs/
 sandbox/app/
 test/sample/
 music/midiInstrument/roland/*.sf2

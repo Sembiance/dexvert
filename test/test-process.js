@@ -50,7 +50,8 @@ const SHA1_IGNORE_FILES =
 	},
 	music :
 	{
-		"med" : [/juanidance.flac$/]
+		"med" : [/juanidance.flac$/],
+		"sid" : [/.flac$/]	// Not sure why, but the FLAC files generated from the WAVs from sidplay2 are different each time
 	},
 	video :
 	{

@@ -52,6 +52,8 @@ exports.updateProcessed = (state, p, cb) =>
 
 }
 
+exports.inputMeta = (state, p, cb) =>
+
 // Executed immediately before the 'steps'. Useful if you need to prepare something right before built in family steps
 exports.preSteps = [];
 

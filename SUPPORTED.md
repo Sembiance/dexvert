@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 204 file formats are support by dexvert.
+The following 206 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -49,6 +49,7 @@ audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | 
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | 
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | 
+audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | 
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | 
 document | AmigaBASIC Source Code | .bas | 
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | 
@@ -162,6 +163,7 @@ music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wik
 music | [AdLib/Roland Song](http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song) | .rol | 
 music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | 
 music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | 
+music | [Commodore SID Music File](http://fileformats.archiveteam.org/wiki/SID) | .sid .psid | 
 music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative_Music_Format) | .cmf | 
 music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | 
 music | [Extended Module](http://fileformats.archiveteam.org/wiki/XM) | .xm | 

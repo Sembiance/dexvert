@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable max-len */
+/* eslint-disable max-len, node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run,
@@ -14,8 +14,9 @@ tiptoe(
 		runUtil.run(path.join(__dirname, "..", "bin", "dexid"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexserv"), ["--help"], runUtil.SILENT, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
 	},
-	function generateReadme(programFilePaths, dexidUsage, dexvertUsage, dexservUsage)
+	function generateReadme(programFilePaths, dexidUsage, dexvertUsage, dexservUsage, formatFilePaths)
 	{
 		const programs = programFilePaths.map(programFilePath => require(programFilePath));	// eslint-disable-line node/global-require
 
@@ -48,7 +49,7 @@ tiptoe(
 
 		fs.writeFile(path.join(__dirname, "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 
-Convert old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert/extract ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f && f.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 

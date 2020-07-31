@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 207 file formats are support by dexvert.
+The following 208 file formats are support by dexvert.
 
 
 
@@ -85,7 +85,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (93)
+## Image (94)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -95,6 +95,7 @@ image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Wor
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | 
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | 
+image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
@@ -151,7 +152,7 @@ image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | 
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | 
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | 
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | 
-image | PFS First Publisher | .art | 
+image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
 image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | 
 image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm | 
 image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm | 

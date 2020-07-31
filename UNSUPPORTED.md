@@ -36,11 +36,11 @@ font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | 
+font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .tdf | Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | 
 image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin |  There is no known 'signature' to have a magic match against. The extension is way to generic to match on. And the converter programs will convert anything you throw at it. So while abydos and ansilove support this, it's not safe to actually try and convert.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not loacate any info online about it. So didn't pursuse further.
 image | NeoPaint Pattern | .pat |  Identified via magic as a Pallette "NeoPaint Palette" they appear to be actual "patterns" used as stamps in the MSDOS Neopaint program In theory I could convert these to images. Maybe opening up Neopaint, selecting the pattern, stamp it once and then save the image
-image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td |  ANSI Art drawing program for DOS. I couldn't come up with any converter programs for it nor could I locate a file format doc. I did locate MysticDraw for windows, which is supposed to be the successor, but I didn't try it and don't know if it can load TheDraw files and if it can, don't know if it can save em
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | RIFF ANIM | .paf | Couldn't find any evidence of this out in the public. Could very well be a proprietary format

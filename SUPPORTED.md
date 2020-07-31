@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 206 file formats are support by dexvert.
+The following 207 file formats are support by dexvert.
 
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -151,6 +151,7 @@ image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) 
 image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | 
 image | [Texas Instruments Calculator Image](http://fileformats.archiveteam.org/wiki/TI_picture_file) | .82i .8ca .8ci .92i .73i .83i .8xi .85i .86i .89i .9xi .v2i | 
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | 
+image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | 
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | 
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp | 

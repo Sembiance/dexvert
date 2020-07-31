@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 41 file formats are NOT currently supported by dexvert.
+The following 42 file formats are NOT currently supported by dexvert.
 
 
 
@@ -51,11 +51,12 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Font (11)
+## Font (12)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
 font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
+font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | This can be converted with recoil2png. So if I ever decide to support fonts, I can use that as a starting point before converting the bitmaps into font files.
 font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | 

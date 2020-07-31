@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 209 file formats are support by dexvert.
+The following 221 file formats are support by dexvert.
 
 
 
-## Archive (38)
+## Archive (39)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -13,6 +13,7 @@ archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/
 archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | 
 archive | [AMOS Basic Source Code Archive](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .amos | 
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj | 
+archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | 
 archive | BOLT Game Data Archive | .blt | 
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | 
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | 
@@ -85,7 +86,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (95)
+## Image (106)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -98,10 +99,15 @@ image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
+image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | 
 image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg | 
+image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp | 
+image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
+image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
+image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | 
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
@@ -113,14 +119,20 @@ image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/w
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | 
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | 
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | 
+image | [Digital Picture Exchange](http://fileformats.archiveteam.org/wiki/DPX) | .dpx | 
+image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds | 
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | 
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | 
+image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | 
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | 
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | 
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | 
+image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | 
+image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | 
 image | [GEM Raster Bitmap](http://fileformats.archiveteam.org/wiki/GEM_Raster) | .img .ximg | 
+image | [GFA Artist](http://fileformats.archiveteam.org/wiki/GFA_Artist) | .art | 
 image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | 
 image | [GX1 Bitmap](http://fileformats.archiveteam.org/wiki/GX1) | .gx1 | 
 image | [GX2 Bitmap](http://fileformats.archiveteam.org/wiki/GX2) | .gx2 | 

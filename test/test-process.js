@@ -62,6 +62,11 @@ const SHA1_IGNORE_FILES =
 	}
 };
 
+// Usually the formatid of the directory should match what is detected by dexid
+// Sadly, some formats are only identified by an extension that is shared by multiple formats (such as image/art and image/gfaArtist)
+// So add them here to exempt from failing the test due to this
+const FORMATID_MATCH_EXEMPT = ["gfaArtist"];
+
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
 let testData = null;
@@ -222,7 +227,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			const {family, formatid} = results.id;
 			if(results.processed && diskFamily!==family)
 				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
-			if(results.processed && diskFormatid!==formatid)
+			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
 				return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
 
 			(results.output.files || []).forEach(outSubFilePath =>

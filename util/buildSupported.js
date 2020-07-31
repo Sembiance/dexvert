@@ -20,9 +20,13 @@ tiptoe(
 
 The following ${formats.length.toLocaleString()} file formats are support by dexvert.
 
+${formats.map(f => f.family).unique().multiSort(f => f).map(familyid => `
+
+## ${familyid.toProperCase()} (${formats.filter(f => f.family===familyid).length.toLocaleString()})
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-${formats.multiSort([f => f.family, f => f.name]).map(f => (`${f.family} | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${(f.notes || "").replaceAll("\n", " ")}`)).join("\n")}
+${formats.filter(f => f.family===familyid).multiSort(f => f.name).map(f => (`${f.family} | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${(f.notes || "").replaceAll("\n", " ")}`)).join("\n")}
+`).join("\n")}
 `, XU.UTF8, this);
 	},
 	XU.FINISH

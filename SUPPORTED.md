@@ -2,6 +2,9 @@
 
 The following 207 file formats are support by dexvert.
 
+
+
+## Archive (38)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -42,6 +45,12 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
+
+
+
+## Audio (9)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | Some 8SVX files don't have a sample rate in the file. In these cases I try multiple different common sample rates.
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | 
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | 
@@ -51,6 +60,12 @@ audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLA
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | 
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | 
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | 
+
+
+
+## Document (16)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | 
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | 
 document | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | 
@@ -67,6 +82,12 @@ document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rt
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | 
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | 
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | 
+
+
+
+## Image (93)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 
@@ -160,6 +181,12 @@ image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp 
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | 
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | 
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | 
+
+
+
+## Music (21)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wiki/AHX_(Abyss)) | .ahx | 
 music | [AdLib/Roland Song](http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song) | .rol | 
 music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | 
@@ -181,6 +208,12 @@ music | [Sidmon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .si
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | 
 music | [Star Tracker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | 
 music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) | .p61 .p61a .p60 .p60a .p50 .p50a .p41 .p40 p40a .p40b .p30 p30a .p22 .p22a | 
+
+
+
+## Text (21)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | 
 text | AMOS Source Code | .amossourcecode | 
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | 
@@ -202,6 +235,12 @@ text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pasca
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | 
+
+
+
+## Video (9)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | 
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | 
 video | Fantavision Movie | .mve |  PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 1 minute and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. Lastly, I just cheat by running DOSbox and recording the screen, so there is dosbox video at the start heh.
@@ -211,3 +250,4 @@ video | [Interchange File Format Animation](http://fileformats.archiveteam.org/w
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi |  Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | 
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | 
+

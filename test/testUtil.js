@@ -2,6 +2,7 @@
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
 	tiptoe = require("tiptoe");
@@ -37,7 +38,10 @@ exports.logResult = function logResult(status, sampleSubFilePath, msg="", ...arg
 
 	logCounts[status] = logCounts[status] + 1;
 
-	XU.log`${XU.cf.fg.cyan("[")}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.cf.fg.cyan("]")} ${XU.c.reset + XU.c.bold + sampleSubFilePath} ${XU.c.fg.orange + msg} ${args.length ? args : ""}`;
+	if(argv.verbose || status!=="PASS")
+		XU.log`\n${XU.cf.fg.cyan("[")}${(status==="FAIL" ? XU.c.blink : "") + XU.c.fg[{FAIL : "red", SKIP : "yellow", PASS : "green"}[status]] + status}${XU.cf.fg.cyan("]")} ${XU.c.reset + XU.c.bold + sampleSubFilePath} ${XU.c.fg.orange + msg} ${args.length ? args : ""}`;	// eslint-disable-line max-len
+	else
+		process.stdout.write(".");
 
 	return true;
 };

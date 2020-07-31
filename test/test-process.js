@@ -24,6 +24,7 @@ Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
   --file=<subFilePath>	Only process the given sample subFilePath
+  --verbose				Set if you want more verbose output
   --full                Run ALL tests, even long running ones
   --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
   --record              Take the results of the identifications and save them as the future expected results`;

@@ -19,6 +19,7 @@ Will test all sample files to ensure dexvert.identify() works correctly.
 Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
+  --verbose				Set if you want more verbose output
   --file=<subFilePath>	Only identify the given sample subFilePath
   --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
   --record              Take the results of the identifications and save them as the future expected results`;

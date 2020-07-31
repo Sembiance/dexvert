@@ -49,7 +49,7 @@ tiptoe(
 
 		fs.writeFile(path.join(__dirname, "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 
-Convert/extract ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f && f.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f && f.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 

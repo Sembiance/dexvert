@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 42 file formats are NOT currently supported by dexvert.
+The following 43 file formats are NOT currently supported by dexvert.
 
 
 
@@ -78,9 +78,10 @@ image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Pal
 
 
 
-## Other (1)
+## Other (2)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl |  Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 
 

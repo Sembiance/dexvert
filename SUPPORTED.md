@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 227 file formats are support by dexvert.
+The following 259 file formats are support by dexvert.
 
 
 
-## Archive (39)
+## Archive (40)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -20,7 +20,7 @@ archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchm
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | 
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | 
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl |  This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
-archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip | 
+archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | 
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | 
 archive | [ISO Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso | 
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | 
@@ -33,6 +33,7 @@ archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox |
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | 
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ | 
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | 
+archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | 
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | 
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | 
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | 
@@ -86,7 +87,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (112)
+## Image (143)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -104,14 +105,16 @@ image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg |
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
-image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp | 
+image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
+image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | 
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | 
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | 
+image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 | 
 image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | 
@@ -126,6 +129,7 @@ image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | 
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | 
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | 
+image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | 
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | 
 image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | 
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
@@ -138,11 +142,14 @@ image | [GX1 Bitmap](http://fileformats.archiveteam.org/wiki/GX1) | .gx1 |
 image | [GX2 Bitmap](http://fileformats.archiveteam.org/wiki/GX2) | .gx2 | 
 image | [Haiku Vector Icon Format](http://fileformats.archiveteam.org/wiki/Haiku_Vector_Icon_Format) | .hvif |  Several HVIF files don't appear to convert correctly with abydosconvert. I located an hvif2svg haskell program but it's even worse. So for now these particular HVIF files just won't be supported.
 image | [Hi-Eddi](http://fileformats.archiveteam.org/wiki/Hi-Eddit) | .hed | 
+image | [Hi-Pic Creator](http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator) | .hpc | 
 image | [High Efficiency Image File](http://fileformats.archiveteam.org/wiki/HEIF) | .heic .heif | 
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | 
 image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff |  Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | 
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | 
+image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph .ipt | 
+image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | 
 image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | 
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | 
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | 
@@ -151,38 +158,56 @@ image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIF
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | 
 image | Koala Paint | .gig .koa .kla | 
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | 
+image | [Kodak FlashPix](http://fileformats.archiveteam.org/wiki/FPX) | .fpx | 
 image | [Kodak Photo CD](http://fileformats.archiveteam.org/wiki/Photo_CD) | .pcd | 
+image | [Krita](http://fileformats.archiveteam.org/wiki/Krita) | .kra | 
 image | [LEADTools Compressed Image](http://fileformats.archiveteam.org/wiki/CMP) | .cmp | 
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | 
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | 
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | 
+image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | 
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | 
 image | [Microsoft Windows Cursor](http://fileformats.archiveteam.org/wiki/CUR) | .cur | 
 image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org/wiki/EMF) | .emf | 
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | 
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | 
+image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture) | .mpp | 
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
+image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | 
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap |  Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo | 
+image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | 
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | 
+image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | 
 image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | 
+image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | 
+image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | 
 image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | 
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | 
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | 
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | 
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
+image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | 
+image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | 
 image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | 
 image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm | 
+image | [Portable Float Map](http://fileformats.archiveteam.org/wiki/PFM) | .pfm | 
 image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm | 
 image | [Portable Network Graphic](http://fileformats.archiveteam.org/wiki/PNG) | .png | 
 image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats) | .ppm | 
+image | [Prism Paint](http://fileformats.archiveteam.org/wiki/Prism_Paint) | .pnt .tpi | 
+image | [Quantum Paint](http://fileformats.archiveteam.org/wiki/QuantumPaint) | .pbx | 
 image | [QuickBasic BSAVE Image](http://fileformats.archiveteam.org/wiki/BSAVE_Image) | .pic .scn .bsv .cgx | 
 image | [QuickTime Image Format](http://fileformats.archiveteam.org/wiki/QTIF) | .qtif .qif | Not all QTIF sub formats are not supported.
+image | [Radiance HDR](http://fileformats.archiveteam.org/wiki/Radiance_HDR) | .hdr .rgbe .xyze .pic .rad | 
+image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | 
 image | [Scalable Vectory Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | 
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | 
+image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | 
 image | [Spectrum 512 Compressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spc | 
 image | [Spectrum 512 Uncompressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spu | 
+image | [STAD PAC](http://fileformats.archiveteam.org/wiki/STAD_PAC) | .pac .seq | 
 image | [Stardent AVS X](http://fileformats.archiveteam.org/wiki/AVS_X_image) | .avs .mbfavs .x | 
 image | [STOS Memory Bank](http://fileformats.archiveteam.org/wiki/STOS_memory_bank) | .mbk .mbs | 
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp3 | 
@@ -190,17 +215,24 @@ image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Pa
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp2 | 
 image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | 
 image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | 
+image | [Tencent TAP](http://fileformats.archiveteam.org/wiki/TAP_(Tencent)) | .tap | 
 image | [Texas Instruments Calculator Image](http://fileformats.archiveteam.org/wiki/TI_picture_file) | .82i .8ca .8ci .92i .73i .83i .8xi .85i .86i .89i .9xi .v2i | 
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | 
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | 
+image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | 
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | 
+image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Texture_Format) | .vtf | 
+image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | 
+image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | 
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp | 
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | 
-image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp | 
+image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp .wap wbm | 
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | 
+image | [X Window Dump](http://fileformats.archiveteam.org/wiki/XWD) | .xwd .dmp | 
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | 
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | 
+image | [XGA](http://fileformats.archiveteam.org/wiki/XGA_(Falcon)) | .xga | 
 
 
 

@@ -1,0 +1,51 @@
+# pcxLib.exe compression program
+0	string/b	pcxLib
+>0x0A	string/b	Copyright\ (c)\ Genus\ Microprogramming,\ Inc.	pcxLib compressed
+
+# TTW! compressed files
+0	string/b	TTW!
+>0x08	belong	0
+>0x0C	byte	1	TTW Compressed File
+
+# Amiga Action Reply 3 Freeze File
+0	string/b	\x41\x52\x50\x33\x00
+>8	string/b	\x00
+>12	string/b	\x00\x00\x00\x00\x00\x08\x00\x00\x00
+>22	string/b	\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00	Amiga Action Reply 3 Freeze File
+
+# IFF LIST packed
+0	string/b	LIST
+>8	string/b	SSETPROP	IFF LIST file
+
+# IFF FORMs
+0	string/b	FORM
+>8	string/b	MLDFBMHD	MLDF BMHD file
+
+# AMOS Memory Bank (Tracker )
+0		string/b	AmBk	AMOS Memory Bank
+>12		string/b	Tracker\ 	\b, Tracker format
+>12		string/b	Data\ \ \ \ 	\b, Data format
+
+# RIFF types
+0		string/b	RIFF
+>8		string/b	MSFX	RIFF MSFX file
+>8		string/b	MIDS	RIFF MIDS file
+>8		string/b	STYL	RIFF STYL file
+>8		string/b	ANIM	RIFF ANIM file
+>8		string/b	MxSt	RIFF MxSt file
+
+# RIFX
+0		string/b	RIFX
+>8		string/b	MV93	RIFX MV93 file
+
+# Lingo Script
+0	string/b	\x04\x11\x71\x50\x00\x00\x00\x01\x00\x00	Lingo Script
+
+# NAPLPS Image
+0	string/b	\x0C\x0E\x20\x4C\x6F\x21\x48\x40\x40\x49\x3E\x40\x3C\x40\x40\x40\x3E	NAPLPS Image
+
+# Picasso 64 Image
+0   string/b    \x00\x18    Picasso 64 Image
+
+# Saracen Paint Image
+0   string/b    \x00\x78    Saracen Paint Image

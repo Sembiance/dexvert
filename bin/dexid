@@ -42,7 +42,7 @@ tiptoe(
 		else
 		{
 			console.log(printUtil.columnizeObjects(results, {
-				colNames   : ["confidence", "from", "magic", "extensions"],
+				colNames   : ["confidence", "from", "magic", "extensions", "extMatch"],
 				colNameMap : {confidence : "%"},
 				formatter(colName, val) { return (colName==="confidence" ? (val ? `${val}%` : "") : (colName==="extensions" ? (val || []).join(", ") : val || "")); }}));
 		}

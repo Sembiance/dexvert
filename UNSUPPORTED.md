@@ -1,13 +1,14 @@
 # Unsupported File Formats
 
-The following 43 file formats are NOT currently supported by dexvert.
+The following 45 file formats are NOT currently supported by dexvert.
 
 
 
-## 3d (3)
+## 3d (4)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 3d | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj |  A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
+3d | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | 
 3d | Sculpt 3D Scene | .scene | A 3D rendering file format. I didn't bother investigating it.
 3d | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | A 3D rendering file format meant for the web.
 
@@ -69,10 +70,11 @@ font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf |
 
 
 
-## Image (3)
+## Image (4)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin |  There is no known 'magic signature' to match against. The extension '.bin' is way to generic to match on. Abydos and Ansilove both support this, but ansi love will convert any file you throw at it. So there is no known 'safe' way to convert Binary Text files to images unless you explcitly know it's such a file. In theory a 'negative' check could be made, where if the file contains any bytes that are normally forbidden by the format. But that might not even be sufficient. Due to this it won't be supported in dexvert.
+image | [GrafX2](http://grafx2.chez.com/) | .pkm | This is a modern program and file format which none of the converter programs currently support.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 

@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 293 file formats are support by dexvert.
+The following 300 file formats are support by dexvert.
 
 
 
@@ -88,7 +88,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (176)
+## Image (182)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -116,7 +116,8 @@ image | [Canon RAW 2](http://fileformats.archiveteam.org/wiki/Canon_RAW_2) | .cr
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | 
-image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | 
+image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | 
+image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | allprims.cgm test file fails to convert
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | 
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | 
@@ -133,6 +134,7 @@ image | [Digital Picture Exchange](http://fileformats.archiveteam.org/wiki/DPX) 
 image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds | 
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | 
 image | [Doodle C64](http://fileformats.archiveteam.org/wiki/Doodle!_(C64)) | .dd .jj | 
+image | [Dr. Halo](http://fileformats.archiveteam.org/wiki/Dr._Halo) | .cut .pal .pic | 
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | 
 image | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | 
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | 
@@ -164,6 +166,7 @@ image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/I
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | 
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | 
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | 
+image | [Inset PIX](http://fileformats.archiveteam.org/wiki/Inset_PIX) | .pix | 
 image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph .ipt | 
 image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | 
 image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | 
@@ -186,6 +189,7 @@ image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns |
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | 
 image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | 
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | 
+image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | 
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | 
 image | [Microsoft Windows Cursor](http://fileformats.archiveteam.org/wiki/CUR) | .cur | 
 image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org/wiki/EMF) | .emf | 
@@ -217,6 +221,7 @@ image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/P
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | 
 image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | 
+image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | 
 image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | 
 image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm | 
 image | [Portable Float Map](http://fileformats.archiveteam.org/wiki/PFM) | .pfm | 
@@ -246,6 +251,7 @@ image | [STOS Memory Bank](http://fileformats.archiveteam.org/wiki/STOS_memory_b
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp3 | 
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp1 | 
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp2 | 
+image | [Sun Icon](http://fileformats.archiveteam.org/wiki/Sun_icon) | .ico .icon | Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.
 image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | 
 image | [Synthetic Arts](http://fileformats.archiveteam.org/wiki/Synthetic_Arts) | .srt | 
 image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | 
@@ -324,7 +330,7 @@ text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_R
 
 
 
-## Video (9)
+## Video (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | 
@@ -334,6 +340,7 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc |
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | 
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | 
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi |  Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
+video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | 
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | 
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | 
 

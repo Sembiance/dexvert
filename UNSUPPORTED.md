@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 45 file formats are NOT currently supported by dexvert.
+The following 47 file formats are NOT currently supported by dexvert.
 
 
 
@@ -70,13 +70,15 @@ font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf |
 
 
 
-## Image (4)
+## Image (6)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin |  There is no known 'magic signature' to match against. The extension '.bin' is way to generic to match on. Abydos and Ansilove both support this, but ansi love will convert any file you throw at it. So there is no known 'safe' way to convert Binary Text files to images unless you explcitly know it's such a file. In theory a 'negative' check could be made, where if the file contains any bytes that are normally forbidden by the format. But that might not even be sufficient. Due to this it won't be supported in dexvert.
+image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
+image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | Couldn't find a reliable converter.
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | This is a modern program and file format which none of the converter programs currently support.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 
 
 

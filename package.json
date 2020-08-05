@@ -23,6 +23,7 @@
 		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
 		"csv-parser"       : "~2.3.3",
 		"cue-parser"       : "~0.2.1",
+		"dxf"              : "~4.4.2",
 		"fastify"          : "~3.0.2",
 		"ioctl"            : "~2.0.2",
 		"minimist"         : "~1.2.5",

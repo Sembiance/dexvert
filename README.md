@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 276 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 293 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -118,6 +118,7 @@ Gentoo users can simply install the packages below, some are available in my Gen
 Package | Program | Overlay
 ------- | ------- | -------
 app-admin/sudo | [sudo](https://www.sudo.ws/) | 
+undefined | [/mnt/compendium/DevLab/dexvert/node_modules/.bin/dxf-to-svg](https://www.npmjs.com/package/dxf) | 
 app-arch/amigadepacker | [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | dexvert
 app-arch/amitools | [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | dexvert
 app-arch/ancient | [ancient](https://github.com/temisu/ancient_format_decompressor) | dexvert
@@ -168,7 +169,10 @@ media-gfx/imagemagick | [convert](https://www.imagemagick.org/) |
 media-gfx/imagemagick | [identify](https://www.imagemagick.org/) | 
 media-gfx/nconvert | [nconvert](https://www.xnview.com/en/nconvert/) | dexvert
 media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
+media-gfx/uniconvertor | [uniconvertor](https://sk1project.net/uc2/) | dexvert
 media-gfx/xcftools | [xcf2png](http://henning.makholm.net/software) | dexvert
+media-libs/gd | [gd2topng](https://libgd.org) | 
+media-libs/gd | [gdtopng](https://libgd.org) | 
 media-libs/libavif | [avifdec](https://github.com/AOMediaCodec/libavif) | dexvert
 media-libs/libbpg | [bpgdec](http://bellard.org/bpg/) | dexvert
 media-libs/libwebp | [webpinfo](https://developers.google.com/speed/webp/download) | 
@@ -190,8 +194,10 @@ media-sound/xmp | [xmp](http://xmp.sourceforge.net/) | dexvert
 media-sound/xmp | [xmp](http://xmp.sourceforge.net/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
 media-video/ffmpeg | [ffmpeg](https://ffmpeg.org/) | 
+media-video/ffmpeg | [ffprobe](https://ffmpeg.org/) | 
 media-video/mplayer | [mplayer](http://www.mplayerhq.hu/) | 
 media-video/xanim | [xanim](http://xanim.polter.net/) | dexvert
+sci-misc/h5utils | [h5topng](https://github.com/NanoComp/h5utils/) | 
 sys-apps/file | [file](https://www.darwinsys.com/file/) | 
 sys-apps/util-linux | [mount](https://www.kernel.org/pub/linux/utils/util-linux/) | 
 sys-fs/hfsutils | [*](https://www.mars.org/home/rob/proj/hfs/) | 
@@ -202,6 +208,6 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="a52 acl alsa amr bzip2 cairo cddb cdio curl cxx dga dts dv dvd dvdnav enca encode flac fontconfig fpx gif gpl heif iconv id3tag introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith sndfile svg tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau vorbis vpx wavpack webp wmf X x264 xattr xinerama xml xorg xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/uade app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/xcftools media-libs/libavif media-libs/libbpg media-libs/libwebp media-sound/adplay media-sound/fluid-soundfont media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mplayer media-video/xanim sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl alsa amr bzip2 cairo cddb cdio curl cxx dav1d dga dts dv dvd dvdnav enca encode flac fontconfig fpx gif gnutls gpl heif iconv id3tag introspection jbig joystick jpeg jpeg2k lcms libass libglvnd live lzma lzo mad mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch png postproc postscript qt5 rtc seccomp shm smith sndfile svg tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau vorbis vpx wavpack webp wmf X x264 xattr xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/nrg2iso app-emulation/uade app-emulation/wine-vanilla app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/gifsicle media-gfx/imagemagick media-gfx/nconvert media-gfx/recoil media-gfx/uniconvertor media-gfx/xcftools media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-sound/adplay media-sound/fluid-soundfont media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mplayer media-video/xanim sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool 
 ```
 		

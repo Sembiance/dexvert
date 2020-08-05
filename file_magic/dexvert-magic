@@ -49,3 +49,6 @@
 
 # Saracen Paint Image
 0   string/b    \x00\x78    Saracen Paint Image
+
+# WAD2
+0	string/b	WAD2	WAD2 file

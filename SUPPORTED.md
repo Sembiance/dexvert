@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 276 file formats are support by dexvert.
+The following 293 file formats are support by dexvert.
 
 
 
-## Archive (40)
+## Archive (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -47,6 +47,7 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | 
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | 
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | 
+archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | 
 
 
 
@@ -87,7 +88,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (160)
+## Image (176)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -97,7 +98,7 @@ image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rl
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | 
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | 
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
-image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | 
+image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk |  Sometimes the spite frames output are all the same size and make a nice animated image (abydosconvert does this with webp output) However often this format contains multiple frames of different sizes and the 'positioning' and timing information for animation is not processed So we also run deark which just outputs all the sprite frames individually
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [Art Studio](http://fileformats.archiveteam.org/wiki/Art_Studio) | .art .aas | 
@@ -107,9 +108,11 @@ image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg |
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
+image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | 
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
+image | [Canon RAW 2](http://fileformats.archiveteam.org/wiki/Canon_RAW_2) | .cr2 | 
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | 
@@ -125,20 +128,24 @@ image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/w
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | 
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | 
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | 
+image | [Digital Negative](http://fileformats.archiveteam.org/wiki/DNG) | .dng | 
 image | [Digital Picture Exchange](http://fileformats.archiveteam.org/wiki/DPX) | .dpx | 
 image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds | 
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | 
 image | [Doodle C64](http://fileformats.archiveteam.org/wiki/Doodle!_(C64)) | .dd .jj | 
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | 
+image | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | 
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | 
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | 
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | 
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | 
+image | [Epson RAW File](http://fileformats.archiveteam.org/wiki/ERF) | .erf | 
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | 
 image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | 
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | 
+image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/RAF) | .raf | 
 image | [GEM Raster Bitmap](http://fileformats.archiveteam.org/wiki/GEM_Raster) | .img .ximg | 
 image | [GFA Artist](http://fileformats.archiveteam.org/wiki/GFA_Artist) | .art | 
 image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | 
@@ -148,7 +155,10 @@ image | [GX2 Bitmap](http://fileformats.archiveteam.org/wiki/GX2) | .gx2 |
 image | [Haiku Vector Icon Format](http://fileformats.archiveteam.org/wiki/Haiku_Vector_Icon_Format) | .hvif |  Several HVIF files don't appear to convert correctly with abydosconvert. I located an hvif2svg haskell program but it's even worse. So for now these particular HVIF files just won't be supported.
 image | [Hi-Eddi](http://fileformats.archiveteam.org/wiki/Hi-Eddit) | .hed | 
 image | [Hi-Pic Creator](http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator) | .hpc | 
+image | [Hierarchical Data Format v4](http://fileformats.archiveteam.org/wiki/HDF) | .hdf | 
+image | [Hierarchical Data Format v5](http://fileformats.archiveteam.org/wiki/HDF) | .h5 | Only support converting to grayscale.
 image | [High Efficiency Image File](http://fileformats.archiveteam.org/wiki/HEIF) | .heic .heif | 
+image | [HRU](http://fileformats.archiveteam.org/wiki/HRU) | .hru | 
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | 
 image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff |  Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | 
@@ -169,6 +179,8 @@ image | [Kodak Photo CD](http://fileformats.archiveteam.org/wiki/Photo_CD) | .pc
 image | [Kolor Raw](http://fileformats.archiveteam.org/wiki/Kolor_Raw) | .kro | 
 image | [Krita](http://fileformats.archiveteam.org/wiki/Krita) | .kra | 
 image | [LEADTools Compressed Image](http://fileformats.archiveteam.org/wiki/CMP) | .cmp | 
+image | [libgd GD Image](https://libgd.github.io/manuals/2.3.0/files/gd_gd-c.html) | .gd | 
+image | [libgd GD2 Image](https://libgd.github.io/manuals/2.3.0/files/gd_gd2-c.html) | .gd2 | 
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | 
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | 
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | 
@@ -185,7 +197,9 @@ image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx |
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap |  Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo | 
+image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | 
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | 
+image | [Olympus RAW](http://fileformats.archiveteam.org/wiki/ORF) | .orf | 
 image | [OpenDocument Drawing](http://fileformats.archiveteam.org/wiki/OpenDocument_Drawing) | .odg .otg .fodg | 
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | 
 image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | 
@@ -193,9 +207,12 @@ image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .i
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | 
 image | [Paintworks](http://fileformats.archiveteam.org/wiki/Paintworks) | .cl0 .sc0 .cl1 .sc1 .cl2 .sc2 | 
 image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | 
+image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) | .rw2 .raw .rwl | 
 image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | 
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | 
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | 
+image | [Pentax RAW](http://fileformats.archiveteam.org/wiki/Pentax_PEF) | .pef .ptx | 
+image | [PES Embroidery File](http://fileformats.archiveteam.org/wiki/PES) | .pes |  It's a vector format, but uniconvertor just embeds a PNG into the resulting SVG file. Imagemagick's convert can produce .svg versions, but it doesn't output all the original lines and no color. So we convert to both SVG and PNG with convert.
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | 
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | 

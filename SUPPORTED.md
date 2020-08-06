@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 300 file formats are support by dexvert.
+The following 317 file formats are support by dexvert.
 
 
 
-## Archive (41)
+## Archive (43)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -13,9 +13,11 @@ archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/
 archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | 
 archive | [AMOS Basic Source Code Archive](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .amos | 
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj | 
+archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | 
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | 
 archive | BOLT Game Data Archive | .blt | 
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | 
+archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 | 
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | 
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | 
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | 
@@ -88,26 +90,36 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (182)
+## Image (197)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
+image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 
 image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | 
+image | [Amica Paint](http://fileformats.archiveteam.org/wiki/Amica_Paint) | .ami | 
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | 
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | 
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk |  Sometimes the spite frames output are all the same size and make a nice animated image (abydosconvert does this with webp output) However often this format contains multiple frames of different sizes and the 'positioning' and timing information for animation is not processed So we also run deark which just outputs all the sprite frames individually
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
+image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [Art Studio](http://fileformats.archiveteam.org/wiki/Art_Studio) | .art .aas | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
 image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | 
+image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm | 
+image | [Atari APAC3 APP Image](http://fileformats.archiveteam.org/wiki/Apac3_APP) | .app .aps | 
 image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg | 
+image | Atari Graph Image | .all | 
+image | [Atari Graphics Studio](http://g2f.atari8.info/) | .ags | 
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
+image | BBC Micro Image | .bb0 .bb1 .bb2 .bb4 .bb5 | 
+image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | 
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
+image | [Big Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/BFLI) | .bfli | 
 image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | 
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
@@ -129,6 +141,7 @@ image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/w
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | 
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | 
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | 
+image | [Digi Paint](http://fileformats.archiveteam.org/wiki/Digi_Paint) | .ap3 .apv .dgi .dgp .ilc .esc .pzm .g09 .bg9 | 
 image | [Digital Negative](http://fileformats.archiveteam.org/wiki/DNG) | .dng | 
 image | [Digital Picture Exchange](http://fileformats.archiveteam.org/wiki/DPX) | .dpx | 
 image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds | 
@@ -146,10 +159,12 @@ image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb |
 image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | 
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
+image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | 
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | 
 image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/RAF) | .raf | 
 image | [GEM Raster Bitmap](http://fileformats.archiveteam.org/wiki/GEM_Raster) | .img .ximg | 
 image | [GFA Artist](http://fileformats.archiveteam.org/wiki/GFA_Artist) | .art | 
+image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt | 
 image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | 
 image | [Graphics Processor](http://fileformats.archiveteam.org/wiki/Graphics_Processor) | .pg1 .pg2 .pg3 | 
 image | [GX1 Bitmap](http://fileformats.archiveteam.org/wiki/GX1) | .gx1 | 
@@ -162,7 +177,8 @@ image | [Hierarchical Data Format v5](http://fileformats.archiveteam.org/wiki/HD
 image | [High Efficiency Image File](http://fileformats.archiveteam.org/wiki/HEIF) | .heic .heif | 
 image | [HRU](http://fileformats.archiveteam.org/wiki/HRU) | .hru | 
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | 
-image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff |  Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
+image | [IFF Amiga Contiguous Bitmap](http://fileformats.archiveteam.org/wiki/ILBM#ACBM) | .lbm .ilbm .iff .acbm | 
+image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp |  Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | 
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | 
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | 
@@ -273,6 +289,7 @@ image | [X Window Dump](http://fileformats.archiveteam.org/wiki/XWD) | .xwd .dmp
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | 
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | 
 image | [XGA](http://fileformats.archiveteam.org/wiki/XGA_(Falcon)) | .xga | 
+image | ZX Spectrum Attributes Image | .atr | 
 
 
 

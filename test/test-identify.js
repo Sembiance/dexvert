@@ -42,6 +42,14 @@ tiptoe(
 	{
 		testData = JSON.parse(_testData);
 
+		const allTypes = sampleFilePaths.map(sampleFilePath => path.dirname(sampleFilePath)).unique().map(sampleFilePath => path.basename(sampleFilePath));
+		const nonUniqueFormatids = allTypes.subtractOnce(allTypes.slice().unique());
+		if(nonUniqueFormatids.length>0)
+		{
+			XU.log`Non unique formatids: ${nonUniqueFormatids}`;
+			process.exit(1);
+		}
+
 		if(argv.format)
 			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
 		

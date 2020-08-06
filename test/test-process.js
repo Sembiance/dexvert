@@ -47,7 +47,8 @@ const SHA1_IGNORE_FILES =
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
-		"3dCK" : [/.png$/]
+		"3dCK" : [/.png$/],
+		"pds"  : [/.png$/]
 	},
 	music :
 	{

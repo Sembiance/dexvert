@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 49 file formats are NOT currently supported by dexvert.
+The following 51 file formats are NOT currently supported by dexvert.
 
 
 
@@ -53,7 +53,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Font (13)
+## Font (15)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
@@ -67,8 +67,10 @@ font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | 
+font | Oric Font | .chs | 
 font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .tdf | Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | 
+font | ZX Spectrum Font | .ch4 .ch6 .ch8 | 
 
 
 

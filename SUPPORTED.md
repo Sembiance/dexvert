@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 317 file formats are support by dexvert.
+The following 332 file formats are support by dexvert.
 
 
 
@@ -90,7 +90,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (197)
+## Image (211)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -103,13 +103,14 @@ image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Wor
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | 
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | 
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk |  Sometimes the spite frames output are all the same size and make a nice animated image (abydosconvert does this with webp output) However often this format contains multiple frames of different sizes and the 'positioning' and timing information for animation is not processed So we also run deark which just outputs all the sprite frames individually
+image | Amstrad CPC Mode 5 Image | .cm5 .gfx | 
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | 
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
 image | [Art Studio](http://fileformats.archiveteam.org/wiki/Art_Studio) | .art .aas | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
 image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | 
-image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm | 
+image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm .mic | 
 image | [Atari APAC3 APP Image](http://fileformats.archiveteam.org/wiki/Apac3_APP) | .app .aps | 
 image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg | 
 image | Atari Graph Image | .all | 
@@ -124,16 +125,22 @@ image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text))
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
+image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | 
 image | [Canon RAW 2](http://fileformats.archiveteam.org/wiki/Canon_RAW_2) | .cr2 | 
+image | [CDU-Paint Image](http://fileformats.archiveteam.org/wiki/CDU-Paint) | .cdu | 
+image | [Champions' Interlace Image](http://fileformats.archiveteam.org/wiki/Champions%27_Interlace) | .cci .cin | 
 image | [Cheese](http://fileformats.archiveteam.org/wiki/Cheese) | .che | 
 image | [ColoRIX](http://fileformats.archiveteam.org/wiki/ColoRIX) | .rix .sca .scb .scc .sce .scf .scg .sci .sck .scl .scn .sco .scp .scq .scr .sct .scu .scv .scw .scx .scy .scz | 
 image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquash) | .rgb | 
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | 
 image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | allprims.cgm test file fails to convert
+image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .ce1 .ce2 .ce3 | 
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | 
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | 
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | 
+image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | 
 image | [Dali](http://fileformats.archiveteam.org/wiki/Dali) | .sd0 .sd1 .sd2 | 
+image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush) | .bru | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 | 
 image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | 
@@ -159,6 +166,7 @@ image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb |
 image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .fcp .fpt | 
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
+image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_GraphF) | .bml .fli | 
 image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | 
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | 
 image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/RAF) | .raf | 
@@ -204,6 +212,7 @@ image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | 
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | 
 image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | 
+image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | 
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | 
 image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | 
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | 
@@ -212,6 +221,7 @@ image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | 
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | 
 image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture) | .mpp | 
+image | [Movie Maker](http://fileformats.archiveteam.org/wiki/Movie_Maker) | .bkg .shp | 
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | 
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
@@ -276,9 +286,11 @@ image | [Texas Instruments Calculator Image](http://fileformats.archiveteam.org/
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | 
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | 
 image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | 
+image | TRS-80 CLP File | .clp | 
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | 
 image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Texture_Format) | .vtf | 
+image | [VDC BitMap](http://fileformats.archiveteam.org/wiki/VBM_(VDC_BitMap)) | .vbm .bm | 
 image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | 
 image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | 
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp | 
@@ -290,6 +302,8 @@ image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm |
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | 
 image | [XGA](http://fileformats.archiveteam.org/wiki/XGA_(Falcon)) | .xga | 
 image | ZX Spectrum Attributes Image | .atr | 
+image | ZX Spectrum Border Screen | .bmc4 .bsc | 
+image | ZX Spectrum CHR$ | .ch$ | 
 
 
 
@@ -347,11 +361,12 @@ text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_R
 
 
 
-## Video (10)
+## Video (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | 
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | 
+video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | 
 video | Fantavision Movie | .mve |  PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 1 minute and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. Lastly, I just cheat by running DOSbox and recording the screen, so there is dosbox video at the start heh.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | 

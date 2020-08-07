@@ -34,6 +34,11 @@ export.meta =
   bruteUnsafe    : true								# [*] Set to true if this format isn't safe to be brute forced
 
   filesize       [8000, 9000, 10000]				# [*] Array of filesizes this format. Required to match this if not a magic magic
+
+  keepFilename   : true								# [*] Don't rename the file safely for input. ONLY USE THIS if the program
+  														  requires the original filename to be able to convert the file.
+
+  symlinkUnsafe  : true								# [*] If the converter program doesn't handle symlinks, can set this to true
 }
 
 # [*] This should return an array of step functions to follow

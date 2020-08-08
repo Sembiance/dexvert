@@ -118,6 +118,9 @@ Gentoo users can install all the above with this single command:
 \`\`\`
 USE="${programs.flatMap(p => (p.meta.gentooUseFlags || "").split(" ")).filterEmpty().multiSort(v => v).unique().join(" ")}" emerge ${programs.map(p => p.meta.gentooPackage).multiSort(v => v).unique().join(" ")}
 \`\`\`
+
+## Test Suite
+The sample files used for tests are available here: https://telparia.com/fileFormatSamples/
 		`, XU.UTF8, this);
 	},
 	XU.FINISH

@@ -63,5 +63,15 @@ exports.inputMeta = (state, p, cb) =>
 # [*] Executed immediately before the 'steps'. Useful if you need to prepare something right before built in family steps
 exports.preSteps = [];
 
-# [*]  Executed immediately after the 'steps'. Useful if you need to cleanup after built in family steps have executed
+# [*] Executed immediately after the 'steps'. Useful if you need to cleanup after built in family steps have executed
 exports.postSteps = [];
+
+
+>>> images/music
+# [*] A list of programs, in priority order, to try and convert this file with
+#     It will try a bunch of others, this is just the initial priority order. Stops at first successful conversion.
+exports.converterPriorty = ["xmp", "openmpt123"]
+
+# [*] IMAGE ONLY. A list of programs to EXCLUDE from attempts at conversion.
+#     Can also specify ["*"] and then only programs mentioned in exports.converterPriorty will be ran
+exports.converterExclude = ["deark"]

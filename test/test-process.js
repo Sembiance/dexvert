@@ -47,7 +47,11 @@ const SHA1_IGNORE_FILES =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK" : [/.png$/],
-		"pds"  : [/.png$/]
+		"pds"  : [/.png$/],
+
+		// Inkscape doesn't always produce the same exact SVG file, even with the same args and inputs.
+		"cvg" : [/.svg$/],
+		"eps" : [/.svg$/]
 	},
 	music :
 	{
@@ -57,8 +61,8 @@ const SHA1_IGNORE_FILES =
 	video :
 	{
 		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
-		"movieSetter" : [/.mp4$/],
-		"fantavision" : [/.mp4$/]
+		"fantavision" : [/.mp4$/],
+		"movieSetter" : [/.mp4$/]
 	}
 };
 

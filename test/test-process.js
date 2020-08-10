@@ -237,7 +237,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			(results.output.files || []).forEach(outSubFilePath =>
 			{
 				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
-					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath}`);
+					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath} (Expected: ${expectedFiles.join(", ")})`);
 
 				if(SHA1_IGNORE_FILES[family] &&
 				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) &&
@@ -269,7 +269,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			}
 
 			this.parallel()(undefined, status==="PASS");
-			if(status!=="FAIL")
+			if(status!=="FAIL" && !argv.keep)
 				fileUtil.unlink(outDirPath, this.parallel());
 		},
 		cb

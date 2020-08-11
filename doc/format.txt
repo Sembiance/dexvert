@@ -33,7 +33,9 @@ export.meta =
 
   bruteUnsafe    : true								# [*] Set to true if this format isn't safe to be brute forced
 
-  filesize       [8000, 9000, 10000]				# [*] Array of filesizes this format. Required to match this if not a magic magic
+  filesize       [8000, [9000, 10000]]				# [*] Array of filesizes this format. Required to match this if not a magic magic
+                 [state => ([100, 300])]				  Can provide a sync function that takes state and returns file sizes
+                                                          Can optionally include or return an array of file sizes
 
   keepFilename   : true								# [*] Don't rename the file safely for input. ONLY USE THIS if the program
   														  requires the original filename to be able to convert the file.

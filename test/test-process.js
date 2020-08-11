@@ -200,7 +200,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			}
 
 			if(!testData.hasOwnProperty(sampleSubFilePath))
-				return this(undefined, "FAIL", "No test data for this file", newTestData);
+				return this(undefined, "FAIL", "No test data for this file", `${results.id.family}/${results.id.formatid}`, newTestData);
 
 			const sampleTestData = testData[sampleSubFilePath];
 			if(!!results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq

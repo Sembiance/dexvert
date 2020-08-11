@@ -52,3 +52,9 @@
 
 # WAD2
 0	string/b	WAD2	WAD2 file
+
+# multiArtist
+0   string/b    \x4D\x47\x48\x01	multiArtist
+
+# Paintworks
+54	string/b	ANvisionA	Paintworks

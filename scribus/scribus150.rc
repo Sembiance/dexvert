@@ -1,0 +1,597 @@
+<SCRIBUSRC VERSION="1.5.0">
+ <UI UseGrayscaleIcons="0" StickyTools="0" IconSet="Scribus 1.5.1" UserPreferredLocale="System" UseDocumentTabs="0" Theme="" MouseMoveTimeout="150" ApplicationFontSize="9" ShowStartupDialog="0" ShowSplashOnStartup="0" UseSmallWidgets="0" ScrollWheelJump="40" RecentDocumentCount="5" PaletteFontSize="9"/>
+ <DocumentSetup BleedLeft="0.000" BleedRight="0.000" PageSize="Letter" MarginRight="40.000" PageOrientation="0" AutoSaveDir="" BleedBottom="0.000" PagePositioning="0" MarginLeft="40.000" MarginBottom="40.000" BleedTop="0.000" AutoSaveLoc="1" MarginTop="40.000" AutoSaveCount="1" UnitIndex="2" AutoSave="0" AutoSaveTime="600000" Language="en_US" PageHeight="792.000" SaveCompressed="0" MarginPreset="0" AutoSaveKeep="0" PageWidth="612.000"/>
+ <Paths Profiles="" Scripts="" Documents="/tmp" Templates=""/>
+ <Guides MinorGridSpacing="20.002" ShowRulers="1" ObjectToGuideSnapRadius="10.000" ShowGrid="0" ShowMargins="1" BaselineGridColor="#c0c0c0" ShowBaselineGrid="0" ShowControls="0" ShowFrames="1" renderStack="2 0 4 1 3" BaselineGridDistance="14.400" MinorGridColor="#00ff00" ShowColumnBorders="1" GuidesColor="#000080" ShowLinks="0" BaselineGridOffset="0.000" MajorGridSpacing="100.001" ShowLayerMarkers="0" ShowGuides="1" GridType="0" MarginColor="#0000ff" ShowBleed="1" ShowImages="1" GrabRadius="4" RulerMode="1" MajorGridColor="#00ff00"/>
+ <Miscellaneous LoremIpsumParagraphs="10" ShowStylePreview="1" LoremIpsumUseStandard="0" saveEmergencyFile="0"/>
+ <StoryEditor FontColorBackground="#ffffff" Font="Sans Serif,9,-1,5,50,0,0,0,0,0" SmartTextSelection="0"/>
+ <Display PageBorderColor="#ff0000" ScratchRight="100.001" FrameLockColor="#800000" FrameLinkColor="#ff0000" ShowVerifierWarningsOnCanvas="1" ShowPageShadow="1" ShowMarginsFilled="0" DisplayScale="1.50000000" FrameSelectedColor="#ff0000" ShowAutosaveClockOnCanvas="0" FrameGroupColor="#008080" ToolTips="1" ScratchColor="#efefef" ShowMouseCoordinates="1" PageColor="#ffffff" ScratchTop="20.002" PageGapVertical="40.003" ControlCharColor="#800000" PageGapHorizontal="0.000" FrameNormColor="#000000" FrameAnnotationColor="#0000ff" ScratchBottom="20.002" ScratchLeft="100.001"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Agate Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Agate Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Agate Normal-Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Andale Mono Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Ann Stone"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Arial Black Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Arial Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Arial Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Arial Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Arial Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="ArnoldBoecklin ExtraBold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Baskerville Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Baskerville Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Baskerville Normal-Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Becker Medium"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Blippo Heavy"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Bodoni Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Bodoni Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Bodoni Normal-Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Braille-HC Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Brushstroke Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Cabin Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Caligula Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="CarrickCaps Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Century Schoolbook L Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Century Schoolbook L Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Century Schoolbook L Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Century Schoolbook L Roman"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Cheq Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="ClassicHeavy Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Comfortaa Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Comic Sans MS Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Comic Sans MS Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Cooper Heavy"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Coronet SemiBold-Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier New Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier New Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier New Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier New Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Courier Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Crackling Fire"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Crillee Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="CuneiFont Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="DavysBigKeyCaps Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Math TeX Gyre Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Bold Oblique"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Book"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Condensed"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Condensed Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Condensed Bold Oblique"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Condensed Oblique"/>
+ <Font Embed="1" Subset="0" Use="1" Name="DejaVu Sans ExtraLight"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Mono Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Mono Bold Oblique"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Mono Book"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Mono Oblique"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Sans Oblique"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Book"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Condensed"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Condensed Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Condensed Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Condensed Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="DejaVu Serif Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Dingbats Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Dobkin Script"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Dragonwick Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Droid Sans Mono Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Elizabeth ANN"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Engraver Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras-Black SemiBold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras-Light Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras-Medium Medium"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Eras-UltraBlk Heavy"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Fabrica Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Florence Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Forum Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="FrizQuadrata Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="FrizQuadrata Thin"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Futura_Poster Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Garamond Medium-Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="GenoaItalic Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="GenoaRoman Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Georgia Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Georgia Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Georgia Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Georgia Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="GoodCityModern Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Goudy-Old-Style Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Goudy-Old-Style Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Goudy-Old-Style Normal-Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="IglooLaser Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Impact Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Mono Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Mono Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Mono Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Mono Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Sans Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Sans Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Sans Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Sans Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Serif Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Serif Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Serif Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Liberation Serif Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Linotext Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Luxembourg Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Manzanita Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Mazama Plain"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Muriel Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Mono L Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Mono L Bold Oblique"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Mono L Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Mono L Regular Oblique"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Roman No9 L Medium"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Roman No9 L Medium Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Roman No9 L Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Roman No9 L Regular Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Bold Condensed"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Bold Condensed Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Regular Condensed"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Regular Condensed Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Nimbus Sans L Regular Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="OSWALDblack Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Old-Town Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Old-Town Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Old-TownCnd Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Old-TownExt Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="ParkAvenue Normal"/>
+ <Font Embed="1" Subset="0" Use="1" Name="PostAntiqua Roman"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Rechtman Script"/>
+ <Font Embed="1" Subset="0" Use="1" Name="RoostHeavy Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Rudelsberg Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Salter Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Shalom OldStyle"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Shalom Script"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Shalom Stick"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Shohl Fold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Sinaloa Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Slogan Normal"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Souliyo Unicode Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Spooky Plain"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Standard Symbols L Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Tekton Display SSi Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="TempoFont Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="TempoFontItalic Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Terminus (TTF) Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Terminus (TTF) Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Terminus (TTF) Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Terminus (TTF) Medium"/>
+ <Font Embed="1" Subset="0" Use="1" Name="TerminusBold (TTF) Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Times New Roman Bold"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Times New Roman Bold Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Times New Roman Italic"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Times New Roman Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Trebuchet MS Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Trebuchet MS Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Trebuchet MS Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Trebuchet MS Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Tribeca Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Bookman L Demi Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Bookman L Demi Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Bookman L Light"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Bookman L Light Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Chancery L Medium Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Gothic L Book"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Gothic L Book Oblique"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Gothic L Demi"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Gothic L Demi Oblique"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Palladio L Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Palladio L Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Palladio L Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="URW Palladio L Roman"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Unifont CSUR Medium"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Unifont Medium"/>
+ <Font Embed="1" Subset="1" Use="1" Name="Unifont Upper Medium"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Verdana Bold"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Verdana Bold Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Verdana Italic"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Verdana Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Victoriana Display SSi Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="Webdings Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="WindsorDemi Regular"/>
+ <Font Embed="1" Subset="0" Use="1" Name="ZaleskiCaps Regular"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 16-full"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8-alt"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8-fantasy"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8-mcr"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8-tall"/>
+ <Font Embed="1" Subset="1" Use="1" Name="unscii 8-thin"/>
+ <Fonts AutomaticSubstitution="0"/>
+ <Typography SuperScriptScaling="66" SubScriptScaling="66" AutomaticLineSpacing="100" StrikeThruDistance="-1" UnderlineDistance="-1" UnderlineWidth="-1" SmallCapsScaling="75" SuperScriptDistance="33" SubScriptDistance="33" StrikeThruWidth="-1"/>
+ <ItemTools ImageLowResType="1" LineWidth="1.000" LineStartArrow="0" LineStyle="1" ImageScaleX="1.000" PolygonCurvature="0.000" CalligraphicPenAngle="0" PolygonOuterCurvature="0.000" TextStrokeColorShade="100" SpiralEndAngle="1080.000" ImageFillColor="None" TextColumnCount="1" TabFillCharacter="" ImageAspectRatio="1" CalligraphicPenFillColorShade="100" ImageScaleType="1" TextTabWidth="36.000" PolygonCorners="4" PolygonFactor="0.502" ShapeLineColorShade="100" ImageFillColorShade="100" ImageStrokeColor="None" ShapeFillColor="None" LineColor="Black" TextBackgroundColor="None" TextColumnGap="0.000" ImageStrokeColorShade="100" LineEndArrow="0" CalligraphicPenStyle="1" SpiralStartAngle="0.000" CalligraphicPenLineColorShade="100" TextColor="Black" ShapeLineColor="Black" LineColorShade="100" ImageScaleY="1.000" TextDistanceLeft="0.000" TextDistanceRight="0.000" TextStrokeColor="Black" TextColorShade="100" CalligraphicPenFillColor="Black" CalligraphicPenWidth="10" ShapeFillColorShade="100" ShapeLineWidth="1.000" ArcSweepAngle="300.000" FontSize="12" TextDistanceTop="0.000" ImageUseEmbeddedPath="0" PolygonInnerRotation="0.000" ShapeLineStyle="1" TextBackgroundColorShade="100" ArcStartAngle="30.000" PolygonUseFactor="0" FontFace="Arial Regular" TextLineColor="None" PolygonRotation="0.000" CalligraphicPenLineColor="Black" TextDistanceBottom="0.000" SpiralFactor="1.200" CalligraphicPenLineWidth="1" TextLineColorShade="100"/>
+ <OperatorTools DisplayOffsetX="10.001" DisplayOffsetY="10.001" MagnificationStep="25" RotationConstrainAngle="15.000" MinimumMagnification="1" MaximumMagnification="32000"/>
+ <MainWindow Height="1080" ScreenNumber="0" Width="1920" Maximized="0" XPosition="0" YPosition="0"/>
+ <ScrapBook CopyToScrapbook="1" WritePreviews="1" PersistentScrapbook="0" ScrapbookCopies="10"/>
+ <PageSets>
+  <Set Columns="1" FirstPage="0" Name="Single Page" Rows="1"/>
+  <Set Columns="2" FirstPage="1" Name="Facing Pages" Rows="1">
+   <PageNames Name="Left Page"/>
+   <PageNames Name="Right Page"/>
+  </Set>
+  <Set Columns="3" FirstPage="0" Name="3-Fold" Rows="1">
+   <PageNames Name="Left Page"/>
+   <PageNames Name="Middle"/>
+   <PageNames Name="Right Page"/>
+  </Set>
+  <Set Columns="4" FirstPage="0" Name="4-Fold" Rows="1">
+   <PageNames Name="Left Page"/>
+   <PageNames Name="Middle Left"/>
+   <PageNames Name="Middle Right"/>
+   <PageNames Name="Right Page"/>
+  </Set>
+ </PageSets>
+ <PreflightVerifier ShowPagesWithoutErrors="0" ShowNonPrintingLayerErrors="0" CurrentProfile="PDF 1.4"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="1" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="0" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF 1.3" CheckOrphans="1" CheckTransparency="1" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="1" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="0" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF 1.4" CheckOrphans="1" CheckTransparency="0" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="1" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="0" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF 1.5" CheckOrphans="1" CheckTransparency="0" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="0" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="0" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF 1.6" CheckOrphans="1" CheckTransparency="0" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="1" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="1" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="1" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF/X-1a" CheckOrphans="1" CheckTransparency="1" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="1" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="1" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="1" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF/X-3" CheckOrphans="1" CheckTransparency="1" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="0" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="1" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="1" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="1" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PDF/X-4" CheckOrphans="1" CheckTransparency="0" CheckEmptyTextFrames="1"/>
+ <VerifierProfile CheckGlyphs="1" MaximumResolution="2400.000" CheckFontIsOpenType="0" CheckResolution="1" CheckPartFilledImageFrames="0" CheckForGIF="1" CheckNotCMYKOrSpot="0" CheckFontNotEmbedded="0" MinimumResolution="144.000" AutoCheck="1" CheckOffConflictLayers="0" CheckDeviceColorsAndOutputIntent="0" CheckRasterPDF="1" IgnoreErrors="0" CheckAnnotations="0" CheckAppliedMasterDifferentSide="1" IgnoreOffLayers="0" CheckOverflow="1" CheckPictures="1" Name="PostScript" CheckOrphans="1" CheckTransparency="1" CheckEmptyTextFrames="1"/>
+ <ColorManagement DefaultPrinterProfile="ISO Coated v2 300% (basICColor)" DefaultIntentColors="1" DefaultImageCMYKProfile="ISO Coated v2 300% (basICColor)" GamutCheck="0" DefaultImageRGBProfile="sRGB display profile (ICC v2.2)" SoftProofFullOn="0" SoftProofOn="0" DefaultSolorColorCMYKProfile="ISO Coated v2 300% (basICColor)" DefaultSolidColorRGBProfile="sRGB display profile (ICC v2.2)" DefaultMonitorProfile="sRGB display profile (ICC v2.2)" DefaultIntentImages="0" ColorManagementActive="0" BlackPoint="1"/>
+ <Printer GCRMode="0" File="" ClipToMargins="0" Name="" Command=""/>
+ <PrintPreview Cyan="1" InkCoverage="0" InkThreshold="250" Black="1" Mode="0" AntiAliasing="1" Transparency="0" Yellow="1" Magenta="1"/>
+ <PDFOutputPreview Cyan="1" InkCoverage="0" InkThreshold="250" CMYKMode="0" Black="1" AntiAliasing="1" Transparency="0" Yellow="1" Magenta="1"/>
+ <PSOutputPreview Cyan="1" InkCoverage="0" InkThreshold="250" CMYKMode="0" Black="1" AntiAliasing="1" Transparency="0" Yellow="1" PSLevel="3" Magenta="1"/>
+ <ExternalTools Uniconvertor="uniconv" LatexForceDpi="1" LatexEditor="" LatexStartWithEmptyFrames="0" GhostscriptAntiAliasGraphics="1" Resolution="72" PDFViewer="" GhostscriptAntiAliasText="1" LatexResolution="72" ImageEditor="gimp" WebBrowser="" Ghostscript="gs">
+  <LatexConfig file="100_latex.xml" command="pdflatex --interaction nonstopmode"/>
+  <LatexConfig file="200_gnuplot.xml" command="gnuplot"/>
+  <LatexConfig file="300_lilypond.xml" command="lilypond --pdf"/>
+  <LatexConfig file="400_dot.xml" command="dot -Tsvg %file -o %file.svg"/>
+  <LatexConfig file="500_povray.xml" command="povray +WL0 -D +W$scribus_width_px$ +H$scribus_height_px$ +Q$scribus_quality$ $scribus_antialias$$scribus_aathres$ +R$scribus_aadepth$ +I%file"/>
+ </ExternalTools>
+ <Hyphenator AutomaticCheck="0" Automatic="1"/>
+ <Shortcut Action="BarcodeGenerator" KeySequence=""/>
+ <Shortcut Action="ColorWheel" KeySequence=""/>
+ <Shortcut Action="ExportAsImage" KeySequence="Ctrl+Shift+E"/>
+ <Shortcut Action="ExportAsSVG" KeySequence=""/>
+ <Shortcut Action="ExportAsXPS" KeySequence=""/>
+ <Shortcut Action="FlattenPath" KeySequence=""/>
+ <Shortcut Action="FontPreview" KeySequence=""/>
+ <Shortcut Action="LensEffects" KeySequence=""/>
+ <Shortcut Action="MeshDistortion" KeySequence=""/>
+ <Shortcut Action="NewFromDocumentTemplate" KeySequence="Ctrl+Alt+N"/>
+ <Shortcut Action="OutputPreviewPDF" KeySequence=""/>
+ <Shortcut Action="OutputPreviewPS" KeySequence=""/>
+ <Shortcut Action="PathAlongPath" KeySequence=""/>
+ <Shortcut Action="PathConnect" KeySequence=""/>
+ <Shortcut Action="PathCutter" KeySequence=""/>
+ <Shortcut Action="PathFinder" KeySequence=""/>
+ <Shortcut Action="PathStroker" KeySequence=""/>
+ <Shortcut Action="Picture Browser" KeySequence=""/>
+ <Shortcut Action="PrintPreview" KeySequence=""/>
+ <Shortcut Action="SaveAsDocumentTemplate" KeySequence="Ctrl+Alt+S"/>
+ <Shortcut Action="ShortWords" KeySequence=""/>
+ <Shortcut Action="SmoothPath" KeySequence=""/>
+ <Shortcut Action="Subdivide" KeySequence=""/>
+ <Shortcut Action="alignBlock" KeySequence=""/>
+ <Shortcut Action="alignCenter" KeySequence=""/>
+ <Shortcut Action="alignForced" KeySequence=""/>
+ <Shortcut Action="alignLeft" KeySequence=""/>
+ <Shortcut Action="alignRight" KeySequence=""/>
+ <Shortcut Action="editActionMode" KeySequence=""/>
+ <Shortcut Action="editClearContents" KeySequence="Ctrl+Shift+Del"/>
+ <Shortcut Action="editColorsAndFills" KeySequence=""/>
+ <Shortcut Action="editCopy" KeySequence="Ctrl+C"/>
+ <Shortcut Action="editCopyContents" KeySequence="Ctrl+Shift+C"/>
+ <Shortcut Action="editCut" KeySequence="Ctrl+X"/>
+ <Shortcut Action="editDeselectAll" KeySequence="Ctrl+Shift+A"/>
+ <Shortcut Action="editEditRenderSource" KeySequence=""/>
+ <Shortcut Action="editEditWithImageEditor" KeySequence=""/>
+ <Shortcut Action="editJavascripts" KeySequence=""/>
+ <Shortcut Action="editMark" KeySequence=""/>
+ <Shortcut Action="editMarks" KeySequence=""/>
+ <Shortcut Action="editMasterPages" KeySequence=""/>
+ <Shortcut Action="editNotesStyles" KeySequence=""/>
+ <Shortcut Action="editPaste" KeySequence="Ctrl+V"/>
+ <Shortcut Action="editPasteContents" KeySequence="Ctrl+Shift+V"/>
+ <Shortcut Action="editPasteContentsAbs" KeySequence="Ctrl+Alt+Shift+V"/>
+ <Shortcut Action="editPasteImageFromClipboard" KeySequence=""/>
+ <Shortcut Action="editRedoAction" KeySequence="Ctrl+Shift+Z"/>
+ <Shortcut Action="editReplaceColors" KeySequence=""/>
+ <Shortcut Action="editSearchReplace" KeySequence="Ctrl+F"/>
+ <Shortcut Action="editSelectAll" KeySequence="Ctrl+A"/>
+ <Shortcut Action="editSelectAllOnLayer" KeySequence="Ctrl+Alt+A"/>
+ <Shortcut Action="editStyles" KeySequence="F4"/>
+ <Shortcut Action="editTruncateContents" KeySequence=""/>
+ <Shortcut Action="editUndoAction" KeySequence="Ctrl+Z"/>
+ <Shortcut Action="extrasDeHyphenateText" KeySequence=""/>
+ <Shortcut Action="extrasGenerateTableOfContents" KeySequence=""/>
+ <Shortcut Action="extrasHyphenateText" KeySequence=""/>
+ <Shortcut Action="extrasManageImages" KeySequence=""/>
+ <Shortcut Action="extrasUpdateDocument" KeySequence=""/>
+ <Shortcut Action="fileClose" KeySequence="Ctrl+W"/>
+ <Shortcut Action="fileCollect" KeySequence=""/>
+ <Shortcut Action="fileDocSetup150" KeySequence=""/>
+ <Shortcut Action="fileExportAsEPS" KeySequence=""/>
+ <Shortcut Action="fileExportAsPDF" KeySequence="Ctrl+Shift+P"/>
+ <Shortcut Action="fileExportText" KeySequence=""/>
+ <Shortcut Action="fileImportAppendText" KeySequence=""/>
+ <Shortcut Action="fileImportImage" KeySequence="Ctrl+I"/>
+ <Shortcut Action="fileImportText" KeySequence="Ctrl+I"/>
+ <Shortcut Action="fileImportText2" KeySequence=""/>
+ <Shortcut Action="fileImportVector" KeySequence=""/>
+ <Shortcut Action="fileNew" KeySequence="Ctrl+N"/>
+ <Shortcut Action="fileNewFromTemplate" KeySequence="Ctrl+Alt+N"/>
+ <Shortcut Action="fileOpen" KeySequence="Ctrl+O"/>
+ <Shortcut Action="filePreferences150" KeySequence=""/>
+ <Shortcut Action="filePrint" KeySequence="Ctrl+P"/>
+ <Shortcut Action="fileQuit" KeySequence="Ctrl+Q"/>
+ <Shortcut Action="fileRevert" KeySequence=""/>
+ <Shortcut Action="fileSave" KeySequence="Ctrl+S"/>
+ <Shortcut Action="fileSaveAs" KeySequence="Ctrl+Shift+S"/>
+ <Shortcut Action="fontSize10" KeySequence=""/>
+ <Shortcut Action="fontSize11" KeySequence=""/>
+ <Shortcut Action="fontSize12" KeySequence=""/>
+ <Shortcut Action="fontSize14" KeySequence=""/>
+ <Shortcut Action="fontSize18" KeySequence=""/>
+ <Shortcut Action="fontSize24" KeySequence=""/>
+ <Shortcut Action="fontSize36" KeySequence=""/>
+ <Shortcut Action="fontSize48" KeySequence=""/>
+ <Shortcut Action="fontSize60" KeySequence=""/>
+ <Shortcut Action="fontSize7" KeySequence=""/>
+ <Shortcut Action="fontSize72" KeySequence=""/>
+ <Shortcut Action="fontSize9" KeySequence=""/>
+ <Shortcut Action="fontSizeOther" KeySequence=""/>
+ <Shortcut Action="helpAboutPlugins" KeySequence=""/>
+ <Shortcut Action="helpAboutQt" KeySequence=""/>
+ <Shortcut Action="helpAboutScribus" KeySequence=""/>
+ <Shortcut Action="helpActionSearch" KeySequence="Ctrl+/"/>
+ <Shortcut Action="helpChat" KeySequence=""/>
+ <Shortcut Action="helpCheckUpdates" KeySequence=""/>
+ <Shortcut Action="helpManual" KeySequence="F1"/>
+ <Shortcut Action="helpOnlineDocs" KeySequence=""/>
+ <Shortcut Action="helpOnlineTutorial1" KeySequence=""/>
+ <Shortcut Action="helpOnlineWWW" KeySequence=""/>
+ <Shortcut Action="helpOnlineWiki" KeySequence=""/>
+ <Shortcut Action="helpTooltips" KeySequence=""/>
+ <Shortcut Action="insertFrame" KeySequence=""/>
+ <Shortcut Action="insertGlyph" KeySequence=""/>
+ <Shortcut Action="insertMark2Mark" KeySequence=""/>
+ <Shortcut Action="insertMarkAnchor" KeySequence=""/>
+ <Shortcut Action="insertMarkItem" KeySequence=""/>
+ <Shortcut Action="insertMarkNote" KeySequence=""/>
+ <Shortcut Action="insertMarkVariableText" KeySequence=""/>
+ <Shortcut Action="insertSampleText" KeySequence=""/>
+ <Shortcut Action="itemAdjustFrameHeightToText" KeySequence=""/>
+ <Shortcut Action="itemAdjustFrameToImage" KeySequence=""/>
+ <Shortcut Action="itemAdjustImageToFrame" KeySequence=""/>
+ <Shortcut Action="itemAttachTextToPath" KeySequence=""/>
+ <Shortcut Action="itemAttributes" KeySequence=""/>
+ <Shortcut Action="itemCombinePolygons" KeySequence=""/>
+ <Shortcut Action="itemConvertToBezierCurve" KeySequence=""/>
+ <Shortcut Action="itemConvertToImageFrame" KeySequence=""/>
+ <Shortcut Action="itemConvertToOutlines" KeySequence=""/>
+ <Shortcut Action="itemConvertToPolygon" KeySequence=""/>
+ <Shortcut Action="itemConvertToSymbolFrame" KeySequence=""/>
+ <Shortcut Action="itemConvertToTextFrame" KeySequence=""/>
+ <Shortcut Action="itemDelete" KeySequence="Del"/>
+ <Shortcut Action="itemDetachTextFromPath" KeySequence=""/>
+ <Shortcut Action="itemDuplicate" KeySequence="Ctrl+D"/>
+ <Shortcut Action="itemEditWeld" KeySequence=""/>
+ <Shortcut Action="itemExtendedImageProperties" KeySequence=""/>
+ <Shortcut Action="itemFlipH" KeySequence=""/>
+ <Shortcut Action="itemFlipV" KeySequence=""/>
+ <Shortcut Action="itemGroup" KeySequence="Ctrl+G"/>
+ <Shortcut Action="itemGroupAdjust" KeySequence=""/>
+ <Shortcut Action="itemImageInfo" KeySequence=""/>
+ <Shortcut Action="itemImageIsVisible" KeySequence=""/>
+ <Shortcut Action="itemLock" KeySequence="Ctrl+L"/>
+ <Shortcut Action="itemLockSize" KeySequence="Ctrl+Shift+L"/>
+ <Shortcut Action="itemLower" KeySequence="Ctrl+End"/>
+ <Shortcut Action="itemLowerToBottom" KeySequence="End"/>
+ <Shortcut Action="itemMulDuplicate" KeySequence="Ctrl+Shift+D"/>
+ <Shortcut Action="itemPDFAnnotationProps" KeySequence=""/>
+ <Shortcut Action="itemPDFFieldProps" KeySequence=""/>
+ <Shortcut Action="itemPDFIsAnnotation" KeySequence=""/>
+ <Shortcut Action="itemPDFIsBookmark" KeySequence=""/>
+ <Shortcut Action="itemPreviewFull" KeySequence=""/>
+ <Shortcut Action="itemPreviewLow" KeySequence=""/>
+ <Shortcut Action="itemPreviewNormal" KeySequence=""/>
+ <Shortcut Action="itemPrintingEnabled" KeySequence=""/>
+ <Shortcut Action="itemRaise" KeySequence="Ctrl+Home"/>
+ <Shortcut Action="itemRaiseToTop" KeySequence="Home"/>
+ <Shortcut Action="itemSendToInline" KeySequence=""/>
+ <Shortcut Action="itemSendToPattern" KeySequence=""/>
+ <Shortcut Action="itemShapeEdit" KeySequence=""/>
+ <Shortcut Action="itemSplitPolygons" KeySequence=""/>
+ <Shortcut Action="itemToggleInlineImage" KeySequence=""/>
+ <Shortcut Action="itemTransform" KeySequence=""/>
+ <Shortcut Action="itemUngroup" KeySequence="Ctrl+Shift+G"/>
+ <Shortcut Action="itemUpdateImage" KeySequence=""/>
+ <Shortcut Action="itemUpdateMarks" KeySequence=""/>
+ <Shortcut Action="itemWeld" KeySequence=""/>
+ <Shortcut Action="itemsUnWeld" KeySequence=""/>
+ <Shortcut Action="pageApplyMasterPage" KeySequence=""/>
+ <Shortcut Action="pageCopy" KeySequence=""/>
+ <Shortcut Action="pageCopyToMasterPage" KeySequence=""/>
+ <Shortcut Action="pageDelete" KeySequence=""/>
+ <Shortcut Action="pageImport" KeySequence=""/>
+ <Shortcut Action="pageInsert" KeySequence=""/>
+ <Shortcut Action="pageManageGuides" KeySequence=""/>
+ <Shortcut Action="pageManageProperties" KeySequence=""/>
+ <Shortcut Action="pageMove" KeySequence=""/>
+ <Shortcut Action="showMouseCoordinates" KeySequence=""/>
+ <Shortcut Action="specialToggleAllGuides" KeySequence="F11"/>
+ <Shortcut Action="specialToggleAllPalettes" KeySequence="F12"/>
+ <Shortcut Action="specialUnicodeSequenceBegin" KeySequence="Ctrl+Shift+U"/>
+ <Shortcut Action="stickyTools" KeySequence=""/>
+ <Shortcut Action="styleImageEffects" KeySequence="Ctrl+E"/>
+ <Shortcut Action="styleTabulators" KeySequence=""/>
+ <Shortcut Action="tableAdjustFrameToTable" KeySequence=""/>
+ <Shortcut Action="tableAdjustTableToFrame" KeySequence=""/>
+ <Shortcut Action="tableDeleteColumns" KeySequence=""/>
+ <Shortcut Action="tableDeleteRows" KeySequence=""/>
+ <Shortcut Action="tableDistributeColumnsEvenly" KeySequence=""/>
+ <Shortcut Action="tableDistributeRowsEvenly" KeySequence=""/>
+ <Shortcut Action="tableInsertColumns" KeySequence=""/>
+ <Shortcut Action="tableInsertRows" KeySequence=""/>
+ <Shortcut Action="tableMergeCells" KeySequence=""/>
+ <Shortcut Action="tableSetColumnWidths" KeySequence=""/>
+ <Shortcut Action="tableSetRowHeights" KeySequence=""/>
+ <Shortcut Action="tableSplitCells" KeySequence=""/>
+ <Shortcut Action="toolsActionHistory" KeySequence=""/>
+ <Shortcut Action="toolsAlignDistribute" KeySequence=""/>
+ <Shortcut Action="toolsBookmarks" KeySequence=""/>
+ <Shortcut Action="toolsContent" KeySequence="F3"/>
+ <Shortcut Action="toolsCopyProperties" KeySequence=""/>
+ <Shortcut Action="toolsDownloads" KeySequence=""/>
+ <Shortcut Action="toolsEditContents" KeySequence="E"/>
+ <Shortcut Action="toolsEditWithStoryEditor" KeySequence="Ctrl+T"/>
+ <Shortcut Action="toolsEyeDropper" KeySequence="Y"/>
+ <Shortcut Action="toolsInline" KeySequence=""/>
+ <Shortcut Action="toolsInsertArc" KeySequence=""/>
+ <Shortcut Action="toolsInsertBezier" KeySequence="B"/>
+ <Shortcut Action="toolsInsertCalligraphicLine" KeySequence=""/>
+ <Shortcut Action="toolsInsertFreehandLine" KeySequence="F"/>
+ <Shortcut Action="toolsInsertImageFrame" KeySequence="I"/>
+ <Shortcut Action="toolsInsertLine" KeySequence="L"/>
+ <Shortcut Action="toolsInsertPolygon" KeySequence="P"/>
+ <Shortcut Action="toolsInsertRenderFrame" KeySequence="D"/>
+ <Shortcut Action="toolsInsertShape" KeySequence="S"/>
+ <Shortcut Action="toolsInsertSpiral" KeySequence=""/>
+ <Shortcut Action="toolsInsertTable" KeySequence="A"/>
+ <Shortcut Action="toolsInsertTextFrame" KeySequence="T"/>
+ <Shortcut Action="toolsLayers" KeySequence="F6"/>
+ <Shortcut Action="toolsLinkTextFrame" KeySequence="N"/>
+ <Shortcut Action="toolsMeasurements" KeySequence=""/>
+ <Shortcut Action="toolsOutline" KeySequence=""/>
+ <Shortcut Action="toolsPDFAnnotLink" KeySequence=""/>
+ <Shortcut Action="toolsPDFAnnotText" KeySequence=""/>
+ <Shortcut Action="toolsPDFCheckBox" KeySequence=""/>
+ <Shortcut Action="toolsPDFComboBox" KeySequence=""/>
+ <Shortcut Action="toolsPDFListBox" KeySequence=""/>
+ <Shortcut Action="toolsPDFPushButton" KeySequence=""/>
+ <Shortcut Action="toolsPDFRadioButton" KeySequence=""/>
+ <Shortcut Action="toolsPDFTextField" KeySequence=""/>
+ <Shortcut Action="toolsPages" KeySequence=""/>
+ <Shortcut Action="toolsPreflightVerifier" KeySequence=""/>
+ <Shortcut Action="toolsProperties" KeySequence="F2"/>
+ <Shortcut Action="toolsResources" KeySequence=""/>
+ <Shortcut Action="toolsRotate" KeySequence="R"/>
+ <Shortcut Action="toolsScrapbook" KeySequence=""/>
+ <Shortcut Action="toolsSelect" KeySequence="C"/>
+ <Shortcut Action="toolsSymbols" KeySequence=""/>
+ <Shortcut Action="toolsToolbarPDF" KeySequence=""/>
+ <Shortcut Action="toolsToolbarTools" KeySequence=""/>
+ <Shortcut Action="toolsToolbarView" KeySequence=""/>
+ <Shortcut Action="toolsUnlinkTextFrame" KeySequence="U"/>
+ <Shortcut Action="toolsUnlinkTextFrameAndCutText" KeySequence=""/>
+ <Shortcut Action="toolsZoom" KeySequence="Z"/>
+ <Shortcut Action="toolsZoomIn" KeySequence="Ctrl++"/>
+ <Shortcut Action="toolsZoomOut" KeySequence="Ctrl+-"/>
+ <Shortcut Action="typeEffectAllCaps" KeySequence=""/>
+ <Shortcut Action="typeEffectNormal" KeySequence=""/>
+ <Shortcut Action="typeEffectOutline" KeySequence=""/>
+ <Shortcut Action="typeEffectShadow" KeySequence=""/>
+ <Shortcut Action="typeEffectSmallCaps" KeySequence=""/>
+ <Shortcut Action="typeEffectStrikeThrough" KeySequence=""/>
+ <Shortcut Action="typeEffectSubscript" KeySequence=""/>
+ <Shortcut Action="typeEffectSuperscript" KeySequence=""/>
+ <Shortcut Action="typeEffectUnderline" KeySequence=""/>
+ <Shortcut Action="typeEffectUnderlineWords" KeySequence=""/>
+ <Shortcut Action="unicodeBullet" KeySequence=""/>
+ <Shortcut Action="unicodeColumnBreak" KeySequence="Ctrl+Shift+Return"/>
+ <Shortcut Action="unicodeCopyRight" KeySequence=""/>
+ <Shortcut Action="unicodeDashEm" KeySequence=""/>
+ <Shortcut Action="unicodeDashEn" KeySequence=""/>
+ <Shortcut Action="unicodeDashFigure" KeySequence=""/>
+ <Shortcut Action="unicodeDashQuotation" KeySequence=""/>
+ <Shortcut Action="unicodeFrameBreak" KeySequence="Ctrl+Return"/>
+ <Shortcut Action="unicodeLigature_ff" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_ffi" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_ffl" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_fi" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_fl" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_ft" KeySequence=""/>
+ <Shortcut Action="unicodeLigature_st" KeySequence=""/>
+ <Shortcut Action="unicodeMidpoint" KeySequence=""/>
+ <Shortcut Action="unicodeNarrowNoBreakSpace" KeySequence="Ctrl+Alt+Space"/>
+ <Shortcut Action="unicodeNewLine" KeySequence="Shift+Return"/>
+ <Shortcut Action="unicodeNonBreakingHyphen" KeySequence="Ctrl+Alt+-"/>
+ <Shortcut Action="unicodeNonBreakingSpace" KeySequence="Ctrl+Space"/>
+ <Shortcut Action="unicodePageCount" KeySequence=""/>
+ <Shortcut Action="unicodePageNumber" KeySequence="Ctrl+Alt+Shift+P"/>
+ <Shortcut Action="unicodeQuoteApostrophe" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteCJKDoubleLeft" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteCJKDoubleRight" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteCJKSingleLeft" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteCJKSingleRight" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteDoubleLeft" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteDoubleLeftGuillemet" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteDoubleReversed" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteDoubleRight" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteDoubleRightGuillemet" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteLowDoubleComma" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteLowSingleComma" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteSingleLeft" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteSingleLeftGuillemet" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteSingleReversed" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteSingleRight" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteSingleRightGuillemet" KeySequence=""/>
+ <Shortcut Action="unicodeQuoteStraight" KeySequence=""/>
+ <Shortcut Action="unicodeRegdTM" KeySequence=""/>
+ <Shortcut Action="unicodeSoftHyphen" KeySequence="Ctrl+Shift+-"/>
+ <Shortcut Action="unicodeSolidus" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceEM" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceEN" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceHair" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceMid" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceThick" KeySequence=""/>
+ <Shortcut Action="unicodeSpaceThin" KeySequence=""/>
+ <Shortcut Action="unicodeTM" KeySequence=""/>
+ <Shortcut Action="unicodeZWJ" KeySequence=""/>
+ <Shortcut Action="unicodeZWNJ" KeySequence=""/>
+ <Shortcut Action="unicodeZerowidthNonBreakingSpace" KeySequence=""/>
+ <Shortcut Action="unicodeZerowidthSpace" KeySequence=""/>
+ <Shortcut Action="viewEditInPreview" KeySequence=""/>
+ <Shortcut Action="viewFit100" KeySequence="Ctrl+1"/>
+ <Shortcut Action="viewFit200" KeySequence=""/>
+ <Shortcut Action="viewFit400" KeySequence=""/>
+ <Shortcut Action="viewFit50" KeySequence=""/>
+ <Shortcut Action="viewFit75" KeySequence=""/>
+ <Shortcut Action="viewFitInWindow" KeySequence="Ctrl+0"/>
+ <Shortcut Action="viewFitWidth" KeySequence=""/>
+ <Shortcut Action="viewPreviewMode" KeySequence="Ctrl+Alt+P"/>
+ <Shortcut Action="viewRulerMode" KeySequence=""/>
+ <Shortcut Action="viewShowBaseline" KeySequence=""/>
+ <Shortcut Action="viewShowBleeds" KeySequence=""/>
+ <Shortcut Action="viewShowColumnBorders" KeySequence=""/>
+ <Shortcut Action="viewShowContextMenu" KeySequence="Menu"/>
+ <Shortcut Action="viewShowFrames" KeySequence=""/>
+ <Shortcut Action="viewShowGrid" KeySequence=""/>
+ <Shortcut Action="viewShowGuides" KeySequence=""/>
+ <Shortcut Action="viewShowImages" KeySequence=""/>
+ <Shortcut Action="viewShowLayerMarkers" KeySequence=""/>
+ <Shortcut Action="viewShowMargins" KeySequence=""/>
+ <Shortcut Action="viewShowRulers" KeySequence="Ctrl+Shift+R"/>
+ <Shortcut Action="viewShowTextChain" KeySequence=""/>
+ <Shortcut Action="viewShowTextControls" KeySequence=""/>
+ <Shortcut Action="viewSnapToElements" KeySequence=""/>
+ <Shortcut Action="viewSnapToGrid" KeySequence=""/>
+ <Shortcut Action="viewSnapToGuides" KeySequence=""/>
+ <Shortcut Action="viewToggleCM" KeySequence=""/>
+ <Shortcut Action="viewToggleCMS" KeySequence=""/>
+ <Shortcut Action="windowsCascade" KeySequence=""/>
+ <Shortcut Action="windowsTile" KeySequence=""/>
+ <DefaultColorSet Name="/usr/share/scribus/swatches/Scribus Basic"/>
+ <PDF Resolution="300" SolidProfile="" Bookmarks="0" PrintProfile="" DoMultiFile="0" MirrorPagesHorizontal="0" PicRes="300" Binding="0" hideMenuBar="0" DisplayThumbs="0" UseProfiles2="0" DocInfoMarks="0" CropMarks="0" ImageProfile="" Intent="0" RecalcPic="0" Grayscale="0" hideToolBar="0" RotateDeg="0" EmbedPDF="0" BleedTop="0.000" DoClip="0" InfoString="" Permissions="-4" fitWindow="0" MarkLength="20.0016" MirrorPagesVertical="0" PassUser="" PageLayout="0" BleedRight="0.000" ColorMarks="0" Encrypt="0" CompressionMethod="0" DisplayBookmarks="0" PresentMode="0" BleedBottom="0.000" UseSpotColors="1" RGBMode="1" DisplayFullscreen="0" OpenAction="" MarkOffset="0" Intent2="0" Quality="0" UseDocBleeds="0" ImagePr="0" UseLayers="0" openAfterExport="0" BleedLeft="0.000" Compress="1" UseProfiles="0" UseLpi="0" DisplayLayers="0" BleedMarks="0" PassOwner="" RegistrationMarks="0" Articles="0" FontEmbedding="0" Version="14" Thumbnails="0">
+  <LPI SpotFunction="0" Color="" Frequency="0" Angle="0"/>
+ </PDF>
+ <DefaultItemAttributes/>
+ <TablesOfContents/>
+ <ImageCache MaximumCacheEntries="1000" CompressionLevel="1" Enabled="0" MaximumCacheSizeMiB="1000"/>
+ <ActivePageSizes Names="A4,Letter"/>
+</SCRIBUSRC>

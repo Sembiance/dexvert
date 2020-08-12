@@ -41,6 +41,8 @@ tiptoe(
 		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});
 		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
 
+		programs.filterInPlace(p => p.meta.hasOwnProperty("gentooPackage"));
+
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
 		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));
 		programs.filterInPlace(p => !Array.isArray(p.meta.gentooPackage));

@@ -29,6 +29,8 @@ export.meta =
 
   weakMagic      : true                             # [*] If true, only match if magic matches AND either ext or filename matches
 
+  trustMagic     : true								# [*] If a magic is marked as untrustworthy elsewhere, you can trust it here
+
   notes          : "Some notes go here"				# [*] You can specify various notes here
 
   bruteUnsafe    : true								# [*] Set to true if this format isn't safe to be brute forced

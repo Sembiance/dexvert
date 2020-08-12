@@ -58,3 +58,12 @@
 
 # Paintworks
 54	string/b	ANvisionA	Paintworks
+
+# Turbo Rascal Syntax Error
+0	string/b	FLUFF64	Turbo Rascal Syntax Error
+
+# Funny Paint
+0	string/b	\x00\x0a\xcf\xe2	Funny Paint
+
+# Fullscreen Construction Kit
+0	string/b	KD	Fullscreen Construction Kit

@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 424 file formats are support by dexvert.
+The following 426 file formats are support by dexvert.
 
 
 
@@ -93,7 +93,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (300)
+## Image (302)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -281,6 +281,7 @@ image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | 
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | 
 image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel_Editor) | .cpi | 
+image | [Mad Designer](http://fileformats.archiveteam.org/wiki/Mad_Designer) | .mbg | 
 image | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 | 
 image | [Magic Draw](http://fileformats.archiveteam.org/wiki/MagicDraw) | .shr .hr | 
 image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | 
@@ -374,6 +375,7 @@ image | [Tiny Stuff](http://fileformats.archiveteam.org/wiki/Tiny_Stuff) | .tn1 
 image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | 
 image | TRS-80 | .grf .max .p41 .pix | 
 image | TRS-80 CLP File | .clp | 
+image | [True Paint I](http://fileformats.archiveteam.org/wiki/True_Paint_I) | .mci .mcp | 
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [Trzmiel](http://fileformats.archiveteam.org/wiki/Trzmiel) | .cpr | 
 image | [TUNDRA Text-Mode Graphic](http://fileformats.archiveteam.org/wiki/TUNDRA) | .tnd | 

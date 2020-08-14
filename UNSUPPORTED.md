@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 59 file formats are NOT currently supported by dexvert.
+The following 60 file formats are NOT currently supported by dexvert.
 
 
 
@@ -53,7 +53,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Font (23)
+## Font (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
@@ -65,6 +65,7 @@ font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_
 font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 font | C64 8x8 Font | .64c | 
 font | Daisy-Dot | .nlq | 
+font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | 
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
 font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | 
 font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it

@@ -68,7 +68,7 @@ tiptoe(
 				delete testData[extraFilePath];
 		});
 
-		sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).parallelForEach(testSampleFile, this, os.cpus().length);
+		sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).parallelForEach(testSampleFile, this, os.cpus().length/2);
 	},
 	function saveTestDataIfNeeded()
 	{
@@ -80,7 +80,7 @@ tiptoe(
 	function outputResults()
 	{
 		testUtil.logFinish();
-		XU.log`\nElapsed time: ${(Date.now()-startTime).secondsAsHumanReadable()}`;
+		XU.log`\nElapsed time: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
 		this();
 	},
 	XU.FINISH

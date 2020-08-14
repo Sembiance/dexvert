@@ -39,10 +39,17 @@ export.meta =
                  [state => ([100, 300])]				  Can provide a sync function that takes state and returns file sizes
                                                           Can optionally include or return an array of file sizes
 
+  forbidFilesizeMatch : true						# [*] Forbid matching unknown files to this format based on filesize alone
+
   keepFilename   : true								# [*] Don't rename the file safely for input. ONLY USE THIS if the program
   														  requires the original filename to be able to convert the file.
 
   symlinkUnsafe  : true								# [*] If the converter program doesn't handle symlinks, can set this to true
+
+  encoding       : "IBM-943"						# [*] Can specify what the file encoding is if you know it. Really only for text
+
+  confidenceAdjust : 1								# [*] Can adjust the confidence manually up or down.
+  														  Useful if a file matches an extension from multiple families.
 }
 
 # [*] This should return an array of step functions to follow

@@ -129,7 +129,7 @@ tiptoe(
 	function outputResults()
 	{
 		testUtil.logFinish();
-		XU.log`\nElapsed time: ${(Date.now()-startTime).secondsAsHumanReadable()}`;
+		XU.log`\nElapsed time: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
 		this();
 	},
 	XU.FINISH
@@ -217,15 +217,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(!sampleTestData.files && results.output.files)
 				return this(undefined, "FAIL", `Expected to have no files but found ${XU.c.fg.white + results.output.files.length + XU.c.fg.orange} instead`);
 			
-			if(sampleTestData.converter && !newTestData.converter)
-				return this(undefined, "FAIL", `Expected converter ${sampleTestData.converter} but did not find one in results.`);
-
-			if(!sampleTestData.converter && newTestData.converter)
-				return this(undefined, "FAIL", `Expected no converter but found in results ${newTestData.converter}`);
-
-			if(sampleTestData.converter && newTestData.converter && sampleTestData.converter!==newTestData.converter)
-				return this(undefined, "FAIL", `converter ${newTestData.converter} does not match expected ${sampleTestData.converter}`);
-			
+		
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
 			if(results.output.files && expectedFiles.length!==results.output.files.length)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but only got ${XU.c.fg.white + results.output.files.length}`);
@@ -257,6 +249,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			if(sampleTestData.files && expectedFiles.length>0)
 				return this(undefined, "FAIL", `The following expected files were not found: ${XU.c.fg.white + expectedFiles.join(", ")}`);
+
+			if(sampleTestData.converter && !newTestData.converter)
+				return this(undefined, "FAIL", `Expected converter ${sampleTestData.converter} but did not find one in results.`);
+
+			if(!sampleTestData.converter && newTestData.converter)
+				return this(undefined, "FAIL", `Expected no converter but found in results ${newTestData.converter}`);
+
+			if(sampleTestData.converter && newTestData.converter && sampleTestData.converter!==newTestData.converter)
+				return this(undefined, "FAIL", `converter ${newTestData.converter} does not match expected ${sampleTestData.converter}`);
 
 			this(undefined, "PASS");
 		},

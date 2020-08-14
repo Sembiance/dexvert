@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 426 file formats are support by dexvert.
+The following 445 file formats are support by dexvert.
 
 
 
@@ -93,11 +93,12 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (302)
+## Image (321)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
+image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | 
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl | 
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | 
 image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | 
@@ -139,6 +140,7 @@ image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | 
+image | [C.O.L.R. Object Editor](http://fileformats.archiveteam.org/wiki/C.O.L.R._Object_Editor) | .mur .pal | 
 image | [C64 Hires-Bitmap](http://fileformats.archiveteam.org/wiki/Hires-Bitmap) | .hbm .hir .hpi .gih .fgs | 
 image | [Calamus Raster Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic) | .crg | 
 image | [Calamus Vector Graphic](http://fileformats.archiveteam.org/wiki/Calamus_Vector_Graphic) | .cvg | 
@@ -155,6 +157,7 @@ image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | 
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | 
 image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | 
+image | D-GRAPH P3C | .p3c | 
 image | [Dali](http://fileformats.archiveteam.org/wiki/Dali) | .sd0 .sd1 .sd2 .hpk .lpk .mpk | 
 image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush) | .bru | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
@@ -284,7 +287,10 @@ image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel
 image | [Mad Designer](http://fileformats.archiveteam.org/wiki/Mad_Designer) | .mbg | 
 image | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 | 
 image | [Magic Draw](http://fileformats.archiveteam.org/wiki/MagicDraw) | .shr .hr | 
+image | [Magic Painter](http://fileformats.archiveteam.org/wiki/Magic_Painter) | .mgp | 
 image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | 
+image | [MAKIchan Graphic](http://fileformats.archiveteam.org/wiki/MAKIchan_Graphics) | .mag .max .mki | 
+image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | 
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | 
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | 
 image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | 
@@ -293,11 +299,13 @@ image | [Microsoft Windows Cursor](http://fileformats.archiveteam.org/wiki/CUR) 
 image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org/wiki/EMF) | .emf | 
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | 
 image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | 
+image | [MIG](http://fileformats.archiveteam.org/wiki/MIG) | .mig | 
 image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture) | .mpp | 
 image | [Mono Magic](http://fileformats.archiveteam.org/wiki/Mono_Magic) | .mon | 
 image | [Movie Maker](http://fileformats.archiveteam.org/wiki/Movie_Maker) | .bkg .shp | 
 image | [MSX BASIX Graphic](http://fileformats.archiveteam.org/wiki/MSX_BASIC_graphics) | .sc2 .grp .sc3 .sc4 .sc5 .ge5 .s15 .sc6 .s16 .sc7 .ge7 .s17 .sc8 .ge8 .s18 .sca .s1a .scc .srs .yjk .s1c | 
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
+image | [Multi-Lace Editor](http://fileformats.archiveteam.org/wiki/Multi-Lace_Editor) | .mle | 
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | 
 image | [multiArtist](http://multiartist.untergrund.net/) | .mg1 .mg2 .mg4 .mg8 | 
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
@@ -311,11 +319,14 @@ image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr |
 image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | 
 image | Oric HRS | .hrs .hir | 
 image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | 
+image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | 
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | 
+image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | 
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop) | .da4 .psc | 
 image | [Paintworks](http://fileformats.archiveteam.org/wiki/Paintworks) | .cl0 .sc0 .cl1 .sc1 .cl2 .sc2 .pg0 .pg1 .pg2 | 
 image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | 
 image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) | .rw2 .raw .rwl | 
+image | [Paradox](http://fileformats.archiveteam.org/wiki/Paradox) | .mcpp | 
 image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | 
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | 
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | 
@@ -326,6 +337,8 @@ image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/P
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | 
 image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | 
+image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | 
+image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | 
 image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | 
 image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | 
 image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm | 
@@ -333,7 +346,10 @@ image | [Portable Float Map](http://fileformats.archiveteam.org/wiki/PFM) | .pfm
 image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm | 
 image | [Portable Network Graphic](http://fileformats.archiveteam.org/wiki/PNG) | .png | 
 image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats) | .ppm | 
+image | [Portfolio Graphics](http://fileformats.archiveteam.org/wiki/PGF_(Portfolio_Graphics)) | .pgf | 
+image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/PGC_(Portfolio_Graphics_Compressed)) | .pgc | 
 image | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | 
+image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | 
 image | Print-Technik HIR Image | .hir | 
 image | [Prism Paint](http://fileformats.archiveteam.org/wiki/Prism_Paint) | .pnt .tpi | 
 image | [Public  Painter](http://fileformats.archiveteam.org/wiki/Public_Painter) | .cmp | 
@@ -354,6 +370,7 @@ image | [Sinbad Slideshow](http://fileformats.archiveteam.org/wiki/Sinbad_Slides
 image | [SlideShow for VBXE](http://fileformats.archiveteam.org/wiki/SlideShow_for_VBXE) | .dap | 
 image | [Spectrum 512 Compressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spc | 
 image | [Spectrum 512 Uncompressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spu | 
+image | [SpritePad](http://www.subchristsoftware.com/spritepadfree/index.htm) | .spd | 
 image | [STAD PAC](http://fileformats.archiveteam.org/wiki/STAD_PAC) | .pac .seq | 
 image | [Stardent AVS X](http://fileformats.archiveteam.org/wiki/AVS_X_image) | .avs .mbfavs .x | 
 image | [STOS Memory Bank](http://fileformats.archiveteam.org/wiki/STOS_memory_bank) | .mbk .mbs | 
@@ -375,6 +392,7 @@ image | [Tiny Stuff](http://fileformats.archiveteam.org/wiki/Tiny_Stuff) | .tn1 
 image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | 
 image | TRS-80 | .grf .max .p41 .pix | 
 image | TRS-80 CLP File | .clp | 
+image | TRS-80 P11 | .p11 | 
 image | [True Paint I](http://fileformats.archiveteam.org/wiki/True_Paint_I) | .mci .mcp | 
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | 
 image | [Trzmiel](http://fileformats.archiveteam.org/wiki/Trzmiel) | .cpr | 
@@ -397,6 +415,7 @@ image | ZX Spectrum Attributes Gigascreen | .hlr |
 image | ZX Spectrum Attributes Image | .atr | 
 image | ZX Spectrum Border Screen | .bmc4 .bsc | 
 image | ZX Spectrum CHR$ | .ch$ | 
+image | ZX Spectrum MLT | .mlt | 
 image | ZX Spectrum Multicolor | .ifl .mc | 
 
 

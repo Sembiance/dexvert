@@ -74,6 +74,7 @@ const FORMATID_MATCH_EXEMPT = ["gfaArtist"];
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
 let testData = null;
+const startTime = Date.now();
 
 tiptoe(
 	function findSampleFiles()
@@ -128,6 +129,7 @@ tiptoe(
 	function outputResults()
 	{
 		testUtil.logFinish();
+		XU.log`\nElapsed time: ${(Date.now()-startTime).secondsAsHumanReadable()}`;
 		this();
 	},
 	XU.FINISH

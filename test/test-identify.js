@@ -27,6 +27,7 @@ Options:
 
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "identify.json");
 let testData = null;
+const startTime = Date.now();
 
 tiptoe(
 	function findSampleFiles()
@@ -79,6 +80,7 @@ tiptoe(
 	function outputResults()
 	{
 		testUtil.logFinish();
+		XU.log`\nElapsed time: ${(Date.now()-startTime).secondsAsHumanReadable()}`;
 		this();
 	},
 	XU.FINISH

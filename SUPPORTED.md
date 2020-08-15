@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 488 file formats are support by dexvert.
+The following 495 file formats are support by dexvert.
 
 
 
-## Archive (46)
+## Archive (47)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | 
@@ -39,6 +39,7 @@ archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_i
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | 
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | 
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | 
+archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | 
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | 
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | 
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | 
@@ -93,7 +94,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (363)
+## Image (369)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -131,6 +132,7 @@ image | [Atari ICE* Image](http://fileformats.archiveteam.org/wiki/ICE*) | .icn 
 image | [Atari Interlace Studio](http://madteam.atari8.info/index.php?prod=uzytki) | .ist | 
 image | [Atari KFX](http://fileformats.archiveteam.org/wiki/KFX) | .kfx | 
 image | [Atari MCS](http://fileformats.archiveteam.org/wiki/MCS) | .mcs | 
+image | Atari RGB Intermediate | .rgb | 
 image | [Atari Standard Graphics 3](http://fileformats.archiveteam.org/wiki/Standard_Graphics_3_(Atari)) | .sg3 | 
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
@@ -195,6 +197,7 @@ image | [Dynamic Publisher Screen](http://fileformats.archiveteam.org/wiki/Dynam
 image | [Dynamic Publisher Stamp](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .stp | 
 image | [ECI Graphic Editor](http://fileformats.archiveteam.org/wiki/ECI_Graphic_Editor) | .eci .ecp | 
 image | [EggPaint](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | 
+image | Electronika BK PIC | .pic | 
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept |  Sometimes it's a vector based image, sometimes not. Haven't determined a way to differeentiate. So we just convert to PNG with nconvert and also to SVG with inkscape.
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | 
 image | [Envision](http://fileformats.archiveteam.org/wiki/Envision) | .map | 
@@ -279,6 +282,7 @@ image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | 
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | 
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | 
+image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pix | APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .gig .koa .kla .gg | 
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | 
 image | [Kodak FlashPix](http://fileformats.archiveteam.org/wiki/FPX) | .fpx | 
@@ -336,6 +340,7 @@ image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .i
 image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | 
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | 
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | 
+image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | 
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop) | .da4 .psc | 
 image | [Paintworks](http://fileformats.archiveteam.org/wiki/Paintworks) | .cl0 .sc0 .cl1 .sc1 .cl2 .sc2 .pg0 .pg1 .pg2 | 
 image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | 
@@ -352,6 +357,7 @@ image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/P
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | 
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | 
 image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | 
+image | [PixArt](http://fileformats.archiveteam.org/wiki/PixArt) | .pix | 
 image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | 
 image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | 
 image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | 
@@ -455,6 +461,7 @@ image | ZX Spectrum CHR$ | .ch$ |
 image | ZX Spectrum Gigascreen | .img | 
 image | ZX Spectrum MLT | .mlt | 
 image | ZX Spectrum Multicolor | .ifl .mc | 
+image | ZX Spectrum RGB | .rgb | 
 image | ZX Spectrum Stellar | .stl | 
 image | [ZX-Paintbrush](https://sourcesolutions.itch.io/zx-paintbrush) | .zxp | 
 image | [ZXpaintyONE](https://web.archive.org/web/20160507112745/http://matt.west.co.tt/demoscene/zxpaintyone/) | .zp1 | 

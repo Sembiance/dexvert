@@ -23,6 +23,7 @@ Will test all sample files to ensure dexvert.process() works correctly.
 Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
+  --ext=<ext>			Only test files that belong to formats that have the given extension
   --file=<subFilePath>	Only process the given sample subFilePath
   --full                Run ALL tests, even long running ones
   --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
@@ -69,7 +70,7 @@ const SHA1_IGNORE_FILES =
 // Usually the formatid of the directory should match what is detected by dexid
 // Sadly, some formats are only identified by an extension that is shared by multiple formats (such as image/art and image/gfaArtist)
 // So add them here to exempt from failing the test due to this
-const FORMATID_MATCH_EXEMPT = ["gfaArtist", "zxGigascreen", "trs80Star"];
+const FORMATID_MATCH_EXEMPT = ["gfaArtist", "zxGigascreen", "trs80Star", "imgScan", "zxRGB"];
 
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
@@ -96,7 +97,9 @@ tiptoe(
 		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
 
 		if(argv.format)
-			this.data.sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
+			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(`${argv.format}/`));
+		if(argv.extension)
+			this.data.sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 

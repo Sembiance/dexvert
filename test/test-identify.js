@@ -19,6 +19,7 @@ Will test all sample files to ensure dexvert.identify() works correctly.
 Options:
   --help                Display help/usage
   --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
+  --ext=<ext>			Only test files that belong to formats that have the given extension
   --file=<subFilePath>	Only identify the given sample subFilePath
   --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
   --record              Take the results of the identifications and save them as the future expected results`;
@@ -51,7 +52,9 @@ tiptoe(
 		}
 
 		if(argv.format)
-			sampleFilePaths.filterInPlace(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath).startsWith(`${argv.format}/`));
+			sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(`${argv.format}/`));
+		if(argv.extension)
+			sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));
 		
 		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
 		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);

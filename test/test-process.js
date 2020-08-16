@@ -68,9 +68,9 @@ const SHA1_IGNORE_FILES =
 };
 
 // Usually the formatid of the directory should match what is detected by dexid
-// Sadly, some formats are only identified by an extension that is shared by multiple formats (such as image/art and image/gfaArtist)
+// Sadly, some formats are only identified by an extension that is shared by multiple formats (such as image/pfsFirstPublisher and image/gfaArtist and image/asciiArtEditor)
 // So add them here to exempt from failing the test due to this
-const FORMATID_MATCH_EXEMPT = ["gfaArtist", "zxGigascreen", "trs80Star", "imgScan", "zxRGB"];
+const FORMATID_MATCH_EXEMPT = ["gfaArtist", "pfsFirstPublisher", "zxGigascreen", "trs80Star", "imgScan", "zxRGB", "advancedArtStudio", "atariGraphics"];
 
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");

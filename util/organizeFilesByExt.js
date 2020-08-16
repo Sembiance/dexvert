@@ -6,7 +6,7 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	tiptoe = require("tiptoe");
 
-const DIR_PATH = "/mnt/compendium/DevLab/dexvert/sandbox/recoil_examples";
+const DIR_PATH = "/mnt/compendium/DevLab/dexvert/sandbox/atari_graphics_studio_examples";
 
 tiptoe(
 	function findFiles()

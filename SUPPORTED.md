@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 495 file formats are support by dexvert.
+The following 516 file formats are support by dexvert.
 
 
 
@@ -94,7 +94,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (369)
+## Image (390)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -116,8 +116,11 @@ image | Apple II High Res | .hgr |
 image | Apple II Sprites | .spr | 
 image | Apple IIe Double High-Resolution | .dhgr | 
 image | Apple IIGS SH3/SHR | .sh3 .shr | 
+image | [Art Director](http://fileformats.archiveteam.org/wiki/Art_Director) | .art | 
 image | [Art Studio](http://fileformats.archiveteam.org/wiki/Art_Studio) | .art .aas | 
+image | Artist by David Eaton | .art | 
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | 
+image | [Ascii-Art Editor](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .art | 
 image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | 
 image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm .mic | 
 image | [Atari APAC3 APP Image](http://fileformats.archiveteam.org/wiki/Apac3_APP) | .app .aps .ils .pls | 
@@ -125,6 +128,7 @@ image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg |
 image | Atari Canvas | .cpt .hbl .ful | 
 image | [Atari DU* Image](http://fileformats.archiveteam.org/wiki/DU*) | .du1 .du2 .duo | 
 image | Atari Graph Image | .all | 
+image | Atari Graphics | .mic | 
 image | [Atari Graphics Studio](http://g2f.atari8.info/) | .ags | 
 image | Atari HCI | .hci | 
 image | Atari Highres Medium | .hrm | 
@@ -132,8 +136,10 @@ image | [Atari ICE* Image](http://fileformats.archiveteam.org/wiki/ICE*) | .icn 
 image | [Atari Interlace Studio](http://madteam.atari8.info/index.php?prod=uzytki) | .ist | 
 image | [Atari KFX](http://fileformats.archiveteam.org/wiki/KFX) | .kfx | 
 image | [Atari MCS](http://fileformats.archiveteam.org/wiki/MCS) | .mcs | 
+image | Atari Player Editor | .apl | 
 image | Atari RGB Intermediate | .rgb | 
 image | [Atari Standard Graphics 3](http://fileformats.archiveteam.org/wiki/Standard_Graphics_3_(Atari)) | .sg3 | 
+image | [AtariTools-800 Graphic](http://fileformats.archiveteam.org/wiki/AtariTools-800) | .agp | 
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | 
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | 
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | 
@@ -169,6 +175,7 @@ image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_C
 image | D-GRAPH P3C | .p3c | 
 image | [Dali](http://fileformats.archiveteam.org/wiki/Dali) | .sd0 .sd1 .sd2 .hpk .lpk .mpk | 
 image | [Degas Elite Brush](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush) | .bru | 
+image | [DEGAS Elite Icon](http://fileformats.archiveteam.org/wiki/DEGAS_Elite_icon) | .icn | 
 image | [Degas High Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc3 | 
 image | [Degas High Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi3 .suh | 
 image | [Degas Low Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc1 | 
@@ -189,6 +196,7 @@ image | [Doodle C64](http://fileformats.archiveteam.org/wiki/Doodle!_(C64)) | .d
 image | [Dr. Halo](http://fileformats.archiveteam.org/wiki/Dr._Halo) | .cut .pal .pic | 
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | 
 image | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | 
+image | DrawIt | .dit | 
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | 
 image | [Drazlace](http://fileformats.archiveteam.org/wiki/Dir_Logo_Maker) | .drl .dlp | 
 image | [Dune AAI Image](http://fileformats.archiveteam.org/wiki/AAI) | .aai | 
@@ -282,7 +290,7 @@ image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | 
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | 
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | 
-image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pix | APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
+image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .gig .koa .kla .gg | 
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | 
 image | [Kodak FlashPix](http://fileformats.archiveteam.org/wiki/FPX) | .fpx | 
@@ -310,6 +318,7 @@ image | [MAKIchan Graphic](http://fileformats.archiveteam.org/wiki/MAKIchan_Grap
 image | [Mamut RYS](http://fileformats.archiveteam.org/wiki/Mamut) | .rys | 
 image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | 
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | 
+image | Micro Illustrator | .mic | 
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | 
 image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | 
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | 
@@ -322,12 +331,14 @@ image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Pa
 image | [Mono Magic](http://fileformats.archiveteam.org/wiki/Mono_Magic) | .mon | 
 image | [Movie Maker](http://fileformats.archiveteam.org/wiki/Movie_Maker) | .bkg .shp | 
 image | [MSX BASIX Graphic](http://fileformats.archiveteam.org/wiki/MSX_BASIC_graphics) | .sc2 .grp .sc3 .sc4 .sc5 .ge5 .s15 .sc6 .s16 .sc7 .ge7 .s17 .sc8 .ge8 .s18 .sca .s1a .scc .srs .yjk .s1c | 
+image | MSX2 Yanagisawa PI | .pi | 
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
 image | [Multi-Lace Editor](http://fileformats.archiveteam.org/wiki/Multi-Lace_Editor) | .mle | 
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | 
 image | [multiArtist](http://multiartist.untergrund.net/) | .mg1 .mg2 .mg4 .mg8 | 
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap |  Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
+image | NEC PC-88 PI | .pi | 
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | 
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | 
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | 
@@ -343,6 +354,7 @@ image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pm
 image | [PaintPro](http://fileformats.archiveteam.org/wiki/PaintPro) | .pic | 
 image | [PaintShop](http://fileformats.archiveteam.org/wiki/PaintShop) | .da4 .psc | 
 image | [Paintworks](http://fileformats.archiveteam.org/wiki/Paintworks) | .cl0 .sc0 .cl1 .sc1 .cl2 .sc2 .pg0 .pg1 .pg2 | 
+image | [Palette Master](http://fileformats.archiveteam.org/wiki/Palette_Master) | .art | 
 image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | 
 image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) | .rw2 .raw .rwl | 
 image | [Paradox](http://fileformats.archiveteam.org/wiki/Paradox) | .mcpp | 
@@ -375,6 +387,7 @@ image | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps |
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | 
 image | Print-Technik HIR Image | .hir | 
 image | [Prism Paint](http://fileformats.archiveteam.org/wiki/Prism_Paint) | .pnt .tpi | 
+image | Psion Series 3 | .icn | 
 image | [Public  Painter](http://fileformats.archiveteam.org/wiki/Public_Painter) | .cmp | 
 image | [QRT Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap) | .qrt .dis .raw | 
 image | [Quantum Paint](http://fileformats.archiveteam.org/wiki/QuantumPaint) | .pbx | 
@@ -393,6 +406,7 @@ image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) |
 image | [Scalable Vectory Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | 
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | 
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | 
+image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a .a.prg | 
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | 
 image | [Sinbad Slideshow](http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow) | .ssb | 
 image | [Sketch-PadDles](http://fileformats.archiveteam.org/wiki/Sketch-PadDles) | .skp | 
@@ -424,7 +438,9 @@ image | Texture Maker0 | .tx0 |
 image | [The GIMP Image Format](http://fileformats.archiveteam.org/wiki/XCF) | .xcf | 
 image | [The Graphics Magician Picture Painter](http://fileformats.archiveteam.org/wiki/The_Graphics_Magician_Picture_Painter) | .spc | It's a vector format, so it would be nice to convert to SVG, but only program that I know of that can convert it is recoil2png which just produces PNG files.
 image | [TheDraw File](http://fileformats.archiveteam.org/wiki/TheDraw_Save_File) | .td | 
-image | Timex 2048 Hi-res Gigascreen | .hrg | 
+image | [Timex 2048 Hi-Color](https://zxart.ee/eng/graphics/database/pictureType:timex81/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | 
+image | Timex 2048 Hi-Res | .scr | 
+image | [Timex 2048 Hi-Res Gigascreen](https://zxart.ee/eng/graphics/database/pictureType:timexhrg/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .hrg | 
 image | [Tiny Stuff](http://fileformats.archiveteam.org/wiki/Tiny_Stuff) | .tn1 .tn2 .tn3 .tn4 .tny | 
 image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow) | .pci | 
 image | TRS-80 | .grf .max .p41 .pix | 
@@ -454,6 +470,8 @@ image | [XL-Paint](http://fileformats.archiveteam.org/wiki/XL-Paint) | .xlp .max
 image | [XLD4 Image](http://fileformats.archiveteam.org/wiki/XLD4) | .q4 | 
 image | [Yanagisawa PIC](http://fileformats.archiveteam.org/wiki/PIC_(Yanagisawa)) | .pic | 
 image | Z's Staff Kid98 | .zim | 
+image | [ZX Monochrome](https://zxart.ee/eng/graphics/database/pictureType:monochrome/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | 
+image | ZX Spectrum - 3 File | .3 | 
 image | ZX Spectrum Attributes Gigascreen | .hlr | 
 image | ZX Spectrum Attributes Image | .atr | 
 image | ZX Spectrum Border Screen | .bmc4 .bsc | 
@@ -462,8 +480,11 @@ image | ZX Spectrum Gigascreen | .img |
 image | ZX Spectrum MLT | .mlt | 
 image | ZX Spectrum Multicolor | .ifl .mc | 
 image | ZX Spectrum RGB | .rgb | 
+image | [ZX Spectrum Standard SCR](https://zxart.ee/eng/graphics/database/pictureType:standard/) | .scr | Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.
 image | ZX Spectrum Stellar | .stl | 
+image | [ZX Spectrum ULA+](https://zxart.ee/eng/graphics/database/pictureType:ulaplus/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | 
 image | [ZX-Paintbrush](https://sourcesolutions.itch.io/zx-paintbrush) | .zxp | 
+image | ZX81 Sinclair BASIC | .p | 
 image | [ZXpaintyONE](https://web.archive.org/web/20160507112745/http://matt.west.co.tt/demoscene/zxpaintyone/) | .zp1 | 
 image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | 
 

@@ -94,7 +94,7 @@ image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM w
 image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip |  A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
-image | [ZX Spectrum Border Screen](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | No known converters.
+image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | No known converters.
 
 
 

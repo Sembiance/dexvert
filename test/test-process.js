@@ -73,10 +73,8 @@ const SHA1_IGNORE_FILES =
 const FORMATID_MATCH_EXEMPT =
 [
 	"gfaArtist", "pfsFirstPublisher", "artistByEaton",	// .art (conflict with asciiArtEditor)
-	"zxGigascreen",			// .img	(conflict with alisaPIX)
 	"trs80Star",			// .pix (conflict with xlPaint)
 	"imgScan",				// .raw	(conflict with xlPaint)
-	"zxRGB", 				// .rgb (conflict with rgbIntermediate)
 	"atariGraphics"			// .mic (conflict with apStar)
 ];
 

@@ -335,7 +335,7 @@ image | MSX2 Yanagisawa PI | .pi |
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | 
 image | [Multi-Lace Editor](http://fileformats.archiveteam.org/wiki/Multi-Lace_Editor) | .mle | 
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | 
-image | [multiArtist](http://multiartist.untergrund.net/) | .mg1 .mg2 .mg4 .mg8 | 
+image | [multiArtist](http://fileformats.archiveteam.org/wiki/MultiArtist) | .mg1 .mg2 .mg4 .mg8 | 
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | 
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap |  Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | NEC PC-88 PI | .pi | 
@@ -400,7 +400,7 @@ image | [RAMbrandt](http://fileformats.archiveteam.org/wiki/RAMbrandt) | .rm0 .r
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | 
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | 
 image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | 
-image | SAM Coupe Mode 4 | .scs4 .ss4 | 
+image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupe_Mode_4) | .ss4 .scs4 | 
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | 
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | 
 image | [Scalable Vectory Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | 
@@ -471,15 +471,15 @@ image | [XLD4 Image](http://fileformats.archiveteam.org/wiki/XLD4) | .q4 |
 image | [Yanagisawa PIC](http://fileformats.archiveteam.org/wiki/PIC_(Yanagisawa)) | .pic | 
 image | Z's Staff Kid98 | .zim | 
 image | [ZX Monochrome](https://zxart.ee/eng/graphics/database/pictureType:monochrome/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | 
-image | ZX Spectrum - 3 File | .3 | 
-image | ZX Spectrum Attributes Gigascreen | .hlr | 
-image | ZX Spectrum Attributes Image | .atr | 
-image | ZX Spectrum Border Screen | .bmc4 .bsc | 
-image | ZX Spectrum CHR$ | .ch$ | 
+image | [ZX Spectrum - Tricolor RGB](http://fileformats.archiveteam.org/wiki/Tricolor_RGB) | .3 | 
+image | [ZX Spectrum Attributes Gigascreen](http://fileformats.archiveteam.org/wiki/HLR) | .hlr | 
+image | [ZX Spectrum Attributes Image](http://fileformats.archiveteam.org/wiki/ATR_(ZX_Spectrum)) | .atr | 
+image | [ZX Spectrum Border Screen](http://fileformats.archiveteam.org/wiki/Border_Screen) | .bmc4 .bsc | 
+image | [ZX Spectrum CHR$](http://fileformats.archiveteam.org/wiki/CH$) | .ch$ | 
 image | ZX Spectrum Gigascreen | .img | 
 image | ZX Spectrum MLT | .mlt | 
-image | ZX Spectrum Multicolor | .ifl .mc | 
-image | ZX Spectrum RGB | .rgb | 
+image | [ZX Spectrum Multicolor](http://fileformats.archiveteam.org/wiki/Multicolor_(ZX_Spectrum)) | .ifl .mc .mlt | 
+image | ZX Spectrum Next Layer 2 | .nxi | 
 image | [ZX Spectrum Standard SCR](https://zxart.ee/eng/graphics/database/pictureType:standard/) | .scr | Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.
 image | ZX Spectrum Stellar | .stl | 
 image | [ZX Spectrum ULA+](https://zxart.ee/eng/graphics/database/pictureType:ulaplus/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | 

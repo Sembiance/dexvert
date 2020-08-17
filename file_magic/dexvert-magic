@@ -76,3 +76,9 @@
 
 # ArtMaster 88
 0	string/b	SS\x5FSIF	ArtMaster88
+
+# ZX Spectrum BSP
+0	string/b	bsp\xC0	ZX Spectrum BSP
+
+# ZX Spectrum CHR
+0	string/b	chr\x24	ZX Spectrum CHR

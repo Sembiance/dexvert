@@ -217,7 +217,7 @@ image | [Face Painter](http://fileformats.archiveteam.org/wiki/Face_Painter) | .
 image | [Falcon True Color](http://fileformats.archiveteam.org/wiki/Falcon_True_Color) | .ftc | 
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | 
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | 
-image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_GraphF) | .bml .fli | 
+image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .bml .fli | 
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr | 
 image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | 
 image | [FLIP Image](http://fileformats.archiveteam.org/wiki/FLIP) | .fbi | 
@@ -271,7 +271,7 @@ image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep |
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | 
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | 
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | 
-image | IMG Scan | .rwh .rwl .raw | 
+image | IMG Scan | .rwl .raw .rwh | 
 image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | 
 image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | 
 image | [Inset PIX](http://fileformats.archiveteam.org/wiki/Inset_PIX) | .pix | 

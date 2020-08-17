@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 516 file formats are support by dexvert.
+The following 515 file formats are support by dexvert.
 
 
 
@@ -94,7 +94,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (390)
+## Image (389)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | 
@@ -477,7 +477,6 @@ image | [ZX Spectrum Attributes Image](http://fileformats.archiveteam.org/wiki/A
 image | [ZX Spectrum Border Screen](http://fileformats.archiveteam.org/wiki/Border_Screen) | .bmc4 .bsc | 
 image | [ZX Spectrum CHR$](http://fileformats.archiveteam.org/wiki/CH$) | .ch$ | 
 image | ZX Spectrum Gigascreen | .img | 
-image | ZX Spectrum MLT | .mlt | 
 image | [ZX Spectrum Multicolor](http://fileformats.archiveteam.org/wiki/Multicolor_(ZX_Spectrum)) | .ifl .mc .mlt | 
 image | ZX Spectrum Next Layer 2 | .nxi | 
 image | [ZX Spectrum Standard SCR](https://zxart.ee/eng/graphics/database/pictureType:standard/) | .scr | Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.

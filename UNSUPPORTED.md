@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 61 file formats are NOT currently supported by dexvert.
+The following 62 file formats are NOT currently supported by dexvert.
 
 
 
@@ -83,7 +83,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 |
 
 
 
-## Image (7)
+## Image (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
@@ -92,6 +92,7 @@ image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | This is a modern program and file format which none of the converter programs currently support.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip |  A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 
 

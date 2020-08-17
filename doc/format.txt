@@ -66,7 +66,7 @@ exports.post = (state, p, cb) =>
 exports.updateProcessed = (state, p, cb) =>
 
 # [*] Synchronous function that can check some additional properties on the file and return true if supported, false otherwise 
-exports.custom = state => (fs.statSync(state.input.absolute).size===32000);
+exports.idCheck = state => (fs.statSync(state.input.absolute).size===32000);
 
 # [*] Can gather additional meta and statsh it into state.input.meta[formatid] = {}
 exports.inputMeta = (state, p, cb) =>

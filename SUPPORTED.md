@@ -111,7 +111,7 @@ image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | 
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | 
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | 
-image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | 
+image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice | 
 image | Apple II High Res | .hgr | 
 image | Apple II Sprites | .spr | 
 image | Apple IIe Double High-Resolution | .dhgr | 

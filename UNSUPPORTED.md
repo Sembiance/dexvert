@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 60 file formats are NOT currently supported by dexvert.
+The following 61 file formats are NOT currently supported by dexvert.
 
 
 
@@ -83,9 +83,10 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 |
 
 
 
-## Image (6)
+## Image (7)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
 image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | Couldn't find a reliable converter.
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | This is a modern program and file format which none of the converter programs currently support.

@@ -147,7 +147,7 @@ image | BBC Micro Image | .bb0 .bb1 .bb2 .bb4 .bb5 |
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | 
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
 image | [Big Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/BFLI) | .bfli | 
-image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | 
+image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | It's crazy hard to identify this file, and we err on the side of caution. So we only keep conversions that have meta data in them.
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | 
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | 
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | 
@@ -502,7 +502,7 @@ music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative
 music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | 
 music | [Extended Module](http://fileformats.archiveteam.org/wiki/XM) | .xm | 
 music | [Human Machine Interfaces MIDI Format](http://fileformats.archiveteam.org/wiki/HMI) | .hmi .hmp | 
-music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | 
+music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows
 music | [OctaMED Module](http://fileformats.archiveteam.org/wiki/MED) | .med .mmd1 .mmd2 .mmd3 .mmd4 | 
 music | [Oktalyzer Module](http://fileformats.archiveteam.org/wiki/Oktalyzer_module) | .okt .okta | 
 music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | 

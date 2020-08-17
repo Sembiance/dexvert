@@ -73,3 +73,6 @@
 
 # XLD4 Data Document
 21	string/b	XLD4\ GRAPHIC\ DATA\ \ DOCUMENT	XLD4 Data Document
+
+# ArtMaster 88
+0	string/b	SS\x5FSIF	ArtMaster88

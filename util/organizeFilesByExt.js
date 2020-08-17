@@ -6,6 +6,8 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	tiptoe = require("tiptoe");
 
+process.exit(0);
+
 const DIR_PATH = "/mnt/compendium/DevLab/dexvert/sandbox/atari_graphics_studio_examples";
 
 tiptoe(

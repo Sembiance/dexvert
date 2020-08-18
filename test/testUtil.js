@@ -15,7 +15,7 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 	tiptoe(
 		function findFormats()
 		{
-			dexUtil.findFormats(this);
+			dexUtil.findFormats({verbose : 0}, this);
 		},
 		function findSampleFiles(formats)
 		{

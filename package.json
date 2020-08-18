@@ -37,6 +37,7 @@
 		"@validatem/is-regular-expression" : "~0.1.0",
 		"@validatem/is-url"                : "~0.2.0",
 		"@validatem/is-value"              : "~0.1.0",
+		"@validatem/one-of"                : "~0.1.1",
 		"@validatem/required"              : "~0.1.1",
 		"csv-parser"                       : "~2.3.3",
 		"cue-parser"                       : "~0.2.1",

@@ -7,7 +7,7 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe");
 
 tiptoe(
-	function findFormats()
+	function findFormatFiles()
 	{
 		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this);
 	},

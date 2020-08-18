@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 63 file formats are NOT currently supported by dexvert.
+The following 64 file formats are NOT currently supported by dexvert.
 
 
 
@@ -83,13 +83,14 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 |
 
 
 
-## Image (9)
+## Image (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
 image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | Couldn't find a reliable converter.
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | This is a modern program and file format which none of the converter programs currently support.
+image | HiRes Player Missile | .hpm |  Atari Graphics Studio is capable of converting these files. Sadly I ran into issues with it when running it under Wine with AutoIt. I haven't been able to locate another converter or any other real info for it.
 image | MLDF BMHD File | .mld | It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat |  While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip |  A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm

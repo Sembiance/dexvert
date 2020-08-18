@@ -6,7 +6,6 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	cueParser = require("cue-parser"),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
-	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fileUtil = require("@sembiance/xutil").file,
 	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
@@ -107,7 +106,7 @@ function extractISOFile(isoFilePath, cb)
 		},
 		function mountISO(identifications)
 		{
-			if(identifications.some(identification => ["identifications ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => C.flexMatch(identification.magic, matchAgainst))))
+			if(identifications.some(identification => ["identifications ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
 				return extractHFSISO(isoFilePath, this.finish);
 
 			// Just a regular ISO, mount it and copy the files over

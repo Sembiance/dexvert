@@ -1,38 +1,58 @@
 # Documentation for files in lib/program/*.js
-# Those marked as [*] are OPTIONAL
 
-export.meta = 
-{
-  website        : "program.com"		# Website URL for the program
+/-------------------------\
+| exports.meta Properties |
+\-------------------------/
+>>> ******** General
+>>> website : "https://entropymine.com/deark/"
+A website URL For the program. The only required property.
 
-  gentooOverlay  : "dexvert"			# [*] Which Gentoo overlay the package is found in, if applicable
+>>> notes : "Blah blah"
+Additional notes about this program
 
-  gentooPackage  : "app-arch/program"	# Which Gentoo package contains this program
-                                          Can be an array of packages. If so, meta.website and meta.bin must be an array too.
 
-  bin            : ["bchunk", "sudo"]	# [*] Only set this if gentooPackages is an array
+>>> ******** Properties
+>>> bruteUnsafe : true
+Set to true if this program isn't safe to be brute forced.
 
-  gentooUseFlags : "png jpg midi"       # [*] Which gento USE flags should be set
+>>> informational : true
+If true, program is just informational that changes state. No files are produced.
 
-  gentooNotes    : "Blah blah"			# [*] Additional notes about the gentoo package version
 
-  informational  : true					# [*] If true, program is just informational that changes state. No files are produced
+>>> ******** Gentoo Specific Properties
+>>> gentooOverlay : "dexvert"
+Which Gentoo overlay the package is found in, if applicable.
 
-  bruteUnsafe    : true					# [*] If true, this program won't be executed in brute force mode
-}
+>>> gentooPackage : "app-arch/program"   ||   gentooPackage : ["app-arch/program", "app-text/program"]
+Which Gentoo package contains this program.
+Can be an array of packages. If so, meta.website and meta.bin must be an array too.
 
-exports.bin  = state => "prog"			# A function that returns the name of the binary to run
+>>> gentooUseFlags : "png jpg midi"
+Which Gentoo USE flags should be set.
 
-exports.args = state => ([arg1, arg2])	# A function that returns an array of arguments to pass to the binary
+>>> bin : ["bchunk", "sudo"]
+An array of binaries that this utilizes. Only set this if gentooPackages is an array.
+  
 
-# [*] If set, the return result will be the new CWD
-exports.cwd = state => state.output.absolute
 
-# [*] This will be executed directly before the program is run
-exports.pre = (state, p, cb) => {}
+/-----------------\
+| Other exports.* |
+\-----------------/
+>>> bin = state => "binary_program"
+A function that returns the name of the binary to run
 
-# [*] This will be executed directly after the program has finished running
-exports.post = (state, p, cb) => {}
+>>> args = state => ([arg1, arg2])
+A function that returns an array of arguments to pass to the binary.
 
-# [*] Can return an object of run options to be passed into runUtil.run
-exports.runOptions = state => ({virtualX : true})
+>>> cwd = state => state.output.absolute
+If set, the return result will be the new CWD.
+Normally I create a temporary CWD and do processing there.
+
+>>> pre = (state, p, cb) => {}
+This will be executed directly BEFORE the program is run.
+
+>>> post = (state, p, cb) => {}
+This will be executed directly AFTER the program has finished running.
+
+>>> runOptions = state => ({virtualX : true})
+Can return an object of run options to be passed into runUtil.run

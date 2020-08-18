@@ -7,7 +7,7 @@ const XU = require("@sembiance/xu"),
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
-	C = require(path.join(__dirname, "..", "lib", "C.js")),
+	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fs = require("fs"),
@@ -244,7 +244,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 				if(SHA1_IGNORE_FILES[family] &&
 				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) &&
-				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => C.flexMatch(outSubFilePath.toLowerCase(), m)))
+				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m)))
 				{
 					expectedFiles.removeOnce(outSubFilePath);
 					return;

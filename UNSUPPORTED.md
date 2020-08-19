@@ -26,7 +26,7 @@ archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/V
 
 
 
-## Audio (9)
+## Audio (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh.
@@ -34,7 +34,6 @@ audio | Aegis Sonix Instrument | .instr | [19 sample files](https://telparia.com
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [6 sample files](https://telparia.com/fileFormatSamples/audio/covoxADPCM/) - I've tried using C:\APP\COVOXCONV.EXE but it could never get the WAV output at the correct sample rate, despire me trying different ones I also tried C:\SPUT111\SPUT.COM but it appears only output more COVOX formats. According to that wiki, mplayer might be able to play these, but I couldn't get it to play any of them.
 audio | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/audio/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | 
-audio | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | Couldn't locate a player or converter. Tried milkytracker, but it wouldn't play it.
 audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://telparia.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
 audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFormatSamples/audio/sonixSoundSample/) - The .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
@@ -99,6 +98,13 @@ image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/) - There are a bunch of different versions of TRS files. Haven't found anything that can convert the sample files yet. This gets close, but crashes: https://github.com/ArguablyUseful/TRS_extraction This reports it can't handle the version of the sample files: https://github.com/dominions-tools/dominions-tools/blob/master/dump-trs-data
 image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | [2 sample files](https://telparia.com/fileFormatSamples/image/zxBSP/) - No known converters.
+
+
+
+## Music (1)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [2 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - Couldn't locate a player or converter. Tried milkytracker, but it wouldn't play it.
 
 
 

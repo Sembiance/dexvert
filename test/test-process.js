@@ -48,12 +48,13 @@ const SHA1_IGNORE_FILES =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK" : [/.png$/],
-		"pds"  : [/.png$/],
+		 "pds" : [/.png$/],
 
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cvg" : [/.svg$/],
 		"eps" : [/.svg$/],
 		"fig" : [/.svg$/],
+		 "ps" : [/.svg$/],
 		"wmf" : [/.svg$/]
 	},
 	music :

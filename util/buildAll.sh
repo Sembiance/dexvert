@@ -1,7 +1,6 @@
 #!/bin/bash
 
 node buildReadme.js &
-node buildSupported.js &
-node buildUnsupported.js &
+node buildSupportedAndUnsupported.js &
 
 wait

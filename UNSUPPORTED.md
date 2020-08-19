@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 64 file formats are unsupported by dexvert.
+The following 67 file formats are unsupported by dexvert.
 
 
 
@@ -21,7 +21,7 @@ Family | Name | Extensions | Notes
 archive | [Corel Thumbnails Archvie](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [213 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back.
 archive | IFF LIST File |  | [15 sample files](https://telparia.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. In theory I could parse this file, and "extract" out by creating seperate files for each major FORM entry inside, making sure to also copy into these files the 'shared' entries, adjusting the resulting FORM lengths as needed. Couldn't find any real documentation on the LIST/SSETPROP format. See: https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
-archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [76 sample files](https://telparia.com/fileFormatSamples/archive/ttw/) - Amiga xfdmaster can supposedly decrunch this. 'vamos' won't run it right. Could emulate an amiga to support this. htpps://aminet.net/package/util/pack/xfdmaster
+archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [76 sample files](https://telparia.com/fileFormatSamples/archive/ttw/) - Amiga xfdmaster can supposedly decrunch this. 'vamos' won't run it right. Could emulate an amiga to support this. https://aminet.net/package/util/pack/xfdmaster
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 
 
@@ -56,7 +56,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 ## Font (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | 
+font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [1 sample file](https://telparia.com/fileFormatSamples/font/adobeType1/)
 font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [16 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/) - Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
 font | Atari FontMaker | .fn2 | [1 sample file](https://telparia.com/fileFormatSamples/font/fn2/)
 font | Atari SXS Font | .sxs | [3 sample files](https://telparia.com/fileFormatSamples/font/sxs/)
@@ -67,34 +67,37 @@ font | C64 8x8 Font | .64c | [4 sample files](https://telparia.com/fileFormatSam
 font | Daisy-Dot | .nlq | [1 sample file](https://telparia.com/fileFormatSamples/font/nlq/)
 font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [11 sample files](https://telparia.com/fileFormatSamples/font/dynamicPublisherFont/)
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/) - Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
-font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | 
+font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [1 sample file](https://telparia.com/fileFormatSamples/font/sfd/)
 font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [29 sample files](https://telparia.com/fileFormatSamples/font/gemFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | Interlace Character Editor | .ice | [12 sample files](https://telparia.com/fileFormatSamples/font/ice/)
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
-font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | 
+font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [1 sample file](https://telparia.com/fileFormatSamples/font/otf/)
 font | Oric Font | .chs | [1 sample file](https://telparia.com/fileFormatSamples/font/oricFont/)
 font | SEUCK Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/g/)
 font | Super-IRG | .sif | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
 font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | The Last Word Font | .f80 | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
-font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | 
+font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [2 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
 font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com/fileFormatSamples/font/zxFont/)
 
 
 
-## Image (10)
+## Image (13)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | [2 sample files](https://telparia.com/fileFormatSamples/image/artMaster88/) - Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
 image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | [1 sample file](https://telparia.com/fileFormatSamples/image/cebraText/) - CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | [1 sample file](https://telparia.com/fileFormatSamples/image/fxg/) - Couldn't find a reliable converter.
+image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG, but no known converters exist, despite the specs being published.
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telparia.com/fileFormatSamples/image/grafx2/) - This is a modern program and file format which none of the converter programs currently support.
 image | HiRes Player Missile | .hpm | [14 sample files](https://telparia.com/fileFormatSamples/image/hiResPlayerMissile/) - Atari Graphics Studio is capable of converting these files. Sadly I ran into issues with it when running it under Wine with AutoIt. I haven't been able to locate another converter or any other real info for it.
 image | MLDF BMHD File | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldfbmhd/) - It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
+image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [43 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/) - No known converter or extractor.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
+image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/) - There are a bunch of different versions of TRS files. Haven't found anything that can convert the sample files yet. This gets close, but crashes: https://github.com/ArguablyUseful/TRS_extraction This reports it can't handle the version of the sample files: https://github.com/dominions-tools/dominions-tools/blob/master/dump-trs-data
 image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | [2 sample files](https://telparia.com/fileFormatSamples/image/zxBSP/) - No known converters.
 
 
@@ -102,7 +105,7 @@ image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectr
 ## Other (2)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [4 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
+other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 
 

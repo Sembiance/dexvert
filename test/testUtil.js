@@ -10,6 +10,16 @@ const XU = require("@sembiance/xu"),
 exports.DATA_DIR_PATH = path.join(__dirname, "data");
 exports.SAMPLE_DIR_PATH = path.join(__dirname, "sample");
 
+// Some files are just there for 'support' so we ignore them
+const IGNORE_FILES =
+{
+	image :
+	{
+		// Some FIG files will embed references to other images, such as pictures.fig, so we exclude these here
+		"fig" : ["bugs.gif", "icebergs.jpg", "pumpkin.xbm", "teapot.xpm"]
+	}
+};
+
 exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 {
 	tiptoe(
@@ -23,7 +33,14 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 		},
 		function returnResults(...sampleFilePaths)
 		{
-			return sampleFilePaths.flat();
+			return sampleFilePaths.flat().filter(sampleFilePath =>
+			{
+				const [family, formatid, filename] = path.relative(exports.SAMPLE_DIR_PATH, sampleFilePath).split(path.sep);
+				if(IGNORE_FILES[family] && IGNORE_FILES[family][formatid] && IGNORE_FILES[family][formatid].some(m => dexUtil.flexMatch(filename, m)))
+					return false;
+
+				return true;
+			});
 		},
 		cb
 	);

@@ -50,9 +50,11 @@ const SHA1_IGNORE_FILES =
 		"3dCK" : [/.png$/],
 		"pds"  : [/.png$/],
 
-		// Inkscape doesn't always produce the same exact SVG file, even with the same args and inputs.
+		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cvg" : [/.svg$/],
-		"eps" : [/.svg$/]
+		"eps" : [/.svg$/],
+		"fig" : [/.svg$/],
+		"wmf" : [/.svg$/]
 	},
 	music :
 	{

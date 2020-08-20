@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 523 file formats are supported by dexvert.
+The following 526 file formats are supported by dexvert.
 
 
 
@@ -94,7 +94,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Image (394)
+## Image (396)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -147,7 +147,7 @@ image | BBC Micro Image | .bb0 .bb1 .bb2 .bb4 .bb5 | [5 sample files](https://te
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | [1 sample file](https://telparia.com/fileFormatSamples/image/ldpic/)
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | [4 sample files](https://telparia.com/fileFormatSamples/image/bpg/) - Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
 image | [Big Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/BFLI) | .bfli | [3 sample files](https://telparia.com/fileFormatSamples/image/bfli/)
-image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | [12 sample files](https://telparia.com/fileFormatSamples/image/binaryText/) - It's crazy hard to identify this file, and we err on the side of caution. So we only keep conversions that have meta data in them.
+image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | [11 sample files](https://telparia.com/fileFormatSamples/image/binaryText/) - It's crazy hard to identify this file, and we err on the side of caution. So we only keep conversions that have meta data in them.
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib | [9 sample files](https://telparia.com/fileFormatSamples/image/bmp/)
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [3 sample files](https://telparia.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [1 sample file](https://telparia.com/fileFormatSamples/image/blazingPaddlesWindow/)
@@ -235,6 +235,7 @@ image | [GFA Artist](http://fileformats.archiveteam.org/wiki/GFA_Artist) | .art 
 image | [GFX9k G9B](http://fileformats.archiveteam.org/wiki/G9B) | .g9b | [9 sample files](https://telparia.com/fileFormatSamples/image/g9b/)
 image | [Giga Cad](http://fileformats.archiveteam.org/wiki/Giga Cad) | .gcd | [1 sample file](https://telparia.com/fileFormatSamples/image/gigaCad/)
 image | GLC | .glc | [1 sample file](https://telparia.com/fileFormatSamples/image/glc/)
+image | [Glow Icon](http://fileformats.archiveteam.org/wiki/GlowIcons) | .info | [6 sample files](https://telparia.com/fileFormatSamples/image/glowIcon/)
 image | GLS | .gls | [1 sample file](https://telparia.com/fileFormatSamples/image/gls/)
 image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt | [7 sample files](https://telparia.com/fileFormatSamples/image/4bt/)
 image | [GodPaint](http://fileformats.archiveteam.org/wiki/GodPaint) | .god | [5 sample files](https://telparia.com/fileFormatSamples/image/god/)
@@ -341,6 +342,7 @@ image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wik
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | [2 sample files](https://telparia.com/fileFormatSamples/image/naplps/) - Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [6 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
+image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [12 sample files](https://telparia.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [4 sample files](https://telparia.com/fileFormatSamples/image/nikon/)
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | [1 sample file](https://telparia.com/fileFormatSamples/image/otaBitmap/)
 image | [Olympus RAW](http://fileformats.archiveteam.org/wiki/ORF) | .orf | [4 sample files](https://telparia.com/fileFormatSamples/image/orf/)
@@ -406,7 +408,7 @@ image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | 
 image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupe_Mode_4) | .ss4 .scs4 | [9 sample files](https://telparia.com/fileFormatSamples/image/samCoupeMode4/)
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | [2 sample files](https://telparia.com/fileFormatSamples/image/samarHiresInterlace/)
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [4 sample files](https://telparia.com/fileFormatSamples/image/sar/)
-image | [Scalable Vectory Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | [3 sample files](https://telparia.com/fileFormatSamples/image/svg/)
+image | [Scalable Vector Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | [3 sample files](https://telparia.com/fileFormatSamples/image/svg/)
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [1 sample file](https://telparia.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)
@@ -549,14 +551,15 @@ text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d
 
 
 
-## Video (14)
+## Video (15)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [5 sample files](https://telparia.com/fileFormatSamples/video/flm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | [4 sample files](https://telparia.com/fileFormatSamples/video/mov/)
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [4 sample files](https://telparia.com/fileFormatSamples/video/avi/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [14 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
-video | Fantavision Movie | .mve | [3 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 1 minute and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. Lastly, I just cheat by running DOSbox and recording the screen, so there is dosbox video at the start heh.
+video | Disney Animation Studio CFAST | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
+video | Fantavision Movie | .mve | [3 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [6 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [4 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [6 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)

@@ -65,6 +65,7 @@ const SHA1_IGNORE_FILES =
 	video :
 	{
 		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
+		"disneyCFAST" : [/.mp4$/],
 		"fantavision" : [/.mp4$/],
 		"movieSetter" : [/.mp4$/]
 	}

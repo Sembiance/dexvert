@@ -1,13 +1,13 @@
 # Unsupported File Formats
 
-The following 67 file formats are unsupported by dexvert.
+The following 70 file formats are unsupported by dexvert.
 
 
 
 ## 3d (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-3d | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [7 sample files](https://telparia.com/fileFormatSamples/3d/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
+3d | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/3d/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 3d | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/3d/povRay/)
 3d | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/3d/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
 3d | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/3d/ydl/)
@@ -82,11 +82,13 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (13)
+## Image (16)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Amiga_Metafile) | .amf | [6 sample files](https://telparia.com/fileFormatSamples/image/amf/) - No known modern converter.
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | [2 sample files](https://telparia.com/fileFormatSamples/image/artMaster88/) - Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
 image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | [1 sample file](https://telparia.com/fileFormatSamples/image/cebraText/) - CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
+image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | [1 sample file](https://telparia.com/fileFormatSamples/image/fxg/) - Couldn't find a reliable converter.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG, but no known converters exist, despite the specs being published.
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telparia.com/fileFormatSamples/image/grafx2/) - This is a modern program and file format which none of the converter programs currently support.
@@ -95,6 +97,7 @@ image | MLDF BMHD File | .mld | [32 sample files](https://telparia.com/fileForma
 image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [43 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/) - No known converter or extractor.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
+image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [1 sample file](https://telparia.com/fileFormatSamples/image/sgx/) - No known converter.
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/) - There are a bunch of different versions of TRS files. Haven't found anything that can convert the sample files yet. This gets close, but crashes: https://github.com/ArguablyUseful/TRS_extraction This reports it can't handle the version of the sample files: https://github.com/dominions-tools/dominions-tools/blob/master/dump-trs-data
 image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | [2 sample files](https://telparia.com/fileFormatSamples/image/zxBSP/) - No known converters.

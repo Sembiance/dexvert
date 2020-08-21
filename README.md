@@ -4,6 +4,8 @@ Convert 526 old file formats into modern ones. Powered by NodeJS, Gentoo and a t
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
+THANK YOU to these AMAZING projects: [abydos](http://snisurset.net/code/abydos/), [deark](https://entropymine.com/deark/), [recoil](http://recoil.sourceforge.net/), [xmp](http://xmp.sourceforge.net/) and so many more, see **Programs** below.
+
 ## Install
 dexvert requires a LOT of programs and some kernel options to be set. See Requirements below. Once satisified, install with:
 `npm install dexvert -g`

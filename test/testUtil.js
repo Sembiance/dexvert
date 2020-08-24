@@ -10,13 +10,17 @@ const XU = require("@sembiance/xu"),
 exports.DATA_DIR_PATH = path.join(__dirname, "data");
 exports.SAMPLE_DIR_PATH = path.join(__dirname, "sample");
 
-// Some files are just there for 'support' so we ignore them
+// Some files are just there for 'support' so we ignore them, or don't convert and take too long to try
 const IGNORE_FILES =
 {
 	image :
 	{
 		// Some FIG files will embed references to other images, such as pictures.fig, so we exclude these here
-		"fig" : ["bugs.gif", "icebergs.jpg", "pumpkin.xbm", "teapot.xpm"]
+		fig : ["bugs.gif", "icebergs.jpg", "pumpkin.xbm", "teapot.xpm"]
+	},
+	font :
+	{
+		amigaBitmapFont : ["Diamonds.font"]
 	}
 };
 
@@ -25,7 +29,7 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 	tiptoe(
 		function findFormats()
 		{
-			dexUtil.findFormats({verbose : 0}, this);
+			dexUtil.findFormats(this);
 		},
 		function findSampleFiles(formats)
 		{

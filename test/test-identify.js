@@ -4,6 +4,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require(path.join(__dirname, "testUtil.js")),
 	printUtil = require("@sembiance/xutil").print,
+	{validate} = require(path.join(__dirname, "validate.js")),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fs = require("fs"),
@@ -31,6 +32,10 @@ let testData = null;
 const startTime = Date.now();
 
 tiptoe(
+	function performValidation()
+	{
+		validate(this);
+	},
 	function findSampleFiles()
 	{
 		printUtil.majorHeader("Identification Test", {prefix : "\n"});

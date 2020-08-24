@@ -2,8 +2,11 @@
 
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	C = require(path.join(__dirname, "C.js")),
+	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	{validateValue} = require("@validatem/core"),
+	fileUtil = require("@sembiance/xutil").file,
+	tiptoe = require("tiptoe"),
+	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	either = require("@validatem/either"),
 	anything = require("@validatem/anything"),	// eslint-disable-line no-unused-vars
 	isLowercase = require("@validatem/is-lowercase"),
@@ -21,7 +24,26 @@ const XU = require("@sembiance/xu"),
 	oneOf = require("@validatem/one-of"),
 	required = require("@validatem/required");
 
-exports.validateFormat = function validateFormat(format)
+exports.validate = function validate(cb)
+{
+	tiptoe(
+		function loadFormatsAndPrograms()
+		{
+			dexUtil.findFormats(this.parallel());
+			fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "**/*.js", {nodir : true}, this.parallel());
+		},
+		function testFormats(formats, programFilePaths)
+		{
+			Object.values(formats).flatMap(v => Object.values(v)).forEach(format => validateFormat(format));
+			programFilePaths.forEach(programFilePath => validateProgram(require(programFilePath)));		// eslint-disable-line node/global-require
+
+			this();
+		},
+		cb
+	);
+};
+
+function validateFormat(format)
 {
 	const filesizeValues = [];
 	if(!format.meta.ext || format.meta.ext.length===1)
@@ -92,9 +114,9 @@ exports.validateFormat = function validateFormat(format)
 		XU.log`Failed to validate format.\n${err}`;
 		process.exit(1);
 	}
-};
+}
 
-exports.validateProgram = function validateProgram(program)
+function validateProgram(program)
 {
 	const programMetaSchema =
 	{
@@ -116,7 +138,7 @@ exports.validateProgram = function validateProgram(program)
 	{
 		meta       : [required, programMetaSchema],
 		bin        : [required, isFunction, hasLengthBetween(0, 2)],
-		args       : [required, isFunction, hasLengthBetween(0, 2)],
+		args       : [required, isFunction, hasLengthOf(2)],	// Technically it's 4, but args with defaults don't count in .length
 		cwd        : [isFunction, hasLengthBetween(0, 2)],
 		pre        : [isFunction, hasLengthOf(3)],
 		post       : [isFunction, hasLengthOf(3)],
@@ -132,7 +154,7 @@ exports.validateProgram = function validateProgram(program)
 	}
 	catch(err)
 	{
-		XU.log`Failed to validate program.\n${err}`;
+		XU.log`Failed to validate program ${program}.\n${err}`;
 		process.exit(1);
 	}
-};
+}

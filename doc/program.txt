@@ -41,18 +41,22 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 >>> bin = state => "binary_program"
 A function that returns the name of the binary to run
 
->>> args = state => ([arg1, arg2])
+>>> args = (state, p, inPath=DEFAULT, outPath=DEFAULT) => ([arg1, arg2])
 A function that returns an array of arguments to pass to the binary.
+Always output to a generic filename like 'outfile' in the OUTPUT dirPath (don't use cwd if it can be helped, saved on copies)
+If I can only pick 1 safe path, better to pick a safe input path
 
 >>> cwd = state => state.output.absolute
 If set, the return result will be the new CWD.
 Normally I create a temporary CWD and do processing there.
+Note, when changing the cwd, the input.filePath and output.dirPath will automatically be updated with proper relative paths
 
 >>> pre = (state, p, cb) => {}
 This will be executed directly BEFORE the program is run.
 
 >>> post = (state, p, cb) => {}
 This will be executed directly AFTER the program has finished running.
+Here is where you should rename any generic 'outfile' names to the original input.meta.name filename
 
 >>> runOptions = state => ({virtualX : true})
 Can return an object of run options to be passed into runUtil.run

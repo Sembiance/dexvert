@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 70 file formats are unsupported by dexvert.
+The following 51 file formats are unsupported by dexvert.
 
 
 
@@ -52,33 +52,14 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Font (24)
+## Font (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [1 sample file](https://telparia.com/fileFormatSamples/font/adobeType1/)
-font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [16 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/) - Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
-font | Atari FontMaker | .fn2 | [1 sample file](https://telparia.com/fileFormatSamples/font/fn2/)
-font | Atari SXS Font | .sxs | [3 sample files](https://telparia.com/fileFormatSamples/font/sxs/)
-font | AtariTools-800 Font | .acs | [1 sample file](https://telparia.com/fileFormatSamples/font/acs/)
-font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | [1 sample file](https://telparia.com/fileFormatSamples/font/blazingPaddlesFont/) - This can be converted with recoil2png. So if I ever decide to support fonts, I can use that as a starting point before converting the bitmaps into font files.
-font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
-font | C64 8x8 Font | .64c | [4 sample files](https://telparia.com/fileFormatSamples/font/64c/)
-font | Daisy-Dot | .nlq | [1 sample file](https://telparia.com/fileFormatSamples/font/nlq/)
-font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [11 sample files](https://telparia.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | No sample files yet.
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/) - Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
-font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [1 sample file](https://telparia.com/fileFormatSamples/font/sfd/)
-font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [29 sample files](https://telparia.com/fileFormatSamples/font/gemFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
-font | Interlace Character Editor | .ice | [12 sample files](https://telparia.com/fileFormatSamples/font/ice/)
-font | LaserJet Soft Font | .sfl .sfp .sft | 
-font | LinkWay Font | .fmf | 
-font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [1 sample file](https://telparia.com/fileFormatSamples/font/otf/)
-font | Oric Font | .chs | [1 sample file](https://telparia.com/fileFormatSamples/font/oricFont/)
-font | SEUCK Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/g/)
-font | Super-IRG | .sif | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
+font | LaserJet Soft Font | .sfl .sfp .sft | No sample files yet.
+font | LinkWay Font | .fmf | No sample files yet.
 font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
-font | The Last Word Font | .f80 | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
-font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [2 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
-font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com/fileFormatSamples/font/zxFont/)
 
 
 

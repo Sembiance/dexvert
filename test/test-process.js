@@ -7,6 +7,7 @@ const XU = require("@sembiance/xu"),
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
+	{validate} = require(path.join(__dirname, "validate.js")),
 	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
@@ -79,7 +80,8 @@ const FORMATID_MATCH_EXEMPT =
 	"gfaArtist", "pfsFirstPublisher", "artistByEaton",	// .art (conflict with asciiArtEditor)
 	"trs80Star",			// .pix (conflict with xlPaint)
 	"imgScan",				// .raw	(conflict with xlPaint)
-	"atariGraphics"			// .mic (conflict with apStar)
+	"atariGraphics",		// .mic (conflict with apStar)
+	"blazingPaddlesFont"
 ];
 
 const cpuCount = os.cpus().length;
@@ -88,6 +90,10 @@ let testData = null;
 const startTime = Date.now();
 
 tiptoe(
+	function performValidation()
+	{
+		validate(this);
+	},
 	function findSampleFiles()
 	{
 		printUtil.majorHeader("Process Test", {prefix : "\n"});
@@ -236,7 +242,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but only got ${XU.c.fg.white + results.output.files.length}`);
 
 			const {family, formatid} = results.id;
-			if(results.processed && diskFamily!==family)
+			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
 				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
 			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
 				return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);

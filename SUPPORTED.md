@@ -1,12 +1,13 @@
 # Supported File Formats
 
-The following 526 file formats are supported by dexvert.
+The following 548 file formats are supported by dexvert.
 
 
 
-## Archive (47)
+## Archive (48)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [1 sample file](https://telparia.com/fileFormatSamples/archive/adfFFS/)
 archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [3 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Not all ADF disk images are properly extracted by unar/unadf/adf-extractor. I've tried TONS of programs and they all fail on these disks, which are identified as the OFS variety. Yet fs-uae emulator loads the disks and runs them fine in an emulated amiga. So I could create an amiga workbench script that will convert all contents of an amiga disk into a ZIP file and put it on a shared folder/hard drive and get the contents that way. That's a lot more work, but doable.
 archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/wiki/Disk_Masher_System) | .dms .fms | [1 sample file](https://telparia.com/fileFormatSamples/archive/dms/)
@@ -91,6 +92,33 @@ document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rt
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [2 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [1 sample file](https://telparia.com/fileFormatSamples/document/wri/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | [1 sample file](https://telparia.com/fileFormatSamples/document/wp/)
+
+
+
+## Font (21)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [27 sample files](https://telparia.com/fileFormatSamples/font/adobeType1/)
+font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [20 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/) - Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
+font | Atari FontMaker | .fn2 | [1 sample file](https://telparia.com/fileFormatSamples/font/fn2/)
+font | Atari SXS Font | .sxs | [3 sample files](https://telparia.com/fileFormatSamples/font/sxs/)
+font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | [1 sample file](https://telparia.com/fileFormatSamples/font/blazingPaddlesFont/)
+font | C64 8x8 Font | .64c | [4 sample files](https://telparia.com/fileFormatSamples/font/64c/)
+font | Daisy-Dot | .nlq | [16 sample files](https://telparia.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
+font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [11 sample files](https://telparia.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [1 sample file](https://telparia.com/fileFormatSamples/font/sfd/)
+font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [29 sample files](https://telparia.com/fileFormatSamples/font/gemFont/)
+font | [Glyph Bitmap Distribution Format](http://fileformats.archiveteam.org/wiki/BDF) | .bdf | [3 sample files](https://telparia.com/fileFormatSamples/font/bdf/)
+font | Interlace Character Editor | .ice | [12 sample files](https://telparia.com/fileFormatSamples/font/ice/)
+font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [3 sample files](https://telparia.com/fileFormatSamples/font/otf/)
+font | Oric Font | .chs | [1 sample file](https://telparia.com/fileFormatSamples/font/oricFont/)
+font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) | .pcf | [5 sample files](https://telparia.com/fileFormatSamples/font/pcf/)
+font | Shoot Em Up Construction Kit Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/seuckFont/)
+font | Super-IRG | .sif | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
+font | The Last Word Font | .f80 | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
+font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [8 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
+font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [5 sample files](https://telparia.com/fileFormatSamples/font/woff/)
+font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com/fileFormatSamples/font/zxFont/)
 
 
 

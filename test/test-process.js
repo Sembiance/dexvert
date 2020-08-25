@@ -45,6 +45,11 @@ const SHA1_IGNORE_FILES =
 		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
 		"*" : [/.pdf$/]
 	},
+	font :
+	{
+		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
+		"adobeType1" : [/.otf$/]
+	},
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical

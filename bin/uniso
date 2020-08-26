@@ -42,7 +42,7 @@ tiptoe(
 	function verifyCUEFiles(cueFilePaths)
 	{
 		if(!cueFilePaths || cueFilePaths.length===0)
-			return this.jump(4, undefined, inputFilePath);
+			return this.jump(5);
 		
 		this.data.cueFilePaths = cueFilePaths;
 		this.data.cueFilePaths.parallelForEach((cueFilePath, subcb) => dexvert.identify(cueFilePath, {}, subcb), this);
@@ -66,8 +66,8 @@ tiptoe(
 			matchingCue = {cueFilePath, data : matchingFile};
 		});
 
-		if(!matchingCue || !matchingCue.data.tracks || matchingCue.data.tracks.length===1)
-			return this.jump(3, undefined, inputFilePath);
+		if(!matchingCue)
+			return this.jump(4);
 		
 		this.data.matchingCue = matchingCue;
 
@@ -87,7 +87,7 @@ tiptoe(
 	},
 	function extractISO(generatedISOFilePaths)
 	{
-		extractISOFile(generatedISOFilePaths[0] || inputFilePath, this);
+		extractISOFile((generatedISOFilePaths || [])[0] || inputFilePath, this);
 	},
 	function cleanup()
 	{
@@ -106,7 +106,7 @@ function extractISOFile(isoFilePath, cb)
 		},
 		function mountISO(identifications)
 		{
-			if(identifications.some(identification => ["identifications ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
+			if(identifications.some(identification => ["ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
 				return extractHFSISO(isoFilePath, this.finish);
 
 			// Just a regular ISO, mount it and copy the files over

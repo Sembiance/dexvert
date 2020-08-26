@@ -45,7 +45,7 @@ tiptoe(
 			return this.jump(4, undefined, inputFilePath);
 		
 		this.data.cueFilePaths = cueFilePaths;
-		this.data.cueFilePaths.parallelForEach(dexvert.identify, this);
+		this.data.cueFilePaths.parallelForEach((cueFilePath, subcb) => dexvert.identify(cueFilePath, {}, subcb), this);
 	},
 	function processCUEFiles(cueFileIdentifications)
 	{
@@ -59,7 +59,7 @@ tiptoe(
 			if(!cueData || !cueData.files || cueData.files.length===0)
 				return;
 			
-			const matchingFile = cueData.files.find(file => path.basename(file.name)===path.basename(inputFilePath));
+			const matchingFile = cueData.files.find(file => path.basename(file.name.toLowerCase())===path.basename(inputFilePath.toLowerCase()));
 			if(!matchingFile)
 				return;
 
@@ -71,23 +71,23 @@ tiptoe(
 		
 		this.data.matchingCue = matchingCue;
 
-		runUtil.run("bchunk", ["-w", path.relative(outDirPath, inputFilePath), path.relative(outDirPath, matchingCue.cueFilePath), `${path.basename(inputFilePath, path.extname(inputFilePath))}_track`], {verbose : true, cwd : outDirPath}, this);
+		runUtil.run("bchunk", ["-w", inputFilePath, matchingCue.cueFilePath, `${path.basename(inputFilePath, path.extname(inputFilePath))}_track`], {verbose : true}, this);
 	},
-	function findResultingISOs()
+	function findAudioTracks()
 	{
-		fileUtil.glob(outDirPath, "*.iso", this);
+		fileUtil.glob(process.cwd(), "*.wav", {nocase : true}, this.parallel());
 	},
-	function moveResultingISO(generatedISOFilePaths)
+	function moveAudioTracks(wavFilePaths)
 	{
-		if(generatedISOFilePaths.length===0)
-			return this(undefined, inputFilePath);
-		
-		this.data.tmpISOPath = path.join(tmpDirPath, path.basename(generatedISOFilePaths[0]));
-		fileUtil.move(generatedISOFilePaths[0], this.data.tmpISOPath, err => this(err, this.data.tmpISOPath));
+		wavFilePaths.parallelForEach((wavFilePath, subcb) => fileUtil.move(wavFilePath, path.join(outDirPath, path.basename(wavFilePath)), subcb), this);
 	},
-	function extractISO(isoFilePath)
+	function findResultingISOFiles()
 	{
-		extractISOFile(isoFilePath, this);
+		fileUtil.glob(process.cwd(), "*.iso", {nocase : true}, this.parallel());
+	},
+	function extractISO(generatedISOFilePaths)
+	{
+		extractISOFile(generatedISOFilePaths[0] || inputFilePath, this);
 	},
 	function cleanup()
 	{
@@ -127,6 +127,9 @@ function extractISOFile(isoFilePath, cb)
 	);
 }
 
+const HCDNUM_BIN = path.join(__dirname, "hcdnum");
+const HCOPYFILES_BIN = path.join(__dirname, "hcopyfiles");
+
 function extractHFSISO(isoFilePath, cb)
 {
 	const homeDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
@@ -141,7 +144,7 @@ function extractHFSISO(isoFilePath, cb)
 			},
 			function copyOutFiles()
 			{
-				runUtil.run("hcopyfiles", [path.join(outDirPath, subPath)], runOptions, this);
+				runUtil.run(HCOPYFILES_BIN, [path.join(outDirPath, subPath)], runOptions, this);
 			},
 			function getDirListing()
 			{
@@ -164,7 +167,7 @@ function extractHFSISO(isoFilePath, cb)
 					tiptoe(
 						function changeDir()
 						{
-							runUtil.run("hcdnum", [`${(lineNum+1)}`], runOptions, this);
+							runUtil.run(HCDNUM_BIN, [`${(lineNum+1)}`], runOptions, this);
 						},
 						function recurseIntoDir()
 						{

@@ -1,0 +1,20 @@
+#!/bin/bash
+# shellcheck disable=SC2154,SC2034
+
+lineNum=1
+hls -alb | while read -r line; do
+	subLineNum=1
+
+	if [ "$1" -eq "$lineNum" ]; then
+		hls -a1b | while read -r filename; do
+			if [ $subLineNum -eq $lineNum ]; then
+				escapedFilename=${filename//\'/\\"'"}
+				eval "hcd $'$escapedFilename'"
+			fi
+
+			subLineNum=$((subLineNum + 1))
+		done
+	fi
+
+	lineNum=$((lineNum + 1))
+done

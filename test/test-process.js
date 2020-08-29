@@ -244,7 +244,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
 			if(results.output.files && expectedFiles.length!==results.output.files.length)
-				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but only got ${XU.c.fg.white + results.output.files.length}`);
+				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(results.output.files, expectedFiles)}`);
 
 			const {family, formatid} = results.id;
 			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))

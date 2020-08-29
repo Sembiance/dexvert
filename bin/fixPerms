@@ -1,8 +1,8 @@
 #!/bin/bash
 
-USER=`whoami`
+USER=$(whoami)
 
-sudo chown -R $USER:users . &
+sudo chown -R "$USER":users . &
 sudo chmod -R u+rw,g+r,o+r-w . &
 
 wait

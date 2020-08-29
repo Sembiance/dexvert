@@ -12,7 +12,7 @@ function usage()
 {
 	XU.log`${XU.cf.fg.cyan("Usage:")} dexserv [options]
 
-Starts a server to assist dexvert. Required for 'unoconv' doc conversion.
+Starts a server to assist dexvert. Required for 'unoconv' doc conversion and ISO extraction.
 
 ${XU.cf.fg.cyan("Options:")}
   ${XU.cf.fg.yellow("--help")}
@@ -23,19 +23,28 @@ ${XU.cf.fg.cyan("Options:")}
 if(argv.help)
 	usage();
 
+let cdEmuDeviceNum = 0;
 let unoconvCP = null;
+let cdemuCP = null;
 let shuttingDown = false;
 
 function shutdown()
 {
-	if(!unoconvCP || unoconvCP.killed)
-		process.exit(0);
-
 	XU.log`Shutting down dexserv...`;
 	shuttingDown = true;
-	unoconvCP.on("exit", () => process.exit(0));
 
-	unoconvCP.kill();
+	[unoconvCP, cdemuCP].parallelForEach((cp, subcb) =>
+	{
+		if(cp && !cp.killed)
+		{
+			cp.on("exit", () => setImmediate(subcb));
+			cp.kill();
+		}
+		else
+		{
+			setImmediate(subcb);
+		}
+	}, XU.FINISH);
 }
 
 process.on("SIGTERM", () =>
@@ -77,13 +86,16 @@ function startUnoconvServer()
 }
 
 tiptoe(
-	function runUnoconvServer()
+	function runServers()
 	{
 		startUnoconvServer();
+		
+		cdemuCP = runUtil.run("cdemu-daemon", ["--ctl-device=/dev/vhba_ctl", "--bus=session", "--num-devices=64", `--logfile=${path.join(__dirname, "..", "log", "cdemu-daemon.log")}`], {silent : true, detached : true});
 
 		XU.log`Registering routes...`;
 
 		fastify.get("/status", (request, reply) => reply.send({status : (unoconvCP ? C.DEXSERV_OK_RESPONSE : "error: unoconv server no longer running!")}));
+		fastify.get("/getCDEmuDeviceNum", (request, reply) => reply.send({deviceNum : (cdEmuDeviceNum++)%64}));
 
 		fastify.ready(this);
 	},

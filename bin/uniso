@@ -8,6 +8,8 @@ const XU = require("@sembiance/xu"),
 	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fileUtil = require("@sembiance/xutil").file,
+	httpUtil = require("@sembiance/xutil").http,
+	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
 	fs = require("fs"),
 	runUtil = require("@sembiance/xutil").run;
@@ -17,40 +19,50 @@ function usage(msg) { process.exit(XU.log`Usage: ${"uniso"} ${"<input.iso>"} ${"
 if(argv._.length!==2)
 	return usage();
 
-const inputFilePath = `${argv._[0]}`;
+const inputFilePath = path.resolve(`${argv._[0]}`);
 if(!fileUtil.existsSync(inputFilePath))
 	return usage(`Input file ${inputFilePath} does not exist.`);
 
-const outDirPath = `${argv._[1]}`;
+const OUT_DIR_PATH = path.resolve(`${argv._[1]}`);
 
-const tmpDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
-const mountDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
+const WIP_DIR_PATH = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
+const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
+const ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
+const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.cue`);
+const RUN_OPTIONS = {silent : true, cwd : WIP_DIR_PATH};
 
-// First thing we do is look for any CUE files in the same directory as our ISO file
-// If we find any and they are identified as a cue sheet and properly parsed by cue-parser, then IF the cue references our ISO file, then we use bchunk to extract any audio tracks and data tracks as seperate ISO files
-// Then we proceed with extractISOFile() which now is being passed a valid ISO.
-// We check in there if it's an HFS ISO, because if so we need to use 'hfsutils' bin programs to manually copy everything out, since we want the resource forks too and 'mount' doesn't support that
+// First thing we do is look for any CUE files in the same directory as our ISO file that are dexvert identified as a cue sheet and are properly parsed by cue-parser and contains references to our ISO file
+// If we don't a valid CUE file, we assume it's a single ISO file and we generate a fake CUE file so cdemu will work correctly
+// If it's an HFS ISO, we have to use 'hfsutils' bin programs to manually copy everything out, since we want the resource forks too and 'mount' doesn't support that
+
+function makeCueFile(cb)
+{
+	fs.writeFile(CUE_FILE_PATH, `FILE "${path.basename(inputFilePath)}" BINARY
+  TRACK 01 MODE1/2048
+    INDEX 01 00:00:00`, XU.UTF8, cb);
+}
 
 tiptoe(
 	function findCUEFiles()
 	{
+		dexvert.identify(inputFilePath, this.parallel());
 		fileUtil.glob(path.dirname(inputFilePath), "*.cue", {nocase : true}, this.parallel());
-		fs.mkdir(outDirPath, {recursive : true}, this.parallel());
-		fs.mkdir(tmpDirPath, {recursive : true}, this.parallel());
-		fs.mkdir(mountDirPath, {recursive : true}, this.parallel());
+		fs.mkdir(MOUNT_DIR_PATH, {recursive : true}, this.parallel());
 	},
-	function verifyCUEFiles(cueFilePaths)
+	function identifyCUEFiles(isoIdentifications, cueFilePaths)
 	{
+		this.data.isoIdentifications = isoIdentifications;
+
 		if(!cueFilePaths || cueFilePaths.length===0)
-			return this.jump(5);
+			return makeCueFile(err => this.jump(1, err));
 		
 		this.data.cueFilePaths = cueFilePaths;
 		this.data.cueFilePaths.parallelForEach((cueFilePath, subcb) => dexvert.identify(cueFilePath, {}, subcb), this);
 	},
-	function processCUEFiles(cueFileIdentifications)
+	function findMatchingCUEFile(cueFileIdentifications)
 	{
 		let matchingCue = null;
-		this.data.cueFilePaths.forEach((cueFilePath, i) =>
+		(this.data.cueFilePaths || []).forEach((cueFilePath, i) =>
 		{
 			if(!cueFileIdentifications[i].some(cueFileIdentification => cueFileIdentification.magic==="Cue Sheet"))
 				return;
@@ -67,72 +79,98 @@ tiptoe(
 		});
 
 		if(!matchingCue)
-			return this.jump(4);
-		
-		this.data.matchingCue = matchingCue;
+			makeCueFile(this);
+		else
+			fs.symlink(matchingCue.cueFilePath, CUE_FILE_PATH, this);
+	},
+	function symlinkISO()
+	{
+		fs.symlink(inputFilePath, ISO_FILE_PATH, this);
+	},
+	function getVirtualDeviceNum()
+	{
+		// HFS CD's must be processed manually
+		if(this.data.isoIdentifications.some(identification => ["ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
+			return extractHFSISO(err => this.jump(-1, err));
 
-		runUtil.run("bchunk", ["-w", inputFilePath, matchingCue.cueFilePath, `${path.basename(inputFilePath, path.extname(inputFilePath))}_track`], {verbose : true}, this);
+		httpUtil.get(`http://127.0.0.1:${C.DEXSERV_PORT}/getCDEmuDeviceNum`, this);
 	},
-	function findAudioTracks()
+	function unloadExistingDevice(getDeviceNumResponse)
 	{
-		fileUtil.glob(process.cwd(), "*.wav", {nocase : true}, this.parallel());
+		this.data.deviceNum = JSON.parse(getDeviceNumResponse).deviceNum;
+		runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
 	},
-	function moveAudioTracks(wavFilePaths)
+	function loadIntoVirtualDevice()
 	{
-		wavFilePaths.parallelForEach((wavFilePath, subcb) => fileUtil.move(wavFilePath, path.join(outDirPath, path.basename(wavFilePath)), subcb), this);
+		runUtil.run("cdemu", ["load", `${this.data.deviceNum}`, CUE_FILE_PATH], RUN_OPTIONS, this);
 	},
-	function findResultingISOFiles()
+	function queryStatusAndDeviceMapping()
 	{
-		fileUtil.glob(process.cwd(), "*.iso", {nocase : true}, this.parallel());
+		runUtil.run("cdemu", ["status"], RUN_OPTIONS, this.parallel());
+		runUtil.run("cdemu", ["device-mapping"], RUN_OPTIONS, this.parallel());
 	},
-	function extractISO(generatedISOFilePaths)
+	function mountISO(statusRaw, deviceMappingRaw)
 	{
-		extractISOFile((generatedISOFilePaths || [])[0] || inputFilePath, this);
+		(statusRaw || "").trim().split("\n").forEach(statusLine =>
+		{
+			const statusInfo = (statusLine.trim().match(/(?<deviceNum>\d+)\s+(?<loaded>True|False)\s+(?<filename>.+)/) || {}).groups;
+			if(statusInfo && +statusInfo.deviceNum===this.data.deviceNum && statusInfo.loaded!=="True")
+				throw new Error(`Failed to load CUE file ${CUE_FILE_PATH} into deviceNum ${this.data.deviceNum} ${statusRaw}`);
+		});
+		
+		let devPath = null;
+		(deviceMappingRaw || "").trim().split("\n").forEach(deviceLine =>
+		{
+			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s+(?<genericPath>.+)/) || {}).groups;
+			if(!deviceInfo || (+deviceInfo.deviceNum)!==this.data.deviceNum)
+				return;
+
+			devPath = deviceInfo.devPath.trim();
+		});
+
+		if(!devPath || devPath.length===0)
+			throw new Error(`Failed to find matching device path for num ${this.data.deviceNum} ${deviceMappingRaw}`);
+
+		this.data.devPath = devPath;
+
+		//this.data.loopNum = dexUtil.allocateLoopDev(this.data.devPath);
+		//runUtil.run("sudo", ["mount", `/dev/loop${this.data.loopNum}`, MOUNT_DIR_PATH], RUN_OPTIONS, this);
+		// So doing it this way was causing weird problems. Some files on PCD1235.cue (photo_cd/images/img0098.pcd for example) would appear as empty zero sized files
+		// Mounting directly seems to work fine. It's also safer in this case due to the way I'm emulating a virtual device with cdemu
+
+		runUtil.run("sudo", ["mount", this.data.devPath, MOUNT_DIR_PATH], RUN_OPTIONS, this);
+	},
+	function extractAnyAudio()
+	{
+		runUtil.run("libcdio-paranoia", ["-w", "-d", this.data.devPath, "-B"], {silent : true, cwd : OUT_DIR_PATH}, this);
+	},
+	function copyFiles()
+	{
+		runUtil.run("sudo", ["cp", "-r", "*", `"${OUT_DIR_PATH}/"`], {liveOutput : true, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
+	},
+	function fixPermissionsAndUnmount()
+	{
+		runUtil.run("sudo", ["umount", MOUNT_DIR_PATH], RUN_OPTIONS, this);
+	},
+	function removeVirtualDevice()
+	{
+		runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
 	},
 	function cleanup()
 	{
-		fileUtil.unlink(tmpDirPath, this.parallel());
-		fileUtil.unlink(mountDirPath, this.parallel());
+		fileUtil.unlink(WIP_DIR_PATH, this);
 	},
 	XU.FINISH
 );
 
-function extractISOFile(isoFilePath, cb)
-{
-	tiptoe(
-		function identifyISOFile()
-		{
-			dexvert.identify(isoFilePath, this);
-		},
-		function mountISO(identifications)
-		{
-			if(identifications.some(identification => ["ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
-				return extractHFSISO(isoFilePath, this.finish);
-
-			// Just a regular ISO, mount it and copy the files over
-			this.data.loopNum = dexUtil.allocateLoopDev(isoFilePath);
-			
-			runUtil.run("sudo", ["mount", `/dev/loop${this.data.loopNum}`, mountDirPath], {liveOutput : true}, this);
-		},
-		function copyFiles()
-		{
-			runUtil.run("cp", ["-r", "*", `"${path.resolve(outDirPath)}/"`], {liveOutput : true, shell : "/bin/bash", cwd : mountDirPath}, this);
-		},
-		function fixPermissionsAndUnmount()
-		{
-			runUtil.run("sudo", ["umount", mountDirPath], {liveOutput : true}, this);
-			dexUtil.freeLoopDev(this.data.loopNum);
-		},
-		cb
-	);
-}
 
 const HCDNUM_BIN = path.join(__dirname, "hcdnum");
 const HCOPYFILES_BIN = path.join(__dirname, "hcopyfiles");
 
-function extractHFSISO(isoFilePath, cb)
+function extractHFSISO(cb)
 {
 	const homeDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
+	// All the hfsutils store their 'state' in a file written to home, so we create a temporary fake home to not clobber other extractions taking place
 	const runOptions = {silent : true, env : {"HOME" : homeDirPath}};
 
 	const recurseHFS = function recurseHFS(subPath, recursecb)
@@ -140,11 +178,11 @@ function extractHFSISO(isoFilePath, cb)
 		tiptoe(
 			function mkdir()
 			{
-				fs.mkdir(path.join(outDirPath, subPath), {recursive : true}, this);
+				fs.mkdir(path.join(OUT_DIR_PATH, subPath), {recursive : true}, this);
 			},
 			function copyOutFiles()
 			{
-				runUtil.run(HCOPYFILES_BIN, [path.join(outDirPath, subPath)], runOptions, this);
+				runUtil.run(HCOPYFILES_BIN, [path.join(OUT_DIR_PATH, subPath)], runOptions, this);
 			},
 			function getDirListing()
 			{
@@ -192,7 +230,7 @@ function extractHFSISO(isoFilePath, cb)
 		},
 		function mountImage()
 		{
-			runUtil.run("hmount", [isoFilePath], runOptions, this);
+			runUtil.run("hmount", [ISO_FILE_PATH], runOptions, this);
 		},
 		function startRecursion()
 		{
@@ -200,11 +238,11 @@ function extractHFSISO(isoFilePath, cb)
 		},
 		function unmountImage()
 		{
-			runUtil.run("humount", [isoFilePath], runOptions, this);
+			runUtil.run("humount", [ISO_FILE_PATH], runOptions, this);
 		},
 		function findExtractedFiles()
 		{
-			fileUtil.glob(outDirPath, "**", {nodir : true}, this);
+			fileUtil.glob(OUT_DIR_PATH, "**", {nodir : true}, this);
 		},
 		function extractResourceForks(extractedFilePaths)
 		{

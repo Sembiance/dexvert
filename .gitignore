@@ -7,3 +7,4 @@ test/sample/
 music/midiInstrument/roland/*.sf2
 .vscode
 scribus/
+log/

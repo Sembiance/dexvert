@@ -66,7 +66,7 @@ dexvert requires a LOT of programs and some kernel options to be set. See Requir
 ${dexvertUsage}
 \`\`\`
 
-In order for documents to convert correctly, a single 'unoconv' daemon needs to be running. So 'dexserv' must be running in the background:
+In order for some documents to convert correctly, two daemons (unoconv and cdemu-daemon) need to be running as a user. So 'dexserv' must be started in the background:
 \`\`\`
 ${dexservUsage}
 \`\`\`

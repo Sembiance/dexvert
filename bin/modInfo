@@ -40,7 +40,7 @@ tiptoe(
 		try { infos.mikmod = parseMikmod(mikmodInfoRaw); } catch(parseErr) {}
 		try { infos.timidity = parseTimidity(timidityInfoRaw); } catch(parseErr) {}
 
-		["title", "type", "tracker", "patternCount", "sampleCount", "trackCount"].forEach(propName =>
+		["title", "type", "tracker", "patternCount", "sampleCount", "trackCount", "instruments"].forEach(propName =>
 		{
 			if(modInfo.hasOwnProperty(propName))
 				return;
@@ -85,7 +85,7 @@ function parseXMP(infoRaw="")
 			if(instrumentNameEndLoc===null)
 				instrumentNameEndLoc = line.match(/(?<precursor>\s+Instrument name\s+).*/).groups.precursor.length;
 			else
-				info.instruments.push(line.substring(2, instrumentNameEndLoc).trim());
+				info.instruments.push(line.substring(3, instrumentNameEndLoc).trimEnd());
 		}
 		else
 		{
@@ -142,9 +142,23 @@ function parseOpenMPT(infoRaw="")
 	if(lines.length===0)
 		return;
 	
-	const info = {};
+	let instrumentSection = false;
+
+	const info = {instruments : []};
 	lines.forEach(line =>
 	{
+		if(line.startsWith("instruments:"))
+		{
+			instrumentSection = true;
+			return;
+		}
+
+		if(instrumentSection)
+		{
+			info.instruments.push(line);
+			return;
+		}
+
 		Object.forEach({
 			title : {re : /^Title\.*:\s(?<value>.+)$/},
 			type : {re : /^Type\.*:\s(?<value>.+)$/},
@@ -160,6 +174,9 @@ function parseOpenMPT(infoRaw="")
 			info[propKey] = propInfo.num ? +matchProps.groups.value : matchProps.groups.value;
 		});
 	});
+
+	if(info.instruments.length===0)
+		delete info.instruments;
 
 	return info;
 }

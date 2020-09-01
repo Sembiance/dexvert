@@ -28,7 +28,7 @@ const OUT_DIR_PATH = path.resolve(`${argv._[1]}`);
 const WIP_DIR_PATH = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
 const ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
-const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.cue`);
+const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!path.extname(inputFilePath).match(/[A-Z]/) ? "cue" : "CUE"}`);
 const RUN_OPTIONS = {silent : true, cwd : WIP_DIR_PATH};
 
 // First thing we do is look for any CUE files in the same directory as our ISO file that are dexvert identified as a cue sheet and are properly parsed by cue-parser and contains references to our ISO file
@@ -52,6 +52,10 @@ tiptoe(
 	function identifyCUEFiles(isoIdentifications, cueFilePaths)
 	{
 		this.data.isoIdentifications = isoIdentifications;
+
+		this.data.isCDISO = isoIdentifications.some(identification => identification.from==="dexvert" && identification.formatid==="iso");
+		if(!this.data.isCDISO)
+			return this.jump(1);
 
 		if(!cueFilePaths || cueFilePaths.length===0)
 			return makeCueFile(err => this.jump(1, err));
@@ -87,8 +91,26 @@ tiptoe(
 	{
 		fs.symlink(inputFilePath, ISO_FILE_PATH, this);
 	},
-	function getVirtualDeviceNum()
+	function checkIfVCD()
 	{
+		runUtil.run("vcd-info", ["-c", CUE_FILE_PATH, "--show-info=vers"], RUN_OPTIONS, this);
+	},
+	function getVirtualDeviceNum(vcdInfo)
+	{
+		// Video CD's are special and need to be ripped with vcdxrip, otherwise we get input/output errors trying to copy the mpegav data
+		if(vcdInfo.split("\n").some(line => line.startsWith(" version: ")))
+		{
+			runUtil.run("vcdxrip", ["-c", CUE_FILE_PATH], {...RUN_OPTIONS, cwd : OUT_DIR_PATH}, err => this.jump(-1, err));
+			return;
+		}
+
+		if(!this.data.isCDISO)
+		{
+			// Non CD images should just be mounted directly
+			runUtil.run("sudo", ["mount", ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(5, err));
+			return;
+		}
+
 		// HFS CD's must be processed manually
 		if(this.data.isoIdentifications.some(identification => ["ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/].some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
 			return extractHFSISO(err => this.jump(-1, err));
@@ -146,7 +168,7 @@ tiptoe(
 	},
 	function copyFiles()
 	{
-		runUtil.run("sudo", ["cp", "-r", "*", `"${OUT_DIR_PATH}/"`], {liveOutput : true, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
+		runUtil.run("sudo", ["cp", "-r", "*", `"${OUT_DIR_PATH}/"`], {...RUN_OPTIONS, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
 	},
 	function fixPermissionsAndUnmount()
 	{
@@ -154,7 +176,10 @@ tiptoe(
 	},
 	function removeVirtualDevice()
 	{
-		runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
+		if(this.data.isCDISO)
+			runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
+		else
+			this();
 	},
 	function cleanup()
 	{

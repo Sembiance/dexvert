@@ -38,7 +38,10 @@ const SHA1_IGNORE_FILES =
 	archive :
 	{
 		// Not sure why, but the director extraction program produces different PNG files each time
-		director : [/.png$/]
+		director : [/.png$/],
+
+		// vcdxrip generate san XML file for extracted VCD isos, but it differs each time slightly, no big deal
+		iso : [/^videocd.xml$/]
 	},
 	document :
 	{
@@ -244,7 +247,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		
 			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
 			if(results.output.files && expectedFiles.length!==results.output.files.length)
-				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(results.output.files, expectedFiles)}`);
+				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
 
 			const {family, formatid} = results.id;
 			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))

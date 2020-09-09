@@ -82,3 +82,9 @@
 
 # ZX Spectrum CHR
 0	string/b	chr\x24	ZX Spectrum CHR
+
+# CharPad
+0	string/b	CTM\x05	CharPad
+
+# Apple IIGS Preferred Format
+2	string/b	\x00\x00\x04MAIN	Apple IIGS Preferred Format

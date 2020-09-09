@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 51 file formats are unsupported by dexvert.
+The following 46 file formats are unsupported by dexvert.
 
 
 
@@ -63,16 +63,12 @@ font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .
 
 
 
-## Image (16)
+## Image (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Amiga_Metafile) | .amf | [6 sample files](https://telparia.com/fileFormatSamples/image/amf/) - No known modern converter.
-image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | [2 sample files](https://telparia.com/fileFormatSamples/image/artMaster88/) - Converter and code available here: http://nanyanen.jp/library/readart.html  But it doesn't handle sample files, just a black box. Someone could take the code and probably deduce the format though.
 image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | [1 sample file](https://telparia.com/fileFormatSamples/image/cebraText/) - CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
-image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | [1 sample file](https://telparia.com/fileFormatSamples/image/fxg/) - Couldn't find a reliable converter.
-image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG, but no known converters exist, despite the specs being published.
-image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telparia.com/fileFormatSamples/image/grafx2/) - This is a modern program and file format which none of the converter programs currently support.
+image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
 image | HiRes Player Missile | .hpm | [14 sample files](https://telparia.com/fileFormatSamples/image/hiResPlayerMissile/) - Atari Graphics Studio is capable of converting these files. Sadly I ran into issues with it when running it under Wine with AutoIt. I haven't been able to locate another converter or any other real info for it.
 image | MLDF BMHD File | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldfbmhd/) - It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [43 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/) - No known converter or extractor.
@@ -81,7 +77,6 @@ image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki
 image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [1 sample file](https://telparia.com/fileFormatSamples/image/sgx/) - No known converter.
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/) - There are a bunch of different versions of TRS files. Haven't found anything that can convert the sample files yet. This gets close, but crashes: https://github.com/ArguablyUseful/TRS_extraction This reports it can't handle the version of the sample files: https://github.com/dominions-tools/dominions-tools/blob/master/dump-trs-data
-image | [ZX Spectrum BSP](http://fileformats.archiveteam.org/wiki/BSP_(ZX_Spectrum)) | .bsp | [2 sample files](https://telparia.com/fileFormatSamples/image/zxBSP/) - No known converters.
 
 
 

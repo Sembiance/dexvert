@@ -19,6 +19,7 @@ const XU = require("@sembiance/xu"),
 	anyProperty = require("@validatem/any-property"),
 	isURL = require("@validatem/is-url"),
 	isBoolean = require("@validatem/is-boolean"),
+	isPlainObject = require("@validatem/is-plain-object"),
 	isNonEmptyString = require("@validatem/is-non-empty-string"),
 	arrayOf = require("@validatem/array-of"),
 	oneOf = require("@validatem/one-of"),
@@ -94,7 +95,7 @@ function validateFormat(format)
 
 		idCheck : [isFunction, hasLengthBetween(0, 1)],
 
-		converterPriorty : [arrayOf([required, isNonEmptyString]), hasLengthBetween(1, Infinity)],
+		converterPriorty : [arrayOf(either([[required, isNonEmptyString], [{program : [required, isNonEmptyString], stateFlags : [isPlainObject]}]])), hasLengthBetween(1, Infinity)],
 		converterExclude : [arrayOf([required, isNonEmptyString]), hasLengthBetween(1, Infinity)],
 
 		inputMeta       : [isFunction, hasLengthOf(3)],

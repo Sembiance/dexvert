@@ -33,6 +33,7 @@
 		"@validatem/is-lowercase"          : "~0.1.0",
 		"@validatem/is-non-empty-string"   : "~0.1.0",
 		"@validatem/is-number"             : "~0.1.3",
+		"@validatem/is-plain-object"       : "~0.1.1",
 		"@validatem/is-positive"           : "~1.0.0",
 		"@validatem/is-regular-expression" : "~0.1.0",
 		"@validatem/is-url"                : "~0.2.0",

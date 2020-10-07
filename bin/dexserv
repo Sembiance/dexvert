@@ -6,7 +6,10 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	C = require(path.join(__dirname, "..", "lib", "C.js")),
 	runUtil = require("@sembiance/xutil").run,
+	fileUtil = require("@sembiance/xutil").file,
 	fastify = require("fastify")({logger : true});
+
+const VHBA_CTL_DEV_PATH = "/dev/vhba_ctl";
 
 function usage()
 {
@@ -86,11 +89,22 @@ function startUnoconvServer()
 }
 
 tiptoe(
-	function runServers()
+	function verifyVHBALoaded()
 	{
+		fileUtil.exists(VHBA_CTL_DEV_PATH, this);
+	},
+	function runServers(vhbaCtlExists)
+	{
+		if(!vhbaCtlExists)
+		{
+			XU.log`Failed to find ${VHBA_CTL_DEV_PATH}. Might need to do \`modprobe vhba\``;
+			process.exit(1);
+		}
+		console.log(vhbaCtlExists);
+
 		startUnoconvServer();
 		
-		cdemuCP = runUtil.run("cdemu-daemon", ["--ctl-device=/dev/vhba_ctl", "--bus=session", "--num-devices=64", `--logfile=${path.join(__dirname, "..", "log", "cdemu-daemon.log")}`], {silent : true, detached : true});
+		cdemuCP = runUtil.run("cdemu-daemon", [`--ctl-device=${VHBA_CTL_DEV_PATH}`, "--bus=session", "--num-devices=64", `--logfile=${path.join(__dirname, "..", "log", "cdemu-daemon.log")}`], {silent : true, detached : true});
 
 		XU.log`Registering routes...`;
 

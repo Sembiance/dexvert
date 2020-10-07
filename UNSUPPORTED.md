@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 47 file formats are unsupported by dexvert.
+The following 48 file formats are unsupported by dexvert.
 
 
 
@@ -88,10 +88,11 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (2)
+## Other (3)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
+other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 
 

@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 562 file formats are supported by dexvert.
+The following 565 file formats are supported by dexvert.
 
 
 
-## Archive (48)
+## Archive (51)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -26,6 +26,8 @@ archive | [Genus Graphics Library Compressed Archive](http://fileformats.archive
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [4 sample files](https://telparia.com/fileFormatSamples/archive/grasp/) - This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
 archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [1 sample file](https://telparia.com/fileFormatSamples/archive/gz/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/hypercard/)
+archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
+archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [ISO Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin | [17 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [1 sample file](https://telparia.com/fileFormatSamples/archive/lzx/)
@@ -46,6 +48,7 @@ archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | 
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [1 sample file](https://telparia.com/fileFormatSamples/archive/powerPack/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [1 sample file](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rnc/)
+archive | Raw Disk Image |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawDiskImage/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [3 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [1 sample file](https://telparia.com/fileFormatSamples/archive/sea/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [1 sample file](https://telparia.com/fileFormatSamples/archive/stc/)

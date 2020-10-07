@@ -9,3 +9,4 @@ wait
 
 find ./ -type d | parallel chmod a+x {} \;
 find ./ -type f | parallel chmod a-x {} \;
+find ./ -type f -iname "*.sh" | parallel chmod a+x {} \;

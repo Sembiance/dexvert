@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 562 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 565 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -143,6 +143,7 @@ app-arch/ttdecomp | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | 
 app-arch/unar | [unar](https://unarchiver.c3.cx/) | 
 app-arch/unice68 | [unice68](https://sourceforge.net/projects/sc68/) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
+app-arch/unshield | [unshield](https://github.com/twogood/unshield) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/cdemu | [*](https://cdemu.sourceforge.io) | 
@@ -178,7 +179,7 @@ media-gfx/nconvert | [nconvert](https://www.xnview.com/en/nconvert/) | dexvert
 media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
 media-gfx/seq2mp4 | [seq2mp4](https://github.com/Sembiance/seq2mp4) | dexvert
 media-gfx/transfig | [fig2dev](https://www.xfig.org/) | 
-media-gfx/uniconvertor | [uniconvertor](https://sk1project.net/uc2/) | dexvert
+media-gfx/uniconvertor | [echo](https://sk1project.net/uc2/) | dexvert
 media-gfx/xcftools | [xcf2png](http://henning.makholm.net/software) | dexvert
 media-libs/fontconfig | [fc-scan](https://fontconfig.org) | 
 media-libs/gd | [gd2topng](https://libgd.org) | 
@@ -221,7 +222,7 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="a52 acl alsa amr boost bzip2 cairo cddb cdio cdr curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch pdf png postproc postscript python qt5 readline rle rtc seccomp shm smith sndfile split-usr svg templates tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau visio vorbis vpx wavpack webp wmf wpg X x264 xattr xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unrar app-arch/unzip app-cdr/bchunk app-cdr/cdemu app-cdr/nrg2iso app-emulation/uade app-emulation/wine-vanilla app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-libs/libcdio-paranoia dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/nconvert media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-sound/adplay media-sound/fluid-soundfont media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mplayer media-video/vcdimager media-video/xanim sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl alsa amr boost bzip2 cairo cddb cdio cdr curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch pdf png postproc postscript python qt5 readline rle rtc seccomp shm smith sndfile split-usr svg templates tga theora threads tiff truetype twolame unicode utils v4l vaapi vcd vdpau visio vorbis vpx wavpack webp wmf wpg X x264 xattr xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unrar app-arch/unshield app-arch/unzip app-cdr/bchunk app-cdr/cdemu app-cdr/nrg2iso app-emulation/uade app-emulation/wine-vanilla app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-libs/libcdio-paranoia dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/nconvert media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-sound/adplay media-sound/fluid-soundfont media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mplayer media-video/vcdimager media-video/xanim sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
 ```
 
 ## Test Suite

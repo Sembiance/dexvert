@@ -53,7 +53,8 @@ tiptoe(
 	{
 		this.data.isoIdentifications = isoIdentifications;
 
-		this.data.isCDISO = isoIdentifications.some(identification => identification.from==="dexvert" && identification.formatid==="iso");
+		this.data.isCDISO =  isoIdentifications.filter(v => v.from==="dexvert").multiSort(v => v.confidence, true)[0].formatid==="iso";
+		this.data.isRawDiskImage =  isoIdentifications.filter(v => v.from==="dexvert").multiSort(v => v.confidence, true)[0].formatid==="rawDiskImage";
 		if(!this.data.isCDISO)
 			return this.jump(1);
 
@@ -93,15 +94,34 @@ tiptoe(
 	},
 	function checkIfVCD()
 	{
+		if(this.data.isRawDiskImage)
+		{
+			runUtil.run("/usr/bin/file", ["-L", ISO_FILE_PATH], this);
+			return;
+		}
+
+		if(!this.data.isCDISO)
+			return this();
+
 		runUtil.run("vcd-info", ["-c", CUE_FILE_PATH, "--show-info=vers"], RUN_OPTIONS, this);
 	},
-	function getVirtualDeviceNum(vcdInfo)
+	function getVirtualDeviceNum(isoInfo)
 	{
 		// Video CD's are special and need to be ripped with vcdxrip, otherwise we get input/output errors trying to copy the mpegav data
-		if(vcdInfo.split("\n").some(line => line.startsWith(" version: ")))
+		if(isoInfo && isoInfo.split("\n").some(line => line.startsWith(" version: ")))
 		{
 			runUtil.run("vcdxrip", ["-c", CUE_FILE_PATH], {...RUN_OPTIONS, cwd : OUT_DIR_PATH}, err => this.jump(-1, err));
 			return;
+		}
+
+		if(this.data.isRawDiskImage)
+		{
+			const startSector = (isoInfo.match(/startsector (?<startSector>\d+)/) || {groups : {}}).groups.startSector;
+			if(startSector && (+startSector)>0)
+			{
+				runUtil.run("sudo", ["mount", "-o", `loop,offset=${(+startSector)*512}`, ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(5, err));
+				return;
+			}
 		}
 
 		if(!this.data.isCDISO)

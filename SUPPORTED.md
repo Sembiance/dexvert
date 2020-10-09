@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 565 file formats are supported by dexvert.
+The following 566 file formats are supported by dexvert.
 
 
 
-## Archive (51)
+## Archive (52)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -20,6 +20,7 @@ archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/S
 archive | BOLT Game Data Archive | .blt | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [7 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
+archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/crunchMania/)
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [1 sample file](https://telparia.com/fileFormatSamples/archive/diskImage/)
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [1 sample file](https://telparia.com/fileFormatSamples/archive/gxlib/)

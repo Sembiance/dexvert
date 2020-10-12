@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+"use strict";
+const XU = require("@sembiance/xu"),
+	path = require("path"),
+	tiptoe = require("tiptoe"),
+	fs = require("fs"),
+	os = require("os"),
+	StreamSkip = require("stream-skip"),
+	fileUtil = require("@sembiance/xutil").file,
+	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js"));
+
+const MIN_FILE_SIZE = XU.KB;
+
+function usage()
+{
+	XU.log`${XU.cf.fg.cyan("Usage:")} dexwalk [options] <inputFilePath> <outputDirPath>
+
+Processes <inputFilePath> digging deep into the file for subfiles and extracting into <outputDirPath>
+
+${XU.cf.fg.cyan("Options:")}
+  ${XU.cf.fg.yellow("--verbose=<level>")}
+    Show additional info when processing. Levels 1 to 5 where 5 is most verbose
+
+   ${XU.cf.fg.yellow("--tmpDirPath=/mnt/tmp")}
+    Use a different tmp dir (default is os.tmpdir())
+	I suggest setting this to a 'tmpfs' mounted RAM disk.
+  
+   ${XU.cf.fg.yellow("--help")}
+    Displays this usage message`;
+	process.exit(0);
+}
+
+if(argv.help || argv._.length<2)
+	usage();
+
+const verbose = argv.verbose || 0;
+const INPUT_FILE_PATH = `${argv._[0]}`;
+const FILE_SIZE = fs.statSync(INPUT_FILE_PATH).size;
+const tmpDirPath = argv.tmpDirPath || os.tmpdir();
+const OUTPUT_DIR_PATH = `${argv._[1]}`;
+
+function tryPart(i, cb)
+{
+	const SUB_FILE_PATH = path.join(tmpDirPath, `${i}`);
+	XU.log`${`${((i/FILE_SIZE)*100).toFixed(2)}`.padStart(6, " ")}% - ${i} of ${FILE_SIZE}`;
+
+	tiptoe(
+		function createSubFile()
+		{
+			const inStream = fs.createReadStream(INPUT_FILE_PATH);
+			inStream.on("error", this);
+			inStream.on("end", this);
+			inStream.pipe(new StreamSkip({skip : i})).pipe(fs.createWriteStream(SUB_FILE_PATH));
+		},
+		function processSubFile()
+		{
+			this.capture();
+			dexvert.process(SUB_FILE_PATH, OUTPUT_DIR_PATH, {tmpDirPath, verbose, useTmpOutputDir : true}, this);
+		},
+		function removeSubFile()
+		{
+			// Errors are ignored
+			fileUtil.unlink(SUB_FILE_PATH, this);
+		},
+		cb
+	);
+}
+
+tiptoe(
+	function walkFile()
+	{
+		[].pushSequence(1, FILE_SIZE-MIN_FILE_SIZE).parallelForEach(tryPart, this, os.cpus().length*2);
+	},
+	function printResults()
+	{
+		console.log("print output files here");
+
+		this();
+	},
+	XU.FINISH
+);

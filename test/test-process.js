@@ -89,6 +89,7 @@ const FORMATID_MATCH_EXEMPT =
 	"trs80Star",			// .pix (conflict with xlPaint)
 	"imgScan",				// .raw	(conflict with xlPaint)
 	"atariGraphics",		// .mic (conflict with apStar)
+	"snx",					// barw22.snx fails to convert with snx but converts to static with recoil, which is wrong, but we just ignore it here for now
 	"blazingPaddlesFont"
 ];
 

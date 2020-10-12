@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 566 file formats are supported by dexvert.
+The following 567 file formats are supported by dexvert.
 
 
 
@@ -126,7 +126,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (410)
+## Image (411)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -242,7 +242,7 @@ image | [DuneGraph](http://fileformats.archiveteam.org/wiki/DuneGraph) | .dc1 .d
 image | [Dynamic Publisher Screen](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .pct | [7 sample files](https://telparia.com/fileFormatSamples/image/dynamicPublisherScreen/)
 image | [Dynamic Publisher Stamp](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .stp | [25 sample files](https://telparia.com/fileFormatSamples/image/dynamicPublisherStamp/)
 image | [ECI Graphic Editor](http://fileformats.archiveteam.org/wiki/ECI_Graphic_Editor) | .eci .ecp | [2 sample files](https://telparia.com/fileFormatSamples/image/eci/)
-image | [EggPaint](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | [28 sample files](https://telparia.com/fileFormatSamples/image/eggPaint/) - Also known as the 'True Colour Picture' format
+image | [EggPaint / True Colour Picture](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | [28 sample files](https://telparia.com/fileFormatSamples/image/eggPaint/)
 image | Electronika BK PIC | .pic | [1 sample file](https://telparia.com/fileFormatSamples/image/electronikaBKPIC/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | [8 sample files](https://telparia.com/fileFormatSamples/image/eps/) - Sometimes it's a vector based image, sometimes not. Haven't determined a way to differeentiate. So we just convert to PNG with nconvert and also to SVG with inkscape.
 image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [4 sample files](https://telparia.com/fileFormatSamples/image/esm/)
@@ -452,6 +452,7 @@ image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupe_Mod
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | [2 sample files](https://telparia.com/fileFormatSamples/image/samarHiresInterlace/)
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [4 sample files](https://telparia.com/fileFormatSamples/image/sar/)
 image | [Scalable Vector Graphics](http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics) | .svg .svgz | [3 sample files](https://telparia.com/fileFormatSamples/image/svg/)
+image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic) | .snx | [6 sample files](https://telparia.com/fileFormatSamples/image/snx/) - This only is able to convert files that are just wrapped JPEG images (dragon*.snx). Others are in an unknown file format, including barw22.snx.
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [1 sample file](https://telparia.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)

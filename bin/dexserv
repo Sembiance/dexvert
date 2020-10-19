@@ -100,7 +100,6 @@ tiptoe(
 			XU.log`Failed to find ${VHBA_CTL_DEV_PATH}. Might need to do \`modprobe vhba\``;
 			process.exit(1);
 		}
-		console.log(vhbaCtlExists);
 
 		startUnoconvServer();
 		

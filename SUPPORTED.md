@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 567 file formats are supported by dexvert.
+The following 572 file formats are supported by dexvert.
 
 
 
@@ -49,7 +49,7 @@ archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | 
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [1 sample file](https://telparia.com/fileFormatSamples/archive/powerPack/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [1 sample file](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rnc/)
-archive | Raw Disk Image |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawDiskImage/)
+archive | Raw Partition |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawPartition/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [3 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [1 sample file](https://telparia.com/fileFormatSamples/archive/sea/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [1 sample file](https://telparia.com/fileFormatSamples/archive/stc/)
@@ -126,7 +126,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (411)
+## Image (416)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -140,6 +140,7 @@ image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Am
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | [2 sample files](https://telparia.com/fileFormatSamples/image/info/)
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | [3 sample files](https://telparia.com/fileFormatSamples/image/amosIcons/)
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | [4 sample files](https://telparia.com/fileFormatSamples/image/amosPicture/)
+image | AMOS Picture Packer | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/amosPicturePacker/)
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | [3 sample files](https://telparia.com/fileFormatSamples/image/amosSprites/) - Sometimes the spite frames output are all the same size and make a nice animated image (abydosconvert does this with webp output) However often this format contains multiple frames of different sizes and the 'positioning' and timing information for animation is not processed So we also run deark which just outputs all the sprite frames individually
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [4 sample files](https://telparia.com/fileFormatSamples/image/amstradMode5/)
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [6 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
@@ -178,6 +179,7 @@ image | [AtariTools-800 Graphic](http://fileformats.archiveteam.org/wiki/AtariTo
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | [4 sample files](https://telparia.com/fileFormatSamples/image/avif/)
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | [1 sample file](https://telparia.com/fileFormatSamples/image/avatar/)
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | [7 sample files](https://telparia.com/fileFormatSamples/image/epa/)
+image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/)
 image | BBC Micro Image | .bb0 .bb1 .bb2 .bb4 .bb5 | [5 sample files](https://telparia.com/fileFormatSamples/image/bbcMicro/)
 image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) | .bbg | [1 sample file](https://telparia.com/fileFormatSamples/image/ldpic/)
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | [4 sample files](https://telparia.com/fileFormatSamples/image/bpg/) - Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
@@ -385,6 +387,7 @@ image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wik
 image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | [2 sample files](https://telparia.com/fileFormatSamples/image/naplps/) - Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [6 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
+image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [47 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
 image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [12 sample files](https://telparia.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [4 sample files](https://telparia.com/fileFormatSamples/image/nikon/)
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | [1 sample file](https://telparia.com/fileFormatSamples/image/otaBitmap/)
@@ -445,6 +448,7 @@ image | [Radiance HDR](http://fileformats.archiveteam.org/wiki/Radiance_HDR) | .
 image | [RAG-D](http://fileformats.archiveteam.org/wiki/RAG-D) | .rag | [5 sample files](https://telparia.com/fileFormatSamples/image/rag/)
 image | [Rainbow Painter](http://fileformats.archiveteam.org/wiki/Rainbow_Painter) | .rp | [2 sample files](https://telparia.com/fileFormatSamples/image/rp/)
 image | [RAMbrandt](http://fileformats.archiveteam.org/wiki/RAMbrandt) | .rm0 .rm1 .rm2 .rm3 .rm4 | [2 sample files](https://telparia.com/fileFormatSamples/image/rambrandt/)
+image | ReGIS | .regis | [1 sample file](https://telparia.com/fileFormatSamples/image/regis/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [1 sample file](https://telparia.com/fileFormatSamples/image/rembrandt/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [138 sample files](https://telparia.com/fileFormatSamples/image/rockyInterlace/)
 image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | [2 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
@@ -455,6 +459,7 @@ image | [Scalable Vector Graphics](http://fileformats.archiveteam.org/wiki/Scala
 image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic) | .snx | [6 sample files](https://telparia.com/fileFormatSamples/image/snx/) - This only is able to convert files that are just wrapped JPEG images (dragon*.snx). Others are in an unknown file format, including barw22.snx.
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [1 sample file](https://telparia.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
+image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [3 sample files](https://telparia.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg*.sgx
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | [5 sample files](https://telparia.com/fileFormatSamples/image/sgi/)
 image | [Sinbad Slideshow](http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow) | .ssb | [2 sample files](https://telparia.com/fileFormatSamples/image/ssb/)

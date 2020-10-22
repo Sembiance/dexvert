@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 567 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 572 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -179,7 +179,7 @@ media-gfx/nconvert | [nconvert](https://www.xnview.com/en/nconvert/) | dexvert
 media-gfx/recoil | [recoil2png](http://recoil.sourceforge.net) | dexvert
 media-gfx/seq2mp4 | [seq2mp4](https://github.com/Sembiance/seq2mp4) | dexvert
 media-gfx/transfig | [fig2dev](https://www.xfig.org/) | 
-media-gfx/uniconvertor | [echo](https://sk1project.net/uc2/) | dexvert
+media-gfx/uniconvertor | [uniconvertor](https://sk1project.net/uc2/) | dexvert
 media-gfx/xcftools | [xcf2png](http://henning.makholm.net/software) | dexvert
 media-libs/fontconfig | [fc-scan](https://fontconfig.org) | 
 media-libs/gd | [gd2topng](https://libgd.org) | 

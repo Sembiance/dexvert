@@ -46,13 +46,13 @@ exports.validate = function validate(cb)
 
 function validateFormat(format)
 {
-	const filesizeValues = [];
+	const fileSizeValues = [];
 	if(!format.meta.ext || format.meta.ext.length===1)
-		filesizeValues.push(isPositive, arrayOf([isPositive]));
+		fileSizeValues.push(isPositive, arrayOf([isPositive]));
 	else
-		filesizeValues.push(isPositive, arrayOf([isPositive]), [anyProperty({key : [required, isNonEmptyString, isLowercase], value : [required, either([[isPositive], arrayOf([isPositive])])]})]);
+		fileSizeValues.push(isPositive, arrayOf([isPositive]), [anyProperty({key : [required, isNonEmptyString, isLowercase], value : [required, either([[isPositive], arrayOf([isPositive])])]})]);
 
-	const filesizeValue = filesizeValues.length===1 ? filesizeValues : [either(filesizeValues)];
+	const fileSizeValue = fileSizeValues.length===1 ? fileSizeValues : [either(fileSizeValues)];
 
 	const formatMetaSchema =
 	{
@@ -83,8 +83,8 @@ function validateFormat(format)
 		weakMagic      : [isBoolean],
 		trustMagic     : [isBoolean],
 
-		filesize            : filesizeValue,
-		forbidFilesizeMatch : [isBoolean],
+		fileSize            : fileSizeValue,
+		forbidFileSizeMatch : [isBoolean],
 
 		filename : [arrayOf(either([[isNonEmptyString], [isRegex]])), hasLengthBetween(1, Infinity)]
 	};

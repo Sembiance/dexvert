@@ -66,7 +66,7 @@ If an array, then none of the given extensions will be matched
 When processing, the extension used is this priority:
 1. An extension returned from safeExt() (if present)
 2. Original filename extension (IF present in meta.ext array)
-3. Extension matched from a filesize match
+3. Extension matched from a fileSize match
 4. The first extension in meta.ext array
 
 
@@ -80,21 +80,21 @@ If it's a regex, the magic must match the regex exactly.
 An array of magics that the file must NOT match.
 
 >>> weakMagic : true
-If true, only match if magic matches AND ALSO ext/filename/filesize matches.
+If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 
 >>> trustMagic : true
 If a magic is marked as untrustworthy elsewhere, you can trust it explicitly by setting this to true.
 
 
 >>> ******** File Size
->>> filesize : 28124   ||   filesize : [8000, 9000, 10000]   ||   filesize : {".gif" : 3192, ".png" : [24000, 24200]}
+>>> fileSize : 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}
 If a number, files must be exactly this size.
 If an array, files must be any of the sizes in the array.
 If an object, the keys are extensions and files with the given extension must be that file size.
-Files without extensions can also match formats based on filesize alone.
+Files without extensions can also match formats based on fileSize alone.
 
->>> forbidFilesizeMatch : true
-Forbid matching unknown files to this format based on filesize.
+>>> forbidFileSizeMatch : true
+Forbid matching unknown files to this format based on fileSize.
 
 
 >>> ******** Filename

@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 46 file formats are unsupported by dexvert.
+The following 45 file formats are unsupported by dexvert.
 
 
 
@@ -64,17 +64,16 @@ font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .
 
 
 
-## Image (9)
+## Image (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-image | [CebraText](http://fileformats.archiveteam.org/wiki/CebraText) | .ttx | [1 sample file](https://telparia.com/fileFormatSamples/image/cebraText/) - CebraText came out in 2003 for Windows. Sadly, it doesn't work with wine and I couldn't find any converter programs that supported the file format.
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
 image | HiRes Player Missile | .hpm | [14 sample files](https://telparia.com/fileFormatSamples/image/hiResPlayerMissile/) - Atari Graphics Studio is capable of converting these files. Sadly I ran into issues with it when running it under Wine with AutoIt. I haven't been able to locate another converter or any other real info for it.
 image | MLDF BMHD File | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldfbmhd/) - It's probably an image format. IFF format FORM with MLDFBMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
-image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
+image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/) - There are a bunch of different versions of TRS files. Haven't found anything that can convert the sample files yet. This gets close, but crashes: https://github.com/ArguablyUseful/TRS_extraction This reports it can't handle the version of the sample files: https://github.com/dominions-tools/dominions-tools/blob/master/dump-trs-data
 
 

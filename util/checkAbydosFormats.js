@@ -10,26 +10,32 @@ const XU = require("@sembiance/xu"),
 const IGNORED_MIMES =
 [
 	// Handled natively
-	"application/pdf", "application/x-pdf",
 	"image/apng", "image/vnd.mozilla.apng",
 
 	// Handled by another mime type
 	"image/jpeg2000",
-
+	"image/x-eps",
+	"image/x-stos-picturepacker",
+	"image/x-portable-anymap",
+	
 	// Handled by another program
-	"video/x-anim"
+	"video/x-anim",
+
+	// Chosen not to handle at all
+	"application/x-doom-wad"
 ];
 
 tiptoe(
 	function downloadWebPage()
 	{
 		httpUtil.get("http://snisurset.net/code/abydos/supported.html", this.parallel());
-		fileUtil.glob(path.join(__dirname, "..", "lib", "format", "image"), "**/*.js", {nodir : true}, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
 	},
 	function checkFormats(formatsHTMLRaw, imageFormatFilePaths)
 	{
-		const supportedMimeTypes = imageFormatFilePaths.map(imageFormatFilePath => require(imageFormatFilePath).meta.mimeType).filterEmpty();
+		const supportedMimeTypes = imageFormatFilePaths.map(imageFormatFilePath => (require(imageFormatFilePath).meta || {}).mimeType).filterEmpty();
 
+		let unsupportedCount = 0;
 		const doc = domino.createWindow(formatsHTMLRaw.toString("utf8")).document;
 		Array.from(doc.querySelectorAll("table.grid tr")).forEach(row =>
 		{
@@ -42,7 +48,10 @@ tiptoe(
 				return;
 
 			XU.log`Unsupported abydos format: ${cells[0]} ${mimeTypes.join(", ")}`;
+			unsupportedCount++;
 		});
+
+		XU.log`\nUnsupported count: ${unsupportedCount}`;
 
 		this();
 	},

@@ -48,6 +48,7 @@
 		"ioctl"                            : "~2.0.2",
 		"minimist"                         : "~1.2.5",
 		"posix"                            : "~4.2.0",
+		"stream-buffers"                   : "~3.0.2",
 		"stream-skip"                      : "~1.0.3",
 		"svgo"                             : "~1.3.2",
 		"tiptoe"                           : "file:/mnt/compendium/DevLab/node-modules/tiptoe",

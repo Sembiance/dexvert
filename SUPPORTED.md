@@ -1,10 +1,10 @@
 # Supported File Formats
 
-The following 586 file formats are supported by dexvert.
+The following 587 file formats are supported by dexvert.
 
 
 
-## Archive (52)
+## Archive (53)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -20,6 +20,7 @@ archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/S
 archive | BOLT Game Data Archive | .blt | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [7 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
+archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [1 sample file](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/crunchMania/)
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [1 sample file](https://telparia.com/fileFormatSamples/archive/diskImage/)
@@ -296,7 +297,7 @@ image | [Haiku Vector Icon Format](http://fileformats.archiveteam.org/wiki/Haiku
 image | Hard Color Map | .hcm | [2 sample files](https://telparia.com/fileFormatSamples/image/hcm/)
 image | [Hard Interlace Picture](http://fileformats.archiveteam.org/wiki/Hard_Interlace_Picture) | .hip hps | [44 sample files](https://telparia.com/fileFormatSamples/image/hip/)
 image | [Hi-Eddi](http://fileformats.archiveteam.org/wiki/Hi-Eddit) | .hed | [4 sample files](https://telparia.com/fileFormatSamples/image/hiEddi/)
-image | [Hi-Pic Creator](http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator) | .hpc | [4 sample files](https://telparia.com/fileFormatSamples/image/hiPic/)
+image | [Hi-Pic Creator](http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator) | .hpc | [2 sample files](https://telparia.com/fileFormatSamples/image/hiPic/)
 image | [Hierarchical Data Format v4](http://fileformats.archiveteam.org/wiki/HDF) | .hdf | [3 sample files](https://telparia.com/fileFormatSamples/image/hdf4/) - nconvert doesn't seem to handle all files, such as input_256 and input_truecolor
 image | [Hierarchical Data Format v5](http://fileformats.archiveteam.org/wiki/HDF) | .h5 | [2 sample files](https://telparia.com/fileFormatSamples/image/hdf5/) - Only support converting to grayscale.
 image | [High Efficiency Image File](http://fileformats.archiveteam.org/wiki/HEIF) | .heic .heif | [3 sample files](https://telparia.com/fileFormatSamples/image/heic/)
@@ -336,7 +337,7 @@ image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [5 sample files](https://telparia.com/fileFormatSamples/image/viff/)
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [1 sample file](https://telparia.com/fileFormatSamples/image/kissCel/)
 image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | [29 sample files](https://telparia.com/fileFormatSamples/image/koalaMicroillustrator/) - APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
-image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .gig .koa .kla .gg | [5 sample files](https://telparia.com/fileFormatSamples/image/koalaPaint/)
+image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .koa .gig .kla .gg | [10 sample files](https://telparia.com/fileFormatSamples/image/koalaPaint/)
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | [1 sample file](https://telparia.com/fileFormatSamples/image/cin/)
 image | [Kodak FlashPix](http://fileformats.archiveteam.org/wiki/FPX) | .fpx | [5 sample files](https://telparia.com/fileFormatSamples/image/fpx/)
 image | [Kodak Photo CD](http://fileformats.archiveteam.org/wiki/Photo_CD) | .pcd | [6 sample files](https://telparia.com/fileFormatSamples/image/pcd/)
@@ -460,7 +461,7 @@ image | [RAMbrandt](http://fileformats.archiveteam.org/wiki/RAMbrandt) | .rm0 .r
 image | ReGIS | .regis | [1 sample file](https://telparia.com/fileFormatSamples/image/regis/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [1 sample file](https://telparia.com/fileFormatSamples/image/rembrandt/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [138 sample files](https://telparia.com/fileFormatSamples/image/rockyInterlace/)
-image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | [2 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
+image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | [5 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
 image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupe_Mode_4) | .ss4 .scs4 | [9 sample files](https://telparia.com/fileFormatSamples/image/samCoupeMode4/)
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | [2 sample files](https://telparia.com/fileFormatSamples/image/samarHiresInterlace/)
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [4 sample files](https://telparia.com/fileFormatSamples/image/sar/)

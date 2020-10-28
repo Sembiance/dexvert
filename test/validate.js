@@ -137,13 +137,15 @@ function validateProgram(program)
 
 	const programSchema =
 	{
-		meta       : [required, programMetaSchema],
-		bin        : [required, isFunction, hasLengthBetween(0, 2)],
-		args       : [required, isFunction, hasLengthOf(2)],	// Technically it's 4, but args with defaults don't count in .length
-		cwd        : [isFunction, hasLengthBetween(0, 2)],
-		pre        : [isFunction, hasLengthOf(3)],
-		post       : [isFunction, hasLengthOf(3)],
-		runOptions : [isFunction, hasLengthBetween(0, 2)]
+		meta        : [required, programMetaSchema],
+		bin         : [isFunction, hasLengthBetween(0, 2)],
+		wine        : [isFunction, hasLengthBetween(0, 2)],
+		args        : [required, isFunction, hasLengthOf(2)], 	// Technically it's 4, but args with defaults don't count in .length
+		cwd         : [isFunction, hasLengthBetween(0, 2)],
+		pre         : [isFunction, hasLengthOf(3)],
+		post        : [isFunction, hasLengthOf(3)],
+		runOptions  : [isFunction, hasLengthBetween(0, 2)],
+		wineOptions : [isFunction, hasLengthBetween(0, 2)]
 	};
 
 	// Format specific properties that are shared for easier re-use

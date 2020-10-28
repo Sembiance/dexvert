@@ -41,6 +41,9 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 >>> bin = state => "binary_program"
 A function that returns the name of the binary to run
 
+>>> wine = state => "binary_program"
+A function that returns the name of the binary to run with WINE
+
 >>> args = (state, p, inPath=DEFAULT, outPath=DEFAULT) => ([arg1, arg2])
 A function that returns an array of arguments to pass to the binary.
 Always output to a generic filename like 'outfile' in the OUTPUT dirPath (don't use cwd if it can be helped, saved on copies)
@@ -60,3 +63,6 @@ Here is where you should rename any generic 'outfile' names to the original inpu
 
 >>> runOptions = state => ({virtualX : true})
 Can return an object of run options to be passed into runUtil.run
+
+>>> wineOptions = state => ({timeout : XU.MINUTE})
+Can return an object of run options to be passed into util.wine.run()

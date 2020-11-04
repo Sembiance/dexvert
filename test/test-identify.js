@@ -57,7 +57,7 @@ tiptoe(
 		}
 
 		if(argv.format)
-			sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(`${argv.format}/`));
+			sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(argv.format));
 		if(argv.extension)
 			sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));
 		
@@ -68,7 +68,7 @@ tiptoe(
 
 		Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			if(!extraFilePath.startsWith(`${argv.format}/`))
+			if(!extraFilePath.startsWith(argv.format))
 				return;
 
 			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;

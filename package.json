@@ -47,6 +47,7 @@
 		"fastify"                          : "~3.0.2",
 		"ioctl"                            : "~2.0.2",
 		"minimist"                         : "~1.2.5",
+		"moment"                           : "~2.29.1",
 		"posix"                            : "~4.2.0",
 		"stream-buffers"                   : "~3.0.2",
 		"stream-skip"                      : "~1.0.3",

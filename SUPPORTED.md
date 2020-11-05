@@ -46,7 +46,7 @@ archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [1 sample file](https://telparia.com/fileFormatSamples/archive/arc/)
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [1 sample file](https://telparia.com/fileFormatSamples/archive/pcxLib/)
-archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [3 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
+archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [4 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [1 sample file](https://telparia.com/fileFormatSamples/archive/powerPack/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [1 sample file](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rnc/)

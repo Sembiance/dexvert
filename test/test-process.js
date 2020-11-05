@@ -4,6 +4,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require("./testUtil.js"),
 	fileUtil = require("@sembiance/xutil").file,
+	moment = require("moment"),
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
@@ -38,10 +39,7 @@ const SHA1_IGNORE_FILES =
 	archive :
 	{
 		// Not sure why, but the director extraction program produces different PNG files each time
-		director : [/.png$/],
-
-		// vcdxrip generate san XML file for extracted VCD isos, but it differs each time slightly, no big deal
-		iso : [/^videocd.xml$/]
+		director : [/.png$/]
 	},
 	document :
 	{
@@ -68,8 +66,31 @@ const SHA1_IGNORE_FILES =
 	},
 	music :
 	{
+		// These files are slightly different each time
 		"med" : [/juanidance.flac$/],
-		"sid" : [/.flac$/]	// Not sure why, but the FLAC files generated from the WAVs from sidplay2 are different each time
+		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+	},
+	video :
+	{
+		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
+		"disneyCFAST" : [/.mp4$/],
+		"fantavision" : [/.mp4$/],
+		"movieSetter" : [/.mp4$/]
+	}
+};
+
+const SIZE_IGNORE_FILES =
+{
+	image :
+	{
+		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
+		"3dCK" : [/.png$/]
+	},
+	music :
+	{
+		// These files are slightly different each time
+		"med" : [/juanidance.flac$/],
+		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 	},
 	video :
 	{
@@ -220,7 +241,19 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(results.processed && results.output.files)
 			{
 				newTestData.files = {};
-				results.output.files.forEach(outSubFilePath => { newTestData.files[outSubFilePath] = hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath))); });
+				results.output.files.forEach(outSubFilePath =>
+				{
+					const outSubFileStats = fs.statSync(path.join(outDirPath, outSubFilePath));
+					const outSubFileRecord =
+					{
+						sum  : hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath))),
+						size : outSubFileStats.size
+					};
+					if(outSubFileStats.mtime.getFullYear()<2020)
+						outSubFileRecord.ts = moment(outSubFileStats.mtime).format("YYYY-MM-DD");
+					
+					newTestData.files[outSubFilePath] = outSubFileRecord;
+				});
 			}
 
 			if(argv.record)
@@ -233,6 +266,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", "No test data for this file", `${results.id.family}/${results.id.formatid}`, newTestData);
 
 			const sampleTestData = testData[sampleSubFilePath];
+
 			this.data.results = results;
 			if(!!results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq
 				return this(undefined, "FAIL", `Expected processed to be ${XU.c.fg.white + sampleTestData.processed + XU.c.fg.orange} but got ${XU.c.fg.white + results.processed + XU.c.fg.orange} instead`);
@@ -262,6 +296,25 @@ function testSampleFile(sampleFilePath, silent, cb)
 				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
 					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath} (Expected: ${expectedFiles.join(", ")})`);
 
+				const newOutStat = fs.statSync(path.join(outDirPath, outSubFilePath));
+
+				if(!(SIZE_IGNORE_FILES[family] &&
+				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]) &&
+				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m))))
+				{
+					if(newOutStat.size!==sampleTestData.files[outSubFilePath].size)
+						return this(undefined, "FAIL", `size mistmatch ${newOutStat.size} vs expected ${sampleTestData.files[outSubFilePath].size}`, outSubFilePath);
+				}
+				
+				if(newOutStat.mtime.getFullYear()<2020 && !sampleTestData.files[outSubFilePath].ts)
+					return this(undefined, "FAIL", `Output file timestamp is an old date of ${moment(newOutStat.mtime).format("YYYY-MM-DD")} but this was unexpected`, outSubFilePath);
+
+				if(newOutStat.mtime.getFullYear()>=2020 && sampleTestData.files[outSubFilePath].ts)
+					return this(undefined, "FAIL", `Output file timestamp is not an old date, but we expected one: ${sampleTestData.files[outSubFilePath].ts}`, outSubFilePath);
+				
+				if(newOutStat.mtime.getFullYear()<2020 && sampleTestData.files[outSubFilePath].ts && moment(newOutStat.mtime).format("YYYY-MM-DD")!==sampleTestData.files[outSubFilePath].ts)
+					return this(undefined, "FAIL", `Output file timestamp does not match. Got ${moment(newOutStat.mtime).format("YYYY-MM-DD")} but expected ${sampleTestData.files[outSubFilePath].ts}`, outSubFilePath);
+
 				if(SHA1_IGNORE_FILES[family] &&
 				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) &&
 				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m)))
@@ -270,7 +323,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 					return;
 				}
 
-				if(hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath)))!==sampleTestData.files[outSubFilePath])
+				if(hashUtil.hash("sha1", fs.readFileSync(path.join(outDirPath, outSubFilePath)))!==sampleTestData.files[outSubFilePath].sum)
 					return this(undefined, "FAIL", "SHA1 sum mistmatch", outSubFilePath);
 
 				expectedFiles.removeOnce(outSubFilePath);
@@ -298,7 +351,9 @@ function testSampleFile(sampleFilePath, silent, cb)
 				if(status!=="PASS")
 				{
 					extraArgs.push(outDirPath);
-					fs.writeFileSync(path.join(outDirPath, "dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);
+
+					if(this.data.results)
+						fs.writeFileSync(path.join(outDirPath, "dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);
 				}
 				testUtil.logResult(status, sampleSubFilePath, msg, ...extraArgs);
 			}

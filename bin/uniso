@@ -109,10 +109,7 @@ tiptoe(
 	{
 		// Video CD's are special and need to be ripped with vcdxrip, otherwise we get input/output errors trying to copy the mpegav data
 		if(isoInfo && isoInfo.split("\n").some(line => line.startsWith(" version: ")))
-		{
-			runUtil.run("vcdxrip", ["-c", CUE_FILE_PATH], {...RUN_OPTIONS, cwd : OUT_DIR_PATH}, err => this.jump(-1, err));
-			return;
-		}
+			return vcdRip(err => this.jump(-1, err));
 
 		if(this.data.isRawDiskImage)
 		{
@@ -208,6 +205,29 @@ tiptoe(
 	XU.FINISH
 );
 
+function vcdRip(cb)
+{
+	tiptoe(
+		function runVCDXRip()
+		{
+			runUtil.run("vcdxrip", ["-c", CUE_FILE_PATH], {...RUN_OPTIONS, cwd : OUT_DIR_PATH}, this);
+		},
+		function stripCommentsFromXML()
+		{
+			// vcdxrip creates an XML file with a comment with the current command being executed which causes this file to change from run to run due to temp dir, etc.
+			// Supposed to be able to pass "--no-command-comment" to vcdxrip to prevent this, but it does not work for me. So we use xmlstarlet to strip out comments
+			runUtil.run("xmlstarlet", ["-q", "c14n", "--without-comments", "videocd.xml"], {...RUN_OPTIONS, cwd : OUT_DIR_PATH}, this);
+		},
+		function saveNewXMLFile(xmlRaw)
+		{
+			if(!xmlRaw || xmlRaw.length===0)
+				return this();
+			
+			fs.writeFile(path.join(OUT_DIR_PATH, "videocd.xml"), `<?xml version="1.0"?>\n${xmlRaw}`, XU.UTF8, this);
+		},
+		cb
+	);
+}
 
 const HCDNUM_BIN = path.join(__dirname, "hcdnum");
 const HCOPYFILES_BIN = path.join(__dirname, "hcopyfiles");

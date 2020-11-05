@@ -233,6 +233,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", "No test data for this file", `${results.id.family}/${results.id.formatid}`, newTestData);
 
 			const sampleTestData = testData[sampleSubFilePath];
+			this.data.results = results;
 			if(!!results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq
 				return this(undefined, "FAIL", `Expected processed to be ${XU.c.fg.white + sampleTestData.processed + XU.c.fg.orange} but got ${XU.c.fg.white + results.processed + XU.c.fg.orange} instead`);
 
@@ -295,7 +296,10 @@ function testSampleFile(sampleFilePath, silent, cb)
 			{
 				const extraArgs = Array.from(args);
 				if(status!=="PASS")
+				{
 					extraArgs.push(outDirPath);
+					fs.writeFileSync(path.join(outDirPath, "dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);
+				}
 				testUtil.logResult(status, sampleSubFilePath, msg, ...extraArgs);
 			}
 

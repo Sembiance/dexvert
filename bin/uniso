@@ -124,7 +124,7 @@ tiptoe(
 		if(!this.data.isCDISO)
 		{
 			// Non CD images should just be mounted directly
-			runUtil.run("sudo", ["mount", ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(5, err));
+			runUtil.run("sudo", ["mount", ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(6, err));
 			return;
 		}
 
@@ -185,9 +185,9 @@ tiptoe(
 	},
 	function copyFiles()
 	{
-		runUtil.run("sudo", ["cp", "-r", "*", `"${OUT_DIR_PATH}/"`], {...RUN_OPTIONS, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
+		runUtil.run("sudo", ["cp", "--preserve=timestamps", "-r", "*", `"${OUT_DIR_PATH}/"`], {...RUN_OPTIONS, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
 	},
-	function fixPermissionsAndUnmount()
+	function unMount()
 	{
 		runUtil.run("sudo", ["umount", MOUNT_DIR_PATH], RUN_OPTIONS, this);
 	},

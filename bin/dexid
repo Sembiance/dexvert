@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 "use strict";
 const XU = require("@sembiance/xu"),
-	path = require("path"),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	tiptoe = require("tiptoe"),
 	printUtil = require("@sembiance/xutil").print,
-	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js"));
+	dexvert = require("../lib/dexvert.js");
 
 function usage()
 {

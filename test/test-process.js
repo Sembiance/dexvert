@@ -2,14 +2,14 @@
 /* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	testUtil = require(path.join(__dirname, "testUtil.js")),
+	testUtil = require("./testUtil.js"),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
-	{validate} = require(path.join(__dirname, "validate.js")),
-	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
-	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js")),
+	{validate} = require("./validate.js"),
+	dexUtil = require("../lib/dexUtil.js"),
+	dexvert = require("../lib/dexvert.js"),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fs = require("fs"),
 	os = require("os"),
@@ -116,7 +116,7 @@ tiptoe(
 		testData = JSON.parse(_testData);
 
 		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
-		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);
+		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require, max-len
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
 		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
@@ -124,7 +124,7 @@ tiptoe(
 		if(argv.format)
 			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(argv.format));
 		if(argv.extension)
-			this.data.sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));
+			this.data.sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));	// eslint-disable-line sembiance/prefer-relative-require, max-len
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 

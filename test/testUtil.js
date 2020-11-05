@@ -1,7 +1,7 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
+	dexUtil = require("../lib/dexUtil.js"),
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,

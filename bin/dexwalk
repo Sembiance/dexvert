@@ -8,7 +8,7 @@ const XU = require("@sembiance/xu"),
 	StreamSkip = require("stream-skip"),
 	fileUtil = require("@sembiance/xutil").file,
 	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
-	dexvert = require(path.join(__dirname, "..", "lib", "dexvert.js"));
+	dexvert = require("../lib/dexvert.js");
 
 const MIN_FILE_SIZE = XU.KB;
 

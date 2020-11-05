@@ -2,11 +2,11 @@
 
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	C = require(path.join(__dirname, "..", "lib", "C.js")),
+	C = require("../lib/C.js"),
 	{validateValue} = require("@validatem/core"),
 	fileUtil = require("@sembiance/xutil").file,
 	tiptoe = require("tiptoe"),
-	dexUtil = require(path.join(__dirname, "..", "lib", "dexUtil.js")),
+	dexUtil = require("../lib/dexUtil.js"),
 	either = require("@validatem/either"),
 	anything = require("@validatem/anything"),	// eslint-disable-line no-unused-vars
 	isLowercase = require("@validatem/is-lowercase"),

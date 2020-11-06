@@ -73,9 +73,16 @@ function forceCDEMUUnload(deviceNum, cb, tries=10)
 			});
 
 			if(unloadFailed)
-				setTimeout(() => forceCDEMUUnload(deviceNum, cb, tries-1), 100*(11-tries));
+			{
+				if(tries>0)
+					setTimeout(() => forceCDEMUUnload(deviceNum, cb, tries-1), 100*(11-tries));
+				else
+					return console.log(`FAILED to unload device number ${deviceNum}, not sure why`), this();
+			}
 			else
+			{
 				this();
+			}
 		},
 		cb
 	);
@@ -106,7 +113,6 @@ tiptoe(
 	},
 	function findCUEFiles(deviceMappingRaw)
 	{
-		console.log(deviceMappingRaw);
 		(deviceMappingRaw || "").trim().split("\n").forEach(deviceLine =>
 		{
 			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s+(?<genericPath>.+)/) || {}).groups;

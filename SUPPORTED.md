@@ -472,7 +472,7 @@ image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
 image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [3 sample files](https://telparia.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg*.sgx
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)
-image | [Sigma/Foveon X3F](http://fileformats.archiveteam.org/wiki/X3F) | .x3f | [3 sample files](https://telparia.com/fileFormatSamples/image/x3f/)
+image | [Sigma/Foveon X3F](http://fileformats.archiveteam.org/wiki/X3F) | .x3f | [2 sample files](https://telparia.com/fileFormatSamples/image/x3f/)
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | [5 sample files](https://telparia.com/fileFormatSamples/image/sgi/)
 image | [Sinbad Slideshow](http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow) | .ssb | [2 sample files](https://telparia.com/fileFormatSamples/image/ssb/)
 image | [Sixel](https://en.wikipedia.org/wiki/Sixel) | .six .sixel | [16 sample files](https://telparia.com/fileFormatSamples/image/sixel/)

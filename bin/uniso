@@ -27,9 +27,10 @@ const OUT_DIR_PATH = path.resolve(`${argv._[1]}`);
 
 const WIP_DIR_PATH = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
-const ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
+let ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
 const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!path.extname(inputFilePath).match(/[A-Z]/) ? "cue" : "CUE"}`);
-const RUN_OPTIONS = {silent : true, cwd : WIP_DIR_PATH};
+const RUN_OPTIONS = {verbose : true, cwd : WIP_DIR_PATH};
+const CDEMU_DEV_MAPPING = {};
 
 // First thing we do is look for any CUE files in the same directory as our ISO file that are dexvert identified as a cue sheet and are properly parsed by cue-parser and contains references to our ISO file
 // If we don't a valid CUE file, we assume it's a single ISO file and we generate a fake CUE file so cdemu will work correctly
@@ -37,14 +38,84 @@ const RUN_OPTIONS = {silent : true, cwd : WIP_DIR_PATH};
 
 function makeCueFile(cb)
 {
-	fs.writeFile(CUE_FILE_PATH, `FILE "${path.basename(inputFilePath)}" BINARY
+	fs.writeFile(CUE_FILE_PATH, `FILE "${path.basename(inputFilePath, path.extname(inputFilePath))}.bin" BINARY
   TRACK 01 MODE1/2048
     INDEX 01 00:00:00`, XU.UTF8, cb);
 }
 
+function forceCDEMUUnload(deviceNum, cb, tries=10)
+{
+	tiptoe(
+		function unmountFirst()
+		{
+			// Just in case the device is currently mounted, try unmounting it
+			runUtil.run("sudo", ["umount", CDEMU_DEV_MAPPING[deviceNum]], RUN_OPTIONS, this);
+		},
+		function attemptUnload()
+		{
+			runUtil.run("cdemu", ["unload", `${deviceNum}`], RUN_OPTIONS, this);
+		},
+		function getCDEMUStatus()
+		{
+			runUtil.run("cdemu", ["status"], RUN_OPTIONS, this);
+		},
+		function checkCDEMUStatus(statusRaw)
+		{
+			let unloadFailed = false;
+			(statusRaw || "").trim().split("\n").forEach(statusLine =>
+			{
+				if(unloadFailed)
+					return;
+
+				const statusInfo = (statusLine.trim().match(/(?<deviceNum>\d+)\s+(?<loaded>True|False)\s+(?<filename>.+)/) || {}).groups;
+				if(statusInfo && +statusInfo.deviceNum===deviceNum && statusInfo.loaded==="True")
+					unloadFailed = true;
+			});
+
+			if(unloadFailed)
+				setTimeout(() => forceCDEMUUnload(deviceNum, cb, tries-1), 100*(11-tries));
+			else
+				this();
+		},
+		cb
+	);
+}
+
+function runMount(args, runOptions, cb)
+{
+	tiptoe(
+		function executeMount()
+		{
+			runUtil.run("sudo", ["mount", ...args], runOptions, this);
+		},
+		function checkForErrors(results)
+		{
+			if(results.toLowerCase().includes("error: command failed"))
+				throw new Error(`Failed to run mount ${results}`);
+
+			this();
+		},
+		cb
+	);
+}
+
 tiptoe(
-	function findCUEFiles()
+	function getCDEMUMapping()
 	{
+		runUtil.run("cdemu", ["device-mapping"], {silent : true}, this);
+	},
+	function findCUEFiles(deviceMappingRaw)
+	{
+		console.log(deviceMappingRaw);
+		(deviceMappingRaw || "").trim().split("\n").forEach(deviceLine =>
+		{
+			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s+(?<genericPath>.+)/) || {}).groups;
+			if(!deviceInfo)
+				return;
+
+			CDEMU_DEV_MAPPING[(+(deviceInfo.deviceNum.trim()))] = deviceInfo.devPath.trim();
+		});
+
 		dexvert.identify(inputFilePath, this.parallel());
 		fileUtil.glob(path.dirname(inputFilePath), "*.cue", {nocase : true}, this.parallel());
 		fs.mkdir(MOUNT_DIR_PATH, {recursive : true}, this.parallel());
@@ -59,7 +130,10 @@ tiptoe(
 			return this.jump(1);
 
 		if(!cueFilePaths || cueFilePaths.length===0)
+		{
+			ISO_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.bin`);
 			return makeCueFile(err => this.jump(1, err));
+		}
 		
 		this.data.cueFilePaths = cueFilePaths;
 		this.data.cueFilePaths.parallelForEach((cueFilePath, subcb) => dexvert.identify(cueFilePath, {}, subcb), this);
@@ -76,7 +150,7 @@ tiptoe(
 			if(!cueData || !cueData.files || cueData.files.length===0)
 				return;
 			
-			const matchingFile = cueData.files.find(file => path.basename(file.name.toLowerCase())===path.basename(inputFilePath.toLowerCase()));
+			const matchingFile = cueData.files.find(file => path.basename(file.name.toLowerCase())===path.basename(ISO_FILE_PATH.toLowerCase()));
 			if(!matchingFile)
 				return;
 
@@ -86,11 +160,12 @@ tiptoe(
 		if(!matchingCue)
 			makeCueFile(this);
 		else
-			fs.symlink(matchingCue.cueFilePath, CUE_FILE_PATH, this);
+			fs.copyFile(matchingCue.cueFilePath, CUE_FILE_PATH, this);
 	},
-	function symlinkISO()
+	function copyISO()
 	{
-		fs.symlink(inputFilePath, ISO_FILE_PATH, this);
+		// We used to just symlink to the ISO, but turns out this isn't reliable
+		fs.copyFile(inputFilePath, ISO_FILE_PATH, this);
 	},
 	function checkIfVCD()
 	{
@@ -116,7 +191,7 @@ tiptoe(
 			const startSector = (isoInfo.match(/startsector (?<startSector>\d+)/) || {groups : {}}).groups.startSector;
 			if(startSector && (+startSector)>0)
 			{
-				runUtil.run("sudo", ["mount", "-o", `loop,offset=${(+startSector)*512}`, ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(5, err));
+				runMount(["-o", `loop,offset=${(+startSector)*512}`, ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(5, err));
 				return;
 			}
 		}
@@ -124,7 +199,7 @@ tiptoe(
 		if(!this.data.isCDISO)
 		{
 			// Non CD images should just be mounted directly
-			runUtil.run("sudo", ["mount", ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(6, err));
+			runMount([ISO_FILE_PATH, MOUNT_DIR_PATH], RUN_OPTIONS, err => this.jump(6, err));
 			return;
 		}
 
@@ -137,7 +212,7 @@ tiptoe(
 	function unloadExistingDevice(getDeviceNumResponse)
 	{
 		this.data.deviceNum = JSON.parse(getDeviceNumResponse).deviceNum;
-		runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
+		forceCDEMUUnload(this.data.deviceNum, this);
 	},
 	function loadIntoVirtualDevice()
 	{
@@ -145,10 +220,9 @@ tiptoe(
 	},
 	function queryStatusAndDeviceMapping()
 	{
-		runUtil.run("cdemu", ["status"], RUN_OPTIONS, this.parallel());
-		runUtil.run("cdemu", ["device-mapping"], RUN_OPTIONS, this.parallel());
+		runUtil.run("cdemu", ["status"], RUN_OPTIONS, this);
 	},
-	function mountISO(statusRaw, deviceMappingRaw)
+	function mountISO(statusRaw)
 	{
 		(statusRaw || "").trim().split("\n").forEach(statusLine =>
 		{
@@ -157,27 +231,14 @@ tiptoe(
 				throw new Error(`Failed to load CUE file ${CUE_FILE_PATH} into deviceNum ${this.data.deviceNum} ${statusRaw}`);
 		});
 		
-		let devPath = null;
-		(deviceMappingRaw || "").trim().split("\n").forEach(deviceLine =>
-		{
-			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s+(?<genericPath>.+)/) || {}).groups;
-			if(!deviceInfo || (+deviceInfo.deviceNum)!==this.data.deviceNum)
-				return;
-
-			devPath = deviceInfo.devPath.trim();
-		});
-
-		if(!devPath || devPath.length===0)
-			throw new Error(`Failed to find matching device path for num ${this.data.deviceNum} ${deviceMappingRaw}`);
-
-		this.data.devPath = devPath;
+		this.data.devPath = CDEMU_DEV_MAPPING[this.data.deviceNum];
 
 		//this.data.loopNum = dexUtil.allocateLoopDev(this.data.devPath);
-		//runUtil.run("sudo", ["mount", `/dev/loop${this.data.loopNum}`, MOUNT_DIR_PATH], RUN_OPTIONS, this);
+		//runMount([`/dev/loop${this.data.loopNum}`, MOUNT_DIR_PATH], RUN_OPTIONS, this);
 		// So doing it this way was causing weird problems. Some files on PCD1235.cue (photo_cd/images/img0098.pcd for example) would appear as empty zero sized files
 		// Mounting directly seems to work fine. It's also safer in this case due to the way I'm emulating a virtual device with cdemu
-
-		runUtil.run("sudo", ["mount", this.data.devPath, MOUNT_DIR_PATH], RUN_OPTIONS, this);
+		XU.log`${this.data}`;
+		runMount([this.data.devPath, MOUNT_DIR_PATH], RUN_OPTIONS, this);
 	},
 	function extractAnyAudio()
 	{
@@ -194,7 +255,7 @@ tiptoe(
 	function removeVirtualDevice()
 	{
 		if(this.data.isCDISO)
-			runUtil.run("cdemu", ["unload", `${this.data.deviceNum}`], RUN_OPTIONS, this);
+			forceCDEMUUnload(this.data.deviceNum, this);
 		else
 			this();
 	},

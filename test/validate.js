@@ -140,13 +140,13 @@ function validateProgram(program)
 		meta        : [required, programMetaSchema],
 		bin         : [isFunction, hasLengthBetween(0, 2)],
 		wine        : [isFunction, hasLengthBetween(0, 2)],
-		preArgs     : [isFunction, hasLengthOf(3)],
-		args        : [required, isFunction, hasLengthOf(2)], 	// Technically it's 4, but args with defaults don't count in .length
-		cwd         : [isFunction, hasLengthBetween(0, 2)],
-		pre         : [isFunction, hasLengthOf(3)],
-		post        : [isFunction, hasLengthOf(3)],
-		runOptions  : [isFunction, hasLengthBetween(0, 2)],
-		wineOptions : [isFunction, hasLengthBetween(0, 2)]
+		preArgs     : [isFunction, hasLengthOf(4)],
+		args        : [required, isFunction, hasLengthOf(3)], 	// Technically it's 5+, but args with defaults don't count in .length
+		cwd         : [isFunction, hasLengthBetween(0, 3)],
+		pre         : [isFunction, hasLengthOf(4)],
+		post        : [isFunction, hasLengthOf(4)],
+		runOptions  : [isFunction, hasLengthBetween(0, 3)],
+		wineOptions : [isFunction, hasLengthBetween(0, 3)]
 	};
 
 	// Format specific properties that are shared for easier re-use

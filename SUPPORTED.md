@@ -1,6 +1,8 @@
 # Supported File Formats
 
-The following 587 file formats are supported by dexvert.
+The following 588 file formats are supported by dexvert.
+
+
 
 
 
@@ -63,7 +65,7 @@ archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.
 
 
 
-## Audio (9)
+## Audio (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | [3 sample files](https://telparia.com/fileFormatSamples/audio/8svx/) - Some 8SVX files don't have a sample rate in the file. In these cases I try multiple different common sample rates.
@@ -74,6 +76,7 @@ audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
+audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [4 sample files](https://telparia.com/fileFormatSamples/audio/au/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [1 sample file](https://telparia.com/fileFormatSamples/audio/wav/)
 
 
@@ -95,7 +98,7 @@ document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outl
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [3 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [2 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [2 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
-document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [1 sample file](https://telparia.com/fileFormatSamples/document/wri/)
+document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [2 sample files](https://telparia.com/fileFormatSamples/document/wri/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | [1 sample file](https://telparia.com/fileFormatSamples/document/wp/)
 
 

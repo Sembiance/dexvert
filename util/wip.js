@@ -1,20 +1,42 @@
 "use strict";
-/* eslint-disable max-len, node/global-require */
+/* eslint-disable max-len, node/global-require, no-unused-vars */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
+	util = require("util"),
+	tiptoe = require("tiptoe"),
+	testUtil = require("../test/testUtil.js"),
+	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs");
 
-process.exit(0);
 
-const processDataFilePath = path.join(__dirname, "..", "test", "data", "process.json");
+tiptoe(
+	function findSampleFiles()
+	{
+		testUtil.findSupportedSampleFilePaths(this);
+	},
+	function wip(sampleFilePaths)
+	{
+		const types = {};
+		sampleFilePaths.forEach(sampleFilePath =>
+		{
+			const subFilePath = path.relative("/mnt/compendium/DevLab/dexvert/test/sample", sampleFilePath);
+			const formatid = path.dirname(subFilePath);
+			if(!types[formatid])
+				types[formatid] = [];
+			types[formatid].push(path.basename(subFilePath));
+		});
 
-const data = JSON.parse(fs.readFileSync(processDataFilePath, XU.UTF8));
-Object.values(data).forEach(result =>
-{
-	if(!result.files)
-		return;
-		
-	Object.mapInPlace(result.files, (k, v) => ([k, {sum : v}]));
-});
+		const haveEnough = [];
+		Object.forEach(types, (formatid, filePaths) =>
+		{
+			if(filePaths.length>=3)
+				haveEnough.push(formatid);
+		});
 
-fs.writeFileSync(processDataFilePath, JSON.stringify(data), XU.UTF8);
+		console.log(util.inspect(haveEnough, {depth : Infinity, maxArrayLength : Infinity}));
+
+		this();
+	},
+	XU.FINISH
+);
+

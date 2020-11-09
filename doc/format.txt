@@ -27,6 +27,9 @@ Set to true if this format isn't safe to be brute forced.
 >>> unsupported : true
 If set to true, then this file can only be identified by not processed.
 
+>>> highConfidence : true
+Normally 'unsupported' matches are very low priority. However sometimes a format might easily match other formats and those programs might not convert them correctly, resulting in gibberish. So if you know a format is a strong match, even though unsupported, set this to true and the confidence level will go up when identified.
+
 >>> keepFilename : true
 Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters

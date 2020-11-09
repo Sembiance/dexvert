@@ -1,6 +1,8 @@
 # Unsupported File Formats
 
-The following 45 file formats are unsupported by dexvert.
+The following 102 file formats are unsupported by dexvert.
+
+They are still **identified** by dexvert, just not processed in any way.
 
 
 
@@ -53,6 +55,21 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
+## Executable (9)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+executable | AmigaOS Executable |  | 
+executable | Atari Executable | .xex | 
+executable | ELF Executable |  | 
+executable | Linux OMAGIC Executable |  | 
+executable | MacOS Executable |  | 
+executable | Microsoft Windows Dynmic Link Library | .dll | 
+executable | MS-DOS COM Executable | .com .c0m | 
+executable | MS-DOS Driver | .sys .drv | 
+executable | MS-DOS/Windows Executable | .exe | 
+
+
+
 ## Font (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
@@ -85,19 +102,79 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (3)
+## Other (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+other | Adobe Type Manager Font Information | .inf | 
+other | Alchemy Mindworks Resource | .res | 
+other | Amiga Action Replay 3 Freeze File |  | 
+other | Amiga ADF BlkDev File | .blkdev | 
+other | Amiga ADF Bootcode | .bootcode | 
+other | Amiga ADF XDF Meta | .xdfmeta | 
+other | Amiga CLI-Mate Directory Index File |  | 
+other | Amiga IFF Catalog | .catalog | 
+other | Amiga IFF DTYP |  | 
+other | Amiga Preferences | .prefs | 
+other | Amos Amal Animation Bank | .abk | 
+other | AMOS Datas Bank | .abk | 
+other | ASCII Font Metrics | .afm | 
+other | Asymetrix ToolBook File | .tbk | 
+other | Audio Interface Library 3 Digital audio driver | .dig | 
+other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
+other | Borland Graphics Interface Driver | .bgi | 
+other | Chemview Animation Data | .d | 
+other | Corncob 3D Data File | .cct | 
+other | Creative Signal Processor microcode | .csp | 
+other | Cygnus Editor Default Settings |  | 
+other | Cygnus Editor Macros |  | 
+other | dBase Index File | .ntx | 
+other | FoxPro Memo File | .fpt | 
+other | Full Tilt Pinball Data | .dat | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
+other | Microsoft Windows Help File Content | .cnt | 
+other | Microsoft Windows Program Information File | .pif | 
+other | Miles Sound System Driver | .adv | 
+other | NeoPaint Palette | .pal | 
+other | NeoPaint Printer Driver | .prd | 
+other | Norton Change Directory Info | .ncd | 
+other | Printer Font Metrics | .pfm | 
+other | RIFF MSFX File | .sfx | 
+other | RIFF MxSt File | .si | 
+other | RIFF STYL File | .par | 
+other | Startrekker Module Info | .nt | 
+other | WordPerfect keyboard file | .wpk | 
+other | WordPerfect Macro File | .wpm | 
 
 
 
-## Video (3)
+## Programming (8)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+programming | Borland Turbo C Project | .prj | 
+programming | Java Class File | .class | 
+programming | Microsoft Visual C Library | .lib | 
+programming | Turbo Basic Chain module | .tbc | 
+programming | Turbo C Context File | .dsk | 
+programming | Turbo Pascal Compiled Unit | .tpu | 
+programming | Turbo Pascal Overlay | .ovr | 
+programming | Visual Basic Extension | .vbx | 
+
+
+
+## Rom (1)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+rom | Game Boy ROM | .gb .gbc | 
+
+
+
+## Video (4)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
+video | Windows Screensaver | .scr | [7 sample files](https://telparia.com/fileFormatSamples/video/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 

@@ -4,6 +4,7 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	path = require("path"),
 	fs = require("fs"),
+	{formats : unsupportedFormats} = require("../lib/format/unsupported.js"),
 	tiptoe = require("tiptoe");
 
 const SAMPLES_DIR_PATH = path.join(__dirname, "..", "test", "sample");
@@ -27,12 +28,15 @@ tiptoe(
 		});
 
 		const allFormats = formatFilePaths.map(formatFilePath => ({family : path.basename(path.dirname(formatFilePath)), formatid : path.basename(formatFilePath, ".js"), ...require(formatFilePath).meta}));
+		Object.forEach(unsupportedFormats, (family, subFormats) => Object.forEach(subFormats, (formatid, subFormat) => allFormats.push({family, formatid, unsupported : true, ...subFormat})));
 
 		[{name : "SUPPORTED", formats : allFormats.filter(f => f.name && !f.unsupported)}, {name : "UNSUPPORTED", formats : allFormats.filter(f => f.name && f.unsupported)}].parallelForEach((o, subcb) =>
 		{
 			fs.writeFile(path.join(__dirname, "..", `${o.name}.md`), `# ${o.name.toProperCase()} File Formats
 
 The following ${o.formats.length.toLocaleString()} file formats are ${o.name.toLowerCase()} by dexvert.
+
+${o.name==="UNSUPPORTED" ? `They are still **identified** by dexvert, just not processed in any way.` : ""}
 
 ${o.formats.map(f => f.family).unique().multiSort(f => f).map(familyid => `
 

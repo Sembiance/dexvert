@@ -56,17 +56,18 @@ function validateFormat(format)
 
 	const formatMetaSchema =
 	{
-		name          : [required, isNonEmptyString],
-		website       : [isNonEmptyString, isURL()],
-		notes         : [isNonEmptyString],
-		mimeType      : [isNonEmptyString],
-		encoding      : [isNonEmptyString],
-		family        : [isNonEmptyString],
-		formatid      : [isNonEmptyString],
-		browserNative : [isBoolean],
+		name      : [required, isNonEmptyString],
+		website   : [isNonEmptyString, isURL()],
+		notes     : [isNonEmptyString],
+		mimeType  : [isNonEmptyString],
+		encoding  : [isNonEmptyString],
+		family    : [isNonEmptyString],
+		formatid  : [isNonEmptyString],
+		untouched : [isBoolean],
 
 		bruteUnsafe      : [isBoolean],
 		unsupported      : [isBoolean],
+		highConfidence   : [isBoolean],
 		keepFilename     : [isBoolean],
 		symlinkUnsafe    : [isBoolean],
 		priority         : [isNumber, oneOf(Object.values(C.PRIORITY))],

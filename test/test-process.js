@@ -34,6 +34,7 @@ Options:
 }
 
 // Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
+// Filenames are the OUTPUT filenames and are all converted to LOWERCASE first
 const SHA1_IGNORE_FILES =
 {
 	archive :
@@ -79,12 +80,18 @@ const SHA1_IGNORE_FILES =
 	}
 };
 
+// Filenames are the OUTPUT filenames and are all converted to LOWERCASE first
 const SIZE_IGNORE_FILES =
 {
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
 		"3dCK" : [/.png$/]
+	},
+	document :
+	{
+		// The size varies by a few bytes each time, not sure why. Probably some the pdf unique id that gets generated
+		"wordMac" : [/business_letter.pdf$/]
 	},
 	music :
 	{

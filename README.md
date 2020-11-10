@@ -33,6 +33,9 @@ Options:
    --alwaysBrute
     When brute forcing, always brute force, even if we have an exact id match.
 
+   --outputState
+    If set, will output the state as JSON
+
    --tmpDirPath=/mnt/tmp
     Use a different tmp dir (default is os.tmpdir())
 	I suggest setting this to a 'tmpfs' mounted RAM disk.

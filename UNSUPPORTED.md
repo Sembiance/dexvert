@@ -55,7 +55,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Executable (9)
+## Executable (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
@@ -67,6 +67,7 @@ executable | Microsoft Windows Dynmic Link Library | .dll |
 executable | MS-DOS COM Executable | .com .c0m | 
 executable | MS-DOS Driver | .sys .drv | 
 executable | MS-DOS/Windows Executable | .exe | 
+executable | Windows Screensaver | .scr | [7 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 
 
 
@@ -170,11 +171,10 @@ rom | Game Boy ROM | .gb .gbc |
 
 
 
-## Video (4)
+## Video (3)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
-video | Windows Screensaver | .scr | [7 sample files](https://telparia.com/fileFormatSamples/video/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 

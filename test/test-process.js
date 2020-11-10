@@ -93,6 +93,11 @@ const SIZE_IGNORE_FILES =
 		// The size varies by a few bytes each time, not sure why. Probably some the pdf unique id that gets generated
 		"wordMac" : [/business_letter.pdf$/]
 	},
+	font :
+	{
+		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
+		"adobeType1" : [/.otf$/]
+	},
 	music :
 	{
 		// These files are slightly different each time

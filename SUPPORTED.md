@@ -35,7 +35,7 @@ archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShi
 archive | [ISO Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin | [14 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [1 sample file](https://telparia.com/fileFormatSamples/archive/lzx/)
-archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz | [2 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
+archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz | [3 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [1 sample file](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [1 sample file](https://telparia.com/fileFormatSamples/archive/director/)
@@ -77,7 +77,7 @@ audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLA
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [4 sample files](https://telparia.com/fileFormatSamples/audio/au/)
-audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [1 sample file](https://telparia.com/fileFormatSamples/audio/wav/)
+audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [2 sample files](https://telparia.com/fileFormatSamples/audio/wav/)
 
 
 
@@ -95,11 +95,11 @@ document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [3 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [3 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [1 sample file](https://telparia.com/fileFormatSamples/document/pco/)
-document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [3 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
+document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [2 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
-document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [2 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
-document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [2 sample files](https://telparia.com/fileFormatSamples/document/wri/)
-document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | [1 sample file](https://telparia.com/fileFormatSamples/document/wp/)
+document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [3 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
+document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [3 sample files](https://telparia.com/fileFormatSamples/document/wri/)
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | [2 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 
 
 
@@ -396,7 +396,7 @@ image | [multiArtist](http://fileformats.archiveteam.org/wiki/MultiArtist) | .mg
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | [2 sample files](https://telparia.com/fileFormatSamples/image/mng/)
 image | [Naïve Image Format NIA](http://fileformats.archiveteam.org/wiki/Na%C3%AFve_Image_Formats) | .nia | [1 sample file](https://telparia.com/fileFormatSamples/image/naiveNIA/)
 image | [Naïve Image Format NIE](http://fileformats.archiveteam.org/wiki/Na%C3%AFve_Image_Formats) | .nie | [1 sample file](https://telparia.com/fileFormatSamples/image/naiveNIE/)
-image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | [2 sample files](https://telparia.com/fileFormatSamples/image/naplps/) - Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
+image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | [3 sample files](https://telparia.com/fileFormatSamples/image/naplps/) - Some NAP files are actually animations. TURSHOW does actually show these, but sadly I can't detect this. So for now I treat all NAP files as just single images.  There also exists .SCR files which are naplps Script files. The EAGMD.SCR file was created from using the P2NV02 program (can't locate anywhere, just a reference to it here: https://groups.google.com/g/alt.bbs/c/jFgKRCoBedA/m/zSW-AkORqIoJ?pli=1). My hunch is if I can find the P2NV02.ZIP archive, it probably has more info, maybe even a way to convert the SCR script back into an image. Note I learned a little bit about this format from README.EXE in eag2nap.zip
 image | [Nearly Raw Raster Data](http://teem.sourceforge.net/nrrd/format.html) | .nrrd | [3 sample files](https://telparia.com/fileFormatSamples/image/nrrd/)
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [6 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
@@ -598,16 +598,16 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
 text | AMOS Source Code | .amossourcecode | [1 sample file](https://telparia.com/fileFormatSamples/text/amosSource/)
-text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [1 sample file](https://telparia.com/fileFormatSamples/text/asm/)
+text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [2 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [1 sample file](https://telparia.com/fileFormatSamples/text/bas/)
-text | [C Source or Header File](http://fileformats.archiveteam.org/wiki/C) | .c .h | [1 sample file](https://telparia.com/fileFormatSamples/text/c/)
-text | [C++ Source File](http://fileformats.archiveteam.org/wiki/AIFF) | .cpp .cxx .cc .c++ .hpp | [1 sample file](https://telparia.com/fileFormatSamples/text/cpp/)
+text | [C Source or Header File](http://fileformats.archiveteam.org/wiki/C) | .c .h | [2 sample files](https://telparia.com/fileFormatSamples/text/c/)
+text | [C++ Source File](http://fileformats.archiveteam.org/wiki/AIFF) | .cpp .cxx .cc .c++ .hpp | [2 sample files](https://telparia.com/fileFormatSamples/text/cpp/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
-text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [1 sample file](https://telparia.com/fileFormatSamples/text/batDOS/)
+text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [4 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
 text | File List | .bbs .lst .lis .dir .ind | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [1 sample file](https://telparia.com/fileFormatSamples/text/html/)
-text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [2 sample files](https://telparia.com/fileFormatSamples/text/ini/)
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [3 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | [2 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [1 sample file](https://telparia.com/fileFormatSamples/text/lisp/)
@@ -631,7 +631,7 @@ video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Pai
 video | Disney Animation Studio CFAST | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | Fantavision Movie | .mve | [3 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [6 sample files](https://telparia.com/fileFormatSamples/video/flc/)
-video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [4 sample files](https://telparia.com/fileFormatSamples/video/fli/)
+video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [5 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [6 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi | [4 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)

@@ -121,7 +121,7 @@ font | Interlace Character Editor | .ice | [12 sample files](https://telparia.co
 font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [3 sample files](https://telparia.com/fileFormatSamples/font/otf/)
 font | Oric Font | .chs | [1 sample file](https://telparia.com/fileFormatSamples/font/oricFont/)
 font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) | .pcf | [5 sample files](https://telparia.com/fileFormatSamples/font/pcf/)
-font | Shoot Em Up Construction Kit Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/seuckFont/)
+font | Shoot Em Up Construction Kit Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/seuckFont/) - Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.
 font | Super-IRG | .sif | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
 font | The Last Word Font | .f80 | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [8 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
@@ -614,7 +614,7 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [1 s
 text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | [1 sample file](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [1 sample file](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [1 sample file](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [1 sample file](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)

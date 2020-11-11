@@ -60,9 +60,6 @@ tiptoe(
 			sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(argv.format));
 		if(argv.extension)
 			sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));	// eslint-disable-line sembiance/prefer-relative-require, max-len
-		
-		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
-		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require, max-len
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 

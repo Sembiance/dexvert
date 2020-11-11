@@ -90,8 +90,8 @@ const SIZE_IGNORE_FILES =
 	},
 	document :
 	{
-		// The size varies by a few bytes each time, not sure why. Probably some the pdf unique id that gets generated
-		"wordMac" : [/business_letter.pdf$/]
+		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
+		"*" : [/.pdf$/]
 	},
 	font :
 	{
@@ -147,6 +147,9 @@ tiptoe(
 	function testSampleFiles(_testData, sampleFilePaths)
 	{
 		testData = JSON.parse(_testData);
+
+		// First ensure we have a format.js for this format, otherwise it's not supported and we shouldn't bother
+		sampleFilePaths.filterInPlace(sampleFilePath => fileUtil.existsSync(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)));
 
 		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
 		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require, max-len

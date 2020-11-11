@@ -66,7 +66,7 @@ executable | MacOS Executable |  |
 executable | Microsoft Windows Dynmic Link Library | .dll | 
 executable | MS-DOS COM Executable | .com .c0m | 
 executable | MS-DOS Driver | .sys .drv | 
-executable | MS-DOS/Windows Executable | .exe | 
+executable | MS-DOS/Windows Executable | .exe | [2 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
 executable | Windows Screensaver | .scr | [7 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 
 

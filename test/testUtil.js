@@ -13,6 +13,16 @@ exports.SAMPLE_DIR_PATH = path.join(__dirname, "sample");
 // Some files are just there for 'support' so we ignore them, or don't convert and take too long to try
 const IGNORE_FILES =
 {
+	archive :
+	{
+		// Unsupported and can't reliably identify them
+		corelThumbnails : "*"
+	},
+	audio :
+	{
+		// Unsupported and can't reliably identify them
+		sonixSoundSample : "*"
+	},
 	image :
 	{
 		// Some FIG files will embed references to other images, such as pictures.fig, so we exclude these here
@@ -40,7 +50,7 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 			return sampleFilePaths.flat().filter(sampleFilePath =>
 			{
 				const [family, formatid, filename] = path.relative(exports.SAMPLE_DIR_PATH, sampleFilePath).split(path.sep);
-				if(IGNORE_FILES[family] && IGNORE_FILES[family][formatid] && IGNORE_FILES[family][formatid].some(m => dexUtil.flexMatch(filename, m)))
+				if(IGNORE_FILES[family] && IGNORE_FILES[family][formatid] && (IGNORE_FILES[family][formatid]==="*" || IGNORE_FILES[family][formatid].some(m => dexUtil.flexMatch(filename, m))))
 					return false;
 
 				return true;

@@ -19,6 +19,9 @@ Some programs like abydos won't convert without a valid mime type specified.
 >>> encoding : "IBM-943"
 Can specify what the file encoding is if you know it. Really only used for text files.
 
+>>> hljsLang : "cpp"
+Can specific a highlight.js type to use for syntax highlighting file matches.
+
 
 >>> ******** Properties
 >>> bruteUnsafe : true
@@ -37,6 +40,9 @@ Normally the filename is renamed to in<ext> in order to prevent issues with prog
 >>> symlinkUnsafe : true
 If the converter program doesn't handle symlinks, can set this to true.
 Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
+
+>>> untouched : true
+Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
 
 >>> priority : C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.

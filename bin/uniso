@@ -149,7 +149,7 @@ tiptoe(
 		let matchingCue = null;
 		(this.data.cueFilePaths || []).forEach((cueFilePath, i) =>
 		{
-			if(!cueFileIdentifications[i].some(cueFileIdentification => cueFileIdentification.magic==="Cue Sheet"))
+			if(!cueFileIdentifications[i].some(cueFileIdentification => cueFileIdentification.magic==="ISO CUE Sheet"))
 				return;
 			
 			const cueData = cueParser.parse(cueFilePath);

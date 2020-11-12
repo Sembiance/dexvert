@@ -91,3 +91,6 @@
 
 # imageUSB
 0	string/b	i\x00m\x00a\x00g\x00e\x00U\x00S\x00B	imageUSB
+
+# Alias PIX
+4	string/b	\x00\x00\x00\x00\x00\x18	Alis PIX

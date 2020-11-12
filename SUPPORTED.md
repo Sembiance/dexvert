@@ -598,7 +598,7 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
 text | AMOS Source Code | .amossourcecode | [1 sample file](https://telparia.com/fileFormatSamples/text/amosSource/)
-text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [2 sample files](https://telparia.com/fileFormatSamples/text/asm/)
+text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [3 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [1 sample file](https://telparia.com/fileFormatSamples/text/bas/)
 text | [C Source or Header File](http://fileformats.archiveteam.org/wiki/C) | .c .h | [2 sample files](https://telparia.com/fileFormatSamples/text/c/)
 text | [C++ Source File](http://fileformats.archiveteam.org/wiki/AIFF) | .cpp .cxx .cc .c++ .hpp | [2 sample files](https://telparia.com/fileFormatSamples/text/cpp/)

@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 588 file formats are supported by dexvert.
+The following 589 file formats are supported by dexvert.
 
 
 
@@ -130,7 +130,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (430)
+## Image (431)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -342,6 +342,7 @@ image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_C
 image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | [29 sample files](https://telparia.com/fileFormatSamples/image/koalaMicroillustrator/) - APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .koa .gig .kla .gg | [10 sample files](https://telparia.com/fileFormatSamples/image/koalaPaint/)
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | [1 sample file](https://telparia.com/fileFormatSamples/image/cin/)
+image | [Kodak DC25](http://fileformats.archiveteam.org/wiki/Kodak) | .k25 | [6 sample files](https://telparia.com/fileFormatSamples/image/kodakK25/)
 image | [Kodak FlashPix](http://fileformats.archiveteam.org/wiki/FPX) | .fpx | [5 sample files](https://telparia.com/fileFormatSamples/image/fpx/)
 image | [Kodak Photo CD](http://fileformats.archiveteam.org/wiki/Photo_CD) | .pcd | [6 sample files](https://telparia.com/fileFormatSamples/image/pcd/)
 image | [Kodak Pro Digital RAW](http://fileformats.archiveteam.org/wiki/Kodak) | .dcr | [2 sample files](https://telparia.com/fileFormatSamples/image/kodakDCR/)

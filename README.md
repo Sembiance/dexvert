@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 589 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 590 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -23,7 +23,7 @@ Options:
    --brute=<family>,<family>
     If unable to identify <inputFilePath>, try converting anyways
     Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio music video image 3d font other programming executable rom text or all
+    Valid families: archive document audio music video image 3d font other executable rom text or all
     Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
     WARNING: Multiple successes could use a lot of disk space
 

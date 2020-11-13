@@ -103,7 +103,7 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (41)
+## Other (49)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -123,6 +123,7 @@ other | Asymetrix ToolBook File | .tbk |
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | Borland Graphics Interface Driver | .bgi | 
+other | Borland Turbo C Project | .prj | 
 other | Chemview Animation Data | .d | 
 other | Corncob 3D Data File | .cct | 
 other | Creative Signal Processor microcode | .csp | 
@@ -134,6 +135,8 @@ other | Full Tilt Pinball Data | .dat |
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
+other | Java Class File | .class | 
+other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | 
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
@@ -145,22 +148,13 @@ other | RIFF MSFX File | .sfx |
 other | RIFF MxSt File | .si | 
 other | RIFF STYL File | .par | 
 other | Startrekker Module Info | .nt | 
+other | Turbo Basic Chain module | .tbc | 
+other | Turbo C Context File | .dsk | 
+other | Turbo Pascal Compiled Unit | .tpu | 
+other | Turbo Pascal Overlay | .ovr | 
+other | Visual Basic Extension | .vbx | 
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm | 
-
-
-
-## Programming (8)
-Family | Name | Extensions | Notes
------- | ---- | ---------- | -----
-programming | Borland Turbo C Project | .prj | 
-programming | Java Class File | .class | 
-programming | Microsoft Visual C Library | .lib | 
-programming | Turbo Basic Chain module | .tbc | 
-programming | Turbo C Context File | .dsk | 
-programming | Turbo Pascal Compiled Unit | .tpu | 
-programming | Turbo Pascal Overlay | .ovr | 
-programming | Visual Basic Extension | .vbx | 
 
 
 

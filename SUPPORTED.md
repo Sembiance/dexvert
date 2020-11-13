@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 589 file formats are supported by dexvert.
+The following 590 file formats are supported by dexvert.
 
 
 
@@ -51,7 +51,7 @@ archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PC
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [6 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [1 sample file](https://telparia.com/fileFormatSamples/archive/powerPack/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [1 sample file](https://telparia.com/fileFormatSamples/archive/pog/)
-archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rnc/)
+archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | Raw Partition |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawPartition/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [3 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [1 sample file](https://telparia.com/fileFormatSamples/archive/sea/)
@@ -72,7 +72,7 @@ audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [1 sample file](https://telparia.com/fileFormatSamples/audio/amosSamples/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [1 sample file](https://telparia.com/fileFormatSamples/audio/aif/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [5 sample files](https://telparia.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
-audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [1 sample file](https://telparia.com/fileFormatSamples/audio/voc/)
+audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [5 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
@@ -130,7 +130,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (431)
+## Image (432)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -216,7 +216,7 @@ image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [1 sample file](https://telparia.com/fileFormatSamples/image/cmx/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [5 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | [14 sample files](https://telparia.com/fileFormatSamples/image/crackArt/)
-image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | [2 sample files](https://telparia.com/fileFormatSamples/image/cyberPaintCel/)
+image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | [5 sample files](https://telparia.com/fileFormatSamples/image/cyberPaintCel/)
 image | D-GRAPH P3C | .p3c | [1 sample file](https://telparia.com/fileFormatSamples/image/p3c/)
 image | [Dali](http://fileformats.archiveteam.org/wiki/Dali) | .sd0 .sd1 .sd2 .hpk .lpk .mpk | [9 sample files](https://telparia.com/fileFormatSamples/image/dali/)
 image | [DaVinci](http://fileformats.archiveteam.org/wiki/DaVinci) | .img | [1 sample file](https://telparia.com/fileFormatSamples/image/daVinci/)
@@ -547,6 +547,7 @@ image | [XL-Paint](http://fileformats.archiveteam.org/wiki/XL-Paint) | .xlp .max
 image | [XLD4 Image](http://fileformats.archiveteam.org/wiki/XLD4) | .q4 | [6 sample files](https://telparia.com/fileFormatSamples/image/q4/)
 image | [Yanagisawa PIC](http://fileformats.archiveteam.org/wiki/PIC_(Yanagisawa)) | .pic | [14 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC/)
 image | Z's Staff Kid98 | .zim | [1 sample file](https://telparia.com/fileFormatSamples/image/zim/)
+image | [Zoner Zebra](http://fileformats.archiveteam.org/wiki/ZBR_(Zoner_Zebra)) | .zbr | [5 sample files](https://telparia.com/fileFormatSamples/image/zbr/)
 image | [ZX Monochrome](https://zxart.ee/eng/graphics/database/pictureType:monochrome/sortParameter:date/sortOrder:desc/resultsType:zxitem/) | .scr | [2 sample files](https://telparia.com/fileFormatSamples/image/zxMonochrome/)
 image | [ZX Spectrum - Tricolor RGB](http://fileformats.archiveteam.org/wiki/Tricolor_RGB) | .3 | [7 sample files](https://telparia.com/fileFormatSamples/image/zx3/)
 image | [ZX Spectrum Attributes Gigascreen](http://fileformats.archiveteam.org/wiki/HLR) | .hlr | [7 sample files](https://telparia.com/fileFormatSamples/image/hlr/)
@@ -576,7 +577,7 @@ music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Ban
 music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [1 sample file](https://telparia.com/fileFormatSamples/music/amosTracker/)
 music | [Commodore SID Music File](http://fileformats.archiveteam.org/wiki/SID) | .sid .psid | [3 sample files](https://telparia.com/fileFormatSamples/music/sid/)
 music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative_Music_Format) | .cmf | [1 sample file](https://telparia.com/fileFormatSamples/music/cmf/)
-music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | [1 sample file](https://telparia.com/fileFormatSamples/music/xmi/)
+music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | [5 sample files](https://telparia.com/fileFormatSamples/music/xmi/)
 music | [Extended Module](http://fileformats.archiveteam.org/wiki/XM) | .xm | [1 sample file](https://telparia.com/fileFormatSamples/music/xm/)
 music | [Human Machine Interfaces MIDI Format](http://fileformats.archiveteam.org/wiki/HMI) | .hmi .hmp | [2 sample files](https://telparia.com/fileFormatSamples/music/hmi/)
 music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | [1 sample file](https://telparia.com/fileFormatSamples/music/mid/) - Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows

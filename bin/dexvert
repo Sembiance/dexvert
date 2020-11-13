@@ -3,6 +3,7 @@
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	C = require("../lib/C.js"),
+	fs = require("fs"),
 	util = require("util"),
 	{Command} = require("commander"),
 	dexvert = require("../lib/dexvert.js");
@@ -17,6 +18,7 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 	option("--keepGoing", "When brute forcing, don't stop at the first success. Try them all.").
 	option("--alwaysBrute", "When brute forcing, always brute force, even if we have an exact id match.").
 	option("--outputState", "If set, will output the state as JSON").
+	option("--outputStateToFile [filePath]", "If set, will output the state as JSON to the given filePath").
 	option("--tmpDirPath [dirPath]", "Use a different tmp dir (default is os.tmpdir()). I suggest setting this to a 'tmpfs' mounted RAM disk.").
 	option("--brutePrograms", "If unable to identify <inputFilePath> just run every available program on it").
 	option("--midiFont [midiFont]", `Convert MIDI files with a specific midi font. Default: eaw
@@ -37,6 +39,9 @@ tiptoe(
 	},
 	function printResults(state)
 	{
+		if(argv.outputStateToFile)
+			return fs.writeFile(argv.outputStateToFile, JSON.stringify(state), XU.UTF8, this);
+
 		if(argv.outputState)
 			console.log(JSON.stringify(state));
 		else if(state.verbose>=2)

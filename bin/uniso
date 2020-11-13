@@ -6,7 +6,7 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	cueParser = require("cue-parser"),
 	dexvert = require("../lib/dexvert.js"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	{Command} = require("commander"),
 	fileUtil = require("@sembiance/xutil").file,
 	httpUtil = require("@sembiance/xutil").http,
 	C = require("../lib/C.js"),
@@ -14,16 +14,19 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	runUtil = require("@sembiance/xutil").run;
 
-function usage(msg) { process.exit(XU.log`Usage: ${"uniso"} ${"<input.iso>"} ${"<outDirPath>"}\n${msg ? XU.c.fg.red + msg : ""}`); }
+const argv = new Command().description("Processes <input.iso> as an ISO and extracting into <outputDirPath>").
+	option("--tmpDirPath [dirPath]", "Use a different tmp dir (default is os.tmpdir()). I suggest setting this to a 'tmpfs' mounted RAM disk.").
+	arguments("<input.iso> <outputDirPath>").
+	parse(process.argv);
 
-if(argv._.length!==2)
-	return usage();
+if(argv.args.length<2)
+	argv.help();
 
-const inputFilePath = path.resolve(`${argv._[0]}`);
+const inputFilePath = path.resolve(argv.args[0]);
 if(!fileUtil.existsSync(inputFilePath))
-	return usage(`Input file ${inputFilePath} does not exist.`);
+	return process.exit(console.error(`Input file ${inputFilePath} does not exist.`));
 
-const OUT_DIR_PATH = path.resolve(`${argv._[1]}`);
+const OUT_DIR_PATH = path.resolve(argv.args[1]);
 
 const WIP_DIR_PATH = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");

@@ -6,26 +6,18 @@ const XU = require("@sembiance/xu"),
 	printUtil = require("@sembiance/xutil").print,
 	{validate} = require("./validate.js"),
 	dexvert = require("../lib/dexvert.js"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	{Command} = require("commander"),
 	fs = require("fs"),
 	os = require("os"),
 	tiptoe = require("tiptoe");
 
-if(argv.help)
-{
-	XU.log`Usage: node test-identify.js [options]
-
-Will test all sample files to ensure dexvert.identify() works correctly.
-
-Options:
-  --help                Display help/usage
-  --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
-  --extension=<ext>			Only test files that belong to formats that have the given extension
-  --file=<subFilePath>	Only identify the given sample subFilePath
-  --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
-  --record              Take the results of the identifications and save them as the future expected results`;
-	process.exit(0);
-}
+const argv = new Command().description("Will test all sample files to ensure dexvert.identify() works correctly.").
+	option("--format [format]", " Can pass a specific format to limit testing to that format, example: archive/zip").
+	option("--extension [ext]", "Only test files that belong to formats that have the given extension").
+	option("--file [subFilePath]", "Only identify the given sample subFilePath").
+	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
+	option("--record", "Take the results of the identifications and save them as the future expected results").
+	parse(process.argv);
 
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "identify.json");
 let testData = null;

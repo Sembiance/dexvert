@@ -17,68 +17,92 @@ Usage: dexvert [options] <inputFilePath> <outputDirPath>
 Processes <inputFilePath> converting or extracting files into <outputDirPath>
 
 Options:
-  --verbose=<level>
-    Show additional info when processing. Levels 1 to 5 where 5 is most verbose
-
-   --brute=<family>,<family>
-    If unable to identify <inputFilePath>, try converting anyways
-    Pass a comma delimited list of families to brute force try
-    Valid families: archive document audio music video image 3d font other executable rom text or all
-    Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
-    WARNING: Multiple successes could use a lot of disk space
-
-   --keepGoing
-    When brute forcing, don't stop at the first success. Try them all.
-
-   --alwaysBrute
-    When brute forcing, always brute force, even if we have an exact id match.
-
-   --outputState
-    If set, will output the state as JSON
-
-   --tmpDirPath=/mnt/tmp
-    Use a different tmp dir (default is os.tmpdir())
-	I suggest setting this to a 'tmpfs' mounted RAM disk.
-
-   --brutePrograms
-    If unable to identify <inputFilePath> just run every available program on it
-
-   --midiFont=<midiFont>
-    Convert MIDI files with a specific midi font. Default: eaw
-	Other available fonts: fluid, roland, creative, freepats, windows
-  
-   --help
-    Displays this usage message
+  --verbose [level]       Show additional info when processing. Levels 1 to 6
+                          where 6 is most verbose
+  --brute [family...]     If unable to identify <inputFilePath>, try converting anyways
+  		Pass a comma delimited list of families to brute force try
+  		Valid families: archive document audio music video image 3d font other executable rom text or all
+  		Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
+  		WARNING: Multiple successes could use a lot of disk space
+  --keepGoing             When brute forcing, don't stop at the first success.
+                          Try them all.
+  --alwaysBrute           When brute forcing, always brute force, even if we
+                          have an exact id match.
+  --outputState           If set, will output the state as JSON
+  --tmpDirPath [dirPath]  Use a different tmp dir (default is os.tmpdir()). I
+                          suggest setting this to a 'tmpfs' mounted RAM disk.
+  --brutePrograms         If unable to identify <inputFilePath> just run every
+                          available program on it
+  --midiFont [midiFont]   Convert MIDI files with a specific midi font. Default: eaw
+  		Other available fonts: fluid, roland, creative, freepats, windows
+  -h, --help              display help for command
 
 ```
 
 In order for some documents to convert correctly, two daemons (unoconv and cdemu-daemon) need to be running as a user. So 'dexserv' must be started in the background:
 ```
-Usage: dexserv [options]
+Error: listen EADDRINUSE: address already in use 127.0.0.1:17735
+    at Server.setupListenHandle [as _listen2] (net.js:1318:16)
+    at listenInCluster (net.js:1366:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1503:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:69:8) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '127.0.0.1',
+  port: 17735,
+  _tiptoeRemainingSteps: [ 'finish' ],
+  _tiptoeOrigin: Error
+      at tiptoe (/mnt/compendium/DevLab/node-modules/tiptoe/index.js:7:20)
+      at Object.<anonymous> (/mnt/compendium/DevLab/dexvert/bin/dexserv:75:1)
+      at Module._compile (internal/modules/cjs/loader.js:1063:30)
+      at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
+      at Module.load (internal/modules/cjs/loader.js:928:32)
+      at Function.Module._load (internal/modules/cjs/loader.js:769:14)
+      at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
+      at internal/main/run_main_module.js:17:47
+}Error: Command failed: /mnt/compendium/DevLab/dexvert/bin/dexserv --help
+Error: listen EADDRINUSE: address already in use 127.0.0.1:17735
+    at Server.setupListenHandle [as _listen2] (net.js:1318:16)
+    at listenInCluster (net.js:1366:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1503:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:69:8) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '127.0.0.1',
+  port: 17735,
+  _tiptoeRemainingSteps: [ 'finish' ],
+  _tiptoeOrigin: Error
+      at tiptoe (/mnt/compendium/DevLab/node-modules/tiptoe/index.js:7:20)
+      at Object.<anonymous> (/mnt/compendium/DevLab/dexvert/bin/dexserv:75:1)
+      at Module._compile (internal/modules/cjs/loader.js:1063:30)
+      at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
+      at Module.load (internal/modules/cjs/loader.js:928:32)
+      at Function.Module._load (internal/modules/cjs/loader.js:769:14)
+      at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
+      at internal/main/run_main_module.js:17:47
+}
+Starting up unoconv server on port 27,359
+Registering routes...
+└── /
+    ├── status (GET)
+    └── getCDEmuDeviceNum (GET)
 
-Starts a server to assist dexvert. Required for 'unoconv' doc conversion and ISO extraction.
-
-Options:
-  --help
-    Display help/usage
 
 ```
 
 You can also just 'identify' what a file is, without processing it by running 'dexid':
 ```
-Usage: dexid [options] <inputFilePath>
+Usage: dexid [options] <inputFilePath...>
 
 Identifies <inputFilePath>. Like an advanced 'file' command
 
 Options:
-  --verbose=<level>
-    Show additional info when identifying. Levels 1 to 5 where 5 is most verbose
-
-  --help
-    Display help/usage
-  
-  --json
-    Output JSON
+  --verbose [level]  Show additional info when identifying. Levels 1 to 5 where
+                     5 is most verbose
+  --json             Output JSON
+  -h, --help         display help for command
 
 ```
 

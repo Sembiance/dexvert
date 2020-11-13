@@ -1,36 +1,24 @@
 #!/usr/bin/env node
 "use strict";
 const XU = require("@sembiance/xu"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	{Command} = require("commander"),
 	tiptoe = require("tiptoe"),
 	printUtil = require("@sembiance/xutil").print,
 	dexvert = require("../lib/dexvert.js");
 
-function usage()
-{
-	XU.log`${XU.cf.fg.cyan("Usage:")} dexid [options] <inputFilePath>
+const argv = new Command().description("Identifies <inputFilePath>. Like an advanced 'file' command").
+	option("--verbose [level]", "Show additional info when identifying. Levels 1 to 5 where 5 is most verbose").
+	option("--json", "Output JSON").
+	arguments("<inputFilePath...>").
+	parse(process.argv);
 
-Identifies <inputFilePath>. Like an advanced 'file' command
-
-${XU.cf.fg.cyan("Options:")}
-  ${XU.cf.fg.yellow("--verbose=<level>")}
-    Show additional info when identifying. Levels 1 to 5 where 5 is most verbose
-
-  ${XU.cf.fg.yellow("--help")}
-    Display help/usage
-  
-  ${XU.cf.fg.yellow("--json")}
-    Output JSON`;
-	process.exit(0);
-}
-
-if(argv.help || argv._.length<1)
-	usage();
+if(argv.args.length<1)
+	argv.help();
 
 tiptoe(
 	function performIdentification()
 	{
-		dexvert.identify(argv._[0], {verbose : argv.verbose || 0}, this);
+		dexvert.identify(argv.args[0], {verbose : argv.verbose || 0}, this);
 	},
 	function processIdentification(results)
 	{

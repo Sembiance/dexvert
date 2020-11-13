@@ -6,20 +6,19 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	util = require("util"),
 	xmlJS = require("xml-js"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
-	fileUtil = require("@sembiance/xutil").file,
+	{Command} = require("commander"),
 	tiptoe = require("tiptoe");
 
-if(!argv.magic)
-	process.exit(console.error("Usage: tridDefToMagic.js [--autoAdd] --magic=\"Your Magic String\" <newtype.trid.xml>"));
-
-if(argv._.length===0 || !fileUtil.existsSync(`${argv._[0]}`))
-	process.exit(console.error("Usage: tridDefToMagic.js [--autoAdd] --magic=\"Your Magic String\" <newtype.trid.xml>"));
+const argv = new Command().description("Will convert a trid def XML file to a magic output").
+	option("--magic <magicString>", "Specify which 'Magic String' you want file to report it as").
+	option("--autoAdd", "Automatically add to file_magic/dexvert-magic").
+	arguments("<inputTrid.xml>").
+	parse(process.argv);
 
 tiptoe(
 	function loadXMLFile()
 	{
-		fs.readFile(`${argv._[0]}`, XU.UTF8, this);
+		fs.readFile(argv.args[0], XU.UTF8, this);
 	},
 	function processXMLFile(xmlFileRaw)
 	{
@@ -43,7 +42,7 @@ tiptoe(
 			return this();
 
 		console.log("\nAutomatically appending to my-magic...");
-		fs.appendFile("/mnt/compendium/sys/magic/my-magic", `\n${lines.join("\n")}`, XU.UTF8, this);
+		fs.appendFile("/mnt/compendium/DevLab/dexvert/file_magic/dexvert-magic", `\n${lines.join("\n")}`, XU.UTF8, this);
 	},
 	XU.FINISH
 );

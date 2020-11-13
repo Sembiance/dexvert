@@ -11,27 +11,20 @@ const XU = require("@sembiance/xu"),
 	{validate} = require("./validate.js"),
 	dexUtil = require("../lib/dexUtil.js"),
 	dexvert = require("../lib/dexvert.js"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	{Command} = require("commander"),
 	fs = require("fs"),
 	os = require("os"),
 	tiptoe = require("tiptoe");
 
-if(argv.help)
-{
-	XU.log`Usage: node test-process.js [options]
-
-Will test all sample files to ensure dexvert.process() works correctly.
-
-Options:
-  --help                Display help/usage
-  --format=<format>     Can pass a specific format to limit testing to that format, example: archive/zip
-  --ext=<ext>			Only test files that belong to formats that have the given extension
-  --file=<subFilePath>	Only process the given sample subFilePath
-  --full                Run ALL tests, even long running ones
-  --verbose=<level>		Verbosity level, 1 to 5 where 5 is the most verbose
-  --record              Take the results of the identifications and save them as the future expected results`;
-	process.exit(0);
-}
+const argv = new Command().description("Will test all sample files to ensure dexvert.process() works correctly.").
+	option("--format [format]", "Can pass a specific format to limit testing to that format, example: archive/zip").
+	option("--extension [ext]", "Only test files that belong to formats that have the given extension").
+	option("--file [subFilePath]", "Only identify the given sample subFilePath").
+	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
+	option("--full", "Run ALL tests, even long running ones").
+	option("--keep", "Keep temporary directories around after converting").
+	option("--record", "Take the results of the identifications and save them as the future expected results").
+	parse(process.argv);
 
 // Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
 // Filenames are the OUTPUT filenames and are all converted to LOWERCASE first

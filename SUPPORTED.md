@@ -60,7 +60,7 @@ archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit 
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [1 sample file](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/tscomp/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [3 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
-archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/ttcomp/)
+archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | [4 sample files](https://telparia.com/fileFormatSamples/archive/ttcomp/)
 archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [1 sample file](https://telparia.com/fileFormatSamples/archive/wad2/)
 
 
@@ -240,7 +240,7 @@ image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | [4 sample files](https://telparia.com/fileFormatSamples/image/doodleAtari/)
 image | [Doodle C64](http://fileformats.archiveteam.org/wiki/Doodle!_(C64)) | .dd .jj | [10 sample files](https://telparia.com/fileFormatSamples/image/doodleC64/)
 image | [Dr. Halo](http://fileformats.archiveteam.org/wiki/Dr._Halo) | .cut .pal .pic | [6 sample files](https://telparia.com/fileFormatSamples/image/drHalo/)
-image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [1 sample file](https://telparia.com/fileFormatSamples/image/draw256/)
+image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Draw256 from DOS correctly loads these formats, but sadly will take invalid .VGA files and render a garbage/static. Couldn't find any more info about the file format to try and determine ahead of time that it's a proper VGA file.
 image | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [2 sample files](https://telparia.com/fileFormatSamples/image/dxf/)
 image | DrawIt | .dit | [14 sample files](https://telparia.com/fileFormatSamples/image/drawIt/)
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | [3 sample files](https://telparia.com/fileFormatSamples/image/drazPaint/)

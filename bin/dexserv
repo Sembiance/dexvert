@@ -2,7 +2,6 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
 	tiptoe = require("tiptoe"),
 	C = require("../lib/C.js"),
 	runUtil = require("@sembiance/xutil").run,
@@ -10,21 +9,6 @@ const XU = require("@sembiance/xu"),
 	fastify = require("fastify")({logger : true});
 
 const VHBA_CTL_DEV_PATH = "/dev/vhba_ctl";
-
-function usage()
-{
-	XU.log`${XU.cf.fg.cyan("Usage:")} dexserv [options]
-
-Starts a server to assist dexvert. Required for 'unoconv' doc conversion and ISO extraction.
-
-${XU.cf.fg.cyan("Options:")}
-  ${XU.cf.fg.yellow("--help")}
-    Display help/usage`;
-	process.exit(0);
-}
-
-if(argv.help)
-	usage();
 
 let cdEmuDeviceNum = 0;
 let unoconvCP = null;

@@ -4,19 +4,22 @@
 
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
-	argv = require("minimist")(process.argv.slice(2), {boolean : true}),
+	{Command} = require("commander"),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
 	runUtil = require("@sembiance/xutil").run;
 
-function usage(msg) { process.exit(XU.log`Usage: ${"modinfo"} ${"<input.mod>"}\n${XU.c.fg.red + msg}`); }
+const argv = new Command().description("Returns meta info about mod at <inputFilePath>").
+	option("--jsonOutput", "Output results as JSON instead of being human readable").
+	arguments("<inputFilePath> <outputDirPath>").
+	parse(process.argv);
 
-if(argv._.length!==1)
-	return usage();
+if(argv.args.length<1)
+	argv.help();
 
-const inputFilePath = `${argv._[0]}`;
+const inputFilePath = argv.args[0];
 if(!fileUtil.existsSync(inputFilePath))
-	return usage(`Input file ${inputFilePath} does not exist.`);
+	return process.exit(console.error(`Input file ${inputFilePath} does not exist.`));
 
 tiptoe(
 	function runCommands()

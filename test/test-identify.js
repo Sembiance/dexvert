@@ -4,6 +4,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require("./testUtil.js"),
 	printUtil = require("@sembiance/xutil").print,
+	fileUtil = require("@sembiance/xutil").file,
 	{validate} = require("./validate.js"),
 	dexvert = require("../lib/dexvert.js"),
 	{Command} = require("commander"),
@@ -51,7 +52,15 @@ tiptoe(
 		if(argv.format)
 			sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(argv.format));
 		if(argv.extension)
-			sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));	// eslint-disable-line sembiance/prefer-relative-require, max-len
+		{
+			sampleFilePaths.filterInPlace(sfp =>
+			{
+				const formatJSPath = path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`);
+				if(!fileUtil.existsSync(formatJSPath))
+					return false;
+				return (require(formatJSPath).meta.ext || []).includes(argv.extension);
+			});	// eslint-disable-line sembiance/prefer-relative-require, max-len
+		}
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;
 

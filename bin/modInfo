@@ -24,7 +24,7 @@ if(!fileUtil.existsSync(inputFilePath))
 tiptoe(
 	function runCommands()
 	{
-		const runOptions = {timeout : XU.MINUTE, silent : true};
+		const runOptions = {timeout : XU.SECOND*30, silent : true};
 
 		runUtil.run("xmp", ["-Cv", "-o", "/dev/null", inputFilePath], runOptions, this.parallel());
 		runUtil.run("uade123", ["-g", inputFilePath], Object.assign({"ignore-stderr" : true}, runOptions), this.parallel());

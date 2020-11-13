@@ -126,8 +126,8 @@ Matches is the list of matches made by various identification programs that you 
 For image/music, an array of programid strings, in priority order, to try and convert this file with.
 It will try a bunch of others, this is just the initial priority order. Stops at first successful conversion.
 
->>> converterExclude = ["deark"]
-For image only. An array of programids to EXCLUDE from conversion attempts.
+>>> converterExclude = ["xmp"]
+For music only. An array of programids to EXCLUDE from conversion attempts.
 
 
 >>> ******** Process Order

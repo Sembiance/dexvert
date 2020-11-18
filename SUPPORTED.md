@@ -97,7 +97,7 @@ document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Mic
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [1 sample file](https://telparia.com/fileFormatSamples/document/pco/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [2 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
-document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [3 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
+document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri | [3 sample files](https://telparia.com/fileFormatSamples/document/wri/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 | [2 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 
@@ -609,7 +609,7 @@ text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [6
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
 text | File List | .bbs .lst .lis .dir .ind | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [1 sample file](https://telparia.com/fileFormatSamples/text/html/)
-text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [3 sample files](https://telparia.com/fileFormatSamples/text/ini/)
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [5 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | [2 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [1 sample file](https://telparia.com/fileFormatSamples/text/lisp/)
@@ -618,7 +618,7 @@ text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [2 sample files](https://telparia.com/fileFormatSamples/text/pas/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
-text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [1 sample file](https://telparia.com/fileFormatSamples/text/reg/)
+text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
 
 

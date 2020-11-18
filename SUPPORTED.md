@@ -107,7 +107,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [27 sample files](https://telparia.com/fileFormatSamples/font/adobeType1/)
-font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [20 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/) - Fony (Win32/wine) (see sandbox/app/) is supposed to be able to open these, but I wasn't able to use it
+font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [20 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/)
 font | Atari FontMaker | .fn2 | [1 sample file](https://telparia.com/fileFormatSamples/font/fn2/)
 font | Atari SXS Font | .sxs | [3 sample files](https://telparia.com/fileFormatSamples/font/sxs/)
 font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | [1 sample file](https://telparia.com/fileFormatSamples/font/blazingPaddlesFont/)

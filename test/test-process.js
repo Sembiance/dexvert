@@ -61,8 +61,8 @@ const SHA1_IGNORE_FILES =
 	music :
 	{
 		// These files are slightly different each time
-		"med" : [/juanidance.flac$/],
-		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		//"med" : [/juanidance.flac$/],
+		//"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 	},
 	video :
 	{
@@ -94,8 +94,8 @@ const SIZE_IGNORE_FILES =
 	music :
 	{
 		// These files are slightly different each time
-		"med" : [/juanidance.flac$/],
-		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		//"med" : [/juanidance.flac$/],
+		//"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 	},
 	video :
 	{

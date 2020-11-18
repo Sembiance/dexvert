@@ -34,7 +34,7 @@ archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-ima
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [ISO Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin | [14 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
-archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [1 sample file](https://telparia.com/fileFormatSamples/archive/lzx/)
+archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [4 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
 archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz | [3 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [1 sample file](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [1 sample file](https://telparia.com/fileFormatSamples/archive/rsrc/)

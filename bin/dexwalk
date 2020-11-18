@@ -1,69 +1,23 @@
-#!/usr/bin/env node
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	tiptoe = require("tiptoe"),
-	fs = require("fs"),
-	os = require("os"),
-	StreamSkip = require("stream-skip"),
-	fileUtil = require("@sembiance/xutil").file,
-	{Command} = require("commander"),
-	dexvert = require("../lib/dexvert.js");
+#!/bin/bash
 
-const MIN_FILE_SIZE = XU.KB;
+fileSize=$(wc -c "$1" | cut -f1 -d" ")
 
-const argv = new Command().description("Processes <inputFilePath> digging deep into the file for subfiles and extracting into <outputDirPath>").
-	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
-	option("--tmpDirPath [dirPath]", "Use a different tmp dir (default is os.tmpdir()). I suggest setting this to a 'tmpfs' mounted RAM disk.").
-	arguments("<inputFilePath> <outputDirPath>").
-	parse(process.argv);
+rm -rf dexwalk_out
+mkdir dexwalk_out
 
-if(argv.args.length<2)
-	argv.help();
+for ((i=1; i <= fileSize; i+=10)); do
+	for ((z=i; z <= i+10; z++)); do
+		mkdir dexwalk_out/"$z"
+		dd if="$1" of=dexwalk_out/wip"$z" bs=1 skip="$z" >/dev/null 2>&1
+		dexvert dexwalk_out/wip"$z" dexwalk_out/"$z"/ &
+	done
 
-const verbose = argv.verbose || 0;
-const INPUT_FILE_PATH = argv.args[0];
-const FILE_SIZE = fs.statSync(INPUT_FILE_PATH).size;
-const tmpDirPath = argv.tmpDirPath || os.tmpdir();
-const OUTPUT_DIR_PATH = argv.args[1];
+	echo "Waiting for 10 dexverts starting at ""$i"
+	wait
 
-function tryPart(i, cb)
-{
-	const SUB_FILE_PATH = path.join(tmpDirPath, `${i}`);
-	XU.log`${`${((i/FILE_SIZE)*100).toFixed(2)}`.padStart(6, " ")}% - ${i} of ${FILE_SIZE}`;
+	for ((z=i; z <= i+10; z++)); do
+		rm -f dexwalk_out/wip"$z"
+	done
 
-	tiptoe(
-		function createSubFile()
-		{
-			const inStream = fs.createReadStream(INPUT_FILE_PATH);
-			inStream.on("error", this);
-			inStream.on("end", this);
-			inStream.pipe(new StreamSkip({skip : i})).pipe(fs.createWriteStream(SUB_FILE_PATH));
-		},
-		function processSubFile()
-		{
-			this.capture();
-			dexvert.process(SUB_FILE_PATH, OUTPUT_DIR_PATH, {tmpDirPath, verbose, useTmpOutputDir : true}, this);
-		},
-		function removeSubFile()
-		{
-			// Errors are ignored
-			fileUtil.unlink(SUB_FILE_PATH, this);
-		},
-		cb
-	);
-}
-
-tiptoe(
-	function walkFile()
-	{
-		[].pushSequence(1, FILE_SIZE-MIN_FILE_SIZE).parallelForEach(tryPart, this, os.cpus().length*2);
-	},
-	function printResults()
-	{
-		console.log("print output files here");
-
-		this();
-	},
-	XU.FINISH
-);
+	find dexwalk_out/* -type d -empty -delete
+done

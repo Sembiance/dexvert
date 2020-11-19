@@ -49,20 +49,23 @@ const SHA1_IGNORE_FILES =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK" : [/.png$/],
-		 "pds" : [/.png$/],
+		"pds"  : [/.png$/],
 
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cvg" : [/.svg$/],
 		"eps" : [/.svg$/],
 		"fig" : [/.svg$/],
 		 "ps" : [/.svg$/],
-		"wmf" : [/.svg$/]
+		"wmf" : [/.svg$/],
+
+		// Abydos doesn't always produce the same webp file, not sure why
+		"amosSprites" : [/leming.webp$/]
 	},
 	music :
 	{
 		// These files are slightly different each time
-		"med" : [/juanidance.flac$/],
-		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		"med" : [/juanidance.mp3$/],
+		"sid" : [/.mp3$/]	// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 	},
 	video :
 	{
@@ -79,7 +82,10 @@ const SIZE_IGNORE_FILES =
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
-		"3dCK" : [/.png$/]
+		"3dCK"        : [/.png$/],
+
+		// Abydos doesn't always produce the same webp file, not sure why
+		"amosSprites" : [/leming.webp$/]
 	},
 	document :
 	{
@@ -94,8 +100,8 @@ const SIZE_IGNORE_FILES =
 	music :
 	{
 		// These files are slightly different each time
-		"med" : [/juanidance.flac$/],
-		"sid" : [/.flac$/]	// The FLAC files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		"med" : [/juanidance.mp3$/],
+		"sid" : [/.mp3$/]	// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 	},
 	video :
 	{

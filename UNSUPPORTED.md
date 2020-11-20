@@ -43,9 +43,10 @@ audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFo
 
 
 
-## Document (6)
+## Document (7)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+document | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [7 sample files](https://telparia.com/fileFormatSamples/document/iffCTLG/) - Contains strings used by programs. Not currently enabled as my parser isn't quite right and I don't feel like debugging it more.
 document | Clarion Database File | .dat | [49 sample files](https://telparia.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://telparia.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/) - Help Librarian files. No information about them could be found anywhere.
@@ -103,7 +104,7 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (49)
+## Other (48)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -113,7 +114,6 @@ other | Amiga ADF BlkDev File | .blkdev |
 other | Amiga ADF Bootcode | .bootcode | 
 other | Amiga ADF XDF Meta | .xdfmeta | 
 other | Amiga CLI-Mate Directory Index File |  | 
-other | Amiga IFF Catalog | .catalog | 
 other | Amiga IFF DTYP |  | 
 other | Amiga Preferences | .prefs | 
 other | Amos Amal Animation Bank | .abk | 

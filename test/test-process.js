@@ -367,7 +367,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 					extraArgs.push(outDirPath);
 
 					if(this.data.results)
-						fs.writeFileSync(path.join(outDirPath, "dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);
+						fs.writeFileSync(path.join(outDirPath, "___dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);
 				}
 				testUtil.logResult(status, sampleSubFilePath, msg, ...extraArgs);
 			}

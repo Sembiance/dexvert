@@ -21,6 +21,7 @@ Can specify what the file encoding is if you know it. Really only used for text 
 
 >>> hljsLang : "cpp"
 Can specific a highlight.js type to use for syntax highlighting file matches.
+https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md
 
 
 >>> ******** Properties

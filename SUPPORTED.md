@@ -333,7 +333,7 @@ image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph 
 image | [InterPainter](http://fileformats.archiveteam.org/wiki/InterPainter) | .inp .ins .int | [41 sample files](https://telparia.com/fileFormatSamples/image/interPainter/)
 image | [Jet Graphics Planner](http://fileformats.archiveteam.org/wiki/Jet_Graphics_Planner) | .jgp | [3 sample files](https://telparia.com/fileFormatSamples/image/jgp/)
 image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [6 sample files](https://telparia.com/fileFormatSamples/image/jbig/)
-image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | [6 sample files](https://telparia.com/fileFormatSamples/image/jpg/)
+image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | [7 sample files](https://telparia.com/fileFormatSamples/image/jpg/)
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | [5 sample files](https://telparia.com/fileFormatSamples/image/jpeg2000/)
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | [13 sample files](https://telparia.com/fileFormatSamples/image/jng/)
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | [1 sample file](https://telparia.com/fileFormatSamples/image/jpegXR/)
@@ -574,7 +574,7 @@ Family | Name | Extensions | Notes
 music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wiki/AHX_(Abyss)) | .ahx | [1 sample file](https://telparia.com/fileFormatSamples/music/ahx/)
 music | [AdLib/Roland Song](http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song) | .rol | [1 sample file](https://telparia.com/fileFormatSamples/music/rol/)
 music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [5 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
-music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [3 sample files](https://telparia.com/fileFormatSamples/music/amosTracker/)
+music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [4 sample files](https://telparia.com/fileFormatSamples/music/amosTracker/)
 music | [Commodore SID Music File](http://fileformats.archiveteam.org/wiki/SID) | .sid .psid | [3 sample files](https://telparia.com/fileFormatSamples/music/sid/)
 music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative_Music_Format) | .cmf | [1 sample file](https://telparia.com/fileFormatSamples/music/cmf/)
 music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | [5 sample files](https://telparia.com/fileFormatSamples/music/xmi/)
@@ -616,7 +616,7 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [1 s
 text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | [1 sample file](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [6 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [2 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .cfg .config .78x20 .78*20 .38x20 .38x17 .36x20 .36*20 .advert .advert2 | [1 sample file](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)

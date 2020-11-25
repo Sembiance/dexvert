@@ -58,8 +58,14 @@ const SHA1_IGNORE_FILES =
 		 "ps" : [/.svg$/],
 		"wmf" : [/.svg$/],
 
+		// lottie2gif doesn't produce identical GIF files for these files:
+		"lottie" : [/cooking.json.gif$/, /tile_grid_loading_animation.json.gif$/, /fingerprint_success.json.gif$/, /starts_transparent.json.gif$/, /tractor.json.gif$/],
+
 		// Abydos doesn't always produce the same webp file, not sure why
-		"amosSprites" : [/leming.webp$/]
+		"amosSprites" : [/leming.webp$/],
+
+		// Abydos doesn't work with this image yet, produces different data each time
+		"sgx" : [/nuke.png$/]
 	},
 	music :
 	{
@@ -85,7 +91,10 @@ const SIZE_IGNORE_FILES =
 		"3dCK"        : [/.png$/],
 
 		// Abydos doesn't always produce the same webp file, not sure why
-		"amosSprites" : [/leming.webp$/]
+		"amosSprites" : [/leming.webp$/],
+
+		// Abydos doesn't work with this image yet, produces different data each time
+		"sgx" : [/nuke.png$/]
 	},
 	document :
 	{
@@ -299,7 +308,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(results.output.files && expectedFiles.length!==results.output.files.length)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
 
-			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert");
+			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
 			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
 				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
 			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))

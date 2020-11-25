@@ -72,7 +72,7 @@ function validateFormat(format)
 		symlinkUnsafe    : [isBoolean],
 		untouched        : [isBoolean],
 		priority         : [isNumber, oneOf(Object.values(C.PRIORITY))],
-		confidenceAdjust : [isFunction, hasLengthBetween(0, 2)],
+		confidenceAdjust : [isFunction, hasLengthBetween(0, 3)],
 		filesRequired    : [isFunction, hasLengthBetween(0, 2)],
 		filesOptional    : [isFunction, hasLengthBetween(0, 2)],
 

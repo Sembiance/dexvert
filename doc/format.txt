@@ -49,7 +49,7 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
 
->>> confidenceAdjust : (state, matchType => (matchType==="ext" ? -20 : 0)
+>>> confidenceAdjust : (state, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.
 Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
 file it's converting well enough, often producing garbage or something when a file is mis-identified. 

@@ -66,15 +66,14 @@ dexvert requires a LOT of programs and some kernel options to be set. See Requir
 ${dexvertUsage}
 \`\`\`
 
-In order for some documents to convert correctly, two daemons (unoconv and cdemu-daemon) need to be running as a user. So 'dexserv' must be started in the background:
-\`\`\`
-${dexservUsage}
-\`\`\`
-
 You can also just 'identify' what a file is, without processing it by running 'dexid':
 \`\`\`
 ${dexidUsage}
 \`\`\`
+
+Some background servers need to be running in order for dexvert to operate correctly. You can run them in 'bin/runServers.sh'
+bin/dexserv runs unoconv and handles generating unique numbers for cd daemon mounting (which sadly, is a littly buggy)
+The tensorServer runs a python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
 
 Use as a nodejs module:
 

@@ -9,3 +9,7 @@ music/midiInstrument/roland/*.sf2
 .vscode
 scribus/
 log/
+util/badPNGs
+util/goodPNGs
+__pycache__
+tensor/garbage

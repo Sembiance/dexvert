@@ -151,8 +151,8 @@ function validateProgram(program)
 		wineOptions : [isFunction, hasLengthBetween(0, 3)]
 	};
 
-	// Format specific properties that are shared for easier re-use
-	["STRIP_ARGS"].forEach(v => { programSchema[v] = [anything]; });
+	// Program/format specific properties that are shared for easier re-use
+	["STRIP_ARGS", "BSAVE_TYPES"].forEach(v => { programSchema[v] = [anything]; });
 
 	try
 	{

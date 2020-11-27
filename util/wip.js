@@ -9,6 +9,8 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs");
 
 
+process.exit(0);
+
 tiptoe(
 	function findSampleFiles()
 	{

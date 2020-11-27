@@ -15,4 +15,3 @@ killall rpcss.exe
 
 # These particular procs have been known to hang
 killall pdfpsai.bin
-killall python3.7

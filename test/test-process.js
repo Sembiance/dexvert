@@ -65,7 +65,10 @@ const SHA1_IGNORE_FILES =
 		"amosSprites" : [/leming.webp$/],
 
 		// Abydos doesn't work with this image yet, produces different data each time
-		"sgx" : [/nuke.png$/]
+		"sgx" : [/nuke.png$/],
+
+		// Deark produces slightly different GIF files each time, not sure why
+		"ani" : [/.gif$/]
 	},
 	music :
 	{
@@ -94,7 +97,10 @@ const SIZE_IGNORE_FILES =
 		"amosSprites" : [/leming.webp$/],
 
 		// Abydos doesn't work with this image yet, produces different data each time
-		"sgx" : [/nuke.png$/]
+		"sgx" : [/nuke.png$/],
+
+		// Deark produces slightly different GIF files each time, not sure why
+		"ani" : [/.gif$/]
 	},
 	document :
 	{

@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 595 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 596 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -42,59 +42,6 @@ Options:
 
 ```
 
-In order for some documents to convert correctly, two daemons (unoconv and cdemu-daemon) need to be running as a user. So 'dexserv' must be started in the background:
-```
-Error: listen EADDRINUSE: address already in use 127.0.0.1:17735
-    at Server.setupListenHandle [as _listen2] (net.js:1318:16)
-    at listenInCluster (net.js:1366:12)
-    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1503:7)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:69:8) {
-  code: 'EADDRINUSE',
-  errno: -98,
-  syscall: 'listen',
-  address: '127.0.0.1',
-  port: 17735,
-  _tiptoeRemainingSteps: [ 'finish' ],
-  _tiptoeOrigin: Error
-      at tiptoe (/mnt/compendium/DevLab/node-modules/tiptoe/index.js:7:20)
-      at Object.<anonymous> (/mnt/compendium/DevLab/dexvert/bin/dexserv:75:1)
-      at Module._compile (internal/modules/cjs/loader.js:1063:30)
-      at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
-      at Module.load (internal/modules/cjs/loader.js:928:32)
-      at Function.Module._load (internal/modules/cjs/loader.js:769:14)
-      at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
-      at internal/main/run_main_module.js:17:47
-}Error: Command failed: /mnt/compendium/DevLab/dexvert/bin/dexserv --help
-Error: listen EADDRINUSE: address already in use 127.0.0.1:17735
-    at Server.setupListenHandle [as _listen2] (net.js:1318:16)
-    at listenInCluster (net.js:1366:12)
-    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1503:7)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:69:8) {
-  code: 'EADDRINUSE',
-  errno: -98,
-  syscall: 'listen',
-  address: '127.0.0.1',
-  port: 17735,
-  _tiptoeRemainingSteps: [ 'finish' ],
-  _tiptoeOrigin: Error
-      at tiptoe (/mnt/compendium/DevLab/node-modules/tiptoe/index.js:7:20)
-      at Object.<anonymous> (/mnt/compendium/DevLab/dexvert/bin/dexserv:75:1)
-      at Module._compile (internal/modules/cjs/loader.js:1063:30)
-      at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)
-      at Module.load (internal/modules/cjs/loader.js:928:32)
-      at Function.Module._load (internal/modules/cjs/loader.js:769:14)
-      at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)
-      at internal/main/run_main_module.js:17:47
-}
-Starting up unoconv server on port 27,359
-Registering routes...
-└── /
-    ├── status (GET)
-    └── getCDEmuDeviceNum (GET)
-
-
-```
-
 You can also just 'identify' what a file is, without processing it by running 'dexid':
 ```
 Usage: dexid [options] <inputFilePath...>
@@ -108,6 +55,10 @@ Options:
   -h, --help         display help for command
 
 ```
+
+Some background servers need to be running in order for dexvert to operate correctly. You can run them in 'bin/runServers.sh'
+bin/dexserv runs unoconv and handles generating unique numbers for cd daemon mounting (which sadly, is a littly buggy)
+The tensorServer runs a python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
 
 Use as a nodejs module:
 

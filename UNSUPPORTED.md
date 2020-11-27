@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 100 file formats are unsupported by dexvert.
+The following 101 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -67,8 +67,8 @@ executable | MacOS Executable |  |
 executable | Microsoft Windows Dynmic Link Library | .dll | 
 executable | MS-DOS COM Executable | .com .c0m | 
 executable | MS-DOS Driver | .sys .drv | 
-executable | MS-DOS/Windows Executable | .exe | [6 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
-executable | Windows Screensaver | .scr | [7 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
+executable | MS-DOS/Windows Executable | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
+executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 
 
 
@@ -102,7 +102,7 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (48)
+## Other (49)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -131,9 +131,10 @@ other | dBase Index File | .ntx |
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
+other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
-other | Java Class File | .class | 
+other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | 
 other | Microsoft Windows Program Information File | .pif | 

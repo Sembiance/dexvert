@@ -110,8 +110,8 @@ Forbid matching unknown files to this format based on fileSize.
 >>> ******** Filename
 >>> filename : ["FILEID.BIZ", /^filename$/i]
 Array of filenames this format may have.
-Strings must match exactly to the filename.
-Regexes match as a regex.
+Strings must match exactly to the filename, case sensitive.
+Regexes match as a regex. Use /.../i for a case insensitive match
 
 
 /-----------------\

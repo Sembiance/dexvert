@@ -292,7 +292,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 			}
 
 			if(!testData.hasOwnProperty(sampleSubFilePath))
-				return this(undefined, "FAIL", "No test data for this file", `${results.id.family}/${results.id.formatid}`, newTestData);
+				return this(undefined, "FAIL", `No test data for this file: ${sampleSubFilePath}`, `${results.id ? `${results.id.family}/${results.id.formatid}` : ""}`, newTestData);
 
 			const sampleTestData = testData[sampleSubFilePath];
 

@@ -3,6 +3,8 @@ killall Xvfb
 killall dosbox
 killall ffmpeg
 killall scribus
+killall convert
+killall abydosconvert
 
 # Kill all wine services
 killall wineserver

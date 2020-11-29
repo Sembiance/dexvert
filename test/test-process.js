@@ -61,8 +61,8 @@ const SHA1_IGNORE_FILES =
 		// lottie2gif doesn't produce identical GIF files for these files:
 		"lottie" : [/cooking.json.gif$/, /tile_grid_loading_animation.json.gif$/, /fingerprint_success.json.gif$/, /starts_transparent.json.gif$/, /tractor.json.gif$/],
 
-		// Abydos doesn't always produce the same webp file, not sure why
-		"amosSprites" : [/leming.webp$/],
+		// Abydos doesn't always produce the same webp files, not sure why
+		"amosSprites" : [/.webp$/],
 
 		// Abydos doesn't work with this image yet, produces different data each time
 		"sgx" : [/nuke.png$/],
@@ -93,8 +93,8 @@ const SIZE_IGNORE_FILES =
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
 		"3dCK"        : [/.png$/],
 
-		// Abydos doesn't always produce the same webp file, not sure why
-		"amosSprites" : [/leming.webp$/],
+		// Abydos doesn't always produce the same webp files, not sure why
+		"amosSprites" : [/.webp$/],
 
 		// Abydos doesn't work with this image yet, produces different data each time
 		"sgx" : [/nuke.png$/],

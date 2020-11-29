@@ -13,7 +13,7 @@ archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [10 sample files](https://telparia.com/fileFormatSamples/archive/adfFFS/)
 archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [11 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Not all ADF disk images are properly extracted by unar/unadf/adf-extractor. I've tried TONS of programs and they all fail on these disks, which are identified as the OFS variety. Yet fs-uae emulator loads the disks and runs them fine in an emulated amiga. So I could create an amiga workbench script that will convert all contents of an amiga disk into a ZIP file and put it on a shared folder/hard drive and get the contents that way. That's a lot more work, but doable.
 archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/wiki/Disk_Masher_System) | .dms .fms | [10 sample files](https://telparia.com/fileFormatSamples/archive/dms/)
-archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | [8 sample files](https://telparia.com/fileFormatSamples/archive/xpk/)
+archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | [10 sample files](https://telparia.com/fileFormatSamples/archive/xpk/)
 archive | [AMOS Basic Source Code Archive](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .amos | [11 sample files](https://telparia.com/fileFormatSamples/archive/amosSrc/)
 archive | [Amstrad CPC Disk](http://fileformats.archiveteam.org/wiki/DSK_(CPCEMU)) | .dsk | [3 sample files](https://telparia.com/fileFormatSamples/archive/cpcDisk/)
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj | [2 sample files](https://telparia.com/fileFormatSamples/archive/arj/)
@@ -577,7 +577,7 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wiki/AHX_(Abyss)) | .ahx | [1 sample file](https://telparia.com/fileFormatSamples/music/ahx/)
 music | [AdLib/Roland Song](http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song) | .rol | [12 sample files](https://telparia.com/fileFormatSamples/music/rol/)
-music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [5 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
+music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [10 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
 music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [3 sample files](https://telparia.com/fileFormatSamples/music/amosTracker/)
 music | [Commodore SID Music File](http://fileformats.archiveteam.org/wiki/SID) | .sid .psid | [3 sample files](https://telparia.com/fileFormatSamples/music/sid/)
 music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative_Music_Format) | .cmf | [6 sample files](https://telparia.com/fileFormatSamples/music/cmf/)
@@ -642,7 +642,7 @@ video | [Interchange File Format Animation](http://fileformats.archiveteam.org/w
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi | [6 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [3 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)
-video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | [3 sample files](https://telparia.com/fileFormatSamples/video/mp4/)
+video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | [4 sample files](https://telparia.com/fileFormatSamples/video/mp4/)
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [1 sample file](https://telparia.com/fileFormatSamples/video/neochromeAnimation/)
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | [3 sample files](https://telparia.com/fileFormatSamples/video/smacker/)
 

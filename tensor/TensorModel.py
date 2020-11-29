@@ -19,10 +19,6 @@ class TensorModel(object):
 		tf.compat.v1.saved_model.loader.load(sess=self.session, tags=self.signature.get("tags"), export_dir=model_path)
 
 	def predict(self, image: Image.Image):
-		width, height = image.size
-		if width != height:
-			return {}
-
 		# Make 0-1 float instead of 0-255 int (that PIL Image loads by default)
 		image = np.asarray(image) / 255.0
 

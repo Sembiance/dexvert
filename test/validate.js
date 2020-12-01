@@ -97,7 +97,7 @@ function validateFormat(format)
 
 		idCheck : [isFunction, hasLengthBetween(0, 2)],
 
-		converterPriorty : [arrayOf(either([[required, isNonEmptyString], [{program : [required, isNonEmptyString], flags : [isPlainObject]}]])), hasLengthBetween(1, Infinity)],
+		converterPriorty : [either([arrayOf(either([[required, isNonEmptyString], [{program : [required, isNonEmptyString], flags : [isPlainObject]}]])), hasLengthBetween(1, Infinity), [isFunction, hasLengthBetween(0, 2)]])],
 		converterExclude : [arrayOf([required, isNonEmptyString]), hasLengthBetween(1, Infinity)],
 
 		inputMeta       : [isFunction, hasLengthOf(3)],

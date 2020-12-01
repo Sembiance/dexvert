@@ -126,6 +126,7 @@ Matches is the list of matches made by various identification programs that you 
 >>> converterPriorty = ["xmp", "openmpt123"]
 For image/music, an array of programid strings, in priority order, to try and convert this file with.
 It will try a bunch of others, this is just the initial priority order. Stops at first successful conversion.
+It can also be a function which returns an array of converters to try
 
 >>> converterExclude = ["xmp"]
 For music only. An array of programids to EXCLUDE from conversion attempts.

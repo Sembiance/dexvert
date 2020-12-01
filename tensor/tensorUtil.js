@@ -70,6 +70,8 @@ exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 		},
 		function runClassifications()
 		{
+			tmpImagePaths.filterInPlace(tmpImagePath => fileUtil.existsSync(tmpImagePath));
+
 			tmpImagePaths.parallelForEach((tmpImagePath, subcb) => httpUtil.post(`http://${C.TENSORSERV_HOST}:${C.TENSORSERV_PORT}/classify/${modelName}`, {imagePath : tmpImagePath}, {postAsJSON : true}, subcb), this);
 		},
 		function parseClassifications(resultsRaw)

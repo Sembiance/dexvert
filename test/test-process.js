@@ -61,8 +61,9 @@ const SHA1_IGNORE_FILES =
 		// lottie2gif doesn't produce identical GIF files for these files:
 		"lottie" : [/cooking.json.gif$/, /tile_grid_loading_animation.json.gif$/, /fingerprint_success.json.gif$/, /starts_transparent.json.gif$/, /tractor.json.gif$/],
 
-		// Abydos doesn't always produce the same webp files, not sure why
+		// Abydos doesn't always produce the same files, not sure why
 		"amosSprites" : [/.webp$/],
+		"p64"         : [/m019.png$/],
 
 		// Abydos doesn't work with this image yet, produces different data each time
 		"sgx" : [/nuke.png$/],

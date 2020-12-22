@@ -108,5 +108,7 @@ tiptoe(
 			console.error(err);
 			process.exit(1);
 		}
+
+		XU.log`Listening!`;
 	}
 );

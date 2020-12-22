@@ -68,6 +68,9 @@ Return an array of filenames that if they exist in the input directory should be
 An array of extensions this format may have. First item should be the pirmary extension.
 All extensions should be lowercase as they are case insentive matches.
 
+>>> forbiddenExt : [".ps"]
+An array of extensions that if present will never result in a match.
+
 >>> forbidExtMatch : true   ||   forbidExtMatch : [".gif", ".other"]
 If set to true, no ext matches will be allowed on this extension.
 If an array, then none of the given extensions will be matched

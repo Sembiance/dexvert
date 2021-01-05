@@ -59,7 +59,7 @@ tiptoe(
 				if(!fileUtil.existsSync(formatJSPath))
 					return false;
 				return (require(formatJSPath).meta.ext || []).includes(argv.extension);
-			});	// eslint-disable-line sembiance/prefer-relative-require, max-len
+			});
 		}
 
 		XU.log`\nTesting ${sampleFilePaths.length} sample files...`;

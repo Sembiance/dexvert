@@ -1,5 +1,4 @@
 "use strict";
-/* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run,
@@ -34,7 +33,7 @@ exports.prepareImage = function prepareImage({inPath, outPath, method="centerCro
 exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 {
 	const METHODS = ["centerCrop", "scaleDown"];
-	const tmpImagePaths = METHODS.map(v => fileUtil.generateTempFilePath("/mnt/ram/tmp", `_${v}.png`));
+	const tmpImagePaths = METHODS.map(v => fileUtil.generateTempFilePath(undefined, `_${v}.png`));
 
 	function parseClassification(resultRaw)
 	{
@@ -52,7 +51,7 @@ exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 		return {confidence : confidence||0, raw : resultRaw.toString()};
 	}
 
-	const pngTrimmedPath = fileUtil.generateTempFilePath("/mnt/ram/tmp", ".png");
+	const pngTrimmedPath = fileUtil.generateTempFilePath(undefined, ".png");
 
 	tiptoe(
 		function convertToPNG()

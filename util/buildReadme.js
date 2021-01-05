@@ -18,7 +18,7 @@ tiptoe(
 	},
 	function generateReadme(programFilePaths, dexidUsage, dexvertUsage, dexservUsage, formatFilePaths)
 	{
-		const programs = programFilePaths.map(programFilePath => require(programFilePath));	// eslint-disable-line node/global-require
+		const programs = programFilePaths.map(programFilePath => require(programFilePath));
 
 		// uniso
 		programs.push({bin() { return "mount"; }, meta : {gentooPackage : "sys-apps/util-linux", website : "https://www.kernel.org/pub/linux/utils/util-linux/"}});
@@ -51,7 +51,7 @@ tiptoe(
 
 		fs.writeFile(path.join(__dirname, "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 
-Convert ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f && f.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f?.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 

@@ -49,7 +49,7 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 			return sampleFilePaths.flat().filter(sampleFilePath =>
 			{
 				const [family, formatid, filename] = path.relative(exports.SAMPLE_DIR_PATH, sampleFilePath).split(path.sep);
-				if(IGNORE_FILES[family] && IGNORE_FILES[family][formatid] && (IGNORE_FILES[family][formatid]==="*" || IGNORE_FILES[family][formatid].some(m => dexUtil.flexMatch(filename, m))))
+				if(IGNORE_FILES[family]?.[formatid] && (IGNORE_FILES[family][formatid]==="*" || IGNORE_FILES[family][formatid].some(m => dexUtil.flexMatch(filename, m))))
 					return false;
 
 				return true;

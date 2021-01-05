@@ -1,5 +1,4 @@
 "use strict";
-/* eslint-disable max-len, node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	path = require("path"),

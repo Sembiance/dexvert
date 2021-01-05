@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable max-len, node/global-require, no-unused-vars */
+/* eslint-disable no-unused-vars */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	util = require("util"),

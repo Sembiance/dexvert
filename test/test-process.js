@@ -242,8 +242,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 	const sampleSubFilePath = path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath);
 	const diskFamily = path.basename(path.dirname(path.dirname(sampleSubFilePath)));
 	const diskFormatid = path.basename(path.dirname(sampleSubFilePath));
-	const tmpDirPath = fileUtil.existsSync("/mnt/ram/tmp") ? "/mnt/ram/tmp" : os.tmpdir();
-	const outDirPath = fileUtil.generateTempFilePath(tmpDirPath, "test-process");
+	const outDirPath = fileUtil.generateTempFilePath(undefined, "test-process");
 
 	tiptoe(
 		function createOutDir()
@@ -254,7 +253,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		{
 			this.capture();
 
-			dexvert.process(sampleFilePath, outDirPath, {tmpDirPath, verbose : argv.verbose}, this);
+			dexvert.process(sampleFilePath, outDirPath, {verbose : argv.verbose}, this);
 		},
 		function validateResults(err, results)
 		{
@@ -266,7 +265,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				newTestData.unsupported = true;
 			if(results.input.meta)
 				newTestData.inputMeta = results.input.meta;
-			if(results.converter && results.converter.program)
+			if(results.converter?.program)
 				newTestData.converter = results.converter.program;
 			if(results.processed && results.output.files)
 			{
@@ -332,7 +331,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]) &&
 				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m))))
 				{
-					if(newOutStat.size!==sampleTestData.files[outSubFilePath].size)
+					if(newOutStat.size!==sampleTestData.files[outSubFilePath].size)	// eslint-disable-line unicorn/no-lonely-if
 						return this(undefined, "FAIL", `size mistmatch ${newOutStat.size} vs expected ${sampleTestData.files[outSubFilePath].size}`, outSubFilePath);
 				}
 				

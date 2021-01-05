@@ -6,7 +6,7 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	tiptoe = require("tiptoe");
 
-const pngTrimmedPath = fileUtil.generateTempFilePath("/mnt/ram/tmp", ".png");
+const pngTrimmedPath = fileUtil.generateTempFilePath(undefined, ".png");
 const RUN_OPTIONS = {silent : true};
 
 tiptoe(

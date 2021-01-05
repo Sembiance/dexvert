@@ -15,7 +15,6 @@ const XU = require("@sembiance/xu"),
 	runUtil = require("@sembiance/xutil").run;
 
 const argv = new Command().description("Processes <input.iso> as an ISO and extracting into <outputDirPath>").
-	option("--tmpDirPath [dirPath]", "Use a different tmp dir (default is os.tmpdir()). I suggest setting this to a 'tmpfs' mounted RAM disk.").
 	arguments("<input.iso> <outputDirPath>").
 	parse(process.argv);
 
@@ -28,7 +27,7 @@ if(!fileUtil.existsSync(inputFilePath))
 
 const OUT_DIR_PATH = path.resolve(argv.args[1]);
 
-const WIP_DIR_PATH = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
+const WIP_DIR_PATH = fileUtil.generateTempFilePath();
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
 let ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
 const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!path.extname(inputFilePath).match(/[A-Z]/) ? "cue" : "CUE"}`);
@@ -192,7 +191,7 @@ tiptoe(
 	function getVirtualDeviceNum(isoInfo)
 	{
 		// Video CD's are special and need to be ripped with vcdxrip, otherwise we get input/output errors trying to copy the mpegav data
-		if(isoInfo && isoInfo.split("\n").some(line => line.startsWith(" version: ")))
+		if(isoInfo?.split("\n").some(line => line.startsWith(" version: ")))
 			return vcdRip(err => this.jump(-1, err));
 
 		if(this.data.isRawDiskImage)
@@ -304,7 +303,7 @@ const HCOPYFILES_BIN = path.join(__dirname, "hcopyfiles");
 
 function extractHFSISO(cb)
 {
-	const homeDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined);
+	const homeDirPath = fileUtil.generateTempFilePath();
 	// All the hfsutils store their 'state' in a file written to home, so we create a temporary fake home to not clobber other extractions taking place
 	const runOptions = {silent : true, env : {"HOME" : homeDirPath}};
 
@@ -383,8 +382,8 @@ function extractHFSISO(cb)
 		{
 			extractedFilePaths.parallelForEach((extractedFilePath, subcb) =>
 			{
-				const tmpUnpackDirPath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined, "");
-				const tmpSafeNameFilePath = fileUtil.generateTempFilePath(argv.tmpDirPath || undefined, "");
+				const tmpUnpackDirPath = fileUtil.generateTempFilePath(undefined, "");
+				const tmpSafeNameFilePath = fileUtil.generateTempFilePath(undefined, "");
 
 				tiptoe(
 					function prepareTmp()

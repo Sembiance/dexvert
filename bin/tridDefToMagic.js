@@ -1,7 +1,5 @@
 #!/usr/bin/node
 "use strict";
-/* eslint-disable no-underscore-dangle */
-
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	util = require("util"),

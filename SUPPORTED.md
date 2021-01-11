@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 594 file formats are supported by dexvert.
+The following 595 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (53)
+## Archive (54)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -32,6 +32,7 @@ archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
+archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [4 sample files](https://telparia.com/fileFormatSamples/archive/installShieldZ/)
 archive | [ISO Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin | [14 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [12 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
@@ -49,7 +50,7 @@ archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/A
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [8 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [10 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
-archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [9 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/)
+archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [13 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [9 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | Raw Partition |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawPartition/)
@@ -141,7 +142,7 @@ image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .
 image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | [1 sample file](https://telparia.com/fileFormatSamples/image/rla/)
 image | [Amica Paint](http://fileformats.archiveteam.org/wiki/Amica_Paint) | .ami | [1 sample file](https://telparia.com/fileFormatSamples/image/ami/)
 image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Amiga_Metafile) | .amf | [6 sample files](https://telparia.com/fileFormatSamples/image/amf/)
-image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | [10 sample files](https://telparia.com/fileFormatSamples/image/info/)
+image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | [11 sample files](https://telparia.com/fileFormatSamples/image/info/)
 image | [AMOS Icons Bank](http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank) | .abk | [12 sample files](https://telparia.com/fileFormatSamples/image/amosIcons/)
 image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture_Bank) | .abk | [14 sample files](https://telparia.com/fileFormatSamples/image/amosPicture/)
 image | AMOS Picture Packer | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/amosPicturePacker/)
@@ -290,7 +291,7 @@ image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telpa
 image | [Graph Saurus](http://fileformats.archiveteam.org/wiki/Graph_Saurus) | .sr5 .gl5 .pl5 .sr6 .gl6 .pl6 .sr7 .gl7 .pl7 .sr8 .gl8 .sri .srs | [25 sample files](https://telparia.com/fileFormatSamples/image/graphSaurus/)
 image | [Graph2Font](http://g2f.atari8.info) | .g2f .mch | [18 sample files](https://telparia.com/fileFormatSamples/image/graph2Font/)
 image | [Graphics 7/8/9/9+/10/11 Image](http://fileformats.archiveteam.org/wiki/GR*) | .gr7 .gr8 .gr9 .g9s .sfd .gr9p .g10 .g11 | [45 sample files](https://telparia.com/fileFormatSamples/image/grStar/)
-image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | [12 sample files](https://telparia.com/fileFormatSamples/image/gif/)
+image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | [13 sample files](https://telparia.com/fileFormatSamples/image/gif/)
 image | [Graphics Processor](http://fileformats.archiveteam.org/wiki/Graphics_Processor) | .pg1 .pg2 .pg3 | [3 sample files](https://telparia.com/fileFormatSamples/image/graphicsProcessor/)
 image | [Grass' Slideshow](http://fileformats.archiveteam.org/wiki/Grass%27_Slideshow) | .hpm | [1 sample file](https://telparia.com/fileFormatSamples/image/grassSlideshow/)
 image | [Gunpaint](http://fileformats.archiveteam.org/wiki/Gunpaint) | .gun .ifl | [3 sample files](https://telparia.com/fileFormatSamples/image/gunpaint/)
@@ -315,7 +316,7 @@ image | I Paint | .ip | [3 sample files](https://telparia.com/fileFormatSamples/
 image | [ICDRAW Icon](http://fileformats.archiveteam.org/wiki/ICDRAW_icon) | .ib3 .ibi | [9 sample files](https://telparia.com/fileFormatSamples/image/icdrawIcon/)
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | [7 sample files](https://telparia.com/fileFormatSamples/image/iCEDraw/)
 image | [IFF Amiga Contiguous Bitmap](http://fileformats.archiveteam.org/wiki/ILBM#ACBM) | .lbm .ilbm .iff .acbm | [4 sample files](https://telparia.com/fileFormatSamples/image/iffACBM/)
-image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp .dctv | [54 sample files](https://telparia.com/fileFormatSamples/image/iffILBM/) - Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
+image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp .dctv | [56 sample files](https://telparia.com/fileFormatSamples/image/iffILBM/) - Some ILBM files were only used to hold a palette and nothing more. This won't convert those. Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort. CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | [4 sample files](https://telparia.com/fileFormatSamples/image/iffRGBN/)
 image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep | [6 sample files](https://telparia.com/fileFormatSamples/image/deep/)
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | [4 sample files](https://telparia.com/fileFormatSamples/image/imageSystem/)
@@ -449,7 +450,7 @@ image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats
 image | [Portfolio Graphics](http://fileformats.archiveteam.org/wiki/PGF_(Portfolio_Graphics)) | .pgf | [6 sample files](https://telparia.com/fileFormatSamples/image/portfolioGraphics/)
 image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/PGC_(Portfolio_Graphics_Compressed)) | .pgc | [8 sample files](https://telparia.com/fileFormatSamples/image/pgc/)
 image | [Portfolio PGX](http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)) | .pgx | [3 sample files](https://telparia.com/fileFormatSamples/image/pgx/) - Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an MP4.
-image | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | [2 sample files](https://telparia.com/fileFormatSamples/image/ps/)
+image | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | [3 sample files](https://telparia.com/fileFormatSamples/image/ps/)
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | [3 sample files](https://telparia.com/fileFormatSamples/image/pgr/)
 image | Print-Technik HIR Image | .hir | [2 sample files](https://telparia.com/fileFormatSamples/image/hir/)
 image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg .bin | [29 sample files](https://telparia.com/fileFormatSamples/image/printfox/)
@@ -501,7 +502,7 @@ image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Pa
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp1 | [4 sample files](https://telparia.com/fileFormatSamples/image/picturePackerLowRes/)
 image | [STOS Picture Packer](http://fileformats.archiveteam.org/wiki/Picture_Packer) | .pp2 | [3 sample files](https://telparia.com/fileFormatSamples/image/picturePackerMedRes/)
 image | [Sun Icon](http://fileformats.archiveteam.org/wiki/Sun_icon) | .ico .icon | [3 sample files](https://telparia.com/fileFormatSamples/image/sunIcon/) - Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.
-image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | [13 sample files](https://telparia.com/fileFormatSamples/image/sunRaster/)
+image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) | .ras .rast .rs .scr .sr .sun .im1 .im8 .im24 .im32 | [12 sample files](https://telparia.com/fileFormatSamples/image/sunRaster/)
 image | [Super IRG/Super IRG 2](http://fileformats.archiveteam.org/wiki/Super_IRG) | .irg .ir2 | [2 sample files](https://telparia.com/fileFormatSamples/image/superIRG/)
 image | [SymbOS Graphic](http://fileformats.archiveteam.org/wiki/SymbOS_graphic) | .sgx | [2 sample files](https://telparia.com/fileFormatSamples/image/symbOSGraphic/)
 image | [Synthetic Arts](http://fileformats.archiveteam.org/wiki/Synthetic_Arts) | .srt | [2 sample files](https://telparia.com/fileFormatSamples/image/srt/)
@@ -602,7 +603,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 ## Text (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [5 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
+text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
 text | AMOS Source Code | .amossourcecode | [10 sample files](https://telparia.com/fileFormatSamples/text/amosSource/)
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [10 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)

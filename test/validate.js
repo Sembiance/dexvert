@@ -3,6 +3,7 @@
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	C = require("../lib/C.js"),
+	assert = require("assert"),
 	{validateValue} = require("@validatem/core"),
 	fileUtil = require("@sembiance/xutil").file,
 	tiptoe = require("tiptoe"),
@@ -35,6 +36,10 @@ exports.validate = function validate(cb)
 		},
 		function testFormats(formats, programFilePaths)
 		{
+			const formatids = Object.values(formats).flatMap(v => Object.keys(v));
+			const dupliacteFormatids = formatids.subtractOnce(formatids.unique());
+			assert.strictEqual(dupliacteFormatids.length, 0, `Duplicate formatids detected: ${dupliacteFormatids}`);
+
 			Object.values(formats).flatMap(v => Object.values(v)).forEach(format => validateFormat(format));
 			programFilePaths.forEach(programFilePath => validateProgram(require(programFilePath)));		// eslint-disable-line node/global-require
 

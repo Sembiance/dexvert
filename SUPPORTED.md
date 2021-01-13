@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 595 file formats are supported by dexvert.
+The following 597 file formats are supported by dexvert.
 
 
 
@@ -101,7 +101,7 @@ document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PD
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [5 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [12 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
-document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [9 sample files](https://telparia.com/fileFormatSamples/document/wp/)
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [8 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 
 
 
@@ -460,7 +460,7 @@ image | Psion Series 3 | .icn | [1 sample file](https://telparia.com/fileFormatS
 image | [Public  Painter](http://fileformats.archiveteam.org/wiki/Public_Painter) | .cmp | [5 sample files](https://telparia.com/fileFormatSamples/image/publicPainter/)
 image | [QRT Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap) | .qrt .dis .raw | [1 sample file](https://telparia.com/fileFormatSamples/image/qrt/)
 image | [Quantum Paint](http://fileformats.archiveteam.org/wiki/QuantumPaint) | .pbx | [6 sample files](https://telparia.com/fileFormatSamples/image/quantumPaint/)
-image | [QuickBasic BSAVE Image](http://fileformats.archiveteam.org/wiki/BSAVE_Image) | .art .pic .scn .bsv .cgx | [5 sample files](https://telparia.com/fileFormatSamples/image/bsave/)
+image | [QuickBasic BSAVE Image](http://fileformats.archiveteam.org/wiki/BSAVE_Image) | .art .pic .scn .bsv .cgx .pix .dat .pkx | [6 sample files](https://telparia.com/fileFormatSamples/image/bsave/)
 image | [QuickTime Image Format](http://fileformats.archiveteam.org/wiki/QTIF) | .qtif .qif | [7 sample files](https://telparia.com/fileFormatSamples/image/qtif/) - Not all QTIF sub formats are not supported.
 image | [Radiance HDR](http://fileformats.archiveteam.org/wiki/Radiance_HDR) | .hdr .rgbe .xyze .pic .rad | [4 sample files](https://telparia.com/fileFormatSamples/image/radiance/)
 image | [RAG-D](http://fileformats.archiveteam.org/wiki/RAG-D) | .rag | [5 sample files](https://telparia.com/fileFormatSamples/image/rag/)
@@ -600,7 +600,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Text (22)
+## Text (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -614,13 +614,15 @@ text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML)
 text | File List | .bbs .lst .lis .dir .ind | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [6 sample files](https://telparia.com/fileFormatSamples/text/ini/)
+text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | [10 sample files](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | [2 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [8 sample files](https://telparia.com/fileFormatSamples/text/lisp/)
 text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .advert .advert2 | [12 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .advert .advert2 | [13 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)

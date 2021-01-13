@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 104 file formats are unsupported by dexvert.
+The following 103 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -105,7 +105,7 @@ music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module
 
 
 
-## Other (49)
+## Other (48)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -136,7 +136,6 @@ other | Full Tilt Pinball Data | .dat |
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
-other | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | 

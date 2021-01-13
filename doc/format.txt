@@ -45,6 +45,9 @@ Normally we symlink to the file to be processed within a temporary CWD. If this 
 >>> untouched : true
 Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
 
+>>> fallback : true
+Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
+
 >>> priority : C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW

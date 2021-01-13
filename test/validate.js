@@ -76,6 +76,7 @@ function validateFormat(format)
 		keepFilename     : [isBoolean],
 		symlinkUnsafe    : [isBoolean],
 		untouched        : [isBoolean],
+		fallback         : [isBoolean],
 		priority         : [isNumber, oneOf(Object.values(C.PRIORITY))],
 		confidenceAdjust : [isFunction, hasLengthBetween(0, 3)],
 		filesRequired    : [isFunction, hasLengthBetween(0, 2)],

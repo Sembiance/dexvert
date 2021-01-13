@@ -138,7 +138,8 @@ const FORMATID_MATCH_EXEMPT =
 	"imgScan",				// .raw	(conflict with xlPaint)
 	"atariGraphics",		// .mic (conflict with apStar)
 	"snx",					// barw22.snx fails to convert with snx but converts to static with recoil, which is wrong, but we just ignore it here for now
-	"blazingPaddlesFont"
+	"blazingPaddlesFont",
+	"text/cue"				// .cue files are in archive/iso/ directories so those bin files work
 ];
 
 const cpuCount = os.cpus().length;
@@ -315,9 +316,9 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
 
 			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
-			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
+			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid) && !FORMATID_MATCH_EXEMPT.includes(`${family}/${formatid}`))
 				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
-			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid))
+			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid) && !FORMATID_MATCH_EXEMPT.includes(`${family}/${formatid}`))
 				return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
 
 			(results.output.files || []).forEach(outSubFilePath =>

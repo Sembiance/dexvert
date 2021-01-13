@@ -14,6 +14,8 @@ killall plugplay.exe
 killall winedevice.exe
 killall svchost.exe
 killall rpcss.exe
+killall Fony.exe
+killall wineboot.exe
 
 # These particular procs have been known to hang
 killall pdfpsai.bin

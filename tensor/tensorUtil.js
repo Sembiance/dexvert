@@ -56,8 +56,11 @@ exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 	tiptoe(
 		function convertToPNG()
 		{
-			// We use [0] just in case the src image is an animation, so we just use the first frame
-			runUtil.run("convert", [`${imagePath}[0]`, pngTrimmedPath], RUN_OPTIONS, this);
+			// If we end with .svg, assume it's an .svg
+			if(imagePath.endsWith(".svg"))
+				runUtil.run("inkscape", ["--export-area-drawing", "-o", pngTrimmedPath, imagePath], RUN_OPTIONS, this);
+			else
+				runUtil.run("convert", [`${imagePath}[0]`, pngTrimmedPath], RUN_OPTIONS, this);	// We use [0] just in case the src image is an animation, so we just use the first frame
 		},
 		function trimImage()
 		{

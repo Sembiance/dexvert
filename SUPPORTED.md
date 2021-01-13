@@ -6,7 +6,7 @@ The following 595 file formats are supported by dexvert.
 
 
 
-## Archive (54)
+## Archive (55)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -44,6 +44,7 @@ archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(A
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox | [1 sample file](https://telparia.com/fileFormatSamples/archive/mbox/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/msCompound/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ | [11 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
+archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [9 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [11 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
@@ -100,7 +101,7 @@ document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PD
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [5 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [12 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
-document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wp/)
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [9 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 
 
 
@@ -131,7 +132,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (436)
+## Image (435)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -395,7 +396,6 @@ image | MSX2 Yanagisawa PI | .pi |
 image | [MTV Ray-Tracer](http://fileformats.archiveteam.org/wiki/MTV_ray_tracer_bitmap) | .mtv .pic | [3 sample files](https://telparia.com/fileFormatSamples/image/mtv/)
 image | [Multi-Lace Editor](http://fileformats.archiveteam.org/wiki/Multi-Lace_Editor) | .mle | [1 sample file](https://telparia.com/fileFormatSamples/image/mle/)
 image | [Multi-Page PCX](http://fileformats.archiveteam.org/wiki/DCX) | .dcx | [3 sample files](https://telparia.com/fileFormatSamples/image/dcx/)
-image | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [5 sample files](https://telparia.com/fileFormatSamples/image/mpo/)
 image | [multiArtist](http://fileformats.archiveteam.org/wiki/MultiArtist) | .mg1 .mg2 .mg4 .mg8 | [32 sample files](https://telparia.com/fileFormatSamples/image/multiArtist/)
 image | [Multiple-image Network Graphics](http://fileformats.archiveteam.org/wiki/MNG) | .mng | [2 sample files](https://telparia.com/fileFormatSamples/image/mng/)
 image | [Naïve Image Format NIA](http://fileformats.archiveteam.org/wiki/Na%C3%AFve_Image_Formats) | .nia | [1 sample file](https://telparia.com/fileFormatSamples/image/naiveNIA/)
@@ -424,7 +424,7 @@ image | [Palette Master](http://fileformats.archiveteam.org/wiki/Palette_Master)
 image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wiki/Palm_Database_ImageViewer) | .pdb | [7 sample files](https://telparia.com/fileFormatSamples/image/palmDatabase/)
 image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) | .rw2 .raw .rwl | [4 sample files](https://telparia.com/fileFormatSamples/image/panasonicRaw/)
 image | [Paradox](http://fileformats.archiveteam.org/wiki/Paradox) | .mcpp | [7 sample files](https://telparia.com/fileFormatSamples/image/mcpp/)
-image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | [10 sample files](https://telparia.com/fileFormatSamples/image/pcPaint/)
+image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | [19 sample files](https://telparia.com/fileFormatSamples/image/pcPaint/)
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | [15 sample files](https://telparia.com/fileFormatSamples/image/pcx/)
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | [7 sample files](https://telparia.com/fileFormatSamples/image/pcBoard/)
 image | [Pentax RAW](http://fileformats.archiveteam.org/wiki/Pentax_PEF) | .pef .ptx | [6 sample files](https://telparia.com/fileFormatSamples/image/pentaxRaw/)
@@ -434,7 +434,7 @@ image | PETSCII Editor | .pet | [2 sample files](https://telparia.com/fileFormat
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/)
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | [17 sample files](https://telparia.com/fileFormatSamples/image/pfsFirstPublisher/)
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | [10 sample files](https://telparia.com/fileFormatSamples/image/photoChrome/)
-image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | [4 sample files](https://telparia.com/fileFormatSamples/image/p64/)
+image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | [3 sample files](https://telparia.com/fileFormatSamples/image/p64/)
 image | [PixArt](http://fileformats.archiveteam.org/wiki/PixArt) | .pix | [9 sample files](https://telparia.com/fileFormatSamples/image/pixArt/)
 image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [2 sample files](https://telparia.com/fileFormatSamples/image/pixelPerfect/)
 image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | [1 sample file](https://telparia.com/fileFormatSamples/image/pl4/)
@@ -607,7 +607,7 @@ text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mast
 text | AMOS Source Code | .amossourcecode | [10 sample files](https://telparia.com/fileFormatSamples/text/amosSource/)
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [10 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
-text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp | [13 sample files](https://telparia.com/fileFormatSamples/text/c/)
+text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp | [15 sample files](https://telparia.com/fileFormatSamples/text/c/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
@@ -620,7 +620,7 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [8 s
 text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .advert .advert2 | [11 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .advert .advert2 | [12 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)

@@ -20,6 +20,7 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 	option("--outputState", "If set, will output the state as JSON").
 	option("--outputStateToFile [filePath]", "If set, will output the state as JSON to the given filePath").
 	option("--brutePrograms", "If unable to identify <inputFilePath> just run every available program on it").
+	option("--dontTransform", "If a file can't be converted, dexvert will try different transforms to convert it.").
 	option("--midiFont [midiFont]", `Convert MIDI files with a specific midi font. Default: eaw
 		Other available fonts: fluid, roland, creative, freepats, windows`).
 	arguments("<inputFilePath> <outputDirPath>").
@@ -33,7 +34,7 @@ const verbose = argv.verbose || 0;
 tiptoe(
 	function runProcess()
 	{
-		const processOptions = {verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms, midiFont : argv.midiFont};
+		const processOptions = {verbose, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms, dontTransform : argv.dontTransform, midiFont : argv.midiFont};
 		dexvert.process(argv.args[0], argv.args[1], processOptions, this);
 	},
 	function printResults(state)

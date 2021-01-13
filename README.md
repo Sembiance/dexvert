@@ -33,6 +33,8 @@ Options:
                                   given filePath
   --brutePrograms                 If unable to identify <inputFilePath> just
                                   run every available program on it
+  --dontTransform                 If a file can't be converted, dexvert will
+                                  try different transforms to convert it.
   --midiFont [midiFont]           Convert MIDI files with a specific midi font. Default: eaw
   		Other available fonts: fluid, roland, creative, freepats, windows
   -h, --help                      display help for command

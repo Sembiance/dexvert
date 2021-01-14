@@ -131,16 +131,20 @@ const SIZE_IGNORE_FILES =
 // Usually the formatid of the directory should match what is detected by dexid
 // Sadly, some formats are only identified by an extension that is shared by multiple formats (such as image/pfsFirstPublisher and image/gfaArtist and image/asciiArtEditor)
 // So add them here to exempt from failing the test due to this
-const FORMATID_MATCH_EXEMPT =
-[
-	"gfaArtist", "pfsFirstPublisher", "artistByEaton",	// .art (conflict with asciiArtEditor)
-	"trs80Star",			// .pix (conflict with xlPaint)
-	"imgScan",				// .raw	(conflict with xlPaint)
-	"atariGraphics",		// .mic (conflict with apStar)
-	"snx",					// barw22.snx fails to convert with snx but converts to static with recoil, which is wrong, but we just ignore it here for now
-	"blazingPaddlesFont",
-	"text/cue"				// .cue files are in archive/iso/ directories so those bin files work
-];
+const FORMATID_MATCH_IGNORE_FILES =
+{
+	image :
+	{
+		"apStar"         : [/atarigraphics\/inny2\.mic$/],
+		"xlPaint"        : [/trs80star\/girl1\.max$/],
+		"asciiArtEditor" : [/gfaartist\/.+\.art$/],
+		"artDirector"    : [/pfsfirstpublisher\/.+\.art$/]
+	},
+	text :
+	{
+		"cue" : [/archive\/iso\/.+\.cue$/]
+	}
+};
 
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
@@ -316,10 +320,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
 
 			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
-			if(results.processed && diskFamily!==family && !FORMATID_MATCH_EXEMPT.includes(diskFormatid) && !FORMATID_MATCH_EXEMPT.includes(`${family}/${formatid}`))
-				return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
-			if(results.processed && diskFormatid!==formatid && !FORMATID_MATCH_EXEMPT.includes(diskFormatid) && !FORMATID_MATCH_EXEMPT.includes(`${family}/${formatid}`))
-				return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
+			if(!(FORMATID_MATCH_IGNORE_FILES[family] &&
+				(FORMATID_MATCH_IGNORE_FILES[family][formatid] || FORMATID_MATCH_IGNORE_FILES[family]["*"]) &&
+				(FORMATID_MATCH_IGNORE_FILES[family][formatid] || FORMATID_MATCH_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(sampleSubFilePath.toLowerCase(), m))))
+			{
+				if(results.processed && diskFamily!==family)
+					return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
+				if(results.processed && diskFormatid!==formatid)
+					return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
+			}
 
 			(results.output.files || []).forEach(outSubFilePath =>
 			{

@@ -83,16 +83,14 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (16)
+## Document (14)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [10 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
-document | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | [4 sample files](https://telparia.com/fileFormatSamples/document/csv/)
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [7 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
-document | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json | [4 sample files](https://telparia.com/fileFormatSamples/document/json/)
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [6 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
@@ -600,7 +598,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Text (24)
+## Text (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -609,12 +607,14 @@ text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_l
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
 text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp | [15 sample files](https://telparia.com/fileFormatSamples/text/c/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
+text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | [4 sample files](https://telparia.com/fileFormatSamples/text/csv/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
 text | File List | .bbs .lst .lis .dir .ind | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [6 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | CUE files are not handled directly. Instead target the .BIN file and the CUE is automatically found and taken into account.
+text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json | [4 sample files](https://telparia.com/fileFormatSamples/text/json/)
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | [10 sample files](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | [2 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [8 sample files](https://telparia.com/fileFormatSamples/text/lisp/)

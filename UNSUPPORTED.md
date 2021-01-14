@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 104 file formats are unsupported by dexvert.
+The following 101 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -59,7 +59,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Executable (10)
+## Executable (7)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
@@ -67,11 +67,8 @@ executable | Atari Executable | .xex |
 executable | ELF Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | MacOS Executable |  | 
-executable | Microsoft Windows Dynmic Link Library | .dll | 
-executable | MS-DOS COM Executable | .com .c0m | 
+executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
-executable | MS-DOS/Windows Executable | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
-executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 
 
 

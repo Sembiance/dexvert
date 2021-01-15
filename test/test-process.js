@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable node/global-require */
+/* eslint-disable node/global-require, prefer-named-capture-group */
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require("./testUtil.js"),
@@ -135,14 +135,19 @@ const FORMATID_MATCH_IGNORE_FILES =
 {
 	image :
 	{
+		// ext conflicts
 		"apStar"         : [/atarigraphics\/inny2\.mic$/],
 		"xlPaint"        : [/trs80star\/girl1\.max$/],
-		"asciiArtEditor" : [/gfaartist\/.+\.art$/],
+		"asciiArtEditor" : [/(gfaartist|artistbyeaton)\/.+\.art$/],
 		"artDirector"    : [/pfsfirstpublisher\/.+\.art$/]
 	},
 	text :
 	{
-		"cue" : [/archive\/iso\/.+\.cue$/]
+		// .cue files have to live alongside ISO/CDI files
+		"cue" : [/archive\/(iso|cdi)\/.+\.cue$/],
+
+		// allprims.cgm isn't supported yet, so it fallsback to text/txt
+		"txt" : [/image\/cgm\/allprims\.cgm$/]
 	}
 };
 
@@ -325,9 +330,9 @@ function testSampleFile(sampleFilePath, silent, cb)
 				(FORMATID_MATCH_IGNORE_FILES[family][formatid] || FORMATID_MATCH_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(sampleSubFilePath.toLowerCase(), m))))
 			{
 				if(results.processed && diskFamily!==family)
-					return this(undefined, "FAIL", `Disk family ${diskFamily} does not match processed family ${family}`);
+					return this(undefined, "FAIL", `Disk FAMILY ${diskFamily}/${diskFormatid} does not match processed FAMILY ${family}/${formatid}`);
 				if(results.processed && diskFormatid!==formatid)
-					return this(undefined, "FAIL", `Disk formatid ${diskFormatid} does not match processed formatid ${formatid}`);
+					return this(undefined, "FAIL", `Disk FORMATID ${diskFamily}/${diskFormatid} does not match processed FORMATID ${family}/${formatid}`);
 			}
 
 			(results.output.files || []).forEach(outSubFilePath =>

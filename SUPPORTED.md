@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 600 file formats are supported by dexvert.
+The following 602 file formats are supported by dexvert.
 
 
 
@@ -67,7 +67,7 @@ archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.
 
 
 
-## Audio (10)
+## Audio (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | [12 sample files](https://telparia.com/fileFormatSamples/audio/8svx/) - Some 8SVX files don't have a sample rate in the file. In these cases I try multiple different common sample rates.
@@ -78,6 +78,7 @@ audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
+audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 | [6 sample files](https://telparia.com/fileFormatSamples/audio/soundFont2/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/au/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [4 sample files](https://telparia.com/fileFormatSamples/audio/wav/)
 
@@ -604,6 +605,13 @@ music | [Sidmon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .si
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [2 sample files](https://telparia.com/fileFormatSamples/music/smus/)
 music | [Star Tracker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | [10 sample files](https://telparia.com/fileFormatSamples/music/starTracker/)
 music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) | .p61 .p61a .p60 .p60a .p50 .p50a .p41 .p40 p40a .p40b .p30 p30a .p22 .p22a | [2 sample files](https://telparia.com/fileFormatSamples/music/thePlayer/)
+
+
+
+## Other (1)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+other | Empty File |  | 
 
 
 

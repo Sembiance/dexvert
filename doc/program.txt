@@ -44,6 +44,9 @@ A function that returns the name of the binary to run
 >>> wine = state => "binary_program"
 A function that returns the name of the binary to run with WINE
 
+>>> steps = (state, p, r) => ([step1, step2, step3])
+A function that returns an array of steps to run serially
+
 >>> preArgs = (state, p, r, cb) => {}
 This is executed directly before calling args()
 

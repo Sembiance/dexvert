@@ -47,6 +47,7 @@
 		"dxf"                              : "~4.4.2",
 		"fastify"                          : "~3.9.2",
 		"ioctl"                            : "~2.0.2",
+		"midi-writer-js"                   : "~1.7.4",
 		"moment"                           : "~2.29.1",
 		"posix"                            : "~4.2.0",
 		"stream-buffers"                   : "~3.0.2",

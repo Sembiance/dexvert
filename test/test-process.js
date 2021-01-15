@@ -35,7 +35,11 @@ const SHA1_IGNORE_FILES =
 		// Not sure why, but the director extraction program produces different PNG files each time
 		director : [/.png$/]
 	},
-	document :
+	audio :
+	{
+		// The produced mp3 files from timidity are slightly different each time
+		"soundFont2" : [/.mp3$/]
+	},	document :
 	{
 		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
 		"*" : [/.pdf$/]
@@ -89,6 +93,21 @@ const SHA1_IGNORE_FILES =
 // Filenames are the OUTPUT filenames and are all converted to LOWERCASE first
 const SIZE_IGNORE_FILES =
 {
+	audio :
+	{
+		// The produced mp3 files from timidity are slightly different each time
+		"soundFont2" : [/.mp3$/]
+	},
+	document :
+	{
+		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
+		"*" : [/.pdf$/]
+	},
+	font :
+	{
+		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
+		"adobeType1" : [/.otf$/]
+	},
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
@@ -102,16 +121,6 @@ const SIZE_IGNORE_FILES =
 
 		// Deark produces slightly different GIF files each time, not sure why
 		"ani" : [/.gif$/]
-	},
-	document :
-	{
-		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
-		"*" : [/.pdf$/]
-	},
-	font :
-	{
-		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
-		"adobeType1" : [/.otf$/]
 	},
 	music :
 	{

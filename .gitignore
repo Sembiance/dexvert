@@ -5,7 +5,7 @@ dexvert.code-workspace
 sandbox/
 test/sample/
 test/wip/
-music/midiInstrument/roland/*.sf2
+music/midiFont/roland/*.sf2
 .vscode
 scribus/
 log/

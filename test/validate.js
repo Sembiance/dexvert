@@ -148,6 +148,7 @@ function validateProgram(program)
 	{
 		meta        : [required, programMetaSchema],
 		bin         : [isFunction, hasLengthBetween(0, 2)],
+		steps       : [isFunction, hasLengthBetween(0, 3)],
 		wine        : [isFunction, hasLengthBetween(0, 2)],
 		preArgs     : [isFunction, hasLengthOf(4)],
 		args        : [required, isFunction, hasLengthOf(3)], 	// Technically it's 5+, but args with defaults don't count in .length

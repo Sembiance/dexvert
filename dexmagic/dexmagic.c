@@ -75,6 +75,32 @@ const char * checkASCII(uint8_t * data, off_t size)
 	return "Printable ASCII";
 }
 
+const char * checkNullBytes(uint8_t * data, off_t size)
+{
+	for(off_t i=0;i<size;i++)
+	{
+		uint8_t c = data[i];
+		if(c!=0)
+			return 0;
+	}
+
+	return "All Null Bytes";
+}
+
+const char * checkIdenticalBytes(uint8_t * data, off_t size)
+{
+	uint8_t last = 0;
+	for(off_t i=0;i<size;i++)
+	{
+		uint8_t c = data[i];
+		if(i>0 && c!=last)
+			return 0;
+		last = c;
+	}
+
+	return "All Identical Bytes";
+}
+
 int main(int argc, char ** argv)
 {
 	int infd=-1;
@@ -118,10 +144,11 @@ int main(int argc, char ** argv)
 
 	const char * result = 0;
 	if((result = checkASCII(data, s.st_size)))
-	{
 		printf("%s\n", result);
-		goto cleanup;
-	}
+	if((result = checkNullBytes(data, s.st_size)))
+		printf("%s\n", result);
+	if((result = checkIdenticalBytes(data, s.st_size)))
+		printf("%s\n", result);
 
 	cleanup:
 	if(data>0)

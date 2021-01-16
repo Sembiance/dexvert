@@ -17,8 +17,8 @@ tiptoe(
 		this.data.filePaths = filePaths;
 		this.data.sampleFileSubpaths = Object.keys(JSON.parse(identifyDataRaw));
 		
-		Object.keys(JSON.parse(identifyDataRaw)).parallelForEach((sampleFilePath, subcb) => hashUtil.hashFile("sha1", path.join(__dirname, "..", "test", "sample", sampleFilePath), subcb), this.parallel());
-		filePaths.parallelForEach((filePath, subcb) => hashUtil.hashFile("sha1", filePath, subcb), this.parallel());
+		Object.keys(JSON.parse(identifyDataRaw)).parallelForEach((sampleFilePath, subcb) => hashUtil.hashFile("blake3", path.join(__dirname, "..", "test", "sample", sampleFilePath), subcb), this.parallel());
+		filePaths.parallelForEach((filePath, subcb) => hashUtil.hashFile("blake3", filePath, subcb), this.parallel());
 	},
 	function checkForExistingSums(existingSums, newSums)
 	{

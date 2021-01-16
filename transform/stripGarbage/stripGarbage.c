@@ -119,11 +119,15 @@ int main(int argc, char ** argv)
 		goto cleanup;
 	}
 
+	off_t stripCount = 0;
 	for(off_t i=0;i<s.st_size;i++)
 	{
 		uint8_t c = data[i];
 		if(c==26 || c==0)
+		{
+			stripCount++;
 			continue;
+		}
 
 		if(ascii && (c!=9 && c!=10 && c!=13 && (c<32 || c>126)))
 		{
@@ -136,6 +140,12 @@ int main(int argc, char ** argv)
 			fprintf(stderr, "Failed to write output byte 0x%x (%d) at offset %ld: %s\n", c, c, i, strerror(errno));
 			goto cleanupWithDelete;
 		}
+	}
+
+	if(stripCount==0)
+	{
+		fprintf(stderr, "No garbage characters detected.\n");
+		goto cleanupWithDelete;
 	}
 
 	goto cleanup;

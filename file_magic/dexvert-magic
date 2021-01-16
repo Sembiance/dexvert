@@ -94,3 +94,14 @@
 
 # Alias PIX
 4	string/b	\x00\x00\x00\x00\x00\x18	Alis PIX
+
+# OLB Library
+0	string/b	Gnu\ is\ Not\ eUnuchs\x2E\x0A\x5F\x5F\x2ESYMDEF	OLB Library
+
+# Atari GEM OBM File
+0	string/b	\x00\x01\x00\x22\x00\x00
+>17	string/b	\x00\x00\x00\x00\x00
+>34	string/b	\x00
+>36	string/b	\x00
+>38	string/b	\x00\x02
+>53	string/b	\x00\x00\x00\x00\x00	Atari GEM OBM File

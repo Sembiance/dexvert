@@ -1,15 +1,17 @@
 # Unsupported File Formats
 
-The following 103 file formats are unsupported by dexvert.
+The following 117 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
 
 
-## 3d (5)
+## 3d (7)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+3d | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/3d/cyberStudioCAD3D/)
 3d | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/3d/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
+3d | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/3d/polyfilm/)
 3d | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/3d/povRay/)
 3d | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/3d/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
 3d | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/3d/ydl/)
@@ -32,7 +34,7 @@ archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/V
 
 
 
-## Audio (9)
+## Audio (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh.
@@ -41,13 +43,14 @@ audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_A
 audio | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/audio/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
 audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://telparia.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
+audio | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://telparia.com/fileFormatSamples/audio/musicStudioSound/)
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
 audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFormatSamples/audio/sonixSoundSample/) - The .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://telparia.com/fileFormatSamples/audio/soundFont1/)
 
 
 
-## Document (7)
+## Document (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/document/iffCTLG/) - Contains strings used by programs. Not currently enabled as my parser isn't quite right and I don't feel like debugging it more.
@@ -57,27 +60,31 @@ document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/He
 document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
 document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
+document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
 
 
 
-## Executable (8)
+## Executable (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
-executable | Atari Executable | .xex | 
+executable | Atari Control Panel Extension Module |  | [12 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
+executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
 executable | ELF Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | MacOS Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
+executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/executable/zbasic/)
 
 
 
-## Font (5)
+## Font (6)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | No sample files yet.
+font | [Calamus Font](http://fileformats.archiveteam.org/wiki/Calamus_Font) | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/) - Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
 font | LaserJet Soft Font | .sfl .sfp .sft | No sample files yet.
 font | LinkWay Font | .fmf | No sample files yet.
@@ -98,14 +105,16 @@ image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 s
 
 
 
-## Music (1)
+## Music (3)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [2 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - Couldn't locate a player or converter. Tried milkytracker, but it wouldn't play it.
+music | [Microdeal Quartet Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | [9 sample files](https://telparia.com/fileFormatSamples/music/quartetModule/)
+music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 
 
 
-## Other (48)
+## Other (53)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -121,16 +130,19 @@ other | Amos Amal Animation Bank | .abk |
 other | AMOS Datas Bank | .abk | 
 other | ASCII Font Metrics | .afm | 
 other | Asymetrix ToolBook File | .tbk | 
+other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileFormatSamples/other/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | Borland Graphics Interface Driver | .bgi | 
 other | Borland Turbo C Project | .prj | 
+other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/other/chaosultdGEMParameters/)
 other | Chemview Animation Data | .d | 
 other | Corncob 3D Data File | .cct | 
 other | Creative Signal Processor microcode | .csp | 
 other | Cygnus Editor Default Settings |  | 
 other | Cygnus Editor Macros |  | 
 other | dBase Index File | .ntx | 
+other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
@@ -138,16 +150,18 @@ other | ICC Color Profile | .icc |
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
 other | Microsoft Visual C Library | .lib | 
-other | Microsoft Windows Help File Content | .cnt | 
+other | Microsoft Windows Help File Content | .cnt | Just a table of contents as to what's in the corresponding .hlp file. Not useful.
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | Norton Change Directory Info | .ncd | 
+other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/other/olbLib/)
+other | Polyfilm Preferences | .prf | 
 other | Printer Font Metrics | .pfm | 
-other | RIFF MSFX File | .sfx | 
-other | RIFF MxSt File | .si | 
-other | RIFF STYL File | .par | 
+other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
+other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
+other | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
 other | Startrekker Module Info | .nt | 
 other | Turbo Basic Chain module | .tbc | 
 other | Turbo C Context File | .dsk | 

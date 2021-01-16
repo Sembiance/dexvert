@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 602 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 608 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -21,7 +21,7 @@ Options:
                                   1 to 6 where 6 is most verbose
   --brute [family...]             If unable to identify <inputFilePath>, try converting anyways
   		Pass a comma delimited list of families to brute force try
-  		Valid families: archive document audio music video image 3d font other executable rom text or all
+  		Valid families: archive document audio music video image 3d font text executable rom other or all
   		Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
   		WARNING: Multiple successes could use a lot of disk space
   --keepGoing                     When brute forcing, don't stop at the first
@@ -128,10 +128,12 @@ app-arch/unlzx | [unlzx](http://xavprods.free.fr/lzx/) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unshield | [unshield](https://github.com/twogood/unshield) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
+app-arch/zoo | [zoo](https://packages.debian.org/jessie/zoo) | 
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/cdemu | [*](https://cdemu.sourceforge.io) | 
 app-emulation/uade | [uade](http://zakalwe.fi/uade) | 
 app-emulation/uade | [uade123](http://zakalwe.fi/uade) | 
+app-emulation/vice | [c1541](https://vice-emu.sourceforge.io/) | 
 app-emulation/wine-vanilla | [wine](https://www.winehq.org/) | 
 app-emulation/wine-vanilla | [winedump](https://www.winehq.org/) | 
 app-office/scribus | [scribus](https://www.scribus.net/) | 
@@ -148,6 +150,7 @@ dev-lang/ab2ascii | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) 
 dev-lang/amosbank | [amosbank](https://github.com/dschwen/amosbank) | dexvert
 dev-lang/amostools | [dumpamos](https://github.com/kyz/amostools/) | dexvert
 dev-lang/amostools | [listamos](https://github.com/kyz/amostools/) | dexvert
+dev-lang/gfalist | [gfalist](https://github.com/Sembiance/gfalist) | dexvert
 dev-libs/libcdio | [iso-info](https://www.gnu.org/software/libcdio) | 
 dev-libs/libcdio-paranoia | [libcdio-paranoia](https://www.gnu.org/software/libcdio/) | 
 dev-python/chardet | [chardetect](https://github.com/chardet/chardet) | 
@@ -211,7 +214,7 @@ x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) |
 
 Gentoo users can install all the above with this single command:
 ```
-USE="a52 acl alsa amr boost bzip2 cairo cddb cdio cdr cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch pdf perl png postproc postscript python qt5 readline realtime rle rtc run-exes seccomp shm smith sndfile split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind utils v4l vaapi vcd vdpau visio vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-cdr/bchunk app-cdr/cdemu app-emulation/uade app-emulation/wine-vanilla app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-libs/libcdio dev-libs/libcdio-paranoia dev-python/chardet dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl alsa amr boost bzip2 cairo cddb cdio cdr cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio ffmpeg flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec network nls ogg opengl openmp openssl opus osdmenu pch pdf perl png postproc postscript python qt5 readline realtime rle rtc run-exes sdl sdlsound seccomp shm smith sndfile split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind utils v4l vaapi vcd vdpau visio vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/fido app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-arch/zoo app-cdr/bchunk app-cdr/cdemu app-emulation/uade app-emulation/vice app-emulation/wine-vanilla app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-lang/gfalist dev-libs/libcdio dev-libs/libcdio-paranoia dev-python/chardet dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
 ```
 
 ## Test Suite

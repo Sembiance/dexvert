@@ -48,10 +48,12 @@ Usage: dexid [options] <inputFilePath...>
 Identifies <inputFilePath>. Like an advanced 'file' command
 
 Options:
-  --verbose [level]  Show additional info when identifying. Levels 1 to 5 where
-                     5 is most verbose
-  --json             Output JSON
-  -h, --help         display help for command
+  --verbose [level]      Show additional info when identifying. Levels 1 to 5
+                         where 5 is most verbose
+  --json                 Output JSON
+  --jsonFile [filePath]  If set, will output the result JSON to the given
+                         filePath
+  -h, --help             display help for command
 
 ```
 

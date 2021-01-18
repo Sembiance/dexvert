@@ -105,3 +105,7 @@
 >36	string/b	\x00
 >38	string/b	\x00\x02
 >53	string/b	\x00\x00\x00\x00\x00	Atari GEM OBM File
+
+# Calamus Document
+0	string/b	DMC\ CALAMUS\ 
+>13	string/b	CDK	Calamus Document

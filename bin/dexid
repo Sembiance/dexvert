@@ -3,12 +3,14 @@
 const XU = require("@sembiance/xu"),
 	{Command} = require("commander"),
 	tiptoe = require("tiptoe"),
+	fs = require("fs"),
 	printUtil = require("@sembiance/xutil").print,
 	dexvert = require("../lib/dexvert.js");
 
 const argv = new Command().description("Identifies <inputFilePath>. Like an advanced 'file' command").
 	option("--verbose [level]", "Show additional info when identifying. Levels 1 to 5 where 5 is most verbose").
 	option("--json", "Output JSON").
+	option("--jsonFile [filePath]", "If set, will output the result JSON to the given filePath").
 	arguments("<inputFilePath...>").
 	parse(process.argv);
 
@@ -25,6 +27,11 @@ tiptoe(
 		if(argv.json)
 		{
 			console.log(JSON.stringify(results));
+			this();
+		}
+		else if(argv.jsonFile)
+		{
+			fs.writeFile(argv.jsonFile, JSON.stringify(results), XU.UTF8, this);
 		}
 		else
 		{
@@ -32,6 +39,7 @@ tiptoe(
 				colNames   : ["confidence", "from", "magic", "extensions", "extMatch", "untrustworthy"],
 				colNameMap : {confidence : "%"},
 				formatter(colName, val) { return (colName==="confidence" ? (val ? `${val}%` : "") : (colName==="extensions" ? (val || []).join(", ") : val || "")); }}));
+			this();
 		}
 	},
 	XU.FINISH

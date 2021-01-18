@@ -1,13 +1,16 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
+	fs = require("fs"),
 	dexUtil = require("../lib/dexUtil.js"),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
+	runUtil = require("@sembiance/xutil").run,
 	tiptoe = require("tiptoe");
 
 exports.DATA_DIR_PATH = path.join(__dirname, "data");
-exports.SAMPLE_DIR_PATH = path.join(__dirname, "sample");
+exports.SAMPLE_DIR_PATH = "/mnt/ram/dexvert/sample";
+exports.SAMPLE_DIR_PATH_DISK = path.join(__dirname, "sample");
 
 // Some files are just there for 'support' so we ignore them, or don't convert and take too long to try
 const IGNORE_FILES =
@@ -54,6 +57,22 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 
 				return true;
 			});
+		},
+		cb
+	);
+};
+
+exports.initSamples = function initSamples(cb)
+{
+	tiptoe(
+		function createRAMDexverDir()
+		{
+			fs.mkdir(exports.SAMPLE_DIR_PATH, {recursive : true}, this);
+		},
+		function runRSYNC()
+		{
+			XU.log`rsyncing sample files to RAM...`;
+			runUtil.run("rsync", ["-avL", path.join(exports.SAMPLE_DIR_PATH_DISK, "/"), path.join(exports.SAMPLE_DIR_PATH, "/")], runUtil.SILENT, this);
 		},
 		cb
 	);

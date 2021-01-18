@@ -4,9 +4,9 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require("./testUtil.js"),
 	printUtil = require("@sembiance/xutil").print,
+	runUtil = require("@sembiance/xutil").run,
 	fileUtil = require("@sembiance/xutil").file,
 	{validate} = require("./validate.js"),
-	dexvert = require("../lib/dexvert.js"),
 	{Command} = require("commander"),
 	fs = require("fs"),
 	os = require("os"),
@@ -25,9 +25,10 @@ let testData = null;
 const startTime = Date.now();
 
 tiptoe(
-	function performValidation()
+	function init()
 	{
-		validate(this);
+		testUtil.initSamples(this.parallel());
+		validate(this.parallel());
 	},
 	function findSampleFiles()
 	{
@@ -74,7 +75,7 @@ tiptoe(
 				delete testData[extraFilePath];
 		});
 
-		sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).parallelForEach(testSampleFile, this, os.cpus().length/2);
+		sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).parallelForEach(testSampleFile, this, os.cpus().length);
 	},
 	function saveTestDataIfNeeded()
 	{
@@ -95,19 +96,20 @@ tiptoe(
 function testSampleFile(sampleFilePath, cb)
 {
 	const sampleSubFilePath = path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath);
+	const idJSONFilePath = fileUtil.generateTempFilePath(undefined, ".json");
 	
 	tiptoe(
 		function performIdentification()
 		{
-			this.capture();
-
-			dexvert.identify(sampleFilePath, {verbose : argv.verbose || 0}, this);
+			runUtil.run("dexid", ["--jsonFile", idJSONFilePath, sampleFilePath], runUtil.SILENT, this);
 		},
-		function validateIdentification(err, ids)
+		function loadIdentification()
 		{
-			if(err)
-				return testUtil.logResult("FAIL", sampleSubFilePath, err.toString(), err), this();
-			
+			fs.readFile(idJSONFilePath, XU.UTF8, this);
+		},
+		function validateIdentification(idsRaw)
+		{
+			const ids = XU.parseJSON(idsRaw);
 			if(!ids)
 				return testUtil.logResult("FAIL", sampleSubFilePath, "No id results returned"), this();
 			
@@ -164,6 +166,10 @@ function testSampleFile(sampleFilePath, cb)
 			testUtil.logResult("PASS", sampleSubFilePath);
 
 			this();
+		},
+		function cleanup()
+		{
+			fileUtil.unlink(idJSONFilePath, this);
 		},
 		cb
 	);

@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 117 file formats are unsupported by dexvert.
+The following 120 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -19,7 +19,7 @@ Family | Name | Extensions | Notes
 
 
 
-## Archive (9)
+## Archive (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -27,9 +27,11 @@ archive | [Corel Thumbnails Archvie](http://fileformats.archiveteam.org/wiki/Cor
 archive | IFF LIST File |  | [15 sample files](https://telparia.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. In theory I could parse this file, and "extract" out by creating seperate files for each major FORM entry inside, making sure to also copy into these files the 'shared' entries, adjusting the resulting FORM lengths as needed. Couldn't find any real documentation on the LIST/SSETPROP format. See: https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [4 sample files](https://telparia.com/fileFormatSamples/archive/installShieldInstallerArchive/)
 archive | [Macromedia Director Compiled](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dcr | [6 sample files](https://telparia.com/fileFormatSamples/archive/directorCompiled/)
+archive | Pax Archive | .pax | [4 sample files](https://telparia.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .sqx | [1 sample file](https://telparia.com/fileFormatSamples/archive/sqx/) - Can be extracted by the 'squeez.exe' wine program, but this is such a rare format that I haven't bothered adding support for it yet.
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [76 sample files](https://telparia.com/fileFormatSamples/archive/ttw/) - Amiga xfdmaster can supposedly decrunch this. 'vamos' won't run it right. Could emulate an amiga to support this. https://aminet.net/package/util/pack/xfdmaster
+archive | Unix Archive - Old | .a | 
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 
 
@@ -50,10 +52,11 @@ audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) |
 
 
 
-## Document (8)
+## Document (9)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/document/iffCTLG/) - Contains strings used by programs. Not currently enabled as my parser isn't quite right and I don't feel like debugging it more.
+document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://telparia.com/fileFormatSamples/document/calamusDocument/)
 document | Clarion Database File | .dat | [49 sample files](https://telparia.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://telparia.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/) - Help Librarian files. No information about them could be found anywhere.
@@ -157,6 +160,7 @@ other | NeoPaint Palette | .pal |
 other | NeoPaint Printer Driver | .prd | 
 other | Norton Change Directory Info | .ncd | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/other/olbLib/)
+other | Pascal Compiled Unit | .tpu .ppu | 
 other | Polyfilm Preferences | .prf | 
 other | Printer Font Metrics | .pfm | 
 other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
@@ -165,7 +169,6 @@ other | RIFF STYL File | .par | References a font for mac and windows and includ
 other | Startrekker Module Info | .nt | 
 other | Turbo Basic Chain module | .tbc | 
 other | Turbo C Context File | .dsk | 
-other | Turbo Pascal Compiled Unit | .tpu | 
 other | Turbo Pascal Overlay | .ovr | 
 other | Visual Basic Extension | .vbx | 
 other | WordPerfect keyboard file | .wpk | 

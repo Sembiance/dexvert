@@ -8,9 +8,9 @@ const XU = require("@sembiance/xu"),
 	printUtil = require("@sembiance/xutil").print,
 	hashUtil = require("@sembiance/xutil").hash,
 	diffUtil = require("@sembiance/xutil").diff,
+	runUtil = require("@sembiance/xutil").run,
 	{validate} = require("./validate.js"),
 	dexUtil = require("../lib/dexUtil.js"),
-	dexvert = require("../lib/dexvert.js"),
 	{Command} = require("commander"),
 	fs = require("fs"),
 	os = require("os"),
@@ -168,7 +168,8 @@ const startTime = Date.now();
 tiptoe(
 	function performValidation()
 	{
-		validate(this);
+		testUtil.initSamples(this.parallel());
+		validate(this.parallel());
 	},
 	function findSampleFiles()
 	{
@@ -262,6 +263,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 	const diskFamily = path.basename(path.dirname(path.dirname(sampleSubFilePath)));
 	const diskFormatid = path.basename(path.dirname(sampleSubFilePath));
 	const outDirPath = fileUtil.generateTempFilePath(undefined, "test-process");
+	const resultsJSONFilePath = fileUtil.generateTempFilePath(undefined, ".json");
 
 	tiptoe(
 		function createOutDir()
@@ -270,14 +272,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 		},
 		function performProcess()
 		{
-			this.capture();
-
-			dexvert.process(sampleFilePath, outDirPath, {verbose : argv.verbose}, this);
+			runUtil.run("dexvert", ["--outputStateToFile", resultsJSONFilePath, sampleFilePath, outDirPath], runUtil.SILENT, this);
 		},
-		function validateResults(err, results)
+		function loadResultsFile()
 		{
-			if(err)
-				return this(undefined, "FAIL", err.toString(), err);
+			fs.readFile(resultsJSONFilePath, XU.UTF8, this);
+		},
+		function validateResults(resultsRaw)
+		{
+			const results = XU.parseJSON(resultsRaw);
 
 			const newTestData = {processed : !!results.processed};
 			if(results.unsupported)
@@ -414,6 +417,8 @@ function testSampleFile(sampleFilePath, silent, cb)
 			this.parallel()(undefined, status==="PASS");
 			if(status!=="FAIL" && !argv.keep)
 				fileUtil.unlink(outDirPath, this.parallel());
+			
+			fileUtil.unlink(resultsJSONFilePath, this.parallel());
 		},
 		cb
 	);

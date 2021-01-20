@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable max-len, node/global-require */
+/* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run,
@@ -10,56 +10,22 @@ const XU = require("@sembiance/xu"),
 tiptoe(
 	function findPrograms()
 	{
-		fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "**/*.js", {nodir : true}, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexid"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), ["--help"], runUtil.SILENT, this.parallel());
-		runUtil.run(path.join(__dirname, "..", "bin", "dexserv"), ["--help"], runUtil.SILENT, this.parallel());
 		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
 	},
-	function generateReadme(programFilePaths, dexidUsage, dexvertUsage, dexservUsage, formatFilePaths)
+	function generateReadme(dexidUsage, dexvertUsage, formatFilePaths)
 	{
-		const programs = programFilePaths.map(programFilePath => require(programFilePath));
-
-		// uniso
-		programs.push({bin() { return "mount"; }, meta : {gentooPackage : "sys-apps/util-linux", website : "https://www.kernel.org/pub/linux/utils/util-linux/"}});
-
-		// runUtil.run
-		programs.push({bin() { return "Xvfb"; }, meta : {gentooPackage : "x11-base/xorg-server", website : "https://www.x.org/wiki/", gentooUseFlags : "libglvnd xorg xvfb"}});
-		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});
-		programs.push({bin() { return "ffmpeg"; }, meta : {gentooPackage : "media-video/ffmpeg", website : "https://ffmpeg.org/", gentooUseFlags : "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib"}});
-
-		// videoUtil.info (and DOS video recording too)
-		programs.push({bin() { return "mplayer"; }, meta : {gentooPackage : "media-video/mplayer", website : "http://www.mplayerhq.hu/", gentooUseFlags : "X a52 alsa cdio dga dts dv dvd dvdnav enca encode iconv joystick jpeg libass live lzo mad mng mp3 network opengl osdmenu png rtc shm tga theora truetype unicode v4l vcd vdpau vorbis x264 xinerama xscreensaver xv xvid"}});
-		
-		// unicodeUtils.fixDirEncodings
-		programs.push({bin() { return "convmv"; }, meta : {gentooPackage : "app-text/convmv", website : "https://www.j3e.de/linux/convmv/"}});
-
-		// lib/util/wine.js
-		programs.push({bin() { return "wine"; }, meta : {gentooPackage : "app-emulation/wine-vanilla", website : "https://www.winehq.org/"}});
-
-		// dosUtil
-		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});
-		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
-
-		programs.filterInPlace(p => p.meta.hasOwnProperty("gentooPackage"));
-
-		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
-		const multiProgs = programs.filter(p => Array.isArray(p.meta.gentooPackage));
-		programs.filterInPlace(p => !Array.isArray(p.meta.gentooPackage));
-
-		multiProgs.forEach(multiProg => programs.push(...multiProg.meta.gentooPackage.map((subGentooPackage, i) => ({ bin() { return multiProg.meta.bin[i]; }, meta : {kernel : multiProg.meta.kernel || undefined, gentooPackage : subGentooPackage, website : multiProg.meta.website[i] || ""} }))));
-
 		fs.writeFile(path.join(__dirname, "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 
 Convert ${formatFilePaths.map(formatFilePath => require(formatFilePath).meta).filter(f => f?.name && !f.unsupported).length.toLocaleString()} old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
-THANK YOU to these AMAZING projects: [abydos](http://snisurset.net/code/abydos/), [deark](https://entropymine.com/deark/), [recoil](http://recoil.sourceforge.net/), [xmp](http://xmp.sourceforge.net/) and so many more, see **Programs** below.
+THANK YOU to these AMAZING projects: [abydos](http://snisurset.net/code/abydos/), [deark](https://entropymine.com/deark/), [recoil](http://recoil.sourceforge.net/), [xmp](http://xmp.sourceforge.net/) and so many more.
 
 ## Install
-dexvert requires a LOT of programs and some kernel options to be set. See Requirements below. Once satisified, install with:
-\`npm install dexvert -g\`
+See [INSTALL.md](INSTALL.md)
 
 ## Usage
 \`\`\`
@@ -82,44 +48,6 @@ const dexvert = require("dexvert");
 
 dexvert.process(inputFilePath, outputDirPath, options, cb);
 dexvert.identify(inputFilePath, options, cb);
-\`\`\`
-
-# Requirements
-
-## Kernel
-\`\`\`
-File systems  --->
-      CD-ROM/DVD Filesystems  --->
-	    <*> ISO 9660 CDROM file system support
-	    [*]   Microsoft Joliet CDROM extensions
-	    [*]   Transparent decompression extension
-	    <*>   UDF file system support
-	  DOS/FAT/EXFAT/NT Filesystems  --->
-	    <*> MSDOS fs support
-	    <*> VFAT (Windows-95) fs support
-	    (iso8859-1) Default iocharset for FAT
-	    <*> exFAT filesystem support
-  [*] Miscellaneous filesystems  --->
-        <*> Amiga FFS file system support
-		<*> Apple Macintosh file system support
-		<*> Apple Extended HFS file system support
-  -*- Native language support  --->
-        <*> Codepage 437 (United States, Canada)
-		<*> ASCII (United States)
-		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
-		-*- NLS UTF-8
-\`\`\`
-
-## Programs
-Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
-
-Package | Program | Overlay
-------- | ------- | -------
-${programs.multiSort([p => p.meta.gentooPackage, p => p.bin()]).map(p => (`${p.meta.gentooPackage} | [${p.bin()}](${p.meta.website}) | ${(p.meta.gentooOverlay || "")}`)).join("\n")}
-
-Gentoo users can install all the above with this single command:
-\`\`\`
-USE="${programs.flatMap(p => (p.meta.gentooUseFlags || "").split(" ")).filterEmpty().multiSort(v => v).unique().join(" ")}" emerge ${programs.map(p => p.meta.gentooPackage).multiSort(v => v).unique().join(" ")}
 \`\`\`
 
 ## Test Suite

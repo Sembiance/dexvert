@@ -59,6 +59,7 @@ app-arch/unar | [unar](https://unarchiver.c3.cx/) |
 app-arch/unice68 | [unice68](https://sourceforge.net/projects/sc68/) | dexvert
 app-arch/unlzx | [unlzx](http://xavprods.free.fr/lzx/) | dexvert
 app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
+app-arch/unrar | [unrar](https://www.rarlab.com/rar_add.htm) | 
 app-arch/unshield | [unshield](https://github.com/twogood/unshield) | 
 app-arch/unzip | [unzip](http://infozip.sourceforge.net/) | dexvert
 app-arch/zoo | [zoo](https://packages.debian.org/jessie/zoo) | 

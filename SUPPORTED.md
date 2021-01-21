@@ -56,7 +56,7 @@ archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPac
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [9 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | Raw Partition |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/rawPartition/)
-archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [3 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
+archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [4 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [10 sample files](https://telparia.com/fileFormatSamples/archive/sea/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [10 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
 archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [2 sample files](https://telparia.com/fileFormatSamples/archive/sit/)

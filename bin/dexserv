@@ -87,7 +87,7 @@ tiptoe(
 
 		startUnoconvServer();
 		
-		cdemuCP = runUtil.run("cdemu-daemon", [`--ctl-device=${VHBA_CTL_DEV_PATH}`, "--bus=session", "--num-devices=64", `--logfile=${path.join(__dirname, "..", "log", "cdemu-daemon.log")}`], {silent : true, detached : true});
+		cdemuCP = runUtil.run("cdemu-daemon", [`--ctl-device=${VHBA_CTL_DEV_PATH}`, "--bus=session", "--num-devices=64", `--logfile=${path.join(__dirname, "..", "log", "cdemu-daemon.log")}`], {silent : true, detached : true, env : {DISPLAY : ":0"}});
 
 		XU.log`Registering routes...`;
 

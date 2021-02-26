@@ -1,0 +1,11 @@
+#!/bin/bash
+
+formatid="$1"
+shift
+
+if [ -d "/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/" ]
+then
+	cp "$@" "/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
+
+	echo "# of $formatid files: "`find /mnt/compendium/DevLab/dexvert/test/sample/"$formatid"/ -type f | wc -l`
+fi

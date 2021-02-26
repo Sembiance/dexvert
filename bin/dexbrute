@@ -1,0 +1,3 @@
+#!/bin/bash
+
+dexvert --brutePrograms --keepGoing --verbose=2 --alwaysBrute "$@"

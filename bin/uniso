@@ -31,7 +31,7 @@ const WIP_DIR_PATH = fileUtil.generateTempFilePath();
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
 let ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
 const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!path.extname(inputFilePath).match(/[A-Z]/) ? "cue" : "CUE"}`);
-const RUN_OPTIONS = {verbose : true, cwd : WIP_DIR_PATH};
+const RUN_OPTIONS = {verbose : true, cwd : WIP_DIR_PATH, env : { DISPLAY : ":0" }};
 const CDEMU_DEV_MAPPING = {};
 
 // First thing we do is look for any CUE files in the same directory as our ISO file that are dexvert identified as a cue sheet and are properly parsed by cue-parser and contains references to our ISO file
@@ -111,18 +111,23 @@ function runMount(args, runOptions, cb)
 tiptoe(
 	function getCDEMUMapping()
 	{
-		runUtil.run("cdemu", ["device-mapping"], {silent : true}, this);
+		runUtil.run("cdemu", ["device-mapping"], {verbose : true, env : { DISPLAY : ":0" }}, this);
 	},
 	function findCUEFiles(deviceMappingRaw)
 	{
 		(deviceMappingRaw || "").trim().split("\n").forEach(deviceLine =>
 		{
-			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s+(?<genericPath>.+)/) || {}).groups;
+			const deviceInfo = (deviceLine.trim().match(/(?<deviceNum>\d+)\s+(?<devPath>\S+)\s*/) || {}).groups;
 			if(!deviceInfo)
+			{
+				XU.log`Failed to map device line [${deviceLine}]`;
 				return;
+			}
 
 			CDEMU_DEV_MAPPING[(+(deviceInfo.deviceNum.trim()))] = deviceInfo.devPath.trim();
 		});
+
+		XU.log`CDEMU_DEV_MAPPING: ${CDEMU_DEV_MAPPING}`;
 
 		dexvert.identify(inputFilePath, this.parallel());
 		fileUtil.glob(path.dirname(inputFilePath), "*.cue", {nocase : true}, this.parallel());

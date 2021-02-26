@@ -18,6 +18,9 @@ tiptoe(
 		// uniso
 		programs.push({bin() { return "mount"; }, meta : {gentooPackage : "sys-apps/util-linux", website : "https://www.kernel.org/pub/linux/utils/util-linux/"}});
 
+		// hashUtil.hash
+		programs.push({bin() { return "b3sum"; }, meta : {gentooPackage : "app-crypt/blake3", website : "hhttps://github.com/BLAKE3-team/BLAKE3"}});
+
 		// runUtil.run
 		programs.push({bin() { return "Xvfb"; }, meta : {gentooPackage : "x11-base/xorg-server", website : "https://www.x.org/wiki/", gentooUseFlags : "libglvnd xorg xvfb"}});
 		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});
@@ -36,6 +39,11 @@ tiptoe(
 		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});
 		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
 
+		// python tensorflow server
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "sci-libs/tensorflow", website : "https://www.tensorflow.org/"}});
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/flask", website : "https://github.com/pallets/flask/"}});
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/pillow", website : "https://python-pillow.org/"}});
+
 		programs.filterInPlace(p => p.meta.hasOwnProperty("gentooPackage"));
 
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
@@ -52,6 +60,8 @@ tiptoe(
 ## Kernel
 \`\`\`
 File systems  --->
+	  Processor type and features --->
+	    [*] NUMA Memory Allocation and Scheduler Support
       CD-ROM/DVD Filesystems  --->
 	    <*> ISO 9660 CDROM file system support
 	    [*]   Microsoft Joliet CDROM extensions

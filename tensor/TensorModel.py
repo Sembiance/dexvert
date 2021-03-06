@@ -3,6 +3,8 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 os.environ["FLASK_ENV"] = "production"
 
 import tensorflow as tf
+from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession
 
 import json
 import numpy as np
@@ -10,6 +12,10 @@ from PIL import Image
 
 class TensorModel(object):
 	def __init__(self, model_path):
+		config = ConfigProto()
+		config.gpu_options.allow_growth = True
+		session = InteractiveSession(config=config)
+
 		# The signature json file shows us the model inputs and outputs, data types, shapes and names
 		with open(os.path.join(model_path, "signature.json"), "r") as f:
 			self.signature = json.load(f)

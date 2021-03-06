@@ -16,3 +16,10 @@ tensor/garbage
 transform/trimGarbage/trimGarbage
 transform/stripGarbage/stripGarbage
 dexmagic/dexmagic
+amiga/FS-UAE/
+wine/env.tar
+wine/reaConverter/
+wine/IsoBuster/
+util/chatsubo.filter
+util/download.sh
+amiga/*.hdf

@@ -25,6 +25,8 @@ def classifyGarbage():
 
 	if image.mode != "RGB":
 		image = image.convert("RGB")
+
+	#print("Classifying [garbage] image [" + request.json["imagePath"] + "] with dimensions " + str(width) + "x" + str(height))
 	return jsonify(modelGarbage.predict(image))
 
 app.run(host="127.0.0.1", port=17736)

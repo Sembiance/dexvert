@@ -1,12 +1,1 @@
-#!/bin/bash
-
-USER=$(whoami)
-
-sudo chown -R "$USER":users . &
-sudo chmod -R u+rw,g+r,o+r-w . &
-
-wait
-
-find ./ -type d | parallel chmod a+x {} \;
-find ./ -type f | parallel chmod a-x {} \;
-find ./ -type f -iname "*.sh" | parallel chmod a+x {} \;
+/mnt/compendium/bin/fixPerms

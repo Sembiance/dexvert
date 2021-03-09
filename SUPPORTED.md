@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 608 file formats are supported by dexvert.
+The following 609 file formats are supported by dexvert.
 
 
 
@@ -143,7 +143,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (436)
+## Image (437)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -241,6 +241,7 @@ image | [Degas Low Resolution Picture (PI)](http://fileformats.archiveteam.org/w
 image | [Degas Medium Resolution Picture](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pc2 | [14 sample files](https://telparia.com/fileFormatSamples/image/degasMed/)
 image | [Degas Medium Resolution Picture (PI)](http://fileformats.archiveteam.org/wiki/DEGAS_image) | .pi2 | [7 sample files](https://telparia.com/fileFormatSamples/image/degasMedPI/)
 image | [DelmPaint](http://fileformats.archiveteam.org/wiki/Calamus_Raster_Graphic) | .del .dph | [4 sample files](https://telparia.com/fileFormatSamples/image/delmPaint/)
+image | [DeskMate Paint](http://fileformats.archiveteam.org/wiki/DeskMate_Paint) | .pnt | [9 sample files](https://telparia.com/fileFormatSamples/image/deskMatePaint/)
 image | [DeskPic](http://fileformats.archiveteam.org/wiki/DeskPic) | .gfb | [3 sample files](https://telparia.com/fileFormatSamples/image/gfb/)
 image | [DICOM Bitmap](http://fileformats.archiveteam.org/wiki/DICOM) | .dcm .dic | [1 sample file](https://telparia.com/fileFormatSamples/image/dicom/)
 image | [Digi Paint](http://fileformats.archiveteam.org/wiki/Digi_Paint) | .ap3 .apv .dgi .dgp .ilc .esc .pzm .g09 .bg9 | [15 sample files](https://telparia.com/fileFormatSamples/image/digiPaint/)

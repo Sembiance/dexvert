@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo rm -rf /mnt/ram/tmp/*
+cd /mnt/compendium/DevLab/dexvert/test
+node test-process.js $@
+cd /mnt/ram/tmp
+echo '<html><head><style>body { background-color: #0E0E0E; color: #ccc; }</style><title>dextest images</title></head><body>' > dextest_images.html
+echo "<h1>$@</h1><hr>" >> dextest_images.html
+find . -type f \( -iname "*.png" -o -iname "*.webp" \) -printf '<a href="%P"><img src="%P"></a>\n' | parallel echo '{}' >> dextest_images.html \;
+echo '</body></html>' >> dextest_images.html

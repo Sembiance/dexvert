@@ -30,7 +30,7 @@ const OUT_DIR_PATH = path.resolve(argv.args[1]);
 const WIP_DIR_PATH = fileUtil.generateTempFilePath();
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "mountme");
 let ISO_FILE_PATH = path.join(WIP_DIR_PATH, path.basename(inputFilePath));
-const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!path.extname(inputFilePath).match(/[A-Z]/) ? "cue" : "CUE"}`);
+const CUE_FILE_PATH = path.join(WIP_DIR_PATH, `${path.basename(inputFilePath, path.extname(inputFilePath))}.${!(/[A-Z]/).test(path.extname(inputFilePath)) ? "cue" : "CUE"}`);
 const RUN_OPTIONS = {verbose : true, cwd : WIP_DIR_PATH, env : { DISPLAY : ":0" }};
 const CDEMU_DEV_MAPPING = {};
 

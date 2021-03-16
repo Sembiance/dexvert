@@ -2,12 +2,15 @@
 
 mkdir -p /tmp/garbageDetected
 
-Xvfb :0 -extension GLX -listen tcp -nocursor -ac -screen 0 1200x800x24 &
-pid1=$!
-
-sleep 5
-
-DISPLAY=:0 dbus-launch --exit-with-x11
+if [ "$DISPLAY" != ":0" ]
+then
+	Xvfb :0 -extension GLX -listen tcp -nocursor -ac -screen 0 1200x800x24 &
+	pid1=$!
+	sleep 5
+	DISPLAY=:0 dbus-launch --exit-with-x11
+else
+	pid1="0"
+fi
 
 ./dexserv &
 pid2=$!

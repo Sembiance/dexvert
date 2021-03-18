@@ -4,10 +4,13 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	C = require("../lib/C.js"),
 	runUtil = require("@sembiance/xutil").run,
+	fs = require("fs"),
+	path = require("path"),
 	fileUtil = require("@sembiance/xutil").file,
 	fastify = require("fastify")({logger : {level : "warn"}});
 
 const VHBA_CTL_DEV_PATH = "/dev/vhba_ctl";
+const WINE_RUN_ENV = {DISPLAY : ":0", WINEPREFIX : C.WINE_PREFIX_DIR_PATH};
 
 let cdEmuDeviceNum = 0;
 let unoconvCP = null;
@@ -16,21 +19,32 @@ let shuttingDown = false;
 
 function shutdown()
 {
+	if(shuttingDown)
+		return;
+		
 	XU.log`Shutting down dexserv...`;
 	shuttingDown = true;
 
-	[unoconvCP, cdemuCP].parallelForEach((cp, subcb) =>
-	{
-		if(cp && !cp.killed)
+	tiptoe(
+		function killChildrenAndWine()
 		{
-			cp.on("exit", () => setImmediate(subcb));
-			cp.kill();
-		}
-		else
-		{
-			setImmediate(subcb);
-		}
-	}, XU.FINISH);
+			[unoconvCP, cdemuCP].parallelForEach((cp, subcb) =>
+			{
+				if(cp && !cp.killed)
+				{
+					cp.on("exit", () => setImmediate(subcb));
+					cp.kill();
+				}
+				else
+				{
+					setImmediate(subcb);
+				}
+			}, this.parallel());
+
+			runUtil.run("wineserver", ["--kill"], {silent : true, env : WINE_RUN_ENV}, this.parallel());
+		},
+		XU.FINISH
+	);
 }
 
 process.on("SIGTERM", () =>
@@ -71,10 +85,50 @@ function startUnoconvServer()
 	});
 }
 
+function startWine(cb)
+{
+	tiptoe(
+		function removePreviousEnv()
+		{
+			XU.log`Preparing wine env prefix...`;
+
+			fileUtil.unlink(C.WINE_PREFIX_DIR_PATH, this);
+		},
+		function createEnvDir()
+		{
+			fs.mkdir(C.WINE_PREFIX_DIR_PATH, {recursive : true}, this);
+		},
+		function extractEnv()
+		{
+			runUtil.run("tar", ["-xf", path.join("..", "wine", "env.tar"), "-C", C.WINE_PREFIX_DIR_PATH], runUtil.SILENT, this);
+		},
+		function startWineserver()
+		{
+			XU.log`Starting wineserver...`;
+			runUtil.run("wineserver", ["--persistent"], {silent : true, detached : true, env : WINE_RUN_ENV});
+			
+			// Wait for wineserver to start fully. Maybe there is a better way to check this.
+			setTimeout(() => this(), XU.SECOND*3);
+		},
+		function startWineboot()
+		{
+			XU.log`Starting wineboot...`;
+			// Ok, so in theory wineboot runs and then exits. But wineboot is a maze of shell scripts and for some reason child_process.execFile() never returns when running wineboot (see sandbox/legacy/testWinebootProblem.js)
+			// It likely has something to do with this: https://github.com/nodejs/node/issues/5637
+			// Though maybe not, because I watched the returned process for any events and nothing ever triggers.
+			// So we just run it detached and wait a bit before continuing. Gross and ugly, but I couldn't come up with another workaround
+			runUtil.run("wineboot", ["--update"], {silent : true, detached : true, env : WINE_RUN_ENV});
+			setTimeout(() => this(), XU.SECOND*10);
+		},
+		cb
+	);
+}
+
 tiptoe(
 	function verifyVHBALoaded()
 	{
-		fileUtil.exists(VHBA_CTL_DEV_PATH, this);
+		fileUtil.exists(VHBA_CTL_DEV_PATH, this.parallel());
+		startWine(this.parallel());
 	},
 	function runServers(vhbaCtlExists)
 	{

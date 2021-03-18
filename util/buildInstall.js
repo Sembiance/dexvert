@@ -15,6 +15,9 @@ tiptoe(
 	{
 		const programs = programFilePaths.map(programFilePath => require(programFilePath));
 
+		// bin/runServers.hs
+		programs.push({bin() { return "jq"; }, meta : {gentooPackage : "app-misc/jq", website : "https://stedolan.github.io/jq/"}});
+
 		// uniso
 		programs.push({bin() { return "mount"; }, meta : {gentooPackage : "sys-apps/util-linux", website : "https://www.kernel.org/pub/linux/utils/util-linux/"}});
 

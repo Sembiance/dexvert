@@ -19,7 +19,35 @@ mkdir -p /mnt/ram/tmp/__pycache__
 python -X pycache_prefix=/mnt/ram/tmp/__pycache__ ../tensor/tensorServer.py &
 pid3=$!
 
-echo "Servers running..."
+for (( ; ; ))
+do
+	statusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
+	if [ "$statusResult" = '"a-ok"' ]
+	then
+		break;
+	fi
 
-trap 'kill "$pid1" "$pid2" "$pid3"; echo done; exit 1' SIGINT
+	sleep 1
+done
+
+echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m"
+
+function clean_up
+{
+	echo "Signal caught. Killing children..."
+	kill "$pid3"
+	kill "$pid2"
+	if [ "$pid1" != "0" ]; then
+		kill "$pid1"
+	fi
+
+	echo "Waiting for children to finish..."
+	wait
+
+	echo -e "\033[0;32mdone.\033[0m"
+	exit 1
+}
+
+trap clean_up SIGINT
+
 wait

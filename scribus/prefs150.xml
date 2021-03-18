@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+	<level name="application">
+		<context name="AlignDistributePalette">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Books">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="CharSelect">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="ContentPalette">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="DownloadsPalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Fonts">
+			<table name="ExtraFontDirs">
+			</table>
+		</context>
+		<context name="GradientVectorPalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="GuideManager">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Inline">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Layers">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="ObjectSize">
+			<attribute key="Origin" value="0"/>
+			<attribute key="Remember" value="1"/>
+			<attribute key="defHeight" value="100"/>
+			<attribute key="defWidth" value="100"/>
+		</context>
+		<context name="PagePalette">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="PropertiesPalette">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Sclib">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Scrapbook">
+			<attribute key="hideDirs" value="0"/>
+			<attribute key="hideImages" value="0"/>
+			<attribute key="hideVectors" value="0"/>
+			<attribute key="openMode" value="0"/>
+		</context>
+		<context name="Shap">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="height" value="240"/>
+			<attribute key="left" value="1200"/>
+			<attribute key="top" value="0"/>
+			<attribute key="visible" value="0"/>
+			<attribute key="width" value="220"/>
+		</context>
+		<context name="Symb">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="ToolBar-Edit">
+			<attribute key="IsVisible" value="1"/>
+		</context>
+		<context name="ToolBar-File">
+			<attribute key="IsVisible" value="1"/>
+		</context>
+		<context name="ToolBar-PDF_Tools">
+			<attribute key="IsVisible" value="1"/>
+		</context>
+		<context name="ToolBar-Tools">
+			<attribute key="IsVisible" value="1"/>
+		</context>
+		<context name="Tree">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="checkDocument">
+			<attribute key="height" value="313"/>
+			<attribute key="left" value="1200"/>
+			<attribute key="top" value="0"/>
+			<attribute key="visible" value="0"/>
+			<attribute key="width" value="795"/>
+		</context>
+		<context name="dirs">
+			<attribute key="eps" value="/tmp"/>
+			<attribute key="pdf" value="."/>
+		</context>
+		<context name="marksManager">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="nodePalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="notesStylesEditor">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="print_options">
+			<attribute key="BleedBottom" value="0"/>
+			<attribute key="BleedLeft" value="0"/>
+			<attribute key="BleedRight" value="0"/>
+			<attribute key="BleedTop" value="0"/>
+			<attribute key="Clip" value="0"/>
+			<attribute key="Command" value=""/>
+			<attribute key="Copies" value="1"/>
+			<attribute key="CurrentPage" value="0"/>
+			<attribute key="CurrentPrn" value="Brother_HL-L8260CDW_series"/>
+			<attribute key="DoGCR" value="0"/>
+			<attribute key="ICCinUse" value="1"/>
+			<attribute key="MirrorH" value="0"/>
+			<attribute key="MirrorV" value="0"/>
+			<attribute key="OtherCom" value="0"/>
+			<attribute key="PSLevel" value="3"/>
+			<attribute key="PageNr" value=""/>
+			<attribute key="PrintAll" value="1"/>
+			<attribute key="PrintColor" value="0"/>
+			<attribute key="PrintRange" value="0"/>
+			<attribute key="SepArt" value="0"/>
+			<attribute key="Separations" value="0"/>
+			<attribute key="bleedMarks" value="0"/>
+			<attribute key="colorMarks" value="0"/>
+			<attribute key="cropMarks" value="0"/>
+			<attribute key="doDev" value="0"/>
+			<attribute key="doSpot" value="1"/>
+			<attribute key="includePDFMarks" value="1"/>
+			<attribute key="markLength" value="20.0016"/>
+			<attribute key="markOffset" value="0"/>
+			<attribute key="registrationMarks" value="0"/>
+		</context>
+		<context name="styleManager">
+			<attribute key="eX" value="0"/>
+			<attribute key="eY" value="0"/>
+			<attribute key="isEditMode" value="0"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="uWidget">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="undo">
+			<attribute key="enabled" value="1"/>
+			<attribute key="historylength" value="99"/>
+		</context>
+		<context name="undoPalette">
+			<attribute key="area" value="0"/>
+			<attribute key="floating" value="1"/>
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="user_preferences">
+			<attribute key="gui_language" value="en_US"/>
+			<attribute key="mainwinstate" value="AAAA/wAAAAD9AAAAAAAAB4AAAAPoAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAUAAAAIAEYAaQBsAGUBAAAAAP////8AAAAAAAAAAAAAAAgARQBkAGkAdAEAAAC//////wAAAAAAAAAAAAAACgBUAG8AbwBsAHMBAAABTP////8AAAAAAAAAAAAAABIAUABEAEYAXwBUAG8AbwBsAHMBAAADm/////8AAAAAAAAAAAAAABQAVgBpAGUAdwBfAFQAbwBvAGwAcwEAAARz/////wAAAAAAAAAA"/>
+			<table name="activeTabs">
+			</table>
+			<table name="tabbedPalettes">
+			</table>
+		</context>
+	</level>
+	<level name="plugin">
+		<context name="StoryEditor">
+			<attribute key="height" value="400"/>
+			<attribute key="left" value="10"/>
+			<attribute key="main" value="-1"/>
+			<attribute key="side" value="-1"/>
+			<attribute key="top" value="10"/>
+			<attribute key="width" value="600"/>
+			<attribute key="winstate" value=""/>
+		</context>
+		<context name="pluginmanager">
+			<attribute key="barcodegenerator" value="0"/>
+			<attribute key="colorwheel" value="0"/>
+			<attribute key="flattenpath" value="0"/>
+			<attribute key="fontpreview" value="0"/>
+			<attribute key="importai" value="0"/>
+			<attribute key="importcdr" value="0"/>
+			<attribute key="importcgm" value="0"/>
+			<attribute key="importcvg" value="0"/>
+			<attribute key="importdrw" value="0"/>
+			<attribute key="importemf" value="0"/>
+			<attribute key="importfh" value="0"/>
+			<attribute key="importidml" value="0"/>
+			<attribute key="importodg" value="0"/>
+			<attribute key="importpages" value="0"/>
+			<attribute key="importpct" value="0"/>
+			<attribute key="importpdf" value="0"/>
+			<attribute key="importpm" value="0"/>
+			<attribute key="importpub" value="0"/>
+			<attribute key="importqxp" value="0"/>
+			<attribute key="importshape" value="0"/>
+			<attribute key="importsml" value="0"/>
+			<attribute key="importsvm" value="0"/>
+			<attribute key="importviva" value="0"/>
+			<attribute key="importvsd" value="0"/>
+			<attribute key="importwpg" value="0"/>
+			<attribute key="importxar" value="0"/>
+			<attribute key="importxfig" value="0"/>
+			<attribute key="importxps" value="0"/>
+			<attribute key="importzmf" value="0"/>
+			<attribute key="lenseffects" value="0"/>
+			<attribute key="meshdistortion" value="0"/>
+			<attribute key="oodrawimp" value="0"/>
+			<attribute key="pathalongpath" value="0"/>
+			<attribute key="pathconnect" value="0"/>
+			<attribute key="pathcut" value="0"/>
+			<attribute key="pathfinder" value="0"/>
+			<attribute key="pathstroker" value="0"/>
+			<attribute key="picturebrowser" value="0"/>
+			<attribute key="saveastemplateplugin" value="0"/>
+			<attribute key="scribus12format" value="0"/>
+			<attribute key="scribus134format" value="0"/>
+			<attribute key="scribus13format" value="0"/>
+			<attribute key="scribus150format" value="0"/>
+			<attribute key="scribusexportpixmap" value="0"/>
+			<attribute key="scribusshortwords" value="0"/>
+			<attribute key="scriptplugin" value="1"/>
+			<attribute key="shapeplugin" value="1"/>
+			<attribute key="smoothpath" value="0"/>
+			<attribute key="subdivide" value="0"/>
+			<attribute key="svgexplugin" value="0"/>
+			<attribute key="svgimplugin" value="0"/>
+			<attribute key="uniconvertorplugin" value="0"/>
+			<attribute key="wmfimplugin" value="0"/>
+			<attribute key="xpsexplugin" value="0"/>
+		</context>
+		<context name="scriptplugin">
+			<attribute key="extensionscripts" value="0"/>
+			<attribute key="importall" value="1"/>
+			<attribute key="startupscript" value=""/>
+			<attribute key="syntaxcomment" value="#a0a0a0"/>
+			<attribute key="syntaxerror" value="#aa0000"/>
+			<attribute key="syntaxkeyword" value="#00007f"/>
+			<attribute key="syntaxnumber" value="#ffaa00"/>
+			<attribute key="syntaxsign" value="#aa00ff"/>
+			<attribute key="syntaxstring" value="#005500"/>
+			<attribute key="syntaxtext" value="#000000"/>
+			<table name="recentscripts">
+			</table>
+		</context>
+		<context name="svgex">
+			<attribute key="wdir" value="/home/sembiance/tmp"/>
+		</context>
+	</level>
+</preferences>

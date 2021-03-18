@@ -7,7 +7,6 @@ test/sample/
 test/wip/
 music/midiFont/roland/*.sf2
 .vscode
-scribus/
 log/
 util/badPNGs
 util/goodPNGs

@@ -15,8 +15,8 @@ fi
 ./dexserv &
 KIDPIDS+=($!)
 
-mkdir -p /mnt/ram/tmp/__pycache__
-python -X pycache_prefix=/mnt/ram/tmp/__pycache__ ../tensor/tensorServer.py &
+mkdir -p /mnt/ram/dexvert/__pycache__
+python -X pycache_prefix=/mnt/ram/dexvert/__pycache__ ../tensor/tensorServer.py &
 KIDPIDS+=($!)
 
 for (( ; ; ))

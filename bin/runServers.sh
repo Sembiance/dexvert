@@ -2,22 +2,22 @@
 
 mkdir -p /tmp/garbageDetected
 
+KIDPIDS=()
+
 if [ "$DISPLAY" != ":0" ]
 then
 	Xvfb :0 -extension GLX -listen tcp -nocursor -ac -screen 0 1200x800x24 &
-	pid1=$!
+	KIDPIDS+=($!)
 	sleep 5
 	DISPLAY=:0 dbus-launch --exit-with-x11
-else
-	pid1="0"
 fi
 
 ./dexserv &
-pid2=$!
+KIDPIDS+=($!)
 
 mkdir -p /mnt/ram/tmp/__pycache__
 python -X pycache_prefix=/mnt/ram/tmp/__pycache__ ../tensor/tensorServer.py &
-pid3=$!
+KIDPIDS+=($!)
 
 for (( ; ; ))
 do
@@ -35,11 +35,9 @@ echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m"
 function clean_up
 {
 	echo "Signal caught. Killing children..."
-	kill "$pid3"
-	kill "$pid2"
-	if [ "$pid1" != "0" ]; then
-		kill "$pid1"
-	fi
+	for kidpid in "${KIDPIDS[@]}"; do
+		kill "$kidpid"
+	done
 
 	echo "Waiting for children to finish..."
 	wait

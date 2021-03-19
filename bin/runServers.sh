@@ -17,6 +17,7 @@ KIDPIDS+=($!)
 
 mkdir -p /mnt/ram/dexvert/__pycache__
 python -X pycache_prefix=/mnt/ram/dexvert/__pycache__ ../tensor/tensorServer.py &
+
 KIDPIDS+=($!)
 
 for (( ; ; ))

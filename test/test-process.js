@@ -203,7 +203,7 @@ tiptoe(
 
 		Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			if(!extraFilePath.startsWith(argv.format))
+			if(!extraFilePath.startsWith(argv.format) || argv.file)
 				return;
 			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
 			if(argv.record)

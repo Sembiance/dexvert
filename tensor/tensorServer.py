@@ -29,4 +29,4 @@ def classifyGarbage():
 	#print("Classifying [garbage] image [" + request.json["imagePath"] + "] with dimensions " + str(width) + "x" + str(height))
 	return jsonify(modelGarbage.predict(image))
 
-app.run(host="127.0.0.1", port=17736)
+app.run(host="127.0.0.1", port=17736, threaded=True)

@@ -72,7 +72,7 @@ exports.initSamples = function initSamples(cb)
 		function runRSYNC()
 		{
 			XU.log`rsyncing sample files to RAM...`;
-			runUtil.run("rsync", ["-avL", path.join(exports.SAMPLE_DIR_PATH_DISK, "/"), path.join(exports.SAMPLE_DIR_PATH, "/")], runUtil.SILENT, this);
+			runUtil.run("rsync", ["--delete", "-avL", path.join(exports.SAMPLE_DIR_PATH_DISK, "/"), path.join(exports.SAMPLE_DIR_PATH, "/")], runUtil.SILENT, this);
 		},
 		cb
 	);

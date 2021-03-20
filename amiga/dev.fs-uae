@@ -6,6 +6,7 @@ floppy_drive_speed = 0
 floppy_drive_0_sounds = off
 floppy_drive_1_sounds = off
 uae_cpu_speed = max
+uae_fpu_model = 68882
 fullscreen = 0
 window_width = 1024
 window_height = 768 

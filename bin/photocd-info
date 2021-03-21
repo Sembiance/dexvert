@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+"use strict";
+
+const XU = require("@sembiance/xu"),
+	path = require("path"),
+	tiptoe = require("tiptoe"),
+	{Command} = require("commander"),
+	fileUtil = require("@sembiance/xutil").file,
+	fs = require("fs"),
+	runUtil = require("@sembiance/xutil").run;
+
+const argv = new Command().description("Checks <inputFilePath> and determines if it is a photo-cd or not").
+	arguments("<inputFilePath>").
+	parse(process.argv);
+
+if(argv.args.length<1)
+	argv.help();
+
+const inputFilePath = path.resolve(argv.args[0]);
+if(!fileUtil.existsSync(inputFilePath))
+	return process.exit(console.error(`Input file ${inputFilePath} does not exist.`));
+
+const MOUNT_DIR_PATH = fileUtil.generateTempFilePath(undefined, "-photocd-info");
+
+tiptoe(
+	function mkMountDir()
+	{
+		fs.mkdir(MOUNT_DIR_PATH, {recursive : true}, this);
+	},
+	function mountISO()
+	{
+		runUtil.run("fuseiso", [inputFilePath, MOUNT_DIR_PATH], runUtil.SILENT, this);
+	},
+	function findPhotoCDImages()
+	{
+		fileUtil.glob(path.join(MOUNT_DIR_PATH, "photo_cd", "images"), "*.pcd", {nocease : true}, this);
+	},
+	function unmount(pcdFilePaths)
+	{
+		this.data.pcdFilePaths = pcdFilePaths || [];
+		if((pcdFilePaths.length || [])>0)
+			console.log(JSON.stringify({photocd : true, photoCount : pcdFilePaths.length}));
+
+		runUtil.run("fusermount", ["-u", MOUNT_DIR_PATH], runUtil.SILENT, this);
+	},
+	function removeMountDir()
+	{
+		fileUtil.unlink(MOUNT_DIR_PATH, this);
+	},
+	XU.FINISH
+);

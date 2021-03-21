@@ -5,9 +5,24 @@ mkdir -p ~/tmp/out
 
 touch ~/tmp/out/deleteme
 
+verboseLevel="4"
+if [ "$1" == "--verbose" ]; then
+	verboseLevel="5"
+	shift
+fi
+
+if [ "$1" == "--dontTransform" ]; then
+	dontTransform="yes"
+	shift
+fi
+
 for filename in "$@"
 do
-	dexvert --verbose=4 "$filename" ~/tmp/out/ &
+	if [ "$dontTransform" == "yes" ]; then
+		dexvert --dontTransform  --verbose="$verboseLevel" "$filename" ~/tmp/out/ &
+	else
+		dexvert --verbose="$verboseLevel" "$filename" ~/tmp/out/ &
+	fi
 done
 
 wait

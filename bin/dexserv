@@ -9,12 +9,9 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	fastify = require("fastify")({logger : {level : "warn"}});
 
-const VHBA_CTL_DEV_PATH = "/dev/vhba_ctl";
 const WINE_RUN_ENV = {DISPLAY : ":0", WINEPREFIX : C.WINE_PREFIX_DIR_PATH};
 
-let cdEmuDeviceNum = 0;
 let unoconvCP = null;
-let cdemuCP = null;
 let shuttingDown = false;
 
 function shutdown()
@@ -28,7 +25,7 @@ function shutdown()
 	tiptoe(
 		function killChildrenAndWine()
 		{
-			[unoconvCP, cdemuCP].parallelForEach((cp, subcb) =>
+			[unoconvCP].parallelForEach((cp, subcb) =>
 			{
 				if(cp && !cp.killed)
 				{
@@ -125,27 +122,17 @@ function startWine(cb)
 }
 
 tiptoe(
-	function verifyVHBALoaded()
+	function preInit()
 	{
-		fileUtil.exists(VHBA_CTL_DEV_PATH, this.parallel());
-		startWine(this.parallel());
+		startWine(this);
 	},
-	function runServers(vhbaCtlExists)
+	function runServers()
 	{
-		if(!vhbaCtlExists)
-		{
-			XU.log`Failed to find ${VHBA_CTL_DEV_PATH}. Might need to do \`modprobe vhba\``;
-			process.exit(1);
-		}
-
 		startUnoconvServer();
 		
-		cdemuCP = runUtil.run("cdemu-daemon", [`--ctl-device=${VHBA_CTL_DEV_PATH}`, "--bus=session", "--num-devices=64"], {silent : true, detached : true, env : {DISPLAY : ":0"}});
-
 		XU.log`Registering routes...`;
 
 		fastify.get("/status", (request, reply) => reply.send({status : (unoconvCP ? C.DEXSERV_OK_RESPONSE : "error: unoconv server no longer running!")}));
-		fastify.get("/getCDEmuDeviceNum", (request, reply) => reply.send({deviceNum : (cdEmuDeviceNum++)%64}));
 
 		fastify.ready(this);
 	},

@@ -115,6 +115,9 @@ function validateFormat(format)
 		updateProcessed : [isFunction, hasLengthOf(3)]
 	};
 
+	// Format specific properties that are shared for easier re-use
+	["HFS_MAGICS"].forEach(v => { formatSchema[v] = [anything]; });
+
 	try
 	{
 		validateValue(format, formatSchema);
@@ -159,7 +162,7 @@ function validateProgram(program)
 		wineOptions : [isFunction, hasLengthBetween(0, 3)]
 	};
 
-	// Program/format specific properties that are shared for easier re-use
+	// Program specific properties that are shared for easier re-use
 	["STRIP_ARGS", "BSAVE_TYPES"].forEach(v => { programSchema[v] = [anything]; });
 
 	try

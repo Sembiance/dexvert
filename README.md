@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 609 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 608 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -34,6 +34,7 @@ Options:
                                   run every available program on it
   --dontTransform                 If a file can't be converted, dexvert will
                                   try different transforms to convert it.
+  --useTmpOutputDir               If set, dexvert won't clobber the output dir
   --midiFont [midiFont]           Convert MIDI files with a specific midi font. Default: eaw
   		Other available fonts: fluid, roland, creative, freepats, windows
   -h, --help                      display help for command

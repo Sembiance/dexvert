@@ -30,7 +30,7 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 if(argv.args.length<2)
 	argv.help();
 
-const verbose = argv.verbose || 0;
+const verbose = +(argv.verbose || 0);
 
 tiptoe(
 	function runProcess()

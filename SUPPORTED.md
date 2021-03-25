@@ -26,7 +26,7 @@ archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | 
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [1 sample file](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | [5 sample files](https://telparia.com/fileFormatSamples/archive/crunchMania/)
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [1 sample file](https://telparia.com/fileFormatSamples/archive/diskImage/)
-archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [20 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/)
+archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [20 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [7 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [17 sample files](https://telparia.com/fileFormatSamples/archive/grasp/) - This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
 archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [3 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
@@ -110,7 +110,7 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_tokenized_file) | .gfa .bas | [13 sample files](https://telparia.com/fileFormatSamples/executable/gfaBASICAtari/) - The gfalist program only supports decompiling tokenized files of version 3 and higher.
 executable | Microsoft Windows Dynmic Link Library | .dll | [7 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
-executable | MS-DOS/Windows Executable | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
 executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
 
 
@@ -277,8 +277,8 @@ image | [Falcon True Color](http://fileformats.archiveteam.org/wiki/Falcon_True_
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | [2 sample files](https://telparia.com/fileFormatSamples/image/farbfeld/)
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | [1 sample file](https://telparia.com/fileFormatSamples/image/fxg/)
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | [5 sample files](https://telparia.com/fileFormatSamples/image/fits/)
-image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .bml .fli | [6 sample files](https://telparia.com/fileFormatSamples/image/fliGraph/)
-image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/)
+image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .bml .fli .flg | [6 sample files](https://telparia.com/fileFormatSamples/image/fliGraph/)
+image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/)
 image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | [1 sample file](https://telparia.com/fileFormatSamples/image/ffli/)
 image | [FLIP Image](http://fileformats.archiveteam.org/wiki/FLIP) | .fbi | [5 sample files](https://telparia.com/fileFormatSamples/image/fbi/)
 image | [Floor Designer](http://fileformats.archiveteam.org/wiki/Floor_Designer) | .fge | [1 sample file](https://telparia.com/fileFormatSamples/image/fge/)
@@ -297,7 +297,7 @@ image | [Giga Cad](http://fileformats.archiveteam.org/wiki/Giga Cad) | .gcd | [1
 image | GLC | .glc | [1 sample file](https://telparia.com/fileFormatSamples/image/glc/)
 image | [Glow Icon](http://fileformats.archiveteam.org/wiki/GlowIcons) | .info | [6 sample files](https://telparia.com/fileFormatSamples/image/glowIcon/)
 image | GLS | .gls | [1 sample file](https://telparia.com/fileFormatSamples/image/gls/)
-image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt | [7 sample files](https://telparia.com/fileFormatSamples/image/4bt/)
+image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt .clp | [7 sample files](https://telparia.com/fileFormatSamples/image/4bt/)
 image | [GodPaint](http://fileformats.archiveteam.org/wiki/GodPaint) | .god | [5 sample files](https://telparia.com/fileFormatSamples/image/god/)
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telparia.com/fileFormatSamples/image/grafx2/)
 image | [Graph Saurus](http://fileformats.archiveteam.org/wiki/Graph_Saurus) | .sr5 .gl5 .pl5 .sr6 .gl6 .pl6 .sr7 .gl7 .pl7 .sr8 .gl8 .sri .srs | [25 sample files](https://telparia.com/fileFormatSamples/image/graphSaurus/)
@@ -311,7 +311,7 @@ image | [GX1 Bitmap](http://fileformats.archiveteam.org/wiki/GX1) | .gx1 | [10 s
 image | [GX2 Bitmap](http://fileformats.archiveteam.org/wiki/GX2) | .gx2 | [7 sample files](https://telparia.com/fileFormatSamples/image/gx2/)
 image | [Haiku Vector Icon Format](http://fileformats.archiveteam.org/wiki/Haiku_Vector_Icon_Format) | .hvif | [4 sample files](https://telparia.com/fileFormatSamples/image/hvif/)
 image | Hard Color Map | .hcm | [2 sample files](https://telparia.com/fileFormatSamples/image/hcm/)
-image | [Hard Interlace Picture](http://fileformats.archiveteam.org/wiki/Hard_Interlace_Picture) | .hip hps | [44 sample files](https://telparia.com/fileFormatSamples/image/hip/)
+image | [Hard Interlace Picture](http://fileformats.archiveteam.org/wiki/Hard_Interlace_Picture) | .hip hps | [44 sample files](https://telparia.com/fileFormatSamples/image/hip/) - Sample file AGA2.HPS converts to just static noise. Not sure if this is an error in recoil2png or a fault in the file or expected output.
 image | [Hi-Eddi](http://fileformats.archiveteam.org/wiki/Hi-Eddit) | .hed | [4 sample files](https://telparia.com/fileFormatSamples/image/hiEddi/)
 image | [Hi-Pic Creator](http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator) | .hpc | [2 sample files](https://telparia.com/fileFormatSamples/image/hiPic/)
 image | [Hierarchical Data Format v4](http://fileformats.archiveteam.org/wiki/HDF) | .hdf | [3 sample files](https://telparia.com/fileFormatSamples/image/hdf4/) - nconvert doesn't seem to handle all files, such as input_256 and input_truecolor
@@ -343,10 +343,10 @@ image | [INT95a](http://fileformats.archiveteam.org/wiki/INT95a) | .int | [1 sam
 image | [Interface Logo Designer](http://fileformats.archiveteam.org/wiki/Interface_Logo_Designer) | .ild | [1 sample file](https://telparia.com/fileFormatSamples/image/ild/)
 image | [Interlace Graphics Editor](http://fileformats.archiveteam.org/wiki/Interlace_Graphics_Editor) | .ige | [1 sample file](https://telparia.com/fileFormatSamples/image/ige/)
 image | [Interlace Hires Editor](http://fileformats.archiveteam.org/wiki/Interlace_Hires_Editor) | .ihe | [1 sample file](https://telparia.com/fileFormatSamples/image/ihe/)
-image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph .ipt | [5 sample files](https://telparia.com/fileFormatSamples/image/interpaint/)
+image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph .ipt .lre .hre | [5 sample files](https://telparia.com/fileFormatSamples/image/interpaint/)
 image | [InterPainter](http://fileformats.archiveteam.org/wiki/InterPainter) | .inp .ins .int | [41 sample files](https://telparia.com/fileFormatSamples/image/interPainter/)
 image | [Jet Graphics Planner](http://fileformats.archiveteam.org/wiki/Jet_Graphics_Planner) | .jgp | [3 sample files](https://telparia.com/fileFormatSamples/image/jgp/)
-image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [6 sample files](https://telparia.com/fileFormatSamples/image/jbig/)
+image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [6 sample files](https://telparia.com/fileFormatSamples/image/jbig/) - Sample file mx.jbg converts to garbage, not sure why. reaConverter produces the same output.
 image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | [11 sample files](https://telparia.com/fileFormatSamples/image/jpg/)
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | [5 sample files](https://telparia.com/fileFormatSamples/image/jpeg2000/)
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | [13 sample files](https://telparia.com/fileFormatSamples/image/jng/)
@@ -389,7 +389,7 @@ image | [Mapletown Network](http://fileformats.archiveteam.org/wiki/Mapletown_Ne
 image | [Matlab MAT](http://fileformats.archiveteam.org/wiki/MAT) | .mat | [5 sample files](https://telparia.com/fileFormatSamples/image/mat5/) - I believe a .mat file can contain more than images, but right now we only support converting images.
 image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | [2 sample files](https://telparia.com/fileFormatSamples/image/mcPainter/)
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | [9 sample files](https://telparia.com/fileFormatSamples/image/bld/)
-image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/)
+image | Micro Illustrator | .mic .mil | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/)
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | [2 sample files](https://telparia.com/fileFormatSamples/image/mil/)
 image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | [8 sample files](https://telparia.com/fileFormatSamples/image/msp/)
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | [24 sample files](https://telparia.com/fileFormatSamples/image/ani/)
@@ -481,7 +481,7 @@ image | [RAMbrandt](http://fileformats.archiveteam.org/wiki/RAMbrandt) | .rm0 .r
 image | ReGIS | .regis | [1 sample file](https://telparia.com/fileFormatSamples/image/regis/)
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [1 sample file](https://telparia.com/fileFormatSamples/image/rembrandt/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [138 sample files](https://telparia.com/fileFormatSamples/image/rockyInterlace/)
-image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm | [5 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
+image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm .rph .rpo | [5 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
 image | [SAM Coupe Mode 4](http://fileformats.archiveteam.org/wiki/SAM_Coupe_Mode_4) | .ss4 .scs4 | [9 sample files](https://telparia.com/fileFormatSamples/image/samCoupeMode4/)
 image | [SAMAR Hires Interlace](http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace) | .shc | [2 sample files](https://telparia.com/fileFormatSamples/image/samarHiresInterlace/)
 image | [Saracen Paint](http://fileformats.archiveteam.org/wiki/Saracen_Paint) | .sar | [4 sample files](https://telparia.com/fileFormatSamples/image/sar/)
@@ -490,7 +490,7 @@ image | [Seattle FilmWorks/PhotoWorks PhotoMail](http://fileformats.archiveteam.
 image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic) | .snx | [6 sample files](https://telparia.com/fileFormatSamples/image/snx/) - This only is able to convert files that are just wrapped JPEG images (dragon*.snx). Others are in an unknown file format, including barw22.snx.
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [1 sample file](https://telparia.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
-image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [3 sample files](https://telparia.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg-lz77.sgx and NUKE.SVG
+image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [3 sample files](https://telparia.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg-lz77.sgx
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)
 image | [Sigma/Foveon X3F](http://fileformats.archiveteam.org/wiki/X3F) | .x3f | [3 sample files](https://telparia.com/fileFormatSamples/image/x3f/)
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | [5 sample files](https://telparia.com/fileFormatSamples/image/sgi/)

@@ -417,7 +417,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				const extraArgs = Array.from(args);
 				if(status!=="PASS")
 				{
-					extraArgs.push(outDirPath);
+					extraArgs.push(os.hostname()==="chatsubo" ? outDirPath.replaceAll("/mnt/", "/mnt/chatsubo/") : outDirPath);
 
 					if(this.data.results)
 						fs.writeFileSync(path.join(outDirPath, "___dexvert_results.txt"), JSON.stringify(this.data.results), XU.UTF8);

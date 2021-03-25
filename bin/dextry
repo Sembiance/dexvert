@@ -11,17 +11,17 @@ if [ "$1" == "--verbose" ]; then
 	shift
 fi
 
-if [ "$1" == "--dontTransform" ]; then
-	dontTransform="yes"
+if [ "$1" == "--allowTransform" ]; then
+	allowTransform="yes"
 	shift
 fi
 
 for filename in "$@"
 do
-	if [ "$dontTransform" == "yes" ]; then
-		dexvert --dontTransform  --verbose="$verboseLevel" "$filename" ~/tmp/out/ &
-	else
+	if [ "$allowTransform" == "yes" ]; then
 		dexvert --verbose="$verboseLevel" "$filename" ~/tmp/out/ &
+	else
+		dexvert --dontTransform  --verbose="$verboseLevel" "$filename" ~/tmp/out/ &
 	fi
 done
 

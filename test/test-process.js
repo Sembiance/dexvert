@@ -154,6 +154,7 @@ const FORMATID_MATCH_IGNORE_FILES =
 	{
 		// .cue files have to live alongside ISO/CDI files
 		"cue" : [/archive\/(iso|cdi)\/.+\.cue$/],
+		"toc" : [/archive\/(iso|cdi)\/.+\.toc$/],
 
 		// allprims.cgm isn't supported yet, so it fallsback to text/txt
 		"txt" : [/image\/cgm\/allprims\.cgm$/]

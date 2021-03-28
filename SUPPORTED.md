@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 610 file formats are supported by dexvert.
+The following 611 file formats are supported by dexvert.
 
 
 
@@ -143,7 +143,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (437)
+## Image (438)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -163,6 +163,7 @@ image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [4 sample files](https://telparia
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [10 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [4 sample files](https://telparia.com/fileFormatSamples/image/a4r/)
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice | [25 sample files](https://telparia.com/fileFormatSamples/image/ans/)
+image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [9 sample files](https://telparia.com/fileFormatSamples/image/aolART/)
 image | Apple II High Res | .hgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2HighRes/)
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/)
 image | Apple IIe Double High-Resolution | .dhgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2eDoubleHighRes/)

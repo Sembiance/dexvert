@@ -42,7 +42,7 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 A function that returns the name of the binary to run
 
 >>> wine = state => "binary_program"
-A function that returns the name of the binary to run with WINE
+A function that returns the name of the binary to run with WINE. If the binary_program begins with "C:" then it will the binary located in the current wine prefix drive_c
 
 >>> steps = (state, p, r) => ([step1, step2, step3])
 A function that returns an array of steps to run serially

@@ -161,6 +161,15 @@ const FORMATID_MATCH_IGNORE_FILES =
 	}
 };
 
+const IGNORE_EXTRA_FILES =
+{
+	archive :
+	{
+		// A file in here is corrupted, so each time I run it I can get different output filenames, so allow this one to have additional files
+		"arc" : [/rainbow.arc$/]
+	}
+};
+
 const TOO_LONG_MS = XU.MINUTE*5;
 const tooLong = {};
 const cpuCount = os.cpus().length;
@@ -342,13 +351,17 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			if(!sampleTestData.files && results.output.files)
 				return this(undefined, "FAIL", `Expected to have no files but found ${XU.c.fg.white + results.output.files.length + XU.c.fg.orange} instead`);
-			
-		
-			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
-			if(results.output.files && expectedFiles.length!==results.output.files.length)
-				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
 
 			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
+
+			const allowExtraFiles = IGNORE_EXTRA_FILES[family] &&
+			   (IGNORE_EXTRA_FILES[family][formatid] || IGNORE_EXTRA_FILES[family]["*"]) &&
+			   (IGNORE_EXTRA_FILES[family][formatid] || IGNORE_EXTRA_FILES[family]["*"]).some(m => dexUtil.flexMatch(sampleSubFilePath.toLowerCase(), m));
+
+			const expectedFiles = sampleTestData.files ? Object.keys(sampleTestData.files) : [];
+			if(results.output.files && expectedFiles.length!==results.output.files.length && !allowExtraFiles)
+				return this(undefined, "FAIL", `Expected ${XU.c.fg.white + expectedFiles.length + XU.c.fg.orange} files, but got ${XU.c.fg.white + results.output.files.length} ${diffUtil.diff(expectedFiles, results.output.files)}`);
+
 			if(!(FORMATID_MATCH_IGNORE_FILES[family] &&
 				(FORMATID_MATCH_IGNORE_FILES[family][formatid] || FORMATID_MATCH_IGNORE_FILES[family]["*"]) &&
 				(FORMATID_MATCH_IGNORE_FILES[family][formatid] || FORMATID_MATCH_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(sampleSubFilePath.toLowerCase(), m))))
@@ -362,7 +375,12 @@ function testSampleFile(sampleFilePath, silent, cb)
 			(results.output.files || []).forEach(outSubFilePath =>
 			{
 				if(!sampleTestData.files.hasOwnProperty(outSubFilePath))
+				{
+					if(allowExtraFiles)
+						return;
+						
 					return this(undefined, "FAIL", `Unexpected file result: ${XU.c.fg.white + outSubFilePath} (Expected: ${expectedFiles.join(", ")})`);
+				}
 
 				const newOutStat = fs.statSync(path.join(outDirPath, outSubFilePath));
 

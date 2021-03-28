@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 608 file formats are supported by dexvert.
+The following 609 file formats are supported by dexvert.
 
 
 
@@ -621,7 +621,7 @@ other | Empty File |  |
 
 
 
-## Text (26)
+## Text (27)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -630,6 +630,7 @@ text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_l
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
 text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp | [15 sample files](https://telparia.com/fileFormatSamples/text/c/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
+text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-example) | .toc | 
 text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | [4 sample files](https://telparia.com/fileFormatSamples/text/csv/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)

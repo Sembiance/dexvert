@@ -72,4 +72,9 @@ Here is where you should rename any generic 'outfile' names to the original inpu
 Can return an object of run options to be passed into runUtil.run
 
 >>> wineOptions = (state, p, r) => ({timeout : XU.MINUTE})
-Can return an object of run options to be passed into util.wine.run()
+Can return an object of run options to be passed into util.wine.run():
+	>>> autoItScript	A l ist of AutoIt script commands to run to automate the wine program
+	>>> isolate			If set to true, won't use the shared wine enviroment started by runServers.sh, useful if the program can't have more tha one instance open at a time
+	>>> selfLock		If set to true, will ensure only 1 single instance of the program is ever run at the same time
+	>>> preWineCleanup(wineDirPath, cb)		A function called right before the wine environment is cleaned up, if you need to recover any particular files
+	

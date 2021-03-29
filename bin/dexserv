@@ -10,6 +10,7 @@ const XU = require("@sembiance/xu"),
 	fastify = require("fastify")({logger : {level : "warn"}});
 
 const WINE_RUN_ENV = {DISPLAY : ":0", WINEPREFIX : C.WINE_PREFIX_DIR_PATH};
+const LOCKS = {};
 
 let unoconvCP = null;
 let shuttingDown = false;
@@ -133,6 +134,23 @@ tiptoe(
 		XU.log`Registering routes...`;
 
 		fastify.get("/status", (request, reply) => reply.send({status : (unoconvCP ? C.DEXSERV_OK_RESPONSE : "error: unoconv server no longer running!")}));
+		fastify.get("/lock", (request, reply) =>
+		{
+			if(LOCKS[request.query.lockid])
+			{
+				reply.send({status : "busy"});
+			}
+			else
+			{
+				LOCKS[request.query.lockid] = true;
+				reply.send({status : "locked"});
+			}
+		});
+		fastify.get("/unlock", (request, reply) =>
+		{
+			delete LOCKS[request.query.lockid];
+			reply.send({status : "unlocked"});
+		});
 
 		fastify.ready(this);
 	},

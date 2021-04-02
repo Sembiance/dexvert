@@ -19,6 +19,7 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 	option("--alwaysBrute", "When brute forcing, always brute force, even if we have an exact id match.").
 	option("--outputState", "If set, will output the state as JSON").
 	option("--outputStateToFile [filePath]", "If set, will output the state as JSON to the given filePath").
+	option("--programFlag [program:flagName:flagValue...]", "If set, the given flagName and flagValue will be used for program").
 	option("--brutePrograms", "If unable to identify <inputFilePath> just run every available program on it").
 	option("--dontTransform", "If a file can't be converted, dexvert will try different transforms to convert it.").
 	option("--useTmpOutputDir", "If set, dexvert won't clobber the output dir").
@@ -35,7 +36,21 @@ const verbose = +(argv.verbose || 0);
 tiptoe(
 	function runProcess()
 	{
-		const processOptions = {verbose, useTmpOutputDir : argv.useTmpOutputDir, brute : argv.brute, keepGoing : argv.keepGoing, alwaysBrute : argv.alwaysBrute, brutePrograms : argv.brutePrograms, dontTransform : argv.dontTransform, midiFont : argv.midiFont};
+		const processOptions = {verbose, programFlags : {}};
+		["useTmpOutputDir", "brute", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform", "midiFont"].forEach(k =>
+		{
+			if(argv.hasOwnProperty(k))
+				processOptions[k] = argv[k];
+		});
+		
+		Array.force(argv.programFlag || []).forEach(flag =>
+		{
+			const flagProps = (flag.match(/(?<p>[^:]+):(?<k>[^:]+):(?<v>.+)/) || {groups : {}}).groups;
+			if(!processOptions.programFlags[flagProps.p])
+				processOptions.programFlags[flagProps.p] = {};
+			processOptions.programFlags[flagProps.p][flagProps.k] = flagProps.v;
+		});
+
 		dexvert.process(argv.args[0], argv.args[1], processOptions, this);
 	},
 	function printResults(state)

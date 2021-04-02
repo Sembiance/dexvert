@@ -170,6 +170,11 @@ const IGNORE_EXTRA_FILES =
 	}
 };
 
+const PROGRAM_FLAGS_FILES =
+{
+	"archive/iso/launch.bin" : ["bchunk:bchunkSwapByteOrder:true"]
+};
+
 const TOO_LONG_MS = XU.MINUTE*5;
 const tooLong = {};
 const cpuCount = os.cpus().length;
@@ -290,7 +295,15 @@ function testSampleFile(sampleFilePath, silent, cb)
 		},
 		function performProcess()
 		{
-			runUtil.run("dexvert", ["--outputStateToFile", resultsJSONFilePath, sampleFilePath, outDirPath], runUtil.SILENT, this);
+			const dexvertArgs = [];
+
+			Object.forEach(PROGRAM_FLAGS_FILES, (targetPath, programFlags) =>
+			{
+				if(sampleSubFilePath.toLowerCase().endsWith(targetPath))
+					dexvertArgs.push(...programFlags.flatMap(programFlag => (["--programFlag", programFlag])));
+			});
+
+			runUtil.run("dexvert", [...dexvertArgs, "--outputStateToFile", resultsJSONFilePath, sampleFilePath, outDirPath], runUtil.SILENT, this);
 		},
 		function loadResultsFile()
 		{

@@ -180,7 +180,7 @@ const tooLong = {};
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
 let testData = null;
-const startTime = Date.now();
+let startTime = null;
 
 tiptoe(
 	function performValidation()
@@ -190,6 +190,8 @@ tiptoe(
 	},
 	function findSampleFiles()
 	{
+		startTime = Date.now();
+
 		printUtil.majorHeader("Process Test", {prefix : "\n"});
 		XU.log`Loading test data and finding sample files...`;
 

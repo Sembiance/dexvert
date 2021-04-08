@@ -37,11 +37,12 @@ You can also just 'identify' what a file is, without processing it by running 'd
 ${dexidUsage}
 \`\`\`
 
-Some background servers need to be running in order for dexvert to operate correctly. You can run them in 'bin/runServers.sh'
-bin/dexserv runs unoconv and handles generating unique numbers for cd daemon mounting (which sadly, is a littly buggy)
-The tensorServer runs a python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
+A server needs to be run in the background before doing any transformations.
+This server will start a background unoconv daemon and also run several emulator instances of win2k, amiga, etc.
+It also runs a tensorServer python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
+Start this by kicking off: 'bin/runServers.sh'
 
-Use as a nodejs module:
+Use dexvert as a nodejs module:
 
 \`\`\`javascript
 const dexvert = require("dexvert");

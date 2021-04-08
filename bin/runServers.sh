@@ -12,7 +12,7 @@ then
 	DISPLAY=:0 dbus-launch --exit-with-x11
 fi
 
-./dexserv &
+../server/server.js &
 KIDPIDS+=($!)
 
 mkdir -p /mnt/ram/dexvert/__pycache__

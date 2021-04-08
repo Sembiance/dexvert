@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 121 file formats are unsupported by dexvert.
+The following 122 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -96,9 +96,10 @@ font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .
 
 
 
-## Image (7)
+## Image (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [9 sample files](https://telparia.com/fileFormatSamples/image/aolART/) - Graphics Workship can convert these files, but it's a crappy bloated commercial program that is unreliable under wine and doesnt offer command line conversion. I hope to find an AOL ART CLI converter in the future.
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.

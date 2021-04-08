@@ -41,8 +41,8 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 >>> bin = state => "binary_program"
 A function that returns the name of the binary to run
 
->>> wine = state => "binary_program"
-A function that returns the name of the binary to run with WINE. If the binary_program begins with "C:" then it will the binary located in the current wine prefix drive_c
+>>> quemu = state => "binary_program"
+A function that returns the location of the binary to run in QEMU. If it doesn't begin with /[A-Za-z]:/ then it assumes it lives in "c:\dexvert\"
 
 >>> steps = (state, p, r) => ([step1, step2, step3])
 A function that returns an array of steps to run serially
@@ -71,10 +71,15 @@ Here is where you should rename any generic 'outfile' names to the original inpu
 >>> runOptions = (state, p, r) => ({virtualX : true})
 Can return an object of run options to be passed into runUtil.run
 
->>> wineOptions = (state, p, r) => ({timeout : XU.MINUTE})
-Can return an object of run options to be passed into util.wine.run():
-	>>> autoItScript	A l ist of AutoIt script commands to run to automate the wine program
-	>>> isolate			If set to true, won't use the shared wine enviroment started by runServers.sh, useful if the program can't have more tha one instance open at a time
-	>>> selfLock		If set to true, will ensure only 1 single instance of the program is ever run at the same time
+>>> qemuOptions = (state, p, r) => ({timeout : XU.MINUTE})
+Can return an object of run options to be passed into util.qemu.run():
+	>>> osid			Which OS to use. Default: win2k
+	>>> cwd				Which directory to run in
+	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
+	>>> timeout			Maximum duration to allow it to run before stopping
+
+
+	
+	>>> autoItScript	A list of AutoIt script commands to run to automate the wine program
 	>>> preWineCleanup(wineDirPath, cb)		A function called right before the wine environment is cleaned up, if you need to recover any particular files
 	

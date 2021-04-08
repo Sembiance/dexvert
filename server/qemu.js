@@ -12,8 +12,9 @@ const OS =
 };
 
 const INSTANCES = {};
-const NUM_SERVERS = 1;
+const NUM_SERVERS = 2;
 const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
+const RUN_QUEUE = [];
 
 // Called to prepare the QEMU environment for a given OS and then start QEMU
 function startOS(osid, instanceid, cb)
@@ -99,6 +100,75 @@ function stopOS(osid, instanceid, cb)
 	);
 }
 
+function performRun(instance, runData)
+{
+	XU.log`qemu performing run for request ${runData.body} on ${runData.body.osid} #${instance.instanceid}`;
+	tiptoe(
+		function copyInFiles()
+		{
+			// copy inFilePaths to instance.dirPath/in
+			this();
+		},
+		function writeAutoItScript()
+		{
+			// We write to a temp file first, and then copy it over in one go to prevent the supervisor.au3 from picking up an incomplete file
+			//fs.writeFile(fileUtil.generateTempPath, in/go.au3)
+			this();
+		},
+		function moveAutoItScript()
+		{
+			//fileUtil.move(tmpGoAU3, in/go.au3
+			this();
+		},
+		function waitForFinish()
+		{
+			//wait for the in/go.au3 script to disappear, deleted by the guest os supervisor
+			this();
+		},
+		function copyResults()
+		{
+			// We use rsync here to preserve timestamps
+			// TODO: Make sure the rsync command is going to preserve timestamps
+			//runUtil.run(rsync, runData.outDirPath
+			this();
+		},
+		function cleanFiles()
+		{
+			//runUtil.run(rm -rf *, cwd : path.join(instance.dirPath, "out")
+			//runUtil.run(rm -rf *, cwd : path.join(instance.dirPath, "in")
+			setTimeout(this, XU.SECOND*10);
+		},
+		function finishRun(err)
+		{
+			instance.busy = false;
+
+			runData.reply.send(err ? `error ${err}` : "ok");
+		}
+	);
+}
+
+function checkRunQueue()
+{
+	if(RUN_QUEUE.length===0)
+		return setTimeout(checkRunQueue, 100);
+	
+	const runData = RUN_QUEUE.shift();
+	
+	const instance = Object.values(INSTANCES[runData.body?.osid]).find(o => o.ready && !o.busy);
+	if(!instance)
+	{
+		XU.log`qemu checkRunQueue failed to find an instance for ${runData.body}`;
+		runData.reply.send("no instance available");
+	}
+	else
+	{
+		instance.busy = true;
+		performRun(instance, runData);
+	}
+
+	setTimeout(checkRunQueue, 100);
+}
+
 // Starts up our background qemu servers
 exports.start = function start(cb)
 {
@@ -113,6 +183,11 @@ exports.start = function start(cb)
 			XU.log`QEMU starting instances...`;
 			Object.keys(OS).serialForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
 		},
+		function startCheckingQueue()
+		{
+			checkRunQueue();
+			this();
+		},
 		cb
 	);
 };
@@ -121,6 +196,7 @@ exports.start = function start(cb)
 exports.registerRoutes = function registerRoutes(fastify)
 {
 	fastify.get("/qemuReady", (request, reply) => readyOS(request.query.osid, Object.values(INSTANCES[request.query.osid]).find(v => v.ip===request.query.ip).instanceid, () => reply.send("ok")));
+	fastify.post("/qemuRun", (request, reply) => { RUN_QUEUE.push({body : request.body, request, reply}); return undefined; });
 };
 
 // Return true if everything is ok

@@ -11,7 +11,7 @@ InetGet("http://192.168.50.2:17735/qemuReady?osid=win2k&ip=" & @IPAddress1, "c:\
 While 1
 	waitForGo()
 
-	ShellExecuteWait("c:\Program Files\AutoIt3\AutoIt3.exe", $goFilePath, "", "open")
+	RunWait("c:\Program Files\AutoIt3\AutoIt3.exe" & " " & $goFilePath, "")
 	Sleep(100)
 	FileDelete($goFilePath)
 WEnd

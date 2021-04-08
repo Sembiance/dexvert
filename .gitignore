@@ -8,8 +8,6 @@ test/wip/
 music/midiFont/roland/*.sf2
 .vscode
 log/
-util/badPNGs
-util/goodPNGs
 __pycache__
 tensor/garbage
 transform/trimGarbage/trimGarbage

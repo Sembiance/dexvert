@@ -57,11 +57,11 @@ Can adjust the confidence manually up or down. WARNING, this is a last resort ha
 Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
 file it's converting well enough, often producing garbage or something when a file is mis-identified. 
 
->>> filesRequired : (state, otherFiles) => ["abc.xyz"]
+>>> filesRequired : (state, otherFiles, otherDirs) => ["abc.xyz"]
 Some formats require other sibling files to be present in order to convert correctly.
 Return an array of filenames that must exist in the input directory for this format to match.
 
->>> filesOptional : (state, otherFiles) => ["xyz.abc"]
+>>> filesOptional : (state, otherFiles, otherDirs) => ["xyz.abc"]
 Some formats can utilize other files in order to convert better (such as an expanded.pal palette file).
 Return an array of filenames that if they exist in the input directory should be symlinked to in the tmp CWD before converting
 

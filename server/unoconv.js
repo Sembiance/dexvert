@@ -11,7 +11,7 @@ function startUnoconvServer()
 	if(unoconvCP!==null)
 		return;
 
-	XU.log`Starting up unoconv server on port ${C.UNOCONV_PORT}`;
+	XU.log`UNOCONV server starting on port ${C.UNOCONV_PORT}`;
 
 	unoconvCP = runUtil.run("unoconv", ["-p", C.UNOCONV_PORT, "-l"], {silent : true, detached : true});
 	unoconvCP.on("exit", () =>
@@ -21,7 +21,7 @@ function startUnoconvServer()
 
 		unoconvCP = null;
 
-		XU.log`Unoconv server has exited, restarting...`;
+		XU.log`UNOCONV server has exited! Restarting...`;
 		startUnoconvServer();
 	});
 }

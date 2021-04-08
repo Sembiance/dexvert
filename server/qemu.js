@@ -12,7 +12,7 @@ const OS =
 };
 
 const INSTANCES = {};
-const NUM_SERVERS = 2;
+const NUM_SERVERS = 1;
 const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
 const RUN_QUEUE = [];
 
@@ -35,17 +35,21 @@ function startOS(osid, instanceid, cb)
 		},
 		function copyHDImage()
 		{
+			XU.log`QEMU ${osid} #${instanceid} copying hd.img...`;
 			fs.copyFile(path.join(__dirname, "..", "qemu", osid, "hd.img"), path.join(instance.dirPath, "hd.img"), this);
 		},
 		function runQEMU()
 		{
-			const qemuArgs = ["-nodefaults", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus", "-netdev"];
-			qemuArgs.push(`user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbPort}-${instance.ip}:445,id=nd1`);
+			const qemuArgs = ["-nodefaults", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
+			qemuArgs.push("-netdev", `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbPort}-${instance.ip}:445,id=nd1`);
 			qemuArgs.push("-device", "rtl8139,netdev=nd1");
 
-			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, {silent : true, detached : true, cwd : instance.dirPath, env : {DISPLAY : ":0"}});
+			// lostcrag: Can replace the 'virtualX : true' flag with 'env : {DISPLAY : ":0"}' to visibly see what's going on
+			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, {silent : true, virtualX : true, detached : true, cwd : instance.dirPath});
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
 			
+			XU.log`QEMU ${osid} #${instanceid} launched, waiting for it to boot...`;
+
 			setImmediate(this);
 		},
 		cb
@@ -85,7 +89,7 @@ function stopOS(osid, instanceid, cb)
 		function unmountInOut()
 		{
 			XU.log`QEMU stopping ${osid} #${instanceid}... Unmounting in/out...`;
-			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["umount", path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);
+			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);
 		},
 		function stopQEMU()
 		{
@@ -100,49 +104,67 @@ function stopOS(osid, instanceid, cb)
 	);
 }
 
-function performRun(instance, runData)
+function performRun(instance, {body, reply})
 {
-	XU.log`qemu performing run for request ${runData.body} on ${runData.body.osid} #${instance.instanceid}`;
+	XU.log`QEMU ${body.osid} #${instance.instanceid} performing run request: ${body}`;
+
+	const inDirPath = path.join(instance.dirPath, "in");
+	const outDirPath = path.join(instance.dirPath, "out");
+	const goAU3FilePath = path.join(inDirPath, "go.au3");
+	const tmpGoAU3FilePath = fileUtil.generateTempFilePath(undefined, ".au3");
+
+	function waitForGoAU3ToVanish(cb)
+	{
+		tiptoe(
+			function checkExistance()
+			{
+				fileUtil.exists(goAU3FilePath, this);
+			},
+			function rescheduleIfNeeded(err, exists)
+			{
+				if(exists)
+					setTimeout(() => waitForGoAU3ToVanish(cb), 100);
+				else
+					setImmediate(() => cb(err));
+			}
+		);
+	}
+
 	tiptoe(
 		function copyInFiles()
 		{
-			// copy inFilePaths to instance.dirPath/in
-			this();
+			// We use rsync here to handle both files and directories
+			(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")], runUtil.SILENT, subcb), this);
 		},
 		function writeAutoItScript()
 		{
 			// We write to a temp file first, and then copy it over in one go to prevent the supervisor.au3 from picking up an incomplete file
-			//fs.writeFile(fileUtil.generateTempPath, in/go.au3)
-			this();
+			fs.writeFile(tmpGoAU3FilePath, body.autoIt, XU.UTF8, this);
 		},
 		function moveAutoItScript()
 		{
-			//fileUtil.move(tmpGoAU3, in/go.au3
-			this();
+			fileUtil.move(tmpGoAU3FilePath, goAU3FilePath, this);
 		},
 		function waitForFinish()
 		{
-			//wait for the in/go.au3 script to disappear, deleted by the guest os supervisor
-			this();
+			waitForGoAU3ToVanish(this);
 		},
 		function copyResults()
 		{
 			// We use rsync here to preserve timestamps
-			// TODO: Make sure the rsync command is going to preserve timestamps
-			//runUtil.run(rsync, runData.outDirPath
-			this();
+			runUtil.run("rsync", ["-aL", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")], runUtil.SILENT, this);
 		},
 		function cleanFiles()
 		{
-			//runUtil.run(rm -rf *, cwd : path.join(instance.dirPath, "out")
-			//runUtil.run(rm -rf *, cwd : path.join(instance.dirPath, "in")
-			setTimeout(this, XU.SECOND*10);
+			fileUtil.emptyDir(inDirPath, this.parallel());
+			fileUtil.emptyDir(outDirPath, this.parallel());
 		},
 		function finishRun(err)
 		{
+			XU.log`QEMU ${body.osid} #${instance.instanceid} finished request`;
 			instance.busy = false;
 
-			runData.reply.send(err ? `error ${err}` : "ok");
+			reply.send(err ? `error ${err}` : "ok");
 		}
 	);
 }
@@ -152,18 +174,11 @@ function checkRunQueue()
 	if(RUN_QUEUE.length===0)
 		return setTimeout(checkRunQueue, 100);
 	
-	const runData = RUN_QUEUE.shift();
-	
-	const instance = Object.values(INSTANCES[runData.body?.osid]).find(o => o.ready && !o.busy);
-	if(!instance)
-	{
-		XU.log`qemu checkRunQueue failed to find an instance for ${runData.body}`;
-		runData.reply.send("no instance available");
-	}
-	else
+	const instance = Object.values(INSTANCES[RUN_QUEUE[0].body?.osid]).find(o => o.ready && !o.busy);
+	if(instance)
 	{
 		instance.busy = true;
-		performRun(instance, runData);
+		performRun(instance, RUN_QUEUE.shift());
 	}
 
 	setTimeout(checkRunQueue, 100);
@@ -202,7 +217,7 @@ exports.registerRoutes = function registerRoutes(fastify)
 // Return true if everything is ok
 exports.status = function status()
 {
-	return true;
+	return Object.values(INSTANCES).flatMap(o => Object.values(o)).every(instance => instance.cp && instance.ready);
 };
 
 // Stops our unoconv background server

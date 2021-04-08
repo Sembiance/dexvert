@@ -79,8 +79,8 @@ function validateFormat(format)
 		fallback         : [isBoolean],
 		priority         : [isNumber, oneOf(Object.values(C.PRIORITY))],
 		confidenceAdjust : [isFunction, hasLengthBetween(0, 3)],
-		filesRequired    : [isFunction, hasLengthBetween(0, 2)],
-		filesOptional    : [isFunction, hasLengthBetween(0, 2)],
+		filesRequired    : [isFunction, hasLengthBetween(0, 3)],
+		filesOptional    : [isFunction, hasLengthBetween(0, 3)],
 
 		ext            : [arrayOf([isNonEmptyString, isLowercase]), hasLengthBetween(1, Infinity)],
 		forbiddenExt   : [arrayOf(either([[isNonEmptyString], [isRegex]])), hasLengthBetween(1, Infinity)],
@@ -149,17 +149,21 @@ function validateProgram(program)
 
 	const programSchema =
 	{
-		meta        : [required, programMetaSchema],
-		bin         : [isFunction, hasLengthBetween(0, 2)],
-		steps       : [isFunction, hasLengthBetween(0, 3)],
-		wine        : [isFunction, hasLengthBetween(0, 2)],
-		preArgs     : [isFunction, hasLengthOf(4)],
-		args        : [required, isFunction, hasLengthOf(3)], 	// Technically it's 5+, but args with defaults don't count in .length
-		cwd         : [isFunction, hasLengthBetween(0, 3)],
-		pre         : [isFunction, hasLengthOf(4)],
-		post        : [isFunction, hasLengthOf(4)],
-		runOptions  : [isFunction, hasLengthBetween(0, 3)],
-		wineOptions : [isFunction, hasLengthBetween(0, 3)]
+		meta       : [required, programMetaSchema],
+		bin        : [isFunction, hasLengthBetween(0, 2)],
+		steps      : [isFunction, hasLengthBetween(0, 3)],
+		qemu       : [isFunction, hasLengthBetween(0, 2)],
+		preArgs    : [isFunction, hasLengthOf(4)],
+		args       : [required, isFunction, hasLengthOf(3)], 	// Technically it's 5+, but args with defaults don't count in .length
+		cwd        : [isFunction, hasLengthBetween(0, 3)],
+		pre        : [isFunction, hasLengthOf(4)],
+		post       : [isFunction, hasLengthOf(4)],
+		runOptions : [isFunction, hasLengthBetween(0, 3)],
+		qemuData   : [isFunction, hasLengthBetween(0, 3)],
+
+		// TODO: Remove these two
+		wine       : [isFunction, hasLengthBetween(0, 2)],
+		wineOptions   : [isFunction, hasLengthBetween(0, 3)]
 	};
 
 	// Program specific properties that are shared for easier re-use

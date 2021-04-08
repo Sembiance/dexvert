@@ -25,7 +25,7 @@ function stop()
 		},
 		function wait()
 		{
-			setTimeout(this, XU.SECOND*3);
+			setTimeout(this, XU.SECOND*2);
 		},
 		XU.FINISH
 	);
@@ -51,11 +51,6 @@ process.on("uncaughtException", err =>
 });
 
 tiptoe(
-	function startSubServers()
-	{
-		unoconv.start(this.parallel());
-		qemu.start(this.parallel());
-	},
 	function registerRoutes()
 	{
 		XU.log`Registering routes...`;
@@ -66,8 +61,16 @@ tiptoe(
 	},
 	function startServer()
 	{
+		XU.log`Routes registered:`;
 		console.log(fastify.printRoutes());
+
 		fastify.listen({port : C.DEXSERV_PORT, host : C.DEXSERV_HOST}, this);
+	},
+	function startSubServers()
+	{
+		XU.log`Starting sub-servers...`;
+		unoconv.start(this.parallel());
+		qemu.start(this.parallel());
 	},
 	function finish(err)
 	{
@@ -76,8 +79,6 @@ tiptoe(
 			console.error(err);
 			process.exit(1);
 		}
-
-		XU.log`Listening!`;
 	}
 );
 

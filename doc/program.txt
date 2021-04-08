@@ -71,15 +71,11 @@ Here is where you should rename any generic 'outfile' names to the original inpu
 >>> runOptions = (state, p, r) => ({virtualX : true})
 Can return an object of run options to be passed into runUtil.run
 
->>> qemuOptions = (state, p, r) => ({timeout : XU.MINUTE})
-Can return an object of run options to be passed into util.qemu.run():
+>>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
+Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> osid			Which OS to use. Default: win2k
 	>>> cwd				Which directory to run in
 	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
 	>>> timeout			Maximum duration to allow it to run before stopping
-
-
-	
-	>>> autoItScript	A list of AutoIt script commands to run to automate the wine program
-	>>> preWineCleanup(wineDirPath, cb)		A function called right before the wine environment is cleaned up, if you need to recover any particular files
+	>>> autoIt			A list of AutoIt script commands to run to automate the wine program
 	

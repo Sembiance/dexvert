@@ -95,7 +95,7 @@ document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.or
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [12 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
-document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [6 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
+document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [5 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [7 sample files](https://telparia.com/fileFormatSamples/document/pco/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)

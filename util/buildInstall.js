@@ -17,7 +17,8 @@ tiptoe(
 
 		// bin/runServers.js
 		programs.push({bin() { return "jq"; }, meta : {gentooPackage : "app-misc/jq", website : "https://stedolan.github.io/jq/"}});
-
+		programs.push({bin() { return "qemu-system-i386"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
+		
 		// hashUtil.hash
 		programs.push({bin() { return "b3sum"; }, meta : {gentooPackage : "app-crypt/blake3", website : "hhttps://github.com/BLAKE3-team/BLAKE3"}});
 
@@ -30,9 +31,6 @@ tiptoe(
 		
 		// unicodeUtils.fixDirEncodings
 		programs.push({bin() { return "convmv"; }, meta : {gentooPackage : "app-text/convmv", website : "https://www.j3e.de/linux/convmv/"}});
-
-		// lib/util/wine.js
-		programs.push({bin() { return "wine"; }, meta : {gentooPackage : "app-emulation/wine-vanilla", website : "https://www.winehq.org/"}});
 
 		// dosUtil
 		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});

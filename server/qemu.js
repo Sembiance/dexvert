@@ -7,7 +7,7 @@ const XU = require("@sembiance/xu"),
 	runUtil = require("@sembiance/xutil").run;
 
 // Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
-const DEBUG = false;
+const DEBUG = true;
 
 const OS =
 {
@@ -125,23 +125,6 @@ function performRun(instance, {body, reply})
 	const goAU3FilePath = path.join(inDirPath, "go.au3");
 	const tmpGoAU3FilePath = fileUtil.generateTempFilePath(undefined, ".au3");
 
-	function waitForGoAU3ToVanish(cb)
-	{
-		tiptoe(
-			function checkExistance()
-			{
-				fileUtil.exists(goAU3FilePath, this);
-			},
-			function rescheduleIfNeeded(err, exists)
-			{
-				if(exists)
-					setTimeout(() => waitForGoAU3ToVanish(cb), 100);
-				else
-					setImmediate(() => cb(err));
-			}
-		);
-	}
-
 	tiptoe(
 		function copyInFiles()
 		{
@@ -159,7 +142,7 @@ function performRun(instance, {body, reply})
 		},
 		function waitForFinish()
 		{
-			waitForGoAU3ToVanish(this);
+			XU.waitUntil(subcb => fileUtil.exists(goAU3FilePath, subcb), exists => !exists, this);
 		},
 		function copyResults()
 		{
@@ -235,14 +218,6 @@ exports.status = function status()
 // Stops our unoconv background server
 exports.stop = function stop(cb)
 {
-	function waitForNotReady(notreadycb)
-	{
-		if(Object.values(INSTANCES).flatMap(o => Object.values(o)).some(o => o.ready))
-			setTimeout(() => waitForNotReady(notreadycb), 100);
-		else
-			setImmediate(notreadycb);
-	}
-
 	tiptoe(
 		function killOSes()
 		{
@@ -250,7 +225,7 @@ exports.stop = function stop(cb)
 		},
 		function waitForKilling()
 		{
-			waitForNotReady(this);
+			XU.waitUntil(subcb => subcb(undefined, Object.values(INSTANCES).flatMap(o => Object.values(o)).some(o => o.ready)), stillReady => stillReady, this);
 		},
 		cb
 	);

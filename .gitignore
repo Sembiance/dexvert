@@ -25,3 +25,4 @@ qemu/win*/in/
 qemu/win*/out/
 qemu/win*/wip/
 qemu/win*/data/*.iso
+qemu/winxp/data/app/reaConverterPro-Setup.exe

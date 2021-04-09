@@ -20,19 +20,6 @@ python -X pycache_prefix=/mnt/ram/dexvert/__pycache__ ../tensor/tensorServer.py 
 
 KIDPIDS+=($!)
 
-for (( ; ; ))
-do
-	statusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
-	if [ "$statusResult" = '"a-ok"' ]
-	then
-		break;
-	fi
-
-	sleep 1
-done
-
-echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m"
-
 function clean_up
 {
 	echo "Signal caught. Killing children..."
@@ -48,5 +35,18 @@ function clean_up
 }
 
 trap clean_up SIGINT
+
+for (( ; ; ))
+do
+	statusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
+	if [ "$statusResult" = '"a-ok"' ]
+	then
+		break;
+	fi
+
+	sleep 1
+done
+
+echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m"
 
 wait

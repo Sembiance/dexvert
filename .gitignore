@@ -20,8 +20,8 @@ wine/IsoBuster/
 util/chatsubo.filter
 util/download.sh
 amiga/*.hdf
-qemu/win2k/hd.img
-qemu/win2k/wip/
-qemu/win2k/in/
-qemu/win2k/out/
-qemu/win2k/test/
+qemu/win*/hd.img
+qemu/win*/in/
+qemu/win*/out/
+qemu/win*/wip/
+qemu/win*/data/*.iso

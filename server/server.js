@@ -23,10 +23,6 @@ function stop()
 			unoconv.stop(this.parallel());
 			qemu.stop(this.parallel());
 		},
-		function wait()
-		{
-			setTimeout(this, XU.SECOND*2);
-		},
 		XU.FINISH
 	);
 }

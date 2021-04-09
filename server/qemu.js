@@ -6,13 +6,17 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run;
 
+// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
+const DEBUG = false;
+
 const OS =
 {
-	win2k : { arch : "i386", subnet : 50 }
+	win2k : { arch : "i386", subnet : 50, ram : "1G" },
+	winxp : { arch : "i386", subnet : 51, ram : "2G", cores : 2 }
 };
 
 const INSTANCES = {};
-const NUM_SERVERS = 1;
+const NUM_SERVERS = DEBUG ? 1 : 5;
 const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
 const RUN_QUEUE = [];
 
@@ -22,7 +26,7 @@ function startOS(osid, instanceid, cb)
 	if(!INSTANCES[osid])
 		INSTANCES[osid] = {};
 	
-	const instance = {instanceid, dirPath : path.join(INSTANCE_DIR_PATH, instanceid.toString()), ready : false, busy : false};
+	const instance = {instanceid, dirPath : path.join(INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
 	instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
 	instance.smbPort = +`${OS[osid].subnet}${20+instanceid}`;
 	INSTANCES[osid][instanceid] = instance;
@@ -40,12 +44,20 @@ function startOS(osid, instanceid, cb)
 		},
 		function runQEMU()
 		{
-			const qemuArgs = ["-nodefaults", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
+			const qemuArgs = ["-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=localtime", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
+			if(!DEBUG)
+				qemuArgs.push("-nographic");
+			qemuArgs.push("-m", `size=${OS[osid].ram}`);
+			if((OS[osid].cores || 1)>1)
+				qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
 			qemuArgs.push("-netdev", `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbPort}-${instance.ip}:445,id=nd1`);
 			qemuArgs.push("-device", "rtl8139,netdev=nd1");
 
-			// lostcrag: Can replace the 'virtualX : true' flag with 'env : {DISPLAY : ":0"}' to visibly see what's going on
-			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, {silent : true, virtualX : true, detached : true, cwd : instance.dirPath});
+			const qemuRunOptions = {silent : true, detached : true, cwd : instance.dirPath};
+			if(DEBUG)
+				qemuRunOptions.env = {DISPLAY : ":0"};
+
+			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, qemuRunOptions);
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
 			
 			XU.log`QEMU ${osid} #${instanceid} launched, waiting for it to boot...`;
@@ -196,7 +208,7 @@ exports.start = function start(cb)
 		function startOSInstances()
 		{
 			XU.log`QEMU starting instances...`;
-			Object.keys(OS).serialForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
+			Object.keys(OS).parallelForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
 		},
 		function startCheckingQueue()
 		{
@@ -223,5 +235,23 @@ exports.status = function status()
 // Stops our unoconv background server
 exports.stop = function stop(cb)
 {
-	Object.keys(OS).serialForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => stopOS(osid, instanceid, instancecb), subcb), cb);
+	function waitForNotReady(notreadycb)
+	{
+		if(Object.values(INSTANCES).flatMap(o => Object.values(o)).some(o => o.ready))
+			setTimeout(() => waitForNotReady(notreadycb), 100);
+		else
+			setImmediate(notreadycb);
+	}
+
+	tiptoe(
+		function killOSes()
+		{
+			Object.keys(OS).serialForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => stopOS(osid, instanceid, instancecb), subcb), this);
+		},
+		function waitForKilling()
+		{
+			waitForNotReady(this);
+		},
+		cb
+	);
 };

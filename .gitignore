@@ -1,28 +1,32 @@
-.eslintrc.js
-node_modules/
-pnpm-lock.yaml
+# Project and dot files
 dexvert.code-workspace
+.eslintrc.js
+.vscode
+pnpm-lock.yaml
+node_modules/
+
+# Too big
+music/midiFont/roland/*.sf2
 sandbox/
 test/sample/
-test/wip/
-music/midiFont/roland/*.sf2
-.vscode
-log/
-__pycache__
-tensor/garbage
+tensor/garbage/new/
+tensor/garbage/train/
+
+# Compiled binaries
 transform/trimGarbage/trimGarbage
 transform/stripGarbage/stripGarbage
 dexmagic/dexmagic
-amiga/FS-UAE/
-wine/env.tar
-wine/reaConverter/
-wine/IsoBuster/
+
+# Dynamic
+log/
+
+# Specific to my home environment
 util/chatsubo.filter
 util/download.sh
+
+# Contains commercial software
+amiga/FS-UAE/
 amiga/*.hdf
 qemu/win*/hd.img
-qemu/win*/in/
-qemu/win*/out/
-qemu/win*/wip/
 qemu/win*/data/*.iso
 qemu/winxp/data/app/reaConverterPro-Setup.exe

@@ -80,8 +80,8 @@ File systems  --->
 		-*- NLS UTF-8
 \`\`\`
 
-## Wine/Amiga
-Some win32 wine programs and amiga files are not included due to being commercial software that is still available.
+## Windows/Amiga
+Some windows and amiga files are not included due to being commercial software that is still available. This includes the HD images used by the QEMU layer. Sorry.
 
 ## Programs
 Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.

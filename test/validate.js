@@ -159,11 +159,7 @@ function validateProgram(program)
 		pre        : [isFunction, hasLengthOf(4)],
 		post       : [isFunction, hasLengthOf(4)],
 		runOptions : [isFunction, hasLengthBetween(0, 3)],
-		qemuData   : [isFunction, hasLengthBetween(0, 3)],
-
-		// TODO: Remove these two
-		wine       : [isFunction, hasLengthBetween(0, 2)],
-		wineOptions   : [isFunction, hasLengthBetween(0, 3)]
+		qemuData   : [isFunction, hasLengthBetween(0, 3)]
 	};
 
 	// Program specific properties that are shared for easier re-use

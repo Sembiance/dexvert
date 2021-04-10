@@ -5,37 +5,18 @@ const XU = require("@sembiance/xu"),
 	util = require("util"),
 	tiptoe = require("tiptoe"),
 	testUtil = require("../test/testUtil.js"),
+	imageUtil = require("@sembiance/xutil").image,
 	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs");
 
-
-process.exit(0);
-
 tiptoe(
-	function findSampleFiles()
+	function getImageInfo()
 	{
-		testUtil.findSupportedSampleFilePaths(this);
+		imageUtil.getInfo("/home/sembiance/tmp/corvette.svg", {failFast : true}, this);
 	},
-	function wip(sampleFilePaths)
+	function wip(imgInfo)
 	{
-		const types = {};
-		sampleFilePaths.forEach(sampleFilePath =>
-		{
-			const subFilePath = path.relative("/mnt/compendium/DevLab/dexvert/test/sample", sampleFilePath);
-			const formatid = path.dirname(subFilePath);
-			if(!types[formatid])
-				types[formatid] = [];
-			types[formatid].push(path.basename(subFilePath));
-		});
-
-		const haveEnough = [];
-		Object.forEach(types, (formatid, filePaths) =>
-		{
-			if(filePaths.length>=3)
-				haveEnough.push(formatid);
-		});
-
-		console.log(util.inspect(haveEnough, {depth : Infinity, maxArrayLength : Infinity}));
+		XU.log`imgInfo ${imgInfo}`;
 
 		this();
 	},

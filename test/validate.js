@@ -70,7 +70,7 @@ function validateFormat(format)
 		formatid : [isNonEmptyString],
 		hljsLang : [isNonEmptyString],
 
-		bruteUnsafe      : [isBoolean],
+		unsafe      : [isBoolean],
 		unsupported      : [isBoolean],
 		highConfidence   : [isBoolean],
 		keepFilename     : [isBoolean],
@@ -137,7 +137,7 @@ function validateProgram(program)
 		notes          : [isNonEmptyString],
 
 		informational  : [isBoolean],
-		bruteUnsafe    : [isBoolean],
+		unsafe    : [isBoolean],
 
 		gentooOverlay  : [isNonEmptyString],
 		gentooPackage  : [either([[isNonEmptyString], [arrayOf([isNonEmptyString])]])],

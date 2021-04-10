@@ -25,7 +25,7 @@ https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md
 
 
 >>> ******** Properties
->>> bruteUnsafe : true
+>>> unsafe : true
 Set to true if this format isn't safe to be brute forced.
 
 >>> unsupported : true

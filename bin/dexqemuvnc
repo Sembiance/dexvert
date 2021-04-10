@@ -1,0 +1,5 @@
+#!/bin/bash
+
+localPort=$(((RANDOM%16000+15000)))
+ssh -f -o ExitOnForwardFailure=yes -L 127.0.0.1:"$localPort":127.0.0.1:"$1" chatsubo sleep 5
+vncviewer 127.0.0.1:"$localPort"

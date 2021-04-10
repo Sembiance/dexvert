@@ -1,12 +1,14 @@
 #!/bin/bash
 
+startAt=$(date +"%s")
+
 mkdir -p /tmp/garbageDetected
 
 KIDPIDS=()
 
 if [ "$DISPLAY" != ":0" ]
 then
-	Xvfb :0 -extension GLX -listen tcp -nocursor -ac -screen 0 1200x800x24 &
+	Xvfb :0 -extension GLX -nolisten tcp -nocursor -ac -screen 0 1200x800x24 &
 	KIDPIDS+=($!)
 	sleep 5
 	DISPLAY=:0 dbus-launch --exit-with-x11
@@ -38,15 +40,19 @@ trap clean_up SIGINT
 
 for (( ; ; ))
 do
-	statusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
-	if [ "$statusResult" = '"a-ok"' ]
+	dexservStatusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
+	tensorStatusResult=$(curl --silent "http://localhost:17736/status" | jq ".status")
+	if [ "$dexservStatusResult" = '"a-ok"' ] && [ "$tensorStatusResult" = '"a-ok"' ]
 	then
 		break;
 	fi
 
-	sleep 1
+	sleep 0.2
 done
 
-echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m"
+endAt=$(date +"%s")
+startupTimeDuration=$((endAt - startAt))
+
+echo -e "\033[1;32mSERVERS ARE RUNNING!\033[0m (took $startupTimeDuration seconds)"
 
 wait

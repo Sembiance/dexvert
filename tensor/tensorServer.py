@@ -9,7 +9,10 @@ app = Flask(__name__)
 
 logging.getLogger('werkzeug').setLevel(logging.WARNING)
 
+print("tensorServer: Loading model...")
 modelGarbage = TensorModel(os.path.realpath(os.path.join(os.path.dirname(__file__), "garbage", "model")))
+
+print("tensorServer: Defining flask routes...")
 
 @app.route("/status", methods=["GET"])
 def status():
@@ -29,4 +32,5 @@ def classifyGarbage():
 	#print("Classifying [garbage] image [" + request.json["imagePath"] + "] with dimensions " + str(width) + "x" + str(height))
 	return jsonify(modelGarbage.predict(image))
 
+print("tensorServer: Running flask server...")
 app.run(host="127.0.0.1", port=17736, threaded=True)

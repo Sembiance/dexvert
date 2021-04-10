@@ -17,7 +17,11 @@ tiptoe(
 
 		// bin/runServers.js
 		programs.push({bin() { return "jq"; }, meta : {gentooPackage : "app-misc/jq", website : "https://stedolan.github.io/jq/"}});
+
+		// server/qemu.js
 		programs.push({bin() { return "qemu-system-i386"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
+		programs.push({bin() { return "mount.cifs"; }, meta : {gentooPackage : "net-fs/cifs-utils", website : "https://wiki.samba.org/index.php/LinuxCIFS_utils", gentooUseFlags : "caps creds pam"}});
+		programs.push({bin() { return "rsync"; }, meta : {gentooPackage : "net-misc/rsync", website : "https://rsync.samba.org/", gentooUseFlags : "acl iconv ipv6 ssl xattr zstd"}});
 		
 		// hashUtil.hash
 		programs.push({bin() { return "b3sum"; }, meta : {gentooPackage : "app-crypt/blake3", website : "hhttps://github.com/BLAKE3-team/BLAKE3"}});
@@ -49,7 +53,11 @@ tiptoe(
 
 		multiProgs.forEach(multiProg => programs.push(...multiProg.meta.gentooPackage.map((subGentooPackage, i) => ({ bin() { return multiProg.meta.bin[i]; }, meta : {kernel : multiProg.meta.kernel || undefined, gentooPackage : subGentooPackage, website : multiProg.meta.website[i] || ""} }))));
 
-		fs.writeFile(path.join(__dirname, "..", "INSTALL.md"), `# Install
+		fs.writeFile(path.join(__dirname, "..", "INSTALL.md"), `# WARNING
+Over ${programs.length} programs are required, including commercial programs and operating systems.
+This isn't something you can easily get up and running in an afternoon.
+		
+# Install
 \`npm install dexvert -g\`
 		
 # Requirements

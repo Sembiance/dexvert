@@ -113,7 +113,7 @@ Family | Name | Extensions | Notes
 executable | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_tokenized_file) | .gfa .bas | [13 sample files](https://telparia.com/fileFormatSamples/executable/gfaBASICAtari/) - The gfalist program only supports decompiling tokenized files of version 3 and higher.
 executable | Microsoft Windows Dynmic Link Library | .dll | [7 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
-executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/) - I could convert these to a video by running them with `wine <file.scr> /s` however that's not very safe and I don't feel like bothering to sandbox wine.
+executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
 
 
 
@@ -161,7 +161,7 @@ image | [AMOS Picture Bank](http://fileformats.archiveteam.org/wiki/AMOS_Picture
 image | AMOS Picture Packer | .bin | [1 sample file](https://telparia.com/fileFormatSamples/image/amosPicturePacker/)
 image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | [10 sample files](https://telparia.com/fileFormatSamples/image/amosSprites/) - Sometimes the spite frames output are all the same size and make a nice animated image (abydosconvert does this with webp output) However often this format contains multiple frames of different sizes and the 'positioning' and timing information for animation is not processed So we also run deark which just outputs all the sprite frames individually
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [4 sample files](https://telparia.com/fileFormatSamples/image/amstradMode5/)
-image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [10 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
+image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [7 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [4 sample files](https://telparia.com/fileFormatSamples/image/a4r/)
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice | [25 sample files](https://telparia.com/fileFormatSamples/image/ans/)
 image | Apple II High Res | .hgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2HighRes/)
@@ -224,7 +224,7 @@ image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquas
 image | [Commodore 64 VIC](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .vic | [12 sample files](https://telparia.com/fileFormatSamples/image/vic/)
 image | [CompuServe RLE](http://fileformats.archiveteam.org/wiki/CompuServe_RLE) | .rle | [12 sample files](https://telparia.com/fileFormatSamples/image/compuServeRLE/) - RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | [2 sample files](https://telparia.com/fileFormatSamples/image/cals/)
-image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [7 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - allprims.cgm and input.cgm both fail to convert. I haven't located another CGM converter yet.
+image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [7 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - Test file input.cgm fails to convert. I haven't located another CGM converter yet.
 image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .ce1 .ce2 .ce3 | [3 sample files](https://telparia.com/fileFormatSamples/image/computerEyes/)
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [1 sample file](https://telparia.com/fileFormatSamples/image/cmx/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [5 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
@@ -348,7 +348,7 @@ image | [Interlace Hires Editor](http://fileformats.archiveteam.org/wiki/Interla
 image | [Interpaint](http://fileformats.archiveteam.org/wiki/Interpaint) | .iph .ipt .lre .hre | [5 sample files](https://telparia.com/fileFormatSamples/image/interpaint/)
 image | [InterPainter](http://fileformats.archiveteam.org/wiki/InterPainter) | .inp .ins .int | [41 sample files](https://telparia.com/fileFormatSamples/image/interPainter/)
 image | [Jet Graphics Planner](http://fileformats.archiveteam.org/wiki/Jet_Graphics_Planner) | .jgp | [3 sample files](https://telparia.com/fileFormatSamples/image/jgp/)
-image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [6 sample files](https://telparia.com/fileFormatSamples/image/jbig/) - Sample file mx.jbg converts to garbage, not sure why. reaConverter produces the same output.
+image | [Joint Bi-Level Image experts Group](http://fileformats.archiveteam.org/wiki/JBIG) | .jbg .jbig .bie | [6 sample files](https://telparia.com/fileFormatSamples/image/jbig/) - Sample file mx.jbg converts to garbage, not sure why.
 image | [Joint Photographic Experts Group Image](http://fileformats.archiveteam.org/wiki/JPG) | .jpg .jpeg .jpe .jfif | [11 sample files](https://telparia.com/fileFormatSamples/image/jpg/)
 image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | [5 sample files](https://telparia.com/fileFormatSamples/image/jpeg2000/)
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | [13 sample files](https://telparia.com/fileFormatSamples/image/jng/)

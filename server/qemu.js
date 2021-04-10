@@ -1,24 +1,27 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
+	os = require("os"),
 	fs = require("fs"),
 	tiptoe = require("tiptoe"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run;
 
 // Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
-const DEBUG = true;
-
+const DEBUG = false;
+const BASE_SUBNET = 50;
 const OS =
 {
-	win2k : { arch : "i386", subnet : 50, ram : "1G" },
-	winxp : { arch : "i386", subnet : 51, ram : "2G", cores : 2 }
+	win2k : { arch : "i386", subnet : BASE_SUBNET, ram : "1G" },
+	winxp : { arch : "i386", subnet : BASE_SUBNET + 1, ram : "2G", cores : 2 }
 };
 
 const INSTANCES = {};
-const NUM_SERVERS = DEBUG ? 1 : 5;
+const NUM_SERVERS = DEBUG ? 1 : (os.hostname()==="lostcrag" ? 2 : 5);
 const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
 const RUN_QUEUE = [];
+const QEMU_DIR_PATH = path.join(__dirname, "..", "qemu");
+let serversLaunched = false;
 
 // Called to prepare the QEMU environment for a given OS and then start QEMU
 function startOS(osid, instanceid, cb)
@@ -29,6 +32,7 @@ function startOS(osid, instanceid, cb)
 	const instance = {instanceid, dirPath : path.join(INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
 	instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
 	instance.smbPort = +`${OS[osid].subnet}${20+instanceid}`;
+	instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
 	INSTANCES[osid][instanceid] = instance;
 		
 	tiptoe(
@@ -39,14 +43,13 @@ function startOS(osid, instanceid, cb)
 		},
 		function copyHDImage()
 		{
-			XU.log`QEMU ${osid} #${instanceid} copying hd.img...`;
-			fs.copyFile(path.join(__dirname, "..", "qemu", osid, "hd.img"), path.join(instance.dirPath, "hd.img"), this);
+			fs.copyFile(path.join(INSTANCE_DIR_PATH, `${osid}.img`), path.join(instance.dirPath, "hd.img"), this);
 		},
 		function runQEMU()
 		{
 			const qemuArgs = ["-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=localtime", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
 			if(!DEBUG)
-				qemuArgs.push("-nographic");
+				qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
 			qemuArgs.push("-m", `size=${OS[osid].ram}`);
 			if((OS[osid].cores || 1)>1)
 				qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
@@ -60,7 +63,7 @@ function startOS(osid, instanceid, cb)
 			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, qemuRunOptions);
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
 			
-			XU.log`QEMU ${osid} #${instanceid} launched, waiting for it to boot...`;
+			XU.log`QEMU ${osid} #${instanceid} launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
 
 			setImmediate(this);
 		},
@@ -118,7 +121,7 @@ function stopOS(osid, instanceid, cb)
 
 function performRun(instance, {body, reply})
 {
-	XU.log`QEMU ${body.osid} #${instance.instanceid} performing run request: ${body}`;
+	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${body}`;
 
 	const inDirPath = path.join(instance.dirPath, "in");
 	const outDirPath = path.join(instance.dirPath, "out");
@@ -183,18 +186,37 @@ function checkRunQueue()
 exports.start = function start(cb)
 {
 	tiptoe(
+		function unmountDeadMounts()
+		{
+			runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), [], runUtil.SILENT, this);
+		},
 		function preClean()
 		{
 			XU.log`QEMU pre-cleaning ${INSTANCE_DIR_PATH}...`;
 			fileUtil.unlink(INSTANCE_DIR_PATH, this);
 		},
+		function mkInstanceDir()
+		{
+			fs.mkdir(INSTANCE_DIR_PATH, {recursive : true}, this);
+		},
+		function preCopyHDImages()
+		{
+			XU.log`QEMU Copying hd img files...`;
+			Object.keys(OS).parallelForEach((osid, subcb) => fs.copyFile(path.join(QEMU_DIR_PATH, osid, "hd.img"), path.join(INSTANCE_DIR_PATH, `${osid}.img`), subcb), this);
+		},
 		function startOSInstances()
 		{
 			XU.log`QEMU starting instances...`;
-			Object.keys(OS).parallelForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
+			Object.keys(OS).parallelForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).parallelForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
+		},
+		function cleanupHDImages()
+		{
+			Object.keys(OS).parallelForEach((osid, subcb) => fileUtil.unlink(path.join(INSTANCE_DIR_PATH, `${osid}.img`), subcb), this);
 		},
 		function startCheckingQueue()
 		{
+			serversLaunched = true;
+
 			checkRunQueue();
 			this();
 		},
@@ -212,7 +234,7 @@ exports.registerRoutes = function registerRoutes(fastify)
 // Return true if everything is ok
 exports.status = function status()
 {
-	return Object.values(INSTANCES).flatMap(o => Object.values(o)).every(instance => instance.cp && instance.ready);
+	return serversLaunched && Object.values(INSTANCES).flatMap(o => Object.values(o)).every(instance => instance.cp && instance.ready);
 };
 
 // Stops our unoconv background server

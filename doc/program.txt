@@ -12,7 +12,7 @@ Additional notes about this program
 
 
 >>> ******** Properties
->>> bruteUnsafe : true
+>>> unsafe : true
 Set to true if this program isn't safe to be brute forced.
 
 >>> informational : true
@@ -77,5 +77,5 @@ Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> cwd				Which directory to run in
 	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
 	>>> timeout			Maximum duration to allow it to run before stopping
-	>>> autoIt			A list of AutoIt script commands to run to automate the wine program
+	>>> autoIt			A list of AutoIt script commands to run to automate the windows program
 	

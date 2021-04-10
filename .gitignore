@@ -20,13 +20,8 @@ dexmagic/dexmagic
 # Dynamic
 log/
 
-# Specific to my home environment
-util/chatsubo.filter
-util/download.sh
-
 # Contains commercial software
 amiga/FS-UAE/
 amiga/*.hdf
 qemu/win*/hd.img
 qemu/win*/data/*.iso
-qemu/winxp/data/app/reaConverterPro-Setup.exe

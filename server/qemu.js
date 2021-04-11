@@ -10,6 +10,13 @@ const XU = require("@sembiance/xu"),
 // Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const DEBUG = false;
 const BASE_SUBNET = 50;
+const HOSTS =
+{
+	lostcrag      : { numServers : 2 },
+	crystalsummit : { numServers : 1 },
+	chatsubo      : { numServers : 5 }
+};
+
 const OS =
 {
 	win2k : { arch : "i386", subnet : BASE_SUBNET, ram : "1G" },
@@ -17,7 +24,7 @@ const OS =
 };
 
 const INSTANCES = {};
-const NUM_SERVERS = DEBUG ? 1 : (os.hostname()==="lostcrag" ? 2 : 5);
+const NUM_SERVERS = DEBUG ? 1 : HOSTS[os.hostname()]?.numServers || 1;
 const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(__dirname, "..", "qemu");

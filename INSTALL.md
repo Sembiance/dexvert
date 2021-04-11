@@ -1,5 +1,5 @@
 # WARNING
-Over 124 programs are required, including commercial programs and operating systems.
+Over 125 programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install
@@ -8,37 +8,97 @@ This isn't something you can easily get up and running in an afternoon.
 # Requirements
 
 ## Kernel
+Several kernel options need to enabled to support QEMU and mounting various fileystems dexvert may encounter.
+
 ```
-File systems  --->
-	  Processor type and features --->
-	    [*] NUMA Memory Allocation and Scheduler Support
-      CD-ROM/DVD Filesystems  --->
-	    <*> ISO 9660 CDROM file system support
-	    [*]   Microsoft Joliet CDROM extensions
-	    [*]   Transparent decompression extension
-	    <*>   UDF file system support
-	  DOS/FAT/EXFAT/NT Filesystems  --->
-	    <*> MSDOS fs support
-	    <*> VFAT (Windows-95) fs support
-	    (iso8859-1) Default iocharset for FAT
-	    <*> exFAT filesystem support
-  [*] Miscellaneous filesystems  --->
-        <*> Amiga FFS file system support
-		<*> Apple Macintosh file system support
-		<*> Apple Extended HFS file system support
-  -*- Native language support  --->
-        <*> Codepage 437 (United States, Canada)
-		<*> ASCII (United States)
-		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
-		-*- NLS UTF-8
+    General setup  --->
+      <*> Control Group support  --->
+            [*] Memory controller
+            [*] Freezer controller
+            [*] Cpuset Controller
+            [*]   Include legacy /proc/<pid>/cpuset file
+            [*] Simple CPU accounting controller
+
+    Processor type and features --->
+      [*] NUMA Memory Allocation and Scheduler Support
+
+[*] Virtualization  --->
+      <*> Kernel-based Virtual Machine (KVM) support
+	  # Choose either Intel or AMD
+      <*>   KVM for Intel (and compatible) processors support
+	  <*>   KVM for AMD processors support
+
+[*] Networking support  --->
+    Networking options  --->
+	  <*> 802.1d Ethernet bridging
+	  [*]   IGMP/MLD snooping
+
+    Device Drivers  --->
+      [*] PCI support  --->
+	        [*] Message Signaled Interrupts (MSI and MSI-X)
+      [*] Network device support  --->
+            [*]   Network core driver support
+            <*>     MAC-VLAN support
+            <*>       MAC-VLAN based tap driver
+            <*>   Universal TUN/TAP device driver support
+      [*] VHOST drivers  --->
+            [*] Host kernel accelerator for virtio net
+            [*] Cross-endian support for vhost
+      [*] IOMMU Hardware Support  --->
+	        # Choose either Intel or AMD
+			[*] AMD IOMMU support
+			<*>   AMD IOMMU Version 2 driver
+            [*] Support for Intel IOMMU using DMA Remapping Devices
+            [*]   Support for Shared Virtual Memory with Intel IOMMU
+            [*]   Enable Intel DMA Remapping Devices by default
+
+    File systems  --->
+      <*> The Extended 4 (ext4) filesystem
+	  [*]   Ext4 Security Labels
+          CD-ROM/DVD Filesystems  --->
+    	    <*> ISO 9660 CDROM file system support
+    	    [*]   Microsoft Joliet CDROM extensions
+    	    [*]   Transparent decompression extension
+    	    <*>   UDF file system support
+    	  DOS/FAT/EXFAT/NT Filesystems  --->
+    	    <*> MSDOS fs support
+    	    <*> VFAT (Windows-95) fs support
+    	    (iso8859-1) Default iocharset for FAT
+    	    <*> exFAT filesystem support
+    		<*> NTFS file system support
+      [*] Miscellaneous filesystems  --->
+            <*> ADFS file system support
+            <*> Amiga FFS file system support
+    		<*> Apple Macintosh file system support
+    		<*> Apple Extended HFS file system support
+    		<*> BeOS file system (BeFS) support (read only)
+    		<*> EFS file system support (read only)
+    		<*> Minix file system support
+    		<*> OS/2 HPFS file system support
+    		<*> ROM file system support
+    		<*> System V/Xenix/V7/Coherent file system support
+    		<*> UFS file system support
+    		<*> EROFS file system support
+      [*] Network File Systems  --->
+    	    <*> SMB3 and CIFS support (advanced network filesystem)
+    		[*]   Support legacy servers which use less secure dialects
+    		[*]     Support legacy servers which use weaker LANMAN security
+    		[*]   CIFS extended attributes
+      -*- Native language support  --->
+            <*> Codepage 437 (United States, Canada)
+    		<*> ASCII (United States)
+    		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
+    		-*- NLS UTF-8
+
+    Kernel hacking  --->
+          Generic Kernel Debugging Instruments  --->
+            [*] Debug Filesystem
 ```
 
 ## Windows/Amiga
 Some windows and amiga files are not included due to being commercial software that is still available. This includes the HD images used by the QEMU layer. Sorry.
 
 ## Programs
-Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
-
 Package | Program | Overlay
 ------- | ------- | -------
 app-admin/sudo | [sudo](https://www.sudo.ws/) | 
@@ -163,10 +223,22 @@ sys-fs/hfsutils | [*](https://www.mars.org/home/rob/proj/hfs/) |
 sys-process/parallel | [parallel](https://www.gnu.org/software/parallel) | 
 x11-apps/bdftopcf | [bdftopcf](https://gitlab.freedesktop.org/xorg/app/bdftopcf) | 
 x11-base/xorg-server | [Xvfb](https://www.x.org/wiki/) | 
+x11-drivers/xf86-video-qxl | [](https://gitlab.freedesktop.org/xorg/driver/xf86-video-qxl) | 
 x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) | 
 x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) | 
 
-Gentoo users can install all the above required programs with this single command:
+## Gentoo
+Gentoo users can more easily install all the above by adding the [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay).
+
+For proper CUDA support, you'll want to look up your [NVIDIA card here](https://developer.nvidia.com/cuda-gpus#compute)
+Then add to your /etc/portage/make.conf these 2 lines:
+TF_CUDA_COMPUTE_CAPABILITIES=7.0
+USE="$USE cuda"
+
+Certain Gentoo USE flags may also be required for proper feature support.
+
+You should be able to install everything you need on Gentoo with this one command:
+
 ```
-USE="a52 acl aio alsa amr boost bzip2 cairo caps cddb cdio cdr creds cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio fdt ffmpeg filecaps flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec ncurses network nls ogg opengl openmp openssl opus osdmenu oss pam pch pdf perl pin-upstream-blobs png postproc postscript python qt5 readline realtime rle rtc run-exes sdl sdlsound seccomp shm slirp smith sndfile spice split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind usb usbredir utils v4l vaapi vcd vdpau vhost-net visio vnc vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xv xvfb xvid zlib zstd" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/cabextract app-arch/cpcxfs app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-arch/zoo app-cdr/bchunk app-cdr/cdrdao app-crypt/blake3 app-emulation/qemu app-emulation/uade app-emulation/vice app-emulation/wine-vanilla app-misc/jq app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-lang/gfalist dev-libs/libcdio dev-python/chardet dev-python/flask dev-python/pillow dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/dcraw media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/pcdtojpeg media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/view64 media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim net-fs/cifs-utils net-misc/rsync sci-libs/tensorflow sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/fuseiso sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl aio alsa amr boost bzip2 cairo caps cddb cdio cdr creds cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio fdt ffmpeg filecaps flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec ncurses network nls ogg opengl openmp openssl opus osdmenu oss pam pch pdf perl pin-upstream-blobs png postproc postscript python qt5 readline realtime rle rtc run-exes sdl sdlsound seccomp shm slirp smith sndfile spice split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind usb usbredir utils v4l vaapi vcd vdpau vhost-net visio vnc vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xspice xv xvfb xvid zlib zstd" emerge app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/cabextract app-arch/cpcxfs app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/gameextractor app-arch/gzip app-arch/helpdeco app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-arch/zoo app-cdr/bchunk app-cdr/cdrdao app-crypt/blake3 app-emulation/qemu app-emulation/uade app-emulation/vice app-emulation/wine-vanilla app-misc/jq app-office/scribus app-office/unoconv app-shells/bash app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-lang/gfalist dev-libs/libcdio dev-python/chardet dev-python/flask dev-python/pillow dev-util/stackimport games-emulation/dosbox media-gfx/abydosconvert media-gfx/ansilove media-gfx/dcraw media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/pcdtojpeg media-gfx/recoil media-gfx/seq2mp4 media-gfx/transfig media-gfx/uniconvertor media-gfx/view64 media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim net-fs/cifs-utils net-misc/rsync sci-libs/tensorflow sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-fs/fuseiso sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-drivers/xf86-video-qxl x11-misc/hsetroot x11-misc/xdotool
 ```

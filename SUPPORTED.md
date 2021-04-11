@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 611 file formats are supported by dexvert.
+The following 612 file formats are supported by dexvert.
 
 
 
@@ -144,7 +144,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (437)
+## Image (438)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | 3D Construction Kit | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -164,6 +164,7 @@ image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [4 sample files](https://telparia
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [7 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [4 sample files](https://telparia.com/fileFormatSamples/image/a4r/)
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice | [25 sample files](https://telparia.com/fileFormatSamples/image/ans/)
+image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [9 sample files](https://telparia.com/fileFormatSamples/image/aolART/)
 image | Apple II High Res | .hgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2HighRes/)
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/)
 image | Apple IIe Double High-Resolution | .dhgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2eDoubleHighRes/)
@@ -418,7 +419,7 @@ image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | 
 image | [Nearly Raw Raster Data](http://teem.sourceforge.net/nrrd/format.html) | .nrrd | [3 sample files](https://telparia.com/fileFormatSamples/image/nrrd/)
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [10 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
-image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [47 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
+image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [45 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
 image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [12 sample files](https://telparia.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [4 sample files](https://telparia.com/fileFormatSamples/image/nikon/)
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | [1 sample file](https://telparia.com/fileFormatSamples/image/otaBitmap/)

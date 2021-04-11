@@ -20,6 +20,7 @@ tiptoe(
 
 		// server/qemu.js
 		programs.push({bin() { return "qemu-system-i386"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "x11-drivers/xf86-video-qxl", website : "https://gitlab.freedesktop.org/xorg/driver/xf86-video-qxl", gentooUseFlags : "xspice"}});
 		programs.push({bin() { return "mount.cifs"; }, meta : {gentooPackage : "net-fs/cifs-utils", website : "https://wiki.samba.org/index.php/LinuxCIFS_utils", gentooUseFlags : "caps creds pam"}});
 		programs.push({bin() { return "rsync"; }, meta : {gentooPackage : "net-misc/rsync", website : "https://rsync.samba.org/", gentooUseFlags : "acl iconv ipv6 ssl xattr zstd"}});
 		
@@ -63,42 +64,113 @@ This isn't something you can easily get up and running in an afternoon.
 # Requirements
 
 ## Kernel
+Several kernel options need to enabled to support QEMU and mounting various fileystems dexvert may encounter.
+
 \`\`\`
-File systems  --->
-	  Processor type and features --->
-	    [*] NUMA Memory Allocation and Scheduler Support
-      CD-ROM/DVD Filesystems  --->
-	    <*> ISO 9660 CDROM file system support
-	    [*]   Microsoft Joliet CDROM extensions
-	    [*]   Transparent decompression extension
-	    <*>   UDF file system support
-	  DOS/FAT/EXFAT/NT Filesystems  --->
-	    <*> MSDOS fs support
-	    <*> VFAT (Windows-95) fs support
-	    (iso8859-1) Default iocharset for FAT
-	    <*> exFAT filesystem support
-  [*] Miscellaneous filesystems  --->
-        <*> Amiga FFS file system support
-		<*> Apple Macintosh file system support
-		<*> Apple Extended HFS file system support
-  -*- Native language support  --->
-        <*> Codepage 437 (United States, Canada)
-		<*> ASCII (United States)
-		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
-		-*- NLS UTF-8
+    General setup  --->
+      <*> Control Group support  --->
+            [*] Memory controller
+            [*] Freezer controller
+            [*] Cpuset Controller
+            [*]   Include legacy /proc/<pid>/cpuset file
+            [*] Simple CPU accounting controller
+
+    Processor type and features --->
+      [*] NUMA Memory Allocation and Scheduler Support
+
+[*] Virtualization  --->
+      <*> Kernel-based Virtual Machine (KVM) support
+	  # Choose either Intel or AMD
+      <*>   KVM for Intel (and compatible) processors support
+	  <*>   KVM for AMD processors support
+
+[*] Networking support  --->
+    Networking options  --->
+	  <*> 802.1d Ethernet bridging
+	  [*]   IGMP/MLD snooping
+
+    Device Drivers  --->
+      [*] PCI support  --->
+	        [*] Message Signaled Interrupts (MSI and MSI-X)
+      [*] Network device support  --->
+            [*]   Network core driver support
+            <*>     MAC-VLAN support
+            <*>       MAC-VLAN based tap driver
+            <*>   Universal TUN/TAP device driver support
+      [*] VHOST drivers  --->
+            [*] Host kernel accelerator for virtio net
+            [*] Cross-endian support for vhost
+      [*] IOMMU Hardware Support  --->
+	        # Choose either Intel or AMD
+			[*] AMD IOMMU support
+			<*>   AMD IOMMU Version 2 driver
+            [*] Support for Intel IOMMU using DMA Remapping Devices
+            [*]   Support for Shared Virtual Memory with Intel IOMMU
+            [*]   Enable Intel DMA Remapping Devices by default
+
+    File systems  --->
+      <*> The Extended 4 (ext4) filesystem
+	  [*]   Ext4 Security Labels
+          CD-ROM/DVD Filesystems  --->
+    	    <*> ISO 9660 CDROM file system support
+    	    [*]   Microsoft Joliet CDROM extensions
+    	    [*]   Transparent decompression extension
+    	    <*>   UDF file system support
+    	  DOS/FAT/EXFAT/NT Filesystems  --->
+    	    <*> MSDOS fs support
+    	    <*> VFAT (Windows-95) fs support
+    	    (iso8859-1) Default iocharset for FAT
+    	    <*> exFAT filesystem support
+    		<*> NTFS file system support
+      [*] Miscellaneous filesystems  --->
+            <*> ADFS file system support
+            <*> Amiga FFS file system support
+    		<*> Apple Macintosh file system support
+    		<*> Apple Extended HFS file system support
+    		<*> BeOS file system (BeFS) support (read only)
+    		<*> EFS file system support (read only)
+    		<*> Minix file system support
+    		<*> OS/2 HPFS file system support
+    		<*> ROM file system support
+    		<*> System V/Xenix/V7/Coherent file system support
+    		<*> UFS file system support
+    		<*> EROFS file system support
+      [*] Network File Systems  --->
+    	    <*> SMB3 and CIFS support (advanced network filesystem)
+    		[*]   Support legacy servers which use less secure dialects
+    		[*]     Support legacy servers which use weaker LANMAN security
+    		[*]   CIFS extended attributes
+      -*- Native language support  --->
+            <*> Codepage 437 (United States, Canada)
+    		<*> ASCII (United States)
+    		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
+    		-*- NLS UTF-8
+
+    Kernel hacking  --->
+          Generic Kernel Debugging Instruments  --->
+            [*] Debug Filesystem
 \`\`\`
 
 ## Windows/Amiga
 Some windows and amiga files are not included due to being commercial software that is still available. This includes the HD images used by the QEMU layer. Sorry.
 
 ## Programs
-Gentoo users can simply install the packages below, some are available in my Gentoo [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay). Certain Gentoo USE flags may also be require, see further below. Other operating systems have not been tested at all. A docker container could be possible, but there would still need to be certain kernel options set for proper functioning.
-
 Package | Program | Overlay
 ------- | ------- | -------
 ${programs.multiSort([p => p.meta.gentooPackage, p => p.bin()]).map(p => (`${p.meta.gentooPackage} | [${p.bin()}](${p.meta.website}) | ${(p.meta.gentooOverlay || "")}`)).join("\n")}
 
-Gentoo users can install all the above required programs with this single command:
+## Gentoo
+Gentoo users can more easily install all the above by adding the [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay).
+
+For proper CUDA support, you'll want to look up your [NVIDIA card here](https://developer.nvidia.com/cuda-gpus#compute)
+Then add to your /etc/portage/make.conf these 2 lines:
+TF_CUDA_COMPUTE_CAPABILITIES=7.0
+USE="$USE cuda"
+
+Certain Gentoo USE flags may also be required for proper feature support.
+
+You should be able to install everything you need on Gentoo with this one command:
+
 \`\`\`
 USE="${programs.flatMap(p => (p.meta.gentooUseFlags || "").split(" ")).filterEmpty().multiSort(v => v).unique().join(" ")}" emerge ${programs.map(p => p.meta.gentooPackage).multiSort(v => v).unique().join(" ")}
 \`\`\``, XU.UTF8, this);

@@ -6,7 +6,7 @@ mkdir -p /tmp/garbageDetected
 
 KIDPIDS=()
 
-if [ "$DISPLAY" != ":0" ]
+if [ "$DISPLAY" = "" ]
 then
 	Xvfb :0 -extension GLX -nolisten tcp -nocursor -ac -screen 0 1200x800x24 &
 	KIDPIDS+=($!)

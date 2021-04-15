@@ -139,7 +139,7 @@ function validateProgram(program)
 		informational  : [isBoolean],
 		unsafe    : [isBoolean],
 
-		gentooOverlay  : [isNonEmptyString],
+		gentooOverlay  : [either([[isNonEmptyString], [arrayOf([isNonEmptyString])]])],
 		gentooPackage  : [either([[isNonEmptyString], [arrayOf([isNonEmptyString])]])],
 		gentooUseFlags : [isNonEmptyString]
 	};

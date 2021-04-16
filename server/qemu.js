@@ -128,7 +128,7 @@ function stopOS(osid, instanceid, cb)
 
 function performRun(instance, {body, reply})
 {
-	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, autoIt : body.autoIt.trim().split("\n")[0]}}`;
+	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, autoIt : body.autoIt.trim().split("\n").find(v => v.startsWith("Run"))}}`;
 
 	const inDirPath = path.join(instance.dirPath, "in");
 	const outDirPath = path.join(instance.dirPath, "out");

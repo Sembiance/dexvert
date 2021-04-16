@@ -52,8 +52,9 @@ const SHA1_IGNORE_FILES =
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
-		"3dCK" : [/.png$/],
-		"pds"  : [/.png$/],
+		"3dCK"   : [/.png$/],
+		"naplps" : [/.png$/],
+		"pds"    : [/.png$/],
 
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cvg" : [/.svg$/],
@@ -111,7 +112,8 @@ const SIZE_IGNORE_FILES =
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
-		"3dCK"        : [/.png$/],
+		"3dCK"   : [/.png$/],
+		"naplps" : [/.png$/],
 
 		// Abydos doesn't always produce the same webp files, not sure why
 		"amosSprites" : [/.webp$/],

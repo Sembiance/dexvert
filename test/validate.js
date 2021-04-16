@@ -152,16 +152,18 @@ function validateProgram(program)
 		meta       : [required, programMetaSchema],
 		bin        : [isFunction, hasLengthBetween(0, 2)],
 		steps      : [isFunction, hasLengthBetween(0, 3)],
-		qemu       : [isFunction, hasLengthBetween(0, 2)],
-		dos        : [isFunction, hasLengthBetween(0, 2)],
 		preArgs    : [isFunction, hasLengthOf(4)],
 		args       : [required, isFunction, hasLengthOf(3)], 	// Technically it's 5+, but args with defaults don't count in .length
 		cwd        : [isFunction, hasLengthBetween(0, 3)],
 		pre        : [isFunction, hasLengthOf(4)],
 		post       : [isFunction, hasLengthOf(4)],
 		runOptions : [isFunction, hasLengthBetween(0, 3)],
+		qemu       : [isFunction, hasLengthBetween(0, 2)],
 		qemuData   : [isFunction, hasLengthBetween(0, 3)],
-		dosData    : [isFunction, hasLengthBetween(0, 3)]
+		dos        : [isFunction, hasLengthBetween(0, 2)],
+		dosData    : [isFunction, hasLengthBetween(0, 3)],
+		amiga      : [isFunction, hasLengthBetween(0, 2)],
+		amigaData  : [isFunction, hasLengthBetween(0, 3)]
 	};
 
 	// Program specific properties that are shared for easier re-use

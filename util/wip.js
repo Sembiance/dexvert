@@ -9,6 +9,9 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs");
 
+XU.log`${XU.WEEK/XU.SECOND}`;
+process.exit(0);
+
 tiptoe(
 	function getImageInfo()
 	{

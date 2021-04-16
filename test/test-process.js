@@ -250,7 +250,7 @@ tiptoe(
 		if(Object.keys(tooLong).length>0)
 		{
 			XU.log`The following files took longer than the target time of ${(TOO_LONG_MS/XU.SECOND).secondsAsHumanReadable()}:`;
-			Object.entries(tooLong).multiSort([([, t]) => t], [true]).forEach(([p, t]) => XU.log`\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((t/XU.SECOND).secondsAsHumanReadable(undefined, true))}`);
+			Object.entries(tooLong).multiSort([([, t]) => t], [true]).forEach(([p, t]) => XU.log`\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((t/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`);
 		}
 
 		XU.log`\nElapsed time: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;

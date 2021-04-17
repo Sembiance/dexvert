@@ -177,8 +177,7 @@ const PROGRAM_FLAGS_FILES =
 	"archive/iso/launch.bin" : ["bchunk:bchunkSwapByteOrder:true"]
 };
 
-const TOO_LONG_MS = XU.MINUTE*5;
-const tooLong = {};
+const fileDurations = {};
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
 let testData = null;
@@ -249,13 +248,11 @@ tiptoe(
 	function outputResults()
 	{
 		testUtil.logFinish();
-		if(Object.keys(tooLong).length>0)
-		{
-			XU.log`The following files took longer than the target time of ${(TOO_LONG_MS/XU.SECOND).secondsAsHumanReadable()}:`;
-			Object.entries(tooLong).multiSort([([, t]) => t], [true]).forEach(([p, t]) => XU.log`\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((t/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`);
-		}
 
-		XU.log`\nElapsed time: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
+		XU.log`\nSlowest files:
+${Object.entries(fileDurations).multiSort([([, duration]) => duration], true).slice(0, 15).map(([p, t]) => `\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((t/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`).join("\n")}`;
+
+		XU.log`\nTotal elapsed duration: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
 		this();
 	},
 	XU.FINISH
@@ -320,8 +317,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 		{
 			const results = XU.parseJSON(resultsRaw);
 
-			if(results.elapsedMS>TOO_LONG_MS)
-				tooLong[sampleSubFilePath] = results.elapsedMS;
+			fileDurations[sampleSubFilePath] = results.elapsedMS;
 
 			const newTestData = {processed : !!results.processed};
 			if(results.unsupported)

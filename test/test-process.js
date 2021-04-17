@@ -311,6 +311,9 @@ function testSampleFile(sampleFilePath, silent, cb)
 		},
 		function loadResultsFile()
 		{
+			if(!fileUtil.existsSync(resultsJSONFilePath))
+				return this.finish(undefined, "FAIL", `Failed to find dexvert JSON output file for: ${sampleFilePath}`);
+				
 			fs.readFile(resultsJSONFilePath, XU.UTF8, this);
 		},
 		function validateResults(resultsRaw)

@@ -8,7 +8,7 @@ KIDPIDS=()
 
 if [ "$DISPLAY" = "" ]
 then
-	Xvfb :0 -extension GLX -nolisten tcp -nocursor -ac -screen 0 1200x800x24 &
+	X &
 	KIDPIDS+=($!)
 	sleep 5
 	DISPLAY=:0 dbus-launch --exit-with-x11

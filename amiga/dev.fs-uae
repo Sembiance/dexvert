@@ -22,7 +22,7 @@ hard_drive_1 = /mnt/compendium/DevLab/dexvert/amiga/in
 hard_drive_2 = /mnt/compendium/DevLab/dexvert/amiga/out
 
 #floppy_drive_0 = /home/sembiance/tmp/amiga/adf/adfFFS/darknews12.adf
-#floppy_drive_0 = /home/sembiance/tmp/amiga/adf/adfOFS/voyager.adf
+#floppy_drive_0 = /home/sembiance/tmp/elprimerpaso.adf
 #floppy_drive_0 = /home/sembiance/tmp/amiga/apps/X-Copy Professional v5.21/X-Copy Professional v5.21 (1991)(Cachet)[inc. Cyclone IV v9.69].zip
 
 #floppy_drive_0 = Workbench v3.1 rev 40.42/Workbench v3.1 rev 40.42 (1994)(Commodore)(M10)(Disk 1 of 6)(Install)[!].zip

@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 614 file formats are supported by dexvert.
+The following 615 file formats are supported by dexvert.
 
 
 
@@ -11,7 +11,7 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [10 sample files](https://telparia.com/fileFormatSamples/archive/adfFFS/)
-archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [11 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Not all ADF disk images are properly extracted by unar/unadf/adf-extractor (such as voyager.adf). This is likely due to them being NDOS (non DOS) disks. These are custom disk formats that demo and game coders came up with to squeeze data out of em. Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.
+archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [11 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Some Amiga disks (such as voyager.adf) are non DOS (NDOS) disks with custom filesystems. These cannot be mounted by the amiga nor extracted with unar/unadf/adf-extractor These are custom disk formats that demo and game coders came up with to squeeze data out of em. Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.
 archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/wiki/Disk_Masher_System) | .dms .fms | [10 sample files](https://telparia.com/fileFormatSamples/archive/dms/)
 archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | [10 sample files](https://telparia.com/fileFormatSamples/archive/xpk/)
 archive | [AMOS Basic Source Code Archive](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .amos | [11 sample files](https://telparia.com/fileFormatSamples/archive/amosSrc/)
@@ -626,7 +626,7 @@ other | Empty File |  |
 
 
 
-## Text (27)
+## Text (28)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -640,6 +640,7 @@ text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
 text | File List | .bbs .lst .lis .dir .ind | 
+text | [FS-UAE Meta File](https://fs-uae.net/docs/options/uaem-write-flags) | .uaem | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [8 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue | 

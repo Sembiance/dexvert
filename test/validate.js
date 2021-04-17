@@ -133,11 +133,12 @@ function validateProgram(program)
 {
 	const programMetaSchema =
 	{
-		website        : [required, either([[isNonEmptyString, isURL()], [arrayOf([isNonEmptyString, isURL()])]])],
-		notes          : [isNonEmptyString],
+		website : [required, either([[isNonEmptyString, isURL()], [arrayOf([isNonEmptyString, isURL()])]])],
+		notes   : [isNonEmptyString],
 
-		informational  : [isBoolean],
-		unsafe    : [isBoolean],
+		informational : [isBoolean],
+		unsafe        : [isBoolean],
+		slow          : [isBoolean],
 
 		gentooOverlay  : [either([[isNonEmptyString], [arrayOf([isNonEmptyString])]])],
 		gentooPackage  : [either([[isNonEmptyString], [arrayOf([isNonEmptyString])]])],

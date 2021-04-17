@@ -6,6 +6,8 @@ Func waitForGo()
 	WEnd
 EndFunc
 
+Sleep(2000)
+
 InetGet("http://192.168.50.2:17735/qemuReady?osid=win2k&ip=" & @IPAddress1, "c:\dexvert\qemuReadyResult.txt")
 
 While 1

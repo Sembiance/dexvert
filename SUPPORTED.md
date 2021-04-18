@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 615 file formats are supported by dexvert.
+The following 616 file formats are supported by dexvert.
 
 
 
@@ -72,13 +72,14 @@ archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [1
 
 
 
-## Audio (11)
+## Audio (12)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | [12 sample files](https://telparia.com/fileFormatSamples/audio/8svx/) - Some 8SVX files don't have a sample rate in the file. In these cases I try multiple different common sample rates.
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [11 sample files](https://telparia.com/fileFormatSamples/audio/amosSamples/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [4 sample files](https://telparia.com/fileFormatSamples/audio/aif/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [5 sample files](https://telparia.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
+audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [6 sample files](https://telparia.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [8 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)

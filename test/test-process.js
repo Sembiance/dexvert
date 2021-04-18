@@ -177,6 +177,8 @@ const PROGRAM_FLAGS_FILES =
 	"archive/iso/launch.bin" : ["bchunk:bchunkSwapByteOrder:true"]
 };
 
+const SLOW_DURATION = XU.MINUTE;
+
 const fileDurations = {};
 const cpuCount = os.cpus().length;
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "process.json");
@@ -249,8 +251,8 @@ tiptoe(
 	{
 		testUtil.logFinish();
 
-		XU.log`\nSlowest files:
-${Object.entries(fileDurations).multiSort([([, duration]) => duration], true).slice(0, 15).map(([p, t]) => `\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((t/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`).join("\n")}`;
+		if(Object.keys(fileDurations).length>0)
+			XU.log`\nSlowest files: ${Object.entries(fileDurations).multiSort([([, d]) => d], true).slice(0, 15).map(([p, d]) => `\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((d/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`).join("\n")}`;
 
 		XU.log`\nTotal elapsed duration: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
 		this();
@@ -317,7 +319,8 @@ function testSampleFile(sampleFilePath, silent, cb)
 		{
 			const results = XU.parseJSON(resultsRaw);
 
-			fileDurations[sampleSubFilePath] = results.elapsedMS;
+			if(results.elapsedMS>SLOW_DURATION)
+				fileDurations[sampleSubFilePath] = results.elapsedMS;
 
 			const newTestData = {processed : !!results.processed};
 			if(results.unsupported)

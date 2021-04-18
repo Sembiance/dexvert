@@ -19,8 +19,8 @@ const HOSTS =
 
 const OS =
 {
-	win2k : { arch : "i386", subnet : BASE_SUBNET, ram : "1G" },
-	winxp : { arch : "i386", subnet : BASE_SUBNET + 1, ram : "2G", cores : 2 }
+	win2k : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET, ram : "1G" },
+	winxp : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET + 1, ram : "2G", cores : 2 }
 };
 
 const INSTANCES = {};
@@ -54,10 +54,11 @@ function startOS(osid, instanceid, cb)
 		},
 		function runQEMU()
 		{
-			const qemuArgs = ["-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=localtime", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
+			const qemuArgs = ["-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
 			if(!DEBUG)
 				qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
 			qemuArgs.push("-m", `size=${OS[osid].ram}`);
+			qemuArgs.push("-rtc", `base=${OS[osid].dateTime}`);
 			if((OS[osid].cores || 1)>1)
 				qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
 			qemuArgs.push("-netdev", `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbPort}-${instance.ip}:445,id=nd1`);
@@ -65,7 +66,7 @@ function startOS(osid, instanceid, cb)
 
 			const qemuRunOptions = {silent : true, detached : true, cwd : instance.dirPath};
 			if(DEBUG)
-				qemuRunOptions.env = {DISPLAY : ":0"};
+				qemuRunOptions.env = {DISPLAY : (os.hostname()==="crystalsummit" ? ":0.1" : ":0")};
 
 			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, qemuRunOptions);
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });

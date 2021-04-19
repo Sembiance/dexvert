@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 118 file formats are unsupported by dexvert.
+The following 119 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -108,14 +108,14 @@ image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 s
 ## Music (4)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [2 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
+music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
 music | [Microdeal Quartet Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | [9 sample files](https://telparia.com/fileFormatSamples/music/quartetModule/)
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Atari_Player) | .sap | A bit more modern of a format, haven't really looked into how best to support it yet.
 
 
 
-## Other (53)
+## Other (54)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -150,6 +150,7 @@ other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/w
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
+other | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | Just a table of contents as to what's in the corresponding .hlp file. Not useful.
 other | Microsoft Windows Program Information File | .pif | 

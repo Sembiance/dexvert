@@ -17,6 +17,7 @@ const HOSTS =
 	chatsubo      : { numServers : 5 }
 };
 
+// We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
 	win2k : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET, ram : "1G" },

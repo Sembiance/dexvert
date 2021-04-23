@@ -15,7 +15,6 @@ tensor/garbage/train/
 # Compiled binaries
 transform/trimGarbage/trimGarbage
 transform/stripGarbage/stripGarbage
-dexmagic/dexmagic
 
 # Dynamic
 log/

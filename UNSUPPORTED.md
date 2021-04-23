@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 119 file formats are unsupported by dexvert.
+The following 120 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -115,7 +115,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (54)
+## Other (55)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -149,6 +149,7 @@ other | Full Tilt Pinball Data | .dat |
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
+other | InstallShield Script | .ins | 
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
 other | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 other | Microsoft Visual C Library | .lib | 

@@ -15,6 +15,7 @@ scanlines = 0
 graphics_card = uaegfx
 scale = 0
 keep_aspect = 1
+video_sync = off
 
 hard_drive_0 = /mnt/compendium/DevLab/dexvert/amiga/WB31.hdf
 hard_drive_0_priority = 6

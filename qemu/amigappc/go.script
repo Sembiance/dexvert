@@ -1,3 +1,0 @@
-ECHO "running decrunch"
-xfdDecrunch HD:in/in.cr out:outfile
-SKIP goDone

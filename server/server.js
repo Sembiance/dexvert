@@ -3,11 +3,10 @@
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	C = require("../lib/C.js"),
-	unoconv = require("./unoconv.js"),
-	qemu = require("./qemu.js"),
 	fastify = require("fastify")({logger : {level : "warn"}});
 
 let stopping = false;
+const subServers = ["unoconv", "ftp", "qemu"].map(v => require(`./${v}.js`));	// eslint-disable-line node/global-require
 
 function stop()
 {
@@ -17,14 +16,7 @@ function stop()
 	XU.log`Stopping dexserv...`;
 	stopping = true;
 
-	tiptoe(
-		function stopSubServers()
-		{
-			unoconv.stop(this.parallel());
-			qemu.stop(this.parallel());
-		},
-		XU.FINISH
-	);
+	subServers.parallelForEach((subServer, subcb) => subServer.stop(subcb), XU.FINISH);
 }
 
 process.on("SIGTERM", () =>
@@ -50,8 +42,13 @@ tiptoe(
 	function registerRoutes()
 	{
 		XU.log`Registering routes...`;
-		fastify.get("/status", (request, reply) => reply.send({status : (unoconv.status() && qemu.status() ? C.DEXSERV_OK_RESPONSE : "error: one or more sub-servers are not running correctly")}));
-		qemu.registerRoutes(fastify);
+		
+		fastify.get("/status", (request, reply) => reply.send({status : (subServers.every(subServer => subServer.status()) ? C.DEXSERV_OK_RESPONSE : "error: one or more sub-servers are not running correctly")}));
+		subServers.forEach(subServer =>
+		{
+			if(subServer.registerRoutes)
+				subServer.registerRoutes(fastify);
+		});
 
 		fastify.ready(this);
 	},
@@ -65,8 +62,7 @@ tiptoe(
 	function startSubServers()
 	{
 		XU.log`Starting sub-servers...`;
-		unoconv.start(this.parallel());
-		qemu.start(this.parallel());
+		subServers.parallelForEach((subServer, subcb) => subServer.start(subcb), this);
 	},
 	function finish(err)
 	{

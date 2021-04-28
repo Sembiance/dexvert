@@ -33,13 +33,17 @@ const SHA1_IGNORE_FILES =
 	archive :
 	{
 		// Not sure why, but the director extraction program produces different PNG files each time
-		director : [/.png$/]
+		director : [/.png$/],
+
+		// unADF always makes this a little different each time, not sure why. Once I add GoADF amiga support, I can remove this line
+		adfOFS : [/iff saxophone.instr$/]
 	},
 	audio :
 	{
 		// The produced mp3 files from timidity are slightly different each time
 		"soundFont2" : [/.mp3$/]
-	},	document :
+	},
+	document :
 	{
 		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
 		"*" : [/.pdf$/]

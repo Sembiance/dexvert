@@ -139,7 +139,7 @@ app-arch/zoo | [zoo](https://packages.debian.org/jessie/zoo) |
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/cdrdao | [toc2cue](http://cdrdao.sourceforge.net/) | 
 app-crypt/blake3 | [b3sum](hhttps://github.com/BLAKE3-team/BLAKE3) | 
-app-emulation/qemu | [qemu-system-i386](http://www.qemu.org) | 
+app-emulation/qemu | [qemu-system-*](http://www.qemu.org) | 
 app-emulation/uade | [uade](http://zakalwe.fi/uade) | 
 app-emulation/uade | [uade123](http://zakalwe.fi/uade) | 
 app-emulation/vice | [c1541](https://vice-emu.sourceforge.io/) | 

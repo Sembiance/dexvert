@@ -19,7 +19,7 @@ tiptoe(
 		programs.push({bin() { return "jq"; }, meta : {gentooPackage : "app-misc/jq", website : "https://stedolan.github.io/jq/"}});
 
 		// server/qemu.js
-		programs.push({bin() { return "qemu-system-i386"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
+		programs.push({bin() { return "qemu-system-*"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
 		programs.push({bin() { return ""; }, meta : {gentooPackage : "x11-drivers/xf86-video-qxl", website : "https://gitlab.freedesktop.org/xorg/driver/xf86-video-qxl", gentooUseFlags : "xspice"}});
 		programs.push({bin() { return "mount.cifs"; }, meta : {gentooPackage : "net-fs/cifs-utils", website : "https://wiki.samba.org/index.php/LinuxCIFS_utils", gentooUseFlags : "caps creds pam"}});
 		programs.push({bin() { return "rsync"; }, meta : {gentooPackage : "net-misc/rsync", website : "https://rsync.samba.org/", gentooUseFlags : "acl iconv ipv6 ssl xattr zstd"}});

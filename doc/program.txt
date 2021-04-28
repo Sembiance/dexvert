@@ -80,5 +80,5 @@ Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> cwd				Which directory to run in
 	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
 	>>> timeout			Maximum duration to allow it to run before stopping
-	>>> autoIt			A list of AutoIt script commands to run to automate the windows program
+	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
 	

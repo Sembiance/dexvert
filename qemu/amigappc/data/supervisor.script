@@ -1,0 +1,32 @@
+SET goFilePath "HD:in/go.script"
+
+WAIT 10 SEC
+
+SHOWNETSTATUS INTERFACE=RTL8029 > RAM:ifstatus.txt
+GREP "Address  " RAM:ifstatus.txt > RAM:ipline.txt
+GREP -oE "192.168.52.[0-9]+" RAM:ipline.txt > RAM:ipaddress.txt
+
+SET ipAddress `TYPE RAM:ipaddress.txt`
+
+DELETE RAM:ifstatus.txt QUIET
+DELETE RAM:ipline.txt QUIET
+DELETE RAM:ipaddress.txt QUIET
+
+wget -O RAM:qemuReadyResult.txt "http://192.168.52.2:17735/qemuReady?osid=amigappc&ip=$ipAddress"
+
+DELETE RAM:qemuReadyResult.txt QUIET
+
+SKIP waitForGo
+
+lab executeGo
+	EXECUTE $goFilePath
+	lab goDone
+		DELAY 5
+		DELETE $goFilePath
+
+lab waitForGo
+	DELAY 25
+	IF exists "$goFilePath"
+		SKIP BACK executeGo
+	ENDIF
+	SKIP BACK waitForGo

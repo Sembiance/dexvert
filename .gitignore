@@ -20,10 +20,9 @@ transform/stripGarbage/stripGarbage
 log/
 
 # Contains commercial software
-amiga/fs-uae-env*
-amiga/*.hdf
 qemu/win*/*.img
 qemu/win*/data/*.iso
 qemu/amiga*/*.img
 qemu/amiga*/data/*.iso
+qemu/amiga*/data/*.img
 qemu/amiga*/data/*.bsdiff

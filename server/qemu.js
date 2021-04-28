@@ -20,8 +20,9 @@ const HOSTS =
 // We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
-	win2k : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET, ram : "1G" },
-	winxp : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET + 1, ram : "2G", cores : 2 }
+	win2k    : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET, ram : "1G", machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	winxp    : { arch : "i386", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET + 1, ram : "2G", machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", cores : 2, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	amigappc : { arch : "ppc", dateTime : "2021-04-18T10:00:00", subnet : BASE_SUBNET + 2, ram : "1G", machine : "sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", smbGuestPort : 139, extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"] }
 };
 
 const INSTANCES = {};
@@ -38,8 +39,9 @@ function startOS(osid, instanceid, cb)
 		INSTANCES[osid] = {};
 	
 	const instance = {instanceid, dirPath : path.join(INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
+	instance.debug = DEBUG || OS[osid].debug;
 	instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
-	instance.smbPort = +`${OS[osid].subnet}${20+instanceid}`;
+	instance.smbHostPort = +`${OS[osid].subnet}${20+instanceid}`;
 	instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
 	INSTANCES[osid][instanceid] = instance;
 		
@@ -55,24 +57,30 @@ function startOS(osid, instanceid, cb)
 		},
 		function runQEMU()
 		{
-			const qemuArgs = ["-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-drive", "format=raw,if=ide,index=0,file=hd.img", "-boot", "order=c", "-vga", "cirrus"];
-			if(!DEBUG)
+			const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts}`];
+			if(!instance.debug)
 				qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
+			if(OS[osid].machine)
+				qemuArgs.push("-machine", OS[osid].machine);
 			qemuArgs.push("-m", `size=${OS[osid].ram}`);
 			qemuArgs.push("-rtc", `base=${OS[osid].dateTime}`);
 			if((OS[osid].cores || 1)>1)
 				qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
-			qemuArgs.push("-netdev", `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbPort}-${instance.ip}:445,id=nd1`);
-			qemuArgs.push("-device", "rtl8139,netdev=nd1");
+			qemuArgs.push("-netdev", `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},hostfwd=tcp:127.0.0.1:${instance.smbHostPort}-${instance.ip}:${OS[osid].smbGuestPort || 445},id=nd1`);
+			qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
+			qemuArgs.push(...OS[osid].extraArgs || []);
 
 			const qemuRunOptions = {silent : true, detached : true, cwd : instance.dirPath};
-			if(DEBUG)
+			if(instance.debug)
+			{
 				qemuRunOptions.env = {DISPLAY : (os.hostname()==="crystalsummit" ? ":0.1" : ":0")};
+				XU.log`QEMU args for osid: ${qemuArgs}`;
+			}
 
 			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, qemuRunOptions);
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
 			
-			XU.log`QEMU ${osid} #${instanceid} launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
+			XU.log`QEMU ${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
 
 			setImmediate(this);
 		},
@@ -88,9 +96,10 @@ function readyOS(osid, instanceid, cb)
 	tiptoe(
 		function mountInOut()
 		{
-			XU.log`QEMU ${osid} #${instanceid} declared itself ready, mounting in/out...`;
+			if(instance.debug)
+				XU.log`QEMU ${osid} #${instanceid} declared itself ready, mounting in/out...`;
 
-			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.smbPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
+			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.smbHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);
 		},
 		function setInstanceReady()
@@ -130,12 +139,13 @@ function stopOS(osid, instanceid, cb)
 
 function performRun(instance, {body, reply})
 {
-	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, autoIt : body.autoIt.trim().split("\n").find(v => v.startsWith("Run"))}}`;
+	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run") || body.script.trim().split("\n")[0])}}`;
 
 	const inDirPath = path.join(instance.dirPath, "in");
 	const outDirPath = path.join(instance.dirPath, "out");
-	const goAU3FilePath = path.join(inDirPath, "go.au3");
-	const tmpGoAU3FilePath = fileUtil.generateTempFilePath(undefined, ".au3");
+	const scriptExt = body.osid.startsWith("win") ? ".au3" : ".script";
+	const goFilePath = path.join(inDirPath, `go${scriptExt}`);
+	const tmpGoFilePath = fileUtil.generateTempFilePath(undefined, scriptExt);
 
 	tiptoe(
 		function copyInFiles()
@@ -143,18 +153,18 @@ function performRun(instance, {body, reply})
 			// We use rsync here to handle both files and directories
 			(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")], runUtil.SILENT, subcb), this);
 		},
-		function writeAutoItScript()
+		function writeGoScript()
 		{
-			// We write to a temp file first, and then copy it over in one go to prevent the supervisor.au3 from picking up an incomplete file
-			fs.writeFile(tmpGoAU3FilePath, body.autoIt, XU.UTF8, this);
+			// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+			fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this);
 		},
-		function moveAutoItScript()
+		function moveGoScript()
 		{
-			fileUtil.move(tmpGoAU3FilePath, goAU3FilePath, this);
+			fileUtil.move(tmpGoFilePath, goFilePath, this);
 		},
 		function waitForFinish()
 		{
-			XU.waitUntil(subcb => fileUtil.exists(goAU3FilePath, subcb), exists => !exists, this);
+			XU.waitUntil(subcb => fileUtil.exists(goFilePath, subcb), exists => !exists, this);
 		},
 		function copyResults()
 		{
@@ -236,7 +246,11 @@ exports.start = function start(cb)
 // The QEMU supervisor.au3 script will call this when it's ready to go
 exports.registerRoutes = function registerRoutes(fastify)
 {
-	fastify.get("/qemuReady", (request, reply) => readyOS(request.query.osid, Object.values(INSTANCES[request.query.osid]).find(v => v.ip===request.query.ip).instanceid, () => reply.send("ok")));
+	fastify.get("/qemuReady", (request, reply) =>
+	{
+		XU.log`Got /qemuReady request with query: ${request.query}`;
+		readyOS(request.query.osid, Object.values(INSTANCES[request.query.osid]).find(v => v.ip===request.query.ip).instanceid, () => reply.send("ok"));
+	});
 	fastify.post("/qemuRun", (request, reply) => { RUN_QUEUE.push({body : request.body, request, reply}); return undefined; });
 };
 

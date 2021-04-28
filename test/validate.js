@@ -162,9 +162,7 @@ function validateProgram(program)
 		qemu       : [isFunction, hasLengthBetween(0, 2)],
 		qemuData   : [isFunction, hasLengthBetween(0, 3)],
 		dos        : [isFunction, hasLengthBetween(0, 2)],
-		dosData    : [isFunction, hasLengthBetween(0, 3)],
-		amiga      : [isFunction, hasLengthBetween(0, 2)],
-		amigaData  : [isFunction, hasLengthBetween(0, 3)]
+		dosData    : [isFunction, hasLengthBetween(0, 3)]
 	};
 
 	// Program specific properties that are shared for easier re-use

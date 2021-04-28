@@ -23,9 +23,6 @@ tiptoe(
 		programs.push({bin() { return ""; }, meta : {gentooPackage : "x11-drivers/xf86-video-qxl", website : "https://gitlab.freedesktop.org/xorg/driver/xf86-video-qxl", gentooUseFlags : "xspice"}});
 		programs.push({bin() { return "mount.cifs"; }, meta : {gentooPackage : "net-fs/cifs-utils", website : "https://wiki.samba.org/index.php/LinuxCIFS_utils", gentooUseFlags : "caps creds pam"}});
 		programs.push({bin() { return "rsync"; }, meta : {gentooPackage : "net-misc/rsync", website : "https://rsync.samba.org/", gentooUseFlags : "acl iconv ipv6 ssl xattr zstd"}});
-
-		// amiga
-		programs.push({bin() { return "fs-uae"; }, meta : {gentooPackage : "app-emulation/fs-uae", website : "https://fs-uae.net/", gentooUseFlags : "fmv glew"}});
 		
 		// hashUtil.hash
 		programs.push({bin() { return "b3sum"; }, meta : {gentooPackage : "app-crypt/blake3", website : "hhttps://github.com/BLAKE3-team/BLAKE3"}});

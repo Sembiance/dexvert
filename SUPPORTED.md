@@ -53,7 +53,7 @@ archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/A
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [8 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [16 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
-archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [13 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/)
+archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [15 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [9 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | Raw Partition |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/rawPartition/)
@@ -607,14 +607,14 @@ music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid |
 music | [OctaMED Module](http://fileformats.archiveteam.org/wiki/MED) | .med .mmd1 .mmd2 .mmd3 .mmd4 | [10 sample files](https://telparia.com/fileFormatSamples/music/med/)
 music | [Oktalyzer Module](http://fileformats.archiveteam.org/wiki/Oktalyzer_module) | .okt .okta | [4 sample files](https://telparia.com/fileFormatSamples/music/okt/)
 music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | [1 sample file](https://telparia.com/fileFormatSamples/music/pru2/)
-music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod | [12 sample files](https://telparia.com/fileFormatSamples/music/mod/)
+music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod | [13 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 music | [RIFF MIDI Music](http://fileformats.archiveteam.org/wiki/RIFF_MIDI) | .rmi | [1 sample file](https://telparia.com/fileFormatSamples/music/rmi/)
 music | [RIFF MIDS File](http://fileformats.archiveteam.org/wiki/RIFF_MIDS) | .mds | [1 sample file](https://telparia.com/fileFormatSamples/music/mds/)
 music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/S3M) | .s3m .stm | [7 sample files](https://telparia.com/fileFormatSamples/music/s3m/)
 music | [Sidmon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid2 | [1 sample file](https://telparia.com/fileFormatSamples/music/sid2/)
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [2 sample files](https://telparia.com/fileFormatSamples/music/smus/)
 music | [Star Tracker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | [10 sample files](https://telparia.com/fileFormatSamples/music/starTracker/)
-music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) | .p61 .p61a .p60 .p60a .p50 .p50a .p41 .p40 p40a .p40b .p30 p30a .p22 .p22a | [2 sample files](https://telparia.com/fileFormatSamples/music/thePlayer/)
+music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) | .p61 .p61a .p60 .p60a .p50 .p50a .p41 .p40 p40a .p40b .p30 p30a .p22 .p22a | [4 sample files](https://telparia.com/fileFormatSamples/music/thePlayer/)
 
 
 
@@ -673,7 +673,7 @@ video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFor
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [6 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [8 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [11 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
-video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) | .avi | [6 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
+video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [9 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [3 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | [4 sample files](https://telparia.com/fileFormatSamples/video/mp4/)

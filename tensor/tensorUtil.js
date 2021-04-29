@@ -1,13 +1,14 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
+	path = require("path"),
 	runUtil = require("@sembiance/xutil").run,
 	httpUtil = require("@sembiance/xutil").http,
 	C = require("../lib/C.js"),
 	tiptoe = require("tiptoe");
 
 const TENSOR_DIM = [224, 224];
-const RUN_OPTIONS = {silent : true};
+const RUN_OPTIONS = {silent : true, timeout : XU.MINUTE*2};
 
 exports.PREPARE_METHODS = ["centerCrop", "scaleDown", "smartCrop"];
 
@@ -57,10 +58,11 @@ exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 		function convertToPNG()
 		{
 			// If we end with .svg, assume it's an .svg
+			// We do the funny cwd and leading ./ to handle files that start with dashes
 			if(imagePath.endsWith(".svg"))
-				runUtil.run("inkscape", ["--export-area-drawing", "-o", pngTrimmedPath, imagePath], RUN_OPTIONS, this);
+				runUtil.run("inkscape", ["--export-area-drawing", "-o", pngTrimmedPath, `./${path.basename(imagePath)}`], {...RUN_OPTIONS, cwd : path.dirname(imagePath)}, this);
 			else
-				runUtil.run("convert", [`${imagePath}[0]`, pngTrimmedPath], RUN_OPTIONS, this);	// We use [0] just in case the src image is an animation, so we just use the first frame
+				runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)}, this);	// We use [0] just in case the src image is an animation, so we just use the first frame
 		},
 		function trimImage()
 		{

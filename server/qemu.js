@@ -31,7 +31,7 @@ const OS =
 {
 	win2k    : { subnet : BASE_SUBNET, machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", extraArgs : ["-nodefaults", "-vga", "cirrus"] },
 	winxp    : { subnet : BASE_SUBNET + 1, ram : "2G", machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", cores : 2, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
-	amigappc : { arch : "ppc", subnet : BASE_SUBNET + 2, machine : "sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" }
+	amigappc : { arch : "ppc", subnet : BASE_SUBNET + 2, machine : "type=sam460ex,dump-guest-core=off", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" }
 };
 
 const INSTANCES = {};

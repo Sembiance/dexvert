@@ -13,7 +13,6 @@
 	"main"         : "./lib/dexvert.js",
 	"bin"          : {
 		"dexid"    : "./bin/dexid",
-		"dexserv"  : "./bin/dexserv",
 		"dexvert"  : "./bin/dexvert",
 		"fixPerms" : "./bin/fixPerms",
 		"uniso"    : "./bin/uniso"
@@ -44,8 +43,8 @@
 		"csv-parser"                       : "~3.0.0",
 		"cue-parser"                       : "~0.3.0",
 		"domino"                           : "~2.1.6",
-		"dxf"                              : "~4.4.4",
-		"fastify"                          : "~3.14.0",
+		"dxf"                              : "~4.4.5",
+		"fastify"                          : "~3.15.1",
 		"ini"                              : "~2.0.0",
 		"ioctl"                            : "~2.0.2",
 		"midi-writer-js"                   : "~1.7.5",
@@ -53,7 +52,7 @@
 		"posix"                            : "~4.2.0",
 		"stream-buffers"                   : "~3.0.2",
 		"stream-skip"                      : "~1.0.3",
-		"svgo"                             : "~2.2.2",
+		"svgo"                             : "~2.3.0",
 		"tiptoe"                           : "file:/mnt/compendium/DevLab/node-modules/tiptoe",
 		"xml-js"                           : "~1.6.11"
 	}

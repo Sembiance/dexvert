@@ -21,6 +21,10 @@
 0	string/b	FORM
 >8	string/b	MLDFBMHD	MLDF BMHD file
 
+# IFF VAXL
+0	string/b	FORM
+>8	string/b	VAXL	IFF VAXL file
+
 # AMOS Memory Bank (Tracker )
 0		string/b	AmBk	AMOS Memory Bank
 >12		string/b	Tracker\ 	\b, Tracker format

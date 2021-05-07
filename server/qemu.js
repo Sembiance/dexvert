@@ -243,7 +243,7 @@ const IN_OUT_LOGIC =
 function performRun(instance, runArgs)
 {
 	const {body, reply} = runArgs;
-	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run") || body.script.trim().split("\n")[0])}}`;
+	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 	tiptoe(
 		function performGoLogic()

@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 121 file formats are unsupported by dexvert.
+The following 122 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -115,7 +115,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (55)
+## Other (56)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -169,6 +169,7 @@ other | RIFF STYL File | .par | References a font for mac and windows and includ
 other | Startrekker Module Info | .nt | 
 other | Turbo Basic Chain module | .tbc | 
 other | Turbo C Context File | .dsk | 
+other | Turbo Pascal Help | .hlp | 
 other | Turbo Pascal Overlay | .ovr | 
 other | Visual Basic Extension | .vbx | 
 other | WordPerfect keyboard file | .wpk | 

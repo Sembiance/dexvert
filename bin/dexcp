@@ -1,0 +1,10 @@
+#!/bin/bash
+AVAILABLE=$(ls -1 /mnt/chatsubo/ram/tmp/wip/ | wc -l)
+if [[ "$1" == "all" || "$1" == "--all" ]]; then
+	COPY_COUNT=$AVAILABLE
+else
+	COPY_COUNT=25
+fi
+
+echo "Copying $COPY_COUNT random files out of $AVAILABLE available files"
+shuf -zn$COPY_COUNT -e /mnt/chatsubo/ram/tmp/wip/* | xargs -0 cp --preserve=all -vt ~/tmp/

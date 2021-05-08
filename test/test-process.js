@@ -213,21 +213,21 @@ tiptoe(
 		sampleFilePaths.filterInPlace(sampleFilePath => fileUtil.existsSync(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)));
 
 		// Filter out any unsupported formats as we have a lot of sample files for formats we don't yet support
-		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require, max-len
+		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
 		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
 
 		if(argv.format)
-			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(argv.format));
+			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(path.join(argv.format, "/")));
 		if(argv.extension)
-			this.data.sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));	// eslint-disable-line sembiance/prefer-relative-require, max-len
+			this.data.sampleFilePaths.filterInPlace(sfp => (require(path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`)).meta.ext || []).includes(argv.extension));	// eslint-disable-line sembiance/prefer-relative-require
 
 		XU.log`\nTesting ${this.data.sampleFilePaths.length} sample files...`;
 
 		Object.keys(testData).subtractAll(this.data.sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			if(!extraFilePath.startsWith(argv.format) || argv.file)
+			if(!extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 				return;
 			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
 			if(argv.record)

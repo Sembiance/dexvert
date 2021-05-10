@@ -29,7 +29,7 @@ tiptoe(
 	function downloadWebPage()
 	{
 		httpUtil.get("http://snisurset.net/code/abydos/supported.html", this.parallel());
-		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "src", "format"), "**/*.js", {nodir : true}, this.parallel());
 	},
 	function checkFormats(formatsHTMLRaw, imageFormatFilePaths)
 	{

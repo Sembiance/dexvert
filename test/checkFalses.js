@@ -2,7 +2,7 @@
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	testUtil = require("./testUtil.js"),
-	dexUtil = require("../lib/dexUtil.js"),
+	dexUtil = require("../src/dexUtil.js"),
 	fs = require("fs"),
 	tiptoe = require("tiptoe");
 

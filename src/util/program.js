@@ -27,7 +27,7 @@ exports.args = function args(state, p, programid)
 	return p.program[programid].args(state, p, {flags : {}});
 };
 
-// Runs the given lib/program/*
+// Runs the given src/program/*
 exports.run = function run(programRaw, options={})
 {
 	return (state, p, cb) =>

@@ -2,7 +2,7 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
-	C = require("../lib/C.js"),
+	C = require("../src/C.js"),
 	fastify = require("fastify")({logger : {level : "warn"}});
 
 let stopping = false;

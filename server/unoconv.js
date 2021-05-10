@@ -1,6 +1,6 @@
 "use strict";
 const XU = require("@sembiance/xu"),
-	C = require("../lib/C.js"),
+	C = require("../src/C.js"),
 	runUtil = require("@sembiance/xutil").run;
 
 let unoconvCP = null;

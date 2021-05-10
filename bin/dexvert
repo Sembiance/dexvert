@@ -2,11 +2,11 @@
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
-	C = require("../lib/C.js"),
+	C = require("../src/C.js"),
 	fs = require("fs"),
 	util = require("util"),
 	{Command} = require("commander"),
-	dexvert = require("../lib/dexvert.js");
+	dexvert = require("../src/dexvert.js");
 
 const argv = new Command().description("Processes <inputFilePath> converting or extracting files into <outputDirPath>").
 	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").

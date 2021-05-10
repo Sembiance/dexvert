@@ -10,7 +10,7 @@
 		"url"  : "https://github.com/Sembiance/dexvert"
 	},
 	"engines"      : { "node" : ">=14" },
-	"main"         : "./lib/dexvert.js",
+	"main"         : "./src/dexvert.js",
 	"bin"          : {
 		"dexid"    : "./bin/dexid",
 		"dexvert"  : "./bin/dexvert",

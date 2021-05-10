@@ -7,7 +7,7 @@ exports.meta =
 	website        : "http://fileformats.archiveteam.org/wiki/CSS",
 	ext            : [".mak"],
 	forbidExtMatch : true,
-	filename       : [/^[Mm]akefile\..*/, /^[Mm]akefile$/],
+	filename       : [/^[Mm]akefile[._-].*/, /^[Mm]akefile$/],
 	magic          : ["makefile script"],
 	weakMagic      : true,
 	untouched      : true,

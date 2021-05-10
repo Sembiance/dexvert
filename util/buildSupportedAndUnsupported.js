@@ -4,7 +4,7 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	path = require("path"),
 	fs = require("fs"),
-	{formats : unsupportedFormats} = require("../lib/format/unsupported.js"),
+	{formats : unsupportedFormats} = require("../src/format/unsupported.js"),
 	tiptoe = require("tiptoe");
 
 const SAMPLES_DIR_PATH = path.join(__dirname, "..", "test", "sample");
@@ -12,7 +12,7 @@ const SAMPLES_DIR_PATH = path.join(__dirname, "..", "test", "sample");
 tiptoe(
 	function findFormatFiles()
 	{
-		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "src", "format"), "**/*.js", {nodir : true}, this.parallel());
 		fileUtil.glob(SAMPLES_DIR_PATH, "**", {nodir : true}, this.parallel());
 	},
 	function generateReadme(formatFilePaths, fileSamplePaths)

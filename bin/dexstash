@@ -8,7 +8,7 @@ fi
 formatid="$1"
 shift
 
-if [ -f "/mnt/compendium/DevLab/dexvert/lib/format/""$formatid"".js" ]
+if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ]
 then
 	formatDir="/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
 	mkdir -p "$formatDir"

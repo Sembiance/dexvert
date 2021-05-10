@@ -9,7 +9,7 @@ const XU = require("@sembiance/xu"),
 tiptoe(
 	function findPrograms()
 	{
-		fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "**/*.js", {nodir : true}, this);
+		fileUtil.glob(path.join(__dirname, "..", "src", "program"), "**/*.js", {nodir : true}, this);
 	},
 	function generateReadme(programFilePaths)
 	{

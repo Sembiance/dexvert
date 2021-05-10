@@ -2,12 +2,12 @@
 
 const XU = require("@sembiance/xu"),
 	path = require("path"),
-	C = require("../lib/C.js"),
+	C = require("../src/C.js"),
 	assert = require("assert"),
 	{validateValue} = require("@validatem/core"),
 	fileUtil = require("@sembiance/xutil").file,
 	tiptoe = require("tiptoe"),
-	dexUtil = require("../lib/dexUtil.js"),
+	dexUtil = require("../src/dexUtil.js"),
 	either = require("@validatem/either"),
 	anything = require("@validatem/anything"),
 	isLowercase = require("@validatem/is-lowercase"),
@@ -32,7 +32,7 @@ exports.validate = function validate(cb)
 		function loadFormatsAndPrograms()
 		{
 			dexUtil.findFormats(this.parallel());
-			fileUtil.glob(path.join(__dirname, "..", "lib", "program"), "**/*.js", {nodir : true}, this.parallel());
+			fileUtil.glob(path.join(__dirname, "..", "src", "program"), "**/*.js", {nodir : true}, this.parallel());
 		},
 		function testFormats(formats, programFilePaths)
 		{

@@ -56,7 +56,7 @@ tiptoe(
 		{
 			sampleFilePaths.filterInPlace(sfp =>
 			{
-				const formatJSPath = path.join(__dirname, "..", "lib", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`);
+				const formatJSPath = path.join(__dirname, "..", "src", "format", path.basename(path.resolve(sfp, "..", "..")), `${path.basename(path.dirname(sfp))}.js`);
 				if(!fileUtil.existsSync(formatJSPath))
 					return false;
 				return (require(formatJSPath).meta.ext || []).includes(argv.extension);
@@ -67,7 +67,7 @@ tiptoe(
 
 		Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(testUtil.SAMPLE_DIR_PATH, sampleFilePath))).forEach(extraFilePath =>
 		{
-			if(!extraFilePath.startsWith(path.join(argv.format, "/")))
+			if(!argv.format || !extraFilePath.startsWith(path.join(argv.format, "/")))
 				return;
 
 			XU.log`${XU.cf.fg.cyan("[") + XU.c.blink + XU.cf.fg.red("EXTRA") + XU.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;

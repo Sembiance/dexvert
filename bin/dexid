@@ -5,7 +5,7 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	fs = require("fs"),
 	printUtil = require("@sembiance/xutil").print,
-	dexvert = require("../lib/dexvert.js");
+	dexvert = require("../src/dexvert.js");
 
 const argv = new Command().description("Identifies <inputFilePath>. Like an advanced 'file' command").
 	option("--verbose [level]", "Show additional info when identifying. Levels 1 to 5 where 5 is most verbose").

@@ -4,7 +4,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	runUtil = require("@sembiance/xutil").run,
 	httpUtil = require("@sembiance/xutil").http,
-	C = require("../lib/C.js"),
+	C = require("../src/C.js"),
 	tiptoe = require("tiptoe");
 
 const TENSOR_DIM = [224, 224];

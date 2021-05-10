@@ -12,7 +12,7 @@ tiptoe(
 	{
 		runUtil.run(path.join(__dirname, "..", "bin", "dexid"), ["--help"], runUtil.SILENT, this.parallel());
 		runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), ["--help"], runUtil.SILENT, this.parallel());
-		fileUtil.glob(path.join(__dirname, "..", "lib", "format"), "**/*.js", {nodir : true}, this.parallel());
+		fileUtil.glob(path.join(__dirname, "..", "src", "format"), "**/*.js", {nodir : true}, this.parallel());
 	},
 	function generateReadme(dexidUsage, dexvertUsage, formatFilePaths)
 	{

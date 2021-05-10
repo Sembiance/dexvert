@@ -2,9 +2,9 @@
 /* eslint-disable max-len, node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
-	dexUtil = require("../../lib/dexUtil"),
+	dexUtil = require("../../src/dexUtil"),
 	StreamSkip = require("stream-skip"),
-	dexvert = require("../../lib/dexvert.js"),
+	dexvert = require("../../src/dexvert.js"),
 	path = require("path"),
 	fs = require("fs"),
 	tiptoe = require("tiptoe");

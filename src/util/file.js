@@ -198,18 +198,29 @@ exports.findValidOutputFiles = function findValidOutputFiles(force)
 			return setImmediate(cb);
 		
 		tiptoe(
-			function findFiles()
+			function deleteEmptyFiles()
 			{
 				if(state.verbose>=4)
+					XU.log`file.findValidOutputFiles finding and deleting empty files...`;
+
+				// Find is very fast at finding and deleting empty files, so let's use that instead of running stat on every output file, checking for zero size and then deleting myself
+				runUtil.run("find", [state.output.absolute, "-type", "f", "-empty", "-delete", "-print"], runUtil.SILENT, this);
+			},
+			function findFiles(deletedFilePathsRaw)
+			{
+				if(state.verbose>=4)
+				{
+					const deletedOutputFiles = deletedFilePathsRaw.trim().split("\n").filterEmpty();
+					if(deletedOutputFiles.length>0)
+						XU.log`file.findValidOutputFiles found and deleted ${deletedOutputFiles.length} empty files`;
+					
 					XU.log`file.findValidOutputFiles starting glob to find output files...`;
+				}
 
 				fileUtil.glob(state.output.absolute, "**", {nodir : true}, this);
 			},
 			function gatherOutputFileInfo(outputFilePaths)
 			{
-				if(state.verbose>=4)
-					XU.log`file.findValidOutputFiles found ${outputFilePaths.length} output files. Checking for zero length files and src duplicates...`;
-
 				delete state.output.files;
 
 				if(outputFilePaths.length===0)
@@ -222,35 +233,24 @@ exports.findValidOutputFiles = function findValidOutputFiles(force)
 				if(outputFilePaths.length===1)
 					fileUtil.areEqual(state.input.absolute, outputFilePaths[0], this.parallel());
 
-				// Find is very fast at finding and deleting empty files, so let's use that instead of running stat on every output file, checking for zero size and then deleting myself
-				// Sadly however, filenames can crazy characters, including newlines, so we can't just add '-print' to the find command and remove those from the output.files list (like we used to do here)
-				// Instead we'll have to glob again later on and use that as the final list of files
-				runUtil.run("find", [state.output.absolute, "-type", "f", "-empty", "-delete"], runUtil.SILENT, this.parallel());
+				this.parallel()();
 			},
 			function deleteIfOnlyChildEqual(outputFileEqual)
 			{
-				if(this.data.outputFilePaths.length!==1 || !outputFileEqual)
-					return this();
+				if(this.data.outputFilePaths.length===1 && outputFileEqual)
+				{
+					XU.log`file.findValidOutputFiles is deleting the single output file ${this.data.outputFilePaths[0]} due to it being identical to the src file`;
+					fileUtil.unlink(this.data.outputFilePaths[0], this);
+				}
+				else
+				{
+					state.output.files = this.data.outputFilePaths.map(outputFilePath => path.relative(state.output.absolute, outputFilePath));
 
-				XU.log`file.findValidOutputFiles is deleting the single output file ${this.data.outputFilePaths[0]} due to it being identical to the src file`;
-				fileUtil.unlink(this.data.outputFilePaths[0], this);
-			},
-			function findAgain()
-			{
-				fileUtil.glob(state.output.absolute, "**", {nodir : true}, this);
-			},
-			function upadteOutputFiles(outputFilePaths)
-			{
-				const numFilesDeleted = outputFilePaths.length-this.data.outputFilePaths.length;
-				if(state.verbose>=4 && numFilesDeleted>0)
-					XU.log`file.findValidOutputFiles deleted ${numFilesDeleted} empty output files.`;
-				
-				state.output.files = outputFilePaths.map(outputFilePath => path.relative(state.output.absolute, outputFilePath));
+					if(state.output.files.length===0)
+						delete state.output.files;
 
-				if(state.output.files.length===0)
-					delete state.output.files;
-				
-				this();
+					this();
+				}
 			},
 			cb
 		);

@@ -3,7 +3,8 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	website : "http://cd.textfiles.com/carousel344/003/CONV125.ZIP"
+	website : "http://cd.textfiles.com/carousel344/003/CONV125.ZIP",
+	unsafe  : true
 };
 
 exports.dos = () => "CONV125/DGIWIND.EXE";

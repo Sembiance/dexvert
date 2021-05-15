@@ -21,4 +21,10 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(stat
 	return convertArgs;
 };
 
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, `outfile${r.flags.convertExt || ".png"}`), path.join(state.output.absolute, `${state.input.name}${r.flags.convertExt || ".png"}`))(state, p, cb);
+exports.post = (state, p, r, cb) =>
+{
+	if((r.results || "").toLowerCase().includes("read error"))
+		r.untrustworthyConversion = true;
+
+	return p.util.file.move(path.join(state.output.absolute, `outfile${r.flags.convertExt || ".png"}`), path.join(state.output.absolute, `${state.input.name}${r.flags.convertExt || ".png"}`))(state, p, cb);
+};

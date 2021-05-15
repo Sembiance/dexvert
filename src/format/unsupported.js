@@ -51,6 +51,7 @@ exports.formats =
 		cygnusEdMacros           : {name : "Cygnus Editor Macros", filename : ["cedmacros"], magic : ["CygnusEd macros"]},
 		dBaseIndex               : {name : "dBase Index File", ext : [".ntx"]},
 		emacsCompiledLisp        : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs .*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
+		fmTownsOSApp			 : {name : "FM TownsOS App", ext : [".exp"]},
 		foxProMemo               : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fullTiltPinballData      : {name : "Full Tilt Pinball Data", ext : [".dat"], magic : ["Full Tilt! Pinball table data"]},
 		iccColorProfile			 : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},

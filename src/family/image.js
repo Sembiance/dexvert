@@ -58,6 +58,11 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 		delete state.converter;
 
 	const unsafeConverter = p.program?.[state.converter?.program]?.meta?.unsafe;
+	let untrustworthyConversion = false;
+
+	// If the converter we used marked it's conversion as untrustworthy (convert.js on a read error for example) then we mark it as such here
+	if(state.converter?.program && (p.util.program.getRan(state, state.converter.program) || {})?.untrustworthyConversion)
+		untrustworthyConversion = true;
 
 	(state.output.files || []).slice().parallelForEach((outSubPath, subcb) =>
 	{
@@ -98,7 +103,7 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 			function checkImageValidity(imageInfo, [garbageResult])
 			{
 				// If we don't have a widht or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
-				if(!imageInfo || !imageInfo.width || !imageInfo.height || (unsafeConverter && imageInfo.colorCount===1 && imageInfo.opaque===true))
+				if(!imageInfo || !imageInfo.width || !imageInfo.height || ((unsafeConverter || untrustworthyConversion) && imageInfo.colorCount===1 && imageInfo.opaque===true))
 				{
 					removeFile = true;
 					return this.jump(-1);

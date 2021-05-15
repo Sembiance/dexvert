@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 122 file formats are unsupported by dexvert.
+The following 124 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -92,12 +92,13 @@ font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .
 
 
 
-## Image (7)
+## Image (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
+image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sample files](https://telparia.com/fileFormatSamples/image/kyssKYG/) - No known converter.
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
@@ -115,7 +116,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (56)
+## Other (57)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -144,6 +145,7 @@ other | Cygnus Editor Default Settings |  |
 other | Cygnus Editor Macros |  | 
 other | dBase Index File | .ntx | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
+other | FM TownsOS App | .exp | 
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.

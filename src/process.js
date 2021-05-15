@@ -91,7 +91,7 @@ exports.checkIdentification = function checkIdentification(state, {DexvertError,
 	// If we are brute forcing programs
 	if(state.brutePrograms)
 	{
-		const idBase = {brute : true, bruteProgram : true, from : "dexvert", confidence : 100, family : state.brute ? state.brute[0] : "other"};
+		const idBase = {brute : true, bruteProgram : true, from : "dexvert", confidence : 100, family : "other"};
 		tiptoe(
 			function findPrograms()
 			{

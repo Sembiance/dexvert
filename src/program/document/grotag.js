@@ -41,7 +41,6 @@ exports.post = (state, p, r, cb) =>
 			const cssData = cssRaw.replaceAll("\0", "").trim().replaceAll("outline: solid gray", "");
 
 			fileUtil.unlink(cssFilePath, this.parallel());
-			fileUtil.unlink(path.dirname(this.data.htmlFilePaths[0]), this.parallel());
 
 			this.data.htmlFilePaths.parallelForEach((htmlFilePath, subcb, i) =>
 			{
@@ -75,7 +74,7 @@ exports.post = (state, p, r, cb) =>
 				topLink.textContent = "Index";
 				body.insertBefore(topLink, body.childNodes[0]);
 
-				fs.writeFile(path.join(state.output.absolute, path.basename(htmlFilePath)), doc.outerHTML, XU.UTF8, subcb);
+				fs.writeFile(htmlFilePath, doc.outerHTML, XU.UTF8, subcb);
 			}, this.parallel());
 		},
 		cb

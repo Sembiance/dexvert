@@ -3,10 +3,11 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name     : "Apple II High Res",
-	ext      : [".hgr"],
-	fileSize : 8192,
-	unsafe   : true
+	name                : "Apple II High Res",
+	ext                 : [".hgr"],
+	fileSize            : 8192,
+	forbidFileSizeMatch : true,
+	unsafe              : true
 };
 
 exports.converterPriorty = ["recoil2png"];

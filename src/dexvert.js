@@ -168,7 +168,7 @@ exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, b
 
 			if(brute)
 			{
-				state.brute = brute==="all" ? C.FAMILIES : brute.split(",").map(v => v.trim()).filter(v => C.FAMILIES.includes(v));
+				state.brute = brute==="all" ? C.FAMILIES : brute.map(v => v.trim()).filter(v => C.FAMILIES.includes(v));
 				state.alwaysBrute = alwaysBrute;
 			
 				if(state.brute.length===0)

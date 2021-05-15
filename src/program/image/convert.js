@@ -15,6 +15,8 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(stat
 	const convertArgs = [inPath, "-strip", "-define", "png:exclude-chunks=time"];
 	if(r.flags.flip)
 		convertArgs.push("-flip");
+	if(r.flags.removeAlpha)
+		convertArgs.push("-alpha", "off");
 	convertArgs.push(outPath);
 	return convertArgs;
 };

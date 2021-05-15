@@ -29,7 +29,10 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 	parse(process.argv);
 
 if(argv.args.length<2)
+{
+	XU.log`Not enough args...`;
 	argv.help();
+}
 
 const verbose = +(argv.verbose || 0);
 

@@ -88,25 +88,17 @@ exports.checkIdentification = function checkIdentification(state, {DexvertError,
 	
 	state.preBruteOutputDirPath = state.output.absolute;
 
-	// If we are brute forcing formats
-	if(state.brute)
-	{
-		const idBase = {brute : true, from : "dexvert", confidence : 100};
-		state.ids = state.brute.flatMap(family => Object.entries(formats[family]).filter(([, f]) => !f.meta.unsupported && !f.meta.unsafe).map(([formatid, f]) => ({family, formatid, magic : f.meta.name, extensions : f.meta.ext, ...idBase})));
-		if(state.ids.length===0)
-			return setImmediate(() => cb(new DexvertError(state, "No formats found to brute force.")));
-		
-		return setImmediate(cb);
-	}
-
 	// If we are brute forcing programs
 	if(state.brutePrograms)
 	{
-		const idBase = {brute : true, bruteProgram : true, from : "dexvert", confidence : 100, family : "other"};
+		const idBase = {brute : true, bruteProgram : true, from : "dexvert", confidence : 100, family : state.brute ? state.brute[0] : "other"};
 		tiptoe(
 			function findPrograms()
 			{
-				fileUtil.glob(path.join(__dirname, "program"), "**/*.js", {nodir : true}, this);
+				let programsParentPath = path.join(__dirname, "program");
+				if(state.brute)
+					programsParentPath = path.join(programsParentPath, state.brute[0]);
+				fileUtil.glob(programsParentPath, "**/*.js", {nodir : true}, this);
 			},
 			function createIDSFromPrograms(programPaths)
 			{
@@ -123,6 +115,15 @@ exports.checkIdentification = function checkIdentification(state, {DexvertError,
 			},
 			cb
 		);
+	}
+	else if(state.brute)
+	{
+		const idBase = {brute : true, from : "dexvert", confidence : 100};
+		state.ids = state.brute.flatMap(family => Object.entries(formats[family]).filter(([, f]) => !f.meta.unsupported && !f.meta.unsafe).map(([formatid, f]) => ({family, formatid, magic : f.meta.name, extensions : f.meta.ext, ...idBase})));
+		if(state.ids.length===0)
+			return setImmediate(() => cb(new DexvertError(state, "No formats found to brute force.")));
+		
+		return setImmediate(cb);
 	}
 	else
 	{

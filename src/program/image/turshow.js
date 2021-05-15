@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "http://fileformats.archiveteam.org/wiki/NAPLPS"
+	website : "http://fileformats.archiveteam.org/wiki/NAPLPS",
+	unsafe  : true
 };
 
 exports.dos = () => "TURSHOW/TURSHOW.EXE";

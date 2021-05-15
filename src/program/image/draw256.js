@@ -3,7 +3,8 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	website : "http://cd.textfiles.com/megarom/megarom3/GRAPHICS/APPS/DRAWV221.ZIP"
+	website : "http://cd.textfiles.com/megarom/megarom3/GRAPHICS/APPS/DRAWV221.ZIP",
+	unsafe  : true
 };
 
 exports.dos = () => "DRAW256/DRAW256.EXE";

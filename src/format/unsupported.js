@@ -8,15 +8,16 @@ exports.formats =
 {
 	executable :
 	{
-		amigaExe   : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
-		atariCPX   : {name : "Atari Control Panel Extension Module", magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"]},
-		atariSTExe : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
-		com        : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
-		elf        : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
-		macExe     : {name : "MacOS Executable", magic : ["Macintosh Application (MacBinary)", "Preferred Executable Format"]},
-		omagic     : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
-		sys        : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/]},
-		xex        : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true}
+		amigaExe     : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
+		atariCPX     : {name : "Atari Control Panel Extension Module", magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"]},
+		atariSTExe   : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
+		com          : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
+		elf          : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
+		fmTownsOSApp : {name : "FM TownsOS App", ext : [".exp"]},
+		macExe       : {name : "MacOS Executable", magic : ["Macintosh Application (MacBinary)", "Preferred Executable Format"]},
+		omagic       : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
+		sys          : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/]},
+		xex          : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true}
 	},
 	
 	rom :
@@ -35,6 +36,8 @@ exports.formats =
 		amigaBlkDev              : {name : "Amiga ADF BlkDev File", ext : [".blkdev"], magic : [...C.TEXT_MAGIC, ...C.GENERIC_MAGIC], weakMagic : true},
 		amigaBootCode            : {name : "Amiga ADF Bootcode", ext : [".bootcode"], magic : [...C.TEXT_MAGIC, ...C.GENERIC_MAGIC], weakMagic : true},
 		amigaCLIMateDirIndex     : {name : "Amiga CLI-Mate Directory Index File", filename : [".fastdir"]},
+		amigaLibrary             : {name : "Amiga Hunk Library/Object", ext : [".lib", ".obj", ".o"], magic : ["AmigaOS object/library data", "Amiga Hunk library/object code"]},
+		amigaSharedLibrary       : {name : "Amiga Shared Library", ext : [".lib"], magic : ["AmigaOS shared library"]},
 		amigaXDFMeta             : {name : "Amiga ADF XDF Meta", ext : [".xdfmeta"], magic : [...C.TEXT_MAGIC, ...C.GENERIC_MAGIC], weakMagic : true},
 		amosAmalBank             : {name : "Amos Amal Animation Bank", ext : [".abk"], magic : ["AMOS AMAL Bank"]},
 		amosDatasBank            : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format"]},
@@ -51,7 +54,6 @@ exports.formats =
 		cygnusEdMacros           : {name : "Cygnus Editor Macros", filename : ["cedmacros"], magic : ["CygnusEd macros"]},
 		dBaseIndex               : {name : "dBase Index File", ext : [".ntx"]},
 		emacsCompiledLisp        : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs .*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
-		fmTownsOSApp			 : {name : "FM TownsOS App", ext : [".exp"]},
 		foxProMemo               : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fullTiltPinballData      : {name : "Full Tilt Pinball Data", ext : [".dat"], magic : ["Full Tilt! Pinball table data"]},
 		iccColorProfile			 : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},
@@ -71,6 +73,7 @@ exports.formats =
 		riffMxSt                 : {name : "RIFF MxSt File", ext : [".si"], magic : ["RIFF MxSt file"], notes : "References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff"},
 		riffSTYL                 : {name : "RIFF STYL File", ext : [".par"], magic : ["RIFF STYL file"], notes : "References a font for mac and windows and includes some text in a TEXT chunk"},
 		starTrekkerModuleInfo    : {name : "Startrekker Module Info", ext : [".nt"], magic : [/^Startrekker .*module info$/]},
+		stormWizardResource      : {name : "StormWizard Resource", ext : [".wizard", ".wizard-all"], magic : ["IFF data, WZRD StormWIZARD resource", "StormWIZARD resource"]},
 		turboBASICChainModule    : {name : "Turbo Basic Chain module", ext : [".tbc"], magic : ["Turbo Basic compiled Chain module"]},
 		turboCContextFile        : {name : "Turbo C Context File", ext : [".dsk"], magic : ["Turbo C Context"]},
 		turboPascalHelp          : {name : "Turbo Pascal Help", ext : [".hlp"], magic : ["Turbo Pascal Help"]},

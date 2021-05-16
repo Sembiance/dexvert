@@ -206,7 +206,7 @@ image | [BBC Micro LdPic Image](http://fileformats.archiveteam.org/wiki/LdPic) |
 image | [Better Portable Graphics](http://fileformats.archiveteam.org/wiki/BPG) | .bpg | [4 sample files](https://telparia.com/fileFormatSamples/image/bpg/) - Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.
 image | [Big Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/BFLI) | .bfli | [3 sample files](https://telparia.com/fileFormatSamples/image/bfli/)
 image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text)) | .bin | [13 sample files](https://telparia.com/fileFormatSamples/image/binaryText/) - It's crazy hard to identify this file, and we err on the side of caution. So we only convert files that have meta data set in them.
-image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib .pic | [21 sample files](https://telparia.com/fileFormatSamples/image/bmp/)
+image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib .pic | [22 sample files](https://telparia.com/fileFormatSamples/image/bmp/)
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [3 sample files](https://telparia.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [1 sample file](https://telparia.com/fileFormatSamples/image/blazingPaddlesWindow/)
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | [2 sample files](https://telparia.com/fileFormatSamples/image/bgp/)
@@ -302,7 +302,7 @@ image | [GFA Artist](http://fileformats.archiveteam.org/wiki/GFA_Artist) | .art 
 image | [GFX9k G9B](http://fileformats.archiveteam.org/wiki/G9B) | .g9b | [9 sample files](https://telparia.com/fileFormatSamples/image/g9b/)
 image | [Giga Cad](http://fileformats.archiveteam.org/wiki/Giga Cad) | .gcd | [1 sample file](https://telparia.com/fileFormatSamples/image/gigaCad/)
 image | GLC | .glc | [1 sample file](https://telparia.com/fileFormatSamples/image/glc/)
-image | [Glow Icon](http://fileformats.archiveteam.org/wiki/GlowIcons) | .info | [6 sample files](https://telparia.com/fileFormatSamples/image/glowIcon/)
+image | [Glow Icon](http://fileformats.archiveteam.org/wiki/GlowIcons) | .info | [10 sample files](https://telparia.com/fileFormatSamples/image/glowIcon/)
 image | GLS | .gls | [1 sample file](https://telparia.com/fileFormatSamples/image/gls/)
 image | [GoDot 4Bit Image](http://fileformats.archiveteam.org/wiki/GoDot) | .4bt .clp | [7 sample files](https://telparia.com/fileFormatSamples/image/4bt/)
 image | [GodPaint](http://fileformats.archiveteam.org/wiki/GodPaint) | .god | [5 sample files](https://telparia.com/fileFormatSamples/image/god/)
@@ -631,7 +631,7 @@ other | Empty File |  |
 ## Text (28)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
+text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [13 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
 text | AMOS Source Code | .amossourcecode | [10 sample files](https://telparia.com/fileFormatSamples/text/amosSource/)
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm | [11 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
@@ -650,7 +650,7 @@ text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  | [10 sample files](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch | [9 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [12 sample files](https://telparia.com/fileFormatSamples/text/lisp/)
-text | [Makefile](http://fileformats.archiveteam.org/wiki/CSS) | .mak | [10 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
+text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk | [10 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [4 sample files](https://telparia.com/fileFormatSamples/text/txt/)
@@ -668,7 +668,7 @@ Family | Name | Extensions | Notes
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [10 sample files](https://telparia.com/fileFormatSamples/video/flm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | [6 sample files](https://telparia.com/fileFormatSamples/video/mov/)
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [4 sample files](https://telparia.com/fileFormatSamples/video/avi/)
-video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [6 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
+video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.

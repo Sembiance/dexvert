@@ -10,6 +10,6 @@ exports.meta =
 	magic    : ["Windows Bitmap", "PC bitmap, Windows 3.x format", "Device independent bitmap graphic"]
 };
 
-exports.converterPriorty = ["convert", "graphicsWorkshopProfessional"];
+exports.converterPriorty = ["convert", "graphicsWorkshopProfessional", "deark"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

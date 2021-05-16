@@ -4,10 +4,10 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	name           : "Makefile",
-	website        : "http://fileformats.archiveteam.org/wiki/CSS",
-	ext            : [".mak"],
+	website        : "http://fileformats.archiveteam.org/wiki/Makefile",
+	ext            : [".mak", ".mk"],
 	forbidExtMatch : true,
-	filename       : [/^[Mm]akefile[._-].*/, /^[Mm]akefile$/],
+	filename       : [/^[Mm]akefile[._-].*/, /^[Mm]akefile$/, /.*[Mm]akefile$/],
 	magic          : ["makefile script"],
 	weakMagic      : true,
 	untouched      : true,

@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 124 file formats are unsupported by dexvert.
+The following 128 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -64,7 +64,7 @@ document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://tel
 
 
 
-## Executable (10)
+## Executable (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
@@ -72,6 +72,7 @@ executable | Atari Control Panel Extension Module |  | [12 sample files](https:/
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
 executable | ELF Executable |  | 
+executable | FM TownsOS App | .exp | 
 executable | Linux OMAGIC Executable |  | 
 executable | MacOS Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
@@ -92,7 +93,7 @@ font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .
 
 
 
-## Image (8)
+## Image (9)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
@@ -101,6 +102,7 @@ image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Me
 image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sample files](https://telparia.com/fileFormatSamples/image/kyssKYG/) - No known converter.
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 
@@ -116,7 +118,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (57)
+## Other (59)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -126,8 +128,10 @@ other | Amiga ADF BlkDev File | .blkdev |
 other | Amiga ADF Bootcode | .bootcode | 
 other | Amiga ADF XDF Meta | .xdfmeta | 
 other | Amiga CLI-Mate Directory Index File |  | 
+other | Amiga Hunk Library/Object | .lib .obj .o | 
 other | Amiga IFF DTYP |  | 
 other | Amiga Preferences | .prefs | 
+other | Amiga Shared Library | .lib | 
 other | Amos Amal Animation Bank | .abk | 
 other | AMOS Datas Bank | .abk | 
 other | ASCII Font Metrics | .afm | 
@@ -145,7 +149,6 @@ other | Cygnus Editor Default Settings |  |
 other | Cygnus Editor Macros |  | 
 other | dBase Index File | .ntx | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
-other | FM TownsOS App | .exp | 
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
@@ -169,6 +172,7 @@ other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffec
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 other | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
 other | Startrekker Module Info | .nt | 
+other | StormWizard Resource | .wizard .wizard-all | 
 other | Turbo Basic Chain module | .tbc | 
 other | Turbo C Context File | .dsk | 
 other | Turbo Pascal Help | .hlp | 

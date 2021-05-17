@@ -9,7 +9,4 @@ exports.meta =
 	magic       : ["Windows HELP File", /^MS Windows 3\.. help/, "Windows Help File"]
 };
 
-exports.steps =
-[
-	() => ({program : "helpdeco"})
-];
+exports.steps = [() => ({program : "helpdeco"})];

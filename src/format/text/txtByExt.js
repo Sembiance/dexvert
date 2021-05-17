@@ -14,6 +14,7 @@ exports.meta =
 	[
 		".txt", ".rea", ".doc", ".docs", ".english", ".credits", ".manual", ".man", ".info", ".inf", ".log", ".ascii",
 		".cfg", ".config",
+		".frm", ".hlp",
 		".advert", ".advert2"
 	],
 	untouched : true

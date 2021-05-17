@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 619 file formats are supported by dexvert.
+The following 622 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (60)
+## Archive (61)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -48,6 +48,7 @@ archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [11 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
+archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp | [5 sample files](https://telparia.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [10 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [16 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
@@ -86,11 +87,11 @@ audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | 
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 | [7 sample files](https://telparia.com/fileFormatSamples/audio/soundFont2/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/au/)
-audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [5 sample files](https://telparia.com/fileFormatSamples/audio/wav/)
+audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [6 sample files](https://telparia.com/fileFormatSamples/audio/wav/)
 
 
 
-## Document (14)
+## Document (15)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
@@ -101,6 +102,7 @@ document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [5 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
+document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [6 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [10 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
@@ -116,7 +118,7 @@ Family | Name | Extensions | Notes
 executable | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_tokenized_file) | .gfa .bas | [13 sample files](https://telparia.com/fileFormatSamples/executable/gfaBASICAtari/) - The gfalist program only supports decompiling tokenized files of version 3 and higher.
 executable | Microsoft Windows Dynmic Link Library | .dll | [10 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
-executable | Windows Screensaver | .scr | [8 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
+executable | Windows Screensaver | .scr | [9 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
 
 
 
@@ -147,7 +149,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (440)
+## Image (441)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -342,7 +344,7 @@ image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep | [
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | [4 sample files](https://telparia.com/fileFormatSamples/image/imageSystem/)
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | [3 sample files](https://telparia.com/fileFormatSamples/image/imageLab/)
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | [2 sample files](https://telparia.com/fileFormatSamples/image/imagic/)
-image | IMG Scan | .rwl .raw .rwh | [4 sample files](https://telparia.com/fileFormatSamples/image/imgScan/)
+image | IMG Scan | .rwl .raw .rwh | [5 sample files](https://telparia.com/fileFormatSamples/image/imgScan/)
 image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | [2 sample files](https://telparia.com/fileFormatSamples/image/indyPaint/)
 image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | [1 sample file](https://telparia.com/fileFormatSamples/image/ing/)
 image | [Inset PIX](http://fileformats.archiveteam.org/wiki/Inset_PIX) | .pix | [6 sample files](https://telparia.com/fileFormatSamples/image/insetPix/)
@@ -360,7 +362,7 @@ image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | 
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | [13 sample files](https://telparia.com/fileFormatSamples/image/jng/)
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | [1 sample file](https://telparia.com/fileFormatSamples/image/jpegXR/)
 image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [5 sample files](https://telparia.com/fileFormatSamples/image/viff/)
-image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [4 sample files](https://telparia.com/fileFormatSamples/image/kissCel/)
+image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [6 sample files](https://telparia.com/fileFormatSamples/image/kissCel/)
 image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | [29 sample files](https://telparia.com/fileFormatSamples/image/koalaMicroillustrator/) - APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .koa .gig .kla .gg | [10 sample files](https://telparia.com/fileFormatSamples/image/koalaPaint/)
 image | [Kodak Cineon](http://fileformats.archiveteam.org/wiki/Cineon) | .cin | [1 sample file](https://telparia.com/fileFormatSamples/image/cin/)
@@ -433,7 +435,8 @@ image | [OpenDocument Drawing](http://fileformats.archiveteam.org/wiki/OpenDocum
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | [2 sample files](https://telparia.com/fileFormatSamples/image/exr/)
 image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | [1 sample file](https://telparia.com/fileFormatSamples/image/ora/)
 image | Oric HRS | .hrs .hir | [1 sample file](https://telparia.com/fileFormatSamples/image/hrs/)
-image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | [1 sample file](https://telparia.com/fileFormatSamples/image/icoOS2/)
+image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | [4 sample files](https://telparia.com/fileFormatSamples/image/icoOS2/)
+image | [OS/2 Pointer](http://fileformats.archiveteam.org/wiki/OS/2_Pointer) | .ptr | [6 sample files](https://telparia.com/fileFormatSamples/image/os2Pointer/)
 image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [3 sample files](https://telparia.com/fileFormatSamples/image/p4i/)
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [4 sample files](https://telparia.com/fileFormatSamples/image/pabloPaint/)
 image | [Paint Magic](http://fileformats.archiveteam.org/wiki/Paint_Magic) | .pmg | [1 sample file](https://telparia.com/fileFormatSamples/image/pmg/)
@@ -654,8 +657,8 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [12 
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk | [10 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [4 sample files](https://telparia.com/fileFormatSamples/text/txt/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .advert .advert2 | [18 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [5 sample files](https://telparia.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .frm .hlp .advert .advert2 | [20 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)
@@ -674,7 +677,7 @@ video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Pai
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [6 sample files](https://telparia.com/fileFormatSamples/video/flc/)
-video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [8 sample files](https://telparia.com/fileFormatSamples/video/fli/)
+video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [9 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [11 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [9 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)

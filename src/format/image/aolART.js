@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["AOL ART image", "AOL ART (Johnson-Grace compressed) bitmap"]
 };
 
-exports.converterPriorty = ["graphicsWorkshopProfessional"];
+exports.converterPriorty = ["graphicWorkshopProfessional"];

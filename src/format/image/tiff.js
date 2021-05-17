@@ -23,7 +23,7 @@ exports.converterPriorty = state =>
 	else
 		converters.push({program : "convert", flags : {removeAlpha : true}});
 
-	converters.push("deark", "imageAlchemy", "graphicsWorkshopProfessional");
+	converters.push("deark", "imageAlchemy", "graphicWorkshopProfessional");
 	return converters;
 };
 

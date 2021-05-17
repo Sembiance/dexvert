@@ -17,7 +17,7 @@ exports.meta =
 
 // binaryText is often mistaken for other things, so only proceed if the meta gathering was successful
 // deark handles this format better than ansilove
-exports.converterPriorty = state => ((state.input.meta.ansiArt || state.input.meta.binaryText) ? ["deark", {program : "ansilove", flags : {ansiloveType : "bin"}}, "abydosconvert", "ffmpeg"] : []);
+exports.converterPriorty = state => ((state.input.meta.ansiArt || state.input.meta.binaryText) ? [{program : "deark", flags : {dearkCharOutput : "image"}}, {program : "ansilove", flags : {ansiloveType : "bin"}}, "abydosconvert", "ffmpeg"] : []);
 
 exports.inputMeta = (state, p, cb) =>
 {

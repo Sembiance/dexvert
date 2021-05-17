@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 618 file formats are supported by dexvert.
+The following 619 file formats are supported by dexvert.
 
 
 
@@ -147,7 +147,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (439)
+## Image (440)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -309,6 +309,7 @@ image | [GodPaint](http://fileformats.archiveteam.org/wiki/GodPaint) | .god | [5
 image | [GrafX2](http://grafx2.chez.com/) | .pkm | [1 sample file](https://telparia.com/fileFormatSamples/image/grafx2/)
 image | [Graph Saurus](http://fileformats.archiveteam.org/wiki/Graph_Saurus) | .sr5 .gl5 .pl5 .sr6 .gl6 .pl6 .sr7 .gl7 .pl7 .sr8 .gl8 .sri .srs | [25 sample files](https://telparia.com/fileFormatSamples/image/graphSaurus/)
 image | [Graph2Font](http://g2f.atari8.info) | .g2f .mch | [18 sample files](https://telparia.com/fileFormatSamples/image/graph2Font/)
+image | [Graphic Workship Thumbnail](http://fileformats.archiveteam.org/wiki/Graphic_Workshop_Thumbnail) | .thn | [5 sample files](https://telparia.com/fileFormatSamples/image/graphicWorkshopThumbnail/)
 image | [Graphics 7/8/9/9+/10/11 Image](http://fileformats.archiveteam.org/wiki/GR*) | .gr7 .gr8 .gr9 .g9s .sfd .gr9p .g10 .g11 | [45 sample files](https://telparia.com/fileFormatSamples/image/grStar/)
 image | [Graphics Interchange Format](http://fileformats.archiveteam.org/wiki/GIF) | .gif | [13 sample files](https://telparia.com/fileFormatSamples/image/gif/)
 image | [Graphics Processor](http://fileformats.archiveteam.org/wiki/Graphics_Processor) | .pg1 .pg2 .pg3 | [3 sample files](https://telparia.com/fileFormatSamples/image/graphicsProcessor/)

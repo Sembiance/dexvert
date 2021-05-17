@@ -16,4 +16,4 @@ exports.meta =
 // Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 // Luckilly 'lha' fails on these, so then I try deark with the proper option argument to use the lhark decompression routine
 // See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
-exports.converterPriorty = ["lha", {program : "deark", argsd : [undefined, undefined, undefined, ["lha:lhark"]]}];
+exports.converterPriorty = ["lha", {program : "deark", flags : {dearkOpts : ["lha:lhark"]}}];

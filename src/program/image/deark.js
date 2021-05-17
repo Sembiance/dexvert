@@ -16,7 +16,17 @@ exports.meta =
 exports.BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
 
 exports.bin = () => "deark";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath, outName=state.input.name, opts=[`char:output=${r.flags.dearkCharOutput || "image"}`]) => ([...opts.flatMap(opt => (["-opt", opt])), "-od", outPath, "-o", outName, inPath]);
+exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath, outName=state.input.name) =>
+{
+	const args = [];
+	if(r.flags.dearkModule)
+		args.push("-m", r.flags.dearkModule);
+	const opts = Array.from(r.flags.dearkOpts || []);
+	if(r.flags.dearkCharOutput)
+		opts.push(`char:output=${r.flags.dearkCharOutput || "image"}`);
+		
+	return [...args, ...opts.flatMap(opt => (["-opt", opt])), "-od", outPath, "-o", outName, inPath];
+};
 
 exports.post = (state, p, r, cb) =>
 {

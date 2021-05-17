@@ -10,7 +10,7 @@ exports.meta =
 	magic   : ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/]		// eslint-disable-line prefer-named-capture-group
 };
 
-exports.converterPriorty = ["unzip", "deark", {program : "deark", argsd : [undefined, undefined, undefined, ["zip:scanmode"]]}, "unar"];
+exports.converterPriorty = ["unzip", "deark", {program : "deark", flags : {dearkOpts : ["zip:scanmode"]}}, "unar"];
 
 exports.inputMeta = (state, p, cb) =>
 {

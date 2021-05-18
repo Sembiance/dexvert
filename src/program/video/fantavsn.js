@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "https://winworldpc.com/product/fantavision/1x-dos"
+	website : "https://winworldpc.com/product/fantavision/1x-dos",
+	unsafe  : true
 };
 
 exports.dos = () => "FANTAVSN/PLAYER.EXE";

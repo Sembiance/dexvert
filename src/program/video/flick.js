@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "http://cd.textfiles.com/silvercollection/disc2/GRAPHVEW/DASFLICK.ARJ"
+	website : "http://cd.textfiles.com/silvercollection/disc2/GRAPHVEW/DASFLICK.ARJ",
+	unsafe  : true
 };
 
 exports.dos = () => "FLICK.EXE";

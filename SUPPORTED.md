@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 622 file formats are supported by dexvert.
+The following 624 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (61)
+## Archive (63)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -19,6 +19,7 @@ archive | [Amstrad CPC Disk](http://fileformats.archiveteam.org/wiki/DSK_(CPCEMU
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .exe | [3 sample files](https://telparia.com/fileFormatSamples/archive/arj/)
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [7 sample files](https://telparia.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [2 sample files](https://telparia.com/fileFormatSamples/archive/stDiskImage/)
+archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [6 sample files](https://telparia.com/fileFormatSamples/archive/binHex/)
 archive | BOLT Game Data Archive | .blt | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [8 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
@@ -31,7 +32,7 @@ archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Format
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [7 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [17 sample files](https://telparia.com/fileFormatSamples/archive/grasp/) - This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
-archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [3 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
+archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [5 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
@@ -39,7 +40,7 @@ archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/Inst
 archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [12 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
 archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz .lzs .exe | [15 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
-archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [1 sample file](https://telparia.com/fileFormatSamples/archive/compactPro/)
+archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [2 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [10 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
@@ -50,6 +51,7 @@ archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-P
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp | [5 sample files](https://telparia.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [10 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
+archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [1 sample file](https://telparia.com/fileFormatSamples/archive/packIt/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [16 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [13 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
@@ -62,8 +64,8 @@ archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar |
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [10 sample files](https://telparia.com/fileFormatSamples/archive/sea/)
 archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .sqx | [1 sample file](https://telparia.com/fileFormatSamples/archive/sqx/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [10 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
-archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [2 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
-archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [5 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
+archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [5 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
+archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [7 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [1 sample file](https://telparia.com/fileFormatSamples/archive/tscomp/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [3 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | [4 sample files](https://telparia.com/fileFormatSamples/archive/ttcomp/)
@@ -469,7 +471,7 @@ image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm | 
 image | [Portable Float Map](http://fileformats.archiveteam.org/wiki/PFM) | .pfm | [3 sample files](https://telparia.com/fileFormatSamples/image/pfm/)
 image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm | [4 sample files](https://telparia.com/fileFormatSamples/image/pgm/)
 image | [Portable Network Graphic](http://fileformats.archiveteam.org/wiki/PNG) | .png | [9 sample files](https://telparia.com/fileFormatSamples/image/png/)
-image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats) | .ppm | [4 sample files](https://telparia.com/fileFormatSamples/image/ppm/)
+image | [Portable Pixmap](http://fileformats.archiveteam.org/wiki/Netpbm_formats) | .ppm | [5 sample files](https://telparia.com/fileFormatSamples/image/ppm/)
 image | [Portfolio Graphics](http://fileformats.archiveteam.org/wiki/PGF_(Portfolio_Graphics)) | .pgf | [9 sample files](https://telparia.com/fileFormatSamples/image/portfolioGraphics/)
 image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/PGC_(Portfolio_Graphics_Compressed)) | .pgc | [13 sample files](https://telparia.com/fileFormatSamples/image/pgc/)
 image | [Portfolio PGX](http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)) | .pgx | [3 sample files](https://telparia.com/fileFormatSamples/image/pgx/) - Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an MP4.
@@ -645,7 +647,7 @@ text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-exa
 text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv | [4 sample files](https://telparia.com/fileFormatSamples/text/csv/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml | [1 sample file](https://telparia.com/fileFormatSamples/text/xml/)
-text | File List | .bbs .lst .lis .dir .ind | 
+text | File List | .bbs .lst .lis .dir .ind | [1 sample file](https://telparia.com/fileFormatSamples/text/fileList/)
 text | [FS-UAE Meta File](https://fs-uae.net/docs/options/uaem-write-flags) | .uaem | 
 text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .cfg .conf | [12 sample files](https://telparia.com/fileFormatSamples/text/ini/)
@@ -659,7 +661,7 @@ text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [5 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .frm .hlp .advert .advert2 | [20 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | 
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/txtByFilename/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
@@ -677,7 +679,7 @@ video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Pai
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [6 sample files](https://telparia.com/fileFormatSamples/video/flc/)
-video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [11 sample files](https://telparia.com/fileFormatSamples/video/fli/)
+video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [11 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [9 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)

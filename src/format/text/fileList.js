@@ -9,7 +9,7 @@ exports.meta =
 	weakMagic : true,
 	priority  : C.PRIORITY.LOW,
 	ext       : [".bbs", ".lst", ".lis", ".dir", ".ind"],
-	filename  : [/^dir\.?\d+$/i, /files.\d+$/i, "files.txt"],
+	filename  : [/^dir\.?\d+$/i, /files.\d+$/i, /^files\.txt$/i],
 	untouched : true
 };
 

@@ -146,43 +146,6 @@ function extractHFSISO(cb)
 		{
 			fileUtil.glob(OUT_DIR_PATH, "**", {nodir : true}, this);
 		},
-		function extractResourceForks(extractedFilePaths)
-		{
-			extractedFilePaths.parallelForEach((extractedFilePath, subcb) =>
-			{
-				const tmpUnpackDirPath = fileUtil.generateTempFilePath(undefined, "");
-				const tmpSafeNameFilePath = fileUtil.generateTempFilePath(undefined, "");
-
-				tiptoe(
-					function prepareTmp()
-					{
-						fs.mkdir(tmpUnpackDirPath, {recursive : true}, this.parallel());
-						fs.copyFile(extractedFilePath, tmpSafeNameFilePath, this.parallel());
-					},
-					function unpackIntoTmpDir()
-					{
-						runUtil.run("unar", ["-f", "-D", "-o", tmpUnpackDirPath, tmpSafeNameFilePath], runUtil.SILENT, this);
-					},
-					function findUnpackedFiles()
-					{
-						fileUtil.glob(tmpUnpackDirPath, "*", {nodir : true}, this);
-					},
-					function moveFiles(unpackedFilePaths)
-					{
-						if(unpackedFilePaths.length===0)
-							return this();
-
-						unpackedFilePaths.parallelForEach((unpackedFilePath, unpackcb) => fileUtil.move(unpackedFilePath, path.join(path.dirname(extractedFilePath), path.basename(unpackedFilePath)), unpackcb), this);
-					},
-					function cleanupUnpack()
-					{
-						fileUtil.unlink(tmpUnpackDirPath, this.parallel());
-						fileUtil.unlink(tmpSafeNameFilePath, this.parallel());
-					},
-					subcb
-				);
-			}, this);
-		},
 		cb
 	);
 }

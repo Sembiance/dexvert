@@ -10,6 +10,7 @@ hls -alb | while read -r line; do
 			if [ "$type" = "f" ]; then
 				escapedFilename=${filename//\'/\\"'"}
 				eval "safeFilename=$'$filename'"
+				safeFilename=${safeFilename//&/\\&}
 				eval "hcopy $'$escapedFilename' '$1'/$safeFilename"
 			fi
 		fi

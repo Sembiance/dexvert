@@ -26,3 +26,6 @@ qemu/amiga*/*.img
 qemu/amiga*/data/*.iso
 qemu/amiga*/data/*.img
 qemu/amiga*/data/*.bsdiff
+qemu/macos*/*.img
+qemu/macos*/data/*.rom
+qemu/macos*/data/*.iso

@@ -8,4 +8,9 @@ exports.meta =
 	magic   : ["HyperCard Stack"]
 };
 
-exports.converterPriorty = ["stackimport"];
+// Both of these programs produce different outputs, so both are useful to use to extract data
+exports.steps =
+[
+	() => ({program : "hypercard_dasm"}),
+	() => ({program : "stackimport"})
+];

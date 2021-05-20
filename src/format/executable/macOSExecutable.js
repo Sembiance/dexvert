@@ -8,4 +8,4 @@ exports.meta =
 	magic   : ["Macintosh Application (MacBinary)", "Preferred Executable Format"]
 };
 
-exports.steps = [() => ({program : "deark"})];
+exports.converterPriorty = ["unar", "deark"];

@@ -116,7 +116,7 @@ exports.identify = function identify(_inputFilePath, _options, _cb)
 	);
 };
 
-exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, brute=false, keepGoing=false, alwaysBrute=false, brutePrograms=false, midiFont=null, useTmpOutputDir=null, dontTransform=false, programFlags, ranPrograms=[]}, cb)
+exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, brute=false, keepGoing=false, alwaysBrute=false, brutePrograms=false, midiFont=null, useTmpOutputDir=null, transformed=false, dontTransform=false, programFlags, ranPrograms=[]}, cb)
 {
 	const inputFilePath = `${_inputFilePath}`;
 	const outputDirPath = `${_outputDirPath}`;
@@ -129,6 +129,8 @@ exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, b
 		state.programFlags = programFlags;
 	if(ranPrograms)
 		state.ranPrograms.pushUnique(...ranPrograms);
+	if(transformed)
+		state.transformed = true;
 		
 	dexUtil.setStateInput(state, inputFilePath);
 
@@ -273,7 +275,7 @@ function processWithTransform(transformType, outputDirPath, state, processOption
 			if(!transformedFileExists)
 				return this();
 			
-			exports.process(transformedFilePath, outputDirPath, {dontTransform : true, ...processOptions}, this);
+			exports.process(transformedFilePath, outputDirPath, {transformed : true, dontTransform : true, ...processOptions}, this);
 		},
 		function cleanup(stateResult)
 		{

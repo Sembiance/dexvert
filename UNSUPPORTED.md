@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 131 file formats are unsupported by dexvert.
+The following 129 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -64,7 +64,7 @@ document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://tel
 
 
 
-## Executable (11)
+## Executable (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
@@ -74,7 +74,6 @@ executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fil
 executable | ELF Executable |  | 
 executable | FM TownsOS App | .exp | 
 executable | Linux OMAGIC Executable |  | 
-executable | MacOS Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
 executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/executable/zbasic/)
@@ -118,7 +117,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (61)
+## Other (60)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -158,7 +157,6 @@ other | ICC Color Profile | .icc |
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Script | .ins | 
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
-other | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | Just a table of contents as to what's in the corresponding .hlp file. Not useful.
 other | Microsoft Windows Program Information File | .pif | 

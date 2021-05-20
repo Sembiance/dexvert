@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 624 file formats are supported by dexvert.
+The following 626 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (63)
+## Archive (64)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -23,7 +23,7 @@ archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .
 archive | BOLT Game Data Archive | .blt | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [8 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [18 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [19 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [7 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [1 sample file](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
@@ -41,6 +41,7 @@ archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [12 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
 archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz .lzs .exe | [15 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [2 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
+archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [10 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
@@ -114,10 +115,11 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 
 
 
-## Executable (4)
+## Executable (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_tokenized_file) | .gfa .bas | [13 sample files](https://telparia.com/fileFormatSamples/executable/gfaBASICAtari/) - The gfalist program only supports decompiling tokenized files of version 3 and higher.
+executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [1 sample file](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
 executable | Microsoft Windows Dynmic Link Library | .dll | [10 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
 executable | Windows Screensaver | .scr | [9 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)

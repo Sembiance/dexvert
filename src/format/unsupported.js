@@ -15,7 +15,7 @@ exports.formats =
 		elf          : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
 		fmTownsOSApp : {name : "FM TownsOS App", ext : [".exp"]},
 		omagic       : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
-		sys          : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/]},
+		msDOSDriver  : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
 		xex          : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true}
 	},
 	

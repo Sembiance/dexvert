@@ -181,7 +181,9 @@ const PROGRAM_FLAGS_FILES =
 	"archive/iso/launch.bin" : ["bchunk:bchunkSwapByteOrder:true"]
 };
 
-const SLOW_DURATION = XU.MINUTE;
+const SLOW_FILES = ["image/trs/VGAMONST.TRS", "image/kodakDCR/RAW_KODAK_DCSPRO.DCR", "image/radiance/forest_path.hdr", "image/tundra/tcf-shocktronics.tnd", "image/heic/sample1.heif", "image/neoDeskIcon/BMAN_5.NIC"];
+
+const SLOW_DURATION = XU.MINUTE*3;
 
 const fileDurations = {};
 const cpuCount = os.cpus().length;
@@ -216,7 +218,7 @@ tiptoe(
 		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "src", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
-		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));
+		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).multiSort([v => SLOW_FILES.some(SLOW_FILE => v.endsWith(SLOW_FILE))], true);
 
 		if(argv.format)
 			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(path.join(argv.format, "/")));

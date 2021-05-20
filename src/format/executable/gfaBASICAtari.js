@@ -10,4 +10,4 @@ exports.meta =
 	notes   : "The gfalist program only supports decompiling tokenized files of version 3 and higher."
 };
 
-exports.steps = [() => ({program : "gfalist"})];
+exports.converterPriorty = ["gfalist"];

@@ -14,8 +14,10 @@ exports.meta =
 	notes          : "It's crazy hard to identify this file, and we err on the side of caution. So we only convert files that have meta data set in them."
 };
 
+// binaryText is often mistaken for other things. So don't allow if we had to transform the file to get here
+exports.idCheck = state => !state.transformed;
 
-// binaryText is often mistaken for other things, so only proceed if the meta gathering was successful
+// Also only proceed if the meta gathering was successful
 // deark handles this format better than ansilove
 exports.converterPriorty = state => ((state.input.meta.ansiArt || state.input.meta.binaryText) ? [{program : "deark", flags : {dearkCharOutput : "image"}}, {program : "ansilove", flags : {ansiloveType : "bin"}}, "abydosconvert", "ffmpeg"] : []);
 

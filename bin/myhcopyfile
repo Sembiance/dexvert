@@ -1,4 +1,4 @@
 #!/bin/bash
 
-src=${1//\'/\\"'"}
-eval "hcopy $'$src' '""$2""'"
+#cmd="hcopy "'$'"'"$1"'"" '"$2"'"
+eval "hcopy $'$1' '""$2""'"

@@ -6,6 +6,7 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
 	runUtil = require("@sembiance/xutil").run,
+	os = require("os"),
 	tiptoe = require("tiptoe");
 
 exports.DATA_DIR_PATH = path.join(__dirname, "data");
@@ -64,6 +65,9 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 
 exports.initSamples = function initSamples(cb)
 {
+	if(os.hostname()!=="chatsubo")
+		return fs.symlink(exports.SAMPLE_DIR_PATH_DISK, exports.SAMPLE_DIR_PATH, cb);
+
 	tiptoe(
 		function createRAMDexverDir()
 		{

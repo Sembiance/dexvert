@@ -1,9 +1,6 @@
 "use strict";
 const XU = require("@sembiance/xu"),
-	dexUtil = require("../../dexUtil.js"),
 	path = require("path");
-
-const HFS_MAGICS = [...require("../../format/archive/iso.js").HFS_MAGICS, ...require("../../format/archive/rawPartition.js").HFS_MAGICS];	// eslint-disable-line node/global-require
 
 exports.meta =
 {
@@ -13,11 +10,15 @@ exports.meta =
 };
 
 exports.bin = () => path.join(__dirname, "..", "..", "..", "bin", "uniso");
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath, isoType=(state.identify.some(identification => HFS_MAGICS.some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))) ? "hfs" : "")) =>
+exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) =>
 {
 	const unisoArgs = [];
 	if(r.flags.offset)
 		unisoArgs.push(`--offset=${r.flags.offset}`);
+	
+	unisoArgs.push(inPath, outPath);
+	if(r.flags.hfs)
+		unisoArgs.push("hfs");
 
-	return ([...unisoArgs, inPath, outPath, isoType]);
+	return (unisoArgs);
 };

@@ -1,12 +1,13 @@
 "use strict";
-const XU = require("@sembiance/xu");
+const XU = require("@sembiance/xu"),
+	dexUtil = require("../../dexUtil.js");
 
-exports.HFS_MAGICS = ["Macintosh HFS data"];
+const HFS_MAGICS = ["Macintosh HFS data"];
 
 exports.meta =
 {
 	name  : "Raw Partition",
-	magic : [/^DOS\/MBR boot sector/, ...exports.HFS_MAGICS]
+	magic : [/^DOS\/MBR boot sector/, ...HFS_MAGICS]
 };
 
 exports.converterPriorty = state =>
@@ -19,6 +20,10 @@ exports.converterPriorty = state =>
 			return [{program : "uniso", flags : {offset : (+startSector)*512}}];
 	}
 
-	return ["uniso"];
+	const unisoProg = {program : "uniso"};
+	if(state.identify.some(identification => HFS_MAGICS.some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst))))
+		unisoProg.flags = {hfs : true};
+
+	return [unisoProg];
 };
 

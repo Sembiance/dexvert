@@ -65,9 +65,6 @@ exports.findSupportedSampleFilePaths = function findSupportedSampleFilePaths(cb)
 
 exports.initSamples = function initSamples(cb)
 {
-	if(os.hostname()!=="chatsubo")
-		return fs.symlink(exports.SAMPLE_DIR_PATH_DISK, exports.SAMPLE_DIR_PATH, cb);
-
 	tiptoe(
 		function createRAMDexverDir()
 		{

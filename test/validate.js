@@ -116,7 +116,7 @@ function validateFormat(format)
 	};
 
 	// Format specific properties that are shared for easier re-use
-	["HFS_MAGICS"].forEach(v => { formatSchema[v] = [anything]; });
+	//["HFS_MAGICS"].forEach(v => { formatSchema[v] = [anything]; });
 
 	try
 	{

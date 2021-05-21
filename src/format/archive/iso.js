@@ -2,16 +2,17 @@
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	cueParser = require("cue-parser"),
+	dexUtil = require("../../dexUtil.js"),
 	C = require("../../C.js");
 
-exports.HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/];
 
 exports.meta =
 {
 	name          : "CD Disc Image",
 	website       : "http://fileformats.archiveteam.org/wiki/ISO_image",
 	ext           : [".iso", ".bin", ".hfs", ".ugh"],
-	magic         : ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", ...exports.HFS_MAGICS],
+	magic         : ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", ...HFS_MAGICS],
 	priority      : C.PRIORITY.HIGH,
 	keepFilename  : true,
 	notes         : "Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.",
@@ -95,10 +96,34 @@ exports.steps =
 			return ({program : "bchunk", argsd : [undefined, undefined, tmpCUEFilePath]});
 		}
 
-		// Otherwise we use uniso
-		return ({program : "uniso"});
+		// Finally, we just use uniso
+		const r = {program : "uniso"};
+		
+		// CDs can be hybrid Mac/PC CDs, thus have both HFS and non-HFS tracks
+		// HFS is problematic though, so we prefer to extract the PC versions if available
+		// So we only set the uniso 'hfs' flag if we have an HFS track and we do NOT detect a regular ISO-9660 track (by checking if iso-info found a 'volume' label)
+		const isHFS = state.identify.some(identification => HFS_MAGICS.some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst)));
+		if(isHFS)
+		{
+			// Sometimes though the PC side is just 'empty' or blank (Odyssey Legend of Nemesis) so we will have to re-try later with HFS uniso if we don't get any files out
+			if(state.input.meta?.iso?.volume)
+				state.fallbackToHFSUniso = true;
+			else
+				r.flags = {hfs : true};
+		}
+
+		return r;
 	},
-	() => ({program : "fixPerms"})
+	() => ({program : "fixPerms"}),
+	(state, p) => (state.fallbackToHFSUniso ? p.util.file.findValidOutputFiles() : p.util.flow.noop),
+	(state, p) =>
+	{
+		// If we don't have HFS ISO to fall back to, or we have output files, then we are done
+		if(!state.fallbackToHFSUniso || (state.output.files || []).length>0)
+			return p.util.flow.noop;
+
+		return ({program : "uniso", flags : {hfs : true}});
+	}
 ];
 
 exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([

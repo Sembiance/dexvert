@@ -23,7 +23,7 @@ archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .
 archive | BOLT Game Data Archive | .blt | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [8 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [19 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [20 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [7 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [1 sample file](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
@@ -661,11 +661,11 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [12 
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk | [10 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [7 sample files](https://telparia.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [9 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .cfg .config .frm .hlp .advert .advert2 | [20 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [1 sample file](https://telparia.com/fileFormatSamples/text/txtByFilename/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
-text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [3 sample files](https://telparia.com/fileFormatSamples/text/reg/)
+text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [5 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
 
 
@@ -675,7 +675,7 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [10 sample files](https://telparia.com/fileFormatSamples/video/flm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | [6 sample files](https://telparia.com/fileFormatSamples/video/mov/)
-video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [4 sample files](https://telparia.com/fileFormatSamples/video/avi/)
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [5 sample files](https://telparia.com/fileFormatSamples/video/avi/)
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.

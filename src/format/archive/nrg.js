@@ -24,6 +24,6 @@ exports.steps =
 		inStream.on("end", cb);
 		inStream.pipe(new StreamSkip({skip : 307200})).pipe(fs.createWriteStream(path.join(state.cwd, "in.iso")));
 	},
-	state => ({program : "uniso", argsd : [path.join(state.cwd, "in.iso")]}),
-	() => ({program : "fixPerms"})
+	// The resulting ISO could be almost anything, so just run dexvert against the ISO so it can be handled correctly
+	state => ({program : "dexvert", argsd : [path.join(state.cwd, "in.iso"), state.output.absolute]})
 ];

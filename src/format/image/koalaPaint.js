@@ -20,4 +20,7 @@ exports.meta =
 	trustMagic : true // Koala Paint is normally untrustworthy, but we trust it here
 };
 
+// Must be greater <= 10006 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller
+exports.idCheck = state => fs.statSync(state.input.absolute).size<=10006;
+
 exports.converterPriorty = ["abydosconvert", "nconvert", "view64"];

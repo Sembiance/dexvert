@@ -102,7 +102,7 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 			},
 			function checkImageValidity(imageInfo, [garbageResult])
 			{
-				// If we don't have a widht or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
+				// If we don't have a width or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
 				if(!imageInfo || !imageInfo.width || !imageInfo.height || ((unsafeConverter || untrustworthyConversion) && imageInfo.colorCount===1 && imageInfo.opaque===true))
 				{
 					removeFile = true;

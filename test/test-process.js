@@ -181,7 +181,8 @@ const PROGRAM_FLAGS_FILES =
 	"archive/iso/launch.bin" : ["bchunk:bchunkSwapByteOrder:true"]
 };
 
-const SLOW_FILES = ["image/trs/VGAMONST.TRS", "image/kodakDCR/RAW_KODAK_DCSPRO.DCR", "image/radiance/forest_path.hdr", "image/tundra/tcf-shocktronics.tnd", "image/heic/sample1.heif", "image/neoDeskIcon/BMAN_5.NIC"];
+// We will front load these files at the start so they don't slow down the whole process by being one of the last files randomly chosen to be processed
+const SLOW_FILES = ["image/trs/VGAMONST.TRS", "image/kodakDCR/RAW_KODAK_DCSPRO.DCR", "image/radiance/forest_path.hdr", "image/tundra/tcf-shocktronics.tnd", "image/heic/sample1.heif", "image/neoDeskIcon/BMAN_5.NIC", "image/cgm/corvette.cgm"];
 
 const SLOW_DURATION = XU.MINUTE*3;
 

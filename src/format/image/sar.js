@@ -3,11 +3,12 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name     : "Saracen Paint",
-	website  : "http://fileformats.archiveteam.org/wiki/Saracen_Paint",
-	ext      : [".sar"],
-	mimeType : "image/x-saracen-paint",
-	magic    : ["Saracen Paint Image"]
+	name      : "Saracen Paint",
+	website   : "http://fileformats.archiveteam.org/wiki/Saracen_Paint",
+	ext       : [".sar"],
+	mimeType  : "image/x-saracen-paint",
+	magic     : ["Saracen Paint Image"],
+	weakMagic : true
 };
 
 exports.converterPriorty = ["nconvert", "recoil2png", "abydosconvert", "view64"];

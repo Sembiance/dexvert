@@ -315,10 +315,13 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			runUtil.run("dexvert", [...dexvertArgs, "--outputStateToFile", resultsJSONFilePath, sampleFilePath, outDirPath], runUtil.SILENT, this);
 		},
-		function loadResultsFile()
+		function loadResultsFile(dexvertOutputRaw)
 		{
 			if(!fileUtil.existsSync(resultsJSONFilePath))
-				return this.finish(undefined, "FAIL", `Failed to find dexvert JSON output file for: ${sampleFilePath}`);
+			{
+				fs.writeFileSync(path.join(outDirPath, "dexvertOutput.txt"), dexvertOutputRaw, XU.UTF8);
+				return this.jump(2, undefined, "FAIL", `Failed to find dexvert JSON output file for: ${sampleFilePath} see dexvertOutput.txt in: `);
+			}
 				
 			fs.readFile(resultsJSONFilePath, XU.UTF8, this);
 		},

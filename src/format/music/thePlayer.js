@@ -11,4 +11,4 @@ exports.meta =
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
-exports.converterPriorty = [{program : "xmp", flags : {uadeType : "PTK-Prowiz"}}, "uade123"];
+exports.converterPriorty = ["xmp", {program : "uade123", flags : {uadeType : "PTK-Prowiz"}}];

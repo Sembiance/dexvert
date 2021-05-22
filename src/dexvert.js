@@ -116,15 +116,13 @@ exports.identify = function identify(_inputFilePath, _options, _cb)
 	);
 };
 
-exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, brute=false, keepGoing=false, alwaysBrute=false, brutePrograms=false, midiFont=null, useTmpOutputDir=null, transformed=false, dontTransform=false, programFlags, ranPrograms=[]}, cb)
+exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, brute=false, keepGoing=false, alwaysBrute=false, brutePrograms=false, useTmpOutputDir=null, transformed=false, dontTransform=false, programFlags, ranPrograms=[]}, cb)
 {
 	const inputFilePath = `${_inputFilePath}`;
 	const outputDirPath = `${_outputDirPath}`;
 
 	const state = { ...baseState, op : "process", verbose, startedAt : performance.now() };
 	let tmpOutputDirPath = null;
-	if(midiFont)
-		state.midiFont = midiFont;
 	if(programFlags)
 		state.programFlags = programFlags;
 	if(ranPrograms)
@@ -229,7 +227,7 @@ exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, b
 			if(state.verbose>=1)
 				printUtil.majorHeader("Transform: trimGarbage");
 			
-			processWithTransform("trimGarbage", outputDirPath, state, {verbose, brute, keepGoing, alwaysBrute, brutePrograms, midiFont, useTmpOutputDir, ranPrograms : state.ranPrograms}, this);
+			processWithTransform("trimGarbage", outputDirPath, state, {verbose, brute, keepGoing, alwaysBrute, brutePrograms, useTmpOutputDir, ranPrograms : state.ranPrograms}, this);
 		},
 		function stripInputFile(trimmedState)
 		{
@@ -239,7 +237,7 @@ exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, b
 			if(state.verbose>=1)
 				printUtil.majorHeader("Transform: stripGarbage");
 
-			processWithTransform("stripGarbage", outputDirPath, state, {verbose, brute, keepGoing, alwaysBrute, brutePrograms, midiFont, useTmpOutputDir, ranPrograms : state.ranPrograms}, this.parallel());
+			processWithTransform("stripGarbage", outputDirPath, state, {verbose, brute, keepGoing, alwaysBrute, brutePrograms, useTmpOutputDir, ranPrograms : state.ranPrograms}, this.parallel());
 		},
 		function returnResult(err, r)
 		{

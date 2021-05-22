@@ -6,7 +6,11 @@ exports.meta =
 {
 	website       : "http://zakalwe.fi/uade",
 	gentooPackage : "app-emulation/uade",
-	unsafe   : true
+	unsafe        : true,
+	flags         :
+	{
+		uadeType : "Which 'player' file to use for conversion. Default: Let uade123 decide"
+	}
 };
 
 exports.bin = () => "uade123";

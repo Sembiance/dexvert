@@ -4,9 +4,15 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website       : "https://ffmpeg.org/",
-	gentooPackage : "media-video/ffmpeg",
-	gentooUseFlags : "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib"
+	website        : "https://ffmpeg.org/",
+	gentooPackage  : "media-video/ffmpeg",
+	gentooUseFlags : "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib",
+	flags          :
+	{
+		ffmpegExt    : `Which extension to convert into (".png", ".mp3", ".mp4", ".flac", etc). Default for image is .png, audio is .mp3 otherwise .mp4`,
+		ffmpegFormat : "Specify which format to treat the input file as. Default: Let ffmpeg decide",
+		ffmpegFPS    : "What frame rate to specify for conversion. Default: Let ffmpeg decide"
+	}
 };
 
 exports.bin = () => "ffmpeg";

@@ -48,29 +48,41 @@ exports.run = function run(programRaw, options={})
 		if(state.id)
 			r.id = XU.clone(state.id);
 		if(options.flags)
+		{
+			const validFlags = Object.keys(program.meta.flags || {});
+			const invalidFlags = Object.keys(options.flags).subtractAll(validFlags);
+			if(invalidFlags.length>0)
+			{
+				console.trace();
+				XU.log`\nInvalid flags ${invalidFlags} for program ${program.meta.programid}`;
+				process.exit(0);
+			}
+
 			Object.assign(r.flags, options.flags);
+		}
 		
 		state.ran.unshift(r);
 
 		const bin = program.steps ? null : (program.qemu || program.dos || program.bin)(state);
 		if(state.programFlags?.[bin])
 			Object.assign(r.flags, state.programFlags[bin]);
+		
+		const prevCWDData = {};
 
 		tiptoe(
 			function changeCWD()
 			{
 				if(!program.cwd)
 					return this();
-
-				const prevInputFilePath = path.join(state.cwd, state.input.filePath);
-				const prevOutputDirPath = path.join(state.cwd, state.output.dirPath);
 				
-				state.programPrevCWD = state.cwd;
+				prevCWDData.cwd = state.cwd;
+				prevCWDData.inputFilePath = state.input.filePath;
+				prevCWDData.outputDirPath = state.output.dirPath;
 
 				const newCWD = program.cwd(state, p, r);
 				state.cwd = newCWD.startsWith(path.sep) ? newCWD : path.join(state.cwd, newCWD);
-				state.input.filePath = path.relative(state.cwd, prevInputFilePath);
-				state.output.dirPath = path.relative(state.cwd, prevOutputDirPath);
+				state.input.filePath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.inputFilePath));
+				state.output.dirPath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.outputDirPath));
 
 				this();
 			},
@@ -150,7 +162,17 @@ exports.run = function run(programRaw, options={})
 
 				program.post(state, p, r, this);
 			},
-			cb
+			function revertState(err)
+			{
+				if(Object.keys(prevCWDData).length>0)
+				{
+					state.cwd = prevCWDData.cwd;
+					state.input.filePath = prevCWDData.inputFilePath;
+					state.output.dirPath = prevCWDData.outputDirPath;
+				}
+
+				cb(err);
+			}
 		);
 	};
 };

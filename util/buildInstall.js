@@ -46,6 +46,8 @@ tiptoe(
 		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/flask", website : "https://github.com/pallets/flask/"}});
 		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/pillow", website : "https://python-pillow.org/"}});
 
+		const programCount = programs.length;
+
 		programs.filterInPlace(p => p.meta.hasOwnProperty("gentooPackage"));
 
 		// Some programs are nodejs scripts that call multiple gentoo packages and binaries (such as uniso)
@@ -55,7 +57,7 @@ tiptoe(
 		multiProgs.forEach(multiProg => programs.push(...multiProg.meta.gentooPackage.map((subGentooPackage, i) => ({ bin() { return multiProg.meta.bin[i]; }, meta : {kernel : multiProg.meta.kernel || undefined, gentooPackage : subGentooPackage, website : multiProg.meta.website[i] || ""} }))));
 
 		fs.writeFile(path.join(__dirname, "..", "INSTALL.md"), `# WARNING
-Over ${programs.length} programs are required, including commercial programs and operating systems.
+Over ${programCount} programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install

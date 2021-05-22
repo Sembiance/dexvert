@@ -7,7 +7,11 @@ exports.meta =
 	website       : "https://www.ansilove.org/",
 	gentooPackage : "media-gfx/ansilove",
 	gentooOverlay : "dexvert",
-	unsafe   : true
+	unsafe        : true,
+	flags         :
+	{
+		ansiloveType : "Which ansilove format to use. Default: Let ansilove decide"
+	}
 };
 
 exports.bin = () => "ansilove";

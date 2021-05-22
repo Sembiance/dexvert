@@ -10,7 +10,17 @@ exports.meta =
 {
 	website       : "https://entropymine.com/deark/",
 	gentooPackage : "app-arch/deark",
-	gentooOverlay : "dexvert"
+	gentooOverlay : "dexvert",
+	flags :
+	{
+		dearkModule     : "Which deark module to forcibly set. Default: Let deark decide",
+		dearkOpts       : "An array of additional -opt <option> arguments to pass to deark",
+		dearkCharOutput : `Which type of output to use when converting character based files. Can be "image" or "html" Default: Let deark decide.`,
+		dearkRemoveDups : "Remove any duplicate output files, based on sum. Default: false",
+		dearkJoinFrames : "Treat output files as individual images frames of an animation and join them together as an MP4",
+		dearkGIFDelay   : "Duration of delay between animation frames. Default: 12",
+		keepAsGIF       : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4"
+	}
 };
 
 exports.BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
@@ -56,7 +66,10 @@ exports.post = (state, p, r, cb) =>
 			function getSums(outputFilePaths)
 			{
 				this.data.outputFilePaths = outputFilePaths;
-				this.data.outputFilePaths.parallelForEach((outputFilePath, subcb) => hashUtil.hashFile("blake3", outputFilePath, subcb), this);
+				if(r.flags.dearkRemoveDups)
+					this.data.outputFilePaths.parallelForEach((outputFilePath, subcb) => hashUtil.hashFile("blake3", outputFilePath, subcb), this);
+				else
+					this();
 			},
 			function convertOutputFiles(hashSums)
 			{

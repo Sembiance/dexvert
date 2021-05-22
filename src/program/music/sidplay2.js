@@ -5,7 +5,12 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://sidplay2.sourceforge.net/",
-	gentooPackage : "media-sound/sidplay"
+	gentooPackage : "media-sound/sidplay",
+	flags         :
+	{
+		sidSubTune    : "Specify which sub tune to convert, zero based. Default: 1",
+		sidSongLength : "Duration of time to play the SID song. Default: Let sidplay2 decide"
+	}
 };
 
 exports.bin = () => "sidplay2";
@@ -13,8 +18,8 @@ exports.args = (state, p, r, inPath=state.input.filePath) =>
 {
 	r.sidPaddedSubTune = `${(r.flags.sidSubTune || 1)}`.padStart(3, "0");
 	const sidplayArgs = [`-w${path.join(state.output.dirPath, `outfile_${r.sidPaddedSubTune}.wav`)}`, `-o${r.flags.sidSubTune || 1}`];
-	if(state.sidSongLength)
-		sidplayArgs.push(`-t${state.sidSongLength}`);
+	if(r.flags.sidSongLength)
+		sidplayArgs.push(`-t${r.flags.sidSongLength}`);
 	sidplayArgs.push(inPath);
 
 	return sidplayArgs;

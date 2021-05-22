@@ -7,7 +7,11 @@ exports.meta =
 {
 	website       : "http://dag.wiee.rs/home-made/unoconv/",
 	gentooPackage : "app-office/unoconv",
-	unsafe   : true
+	unsafe        : true,
+	flags         :
+	{
+		unoconvType : `Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "png" for images or "pdf" for everything else.`
+	}
 };
 
 exports.bin = () => "unoconv";

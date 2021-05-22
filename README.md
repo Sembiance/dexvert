@@ -26,12 +26,35 @@ Options:
   --alwaysBrute                                  When brute forcing, always brute force, even if we have an exact id match.
   --outputState                                  If set, will output the state as JSON
   --outputStateToFile [filePath]                 If set, will output the state as JSON to the given filePath
-  --programFlag [program:flagName:flagValue...]  If set, the given flagName and flagValue will be used for program
   --brutePrograms                                If unable to identify <inputFilePath> just run every available program on it
   --dontTransform                                If a file can't be converted, dexvert will try different transforms to convert it.
   --useTmpOutputDir                              If set, dexvert won't clobber the output dir
-  --midiFont [midiFont]                          Convert MIDI files with a specific midi font. Default: eaw
-  		Other available fonts: fluid, roland, creative, freepats, windows
+  --programFlag [program:flagName:flagValue...]  If set, the given flagName and flagValue will be used for program. Possible flags include:
+      bchunk:bchunkSwapByteOrder                 If set to true, will swap the byte ordering for WAVs extracted from audio tracks with bchunk
+      uniso:offset                               Extract ISO starting at this particular byte offset. Default: 0
+      uniso:hfs                                  Set this to true to process the iso as a MacOS HFS disc. Default: false
+      unlzx:unlzxListOnly                        If set to true, only list out the the files in the archive and set meta info, don't actually extract. Default: false
+      unoconv:unoconvType                        Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "png" for images or "pdf" for everything else.
+      file:allMatches                            Set this to true to return ALL matches from the file command, instead of just 1. Default: false
+      ansilove:ansiloveType                      Which ansilove format to use. Default: Let ansilove decide
+      convert:convertExt                         Which extension to convert to (".png", ".webp", ".svg"). Default: .png
+      convert:flip                               Set this to true to flip the image vertically. Default: false
+      convert:removeAlpha                        Set this to true to remove the alpha channel and produce a flat, opaque image. Default: false
+      deark:dearkModule                          Which deark module to forcibly set. Default: Let deark decide
+      deark:dearkOpts                            An array of additional -opt <option> arguments to pass to deark
+      deark:dearkCharOutput                      Which type of output to use when converting character based files. Can be "image" or "html" Default: Let deark decide.
+      deark:dearkRemoveDups                      Remove any duplicate output files, based on sum. Default: false
+      deark:dearkJoinFrames                      Treat output files as individual images frames of an animation and join them together as an MP4
+      deark:dearkGIFDelay                        Duration of delay between animation frames. Default: 12
+      deark:keepAsGIF                            If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4
+      fig2dev:fig2devType                        Which image format to convert to ("png" for example). Default: svg
+      sidplay2:sidSubTune                        Specify which sub tune to convert, zero based. Default: 1
+      sidplay2:sidSongLength                     Duration of time to play the SID song. Default: Let sidplay2 decide
+      timidity:midiFont                          Which midifont to use to convert (eaw, fluid, roland, creative, freepats, windows) Default: eaw
+      uade123:uadeType                           Which 'player' file to use for conversion. Default: Let uade123 decide
+      ffmpeg:ffmpegExt                           Which extension to convert into (".png", ".mp3", ".mp4", ".flac", etc). Default for image is .png, audio is .mp3 otherwise .mp4
+      ffmpeg:ffmpegFormat                        Specify which format to treat the input file as. Default: Let ffmpeg decide
+      ffmpeg:ffmpegFPS                           What frame rate to specify for conversion. Default: Let ffmpeg decide
   -h, --help                                     display help for command
 
 ```

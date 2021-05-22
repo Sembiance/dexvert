@@ -6,7 +6,11 @@ exports.meta =
 {
 	website       : "http://xavprods.free.fr/lzx/",
 	gentooPackage : "app-arch/unlzx",
-	gentooOverlay : "dexvert"
+	gentooOverlay : "dexvert",
+	flags :
+	{
+		unlzxListOnly : "If set to true, only list out the the files in the archive and set meta info, don't actually extract. Default: false"
+	}
 };
 
 exports.bin = () => "unlzx";

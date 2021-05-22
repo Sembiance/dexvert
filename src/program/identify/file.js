@@ -9,7 +9,11 @@ exports.meta =
 	website        : "https://www.darwinsys.com/file/",
 	gentooPackage  : "sys-apps/file",
 	gentooUseFlags : "bzip2 lzma seccomp zlib",
-	informational  : true
+	informational  : true,
+	flags          :
+	{
+		allMatches : "Set this to true to return ALL matches from the file command, instead of just 1. Default: false"
+	}
 };
 
 exports.bin = () => "file";

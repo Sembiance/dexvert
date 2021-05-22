@@ -5,7 +5,11 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://www.xfig.org/",
-	gentooPackage : "media-gfx/transfig"
+	gentooPackage : "media-gfx/transfig",
+	flags         :
+	{
+		fig2devType : `Which image format to convert to ("png" for example). Default: svg`
+	}
 };
 
 exports.bin = () => "fig2dev";

@@ -5,23 +5,27 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	path = require("path");
 
+const INSTRUMENT_NAMES = ["eaw", "fluid", "roland", "creative", "freepats", "windows"];	// Ordered by best sounding
+const INSTRUMENT_DIR_PATH = path.resolve(path.join(__dirname, "..", "..", "..", "music", "midiFont"));
+
 exports.meta =
 {
 	website        : ["http://timidity.sourceforge.net/", "http://freepats.opensrc.org", "http://musescore.org/en/handbook/soundfont", "http://www.stardate.bc.ca/eawpatches/html/default.htm"],
 	gentooPackage  : ["media-sound/timidity++", "media-sound/timidity-freepats", "media-sound/fluid-soundfont", "media-sound/timidity-eawpatches"],
 	bin            : ["timidity", "*", "*"],
 	gentooUseFlags : "X alsa flac gtk ncurses speex vorbis",
-	unsafe    : true
+	unsafe         : true,
+	flags          :
+	{
+		midiFont : `Which midifont to use to convert (${INSTRUMENT_NAMES.join(", ")}) Default: ${INSTRUMENT_NAMES[0]}`
+	}
 };
 
 exports.bin = () => "timidity";
 
-const INSTRUMENT_NAMES = ["eaw", "fluid", "roland", "creative", "freepats", "windows"];	// Ordered by best sounding
-const INSTRUMENT_DIR_PATH = path.resolve(path.join(__dirname, "..", "..", "..", "music", "midiFont"));
-
 exports.preArgs = (state, p, r, cb) =>
 {
-	r.flags.midiFont = r.flags.midiFont || state.midiFont;
+	r.flags.midiFont = r.flags.midiFont;
 	if(!r.flags.midiFont)
 		r.flags.midiFont = INSTRUMENT_NAMES[0];
 

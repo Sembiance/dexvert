@@ -4,11 +4,13 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	C = require("../src/C.js"),
 	fs = require("fs"),
+	path = require("path"),
 	util = require("util"),
+	fileUtil = require("@sembiance/xutil").file,
 	{Command} = require("commander"),
 	dexvert = require("../src/dexvert.js");
 
-const argv = new Command().description("Processes <inputFilePath> converting or extracting files into <outputDirPath>").
+const cmd = new Command().description("Processes <inputFilePath> converting or extracting files into <outputDirPath>").
 	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
 	option("--brute [family...]", `If unable to identify <inputFilePath>, try converting anyways
 		Pass a comma delimited list of families to brute force try
@@ -19,14 +21,18 @@ const argv = new Command().description("Processes <inputFilePath> converting or 
 	option("--alwaysBrute", "When brute forcing, always brute force, even if we have an exact id match.").
 	option("--outputState", "If set, will output the state as JSON").
 	option("--outputStateToFile [filePath]", "If set, will output the state as JSON to the given filePath").
-	option("--programFlag [program:flagName:flagValue...]", "If set, the given flagName and flagValue will be used for program").
 	option("--brutePrograms", "If unable to identify <inputFilePath> just run every available program on it").
 	option("--dontTransform", "If a file can't be converted, dexvert will try different transforms to convert it.").
 	option("--useTmpOutputDir", "If set, dexvert won't clobber the output dir").
-	option("--midiFont [midiFont]", `Convert MIDI files with a specific midi font. Default: eaw
-		Other available fonts: fluid, roland, creative, freepats, windows`).
-	arguments("<inputFilePath> <outputDirPath>").
-	parse(process.argv);
+	option("--programFlag [program:flagName:flagValue...]", "If set, the given flagName and flagValue will be used for program. Possible flags include:");
+
+fileUtil.globSync(path.join(__dirname, "..", "src", "program"), "**/*.js", {nodir : true}).forEach(programFilePath =>
+{
+	const prog = require(programFilePath);	// eslint-disable-line node/global-require
+	Object.forEach((prog.meta.flags || {}), (k, v) => cmd.option(`    ${path.basename(programFilePath, ".js")}:${k}`, v));
+});
+
+const argv = cmd.arguments("<inputFilePath> <outputDirPath>").parse(process.argv);
 
 if(argv.args.length<2)
 {
@@ -40,7 +46,7 @@ tiptoe(
 	function runProcess()
 	{
 		const processOptions = {verbose, programFlags : {}};
-		["useTmpOutputDir", "brute", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform", "midiFont"].forEach(k =>
+		["useTmpOutputDir", "brute", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform"].forEach(k =>
 		{
 			if(argv.hasOwnProperty(k))
 				processOptions[k] = argv[k];

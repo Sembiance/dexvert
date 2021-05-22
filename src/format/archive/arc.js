@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["PAK/ARC Compressed archive", "ARC archive data"]
 };
 
-exports.converterPriorty = ["unar", "arc"];
+exports.converterPriorty = ["unar", "arc", "xarc"];

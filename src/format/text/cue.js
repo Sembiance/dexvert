@@ -39,6 +39,6 @@ exports.inputMeta = (state, p, cb) =>
 	});
 
 	state.processed = true;
-	
-	setImmediate(cb);
+
+	p.family.supportedInputMeta(state, p, cb);
 };

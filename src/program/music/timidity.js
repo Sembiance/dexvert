@@ -25,7 +25,6 @@ exports.bin = () => "timidity";
 
 exports.preArgs = (state, p, r, cb) =>
 {
-	r.flags.midiFont = r.flags.midiFont;
 	if(!r.flags.midiFont)
 		r.flags.midiFont = INSTRUMENT_NAMES[0];
 

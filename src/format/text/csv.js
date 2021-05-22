@@ -35,7 +35,7 @@ exports.inputMeta = (state, p, cb) =>
 				state.processed = true;
 			}
 
-			this();
+			p.family.supportedInputMeta(state, p, this);
 		},
 		cb
 	);

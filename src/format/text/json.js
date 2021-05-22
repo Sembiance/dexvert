@@ -50,7 +50,7 @@ exports.inputMeta = (state, p, cb) =>
 			}
 			catch(err) {}
 
-			this();
+			p.family.supportedInputMeta(state, p, this);
 		},
 		cb
 	);

@@ -68,7 +68,7 @@ document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://tel
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
-executable | Atari Control Panel Extension Module |  | [12 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
+executable | Atari Control Panel Extension Module | .cpx | [12 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
 executable | ELF Executable |  | 

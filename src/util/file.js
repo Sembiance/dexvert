@@ -198,23 +198,29 @@ exports.findValidOutputFiles = function findValidOutputFiles(force)
 			return setImmediate(cb);
 		
 		tiptoe(
-			function deleteEmptyFiles()
+			function deleteEmptyFilesAndBrokenSymlinks()
 			{
-				if(state.verbose>=4)
-					XU.log`file.findValidOutputFiles finding and deleting empty files...`;
+				if(state.verbose>=5)
+					XU.log`file.findValidOutputFiles finding and deleting empty files and broken symlinks...`;
 
-				// Find is very fast at finding and deleting empty files, so let's use that instead of running stat on every output file, checking for zero size and then deleting myself
-				runUtil.run("find", [state.output.absolute, "-type", "f", "-empty", "-delete", "-print"], runUtil.SILENT, this);
+				// Find is very fast at finding and deleting empty files/broken symlinks, so let's use that instead of running stat on every output file, checking for zero size and then deleting myself
+				runUtil.run("find", [state.output.absolute, "-type", "f", "-empty", "-delete", "-print"], runUtil.SILENT, this.parallel());
+				runUtil.run("find", [state.output.absolute, "-xtype", "l", "-delete", "-print"], runUtil.SILENT, this.parallel());
 			},
-			function findFiles(deletedFilePathsRaw)
+			function findFiles(deletedFilePathsRaw, deletedBrokenSymlinkFilePathsRaw)
 			{
 				if(state.verbose>=4)
 				{
 					const deletedOutputFiles = deletedFilePathsRaw.trim().split("\n").filterEmpty();
 					if(deletedOutputFiles.length>0)
 						XU.log`file.findValidOutputFiles found and deleted ${deletedOutputFiles.length} empty files`;
-					
-					XU.log`file.findValidOutputFiles starting glob to find output files...`;
+
+					const deletedBrokenSymlinkFilePaths = deletedBrokenSymlinkFilePathsRaw.trim().split("\n").filterEmpty();
+					if(deletedBrokenSymlinkFilePaths.length>0)
+						XU.log`file.findValidOutputFiles found and deleted ${deletedBrokenSymlinkFilePaths.length} broken symlinks: ${deletedBrokenSymlinkFilePaths}`;
+
+					if(state.verbose>=5)
+						XU.log`file.findValidOutputFiles starting glob to find output files...`;
 				}
 
 				fileUtil.glob(state.output.absolute, "**", {nodir : true}, this);

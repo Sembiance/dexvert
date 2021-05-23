@@ -204,15 +204,26 @@ exports.process = function process(_inputFilePath, _outputDirPath, {verbose=0, b
 			if(!state.input.meta.ts)
 				return this.jump(2);
 			
-			(state.output.files || []).parallelForEach((fp, subcb) => fs.stat(path.join(outputDirPath, fp), subcb), this);
+			// It's possible for unzipped archives to include symlinks that point to files that don't exist which causes fs.stat to fail
+			// So we eat any errors that fs.stat throws and the next function will remoev those files from the state.output.files list
+			(state.output.files || []).parallelForEach((fp, subcb) => fs.stat(path.join(outputDirPath, fp), (err, statData) => subcb(undefined, err ? null : statData)), this);
 		},
 		function setOutputFileTimestamps(outputFilesStats)
 		{
 			const inputTS = moment(state.input.meta.ts, "YYYY-MM-DD").unix();
-			(state.output.files || []).parallelForEach((fp, subcb, i) =>
+			(state.output.files || []).slice().parallelForEach((fp, subcb, i) =>
 			{
+				// If we don't have any stats, then fs.stat() failed which is critical enough to remove it from the state.output.files list
+				if(!outputFilesStats[i])
+				{
+					if(state.verbose>=1)
+						XU.log`ALERT! Removing output file ${fp} from the output.files list due to fs.stat having failed to run on it (possibly a broken symlink extracted from something?).`;
+					state.output.files.removeAll(fp);
+					return setImmediate(subcb);
+				}
+
 				// If our output file has a timestamp earlier than 2020 then it's assumed to be correct and shouldn't be overridden
-				if(outputFilesStats[i].mtime.getFullYear()<2020)
+				if(!outputFilesStats[i] || outputFilesStats[i].mtime.getFullYear()<2020)
 					return setImmediate(subcb);
 
 				// Otherwise we don't know the date. But we know it can't be any later than the input file date, so let's set the output file to the input file date

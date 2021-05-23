@@ -7,7 +7,7 @@ exports.meta =
 	website        : "http://fileformats.archiveteam.org/wiki/Bourne_shell_script",
 	ext            : [".sh", ".x11", ".gnu", ".csh", ".tsch"],
 	forbidExtMatch : true,
-	magic          : ["Linux/UNIX shell script", "POSIX shell script"],
+	magic          : ["Linux/UNIX shell script", "POSIX shell script", "C shell script"],
 	weakMagic      : true,
 	untouched      : true,
 	hljsLang       : "sh"

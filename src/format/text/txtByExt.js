@@ -12,7 +12,7 @@ exports.meta =
 	priority  : C.PRIORITY.VERYLOW,
 	ext       :
 	[
-		".txt", ".rea", ".doc", ".docs", ".english", ".credits", ".manual", ".man", ".info", ".inf", ".log", ".ascii",
+		".txt", ".rea", ".doc", ".docs", ".english", ".credits", ".manual", ".man", ".info", ".inf", ".log", ".ascii", ".nfo",
 		".cfg", ".config",
 		".frm", ".hlp",
 		".advert", ".advert2"

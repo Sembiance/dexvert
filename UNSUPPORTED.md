@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 129 file formats are unsupported by dexvert.
+The following 138 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -68,7 +68,7 @@ document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://tel
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
-executable | Atari Control Panel Extension Module | .cpx | [12 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
+executable | Atari Control Panel Extension Module | .cpx | [10 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
 executable | ELF Executable |  | 
@@ -117,7 +117,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (60)
+## Other (69)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -156,14 +156,20 @@ other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/w
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Script | .ins | 
+other | InstallShield Uninstall Script | .isu | 
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
+other | MDIFF Patch File | .mdf | 
+other | Micro Lathe Object | .lat | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Help File Content | .cnt | Just a table of contents as to what's in the corresponding .hlp file. Not useful.
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
+other | Netware Loadable Module | .nlm | 
+other | Netware Message | .msg | 
 other | Norton Change Directory Info | .ncd | 
+other | NoteWorthy Composure | .nw | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/other/olbLib/)
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | Polyfilm Preferences | .prf | 
@@ -171,6 +177,7 @@ other | Printer Font Metrics | .pfm |
 other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 other | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
+other | RTPatch File | .rtp | 
 other | Startrekker Module Info | .nt | 
 other | StormWizard Resource | .wizard .wizard-all | 
 other | Turbo Basic Chain module | .tbc | 
@@ -178,6 +185,8 @@ other | Turbo C Context File | .dsk |
 other | Turbo Pascal Help | .hlp | 
 other | Turbo Pascal Overlay | .ovr | 
 other | Visual Basic Extension | .vbx | 
+other | Windows Help Global Index Data | .gid | 
+other | Windows Shortcut | .lnk | 
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm | 
 

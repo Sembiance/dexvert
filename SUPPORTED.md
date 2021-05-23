@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 627 file formats are supported by dexvert.
+The following 628 file formats are supported by dexvert.
 
 
 
@@ -56,7 +56,7 @@ archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pi
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [17 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [13 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
-archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [16 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
+archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip | [18 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [15 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [9 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
@@ -84,7 +84,7 @@ audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [4 sample files](https://telparia.com/fileFormatSamples/audio/aif/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [5 sample files](https://telparia.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [6 sample files](https://telparia.com/fileFormatSamples/audio/covoxADPCM/)
-audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [8 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
+audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [9 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
@@ -122,7 +122,7 @@ executable | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BAS
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [1 sample file](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
 executable | Microsoft Windows Dynmic Link Library | .dll | [10 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [14 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
-executable | Windows Screensaver | .scr | [9 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
+executable | Windows Screensaver | .scr | [12 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
 
 
 
@@ -153,7 +153,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (441)
+## Image (442)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -338,6 +338,7 @@ image | [Hires Manager](http://fileformats.archiveteam.org/wiki/Hires_Manager) |
 image | HiRes Player Missile | .hpm | [14 sample files](https://telparia.com/fileFormatSamples/image/hiResPlayerMissile/)
 image | [HRU](http://fileformats.archiveteam.org/wiki/HRU) | .hru | [1 sample file](https://telparia.com/fileFormatSamples/image/hru/)
 image | HS2 Postering | .hs2 | [1 sample file](https://telparia.com/fileFormatSamples/image/hs2/)
+image | [HSI Raw](http://fileformats.archiveteam.org/wiki/HSI_Raw) | .raw .hst | [1 sample file](https://telparia.com/fileFormatSamples/image/hsiRaw/)
 image | I Paint | .ip | [3 sample files](https://telparia.com/fileFormatSamples/image/iPaint/)
 image | [ICDRAW Icon](http://fileformats.archiveteam.org/wiki/ICDRAW_icon) | .ib3 .ibi | [9 sample files](https://telparia.com/fileFormatSamples/image/icdrawIcon/)
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | [7 sample files](https://telparia.com/fileFormatSamples/image/iCEDraw/)
@@ -453,7 +454,7 @@ image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) |
 image | [Paradox](http://fileformats.archiveteam.org/wiki/Paradox) | .mcpp | [7 sample files](https://telparia.com/fileFormatSamples/image/mcpp/)
 image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | [18 sample files](https://telparia.com/fileFormatSamples/image/pcPaint/)
 image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | [15 sample files](https://telparia.com/fileFormatSamples/image/pcx/)
-image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | [7 sample files](https://telparia.com/fileFormatSamples/image/pcBoard/)
+image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | [8 sample files](https://telparia.com/fileFormatSamples/image/pcBoard/)
 image | [Pentax RAW](http://fileformats.archiveteam.org/wiki/Pentax_PEF) | .pef .ptx | [6 sample files](https://telparia.com/fileFormatSamples/image/pentaxRaw/)
 image | [Perfect Pix](http://fileformats.archiveteam.org/wiki/Perfect_Pix) | .eve .odd .pph | [9 sample files](https://telparia.com/fileFormatSamples/image/perfectPix/)
 image | [PES Embroidery File](http://fileformats.archiveteam.org/wiki/PES) | .pes | [1 sample file](https://telparia.com/fileFormatSamples/image/pes/) - It's a vector format, but uniconvertor just embeds a PNG into the resulting SVG file. Imagemagick's convert can produce .svg versions, but it doesn't output all the original lines and no color. So we convert to both SVG and PNG with convert. NOTE: Some of these files produce HUGE resulting files and the process can take a good amoung of time to complete.

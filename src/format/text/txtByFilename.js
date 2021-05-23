@@ -14,7 +14,7 @@ exports.meta =
 	filename  :
 	[
 		/registra.tio/i, /descript.ion/i,
-		/file_id.diz/i,
+		/file_id.*\.diz/i,
 		/^disk_ord.er.?$/i, /ordrform/i,
 		/^(about|change|copying|description|manifest|manual|order|problems|readme|readnow|readthis|release|todo|whatsnew)[._-]*($|\..+$)/i,
 		/^.*read\..*me.*$/i, /^.*read.*me.*\./i, /^.*read.?me.?$/i, /^read.*me.*$/i, /^.read_this/i, /^whats\.new$/i,

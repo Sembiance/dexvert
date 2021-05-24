@@ -5,7 +5,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	name      : "File List",
-	magic     : [...C.TEXT_MAGIC, ...C.GENERIC_MAGIC],
+	magic     : [...C.TEXT_MAGIC, /^data$/],
 	weakMagic : true,
 	priority  : C.PRIORITY.LOW,
 	ext       : [".bbs", ".lst", ".lis", ".dir", ".ind"],

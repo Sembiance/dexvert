@@ -3,12 +3,12 @@
 const XU = require("@sembiance/xu"),
 	C = require("../../C.js");
 
-// txtByFilename handles files with specific filenames that are likely text but have non-ascii characters which requires loosened magic match of A.GENERIC_MAGIC which includes "data"
+// txtByFilename handles files with specific filenames that are likely text but have non-ascii characters which requires loosened magic match of /^data$/
 exports.meta =
 {
 	name      : "Text File",
 	website   : "http://fileformats.archiveteam.org/wiki/Text",
-	magic     : [...C.TEXT_MAGIC, ...C.GENERIC_MAGIC],
+	magic     : [...C.TEXT_MAGIC, /^data$/],
 	weakMagic : true,
 	priority  : C.PRIORITY.VERYLOW,
 	filename  :

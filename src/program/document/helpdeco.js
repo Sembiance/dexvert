@@ -2,6 +2,7 @@
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs"),
+	C = require("../../C.js"),
 	path = require("path"),
 	tiptoe = require("tiptoe");
 
@@ -70,6 +71,7 @@ exports.post = (state, p, r, cb) =>
 		},
 		function convertToPNG()
 		{
+			XU.log`convertToPNG`;
 			this.data.bitmapFilePaths.parallelForEach((bitmapFilePath, subcb) =>
 			{
 				if(bitmapFilePath.endsWith(".shg"))
@@ -80,7 +82,13 @@ exports.post = (state, p, r, cb) =>
 		},
 		function loadImages()
 		{
-			this.data.bitmapFilePaths.parallelForEach((bitmapFilePath, subcb) => fs.readFile(`${bitmapFilePath}.png`, subcb), this);
+			this.data.bitmapFilePaths.parallelForEach((bitmapFilePath, subcb) => fs.readFile(`${bitmapFilePath}.png`, (err, fileData) =>
+			{
+				if(err && state.verbose>=1)
+					XU.log`helpdeco was unable to access PNG ${bitmapFilePath} with err ${err}`;
+
+				subcb(undefined, err ? null : fileData);
+			}), this);
 		},
 		function embedImagesIntoRTF(imagesFileData)
 		{
@@ -89,8 +97,11 @@ exports.post = (state, p, r, cb) =>
 			{
 				if(!fldinstRegex.test(line))
 					return line;
+				
+				const imageData = imagesFileData[i] ? imagesFileData[i].toString("hex").toLowerCase() : C.BROKEN_IMAGE_HEX_DATA;
+				i++;
 
-				return line.replace(fldinstRegex, `{\\pict\\pngblip\n${imagesFileData[i++].toString("hex").toLowerCase()}}`);
+				return line.replace(fldinstRegex, `{\\pict\\pngblip\n${imageData}}`);
 			}).join("\n"), XU.UTF8, this);
 		},
 		function convertRTFToPDF()

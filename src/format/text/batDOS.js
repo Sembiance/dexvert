@@ -8,7 +8,7 @@ exports.meta =
 	website        : "http://fileformats.archiveteam.org/wiki/BAT",
 	ext            : [".bat"],
 	forbidExtMatch : true,
-	magic          : ["DOS batch file", ...C.TEXT_MAGIC, ...C.GENERIC_MAGIC],
+	magic          : ["DOS batch file", ...C.TEXT_MAGIC, /^data$/],
 	weakMagic      : true,
 	untouched      : true,
 	hljsLang       : "bat"

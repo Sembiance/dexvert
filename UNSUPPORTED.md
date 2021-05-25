@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 153 file formats are unsupported by dexvert.
+The following 155 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -53,7 +53,7 @@ audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) |
 
 
 
-## Document (9)
+## Document (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/document/iffCTLG/) - Contains strings used by programs. Not currently enabled as my parser isn't quite right and I don't feel like debugging it more.
@@ -63,6 +63,7 @@ document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/) - Help Librarian files. No information about them could be found anywhere.
 document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
+document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [99 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
 document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
 
@@ -124,7 +125,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (77)
+## Other (78)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -135,6 +136,7 @@ other | Amiga ADF Bootcode | .bootcode |
 other | Amiga ADF XDF Meta | .xdfmeta | 
 other | Amiga CLI-Mate Directory Index File |  | 
 other | Amiga Hunk Library/Object | .lib .obj .o | 
+other | Amiga IFF Debug File | .debug | 
 other | Amiga IFF DTYP |  | 
 other | Amiga Preferences | .prefs | 
 other | Amiga Shared Library | .lib | 

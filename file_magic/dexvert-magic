@@ -25,6 +25,10 @@
 0	string/b	FORM
 >8	string/b	VAXL	IFF VAXL file
 
+# IFF SDBG
+0	string/b	FORM
+>8	string/b	SDBG	IFF SDBG file
+
 # AMOS Memory Bank (Tracker )
 0		string/b	AmBk	AMOS Memory Bank
 >12		string/b	Tracker\ 	\b, Tracker format
@@ -116,3 +120,6 @@
 
 # Kyss KYG
 0	string/b	KYGformat\ ver.	Kyss KYG
+
+# PageStream Document
+0	string/b	\x07\x23\x19\x92\x00\x0D\x02\x00\x00	PageStream Document

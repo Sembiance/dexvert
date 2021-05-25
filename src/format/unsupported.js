@@ -63,6 +63,7 @@ exports.formats =
 		iccColorProfile              : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},
 		iffDTYP                      : {name : "Amiga IFF DTYP", magic : ["Amiga IFF datatype info", "IFF data, DTYP datatype description"]},
 		iffPrefs                     : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
+		iffSDBG					     : {name : "Amiga IFF Debug File", ext : [".debug"], magic : ["IFF SDBG file"]},
 		installShieldScript          : {name : "InstallShield Script", ext : [".ins"], magic : ["InstallShield Script"]},
 		installShieldUninstallScript : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script"]},
 		javaClass                    : {name : "Java Class File", ext : [".class"], magic : ["Java Compiled Object Code", "compiled Java class data", "Java bytecode"]},

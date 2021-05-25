@@ -1,0 +1,56 @@
+þÿ01010104025500ÿ ÿ
+ Date: 11-19-60ÿ  IBM Storyboard Live!ÿ+ Setupÿ þ0100250103010901ÿ ÿ
+ F1=Help þ0200250103011902ÿ ÿ
+ F10=File Services þ0300257003011003ÿ ÿ
+ Esc=Exit þ0400257003011004ÿ ÿ
+ Esc=Quit þ0500212204023905ÿ ÿ
+ÿ  Version 2.0ÿ Copyright IBM Corporation 1992ÿ þ06ÿ052807152506ÿ ÿ
+ÚÿÄ¿³ÿ	 Setupÿ	 ³ÃÿÄ´³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ To select, use  or  ³³ÿ and press ÄÙ.ÿ ³ÀÿÄÙþ07ÿ052908105107ÿ ÿ
+Úÿ1Ä¿³ÿ Default Buffer Pathÿ ³Ãÿ1Ä´³ÿ1 ³³ÿ1 ³³ÿ1 ³³ÿ1 ³Ãÿ1Ä´³ÿ Type the DOS drive and directory path.ÿ ³Àÿ1ÄÙþ08ÿ052908105108ÿ ÿ
+Úÿ1Ä¿³ÿ Default Data Pathÿ ³Ãÿ1Ä´³ÿ1 ³³ÿ1 ³³ÿ1 ³³ÿ1 ³Ãÿ1Ä´³ÿ Type the DOS drive and directory path.ÿ ³Àÿ1ÄÙþ09ÿ080808104009ÿ ÿ
+Úÿ&Ä¿³ÿ  Input Deviceÿ  ³Ãÿ&Ä´³ÿ Input deviceÿ ³³ÿ DOS device nameÿ ³Ãÿ&Ä´³ÿ To select, use  or ÿ	 ³³ÿ and press ÄÙ.ÿ ³³ÿ Press F10 to accept all changes.ÿ ³Àÿ&ÄÙþ1ÿ0121809104010ÿ ÿ
+Úÿ&Ä¿³ÿ  Input Deviceÿ  ³Ãÿ&Ä´³ÿ  Handÿ ³³ÿ  Button actionÿ ³Ãÿ&Ä´³ÿ To select, use  or ÿ	 ³³ÿ and press ÄÙ.ÿ ³³ÿ Press F10 to accept all changes.ÿ ³Àÿ&ÄÙþ11ÿ070808124011ÿ ÿ
+Úÿ&Ä¿³ÿ Printerÿ ³Ãÿ&Ä´³ÿ Printerÿ ³³ÿ Modelÿ ³³ÿ Paper feedÿ ³³ÿ DOS device nameÿ ³Ãÿ&Ä´³ÿ To select, use  or ÿ	 ³³ÿ and press ÄÙ.ÿ ³³ÿ Press F10 to accept all changes.ÿ ³Àÿ&ÄÙþ12ÿ081609134012ÿ ÿ
+Úÿ&Ä¿³ÿ Printer Communication Settingsÿ ³Ãÿ&Ä´³ÿ Baud rateÿ ³³ÿ Parityÿ ³³ÿ Data bitsÿ ³³ÿ Stop bitsÿ ³³ÿ Protocolÿ ³Ãÿ&Ä´³ÿ To select, use  or ÿ	 ³³ÿ and press ÄÙ.ÿ ³³ÿ Press F10 to accept all changes.ÿ ³Àÿ&ÄÙþ1300132409104013ÿ ÿ
+Úÿ&Ä¿³ÿ	 QuietWriter Printerÿ
+ ³Ãÿ&Ä´³ÿ  Slot A pitchÿ  ³³ÿ  Slot B pitchÿ  ³Ãÿ&Ä´³ÿ To select, use  or ÿ	 ³³ÿ and press ÄÙ.ÿ ³³ÿ Press F10 to accept all changes.ÿ ³Àÿ&ÄÙþ14001ÿ309092714ÿ ÿ
+ÚÿÄ¿³ÿ Printer Resolutionÿ ³ÃÿÄ´³ÿ 100 DPIÿ
+ ³³ÿ 300 DPIÿ
+ ³ÃÿÄ´³ÿ Use  or ÿ ³³ÿ and press ÄÙ.ÿ ³ÀÿÄÙþ15ÿ084008072015ÿ ÿ
+ÚÿÄ¿³ÿ Onÿ	 ³³ÿ Offÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ16ÿ084208ÿ1816ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³ and press ÄÙ. ³ÀÿÄÙþ17ÿ094108102717ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³  To select, use  or   ³³ÿ and press ÄÙ.ÿ ³ÀÿÄÙþ18ÿ053009183418ÿ ÿ
+Úÿ Ä¿³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³³ÿ  ³Ãÿ Ä´³ÿ To select, use  or ÿ ³³ÿ	 and press ÄÙ.ÿ	 ³Àÿ ÄÙþ1900113309082019ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ2ÿ0134307072020ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ2100134307072021ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ22ÿ083009173ÿ2ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ To select, use  or ÿ ³³ÿ and press ÄÙ.ÿ ³ÀÿÄÙþ2300103109072023ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ2400133009082024ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ2500113009102025ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþÿ0164109082026ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0100164109082027ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ02ÿ093307132028ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0300113307082029ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0400113307072030ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0500113207072031ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0600113207072032ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³ÃÿÄ´³ÿ Use  or ÿ ³³  and press ÄÙ.  ³ÀÿÄÙþ0700104208123233ÿ ÿ
+ÚÿÄ¿³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³³ÿ ³ÃÿÄ´³ÿ
+ Use  or ÿ
+ ³³ÿ and press ÄÙ.ÿ ³ÀÿÄÙþ08ÿ082802074034ÿ ÿ
+Úÿ&Ä¿³ÿ& ³³ÿ& ³³ÿ	 One moment pleaseÿ.ÿ	 ³³ÿ& ³³ÿ& ³Àÿ&ÄÙþ0900122102094035ÿ ÿ
+Úÿ&Ä¿³ÿ& ³³  You are about to exit Quickÿ	 ³³  Menu/Setup.ÿ ³³ÿ& ³³ÿ& ³³ÿ Exit (y/n)? [ ]ÿ ³³ÿ& ³Àÿ&ÄÙþ1ÿ093602094036ÿ ÿ
+Úÿ&Ä¿³ÿ& ³³ÿ& ³³ÿ Setup changes saved.ÿ
+ ³³ÿ& ³³ÿ Press ÄÙ to continue.ÿ	 ³³ÿ& ³³ÿ& ³Àÿ&ÄÙþ11ÿ093602094037ÿ ÿ
+Úÿ&Ä¿³ÿ& ³³ÿ& ³³ÿ Insert Diskette 1 in drive  .ÿ ³³ÿ& ³³ÿ& ³³ÿ Press ÄÙ when ready.ÿ	 ³³ÿ& ³Àÿ&ÄÙþ12ÿ093602094038ÿ ÿ
+Úÿ&Ä¿³ÿ& ³³ÿ& ³³  Insert program diskette in drive  . ³³ÿ& ³³ÿ& ³³ÿ Press ÄÙ when ready.ÿ	 ³³ÿ& ³Àÿ&ÄÙþ13ÿ0829ÿ075039ÿ ÿ
+Úÿ0Ä¿³ÿ0 ³³ÿ The diskette drive door is open.  Pressÿ ³³ÿ Esc to cancel or close the door and pressÿ ³³ÿ ÄÙ to continue.ÿ ³³ÿ0 ³Àÿ0ÄÙþ14ÿ0829ÿ075040ÿ ÿ
+Úÿ0Ä¿³ÿ0 ³³ÿ Diskette is write-protected.  Press Escÿ ³³ÿ to cancel or remove the write protect tabÿ ³³ÿ and press ÄÙ to continue.ÿ ³³ÿ0 ³Àÿ0ÄÙþ15001029ÿ065041ÿ ÿ
+Úÿ0Ä¿³ÿ0 ³³ÿ The diskette is not formatted or isÿ
+ ³³ÿ damaged.ÿ% ³³ÿ0 ³Àÿ0ÄÙþ16001029ÿ065042ÿ ÿ
+Úÿ0Ä¿³ÿ0 ³³ÿ Cannot find help file.  Make sure the drive  ³³ÿ is ready and contains Diskette 1.ÿ ³³ÿ0 ³Àÿ0ÄÙþ17001029ÿ065043ÿ ÿ
+Úÿ0Ä¿³ÿ0 ³³ÿ Access denied.  Default drive/path isÿ ³³ÿ read-only.ÿ# ³³ÿ0 ³Àÿ0ÄÙþ1800141101106044ÿ ÿ
+ÚÿÄÄÂÿ'ÄÂÿÄ¿³ÿ Helpÿ ³ÿ Use PgUp or PgDn to view.ÿ ³ÿ ³ÃÿÄÄÁÿ'ÄÁÿÄ´³ÿ: ³³ÿ: ³³ÿ: ³³ÿ: ³³ÿ: ³³ÿ: ³Àÿ:ÄÙþ1900110105148045ÿ ÿ
+ÚÿNÄ¿³ÿ  File Servicesÿ! ³³ ÚÿÄ¿ ÚÿÄ¿ Úÿ/Ä¿ ³³ ³ Drive ³ ³  Directoryÿ ³ ³ÿ Filenameÿ Sizeÿ Dateÿ Timeÿ ³ ³³ ÃÿÄ´ ÃÿÄ´ Ãÿ/Ä´ ³³ ³ÿ ³ ³ÿ ³ ³ÿ/ ³ ³³ ³ÿ ³ ³ÿ ³ ³ÿ/ ³ ³³ ³ÿ ³ ³ÿ ³ ³ÿ/ ³ ³³ ³ÿ ³ ³ÿ ³ ³ÿ/ ³ ³³ ³ÿ ³ ³ÿ ³ ³ÿ/ ³ ³³ ÀÿÄÙ ÀÿÄÙ Àÿ/ÄÙ ³³ÿ
+ To select Drive or Directory, use the Tab key and  or ,ÿ ³³ÿ then press ÄÙ.  Press F10 to accept.ÿ ³ÀÿNÄÙþ2ÿ072208164646ÿ ÿ
+Úÿ,Ä¿³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³³ÿ, ³Ãÿ,Ä´³ÿ Use  or ÿ ³³ÿ and press ÄÙ.ÿ ³Àÿ,ÄÙÿ

@@ -1,0 +1,956 @@
+/*****************************************************************************/
+/*                   MCONFIG  HELP  DEFINITION  FILE                         */
+/*                                                                           */
+/*  This file defines the pop-up Help Panels for MCONFIG.EXE .               */
+/*                                                                           */
+/*  Each Help Panel begins with a HELP DEFINITION TAG defined as follows:    */
+/*                                                                           */
+/*  COLUMN  0    1    2   3   4   5   6   7   8   9                          */
+/*          H    E    L   P       x   x       y   y                          */
+/*                                                                           */
+/*          Where xx is a 2 digit number defining the Help Panel Number.     */
+/*          DO NOT CHANGE THE HELP PANEL NUMBERS ! ! !                       */
+/*                                                                           */
+/*          yy is a 2 digit number defining the number of lines in the       */
+/*          Help Panel. The Help Panel Lines immediately follow a HELP       */
+/*          DEFINITION TAG line.  Help Lines should not exceed 54 columns.   */
+/*                                                                           */
+/*  The help popup can display 19 lines at a time.                           */
+/*                                                                           */
+/*  Additional lines in this file are ignored.                               */
+/*                                                                           */
+/*  This file must be an ASCII text file and must be saved WITHOUT Tabs.     */
+/*                                                                           */
+/*                                                                           */
+/*  HELP # 01  -  M-Motion Inputs and Controls Help                          */
+/*  HELP # 02  -  Set Video Inputs Help                                      */
+/*  HELP # 03  -  Set Video Controls Help                                    */
+/*  HELP # 04  -  Set Audio Controls Help                                    */
+/*  HELP # 05  -  Player Error Help                                          */
+/*  HELP # 06  -  4055 InfoWindow Compatibility Help                         */
+/*  HELP # 07  -  Set Audio Inputs Help                                      */
+/*  HELP # 08  -  Pointer Device Definition Help                             */
+/*  HELP # 09  -  Main Menu Help                                             */
+/*  HELP # 10  -  Pioneer Player Help                                        */
+/*  HELP # 11  -  Sony 1200 / 1500 Player Help                               */
+/*  HELP # 12  -  Sony 2000 Player Help                                      */
+/*  HELP # 13  -  OEM Player Help                                            */
+/*  HELP # 15  -  No Player Help                                             */
+/*  HELP # 16  -  Change Configuration Help                                  */
+/*  HELP # 20  -  Test Configuration Help                                    */
+/*                                                                           */
+/*****************************************************************************/
+
+/*****************************************************************************/
+/* HELP DEFINITION - M-Motion Inputs and Controls Menu                       */
+/*****************************************************************************/
+
+HELP 01 38                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄ M-Motion Inputs and Controls Help ÄÄÄÄÄÄÄÄÄÄÄ
+
+You can select one of the following options:
+
+ 1. Set Video Controls:  Brightness, Contrast,
+                         Sharpness, Color, and Tint
+
+ 2. Set Video Inputs 1, 2, and 3:  NTSC, PAL,
+                                   Super-VHS, or None
+
+ 3. Set 4055 InfoWindow Compatibility:  On or Off
+
+ 4. Set Audio Controls:
+
+     . Volume, Balance, Bass, and Treble Levels
+     . Digital Audio Record and Playback Volumes
+     . Left and Right Channel Sensitivity Levels
+     . Use PS/2 Speaker
+
+
+ 5. Set Audio Inputs 1/Left, 1/Right, 2/Left, and
+    2/Right:
+
+     . Match Video Source to Audio Source
+     . Mono or Stereo
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu
+
+
+.... End of M-Motion Inputs and Controls Help ........
+
+
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Set Video Inputs                                        */
+/*****************************************************************************/
+
+HELP 02 38                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ Set Video Inputs Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+Use this Menu to configure the 3 Video Input Sources:
+
+ . Video Input 1:  NTSC, PAL, Y/C, or None  (Cable V1)
+
+    . If Y/C, Cable V1 must be attached to the Y
+      signal, and Cable VC must be attached to the
+      C signal.
+
+ . Video Input 2:  NTSC, PAL, Y/C, or None  (Cable V2)
+
+    . If Y/C, Cable V2 must be attached to the Y
+      signal, and Cable V3 must be attached to the
+      C signal.
+
+      NOTE:  Video Input 3 will automatically be
+             configured as Y/C.
+
+ . Video Input 3:  NTSC, PAL, or None       (Cable V3)
+
+
+NTSC - Video standard in the United States
+PAL  - Video standard in Europe
+Y/C  - S-VIDEO (ie., Super-VHS);  Has separate
+        luminance (Y) and chrominance (C) signals
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+
+.......... End of Set Video Inputs Help ..............
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Set Video Controls                                      */
+/*****************************************************************************/
+
+HELP 03 37                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄ Set Video Controls Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+Use this Menu to adjust the video for:
+ . Brightness, Contrast, Sharpness, Color, and Tint
+
+   Tint:  +100 = maximum green
+          -100 = maximum blue
+
+To change a setting using the Keyboard:
+ . Use the Cursor Up/Down (or Tab) keys to switch to
+   the control you wish to change
+ . Use the following keys to change the value:
+    . Cursor Left/Right for increments of 1
+    . Page Up/Page Down for increments of 10
+
+To change a setting using the Pointer:
+ . Move the Pointer to a Scrollbar Select Area
+ . Select the new setting
+
+As you change a value, it will be implemented.
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F2  - Toggle size of the video window
+  F3  - Save these settings as the new defaults
+  F4  - Restore to initial values
+        (when Utility started)
+  F5  - Reset to the current default values
+  F6  - Change the video source
+  F7  - Start (or stop) the videodisc player
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+
+......... End of Set Video Controls Help .............
+
+/*****************************************************************************/
+/* HELP DEFINITION - Set Audio Controls                                      */
+/*****************************************************************************/
+
+HELP 04 76                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄ Set Audio Controls Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+Use this Menu to adjust the following audio controls:
+
+ . Use PS/2 speaker ?
+    . Output audio to the mono speaker in your PS/2
+    . You may need to set the Volume Level to 100.
+
+ . Volume, Balance, Bass, and Treble Levels
+
+    . Main Volume Level affects the following levels:
+       . Analog Audio Volume
+       . Digital Audio Playback Volume
+
+       It does NOT affect the Digital Record Volume.
+
+    . Balance:  +100 = Right Channel only
+                -100 = Left Channel only
+                   0 = Equal Levels
+
+ . Digital Audio Record and Playback Volumes
+
+    . Digital Audio Record Volume is NOT affected
+      by changes to the Main Volume
+
+    . Digital Audio Playback Volume
+       . Allows you to compensate for any difference
+         in volume level for digital audio playback
+         and analog audio
+
+      NOTE: You should set the Main Volume Level
+            BEFORE you set this Playback Volume.
+
+ . Sensitivity Levels for Input 1/Left, 1/Right,
+   2/Left, and 2/Right:
+
+    . Allows you to compensate for differences in
+      audio input levels
+
+    . If you mix 1/Left and 2/Left (or 1/Right and
+      2/Right), the Sensitivity Level used will be
+      the LOWER of the 2 individual Sensitivity Levels
+
+    . If you have any unused Audio Inputs, you should
+      set their Sensitivity Levels to 100.
+
+    . Sensitivity Levels will not be modified until
+      you do a Save (F3).
+
+    . If you select Restore (F4), the Sensitivity
+      Levels will NOT be reset.  They will remain the
+      current value.
+
+To change a setting using the Keyboard:
+ . Use the Cursor Up/Down (or Tab) keys to switch to
+   the control you wish to change
+ . Use the following keys to change the value:
+    . Cursor Left/Right for increments of 1
+    . Page Up/Page Down for increments of 10
+
+To change a setting using the Pointer:
+ . Move the Pointer to a Scrollbar Select Area
+ . Select the new setting
+
+You can use the following Keys or Selection Areas:
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  F4  - Restore to initial values
+        (when Utility started)
+  F5  - Reset to the current default values
+  F6  - Change the video source. You can hear the
+        audio associated with the active source.
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+......... End of Set Audio Controls Help .............
+/*****************************************************************************/
+/* HELP DEFINITION - Player Error                                            */
+/*****************************************************************************/
+
+HELP 05 19                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ Player Error Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ A player error has occurred.  Check the following
+ for the failing player:
+
+  . All cables are correctly connected.
+  . The player is powered on.
+  . The disc is properly installed.
+  . The drawer is closed.
+
+
+ To perform error recovery and reload the player:
+  . Press any key (EXCEPT F3)
+
+ To abort without any error recovery:
+  . Press F3
+
+
+............ End of Player Error Help ................
+/*****************************************************************************/
+/* HELP DEFINITION - 4055 InfoWindow Compatibility                           */
+/*****************************************************************************/
+
+HELP 06 57                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄ 4055 InfoWindow Compatibility Help ÄÄÄÄÄÄÄÄÄÄ
+
+You can select one of the following options:
+
+ 1. Not InfoWindow Compatible Mode:
+
+    Use this option when you are running
+    applications developed for the M-Motion Video
+    Adapter/A.
+
+ 2. InfoWindow Compatible Mode:
+
+    Use this option when you are running existing
+    InfoWindow applications on the M-Motion Video
+    Adapter/A.
+
+    NOTE:  None of the new functions on the M-Motion
+           Video Adapter/A will be available when
+           this mode is active.
+
+    The following audio settings are used:
+
+     . Audio is not muted
+     . Audio does not follow video  (It does not
+       change when the video source is changed.)
+     . Audio Input 1/Left and Input 2/Left are mixed
+     . Audio Input 1/Right and Input 2/Right are mixed
+     . Stereo output
+
+    Also, the video image is modified.  Touch areas
+    (defined with the InfoWindow Control Program)
+    and graphics will then align with the video
+    the same as on the 4055 InfoWindow.
+
+
+    NOTE: This utility may appear to run much slower
+          in InfoWindow Compatible Mode, because it
+          must swap the modes to run certain functions
+          (Test Configuration, Video Controls, Audio
+          Inputs, and Audio Controls ).
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save this setting as the new default
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THIS SETTING
+
+
+.... End of 4055 InfoWindow Compatibility Help .......
+
+
+
+
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Set Audio Inputs                                        */
+/*****************************************************************************/
+
+HELP 07 57                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄ Set Audio Inputs Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+Use this option to match the Audio Inputs to the Video
+Inputs (1, 2, or 3).  This allows the associated Audio
+Inputs to be automatically switched whenever the Video
+Input is switched.  (eg., Audio follows video.)
+
+Four Audio Inputs are available:
+ . Input 1/Left
+ . Input 1/Right
+ . Input 2/Left
+ . Input 2/Right
+
+You can select Left, Right or both (Left and Right)
+Channels.
+
+
+You can also select Mono or Stereo output:
+
+ . If you select Mono:
+
+    . The Left Channel (if configured) will be heard
+      in both speakers, and
+    . The Right Channel (if configured) will be heard
+      in both speakers.
+
+      For example, if your only input is Audio 2-Left,
+      selecting Mono will produce the same audio on
+      both the left and right speaker.
+
+      You must use Mono output if either of the
+      following is true:
+
+       . Your device has only one output channel
+       . All 3 video inputs require audio.  You
+         can configure this 2 ways:
+          . 3 Mono outputs, or
+          . 2 Mono outputs and 1 Stereo output
+
+ . If you do not select Mono:  (Output is Stereo.)
+
+    . The Left Channel (if configured) will be heard
+      in the left speaker, and
+    . The Right Channel (if configured) will be heard
+      in the right speaker.
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+
+......... End of Set Audio Inputs Help ...............
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Pointer Device Definition                               */
+/*****************************************************************************/
+
+HELP 08 57                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄ Pointer Device Definition Help ÄÄÄÄÄÄÄÄÄÄÄÄ
+
+You can select one of the following options:
+
+ 1. No Pointer Device Defined
+
+ 2. Set the Pointer Device to Ignore the InfoWindow
+    Compatibility Mode
+
+     . Use this option when you are running
+       applications developed for the M-Motion
+       Video Adapter/A.
+
+     . The application must control hiding and
+       showing the Mouse.  The pointer will not be
+       automatically hidden and shown.
+
+ 3. Define a MultiMedia Pointer Device
+     . This must be a PS/2 Mouse.
+
+ 4. Set the Pointer Device to Follow the InfoWindow
+    Compatibility Mode
+
+     . Use this option when you are running existing
+       InfoWindow applications on the M-Motion Video
+       Adapter/A.
+
+     . When this option is selected and the InfoWindow
+       Compatible Mode is active, the pointer will
+       automatically be hidden or shown under the
+       following conditions:
+        . Hidden:  If Button #1 (the Left Button) is
+                   pressed
+        . Shown:   If Mouse movement is detected
+                   approximately 1 second after Button
+                   #1 is pressed
+        . Shown:   If Button #2 is pressed
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+
+...... End of Pointer Device Definition Help .........
+
+
+
+
+
+
+
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Main Menu                                               */
+/*****************************************************************************/
+
+HELP 09 76                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ Main Menu Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+You can select one of the following options:
+
+ 1. Change the current configuration:
+    . Videodisc player(s)
+    . Video Inputs and Controls
+    . Audio Inputs and Controls
+    . 4055 InfoWindow Compatibility
+    . Pointing Device
+
+ 2. Test the current configuration.
+
+The current configuration is displayed in the
+scrollable panel on the left side of the screen.
+
+REMEMBER:  You must run MSTART.BAT before running this
+           utility.
+
+You can use the Keyboard or the Pointer (Mouse) to
+make a selection.  Do one of the following:
+
+ . Press the appropriate Key on the Keyboard
+      For Menu Options:  The Key you should press is
+                         displayed in the upper left
+                         corner of the "box."
+
+ . Move the Mouse Pointer to the Selection Area and
+   press Button #1 (the Left Button)
+
+
+   If your Mouse Pointer is not visible, press the
+   END Key and follow the instructions listed.
+
+
+A checkmark will be placed in the upper right corner
+of any Menu Option you have "visited."
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Utility
+
+
+To view the current configuration (or Help Panels),
+use the following Keys (or Selection Areas):
+
+   PGUP - Display the previous screen
+   PGDN - Display the next screen
+   UP   - Display the previous line
+   DN   - Display the next line
+   HOME - Display the first screen
+   END  - Display the last screen
+
+
+If your Pointer Device (Mouse) is not working,
+you must:
+
+  . Define the Pointing Device
+  . Re-boot your system
+  . Run MSTART.BAT
+  . Run MOUSE.COM
+  . Re-start the Configuration Utility
+
+
+............. End of Main Menu Help ..................
+
+
+
+
+
+
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Pioneer Player                                          */
+/*****************************************************************************/
+
+HELP 10 38                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄ Pioneer LD-V6000, LD-V6000A, and LD-V6010A ÄÄÄÄÄ
+                 ÄÄÄ Player Help ÄÄÄ
+You have selected a Pioneer LD-V6000, LD-V6000A, or
+LD-V6010A Player.
+
+REMEMBER: You must also define the following:
+           . The Communications Port (1, 2, 3, or 4)
+           . The Video Input Number  (1, 2, or 3)
+           . The Video Input Type    (NTSC)
+           . The Audio Input Number  (1 or 2)
+
+          See the M-Motion Inputs and Controls Menu.
+
+The switches in the rear of the player must be set as:
+              ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+              º  Ü   Ü       Ü         º
+              º  ³ Ü ³ Ü Ü Ü ³ Ü Ü Ü   º
+              º  1 2 3 4 5 6 7 8 9 10  º
+              ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+This sets the player for 9600 baud which is required
+for the M-Control Program / 2.
+
+
+NOTE:  If you configure a player for Com. Port 1,
+       make sure it is attached to the Communications
+       Port on the PS/2 System Board - the 25 pin
+       connector with pins visible.  (It's a "male"
+       connector.)
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+........... End of Pioneer Player Help ...............
+/*****************************************************************************/
+/* HELP DEFINITION - Sony 1200 / 1500 Player                                 */
+/*****************************************************************************/
+
+HELP 11 38                                            /* HELP DEFINITION TAG */
+ÄÄÄ Sony LDP-1200, LDP-1450, LDP-1500, LDP-1550, ÄÄÄÄ
+           ÄÄ and LDP-3600D Player Help ÄÄÄ
+
+You have selected a Sony LDP-1200, LDP-1450, LDP-1500,
+LDP-1550, or LDP-3600D Player.
+REMEMBER: You must also define the following:
+           . The Communications Port (1, 2, 3, or 4)
+           . The Video Input Number  (1, 2, or 3)
+           . The Video Input Type    (NTSC)
+           . The Audio Input Number  (1 or 2)
+
+          See the M-Motion Inputs and Controls Menu.
+The switches in the rear of a Sony LDP-1450, LDP-1500
+or LDP-1550 must be set as:
+              ÉÍÍÍÍÍÍÍÍÍÍÍ»
+              º        Ü  º
+              º  Ü Ü Ü ³  º
+              º  1 2 3 4  º
+              ÈÍÍÍÍÍÍÍÍÍÍÍ¼
+On a Sony LDP-1200 and LDP-3600D player, select
+Baud Rate 4.
+This sets the player for 9600 baud which is required
+for the M-Control Program / 2.
+
+NOTE:  If you configure a player for Com. Port 1,
+       make sure it is attached to the Communications
+       Port on the PS/2 System Board - the 25 pin
+       connector with pins visible.  (It's a "male"
+       connector.)
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+............. End of Sony Player Help ................
+/*****************************************************************************/
+/* HELP DEFINITION - Sony 2000 Player                                        */
+/*****************************************************************************/
+
+HELP 12 38                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄ Sony LDP-2000 Player Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+You have selected a Sony LDP-2000 Player.
+
+REMEMBER: You must also define the following:
+           . The Communications Port (1, 2, 3, or 4)
+           . The Video Input Number  (1, 2, or 3)
+           . The Video Input Type    (NTSC)
+           . The Audio Input Number  (1 or 2)
+
+          See the M-Motion Inputs and Controls Menu.
+
+The switches in the rear of a Sony LDP-2000 must be
+set as:
+             ÉÍÍÍÍÍÍÍÍÍÍÍ»
+             º  Ü Ü      º
+             º  ³ ³ Ü Ü  º
+             º  1 2 3 4  º
+             ÈÍÍÍÍÍÍÍÍÍÍÍ¼
+This sets the player for 9600 baud which is required
+for the M-Control Program / 2.
+
+
+NOTE:  If you configure a player for Com. Port 1,
+       make sure it is attached to the Communications
+       Port on the PS/2 System Board - the 25 pin
+       connector with pins visible.  (It's a "male"
+       connector.)
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+........... End of Sony 2000 Player Help .............
+/*****************************************************************************/
+/* HELP DEFINITION - OEM Player                                             */
+/*****************************************************************************/
+
+HELP 13 35                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ OEM Player Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+You have selected an OEM player for this device.
+
+You must supply the name of the OEM player driver.
+
+Refer to the manufacturer's documentation for
+further information.
+
+
+REMEMBER: You must also define the following:
+           . The Communications Port (1, 2, 3, or 4)
+           . The Video Input Number  (1, 2, or 3)
+           . The Video Input Type    (NTSC or PAL)
+           . The Audio Input Number  (1 or 2)
+
+
+          See the M-Motion Inputs and Controls Menu.
+
+
+NOTE:  If you configure a player for Com. Port 1,
+       make sure it is attached to the Communications
+       Port on the PS/2 System Board - the 25 pin
+       connector with pins visible.  (It's a "male"
+       connector.)
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+............. End of OEM Player Help .................
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - No Player                                               */
+/*****************************************************************************/
+
+HELP 15 46                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ No Player Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+There is currently no videodisc player defined
+for this device.
+
+
+Select Option 1 if your player is one of the
+following:
+ . Pioneer LD-V6000
+ . Pioneer LD-V6000A
+ . Pioneer LD-V6010A
+
+Select Option 2 if your player is one of the
+following:
+ . Sony LDP-1200   . Sony LDP-1550
+ . Sony LDP-1450   . Sony LDP-3600D
+ . Sony LDP-1500
+
+Select Option 3 if your player is a Sony LDP-2000.
+
+Select Option 4 if your player is not listed by the
+players in options 1 - 3 or 6 - 7.
+
+Select Option 5 (this option) for no player.
+
+Select Option 6 if your player is one of the
+following:
+ . Pioneer LD-V4200
+ . Pioneer LD-V2200
+
+Select Option 7 if your player is one of the
+following:
+ . Pioneer LD-V8000
+ . Pioneer LD-V4400
+ . Pioneer LD-V4300D
+
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save this setting as the new default
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THIS SETTING
+
+............. End of No Player Help .................
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Change Configuration                                    */
+/*****************************************************************************/
+
+HELP 16 38                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄ Change Configuration Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+You can select one of the following options:
+
+ 1. Set Player 1 Type and Communication Port ( COMx )
+    location.
+
+ 2. Set Player 2 Type and Communication Port ( COMx )
+    location.
+
+ 3. Define Inputs and Controls for the M-Motion Video
+    Adapter/A:
+     .  Video Inputs and Controls
+     .  Audio Inputs and Controls
+     .  4055 InfoWindow Compatibility Mode
+
+ 4. Define a Pointer Device.
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu
+
+
+........ End of Change Configuration Help ............
+
+
+
+
+
+
+
+
+
+
+
+/*****************************************************************************/
+/* HELP DEFINITION - Test Configuration                                      */
+/*****************************************************************************/
+
+HELP 20 53                                            /* HELP DEFINITION TAG */
+ÄÄÄÄÄÄÄÄÄÄÄÄÄ Test Configuration Help ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+NOTE:  If you have changed your configuration, you
+       must re-boot your system and run MSTART.BAT
+       BEFORE YOU CAN TEST YOUR NEW CONFIGURATION.
+
+Test Configuration verifies your configuration by
+performing the following tests:
+
+ . Check if M-Control Program [MMEDIA.EXE] is loaded.
+
+ . If the Pointer Device is defined:
+    . Check if its driver [MPOINTER.EXE] is loaded.
+
+ . If the M-Motion Video Adapter/A is installed.
+    . Check if its driver [MMOTION.EXE] is loaded.
+
+ . If Player 1 is defined and the proper device driver
+   is loaded:
+    . Attempt to load Player 1
+
+ . If Player 2 is defined and the proper device driver
+   is loaded:
+    . Attempt to load Player 2
+
+ . Issue a play command to each valid player
+
+ . For each video input source defined:
+    . Display the video input source for 4 seconds
+
+
+You should visually verify that the proper video
+appears for each video input source.  To adjust
+the video quality, select the following options:
+
+ . Change Configuration
+ . M-Motion Inputs and Controls
+ . Set Video Controls
+
+
+To switch between video input sources:
+ . Use the pointer or type the video input source
+   number
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and ABORT ANY TEST IN PROGRESS
+
+
+........ End of Test Configuration Help ..............
+/*****************************************************************************/
+/* HELP DEFINITION - Pioneer 8000 Player                                          */
+/*****************************************************************************/
+
+HELP 21 74
+ÄÄ Pioneer LD-V8000, LD-V4400, LD-V4300D, LD-V4200  ÄÄ
+            ÄÄ and LD-V2200 Player Help ÄÄ
+
+You have selected a Pioneer LD-V8000, LD-V4400,
+LD-V4300D, LD-V4200, or LD-V2200 Player.
+REMEMBER: You must also define the following:
+           . The Communications Port (1, 2, 3, or 4)
+           . The Video Input Number  (1, 2, or 3)
+           . The Video Input Type    (NTSC)
+           . The Audio Input Number  (1 or 2)
+
+          See the M-Motion Inputs and Controls Menu.
+
+These players sould be set to the following:
+
+    PLAYER:     SETTINGS:     (baud rate, parity,
+                              data bits, stop bits)
+
+    LD-V8000    9600,n,8,1     LD-V4200    4800,n,8,1
+    LD-V4400    9600,n,8,1     LD-V2200    4800,n,8,1
+    LD-V4300D   9600,n,8,1
+
+
+To make the player settings follow these steps:
+
+LD-V8000, LD-V4400, LD-V4300D:
+
+1. Depress the Display button and hold it down while
+powering up the player.  The player will enter setup
+mode.
+
+2. Press the Scan Forward button 5 times. The monitor
+should display "RS-232C SWITCH P-5" at the top of the
+screen.
+
+3. Use the Step Forward button to highlight the
+parameter to be set.
+
+4. Use the Step Reverse button to cycle the
+highlighted parameter through its possible settings
+until the correct one is displayed.
+
+5. Repeat steps 3 and 4 for each parameter.
+
+6. Press the Display button to end the setup mode.
+
+
+LD-V4200:
+
+1. Open the panel on the front of the player.
+2. Set all switches in the UP position.
+
+
+LD-V2200:
+
+1. Set both switches on the rear of the player in the
+UP position.
+
+
+NOTE:  If you configure a player for Com. Port 1,
+       make sure it is attached to the Communications
+       Port on the PS/2 System Board - the 25 pin
+       connector with pins visible.  (It's a "male"
+       connector.)
+
+
+You can use the following Keys or Selection Areas:
+
+  F1  - Display this Help Panel
+  F3  - Save these settings as the new defaults
+  ESC - Exit this Help Panel (if displayed), or
+        Exit this Menu, and DO NOT SAVE THESE SETTINGS
+
+........... End of Pioneer Player Help ...............
+
+
+
+
+/*****************************************************************************/
+/* End of file                                                               */
+/*****************************************************************************/
+

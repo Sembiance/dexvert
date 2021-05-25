@@ -6,7 +6,7 @@ exports.meta =
 {
 	name    : "PKZip Archive",
 	website : "http://fileformats.archiveteam.org/wiki/ZIP",
-	ext     : [".zip"],
+	ext     : [".zip", ".exe"],
 	magic   : ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/]		// eslint-disable-line prefer-named-capture-group
 };
 

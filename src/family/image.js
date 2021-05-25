@@ -105,6 +105,8 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 				// If we don't have a width or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
 				if(!imageInfo || !imageInfo.width || !imageInfo.height || ((unsafeConverter || untrustworthyConversion) && imageInfo.colorCount===1 && imageInfo.opaque===true))
 				{
+					if(state.verbose>=3)
+						XU.log`Removing image ${outFilePath} due to not having width/height or no imageInfo or invalid imageInfo ${{unsafeConverter, untrustworthyConversion, imageInfo}}`;
 					removeFile = true;
 					return this.jump(-1);
 				}

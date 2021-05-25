@@ -3,7 +3,7 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name        : "Corel Thumbnails Archvie",
+	name        : "Corel Thumbnails Archive",
 	website     : "http://fileformats.archiveteam.org/wiki/CorelDRAW",
 	filename    : ["_thumbnail_"],
 	unsupported : true,

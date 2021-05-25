@@ -9,5 +9,5 @@ exports.meta =
 	magic    : ["Windows Icon", "MS Windows icon resource", "Icon File Format"]
 };
 
-// ICO file has multiple sub icons, which deark handles well
-exports.converterPriorty = ["deark"];
+// ICO file has multiple sub icons, which deark handles well. Fallback to nconvert
+exports.converterPriorty = ["deark", "nconvert"];

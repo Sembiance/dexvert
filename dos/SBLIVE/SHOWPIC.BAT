@@ -1,0 +1,3 @@
+@ECHO OFF
+FOR %%F IN (*.PIC) DO SHOWPIC %%F)
+

@@ -7,7 +7,7 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "http://fileformats.archiveteam.org/wiki/Image_Alchemy"
+	website : "https://github.com/Sembiance/dexvert"
 };
 
 exports.dos = () => "IPF2TXT.EXE";

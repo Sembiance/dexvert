@@ -6,7 +6,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.watto.org/game_extractor.html",
-	gentooPackage : "app-arch/gameextractor",
+	gentooPackage : "games-util/gameextractor",
 	gentooOverlay : "dexvert",
 	unsafe   : true
 };

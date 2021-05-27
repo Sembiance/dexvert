@@ -75,6 +75,7 @@ C.UNTRUSTWORTHY_MAGIC =
 	/^MMDF mailbox$/,
 	/^Motorola S-Record; binary data in text format$/,
 	/^Novell LANalyzer capture file$/,
+	/^PEX Binary Archive$/,
 	/^Par archive data$/,
 	/^Picasso 64 Image$/,
 	/^PGP key security ring/,

@@ -5,17 +5,17 @@ fileSize=$(wc -c "$1" | cut -f1 -d" ")
 rm -rf dexwalk_out
 mkdir dexwalk_out
 
-for ((i=1; i <= fileSize; i+=10)); do
-	for ((z=i; z <= i+10; z++)); do
+for ((i=1; i <= fileSize; i+=30)); do
+	for ((z=i; z <= i+30; z++)); do
 		mkdir dexwalk_out/"$z"
 		dd if="$1" of=dexwalk_out/wip"$z" bs=1 skip="$z" >/dev/null 2>&1
 		dexvert dexwalk_out/wip"$z" dexwalk_out/"$z"/ &
 	done
 
-	echo "Waiting for 10 dexverts starting at ""$i"
+	echo "Waiting for 30 dexverts starting at ""$i"
 	wait
 
-	for ((z=i; z <= i+10; z++)); do
+	for ((z=i; z <= i+30; z++)); do
 		rm -f dexwalk_out/wip"$z"
 	done
 

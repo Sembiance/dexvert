@@ -123,3 +123,7 @@
 
 # PageStream Document
 0	string/b	\x07\x23\x19\x92\x00\x0D\x02\x00\x00	PageStream Document
+
+# FM-TownsOS EXP
+0	string/b	P3	FM-TownsOS EXP P3
+0	string/b	MP	FM-TownsOS EXP MP

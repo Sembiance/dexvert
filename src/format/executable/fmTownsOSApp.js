@@ -7,6 +7,7 @@ exports.meta =
 	name        : "FM-TownsOS App",
 	ext         : [".exp"],
 	magic       : ["FM-TownsOS EXP"],
+	weakMagic   : true,
 	unsupported : true
 };
 

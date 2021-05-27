@@ -82,7 +82,10 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 					return this.jump(-1);
 				}
 
-				imageUtil.getInfo(outFilePath, {timeout : XU.SECOND*30}, this.parallel());
+				const imageGetInfoOptions = {timeout : XU.SECOND*30};
+				if(dexid.formatid==="svg")
+					imageGetInfoOptions.svg = true;
+				imageUtil.getInfo(outFilePath, imageGetInfoOptions, this.parallel());
 
 				// tensorUtil.classifyImage will convert these into PNG before sending to the classifier.
 				// We skip some files from classification, due to them looking like garbage. We do this by hoping the input file path contains certain keywords that are known to have 'noisy' images
@@ -170,7 +173,10 @@ exports.supportedInputMeta = function supportedInputMeta(state, p, cb)
 	tiptoe(
 		function getImageInfo()
 		{
-			imageUtil.getInfo(state.input.absolute, {timeout : XU.MINUTE*3}, this);
+			const imageGetInfoOptions = {timeout : XU.MINUTE*3};
+			if(state?.id?.formatid==="svg")
+				imageGetInfoOptions.svg = true;
+			imageUtil.getInfo(state.input.absolute, imageGetInfoOptions, this);
 		},
 		function stashResults(imageInfo)
 		{

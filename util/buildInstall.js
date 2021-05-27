@@ -18,6 +18,10 @@ tiptoe(
 		// bin/runServers.js
 		programs.push({bin() { return "jq"; }, meta : {gentooPackage : "app-misc/jq", website : "https://stedolan.github.io/jq/"}});
 
+		// util/calcQEMUScreenshotDiffValues.js
+		programs.push({bin() { return "vncsnapshot"; }, meta : {gentooPackage : "net-misc/vncsnapshot", website : "http://vncsnapshot.sourceforge.net/"}});
+		programs.push({bin() { return "puzzle-diff"; }, meta : {gentooPackage : "media-libs/libpuzzle", gentooOverlay : "dexvert", website : "http://www.pureftpd.org/project/libpuzzle"}});
+
 		// server/qemu.js
 		programs.push({bin() { return "qemu-system-*"; }, meta : {gentooPackage : "app-emulation/qemu", website : "http://www.qemu.org", gentooUseFlags : "aio alsa bzip2 caps curl fdt filecaps gtk jpeg lzo ncurses nls opengl oss pin-upstream-blobs png seccomp slirp spice usb usbredir vhost-net vnc xattr zstd"}});
 		programs.push({bin() { return ""; }, meta : {gentooPackage : "x11-drivers/xf86-video-qxl", website : "https://gitlab.freedesktop.org/xorg/driver/xf86-video-qxl", gentooUseFlags : "xspice"}});
@@ -30,6 +34,9 @@ tiptoe(
 		// runUtil.run
 		programs.push({bin() { return "Xvfb"; }, meta : {gentooPackage : "x11-base/xorg-server", website : "https://www.x.org/wiki/", gentooUseFlags : "libglvnd xorg xvfb"}});
 		programs.push({bin() { return "hsetroot"; }, meta : {gentooPackage : "x11-misc/hsetroot", website : "https://wiki.gentoo.org/wiki/No_homepage"}});
+
+		// imageUtil.getInfo
+		programs.push({bin() { return "svgdim"; }, meta : {gentooPackage : "media-gfx/svgdim", gentooOverlay : "dexvert", website : "https://github.com/Sembiance/svgdim"}});
 
 		// videoUtil.info (and DOS video recording too)
 		programs.push({bin() { return "mplayer"; }, meta : {gentooPackage : "media-video/mplayer", website : "http://www.mplayerhq.hu/", gentooUseFlags : "X a52 alsa cdio dga dts dv dvd dvdnav enca encode iconv joystick jpeg libass live lzo mad mng mp3 network opengl osdmenu png rtc shm tga theora truetype unicode v4l vcd vdpau vorbis x264 xinerama xscreensaver xv xvid"}});

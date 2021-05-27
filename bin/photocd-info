@@ -29,6 +29,7 @@ tiptoe(
 	},
 	function mountISO()
 	{
+		// fuseiso does a pretty good job at mounting photo cds, so use it to see if a photo_cd is detected
 		runUtil.run("fuseiso", [inputFilePath, MOUNT_DIR_PATH], runUtil.SILENT, this);
 	},
 	function findPhotoCDImages()

@@ -18,6 +18,11 @@ exports.qemuData = (state, p, r) => ({
 			If $errorVisible Not = 0 Then
 				ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:Ok]")
 				ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:No]")
+
+				Sleep(1500)
+
+				ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:Ok]")
+				ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:No]")
 			EndIf
 		Else
 			Sleep(1000)

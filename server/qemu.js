@@ -3,6 +3,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	os = require("os"),
 	fs = require("fs"),
+	C = require("../src/C.js"),
 	tiptoe = require("tiptoe"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run;
@@ -29,14 +30,13 @@ const OS_DEFAULT =
 // We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
-	win2k    : { subnet : BASE_SUBNET, machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	win2k    : { subnet : BASE_SUBNET, machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", extraArgs : ["-nodefaults", "-vga", "cirrus", "-drive", "format=raw,if=ide,file=pagefile.img"], extraImgs : ["pagefile.img"] },
 	winxp    : { subnet : BASE_SUBNET + 1, ram : "2G", machine : "accel=kvm,dump-guest-core=off", hdOpts : ",if=ide,index=0", cores : 2, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
 	amigappc : { arch : "ppc", subnet : BASE_SUBNET + 2, machine : "type=sam460ex,dump-guest-core=off", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" }
 };
 
 const INSTANCES = {};
 const NUM_SERVERS = DEBUG ? 1 : HOSTS[os.hostname()]?.numServers || 1;
-const INSTANCE_DIR_PATH = "/mnt/ram/dexvert/qemu";
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(__dirname, "..", "qemu");
 let serversLaunched = false;
@@ -47,7 +47,7 @@ function startOS(osid, instanceid, cb)
 	if(!INSTANCES[osid])
 		INSTANCES[osid] = {};
 	
-	const instance = {instanceid, dirPath : path.join(INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
+	const instance = {osid, instanceid, dirPath : path.join(C.QEMU_INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
 	instance.debug = DEBUG || OS[osid].debug;
 	instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
 	instance.smbHostPort = +`${OS[osid].subnet}${20+instanceid}`;
@@ -61,9 +61,10 @@ function startOS(osid, instanceid, cb)
 			fs.mkdir(path.join(instance.dirPath, "in"), {recursive : true}, this.parallel());
 			fs.mkdir(path.join(instance.dirPath, "out"), {recursive : true}, this.parallel());
 		},
-		function copyHDImage()
+		function copyHDImages()
 		{
-			fs.copyFile(path.join(INSTANCE_DIR_PATH, `${osid}.img`), path.join(instance.dirPath, "hd.img"), this);
+			const imgFilePaths = ["hd.img", ...(OS[osid].extraImgs || [])].map(imgFilename => path.join(C.QEMU_INSTANCE_DIR_PATH, osid, imgFilename));
+			imgFilePaths.parallelForEach((imgFilePath, copycb) => fs.copyFile(imgFilePath, path.join(instance.dirPath, path.basename(imgFilePath)), copycb), this);
 		},
 		function runQEMU()
 		{
@@ -92,12 +93,16 @@ function startOS(osid, instanceid, cb)
 				XU.log`QEMU args for osid: ${qemuArgs}`;
 			}
 
+			instance.qemuRunOptions = qemuRunOptions;
+			instance.qemuArgs = qemuArgs;
+			const instanceJSON = JSON.stringify(instance);
+
 			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch || OS_DEFAULT.arch}`, qemuArgs, qemuRunOptions);
 			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
 			
 			XU.log`QEMU ${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
 
-			setImmediate(this);
+			fs.writeFile(path.join(instance.dirPath, "instance.json"), instanceJSON, XU.UTF8, this);
 		},
 		cb
 	);
@@ -285,17 +290,21 @@ exports.start = function start(cb)
 		},
 		function preClean()
 		{
-			XU.log`QEMU pre-cleaning ${INSTANCE_DIR_PATH}...`;
-			fileUtil.unlink(INSTANCE_DIR_PATH, this);
+			XU.log`QEMU pre-cleaning ${C.QEMU_INSTANCE_DIR_PATH}...`;
+			fileUtil.unlink(C.QEMU_INSTANCE_DIR_PATH, this);
 		},
-		function mkInstanceDir()
+		function mkOSInstanceDirs()
 		{
-			fs.mkdir(INSTANCE_DIR_PATH, {recursive : true}, this);
+			Object.keys(OS).parallelForEach((osid, subcb) => fs.mkdir(path.join(C.QEMU_INSTANCE_DIR_PATH, osid), {recursive : true}, subcb), this);
 		},
 		function preCopyHDImages()
 		{
-			XU.log`QEMU Copying hd img files...`;
-			Object.keys(OS).parallelForEach((osid, subcb) => fs.copyFile(path.join(QEMU_DIR_PATH, osid, "hd.img"), path.join(INSTANCE_DIR_PATH, `${osid}.img`), subcb), this);
+			XU.log`QEMU pre-copying img files...`;
+			Object.entries(OS).parallelForEach(([osid, osInfo], subcb) =>
+			{
+				const imgFilePaths = ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename));
+				imgFilePaths.parallelForEach((imgFilePath, copycb) => fs.copyFile(imgFilePath, path.join(C.QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath)), copycb), subcb);
+			}, this);
 		},
 		function startOSInstances()
 		{
@@ -304,7 +313,7 @@ exports.start = function start(cb)
 		},
 		function cleanupHDImages()
 		{
-			Object.keys(OS).parallelForEach((osid, subcb) => fileUtil.unlink(path.join(INSTANCE_DIR_PATH, `${osid}.img`), subcb), this);
+			Object.keys(OS).parallelForEach((osid, subcb) => fileUtil.unlink(path.join(C.QEMU_INSTANCE_DIR_PATH, osid), subcb), this);
 		},
 		function startCheckingQueue()
 		{

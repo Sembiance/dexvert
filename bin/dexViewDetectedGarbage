@@ -1,0 +1,16 @@
+#!/bin/bash
+mkdir -p /mnt/dexvert/garbageDetected
+rsync -av sembiance@chatsubo:/mnt/dexvert/garbageDetected/ /mnt/dexvert/garbageDetected/
+
+gqview /mnt/dexvert/garbageDetected &
+
+sleep 0.3
+
+xdotool search --onlyvisible --class GQview key ctrl+j
+sleep 0.1
+xdotool search --name "Pan View - GQview" key f
+
+wait
+
+echo "done"
+

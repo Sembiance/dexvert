@@ -4,12 +4,13 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	name     : "Draw 256 Image",
-	website  : "http://fileformats.archiveteam.org/wiki/Draw256",
-	ext      : [".vga"],
-	unsafe   : true,
-	priority : C.PRIORITY.VERYLOW,
-	notes    : "Draw256 from DOS correctly loads these formats, but sadly will take invalid .VGA files and render a garbage/static. Couldn't find any more info about the file format to try and determine ahead of time that it's a proper VGA file."
+	name        : "Draw 256 Image",
+	website     : "http://fileformats.archiveteam.org/wiki/Draw256",
+	ext         : [".vga"],
+	unsafe      : true,
+	priority    : C.PRIORITY.VERYLOW,
+	unsupported : true,
+	notes       : "Sadly Draw256 for DOS takes any file ending with .VGA and renders garbage. Cannot determine before if it's a proper file. Due to common extension and extreme rarity of Draw256 files in the wild, this format is marked unsupported."
 };
 
-exports.converterPriorty = ["draw256"];
+//exports.converterPriorty = ["draw256"];

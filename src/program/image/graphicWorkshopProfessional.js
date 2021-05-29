@@ -46,7 +46,10 @@ exports.qemuData = (state, p, r) => ({
 			EndIf
 
 			WinClose("[CLASS:GraphicWorkshopProfessionalPicture]")
-		EndIf`
+		EndIf
+		
+		Sleep(200)
+		ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")`
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);

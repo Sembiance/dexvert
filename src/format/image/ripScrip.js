@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["RIPscript"]
 };
 
-exports.converterPriorty = ["pabloDraw"];
+exports.converterPriorty = ["pabloDrawConsole"];

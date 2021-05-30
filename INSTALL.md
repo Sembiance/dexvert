@@ -1,9 +1,9 @@
 # WARNING
-Over 153 programs are required, including commercial programs and operating systems.
+Over 156 programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install
-`npm install dexvert -g`
+GIT clone the repo
 		
 # Requirements
 

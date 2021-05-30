@@ -68,7 +68,7 @@ Over ${programCount} programs are required, including commercial programs and op
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install
-\`npm install dexvert -g\`
+GIT clone the repo
 		
 # Requirements
 

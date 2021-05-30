@@ -107,6 +107,7 @@ C.UNTRUSTWORTHY_MAGIC =
 	/^DEGAS hi-res compressed bitmap$/,
 	/^DICOM medical imaging bitmap/,
 	/^Digital Micrograph Script$/,
+	/^DiskDupe 5\.12 disk image$/,
 	/^Generic INI configuration$/,
 	/^GIF bitmap \(generic\)$/,
 	/^GNU Privacy Guard public keyring \(generic\)$/,

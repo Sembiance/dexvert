@@ -36,10 +36,21 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 				if(inFilePaths.length>0)
 					qemuData.inFilePaths = inFilePaths.map(inFilePath => (inFilePath.startsWith("/") ? inFilePath : path.resolve(state.cwd, inFilePath)));
 
+				const scriptLines = [];
 				let binAndArgs = "";
 				if(osid.startsWith("win"))
 				{
-					binAndArgs += `"${(/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`}"`;
+					const fullCMD = (/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`;
+					if(cmd.endsWith(".lnk"))
+					{
+						scriptLines.push(`$lnkInfo = FileGetShortcut("${fullCMD}")`);
+						binAndArgs += `"' & $lnkInfo[0] & '"`;
+					}
+					else
+					{
+						binAndArgs += `"${fullCMD}"`;
+					}
+
 					if(args.length>0)
 					{
 						binAndArgs += ` ${args.map(v => (inFilePaths.includes(v) ? `c:\\in\\${path.basename(v)}` : v)).map(_v =>
@@ -57,7 +68,6 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 						binAndArgs += ` ${args.map(arg => (inFilePaths.includes(arg) ? path.basename(arg).includes(" ") ? `"HD:in/${path.basename(arg)}"` : `HD:in/${path.basename(arg)}` : (arg.includes(" ") && !arg.includes('"') ? `"${arg}"` : arg))).join(" ")}`;
 				}
 
-				const scriptLines = [];
 				if(osid.startsWith("win"))
 				{
 					// Build an AutoIt script

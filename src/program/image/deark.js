@@ -19,6 +19,7 @@ exports.meta =
 		dearkRemoveDups : "Remove any duplicate output files, based on sum. Default: false",
 		dearkJoinFrames : "Treat output files as individual images frames of an animation and join them together as an MP4",
 		dearkGIFDelay   : "Duration of delay between animation frames. Default: 12",
+		dearkReplaceExt : "An object of keys that are extensions to replace with their values. Only works with a single output file.",
 		keepAsGIF       : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4"
 	}
 };
@@ -116,12 +117,18 @@ exports.post = (state, p, r, cb) =>
 				if(outputFilePaths.length===1)
 				{
 					let newOutputFilename = path.basename(outputFilePaths[0]);
-					const badExts = [".000", ...exports.BSAVE_TYPES.map(v => `_${v}`)].filter(v => newOutputFilename.includes(v));
-					if(badExts.length===0)
-						return this.finish();
+
+					const dropExts = [".000", ...exports.BSAVE_TYPES.map(v => `_${v}`)].filter(v => newOutputFilename.includes(v));
+					if(dropExts.length>0)
+						dropExts.forEach(dropExt => { newOutputFilename = newOutputFilename.replaceAll(dropExt, ""); });
+
+					Object.forEach((r.flags.dearkReplaceExt || {}), (fromExt, toExt) => { newOutputFilename = newOutputFilename.replaceAll(fromExt, toExt); });
+
+					if(newOutputFilename!==path.basename(outputFilePaths[0]))
+						fs.rename(outputFilePaths[0], path.join(path.dirname(outputFilePaths[0]), newOutputFilename), this.finish);
+					else
+						this.finish();
 					
-					badExts.forEach(badExt => { newOutputFilename = newOutputFilename.replaceAll(badExt, ""); });
-					fs.rename(outputFilePaths[0], path.join(path.dirname(outputFilePaths[0]), newOutputFilename), this.finish);
 					return;
 				}
 
@@ -150,6 +157,7 @@ exports.post = (state, p, r, cb) =>
 
 					return shortFilePath;
 				});
+
 				if(beforeFilePaths.subtractAll(afterFilePaths)===0 || afterFilePaths.slice().unique().length!==afterFilePaths.length)
 					return this.finish();
 

@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 156 file formats are unsupported by dexvert.
+The following 157 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -36,13 +36,14 @@ archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/V
 
 
 
-## Audio (11)
+## Audio (12)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
 audio | Aegis Sonix Instrument | .instr | [19 sample files](https://telparia.com/fileFormatSamples/audio/sonixInstrument/) - The .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/)
 audio | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/audio/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
+audio | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
 audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://telparia.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 audio | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://telparia.com/fileFormatSamples/audio/musicStudioSound/)
@@ -98,7 +99,7 @@ font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)
 
 
 
-## Image (11)
+## Image (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
@@ -110,7 +111,6 @@ image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sam
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
-image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/) - A vector based format. Would love to convert to SVG. This project started support for that: https://github.com/cgorringe/RIPtermJS I could extend that project to make a true ripscrip-to-svg node based converter. Other tools: http://archives.thebbs.org/ra109a.htm
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 
 
@@ -126,7 +126,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (78)
+## Other (79)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -171,6 +171,7 @@ other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShiel
 other | InstallShield Script | .ins | 
 other | InstallShield Uninstall Script | .isu | 
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
+other | Legend of Kyrandia EMC File | .emc | 
 other | Lotus 1-2-3 Formatting Data | .fm3 | 
 other | MDIFF Patch File | .mdf | 
 other | Micro Lathe Object | .lat | 

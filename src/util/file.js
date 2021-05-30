@@ -245,7 +245,7 @@ exports.findValidOutputFiles = function findValidOutputFiles(force)
 			{
 				if(this.data.outputFilePaths.length===1 && outputFileEqual)
 				{
-					XU.log`file.findValidOutputFiles is deleting the single output file ${this.data.outputFilePaths[0]} due to it being identical to the src file`;
+					XU.log`file.findValidOutputFiles is ${XU.cf.fg.red("deleting the single output file")} ${this.data.outputFilePaths[0]} due to it being identical to the src file`;
 					fileUtil.unlink(this.data.outputFilePaths[0], this);
 				}
 				else

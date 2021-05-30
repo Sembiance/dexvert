@@ -66,6 +66,7 @@ exports.formats =
 		installShieldScript          : {name : "InstallShield Script", ext : [".ins"], magic : ["InstallShield Script"]},
 		installShieldUninstallScript : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script"]},
 		javaClass                    : {name : "Java Class File", ext : [".class"], magic : ["Java Compiled Object Code", "compiled Java class data", "Java bytecode"]},
+		legendOfKyrandiaEMCFile		 : {name : "Legend of Kyrandia EMC File", ext : [".emc"], magic : ["Kyra Engine game data"]},
 		lotus123FormattingData       : {name : "Lotus 1-2-3 Formatting Data", ext : [".fm3"], magic : ["Formatting Data for Lotus 1-2-3 worksheet"]},
 		neoPaintPallette             : {name : "NeoPaint Palette", ext : [".pal"], magic : ["NeoPaint Palette"]},
 		neoPaintPrinterDriver        : {name : "NeoPaint Printer Driver", ext : [".prd"], magic : ["NeoPaint Printer Driver"]},

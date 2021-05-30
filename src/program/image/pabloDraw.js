@@ -27,16 +27,16 @@ exports.qemuData = (state, p, r) => ({
 			; Issue save command
 			Send("^+s")
 
-			Sleep(1000)
+			Sleep(500)
 
 			$saveVisible = WinWaitActive("[TITLE:Specify the file to save]", "", 10)
 			If $saveVisible Not = 0 Then
 				ControlSetText("Specify the file to save", "", "[CLASS:Edit; INSTANCE:1]", "c:\\out\\outfile.png")
-				Sleep(100)
+				Sleep(200)
 				ControlClick("Specify the file to save", "", "[CLASS:Button; TEXT:&Save]")
 			EndIf
 
-			Sleep(500)
+			Sleep(200)
 			Send("!x")
 		EndIf`
 });

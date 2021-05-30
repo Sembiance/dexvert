@@ -15,7 +15,7 @@ const HOSTS =
 {
 	lostcrag      : { numServers : 2 },
 	crystalsummit : { numServers : 1 },
-	chatsubo      : { numServers : 5 }
+	chatsubo      : { numServers : 10 }
 };
 const OS_DEFAULT =
 {
@@ -116,8 +116,7 @@ function readyOS(osid, instanceid, cb)
 	tiptoe(
 		function mountInOut()
 		{
-			if(instance.debug)
-				XU.log`QEMU ${osid} #${instanceid} declared itself ready, mounting in/out...`;
+			XU.log`QEMU ${osid} #${instanceid} declared itself ready, mounting in/out...`;
 
 			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.smbHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);

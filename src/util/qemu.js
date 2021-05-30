@@ -7,6 +7,15 @@ const XU = require("@sembiance/xu"),
 
 const autoItFuncs =
 {
+	KillAll : `
+Func KillAll($program)
+	Do
+		$result = ProcessClose($program)
+		If $result = 1 Then
+			Sleep(500)
+		EndIf
+	Until $result Not = 1
+EndFunc`,
 	RunWaitWithTimeout : `
 Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
 	$pid = Run($program, $workingdir, $show_flag)
@@ -27,6 +36,8 @@ EndFunc`
 // Send() Keys: https://www.autoitscript.com/autoit3/docs/functions/Send.htm
 exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths=[], timeout=XU.MINUTE*5})
 {
+	let fullCmd = cmd;
+
 	return (state, p, cb) =>
 	{
 		tiptoe(
@@ -40,7 +51,8 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 				let binAndArgs = "";
 				if(osid.startsWith("win"))
 				{
-					binAndArgs += `"${(/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`}"`;
+					fullCmd = (/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`;
+					binAndArgs += `"${fullCmd}"`;
 
 					if(args.length>0)
 					{
@@ -62,12 +74,16 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 				if(osid.startsWith("win"))
 				{
 					// Build an AutoIt script
+					scriptLines.push(autoItFuncs.KillAll);
+
 					if(!script && timeout)
 						scriptLines.push(autoItFuncs.RunWaitWithTimeout);
 
 					scriptLines.push(`Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}', @SW_MAXIMIZE${script || !timeout ? "" : `, ${timeout}`})`);
 					if(script)
 						scriptLines.push(script);
+					
+					scriptLines.push(`KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")`);
 				}
 				else if(osid.startsWith("amiga"))
 				{

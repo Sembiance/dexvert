@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 157 file formats are unsupported by dexvert.
+The following 139 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -54,19 +54,14 @@ audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) |
 
 
 
-## Document (10)
+## Document (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-document | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/document/iffCTLG/) - Contains strings used by programs. Not currently enabled as my parser isn't quite right and I don't feel like debugging it more.
 document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://telparia.com/fileFormatSamples/document/calamusDocument/)
 document | Clarion Database File | .dat | [49 sample files](https://telparia.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. unoconv didn't do anything with it either.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://telparia.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
-document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/) - Help Librarian files. No information about them could be found anywhere.
-document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program.
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
-document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [99 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a pretty popular database program back in the day. Didn't really dig into what converters might be possible.
-document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
 
 
 
@@ -126,7 +121,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (79)
+## Other (66)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -144,7 +139,6 @@ other | Amiga Shared Library | .lib |
 other | Amos Amal Animation Bank | .abk | 
 other | AMOS Datas Bank | .abk | 
 other | ASCII Font Metrics | .afm | 
-other | Asymetrix ToolBook File | .tbk | 
 other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileFormatSamples/other/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
@@ -152,7 +146,6 @@ other | Borland Delphi - C++ Builder Form | .dfm |
 other | Borland Delphi Compiled Unit | .dcu | 
 other | Borland Graphics Interface Driver | .bgi | 
 other | Borland Overlay | .ovr | 
-other | Borland Turbo C Project | .prj | 
 other | BOYAN Action Model | .bam | 
 other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/other/chaosultdGEMParameters/)
 other | Chemview Animation Data | .d | 
@@ -164,11 +157,9 @@ other | dBase Index File | .ntx |
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
-other | GFA-BASIC Windows | .gfw | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
-other | InstallShield Script | .ins | 
 other | InstallShield Uninstall Script | .isu | 
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
 other | Legend of Kyrandia EMC File | .emc | 
@@ -176,17 +167,13 @@ other | Lotus 1-2-3 Formatting Data | .fm3 |
 other | MDIFF Patch File | .mdf | 
 other | Micro Lathe Object | .lat | 
 other | Microsoft Visual C Library | .lib | 
-other | Microsoft Windows Help File Content | .cnt | Just a table of contents as to what's in the corresponding .hlp file. Not useful.
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
-other | MSVC Resource File | .res | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
 other | Norton Change Directory Info | .ncd | 
-other | NoteWorthy Composure | .nw | 
-other | ObjectVision Datafile | .ovd | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/other/olbLib/)
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | Polyfilm Preferences | .prf | 
@@ -197,14 +184,9 @@ other | RIFF STYL File | .par | References a font for mac and windows and includ
 other | RTPatch File | .rtp | 
 other | Startrekker Module Info | .nt | 
 other | StormWizard Resource | .wizard .wizard-all | 
-other | Turbo Basic Chain module | .tbc | 
-other | Turbo C Context File | .dsk | 
-other | Turbo Pascal Chain module | .chn | 
 other | Turbo Pascal Help | .hlp | 
-other | Turbo Pascal Overlay | .ovr | 
 other | Visual Basic Extension | .vbx | 
 other | Windows Help Global Index Data | .gid | 
-other | Windows Program Group | .grp | 
 other | Windows Shortcut | .lnk | 
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm | 

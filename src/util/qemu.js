@@ -40,16 +40,7 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 				let binAndArgs = "";
 				if(osid.startsWith("win"))
 				{
-					const fullCMD = (/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`;
-					if(cmd.endsWith(".lnk"))
-					{
-						scriptLines.push(`$lnkInfo = FileGetShortcut("${fullCMD}")`);
-						binAndArgs += `"' & $lnkInfo[0] & '"`;
-					}
-					else
-					{
-						binAndArgs += `"${fullCMD}"`;
-					}
+					binAndArgs += `"${(/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`}"`;
 
 					if(args.length>0)
 					{

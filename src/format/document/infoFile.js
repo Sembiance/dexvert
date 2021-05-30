@@ -3,11 +3,12 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name        : "InfoFile Database File",
-	ext         : [".flr"],
-	magic       : ["InfoFile database"],
-	weakMagic   : true,
-	unsupported : true,
-	notes       : "Did a very quick Google search and didn't turn up any sort of converter program. This was a very obscure amiga database program."
+	name           : "InfoFile Database File",
+	ext            : [".flr"],
+	forbidExtMatch : true,
+	magic          : ["InfoFile database"],
+	weakMagic      : true,
+	notes          : "Very obscure amiga database program."
 };
 
+exports.steps = [() => ({program : "strings"})];

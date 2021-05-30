@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 637 file formats are supported by dexvert.
+The following 655 file formats are supported by dexvert.
 
 
 
@@ -95,7 +95,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (18)
+## Document (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
@@ -103,16 +103,20 @@ document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGu
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [6 sample files](https://telparia.com/fileFormatSamples/document/xls/)
+document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [12 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
 document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/ibm-storyboard/) | .txm | [5 sample files](https://telparia.com/fileFormatSamples/document/ibmStoryboardDocument/) - Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out.
+document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [5 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [7 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
+document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [99 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [10 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
+document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [15 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [12 sample files](https://telparia.com/fileFormatSamples/document/wp/)
@@ -635,16 +639,32 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Other (3)
+## Other (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | All Identical Bytes |  | 
 other | All Null Bytes |  | 
+other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/other/iffCTLG/)
+other | Asymetrix ToolBook File | .tbk | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
+other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboCProject/)
 other | Empty File |  | 
+other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
+other | InstallShield Script | .ins | [7 sample files](https://telparia.com/fileFormatSamples/other/installShieldScript/)
+other | Microsoft Windows Help File Content | .cnt | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
+other | MSVC Resource File | .res | [14 sample files](https://telparia.com/fileFormatSamples/other/msvcRes/)
+other | NoteWorthy Composure | .nw | [9 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
+other | ObjectVision Datafile | .ovd | [8 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
+other | Turbo Basic Chain module | .tbc | [7 sample files](https://telparia.com/fileFormatSamples/other/turboBASICChainModule/)
+other | Turbo C Configuration | .tc | 
+other | Turbo C Context File | .dsk | [3 sample files](https://telparia.com/fileFormatSamples/other/turboCContextFile/)
+other | Turbo Pascal Chain module | .chn | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalChainModule/)
+other | Turbo Pascal Overlay | .ovr | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalOverlay/)
+other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
+other | Windows Program Group | .grp | [5 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
 
 
 
-## Text (31)
+## Text (29)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  | [13 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -673,8 +693,6 @@ text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) 
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [10 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .nfo .cfg .config .frm .hlp .advert .advert2 | [21 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [11 sample files](https://telparia.com/fileFormatSamples/text/txtByFilename/)
-text | Turbo C Configuration | .tc | 
-text | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/text/visualBasicProject/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)

@@ -6,7 +6,7 @@ exports.meta =
 	name    : "Excel Spreadsheet",
 	website : "http://fileformats.archiveteam.org/wiki/XLS",
 	ext     : [".xls"],
-	magic   : ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet"]
+	magic   : ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet"]
 };
 
 exports.steps = [() => ({program : "antixls"})];

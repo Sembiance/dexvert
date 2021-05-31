@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "http://picoe.ca/products/pablodraw/"
+	website : "http://picoe.ca/products/pablodraw/",
+	unsafe  : true
 };
 
 exports.qemu = () => "C:\\Documents and Settings\\dexvert\\Local Settings\\Apps\\2.0\\XN7ZX61H.J6Q\\O72LB2O7.1KE\\pabl..tion_29b20c6ea23027e7_0003.0002_55cb9279e07d9803\\PabloDraw.exe";

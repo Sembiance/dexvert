@@ -6,7 +6,8 @@ exports.meta =
 {
 	website        : "https://inkscape.org/",
 	gentooPackage  : "media-gfx/inkscape",
-	gentooUseFlags : "cdr dbus dia exif graphicsmagick jpeg openmp postscript visio wpg"
+	gentooUseFlags : "cdr dbus dia exif graphicsmagick jpeg openmp postscript visio wpg",
+	unsafe         : true
 };
 
 exports.bin = () => "inkscape";

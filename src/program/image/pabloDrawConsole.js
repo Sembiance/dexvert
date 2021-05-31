@@ -6,7 +6,8 @@ exports.meta =
 {
 	website       : "http://picoe.ca/products/pablodraw/",
 	gentooPackage : "media-gfx/pablodraw-console",
-	gentooOverlay : "dexvert"
+	gentooOverlay : "dexvert",
+	unsafe        : true
 };
 
 exports.bin = () => "pablodraw-console";

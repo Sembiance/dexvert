@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 139 file formats are unsupported by dexvert.
+The following 145 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -81,9 +81,10 @@ executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSam
 
 
 
-## Font (7)
+## Font (8)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+font | [Banner Mania Font](https://en.wikipedia.org/wiki/Banner_Mania) | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
 font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | No sample files yet.
 font | [Calamus Font](http://fileformats.archiveteam.org/wiki/Calamus_Font) | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
 font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/) - Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
@@ -121,7 +122,7 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (66)
+## Other (71)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -169,6 +170,7 @@ other | Micro Lathe Object | .lat |
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
+other | Moonbase Game Data | .mb | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | Netware Loadable Module | .nlm | 
@@ -178,10 +180,14 @@ other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | Polyfilm Preferences | .prf | 
 other | Printer Font Metrics | .pfm | 
+other | Relocatable Object Module | .obj | 
 other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 other | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
 other | RTPatch File | .rtp | 
+other | SimCity 2000 Save Game Data | .sc .sc2 | 
+other | SimCity City | .cty | 
+other | SoftDisk Library | .shl | 
 other | Startrekker Module Info | .nt | 
 other | StormWizard Resource | .wizard .wizard-all | 
 other | Turbo Pascal Help | .hlp | 

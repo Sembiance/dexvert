@@ -6,7 +6,8 @@ exports.meta =
 {
 	website       : "http://view64.sourceforge.net/",
 	gentooPackage : "media-gfx/view64",
-	gentooOverlay : "dexvert"
+	gentooOverlay : "dexvert",
+	unsafe        : true
 };
 
 exports.bin = () => "view64pnm";

@@ -41,6 +41,7 @@ exports.formats =
 		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format"]},
 		asciiFontMetrics             : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric"]},
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
+		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
 		borlandDelphiBuilderForm     : {name : "Borland Delphi - C++ Builder Form", ext : [".dfm"], magic : ["Borland Delphi - C++ Builder Form"]},
 		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file"]},
 		borlandDrive                 : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI Device Driver"]},

@@ -79,6 +79,8 @@ C.UNTRUSTWORTHY_MAGIC =
 	/^PEX Binary Archive$/,
 	/^Par archive data$/,
 	/^Picasso 64 Image$/,
+	/^OpenPGP Public Key/,
+	/^OpenPGP Secret Key/,
 	/^PGP key security ring/,
 	/^PGP Secret Sub-key/,
 	/^PGP symmetric key encrypted data/,

@@ -1,5 +1,5 @@
 # WARNING
-Over 157 programs are required, including commercial programs and operating systems.
+Over 158 programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install

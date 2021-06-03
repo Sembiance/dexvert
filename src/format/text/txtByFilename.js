@@ -13,7 +13,8 @@ exports.meta =
 	priority  : C.PRIORITY.VERYLOW,
 	filename  :
 	[
-		/registra.tio/i, /descript.ion/i,
+		/registra.tio/i, /register.*/i,
+		/descript.ion/i,
 		/file_id.*\.diz/i,
 		/^disk_ord.er.?$/i, /ordrform/i,
 		/^(about|change|copying|description|manifest|manual|order|problems|readme|readnow|readthis|release|todo|whatsnew)[._-]*($|\..+$)/i,

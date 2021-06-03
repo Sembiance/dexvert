@@ -1,15 +1,16 @@
 # Supported File Formats
 
-The following 656 file formats are supported by dexvert.
+The following 661 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (65)
+## Archive (66)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
+archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [4 sample files](https://telparia.com/fileFormatSamples/archive/ain/)
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [10 sample files](https://telparia.com/fileFormatSamples/archive/adfFFS/)
 archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [13 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Some Amiga disks (such as voyager.adf) are non DOS (NDOS) disks with custom filesystems. These cannot be mounted by the amiga nor extracted with unar/unadf/adf-extractor These are custom disk formats that demo and game coders came up with to squeeze data out of em. Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.
 archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/wiki/Disk_Masher_System) | .dms .fms | [10 sample files](https://telparia.com/fileFormatSamples/archive/dms/)
@@ -32,12 +33,12 @@ archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Format
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [9 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
 archive | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [20 sample files](https://telparia.com/fileFormatSamples/archive/grasp/) - This is an animation format, but the GRASPRT.EXE program won't play any of them and I can't find any modern players. However 'deark' will extract all the files, the artwork, code, etc. So for now I just treat this as an archive file.
-archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [8 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
+archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [9 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [10 sample files](https://telparia.com/fileFormatSamples/archive/installShieldZ/)
-archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [1 sample file](https://telparia.com/fileFormatSamples/archive/lbr/)
+archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [3 sample files](https://telparia.com/fileFormatSamples/archive/lbr/)
 archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [12 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
 archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz .lzs .exe | [15 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [2 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
@@ -46,7 +47,7 @@ archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintos
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox | [1 sample file](https://telparia.com/fileFormatSamples/archive/mbox/)
-archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
+archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
@@ -90,7 +91,7 @@ audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLA
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [2 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 | [7 sample files](https://telparia.com/fileFormatSamples/audio/soundFont2/)
-audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/au/)
+audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [8 sample files](https://telparia.com/fileFormatSamples/audio/au/)
 audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV) | .wav | [10 sample files](https://telparia.com/fileFormatSamples/audio/wav/)
 
 
@@ -103,7 +104,7 @@ document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGu
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [7 sample files](https://telparia.com/fileFormatSamples/document/xls/)
-document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
+document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [6 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [12 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
 document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/ibm-storyboard/) | .txm | [5 sample files](https://telparia.com/fileFormatSamples/document/ibmStoryboardDocument/) - Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out.
 document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
@@ -450,7 +451,7 @@ image | [OpenDocument Drawing](http://fileformats.archiveteam.org/wiki/OpenDocum
 image | [OpenEXR](http://fileformats.archiveteam.org/wiki/OpenEXR) | .exr | [2 sample files](https://telparia.com/fileFormatSamples/image/exr/)
 image | [OpenRaster](http://fileformats.archiveteam.org/wiki/OpenRaster) | .ora | [1 sample file](https://telparia.com/fileFormatSamples/image/ora/)
 image | Oric HRS | .hrs .hir | [1 sample file](https://telparia.com/fileFormatSamples/image/hrs/)
-image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | [5 sample files](https://telparia.com/fileFormatSamples/image/icoOS2/)
+image | [OS/2 Icon File](http://fileformats.archiveteam.org/wiki/OS/2_Icon) | .ico | [8 sample files](https://telparia.com/fileFormatSamples/image/icoOS2/)
 image | [OS/2 Pointer](http://fileformats.archiveteam.org/wiki/OS/2_Pointer) | .ptr | [6 sample files](https://telparia.com/fileFormatSamples/image/os2Pointer/)
 image | [P4I](http://fileformats.archiveteam.org/wiki/P4I) | .p4i | [3 sample files](https://telparia.com/fileFormatSamples/image/p4i/)
 image | [PabloPaint](http://fileformats.archiveteam.org/wiki/PabloPaint) | .pa3 .ppp | [4 sample files](https://telparia.com/fileFormatSamples/image/pabloPaint/)
@@ -632,7 +633,7 @@ music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | 
 music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod | [13 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 music | [RIFF MIDI Music](http://fileformats.archiveteam.org/wiki/RIFF_MIDI) | .rmi | [1 sample file](https://telparia.com/fileFormatSamples/music/rmi/)
 music | [RIFF MIDS File](http://fileformats.archiveteam.org/wiki/RIFF_MIDS) | .mds | [1 sample file](https://telparia.com/fileFormatSamples/music/mds/)
-music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/S3M) | .s3m .stm | [9 sample files](https://telparia.com/fileFormatSamples/music/s3m/)
+music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/S3M) | .s3m .stm | [10 sample files](https://telparia.com/fileFormatSamples/music/s3m/)
 music | [Sidmon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid2 | [1 sample file](https://telparia.com/fileFormatSamples/music/sid2/)
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [2 sample files](https://telparia.com/fileFormatSamples/music/smus/)
 music | [Star Tracker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | [10 sample files](https://telparia.com/fileFormatSamples/music/starTracker/)
@@ -640,7 +641,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Other (19)
+## Other (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | All Identical Bytes |  | 
@@ -648,10 +649,13 @@ other | All Null Bytes |  |
 other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/other/iffCTLG/)
 other | Asymetrix ToolBook File | .tbk | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
 other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboCProject/)
+other | Borland Turbo Vision Resource | .res .tvr | [3 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
 other | Empty File |  | 
 other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
-other | InstallShield Script | .ins | [7 sample files](https://telparia.com/fileFormatSamples/other/installShieldScript/)
+other | InstallShield Script | .ins | [8 sample files](https://telparia.com/fileFormatSamples/other/installShieldScript/)
+other | JAM Message Area Header File | .jhr | [7 sample files](https://telparia.com/fileFormatSamples/other/jamMessageAreaHeaderFile/)
 other | Microsoft Windows Help File Content | .cnt | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
+other | MS Visual FoxPro App | .app .fxp | [4 sample files](https://telparia.com/fileFormatSamples/other/msVisualFoxProApp/)
 other | MSVC Resource File | .res | [14 sample files](https://telparia.com/fileFormatSamples/other/msvcRes/)
 other | NoteWorthy Composure | .nw | [9 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
 other | ObjectVision Datafile | .ovd | [8 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
@@ -659,6 +663,7 @@ other | Turbo Basic Chain module | .tbc | [7 sample files](https://telparia.com/
 other | Turbo C Configuration | .tc | 
 other | Turbo C Context File | .dsk | [3 sample files](https://telparia.com/fileFormatSamples/other/turboCContextFile/)
 other | Turbo Pascal Chain module | .chn | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalChainModule/)
+other | Turbo Pascal Desktop File | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalDesktopFile/)
 other | Turbo Pascal Overlay | .ovr | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalOverlay/)
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
 other | Windows Program Group | .grp | [5 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
@@ -690,10 +695,10 @@ text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp | [12 
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk | [11 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 | [11 sample files](https://telparia.com/fileFormatSamples/text/pas/)
-text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub | [1 sample file](https://telparia.com/fileFormatSamples/text/pgpPublicKey/)
+text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub | [2 sample files](https://telparia.com/fileFormatSamples/text/pgpPublicKey/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [10 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt .rea .doc .docs .english .credits .manual .man .info .inf .log .ascii .nfo .cfg .config .frm .hlp .advert .advert2 | [21 sample files](https://telparia.com/fileFormatSamples/text/txtByExt/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [11 sample files](https://telparia.com/fileFormatSamples/text/txtByFilename/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  | [13 sample files](https://telparia.com/fileFormatSamples/text/txtByFilename/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
@@ -714,7 +719,7 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [11 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [9 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
-video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [6 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
+video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [7 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [3 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v | [4 sample files](https://telparia.com/fileFormatSamples/video/mp4/)
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [1 sample file](https://telparia.com/fileFormatSamples/video/neochromeAnimation/)

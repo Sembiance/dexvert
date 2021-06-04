@@ -34,7 +34,7 @@ exports.prepareImage = function prepareImage({inPath, outPath, method="centerCro
 exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 {
 	const METHODS = ["centerCrop", "scaleDown"];
-	const tmpImagePaths = METHODS.map(v => fileUtil.generateTempFilePath(undefined, `_${v}.png`));
+	const tmpImagePaths = METHODS.map(v => fileUtil.generateTempFilePath(path.join(C.TENSORSERV_PATH, "tmp"), `_${v}.png`));
 
 	function parseClassification(resultRaw)
 	{
@@ -52,7 +52,7 @@ exports.classifyImage = function classifyImage(imagePath, modelName, cb)
 		return {confidence : confidence||0, raw : resultRaw.toString()};
 	}
 
-	const pngTrimmedPath = fileUtil.generateTempFilePath(undefined, ".png");
+	const pngTrimmedPath = fileUtil.generateTempFilePath(path.join(C.TENSORSERV_PATH, "tmp"), ".png");
 
 	tiptoe(
 		function convertToPNG()

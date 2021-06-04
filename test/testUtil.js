@@ -6,7 +6,6 @@ const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	printUtil = require("@sembiance/xutil").print,
 	runUtil = require("@sembiance/xutil").run,
-	os = require("os"),
 	tiptoe = require("tiptoe");
 
 exports.DATA_DIR_PATH = path.join(__dirname, "data");

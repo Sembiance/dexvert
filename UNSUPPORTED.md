@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 147 file formats are unsupported by dexvert.
+The following 146 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -208,11 +208,10 @@ rom | Game Boy ROM | .gb .gbc |
 
 
 
-## Video (5)
+## Video (4)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
-video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [13 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
 video | [IFF VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it

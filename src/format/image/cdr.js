@@ -10,4 +10,4 @@ exports.meta =
 	unsafe  : true
 };
 
-exports.converterPriorty = [{program : "unoconv", flags : {unoconvType : "svg"}}, "scribus", "deark", "nconvert"];
+exports.converterPriorty = ["scribus", "deark", "nconvert"];

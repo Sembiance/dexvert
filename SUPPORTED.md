@@ -163,7 +163,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (444)
+## Image (443)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -196,13 +196,12 @@ image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .im
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf | [10 sample files](https://telparia.com/fileFormatSamples/image/artworx/)
 image | [Ascii-Art Editor](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .art | [3 sample files](https://telparia.com/fileFormatSamples/image/asciiArtEditor/)
 image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | [2 sample files](https://telparia.com/fileFormatSamples/image/aseprite/)
-image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm .mic | [32 sample files](https://telparia.com/fileFormatSamples/image/apStar/)
+image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm .mic | [35 sample files](https://telparia.com/fileFormatSamples/image/apStar/)
 image | [Atari APAC3 APP Image](http://fileformats.archiveteam.org/wiki/Apac3_APP) | .app .aps .ils .pls | [6 sample files](https://telparia.com/fileFormatSamples/image/apac3App/)
 image | [Atari CAD](http://fileformats.archiveteam.org/wiki/AtariCAD) | .drg | [2 sample files](https://telparia.com/fileFormatSamples/image/atariCAD/)
 image | Atari Canvas | .cpt .hbl .ful | [17 sample files](https://telparia.com/fileFormatSamples/image/canvas/)
 image | [Atari DU* Image](http://fileformats.archiveteam.org/wiki/DU*) | .du1 .du2 .duo | [2 sample files](https://telparia.com/fileFormatSamples/image/duStar/)
 image | Atari Graph Image | .all | [1 sample file](https://telparia.com/fileFormatSamples/image/all/)
-image | Atari Graphics | .mic | [4 sample files](https://telparia.com/fileFormatSamples/image/atariGraphics/)
 image | [Atari Graphics Studio](http://g2f.atari8.info/) | .ags | [4 sample files](https://telparia.com/fileFormatSamples/image/ags/)
 image | Atari HCI | .hci | [11 sample files](https://telparia.com/fileFormatSamples/image/hci/)
 image | Atari Highres Medium | .hrm | [1 sample file](https://telparia.com/fileFormatSamples/image/hrm/)
@@ -705,7 +704,7 @@ text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d
 
 
 
-## Video (16)
+## Video (17)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [10 sample files](https://telparia.com/fileFormatSamples/video/flm/)
@@ -714,6 +713,7 @@ video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
+video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [13 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)

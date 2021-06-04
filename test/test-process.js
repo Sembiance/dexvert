@@ -51,7 +51,9 @@ const SHA1_IGNORE_FILES =
 	font :
 	{
 		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
-		"adobeType1" : [/.otf$/]
+		"adobeType1" : [/.otf$/],
+		"sfd"        : [/.otf$/],
+		"woff"       : [/.otf$/]
 	},
 	image :
 	{
@@ -99,49 +101,74 @@ const SHA1_IGNORE_FILES =
 // Filenames are the OUTPUT filenames and are all converted to LOWERCASE first
 const SIZE_IGNORE_FILES =
 {
-	audio :
-	{
-		// The produced mp3 files from timidity are slightly different each time
-		"soundFont2" : [/.mp3$/]
-	},
 	document :
 	{
 		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
 		"*" : [/.pdf$/]
 	},
-	font :
+	image :
 	{
-		// Generated .otf files from fontforge and differ. Probably meta info or something. Didn't investigate further
-		"adobeType1" : [/.otf$/]
+		// Abydos sometimes fails to produce the proper webp output
+		"amosSprites" : [/.webp$/],
+
+		// This particular program produces very different colors each time, not sure why
+		"3dCK" : [/.png$/],
+
+		// Unoconv can produce wildly different SVG output, not sure why
+		"cgm" : [/.svg$/]
+	}
+};
+
+// Several output files will vary every so slightly due to screenshot artifacts or FFMPEG changing slightly how it encodes a video on version upgrades
+const DEFAULT_SIZE_FLEX_VIDEO = 5;	// Video often changes a lot more, but usually not more than 5%
+const SIZE_FLEX_PERCENTAGE =
+{
+	audio :
+	{
+		// The produced mp3 files from timidity are different each time
+		"soundFont2" : 10
 	},
 	image :
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
-		"3dCK"             : [/.png$/],
-		"naplps"           : [/.png$/],
-		"ibmStoryboardPic" : [/.png$/],
-
-		// Abydos doesn't always produce the same webp files, not sure why
-		"amosSprites" : [/.webp$/],
-
-		// Abydos doesn't work with this image yet, produces different data each time
-		"sgx" : [/nuke.png$/],
-
-		// Deark produces slightly different GIF files each time, not sure why
-		"ani" : [/.gif$/]
+		"ibmStoryboardPic" : 40,
+		"naplps"           : 2
+	},
+	font :
+	{
+		// PNG preview (generated from an SVG file) is slightly different when inkscape updates
+		"otf" : 1,
+		"ttf" : 1
 	},
 	music :
 	{
-		// These files are slightly different each time
-		"med" : [/juanidance.mp3$/],
-		"sid" : [/.mp3$/]	// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		// Not entirely sure why, but _¡tsa!_juanidance.med is always different
+		med : 1,
+		
+		// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
+		sid : 10
 	},
 	video :
 	{
-		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
-		"disneyCFAST" : [/.mp4$/],
-		"fantavision" : [/.mp4$/],
-		"movieSetter" : [/.mp4$/]
+		// These are screen recordings, thus they are going to differ each time
+		"disneyCFAST" : DEFAULT_SIZE_FLEX_VIDEO,
+		"fantavision" : DEFAULT_SIZE_FLEX_VIDEO,
+		"movieSetter" : DEFAULT_SIZE_FLEX_VIDEO,
+
+		// ffmpeg version upgrades produce slightly different output and ffmpeg on different architectures too, odd.
+		"avi"                : DEFAULT_SIZE_FLEX_VIDEO,
+		"cdxl"               : DEFAULT_SIZE_FLEX_VIDEO,
+		"cyberPaintSeq"      : DEFAULT_SIZE_FLEX_VIDEO,
+		"dl"                 : DEFAULT_SIZE_FLEX_VIDEO,
+		"flc"                : DEFAULT_SIZE_FLEX_VIDEO,
+		"fli"                : DEFAULT_SIZE_FLEX_VIDEO,
+		"flm"                : DEFAULT_SIZE_FLEX_VIDEO,
+		"iffANIM"            : DEFAULT_SIZE_FLEX_VIDEO,
+		"mov"                : DEFAULT_SIZE_FLEX_VIDEO,
+		"mpeg1"              : DEFAULT_SIZE_FLEX_VIDEO,
+		"mpeg2"              : DEFAULT_SIZE_FLEX_VIDEO,
+		"neochromeAnimation" : DEFAULT_SIZE_FLEX_VIDEO,
+		"smacker"            : DEFAULT_SIZE_FLEX_VIDEO
 	}
 };
 
@@ -175,6 +202,14 @@ const IGNORE_EXTRA_FILES =
 	{
 		// A file in here is corrupted, so each time I run it I can get different output filenames, so allow this one to have additional files
 		"arc" : [/rainbow.arc$/]
+	}
+};
+
+const IGNORE_META_DIFFERENCES =
+{
+	executable :
+	{
+		"windowsSCR" : [/kaleid95.scr$/]
 	}
 };
 
@@ -374,7 +409,13 @@ function testSampleFile(sampleFilePath, silent, cb)
 			if(!!results.processed!=sampleTestData.processed)	// eslint-disable-line eqeqeq
 				return this(undefined, "FAIL", `Expected processed to be ${XU.c.fg.white + sampleTestData.processed + XU.c.fg.orange} but got ${XU.c.fg.white + results.processed + XU.c.fg.orange} instead`);
 
-			if(!Object.equals(sampleTestData.inputMeta, results.input.meta))
+			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
+
+			const allowMetaDifferences = IGNORE_META_DIFFERENCES[family] &&
+			   (IGNORE_META_DIFFERENCES[family][formatid] || IGNORE_META_DIFFERENCES[family]["*"]) &&
+			   (IGNORE_META_DIFFERENCES[family][formatid] || IGNORE_META_DIFFERENCES[family]["*"]).some(m => dexUtil.flexMatch(sampleSubFilePath.toLowerCase(), m));
+
+			if(!allowMetaDifferences && !Object.equals(sampleTestData.inputMeta, results.input.meta))
 				return this(undefined, "FAIL", `input.meta does not match expected result: ${diffUtil.diff(sampleTestData.inputMeta, results.input.meta)}`);
 
 			if(sampleTestData.files && !results.output.files)
@@ -382,8 +423,6 @@ function testSampleFile(sampleFilePath, silent, cb)
 
 			if(!sampleTestData.files && results.output.files)
 				return this(undefined, "FAIL", `Expected to have no files but found ${XU.c.fg.white + results.output.files.length + XU.c.fg.orange} instead`);
-
-			const {family, formatid} = results.id || results.identify.find(id => id.from==="dexvert") || {};
 
 			const allowExtraFiles = IGNORE_EXTRA_FILES[family] &&
 			   (IGNORE_EXTRA_FILES[family][formatid] || IGNORE_EXTRA_FILES[family]["*"]) &&
@@ -414,15 +453,20 @@ function testSampleFile(sampleFilePath, silent, cb)
 				}
 
 				const newOutStat = fs.statSync(path.join(outDirPath, outSubFilePath));
+				let ignoreSHA1 = SHA1_IGNORE_FILES[family] && (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) && (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m));
 
 				if(!(SIZE_IGNORE_FILES[family] &&
 				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]) &&
 				     (SIZE_IGNORE_FILES[family][formatid] || SIZE_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m))))
 				{
-					if(newOutStat.size!==sampleTestData.files[outSubFilePath].size)	// eslint-disable-line unicorn/no-lonely-if
-						return this(undefined, "FAIL", `size mistmatch ${newOutStat.size} vs expected ${sampleTestData.files[outSubFilePath].size}`, outSubFilePath);
+					const sizeDiffPercent = 100*(1-((sampleTestData.files[outSubFilePath].size-Math.abs(newOutStat.size-sampleTestData.files[outSubFilePath].size))/sampleTestData.files[outSubFilePath].size));
+					const allowedSizeDiffPercent = SIZE_FLEX_PERCENTAGE[family]?.[formatid] || 0;
+					if(allowedSizeDiffPercent>0 && sizeDiffPercent>0)
+						ignoreSHA1 = true;
+					if(sizeDiffPercent>allowedSizeDiffPercent)
+						return this(undefined, "FAIL", `size mistmatch ${newOutStat.size} vs expected ${sampleTestData.files[outSubFilePath].size} a ${sizeDiffPercent.toFixed(5)}% vs allowed ${allowedSizeDiffPercent}%`, outSubFilePath);
 				}
-				
+
 				if(newOutStat.mtime.getFullYear()<2020 && !sampleTestData.files[outSubFilePath].ts)
 					return this(undefined, "FAIL", `Output file timestamp is an old date of ${moment(newOutStat.mtime).format("YYYY-MM-DD")} but this was unexpected`, outSubFilePath);
 
@@ -432,9 +476,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				if(newOutStat.mtime.getFullYear()<2020 && sampleTestData.files[outSubFilePath].ts && moment(newOutStat.mtime).format("YYYY-MM-DD")!==sampleTestData.files[outSubFilePath].ts)
 					return this(undefined, "FAIL", `Output file timestamp does not match. Got ${moment(newOutStat.mtime).format("YYYY-MM-DD")} but expected ${sampleTestData.files[outSubFilePath].ts}`, outSubFilePath);
 
-				if(SHA1_IGNORE_FILES[family] &&
-				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]) &&
-				   (SHA1_IGNORE_FILES[family][formatid] || SHA1_IGNORE_FILES[family]["*"]).some(m => dexUtil.flexMatch(outSubFilePath.toLowerCase(), m)))
+				if(ignoreSHA1)
 				{
 					expectedFiles.removeOnce(outSubFilePath);
 					return;

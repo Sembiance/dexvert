@@ -30,6 +30,7 @@ C.DEXSERV_HOST = "localhost";
 C.DEXSERV_PORT = 17735;
 C.DEXSERV_OK_RESPONSE = "a-ok";
 
+C.TENSORSERV_PATH = "/mnt/ram/dexvert/tensor";
 C.TENSORSERV_HOST = "localhost";
 C.TENSORSERV_PORT = 17736;
 C.TENSORSERV_OK_RESPONSE = "a-ok";

@@ -33,4 +33,4 @@ def classifyGarbage():
 	return jsonify(modelGarbage.predict(image))
 
 print("tensorServer: Running flask server...")
-app.run(host="127.0.0.1", port=17736, threaded=True)
+app.run(host="0.0.0.0", port=17736, threaded=True)

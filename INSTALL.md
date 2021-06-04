@@ -1,5 +1,5 @@
 # WARNING
-Over 158 programs are required, including commercial programs and operating systems.
+Over 157 programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install
@@ -8,7 +8,7 @@ GIT clone the repo
 # Requirements
 
 ## Kernel
-Several kernel options need to enabled to support QEMU and mounting various fileystems dexvert may encounter.
+Several kernel options need to enabled to support QEMU, docker and mounting various fileystems dexvert may encounter.
 
 ```
     General setup  --->
@@ -95,6 +95,8 @@ Several kernel options need to enabled to support QEMU and mounting various file
             [*] Debug Filesystem
 ```
 
+Also everything detailed here: https://wiki.gentoo.org/wiki/Docker
+
 ## Windows/Amiga
 Some windows and amiga files are not included due to being commercial software that is still available. This includes the HD images used by the QEMU layer. Sorry.
 
@@ -140,6 +142,8 @@ app-arch/zoo | [zoo](https://packages.debian.org/jessie/zoo) |
 app-cdr/bchunk | [bchunk](http://he.fi/bchunk/) | 
 app-cdr/cdrdao | [toc2cue](http://cdrdao.sourceforge.net/) | 
 app-crypt/blake3 | [b3sum](hhttps://github.com/BLAKE3-team/BLAKE3) | 
+app-emulation/docker | [](https://www.docker.com/) | 
+app-emulation/nvidia-container-toolkit | [](https://github.com/NVIDIA/nvidia-container-toolkit) | dexvert
 app-emulation/qemu | [qemu-system-*](http://www.qemu.org) | 
 app-emulation/uade | [uade](http://zakalwe.fi/uade) | 
 app-emulation/uade | [uade123](http://zakalwe.fi/uade) | 
@@ -164,8 +168,6 @@ dev-lang/amostools | [listamos](https://github.com/kyz/amostools/) | dexvert
 dev-lang/gfalist | [gfalist](https://github.com/Sembiance/gfalist) | dexvert
 dev-libs/libcdio | [iso-info](https://www.gnu.org/software/libcdio) | 
 dev-python/chardet | [chardetect](https://github.com/chardet/chardet) | 
-dev-python/flask | [](https://github.com/pallets/flask/) | 
-dev-python/pillow | [](https://python-pillow.org/) | 
 dev-util/stackimport | [stackimport](https://github.com/uliwitness/stackimport/) | 
 games-emulation/dosbox | [dosbox](http://dosbox.sourceforge.net/) | 
 games-util/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert
@@ -225,7 +227,6 @@ media-video/xanim | [xanim](http://xanim.polter.net/) | dexvert
 net-fs/cifs-utils | [mount.cifs](https://wiki.samba.org/index.php/LinuxCIFS_utils) | 
 net-misc/rsync | [rsync](https://rsync.samba.org/) | 
 net-misc/vncsnapshot | [vncsnapshot](http://vncsnapshot.sourceforge.net/) | 
-sci-libs/tensorflow | [](https://www.tensorflow.org/) | 
 sci-misc/h5utils | [h5topng](https://github.com/NanoComp/h5utils/) | 
 sys-apps/file | [file](https://www.darwinsys.com/file/) | 
 sys-apps/util-linux | [mount](https://www.kernel.org/pub/linux/utils/util-linux/) | 
@@ -240,17 +241,12 @@ x11-misc/hsetroot | [hsetroot](https://wiki.gentoo.org/wiki/No_homepage) |
 x11-misc/xdotool | [xdotool](https://www.semicomplete.com/projects/xdotool/) | 
 
 ## Gentoo
-Gentoo users can more easily install all the above by adding the [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay).
-
-For proper CUDA support, you'll want to look up your [NVIDIA card here](https://developer.nvidia.com/cuda-gpus#compute)
-Then add to your /etc/portage/make.conf these 2 lines:
-TF_CUDA_COMPUTE_CAPABILITIES=7.0
-USE="$USE cuda"
+The [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay) is required for many programs, it contains patches for other programs too.
 
 Certain Gentoo USE flags may also be required for proper feature support.
 
 You should be able to install everything you need on Gentoo with this one command:
 
 ```
-USE="a52 acl aio alsa amr boost bzip2 cairo caps cddb cdio cdr creds cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio fdt ffmpeg filecaps flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec ncurses network nls ogg opengl openmp openssl opus osdmenu oss pam pch pdf perl pin-upstream-blobs png postproc postscript python qt5 readline realtime rle rtc run-exes sdl sdlsound seccomp shm slirp smith sndfile spice split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind usb usbredir utils v4l vaapi vcd vdpau vhost-net visio vnc vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xspice xv xvfb xvid zlib zstd" emerge =dev-lang/python-2* app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/cabextract app-arch/cpcxfs app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/gzip app-arch/helpdeco app-arch/inivalidate app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/resource-dasm app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unadf app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-arch/zoo app-cdr/bchunk app-cdr/cdrdao app-crypt/blake3 app-emulation/qemu app-emulation/uade app-emulation/vice app-emulation/wine-vanilla app-misc/jq app-office/scribus app-office/unoconv app-shells/bash app-text/antixls app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-lang/gfalist dev-libs/libcdio dev-python/chardet dev-python/flask dev-python/pillow dev-util/stackimport games-emulation/dosbox games-util/gameextractor media-gfx/abydosconvert media-gfx/ansilove media-gfx/dcraw media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/pablodraw-console media-gfx/pcdtojpeg media-gfx/recoil media-gfx/seq2mp4 media-gfx/svgdim media-gfx/transfig media-gfx/uniconvertor media-gfx/view64 media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libpuzzle media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/eupmini media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim net-fs/cifs-utils net-misc/rsync net-misc/vncsnapshot sci-libs/tensorflow sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-devel/binutils sys-fs/fuseiso sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-drivers/xf86-video-qxl x11-misc/hsetroot x11-misc/xdotool
+USE="a52 acl aio alsa amr boost bzip2 cairo caps cddb cdio cdr creds cups curl cxx dav1d dbus dga dia dts dv dvd dvdnav enca encode exif faudio fdt ffmpeg filecaps flac fontconfig fpx gif gnutls gpl graphicsmagick gtk heif iconv id3tag introspection ipv6 jbig joystick jpeg jpeg2k kpathsea lcms libass libglvnd live lzma lzo mad minimal mms mng mp3 natspec ncurses network nls ogg opengl openmp openssl opus osdmenu oss pam pch pdf perl pin-upstream-blobs png postproc postscript python qt5 readline realtime rle rtc run-exes sdl sdlsound seccomp shm slirp smith sndfile spice split-usr ssl svg templates tga theora threads tiff truetype twolame unicode unwind usb usbredir utils v4l vaapi vcd vdpau vhost-net visio vnc vorbis vpx wavpack webp wmf wpg X x264 xattr xcomposite xinerama xml xorg xpm xscreensaver xspice xv xvfb xvid zlib zstd" emerge =dev-lang/python-2* app-admin/sudo app-arch/amigadepacker app-arch/amitools app-arch/ancient app-arch/arc app-arch/atari-tools app-arch/bzip2 app-arch/cabextract app-arch/cpcxfs app-arch/deark app-arch/decrmtool app-arch/drxtract app-arch/extract-adf app-arch/gzip app-arch/helpdeco app-arch/inivalidate app-arch/isextract app-arch/lbrate app-arch/lha app-arch/mscompress app-arch/p7zip app-arch/resource-dasm app-arch/tar app-arch/trid app-arch/ttdecomp app-arch/unadf app-arch/unar app-arch/unice68 app-arch/unlzx app-arch/unrar app-arch/unshield app-arch/unzip app-arch/zoo app-cdr/bchunk app-cdr/cdrdao app-crypt/blake3 app-emulation/docker app-emulation/nvidia-container-toolkit app-emulation/qemu app-emulation/uade app-emulation/vice app-emulation/wine-vanilla app-misc/jq app-office/scribus app-office/unoconv app-shells/bash app-text/antixls app-text/convmv app-text/djvu app-text/ghostpcl-bin app-text/grotag app-text/lcdf-typetools app-text/poppler app-text/xmlstarlet dev-lang/ab2ascii dev-lang/amosbank dev-lang/amostools dev-lang/gfalist dev-libs/libcdio dev-python/chardet dev-util/stackimport games-emulation/dosbox games-util/gameextractor media-gfx/abydosconvert media-gfx/ansilove media-gfx/dcraw media-gfx/fontforge media-gfx/gifsicle media-gfx/imagemagick media-gfx/inkscape media-gfx/libpgf-tools media-gfx/nconvert media-gfx/pablodraw-console media-gfx/pcdtojpeg media-gfx/recoil media-gfx/seq2mp4 media-gfx/svgdim media-gfx/transfig media-gfx/uniconvertor media-gfx/view64 media-gfx/xcftools media-libs/fontconfig media-libs/gd media-libs/libavif media-libs/libbpg media-libs/libpuzzle media-libs/libwebp media-libs/netpbm media-libs/rlottie media-sound/adplay media-sound/eupmini media-sound/fluid-soundfont media-sound/fluidsynth media-sound/midistar2mid media-sound/mikmod2wav media-sound/mikmodInfo media-sound/openmpt123 media-sound/sidplay media-sound/sox media-sound/timidity-eawpatches media-sound/timidity-freepats media-sound/timidity++ media-sound/xmp media-video/ffmpeg media-video/mediainfo media-video/mplayer media-video/vcdimager media-video/xanim net-fs/cifs-utils net-misc/rsync net-misc/vncsnapshot sci-misc/h5utils sys-apps/file sys-apps/util-linux sys-devel/binutils sys-fs/fuseiso sys-fs/hfsutils sys-process/parallel x11-apps/bdftopcf x11-base/xorg-server x11-drivers/xf86-video-qxl x11-misc/hsetroot x11-misc/xdotool
 ```

@@ -9,12 +9,13 @@ const XU = require("@sembiance/xu"),
 // Will read length bytes from filePath at offset and compare to compareTo
 exports.compareFileBytes = function compareFileBytes(filePath, offset, compareTo)
 {
-	const buf = Buffer.alloc(compareTo.length);
+	const compareToLength = Array.isArray(compareTo) ? compareTo[0].length : compareTo.length;
+	const buf = Buffer.alloc(compareToLength);
 	const fd = fs.openSync(filePath, "r");
-	const bytesRead = fs.readSync(fd, buf, 0, compareTo.length, offset);
+	const bytesRead = fs.readSync(fd, buf, 0, compareToLength, offset);
 	fs.closeSync(fd);
 
-	if(bytesRead!==compareTo.length || !buf.equals(compareTo))
+	if(bytesRead!==compareToLength || (Array.isArray(compareTo) ? !compareTo.some(v => buf.equals(v)) : !buf.equals(compareTo)))
 		return false;
 
 	return true;

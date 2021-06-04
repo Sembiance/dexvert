@@ -49,9 +49,8 @@ tiptoe(
 		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
 
 		// python tensorflow server
-		programs.push({bin() { return ""; }, meta : {gentooPackage : "sci-libs/tensorflow", website : "https://www.tensorflow.org/"}});
-		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/flask", website : "https://github.com/pallets/flask/"}});
-		programs.push({bin() { return ""; }, meta : {gentooPackage : "dev-python/pillow", website : "https://python-pillow.org/"}});
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "app-emulation/docker", website : "https://www.docker.com/"}});
+		programs.push({bin() { return ""; }, meta : {gentooPackage : "app-emulation/nvidia-container-toolkit", gentooOverlay : "dexvert", website : "https://github.com/NVIDIA/nvidia-container-toolkit"}});
 
 		const programCount = programs.length;
 
@@ -73,7 +72,7 @@ GIT clone the repo
 # Requirements
 
 ## Kernel
-Several kernel options need to enabled to support QEMU and mounting various fileystems dexvert may encounter.
+Several kernel options need to enabled to support QEMU, docker and mounting various fileystems dexvert may encounter.
 
 \`\`\`
     General setup  --->
@@ -160,6 +159,8 @@ Several kernel options need to enabled to support QEMU and mounting various file
             [*] Debug Filesystem
 \`\`\`
 
+Also everything detailed here: https://wiki.gentoo.org/wiki/Docker
+
 ## Windows/Amiga
 Some windows and amiga files are not included due to being commercial software that is still available. This includes the HD images used by the QEMU layer. Sorry.
 
@@ -169,12 +170,7 @@ Package | Program | Overlay
 ${programs.multiSort([p => p.meta.gentooPackage, p => p.bin()]).map(p => (`${p.meta.gentooPackage} | [${p.bin()}](${p.meta.website}) | ${(p.meta.gentooOverlay || "")}`)).join("\n")}
 
 ## Gentoo
-Gentoo users can more easily install all the above by adding the [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay).
-
-For proper CUDA support, you'll want to look up your [NVIDIA card here](https://developer.nvidia.com/cuda-gpus#compute)
-Then add to your /etc/portage/make.conf these 2 lines:
-TF_CUDA_COMPUTE_CAPABILITIES=7.0
-USE="$USE cuda"
+The [dexvert overlay](https://github.com/Sembiance/dexvert-gentoo-overlay) is required for many programs, it contains patches for other programs too.
 
 Certain Gentoo USE flags may also be required for proper feature support.
 

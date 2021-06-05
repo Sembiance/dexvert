@@ -47,7 +47,7 @@ const SVG_PREVIEW_FILENAME = "dexvert-font-preview.svg";
 // Will create an SVG file that references the input font
 exports.previewSteps =
 [
-	() => (state, p, cb) => fs.writeFile(path.join(state.cwd, SVG_PREVIEW_FILENAME), `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+	() => (state, p, cb) => (!state.input?.meta?.font?.family ? setImmediate(cb) : fs.writeFile(path.join(state.cwd, SVG_PREVIEW_FILENAME), `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
         <style>
 			@font-face{font-family:&quot;${state.input.meta.font.family.escapeXML()}&quot;;src:url(&quot;${path.join(state.cwd, state.input.filePath).escapeXML()}&quot;)}
@@ -72,7 +72,7 @@ exports.previewSteps =
 			<tspan x="0" dy="72pt">72</tspan><tspan x="28pt" font-size="72pt">The quick brown fox jumps over the lazy dog.</tspan>
 		</text>
     </g>
-</svg>`, XU.UTF8, cb),
+</svg>`, XU.UTF8, cb)),
 	state => ({program : "inkscape", args : [`--actions=export-area-drawing; export-filename:${path.join(state.output.dirPath, `${state.input.name}.png`)}; export-do;`, path.join(state.cwd, SVG_PREVIEW_FILENAME)]})
 ];
 

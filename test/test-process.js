@@ -64,6 +64,7 @@ const SHA1_IGNORE_FILES =
 		"ibmStoryboardPic" : [/.png$/],
 
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
+		"cgm" : [/.svg$/],
 		"cvg" : [/.svg$/],
 		"eps" : [/.svg$/],
 		"fig" : [/.svg$/],
@@ -196,14 +197,7 @@ const FORMATID_MATCH_IGNORE_FILES =
 	}
 };
 
-const IGNORE_EXTRA_FILES =
-{
-	archive :
-	{
-		// A file in here is corrupted, so each time I run it I can get different output filenames, so allow this one to have additional files
-		"arc" : [/rainbow.arc$/]
-	}
-};
+const IGNORE_EXTRA_FILES = {};
 
 const IGNORE_META_DIFFERENCES =
 {

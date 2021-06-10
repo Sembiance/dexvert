@@ -68,16 +68,19 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 	{
 		const outFilePath = path.join(state.output.absolute, outSubPath);
 		let removeFile = false;
+		let dexid = null;
 		tiptoe(
 			function identifyOutputFile()
 			{
 				dexvert.identify(outFilePath, {tmpFilePath : state.tmpFilePath}, this);
 			},
-			function classifyImage(outIdentifications)
+			function getImageInfo(outIdentifications)
 			{
-				const dexid = (outIdentifications || []).find(o => o.from==="dexvert");
+				dexid = (outIdentifications || []).find(o => o.from==="dexvert");
 				if(!dexid || dexid.family!=="image")
 				{
+					if(state.verbose>=3)
+						XU.log`Removing image ${outFilePath} due to not being identified as an image ${{dexid}}`;
 					removeFile = true;
 					return this.jump(-1);
 				}
@@ -85,25 +88,9 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 				const imageGetInfoOptions = {timeout : XU.SECOND*30};
 				if(dexid.formatid==="svg")
 					imageGetInfoOptions.svg = true;
-				imageUtil.getInfo(outFilePath, imageGetInfoOptions, this.parallel());
-
-				// tensorUtil.classifyImage will convert these into PNG before sending to the classifier.
-				// We skip some files from classification, due to them looking like garbage. We do this by hoping the input file path contains certain keywords that are known to have 'noisy' images
-				if(["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid) && !["texture", "stereo", "pattern", "brush", "noise", "illusion"].some(v => state.input.absolute.toLowerCase().includes(v)))
-				{
-					if(state.verbose>=4)
-						XU.log`Getting garbage classification for image: ${outFilePath}`;
-
-					tensorUtil.classifyImage(outFilePath, "garbage", this.parallel());
-				}
-				else
-				{
-					if(state.verbose>=4)
-						XU.log`SKIPPING garbage classification for image: ${outFilePath} due to being unsupported image type or path matches exception pattern`;
-					this.parallel()(undefined, []);
-				}
+				imageUtil.getInfo(outFilePath, imageGetInfoOptions, this);
 			},
-			function checkImageValidity(imageInfo, [garbageResult])
+			function classifyImage(imageInfo)
 			{
 				// If we don't have a width or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
 				if(!imageInfo || !imageInfo.width || !imageInfo.height || ((unsafeConverter || untrustworthyConversion) && imageInfo.colorCount===1 && imageInfo.opaque===true))
@@ -114,6 +101,39 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 					return this.jump(-1);
 				}
 
+
+				let skipClassificationReason = null;
+
+				// Only classify these image types
+				if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
+					skipClassificationReason = `Unsupported image formatid: ${dexid.formatid}`;
+				
+				// Don't classify if the full original absolute path includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
+				if(["texture", "stereo", "pattern", "brush", "noise", "illusion"].some(v => state.input.absolute.toLowerCase().includes(v)))
+					skipClassificationReason = `Contains a known 'noisy' pattern in file path`;
+				
+				// Don't classify if the dimensions are too big
+				if([imageInfo.width, imageInfo.height].some(v => v>=6000))
+					skipClassificationReason = `Width or height is too big ${imageInfo.width}x${imageInfo.height}`;
+
+				// tensorUtil.classifyImage will convert these into PNG before sending to the classifier.
+				// We skip some files from classification, due to them looking like garbage. We do this by hoping the input file path contains certain keywords that are known to have 'noisy' images
+				if(!skipClassificationReason)
+				{
+					if(state.verbose>=4)
+						XU.log`Getting garbage classification for image: ${outFilePath}`;
+
+					tensorUtil.classifyImage(outFilePath, "garbage", this);
+				}
+				else
+				{
+					if(state.verbose>=4)
+						XU.log`SKIPPING garbage classification for image: ${outFilePath} due to: ${skipClassificationReason}`;
+					this.jump(2);
+				}
+			},
+			function checkImageValidity(garbageResult)
+			{
 				if(garbageResult && garbageResult.confidence>0)
 				{
 					if(!state.output.hasOwnProperty("garbageProbability"))

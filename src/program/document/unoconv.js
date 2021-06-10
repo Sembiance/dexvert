@@ -14,7 +14,7 @@ exports.meta =
 	}
 };
 
-exports.bin = () => "unoconv";
+exports.bin = () => path.join(__dirname, "..", "..", "..", "bin", "myunoconv");
 exports.runOptions = () => ({timeout : XU.MINUTE});	// unoconv often just hangs, forever
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, `outfile.${(r.flags.unoconvType || (state.id.family==="image" ? "png" : "pdf"))}`)) => [
 	"-n", "-p", `${C.UNOCONV_PORT}`, "-f", (r.flags.unoconvType || (state.id.family==="image" ? "png" : "pdf")), "-o", outPath, inPath];

@@ -5,7 +5,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://aminet.net/package/util/pack/decrunchmania-mos",
-	gentooPackage : "app-arch/decrmtool",
+	gentooPackage : "app-arch/decrunchmania",
 	gentooOverlay : "dexvert"
 };
 

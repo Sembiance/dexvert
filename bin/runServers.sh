@@ -36,6 +36,9 @@ function clean_up
 
 trap clean_up SIGINT
 
+# It will take some time for those servers to get going, so just sleep for 10 seconds to start
+sleep 10
+
 for (( ; ; ))
 do
 	dexservStatusResult=$(curl --silent "http://localhost:17735/status" | jq ".status")
@@ -43,9 +46,10 @@ do
 	if [ "$dexservStatusResult" = '"a-ok"' ] && [ "$tensorStatusResult" = '"a-ok"' ]
 	then
 		break;
+	else
+		echo "Waiting for servers  dex [${dexservStatusResult}]  tensor [${tensorStatusResult}]"
+		sleep 7
 	fi
-
-	sleep 0.2
 done
 
 endAt=$(date +"%s")

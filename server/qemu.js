@@ -302,7 +302,12 @@ exports.start = function start(cb)
 			Object.entries(OS).parallelForEach(([osid, osInfo], subcb) =>
 			{
 				const imgFilePaths = ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename));
-				imgFilePaths.parallelForEach((imgFilePath, copycb) => fs.copyFile(imgFilePath, path.join(C.QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath)), copycb), subcb);
+				imgFilePaths.serialForEach((imgFilePath, copycb) =>
+				{
+					const imgDestFilePath = path.join(C.QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
+					XU.log`QEMU copying to ${imgDestFilePath}...`;
+					fs.copyFile(imgFilePath, imgDestFilePath, copycb);
+				}, subcb);
 			}, this);
 		},
 		function startOSInstances()

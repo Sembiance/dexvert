@@ -171,6 +171,12 @@ function testSampleFile(sampleFilePath, cb)
 		{
 			fileUtil.unlink(idJSONFilePath, this);
 		},
-		cb
+		function handleError(err)
+		{
+			if(err)
+				testUtil.logResult("FAIL", sampleSubFilePath, "Failed due to unexpected error: ", err);
+
+			cb();
+		}
 	);
 }

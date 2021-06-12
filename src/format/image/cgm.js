@@ -9,7 +9,7 @@ exports.meta =
 	mimeType : "image/cgm",
 	magic    : ["Computer Graphics Metafile"],
 	unsafe   : true,
-	notes    : "Test file input.cgm fails to convert. I haven't located another CGM converter yet."
+	notes    : "Test file allprims.cgm and input.cgm fail to convert"
 };
 
-exports.converterPriorty = [{program : "unoconv", flags : {unoconvType : "svg"}}, "irfanView"];
+exports.converterPriorty = [{program : "soffice", flags : {sofficeType : "svg"}}, "irfanView"];

@@ -6,14 +6,14 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	testUtil = require("../test/testUtil.js"),
 	imageUtil = require("@sembiance/xutil").image,
+	runUtil = require("@sembiance/xutil").run,
 	fileUtil = require("@sembiance/xutil").file,
 	{Iconv} = require("iconv"),
 	fs = require("fs");
 
 
-const raw = fs.readFileSync("/home/sembiance/tmp/out/PMJPEG.txt");
-
-const iconv = new Iconv("CP866", "UTF-8");
-const out = iconv.convert(raw);
-
-XU.log`${out.toString("UTF8")}`;
+runUtil.run("rsync", ["--verbose", "-aL", "-e", "ssh -i /mnt/compendium/DevLab/dexvert/qemu/gentoo/data/dexvert_id_rsa -o StrictHostKeyChecking=no -p 5320", "dexvert@127.0.0.1:/out/", "/mnt/ram/tmp/wip/"], {liveOutput : true}, (...args) =>
+{
+	XU.log`${args}`;
+	process.exit(0);
+});

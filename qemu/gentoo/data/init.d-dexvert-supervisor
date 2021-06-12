@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+
+depend() {
+    need sshd
+}
+
+start() {
+    ebegin "Starting dexvert supervisor..."
+    daemonize -u dexvert -c /home/dexvert -p /home/dexvert/supervisor.pid -e /home/dexvert/supervisor-error.log -o /home/dexvert/supervisor.log /home/dexvert/supervisor.sh
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping dexvert supervisor..."
+    kill `cat /home/dexvert/supervisor.pid`
+    eend $?
+}

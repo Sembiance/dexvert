@@ -37,7 +37,7 @@ function clean_up
 trap clean_up SIGINT
 
 # It will take some time for those servers to get going, so just sleep for 10 seconds to start
-sleep 10
+sleep 20
 
 for (( ; ; ))
 do
@@ -48,7 +48,7 @@ do
 		break;
 	else
 		echo "Waiting for servers  dex [${dexservStatusResult}]  tensor [${tensorStatusResult}]"
-		sleep 7
+		sleep 5
 	fi
 done
 

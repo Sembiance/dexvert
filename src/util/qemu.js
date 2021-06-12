@@ -70,6 +70,10 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 					if(args.length>0)
 						binAndArgs += ` ${args.map(arg => (inFilePaths.includes(arg) ? path.basename(arg).includes(" ") ? `"HD:in/${path.basename(arg)}"` : `HD:in/${path.basename(arg)}` : (arg.includes(" ") && !arg.includes('"') ? `"${arg}"` : arg))).join(" ")}`;
 				}
+				else if(osid.startsWith("gentoo"))
+				{
+					binAndArgs += `${cmd} ${args.map(v => `'${v.replaceAll("'", `'"'"'`)}'`).join(" ")}`;
+				}
 
 				if(osid.startsWith("win"))
 				{
@@ -95,6 +99,12 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 						scriptLines.push(script);
 					
 					scriptLines.push("EXIT");
+				}
+				else if(osid.startsWith("gentoo"))
+				{
+					scriptLines.push(`#!/bin/bash`);
+					scriptLines.push(`${timeout ? `timeout ${Math.floor(timeout/XU.SECOND)}s ` : ""}${binAndArgs}`);
+					scriptLines.push("sync");
 				}
 
 				qemuData.script = scriptLines.join("\n");

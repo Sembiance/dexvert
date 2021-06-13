@@ -111,6 +111,9 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 					scriptLines.push(`#!/bin/bash`);
 					scriptLines.push(`${timeout ? `timeout ${Math.floor(timeout/XU.SECOND)}s ` : ""}${binAndArgs}`);
 					scriptLines.push("sync");
+
+					if(script)
+						scriptLines.push(script);
 				}
 
 				qemuData.script = scriptLines.join("\n");

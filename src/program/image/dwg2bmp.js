@@ -10,5 +10,6 @@ exports.meta =
 };
 
 exports.bin = () => "dwg2bmp";
+exports.runOptions = () => ({virtualX : true});
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.cwd, "outfile.bmp")) => (["-quality=100", `-outfile=${outPath}`, inPath]);
 exports.post = (state, p, r, cb) => p.util.program.run("convert", {argsd : [path.join(state.cwd, "outfile.bmp")]})(state, p, cb);

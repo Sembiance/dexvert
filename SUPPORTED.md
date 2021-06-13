@@ -47,7 +47,7 @@ archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintos
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox | [1 sample file](https://telparia.com/fileFormatSamples/archive/mbox/)
-archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
+archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
@@ -120,7 +120,7 @@ document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rt
 document | Timeworks Publisher/Publish It! | .dtp | [7 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [16 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
-document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc | [6 sample files](https://telparia.com/fileFormatSamples/document/wordDoc/)
+document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc | [7 sample files](https://telparia.com/fileFormatSamples/document/wordDoc/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [12 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 
 
@@ -442,7 +442,7 @@ image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | 
 image | [Nearly Raw Raster Data](http://teem.sourceforge.net/nrrd/format.html) | .nrrd | [3 sample files](https://telparia.com/fileFormatSamples/image/nrrd/)
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [10 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
-image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [45 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
+image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [35 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
 image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [12 sample files](https://telparia.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [4 sample files](https://telparia.com/fileFormatSamples/image/nikon/)
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | [1 sample file](https://telparia.com/fileFormatSamples/image/otaBitmap/)
@@ -565,7 +565,7 @@ image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org
 image | TRS-80 | .grf .max .p41 .pix | [7 sample files](https://telparia.com/fileFormatSamples/image/trs80Star/)
 image | TRS-80 CLP File | .clp | [1 sample file](https://telparia.com/fileFormatSamples/image/trs80Clp/)
 image | TRS-80 P11 | .p11 | [2 sample files](https://telparia.com/fileFormatSamples/image/trs80P11/)
-image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [9 sample files](https://telparia.com/fileFormatSamples/image/trs/)
+image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [6 sample files](https://telparia.com/fileFormatSamples/image/trs/)
 image | [True Paint I](http://fileformats.archiveteam.org/wiki/True_Paint_I) | .mci .mcp | [10 sample files](https://telparia.com/fileFormatSamples/image/truePaint/)
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | [10 sample files](https://telparia.com/fileFormatSamples/image/tga/)
 image | [Trzmiel](http://fileformats.archiveteam.org/wiki/Trzmiel) | .cpr | [6 sample files](https://telparia.com/fileFormatSamples/image/cpr/)

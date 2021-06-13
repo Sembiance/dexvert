@@ -196,6 +196,8 @@ exports.supportedInputMeta = function supportedInputMeta(state, p, cb)
 			const imageGetInfoOptions = {timeout : XU.MINUTE*3};
 			if(state?.id?.formatid==="svg")
 				imageGetInfoOptions.svg = true;
+			if(p.format.meta.slow)
+				imageGetInfoOptions.widthHeightOnly = true;
 			imageUtil.getInfo(state.input.absolute, imageGetInfoOptions, this);
 		},
 		function stashResults(imageInfo)

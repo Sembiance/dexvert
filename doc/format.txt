@@ -48,6 +48,9 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 >>> fallback : true
 Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
 
+>>> slow : true
+If set to true then this format is known to be slow to work with. If an image, then this causes only width/height metadata to be calculated (instead of additional image info like color counts, opaque, etc which are slow to calculate)
+
 >>> priority : C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW

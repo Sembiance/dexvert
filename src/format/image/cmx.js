@@ -8,7 +8,7 @@ exports.meta =
 	ext            : [".cmx"],
 	forbidExtMatch : true,
 	magic          : ["Corel Metafile Exchange Image", "Corel Presentation Exchange File"],
-	unsafe    : true
+	unsafe         : true
 };
 
 exports.converterPriorty = [{program : "soffice", flags : {sofficeType : "svg"}}];

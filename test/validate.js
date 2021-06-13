@@ -6,6 +6,7 @@ const XU = require("@sembiance/xu"),
 	assert = require("assert"),
 	{validateValue} = require("@validatem/core"),
 	fileUtil = require("@sembiance/xutil").file,
+	runUtil = require("@sembiance/xutil").run,
 	tiptoe = require("tiptoe"),
 	dexUtil = require("../src/dexUtil.js"),
 	either = require("@validatem/either"),
@@ -41,9 +42,8 @@ exports.validate = function validate(cb)
 			assert.strictEqual(dupliacteFormatids.length, 0, `Duplicate formatids detected: ${dupliacteFormatids}`);
 
 			Object.values(formats).flatMap(v => Object.values(v)).forEach(format => validateFormat(format));
-			programFilePaths.forEach(programFilePath => validateProgram(require(programFilePath)));		// eslint-disable-line node/global-require
-
-			this();
+			
+			programFilePaths.serialForEach((programFilePath, subcb) => validateProgram(require(programFilePath), subcb), this);		// eslint-disable-line node/global-require
 		},
 		cb
 	);
@@ -77,6 +77,7 @@ function validateFormat(format)
 		symlinkUnsafe    : [isBoolean],
 		untouched        : [isBoolean],
 		fallback         : [isBoolean],
+		slow             : [isBoolean],
 		priority         : [isNumber, oneOf(Object.values(C.PRIORITY))],
 		confidenceAdjust : [isFunction, hasLengthBetween(0, 3)],
 		filesRequired    : [isFunction, hasLengthBetween(0, 3)],
@@ -129,7 +130,7 @@ function validateFormat(format)
 	}
 }
 
-function validateProgram(program)
+function validateProgram(program, cb)
 {
 	const programMetaSchema =
 	{
@@ -179,4 +180,28 @@ function validateProgram(program)
 		XU.log`Failed to validate program ${program}.\n${err}`;
 		process.exit(1);
 	}
+
+	tiptoe(
+		function queryIfInstalled()
+		{
+			if(!program.meta?.gentooPackage)
+				return this.finish();
+			
+			Array.force(program.meta.gentooPackage).parallelForEach((gentooPackage, subcb) => runUtil.run("eix", ["-I", gentooPackage], runUtil.SILENT, subcb), this);
+		},
+		function verifyInstalled(rawResults)
+		{
+			Array.force(program.meta.gentooPackage).forEach((gentooPackage, i) =>
+			{
+				if(rawResults[i].includes("No matches found"))
+				{
+					XU.log`Package ${program.meta.gentooPackage} is not installed!`;
+					process.exit(1);
+				}
+			});
+
+			this();
+		},
+		cb
+	);
 }

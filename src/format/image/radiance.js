@@ -7,7 +7,8 @@ exports.meta =
 	website  : "http://fileformats.archiveteam.org/wiki/Radiance_HDR",
 	ext      : [".hdr", ".rgbe", ".xyze", ".pic", ".rad"],
 	mimeType : "image/vnd.radiance",
-	magic    : ["Radiance RGBE Image Format", "Radiance HDR image data", "Radiance High Dynamic Range bitmap"]
+	magic    : ["Radiance RGBE Image Format", "Radiance HDR image data", "Radiance High Dynamic Range bitmap"],
+	slow     : true
 };
 
 exports.converterPriorty = ["convert", "nconvert", "abydosconvert"];

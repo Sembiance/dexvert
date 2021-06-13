@@ -13,7 +13,8 @@ while true
 do
 	if [ -f "$GO_FILE_PATH" ]; then
 		sudo chmod 755 "$GO_FILE_PATH"
-		"$GO_FILE_PATH"
+		./"$GO_FILE_PATH" &
+		wait
 		sleep 0.5
 		rm -f "$GO_FILE_PATH"
 	else

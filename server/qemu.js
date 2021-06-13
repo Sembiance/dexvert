@@ -263,7 +263,7 @@ const IN_OUT_LOGIC =
 	},
 	ssh : (instance, {body}, cb) =>
 	{
-		const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "data", "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
+		const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
 		const sshPrefix = "dexvert@127.0.0.1";
 		const inDirPath = "/in";
 		const outDirPath = "/out";

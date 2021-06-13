@@ -4,11 +4,9 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website        : "https://www.libreoffice.org",
-	gentooPackage  : "app-office/libreoffice",
-	gentooUseFlags : "branding cups dbus gtk mariadb",
-	unsafe         : true,
-	flags          :
+	website : "https://www.libreoffice.org",
+	unsafe  : true,
+	flags   :
 	{
 		sofficeType : `Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "png" for images or "pdf" for everything else.`
 	}

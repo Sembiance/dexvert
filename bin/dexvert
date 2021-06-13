@@ -17,6 +17,7 @@ const cmd = new Command().description("Processes <inputFilePath> converting or e
 		Valid families: ${C.FAMILIES.join(" ")} or ${"all"}
 		Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
 		WARNING: Multiple successes could use a lot of disk space`).
+	option("--asFormat [family/formatid]", "Convert the format as a specific format. Don't identify the file").
 	option("--keepGoing", "When brute forcing, don't stop at the first success. Try them all.").
 	option("--alwaysBrute", "When brute forcing, always brute force, even if we have an exact id match.").
 	option("--outputState", "If set, will output the state as JSON").
@@ -46,7 +47,7 @@ tiptoe(
 	function runProcess()
 	{
 		const processOptions = {verbose, programFlags : {}};
-		["useTmpOutputDir", "brute", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform"].forEach(k =>
+		["useTmpOutputDir", "brute", "asFormat", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform"].forEach(k =>
 		{
 			if(argv.hasOwnProperty(k))
 				processOptions[k] = argv[k];

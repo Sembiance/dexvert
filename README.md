@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 661 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 662 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -22,6 +22,7 @@ Options:
   		Valid families: archive document audio music video image 3d font text executable rom other or all
   		Successes will be stored in <outputDirPath>/<family>/<format>/ sub dirs
   		WARNING: Multiple successes could use a lot of disk space
+  --asFormat [family/formatid]                   Convert the format as a specific format. Don't identify the file
   --keepGoing                                    When brute forcing, don't stop at the first success. Try them all.
   --alwaysBrute                                  When brute forcing, always brute force, even if we have an exact id match.
   --outputState                                  If set, will output the state as JSON
@@ -34,7 +35,7 @@ Options:
       uniso:offset                               Extract ISO starting at this particular byte offset. Default: 0
       uniso:hfs                                  Set this to true to process the iso as a MacOS HFS disc. Default: false
       unlzx:unlzxListOnly                        If set to true, only list out the the files in the archive and set meta info, don't actually extract. Default: false
-      unoconv:unoconvType                        Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "png" for images or "pdf" for everything else.
+      soffice:sofficeType                        Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "png" for images or "pdf" for everything else.
       file:allMatches                            Set this to true to return ALL matches from the file command, instead of just 1. Default: false
       ansilove:ansiloveType                      Which ansilove format to use. Default: Let ansilove decide
       convert:convertExt                         Which extension to convert to (".png", ".webp", ".svg"). Default: .png
@@ -77,7 +78,7 @@ Options:
 ```
 
 A server needs to be run in the background before doing any transformations.
-This server will start a background unoconv daemon and also run several emulator instances of win2k, amiga, etc.
+This server will run several emulator instances of win2k, amiga, etc.
 It also runs a tensorServer python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
 Start this by kicking off: 'bin/runServers.sh'
 

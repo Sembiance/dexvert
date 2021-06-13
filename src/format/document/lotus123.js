@@ -15,8 +15,8 @@ exports.meta =
 exports.steps =
 [
 	// PDF
-	() => ({program : "unoconv"}),
+	() => ({program : "soffice"}),
 
 	// CSV
-	() => ({program : "unoconv", flags : {unoconvType : "csv"}})
+	() => ({program : "soffice", flags : {sofficeType : "csv"}})
 ];

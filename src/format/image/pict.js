@@ -10,4 +10,4 @@ exports.meta =
 	magic    : ["QuickDraw/PICT bitmap", "Macintosh PICT Image", "Claris clip art"]
 };
 
-exports.converterPriorty = ["deark", "recoil2png", "nconvert", "convert", "unoconv"];
+exports.converterPriorty = ["deark", "recoil2png", "nconvert", "convert", "soffice"];

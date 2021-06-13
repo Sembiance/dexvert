@@ -72,6 +72,12 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 				}
 				else if(osid.startsWith("gentoo"))
 				{
+					inFilePaths.forEach(inFilePath =>
+					{
+						if(inFilePath.startsWith("/"))
+							args.replaceAll(inFilePath, path.basename(inFilePath));
+					});
+
 					binAndArgs += `${cmd} ${args.map(v => `'${v.replaceAll("'", `'"'"'`)}'`).join(" ")}`;
 				}
 

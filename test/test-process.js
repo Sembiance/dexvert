@@ -115,7 +115,7 @@ const SIZE_IGNORE_FILES =
 		// This particular program produces very different colors each time, not sure why
 		"3dCK" : [/.png$/],
 
-		// Unoconv can produce wildly different SVG output, not sure why
+		// soffice can produce wildly different SVG output, not sure why
 		"cgm" : [/.svg$/]
 	}
 };
@@ -144,7 +144,7 @@ const SIZE_FLEX_PERCENTAGE =
 	music :
 	{
 		// Not entirely sure why, but _¡tsa!_juanidance.med is always different
-		med : 1,
+		med : 2,
 		
 		// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
 		sid : 10

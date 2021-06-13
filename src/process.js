@@ -40,7 +40,7 @@ function checkShouldContinue(state)
 exports.steps =
 [
 	(state, p) => p.util.file.glob(state.output.absolute, "**", {nodir : true}, existingOutputFiles => existingOutputFiles.length===0, `Output directory ${state.output.absolute} is not empty`),
-	(state, p) => p.util.flow.serial(p.identify.steps),
+	(state, p) => (state.asFormat ? p.util.flow.noop : p.util.flow.serial(p.identify.steps)),
 	() => exports.checkIdentification,
 	(state0, p0) => p0.util.flow.batchRepeatUntil([
 		() => exports.processNext,
@@ -66,7 +66,34 @@ function setFallthroughID(state)
 // Will come up with a list of ids to check based on the results of the p.identify call
 exports.checkIdentification = function checkIdentification(state, {DexvertError, formats}, cb)
 {
-	state.ids = state.identify.filter(id => id.from==="dexvert" && !id.unsupported);
+	if(state.asFormat)
+	{
+		const [asFamily, asFormatid] = state.asFormat.split("/");
+		const formatMeta = formats[asFamily][asFormatid].meta;
+		const asMatch = {from : "dexvert", family : asFamily, formatid : asFormatid, magic : formatMeta.name, matchType : "magic", confidence : 100, originalConfidence : 100};
+		if(formatMeta.ext)
+			asMatch.extensions = formatMeta.ext;
+		["encoding", "confidenceAdjust", "website", "unsupported", "mimeType", "hljsLang", "fallback"].forEach(k =>
+		{
+			if(formatMeta[k])
+				asMatch[k] = formatMeta[k];
+		});
+
+		["trustMagic", "unsupported", "untouched", "highConfidence"].forEach(key =>
+		{
+			if(formatMeta[key])
+				asMatch[key] = true;
+		});
+
+		// NOTE: Some id flags are not correctly emulated here, such as extMatch/filenameMatch, etc. This might cause problems when processing a format that checks these for whatever reason
+
+		state.ids = [asMatch];
+	}
+	else
+	{
+		state.ids = state.identify.filter(id => id.from==="dexvert" && !id.unsupported);
+	}
+
 	if(state.verbose>=4)
 		XU.log`Identifications: ${state.ids}`;
 

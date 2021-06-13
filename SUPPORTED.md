@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 661 file formats are supported by dexvert.
+The following 662 file formats are supported by dexvert.
 
 
 
@@ -55,7 +55,7 @@ archive | [NPack Archive](http://fileformats.archiveteam.org/wiki/NPack) | .$ | 
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [13 sample files](https://telparia.com/fileFormatSamples/archive/os2BitmapArray/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [10 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [1 sample file](https://telparia.com/fileFormatSamples/archive/packIt/)
-archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [17 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
+archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [16 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [1 sample file](https://telparia.com/fileFormatSamples/archive/stx/)
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [13 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [19 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
@@ -157,13 +157,13 @@ font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) |
 font | Shoot Em Up Construction Kit Font | .g | [1 sample file](https://telparia.com/fileFormatSamples/font/seuckFont/) - Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.
 font | Super-IRG | .sif | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
 font | The Last Word Font | .f80 | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
-font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [16 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
+font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [15 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [5 sample files](https://telparia.com/fileFormatSamples/font/woff/)
 font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com/fileFormatSamples/font/zxFont/)
 
 
 
-## Image (443)
+## Image (444)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -213,6 +213,7 @@ image | Atari Player Editor | .apl | [1 sample file](https://telparia.com/fileFo
 image | Atari RGB Intermediate | .rgb | [1 sample file](https://telparia.com/fileFormatSamples/image/rgbIntermediate/)
 image | [Atari Standard Graphics 3](http://fileformats.archiveteam.org/wiki/Standard_Graphics_3_(Atari)) | .sg3 | [1 sample file](https://telparia.com/fileFormatSamples/image/sg3/)
 image | [AtariTools-800 Graphic](http://fileformats.archiveteam.org/wiki/AtariTools-800) | .agp | [4 sample files](https://telparia.com/fileFormatSamples/image/atariTools800Graphic/)
+image | [AutoCAD Drawing](http://fileformats.archiveteam.org/wiki/DWG) | .dwg .dwt | [9 sample files](https://telparia.com/fileFormatSamples/image/dwg/)
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | [4 sample files](https://telparia.com/fileFormatSamples/image/avif/)
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | [13 sample files](https://telparia.com/fileFormatSamples/image/avatar/)
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | [7 sample files](https://telparia.com/fileFormatSamples/image/epa/)
@@ -243,7 +244,7 @@ image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquas
 image | [Commodore 64 VIC](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .vic | [12 sample files](https://telparia.com/fileFormatSamples/image/vic/)
 image | [CompuServe RLE](http://fileformats.archiveteam.org/wiki/CompuServe_RLE) | .rle | [12 sample files](https://telparia.com/fileFormatSamples/image/compuServeRLE/) - RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | [2 sample files](https://telparia.com/fileFormatSamples/image/cals/)
-image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [8 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - Test file input.cgm fails to convert. I haven't located another CGM converter yet.
+image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [8 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - Test file input.cgm fails to convert
 image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .ce1 .ce2 .ce3 | [3 sample files](https://telparia.com/fileFormatSamples/image/computerEyes/)
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [1 sample file](https://telparia.com/fileFormatSamples/image/cmx/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [9 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
@@ -713,7 +714,7 @@ video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
-video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [13 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
+video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [19 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)

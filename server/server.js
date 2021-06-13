@@ -6,7 +6,7 @@ const XU = require("@sembiance/xu"),
 	fastify = require("fastify")({logger : {level : "warn"}});
 
 let stopping = false;
-const subServers = ["unoconv", "ftp", "qemu"].map(v => require(`./${v}.js`));	// eslint-disable-line node/global-require
+const subServers = ["ftp", "qemu"].map(v => require(`./${v}.js`));	// eslint-disable-line node/global-require
 
 function stop()
 {

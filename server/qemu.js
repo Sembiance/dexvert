@@ -97,7 +97,7 @@ function startOS(osid, instanceid, cb)
 
 			qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
 
-			(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push(`format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
+			(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
 
 			if(OS[osid].uefi)
 			{
@@ -111,7 +111,7 @@ function startOS(osid, instanceid, cb)
 			if(instance.debug)
 				qemuRunOptions.env = {DISPLAY : (os.hostname()==="crystalsummit" ? ":0.1" : ":0")};
 
-			XU.log`QEMU args for osid: ${qemuArgs}`;
+			XU.log`QEMU run for osid ${osid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${qemuArgs}`;
 
 			instance.qemuRunOptions = qemuRunOptions;
 			instance.qemuArgs = qemuArgs;
@@ -409,7 +409,7 @@ exports.status = function status()
 	return serversLaunched && Object.values(INSTANCES).flatMap(o => Object.values(o)).every(instance => instance.cp && instance.ready);
 };
 
-// Stops our unoconv background server
+// Stops our qemu instances
 exports.stop = function stop(cb)
 {
 	tiptoe(

@@ -7,10 +7,9 @@ exports.meta =
 	website        : "http://fileformats.archiveteam.org/wiki/WordPerfect",
 	ext            : [".wp", ".wpd", ".wp4", ".wp5", ".wp6", ".wp7", ".doc"],
 	forbidExtMatch : true,
-	symlinkUnsafe  : true,	// unoconv resolves symlinks and is sensitive to original extension, thus we need to forbid symlink
 	magic          : [/^WordPerfect.* [Dd]ocument/],
 	weakMagic      : true,
 	unsafe         : true
 };
 
-exports.steps = [() => ({program : "unoconv"})];
+exports.steps = [() => ({program : "soffice"})];

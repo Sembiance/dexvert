@@ -55,6 +55,8 @@ exports.status = function status()
 // Stops our FTP server
 exports.stop = function stop(cb)
 {
+	XU.log`VSFTPD stopping...`;
+	
 	stopping = true;
 
 	if(vsftpdCP && !vsftpdCP.killed)

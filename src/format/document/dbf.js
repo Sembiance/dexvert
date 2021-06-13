@@ -10,4 +10,4 @@ exports.meta =
 	unsafe  : true
 };
 
-exports.steps = [() => ({program : "unoconv", flags : {unoconvType : "csv"}})];
+exports.steps = [() => ({program : "soffice", flags : {sofficeType : "csv"}})];

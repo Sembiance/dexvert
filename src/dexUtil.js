@@ -2,8 +2,10 @@
 /* eslint-disable node/global-require */
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
+	runUtil = require("@sembiance/xutil").run,
 	path = require("path"),
 	C = require("./C.js"),
+	fs = require("fs"),
 	tiptoe = require("tiptoe");
 
 // Matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
@@ -65,4 +67,29 @@ exports.setStateInput = function setStateInput(state, inputFilePath)
 exports.setStateOutput = function setStateOutput(state, outputDirPath)
 {
 	state.output = { absolute : path.resolve(outputDirPath), dirPath : path.resolve(outputDirPath), ...path.parse(outputDirPath)};
+};
+
+// Will run an external dexvert process against inFilePath, treating it asFormat
+exports.dexvertAs = function dexvertAs(state, inFilePath, outDirPath, asFormat, cb)
+{
+	const outputJSONFilePath = fileUtil.generateTempFilePath(undefined, ".json");
+	tiptoe(
+		function runDexvert()
+		{
+			const dexArgs = ["--verbose", state.verbose.toString(), "--outputStateToFile", outputJSONFilePath, "--asFormat", asFormat];
+			dexArgs.push(inFilePath, outDirPath);
+
+			runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), dexArgs, {silent : true, liveOutput : true}, this);
+		},
+		function loadResults()
+		{
+			fs.readFile(outputJSONFilePath, XU.UTF8, this);
+		},
+		function parseJSON(resultRaw)
+		{
+			this.parallel()(undefined, XU.parseJSON(resultRaw, null));
+			fileUtil.unlink(outputJSONFilePath, this.parallel());
+		},
+		cb
+	);
 };

@@ -24,8 +24,6 @@ C.FORMAT_DIR_PATH = path.join(__dirname, "format");
 
 C.LOCK_CHECK_INTERVAL = XU.SECOND;
 
-C.UNOCONV_PORT = 27359;
-
 C.DEXSERV_HOST = "localhost";
 C.DEXSERV_PORT = 17735;
 C.DEXSERV_OK_RESPONSE = "a-ok";

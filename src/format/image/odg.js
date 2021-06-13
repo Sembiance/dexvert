@@ -10,4 +10,4 @@ exports.meta =
 	weakMagic : true
 };
 
-exports.converterPriorty = [{program : "unoconv", flags : {unoconvType : "svg"}}];
+exports.converterPriorty = [{program : "soffice", flags : {sofficeType : "svg"}}];

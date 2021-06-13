@@ -106,7 +106,7 @@ exports.post = (state, p, r, cb) =>
 		},
 		function convertRTFToPDF()
 		{
-			p.util.program.run("unoconv", {flags : {unoconvType : "pdf"}, argsd : [this.data.rtfFilePath]})(state, p, this);
+			p.util.program.run("soffice", {flags : {sofficeType : "pdf"}, argsd : [this.data.rtfFilePath]})(state, p, this);
 		},
 		function cleanup()
 		{

@@ -38,7 +38,7 @@ ${dexidUsage}
 \`\`\`
 
 A server needs to be run in the background before doing any transformations.
-This server will start a background unoconv daemon and also run several emulator instances of win2k, amiga, etc.
+This server will run several emulator instances of win2k, amiga, etc.
 It also runs a tensorServer python web server that loads the tensorflow models used by dexvert to determine if image conversion was successful.
 Start this by kicking off: 'bin/runServers.sh'
 

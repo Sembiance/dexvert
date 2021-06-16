@@ -10,7 +10,7 @@ exports.meta =
 	flags          :
 	{
 		ffmpegExt    : `Which extension to convert into (".png", ".mp3", ".mp4", ".flac", etc). Default for image is .png, audio is .mp3 otherwise .mp4`,
-		ffmpegFormat : "Specify which format to treat the input file as. Default: Let ffmpeg decide",
+		ffmpegFormat : "Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide",
 		ffmpegFPS    : "What frame rate to specify for conversion. Default: Let ffmpeg decide"
 	}
 };

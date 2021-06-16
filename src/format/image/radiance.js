@@ -11,6 +11,6 @@ exports.meta =
 	slow     : true
 };
 
-exports.converterPriorty = ["convert", "nconvert", "abydosconvert"];
+exports.converterPriorty = ["pfsconvert", "convert", "nconvert", "abydosconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

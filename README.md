@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 662 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 663 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -55,7 +55,7 @@ Options:
       timidity:midiFont                          Which midifont to use to convert (eaw, fluid, roland, creative, freepats, windows) Default: eaw
       uade123:uadeType                           Which 'player' file to use for conversion. Default: Let uade123 decide
       ffmpeg:ffmpegExt                           Which extension to convert into (".png", ".mp3", ".mp4", ".flac", etc). Default for image is .png, audio is .mp3 otherwise .mp4
-      ffmpeg:ffmpegFormat                        Specify which format to treat the input file as. Default: Let ffmpeg decide
+      ffmpeg:ffmpegFormat                        Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide
       ffmpeg:ffmpegFPS                           What frame rate to specify for conversion. Default: Let ffmpeg decide
   -h, --help                                     display help for command
 

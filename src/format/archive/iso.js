@@ -101,12 +101,12 @@ exports.steps =
 		
 		// CDs can be hybrid Mac/PC CDs, thus have both HFS and non-HFS tracks
 		// HFS is problematic though, so we prefer to extract the PC versions if available
-		// So we only set the uniso 'hfs' flag if we have an HFS track and we do NOT detect a regular ISO-9660 track (by checking if iso-info found a 'volume' label)
+		// So we only set the uniso 'hfs' flag if we have an HFS track and we do NOT detect a regular ISO-9660 track (by checking if iso-info found a 'system' or 'volume' label)
 		const isHFS = state.identify.some(identification => HFS_MAGICS.some(matchAgainst => dexUtil.flexMatch(identification.magic, matchAgainst)));
 		if(isHFS)
 		{
 			// Sometimes though the PC side is just 'empty' or blank (Odyssey Legend of Nemesis) so we will have to re-try later with HFS uniso if we don't get any files out
-			if(state.input.meta?.iso?.volume)
+			if(state.input.meta?.iso?.system || state.input.meta?.iso?.volume)
 				state.fallbackToHFSUniso = true;
 			else
 				r.flags = {hfs : true};

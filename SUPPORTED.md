@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 662 file formats are supported by dexvert.
+The following 663 file formats are supported by dexvert.
 
 
 
@@ -442,7 +442,7 @@ image | [NAPLPS Image](http://fileformats.archiveteam.org/wiki/NAPLPS) | .nap | 
 image | [Nearly Raw Raster Data](http://teem.sourceforge.net/nrrd/format.html) | .nrrd | [3 sample files](https://telparia.com/fileFormatSamples/image/nrrd/)
 image | NEC PC-88 PI | .pi | [8 sample files](https://telparia.com/fileFormatSamples/image/pc88PI/)
 image | [Neochrome](http://fileformats.archiveteam.org/wiki/NEOchrome) | .neo .rst | [10 sample files](https://telparia.com/fileFormatSamples/image/neochrome/)
-image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [35 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
+image | [NeoDesk Icon](http://fileformats.archiveteam.org/wiki/NeoDesk_icon) | .nic | [34 sample files](https://telparia.com/fileFormatSamples/image/neoDeskIcon/)
 image | [NewIcons Icon](http://fileformats.archiveteam.org/wiki/NewIcons) | .info | [12 sample files](https://telparia.com/fileFormatSamples/image/newIcon/)
 image | [Nikon Electronic Format](http://fileformats.archiveteam.org/wiki/Nikon) | .nef .nrw | [4 sample files](https://telparia.com/fileFormatSamples/image/nikon/)
 image | [Nokia Over the Air Bitmap](http://fileformats.archiveteam.org/wiki/OTA_bitmap) | .otb | [1 sample file](https://telparia.com/fileFormatSamples/image/otaBitmap/)
@@ -565,7 +565,7 @@ image | [Tobias Richter Fullscreen Slideshow](http://fileformats.archiveteam.org
 image | TRS-80 | .grf .max .p41 .pix | [7 sample files](https://telparia.com/fileFormatSamples/image/trs80Star/)
 image | TRS-80 CLP File | .clp | [1 sample file](https://telparia.com/fileFormatSamples/image/trs80Clp/)
 image | TRS-80 P11 | .p11 | [2 sample files](https://telparia.com/fileFormatSamples/image/trs80P11/)
-image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [6 sample files](https://telparia.com/fileFormatSamples/image/trs/)
+image | [True Colour Sprites](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .trs | [4 sample files](https://telparia.com/fileFormatSamples/image/trs/)
 image | [True Paint I](http://fileformats.archiveteam.org/wiki/True_Paint_I) | .mci .mcp | [10 sample files](https://telparia.com/fileFormatSamples/image/truePaint/)
 image | [Truevision Targa Graphic](http://fileformats.archiveteam.org/wiki/TGA) | .tga .targa .tpic .icb .vda .vst | [10 sample files](https://telparia.com/fileFormatSamples/image/tga/)
 image | [Trzmiel](http://fileformats.archiveteam.org/wiki/Trzmiel) | .cpr | [6 sample files](https://telparia.com/fileFormatSamples/image/cpr/)
@@ -705,7 +705,7 @@ text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d
 
 
 
-## Video (17)
+## Video (18)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [10 sample files](https://telparia.com/fileFormatSamples/video/flm/)
@@ -713,6 +713,7 @@ video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [5 sample files](https://telparia.com/fileFormatSamples/video/avi/)
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
+video | [DeluxePaint Animation](http://fileformats.archiveteam.org/wiki/DeluxePaint_Animation) | .anm | [6 sample files](https://telparia.com/fileFormatSamples/video/deluxePaintAnimation/) - Sample file HORSE.ANM doesn't convert for some reason
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [19 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.

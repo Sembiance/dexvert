@@ -38,11 +38,6 @@ const SHA1_IGNORE_FILES =
 		// unADF always makes this a little different each time, not sure why. Once I add GoADF amiga support, I can remove this line
 		adfOFS : [/iff saxophone.instr$/]
 	},
-	audio :
-	{
-		// The produced mp3 files from timidity are slightly different each time
-		"soundFont2" : [/.mp3$/]
-	},
 	document :
 	{
 		// PDF's have unique ID's within them and also creation dates, etc which cause them to never SHA1 match the same
@@ -59,9 +54,7 @@ const SHA1_IGNORE_FILES =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
 		"3dCK"             : [/.png$/],
-		"naplps"           : [/.png$/],
 		"pds"              : [/.png$/],
-		"ibmStoryboardPic" : [/.png$/],
 
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cgm" : [/.svg$/],
@@ -83,19 +76,6 @@ const SHA1_IGNORE_FILES =
 
 		// Deark produces slightly different GIF files each time, not sure why
 		"ani" : [/.gif$/]
-	},
-	music :
-	{
-		// These files are slightly different each time
-		"med" : [/juanidance.mp3$/],
-		"sid" : [/.mp3$/]	// The files generated from the WAVs from sidplay2 are different each time. Probably due to the analog nature of the SID chip
-	},
-	video :
-	{
-		// These are screen recordings and the videos are not guaranteed to be identical. I could in theory though check for duration, but meh.
-		"disneyCFAST" : [/.mp4$/],
-		"fantavision" : [/.mp4$/],
-		"movieSetter" : [/.mp4$/]
 	}
 };
 
@@ -133,7 +113,22 @@ const SIZE_FLEX_PERCENTAGE =
 	{
 		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
 		"ibmStoryboardPic" : 40,
-		"naplps"           : 2
+		"naplps"           : 2,
+
+		// Darktable results produces just ever so slightly different PNG files each time
+		"crw"          : 0.01,
+		"cr2"          : 0.01,
+		"arw"          : 0.01,
+		"dng"          : 0.01,
+		"erf"          : 0.01,
+		"kodakDCR"     : 0.01,
+		"kodakKDC"     : 0.01,
+		"mrw"          : 0.01,
+		"nikon"        : 0.01,
+		"orf"          : 0.01,
+		"panasonicRaw" : 0.01,
+		"pentaxRaw"    : 0.01,
+		"raf"          : 0.01
 	},
 	font :
 	{
@@ -455,7 +450,7 @@ function testSampleFile(sampleFilePath, silent, cb)
 				{
 					const sizeDiffPercent = 100*(1-((sampleTestData.files[outSubFilePath].size-Math.abs(newOutStat.size-sampleTestData.files[outSubFilePath].size))/sampleTestData.files[outSubFilePath].size));
 					const allowedSizeDiffPercent = SIZE_FLEX_PERCENTAGE[family]?.[formatid] || 0;
-					if(allowedSizeDiffPercent>0 && sizeDiffPercent>0)
+					if(allowedSizeDiffPercent>0)
 						ignoreSHA1 = true;
 					if(sizeDiffPercent>allowedSizeDiffPercent)
 						return this(undefined, "FAIL", `size mistmatch ${newOutStat.size} vs expected ${sampleTestData.files[outSubFilePath].size} a ${sizeDiffPercent.toFixed(5)}% vs allowed ${allowedSizeDiffPercent}%`, outSubFilePath);

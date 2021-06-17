@@ -21,6 +21,10 @@ If true, program is just informational that changes state. No files are produced
 >>> slow : true
 If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)
 
+>>> symlinkUnsafe : true
+If the converter program doesn't handle symlinks, can set this to true.
+Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
+
 
 >>> ******** Gentoo Specific Properties
 >>> gentooOverlay : "dexvert"

@@ -215,7 +215,7 @@ exports.supportedInputMeta = function supportedInputMeta(state, p, cb)
 	);
 };
 
-// Standard inputMeta function for images we support
+// Standard inputMeta function for ANSI Art images we support
 exports.ansiArtInputMeta = function ansiArtInputMeta(state, p, cb)
 {
 	tiptoe(
@@ -244,6 +244,31 @@ exports.ansiArtInputMeta = function ansiArtInputMeta(state, p, cb)
 			if(Object.keys(meta).length>0)
 				state.input.meta.ansiArt = meta;
 			
+			this();
+		},
+		cb
+	);
+};
+
+
+// Standard inputMeta function for RAW dark table supported images
+exports.darkTableInputMeta = function darkTableInputMeta(state, p, cb)
+{
+	tiptoe(
+		function runDarkTableRSIdentify()
+		{
+			p.util.program.run("darktable-rs-identify")(state, p, this);
+		},
+		function recordMeta()
+		{
+			const darkTableMeta = (p.util.program.getRan(state, "darktable-rs-identify").meta || {});
+			if(Object.keys(darkTableMeta).length>0)
+			{
+				if(darkTableMeta.dimUncropped && darkTableMeta.dimUncropped.split("x").length===2)
+					state.input.meta.image = { width : +darkTableMeta.dimUncropped.split("x")[0], height : +darkTableMeta.dimUncropped.split("x")[1] };
+				state.input.meta.darkTable = darkTableMeta;
+			}
+
 			this();
 		},
 		cb

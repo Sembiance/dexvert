@@ -11,4 +11,6 @@ exports.meta =
 	weakMagic : true
 };
 
-exports.converterPriorty = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriorty = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+
+exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);

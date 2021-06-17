@@ -4,6 +4,7 @@ const XU = require("@sembiance/xu"),
 	{performance} = require("perf_hooks"),
 	runUtil = require("@sembiance/xutil").run,
 	fileUtil = require("@sembiance/xutil").file,
+	fs = require("fs"),
 	tiptoe = require("tiptoe");
 
 exports.runOptions = function runOptions(state)
@@ -72,19 +73,30 @@ exports.run = function run(programRaw, options={})
 		tiptoe(
 			function changeCWD()
 			{
-				if(!program.cwd)
+				if(program.cwd)
+				{
+					prevCWDData.cwd = state.cwd;
+					prevCWDData.inputFilePath = state.input.filePath;
+					prevCWDData.outputDirPath = state.output.dirPath;
+
+					const newCWD = program.cwd(state, p, r);
+					state.cwd = newCWD.startsWith(path.sep) ? newCWD : path.join(state.cwd, newCWD);
+					state.input.filePath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.inputFilePath));
+					state.output.dirPath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.outputDirPath));
+				}
+
+				if(program.meta.symlinkUnsafe)
+					fs.lstat(path.join(state.cwd, state.input.filePath), this);
+				else
+					this();
+			},
+			function resolveSymlink(inputSymlinkStat)
+			{
+				if(!program.meta.symlinkUnsafe || !inputSymlinkStat.isSymbolicLink())
 					return this();
 				
-				prevCWDData.cwd = state.cwd;
-				prevCWDData.inputFilePath = state.input.filePath;
-				prevCWDData.outputDirPath = state.output.dirPath;
-
-				const newCWD = program.cwd(state, p, r);
-				state.cwd = newCWD.startsWith(path.sep) ? newCWD : path.join(state.cwd, newCWD);
-				state.input.filePath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.inputFilePath));
-				state.output.dirPath = path.relative(state.cwd, path.join(prevCWDData.cwd, prevCWDData.outputDirPath));
-
-				this();
+				fileUtil.unlinkSync(path.join(state.cwd, state.input.filePath));
+				fs.copyFile(state.input.absolute, path.join(state.cwd, state.input.filePath), this);
 			},
 			function preArgs()
 			{

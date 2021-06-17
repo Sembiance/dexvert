@@ -39,7 +39,7 @@ Don't rename the file safely for input. ONLY USE THIS if the program requires th
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
 >>> symlinkUnsafe : true
-If the converter program doesn't handle symlinks, can set this to true.
+If the file format doesn't play well with symlinks, can set this to true. Probably better to set it in the program though, usually.
 Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
 
 >>> untouched : true

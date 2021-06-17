@@ -10,4 +10,6 @@ exports.meta =
 	mimeType : "image/x-epson-erf"
 };
 
-exports.converterPriorty = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriorty = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+
+exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);

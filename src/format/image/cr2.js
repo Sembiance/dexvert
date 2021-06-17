@@ -10,4 +10,6 @@ exports.meta =
 	mimeType : "image/x-canon-cr2"
 };
 
-exports.converterPriorty = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriorty = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+
+exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);

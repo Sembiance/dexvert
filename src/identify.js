@@ -41,7 +41,7 @@ exports.identify = function identify(state, {C, formats}, cb)
 	catch(tridErr) {}
 
 	results.push(...tridMatches.map(v => { v.from = "trid"; return v; }));
-	
+
 	// Mark any magics that are very generic as untrustworthy
 	results.forEach(result =>
 	{

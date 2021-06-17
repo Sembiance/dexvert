@@ -10,4 +10,6 @@ exports.meta =
 	mimeType : "image/x-kodak-kdc"
 };
 
-exports.converterPriorty = ["abydosconvert"];
+exports.converterPriorty = ["darktable-cli", "abydosconvert"];
+
+exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);

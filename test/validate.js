@@ -140,6 +140,7 @@ function validateProgram(program, cb)
 		informational : [isBoolean],
 		unsafe        : [isBoolean],
 		slow          : [isBoolean],
+		symlinkUnsafe : [isBoolean],
 
 		flags : [isPlainObject],
 

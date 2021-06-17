@@ -115,20 +115,23 @@ const SIZE_FLEX_PERCENTAGE =
 		"ibmStoryboardPic" : 40,
 		"naplps"           : 2,
 
+		// pfstools will produce an ever so slightly different PNG
+		"radiance" : 0.1,
+
 		// Darktable results produces just ever so slightly different PNG files each time
-		"crw"          : 0.01,
-		"cr2"          : 0.01,
-		"arw"          : 0.01,
-		"dng"          : 0.01,
-		"erf"          : 0.01,
-		"kodakDCR"     : 0.01,
-		"kodakKDC"     : 0.01,
-		"mrw"          : 0.01,
-		"nikon"        : 0.01,
-		"orf"          : 0.01,
-		"panasonicRaw" : 0.01,
-		"pentaxRaw"    : 0.01,
-		"raf"          : 0.01
+		"crw"          : 0.1,
+		"cr2"          : 0.1,
+		"arw"          : 0.1,
+		"dng"          : 0.1,
+		"erf"          : 0.1,
+		"kodakDCR"     : 0.1,
+		"kodakKDC"     : 0.1,
+		"mrw"          : 0.1,
+		"nikon"        : 0.1,
+		"orf"          : 0.1,
+		"panasonicRaw" : 0.1,
+		"pentaxRaw"    : 0.1,
+		"raf"          : 0.1
 	},
 	font :
 	{

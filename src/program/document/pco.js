@@ -9,11 +9,10 @@ exports.meta =
 
 exports.dos = () => "PCO/PCO.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = (state, p, r) => (
-	{
-		includeDir : true,
-		timeout    : XU.MINUTE*2,
-		autoExec   : [`COPY ${r.args[0].toUpperCase()} PCO\\F.PCO`, "CD PCO", "PCO.EXE"],
-		keys       : [" ", " ", ["Down"], ["Return"], ["Return"], {delay : XU.SECOND*5}, ["Insert"], ["Right"], ["Right"], ["Right"], ["Right"], "d", "a", "g", "E:\\OUTFILE.TXT", ["Return"], ["Escape"], ["Escape"], "y"]
-	});
+exports.dosData = (state, p, r) => ({
+	includeDir : true,
+	timeout    : XU.MINUTE*2,
+	autoExec   : [`COPY ${r.args[0].toUpperCase()} PCO\\F.PCO`, "CD PCO", "PCO.EXE"],
+	keys       : [" ", " ", ["Down"], ["Return"], ["Return"], {delay : XU.SECOND*5}, ["Insert"], ["Right"], ["Right"], ["Right"], ["Right"], "d", "a", "g", "E:\\OUTFILE.TXT", ["Return"], ["Escape"], ["Escape"], "y"]
+});
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.cwd, "OUTFILE.TXT"), path.join(state.output.absolute, `${state.input.name}.txt`))(state, p, cb);

@@ -9,4 +9,4 @@ exports.meta =
 
 exports.dos = () => "RUNVGA.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = state => ({keys : ["1"], keyOpts : {delay : XU.SECOND*10}, screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), loc : -(XU.SECOND*3)}});
+exports.dosData = state => ({keys : ["1"], keyOpts : {delay : XU.SECOND*10}, screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), frameLoc : 100}});

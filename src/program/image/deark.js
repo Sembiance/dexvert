@@ -13,8 +13,8 @@ exports.meta =
 	gentooOverlay : "dexvert",
 	flags :
 	{
-		dearkModule     : "Which deark module to forcibly set. Default: Let deark decide",
-		dearkOpts       : "An array of additional -opt <option> arguments to pass to deark",
+		dearkModule     : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
+		dearkOpts       : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		dearkCharOutput : `Which type of output to use when converting character based files. Can be "image" or "html" Default: Let deark decide.`,
 		dearkRemoveDups : "Remove any duplicate output files, based on sum. Default: false",
 		dearkJoinFrames : "Treat output files as individual images frames of an animation and join them together as an MP4",

@@ -10,4 +10,4 @@ exports.meta =
 
 exports.dos = () => "TURSHOW/TURSHOW.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = state => ({screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), loc : -(XU.SECOND*12)}});
+exports.dosData = state => ({screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), frameLoc : 100}});

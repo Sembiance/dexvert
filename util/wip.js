@@ -12,7 +12,8 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs");
 
 
-runUtil.run("rsync", ["--verbose", "-aL", "-e", "ssh -i /mnt/compendium/DevLab/dexvert/qemu/gentoo/data/dexvert_id_rsa -o StrictHostKeyChecking=no -p 5320", "dexvert@127.0.0.1:/out/", "/mnt/ram/tmp/wip/"], {liveOutput : true}, (...args) =>
+//runUtil.run("/usr/bin/ffprobe", ["-v", "0", "-select_streams", "v:0", "-count_frames", "-show_entries stream=nb_read_frames", "-of", "csv=p=0", "/mnt/ram/tmp/6695461950302124834461/turshow_001.avi"], {silent : true}, (...args) =>
+runUtil.run("/usr/bin/ffprobe", ["-select_streams", "v:0", "-count_frames", "-show_entries stream=nb_read_frames", "/mnt/ram/tmp/6695461950302124834461/turshow_001.avi"], {silent : true}, (...args) =>
 {
 	XU.log`${args}`;
 	process.exit(0);

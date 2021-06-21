@@ -38,14 +38,14 @@ tiptoe(
 		// imageUtil.getInfo
 		programs.push({bin() { return "svgdim"; }, meta : {gentooPackage : "media-gfx/svgdim", gentooOverlay : "dexvert", website : "https://github.com/Sembiance/svgdim"}});
 
-		// videoUtil.info (and DOS video recording too)
+		// videoUtil.getInfo
 		programs.push({bin() { return "mplayer"; }, meta : {gentooPackage : "media-video/mplayer", website : "http://www.mplayerhq.hu/", gentooUseFlags : "X a52 alsa cdio dga dts dv dvd dvdnav enca encode iconv joystick jpeg libass live lzo mad mng mp3 network opengl osdmenu png rtc shm tga theora truetype unicode v4l vcd vdpau vorbis x264 xinerama xscreensaver xv xvid"}});
 		
 		// unicodeUtils.fixDirEncodings
 		programs.push({bin() { return "convmv"; }, meta : {gentooPackage : "app-text/convmv", website : "https://www.j3e.de/linux/convmv/"}});
 
 		// dosUtil
-		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl"}});
+		programs.push({bin() { return "dosbox"; }, meta : {gentooPackage : "games-emulation/dosbox", website : "http://dosbox.sourceforge.net/", gentooUseFlags : "alsa opengl", gentooOverlay : "dexvert"}});
 		programs.push({bin() { return "xdotool"; }, meta : {gentooPackage : "x11-misc/xdotool", website : "https://www.semicomplete.com/projects/xdotool/"}});
 
 		// python tensorflow server

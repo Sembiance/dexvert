@@ -52,10 +52,6 @@ const SHA1_IGNORE_FILES =
 	},
 	image :
 	{
-		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be bit perfect identical
-		"3dCK"             : [/.png$/],
-		"pds"              : [/.png$/],
-
 		// Inkscape/uniconvertor doesn't always produce the same exact SVG file, even with the same args and inputs.
 		"cgm" : [/.svg$/],
 		"cvg" : [/.svg$/],
@@ -111,10 +107,6 @@ const SIZE_FLEX_PERCENTAGE =
 	},
 	image :
 	{
-		// These are screengrabs from DOSBox and due to this the images are not guaranteed to be the same size
-		"ibmStoryboardPic" : 40,
-		"naplps"           : 2,
-
 		// pfstools will produce an ever so slightly different PNG
 		"radiance" : 0.1,
 
@@ -149,9 +141,11 @@ const SIZE_FLEX_PERCENTAGE =
 	},
 	video :
 	{
-		// These are screen recordings, thus they are going to differ each time
+		// These are screen recordings from DOSBox and get converted to MP4 with ffmpeg, thus they can differ each time
 		"disneyCFAST" : DEFAULT_SIZE_FLEX_VIDEO,
 		"fantavision" : DEFAULT_SIZE_FLEX_VIDEO,
+	
+		// These are linux virtualX screen recordings and can differ each time
 		"movieSetter" : DEFAULT_SIZE_FLEX_VIDEO,
 
 		// ffmpeg version upgrades produce slightly different output and ffmpeg on different architectures too, odd.

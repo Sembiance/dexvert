@@ -41,8 +41,8 @@ Options:
       convert:convertExt                         Which extension to convert to (".png", ".webp", ".svg"). Default: .png
       convert:flip                               Set this to true to flip the image vertically. Default: false
       convert:removeAlpha                        Set this to true to remove the alpha channel and produce a flat, opaque image. Default: false
-      deark:dearkModule                          Which deark module to forcibly set. Default: Let deark decide
-      deark:dearkOpts                            An array of additional -opt <option> arguments to pass to deark
+      deark:dearkModule                          Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide
+      deark:dearkOpts                            An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark
       deark:dearkCharOutput                      Which type of output to use when converting character based files. Can be "image" or "html" Default: Let deark decide.
       deark:dearkRemoveDups                      Remove any duplicate output files, based on sum. Default: false
       deark:dearkJoinFrames                      Treat output files as individual images frames of an animation and join them together as an MP4

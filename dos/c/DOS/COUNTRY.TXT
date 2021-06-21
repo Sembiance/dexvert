@@ -1,0 +1,340 @@
+COUNTRY.TXT
+
+
+SUPPLEMENTAL INFORMATION ON MS-DOS 6.22 -- CUSTOMIZING FOR INTERNATIONAL USE
+============================================================================
+
+This file provides information on customizing MS-DOS 6.22 for international 
+use. This information is not included in the MICROSOFT MS-DOS USER'S 
+GUIDE, MS-DOS Help or the README.TXT file. It supplements the international 
+keyboard and character set information provided in Section 1 of the 
+README.TXT file that accompanied MS-DOS 6.22.
+
+This file covers the following topics:
+
+  1. Additional Character Set (Codepage) and Keyboard Support
+        1.1  The KEYBRD2.SYS File
+        1.2  The EGA.CPI, EGA2.CPI, and EGA3.CPI Files
+        1.3  Configuring Your Computer to Use International-Language Settings
+  2. Switching Between Modes on Dual-Mode Keyboards
+  3. Using ISO Fonts
+  4. Quick Reference Tables for International Language Support
+
+1.  Additional Character Set (Codepage) and Keyboard Support
+============================================================
+MS-DOS 6.22 includes the KEYBRD2.SYS, EGA2.CPI and EGA3.CPI files, which
+offer support for additional keyboards and character sets (codepages). 
+You use these files just as you would the KEYBOARD.SYS and EGA.CPI files. 
+MS-DOS also includes new country settings in COUNTRY.SYS. (In addition, 
+MS-DOS 6.22 includes ISO-compliant versions of certain character sets; 
+for more information, see section 3 of this file.)
+
+MS-DOS 6.22 includes new country settings in COUNTRY.SYS that use the
+new keyboards and character sets. For more information, see the tables
+in section 4 of this file. For a complete list of all the countries, 
+keyboards and character sets provided by MS-DOS 6.22, see section 4 
+of this file.
+
+1.1  The KEYBRD2.SYS File
+-------------------------
+The KEYBRD2.SYS file is essentially similar to KEYBOARD.SYS; you use it
+just as you would the KEYBOARD.SYS file. The differences between 
+KEYBOARD.SYS and KEYBRD2.SYS are:
+
+ o  KEYBRD2.SYS contains support for the following keyboards, which
+    are not supported by KEYBOARD.SYS:
+
+    Country/Language             Keyboard layout   Keyboard ID
+    ----------------             ---------------   -----------
+    Canada (standard CAN/CSA-Z keyboard)   cf      See below.
+    Brazil (secondary standard keyboard)   br      274, 275
+    Bulgaria                               bg      442
+    Greece                                 gk      319
+    Iceland                                is      161
+    Macedonia and Serbia/Montenegro        yc      118
+    Romania                                ro      333
+    Russian                                ru      441
+    Turkish                                tr      440, 179
+
+ o  Although KEYBRD2.SYS contains a Canadian keyboard with the same
+    keyboard code (058) and identifier (cf) as KEYBOARD.SYS, the 
+    layout of the two keyboards is different. The Canadian keyboard 
+    layout in KEYBRD2.SYS meets the standard set forth by the Canadian 
+    government's specification 243.200-92 (CAN/CSA-Z). The keyboard
+    layout in KEYBOARD.SYS is more commonly used, but does not meet 
+    Canadian government specifications.
+
+ o  The KEYBRD2.SYS file does not include support for the following
+    keyboards supported by KEYBOARD.SYS:
+
+       Belgium
+       Danish
+       French
+       Japan
+       Latin America
+       Netherlands
+       Portuguese
+       Spanish
+       Switzerland (German)
+       Switzerland (French)
+
+ o  KEYBRD2.SYS contains changes to the German keyboard that are
+    not in KEYBOARD.SYS. In the German keyboard, the SHIFT lock 
+    behavior of the top row of the keyboard is now functionally 
+    the same as the US keyboard (that is, "typewriter mode" 
+    has been removed).
+
+1.2  The EGA.CPI, EGA2.CPI, and EGA3.CPI Files
+----------------------------------------------
+MS-DOS 6.22 includes four codepage information (.CPI) files. The
+three EGAx.CPI files are similar except that they contain information 
+for different code pages. The ISO.CPI file contains ISO-compliant
+character sets; for more information, see section 3 of this file.
+
+EGA.CPI contains the following:
+
+    437 - United States 
+    850 - Multilingual (Latin I)
+    852 - Slavic/Eastern European (Latin II)
+    860 - Portuguese
+    863 - Canadian-French
+    865 - Nordic
+
+EGA2.CPI contains the following:
+
+    737 - Greek II
+    850 - Multilingual (Latin I)
+    852 - Slavic/Eastern European (Latin II)
+    857 - Turkish
+    861 - Icelandic
+    869 - Greek
+
+EGA3.CPI contains the following:
+
+    437 - United States 
+    850 - Multilingual (Latin I)
+    852 - Slavic/Eastern European (Latin II)
+    855 - Cyrillic I
+    866 - Russian (Cyrillic II)
+
+1.3  Configuring Your Computer to Use International-Language Settings
+---------------------------------------------------------------------
+To use country settings or a character set other than the standard
+ones (United States), you must edit your CONFIG.SYS and AUTOEXEC.BAT
+files.
+
+For example, to use the new Icelandic settings, carry out the 
+following steps:
+
+1. Add the following commands to your CONFIG.SYS file:
+
+    REM  ICELAND SETTINGS
+    COUNTRY=354,861,C:\DOS\COUNTRY.SYS
+    DEVICE=C:\DOS\DISPLAY.SYS CON=(,,2)
+
+2. Add the following commands to your AUTOEXEC.BAT file:
+
+    REM  ICELAND SETTINGS
+    MODE CON CP PREPARE=((861 850) c:\DOS\EGA2.CPI
+    MODE CON CP SELECT=861
+    KEYB IS,,C:\DOS\KEYBRD2.SYS
+
+3. Restart your computer.
+
+
+2.  Switching Between Modes on Dual-Mode Keyboards
+==================================================
+MS-DOS 6.22 includes dual-mode keyboard support for Greek, 
+French Canadian,  Bulgarian, Serbia/Montenegro, and Russian keyboards. 
+These keyboards allow you to easily switch between two different 
+keyboard modes. When your computer starts with one of these keyboards, 
+the primary mode is active. To switch modes, press the appropriate 
+key combination (listed below).
+
+The key combinations for the Greek keyboard are as follows:
+                    
+                    Mode description    Key combination      
+                    ----------------    ---------------     
+  Primary mode      Latin               ALT+LEFT SHIFT
+  Secondary mode    Greek               ALT+RIGHT SHIFT
+                    
+The key combinations for the French Canadian keyboard are as follows:
+                    
+                    Mode description    Key combination      
+                    ----------------    ---------------     
+  Primary mode      Latin               CTRL+RIGHT SHIFT
+  Secondary mode    Latin II            CTRL+LEFT SHIFT
+
+The key combinations for the Bulgarian, Russian, Serbia/Montenegro and
+Macedonia keyboards are as follows:
+                    
+                    Mode description    Key combination      
+                    ----------------    ---------------     
+  Primary mode      Latin               ALT+LEFT SHIFT
+  Secondary mode    Cyrillic            ALT+RIGHT SHIFT
+
+
+3.  Using ISO Fonts
+===================
+ISO fonts are special monospace (nonproportional) display fonts that, 
+on some displays, are more readable than standard display fonts. (ISO 
+fonts work only in 25-line mode; they do not support 43- or 50-line 
+mode.) The ISO fonts included with MS-DOS 6.22 comply with Part 3 of 
+the ISO 9241 Specification.
+
+MS-DOS 6.22 includes the ISO.CPI file, which contains ISO-compliant 
+versions of the following character sets (codepages):
+
+        437  United States            
+        737  Greek II                 
+        850  Multilingual (Latin I)   
+        852  Slavic/Eastern European (Latin II)        
+        855  Cyrillic I               
+        857  Turkish
+        860  Portuguese
+        861  Icelandic
+        863  Canadian-French
+        865  Nordic
+        866  Russian (Cyrillic II)
+        869  Greek I
+
+
+To install ISO fonts, you add or edit commands in your AUTOEXEC.BAT and 
+CONFIG.SYS files. If your system is already set up to load a character
+set (code page) other than the standard United States character set, 
+carry out Procedure 1. Otherwise, carry out Procedure 2.
+
+Procedure 1 -- If your system is already set up to load a character set 
+other than the standard United States character set:
+
+1. In your AUTOEXEC.BAT file, change the MODE CON CODEPAGE PREPARE
+   command so that it specifies ISO.CPI instead of your usual 
+   codepage (.CPI) file. 
+   
+   For example, suppose your current MODE command loads the Portugese 
+   character set (860) and looks like the following:
+       
+       MODE CON CODEPAGE PREPARE=((860) C:\DOS\EGA.CPI)
+
+   To use the ISO-compliant version of the Portugese character set, you 
+   would change this command to specify ISO.CPI, as follows:
+
+       MODE CON CODEPAGE PREPARE=((860) C:\DOS\ISO.CPI)
+
+Procedure 2 -- If you are using the standard US character set:
+
+1. Add a DEVICE command for DISPLAY.SYS to your CONFIG.SYS file. For
+   example, if you want to use the United States hardware character 
+   set (437), and if DISPLAY.SYS is in the C:\DOS directory, you would
+   add the following command to your CONFIG.SYS file:
+ 
+       DEVICE=C:\DOS\DISPLAY.SYS CON=(EGA,437,2)
+ 
+   Note that DISPLAY.SYS uses about 12K of memory.
+
+2. Add MODE commands to your AUTOEXEC.BAT file to load and select the
+   proper character sets (code pages). For example, to use the ISO
+   version of the United States character set (437), you would add 
+   the following commands to your AUTOEXEC.BAT files:
+ 
+       MODE CON CODEPAGE PREPARE=((437) C:\DOS\ISO.CPI)
+       MODE CON CODEPAGE SELECT=437
+
+
+4.  Quick Reference Tables for International Language Support
+=============================================================
+The following table lists each country supported by MS-DOS 6.22,
+along with the associated character set, CPI file, and keyboard codes.
+
+Note: To use ISO fonts, specify the ISO.CPI file instead of the .CPI 
+      file listed for that country. For more information, see the
+      preceding section.)       
+                                Supported
+                       Country  Character            Keyboard  Keyboard
+Country                 Code      Sets     CPI File    Code       ID
+=====================  ======  ==========  ========  ========  ========
+Albania                 355     852, 850   EGA.CPI    --        ---
+Area South              
+  (Arabic Countries)    785     850, 864*  EGA.CPI    --        ---
+Argentina               054     850, 437   EGA.CPI    la        ---
+Australia               061     437, 850   EGA.CPI    us        ---
+Austria                 043     850, 437   EGA.CPI    gr        See section
+                                                                1.1
+Belgium                 032     850, 437   EGA.CPI    be        ---
+Bosnia/Herzegovina      387     852, 850   EGA.CPI    yu        234
+Brazil                  055     850, 437   EGA.CPI    br        274, 275
+Bulgaria                359     855, 850   EGA3.CPI   bg        442
+Canada French           002     850, 863   EGA.CPI    cf        See section
+                                                                1.1
+Canada English          004     850, 863   EGA.CPI    cf        See section
+                                                                1.1
+Chile                   056     850, 437   EGA.CPI    la        ---
+Colombia                057     850, 437   EGA.CPI    la        ---
+Croatia                 384     852, 850   EGA.CPI    yu        234
+Czech Republic          042     852, 850   EGA.CPI    cz        243
+Denmark                 045     850, 865   EGA.CPI    dk        ---
+Ecuador                 593     850, 437   EGA.CPI    la        ---
+Finland                 358     850, 437   EGA.CPI    su        ---
+France                  033     850, 437   EGA.CPI    fr        120, 189
+Germany                 049     850, 437   EGA.CPI    gr        See section
+                                                                1.1
+Greece                  030     869, 737,  EGA2.CPI   gk        319
+                                850
+Hong Kong               852     437, **    EGA.CPI    --        ---
+Hungary                 036     852, 850   EGA.CPI    hu        ---
+Iceland                 354     850, 861   EGA2.CPI   is        161
+India                   091     437, **    EGA.CPI    --        ---
+International English   061     437, 850   EGA.CPI    --        ---
+Ireland                 353     850, 437   EGA.CPI    uk        ---
+Israel                  972     850, 862*  EGA.CPI    --        ---
+Italy                   039     850, 437   EGA.CPI    it        141, 142
+Japan                   081     437, 932*  EGA.CPI    jp        ---
+Korea                   082     437, 934*  EGA.CPI    --        ---
+Latin America           003     850, 437   EGA.CPI    la        ---
+Macedonia               389     855, 850   EGA3.CPI   yc        118
+Malaysia                060     437, **    EGA.CPI    --        ---
+Mexico                  052     850, 437   EGA.CPI    la        ---
+Netherlands             031     850, 437   EGA.CPI    nl        ---
+New Zealand             064     437, 850   EGA.CPI    us        ---
+Norway                  047     850, 865   EGA.CPI    no        ---
+People's Republic
+  of China              086     437, 936*  EGA.CPI    --        ---
+Poland                  048     852, 850   EGA.CPI    pl        ---
+Portugal                351     850, 860   EGA.CPI    po        ---
+Romania                 040     852, 850   EGA.CPI    ro        333
+Russia                  007     866, 855,  EGA3.CPI   ru        441
+                                852, 850,
+                                437
+Serbia/Montenegro       381     855, 850   EGA3.CPI   yc        118
+Singapore               065     437, **    EGA.CPI    --        ---
+Slovakia                421     852, 850   EGA.CPI    sl        245
+Slovenia                386     852, 850   EGA.CPI    yu        234
+South Africa            027     437, 850   EGA.CPI    us        ---
+Spain                   034     850, 437   EGA.CPI    sp        ---
+Sweden                  046     850, 437   EGA.CPI    sv        ---
+Switzerland             041     850, 437   EGA.CPI    sf (French)
+                                                      sg (German)
+Taiwan                  886     437, 938*  EGA.CPI    --        ---
+Turkey                  090     857, 850   EGA2.CPI   tr        440, 179
+United Kingdom          044     850, 437   EGA.CPI    uk        166, 168
+United States           001     437, 850   EGA.CPI    us        ---
+Venezuela               058     850, 437   EGA.CPI    la        ---
+Yugoslavia              038     852, 850   EGA.CPI    yu        234
+Yugoslavia Cyrillic     038     855, 850   EGA3.CPI   yc        118
+
+ *  Although COUNTRY.SYS supports the country conventions (date, time,
+    currency, etc.) associated with code pages 862 (Hebrew), 864 (Arabic), 
+    932 (Japanese), 934 (Korean), 936 (PRC Chinese), and 938 (Taiwanese), 
+    those character sets (code pages) are available only with the
+    associated special versions of MS-DOS (Hebrew, Arabic, Japanese, 
+    Korean, PRC Chinese, and Taiwanese).
+
+ ** Hong Kong, India, Malaysia, and Singapore have been added to COUNTRY.SYS
+    to give access to these countries' settings when using Universal English.
+    If you need to use settings for one of these countries using the primary 
+    language for that country, contact the appropriate International 
+    Microsoft Office (Microsoft Hong Kong Limited, Microsoft Systems Private 
+    Limited (India), Microsoft Malaysia Sdn Bhd, or Microsoft Singapore Pte 
+    Ltd).
+
+

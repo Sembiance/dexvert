@@ -10,4 +10,4 @@ exports.meta =
 
 exports.dos = () => "SBLIVE/SHOWPIC.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = state => ({keys : ["Escape"], keyOpts : {delay : XU.SECOND*15}, screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), loc : -(XU.SECOND*6)}});
+exports.dosData = state => ({keys : ["Escape"], keyOpts : {delay : XU.SECOND*15}, screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), frameLoc : 100}});

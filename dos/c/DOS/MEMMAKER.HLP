@@ -1,0 +1,462 @@
+MemMaker Help File
+%%
+1,0:1
+2,0:2
+3,0:3
+4,0:4
+5,0:5
+6,0:6
+7,0:7
+8,0:8
+9,0:9
+10,0:10
+11,0:11
+12,0:12
+13,0:13
+16,0:16
+17,0:17
+18,0:18
+19,0:19
+20,0:20
+21,0:21
+22,0:22
+23,0:23
+24,0:24
+25,0:25
+26,0:26
+27,0:27
+28,0:28
+29,0:29
+30,0:30
+31,0:31
+32,0:32
+33,0:33
+34,0:34
+35,0:35
+36,0:36
+37,0:37
+38,0:38
+39,0:39
+40,0:40
+41,0:41
+42,0:42
+43,0:43
+44,0:44
+45,0:45
+46,0:46
+47,0:47
+%%
+
+.1
+Help -- MemMaker Cannot Run on This Computer
+
+MemMaker cannot run on your computer because your system
+does not meet the following minimum hardware and software 
+requirements:
+
+  * MS-DOS 6
+  * An 80386 or higher processor
+  * At least 384K of extended memory
+
+.2
+Help -- MemMaker Has Been Run Before
+
+MemMaker has been run before, but did not finish optimizing your 
+system's memory.
+
+To run MemMaker again, choose "Restart optimization."
+To undo MemMaker's last changes, choose "Undo changes."
+
+The following are some possible reasons that MemMaker might
+have been interrupted:
+
+  * After MemMaker restarted your computer, you forgot to 
+    exit from a menu program or other application started by 
+    your AUTOEXEC.BAT file. If the last command in your 
+    AUTOEXEC.BAT file starts a menu program or an application, 
+    you should immediately exit from that program or application 
+    so that MemMaker can continue. 
+
+  * Your computer was restarted accidentally due to a power
+    outage or other event (but not because of system problems).
+  
+  * You pressed the F5 key while your computer was restarting, 
+    which caused MS-DOS to skip your CONFIG.SYS and AUTOEXEC.BAT 
+    files.
+
+  * Your system stopped before optimization was complete, and you
+    had to restart your computer. If MemMaker did not finish because 
+    of problems during the optimization process, choose "Undo 
+    changes."
+
+.5
+Help -- Welcome to MemMaker
+
+At the bottom of each screen, MemMaker lists the keys you can press.
+
+ ENTER      Accepts the current option(s) and continues MemMaker.
+ SPACEBAR   Changes the highlighted option. 
+ F1         Displays Help for the current screen.
+ F3         Quits MemMaker.
+ ESC        Returns to the previous screen.
+
+If a key is not available for the current screen, MemMaker does not 
+list that key. 
+
+.7
+Help -- MemMaker and the QEMM Memory Manager
+
+MemMaker has detected the QEMM memory manager on your computer.
+MemMaker requires the MS-DOS memory manager EMM386, which cannot
+run at the same time as QEMM. 
+
+Although QEMM and EMM386 perform basically the same function, 
+each has its own specific command syntax. To optimize your memory 
+configuration, MemMaker modifies some of the commands in your 
+CONFIG.SYS and AUTOEXEC.BAT files. The resulting commands will work 
+only with EMM386, not with QEMM.
+
+If you continue, MemMaker will automatically install EMM386 and 
+remove any QEMM commands from your CONFIG.SYS and AUTOEXEC.BAT 
+files. (MemMaker does not delete any QEMM files from your hard disk.)
+
+.8
+Help -- MemMaker and the 386MAX Memory Manager 
+
+MemMaker has detected the 386MAX memory manager on your computer.
+MemMaker requires the MS-DOS memory manager EMM386, which cannot
+run at the same time as 386MAX. 
+
+Although 386MAX and EMM386 perform basically the same function, 
+each has its own specific command syntax. To optimize your memory 
+configuration, MemMaker modifies some of the commands in your 
+CONFIG.SYS and AUTOEXEC.BAT files. The resulting commands will work 
+only with EMM386, not with 386MAX.
+
+If you continue, MemMaker will automatically install EMM386 and 
+remove any 386MAX commands from your CONFIG.SYS and AUTOEXEC.BAT 
+files. (MemMaker does not delete any 386MAX files from your hard disk.)
+
+.9
+Help -- MemMaker and the NETROOM Memory Manager
+
+MemMaker has detected the NETROOM memory manager on your computer.
+MemMaker requires the MS-DOS memory manager EMM386, which cannot
+run at the same time as NETROOM. 
+
+Although NETROOM and EMM386 perform basically the same function, 
+each has its own specific command syntax. To optimize your memory 
+configuration, MemMaker modifies some of the commands in your 
+CONFIG.SYS and AUTOEXEC.BAT files. The resulting commands will work 
+only with EMM386, not with NETROOM.
+
+If you continue, MemMaker will automatically install EMM386 and 
+remove any NETROOM commands from your CONFIG.SYS and AUTOEXEC.BAT 
+files. (MemMaker does not delete any NETROOM files from your hard 
+disk.)
+
+.10
+Help -- MemMaker and Other Memory Managers 
+
+MemMaker requires the MS-DOS memory manager EMM386. However,
+there is another memory manager installed on your computer that
+cannot run at the same time as EMM386.
+
+To optimize your memory configuration, MemMaker modifies some 
+of the commands in your CONFIG.SYS and AUTOEXEC.BAT files.  
+The resulting commands will work only with EMM386.
+
+To run MemMaker, you must first edit your CONFIG.SYS and 
+AUTOEXEC.BAT files and remove any command lines that start 
+other manufacturers' memory managers. 
+
+.11
+Help -- Express or Custom Mode
+
+You can run MemMaker in either Express or Custom mode. 
+
+In Express mode, MemMaker optimizes your system's memory
+automatically.
+
+In Custom mode, MemMaker gives you more control over the
+changes it makes. Sometimes you can free more conventional 
+memory by using Custom mode and changing some settings. 
+
+You might want to use Custom mode if:
+
+  * You want more control over MemMaker's changes.
+  * Your computer has an EGA or VGA monitor. 
+  * You run MS-DOS-based applications with Windows.
+  * You want to exclude specific device drivers or programs
+    from the optimization process.
+  * You want MemMaker to scan upper memory aggressively.
+
+.19
+Help -- Exiting From MemMaker
+
+You have chosen to exit from MemMaker.
+
+  * To exit and restore your original CONFIG.SYS and AUTOEXEC.BAT 
+    files, choose "Exit and undo changes."
+
+  * To exit and keep MemMaker's changes to your startup files, 
+    choose "Exit and keep changes." (You can undo the changes 
+    later by typing MEMMAKER /UNDO at the command prompt.)
+
+  * To continue MemMaker, choose "Continue."
+
+.23
+Help -- Indicating Whether Your System Is Working Properly
+
+Some or all of your device drivers and memory-resident programs 
+are now running in upper memory rather than conventional memory. 
+Most programs can run properly in upper memory, but a few cannot.
+
+If you noticed any error messages when your system started,
+answer No. MemMaker will then remove the changes it made.
+For more information, see the Troubleshooting section of
+the chapter "Making More Memory Available" in the MS-DOS 6 
+User's Guide.
+
+If your system seems to work properly, answer Yes. (If any 
+problems turn up later, you can remove MemMaker's changes by 
+typing MEMMAKER /UNDO at the command prompt.)
+
+.24
+Help -- Exiting or Undoing Changes
+
+You indicated that your system does not appear to work properly.
+You can either remove the changes MemMaker made to your system
+files, or you can exit MemMaker without undoing the changes.
+
+To test your system further, you might want to exit without undoing 
+MemMaker's changes. For example, if you suspect your mouse driver is 
+not working properly, you might want to try running a program that 
+uses the mouse. 
+
+If any problems turn up later, you can remove MemMaker's changes by 
+typing MEMMAKER /UNDO at the command prompt.
+
+.26
+Help -- Changing Your SYSTEM.INI File 
+
+For Windows to run properly in 386 enhanced mode, some changes 
+need to be made to your Windows SYSTEM.INI file. 
+
+To let MemMaker make the necessary changes to your SYSTEM.INI
+file, answer Yes. MemMaker saves your current SYSTEM.INI file 
+as SYSTEM.UMB.
+
+If you do not want MemMaker to change your SYSTEM.INI file,
+answer No. (To run Windows in 386 enhanced mode, you should 
+make the changes yourself.)
+
+.29
+Help -- Advanced Options 
+
+On the Advanced Options screen, you can change some of the settings 
+MemMaker uses. To change an option, use the UP ARROW or DOWN ARROW 
+key to highlight the Yes or No answer for that option. Then, press 
+the SPACEBAR to change the answer. The following list briefly 
+describes each option.
+
+Specify which drivers and TSRs to include in optimization?
+----------------------------------------------------------
+By default, MemMaker includes all device drivers and memory-resident 
+programs (also called TSRs) in the optimization process. Sometimes, a 
+program causes problems while you are running MemMaker. You can 
+avoid a problem with a specific program by leaving that program out 
+of the optimization process. 
+
+Answer Yes   if your computer did not start properly while MemMaker 
+             was determining the memory requirements of a particular 
+             program. After you finish selecting advanced options, 
+             MemMaker prompts you to confirm each program in your 
+             CONFIG.SYS and AUTOEXEC.BAT file.
+
+Answer No    if you have not experienced any system problems while 
+             running MemMaker.
+
+To direct MemMaker never to include a particular program in the
+optimization process, you can add that program to your MEMMAKER.INF
+file. For more information, see the comments at the beginning
+of the MEMMAKER.INF file, which is located in the directory that
+contains your MS-DOS files.
+
+Scan the upper memory area aggressively?
+----------------------------------------
+By default, MemMaker instructs EMM386 to limit its search for
+available upper memory blocks (UMBs) to upper-memory addresses 
+C600 through EFFF. 
+
+Answer Yes  if you have not experienced any system problems while 
+            running MemMaker. Answering Yes may make more upper 
+            memory available for running programs. If you answer 
+            Yes, MemMaker will direct EMM386 to search for UMBs 
+            in upper-memory addresses F000 through F7FF. On some 
+            computers, putting UMBs in this address range can 
+            prevent the computer from operating properly.
+
+Answer No   if your computer did not start properly while you were 
+            using MemMaker. If you answer No, MemMaker will direct 
+            EMM386 to limit its search for UMBs to upper-memory 
+            addresses C600 through EFFF.
+
+Optimize upper memory for use with Windows?
+-------------------------------------------
+By default, MemMaker optimizes your system so that there is as 
+much conventional memory as possible when Windows is not running.
+If you run MS-DOS-based programs with Windows, you might want
+to optimize your system to free as much conventional memory as
+possible for those applications. However, less conventional memory 
+might be available when Windows is not running. 
+
+Answer Yes  if you run MS-DOS-based applications with Windows.
+
+Answer No   if you do not run Windows, or if you run only Windows 
+            programs with Windows. This will free more conventional 
+            memory when Windows is not running. 
+
+Use monochrome region (B000-BFFF) for running programs?
+-------------------------------------------------------
+By default, 32K of upper memory (addresses B000 through BFFF) is 
+reserved for use with a monochrome display adapter. This region of 
+upper memory is not used on most computers with an EGA or VGA monitor.
+
+Answer Yes   if you use an EGA or VGA (but not SuperVGA) monitor,
+             and your video card does not use memory in that range. 
+             MemMaker can then use that region of upper memory for 
+             running device drivers and memory-resident programs.
+
+Answer No    if you have a monochrome or SuperVGA (high-resolution) 
+             monitor.
+
+Keep current EMM386 memory exclusions and inclusions?
+-----------------------------------------------------
+By default, MemMaker preserves any memory exclusion or inclusion 
+switches it finds on the EMM386 command line. However, you can 
+sometimes free more memory by allowing MemMaker to determine what, 
+if any, memory addresses should be excluded or included. 
+
+Answer No   to have MemMaker remove the current I= and X= switches  
+            from the EMM386 command line. MemMaker will add new 
+            switches as necessary. This can result in a more efficient 
+            memory configuration.
+
+Answer Yes  to preserve your current EMM386 switches. You might want 
+            to answer Yes if you previously answered No to this 
+            question and your computer did not start properly.
+
+Move Extended BIOS Data Area from conventional to upper memory?
+---------------------------------------------------------------
+The Extended BIOS Data Area (EBDA) normally resides in conventional 
+memory. By default, MemMaker moves the EBDA to upper memory, which 
+frees an additional kilobyte of conventional memory for applications. 
+
+Answer No   if you previously ran MemMaker and encountered system 
+            problems that you suspect were caused by relocating the 
+            EBDA.
+
+Answer Yes  if you have not experienced any system problems while 
+            running MemMaker. Answering Yes frees more conventional 
+            memory for your applications.
+
+.37
+Help -- Undoing MemMaker's Changes 
+
+Typing MEMMAKER /UNDO at the command prompt instructs MemMaker
+to undo the changes it made to your CONFIG.SYS, AUTOEXEC.BAT
+files and, if necessary, to your Windows SYSTEM.INI file. 
+
+MemMaker restores your system files by replacing them with the 
+backup copies it made earlier. 
+
+To restore your original files, press the SPACEBAR until the
+"Restore files now" option appears, and then press ENTER.
+
+To quit MemMaker without restoring your original files, press the 
+SPACEBAR until the "Exit" option appears, and then press ENTER.
+
+
+.39
+Help -- Including a Driver/Program in Optimization
+
+On the Advanced Options screen, you specified that you want to 
+control which drivers and memory-resident programs (TSRs) to 
+include in the optimization process. 
+
+MemMaker displays each CONFIG.SYS or AUTOEXEC.BAT command that 
+starts a device driver or program. 
+
+ * To include the driver or program in the optimization process, 
+   answer Yes. 
+ 
+ * To exclude the driver or program from the optimization 
+   process, answer No. 
+   
+Press the SPACEBAR to change your answer from Yes to No or vice
+versa. Press ENTER to accept the highlighted answer and continue.
+
+.44
+Help -- MemMaker Has Found Windows on Your System
+
+If you have Microsoft Windows version 3.0, MemMaker needs to 
+edit your Windows SYSTEM.INI file. If you have Microsoft Windows 
+version 3.1, MemMaker needs to examine the settings in your 
+Windows SYSTEM.INI file, but makes no changes to that file.
+
+MemMaker searches your hard disk for Windows and displays the location 
+of the first copy of Windows it finds. If the specified directory contains the 
+copy of Windows you are currently using, press ENTER to continue.
+
+If you are using a copy of Windows in a different directory, type 
+the full path of the directory. For example, if your current copy 
+of Windows is on drive D in the \WIN directory, you would type:
+  
+  D:\WIN
+
+.46
+Help -- Programs That Require Expanded Memory
+
+In this screen, MemMaker asks whether you use any programs 
+that need expanded memory.
+
+If you use programs that require expanded memory, answer Yes. 
+Answering Yes makes expanded memory available, but might not 
+free as much conventional memory. If you answer Yes, MemMaker 
+sets aside 64K of the upper memory area for use as an EMS page 
+frame. (An EMS page frame is required in order to use expanded 
+memory.) 
+
+If none of your programs require expanded memory, answer No. 
+Answering No frees more conventional memory, since MemMaker 
+does not set aside any upper memory for an EMS page frame. 
+If you answer No, expanded memory will be unavailable even if 
+your computer includes an expanded-memory board. 
+
+If you are not sure whether your programs need expanded memory, 
+answer No to free as much memory as possible. When MemMaker 
+completes, try running any programs that you think might need 
+expanded memory. If a program displays a message saying that 
+expanded memory or the EMS page frame is unavailable, run 
+MemMaker again and answer Yes to this question.
+.47
+Help -- Your Configuration is Already Optimized
+
+MemMaker could not free additional memory because your system's 
+memory configuration was already optimized. You can either 
+return to your previous memory configuration or keep the 
+new memory configuration. (The new configuration might have
+less free memory than your previous configuration.)
+
+To restore your previous configuration, press ENTER.
+
+To keep the new configuration, press F3. You might want to 
+keep the new configuration if you previously used a third-party 
+memory manager and now want to use EMM386 instead. 
+
+If you are not sure, press F3 to keep the new configuration.
+If you later decide you want to restore your previous 
+configuration, just type MEMMAKER /UNDO at the command prompt.
+
+.End

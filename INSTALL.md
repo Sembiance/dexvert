@@ -1,5 +1,5 @@
 # WARNING
-Over 162 programs are required, including commercial programs and operating systems.
+Over 163 programs are required, including commercial programs and operating systems.
 This isn't something you can easily get up and running in an afternoon.
 		
 # Install
@@ -167,7 +167,7 @@ dev-lang/gfalist | [gfalist](https://github.com/Sembiance/gfalist) | dexvert
 dev-libs/libcdio | [iso-info](https://www.gnu.org/software/libcdio) | 
 dev-python/chardet | [chardetect](https://github.com/chardet/chardet) | 
 dev-util/stackimport | [stackimport](https://github.com/uliwitness/stackimport/) | 
-games-emulation/dosbox | [dosbox](http://dosbox.sourceforge.net/) | 
+games-emulation/dosbox | [dosbox](http://dosbox.sourceforge.net/) | dexvert
 games-util/gameextractor | [gameextractor](http://www.watto.org/game_extractor.html) | dexvert
 media-gfx/abydosconvert | [abydosconvert](https://github.com/Sembiance/abydosconvert) | dexvert
 media-gfx/ansilove | [ansilove](https://www.ansilove.org/) | dexvert

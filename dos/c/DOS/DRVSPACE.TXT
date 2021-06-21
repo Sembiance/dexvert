@@ -1,0 +1,864 @@
+DRVSPACE.TXT
+============
+
+
+Welcome to Microsoft(R) MS-DOS(R), the most widely used operating system for 
+personal computers. This version of MS-DOS includes many new features that 
+turn your computer into a powerful tool for business or personal use. 
+
+This file, the Microsoft MS-DOS User's Guide Addendum, briefly describes 
+features new to MS-DOS 6.22 and explains how to use Microsoft DriveSpace 
+integrated compression. 
+
+If this version of MS-DOS is not yet set up on your computer, see the chapter 
+"Getting Started" in the Microsoft MS-DOS User's Guide for information about 
+how to use the Setup program. 
+
+
+Table of Contents
+-----------------
+   New Features of MS-DOS 6.22
+   Freeing Disk Space by Using DriveSpace
+   Getting Help
+   Setting Up DriveSpace
+      Using Express Setup
+      Using Custom Setup
+	 If you chose to compress an existing drive
+	 If you chose to create a new compressed drive
+   Understanding Disk Compression
+      Compressed Volume Files and Host Drives
+      How DriveSpace Calculates Free Space on a Compressed Drive
+   Using DriveSpace to Manage Compressed Drives
+   Compressing Additional Drives
+      Compressing an Existing Drive
+      Creating a New Compressed Drive
+   Using DriveSpace with Floppy Disks
+      Compressing a Floppy Disk
+      Using a Compressed Floppy Disk
+	  Using Compressed Floppy Disks Without Automounting
+   Getting Information About Compressed Drives
+   Understanding DriveSpace and Memory
+   Getting More Information About DriveSpace
+   Troubleshooting DriveSpace
+
+
+New Features of MS-DOS 6.22
+===========================
+MS-DOS 6.22 includes Microsoft DriveSpace, integrated disk compression 
+that increases your available disk space by compressing files. DriveSpace 
+appears similar to DoubleSpace, which was included with some earlier versions 
+of MS-DOS; however, DriveSpace stores compressed information in a different 
+format. For more information about DriveSpace, see the following section. 
+(If you are currently using DoubleSpace, type HELP DBLSPACE at the MS-DOS 
+command prompt for information about using DoubleSpace with MS-DOS 6.22.)
+
+MS-DOS 6.22 DriveSpace also includes several new safety and convenience 
+features that were not in MS-DOS 6 DoubleSpace. For more information, type 
+HELP WHATSNEW at the MS-DOS command prompt, and then press ENTER.
+For information about other new features of MS-DOS, see the "Welcome" 
+chapter of the the Microsoft MS-DOS User's Guide or type HELP WHATSNEW
+at the MS-DOS command prompt, and then press ENTER.
+
+Freeing Disk Space by Using DriveSpace
+======================================
+DriveSpace frees space on hard and floppy disks by compressing the data that 
+is on them. DriveSpace is easy to set up and use. For instructions on setting 
+up DriveSpace, see "Setting Up DriveSpace" later in this file. After you set 
+up DriveSpace, your disk will have 50 to 100 percent more free space. 
+
+After you set up DriveSpace, you can maintain your compressed drives by using 
+the full-screen DriveSpace maintenance program or by typing commands at the 
+MS-DOS command prompt. For information about using the DriveSpace program to 
+manage compressed drives, see "Using DriveSpace to Manage Compressed Drives" 
+later in this file. For more information about managing compressed drives 
+from the MS-DOS command prompt, type HELP DRVSPACE at the command prompt. 
+For information about checking a compressed drive for disk errors, type 
+HELP SCANDISK at the MS-DOS command prompt.
+
+You can also use DriveSpace to compress floppy disks, removable-media drives, 
+or additional hard disk drives. For more information, see "Compressing 
+Additional Drives" later in this file. 
+
+The rest of this file explains how to set up and use DriveSpace. 
+
+Getting Help
+============
+DriveSpace includes extensive online help for commands, dialog boxes, and 
+procedures. 
+
+To get help while running DriveSpace:
+
+ *  Press F1 when a DriveSpace screen, dialog box, or error message appears. 
+
+To get help about the DRVSPACE command:
+
+ *  Type HELP DRVSPACE at the command prompt. 
+
+Setting Up DriveSpace
+=====================
+When you run DriveSpace for the first time, the DriveSpace Setup program 
+starts. DriveSpace Setup compresses the data on the drive you select. After 
+DriveSpace Setup is complete, your disk will have 50 to 100 percent more 
+free space than it did before. 
+
+Note  After you run DriveSpace Setup, you cannot use the Uninstall program 
+      to restore your previous version of DOS. Do not set up DriveSpace 
+      if you want to be able to use the Uninstall program. 
+
+During DriveSpace Setup, you can select either Express Setup or Custom Setup. 
+To compress the existing files on drive C and have DriveSpace determine the 
+compression settings for you, choose Express Setup. To compress a hard disk 
+drive other than drive C, or to use the empty space on an existing drive to 
+create a new compressed drive, choose Custom Setup. When you use Custom Setup, 
+you can determine compression settings yourself. For more information about 
+running Custom Setup, see "Using Custom Setup" later in this file. 
+The following sections explain each setup method.
+
+Using Express Setup
+-------------------
+Express Setup is the easiest way to install DriveSpace. It compresses the 
+existing files on drive C. (To compress the files on a drive other than C, 
+use Custom Setup. For more information, see the following section.) 
+
+Note  Before you run Express Setup, you should back up the files on drive C. 
+      For information about using Microsoft Backup, see the chapter 
+      "Managing Your System" in the Microsoft MS-DOS User's Guide. 
+
+To install DriveSpace by using Express Setup:
+
+1. Quit all running programs (including Windows). If you use a network, 
+   start the network software and connect to any drives you usually use. 
+
+2. Type DRVSPACE at the command prompt. The Welcome screen appears. 
+
+3. To continue DriveSpace, press ENTER. 
+
+   DriveSpace displays a screen that prompts you to choose between Express 
+   and Custom Setup. 
+
+4. Choose Express Setup by pressing ENTER. 
+
+   DriveSpace displays a confirmation screen that estimates the amount of 
+   time it will take to compress drive C. 
+
+5. To compress drive C, press C. 
+
+DriveSpace checks drive C for disk errors, and then defragments and 
+compresses drive C. This process can take from several minutes to several 
+hours, depending on the speed of your hard disk and processor and the 
+amount of data your hard disk contains. Because DriveSpace checks and 
+rechecks the validity of the data as it compresses your files, the process 
+is very safe. In fact, if the compression process is accidentally 
+interrupted (for example, by a power outage), DriveSpace will recover and 
+continue without losing any data. During the compression process, DriveSpace 
+Setup restarts your computer twice. 
+
+When DriveSpace Setup is complete, it displays a screen that shows how long 
+the compression process took and how much free space your new drive contains. 
+To quit DriveSpace after it has compressed drive C, press ENTER. 
+
+After you set up DriveSpace, your computer's drives will be configured 
+differently: 
+
+ *  Drive C will be compressed and will contain more free space than it 
+    did before. You will use drive C just as you did before you set up 
+    DriveSpace. 
+
+ *  Your computer will have a new drive that is not compressed. This drive 
+    is used to store files that must remain uncompressed. For example, the 
+    Windows permanent swap file does not work properly when it is compressed; 
+    if your Windows permanent swap file was previously located on drive C, 
+    DriveSpace moves it to the new uncompressed drive. 
+
+DriveSpace also uses the new uncompressed drive to store important system 
+files such as IO.SYS, MSDOS.SYS, DRVSPACE.BIN, DRVSPACE.INI, and DRVSPACE.000. 
+If you try to list the files on this drive, it will probably appear empty. 
+This is because most of the files it contains have the Hidden attribute; 
+many also have the Read-Only attribute. To view the files, type DIR /A at 
+the command prompt. 
+
+CAUTION   Do not tamper with the hidden files on the new drive. If you change 
+	  or delete these files, you might lose all the files on drive C. 
+
+For information about adjusting the configuration of your compressed drive, 
+see "Using DriveSpace to Manage Compressed Drives" later in this file. For 
+information about compressing additional drives, see "Compressing Additional 
+Drives" later in this file. For information about compressing floppy disks, 
+see "Using DriveSpace with Floppy Disks" later in this file. 
+
+Using Custom Setup
+------------------
+Custom Setup gives you more control over the compression process than 
+Express Setup does. You should use Custom Setup: 
+
+ *  To compress the data on a hard disk other than drive C. 
+
+ *  If you don't want to compress existing data. 
+    
+    Compressing existing data can take a long time. If you don't 
+    want to compress your existing data, you can have DriveSpace 
+    use some of the free space on an existing drive to create a new 
+    compressed drive. This method does not compress existing data 
+    and is much faster. 
+
+ *  To determine compression settings yourself. 
+    
+    Depending on whether you are compressing an existing drive 
+    or creating a new one, you can specify the drive letter for the 
+    new drive, the estimated compression ratio, and the amount 
+    of space to leave uncompressed. 
+
+
+Note  Before you use Custom Setup to compress an existing drive, you should 
+      back up the files on that drive. For information about using Microsoft 
+      Backup, see the chapter "Managing Your System" in the Microsoft MS-DOS 
+      User's Guide.
+
+To install DriveSpace by using Custom Setup 
+-------------------------------------------
+1. Quit all running programs (including Windows). If you use a network, 
+   start the network software and connect to any drives you usually use.
+
+2. Type DRVSPACE at the command prompt. The Welcome screen appears. 
+
+3. To continue DriveSpace, press ENTER. 
+
+DriveSpace displays a screen that prompts you to choose between Express and 
+Custom Setup. 
+
+4. Select Custom Setup by pressing the DOWN ARROW key, and then press ENTER. 
+   DriveSpace displays a screen in which you can choose between compressing 
+   an existing drive and creating a new compressed drive. For information 
+   about choosing a compression method, press F1. 
+
+5. Select the compression method you want by pressing the UP ARROW or DOWN 
+   ARROW key, and then press ENTER. 
+
+   If your computer has more than one hard disk drive, DriveSpace displays a 
+   list of drives. If you chose to compress an existing drive, select the 
+   drive you want to compress, and then press ENTER. If you are creating a 
+   new compressed drive, select the drive that contains the free space 
+   DriveSpace should use to create the new drive, and then press ENTER. 
+
+   DriveSpace displays a screen that shows the default compression settings. 
+
+6. If necessary, change the compression settings to suit your needs. To 
+   change a setting, press the UP ARROW or DOWN ARROW key until the setting 
+   is highlighted, and then press ENTER to display alternatives. For 
+   information about compression settings, press F1. 
+
+7. When all the settings are correct, press ENTER to continue DriveSpace. 
+   DriveSpace displays a confirmation screen that estimates the amount of 
+   time it will take to compress the drive or free space you selected. 
+
+8. To begin the compression process, press C. 
+
+DriveSpace checks the specified drive for disk errors, and then carries out 
+the compression process with the settings you specified. This process can 
+take from several minutes to several hours, depending on the speed of your 
+hard disk and processor, the amount of data your hard disk contains, and 
+whether you chose to compress existing data or create a new compressed 
+drive. Because DriveSpace checks and rechecks the validity of the data as 
+it compresses existing files, the process is very safe. In fact, if the 
+compression process is accidentally interrupted (for example, by a power 
+outage), DriveSpace will recover and continue without losing any data. 
+
+During the compression process, DriveSpace Setup restarts your computer 
+twice. 
+
+When DriveSpace Setup is complete, it displays a screen that shows how long 
+the compression process took and how much space your new drive contains. 
+To quit DriveSpace after it has compressed the drive or free space you 
+selected, press ENTER. 
+
+After you set up DriveSpace, your computer's drives will be configured 
+differently. The results differ depending on whether you chose to compress 
+an existing drive or create a new compressed drive. 
+
+If you chose to compress an existing drive
+------------------------------------------
+If you chose "Compress an existing drive" during Custom Setup: 
+
+ *  The drive you selected will be compressed and will contain more free 
+    space than it did before. You will use the compressed drive just as you 
+    did before you set up DriveSpace. 
+
+ *  Your computer will have a new drive that is not compressed. This drive 
+    is used to store files that must remain uncompressed. For example, the 
+    Windows permanent swap file does not work properly when it is compressed; 
+    if your Windows permanent swap file was previously located on the drive 
+    you compressed, DriveSpace moves it to the new uncompressed drive. 
+    
+DriveSpace also uses the new uncompressed drive to store important system 
+files such as DRVSPACE.000. If you compressed drive C, the new uncompressed 
+drive will also contain the IO.SYS, MSDOS.SYS, DRVSPACE.BIN and DRVSPACE.INI 
+files. If you try to list the files on this drive, it will probably appear 
+empty. This is because most of the files it contains have the Hidden 
+attribute; many also have the Read-Only attribute. To view the files, type 
+DIR /A at the command prompt. 
+
+CAUTION  Do not tamper with the hidden files on the new drive. If you change 
+	 or delete these files, you might lose the files on your compressed 
+	 drive. 
+
+If you chose to create a new compressed drive
+---------------------------------------------
+If you chose "Create a new compressed drive" during Custom Setup: 
+
+ *  Your computer will have a new compressed drive that is currently empty. 
+    Although the new drive does use some disk space, it makes up for it by 
+    providing more free space than it uses. 
+
+ *  The drive that contained the free space you used to create the new 
+    compressed drive will contain less free space than it did before. This 
+    space is now being used by your new compressed drive, which is stored 
+    in a hidden file with a filename such as DRVSPACE.001. 
+
+For information about adjusting the configuration of your compressed drive, 
+see "Using DriveSpace to Manage Compressed Drives" later in this file. For 
+information about compressing additional drives, see "Compressing Additional 
+Drives" later in this file. For information about compressing floppy disks, 
+see "Using DriveSpace with Floppy Disks" later in this file. 
+
+
+Understanding Disk Compression
+==============================
+You don't need to know anything about disk compression to run DriveSpace 
+Setup: just type DRVSPACE at the command prompt, follow the instructions on 
+your screen, and DriveSpace takes care of the rest. 
+
+However, if you want to adjust or modify your DriveSpace configuration, 
+you need to understand some disk-compression concepts and terms. This 
+section explains the terms you will encounter when you use DriveSpace to 
+manage or modify your compressed drives. 
+
+
+Compressed Volume Files and Host Drives
+---------------------------------------
+A compressed drive is not a real disk drive, although it appears that way to 
+most programs. Instead, a compressed drive exists on your hard disk as a 
+compressed volume file (CVF). 
+
+A CVF is a file with Read-Only, Hidden, and System attributes that contains 
+a compressed drive. Each CVF is located on an uncompressed drive, which is 
+referred to as the CVF's host drive. A CVF is stored in the root directory 
+of its host drive and has a filename such as DRVSPACE.000. 
+
+Most CVFs can store more data than the space they use on their host drives; 
+for example, a typical CVF might use 10 MB of space on its host drive but 
+contain 20 MB of compressed data. DriveSpace assigns a drive letter to the 
+CVF so that you can use it as a disk drive and can access the files it 
+contains. 
+
+CAUTION  Do not tamper with a CVF. If you do, you might lose all the files 
+	 on your compressed drive. 
+
+
+How DriveSpace Calculates Free Space on a Compressed Drive
+----------------------------------------------------------
+On an uncompressed drive, free space indicates how much additional data you 
+can store on that drive. For example, if a drive has 2 megabytes (MB) of 
+free space, you can expect to fit 2 MB of data on it. However, the free 
+space on a compressed drive is only an estimate of how much data you can fit 
+on that drive. 
+
+When you store a file on a compressed drive, DriveSpace compresses the file 
+so that it takes up as little space as possible. Some files can be compressed 
+more tightly than others; for example, a bitmap file can be compressed much 
+more than a program file. DriveSpace cannot detect the compressibility of 
+files you haven't stored yet, so it can only estimate a compressed drive's 
+free space. 
+
+DriveSpace estimates a drive's free space by using the estimated compression 
+ratio, which you can set to specify the compressibility of the files you plan 
+to store. For example, if the estimated compression ratio is set to 3 to 1, 
+DriveSpace calculates the drive's free space based on the assumption that 
+the files you will store will be compressible at a 3-to-1 ratio — that is, 
+that each file can be compressed to one-third its original size. 
+
+Usually, the best compression estimate to use is the actual compression ratio 
+for the files already stored on the drive. From time to time, you might want 
+to reset the estimated compression ratio of each drive to match that drive's 
+actual compression ratio. To do this for all your compressed drives, type 
+DRVSPACE /RATIO /ALL at the command prompt. 
+
+You might want to change the estimated compression ratio if it differs 
+greatly from the actual compressibility of the files you plan to store. 
+For example, if you plan to store extremely compressible files, such as 
+bitmap files, you might want to specify a higher estimated compression 
+ratio. Or, if you plan to store files that will not compress much further, 
+you might specify a lower ratio. 
+
+Note  Changing a drive's estimated compression ratio does not affect how 
+      much DriveSpace actually compresses the files on that drive; it 
+      changes only the way DriveSpace estimates the free space on the 
+      compressed drive. 
+
+
+Using DriveSpace to Manage Compressed Drives
+============================================
+Generally, you work with a compressed drive just as you would with an 
+uncompressed drive. For example, saving, copying, and deleting files works 
+the same way on both a compressed and an uncompressed drive. However, there 
+are some tasks that you carry out only on compressed drives; for example, 
+you can change the size of a compressed drive, but not that of an 
+uncompressed drive. To maintain or modify compressed drives or to create 
+additional compressed drives, use the DriveSpace maintenance program, which 
+provides a full-screen interface with easy-to-use menu commands. 
+
+You can also manage compressed drives from the MS-DOS command prompt 
+by using switches with the DRVSPACE command. For more information, type 
+HELP DRVSPACE at the command prompt. 
+
+To start the DriveSpace program:
+
+ *  Type DRVSPACE at the command prompt. 
+
+The main DriveSpace screen appears. This screen lists your existing 
+compressed drives. You can work with these drives, compress additional 
+drives, or create new compressed drives. From this screen, you can carry 
+out the following tasks: 
+
+ *  Work with a compressed drive. To do this, select the drive by clicking 
+    it with your mouse or by pressing the UP ARROW or DOWN ARROW key until 
+    the drive you want is selected. Then, choose the command you want from 
+    the Drive or Tools menu. (For a description of the commands on these 
+    menus, see the tables later in this section.) 
+
+ *  Compress an existing drive. To do this, choose the Existing Drive 
+    command from the Compress menu. Use this command to compress files on 
+    a hard disk drive or floppy disk. For more information, see "Compressing 
+    Additional Drives" later in this file. 
+
+ *  Add a new compressed drive. You can create a new compressed drive by 
+    using free space on an existing drive; to do this, choose the Create New 
+    Drive command from the Compress menu. For more information, see 
+    "Compressing Additional Drives" later in this file. (You can also add a 
+    compressed drive by mounting an unmounted compressed volume file. For 
+    more information, see "Creating a New Compressed Drive" later in this 
+    file.) 
+
+The Drive menu includes commands you can use to work with the selected 
+drive. The following list describes the commands on the Drive menu. 
+
+Info
+     Displays information about the selected drive. When you choose this 
+     command, the Compressed Drive Information dialog box appears 
+     and displays information about the drive's free and used space, 
+     the name of its CVF, its actual and estimated compression ratios, 
+     and other information. You can also display the Compressed Drive 
+     Information dialog box by double-clicking the name of the drive or 
+     by pressing ENTER when the drive is selected. For more information, 
+     press F1 when the Compressed Drive Information dialog box is on 
+     your screen. 
+
+Change Size
+     Enlarges or reduces the size of the selected drive. Unlike an 
+     uncompressed drive, you can change the size of a compressed drive. 
+     You might want to enlarge a compressed drive if its host drive 
+     contains a lot of free space. You might want to reduce the size of a 
+     compressed drive if you need more free space on the host drive. For 
+     more information, choose the Change Size command, and then press F1. 
+
+Change Ratio
+     Changes the estimated compression ratio of the selected drive. 
+     DriveSpace uses this ratio to estimate how much free space 
+     the compressed drive contains. You might want to change the 
+     estimated compression ratio if you plan to store new files with a 
+     compression ratio that differs greatly from the current ratio. For 
+     more information, choose the Change Ratio command and then 
+     press F1. 
+
+Mount
+     Establishes a connection between a compressed volume file and a 
+     drive letter, so you can use the files the CVF contains. DriveSpace 
+     usually mounts CVFs automatically. You need to mount a CVF only 
+     if you previously unmounted it, or if the CVF is located on a floppy 
+     disk and you turned off the Enable Automounting option. For more 
+     information, choose the Mount command, and then press F1. For 
+     more information about using DriveSpace with floppy disks, see 
+     "Using DriveSpace with Floppy Disks" later in this file. 
+
+Unmount
+     Breaks the connection between the selected drive's CVF and its 
+     drive letter. Unmounting a drive makes it temporarily inaccessible. 
+     For more information, choose Index from the Help menu, and then 
+     select the topic "Unmounting a Compressed Drive." 
+
+Format
+     Formats the selected compressed drive. Like formatting an 
+     uncompressed drive, formatting a compressed drive deletes all 
+     the files it contains. For more information, choose the Index 
+     command from the Help menu, and then select the topic 
+     "Formatting." For more information about using compressed 
+     floppy disks, see "Using DriveSpace with Floppy Disks" later in 
+     this file. 
+
+Delete
+     Deletes the selected compressed drive and the associated CVF. 
+     Deleting a compressed drive erases it and all the files it contains. 
+     For more information, choose the Index command from the Help 
+     menu, and then select the topic "Deleting a Compressed Drive." 
+     
+Exit
+     Quits the DriveSpace program. (MS-DOS continues to provide 
+     access to your compressed drives after you quit DriveSpace.) 
+
+The Compress menu contains commands you can use to create additional 
+compressed drives or to compress floppy disks. For information about 
+compressing additional drives, see the following section, "Compressing 
+Additional Drives." For information about compressing and working with 
+floppy disks, see "Using DriveSpace with Floppy Disks" later in this file. 
+
+The Tools menu includes commands you can use to maintain compressed 
+drives. The following list describes the commands on the Tools menu. 
+
+Defragment
+     Defragments the selected compressed drive. Defragmenting a 
+     compressed drive consolidates the free space on it. If you are 
+     planning to reduce the size of a compressed drive, you should first 
+     use the Defragment command to consolidate the drive's free 
+     space. You might also need to use the Defragment command if 
+     your compressed drive is running out of disk space. For more 
+     information, choose the Defragment command, and then press F1. 
+
+Uncompress
+     Uncompresses a drive that was compressed by using DriveSpace. 
+     When you uncompress the last mounted drive, DriveSpace also 
+     removes DRVSPACE.BIN from memory. (DRVSPACE.BIN is 
+     the portion of MS-DOS that provides access to compressed 
+     drives. It uses about 50K of memory.)
+     
+Options
+     Displays the DriveSpace Options dialog box, in which you 
+     can enable or disable the DoubleGuard and Automount features. 
+     The Options dialog also enables you to change other settings. For 
+     more information, choose the Options command, and then press 
+     F1 when the DriveSpace Options dialog box is on your screen. 
+     
+
+Compressing Additional Drives
+=============================
+DriveSpace provides two ways to add compressed drives. You can: 
+
+ *  Compress an existing hard disk drive or floppy disk. 
+
+ *  Create a new, empty compressed drive by using free space on an 
+    existing drive. 
+
+The rest of this section explains each method. 
+
+
+Compressing an Existing Drive
+-----------------------------
+You can use DriveSpace to compress the files on existing hard disk drives, 
+floppy disks, or other removable media. Compressing an existing drive makes 
+more space available on that drive. 
+
+Note  Before you compress an existing drive, you should back up the files 
+      on that drive. For information about using Microsoft Backup, see the 
+      chapter "Managing Your System" in the Microsoft MS-DOS User's Guide.
+
+To compress an existing drive:
+
+1. In the main DriveSpace screen, choose the Existing Drive command from 
+   the Compress menu. (If you are compressing a floppy disk or other 
+   removable media, make sure it is formatted and is in the drive before 
+   you choose the Existing Drive command.) 
+
+   DriveSpace scans your computer and then displays a list of drives that 
+   can be compressed. (The list does not include drives that are too full 
+   to be compressed, compressed drives, network drives, CD-ROM drives, 
+   Interlnk drives, or paths that have been associated with a drive letter 
+   by using the SUBST command. For more information, press F1 when this 
+   list is displayed.) 
+
+2. Select the drive you want to compress by pressing the UP ARROW or DOWN 
+   ARROW key, and then press ENTER. 
+
+   A screen appears, giving you the opportunity to change the settings 
+   DriveSpace will use to compress the drive. 
+
+3. Change the settings as needed. For more information about changing 
+   settings, press F1. 
+
+4. When you have finished changing settings, press ENTER. 
+
+   DriveSpace displays a confirmation screen stating that it is ready to 
+   compress the drive. 
+
+5. To compress the drive, press C. 
+
+DriveSpace checks the specified drive for disk errors, defragments and 
+compresses it, and then restarts your computer so your new drive 
+configuration can take effect. 
+
+
+Creating a New Compressed Drive
+-------------------------------
+If your hard disk drive contains a lot of uncompressed space, you might want 
+to convert that unused space into a new compressed drive. The new drive will 
+provide more storage capacity than the amount of space it uses. 
+
+To convert free space into a new compressed drive:
+
+1. From the main DriveSpace screen, choose the Create New Drive command 
+   from the Compress menu. 
+
+   DriveSpace scans your computer and then displays a list of uncompressed 
+   drives that contain free space. (The list does not include uncompressed 
+   drives that are too full to be compressed, network drives, CD-ROM drives, 
+   Interlnk drives, or paths that have been associated with a drive letter 
+   by using the SUBST command.) The list shows the free space on each 
+   uncompressed drive and how large the new compressed drive will be. 
+
+2. Select the drive that contains the space you want to use, and then press 
+   ENTER. A screen appears, giving you the opportunity to change the 
+   settings DriveSpace will use when it creates the new compressed drive. 
+
+3. Change the settings as needed. For more information about changing 
+   settings, press F1. 
+
+4. When you have finished changing settings, press ENTER. A confirmation 
+   screen appears. 
+
+5. To create the new compressed drive, press C. 
+
+DriveSpace creates the new compressed drive, and then updates the list of 
+drives on the main DriveSpace screen to include the new compressed drive. 
+
+
+Using DriveSpace with Floppy Disks
+==================================
+You can use DriveSpace to increase the storage capacity of floppy disks. 
+After compressing a floppy disk, you can use it to store data or to 
+transfer data from one computer to another. 
+
+Note  To use a compressed floppy disk to transfer data from one computer 
+      to another, both computers must be using DriveSpace. 
+
+
+Compressing a Floppy Disk
+-------------------------
+Compressing a floppy disk is similar to compressing a hard disk drive. You 
+can compress a floppy disk that is completely empty or one that contains 
+files. (However, you cannot create a new compressed drive on a floppy disk.)
+
+Note  Make sure the floppy disk is formatted and has at least .65 MB of 
+      free space. DriveSpace cannot compress a 360K disk, an unformatted 
+      disk, or a disk that is completely full. 
+
+To compress a floppy disk:
+
+1. Insert a formatted disk in a floppy disk drive. 
+
+2. In the main DriveSpace screen, choose the Existing Drive command from the 
+   Compress menu. 
+
+   DriveSpace scans your computer and then displays a list of drives that 
+   can be compressed. (If the list does not include the floppy disk you just 
+   inserted, make sure the disk is formatted and has at least .65 MB of free 
+   space.) 
+
+3. Select the drive that contains the floppy disk you want to compress by 
+   pressing the UP ARROW or DOWN ARROW key, and then press ENTER. 
+
+   DriveSpace displays a confirmation screen stating that it is ready to 
+   compress the drive you selected. 
+
+4. To compress the floppy disk, press C. 
+
+   DriveSpace checks the floppy disk for errors. Then it defragments, 
+   compresses, and mounts the floppy disk, and updates the list of drives 
+   on the main DriveSpace screen to include the newly compressed disk. 
+
+After DriveSpace finishes compressing the floppy disk: 
+
+ *  The floppy disk will contain more free space than it did before. You 
+    use the floppy disk just as you did before you compressed it, except 
+    that if you change floppy disks or restart your computer, you must 
+    remount the floppy disk. For more information about using a compressed 
+    floppy disk, see the following section. 
+
+ *  Your computer will have a new drive letter. This new drive letter 
+    represents the compressed floppy disk's host drive, which contains the 
+    floppy disk's CVF. Both the new drive letter and the original drive 
+    letter are associated with the same physical floppy disk drive. For 
+    more information, see "Understanding Disk Compression" earlier in this 
+    file. 
+
+
+Using a Compressed Floppy Disk
+------------------------------
+In general, you use a compressed floppy disk just as you would an 
+uncompressed floppy disk. 
+
+By default, DriveSpace automatically mounts a compressed floppy disk when 
+you try to use that disk. This makes it possible to use the disk as if it 
+were an uncompressed floppy disk. (However, if you turn off the Enable 
+Automounting option in the Options dialog box, you must mount compressed 
+floppy disks yourself. For more information, see the following section.)
+
+To gain access to the contents of a compressed floppy disk, insert the 
+floppy disk in the drive, and then use a command such as the DIR command 
+(for example, if the disk is in drive A, type DIR A:).
+
+
+Using Compressed Floppy Disks Without Automounting
+--------------------------------------------------
+If you rarely use compressed floppy disks, you might want to disable the 
+Automounting feature. When Automounting is enabled, it uses about 4K of 
+memory.
+
+To disable Automounting, choose DriveSpace Options from the Tools menu, and 
+then clear the Enable Automounting check box.
+
+Note  Before it is mounted, a compressed floppy disk appears nearly full. 
+      If you have turned off the Enable Automounting option and you change 
+      to the floppy disk drive and carry out the DIR command, MS-DOS 
+      usually lists one file: a text file named READTHIS.TXT, which briefly 
+      explains how to mount the floppy disk. The DIR command usually reports 
+      that the floppy disk contains almost no free space, since most of 
+      the space is used by the CVF. The CVF is a file with Hidden, Read-Only, 
+      and System attributes named DRVSPACE.000. 
+
+When Automounting is disabled, you can still use compressed floppy disks, 
+but you must mount them yourself. You can do this either from the main 
+DriveSpace screen or at the MS-DOS command prompt. 
+
+To mount a compressed floppy disk from the main DriveSpace screen:
+
+1. Insert the compressed floppy disk in a drive. 
+
+2. In the main DriveSpace screen, choose the Mount command from the 
+   Drive menu. 
+
+DriveSpace searches your computer for unmounted CVFs and lists the ones it 
+finds. 
+
+3. Select the CVF that is located on your compressed floppy disk by using 
+   the UP ARROW or DOWN ARROW key, and then press ENTER. 
+
+4. DriveSpace mounts the CVF and then updates the list of compressed 
+   drives on the main DriveSpace screen to include the newly mounted 
+   floppy disk. 
+
+The compressed floppy disk remains mounted, and the files on it remain 
+available, until you change floppy disks or restart your computer. 
+
+To mount a compressed floppy disk at the MS-DOS command prompt:
+
+1. Insert the compressed floppy disk in a drive. 
+
+2. At the command prompt, type DRVSPACE /MOUNT and the letter of the drive 
+   the floppy disk is in. For example, to mount the compressed floppy disk 
+   in drive A, you would type DRVSPACE /MOUNT A:.
+
+The compressed floppy disk remains mounted until you change floppy disks or 
+restart your computer. 
+
+If you want, you can include the DRVSPACE /MOUNT command in your AUTOEXEC.BAT 
+file. For example, if you usually keep a compressed floppy disk in drive B 
+and want to mount it each time you start your computer, you could add 
+the command DRVSPACE /MOUNT B: to your AUTOEXEC.BAT file. For more 
+information about your AUTOEXEC.BAT file, see the chapter "Configuring Your 
+System" in the Microsoft MS-DOS User's Guide. 
+
+
+Getting Information About Compressed Drives
+===========================================
+You can display information about your compressed drives in several ways: 
+
+ *  In DriveSpace, choose the Info command from the Drive menu to display 
+    detailed information about a compressed drive. For more information, 
+    press F1 while the Compressed Drive Information dialog box is on your 
+    screen. (You can also display detailed information about a drive by 
+    typing DRVSPACE /INFO at the command prompt; for more information about 
+    this command, type HELP DRVSPACE /INFO.)
+
+ *  At the MS-DOS command prompt, change to the compressed drive you want 
+    information about, and then type DIR /C. MS-DOS lists the files in the 
+    current directory and displays the actual compression ratio for each 
+    file. It also shows the average compression ratio for the entire list 
+    of files. (If the compressed drive is empty, DIR /C does not display 
+    compression information.) For more information, type HELP DIR at the 
+    command prompt. 
+
+ *  At the MS-DOS command prompt, type DRVSPACE /LIST to see a list of your 
+    computer's drives and their compression status. This command lists and 
+    briefly describes all your computer's drives (except network drives). 
+    Use this command to get a more complete picture of your computer's drive 
+    configuration. 
+
+ *  If you use Windows, choose DriveSpace Info from the Tools menu in File 
+    Manager. For more information, press F1 while the DriveSpace Info dialog 
+    box is on your screen. 
+
+
+Understanding DriveSpace and Memory
+===================================
+When you start your computer, MS-DOS loads DRVSPACE.BIN into memory. 
+DRVSPACE.BIN is the part of MS-DOS that provides access to your compressed 
+drives. It requires about 50K of memory. MS-DOS loads DRVSPACE.BIN, along 
+with other operating system functions, before carrying out the commands in 
+your CONFIG.SYS and AUTOEXEC.BAT files. Initially, DRVSPACE.BIN loads at 
+the top of conventional memory. By default, MS-DOS moves DRVSPACE.BIN to 
+the bottom of conventional memory after carrying out the commands in the 
+CONFIG.SYS file.
+
+You can use the DRVSPACE.SYS device driver to move DRVSPACE.BIN to a 
+specific area of memory. (The DRVSPACE.SYS device driver does not provide 
+access to compressed drives; it simply determines the final location in 
+memory of DRVSPACE.BIN.) (DriveSpace Setup automatically adds a DEVICE 
+command for the DRVSPACE.SYS device driver to your CONFIG.SYS file.)
+
+There are two reasons you might want to use DRVSPACE.SYS to move 
+DRVSPACE.BIN from the top of conventional memory: 
+
+ *  To avoid conflicts with programs that require access to the top of 
+    conventional memory. 
+
+    A few programs require access to the top of conventional memory and 
+    do not work properly if DRVSPACE.BIN is located there.
+
+ *  To free conventional memory. 
+
+    If your computer has extended memory, DRVSPACE.SYS can move part of 
+    DRVSPACE.BIN to the high memory area (HMA). (By default, MS-DOS 
+    Setup and DriveSpace Setup configure your computer this way.) In 
+    addition, if you have an 80386 or higher computer with extended 
+    memory, you can run the MemMaker program to move the rest of 
+    DRVSPACE.BIN to the upper memory area. (For instructions on how to 
+    run MemMaker, see the chapter "Making More Memory Available" in the 
+    Microsoft MS-DOS User's Guide.)
+
+For more information about DRVSPACE.SYS and DRVSPACE.BIN, type HELP 
+DRVSPACE.SYS at the MS-DOS command prompt.
+
+
+Getting More Information About DriveSpace
+=========================================
+For tips on using DriveSpace and answers to common questions about 
+DriveSpace, type HELP DRVTIPS at the command prompt.
+
+For information about using the DRVSPACE command, type HELP DRVSPACE at the 
+command prompt.
+
+For information about using the DriveSpace program, press F1 while the 
+DriveSpace program is running.
+
+For technical information about DriveSpace, including information about 
+writing programs that use MRCI (Microsoft Real-Time Compression Interface), 
+obtain the Microsoft MS-DOS Resource Kit. For details, see the coupon in 
+the back of your Microsoft MS-DOS User's Guide.
+
+Troubleshooting DriveSpace
+==========================
+If you encounter problems while running DriveSpace, or if you encounter 
+problems with your compressed drives, see the DriveSpace section of the 
+README.TXT file. The README.TXT file is located in the directory that 
+contains your MS-DOS files. 
+
+If you encounter disk errors on a compressed drive, run the ScanDisk 
+program on that drive. For more information about ScanDisk, type 
+HELP SCANDISK at the command prompt.

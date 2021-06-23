@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["PC-Outline outline"]
 };
 
-exports.steps = [() => ({program : "pco"})];
+exports.converterPriorty = ["pco"];

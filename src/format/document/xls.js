@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet"]
 };
 
-exports.steps = [() => ({program : "antixls"})];
+exports.converterPriorty = ["antixls"];

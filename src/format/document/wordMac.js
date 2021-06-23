@@ -9,4 +9,4 @@ exports.meta =
 	unsafe  : true
 };
 
-exports.steps = [() => ({program : "soffice"})];
+exports.converterPriorty = ["soffice"];

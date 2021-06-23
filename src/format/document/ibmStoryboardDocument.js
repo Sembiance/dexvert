@@ -12,4 +12,4 @@ exports.meta =
 	notes          : "Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out."
 };
 
-exports.steps = [() => ({program : "strings"})];
+exports.converterPriorty = ["strings"];

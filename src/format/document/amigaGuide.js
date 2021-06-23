@@ -11,4 +11,4 @@ exports.meta =
 	filesOptional : (state, otherFiles, otherDirs) => ([...otherFiles, ...otherDirs])	// Amiga Guides reference other guides and directories, so include symlinks to everything else
 };
 
-exports.steps = [() => ({program : "grotag"})];
+exports.converterPriorty = ["grotag"];

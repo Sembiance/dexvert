@@ -10,4 +10,4 @@ exports.meta =
 	magic          : ["C-Worthy Help Librarian Data"]
 };
 
-exports.steps = [() => ({program : "strings"})];
+exports.converterPriorty = ["strings"];

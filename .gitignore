@@ -22,6 +22,7 @@ log/
 # Contains commercial software
 qemu/win*/*.img
 qemu/win*/data/*.iso
+qemu/win2k/data/app/PageStream5.0.5.8-windows.zip
 qemu/amiga*/*.img
 qemu/amiga*/data/*.iso
 qemu/amiga*/data/*.img

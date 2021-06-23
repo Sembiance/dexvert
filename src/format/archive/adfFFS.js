@@ -10,4 +10,4 @@ exports.meta =
 	magic    : ["Amiga Disk image File (FFS)", "Amiga FFS disk", "Amiga Inter FFS disk", "Amiga Fastdir FFS disk"]
 };
 
-exports.converterPriorty = ["unadf", "xdftool"];
+exports.converterPriorty = ["unadf", "xdftool", "IsoBuster"];

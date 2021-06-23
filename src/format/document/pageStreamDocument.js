@@ -10,4 +10,4 @@ exports.meta =
 	magic          : ["PageStream Document"]
 };
 
-exports.steps = [() => ({program : "strings"})];
+exports.converterPriorty = ["PageStream", "strings"];

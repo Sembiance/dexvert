@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 663 file formats are supported by dexvert.
+The following 664 file formats are supported by dexvert.
 
 
 
@@ -95,7 +95,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (23)
+## Document (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
@@ -110,9 +110,10 @@ document | InfoFile Database File | .flr | [7 sample files](https://telparia.com
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [5 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
+document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [7 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
-document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [99 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
+document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [10 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
@@ -718,7 +719,7 @@ video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [19 sampl
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
-video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [32 sample files](https://telparia.com/fileFormatSamples/video/grasp/)
+video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [30 sample files](https://telparia.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [11 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [9 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and my runUtil.recordVirtualX also doesn't record sound Couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [7 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)

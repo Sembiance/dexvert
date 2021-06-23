@@ -10,4 +10,4 @@ exports.meta =
 	unsafe         : true
 };
 
-exports.steps = [() => ({program : "ab2ascii"})];
+exports.converterPriorty = ["ab2ascii"];

@@ -11,4 +11,4 @@ exports.meta =
 	notes          : "Very obscure amiga database program."
 };
 
-exports.steps = [() => ({program : "strings"})];
+exports.converterPriorty = ["strings"];

@@ -13,4 +13,4 @@ exports.meta =
 	unsafe         : true
 };
 
-exports.steps = [() => ({program : "gpcl6"})];
+exports.converterPriorty = ["gpcl6"];

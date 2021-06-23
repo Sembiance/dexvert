@@ -10,4 +10,4 @@ exports.meta =
 	magic    : ["DjVu multi-page document", "DjVu File Format", "DjVu multiple page document"]
 };
 
-exports.steps = [() => ({program : "ddjvu"})];
+exports.converterPriorty = ["ddjvu"];

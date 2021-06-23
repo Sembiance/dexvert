@@ -10,7 +10,7 @@ exports.meta =
 	unsafe  : true
 };
 
-// Several Lotus 123 docs back in the day wer actually used for order formats and were meant to printed
+// Several Lotus 123 docs back in the day were actually used for order forms and were meant to printed
 // So we convert both to PDF and CSV
 exports.steps =
 [

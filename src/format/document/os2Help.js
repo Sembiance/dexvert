@@ -9,4 +9,4 @@ exports.meta =
 	magic       : ["OS/2 HLP", "OS/2 Help"]
 };
 
-exports.steps = [() => ({program : "ipf2txt"})];
+exports.converterPriorty = ["ipf2txt"];

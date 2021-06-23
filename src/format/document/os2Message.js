@@ -10,4 +10,4 @@ exports.meta =
 	magic          : [/^OS\/2 help [Mm]essage/]
 };
 
-exports.steps = [() => ({program : "strings"})];
+exports.converterPriorty = ["strings"];

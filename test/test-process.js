@@ -97,7 +97,7 @@ const SIZE_IGNORE_FILES =
 };
 
 // Several output files will vary every so slightly due to screenshot artifacts or FFMPEG changing slightly how it encodes a video on version upgrades
-const DEFAULT_SIZE_FLEX_VIDEO = 5;	// Video often changes a lot more, but usually not more than 5%
+const DEFAULT_SIZE_FLEX_VIDEO = 5;	// Video often changes, but usually not more than 5%
 const SIZE_FLEX_PERCENTAGE =
 {
 	audio :
@@ -144,6 +144,7 @@ const SIZE_FLEX_PERCENTAGE =
 		// These are screen recordings from DOSBox and get converted to MP4 with ffmpeg, thus they can differ each time
 		"disneyCFAST" : DEFAULT_SIZE_FLEX_VIDEO,
 		"fantavision" : DEFAULT_SIZE_FLEX_VIDEO,
+		"grasp"       : DEFAULT_SIZE_FLEX_VIDEO,
 	
 		// These are linux virtualX screen recordings and can differ each time
 		"movieSetter" : DEFAULT_SIZE_FLEX_VIDEO,
@@ -205,7 +206,7 @@ const PROGRAM_FLAGS_FILES =
 };
 
 // We will front load these files at the start so they don't slow down the whole process by being one of the last files randomly chosen to be processed
-const SLOW_FILES = ["image/kodakDCR/RAW_KODAK_DCSPRO.DCR", "image/radiance/forest_path.hdr", "image/tundra/tcf-shocktronics.tnd", "image/heic/sample1.heif", "image/cgm/corvette.cgm"];
+const SLOW_FILES = ["image/kodakDCR/RAW_KODAK_DCSPRO.DCR", "image/radiance/forest_path.hdr", "image/tundra/tcf-shocktronics.tnd", "image/heic/sample1.heif", "image/cgm/corvette.cgm", ".GL", ".gl"];
 
 const SLOW_DURATION = XU.MINUTE*3;
 
@@ -282,7 +283,15 @@ tiptoe(
 		testUtil.logFinish();
 
 		if(Object.keys(fileDurations).length>0)
-			XU.log`\nSlowest files: ${Object.entries(fileDurations).multiSort([([, d]) => d], true).slice(0, 15).map(([p, d]) => `\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((d/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`).join("\n")}`;
+		{
+			XU.log`\nSlowest files: ${Object.entries(fileDurations).multiSort([([, d]) => d], true).slice(0, 15).map(([p, d]) =>
+			{
+				if(SLOW_FILES.some(SLOW_FILE => p.endsWith(SLOW_FILE)))
+					return null;
+
+				return `\t${XU.cf.fg.white(p)}: ${XU.cf.fg.cyan((d/XU.SECOND).secondsAsHumanReadable({short : true, maxParts : 2}))}`;
+			}).filterEmpty().join("\n")}`;
+		}
 
 		XU.log`\nTotal elapsed duration: ${((Date.now()-startTime)/XU.SECOND).secondsAsHumanReadable()}`;
 		this();

@@ -35,6 +35,7 @@ const EXPECTED =
 		hlr                   : "autumn edition, 7).hlr",
 		jbig                  : "mx.jbg",
 		koalaMicroillustrator : ["starwar.pic", "apollo.pic"],
+		pgc                   : "naked1.pgc",	// Is correct, just looks like garbage and should be continue to be detected as such by tensor
 		prismPaint            : "pat_16.tpi",
 		sgx                   : "testimg-lz77.sgx",
 		snx                   : true,

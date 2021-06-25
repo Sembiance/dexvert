@@ -9,4 +9,4 @@ exports.meta =
 	magic     : ["PGC Portfolio Graphics Compressed bitmap"]
 };
 
-exports.converterPriorty = ["recoil2png"];
+exports.converterPriorty = ["recoil2png", "nconvert"];

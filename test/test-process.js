@@ -97,7 +97,7 @@ const SIZE_IGNORE_FILES =
 };
 
 // Several output files will vary every so slightly due to screenshot artifacts or FFMPEG changing slightly how it encodes a video on version upgrades
-const DEFAULT_SIZE_FLEX_VIDEO = 5;	// Video often changes, but usually not more than 5%
+const DEFAULT_SIZE_FLEX_VIDEO = 7;	// Video often changes, but usually not more than this
 const SIZE_FLEX_PERCENTAGE =
 {
 	audio :
@@ -107,6 +107,9 @@ const SIZE_FLEX_PERCENTAGE =
 	},
 	image :
 	{
+		// Program has a flashing cursor that is different each time
+		"3dCK" : 0.1,
+
 		// pfstools will produce an ever so slightly different PNG
 		"radiance" : 0.1,
 
@@ -144,7 +147,7 @@ const SIZE_FLEX_PERCENTAGE =
 		// These are screen recordings from DOSBox and get converted to MP4 with ffmpeg, thus they can differ each time
 		"disneyCFAST" : DEFAULT_SIZE_FLEX_VIDEO,
 		"fantavision" : DEFAULT_SIZE_FLEX_VIDEO,
-		"grasp"       : DEFAULT_SIZE_FLEX_VIDEO,
+		"grasp"       : 25,
 	
 		// These are linux virtualX screen recordings and can differ each time
 		"movieSetter" : DEFAULT_SIZE_FLEX_VIDEO,
@@ -243,7 +246,7 @@ tiptoe(
 		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "src", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
-		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).multiSort([v => SLOW_FILES.some(SLOW_FILE => v.endsWith(SLOW_FILE))], true);
+		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));	//.multiSort([v => SLOW_FILES.some(SLOW_FILE => v.endsWith(SLOW_FILE))], true);
 
 		if(argv.format)
 			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(path.join(argv.format, "/")));

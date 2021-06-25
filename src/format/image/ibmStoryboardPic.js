@@ -6,6 +6,7 @@ exports.meta =
 	name           : "IBM Storyboard PIC",
 	website        : "https://winworldpc.com/product/ibm-storyboard/live-20",
 	ext            : [".pic", ".cap"],
+	forbiddenExt   : [".txm"],
 	forbidExtMatch : true,
 	magic          : ["IBM Storyboard bitmap", "IBM Storyboard screen Capture"],
 	notes          : XU.trim`

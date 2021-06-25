@@ -9,4 +9,4 @@ exports.meta =
 	magic   : ["PDS image bitmap", "PDS (JPL) image data"]
 };
 
-exports.converterPriorty = ["imageAlchemy"];
+exports.converterPriorty = ["nconvert", "imageAlchemy"];

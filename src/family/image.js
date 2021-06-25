@@ -109,7 +109,7 @@ exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
 					skipClassificationReason = `Unsupported image formatid: ${dexid.formatid}`;
 				
 				// Don't classify if the full original absolute path includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
-				if(["texture", "stereo", "pattern", "brush", "noise", "illusion"].some(v => state.input.absolute.toLowerCase().includes(v)))
+				if(["texture", "stereo", "pattern", "brush", "noise", "illusion", "background"].some(v => state.input.absolute.toLowerCase().includes(v)))
 					skipClassificationReason = `Contains a known 'noisy' pattern in file path`;
 				
 				// Don't classify if the dimensions are too big

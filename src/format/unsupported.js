@@ -17,6 +17,19 @@ exports.formats =
 		msDOSDriver  : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
 		xex          : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true}
 	},
+
+	font :
+	{
+		averyFont             : {name : "Avery Font", ext : [".ff1"], magic : ["Avery Font"]},
+		bannerManiaFont       : {name : "Banner Mania Font", ext : [".fnt"], magic : ["Bannermania font"]},
+		borlandGraphicsFont   : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
+		calamusFont           : {name : "Calamus Font", ext : [".cfn"], magic : ["Calamus Font Data"]},
+		envisionPublisherFont : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
+		laserJetSoftFont      : {name : "LaserJet Soft Font", ext : [".sfl", ".sfp", ".sft"], magic : ["LaserJet Soft Font"]},
+		linkWayFont           : {name : "LinkWay Font", ext : [".fmf"], magic : ["LinkWay Font"]},
+		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
+		theDrawFont           : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"}
+	},
 	
 	rom :
 	{
@@ -30,6 +43,7 @@ exports.formats =
 		ailMidiDriver                : {name : "Audio Interface Library 3 Music/MIDI driver", ext : [".mdi"], magic : ["Audio Interface Library 3 Music/MIDI driver"]},
 		ailDigitalAudioDriver        : {name : "Audio Interface Library 3 Digital audio driver", ext : [".dig"], magic : ["Audio Interface Library 3 Digital audio driver"]},
 		alchemyMindworksResource     : {name : "Alchemy Mindworks Resource", ext : [".res"], magic : ["Alchemy Mindworks Resource data"]},
+		alphaFourScript              : {name : "Alpha Four Script", ext : [".scp"], magic : ["Alpha Four Script"]},
 		amigaActionReplay3           : {name : "Amiga Action Replay 3 Freeze File", magic : ["Amiga Action Reply 3 Freeze File"]},
 		amigaBlkDev                  : {name : "Amiga ADF BlkDev File", ext : [".blkdev"], magic : [...C.TEXT_MAGIC, /^data$/], weakMagic : true},
 		amigaBootCode                : {name : "Amiga ADF Bootcode", ext : [".bootcode"], magic : [...C.TEXT_MAGIC, /^data$/], weakMagic : true},
@@ -41,12 +55,15 @@ exports.formats =
 		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format"]},
 		asciiFontMetrics             : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric"]},
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
+		autoCADProtectedLISP		 : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
 		borlandDelphiBuilderForm     : {name : "Borland Delphi - C++ Builder Form", ext : [".dfm"], magic : ["Borland Delphi - C++ Builder Form"]},
 		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file"]},
 		borlandDrive                 : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI Device Driver"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},
+		cakeWalkWorkFile             : {name : "CakeWalk Work File", ext : [".wrk"], magic : ["Cakewalk Music project"]},
+		calCompressedData            : {name : "Confusion and Light Compressed Data", ext : [".cal"], magic : ["CAL compressed data"]},
 		chaosultdGEMParameters       : {name : "CHAOSultdGEM Parameters", ext : [".chs"], magic : ["CHAOSultdGEM parameters"]},
 		chemViewAnimationData        : {name : "Chemview Animation Data", ext : [".d"], magic : ["CHEMVIEW animation Data"]},
 		corncob3DData                : {name : "Corncob 3D Data File", ext : [".cct"], magic : ["Corncob 3D Theater-of-operation data"]},
@@ -54,9 +71,14 @@ exports.formats =
 		cygnusEdDefaultSettings      : {name : "Cygnus Editor Default Settings", filename : ["ceddefaults"], magic : ["CygnusEd default settings"]},
 		cygnusEdMacros               : {name : "Cygnus Editor Macros", filename : ["cedmacros"], magic : ["CygnusEd macros"]},
 		dBaseIndex                   : {name : "dBase Index File", ext : [".ntx"]},
+		dBaseCompiledObjectProgram   : {name : "dBase Compiled Object Program", ext : [".dbo"], magic : ["dBASE compiled Object program"]},
 		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs .*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
 		foxProMemo                   : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fullTiltPinballData          : {name : "Full Tilt Pinball Data", ext : [".dat"], magic : ["Full Tilt! Pinball table data"]},
+		geePrinterDriver             : {name : "Gee! Printer Driver", ext : [".pdr"], magic : ["Gee! Printer Driver"]},
+		geoWorksGEOSData             : {name : "GeoWorks GEOS Data", ext : [".000", ".001", ".002", ".003", ".004", ".005", ".006", ".007", ".008", ".009", ".010", ".011", ".012", ".geo"], magic : ["GeoWorks data", "GeoWorks GEOS data"]},
+		harvardGraphicsChart         : {name : "Harvard Graphics Chart", ext : [".ch3"], magic : ["Harvard Graphics Chart"]},
+		hyperPadPad					 : {name : "HyperPAD Pad", ext : [".pad"], magic : ["HyperPAD Pad"]},
 		iccColorProfile              : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},
 		iffDTYP                      : {name : "Amiga IFF DTYP", magic : ["Amiga IFF datatype info", "IFF data, DTYP datatype description"]},
 		iffPrefs                     : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
@@ -78,6 +100,7 @@ exports.formats =
 		pascalCompiledUnit           : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit"]},
 		polyfilmPrefs                : {name : "Polyfilm Preferences", ext : [".prf"], magic : ["Polyfilm Preferences"]},
 		printerFontMetrics           : {name : "Printer Font Metrics", ext : [".pfm"], magic : ["Adobe Printer Font Metrics", "Printer Font Metrics"]},
+		puzzleBusterPuzzle           : {name : "Puzzle Buster Puzzle", ext : [".puz"], magic : ["Puzzle Buster Puzzle"]},
 		relocatableObjectModule      : {name : "Relocatable Object Module", ext : [".obj"], magic : ["OMF - Relocatable Object Module Format", "8086 relocatable"]},
 		riffMSXF                     : {name : "RIFF MSFX File", ext : [".sfx"], magic : ["RIFF MSFX file"], notes : "Just contains meta info about a given soundeffect usually distributed alongside it as a .wav"},
 		riffMxSt                     : {name : "RIFF MxSt File", ext : [".si"], magic : ["RIFF MxSt file"], notes : "References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff"},
@@ -88,6 +111,7 @@ exports.formats =
 		softDiskLibrary              : {name : "SoftDisk Library", ext : [".shl"], magic : ["Softdisk Help Library format"]},
 		starTrekkerModuleInfo        : {name : "Startrekker Module Info", ext : [".nt"], magic : [/^Startrekker .*module info$/]},
 		stormWizardResource          : {name : "StormWizard Resource", ext : [".wizard", ".wizard-all"], magic : ["IFF data, WZRD StormWIZARD resource", "StormWIZARD resource"]},
+		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
 		turboPascalHelp              : {name : "Turbo Pascal Help", ext : [".hlp"], magic : ["Turbo Pascal Help"]},
 		visualBasicExtension         : {name : "Visual Basic Extension", ext : [".vbx"], magic : ["Visual Basic eXtension/Custom Control"]},
 		visualCLibrary               : {name : "Microsoft Visual C Library", ext : [".lib"], magic : ["Microsoft Visual C Library"]},
@@ -95,6 +119,8 @@ exports.formats =
 		windowsProgramInfo           : {name : "Microsoft Windows Program Information File", ext : [".pif"], magic : ["Program Information File (Windows)", "Windows Program Information File"]},
 		windowsShortcut              : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
-		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm"], magic : [/^WordPerfect [Mm]acro/]}
+		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/]},
+		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]}
 	}
 };
+

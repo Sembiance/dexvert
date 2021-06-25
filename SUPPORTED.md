@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 664 file formats are supported by dexvert.
+The following 666 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (65)
+## Archive (66)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -29,10 +29,11 @@ archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | 
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [1 sample file](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) |  | [5 sample files](https://telparia.com/fileFormatSamples/archive/crunchMania/)
-archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [1 sample file](https://telparia.com/fileFormatSamples/archive/diskImage/)
+archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [2 sample files](https://telparia.com/fileFormatSamples/archive/diskImage/)
+archive | EDI Install LZS Compressed Data | $ | [6 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
-archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [9 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
-archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [9 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
+archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [11 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
+archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [10 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [3 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
@@ -66,7 +67,7 @@ archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar |
 archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sea | [10 sample files](https://telparia.com/fileFormatSamples/archive/sea/)
 archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .sqx | [1 sample file](https://telparia.com/fileFormatSamples/archive/sqx/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [10 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
-archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [6 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
+archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [7 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [11 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [10 sample files](https://telparia.com/fileFormatSamples/archive/tscomp/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [3 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
@@ -84,7 +85,7 @@ audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [11 sample files](https://telparia.com/fileFormatSamples/audio/amosSamples/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [4 sample files](https://telparia.com/fileFormatSamples/audio/aif/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [5 sample files](https://telparia.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
-audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [6 sample files](https://telparia.com/fileFormatSamples/audio/covoxADPCM/)
+audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [7 sample files](https://telparia.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [14 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 | [2 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
@@ -100,15 +101,15 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [12 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
+document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [7 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
-document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [7 sample files](https://telparia.com/fileFormatSamples/document/xls/)
-document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [6 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
+document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [9 sample files](https://telparia.com/fileFormatSamples/document/xls/)
+document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [9 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [12 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
 document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/ibm-storyboard/) | .txm | [5 sample files](https://telparia.com/fileFormatSamples/document/ibmStoryboardDocument/) - Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out.
 document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
-document | [MaciCardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [5 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
@@ -163,7 +164,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (444)
+## Image (445)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -213,7 +214,7 @@ image | Atari Player Editor | .apl | [1 sample file](https://telparia.com/fileFo
 image | Atari RGB Intermediate | .rgb | [1 sample file](https://telparia.com/fileFormatSamples/image/rgbIntermediate/)
 image | [Atari Standard Graphics 3](http://fileformats.archiveteam.org/wiki/Standard_Graphics_3_(Atari)) | .sg3 | [1 sample file](https://telparia.com/fileFormatSamples/image/sg3/)
 image | [AtariTools-800 Graphic](http://fileformats.archiveteam.org/wiki/AtariTools-800) | .agp | [4 sample files](https://telparia.com/fileFormatSamples/image/atariTools800Graphic/)
-image | [AutoCAD Drawing](http://fileformats.archiveteam.org/wiki/DWG) | .dwg .dwt | [9 sample files](https://telparia.com/fileFormatSamples/image/dwg/)
+image | [AutoCAD Drawing](http://fileformats.archiveteam.org/wiki/DWG) | .dwg .dwt | [12 sample files](https://telparia.com/fileFormatSamples/image/dwg/)
 image | [AV1 Image File Format](http://fileformats.archiveteam.org/wiki/AVIF) | .avif .avifs | [4 sample files](https://telparia.com/fileFormatSamples/image/avif/)
 image | [Avatar/0](http://fileformats.archiveteam.org/wiki/AVATAR) | .avt | [13 sample files](https://telparia.com/fileFormatSamples/image/avatar/)
 image | [Award BIOS Logo](http://fileformats.archiveteam.org/wiki/Award_BIOS_logo) | .epa | [7 sample files](https://telparia.com/fileFormatSamples/image/epa/)
@@ -244,10 +245,10 @@ image | [ColorViewSquash](http://fileformats.archiveteam.org/wiki/ColorViewSquas
 image | [Commodore 64 VIC](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .vic | [12 sample files](https://telparia.com/fileFormatSamples/image/vic/)
 image | [CompuServe RLE](http://fileformats.archiveteam.org/wiki/CompuServe_RLE) | .rle | [12 sample files](https://telparia.com/fileFormatSamples/image/compuServeRLE/) - RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.
 image | [Computer Aided Acquisition and Logistics Support](http://fileformats.archiveteam.org/wiki/CALS_raster) | .ct1 .cal .ras .ct2 .ct3 .nif .ct4 .c4 | [2 sample files](https://telparia.com/fileFormatSamples/image/cals/)
-image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [8 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - Test file input.cgm fails to convert
+image | [Computer Graphics Metafile](http://fileformats.archiveteam.org/wiki/CGM) | .cgm | [11 sample files](https://telparia.com/fileFormatSamples/image/cgm/) - Test file input.cgm fails to convert
 image | [ComputerEyes](http://fileformats.archiveteam.org/wiki/ComputerEyes) | .ce1 .ce2 .ce3 | [3 sample files](https://telparia.com/fileFormatSamples/image/computerEyes/)
 image | [Corel Metafile Exchange Image](http://fileformats.archiveteam.org/wiki/CMX) | .cmx | [1 sample file](https://telparia.com/fileFormatSamples/image/cmx/)
-image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [9 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
+image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [14 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | [14 sample files](https://telparia.com/fileFormatSamples/image/crackArt/)
 image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | [2 sample files](https://telparia.com/fileFormatSamples/image/cyberPaintCel/)
 image | D-GRAPH P3C | .p3c | [1 sample file](https://telparia.com/fileFormatSamples/image/p3c/)
@@ -274,7 +275,7 @@ image | [Dir Logo Maker](http://fileformats.archiveteam.org/wiki/Dir_Logo_Maker)
 image | [DirectDraw Surface](http://fileformats.archiveteam.org/wiki/DDS) | .dds | [7 sample files](https://telparia.com/fileFormatSamples/image/dds/)
 image | [Doodle Atari](http://fileformats.archiveteam.org/wiki/Doodle_(Atari)) | .doo | [13 sample files](https://telparia.com/fileFormatSamples/image/doodleAtari/)
 image | [Doodle C64](http://fileformats.archiveteam.org/wiki/Doodle!_(C64)) | .dd .jj | [10 sample files](https://telparia.com/fileFormatSamples/image/doodleC64/)
-image | [Dr. Halo](http://fileformats.archiveteam.org/wiki/Dr._Halo) | .cut .pal .pic | [6 sample files](https://telparia.com/fileFormatSamples/image/drHalo/)
+image | [Dr. Halo](http://fileformats.archiveteam.org/wiki/Dr._Halo) | .cut .pal .pic | [7 sample files](https://telparia.com/fileFormatSamples/image/drHalo/)
 image | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [2 sample files](https://telparia.com/fileFormatSamples/image/dxf/)
 image | DrawIt | .dit | [14 sample files](https://telparia.com/fileFormatSamples/image/drawIt/)
 image | [Draz Paint](http://fileformats.archiveteam.org/wiki/Drazpaint) | .drz .drp | [3 sample files](https://telparia.com/fileFormatSamples/image/drazPaint/)
@@ -298,7 +299,7 @@ image | [Falcon True Color](http://fileformats.archiveteam.org/wiki/Falcon_True_
 image | [Farbfeld](http://fileformats.archiveteam.org/wiki/Farbfeld) | .ff | [2 sample files](https://telparia.com/fileFormatSamples/image/farbfeld/)
 image | [Flash XML Graphics](http://fileformats.archiveteam.org/wiki/FXG) | .fxg | [1 sample file](https://telparia.com/fileFormatSamples/image/fxg/)
 image | [Flexible Image Transport System](http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System) | .fit .fits .fts .fz | [5 sample files](https://telparia.com/fileFormatSamples/image/fits/)
-image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .bml .fli .flg | [6 sample files](https://telparia.com/fileFormatSamples/image/fliGraph/)
+image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .bml .fli | [6 sample files](https://telparia.com/fileFormatSamples/image/fliGraph/)
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/)
 image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | [1 sample file](https://telparia.com/fileFormatSamples/image/ffli/)
 image | [FLIP Image](http://fileformats.archiveteam.org/wiki/FLIP) | .fbi | [5 sample files](https://telparia.com/fileFormatSamples/image/fbi/)
@@ -422,7 +423,7 @@ image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/w
 image | [Microsoft Windows Cursor](http://fileformats.archiveteam.org/wiki/CUR) | .cur | [13 sample files](https://telparia.com/fileFormatSamples/image/cur/)
 image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org/wiki/EMF) | .emf | [1 sample file](https://telparia.com/fileFormatSamples/image/emf/)
 image | [Microsoft Windows Icon File](http://fileformats.archiveteam.org/wiki/ICO) | .ico | [10 sample files](https://telparia.com/fileFormatSamples/image/ico/)
-image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | [8 sample files](https://telparia.com/fileFormatSamples/image/wmf/) - This is a vector format, but 'convert' doesn't support exporting it to svg. So if uniconvertor fails, we'll just get a PNG out instead of an SVG.
+image | [Microsoft Windows Metafile](http://fileformats.archiveteam.org/wiki/WMF) | .wmf .apm .wmz | [9 sample files](https://telparia.com/fileFormatSamples/image/wmf/) - This is a vector format, but 'convert' doesn't support exporting it to svg. So if uniconvertor fails, we'll just get a PNG out instead of an SVG.
 image | [MIG](http://fileformats.archiveteam.org/wiki/MIG) | .mig | [14 sample files](https://telparia.com/fileFormatSamples/image/mig/)
 image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture) | .mpp | [8 sample files](https://telparia.com/fileFormatSamples/image/mpp/)
 image | [Minolta RAW](http://fileformats.archiveteam.org/wiki/Minolta) | .mrw | [2 sample files](https://telparia.com/fileFormatSamples/image/mrw/)
@@ -477,7 +478,7 @@ image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 
 image | [PixArt](http://fileformats.archiveteam.org/wiki/PixArt) | .pix | [9 sample files](https://telparia.com/fileFormatSamples/image/pixArt/)
 image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [2 sample files](https://telparia.com/fileFormatSamples/image/pixelPerfect/)
 image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | [1 sample file](https://telparia.com/fileFormatSamples/image/pl4/)
-image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | [3 sample files](https://telparia.com/fileFormatSamples/image/pds/)
+image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | [5 sample files](https://telparia.com/fileFormatSamples/image/pds/)
 image | [PlayStation TIM](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .tim | [9 sample files](https://telparia.com/fileFormatSamples/image/tim/)
 image | [PMG Designer](http://fileformats.archiveteam.org/wiki/PMG_Designer) | .pmd | [4 sample files](https://telparia.com/fileFormatSamples/image/pmd/)
 image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | [2 sample files](https://telparia.com/fileFormatSamples/image/pam/)
@@ -581,6 +582,7 @@ image | [Video Image Communication and Retrieval](http://fileformats.archiveteam
 image | [Vidig Paint](http://fileformats.archiveteam.org/wiki/Vidig_Paint) | .rap | [9 sample files](https://telparia.com/fileFormatSamples/image/rap/)
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp | [4 sample files](https://telparia.com/fileFormatSamples/image/webp/)
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | [2 sample files](https://telparia.com/fileFormatSamples/image/artist64/)
+image | [Windows Clipboard](http://fileformats.archiveteam.org/wiki/Windows_clipboard) | .clp | 
 image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp .wap wbm | [3 sample files](https://telparia.com/fileFormatSamples/image/wirelessBMP/)
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | [13 sample files](https://telparia.com/fileFormatSamples/image/wpg/) - It's a vector format, but convert doesn't always properly convert it to an SVG. So we also convert it to a PNG
 image | [X Window Dump](http://fileformats.archiveteam.org/wiki/XWD) | .xwd .dmp | [7 sample files](https://telparia.com/fileFormatSamples/image/xwd/)
@@ -649,24 +651,24 @@ other | All Null Bytes |  |
 other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [11 sample files](https://telparia.com/fileFormatSamples/other/iffCTLG/)
 other | Asymetrix ToolBook File | .tbk | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
 other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboCProject/)
-other | Borland Turbo Vision Resource | .res .tvr | [3 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
+other | Borland Turbo Vision Resource | .res .tvr | [7 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
 other | Empty File |  | 
 other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
 other | InstallShield Script | .ins | [8 sample files](https://telparia.com/fileFormatSamples/other/installShieldScript/)
 other | JAM Message Area Header File | .jhr | [7 sample files](https://telparia.com/fileFormatSamples/other/jamMessageAreaHeaderFile/)
 other | Microsoft Windows Help File Content | .cnt | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
-other | MS Visual FoxPro App | .app .fxp | [4 sample files](https://telparia.com/fileFormatSamples/other/msVisualFoxProApp/)
+other | MS Visual FoxPro App | .app .fxp | [7 sample files](https://telparia.com/fileFormatSamples/other/msVisualFoxProApp/)
 other | MSVC Resource File | .res | [14 sample files](https://telparia.com/fileFormatSamples/other/msvcRes/)
 other | NoteWorthy Composure | .nw | [9 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
 other | ObjectVision Datafile | .ovd | [8 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
 other | Turbo Basic Chain module | .tbc | [7 sample files](https://telparia.com/fileFormatSamples/other/turboBASICChainModule/)
 other | Turbo C Configuration | .tc | 
-other | Turbo C Context File | .dsk | [3 sample files](https://telparia.com/fileFormatSamples/other/turboCContextFile/)
+other | Turbo C Context File | .dsk | [7 sample files](https://telparia.com/fileFormatSamples/other/turboCContextFile/)
 other | Turbo Pascal Chain module | .chn | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalChainModule/)
 other | Turbo Pascal Desktop File | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalDesktopFile/)
 other | Turbo Pascal Overlay | .ovr | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalOverlay/)
-other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [3 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
-other | Windows Program Group | .grp | [5 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
+other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [6 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
+other | Windows Program Group | .grp | [8 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
 
 
 
@@ -710,10 +712,10 @@ Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [10 sample files](https://telparia.com/fileFormatSamples/video/flm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | [7 sample files](https://telparia.com/fileFormatSamples/video/mov/)
-video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [5 sample files](https://telparia.com/fileFormatSamples/video/avi/)
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [6 sample files](https://telparia.com/fileFormatSamples/video/avi/)
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
 video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [18 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
-video | [DeluxePaint Animation](http://fileformats.archiveteam.org/wiki/DeluxePaint_Animation) | .anm | [6 sample files](https://telparia.com/fileFormatSamples/video/deluxePaintAnimation/) - Sample file HORSE.ANM doesn't convert for some reason
+video | [DeluxePaint Animation](http://fileformats.archiveteam.org/wiki/DeluxePaint_Animation) | .anm | [8 sample files](https://telparia.com/fileFormatSamples/video/deluxePaintAnimation/) - Sample file HORSE.ANM doesn't convert for some reason
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - FLICK.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Due to just running DOSbox and recording the screen, there is dosbox logo at the start. Finally, the format is documented, so someone could create a more modern converter.
 video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [19 sample files](https://telparia.com/fileFormatSamples/video/dl/) - Could not find a modern viewer/extractor (rumor has it Graphics Converter for MacOS X supports this, but haven't tried. I could spin up the DOS DL_VIEWER.EXE program and record the X11 output as video but can't currently identify DL files safely. Source code for an old DOS viewer is here: https://github.com/lucadegregorio/dl-viewer Could examine said source code to reverse engineer the format and build a converter. Maybe some day.
 video | Fantavision Movie | .mve | [7 sample files](https://telparia.com/fileFormatSamples/video/fantavision/) - PLAYER.EXE just loops the video forever, haven't figured out a way to get it to stop after playing once. So I just record for 40 seconds and that's the result. Also, there is sound effects but my runUtil Xvfb doesn't support sound recording yet, so no sound. I just run DOSbox and record the screen, so there is dosbox logo at the start.

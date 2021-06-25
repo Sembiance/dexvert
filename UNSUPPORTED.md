@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 146 file formats are unsupported by dexvert.
+The following 161 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -79,21 +79,23 @@ executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSam
 
 
 
-## Font (8)
+## Font (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-font | [Banner Mania Font](https://en.wikipedia.org/wiki/Banner_Mania) | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
-font | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | No sample files yet.
-font | [Calamus Font](http://fileformats.archiveteam.org/wiki/Calamus_Font) | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
-font | [Envision Publisher Font](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/) - Font file for the MSDOS program Envsion Publisher. Fontforge doesn't handle it and I didn't bother trying to convert further.
-font | LaserJet Soft Font | .sfl .sfp .sft | No sample files yet.
-font | LinkWay Font | .fmf | No sample files yet.
-font | [The Draw Font](http://fileformats.archiveteam.org/wiki/TheDraw_font) | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
+font | Avery Font | .ff1 | 
+font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
+font | Borland Graphics Font | .chr .bgi | 
+font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
+font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
+font | LaserJet Soft Font | .sfl .sfp .sft | 
+font | LinkWay Font | .fmf | 
+font | PrintPartner Font | .font | 
+font | TheDraw Font | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 
 
 
-## Image (10)
+## Image (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
@@ -101,6 +103,7 @@ image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Sadly Draw256 for DOS takes any file ending with .VGA and renders garbage. Cannot determine before if it's a proper file. Due to common extension and extreme rarity of Draw256 files in the wild, this format is marked unsupported.
 image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .faxx .fax | [3 sample files](https://telparia.com/fileFormatSamples/image/faxx/) - No known converter.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
+image | KwikDraw Drawing | .kwk | A windows 'object oriented' drawing program. Don't think it was very popular. sandbox/app/KDRAW121.ZIP has the app, works in Win2k, no export ability. Could add a virtual printer driver and then use that to output as PNG.
 image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sample files](https://telparia.com/fileFormatSamples/image/kyssKYG/) - No known converter.
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
@@ -123,11 +126,12 @@ music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Ata
 
 
 
-## Other (72)
+## Other (84)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
 other | Alchemy Mindworks Resource | .res | 
+other | Alpha Four Script | .scp | 
 other | Amiga Action Replay 3 Freeze File |  | 
 other | Amiga ADF BlkDev File | .blkdev | 
 other | Amiga ADF Bootcode | .bootcode | 
@@ -144,23 +148,31 @@ other | ASCII Font Metrics | .afm |
 other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileFormatSamples/other/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
+other | AutoCAD Protected LISP | .lsp | 
 other | BNUPORT Patch Table | .pat | 
 other | Borland Delphi - C++ Builder Form | .dfm | 
 other | Borland Delphi Compiled Unit | .dcu | 
 other | Borland Graphics Interface Driver | .bgi | 
 other | Borland Overlay | .ovr | 
 other | BOYAN Action Model | .bam | 
+other | CakeWalk Work File | .wrk | 
 other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/other/chaosultdGEMParameters/)
 other | Chemview Animation Data | .d | 
+other | Confusion and Light Compressed Data | .cal | 
 other | Corncob 3D Data File | .cct | 
 other | Creative Signal Processor microcode | .csp | 
 other | Cygnus Editor Default Settings |  | 
 other | Cygnus Editor Macros |  | 
+other | dBase Compiled Object Program | .dbo | 
 other | dBase Index File | .ntx | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
+other | Gee! Printer Driver | .pdr | 
+other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
+other | Harvard Graphics Chart | .ch3 | 
 other | [Hewlett-Packard Graphics Language](http://fileformats.archiveteam.org/wiki/HPGL) | .hpgl | [5 sample files](https://telparia.com/fileFormatSamples/other/hpgl/) - Sometimes used for graphics, sometimes used to control plotters and other machines. I tried to compile this but it's ancient and failed: http://ftp.funet.fi/index/graphics/packages/hpgl2ps/hpgl2ps.tar.Z Quick searches didn't turn up any other 'easy' to grab and use converters, so punt on this for now.
+other | HyperPAD Pad | .pad | 
 other | ICC Color Profile | .icc | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Uninstall Script | .isu | 
@@ -182,6 +194,7 @@ other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | Polyfilm Preferences | .prf | 
 other | Printer Font Metrics | .pfm | 
+other | Puzzle Buster Puzzle | .puz | 
 other | Relocatable Object Module | .obj | 
 other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
@@ -192,12 +205,14 @@ other | SimCity City | .cty |
 other | SoftDisk Library | .shl | 
 other | Startrekker Module Info | .nt | 
 other | StormWizard Resource | .wizard .wizard-all | 
+other | Telix Compiled Script | .slc | 
 other | Turbo Pascal Help | .hlp | 
 other | Visual Basic Extension | .vbx | 
 other | Windows Help Global Index Data | .gid | 
 other | Windows Shortcut | .lnk | 
+other | WordPerfect for Windows Button Bar | .wwb | 
 other | WordPerfect keyboard file | .wpk | 
-other | WordPerfect Macro File | .wpm | 
+other | WordPerfect Macro File | .wpm .wcm | 
 
 
 

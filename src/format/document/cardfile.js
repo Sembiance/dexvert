@@ -3,7 +3,7 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name    : "MaciCardfile Document",
+	name    : "Cardfile Document",
 	website : "http://fileformats.archiveteam.org/wiki/Cardfile",
 	ext     : [".crd"],
 	magic   : ["Windows Cardfile database", "Cardfile"]

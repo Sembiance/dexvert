@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "https://en.wikipedia.org/wiki/3D_Construction_Kit"
+	website : "https://en.wikipedia.org/wiki/3D_Construction_Kit",
+	unsafe  : true
 };
 
 exports.dos = () => "RUNVGA.EXE";

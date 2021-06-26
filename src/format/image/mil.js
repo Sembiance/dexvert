@@ -3,10 +3,11 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	name     : "Micro Illustrator",
-	website  : "http://fileformats.archiveteam.org/wiki/Micro_Illustrator",
-	ext      : [".mil"],
-	fileSize : 10022
+	name                : "Micro Illustrator",
+	website             : "http://fileformats.archiveteam.org/wiki/Micro_Illustrator",
+	ext                 : [".mil"],
+	fileSize            : 10022,
+	forbidFileSizeMatch : true
 };
 
 exports.converterPriorty = ["recoil2png", "nconvert"];

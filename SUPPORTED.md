@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 666 file formats are supported by dexvert.
+The following 667 file formats are supported by dexvert.
 
 
 
@@ -164,10 +164,11 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (445)
+## Image (446)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
+image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_Sprite) | .acorn | [8 sample files](https://telparia.com/fileFormatSamples/image/acornSprite/)
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | [4 sample files](https://telparia.com/fileFormatSamples/image/psd/)
 image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | [16 sample files](https://telparia.com/fileFormatSamples/image/advancedArtStudio/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/)
@@ -465,7 +466,7 @@ image | [Palm Database ImageViewer format](http://fileformats.archiveteam.org/wi
 image | [Panasonic RAW](http://fileformats.archiveteam.org/wiki/Panasonic_RAW) | .rw2 .raw .rwl | [4 sample files](https://telparia.com/fileFormatSamples/image/panasonicRaw/)
 image | [Paradox](http://fileformats.archiveteam.org/wiki/Paradox) | .mcpp | [7 sample files](https://telparia.com/fileFormatSamples/image/mcpp/)
 image | [PC Paint Image](http://fileformats.archiveteam.org/wiki/PCPaint_PIC) | .pic .clp | [18 sample files](https://telparia.com/fileFormatSamples/image/pcPaint/)
-image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | [15 sample files](https://telparia.com/fileFormatSamples/image/pcx/)
+image | [PC Paintbrush Image](http://fileformats.archiveteam.org/wiki/PCX) | .pcx | [17 sample files](https://telparia.com/fileFormatSamples/image/pcx/)
 image | [PC-Board](http://fileformats.archiveteam.org/wiki/PCBoard) | .pcb | [11 sample files](https://telparia.com/fileFormatSamples/image/pcBoard/)
 image | [Pentax RAW](http://fileformats.archiveteam.org/wiki/Pentax_PEF) | .pef .ptx | [6 sample files](https://telparia.com/fileFormatSamples/image/pentaxRaw/)
 image | [Perfect Pix](http://fileformats.archiveteam.org/wiki/Perfect_Pix) | .eve .odd .pph | [9 sample files](https://telparia.com/fileFormatSamples/image/perfectPix/)

@@ -10,6 +10,6 @@ exports.meta =
 	magic    : ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/]
 };
 
-exports.converterPriorty = ["nconvert", "convert"];
+exports.converterPriorty = ["nconvert", "convert", "deark"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

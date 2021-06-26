@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 161 file formats are unsupported by dexvert.
+The following 162 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -63,7 +63,7 @@ document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .re
 
 
 
-## Executable (10)
+## Executable (11)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | AmigaOS Executable |  | 
@@ -75,6 +75,7 @@ executable | FM-TownsOS App | .exp | [9 sample files](https://telparia.com/fileF
 executable | Linux OMAGIC Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
+executable | RISC OS Executable |  | 
 executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/executable/zbasic/)
 
 

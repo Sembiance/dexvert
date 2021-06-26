@@ -1,0 +1,9 @@
+#!/bin/bash
+
+outputFilePath="$1"
+shift
+
+progPath="$1"
+shift
+
+"$progPath" "$@" > "$outputFilePath"

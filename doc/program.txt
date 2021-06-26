@@ -78,6 +78,9 @@ Here is where you should rename any generic 'outfile' names to the original inpu
 >>> runOptions = (state, p, r) => ({virtualX : true})
 Can return an object of run options to be passed into runUtil.run
 
+>>> redirectOutput = (state, p, r) => "/path/to/output.txt"
+Can return a file path string where stdout from the program should be redirected to
+
 >>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
 Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> osid			Which OS to use. Default: win2k

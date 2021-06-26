@@ -10,4 +10,4 @@ exports.meta =
 
 exports.bin = () => "dwg2SVG";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.runOptions = state => ({"redirect-stdout" : path.join(state.output.absolute, `${state.input.name}.svg`)});
+exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.svg`);

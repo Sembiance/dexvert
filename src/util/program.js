@@ -65,6 +65,7 @@ exports.run = function run(programRaw, options={})
 		state.ran.unshift(r);
 
 		const bin = program.steps ? null : (program.qemu || program.dos || program.bin)(state);
+
 		if(state.programFlags?.[bin])
 			Object.assign(r.flags, state.programFlags[bin]);
 		
@@ -127,6 +128,8 @@ exports.run = function run(programRaw, options={})
 				this.data.startedAt = performance.now();
 
 				r.options = Object.assign(exports.runOptions(state), (options.runOptions || (program.runOptions ? program.runOptions(state, p, r) : {})));
+				if(r.options["redirect-stdout"])
+					process.exit(XU.log`${XU.cf.fg.red("WARNING")}: DO NOT SET runOptions redirect-stdout as it's buggy! Instead in the program set: ${"exports.redirectOutput"} for program ${r.programid}`);
 
 				if(program.steps)
 				{
@@ -161,7 +164,10 @@ exports.run = function run(programRaw, options={})
 				}
 				else
 				{
-					runUtil.run(bin, r.args, r.options, runcb);
+					if(program.redirectOutput)
+						runUtil.run(path.join(__dirname, "..", "..", "bin", "redirectOutput"), [program.redirectOutput(state), bin, ...r.args], r.options, runcb);
+					else
+						runUtil.run(bin, r.args, r.options, runcb);
 				}
 			},
 			function post(results)

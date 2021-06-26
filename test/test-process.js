@@ -88,9 +88,6 @@ const SIZE_IGNORE_FILES =
 		// Abydos sometimes fails to produce the proper webp output
 		"amosSprites" : [/.webp$/],
 
-		// This particular program produces very different colors each time, not sure why
-		"3dCK" : [/.png$/],
-
 		// soffice can produce wildly different SVG output, not sure why
 		"cgm" : [/.svg$/]
 	}
@@ -246,7 +243,7 @@ tiptoe(
 		sampleFilePaths.filterInPlace(sampleFilePath => !require(path.join(__dirname, "..", "src", "format", path.basename(path.resolve(sampleFilePath, "..", "..")), `${path.basename(path.dirname(sampleFilePath))}.js`)).meta.unsupported);	// eslint-disable-line sembiance/prefer-relative-require
 
 		// We shuffle just to better test whether some formats might not reliably work with other formats being converted in parallel
-		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file));	//.multiSort([v => SLOW_FILES.some(SLOW_FILE => v.endsWith(SLOW_FILE))], true);
+		this.data.sampleFilePaths = sampleFilePaths.shuffle().filter(sampleFilePath => !argv.file || sampleFilePath.endsWith(argv.file)).multiSort([v => SLOW_FILES.some(SLOW_FILE => v.endsWith(SLOW_FILE))], true);
 
 		if(argv.format)
 			this.data.sampleFilePaths.filterInPlace(sfp => path.relative(testUtil.SAMPLE_DIR_PATH, sfp).startsWith(path.join(argv.format, "/")));

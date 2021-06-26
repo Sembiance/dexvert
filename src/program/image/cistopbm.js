@@ -11,5 +11,5 @@ exports.meta =
 
 exports.bin = () => "cistopbm";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.runOptions = state => ({"ignore-stderr" : true, "redirect-stdout" : path.join(state.cwd, "outfile.pbm")});
+exports.redirectOutput = state => path.join(state.cwd, "outfile.pbm");
 exports.post = (state, p, r, cb) => p.util.program.run("convert", {argsd : ["outfile.pbm"]})(state, p, cb);

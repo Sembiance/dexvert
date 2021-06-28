@@ -11,4 +11,4 @@ exports.meta =
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
-exports.converterPriorty = ["uade123"];
+exports.converterPriorty = ["uade123", "zxtune123"];

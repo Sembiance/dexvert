@@ -19,7 +19,7 @@ exports.meta =
 
 exports.bin = () => "xanim";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, `${state.input.name}.mp4`)) => { r.outPath = outPath; return ["+Ze", "+l0", "-Zr", "+Ee", inPath]; };
-exports.runOptions = () => ({virtualX : true, timeout : XU.MINUTE*5});
+exports.runOptions = () => ({virtualX : true, timeout : XU.MINUTE*3});
 
 exports.post = (state, p, r, cb) =>
 {

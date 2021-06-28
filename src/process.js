@@ -204,7 +204,14 @@ exports.processNext = function processNext(state, p, cb)
 		() => p.util.file.tmpCWDCreate,
 		subState =>
 		{
-			const ext = p.format.meta.safeExt ? p.format.meta.safeExt(state) : (p.format.meta.ext ? (p.format.meta.ext.includes(subState.input.ext.toLowerCase()) ? subState.input.ext : (state.id.fileSizeMatchExt || p.format.meta.ext[0])) : (state.id.fileSizeMatchExt || subState.input.ext || ""));	// eslint-disable-line max-len
+			let ext=null;
+			if(p.format.meta.safeExt)
+				ext = p.format.meta.safeExt(state);
+			else if(p.format.meta.ext)
+				ext = (p.format.meta.ext.includes(subState.input.ext.toLowerCase()) ? subState.input.ext : (state.id.fileSizeMatchExt || p.format.meta.ext[0]));
+			else
+				ext = (state.id.fileSizeMatchExt || subState.input.ext || "");
+
 			return p.util.file.safeInput(p.format.meta.keepFilename ? state.input.name : "in", ext.toLowerCase(), !!p.format.meta.symlinkUnsafe);
 		},
 		() => p.util.file.safeOutput,

@@ -11,4 +11,4 @@ exports.meta =
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
-exports.converterPriorty = ["xmp"];
+exports.converterPriorty = ["xmp", "zxtune123"];

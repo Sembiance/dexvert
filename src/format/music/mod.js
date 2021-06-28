@@ -11,5 +11,5 @@ exports.meta =
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
-exports.converterPriorty = ["xmp", "uade123", "mikmod2wav"];
+exports.converterPriorty = ["xmp", "uade123", "mikmod2wav", "zxtune123"];
 

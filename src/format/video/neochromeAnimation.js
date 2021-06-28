@@ -9,4 +9,4 @@ exports.meta =
 	magic    : ["Atari NEOchrome animation"]
 };
 
-exports.steps = [() => ({program : "deark", flags : {dearkJoinFrames : true}})];
+exports.converterPriorty = [{program : "deark", flags : {dearkJoinFrames : true}}];

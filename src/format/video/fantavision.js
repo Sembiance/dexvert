@@ -13,4 +13,4 @@ exports.meta =
 		I just run DOSbox and record the screen, so there is dosbox logo at the start.`
 };
 
-exports.steps = [() => ({program : "fantavsn"})];
+exports.converterPriorty = ["fantavsn"];

@@ -11,4 +11,4 @@ exports.meta =
 	notes     : "Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version."
 };
 
-exports.steps = [() => ({program : "grasp4"})];
+exports.converterPriorty = ["grasp4"];

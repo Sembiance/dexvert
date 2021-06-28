@@ -8,4 +8,4 @@ exports.meta =
 
 exports.dos = () => "AIN.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath}`]);
-exports.dosData = (state, p, r) => ({autoExec : ["CD OUT", `..\\AIN.EXE x ${r.args}`], keys : [["Return"]], keyOpts : {delay : XU.SECOND*3}});
+exports.dosData = (state, p, r) => ({autoExec : ["CD OUT", `..\\AIN.EXE x ${r.args}`], keys : [["Return"]], keyOpts : {delay : XU.SECOND*4}});

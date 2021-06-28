@@ -9,6 +9,6 @@ exports.meta =
 	magic    : ["FLIC FLC video", "FLC animation", "Autodesk Animator Pro FLIC"]
 };
 
-exports.steps = [() => ({program : "ffmpeg", flags : {ffmpegFormat : "flic"}})];
+exports.converterPriorty = [{program : "ffmpeg", flags : {ffmpegFormat : "flic"}}, "xanim"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

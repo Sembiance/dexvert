@@ -197,7 +197,7 @@ function validateProgram(program, cb)
 			{
 				if(rawResults[i].includes("No matches found"))
 				{
-					XU.log`Package ${program.meta.gentooPackage} is not installed!`;
+					XU.log`Package ${program.meta.gentooPackage} is not installed! (Did you forget to run eix-update ?)`;
 					process.exit(1);
 				}
 			});

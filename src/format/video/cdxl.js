@@ -9,6 +9,6 @@ exports.meta =
 	magic       : ["Amiga CDXL video"]
 };
 
-exports.steps = [() => ({program : "ffmpeg", flags : {ffmpegFormat : "cdxl"}})];
+exports.converterPriorty = [{program : "ffmpeg", flags : {ffmpegFormat : "cdxl"}}];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

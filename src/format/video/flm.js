@@ -9,4 +9,4 @@ exports.meta =
 	magic    : ["Animatic Film"]
 };
 
-exports.steps = [() => ({program : "deark", flags : {dearkJoinFrames : true}})];
+exports.converterPriorty = [{program : "deark", flags : {dearkJoinFrames : true}}];

@@ -10,6 +10,6 @@ exports.meta =
 	magic    : ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.* video/, "Audio/Video Interleaved Format"]
 };
 
-exports.steps = [() => ({program : "ffmpeg"})];
+exports.converterPriorty = ["ffmpeg", "xanim"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

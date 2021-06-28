@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 667 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 670 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -58,6 +58,7 @@ Options:
       ffmpeg:ffmpegExt                           Which extension to convert into (".png", ".mp3", ".mp4", ".flac", etc). Default for image is .png, audio is .mp3 otherwise .mp4
       ffmpeg:ffmpegFormat                        Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide
       ffmpeg:ffmpegFPS                           What frame rate to specify for conversion. Default: Let ffmpeg decide
+      xanim:xanimDelay                           Duration of delay between animation frames. Default: 10
   -h, --help                                     display help for command
 
 ```

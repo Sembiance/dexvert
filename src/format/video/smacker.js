@@ -9,6 +9,6 @@ exports.meta =
 	magic    : ["Smacker movie/video (original)", "Smacker Video", /^RAD Game Tools Smacker Multimedia .* frames$/]
 };
 
-exports.steps = [() => ({program : "ffmpeg", flags : {ffmpegFormat : "smk"}})];
+exports.converterPriorty = [{program : "ffmpeg", flags : {ffmpegFormat : "smk"}}];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

@@ -13,4 +13,4 @@ exports.meta =
 		Finally, the format is documented, so someone could create a more modern converter.`
 };
 
-exports.steps = [() => ({program : "flick"})];
+exports.converterPriorty = ["flick"];

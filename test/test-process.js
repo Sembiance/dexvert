@@ -105,7 +105,7 @@ const SIZE_FLEX_PERCENTAGE =
 	image :
 	{
 		// Program has a flashing cursor that is different each time
-		"3dCK" : 0.1,
+		"3dCK" : 1,
 
 		// pfstools will produce an ever so slightly different PNG
 		"radiance" : 0.1,

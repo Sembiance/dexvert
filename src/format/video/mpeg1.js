@@ -10,6 +10,6 @@ exports.meta =
 	magic    : ["MPEG-1 Elementary Stream", "MPEG-1 Program Stream", "MPEG sequence, v1"]
 };
 
-exports.steps = [() => ({program : "ffmpeg"})];
+exports.converterPriorty = ["ffmpeg"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

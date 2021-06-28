@@ -10,6 +10,6 @@ exports.meta =
 	notes   : "Sample file HORSE.ANM doesn't convert for some reason"
 };
 
-exports.steps = [() => ({program : "ffmpeg", flags : {ffmpegFormat : "anm"}})];
+exports.converterPriorty = [{program : "ffmpeg", flags : {ffmpegFormat : "anm"}}];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

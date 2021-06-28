@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 162 file formats are unsupported by dexvert.
+The following 165 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -113,10 +113,12 @@ image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 s
 
 
 
-## Music (8)
+## Music (10)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | 
+music | AY Amadeus Chiptune | .ay .emul | [5 sample files](https://telparia.com/fileFormatSamples/music/ay/) - Whatver ends up converting ayAMAD will also likely convert this.
+music | AY Amadeus Chiptune | .amad | [7 sample files](https://telparia.com/fileFormatSamples/music/ayAMAD/) - This program can play the files, even under linux, but couldn't figure out how to convert to WAV: https://bulba.untergrund.net/emulator_e.htm I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
 music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 music | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
@@ -224,11 +226,12 @@ rom | Game Boy ROM | .gb .gbc |
 
 
 
-## Video (4)
+## Video (5)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | [IFF VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
+video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [6 sample files](https://telparia.com/fileFormatSamples/video/videoMasterFilm/) - No known modern converter
 

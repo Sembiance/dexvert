@@ -10,6 +10,6 @@ exports.meta =
 	magic    : ["Apple QuickTime movie", "QuickTime Movie"]
 };
 
-exports.steps = [() => ({program : "ffmpeg"})];
+exports.converterPriorty = ["ffmpeg", "xanim"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

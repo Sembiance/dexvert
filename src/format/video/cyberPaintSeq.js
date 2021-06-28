@@ -9,4 +9,4 @@ exports.meta =
 	magic    : ["Cyber Paint Sequence"]
 };
 
-exports.steps = [() => ({program : "seq2mp4"})];
+exports.converterPriorty = ["seq2mp4"];

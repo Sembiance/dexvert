@@ -9,6 +9,6 @@ exports.meta =
 	magic    : ["IFF data, ANIM animation", "IFF ANIM"]
 };
 
-exports.steps = [() => ({program : "ffmpeg", flags : {ffmpegFPS : 10, ffmpegFormat : "iff"}})];
+exports.converterPriorty = [{program : "ffmpeg", flags : {ffmpegFormat : "iff"}}, {program : "xanim", flags : {xanimDelay : 6}}];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

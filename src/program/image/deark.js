@@ -20,6 +20,7 @@ exports.meta =
 		dearkJoinFrames : "Treat output files as individual images frames of an animation and join them together as an MP4",
 		dearkGIFDelay   : "Duration of delay between animation frames. Default: 12",
 		dearkReplaceExt : "An object of keys that are extensions to replace with their values. Only works with a single output file.",
+		dearkFile2      : "An extra file that can be used by deark module to get the correct palette or image names",
 		keepAsGIF       : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4"
 	}
 };
@@ -32,6 +33,9 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.d
 	const args = [];
 	if(r.flags.dearkModule)
 		args.push("-m", r.flags.dearkModule);
+	if(r.flags.dearkFile2)
+		args.push("-file2", r.flags.dearkFile2);
+
 	const opts = Array.from(r.flags.dearkOpts || []);
 	if(r.flags.dearkCharOutput)
 		opts.push(`char:output=${r.flags.dearkCharOutput || "image"}`);

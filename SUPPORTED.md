@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 674 file formats are supported by dexvert.
+The following 684 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (66)
+## Archive (67)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -45,6 +45,7 @@ archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Comp
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [10 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
+archive | [Macromedia Director Protected Cast](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .cxt | [3 sample files](https://telparia.com/fileFormatSamples/archive/directorProtectedCast/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox | [1 sample file](https://telparia.com/fileFormatSamples/archive/mbox/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
@@ -60,7 +61,7 @@ archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx
 archive | [PCXlib Compressed Archive](http://fileformats.archiveteam.org/wiki/PCX_Library) | .pcl | [13 sample files](https://telparia.com/fileFormatSamples/archive/pcxLib/)
 archive | [PKZip Archive](http://fileformats.archiveteam.org/wiki/ZIP) | .zip .exe | [19 sample files](https://telparia.com/fileFormatSamples/archive/zip/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [15 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
-archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [12 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
+archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [15 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [5 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | Raw Partition |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/rawPartition/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [10 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
@@ -96,7 +97,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (26)
+## Document (27)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Amiga Catalog Translation file | .ct | 
@@ -104,6 +105,7 @@ document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [13 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [7 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
+document | [Device Independent File](http://fileformats.archiveteam.org/wiki/DVI_(Device_Independent_File_Format)) | .dvi | [2 sample files](https://telparia.com/fileFormatSamples/document/deviceIndependentFile/) - Once I get more file samples, convert with something better than `strings'. I can try using `dvips` to convert to PS then use ps2pdf. Or use sandbox/app/dvipbm
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [9 sample files](https://telparia.com/fileFormatSamples/document/xls/)
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [9 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
@@ -166,7 +168,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [3 sample files](https://telparia.com
 
 
 
-## Image (447)
+## Image (448)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [1 sample file](https://telparia.com/fileFormatSamples/image/3dCK/)
@@ -497,6 +499,7 @@ image | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps |
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | [3 sample files](https://telparia.com/fileFormatSamples/image/pgr/)
 image | Print-Technik HIR Image | .hir | [2 sample files](https://telparia.com/fileFormatSamples/image/hir/)
 image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg | [29 sample files](https://telparia.com/fileFormatSamples/image/printfox/)
+image | [PrintMaster Shape](http://fileformats.archiveteam.org/wiki/PrintMaster) | .shp | [7 sample files](https://telparia.com/fileFormatSamples/image/printMasterShape/)
 image | [Prism Paint](http://fileformats.archiveteam.org/wiki/Prism_Paint) | .pnt .tpi | [13 sample files](https://telparia.com/fileFormatSamples/image/prismPaint/)
 image | [Progressive Graphics File](http://fileformats.archiveteam.org/wiki/PGF_(Progressive_Graphics_File)) | .pgf | [10 sample files](https://telparia.com/fileFormatSamples/image/progressiveGraphicsFile/)
 image | Psion Series 3 | .icn | [1 sample file](https://telparia.com/fileFormatSamples/image/psionSeries3/)
@@ -649,7 +652,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Other (24)
+## Other (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | All Identical Bytes |  | 
@@ -658,6 +661,8 @@ other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .cata
 other | Asymetrix ToolBook File | .tbk | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
 other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboCProject/)
 other | Borland Turbo Vision Resource | .res .tvr | [7 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
+other | dBase Index | .mdx | [4 sample files](https://telparia.com/fileFormatSamples/other/dBaseIndex/)
+other | dBase Label Design | .lbl | [2 sample files](https://telparia.com/fileFormatSamples/other/dBaseLabelDesign/)
 other | Empty File |  | 
 other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
 other | IBM PC Overlay | .ovl | [4 sample files](https://telparia.com/fileFormatSamples/other/ibmPCOverlay/)
@@ -668,12 +673,17 @@ other | MS Visual FoxPro App | .app .fxp | [7 sample files](https://telparia.com
 other | MSVC Resource File | .res | [14 sample files](https://telparia.com/fileFormatSamples/other/msvcRes/)
 other | NoteWorthy Composure | .nw | [9 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
 other | ObjectVision Datafile | .ovd | [8 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
+other | OS/2 INI File | .ini | [1 sample file](https://telparia.com/fileFormatSamples/other/os2INI/) - Just usings `strings` seems to do a pretty good at extracting the contents. Additional tools to process these files: https://www.os2site.com/sw/util/ini/index.html
+other | [Print Shop Graphic POG Archive Names File](http://fileformats.archiveteam.org/wiki/PrintMaster) | .pnm | [15 sample files](https://telparia.com/fileFormatSamples/other/pogNames/)
+other | [PrintMaster Shape Names](http://fileformats.archiveteam.org/wiki/PrintMaster) | .sdr | [6 sample files](https://telparia.com/fileFormatSamples/other/printMasterShapeNames/)
+other | QuickBASIC Tokenized Source | .bas | [2 sample files](https://telparia.com/fileFormatSamples/other/quickBasicTokenizedSource/)
 other | Turbo Basic Chain module | .tbc | [7 sample files](https://telparia.com/fileFormatSamples/other/turboBASICChainModule/)
 other | Turbo C Configuration | .tc | 
 other | Turbo C Context File | .dsk | [7 sample files](https://telparia.com/fileFormatSamples/other/turboCContextFile/)
 other | Turbo Pascal Chain module | .chn | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalChainModule/)
 other | Turbo Pascal Desktop File | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/other/turboPascalDesktopFile/)
 other | Turbo Pascal Overlay | .ovr | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalOverlay/)
+other | [Visual Basic Form](http://fileformats.archiveteam.org/wiki/VisualBasic_form) | .frm | [1 sample file](https://telparia.com/fileFormatSamples/other/visualBasicForm/)
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [6 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
 other | Windows Program Group | .grp | [8 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
 

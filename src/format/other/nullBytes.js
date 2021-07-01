@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	name      : "All Null Bytes",
-	magic     : [/^null bytes$/],
+	/// WARNING: Do not match 'null bytes' from trid, it only checks the first X bytes for zeroes. So NOT trustworthy
+	magic     : [/^All Null Bytes$/],
 	untouched : true
 };
 

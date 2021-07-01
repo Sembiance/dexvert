@@ -1,6 +1,6 @@
 # dexvert - Decompress EXtract conVERT
 
-Convert 674 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
+Convert 684 old file formats into modern ones. Powered by NodeJS, Gentoo and a ton of helper programs.
 
 See [SUPPORTED.md](SUPPORTED.md) and [UNSUPPORTED.md](UNSUPPORTED.md) for file formats that are supported or unsupported.
 
@@ -48,6 +48,7 @@ Options:
       deark:dearkJoinFrames                      Treat output files as individual images frames of an animation and join them together as an MP4
       deark:dearkGIFDelay                        Duration of delay between animation frames. Default: 12
       deark:dearkReplaceExt                      An object of keys that are extensions to replace with their values. Only works with a single output file.
+      deark:dearkFile2                           An extra file that can be used by deark module to get the correct palette or image names
       deark:keepAsGIF                            If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4
       fig2dev:fig2devType                        Which image format to convert to ("png" for example). Default: svg
       uniconvertor:uniconvertorExt               Which extension to convert to (".svg", ".png"). Default: .svg

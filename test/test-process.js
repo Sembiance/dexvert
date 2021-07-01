@@ -127,6 +127,9 @@ const SIZE_FLEX_PERCENTAGE =
 	},
 	font :
 	{
+		// Fontforge must put some sort of meta info in there that must change from time to time
+		"adobeType1" : 0.1,
+		
 		// PNG preview (generated from an SVG file) is slightly different when inkscape updates
 		"otf" : 1,
 		"ttf" : 1
@@ -171,13 +174,26 @@ const SIZE_FLEX_PERCENTAGE =
 // So add them here to exempt from failing the test due to this
 const FORMATID_MATCH_IGNORE_FILES =
 {
+	archive :
+	{
+		"pog" : [/other\/pognames\/.+\.pog$/]
+	},
 	image :
 	{
 		// ext conflicts
-		"apStar"         : [/atarigraphics\/inny2\.mic$/],
-		"xlPaint"        : [/trs80star\/girl1\.max$/],
-		"asciiArtEditor" : [/(gfaartist|artistbyeaton)\/.+\.art$/],
-		"artDirector"    : [/pfsfirstpublisher\/.+\.art$/]
+		"asciiArtEditor"   : [/(gfaartist|artistbyeaton)\/.+\.art$/],
+		"apStar"           : [/atarigraphics\/inny2\.mic$/],
+		"artDirector"      : [/pfsfirstpublisher\/.+\.art$/],
+		"xlPaint"          : [/trs80star\/girl1\.max$/],
+
+		// These formats have corresponding index files of filenames that we should ignore
+		"printMasterShape" : [/other\/printmastershapenames\/.+\.shp$/]
+	},
+	other :
+	{
+		// These formats have corresponding index files of filenames that we should ignore
+		"pogNames"              : [/archive\/pog\/.+\.pnm$/],
+		"printMasterShapeNames" : [/image\/printmastershape\/.+\.sdr$/]
 	},
 	text :
 	{

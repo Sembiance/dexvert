@@ -50,8 +50,10 @@ exports.run = function run(programRaw, options={})
 			r.id = XU.clone(state.id);
 		if(options.flags)
 		{
+			const optionsFlags = typeof options.flags==="function" ? options.flags(state, p, r) : options.flags;
+			XU.log`optionsFlags ${optionsFlags}`;
 			const validFlags = Object.keys(program.meta.flags || {});
-			const invalidFlags = Object.keys(options.flags).subtractAll(validFlags);
+			const invalidFlags = Object.keys(optionsFlags).subtractAll(validFlags);
 			if(invalidFlags.length>0)
 			{
 				console.trace();
@@ -59,7 +61,7 @@ exports.run = function run(programRaw, options={})
 				process.exit(0);
 			}
 
-			Object.assign(r.flags, options.flags);
+			Object.assign(r.flags, optionsFlags);
 		}
 		
 		state.ran.unshift(r);

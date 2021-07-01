@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 672 file formats are supported by dexvert.
+The following 674 file formats are supported by dexvert.
 
 
 
@@ -96,12 +96,12 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (25)
+## Document (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Amiga Catalog Translation file | .ct | 
 document | AmigaBASIC Source Code | .bas | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
-document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [12 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
+document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [13 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [7 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf | [10 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
@@ -112,6 +112,7 @@ document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/i
 document | InfoFile Database File | .flr | [7 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [4 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
+document | MicroHelp | .slb | [5 sample files](https://telparia.com/fileFormatSamples/document/microHelp/)
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [7 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
@@ -648,7 +649,7 @@ music | [The Player Module](http://fileformats.archiveteam.org/wiki/The_Player) 
 
 
 
-## Other (23)
+## Other (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | All Identical Bytes |  | 
@@ -659,6 +660,7 @@ other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/
 other | Borland Turbo Vision Resource | .res .tvr | [7 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
 other | Empty File |  | 
 other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
+other | IBM PC Overlay | .ovl | [4 sample files](https://telparia.com/fileFormatSamples/other/ibmPCOverlay/)
 other | InstallShield Script | .ins | [8 sample files](https://telparia.com/fileFormatSamples/other/installShieldScript/)
 other | JAM Message Area Header File | .jhr | [7 sample files](https://telparia.com/fileFormatSamples/other/jamMessageAreaHeaderFile/)
 other | Microsoft Windows Help File Content | .cnt | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)

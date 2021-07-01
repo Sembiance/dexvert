@@ -12,4 +12,4 @@ exports.meta =
 // dl files will start with 0x03, 0x02 or 0x01
 exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, [Buffer.from([0x03]), Buffer.from([0x02]), Buffer.from([0x01])]);
 
-exports.converterPriorty = [{program : "deark", flags : {dearkModule : "dlmaker", dearkJoinFrames : true}}, "xanim"];
+exports.converterPriorty = ["xanim", {program : "deark", flags : {dearkModule : "dlmaker", dearkJoinFrames : true}}];

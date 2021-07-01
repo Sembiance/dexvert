@@ -10,4 +10,4 @@ exports.meta =
 	notes       : "While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see."
 };
 
-exports.converterPriorty = ["abydosconvert"];
+//exports.converterPriorty = ["abydosconvert"];

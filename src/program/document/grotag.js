@@ -31,6 +31,9 @@ exports.post = (state, p, r, cb) =>
 		},
 		function loadCSSAndHTMLFiles(htmlFilePaths)
 		{
+			if(htmlFilePaths.length===0 || !fileUtil.existsSync(cssFilePath))
+				return this.finish();
+				
 			this.data.htmlFilePaths = htmlFilePaths;
 			fs.readFile(cssFilePath, XU.UTF8, this.parallel());
 			htmlFilePaths.parallelForEach((htmlFilePath, subcb) => fs.readFile(htmlFilePath, XU.UTF8, subcb), this.parallel());

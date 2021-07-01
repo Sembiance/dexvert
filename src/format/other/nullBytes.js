@@ -4,7 +4,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	name      : "All Null Bytes",
-	magic     : [/^All Null Bytes$/],
+	magic     : [/^null bytes$/],
 	untouched : true
 };
 

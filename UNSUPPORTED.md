@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 163 file formats are unsupported by dexvert.
+The following 168 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -96,7 +96,7 @@ font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)
 
 
 
-## Image (11)
+## Image (12)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
@@ -106,6 +106,7 @@ image | [Facsimile image FORM](http://fileformats.archiveteam.org/wiki/FAXX) | .
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
 image | KwikDraw Drawing | .kwk | A windows 'object oriented' drawing program. Don't think it was very popular. sandbox/app/KDRAW121.ZIP has the app, works in Win2k, no export ability. Could add a virtual printer driver and then use that to output as PNG.
 image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sample files](https://telparia.com/fileFormatSamples/image/kyssKYG/) - No known converter.
+image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
@@ -127,7 +128,7 @@ music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_St
 
 
 
-## Other (84)
+## Other (88)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -150,6 +151,7 @@ other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileF
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | AutoCAD Protected LISP | .lsp | 
+other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
 other | Borland Delphi - C++ Builder Form | .dfm | 
 other | Borland Delphi Compiled Unit | .dcu | 
@@ -166,6 +168,8 @@ other | Cygnus Editor Default Settings |  |
 other | Cygnus Editor Macros |  | 
 other | dBase Compiled Object Program | .dbo | 
 other | dBase Index File | .ntx | 
+other | dBase Query | .qbe | 
+other | dBase Update | .upd | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | FoxPro Memo File | .fpt | 
 other | Full Tilt Pinball Data | .dat | 
@@ -214,6 +218,7 @@ other | Windows Shortcut | .lnk |
 other | WordPerfect for Windows Button Bar | .wwb | 
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm .wcm | 
+other | WordPerfect Printer Data | .all .prd | 
 
 
 

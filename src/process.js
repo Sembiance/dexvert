@@ -235,7 +235,7 @@ exports.processNext = function processNext(state, p, cb)
 			}
 			else
 			{
-				fs.symlink(extraDestFilePath, extraSrcFilePath, vcb);
+				fs.symlink(extraSrcFilePath, extraDestFilePath, vcb);
 			}
 		}, scb),
 		() => p.util.meta.input,

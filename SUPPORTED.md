@@ -1,12 +1,12 @@
 # Supported File Formats
 
-The following 684 file formats are supported by dexvert.
+The following 685 file formats are supported by dexvert.
 
 
 
 
 
-## Archive (67)
+## Archive (68)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [3 sample files](https://telparia.com/fileFormatSamples/archive/7z/)
@@ -45,7 +45,8 @@ archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Comp
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | 
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc | [10 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dxr .dir | [5 sample files](https://telparia.com/fileFormatSamples/archive/director/)
-archive | [Macromedia Director Protected Cast](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .cxt | [3 sample files](https://telparia.com/fileFormatSamples/archive/directorProtectedCast/)
+archive | [Macromedia Director Cast](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .cst | [6 sample files](https://telparia.com/fileFormatSamples/archive/directorCast/) - Several cast file types are not yet support. Mainly because I haven't encountered them yet. Also 'xtras' are not supported yet. See macromediaDirector.js for more info.
+archive | [Macromedia Director Cast - Protected](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .cxt | [67 sample files](https://telparia.com/fileFormatSamples/archive/directorCastProtected/)
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [3 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/ARJ) | .mbox | [1 sample file](https://telparia.com/fileFormatSamples/archive/mbox/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [2 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)

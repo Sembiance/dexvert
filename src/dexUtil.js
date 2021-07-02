@@ -76,7 +76,9 @@ exports.dexvertAs = function dexvertAs(state, inFilePath, outDirPath, asFormat, 
 	tiptoe(
 		function runDexvert()
 		{
-			const dexArgs = ["--verbose", state.verbose.toString(), "--outputStateToFile", outputJSONFilePath, "--asFormat", asFormat];
+			const dexArgs = ["--verbose", state.verbose.toString(), "--outputStateToFile", outputJSONFilePath];
+			if(asFormat)
+				dexArgs.push("--asFormat", asFormat);
 			dexArgs.push(inFilePath, outDirPath);
 
 			runUtil.run(path.join(__dirname, "..", "bin", "dexvert"), dexArgs, {silent : true, liveOutput : true}, this);

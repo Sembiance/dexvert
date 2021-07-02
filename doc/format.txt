@@ -34,11 +34,11 @@ Set to true if this format isn't safe to be brute forced.
 >>> highConfidence : true
 Normally 'unsupported' matches are very low priority. However sometimes a format might easily match other formats and those programs might not convert them correctly, resulting in gibberish. So if you know a format is a strong match, even though unsupported, set this to true and the confidence level will go up when identified.
 
->>> keepFilename : true
+>>> keepFilename : true || "extras" || "input"
 Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
->>> symlinkUnsafe : true
+>>> symlinkUnsafe : true || "extras" || "input"
 If the file format doesn't play well with symlinks, can set this to true. Probably better to set it in the program though, usually.
 Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
 

@@ -23,6 +23,7 @@ log/
 qemu/win*/*.img
 qemu/win*/data/*.iso
 qemu/win2k/data/app/PageStream5.0.5.8-windows.zip
+qemu/winxp/data/app/DirectorMX2004.exe
 qemu/amiga*/*.img
 qemu/amiga*/data/*.iso
 qemu/amiga*/data/*.img

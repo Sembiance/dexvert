@@ -10,20 +10,62 @@ const autoItFuncs =
 	KillAll : `
 Func KillAll($program)
 	Do
-		$result = ProcessClose($program)
+		Local $result = ProcessClose($program)
 		If $result = 1 Then
 			Sleep(500)
 		EndIf
 	Until $result Not = 1
 EndFunc`,
-	RunWaitWithTimeout : `
-Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
-	$pid = Run($program, $workingdir, $show_flag)
-	$timer = TimerInit()
+	MouseClickWin : `
+Func MouseClickWin($title, $button, $x, $y, $clicks=1)
+	Local $winPos = WinGetPos($title)
+	MsgBox(0, "debug", String($winPos[0]) & "x" & String($winPos[1]) & String($winPos[0]+$x))
+	MouseClick($button, $winPos[0]+$x, $winPos[1]+$y, $clicks)
+EndFunc
+	`,
+	WaitForClipChange : `
+Func WaitForClipChange($max_duration)
+	Local $startValue = ClipGet()
+	Local $timer = TimerInit()
+	Do
+		If Not (ClipGet() == $startValue) Then ExitLoop
+		Sleep(50)
+	Until TimerDiff($timer) > $max_duration
+EndFunc
+`,
+	WaitForControl : `
+Func WaitForControl($title, $text, $controlID, $max_duration, $errorWindowTitle=0, $errowWindowButton=0, $errorWindowTitleEscape=0)
+	Local $controlHandle
+	Local $timer = TimerInit()
+	Do
+		If $errorWindowTitle Then
+			If WinActive($errorWindowTitle, "") Not = 0 Then ControlClick($errorWindowTitle, "", $errowWindowButton)
+		EndIf
+
+		If $errorWindowTitleEscape Then
+			If WinActive($errorWindowTitleEscape, "") Not = 0 Then Send("{ESCAPE}")
+		EndIf
+
+		$controlHandle = ControlGetHandle($title, $text, $controlID)
+		If $controlHandle Then ExitLoop
+		Sleep(50)
+	Until TimerDiff($timer) > $max_duration
+
+	return $controlHandle
+EndFunc
+`,
+	WaitForPID : `
+Func WaitForPID($pid, $max_duration)
+	Local $timer = TimerInit()
 	Do
 		If Not ProcessExists($pid) Then ExitLoop
-		Sleep(100)
+		Sleep(50)
 	Until TimerDiff($timer) > $max_duration
+EndFunc`,
+	RunWaitWithTimeout : `
+Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
+	Local $pid = Run($program, $workingdir, $show_flag)
+	WaitForPID($pid, $max_duration)
 	If ProcessExists($pid) Then
 		ProcessClose($pid)
 	EndIf
@@ -34,7 +76,7 @@ EndFunc`
 
 // AUTOIT DOCS: https://www.autoitscript.com/autoit3/docs/functions.htm
 // Send() Keys: https://www.autoitscript.com/autoit3/docs/functions/Send.htm
-exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths=[], timeout=XU.MINUTE*5})
+exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths=[], timeout=XU.MINUTE*5, dontMaximize, outDirPath})
 {
 	let fullCmd = cmd;
 
@@ -43,7 +85,8 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 		tiptoe(
 			function prepare()
 			{
-				const qemuData = {osid, timeout, outDirPath : state.output.absolute};
+				const qemuData = {osid, timeout, outDirPath : outDirPath || state.output.absolute};
+
 				if(inFilePaths.length>0)
 					qemuData.inFilePaths = inFilePaths.map(inFilePath => (inFilePath.startsWith("/") ? inFilePath : path.resolve(state.cwd, inFilePath)));
 
@@ -87,9 +130,11 @@ exports.run = function run({cmd, osid="win2k", args=[], cwd, script, inFilePaths
 					scriptLines.push(autoItFuncs.KillAll);
 
 					if(!script && timeout)
-						scriptLines.push(autoItFuncs.RunWaitWithTimeout);
+						scriptLines.push(autoItFuncs.WaitForPID, autoItFuncs.RunWaitWithTimeout);
+					else
+						scriptLines.push(...Object.entries(autoItFuncs).map(([funcName, funcText]) => (script.includes(funcName) ? funcText : null)).filterEmpty());
 
-					scriptLines.push(`Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}', @SW_MAXIMIZE${script || !timeout ? "" : `, ${timeout}`})`);
+					scriptLines.push(`Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
 					if(script)
 						scriptLines.push(script);
 					

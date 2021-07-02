@@ -36,7 +36,10 @@ const SHA1_IGNORE_FILES =
 		director : [/.png$/],
 
 		// unADF always makes this a little different each time, not sure why. Once I add GoADF amiga support, I can remove this line
-		adfOFS : [/iff saxophone.instr$/]
+		adfOFS : [/iff saxophone.instr$/],
+
+		// dirOpener produces slightly different dir files each time, not sure why
+		directorCastProtected : [/.cst$/]
 	},
 	document :
 	{

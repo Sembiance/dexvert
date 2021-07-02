@@ -6,6 +6,7 @@ const XU = require("@sembiance/xu"),
 	C = require("./C.js"),
 	dexUtil = require("./dexUtil.js"),
 	fileUtil = require("@sembiance/xutil").file,
+	runUtil = require("@sembiance/xutil").run,
 	printUtil = require("@sembiance/xutil").print;
 
 // Returns true if we should continue checking the next identification
@@ -27,7 +28,7 @@ function checkShouldContinue(state)
 		if(state.verbose>=1)
 			XU.log`\nNo more formats to check.`;
 
-		if(!state.unsupported)
+		if(!state.unsupported && !state.asFormat)
 			setFallthroughID(state);
 
 		return false;
@@ -100,7 +101,8 @@ exports.checkIdentification = function checkIdentification(state, {DexvertError,
 	// If no ids and not brute forcing, we are done
 	if(!state.brute && !state.brutePrograms && state.ids.length===0)
 	{
-		setFallthroughID(state);
+		if(!state.asFormat)
+			setFallthroughID(state);
 		return setImmediate(cb);
 	}
 
@@ -212,17 +214,29 @@ exports.processNext = function processNext(state, p, cb)
 			else
 				ext = (state.id.fileSizeMatchExt || subState.input.ext || "");
 
-			return p.util.file.safeInput(p.format.meta.keepFilename ? state.input.name : "in", ext.toLowerCase(), !!p.format.meta.symlinkUnsafe);
+			return p.util.file.safeInput([true, "input"].includes(p.format.meta.keepFilename) ? state.input.name : "in", ext.toLowerCase(), [true, "input"].includes(p.format.meta.symlinkUnsafe));
 		},
 		() => p.util.file.safeOutput,
 		() => (ss, sp, scb) => ["filesRequired", "filesOptional"].flatMap(t => ((p.format.meta[t] || (() => []))(ss, ss.input.otherFiles, ss.input.otherDirs) || [])).unique().parallelForEach((v, vcb) =>
 		{
 			if(!ss.extraFilenames)
 				ss.extraFilenames = [];
-			const extraFilename = (p.format.meta.keepFilename ? path.basename(v, path.extname(v)) : "in") + path.extname(v).toLowerCase();
+			const extraFilename = ([true, "extras"].includes(p.format.meta.keepFilename) ? path.basename(v, path.extname(v)) : "in") + path.extname(v).toLowerCase();
 			ss.extraFilenames.push(extraFilename);
 
-			fs.symlink(path.join(ss.input.dirPath, v), path.join(ss.cwd, extraFilename), vcb);
+			const extraDestFilePath = path.join(ss.cwd, extraFilename);
+			const extraSrcFilePath = path.join(ss.input.dirPath, v);
+			if([true, "extras"].includes(p.format.meta.symlinkUnsafe))
+			{
+				if(fs.statSync(extraSrcFilePath).isDirectory())
+					fileUtil.copyDir(extraSrcFilePath, extraDestFilePath, vcb);
+				else
+					fs.copyFile(extraSrcFilePath, extraDestFilePath, vcb);
+			}
+			else
+			{
+				fs.symlink(extraDestFilePath, extraSrcFilePath, vcb);
+			}
 		}, scb),
 		() => p.util.meta.input,
 		...(p.format.preSteps || []),

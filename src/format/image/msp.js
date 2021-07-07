@@ -9,4 +9,4 @@ exports.meta =
 	magic    : ["Microsoft Paint bitmap", /^M?icrosoft Paint image data/]
 };
 
-exports.converterPriorty = ["recoil2png"];
+exports.converterPriorty = ["recoil2png", "deark", "nconvert"];

@@ -4,7 +4,8 @@ const XU = require("@sembiance/xu"),
 
 exports.meta =
 {
-	website : "https://fastcad2.com/"
+	website : "https://fastcad2.com/",
+	unsafe  : true
 };
 
 exports.qemu = () => "C:\\FCAD32D\\FCW32.EXE";

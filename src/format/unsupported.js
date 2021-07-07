@@ -26,6 +26,7 @@ exports.formats =
 		borlandGraphicsFont   : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
 		bradfordFont          : {name : "Bradford Font", ext : [".bf2"], magic : ["Bradford Font"]},
 		calamusFont           : {name : "Calamus Font", ext : [".cfn"], magic : ["Calamus Font Data"]},
+		corelWiffenFont       : {name : "Corel Wiffen Font", ext : [".wfn"], magic : ["Corel Font/Symbol"]},
 		envisionPublisherFont : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
 		laserJetSoftFont      : {name : "LaserJet Soft Font", ext : [".sfl", ".sfp", ".sft"], magic : ["LaserJet Soft Font"]},
 		linkWayFont           : {name : "LinkWay Font", ext : [".fmf"], magic : ["LinkWay Font"]},

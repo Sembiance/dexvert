@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 182 file formats are unsupported by dexvert.
+The following 183 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -80,7 +80,7 @@ executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSam
 
 
 
-## Font (12)
+## Font (13)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | Avery Font | .ff1 | 
@@ -88,6 +88,7 @@ font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFor
 font | Borland Graphics Font | .chr .bgi | 
 font | Bradford Font | .bf2 | 
 font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
+font | Corel Wiffen Font | .wfn | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
@@ -172,7 +173,7 @@ other | Creative Signal Processor microcode | .csp |
 other | Cygnus Editor Default Settings |  | 
 other | Cygnus Editor Macros |  | 
 other | dBase Compiled Object Program | .dbo | 
-other | dBase Index File | .ntx | [4 sample files](https://telparia.com/fileFormatSamples/other/dBaseIndex/)
+other | dBase Index File | .ntx | 
 other | dBase Query | .qbe | 
 other | dBase Update | .upd | 
 other | Electronic Arts LIB container | .lib | 

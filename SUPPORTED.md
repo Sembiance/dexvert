@@ -1,6 +1,6 @@
 # Supported File Formats
 
-The following 690 file formats are supported by dexvert.
+The following 691 file formats are supported by dexvert.
 
 
 
@@ -98,7 +98,7 @@ audio | [Waveform Audio File Format](http://fileformats.archiveteam.org/wiki/WAV
 
 
 
-## Document (31)
+## Document (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Amiga Catalog Translation file | .ct | 
@@ -132,6 +132,7 @@ document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .h
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
 document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc | [7 sample files](https://telparia.com/fileFormatSamples/document/wordDoc/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [12 sample files](https://telparia.com/fileFormatSamples/document/wp/)
+document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [3 sample files](https://telparia.com/fileFormatSamples/document/wordStar/)
 
 
 
@@ -194,7 +195,7 @@ image | [AMOS Sprites Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [4 sample files](https://telparia.com/fileFormatSamples/image/amstradMode5/)
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [7 sample files](https://telparia.com/fileFormatSamples/image/aniST/)
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [4 sample files](https://telparia.com/fileFormatSamples/image/a4r/)
-image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice | [34 sample files](https://telparia.com/fileFormatSamples/image/ans/)
+image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans | [34 sample files](https://telparia.com/fileFormatSamples/image/ans/)
 image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [9 sample files](https://telparia.com/fileFormatSamples/image/aolART/)
 image | Apple II High Res | .hgr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2HighRes/)
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/)
@@ -430,7 +431,7 @@ image | [McPainter](http://fileformats.archiveteam.org/wiki/McPainter) | .mcp | 
 image | [MegaPaint BLD](http://fileformats.archiveteam.org/wiki/MegaPaint_BLD) | .bld | [9 sample files](https://telparia.com/fileFormatSamples/image/bld/)
 image | Micro Illustrator | .mic .mil | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/)
 image | [Micro Illustrator](http://fileformats.archiveteam.org/wiki/Micro_Illustrator) | .mil | [2 sample files](https://telparia.com/fileFormatSamples/image/mil/)
-image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | [8 sample files](https://telparia.com/fileFormatSamples/image/msp/)
+image | [Microsoft Paint](http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)) | .msp | [9 sample files](https://telparia.com/fileFormatSamples/image/msp/)
 image | [Microsoft Windows Animated Cursor](http://fileformats.archiveteam.org/wiki/ANI) | .ani | [24 sample files](https://telparia.com/fileFormatSamples/image/ani/)
 image | [Microsoft Windows Cursor](http://fileformats.archiveteam.org/wiki/CUR) | .cur | [13 sample files](https://telparia.com/fileFormatSamples/image/cur/)
 image | [Microsoft Windows Enhanced Metafile](http://fileformats.archiveteam.org/wiki/EMF) | .emf | [1 sample file](https://telparia.com/fileFormatSamples/image/emf/)
@@ -667,7 +668,7 @@ other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .cata
 other | Asymetrix ToolBook File | .tbk | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
 other | Borland Turbo C Project | .prj | [10 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboCProject/)
 other | Borland Turbo Vision Resource | .res .tvr | [7 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)
-other | dBase Index | .mdx | [4 sample files](https://telparia.com/fileFormatSamples/other/dBaseIndex/)
+other | dBase Index | .mdx | 
 other | dBase Label Design | .lbl | [2 sample files](https://telparia.com/fileFormatSamples/other/dBaseLabelDesign/)
 other | Empty File |  | 
 other | GFA-BASIC Windows | .gfw | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)

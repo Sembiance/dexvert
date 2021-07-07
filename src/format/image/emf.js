@@ -10,4 +10,4 @@ exports.meta =
 	magic    : ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile"]
 };
 
-exports.converterPriorty = ["abydosconvert"];
+exports.converterPriorty = ["abydosconvert", "deark", "convert", "irfanView"];

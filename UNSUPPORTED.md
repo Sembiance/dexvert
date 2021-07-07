@@ -1,6 +1,6 @@
 # Unsupported File Formats
 
-The following 174 file formats are unsupported by dexvert.
+The following 182 file formats are unsupported by dexvert.
 
 They are still **identified** by dexvert, just not processed in any way.
 
@@ -80,23 +80,25 @@ executable | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSam
 
 
 
-## Font (10)
+## Font (12)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | Avery Font | .ff1 | 
 font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
 font | Borland Graphics Font | .chr .bgi | 
+font | Bradford Font | .bf2 | 
 font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
+font | MacOS Font | .fnt | 
 font | PrintPartner Font | .font | 
 font | TheDraw Font | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 
 
 
-## Image (13)
+## Image (14)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported, due to no extension and no magic, it's impossible to accurately detect. Abydos will convert invalid files and and produce a garbled image, thus not able to just try a conversion and see.
@@ -109,6 +111,7 @@ image | [Kyss KYG](http://fileformats.archiveteam.org/wiki/KYG) | .kyg | [25 sam
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | [MLDF](http://fileformats.archiveteam.org/wiki/MLDF) | .mld | [32 sample files](https://telparia.com/fileFormatSamples/image/mldf/) - It's probably an image format. IFF format FORM with MLDF BMHD. Could not locate any info online about it and I didn't investigate further.
 image | NeoPaint Pattern | .pat | While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Just can't reliably detected this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
@@ -129,7 +132,7 @@ music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_St
 
 
 
-## Other (93)
+## Other (98)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | Adobe Type Manager Font Information | .inf | 
@@ -152,6 +155,7 @@ other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileF
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | AutoCAD Protected LISP | .lsp | 
+other | Babble! Data | .bab | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
 other | Borland Delphi - C++ Builder Form | .dfm | 
@@ -189,8 +193,10 @@ other | Java Class File | .class | [4 sample files](https://telparia.com/fileFor
 other | Legend of Kyrandia EMC File | .emc | 
 other | LIFE 3000 Status | .lif | 
 other | Lotus 1-2-3 Formatting Data | .fm3 | 
+other | Lotus 1-2-3 SQZ! Compressed | wq! | 
 other | MDIFF Patch File | .mdf | 
 other | Micro Lathe Object | .lat | 
+other | Microsoft Printer Definition | .prd | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Program Information File | .pif | 
 other | Miles Sound System Driver | .adv | 
@@ -215,6 +221,7 @@ other | SimCity City | .cty |
 other | SoftDisk Library | .shl | 
 other | Startrekker Module Info | .nt | 
 other | StormWizard Resource | .wizard .wizard-all | 
+other | Superbase Form | .sbv | 
 other | Telix Compiled Script | .slc | 
 other | Turbo Pascal Help | .hlp | 
 other | Visual Basic Extension | .vbx | 
@@ -225,6 +232,7 @@ other | WordPerfect for Windows Button Bar | .wwb |
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm .wcm | 
 other | WordPerfect Printer Data | .all .prd | 
+other | ZZT File | .zzt | 
 
 
 

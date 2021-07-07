@@ -32,6 +32,7 @@ exports.qemuData = (state, p, r) =>
 			Func HandleText($itemNum, $filename)
 				Send("{Enter}")
 				Local $textControl = WaitForControl("[TITLE:Director MX 2004]", "", "[CLASS:ASISubWndClass; TEXT:Untitled: Text]", ${XU.SECOND*2})
+				Sleep(100)
 				Send("^a")
 				Send("^c")
 				WaitForClipChange(${XU.SECOND})
@@ -96,6 +97,7 @@ exports.qemuData = (state, p, r) =>
 
 			Send("!fx")
 
+			ProcessClose("Director.exe")
 			WaitForPID(ProcessExists("Director.exe"), ${XU.MINUTE*10})`
 	};
 

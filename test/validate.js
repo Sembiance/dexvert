@@ -90,7 +90,7 @@ function validateFormat(format)
 
 		magic          : [arrayOf(either([[isNonEmptyString], [isRegex]])), hasLengthBetween(1, Infinity)],
 		forbiddenMagic : [arrayOf(either([[isNonEmptyString], [isRegex]])), hasLengthBetween(1, Infinity)],
-		weakMagic      : [isBoolean],
+		weakMagic      : [either([[arrayOf(either([[isNonEmptyString], [isRegex]]))], [isBoolean]])],
 		trustMagic     : [isBoolean],
 
 		fileSize            : fileSizeValue,

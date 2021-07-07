@@ -3,7 +3,7 @@ const XU = require("@sembiance/xu");
 
 exports.meta =
 {
-	website : "http://www.cpcwiki.eu/forum/applications/cpcxfs/",
+	website       : "http://www.cpcwiki.eu/forum/applications/cpcxfs/",
 	gentooPackage : "app-arch/cpcxfs",
 	gentooOverlay : "dexvert"
 };

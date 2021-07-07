@@ -98,7 +98,7 @@ If it's a regex, the magic must match the regex exactly.
 >>> forbiddenMagic : ["Not Magic", /^Not This$/]
 An array of magics that the file must NOT match.
 
->>> weakMagic : true
+>>> weakMagic : true || ["Specific Magic", /^That is weak$/]
 If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 
 >>> trustMagic : true

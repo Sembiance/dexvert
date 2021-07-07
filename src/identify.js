@@ -175,8 +175,10 @@ exports.identify = function identify(state, {C, formats}, cb)
 			if(matchIsUntrustworthy)
 				baseMatch.untrustworthy = true;
 
+			const hasWeakMagic = meta.weakMagic===true || (Array.isArray(meta.weakMagic) && results.some(result => meta.weakMagic.some(m => dexUtil.flexMatch(result.magic, m))));
+
 			// Non-weak magic matches start at confidence 100.
-			if(magicMatch && (!meta.weakMagic || extMatch || filenameMatch || fileSizeMatch))
+			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileSizeMatch))
 			{
 				// Original confidence is a sub-sorter used before assigning proper confidence
 				let originalConfidence = 0;

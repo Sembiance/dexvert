@@ -1,5 +1,6 @@
 "use strict";
-const XU = require("@sembiance/xu");
+const XU = require("@sembiance/xu"),
+	C = require("../../C.js");
 
 exports.meta =
 {
@@ -8,7 +9,8 @@ exports.meta =
 	ext            : [".ans", ".drk", ".ice"],
 	forbidExtMatch : true,
 	mimeType       : "text/x-ansi",
-	magic          : ["ANSI escape sequence text", "ISO-8859 text, with CRLF, CR, LF line terminators, with escape sequences"],
+	magic          : ["ANSI escape sequence text", "ISO-8859 text, with CRLF, CR, LF line terminators, with escape sequences", ...C.TEXT_MAGIC, /^data$/],
+	weakMagic      : [...C.TEXT_MAGIC, /^data$/],
 	unsafe         : true
 };
 

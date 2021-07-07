@@ -10,4 +10,4 @@ exports.meta =
 	unsafe  : true
 };
 
-exports.converterPriorty = [{program : "soffice", flags : {sofficeType : "csv"}}];
+exports.converterPriorty = [{program : "soffice", flags : {sofficeType : "csv"}}, "strings"];

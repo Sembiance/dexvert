@@ -24,10 +24,12 @@ exports.formats =
 		averyFont             : {name : "Avery Font", ext : [".ff1"], magic : ["Avery Font"]},
 		bannerManiaFont       : {name : "Banner Mania Font", ext : [".fnt"], magic : ["Bannermania font"]},
 		borlandGraphicsFont   : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
+		bradfordFont          : {name : "Bradford Font", ext : [".bf2"], magic : ["Bradford Font"]},
 		calamusFont           : {name : "Calamus Font", ext : [".cfn"], magic : ["Calamus Font Data"]},
 		envisionPublisherFont : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
 		laserJetSoftFont      : {name : "LaserJet Soft Font", ext : [".sfl", ".sfp", ".sft"], magic : ["LaserJet Soft Font"]},
 		linkWayFont           : {name : "LinkWay Font", ext : [".fmf"], magic : ["LinkWay Font"]},
+		macOSFont             : {name : "MacOS Font", ext : [".fnt"], magic : ["Mac OSX datafork font, 'FONT'"]},
 		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
 		theDrawFont           : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"}
 	},
@@ -57,6 +59,7 @@ exports.formats =
 		asciiFontMetrics             : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric"]},
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
 		autoCADProtectedLISP		 : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
+		babbleData                   : {name : "Babble! Data", ext : [".bab"], magic : ["Babble! text data"]},
 		blockBreakerPattern          : {name : "Block Breaker Pattern", ext : [".blc"], magic : ["Block Breaker pattern"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
 		borlandDelphiBuilderForm     : {name : "Borland Delphi - C++ Builder Form", ext : [".dfm"], magic : ["Borland Delphi - C++ Builder Form"]},
@@ -95,10 +98,12 @@ exports.formats =
 		legendOfKyrandiaEMCFile		 : {name : "Legend of Kyrandia EMC File", ext : [".emc"], magic : ["Kyra Engine game data"]},
 		life3000Status               : {name : "LIFE 3000 Status", ext : [".lif"], magic : ["LIFE 3000 status"]},
 		lotus123FormattingData       : {name : "Lotus 1-2-3 Formatting Data", ext : [".fm3"], magic : ["Formatting Data for Lotus 1-2-3 worksheet"]},
+		lotus123SQZCompressed        : {name : "Lotus 1-2-3 SQZ! Compressed", ext : ["wq!"], magic : ["Lotus 123 SQZ! compressed Worksheet"]},
 		neoPaintPallette             : {name : "NeoPaint Palette", ext : [".pal"], magic : ["NeoPaint Palette"]},
 		neoPaintPrinterDriver        : {name : "NeoPaint Printer Driver", ext : [".prd"], magic : ["NeoPaint Printer Driver"]},
 		mdiffPatchFile               : {name : "MDIFF Patch File", ext : [".mdf"], magic : ["MDIFF patch"]},
 		microLatheObject             : {name : "Micro Lathe Object", ext : [".lat"], magic : ["MicroLathe object"]},
+		microsoftPrinterDefinition   : {name : "Microsoft Printer Definition", ext : [".prd"], magic : ["Microsoft Printer Definition"]},
 		milesSoundSystemDriver       : {name : "Miles Sound System Driver", ext : [".adv"], magic : ["Miles Sound System real mode drivers"]},
 		moonbaseGameData             : {name : "Moonbase Game Data", ext : [".mb"], magic : ["Moonbase game data"]},
 		netwareLoadableModule        : {name : "Netware Loadable Module", ext : [".nlm"], magic : [/^Net[Ww]are Loadable Module/]},
@@ -119,6 +124,7 @@ exports.formats =
 		softDiskLibrary              : {name : "SoftDisk Library", ext : [".shl"], magic : ["Softdisk Help Library format"]},
 		starTrekkerModuleInfo        : {name : "Startrekker Module Info", ext : [".nt"], magic : [/^Startrekker .*module info$/]},
 		stormWizardResource          : {name : "StormWizard Resource", ext : [".wizard", ".wizard-all"], magic : ["IFF data, WZRD StormWIZARD resource", "StormWIZARD resource"]},
+		superbaseForm                : {name : "Superbase Form", ext : [".sbv"], magic : ["Superbase form"]},
 		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
 		turboPascalHelp              : {name : "Turbo Pascal Help", ext : [".hlp"], magic : ["Turbo Pascal Help"]},
 		visualBasicExtension         : {name : "Visual Basic Extension", ext : [".vbx"], magic : ["Visual Basic eXtension/Custom Control"]},
@@ -130,7 +136,8 @@ exports.formats =
 		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
 		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/]},
-		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]}
+		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
+		zztFile                      : {name : "ZZT File", ext : [".zzt"], magic : ["ZZT Game Creation System data format"]}
 	}
 };
 

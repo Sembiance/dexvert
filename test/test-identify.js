@@ -7,18 +7,22 @@ const XU = require("@sembiance/xu"),
 	runUtil = require("@sembiance/xutil").run,
 	fileUtil = require("@sembiance/xutil").file,
 	{validate} = require("./validate.js"),
-	{Command} = require("commander"),
+	cmdUtil = require("@sembiance/xutil").cmd,
 	fs = require("fs"),
 	os = require("os"),
 	tiptoe = require("tiptoe");
 
-const argv = new Command().description("Will test all sample files to ensure dexvert.identify() works correctly.").
-	option("--format [format]", " Can pass a specific format to limit testing to that format, example: archive/zip").
-	option("--extension [ext]", "Only test files that belong to formats that have the given extension").
-	option("--file [subFilePath]", "Only identify the given sample subFilePath").
-	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
-	option("--record", "Take the results of the identifications and save them as the future expected results").
-	parse(process.argv);
+const argv = cmdUtil.cmdInit({
+	version : "1.0.0",
+	desc    : "Will test all sample files to ensure dexvert.identify() works correctly.",
+	opts    :
+	{
+		format    : {desc : "Can pass a specific format to limit testing to that format, example: archive/zip", hasValue : true},
+		extension : {desc : "Only test files that belong to formats that have the given extension", hasValue : true},
+		file      : {desc : "Only identify the given sample subFilePath", hasValue : true},
+		verbose   : {desc : "Show additional info when processing. Levels 1 to 6 where 6 is most verbose", defaultValue : 0},
+		record    : {desc : "Take the results of the identifications and save them as the future expected results"}
+	}});
 
 const testDataFilePath = path.join(testUtil.DATA_DIR_PATH, "identify.json");
 let testData = null;

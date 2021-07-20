@@ -89,6 +89,10 @@ When processing, the extension used is this priority:
 4. The first extension in meta.ext array
 
 
+>>> weakExt : true || [".drk"]
+Either all extensions (if set to true) or specified extensions are weak and the file should not match if the magic is also weak.
+
+
 >>> ******** Magic
 >>> magic : ["Some Magic", /^More Magic$/]
 An array of magics to test against.

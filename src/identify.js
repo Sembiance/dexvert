@@ -176,10 +176,11 @@ exports.identify = function identify(state, {C, formats}, cb)
 				baseMatch.untrustworthy = true;
 
 			const trustedMagic = (meta.magic || []).filter(m => !(Array.isArray(meta.weakMagic) ? meta.weakMagic : []).some(wm => m.toString()===wm.toString()));
+			const hasWeakExt = meta.weakExt===true || (Array.isArray(meta.weakExt) && meta.weakExt.some(ext => state.input.base.toLowerCase().endsWith(ext)));
 			const hasWeakMagic = meta.weakMagic===true || (Array.isArray(meta.weakMagic) && results.some(r => meta.weakMagic.some(m => dexUtil.flexMatch(r.magic, m))) && !results.some(r => trustedMagic.some(m => dexUtil.flexMatch(r.magic, m))));
 
 			// Non-weak magic matches start at confidence 100.
-			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileSizeMatch))
+			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				// Original confidence is a sub-sorter used before assigning proper confidence
 				let originalConfidence = 0;
@@ -193,7 +194,7 @@ exports.identify = function identify(state, {C, formats}, cb)
 			}
 
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
-			if(extMatch && (!meta.forbidExtMatch || (Array.isArray(meta.forbidExtMatch) && !meta.forbidExtMatch.some(ext => state.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch))
+			if(extMatch && (!meta.forbidExtMatch || (Array.isArray(meta.forbidExtMatch) && !meta.forbidExtMatch.some(ext => state.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch};
 				if(fileSizeMatch)

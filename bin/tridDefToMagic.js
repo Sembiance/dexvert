@@ -4,19 +4,26 @@ const XU = require("@sembiance/xu"),
 	fs = require("fs"),
 	util = require("util"),
 	xmlJS = require("xml-js"),
-	{Command} = require("commander"),
+	cmdUtil = require("@sembiance/xutil").cmd,
 	tiptoe = require("tiptoe");
 
-const argv = new Command().description("Will convert a trid def XML file to a magic output").
-	option("--magic <magicString>", "Specify which 'Magic String' you want file to report it as").
-	option("--autoAdd", "Automatically add to file_magic/dexvert-magic").
-	arguments("<inputTrid.xml>").
-	parse(process.argv);
+const argv = cmdUtil.cmdInit({
+	version : "1.0.0",
+	desc    : "Will convert a trid def XML file to a magic output",
+	opts    :
+	{
+		magic   : {desc : "Specify which 'Magic String' you want file to report it as", hasValue : true},
+		autoAdd : {desc : "Automatically add to file_magic/dexvert-magic"}
+	},
+	args :
+	[
+		{argid : "inputTridXML", desc : "", required : true}
+	]});
 
 tiptoe(
 	function loadXMLFile()
 	{
-		fs.readFile(argv.args[0], XU.UTF8, this);
+		fs.readFile(argv.inputTridXML, XU.UTF8, this);
 	},
 	function processXMLFile(xmlFileRaw)
 	{

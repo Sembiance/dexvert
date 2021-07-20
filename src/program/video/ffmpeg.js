@@ -27,14 +27,23 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(stat
 	if(r.flags.ffmpegFPS)
 		ffmpegArgs.push("-r", r.flags.ffmpegFPS.toString());
 
-	if(r.flags.ffmpegExt===".png")
-		ffmpegArgs.push("-i", inPath, "-frames:v", "1", outPath);
-	else if(r.flags.ffmpegExt===".mp3")
-		ffmpegArgs.push("-i", inPath, "-c:a", "libmp3lame", "-qscale:a", "0", outPath);
-	else if(r.flags.ffmpegExt===".flac")
-		ffmpegArgs.push("-i", inPath, "-c:a", "flac", "-compression_level", "12", outPath);
-	else
-		ffmpegArgs.push("-i", inPath, "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", outPath);
+	switch (r.flags.ffmpegExt)
+	{
+		case ".png":
+			ffmpegArgs.push("-i", inPath, "-frames:v", "1", outPath);
+			break;
+
+		case ".mp3":
+			ffmpegArgs.push("-i", inPath, "-c:a", "libmp3lame", "-qscale:a", "0", outPath);
+			break;
+
+		case ".flac":
+			ffmpegArgs.push("-i", inPath, "-c:a", "flac", "-compression_level", "12", outPath);
+			break;
+
+		default:
+			ffmpegArgs.push("-i", inPath, "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", outPath);
+	}
 
 	// OK. So the `-pix_fmt yuv420p` is REQUIRED for iOS devices to actually play these videos.
 	// This then requires that the video WxH be divisible by 2, thus the 'pad' video filter

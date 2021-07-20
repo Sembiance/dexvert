@@ -36,8 +36,8 @@ function clean_up
 
 trap clean_up SIGINT
 
-# It will take some time for those servers to get going, so just sleep for 10 seconds to start
-sleep 30
+# It will take some time for those servers to get going, so just sleep for a bit before outputting messages
+sleep 40
 
 for (( ; ; ))
 do

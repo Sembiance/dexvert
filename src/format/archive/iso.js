@@ -5,7 +5,7 @@ const XU = require("@sembiance/xu"),
 	dexUtil = require("../../dexUtil.js"),
 	C = require("../../C.js");
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem"];
 
 exports.meta =
 {

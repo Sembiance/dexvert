@@ -8,7 +8,7 @@ rm -rf "$TPATH"
 echo "Creating tensor dir..."
 mkdir -p "$TPATH"/garbage "$TPATH"/__pycache__ "$TPATH"/tmp
 
-echo "Changind dir and copying over tensor files..."
+echo "Changing dir and copying over tensor files..."
 cd /mnt/compendium/DevLab/dexvert/tensor || exit
 cp tensorServer.sh ./*.py "$TPATH"/
 cp -rv garbage/model "$TPATH"/garbage/

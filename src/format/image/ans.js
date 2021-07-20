@@ -6,7 +6,8 @@ exports.meta =
 {
 	name           : "ANSI Art File",
 	website        : "http://fileformats.archiveteam.org/wiki/ANSI_Art",
-	ext            : [".ans"],
+	ext            : [".ans", ".drk", ".ice"],
+	weakExt        : [".drk", ".ice"],	// .ANS was widely accepted as ANSI, but .drk and .ice less so
 	forbidExtMatch : true,
 	mimeType       : "text/x-ansi",
 	magic          : ["ANSI escape sequence text", ...C.TEXT_MAGIC, /^data$/],

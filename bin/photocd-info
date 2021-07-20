@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 "use strict";
-
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	tiptoe = require("tiptoe"),
-	{Command} = require("commander"),
+	cmdUtil = require("@sembiance/xutil").cmd,
 	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs"),
 	runUtil = require("@sembiance/xutil").run;
 
-const argv = new Command().description("Checks <inputFilePath> and determines if it is a photo-cd or not").
-	arguments("<inputFilePath>").
-	parse(process.argv);
+const argv = cmdUtil.cmdInit({
+	version : "1.0.0",
+	desc    : "Checks <inputFilePath> and determines if it is a photo-cd or not",
+	args :
+	[
+		{argid : "inputFilePath", desc : "FIle path to identify", required : true}
+	]});
 
-if(argv.args.length<1)
-	argv.help();
-
-const inputFilePath = path.resolve(argv.args[0]);
+const inputFilePath = path.resolve(argv.inputFilePath);
 if(!fileUtil.existsSync(inputFilePath))
 	return process.exit(console.error(`Input file ${inputFilePath} does not exist.`));
 

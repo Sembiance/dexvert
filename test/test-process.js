@@ -11,20 +11,24 @@ const XU = require("@sembiance/xu"),
 	runUtil = require("@sembiance/xutil").run,
 	{validate} = require("./validate.js"),
 	dexUtil = require("../src/dexUtil.js"),
-	{Command} = require("commander"),
+	cmdUtil = require("@sembiance/xutil").cmd,
 	fs = require("fs"),
 	os = require("os"),
 	tiptoe = require("tiptoe");
 
-const argv = new Command().description("Will test all sample files to ensure dexvert.process() works correctly.").
-	option("--format [format]", "Can pass a specific format to limit testing to that format, example: archive/zip").
-	option("--extension [ext]", "Only test files that belong to formats that have the given extension").
-	option("--file [subFilePath]", "Only identify the given sample subFilePath").
-	option("--verbose [level]", "Show additional info when processing. Levels 1 to 6 where 6 is most verbose").
-	option("--full", "Run ALL tests, even long running ones").
-	option("--keep", "Keep temporary directories around after converting").
-	option("--record", "Take the results of the identifications and save them as the future expected results").
-	parse(process.argv);
+const argv = cmdUtil.cmdInit({
+	version : "1.0.0",
+	desc    : "Will test all sample files to ensure dexvert.process() works correctly.",
+	opts    :
+	{
+		format    : {desc : "Can pass a specific format to limit testing to that format, example: archive/zip", hasValue : true},
+		extension : {desc : "Only test files that belong to formats that have the given extension", hasValue : true},
+		file      : {desc : "Only identify the given sample subFilePath", hasValue : true},
+		verbose   : {desc : "Show additional info when processing. Levels 1 to 6 where 6 is most verbose", defaultValue : 0},
+		record    : {desc : "Take the results of the identifications and save them as the future expected results"},
+		full    : {desc : "Run ALL tests, even long running ones"},
+		keep    : {desc : "Keep temporary directories around after converting"}
+	}});
 
 // Can specificy family : { formatid : ["subPath/file.png", /.txt$/]} to ignore the file subpath when doing SHA1 checking
 // Filenames are the OUTPUT filenames and are all converted to LOWERCASE first

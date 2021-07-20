@@ -6,7 +6,6 @@ const XU = require("@sembiance/xu"),
 	C = require("./C.js"),
 	dexUtil = require("./dexUtil.js"),
 	fileUtil = require("@sembiance/xutil").file,
-	runUtil = require("@sembiance/xutil").run,
 	printUtil = require("@sembiance/xutil").print;
 
 // Returns true if we should continue checking the next identification

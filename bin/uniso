@@ -1,29 +1,34 @@
 #!/usr/bin/env node
 "use strict";
-
 const XU = require("@sembiance/xu"),
 	path = require("path"),
 	tiptoe = require("tiptoe"),
-	{Command} = require("commander"),
+	cmdUtil = require("@sembiance/xutil").cmd,
 	fileUtil = require("@sembiance/xutil").file,
 	fs = require("fs"),
 	runUtil = require("@sembiance/xutil").run;
 
-const argv = new Command().description("Processes <input.iso> as an ISO and extracting into <outputDirPath>\n[subType] is optional and currently allows: hfs").
-	option("--offset [offset]", "If set, mount at the given offset").
-	arguments("<input.iso> <outputDirPath> [subType]").
-	parse(process.argv);
+const argv = cmdUtil.cmdInit({
+	version : "1.0.0",
+	desc    : "Processes <input.iso> as an ISO and extracting into <outputDirPath>",
+	opts    :
+	{
+		offset : {desc : "If set, mount at the given offset", hasValue : true}
+	},
+	args :
+	[
+		{argid : "inputFilePath", desc : "ISO file path to extract", required : true},
+		{argid : "outputDirPath", desc : "Output directory to extract to", required : true},
+		{argid : "subType", desc : "Sub type to convert as. Currently supported: hfs"}
+	]});
 
-if(argv.args.length<2)
-	argv.help();
-
-const inputFilePath = path.resolve(argv.args[0]);
+const inputFilePath = path.resolve(argv.inputFilePath);
 if(!fileUtil.existsSync(inputFilePath))
 	return process.exit(console.error(`Input file ${inputFilePath} does not exist.`));
 
-const OUT_DIR_PATH = path.resolve(argv.args[1]);
+const OUT_DIR_PATH = path.resolve(argv.outputDirPath);
 
-const SUB_TYPE = argv.args[2];
+const SUB_TYPE = argv.subType;
 
 const WIP_DIR_PATH = fileUtil.generateTempFilePath(undefined, "-uniso");
 const MOUNT_DIR_PATH = path.join(WIP_DIR_PATH, "m");

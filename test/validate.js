@@ -84,6 +84,7 @@ function validateFormat(format)
 		filesOptional    : [isFunction, hasLengthBetween(0, 3)],
 
 		ext            : [arrayOf([isNonEmptyString, isLowercase]), hasLengthBetween(1, Infinity)],
+		weakExt        : [either([[arrayOf([isNonEmptyString, isLowercase])], [isBoolean]])],
 		forbiddenExt   : [arrayOf(either([[isNonEmptyString], [isRegex]])), hasLengthBetween(1, Infinity)],
 		forbidExtMatch : [either([[arrayOf([isNonEmptyString]), hasLengthBetween(1, Infinity)], [isBoolean]])],
 		safeExt        : [isFunction, hasLengthBetween(0, 1)],

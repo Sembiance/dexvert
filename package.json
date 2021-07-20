@@ -39,7 +39,6 @@
 		"@validatem/is-value"              : "~0.1.0",
 		"@validatem/one-of"                : "~0.1.1",
 		"@validatem/required"              : "~0.1.1",
-		"commander"                        : "~6.2.1",
 		"csv-parser"                       : "~3.0.0",
 		"cue-parser"                       : "~0.3.0",
 		"domino"                           : "~2.1.6",

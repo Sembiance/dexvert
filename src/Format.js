@@ -61,7 +61,7 @@ export class Format
 
 		const families = await Family.loadFamilies();
 
-		for(const formatFilePath of await fileUtil.tree(path.join((new URL(".", import.meta.url).pathname), "format"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
+		for(const formatFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "format"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
 			const formatModule = await import(formatFilePath);
 			const formatid = Object.keys(formatModule)[0];

@@ -9,7 +9,7 @@ export class FileSet
 	files = {};
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create()ead`); } }	// eslint-disable-line curly
+	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static async create(o)
 	{
 		if(!o)
@@ -38,7 +38,7 @@ export class FileSet
 		}
 		else
 		{
-			fileSet.root = (o.root.endsWith("/") ? o.root.substring(0, o.root.length-1) : o.root);
+			fileSet.root = path.resolve(o.root);
 			Object.assign(fileSet.files, o.files);
 		}
 
@@ -68,7 +68,7 @@ export class FileSet
 	// changes the root location of this FileSet and the DexFiles within it
 	changeRoot(newRoot)
 	{
-		this.root = (newRoot.endsWith("/") ? newRoot.substring(0, newRoot.length-1) : newRoot);
+		this.root = path.resolve(newRoot);
 		for(const file of this.all)
 			file.changeRoot(newRoot);
 		

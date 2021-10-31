@@ -9,7 +9,7 @@ export class DexFile
 	{
 		const dexFile = new this({allowNew : true});
 		dexFile.rel = typeof o==="string" ? path.basename(o) : o.subPath;
-		dexFile.root = path.join(typeof o==="string" ? path.dirname(o) : (o.root.endsWith("/") ? o.root.substring(0, o.root.length-1) : o.root));
+		dexFile.root = path.join(typeof o==="string" ? path.dirname(o) : path.resolve(o.root));
 		dexFile.absolute = path.join(dexFile.root, dexFile.rel);
 
 		const pathInfo = path.parse(dexFile.absolute);
@@ -37,7 +37,7 @@ export class DexFile
 	// changes the root of this file to something else
 	changeRoot(newRoot)
 	{
-		this.root = newRoot.endsWith("/") ? newRoot.substring(0, newRoot.length-1) : newRoot;
+		this.root = path.resolve(newRoot);
 		this.absolute = path.join(newRoot, this.rel);
 		this.dir = path.dirname(this.absolute);
 		return this;

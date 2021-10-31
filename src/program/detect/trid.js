@@ -1,4 +1,5 @@
 import {Program} from "../../Program.js";
+import {Detection} from "../../Detection.js";
 
 export class trid extends Program
 {
@@ -12,19 +13,19 @@ export class trid extends Program
 	args = r => [r.input.primary.rel, "-n:5"]
 	post = r =>
 	{
-		r.meta.matches = [];
+		r.meta.detections = [];
 
 		r.stdout.split("\n").forEach(tridLine =>
 		{
-			const parts = tridLine.match(/^\s*(?<confidence>\d+\.\d)% \((?<extension>[^)]+)\) (?<magic>.+) \([^)]+\)$/);
+			const parts = tridLine.match(/^\s*(?<confidence>\d+\.\d)% \((?<extension>[^)]+)\) (?<value>.+) \([^)]+\)$/);
 			if(!parts)
 				return;
 			
-			const tridMatch = {confidence : +parts.groups.confidence, magic : parts.groups.magic};
+			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.inputOriginal.primary};
 			tridMatch.extensions = parts.groups.extension.includes("/") ? parts.groups.extension.split("/").map(ext => (ext.charAt(0)==="." ? "" : ".") + ext) : [parts.groups.extension];
 			tridMatch.extensions.mapInPlace(ext => ext.toLowerCase());
 			tridMatch.from = "trid";
-			r.meta.matches.push(tridMatch);
+			r.meta.detections.push(Detection.create(tridMatch));
 		});
 	}
 }

@@ -6,11 +6,10 @@ export class RunState
 	
 	// builder to get around the fact that constructors can't be async
 	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
-	static create({input, output})
+	static create({inputOriginal, input, output})
 	{
 		const runState = new this({allowNew : true});
-		runState.input = input;
-		runState.output = output;
+		Object.assign(runState, {inputOriginal, input, output});
 		return runState;
 	}
 }

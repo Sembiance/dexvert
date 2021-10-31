@@ -2,19 +2,24 @@ import { assert, assertStrictEquals } from "https://deno.land/std@0.110.0/testin
 
 export function validateClass(o, schema)
 {
-	const extraProperties = Object.keys(o).subtractAll([...Object.keys(schema), ...o.baseKeys, "baseKeys"]);
+	let prefix = `class [${o.constructor.name}]`;
+	const suffix = `for class ${JSON.stringify(o)}`;
+
+	const extraProperties = Object.keys(o).subtractAll([...Object.keys(schema), ...(o.baseKeys || []), "baseKeys"]);
 	if(extraProperties.length)
-		throw new Error(`class [${o.constructor.name}] has extra unsupported properties: [${extraProperties.join("], [")}]`);
+		throw new Error(`${prefix} has extra unsupported properties: [${extraProperties.join("], [")}] ${suffix}`);
 
 	for(const [propid, prop] of Object.entries(schema))
 	{
 		if(!Object.hasOwn(o, propid))
 		{
 			if(prop.required)
-				throw new Error(`class [${o.constructor.name}] is missing required property [${propid}]`);
+				throw new Error(`${prefix} is missing required property [${propid}] ${suffix}`);
 			
 			continue;
 		}
+
+		prefix = `${prefix}.[${propid}]`;
 
 		const value = o[propid];
 
@@ -23,31 +28,48 @@ export function validateClass(o, schema)
 		{
 			if(Array.isArray(prop.type))
 			{
-				assert(Array.isArray(value), `class [${o.constructor.name}].[${propid}] expected to be an array, but got [${typeof value}]`);
-				value.forEach(v =>
+				assert(Array.isArray(value), `${prefix} expected to be an array, but got [${typeof value}] ${suffix}`);
+				value.forEach(v =>	// eslint-disable-line no-loop-func
 				{
 					const typeMatches = prop.type.filter(t => typeof t==="string");
 					const instanceMatches = prop.type.filter(t => typeof t!=="string");
 					if(!typeMatches.includes(typeof v) && !instanceMatches.some(instanceMatch => v instanceof instanceMatch))
-						throw new Error(`class [${o.constructor.name}].[${propid}] value [${v}] expected to be one of type [${prop.type.map(t => (typeof t==="string" ? t : t.name)).join("], [")}] but got [${typeof v}]`);
+						throw new Error(`${prefix} value [${v}] expected to be one of type [${prop.type.map(t => (typeof t==="string" ? t : t.name)).join("], [")}] but got [${typeof v}] ${suffix}`);
+					
+					if(prop.type.includes("string") && typeof v==="string")
+						assert(v.length>0, `${prefix} array value [${v}] expected to to not be empty ${suffix}`);
 				});
 			}
 			else
 			{
-				assertStrictEquals(typeof value, prop.type, `class [${o.constructor.name}].[${propid}] expected to be type [${prop.type}] but got [${typeof value}]`);
+				if(typeof prop.type==="string")
+					assertStrictEquals(typeof value, prop.type, `${prefix} expected to be type [${prop.type}] but got [${typeof value}] ${suffix}`);
+				else
+					assert(value instanceof prop.type, `${prefix} expected to be instance [${prop.type}] but got ${value.constructor.name} ${suffix}`);
 			}
 		}
 
 		// validate that the property is a valid URL
 		if(prop.url)
-			assert((new URL(value)) instanceof URL, `class [${o.constructor.name}].[${propid}] expected to be a valid URL but it was not`);
+			assert((new URL(value)) instanceof URL, `${prefix} expected to be a valid URL but it was not ${suffix}`);
 		
 		// validate that the property has a spcific value
 		if(prop.enum)
-			assert(prop.enum.includes(value), `class [${o.constructor.name}].[${propid}] expected to be one of value [${prop.enum.join("], [")}] but got [${value}]`);
+			assert(prop.enum.includes(value), `${prefix} expected to be one of value [${prop.enum.join("], [")}] but got [${value}] ${suffix}`);
 
 		// validate that the property value is a given length
 		if(prop.length)
-			assertStrictEquals(prop.length, value.length, `class [${o.constructor.name}].[${propid}] value [${value}] expected to be [${prop.length}] long but is [${value.length}] long`);
+			assertStrictEquals(prop.length, value.length, `${prefix} value [${value}] expected to be [${prop.length}] long but is [${value.length}] long ${suffix}`);
+		
+		// validate that the property value falls within a given range
+		if(prop.range)
+		{
+			assert(value>=prop.range[0]);
+			assert(value<=prop.range[1]);
+		}
+		
+		// by default, strings and arrays must not be empty
+		if(!prop.allowEmpty && (typeof value==="string" || Array.isArray(value)))
+			assert(value.length>0, `${prefix} value [${value}] expected to to not be empty ${suffix}`);
 	}
 }

@@ -22,10 +22,12 @@ export class Program
 	{
 		const program = new this({allowNew : true});
 
+		if(Object.hasOwn(program, "bin") && Object.hasOwn(program, "exec"))
+			throw new Error(`class [${this.constructor.name}] can't have both [bin] and [exec] properties.`);
+
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			bin       : {type : "string", required : true},	// path to the binary to run
 			loc       : {type : "string", required : true, enum : ["gentoo", "local", "amigappc", "win2k", "winxp"]},	// where to run this program at. Default is gentoo
 
 			// meta
@@ -35,7 +37,9 @@ export class Program
 			website        : {type : "string", url : true}, 	// homepage URL for this program
 
 			// execution
-			args : {type : "function", length : 1},	// returns an array of the program arguments
+			bin  : {type : "string"},				// path to the binary to run. Can't have bin and exec.
+			exec : {type : "function", length : 1},	// function of code to run instead of bin. Can't have bin and exec.
+			args : {type : "function", length : 1}, // returns an array of the program arguments
 			post : {type : "function", length : 1}	// is called after the program is finished being executed
 		});
 
@@ -43,7 +47,7 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(_input, _output, {diskQuota=DEFAULT_QUOTA_DISK, timeout=DEFAULT_TIMEOUT}={})
+	async run(_input, _output, {diskQuota=DEFAULT_QUOTA_DISK, timeout=DEFAULT_TIMEOUT, verbose=false}={})
 	{
 		// ensure input and output are FileSets
 		const input = _input instanceof FileSet ? _input : await FileSet.create(_input);
@@ -55,9 +59,22 @@ export class Program
 		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${diskQuota},mode=0777,nodev,noatime`, "tmpfs", ramDirPath]);
 
 		// we rsync them instead of symlink in order to prevent problems with some programs not working with symlinks correctly or modifying the original (bad program), wanting exclusive locks (even a thing under linux?), etc
-		const r = RunState.create({input : await input.rsyncTo(ramDirPath), output});
-		const {stdout, stderr, status} = await runUtil.run(this.bin, await this.args(r), {cwd : ramDirPath, timeout});
-		Object.assign(r, {stdout, stderr, status});
+		const r = RunState.create({inputOriginal : input, input : await input.rsyncTo(ramDirPath), output});
+		if(this.bin)
+		{
+			const args = await this.args(r);
+			const runOptions = {cwd : ramDirPath, timeout, verbose};
+			if(verbose)
+				console.log(`Program ${this.programid} running as [${this.bin} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}] with options ${runOptions}`);
+			const {stdout, stderr, status} = await runUtil.run(this.bin, args, runOptions);
+			Object.assign(r, {stdout, stderr, status});
+		}
+		else if(this.exec)
+		{
+			if(verbose)
+				console.log(`Program ${this.programid} executing .exec steps`);
+			await this.exec(r);
+		}
 
 		if(this.post)
 			await this.post(r);
@@ -78,6 +95,12 @@ export class Program
 		return program.run(...args);
 	}
 
+	// forms a path to dexvert/bin/{subPath}
+	static binPath(subPath)
+	{
+		return path.join(xu.dirname(import.meta), "..", "bin", subPath);
+	}
+
 	// loads all src/program/*/*.js files from disk as Program objects. These are cached in the static this.programs cache
 	static async loadPrograms()
 	{
@@ -90,7 +113,7 @@ export class Program
 		this.programs = false;
 		const programs = {};
 
-		for(const programFilePath of await fileUtil.tree(path.join((new URL(".", import.meta.url).pathname), "program"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
+		for(const programFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "program"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
 			const progamModule = await import(programFilePath);
 			const programid = Object.keys(progamModule)[0];

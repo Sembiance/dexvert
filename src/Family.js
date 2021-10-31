@@ -27,7 +27,7 @@ export class Family
 		
 		this.families = {};
 
-		for(const familyFilePath of await fileUtil.tree(path.join((new URL(".", import.meta.url).pathname), "family"), {nodir : true, regex : /\.js$/}))
+		for(const familyFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "family"), {nodir : true, regex : /\.js$/}))
 		{
 			const familyModule = await import(familyFilePath);
 			const familyid = Object.keys(familyModule)[0];

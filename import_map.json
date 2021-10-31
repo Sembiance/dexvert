@@ -1,0 +1,7 @@
+{
+	"imports" :
+	{
+		"xu"    : "https://raw.githubusercontent.com/Sembiance/deno/master/xu/xu.js",
+		"xutil" : "https://raw.githubusercontent.com/Sembiance/deno/master/xutil/xutil.js"
+	}
+}

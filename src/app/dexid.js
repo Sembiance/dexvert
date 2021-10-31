@@ -1,0 +1,21 @@
+import {xu} from "xu";
+import {cmdUtil} from "xutil";
+import {identify} from "../identify.js";
+
+const argv = cmdUtil.cmdInit({
+	cmdid   : "dexid",
+	version : "1.0.0",
+	desc    : "Identifies one or more files",
+	opts    :
+	{
+		verbose  : {desc : "Show additional info when identifying. Levels 1 to 6 where 6 is most verbose", defaultValue : 0},
+		json     : {desc : "Output JSON"},
+		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true}
+	},
+	args :
+	[
+		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
+	]});
+
+const identifications = await identify(argv.inputFilePath, {verbose : argv.verbose});
+console.log({identifications});

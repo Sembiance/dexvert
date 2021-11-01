@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class vendinfo extends Format
+{
+	name = "VENDINFO";
+	ext = [".diz"];
+	forbidExtMatch = true;
+	magic = ["VENDINFO information"];
+	filename = [{}];
+	untouched = true;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +28,5 @@ exports.meta =
 };
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

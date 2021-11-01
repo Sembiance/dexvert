@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class psd extends Format
+{
+	name = "Adobe Photoshop";
+	website = "http://fileformats.archiveteam.org/wiki/PSD";
+	ext = [".psd"];
+	mimeType = "image/vnd.adobe.photoshop";
+	magic = [{},{}];
+	converters = ["convert"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -16,3 +32,5 @@ exports.converterPriority = ["convert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
+
+*/

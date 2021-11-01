@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class graphSaurus extends Format
+{
+	name = "Graph Saurus";
+	website = "http://fileformats.archiveteam.org/wiki/Graph_Saurus";
+	ext = [".sr5",".gl5",".pl5",".sr6",".gl6",".pl6",".sr7",".gl7",".pl7",".sr8",".gl8",".sri",".srs"];
+	magic = ["Graph Saurus bitmap","MSX Graph Saurus"];
+	filesRequired = undefined;
+	filesOptional = undefined;
+	converters = ["recoil2png"]
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -34,3 +51,5 @@ exports.meta =
 exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase().startsWith(".pl"); }];
 
 exports.converterPriority = ["recoil2png"];
+
+*/

@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class webp extends Format
+{
+	name = "WebP Image";
+	website = "http://fileformats.archiveteam.org/wiki/Webp";
+	ext = [".webp"];
+	mimeType = "image/webp";
+	magic = ["WebP bitmap",{},{}];
+	untouched = true;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -22,3 +38,5 @@ exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 		return p.util.flow.noop;
 	}
 ])(state0, p0, cb);
+
+*/

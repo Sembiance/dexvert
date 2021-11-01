@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class wordDoc extends Format
+{
+	name = "Word Document";
+	website = "http://fileformats.archiveteam.org/wiki/DOC";
+	ext = [".doc"];
+	forbidExtMatch = true;
+	magic = ["Microsoft Word document","Microsoft Word for Windows"];
+	unsafe = true;
+	converters = ["fileMerlin","antiword","soffice"]
+
+post = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -24,3 +41,5 @@ exports.post = (state, p, cb) =>
 	setImmediate(cb);
 };
 
+
+*/

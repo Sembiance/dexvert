@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class turboCConfiguration extends Format
+{
+	name = "Turbo C Configuration";
+	ext = [".tc"];
+	forbidExtMatch = true;
+	magic = ["Turbo C Configuration"];
+
+steps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -10,3 +24,5 @@ exports.meta =
 };
 
 exports.steps = [() => ({program : "strings"})];
+
+*/

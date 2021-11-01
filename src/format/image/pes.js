@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class pes extends Format
+{
+	name = "PES Embroidery File";
+	website = "http://fileformats.archiveteam.org/wiki/PES";
+	ext = [".pes"];
+	magic = ["Brother/Babylock/Bernina Home Embroidery Format"];
+	notes = "\nIt's a vector format, but uniconvertor just embeds a PNG into the resulting SVG file.\nImagemagick's convert can produce .svg versions, but it doesn't output all the original lines and no color.\nSo we convert to both SVG and PNG with convert.\nNOTE: Some of these files produce HUGE resulting files and the process can take a good amoung of time to complete.";
+
+steps = [null,null];
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -20,3 +37,5 @@ exports.steps = [
 ];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

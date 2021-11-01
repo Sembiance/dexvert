@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class advancedArtStudio extends Format
+{
+	name = "Advanced Art Studio";
+	website = "http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio";
+	ext = [".ocp",".scr",".win",".pal"];
+	fileSize = {".ocp":10018};
+	filesRequired = undefined;
+	converters = ["recoil2png"]
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -26,3 +42,5 @@ exports.meta =
 exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".pal"; }];
 
 exports.converterPriority = ["recoil2png"];
+
+*/

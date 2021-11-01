@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class ultraTracker extends Format
+{
+	name = "Ultra Tracker Module";
+	website = "http://fileformats.archiveteam.org/wiki/Ultra_Tracker";
+	ext = [".ult"];
+	magic = [{},"Ultra Tracker module"];
+	converters = ["zxtune123","awaveStudio"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +27,5 @@ exports.meta =
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
 exports.converterPriority = ["zxtune123", "awaveStudio"];
+
+*/

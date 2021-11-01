@@ -1,3 +1,14 @@
+/*
+import {Format} from "../../Format.js";
+
+export class tx0 extends Format
+{
+	name = "Texture Maker0";
+	ext = [".tx0"];
+	converters = ["recoil2png"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -8,3 +19,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["recoil2png"];
+
+*/

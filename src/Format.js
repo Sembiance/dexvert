@@ -35,14 +35,18 @@ export class Format
 			website  : {type : "string", url : true},	// URL about this format
 
 			// identification - extension
-			ext          : {type : ["string"]}, // array of extensions this format may have. first item should be the primary extension. always use lowercase
-			forbiddenExt : {type : ["string"]},	// array of extensions that it should never be
+			ext            : {type : ["string"]},	// array of extensions this format may have. first item should be the primary extension. always use lowercase
+			forbidExtMatch : {type : "boolean"},	// set to true to disallow matching this format based on extension
+			forbiddenExt   : {type : ["string"]},	// array of extensions that it should never be
 
 			// identification - magic
-			magic : {type : ["string", RegExp]},
+			magic          : {type : ["string", RegExp]}, 	// array of strings/regexes to check match against detections
+			forbiddenMagic : {type : ["string", RegExp]}, 	// an array of strings/regexes that if any detections match to forbid matching to this format
 
 			// conversion
-			converters : {type : ["string"]}
+			converters     : {type : ["string"]},	// an array of programids to use for converting this format
+			unsafe         : {type : "boolean"},	// this format is unsafe to convert, so be careful matching against it
+			allowTransform : {type : "boolean"}		// set to true to allow matching to this format even if the format is unsafe and the file is transformed
 		});
 		return format;
 	}
@@ -64,7 +68,7 @@ export class Format
 		for(const formatFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "format"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
 			// TODO REMOVE BELOW AFTER CONVERTING ALL FORMATS
-			if(!(await fileUtil.readFile(formatFilePath)).includes(" extends Format"))
+			if(!(await fileUtil.readFile(formatFilePath)).includes(" extends Format") || (await fileUtil.readFile(formatFilePath)).startsWith("/*"))
 				continue;
 			// TODO REMOVE ABOVE AFTER CONVERTING ALL FORMATS
 

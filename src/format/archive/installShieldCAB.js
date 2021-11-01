@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class installShieldCAB extends Format
+{
+	name = "InstallShield CAB";
+	website = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
+	ext = [".cab"];
+	magic = ["InstallShield CAB","InstallShield Cabinet archive","InstallShield compressed Archive"];
+	keepFilename = true;
+	filesOptional = undefined;
+	converters = ["unshield",{"program":"unshield","flags":{"unshieldUseOldCompression":true}},"winPack","gameextractor","UniExtract"]
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -30,3 +47,5 @@ exports.converterPriority =
 	"gameextractor",
 	"UniExtract"
 ];
+
+*/

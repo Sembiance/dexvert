@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class koalaMicroillustrator extends Format
+{
+	name = "Koala Microillustrator";
+	website = "http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator";
+	ext = [".pic"];
+	magic = ["Koala Micro Illustrator bitmap"];
+	notes = "APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil.";
+	converters = ["recoil2png","view64"]
+
+idCheck = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -15,3 +31,5 @@ exports.meta =
 exports.idCheck = state => state.input.ext.toLowerCase()!==".rm4";
 
 exports.converterPriority = ["recoil2png", "view64"];
+
+*/

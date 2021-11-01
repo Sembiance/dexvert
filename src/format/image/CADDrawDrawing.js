@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class CADDrawDrawing extends Format
+{
+	name = "TommySoftware CAD/Draw Drawing";
+	website = "https://archive.org/details/t425l1e_zip";
+	ext = [".t4g",".t3g",".t2g",".mpg"];
+	forbidExtMatch = true;
+	magic = ["TommySoftware CAD/Draw drawing","CAD/Draw TVG"];
+	converters = undefined
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file;
@@ -37,3 +51,5 @@ exports.converterPriority = s0 =>
 
 	return [converters];
 };
+
+*/

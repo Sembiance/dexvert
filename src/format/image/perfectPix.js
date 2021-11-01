@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class perfectPix extends Format
+{
+	name = "Perfect Pix";
+	website = "http://fileformats.archiveteam.org/wiki/Perfect_Pix";
+	ext = [".eve",".odd",".pph"];
+	filesRequired = undefined;
+	converters = ["recoil2png"]
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -17,3 +32,5 @@ exports.meta =
 exports.preSteps = [state => { state.processed = state.processed || [".eve", ".odd"].includes(state.input.ext.toLowerCase()); }];
 
 exports.converterPriority = ["recoil2png"];
+
+*/

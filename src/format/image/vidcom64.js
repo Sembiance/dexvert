@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class vidcom64 extends Format
+{
+	name = "Vidcom 64";
+	website = "http://fileformats.archiveteam.org/wiki/Vidcom_64";
+	ext = [".vid"];
+	mimeType = "image/x-vidcom-64";
+	magic = ["Drazpaint (C64) bitmap"];
+	weakMagic = true;
+	fileSize = 10050;
+	forbidFileSizeMatch = true;
+	converters = ["nconvert","recoil2png","abydosconvert","view64"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -15,3 +32,5 @@ exports.meta =
 
 // nconvert produces clearer output compared to recoil2png
 exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert", "view64"];
+
+*/

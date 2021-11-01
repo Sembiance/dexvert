@@ -1,3 +1,22 @@
+/*
+import {Format} from "../../Format.js";
+
+export class 8svx extends Format
+{
+	name = "Amiga 8-bit Sampled Voice";
+	website = "http://fileformats.archiveteam.org/wiki/8SVX";
+	ext = [".8svx",".iff"];
+	weakExt = [".iff"];
+	magic = ["Amiga IFF 8SVX audio","IFF data, 8SVX","Interchange File Format 8-bit Sampled Voice"];
+	notes = "Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates.";
+	converters = [{"program":"ffmpeg"},"8SVXtoXXX"]
+
+inputMeta = undefined;
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -72,3 +91,5 @@ exports.converterPriority = [{program : "ffmpeg", argsd : state =>
 	
 	return rflags;
 }}, "8SVXtoXXX"];
+
+*/

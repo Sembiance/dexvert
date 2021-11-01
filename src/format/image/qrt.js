@@ -1,12 +1,10 @@
-"use strict";
-const XU = require("@sembiance/xu");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class qrt extends Format
 {
-	name           : "QRT Ray Tracer Bitmap",
-	website        : "http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap",
-	ext            : [".qrt", ".dis", ".raw"],
-	forbiddenMagic : ["KryoFlux raw stream"]
-};
-
-exports.converterPriority = ["nconvert"];
+	name           = "QRT Ray Tracer Bitmap";
+	website        = "http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap";
+	ext            = [".qrt", ".dis", ".raw"];
+	forbiddenMagic = ["KryoFlux raw stream"];
+	converters     = ["nconvert"];
+}

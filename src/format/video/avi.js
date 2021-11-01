@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class avi extends Format
+{
+	name = "Audio Video Interleaved Video";
+	website = "http://fileformats.archiveteam.org/wiki/AVI";
+	ext = [".avi"];
+	mimeType = "video/avi";
+	magic = ["AVI Audio Video Interleaved",{},"Audio/Video Interleaved Format"];
+	converters = ["ffmpeg","xanim"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -16,3 +32,5 @@ exports.meta =
 exports.converterPriority = ["ffmpeg", "xanim"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class bmp extends Format
+{
+	name = "Bitmap Image";
+	website = "http://fileformats.archiveteam.org/wiki/BMP";
+	ext = [".bmp",".rle",".dib",".pic"];
+	forbidExtMatch = [".pic"];
+	mimeType = "image/bmp";
+	magic = ["Windows Bitmap","PC bitmap, Windows 3.x format","Device independent bitmap graphic"];
+	converters = undefined
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -23,3 +40,5 @@ exports.converterPriority = state =>
 };
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

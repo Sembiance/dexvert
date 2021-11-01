@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class technicolorDream extends Format
+{
+	name = "Technicolor Dream";
+	website = "http://fileformats.archiveteam.org/wiki/Technicolor_Dream";
+	ext = [".lum",".col"];
+	filesRequired = undefined;
+	filesOptional = undefined;
+	converters = ["recoil2png"]
+
+preSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -14,3 +30,5 @@ exports.meta =
 exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".col"; }];
 
 exports.converterPriority = ["recoil2png"];
+
+*/

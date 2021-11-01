@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class rar extends Format
+{
+	name = "Roshal Archive";
+	website = "http://fileformats.archiveteam.org/wiki/RAR";
+	ext = [".rar"];
+	magic = ["RAR archive data","RAR compressed archive","RAR Archive"];
+	converters = ["unrar","UniExtract"]
+
+inputMeta = undefined;
+
+post = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -38,3 +55,5 @@ exports.post = (state, p, cb) =>
 	setImmediate(cb);
 };
 
+
+*/

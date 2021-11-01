@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class lzx extends Format
+{
+	name = "Lempel-Ziv Archive";
+	website = "http://fileformats.archiveteam.org/wiki/LZX";
+	ext = [".lzx"];
+	magic = ["LZX compressed archive","LZX Amiga compressed archive"];
+	converters = ["unar","UniExtract"]
+
+postSteps = [null,null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -34,3 +49,5 @@ exports.postSteps =
 		}, cb);
 	}
 ];
+
+*/

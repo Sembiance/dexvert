@@ -1,3 +1,21 @@
+/*
+import {Format} from "../../Format.js";
+
+export class xml extends Format
+{
+	name = "Extensible Markup Language";
+	website = "http://fileformats.archiveteam.org/wiki/XML";
+	ext = [".xml"];
+	forbidExtMatch = true;
+	mimeType = "application/xml";
+	magic = ["Extensible Markup Language","Generic XML",{}];
+	untouched = true;
+	hljsLang = "xml";
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -41,3 +59,5 @@ exports.inputMeta = (state, p, cb) =>
 		cb
 	);
 };
+
+*/

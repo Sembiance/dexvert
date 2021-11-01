@@ -17,37 +17,49 @@ export class FileSet
 
 		const fileSet = new this({allowNew : true});
 
+		function getRoot(v)
+		{
+			return (v instanceof DexFile ? v.root : (v.startsWith("/") ? path.dirname(v) : Deno.cwd()));
+		}
+
 		if(typeof o==="string")
 		{
-			// a string, assume we just have a single primary file
-			fileSet.root = path.dirname(o);
-			fileSet.files.primary = [path.basename(o)];
+			// a string, assume we just have a single primary file, absolute path
+			fileSet.root = getRoot(o);
+			await fileSet.addFile("primary", path.basename(o));
+		}
+		else if(o instanceof DexFile)
+		{
+			// a single DexFile, assume it's a primary file
+			fileSet.root = o.root;
+			await fileSet.addFile("primary", o);
 		}
 		else if(Array.isArray(o))
 		{
 			// an array, assume it's an array of primary files
-			fileSet.root = o.map(v => path.dirname(v)).sortMulti([v => v.length])[0];
-			fileSet.files.primary = o.map(v => path.relative(fileSet.root, v));
+			fileSet.root = o.map(getRoot).sortMulti([v => v.length])[0];
+			for(const v of o)
+				await fileSet.addFile("primary", path.relative(fileSet.root, v));
 		}
 		else if(!Object.hasOwn(o, "root"))
 		{
 			// an object without a root
-			fileSet.root = Object.values(o).flatMap(v => Array.force(v)).map(v => path.dirname(v)).sortMulti([v => v.length])[0];
+			fileSet.root = Object.values(o).flatMap(v => Array.force(v)).map(getRoot).sortMulti([v => v.length])[0];
 			for(const [type, files] of Object.entries(o))
-				fileSet.files[type] = Array.force(files).map(v => path.relative(fileSet.root, v));
+			{
+				for(const file of files)
+					await fileSet.addFile(type, file);
+			}
 		}
 		else
 		{
 			fileSet.root = path.resolve(o.root);
-			Object.assign(fileSet.files, o.files);
+			for(const [type, files] of Object.entries(o.files))
+			{
+				for(const file of files)
+					await fileSet.addFile(type, file);
+			}
 		}
-
-		if(!Object.hasOwn(o, "root") && fileSet.root===".")
-			fileSet.root = Deno.cwd();
-
-		// convert files into DexFile objects
-		for await(const [type, subPaths] of Object.entries(fileSet.files))
-			fileSet.files[type] = await Promise.all(subPaths.map(async file => await DexFile.create({root : fileSet.root, subPath : file})));
 
 		return fileSet;
 	}
@@ -63,6 +75,28 @@ export class FileSet
 		}
 
 		return this.clone().changeRoot(targetRoot);
+	}
+
+	async addFiles(type, files)
+	{
+		await Promise.all(files.map(file => this.addFile(type, file)));
+	}
+
+	// adds the given file of type type
+	async addFile(_type, _o)
+	{
+		const type = typeof _o==="undefined" ? "primary" : _type;
+		const o = typeof _o==="undefined" ? _type : _o;
+
+		if(!this.files[type])
+			this.files[type] = [];
+
+		if(o instanceof DexFile)
+			this.files[type].push(o);
+		else if(typeof o==="string")
+			this.files[type].push(await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o}));
+		else
+			throw new Error(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it

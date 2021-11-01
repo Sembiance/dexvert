@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class csv extends Format
+{
+	name = "Comma Seperated Value File";
+	website = "http://fileformats.archiveteam.org/wiki/CSV";
+	ext = [".csv"];
+	mimeType = "application/json";
+	magic = ["CSV text"];
+	priority = 3;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -40,3 +56,5 @@ exports.inputMeta = (state, p, cb) =>
 		cb
 	);
 };
+
+*/

@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class sid extends Format
+{
+	name = "Commodore SID Music File";
+	website = "http://fileformats.archiveteam.org/wiki/SID";
+	ext = [".sid",".psid",".mus"];
+	magic = ["Play SID Audio","PlaySID","SID tune"];
+
+inputMeta = undefined;
+
+steps = [null,null,null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -58,3 +74,5 @@ exports.steps =
 	(state, p) => p.util.file.findValidOutputFiles(true),
 	(state, p) => p.family.validateOutputFiles
 ];
+
+*/

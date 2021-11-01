@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class amigaGuide extends Format
+{
+	name = "Amigaguide Document";
+	website = "http://fileformats.archiveteam.org/wiki/AmigaGuide";
+	ext = [".guide"];
+	magic = ["Amigaguide hypertext document","AmigaGuide file"];
+	keepFilename = true;
+	filesOptional = undefined;
+	converters = ["grotag","guideml","strings"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -15,3 +30,5 @@ exports.meta =
 // If that fails though, guideml will at least process the text content in this particular guide file
 // Finally we fall back to strings
 exports.converterPriority = ["grotag", "guideml", "strings"];
+
+*/

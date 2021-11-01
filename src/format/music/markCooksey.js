@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class markCooksey extends Format
+{
+	name = "Mark Cooksey Module";
+	ext = [".mc"];
+	magic = ["Mark Cooksey module"];
+	converters = ["uade123"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +25,5 @@ exports.meta =
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
 exports.converterPriority = ["uade123"];
+
+*/

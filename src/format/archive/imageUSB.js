@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class imageUSB extends Format
+{
+	name = "imageUSB";
+	website = "https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software";
+	ext = [".usbimage"];
+	magic = ["imageUSB"];
+
+idCheck = undefined;
+
+steps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -32,3 +48,5 @@ exports.steps =
 		);
 	}
 ];
+
+*/

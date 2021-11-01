@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class hiPic extends Format
+{
+	name = "Hi-Pic Creator";
+	website = "http://fileformats.archiveteam.org/wiki/Hi-Pic_Creator";
+	ext = [".hpc"];
+	magic = ["Koala Paint"];
+	weakMagic = true;
+	trustMagic = true;
+	fileSize = 9003;
+	converters = ["recoil2png"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -13,3 +29,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["recoil2png"];
+
+*/

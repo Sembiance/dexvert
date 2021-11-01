@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class msa extends Format
+{
+	name = "Magic Shadow Archiver";
+	website = "http://fileformats.archiveteam.org/wiki/MSA_(Atari)";
+	ext = [".msa"];
+	magic = ["Atari MSA archive data","Atari MSA Disk Image"];
+	notes = "Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.";
+	converters = ["deark"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +25,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["deark"];
+
+*/

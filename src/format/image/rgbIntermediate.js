@@ -1,3 +1,15 @@
+/*
+import {Format} from "../../Format.js";
+
+export class rgbIntermediate extends Format
+{
+	name = "Atari RGB Intermediate";
+	ext = [".rgb"];
+	mimeType = "image/x-atari-rgb-intermediate";
+	converters = ["recoil2png","abydosconvert"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -9,3 +21,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["recoil2png", "abydosconvert"];
+
+*/

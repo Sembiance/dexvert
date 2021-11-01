@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class fig extends Format
+{
+	name = "XFig";
+	website = "http://fileformats.archiveteam.org/wiki/Fig";
+	ext = [".fig"];
+	magic = ["FIG image text","FIG vector drawing"];
+	notes = "It's a vector format, but embedded bitmaps don't convert to SVG. So we convert to both SVG and PNG.";
+
+steps = [null,null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -14,3 +29,5 @@ exports.steps = [
 	() => ({program : "fig2dev", flags : {fig2devType : "png"}}),
 	() => ({program : "fig2dev"})
 ];
+
+*/

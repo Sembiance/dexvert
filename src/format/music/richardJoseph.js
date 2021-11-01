@@ -1,3 +1,24 @@
+/*
+import {Format} from "../../Format.js";
+
+export class richardJoseph extends Format
+{
+	name = "Richard Joseph Module/Instrument";
+	website = "http://fileformats.archiveteam.org/wiki/Richard_Joseph";
+	ext = [".sng",".ins"];
+	forbidExtMatch = true;
+	magic = ["RJP / Vectordean module","RJP / Vectordean instrument"];
+	safeExt = undefined;
+	keepFilename = true;
+	filesRequired = undefined;
+	converters = ["uade123"]
+
+preSteps = [null];
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -19,3 +40,5 @@ exports.preSteps = [state => { state.processed = state.processed || state.input.
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
 exports.converterPriority = ["uade123"];
+
+*/

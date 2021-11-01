@@ -1,3 +1,21 @@
+/*
+import {Format} from "../../Format.js";
+
+export class ini extends Format
+{
+	name = "INI File";
+	website = "http://fileformats.archiveteam.org/wiki/INI";
+	ext = [".ini",".inf",".cfg",".conf",".nfo"];
+	forbidExtMatch = [".cfg",".conf",".nfo"];
+	magic = ["Generic INI configuration"];
+	priority = 3;
+	untouched = true;
+	hljsLang = "ini";
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -51,3 +69,5 @@ exports.inputMeta = (state, p, cb) =>
 		cb
 	);
 };
+
+*/

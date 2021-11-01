@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class cue extends Format
+{
+	name = "ISO CUE Sheet";
+	website = "http://fileformats.archiveteam.org/wiki/CUE_and_BIN";
+	ext = [".cue"];
+	magic = ["ISO CDImage cue","Cue Sheet"];
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	cueParser = require("cue-parser");
@@ -42,3 +56,5 @@ exports.inputMeta = (state, p, cb) =>
 
 	p.family.supportedInputMeta(state, p, cb);
 };
+
+*/

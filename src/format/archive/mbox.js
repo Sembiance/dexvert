@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class mbox extends Format
+{
+	name = "Mailbox";
+	website = "http://fileformats.archiveteam.org/wiki/Mbox";
+	ext = [".mbox"];
+	magic = ["Standard Unix Mailbox"];
+	unsafe = true;
+
+steps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -68,3 +83,5 @@ exports.steps =
 		);
 	}
 ];
+
+*/

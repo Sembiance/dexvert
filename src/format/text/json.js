@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class json extends Format
+{
+	name = "JavaScript Object Notation";
+	website = "http://fileformats.archiveteam.org/wiki/JSON";
+	ext = [".json"];
+	mimeType = "application/json";
+	untouched = true;
+	confidenceAdjust = undefined;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -55,3 +71,5 @@ exports.inputMeta = (state, p, cb) =>
 		cb
 	);
 };
+
+*/

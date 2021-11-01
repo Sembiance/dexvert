@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class tiff extends Format
+{
+	name = "Tagged Image File Format";
+	website = "http://fileformats.archiveteam.org/wiki/TIFF";
+	ext = [".tif",".tiff"];
+	mimeType = "image/tiff";
+	magic = ["Tagged Image File Format","TIFF image data"];
+	priority = 3;
+	converters = [{"program":"deark","flags":{"dearkNoThumbs":true}},"convert","imageAlchemy","graphicWorkshopProfessional"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	C = require("../../C.js");
@@ -18,3 +35,5 @@ exports.meta =
 exports.converterPriority = [{program : "deark", flags : {dearkNoThumbs : true}}, "convert", "imageAlchemy", "graphicWorkshopProfessional"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

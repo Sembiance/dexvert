@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class exe extends Format
+{
+	name = "MS-DOS/Windows Executable";
+	website = "http://fileformats.archiveteam.org/wiki/EXE";
+	ext = [".exe"];
+	magic = ["Generic Win/DOS Executable","DOS Executable Generic",{},{},{},"DOS Executable (alternate ZM id)","16bit DOS EXE PKLite compressed","PE32 executable",{},"Win16 NE executable"];
+	priority = 3;
+	converters = undefined
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	C = require("../../C.js");
@@ -37,3 +53,5 @@ exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 		return p.util.flow.noop;
 	}
 ])(state0, p0, cb);
+
+*/

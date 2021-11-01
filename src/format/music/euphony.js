@@ -1,3 +1,23 @@
+/*
+import {Format} from "../../Format.js";
+
+export class euphony extends Format
+{
+	name = "EUPHONY Module";
+	website = "http://fileformats.archiveteam.org/wiki/EUPHONY";
+	ext = [".eup",".fmb",".pmb"];
+	fileSize = {".fmb":6152};
+	keepFilename = true;
+	filesRequired = undefined;
+	filesOptional = undefined;
+	converters = ["eupplay"]
+
+preSteps = [null];
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -18,3 +38,5 @@ exports.preSteps = [state => { state.processed = state.processed || [".fmb", ".p
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
 exports.converterPriority = ["eupplay"];
+
+*/

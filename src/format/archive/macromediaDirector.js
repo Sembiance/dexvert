@@ -1,3 +1,22 @@
+/*
+import {Format} from "../../Format.js";
+
+export class macromediaDirector extends Format
+{
+	name = "Macromedia Director";
+	website = "http://fileformats.archiveteam.org/wiki/Shockwave_(Director)";
+	ext = [".dir",".dxr",".drx",".cxt",".cst",".dcr"];
+	forbidExtMatch = true;
+	magic = ["Macromedia Director project","Adobe Director Protected Cast","Macromedia Director Protected Movie","Director - Shockwave movie","Generic RIFX container"];
+	weakMagic = ["Generic RIFX container"];
+	keepFilename = "extras";
+	filesOptional = undefined;
+	notes = "While 'xtras' is included here, it is NOT copied over into Windows. See more details in program/archive/macromediaDirector.js";
+
+steps = [null,null,null,null,null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -42,3 +61,5 @@ exports.steps =
 	(state, p) => p.util.file.findValidOutputFiles(),
 	() => exports.validateOutputFiles
 ];
+
+*/

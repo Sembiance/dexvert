@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class wri extends Format
+{
+	name = "Windows Write Document";
+	website = "http://fileformats.archiveteam.org/wiki/WRI";
+	ext = [".wri",".wr",".doc"];
+	forbidExtMatch = true;
+	magic = ["Windows Write Document",{},"Write for Windows Document"];
+	unsafe = true;
+	converters = ["soffice",{"program":"fileMerlin","flags":{"fileMerlinSrcFormat":"MSWR"}}]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +27,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["soffice", {program : "fileMerlin", flags : {fileMerlinSrcFormat : "MSWR"}}];
+
+*/

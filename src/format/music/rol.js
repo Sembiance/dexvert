@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class rol extends Format
+{
+	name = "AdLib/Roland Song";
+	website = "http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song";
+	ext = [".rol"];
+	magic = ["AdLib Visual Composer music"];
+	notes = "Couldn't convert GIRLIPEN.ROL for some reason";
+
+steps = [null,null,null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -63,3 +78,5 @@ exports.steps =
 	(state, p) => p.util.file.findValidOutputFiles(),
 	(state, p) => p.family.validateOutputFiles
 ];
+
+*/

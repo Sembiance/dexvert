@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class dll extends Format
+{
+	name = "Microsoft Windows Dynmic Link Library";
+	ext = [".dll"];
+	forbiddenExt = [".exe"];
+	magic = ["Win32 Dynamic Link Library","PE32 executable (DLL)","MS-DOS executable, NE for MS Windows 3.x (DLL or font)"];
+	converters = undefined
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -29,3 +44,5 @@ exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 		return p.util.flow.noop;
 	}
 ])(state0, p0, cb);
+
+*/

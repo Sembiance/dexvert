@@ -1,3 +1,16 @@
+/*
+import {Format} from "../../Format.js";
+
+export class news extends Format
+{
+	name = "Newsgroup Content";
+	magic = ["saved news"];
+	unsafe = true;
+
+steps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -66,3 +79,5 @@ exports.steps =
 		);
 	}
 ];
+
+*/

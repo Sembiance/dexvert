@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class mp4 extends Format
+{
+	name = "MPEG4 Video";
+	website = "http://fileformats.archiveteam.org/wiki/MP4";
+	ext = [".mp4",".m4v"];
+	mimeType = "video/mp4";
+	magic = [{},"MPEG-4 Media File",{},"ISO Media, MP4"];
+	untouched = true;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +28,5 @@ exports.meta =
 };
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

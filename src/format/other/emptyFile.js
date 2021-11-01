@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class emptyFile extends Format
+{
+	name = "Empty File";
+	magic = [{}];
+	untouched = true;
+
+idCheck = undefined;
+
+updateProcessed = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +27,5 @@ exports.meta =
 exports.idCheck = state => !state.transformed;
 
 exports.updateProcessed = (state, p, cb) => { state.processed = true; setImmediate(cb); };
+
+*/

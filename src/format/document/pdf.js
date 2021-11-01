@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class pdf extends Format
+{
+	name = "Portable Document Format";
+	website = "http://fileformats.archiveteam.org/wiki/PDF";
+	ext = [".pdf"];
+	mimeType = "application/pdf";
+	magic = ["Adobe Portable Document Format","PDF document",{}];
+	untouched = true;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -24,3 +40,5 @@ exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 		return p.util.flow.noop;
 	}
 ])(state0, p0, cb);
+
+*/

@@ -1,3 +1,21 @@
+/*
+import {Format} from "../../Format.js";
+
+export class koalaPaint extends Format
+{
+	name = "Koala Paint";
+	website = "http://fileformats.archiveteam.org/wiki/KoalaPainter";
+	ext = [".koa",".gig",".kla",".gg",".koala"];
+	safeExt = undefined;
+	mimeType = "image/x-koa";
+	magic = ["Koala Paint"];
+	trustMagic = true;
+	converters = ["nconvert","abydosconvert","view64"]
+
+idCheck = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs");
@@ -24,3 +42,5 @@ exports.meta =
 exports.idCheck = state => fs.statSync(state.input.absolute).size<=10006;
 
 exports.converterPriority = ["nconvert", "abydosconvert", "view64"];
+
+*/

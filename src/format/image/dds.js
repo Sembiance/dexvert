@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class dds extends Format
+{
+	name = "DirectDraw Surface";
+	website = "http://fileformats.archiveteam.org/wiki/DDS";
+	ext = [".dds"];
+	mimeType = "image/x-direct-draw-surface";
+	magic = ["DirectX DirectDraw Surface","Microsoft DirectDraw Surface","DirectDraw Surface"];
+	converters = ["convert","nconvert"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -14,3 +30,5 @@ exports.meta =
 exports.converterPriority = ["convert", "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

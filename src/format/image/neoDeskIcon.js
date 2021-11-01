@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class neoDeskIcon extends Format
+{
+	name = "NeoDesk Icon";
+	website = "http://fileformats.archiveteam.org/wiki/NeoDesk_icon";
+	ext = [".nic"];
+	magic = ["NeoDesk icon"];
+	mimeType = "image/x-neodesk-icon";
+	converters = ["abydosconvert"]
+
+idCheck = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs");
@@ -23,3 +39,5 @@ exports.idCheck = (state, matches) =>
 };
 
 exports.converterPriority = ["abydosconvert"];
+
+*/

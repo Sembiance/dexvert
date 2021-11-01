@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class xwd extends Format
+{
+	name = "X Window Dump";
+	website = "http://fileformats.archiveteam.org/wiki/XWD";
+	ext = [".xwd",".dmp"];
+	safeExt = undefined;
+	mimeType = "image/x-xwindowdump";
+	magic = ["X-Windows Screen Dump","XWD X Windows Dump image data"];
+	converters = ["nconvert","abydosconvert","convert"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -15,3 +32,5 @@ exports.meta =
 exports.converterPriority = ["nconvert", "abydosconvert", "convert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

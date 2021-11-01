@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class cvg extends Format
+{
+	name = "Calamus Vector Graphic";
+	website = "http://fileformats.archiveteam.org/wiki/Calamus_Vector_Graphic";
+	ext = [".cvg"];
+	forbidExtMatch = true;
+	magic = ["Calamus Vector Graphic"];
+	converters = ["scribus"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +25,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["scribus"];
+
+*/

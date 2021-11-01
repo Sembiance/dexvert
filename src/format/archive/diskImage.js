@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class diskImage extends Format
+{
+	name = "Disk Image";
+	website = "http://fileformats.archiveteam.org/wiki/Disk_Image_Formats";
+	ext = [".img"];
+	magic = ["Generic PC disk image","FAT Disk Image"];
+	confidenceAdjust = undefined;
+	converters = ["7z"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -13,3 +27,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["7z"];
+
+*/

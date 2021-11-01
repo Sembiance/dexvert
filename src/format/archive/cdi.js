@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class cdi extends Format
+{
+	name = "Compact Disc-Interactive";
+	website = "http://fileformats.archiveteam.org/wiki/Cd-i";
+	ext = [".bin"];
+	magic = ["CD-I disk image"];
+	keepFilename = true;
+	filesRequired = undefined;
+	converters = ["IsoBuster"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +27,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["IsoBuster"];
+
+*/

@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class reg extends Format
+{
+	name = "Windows Registry Data";
+	website = "http://fileformats.archiveteam.org/wiki/Windows_Registry";
+	ext = [".reg",".dat"];
+	forbidExtMatch = true;
+	magic = [{}];
+	untouched = true;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 /* eslint-disable prefer-named-capture-group */
 const XU = require("@sembiance/xu");
@@ -13,3 +29,5 @@ exports.meta =
 };
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

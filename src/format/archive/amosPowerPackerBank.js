@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class amosPowerPackerBank extends Format
+{
+	name = "AMOS Power Packer Bank";
+	ext = [".abk"];
+	magic = ["AMOS PowerPacker bank"];
+	converters = ["xfdDecrunch"]
+
+post = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -43,3 +57,5 @@ exports.post = (state, p, cb) =>
 		cb
 	);
 };
+
+*/

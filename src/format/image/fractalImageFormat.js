@@ -1,15 +1,13 @@
-"use strict";
-const XU = require("@sembiance/xu");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class fractalImageFormat extends Format
 {
-	name           : "Fractal Image Format",
-	website        : "http://fileformats.archiveteam.org/wiki/FIF_(Fractal_Image_Format)",
-	ext            : [".fif"],
-	forbidExtMatch : true,
-	magic          : ["Fractal Image Format bitmap"],
-	unsafe         : true,
-	allowTransform : true
-};
-
-exports.converterPriority = ["fifView"];
+	name           = "Fractal Image Format";
+	website        = "http://fileformats.archiveteam.org/wiki/FIF_(Fractal_Image_Format)";
+	ext            = [".fif"];
+	forbidExtMatch = true;
+	magic          = ["Fractal Image Format bitmap"];
+	unsafe         = true;
+	allowTransform = true;
+	converters     = ["fifView"];
+}

@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class grassSlideshow extends Format
+{
+	name = "Grass' Slideshow";
+	website = "http://fileformats.archiveteam.org/wiki/Grass%27_Slideshow";
+	ext = [".hpm"];
+	converters = ["recoil2png"]
+
+idCheck = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs");
@@ -14,3 +28,5 @@ exports.meta =
 exports.idCheck = state => fs.statSync(state.input.absolute).size!==19203;
 
 exports.converterPriority = ["recoil2png"];
+
+*/

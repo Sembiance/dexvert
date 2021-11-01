@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class swfEXE extends Format
+{
+	name = "Macromedia Flash Compiled EXE";
+	website = "http://fileformats.archiveteam.org/wiki/SWF";
+	ext = [".exe"];
+	forbidExtMatch = true;
+	magic = ["Macromedia Projector/Flash executable"];
+	converters = [["EXE2SWFExtractor",{"program":"dexvert","flags":{"deleteInput":true}}]]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -15,3 +29,5 @@ exports.converterPriority =
 [
 	["EXE2SWFExtractor", {program : "dexvert", flags : {deleteInput : true}, argsd : state => ([path.join(state.output.absolute, `${state.input.name}.swf`), state.output.absolute])}]
 ];
+
+*/

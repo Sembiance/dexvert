@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class fn2 extends Format
+{
+	name = "Atari FontMaker";
+	ext = [".fn2",".fnt",".fn8"];
+	safeExt = undefined;
+	fileSize = 2048;
+	forbidFileSizeMatch = true;
+
+steps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +26,5 @@ exports.meta =
 };
 
 exports.steps = [() => ({program : "recoil2png"})];
+
+*/

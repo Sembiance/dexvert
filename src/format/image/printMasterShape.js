@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class printMasterShape extends Format
+{
+	name = "PrintMaster Shape";
+	website = "http://fileformats.archiveteam.org/wiki/PrintMaster";
+	ext = [".shp"];
+	forbidExtMatch = true;
+	filesOptional = undefined;
+	magic = ["Printmaster Shape bitmap"];
+	converters = [{"program":"deark"}]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -12,3 +27,5 @@ exports.meta =
 };
 
 exports.converterPriority = [{program : "deark", flags : state => ({dearkFile2 : (state.extraFilenames || []).find(v => v.toLowerCase().endsWith(".sdr"))})}];
+
+*/

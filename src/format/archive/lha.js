@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class lha extends Format
+{
+	name = "LHArc Archive";
+	website = "http://fileformats.archiveteam.org/wiki/LHA";
+	ext = [".lha",".lhz",".lzs",".exe"];
+	safeExt = undefined;
+	magic = ["LHARC/LZARK compressed archive",{},"LHA File Format","LHA self-extracting","LHarc self-extracting archive",{},"LArc compressed archive"];
+	converters = ["lha",{"program":"deark","flags":{"dearkOpts":["lha:lhark"]}},"UniExtract"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -17,3 +31,5 @@ exports.meta =
 // Luckilly 'lha' fails on these, so then I try deark with the proper option argument to use the lhark decompression routine
 // See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
 exports.converterPriority = ["lha", {program : "deark", flags : {dearkOpts : ["lha:lhark"]}}, "UniExtract"];
+
+*/

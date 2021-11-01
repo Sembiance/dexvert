@@ -1,3 +1,22 @@
+/*
+import {Format} from "../../Format.js";
+
+export class fileList extends Format
+{
+	name = "File List";
+	magic = ["ASCII text","ISO-8859 text","UTF-8 Unicode text","Non-ISO extended-ASCII text","ReStructuredText file","International EBCDIC text","UTF-8 Unicode text","Printable ASCII","Unicode text, UTF-8 text","Algol 68 source, ISO-8859 text"];
+	weakMagic = true;
+	priority = 3;
+	ext = [".bbs",".lst",".lis",".dir",".ind"];
+	filename = [{},{},{},{},{}];
+	untouched = true;
+
+idCheck = undefined;
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -17,3 +36,5 @@ exports.meta =
 exports.idCheck = state => fs.statSync(state.input.absolute).size<XU.MB*25;	// Unlikely to ever encountere a file list this big
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+*/

@@ -23,6 +23,7 @@ export class DexFile
 		dexFile.preExt = periodLoc===-1 ? "" : `.${dexFile.base.substring(0, periodLoc)}`;
 		dexFile.preName = dexFile.base.substring(dexFile.preExt.length);
 
+		dexFile.transformed = Object.isObject(o) && o.transformed;
 		return dexFile;
 	}
 

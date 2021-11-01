@@ -1,3 +1,17 @@
+/*
+import {Format} from "../../Format.js";
+
+export class xps extends Format
+{
+	name = "Open XML Paper Specification";
+	website = "http://fileformats.archiveteam.org/wiki/XPS";
+	ext = [".xps",".oxps"];
+	mimeType = "application/oxps";
+	magic = ["Open XML Paper Specification"];
+	converters = ["xpstopdf","abydosconvert"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +25,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["xpstopdf", "abydosconvert"];
+
+*/

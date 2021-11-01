@@ -1,3 +1,19 @@
+/*
+import {Format} from "../../Format.js";
+
+export class orf extends Format
+{
+	name = "Olympus RAW";
+	website = "http://fileformats.archiveteam.org/wiki/ORF";
+	ext = [".orf"];
+	magic = ["Olympus RAW","Olympus ORF raw image data","Olympus digital camera RAW image"];
+	mimeType = "image/x-olympus-orf";
+	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -13,3 +29,5 @@ exports.meta =
 exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
+
+*/

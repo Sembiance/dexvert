@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class acornSprite extends Format
+{
+	name = "Acorn (RISC OS) Sprite";
+	website = "http://fileformats.archiveteam.org/wiki/Acorn_Sprite";
+	ext = [".acorn"];
+	magic = ["GLS_BINARY_LSB_FIRST","GLS_BINARY_MSB_FIRST"];
+	priority = 3;
+	untrustworthy = true;
+	converters = [{"program":"deark","flags":{"dearkModule":"rosprite"}},"nconvert"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	C = require("../../C.js");
@@ -13,3 +28,5 @@ exports.meta =
 };
 
 exports.converterPriority = [{ program : "deark", flags : {dearkModule : "rosprite"} }, "nconvert"];
+
+*/

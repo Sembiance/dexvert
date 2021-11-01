@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class printfox extends Format
+{
+	name = "Printfox/Pagefox Bitmap";
+	website = "http://fileformats.archiveteam.org/wiki/Printfox_bitmap";
+	ext = [".gb",".bs",".pg"];
+	magic = ["PrintFox/Pagefox bitmap"];
+	weakMagic = true;
+	trustMagic = true;
+	converters = ["nconvert"]
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -16,3 +31,5 @@ exports.meta =
 };
 
 exports.converterPriority = ["nconvert"];
+
+*/

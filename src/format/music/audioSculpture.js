@@ -1,3 +1,20 @@
+/*
+import {Format} from "../../Format.js";
+
+export class audioSculpture extends Format
+{
+	name = "Audio Sculpture Module";
+	website = "http://fileformats.archiveteam.org/wiki/Audio_Sculpture";
+	ext = [".adsc"];
+	magic = ["Audio Sculpture module"];
+	keepFilename = true;
+	filesOptional = undefined;
+	converters = [{"program":"uade123","flags":{"uadeType":"AudioSculpture"}}]
+
+inputMeta = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -14,3 +31,5 @@ exports.meta =
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 
 exports.converterPriority = [{program : "uade123", flags : {uadeType : "AudioSculpture"}}];
+
+*/

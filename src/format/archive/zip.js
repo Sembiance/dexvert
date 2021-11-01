@@ -1,3 +1,22 @@
+/*
+import {Format} from "../../Format.js";
+
+export class zip extends Format
+{
+	name = "PKZip Archive";
+	website = "http://fileformats.archiveteam.org/wiki/ZIP";
+	ext = [".zip",".exe"];
+	magic = ["ZIP compressed archive","Zip archive data","ZIP Format",{},{},"Zip multi-volume archive data"];
+	converters = ["unzip","deark",{"program":"deark","flags":{"dearkOpts":["zip:scanmode"]}},"unar","7z","UniExtract"]
+
+inputMeta = undefined;
+
+post = undefined;
+
+updateProcessed = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 const tiptoe = require("tiptoe");
@@ -50,3 +69,5 @@ exports.updateProcessed = (state, p, cb) =>
 	
 	setImmediate(cb);
 };
+
+*/

@@ -1,3 +1,21 @@
+/*
+import {Format} from "../../Format.js";
+
+export class smus extends Format
+{
+	name = "Simple Musical Score";
+	website = "http://fileformats.archiveteam.org/wiki/Amiga_Module";
+	ext = [".smus",".song"];
+	magic = ["SMUS IFF Simple Musical Score","IFF data, SMUS simple music"];
+	notes = "\nThe 'SMUS' format was used by many different programs including Sonix and Deluxe Music.\nThis first tries to convert SONIX SMUS with instrument support using uade123.\nThat cna fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples.\nSMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus)\nSMUSMIDI is pretty good, but it crashes on many files, requiring a full timeout wait of the rexx script.";
+	converters = [{"program":"uade123"},["smus2midi",{"program":"dexvert","flags":{"asFormat":"music/mid","deleteInput":true}}],["smusmidi",{"program":"dexvert","flags":{"asFormat":"music/mid","deleteInput":true}}]]
+
+preSteps = [null];
+
+postSteps = [null];
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -66,3 +84,5 @@ exports.postSteps = [
 		return p.util.file.unlink(smusWorkDir);
 	}
 ];
+
+*/

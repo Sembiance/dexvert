@@ -1,3 +1,18 @@
+/*
+import {Format} from "../../Format.js";
+
+export class nullBytes extends Format
+{
+	name = "All Null Bytes";
+	magic = [{}];
+	untouched = true;
+
+idCheck = undefined;
+
+updateProcessed = undefined;
+}
+*/
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -13,3 +28,5 @@ exports.meta =
 exports.idCheck = state => !state.transformed;
 
 exports.updateProcessed = (state, p, cb) => { state.processed = true; setImmediate(cb); };
+
+*/

@@ -1,0 +1,13 @@
+"use strict";
+const XU = require("@sembiance/xu");
+
+exports.meta =
+{
+	name           : "NeoBook Document",
+	ext            : [".pub"],
+	forbidExtMatch : true,
+	magic          : ["NeoBook for DOS document"],
+	untouched      : true
+};
+
+exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);

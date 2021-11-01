@@ -20,5 +20,5 @@ const argv = cmdUtil.cmdInit({
 for(const inputFilePath of Array.force(argv.inputFilePath))
 {
 	const identifications = await identify(inputFilePath, {verbose : argv.verbose});
-	console.log({identifications});
+	xu.log`${identifications}`;
 }

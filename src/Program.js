@@ -65,14 +65,14 @@ export class Program
 			const args = await this.args(r);
 			const runOptions = {cwd : ramDirPath, timeout, verbose};
 			if(verbose)
-				console.log(`Program ${this.programid} running as [${this.bin} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}] with options ${runOptions}`);
+				xu.log`Program ${this.programid} running as \`${this.bin} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, args, runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
 		else if(this.exec)
 		{
 			if(verbose)
-				console.log(`Program ${this.programid} executing .exec steps`);
+				xu.log`Program ${this.programid} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
 
@@ -115,6 +115,11 @@ export class Program
 
 		for(const programFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "program"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
+			// TODO REMOVE BELOW AFTER CONVERTING ALL PROGRAMS
+			if(!(await fileUtil.readFile(programFilePath)).includes(" extends Program"))
+				continue;
+			// TODO REMOVE ABOVE AFTER CONVERTING ALL PROGRAMS
+
 			const progamModule = await import(programFilePath);
 			const programid = Object.keys(progamModule)[0];
 

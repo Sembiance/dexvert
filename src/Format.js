@@ -63,6 +63,11 @@ export class Format
 
 		for(const formatFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "format"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
+			// TODO REMOVE BELOW AFTER CONVERTING ALL FORMATS
+			if(!(await fileUtil.readFile(formatFilePath)).includes(" extends Format"))
+				continue;
+			// TODO REMOVE ABOVE AFTER CONVERTING ALL FORMATS
+
 			const formatModule = await import(formatFilePath);
 			const formatid = Object.keys(formatModule)[0];
 			const familyid = path.basename(path.dirname(formatFilePath));

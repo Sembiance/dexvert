@@ -20,8 +20,8 @@ export class DexFile
 		dexFile.ts = fileInfo.mtime;	// eslint-disable-line require-atomic-updates
 
 		const periodLoc = dexFile.base.indexOf(".");
-		dexFile.pre = periodLoc===-1 ? "" : dexFile.base.substring(0, periodLoc+1);
-		dexFile.preName = dexFile.base.substring(dexFile.pre.length);
+		dexFile.preExt = periodLoc===-1 ? "" : `.${dexFile.base.substring(0, periodLoc)}`;
+		dexFile.preName = dexFile.base.substring(dexFile.preExt.length);
 
 		return dexFile;
 	}

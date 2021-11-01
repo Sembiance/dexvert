@@ -23,7 +23,7 @@ Deno.test("create", async () =>
 		assertStrictEquals(o.isSymlink, false);
 		assertStrictEquals(o.size, 6);
 		assertStrictEquals(o.ts.toString(), (new Date("2021-10-31T13:04:29.027Z")).toString());
-		assertStrictEquals(o.pre, "some.");
+		assertStrictEquals(o.preExt, ".some");
 		assertStrictEquals(o.preName, "big.txt.file.txt");
 	});
 
@@ -41,7 +41,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 8);
 	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
-	assertStrictEquals(a.pre, "txt.");
+	assertStrictEquals(a.preExt, ".txt");
 	assertStrictEquals(a.preName, "b");
 
 	// symlink
@@ -57,7 +57,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, true);
 	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:09:55.866Z")).toString());
-	assertStrictEquals(a.pre, "");
+	assertStrictEquals(a.preExt, "");
 	assertStrictEquals(a.preName, "symlinkFile");
 
 	// directory
@@ -73,7 +73,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isDirectory, true);
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:49.475Z")).toString());
-	assertStrictEquals(a.pre, "");
+	assertStrictEquals(a.preExt, "");
 	assertStrictEquals(a.preName, "third");
 });
 
@@ -96,7 +96,7 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 8);
 	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
-	assertStrictEquals(a.pre, "txt.");
+	assertStrictEquals(a.preExt, ".txt");
 	assertStrictEquals(a.preName, "b");
 
 	// check that clone was changed
@@ -112,6 +112,6 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(b.isSymlink, false);
 	assertStrictEquals(b.size, 8);
 	assertStrictEquals(b.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
-	assertStrictEquals(b.pre, "txt.");
+	assertStrictEquals(b.preExt, ".txt");
 	assertStrictEquals(b.preName, "b");
 });

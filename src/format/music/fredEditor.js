@@ -1,0 +1,14 @@
+"use strict";
+const XU = require("@sembiance/xu");
+
+exports.meta =
+{
+	name    : "Fred Editor Module",
+	website : "http://fileformats.archiveteam.org/wiki/Fred_Editor",
+	ext     : [".fred"],
+	magic   : ["Fred Editor module"]
+};
+
+exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
+
+exports.converterPriority = [{program : "uade123", flags : {uadeType : "Fred"}}];

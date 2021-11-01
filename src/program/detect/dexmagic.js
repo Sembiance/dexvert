@@ -1,181 +1,75 @@
+/* eslint-disable unicorn/no-hex-escape, max-len */
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 
 const DEXMAGIC_CHECKS =
 {
+	// 3d
+	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
+
 	// archive
+	"IFF LIST file"       : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
+	"imageUSB"            : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
 	"pcxLib compressed"   : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
+	"SCR Package"         : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File" : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
+	"WAD2 file"           : [{offset : 0, match : "WAD2"}],
+
+	// document
+	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],
+	"MacWrite Document"                       : [{offset : 0, match : [0x00, 0x06, 0x00]}, {offset : 4, match : [0x00, 0x06, 0x00, 0x02]}],
+	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],
+	"PCBoard Programming Language Executable" : [{offset : 0, match : "PCBoard Programming Language Executable"}],
+	"Wildcat WCX"                             : [{offset : 0, match : "GHSH"}],
+
+	// executable
+	"FM-TownsOS EXP P3" : [{offset : 0, match : "P3"}],
+	"FM-TownsOS EXP MP" : [{offset : 0, match : "MP"}],
 
 	// image
-	"CAD/Draw TVG"             : "TommySoftware TVG",
-	"Second Nature Slide Show" : "Second Nature Software\r\nSlide Show\r\nCollection",
+	"Alias PIX"                   : [{offset : 4, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x18]}],
+	"Apple IIGS Preferred Format" : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
+	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
+	"CAD/Draw TVG"                : "TommySoftware TVG",
+	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
+	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
+	"MLDF BMHD file"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
+	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],
+	"NAPLPS Image"                : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
+	"PaintWorks"                  : [{offset : 54, match : "ANvisionA"}],
+	"Picasso 64 Image"            : [{offset : 0, match : [0x00, 0x18]}],
+	"Saracen Paint Image"         : [{offset : 0, match : [0x00, 0x78]}],
+	"Second Nature Slide Show"    : "Second Nature Software\r\nSlide Show\r\nCollection",
+	"ZX Spectrum BSP"             : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
+	"ZX Spectrum CHR"             : [{offset : 0, match : "chr"}, {offset : 3, match : [0x24]}],
+
+	// music
+	"AMOS Memory Bank, Tracker format" : [{offset : 0, match : "AmBk"}, {offset : 12, match : "Tracker "}],
+	"IFF Deluxe Music Score"           : [{offset : 0, match : "FORM"}, {offset : 8, match : "DMCS"}],
+	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
+
+	// other
+	"Director STXT" : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
+	"OLB Library"   : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
+	"VCD Info File" : [{offset : 0, match : "VIDEO_CD"}],
+
+	// video
+	"RIFF ANIM file" : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
 
 	// unsupported
-	"Amiga Action Reply 3 Freeze File" : [{offset : 0, match : [0x41, 0x52, 0x50, 0x33, 0x00]}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00]}, {offset : 22, match : Array(10).fill(0x00)}]
+	"Amiga Action Reply 3 Freeze File" : [{offset : 0, match : [0x41, 0x52, 0x50, 0x33, 0x00]}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00]}, {offset : 22, match : Array(10).fill(0x00)}],
+	"AMOS Memory Bank, Data format"    : [{offset : 0, match : "AmBk"}, {offset : 12, match : "Datas   "}],
+	"Atari CTB File"                   : [{offset : 0, match : "GSP22-CTB"}],
+	"Atari GEM OBM File"               : [{offset : 0, match : [0x00, 0x01, 0x00, 0x22, 0x00, 0x00]}, {offset : 17, match : Array(5).fill(0x00)}, {offset : 34, match : [0x00]}, {offset : 36, match : [0x00]}, {offset : 38, match : [0x00, 0x02]}, {offset : 53, match : Array(5).fill(0x00)}],
+	"IFF SDBG file"                    : [{offset : 0, match : "FORM"}, {offset : 8, match : "SDBG"}],
+	"RIFF MSXF file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MSXF"}],
+	"RIFF MxSt file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MxSt"}],
+	"RIFF STYL file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "STYL"}],
+	"VCD Entries File"                 : [{offset : 0, match : "ENTRYVCD"}],
+	"VideoTracker Routine"             : [{offset : 0, match : "PVC!"}]
 };
-/*
 
-# IFF LIST packed
-0	string/b	LIST
->8	string/b	SSETPROP	IFF LIST file
-
-# IFF FORMs
-0	string/b	FORM
->8	string/b	MLDFBMHD	MLDF BMHD file
-
-# IFF VAXL
-0	string/b	FORM
->8	string/b	VAXL	IFF VAXL file
-
-# IFF SDBG
-0	string/b	FORM
->8	string/b	SDBG	IFF SDBG file
-
-# IFF DMCS
-0	string/b	FORM
->8	string/b	DMCS	IFF Deluxe Music Score
-
-# IFF FRAY
-0	string/b	FORM
->8	string/b	FRAY	IFF Cinema 4D file
-
-# AMOS Memory Bank (Tracker )
-0		string/b	AmBk	AMOS Memory Bank
->12		string/b	Tracker\ 	\b, Tracker format
->12		string/b	Data\ \ \ \ 	\b, Data format
-
-# RIFF types
-0		string/b	RIFF
->8		string/b	MSFX	RIFF MSFX file
->8		string/b	MIDS	RIFF MIDS file
->8		string/b	STYL	RIFF STYL file
->8		string/b	ANIM	RIFF ANIM file
->8		string/b	MxSt	RIFF MxSt file
-
-# RIFX
-0		string/b	RIFX
->8		string/b	MV93	RIFX MV93 file
-
-# Lingo Script
-0	string/b	\x04\x11\x71\x50\x00\x00\x00\x01\x00\x00	Lingo Script
-
-# NAPLPS Image
-0	string/b	\x0C\x0E\x20\x4C\x6F\x21\x48\x40\x40\x49\x3E\x40\x3C\x40\x40\x40\x3E	NAPLPS Image
-
-# Picasso 64 Image
-0   string/b    \x00\x18    Picasso 64 Image
-
-# Saracen Paint Image
-0   string/b    \x00\x78    Saracen Paint Image
-
-# WAD2
-0	string/b	WAD2	WAD2 file
-
-# multiArtist
-0   string/b    \x4D\x47\x48\x01	multiArtist
-
-# Paintworks
-54	string/b	ANvisionA	Paintworks
-
-# Turbo Rascal Syntax Error
-0	string/b	FLUFF64	Turbo Rascal Syntax Error
-
-# Funny Paint
-0	string/b	\x00\x0a\xcf\xe2	Funny Paint
-
-# Fullscreen Construction Kit
-0	string/b	KD	Fullscreen Construction Kit
-
-# PMG Designer
-0	string/b	\xF0\xED\xE4	PMG Designer
-
-# XLD4 Data Document
-21	string/b	XLD4\ GRAPHIC\ DATA\ \ DOCUMENT	XLD4 Data Document
-
-# ArtMaster 88
-0	string/b	SS\x5FSIF	ArtMaster88
-
-# ZX Spectrum BSP
-0	string/b	bsp\xC0	ZX Spectrum BSP
-
-# ZX Spectrum CHR
-0	string/b	chr\x24	ZX Spectrum CHR
-
-# CharPad
-0	string/b	CTM\x05	CharPad
-
-# Apple IIGS Preferred Format
-2	string/b	\x00\x00\x04MAIN	Apple IIGS Preferred Format
-
-# imageUSB
-0	string/b	i\x00m\x00a\x00g\x00e\x00U\x00S\x00B	imageUSB
-
-# Alias PIX
-4	string/b	\x00\x00\x00\x00\x00\x18	Alis PIX
-
-# OLB Library
-0	string/b	Gnu\ is\ Not\ eUnuchs\x2E\x0A\x5F\x5F\x2ESYMDEF	OLB Library
-
-# Atari GEM OBM File
-0	string/b	\x00\x01\x00\x22\x00\x00
->17	string/b	\x00\x00\x00\x00\x00
->34	string/b	\x00
->36	string/b	\x00
->38	string/b	\x00\x02
->53	string/b	\x00\x00\x00\x00\x00	Atari GEM OBM File
-
-# Calamus Document
-0	string/b	DMC\ CALAMUS\ 
->13	string/b	CDK	Calamus Document
-
-# Kyss KYG
-0	string/b	KYGformat\ ver.	Kyss KYG
-
-# PageStream Document
-0	string/b	\x07\x23\x19\x92\x00\x0D\x02\x00\x00	PageStream Document
-
-# FM-TownsOS EXP
-0	string/b	P3	FM-TownsOS EXP P3
-0	string/b	MP	FM-TownsOS EXP MP
-
-# MacWrite
-0	string/b	\x00\x06\x00
->4	string/b	\x00\x02\x00\x02	MacWrite Document
->4	string/b	\x00\x06\x00\x02	MacWrite Document
-
-# GNU Info
-0	string/b	This\ is\ Info\ file	GNU Info
-
-# VideoTracker
-0	string/b	PVC!	VideoTracker Routine
-
-# Director STXT
-0	string/b	\x00\x00\x00\x0C\x00\x00	Director STXT
-
-# MediaPaq DCF
-0	string/b	EKIF	MediaPaq DCF
-
-# SCR Package
-0	string/b	This\ is\ SCR\ Package\ File	SCR Package
-
-# VCD Entries File
-0	string/b	ENTRYVCD	VCD Entries File
-
-# VCD Info File
-0	string/b	VIDEO_CD	VCD Info File
-
-# PCBoard Programming Language Executable
-0	string/b	PCBoard\ Programming\ Language\ Executable	PCBoard Programming Language Executable
-
-# Wildcat WCX
-0	string/b	GHSH	Wildcat WCX
-
-# Atari CTB File
-0	string/b	GSP22-CTB	Atari CTB File
-
-*/
 Object.mapInPlace(DEXMAGIC_CHECKS, (k, v) => (typeof v==="string" ? ([k, [{offset : 0, match : v}]]) : [k, v]));
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 {

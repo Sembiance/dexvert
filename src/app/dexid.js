@@ -17,5 +17,8 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
-const identifications = await identify(argv.inputFilePath, {verbose : argv.verbose});
-console.log({identifications});
+for(const inputFilePath of Array.force(argv.inputFilePath))
+{
+	const identifications = await identify(inputFilePath, {verbose : argv.verbose});
+	console.log({identifications});
+}

@@ -1,0 +1,34 @@
+# On a fresh debian 10:
+apt install sshpass gettext python-cairo-dev pango1.0-dev git gcc libcairo2-dev liblcms2-dev libmagickwand-dev python-dev python-pil python-reportlab python-cairo
+
+git clone https://github.com/sk1project/uniconvertor.git
+cd uniconvertor
+mkdir subproj
+git clone https://github.com/sk1project/build-utils subproj/build-utils
+ln -s subproj/build-utils/src/utils utils
+
+python setup.py bdist_deb
+mkdir appdir
+cd appdir
+dpkg-deb -x ../dist/python-uniconvertor-2.0rc5_amd64.deb .
+apt download libcairo2 libpango1.0 python-wxgtk3.0 python-reportlab python-cups python-pil python-cairo libpng16-16 libpython2.7-stdlib python2.7 python2.7-minimal libpython2.7-minimal python-wxgtk3.0 libwxgtk3.0-0v5 libwxbase3.0-0v5
+find *.deb -exec dpkg-deb -x {} . \;
+rm *.deb
+cd ..
+
+# Now put into appdir/AppRun the sandbox/app/uniconvertor-AppRun contents
+chmod +x ./appdir/AppRun
+
+wget -O appdir/uniconvertor-icon.png https://raw.githubusercontent.com/boolean-world/appimage-resources/master/hello-world-appimage/hello-world-icon.png
+echo -e "[Desktop Entry]\nType=Application\nName=uniconvertor\nIcon=uniconvertor-icon" > appdir/uniconvertor.desktop
+
+cd appdir/usr/lib/python2.7/dist-packages
+ln -s ../../uniconvertor-*/uc2 .
+ln -s wx-3.0-gtk3/* .
+cd ../../../../../
+
+wget -c -nv "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+chmod a+x appimagetool-x86_64.AppImage
+./appimagetool-x86_64.AppImage -g appdir/
+
+# Now you have a uniconvertor-*-x86_64.AppImage file that you can run anywhere

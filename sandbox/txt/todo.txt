@@ -1,0 +1,103 @@
+/--------------\
+| TOP Priority |
+\--------------/
+* Do both of these:
+  dexvert/test/checkFalses.js and fix anything
+  dexvert/util/checkAbydosFormats.js and add new formats (author slips in new ones without mentioning in release notes)
+
+* Once abydos upgrades to 0.2.9 ensure GX1 files all convert properly now.
+  Then add support for: DataShow Graphic, DataShow Sprite, FAXX, lotusChart and MLDF.
+  ALSO, go through the email he sent me on Oct 17 (I archived it)
+
+* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
+  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage
+  Then process the OS/2 CDs I have
+
+/---------------\
+| High Priority |
+\---------------/
+* Add support for these formats:
+  music/sc68.js
+  music/sndh.js
+  music/graoumfTracker.js
+  music/famiTracker.js
+  audio/psf
+
+* Add WavPack support (sox should work) (for sample files: `wget http://www.rarewares.org/wavpack/test_suite.zip`)
+
+* Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
+  Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
+
+
+/-----------------\
+| Medium Priority |
+\-----------------/
+* See about adding these formats:
+  https://ftp.modland.com/pub/modules/Ad%20Lib/
+  https://ftp.modland.com/pub/modules/Spectrum/
+
+* The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
+  I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
+  If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
+
+* GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
+
+* After retromission is pretty far along, grab a copy of every single .instr and .ss file found and stick em into music/smusInstruments (would have to check for naming collisions (where the files have different checksums) and potentially support that if there are a lot.
+Then the conversion app would have a much higher chance at being able to convert the files.
+I could then create a retryFiles.js that would find all items and files that have processed false that match a given criteria (magic probably) and the re-run processFile for that item (which would likely mean breaking processFile fun into its on file, that shouldn't be too hard.)
+There are likely to be filename collisions. I should also preserve those from the original software over those just found in the wild
+
+* Create a NodeJS based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
+  http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
+  See samples in: sandbox/samples/mail_news/
+
+
+/--------------\
+| Low Priority |
+\--------------/
+* Improve ILBM animations. Probably need to use an amiga program under QEMU and export as either GIF or raw PNG frames
+  Abydos author mentioned he would like to improve the animations
+  PPaint can save as animated GIF, but dunno if it handles color cycling: http://www.ppaint.com/
+  Maybe also check out Delxue Paint itself to see if it has any export capability: https://en.wikipedia.org/wiki/Deluxe_Paint
+
+* Support ANSI Music files: http://artscene.textfiles.com/ansimusic/
+
+* Figure out what format to create '3D' files to. Not even sure what software can handle opening things like VRML. Maybe start there and see what they can 'export' to. Maybe STL? Or maybe just 'render' each 3D file to a PNG and call it a day.
+
+* Add support for iffCTLG. Looks pretty easy to reverse engineer.
+  Use this tool, looks fun to use: http://kaitai.io/  (or just use 010 Editor templates, see dexvert/010_templates/)
+  As that tool looks like I can take the result and use it directly within dexvert. Woot.
+  For inspiration help: http://formats.kaitai.io/riff/index.html
+
+* Get other formats reverse engineered
+  Goal: Produce open source code (any language) that can run on Linux that can take an input file and produce one or more output PNG files
+  Could also try posting on reddit r/ReverseEngineering/ or r/INAT
+  Maybe offer a $5,000 bounty on one of the sites linked: https://en.wikipedia.org/wiki/Open-source_bounty
+  Alternatively I can post on reddit.com/r/ReverseEngineering  also ask where else I might post such an offer
+  Could also contact devs directly:
+  https://www.upwork.com/o/profiles/users/~0105d5841f6a52bb2e/
+  https://www.upwork.com/o/profiles/users/~0168f82b6f4a79d7e0/
+  https://www.upwork.com/o/profiles/users/~01ca8e53b73db18365/
+  https://www.upwork.com/o/profiles/users/~017b879ebc3785c685/
+  - Second Nature SNX 	http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic
+  - AOL Art 			http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)
+
+* Ask on IRC OFTC #kernelnewbies and ##linux on freenode about PAYING someone to add support to linux kernel for mounting CDI images:
+  https://www.isobuster.com/help/cd-i_and_vcd
+  https://encyclopedia2.thefreedictionary.com/Green+Book+CD-ROM
+  https://www.lscdweb.com/data/downloadables/2/8/cdi_may94_r2.pdf
+  See smoe tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
+
+* Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
+  WARNING! I need to assumed that it will be exploited. So I'll likely need to run virtual machines to do the actual conversions, or something
+
+
+/----------------\
+| Probably Never |
+\----------------/
+* Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
+
+* Create a 'dexvert-remote' NPM  package that will provide the same 'dexvert inputFilePath outputDirPath' command line tool but it will upload the file to the website and then download the results all seamlessly (with progress bar)
+
+* Convert bitmap fonts to more usable vector fonts by trying to "autotrace" the fonts, or utilize a pro tool like: https://www.fontlab.com/font-editor/bitfonter/   or   https://www.fontlab.com/font-converter/transtype/
+

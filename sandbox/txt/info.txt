@@ -1,0 +1,45 @@
+/------------------------------------\
+| Other Converters (see formats.txt) |
+\------------------------------------/
+Better DOSBox that supports Windows 3.x and Windows 95: https://dosbox-x.com/
+
+Type		Name				Platform		Website														Notes
+----		----				--------		-------														-----
+Various		Konvertor			Windows			https://www.logipole.com/konvertor-en.htm
+Various		Filestar*			Online			https://filestar.com/skills/
+
+>>> Maybe possible...
+Archive		http://www.compression.dk/cmview/View?id=10005
+Archive		https://www.sac.sk/files.php?d=7&l=
+Archive		https://www.amiga-stuff.com/crunchers-download.html
+Archive		https://www.legroom.net/software/uniextract
+Archive		https://github.com/Bioruebe/UniExtract2
+Image		http://old-dos.ru//index.php?page=files&mode=files&do=list&cat=96
+Image		http://files.mpoli.fi/software/DOS/GRAPHICS/
+Game		http://www.ctpax-x.org/index.php?goto=files
+Music		https://www.amigans.net/modules/xforum/viewtopic.php?topic_id=4555&forum=3
+Amiga		https://www.kuehlbox.wtf/files/amiganet/dev/misc
+C64			http://www.fairlight.to/tools/pc.html
+Assorted	https://www.pcorner.com/list/BBS
+Assorted	http://www.retroarchive.org/index.html
+
+/---------------------------\
+| File Format Info Websites |
+\---------------------------/
+>>> IFF
+http://fileformats.archiveteam.org/wiki/IFF
+http://shikadi.net/moddingwiki/TED5
+https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF
+https://wiki.amigaos.net/wiki/IFF_FORM_and_Chunk_Registry
+https://wiki.amigaos.net/wiki/IFF_Standard
+https://wiki.amigaos.net/wiki/IFF_Source_Code
+https://www.kim-minh.com/riffl/
+
+>>> Other
+http://www.vgmpf.com/Wiki/index.php?title=MDS
+https://www.fileformat.info/format/cloud.htm
+https://file-extension.net/seeker/file_extension_stc
+https://www.digipres.org/formats/sources/trid/
+file:///mnt/compendium/DevLab/retromission/sandbox/websites/wotsit.org/default.html
+https://fileinfo.com/
+https://www.amiga-stuff.com/crunchers-id.html

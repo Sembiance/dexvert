@@ -1,0 +1,196 @@
+# Documentation for files in src/format/<family>/*.js
+
+>>> ******** General
+>>> name = "Format Name"
+A human friendly name for this format. This is the only 'required' property
+
+>>> charSet = "IBM-943"
+Can specify what the file encoding is if you know it. Really only used for text files.
+
+>>> mimeType = "image/some-mime"
+Some programs like abydos won't convert without a valid mime type specified.
+
+>>> notes = "Notes about the format go here"
+You can specify notes about the format here.
+
+>>> website = "http://fileformats.archiveteam.org/wiki/Tricolor_RGB"
+A website URL that details this format.
+
+
+>>> ******** Extension
+>>> ext = [".ext", ".ext2"]
+An array of extensions this format may have. First item should be the pirmary extension.
+All extensions should be lowercase as they are case insentive matches.
+
+>>> forbiddenExt = [".ps"]
+An array of extensions that if present will never result in a match.
+
+>>> forbidExtMatch = true   ||   forbidExtMatch = [".gif", ".other"]
+If set to true, no ext matches will be allowed on this extension.
+If an array, then none of the given extensions will be matched
+
+>>> weakExt = true   ||   weakExt = [".drk"]
+Either all extensions (if set to true) or specified extensions are weak and the file should not match if the magic is also weak.
+
+
+>>> ******** Filename
+>>> filename : ["FILEID.BIZ", /^filename$/i]
+Array of filenames this format may have.
+Strings must match exactly to the filename, case sensitive.
+Regexes match as a regex. Use /.../i for a case insensitive match
+
+
+>>> ******** File Size
+>>> fileSize : 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}
+If a number, files must be exactly this size.
+If an array, files must be any of the sizes in the array.
+If an object, the keys are extensions and files with the given extension must be that file size.
+
+>>> matchFileSize : true
+Normally files are not matched against file size because it's a pretty weak match.
+You can opt into file size matching if by setting this to true, only do this if you are sure your converter won't produce garbage from garbage.
+
+
+>>> ******** Magic
+>>> magic = ["Some Magic", /^More Magic$/]
+An array of magics to test against.
+If it's a string, the magic must .startWith() the string.
+If it's a regex, the magic must match the regex exactly.
+
+>>> forbiddenMagic = ["Not Magic", /^Not This$/]
+An array of magics that the file must NOT match.
+
+>>> forbidMagicMatch : true
+If set to true, then this format will never match on 'magic'
+
+>>> weakMagic = true || ["Specific Magic", /^That is weak$/]
+If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
+
+
+>>> ******** Other
+>>> auxFiles = (input, otherFiles, otherDirs) => [file, file] || false
+Some formats require other sibling files/directories to be present in order to convert correctly.
+Return an array of DexFiles (filtered from otherFiles/otherDirs) or false if no files were required.
+If you return an empty array, that is stating the required files were not found and to not match against this format.
+
+>>> byteCheck = {offset : 0, match : [0x00, 0x02] || "string"}  ||  byteCheck = [{}, {}...];
+A way to match against a particular part of the file as a way to double check the file is correct.
+Can return a single object or an array of matches. The match key can be a string or an array of bytes
+
+>>> confidenceAdjust : (input, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
+Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.
+Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
+file it's converting well enough, often producing garbage or something when a file is mis-identified. 
+
+>>> fallback : true
+Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
+
+>>> priority = C.PRIORITY.HIGH
+If a file matches multiple formats in a single family, this is the priority order for processing.
+Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
+
+>>> transformUnsafe : true
+If set to true, this format isn't safe to transform
+
+>>> trustMagic : true
+If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
+
+>>> unsupported = true
+If set to true, then this file can only be identified by not processed.
+
+>>> untouched : true
+Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
+
+
+>>> ******** Conversion
+
+
+
+
+
+
+
+
+
+
+
+>>> ******** Properties
+>>> highConfidence : true
+Normally 'unsupported' matches are very low priority. However sometimes a format might easily match other formats and those programs might not convert them correctly, resulting in gibberish. So if you know a format is a strong match, even though unsupported, set this to true and the confidence level will go up when identified.
+
+>>> keepFilename : true || "extras" || "input"
+Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
+NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
+Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
+
+>>> symlinkUnsafe : true || "extras" || "input"
+If the file format doesn't play well with symlinks, can set this to true. Probably better to set it in the program though, usually.
+Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
+
+
+>>> slow : true
+If set to true then this format is known to be slow to work with. If an image, then this causes only width/height metadata to be calculated (instead of additional image info like color counts, opaque, etc which are slow to calculate)
+
+
+
+
+>>> ******** Extension
+>>> safeExt(state) { return ".safe"; }
+When processing, the extension used is this priority:
+1. An extension returned from safeExt() (if present)
+2. Original filename extension (IF present in meta.ext array)
+3. Extension matched from a fileSize match
+4. The first extension in meta.ext array
+
+
+
+
+
+
+
+
+
+
+
+/-----------------\
+| Other exports.* |
+\-----------------/
+>>> idCheck = (state, matches) => (fs.statSync(state.input.absolute).size===32000);
+An additional Synchronous function that can check other file properties and return true if supported, false otherwise.
+Matches is the list of matches made by various identification programs that you can check against.
+
+>>> outputValidator = (state, p, subPath, imageInfo) => imageInfo.colorCount>5
+An additional check performed on any output files to further validate whether they are correct or not.
+Currently only supported for 'image' family
+
+>>> ******** Process Control
+>>> converterPriority = ["xmp", "openmpt123", [() => ({program : "convert"}), () => ({program : "convertAlt"})]]
+For image/music/archive, an array of programid strings, in priority order, to try and convert this file with.
+It will try a bunch of others, this is just the initial priority order. Stops at first successful conversion.
+It can also be a function which returns an array of converters to try
+
+>>> converterExclude = ["xmp"]
+For music only. An array of programids to EXCLUDE from conversion attempts.
+
+
+>>> ******** Process Order
+>>> inputMeta = (state, p, cb) => { state.input.meta[formatid] = {prop : "value"}; setImmediate(cb); }
+Can gather additional format specific meta and statsh it into state.input.meta[formatid]
+
+>>> preSteps = [ (state, p) => (state, p, cb) => {}, ...]
+An array of methods that will be executed immediately BEFORE 'steps', even if 'steps' is coming from family.steps instead.
+
+>>> steps = [ (state, p) => (state, p, cb) => {}, ... ]
+An array of methods that will be executed serially, responsible for handling the file.
+
+>>> postSteps = [ (state, p) => (state, p, cb) => {}, ...]
+An array of methods that will be executed immediately AFTER 'steps', even if 'steps' is coming from family.steps instead.
+
+>>> post = (state, p, cb) => {}
+A method that will be executed after preSteps/steps/postSteps.
+
+>>> updateProcessed = (state, p, cb) => { state.processed = false||true; setImmediate(cb); }
+Some formats have additional format specific checks to determine whether processing was truly successful, or not.
+Can set state.processed to true or false.
+If you set it to false (and it was true before) you are responsible for deleting any output files.
+

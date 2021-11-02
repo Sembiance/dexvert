@@ -15,9 +15,9 @@ function flexMatch(value, matcher, fullStringMatch)
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "3d", "font", "text", "executable", "rom", "other"];
 
-export async function identify(inputFilePath, {verbose})
+export async function identify(inputFile, {verbose})
 {
-	const input = await FileSet.create(await DexFile.create(inputFilePath));
+	const input = await FileSet.create(inputFile);
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, input, undefined, {verbose})))).flatMap(o => o.meta.detections);
 
 	if(verbose)
@@ -50,7 +50,7 @@ export async function identify(inputFilePath, {verbose})
 			}
 
 			// skip this format if it's marked as unsafe and our file has been transformed and we don't explictly allow transforming
-			if(input.primary.transformed && format.unsafe && !format.allowTransform)
+			if(input.primary.transformed && format.transformUnsafe)
 			{
 				if(verbose)
 					xu.log`Excluding format ${formatid} due to input being a transformed file and the format being marked as unsafe.`;

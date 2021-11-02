@@ -1,0 +1,34 @@
+>>> Sample links
+Archive: http://fileformats.archiveteam.org/wiki/TSComp
+
+>>> Snippets:
+{{FormatInfo
+|formattype=electronic
+|subcat=Help files
+|extensions={{ext|hlp}}
+|released=1985
+}}
+
+== Identification ==
+GX2 files begin with ASCII "{{magic|GX2}}".
+
+== Software ==
+* [[FFmpeg]]
+* [[ImageMagick]]
+* [[XnView]]
+* [[RECOIL]]
+* {{Deark}}
+* [http://snisurset.net/code/abydos/ abydos]
+* [https://zxtune.bitbucket.io/ zxtune]
+* [[XMP]]
+* [https://zakalwe.fi/uade/ UADE]
+* [https://www.fmjsoft.com/awavestudio.html Awave Studio]
+* [http://www.watto.org/game_extractor.html Game Extractor]
+
+== Sample files ==
+* https://telparia.com/fileFormatSamples/image/dpx/
+
+== Links ==
+* [[Wikipedia:NewIcons|Wikipedia: NewIcons]] - Also has information about GlowIcons
+
+#REDIRECT [[AmigaGuide]]

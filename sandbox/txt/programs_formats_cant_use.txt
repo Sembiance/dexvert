@@ -1,0 +1,783 @@
+>>> These programs don't work in multiple QEMU environments at once or are unreliable in some other major way
+>>> Thus these can't be used
+
+>>> reaConverter (winxp - v7 - 2020-11-12) (https://www.reaconverter.com/features/formats.html)
+Read  676
+Regular Images:
+BMP
+GIF
+JFI
+JFIF
+JIFF
+JPE
+JPEG
+JPG
+PNG
+TIF
+TIFF
+
+Advanced Images:
+APNG
+BPG
+CAL
+CDR
+CG4
+CIN
+CPT
+DCX
+DDS
+DIB
+DIS
+FAX
+FITS
+FLIF
+FPX
+HEIC
+HEIF
+HRU
+ICO
+J2C
+J2K
+JP2
+JPC
+JPF
+JPM
+JPX
+JXR
+KRA
+MAC
+MIX
+MTV
+PBM
+PCD
+PCX
+PGM
+PIC
+PNM
+PPM
+PSD
+PSP
+QRT
+RAD
+RLA
+SGI
+SVS
+TGA
+WB1
+WBC
+WBP
+WBZ
+WEBP
+WEBPLL
+XBM
+XCF
+XPM
+
+Digital Cameras RAW Images:
+3FR
+ARI
+ARW
+BAY
+BMQ
+CAP
+CINE
+CR2
+CR3
+CRW
+CS1
+DC2
+DCR
+DCS
+DNG
+DRF
+EIP
+ERF
+FFF
+IA
+IIQ
+K25
+KC2
+KDC
+MDC
+MEF
+MOS
+MRW
+NEF
+NRW
+OBM
+ORF
+PEF
+PTX
+PXN
+QTK
+R3D
+RAF
+RAW
+RDC
+RW2
+RWL
+RWZ
+SR2
+SRF
+SRW
+STI
+X3F
+
+Adobe Vector Formats:
+AI
+EPI
+EPS
+PDF
+PDP
+PS
+SWF
+
+Microsoft Office Formats:
+DOC
+DOCX
+OXPS
+RTF
+VDX
+VSD
+VSDM
+VSDX
+XPS
+
+Microsoft Windows Metafiles:
+EMF
+EMZ
+WMF
+WMZ
+
+CAD Formats:
+DGN
+DWF
+DWFX
+DWG
+DXF
+PLT
+
+Gerber Formats:
+BOT
+CMP
+DRD
+DRL
+GBL
+GBO
+GBP
+GBR
+GBS
+GBX
+GKO
+GM1
+GPB
+GTL
+GTO
+GTP
+GTS
+PLC
+PLS
+SMB
+SMT
+SOL
+SSB
+SST
+STC
+STS
+TAP
+TOP
+XLN
+
+Vector Formats:
+AFF
+CGM
+DJVU
+DRW
+DST
+HP2
+HPG
+MIF
+NVA
+OBJ
+ORB
+PCL
+PCT
+PRN
+PRT
+PXL
+SK
+SK1
+SVG
+SVGZ
+WPG
+XFIG
+
+3D Formats:
+3D
+3DS
+3MF
+AC
+AC3D
+ACC
+AMJ
+ASE
+ASK
+B3D
+BLEND
+BVH
+C4D
+COB
+CSM
+DAE
+ENFF
+FBX
+GITF
+GLB
+HMB
+HMP
+IRR
+IRRMESH
+LWO
+LWS
+LXO
+M3D
+MD2
+MD3
+MD5
+MDL
+MESH
+MOT
+MS3D
+NDO
+NFF
+OFF
+OGEX
+PK3
+PLY
+PMX
+PRJ
+Q3D
+Q3O
+Q3S
+SCN
+SIB
+SMD
+STEP
+STL
+STP
+TER
+UC
+VTA
+X3D
+XGL
+ZGL
+
+GIS Formats:
+000
+BNA
+E00
+GEOJSON
+GML
+GMT
+GPX
+GTM
+GTZ
+GXT
+KML
+KMZ
+NTF
+REC
+SHP
+TAB
+
+Rare Formats:
+!C
+$C
+$S
+001
+2BP
+2D
+301
+411
+4BT
+73I
+82I
+83I
+85I
+86I
+89I
+92I
+A64
+ABC
+ABIC
+ABS
+ACE
+ACORN
+ADT
+AFP
+AFX
+AIP
+ALIAS
+ALS
+AMI
+ANI
+APX
+ARF
+ARN
+ART
+ATK
+AVS
+AWD
+B&W
+B16
+BFL
+BFLI
+BFX
+BGA
+BIF
+BIG
+BLD
+BLK
+BM
+BMF
+BMG
+BMX
+BN
+BOB
+BPR
+BRK
+BRT
+BS
+BSG
+BTN
+BUM
+BW
+B_W
+C4
+CALS
+CAM
+CAN
+CAR
+CAT
+CBM
+CDU
+CE
+CE1
+CE2
+CEL
+CIP
+CIT
+CLO
+CLP
+CMT
+CMU
+CMW
+CMX
+CP8
+CPA
+CPC
+CPI
+CRD
+CRG
+CT
+CUT
+CVP
+DAT
+DBW
+DCM
+DD
+DOL
+DOO
+DPX
+DRZ
+DSI
+DTA
+ECC
+EF3
+EFX
+EI
+EIDI
+EPA
+ESM
+EXR
+F96
+FAC
+FACE
+FBM
+FCX
+FI
+FIT
+FLC
+FLI
+FMF
+FP2
+FPG
+FPR
+FPT
+FRE
+FRM
+FSY
+FTF
+FTS
+FUN
+FX3
+FXD
+FXM
+FXO
+FXR
+FXS
+G16
+G3
+G3N
+G4
+GAF
+GB
+GEO
+GG
+GIG
+GIH
+GM
+GM2
+GM4
+GMF
+GP4
+GRAF
+GRB
+GRO
+GRO2
+GRO4
+GUN
+HDP
+HDR
+HDRU
+HED
+HF
+HIR
+HPI
+HR
+HRZ
+I17
+I18
+IB7
+IBG
+ICA
+ICB
+ICL
+ICN
+ICNS
+IDC
+IF9
+IFF
+IFL
+IIM
+IIMG
+IM1
+IM5
+IMA
+IMG
+IMI
+IMT
+INFO
+IPG
+IPH
+IPT
+IRIS
+ISH
+ISM
+ISS
+ITG
+J6I
+JBF
+JBG
+JBIG
+JIF
+JIG
+JJ
+JPS
+JTF
+KAP
+KFX
+KOA
+KPS
+KQP
+LBM
+LDA
+LFF
+LIF
+LVP
+LWI
+M8
+MAG
+MAP
+MBFAVS
+MBFS
+MBM
+MGR
+MH
+MIC
+MIFF
+MIL
+MIM
+MNG
+MPH
+MPNT
+MRF
+MSK
+MSP
+NAP
+NAV
+NCD
+NCR
+NCT
+NEO
+NITF
+NLM
+NMP
+NOL
+NPM
+NSR
+OAZ
+OCP
+OFX
+OIL
+P64
+P7
+PAC
+PAN
+PAT
+PAX
+PBT
+PC
+PCC
+PCP
+PD
+PDB
+PDD
+PDS
+PDX
+PE4
+PFR
+PG
+PGC
+PGF
+PH
+PHP
+PI
+PICIO
+PICT
+PIG
+PIX
+PIXAR
+PM
+PMG
+PMP
+PPP
+PPS
+PPT
+PRC
+PRF
+PRI
+PSA
+PSB
+PSE
+PSF
+PSPBRUSH
+PSPFRAME
+PSPIMAGE
+PSPMASK
+PST
+PTK
+PTOCA
+PWP
+PXA
+PXB
+PXR
+PXS
+PZL
+PZP
+Q0
+QDV
+QTI
+QTIF
+QTL
+RAS
+RAST
+RGB
+RGH
+RIX
+RLB
+RLC2
+RLE
+RP
+RPBM
+RPM
+RS
+RSB
+SAR
+SC
+SC2
+SCI
+SCR
+SCT
+SCX
+SD0
+SD1
+SD2
+SDG
+SEQ
+SFF
+SFW
+SI
+SID
+SIM
+SIR
+SJ1
+SKN
+SMP
+SNA
+SPC
+SPS
+SPU
+SR
+SSI
+SSP
+ST4
+ST5
+ST6
+ST7
+ST8
+STW
+STX
+SUL
+SUN
+SUNIFF
+SYJ
+SYN
+SYNU
+TAAC
+TDI
+TDIM
+TEX
+TG4
+TIL
+TIM
+TJP
+TM2
+TN1
+TN2
+TN3
+TNL
+TNY
+TRP
+TSK
+TUB
+UNI
+UPI
+UYVY
+V
+VDA
+VFF
+VFX
+VI
+VIC
+VICAR
+VID
+VIF
+VIFF
+VIT
+VOB
+VPB
+VST
+WAL
+WB0
+WDP
+WFX
+WZL
+X
+X11
+XAR
+XIF
+XIM
+XV
+XWD
+YUV
+ZBR
+
+
+>>> Graphic Workshop Professional (winxp - v??? - 2021-04-11 - http://www.mindworkshop.com/gwspro.html)
+Adobe DNG (requires RAW plugin)
+Adobe Photoshop PSD/PDD
+AI (requires PostScript plugin)
+ANI animated cursors (play only)
+AOL ART (requires ART plugin)
+AVI Video for Windows
+BGA OS/2 graphic arrays
+CALS Raster
+Canon CRW RAW (requires RAW plugin)
+Casio digital camera CAM
+Corel CDR preview and bitmaps
+Digital Research/Ventura IMG
+DCX FAX files
+Windows enhanced metafiles (EMF)
+EPS (requires PostScript plugin)
+EXE self-displaying pictures
+FITS
+Flash™ SWF web objects
+FlashPix
+FLI/FLC animation files
+GIF (with animated GIF viewing)
+Halo CUT
+HAM — Amiga hold and modify
+HDP HD Photo
+ICO Windows icon files
+IFF/LBM
+Iterated Systems FIF
+JPEG (JPG)
+Konica KQP
+Kodak Digital Science Camera KDC
+Kodak Photo-CD PCD
+Leaf MOS (requires RAW plugin)
+Leica RAW requires RAW plugin)
+MacPaint
+Microsoft Paint MSP
+MIDI music files (play only)
+Minolta MRW (requires RAW plugin)
+MP3 (play only, external player)
+MPEG (play only, external player)
+Nikon NEF (requires RAW plugin)
+Olympus ORF (requires RAW plugin)
+Panasonic RAW requires RAW plugin)
+PC Paintbrush PCX
+PDF (requires PostScript plugin)
+Pegasus PIC files
+Pentax PEF (requires RAW plugin)
+PFS ART files (requires ART plugin)
+PIC (as used by GLpro/GLpaint)
+PICT — Macintosh metafile
+PNG, including animated PNG
+PS (requires PostScript plugin)
+PSP graphic files
+QuickTime MOV
+RAR (view and extract graphics and other files from RAR archives)
+Seattle Film SFW (requires SFW plugin)
+Silicon Graphics workstation SGI
+Slow scan television HRZ files
+Sony SRF (requires RAW plugin)
+Sun Raster RAS files
+Targa Truevision
+Text files
+TIFF
+TTF TrueType font preview
+UUE encoded graphics
+WAP Bitmap WBMP
+WDP Windows digital media photo
+WebP on-line graphics and animation
+Windows BMP, DIB and RLE
+Windows CUR cursors
+Windows metafiles (WMF)
+Windows screen savers (SCR)
+Windows WAV files
+WordPerfect Graphics WPG
+XBM
+WMV (play only, external player)
+ZIP (view and extract from ZIP archives)

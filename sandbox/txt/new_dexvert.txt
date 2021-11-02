@@ -1,0 +1,102 @@
+/--------------\
+| TOP Priority |
+\--------------/
+* Create a new test-identify.js and start testing the formats listed below.
+
+* Fully identify and process:
+image/pcx
+image/qrt
+image/fractalImageFormat
+image/degasHiPI
+image/mur
+image/artistByEaton
+image/autoSketchDrawing
+image/artworx
+image/hsiRaw
+image/ans
+image/apStar
+image/artDirector
+image/advancedArtStudio
+image/hiPic
+archive/windowsThumbDB
+archive/msCompound
+archive/macBinary
+text/txtByFilename
+
+* Now convert and identify any formats with:
+untrustworthy (which has been removed entirely, as programs are untrustworthy, not formats)
+idCheck -> byteCheck
+filesRequired/filesOptional -> auxFiles
+
+* Now get processing working, again, starting with all the formats I've already converted, see above.
+  This involves getting test-process.js coded too
+  transform code should move into bin/*/
+  Some of the formats will likely need 'transformUnsafe = true' flag added, but won't know right away. Make sure the output of process shows whether it was on a transformed file or not
+  Programs don't need preArgs() it can just be handlded in args now that it is async capable
+  Programs can be marked as unsafe (such as recoil2png). Make sure that transformed files are never sent to 'unsafe' programs
+  Program  flags are shorter and more generic:
+	inputType
+	outputType
+	fps
+	etc.
+* My runUtil doesn't support 'detached' which dos uses along with virtualX.
+I could add support for this, by checking 'detached' and if so add a p.status().then(v => { kill xVfb now }) before returning p
+Would need to make sure I properly handle stdout/stderr pipes (probably delete runArgs.stdout/stderr)
+Make a test case for this detached support
+
+* Now go through every other format, and test identification and processing for each one
+
+/---------------\
+| High Priority |
+\---------------/
+* Once all done, go through the sandbox/wip/misIdentified files and figure out where they go, then delete the misIdentified folder
+  These are files that I believe DID convert, but do not actually appear to be the image they are assigned to, so need to determine what type they actually are
+
+* Once ALL FORMATS identifcation fully working and tested, think about adding a 'prefix' match type that will match prefixes against extensions
+
+* Will likely need to create FileSet/DexFile/etc  static Class.parse() and class.toJSON() methods that utilize xu.parseJSON() and create objects and JSON.stringify them.
+
+* Try this as alternative to lobe, see how it does: https://teachablemachine.withgoogle.com/
+
+* To start, have all linux programs run locally, just as dexvert always has.
+  Eventually though, I want to be able to just have Program.loc default change to 'gentoo' and be able to run it all on gentoo qemu by default (maybe dynamic based on hostname or environment variable)
+* Create a new QEMU instance with dexvert:dexvert username that has X11 and boots up into awesomewm auto login auto start X
+DON'T DELETE OLD ONE, as I need to refer to it 
+Make a 10GB hd.img and a 40GB other.img that mounts as /mnt/extra then make symlinks
+/usr/portage -> /mnt/extra/usr/portage
+/usr/src     -> /mnt/extra/usr/src
+/var/tmp     -> /mnt/extra/var/tmp
+/usr/tmp     -> /mnt/extra/usr/tmp
+Of course only the hd.img is used in the final version
+* Use this new Gentoo QEMU instance to run all Linux conversion programs (so if they are exploited, somewhat more protected)
+Will need to update the 'supervisor.sh' script AND the QEMU server JS code to support a 'supervisorid' number.
+I'll want to run like 20x supervisor.sh scripts at once, since each QEMU instance can run more than 1 program at a time
+Will need to increase the ram from like 2GB to 10GB (since files get copied and processed into RAM) and size cores/instance count appropriately to not use all RAM.
+Will want to be able to specify the number of servers per OS type, so instead of numServers : 10 have numServers : {gentoo : 20, win2k : 10, winxp : 15, amigappc : 10}
+Both the supervisor script and the 'go' script should both disable core dumps with the equilivant linux command (ulimit?): posix.setrlimit("core", {soft : 0});
+
+* Make an apps.txt document for win2k/winxp that list the custom apps I installed, and where they are located and their version numbers and corresponding data/app/install.exe program
+
+
+/-----------------\
+| Medium Priority |
+\-----------------/
+
+
+/--------------\
+| Low Priority |
+\--------------/
+* Add dexvert back to searchMyCode/shared/ Was:
+	"DevLab/dexvert/util/*.js",
+	"DevLab/dexvert/bin/dex*",
+	"DevLab/dexvert/bin/*.js",
+	"DevLab/dexvert/bin/uniso",
+	"DevLab/dexvert/bin/modInfo",
+	"DevLab/dexvert/bin/photocd-info",
+	"DevLab/dexvert/test/*.js",
+	"DevLab/dexvert/tensor/*.js",
+	"DevLab/dexvert/src/**/*.js",
+	"DevLab/dexvert/server/*.js",
+<<<
+
+

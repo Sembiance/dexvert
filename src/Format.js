@@ -67,6 +67,7 @@ export class Format
 			byteCheck        : {types : [Object, Array]},
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},
+			transformUnsafe  : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			unsupported      : {type : "boolean"},

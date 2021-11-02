@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, printUtil} from "xutil";
 import {identify} from "../identify.js";
+import {DexFile} from "../DexFile.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexid",
@@ -19,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 
 for(const inputFilePath of Array.force(argv.inputFilePath))
 {
-	const rows = await identify(inputFilePath, {verbose : argv.verbose});
+	const rows = await identify(await DexFile.create(inputFilePath), {verbose : argv.verbose});
 
 	if(argv.jsonFile)
 		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(rows));

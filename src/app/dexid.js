@@ -30,7 +30,11 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 		Deno.exit(0);
 	}
 
-	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid}) => ({from : from==="dexvert" ? xu.cf.fg.green(from) : from, confidence, format : `${magic}${from==="dexvert" ? ` ${xu.cf.fg.peach(matchType)} ${xu.cf.fg.yellow(family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}` : ""}`, extensions}));	// eslint-disable-line max-len
+	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid}) => ({
+		from : from==="dexvert" ? xu.cf.fg.green(from) : from,
+		confidence,
+		format : `${from!=="dexvert" ? magic.innerTruncate(100) : magic}${from==="dexvert" ? ` ${xu.cf.fg.peach(matchType)} ${xu.cf.fg.yellow(family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}` : ""}`,
+		extensions}));
 	console.log(printUtil.columnizeObjects(printRows, {		// eslint-disable-line no-restricted-syntax
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));

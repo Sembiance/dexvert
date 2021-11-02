@@ -280,6 +280,6 @@ export async function identify(inputFilePath, {verbose})
 
 	return [
 		...matches.map(({family, confidence, magic, extensions, matchType, formatid}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType})),
-		...detections.map(({from, confidence, value, extensions}) => ({from, confidence, magic : value.innerTruncate(100), extensions}))
+		...detections.map(({from, confidence, value, extensions}) => ({from, confidence, magic : value, extensions}))
 	];
 }

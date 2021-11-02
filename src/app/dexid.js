@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil, printUtil} from "xutil";
 import {identify} from "../identify.js";
 
 const argv = cmdUtil.cmdInit({
@@ -19,6 +19,19 @@ const argv = cmdUtil.cmdInit({
 
 for(const inputFilePath of Array.force(argv.inputFilePath))
 {
-	const identifications = await identify(inputFilePath, {verbose : argv.verbose});
-	xu.log`${identifications}`;
+	const rows = await identify(inputFilePath, {verbose : argv.verbose});
+
+	if(argv.jsonFile)
+		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(rows));
+
+	if(argv.json)
+	{
+		console.log(JSON.stringify(rows));	// eslint-disable-line no-restricted-syntax
+		Deno.exit(0);
+	}
+
+	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid}) => ({from : from==="dexvert" ? xu.cf.fg.green(from) : from, confidence, format : `${magic}${from==="dexvert" ? ` ${xu.cf.fg.peach(matchType)} ${xu.cf.fg.yellow(family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}` : ""}`, extensions}));	// eslint-disable-line max-len
+	console.log(printUtil.columnizeObjects(printRows, {		// eslint-disable-line no-restricted-syntax
+		colNameMap : {confidence : "%"},
+		color      : {confidence : "white"}}));
 }

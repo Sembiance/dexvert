@@ -7,6 +7,15 @@ import {validateClass} from "./validate.js";
 
 export class Format
 {
+	PRIORITY = {
+		TOP      : 0,
+		HIGH     : 1,
+		STANDARD : 2,
+		LOW      : 3,
+		VERYLOW  : 4,
+		LOWEST   : 5
+	};
+
 	static formats = null;
 	formatid = this.constructor.name;
 	family = null;
@@ -25,28 +34,48 @@ export class Format
 		format.familyid = family.familyid;
 		validateClass(format, {
 			// required
-			formatid : {type : "string", required : true},	// automatically set to the constructor name
-			name     : {type : "string", required : true},	// human friendly name of the format. The only required field.
+			formatid : {type : "string", required : true},
+			name     : {type : "string", required : true},
 
 			// meta
-			charSet  : {type : "string"}, 		// the character set for this file. Example: "IBM-943"
-			mimeType : {type : "string"}, 		// mime type for this format. required to use abydosconvert
-			notes    : {type : "string"}, 		// various notes about this format
-			website  : {type : "string", url : true},	// URL about this format
+			charSet  : {type : "string"},
+			mimeType : {type : "string"},
+			notes    : {type : "string"},
+			website  : {type : "string", url : true},
 
 			// identification - extension
-			ext            : {type : ["string"]},	// array of extensions this format may have. first item should be the primary extension. always use lowercase
-			forbidExtMatch : {type : "boolean"},	// set to true to disallow matching this format based on extension
-			forbiddenExt   : {type : ["string"]},	// array of extensions that it should never be
+			ext            : {type : ["string"]},
+			forbidExtMatch : {types : ["boolean", Array]},
+			forbiddenExt   : {type : ["string"]},
+			weakExt        : {types : ["boolean", Array]},
+
+			// identification - filename
+			filename : {type : ["string", RegExp]},
+
+			// identification - filename
+			fileSize      : {types : ["number", Array, Object]},
+			matchFileSize : {type : "boolean"},
 
 			// identification - magic
-			magic          : {type : ["string", RegExp]}, 	// array of strings/regexes to check match against detections
-			forbiddenMagic : {type : ["string", RegExp]}, 	// an array of strings/regexes that if any detections match to forbid matching to this format
+			magic            : {type : ["string", RegExp]},
+			forbiddenMagic   : {type : ["string", RegExp]},
+			forbidMagicMatch : {type : "boolean"},
+			weakMagic        : {types : ["boolean", Array]},
+
+			// other
+			allowTransform   : {type : "boolean"},
+			auxFiles         : {type : "function", length : [2, 3]},
+			byteCheck        : {types : [Object, Array]},
+			confidenceAdjust : {type : "function"},
+			fallback         : {type : "boolean"},
+			trustMagic       : {type : "boolean"},
+			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
+			unsafe           : {type : "boolean"},
+			unsupported      : {type : "boolean"},
+			untouched        : {type : "boolean"},
 
 			// conversion
-			converters     : {type : ["string"]},	// an array of programids to use for converting this format
-			unsafe         : {type : "boolean"},	// this format is unsafe to convert, so be careful matching against it
-			allowTransform : {type : "boolean"}		// set to true to allow matching to this format even if the format is unsafe and the file is transformed
+			converters     : {type : ["string", Object]}
 		});
 		return format;
 	}

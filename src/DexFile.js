@@ -8,8 +8,8 @@ export class DexFile
 	static async create(o)
 	{
 		const dexFile = new this({allowNew : true});
-		dexFile.rel = typeof o==="string" ? path.basename(o) : o.subPath;
-		dexFile.root = path.join(typeof o==="string" ? path.dirname(o) : path.resolve(o.root));
+		dexFile.root = path.join(typeof o==="string" ? (o.startsWith("/") ? path.dirname(o) : Deno.cwd()) : path.resolve(o.root));
+		dexFile.rel = typeof o==="string" ? (o.startsWith("/") ? path.basename(o) : o) : o.subPath;
 		dexFile.absolute = path.join(dexFile.root, dexFile.rel);
 
 		const pathInfo = path.parse(dexFile.absolute);

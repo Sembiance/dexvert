@@ -1,10 +1,27 @@
 import {assertStrictEquals} from "https://deno.land/std@0.111.0/testing/asserts.ts";
 import {DexFile} from "../src/DexFile.js";
+import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
 Deno.test("create", async () =>
 {
-	// single file, absolute path, root and clonse
-	let a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
+	// cwd file
+	let a = await DexFile.create(path.relative(Deno.cwd(), "/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt"));
+	assertStrictEquals(a.root, Deno.cwd());
+	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
+	assertStrictEquals(a.base, "some.big.txt.file.txt");
+	assertStrictEquals(a.dir, "/mnt/compendium/DevLab/dexvert/test/files");
+	assertStrictEquals(a.name, "some.big.txt.file");
+	assertStrictEquals(a.ext, ".txt");
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 6);
+	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:29.027Z")).toString());
+	assertStrictEquals(a.preExt, ".some");
+	assertStrictEquals(a.preName, "big.txt.file.txt");
+
+	// absolute path, root and clonse
+	a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
 	const b = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "some.big.txt.file.txt"});
 	const c = b.clone();
 	const d = b.clone();

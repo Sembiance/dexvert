@@ -49,6 +49,9 @@ export function validateClass(o, schema)
 			}
 		}
 
+		if(prop.types && !prop.types.some(type => (typeof type==="string" ? (typeof value===type) : (value instanceof type))))
+			throw new Error(`${prefix} value [${value}] expected to be one of type [${prop.types.map(t => (typeof t==="string" ? t : t.name)).join("], [")}] but got [${typeof value}] ${suffix}`);
+
 		// validate that the property is a valid URL
 		if(prop.url)
 			assert((new URL(value)) instanceof URL, `${prefix} expected to be a valid URL but it was not ${suffix}`);
@@ -59,7 +62,17 @@ export function validateClass(o, schema)
 
 		// validate that the property value is a given length
 		if(prop.length)
-			assertStrictEquals(prop.length, value.length, `${prefix} value [${value}] expected to be [${prop.length}] long but is [${value.length}] long ${suffix}`);
+		{
+			if(Array.isArray(prop.length))
+			{
+				assert(value.length>=prop.length[0], `${prefix} value [${value}] expected to be at least ${prop.length[0]} long but is [${value.length}] long ${suffix}`);
+				assert(value.length<=prop.length[1], `${prefix} value [${value}] expected to less than ${prop.length[1]} long but is [${value.length}] long ${suffix}`);
+			}
+			else
+			{
+				assertStrictEquals(prop.length, value.length, `${prefix} value [${value}] expected to be [${prop.length}] long but is [${value.length}] long ${suffix}`);
+			}
+		}
 		
 		// validate that the property value falls within a given range
 		if(prop.range)

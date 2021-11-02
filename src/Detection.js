@@ -2,6 +2,12 @@ import {xu} from "xu";
 import {validateClass} from "./validate.js";
 import {DexFile} from "./DexFile.js";
 
+export const TEXT_MAGIC =
+[
+	"ASCII text", "ISO-8859 text", "UTF-8 Unicode text", "Non-ISO extended-ASCII text", "ReStructuredText file", "International EBCDIC text", "UTF-8 Unicode text", "Printable ASCII", "Unicode text, UTF-8 text",
+	"Algol 68 source, ISO-8859 text"	// Algol 68 is often mis-identified, usually confused with Pascal files. Just treat it as regular text
+];
+
 /* eslint-disable prefer-named-capture-group */
 // These magics are VERY untrustworthy and any detections against them should be noted as such
 const WEAK_VALUES =
@@ -153,7 +159,7 @@ export class Detection
 	{
 		const detection = new this({allowNew : true});
 		Object.assign(detection, {value, from, file, confidence, extensions});
-		detection.weak = WEAK_VALUES.some(v => v.test(value));
+		detection.weak = WEAK_VALUES.some(v => v.test(value)) || confidence<5;
 
 		validateClass(detection, {
 			// required

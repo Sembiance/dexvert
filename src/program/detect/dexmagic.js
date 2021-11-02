@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/no-hex-escape, max-len */
 import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 
@@ -87,10 +88,7 @@ export class dexmagic extends Program
 	{
 		r.meta.detections = [];
 
-		const f = await Deno.open(r.input.primary.absolute);
-		const buf = new Uint8Array(DEXMAGIC_BYTES_MAX);
-		await Deno.read(f.rid, buf);
-		Deno.close(f.rid);
+		const buf = await fileUtil.readFileBytes(r.input.primary.absolute, DEXMAGIC_BYTES_MAX);
 		
 		for(const [matchid, checks] of Object.entries(DEXMAGIC_CHECKS))
 		{

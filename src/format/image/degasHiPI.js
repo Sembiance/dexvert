@@ -1,17 +1,15 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class degasHiPI extends Format
 {
-	name     : "Degas High Resolution Picture (PI)",
-	website  : "http://fileformats.archiveteam.org/wiki/DEGAS_image",
-	ext      : [".pi3", ".suh"],
-	mimeType : "image/x-pi3",
-	magic    : ["DEGAS hi-res bitmap"]
-};
+	name     = "Degas High Resolution Picture (PI)";
+	website  = "http://fileformats.archiveteam.org/wiki/DEGAS_image";
+	ext      = [".pi3", ".suh"];
+	mimeType = "image/x-pi3";
+	magic    = ["DEGAS hi-res bitmap"];
+	
+	byteCheck = [{offset : 0, match : [0x00, 0x02]}];
 
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x00, 0x02]));
-
-// nconvert messes up with certain files such as vanna5.pi3
-exports.converterPriority = ["recoil2png", "abydosconvert", "nconvert"];
+	// nconvert messes up with certain files such as vanna5.pi3
+	converters     = ["recoil2png", "abydosconvert", "nconvert"];
+}

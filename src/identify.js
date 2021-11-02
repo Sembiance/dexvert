@@ -32,11 +32,6 @@ export async function identify(inputFilePath, {verbose})
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => (typeof format.byteCheck==="function" ? Array.force(format.byteCheck(input)) : Array.force(format.byteCheck || []))).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
 	const byteCheckBuf = await fileUtil.readFileBytes(input.primary.absolute, byteCheckMaxSize);
 
-	// results -> detections
-	// result.untrustworthy -> detection.weak ==
-	// inputFileSize -> input.primary.size
-	// meta -> format
-
 	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
 	FAMILY_MATCH_ORDER.forEach(familyid =>
 	{
@@ -243,7 +238,7 @@ export async function identify(inputFilePath, {verbose})
 				delete m.priority;
 				delete m.originalConfidence;
 
-				if(m.untrustworthy && !m.trustMagic && !m.extMatch)
+				if(m.weak && !m.trustMagic && !m.extMatch)
 					m.confidence = 10;
 				
 				if(m.confidenceAdjust)

@@ -10,7 +10,6 @@ export class artworx extends Format
 	magic          = [/^data$/];
 	forbiddenMagic = ["Amiga Disk image File", ...TEXT_MAGIC];
 	weakMagic      = true;
-	unsafe         = true;
 	//// deark messes up several images, but ansilove seems to handle them all
 	//converters     = [{program : "ansilove", flags : {ansiloveType : "adf"}}, "deark", "abydosconvert"];
 	//inputMeta = (state, p, cb) => p.family.ansiArtInputMeta(state, p, cb);

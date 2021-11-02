@@ -7,7 +7,5 @@ export class fractalImageFormat extends Format
 	ext            = [".fif"];
 	forbidExtMatch = true;
 	magic          = ["Fractal Image Format bitmap"];
-	unsafe         = true;
-	allowTransform = true;
 	converters     = ["fifView"];
 }

@@ -63,14 +63,12 @@ export class Format
 			weakMagic        : {types : ["boolean", Array]},
 
 			// other
-			allowTransform   : {type : "boolean"},
 			auxFiles         : {type : "function", length : [2, 3]},
 			byteCheck        : {types : [Object, Array]},
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
-			unsafe           : {type : "boolean"},
 			unsupported      : {type : "boolean"},
 			untouched        : {type : "boolean"},
 

@@ -274,7 +274,7 @@ export async function identify(inputFile, {verbose})
 	matches.push(...matchesByFamily.fallback);
 
 	return [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType})),
+		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported})),
 		...detections.map(({from, confidence, value, extensions}) => ({from, confidence, magic : value, extensions}))
 	];
 }

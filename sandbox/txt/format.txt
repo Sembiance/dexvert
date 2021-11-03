@@ -127,10 +127,8 @@ Normally the filename is renamed to in<ext> in order to prevent issues with prog
 If the file format doesn't play well with symlinks, can set this to true. Probably better to set it in the program though, usually.
 Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
 
-
 >>> slow : true
 If set to true then this format is known to be slow to work with. If an image, then this causes only width/height metadata to be calculated (instead of additional image info like color counts, opaque, etc which are slow to calculate)
-
 
 
 
@@ -141,14 +139,6 @@ When processing, the extension used is this priority:
 2. Original filename extension (IF present in meta.ext array)
 3. Extension matched from a fileSize match
 4. The first extension in meta.ext array
-
-
-
-
-
-
-
-
 
 
 

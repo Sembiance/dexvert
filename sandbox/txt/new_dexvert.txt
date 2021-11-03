@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create a new test-identify.js and start testing the formats listed below.
+* Create a new test/testid.js and a test/testUtil.js where the common rsync stuff will live, etc. and start testing the formats listed below.
 
 * Fully identify and process:
 image/pcx
@@ -29,7 +29,11 @@ idCheck -> byteCheck
 filesRequired/filesOptional -> auxFiles
 
 * Now get processing working, again, starting with all the formats I've already converted, see above.
-  This involves getting test-process.js coded too
+  Create a .tar file that will include symlinks outside of the dir. So have one symlink to / and another to like one dir up ../../outSideOfTar.txt
+  Ensure the tar is created as symlinks and not what the symlink points to
+  Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
+  Programs run in a tmp ram dir, but I should also make a 'out' dir in the cwd ram dir and all programs should extract to that. Will need to check and make sure 'out' doesn't already exist, and if so do a genTempPath with a prefix of the tmp ram cwd dir
+  Also create a test/testdex.js file
   transform code should move into bin/*/
   Some of the formats will likely need 'transformUnsafe = true' flag added, but won't know right away. Make sure the output of process shows whether it was on a transformed file or not
   Programs don't need preArgs() it can just be handlded in args now that it is async capable

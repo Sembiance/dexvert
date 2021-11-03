@@ -1,10 +1,8 @@
-"use strict";
 /* eslint-disable prefer-named-capture-group */
-const XU = require("@sembiance/xu"),
-	C = require("../C.js");
+import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
-exports.formats =
+export default
 {
 	executable :
 	{
@@ -50,11 +48,6 @@ exports.formats =
 		wordUpToolkitFont     : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]}
 	},
 	
-	rom :
-	{
-		gameBoy : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]}
-	},
-
 	other :
 	{
 		//////////
@@ -165,6 +158,12 @@ exports.formats =
 		wordPerfectDriver       : {name : "WordPerfect Driver", ext : [".vrs"], magic : ["Corel WordPerfect: Unknown filetype 36, v5.0"]},
 
 
+		//////////
+		// ROMS //
+		//////////
+		gameBoy : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+
+
 		///////////
 		// Other //
 		///////////
@@ -175,10 +174,10 @@ exports.formats =
 		alchemyMindworksResource     : {name : "Alchemy Mindworks Resource", ext : [".res"], magic : ["Alchemy Mindworks Resource data"]},
 		amiAtlasFile                 : {name : "AmiAtlas File", ext : [".borders", ".coasts", ".index", ".islands", ".prefs", ".rivers", ".route", ".town", ".countries", ".country"], magic : ["AmiAtlas "]},
 		amigaActionReplay3           : {name : "Amiga Action Replay 3 Freeze File", magic : ["Amiga Action Reply 3 Freeze File"]},
-		amigaBlkDev                  : {name : "Amiga ADF BlkDev File", ext : [".blkdev"], magic : [...C.TEXT_MAGIC, /^data$/], weakMagic : true},
-		amigaBootCode                : {name : "Amiga ADF Bootcode", ext : [".bootcode"], magic : [...C.TEXT_MAGIC, /^data$/], weakMagic : true},
+		amigaBlkDev                  : {name : "Amiga ADF BlkDev File", ext : [".blkdev"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
+		amigaBootCode                : {name : "Amiga ADF Bootcode", ext : [".bootcode"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
 		amigaCLIMateDirIndex         : {name : "Amiga CLI-Mate Directory Index File", filename : [".fastdir"]},
-		amigaXDFMeta                 : {name : "Amiga ADF XDF Meta", ext : [".xdfmeta"], magic : [...C.TEXT_MAGIC, /^data$/], weakMagic : true},
+		amigaXDFMeta                 : {name : "Amiga ADF XDF Meta", ext : [".xdfmeta"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
 		amosAmalBank                 : {name : "Amos Amal Animation Bank", ext : [".abk"], magic : ["AMOS AMAL Bank"]},
 		amosAsmBank                  : {name : "AMOS ASM Bank", ext : [".abk"], magic : ["AMOS Asm Bank"]},
 		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format"]},
@@ -225,7 +224,7 @@ exports.formats =
 		iffBinaryPatch               : {name : "IFF Binary Patch", ext : [".pch", ".patch"], magic : ["IFF data, PTCH binary patch", "IFF binary Patch"]},
 		iffDTYP                      : {name : "Amiga IFF DTYP", magic : ["Amiga IFF datatype info", "IFF data, DTYP datatype description"]},
 		iffPrefs                     : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
-		kryoFluxRawStream            : {name : "KryoFlux Saw Stream", ext : [".raw"], magic : ["KryoFlux raw stream"]},
+		kryoFluxRawStream            : {name : "KryoFlux Raw Stream", ext : [".raw"], magic : ["KryoFlux raw stream"]},
 		labViewVirtualInstrument     : {name : "LabView Virtual Instrument", ext : [".vi"], magic : ["National Instruments, LabVIEW File, Virtual Instrument", "LABView Virtual Instrument"]},
 		ldiffDifferencesData         : {name : "LDIFF Differences Data", ext : [".lzd"], magic : ["LDIFF differences data"]},
 		life3000Status               : {name : "LIFE 3000 Status", ext : [".lif"], magic : ["LIFE 3000 status"]},
@@ -293,4 +292,3 @@ exports.formats =
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]}
 	}
 };
-

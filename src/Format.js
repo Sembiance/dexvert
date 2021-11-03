@@ -4,6 +4,7 @@ import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
 import {Family} from "./Family.js";
 import {validateClass} from "./validate.js";
+import unsupported from "./format/unsupported.js";
 
 export class Format
 {
@@ -24,7 +25,7 @@ export class Format
 
 	// builder to get around the fact that constructors can't be async
 	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
-	static create(family)
+	static create(family, preValidate)
 	{
 		if(!family || !(family instanceof Family))
 			throw new Error(`format [${this.formatid}] constructor called with invalid family [${family}] of type [${typeof family}]`);
@@ -32,6 +33,8 @@ export class Format
 		const format = new this({allowNew : true});
 		format.family = family;
 		format.familyid = family.familyid;
+		if(preValidate)
+			preValidate(format);
 		validateClass(format, {
 			// required
 			formatid : {type : "string", required : true},
@@ -117,6 +120,31 @@ export class Format
 			formats[formatid] = formatModule[formatid].create(families[familyid]);
 			if(!(formats[formatid] instanceof this))
 				throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
+		}
+
+		for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
+		{
+			for(const [formatid, o] of Object.entries(unsupportedFormats))
+			{
+				const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes"];
+				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
+				if(extraKeys.length>0)
+					throw new Error(`unsupported format ${familyid}/${formatid} has extra keys that are not currently copied over to the Unknown class, add them: ${extraKeys}`);
+				
+				class Unsupported extends Format
+				{
+					unsupported = true;
+				}
+
+				formats[formatid] = Unsupported.create(families[familyid], format =>	// eslint-disable-line sembiance/shorter-arrow-funs
+				{
+					for(const supportedKey of supportedKeys)
+					{
+						if(Object.hasOwn(o, supportedKey))
+							format[supportedKey] = o[supportedKey];
+					}
+				});
+			}
 		}
 		
 		this.formats = formats;

@@ -31,11 +31,17 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 		Deno.exit(0);
 	}
 
-	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid}) => ({
+	const maxes =
+	{
+		matchType : rows.map(({matchType}) => (matchType || "").length).max(),
+		family    : rows.map(({family}) => (family || "").length).max()
+	};
+	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid, unsupported}) => ({
 		from : from==="dexvert" ? xu.cf.fg.green(from) : from,
 		confidence,
-		format : `${from!=="dexvert" ? magic.innerTruncate(100) : magic}${from==="dexvert" ? ` ${xu.cf.fg.peach(matchType)} ${xu.cf.fg.yellow(family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}` : ""}`,
-		extensions}));
+		format : `${from!=="dexvert" ? magic.innerTruncate(75) : magic}${unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""}`,
+		extensions,
+		dexvert : `${from!=="dexvert" ? "" : `${xu.cf.fg.peach(matchType.padStart(maxes.matchType))} ${xu.cf.fg.yellow(family.padStart(maxes.family))}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}`}`}));
 	console.log(printUtil.columnizeObjects(printRows, {		// eslint-disable-line no-restricted-syntax
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));

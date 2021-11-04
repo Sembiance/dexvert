@@ -11,20 +11,25 @@ export class DexFile
 		dexFile.root = path.join(typeof o==="string" ? (o.startsWith("/") ? path.dirname(o) : Deno.cwd()) : path.resolve(o.root));
 		dexFile.rel = typeof o==="string" ? (o.startsWith("/") ? path.basename(o) : o) : o.subPath;
 		dexFile.absolute = path.join(dexFile.root, dexFile.rel);
+		dexFile.transformed = Object.isObject(o) && o.transformed;
 
-		const pathInfo = path.parse(dexFile.absolute);
-		["base", "dir", "name", "ext"].forEach(n => { dexFile[n] = pathInfo[n]; });
+		dexFile.calcProps();
 
 		const fileInfo = await Deno.lstat(dexFile.absolute);
 		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { dexFile[n] = fileInfo[n]; });
 		dexFile.ts = fileInfo.mtime;	// eslint-disable-line require-atomic-updates
 
-		const periodLoc = dexFile.base.indexOf(".");
-		dexFile.preExt = periodLoc===-1 ? "" : `.${dexFile.base.substring(0, periodLoc)}`;
-		dexFile.preName = dexFile.base.substring(dexFile.preExt.length);
-
-		dexFile.transformed = Object.isObject(o) && o.transformed;
 		return dexFile;
+	}
+
+	calcProps()
+	{
+		const pathInfo = path.parse(this.absolute);
+		["base", "dir", "name", "ext"].forEach(n => { this[n] = pathInfo[n]; });
+
+		const periodLoc = this.base.indexOf(".");
+		this.preExt = periodLoc===-1 ? "" : `.${this.base.substring(0, periodLoc)}`;
+		this.preName = this.base.substring(this.preExt.length);
 	}
 
 	// creates a copy of this
@@ -42,5 +47,14 @@ export class DexFile
 		this.absolute = path.join(newRoot, this.rel);
 		this.dir = path.dirname(this.absolute);
 		return this;
+	}
+
+	async rename(newFilename)
+	{
+		const newAbsolute = path.join(this.dir, newFilename);
+		await Deno.rename(this.absolute, newAbsolute);
+		this.absolute = newAbsolute;
+		this.rel = this.rel.includes("/") ? path.join(path.dirname(this.rel), newFilename) : newFilename;
+		this.calcProps();
 	}
 }

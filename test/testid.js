@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
-import { delay } from "https://deno.land/std@0.111.0/async/mod.ts";
+import {colorizeid} from "../src/identify.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -58,11 +58,6 @@ async function testSample(sampleFilePath)
 	{
 		xu.stdoutWrite(c);
 		passChain++;
-	}
-
-	function colorizeid(id)
-	{
-		return `${xu.cf.fg.deepSkyblue(id.magic)} ${xu.cf.fg.white(id.confidence)} ${xu.cf.fg.peach(id.matchType)} ${xu.cf.fg.yellow(id.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(id.formatid)}`;
 	}
 
 	if(!ids)

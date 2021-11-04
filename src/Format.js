@@ -77,7 +77,9 @@ export class Format
 			untouched        : {type : "boolean"},
 
 			// conversion
-			converters     : {type : ["string", Object]}
+			converters   : {type : ["string", Object]},
+			keepFilename : {type : "boolean"},
+			safeExt      : {type : "function", length : [0, 1]}
 		});
 		return format;
 	}

@@ -103,7 +103,17 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 
 
 >>> ******** Conversion
+>>> keepFilename : true
+Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
+NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
+Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
+>>> safeExt(inputFileSet) { return ".safe"; }
+When processing, the extension used is this priority:
+1. An extension returned from safeExt() (if present)
+2. Original filename extension (IF present in meta.ext array)
+3. Extension matched from a fileSize match
+4. The first extension in meta.ext array
 
 
 
@@ -118,10 +128,6 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 >>> highConfidence : true
 Normally 'unsupported' matches are very low priority. However sometimes a format might easily match other formats and those programs might not convert them correctly, resulting in gibberish. So if you know a format is a strong match, even though unsupported, set this to true and the confidence level will go up when identified.
 
->>> keepFilename : true || "extras" || "input"
-Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
-NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
-Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
 >>> symlinkUnsafe : true || "extras" || "input"
 If the file format doesn't play well with symlinks, can set this to true. Probably better to set it in the program though, usually.
@@ -133,12 +139,7 @@ If set to true then this format is known to be slow to work with. If an image, t
 
 
 >>> ******** Extension
->>> safeExt(state) { return ".safe"; }
-When processing, the extension used is this priority:
-1. An extension returned from safeExt() (if present)
-2. Original filename extension (IF present in meta.ext array)
-3. Extension matched from a fileSize match
-4. The first extension in meta.ext array
+
 
 
 

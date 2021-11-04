@@ -9,7 +9,7 @@ export class macromediaDirector extends Format
 	forbidExtMatch = true;
 	magic = ["Macromedia Director project","Adobe Director Protected Cast","Macromedia Director Protected Movie","Director - Shockwave movie","Generic RIFX container"];
 	weakMagic = ["Generic RIFX container"];
-	keepFilename = "extras";
+	keepFilename = true;
 	filesOptional = undefined;
 	notes = "While 'xtras' is included here, it is NOT copied over into Windows. See more details in program/archive/macromediaDirector.js";
 
@@ -30,7 +30,7 @@ exports.meta =
 	forbidExtMatch : true,
 	magic          : ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container"],
 	weakMagic      : ["Generic RIFX container"],
-	keepFilename   : "extras",
+	keepFilename   : true,
 	filesOptional  : (state, otherFiles, otherDirs=[]) => otherDirs.filter(otherDir => otherDir.toLowerCase()==="xtras"),
 	notes          : "While 'xtras' is included here, it is NOT copied over into Windows. See more details in program/archive/macromediaDirector.js"
 };

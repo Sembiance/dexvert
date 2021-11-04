@@ -1,11 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create a new test/testid.js and a test/testUtil.js where the common rsync stuff will live, etc. and start testing the formats listed below.
-
 * Fully identify and process:
 image/pcx
 image/qrt
+image/xwd
 image/fractalImageFormat
 image/degasHiPI
 image/mur
@@ -22,6 +21,7 @@ archive/windowsThumbDB
 archive/msCompound
 archive/macBinary
 text/txtByFilename
+font/amigaBitmapFont
 
 * Now convert and identify any formats with:
 untrustworthy (which has been removed entirely, as programs are untrustworthy, not formats)
@@ -32,9 +32,7 @@ filesRequired/filesOptional -> auxFiles
   Create a .tar file that will include symlinks outside of the dir. So have one symlink to / and another to like one dir up ../../outSideOfTar.txt
   Ensure the tar is created as symlinks and not what the symlink points to
   Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
-  Programs run in a tmp ram dir, but I should also make a 'out' dir in the cwd ram dir and all programs should extract to that. Will need to check and make sure 'out' doesn't already exist, and if so do a genTempPath with a prefix of the tmp ram cwd dir
   Also create a test/testdex.js file
-  transform code should move into bin/*/
   Some of the formats will likely need 'transformUnsafe = true' flag added, but won't know right away. Make sure the output of process shows whether it was on a transformed file or not
   Programs don't need preArgs() it can just be handlded in args now that it is async capable
   Programs can be marked as unsafe (such as recoil2png). Make sure that transformed files are never sent to 'unsafe' programs
@@ -43,10 +41,6 @@ filesRequired/filesOptional -> auxFiles
 	outputType
 	fps
 	etc.
-* My runUtil doesn't support 'detached' which dos uses along with virtualX.
-I could add support for this, by checking 'detached' and if so add a p.status().then(v => { kill xVfb now }) before returning p
-Would need to make sure I properly handle stdout/stderr pipes (probably delete runArgs.stdout/stderr)
-Make a test case for this detached support
 
 * Now go through every other format, and test identification and processing for each one
 

@@ -1,17 +1,16 @@
-/*
 import {Format} from "../../Format.js";
 
 export class cdi extends Format
 {
-	name = "Compact Disc-Interactive";
-	website = "http://fileformats.archiveteam.org/wiki/Cd-i";
-	ext = [".bin"];
-	magic = ["CD-I disk image"];
+	name         = "Compact Disc-Interactive";
+	website      = "http://fileformats.archiveteam.org/wiki/Cd-i";
+	ext          = [".bin"];
+	magic        = ["CD-I disk image"];
 	keepFilename = true;
-	filesRequired = undefined;
-	converters = ["IsoBuster"]
+	auxFiles     = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.cue`);
+	converters   = ["IsoBuster"]
 }
-*/
+
 /*
 "use strict";
 const XU = require("@sembiance/xu");

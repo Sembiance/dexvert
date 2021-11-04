@@ -9,7 +9,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Identifies one or more files",
 	opts    :
 	{
-		verbose  : {desc : "Show additional info when identifying"},
+		verbose  : {desc : "Show additional info when identifying. Levels 0 to 5. Default: 0", defaultValue : 0},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true}
 	},

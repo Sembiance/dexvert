@@ -15,12 +15,17 @@ function flexMatch(value, matcher, fullStringMatch)
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "3d", "font", "text", "executable", "rom", "other"];
 
-export async function identify(inputFile, {verbose})
+export function colorizeid(id)
+{
+	return `${xu.cf.fg.deepSkyblue(id.magic)} ${xu.cf.fg.white(id.confidence)} ${xu.cf.fg.peach(id.matchType)} ${xu.cf.fg.yellow(id.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(id.formatid)}`;
+}
+
+export async function identify(inputFile, {verbose=0})
 {
 	const input = await FileSet.create(inputFile);
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, input, undefined, {verbose})))).flatMap(o => o.meta.detections);
 
-	if(verbose)
+	if(verbose>=3)
 		xu.log`raw detections: ${detections.map(({confidence, from, value, extensions, weak}) => ({"%" : confidence, from, value, extensions, weak}))}`;
 
 	const formats = await Format.loadFormats();
@@ -44,7 +49,7 @@ export async function identify(inputFile, {verbose})
 			// skip this format if any of our detections are forbidden magic values or our input filename has a forbidden extension
 			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => input.primary.base.toLowerCase().endsWith(fext)))))
 			{
-				if(verbose)
+				if(verbose>=4)
 					xu.log`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
 				continue;
 			}
@@ -52,7 +57,7 @@ export async function identify(inputFile, {verbose})
 			// skip this format if it's marked as unsafe and our file has been transformed and we don't explictly allow transforming
 			if(input.primary.transformed && format.transformUnsafe)
 			{
-				if(verbose)
+				if(verbose>=4)
 					xu.log`Excluding format ${formatid} due to input being a transformed file and the format being marked as unsafe.`;
 				continue;
 			}
@@ -79,22 +84,23 @@ export async function identify(inputFile, {verbose})
 
 				if(!match)
 				{
-					if(verbose)
+					if(verbose>=4)
 						xu.log`Excluding format ${formatid} due to byteCheck not matching.`;
 					continue;
 				}
 			}
 
 			// some formats requrie additional files or directories that may be used
+			let auxFiles = null;
 			if(format.auxFiles)
 			{
-				const auxFiles = format.auxFiles(input.primary, otherFiles, otherDirs);
+				auxFiles = format.auxFiles(input.primary, otherFiles, otherDirs);
 
 				// If the filesRequired function returns false, then we don't have any required files
 				// If it returns an empty array then we fail to match
 				if(auxFiles!==false && auxFiles.length===0)
 				{
-					if(verbose)
+					if(verbose>=4)
 						xu.log`Excluding format ${formatid} due to requiredFiles not being present.`;
 					continue;
 				}
@@ -152,6 +158,8 @@ export async function identify(inputFile, {verbose})
 			}));
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
+			if(auxFiles)
+				baseMatch.auxFiles = auxFiles;
 			["charSet", "confidenceAdjust", "website", "mimeType", "fallback"].forEach(key =>
 			{
 				if(format[key])
@@ -274,7 +282,7 @@ export async function identify(inputFile, {verbose})
 	matches.push(...matchesByFamily.fallback);
 
 	return [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported})),
+		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),
 		...detections.map(({from, confidence, value, extensions}) => ({from, confidence, magic : value, extensions}))
 	];
 }

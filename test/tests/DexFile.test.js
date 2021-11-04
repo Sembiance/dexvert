@@ -1,6 +1,7 @@
 import {assertStrictEquals} from "https://deno.land/std@0.111.0/testing/asserts.ts";
-import {DexFile} from "../src/DexFile.js";
+import {DexFile} from "../../src/DexFile.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {fileUtil} from "xutil";
 
 Deno.test("create", async () =>
 {
@@ -131,4 +132,43 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(b.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
 	assertStrictEquals(b.preExt, ".txt");
 	assertStrictEquals(b.preName, "b");
+});
+
+Deno.test("rename", async () =>
+{
+	const tmpPath = await fileUtil.genTempPath(undefined, ".txt");
+	const tmpDir = path.dirname(tmpPath);
+	const tmpFilename = path.basename(tmpPath);
+	await Deno.copyFile("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt", tmpPath);
+
+	const a = await DexFile.create(tmpPath);
+	assertStrictEquals(a.root, tmpDir);
+	assertStrictEquals(a.absolute, path.join(tmpDir, tmpFilename));
+	assertStrictEquals(a.base, tmpFilename);
+	assertStrictEquals(a.dir, tmpDir);
+	assertStrictEquals(a.name, path.basename(tmpFilename, ".txt"));
+	assertStrictEquals(a.ext, ".txt");
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 6);
+	assertStrictEquals(a.preName, "txt");
+
+	await a.rename("somethingElse.png");
+	assertStrictEquals(a.root, tmpDir);
+	assertStrictEquals(a.absolute, path.join(tmpDir, "somethingElse.png"));
+	assertStrictEquals(a.base, "somethingElse.png");
+	assertStrictEquals(a.dir, tmpDir);
+	assertStrictEquals(a.name, "somethingElse");
+	assertStrictEquals(a.ext, ".png");
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 6);
+	assertStrictEquals(a.preExt, ".somethingElse");
+	assertStrictEquals(a.preName, "png");
+
+	await a.rename(tmpFilename);
+
+	await Deno.remove(tmpPath);
 });

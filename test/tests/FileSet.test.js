@@ -1,5 +1,5 @@
 import {assertStrictEquals} from "https://deno.land/std@0.111.0/testing/asserts.ts";
-import {FileSet} from "../src/FileSet.js";
+import {FileSet} from "../../src/FileSet.js";
 
 Deno.test("create", async () =>
 {

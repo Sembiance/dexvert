@@ -27,7 +27,7 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 
 	if(argv.json)
 	{
-		console.log(JSON.stringify(rows));	// eslint-disable-line no-restricted-syntax
+		console.log(JSON.stringify(rows));
 		Deno.exit(0);
 	}
 
@@ -42,7 +42,7 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 		format : `${from!=="dexvert" ? magic.innerTruncate(75) : magic}${unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""}`,
 		extensions,
 		dexvert : `${from!=="dexvert" ? "" : `${xu.cf.fg.peach(matchType.padStart(maxes.matchType))} ${xu.cf.fg.yellow(family.padStart(maxes.family))}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}`}`}));
-	console.log(printUtil.columnizeObjects(printRows, {		// eslint-disable-line no-restricted-syntax
+	console.log(printUtil.columnizeObjects(printRows, {
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));
 }

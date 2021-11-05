@@ -17,6 +17,6 @@ export class checkBytes extends Program
 		if(r.stdout.trim().length===0)
 			return;
 		
-		r.meta.detections.push(Detection.create({value : r.stdout.trim(), from : "checkBytes", file : r.inputOriginal.primary}));
+		r.meta.detections.push(Detection.create({value : r.stdout.trim(), from : "checkBytes", file : r.input.primary}));
 	}
 }

@@ -21,7 +21,7 @@ export class trid extends Program
 			if(!parts)
 				return;
 			
-			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.inputOriginal.primary};
+			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.input.primary};
 			tridMatch.extensions = parts.groups.extension.includes("/") ? parts.groups.extension.split("/").map(ext => (ext.charAt(0)==="." ? "" : ".") + ext) : [parts.groups.extension];
 			tridMatch.extensions.mapInPlace(ext => ext.toLowerCase());
 			tridMatch.from = "trid";

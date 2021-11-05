@@ -1,15 +1,14 @@
-/*
 import {Format} from "../../Format.js";
 
 export class revisableFormText extends Format
 {
-	name = "IBM Revisable-Form Text";
-	ext = [".rft",".dca"];
+	name           = "IBM Revisable-Form Text";
+	ext            = [".rft", ".dca"];
 	forbidExtMatch = true;
-	magic = [{}];
-	converters = ["fileMerlin",["word97",{"program":"dexvert","flags":{"asFormat":"document/wordDoc","deleteInput":true}}]]
+	magic          = [/Revisable Form Text/];
+	converters     = ["fileMerlin", "word97 -> dexvert[asFormat:document/wordDoc][deleteInput]"]
 }
-*/
+
 /*
 "use strict";
 const XU = require("@sembiance/xu"),
@@ -20,7 +19,7 @@ exports.meta =
 	name           : "IBM Revisable-Form Text",
 	ext            : [".rft", ".dca"],
 	forbidExtMatch : true,
-	magic          : [/Revisable Form Text/]
+	magic          : []
 };
 
 exports.converterPriority =

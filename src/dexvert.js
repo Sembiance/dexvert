@@ -1,9 +1,11 @@
 import {xu} from "xu";
-import {identify, colorizeid} from "./identify.js";
+import {identify} from "./identify.js";
 import {Format} from "./Format.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
+import {DexState} from "./DexState.js";
 import {fileUtil, runUtil} from "xutil";
+import {Identification} from "./Identification.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
 const DEFAULT_QUOTA_DISK = xu.GB*10;
@@ -27,7 +29,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 			if(formats[asFormatid][k])
 				asId[k] = formats[asFormatid][k];
 		}
-		ids.push(asId);
+		ids.push(Identification.create(asId));
 	}
 	else
 	{
@@ -35,33 +37,35 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 	}
 
 	if(verbose>=2)
-		xu.log`Identifications:\n\t${ids.map(colorizeid).join("\n\t")}`;
+		xu.log`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 	
 	if(ids.length===0)
 		return;
 
 	//posix.setrlimit("core", {soft : 0});
 
+	let dexState = null;
 	for(const id of ids)
 	{
 		const format = formats[id.formatid];
 		if(verbose>=1)
-			xu.log`Attempting to process as format: ${colorizeid(id)}`;
+			xu.log`Attempting to process identification: ${id.pretty()}`;
 		
 		// create an input FileSet containing both our input file and any aux files needed
-		// TODO Need to test with a directory frmo auxfiles, like font/amigaBitmapFont
+		// TODO Need to test with a directory from auxfiles, like font/amigaBitmapFont
 		const inputFileSet = await FileSet.create(inputFile);
 		if(id.auxFiles)
-			inputFileSet.addFiles("aux", id.auxFiles);
+			inputFileSet.addAll("aux", id.auxFiles);
 		
-		// create a temporary ram cwd and copy over our files, this avoids issues with symlinks/file locks
+		// create a temporary ram cwd and copy over our files, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
-		const cwdInputFileSet = await inputFileSet.rsyncTo(cwd);
+		const cwdInput = await inputFileSet.rsyncTo(cwd);
+		cwdInput.add("original", inputFile);
 
-		inputFileSet.addFile("original", inputFile);
+		// rename the primary file to an easy filename that any program can handle: in<ext>
+		const cwdFilename = format.keepFilename ? inputFile.name : "in";
 
-		// rename the primary file to something nice and safe to convert: in.ext
 		let cwdExt = null;
 		if(format.safeExt)
 			cwdExt = format.safeExt(inputFileSet);
@@ -69,38 +73,84 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 			cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase()) || format.ext[0];
 		else
 			cwdExt = inputFile.ext;
+		
+		await cwdInput.primary.rename(cwdFilename + cwdExt);
 
-		const cwdFilename = format.keepFilename ? inputFile.name : "in";
-
-		await cwdInputFileSet.primary.rename(cwdFilename + cwdExt);
-
-		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues with weird destination output directory names, bad characters etc.
+		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
 		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
 		await Deno.mkdir(outFilePath, {recursive : true});
-		const cwdOutputDir = await DexFile.create(outFilePath);
+		const cwdOutput = await FileSet.create(await DexFile.create(outFilePath));
+		cwdOutput.add("original", outputDir);
 
-		// restrict the size of our out dir by mounting a RAM disk to it, that way we can't fill up our entire hard drive with misbehaving programs
-		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutputDir.absolute]);
+		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
+		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.primary.absolute]);
 
-		/*
-		p.util.flow.serial([
-			() => p.util.meta.input,
-			...(p.format.preSteps || []),
-			subState => (subState.processed ? p.util.flow.noop : p.util.flow.serial(p.family.steps)),		// For files we don't need to convert, meta.input calls format.inputMeta which can set processed to true if the file is verified as valid
-			...(p.format.postSteps || []),
-			() => p.util.file.tmpCWDCleanup])(state, p, cbHandler);
+		dexState = await DexState.create({id, format, input : cwdInput, output : cwdOutput});
+		Object.assign(dexState.meta, await format.getMeta(cwdInput, format));
+
+		const cleanup = async () =>
+		{
+			await runUtil.run("sudo", ["umount", cwdOutput.primary.absolute]);
+			await Deno.remove(cwd, {recursive : true});
+		};
+
+		try
+		{
+			if(format.untouched===true || (typeof format.untouched==="function" && format.untouched(dexState)))
+			{
+				dexState.processed = true;
+				await cleanup();
+				break;
+			}
+
+			if(format.pre)
+				await format.pre(dexState);
 			
-		(state, p) => p.util.file.findValidOutputFiles(true),
-		() => exports.updateProcessed,
-		() => exports.cleanup
-		
-		checkShouldContinue)
-			*/
+			for(const converter of (format.converters || []))
+			{
+				const chain = converter.split("->").map(v => v.trim());
+				for(const link of chain)
+				{
+					const {programid, flagsRaw=""} = link.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
+					const flags = flagsRaw.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/g)?.groups;
+					console.log({chain, programid, flags});
 
-		// cleanup
-		await runUtil.run("sudo", ["umount", cwdOutputDir.absolute]);
-		await Deno.remove(cwd, {recursive : true});
+
+					//const linkProps = link.match(/\s*(?<programid>[^\]]+)(?<flag>\s*\s*)/).groups
+
+					//^\s*(?<programid>[^[]+)(?<flags>\[(?<flagName>[^:\]]+):?(?<flagValue>[^\]]*)\])*
+				}
+				// ["word97 -> dexvert[asFormat:document/wordDoc][deleteInput]"]
+				// [["word97", ["dexvert", {asFormat : "document/wordDoc", deleteInput : true}]]]
+
+				// ["deark[module:rosprite]"]
+				// ["deark", {module : "rosprite"}]
+			}
+
+			if(format.post)
+				await format.post(dexState);
+
+			/*
+			subState => (subState.processed ? p.util.flow.noop : p.util.flow.serial(p.family.steps)),		// For files we don't need to convert, meta.input calls format.inputMeta which can set processed to true if the file is verified as valid
+			() => p.util.file.tmpCWDCleanup])(state, p, cbHandler);
+				
+			(state, p) => p.util.file.findValidOutputFiles(true),
+			() => exports.updateProcessed,
+			() => exports.cleanup
+			
+			checkShouldContinue)
+				*/
+		}
+		catch(err)
+		{
+			xu.log`dexvert failed with error: ${err}`;
+		}
+
+		dexState = null;
+		await cleanup();
 	}
+
+	return dexState;
 }
 
 /*

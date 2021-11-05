@@ -11,7 +11,7 @@ export function validateClass(o, schema)
 
 	for(const [propid, prop] of Object.entries(schema))
 	{
-		if(!Object.hasOwn(o, propid))
+		if(!Object.hasOwn(o, propid) || typeof o[propid]==="undefined")
 		{
 			if(prop.required)
 				throw new Error(`${prefix} is missing required property [${propid}] ${suffix}`);
@@ -57,8 +57,13 @@ export function validateClass(o, schema)
 			assert((new URL(value)) instanceof URL, `${prefix} expected to be a valid URL but it was not ${suffix}`);
 		
 		// validate that the property has a spcific value
-		if(prop.enum)
-			assert(prop.enum.includes(value), `${prefix} expected to be one of value [${prop.enum.join("], [")}] but got [${value}] ${suffix}`);
+		if(prop.enum && prop.enum.length>0)
+		{
+			if(Array.isArray(value))
+				assertStrictEquals(value.filter(v => !prop.enum.includes(v)).length, 0, `${prefix} expected to contain one of value [${prop.enum.join("], [")}] but got [${value}] ${suffix}`);
+			else
+				assert(prop.enum.includes(value), `${prefix} expected to be one of value [${prop.enum.join("], [")}] but got [${value}] ${suffix}`);
+		}
 
 		// validate that the property value is a given length
 		if(prop.length)

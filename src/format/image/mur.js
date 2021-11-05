@@ -7,9 +7,9 @@ export class mur extends Format
 	ext           = [".mur", ".pal"];
 	// Both .mur and .pal are required
 	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
+
+	// Don't do anything with .pal files
+	untouched = dexState => dexState.input.primary.ext.toLowerCase()===".pal"
 	
 	converters    = ["recoil2png"]
-
-	// TODO Need to figure out a way to mark the .pal file as processed and don't bother with conversion
-	//preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".pal"; }];
 }

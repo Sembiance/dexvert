@@ -13,6 +13,6 @@ export class file extends Program
 	args = r => ["--dereference", "--brief", "--keep-going", "--raw", r.input.primary.rel]
 	post = r =>
 	{
-		r.meta.detections = r.stdout.trim().replaceAll("\n- , ", "\n- ").split("\n- ").filter(v => !!v).map((line, i) => Detection.create({value : line.trim(), from : "file", confidence : 100-i, file : r.inputOriginal.primary}));
+		r.meta.detections = r.stdout.trim().replaceAll("\n- , ", "\n- ").split("\n- ").filter(v => !!v).map((line, i) => Detection.create({value : line.trim(), from : "file", confidence : 100-i, file : r.input.primary}));
 	}
 }

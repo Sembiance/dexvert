@@ -23,6 +23,20 @@ export class Format
 	familyid = null;
 	baseKeys = Object.keys(this);
 
+	// will get meta info for this particular format and the passed input fileset
+	getMeta(input)
+	{
+		return this.family.getMeta(input, this);
+	}
+
+	// returns a pretty string to output to console
+	pretty()
+	{
+		const r = [];
+		r.push(`${xu.cf.fg.magenta(this.name)} ${xu.cf.fg.yellow(this.familyid)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}${this.unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""} (${xu.cf.fg.greenDim(this.website)})`);
+		return r.join("");
+	}
+
 	// builder to get around the fact that constructors can't be async
 	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create(family, preValidate)
@@ -35,9 +49,14 @@ export class Format
 		format.familyid = family.familyid;
 		if(preValidate)
 			preValidate(format);
+		
+		if((format.converters || []).includes("abydosconvert") && !format.mimeType)
+			throw new Error(`format [${this.formatid}] has abydosconvert as a converter but doesn't have a mimeType set which is required for abydos`);
+
 		validateClass(format, {
 			// required
 			formatid : {type : "string", required : true},
+			family   : {type : Family, required : true},
 			name     : {type : "string", required : true},
 
 			// meta
@@ -74,12 +93,15 @@ export class Format
 			trustMagic       : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			unsupported      : {type : "boolean"},
-			untouched        : {type : "boolean"},
+			untouched        : {types : ["boolean", "function"]},
 
 			// conversion
-			converters   : {type : ["string", Object]},
-			keepFilename : {type : "boolean"},
-			safeExt      : {type : "function", length : [0, 1]}
+			metaProviders : {type : ["string"], enum : (family.metaids || [])},
+			converters    : {type : ["string", Object]},
+			keepFilename  : {type : "boolean"},
+			safeExt       : {type : "function", length : [0, 1]},
+			pre           : {type : "function", length : [0, 1]},
+			post          : {type : "function", length : [0, 1]}
 		});
 		return format;
 	}
@@ -124,6 +146,7 @@ export class Format
 				throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
 		}
 
+		// process our 'unsupported.js' formats
 		for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 		{
 			for(const [formatid, o] of Object.entries(unsupportedFormats))

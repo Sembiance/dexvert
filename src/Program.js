@@ -4,7 +4,6 @@ import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
 import {validateClass} from "./validate.js";
 import {RunState} from "./RunState.js";
-import {FileSet} from "./FileSet.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*2;
 
@@ -46,21 +45,13 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(_input, _output, {timeout=DEFAULT_TIMEOUT, verbose=0}={})
+	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0}={})
 	{
-		// ensure input and output are FileSets
-		const input = _input instanceof FileSet ? _input : await FileSet.create(_input);
-		const output = _output instanceof FileSet ? _output : await FileSet.create(_output);
-
-		const ramDirPath = await fileUtil.genTempPath(undefined, `${this.programid}`);
-		await Deno.mkdir(ramDirPath);
-
-		// we rsync them instead of symlink in order to prevent problems with some programs not working with symlinks correctly or modifying the original (bad program), wanting exclusive locks (even a thing under linux?), etc
-		const r = RunState.create({inputOriginal : input, input : await input.rsyncTo(ramDirPath), output});
+		const r = RunState.create({input, output});
 		if(this.bin)
 		{
 			const args = await this.args(r);
-			const runOptions = {cwd : ramDirPath, timeout};
+			const runOptions = {cwd : input.root, timeout};
 			if(verbose>=4)
 				xu.log`Program ${this.programid} running as \`${this.bin} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, args, runOptions);
@@ -75,8 +66,6 @@ export class Program
 
 		if(this.post)
 			await this.post(r);
-
-		await Deno.remove(ramDirPath, {recursive : true});
 
 		return r;
 	}

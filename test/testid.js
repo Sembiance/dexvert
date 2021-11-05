@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil} from "xutil";
+import {Identification} from "../src/Identification.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
-import {colorizeid} from "../src/identify.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -63,7 +63,7 @@ async function testSample(sampleFilePath)
 	if(!ids)
 		return fail(`No id results returned ${r.stderr}`);
 
-	ids.filterInPlace(id =>
+	ids.mapInPlace(id => Identification.create(id)).filterInPlace(id =>
 	{
 		if(id.from!=="dexvert")
 			return false;
@@ -82,13 +82,13 @@ async function testSample(sampleFilePath)
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return fail(`No test data for this file: ${xu.cf.fg.cyan("[")}${ids.map(colorizeid).join(xu.cf.fg.cyan("] ["))}${xu.cf.fg.cyan("]")}`);
+		return fail(`No test data for this file: ${xu.cf.fg.cyan("[")}${ids.map(id => id.pretty()).join(xu.cf.fg.cyan("] ["))}${xu.cf.fg.cyan("]")}`);
 	
 	for(const id of ids)
 	{
 		const previd = testData[sampleSubFilePath].find(v => v.formatid===id.formatid);
 		if(!previd)
-			return fail(`New identification detected: ${colorizeid(id)}`);
+			return fail(`New identification detected: ${id.pretty()}`);
 		else if(previd.confidence!==id.confidence)
 			return fail(`Confidence level changed for ${xu.cf.fg.white(id.formatid) + xu.c.fg.orange} was ${xu.cf.fg.white(previd.confidence) + xu.c.fg.orange} and now ${xu.cf.fg.white(id.confidence)}`);
 	}
@@ -97,7 +97,7 @@ async function testSample(sampleFilePath)
 	{
 		const id = ids.find(v => v.formatid===previd.formatid);
 		if(!id)
-			return fail(`Previous identification not detected: ${colorizeid(previd)}`);
+			return fail(`Previous identification not detected: ${Identification.create(previd).pretty()}`);
 	}
 
 	return pass(".");

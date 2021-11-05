@@ -111,7 +111,7 @@ export class dexmagic extends Program
 			if(!match)
 				continue;
 			
-			r.meta.detections.push(Detection.create({value : matchid, from : "dexmagic", file : r.inputOriginal.primary}));
+			r.meta.detections.push(Detection.create({value : matchid, from : "dexmagic", file : r.input.primary}));
 		}
 	}
 }

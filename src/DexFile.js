@@ -49,6 +49,7 @@ export class DexFile
 		return this;
 	}
 
+	// renames this file to the newFilename
 	async rename(newFilename)
 	{
 		const newAbsolute = path.join(this.dir, newFilename);

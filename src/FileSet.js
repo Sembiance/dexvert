@@ -26,20 +26,20 @@ export class FileSet
 		{
 			// a string, assume we just have a single primary file, absolute path
 			fileSet.root = getRoot(o);
-			await fileSet.addFile("primary", path.basename(o));
+			await fileSet.add("primary", path.basename(o));
 		}
 		else if(o instanceof DexFile)
 		{
 			// a single DexFile, assume it's a primary file
 			fileSet.root = o.root;
-			await fileSet.addFile("primary", o);
+			await fileSet.add("primary", o);
 		}
 		else if(Array.isArray(o))
 		{
 			// an array, assume it's an array of primary files
 			fileSet.root = o.map(getRoot).sortMulti([v => v.length])[0];
 			for(const v of o)
-				await fileSet.addFile("primary", path.relative(fileSet.root, v));
+				await fileSet.add("primary", path.relative(fileSet.root, v));
 		}
 		else if(!Object.hasOwn(o, "root"))
 		{
@@ -48,7 +48,7 @@ export class FileSet
 			for(const [type, files] of Object.entries(o))
 			{
 				for(const file of files)
-					await fileSet.addFile(type, file);
+					await fileSet.add(type, file);
 			}
 		}
 		else
@@ -57,7 +57,7 @@ export class FileSet
 			for(const [type, files] of Object.entries(o.files))
 			{
 				for(const file of files)
-					await fileSet.addFile(type, file);
+					await fileSet.add(type, file);
 			}
 		}
 
@@ -77,13 +77,13 @@ export class FileSet
 		return this.clone().changeRoot(targetRoot);
 	}
 
-	async addFiles(type, files)
+	async addAll(type, files)
 	{
-		await Promise.all(files.map(file => this.addFile(type, file)));
+		await Promise.all(files.map(file => this.add(type, file)));
 	}
 
 	// adds the given file of type type
-	async addFile(_type, _o)
+	async add(_type, _o)
 	{
 		const type = typeof _o==="undefined" ? "primary" : _type;
 		const o = typeof _o==="undefined" ? _type : _o;
@@ -133,4 +133,10 @@ export class FileSet
 
 	get auxes() { return (this.files.aux || []); }
 	get auxesFull() { return this.auxes.map(v => path.join(this.root, v)); }
+
+	get original() { return this.originals[0]; }
+	get originalFull() { return path.join(this.root, this.original); }
+
+	get originals() { return (this.files.original || []); }
+	get originalsFull() { return this.originals.map(v => path.join(this.root, v)); }
 }

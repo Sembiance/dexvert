@@ -4,6 +4,7 @@ import {Format} from "./Format.js";
 import {Program} from "./Program.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
+import {Identification} from "./Identification.js";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -14,11 +15,6 @@ function flexMatch(value, matcher, fullStringMatch)
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "3d", "font", "text", "executable", "rom", "other"];
-
-export function colorizeid(id)
-{
-	return `${xu.cf.fg.deepSkyblue(id.magic)} ${xu.cf.fg.white(id.confidence)} ${xu.cf.fg.peach(id.matchType)} ${xu.cf.fg.yellow(id.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(id.formatid)}`;
-}
 
 export async function identify(inputFile, {verbose=0})
 {
@@ -282,7 +278,7 @@ export async function identify(inputFile, {verbose=0})
 	matches.push(...matchesByFamily.fallback);
 
 	return [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => ({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),
-		...detections.map(({from, confidence, value, extensions}) => ({from, confidence, magic : value, extensions}))
+		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),	// eslint-disable-line max-len
+		...detections.map(({from, confidence, value, extensions}) => Identification.create({from, confidence, magic : value, extensions}))
 	];
 }

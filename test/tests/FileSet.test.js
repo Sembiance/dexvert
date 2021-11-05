@@ -74,13 +74,13 @@ Deno.test("addFile", async () =>
 	const a = await FileSet.create([
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
-	await a.addFile("/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
-	await a.addFile("primary", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
-	await a.addFile("primary", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third");
+	await a.add("/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
+	await a.add("primary", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
+	await a.add("primary", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third");
 	const b = await FileSet.create([
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
-	await b.addFiles("primary", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await b.addAll("primary", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 
 	[a, b].forEach(o =>
 	{

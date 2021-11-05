@@ -98,11 +98,15 @@ If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.
 
->>> untouched : true
+>>> untouched : true || (dexState) { return true; }
 Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
 
 
 >>> ******** Conversion
+>>> metaProviders : ["image", "darkTable", "ansiArt"]
+A list of meta providers to use to get info about the input file for this format.
+These are family specific
+
 >>> keepFilename : true
 Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
 NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
@@ -115,7 +119,11 @@ When processing, the extension used is this priority:
 3. Extension matched from a fileSize match
 4. The first extension in meta.ext array
 
+>>> pre = async (dexState) { ... }
+A method that will be executed before any converters are attempted
 
+>>> post = async (dexState) { ... }
+A method that will be executed after converters have been attempted
 
 
 
@@ -160,25 +168,10 @@ For image/music/archive, an array of programid strings, in priority order, to tr
 It will try a bunch of others, this is just the initial priority order. Stops at first successful conversion.
 It can also be a function which returns an array of converters to try
 
->>> converterExclude = ["xmp"]
-For music only. An array of programids to EXCLUDE from conversion attempts.
-
 
 >>> ******** Process Order
->>> inputMeta = (state, p, cb) => { state.input.meta[formatid] = {prop : "value"}; setImmediate(cb); }
-Can gather additional format specific meta and statsh it into state.input.meta[formatid]
-
->>> preSteps = [ (state, p) => (state, p, cb) => {}, ...]
-An array of methods that will be executed immediately BEFORE 'steps', even if 'steps' is coming from family.steps instead.
-
 >>> steps = [ (state, p) => (state, p, cb) => {}, ... ]
 An array of methods that will be executed serially, responsible for handling the file.
-
->>> postSteps = [ (state, p) => (state, p, cb) => {}, ...]
-An array of methods that will be executed immediately AFTER 'steps', even if 'steps' is coming from family.steps instead.
-
->>> post = (state, p, cb) => {}
-A method that will be executed after preSteps/steps/postSteps.
 
 >>> updateProcessed = (state, p, cb) => { state.processed = false||true; setImmediate(cb); }
 Some formats have additional format specific checks to determine whether processing was truly successful, or not.

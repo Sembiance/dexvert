@@ -15,7 +15,11 @@ export class Family
 	static create()
 	{
 		const family = new this({allowNew : true});
-		validateClass(family, {});
+		validateClass(family, {
+			// meta
+			metaids : {type : ["string"]},
+			getMeta : {type : "function", length : [1]}
+		});
 		return family;
 	}
 

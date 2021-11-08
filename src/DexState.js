@@ -8,11 +8,13 @@ import {Identification} from "./Identification.js";
 
 export class DexPhase
 {
+	ran = [];
+	baseKeys = Object.keys(this);
+
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create(o)
 	{
-		const dexPhase = new this({allowNew : true});
+		const dexPhase = new this();
 		Object.assign(dexPhase, o);
 
 		validateClass(dexPhase, {
@@ -45,10 +47,9 @@ export class DexState
 	baseKeys = Object.keys(this);
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create(o)
 	{
-		const dexState = new this({allowNew : true});
+		const dexState = new this();
 		Object.assign(dexState, o);
 		dexState.meta.size = dexState.original.input.size;
 		dexState.meta.ts = dexState.original.input.ts;

@@ -53,7 +53,7 @@ export class DexFile
 	// creates a copy of this
 	clone()
 	{
-		const dexFile = new DexFile({allowNew : true});
+		const dexFile = new DexFile();
 		Object.assign(dexFile, this);
 		return dexFile;
 	}

@@ -15,10 +15,9 @@ export class Program
 	baseKeys = Object.keys(this);
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create()
 	{
-		const program = new this({allowNew : true});
+		const program = new this();
 
 		if(Object.hasOwn(program, "bin") && Object.hasOwn(program, "exec"))
 			throw new Error(`class [${this.constructor.name}] can't have both [bin] and [exec] properties.`);

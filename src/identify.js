@@ -277,8 +277,13 @@ export async function identify(inputFile, {verbose=0})
 
 	matches.push(...matchesByFamily.fallback);
 
-	return [
+	const result = [
 		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),	// eslint-disable-line max-len
 		...detections.map(({from, confidence, value, extensions}) => Identification.create({from, confidence, magic : value, extensions}))
 	];
+
+	if(verbose>=5)
+		xu.log`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
+
+	return result;
 }

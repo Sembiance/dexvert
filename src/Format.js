@@ -38,13 +38,12 @@ export class Format
 	}
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create(family, preValidate)
 	{
 		if(!family || !(family instanceof Family))
 			throw new Error(`format [${this.formatid}] constructor called with invalid family [${family}] of type [${typeof family}]`);
 		
-		const format = new this({allowNew : true});
+		const format = new this();
 		format.family = family;
 		format.familyid = family.familyid;
 		if(preValidate)

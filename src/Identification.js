@@ -30,6 +30,14 @@ export class Identification
 
 	pretty(prefix="")
 	{
-		return `${prefix}${xu.cf.fg.magenta(this.magic)} ${xu.cf.fg.white(this.confidence)} ${xu.cf.fg.peach(this.matchType)} ${xu.cf.fg.yellow(this.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}`;
+		const r = [prefix];
+		r.push(xu.cf.fg.orange(this.from.padStart(8, " ")));
+		r.push(` ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}%`);
+		r.push(` ${xu.cf.fg.magenta(this.magic)}`);
+		if(this.from==="dexvert")
+			r.push(` ${xu.cf.fg.peach(this.matchType)} ${xu.cf.fg.yellow(this.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}`);
+		if(this.unsupported)
+			r.push(xu.cf.fg.deepSkyblue(" unsupported"));
+		return r.join("");
 	}
 }

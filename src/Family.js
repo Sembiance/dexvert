@@ -11,10 +11,9 @@ export class Family
 	baseKeys = Object.keys(this);
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create()
 	{
-		const family = new this({allowNew : true});
+		const family = new this();
 		validateClass(family, {
 			// meta
 			metaids : {type : ["string"]},

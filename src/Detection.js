@@ -175,6 +175,6 @@ export class Detection
 
 	pretty(prefix="")
 	{
-		return `${prefix}${xu.cf.fg.peach(this.from)} ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}% ${xu.cf.fg.magenta(this.value)}${this.weak ? xu.cf.fg.deepSkyblue("weak") : ""}`;
+		return `${prefix}${xu.cf.fg.orange(this.from.padStart(8, " "))} ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}% ${xu.cf.fg.magenta(this.value)}${this.weak ? xu.cf.fg.deepSkyblue("weak") : ""}`;
 	}
 }

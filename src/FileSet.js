@@ -123,7 +123,7 @@ export class FileSet
 	// creates a copy of this
 	clone()
 	{
-		const fileSet = new FileSet({allowNew : true});
+		const fileSet = new FileSet();
 		fileSet.root = this.root;
 		fileSet.files = Object.fromEntries(Object.entries(this.files).map(([k, subFiles]) => ([k, subFiles.map(subFile => subFile.clone())])));
 		return fileSet;

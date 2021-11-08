@@ -5,10 +5,9 @@ export class RunState
 	meta = {};
 	
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create({input, output})
 	{
-		const runState = new this({allowNew : true});
+		const runState = new this();
 		Object.assign(runState, {input, output});
 		return runState;
 	}

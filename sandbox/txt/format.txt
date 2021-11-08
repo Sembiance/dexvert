@@ -112,7 +112,7 @@ Don't rename the file safely for input. ONLY USE THIS if the program requires th
 NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
->>> safeExt(inputFileSet) { return ".safe"; }
+>>> safeExt(dexState) { return ".safe"; }
 When processing, the extension used is this priority:
 1. An extension returned from safeExt() (if present)
 2. Original filename extension (IF present in meta.ext array)

@@ -9,13 +9,12 @@ export class FileSet
 	files = {};
 
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static async create(o)
 	{
 		if(!o)
 			return null;
 
-		const fileSet = new this({allowNew : true});
+		const fileSet = new this();
 
 		function getRoot(v)
 		{
@@ -24,22 +23,22 @@ export class FileSet
 
 		if(typeof o==="string")
 		{
-			// a string, assume we just have a single primary file, absolute path
+			// a string, assume we just have a single main file, absolute path
 			fileSet.root = getRoot(o);
-			await fileSet.add("primary", path.basename(o));
+			await fileSet.add("main", path.basename(o));
 		}
 		else if(o instanceof DexFile)
 		{
-			// a single DexFile, assume it's a primary file
+			// a single DexFile, assume it's a main file
 			fileSet.root = o.root;
-			await fileSet.add("primary", o);
+			await fileSet.add("main", o);
 		}
 		else if(Array.isArray(o))
 		{
-			// an array, assume it's an array of primary files
+			// an array, assume it's an array of main files
 			fileSet.root = o.map(getRoot).sortMulti([v => v.length])[0];
 			for(const v of o)
-				await fileSet.add("primary", path.relative(fileSet.root, v));
+				await fileSet.add("main", path.relative(fileSet.root, v));
 		}
 		else if(!Object.hasOwn(o, "root"))
 		{
@@ -54,7 +53,7 @@ export class FileSet
 		else
 		{
 			fileSet.root = path.resolve(o.root);
-			for(const [type, files] of Object.entries(o.files))
+			for(const [type, files] of Object.entries(o.files || {}))
 			{
 				for(const file of files)
 					await fileSet.add(type, file);
@@ -65,12 +64,12 @@ export class FileSet
 	}
 
 	// rsync copies all files to targetRoot and returns a FileSet for the new root
-	async rsyncTo(targetRoot)
+	async rsyncTo(targetRoot, {type}={})
 	{
-		for(const file of this.all)
+		for(const file of (type ? this.files[type] : this.all))
 		{
 			if(file.rel.includes("/"))
-				await Deno.mkdir(path.join(targetRoot, path.dirname(file.rel)), {recurisve : true});
+				await Deno.mkdir(path.join(targetRoot, path.dirname(file.rel)), {recursive : true});
 			await runUtil.run("rsync", ["-aL", path.join(this.root, file.rel), path.join(targetRoot, file.rel)]);
 		}
 
@@ -79,24 +78,36 @@ export class FileSet
 
 	async addAll(type, files)
 	{
-		await Promise.all(files.map(file => this.add(type, file)));
+		for(const file of files)
+			await this.add(type, file);
+		
+		// Doing this would be faster probably, but would yield files being added potentially out of order, which might be important to maintain
+		//await Promise.all(files.map(file => this.add(type, file)));
 	}
 
 	// adds the given file of type type
 	async add(_type, _o)
 	{
-		const type = typeof _o==="undefined" ? "primary" : _type;
+		const type = typeof _o==="undefined" ? "main" : _type;
 		const o = typeof _o==="undefined" ? _type : _o;
 
 		if(!this.files[type])
 			this.files[type] = [];
 
 		if(o instanceof DexFile)
+		{
+			if(o.root!==this.root)
+				throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
 			this.files[type].push(o);
+		}
 		else if(typeof o==="string")
+		{
 			this.files[type].push(await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o}));
+		}
 		else
-			throw new Error(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
+		{
+			throw new TypeError(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
+		}
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
@@ -118,25 +129,34 @@ export class FileSet
 		return fileSet;
 	}
 
+	// converts this to a serilizable object
+	serialize()
+	{
+		const o = {};
+		o.root = this.root;
+		o.files = Object.fromEntries(Object.entries(this.files).map(([k, v]) => ([k, v.map(dexFile => dexFile.serialize())])));
+		return o;
+	}
+
+	// deserializes an object into a Dexfile
+	static deserialize(o)
+	{
+		const fileSet = new this();
+		fileSet.root = o.root;
+		fileSet.files = Object.fromEntries(Object.entries(o.files).map(([k, v]) => ([k, v.map(dexFile => DexFile.deserialize(dexFile))])));
+		return fileSet;
+	}
+
+	pretty(prefix="")
+	{
+		const r = [];
+		r.push(`${prefix}${xu.cf.fg.white("FileSet")} ${xu.cf.fg.cyan("(")}${xu.cf.fg.white("root ")}${xu.cf.fg.magentaDim(this.root)}${xu.cf.fg.cyan(")")} has ${xu.cf.fg.white(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
+		r.push(...this.all.map(f => f.pretty(`${prefix}\t`)));
+		return r.join("\n");
+	}
+
 	// shortcut getters to return single/multi often used categories
 	get all() { return Object.values(this.files).flat(); }
-	get allFull() { return this.all.map(v => path.join(this.root, v)); }
-
-	get primary() { return this.primaries[0]; }
-	get primaryFull() { return path.join(this.root, this.primary); }
-
-	get primaries() { return (this.files.primary || []); }
-	get primariesFull() { return this.primaries.map(v => path.join(this.root, v)); }
-
-	get aux() { return this.auxes[0]; }
-	get auxFull() { return path.join(this.root, this.aux); }
-
-	get auxes() { return (this.files.aux || []); }
-	get auxesFull() { return this.auxes.map(v => path.join(this.root, v)); }
-
-	get original() { return this.originals[0]; }
-	get originalFull() { return path.join(this.root, this.original); }
-
-	get originals() { return (this.files.original || []); }
-	get originalsFull() { return this.originals.map(v => path.join(this.root, v)); }
+	get main() { return (this.files.main || [])[0]; }
+	get aux() { return (this.files.aux || [])[0]; }
 }

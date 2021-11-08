@@ -44,7 +44,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 
 	//posix.setrlimit("core", {soft : 0});
 
-	let dexState = null;
+	const dexState = await DexState.create({original : {input : inputFile, output : outputDir}, pastStates : []});
 	for(const id of ids)
 	{
 		const format = formats[id.formatid];
@@ -61,7 +61,13 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
 		const cwdInput = await inputFileSet.rsyncTo(cwd);
-		cwdInput.add("original", inputFile);
+
+		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
+		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
+		await Deno.mkdir(outFilePath, {recursive : true});
+		const cwdOutput = await FileSet.create({root : outFilePath});
+
+		dexState.start({format, id, input : cwdInput, output : cwdOutput});
 
 		// rename the primary file to an easy filename that any program can handle: in<ext>
 		const cwdFilename = format.keepFilename ? inputFile.name : "in";
@@ -74,23 +80,22 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		else
 			cwdExt = inputFile.ext;
 		
-		await cwdInput.primary.rename(cwdFilename + cwdExt);
-
-		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
-		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
-		await Deno.mkdir(outFilePath, {recursive : true});
-		const cwdOutput = await FileSet.create(await DexFile.create(outFilePath));
-		cwdOutput.add("original", outputDir);
+		await cwdInput.main.rename(cwdFilename + cwdExt);
 
 		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
-		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.primary.absolute]);
+		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.main.absolute]);
 
-		dexState = await DexState.create({id, format, input : cwdInput, output : cwdOutput});
+		if(dexState)
+		{
+			delete dexState.pastStates;
+			pastStates.push(dexState);
+		}
+		dexState = await DexState.create({id, format, input : cwdInput, output : cwdOutput, pastStates});
 		Object.assign(dexState.meta, await format.getMeta(cwdInput, format));
 
 		const cleanup = async () =>
 		{
-			await runUtil.run("sudo", ["umount", cwdOutput.primary.absolute]);
+			await runUtil.run("sudo", ["umount", cwdOutput.main.absolute]);
 			await Deno.remove(cwd, {recursive : true});
 		};
 
@@ -111,10 +116,12 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 				const chain = converter.split("->").map(v => v.trim());
 				for(const link of chain)
 				{
+					// TODO Split link on ampresand for programs to run in parllel
+					// eg: ["word97 -> nconvert & deark[blah]"]
+
 					const {programid, flagsRaw=""} = link.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
 					const flags = flagsRaw.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/g)?.groups;
-					console.log({chain, programid, flags});
-
+					//console.log({chain, programid, flags});
 
 					//const linkProps = link.match(/\s*(?<programid>[^\]]+)(?<flag>\s*\s*)/).groups
 

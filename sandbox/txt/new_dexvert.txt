@@ -1,6 +1,36 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Continue pretty(prefix) with PREFIX for all classes
+
+* output fileset should be empty and set root to the actual out dir then I can just add the output files
+
+* Probably create a 'Converter.js' class (DexState, "converter string") that will handle parsing the converter string and running the programs/moving files, etc.
+
+* Program: After running program, run fixPerms with cwd of output.root
+
+* Program: Then find any new output files and stick in output.add("new", files)
+  Will need to do a tree in output.root and subtract any already in output.main
+
+* Program: Then run program.post() if it is set
+
+* Program: Then if just 1 output file (output.new.length===1), rename it according to program.renameOut object.
+Key defaults are { ext : ".png", name : true}
+default ext is different per family. So image is .png, audio is .wav, etc
+If ext is set to an untruthy value false/null/etc then it won't rename the ext
+If ext is a string, it will be set to that
+If name is set to false, the filename won't be renamed. If set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string
+
+* dexvert.js, now that program is done, pass the input/output filesets to family.verify()
+
+* Family.verify:
+  It will check the files in output.new and verify they are valid images/wavs/etc
+  It will delete empty files, files that are the same as the input (fast hash, blake/blaze?)
+  Any it decides to keep use new method FileSet.changeType("new", "main") to move from new to main
+  If it does keep any, then this is what sets to dexvert.processed = true
+
+* dexvert.js then if processed, will rsync the 'main' files back to the original output root and finish up
+
 * Fully identify and process:
 image/pcx
 image/qrt
@@ -43,6 +73,8 @@ filesRequired/filesOptional -> auxFiles
 	etc.
 
 * Now go through every other format, and test identification and processing for each one
+
+* Maybe convert test-identify/test-process to have a live web page or fancy console status with boxes for every format type that turn red/green on success/failure
 
 /---------------\
 | High Priority |

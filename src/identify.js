@@ -22,16 +22,16 @@ export async function identify(inputFile, {verbose=0})
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, input, undefined, {verbose})))).flatMap(o => o.meta.detections);
 
 	if(verbose>=3)
-		xu.log`raw detections: ${detections.map(({confidence, from, value, extensions, weak}) => ({"%" : confidence, from, value, extensions, weak}))}`;
+		xu.log`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
 
 	const formats = await Format.loadFormats();
 
-	const otherFiles = (await Promise.all((await fileUtil.tree(input.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==input.primary.absolute);
+	const otherFiles = (await Promise.all((await fileUtil.tree(input.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==input.main.absolute);
 	const otherDirs = await Promise.all((await fileUtil.tree(input.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
 
 	// find the largest byteChecks check and read that many bytes in
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => (typeof format.byteCheck==="function" ? Array.force(format.byteCheck(input)) : Array.force(format.byteCheck || []))).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
-	const byteCheckBuf = await fileUtil.readFileBytes(input.primary.absolute, byteCheckMaxSize);
+	const byteCheckBuf = await fileUtil.readFileBytes(input.main.absolute, byteCheckMaxSize);
 
 	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
 	FAMILY_MATCH_ORDER.forEach(familyid =>
@@ -43,7 +43,7 @@ export async function identify(inputFile, {verbose=0})
 				continue;
 
 			// skip this format if any of our detections are forbidden magic values or our input filename has a forbidden extension
-			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => input.primary.base.toLowerCase().endsWith(fext)))))
+			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => input.main.base.toLowerCase().endsWith(fext)))))
 			{
 				if(verbose>=4)
 					xu.log`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
@@ -51,7 +51,7 @@ export async function identify(inputFile, {verbose=0})
 			}
 
 			// skip this format if it's marked as unsafe and our file has been transformed and we don't explictly allow transforming
-			if(input.primary.transformed && format.transformUnsafe)
+			if(input.main.transformed && format.transformUnsafe)
 			{
 				if(verbose>=4)
 					xu.log`Excluding format ${formatid} due to input being a transformed file and the format being marked as unsafe.`;
@@ -90,7 +90,7 @@ export async function identify(inputFile, {verbose=0})
 			let auxFiles = null;
 			if(format.auxFiles)
 			{
-				auxFiles = format.auxFiles(input.primary, otherFiles, otherDirs);
+				auxFiles = format.auxFiles(input.main, otherFiles, otherDirs);
 
 				// If the filesRequired function returns false, then we don't have any required files
 				// If it returns an empty array then we fail to match
@@ -103,8 +103,8 @@ export async function identify(inputFile, {verbose=0})
 			}
 
 			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
-			const extMatch = ((!format.unsupported || format.byteCheck) || format.magic) && (format.ext || []).some(ext => input.primary.base.toLowerCase().endsWith(ext));
-			const filenameMatch = (format.filename || []).some(mfn => flexMatch(input.primary.base, mfn, true));
+			const extMatch = ((!format.unsupported || format.byteCheck) || format.magic) && (format.ext || []).some(ext => input.main.base.toLowerCase().endsWith(ext));
+			const filenameMatch = (format.filename || []).some(mfn => flexMatch(input.main.base, mfn, true));
 
 			let hasExpectedFileSize = false;
 			let fileSizeMatch = false;
@@ -114,17 +114,17 @@ export async function identify(inputFile, {verbose=0})
 				if(Array.isArray(format.fileSize) || typeof format.fileSize==="number")
 				{
 					hasExpectedFileSize = true;
-					fileSizeMatch = Array.force(format.fileSize).includes(input.primary.size);
+					fileSizeMatch = Array.force(format.fileSize).includes(input.main.size);
 				}
 				else if(extMatch)
 				{
 					// If we've matched an extension, then we have to also match the expected fileSize
 					Object.entries(format.fileSize).forEach(([extEntry, sizeEntry]) =>
 					{
-						if(extEntry.split(",").some(ext => input.primary.base.toLowerCase().endsWith(ext)))
+						if(extEntry.split(",").some(ext => input.main.base.toLowerCase().endsWith(ext)))
 						{
 							hasExpectedFileSize = true;
-							if(Array.force(sizeEntry).includes(input.primary.size))
+							if(Array.force(sizeEntry).includes(input.main.size))
 								fileSizeMatch = true;
 						}
 					});
@@ -134,7 +134,7 @@ export async function identify(inputFile, {verbose=0})
 					// Otherwise we can match any of the extensions fileSize
 					Object.entries(format.fileSize).forEach(([extEntry, sizeEntry]) =>
 					{
-						if(Array.force(sizeEntry).includes(input.primary.size))
+						if(Array.force(sizeEntry).includes(input.main.size))
 						{
 							fileSizeMatch = true;
 							fileSizeMatchExt = extEntry.split(",")[0];
@@ -172,7 +172,7 @@ export async function identify(inputFile, {verbose=0})
 				baseMatch.weak = true;
 
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
-			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => input.primary.base.toLowerCase().endsWith(ext)));
+			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => input.main.base.toLowerCase().endsWith(ext)));
 			const hasWeakMagic = format.weakMagic===true || (Array.isArray(format.weakMagic) && detections.some(r => format.weakMagic.some(m => flexMatch(r.value, m))) && !detections.some(r => trustedMagic.some(m => flexMatch(r.value, m))));
 
 			// Non-weak magic matches start at confidence 100.
@@ -190,7 +190,7 @@ export async function identify(inputFile, {verbose=0})
 			}
 
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
-			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => input.primary.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
+			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => input.main.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch};
 				if(fileSizeMatch)
@@ -210,7 +210,7 @@ export async function identify(inputFile, {verbose=0})
 				const m = {...baseMatch, matchType : "fileSize"};
 				if(fileSizeMatchExt)
 					m.fileSizeMatchExt = fileSizeMatchExt;
-				if((format.ext || []).some(ext => input.primary.base.toLowerCase().endsWith(ext)))
+				if((format.ext || []).some(ext => input.main.base.toLowerCase().endsWith(ext)))
 					m.matchesExt = true;
 
 				familyMatches.fileSize.push(m);
@@ -247,7 +247,7 @@ export async function identify(inputFile, {verbose=0})
 				
 				if(m.confidenceAdjust)
 				{
-					m.confidence += m.confidenceAdjust(input.primary, matchType, m.confidence);
+					m.confidence += m.confidenceAdjust(input.main, matchType, m.confidence);
 					delete m.confidenceAdjust;
 				}
 

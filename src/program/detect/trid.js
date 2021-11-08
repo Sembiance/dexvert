@@ -10,7 +10,7 @@ export class trid extends Program
 	bin = "trid";
 	loc = "local";
 
-	args = r => [r.input.primary.rel, "-n:5"]
+	args = r => [r.input.main.rel, "-n:5"]
 	post = r =>
 	{
 		r.meta.detections = [];
@@ -21,7 +21,7 @@ export class trid extends Program
 			if(!parts)
 				return;
 			
-			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.input.primary};
+			const tridMatch = {confidence : +parts.groups.confidence, value : parts.groups.value, file : r.input.main};
 			tridMatch.extensions = parts.groups.extension.includes("/") ? parts.groups.extension.split("/").map(ext => (ext.charAt(0)==="." ? "" : ".") + ext) : [parts.groups.extension];
 			tridMatch.extensions.mapInPlace(ext => ext.toLowerCase());
 			tridMatch.from = "trid";

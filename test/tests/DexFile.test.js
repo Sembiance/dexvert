@@ -2,6 +2,7 @@ import {assertStrictEquals} from "https://deno.land/std@0.111.0/testing/asserts.
 import {DexFile} from "../../src/DexFile.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import {fileUtil} from "xutil";
+import {encode as base64Encode} from "https://deno.land/std@0.113.0/encoding/base64.ts";
 
 Deno.test("create", async () =>
 {
@@ -17,7 +18,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 6);
-	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:29.027Z")).toString());
+	assertStrictEquals(a.ts, 1_635_685_469_027);
 	assertStrictEquals(a.preExt, ".some");
 	assertStrictEquals(a.preName, "big.txt.file.txt");
 
@@ -40,7 +41,7 @@ Deno.test("create", async () =>
 		assertStrictEquals(o.isDirectory, false);
 		assertStrictEquals(o.isSymlink, false);
 		assertStrictEquals(o.size, 6);
-		assertStrictEquals(o.ts.toString(), (new Date("2021-10-31T13:04:29.027Z")).toString());
+		assertStrictEquals(o.ts, 1_635_685_469_027);
 		assertStrictEquals(o.preExt, ".some");
 		assertStrictEquals(o.preName, "big.txt.file.txt");
 	});
@@ -58,7 +59,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 8);
-	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
+	assertStrictEquals(a.ts, 1_635_685_484_995);
 	assertStrictEquals(a.preExt, ".txt");
 	assertStrictEquals(a.preName, "b");
 
@@ -74,7 +75,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isFile, false);
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, true);
-	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:09:55.866Z")).toString());
+	assertStrictEquals(a.ts, 1_635_685_795_866);
 	assertStrictEquals(a.preExt, "");
 	assertStrictEquals(a.preName, "symlinkFile");
 
@@ -90,7 +91,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isFile, false);
 	assertStrictEquals(a.isDirectory, true);
 	assertStrictEquals(a.isSymlink, false);
-	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:49.475Z")).toString());
+	assertStrictEquals(a.ts, 1_635_685_489_475);
 	assertStrictEquals(a.preExt, "");
 	assertStrictEquals(a.preName, "third");
 });
@@ -113,7 +114,7 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 8);
-	assertStrictEquals(a.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
+	assertStrictEquals(a.ts, 1_635_685_484_995);
 	assertStrictEquals(a.preExt, ".txt");
 	assertStrictEquals(a.preName, "b");
 
@@ -129,7 +130,7 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(b.isDirectory, false);
 	assertStrictEquals(b.isSymlink, false);
 	assertStrictEquals(b.size, 8);
-	assertStrictEquals(b.ts.toString(), (new Date("2021-10-31T13:04:44.995Z")).toString());
+	assertStrictEquals(b.ts, 1_635_685_484_995);
 	assertStrictEquals(b.preExt, ".txt");
 	assertStrictEquals(b.preName, "b");
 });
@@ -171,4 +172,34 @@ Deno.test("rename", async () =>
 	await a.rename(tmpFilename);
 
 	await Deno.remove(tmpPath);
+});
+
+Deno.test("pretty", async () =>
+{
+	const a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
+	assertStrictEquals(base64Encode(a.pretty()), "G1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBt");
+});
+
+Deno.test("serialize", async () =>
+{
+	const a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
+	assertStrictEquals(JSON.stringify(a.serialize()), `{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027}`);	// eslint-disable-line max-len
+});
+
+Deno.test("deserialize", () =>
+{
+	const a = DexFile.deserialize(JSON.parse(`{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027}`));	// eslint-disable-line max-len, no-restricted-syntax
+	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
+	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
+	assertStrictEquals(a.base, "some.big.txt.file.txt");
+	assertStrictEquals(a.dir, "/mnt/compendium/DevLab/dexvert/test/files");
+	assertStrictEquals(a.name, "some.big.txt.file");
+	assertStrictEquals(a.ext, ".txt");
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 6);
+	assertStrictEquals(a.ts, 1_635_685_469_027);
+	assertStrictEquals(a.preExt, ".some");
+	assertStrictEquals(a.preName, "big.txt.file.txt");
 });

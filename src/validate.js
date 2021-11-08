@@ -2,9 +2,20 @@ import { assert, assertStrictEquals } from "https://deno.land/std@0.110.0/testin
 
 export function validateClass(o, schema)
 {
-	let prefix = `class [${o.constructor.name}]`;
+	const prefix = `class [${o.constructor.name}]`;
 	const suffix = `for class ${JSON.stringify(o)}`;
+	return validate(prefix, suffix, o, schema);
+}
 
+export function validateObject(o, schema)
+{
+	return validate(`object`, `for object ${JSON.stringify(o)}`, o, schema);
+}
+
+function validate(basePrefix, suffix, o, schema)
+{
+	let prefix = basePrefix;
+	
 	const extraProperties = Object.keys(o).subtractAll([...Object.keys(schema), ...(o.baseKeys || []), "baseKeys"]);
 	if(extraProperties.length)
 		throw new Error(`${prefix} has extra unsupported properties: [${extraProperties.join("], [")}] ${suffix}`);
@@ -19,7 +30,7 @@ export function validateClass(o, schema)
 			continue;
 		}
 
-		prefix = `${prefix}.[${propid}]`;
+		prefix = `${basePrefix}.[${propid}]`;
 
 		const value = o[propid];
 

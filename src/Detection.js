@@ -154,10 +154,9 @@ const WEAK_VALUES =
 export class Detection
 {
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create({value, from, file, confidence=100, extensions=[]})
 	{
-		const detection = new this({allowNew : true});
+		const detection = new this();
 		Object.assign(detection, {value, from, file, confidence, extensions});
 		detection.weak = WEAK_VALUES.some(v => v.test(value)) || confidence<5;
 
@@ -168,9 +167,14 @@ export class Detection
 			file       : {type : DexFile, required : true},							// the file that this detection is for
 			confidence : {type : "number", required : true, range : [0, 100]},		// what confidence level this detection is. Default: 100
 			extensions : {type : ["string"], required : true, allowEmpty : true}, 	// list of extensions that are expected with this type of detection. Default: []
-			weak       : {type : "boolean", required : true}											// if set to true this is a weak detection and should not be trusted too highly
+			weak       : {type : "boolean", required : true}						// if set to true this is a weak detection and should not be trusted too highly
 		});
 
 		return detection;
+	}
+
+	pretty(prefix="")
+	{
+		return `${prefix}${xu.cf.fg.peach(this.from)} ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}% ${xu.cf.fg.magenta(this.value)}${this.weak ? xu.cf.fg.deepSkyblue("weak") : ""}`;
 	}
 }

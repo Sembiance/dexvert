@@ -5,10 +5,9 @@ import {DexFile} from "./DexFile.js";
 export class Identification
 {
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static create(o)
 	{
-		const id = new this({allowNew : true});
+		const id = new this();
 		Object.assign(id, o);
 		validateClass(id, {
 			// required
@@ -29,8 +28,8 @@ export class Identification
 		return id;
 	}
 
-	pretty()
+	pretty(prefix="")
 	{
-		return `${xu.cf.fg.magenta(this.magic)} ${xu.cf.fg.white(this.confidence)} ${xu.cf.fg.peach(this.matchType)} ${xu.cf.fg.yellow(this.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}`;
+		return `${prefix}${xu.cf.fg.magenta(this.magic)} ${xu.cf.fg.white(this.confidence)} ${xu.cf.fg.peach(this.matchType)} ${xu.cf.fg.yellow(this.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}`;
 	}
 }

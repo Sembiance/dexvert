@@ -15,7 +15,7 @@ export class image extends Family
 
 		// imageMagick meta provider
 		if(format.metaProviders.includes("image"))
-			Object.assign(meta, await imageUtil.getInfo(input.primary.absolute));
+			Object.assign(meta, await imageUtil.getInfo(input.main.absolute));
 	}
 }
 

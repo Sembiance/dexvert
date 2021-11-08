@@ -4,10 +4,9 @@ import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 export class DexFile
 {
 	// builder to get around the fact that constructors can't be async
-	constructor({allowNew}) { if(!allowNew) { throw new Error(`Use static ${this.constructor.name}.create() instead`); } }	// eslint-disable-line curly
 	static async create(o)
 	{
-		const dexFile = new this({allowNew : true});
+		const dexFile = new this();
 		dexFile.root = path.join(typeof o==="string" ? (o.startsWith("/") ? path.dirname(o) : Deno.cwd()) : path.resolve(o.root));
 		dexFile.rel = typeof o==="string" ? (o.startsWith("/") ? path.basename(o) : o) : o.subPath;
 		dexFile.absolute = path.join(dexFile.root, dexFile.rel);
@@ -17,7 +16,7 @@ export class DexFile
 
 		const fileInfo = await Deno.lstat(dexFile.absolute);
 		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { dexFile[n] = fileInfo[n]; });
-		dexFile.ts = fileInfo.mtime;	// eslint-disable-line require-atomic-updates
+		dexFile.ts = fileInfo.mtime.getTime();	// eslint-disable-line require-atomic-updates
 
 		return dexFile;
 	}
@@ -30,14 +29,6 @@ export class DexFile
 		const periodLoc = this.base.indexOf(".");
 		this.preExt = periodLoc===-1 ? "" : `.${this.base.substring(0, periodLoc)}`;
 		this.preName = this.base.substring(this.preExt.length);
-	}
-
-	// creates a copy of this
-	clone()
-	{
-		const dexFile = new DexFile({allowNew : true});
-		Object.assign(dexFile, this);
-		return dexFile;
 	}
 
 	// changes the root of this file to something else
@@ -57,5 +48,39 @@ export class DexFile
 		this.absolute = newAbsolute;
 		this.rel = this.rel.includes("/") ? path.join(path.dirname(this.rel), newFilename) : newFilename;
 		this.calcProps();
+	}
+
+	// creates a copy of this
+	clone()
+	{
+		const dexFile = new DexFile({allowNew : true});
+		Object.assign(dexFile, this);
+		return dexFile;
+	}
+
+	// converts this to a serilizable object
+	serialize()
+	{
+		return Object.fromEntries(Object.entries(this));
+	}
+
+	// deserializes an object into a Dexfile
+	static deserialize(o)
+	{
+		const dexfile = new this();
+		Object.assign(dexfile, o);
+		return dexfile;
+	}
+
+	// returns a pretty string representing this file
+	pretty(prefix="")
+	{
+		const r = [prefix];
+		r.push(this.isDirectory ? xu.cf.fg.magenta("D") : (this.isSymlink ? xu.cf.fg.cyan("L") : xu.cf.fg.fogGray("F")));
+		r.push(` ${xu.cf.fg.white(this.size.bytesToSize().padStart(6, " "))}`);
+		r.push(` ${xu.cf.fg.yellow(this.root)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.rel)}`);
+		if(this.transformed)
+			r.push(` ${xu.cf.fg.peach("transformed")}`);
+		return r.join("");
 	}
 }

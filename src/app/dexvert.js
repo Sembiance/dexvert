@@ -28,9 +28,9 @@ const dexvertOptions = {};
 		dexvertOptions[k] = argv[k];
 });
 
-const r = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions);
-if(r)
-	console.log(`\n${r.pretty()}`);
+const dexState = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions);
+if(dexState)
+	console.log(`\n${dexState.pretty()}`);
 // TODO if no results, transform.   transform code should move into bin/*/
 
 /*

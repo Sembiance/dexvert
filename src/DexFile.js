@@ -77,7 +77,7 @@ export class DexFile
 	{
 		const r = [prefix];
 		r.push(this.isDirectory ? xu.cf.fg.magenta("D") : (this.isSymlink ? xu.cf.fg.cyan("L") : xu.cf.fg.fogGray("F")));
-		r.push(` ${xu.cf.fg.white(this.size.bytesToSize().padStart(6, " "))}`);
+		r.push(` ${xu.cf.fg.white((this.isFile ? this.size.bytesToSize() : "").padStart(6, " "))}`);
 		r.push(` ${xu.cf.fg.yellow(this.root)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.rel)}`);
 		if(this.transformed)
 			r.push(` ${xu.cf.fg.peach("transformed")}`);

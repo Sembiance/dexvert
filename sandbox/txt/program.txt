@@ -1,0 +1,122 @@
+# Documentation for files in src/program/<type>/*.js
+
+>>> ******** General
+>>> loc : "local"
+Where to run this program at. One of: local, amigappc, gentoo, win2k, winxp
+
+>>> website : "https://entropymine.com/deark/"
+A website URL For the program
+
+>>> notes : "Blah blah"
+Additional notes about this program
+
+>>> ******** Gentoo Specific Properties
+>>> gentooOverlay : "dexvert"
+Which Gentoo overlay the package is found in, if applicable.
+
+>>> gentooPackage : "app-arch/program"   ||   gentooPackage : ["app-arch/program", "app-text/program"]
+Which Gentoo package contains this program.
+Can be an array of packages. If so, meta.website and meta.bin must be an array too.
+
+>>> gentooUseFlags : "png jpg midi"
+Which Gentoo USE flags should be set.
+
+
+>>> ******** Execute Properties
+>>> bin = "binary_program"
+The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("checkBytes/checkBytes") to get a local dexvert/bin/*
+If you have 'bin' you can't have 'exec'
+
+>>> args = async (dexState) => ([arg1, arg2])
+A function that returns an array of arguments to pass to the binary.
+This is executed before running the binary
+All args are relative to the CWD of dexState.input.root
+
+>>> exec = async (dexState) => { ... }
+Instead of bin, you can just run abritrary code for this program.
+
+>>> post = async (dexState) => { ... }
+This will be executed directly AFTER the program has finished running (either bin or exec)
+
+
+
+
+
+
+
+
+
+
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+
+
+
+
+
+/-------------------------\
+| exports.meta Properties |
+\-------------------------/
+>>> bin : ["bchunk", "sudo"]
+An array of binaries that this utilizes. Only set this if gentooPackages is an array.
+
+>>> ******** Properties
+>>> unsafe : true
+Set to true if this program isn't safe to be brute forced.
+
+>>> informational : true
+If true, program is just informational that changes state. No files are produced.
+
+>>> slow : true
+If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)
+
+>>> symlinkUnsafe : true
+If the converter program doesn't handle symlinks, can set this to true.
+Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
+
+
+
+/-----------------\
+| Other exports.* |
+\-----------------/
+>>> qemu = state => "binary_program"
+A function that returns the location of the binary to run in QEMU. If it doesn't begin with /[A-Za-z]:/ then it assumes it lives in "c:\dexvert\"
+
+>>> steps = (state, p, r) => ([step1, step2, step3])
+A function that returns an array of steps to run serially
+
+>>> preArgs = (state, p, r, cb) => {}
+This is executed directly before calling args()
+
+>>> cwd = (state, p, r) => state.output.absolute
+If set, the return result will be the new CWD.
+Normally I create a temporary CWD and do processing there.
+Note, when changing the cwd, the input.filePath and output.dirPath will automatically be updated with proper relative paths
+
+>>> pre = (state, p, r, cb) => {}
+This will be executed directly BEFORE the program is run.
+
+
+>>> runOptions = (state, p, r) => ({virtualX : true})
+Can return an object of run options to be passed into runUtil.run
+
+>>> redirectOutput = (state, p, r) => "/path/to/output.txt"
+Can return a file path string where stdout from the program should be redirected to
+
+>>> diskQuota = () => XU.MB*20
+Some programs are buggy and will consume the entire hard drive. This is a way to limit that.
+
+>>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
+Can return an object of QEMU specific data to be passed into util.qemu.run():
+	>>> osid			Which OS to use. Default: win2k
+	>>> cwd				Which directory to run in
+	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
+	>>> timeout			Maximum duration to allow it to run before stopping
+	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
+	

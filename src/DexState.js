@@ -8,6 +8,7 @@ import {Identification} from "./Identification.js";
 
 export class DexPhase
 {
+	meta = {};
 	ran = [];
 	baseKeys = Object.keys(this);
 
@@ -28,13 +29,22 @@ export class DexPhase
 		return dexPhase;
 	}
 
+	serialize()
+	{
+		// TODO
+	}
+
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${xu.cf.fg.white(" input:")} ${this.input.pretty(`${prefix}\t`)}`);
-		r.push(`\n${prefix}${xu.cf.fg.white("output:")} ${this.output.pretty(`${prefix}\t`)}`);
-		r.push(`\n${prefix}${xu.cf.fg.white("format:")} ${this.format.pretty(`${prefix}\t`)}`);
-		r.push(`\n${prefix}${xu.cf.fg.white("    id:")} ${this.id.pretty(`${prefix}\t`)}`);
+		r.push(`${prefix}${xu.cf.fg.white(" input:")} ${this.input.pretty(`${prefix}\t`).trim()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("output:")} ${this.output.pretty(`${prefix}\t`).trim()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("format:")} ${this.format.pretty(`${prefix}\t`).trim()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("    id:")} ${this.id.pretty(`${prefix}\t`).trim()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("   ran:")} ${xu.cf.fg.yellowDim(this.ran.length)} programs`);
+		if(this.ran.length>0)
+			r.push(this.ran.map(v => v.pretty(`${prefix}\t`).join("")));
 		return r.join("");
 	}
 }
@@ -51,8 +61,6 @@ export class DexState
 	{
 		const dexState = new this();
 		Object.assign(dexState, o);
-		dexState.meta.size = dexState.original.input.size;
-		dexState.meta.ts = dexState.original.input.ts;
 
 		validateClass(dexState, {
 			// required
@@ -65,38 +73,42 @@ export class DexState
 			input  : {type : DexFile, required : true},
 			output : {type : DexFile, required : true}
 		});
-		
+
 		return dexState;
 	}
 
 	// starts the next phase
-	phase(o)
+	startPhase(o)
 	{
 		const dexPhase = o instanceof DexPhase ? o : DexPhase.create(o);
 		if(this.phase)
 			this.past.push(this.phase);
 		this.phase = dexPhase;
+		return dexPhase;
 	}
 
 	// convenience methods to access current phase properties
 	get input() { return this.phase.input; }
 	get output() { return this.phase.output; }
 	get format() { return this.phase.format; }
+	get meta() { return this.phase.meta; }
 	get id() { return this.phase.id; }
+
+	serialize()
+	{
+		// TODO
+	}
 
 	// returns a pretty string for this DexState, useful for debugging purposes
 	pretty(prefix="")
 	{
 		const r = [];
 		r.push(printUtil.majorHeader("DexState"));
-		r.push(`${prefix}${xu.cf.fg.white("  input:")} ${this.original.input.absolute}`);
-		r.push(`\n${prefix}${xu.cf.fg.white(" output:")} ${this.original.output.absolute}`);
-		r.push(`\n${prefix}${xu.cf.fg.white("    cwd:")} ${this.input.root}`);
-		r.push(`\n${prefix}${xu.cf.fg.white("CURRENT:")} ${this.phase.pretty()}`);
-		const meta = Deno.inspect(this.meta, {colors : true, compact : true, depth : 7, iterableLimit : 150, showProxy : false, sorted : false, trailingComma : false, getters : false, showHidden : false});
-		r.push(`\n${prefix}${xu.cf.fg.white("   meta:")}${meta.includes("\n") ? "\n" : " "}${meta}`);
-		r.push(`\n${prefix}${xu.cf.fg.white(" result:")} ${this.format.untouched ? xu.cf.fg.peach("UNTOUCHED") : "TODO"}`);
-		r.push(`\n${prefix}${xu.cf.fg.brown("   PAST:")} ${this.past.map(pastPhase => pastPhase.pretty("\t")).join("\n")}`);
+		r.push(`${prefix}${xu.cf.fg.white("         result:")} ${this.processed ? xu.cf.fg.cyan("PROCESSED") : xu.cf.fg.peach("NOT PROCESSED")} ${this.format.untouched ? xu.cf.fg.deepSkyblue("**UNTOUCHED**") : ""}`);
+		r.push(`\n${prefix}${xu.cf.fg.white(" original input:")} ${this.original.input.pretty()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("original output:")} ${this.original.output.pretty()}`);
+		r.push(`\n${prefix}${xu.cf.fg.white("  CURRENT PHASE:")}\n${this.phase.pretty(`${prefix}\t`)}`);
+		r.push(`\n${prefix}${xu.cf.fg.brown("    PAST PHASES:")} ${xu.cf.fg.yellow(this.past.length)} phases\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
 		return r.join("");
 	}
 }

@@ -1,14 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add RunState.pretty()
-
-* Finish refactoring DexState/DexPhase including pretty() for ran[] and other .pretty()'s
-
-* Get dexvert working again with image/mur/test.pal and a nice colorized output of DexState.pretty()
-
-* output fileset should be empty and set root to the actual out dir then I can just add the output files
-
 * Probably create a 'Converter.js' class (DexState?, "converter string") that will handle parsing the converter string and running the programs/moving files, etc.
 
 * Program: After running program, run fixPerms with cwd of output.root
@@ -34,6 +26,8 @@ If name is set to false, the filename won't be renamed. If set to true (the defa
   If it does keep any, then this is what sets to dexvert.processed = true
 
 * dexvert.js then if processed, will rsync the 'main' files back to the original output root and finish up
+
+* Find a program that requires it to be ran in the output cwd and add easy support for this
 
 * Fully identify and process:
 image/pcx

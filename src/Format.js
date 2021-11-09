@@ -30,11 +30,9 @@ export class Format
 	}
 
 	// returns a pretty string to output to console
-	pretty()
+	pretty(prefix="")
 	{
-		const r = [];
-		r.push(`${xu.cf.fg.magenta(this.name)} ${xu.cf.fg.yellow(this.familyid)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}${this.unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""} (${xu.cf.fg.greenDim(this.website)})`);
-		return r.join("");
+		return `${prefix}${xu.cf.fg.magenta(this.name)} ${xu.cf.fg.yellow(this.familyid)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}${this.unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""} (${xu.cf.fg.greenDim(this.website)})`;
 	}
 
 	// builder to get around the fact that constructors can't be async

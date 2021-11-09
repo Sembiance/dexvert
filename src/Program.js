@@ -25,13 +25,14 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["gentoo", "local", "amigappc", "win2k", "winxp"]},	// where to run this program at. Default is gentoo
+			loc       : {type : "string", required : true, enum : ["local", "amigappc", "gentoo", "win2k", "winxp"]},	// where to run this program at. Default is local
 
 			// meta
-			gentooPackage  : {type : "string"},				// gentoo package atom
-			gentooUseFlags : {type : "string"},				// gentoo use flags set for the gentoo package
+			gentooPackage  : {types : ["string", Array]},	// gentoo package atom
 			gentooOverlay  : {type : "string"},				// gentoo overlay
-			website        : {type : "string", url : true}, 	// homepage URL for this program
+			gentooUseFlags : {type : "string"},				// gentoo use flags set for the gentoo package
+			website        : {type : "string", url : true},	// homepage URL for this program
+			notes          : {type : "string"},				// notes about this program
 
 			// execution
 			bin  : {type : "string"},				// path to the binary to run. Can't have bin and exec.
@@ -46,25 +47,29 @@ export class Program
 	// runs the current program with the given input and output FileSets and various options
 	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0}={})
 	{
-		const r = RunState.create({input, output});
+		const r = RunState.create({programid : this.programid, input, output});
 		if(this.bin)
 		{
-			const args = await this.args(r);
-			const runOptions = {cwd : input.root, timeout};
+			r.bin = this.bin;
+			r.args = await this.args(r);
+			r.runOptions = {cwd : input.root, timeout};
 			if(verbose>=4)
-				xu.log`Program ${this.programid} running as \`${this.bin} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${runOptions}`;
-			const {stdout, stderr, status} = await runUtil.run(this.bin, args, runOptions);
+				xu.log`Program ${xu.cf.fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
+			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
 		else if(this.exec)
 		{
 			if(verbose>=4)
-				xu.log`Program ${this.programid} executing ${".exec"} steps`;
+				xu.log`Program ${xu.cf.fg.orange(this.programid)} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
 
 		if(this.post)
 			await this.post(r);
+
+		if(verbose>=3)
+			console.log(r.pretty());
 
 		return r;
 	}

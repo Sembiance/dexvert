@@ -98,7 +98,7 @@ If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.
 
->>> untouched : true || (dexState) { return true; }
+>>> untouched : true || async (dexState) { return true; }
 Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
 
 
@@ -112,7 +112,7 @@ Don't rename the file safely for input. ONLY USE THIS if the program requires th
 NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters
 
->>> safeExt(dexState) { return ".safe"; }
+>>> safeExt = async (dexState) { return ".safe"; }
 When processing, the extension used is this priority:
 1. An extension returned from safeExt() (if present)
 2. Original filename extension (IF present in meta.ext array)
@@ -131,6 +131,14 @@ A method that will be executed after converters have been attempted
 
 
 
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
+OLD NODE BELOW:
 
 >>> ******** Properties
 >>> highConfidence : true

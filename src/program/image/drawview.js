@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class drawview extends Program
+{
+	website = "http://www.keelhaul.me.uk/acorn/drawview/";
+	gentooPackage = "media-gfx/drawview";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -51,3 +63,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

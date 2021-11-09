@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class uade123 extends Program
+{
+	website = "http://zakalwe.fi/uade";
+	gentooPackage = "app-emulation/uade";
+	flags = {"uadeType":"Which 'player' file to use for conversion. Find a list in `ls /usr/share/uade/players/` Default: Let uade123 decide"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -36,3 +48,4 @@ exports.post = (state, p, r, cb) =>
 	
 	p.util.file.move(outFilePath, path.join(state.output.absolute, `${state.input.name}.wav`))(state, p, cb);
 };
+*/

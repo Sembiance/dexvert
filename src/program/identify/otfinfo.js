@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class otfinfo extends Program
+{
+	website = "http://www.lcdf.org/type/#typetools";
+	gentooPackage = "app-text/lcdf-typetools";
+	gentooUseFlags = "kpathsea";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -27,3 +40,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

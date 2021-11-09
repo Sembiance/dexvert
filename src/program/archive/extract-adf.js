@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class extract-adf extends Program
+{
+	website = "https://github.com/mist64/extract-adf";
+	gentooPackage = "app-arch/extract-adf";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -26,3 +38,4 @@ exports.args = (state, p, r, inPath=state.input.filePath) => (["-a", path.relati
 exports.runOptions = (state, p, r) => ({cwd : r.extractADFWipPath});
 
 exports.post = (state, p, r, cb) => p.util.file.moveAllFiles(r.extractADFWipPath, state.output.absolute)(state, p, cb);
+*/

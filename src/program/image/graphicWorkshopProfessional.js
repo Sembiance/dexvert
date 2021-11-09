@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class graphicWorkshopProfessional extends Program
+{
+	website = "http://www.mindworkshop.com/gwspro.html";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -66,3 +76,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

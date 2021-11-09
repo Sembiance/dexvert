@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class 7z extends Program
+{
+	website = "http://p7zip.sourceforge.net/";
+	gentooPackage = "app-arch/p7zip";
+	gentooUseFlags = "pch";
+	flags = {"7zRSRCOnly":"Only care about the files contained within the output .rsrc folder for things like DLL/EXE extraction","7zSingleFile":"Likely just a single output result, so rename it to the name of the original input file","7zType":"What archive type to process as"};
+}
+*/
+
+/*
 "use strict";
 /* eslint-disable no-bitwise */
 const XU = require("@sembiance/xu"),
@@ -241,3 +254,4 @@ exports.post = (state, p, r, cb) =>
 		setImmediate(cb);
 	}
 };
+*/

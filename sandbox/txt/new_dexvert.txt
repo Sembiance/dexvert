@@ -1,10 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Probably create a 'Converter.js' class (DexState?, "converter string") that will handle parsing the converter string and running the programs/moving files, etc.
-  This will make it easier to make a dexbrute.js as it can create Converters() for every program with a custom output path /output/programid/
-
-* Program: After running program, run fixPerms with cwd of output.root
+* Get PCX conversion working, next up: nconvert program
 
 * Program: Then find any new output files and stick in output.add("new", files)
   Will need to do a tree in output.root and subtract any already in output.main
@@ -74,6 +71,8 @@ filesRequired/filesOptional -> auxFiles
 * Now go through every other format, and test identification and processing for each one
 
 * Maybe convert test-identify/test-process to have a live web page or fancy console status with boxes for every format type that turn red/green on success/failure
+
+* Make a src/app/dexbrute.js that will create Converters() for every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
 
 /---------------\
 | High Priority |

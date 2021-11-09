@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class UniExtract extends Program
+{
+	website = "https://www.legroom.net/software/uniextract";
+	flags = {"uniExtractType":"Which type of extraction to choose. Examples: \"i3comp extraction\" or \"STIX extraction\""};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -39,3 +50,4 @@ exports.qemuData = (state, p, r) => ({
 
 		ProcessWaitClose("UniExtract.exe", 10)`
 });
+*/

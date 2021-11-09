@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class soffice extends Program
+{
+	website = "https://www.libreoffice.org";
+	unsafe = true;
+	flags = {"sofficeType":"Which format to transform into (\"svg\", \"csv\", \"pdf\", \"png\", etc). Default is \"png\" for images or \"pdf\" for everything else."};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -47,3 +59,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

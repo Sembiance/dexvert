@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ffdec extends Program
+{
+	website = "https://github.com/jindrapetrik/jpexs-decompiler";
+	gentooPackage = "media-gfx/ffdec";
+	gentooOverlay = "dexvert";
+	flags = {"ffdecKeepAsGIF":"Leave the animation as a GIF, don't convert to MP4","ffdecMaxFrames":"Maximum number of frames to extract. Default: 500"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -68,3 +81,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

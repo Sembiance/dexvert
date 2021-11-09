@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class replica extends Program
+{
+	website = "https://gondwanaland.com/meta/history/";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -37,3 +48,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "OUT.TXT"), path.join(state.output.absolute, `${state.input.name}.txt`))(state, p, cb);
+*/

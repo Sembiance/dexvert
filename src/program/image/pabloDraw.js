@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class pabloDraw extends Program
+{
+	website = "http://picoe.ca/products/pablodraw/";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -43,3 +54,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);
+*/

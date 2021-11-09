@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class MPG_T2G extends Program
+{
+	website = "http://www.mindworkshop.com/gwspro.html";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -46,3 +57,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "OUT.T2G"), path.join(state.output.absolute, `${state.input.name}.t2g`))(state, p, cb);
+*/

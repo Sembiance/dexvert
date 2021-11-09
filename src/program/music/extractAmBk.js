@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class extractAmBk extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -34,3 +45,4 @@ exports.steps = (s0, p0, r) => [
 		);
 	}
 ];
+*/

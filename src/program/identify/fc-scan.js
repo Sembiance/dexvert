@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fc-scan extends Program
+{
+	website = "https://fontconfig.org";
+	gentooPackage = "media-libs/fontconfig";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -55,3 +67,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

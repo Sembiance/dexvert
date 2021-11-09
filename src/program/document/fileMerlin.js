@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fileMerlin extends Program
+{
+	website = "http://www.file-convert.com/flmn.htm";
+	flags = {"fileMerlinSrcFormat":"Which format to specify for the input format. Default: AUTO (let FileMerlin decide)","fileMerlinDestFormat":"Which format to specify for the output. Default: PDF","fileMerlinExt":"Which extension to use for the output file. Default: .pdf"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -32,3 +43,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

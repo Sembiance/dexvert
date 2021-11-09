@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class c1541 extends Program
+{
+	website = "https://vice-emu.sourceforge.io/";
+	gentooPackage = "app-emulation/vice";
+	gentooUseFlags = "alsa ffmpeg ipv6 nls png sdl sdlsound threads zlib";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -61,3 +73,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

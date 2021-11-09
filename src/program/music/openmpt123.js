@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class openmpt123 extends Program
+{
+	website = "https://lib.openmpt.org/libopenmpt/";
+	gentooPackage = "media-sound/openmpt123";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -25,3 +36,4 @@ exports.post = (state, p, r, cb) =>
 	
 	p.util.file.move(outFilePath, path.join(state.output.absolute, `${state.input.name}.wav`))(state, p, cb);
 };
+*/

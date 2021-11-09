@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fifView extends Program
+{
+	website = "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -48,3 +59,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

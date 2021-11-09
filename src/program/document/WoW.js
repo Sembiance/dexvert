@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class WoW extends Program
+{
+	website = "http://aminet.net/package/util/conv/WoW";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -24,3 +34,4 @@ exports.post = (state, p, r, cb) =>
 
 	p.util.file.move(outputFilePath, path.join(state.output.absolute, `${state.input.name}.txt`))(state, p, cb);
 };
+*/

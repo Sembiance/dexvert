@@ -47,9 +47,12 @@ export class Program
 	// runs the current program with the given input and output FileSets and various options
 	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0}={})
 	{
+		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, input, output});
+
 		if(this.bin)
 		{
+			// run a program on disk
 			r.bin = this.bin;
 			r.args = await this.args(r);
 			r.runOptions = {cwd : input.root, timeout};
@@ -60,10 +63,30 @@ export class Program
 		}
 		else if(this.exec)
 		{
+			// run arbitrary javascript code
 			if(verbose>=4)
 				xu.log`Program ${xu.cf.fg.orange(this.programid)} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
+
+		if(r.output)
+		{
+			// we may have new files on disk in r.output.root
+			// first we have to run fixPerms in order to ensure we can access the new files
+			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : r.output.root});
+
+			// now find the new output files
+			const newFiles = await fileUtil.tree(r.output.root, {nodir : true});
+			console.log(newFiles);
+		}
+
+
+		/*
+* Program: Then find any new output files and stick in output.add("new", files)
+  Will need to do a tree in output.root and subtract any already in output.main
+
+* Program: Then run program.post() if it is set
+*/
 
 		if(this.post)
 			await this.post(r);
@@ -79,7 +102,7 @@ export class Program
 	{
 		const program = (await this.loadPrograms())[programid];
 		if(!program)
-			return null;
+			throw new Error(`Unknown programid: ${programid}`);
 		
 		return program.run(...args);
 	}
@@ -105,7 +128,7 @@ export class Program
 		for(const programFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "program"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
 		{
 			// TODO REMOVE BELOW AFTER CONVERTING ALL PROGRAMS
-			if(!(await fileUtil.readFile(programFilePath)).includes(" extends Program"))
+			if(!(await fileUtil.readFile(programFilePath)).includes(" extends Program") || (await fileUtil.readFile(programFilePath)).startsWith("/*"))
 				continue;
 			// TODO REMOVE ABOVE AFTER CONVERTING ALL PROGRAMS
 

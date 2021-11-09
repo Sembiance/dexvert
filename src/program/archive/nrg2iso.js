@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class nrg2iso extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -21,3 +32,4 @@ exports.steps = (s0, p0, r) => [
 		inStream.pipe(new StreamSkip({skip : 307200})).pipe(fs.createWriteStream(r.args[1]));
 	}
 ];
+*/

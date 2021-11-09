@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class Fony extends Program
+{
+	website = "http://hukka.ncn.fi/?fony";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -50,3 +60,4 @@ exports.post = (state, p, r, cb) => p.util.flow.serial([
 	() => (r.bdfFilePath ? p.util.program.run("bdftopcf", {argsd : [r.bdfFilePath]}) : p.util.flow.noop),
 	() => (r.bdfFilePath ? p.util.file.unlink(r.bdfFilePath) : p.util.flow.noop)
 ])(state, p, cb);
+*/

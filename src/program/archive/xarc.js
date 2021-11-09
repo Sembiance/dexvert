@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class xarc extends Program
+{
+	website = "http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -8,3 +18,4 @@ exports.meta =
 
 exports.dos = () => "XARC.EXE";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => ([inPath, outPath]);
+*/

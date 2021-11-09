@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class swfextract extends Program
+{
+	website = "http://www.swftools.org/";
+	gentooPackage = "media-gfx/swftools";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -34,3 +46,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

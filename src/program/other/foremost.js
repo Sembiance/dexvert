@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class foremost extends Program
+{
+	website = "http://foremost.sourceforge.net/";
+	gentooPackage = "app-forensics/foremost";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -12,3 +23,4 @@ exports.meta =
 exports.bin = () => "foremost";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => ([`-o${outPath}`, inPath]);
 exports.post = (state, p, r, cb) => fileUtil.unlink(path.join(state.output.absolute, "audit.txt"), cb);
+*/

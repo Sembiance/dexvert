@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class antiword extends Program
+{
+	website = "http://www.winfield.demon.nl";
+	gentooPackage = "app-text/antiword";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -28,3 +39,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

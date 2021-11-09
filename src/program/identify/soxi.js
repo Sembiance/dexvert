@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class soxi extends Program
+{
+	website = "http://sox.sourceforge.net";
+	gentooPackage = "media-sound/sox";
+	gentooUseFlags = "alsa amr encode flac id3tag mad ogg openmp png sndfile twolame wavpack";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -39,3 +52,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

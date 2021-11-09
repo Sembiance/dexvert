@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class amosbank extends Program
+{
+	website = "https://github.com/dschwen/amosbank";
+	gentooPackage = "dev-lang/amosbank";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -36,3 +48,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

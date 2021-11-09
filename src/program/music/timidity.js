@@ -1,3 +1,18 @@
+/*
+import {Program} from "../../Program.js";
+
+export class timidity extends Program
+{
+	website = ["http://timidity.sourceforge.net/","http://freepats.opensrc.org","http://musescore.org/en/handbook/soundfont","http://www.stardate.bc.ca/eawpatches/html/default.htm"];
+	gentooPackage = ["media-sound/timidity++","media-sound/timidity-freepats","media-sound/fluid-soundfont","media-sound/timidity-eawpatches"];
+	bin = ["timidity","*","*"];
+	gentooUseFlags = "X alsa flac gtk ncurses speex vorbis";
+	unsafe = true;
+	flags = {"midiFont":"Which midifont to use to convert (eaw, fluid, roland, creative, freepats, windows) Default: eaw"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -54,3 +69,4 @@ exports.post = (state, p, r, cb) => p.util.flow.parallel([
 	() => (INSTRUMENT_NAMES.includes(r.flags.midiFont) ? p.util.flow.noop : p.util.file.unlink(r.instrumentDirPath)),
 	() => p.util.file.move(path.join(state.output.absolute, "outfile.wav"), path.join(state.output.absolute, `${state.input.name}.wav`))
 ])(state, p, cb);
+*/

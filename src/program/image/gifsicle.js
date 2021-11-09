@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class gifsicle extends Program
+{
+	website = "https://www.lcdf.org/~eddietwo/gifsicle/";
+	gentooPackage = "media-gfx/gifsicle";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -22,3 +34,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

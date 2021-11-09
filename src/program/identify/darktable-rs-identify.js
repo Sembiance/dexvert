@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class darktable-rs-identify extends Program
+{
+	website = "https://github.com/Sembiance/dexmagic";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -18,3 +29,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

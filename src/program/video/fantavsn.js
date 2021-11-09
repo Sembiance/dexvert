@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fantavsn extends Program
+{
+	website = "https://winworldpc.com/product/fantavision/1x-dos";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -16,3 +27,4 @@ exports.dosData = (state, p, r) => ({
 	timeout    : XU.SECOND*40,
 	video      : path.join(state.output.absolute, `${state.input.name}.mp4`)
 });
+*/

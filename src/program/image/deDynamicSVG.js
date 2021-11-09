@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class deDynamicSVG extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+	gentooPackage = "app-text/xmlstarlet";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -43,3 +55,4 @@ exports.steps = (s0, p0, r) => [
 		);
 	}
 ];
+*/

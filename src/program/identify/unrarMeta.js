@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class unrarMeta extends Program
+{
+	website = "https://www.rarlab.com/rar_add.htm";
+	gentooPackage = "app-arch/unrar";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -47,3 +59,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

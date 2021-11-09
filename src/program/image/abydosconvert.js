@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class abydosconvert extends Program
+{
+	website = "https://github.com/Sembiance/abydosconvert";
+	gentooPackage = "media-gfx/abydosconvert";
+	gentooOverlay = "dexvert";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -43,3 +56,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

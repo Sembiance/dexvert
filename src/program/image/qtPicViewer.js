@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class qtPicViewer extends Program
+{
+	website = "https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -77,3 +88,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);
+*/

@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class strings extends Program
+{
+	website = "https://www.gnu.org/software/binutils/";
+	gentooPackage = "sys-devel/binutils";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -11,3 +22,4 @@ exports.meta =
 exports.bin = () => "strings";
 exports.args = (state, p, r, inPath=state.input.filePath) => (["-a", inPath]);
 exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
+*/

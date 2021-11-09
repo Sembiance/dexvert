@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class dviinfox extends Program
+{
+	website = "http://tug.org/texlive/";
+	gentooPackage = "app-text/texlive";
+	gentooUseFlags = "X cjk extra graphics metapost png texi2html truetype xetex xml";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -27,3 +40,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

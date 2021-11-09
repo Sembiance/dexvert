@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class xdftool extends Program
+{
+	website = "http://lallafa.de/blog/amiga-projects/amitools/";
+	gentooPackage = "app-arch/amitools";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -82,3 +94,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

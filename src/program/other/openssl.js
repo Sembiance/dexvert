@@ -1,3 +1,17 @@
+/*
+import {Program} from "../../Program.js";
+
+export class openssl extends Program
+{
+	website = "https://www.openssl.org/";
+	gentooPackage = "dev-libs/openssl";
+	gentooUseFlags = "asm zlib";
+	flags = {"sslCommand":"Which command to perform. REQUIRED FLAG","encodingType":"Encoding type of the certificate. Default: Let openssl decide (usually fails)"};
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -25,3 +39,4 @@ exports.args = (state, p, r, inPath=state.input.filePath) =>
 	return [...args, "-in", inPath];
 };
 exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
+*/

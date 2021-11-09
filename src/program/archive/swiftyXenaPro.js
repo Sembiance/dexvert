@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class swiftyXenaPro extends Program
+{
+	website = "https://www.buraks.com/swifty/xena.html";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -30,3 +41,4 @@ exports.qemuData = (state, p, r) => ({
 		
 		FileDelete("c:\\out\\${path.basename(r.inPath)}")`
 });
+*/

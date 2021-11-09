@@ -28,6 +28,13 @@ export class Identification
 		return id;
 	}
 
+	serialize()
+	{
+		const o = {};
+		Object.assign(o, this);
+		return o;
+	}
+
 	pretty(prefix="")
 	{
 		const r = [prefix];

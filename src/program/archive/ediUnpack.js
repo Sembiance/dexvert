@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ediUnpack extends Program
+{
+	website = "https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -33,4 +43,4 @@ exports.qemuData = (state, p, r) => ({
 		; Program tends to hang forever preventing any other instances from running, so we kill this process which kills the program
 		ProcessClose("ntvdm.exe")`
 });
-
+*/

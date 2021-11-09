@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class asapconv extends Program
+{
+	website = "http://asap.sourceforge.net/";
+	gentooPackage = "media-sound/asap";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -32,3 +44,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

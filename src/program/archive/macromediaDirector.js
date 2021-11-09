@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class macromediaDirector extends Program
+{
+	website = "https://www.buraks.com/swifty/xena.html";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -202,3 +212,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

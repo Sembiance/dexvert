@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class decrmtool extends Program
+{
+	website = "http://aminet.net/package/util/pack/decrunchmania-mos";
+	gentooPackage = "app-arch/decrunchmania";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -12,3 +24,4 @@ exports.meta =
 exports.bin = () => "decrmtool";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile")) => ([inPath, outPath]);
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile"), path.join(state.output.absolute, state.input.name))(state, p, cb);
+*/

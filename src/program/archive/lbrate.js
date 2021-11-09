@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class lbrate extends Program
+{
+	website = "http://www.svgalib.org/rus/lbrate.html";
+	gentooPackage = "app-arch/lbrate";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +23,4 @@ exports.meta =
 exports.bin = () => "lbrate";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
 exports.cwd = state => state.output.absolute;
+*/

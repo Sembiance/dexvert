@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ha extends Program
+{
+	website = "http://fileformats.archiveteam.org/wiki/HA";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -115,3 +125,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

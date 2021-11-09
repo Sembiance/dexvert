@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class photocd-info extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -28,3 +39,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

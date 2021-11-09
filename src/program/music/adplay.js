@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class adplay extends Program
+{
+	website = "https://github.com/adplug/adplay-unix";
+	gentooPackage = "media-sound/adplay";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -25,3 +36,4 @@ exports.post = (state, p, r, cb) =>
 	
 	p.util.file.move(outFilePath, path.join(state.output.absolute, `${state.input.name}.wav`))(state, p, cb);
 };
+*/

@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class man2html extends Program
+{
+	website = "http://primates.ximian.com/~flucifredi/man/";
+	gentooPackage = "sys-apps/man2html";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -21,3 +32,4 @@ exports.post = (state, p, r, cb) =>
 
 	fileUtil.searchReplace(outputFilePath, "Content-type: text/html", "", cb);
 };
+*/

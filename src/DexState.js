@@ -32,7 +32,10 @@ export class DexPhase
 	serialize()
 	{
 		const o = {};
-		
+		for(const key of ["input", "output", "format", "id"])
+			o[key] = this[key].serialize();
+		o.meta = xu.parseJSON(JSON.stringify(this.meta));
+		o.ran = this.ran.map(v => v.serialize());
 		return o;
 	}
 
@@ -53,7 +56,6 @@ export class DexPhase
 
 export class DexState
 {
-	meta = {};
 	phase = null;
 	past = [];
 	baseKeys = Object.keys(this);
@@ -98,7 +100,12 @@ export class DexState
 
 	serialize()
 	{
-		// TODO
+		const o = {};
+		o.original = Object.fromEntries(Object.entries(this.original).map(([k, v]) => ([k, v.serialize()])));
+		if(this.phase)
+			o.phase = this.phase.serialize();
+		o.past = this.past.map(v => v.serialize());
+		return o;
 	}
 
 	// returns a pretty string for this DexState, useful for debugging purposes

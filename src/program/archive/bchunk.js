@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class bchunk extends Program
+{
+	website = "http://he.fi/bchunk/";
+	gentooPackage = "app-cdr/bchunk";
+	unsafe = true;
+	flags = {"bchunkSwapByteOrder":"If set to true, will swap the byte ordering for WAVs extracted from audio tracks with bchunk"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -60,3 +73,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

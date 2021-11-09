@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class EXE2SWFExtractor extends Program
+{
+	website = "https://sothink.com/product/flashdecompiler/";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -54,3 +65,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

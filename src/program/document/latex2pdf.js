@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class latex2pdf extends Program
+{
+	website = "http://latex2rtf.sourceforge.net/";
+	gentooPackage = "dev-tex/latex2rtf";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -25,3 +36,4 @@ exports.post = (state, p, r, cb) =>
 	
 	return p.util.program.run("soffice", {argsd : [path.join(state.cwd, `${state.input.name}.rtf`)]})(state, p, cb);
 };
+*/

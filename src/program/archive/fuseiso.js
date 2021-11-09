@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fuseiso extends Program
+{
+	website = "https://sourceforge.net/projects/fuseiso";
+	gentooPackage = "sys-fs/fuseiso";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -41,3 +52,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class pdfinfo extends Program
+{
+	website = "https://poppler.freedesktop.org/";
+	gentooPackage = "app-text/poppler";
+	gentooUseFlags = "cairo curl cxx introspection jpeg jpeg2k lcms png qt5 tiff utils";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -34,3 +47,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

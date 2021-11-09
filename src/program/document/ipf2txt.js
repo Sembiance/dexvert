@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ipf2txt extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -37,3 +47,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

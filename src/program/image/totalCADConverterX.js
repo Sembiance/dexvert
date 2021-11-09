@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class totalCADConverterX extends Program
+{
+	website = "https://www.coolutils.com/TotalCADConverterX";
+	flags = {"outputFileType":"Which format to transform into (\"svg\", \"pdf\", \"png\", etc). LOWERCASE. See sandbox/app/totalCADXManual.txt for list. Default is \"svg\""};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -47,3 +58,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

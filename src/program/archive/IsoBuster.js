@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class IsoBuster extends Program
+{
+	website = "https://www.isobuster.com/isobuster.php";
+	unsafe = true;
+	slow = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -15,3 +27,4 @@ exports.args = (state, p, r, inPath=state.input.filePath) => (["/ef:all:C:\\out"
 
 // IsoBuster can take a LONG time to run, but 20 minutes should be plenty for any file
 exports.qemuData = (state, p, r) => ({osid : "winxp", timeout : XU.MINUTE*20, inFilePaths : [r.args[1], ...(state.extraFilenames || [])]});
+*/

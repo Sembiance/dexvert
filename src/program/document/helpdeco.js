@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class helpdeco extends Program
+{
+	website = "https://sourceforge.net/projects/helpdeco/";
+	gentooPackage = "app-arch/helpdeco";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -115,3 +127,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

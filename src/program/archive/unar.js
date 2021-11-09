@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class unar extends Program
+{
+	website = "https://unarchiver.c3.cx/";
+	gentooPackage = "app-arch/unar";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -32,3 +43,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

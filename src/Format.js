@@ -35,6 +35,11 @@ export class Format
 		return `${prefix}${xu.cf.fg.magenta(this.name)} ${xu.cf.fg.yellow(this.familyid)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}${this.unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""} (${xu.cf.fg.greenDim(this.website)})`;
 	}
 
+	serialize()
+	{
+		return this.formatid;
+	}
+
 	// builder to get around the fact that constructors can't be async
 	static create(family, preValidate)
 	{
@@ -101,6 +106,11 @@ export class Format
 			post          : {type : "function", length : [0, 1]}
 		});
 		return format;
+	}
+
+	static deserialize(v)
+	{
+		return this.formats[v];
 	}
 
 	// loads all src/format/*/*.js files from disk as Format objects. These are cached in the static this.formats cache

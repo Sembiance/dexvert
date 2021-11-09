@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class DirMaster extends Program
+{
+	website = "https://style64.org/dirmaster";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -40,3 +50,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

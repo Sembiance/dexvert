@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class swagReader extends Program
+{
+	website = "http://fileformats.archiveteam.org/wiki/SWG";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -67,3 +78,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

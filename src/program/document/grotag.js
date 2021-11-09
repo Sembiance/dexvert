@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class grotag extends Program
+{
+	website = "http://grotag.sourceforge.net/";
+	gentooPackage = "app-text/grotag";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -87,3 +99,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

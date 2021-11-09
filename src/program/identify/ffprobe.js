@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ffprobe extends Program
+{
+	website = "https://ffmpeg.org/";
+	gentooPackage = "media-video/ffmpeg";
+	gentooUseFlags = "X alsa amr bzip2 dav1d encode fontconfig gnutls gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -38,3 +51,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

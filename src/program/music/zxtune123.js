@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class zxtune123 extends Program
+{
+	website = "https://zxtune.bitbucket.io/";
+	gentooPackage = "media-sound/zxtune";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -38,3 +50,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

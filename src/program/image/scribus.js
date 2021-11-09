@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class scribus extends Program
+{
+	website = "https://www.scribus.net/";
+	gentooPackage = "app-office/scribus";
+	gentooUseFlags = "boost minimal pdf templates";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -67,3 +80,4 @@ scribus.fileQuit()
 exports.post = (state, p, r, cb) => p.util.program.run("inkscape", {argsd : ["outfile.eps"]})(state, p, cb);
 
 exports.runOptions = () => ({timeout : XU.MINUTE, virtualX : true, killSignal : "SIGTERM"});	// scribus won't kill with SIGINT
+*/

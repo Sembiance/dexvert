@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class nconvert extends Program
+{
+	website = "https://www.xnview.com/en/nconvert/";
+	gentooPackage = "media-gfx/nconvert";
+	gentooOverlay = "dexvert";
+	flags = {"nconvertFormat":"Which nconvert format to force conversion as. For list run `nconvert -help` Default: Let nconvert decide"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -23,3 +36,4 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(stat
 	return nconvertArgs;
 };
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);
+*/

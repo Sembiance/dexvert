@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class gameextractor extends Program
+{
+	website = "http://www.watto.org/game_extractor.html";
+	gentooPackage = "games-util/gameextractor";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -20,3 +32,4 @@ exports.post = (state, p, r, cb) => fileUtil.unlink(`${state.input.absolute}_ge_
 
 // gameextractor always opens an X window (thus virtualX) and on some files it just hangs forever (thus timeout)
 exports.runOptions = () => ({timeout : XU.MINUTE*1, virtualX : true});
+*/

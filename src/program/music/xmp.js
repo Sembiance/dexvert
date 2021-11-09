@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class xmp extends Program
+{
+	website = "http://xmp.sourceforge.net/";
+	gentooPackage = "media-sound/xmp";
+	gentooOverlay = "dexvert";
+	gentooUseFlags = "alsa";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -27,3 +40,4 @@ exports.post = (state, p, r, cb) =>
 	
 	p.util.file.move(outFilePath, path.join(state.output.absolute, `${state.input.name}.wav`))(state, p, cb);
 };
+*/

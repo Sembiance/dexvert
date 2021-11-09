@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class isextract extends Program
+{
+	website = "https://github.com/OmniBlade/isextract";
+	gentooPackage = "app-arch/isextract";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -10,3 +21,4 @@ exports.meta =
 exports.bin = () => "isextract";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => (["x", inPath, outPath]);
 exports.runOptions = () => ({timeout : XU.MINUTE*2});
+*/

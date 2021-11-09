@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class uniconvertor extends Program
+{
+	website = "https://sk1project.net/uc2/";
+	gentooPackage = "media-gfx/uniconvertor";
+	gentooOverlay = "dexvert";
+	flags = {"uniconvertorExt":"Which extension to convert to (\".svg\", \".png\"). Default: .svg"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -48,3 +61,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

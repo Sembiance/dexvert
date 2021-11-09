@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class awaveStudio extends Program
+{
+	website = "https://archive.org/details/awave70_zip";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -64,3 +74,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

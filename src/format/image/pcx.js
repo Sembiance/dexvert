@@ -7,6 +7,6 @@ export class pcx extends Format
 	ext           = [".pcx"];
 	mimeType      = "image/x-pcx";
 	magic         = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/];
-	converters    = ["word97 -> dexvert[asFormat:document/wordDoc][deleteInput] -> programid[flag1:flag1Value][flag2][flag3:flag3Value]", "nconvert", "convert", "deark", "imageAlchemy", "graphicWorkshopProfessional"];
+	converters    = ["nconvert", "convert", "deark", "imageAlchemy", "graphicWorkshopProfessional"];
 	metaProviders = ["image"];
 }

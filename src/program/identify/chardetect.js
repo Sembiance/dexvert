@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class chardetect extends Program
+{
+	website = "https://github.com/chardet/chardet";
+	gentooPackage = "dev-python/chardet";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -27,3 +39,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

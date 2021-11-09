@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class sf2info extends Program
+{
+	website = "https://github.com/FluidSynth/fluidsynth";
+	gentooPackage = "media-sound/fluidsynth";
+	gentooUseFlags = "alsa dbus ipv6 network readline sndfile threads";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -33,3 +46,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

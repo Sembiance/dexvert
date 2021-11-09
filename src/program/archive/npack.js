@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class npack extends Program
+{
+	website = "http://fileformats.archiveteam.org/wiki/NPack";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -22,3 +33,4 @@ exports.post = (state, p, r, cb) =>
 	else
 		p.util.file.move(outFilePath, path.join(state.output.absolute, `${state.input.name}${state.input.ext.replaceAll("$", "")}`))(state, p, cb);
 };
+*/

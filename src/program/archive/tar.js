@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class tar extends Program
+{
+	website = "https://www.gnu.org/software/tar/";
+	gentooPackage = "app-arch/tar";
+	gentooUseFlags = "acl nls xattr";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -10,3 +22,4 @@ exports.meta =
 
 exports.bin = () => "tar";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => (["-xf", inPath, "-C", outPath]);
+*/

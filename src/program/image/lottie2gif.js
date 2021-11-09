@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class lottie2gif extends Program
+{
+	website = "https://github.com/Samsung/rlottie";
+	gentooPackage = "media-libs/rlottie";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fs = require("fs"),
@@ -49,3 +60,4 @@ exports.pre = (state, p, r, cb) =>
 };
 
 exports.post = (state, p, r, cb) => (r.lottieCreatedDirs || []).serialForEach((lottieCreatedDir, subcb) => fileUtil.unlink(lottieCreatedDir, subcb), cb);
+*/

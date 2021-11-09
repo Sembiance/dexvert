@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class listamos extends Program
+{
+	website = "https://github.com/kyz/amostools/";
+	gentooPackage = "dev-lang/amostools";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -22,3 +34,4 @@ exports.post = (state, p, r, cb) =>
 	
 	fs.writeFile(path.join(state.output.absolute, `${state.input.name}.amosSourceCode`), sourceCode.trim(), XU.UTF8, cb);
 };
+*/

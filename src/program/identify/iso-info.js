@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class iso-info extends Program
+{
+	website = "https://www.gnu.org/software/libcdio";
+	gentooPackage = "dev-libs/libcdio";
+	gentooUseFlags = "cddb cxx";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -28,3 +41,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

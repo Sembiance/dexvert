@@ -1,9 +1,9 @@
-/* eslint-disable unicorn/no-hex-escape, max-len */
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 
+/* eslint-disable unicorn/no-hex-escape, max-len */
 const DEXMAGIC_CHECKS =
 {
 	// 3d
@@ -70,6 +70,7 @@ const DEXMAGIC_CHECKS =
 	"VCD Entries File"                 : [{offset : 0, match : "ENTRYVCD"}],
 	"VideoTracker Routine"             : [{offset : 0, match : "PVC!"}]
 };
+/* eslint-enable unicorn/no-hex-escape, max-len */
 
 Object.mapInPlace(DEXMAGIC_CHECKS, (k, v) => (typeof v==="string" ? ([k, [{offset : 0, match : v}]]) : [k, v]));
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>

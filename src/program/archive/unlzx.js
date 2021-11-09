@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class unlzx extends Program
+{
+	website = "http://xavprods.free.fr/lzx/";
+	gentooPackage = "app-arch/unlzx";
+	gentooOverlay = "dexvert";
+	flags = {"unlzxListOnly":"If set to true, only list out the the files in the archive and set meta info, don't actually extract. Default: false"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	moment = require("moment");
@@ -35,3 +48,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

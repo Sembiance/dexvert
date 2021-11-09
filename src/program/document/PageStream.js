@@ -1,3 +1,13 @@
+/*
+import {Program} from "../../Program.js";
+
+export class PageStream extends Program
+{
+	website = "https://pagestream.org/";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -37,3 +47,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.pdf"), path.join(state.output.absolute, `${state.input.name}.pdf`))(state, p, cb);
+*/

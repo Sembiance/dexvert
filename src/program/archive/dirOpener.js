@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class dirOpener extends Program
+{
+	website = "https://www.buraks.com/swifty/xena.html";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -122,3 +133,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

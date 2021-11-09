@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class stackimport extends Program
+{
+	website = "https://github.com/uliwitness/stackimport/";
+	gentooPackage = "dev-util/stackimport";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -35,3 +46,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

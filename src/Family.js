@@ -22,6 +22,16 @@ export class Family
 		return family;
 	}
 
+	serialize()
+	{
+		return this.familyid;
+	}
+
+	static deserialize(v)
+	{
+		return this.families[v];
+	}
+
 	// loads all src/family/*.js files from disk as Family objects. These are cached in the static this.families cache
 	static async loadFamilies()
 	{

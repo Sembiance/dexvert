@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class winPack extends Program
+{
+	website = "https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -63,3 +74,4 @@ exports.qemuData = (state, p, r) => ({
 
 		WaitForPID(ProcessExists("WinPack.exe"), ${XU.SECOND*10})`
 });
+*/

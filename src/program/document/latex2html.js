@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class latex2html extends Program
+{
+	website = "https://www.latex2html.org/";
+	gentooPackage = "dev-tex/latex2html";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -28,3 +39,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

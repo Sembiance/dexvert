@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class vcd-info extends Program
+{
+	website = "https://www.gnu.org/software/vcdimager";
+	gentooPackage = "media-video/vcdimager";
+	gentooUseFlags = "xml";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -47,5 +60,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
-
-
+*/

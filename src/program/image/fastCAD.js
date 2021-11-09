@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class fastCAD extends Program
+{
+	website = "https://fastcad2.com/";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -38,3 +49,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(r.outPath, "out.bmp"), path.join(r.outPath, `${state.input.name}.bmp`))(state, p, cb);
+*/

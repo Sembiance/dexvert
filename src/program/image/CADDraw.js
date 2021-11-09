@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class CADDraw extends Program
+{
+	website = "http://www.mindworkshop.com/gwspro.html";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -45,3 +56,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.wmf"), path.join(state.output.absolute, `${state.input.name}.wmf`))(state, p, cb);
+*/

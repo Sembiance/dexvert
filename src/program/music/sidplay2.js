@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class sidplay2 extends Program
+{
+	website = "http://sidplay2.sourceforge.net/";
+	gentooPackage = "media-sound/sidplay";
+	flags = {"sidSubTune":"Specify which sub tune to convert, zero based. Default: 1","sidSongLength":"Duration of time to play the SID song. Default: Let sidplay2 decide"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -26,3 +38,4 @@ exports.args = (state, p, r, inPath=state.input.filePath) =>
 };
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, `outfile_${r.sidPaddedSubTune}.wav`), path.join(state.output.absolute, `${state.input.name}_${r.sidPaddedSubTune}.wav`))(state, p, cb);
+*/

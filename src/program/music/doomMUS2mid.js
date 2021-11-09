@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class doomMUS2mid extends Program
+{
+	website = "http://slade.mancubus.net/";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	runUtil = require("@sembiance/xutil").run,
@@ -65,3 +76,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.mid"), path.join(state.output.absolute, `${state.input.name}.mid`))(state, p, cb);
+*/

@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class word97 extends Program
+{
+	website = "https://archive.org/details/office97standard_201912/";
+	notes = "revisableFormText converter from: http://www.gmayor.com/downloads.htm";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -35,3 +46,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.doc"), path.join(state.output.absolute, `${state.input.name}.doc`))(state, p, cb);
+*/

@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class ffmpeg extends Program
+{
+	website = "https://ffmpeg.org/";
+	gentooPackage = "media-video/ffmpeg";
+	gentooUseFlags = "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib";
+	flags = {"ffmpegExt":"Which extension to convert into (\".png\", \".mp3\", \".mp4\", \".flac\", etc). Default for image is .png, audio is .mp3 otherwise .mp4","ffmpegFormat":"Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide","ffmpegCodec":"Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide","ffmpegFPS":"What frame rate to specify for conversion. Default: Let ffmpeg decide","ffmpegRate":"What rate to set for the output. Default: Let ffmpeg decide","ffmpegMaxDuration":"Maximum duration (in seconds) to allow the output file to be"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -76,3 +89,4 @@ exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(stat
 };
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, `outfile${r.flags.ffmpegExt}`), path.join(state.output.absolute, state.input.name + r.flags.ffmpegExt))(state, p, cb);
+*/

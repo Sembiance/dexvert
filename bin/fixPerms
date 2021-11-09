@@ -1,0 +1,10 @@
+#!/bin/bash
+
+USER=$(whoami)
+
+# This first command will ensure we have execute permission to enter into each directory
+# Note the capital X will only change directories execute permission, not files
+sudo chmod -R a=r-wx,u=wr,g+r,o+r,a+X .
+
+# Now we ensure the current user owns every file and directory
+sudo chown -R "$USER":users .

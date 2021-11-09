@@ -1,3 +1,17 @@
+/*
+import {Program} from "../../Program.js";
+
+export class vcdxrip extends Program
+{
+	website = ["https://www.gnu.org/software/vcdimager","http://xmlstar.sourceforge.net/"];
+	gentooPackage = ["media-video/vcdimager","app-text/xmlstarlet"];
+	bin = ["vcdxrip","xmlstarlet"];
+	gentooUseFlags = "xml";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
@@ -52,3 +66,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

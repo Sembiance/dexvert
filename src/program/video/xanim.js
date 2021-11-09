@@ -1,3 +1,18 @@
+/*
+import {Program} from "../../Program.js";
+
+export class xanim extends Program
+{
+	website = "https://github.com/Sembiance/xanim";
+	gentooPackage = "media-video/xanim";
+	gentooOverlay = "dexvert";
+	unsafe = true;
+	notes = "The dexvert version of xanim has special export functionality, originally based on the loki xanim fork, but I've ehnhanced it to support other animation formats and output correctly on 32bit x11 displays";
+	flags = {"xanimDelay":"Duration of delay between animation frames. Default: 10"};
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path"),
@@ -47,3 +62,4 @@ exports.post = (state, p, r, cb) =>
 		cb
 	);
 };
+*/

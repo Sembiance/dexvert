@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class dumpamos extends Program
+{
+	website = "https://github.com/kyz/amostools/";
+	gentooPackage = "dev-lang/amostools";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -11,3 +23,4 @@ exports.meta =
 exports.bin = () => "dumpamos";
 exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
 exports.cwd = state => state.output.absolute;
+*/

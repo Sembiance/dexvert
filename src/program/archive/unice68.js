@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class unice68 extends Program
+{
+	website = "https://sourceforge.net/projects/sc68/";
+	gentooPackage = "app-arch/unice68";
+	gentooOverlay = "dexvert";
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -12,3 +24,4 @@ exports.meta =
 exports.bin = () => "unice68";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile")) => (["-d", inPath, outPath]);
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile"), path.join(state.output.absolute, state.input.base))(state, p, cb);
+*/

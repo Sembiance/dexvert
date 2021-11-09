@@ -1,3 +1,15 @@
+/*
+import {Program} from "../../Program.js";
+
+export class dexvert extends Program
+{
+	website = "https://github.com/Sembiance/dexvert";
+	flags = {"asFormat":"Which format to convert as","deleteInput":"Delete input file after finishing"};
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
@@ -33,3 +45,4 @@ exports.post = (state, p, r, cb) =>
 	else
 		setImmediate(cb);
 };
+*/

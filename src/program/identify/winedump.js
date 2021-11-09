@@ -1,3 +1,16 @@
+/*
+import {Program} from "../../Program.js";
+
+export class winedump extends Program
+{
+	website = "https://www.winehq.org/";
+	gentooPackage = "app-emulation/wine-vanilla";
+	gentooUseFlags = "X alsa cups faudio fontconfig jpeg lcms mp3 nls opengl perl png realtime run-exes ssl threads truetype unwind xcomposite xinerama xml ";
+	informational = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu");
 
@@ -81,3 +94,4 @@ exports.post = (state, p, r, cb) =>
 
 	setImmediate(cb);
 };
+*/

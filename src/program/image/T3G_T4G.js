@@ -1,3 +1,14 @@
+/*
+import {Program} from "../../Program.js";
+
+export class T3G_T4G extends Program
+{
+	website = "http://www.mindworkshop.com/gwspro.html";
+	unsafe = true;
+}
+*/
+
+/*
 "use strict";
 const XU = require("@sembiance/xu"),
 	path = require("path");
@@ -44,3 +55,4 @@ exports.qemuData = (state, p, r) => ({
 });
 
 exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.t4g"), path.join(state.output.absolute, `${state.input.name}.t4g`))(state, p, cb);
+*/

@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {identify} from "./identify.js";
 import {Format} from "./Format.js";
 import {FileSet} from "./FileSet.js";
-import {DexFile} from "./DexFile.js";
+import {Converter} from "./Converter.js";
 import {DexState} from "./DexState.js";
 import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
@@ -67,7 +67,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		await Deno.mkdir(outFilePath, {recursive : true});
 		const cwdOutput = await FileSet.create({root : outFilePath});
 
-		const phase = dexState.startPhase({format, id, input : cwdInput, output : cwdOutput});
+		dexState.startPhase({format, id, input : cwdInput, output : cwdOutput});
 
 		// rename the primary file to an easy filename that any program can handle: in<ext>
 		const cwdFilename = format.keepFilename ? inputFile.name : "in";
@@ -85,7 +85,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
 		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.root]);
 
-		Object.assign(phase.meta, await format.getMeta(cwdInput, format));
+		Object.assign(dexState.meta, await format.getMeta(cwdInput, format));
 
 		const cleanup = async () =>
 		{
@@ -105,27 +105,11 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 			if(format.pre)
 				await format.pre(dexState);
 			
-			for(const converter of (format.converters || []))
+			for(const converter of (format.converters || []).map(v => Converter.create(dexState, v)))
 			{
-				const chain = converter.split("->").map(v => v.trim());
-				for(const link of chain)
-				{
-					// TODO Split link on ampresand for programs to run in parllel
-					// eg: ["word97 -> nconvert & deark[blah]"]
+				await converter.run();
 
-					//const {programid, flagsRaw=""} = link.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
-					//const flags = flagsRaw.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/g)?.groups;
-					//console.log({chain, programid, flags});
-
-					//const linkProps = link.match(/\s*(?<programid>[^\]]+)(?<flag>\s*\s*)/).groups
-
-					//^\s*(?<programid>[^[]+)(?<flags>\[(?<flagName>[^:\]]+):?(?<flagValue>[^\]]*)\])*
-				}
-				// ["word97 -> dexvert[asFormat:document/wordDoc][deleteInput]"]
-				// [["word97", ["dexvert", {asFormat : "document/wordDoc", deleteInput : true}]]]
-
-				// ["deark[module:rosprite]"]
-				// ["deark", {module : "rosprite"}]
+				// TODO
 			}
 
 			if(format.post)

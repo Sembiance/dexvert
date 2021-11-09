@@ -27,15 +27,15 @@ Which Gentoo USE flags should be set.
 The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("checkBytes/checkBytes") to get a local dexvert/bin/*
 If you have 'bin' you can't have 'exec'
 
->>> args = async (dexState) => ([arg1, arg2])
+>>> args = async (runState) => ([arg1, arg2])
 A function that returns an array of arguments to pass to the binary.
 This is executed before running the binary
 All args are relative to the CWD of dexState.input.root
 
->>> exec = async (dexState) => { ... }
+>>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
 
->>> post = async (dexState) => { ... }
+>>> post = async (runState) => { ... }
 This will be executed directly AFTER the program has finished running (either bin or exec)
 
 

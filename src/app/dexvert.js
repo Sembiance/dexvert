@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
 
@@ -29,9 +29,17 @@ const dexvertOptions = {};
 });
 
 const dexState = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions);
+// TODO if no results or !dexState.processed, transform.   transform code should move into bin/*/
 if(dexState)
-	console.log(`\n${dexState.pretty()}`);
-// TODO if no results, transform.   transform code should move into bin/*/
+{
+	if(argv.jsonFile)
+		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+
+	if(argv.json)
+		console.log(JSON.stringify(dexState.serialize()));
+	else
+		console.log(`\n${dexState.pretty()}`);
+}
 
 /*
 const argv = cmdUtil.cmdInit(cmdData);

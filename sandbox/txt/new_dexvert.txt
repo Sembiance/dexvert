@@ -2,6 +2,7 @@
 | TOP Priority |
 \--------------/
 * Probably create a 'Converter.js' class (DexState?, "converter string") that will handle parsing the converter string and running the programs/moving files, etc.
+  This will make it easier to make a dexbrute.js as it can create Converters() for every program with a custom output path /output/programid/
 
 * Program: After running program, run fixPerms with cwd of output.root
 

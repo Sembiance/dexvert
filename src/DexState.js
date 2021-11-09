@@ -31,7 +31,9 @@ export class DexPhase
 
 	serialize()
 	{
-		// TODO
+		const o = {};
+		
+		return o;
 	}
 
 	pretty(prefix="")

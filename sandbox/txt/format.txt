@@ -68,16 +68,16 @@ If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 
 
 >>> ******** Other
->>> auxFiles = (input, otherFiles, otherDirs) => [file, file] || false
+>>> auxFiles = (inputFile, otherFiles, otherDirs) => [file, file] || false
 Some formats require other sibling files/directories to be present in order to convert correctly.
 Return an array of DexFiles (filtered from otherFiles/otherDirs) or false if no files were required.
 If you return an empty array, that is stating the required files were not found and to not match against this format.
 
 >>> byteCheck = {offset : 0, match : [0x00, 0x02] || "string"}  ||  byteCheck = [{}, {}...];
 A way to match against a particular part of the file as a way to double check the file is correct.
-Can return a single object or an array of matches. The match key can be a string or an array of bytes
+Can be a single object or an array of objects. The match key can be a string or an array of bytes
 
->>> confidenceAdjust : (input, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
+>>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.
 Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
 file it's converting well enough, often producing garbage or something when a file is mis-identified. 

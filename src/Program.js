@@ -50,17 +50,17 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput, outExt}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput, outExt}={})
 	{
 		// create a RunState to store program results/meta
-		const r = RunState.create({programid : this.programid, input, output, flags});
+		const r = RunState.create({programid : this.programid, f, flags});
 
 		if(this.bin)
 		{
 			// run a program on disk
 			r.bin = this.bin;
 			r.args = await this.args(r);
-			r.runOptions = {cwd : input.root, timeout};
+			r.runOptions = {cwd : f.root, timeout};
 			if(verbose>=4)
 				xu.log`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
@@ -74,39 +74,39 @@ export class Program
 			await this.exec(r);
 		}
 
-		if(r.output)
+		if(f.outDir)
 		{
-			// we may have new files on disk in r.output.root
+			// we may have new files on disk in f.outDir
 
 			// first we have to run fixPerms in order to ensure we can access the new files
-			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : r.output.dir.absolute});
+			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute});
 
 			// delete empty files/broken symlinks. find is very fast at this, so use that
-			await runUtil.run("find", [r.output.dir.absolute, "-type", "f", "-empty", "-delete"]);
-			await runUtil.run("find", [r.output.dir.absolute, "-xtype", "l", "-delete"]);
+			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
+			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);
 
 			// also delete any 'special' files that may be dangerous to process. block special, character special named pipe, socket
-			await runUtil.run("find", [r.output.dir.absolute, "-type", "b,c,p,s", "-delete"]);
+			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
 
 			// now find any new files on disk in the output dir that we don't yet
-			const newFiles = (await fileUtil.tree(r.output.dir.absolute, {nodir : true})).subtractAll(r.output.all.map(v => v.absolute));
+			const newFiles = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll((f.output || []).map(v => v.absolute));
 			if(newFiles.length>0)
-				await r.output.addAll("new", newFiles);
+				await f.addAll("new", newFiles);
 		}
 
 		if(this.post)
 			await this.post(r);
 		
 		// if we have just a single new output file, we perform some renaming of it
-		if(r.output && r.output.files.new?.length===1)
+		if(f.outDir && f.files.new?.length===1)
 		{
 			const ro = Object.assign({ext : outExt || "", name : true}, this.renameOut);
-			const newFilename = (ro.name===true ? (originalInput?.name || r.input.main.name) : (ro.name || r.output.new.name)) + (ro.ext || r.output.new.ext);
-			if(newFilename!==r.output.new.base)
+			const newFilename = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name)) + (ro.ext || f.new.ext);
+			if(newFilename!==f.new.base)
 			{
 				if(verbose>=3)
-					xu.log`Program ${fg.orange(this.programid)} renaming the single output file [${r.output.new.pretty()}] to ${newFilename}`;
-				await r.output.new.rename(newFilename);
+					xu.log`Program ${fg.orange(this.programid)} renaming the single output file [${f.new.pretty()}] to ${newFilename}`;
+				await f.new.rename(newFilename);
 			}
 		}
 

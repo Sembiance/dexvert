@@ -10,9 +10,9 @@ export class file extends Program
 	bin = "file";
 	loc = "local";
 
-	args = r => ["--dereference", "--brief", "--keep-going", "--raw", r.input.main.rel]
+	args = r => ["--dereference", "--brief", "--keep-going", "--raw", r.f.input.rel]
 	post = r =>
 	{
-		r.meta.detections = r.stdout.trim().replaceAll("\n- , ", "\n- ").split("\n- ").filter(v => !!v).map((line, i) => Detection.create({value : line.trim(), from : "file", confidence : 100-i, file : r.input.main}));
+		r.meta.detections = r.stdout.trim().replaceAll("\n- , ", "\n- ").split("\n- ").filter(v => !!v).map((line, i) => Detection.create({value : line.trim(), from : "file", confidence : 100-i, file : r.f.input}));
 	}
 }

@@ -20,8 +20,7 @@ export class DexPhase
 
 		validateClass(dexPhase, {
 			// required
-			input  : {type : FileSet, required : true},
-			output : {type : FileSet, required : true},
+			f      : {type : FileSet, required : true},
 			format : {type : Format, required : true},
 			id     : {type : Identification, required : true}
 		});
@@ -32,7 +31,7 @@ export class DexPhase
 	serialize()
 	{
 		const o = {};
-		for(const key of ["input", "output", "format", "id"])
+		for(const key of ["f", "format", "id"])
 			o[key] = this[key].serialize();
 		o.meta = xu.parseJSON(JSON.stringify(this.meta));
 		o.ran = this.ran.map(v => v.serialize());
@@ -42,8 +41,7 @@ export class DexPhase
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${fg.white(" input:")} ${this.input.pretty(`${prefix}\t`).trim()}`);
-		r.push(`\n${prefix}${fg.white("output:")} ${this.output.pretty(`${prefix}\t`).trim()}`);
+		r.push(`${prefix}${fg.white("     f:")} ${this.f.pretty(`${prefix}\t`).trim()}`);
 		r.push(`\n${prefix}${fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
 		r.push(`\n${prefix}${fg.white("format:")} ${this.format.pretty(`${prefix}\t`).trim()}`);
 		r.push(`\n${prefix}${fg.white("    id:")} ${this.id.pretty(`${prefix}\t`).trim()}`);
@@ -93,8 +91,7 @@ export class DexState
 	}
 
 	// convenience methods to access current phase properties
-	get input() { return this.phase.input; }
-	get output() { return this.phase.output; }
+	get f() { return this.phase.f; }
 	get format() { return this.phase.format; }
 	get meta() { return this.phase.meta; }
 	get id() { return this.phase.id; }

@@ -9,7 +9,7 @@ export class checkBytes extends Program
 	bin = Program.binPath("checkBytes/checkBytes");
 	loc = "local";
 
-	args = r => [r.input.main.rel]
+	args = r => [r.f.input.rel]
 	post = r =>
 	{
 		r.meta.detections = [];
@@ -17,6 +17,6 @@ export class checkBytes extends Program
 		if(r.stdout.trim().length===0)
 			return;
 		
-		r.meta.detections.push(Detection.create({value : r.stdout.trim(), from : "checkBytes", file : r.input.main}));
+		r.meta.detections.push(Detection.create({value : r.stdout.trim(), from : "checkBytes", file : r.f.input}));
 	}
 }

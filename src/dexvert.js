@@ -50,24 +50,26 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		const format = formats[id.formatid];
 		if(verbose>=1)
 			xu.log`Attempting to process identification: ${id.pretty()}`;
-		
-		// create an input FileSet containing both our input file and any aux files needed
-		// TODO Need to test with a directory from auxfiles, like font/amigaBitmapFont
-		const inputFileSet = await FileSet.create(inputFile);
-		if(id.auxFiles)
-			inputFileSet.addAll("aux", id.auxFiles);
-		
-		// create a temporary ram cwd and copy over our files, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
+
+		// create a temporary ram cwd where all programs will run at (by default)
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
-		const cwdInput = await inputFileSet.rsyncTo(cwd);
+
+		// create a temporary fileSet with the original input file and aux files so we can rsync to our cwd
+		const inputFileSet = await FileSet.create(inputFile.root, "input", inputFile);
+		if(id.auxFiles)
+			inputFileSet.addAll("aux", id.auxFiles);
+
+		// copy over our files to cwd, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
+		// TODO Need to test with a directory from auxfiles, like font/amigaBitmapFont
+		const f = await inputFileSet.rsyncTo(cwd);
 
 		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
 		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
 		await Deno.mkdir(outFilePath, {recursive : true});
-		const cwdOutput = await FileSet.create({root : cwd, files : {dir : ["out"]}});
+		await f.add("outDir", outFilePath);
 
-		dexState.startPhase({format, id, input : cwdInput, output : cwdOutput});
+		dexState.startPhase({format, id, f});
 
 		// rename the primary file to an easy filename that any program can handle: in<ext>
 		const cwdFilename = format.keepFilename ? inputFile.name : "in";
@@ -80,16 +82,16 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		else
 			cwdExt = inputFile.ext;
 		
-		await cwdInput.main.rename(cwdFilename + cwdExt);
+		await f.input.rename(cwdFilename + cwdExt);
 
 		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
-		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.dir.absolute]);
+		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
 
-		Object.assign(dexState.meta, await format.getMeta(cwdInput, format));
+		Object.assign(dexState.meta, await format.getMeta(f.input, format));
 
 		const cleanup = async () =>
 		{
-			await runUtil.run("sudo", ["umount", cwdOutput.dir.absolute]);
+			await runUtil.run("sudo", ["umount", f.outDir.absolute]);
 			await Deno.remove(cwd, {recursive : true});
 		};
 

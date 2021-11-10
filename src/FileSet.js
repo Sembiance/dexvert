@@ -9,63 +9,19 @@ export class FileSet
 	files = {};
 
 	// builder to get around the fact that constructors can't be async
-	static async create(o)
+	static async create(root, type, files)
 	{
-		if(!o)
-			return null;
-
 		const fileSet = new this();
-
-		function getRoot(v)
-		{
-			return (v instanceof DexFile ? v.root : (v.startsWith("/") ? path.dirname(v) : Deno.cwd()));
-		}
-
-		if(typeof o==="string")
-		{
-			// a string, assume we just have a single main file, absolute path
-			fileSet.root = getRoot(o);
-			await fileSet.add("main", path.basename(o));
-		}
-		else if(o instanceof DexFile)
-		{
-			// a single DexFile, assume it's a main file
-			fileSet.root = o.root;
-			await fileSet.add("main", o);
-		}
-		else if(Array.isArray(o))
-		{
-			// an array, assume it's an array of main files
-			fileSet.root = o.map(getRoot).sortMulti([v => v.length])[0];
-			for(const v of o)
-				await fileSet.add("main", path.relative(fileSet.root, v));
-		}
-		else if(!Object.hasOwn(o, "root"))
-		{
-			// an object without a root
-			fileSet.root = Object.values(o).flatMap(v => Array.force(v)).map(getRoot).sortMulti([v => v.length])[0];
-			for(const [type, files] of Object.entries(o))
-			{
-				for(const file of files)
-					await fileSet.add(type, file);
-			}
-		}
-		else
-		{
-			fileSet.root = path.resolve(o.root);
-			for(const [type, files] of Object.entries(o.files || {}))
-			{
-				for(const file of files)
-					await fileSet.add(type, file);
-			}
-		}
-
+		fileSet.root = path.resolve(root);
+		if(type && files)
+			await fileSet.addAll(type, Array.force(files));
 		return fileSet;
 	}
 
 	// rsync copies all files to targetRoot and returns a FileSet for the new root
 	async rsyncTo(targetRoot, {type}={})
 	{
+		const newFileSet = await this.clone();
 		for(const file of (type ? this.files[type] : this.all))
 		{
 			if(file.rel.includes("/"))
@@ -73,7 +29,7 @@ export class FileSet
 			await runUtil.run("rsync", ["-aL", path.join(this.root, file.rel), path.join(targetRoot, file.rel)]);
 		}
 
-		return this.clone().changeRoot(targetRoot, {keepRel : true});
+		return newFileSet.changeRoot(targetRoot, {keepRel : true});
 	}
 
 	async addAll(type, files)
@@ -86,28 +42,25 @@ export class FileSet
 	}
 
 	// adds the given file of type type
-	async add(_type, _o)
+	async add(type, o)
 	{
-		const type = typeof _o==="undefined" ? "main" : _type;
-		const o = typeof _o==="undefined" ? _type : _o;
+		if(!type)
+			throw new TypeError(`No type specified, required.`);
+
+		if(!(o instanceof DexFile || typeof o==="string"))
+			throw new TypeError(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
 
 		if(!this.files[type])
+		{
+			Object.defineProperty(this, type, {get : () => (this.files[type] || [])[0]});
 			this.files[type] = [];
+		}
 
-		if(o instanceof DexFile)
-		{
-			if(o.root!==this.root)
-				throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
-			this.files[type].push(o);
-		}
-		else if(typeof o==="string")
-		{
-			this.files[type].push(await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o}));
-		}
-		else
-		{
-			throw new TypeError(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
-		}
+		const dexFile = o instanceof DexFile ? o : await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o});
+		if(dexFile.root!==this.root)
+			throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
+
+		this.files[type].push(dexFile);
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
@@ -121,11 +74,11 @@ export class FileSet
 	}
 
 	// creates a copy of this
-	clone()
+	async clone()
 	{
-		const fileSet = new FileSet();
-		fileSet.root = this.root;
-		fileSet.files = Object.fromEntries(Object.entries(this.files).map(([k, subFiles]) => ([k, subFiles.map(subFile => subFile.clone())])));
+		const fileSet = await FileSet.create(this.root);
+		for(const [type, files] of Object.entries(this.files))
+			await fileSet.addAll(type, files.map(file => file.clone()));
 		return fileSet;
 	}
 
@@ -162,8 +115,10 @@ export class FileSet
 
 	// shortcut getters to return single/multi often used categories
 	get all() { return Object.values(this.files).flat(); }
-	get main() { return (this.files.main || [])[0]; }
+	/*get input() { return (this.files.input || [])[0]; }
+	get output() { return (this.files.output || [])[0]; }
 	get new() { return (this.files.new || [])[0]; }
-	get dir() { return (this.files.dir || [])[0]; }
-	get aux() { return (this.files.aux || [])[0]; }
+	get outDir() { return (this.files.outDir || [])[0]; }
+	get homeDir() { return (this.files.homeDir || [])[0]; }
+	get aux() { return (this.files.aux || [])[0]; }*/
 }

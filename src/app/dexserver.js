@@ -1,7 +1,6 @@
 import {xu} from "xu";
 import {fileUtil, runUtil} from "xutil";
 import { delay } from "https://deno.land/std@0.113.0/async/mod.ts";
-import { onSignal } from "https://deno.land/std@0.113.0/signal/mod.ts";
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 
@@ -25,10 +24,9 @@ if(!Deno.env.get("DISPLAY"))
 	await runUtil.run("dbus-launch", ["--exit-with-x11"], {env : {DISPLAY : ":0", detached : true}});
 }
 
-const handles = ["SIGINT", "SIGTERM"].map(v => onSignal(v, () => signalHandler(v)));
+["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, () => signalHandler(v)));
 function signalHandler(sig)
 {
-	handles.forEach(handle => handle.dispose());
 	xu.log`Got signal ${sig}`;
 	//xu.log`Closing ${pids.length} children...`;
 	//for(const pid of pids)

@@ -16,8 +16,7 @@ export class RunState
 		validateClass(runState, {
 			// required
 			programid : {type : "string", required : true},
-			input     : {type : FileSet, required : true},
-			output    : {type : FileSet},
+			f         : {type : FileSet, required : true},
 			flags     : {type : Object}
 		});
 		return runState;
@@ -27,9 +26,7 @@ export class RunState
 	{
 		const o = {};
 		o.programid = this.programid;
-		o.input = this.input.serialize();
-		if(this.output)
-			o.output = this.output.serialize();
+		o.f = this.f.serialize();
 		o.meta = xu.parseJSON(JSON.stringify(o.meta));	// Can include classes and other non-JSON friendly things
 		for(const key of ["bin", "args", "runOptions"])
 		{

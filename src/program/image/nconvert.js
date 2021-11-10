@@ -8,11 +8,11 @@ export class nconvert extends Program
 	gentooOverlay = "dexvert";
 	flags         =
 	{
-		inType : "Which nconvert format to force conversion as. For list run `nconvert -help` Default: Let nconvert decide"
+		inType : "Which nconvert format to use for conversion. For list run `nconvert -help` Default: Let nconvert decide"
 	};
 	
 	bin  = "nconvert";
-	args = r => [...(r.flags.inType ? ["-in", r.flags.inType] : []), "-out", "png", "-o", path.join(r.output.dir.rel, "out.png"), r.input.main.rel]
+	args = r => [...(r.flags.inType ? ["-in", r.flags.inType] : []), "-out", "png", "-o", path.join(r.f.outDir.rel, "out.png"), r.f.input.rel]
 }
 
 /*

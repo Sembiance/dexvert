@@ -7,7 +7,7 @@ export class image extends Family
 	outExt = ".png";
 
 	// gets meta information for the given input and format
-	async getMeta(input, format)
+	async getMeta(inputFile, format)
 	{
 		if(!format.metaProviders)
 			return;
@@ -16,7 +16,7 @@ export class image extends Family
 
 		// imageMagick meta provider
 		if(format.metaProviders.includes("image"))
-			Object.assign(meta, await imageUtil.getInfo(input.main.absolute));
+			Object.assign(meta, await imageUtil.getInfo(inputFile.absolute));
 	}
 }
 

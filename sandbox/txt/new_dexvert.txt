@@ -1,29 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get PCX conversion working, next up: nconvert program
+* Migrate from node-modules/xutil/fileUtil to deno fileUtil areEqual()
 
-* Program: Then find any new output files and stick in output.add("new", files)
-  Will need to do a tree in output.root and subtract any already in output.main
+* Program.js: Check newFiles array (before adding to output) and filter out any that areEqual() to the input.main.absolute
 
-* Program: Then run program.post() if it is set
+* Migrate tensor over, get this running with app/dexserver.js
 
-* Program: Then if just 1 output file (output.new.length===1), rename it according to program.renameOut object.
-Key defaults are { ext : ".png", name : true}
-default ext is different per family. So image is .png, audio is .wav, etc
-If ext is set to an untruthy value false/null/etc then it won't rename the ext
-If ext is a string, it will be set to that
-If name is set to false, the filename won't be renamed. If set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string
+* Converter.js: After program is run, call await this.dexState.format.family.verify(input, output);
 
-* dexvert.js, now that program is done, pass the input/output filesets to family.verify()
+* Family.verify: It will check the files in output.new and verify they are valid images/wavs/etc
 
-* Family.verify:
-  It will check the files in output.new and verify they are valid images/wavs/etc
-  It will delete empty files, files that are the same as the input (fast hash, blake/blaze?)
-  Any it decides to keep use new method FileSet.changeType("new", "main") to move from new to main
-  If it does keep any, then this is what sets to dexvert.processed = true
+* Converter.js: If any are left in output.new
+  Add and use a new method: FileSet.changeType("new", "main") to move from new to main
 
-* dexvert.js then if processed, will rsync the 'main' files back to the original output root and finish up
+* Continue working through the rest of the converter chain
+
+* dexvert.js if there are files in output.main then set dexvert.processed = true and rsync the  'main' files back to the original output root and finish up
+
+* Once pcx/nconvert working, get the rest of the PCX converters working, even if QEMU
 
 * Find a program that requires it to be ran in the output cwd and add easy support for this
 

@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
@@ -32,7 +32,7 @@ export class Format
 	// returns a pretty string to output to console
 	pretty(prefix="")
 	{
-		return `${prefix}${xu.cf.fg.magenta(this.name)} ${xu.cf.fg.yellow(this.familyid)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}${this.unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""} (${xu.cf.fg.greenDim(this.website)})`;
+		return `${prefix}${fg.magenta(this.name)} ${fg.yellow(this.familyid)}${fg.cyan("/")}${fg.yellowDim(this.formatid)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} (${fg.greenDim(this.website)})`;
 	}
 
 	serialize()

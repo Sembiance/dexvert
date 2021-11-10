@@ -44,7 +44,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 
 	//posix.setrlimit("core", {soft : 0});
 
-	const dexState = DexState.create({original : {input : inputFile, output : outputDir}});
+	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, verbose});
 	for(const id of ids)
 	{
 		const format = formats[id.formatid];
@@ -65,7 +65,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
 		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
 		await Deno.mkdir(outFilePath, {recursive : true});
-		const cwdOutput = await FileSet.create({root : outFilePath});
+		const cwdOutput = await FileSet.create({root : cwd, files : {dir : ["out"]}});
 
 		dexState.startPhase({format, id, input : cwdInput, output : cwdOutput});
 
@@ -83,13 +83,13 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		await cwdInput.main.rename(cwdFilename + cwdExt);
 
 		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
-		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.root]);
+		await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", cwdOutput.dir.absolute]);
 
 		Object.assign(dexState.meta, await format.getMeta(cwdInput, format));
 
 		const cleanup = async () =>
 		{
-			await runUtil.run("sudo", ["umount", cwdOutput.root]);
+			await runUtil.run("sudo", ["umount", cwdOutput.dir.absolute]);
 			await Deno.remove(cwd, {recursive : true});
 		};
 

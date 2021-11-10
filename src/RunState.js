@@ -1,10 +1,11 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {FileSet} from "./FileSet.js";
 
 export class RunState
 {
 	meta = {};
+	flags = {};
 	baseKeys = Object.keys(this);
 	
 	// builder to get around the fact that constructors can't be async
@@ -16,7 +17,8 @@ export class RunState
 			// required
 			programid : {type : "string", required : true},
 			input     : {type : FileSet, required : true},
-			output    : {type : FileSet}
+			output    : {type : FileSet},
+			flags     : {type : Object}
 		});
 		return runState;
 	}
@@ -40,14 +42,14 @@ export class RunState
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${xu.cf.fg.white("Program")} ${xu.cf.fg.orange(this.programid)}${this.status ? ` ${xu.cf.fg.cyan("—")} ${xu.cf.fg.white("Status:")} ${xu.inspect(this.status)}` : ""}`);
+		r.push(`${prefix}${fg.white("Program")} ${fg.orange(this.programid)}${this.status ? ` ${fg.cyan("—")} ${fg.white("Status:")} ${xu.inspect(this.status)}` : ""}`);
 		if(this.bin)
-			r.push(`\n${prefix}\t${xu.cf.fg.white("ran:")} ${xu.cf.fg.peach(this.bin)} ${(this.args || []).map(arg => (arg.includes(" ") ? `${xu.cf.fg.cyan('"')}${xu.cf.fg.green(arg)}${xu.cf.fg.cyan('"')}` : xu.cf.fg.green(arg))).join(" ")} with options ${xu.inspect(this.runOptions || {})}`);	// eslint-disable-line max-len
-		r.push(`\n${prefix}\t${xu.cf.fg.white("meta:")} ${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("ran:")} ${fg.peach(this.bin)} ${(this.args || []).map(arg => (arg.includes(" ") ? `${fg.cyan('"')}${fg.green(arg)}${fg.cyan('"')}` : fg.green(arg))).join(" ")} with options ${xu.inspect(this.runOptions || {})}`);
+		r.push(`\n${prefix}\t${fg.white("meta:")} ${xu.inspect(this.meta).squeeze()}`);
 		if(Object.hasOwn(this, "stdout"))
 		{
-			r.push(`\n${prefix}\t${xu.cf.fg.white("stdout (squeezed):")} ${this.stdout.squeeze()}`);
-			r.push(`\n${prefix}\t${xu.cf.fg.white("stderr (squeezed):")} ${this.stderr.squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("stdout (squeezed):")} ${this.stdout.squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("stderr (squeezed):")} ${this.stderr.squeeze()}`);
 		}
 		return r.join("");
 	}

@@ -4,6 +4,7 @@ import {imageUtil} from "xutil";
 export class image extends Family
 {
 	metaids = ["image", "darkTable", "ansiArt"];
+	outExt = ".png";
 
 	// gets meta information for the given input and format
 	async getMeta(input, format)

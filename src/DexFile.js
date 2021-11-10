@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
 export class DexFile
@@ -16,7 +16,7 @@ export class DexFile
 
 		const fileInfo = await Deno.lstat(dexFile.absolute);
 		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { dexFile[n] = fileInfo[n]; });
-		dexFile.ts = fileInfo.mtime.getTime();	// eslint-disable-line require-atomic-updates
+		dexFile.ts = fileInfo.mtime.getTime();
 
 		return dexFile;
 	}
@@ -32,11 +32,15 @@ export class DexFile
 	}
 
 	// changes the root of this file to something else
-	changeRoot(newRoot)
+	changeRoot(newRoot, {keepRel}={})
 	{
 		this.root = path.resolve(newRoot);
+		if(!keepRel)
+			this.rel = path.relative(newRoot, this.absolute);
+
 		this.absolute = path.join(newRoot, this.rel);
 		this.dir = path.dirname(this.absolute);
+
 		return this;
 	}
 
@@ -76,11 +80,11 @@ export class DexFile
 	pretty(prefix="")
 	{
 		const r = [prefix];
-		r.push(this.isDirectory ? xu.cf.fg.magenta("D") : (this.isSymlink ? xu.cf.fg.cyan("L") : xu.cf.fg.fogGray("F")));
-		r.push(` ${xu.cf.fg.white((this.isFile ? this.size.bytesToSize() : "").padStart(6, " "))}`);
-		r.push(` ${xu.cf.fg.yellow(this.root)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.rel)}`);
+		r.push(this.isDirectory ? fg.magenta("D") : (this.isSymlink ? fg.cyan("L") : fg.fogGray("F")));
+		r.push(` ${fg.white((this.isFile ? this.size.bytesToSize() : "").padStart(6, " "))}`);
+		r.push(` ${fg.yellow(this.root)}${fg.cyan("/")}${fg.yellowDim(this.rel)}`);
 		if(this.transformed)
-			r.push(` ${xu.cf.fg.peach("transformed")}`);
+			r.push(` ${fg.peach("transformed")}`);
 		return r.join("");
 	}
 }

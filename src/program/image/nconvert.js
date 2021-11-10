@@ -1,14 +1,19 @@
-/*
 import {Program} from "../../Program.js";
+import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
 export class nconvert extends Program
 {
-	website = "https://www.xnview.com/en/nconvert/";
+	website       = "https://www.xnview.com/en/nconvert/";
 	gentooPackage = "media-gfx/nconvert";
 	gentooOverlay = "dexvert";
-	flags = {"nconvertFormat":"Which nconvert format to force conversion as. For list run `nconvert -help` Default: Let nconvert decide"};
+	flags         =
+	{
+		inType : "Which nconvert format to force conversion as. For list run `nconvert -help` Default: Let nconvert decide"
+	};
+	
+	bin  = "nconvert";
+	args = r => [...(r.flags.inType ? ["-in", r.flags.inType] : []), "-out", "png", "-o", path.join(r.output.dir.rel, "out.png"), r.input.main.rel]
 }
-*/
 
 /*
 "use strict";
@@ -26,7 +31,6 @@ exports.meta =
 	}
 };
 
-exports.bin = () => "nconvert";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile.png")) =>
 {
 	const nconvertArgs = [];

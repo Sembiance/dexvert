@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil} from "xutil";
 import {identify} from "../identify.js";
 import {DexFile} from "../DexFile.js";
@@ -37,11 +37,11 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 		family    : rows.map(({family}) => (family || "").length).max()
 	};
 	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid, unsupported}) => ({
-		from : from==="dexvert" ? xu.cf.fg.green(from) : from,
+		from : from==="dexvert" ? fg.green(from) : from,
 		confidence,
-		format : `${from!=="dexvert" ? magic.innerTruncate(75) : magic}${unsupported ? xu.cf.fg.deepSkyblue(" unsupported") : ""}`,
+		format : `${from!=="dexvert" ? magic.innerTruncate(75) : magic}${unsupported ? fg.deepSkyblue(" unsupported") : ""}`,
 		extensions,
-		dexvert : `${from!=="dexvert" ? "" : `${xu.cf.fg.peach(matchType.padStart(maxes.matchType))} ${xu.cf.fg.yellow(family.padStart(maxes.family))}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(formatid)}`}`}));
+		dexvert : `${from!=="dexvert" ? "" : `${fg.peach(matchType.padStart(maxes.matchType))} ${fg.yellow(family.padStart(maxes.family))}${fg.cyan("/")}${fg.yellowDim(formatid)}`}`}));
 	console.log(printUtil.columnizeObjects(printRows, {
 		colNameMap : {confidence : "%"},
 		color      : {confidence : "white"}}));

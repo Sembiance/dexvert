@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {DexFile} from "./DexFile.js";
 
@@ -175,6 +175,6 @@ export class Detection
 
 	pretty(prefix="")
 	{
-		return `${prefix}${xu.cf.fg.orange(this.from.padStart(8, " "))} ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}% ${xu.cf.fg.magenta(this.value)}${this.weak ? xu.cf.fg.deepSkyblue("weak") : ""}`;
+		return `${prefix}${fg.orange(this.from.padStart(8, " "))} ${fg.white(this.confidence.toString().padStart(3, " "))}% ${fg.magenta(this.value)}${this.weak ? fg.deepSkyblue("weak") : ""}`;
 	}
 }

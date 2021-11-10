@@ -1,8 +1,8 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
-import {validateClass} from "./validate.js";
+import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*2;
@@ -25,30 +25,35 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "amigappc", "gentoo", "win2k", "winxp"]},	// where to run this program at. Default is local
+			loc       : {type : "string", required : true, enum : ["local", "amigappc", "gentoo", "win2k", "winxp"]},
 
 			// meta
-			gentooPackage  : {types : ["string", Array]},	// gentoo package atom
-			gentooOverlay  : {type : "string"},				// gentoo overlay
-			gentooUseFlags : {type : "string"},				// gentoo use flags set for the gentoo package
-			website        : {type : "string", url : true},	// homepage URL for this program
-			notes          : {type : "string"},				// notes about this program
+			gentooPackage  : {types : ["string", Array]},
+			gentooOverlay  : {type : "string"},
+			gentooUseFlags : {type : "string"},
+			website        : {type : "string", url : true},
+			notes          : {type : "string"},
+			flags          : {type : Object},
+			renameOut      : {type : Object},
 
 			// execution
-			bin  : {type : "string"},				// path to the binary to run. Can't have bin and exec.
-			exec : {type : "function", length : 1},	// function of code to run instead of bin. Can't have bin and exec.
-			args : {type : "function", length : 1}, // returns an array of the program arguments
-			post : {type : "function", length : 1}	// is called after the program is finished being executed
+			bin  : {type : "string"},
+			exec : {type : "function", length : 1},
+			args : {type : "function", length : 1},
+			post : {type : "function", length : 1}
 		});
+
+		if(program.renameOut)
+			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}});
 
 		return program;
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0}={})
+	async run(input, output, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput, outExt}={})
 	{
 		// create a RunState to store program results/meta
-		const r = RunState.create({programid : this.programid, input, output});
+		const r = RunState.create({programid : this.programid, input, output, flags});
 
 		if(this.bin)
 		{
@@ -57,7 +62,7 @@ export class Program
 			r.args = await this.args(r);
 			r.runOptions = {cwd : input.root, timeout};
 			if(verbose>=4)
-				xu.log`Program ${xu.cf.fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
+				xu.log`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
@@ -65,31 +70,45 @@ export class Program
 		{
 			// run arbitrary javascript code
 			if(verbose>=4)
-				xu.log`Program ${xu.cf.fg.orange(this.programid)} executing ${".exec"} steps`;
+				xu.log`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
 
 		if(r.output)
 		{
 			// we may have new files on disk in r.output.root
+
 			// first we have to run fixPerms in order to ensure we can access the new files
-			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : r.output.root});
+			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : r.output.dir.absolute});
 
-			// now find the new output files
-			const newFiles = await fileUtil.tree(r.output.root, {nodir : true});
-			console.log(newFiles);
+			// delete empty files/broken symlinks. find is very fast at this, so use that
+			await runUtil.run("find", [r.output.dir.absolute, "-type", "f", "-empty", "-delete"]);
+			await runUtil.run("find", [r.output.dir.absolute, "-xtype", "l", "-delete"]);
+
+			// also delete any 'special' files that may be dangerous to process. block special, character special named pipe, socket
+			await runUtil.run("find", [r.output.dir.absolute, "-type", "b,c,p,s", "-delete"]);
+
+			// now find any new files on disk in the output dir that we don't yet
+			const newFiles = (await fileUtil.tree(r.output.dir.absolute, {nodir : true})).subtractAll(r.output.all.map(v => v.absolute));
+			if(newFiles.length>0)
+				await r.output.addAll("new", newFiles);
 		}
-
-
-		/*
-* Program: Then find any new output files and stick in output.add("new", files)
-  Will need to do a tree in output.root and subtract any already in output.main
-
-* Program: Then run program.post() if it is set
-*/
 
 		if(this.post)
 			await this.post(r);
+		
+		// if we have just a single new output file, we perform some renaming of it
+		if(r.output && r.output.files.new?.length===1)
+		{
+			const ro = Object.assign({ext : outExt || "", name : true}, this.renameOut);
+			const newFilename = (ro.name===true ? (originalInput?.name || r.input.main.name) : (ro.name || r.output.new.name)) + (ro.ext || r.output.new.ext);
+			if(newFilename!==r.output.new.base)
+			{
+				if(verbose>=3)
+					xu.log`Program ${fg.orange(this.programid)} renaming the single output file [${r.output.new.pretty()}] to ${newFilename}`;
+				await r.output.new.rename(newFilename);
+			}
+		}
 
 		if(verbose>=3)
 			console.log(r.pretty());

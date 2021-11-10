@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {DexFile} from "./DexFile.js";
 
@@ -38,13 +38,13 @@ export class Identification
 	pretty(prefix="")
 	{
 		const r = [prefix];
-		r.push(xu.cf.fg.orange(this.from.padStart(8, " ")));
-		r.push(` ${xu.cf.fg.white(this.confidence.toString().padStart(3, " "))}%`);
-		r.push(` ${xu.cf.fg.magenta(this.magic)}`);
+		r.push(fg.orange(this.from.padStart(8, " ")));
+		r.push(` ${fg.white(this.confidence.toString().padStart(3, " "))}%`);
+		r.push(` ${fg.magenta(this.magic)}`);
 		if(this.from==="dexvert")
-			r.push(` ${xu.cf.fg.peach(this.matchType)} ${xu.cf.fg.yellow(this.family)}${xu.cf.fg.cyan("/")}${xu.cf.fg.yellowDim(this.formatid)}`);
+			r.push(` ${fg.peach(this.matchType)} ${fg.yellow(this.family)}${fg.cyan("/")}${fg.yellowDim(this.formatid)}`);
 		if(this.unsupported)
-			r.push(xu.cf.fg.deepSkyblue(" unsupported"));
+			r.push(fg.deepSkyblue(" unsupported"));
 		return r.join("");
 	}
 }

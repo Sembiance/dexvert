@@ -22,7 +22,7 @@ Deno.test("create", async () =>
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]});
-	d.changeRoot("/tmp/path/dir");
+	d.changeRoot("/tmp/path/dir", {keepRel : true});
 
 	[a, b, c, e].forEach(o =>
 	{
@@ -38,9 +38,9 @@ Deno.test("create", async () =>
 
 Deno.test("changeRoot", async () =>
 {
-	const a = await FileSet.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", files : {main : ["some.big.txt.file.txt", "subDir/txt.b", "subDir/symlinkFile", "subDir/more_sub/c.txt", "subDir/more_sub/third"]}});
+	let a = await FileSet.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", files : {main : ["some.big.txt.file.txt", "subDir/txt.b", "subDir/symlinkFile", "subDir/more_sub/c.txt", "subDir/more_sub/third"]}});
 	const b = a.clone();
-	b.changeRoot("/some/other/dir/");
+	b.changeRoot("/some/other/dir/", {keepRel : true});
 
 	// test original
 	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
@@ -65,6 +65,26 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(b.all[2].absolute, "/some/other/dir/subDir/symlinkFile");
 	assertStrictEquals(b.all[2].dir, "/some/other/dir/subDir");
 	assertStrictEquals(b.all[2].name, "symlinkFile");
+
+	a = await FileSet.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", files : {main : ["some.big.txt.file.txt", "subDir/txt.b", "subDir/symlinkFile", "subDir/more_sub/c.txt", "subDir/more_sub/third"]}});
+	a.changeRoot("/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub");
+	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub");
+	assertStrictEquals(a.files.main.length, 5);
+	assertStrictEquals(a.all.length, 5);
+	assertStrictEquals(a.main.name, "some.big.txt.file");
+	assertStrictEquals(a.main.size, 6);
+	assertStrictEquals(a.all[2].isSymlink, true);
+	assertStrictEquals(a.files.main[2].isSymlink, true);
+	assertStrictEquals(a.all[2].rel, "../symlinkFile");
+	assertStrictEquals(a.all[2].root, "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub");
+	assertStrictEquals(a.all[2].absolute, "/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
+	assertStrictEquals(a.all[2].dir, "/mnt/compendium/DevLab/dexvert/test/files/subDir");
+	assertStrictEquals(a.all[2].name, "symlinkFile");
+
+	assertStrictEquals(a.all[0].rel, "../../some.big.txt.file.txt");
+	assertStrictEquals(a.all[1].rel, "../txt.b");
+	assertStrictEquals(a.all[3].rel, "c.txt");
+	assertStrictEquals(a.all[4].rel, "third");
 });
 
 Deno.test("addFile", async () =>
@@ -122,6 +142,7 @@ Deno.test("rsyncTo", async () =>
 		"subDir/more_sub",
 		"subDir/more_sub/c.txt",
 		"subDir/symlinkFile"].map(v => path.join(tmpDirPath, v)));
+	await Deno.remove(tmpDirPath, {recursive : true});
 });
 
 Deno.test("pretty", async () =>
@@ -132,7 +153,7 @@ Deno.test("pretty", async () =>
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
 
-	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzM4OzU7MjUwbUYbWzBtIBtbOTdtICAgIDZiG1swbSAbWzkzbS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzMzbXNvbWUuYmlnLnR4dC5maWxlLnR4dBtbMG0KCRtbMzg7NTsyNTBtRhtbMG0gG1s5N20gICAgOGIbWzBtIBtbOTNtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbMzNtc3ViRGlyL3R4dC5iG1swbQoJG1s5NW1EG1swbSAbWzk3bSAgIDRLQhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk2bUwbWzBtIBtbOTdtICAgMTRiG1swbSAbWzkzbS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzMzbXN1YkRpci9zeW1saW5rRmlsZRtbMG0KCRtbMzg7NTsyNTBtRhtbMG0gG1s5N20gICAxMGIbWzBtIBtbOTNtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbMzNtc3ViRGlyL21vcmVfc3ViL2MudHh0G1swbQ==");	// eslint-disable-line max-len
+	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bSBtYWluOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bSBtYWluOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bSBtYWluOiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
 });
 
 const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files":{"main":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/txt.b","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b","base":"txt.b","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"txt","ext":".b","preExt":".txt","preName":"b","isFile":true,"isDirectory":false,"isSymlink":false,"size":8,"ts":1635685484995},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/third","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third","base":"third","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"third","ext":"","preExt":"","preName":"third","isFile":false,"isDirectory":true,"isSymlink":false,"size":4096,"ts":1635685489475}],"other":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/symlinkFile","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile","base":"symlinkFile","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"symlinkFile","ext":"","preExt":"","preName":"symlinkFile","isFile":false,"isDirectory":false,"isSymlink":true,"size":14,"ts":1635685795866},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/c.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt","base":"c.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"c","ext":".txt","preExt":".c","preName":"txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":10,"ts":1635685592959}]}}`; // eslint-disable-line max-len
@@ -150,6 +171,6 @@ Deno.test("serialize", async () =>
 Deno.test("deserialize", () =>
 {
 	const a = FileSet.deserialize(JSON.parse(fileSetJSON));	// eslint-disable-line no-restricted-syntax
-	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzM4OzU7MjUwbUYbWzBtIBtbOTdtICAgIDZiG1swbSAbWzkzbS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzMzbXNvbWUuYmlnLnR4dC5maWxlLnR4dBtbMG0KCRtbMzg7NTsyNTBtRhtbMG0gG1s5N20gICAgOGIbWzBtIBtbOTNtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbMzNtc3ViRGlyL3R4dC5iG1swbQoJG1s5NW1EG1swbSAbWzk3bSAgIDRLQhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk2bUwbWzBtIBtbOTdtICAgMTRiG1swbSAbWzkzbS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzMzbXN1YkRpci9zeW1saW5rRmlsZRtbMG0KCRtbMzg7NTsyNTBtRhtbMG0gG1s5N20gICAxMGIbWzBtIBtbOTNtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbMzNtc3ViRGlyL21vcmVfc3ViL2MudHh0G1swbQ==");	// eslint-disable-line max-len
+	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bSBtYWluOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bSBtYWluOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bSBtYWluOiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
 	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
 });

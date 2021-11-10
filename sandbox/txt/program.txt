@@ -7,6 +7,9 @@ Where to run this program at. One of: local, amigappc, gentoo, win2k, winxp
 >>> website : "https://entropymine.com/deark/"
 A website URL For the program
 
+>>> flags : { inFormat : "Force programid to use this format", ... }
+An object of key/value pairs of various flag properties you can set when running the program to modify the behavior of this program
+
 >>> notes : "Blah blah"
 Additional notes about this program
 
@@ -37,6 +40,14 @@ Instead of bin, you can just run abritrary code for this program.
 
 >>> post = async (runState) => { ... }
 This will be executed directly AFTER the program has finished running (either bin or exec)
+
+>>> renameOut = { ext : ".png", name : true }
+If a single output file is produced, it can be automatically renamed.
+If ext is a string, the single output file will be given that extension
+default ext is different per family. So image is .png, audio is .wav, etc
+If ext is set to an untruthy value false/null/etc then it won't rename the ext
+If name is set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string.
+If name is set to false, the filename won't be renamed. 
 
 
 

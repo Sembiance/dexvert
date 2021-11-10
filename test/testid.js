@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil} from "xutil";
 import {Identification} from "../src/Identification.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
@@ -35,7 +35,7 @@ Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.rel
 	if(!argv.format || !extraFilePath.startsWith(path.join(argv.format, "/")))
 		return;
 
-	xu.log`${xu.cf.fg.cyan("[") + xu.c.blink + xu.cf.fg.red("EXTRA") + xu.cf.fg.cyan("]")} file path detected: ${extraFilePath}`;
+	xu.log`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
 	if(argv.record)
 		delete testData[extraFilePath];
 });
@@ -49,7 +49,7 @@ async function testSample(sampleFilePath)
 	
 	function fail(msg)
 	{
-		xu.log`${passChain>0 ? "\n" : ""}${xu.cf.fg.cyan("[")}${xu.c.blink + xu.cf.fg.red("FAIL")}${xu.cf.fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.cf.fg.orange(msg)}`;
+		xu.log`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${fg.orange(msg)}`;
 		if(passChain>0)
 			passChain = 0;
 	}
@@ -82,7 +82,7 @@ async function testSample(sampleFilePath)
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return fail(`No test data for this file: ${xu.cf.fg.cyan("[")}${ids.map(id => id.pretty()).join(xu.cf.fg.cyan("] ["))}${xu.cf.fg.cyan("]")}`);
+		return fail(`No test data for this file: ${fg.cyan("[")}${ids.map(id => id.pretty()).join(fg.cyan("] ["))}${fg.cyan("]")}`);
 	
 	for(const id of ids)
 	{
@@ -90,7 +90,7 @@ async function testSample(sampleFilePath)
 		if(!previd)
 			return fail(`New identification detected: ${id.pretty()}`);
 		else if(previd.confidence!==id.confidence)
-			return fail(`Confidence level changed for ${xu.cf.fg.white(id.formatid) + xu.c.fg.orange} was ${xu.cf.fg.white(previd.confidence) + xu.c.fg.orange} and now ${xu.cf.fg.white(id.confidence)}`);
+			return fail(`Confidence level changed for ${fg.white(id.formatid) + xu.c.fg.orange} was ${fg.white(previd.confidence) + xu.c.fg.orange} and now ${fg.white(id.confidence)}`);
 	}
 
 	for(const previd of testData[sampleSubFilePath])

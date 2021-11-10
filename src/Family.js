@@ -16,7 +16,8 @@ export class Family
 		const family = new this();
 		validateClass(family, {
 			// meta
-			metaids : {type : ["string"]},
+			metaids : {type : ["string"]},	// list of meta provider id strings
+			outExt  : {type : "string"},	// default extension that most output files should have in this family
 			getMeta : {type : "function", length : [1]}
 		});
 		return family;

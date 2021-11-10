@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import {runUtil} from "xutil";
 import {DexFile} from "./DexFile.js";
@@ -73,7 +73,7 @@ export class FileSet
 			await runUtil.run("rsync", ["-aL", path.join(this.root, file.rel), path.join(targetRoot, file.rel)]);
 		}
 
-		return this.clone().changeRoot(targetRoot);
+		return this.clone().changeRoot(targetRoot, {keepRel : true});
 	}
 
 	async addAll(type, files)
@@ -111,11 +111,11 @@ export class FileSet
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
-	changeRoot(newRoot)
+	changeRoot(newRoot, o={})
 	{
 		this.root = path.resolve(newRoot);
 		for(const file of this.all)
-			file.changeRoot(newRoot);
+			file.changeRoot(newRoot, o);
 		
 		return this;
 	}
@@ -150,13 +150,20 @@ export class FileSet
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${xu.cf.fg.white("FileSet")} ${xu.cf.fg.cyan("(")}${xu.cf.fg.white("root ")}${xu.cf.fg.magentaDim(this.root)}${xu.cf.fg.cyan(")")} has ${xu.cf.fg.white(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
-		r.push(...this.all.map(f => f.pretty(`${prefix}\t`)));
-		return r.join("\n");
+		r.push(`${prefix}${fg.white("FileSet")} ${fg.cyan("(")}${fg.white("root ")}${fg.magentaDim(this.root)}${fg.cyan(")")} has ${fg.white(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
+		if(this.all.length>0)
+		{
+			const longestType = Object.keys(this.files).map(v => v.length).max();
+			for(const [type, typeFiles] of Object.entries(this.files))
+				r.push(...typeFiles.map(f => f.pretty(`\n${prefix}\t${fg.white(`${type.padStart(longestType, " ")}: `)}`)));
+		}
+		return r.join("");
 	}
 
 	// shortcut getters to return single/multi often used categories
 	get all() { return Object.values(this.files).flat(); }
 	get main() { return (this.files.main || [])[0]; }
+	get new() { return (this.files.new || [])[0]; }
+	get dir() { return (this.files.dir || [])[0]; }
 	get aux() { return (this.files.aux || [])[0]; }
 }

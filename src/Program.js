@@ -60,7 +60,12 @@ export class Program
 			// run a program on disk
 			r.bin = this.bin;
 			r.args = await this.args(r);
-			r.runOptions = {cwd : f.root, timeout};
+			r.runOptions = {cwd : f.root, setTimeout};
+			if(f.homeDir)
+				r.runOptions.env = {HOME : f.homeDir.absolute};
+			if(verbose>=5)
+				r.runOptions.verbose = true;
+				
 			if(verbose>=4)
 				xu.log`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
@@ -89,9 +94,20 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
 
 			// now find any new files on disk in the output dir that we don't yet
-			const newFiles = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll((f.output || []).map(v => v.absolute));
-			if(newFiles.length>0)
-				await f.addAll("new", newFiles);
+			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll((f.output || []).map(v => v.absolute)))
+			{
+				// if the new file is identical to our input file, delete it
+				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
+				{
+					if(verbose>=3)
+						xu.log`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
+					await Deno.remove(newFilePath);
+					continue;
+				}
+
+				// add our new file to our fileset
+				await f.add("new", newFilePath);
+			}
 		}
 
 		if(this.post)

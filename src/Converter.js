@@ -37,7 +37,8 @@ export class Converter
 				}).filter(v => !!v));
 
 				// run prog
-				const r = await Program.runProgram(programid, this.dexState.f, {flags, verbose : this.dexState.verbose, originalInput : this.dexState.original.input, outExt : this.dexState.format.family.outExt});
+				const programOptions = {flags, verbose : this.dexState.verbose, originalInput : this.dexState.original.input, outExt : this.dexState.format.family.outExt};
+				const r = await Program.runProgram(programid, this.dexState.f, programOptions);
 			}
 		}
 	}

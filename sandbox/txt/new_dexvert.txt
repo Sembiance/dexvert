@@ -1,14 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Have dexvert.js create a cwd/home dir just like I do with "out"
-Run all programs with a HOME env of that. (Research what other env variables I should change online and check printenv). If it's more than just HOME, consider adding "homeDirPath" or just "home" as a new option to runUtil.run
-Also strongly consider using "clearEnv" option as a default with runUtil.run and add an option inheritEnv that must be set to skip setting this option
-
-* Migrate from node-modules/xutil/fileUtil to deno fileUtil areEqual()
-
-* Program.js: Check newFiles array (before adding to output) and filter out any that areEqual() to the f.input.absolute
-
 * Migrate tensor over, get this running with app/dexserver.js
 
 * Converter.js: After program is run, call await this.dexState.format.family.verify(input, output);

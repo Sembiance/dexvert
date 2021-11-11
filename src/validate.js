@@ -22,7 +22,8 @@ function validate(basePrefix, suffix, o, schema)
 
 	for(const [propid, prop] of Object.entries(schema))
 	{
-		if(!Object.hasOwn(o, propid) || typeof o[propid]==="undefined")
+		const value = o[propid];
+		if(typeof value==="undefined")
 		{
 			if(prop.required)
 				throw new Error(`${prefix} is missing required property [${propid}] ${suffix}`);
@@ -31,8 +32,6 @@ function validate(basePrefix, suffix, o, schema)
 		}
 
 		prefix = `${basePrefix}.[${propid}]`;
-
-		const value = o[propid];
 
 		// validate the property type
 		if(prop.type)

@@ -39,40 +39,22 @@ export async function classifyImage(imagePath, modelName)
 
 	await runUtil.run("autocrop", [pngTrimmedPath], RUN_OPTIONS);
 
+	const confidences = [];
 	for(const [i, tmpImagePath] of tmpImagePaths.entries())
 	{
 		await cropImage({inPath : pngTrimmedPath, outPath : tmpImagePath, method : CROP_METHODS[i]});
 		if(!(await fileUtil.exists(tmpImagePath)))
 			continue;
 		
-		const r = await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/classify/${modelName}`, {method : "POST", body : JSON.stringify({imagePath : tmpImagePath})});
-		console.log(r);
+		const r = (await (await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()) || {};
+
+		await Deno.remove(tmpImagePath);
+		
+		if(r?.Confidences.length===2)
+			confidences.push(r.Confidences[0]);
 	}
 
-	/*function parseClassification(resultRaw)
-	{
-		let confidence = null;
-		try
-		{
-			const result = JSON.parse(resultRaw.toString());
-			if(result.error)
-				return setImmediate(() => cb(new Error(result.error)));
-			
-			confidence = result.Confidences[0];
-		}
-		catch(err) {}
+	await Deno.remove(pngTrimmedPath);
 
-		return {confidence : confidence||0, raw : resultRaw.toString()};
-	}
-
-
-	tiptoe(
-		function parseClassifications(resultsRaw)
-		{
-			this.parallel()(undefined, {confidence : resultsRaw.map(rawGP => parseClassification(rawGP).confidence).average(), raw : resultsRaw.map(v => v.toString())});
-			tmpImagePaths.parallelForEach((tmpImagePath, subcb) => fileUtil.unlink(tmpImagePath, subcb), this.parallel());
-			fileUtil.unlink(pngTrimmedPath, this.parallel());
-		},
-		cb
-	);*/
+	return confidences.average();
 }

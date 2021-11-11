@@ -36,6 +36,8 @@ export class image extends Family
 						meta[key.toLowerCase()] = val;
 				});
 			}
+			await Deno.remove(r.f.outDir.absolute, {recursive : true});
+			await Deno.remove(r.f.homeDir.absolute, {recursive : true});
 		}
 
 		return meta;

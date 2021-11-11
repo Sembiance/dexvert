@@ -113,12 +113,5 @@ export class FileSet
 		return r.join("");
 	}
 
-	// shortcut getters to return single/multi often used categories
 	get all() { return Object.values(this.files).flat(); }
-	/*get input() { return (this.files.input || [])[0]; }
-	get output() { return (this.files.output || [])[0]; }
-	get new() { return (this.files.new || [])[0]; }
-	get outDir() { return (this.files.outDir || [])[0]; }
-	get homeDir() { return (this.files.homeDir || [])[0]; }
-	get aux() { return (this.files.aux || [])[0]; }*/
 }

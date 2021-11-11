@@ -1,3 +1,14 @@
+import { DOMParser, Element } from "https://deno.land/x/deno_dom/deno-dom-native.ts";
 
-const r = await fetch("https://webhook.site/d2697520-afec-42d9-a772-3b338a9011d1", {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : "/path/to/image.png"})});
-console.log(r);
+const doc = new DOMParser().parseFromString(`
+  <h1>Hello World!</h1>
+  <p>Hello from <a href="https://deno.land/">Deno!</a></p>
+`, "text/html");
+
+const p = doc.querySelector("p");
+
+console.log(p.textContent); // "Hello from Deno!"
+console.log(p.childNodes[1].textContent); // "Deno!"
+
+p.innerHTML = "DOM in <b>Deno</b> is pretty cool";
+console.log(p.children[0].outerHTML); // "<b>Deno</b>"

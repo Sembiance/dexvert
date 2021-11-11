@@ -4,6 +4,8 @@ import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
 import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
+import {FileSet} from "./FileSet.js";
+import {DexFile} from "./DexFile.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*2;
 
@@ -52,6 +54,13 @@ export class Program
 	// runs the current program with the given input and output FileSets and various options
 	async run(f, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput, outExt}={})
 	{
+		if(!(f instanceof FileSet))
+			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
+		
+		const unknownFlags = Object.keys(flags).subtractAll(Object.keys(this.flags || {}));
+		if(unknownFlags.length>0)
+			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
+
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags});
 
@@ -60,7 +69,7 @@ export class Program
 			// run a program on disk
 			r.bin = this.bin;
 			r.args = await this.args(r);
-			r.runOptions = {cwd : f.root, setTimeout};
+			r.runOptions = {cwd : f.root, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(verbose>=5)
@@ -138,6 +147,24 @@ export class Program
 		const program = (await this.loadPrograms())[programid];
 		if(!program)
 			throw new Error(`Unknown programid: ${programid}`);
+
+		// if our first arg isn't a FileSet, then we will create a temporary one
+		if(!(args[0] instanceof FileSet))
+		{
+			const arg0 = args.shift();
+			const inputFile = arg0 instanceof DexFile ? arg0.clone() : await DexFile.create(arg0);
+			const f = await FileSet.create(inputFile.root, "input", inputFile);
+			
+			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}-out`);
+			await Deno.mkdir(outDirPath, {recursive : true});
+			await f.add("outDir", outDirPath);
+
+			const homeDirPath = await fileUtil.genTempPath(undefined, `${programid}-home`);
+			await Deno.mkdir(homeDirPath, {recursive : true});
+			await f.add("homeDir", homeDirPath);
+
+			args.unshift(f);
+		}
 		
 		return program.run(...args);
 	}

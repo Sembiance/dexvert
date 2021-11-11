@@ -1,14 +1,39 @@
-/*
 import {Program} from "../../Program.js";
 
 export class deark extends Program
 {
-	website = "https://entropymine.com/deark/";
+	website       = "https://entropymine.com/deark/";
 	gentooPackage = "app-arch/deark";
 	gentooOverlay = "dexvert";
-	flags = {"dearkCharOutput":"Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.","dearkNoThumbs":"Don't extract any thumb files found","dearkFile2":"An extra file that can be used by deark module to get the correct palette or image names","dearkGIFDelay":"Duration of delay between animation frames. Default: 12","dearkJoinFrames":"Treat output files as individual images frames of an animation and join them together as an MP4","dearkKeepAsGIF":"If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4","dearkModule":"Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide","dearkOpts":"An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark","dearkRemoveDups":"Remove any duplicate output files, based on sum. Default: false","dearkReplaceExt":"An object of keys that are extensions to replace with their values. Only works with a single output file."};
+
+	flags =
+	{
+		"module"      : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
+		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
+		"opts"        : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark"
+		//"dearkNoThumbs"   : "Don't extract any thumb files found",
+		//"dearkFile2"      : "An extra file that can be used by deark module to get the correct palette or image names",
+		//"dearkGIFDelay"   : "Duration of delay between animation frames. Default: 12",
+		//"dearkJoinFrames" : "Treat output files as individual images frames of an animation and join them together as an MP4",
+		//"dearkKeepAsGIF"  : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4",
+		//"dearkRemoveDups" : "Remove any duplicate output files, based on sum. Default: false",
+		//"dearkReplaceExt" : "An object of keys that are extensions to replace with their values. Only works with a single output file."};
+	};
+
+	bin  = "deark";
+	args = r =>
+	{
+		const args = ["-maxfiles", "9999"];
+		if(r.flags.module)
+			args.push("-m", r.flags.module);
+		
+		const opts = Array.from(r.flags.opts || []);
+		if(r.flags.charOutType)
+			opts.push(`char:output=${r.flags.charOutType || "image"}`);
+		
+		return [...args, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.f.outDir.rel, "-o", "out", r.f.input.rel];
+	};
 }
-*/
 
 /*
 "use strict";
@@ -43,12 +68,8 @@ exports.meta =
 
 exports.BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
 
-exports.bin = () => "deark";
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath, outName=state.input.name) =>
 {
-	const args = ["-maxfiles", "9999"];
-	if(r.flags.dearkModule)
-		args.push("-m", r.flags.dearkModule);
 	if(r.flags.dearkNoThumbs)
 		args.push("-main");
 	if(r.flags.dearkFile2)

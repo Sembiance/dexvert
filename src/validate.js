@@ -81,7 +81,8 @@ function validate(basePrefix, suffix, o, schema)
 			if(Array.isArray(prop.length))
 			{
 				assert(value.length>=prop.length[0], `${prefix} value [${value}] expected to be at least ${prop.length[0]} long but is [${value.length}] long ${suffix}`);
-				assert(value.length<=prop.length[1], `${prefix} value [${value}] expected to less than ${prop.length[1]} long but is [${value.length}] long ${suffix}`);
+				if(prop.length>1)
+					assert(value.length<=prop.length[1], `${prefix} value [${value}] expected to be less than ${prop.length[1]} long but is [${value.length}] long ${suffix}`);
 			}
 			else
 			{

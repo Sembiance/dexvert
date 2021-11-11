@@ -26,7 +26,7 @@ export class Format
 	// will get meta info for this particular format and the passed input fileset
 	getMeta(inputFile)
 	{
-		return this.family.getMeta(inputFile, this);
+		return this.family.getMeta(inputFile, this) || {};
 	}
 
 	// returns a pretty string to output to console

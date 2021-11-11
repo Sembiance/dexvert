@@ -1,5 +1,7 @@
 import {Family} from "../Family.js";
-import {imageUtil} from "xutil";
+import {Program} from "../Program.js";
+import {imageUtil, fileUtil} from "xutil";
+import {DOMParser} from "https://deno.land/x/deno_dom@v0.1.17-alpha/deno-dom-native.ts";
 
 export class image extends Family
 {
@@ -17,6 +19,26 @@ export class image extends Family
 		// imageMagick meta provider
 		if(format.metaProviders.includes("image"))
 			Object.assign(meta, await imageUtil.getInfo(inputFile.absolute));
+
+		if(format.metaProviders.includes("ansiArt"))
+		{
+			// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
+			const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
+			if(r.f.new)
+			{
+				const htmlRaw = await fileUtil.readFile(r.f.new.absolute);
+				const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
+				Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
+				{
+					const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
+					const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
+					if(key && val && key.length>0 && val.length>0)
+						meta[key.toLowerCase()] = val;
+				});
+			}
+		}
+
+		return meta;
 	}
 }
 
@@ -225,42 +247,6 @@ exports.updateProcessed = function updateProcessed(state, p, cb)
 	
 	setImmediate(cb);
 };
-
-// Standard inputMeta function for ANSI Art images we support
-exports.ansiArtInputMeta = function ansiArtInputMeta(state, p, cb)
-{
-	tiptoe(
-		function convertWithDeark()
-		{
-			p.util.program.run("deark", {flags : {dearkCharOutput : "html"}, argsd : [state.input.filePath, state.cwd]})(state, p, this);
-		},
-		function parseHTMLForMeta()
-		{
-			const htmlFilePath = path.join(state.cwd, `${state.input.name}.000.html`);
-
-			if(!fileUtil.existsSync(htmlFilePath))
-				return this.finish();
-
-			const doc = domino.createWindow(fs.readFileSync(htmlFilePath, XU.UTF8)).document;
-			const meta = {};
-
-			Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
-			{
-				const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
-				const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
-				if(key && val && key.length>0 && val.length>0)
-					meta[key.toLowerCase()] = val;
-			});
-
-			if(Object.keys(meta).length>0)
-				state.input.meta.ansiArt = meta;
-			
-			this();
-		},
-		cb
-	);
-};
-
 
 // Standard inputMeta function for RAW dark table supported images
 exports.darkTableInputMeta = function darkTableInputMeta(state, p, cb)

@@ -65,9 +65,9 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		const f = await originalInputFileSet.rsyncTo(cwd);
 
 		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
-		const outFilePath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
-		await Deno.mkdir(outFilePath, {recursive : true});
-		await f.add("outDir", outFilePath);
+		const outDirPath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
+		await Deno.mkdir(outDirPath, {recursive : true});
+		await f.add("outDir", outDirPath);
 
 		// create a 'home' dir (or a unique name if taken already) and run programs with a HOME env set to that, this avoids issues when running the same program multiple times at once and it uses some sort of HOME .config lock file
 		const homeFilePath = (await fileUtil.exists(path.join(cwd, "home")) ? (await fileUtil.genTempPath(cwd, "home")) : path.join(cwd, "home"));
@@ -95,8 +95,6 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		else
 			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
 
-		Object.assign(dexState.meta, await format.getMeta(f.input, format));
-
 		const cleanup = async () =>
 		{
 			if(verbose>=5)
@@ -112,6 +110,8 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 
 		try
 		{
+			Object.assign(dexState.meta, await format.getMeta(f.input, format));
+			
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{
 				dexState.processed = true;

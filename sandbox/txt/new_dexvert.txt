@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get the final darktable image.getMeta provider working (test with a format that supports that)
-
 * Converter.js: After program is run, call await this.dexState.format.family.verify(input, output);
 
 * Family.verify: It will check the files in output.new and verify they are valid images/wavs/etc

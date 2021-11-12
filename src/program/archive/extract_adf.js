@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class extract-adf extends Program
+export class extract_adf extends Program
 {
 	website = "https://github.com/mist64/extract-adf";
 	gentooPackage = "app-arch/extract-adf";

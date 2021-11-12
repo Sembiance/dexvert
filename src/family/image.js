@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
@@ -9,35 +10,47 @@ export class image extends Family
 	outExt = ".png";
 
 	// gets meta information for the given input and format
-	async getMeta(inputFile, format)
+	async getMeta(inputFile, format, {verbose}={})
 	{
 		if(!format.metaProviders)
 			return;
 
 		const meta = {};
-
-		// imageMagick meta provider
-		if(format.metaProviders.includes("image"))
-			Object.assign(meta, await imageUtil.getInfo(inputFile.absolute));
-
-		if(format.metaProviders.includes("ansiArt"))
+		for(const metaProvider of format.metaProviders)
 		{
-			// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
-			const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
-			if(r.f.new)
+			if(verbose>=3)
+				xu.log`image.getMeta() getting meta from provider ${metaProvider}`;
+
+			// imageMagick meta provider
+			if(metaProvider==="image")
+				Object.assign(meta, await imageUtil.getInfo(inputFile.absolute));
+
+			if(metaProvider==="ansiArt")
 			{
-				const htmlRaw = await fileUtil.readFile(r.f.new.absolute);
-				const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
-				Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
+				// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
+				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
+				if(r.f.new)
 				{
-					const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
-					const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
-					if(key && val && key.length>0 && val.length>0)
-						meta[key.toLowerCase()] = val;
-				});
+					const htmlRaw = await fileUtil.readFile(r.f.new.absolute);
+					const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
+					Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
+					{
+						const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
+						const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
+						if(key && val && key.length>0 && val.length>0)
+							meta[key.toLowerCase()] = val;
+					});
+				}
+				await Deno.remove(r.f.outDir.absolute, {recursive : true});
+				await Deno.remove(r.f.homeDir.absolute, {recursive : true});
 			}
-			await Deno.remove(r.f.outDir.absolute, {recursive : true});
-			await Deno.remove(r.f.homeDir.absolute, {recursive : true});
+
+			if(metaProvider==="darkTable")
+			{
+				const r = await Program.runProgram("darktable_rs_identify", inputFile);
+				if(r.meta?.dimUncropped && r.meta.dimUncropped.split("x").length===2)
+					meta.image = { width : +r.meta.dimUncropped.split("x")[0], height : +r.meta.dimUncropped.split("x")[1] };
+			}
 		}
 
 		return meta;
@@ -248,29 +261,6 @@ exports.updateProcessed = function updateProcessed(state, p, cb)
 		return p.format.updateProcessed(state, p, cb);
 	
 	setImmediate(cb);
-};
-
-// Standard inputMeta function for RAW dark table supported images
-exports.darkTableInputMeta = function darkTableInputMeta(state, p, cb)
-{
-	tiptoe(
-		function runDarkTableRSIdentify()
-		{
-			p.util.program.run("darktable-rs-identify")(state, p, this);
-		},
-		function recordMeta({meta : darkTableMeta}={})
-		{
-			if(Object.keys(darkTableMeta).length>0)
-			{
-				if(darkTableMeta.dimUncropped && darkTableMeta.dimUncropped.split("x").length===2)
-					state.input.meta.image = { width : +darkTableMeta.dimUncropped.split("x")[0], height : +darkTableMeta.dimUncropped.split("x")[1] };
-				state.input.meta.darkTable = darkTableMeta;
-			}
-
-			this();
-		},
-		cb
-	);
 };
 
 */

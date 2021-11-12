@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class fc-scan extends Program
+export class fc_scan extends Program
 {
 	website = "https://fontconfig.org";
 	gentooPackage = "media-libs/fontconfig";

@@ -110,7 +110,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 
 		try
 		{
-			Object.assign(dexState.meta, await format.getMeta(f.input, format));
+			Object.assign(dexState.meta, await format.getMeta(f.input, {verbose}));
 			
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{

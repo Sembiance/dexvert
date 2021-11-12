@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class darktable-cli extends Program
+export class darktable_cli extends Program
 {
 	website = "https://www.darktable.org/";
 	gentooPackage = "media-gfx/darktable";

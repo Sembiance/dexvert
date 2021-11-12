@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class photocd-info extends Program
+export class photocd_info extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
 	informational = true;

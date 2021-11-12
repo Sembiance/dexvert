@@ -81,9 +81,6 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 >>> unsafe : true
 Set to true if this program isn't safe to be brute forced.
 
->>> informational : true
-If true, program is just informational that changes state. No files are produced.
-
 >>> slow : true
 If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)
 

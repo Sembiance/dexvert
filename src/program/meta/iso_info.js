@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class iso-info extends Program
+export class iso_info extends Program
 {
 	website = "https://www.gnu.org/software/libcdio";
 	gentooPackage = "dev-libs/libcdio";

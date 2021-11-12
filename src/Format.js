@@ -24,9 +24,9 @@ export class Format
 	baseKeys = Object.keys(this);
 
 	// will get meta info for this particular format and the passed input fileset
-	getMeta(inputFile)
+	getMeta(inputFile, o)
 	{
-		return this.family.getMeta(inputFile, this) || {};
+		return this.family.getMeta(inputFile, this, o) || {};
 	}
 
 	// returns a pretty string to output to console

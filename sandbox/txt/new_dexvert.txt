@@ -1,10 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add a 'chain = "inkscape"' to scribus.js and in Program.js after a program is run it will check .chain and continue along the chain, splitting on "->" in a similar way Converter.js does
-  Each subsequent program call will iterate over each 'new' file and call Program.runProgram() using a new  const chainF = f.clone() followed by a chainF.removeType("input") and then chainF.add("input", newFile)
-  Need to determine the best place to delete the originals when converting like this (in the chained program? or back in the original?
-  Hrm... need to think this over some more.
+* Get svgInfo working
+
+* Get svg identifying and `dextry file.svg` working (with svg meta using new format.meta() (so base format.getMeta() will check this.meta() and combine with family))
+
+* Get EPS to SVG working with family image.js verify working with SVG output
+
+* Get EPS 'nconvert & inkscape' working
+
+* Get cdr -> scribus -> eps -> svg working
 
 * Once pcx/nconvert working, get the rest of the PCX converters working, even if QEMU
 

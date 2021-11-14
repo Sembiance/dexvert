@@ -47,7 +47,7 @@ scribus.fileQuit()`);
 
 	args = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.f.input.rel]
 	runOptions = ({timeout : xu.MINUTE, virtualX : true})
-	chain = "dexvert[asFormat:image/eps]"
+	chain = "inkscape"
 }
 
 

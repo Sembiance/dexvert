@@ -62,6 +62,8 @@ If ext is set to an untruthy value false/null/etc then it won't rename the ext
 If name is set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string.
 If name is set to false, the filename won't be renamed. 
 
+>>> diskQuota = xu.MB*20
+Some programs are buggy and will consume the entire hard drive. This is a way to limit that.
 
 
 
@@ -119,9 +121,6 @@ Note, when changing the cwd, the input.filePath and output.dirPath will automati
 
 >>> redirectOutput = (state, p, r) => "/path/to/output.txt"
 Can return a file path string where stdout from the program should be redirected to
-
->>> diskQuota = () => XU.MB*20
-Some programs are buggy and will consume the entire hard drive. This is a way to limit that.
 
 >>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
 Can return an object of QEMU specific data to be passed into util.qemu.run():

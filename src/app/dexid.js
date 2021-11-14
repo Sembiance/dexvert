@@ -18,9 +18,11 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
+xu.verbose = argv.verbose;
+
 for(const inputFilePath of Array.force(argv.inputFilePath))
 {
-	const rows = await identify(await DexFile.create(inputFilePath), {verbose : argv.verbose});
+	const rows = await identify(await DexFile.create(inputFilePath));
 
 	if(argv.jsonFile)
 		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(rows));

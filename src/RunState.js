@@ -36,18 +36,26 @@ export class RunState
 		return o;
 	}
 
-	pretty(prefix="")
+	pretty(pre="")
 	{
 		const r = [];
-		r.push(`${prefix}${fg.white("Program")} ${fg.orange(this.programid)}${this.status ? ` ${fg.cyan("—")} ${fg.white("Status:")} ${xu.inspect(this.status)}` : ""}`);
+		r.push(`${pre}${xu.paren(fg.orange(this.programid))}`);
 		if(this.bin)
-			r.push(`\n${prefix}\t${fg.white("   ran:")} ${fg.peach(this.bin)} ${(this.args || []).map(arg => (arg.includes(" ") ? `${fg.cyan('"')}${fg.green(arg)}${fg.cyan('"')}` : fg.green(arg))).join(" ")} with options ${xu.inspect(this.runOptions || {}).squeeze()}`);
-		r.push(`\n${prefix}\t${fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
-		if(Object.hasOwn(this, "stdout"))
 		{
-			r.push(`\n${prefix}\t${fg.white("stdout:")} ${this.stdout.squeeze()}`);
-			r.push(`\n${prefix}\t${fg.white("stderr:")} ${this.stderr.squeeze()}`);
+			r.push(` ${fg.peach(this.bin)} ${(this.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
+			if(this.status)
+				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+			if(xu.verbose>=4)
+				r.push(`\n${pre}\t${xu.colon("  opts")}${xu.inspect(this.runOptions || {}).squeeze()}`);
 		}
+		if(xu.verbose>=2 && Object.keys(this.meta || {}).length>0)
+			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
+
+		if(xu.verbose>=3 && (this.stdout || "").trim().length>0)
+			r.push(`\n${pre}\t${xu.colon("stdout")}${this.stdout.squeeze()}`);
+		if(xu.verbose>=3 && (this.stderr || "").trim().length>0)
+			r.push(`\n${pre}\t${xu.colon("stderr")}${this.stderr.squeeze()}`);
+			
 		return r.join("");
 	}
 }

@@ -2,6 +2,7 @@ import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
 import {delay} from "https://deno.land/std@0.113.0/async/mod.ts";
 import {Server} from "../Server.js";
+import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 
@@ -47,5 +48,7 @@ async function signalHandler(sig)
 	xu.log`Exiting...`;
 	Deno.exit(0);
 }
+
+await fileUtil.writeFile(path.join(DEXVERT_RAM_DIR, "serverRunning"), "true");
 
 await delay(xu.YEAR);

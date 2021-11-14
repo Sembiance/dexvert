@@ -94,7 +94,8 @@ function validate(basePrefix, suffix, o, schema)
 		if(prop.range)
 		{
 			assert(value>=prop.range[0]);
-			assert(value<=prop.range[1]);
+			if(prop.range.length>1)
+				assert(value<=prop.range[1]);
 		}
 		
 		// by default, strings and arrays must not be empty

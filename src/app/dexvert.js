@@ -21,8 +21,10 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
+xu.verbose = argv.verbose;
+
 const dexvertOptions = {};
-["verbose", "asFormat"].forEach(k =>
+["asFormat"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];
@@ -38,8 +40,8 @@ async function handleDexState(dexState)
 
 	if(argv.json)
 		console.log(JSON.stringify(dexState.serialize()));
-	else
-		console.log(`\n${dexState.pretty()}`);
+	else if(xu.verbose>=1)
+		console.log(`${dexState.pretty()}`);
 
 	Deno.exit(0);
 }
@@ -47,8 +49,7 @@ async function handleDexState(dexState)
 await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions));
 if(argv.dontTransform)
 {
-	if(argv.verbose>=1)
-		xu.log`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
+	xu.log1`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
 	Deno.exit(0);
 }
 

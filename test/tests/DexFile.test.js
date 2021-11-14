@@ -210,7 +210,7 @@ Deno.test("rename", async () =>
 Deno.test("pretty", async () =>
 {
 	const a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
-	assertStrictEquals(base64Encode(a.pretty()), "G1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBt");
+	assertStrictEquals(base64Encode(a.pretty()), "G1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zb21lLmJpZy50eHQuZmlsZS50eHQbWzBt");
 });
 
 Deno.test("serialize", async () =>

@@ -4,14 +4,14 @@ import {Format} from "./Format.js";
 import {FileSet} from "./FileSet.js";
 import {Converter} from "./Converter.js";
 import {DexState} from "./DexState.js";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
-const DEFAULT_QUOTA_DISK = xu.GB*10;
-
-export async function dexvert(inputFile, outputDir, {verbose, asFormat})
+export async function dexvert(inputFile, outputDir, {asFormat}={})
 {
+	if(!(await fileUtil.exists("/mnt/ram/dexvert/serverRunning")))
+		throw new Error("DexServer not running!");
 	if(!inputFile.isFile)
 		throw new Error(`Invalid input file, expected file. ${inputFile.absolute}`);
 	if(!outputDir.isDirectory)
@@ -27,29 +27,29 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		for(const k of ["ext", "unsupported"])
 		{
 			if(formats[asFormatid][k])
-				asId[k] = formats[asFormatid][k];
+				asId[k==="ext" ? "extensions" : k] = formats[asFormatid][k];
 		}
 		ids.push(Identification.create(asId));
+		xu.log`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
 	}
 	else
 	{
-		ids.push(...(await identify(inputFile, {verbose})).filter(id => id.from==="dexvert" && !id.unsupported));
+		xu.log`Getting identifications for ${inputFile.pretty()}`;
+		ids.push(...(await identify(inputFile)).filter(id => id.from==="dexvert" && !id.unsupported));
 	}
 
-	if(verbose>=2)
-		xu.log`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
-	
 	if(ids.length===0)
 		return;
 
+	xu.log2`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
+
 	//posix.setrlimit("core", {soft : 0});
 
-	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, verbose});
+	const dexState = DexState.create({original : {input : inputFile, output : outputDir}});
 	for(const id of ids)
 	{
 		const format = formats[id.formatid];
-		if(verbose>=1)
-			xu.log`Attempting to process identification: ${id.pretty()}`;
+		xu.log2`\nAttempting to process identification: ${id.pretty()}`;
 
 		// create a temporary ram cwd where all programs will run at (by default)
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
@@ -89,28 +89,17 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		
 		await f.input.rename(cwdFilename + cwdExt);
 
-		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
-		if(verbose>=5)
-			xu.log`${fg.red("NOT")} mounting ${cwd}/out as a RAM disk, due to verbose>=5`;
-		else
-			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${DEFAULT_QUOTA_DISK},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
-
 		const cleanup = async () =>
 		{
-			if(verbose>=5)
-			{
-				xu.log`${fg.red("NOT")} deleting cwd ${cwd} due to verbose>=5`;
-			}
+			if(xu.verbose>=5)
+				xu.log5`${fg.red("NOT")} deleting cwd ${cwd} due to verbose>=5`;
 			else
-			{
-				await runUtil.run("sudo", ["umount", f.outDir.absolute]);
 				await Deno.remove(cwd, {recursive : true});
-			}
 		};
 
 		try
 		{
-			Object.assign(dexState.meta, await format.getMeta(f.input, {verbose}));
+			Object.assign(dexState.meta, await format.getMeta(f.input));
 			
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
@@ -124,6 +113,8 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 			if(format.pre)
 				await format.pre(dexState);
 			
+			xu.log3`\nTrying ${fg.yellowDim((format.converters || []).length)} ${format.formatid} converters...`;
+
 			// try each converter specificied, until we have output files or have been marked as processed
 			for(const converter of (format.converters || []).map(v => Converter.create(dexState, v)))
 			{
@@ -141,7 +132,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		}
 		catch(err)
 		{
-			xu.log`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${err}`;
+			xu.log1`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${err}`;
 		}
 
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made
@@ -154,9 +145,6 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		if(dexState.processed)
 			break;
 	}
-
-	if(dexState.processed && verbose>=1)
-		xu.log`dexvert ${fg.green("succeeded")} with format: ${dexState.format.pretty()}`;
 
 	return dexState;
 }

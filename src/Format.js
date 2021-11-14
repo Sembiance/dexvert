@@ -24,15 +24,15 @@ export class Format
 	baseKeys = Object.keys(this);
 
 	// will get meta info for this particular format and the passed input fileset
-	getMeta(inputFile, o)
+	getMeta(inputFile)
 	{
-		return this.family.getMeta ? this.family.getMeta(inputFile, this, o) || {} : {};
+		return this.family.getMeta ? this.family.getMeta(inputFile, this) || {} : {};
 	}
 
 	// returns a pretty string to output to console
 	pretty(prefix="")
 	{
-		return `${prefix}${fg.magenta(this.name)} ${fg.yellow(this.familyid)}${fg.cyan("/")}${fg.yellowDim(this.formatid)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} (${fg.greenDim(this.website)})`;
+		return `${prefix}${fg.greenDim(this.name)} ${fg.yellow(this.familyid)}${fg.cyanDim("/")}${fg.yellowDim(this.formatid)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} ${xu.paren(fg.greenDim(this.website))}`;
 	}
 
 	serialize()

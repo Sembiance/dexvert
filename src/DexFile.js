@@ -80,9 +80,9 @@ export class DexFile
 	pretty(prefix="")
 	{
 		const r = [prefix];
-		r.push(this.isDirectory ? fg.magenta("D") : (this.isSymlink ? fg.cyan("L") : fg.fogGray("F")));
+		r.push(this.isDirectory ? fg.violet("D") : (this.isSymlink ? fg.cyan("L") : fg.fogGray("F")));
 		r.push(` ${fg.white((this.isFile ? this.size.bytesToSize() : "").padStart(6, " "))}`);
-		r.push(` ${fg.yellow(this.root)}${fg.cyan("/")}${fg.yellowDim(this.rel)}`);
+		r.push(` ${fg.magenta(this.root)}${fg.cyan("/")}${fg.magenta(this.rel)}`);
 		if(this.transformed)
 			r.push(` ${fg.peach("transformed")}`);
 		return r.join("");

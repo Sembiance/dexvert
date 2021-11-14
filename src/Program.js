@@ -41,12 +41,13 @@ export class Program
 			runOptions     : {type : Object},
 
 			// execution
-			bin    : {type : "string"},
-			outExt : {type : "function", length : [0, 1]},
-			exec   : {type : "function", length : 1},
-			args   : {type : "function", length : 1},
-			pre    : {type : "function", length : 1},
-			post   : {type : "function", length : 1}
+			bin       : {type : "string"},
+			diskQuota : {type : "number", range : [1]},
+			outExt    : {type : "function", length : [0, 1]},
+			exec      : {type : "function", length : 1},
+			args      : {type : "function", length : 1},
+			pre       : {type : "function", length : 1},
+			post      : {type : "function", length : 1}
 		});
 
 		if(program.renameOut)
@@ -56,7 +57,7 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -64,6 +65,10 @@ export class Program
 		const unknownFlags = Object.keys(flags).subtractAll(Object.keys(this.flags || {}));
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
+		
+		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
+		if(this.diskQuota)
+			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${this.diskQuota},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
 
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags});
@@ -79,21 +84,19 @@ export class Program
 			r.runOptions = {cwd : f.root, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
-			if(verbose>=5)
+			if(xu.verbose>=5)
 				r.runOptions.verbose = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, this.runOptions);
 				
-			if(verbose>=4)
-				xu.log`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
+			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
 		else if(this.exec)
 		{
 			// run arbitrary javascript code
-			if(verbose>=4)
-				xu.log`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
+			xu.log3`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
 
@@ -117,8 +120,7 @@ export class Program
 				// if the new file is identical to our input file, delete it
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
-					if(verbose>=3)
-						xu.log`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
+					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
 					await Deno.remove(newFilePath);
 					continue;
 				}
@@ -138,31 +140,54 @@ export class Program
 			const newFilename = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name)) + (ro.ext || f.new.ext);
 			if(newFilename!==f.new.base)
 			{
-				if(verbose>=3)
-					xu.log`Program ${fg.orange(this.programid)} renaming the single output file [${f.new.pretty()}] to ${newFilename}`;
+				xu.log2`${fg.orange(this.programid)} renaming single output file ${xu.bracket(f.new.pretty())} to ${newFilename}`;
 				await f.new.rename(newFilename);
 			}
 		}
 
-		if(verbose>=3)
-			console.log(r.pretty());
+		xu.log3`Program Result: ${r.pretty()}`;
+
+		// if we have a disk quota, we need to make a temp out dir, rsync over our new files to it, unmount it and then rsync them back to the original outDir
+		if(this.diskQuota)
+		{
+			const tmpOutDirPath = await fileUtil.genTempPath(f.root, "diskQuotaTmpOut");
+			await Deno.mkdir(tmpOutDirPath, {recursive : true});
+			const tmpF = await f.rsyncTo(tmpOutDirPath, {type : "new", relativeFrom : f.outDir.absolute});
+			await runUtil.run("sudo", ["umount", f.outDir.absolute]);
+			await tmpF.rsyncTo(f.outDir.absolute, {type : "new"});
+			await Deno.remove(tmpOutDirPath, {recursive : true});
+			// don't need to do anything with the original f, everything should have the same path as before
+		}
 
 		return r;
 	}
 
 	// runs the programid program
-	static async runProgram(programid, ...args)
+	static async runProgram(progRaw, fRaw, progOptions={})
 	{
+		const {programid, flagsRaw=""} = progRaw.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
+		const flags = Object.fromEntries((flagsRaw.match(/\[[^:\]]+:?[^\]]*]/g) || []).map(flag =>
+		{
+			const {name, val} = flag.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/)?.groups || {};
+			return (name ? [name, (val.length>0 ? (val.isNumber() ? +val : val) : true)] : null);
+		}).filter(v => !!v));
+
+		// run prog
+		if(!progOptions.flags)
+			progOptions.flags = {};
+		Object.assign(progOptions.flags, flags);
+
 		const program = (await this.loadPrograms())[programid];
 		if(!program)
 			throw new Error(`Unknown programid: ${programid}`);
 
-		// if our first arg isn't a FileSet, then we will create a temporary one
-		if(!(args[0] instanceof FileSet))
+		let f = fRaw;
+
+		// if fRaw isn't a FileSet, then we will create a temporary one
+		if(!(fRaw instanceof FileSet))
 		{
-			const arg0 = args.shift();
-			const inputFile = arg0 instanceof DexFile ? arg0.clone() : await DexFile.create(arg0);
-			const f = await FileSet.create(inputFile.root, "input", inputFile);
+			const inputFile = fRaw instanceof DexFile ? fRaw.clone() : await DexFile.create(fRaw);
+			f = await FileSet.create(inputFile.root, "input", inputFile);
 			
 			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}-out`);
 			await Deno.mkdir(outDirPath, {recursive : true});
@@ -171,11 +196,9 @@ export class Program
 			const homeDirPath = await fileUtil.genTempPath(undefined, `${programid}-home`);
 			await Deno.mkdir(homeDirPath, {recursive : true});
 			await f.add("homeDir", homeDirPath);
-
-			args.unshift(f);
 		}
 		
-		return program.run(...args);
+		return program.run(f, progOptions);
 	}
 
 	// forms a path to dexvert/bin/{subPath}

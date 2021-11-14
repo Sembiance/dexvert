@@ -41,13 +41,19 @@ export class DexPhase
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${fg.white("format:")} ${this.format.pretty(`${prefix}\t`).trim()}`);
-		r.push(`\n${prefix}${fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
-		r.push(`\n${prefix}${fg.white("    id:")} ${this.id.pretty(`${prefix}\t`).trim()}`);
-		r.push(`\n${prefix}${fg.white("     f:")} ${this.f.pretty(`${prefix}\t`).trim()}`);
-		r.push(`\n${prefix}${fg.white("   ran:")} ${fg.yellowDim(this.ran.length)} programs:`);
-		if(this.ran.length>0)
-			r.push(this.ran.map(v => `\n${v.pretty(`${prefix}\t`)}`).join(""));
+		r.push(`${prefix}${xu.colon("format")}${this.format.pretty(`${prefix}\t`).trim()}`);
+		if(xu.verbose>=1)
+			r.push(`\n${prefix}${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
+		if(xu.verbose>=2)
+			r.push(`\n${prefix}${xu.colon("    id")}${this.id.pretty(`${prefix}\t`).trim()}`);
+		if(xu.verbose>=3)
+			r.push(`\n${prefix}${xu.colon("     f")}${this.f.pretty(`${prefix}\t`).trim()}`);
+		if(xu.verbose>=2)
+		{
+			r.push(`\n${prefix}${xu.colon("   ran")}${fg.yellowDim(this.ran.length)} program${this.ran.length===1 ? "" : "s"}`);
+			if(this.ran.length>0)
+				r.push(this.ran.map(v => `\n${v.pretty(`${prefix}\t`)}`).join(""));
+		}
 		return r.join("");
 	}
 }
@@ -66,10 +72,7 @@ export class DexState
 
 		validateClass(dexState, {
 			// required
-			original : {type : Object, required : true},
-
-			// optional
-			verbose : {type : "number", range : [0, 6]}
+			original : {type : Object, required : true}
 		});
 
 		validateObject(dexState.original, {
@@ -113,20 +116,24 @@ export class DexState
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(printUtil.majorHeader("DexState"));
-		r.push(`${prefix}${fg.brown(" PAST PHASES:")} ${fg.yellow(this.past.length)} phases\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
-		r.push(`\n${prefix}${fg.white("ACTIVE PHASE:")}\n${this.phase.pretty(`${prefix}\t`)}`);
-		r.push(`\n${xu.cf.fg.cyan("-".repeat(150))}`);
-		r.push(`\n${prefix}${fg.white("  result:")} ${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
-		r.push(`\n${prefix}${fg.white(" orig in:")} ${this.original.input.pretty()}`);
-		r.push(`\n${prefix}${fg.white("orig out:")} ${this.original.output.pretty()}`);
+		if(xu.verbose>=3)
+		{
+			r.push(`\n${printUtil.majorHeader("DexState")}`);
+			r.push(`${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
+		}
+		r.push(`\n${prefix}${printUtil.minorHeader("ACTIVE PHASE")}${this.phase.pretty(`${prefix}\t`)}`);
+		
+		r.push(`\n${xu.cf.fg.cyan("-".repeat(Deno.consoleSize(Deno.stdout.rid).columns))}`);
+		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
+		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);
+		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);
 		if(this.processed)
 		{
-			r.push(`\n${prefix}${fg.white("  format:")} ${this.format.pretty()}`);
-			r.push(`\n${prefix}${fg.white("    meta:")} ${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${prefix}${xu.colon("  format")}${this.format.pretty()}`);
+			r.push(`\n${prefix}${xu.colon("    meta")}${xu.inspect(this.meta).squeeze()}`);
 		}
 		if(this.created)
-			r.push(`\n${prefix}${fg.white(" created:")} ${this.created.pretty(`${prefix}`).trim()}`);
+			r.push(`\n${prefix}${xu.colon(" created")}${this.created.pretty(`${prefix}`).trim()}`);
 		return r.join("");
 	}
 }

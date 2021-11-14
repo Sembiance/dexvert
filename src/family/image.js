@@ -29,13 +29,12 @@ export class image extends Family
 {
 	metaids = ["image", "darkTable", "ansiArt"];
 
-	async verify(dexFile, identifications, {programid, verbose, dexState})
+	async verify(dexFile, identifications, {dexState})
 	{
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{
-			if(verbose>=3)
-				xu.log`DELETING OUTPUT due to not being identified as an image: ${dexFile.pretty()}`;
+			xu.log2`DELETING OUTPUT due to not being identified as an image: ${dexFile.pretty()}`;
 			return false;
 		}
 
@@ -44,17 +43,17 @@ export class image extends Family
 		// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
 		// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
 		if(dexid.formatid==="svg")
-			console.log(await Program.runProgram("svgInfo", dexFile, {verbose}));	// TODO need to handle this
+			console.log(await Program.runProgram("svgInfo", dexFile));	// TODO need to handle this
 		else
 			Object.assign(meta, await imageUtil.getInfo(dexFile.absolute));
 
 		if(!meta.width || !meta.height)
 			return false;
 
-		if(Program.programs[programid].unsafe && meta.colorCount<=1 && meta.opaque)
+		if(Program.programs[dexState.ran.at(-1).programid].unsafe && meta.colorCount<=1 && meta.opaque)
 			return false;
 
-		if(Program.programs[programid].unsafe && [meta.width, meta.height].some(v => v>=15000))
+		if(Program.programs[dexState.ran.at(-1).programid].unsafe && [meta.width, meta.height].some(v => v>=15000))
 			return false;
 
 		if(dexid.formatid==="svg" && meta.colorCount<=1)
@@ -81,26 +80,23 @@ export class image extends Family
 			if(typeof garbage!=="number" || garbage<0 || garbage>1)
 				throw new Error(`Got invalid garabge result for ${dexFile.pretty()} ${dexState.original.input.pretty()} ${garbage}`);
 
-			console.log(dexState.id.matchType);
 			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
 			{
-				if(verbose>=3)
-					xu.log`Image detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
+				xu.log2`Image detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
 				await Deno.copyFile(dexFile.absolute, path.join(GARBAGE_DETECTED_DIR_PATH, `${garbage.noExponents()}-${Math.randomInt(1, 10000)}-${dexState.format.formatid}-${dexState.original.input.absolute.replaceAll("/", ":")}-${dexFile.rel.replaceAll("/", ":")}`));
 				return false;
 			}
 		}
 		else
 		{
-			if(verbose>=3)
-				xu.log`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
+			xu.log2`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
 		}
 
 		return true;
 	}
 
 	// gets meta information for the given input and format
-	async getMeta(inputFile, format, {verbose}={})
+	async getMeta(inputFile, format)
 	{
 		if(!format.metaProviders)
 			return;
@@ -108,12 +104,19 @@ export class image extends Family
 		const meta = {};
 		for(const metaProvider of format.metaProviders)
 		{
-			if(verbose>=3)
-				xu.log`image.getMeta() getting meta from provider ${metaProvider}`;
+			xu.log3`Getting meta from provider ${metaProvider}`;
 
 			// imageMagick meta provider
 			if(metaProvider==="image")
-				Object.assign(meta, await imageUtil.getInfo(inputFile.absolute));
+			{
+				const info = await imageUtil.getInfo(inputFile.absolute);
+				if(info.err)
+				{
+					xu.log(3, `imageUtil.getInfo() returned an err ${info.err}`);
+					delete info.err;
+				}
+				Object.assign(meta, info);
+			}
 
 			if(metaProvider==="ansiArt")
 			{

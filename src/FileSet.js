@@ -86,12 +86,14 @@ export class FileSet
 	async rsyncTo(targetRoot, {type, relativeFrom}={})
 	{
 		const newFileSet = await this.clone(type ? [type] : null);
+		if(relativeFrom)
+			newFileSet.changeRoot(relativeFrom);
 		for(const file of (type ? this.files[type] : this.all))
 		{
 			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			if(fileRel.includes("/"))
 				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
-			await runUtil.run("rsync", ["-aL", path.join(relativeFrom || file.root, fileRel), path.join(targetRoot, fileRel)]);
+			await runUtil.run("rsync", ["-a", path.join(relativeFrom || file.root, fileRel), path.join(targetRoot, fileRel)]);
 		}
 
 		return newFileSet.changeRoot(targetRoot, {keepRel : true});
@@ -118,7 +120,7 @@ export class FileSet
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${fg.white("FileSet")} ${fg.cyan("(")}${fg.white("root ")}${fg.magentaDim(this.root)}${fg.cyan(")")} has ${fg.white(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
+		r.push(`${prefix}FileSet ${xu.paren(`root ${fg.magentaDim(this.root)}`)} has ${fg.yellowDim(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
 		if(this.all.length>0)
 		{
 			const longestType = Object.keys(this.files).map(v => v.length).max();

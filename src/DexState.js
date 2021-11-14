@@ -41,13 +41,13 @@ export class DexPhase
 	pretty(prefix="")
 	{
 		const r = [];
-		r.push(`${prefix}${fg.white("     f:")} ${this.f.pretty(`${prefix}\t`).trim()}`);
+		r.push(`${prefix}${fg.white("format:")} ${this.format.pretty(`${prefix}\t`).trim()}`);
 		r.push(`\n${prefix}${fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
-		r.push(`\n${prefix}${fg.white("format:")} ${this.format.pretty(`${prefix}\t`).trim()}`);
 		r.push(`\n${prefix}${fg.white("    id:")} ${this.id.pretty(`${prefix}\t`).trim()}`);
-		r.push(`\n${prefix}${fg.white("   ran:")} ${fg.yellowDim(this.ran.length)} programs`);
+		r.push(`\n${prefix}${fg.white("     f:")} ${this.f.pretty(`${prefix}\t`).trim()}`);
+		r.push(`\n${prefix}${fg.white("   ran:")} ${fg.yellowDim(this.ran.length)} programs:`);
 		if(this.ran.length>0)
-			r.push(this.ran.map(v => v.pretty(`${prefix}\t`).join("")));
+			r.push(this.ran.map(v => `\n${v.pretty(`${prefix}\t`)}`).join(""));
 		return r.join("");
 	}
 }
@@ -94,6 +94,7 @@ export class DexState
 	get f() { return this.phase.f; }
 	get format() { return this.phase.format; }
 	get meta() { return this.phase.meta; }
+	get ran() { return this.phase.ran; }
 	get id() { return this.phase.id; }
 
 	serialize()
@@ -103,6 +104,8 @@ export class DexState
 		if(this.phase)
 			o.phase = this.phase.serialize();
 		o.past = this.past.map(v => v.serialize());
+		if(this.created)
+			o.created = this.created.serialize();
 		return o;
 	}
 
@@ -111,11 +114,19 @@ export class DexState
 	{
 		const r = [];
 		r.push(printUtil.majorHeader("DexState"));
-		r.push(`${prefix}${fg.white("         result:")} ${this.processed ? fg.cyan("PROCESSED") : fg.peach("NOT PROCESSED")} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
-		r.push(`\n${prefix}${fg.white(" original input:")} ${this.original.input.pretty()}`);
-		r.push(`\n${prefix}${fg.white("original output:")} ${this.original.output.pretty()}`);
-		r.push(`\n${prefix}${fg.white("  CURRENT PHASE:")}\n${this.phase.pretty(`${prefix}\t`)}`);
-		r.push(`\n${prefix}${fg.brown("    PAST PHASES:")} ${fg.yellow(this.past.length)} phases\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
+		r.push(`${prefix}${fg.brown(" PAST PHASES:")} ${fg.yellow(this.past.length)} phases\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
+		r.push(`\n${prefix}${fg.white("ACTIVE PHASE:")}\n${this.phase.pretty(`${prefix}\t`)}`);
+		r.push(`\n${xu.cf.fg.cyan("-".repeat(150))}`);
+		r.push(`\n${prefix}${fg.white("  result:")} ${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
+		r.push(`\n${prefix}${fg.white(" orig in:")} ${this.original.input.pretty()}`);
+		r.push(`\n${prefix}${fg.white("orig out:")} ${this.original.output.pretty()}`);
+		if(this.processed)
+		{
+			r.push(`\n${prefix}${fg.white("  format:")} ${this.format.pretty()}`);
+			r.push(`\n${prefix}${fg.white("    meta:")} ${xu.inspect(this.meta).squeeze()}`);
+		}
+		if(this.created)
+			r.push(`\n${prefix}${fg.white(" created:")} ${this.created.pretty(`${prefix}`).trim()}`);
 		return r.join("");
 	}
 }

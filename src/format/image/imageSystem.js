@@ -8,7 +8,7 @@ export class imageSystem extends Format
 	ext = [".ish",".ism"];
 	converters = ["nconvert","recoil2png","view64"]
 
-outputValidator = undefined;
+outputValidator = undefined;	// Rename to verify(dexFile, identifications)
 }
 */
 /*

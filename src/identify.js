@@ -5,7 +5,6 @@ import {Program} from "./Program.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -17,8 +16,9 @@ function flexMatch(value, matcher, fullStringMatch)
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "3d", "font", "text", "executable", "rom", "other"];
 
-export async function identify(inputFile, {verbose=0})
+export async function identify(inputFileRaw, {verbose=0}={})
 {
+	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f, {verbose})))).flatMap(o => o.meta.detections);
 

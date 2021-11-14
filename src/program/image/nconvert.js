@@ -12,6 +12,7 @@ export class nconvert extends Program
 	};
 	
 	bin  = "nconvert";
+	outExt = () => ".png";
 	args = r => [...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", path.join(r.f.outDir.rel, "out.png"), r.f.input.rel]
 }
 

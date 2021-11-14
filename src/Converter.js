@@ -1,7 +1,8 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {DexState} from "./DexState.js";
 import {Program} from "./Program.js";
+import {identify} from "./identify.js";
 
 export class Converter
 {
@@ -23,6 +24,7 @@ export class Converter
 
 	async run()
 	{
+		const verbose = this.dexState.verbose;
 		const chain = this.value.split("->").map(v => v.trim());	// deark[keepAsGIF][outputFormat:GIF][fps:60] & nconvert -> word97
 		for(const link of chain)	// deark[keepAsGIF][outputFormat:GIF][fps:60] & nconvert
 		{
@@ -37,8 +39,26 @@ export class Converter
 				}).filter(v => !!v));
 
 				// run prog
-				const programOptions = {flags, verbose : this.dexState.verbose, originalInput : this.dexState.original.input, outExt : this.dexState.format.family.outExt};
+				const programOptions = {flags, verbose : this.dexState.verbose, originalInput : this.dexState.original.input};
 				const r = await Program.runProgram(programid, this.dexState.f, programOptions);
+				this.dexState.ran.push(r);
+
+				// verify output files
+				for(const newFile of this.dexState.f.files.new || [])
+				{
+					const isValid = await this.dexState.format.family.verify(newFile, await identify(newFile, {verbose}), {verbose, programid, dexState : this.dexState});
+					if(!isValid)
+					{
+						if(verbose>=3)
+							xu.log`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${this.dexState.format.family.pretty()} family`;
+						await Deno.remove(newFile.absolute);
+					}
+					else
+					{
+						await this.dexState.f.add("output", newFile);
+					}
+				}
+				this.dexState.f.removeType("new");
 			}
 		}
 	}
@@ -55,7 +75,3 @@ export class Converter
 		return r.join("");
 	}
 }
-
-
-
-

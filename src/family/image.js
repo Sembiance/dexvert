@@ -1,13 +1,103 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
 import {DOMParser} from "https://deno.land/x/deno_dom@v0.1.17-alpha/deno-dom-native.ts";
+import {classifyImage} from "../tensorUtil.js";
+import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+
+// These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
+const TENSOR_PATH_EXCLUSIONS =
+[
+	"texture", "textura",
+	"background", "backgrnd",
+	"stereo", "pattern", "brush", "noise", "illusion", "fractal", "border"
+];
+
+const MATCH_MAX_GARBAGE_PROBABILITIES =
+{
+	magic    : 0.7,
+	filename : 0.6,
+	ext      : 0.6,
+	fileSize : 0.01,
+	fallback : 0.01
+};
+
+const GARBAGE_DETECTED_DIR_PATH = "/mnt/dexvert/garbageDetected";
 
 export class image extends Family
 {
 	metaids = ["image", "darkTable", "ansiArt"];
-	outExt = ".png";
+
+	async verify(dexFile, identifications, {programid, verbose, dexState})
+	{
+		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
+		if(!dexid)
+		{
+			if(verbose>=3)
+				xu.log`DELETING OUTPUT due to not being identified as an image: ${dexFile.pretty()}`;
+			return false;
+		}
+
+		const meta = {};
+		// SVG's are VERY problematic for imagemagick to deal with. Loading up inkscape in the background and spinning at 100% CPU for ages while it renders some 65,000px wide SVG
+		// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
+		// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
+		if(dexid.formatid==="svg")
+			console.log(await Program.runProgram("svgInfo", dexFile, {verbose}));	// TODO need to handle this
+		else
+			Object.assign(meta, await imageUtil.getInfo(dexFile.absolute));
+
+		if(!meta.width || !meta.height)
+			return false;
+
+		if(Program.programs[programid].unsafe && meta.colorCount<=1 && meta.opaque)
+			return false;
+
+		if(Program.programs[programid].unsafe && [meta.width, meta.height].some(v => v>=15000))
+			return false;
+
+		if(dexid.formatid==="svg" && meta.colorCount<=1)
+			return false;
+		
+		let skipTensor = null;
+
+		// Only classify these image types
+		if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
+			skipTensor = `Unsupported image formatid: ${dexid.formatid}`;
+		
+		// Don't classify if the full original absolute path or formatid includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
+		if(TENSOR_PATH_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || dexState.original.input.absolute.toLowerCase().includes(v)))
+			skipTensor = `Contains a known 'noisy' pattern in original file path`;
+		
+		// Don't classify if the dimensions are too big
+		if([meta.width, meta.height].some(v => v>=6000))
+			skipTensor = `Width or height is too big ${meta.width}x${meta.height}`;
+		
+		if(!skipTensor)
+		{
+			// tensorUtil.classifyImage will convert these into PNG before sending to the tensor
+			const garbage = await classifyImage(dexFile.absolute, "garbage");
+			if(typeof garbage!=="number" || garbage<0 || garbage>1)
+				throw new Error(`Got invalid garabge result for ${dexFile.pretty()} ${dexState.original.input.pretty()} ${garbage}`);
+
+			console.log(dexState.id.matchType);
+			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
+			{
+				if(verbose>=3)
+					xu.log`Image detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
+				await Deno.copyFile(dexFile.absolute, path.join(GARBAGE_DETECTED_DIR_PATH, `${garbage.noExponents()}-${Math.randomInt(1, 10000)}-${dexState.format.formatid}-${dexState.original.input.absolute.replaceAll("/", ":")}-${dexFile.rel.replaceAll("/", ":")}`));
+				return false;
+			}
+		}
+		else
+		{
+			if(verbose>=3)
+				xu.log`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
+		}
+
+		return true;
+	}
 
 	// gets meta information for the given input and format
 	async getMeta(inputFile, format, {verbose}={})
@@ -56,211 +146,3 @@ export class image extends Family
 		return meta;
 	}
 }
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	fs = require("fs"),
-	tiptoe = require("tiptoe"),
-	C = require("../C.js"),
-	domino = require("domino"),
-	dexUtil = require("../dexUtil.js"),
-	dexvert = require("../dexvert.js"),
-	fileUtil = require("@sembiance/xutil").file,
-	tensorUtil = require("../../tensor/tensorUtil.js"),
-	imageUtil = require("@sembiance/xutil").image;
-
-function checkShouldContinue(state)
-{
-	return !state.output.files && state.converters.length>0;
-}
-
-exports.converterSteps =
-[
-	(state, p) =>
-	{
-		state.converters = dexUtil.preProcessConverters(state, p, p.format.converterPriority);
-
-		state.converters.filterInPlace(cp =>
-		{
-			// abydos requires a mime type
-			if(Object.isObject(cp) && cp.program==="abydosconvert" && !p.format.meta.mimeType)
-				return false;
-			
-			return true;
-		});
-
-		return p.util.flow.noop;
-	},
-	(state0, p0) => p0.util.flow.batchRepeatUntil([
-		(state, p) =>
-		{
-			state.converter = state.converters.shift();
-			if(Array.isArray(state.converter))
-				return p.util.flow.serial(state.converter);
-
-			return state.converter;
-		},
-		(state, p) => p.util.file.findValidOutputFiles(),
-		() => exports.validateOutputFiles], checkShouldContinue)
-];
-
-exports.steps =
-[
-	(state, p) => p.util.flow.serial(p.format.steps || exports.converterSteps),
-	(state, p) => (p.format.steps ? p.util.file.findValidOutputFiles() : p.util.flow.noop),
-	(state, p) => (p.format.steps ? exports.validateOutputFiles : p.util.flow.noop)
-];
-
-exports.validateOutputFiles = function validateOutputFiles(state, p, cb)
-{
-	if((state.output.files || []).length===0)
-		delete state.converter;
-
-	const unsafeConverter = p.program?.[state.converter?.program]?.meta?.unsafe;
-	let untrustworthyConversion = false;
-
-	// If the converter we used marked it's conversion as untrustworthy (convert.js on a read error for example) then we mark it as such here
-	if(state.converter?.program && (p.util.program.getRan(state, state.converter.program) || {})?.untrustworthyConversion)
-		untrustworthyConversion = true;
-	
-	if(p.format.meta.untrustworthy)
-		untrustworthyConversion = true;
-	
-	(state.output.files || []).slice().parallelForEach((outSubPath, subcb) =>
-	{
-		const outFilePath = path.join(state.output.absolute, outSubPath);
-		let removeFile = false;
-		let dexid = null;
-		tiptoe(
-			function identifyOutputFile()
-			{
-				dexvert.identify(outFilePath, {tmpFilePath : state.tmpFilePath}, this);
-			},
-			function getImageInfo(outIdentifications)
-			{
-				dexid = (outIdentifications || []).find(o => o.from==="dexvert");
-				if(!dexid || dexid.family!=="image")
-				{
-					if(state.verbose>=3)
-						XU.log`Removing image ${outFilePath} due to not being identified as an image ${{dexid}}`;
-					removeFile = true;
-					return this.jump(-1);
-				}
-
-				// SVG's are VERY problematic for imagemagick to deal with. Loading up inkscape in the background and spinning at 100% CPU for ages while it renders some 65,000px wide SVG
-				// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
-				// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
-				if(dexid.formatid==="svg")
-				{
-					this.data.isSVG = true;
-					p.util.program.run("svgInfo", {argsd : [outFilePath]})(state, p, (err, svgInfoResult) => this(err, (svgInfoResult || {}).meta || {}));
-				}
-				else
-				{
-					imageUtil.getInfo(outFilePath, {timeout : XU.SECOND*30}, this);
-				}
-			},
-			function classifyImage(info)
-			{
-				// If we don't have a width or height, or we are an unsafe converter and are just a solid color, count the image as failed and remove it
-				if(!info || !info.width || !info.height ||
-				   ((unsafeConverter || untrustworthyConversion) && info.colorCount<=1 && (info.opaque===true || untrustworthyConversion)) ||	// Unsafe conversions must have 2 or more colors
-				   (untrustworthyConversion && (info.width>20000 || info.height>20000)) ||
-				   (p.format.outputValidator && !p.format.outputValidator(state, p, outSubPath, info)) ||
-				   (this.data.isSVG && info.colorCount<=1))
-				{
-					if(state.verbose>=3)
-						XU.log`Removing image ${outFilePath} due to not having width/height or no imageInfo or suspect imageInfo ${{unsafeConverter, untrustworthyConversion, info}}`;
-					removeFile = true;
-					return this.jump(-1);
-				}
-
-
-				let skipClassificationReason = null;
-
-				// Only classify these image types
-				if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
-					skipClassificationReason = `Unsupported image formatid: ${dexid.formatid}`;
-				
-				// Don't classify if the full original absolute path or formatid includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
-				if(C.TENSOR_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || state.input.absolute.toLowerCase().includes(v)))
-					skipClassificationReason = `Contains a known 'noisy' pattern in file path`;
-				
-				// Don't classify if the dimensions are too big
-				if([info.width, info.height].some(v => v>=6000))
-					skipClassificationReason = `Width or height is too big ${info.width}x${info.height}`;
-
-				// tensorUtil.classifyImage will convert these into PNG before sending to the classifier.
-				// We skip some files from classification, due to them looking like garbage. We do this by hoping the input file path contains certain keywords that are known to have 'noisy' images
-				if(!skipClassificationReason)
-				{
-					if(state.verbose>=4)
-						XU.log`Getting garbage classification for image: ${outFilePath}`;
-
-					tensorUtil.classifyImage(outFilePath, "garbage", this);
-				}
-				else
-				{
-					if(state.verbose>=4)
-						XU.log`SKIPPING garbage classification for image: ${outFilePath} due to: ${skipClassificationReason}`;
-					this.jump(2);
-				}
-			},
-			function checkImageValidity(garbageResult)
-			{
-				if(garbageResult && garbageResult.confidence>0)
-				{
-					if(!state.output.hasOwnProperty("garbageProbability"))
-						state.output.garbageProbability = {};
-					state.output.garbageProbability[`${state.id.family}/${state.id.formatid}:${outSubPath}`] = garbageResult.confidence;
-				}
-
-				if(!garbageResult)
-					throw new Error(`Failed to calculate garbage probability for: ${outFilePath} with result: ${garbageResult}`);
-
-				if(garbageResult.confidence>C.MATCH_MAX_GARBAGE_PROBABILITIES[state.id.matchType])
-				{
-					if(state.verbose>=3)
-						XU.log`Removing image ${outFilePath} due to detected as garbage: ${garbageResult}`;
-						
-					fs.copyFileSync(outFilePath, path.join(C.GARBAGE_DETECTED_DIR_PATH, `${garbageResult.confidence.noExponents()}-${Math.randomInt(1, 100000)}-${Date.now().toString()}-${state.id.formatid}-${state.input.absolute.replaceAll("/", ":")}-${outSubPath}`));
-					removeFile = true;
-					return this.jump(-1);
-				}
-
-				this();
-			},
-			function removeIfNeeded()
-			{
-				if(!removeFile)
-					return this();
-			
-				state.output.files.removeOnce(outSubPath);
-				if(state.output.files.length===0)
-				{
-					delete state.output.files;
-					delete state.converter;
-				}
-				fileUtil.unlink(outFilePath, this);
-			},
-			subcb
-		);
-	}, cb);
-};
-
-exports.updateProcessed = function updateProcessed(state, p, cb)
-{
-	if(state.output.files)
-		state.processed = true;
-	else
-		delete state.converter;
-
-	if(p.format.updateProcessed)
-		return p.format.updateProcessed(state, p, cb);
-	
-	setImmediate(cb);
-};
-
-*/

@@ -41,12 +41,12 @@ export class RunState
 		const r = [];
 		r.push(`${prefix}${fg.white("Program")} ${fg.orange(this.programid)}${this.status ? ` ${fg.cyan("—")} ${fg.white("Status:")} ${xu.inspect(this.status)}` : ""}`);
 		if(this.bin)
-			r.push(`\n${prefix}\t${fg.white("ran:")} ${fg.peach(this.bin)} ${(this.args || []).map(arg => (arg.includes(" ") ? `${fg.cyan('"')}${fg.green(arg)}${fg.cyan('"')}` : fg.green(arg))).join(" ")} with options ${xu.inspect(this.runOptions || {})}`);
-		r.push(`\n${prefix}\t${fg.white("meta:")} ${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("   ran:")} ${fg.peach(this.bin)} ${(this.args || []).map(arg => (arg.includes(" ") ? `${fg.cyan('"')}${fg.green(arg)}${fg.cyan('"')}` : fg.green(arg))).join(" ")} with options ${xu.inspect(this.runOptions || {}).squeeze()}`);
+		r.push(`\n${prefix}\t${fg.white("  meta:")} ${xu.inspect(this.meta).squeeze()}`);
 		if(Object.hasOwn(this, "stdout"))
 		{
-			r.push(`\n${prefix}\t${fg.white("stdout (squeezed):")} ${this.stdout.squeeze()}`);
-			r.push(`\n${prefix}\t${fg.white("stderr (squeezed):")} ${this.stderr.squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("stdout:")} ${this.stdout.squeeze()}`);
+			r.push(`\n${prefix}\t${fg.white("stderr:")} ${this.stderr.squeeze()}`);
 		}
 		return r.join("");
 	}

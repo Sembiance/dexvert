@@ -112,6 +112,7 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 		{
 			Object.assign(dexState.meta, await format.getMeta(f.input, {verbose}));
 			
+			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{
 				dexState.processed = true;
@@ -119,37 +120,43 @@ export async function dexvert(inputFile, outputDir, {verbose, asFormat})
 				break;
 			}
 
+			// run any pre-converter pre format function
 			if(format.pre)
 				await format.pre(dexState);
 			
+			// try each converter specificied, until we have output files or have been marked as processed
 			for(const converter of (format.converters || []).map(v => Converter.create(dexState, v)))
 			{
 				await converter.run();
+				if((dexState.f.files.output?.length || 0)>0)
+					dexState.processed = true;
 
-				// TODO
+				if(dexState.processed)
+					break;
 			}
 
+			// run any post-convergter post format function
 			if(format.post)
 				await format.post(dexState);
-
-			/*
-			subState => (subState.processed ? p.util.flow.noop : p.util.flow.serial(p.family.steps)),		// For files we don't need to convert, meta.input calls format.inputMeta which can set processed to true if the file is verified as valid
-			() => p.util.file.tmpCWDCleanup])(state, p, cbHandler);
-				
-			(state, p) => p.util.file.findValidOutputFiles(true),
-			() => exports.updateProcessed,
-			() => exports.cleanup
-			
-			checkShouldContinue)
-				*/
 		}
 		catch(err)
 		{
-			xu.log`dexvert failed with error: ${err}`;
+			xu.log`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${err}`;
 		}
 
+		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made
+		// important to do this before cleanup() since that will delete all tmp dirs including output files
+		if(dexState.processed)
+			dexState.created = await dexState.f.rsyncTo(outputDir.absolute, {type : "output", relativeFrom : outDirPath});
+
 		await cleanup();
+
+		if(dexState.processed)
+			break;
 	}
+
+	if(dexState.processed && verbose>=1)
+		xu.log`dexvert ${fg.green("succeeded")} with format: ${dexState.format.pretty()}`;
 
 	return dexState;
 }

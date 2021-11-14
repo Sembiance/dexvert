@@ -18,20 +18,6 @@ export class FileSet
 		return fileSet;
 	}
 
-	// rsync copies all files to targetRoot and returns a FileSet for the new root
-	async rsyncTo(targetRoot, {type}={})
-	{
-		const newFileSet = await this.clone();
-		for(const file of (type ? this.files[type] : this.all))
-		{
-			if(file.rel.includes("/"))
-				await Deno.mkdir(path.join(targetRoot, path.dirname(file.rel)), {recursive : true});
-			await runUtil.run("rsync", ["-aL", path.join(this.root, file.rel), path.join(targetRoot, file.rel)]);
-		}
-
-		return newFileSet.changeRoot(targetRoot, {keepRel : true});
-	}
-
 	async addAll(type, files)
 	{
 		for(const file of files)
@@ -74,11 +60,49 @@ export class FileSet
 	}
 
 	// creates a copy of this
-	async clone()
+	async clone(types)
 	{
 		const fileSet = await FileSet.create(this.root);
-		for(const [type, files] of Object.entries(this.files))
-			await fileSet.addAll(type, files.map(file => file.clone()));
+		for(const type of types ? Array.force(types) : Object.keys(this.files))
+			await fileSet.addAll(type, this.files[type].map(file => file.clone()));
+		return fileSet;
+	}
+
+	// removes all files of the given type from this fileSet
+	removeType(type)
+	{
+		delete this.files[type];
+	}
+
+	// renames a type from oldType to newType
+	renameType(oldType, newType)
+	{
+		for(const file of this.files[oldType])
+			this.add(newType, file);
+		this.removeType(oldType);
+	}
+
+	// rsync copies all files to targetRoot and returns a FileSet for the new root
+	async rsyncTo(targetRoot, {type, relativeFrom}={})
+	{
+		const newFileSet = await this.clone(type ? [type] : null);
+		for(const file of (type ? this.files[type] : this.all))
+		{
+			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
+			if(fileRel.includes("/"))
+				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
+			await runUtil.run("rsync", ["-aL", path.join(relativeFrom || file.root, fileRel), path.join(targetRoot, fileRel)]);
+		}
+
+		return newFileSet.changeRoot(targetRoot, {keepRel : true});
+	}
+
+	// deserializes an object into a Dexfile
+	static deserialize(o)
+	{
+		const fileSet = new this();
+		fileSet.root = o.root;
+		fileSet.files = Object.fromEntries(Object.entries(o.files).map(([k, v]) => ([k, v.map(dexFile => DexFile.deserialize(dexFile))])));
 		return fileSet;
 	}
 
@@ -89,15 +113,6 @@ export class FileSet
 		o.root = this.root;
 		o.files = Object.fromEntries(Object.entries(this.files).map(([k, v]) => ([k, v.map(dexFile => dexFile.serialize())])));
 		return o;
-	}
-
-	// deserializes an object into a Dexfile
-	static deserialize(o)
-	{
-		const fileSet = new this();
-		fileSet.root = o.root;
-		fileSet.files = Object.fromEntries(Object.entries(o.files).map(([k, v]) => ([k, v.map(dexFile => DexFile.deserialize(dexFile))])));
-		return fileSet;
 	}
 
 	pretty(prefix="")

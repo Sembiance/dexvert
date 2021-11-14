@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {runUtil, fileUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {identify} from "./identify.js";
 
 const TENSORSERV_PATH = "/mnt/ram/dexvert/tensor";
 const TENSORSERV_HOST = "localhost";
@@ -30,9 +31,10 @@ export async function classifyImage(imagePath, modelName)
 	// convert to PNG
 	const pngTrimmedPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
 
-	// If we end with .svg, assume it's an .svg
-	// We do the funny cwd and leading ./ to handle files that start with dashes
-	if(imagePath.endsWith(".svg"))	// eslint-disable-line unicorn/prefer-ternary
+	const identifications = await identify(imagePath);
+
+	// We do the cwd and leading ./ to handle files that start with dashes
+	if(identifications.some(o => o.formatid==="svg"))	// eslint-disable-line unicorn/prefer-ternary
 		await runUtil.run("inkscape", ["--export-area-drawing", "-o", pngTrimmedPath, `./${path.basename(imagePath)}`], {...RUN_OPTIONS, virtualX : true, cwd : path.dirname(imagePath)});
 	else
 		await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame

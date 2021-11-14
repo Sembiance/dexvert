@@ -28,10 +28,11 @@ const dexvertOptions = {};
 		dexvertOptions[k] = argv[k];
 });
 
-const dexState = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions);
-// TODO if no results or !dexState.processed, transform.   transform code should move into bin/*/
-if(dexState)
+async function handleDexState(dexState)
 {
+	if(!dexState || !dexState.processed)
+		return false;
+
 	if(argv.jsonFile)
 		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
 
@@ -39,7 +40,22 @@ if(dexState)
 		console.log(JSON.stringify(dexState.serialize()));
 	else
 		console.log(`\n${dexState.pretty()}`);
+
+	Deno.exit(0);
 }
+
+await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions));
+if(argv.dontTransform)
+{
+	if(argv.verbose>=1)
+		xu.log`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
+	Deno.exit(0);
+}
+
+// TODO do the two transforms now
+
+xu.log`No processed result.`;
+
 
 /*
 const argv = cmdUtil.cmdInit(cmdData);

@@ -24,6 +24,10 @@ Can be an array of packages. If so, meta.website and meta.bin must be an array t
 >>> gentooUseFlags : "png jpg midi"
 Which Gentoo USE flags should be set.
 
+>>> ******** Properties
+>>> unsafe : true
+Set to true if this program isn't safe to use with all input files and may produce 'garbage' output
+
 
 >>> ******** Execute Properties
 >>> bin = "binary_program"
@@ -35,8 +39,17 @@ A function that returns an array of arguments to pass to the binary.
 This is executed before running the binary
 All args are relative to the CWD of dexState.input.root
 
+>>> runOptions = ({virtualX : true, timeout : xu.MINUTE})
+An object of run options to be passed into runUtil.run. Will override defaults.
+
+>>> outExt = async (runState) => { ... }
+Return the extension files produced by this program should be renamed to
+
 >>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
+
+>>> pre = (state, p, r, cb) => {}
+This will be executed directly BEFORE the program is run (either in or exec)
 
 >>> post = async (runState) => { ... }
 This will be executed directly AFTER the program has finished running (either bin or exec)
@@ -77,10 +90,6 @@ OLD NODE BELOW:
 >>> bin : ["bchunk", "sudo"]
 An array of binaries that this utilizes. Only set this if gentooPackages is an array.
 
->>> ******** Properties
->>> unsafe : true
-Set to true if this program isn't safe to be brute forced.
-
 >>> slow : true
 If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)
 
@@ -107,12 +116,6 @@ If set, the return result will be the new CWD.
 Normally I create a temporary CWD and do processing there.
 Note, when changing the cwd, the input.filePath and output.dirPath will automatically be updated with proper relative paths
 
->>> pre = (state, p, r, cb) => {}
-This will be executed directly BEFORE the program is run.
-
-
->>> runOptions = (state, p, r) => ({virtualX : true})
-Can return an object of run options to be passed into runUtil.run
 
 >>> redirectOutput = (state, p, r) => "/path/to/output.txt"
 Can return a file path string where stdout from the program should be redirected to

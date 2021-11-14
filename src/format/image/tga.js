@@ -10,7 +10,7 @@ export class tga extends Format
 	magic = ["Truevision TGA","Targa image data"];
 	converters = ["deark","nconvert","recoil2png","abydosconvert"]
 
-outputValidator = undefined;
+outputValidator = undefined;	// Rename to verify(dexFile, identifications)
 }
 */
 /*

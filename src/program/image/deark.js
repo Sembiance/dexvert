@@ -21,6 +21,7 @@ export class deark extends Program
 	};
 
 	bin  = "deark";
+	outExt = () => ".png";
 	args = r =>
 	{
 		const args = ["-maxfiles", "9999"];

@@ -1,39 +1,39 @@
-import {assertStrictEquals, assertThrowsAsync, assertEquals} from "https://deno.land/std@0.111.0/testing/asserts.ts";
+import {assertStrictEquals, assertThrowsAsync, assertEquals, assert} from "https://deno.land/std@0.111.0/testing/asserts.ts";
 import {FileSet} from "../../src/FileSet.js";
 import {DexFile} from "../../src/DexFile.js";
 import {fileUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import {encode as base64Encode} from "https://deno.land/std@0.113.0/encoding/base64.ts";
 
-Deno.test("create", async () =>
+const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files":{"input":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/txt.b","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b","base":"txt.b","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"txt","ext":".b","preExt":".txt","preName":"b","isFile":true,"isDirectory":false,"isSymlink":false,"size":8,"ts":1635685484995},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/third","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third","base":"third","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"third","ext":"","preExt":"","preName":"third","isFile":false,"isDirectory":true,"isSymlink":false,"size":4096,"ts":1635685489475}],"other":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/symlinkFile","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile","base":"symlinkFile","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"symlinkFile","ext":"","preExt":"","preName":"symlinkFile","isFile":false,"isDirectory":false,"isSymlink":true,"size":14,"ts":1635685795866},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/c.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt","base":"c.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"c","ext":".txt","preExt":".c","preName":"txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":10,"ts":1635685592959}]}}`; // eslint-disable-line max-len
+
+Deno.test("addFile", async () =>
 {
 	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
-	const b = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files/", "input", ["some.big.txt.file.txt", "subDir/txt.b", "subDir/symlinkFile", "subDir/more_sub/c.txt", "subDir/more_sub/third"]);
-	const c = await b.clone();
-	const d = await b.clone();
-	const e = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files/", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
+	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
+	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
+	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third");
+	const b = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
-	d.changeRoot("/tmp/path/dir", {keepRel : true});
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
+	await b.addAll("input", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 
-	[a, b, c, e].forEach(o =>
+	[a, b].forEach(o =>
 	{
 		assertStrictEquals(o.root, "/mnt/compendium/DevLab/dexvert/test/files");
 		assertStrictEquals(o.files.input.length, 5);
 		assertStrictEquals(o.all.length, 5);
 		assertStrictEquals(o.input.name, "some.big.txt.file");
 		assertStrictEquals(o.input.size, 6);
+		assertStrictEquals(o.files.input[2].isSymlink, true);
 		assertStrictEquals(o.all[2].isSymlink, true);
 		assertStrictEquals(o.files.input[2].isSymlink, true);
 	});
+
+	assertThrowsAsync(async () => await a.add(await DexFile.create("/mnt/compendium/DevLab/dexvert/.gitignore")));
+	assertThrowsAsync(async () => await a.add(await DexFile.create("whatever", "/mnt/compendium/DevLab/dexvert/.gitignore")));
 });
 
 Deno.test("changeRoot", async () =>
@@ -87,33 +87,118 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(a.all[4].rel, "third");
 });
 
-Deno.test("addFile", async () =>
+Deno.test("create", async () =>
 {
 	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
-	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
-	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
-	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third");
-	const b = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	const b = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files/", "input", ["some.big.txt.file.txt", "subDir/txt.b", "subDir/symlinkFile", "subDir/more_sub/c.txt", "subDir/more_sub/third"]);
+	const c = await b.clone();
+	const d = await b.clone();
+	const e = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files/", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
-	await b.addAll("input", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	d.changeRoot("/tmp/path/dir", {keepRel : true});
 
-	[a, b].forEach(o =>
+	[a, b, c, e].forEach(o =>
 	{
 		assertStrictEquals(o.root, "/mnt/compendium/DevLab/dexvert/test/files");
 		assertStrictEquals(o.files.input.length, 5);
 		assertStrictEquals(o.all.length, 5);
 		assertStrictEquals(o.input.name, "some.big.txt.file");
 		assertStrictEquals(o.input.size, 6);
-		assertStrictEquals(o.files.input[2].isSymlink, true);
 		assertStrictEquals(o.all[2].isSymlink, true);
 		assertStrictEquals(o.files.input[2].isSymlink, true);
 	});
+});
 
-	assertThrowsAsync(async () => await a.add(await DexFile.create("/mnt/compendium/DevLab/dexvert/.gitignore")));
-	assertThrowsAsync(async () => await a.add(await DexFile.create("whatever", "/mnt/compendium/DevLab/dexvert/.gitignore")));
+Deno.test("clone", async () =>
+{
+	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
+	let b = await a.clone();
+	assertStrictEquals(b.files.input.length, 3);
+	assertStrictEquals(b.files.other.length, 2);
+	assertStrictEquals(b.all.length, 5);
+
+	b = await a.clone("other");
+	assert(!b.files.input);
+	assertStrictEquals(b.files.other.length, 2);
+	assertStrictEquals(b.all.length, 2);
+});
+
+Deno.test("deserialize", () =>
+{
+	const a = FileSet.deserialize(JSON.parse(fileSetJSON));	// eslint-disable-line no-restricted-syntax
+	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
+	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
+});
+
+Deno.test("pretty", async () =>
+{
+	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
+
+	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
+});
+
+Deno.test("removeType", async () =>
+{
+	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
+	assertStrictEquals(a.files.input.length, 3);
+	assertStrictEquals(a.files.other.length, 2);
+	assert(a.files.input);
+	assert(a.files.other);
+	assertStrictEquals(a.all.length, 5);
+	a.removeType("other");
+	assertStrictEquals(a.files.input.length, 3);
+	assert(!a.files.other);
+	assert(a.files.input);
+	assertStrictEquals(a.all.length, 3);
+	a.removeType("input");
+	assertStrictEquals(a.all.length, 0);
+});
+
+Deno.test("renameType", async () =>
+{
+	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
+	assertStrictEquals(a.files.input.length, 3);
+	assertStrictEquals(a.files.other.length, 2);
+	assert(a.files.input);
+	assert(a.files.other);
+	assertStrictEquals(a.all.length, 5);
+	a.renameType("other", "bingo");
+	assertStrictEquals(a.files.input.length, 3);
+	assert(!a.files.other);
+	assert(a.files.input);
+	assert(a.files.bingo.length, 2);
+	assertStrictEquals(a.all.length, 5);
+	a.renameType("bingo", "input");
+	assertStrictEquals(a.files.input.length, 5);
+	assert(!a.files.other);
+	assert(!a.files.bingo);
+	assert(a.files.input);
+	assertStrictEquals(a.all.length, 5);
 });
 
 Deno.test("rsyncTo", async () =>
@@ -136,28 +221,28 @@ Deno.test("rsyncTo", async () =>
 		"subDir/txt.b",
 		"some.big.txt.file.txt"].map(v => path.join(tmpDirPath, v)));
 	await Deno.remove(tmpDirPath, {recursive : true});
+
 	await Deno.mkdir(tmpDirPath);
-	await a.rsyncTo(tmpDirPath, {type : "other"});
+	const b = await a.rsyncTo(tmpDirPath, {type : "other"});
 	assertEquals(await fileUtil.tree(tmpDirPath), [
 		"subDir",
 		"subDir/more_sub",
 		"subDir/more_sub/c.txt",
 		"subDir/symlinkFile"].map(v => path.join(tmpDirPath, v)));
+	assert(!b.files.input);
+	assertStrictEquals(b.files.other.length, 2);
+	assertStrictEquals(b.all.length, 2);
+	await Deno.remove(tmpDirPath, {recursive : true});
+
+	await Deno.mkdir(tmpDirPath);
+	await a.rsyncTo(tmpDirPath, {type : "other", relativeFrom : "/mnt/compendium/DevLab/dexvert/test/files/subDir"});
+	assertEquals(await fileUtil.tree(tmpDirPath), [
+		"more_sub",
+		"more_sub/c.txt",
+		"symlinkFile"].map(v => path.join(tmpDirPath, v)));
 	await Deno.remove(tmpDirPath, {recursive : true});
 });
 
-Deno.test("pretty", async () =>
-{
-	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
-		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
-		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
-	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
-
-	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
-});
-
-const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files":{"input":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/txt.b","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b","base":"txt.b","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"txt","ext":".b","preExt":".txt","preName":"b","isFile":true,"isDirectory":false,"isSymlink":false,"size":8,"ts":1635685484995},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/third","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third","base":"third","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"third","ext":"","preExt":"","preName":"third","isFile":false,"isDirectory":true,"isSymlink":false,"size":4096,"ts":1635685489475}],"other":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/symlinkFile","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile","base":"symlinkFile","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"symlinkFile","ext":"","preExt":"","preName":"symlinkFile","isFile":false,"isDirectory":false,"isSymlink":true,"size":14,"ts":1635685795866},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/c.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt","base":"c.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"c","ext":".txt","preExt":".c","preName":"txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":10,"ts":1635685592959}]}}`; // eslint-disable-line max-len
 Deno.test("serialize", async () =>
 {
 	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
@@ -166,13 +251,6 @@ Deno.test("serialize", async () =>
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
 
-	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
-});
-
-Deno.test("deserialize", () =>
-{
-	const a = FileSet.deserialize(JSON.parse(fileSetJSON));	// eslint-disable-line no-restricted-syntax
-	assertStrictEquals(base64Encode(a.pretty()), "G1s5N21GaWxlU2V0G1swbSAbWzk2bSgbWzBtG1s5N21yb290IBtbMG0bWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtKRtbMG0gaGFzIBtbOTdtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1s5NW1EG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvdGhpcmQbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1s5Nm1MG1swbSAbWzk3bSAgICAgIBtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvc3ltbGlua0ZpbGUbWzBtCgkbWzk3bW90aGVyOiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgIDEwYhtbMG0gG1s5M20vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1szM21zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
 	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
 });
 

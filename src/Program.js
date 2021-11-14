@@ -35,14 +35,18 @@ export class Program
 			gentooUseFlags : {type : "string"},
 			website        : {type : "string", url : true},
 			notes          : {type : "string"},
+			unsafe         : {type : "boolean"},
 			flags          : {type : Object},
 			renameOut      : {type : Object},
+			runOptions     : {type : Object},
 
 			// execution
-			bin  : {type : "string"},
-			exec : {type : "function", length : 1},
-			args : {type : "function", length : 1},
-			post : {type : "function", length : 1}
+			bin    : {type : "string"},
+			outExt : {type : "function", length : [0, 1]},
+			exec   : {type : "function", length : 1},
+			args   : {type : "function", length : 1},
+			pre    : {type : "function", length : 1},
+			post   : {type : "function", length : 1}
 		});
 
 		if(program.renameOut)
@@ -52,7 +56,7 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput, outExt}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, verbose=0, flags={}, originalInput}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -64,6 +68,9 @@ export class Program
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags});
 
+		if(this.pre)
+			await this.pre(r);
+
 		if(this.bin)
 		{
 			// run a program on disk
@@ -74,6 +81,8 @@ export class Program
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(verbose>=5)
 				r.runOptions.verbose = true;
+			if(this.runOptions)
+				Object.assign(r.runOptions, this.runOptions);
 				
 			if(verbose>=4)
 				xu.log`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
@@ -125,7 +134,7 @@ export class Program
 		// if we have just a single new output file, we perform some renaming of it
 		if(f.outDir && f.files.new?.length===1)
 		{
-			const ro = Object.assign({ext : outExt || "", name : true}, this.renameOut);
+			const ro = Object.assign({ext : this.outExt ? this.outExt(r) || "" : "", name : true}, this.renameOut);
 			const newFilename = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name)) + (ro.ext || f.new.ext);
 			if(newFilename!==f.new.base)
 			{

@@ -12,7 +12,7 @@ export class pcd extends Format
 
 inputMeta = undefined;
 
-outputValidator = undefined;
+outputValidator = undefined;	// Rename to verify(dexFile, identifications)
 }
 */
 /*

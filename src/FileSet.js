@@ -37,10 +37,9 @@ export class FileSet
 			throw new TypeError(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
 
 		if(!this.files[type])
-		{
-			Object.defineProperty(this, type, {get : () => (this.files[type] || [])[0]});
 			this.files[type] = [];
-		}
+		if(!Object.hasOwn(this, type))
+			Object.defineProperty(this, type, {get : () => (this.files[type] || [])[0]});
 
 		const dexFile = o instanceof DexFile ? o : await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o});
 		if(dexFile.root!==this.root)

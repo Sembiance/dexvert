@@ -42,6 +42,7 @@ export class Program
 
 			// execution
 			bin       : {type : "string"},
+			chain     : {type : "string"},
 			diskQuota : {type : "number", range : [1]},
 			outExt    : {type : "function", length : [0, 1]},
 			exec      : {type : "function", length : 1},
@@ -157,6 +158,23 @@ export class Program
 			await tmpF.rsyncTo(f.outDir.absolute, {type : "new"});
 			await Deno.remove(tmpOutDirPath, {recursive : true});
 			// don't need to do anything with the original f, everything should have the same path as before
+		}
+
+		// check to see if we need to chain to another program
+		if(this.chain && f.files.new?.length>0)
+		{
+			for(const progRaw of this.chain.split("->").map(v => v.trim()))
+			{
+				for(const newFile of f.files.new)
+				{
+					const chainF = await f.clone();
+					chainF.removeType("input");
+					chainF.removeType("new");
+					await chainF.add("input", newFile);
+					const newR = await Program.runProgram(progRaw, chainF);
+					console.log(`${newR}: ${newR.pretty()}`);
+				}
+			}
 		}
 
 		return r;

@@ -1,32 +1,18 @@
-/*
 import {Format} from "../../Format.js";
 
 export class svg extends Format
 {
-	name = "Scalable Vector Graphics";
-	website = "http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics";
-	ext = [".svg",".svgz"];
-	mimeType = "image/svg+xml";
-	magic = ["SVG Scalable Vector Graphics image"];
+	name      = "Scalable Vector Graphics";
+	website   = "http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics";
+	ext       = [".svg", ".svgz"];
+	mimeType  = "image/svg+xml";
+	magic     = ["SVG Scalable Vector Graphics image"];
 	untouched = true;
 
-inputMeta = undefined;
+	// TODO add inputMeta
 }
-*/
+
 /*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name      : "Scalable Vector Graphics",
-	website   : "http://fileformats.archiveteam.org/wiki/Scalable_Vector_Graphics",
-	ext       : [".svg", ".svgz"],
-	mimeType  : "image/svg+xml",
-	magic     : ["SVG Scalable Vector Graphics image"],
-	untouched : true
-};
-
 exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 	() => ({program : "svgInfo"}),
 	(state, p) =>

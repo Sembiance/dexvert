@@ -1,30 +1,22 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class dexvert extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
-	flags = {"asFormat":"Which format to convert as","deleteInput":"Delete input file after finishing"};
+	flags =
+	{
+		asFormat : "Which format to convert as"
+	};
+
 	unsafe = true;
+	bin = "/mnt/compendium/.deno/bin/dexvert";
+	args = r => [...(r.flags.asFormat ? [`--asFormat=${r.flags.asFormat}`] : []), `--verbose=${xu.verbose}`, r.f.input.rel, r.f.outDir.rel]
 }
-*/
+
 
 /*
-"use strict";
-const XU = require("@sembiance/xu"),
-	fileUtil = require("@sembiance/xutil").file,
-	path = require("path");
-
-exports.meta =
-{
-	website : "https://github.com/Sembiance/dexvert",
-	flags   :
-	{
-		asFormat    : `Which format to convert as`,
-		deleteInput : "Delete input file after finishing"
-	},
-	unsafe : true
-};
+"
 
 exports.bin = () => path.join(__dirname, "..", "..", "..", "bin", "dexvert");
 exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) =>

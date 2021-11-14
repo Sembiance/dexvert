@@ -23,6 +23,8 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 	if(asFormat)
 	{
 		const [asFamilyid, asFormatid] = asFormat.split("/");
+		if(!formats[asFormatid])
+			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);
 		const asId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : formats[asFormatid].name, matchType : "magic", confidence : 100};
 		for(const k of ["ext", "unsupported"])
 		{

@@ -65,8 +65,8 @@ If name is set to false, the filename won't be renamed.
 >>> diskQuota = xu.MB*20
 Some programs are buggy and will consume the entire hard drive. This is a way to limit that.
 
-
-
+>>> chain = "dexvert[asFormat:abc] -> dexvert[asFormat:mid]"
+Programs can't always produce the end result I want, so you can chain the outputs of one program into a nother program.
 
 
 

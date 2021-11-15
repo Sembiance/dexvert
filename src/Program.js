@@ -44,7 +44,7 @@ export class Program
 			bin       : {type : "string"},
 			chain     : {type : "string"},
 			diskQuota : {type : "number", range : [1]},
-			outExt    : {type : "function", length : [0, 1]},
+			outExt    : {types : ["function", "string"]},
 			exec      : {type : "function", length : 1},
 			args      : {type : "function", length : 1},
 			pre       : {type : "function", length : 1},
@@ -116,7 +116,7 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
 
 			// now find any new files on disk in the output dir that we don't yet
-			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll((f.output || []).map(v => v.absolute)))
+			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.input || [])].map(v => v.absolute)))
 			{
 				// if the new file is identical to our input file, delete it
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
@@ -137,7 +137,7 @@ export class Program
 		// if we have just a single new output file, we perform some renaming of it
 		if(f.outDir && f.files.new?.length===1)
 		{
-			const ro = Object.assign({ext : this.outExt ? this.outExt(r) || "" : "", name : true}, this.renameOut);
+			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
 			const newFilename = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name)) + (ro.ext || f.new.ext);
 			if(newFilename!==f.new.base)
 			{
@@ -165,15 +165,24 @@ export class Program
 		{
 			for(const progRaw of this.chain.split("->").map(v => v.trim()))
 			{
+				const newFilesToAdd = [];
 				for(const newFile of f.files.new)
 				{
 					const chainF = await f.clone();
 					chainF.removeType("input");
 					chainF.removeType("new");
 					await chainF.add("input", newFile);
-					const newR = await Program.runProgram(progRaw, chainF);
-					console.log(`${newR}: ${newR.pretty()}`);
+					await Program.runProgram(progRaw, chainF);
+					
+					if(chainF.files.new?.length)
+					{
+						f.files.new.removeOnce(newFile);
+						await Deno.remove(newFile.absolute);
+						newFilesToAdd.push(...chainF.files.new);
+					}
 				}
+				if(newFilesToAdd.length>0)
+					await f.addAll("new", newFilesToAdd);
 			}
 		}
 

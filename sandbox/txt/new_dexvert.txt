@@ -1,16 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get svgInfo working
-
-* Get svg identifying and `dextry file.svg` working (with svg meta using new format.meta() (so base format.getMeta() will check this.meta() and combine with family))
-
-* Get EPS to SVG working with family image.js verify working with SVG output
-
-* Get EPS 'nconvert & inkscape' working
-
-* Get cdr -> scribus -> eps -> svg working
-
 * Once pcx/nconvert working, get the rest of the PCX converters working, even if QEMU
 
 * Find a program that requires it to be ran in the output cwd and add easy support for this

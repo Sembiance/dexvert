@@ -24,9 +24,13 @@ export class Format
 	baseKeys = Object.keys(this);
 
 	// will get meta info for this particular format and the passed input fileset
-	getMeta(inputFile)
+	async getMeta(inputFile)
 	{
-		return this.family.getMeta ? this.family.getMeta(inputFile, this) || {} : {};
+		const meta = {};
+		Object.assign(meta, this.family.getMeta ? this.family.getMeta(inputFile, this) || {} : {});
+		if(this.meta)
+			Object.assign(meta, (await this.meta(inputFile)) || {});
+		return meta;
 	}
 
 	// returns a pretty string to output to console
@@ -90,6 +94,7 @@ export class Format
 			auxFiles         : {type : "function", length : [2, 3]},
 			byteCheck        : {types : [Object, Array]},
 			confidenceAdjust : {type : "function"},
+			meta             : {type : "function", length : 1},
 			fallback         : {type : "boolean"},
 			transformUnsafe  : {type : "boolean"},
 			trustMagic       : {type : "boolean"},

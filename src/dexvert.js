@@ -2,7 +2,7 @@ import {xu, fg} from "xu";
 import {identify} from "./identify.js";
 import {Format} from "./Format.js";
 import {FileSet} from "./FileSet.js";
-import {Converter} from "./Converter.js";
+import {Program} from "./Program.js";
 import {DexState} from "./DexState.js";
 import {fileUtil} from "xutil";
 import {Identification} from "./Identification.js";
@@ -118,9 +118,31 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 			xu.log3`\nTrying ${fg.yellowDim((format.converters || []).length)} ${format.formatid} converters...`;
 
 			// try each converter specificied, until we have output files or have been marked as processed
-			for(const converter of (format.converters || []).map(v => Converter.create(dexState, v)))
+			for(const converter of (format.converters || []))
 			{
-				await converter.run();
+				const progs = converter.split("&").map(v => v.trim());
+				for(const prog of progs)
+				{
+					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input});
+					dexState.ran.push(r);
+
+					// verify output files
+					for(const newFile of dexState.f.files.new || [])
+					{
+						const isValid = await dexState.format.family.verify(newFile, await identify(newFile), {dexState});
+						if(!isValid)
+						{
+							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
+							await Deno.remove(newFile.absolute);
+						}
+						else
+						{
+							await dexState.f.add("output", newFile);
+						}
+					}
+					dexState.f.removeType("new");
+				}
+
 				if((dexState.f.files.output?.length || 0)>0)
 					dexState.processed = true;
 

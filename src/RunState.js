@@ -48,12 +48,12 @@ export class RunState
 			if(xu.verbose>=4)
 				r.push(`\n${pre}\t${xu.colon("  opts")}${xu.inspect(this.runOptions || {}).squeeze()}`);
 		}
-		if(xu.verbose>=2 && Object.keys(this.meta || {}).length>0)
+		if(xu.verbose>=3 && Object.keys(this.meta || {}).length>0)
 			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
 
-		if(xu.verbose>=3 && (this.stdout || "").trim().length>0)
+		if(xu.verbose>=4 && (this.stdout || "").trim().length>0)
 			r.push(`\n${pre}\t${xu.colon("stdout")}${this.stdout.squeeze()}`);
-		if(xu.verbose>=3 && (this.stderr || "").trim().length>0)
+		if(xu.verbose>=4 && (this.stderr || "").trim().length>0)
 			r.push(`\n${pre}\t${xu.colon("stderr")}${this.stderr.squeeze()}`);
 			
 		return r.join("");

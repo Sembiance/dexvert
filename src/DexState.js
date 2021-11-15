@@ -123,7 +123,7 @@ export class DexState
 		}
 		r.push(`\n${prefix}${printUtil.minorHeader("ACTIVE PHASE")}${this.phase.pretty(`${prefix}\t`)}`);
 		
-		r.push(`\n${xu.cf.fg.cyan("-".repeat(Deno.consoleSize(Deno.stdout.rid).columns))}`);
+		r.push(`\n${xu.cf.fg.cyan("-".repeat(100))}`);
 		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
 		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);
 		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);

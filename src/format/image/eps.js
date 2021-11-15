@@ -8,9 +8,7 @@ export class eps extends Format
 	ext      = [".eps", ".epsf", ".epsi", ".epi", ".ept"];
 	mimeType = "application/postscript";
 	magic    = ["Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File Postscript"];
-	notes    = xu.trim`
-		Sometimes it's a vector based image, sometimes not. Haven't determined a way to differeentiate.
-		So we just convert to PNG with nconvert and also to SVG with inkscape.`;
+	notes    = "Sometimes it's a vector based image, sometimes not. Haven't determined a way to differentiate. So we just convert to PNG with nconvert and also to SVG with inkscape.";
 
-	converters = ["inkscape"]		// todo nconvert & inkscape
+	converters = ["nconvert & inkscape"]
 }

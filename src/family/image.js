@@ -43,9 +43,16 @@ export class image extends Family
 		// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
 		// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
 		if(dexid.formatid==="svg")
-			console.log(await Program.runProgram("svgInfo", dexFile));	// TODO need to handle this
+		{
+			const r = await Program.runProgram("svgInfo", dexFile);
+			await Deno.remove(r.f.outDir.absolute, {recursive : true});
+			await Deno.remove(r.f.homeDir.absolute, {recursive : true});
+			Object.assign(meta, r.meta);
+		}
 		else
+		{
 			Object.assign(meta, await imageUtil.getInfo(dexFile.absolute));
+		}
 
 		if(!meta.width || !meta.height)
 			return false;

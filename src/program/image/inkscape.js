@@ -9,8 +9,8 @@ export class inkscape extends Program
 	gentooUseFlags = "cdr dbus dia exif graphicsmagick jpeg openmp postscript visio wpg";
 	unsafe         = true;
 
-	bin = "inkscape"
-	runOptions = ({timeout : xu.MINUTE*2, virtualX : true});
+	bin        = "inkscape"
+	runOptions = ({virtualX : true});
 
 	// OLD: inkscape --actions="export-area-drawing; export-filename:/tmp/export.png; export-do;" inputFile
 	args = r => ["--export-area-drawing", "--export-plain-svg", "--export-type=svg", "-o", path.join(r.f.outDir.rel, "out.svg"), r.f.input.rel]

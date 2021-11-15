@@ -34,19 +34,19 @@ Either all extensions (if set to true) or specified extensions are weak and the 
 
 
 >>> ******** Filename
->>> filename : ["FILEID.BIZ", /^filename$/i]
+>>> filename = ["FILEID.BIZ", /^filename$/i]
 Array of filenames this format may have.
 Strings must match exactly to the filename, case sensitive.
 Regexes match as a regex. Use /.../i for a case insensitive match
 
 
 >>> ******** File Size
->>> fileSize : 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}
+>>> fileSize = 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}
 If a number, files must be exactly this size.
 If an array, files must be any of the sizes in the array.
 If an object, the keys are extensions and files with the given extension must be that file size.
 
->>> matchFileSize : true
+>>> matchFileSize = true
 Normally files are not matched against file size because it's a pretty weak match.
 You can opt into file size matching if by setting this to true, only do this if you are sure your converter won't produce garbage from garbage.
 
@@ -60,7 +60,7 @@ If it's a regex, the magic must match the regex exactly.
 >>> forbiddenMagic = ["Not Magic", /^Not This$/]
 An array of magics that the file must NOT match.
 
->>> forbidMagicMatch : true
+>>> forbidMagicMatch = true
 If set to true, then this format will never match on 'magic'
 
 >>> weakMagic = true || ["Specific Magic", /^That is weak$/]
@@ -82,32 +82,34 @@ Can adjust the confidence manually up or down. WARNING, this is a last resort ha
 Can be useful if a format has a generic extension, or is otherwise easily matched, and the conversion program doesn't check the
 file it's converting well enough, often producing garbage or something when a file is mis-identified. 
 
->>> fallback : true
+>>> fallback = true
 Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
 
 >>> priority = C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
 
->>> transformUnsafe : true
+>>> transformUnsafe = true
 If set to true, this format isn't safe to transform
 
->>> trustMagic : true
+>>> trustMagic = true
 If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
 
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.
 
->>> untouched : true || async (dexState) { return true; }
+>>> untouched = true || async (dexState) { return true; }
 Specify that the file will remain as-is and untouched. Use for formats that browsers already support like jpg, pdf, txt, etc.
 
+>>> meta = async inputFile => { return {}; }
+Format specific function that takes in an input DexFile and should return meta about the input file
 
 >>> ******** Conversion
->>> metaProviders : ["image", "darkTable", "ansiArt"]
+>>> metaProviders = ["image", "darkTable", "ansiArt"]
 A list of meta providers to use to get info about the input file for this format.
 These are family specific
 
->>> keepFilename : true
+>>> keepFilename = true
 Don't rename the file safely for input. ONLY USE THIS if the program requires the original filename to be able to convert the file.
 NOTE! This will not prevent the program from adding the proper extension, see safeExt for that.
 Normally the filename is renamed to in<ext> in order to prevent issues with programs choking on filenames with non-ascii characters

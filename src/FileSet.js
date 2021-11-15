@@ -23,7 +23,7 @@ export class FileSet
 		for(const file of files)
 			await this.add(type, file);
 		
-		// Doing this would be faster probably, but would yield files being added potentially out of order, which might be important to maintain
+		// Doing this below instead of the above would be faster probably, but would yield files being added potentially out of order, which might be important to maintain
 		//await Promise.all(files.map(file => this.add(type, file)));
 	}
 

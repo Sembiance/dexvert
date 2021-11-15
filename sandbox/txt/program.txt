@@ -42,7 +42,7 @@ All args are relative to the CWD of dexState.input.root
 >>> runOptions = ({virtualX : true, timeout : xu.MINUTE})
 An object of run options to be passed into runUtil.run. Will override defaults.
 
->>> outExt = async (runState) => { ... }
+>>> outExt = ".svg"   ||   async (runState) => { ... }
 Return the extension files produced by this program should be renamed to
 
 >>> exec = async (runState) => { ... }

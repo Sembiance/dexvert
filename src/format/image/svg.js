@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {Program} from "../../Program.js";
 
 export class svg extends Format
 {
@@ -7,26 +8,13 @@ export class svg extends Format
 	ext       = [".svg", ".svgz"];
 	mimeType  = "image/svg+xml";
 	magic     = ["SVG Scalable Vector Graphics image"];
-	untouched = true;
+	untouched = dexState => dexState.meta.width && dexState.meta.height;
 
-	// TODO add inputMeta
-}
-
-/*
-exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
-	() => ({program : "svgInfo"}),
-	(state, p) =>
+	meta = async inputFile =>
 	{
-		const svgInfo = p.util.program.getMeta(state, "svgInfo");
-		if(svgInfo)
-		{
-			state.input.meta.image = svgInfo;
-			if(svgInfo.width && svgInfo.height)
-				state.processed = true;
-		}
-		
-		return p.util.flow.noop;
+		const svgInfoR = await Program.runProgram("svgInfo", inputFile);
+		await Deno.remove(svgInfoR.f.outDir.absolute, {recursive : true});
+		await Deno.remove(svgInfoR.f.homeDir.absolute, {recursive : true});
+		return svgInfoR.meta;
 	}
-])(state0, p0, cb);
-
-*/
+}

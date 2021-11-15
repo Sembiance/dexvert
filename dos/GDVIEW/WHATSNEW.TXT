@@ -1,0 +1,25 @@
+
+New in GD View 0.92 for DOS
+---------------------------
+
+- added character set conversion (press ALT-D in text viewer)
+- improved file type detection
+- improved JPEG support
+- misc. other improvements/bugfixes
+
+
+
+New in GD View 0.91 for DOS
+---------------------------
+
+- fixed GIF support
+- support for HA archives
+- improved support for: JPEG, PCPAINT, CAB, ZIP, Text, RTF, AmigaGuide, UUE
+
+- fixed directory viewer status line display
+- support for long file names in Windows NT DOS box (can be disabled in
+  gdv.cfg)
+- other small bugfixes
+
+- new registration method (see register.txt)
+

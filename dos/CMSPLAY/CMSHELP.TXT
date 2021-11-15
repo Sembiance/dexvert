@@ -1,0 +1,123 @@
+                              ÚÄÄÄÄÄÄÄÄÄ¿
+                              ³ CMSHELP ³
+                              ÀÄÄÄÄÄÄÄÄÄÙ
+
+1. No Music During Play - Check the connections from the card to the   
+   Hi-fi set or speakers. Check the volume control on the card.
+
+   Type : CMSDRV
+          You should see CMSDRV (PC) already exist
+
+
+2. Playing Music
+
+   Type PLAYER to play the music. But there are very few songs in
+   this CMS Master disk. The songs are in CMS SONG Disk #1 and #2.
+   Put one of the Song Disks in B: drive, then select the "SETUP"    
+   option in PLAYER's main menu and set the CMS path to "B:".
+
+   After this,  select "NEW FILE" under the "MUSIC"  option.  Use 
+   the  arrow keys to select the song you wish to play using  the 
+   arrow keys and hit <Enter>.
+
+
+
+3. Start ABC
+
+   a) Create an .ABC file - refer to MYSONG2.ABC in this disk for
+      guidance.
+
+   b) Generate the Bass, Chord and Rhythm
+                         enter:    ABCR MYSONG2
+
+   c) Proceed to (4) to COMPOSE and play the music
+
+
+
+4. Start Composing :
+
+   a) Create a .THM file using any word-processor that stores in
+      ASCII format. You can refer to the sample file - MYSONG.THM
+      in this disk for guidance.
+
+   b) Compose the song,  enter :   COMPOSE MYSONG
+
+   c) Play the song,     enter :   PLAYER MYSONG /Q
+
+
+5. DEFINST - define your own instrument,
+   also use for listening to the effect of each preset instruments
+
+
+
+
+                         SUMMARY OF CMS
+                         --------------
+
+ .title    SONG TITLE    (for display on Title line max 32 chars)
+
+ .composer COMPOSER's name (for display on Composer line, max 32)
+
+ .message ANY MESSAGE        (for display on third lines, max 32)
+
+ ; semi colons for remarks
+
+ .COPY  M1-M3      will copy the m1 line to m2 and m3
+
+BARS :   use  "|"   as bars separators
+         ensure each row of music has the same number of Bars
+
+ %    = don't check timing
+
+
+Parameters :
+Parameters are enclosed in square brackets [ ],
+each separated by a comma
+
+     Global Parameters: affect all voices:
+     T= time sig     : 1/4,2/4,3/4,4/4,6/4,6/8 def T=4/4
+     S= tempo        : 40 -240 , def S=120
+     1= key sig      : A,B...G or #A...#G or @A...@G , Def is 1=C
+     1= key1>key2    : transpose key1 to key2
+     R= rythm        : look for .BCD files.  eg [r=waltz]
+        [r=0] stop abc
+
+     Normal parameter, affect individual voices only:
+     P=preset instrument : 1 - 32 , def p=1
+     V=volume            : 0-255, def  v=255
+     X=stereo effect     : [x=R] [x=L] [x=B] Right,Left,Both
+
+
+Musical Notes :  1,2,3,4,5,6,7 for  Do,Re,Mi,Fa,So,La,Ti
+
+     .line5  === > use   c,d,e,f,g,a,b for 1,2,3,4,5,6,7
+
+
+Accidentals  : sharp: #    flat: @    natural: ~
+
+
+Octaves: 7 octaves denoted by symbols: A,B...G , default is D
+         + jump to next higher octave,  _ jump to lower octave
+
+
+Timing:  1 ---  4beats ,   1 --   3beats,   1 - 2beats,  1 1beat
+          1/   1/2 beat,      1//  1/4 beat,  1///  1/8 beat
+          1.   1+ 1/2 beat,    1./  3/4 beat
+
+Triplets: 123T// (total 1/2 beat),  123T/ (1 beat),  123T (2 beats)
+
+12 voices (or parts) use m1 ... m12 as "line ID"
+
+     Line ID  AA :is for autobass chords
+
+
+ABCR Chords   : A B C D E F G or #A.... @A   are all major chord
+
+          small "m" for minor chords   eg   Am, Em , #Fm
+          small "s" for major seventh chords , eg.  Gs,  Cs
+          small "n" for minor seventh chords , eg. An , Dn
+          small "u" for Augmented chords , eg Cu
+          small "i" for Diminished chords, eg Ci
+
+
+

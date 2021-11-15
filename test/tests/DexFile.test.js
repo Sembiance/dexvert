@@ -24,7 +24,7 @@ Deno.test("create", async () =>
 
 	// absolute path, root and clonse
 	a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
-	const b = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "some.big.txt.file.txt"});
+	const b = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", rel : "some.big.txt.file.txt"});
 	const c = b.clone();
 	const d = b.clone();
 	d.changeRoot("/some/random/dir", {keepRel : true});
@@ -47,7 +47,7 @@ Deno.test("create", async () =>
 	});
 
 	// subDir file
-	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "subDir/txt.b"});
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", rel : "subDir/txt.b"});
 	assertStrictEquals(a.rel, "subDir/txt.b");
 	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
 	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b");
@@ -64,7 +64,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.preName, "b");
 
 	// symlink
-	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "subDir/symlinkFile"});
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", rel : "subDir/symlinkFile"});
 	assertStrictEquals(a.rel, "subDir/symlinkFile");
 	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
 	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
@@ -80,7 +80,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.preName, "symlinkFile");
 
 	// directory
-	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "subDir/more_sub/third"});
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", rel : "subDir/more_sub/third"});
 	assertStrictEquals(a.rel, "subDir/more_sub/third");
 	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
 	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third");
@@ -94,11 +94,28 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.ts, 1_635_685_489_475);
 	assertStrictEquals(a.preExt, "");
 	assertStrictEquals(a.preName, "third");
+
+	// absolute path with root
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files", absolute : "/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"});
+	assertStrictEquals(a.rel, "subDir/txt.b");
+	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
+	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b");
+	assertStrictEquals(a.base, "txt.b");
+	assertStrictEquals(a.dir, "/mnt/compendium/DevLab/dexvert/test/files/subDir");
+	assertStrictEquals(a.name, "txt");
+	assertStrictEquals(a.ext, ".b");
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 8);
+	assertStrictEquals(a.ts, 1_635_685_484_995);
+	assertStrictEquals(a.preExt, ".txt");
+	assertStrictEquals(a.preName, "b");
 });
 
 Deno.test("changeRoot", async () =>
 {
-	let a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", subPath : "subDir/txt.b"});
+	let a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files/", rel : "subDir/txt.b"});
 	const b = a.clone();
 	b.changeRoot("/tmp/dir/whatever/", {keepRel : true});
 
@@ -134,7 +151,7 @@ Deno.test("changeRoot", async () =>
 	assertStrictEquals(b.preExt, ".txt");
 	assertStrictEquals(b.preName, "b");
 
-	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files", subPath : "subDir/txt.b"});
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files", rel : "subDir/txt.b"});
 	a.changeRoot("/mnt/compendium/DevLab/dexvert/test/files/subDir");
 	assertStrictEquals(a.rel, "txt.b");
 	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files/subDir");

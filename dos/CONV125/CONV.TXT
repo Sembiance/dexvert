@@ -1,0 +1,128 @@
+                     Copyright (c) 1986 William T Morrison IV
+
+You may copy and distribute these programs freely, provided that:
+ 1)   Only a nominal fee is charged for such copying and distribution.
+ 2)   They are distributed ONLY in their original, unmodified state.
+
+Address all correspondence to :
+                               Bill Morrison IV
+                               34762 Oak Ave
+                               Ingleside, IL  60041
+
+       Or leave a message on The Picture Bulletin Board - 301 588-9079
+
+
+
+MACWIND   -    Converts MacPaint format pictures to Windows Paint format. 
+               Since Windows Paint stores the file with no compression, this 
+               program removes all blank space from around the image.
+
+     ENTRY FORMAT:
+        MACWIND infile outfile
+
+           infile  - Picture to be converted.
+           outfile - Filename to be created.
+
+
+TURBOMAC  -    Converts Digi-Pic 1 (.COM) format pictures to MacPaint format. 
+               The resulting file is put in the default directory with the 
+               same name as the original, except the extension is changed to 
+               .MAC. The extension of .COM need not be specified in the 
+               filename, the program will add the extension. Entering * is the 
+               same as *.COM.
+
+     ENTRY FORMAT:
+        TURBOMAC filename
+
+            filename - Digi-Pic 1 to be converted. May contain wild cards.
+
+
+DGIMAC    -    Converts Digi-Pic 2 (.DGI) format pictures to MacPaint format. 
+               The resulting file is put in the default directory with the 
+               same name as the original, except the extension is changed to 
+               .MAC. The extension of .DGI need not be specified in the 
+               filename, the program will add the extension. Entering * is the 
+               same as *.DGI. Due to the width of Digi-Pic 2 format pictures 
+               (640 pixels), the image is rotated 90 degrees to fit into 
+               MacPaint format (576 pixels).
+
+
+     ENTRY FORMAT:
+        TURBOMAC filename
+
+            filename - Digi-Pic 2 to be converted. May contain wild cards.
+
+
+
+WINDMAC   -    Converts Windows Paint format pictures to MacPaint format. 
+               Since Windows Paint stores the file with variable sizing, the 
+               program will determine if the Windows Paint file can be read in 
+               normally, has to be rotated ninety degrees, or is too big to be 
+               converted.
+
+     ENTRY FORMAT:
+        WINDMAC infile outfile
+
+           infile  - Picture to be converted.
+           outfile - Filename to be created.
+
+
+DGIWIND   -    Converts Digi-Pic 2 (.DGI) format pictures to Windows Paint 
+               format. The resulting file is put in the default directory with 
+               the same name as the original, except the extension is changed 
+               to .MSP. The extension of .DGI need not be specified in the 
+               filename, the program will add the extension. Entering * is the 
+               same as *.DGI.
+
+     ENTRY FORMAT:
+        DGIWIND  filename
+
+            filename - Digi-Pic 2 to be converted. May contain wild cards.
+
+
+
+TURBOPRT  -    Prints Digi-Pic 1 (.COM) format pictures, without displaying 
+               them on a PC. The printer section of this program outputs 320 
+               bytes per line. The extension of .COM need not be specified in 
+               the filename, the program will add the extension. Entering * is 
+               the same as *.COM.
+
+     ENTRY FORMAT:
+        TURBOPRT filename
+
+            filename - Pictures to be printed. May contain wild cards.
+
+
+DGIPRT    -    Prints Digi-Pic 2 format pictures, without displaying them on a 
+               PC. The printer section of this program outputs 640 bytes per 
+               line. The extension of .DGI need not be specified in the 
+               filename, the program will add the extension. Entering * is the 
+               same as *.DGI.
+
+     ENTRY FORMAT:
+        PRNDGI filename
+
+            filename - DGI pictures to be printed. May contain wild cards.
+
+
+PRINTER FORMAT -
+       These programs assume an IBM Graphics printer (Epson MX-80). The 
+       following is the format of the printer table inside the programs. If 
+       you should need to change the printer control codes the printer 
+       information is located near the end of the program. The printer 
+       information is in the following format:
+
+       'PRINTER TABLE***'              ;header
+                             ;Set up - 8/72 linefeed
+       1 byte                          ;Length of this print string
+       15 bytes                        ;Print string to send, zero filled
+
+                            ;Print Graphics characters
+                                       ;(number depends on program)
+       1 byte                          ;Length of this print string
+       15 bytes                        ;Print string to send, zero filled
+
+                             ;Reset printer to normal
+       1 byte                          ;Length of this print string
+       15 bytes                        ;Print string to send, zero filled
+

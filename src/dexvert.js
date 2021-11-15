@@ -37,7 +37,11 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 	else
 	{
 		xu.log`Getting identifications for ${inputFile.pretty()}`;
+		
+		const prevVerbose = xu.verbose;
+		xu.verbose = prevVerbose>=5 ? prevVerbose : 1;
 		ids.push(...(await identify(inputFile)).filter(id => id.from==="dexvert" && !id.unsupported));
+		xu.verbose = prevVerbose;
 	}
 
 	if(ids.length===0)

@@ -56,11 +56,13 @@ export class image extends Family
 
 		if(!meta.width || !meta.height)
 			return false;
+		
+		const isUnsafe = Program.programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
 
-		if(Program.programs[dexState.ran.at(-1).programid].unsafe && meta.colorCount<=1 && meta.opaque)
+		if(isUnsafe && meta.opaque && meta.colorCount<=1)
 			return false;
 
-		if(Program.programs[dexState.ran.at(-1).programid].unsafe && [meta.width, meta.height].some(v => v>=15000))
+		if(isUnsafe && [meta.width, meta.height].some(v => v>=15000))
 			return false;
 
 		if(dexid.formatid==="svg" && meta.colorCount<=1)
@@ -103,7 +105,7 @@ export class image extends Family
 	}
 
 	// gets meta information for the given input and format
-	async getMeta(inputFile, format)
+	async meta(inputFile, format)
 	{
 		if(!format.metaProviders)
 			return;
@@ -119,7 +121,7 @@ export class image extends Family
 				const info = await imageUtil.getInfo(inputFile.absolute);
 				if(info.err)
 				{
-					xu.log(3, `imageUtil.getInfo() returned an err ${info.err}`);
+					xu.log4`imageUtil.getInfo() returned an err ${info.err}`;
 					delete info.err;
 				}
 				Object.assign(meta, info);

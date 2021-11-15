@@ -1,0 +1,139 @@
+16000:Not Enough Memory
+001:Can't find screen text file
+002:Invalid screen text file
+003:No floppy drives installed
+004:An Error has been detected in a screen text file
+005:PBRUSH
+006:Floppy drive Access error
+007:Floppy File Open error - file not found
+008:Floppy File Close error
+009:Floppy File Read error
+010:Floppy File Write error
+011:Destination drive Access error
+012:Destination drive File Open error
+013:Destination drive File Close error
+014:Destination drive File Read error
+015:Destination drive File Write error - disk probably full
+016:Not enough memory for copy buffer
+017:Cannot find file
+! file to check for to see if already copied to hard disk
+018:TINYFRZ.COM
+020:Please fix the problem using DOS commands and rerun PBSETUP
+021:Warning - can't find PBSETUP.DAT   Using defaults...
+022:Error creating PBSETUP.DAT
+023:Error creating PAINT.BAT
+024:Output file disk write error - disk probably full
+025:Can't find file CARDS.DAT
+026:            ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+027:            ³ TO                                 PRESS ³
+028:            ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+029:            ³ Show next part of list               N   ³
+030:            ³ Show previous part of list           P   ³
+031:            ³ Return to main menu                  M   ³
+032:            ³ Quit                                 Q   ³
+033:            ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+034:Can't find file PRINTERS.DAT
+035:    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+036:    ready:           ³ TO                                 PRESS ³
+037:                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+038:                     ³ Continue                             C   ³
+039:                     ³ Return to main menu                  M   ³
+040:                     ³ Quit                                 Q   ³
+041:                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+042:    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+043:    ready:           ³ TO                                 PRESS ³
+044:                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+045:                     ³ Continue                             C   ³
+046:                     ³ Quit                                 Q   ³
+047:                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+! lines started by ! are temporary comments. remove before shipping
+! 050 starts Setup disk (disk 1) files to copy to hard disk. end list with $
+! if first entry is $, floppy will not be requested
+050:PBRUSH.HLP
+051:PBSETUP?.*
+052:DRIVEA
+053:*.DAT
+054:$
+! 075 starts Program Disk (disk 2) file list to copy to hard disk
+075:PBRUSH.EXE
+076:PBREADME.DOC
+077:$
+! 100 starts Utility Disk (disk 3) file list to copy to hard disk
+100:FRIEZE.COM
+101:HBIOS.COM
+102:TINYFRZ.COM
+103:*.OV1
+104:*.FNT
+105:*.XFR
+106:*.OTL
+107:*.PAL
+108:*.INI
+109:$
+! 125 starts disk 4 file list to copy to hard disk
+125:$
+! menu selection characters, must be unique. word in parens not used
+175:C (Continue)
+176:Q (Quit)
+177:D (CopyDisk)
+178:A (CopyAdapt)
+179:R (CopyPrinter)
+180:S (CopyPort)
+181:M (Menu)
+182:P (Previous)
+183:N (Next)
+184:D (ChangeDir)
+185:A (ChangeAdapt)
+186:H (HardDisk)
+187:F (Floppy)
+188:A (FloppyA)
+189:B (FloppyB)
+! next two entries are floppy subdirs on the drivers disk
+205:
+206:
+207:PBRUSH.EXE
+208:PBSETUP.EXE
+! lines to add to paint.bat for floppy situation  - overlays must be in path
+210:path >oldpath.bat
+211:path a:\;b:\;
+212:$
+215:oldpath
+216:$
+! next is source floppy drive used when copying to Run Disks
+250:B:
+! next is destination floppy drive used when copying to Run Disks
+251:A:
+! next is disk requested for .OV1 .INI etc files for finishing floppy install
+252:3
+! 300 starts Setup Disk (disk 1) floppy verification files. no wildcards
+300:PBRUSH.HLP
+301:PBSETUP.EXE
+302:$
+! 310 starts Program Disk (disk 2) floppy verification files
+310:PBRUSH.EXE
+311:$
+! 320 starts Utility Disk (disk 3) floppy verification files
+320:FRIEZE.COM
+321:$
+! 330 starts disk 4 floppy verification files
+330:$
+! 350 starts disk 1 file list to copy to Run Diskette A
+350:PBRUSH.HLP
+351:PBSETUP?.*
+352:DRIVEA
+353:*.DAT
+354:$
+! 375 starts disk 2 file list to copy to Run Diskette A
+375:$
+! 400 starts disk 3 file list to copy to Run Diskette A
+400:FRIEZE.COM
+401:TINYFRZ.COM
+402:HBIOS.COM
+403:$
+! 450 starts disk 1 file list to copy to Run Diskette B
+450:$
+! 475 starts disk 2 file list to copy to Run Diskette B
+475:PBRUSH.EXE
+476:$
+! 500 starts disk 3 file list to copy to Run Diskette B
+500:$
+

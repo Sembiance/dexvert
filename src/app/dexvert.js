@@ -8,7 +8,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> converting or extracting files into <outputDirPath>",
 	opts    :
 	{
-		verbose         : {desc : "Show additional info when processing. Levels 0 to 5. Default: 0", defaultValue : 0},
+		verbose         : {desc : "Show additional info when processing. Levels 0 to 6. Default: 0", defaultValue : 0},
 		asFormat        : {desc : "Convert the format as [family/formatid]. Don't identify the file", hasValue : true},
 		json            : {desc : "If set, will output results as JSON"},
 		jsonFile        : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},

@@ -1,0 +1,40 @@
+
+
+                              GD VIEW V0.92
+                   Copyright (c) 1996-98 Gerard de Melo
+                            LICENSE AGREEMENT
+
+
+The use and  distribution of GD VIEW V0.92,  from now on refered to as the
+SOFTWARE, is subject to the following terms and conditions.
+
+The  entire SOFTWARE  (including  the manual)  is  copyrighted:  Copyright
+(c) 1996 - 1998  Gerard  de Melo.  All rights reserved.  The  SOFTWARE  is
+protected by laws of the European Union and by international agreements.
+
+The SOFTWARE is user supported Software. If you continue to use it after a
+trial  period  of  30  days  you   must  become  a  registered  user  (see
+register.txt for more information).  The registration is free.
+
+Registered  copies  may  not  be   distributed  or  copied.   Distributing
+unregistered,  unmodified copies is permitted as long as no fee is charged
+for the  SOFTWARE itself,  only for the  media and  labor involved  in the
+distribution  (up to 5 US dollars).  No other price may be charged for the
+SOFTWARE  without  written  permission  from  the  copyright  holder.  The
+SOFTWARE must not be bundled  together with any hardware product,  book or
+other software package without a written agreement from the author.
+
+The entire SOFTWARE (including the manual) is provided on an "as is" basis
+without  warranty of  any kind,  express  or  implied,  including  without
+limitation  any  implied  warranties  of  merchantability,  fitness  for a
+particular purpose  or functionality.  The person using the SOFTWARE bears
+all risk as  to the quality  and performance  of the SOFTWARE.  The author
+will not be liable  for any damage  whatsoever,  including lost profits or
+information,  even if the author  has been  advised of the  possibility of
+such damages.
+
+Using or distributing the  SOFTWARE signifies acceptance  of the terms and
+conditions of this license.  You may not use or distribute the SOFTWARE if
+you  do not agree with  the terms of the license  agreement or if parts of
+the license agreement are invalid due to local laws.
+

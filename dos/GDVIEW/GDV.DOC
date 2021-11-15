@@ -1,0 +1,3339 @@
+
+
+
+                  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.
+                  $$$$.        $$.       $$$. $$$$$. $$$$.
+                  $$$$. $$$$$$$$$. $$$$$. $$$. $$$. $$$$$.
+                  $$$$. $$ooo. $$. $$$$$. $$$$. $. $$$$$$.
+                  $$$$.        $$.       $$$$$$.  $$$$$$$.
+                  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.
+
+
+                              GD VIEW V0.92
+                   Copyright (c) 1996-98 Gerard de Melo
+                               User Manual
+
+
+----------------------------------------------------------------------------
+TABLE OF CONTENTS
+----------------------------------------------------------------------------
+
+ 1. Introduction
+ 2. Legal Issues (important!)
+ 3. Configuration Issues
+ 4. Overview: List of the supported file types
+ 5. Using GD View
+ 6. The supported file types
+ 7. Miscellaneous questions
+ 8. Contacting the author
+ 9. Credits and Greetings
+
+----------------------------------------------------------------------------
+1. INTRODUCTION
+----------------------------------------------------------------------------
+
+GD View  (GDV)  is an  object-oriented  viewer which lets you look  at the 
+contents of files  (and other objects)  while supporting a lot of formats. 
+See section 3 for a list of all supported file types.
+
+A lot of file viewers are available  in the computer market but GD View is 
+different than  most other ones.  Most other viewers  support just  one or 
+possibly a few  file types.  For example  some viewers always  display the 
+contents  of a  file as text but  it is  not very  useful  to look  at the 
+contents of a picture file as text because they usually do not contain any 
+useful text.  Many computer users are  forced to have an entire collection 
+of file viewers on their harddisk.  They have to guess which viewer to use 
+and how to use it.  This can be relatively complicated,  especially if you 
+are dealing with unknown data and you do not know the file type.
+GD View  can solve  these problems:  It attempts  to detect  the file type 
+automatically  and it  will then  display the file  properly.  This  makes 
+everything much easier for you. Not only that GD View can probably display 
+more graphic,  document, database,  spreadsheet, animation,  text, binary, 
+palette, font, sound, terminal, archive and  encoded file formats than any 
+other  DOS  program,  GD View  can  also display  information about  files 
+(including  the meaning of  the file name extention),  display information 
+about your computer system,  play Audio CDs,  display the contents of your 
+base memory,  decode UUE, XXE and  other encoded  files and extract Device 
+Independent (Windows) Bitmaps from binary files.
+
+----------------------------------------------------------------------------
+2. LEGAL ISSUES (IMPORTANT!)
+----------------------------------------------------------------------------
+
+LICENSE AGREEMENT:
+You  MUST  understand  and  accept  the  license  agreement  (LICENSE.DOC) 
+**before** you  do anything  with GD View.
+
+[Sorry,  I had to write that license agreement to protect myself.  There's 
+nothing special about it but you still MUST read it.]
+
+GD View is user supported software. You may test this unregistered version 
+for max. 30 days.  After that you must either  become a registered user or 
+remove GD View from your system. Read REGISTER.TXT for more information.
+
+
+All trademarked names  used herein are used  only in an editorial  fashion 
+with no intention of infringement of the trademark.  Although they are not 
+marked  in any  special way all  trademarked  names are  trademarks of the 
+respective trademark owners.
+
+----------------------------------------------------------------------------
+3. CONFIGURATION ISSUES
+----------------------------------------------------------------------------
+
+The requirements:
+ -> an IBM PC compatible computer with a 80286 or better CPU
+    (fast '486 or better recommended)
+ -> MS DOS 3.0 (or higher) or a 100% compatible operating system
+ -> about 600 KB free base memory and about 1MB of free EMS or XMS (more
+    EMS or XMS recommended for large directories and some large files)
+ -> a VGA or SVGA graphic card (SVGA recommended), a color monitor
+ -> for sound files: a Sound Blaster 2.0, Sound Blaster Pro or
+    100% compatible sound card
+ -> for Audio CDs: a CD-ROM drive (MSCDEX must be loaded)
+ -> for CMF files: SBFMDRV.COM must be loaded
+ -> optional: a computer mouse or other pointing device (a Microsoft
+    compatible mouse driver must be loaded)
+
+About the operating system:
+The main target operating system  for GD View is MS DOS but clones such as
+Novell DOS should not cause any problems.
+It is possible to use GD View with MS Windows,  MS Windows 95,  MS Windows
+NT,  OS/2  and some other operating systems  which can run MS DOS programs
+but there might be some  unexpected results,  e.g. when  graphic files are
+displayed  or sound files are played.  In any case,  make sure that enough
+memory is  available  for  GD View  and try to use a  full-screen  mode if
+possible!!
+Recommendations:
+- Windows 3.1: use full-screen mode (you can create a PIF file to
+  do that)
+- Windows 95: use full-screen mode (can be selected in the properties
+  dialog box), long file names are displayed but cannot be used when
+  prompted for file names, some functions of the CD Player do not work
+- Windows NT: no sound support, some functions of the CD Player
+  do not work, long file names can not be used at prompts
+- OS/2: use full-screen mode
+
+About graphic cards:
+To use the advanced graphic modes of SVGA cards you will need to make your
+graphic card accessable via the so called VESA BIOS extention, version 1.2
+or higher.  Most  modern  graphic cards  are shipped  with  built-in  VESA
+support.  For older cards  you can use  resident programs  which make your
+SVGA card VESA compatible.  You should check if there is  one on the disks
+which came with your  graphic card.  If not then try to find one online or
+contact the manufacturer of your graphic card.
+If going into a graphic mode  takes too long  then use the "Auto-configure
+VESA graphic modes" selection in GDV SETUP.
+Note that using a TrueColor SVGA card is definitely recommended because GD
+View does NOT perform any dithering or  any real quantization of graphical
+images.
+
+About sound cards:
+You will usually have to set some things up before you use GD View to play
+sound files.  To do that you have to run setup and select "Configure sound
+card".  If you own a sound card which is not listed you will have to check
+the manual of it to see to what it is compatible.  Most modern sound cards
+are compatible to the  Sound Blaster Pro.  More older ones should at least
+be  compatible  to the  Sound Blaster 2.x.  Most Sound Blaster  compatible
+sound  cards are  configured  to use  the base port  address 220h  and DMA
+channel 1.
+Right now,  GD View is not able  to change the  sampling rate  of a  sound
+file.  That means that you will  not hear anything if  the sample  rate is
+extremely high or extremely low.
+SBFMDRV.COM must be loaded if you want to play CMF files.
+
+About memory:
+Try to have at least  580 KB of free base memory before  starting GD View.
+If you do not have  enough  then your  system can become  unstable or even
+crash.  You can free more base memory  by removing resident programs, e.g.
+by using MemMaker.  GD View can become  extremely slow if  you do not have
+enough free EMS or XMS memory.  The best way to solve most memory problems
+with  GD View  is to use  an  advanced  memory manager  like QEMM  or even
+better, use the Windows NT command line interface or something similar.
+
+About mice:
+To use your mouse you  have to install a  Microsoft compatible  DOS  mouse
+driver.  You can force GD View to use a  slow mouse reset or to invert the
+mouse buttons by editing gdv.cfg appropriately.
+
+----------------------------------------------------------------------------
+4. OVERVIEW: LIST OF THE SUPPORTED FILE TYPES
+----------------------------------------------------------------------------
+
+See part 6 for a detailed description of every file format.
+
+ * GRAPHICAL IMAGES
+     1st Publisher ART
+     Advanced Art Studio
+     Alias PIX / Alias Mask / Vivid IMG
+     Art Director
+     Artist 64
+     Atari Image Manager (AIM)
+     Autodesk Animator Pro CEL
+     Blazing Paddles
+     CBM hi-res format
+     CDU Paint
+     CMU wm raster
+     ColoRIX
+     Corel Draw
+     Craig Bruce's BM format
+     DCX
+     Degas / Degas Elite uncompressed
+     Degas Elite compressed
+     Device Independent Bitmap (DIB/BMP)
+     Doodle (Atari ST)
+     Draw256
+     Encapsulated PostScript (EPS) - TIFF preview
+     Face
+     FLI (C64)
+     GEM Image
+     Giffer QDV
+     Girls & Poker for Windows data
+     Graphics Interchange Format (GIF)
+     Grasp Library (GL)
+     Halo CUT
+     Handy Scanner 2000
+     HIPS
+     HRZ
+     HSI Raw
+     ILBM (IFF)
+     IM
+     J6I
+     JPEG/JFIF
+     Koala Painter
+     MacPaint
+     MCUREDIT (toolbox)
+     MS Paint
+     MS Windows cursor
+     MS Windows icon
+     MS Word CAPTURE screen
+     MTV
+     Neochrome
+     OS/2 icon
+     OS/2 pointer
+     PC Paintbrush PCX
+     PCJ
+     PCPAINT / Pictor PIC
+     Photo CD
+     Picture Publisher 4 and 5
+     PMP
+     Portable Bit/Gray/Pix/Anymap
+     Portable Network Graphics (PNG)
+     Psion Series 3 Bitmap (PIC)
+     QRT RAW / DKB RAW / POV Dump
+     Raw graphical image
+     RGB Intermediate Format
+     RIFF DIB (RDIB)
+     SGI Image format
+     Specem PRG
+     SPECTRUM / VGASPEC SP
+     Spectrum 512 compressed (SPC)
+     Spectrum 512 uncompressed (SPU)
+     Strip BlackJack / Stripoid data
+     Sun Icon
+     Sun RASter
+     TGA
+     TIFF
+     Tiny
+     TZ Strip Poker
+     Vidcom 64
+     VIS
+     X Bitmap (XBM)
+     X Puzzle
+     XIMG
+     YBM
+     YUV
+     ZX Spectrum Screen
+     ZX Spectrum Snapshot (SNA)
+
+ * ANIMATIONS
+     FLIC
+     Tempra FLX
+
+ * BINARY DATA
+     Aiken BCD
+     Binary Coded Decimal (BCD)
+     Binary display
+     Decimal display
+     Excess 3 BCD
+     Hexadecimal display
+     Octal display
+
+ * TEXT FORMATS (INCL. CHARACTER SETS)
+     1st Word
+     Adobe Standard text
+     Adobe Symbol text
+     Adobe Zapf Dingbats text
+     AmigaGuide
+     ANSI X3.4-1968 text
+     Apple II text
+     ASCII with Unicode codes
+     ASMO 449 text
+     Atari ATASCII text
+     Atari ST/TT text
+     BALTIC text
+     BS 4730 text
+     BS VIEWDATA text
+     Code Page 037 (EBCDIC - United States) text
+     Code Page 038 (EBCDIC-INT) text
+     Code Page 10000 (Macintosh Roman 10000) text
+     Code Page 10006 (Macintosh Greek 1) text
+     Code Page 10007 (Macintosh Cyrillic) text
+     Code Page 10029 (Macintosh Latin 2) text
+     Code Page 1004 (OS/2 Latin 1) text
+     Code Page 1006 (Urdu - ISO) text
+     Code Page 10079 text
+     Code Page 1008 (Arabic Windows - original) text
+     Code Page 10081 text
+     Code Page 1025 (Cyrillic - EBCDIC) text
+     Code Page 1026 text
+     Code Page 1027 (Japan (Latin) - EBCDIC) text
+     Code Page 1028 (Hebrew - Publishing) text
+     Code Page 1038 (PostScript Symbol Set) text
+     Code Page 1041 (Japan SAA) text
+     Code Page 1043 (Taiwan SAA) text
+     Code Page 1046 (Arabic - EBCDIC) text
+     Code Page 1047 text
+     Code Page 1051 (HP Roman 8) text
+     Code Page 1088 (Korea KS) text
+     Code Page 1089 (Arabic - ISO 8859-6) text
+     Code Page 1092 (PC Symbols) text
+     Code Page 1097 (Farsi - EBCDIC) text
+     Code Page 1098 (Farsi) text
+     Code Page 1112 (Baltic - EBCDIC) text
+     Code Page 1114 (Taiwan Big-5) text
+     Code Page 1115 (China GB) text
+     Code Page 1116 (Estonia) text
+     Code Page 1117 (Latvia) text
+     Code Page 1118 (Lithuania) text
+     Code Page 1119 (Lithusanian and Russian) text
+     Code Page 1122 (Estonia - EBCDIC) text
+     Code Page 1123 text
+     Code Page 1124 text
+     Code Page 1250 (MS Windows Eastern Europe) text
+     Code Page 1251 (MS Windows Cyrillic) text
+     Code Page 1252 (MS Windows ANSI) text
+     Code Page 1253 (MS Windows Greek) text
+     Code Page 1254 (MS Windows Turkish) text
+     Code Page 1255 text
+     Code Page 1256 text
+     Code Page 1257 text
+     Code Page 1258 (MS Windows Vietnamese) text
+     Code Page 1275 (Apple Latin 1) text
+     Code Page 1276 (Adobe PS Standard Encoding) text
+     Code Page 1277 (Adobe PS ISOLatin1 Encoding) text
+     Code Page 1280 (Apple Greece) text
+     Code Page 1281 (Apple Turkey) text
+     Code Page 1282 (Apple Central European) text
+     Code Page 1283 (Apple Cyrillic) text
+     Code Page 256 text
+     Code Page 259 (Symbols WP - EBCDIC) text
+     Code Page 273 text
+     Code Page 274 text
+     Code Page 275 text
+     Code Page 277 text
+     Code Page 278 text
+     Code Page 280 text
+     Code Page 282 text
+     Code Page 284 text
+     Code Page 285 text
+     Code Page 290 text
+     Code Page 293 (APL - EBCDIC) text
+     Code Page 297 text
+     Code Page 361 (International - Publishing) text
+     Code Page 363 (Symbols - Publishing) text
+     Code Page 367 (G0 - ASCII) text
+     Code Page 382 (Austria, Germany - Publishing) text
+     Code Page 383 (Belgium - Publishing) text
+     Code Page 385 (Canada (French) - Publishing) text
+     Code Page 386 (Denmark, Norway - Publishing) text
+     Code Page 387 (Finland, Sweden - Publishing) text
+     Code Page 388 (France - Publishing) text
+     Code Page 389 (Italy - Publishing) text
+     Code Page 391 (Portugal - Publishing) text
+     Code Page 392 (Spain - Publishing) text
+     Code Page 393 (Latin America - Publishing) text
+     Code Page 394 (United Kingdom - Publishing) text
+     Code Page 395 (United States - Publishing) text
+     Code Page 420 text
+     Code Page 423 text
+     Code Page 424 text
+     Code Page 437 (USA) text
+     Code Page 500 (EBCDIC) text
+     Code Page 737 (Greek II or IBM Greek) text
+     Code Page 775 ("BaltRim") text
+     Code Page 813 (Greece - ISO 8859-7) text
+     Code Page 819 (Latin 1 - ISO 8859-1) text
+     Code Page 829 (Math Symbols - Publishing) text
+     Code Page 833 (Korea - EBCDIC) text
+     Code Page 836 (China - EBCDIC) text
+     Code Page 838 (Thai - EBCDIC) text
+     Code Page 850 (Latin I - multilingual) text
+     Code Page 851 text
+     Code Page 852 (Latin II - slavic) text
+     Code Page 853 (Multilingual Latin 3) text
+     Code Page 855 (Cyrillic I) text
+     Code Page 856 (Hebrew - old) text
+     Code Page 857 (Turkish) text
+     Code Page 860 (Portuguese) text
+     Code Page 861 (Icelandic) text
+     Code Page 862 text
+     Code Page 863 (French Canadian) text
+     Code Page 864 text
+     Code Page 865 (Nordic) text
+     Code Page 866 (Cyrillic 2 or Russian) text
+     Code Page 868 text
+     Code Page 869 (Greek I or IBM Modern Greek) text
+     Code Page 870 text
+     Code Page 871 text
+     Code Page 874 text
+     Code Page 875 text
+     Code Page 878 (Russia - Internet) text
+     Code Page 880 text
+     Code Page 891 text
+     Code Page 895 (Japan G0 (Latin) - EUC) text
+     Code Page 896 (Japan G2 (Katakana) - EUC) text
+     Code Page 897 (Japan) text
+     Code Page 903 text
+     Code Page 904 text
+     Code Page 907 (APL) text
+     Code Page 909 (APL2 Extended) text
+     Code Page 910 (APL2) text
+     Code Page 912 (Latin 2 - ISO 8859-2) text
+     Code Page 913 (Latin 3 - ISO 8859-3) text
+     Code Page 914 (Latin 4 - ISO 8859-4) text
+     Code Page 915 (Cyrillic - ISO 8859-5) text
+     Code Page 916 (Israel - ISO 8859-8) text
+     Code Page 918 text
+     Code Page 920 (Latin 5 - ISO 8859-9) text
+     Code Page 921 (Baltic) text
+     Code Page 922 (Estonia) text
+     CSA Z243.4-1985-1 text
+     CSA Z243.4-1985-2 text
+     CSA Z243.4-1985-GR text
+     CSN 369103 text
+     CWI text
+     DEC-MCS text
+     DIN 66003 text
+     DS 2089 text
+     EBCDIC text (generic version)
+     EBCDIC-AT-DE text
+     EBCDIC-AT-DE-A text
+     EBCDIC-CA-FR text
+     EBCDIC-DK-NO text
+     EBCDIC-DK-NO-A text
+     EBCDIC-ES text
+     EBCDIC-ES-A text
+     EBCDIC-ES-S text
+     EBCDIC-FI-SE text
+     EBCDIC-FI-SE-A text
+     EBCDIC-FR text
+     EBCDIC-IS-FRISS text
+     EBCDIC-IT text
+     EBCDIC-PT text
+     EBCDIC-UK text
+     EBCDIC-US text
+     ECMA-CYRILLIC text
+     Epson Denmark text
+     Epson England text
+     Epson France text
+     Epson Italy text
+     Epson Japan text
+     Epson Spain text
+     Epson Sweden text
+     Exec MemoMaker
+     GB 1988-80 text
+     GOST 19768-74 text
+     GREEK-CCITT text
+     GREEK7 text
+     GREEK7-OLD text
+     HP 48 text
+     HP-ROMAN8 text
+     Hypertext Markup Language (HTML)
+     INIS text
+     INIS-8 text
+     INIS-CYRILLIC text
+     INVARIANT text
+     ISO 10646
+     ISO 2033-1983 text
+     ISO 5427 text
+     ISO 5427:1981 text
+     ISO 5428:1980 text
+     ISO 646-ES text
+     ISO 646-ES2 text
+     ISO 646-IT text
+     ISO 646-PT text
+     ISO 646-PT2 text
+     ISO 646.BASIC:1983 text
+     ISO 646.IRV:1983 text
+     ISO 8859-10:1993 text
+     ISO 8859-1:1987 text
+     ISO 8859-2:1987 text
+     ISO 8859-3:1988 text
+     ISO 8859-4:1988 text
+     ISO 8859-5:1988 text
+     ISO 8859-6:1987 text
+     ISO 8859-7:1987 text
+     ISO 8859-8:1988 text
+     ISO 8859-9:1989 text
+     ISO 8859-SUPP text
+     JIS C6220-1969-JP text
+     JIS C6220-1969-RO text
+     JIS C6229-1984-A text
+     JIS C6229-1984-B text
+     JIS C6229-1984-B-ADD text
+     JIS C6229-1984-HAND text
+     JIS C6229-1984-HAND-ADD text
+     JIS C6229-1984-KANA text
+     JUS I.B1. 002 text
+     JUS I.B1.003-MAC text
+     JUS I.B1.003-SERB text
+     KOI-8R text
+     KSC 5636 text
+     LATIN-GREEK text
+     LATIN-GREEK-1 text
+     Lotus Ami / Lotus Ami Pro
+     Magnatype
+     MS Windows "MS LineDraw" font text
+     MS Windows "Symbol" font text
+     MS Windows "Wingdings" font text
+     MS Windows 3.0 ANSI text
+     MS Windows Write (WRI)
+     MS Word for DOS
+     MS Word for Macintosh
+     MS Word for Windows, MS Windows 95/NT WordPad
+     MS Works for DOS word processor
+     MSZ 7795/3 text
+     Multimate, Multimate Advantage
+     Navy DIF
+     NC NC00-10:81 text
+     NEXTSTEP text
+     NF Z 62-010 (1973) text
+     NF Z 62-010 text
+     nroff
+     NS 4551-1 text
+     NS 4551-2 text
+     PC Write
+     Protext
+     Rich-Text Format
+     SAMI text
+     SEN 850200 B text
+     SEN 850200 C text
+     SGML, XML
+     T.61-7BIT text
+     Unicode V1.0 text
+     Unicode V1.0.1 text
+     Unicode V1.1/2.0 text
+     UTF-8
+     WordPerfect
+     WordStar 2000
+     WordStar
+     XyWrite
+
+ * PALETTES
+     6 bit raw palette
+     8 bit raw palette
+
+ * FONTS
+     Commodore 64/128 font
+     Fontedit (Chris Howe) font
+     Letters font
+     Raw BIOS font
+     The Font Editor font
+     The Graphics Engine font
+     ZX Spectrum Big font
+     ZX Spectrum Standard font
+
+ * SOUNDS
+     8SVX
+     AVR
+     Creative Music (CMF)
+     Creative Voice (VOC)
+     DEC Audio
+     GTS Sound Sample
+     Headerless Sound Sample (raw)
+     Psion Series 3 Wave
+     RIFF Wave (WAV)
+     Scream Tracker 3/DigiPlayer sample
+     Sounder
+     SoundTool / Wired for Sound
+     Sun/NeXT Audio (AU)
+     Totosampler
+     VoiceMaster
+
+ * TERMINAL CODES
+     ANSI music
+     ANSI X3.64 data stream (*.ANS)
+     Avatar data stream
+     IBM PC text mode screen image (binary)
+     iCE Color ANSI
+     PC Board color codes text
+     Renegade Pipe Code text
+     The Last Video Interface (LVI) data stream
+     TTY
+     WildCat 3.0+ color code text
+     WWIV color code text
+
+ * DATABASES/WORKSHEETS
+     dBASE / FoxBase / FoxBase+
+     dbLite
+     FoxPro, FoxPro for Windows
+     Lotus 1-2-3 (and compatible formats)
+     System Data Format (SDF)
+
+ * FILE ARCHIVES/COMPRESSED DATA
+     AMG
+     Apple Macintosh resource fork data
+     AR
+     ARC
+     ARJ
+     CBM ARC
+     Crunch
+     Crush
+     Descent .HOG
+     Duke Nukem 3D .GRP
+     DWC
+     Genus Microprogramming VXL
+     gzip (.gz)
+     HA
+     Hyper
+     id software WAD
+     LARC
+     LHarc / LHA / LHice
+     LZEXE compressed EXE
+     MacBinary
+     MAR
+     MDCD
+     MS Cabinet (.CAB)
+     MS Windows clipboard
+     MS Windows resource
+     Novosielski library (LBR)
+     PAK
+     PUTGET
+     Quake PACK
+     Quake WAD2
+     RAR
+     SAR
+     Squeeze
+     SQueezed files
+     Stuff-It
+     SWAG compressed archive
+     T64
+     Unix compress (.z)
+     Unix Standard tape archiver (tar)
+     YellowPoint disk set
+     ZIP
+     ZOO
+
+ * EXECUTABLES/DECODABLE DATA
+     BOO encoded data
+     BTOA
+     Caesar
+     Device Independent Bitmap - Embedded
+     Executables (EXE, COM, BAT, associations)
+     HQX (BinHex)
+     Intel Hex
+     MIME Base64
+     MIME Quoted Printable
+     ROT 13
+     UU-Encoded data
+     WordPerfect 7-bit transfer format
+     XX-Encoded data
+
+ * MISC. TYPES
+     @BASIC
+     Commodore BASIC 1.0
+     Commodore BASIC 10.0
+     Commodore BASIC 2.0 w/ Super Extender
+     Commodore BASIC 2.0
+     Commodore BASIC 3.5
+     Commodore BASIC 4.0 Expansion for C64
+     Commodore BASIC 4.0
+     Commodore BASIC 7.0
+     File List
+     MS Windows Internet shortcut
+     Program Information File (PIF)
+     QWK Mail MESSAGES.DAT
+     Simon's BASIC
+     Speech BASIC
+     Turtle BASIC
+     URL file (M3U/RAM/etc.)
+
+ * SPECIAL MODULES
+     Audio CD player
+     Directory viewer (file selector)
+     External viewers (association)
+     External editors (association)
+     File Information (5000+ extentions, descriptions, etc.)
+     System Information
+
+----------------------------------------------------------------------------
+5. USING GD VIEW
+----------------------------------------------------------------------------
+
+Generally,  if you do not understand  something in this  section then just 
+ask an advanced computer user.  Most advanced users  will be able to solve 
+your problems in a few minutes.
+
+There are several  ways to start GD View.  The easiest one  is probably to 
+simply execute "GDV.EXE".  The title screen appears unless disabled (press 
+any key to continue) and then you enter the directory viewer where you can 
+select the files you want to display.
+
+Alternatively,  you can just specify a file name on the command line,  for 
+example:
+
+ C:\GDV>GDV C:\AUTOEXEC.BAT
+        ^^^^^^^^^^^^^^^^^^^
+Please refer  to your  DOS manual  for more  information  on file and path 
+names.
+
+For your convenience,  there are some additional batch files which make it 
+easier for you to use some special features of GD View. Just run the batch 
+file to begin:
+You can use  CDPLAY.BAT to play audio CDs  (a drive letter can be supplied 
+as a command line  parameter if more than one CD-ROM drive  is installed). 
+You can use  FCH.BAT  to check files and TEST.BAT  to test files.  You can 
+retrieve information about your  system by calling sysinfo.bat and you can 
+look at your system's base memory by calling memview.bat.
+
+If you often look at single files you  might want to use v.bat as an alias 
+for gdv.exe because it is much quicker to simply type "v filename".
+
+GD View  can  also call  external programs:  you can edit  files by  using 
+ed.bat and execute  files by using ex.bat  but note that  GD View will use 
+external programs to do so (external programs are other programs installed 
+on your harddisk which do not belong to GD View).
+
+Once you have started GD View everything is quite self-explaining. You can 
+usually use the cursor keys to navigate and ESC or ALT-X to abort/exit. In 
+most cases you can press F1 to see the online help.
+
+The GD Unpacker:  The GD View package includes U.EXE. You can use setup to 
+configure  GD View  to use the  GD Unpacker  (search for  applications and 
+answer yes when you are asked if you want to assign the GD Unpacker to the 
+extentions).  After that you can decompress  ZIP files  simply by pressing 
+space  in the  GD View  directory viewer.  Note that GD Unpacker is  not a 
+dearchiver so the correct dearchiving programs must be in your path if you 
+want to use this feature.  You will need PKZIP (for .zip files), RAR, ARJ, 
+ARC (for .arc and .ark),  LHA (for .lzh/.lzs/.lha), extar (for .tar), ZOO, 
+LUE (for .lbr)  and Limit (for .lim).  All of these programs are available 
+online. Make sure that  your copy of the archivers are not too old. If you 
+do not have the right  dearchiver then answer no  for that particular file 
+type.
+
+Integrated  archiver support:  GD View can  display files  in some archive 
+types by  automatically  extracting them.  You will need  PKUNZIP for .zip 
+files, ARJ for .arj files, RAR for .rar files and gzip for .z/.gz files.
+
+Using the viewers:
+
+ > DIRECTORY/ARCHIVE VIEWER <
+   ------------------------
+   Up, Down                move cursor up/down
+   PgUp, PgDn              move cursor one page up/down
+   Home, End               move cursor to top/bottom
+   F2                      display information about object at cursor
+                           position
+   F3, Enter               display object at cursor position (or change
+                           directory)
+   F4                      edit object at cursor position
+   F5                      copy object at cursor position to standard file
+                           (specify a file name - not a directory name!)
+   F8, Del                 delete object at cursor position
+   Ctrl-Left               go to parent directory
+   ALT-X                   exit to DOS
+   CTRL-F3                 sort by name
+   CTRL-F4                 sort by extention
+   CTRL-F6                 sort by size
+   CTRL-F7                 unsorted
+   ALT-F1                  select drive
+   ALT-F2                  test object at cursor position
+   ALT-F3                  display object at cursor position as text
+   Shift-F3                lets you select a file type to display the
+                           object at the cursor position
+   ALT-1                   display only file names
+   ALT-2                   very detailed report on every object (one
+                           object per page)
+   ALT-3                   standard directory display (like the DOS DIR
+                           command)
+   ALT-4                   normal file archive information
+   ALT-5                   technical file archive information
+   ALT-6                   normal and technical file archive information
+   ALT-J                   Jump to DOS
+   CTRL-N                  use different type of file name case changing
+   Tab                     reload directory
+
+ > TEXT VIEWER <
+   -----------
+   Up, Down                move up/down
+   PgUp, PgDn              move on page up/down
+   +, -                    move 20 pages up/down
+   Left, Right             move 20 columns left/right
+   (, )                    move one column left/right
+   Home, End               go to top/bottom
+   Ctrl-Left, Ctrl-Right   move to begin/end of line
+   Ins, Del                move one printed page up/down
+   ALT-L                   select a line
+   ALT-G                   select a page
+   ALT-P                   select a printed page
+   /                       case-sensitive search
+   \                       case-insensitive search
+   Ctrl-L                  search again
+   ALT-C                   SELECT CHARACTER SET
+   ALT-H                   toggle Hex/Dec/Bin/Oct mode
+   ALT-X, ESC              exit
+   W                       toggle line wrap mode
+   O                       toggle file offset display
+   ALT-1..9, ALT-0         set bookmark 1-10
+   1..9, 0                 go to bookmark 1-10
+   Tab                     change tab width
+   #                       toggle text direction (left-to-right or
+                           right-to-left)
+   I                       toggle isolated CR interpretation (useful for
+                           some text files which are intended to be
+                           printed)
+   M                       map 8-bit to 7-bit chars [only possible with
+                           7-bit character sets]
+   E                       toggle endianness (for 16-bit character sets)
+   N                       select if character 0 should be treated like a
+                           new line
+                           character (useful for executables)
+   $                       select if the '$' character should be treated
+                           like a new line character (useful for some MS
+                           DOS .COM files)
+   Z                       ignore trailing end-of-file markers
+   ALT-D                   write to file (character set conversion!)
+   ALT-W                   write to ISO 10646 file
+
+ > GRAPHICAL IMAGE VIEWER <
+   ----------------------
+   Enter                   display next image (only when file selected in
+                           directory viewer)
+   Space                   redraw
+   F2                      display image information
+   F3                      display palette (not possible with TrueColor
+                           images)
+   Up, Dn                  scroll half a screen up/down
+   Left, Right             scroll half a screen left/right
+   PgUp, PgDn              scroll one screen up/down
+   Ctrl-Left, Ctrl-Right   scroll one screen left/right
+   Home, End               go to top/bottom
+   Tab                     reset brightness, contrast, high intensity
+                           filter
+   Shift-Up                increase brightness (not possible with
+                           TrueColor images)
+   Shift-Down              reduce brightness (not possible with TrueColor
+                           images)
+   Shift-Right             more contrast (not possible with TrueColor
+                           images)
+   Shift-Left              less contrast (not possible with TrueColor
+                           images)
+   +, -                    control high intensity filter (not possible
+                           with TrueColor images)
+
+ > TERMINAL EMULATOR <
+   -----------------
+   ALT-X                   exit
+   ALT-B                   toggle scroll-back mode
+   Home, End               move to top/bottom (in scroll-back mode)
+   Up, Down                move up/down (in scroll-back mode)
+   PgUp, PgDn              move on page up/down (in scroll-back mode)
+
+ > SOUND PLAYER <
+   ------------
+   any key                 stop playing
+
+ > ANIMATION PLAYER <
+   ----------------
+   ALT-X, ESC              exit
+
+ > DATABASE/SPREADSHEET VIEWER <
+   ---------------------------
+   Enter                   display current field in status line (when you
+                           want to see long strings completely)
+   ESC, ALT-X              exit
+   Up, Down                move up/down
+   Left, Right             move left/right
+   PgUp, PgDn              move one page up/down
+   Home, End               go to first/last field
+
+ > CD PLAYER <
+   ---------
+   Help is displayed on the screen
+
+----------------------------------------------------------------------------
+6. THE SUPPORTED FILE FORMATS
+----------------------------------------------------------------------------
+
+You do not need to read this part.  Just use it as a  reference section if 
+you want to know something about a specific file type.  Remember, that the 
+command line parameters can change from version to version, especially the 
+parameters for the text file formats.
+
+   - 1ST PUBLISHER ART
+     extention:       .art
+     origin/purpose:  Desk Top Publishing graphical image format used by
+                      1st Publisher.
+     parameters:      -art
+   - 1ST WORD
+     origin/purpose:  A document format used by the popular Atari ST word
+                      processor 1st Word.
+     compliance:      Only plain text is shown.
+     parameters:      -1stw
+   - 6 BIT RAW PALETTE
+     extention:       .pal, .dat
+     origin/purpose:  These files contain 6-bit color palettes. 6-bit
+                      color files are usually used on IBM PCs.
+     parameters:      -pal6
+   - 8 BIT RAW PALETTE
+     extention:       .pal, .dat
+     origin/purpose:  These files contain 8-bit color palettes.
+     compliance:      If the palette looks too dark then use the 6-bit
+                      palette file type.
+     parameters:      -pal
+   - 8SVX
+     extention:       .8svx, .8sv, .svx
+     origin/purpose:  8-bit sound sample files in IFF format.
+     parameters:      -8svx
+   - @BASIC
+     extention:       .prg
+     origin/purpose:  @BASIC extends the standard BASIC interpreter of
+                      the C64. The C64 stores the source code in a binary
+                      format but GDV can display the BASIC source code.
+     parameters:      -atba
+   - ADOBE STANDARD TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:17
+   - ADOBE SYMBOL TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:18
+   - ADOBE ZAPF DINGBATS TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:19
+   - ADVANCED ART STUDIO
+     extention:       .mpic, .pic, .art
+     origin/purpose:  The graphic file format of Advanced Art Studio, a
+                      famous painting program for the C64.
+     compliance:      Only Advanced Art Studio files are supported. The
+                      original Art Studio format is not supported.
+     parameters:      -aast
+   - AIKEN BCD
+     origin/purpose:  This is a variant of BCD, which can be processed
+                      easier by electronic devices.
+     parameters:      -text -txtcs:15
+   - ALIAS PIX / ALIAS MASK / VIVID IMG
+     extention:       .alias, .pix, .img, .viv
+     origin/purpose:  Alias PIX and Mask files are produced by programs of
+                      Alias Research, Inc. Vivid IMG files have the same
+                      format. They are produced by the Vivid Ray Tracer
+                      (Steven B. Coy), a Shareware ray tracer for MS DOS.
+     parameters:      -alia
+   - AMG
+     extention:       .amg, .exe
+     origin/purpose:  AMG is a file archiver by Milen Georgiev.
+     compliance:      Self-extracting files are supported, too!
+     parameters:      -amg
+   - AMIGAGUIDE
+     extention:       .gui, .guide
+     origin/purpose:  A popular hypertext format used on Amigas.
+     compliance:      Only standard text elements are shown (unformatted).
+     parameters:      -agui
+   - ANSI MUSIC
+     extention:       .ans
+     origin/purpose:  This is an extention of the MS DOS ANSI.SYS command
+                      set which is incompatible to the ANSI X3.64
+                      standard. These Files contain simple music music
+                      commands.
+     compliance:      The music strings are *IGNORED*. Using the ANSI
+                      music mode instead of the standard ANSI X3.64 mode
+                      just ensures that no garbage appears on the screen.
+     parameters:      -ansm
+   - ANSI X3.4-1968 TEXT
+     extention:       txt, doc
+     name:            Also known as (US-)ASCII, ECMA-6, ISO 646-US, ANSI
+                      X3.4-1986 and ISO_646.IRV:1991. ASCII stands for
+                      American Standard Code of Information Interchange.
+     origin/purpose:  This is the original ASCII character set and it is
+                      still VERY popular although it doesn't support
+                      non-English characters. The ECMA standardized this
+                      character set in April 1965 as ECMA-6.
+     parameters:      -text -txtcs:177
+   - ANSI X3.64 DATA STREAM (*.ANS)
+     extention:       .ans
+     name:            The format is usually just called ANSI.
+     origin/purpose:  This format is used by most Bulletin Board Systems.
+                      ANSI Artists use this format, too.
+                      Note that the ECMA 48 standard replaces ANSI X3.64
+                      now.
+     compliance:      GD View supports all commands used by ANSI.SYS and
+                      some of the other ANSI X3.64 commands.
+                      The "-x" and "-y" parameters can be used to
+                      specify the terminal screen size (for example
+                      "-x:80 -y:43" for a 80x43 screen).
+                      GDV performs line wraps because many MS DOS ANSI
+                      files assume that line wraps are used but according
+                      to the standard wraps shouldn't be performed with
+                      the cursor movement commands. Use the "-tm_nw"
+                      option to disable them. GD View assumes that the
+                      ANSI file was designed to be displayed with MS DOS
+                      Code Page 437 as a character set.
+     parameters:      -x364
+   - APPLE II TEXT
+     origin/purpose:  ASCII character set used on Apple ][ computers
+                      (maybe also Apple I).
+     parameters:      -text -txtcs:13
+   - APPLE MACINTOSH RESOURCE FORK DATA
+     extention:       .rsr, .rsc
+     origin/purpose:  Resource files are used internally by Apple
+                      Macintosh programs to store all kinds of data.
+     parameters:      -macr
+   - AR
+     extention:       .arh, .lzh
+     origin/purpose:  AR is a Japanese file archiver by Haruhiko Okumura.
+     compliance:      Path names are not shown. AR001 (22 Apr 1990) is
+                      not supported. The August 1990 and December 1991
+                      versions are supported.
+     parameters:      -lha
+   - ARC
+     extention:       .arc, .ark, .exe
+     origin/purpose:  ARC (by SEA) used to be a very popular file archiver
+                      for MS DOS. ARC files are created by ARC (SEA),
+                      PKARC (PKWare), PKPAK (PKWare), ARCA (Wayne Chin &
+                      Vernon Buerg), Squash (several authors) and ArcMac
+                      (dogStar Software).
+     compliance:      RISC OS (Acorn) *.arc files are not compatible to
+                      the standard DOS ARC format.
+     parameters:      -arc
+   - ARJ
+     extention:       .arj, .sdn, .exe, .qwk, .sow
+     origin/purpose:  ARJ is a popular file archiver by Robert Jung.
+     compliance:      Self-extracting archives created by ARJ or EXARJ 1.1
+                      are supported, too! Interplay uses *.SOW files in
+                      ARJ format as install files.
+     parameters:      -arj
+   - ART DIRECTOR
+     extention:       .art
+     origin/purpose:  Art Director is a painting program used on Atari ST
+                      computers.
+     parameters:      -artd
+   - ARTIST 64
+     origin/purpose:  The graphic file format of Artist 64, a painting
+                      program for the C64.
+     parameters:      -ar64
+   - ASCII WITH UNICODE CODES
+     origin/purpose:  These are ASCII files which use the '\uDDDD'
+                      notation to store Unicode characters.
+     parameters:      -ascu
+   - ASMO 449 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 9036 and ISO-IR-89.
+     origin/purpose:  An Arabic character set.
+     parameters:      -text -txtcs:205
+   - ATARI ATASCII TEXT
+     origin/purpose:  The ATASCII character set is used on 8-bit Atari
+                      computers.
+     compliance:      GDV doesn't support this character set completely.
+                      It just translates the line seperators.
+     parameters:      -text -txtcs:2
+   - ATARI IMAGE MANAGER (AIM)
+     extention:       .im
+     origin/purpose:  AIM is an image processing program written at the
+                      Delft University of Technology (in the Netherlands).
+     parameters:      -aim
+   - ATARI ST/TT TEXT
+     origin/purpose:  Text files from the Atari ST/TT computers.
+     parameters:      -text -txtcs:12
+   - AUTODESK ANIMATOR PRO CEL
+     extention:       .cel
+     origin/purpose:  Used by Autodesk Animator Pro to store frames.
+     compliance:      Note that the original Autodesk Animator uses a
+                      different format!
+     parameters:      -flic
+   - AVATAR DATA STREAM
+     extention:       .avt
+     origin/purpose:  Text files with color codes, cursor positioning
+                      codes and other codes.
+     compliance:      All AVT/0 codes are supported. The blink attribute
+                      is not supported.
+     parameters:      -avt
+   - AVR
+     extention:       .avr
+     origin/purpose:  The AVR format (developed by Audio Visual Research)
+                      is used to store sound samples.
+     parameters:      -avr
+   - BALTIC TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-179.
+     parameters:      -text -txtcs:238
+   - BINARY CODED DECIMAL (BCD)
+     origin/purpose:  This is a method used to store numbers especially
+                      long numbers). It uses 4-bits per digit, so one byte
+                      stores two digits.
+     parameters:      -text -txtcs:14
+   - BINARY DISPLAY
+     origin/purpose:  This mode can be used for binary files. It can be
+                      combined with most character sets.
+     parameters:      -text -txtbin
+   - BLAZING PADDLES
+     extention:       .bp
+     origin/purpose:  A graphic file format used on the C64.
+     parameters:      -blpd
+   - BOO ENCODED DATA
+     extention:       .boo
+     origin/purpose:  Files which contain the 7-bit representation of
+                      8-bit binary data. GD View decodes the file and
+                      writes the binary data to disk.
+     parameters:      -boo
+   - BS 4730 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-GB and ISO-IR-4.
+     origin/purpose:  The British 7-bit version of ASCII.
+     parameters:      -text -txtcs:176
+   - BS VIEWDATA TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-47.
+     parameters:      -text -txtcs:191
+   - BTOA
+     extention:       .b2a
+     name:            BTOA stands for "binary to ascii".
+     origin/purpose:  BTOA is a UNIX program which converts binary data to
+                      normal printable ascii data. It produces smaller
+                      output files than uuencode but the en-/decoding
+                      process is slower. GD View decodes the file and
+                      writes the binary data to disk (normally one would
+                      need the atob program to do that).
+     parameters:      -btoa
+   - CAESAR
+     origin/purpose:  Caesar encrypted files are text files which were
+                      encrypted using an extremely simple algorithm.
+                      GD View creates the decrypted file.
+     parameters:      -csar
+   - CBM ARC
+     extention:       .arc, .sda
+     origin/purpose:  The archive format of the popular Commodore 64/128
+                      archiver ARC. It uses a format which is incompatible
+                      to the standard (DOS) ARC.
+     compliance:      Self dissolving archives (SDAs) are supported, too.
+     parameters:      -carc
+   - CBM HI-RES FORMAT
+     extention:       .hir
+     origin/purpose:  A file format used on the C64 for hi-resolution
+                      black and white graphical images.
+     parameters:      -hir
+   - CDU PAINT
+     extention:       .cdu
+     origin/purpose:  The graphic file format of CDU Paint, a painting
+                      program for the C64. The CDU format is based
+                      on the the Koala Paint format. The only difference
+                      is that CDU files have a small loader.
+     parameters:      -cdu
+   - CMU WM RASTER
+     extention:       .cmu, .cmuwm
+     origin/purpose:  A graphical image format used by the CMU window
+                      manager.
+     parameters:      -cmu
+   - CODE PAGE 037 (EBCDIC - UNITED STATES) TEXT
+     extention:       txt, doc
+     origin/purpose:  The United States EBCDIC code page.
+     parameters:      -text -txtcs:20
+   - CODE PAGE 038 (EBCDIC-INT) TEXT
+     extention:       txt, doc
+     origin/purpose:  An international version of the EBCDIC character
+                      set used on DOS systems.
+     parameters:      -text -txtcs:21
+   - CODE PAGE 10000 (MACINTOSH ROMAN 10000) TEXT
+     extention:       txt, doc
+     origin/purpose:  Text files which use the Apple Macintosh
+                      Roman 10000 character set.
+     parameters:      -text -txtcs:148
+   - CODE PAGE 10006 (MACINTOSH GREEK 1) TEXT
+     extention:       txt, doc
+     origin/purpose:  Text files which use the Apple Macintosh
+                      Greek 1 character set.
+     parameters:      -text -txtcs:149
+   - CODE PAGE 10007 (MACINTOSH CYRILLIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  Text files which use the Apple Macintosh
+                      Cyrillic character set.
+     parameters:      -text -txtcs:150
+   - CODE PAGE 10029 (MACINTOSH LATIN 2) TEXT
+     extention:       txt, doc
+     origin/purpose:  Text files which use the Apple Macintosh
+                      Latin 2 character set.
+     parameters:      -text -txtcs:151
+   - CODE PAGE 1004 (OS/2 LATIN 1) TEXT
+     extention:       txt, doc
+     origin/purpose:  A Latin-1 character set used by OS/2.
+     parameters:      -text -txtcs:104
+   - CODE PAGE 1006 (URDU - ISO) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:105
+   - CODE PAGE 10079 TEXT
+     extention:       txt, doc
+     origin/purpose:  A Macintosh character set.
+     parameters:      -text -txtcs:152
+   - CODE PAGE 1008 (ARABIC WINDOWS - ORIGINAL) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:106
+   - CODE PAGE 10081 TEXT
+     extention:       txt, doc
+     origin/purpose:  A Macintosh character set.
+     parameters:      -text -txtcs:153
+   - CODE PAGE 1025 (CYRILLIC - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:107
+   - CODE PAGE 1026 TEXT
+     extention:       txt, doc
+     origin/purpose:  The EBCDIC code page of MS Windows.
+     parameters:      -text -txtcs:108
+   - CODE PAGE 1027 (JAPAN (LATIN) - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:109
+   - CODE PAGE 1028 (HEBREW - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:110
+   - CODE PAGE 1038 (POSTSCRIPT SYMBOL SET) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:111
+   - CODE PAGE 1041 (JAPAN SAA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:112
+   - CODE PAGE 1043 (TAIWAN SAA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:113
+   - CODE PAGE 1046 (ARABIC - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:114
+   - CODE PAGE 1047 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:115
+   - CODE PAGE 1051 (HP ROMAN 8) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:116
+   - CODE PAGE 1088 (KOREA KS) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:117
+   - CODE PAGE 1089 (ARABIC - ISO 8859-6) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:118
+   - CODE PAGE 1092 (PC SYMBOLS) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:119
+   - CODE PAGE 1097 (FARSI - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:120
+   - CODE PAGE 1098 (FARSI) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:121
+   - CODE PAGE 1112 (BALTIC - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:122
+   - CODE PAGE 1114 (TAIWAN BIG-5) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:123
+   - CODE PAGE 1115 (CHINA GB) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:124
+   - CODE PAGE 1116 (ESTONIA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:125
+   - CODE PAGE 1117 (LATVIA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:126
+   - CODE PAGE 1118 (LITHUANIA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:127
+   - CODE PAGE 1119 (LITHUSANIAN AND RUSSIAN) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:128
+   - CODE PAGE 1122 (ESTONIA - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:129
+   - CODE PAGE 1123 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:130
+   - CODE PAGE 1124 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:131
+   - CODE PAGE 1250 (MS WINDOWS EASTERN EUROPE) TEXT
+     extention:       txt, doc
+     name:            Also known as Windows Latin 2.
+     origin/purpose:  The Eastern Europe code page of MS Windows.
+     parameters:      -text -txtcs:132
+   - CODE PAGE 1251 (MS WINDOWS CYRILLIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Cyrillic code page of MS Windows.
+     parameters:      -text -txtcs:133
+   - CODE PAGE 1252 (MS WINDOWS ANSI) TEXT
+     extention:       txt, doc
+     name:            Also known as Windows Latin 1.
+     origin/purpose:  The ANSI code page of MS Windows 3.1 and newer
+                      versions. This is the default Windows code page.
+                      It is downwards compatible to ISO 8859/1.
+     parameters:      -text -txtcs:134
+   - CODE PAGE 1253 (MS WINDOWS GREEK) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Greek code page of MS Windows.
+     parameters:      -text -txtcs:135
+   - CODE PAGE 1254 (MS WINDOWS TURKISH) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Turkish code page of MS Windows.
+     parameters:      -text -txtcs:136
+   - CODE PAGE 1255 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Hebrew code page of MS Windows.
+     parameters:      -text -txtcs:137
+   - CODE PAGE 1256 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Arabic code page of MS Windows.
+     parameters:      -text -txtcs:138
+   - CODE PAGE 1257 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Baltic code page of MS Windows.
+     parameters:      -text -txtcs:139
+   - CODE PAGE 1258 (MS WINDOWS VIETNAMESE) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:140
+   - CODE PAGE 1275 (APPLE LATIN 1) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:141
+   - CODE PAGE 1276 (ADOBE PS STANDARD ENCODING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:142
+   - CODE PAGE 1277 (ADOBE PS ISOLATIN1 ENCODING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:143
+   - CODE PAGE 1280 (APPLE GREECE) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:144
+   - CODE PAGE 1281 (APPLE TURKEY) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:145
+   - CODE PAGE 1282 (APPLE CENTRAL EUROPEAN) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:146
+   - CODE PAGE 1283 (APPLE CYRILLIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:147
+   - CODE PAGE 256 TEXT
+     extention:       txt, doc
+     origin/purpose:  An international EBCDIC character set for DOS.
+     parameters:      -text -txtcs:22
+   - CODE PAGE 259 (SYMBOLS WP - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:23
+   - CODE PAGE 273 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:24
+   - CODE PAGE 274 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:25
+   - CODE PAGE 275 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:26
+   - CODE PAGE 277 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Danish and Norwegian EBCDIC code page.
+     parameters:      -text -txtcs:27
+   - CODE PAGE 278 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Finnish and Swedish EBCDIC code page.
+     parameters:      -text -txtcs:28
+   - CODE PAGE 280 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Italian EBCDIC code page.
+     parameters:      -text -txtcs:29
+   - CODE PAGE 282 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:30
+   - CODE PAGE 284 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Spanish EBCDIC code page.
+     parameters:      -text -txtcs:31
+   - CODE PAGE 285 TEXT
+     extention:       txt, doc
+     origin/purpose:  The British EBCDIC code page.
+     parameters:      -text -txtcs:32
+   - CODE PAGE 290 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:33
+   - CODE PAGE 293 (APL - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:34
+   - CODE PAGE 297 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:35
+   - CODE PAGE 361 (INTERNATIONAL - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:36
+   - CODE PAGE 363 (SYMBOLS - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:37
+   - CODE PAGE 367 (G0 - ASCII) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:38
+   - CODE PAGE 382 (AUSTRIA, GERMANY - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:39
+   - CODE PAGE 383 (BELGIUM - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:40
+   - CODE PAGE 385 (CANADA (FRENCH) - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:41
+   - CODE PAGE 386 (DENMARK, NORWAY - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:42
+   - CODE PAGE 387 (FINLAND, SWEDEN - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:43
+   - CODE PAGE 388 (FRANCE - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:44
+   - CODE PAGE 389 (ITALY - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:45
+   - CODE PAGE 391 (PORTUGAL - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:46
+   - CODE PAGE 392 (SPAIN - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:47
+   - CODE PAGE 393 (LATIN AMERICA - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:48
+   - CODE PAGE 394 (UNITED KINGDOM - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:49
+   - CODE PAGE 395 (UNITED STATES - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:50
+   - CODE PAGE 420 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:51
+   - CODE PAGE 423 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:52
+   - CODE PAGE 424 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:53
+   - CODE PAGE 437 (USA) TEXT
+     extention:       txt, doc
+     origin/purpose:  This character set used to be the (only) 8-bit MS
+                      DOS Extended character set (IBM PC-8 character set).
+                      When Microsoft added support for other character
+                      sets, the original set was kept as code page 437 for
+                      backwards-compatibility. Many MS DOS users still use
+                      this character set although Microsoft recommends
+                      using code page 850. It was first used in 1981 with
+                      PC DOS 1.0.
+     parameters:      -text -txtcs:54
+   - CODE PAGE 500 (EBCDIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  An IBM PC code page which contains the EBCDIC
+                      character set
+     parameters:      -text -txtcs:55
+   - CODE PAGE 737 (GREEK II OR IBM GREEK) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Greek II IBM PC code page (also known as IBM
+                      Greek).
+     parameters:      -text -txtcs:56
+   - CODE PAGE 775 ("BALTRIM") TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:57
+   - CODE PAGE 813 (GREECE - ISO 8859-7) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:58
+   - CODE PAGE 819 (LATIN 1 - ISO 8859-1) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:59
+   - CODE PAGE 829 (MATH SYMBOLS - PUBLISHING) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:60
+   - CODE PAGE 833 (KOREA - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:61
+   - CODE PAGE 836 (CHINA - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:62
+   - CODE PAGE 838 (THAI - EBCDIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:63
+   - CODE PAGE 850 (LATIN I - MULTILINGUAL) TEXT
+     extention:       txt, doc
+     origin/purpose:  In 1987 Microsoft released MS DOS 3.3 and added
+                      support for code page 850 (Latin I). It is the
+                      default code page of the MS DOS versions for most
+                      European language countries. It contains all
+                      characters necessary to display ISO 8859/1 texts.
+                      Microsoft recommends using this character set
+                      instead of code page 437.
+     parameters:      -text -txtcs:64
+   - CODE PAGE 851 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:65
+   - CODE PAGE 852 (LATIN II - SLAVIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Latin 2 IBM PC code page. It contains Slavic
+                      characters.
+     parameters:      -text -txtcs:66
+   - CODE PAGE 853 (MULTILINGUAL LATIN 3) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:67
+   - CODE PAGE 855 (CYRILLIC I) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Cyrillic I IBM PC code page.
+     parameters:      -text -txtcs:68
+   - CODE PAGE 856 (HEBREW - OLD) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:69
+   - CODE PAGE 857 (TURKISH) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Turkish I IBM PC code page.
+     parameters:      -text -txtcs:70
+   - CODE PAGE 860 (PORTUGUESE) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Portuguese IBM PC code page.
+     parameters:      -text -txtcs:71
+   - CODE PAGE 861 (ICELANDIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Icelandic IBM PC code page.
+     parameters:      -text -txtcs:72
+   - CODE PAGE 862 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Hebrew IBM PC code page.
+     parameters:      -text -txtcs:73
+   - CODE PAGE 863 (FRENCH CANADIAN) TEXT
+     extention:       txt, doc
+     origin/purpose:  The French Canadian IBM PC code page.
+     parameters:      -text -txtcs:74
+   - CODE PAGE 864 TEXT
+     extention:       txt, doc
+     origin/purpose:  The Arabic IBM PC code page.
+     parameters:      -text -txtcs:75
+   - CODE PAGE 865 (NORDIC) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Nordic IBM PC code page.
+     parameters:      -text -txtcs:76
+   - CODE PAGE 866 (CYRILLIC 2 OR RUSSIAN) TEXT
+     extention:       txt, doc
+     origin/purpose:  The Cyrillic II (Russian) IBM PC code page.
+     parameters:      -text -txtcs:77
+   - CODE PAGE 868 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:78
+   - CODE PAGE 869 (GREEK I OR IBM MODERN GREEK) TEXT
+     extention:       txt, doc
+     name:            Also known as IBM Modern Greek.
+     origin/purpose:  The Greek I IBM PC code page.
+     parameters:      -text -txtcs:79
+   - CODE PAGE 870 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:80
+   - CODE PAGE 871 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:81
+   - CODE PAGE 874 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:82
+   - CODE PAGE 875 TEXT
+     extention:       txt, doc
+     origin/purpose:  The EBCDIC IBM PC code page.
+     parameters:      -text -txtcs:83
+   - CODE PAGE 878 (RUSSIA - INTERNET) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:84
+   - CODE PAGE 880 TEXT
+     extention:       txt, doc
+     origin/purpose:  A cyrillic EBCDIC code page.
+     parameters:      -text -txtcs:85
+   - CODE PAGE 891 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:86
+   - CODE PAGE 895 (JAPAN G0 (LATIN) - EUC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:87
+   - CODE PAGE 896 (JAPAN G2 (KATAKANA) - EUC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:88
+   - CODE PAGE 897 (JAPAN) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:89
+   - CODE PAGE 903 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:90
+   - CODE PAGE 904 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:91
+   - CODE PAGE 907 (APL) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:92
+   - CODE PAGE 909 (APL2 EXTENDED) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:93
+   - CODE PAGE 910 (APL2) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:94
+   - CODE PAGE 912 (LATIN 2 - ISO 8859-2) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:95
+   - CODE PAGE 913 (LATIN 3 - ISO 8859-3) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:96
+   - CODE PAGE 914 (LATIN 4 - ISO 8859-4) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:97
+   - CODE PAGE 915 (CYRILLIC - ISO 8859-5) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:98
+   - CODE PAGE 916 (ISRAEL - ISO 8859-8) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:99
+   - CODE PAGE 918 TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:100
+   - CODE PAGE 920 (LATIN 5 - ISO 8859-9) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:101
+   - CODE PAGE 921 (BALTIC) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:102
+   - CODE PAGE 922 (ESTONIA) TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:103
+   - COLORIX
+     extention:       .sc?, .rix
+     origin/purpose:  A format used by ColoRIX and WinRIX.
+     compliance:      Implementation partially based on guess work. Most
+                      uncompressed images should work.
+     parameters:      -rix
+   - COMMODORE 64/128 FONT
+     extention:       .fnt
+     origin/purpose:  8x8 character fonts used on CBM computers.
+     parameters:      -cbmf
+   - COMMODORE BASIC 1.0
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb1
+   - COMMODORE BASIC 10.0
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb10
+   - COMMODORE BASIC 2.0 W/ SUPER EXTENDER
+     extention:       .prg
+     origin/purpose:  This is an extended version of CBM Basic 2.0.
+                      Commodore Basic source code is saved in a binary
+                      format but GDV can reconstruct it.
+     parameters:      -cbse
+   - COMMODORE BASIC 2.0
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb2
+   - COMMODORE BASIC 3.5
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb35
+   - COMMODORE BASIC 4.0 EXPANSION FOR C64
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb4s
+   - COMMODORE BASIC 4.0
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb4
+   - COMMODORE BASIC 7.0
+     extention:       .prg
+     origin/purpose:  Commodore Basic (CBM Basic) source code is saved in
+                      a binary format but GDV can reconstruct it.
+     parameters:      -cb7
+   - COREL DRAW
+     extention:       .cdr, .pat
+     origin/purpose:  A vector graphics format used by the popular Windows
+                      program Corel Draw.
+     compliance:      Only the preview image is shown. Not all versions
+                      are supported.
+     parameters:      -cdrw
+   - CRAIG BRUCE'S BM FORMAT
+     extention:       .bm
+     origin/purpose:  Craig Bruce is the author of VBM (a C128 program).
+                      The program uses this bitmap format.
+     parameters:      -cbbm
+   - CREATIVE MUSIC (CMF)
+     extention:       .cmf
+     origin/purpose:  A music file format used with Sound Blaster sound
+                      cards.
+     compliance:      SBFMDRV.COM must be loaded!
+     parameters:      -ctmf
+
+   - CREATIVE VOICE (VOC)
+     extention:       .voc
+     origin/purpose:  A sound sample format developed by Creative Labs. It
+                      is used extensively on IBM PCs due to the popularity
+                      of the Sound Blaster sound card family.
+     compliance:      All common sample types should work. Silences and
+                      loops are ignored.
+     parameters:      -cvoc
+   - CRUNCH
+     origin/purpose:  Crunch is a file compression program.
+     parameters:      -crn
+   - CRUSH
+     extention:       .cru, .cri
+     origin/purpose:  Crush is a file archiver by PocketWare which is used
+                      together with other compressing file archivers.
+     compliance:      All files should work. Only the uncompressed
+                      .CRU/.CRI files are shown.
+     parameters:      -cru
+   - CSA Z243.4-1985-1 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-CA and ISO-IR-121.
+     parameters:      -text -txtcs:219
+   - CSA Z243.4-1985-2 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-CA2 and ISO-IR-122.
+     parameters:      -text -txtcs:220
+   - CSA Z243.4-1985-GR TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-132.
+     parameters:      -text -txtcs:223
+   - CSN 369103 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-139.
+     parameters:      -text -txtcs:225
+   - CWI TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:154
+   - DBASE / FOXBASE / FOXBASE+
+     extention:       .dbf
+     origin/purpose:  One of the most commonly used database formats on
+                      IBM PCs. In addition to dBase this format is also
+                      used by Clipper, dBXL, dBFast, dBFast/Windows,
+                      Quicksilver and by many Shareware database programs.
+                      Virtually every important database program is able
+                      to export dBase files.
+     compliance:      Memo files are not used.
+     parameters:      -dbf
+   - DBLITE
+     extention:       .dbl
+     origin/purpose:  dbLite is a Shareware free-form database program for
+                      MS DOS by Michael J. Seither.
+     compliance:      All files should work but notes are not supported.
+     parameters:      -dbl
+   - DCX
+     extention:       .dcx
+     origin/purpose:  The DCX is format is defined by the DCA/Intel
+                      Communicating Applications Specification (CAS).
+     compliance:      Some fax modem vendors use nonstandard images.
+     parameters:      -dcx
+   - DEC AUDIO
+     extention:       .au
+     origin/purpose:  The DEC .au format is a sound sample format which is
+                      similar to the Sun/NeXT .au format.
+     compliance:      All common sample types should work.
+     parameters:      -au
+   - DEC-MCS TEXT
+     extention:       txt, doc
+     name:            MCS stands for Multilanguage Character Set.
+     origin/purpose:  The DEC MCS character set is used on DEC VT100 and
+                      VT200 terminals. It was first used in 1982 and it
+                      was similar to the ISO 6937/2 character set. The
+                      ECMA-94 standard is based on it. The only difference
+                      to the final ISO 8859/1 standard is that four
+                      icelandic characters are missing. DEC MCS is used
+                      with DEC Ultrix and VAX VMS.
+     parameters:      -text -txtcs:155
+   - DECIMAL DISPLAY
+     origin/purpose:  This mode can be used for binary files. It can be
+                      combined with most character sets.
+     parameters:      -text -txtdec
+   - DEGAS / DEGAS ELITE UNCOMPRESSED
+     extention:       .pi1, .pi2, .pi3
+     origin/purpose:  Degas is a popular painting program used on Atari ST
+                      computers.
+     parameters:      -dgas
+   - DEGAS ELITE COMPRESSED
+     extention:       .pc1, .pc2, .pc3
+     origin/purpose:  Degas Elite is a painting program used on Atari ST
+                      computers.
+     parameters:      -dgec
+   - DESCENT .HOG
+     extention:       .hog
+     origin/purpose:  HOG files are used by Descent, a 3d game by Parallax
+                      Software.
+     parameters:      -dhog
+   - DEVICE INDEPENDENT BITMAP (DIB/BMP)
+     extention:       .bmp, .dib, .rle, .rl4, .rl8, .sys
+     name:            "Device Independent" just means that Windows can
+                      display the image consistently on all kinds of
+                      output devices.
+     origin/purpose:  A graphical image format used by Microsoft Windows
+                      and OS/2. The MS Windows 95 logos (*.SYS) are in DIB
+                      format.
+     compliance:      Virtually all images should work (including RLE
+                      compressed ones).
+     parameters:      -dib
+   - DEVICE INDEPENDENT BITMAP - EMBEDDED
+     origin/purpose:  Files which contain embedded DIB data. GD View
+                      searches and extracts the DIB files. In order words
+                      GD View can "rip" BMP files out of data files or
+                      executables.
+     parameters:      -dibe
+   - DIN 66003 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-DE and ISO-IR-21.
+     origin/purpose:  German version of ASCII.
+     parameters:      -text -txtcs:187
+   - DOODLE (ATARI ST)
+     extention:       .doo
+     origin/purpose:  Pictures created by the Atari ST Doodle program.
+     parameters:      -ddst
+   - DRAW256
+     extention:       .vga
+     origin/purpose:  Draw256 is a free art program for MS DOS by
+                      Matthew Hildebrand.
+     parameters:      -d256
+   - DS 2089 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-DK.
+     origin/purpose:  The Danish version of ASCII.
+     parameters:      -text -txtcs:156
+   - DUKE NUKEM 3D .GRP
+     extention:       .grp
+     origin/purpose:  GRP files are used by Apogee's Duke Nukem 3D.
+     parameters:      -dn3d
+   - DWC
+     extention:       .dwc, .exe
+     origin/purpose:  DWC is a file archiver by Dean W. Cooper.
+     compliance:      Self-extracting archives are supported.
+     parameters:      -dwc
+   - EBCDIC TEXT (GENERIC VERSION)
+     extention:       .txt, .doc
+     name:            EBCDIC stands for Extended Binary Coded Decimal
+                      Interchange Code.
+     origin/purpose:  EBCDIC is a character set which is incompatible to
+                      7-bit ASCII. It was developed by IBM and is used on
+                      mainframe computers.
+     compliance:      This "Generic" EBCDIC character set is a combination
+                      of several EBCDIC variants and it is designed to
+                      handle most EBCDIC texts.
+     parameters:      -text -txtcs:0
+   - EBCDIC-AT-DE TEXT
+     extention:       txt, doc
+     origin/purpose:  A German and Austrian EBCDIC character set.
+     parameters:      -text -txtcs:157
+   - EBCDIC-AT-DE-A TEXT
+     extention:       txt, doc
+     origin/purpose:  A German and Austrian EBCDIC character set.
+     parameters:      -text -txtcs:158
+   - EBCDIC-CA-FR TEXT
+     extention:       txt, doc
+     origin/purpose:  A Canadian and French EBCDIC character set.
+     parameters:      -text -txtcs:159
+   - EBCDIC-DK-NO TEXT
+     extention:       txt, doc
+     origin/purpose:  A Danish and Norwegian EBCDIC character set.
+     parameters:      -text -txtcs:160
+   - EBCDIC-DK-NO-A TEXT
+     extention:       txt, doc
+     origin/purpose:  A Danish and Norwegian EBCDIC character set.
+     parameters:      -text -txtcs:161
+   - EBCDIC-ES TEXT
+     extention:       txt, doc
+     origin/purpose:  A Spanish EBCDIC character set.
+     parameters:      -text -txtcs:162
+   - EBCDIC-ES-A TEXT
+     extention:       txt, doc
+     origin/purpose:  A Spanish EBCDIC character set.
+     parameters:      -text -txtcs:163
+   - EBCDIC-ES-S TEXT
+     extention:       txt, doc
+     origin/purpose:  A Spanish EBCDIC character set.
+     parameters:      -text -txtcs:164
+   - EBCDIC-FI-SE TEXT
+     extention:       txt, doc
+     origin/purpose:  A Finnish and Swedish EBCDIC character set.
+     parameters:      -text -txtcs:165
+   - EBCDIC-FI-SE-A TEXT
+     extention:       txt, doc
+     origin/purpose:  A Finnish and Swedish EBCDIC character set.
+     parameters:      -text -txtcs:166
+   - EBCDIC-FR TEXT
+     extention:       txt, doc
+     origin/purpose:  A French EBCDIC character set.
+     parameters:      -text -txtcs:167
+   - EBCDIC-IS-FRISS TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:169
+   - EBCDIC-IT TEXT
+     extention:       txt, doc
+     origin/purpose:  An Italian EBCDIC character set.
+     parameters:      -text -txtcs:168
+   - EBCDIC-PT TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:170
+   - EBCDIC-UK TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:171
+   - EBCDIC-US TEXT
+     extention:       txt, doc
+     origin/purpose:  An American EBCDIC character set.
+     parameters:      -text -txtcs:172
+   - ECMA-CYRILLIC TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-111.
+     parameters:      -text -txtcs:218
+   - ENCAPSULATED POSTSCRIPT (EPS) - TIFF PREVIEW
+     extention:       .eps
+     origin/purpose:  A popular graphics format by Adobe.
+     compliance:      Only TIFF preview images in EPS files are supported.
+                      Unfortunately, some EPS files (especially Macintosh
+                      ones) do not contain TIFF preview images.
+     parameters:      -eps
+   - EPSON DENMARK TEXT
+     extention:       .txt, .doc
+     origin/purpose:  Danish version of 7-bit ASCII.
+     parameters:      -text -txtcs:5
+   - EPSON ENGLAND TEXT
+     extention:       .txt, .doc
+     origin/purpose:  UK version of 7-bit ASCII (not same as ISO IR 4).
+     parameters:      -text -txtcs:4
+   - EPSON FRANCE TEXT
+     extention:       .txt, .doc
+     origin/purpose:  French version of 7-bit ASCII (not same as ISO IR
+                      69).
+     parameters:      -text -txtcs:3
+   - EPSON ITALY TEXT
+     extention:       .txt, .doc
+     origin/purpose:  Italian version of 7-bit ASCII (not same as ISO IR
+                      15).
+     parameters:      -text -txtcs:7
+   - EPSON JAPAN TEXT
+     extention:       .txt, .doc
+     origin/purpose:  Japanese version of 7-bit ASCII.
+     parameters:      -text -txtcs:9
+   - EPSON SPAIN TEXT
+     extention:       .txt, .doc
+     origin/purpose:  Spanish version of 7-bit ASCII (not same as ISO IR
+                      17).
+     parameters:      -text -txtcs:8
+   - EPSON SWEDEN TEXT
+     extention:       .txt, .doc
+     origin/purpose:  Swedish version of 7-bit ASCII (not same as ISO IR
+                      10).
+     parameters:      -text -txtcs:6
+   - EXCESS 3 BCD
+     origin/purpose:  This is a variant of BCD, which can be processed
+                      easier by electronic devices.
+     parameters:      -text -txtcs:16
+   - EXEC MEMOMAKER
+     origin/purpose:  A text format.
+     compliance:      Autodetection is not possible.
+     parameters:      -exmm
+   - EXECUTABLES (EXE, COM, BAT, ASSOCIATIONS)
+     origin/purpose:  GD View can be used as a program shell. Files which
+                      can be executed by the operating system. In addition
+                      to that special file types can be associated with
+                      programs, for example BASIC files could be
+                      associated with a BASIC interpreter or emulator disk
+                      files could be associated with the respective
+                      emulator.
+                      If GD View is running in a Windows NT or Windows 95
+                      DOS Box then you can use the exec viewer to call the
+                      Windows association for files and the Explorer for
+                      directories (using WV.EXE).
+     parameters:      -exec
+   - FACE
+     extention:       .fac, .face
+     origin/purpose:  Used for images of people's faces.
+     parameters:      -face
+   - FLI (C64)
+     extention:       .fli
+     origin/purpose:  A popular graphics file format on the C64. It is
+                      used with the special C64 "FLI" graphic mode. This
+                      format is not related to the Autodesk Animator FLIC
+                      format (.fli and .flc files).
+     parameters:      -fli
+   - FLIC
+     extention:       .fli, .flc, .flh, .flt
+     origin/purpose:  An Animation format used by Autodesk Animator and
+                      Autodesk Animator Pro. This is one of the most
+                      important animation formats on IBM PC compatible
+                      computers.
+     compliance:      In addition to the Autodesk Animator FLI and
+                      Autodesk Animator Pro FLC formats, GD View also
+                      supports the HiColor FLH and the TrueColor FLT
+                      formats!
+                      Palette animation is not supported in some video
+                      modes.
+     parameters:      -flic
+   - FONTEDIT (CHRIS HOWE) FONT
+     origin/purpose:  Font files created with Chris Howe's Fontedit.
+     parameters:      -chfe
+   - FOXPRO, FOXPRO FOR WINDOWS
+     origin/purpose:  Database format similar to dBase format.
+     compliance:      Memos, Objects and Pictures are not supported.
+     parameters:      -dbf
+   - GB 1988-80 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-CN and ISO-IR-57.
+     parameters:      -text -txtcs:197
+   - GEM IMAGE
+     extention:       .img, .gem, .gmi
+     origin/purpose:  This format was developed by Digital Research for
+                      programs which run in the GEM enviroment (e.g. on
+                      Atari ST computers). This format is also also used
+                      by Ventura Publisher.
+     parameters:      -gimg
+   - GIFFER QDV
+     extention:       .qdv
+     origin/purpose:  A graphical image file format used by the Apple
+                      Macintosh "beerware" program Giffer (Steve
+                      Blackstone).
+     parameters:      -qdv
+   - GIRLS & POKER FOR WINDOWS DATA
+     extention:       .pok
+     origin/purpose:  Girls & Poker is an adult Shareware game for MS
+                      Windows by Ain Avi. GDV can display the data files
+                      of the game.
+     parameters:      -gapo
+   - GOST 19768-74 TEXT
+     extention:       txt, doc
+     name:            Also known as ST SEV 358-8 and ISO-IR-153.
+     parameters:      -text -txtcs:233
+   - GRAPHICS INTERCHANGE FORMAT (GIF)
+     extention:       .gif, .giff, .pla, .ppf
+     name:            The GIF specification states that "GIF" is supposed
+                      to be pronounced "jif" (pronounce the 'j' as in
+                      "jelly") but most people prefer pronouncing it "gif"
+                      (pronounce the 'g' as in "Graphics").
+     origin/purpose:  "The Graphics Interchange Format(c) is the Copyright
+                      property of CompuServe Incorporated. GIF(sm) is a
+                      Service Mark property of CompuServe Incorporated."
+                      The GIF file format is one of the most popular
+                      graphical image formats used on PCs.
+     compliance:      All GIF files should be supported (GIF87a and
+                      GIF89a). GIF files can contain more than one images
+                      but only the first one is displayed.
+                      You can only look at the first frame of an Aldus
+                      Persuasion file.
+     parameters:      -gif
+   - GRASP LIBRARY (GL)
+     extention:       .gl
+     origin/purpose:  A file format which is used to store animations. It
+                      is used on MS DOS and Amiga systems.
+     parameters:      -gspl
+   - GREEK-CCITT TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-150.
+     parameters:      -text -txtcs:231
+   - GREEK7 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-88.
+     parameters:      -text -txtcs:204
+   - GREEK7-OLD TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-18.
+     parameters:      -text -txtcs:185
+   - GTS SOUND SAMPLE
+     extention:       .sam
+     origin/purpose:  Sound sample files used by the GTS music system.
+     parameters:      -gtss
+   - GZIP (.GZ)
+     extention:       .gz, .tgz, .gzip
+     origin/purpose:  gzip is a popular UNIX utility which is used to
+                      compress files. A lot of files on the Internet are
+                      compressed with gzip.
+     parameters:      -gzip
+   - HA
+     extention:       .ha
+     origin/purpose:  HA is a file archiver by Harri Hirvola.
+     parameters:      -ha
+   - HALO CUT
+     extention:       .cut / .pal
+     compliance:      There must be an associated .PAL file if the image
+                      is not mono.
+     parameters:      -hcut
+   - HANDY SCANNER 2000
+     extention:       .hs2
+     origin/purpose:  Used by Handy Scanner 2000 software
+     compliance:      The HSZ image archives can be decompressed with ZIP.
+     parameters:      -hns2
+   - HEADERLESS SOUND SAMPLE (RAW)
+     extention:       .smp, .sam, .snd, .raw, .sb, .sw, .u8, .ul, .uw,
+                      .au, .8sn
+     origin/purpose:  These are raw sound samples. They do not contain a
+                      header which specifies the type of the sound file or
+                      the sample rate. GDV tries to guess the parameters
+                      but there is no 100% safe way to do it so in some
+                      cases you will have to specify the correct
+                      parameters on the command line.
+                      Macintosh and IBM PC sound files are usually
+                      unsigned (use "-rsub"). Amiga, Atari ST/TT and Atari
+                      Falcon sound files are usually signed (use "-rssb").
+                      UNIX sound files are usually in U-Law format (use
+                      "-rsul").
+     compliance:      All files should work. However the correct sound
+                      type must be selected.
+     parameters:      -rsam
+                      -rsmp
+                      -rssb
+                      -rssd
+                      -rssw
+                      -rsub
+                      -rsud
+                      -rsul
+                      -rsuw
+   - HEXADECIMAL DISPLAY
+     origin/purpose:  This mode is for binary files and it can be combined
+                      with most character sets.
+     parameters:      -text -txthex
+   - HP 48 TEXT
+     extention:       txt, doc
+     origin/purpose:  The character set used on HP48 pocket computers.
+     parameters:      -text -txtcs:174
+   - HP-ROMAN8 TEXT
+     extention:       txt, doc
+     origin/purpose:  Hewlett Packard's Roman 8 font.
+     parameters:      -text -txtcs:173
+   - HQX (BINHEX)
+     extention:       .hqx, .hcx, .hex
+     origin/purpose:  Files which contain the 7-bit representation of
+                      8-bit binary Macintosh files. These files can be
+                      transported e.g. via e-mail without losing
+                      information. The data the resource forks are
+                      transported as well as the attributes of the file.
+                      GD View decodes the file and writes the binary data
+                      (two seperate files) to disk.
+     compliance:      Only Hqx7 is supported, not Hqx8.
+     parameters:      -hqx
+   - HRZ
+     extention:       .hrz
+     origin/purpose:  A graphical image format by Hitachi. Apparently used
+                      with SSTV (slow scan television).
+     parameters:      -hrz
+   - HSI RAW
+     extention:       .raw, .hst
+     origin/purpose:  The HSI Raw format is used by Image Alchemy
+                      (Handmade Software, Inc.).
+     compliance:      Only version 4 is supported.
+     parameters:      -hsir
+   - HYPER
+     extention:       .hyp, .exe
+     origin/purpose:  Hyper is a file archiver by P. Sawatski and K.P.
+                      Nischke.
+     compliance:      Self-extracting archives are supported, too!
+     parameters:      -hyp
+   - HYPERTEXT MARKUP LANGUAGE (HTML)
+     extention:       .htm, .html
+     origin/purpose:  HTML is a document language which is used in the
+                      World Wide Web.
+     compliance:      Only standard text elements are shown.
+     parameters:      -html
+   - IBM PC TEXT MODE SCREEN IMAGE (BINARY)
+     extention:       .bin, .scr
+     origin/purpose:  Raw IBM PC text mode screen images. The name of this
+                      format may sound a bit weird but these kind of files
+                      are actually used by a lot of screen drawing
+                      programs. They usually call this format "Binary" or
+                      "Raw".
+     compliance:      It is impossible to determine the correct screen
+                      width so in some cases the "-x:NN" parameter has to
+                      be used (for example "-x:40" if the screen width is
+                      40).
+     parameters:      -sbin
+   - ICE COLOR ANSI
+     extention:       .ans, .ice
+     origin/purpose:  This is an incompatible extention of the MS DOS
+                      ANSI.SYS command set which was originally used by
+                      the famous art group iCE (Insane Creator's
+                      Enterprise).
+     parameters:      -ians
+   - ID SOFTWARE WAD
+     extention:       .wad
+     origin/purpose:  WAD files are used by Games written by or based on
+                      games by id software, e.g. D**m, D**m 2 and Heretic.
+     parameters:      -iwad
+   - ILBM (IFF)
+     extention:       .lbm, .iff, .ilbm, .ilb, .ham, .ham6, .ham8, .ehb,
+                      .bbm, .brush
+     origin/purpose:  This is a graphical image format which is very
+                      popular on the Amiga. BBM files are Deluxe Paint
+                      brush files.
+     compliance:      Hold-and-modify (HAM6), Hold-any-modify-8 (HAM8),
+                      extra-half-brite (EHB) and DP2E PBM images are
+                      supported but some of the other special variations
+                      aren't (MP, SHAM).
+     parameters:      -ilbm
+   - IM
+     extention:       .im
+     origin/purpose:  This format is used to store digital graphical
+                      images.
+     parameters:      -im
+   - INIS TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-49.
+     parameters:      -text -txtcs:192
+   - INIS-8 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-50.
+     parameters:      -text -txtcs:193
+   - INIS-CYRILLIC TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-51.
+     parameters:      -text -txtcs:194
+   - INTEL HEX
+     extention:       .hex
+     origin/purpose:  The Intel Hex format is used when programming micro-
+                      chips. It was developed by Intel. GD View decodes
+                      the file and writes the binary microcode to disk.
+                      The CompuServe binary format is compatible to the
+                      Intel Hex format.
+     parameters:      -ihex
+   - INVARIANT TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-170.
+     parameters:      -text -txtcs:237
+   - ISO 10646
+     origin/purpose:  The ISO 16-bit character set standard. ISO 10646
+                      supports all special characters to store texts
+                      in virtually any language. It also supports
+                      virtually all characters needed for scientific
+                      purposes.
+                      ISO/IEC 10646-1 was approved as an international
+                      standard in June 1992 and published in May 1993.
+     compliance:      GDV is only able to display characters which are
+                      supported by the local character set. Special
+                      multi-word codes are not interpreted properly.
+     parameters:      -text -txtcs:11
+   - JIS C6220-1969-JP TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-13.
+     origin/purpose:  A Japanese Katakana character set.
+     parameters:      -text -txtcs:180
+   - JIS C6220-1969-RO TEXT
+     extention:       txt, doc
+     name:            Also knwon as ISO 646-JP and ISO-IR-14.
+     origin/purpose:  A Japanese version of ASCII.
+     parameters:      -text -txtcs:181
+   - JIS C6229-1984-A TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-91.
+     parameters:      -text -txtcs:206
+   - JIS C6229-1984-B TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-JP-OCR-B and ISO-IR-92.
+     parameters:      -text -txtcs:207
+   - JIS C6229-1984-B-ADD TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-93.
+     parameters:      -text -txtcs:208
+   - JIS C6229-1984-HAND TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-94.
+     parameters:      -text -txtcs:209
+   - JIS C6229-1984-HAND-ADD TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-95.
+     parameters:      -text -txtcs:210
+   - JIS C6229-1984-KANA TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-96.
+     parameters:      -text -txtcs:211
+   - JPEG/JFIF
+     extention:       .jpg, .jpeg, .jpe, .jfif, .jfi, .jff, .thm
+     name:            JPEG (pronounced Jay-Peg) stands for Joint
+                      Photographers Expert Group. JFIF stands for JPEG
+                      File Interchange Format.
+     origin/purpose:  JPEG/JFIF files use a lossy compression method to
+                      minimize the file size of graphical images.
+                      JPEG/JFIF files are therefore very small and they
+                      can be transported at relatively high speeds over
+                      the Internet.
+     compliance:      Only 8-bit samples are supported. Arithmetic entropy
+                      coding is not supported. Lossless JPEG is not
+                      supported. Nevertheless nearly all uncorrupt files
+                      should work.
+                      Due to memory limitations GD View for DOS will
+                      however not be able to display most progressive JPEG
+                      files.
+     parameters:      -jfif
+   - JUS I.B1. 002 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-YU and ISO-IR-141.
+     origin/purpose:  The Croatian/Slovene 7-bit character set.
+     parameters:      -text -txtcs:226
+   - JUS I.B1.003-MAC TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-147.
+     origin/purpose:  The Macedonian character set (Yugoslavia).
+     parameters:      -text -txtcs:229
+   - JUS I.B1.003-SERB TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-146.
+     origin/purpose:  A Serbian character set.
+     parameters:      -text -txtcs:228
+   - KOALA PAINTER
+     extention:       .koa
+     origin/purpose:  Koala Painter is a popular paint program for the
+                      C64. The images are for the C64 multicolor mode and
+                      the size is always 160x200. The palette is fixed.
+     parameters:      -koa
+   - KOI-8R TEXT
+     extention:       txt, doc
+     parameters:      -text -txtcs:240
+   - KSC 5636 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-KR.
+     parameters:      -text -txtcs:241
+   - LARC
+     extention:       .lzs, .com
+     origin/purpose:  LARC is a Japanese file archiver by K. Miki, H.
+                      Okumura and K. Masuyama.
+     compliance:      Self-extracting archives are supported, too!
+     parameters:      -lha
+   - LATIN-GREEK TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-19.
+     parameters:      -text -txtcs:186
+   - LATIN-GREEK-1 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-27.
+     parameters:      -text -txtcs:189
+   - LETTERS FONT
+     extention:       .fnt
+     origin/purpose:  EGA/VGA font files created by the Shareware program
+                      Letters (Yonah Schmeidler).
+     parameters:      -lett
+   - LHARC / LHA / LHICE
+     extention:       .lzh, .lha, .com, .exe, .lzk, .ice, .qwk
+     origin/purpose:  LHarc is a popular Japanese file archiver by
+                      Haruyasu Yoshizaki. LHice is a hacked version of
+                      LHarc 1.13. LHA is the official successor of LHarc.
+                      LHA format files are created by LHA, LHarc, LHice,
+                      LH2 (A:WARE Inc.), LHARK (Kerwin F. Medina) and
+                      LHCTK/LHA.DLL (Rhizome Project). The LZK file
+                      extension is used by the KlickSoft installation
+                      program.
+     compliance:      Path names are not shown. Self-extracting archives
+                      are supported!
+     parameters:      -lha
+   - LOTUS 1-2-3 (AND COMPATIBLE FORMATS)
+     extention:       .wks, .wk1, .wk2, .wkq
+     origin/purpose:  One of the most commonly used spreadsheet formats on
+                      IBM PCs. This format is also used by Lotus Symphony
+                      and As-Easy-As. Virtually every important worksheet
+                      program is able to export Lotus 1-2-3 files.
+     compliance:      Formulas, macros and some other special fields are
+                      not supported. WK3, WK4 and WQ1 files are not
+                      supported.
+     parameters:      -l123
+   - LOTUS AMI / LOTUS AMI PRO
+     extention:       .sam
+     origin/purpose:  A document format used by the Windows applications
+                      Lotus Ami and Lotus Ami Pro.
+     compliance:      Tested with Ami Pro 3.0 files. Only standard text
+                      elements are shown (unformatted).
+     parameters:      -lami
+   - LZEXE COMPRESSED EXE
+     extention:       .exe
+     origin/purpose:  LZEXE is an executable compression program.
+     parameters:      -lze
+   - MACBINARY
+     origin/purpose:  This format is used when Macintosh data has to be
+                      transferred to other systems. It is used very often.
+     parameters:      -mb
+   - MACPAINT
+     extention:       .mac, .pnt, .mpnt, .macp, .pntg, .rle
+     origin/purpose:  Used by MacPaint (Macintosh Computers).
+     compliance:      Gray-scale images are not supported (do they
+                      exist?).
+     parameters:      -macp
+   - MAGNATYPE
+     origin/purpose:  A document format used by Magnatype.
+     compliance:      Only plain text is shown. Auto-detection is not
+                      possible.
+     parameters:      -mgna
+   - MAR
+     extention:       .mar
+     origin/purpose:  MAR is a file archiver by Haruhiko Okumura.
+     compliance:      Path names are not shown.
+     parameters:      -lha
+   - MCUREDIT (TOOLBOX)
+     extention:       .cur
+     origin/purpose:  Mouse cursor format used by the MCUREDIT from the
+                      German magazine "toolbox".
+     parameters:      -txcu
+   - MDCD
+     extention:       .md
+     origin/purpose:  MDCD is a file archiver by Mike Davenport.
+     parameters:      -md
+   - MIME BASE64
+     extention:       .m, .64
+     name:            MIME stands for Multipurpose Internet Mail
+                      Extensions.
+     origin/purpose:  MIME Base64 is a popular Internet standard for
+                      encoding binary so that they can be transported
+                      using Internet e-mails or Usenet newsgroups. GD View
+                      decodes the file and writes the binary data to disk.
+
+     compliance:      Multi-part messages are not supported.
+     parameters:      -mb64
+   - MIME QUOTED PRINTABLE
+     name:            MIME Quoted-Printable is sometimes just called
+                      MIMEQP. MIME stands for Multipurpose Internet Mail
+                      Extensions.
+     origin/purpose:  MIME Quoted Printable is an encoding method which is
+                      used to transport data using Internet e-mails or
+                      using the Usenet newsgroups. It is used for files
+                      which mostly contain normal human-readable ASCII
+                      data with the exception of some 8-bit characters or
+                      some long lines. GD View decodes the file and writes
+                      the binary data to disk.
+     parameters:      -mqp
+   - MS CABINET (.CAB)
+     extention:       .cab
+     origin/purpose:  An archive format which uses LZW compression. MS is
+                      trying to make the format an Internet standard but
+                      for a lot of reasons the ZIP format should be used
+                      instead of this one.
+     parameters:      -cab
+   - MS PAINT
+     extention:       .msp
+     origin/purpose:  Used by MS Paint.
+     parameters:      -msp
+   - MS WINDOWS "MS LINEDRAW" FONT TEXT
+     extention:       txt, doc
+     origin/purpose:  A font which comes with MS Windows. It contains line
+                      drawing characters.
+     parameters:      -text -txtcs:242
+   - MS WINDOWS "SYMBOL" FONT TEXT
+     extention:       txt, doc
+     origin/purpose:  The Symbol TrueType font provided with MS Windows.
+     parameters:      -text -txtcs:243
+   - MS WINDOWS "WINGDINGS" FONT TEXT
+     extention:       txt, doc
+     origin/purpose:  Wingdings is a font delivered with MS Windows. It
+                      contains graphical symbols.
+     parameters:      -text -txtcs:244
+   - MS WINDOWS 3.0 ANSI TEXT
+     origin/purpose:  Older MS Windows versions used to use the ISO 8859/1
+                      character set, but Microsoft added a few characters
+                      to unused positions in the character set when it
+                      introduced MS Windows 3.0. Generally, most MS
+                      Windows ANSI texts should be compatible to the ISO
+                      8859/1 character set.
+     parameters:      -text -txtcs:1
+   - MS WINDOWS CLIPBOARD
+     extention:       .clp
+     origin/purpose:  This format is used to store the contents of the
+                      clipboard (MS Windows).
+     compliance:      Clipboard files can contain all kinds of data. GD
+                      View does not support device dependent bitmaps or
+                      metafile pictures.
+   - MS WINDOWS CURSOR
+     extention:       .cur
+     origin/purpose:  Icons used by MS Windows.
+     compliance:      Only the first image is shown. MS Windows Animated
+                      Cursors (*.ANI) are not supported.
+     parameters:      -wico
+   - MS WINDOWS ICON
+     extention:       .ico
+     origin/purpose:  Icons used by MS Windows.
+     compliance:      Only first image is shown. TrueColor icons which
+                      rely on the AND-mask will not be shown 100% correct
+                      (don't worry, most other programs don't deal with
+                      AND-masks at all).
+     parameters:      -wico
+   - MS WINDOWS RESOURCE
+     extention:       .res
+     origin/purpose:  Resource files are used internally by MS Windows
+                      programs to store all kinds of data.
+     compliance:      Win32 Resource files are not supported.
+     parameters:      -mwrs
+   - MS WINDOWS WRITE (WRI)
+     extention:       .wri
+     origin/purpose:  A popular document format used by the Write
+                      application which is distributed with MS Windows.
+     compliance:      Only standard text elements are shown (unformatted).
+     parameters:      -mwdd
+   - MS WORD CAPTURE SCREEN
+     extention:       .scr
+     origin/purpose:  Screen images produced with CAPTURE, a program that
+                      comes with some versions of MS Word for DOS.
+     parameters:      -mwcs
+   - MS WORD FOR DOS
+     extention:       .txt
+     origin/purpose:  A popular document format used by Microsoft Word for
+                      DOS.
+     compliance:      Tested with MS Word for DOS 5.0 files. Only standard
+                      text elements are shown (unformatted).
+     parameters:      -mwdd
+   - MS WORD FOR MACINTOSH
+     origin/purpose:  A popular Macintosh document format used by
+                      Microsoft Word for Macintosh.
+     compliance:      Only standard text elements are shown.
+     parameters:      -mwdm
+   - MS WORD FOR WINDOWS, MS WINDOWS 95/NT WORDPAD
+     extention:       .doc, .ww2
+     origin/purpose:  A popular document format used by Microsoft Word for
+                      Windows ("Winword") and by WordPad, a small word
+                      processor delivered with MS Windows 95 and newer
+                      versions of MS Windows NT.
+     compliance:      Tested with Winword 1.0, 2.0 and 6.0 files. Only
+                      standard text elements are shown.
+     parameters:      -mwdw
+   - MS WORKS FOR DOS WORD PROCESSOR
+     extention:       .wps
+     origin/purpose:  A document format used by Microsoft Works.
+     compliance:      Tested with MS Works for DOS 1.0 files. Only
+                      standard text elements are shown (unformatted).
+     parameters:      -mwdd
+   - MSZ 7795/3 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-HU and ISO-IR-86.
+     origin/purpose:  The Hungarian 7-bit character set.
+     parameters:      -text -txtcs:203
+   - MTV
+     extention:       .mtv
+     origin/purpose:  Image files used by the MTV ray tracer. The ray
+                      tracer is in the public domain. The PRT ray tracer
+                      also creates files with this format.
+     parameters:      -mtv
+   - MULTIMATE, MULTIMATE ADVANTAGE
+     origin/purpose:  The document format used by Multimate.
+     compliance:      Tested with Multimate 3.30 and Multimate Advantage
+                      II files. Text is shown unformatted.
+     parameters:      -mmte
+   - NAVY DIF
+     origin/purpose:  A document format.
+     compliance:      The formatting commands are ignored.
+     parameters:      -ndif
+   - NC NC00-10:81 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-CU and ISO-IR-151.
+     origin/purpose:  The Cuban 7-bit ASCII character set.
+     parameters:      -text -txtcs:232
+   - NEOCHROME
+     extention:       .neo
+     origin/purpose:  Neochrome is a painting program used on Atari ST
+                      computers.
+     parameters:      -neo
+   - NEXTSTEP TEXT
+     extention:       txt, doc
+     origin/purpose:  This character set is used on NeXT computers and on
+                      other computer systems using the NeXTStep operating
+                      system.
+     parameters:      -text -txtcs:245
+
+   - NF Z 62-010 (1973) TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-FR1 and ISO-IR-25.
+     origin/purpose:  A French ASCII character set.
+     parameters:      -text -txtcs:188
+   - NF Z 62-010 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-FR and ISO-IR-69.
+     origin/purpose:  The French version of ASCII.
+     parameters:      -text -txtcs:200
+   - NOVOSIELSKI LIBRARY (LBR)
+     extention:       .lbr
+     origin/purpose:  A popular archive format on CP/M machines. Also
+                      used to be used on MS DOS PCs. LBR files are created
+                      by LU (Novosielski), LU86 (T. Jennings & Paul
+                      Homchick), LUPC, LAR (Stephen C. Hemminger), LUPower
+                      (Powel Breder) and LUU (Vernon D. Buerg).
+     parameters:      -lbr
+   - NROFF
+     extention:       .1, .man
+     origin/purpose:  Source files for the text formatting program nroff
+                      which is often used on UNIX and Atari ST systems
+                      to create manual pages.
+     compliance:      Most important nroff features are supported.
+     parameters:      -nrff
+   - NS 4551-1 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-NO and ISO-IR-60.
+     origin/purpose:  A Norwegian ASCII version.
+     parameters:      -text -txtcs:198
+   - NS 4551-2 TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-NO2 and ISO-IR-61.
+     origin/purpose:  A Norwegian ASCII version.
+     parameters:      -text -txtcs:199
+   - OCTAL DISPLAY
+     origin/purpose:  This mode can be used for binary files. It can be
+                      combined with most character sets.
+     parameters:      -text -txtoct
+   - OS/2 ICON
+     extention:       .ico
+     origin/purpose:  Used by OS/2.
+     compliance:      Only single-image icons are supported. Color and
+                      black&white images are supported.
+     parameters:      -os2p
+   - OS/2 POINTER
+     extention:       .ptr
+     origin/purpose:  Used by OS/2.
+     compliance:      Only single-image icons are supported. Color and
+                      black&white images are supported.
+     parameters:      -os2p
+   - PAK
+     extention:       .pak, .arc, .sdn, .exe
+     origin/purpose:  PAK is a file archiver for MS DOS by NoGate
+                      Consulting.
+     compliance:      Self-extracting archives are supported!
+     parameters:      -arc
+   - PC BOARD COLOR CODES TEXT
+     extention:       .pcb
+     origin/purpose:  Text files which contain color codes and other
+                      codes. Used by the popular BBS software PC Board.
+     compliance:      All color codes and nearly all other codes are
+                      interpreted properly. Embedded ANSI codes are not
+                      supported. The blink attribute is not supported.
+     parameters:      -pcb
+   - PC PAINTBRUSH PCX
+     extention:       .pcx, .pcc, .st
+     origin/purpose:  Format developed by ZSoft, the makers of PC
+                      Paintbrush. Used very often on IBM PCs. NeoPaint
+                      stamp files (*.st) are also PCX format images.
+     compliance:      All standard 2/16/256 color images should work.
+                      Unfortunately, there are a lot of bad PCX files
+                      floating around.
+                      Some old CGA PCX files are not supported.
+     parameters:      -pcx
+   - PC WRITE
+     extention:       .doc
+     origin/purpose:  The format used by the Shareware MS DOS word
+                      PC Write.
+     compliance:      The text is shown without any formatting. Note:
+                      Autodetection of format is not possible!
+     parameters:      -pcwr
+   - PCJ
+     extention:       .pcx + .p13
+     origin/purpose:  This is an extention of the PC Paintbrush PCX format
+                      which uses an external file to store the palette
+                      (older versions of the PCX format only supported 16
+                      colors).
+     parameters:      -pcx
+   - PCPAINT / PICTOR PIC
+     extention:       .pic
+     origin/purpose:  Used by PCPAINT (Mouse Systems) and Pictor. PCPAINT
+                      PLUS files are also used in GRASP Libraries (GL
+                      files).
+     compliance:      Only 1-plane images are supported. Pictures
+                      generated by older versions of the programs might
+                      not be supported.
+                      Note: Graphic Workshop for DOS seems to create
+                      invalid 16-color files (data is 4-planar but the
+                      planes nibble is set to 0).
+     parameters:      -pcpt
+   - PHOTO CD
+     extention:       .pcd
+     origin/purpose:  The Photo CD format was developed by Eastman Kodak.
+                      It is used to store photographical images on Photo
+                      CDs. You can put your own private photos on Photo
+                      CDs.
+     compliance:      The files contain the same images in several
+                      resolutions. GD View always uses the 768x512 image.
+                      Note that this is not a complete implementation of
+                      the format but GDV should produce acceptable results
+                      with nearly all files.
+     parameters:      -pcd
+   - PICTURE PUBLISHER 4 AND 5
+     extention:       .pp4, .pp5
+     origin/purpose:  A graphical image program by Micrografx.
+     parameters:      -tiff
+   - PORTABLE BIT/GRAY/PIX/ANYMAP
+     extention:       .pbm, .pgm, .ppm, .pnm
+     origin/purpose:  A portable way to store graphical images. Often used
+                      on the Internet.
+     compliance:      Virtually all files should work. Non-standard
+                      maximum pixel intensity values are not supported.
+     parameters:      -pnm
+   - PORTABLE NETWORK GRAPHICS (PNG)
+     extention:       .png
+     name:            PNG is pronounced "ping".
+     origin/purpose:  A portable and highly compressed image format which
+                      is the official successor of the GIF format. PNG
+                      files are usually smaller than GIF files although
+                      lossless compression is used.
+     parameters:      -png
+   - PROGRAM INFORMATION FILE (PIF)
+     extention:       .pif
+     origin/purpose:  PIF files are used by MS Windows, TopView and other
+                      multitasking systems. PIF files store information
+                      which is used by those systems to run MS DOS
+                      applications safely when using those systems.
+     parameters:      -pif
+   - PROTEXT
+     origin/purpose:  A Word Processor document format used by Protext
+                      (an Atari ST application).
+     compliance:      Only plain text is shown.
+     parameters:      -ptxt
+   - PSION SERIES 3 BITMAP (PIC)
+     extention:       .pic, .icn, .crs
+     origin/purpose:  The graphic file format used on Psion Series 3
+                      pocket computers.
+     compliance:      Only the first image is loaded. GDV tries to
+                      autodetect if the second block contains gray scale
+                      information.
+     parameters:      -ps3p
+   - PSION SERIES 3 WAVE
+     extention:       .wve
+     origin/purpose:  A sound sample format used on Psion series 3
+                      notepads. A-law encoding is used.
+     parameters:      -ps3w
+   - PUTGET
+     extention:       .put, .ins
+     origin/purpose:  PUT/GET is a file archiver for MS DOS systems by Jim
+                      Hass (MicroFox Company).
+     compliance:      Path names are not shown.
+     parameters:      -lha
+   - QRT RAW / DKB RAW / POV DUMP
+     extention:       .raw, .dkb, .dis
+     origin/purpose:  A TrueColor format used by QRT, the DKB raytracer
+                      and by the Persistence of Vision ray tracer.
+     parameters:      -qrt
+   - QUAKE PACK
+     extention:       .pak
+     origin/purpose:  PACK files are used by Quake, a really cool game by
+                      by id software. It is also used by newer versions
+                      of Cubic Player, a really cool module player by
+                      Cubic Team.
+     parameters:      -iwad
+   - QUAKE WAD2
+     extention:       .wad
+     origin/purpose:  WAD2 files are used by Quake, a really cool game by
+                      by id software.
+     parameters:      -iwad
+   - QWK MAIL MESSAGES.DAT
+     origin/purpose:  The .QWK files themselves are actually just file
+                      archives. With some archive types GD View is able
+                      to extract files in them automatically while with
+                      others you have to use the GD Unpacker. The actual
+                      message data is stored in the MESSAGES.DAT file in
+                      that archive. You have to look at MESSAGES.DAT.
+     parameters:      -qwkm
+   - RAR
+     extention:       .rar, .exe
+     origin/purpose:  RAR is a file archiver by Eugene Roshal which is
+                      becoming quite popular on IBM compatible PCs because
+                      it usually compresses better than PKZip 2.04g, ARJ
+                      2.50 and other programs. OS/2 and Unix versions
+                      exist, too.
+     compliance:      Self-extracting archives are supported! Both the old
+                      and the new RAR 1.50+ formats are supported.
+     parameters:      -rar
+   - RAW BIOS FONT
+     extention:       .fnt, .raw, .f07, .f08, .f09, .f10, .f11, .f12,
+                      .f13, .f14, .f16, .f19, .819
+     origin/purpose:  Raw fonts like the ones which are in the ROM of
+                      computers.
+     parameters:      -rfnt
+   - RAW GRAPHICAL IMAGE
+     extention:       .raw, .img, .rgb, .gry, etc.
+     origin/purpose:  This can be used to display most raw uncompressed
+                      graphical images, especially medical images and
+                      satellite images.
+     parameters:      -rgi
+   - RENEGADE PIPE CODE TEXT
+     origin/purpose:  Text files which contain color codes. Used by the
+                      Renegade BBS system.
+     compliance:      All color codes are interpreted properly. The blink
+                      attribute is not supported.
+     parameters:      -rngd
+   - RGB INTERMEDIATE FORMAT
+     extention:       .rgb
+     origin/purpose:  A graphical image format developed by Lars Michael.
+                      It is used on the Atari ST to store 12-bit RGB
+                      pictures.
+     parameters:      -rgbi
+   - RICH-TEXT FORMAT
+     extention:       .rtf
+     origin/purpose:  A popular document format used on PCs and Macs.
+     compliance:      Only a subset of the full standard is interpreted
+                      correctly.
+     parameters:      -rtf
+   - RIFF DIB (RDIB)
+     origin/purpose:  DIB graphical images embedded in a RIFF file.
+     compliance:      Virtually all images should work.
+     parameters:      -rdib
+   - RIFF WAVE (WAV)
+     extention:       .wav
+     origin/purpose:  The RIFF Wave format is a sound sample format
+                      developed by Microsoft for use with MS Windows. It
+                      is used extensively on IBM PCs.
+     compliance:      12-bit samples are not yet supported. Loops are not
+                      supported. There are a lot of damaged .wav files
+                      floating around but GDV handles them in most cases.
+     parameters:      -rwav
+   - ROT 13
+     origin/purpose:  ROT13 files are files which are encrypted (it is an
+                      extremely simple algorithm which does not use any
+                      key). ROT13 is used on Usenet to scramble
+                      information which might offend people. GD View
+                      creates the decrypted file.
+     parameters:      -rt13
+   - SAMI TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-158.
+     parameters:      -text -txtcs:236
+   - SAR
+     extention:       .sar
+     origin/purpose:  SAR is a file archiver by Streamline Design.
+     compliance:      Path names are not shown.
+     parameters:      -lha
+   - SCREAM TRACKER 3/DIGIPLAYER SAMPLE
+     extention:       .st3
+     origin/purpose:  This format is used by DigiPlayer and by the famous
+                      sound module tracker Scream Tracker by the even more
+                      famous demo group Future Crew.
+     parameters:      -dgsi
+   - SEN 850200 B TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-FI, ISO 646-SE, SS 63 61 27
+                      and ISO-IR-10.
+     origin/purpose:  Swedish/Finnish version of ASCII. It is (or used to
+                      be) quite popular in Sweden.
+     parameters:      -text -txtcs:178
+   - SEN 850200 C TEXT
+     extention:       txt, doc
+     name:            Also known as ISO 646-SE2, ISO-IR-11 and
+                      SS 63 61 27.
+     origin/purpose:  Second Swedish version of ASCII which supports most
+                      characters needed to display names in Sweden.
+     parameters:      -text -txtcs:179
+   - SGI IMAGE FORMAT
+     extention:       .bw, .rgb, .rgba, .sgi, .iris
+     origin/purpose:  A graphical image format used on Silicon Graphics
+                      workstation computers.
+     parameters:      -sgi
+   - SGML, XML
+     naming:          SGML stands for Standard Generalized Markup Language
+                      XML stands for Extensible Markup Language
+     extention:       .sgm, .sgml, .gml
+     origin/purpose:  SGML is a powerful complex language for formally
+                      describing the structure and contents of documents.
+                      It is defined in ISO 8879:1986.
+                      XML is a subset of the SGML standard designed for
+                      use on the World Wide Web.
+     compliance:      GD View does NOT include an SGML/XML parser. It
+                      merely attempts to extract the text from an SGML
+                      document.
+                      With "well-designed" files the results can however
+                      be quite good.
+     parameters:      -sgml
+   - SIMON'S BASIC
+     extention:       .prg
+     origin/purpose:  Simon's Basic extends the standard BASIC interpreter
+                      of the C64. The C64 stores the source code in a
+                      binary format but GDV can reconstruct and display
+                      it.
+     parameters:      -simb
+   - SOUNDER
+     extention:       .snd
+     origin/purpose:  Sound sample files used on IBM PCs.
+     parameters:      -sndr
+   - SOUNDTOOL / WIRED FOR SOUND
+     extention:       .snd
+     origin/purpose:  Sound sample files used on IBM PCs. The format was
+                      developed by Martin Hepperle for his SoundTool
+                      program. Wired For Sound (Artisoft) uses the same
+                      format.
+     parameters:      -st
+   - SPECEM PRG
+     extention:       .prg
+     origin/purpose:  SP files are used by Specem, a ZX Spectrum emulator
+                      for MS DOS. GD View displays the contents of the
+                      video memory.
+     parameters:      -sprg
+   - SPECTRUM / VGASPEC SP
+     extention:       .sp
+     origin/purpose:  SP files are used by SPECTRUM and VGASPEC. Both are
+                      ZX Spectrum emulators for MS DOS. GD View displays
+                      the contents of the video memory.
+     parameters:      -spsp
+   - SPECTRUM 512 COMPRESSED (SPC)
+     extention:       .spc
+     origin/purpose:  Spectrum 512 compressed pictures are used on the
+                      Atari ST.
+     parameters:      -spcc
+   - SPECTRUM 512 UNCOMPRESSED (SPU)
+     extention:       .spu
+     origin/purpose:  Spectrum 512 pictures are used on the Atari ST.
+                      Three 16-color palettes per line are used.
+     parameters:      -spcu
+   - SPEECH BASIC
+     extention:       .prg
+     origin/purpose:  Speech Basic is a Basic dialect used on the C64.
+                      The C64 stores the source code in a binary format
+                      but GDV can reconstruct and display it.
+     parameters:      -spba
+   - SQUEEZE
+     extention:       .sqz, .exe
+     origin/purpose:  Squeeze is a file archiver by Jonas I. Hammarberg
+     compliance:      Self-extracting files are supported!
+     parameters:      -sqz
+   - SQUEEZED FILES
+     extention:       .?q?
+     origin/purpose:  SQ is a compression program by Richard Greenlaw. It
+                      used to be very popular on PCs until ARC appeared.
+                      SQ files can also be created by SQPC (Vernon D.
+                      Buerg), Squeezer (Steve Freeman and others) and XSQ
+                      (Omen Technology).
+     parameters:      -sq
+   - STRIP BLACKJACK / STRIPOID DATA
+     extention:       .sbj, .spd
+     origin/purpose:  Graphical image data used by the MS Windows games
+                      Strip BlackJack and Stripoid.
+     parameters:      -tzbs
+   - STUFF-IT
+     extention:       .sit, .sea
+     origin/purpose:  Stuff-It is a file archiver for Macintosh computers.
+     compliance:      Some files are not read correctly because I do not
+                      have any accurate information of the format. Self-
+                      extracting archives are NOT supported.
+     parameters:      -sit
+   - SUN ICON
+     extention:       .icon, .ico
+     origin/purpose:  This format is used on Sun workstations to store
+                      icons.
+     parameters:      -sico
+   - SUN RASTER
+     extention:       .ras, .rast, .sun, .scr, .sr, .im1, .im8, .im24,
+                      .im32
+     origin/purpose:  A graphical image format used on Sun computers.
+     compliance:      Image types 0, 1 and 2 are supported.
+     parameters:      -sras
+   - SUN/NEXT AUDIO (AU)
+     extention:       .au
+     origin/purpose:  The .au format is a sound sample format used on Sun
+                      and NeXT computers.
+     compliance:      All common sample types should work (incl. ulaw,
+                      pcm-8, pcm-16, ulaw, alaw).
+     parameters:      -au
+   - SWAG COMPRESSED ARCHIVE
+     extention:       .swg
+     origin/purpose:  The SourceWare Archival Group (SWAG) publishes free
+                      Pascal source packages. The data is stored in .SWG
+                      files. (Note that you can only look at the directory
+                      with GD View, not at the actual source data).
+     parameters:      -lha
+   - SYSTEM DATA FORMAT (SDF)
+     extention:       .sdf
+     name:            The abbreviation is SDF.
+     origin/purpose:  A portable way of storing databases.
+     parameters:      -sdf
+   - T.61-7BIT TEXT
+     extention:       txt, doc
+     name:            Also known as ISO-IR-102.
+     parameters:      -text -txtcs:215
+   - T64
+     extention:       .t64
+     origin/purpose:  A format used by the C64S emulator to store the
+                      contents of Commodore 64 tapes.
+     parameters:      -t64
+   - TEMPRA FLX
+     extention:       .flx
+     origin/purpose:  An extention of the FLIC format for HiColor images.
+                      FLX files do not use the Autodesk Animator FLH
+                      chunks.
+     parameters:      -flic
+   - TGA
+     extention:       .tga, .icb, .vda, .vst, .win
+     name:            A lot of people call it the "Targa" format.
+     origin/purpose:  First used with the Truevision Targa video card.
+     compliance:      Only non-interlaced images are supported.
+     parameters:      -tga
+   - THE FONT EDITOR FONT
+     extention:       .chs
+     origin/purpose:  Font files created with The Font Editor.
+     parameters:      -tfef
+   - THE GRAPHICS ENGINE FONT
+     extention:       .fnt
+     origin/purpose:  Font files used by TGE (The Graphics Engine), a
+                      graphics library for MS DOS by Matthew Hildebrand.
+     parameters:      -tgef
+   - THE LAST VIDEO INTERFACE (LVI) DATA STREAM
+     origin/purpose:  Text files which contain color codes. Used by BBS
+                      systems.
+     parameters:      -lvi
+   - TIFF
+     extention:       .tif, .tiff, .ctf, .icn, .tim, .tig, .tic
+     origin/purpose:  The TIFF format is a very popular format developed
+                      by Aldus. It is used by Desktop Publishing programs,
+                      Scanner software, Fax Software and other graphic
+                      programs. The TIFF format is very popular on IBM
+                      PCs, Macintosh and NeXT computers.
+     compliance:      The TIFF format is very complex. GDV cannot display
+                      all TIFF files (a program which can display all of
+                      them properly probably doesn't exist). Neither CCITT
+                      fax nor JPEG compression is supported.
+                      Unfortunately, a lot of programs write bad TIFF
+                      files.
+     parameters:      -tiff
+   - TINY
+     extention:       .tny, .tn1, .tn2, .tn3
+     origin/purpose:  Tiny used to be a popular file format on Atari ST
+                      computers.
+     parameters:      -tiny
+   - TOTOSAMPLER
+     extention:       .smp
+     origin/purpose:  Totosampler is a sound sampler for the Atari
+                      ST/STE/TT written by Torsten Thiel.
+     compliance:      Although Totosampler files have a kind of header GD
+                      View cannot recognize them. Use the parameter.
+     parameters:      -ttsm
+   - TTY
+     name:            TTY stands for TeleTYpe terminal.
+     origin/purpose:  Used for terminal data, e.g. capture files of
+                      bulletin board system or telnet sessions.
+     parameters:      -tty
+   - TURTLE BASIC
+     extention:       .prg
+     origin/purpose:  Turtle Basic is a BASIC dialect for the VIC-20.
+                      The source code is stored in a binary format but GDV
+                      can reconstruct the BASIC source code.
+     parameters:      -tuba
+   - TZ STRIP POKER
+     extention:       .stp
+     origin/purpose:  Used by the MS Windows game TZ Strip Poker.
+     parameters:      -tzsp
+   - UTF-8
+     origin/purpose:  UTF-8 is a so-called UCS transformation format.
+                      Unicode characters (which are 16/32 bit wide) are
+                      encoded into 8 bit values which can be stored and
+                      processed more easily on some systems.
+     parameters:      -utf8
+   - UU-ENCODED DATA
+     extention:       .uue, .uua
+     origin/purpose:  Files which contain the 7-bit representation of
+                      8-bit binary data. Often used on Usenet and
+                      Internet. GD View decodes the file and writes the
+                      binary data to disk.
+     compliance:      Multi-part messages are not supported.
+     parameters:      -uue
+   - VIDCOM 64
+     origin/purpose:  A graphic file format used on the C64.
+     compliance:      GD View assumes that all files contain multi-color
+                      images.
+     parameters:      -vc64
+   - VIS
+     extention:       .vis
+     origin/purpose:  An image format developed at the MIT AI lab.
+     compliance:      Floating point images are not supported (they
+                      are machine dependent).
+                      For raster images the "visr" file type has to be
+                      used.
+     parameters:      -vis
+                      -visr
+   - VOICEMASTER
+     extention:       .vmd
+     origin/purpose:  A headerless sound sample format used with
+                      Covox SpeechThing/VoiceMaster.
+     compliance:      VMD files do not contain information about the
+                      sample rate! The "-ds_r" parameter might have to
+                      be used to set the correct sample rate.
+     parameters:      -rsub
+   - WILDCAT 3.0+ COLOR CODE TEXT
+     extention:       .bbs
+     origin/purpose:  Text files which contain color codes and other
+                      codes. Used by the WildCat BBS system.
+     compliance:      All color codes and nearly all other codes are
+                      interpreted properly. Embedded ANSI codes are not
+                      supported. The blink attribute is not supported.
+     parameters:      -wcat
+   - WORDPERFECT 7-BIT TRANSFER FORMAT
+     origin/purpose:  Files which can be transfered without losing
+                      information when the 7th bit is lost. GD View
+                      creates the decoded file.
+     parameters:      -wp7b
+   - WORDPERFECT
+     extention:       .wp, .doc, .wp5, .wp6, .wpd
+     origin/purpose:  The document format used by the popular word
+                      processor WordPerfect (originally by WordPerfect
+                      Corporation, now by Corel). WordPerfect is used on
+                      MS DOS, Windows, VAX and UNIX systems.
+     compliance:      Tested with WordPerfect 4.2, 5.1 and 6.0 files. Only
+                      the standard text elements are shown (unformatted).
+     parameters:      -wpft
+   - WORDSTAR 2000
+     origin/purpose:  The format used by the WordStar 2000.
+     compliance:      Tested with WordStar 2000 1.0 and 3.0 files. The
+                      text is shown without any formatting.
+   - WORDSTAR
+     extention:       .doc, .ws, .ws7, etc.
+     origin/purpose:  The format used by the popular word processor
+                      WordStar.
+     compliance:      Tested with WordStar 3.3 files. The text is shown
+                      without any formatting. Note: Autodetection is often
+                      not possible!
+     parameters:      -wdst
+   - WWIV COLOR CODE TEXT
+     origin/purpose:  Text files which contain color codes. Used by the
+                      WWIV BBS system and by VBBS.
+     compliance:      All color codes are interpreted properly.  The blink
+                      attribute is not supported.
+     parameters:      -wwiv
+   - X BITMAP (XBM)
+     extention:       .xbm
+     origin/purpose:  Used by X Windows.
+     compliance:      All standard images should work (X10 and X11).
+                      Complete syntax checking is not performed. Only the
+                      first image is shown in multi-image files.
+     parameters:      -xbm
+   - X PUZZLE
+     extention:       .puzzle, .pzl, .cm
+     origin/purpose:  This format is used by the Puzzle program which is
+                      distributed with X.
+     parameters:      -xpzl
+   - XIMG
+     extention:       .img
+     origin/purpose:  This is an extended version of the GEM image format.
+                      It is used on Atari ST computers to store color
+                      images.
+     compliance:      Only RGB color maps are supported.
+     parameters:      -gimg
+   - XX-ENCODED DATA
+     extention:       .xxe
+     origin/purpose:  Files which contain the 7-bit representation of
+                      8-bit binary data. GD View decodes the file and
+                      writes the binary data to disk.
+     compliance:      Multi-part messages are not supported.
+     parameters:      -xxe
+   - XYWRITE
+     origin/purpose:  A document format used by XyWrite.
+     compliance:      Only plain text is shown. Auto-detection is not
+                      possible.
+     parameters:      -xywr
+   - YBM
+     extention:       .ybm
+     origin/purpose:  The YBM format is used by Bennet Yee's "face"
+                      program.
+     parameters:      -ybm
+   - YELLOWPOINT DISK SET
+     origin/purpose:  The YellowPoint CDs are very famous Pay CDs.
+     compliance:      Only files which are NOT ENCRYPTED are supported!
+                      I did not have any information on the format so the
+                      code is based on information obtained through
+                      analyzing.
+     parameters:      -ypd
+   - YUV
+     extention:       .yuv
+     origin/purpose:  YUV files are used by the Berkeley MPEG software.
+     compliance:      YUV files do not contain any information about the
+                      image dimensions. That means that the "-x" and "-y"
+                      parameters have to be used, e.g. to look at a
+                      640x480 YUV you have to use "gdv filename -x:640
+                      -y:480".
+     parameters:      -yuv -x:n -y:n
+   - ZIP
+     extention:       .zip, .exe, .qwk
+     origin/purpose:  ZIP is a very popular file archive format which was
+                      originally used by PKWare's PKZip. ZIP files are
+                      created by PKZip, ZIP (InfoZIP), WinZip (Nico Mak
+                      Computing), Drag And Zip (Canyon Software), FPZIP
+                      for Windows (FlashPoint), FZIP (GroupWare), NCZip
+                      (Symantec), QZip (Micheal Leavitt), Shrink (R. P.
+                      Byrne), ZipIt (Tommy Brown), ZipShell Pro
+                      (NewVision), MHG*Zip (MHG Software Ltd.) and PAK
+                      (NoGate Consulting).
+     compliance:      Most MS DOS self-extracting archives are supported.
+     parameters:      -zip
+   - ZOO
+     extention:       .zoo
+     origin/purpose:  ZOO is a file archiver by Rahul Dhesi which is used
+                      on MS DOS, OS/2 and UNIX systems.
+     parameters:      -zoo
+   - ZX SPECTRUM BIG FONT
+     extention:       .bft
+     origin/purpose:  A font file format used on the ZX Spectrum. It was
+                      developed by "Mr.UNIVERSUM".
+     parameters:      -bft
+   - ZX SPECTRUM SCREEN
+     extention:       .scr
+     origin/purpose:  These are raw ZX Spectrum video memory images.
+     parameters:      -zxss
+   - ZX SPECTRUM SNAPSHOT (SNA)
+     extention:       .sna
+     origin/purpose:  SNA files are used by JPP, a ZX Spectrum emulator
+                      for DOS and now also by many other ZX Spectrum
+                      emulators. The Snapshot files contain a complete
+                      "snapshot" of the machines state. The memory and
+                      registers are saved. GD View displays the contents
+                      of the video memory.
+     parameters:      -sna
+   - ZX SPECTRUM STANDARD FONT
+     extention:       .sft
+     origin/purpose:  A font file format used on the ZX Spectrum. It was
+                      developed by "Mr.UNIVERSUM".
+     parameters:      -sft
+
+----------------------------------------------------------------------------
+7. MISCELLANEOUS QUESTIONS
+----------------------------------------------------------------------------
+
+This section is in a Question and Answer form (like an Internet
+FAQ list).
+
+Q: I let SETUP auto-configure my VESA modes but when I look at a
+   graphic file all I see is a blank screen / I get some kind of
+   "scan range" error message.
+A: This usually happens when your VESA driver claims that certain
+   modes are supported although they actually aren't, often because
+   your monitor is unable to handle them.
+   If you have got the correct software you can reconfigure your
+   VESA driver or your graphic card.
+   If you are an advanced computer user you can also try to edit the
+   screen.cfg file in the GD View directory (note that you must
+   have completed the VESA auto-configuration in SETUP in order to
+   do this). Use GD View to look at the graphic file you were
+   having problems with. When the blank screen or the error message
+   appears press F2 to see which graphic mode was being used. Exit
+   GD View and remove the line for that mode in SCREEN.CFG. Keep
+   repeating the process until you are able to look at the graphic
+   file.
+
+Q: GDV does not accept file names which start with "-"!
+A: That's because the dash character is used to specify parameters.
+   Use ".\" before the filename, e.g. for a file called "-test.doc"
+   call gdv with "GDV .\-test.doc".
+
+Q: I want to use GDV to look at directories but when I enter something
+   like "GDV A:" then GDV just displays some information about the drive!
+A: Add a "." to the drive name: instead of "GDV A:" you have to
+   use "GDV A:.".
+
+Q: Reading larger directories takes extremely long!
+A: You are probably running GD View without EMS or XMS. As stated in the
+   system requirements section you must have some free expanded or
+   extended memory. Well, anyway, GD View DOES run without it but as you
+   have noticed it is really slow. In fact, systems which run without EMS
+   or XMS usually do not have a disk cache so the whole process becomes
+   even
+   slower. You can improve the performance a lot by selecting that you
+   want an unsorted file list (press CTRL-F7 in the directory viewer).
+   The best thing to do is of course to install an EMS or XMS driver.
+
+Q: I read a lot of non-English texts on my PC but some of the accented
+   characters and other special characters don't appear properly when I
+   look at Amiga/Windows/Mac/etc. texts!
+A: You have to select the correct character set. Press ALT-C when you are
+   in the text viewer and select the right one. For Amiga texts you can
+   use "ISO 8859/1". If you have you have already selected the right one
+   then the problem might have another reason. GD View reads your file
+   properly but unfortunately it cannot display all characters because
+   only characters which are in the local character set can be displayed.
+   And in some cases GD View doesn't support all characters of the local
+   character set.
+
+Q: I used GD View to search for a string but GD View didn't find it
+   although I could see it on the screen! What am I doing wrong?
+A: GD View doesn't find strings unless they are a perfect match. The
+   string which you saw on the screen probably contained some kind of
+   invisible control codes (e.g. backspaces).
+
+Q: Unicode files produced by GD View are bad!
+A: Some programs, such as Windows NT's NotePad do not support the use
+   of "U2028" as the newline character although that is the Unicode
+   line seperator code. This is not a bug in GD View.
+
+Q: I've got some raw graphical images? How do I display them?
+A: If you are specifying the file name on the command line then just
+   add "-rgi" to the command. If you are using the directory viewer
+   then press Shift-F3 instead of F3 and enter "rgi". After that
+   you will be prompted for the image parameters.
+
+Q: GDV aborts and just says that a "JPEG error" occured. What is that
+   supposed to mean?
+A: This can have a lot of reasons. This happens, for example, when:
+   - there is too little free base memory
+   - there is too little free harddisk space
+   - the JPEG file has an error (the file is bad)
+   - the JPEG file is not JFIF compatible
+
+Q: GDV can't play FLI files created by HCMAKE!
+A: FLI files created by HCMAKE are not real FLI files. As far as I
+   know HCPLAY is the only program which can play those files.
+
+Q: Sound files seem to be "hacked up"!
+A: 1. Try using a faster storage medium, for example if the files are
+      on CD-ROM or floppy disks then copy them to your harddisk.
+   2. If there is too little free base memory then GD View only uses
+      one buffer. Free more base memory!
+   3. The sample quality is too high (the higher the sample quality the
+      more data has to be processed per second). Try using a sound
+      program to reduce the quality of the sound file.
+
+Q: How did you make GD View?
+A: GD View is written in C++. It's not that easy to say when I started
+   working on the code because I started working on GD View in this
+   form in January 1996 but some of the code is based on or identical
+   to code in older projects of mine (the oldest ones are from 1993).
+
+Q: The system info routines really should display some information
+   about <something>!
+A: I never finished translating my old system information program from
+   Pascal to C++ and I guess I never will. I don't really want to work
+   on those routines any more.
+
+Q: I have found a bug which is not mentioned in the manual! What should
+   I do?
+A: First of all, I already know about the following bugs:
+   - sometimes when you start the cd player it seems to hang until
+     you eject the cd
+   - occasionally, scrolling will not work as expected with some text
+     files
+   - damaged/corrupted files can cause problems
+   If you find other bugs then contact me and explain what happens, when
+   it happens and what configuration you use (everything as detailed as
+   possible). My mail addresses are in listed in section 8 of this
+   manual. I will try to solve the problem but naturally I cannot promise
+   anything.
+
+----------------------------------------------------------------------------
+8. CONTACTING THE AUTHOR
+----------------------------------------------------------------------------
+
+Name:              Gerard de Melo
+Internet e-mail:   gdm@demelo.org
+Internet WWW page: http://www.demelo.org/gdm/gdv/
+Mail:              Gerard de Melo
+                   Heidestr. 156
+                   60385 Frankfurt
+                   Germany
+
+Before contacting me about  problems with GD View  make sure that you have 
+read  this  manual  properly  especially the  Frequently  Asked  Questions 
+section,  and if possible also check out my home page for the latest news. 
+I will try to answer all e-mails (use "GDV" as the subject). If there seem 
+to be problems with  the e-mail address then check out my home page to see 
+if it has changed.
+I cannot answer normal postal mail unless you send me 2 US dollars or 3 DM 
+(German Marks) for the postage fee.
+
+----------------------------------------------------------------------------
+9. CREDITS AND GREETINGS
+----------------------------------------------------------------------------
+
+The JPEG code used by GD View is based on the work of the Independent JPEG 
+Group.
+This product uses the SPAWNO routines by Ralf Brown to minimize memory use 
+while shelling to DOS and running other programs.
+
+A lot of  information on  character  sets was  obtained  from the  RFC1345 
+document by Keld Simonsen.
+Misc. information  was obtained  from the famous  interrupt list  by Ralph 
+Brown.
+
+Thanks to:
+> my family
+> Tobias Roth, Eneldo Loza Mencia and Rodney D'Silva
+> all registered users!
+
+

@@ -1,0 +1,55 @@
+
+                    *****   Future Enhancements   ******
+
+  These are just some of the enhancements planned for future releases
+  of The SPUTTER Sound System:
+
+        . Mouse support will be added to the SPUTTER File Manager.
+
+        . Background playback capability will be added to SPUTROL, the ROL
+          file player.
+
+        . A special editor for Event Definition files will be added to
+          SPUTTER to simplify the creation and modification of these files.
+
+        . Access to all of the Event Monitor switches will be added to
+          the SPUTTER pull-down menus.
+
+        . An improved male voice and a new female voice will be provided
+          for text-to-speech translations.
+
+        . The SPUTTER argument selection screens, will be expanded into
+          fill-in forms with switch values selected by using arrow keys.
+
+        . I'm considering the possibility of adding the ability to store
+          and play ROL files in ZIP files.  This would require extensive
+          changes to the SPUTTER File Manager, so I'd like to hear how
+          important this is to anyone.  If I get enough feedback that it's
+          a very desirable feature - I'll go for it!
+
+        . Support for extended & expanded memory may be added to be used
+          for loading digitized sound files.
+
+        . A new utility called SPUTIL (SPutter-UTILity), to convert or encode
+          sound files into compressed formats to save disk space.
+
+        . Add support for playback of files of unlimited size.
+
+
+  If you have any other ideas for improving or enhancing the SPUTTER Sound
+  System, please let me know.  I can be reached in the following ways:
+
+        Mail:   VersaWare / Adrienne Cousins
+                30 Jennifer Street
+                Littleton, MA 01460
+
+        Phone:  508-486-3083 (voice)
+
+        BBS:    Channel One    Cambridge MA  617-354-8873   (MABOS)
+                Exec-PC        Milwaukee WI  414-789-4210   (WIMIL)
+
+                The latest version of SPUTTER is always posted on these
+                fine boards, and registered users are always welcome to
+                call me direct for the latest beta test release.
+
+

@@ -1,0 +1,110 @@
+
+                              GD VIEW V0.92
+                   Copyright (c) 1996-98 Gerard de Melo
+                               User Manual
+
+
+                         Vendor/Sysop Information
+
+
+----------------------------------------------------------------------------
+1. Status
+----------------------------------------------------------------------------
+GD View V0.92 is  user supported software.  The user must register after a
+trial period  of 30 days  but there is no  fixed registration fee. Look at
+the file register.txt for more information.
+
+
+----------------------------------------------------------------------------
+2. Archive naming
+----------------------------------------------------------------------------
+For consistency  and to enable users to  quickly find GD View,  please use
+the file name GDV092MD.ext where ext is the extention of the archive (e.g.
+ZIP or RAR).
+
+
+----------------------------------------------------------------------------
+3. Multiple-line description
+----------------------------------------------------------------------------
+GD View V0.92 for MS DOS:  *the*  viewer
+and player for 400+ formats
+>Texts: ANSI, DOS, Unicode, Mac, EBCDIC,
+ and 200+ MORE w/ HEX/DEC/BIN/OCT modes!
+>Documents: Word, WinWord, WordPerfect,
+ WordStar, Write, Ami Pro, RTF, etc.
+>Graphics: TIFF,  GIF, JPEG,  FLIC, PCD,
+ PCX, IFF, TGA, DIB, RIX, MSP, MAC, ART,
+ PNM, RAS, XBM, PIC, FNT, PAL, CUT, RAW,
+ SGI, IMG, DCX etc. (over 60 formats)
+>Sounds:  WAV, VOC,  8SVX,  SND, AU, AVR
+ ST, Psion WVE, CMF, raw (SAM/SMP/etc.)!
+>Terminal codes: ANSi, PCB, BIN, etc.
+>Databases: dBase, SDF, FoxBase, etc.!
+>File archives: ZIP, ARJ, LZH, ARC, TAR,
+ RAR, ZOO, LBR, PAK and MORE incl. SFXs!
+FILE INFORMATION:  recognizes  5000+ (!)
+ extentions, shows file descriptions
+AND:   Directory  viewer,  System  Info,
+ Audio CD Player,  CBM Basic decompiler!
+
+
+----------------------------------------------------------------------------
+4. Short description (one-line)
+----------------------------------------------------------------------------
+GD View V0.92 for MS DOS - object-oriented viewer, supports 400+ formats
+
+
+----------------------------------------------------------------------------
+5. Categories
+----------------------------------------------------------------------------
+MsDos/Utility/Viewers
+MsDos/Graphics/Viewers
+MsDos/Sound/SamplePlayers
+MsDos/TextUtils/Charsets
+etc.
+
+
+----------------------------------------------------------------------------
+6. Keywords
+----------------------------------------------------------------------------
+The following keywords could appear in word indexes:
+viewer, graphics, animation, sound, text, charset, database, archiver
+
+
+----------------------------------------------------------------------------
+7. Contact
+----------------------------------------------------------------------------
+How to contacting me (the author):
+
+Name:              Gerard de Melo
+Internet e-mail:   gdm@demelo.org
+Internet WWW page: http://www.demelo.org/gdm/gdv/
+Mail:              Gerard de Melo
+                   Heidestr. 156
+                   60385 Frankfurt
+                   Germany
+
+
+----------------------------------------------------------------------------
+8. Requirements
+----------------------------------------------------------------------------
+ -> an IBM PC compatible computer with a 80286 or better CPU
+    (fast '486 or better recommended)
+ -> MS DOS 3.0 (or higher) or a 100% compatible operating system
+ -> about 600 KB free base memory and about 1MB of free EMS or XMS (more
+    EMS or XMS recommended for large directories and some large files)
+ -> a VGA or SVGA graphic card (SVGA recommended), a color monitor
+ -> for sound files: a Sound Blaster 2.0, Sound Blaster Pro or
+    100% compatible sound card
+ -> for Audio CDs: a CD-ROM drive (MSCDEX must be loaded)
+ -> for CMF files: SBFMDRV.COM must be loaded
+ -> optional: a computer mouse or other pointing device (a Microsoft
+    compatible mouse driver must be loaded)
+
+
+----------------------------------------------------------------------------
+9. License Agreement (IMPORTANT)
+----------------------------------------------------------------------------
+Please read the LICENSE.DOC file.
+
+

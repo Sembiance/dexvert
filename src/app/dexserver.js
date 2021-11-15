@@ -26,7 +26,7 @@ for(const [serverid, server] of Object.entries(servers))
 xu.log`Waiting for ${Object.keys(servers).length} servers to fully load...`;
 for(const [serverid, server] of Object.entries(servers))
 {
-	await xu.waitUntil(async () => (await server.status())===true, xu.SECOND);
+	await xu.waitUntil(async () => (await server.status())===true);
 	xu.log`Server ${fg.peach(serverid)} fully loaded!`;
 }
 

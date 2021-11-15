@@ -1,0 +1,55 @@
+        -------------------------------------------------------------
+                       WAYS TO USE DIGITIZED SOUND FILES
+        -------------------------------------------------------------
+
+
+        Here are some ideas of ways to use digitized sound files:
+
+        Incorporate sound in batch files.  My autoexec is fairly lengthy,
+        performing incremental backups, disk optimization and virus checking
+        automatically each day.  By sprinkling different sound files
+        throughout the AUTOEXEC process, I can go work on other tasks
+        in the office, while listening to the progress the system is making.
+
+        Incorporate sound with your slide shows.  When using VPIC to
+        display GIF, PCX, MAC and other picture files from a batch file,
+        you can run VPIC with the /r switch to regain control.  This will
+        cause VPIC to exit while leaving the picture still displayed on the
+        screen, then you can play an appropriate sound file.
+
+        Use soundfiles as part of a tutorial series.  Display a screen of
+        pictures or charts, while playing a descriptive message.
+
+        To preserve lectures, or recordings of any other noteworthy
+        event you wish to preserve.
+
+        Enclose voice message files with your EMAIL messages.
+
+        To alert you that selected events that may be occurring on your
+        system, such as the modification or deletion of certain files,
+        or the running of a particular program.
+
+        To replace the run-of-the-mill BEEP with something more fitting
+        for where the system is in use.  I like to use different animal
+        sounds, like frogs croaking, or chicks peeping.  In an office
+        environment, you might prefer some soothing tones, or a short
+        piece of clasical music.
+
+        For children younger than age 7 or 8, that haven't started to read
+        yet, but still enjoy playing computer games, adding some verbal
+        directions to a menuing system can make all the difference.
+        I've added simple directions for inserting floppy disks,
+        calibrating the joystick, or indicating which keys to hit to
+        start and quit the game.
+
+
+
+        If you have any other unique or interesting ways of using digitized
+        sound files on your PC, I'd like to hear them.  Just send me a
+        message on either of the BBS systems listed below, which I visit
+        regularly.
+
+        Channel One   Cambridge MA   (MABOS) 617-354-8873
+        Exec-PC       Milmaukee WI   (WIMIL) 414-789-4210
+
+

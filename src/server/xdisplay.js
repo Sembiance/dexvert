@@ -14,8 +14,9 @@ export class xdisplay extends Server
 			return;
 		}
 
-		this.xProc = await runUtil.run("X", [], {detached : true, liveOutput : true});
-		await xu.waitUntil(fileUtil.exists("/tmp/.X0-lock"));
+		const {p} = await runUtil.run("X", [], {detached : true, liveOutput : true});
+		this.xProc = p;
+		await xu.waitUntil(async () => await fileUtil.exists("/tmp/.X0-lock"));
 		await delay(xu.SECOND*2);
 		await runUtil.run("dbus-launch", ["--exit-with-x11"], {env : {DISPLAY : ":0", detached : true, liveOutput : true}});
 	}

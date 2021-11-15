@@ -1,25 +1,12 @@
-/*
 import {Program} from "../../Program.js";
 
 export class draw256 extends Program
 {
 	website = "http://cd.textfiles.com/megarom/megarom3/GRAPHICS/APPS/DRAWV221.ZIP";
-	unsafe = true;
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "DRAW256/DRAW256.EXE";
+	args    = r => [`..\\..\\${r.f.input.rel.replaceAll("/", "\\")}`]
+	dosData = r => ({runIn : "prog", keys : ["s", `..\\..\\${r.f.outDir.rel.replaceAll("/", "\\")}\\F.PCX`, ["Return"], ["Escape"], "y"]});
+	chain   = "dexvert[asFormat:image/pcx]";
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "http://cd.textfiles.com/megarom/megarom3/GRAPHICS/APPS/DRAWV221.ZIP",
-	unsafe  : true
-};
-
-exports.dos = () => "DRAW256/DRAW256.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath}`]);
-exports.dosData = (state, p, r) => ({includeDir : true, autoExec : ["CD DRAW256", `DRAW256.EXE ${r.args}`], keys : ["s", "..\\F.PCX", ["Return"], ["Escape"], "y"]});
-exports.post = (state, p, r, cb) => p.util.program.run("convert", {argsd : ["F.PCX"]})(state, p, cb);
-*/

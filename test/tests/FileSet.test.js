@@ -34,6 +34,9 @@ Deno.test("addFile", async () =>
 
 	assertThrowsAsync(async () => await a.add(await DexFile.create("/mnt/compendium/DevLab/dexvert/.gitignore")));
 	assertThrowsAsync(async () => await a.add(await DexFile.create("whatever", "/mnt/compendium/DevLab/dexvert/.gitignore")));
+
+	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
+	assertStrictEquals(a.files.input.length, 5);
 });
 
 Deno.test("changeRoot", async () =>
@@ -175,7 +178,7 @@ Deno.test("removeType", async () =>
 	assertStrictEquals(a.all.length, 0);
 });
 
-Deno.test("renameType", async () =>
+Deno.test("changeType", async () =>
 {
 	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
@@ -187,13 +190,13 @@ Deno.test("renameType", async () =>
 	assert(a.files.input);
 	assert(a.files.other);
 	assertStrictEquals(a.all.length, 5);
-	a.renameType("other", "bingo");
+	a.changeType("other", "bingo");
 	assertStrictEquals(a.files.input.length, 3);
 	assert(!a.files.other);
 	assert(a.files.input);
 	assert(a.files.bingo.length, 2);
 	assertStrictEquals(a.all.length, 5);
-	a.renameType("bingo", "input");
+	a.changeType("bingo", "input");
 	assertStrictEquals(a.files.input.length, 5);
 	assert(!a.files.other);
 	assert(!a.files.bingo);
@@ -254,5 +257,19 @@ Deno.test("serialize", async () =>
 	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
 
 	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
+});
+
+Deno.test("remove", async () =>
+{
+	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	assertStrictEquals(a.all.length, 3);
+	a.remove("input", await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"));
+	assertStrictEquals(a.all.length, 2);
+	a.remove("input", await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"));
+	a.remove("wrongType", await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt"));
+	assertStrictEquals(a.all.length, 2);
 });
 

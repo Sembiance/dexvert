@@ -27,7 +27,7 @@ export class FileSet
 		//await Promise.all(files.map(file => this.add(type, file)));
 	}
 
-	// adds the given file of type type
+	// adds the given file of type type. If o is already a Dexfile, don't need to await
 	async add(type, o)
 	{
 		if(!type)
@@ -41,11 +41,17 @@ export class FileSet
 		if(!Object.hasOwn(this, type))
 			Object.defineProperty(this, type, {get : () => (this.files[type] || [])[0]});
 
-		const dexFile = o instanceof DexFile ? o : await DexFile.create({root : this.root, subPath : o.startsWith("/") ? path.relative(this.root, o) : o});
+		const dexFile = o instanceof DexFile ? o : await DexFile.create({root : this.root, rel : o.startsWith("/") ? path.relative(this.root, o) : o});
 		if(dexFile.root!==this.root)
 			throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
 
-		this.files[type].push(dexFile);
+		if(!this.files[type].some(file => file.absolute===dexFile.absolute))
+			this.files[type].push(dexFile);
+	}
+
+	remove(type, file)
+	{
+		(this.files[type] || []).filterInPlace(v => v.absolute!==file.absolute);
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
@@ -73,8 +79,8 @@ export class FileSet
 		delete this.files[type];
 	}
 
-	// renames a type from oldType to newType
-	renameType(oldType, newType)
+	// changes a type from oldType to newType
+	changeType(oldType, newType)
 	{
 		for(const file of this.files[oldType])
 			this.add(newType, file);

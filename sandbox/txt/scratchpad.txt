@@ -2,3 +2,13 @@ Traceback (most recent call last):
   File "<string>", line 11, in <module>
   File "<string>", line 6, in <module>
 Exception: Requested Import plugin not available
+
+
+gameshark
+game shark
+actionreplay
+action replay
+cheats
+codes
+game genie
+gamegenie

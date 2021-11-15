@@ -1,0 +1,2138 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@@!45!@
+ Help -- %N Setup
+
+%N disk compression creates more disk space by compressing your files so that they use less space. 
+
+Using %N Setup
+------------------------
+During %N Setup, you will need to make some choices. %N displays choices in a box. To choose the highlighted option, just press ENTER. To choose a different option, press the UP ARROW or DOWN ARROW key to highlight the option you want, and then press ENTER.
+
+What Happens During %N Setup?
+---------------------------------------
+The %N Setup program configures your computer for disk compression, checks your drive's reliability, and then compresses the drive of your choice.
+
+Once you install it, %N disk compression is built into MS-DOS. When MS-DOS starts, it loads %S.BIN, the part of MS-DOS that provides access to compressed drives, along with other operating system components. MS-DOS loads %S.BIN before carrying out the commands in your CONFIG.SYS file.
+
+After you install %N, you can run the %N program to maintain your compressed drives and to compress additional drives. To run it, type %S at the command prompt.
+
+Note: If you need to, you can later uncompress a %N 
+      compressed drive, and can even uninstall %N. 
+
+Related Topic
+-------------
+  "Uncompressing a Compressed Drive"~HLAA~
+
+
+@@!46!@
+ Help -- Choosing Express or Custom Setup
+
+You can choose either Express Setup or Custom Setup.
+
+When you run Express Setup, %N compresses the existing files on drive C and determines compression settings for you. This is the easiest way to compress the data on your hard disk.
+
+When you run Custom Setup, %N gives you a choice of which drives to compress, and gives you the chance to specify compression settings yourself. Choose Custom Setup to compress the data on a drive other than drive C, or to create an empty compressed drive using the free space on an existing drive.
+
+@@!49!@
+ Help -- Choosing a Compression Method
+
+There are two ways to create a compressed drive.
+
+If you choose "Compress an existing drive," %N compresses the existing files on the hard disk drive of your choice. When %N finishes, the drive will have more free space. (The drive will contain most of the same files as before; the only exceptions are files that cannot be compressed. %N creates a new uncompressed drive to contain those files.) The "Compress an existing drive" option is particularly useful if your hard disk is getting full. 
+
+If you choose "Create a new empty compressed drive," %N uses some of the space on a hard disk drive to create a new compressed drive. The result is a new empty drive that contains more free space than the amount used to create the drive. You might want to choose this option if your hard drive has plenty of free space, or if you do not want to compress your existing files.
+
+Note: If you need to, you can later uncompress a %N 
+      compressed drive, and can even uninstall %N. 
+
+Related Topic
+-------------
+  "Uncompressing a Compressed Drive"~HLAA~
+
+@@!59!@
+ Help --  %N Has Finished Compressing Your Drive
+
+%N has finished compressing the drive you selected, and displays the following information:
+
+ * How much free space the drive contained before %N
+   compressed it.
+
+ * How much free space the drive contains now.
+ 
+ * How long %N took to compress the drive.
+
+ * The compression ratio, which shows how much %N was
+   able to compress the files on the drive.
+
+%N also shows the drive letter and size of the new 
+uncompressed drive it created. This drive contains uncompressed 
+space for files that must remain uncompressed. (The drive also 
+contains the "compressed volume file"~HL84~ for your
+newly compressed drive.)
+
+@@!60!@
+ Help --  %N Has Finished Compressing Your Drive
+
+%N created a new compressed drive by using free space from 
+the drive you selected. %N displays the following information:
+
+ * How much space on your existing drive %N used to 
+   create the new compressed drive.
+
+ * How much free space the new compressed drive contains.
+
+ * The compression ratio for the new drive.
+
+ * How long %N took to create the new drive.
+
+ * How much free space remains on your existing drive.
+
+@@!64!@
+ Help -- Restart Your Computer Now? 
+
+The Restart Your Computer Now dialog box appears if you have just made changes in the Options dialog box and %N needs to restart your computer in order for your changes to take effect.
+
+To restart your computer now, choose Yes.
+
+To continue without restarting your computer, choose No. You can continue using %N, but the changes you made in the Options dialog box will not take effect until you restart your computer.
+
+
+
+
+@@!50!@
+ Help --  Selecting a Drive to Compress
+
+You have specified that you want to compress an existing drive. You must now specify which drive to compress.
+
+%N lists the compressible drives and shows how large each will be after it is compressed. 
+
+Choose the drive you want by pressing the UP ARROW or DOWN ARROW key, and then press ENTER to continue.
+
+If the drive you want to compress does not appear on the list, check the following:
+
+ * Make sure the disk is formatted.
+
+ * Make sure the drive contains enough free space. To compress your 
+   startup hard disk drive, the drive must contain at least 
+   1.2 MB of free space. Other hard disk drives and floppy 
+   disks must contain at least .65 MB of free space. (%N 
+   cannot compress 360K floppy disks.)
+
+ * If you are trying to compress a floppy disk or other 
+   removable media, make sure the disk is in the drive and the 
+   drive door closed. 
+
+@@!51!@
+ Help --  Selecting an Existing Drive to Use
+
+You have specified that you want to create a new compressed drive by using space on an existing drive. You must now specify the drive that contains the space you want to use.
+
+%N lists the available drives; for each drive, %N shows how large the new drive will be if you use the free space on that existing drive. 
+
+Choose the drive you want by pressing the UP ARROW or DOWN ARROW key, and then press ENTER to continue.
+
+@@!52!@
+ Help --  Specifying Compression Settings
+
+When %N compresses the selected drive, it also creates a new uncompressed drive. This new drive will contain any files from the selected drive that must remain uncompressed (such as the Windows permanent swap file).
+
+This screen shows the settings %N will use to create the new uncompressed drive. To change a setting, press the UP ARROW or DOWN ARROW key until the setting you want is highlighted, and then press ENTER to display alternatives. You can change the following settings:
+
+Free space on new uncompressed drive 
+   Shows how much free space the new drive will contain. If you are 
+   not sure how much space you will need, use the recommended size. 
+
+   If the drive you are compressing a drive contains your Windows 
+   permanent swap file, %N takes it into account when 
+   calculating the free space needed, moves the swap file to the 
+   new  drive, and adjusts your Windows installation accordingly. 
+   You need to specify enough free space for a Windows permanent 
+   swap file only if you are planning to create one but have not 
+   yet done so. (For more information about the Windows permanent 
+   swap file, see your Windows documentation.)
+
+Drive letter of new uncompressed drive
+   Shows the drive letter %N will assign to the new drive.
+   You can specify a different letter, if you want.   
+
+   By default, %N Setup uses the fifth drive letter after 
+   the last used drive letter. For example, if E is the last drive 
+   letter currently in use, %N Setup assigns the new 
+   drive the letter J. Once you have installed %N, it 
+   assigns the new drive the last drive letter that is marked as 
+   available for use by %N. 
+
+@@!53!@
+ Help --  Specifying Compression Settings
+
+%N displays the settings that will be used when creating the new compressed drive. To change a setting, press the UP ARROW or DOWN ARROW key until the setting you want is highlighted, and then press ENTER to display alternatives. The following describes each setting:
+
+Free space to leave on drive X
+   Shows how much free space the selected drive will have after 
+   the new drive is created. You can change the amount of free 
+   space that %N leaves on the selected drive. 
+
+Compression ratio of new drive
+   Shows the estimated compression ratio of the new drive.
+   %N uses this ratio to estimate how much data you will 
+   be able to store on the new drive. The default ratio is 2 to 1; 
+   you might want to specify a different ratio if you plan to store 
+   files that will compress at a ratio other than 2 to 1.
+
+Drive letter of new drive
+   Shows the drive letter %N will assign to the new drive.
+   By default, %N assigns the last unused drive letter, 
+   but you can specify a different letter if you want.
+
+@@!54!@
+ Help --  Free Space on the New Uncompressed Drive
+
+When %N compresses a drive, it also creates a new uncompressed drive to hold any files that must remain uncompressed. 
+
+On this screen, you can specify how much free space you want the new uncompressed drive to contain. The more free space you allocate to the new uncompressed drive, the less free space your compressed drive will have.
+
+Note:  Some applications require some free uncompressed disk space 
+       in order to work properly. It might be a good idea to 
+       allocate some space to the new uncompressed drive in case 
+       that space is needed by your applications.
+
+@@!55!@
+ Help --  Specifying Free Space for the Existing Drive
+
+When %N creates the new compressed drive, it uses some or all of the space on the existing drive. 
+
+On this screen, you can specify how much free space you want %N to leave on the existing drive. The more free space you leave on the existing drive, the smaller the new drive will be.
+
+Note:  Some applications require some free uncompressed disk space 
+       in order to work properly. It might be a good idea to leave 
+       some disk space uncompressed in case that space is needed by 
+       your applications.
+ 
+@@!56!@
+ Help --  Specifying a Different Drive Letter
+
+When compressing an existing drive, %N also creates a new uncompressed drive to hold any files that must remain uncompressed. By default, %N skips four drive letters, and then assigns the next available drive letter to the new drive.
+
+To assign a different letter to the new drive, type the letter you want, or press the UP ARROW or DOWN ARROW key until the letter is selected. Then, press ENTER.
+
+@@!57!@
+ Help --  Specifying a Different Drive Letter
+
+By default, when creating a new compressed drive, %N assigns it the last drive letter that is available for %N's use.
+
+To assign a different letter to the new drive, type the letter you want, or press the UP ARROW or DOWN ARROW key until the letter is selected. Then, press ENTER.
+
+@@!58!@
+ Help --  Specifying a Compression Ratio
+
+In this screen, you can change a drive's estimated compression ratio. To choose a different ratio, press the UP ARROW or DOWN ARROW key until the ratio you want is selected, and then press ENTER.
+
+The estimated compression ratio is a number that %N uses to calculate the amount of free space on a compressed drive. You might want to change this ratio if it differs greatly from the actual compressibility of the files you plan to store.
+
+For example, you might want to specify a higher estimated compression ratio if you plan to store extremely compressible files such as bitmap files. You might want to specify a lower ratio if you will store files that will not compress much further, such as certain program (.EXE or .COM) files.
+
+Note: Changing a drive's estimated compression ratio does not 
+      affect how much %N actually compresses the files 
+      on that drive; it changes only the way %N estimates 
+      the free space on the compressed drive.
+
+Having the wrong estimated compression ratio for your files can cause %N to provide inaccurate space estimates to MS-DOS, which can, in turn, result in problems when storing files. If the ratio is too high, %N overestimates the amount of free space; the DIR command might then report that more space is free than is actually available. If the ratio is too low, MS-DOS might be unable to copy a file even though there may be plenty of space for that file.
+
+@@!47!@
+ Help -- Confirming Compression
+
+%N is about to compress the drive you selected.
+
+To compress the selected drive, press C. %N will then compress the drive. (If you are running %N Setup, it will also restart your computer to load %S.BIN, the part of MS-DOS that provides access to compressed drives.)
+
+Note: If you need to, you can later uncompress a %N 
+      compressed drive, and can even uninstall %N. 
+
+To return to the previous screen, press ESC. You can then review and change any choices you made.
+
+
+Related Topic
+-------------
+  "Uncompressing a Compressed Drive"~HLAA~
+
+
+@@!48!@
+ Help -- Confirming Compression
+
+%N is about to create the new compressed drive using free space on the drive you selected. 
+
+To create the new drive, press C. %N will then create the new compressed drive. (If you are running %N Setup, it will also restart your computer to load %S.BIN, the part of MS-DOS that provides access to compressed drives.)
+
+Note: If you need to, you can later uncompress a %N 
+      compressed drive, and can even uninstall %N. 
+
+To return to the previous screen, press ESC. You can then review and change any choices you made.
+
+Related Topic
+-------------
+  "Uncompressing a Compressed Drive"~HLAA~
+
+
+
+
+@@!0!HL97!@
+ Help -- Main %N Screen
+
+The main %N screen lists all the compressed drives that are currently mounted. The list includes hard disks, floppy disks, and other removable media.
+
+To display information about a drive, press the UP ARROW or DOWN ARROW key until the drive you want is selected, and then press ENTER.
+
+From the main %N screen, you can work with compressed drives, compress or mount additional drives, and create new compressed drives. For more information about the tasks you can carry out from the main %N screen, choose one of the following topics:
+
+  "Working with Compressed Drives"~HL76~
+  "Compressing an Existing Drive"~HL80~
+  "Creating a New Compressed Drive"~HL83~
+  "Mounting Compressed Volume Files"~HL95~
+  "Working With Floppy Disks"~HL89~
+  "Uncompressing a Compressed Drive"~HLAA~
+  "Understanding %N Terms"~HL81~
+
+Note:  You can also work with compressed drives from the MS-DOS 
+       command prompt by using the %S command. For more 
+       information, type HELP %S at the command prompt.
+
+@@!23!@
+ Help -- Compressed Drive Information
+
+The Compressed Drive Information dialog box contains the following information about the selected compressed drive:
+
+  Space free   An estimate of the free space on the drive. The 
+               actual amount of data you will be able to store in 
+               this space depends on how compressible your files 
+               are. To estimate the free space, %N uses
+               the "estimated compression ratio"~HL87~.
+
+  Space used   The amount of data stored on the compressed drive.
+
+  Total space  An estimate of the drive's total capacity. This 
+               number is the sum of the used and free space. 
+
+The Drive Info dialog box also shows information about the 
+"compressed volume file"~HL84~ that contains the compressed drive.
+
+From the Compressed Drive Information dialog box, you can change the size or estimated compression ratio of the compressed drive. To change the drive's size, choose the Size button. To change its estimated compression ratio, choose the Ratio button.
+
+Related Topics
+--------------
+  "Changing the Size of a Drive"~HL78~
+  "Changing the Compression Ratio of a Drive"~HL77~
+  "Estimated Compression Ratio"~HL87~
+  "Listing the Drives on Your Computer"~HL93~
+
+@@!hidLIST_DIALOG!@
+ Help -- Drive List
+
+
+In the Drive List dialog box, %N lists your computer's drives. It shows hard disk drives, RAM drives, floppy-disk drives and other removable-media drives. (The list does not include network drives.)
+
+%N shows the following information about each drive:
+
+ * Its drive letter.
+ * The type of drive it is, and whether or not it is compressed. 
+   (%N uses the term "removable-media drives" to refer to 
+   floppy-disk drives as well as other types of removable-media 
+   drives.)
+ * Its total capacity.
+ * The amount of free space it contains.
+ * The name of its compressed volume file, if it is a compressed 
+   drive.
+
+Related Topic
+-------------
+  "Displaying Information About a Drive"~HL91~
+
+@@!28!@
+ Help -- Change Size
+
+In the Change Size dialog box, you can change the size of the selected compressed drive. 
+
+The Change Size dialog box shows information about the compressed 
+drive and the host drive -- the uncompressed drive that contains 
+the "compressed volume file"~HL84~ for the compressed drive.
+
+To change the size of a compressed drive, you specify the amount of free space you want the uncompressed drive to contain. 
+
+Enlarging a Compressed Drive
+----------------------------
+You might want to enlarge a compressed drive if it is getting full. You can enlarge the compressed drive only if the host drive contains some free space. Enlarging a compressed drive makes more free space on it, but removes free space from the host drive. 
+
+To enlarge the compressed drive, specify a smaller amount of free space for the uncompressed drive.
+
+Increasing the Free Space on the Uncompressed Drive
+---------------------------------------------------
+You might want to reduce the size of a compressed drive if you need more free space on the host drive. You can reduce the size of a compressed drive only if it contains free space. 
+
+To increase the amount of free space on the uncompressed drive, specify a larger amount of free space for the uncompressed drive.
+
+Note: To reduce the size of a compressed drive as much as possible, 
+      first run the MS-DOS Defragmenter, DEFRAG.EXE, on that drive. 
+
+@@!27!@
+ Help -- Change Compression Ratio
+
+In the Change Compression Ratio dialog box, you can change the "estimated compression ratio"~HL87~ of a drive.
+
+The estimated compression ratio is a number that %N uses to calculate the amount of free space on a compressed drive. You might want to change this ratio if it differs greatly from the actual compressibility of the files you plan to store.
+
+For example, you might want to specify a higher estimated compression ratio if you plan to store extremely compressible files such as bitmap files. You might want to specify a lower ratio if you will store files that will not compress much further, such as certain program (.EXE or .COM) files.
+
+Note: Changing a drive's estimated compression ratio does not 
+      affect how much %N actually compresses the files 
+      on that drive; it changes only the way %N estimates 
+      the free space on the compressed drive.
+
+Having the wrong estimated compression ratio for your files can cause %N to provide inaccurate space estimates to MS-DOS, which can, in turn, result in problems when storing files. If the ratio is too high, %N overestimates the amount of free space; the DIR command might then report that more space is free than is actually available. If the ratio is too low, MS-DOS might be unable to copy a file even though there may be plenty of space for that file.
+
+Note: To find out the actual compression ratio of each of your 
+      existing files, type DIR /C at the command prompt.
+
+@@!26!@
+ Help -- Mount a Compressed Drive
+
+In the Mount a Compressed Drive dialog box, you can choose the drive you want to mount. 
+
+A compressed drive resides in the root directory of your disk as a hidden file with a filename such as %S.001. This file is called a "compressed volume file"~HL84~ (CVF). When you mount a CVF, %N associates it with a drive letter so you can use the files that CVF contains.
+
+The Mount a Compressed Drive dialog box lists all the unmounted compressed volume files it finds on your computer. To mount one of them as a compressed drive, press the UP ARROW or DOWN ARROW keys to select it, and then choose OK or press ENTER.
+
+Related Topic
+-------------
+  "Unmounting a Compressed Drive"~HL98~
+  "Working with Floppy Disks"~HL89~ 
+
+@@!25!@
+ Help -- Unmount Confirmation
+
+In the Unmount Confirmation dialog box, you can confirm that you want to unmount a compressed drive. To confirm that you want to unmount the specified drive, choose OK.
+
+Unmounting a compressed drive makes the files on it temporarily unavailable. To make the files available again, remount the drive by choosing the Mount command from the Drive menu.
+
+An unmounted drive resides in the root directory of your disk as a "compressed volume file"~HL84~ -- a hidden file with a filename in the form %S.nnn (for example, %S.001). 
+
+CAUTION: Do not delete the compressed volume file. Doing so will 
+         delete the compressed drive and all the files on it.
+
+Related Topic
+-------------
+  "Mounting an Unmounted Compressed Drive"~HL95~
+
+@@!32!@
+ Help -- Format a Compressed Drive 
+
+In the Format a Compressed Drive dialog box, you can instruct %N to format the specified drive.
+
+CAUTION: If you format a compressed drive, all the files it 
+         contains will be permanently erased. Formatting a 
+         compressed drive erases its contents and leaves the empty 
+         compressed volume file on your disk.
+
+To format the selected drive, choose OK.
+
+@@!36!@
+ Help -- Format Confirmation
+
+You have just confirmed that you want to format the currently selected compressed drive. 
+
+This is the last chance you will have to confirm the Format command. To format the specified drive, choose Yes. 
+
+CAUTION: If you format a compressed drive, all the files it 
+         contains will be permanently erased. Formatting a 
+         compressed drive erases its contents and leaves the empty 
+         compressed volume file on your disk.
+
+@@!31!@
+ Help -- Delete a Compressed Drive
+
+In the Delete a Compressed Drive dialog box, you can instruct %N to permanently delete a compressed drive and its associated compressed volume file.
+
+To delete the selected drive, choose OK.
+
+CAUTION: When you delete a drive, you also delete all the files it 
+         contains. Deleting a compressed drive removes the 
+         compressed volume file from your disk.
+
+@@!68!@
+ Help -- Delete Confirmation
+
+You have just confirmed that you want to delete the currently selected compressed drive. This is the last chance you will have to confirm the deletion. To delete the drive, choose Yes.
+
+CAUTION: When you delete a drive, you also delete all the files 
+         it contains. Deleting a compressed drive removes the 
+         compressed volume file from your disk.
+
+@@!63!@
+ Help -- Defragment a Compressed Drive
+
+In the Defragment a Compressed Drive dialog box, you can confirm that you want to defragment the specified drive. To defragment the selected drive, choose OK.
+
+Defragmenting a compressed drive moves all the data to the beginning of the compressed volume file and all the free space to the end. Unlike defragmenting an uncompressed drive, it does not reorganize the files on the drive so that they are stored contiguously. Defragmenting a compressed drive has no effect on its speed. 
+
+You should defragment a compressed drive before you reduce its size. If you do, you might be able to reduce the drive's size more than you otherwise could.
+
+@@!116!@
+ Help -- Stop Defragmenting a Compressed Drive
+
+You pressed the ESC key while %N was defragmenting your compressed drive. 
+
+If you want to stop defragmenting and return to the main %N screen, choose Yes.
+
+To resume the defragmentation process, choose No.
+
+@@!30!HL79!13!@
+ Help --  %N Chkdsk
+
+Previous versions of %N included the %N Chkdsk command (%S /CHKDSK) for checking the validity of the specified compressed drive. 
+
+Instead of the %N Chkdsk command, MS-DOS 6.2 includes the new ScanDisk program, a full-featured disk analysis and repair utility. ScanDisk can check and repair both uncompressed drives and %N drives. It can even check and repair unmounted %N compressed volume files.
+
+To run ScanDisk, quit %N, and then type SCANDISK at the command prompt. 
+
+For more information about ScanDisk, type HELP SCANDISK at the command prompt.
+
+@@!65!@
+ Help -- Options 
+
+In the %N Options dialog box, you can set the following options, which determine how %N interacts with your drives:
+
+Last drive reserved for %N's use
+   To mount a compressed drive, a drive letter must be available
+   to assign to %N.  %N reserves some drive
+   letters based on the number of compressed drives you have.
+   If you run out of drive letters while compressing or mounting a 
+   drive, increase this number. Each drive letter uses about 120 
+   bytes of memory; to conserve memory, decrease this number. 
+
+Number of removable-media drives
+   In general, you should set this field to the number of 
+   removable-media drives you have. (Floppy-disk drives, Bernoulli 
+   drives and Flash memory cards are all removable-media drives.) 
+   You might want to specify fewer removable-media drives than you 
+   actually have if you do not plan to compress the data in those 
+   drives and you want to conserve memory.
+
+
+Enable automounting
+   If this option is checked, then %N will automatically
+   mount compressed floppy disks and other removable media. You can 
+   save about 4K of memory by disabling this option. If you do, 
+   you will have to mount compressed removable drives yourself, by
+   using the Mount command.
+
+Enable DoubleGuard safety checking
+   DoubleGuard constantly checks the validity of the memory 
+   %N is using. If another program were to change the 
+   data %N is storing in memory, the data on your drive 
+   could be damaged. To prevent other programs from damaging
+   your data, DoubleGuard shuts down your computer immmediately if
+   it detects any unauthorized changes to %N's memory.
+
+@@!134!@
+ Help -- Options 
+
+In the %N Options dialog box, you can set the following options to determine how %N interacts with your drives:
+
+Last drive reserved for %N's use
+   To mount a compressed drive, a drive letter must be available
+   to assign to %N.  %N reserves some drive
+   letters based on the number of compressed drives you have.
+   If you run out of drive letters while compressing or mounting a 
+   drive, increase this number. Each drive letter uses about 120 
+   bytes of memory; to conserve memory, decrease this number. 
+
+Number of removable-media drives
+   In general, you should set this field to the number of 
+   removable-media drives you have. (Floppy-disk drives, Bernoulli 
+   drives and Flash memory cards are all removable-media drives.) 
+   You might want to specify fewer removable-media drives than you 
+   actually have if you do not plan to compress the data in those 
+   drives and you want to conserve memory.
+
+
+Enable automounting
+   If this option is checked, then %N will automatically
+   mount compressed floppy disks and other removable media. You can 
+   save about 4K of memory by disabling this option. If you do, 
+   you will have to mount compressed removable drives yourself, by
+   using the Mount command.
+
+Enable DoubleGuard safety checking
+   DoubleGuard constantly checks the validity of the memory 
+   %N is using. If another program were to change the 
+   data %N is storing in memory, the data on your drive 
+   could be damaged. To prevent other programs from damaging
+   your data, DoubleGuard shuts down your computer immmediately if
+   it detects any unauthorized changes to %N's memory.
+
+Read DoubleSpace drives
+   If this option is checked, DriveSpace can mount and read
+   DoubleSpace drives without requiring that you first convert
+   them to DriveSpace format. You can save about 5K of memory by
+   disabling this option.
+
+@@!33!HL99!@
+ Help -- Using Help 
+
+Using the Help Window
+---------------------
+To scroll more Help information into view, use the following:
+
+    * The PAGE UP and PAGE DOWN keys
+    * The arrow keys
+    * The scroll bar to the right of the dialog box
+
+To choose a button at the bottom of the Help window, press TAB or SHIFT+TAB until the button is selected, and then press ENTER. Or, use the mouse to click the button you want.
+
+To close the Help window, press ESC or choose the Close button.
+
+Viewing Help Topics
+-------------------
+Help displays related topics in a different color. To view a related topic, press TAB to select the topic you want, and then press ENTER. Or, use the mouse to click the topic name.
+
+To select the previous topic name, press SHIFT+TAB.
+
+Getting Instant Help
+--------------------
+To get instant help on a message or dialog box, press F1 or choose the Help button.
+
+Using the Help Index
+--------------------
+To view an index of Help topics, choose the Index command from the Help menu.
+
+To view the Help index from the Help window, press TAB to select the Index button, and then press ENTER. Or, click the Index button.
+
+@@!29!18!@
+ Help -- About
+
+The About dialog box displays the current version number of Microsoft %N. To close the About dialog box, press ESC or choose OK.
+
+
+
+
+@@!66!@
+ Help -- Incompatible Hardware or Software
+
+This error message usually indicates that your computer is running disk-caching software that might be incompatible with %N. This message also appears if your computer has a hardcard that is configured as drive C. 
+
+If You Are Running Incompatible Disk-Caching Software
+-----------------------------------------------------
+If you run %N while using incompatible disk-caching software, you could lose some or all of the files on your computer. Before running %N, carry out the following procedure:
+
+1. Edit your CONFIG.SYS and AUTOEXEC.BAT files and remove any 
+   commands that start incompatible disk-caching software. (Microsoft 
+   SMARTDrive is compatible with %N, so you do not need to 
+   remove commands that start SMARTDrive.) Save your changes to both 
+   files.
+2. Restart your computer by pressing CTRL+ALT+DEL.
+3. Restart %N.
+
+For additional information, see the Troubleshooting %N section of the README.TXT file.
+
+If You Have a HardCard Drive Installed
+--------------------------------------
+If your computer includes a hardcard drive that is configured as drive C, %N cannot compress that drive. However, %N can compress your other drives, including other hardcard drives. 
+
+@@!44!@
+ Help -- Defragment Again?
+
+%N cannot continue the current operation because there is not enough contiguous free space on the drive you selected. %N ran the Microsoft Defragmenter to try to gain more contiguous free space, but Defragmenter either did not finish or could not recover additional contiguous space. 
+
+  * To have %N run Defragmenter again, choose Yes.
+    You might want to run Defragmenter again if it was
+    accidentally interrupted, or if this is the first time
+    you have received this error message.
+
+  * If you have already answered Yes to this error message once,
+    or if you are sure Defragmenter was not interrupted, choose No.
+    Then, quit %N and run ScanDisk on the drive. When 
+    ScanDisk is complete, restart %N and try carrying
+    out the operation (for example, resizing the drive) again.
+
+@@!67!@
+ Help -- More Memory Required
+
+%N must allocate additional conventional memory before it can create or mount additional compressed drives. To complete your task, do the following:
+
+  1. Restart your computer by choosing Yes.
+  2. After your computer starts, restart %N.
+  3. Try carrying out your task again. (For example, if you were 
+     trying to create a new compressed drive when you received this
+     message, you would choose the Create New command from the
+     Compress menu.)
+
+To continue using %N, choose No. You will return to the main %N screen. However, you will not be able to complete your task until you have restarted your computer.
+
+How %N Allocates Memory for Drives
+-------------------------------------------
+Each time you start your computer, %N allocates a certain amount of memory for mounting drives: about 100 bytes of memory for each compressed drive that is currently mounted plus 96 bytes for each removable-media drive defined in the %N Options dialog. When you create or mount additional drives, %N uses up 96 bytes of memory for each drive. 
+
+@@!43!@
+ Help -- Restart Now?
+
+%N made some temporary changes to your AUTOEXEC.BAT file to ensure that %N could restart if it was interrupted while resizing your compressed drive. %N has restored your original AUTOEXEC.BAT and CONFIG.SYS files, but needs to restart your computer so that the settings in those files can take effect.
+
+To restart your computer now, choose Yes.
+
+To continue working with %N, choose No. You will return to the main %N screen. When you quit %N, your computer will restart automatically. 
+
+@@!35!@
+ Help -- Retry 
+
+There is no disk in the drive you selected.
+
+To continue, insert the disk in the drive, and then choose the Retry button.
+
+@@!37!@
+ Help -- No Available Drive Letters
+
+%N cannot mount or compress any more drives because no more drive letters are available.
+
+To make more drive letters available for %N's use, choose the Options command from the Tools menu. Then, in the %N Options dialog box, choose a higher drive letter in the "Last drive letter for %N's use" box. Each drive letter uses 96 bytes of memory, so do not allocate more drive letters than you need. 
+
+You can also increase the number of available drive letters by unmounting compressed drives or by disconnecting network drives.
+
+@@!38!@
+ Help -- Working with Your Startup Drive
+
+%N does not allow you to unmount, delete, or format your startup drive. If you were to unmount, delete, or format your startup drive, your computer would not start properly.
+
+@@!39!@
+ Help -- Error Message
+
+There are no unmounted drives on your computer.
+
+You have chosen to mount a compressed drive. However, there are no unmounted compressed drives on your computer. 
+
+An unmounted drive appears on your disk as a hidden file with a filename in the form %S.nnn (for example, %S.001). This file is called a "compressed volume file"~HL84~. Once the file is mounted, it is available for use as a compressed drive, and any compressed files it contains become available.
+
+If you previously unmounted a compressed drive and were trying to remount it when you received this error message, make sure that you did not accidentally delete the compressed volume file. (For a list of hidden files, type the DIR /AH command at the command prompt.)
+
+If you suspect the compressed volume file has been deleted, try using the UNDELETE command to restore it. For more information, type HELP UNDELETE at the command prompt.
+
+@@!71!@
+ Help -- Disk Errors Found
+
+%N has detected crosslinked files, lost clusters or other errors on the specified compressed drive.
+
+To fix the errors, quit %N, and then run the ScanDisk program on this drive. For more information about ScanDisk, type HELP SCANDISK at the command prompt.
+
+
+@@!72!@
+ Help -- Remove Floppy Disk
+
+Your startup floppy disk drive currently contains a floppy disk. 
+If the power fails or if your computer is accidentally restarted, %N can recover automatically and continue compressing your drive. However, for %N to continue properly, your computer must start from the hard disk rather than from a floppy disk.
+
+Remove the floppy disk from the drive and then choose the Retry button.
+
+
+@@!76!@
+ Help -- Invalid Free Space
+
+The amount of free space you requested is invalid for one of the following reasons:
+
+ * The number you entered is too small or too large. The number 
+   must be no smaller than the uncompressed drive's Minimum Free 
+   Space value and no larger than the uncompressed drive's Maximum 
+   Free Space value.
+
+ * The value you typed contains invalid characters. You must enter 
+   a number. Do not use an additional character, such as a comma or 
+   space, to separate thousands.
+
+@@!115!@
+ Help -- Too Fragmented to Resize
+
+%N cannot resize this drive because the drive is too fragmented. To defragment the drive now, choose Yes. %N will then start the Microsoft Defragmenter. When Defragmenter is complete, you should be able to resize the drive.
+
+Note: If this drive contains copy-protected software, choose 
+      No. Defragmenting the drive might damage the copy-
+      protection mechanism, which would prevent you from 
+      running that software.
+
+If %N has just finished running the Microsoft Defragmenter and is now displaying this dialog again, then Defragmenter was unable to solve the problem. Quit %N and run ScanDisk on this drive. Then, try resizing the drive again.
+
+@@!77!@
+ Help -- Invalid Ratio
+
+The ratio you requested is invalid for one of the following reasons:
+
+ * The ratio you entered is too small or too large. The number 
+   must be within the range displayed in the Change Compression 
+   Ratio dialog box.
+
+ * The value you typed contains invalid characters. You must enter 
+   a number.
+
+@@!78!@
+ Help -- File Access Error
+
+%N cannot continue because it is unable to find or gain access to the specified file. 
+
+If %N was unable to find the file, the problem could be that the file is in a nonstandard location. If you know where this file is located, use the MS-DOS COPY command to copy the file from its current location to the directory that contains your MS-DOS files. Then restart %N and try your task again.
+
+If %N found the file but was unable to gain access to it, a disk error might be causing the problem. To fix any disk errors, run ScanDisk on the drive that contains the file.
+
+@@!79!@
+ Help -- Damaged Drive
+
+Your computer was unexpectedly restarted, and now %N cannot remount the specified drive. This could be due to a disk error that damaged the drive's HOTLINK("compressed volume file",hlCVF).
+
+To fix the error, quit %N, and then run ScanDisk on the compressed volume file for the specified drive. For example, if the compressed volume filename is C:\%S.001, you would type the following at the command prompt:
+
+   SCANDISK C:\%S.001
+
+The compressed volume file is a hidden file; to see it, type DIR /A in the root directory of your uncompressed (host) drive.
+
+When ScanDisk completes, run %N and try mounting the drive again.
+
+@@!80!@
+ Help -- Error
+
+%N has encountered an error. For additional information, see the %N section of the README.TXT file. 
+
+The README.TXT file is located in the directory that contains your MS-DOS files. (A copy of README.TXT is also located on Setup Disk 1.)
+
+To view the README.TXT file, use a text editor such as MS-DOS Editor. For example, if your MS-DOS files are in the C:\DOS directory, you could view the README.TXT file by typing the following at the command prompt:
+
+   EDIT C:\DOS\README.TXT
+
+@@!81!@
+ Help -- Drive is Full
+
+%N has compressed as many of the files on this drive as possible. However, there was not enough space to compress all the files. The files that were not compressed are still on the uncompressed drive, which now has a new drive letter.
+
+To move those files to the compressed drive, you must move them to a different drive or onto a floppy disk, delete them from the uncompressed drive, enlarge the compressed drive, and then copy the files onto the compressed drive. For information about how to do this, see the %N section of the README.TXT file.
+
+@@!82!@
+ Help -- Startup Drive is Full
+
+%N Setup cannot continue because there is not enough space on your startup drive. 
+
+Use the DEL command to delete unnecessary files from your startup drive until there is enough space. To find out how much free space is on the drive, type the DIR command.
+
+Caution: If you are not sure what a file's function is, do 
+         not delete it. For a list of files you can safely 
+         delete, see the Freeing Disk Space chapter of the 
+         MS-DOS User's Guide.
+
+@@!83!@
+ Help -- Cannot Find File
+
+%N cannot find the specified file. 
+
+To continue, quit %N and make sure the file is located in the root directory of your startup disk or in the directory that contains your MS-DOS files. Then, restart %N and try carrying out your task again.
+
+@@!84!@
+ Help -- File Access Error
+
+%N cannot compress the specified file because it cannot gain access to it.
+
+To try copying and compressing the file again, choose the Retry button.
+
+To skip this file and continue with the compression process, choose the Skip button. When %N finishes compressing your drive, the specified file will be located on the new uncompressed drive rather than on the compressed drive. To move the file to your compressed drive, run the ScanDisk program on the uncompressed drive, and then copy the file by using the MOVE or COPY commands.
+
+@@!85!@
+ Help -- Disk Error
+
+%N cannot compress your drive because it has encountered a disk error.
+
+Quit %N, and then run the ScanDisk program to fix any disk errors on this drive.
+
+@@!86!@
+ Help -- No Compressible Drives
+
+%N could not find any compressible drives. 
+To compress a drive:
+
+ * The disk must be formatted.
+
+ * The drive must contain enough free space. To find out how
+   much free space is needed to compress a drive, exit
+   %N and use the %S /COMPRESS X: command,
+   where X is the letter of the drive you want to compress.
+   (%N cannot compress 360K floppy disks.)
+
+ * If you are trying to compress a floppy disk or other 
+   removable media, the disk must be in the drive and the 
+   drive door closed. 
+
+ * The drive must not be already compressed. (%N 
+   displays this error message if all your drives are already 
+   compressed.)
+
+@@!87!@
+ Help -- Cannot Load %S.BIN
+
+MS-DOS was unable to load %S.BIN -- the part of MS-DOS that provides access to your compressed drives.
+
+Either or both of the %S.BIN and IO.SYS system files are invalid. Reinstall MS-DOS, and then try running %N again.
+
+@@!88!@
+ Help -- Quitting %N
+
+If you quit %N Setup before it is complete, the files on your disk will be unchanged. 
+
+@@!92!@
+ Help -- Error
+%N has encountered a fatal error during compression. 
+
+For more information, see the %N section of the README.TXT file. This file is located in the directory that contains your MS-DOS files. A copy of the README.TXT file is also located on Setup Disk 1.
+
+@@!93!@
+ Help -- Error
+%N has encountered an error condition. 
+
+For more information, see the %N section of the README.TXT file. This file is located in the directory that contains your MS-DOS files. A copy of the README.TXT file is also located on Setup Disk 1.
+
+@@!94!@
+ Help -- Defragment Error
+%N has encountered an error while defragmenting your drive. 
+
+For more information, see the %N section of the README.TXT file. This file is located in the directory that contains your MS-DOS files. A copy of the README.TXT file is also located on Setup Disk 1.
+
+@@!95!@
+ Help -- Cannot Update Windows Files
+
+The next time you run Windows, you will need to correct your Virtual Memory settings.
+
+When %N compressed your hard drive, it found that your Windows swap file was located on that drive. To work properly, your Windows swap file must be located on an uncompressed drive. Therefore, %N moved your swap file to the specified uncompressed drive. However, %N could not modify the Windows configuration files that specify the location of your swap file.
+
+The next time you start Windows, you will see a message about your swap file. Follow the instructions on your screen.
+
+@@!96!@
+ Help -- Running %N with Other Operating Systems
+
+%N has found files from another operating system on your hard disk. Before you install %N, check to make sure the other operating system can use %N compressed drives. 
+
+@@!118!@
+ Help -- Running %N with Long Filenames
+
+If %N compresses a drive that contains files with long filenames, the filenames might be damaged. 
+
+A long filename is any filename that does not conform to the standard MS-DOS file-naming convention (8 characters for the filename, 3 characters for the filename extension). A long filename might exceed these limits, or might contain characters not supported by the standard MS-DOS file-naming convention.
+
+%N does not support long filenames. If it encounters any long filenames while compressing a drive, %N truncates the filenames to the standard length.
+
+@@!hidRUNDEFRAG_POPUP!@
+If you install %N and the other operating system cannot read %N compressed drives, then you will not be able to use the files on your compressed drives when you are running the other operating system. 
+
+If you compress drive C and the other operating system cannot read %N compressed drives, the other operating system might not start properly.
+
+@@!99!@
+ Help -- Backing Up Your Files
+
+You should back up your files before you compress them. It's always a good idea to have a recent backup of the files on your drive.
+
+MS-DOS 6 includes two backup programs: Microsoft Backup for MS-DOS and Microsoft Backup for Windows. When you ran MS-DOS Setup, you chose which backup program(s) to install on your hard disk.
+
+If you installed Microsoft Backup for MS-DOS, back up your files by typing MSBACKUP at the command prompt. 
+
+If you installed Microsoft Backup for Windows, back up your files by starting Windows and then double-clicking the Backup icon in the Microsoft Tools group.
+
+For more information about both backup programs, see the MS-DOS 6 User's Guide.
+
+@@!112!@
+ Help -- Caution
+
+%N runs the ScanDisk program to check your drive for errors. This is an important step whenever you will be changing the drive dramatically (for example, when compressing or uncompressing the drive). 
+
+Running ScanDisk ensures that %N will not attempt to use damaged areas of your drive. Because you quit ScanDisk before it finished performing a surface scan on your drive, there is no way for %N to tell which parts of your drive are reliable and which, if any, are not. 
+
+If you are not sure whether your drive contains unreliable areas, choose No. If you choose Yes and your drive does contain errors, you could lose data if %N tries to use an unreliable area of the drive during the compression or uncompression process. 
+
+@@!113!@
+ Help -- Error
+
+%N runs the ScanDisk program to check your drive for errors. Because you stopped ScanDisk before it could complete its basic tests, there is no way for %N to tell which parts of your drive are reliable and which, if any, are not. Therefore, %N cannot continue.
+
+ScanDisk takes much longer to perform a surface scan than it does to check other areas of a drive. Although it is much safer to allow ScanDisk to check all areas of your drive, if you are in a hurry, you can compress your drive without first completing a surface scan. To bypass the surface scan, wait until ScanDisk begins the surface scan, and then choose Exit. When %N displays a Caution dialog, choose Yes. Note that if you skip the surface scan, %N might try to use an unreliable area of your drive, and you might lose data.
+
+Note: If you are uncompressing a drive, ScanDisk checks 
+      both the compressed drive and the host drive for errors. 
+      If you are in a hurry, you can skip the surface scan of 
+      the host drive. To do this, choose Next Drive in the 
+      Surface Scan dialog. 
+
+@@!114!@
+ Help -- Error
+
+%N cannot continue because ScanDisk found problems on your drive.
+
+Before you compress or uncompress a drive, %N runs ScanDisk to make sure your drive is reliable. If ScanDisk finds physical errors or damaged data on your drive, you cannot compress or uncompress the drive because you might lose data.
+
+To fix the problems, quit %N, and then run ScanDisk on the drive.
+
+Caution: If ScanDisk found physical errors, your drive might be about 
+         to experience a hardware failure. Back up your files immediately,
+         and then have the drive checked by a qualified computer hardware
+         technician. Do not compress or uncompress the drive until it has
+         been inspected by a technician.
+
+
+
+
+
+@@!HL84!@
+ Help -- Compressed Volume File
+
+A compressed drive is not a real disk drive, although it appears that way to most programs. Instead, a compressed drive exists on your disk as a hidden file called a compressed volume file (CVF). A compressed volume file is stored in the disk's root directory and has a filename in the form %S.nnn. When you compress the files on an existing drive, %N names the associated compressed volume file %S.000. When you create a new compressed drive, %N names the associated CVF by using a number such as 001 (for example, %S.001). 
+
+Most CVFs can store more data than the space they use; for example, a typical CVF might use 10 MB of space on its host drive but contain 20 MB of compressed data. When a CVF is mounted, or made active, it is assigned a drive letter and appears as a disk drive. The CVF's contents are then accessible and appear as normal files.
+
+Related Topic
+-------------
+  "Mounting a Compressed Volume File"~HL95~
+
+@@!HL92!@
+ Help -- Host Drive
+
+A host drive is an uncompressed drive that contains one or more compressed volume files. Sometimes the host drive is referred to as the "physical drive" because it is an actual hard-disk partition or floppy disk.
+
+After a drive is compressed, it becomes the host drive for a compressed volume file. The CVF contains the files that used to be on the host drive. Usually, the host drive contains very little free space after compression, since the compressed volume file uses so much space. Because it is compressed, a CVF can store more data than the space it uses; for example, a typical CVF might use 10 MB of space on the host drive but contain 20 MB of compressed data. 
+
+@@!HL87!@
+ Help -- Estimated Compression Ratio
+
+The estimated compression ratio is a number that %N uses to calculate the amount of free space on a compressed drive. 
+
+On an uncompressed drive, the free space indicates how much additional data you can store. However, on a compressed drive, the amount of data you can store depends on how compressible the files are. %N estimates a drive's free space by assuming that you will store files that can be compressed to the estimated compression ratio.
+
+You might want to change this ratio if it differs greatly from the actual compressibility of the files you plan to store. For example, you might want to specify a higher estimated compression ratio if you plan to store extremely compressible files such as bitmap files. You might want to specify a lower ratio if you will store files that will not compress much further, such as certain program (.EXE or .COM) files.
+
+Note: Changing a drive's estimated compression ratio does not 
+      affect how much %N actually compresses the files 
+      on that drive; it changes only the way %N estimates 
+      the free space on the compressed drive.
+
+Having the wrong estimated compression ratio for your files can cause %N to provide inaccurate space estimates to MS-DOS, which can, in turn, result in problems when storing files. If the ratio is too high, %N overestimates the amount of free space; the DIR command might then report that more space is free than is actually available. If the ratio is too low, MS-DOS might be unable to copy a file even though there may be plenty of space for that file.
+
+Note: To find out the actual compression ratio of your existing 
+      files, type the DIR /C command at the MS-DOS command prompt.
+      For more information, type HELP DIR at the command prompt.
+
+Related Topic
+-------------
+  "Changing the Compression Ratio of a Drive"~HL77~
+
+@@!HL76!@
+ Help -- Working with Existing Compressed Drives
+
+The main %N screen lists all the compressed drives that are currently mounted. 
+
+To work with a compressed drive, first select it from the list by clicking it with the mouse, or by pressing the UP ARROW or DOWN ARROW keys until the drive is highlighted. Then choose the command you want to carry out from the Drive or Tools menu.
+
+If there are more drives than fit in the window, you can scroll through the list by using the scroll bar on the right side of the list or by pressing the DOWN ARROW, UP ARROW, PAGE DOWN or PAGE UP keys.
+
+You can carry out the following actions on a compressed drive you have selected:
+
+  "Display information about a drive"~HL91~
+  "Change the size of a drive"~HL78~
+  "Change the compression ratio of a drive"~HL77~
+  "Unmount a drive"~HL98~
+  "Format a drive"~HL90~
+  "Delete a drive"~HL86~
+  "Defragment a drive"~HL85~
+  "Uncompress a drive"~HLAA~
+
+You can also do the following:
+
+  "Mount an unmounted compressed drive"~HL95~
+  "Compress an existing drive"~HL80~
+  "Create a new compressed drive"~HL83~
+
+@@!HL89!@
+ Help -- Using Floppy Disks
+
+You can use %N to increase the storage capacity of floppy disks as well as hard disks. To compress a floppy disk, choose the Existing Drive command from the Compress menu. 
+
+In general, %N treats compressed floppy disks just like compressed hard disks. However, there are a few differences:
+
+  * You cannot create a new empty compressed drive on a floppy 
+    disk. (That is, you cannot compress a floppy disk by using
+    the Create New Drive... command.)
+
+  * Normally, %N automatically mounts a compressed 
+    floppy disk when you try to use that disk. However, if
+    you turn off the Enable Automounting option in the Options 
+    dialog, you must mount compressed floppy disks yourselfr.
+  
+Related Topics
+--------------
+  "Compressing an Existing Drive"~HL80~
+  "Mounting an Unmounted Compressed Drive"~HL95~
+
+@@!HL91!1!@
+ Help -- Displaying Information About a Drive
+
+You can display information about a compressed drive by using any of the following methods:
+
+ * Select the drive in the main %N screen, and then press
+   ENTER or choose the Info command from the Drive menu.
+
+ * Double-click the drive in the main %N screen.
+
+ * From the MS-DOS command prompt, type the %S /INFO command.
+   For more information, type HELP %S /INFO at the command 
+   prompt.
+
+%N provides the following information about the selected compressed drive:
+
+ * Its volume label
+ * The time and date it was created
+ * Its total capacity
+ * The amount of data stored on it
+ * An estimate of the amount of free space it contains
+ * Its actual compression ratio
+ * Its "estimated compression ratio"~HL87~
+ * The name of its "compressed volume file"~HL84~
+ * The size of its compressed volume file
+
+@@!HL78!2!@
+ Help -- Changing the Size of a Drive
+
+You can change the size of a compressed drive. 
+
+You might want to enlarge a compressed drive if it is getting full. You can enlarge the compressed drive only if the host drive contains some free space. Enlarging a compressed drive makes more free space on it, but removes free space from the host drive. 
+
+You might want to reduce the size of a compressed drive if you need more free space on the host drive. You can reduce the size of a compressed drive only if it contains free space. 
+
+To change the size of a compressed drive, select it in the main %N screen, and then choose the Change Size command from the Drive menu.
+
+You can also change the size of a compressed drive from the MS-DOS command prompt by using the %S /SIZE command. For more information, type HELP %S /SIZE at the command prompt.
+
+@@!HL77!3!@
+ Help -- Changing the Compression Ratio of a Drive
+
+The "estimated compression ratio"~HL87~ is a number that %N uses to calculate the amount of free space on a compressed drive. 
+
+You might want to change a drive's estimated compression ratio if it differs greatly from the actual compressibility of the files you plan to store on that drive.
+
+Note: Changing a drive's estimated compression ratio does not 
+      affect how much %N actually compresses the 
+      files on that drive; it changes only the way %N 
+      estimates the free space on the compressed drive.
+
+To change a drive's estimated compression ratio, select the drive in the main %N screen, and then choose the Change Ratio command from the Drive menu.
+
+You can also change a drive's estimated compression ratio from the MS-DOS command prompt by using the %S /RATIO command. For more information, type HELP %S /RATIO at the command prompt.
+
+@@!HL98!5!@
+ Help -- Unmounting a Compressed Drive
+
+You can instruct %N to unmount a compressed drive. Unmounting a compressed drive makes the files on it temporarily unavailable. To make the files available again, remount the drive by choosing the Mount command from the Drive menu.
+
+An unmounted drive resides in the root directory of your disk as a "compressed volume file"~HL84~ -- a hidden file with a filename in the form %S.nnn (for example, %S.001).
+
+To unmount a compressed drive, select it in the main %N screen, and then choose the Unmount command from the Drive menu.
+
+You can also unmount a drive from the MS-DOS command prompt by using the %S /UNMOUNT command. For more information, type HELP %S /UNMOUNT at the command prompt.
+
+Note: %N automatically remounts a compressed floppy 
+      disk as soon as you try to use the disk -- even if you 
+      have unmounted it. However, if you turn off the Enable 
+      Automounting option in the Options dialog, you must mount
+      compressed floppy disks yourself.
+
+Related Topic
+-------------
+  "Mounting an Unmounted Compressed Drive"~HL95~
+
+@@!HL90!6!@
+ HELP --  Formatting a Compressed Drive
+
+You can instruct %N to format a compressed drive. You might want to format a compressed drive if you have already backed up all the files on that drive and want to make the drive completely empty.
+
+CAUTION: If you format a compressed drive, all the files it 
+         contains will be permanently erased. Formatting a 
+         compressed drive erases its contents and leaves the 
+         empty compressed volume file on your disk.
+
+To format a compressed drive, select it in the main %N screen, and then choose the Format command from the Drive menu.
+
+You can also format a compressed drive from the MS-DOS command prompt by using the %S /FORMAT command. For more information, type HELP %S /FORMAT at the command prompt.
+
+@@!HL86!7!@
+ HELP --  Deleting a Compressed Drive
+
+You can instruct %N to permanently delete a compressed drive and its associated compressed volume file. You might want to delete a compressed drive if you have already backed up all the files on that drive and want to reclaim the space used by the compressed volume file on the host drive.
+
+CAUTION: When you delete a drive, you also delete all the files 
+         it contains. Deleting a compressed drive removes the 
+         compressed volume file from your disk.
+
+To delete a compressed drive, select it in the main %N screen, and then choose the Delete command from the Drive menu.
+
+You can also delete a compressed drive from the MS-DOS command prompt by using the %S /DELETE command. For more information, type HELP %S /DELETE at the command prompt.
+
+@@!HL88!8!@
+ HELP --  Quitting %N
+
+To quit the %N program, choose the Exit command from the Drive menu. 
+
+Note: If you mounted any compressed floppy disks or removable-media 
+      drives, they will remain mounted until you unmount them or 
+      restart your computer.
+
+@@!HL85!11!@
+ HELP --  Defragmenting a Compressed Drive
+
+You can instruct %N to defragment a compressed drive. Defragmenting a compressed drive moves all the data to the beginning of the compressed volume file and all the free space to the end. Unlike defragmenting an uncompressed drive, it does not reorganize the files on the drive so that they are stored contiguously. Defragmenting a compressed drive has no effect on its speed. 
+
+You should defragment a compressed drive before you reduce its size. If you do, you might be able to reduce the drive's size more than you otherwise could.
+
+To defragment a compressed drive, select it in the main %N screen, and then choose the Defragment command from the Drive menu.
+
+You can also defragment a compressed drive from the MS-DOS command prompt by using the %S /DEFRAG command. For more information, type HELP %S /DEFRAG at the command prompt.
+
+
+@@!HL93!@
+ HELP --  Listing Your Computer's Drives
+
+You can have %N display a list of your computer's drives. 
+To do this, quit %N and type the %S /LIST command at the MS-DOS command prompt.
+
+%N lists your computer's hard disk drives, RAM drives, floppy-disk drives and other removable-media drives. (It does not list network drives.) %N shows the following information about each drive:
+
+ * Its drive letter.
+ * The kind of drive it is, and whether or not it is compressed. 
+   (%N uses the term "removable-media drives" to refer to 
+   floppy-disk drives as well as other types of removable-media 
+   drives.)
+ * Its total capacity.
+ * The amount of free space it contains.
+ * The name of its compressed volume file, if it is a compressed 
+   drive.
+
+For more information about the %S /LIST command, type HELP %S /LIST at the command prompt.
+
+@@!HL95!4!@
+ HELP --  Mounting a Compressed Drive
+
+A compressed drive is actually just a compressed volume file until you mount it. Mounting a compressed volume file establishes a connection between it and a drive letter, so that you can use that CVF as a drive.
+
+%N automatically mounts your compressed hard drives when you start your computer. It automatically mounts compressed floppy disks and other removable media as soon as you try to use them. (If the Enable Automounting option in the Options dialog is turned off, then %N does not automatically mount removable media.)
+
+To mount a compressed volume file, choose the Mount command from the Drive menu, and then select the compressed volume file from the list that %N displays.
+
+You can also mount a compressed volume file from the MS-DOS command prompt by using the %S /MOUNT command. For more information, type HELP %S /MOUNT at the command prompt.
+
+Related Topics
+--------------
+  "Unmounting a Compressed Drive"~HL98~
+  "Working with Floppy Disks"~HL89~
+
+@@!HL80!9!@
+ HELP --  Compressing an Existing Drive
+
+When you compress an existing drive, you compress all the files on it. When compression is complete, your original drive will contain compressed files and additional free space. You will also have a new uncompressed drive that contains any uncompressible files from the drive you just compressed.
+
+To compress an existing drive, choose the Existing Drive option from the Compress menu. 
+
+You can also compress an existing drive from the MS-DOS command prompt  by using the %S /COMPRESS command. For more information, type HELP %S /COMPRESS at the command prompt.
+
+Related Topics
+--------------
+  "Creating a New Compressed Drive"~HL83~
+  "Working with Floppy Disks"~HL89~
+
+@@!HL83!10!@
+ HELP --  Creating a New Compressed Drive
+
+You can create a new compressed drive by using free space on an existing uncompressed drive. When compression is complete, you will have a new compressed drive that contains more free space than it took from the existing drive.
+
+To create a new compressed drive, choose the Create New Drive option from the Compress menu.
+
+You can also create a new compressed drive from the MS-DOS command prompt by using the %S /CREATE command. For more information, type HELP %S /CREATE at the command prompt.
+
+Related Topic
+-------------
+  "Compressing an Existing Drive"~HL80~
+
+@@!HL83!10!@
+ HELP --  Creating a New Compressed Drive
+
+You can create a new compressed drive by using free space on an existing uncompressed drive. When compression is complete, you will have a new compressed drive that contains more free space than it took from the existing drive.
+
+To create a new compressed drive, choose the Create New Drive option from the Compress menu.
+
+You can also create a new compressed drive from the MS-DOS command prompt by using the %S /CREATE command. For more information, type HELP %S /CREATE at the command prompt.
+
+Related Topic
+-------------
+  "Compressing an Existing Drive"~HL80~
+
+@@!HLAA!100!@
+ HELP --  Uncompressing a Compressed Drive
+
+You can uncompress a %N compressed drive if there is enough free disk space to hold all the files in uncompressed form.
+
+When you uncompress a compressed drive, the result depends on how that drive was created:
+
+  * If the compressed drive was created by compressing an 
+    existing drive, then its drive letter will be the same
+    after it is uncompressed.
+
+  * If the compressed drive was created by using free space
+    on another drive (the host drive), %N moves all 
+    the files on the compressed drive to the host drive, and 
+    then removes the compressed drive. 
+
+To uncompress a compressed drive, select it in the main %N screen, and then choose the Uncompress option from the Tools menu.
+
+You can also uncompress a compressed drive from the MS-DOS command prompt by using the %S /UNCOMPRESS command. For more information, type HELP %S /UNCOMPRESS at the command prompt.
+
+Note: When you uncompress the last remaining compressed drive, 
+      %N uncompresses that drive, and then removes the 
+      %N driver from memory. This effectively uninstalls 
+      %N. If you want to use %N after that, you 
+      must run %N Setup again.
+
+Related Topic
+-------------
+  "Working With Compressed Drives"~HL76~
+
+@@!110!@
+ Help -- Uncompress Confirmation
+
+%N is about to uncompress the compressed drive you selected. 
+
+To uncompress the drive, choose Yes. %N will then move your files from your compressed drive to the specified uncompressed drive. (If you are uncompressing the last mounted compressed drive, %N will offer to remove %S.BIN from memory. (%S.BIN is the part of MS-DOS that provides access to compressed drives.)
+
+If you don't want to uncompress this drive, choose No.
+
+@@!111!@
+ Help -- %N Could Not Uncompress a Drive
+
+There was not enough free space to uncompress the specified drive. To uncompress a drive, there must be a certain amount of free space on either your compressed drive or your uncompressed drive (to which %N will move the files on the compressed drive).
+
+To uncompress the drive, quit %N and free some disk space by deleting or moving files from either or both drives. Then, restart %N and try uncompressing the drive again.
+
+@@!117!@
+ Help -- Duplicate Files Error
+
+%N cannot uncompress the specified drive until you move or rename the files listed in the %S.LOG file. Both the compressed and uncompressed (host) drive contain a copy of these files. If %N were to continue and uncompress the drive, the copy of these files on the compressed drive would replace the copy on the host drive.
+
+To uncompress this drive:
+
+1. Quit %N.
+2. View the contents of the %S.LOG file. This file lists
+   the affected files. For example, if the %S.LOG file
+   lists the filename REPORT.DOC, then there are two files named
+   REPORT.DOC: one in the root directory of your compressed 
+   drive and one in the root directory of your uncompressed 
+   (host) drive.
+3. Move or rename one copy of each file. For example, if the 
+   affected file is named REPORT.DOC, you could correct the 
+   problem by typing the following command:
+
+   REN REPORT.DOC REPORT2.DOC
+
+4. Try uncompressing the drive again.
+
+@@!119!@
+ Help -- Uninstall %N Now?
+
+%N has finished uncompressing the last mounted compressed drive on your system. Typically, this means that you no longer need %N to provide access to compressed drives. 
+
+Choose Yes   if you are sure you won't need %N to provide
+             access to additional compressed drives. Choosing Yes
+             uninstalls %N by removing it from memory. 
+             This can free as much as 43K of memory. 
+
+Choose No    If you want %N to remain in memory to provide
+             access to compressed floppy disks or other unmounted
+             compressed drives. If you choose No, %N will
+             remain installed. (Your hard disk will stay 
+             uncompressed unless you specifically recompress it.)
+
+What if I uninstall %N and then need it later?
+-------------------------------------------------------
+If you uninstall %N and then later discover that you need %N to use compressed floppy disks or other unmounted compressed drives, you can reinstall %N without compressing the files on your hard disk. To do this, run %N Setup by typing %S, and then choose Custom Setup and create a new compressed drive by using free space. You should then be able to mount and use your other compressed drives.
+
+What if I don't uninstall %N now? Can I do it later?
+-------------------------------------------------------------
+If you do not uninstall %N now, you can still uninstall %N manually. To do this, type the following at the command prompt and then restart your computer:
+
+   DELTREE C:\%S.BIN
+
+Caution: Use this command only if you are sure you have no
+         mounted compressed drives.
+
+
+@@!128!@
+ Help -- Converting DoubleSpace Drives to DriveSpace Format
+
+To convert all your DoubleSpace drives to DriveSpace format, press ENTER. %N will convert all currently mounted DoubleSpace drives.
+
+To quit without converting your drives, press F3.
+
+Note: Before converting, make sure you have a recent backup of your files.
+
+If you also have DoubleSpace floppy disks or unmounted DoubleSpace compressed volume files, you can convert them later by running DriveSpace and then choosing the Convert command from the Tools menu.
+
+@@!129!@
+ Help -- DriveSpace Conversion Confirmation
+
+%N is about to convert all mounted DoubleSpace drives to DriveSpace format.
+
+To convert your drives, press C. %N will then convert each of your DoubleSpace drives. 
+
+If you don't want to convert your drives, press F3 to exit.
+
+@@!130!@
+ Help -- Cannot Mount Volume File
+
+The specified compressed volume file cannot be mounted because it was created by a newer version of this program.
+
+To mount this compressed volume file, use the correct version of %N.
+
+@@!132!@
+ Help -- Finish Conversion
+
+The specified compressed volume file has been partially converted to DriveSpace format.
+
+To complete the conversion, choose Yes.
+
+To leave the volume file partially converted, choose No. (You might be unable to mount it until it is converted.)
+
+@@!131!@
+ Help -- Cannot Mount Volume File
+
+The specified volume file has been partially converted and therefore cannot be mounted.
+
+To mount this volume file, you must first convert it to DriveSpace format. To do this,
+choose Convert from the Tools menu.
+
+@@!133!@
+ Help -- Must Convert Volume File
+
+To mount this compressed volume file, you must first convert it to DriveSpace format.
+
+To convert the specified volume file, choose Yes.
+
+To leave the volume file unconverted, choose No. You will be unable to mount this volume file.
+
+@@!151!@
+ Help -- Error
+
+The specified volume file is in DriveSpace format, which is incompatible with DoubleSpace. 
+To mount this compressed volume file, you must first convert your system to DriveSpace.
+
+To convert your system and all mounted compressed drives to DriveSpace now, type Y.
+
+To continue using DoubleSpace, type N. You will be unable to mount this volume file.
+
+@@!135!@
+ Help -- Convert DoubleSpace
+
+In the Convert DoubleSpace dialog box, you select the DoubleSpace volume file you want to convert to DriveSpace format. %N displays a list of the DoubleSpace volume files it found on your computer.
+
+To convert a DoubleSpace volume file, press the UP ARROW or DOWN ARROW key until the file you want is selected. Then, press ENTER or choose OK.
+
+%N converts the DoubleSpace volume file to a DriveSpace compressed volume file, and then mounts the converted file as a DriveSpace compressed drive.
+
+Note: Once you convert a DoubleSpace volume file to DriveSpace format, 
+      you cannot unconvert it.
+
+@@!136!@
+ Help -- Warning
+
+%N runs the ScanDisk program to check your drive for errors. This is an important step that should be completed whenever the contents of a drive will change significantly (for example, when compressing or uncompressing the drive). 
+
+Running ScanDisk ensures that %N will not use damaged areas of your drive. Because you quit ScanDisk before it finished performing a surface scan on your drive, there is no way for %N to tell which parts of your drive are reliable and which, if any, are not. 
+
+Choose No if you are not sure whether your drive contains unreliable areas. Choose Yes only if you are sure that the drive does not contain any unreliable areas.
+
+Caution: If you choose Yes and your drive does contain errors, you
+         could lose data if %N tries to use an unreliable area of
+         the drive during the conversion process.
+
+@@!138!@
+ Help -- Error
+
+%N cannot continue because ScanDisk found problems on your drive.
+
+Before %N converts a DoubleSpace drive, it runs ScanDisk to make sure your drive is reliable. If ScanDisk finds physical errors or damaged data on your drive, DriveSpace will not convert the drive because you might lose data.
+
+To fix the problems, quit %N, and then run ScanDisk on the drive.
+
+Caution: If ScanDisk found physical errors, your drive might be
+         about to experience a hardware failure. Back up your files
+         immediately, and then have the drive checked by a qualified
+         computer hardware technician. Do not convert any
+         DoubleSpace drives until your hardware has been inspected
+         by a technician.
+
+@@!139!@
+ Help -- Error
+
+%N cannot convert any DoubleSpace drives to DriveSpace format because MS-DOS could not load both DRVSPACE.BIN and DBLSPACE.BIN.
+
+To convert DoubleSpace drives to DriveSpace format, both DRVSPACE.BIN and DBLSPACE.BIN must be loaded. Make sure that the following files are in the directory that contains your MS-DOS files:
+
+     DRVSPACE.BIN
+     DBLSPACE.BIN
+     DRVSPACE.MR1
+
+If these files exist in your MS-DOS directory, then the problem miht be insufficient conventional memory or an invalid version of the IO.SYS file.
+
+@@!140!@
+ Help -- Error
+
+Your computer does not contain any mounted DoubleSpace drives that need to be converted.
+
+@@!141!@
+ Help -- Conversion Finished
+
+%N has finished converting your DoubleSpace drives to DriveSpace format.  When you restart your machine, you will be using DriveSpace instead of DoubleSpace.
+
+If you need to, you can still mount unconverted DoubleSpace floppy disks and other unconverted DoubleSpace drives for read-only access. To do this, run DriveSpace, choose Options from the Tools menu, and then check the Read DoubleSpace Drives option. (This option uses an additional 5K of memory.) DriveSpace does not automatically mount DoubleSpace floppy disks; to mount a DoubleSpace floppy disk, choose Mount from the Drive menu.
+
+Note: The Read DoubleSpace Drives option enables only the ability to 
+      mount and read unconverted DoubleSpace drives. To write to a 
+      DoubleSpace floppy disk, you must first convert it to DriveSpace 
+      format. 
+
+@@!143!@
+ Help -- Failed Conversion
+
+%N could not finish converting a compressed drive to DriveSpace format.
+
+To finish converting the drive, first run ScanDisk on this drive to correct any disk errors. When ScanDisk completes, try converting the drive again by running DriveSpace and choosing Convert from the Tools menu.
+
+@@!142!@
+ Help -- Error
+
+%N cannot read from or write to an area of the drive that is currently being converted. That portion of the drive is not yet converted to DriveSpace format.
+
+To try again to convert that portion of the drive, choose Retry.
+
+To skip that portion of the drive and continue converting the rest of the drive, choose Continue.  
+
+To stop converting this drive and go on to the next drive, if any, choose Next Drive.
+
+You might want to choose Next Drive to convert your other drives (if any) and then try to correct the disk problem by running ScanDisk on this drive. When ScanDisk completes, try converting the drive again by running DriveSpace and choosing Convert from the Tools menu.
+
+@@!HLAB!101!@
+ Help -- Converting DoubleSpace drives to DriveSpace Format
+
+DoubleSpace and DriveSpace are similar, but they store compressed data in different formats. You can convert your DoubleSpace drives to DriveSpace format by choosing the Convert command from the Tools menu.
+
+The first time you use the Convert command, %N converts all mounted DoubleSpace drives to DriveSpace format, and then converts your system to run DriveSpace instead of DoubleSpace.
+
+Once you have converted your system to DriveSpace, you can use the Convert command to convert any remaining unmounted DoubleSpace drives or DoubleSpace floppy disks to DriveSpace.
+
+Note: While running DriveSpace, you will still be able to mount 
+      unconverted DoubleSpace floppy disks for read-only access; 
+      however, to write to a DoubleSpace floppy disk, you must
+      first convert it to DriveSpace. DriveSpace does not
+      automatically mount DoubleSpace floppy disks; to mount a
+      DoubleSpace floppy disk, choose Mount from the Drive menu.
+
+@@!144!@
+ Help -- Error
+
+DriveSpace could not find one of the files it needs in order to read DoubleSpace drives.
+
+To read DoubleSpace drives, the following files must be in the directory that contains your MS-DOS files:
+
+     DRVSPACE.BIN
+     DRVSPACE.MR1
+
+@@!145!@
+ Help -- Error
+
+DriveSpace could not mount this volume file because it was created by using DoubleSpace.
+
+DriveSpace and DoubleSpace use different formats to store compressed data. To mount this volume file, you must first convert it to DriveSpace format. 
+
+To convert this volume file to DriveSpace format, choose the Convert DoubleSpace command from the Tools menu.  Once the volume is converted to DriveSpace format, you will be able to 
+mount and use the volume file as you would any other DriveSpace drive.
+
+If you don't want to convert this volume file, you can still mount it for read-only access. This means that you will be able to read the files on that drive, but will not be able to change the data on it.) 
+
+Note: To mount a DoubleSpace volume file without converting it, the
+      Read DoubleSpace Drives option must be enabled. To enable this
+      option, choose the Options command from the Tools menu, and
+      then check the Read DoubleSpace Drives option. This option uses
+      an additional 5K of memory.
+
+@@!146!@
+ Help -- Error
+
+DoubleSpace could not mount this volume file because it was created by using DriveSpace.
+
+DriveSpace and DoubleSpace use different formats to store compressed data. 
+
+@@!147!@
+ Help -- DriveSpace
+
+Your computer is still running DoubleSpace. To work with your compressed drives, use DBLSPACE.EXE.
+
+For information about converting your computer to DriveSpace, see the README.TXT file, which is located in the directory that contains your MS-DOS files.
+
+@@!148!@
+ Help -- Cannot Convert
+
+%N converts DoubleSpace drives to DriveSpace format by reading DoubleSpace compressed data, and then storing that data using DriveSpace compression.
+
+The ability to read DoubleSpace compressed data is optional, since this feature uses about 14K of memory. Currently, this option is disabled. 
+
+To enable the ability to read DoubleSpace drives, choose the Options command from the Tools menu, and then check the Read DoubleSpace Drives option.
+
+@@!149!@
+ Help -- Error
+
+%N cannot format the selected drive because it is a DoubleSpace drive.
+
+Note: The easiest way to remove all the data on this drive
+      is to select the drive and then choose the Delete
+      command from the Drive menu. This deletes both the
+      drive and the data it contains.
+
+@@!150!@
+ Help -- Error
+
+DriveSpace cannot mount the specified drive because it is a DoubleSpace drive. For more information, see the README.TXT file.
+
+@@!137!@
+ Help -- Caution
+
+%N runs the ScanDisk program to check your drive for errors. Because you stopped ScanDisk before it could complete its basic tests, there is no way for %N to tell which parts of your drive are reliable and which, if any, are not. Therefore, %N cannot continue.
+
+ScanDisk takes much longer to perform a surface scan than it does to check other areas of a drive. Although it is much safer to allow ScanDisk to check all areas of your drive, if you are in a hurry, you can convert your drives without first completing a surface scan. To bypass the surface scan, wait until ScanDisk begins the surface scan, and then choose the Next Drive button (or Exit, if there is no Next Drive button). When %N displays a Caution dialog, choose Yes. 
+
+Caution: If you skip the surface scan, %N might try to use an 
+         unreliable area of your drive, and you might lose data.
+
+@@!152!@
+ HELP -- DriveSpace
+
+You typed DBLSPACE to install DoubleSpace on your system.
+
+Some previous versions of MS-DOS included DoubleSpace disk compression. MS-DOS 6.22 includes DriveSpace compression, which appears similar to DoubleSpace but which stores compressed data in a different format. 
+
+Although you can still install and use DoubleSpace with MS-DOS 6.22, DriveSpace is now the recommended method of disk compression.
+
+To continue installing DoubleSpace, choose Yes. If you do, when you are finished, type HELP DBLSPACE for information about running DoubleSpace with MS-DOS 6.22.
+
+To install DriveSpace instead, choose No, and then type DRVSPACE at the command prompt.
+
+@@!HL96!15!@
+ Help -- Options 
+
+You can set options that determine how %N reserves memory for use when mounting additional drives. To do this, choose the Options command from the Tools menu. The Options dialog box appears, and contains the following options:
+
+Last drive reserved for %N's use
+   To mount a compressed drive, a drive letter must be available
+   to assign to %N.  %N reserves some drive
+   letters based on the number of compressed drives you have.
+   If you run out of drive letters while compressing or mounting a 
+   drive, increase this number. Each drive letter uses 96 bytes of 
+   memory; to conserve memory, decrease this number. 
+
+Number of removable-media drives
+   In general, you should set this field to the number of 
+   removable-media drives you have. (Floppy-disk drives, Bernoulli 
+   drives and Flash memory cards are all removable-media drives.) 
+   You might want to specify fewer removable-media drives than you 
+   actually have if you do not plan to compress the data in those 
+   drives and you want to conserve memory.
+
+@@!HL72!@
+ HELP -- An Overview of %N
+
+%N is a disk-compression program. Disk compression makes it possible to store more data on a disk than you ordinarily could. Typically, you can store twice as much data on a compressed disk as you could on a disk that is not compressed.
+
+To set up %N on your computer, you (or someone else) typed %S at the command prompt. The %N Setup program configured MS-DOS to provide access to compressed drives, and then compressed the specified hard disk drive.
+
+Now that your computer contains one or more compressed drives, you can use this program -- the %N maintenance program -- to maintain your existing compressed drives or to create new compressed drives.
+
+You can also maintain or create compressed drives by typing %N commands at the MS-DOS command prompt. For more information, type HELP %S at the command prompt.
+
+Related Topics
+--------------
+"Using %N Help"~HL99~
+"Using %N Menus"~HL73~
+"Using the Main %N Screen"~HL97~
+"Using %N With Floppy Disks"~HL89~
+"Understanding %N Concepts"~HL81~
+
+@@!HL74!@
+ Help -- Using the %S.INI File
+
+The %S.INI file is a text file with the Read-Only and Hidden attributes. %N stores this file in the root directory of your startup drive. The %S.INI file contains variables that %N uses when your computer starts. 
+
+Although it is possible to change these variables yourself, you should do so only if you understand what they do and what the results might be. Otherwise, your computer might not start properly or you might lose data.
+
+To change the %S.INI file, you use the %S command with the appropriate switch (for more information, type HELP %S.INI at the command prompt). Before changing the %S.INI file, you should make a backup copy of the file.
+
+@@!HL75!@
+ Help -- Understanding %N and Memory
+
+%S.BIN Provides Access to Compressed Drives
+-------------------------------------------------
+When you start your computer, MS-DOS loads %S.BIN into memory. %S.BIN is the part of MS-DOS that provides access to your compressed drives. It requires about 50K of memory. MS-DOS loads %S.BIN along with other operating system functions, before carrying out the commands in your CONFIG.SYS and AUTOEXEC.BAT files. 
+
+%S.SYS Determines the Memory Location of %S.BIN
+-----------------------------------------------------------
+Initially, %S.BIN loads at the top of conventional memory. By default, MS-DOS moves %S.BIN to the bottom of conventional memory after carrying out the commands in the CONFIG.SYS file.
+
+You can use the %S.SYS device driver to move %S.BIN to a specific area of memory. (The %S.SYS device driver does not provide access to compressed drives; it simply determines the final location in memory of %S.BIN.)
+
+There are two reasons you might want to use %S.SYS to move %S.BIN from the top of conventional memory: 
+
+* To avoid conflicts with programs that require access to the 
+  top of conventional memory. A few programs that are started
+  from the CONFIG.SYS file require access to the top of 
+  conventional memory and do not work properly if %S.BIN 
+  is located there. To avoid any possible conflicts with such 
+  programs, %N Setup automatically adds a command 
+  for %S.SYS to your CONFIG.SYS file.
+
+* To free conventional memory. If your computer has extended 
+  memory and is configured properly, %S.SYS can move part
+  of %S.BIN to the HMA and part of it to the upper memory
+  area.
+
+For more information about %S.SYS and %S.BIN, type HELP %S.SYS at the MS-DOS command prompt.
+
+Conserving Memory While Using %N
+-----------------------------------------
+To conserve memory, you can adjust the following settings:
+
+  * If you don't plan to compress all your removable-media 
+    drives, you can save memory by specifying a lower number of 
+    removable-media drives in the Options dialog (choose Options 
+    from the Tools menu). %N reserves 96 bytes of memory 
+    for each removable-media drive.
+
+  * If you don't use compressed floppy disks or other removable
+    media, you can save about 4K of memory by preventing 
+    %N from mounting removable media automatically.
+    To do this, choose Options from the Tools menu, and then 
+    turn off the Enable Automounting check box in the Options 
+    dialog.
+
+* -------------------------------------------------------------------
+6. Menu-selected or menu-alted topic
+   Pressing F1 on most menu items displays help on that item.
+---------------------------------------------------------------------*/
+@@!HL73!19!20!21!16!17!22!@
+ HELP --  Using %N Menus
+
+%N lists commands in menus at the top of the main %N screen. 
+
+To select a menu command by using the keyboard:
+
+1. Display the menu you want by pressing the ALT key and the first 
+   letter of the menu name. 
+2. Press the UP ARROW or DOWN ARROW key until the command you want
+   is highlighted.
+3. Press the ENTER key to select the highlighted command.
+
+To select a menu command by using the mouse:
+
+1. Click the name of the menu that contains the command you want.
+2. Click the name of the command. 
+
+For more information about %N menu commands, choose one of the following topics:
+
+  Drive Menu
+    "Info command"~HL91~
+    "Change Size command"~HL78~
+    "Change Ratio command"~HL77~
+    "Mount command"~HL95~
+    "Unmount command"~HL98~
+    "Format command"~HL90~
+    "Delete command"~HL86~
+    "Exit command"~HL88~
+
+  Compress Menu
+    "Existing Drive command"~HL80~
+    "Create New Drive command"~HL83~
+
+  Tools Menu
+    "Defragment command"~HL85~
+    "Uncompress command"~HLAA~
+    "Chkdsk command"~HL79~
+    "Convert DoubleSpace command"~HLAB~
+    "Options command"~HL96~
+
+The Help menu contains the Contents and Index commands, which display the Help Contents and Help Index screens. It also contains the About command, which displays the version number of %N. For more information about using Help, choose the Help button at the bottom of the screen.
+
+
+
+
+@@!HL81!@
+ HELP --  Understanding %N Concepts and Terms
+
+To learn more about %N concepts and terms, choose one of the following topics:
+
+  "Compressed Volume File"~HL84~
+  "Estimated Compression Ratio"~HL87~
+  "Host Drive"~HL92~
+  "Working With Compressed Drives"~HL76~
+  "Working With Floppy Disks"~HL89~
+
+@@!IDX!@
+ Help Index
+
+To display a help topic, double-click the topic name. Or, select the topic name and then press ENTER. For more information about using %N Help, press F1.
+
+Using the %N Program
+-----------------------------
+"An Overview of the %N Program"~HL72~
+"Using %N Menus"~HL73~
+"Using the Main %N Screen"~HL97~
+"Using %N Help"~HL99~
+
+Working With Compressed Drives
+------------------------------
+"Changing a Drive's Estimated Compression Ratio"~HL77~
+"Changing the Size of a Compressed Drive"~HL78~
+"Creating a Compressed Drive by Compressing Free Space"~HL83~
+"Defragmenting a Compressed Drive"~HL85~
+"Deleting a Compressed Drive"~HL86~
+"Displaying Information About a Compressed Drive"~HL91~
+"Formatting a Compressed Drive"~HL90~
+"Listing all the Drives on Your Computer"~HL93~
+"Mounting a Compressed Drive"~HL95~
+"Unmounting a Compressed Drive"~HL98~
+"Uncompressing a Compressed Drive"~HLAA~
+"Working with Compressed Drives"~HL76~
+   
+Adding More Compressed Drives
+-----------------------------
+"Compressing an Existing Drive"~HL80~
+"Creating a New Compressed Drive"~HL83~
+"Compressing a Floppy Disk"~HL89~
+
+Other Topics
+------------
+"Understanding %N Concepts And Terms"~HL81~
+"Using the %S.INI File"~HL74~
+"Using %N with Floppy Disks"~HL89~
+"Changing %N Options"~HL96~
+"Understanding %N and Memory"~HL75~
+
+For additional information about %N, see the Freeing Disk Space chapter in the MS-DOS User's Guide or the %N section of the README.TXT file.
+
+@@!hlNOTYET!@
+ Not Yet Written
+
+This topic is not yet written.
+
+@@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

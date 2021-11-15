@@ -27,7 +27,7 @@ export class Format
 	async getMeta(inputFile)
 	{
 		const meta = {};
-		Object.assign(meta, this.family.getMeta ? this.family.getMeta(inputFile, this) || {} : {});
+		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this)) || {} : {});
 		if(this.meta)
 			Object.assign(meta, (await this.meta(inputFile)) || {});
 		return meta;

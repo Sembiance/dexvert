@@ -1,0 +1,552 @@
+0
+    PBSETUP has detected the following floppy disk drives
+    attached to your system:
+  
+          A     B
+    
+    During installation, you may be required to insert your
+    original disks to retrieve additional information required
+    by MS Paintbrush.
+   
+      * Type the letter of the floppy disk drive you would
+        like to use for this purpose.
+      * Then press Enter.
+     
+      ÚÄÄÄÄ¿
+      ³    ³
+      ÀÄÄÄÄÙ
+101
+    Before you set up MS Paintbrush, you must install the
+    hardware and software for your Microsoft Mouse.
+  
+    For mouse hardware installation instructions, see "Connecting the
+    Mouse Hardware", in the Microsoft Mouse User's Guide.
+102
+    Before you set up MS Paintbrush, you must install the
+    software for your Microsoft Mouse, using the Mouse Setup
+    disk.
+    
+    For mouse software installation instructions, "Installing the Mouse
+    Software", in the Microsoft Mouse User's Guide.
+2
+    You can run MS Paintbrush from your hard disk or from 
+    two floppy diskettes.
+ 
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Set up hard disk                     H   ³
+                     ³ Set up Paintbrush Program Diskettes  F   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+301
+             WELCOME TO PBSETUP (MS PAINTBRUSH SETUP)
+ 
+    PBSETUP provides step-by-step instructions for setting up MS
+    Paintbrush to run on your computer.  PBSETUP will help you:
+ 
+    -Set up Paintbrush to run from your hard disk or from
+      two floppy disks.
+    -Create a directory on your hard disk for the MS
+      Paintbrush files.
+    -Copy the Paintbrush files to the hard disk.
+    -Tell Paintbrush what kind of display adapter and printer
+      you have.
+ 
+302
+             WELCOME TO PBSETUP (MS PAINTBRUSH SETUP)
+ 
+    PBSETUP provides step-by-step instructions for setting up MS
+    Paintbrush to run on your computer.  PBSETUP will help you:
+ 
+    -Install MS Paintbrush on diskette(s)
+    -Select your display adapter.
+    -Select your printer and printer port.
+   
+    Note:   To install MS Paintbrush on a floppy disk system,
+    PBSETUP will need 1 or 2 blank formatted diskettes.  If you
+    don't have blank formatted disk(s), Quit PBSETUP now.  See your
+    DOS documentation for directions on formatting diskettes.
+   
+4
+    PBSETUP has detected the following hard disks attached to your
+    system:
+    
+%s
+    
+    You can install MS Paintbrush on only one of the hard disks.
+    
+    *Type the letter of the disk where you would like to install
+     MS Paintbrush.
+    *Then press Enter.
+     
+      ÚÄÄÄÄ¿
+      ³    ³
+      ÀÄÄÄÄÙ
+    
+5
+                         PBSETUP MAIN MENU
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ TO                                                  PRESS ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³ Copy the MS Paintbrush program to the hard disk       D   ³
+    ³ Select the display adapter                            A   ³
+    ³ Select the printer                                    R   ³
+    ³ Specify printer port                                  S   ³
+    ³ Quit PBSETUP                                          Q   ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    
+    If you're using PBSETUP for the first time:  Do all these, in the
+    order shown above.  (The program will automatically follow
+    this order if you press C for "Continue" on submenus.)
+    
+    If you have already copied Paintbrush to the hard disk:  You 
+    may proceed directly to selecting the display or printer.
+    After making a new selection, you may quit at any time to
+    accept the new configuration.
+501
+                         PBSETUP MAIN MENU
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ TO                                                  PRESS ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³ Copy the MS Paintbrush program to floppy disk(s)	    D	³
+    ³ Select the display adapter                            A   ³
+    ³ Select the printer                                    R   ³
+    ³ Specify printer port                                  S   ³
+    ³ Quit PBSETUP                                          Q   ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+    
+    If you're using PBSETUP for the first time, do all these, in the
+    order shown above.  (The program will automatically follow
+    this order if you press C for "Continue" on submenus.)
+    
+    If you have already copied Paintbrush to floppy disk(s):  You
+    may proceed directly to selecting the display or printer.
+    After making a new selection, you may quit at any time to
+    accept the new configuration.
+
+6
+    PBSETUP will copy the MS Paintbrush files to a
+    directory called %sPBRUSH or to a directory you specify.
+    If the directory does not exist, PBSETUP will create it for
+    you.  Please note that it's a good idea to put the files
+    into a directory other than the root (%s) directory.
+    
+    *To accept %sPBRUSH as the directory, press the Enter key.
+    
+    *To specify a different directory:
+    
+       -Use the Backspace Key to delete characters from the
+         directory name below.  (You cannot backspace over the
+         %s.)
+       -Type the new directory name (for example, PAINT) after
+         the %s.
+       -Press the Enter key.
+7
+    You have chosen the %s directory.
+    
+    *If this is OK, press C to continue.
+    
+    *If not, press D to go back and change the directory name.
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Continue                             C   ³
+                     ³ Go back and change directory name    D   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+701
+    The directory %s cannot be created.
+    
+    *You must change the directory name to one that can be created
+     before proceeding.
+    
+    *Or, exit the program and fix the problem using DOS commands.
+     Then rerun PBSETUP.
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Go back and change directory name    D   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+8
+    There is an earlier version of Paintbrush stored in the
+    directory you've specified.  Choose one option below.
+    
+    *To keep the old version and install Paintbrush in a new
+     directory:
+    
+       -Press D to go back and change the directory name (this
+         will restart the Paintbrush copying procedure).
+       -Enter a different name for the directory.
+    
+    *To remove the old version and install Paintbrush in that
+     directory:
+    
+       -Quit PBSETUP.
+       -Delete the old Paintbrush files.
+       -Run PBSETUP again.
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Go back and change directory name    D   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+81
+    If you have 360Kbyte (5.25 inch, low capacity) diskettes
+    PBSETUP will need two (2) blank floppy diskettes.  If you
+    have 720Kbyte (3.5 inch) or greater capacity diskettes PBSETUP
+    will need only one blank diskette.	These are the disk(s) from
+    which Paintbrush will actually run.
+    
+    The diskette(s) must be formatted and empty.
+    
+    Label the diskettes "Run Disk A" and, if neccessary, "Run Disk B"
+
+    If you are installing MS Paintbrush on one diskette only then use that
+    diskette in response to all PBSETUP requests for Run Disk A and Run
+    Disk B.
+  
+
+82
+    The copying of MS Paintbrush to floppy diskette(s) is complete.
+    
+    You must now continue to select the display adapter, printer, and
+    printer port to be used.
+    
+9
+    PBSETUP is ready to copy MS Paintbrush to your hard disk to
+    the directory you just specified.
+    
+    Make sure the Paintbrush Setup Disk is in the drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                   Paintbrush Setup Disk
+    
+901
+    PBSETUP now needs files from the Program disk.  Please put
+    the Program disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Program Disk
+    
+902
+    PBSETUP now needs files from the Utility disk.  Please put
+    the Utility disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                   Paintbrush Utility Disk
+    
+903
+    PBSETUP now needs files from the Font disk.  Please put
+    the Font disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                    Paintbrush Font Disk
+    
+905
+    PBSETUP is ready to copy the rest of MS Paintbrush to Run Disk A.
+    
+    Please put Run Disk A in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Run Disk A
+    
+906
+    PBSETUP is now ready to copy part of MS Paintbrush
+    to Run Disk B.
+    
+    Please put Run Disk B in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Run Disk B
+    
+10
+    Please put the Paintbrush Setup Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                   Paintbrush Setup Disk
+    
+1011
+    Please put the Program Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Program Disk
+    
+1012
+    Please put the Utility Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Utility Disk
+    
+1013
+    Please put the Font Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                          Font Disk
+    
+1015
+    Please put Run Disk A in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Run Disk A
+    
+1016
+    Please put Run Disk B in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Run Disk B
+    
+1017
+    PBSETUP needs a few last files from the Utility Disk.
+    
+    Please put the Utility Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Utility Disk
+    
+11
+    
+    
+    . . . copy complete.
+    
+    If this is the first time you've used PBSETUP, you must
+    press "C" to continue, in order to specify an adapter,
+    printer, and printer port; otherwise PBSETUP will be unable
+    to complete the installation.
+  
+1101
+    PBSETUP is now copying the Paintbrush Setup files
+    to the hard disk. . .
+1102
+    PBSETUP is now copying MS Paintbrush to the hard disk. . .
+1103
+    PBSETUP is now copying the Utility files to the hard disk. . .
+1104
+    PBSETUP is now copying the Font files to the hard disk. . .
+1106
+    PBSETUP is now copying files to Run Disk A...
+1107
+    PBSETUP is now copying files to Run Disk B...
+12
+    This procedure records information about the display adapter
+    you'll be using with MS Paintbrush.  Some adapters have more
+    than one display mode (resolution and colors) listed, so be
+    sure to make the correct choice for your system configuration.
+    
+14
+    Follow these     -Find your display adapter/display         ÚÄÄÄÄÄ¿
+    steps:            mode on this list.                        ³     ³
+                     -Type the number for your adapter.         ÀÄÄÄÄÄÙ
+                     -Press the Enter key.
+15
+    You've chosen the %s.
+    
+    *If this is OK, press C to continue.
+    
+    *If not, press A to go back and change the adapter
+    information.
+    
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Continue                             C   ³
+                     ³ Go back to change adapter            A   ³
+                     ³ Return to main menu                  M   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+1501
+    PBSETUP is now ready to record your adapter information.
+    
+    Make sure the Setup disk is in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³   %s  ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Setup disk
+    
+1502
+    The Setup disk is not in drive %s.
+    
+    Please put the Setup Disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Setup Disk
+    
+1601
+    PBSETUP is now recording your display adapter information. . .
+1602
+    
+    
+    
+    
+    
+    . . .display adapter information recorded.
+    
+    
+17
+    This procedure records information about your printer so
+    that MS Paintbrush can print your graphics correctly.
+    
+    Note that the list of printers is several screens long.
+    If your system includes a printer, be sure to make
+    the correct choice for your system configuration.
+    
+18
+    Follow these     -Find your printer on this                 ÚÄÄÄÄÄ¿
+    steps:            list (press N for more listings).         ³     ³
+                     -Type the number for your printer.         ÀÄÄÄÄÄÙ
+                     -Press the Enter key.
+20
+    You've chosen the %s.
+    
+    *If this is OK, press C to continue.
+    
+    *If not, press R to go back and change the printer
+    information.
+    
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Continue                             C   ³
+                     ³ Go back to change printer            R   ³
+                     ³ Return to main menu                  M   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+21
+    PBSETUP is now ready to record your printer information.
+    
+    Make sure the Setup disk is in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³   %s  ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                         Setup disk
+    
+22
+    The Setup disk is not in the drive.  Please put this
+    disk in drive %s.
+    
+                ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+                ³  %s   ÄÄÄÄÄÛÛÄÄÄÄÄÄ       ³
+                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        Setup disk
+    
+2301
+    PBSETUP is now recording your printer information. . .
+2302
+    
+    
+    
+    
+    
+    . . .printer information recorded.
+    
+    Note:  If you are using a serial printer with MS Paintbrush,
+    you do not need to use the DOS MODE command to redirect
+    output to the printer.  However, you must set the baud rate
+    appropriately for the printer you are using.
+    
+24
+    Paintbrush needs information about the output port your
+    printer will use.  Parallel printer ports can be designated
+    as LPT1, LPT2, or LPT3; LPT1 is the most common.  Serial
+    printer ports can be designated as COM1 or COM2; COM1 is the
+    most common.
+    
+    For more information about output ports, see your DOS
+    manual.  To determine whether you have a parallel or serial
+    printer, check your printer manual.
+    
+26
+    Follow these     -From the list below, find the             ÚÄÄÄÄÄ¿
+    steps:            printer port that you want.               ³     ³
+                     -Type the number (1-5) that                ÀÄÄÄÄÄÙ
+                      corresponds to that port.
+                     -Press the Enter key.
+    
+      1.  LPT1
+      2.  LPT2
+      3.  LPT3
+      4.  COM1
+      5.  COM2
+  
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+27
+    You've chosen printer port %s.
+    
+    *If this is OK, press C to continue.
+    
+    *If not, press S to go back and change the printer
+    information.
+    
+    
+    When you're      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ready:           ³ TO                                 PRESS ³
+                     ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+                     ³ Continue                             C   ³
+                     ³ Go back to change printer port       S   ³
+                     ³ Return to main menu                  M   ³
+                     ³ Quit                                 Q   ³
+                     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+28
+    PBSETUP is finishing up the installation...
+29
+    PBSETUP has recorded the devices and settings you specified.
+    Please put away your original disks.
+  
+    If you wish to change any of the devices you've set up you can run
+    PBSETUP again and change those settings.  PBSETUP has been copied to
+    your target disk, and directory and must be run from there to change
+    the settings.
+
+    To run PBSETUP or MS Paintbrush from floppy disks, you must insert
+    Run Disk A in drive A: and Run Disk B in drive B:.
+    
+    After exiting PBSETUP type PAINT to run MS Paintbrush.
+30
+    PBSETUP has not successfully completed the setup procedure.
+    Be sure to run PBSETUP again before attempting to start MS
+    Paintbrush.
+31
+    PBSETUP ended.  No settings were changed.
+99
+    
+

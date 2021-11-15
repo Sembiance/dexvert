@@ -1,0 +1,651 @@
+
+  SPUTTER Sound System v1.11 changes:
+
+        . Improved documentation with new Installation & User Guide sections.
+
+        . The SPUTTER Sound System is no longer limited in any way.  Now,
+          a shareware message is displayed when file playback is completed,
+          and a short delay will occur.  This message and delay is removed
+          when you register your copy.
+
+        . Added a new ROL file player described in detail below.
+
+        . Added a complete Text-to-Speech package described in detail below.
+
+        . Redesigned the File Manager interface using windows and
+          pull-down menus.
+
+        . Miscellaneous enhancements and bug fixes described below.
+
+  SPUTTER File Manager changes:
+
+        . Redesigned screens using windows & colors, and added pull-down
+          menus with on-screen help.
+
+        . Added information display box with files-marked, bytes-marked
+          counters, and state of toggle switches.
+
+        . Added menu line at top of screen, invoked with F10, or the
+          slash key.
+
+        . Added function key line at bottom of screen with new functions.
+          (All the CTRL key functions remain the same).
+
+        . Added option to not pause after playback when output is enabled.
+          This may be toggled with F7.
+
+        . Added ability to re-read current directory with F3, or change
+          drive/directory with F4.  Hitting ENTER with the bar placed on a
+          directory will also change to that directory.
+
+        . After mark/unmark commands, bar is moved in same direction as last
+          up/down arrow command.
+
+        . Added ability perform an operation on a single file even when
+          multiple files are tagged.
+
+        . Added separate argument selection screens for SOUND, TEXT and ROL
+          files.
+
+        . Added preview window to display short excerpt of file contents.
+          This is only filled in if the bar remains stationary for at least
+          one second.  As long as you move the bar faster than this, no files
+          will be read and no disk accesses will occur.
+
+        . Added display of error messages, instead of just beeping on errors.
+
+        . Added enhanced support when running under DESQview.
+
+        . Now executes SPUT to play text files instead of TRAN.
+
+        . Now executes SPUTROL to play ROL files instead of PLAYROL.
+
+        . Fixed not finding player programs properly when located in the
+          root directory of a disk or ramdrive.
+
+        . Fixed not finding player programs properly when an environment
+          variable exists that contains the word 'PATH' in addition to the
+          normal PATH variable (ie. Brief's BPATH variable).
+
+        . Fixed playing a file with arguments sometimes scrolls to the end of
+          the file list and hangs.
+
+  SPUT Player Utility changes:
+
+        . Added ability to play digitized sound files on the AdLib card.
+          Only 6-bit sound is possible through this port, so the quality
+          of sound is not much better than the PC internal speaker, but
+          the volume will be much better.  The AdLib port is selected by
+          using the /P388-A switch.
+
+        . Added ability to determine the correct playback rate for Macintosh
+          sound files.  This only works if the Resource Fork was included
+          when the file was unarchived from the .SIT stuff-it file.
+          If the Resource Fork is missing, a warning message is displayed.
+
+        . Added the ability to resample sound files while playing them
+          instead of just when writing to disk with the /W switch.
+          The file statistics now display the new playback rate and
+          frequency instead of the old information.
+
+        . Added oversampling capability to all device driver routines
+          instead of just the internal speaker.
+
+        . The interrupt driver for the internal speaker (selected with /D3)
+          automatically adjusts the playback rate if the desired playback
+          rate is too fast for the current system.  This will prevent system
+          lock-ups which occur when trying to use too high a rate for that
+          machine.  A warning message is displayed, and the file can then be
+          resampled to the rate in the warning message.
+
+        . Effects of oversampling with /O switch are now preserved when
+          used with the /W switch to write a new sound file.
+
+        . Removed the SPUTPOR environment variable, since this function
+          is duplicated by the SPUTARG variable. (ie: SPUTARG=/Pnnn)
+
+        . Removed 30k byte limit on playback for unregistered users, and
+          added a shareware message and delay that is removed upon
+          registration.
+
+        . Added code to auto select the proper Sound Blaster driver depending
+          on file format and switches.  Formats 42,44,46 and the /SH shell
+          switch require the DMA driver (/D2).  Use of any switches
+          that modify the data (/A/H/L/O/RS/T) requires use of the DIRECT
+          driver (/D1).  You cannot use any of the switches that modify
+          the sound data with file formats 42,44,46 or the /SH switch.
+
+        . Added check for other Sputter utilities already running before
+          starting file playback, to eliminate playback of multiple sounds
+          occurring at the same time.
+
+        . File extensions are no longer required.  'SPUT file' will perform
+          a wildcard lookup on FILE.*.  This is most useful when defining
+          events for SPUTMON in the Event Definition file.
+
+        . Added complete Text-to-Speech package with the following features:
+
+                . Can digitize any combination of text & phonemes entered at
+                  the SPUT > prompt in interactive mode.
+                  Registered users can also digitize any text file.
+
+                . Text may include phoneme strings to correct pronounciation
+                  of words.  Smooth Talker phoneme strings are also recognized
+                  and supported.  The SPUT phoneme string for the word "vapor"
+                  is ~V-EY-P-ER (case is not important).  The SMOOTH TALKER
+                  phoneme string for the word "vapor" is <<~vEYpER>> (case is
+                  important).
+
+                . Text may also include special functions to fine tune some
+                  of the parameters that affect the digitized sound.
+                  ~An to vary the amplitude (volume),
+                  ~Rn to vary the rate (speed),
+                  ~Pn to determine how much punctuation to pronounce,
+                  ~Mn to set word or letter pronounciation.
+                  These functions can be used to change the inflection of
+                  syllables, words, phrases or the entire file.
+
+                . Interchangable voice files can be selected from the SPUT
+                  command line with the /V switch.  A temporary male voice
+                  has been provided with this release.  The next release
+                  will contain an improved male voice and a female voice.
+
+                . Interchangable dictionary files can be selected from the
+                  SPUT command line with the /DI switch.
+                  The exception dictionary can be used to correct SPUT's
+                  pronounciation of a word, expand abbreviations, or add
+                  inflections to any word or phrase.
+
+                . The /PH and /RU switches can be used to tell SPUT to
+                  display all phonemes & rule numbers used in forming
+                  digitized words.
+
+                . The /TI switch can be used to have SPUT digitize and say
+                  the current time.
+
+                . The /F10 file format switch has been added for text files.
+
+  SPUTMON Event Monitor changes:
+
+        . Removed 1 hour limitation for unregistered users.  The Event
+          Monitor is no longer limited in any way.
+
+        . Removed bells that played just before playing a sound file at
+          the DOS prompt.
+
+        . The event definition file can now be found anywhere in the Path.
+
+        . Cleaned up summary display so long lines will be truncated instead
+          of wrapping to the next line.
+
+        . Changed all PLAYROL references to now call SPUTROL.
+
+        . Changed all TRAN references to now call SPUT.
+
+        . Added check for other Sputter utilities already running before
+          starting a second player utility.  Retry bells will also be
+          suppressed when another player utility is already running.
+
+        . Added display of active timer count to summary line.
+
+        . Fixed incorrect counters that sometimes caused files to be played
+          minutes late, or prevented playback from the DOS prompt.
+
+        . Fixed not passing environment to SPUT when started via the #C
+          function. This caused SPUT to not find it's environment variables.
+
+        . Fixed BELL character sometimes hanging system when no BELL event
+          was defined in event definition file.
+
+        . Fixed presence of a T event in event file causing error messages
+          for non-existent line numbers.
+
+        . Fixed not finding player programs properly when located in the
+          root directory of a disk or ramdrive.
+
+        . Fixed not finding player programs properly when an environment
+          variable exists that contains the word 'PATH' in addition to the
+          normal PATH variable (ie. Brief's BPATH variable).
+
+        . Fixed code to find DOS critical-error-flag to work with Compaq DOS.
+
+  SPUTROL ROL File Player (New!) with the following features:
+
+        . Automatically loads & unloads AdLib driver SOUND.COM
+          if not already loaded.  Useful when memory is a prime
+          consideration.
+
+        . Plays ANY song correctly even with a small AdLib sound buffer.
+
+        . Has random file selection capability.
+
+        . Allows user defined instrument substitutions with /IS.
+
+        . Attempts to pick a close match for missing instruments.
+
+        . Allows playback of any combination of voices with /V
+
+        . Can change tempo from command line with /T switch.
+
+        . Can change relative playback volume with /A switch.
+
+        . Allows continous or repeated playback with /C switch.
+
+        . Default directory can be set via the SROLDIR variable.
+
+        . Default switches can be set via the SROLARG variable.
+
+        . File extension is not required.  A default extension of
+          .* is assumed if missing, and a wildcard lookup is
+          performed.
+
+----------------------------------------------------------------------------
+  SPUTTER Sound System v1.10 changes:
+
+        SPUT Player Utility changes:
+
+        . Added support for the Sound Blaster DAC port in both direct
+          and DMA modes.  This means you can play ANY file format that
+          SPUT supports on a Sound Blaster card in either direct or
+          DMA mode.  It also means that SPUT can now handle all the
+          Creative Labs VOC file formats.
+
+        . Added /SH switch to shell to DOS while playing files on the
+          Sound Blaster in DMA mode.
+
+        . Added optional SPUTARG environment variable to setup permanent
+          switches for SPUT.  Particularily useful for specifying Sound
+          Blaster port and interrupt number (ie: SPUTARG=/p220s/ir7).
+
+        . Changed /D switch (dedicated) to /DE.
+
+        . Changed /Sn switch to /Dn (driver number).
+
+        . Changed /U switch to /RE (resampling rate).
+
+        . Fixed sometimes hanging while waiting for screen display to
+          complete before starting playback.
+
+        SPUTEM Event Monitor changes:
+
+        . Added type T timer events.  You can specify a date/time for the
+          alarm and a repeat, along with an incremental date/time so SPUTEM
+          will compute the next alarm setting.
+
+        . Added ability to playback .ROL files to the Sound Blaster FM port
+          and AdLib music card when an event occurs.
+          ** Currently, you must have an ROL file player named PLAYROL.EXE
+          in order to use this feature.  Support for the .ROL file format
+          will be incorporated into a future release of the SPUT Player
+          Utility.
+
+        . Added ability to play text to speech synthesis when an event occurs.
+          ** Currently, you must have a text to speech conversion program
+          named TRAN.EXE to use this feature.  Support for text to speech
+          synthesis will be incorporated into the next release of the SPUT
+          Player Utility.
+          ** Smooth Talker software by First Byte is also supported.
+
+        . Added ability to run ANY program or batch file when an event occurs.
+
+        . Added ability to perform playback in a separate DESQview window,
+          and the /W switch to enable & disable this feature.
+
+        . Added ability to start the DESQview player window in the background
+          or foreground, and the /G switch to control this feature.
+
+        . Added ability to initiate playback from the DOS prompt when an
+          event occurs, and /C switch to enable & disable the feature.
+
+        . Added use of custom fluttering bells to indicate error & retry
+          conditions instead of using the dull old system beep.
+
+        . Added optional number value to /B switch to set the frequency      
+          for playing bells on retries, or disable bells all together.
+
+        . Added ability to enter multiple switches on the command line.
+
+        . Added /M switch to allow events to trigger multiple playbacks.
+
+        . Fixed problem where ansi escape sequence for clear screen was
+          printed on the screen when ANSI.SYS wasn't loaded.
+
+        . Fixed just about every possible way of crashing the system that
+          existed.
+
+        . And a bunch of other minor enhancements.
+
+        SPUTTER File Manager changes:
+
+        . Added ability to differentiate between digitized sound files for
+          SPUT, text files for TRAN.EXE, and ROL files for PLAYROL, and invoke
+          the correct player program automatically.
+
+        . Added SPUTTRN environment variable to setup permanent switches
+          for TRAN.EXE.
+
+        . Changed the way the player tasks are started so it will work
+          in a networking environment.
+
+        . Setup screen colors instead of just using default colors, which
+          is just white on black if ANSI.SYS not loaded.
+
+        . Fixed wiping out menu & loosing startup directory on first PLAY
+          command.
+
+        . Fixed multiple PLAY commands with ARGUMENTS scrolling to the end
+          of the file list and hanging the system.
+
+------------------------------------------------------------------------------
+  SPUTTER Sound System v1.09 changes:
+
+        SPUT Player Utility changes:
+
+        . Added /U switch to indicate new playback rate to use while
+          rewriting the file with the /W switch.
+
+          I'm really excited about this new feature.  Now virtually ANY
+          sound file can be played on ANY speed machine.  If a file plays
+          too slowly, it means that the playback rate is too high for the
+          machine to handle.  Resampling the file with the /U switch will
+          allow you to lower the playback rate to something that your
+          machine can handle more easily.
+
+        . Added support for Sound Blaster .VOC 8-bit PCM format files.
+
+        . Added optional values 1 and 2 to /Q switch, to set desired
+          level of quiet.  /Q or /Q1 disables all output, /Q2 will print
+          error messages only.
+
+        . Fixed incorrect time calculation for non 8-bit file formats.
+
+        . Added trouble shooting section to documentation for SPUT.
+
+------------------------------------------------------------------------------
+  SPUTTER Sound System v1.08 changes:
+
+        Also, read CUSTOM.TXT for new reduced rates on custom digitized
+        sound files.
+
+        SPUT Player Utility changes:
+
+        . Added code to adjust system time of day after playback completed.
+        . Added format 21 for Digicorder 1-bit reverse CVSD format.
+        . Added format 31 for Voice Toolkit .VOI 1-bit format.
+        . Added /A switch to apply amplitude variations to sound files.
+          This actually increases the volume of sound files.
+        . Added /D switch for dedicated sound in a DESQview window.
+          By default, background tasks will now continue to run.
+        . Added /S switch to select an internal speaker driver.
+          Four different methods of driving the internal speaker are
+          available.  Each is appropriate in a different situation.
+        . Changed abort key from any key to the ESCAPE key only.
+          This allows aborting playback without disturbing type-ahead.
+        . Removed /X switch.  This has functionally been replaced by
+          the /S4 switch which uses the 8255 chip to drive the speaker.
+        . Numbered all error messages so that an error-number can be
+          returned to SPUTTER File Manager and SPUTEM Event Monitor.
+        . Changed all SPUT console output from INT21 to INT10 calls.
+          This prevents console output from crashing the system when
+          called from the Event Monitor SPUTEM with /Q disabled.
+        . Fixed crashing system when file was truncated because of
+          insufficient memory.  Too much of the file was being read.
+        . Fixed playback to internal speaker causing DESQview to crash.
+          This was caused by the interrupt method speaker driver (/S3).
+          Three more speaker drivers are now available when in DESQview.
+        . Fixed playback to internal speaker crashing slow systems.
+          This was caused by the interrupt method speaker driver. Three
+          other speaker drivers are now available for slower systems.
+        . Fixed "divide overflow" when rates >238 were selected.
+          Now all rates 1-255 are handled correctly.
+
+        SPUTEM Event Monitor changes:
+
+        . Added more specific error messages for definition file errors.
+        . Added trigger & error counter fields to event table.
+        . Added /S switch to display event table summary.
+        . Added /I switch to reinitialize event table & counters.
+        . Added /R switch to enable event playback retry.
+        . Added code to catch remaining bell events via INT10 & INT29.
+        . There were many different causes of system crashes in v1.07,
+          that either hung the system or printed "divide overflow".
+          Changes made to eliminate these problems were as follows:
+          - Added code to check available memory before asking DOS to
+            run the Player Utility SPUT.  There appears to be a bug
+            in the way DOS handles the case of insufficient memory.
+            The first failed attempt returns an error code properly,
+            but the second attempt hangs the system.
+          - Rewrote the INT08 and INT21 interrupt handlers.
+          - Added check for disk-I/O active before attempting playback.
+          - Added check for when called from DOS so we don't reenter.
+          - Switch to our own internal stack instead of using callers.
+          - Save & restore DOS extended error information.
+          - Save & restore PSP & DTA for current task before playback.
+          - Changed all SPUTEM console output from INT21 to INT10 calls.
+
+        SPUTTER File Manager changes:
+
+        . Fixed DELETE prompt overwriting marked file count & menu box.
+        . Added code to display error code from executed programs.
+
+-----------------------------------------------------------------------------
+  SPUTTER Sound System v1.07 changes:
+
+        . It's here!!  A new memory resident utility called SPUTEM
+          (SPUT Event Monitor) to allow you to attach sound files to
+          events on your PC.  You can define which events you want to
+          attach sound files to and what sound files should be played
+          when the event occurs.  The definitions are made in an ascii
+          file.  Events supported in this release are Program-execute,
+          File Open (read-only), File Create, File Rename, File Delete,
+          Beep, and a special event type to attach sound files to any 
+          INT13 or INT21 function.
+
+        SPUT Playback UTility Changes:
+
+        . Added /C switch for continous play.  Most useful when trying
+          to hear the sound quality of short sound clips.
+        . Fixed incorrect upper case hexadecimal command line parsing.
+
+        SPUTTER File Manager Changes:
+
+        . Added VIEW function to view files in ascii hex mode.
+        . Added display of Bytes-used at bottom of screen.
+        . Changed MARK-ALL function from ^A key to ^K key.
+        . Added ^A key for PLAY-ARGS function.
+        . Added ^Z key for SORT-SIZE function.
+        . Rearranged menu to group all sound related functions together.
+        . Fixed GREY+ and GREY- keys not working properly.
+        . Fixed file information messed up on screen after renaming a file.
+        . Fixed wiping out menu & exiting to root instead of starting
+          directory, the first time it was run.
+        . Fixed ^P prompting for arguments when it shouldn't.
+
+------------------------------------------------------------------------------
+  SPUTTER v1.06 changes:
+
+        . Added a new Point-and-Play full-screen interface with complete
+          file management capabillities.  From the File Manager, files
+          can be played, viewed in waveform, copied, renamed, moved and
+          deleted.  The directory can be viewed in name, extension, size
+          or date order.  The new File Manager module is named SPUTTER.
+
+        . Added a /I switch to SPUT, to display file information only
+          without actually playing the file.
+
+        . Added code to SPUT to pickup the playback rate from the header
+          record of Covox .VMF format files.
+
+        . Added code to SPUT to recognize ? on the command line as a plea
+          for help, and print the help screen.
+
+------------------------------------------------------------------------------
+  SPUTTER v1.05 changes:
+
+        . Added random file selection capability using wildcards within
+          filename.  I added this because I got tired of hearing the same
+          sounds every morning as my system booted up, and didn't feel
+          like constantly changing the batch files either.  Now my batch
+          files just say "SPUT *.*/q" and I hear a different file each time.
+
+        . Check for the case of the length of the sound data in the header
+          record being incorrect.  This only happens when the file has
+          somehow been truncated, but caused SPUTTER to play beyond it's
+          allocated memory.  Now a warning message will be printed.
+
+        . More documentation has been written, and a section for sources
+          of sound files has been added.
+        
+------------------------------------------------------------------------------
+  SPUTTER v1.04 changes:
+
+        . Added support for Covox 1-bit ADPCM format files and the
+          /F01 and /F81 switches.
+
+        . Added support for Covox 2-bit ADPCM format files and the
+          /F02 and /F82 switches.
+
+        . Added support for Covox 3-bit ADPCM format files and the
+          /F03 and /F83 switches.
+
+        . Added support for Covox 4-bit ADPCM format files and the
+          /F04 and /F84 switches.
+
+        . Pickup playback speed and file format from the header record
+          of Amiga 8SVX format files.
+
+        . Identify Amiga/Sonix files and pickup playback speed from the
+          header record.
+
+        . When a key is struck during playback, only flush a single
+          keystroke, instead of the entire keyboard buffer.
+
+        . Fixed Internal Speaker playback routine sometimes not detecting
+          end of file properly.
+
+        . Fixed time calculation of encoded files still not correct.
+
+------------------------------------------------------------------------------
+  SPUTTER v1.03 changes:
+
+        . Added support for 1-bit CVSD format files used by IBM.
+
+        . Added /F11 switch for CVSD format files.
+
+        . Added /W switch to redirect output to a disk file.
+
+        . Added /H switch for high-pass filtering (Differentiator)
+
+        . Added /L switch for low-pass filtering (Integrator)
+
+        . Fixed replaying first part of buffer for files over 65535 bytes.
+          (This problem was accidently re-introduced in v1.02)
+
+        . Fixed printing of Macintosh title hanging system.
+          (This problem was accidently introduced in v1.02)
+
+        . Fixed Macintosh title printing even with /Q switch.
+
+        . Fixed calculation of playback time for compressed files.
+
+        . Removed Missed Sample messages.  This was for debugging
+          only, and was inadvertently left in.
+
+------------------------------------------------------------------------------
+  SPUTTER v1.02 changes:
+
+        . Added support for silence encoding.  This is analagous to
+          repeat character encoding known as RLE and can save
+          a considerable amount of disk space without any noticable
+          difference in sound quality.  A soon to be released utility
+          will allow you to rewrite any sound file with silence encoding.
+
+          DEMO.V8S is an example of a silence encoded file.  You can play
+          it back with no switches for normal playback, or you can use
+          the /F8 switch to hear just the non-silent passages.  The little
+          cracks you'll hear with the /F8 switch are the places where silence
+          has been compressed into just a few bytes.         
+
+        . Added /F88 switch to support 8-bit PCM silence encoded files.
+
+        . Added /N switch to generate noise inplace of dead silence
+          when playing files with silence encoding.
+
+        . Added display of total bytes output, and number of silence
+          groups processed.
+
+        . Added SPUTPOR environment variable to change the default
+          output port without having to enter it on the command line.
+
+        . Added SPUTDIR environment variable to define a default
+          directory for sound files.  
+
+        . Added /Q switch to enable quiet mode, and not print any
+          text on the screen.
+
+        . Rewrote keyboard handling to be safer and more consistent.
+
+        . Implemented a temporary solution for the problem of hanging
+          when run under DESQview.  It is now safe to run SPUTTER in
+          DESQview.
+
+        . Set limits on oversampling to avoid system lock-ups.
+
+------------------------------------------------------------------------------
+  SPUTTER v1.01 Enhancements:
+
+        . Added /P switch to allow selection of output device.
+          (Internal Speaker, SpeechThing, VoiceMaster, SoundMaster)
+
+        . Added /T switch to invoke treble enhancement.
+
+        . Added /X switch to force SPUTTER to drive the Internal speaker
+          using the DAC routine or vice-versa.  This just produces
+          another variation of playback.
+          
+        . Changed /F values to allow for expansion of support for
+          additional file formats  (1->8  2->28  3->38).
+
+        . Just print a warning if file format is unrecognized, and continue
+          with playback anyway.
+
+        . Changed Macintosh oversample default from 2 to 1 just for
+          consistency.
+
+  SPUTTER v1.01 Bug Fixes:
+
+        . Fixed the playback time calculation when oversampling is used.
+
+        . Fixed incorrect parsing of hex port addresses.
+
+        . Fixed problem of reading too few bytes into memory for
+          files larger than 65535 bytes.  This caused garbage to play
+          in place of the end of the file.
+
+        . Fixed problem of playing files larger than 65535 bytes that
+          caused SPUTTER to play beyond the end of the buffer and then
+          hang the system.
+
+        . Fixed problem of overflowing buffer when reading a file into
+          a buffer that's been truncated because of insufficient memory.
+
+  SPUTTER v1.01 Known Bugs:
+
+        Yes there really are two known bugs.  The only reason I'm releasing
+        this version of SPUTTER with 2 known problems, is that there are
+        users waiting for fixes provided by this release.  
+
+        Both bugs are easily avoidable, but not so easily solvable.  Both
+        problems should be resolved in subsequent releases of SPUTTER.
+
+        Problem 1:  SPUTTER hangs the system when run in DESQview.  So
+                    don't run it in DESQview until this problem is fixed.
+
+        Problem 2:  When too high a rate or oversample value is selected
+                    the system hangs.  The limit seems to be around 220
+                    samples per second on a 20mhz PC, but may vary on
+                    other systems depending on CPU speed.  To help work
+                    around this for now, SPUTTER limits playback rate to
+                    215 samples-per-second.
+
+

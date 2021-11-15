@@ -1,0 +1,99 @@
+066010303050000132002006006010000
+11
+2#1
+F0110000001
+9[...........................................]0010
+àChagall Referenz   TIFF-Formate           17.9.93Ä
+
+   Da dasÑ TIFF (Tag Interchange File Format) Äein sehr
+   umfangreiches und flexibles Format ist, wird beim
+   Speichern eines TIFF-Bildes ein Dialog geîffnet,
+   in dem man wichtige Charakteristika des TIFF-Bildes
+   einstellen kann.
+
+   inderBoxÑ"Datenformat"Älegen Siefest, inwelcher
+Kompression(PopUp)undin welcher Reihenfolge die
+   Bildinformationen abgelegt werden. Diese Reihen-
+   folge variiert je nach Rechner oder genauer: je 
+   nach Prozessortyp. Verarbeitet man TIFF-Bilder 
+   nur auf ÑAtari- Äoder dem ÑApple-Macintosh-ÄComputern, 
+   so belÑût man es bei dem voreingestelltenÅ ÑMotorola-Ä
+   Format. Beim Austausch von TIFF-Bildern mitÅ ÑMS-DOS-Ä
+   kompatiblen ÑPCs Ämit ÑIntel-Prozessor Äkann es erfor-
+   derlich sein, das ÑIntel-ÄFormat zu wÑhlen. 
+
+   Sie sollten jedoch zunÑchst ausprobieren, ob die 
+   entsprechende PC-Applikation vielleicht doch das 
+   Motorola-Format versteht.
+
+   Die ÑKomprimierungsart Äentscheidet darÅber, ob das
+Bild inÅ Ñunkomprimierter ÄForm oderÖ ÑRLE-Ö Äbzw. ÑLZW-Ä
+   komprimiert abgelegt werden soll. Unkomprimierte 
+   Bilder kînnen von praktisch jeder TIFF-verarbeitenden
+   Applikation gelesen werden, beanspruchen jedoch mehr
+Speicherplatz. LZW-komprimierte TIFF-Bilder sind
+deutlich kompakter und auch in den meisten Appli-
+kationen lesbar. Die RLE-Komprimierung ist eher fÅr
+SpezialfÑlle gedacht, in denen dieses Komprimierungs-
+verfahren bessere Ergebnisse als LZW liefert.Leider
+sinddieKomprimierungsartenselbstaufgleichen
+Plattformennichtkompatibel,sodaûesratsamer-
+scheint,dieDatenumkomprimiertzuspeichernund
+dannmiteinemFreeware-Packerzupacken,wennman
+Datentransportierenwill.
+
+ DerPunktÑInvertieren Äsorgt dafÅr, daû alle Werte
+in invertierter Form gespeichert werden, was einige
+wenige Programme benîtigen, um TIFF-Bilder korrekt
+lesen zu kînnen.
+
+   InderBoxÑ"Bildtyp"ÄlegenSie fest, welche TIFF-
+Variante erzeugt werden soll: Hier ist in der Regel
+jenes Format voreingestellt, das fÅr das zu sichernde
+Bild am sinnvollsten erscheint.
+
+ImoberstenPoPuperreichenSiedieverschiedenen
+Typen:
+
+-ÑMonochromÄspeicherteinreinesS/W-Bild
+
+Ä   - ÑGraubild Äsichert ein Halbtonbild mit 256 Graustufen.
+
+   -Å ÑREPRO ST Äist ein Spezialformat, das benutzt wird, 
+     um Halbton-Bilder so im TIFF-Format speichern zu 
+     kînnen, daû sie auch von Repro Studio geladen werden
+     kînnen.
+
+   -Ö 256-Farben Äbewirkt das Erzeugen eines Farbbildes
+     mit einer Palette von 256 Farben. Dies ist ein 
+     speichersparendes Verfahren, das sich fÅr bestimmte 
+     Anwendungszwecke eignet, in der Regel jedoch einen 
+     Verlust an BildqualitÑt mit sich bringt. Mîchten 
+     Sie Bilder nur fÅr PrÑsentationen auf dem Computer 
+     selbst nutzen, so sind 256 Farben eigentlich immer 
+     ausreichend. Auch solche Bilder, die nur wenige 
+     Farben oder aber viele Farben mit groûen Farb-
+     sprÅngen enthalten, verlieren nur wenig an QualitÑt, 
+     sodaû sich die Verwendung dieses speichersparenden 
+     Formates anbietet.DashierverwendeteÖÑRasterÄkînnen
+SieindemÑunterenPopUpÄauswÑhlen.
+
+   -Å ÑRGB TrueColor Äist das Standardformat fÅr Farbbilder
+     mit 24 Bit Farbtiefe.
+
+   - ÑCMYK Ä(TIFF 6.0) ist fÅr Farbbilder anwendbar und
+     speichert das Bild in farbseparierter Fassung.
+     Zur Separation werden Separationskurven in einem
+     standardisierten Format verwandt, die direkt in
+     diesem Dialog geladen werden kînnen (nurCMYK-Version).
+
+   - ÑLUT mitspeichern Äermîglicht es, die in dem ›LUT-Diagramm›..\MENUE\TOOLBOX\SPECIAL\LUT›
+     eingestellten Werte mit abzuspeichern. Da einige Pro-
+grammedies unsauber interpretieren, sollte man erst
+einmaltesten, ob das Programm, in welchem die Datei
+wiederimportiert wird, die Kurven auch korrekt
+interpretiert
+     
+KanneinBilduntermehrerenTypenabgespeichertwerden,
+sokînnenauchmehrereimPopUpangewÑhltwerden.
+

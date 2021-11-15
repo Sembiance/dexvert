@@ -6,6 +6,7 @@ import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
+import {runDOS} from "./dosUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*2;
 
@@ -27,7 +28,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "amigappc", "gentoo", "win2k", "winxp"]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", "amigappc", "gentoo", "win2k", "winxp"]},
 
 			// meta
 			gentooPackage  : {types : ["string", Array]},
@@ -45,8 +46,10 @@ export class Program
 			chain     : {type : "string"},
 			diskQuota : {type : "number", range : [1]},
 			outExt    : {types : ["function", "string"]},
+			dosData   : {type : "function", length : [0, 1]},
 			exec      : {type : "function", length : 1},
 			args      : {type : "function", length : 1},
+			verify    : {type : "function", length : [0, 2]},
 			pre       : {type : "function", length : 1},
 			post      : {type : "function", length : 1}
 		});
@@ -77,7 +80,13 @@ export class Program
 		if(this.pre)
 			await this.pre(r);
 
-		if(this.bin)
+		if(this.exec)
+		{
+			// run arbitrary javascript code
+			xu.log3`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
+			await this.exec(r);
+		}
+		else if(this.loc==="local")
 		{
 			// run a program on disk
 			r.bin = this.bin;
@@ -90,15 +99,18 @@ export class Program
 			if(this.runOptions)
 				Object.assign(r.runOptions, this.runOptions);
 				
-			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${r.runOptions}`;
+			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${xu.inspect(r.runOptions).squeeze()}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
-		else if(this.exec)
+		else if(this.loc==="dos")
 		{
-			// run arbitrary javascript code
-			xu.log3`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
-			await this.exec(r);
+			r.dosData = {root : f.root, cmd : this.bin};
+			r.dosData.args = await this.args(r);
+			if(this.dosData)
+				Object.assign(r.dosData, await this.dosData(r));
+
+			r.status = await runDOS(r.dosData);
 		}
 
 		if(f.outDir)
@@ -116,7 +128,7 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
 
 			// now find any new files on disk in the output dir that we don't yet
-			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.input || [])].map(v => v.absolute)))
+			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute)))
 			{
 				// if the new file is identical to our input file, delete it
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
@@ -126,8 +138,18 @@ export class Program
 					continue;
 				}
 
+				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
+
+				// if this program has a custom verification step, check that
+				if(this.verify && !(await this.verify(r, newFile)))
+				{
+					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to failing program.verify() function`;
+					await Deno.remove(newFilePath);
+					continue;
+				}
+
 				// add our new file to our fileset
-				await f.add("new", newFilePath);
+				await f.add("new", newFile);
 			}
 		}
 
@@ -165,24 +187,23 @@ export class Program
 		{
 			for(const progRaw of this.chain.split("->").map(v => v.trim()))
 			{
-				const newFilesToAdd = [];
-				for(const newFile of f.files.new)
+				const newFiles = Array.from(f.files.new);
+				const chainF = await f.clone();
+				chainF.changeType("new", "prev");
+				for(const newFile of newFiles)
 				{
-					const chainF = await f.clone();
 					chainF.removeType("input");
-					chainF.removeType("new");
 					await chainF.add("input", newFile);
 					await Program.runProgram(progRaw, chainF);
 					
-					if(chainF.files.new?.length)
+					if(chainF.new)
 					{
-						f.files.new.removeOnce(newFile);
+						await f.addAll("new", chainF.files.new);
+						chainF.changeType("new", "prev");
+						f.remove("new", newFile);
 						await Deno.remove(newFile.absolute);
-						newFilesToAdd.push(...chainF.files.new);
 					}
 				}
-				if(newFilesToAdd.length>0)
-					await f.addAll("new", newFilesToAdd);
 			}
 		}
 
@@ -228,10 +249,10 @@ export class Program
 		return program.run(f, progOptions);
 	}
 
-	// forms a path to dexvert/bin/{subPath}
-	static binPath(subPath)
+	// forms a path to dexvert/bin/{rel}
+	static binPath(rel)
 	{
-		return path.join(xu.dirname(import.meta), "..", "bin", subPath);
+		return path.join(xu.dirname(import.meta), "..", "bin", rel);
 	}
 
 	// loads all src/program/*/*.js files from disk as Program objects. These are cached in the static this.programs cache

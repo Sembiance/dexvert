@@ -1,0 +1,10 @@
+15-810:  Conversion 
+811:YY1to PC Paintbrush 2 Color
+812:NY1to PC Paintbrush 4 Color
+813:NY1to Microsoft Paint
+-820: File 
+821:NY*Convert file
+822:NY*Select Source
+823:NY*Select Destination
+-830: Exit 
+-999:END

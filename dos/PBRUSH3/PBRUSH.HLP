@@ -1,0 +1,1364 @@
+001 Help
+002   Using the Help Index
+004 General Information
+052   The Pointer
+097   The Mouse Symbols:   
+005   Using the Mouse
+098      Using the Mouse with Tools
+100      Using the Mouse with Menus
+101      Using the Mouse with Scroll Bars
+106   Using the Keyboard
+107      Using the Keyboard with Tools
+108      Using the Keyboard with Menus
+110      Using the Keyboard with Dialog Boxes
+007   The Screen
+019      The Menu Bar
+022      The Toolbox
+042      The Color Pattern Set
+041      The Drawing Area
+051      The Width Box
+103      Dialog Boxes
+017      File List Boxes
+105   Mixing RGB Colors
+006   Keys
+099   Short Cuts
+009   Technical Support
+76 Tools
+77   Scissors
+78   Gadget Box
+81   Text
+79   Hand
+80   Eyedropper
+83   Paint Roller
+82   Spraycan
+84   Paintbrush
+86   Color Eraser
+85   Eraser
+88   Curve
+87   Line
+91   Hollow Rounded Box
+92   Filled Rounded Box
+89   Hollow Box
+90   Filled Box
+93   Hollow Ellipse
+94   Filled Ellipse
+95   Hollow Polygon
+96   Filled Polygon
+10 File Menu
+11   New
+13   Open
+115     Loading B/W .PCX files
+116     Loading color .PCX files
+15   Save
+16   Save As
+18   Print
+20   Open Workspace
+21   Save Workspace
+23   Exit
+25 Edit Menu
+026   Undo
+102   Local Undo
+027   Cut
+028   Copy
+029   Paste
+030   Copy To
+031   Paste From
+032   Invert
+033   Outline
+34 Display Menu
+35   Zoom In
+36   Zoom Out
+69   Set Zoom
+39   Show Screen
+37   Alternate Layout
+38   Set Screen Layout
+08   Solid Colors Only
+44 Font Menu
+45   1-4
+46   Select Font File
+49   Set Gradient
+48   Set Shadow
+47   Set Type Specs
+50   Set Type Style
+60 Effects Menu
+61   Standard
+67   Blend
+200     Using the Paintbrush with Blend
+201     Using the Filled Box with Blend
+64   Brightness
+202     Using the Paintbrush with Brightness
+203     Using the Filled Box with Brightness
+65   Contrast
+204     Using the Paintbrush with Contrast
+205     Using the Filled Box with Contrast
+63   Gradient
+206     Using the Paint Roller with Gradient
+207     Using the Filled Box with Gradient
+57   Smudge
+208     Using the Spraycan with Smudge
+209     Using the Filled Box with Smudge
+112   Tile Pattern
+210     Using the Line with a Tile Pattern
+211     Using the Filled Box with a Tile Pattern
+66   Tint
+212     Using the Paintbrush with Tint
+213     Using the Filled Box with Tint
+68 Options Menu
+070   Set Aspect
+072   Set Brush Shape
+073   Set Color Pattern
+111   Set Entire Palette
+059   Set Gradient
+058   Set Line Width
+071   Set Palette
+104   Set Tile Pattern
+014   Set Units
+074   Get Palette
+075   Save Palette
+003 Help Menu
+113   Context Sensitive Help
+114   Information Line
+043   Statistics
+#1 ®RM50¯
+Help
+To get help on a topic, press the F1 key or click &Help in any dialog box. If you've never used Microsoft Paintbrush, read "Getting Started" in the "Microsoftþ Paintbrushþ User's Guide."
+
+³´µ Choose &Next for more help.
+#2
+Using the Help Index
+ Choose &Topics to see a list of available subjects.
+ Choose &Next or &Previous to browse through related topics.
+ Choose &Done to return to MS Paintbrush.
+ Click double arrows on the scroll bar to page through text quickly.
+ Click single arrows on the scroll bar to move through text line-by-line.
+
+Choose &Next for more help.
+#4
+General Information
+This section gives you additional help and general information about using MS Paintbrush.
+
+Choose &Next for more help.
+#52
+The Pointer
+The pointer is the object on the screen that moves as you move the mouse. When the pointer is inside the drawing area, it takes on the shape of the current tool. When the pointer is outside the drawing area, it is an arrow.
+
+Choose &Next for help on using the mouse.
+#97
+The Mouse Symbols
+Help uses these symbols for the mouse:
+ the mouse itself       - 
+ the left mouse button  - 
+ the right mouse button - 
+
+Choose &Next for more help on using the mouse.
+#5
+Using the Mouse
+You "click," "double-click," and "drag" while using the mouse. Unless noted, you should press  to click, double-click, or drag the mouse.
+
+ Click means quickly press and release a button.
+ Double-click means quickly press and release a button twice.
+ Drag means press and hold down a button as you move the mouse.
+
+Choose &Next for more help on using the mouse.
+#98
+Using the Mouse with Tools
+ To choose a tool, point to it and click . The tool is highlighted and the pointer's shape changes in the drawing area.
+ To get help on using a tool, point to the tool and click .
+ Drag  or  where you want to start using a tool; release  or  at the end point.
+
+Choose &Next for more help on using the mouse.
+#100
+Using the Mouse with Menus
+ To open a menu, point to the menu title and click . For example, click File to open the File menu. To choose a command on a menu, point to the command and click .
+
+Choose &Next for more help on using the mouse.
+#101
+Using the Mouse with Scroll Bars
+ To scroll in single steps, point to a single arrow and click .
+ To scroll in large increments, point to a double arrow and click .
+ To move continuously in one direction, point to an arrow and press and hold .
+ To scroll quickly, point to the slider (the box in the middle of the scroll bar) and drag .
+
+³´µ You can use the Hand tool to move the drawing around on screen. The Hand works like the scroll bars, but it also lets you move diagonally.  The Hand tool can be used to move the drawing when the scroll bars are turned off.
+#106
+Using the Keyboard
+You can use the keyboard to open menus, choose commands, and select options.
+
+Choose &Next for more information.
+#107
+Using the Keyboard with Tools
+Press the Shift key to "constrain" some tools. Use the Esc key to stop a tool while it is in use.
+
+If you hold down Shift while using the Paintbrush, you can draw only horizontal or vertical lines. To switch between vertical and horizontal constraint, press Spacebar.
+
+Shift constrains the Line tool so it draws only horizontal, vertical, or 45-degree lines.
+
+If you press Shift while using an Ellipse tool, you draw a circle; with a Box tool, you draw a square.
+
+With the Gadget Box tool, press Shift to make the sides grow in proportion as you stretch the box. Press Shift while dragging the Gadget Box if you want to leave a single copy of the image behind. Press Ctrl while dragging the Gadget Box if you want to leave a trail of copies behind.
+
+The Esc key will stop the Paint Roller from finishing a fill. It will stop (without drawing the figure) any tool such as Line, Box, or Ellipse while the tool is in "rubber band" mode.
+#108
+Using the Keyboard with Menus
+To open a menu, hold down Alt and type the underlined letter in the menu title. For example, to open the File menu, press Alt+F.
+
+To choose a command on a menu, open the menu, then press the underlined letter in the command's name. For example, to choose the Save command on the File menu, press Alt+F to open the File menu, then press S or Alt+S.
+#110
+Using the Keyboard with Dialog Boxes.
+You can use the keyboard to move quickly in a dialog box. To move to an option or box, press the key corresponding to the underlined letter next to the field or box. For example, press F in the Save dialog box to move to the Filename box. Press Tab to move among editable fields and boxes in a dialog box.
+
+To edit text in a filename or display box:
+ Use the direction keys or point and click to move the insertion point inside the box.
+ Drag over text you want to delete.
+ Type new text or press the Del key to erase the existing text.
+#7
+The MS Paintbrush Screen
+The MS Paintbrush screen includes the menu bar, Toolbox, drawing area, pointer, scroll bars, caption bar, Color Pattern Set, and Width Box.
+
+Choose &Next to learn more about the screen.
+#19
+The Menu Bar
+The names at the top of the screen are the titles of the drop-down menus. Menus contain MS Paintbrush commands. You control how some commands work by selecting options in dialog boxes.
+
+ To open the menu, click a menu title.
+ To choose the command, click a command.
+ To select an option, click the option in a dialog box.
+#22
+The Toolbox
+The Toolbox contains icons representing the drawing tools. To choose a tool, point to the icon for the tool and click . To get help on using a tool, point to the tool and click .
+
+When you choose a tool, it is highlighted in the Toolbox, and the pointer takes on the tool's shape when you point in the drawing area.
+
+³´µ The tools that appear in the Toolbox box vary depending on the command you have chosen on the Effects or Display menus.
+#42
+The Color Pattern Set
+The Color Pattern Set at the bottom of the screen contains the colors and patterns you draw with. The tools use the current primary, secondary, and background colors you have chosen from the Color Pattern Set.
+
+To choose a color or pattern from the Color Pattern Set:
+ Point to the color or pattern.
+ Click  to choose the primary color.
+ Click  to choose the secondary color.
+ Hold down Shift and click  to choose the background color.
+
+The three small boxes to the left of the Color Pattern Set show the current colors. The upper-left box shows the primary color. The lower-right box shows the secondary color. The area behind the two boxes shows the background color.
+
+Tools normally draw with the primary color. The Box, Ellipse, and Polygon tools use the primary color to draw the borders of the shapes they create. The secondary color fills shapes created with the Filled Box, Filled Ellipse, and Filled Polygon tools. The Color Eraser, the Gradient effect, and the shadow behind text also use the secondary color. The Eraser, the New command, and the Gradient effect use the background color.
+
+³´µ The colors and patterns in the Color Pattern Set change depending on the command you have chosen on the Effects menu. Choose Effects Standard to show the complete Color Pattern Set.
+#41
+The Drawing Area
+You create your drawing in the drawing area. It is part of the drawing canvas--the entire area available for drawing. The size of the drawing canvas depends on how much free memory your computer has when you run MS Paintbrush.
+#51
+The Width Box
+The Width Box, in the lower left part of the screen, shows the current line width. The Spraycan, Paintbrush, Curve, Line, Box, Ellipse, and Polygon tools draw with the current line width. You set the line width by using the Width Box or by choosing the Options Set Line Width command.
+
+To use the Width Box:
+ Point inside the Width Box.
+ Click an arrow to increase or decrease the line width, or
+ Drag across the line width display box, and type a new number, or
+ Click the triangle and select options in the Set Line Width dialog box.
+#103
+Dialog Boxes
+Dialog boxes can contain display boxes which show values or names of options, list boxes which show lists of filenames or options, buttons or check boxes to turn options on or off, and command buttons.
+
+To change the value or name of an option in a display box, drag inside the display box to select the contents of the box and type the new value or name. Press Tab or point and click to move to another display box.
+
+To select an option or filename from a list box, use the scroll bars to move through the list:
+ To page through the list, click the double arrows.
+ To scroll line-by-line, click the single arrows.
+ To move through the list quickly, drag the small box.
+ To select an option or filename, double-click its name.
+
+To use a button or check box to turn an option on or off, click the button or check box.
+
+To use a command button:
+ Click OK to close the dialog box and use options you selected.
+ Click Cancel to close the dialog box without making changes.
+
+To use the keyboard to select an option, press Alt and the underlined letter in the option name.
+
+³´µ You can press and drag the top bar on dialog boxes to move them around the screen.  Use this if you need to uncover important parts of your drawing.
+
+³´µ MS Paintbrush saves many options when you save a workspace file. See Open Workspace and Save Workspace.
+#17
+File List Boxes
+Some dialog boxes include a file list box where you can select a file to open and a filename box where you can type the name of a file to save or open. The file list box shows the subdirectories and files in the current directory. To save a file, type its name in the filename box and choose Save. To open a file, type its name in the filename box and choose Open, or double-click the filename in the file list box.
+
+To use the mouse with file list boxes:
+ Double-click "[..]" to move back one directory at a time.
+ Double-click a drive letter, directory or filename to select it.
+ Use the scroll bar to move through the list of files.
+
+³´µ The filenames in a file list box depend on the type of file associated with the box. For example, if you select the PCX file format in the File Open dialog box, only files with a .PCX extension appear.
+#105
+Mixing RGB Colors
+MS Paintbrush supports the RGB (Red Green Blue) and HLS (Hue Lightness Saturation) color systems. You can select either system to adjust the colors your computer displays.
+
+Here are the RGB values for some common colors:
+
+                Red Green Blue
+Red
+   Dark           85   0   0
+   Medium        170   0   0
+   Bright        255   0   0
+   Light         255  85  85
+   Brick         160  64  64
+   Cherry        255   0  85
+   Maroon        192   0  80
+   Pink          255 170 170
+   Salmon        255 144 128
+   Violet-Red    255   0 170
+Orange
+   Dark          128  85   0
+   Medium        170 113   0
+   Bright        255 170   0
+   Light         255 170  85
+   Bittersweet   255 112  80
+   Burnt Orange  224  96   0
+   Melon         255 128 112
+   Orange-Red    255  80   0
+   Tangerine     255 112   0
+   Yellow-Orange 255 144   0
+Yellow
+   Dark           85  85   0
+   Medium        170 170   0
+   Bright        255 255   0
+   Light         255 255 170
+   Amber         255 170   0
+   Cream         255 255 208
+   Gold          176 112  64
+   Goldenrod     255 176   0
+   Green-Yellow  170 255   0
+   Lemon         255 255  85
+   Maize         255 176 112
+   Orange-Yellow 255 208   0
+Green
+   Dark            0  85   0
+   Medium          0 170   0
+   Bright          0 255   0
+   Light         170 255 170
+   Forest         85 170   0
+   Grass           0 176 112
+   Lime          170 255  85
+   Olive         120 144   0
+   Pine           43  85   0
+   Sea Green     170 255 255
+   Spring Green  208 255 160
+   Yellow-Green  192 255   0
+Cyan (Blue-Green)
+   Dark            0  85  85
+   Medium          0 170 170
+   Bright          0 255 255
+   Light          85 255 255
+   Aquamarine    160 255 224
+   Blue-Green      0 255 170
+   Green-Blue      0 128 112
+   Pale          170 255 255
+   Turquoise       0 176 160
+Blue
+   Dark            0   0  85
+   Medium          0   0 170
+   Bright          0   0 255
+   Light          85  85 255
+   Baby Blue     170 170 255
+   Blue-Gray     144 144 160
+   Cobalt Blue    96  80 208
+   Cornflower    170 170 255
+   Navy            0   0 128
+   Periwinkle    224 208 255
+   Sky Blue       85 170 255
+   Violet Blue   170   0 255
+Purple
+   Dark           43   0  85
+   Medium         85   0 170
+   Bright        128   0 255
+   Light         128  85 255
+   Violet         96   0 112
+   Lavender      213 170 255
+   Plum          160   0 112
+Magenta (Red-Violet)
+   Dark           85   0  85
+   Medium        170   0 170
+   Bright        255   0 255
+   Light         255  85 255
+   Mulberry      170   0  85
+   Orchid        255  85 170
+   Pale          255 170 255
+   Red Violet    255   0 160
+Gray
+   Black           0   0   0
+   Very Dark      64  64  64
+   Dark           85  85  85
+   Medium        128 128 128
+   Light         170 170 170
+   Very Light    213 213 213
+   White         255 255 255
+   Silver        208 208 224
+Earthtones
+   Dark Brown    128  64   0
+   Brown         176  80   0
+   Burnt Sienna  176  64   0
+   Copper        176  96  64
+   Indian Red    144   0   0
+   Mahogany      192  64   0
+   Raw Sienna    176  96   0
+   Raw Umber     144  96   0
+   Rust          160  80  48
+   Sepia         144  64   0
+   Tan           255 144  96
+Flesh
+   Dark          170  85  85
+   Medium        255 170 170
+   Light         255 192 192
+   Apricot       255 224 192
+   Peach         255 208 192
+
+³´µ If the colors don't look right, try adjusting the brightness and contrast of your monitor.
+³´µ You may not be able to create all of these colors unless you have a VGA card and an analog monitor which let you choose from among 262,144 colors. An EGA system gives you 64 colors; most other systems offer 16 colors or less.
+#6
+Keys
+ To move to the next option in a dialog box, press Tab.
+ To choose OK in a dialog box, press Enter.
+ To close a dialog box without making changes, press Esc.
+ To stop the current action, press Esc. For example, to stop the Paint Roller from filling an area, press Esc.
+ To leave behind a copy of a cutout, hold down Shift while dragging the Gadget Box.
+ To leave behind a trail of copies of a cutout, hold down Ctrl while dragging the Gadget Box.
+ To "constrain" certain tools, press Shift.
+
+Choose &Next for more information on using the keyboard.
+#99
+Short Cuts
+You can use keyboard short cuts to choose commands. Double-click a topic to view it immediately.
+
+The "^" means hold down the Ctrl key and press the letter.
+
+   F1  Help
+   ^A  Display Alternate (last) screen layout
+   ^Z  Zoom In
+   ^L  Local Undo
+   ^O  Zoom Out
+   ^S  Save
+   ^U  Undo
+   ^X  Exit
+
+Hold down Shift to "constrain" some tools. If you hold down Shift:
+
+ The Box and Gadget Box tools draw squares.
+ The Ellipse tools draw circles.
+ The Paintbrush, Eraser, Color Eraser, local undo eraser, and zoom-in paintbrush move only horizontally or vertically.
+ The Line tool draws only horizontal, vertical, or 45-degree lines.
+
+Press Spacebar to switch between horizontal and vertical constraint. Release the Shift key to use the tools normally.
+
+³´µ MS Paintbrush uses the current aspect ratio to draw squares and circles. You may need to choose the Options Set Aspect command to set the aspect ratio before you begin drawing to make squares and circles appear correct.
+
+Mouse
+ To select a new paintbrush shape, double-click the Paintbrush.
+ To clear the screen, double-click the Eraser.
+ To show the whole screen image, double-click the Gadget Box.
+ To replace the primary color with the secondary color, double-click the Color Eraser.
+ To edit a color pattern, double-click a color pattern in the Color Pattern Set.
+
+To set the line width, point to Width Box and:
+ Click an arrow to increase or decrease the line width.
+ Drag across the line width display box and type a new number for the line width.
+ Click the width triangle and select options in the Set Line Width dialog box.
+#9
+Technical Support
+
+If you have a question about Microsoft Paintbrush and you can't find the answer in the "Microsoftþ Paintbrushþ User's Guide" call Microsoft Product Support Services.
+
+When calling Microsoft Product Support Services please have the following information ready:
+ Microsoft Paintbrush version number (4.0)
+ System configuration (including your CONFIG.SYS and AUTOEXEC.BAT files)
+#76
+Tools
+The Toolbox holds the drawing and editing tools. To choose a tool, point to the icon and click. To draw with a tool, point to where you want to start drawing and drag the mouse. Unless noted, tools use the primary color and the current line width. You can "constrain" some tools with the Shift key (see Short Cuts).
+
+Choose &Next to learn more about the tools.
+#77
+Scissors
+Use the Scissors to outline an irregular part of a drawing so you can move, copy, stretch, shrink, tilt, rotate, cut, or save it. The defined area is called a cutout--it can be very small or as large as the drawing area. The Scissors outlines the cutout with a polygon, and then the Gadget Box appears so you can manipulate the cutout.
+
+To define an irregular cutout with the Scissors:
+ Click the Scissors tool.
+ Point near the area you want to cut.
+ Click to mark the start of the cut.
+ Point to where you want the first side of the polygon to end and click.
+ Repeat the step above to draw more sides until the area is enclosed.
+ Double-click to complete the cutout.
+
+The Gadget Box automatically appears around the cutout. Drag the Gadget box and click the handles on the Gadget Box to manipulate the cutout (See Gadget Box).
+#78
+Gadget Box
+Use the Gadget Box to move, copy, stretch, shrink, tilt, rotate, cut, or save part of a drawing. The cutout can be very small or as large as the drawing area. The Gadget Box automatically appears around an irregular cutout you define with the Scissors. You can also use the Gadget Box directly to define a rectangular cutout. You click or drag the handles on the Gadget Box to manipulate the cutout.
+
+To define a rectangular cutout with the Gadget Box:
+ Click the Gadget Box tool.
+ Point to the first corner of the cutout you want to define.
+ Drag until the rectangle encloses the area you want to define.
+ Release . Square, circle, and diamond handles appear on the rectangle.
+
+To move the cutout:
+ Point inside the Gadget Box. The pointer becomes a Hand.
+ Drag the Hand. The cutout moves in the drawing area.
+
+To move the cutout and leave a copy or copies behind:
+ Use the Gadget Box to define the cutout.
+ Point inside the Gadget Box. The pointer becomes a Hand.
+ Hold down Shift and drag the Hand. The cutout moves, leaving a copy behind.
+ Hold down Ctrl and drag to leave a trail of copies behind. If you hold down  and drag, the cutout covers objects under it. If you hold down  and drag, objects show through the cutout. When a color in your cutout is the same as your background color, it is invisible.
+
+To use the Gadget Box handles:
+ Drag squares on the perimeter to shrink or stretch the cutout.
+ Hold down Shift and drag the squares on the corners for a proportional shrink or grow.
+ Drag the circle to tilt the cutout.
+ Click the square above the diamond to flip the cutout on its vertical axis.
+ Click the square to the right of the diamond to flip the cutout on its horizontal axis.
+ Click the diamond to rotate the cutout 90 degrees.
+
+To cut or save the cutout:
+ Use the Gadget Box to define the cutout.
+ Choose the Edit Cut command to remove the cutout to the clipboard.
+ Choose the Edit Copy command to copy the cutout to the clipboard.
+ Choose the Edit Copy To command to save the cutout to disk.
+#81
+Text
+Use the Text tool to add text to your drawing.  You type text in the Enter Text dialog box, draw your Text Frame, and then use the Text Frame markers to adjust the margins. You can enter more than the 400 characters (about ten lines of text), that the Text Box displays.
+
+To add Text:
+ Choose a font from the Font menu, or use the current font.
+ Select a secondary color from the Color Pattern Set for the color of the characters. (Select a primary color for the outline of characters and a background for the color of the shadow if you've set these options with the Font Set Type Style command.)
+ Click the Text tool. The Enter Text dialog box appears.
+ Type the text you want to add. Text wraps automatically at the end of each line. If you make a mistake, press Backspace. To start a new line before the text wraps, press Ctrl+Enter, a line break character appears in the Enter Text dialog box indicating where the line will break on screen.
+ When you're finished typing, press Enter. The dialog box disappears.
+ Point to the area where you want to place your text and drag the text cursor until the Text Frame is the size you want. When you release the mouse the Text Frame appears on screen, enclosing the text you just typed.
+ Drag the Text Frame's markers until the margins are correct. Press the space bar to edit the text before you paste it.
+ Paste the text by choosing another tool or reselecting the Text tool.
+#79
+Hand
+Use the Hand to move a drawing around on the screen. The Hand works like the scroll bars, but you can also move diagonally with the Hand. The Hand is also used to move the drawing when the scroll bars are turned off.
+
+To use the Hand:
+ Click the Hand tool.
+ Move the pointer into the drawing area.
+ Drag the pointer in the direction you want to move.
+ Release . The screen redraws with a new part of the drawing in the drawing area.
+#80
+Eyedropper
+Use the Eyedropper to "pick up" a solid color from a drawing and choose it as the primary, secondary, or background color.
+
+To use the Eyedropper:
+ Click the Eyedropper tool.
+ Point to the color in your drawing that you want to pick up.
+ Click  to make it the primary color.
+ Click  to make it the secondary color.
+ Press Shift and click  to make it the background color.
+#83
+Paint Roller
+Use the Paint Roller to fill shapes in a drawing with the primary color.
+
+To use the Paint Roller:
+ Point to the color you want to use in the Color Pattern Set and click .
+ Click the Paint Roller tool.
+ Point inside the area you want to fill. Only the "drop" on the pointer needs to fit in the area.
+ Click  to fill over a solid color. Click  to fill over a pattern.
+
+³´µ If the line defining the area you fill has gaps, the color "leaks out." Press Esc to stop the fill, or wait until the fill is complete, then choose Edit Undo.
+#82
+Spraycan
+Use the Spraycan to add shading and depth to your drawing. You can spray with either the primary or secondary color and adjust the width of the spray pattern.
+
+To use the Spraycan:
+ Choose the colors you want to spray with.
+ Use the Width Box to set the size of the spray pattern.
+ Click the Spraycan tool.
+ Point to where you want to spray.
+ Drag the pointer to spray the area. Hold down  to spray with the primary color. Hold down  to spray with the secondary color.
+#84
+Paintbrush
+Use the Paintbrush to draw freehand shapes in the primary or secondary color. You can change the size and shape of the brush. Hold down Shift to draw vertical or horizontal lines. To switch between vertical and horizontal constraint, press Spacebar.
+
+To use the Paintbrush:
+ Choose the primary and secondary colors.
+ Use the Width Box to set the brush width.
+ Double-click the Paintbrush tool to set the brush shape.
+ Point to where you want to start drawing.
+ Drag the pointer to draw. Press  to draw with the primary color. Press  to draw with the secondary color.
+#86
+Color Eraser
+Use the Color Eraser to replace the primary color with the secondary color.
+
+To use the Color Eraser:
+ Choose the primary and secondary colors.
+ Use the Width Box to set the relative size of the Color Eraser (about 4 times the width).
+ Click the Color Eraser tool.
+ Point to where you want to start replacing the primary color.
+ Drag the pointer over the area.
+
+³´µ To replace the primary color with the secondary color in the entire drawing area, double-click the Color Eraser.
+#85
+Eraser
+Use the Eraser to remove parts of a drawing. The Eraser paints with the background color.
+
+To use the Eraser:
+ Use the Width Box to set the relative size of the Eraser (about 4 times the width).
+ Click the Eraser tool.
+ Point to where you want to start erasing.
+ Drag the pointer over the area.
+
+³´µ To erase the entire image, double-click the Eraser.
+#88
+Curve
+Use the Curve to add curves to a drawing.
+
+To use the Curve:
+ Choose the primary color from the Color Pattern Set.
+ Use the Width Box to set the width of the curve.
+ Click the Curve tool.
+ Point to where you want the curve to start.
+ Hold down  to mark the beginning of the curve.
+ Drag to where you want the curve to end and release . A line with handles appears.
+ Drag the circles to bend the curve.
+ Drag the squares to move the ends of the curve.
+ Paste the curve by choosing another tool or reselecting the Curve tool.
+
+³´µ To paste the current curve and draw a curve connected to the last curve, use .
+³´µ To paste the current curve and draw a curve connected to the start of the last curve (a curved ray), use Ctrl-.
+#87
+Line
+Use the Line to draw straight lines. Hold down Shift to draw horizontal, vertical, or 45-degrees lines. To switch between constraints press Spacebar (see Short Cuts).
+
+To use the Line:
+ Choose the primary color from the Color Pattern Set.
+ Use the Width Box to set the line width.
+ Click the Line tool.
+ Point to where you want to start drawing.
+ Hold down  to mark the beginning of the line.
+ Drag to where you want the line to end and release .
+
+³´µ To draw a line connected to the last line, use .
+³´µ To draw a line connected to the start of the last line (a ray), use Ctrl-.
+#91
+Hollow Rounded Box
+Use the Hollow Rounded Box to draw hollow rectangles and squares with round corners. The box is drawn in the primary color.
+
+Choose &Next for information on using the Rounded Box tools.
+#92
+Filled Rounded Box
+Use the Filled Rounded Box to draw rectangles and squares filled with the secondary color. The border is drawn in the primary color.
+
+To use the Hollow or Filled Rounded Box:
+ Choose the primary (and a secondary color, if you're drawing a Filled Rounded Box) from the Color Pattern Set.
+ Use the Width Box to set the border thickness.
+ Click the left side of the Filled Rounded Box tool to draw a hollow rounded box, or the right side to draw a filled rounded box.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box is the size you want. Hold down Shift to draw a square.
+ Release  to paste the box.
+#89
+Hollow Box
+Use the Hollow Box to draw rectangles and squares. The box is drawn in the primary color.
+
+Choose &Next for information on using the Box tools.
+#90
+Filled Box
+Use the Filled Box to draw rectangles and squares filled with the secondary color. The border is drawn in the primary color.
+
+To use the Hollow or Filled Box:
+ Choose the primary color (and the secondary color, if you're drawing a Filled Box) from the Color Pattern Set.
+ Use the Width Box to set the border thickness.
+ Click the left side of the Filled Box tool to draw a hollow box, or the right side to draw a filled box.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box is the size you want. Hold down Shift to draw a square.
+ Release  to draw the box.
+#93
+Hollow Ellipse
+Use the Hollow Ellipse to draw hollow ellipses and circles.
+
+Choose &Next for information on drawing ellipses and circles.
+#94
+Filled Ellipse
+Use the Filled Ellipse to draw ellipses and circles filled with the secondary color.
+
+To use the Hollow or Filled Ellipse:
+ Choose the primary color and secondary colors from the Color Pattern Set.
+ Use the Width Box to set the border thickness.
+ Click the left side of the Ellipse tool to draw a hollow ellipse, the right side to draw a filled ellipse.
+ Point to where you want to start drawing.
+ Hold down  to mark the center of the ellipse.
+ Drag until the ellipse is the size you want. Hold down Shift to draw a circle.
+ Release  to paste the ellipse.
+ To draw additional ellipses that are concentric with the first one, press , drag and release .
+#95
+Hollow Polygon
+Use the Hollow Polygon to draw closed shapes made of connected line segments.
+
+Choose &Next for information on drawing polygons.
+#96
+Filled Polygon
+Use the Filled Polygon to draw closed shapes made of connected line segments. The shape is filled with the secondary color, and the border is drawn in the primary color.
+
+To use the Hollow or Filled Polygon:
+ Choose the primary and secondary colors from the Color Pattern Set.
+ Use the Width Box to set the border thickness.
+ Click the left side of the Polygon tool to draw a hollow polygon, the right side to draw a filled polygon.
+ Point to where you want to start drawing.
+ Press  to mark the beginning of the first side.
+ Drag the pointer to where you want the first side to end.
+ Release . The end of the first side becomes the beginning of the next side.
+ Press , drag, and release  to draw the remaining sides.
+ Double click  to close the polygon.
+
+³´µ If you make a mistake, press Esc to start over before you close the polygon.
+#10
+File Menu
+Use the commands on the File menu to create, open, save, and print images.
+#11
+New
+Choose File New to create a clean drawing area. You select options in the New dialog box to set the width, height, unit of measure, and number of colors for the new image.
+
+If you intend to print a drawing, choose the Options Set Aspect command and select For Printer before creating the image. This step ensures that circles, squares, and other parts of the image print correctly. Select For Screen if you want the images to appear correct on the screen.
+
+To create a clean drawing area:
+ Choose File New. The New dialog box appears.
+ Click Set Units if you want to change the unit of measure.
+ Click a button in Number of Colors to select how many colors you will use in your drawing. To change your palette use the Options Get Palette command.
+ Use the width and height boxes to set the dimensions for your image.
+
+³´µ The width and height may be larger than the drawing area on the screen. The maximum size of an image depends on the amount of memory available in your system.
+#13
+Open
+Choose File Open to load a .PCX or .TIF image file from disk.
+
+To open an image file:
+ Choose File Open. The Open dialog box appears.
+ Select either PCX or TIF, depending on the format you want to use.
+ Select the file you want to open in the file list box (see File List Boxes).
+
+ .PCX is the ZSoft image format used by many graphics applications and most desktop publishing programs.
+ .TIF (Tagged Image File Format) has many sub-formats. MS Paintbrush supports most TIFF sub-formats. If you try to open a TIFF file with a format MS Paintbrush doesn't support, an error message appears.
+
+³´µ A .PCX file generally uses less memory than a .TIF file and is more likely to be supported by other applications.
+#115
+Loading b/w images on color displays
+When loading a b/w image while MS Paintbrush is running in a multicolor display mode, a dialog box appears and asks you to specify how to load the image.
+
+ Select Keep as B/W to load the image as is. If the image does not need colors added to it, this selection will keep the image as b/w.
+ Select Convert to Color to make the new image have the same number of colors as the current display mode. This will not change the image's appearance, but colors may then be added to the b/w image.  This will always require more memory than keeping the image as b/w.
+#116
+Loading incompatible color files
+When you load an image that has a different number of colors than your display, MS Paintbrush will try to adjust the colors in your image to match the hardware.  This will change the image permanently once you save it (increasing or decreasing the number of colors in the image).  The more colors you have on-screen, the more likely that you will get a good approximation.
+
+ Select Use Current Palette to load the image by approximating it with colors in the current palette.
+ Select Create Optimized Palette to make MS Paintbrush change the display's hardware palette to match the image file as closely as possible.
+#15
+Save
+Choose File Save to save an image you've previously saved to disk and then continue working on your drawing. You should choose File Save frequently as you work. To save an image for the first time, choose File Save As.
+#16
+Save As
+Choose File Save As to save an image to disk with a name you specify. Use the File Save As command to save an image for the first time or to save a new version of an existing drawing without altering the original.
+
+To save an image for the first time:
+ Choose File Save As. The Save As dialog box appears.
+ Select PCX, TIF, or TIF Uncompressed file format.
+ Type a name for the file in the Filename box.
+ Click Save to save the file.
+
+³´µ .PCX is the ZSoft image format used by many graphics applications and most desktop publishing programs. .TIF (Tagged Image File Format) has many sub-formats, and a file saved as .TIF may not be usable with another application.
+#18
+Print
+Choose File Print to print an image. You select options in the Print dialog box to set the unit of measure, margins, size, number of copies, and quality of the printed image. To make sure circles, squares, and other parts of your image print correctly, choose Options Set Aspect and select For Printer before creating a drawing.
+
+To print a drawing:
+ Choose File Print.
+ In the dialog box, type numbers in the Top and Left Margin boxes to set the amount of white space around the printed drawing.
+ Click Set Units to set the unit of measure for the drawing.
+ Type numbers in the Print Width and Height boxes to set the drawing's printed size.
+ Turn on Print Proportional if you want MS Paintbrush to keep the width and height of the drawing in the same proportion as they are in the original image.
+ Type a number in the Number of Copies box to specify how many copies (up to 99) you want to print.
+ Select Draft to print quickly, or Proof for high-quality printing.
+#20
+Open Workspace
+Choose File Open Workspace to recall many MS Paintbrush settings that you saved during a previous drawing session with the File Save Workspace command. These settings are stored in a workspace file with an .INI extension.
+
+To recall MS Paintbrush settings:
+ Choose File Open Workspace.
+ In the dialog box, double-click the name of the workspace file you want to open, or scroll through the file list box (see File List Boxes).
+ Click Open.
+
+The workspace file includes the following information:
+ The screen layout.
+ The zoom-in and zoom-out settings.
+ The aspect ratio.
+ The color model (RGB or HLS).
+ The picture file type (PCX or TIF).
+ The brush shape.
+ The line width.
+ The unit of measure.
+ All font information set with the Font commands.
+ The active and currently selected fonts.
+ The effects set with the Effects commands.
+ The Color Pattern Set
+#21
+Save Workspace
+Choose File Save Workspace to save many MS Paintbrush settings. If you've saved your workspace, you can choose File Open Workspace next time you start MS Paintbrush and resume drawing without having to reset options. The settings are saved in a workspace file with an .INI extension.
+
+To save MS Paintbrush settings:
+ Choose File Save Workspace.
+ In the dialog box, type a name for the workspace file in the Filename box. The file must have an .INI extension.
+ Choose Save.
+
+³´µ Choose &Previous to see a list of settings saved with the Save Workspace command.
+#23
+Exit
+Choose File Exit to quit MS Paintbrush and return to DOS.
+
+If you've changed a drawing since you last saved it, a dialog box appears asking if you want to save changes before quitting MS Paintbrush. Choose Yes or No. Choose Cancel to continue working.
+#25
+Edit Menu
+The commands on the Edit Menu (except Undo) use the Gadget Box so you can change, cut, or copy part of a drawing for use in other drawings or with other applications.
+#26
+Undo
+Choose Edit Undo to cancel changes made to a drawing since the last time you changed tools. Choose Local Undo if you want to undo only a few changes.
+
+Choose &Next to see how to undo portions of your work.
+#102
+Local Undo
+Choose Edit Local Undo to remove any changes you made to a drawing since the last time you changed tools. Unlike normal Undo, Local Undo works like an eraser, letting you undo your most recent changes to specific areas, restoring them to their original state.
+
+To erase some changes before you switch tools:
+ Choose Edit Local Undo. The pointer becomes an eraser with an "X" inside.
+ Use the Width Box to set the relative size of the Local Undo eraser (about 4 times the width).
+ Drag the pointer over the parts you want to undo.
+#27
+Cut
+Choose Edit Cut to delete part of a drawing you've defined with the Scissors or Gadget Box. The cutout is saved in the clipboard. You can paste the copy into another drawing (see Paste).
+
+To cut part of a drawing to the clipboard:
+ Use the Scissors or Gadget Box to define the cutout.
+ Choose Edit Cut.
+
+³´µ The clipboard can hold only one cutout at a time. Each time you choose Edit Cut or Edit Copy, the previous cutout is replaced with the new cutout.
+#28
+Copy
+Choose Edit Copy to copy part of a drawing you have defined with the Scissors or Gadget Box tool. The part you copy is pasted to the clipboard. You can paste the copy into another drawing (see Paste).
+
+To copy part of a drawing to the clipboard:
+ Use the Scissors or Gadget Box to define the cutout.
+ Choose Edit Copy.
+
+³´µ The clipboard can hold only one cutout at a time. Each time you choose Edit Cut or Edit Copy, the previous cutout is replaced with the new cutout.
+#29
+Paste
+Choose Edit Paste to copy part of a drawing that you cut or copied to the clipboard.
+
+To paste a cutout into the current drawing:
+ Choose Edit Paste. The cutout, surrounded by the Gadget Box, appears in the drawing area.
+ Drag the Gadget Box to where you want to paste the cutout.
+ Click outside the Gadget Box or choose another tool to paste the cutout.
+#30
+Copy To
+Choose Edit Copy To to save a copy of a cutout to disk. To use Copy To you first define the area to be copied (see Gadget Box and Scissors).
+
+To copy a cutout to disk:
+ Select the Scissors or Gadget Box to define the cutout.
+ Choose Edit Copy To. The Copy To dialog box appears.
+ Type a name for the cutout in the filename box (see Dialog Boxes).
+ Click Copy.
+#31
+Paste From
+Choose Edit Paste From to paste a cutout you saved to disk into the current drawing.
+
+To paste a cutout from disk:
+ Choose Edit Paste From.
+ In the dialog box, select a file format from the Image Format box.
+ Select a file from the file list box (see File List Boxes).
+ The cutout, surrounded by the Gadget Box, appears in the drawing area.
+ Use the Gadget Box to manipulate the cutout (see Gadget Box).
+ Click outside the Gadget Box or choose another tool to paste the cutout.
+#32
+Invert
+Choose Edit Invert to reverse the colors in the cutout. To use Invert, define the cutout with the Scissors or Gadget Box and choose Edit Invert.
+#33
+Outline
+Choose Edit Outline to outline the cutout. The rest of the cutout is filled with the background color. To use Outline, define the cutout with the Scissors or Gadget Box and choose Edit Outline.
+
+³´µ When the Outline command is grayed (not available) you do not have enough memory to perform this function (try defining a smaller area with the Gadget Box).
+#34
+Display Menu
+Use the commands on the Display menu to zoom in and out on a drawing and change the appearance of the MS Paintbrush screen.
+#35
+Zoom In
+Choose Display Zoom In to magnify the image so you can touch up a drawing dot-by-dot. You use the Paint Roller and Paintbrush tools while you're zoomed in. Choose Display Set Zoom to adjust the magnification factor.
+
+To use Zoom In:
+ Choose Display Zoom In. The screen splits into two windows. One shows the magnified image, the other shows the image in normal size.
+ Use the Paint Roller or Paintbrush to edit the image. Drag the box in the unzoomed window to bring new parts of the image into the zoomed window.
+ Choose Display Zoom Out to return to the normal MS Paintbrush screen.
+
+³´µ While you're zoomed-in, you can't use the Edit Undo command to cancel changes after you scroll the zoomed-in image.
+#36
+Zoom Out
+Choose Display Zoom Out to reduce an image so you can view your entire picture if it's larger than the drawing area. Choose Display Set Zoom to adjust the reduction factor.
+
+In the zoomed-out window (the one with the smaller drawing), use the Gadget Box to copy, cut, or move part of the zoomed-out image. Use the Hand to move around the zoomed-out image if the image is too large to fit in the zoomed-out window.
+
+In the unzoomed window (the actual size drawing window), you can follow the changes you make in the zoomed-out window. The cross-hair in the unzoomed window, shows the location of the zoomed-out pointer.
+
+³´µ Some details of the image may disappear while you're zoomed out. The details reappear when you return to the normal MS Paintbrush screen.
+#69
+Set Zoom
+Choose Display Set Zoom to set the magnification factor for the Zoom In command and the reduction factor for the Zoom Out command. The Zoom Split options work with Zoom In and Zoom Out.
+
+ Select Horizontal to split the zoomed windows horizontally.
+ Select Vertical to split the zoomed windows vertically.
+ Select Grid to turn on the grid, to distinguish the individual pixels in the Zoom In window.  The grid is available only in Zoom In when the magnification factor is 4 or greater.
+ To change the size of a zoomed window, point to the border between the windows and your pointer becomes a double ended arrow. Drag the border between the windows to adjust the window sizes.
+
+Click Zoom In or Zoom Out to zoom immediately.
+#39
+Show Screen
+Choose Display Show Screen to hide the Toolbox, Color Pattern Set, menus, and caption bar so only the drawing appears on screen. You CANNOT edit the image while the Display Show Screen command is active. To hide some parts of the screen and edit a drawing, choose Display Set Screen Layout.
+
+To show only the drawing area on screen:
+ Choose Display Show Screen.
+ Choose OK in the Show Screen dialog box.
+ Press Esc to restore the normal MS Paintbrush screen.
+#37
+Alternate Layout
+Choose Display Alternate Layout to return quickly to the last screen layout you chose with the Set Screen Layout command. To switch quickly between the current layout and the previous layout, press Ctrl+A. Turn on Display All to return to the standard screen layout.
+
+³´µ If you hide the menu titles in both the current and alternate screen layouts, you must bring up a menu by pressing ALT+D (or ALT + the first letter of any of the menu commands), and then use the cursor keys to highlight the desired command.  Press Enter to choose the highlighted command.  (See Using the Keyboard with Menus.)
+#38
+Set Screen Layout
+Choose Display Set Screen Layout to display or hide parts of the MS Paintbrush screen. To hide parts of the screen, turn off the appropriate options. Choose OK to show the new screen. You display or hide all items by clicking the All On or All Off button. Use the Display Alternate Layout command to switch between the current display and the previous display.
+
+³´µ If you turn off the menu option, press Alt+D to open the Display menu, choose Set Screen Layout, and click All On to restore the menus.
+
+ Select Caption Bar to show or hide the caption bar (including the information line and context sensitive help).
+ Select Menu to show or hide the menu bar.
+ Select Palette to show or hide the Color Pattern Set.
+ Select Scroll Bars to show or hide the scroll bars.
+ Select Tools to show or hide the Toolbox.
+ Click All On to turn on all display options.
+ Click All Off to turn off all display options.
+
+³´µ When both the toolbox and the palette are hidden, the drawing Width Box also is hidden.
+#8
+Solid Colors Only
+Choose Display Solid Colors Only to make only solid colors available in the Color Pattern Set. Using only solid colors in your drawing generally improves the quality of the image when you print it.
+#44
+Font Menu
+The commands on the Font menu work with the Text tool. You can change the type style, size, and format of the text you add to your drawings.
+#45
+1-4
+The first four items on the Font menu are the names of MS Paintbrush font files. To choose a font listed on the Font menu, click its name. A checkmark indicates the current font.
+
+You add different fonts to the menu with the Select Font Files command. Four fonts are available at one time.
+#46
+Select Font Files
+Choose Font Select Font Files to add fonts to the Font menu. When you select a new font, it replaces the first font on the Font menu. To use the new font, choose it on the Font menu before typing text.
+
+To add a font to the Font menu, choose Font Select Font File.  Select the font you want to add in the dialog box. You can choose bitmap or outline fonts (see "MS Paintbrush IV User's Manual" for more information about fonts).
+#49
+Set Gradient
+Choose Font Set Gradient to select a shading effect for text. The Gradient effect uses the secondary and background colors to create a gradual shade. The gradient fill color begins at the current background color, and changes into the secondary color. You can select a horizontal, vertical, or radial (from the center out) gradient.
+
+To use the gradient you specify, choose Font Set Type Style and select Gradient as the font style before you start typing.
+#48
+Set Shadow
+Choose Font Set Shadow to specify where the shadow behind text appears. You control the position of the shadow by adjusting the X (horizontal) and Y (vertical) offsets in the Set Shadow dialog box. Change the settings with the scroll bar or by typing a value in the appropriate box. A negative X value puts the shadow left of the letter; a negative Y value puts the shadow below the baseline. As you adjust the offsets, the sample shadow moves in the display box. Select &3D shadow if you want to create an attached shadow to create a block letter effect.
+
+³´µ To use the shadow settings, choose Font Set Type Style and select the Shadow option before typing text.
+#47
+Set Type Specs
+Choose Font Set Type Specs to adjust character size, interline and intercharacter spacing, italic slant, and base angle. The values of these options appear in the current unit of measure (choose Set Units to see or change the unit of measure). To change a value, point to the box next to the option name, select the value in the box, and type the new value. To use the built-in settings, choose Default.
+
+ Bitmap fonts cannot be rotated or resized.
+
+You can set the following options in the Set Type Specs dialog box:
+ Character Size: Sets the size of outline fonts. This does not affect bitmap fonts.
+ Intercharacter Spacing: Changes the distance between characters. Negative values move characters closer together, positive values spread them apart.
+ Interline Spacing: Controls the vertical distance between lines of text. Negative values move lines closer together, positive values spread them apart.
+ Italic Slant: Determines the angle of slant of the characters, when Font Style Italic is selected.  This value is always in degrees.
+ Base Angle: Controls the angle of the baseline for outline fonts.  This does not affect bitmap fonts.  The Base Angle value is always in degrees.
+
+³´µ Settings affect only new text or text you have not pasted into your drawing. Touch the text frame to have changes affect current text.
+#50
+Set Type Style
+Choose Font Set Type Style to change the appearance of text you type by adding shadows, underlining, bold, italic and other formats to your text. You specify values for the italic effect with the Font Set Type Specs command. You specify the values for the shadow with the Font Set Shadow command.
+
+You can select the following options in the Set Type Style dialog box:
+ Plain: Uses standard characters.
+ Gradient: Applies a color gradient, like a shadow, inside letters.
+ Outline: Outlines text in the primary color and fills letters with the secondary color.
+ Flush Left: Aligns text left.
+ Flush Right: Aligns text right.
+ Justified: Aligns text on both sides, like a newspaper column.
+ Centered: Centers each line of text.
+ Bold: Makes text bold.
+ Shadow: Adds a shadow to text.
+ Transparent: Makes background color show through outline text.
+ Italic: Makes text italic.
+ Underline: Underlines text.
+
+You can combine bold, italic, and underline with any other options.
+#60
+Effects Menu
+Use the commands on the Effects menu to add special coloring and shading effects to your drawing. Most effects work best with a large number of colors.
+
+Effects change the appearance of areas a tool touches. Some tools are inactive or work differently when you choose an effect. The Color Pattern Set also may change. Choose Effects Standard to restore the normal Toolbox and Color Pattern Set.
+#61
+Standard
+Choose Effects Standard to turn off special effects and restore the normal Toolbox and Color Pattern Set.
+#67
+Blend
+Choose Effects Blend to "average" colors in an area. This works best when you have at least 16 grays or 256 colors (it is not available in black and white). You use either the Paintbrush or Filled Box tool to tell MS Paintbrush where to blend.
+
+Click &Next for information about specific tools.
+#200
+Using the Paintbrush with Blend
+Blend "averages" colors in an area.
+
+To blend with the Paintbrush:
+ Choose Effects Blend.
+ Choose the Paintbrush, and set the desired drawing width.
+ Drag the Paintbrush over the area you want to blend. The colors blend as you drag.
+
+³´µ The brush shape is always square with this effect.
+#201
+Using the Filled Box with Blend
+Blend "averages" colors in an area.
+
+To blend with the Filled Box:
+ Choose Effects Blend.
+ Choose the Filled Box.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box covers the area you want to blend. Hold down Shift to draw a square.
+ Release , the colors blend when the box is drawn.
+#64
+Brightness
+Choose Effects Brightness to change the intensity of colors on the screen. This works best when you have at least 16 grays or 256 colors (it is not available in black and white). The amount of brightening is selected from the Color Pattern Set. You use either the Paintbrush or Filled Box tool to tell MS Paintbrush where to brighten.
+
+Click &Next to see how to use specific tools.
+#202
+Using the Paintbrush with Brightness
+Brightness changes the intensity of colors on the screen. The brush shape is always square with this effect.
+
+To brighten with the Paintbrush:
+ Choose Effects Brightness.
+ Choose the Paintbrush, and set the desired drawing width.
+ Choose a level of brightness from the Color Pattern Set. Choose a light color to lighten an area, a dark color to darken the area.
+ Drag the Paintbrush over the area you want to change, the area changes as you drag.
+
+³´µ To change the level of the effect, select a different level from the settings in the Color Pattern Set, or click the tool again to save the changes and then brighten again.
+#203
+Using the Filled Box with Brightness
+Brightness changes the intensity of colors on the screen.
+
+To brighten with the Filled Box:
+ Choose Effects Brightness.
+ Choose the Filled Box.
+ Choose a level of brightness from the Color Pattern Set. Choose a light color to lighten an area, a dark color to darken the area.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box covers the area you want to brighten. Hold down Shift to draw a square.
+ Release , the area brightens when the box is drawn.
+
+³´µ To change the level of the effect, select a different level from the settings in the Color Pattern Set, or click the tool again to save the changes and then brighten again.
+#65
+Contrast
+Choose Effects Contrast to adjust the contrast between colors in your drawing to add subtlety. This works best when you have at least 16 grays or 256 colors (it is not available in black and white). The levels of contrast you can choose appear in the Color Pattern Set. You use either the Paintbrush or Filled Box to tell MS Paintbrush where to adjust the contrast.
+
+Click &Next to see how to use specific tools.
+#204
+Using the Paintbrush with Contrast
+Contrast adjusts the colors in your drawing, adding subtlety. The brush shape is always square with this effect.
+
+To adjust contrast with the Paintbrush:
+ Choose Effects Contrast.
+ Choose the Paintbrush, and set the desired drawing width.
+ Choose a level of contrast from the Color Pattern Set.
+ Drag the Paintbrush over the area you want to change, the area changes as you drag.
+
+³´µ To change the level of the effect, select a different level from the settings in the Color Pattern Set, or click the tool again to save the changes and then brush again.
+#205
+Using the Filled Box with Contrast
+Contrast adjusts the colors in your drawing, adding subtlety.
+
+To adjust contrast with the Filled box:
+ Choose Effects Contrast.
+ Choose the Filled Box.
+ Choose a level of contrast from the Color Pattern Set.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box is the size you want. Hold down Shift to draw a square.
+ Release , the area changes when the box is drawn.
+
+³´µ To change the level of the effect, select a different level from the settings in the Color Pattern Set, or click the tool again to save the changes and then draw again.
+#63
+Gradient
+Choose Effects Gradient to fill shapes with a graduated blend of the secondary and background colors. You set the type of gradient (horizontal, vertical, or radial) with the Options Set Gradient command.
+
+Click &Next to see how to use specific tools.
+#206
+Using the Paint Roller with Gradient
+Gradient fills shapes with a graduated blend of the secondary and background colors.
+
+To use Gradient with the Paint Roller:
+ Choose Effects Gradient.
+ Choose the Paint Roller.
+ Choose the secondary and background colors.
+ Point to where you want to fill. Only the "drop" on the pointer needs to fit in the area.
+ Click  to fill an area with the gradient.
+#207
+Using the Filled Box with Gradient
+Gradient fills with a graduated blend of the secondary and background colors.
+
+To use Gradient with the Filled Box:
+ Choose Effects Gradient.
+ Choose the Filled Box.
+ Choose the primary color for the boundary of the shape.
+ Choose the secondary and background colors.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box is the size you want. Hold down Shift to draw a square.
+ Release , to draw a box filled with the gradient and bordered by the primary color.
+#57
+Smudge
+Choose Effects Smudge to randomly mix dots (pixels) on screen. This effect adds subtlety to the colors. You use either the Spraycan or Filled Box to tell MS Paintbrush where to smudge.
+
+Click &Next to see how to use specific tools.
+#208
+Using the Spraycan with Smudge 
+Smudge randomly mixes dots (pixels) on screen, adding subtlety to the colors.
+
+To randomly mix dots with the Spraycan:
+ Choose Effects Smudge.
+ Choose the Spraycan, and set the desired drawing width.
+ Press  and drag over the area you wish to smudge, the colors smudge as you drag.
+#209
+Using the Filled Box with Smudge
+Smudge randomly mixes dots (pixels) on screen, adding subtlety to the colors.
+
+To randomly mix dots with the Filled Box:
+ Choose Effects Smudge.
+ Choose the Filled Box.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box covers the area you want to smudge. Hold down Shift to draw a square.
+ Release , the area changes when the box is drawn.
+#112
+Tile Pattern
+Choose Effects Tile Pattern to paint with a tile pattern you load from disk or the clipboard by using the Options Set Tile Pattern command. The tile pattern can be any small .PCX or .TIF file. Use a tile pattern to paint a geometric background in your drawing or to add a 3D effect.
+
+The Tiles are always pasted transparently. When a color in your tile is the same as your transparent color, it is invisible.
+
+ Point to a color in the Color Pattern Set and click  to choose the transparency color.
+ Point to a color in the Color Pattern Set and click Shift  to choose the background color.
+
+Click &Next to see how to use specific tools.
+#210
+Using the Line with a Tile Pattern
+Use a tile pattern to paint a geometric background in your drawing or to add a 3D effect.
+
+To draw a pattern of tiles with the Line:
+ Use the Options Set tile Pattern to load a tile pattern from disk or the clipboard.
+ Choose Effects Tile Pattern.
+ Choose the Line.
+ Point to where you want to start the line of tiles.
+ Drag  until the line of tiles is the length you want. Hold down Shift to constrain the line to a horizontal, vertical or 45 degree angle.
+ The tiles are drawn when you release .
+
+³´µ To adjust the distance between the tiles, change the line width.
+#211
+Using the Filled Box with a Tile Pattern
+Use a tile pattern to paint a repeated geometric background in your drawing.
+
+To draw a rectangular pattern of tiles with the Filled Box:
+ Use the Options Set tile Pattern to load a tile pattern from disk or the clipboard.
+ Choose Effects Tile Pattern.
+ Choose the Filled Box.
+ Point to where you want to start drawing.
+ Hold down  to mark the first corner of the box.
+ Drag until the box is the size you want. Hold down Shift to draw a square.
+ Release , the area is filled with the tile pattern when the box is drawn.
+#66
+Tint
+Choose Effects Tint to alter the shade of colors in a drawing. Tint makes the colors look as though they are being viewed through colored sunglasses. This works best when you have at least 16 grays or 256 colors (it is not available in black and white).
+
+Click Next to see how to use specific tools.
+#212
+Using the Paintbrush with Tint
+Tint makes the colors look as though they are being viewed through colored sunglasses. The brush shape is always square with this effect.
+
+To tint an area with the Paintbrush:
+ Choose Effects Tint.
+ Choose the Paintbrush, and set the desired drawing width.
+ Drag over the area you want to tint, the tint occurs as you drag.
+
+³´µ If you tint with a gray shade, the saturation of the results will change (black decreases saturation, white increases saturation).
+#213
+Using the Filled Box with Tint
+Tint makes the colors look as though they are being viewed through colored sunglasses.
+
+To tint an area with the Filled Box:
+ Choose Effects Tint.
+ Choose the Filled Box.
+ Point to where you want to start tinting.
+ Hold down  to mark the first corner of the box.
+ Drag until the box covers the area you want to tint. Hold down Shift to draw a square.
+ Release , the area is tinted when the box is drawn.
+
+³´µ If you tint with a gray shade, the saturation of the results will change (black decreases saturation, white increases saturation).
+#68
+Options Menu
+Use the commands on the Options menu to set a wide range of drawing options, from selecting the brush shape and width, to setting the appearance of colors on your screen. After you set these options, you can save them by choosing File Save Workspace.
+#70
+Set Aspect
+Choose Options Set Aspect to adjust the width-to-height ratio of the drawing tools. If you intend to print an image, you should choose Options Set Aspect and select For Printer before you start drawing. If you want the image to look correct on screen, select For Screen before you start drawing. If you have selected For Printer, circles, squares and other objects may appear elongated on screen, but they will print correctly. If you select For Screen, those objects will look correct screen, but they may appear elongated on the printout.
+
+Set Aspect affects Shift key constraining of circles and boxes by making the ratio of height to width appropriate for the device (printer/screen).  It also affects the actual widths of the sides of boxes and ovals, as well as the appearance of the paintbrush and the widths of lines.  If screen and printer have the same aspect ratio (such as VGA and laser printer) Set Aspect is not needed.
+
+Use the Custom Ratio option to set a specific aspect ratio when the printer you chose in PBSETUP is not the one you want to use to print your drawing (see "Supported Printers" in your MS Paintbrush IV User's Manual for a list of aspect ratios).
+
+³´µ The aspect ratios for screen and printer are the same when your screen resolution is 640 x 480 (standard VGA) and your printer prints 1 to 1.
+
+Here is a list of common screen resolutions and aspect ratios: VGA (640 x 480) = 1.0, EGA (640 x 350) = 1.371, CGA (640 x 200) = 2.4, and CGA (320 x 200) = 1.2.
+
+Here is a list of common printer resolutions and aspect ratios: Epson MX (120 x 144 dpi) = 0.833, Epson FX (240 x 144) = 1.667, Epson LQ (180 x 180) = 1.0, and HP LaserJet (300 x 300) = 1.0.
+#73
+Set Color Patterns
+Choose Options Set Color Pattern to change the color patterns in the Color Pattern Set. Color patterns are combinations of the solid colors your computer can display. Since these combinations are patterns of dots, even though they may appear solid on your display, color patterns may not print smoothly.
+
+To change a color pattern:
+ Choose the color pattern you want to change.
+ Choose Options Set Color Pattern.
+ In the Set Color Pattern dialog box, select the color model in which you want to edit the color pattern, either RGB or HLS. RGB (red, green, blue) adjusts colors by changing the levels of red, green, and blue in the selected color. HLS (hue, lightness, and saturation) adjusts various values in the selected color.
+ Use the scroll bars to change the levels of each factor in the color.
+ Choose OK to change the color pattern or Cancel to undo the changes.  Choose Default to revert to the original setting.
+
+³´µ If you have trouble creating a color, see Mixing RGB Colors.
+#72
+Set Brush Shape
+Choose Options Set Brush Shape to change the shape the Paintbrush and Line tools draw with. You can set the brush shape to round, square, diamond, or one of four angled lines.
+
+To change the brush shape:
+ Choose Options Set Brush Shape.
+ Click the shape you want to use.
+ Choose OK.
+#111
+Set Entire Palette
+Choose Options Set Entire Palette to adjust the set of colors, or "palette," your computer uses to display colors on the screen. This palette is the set of solid colors used to create your drawing. (To adjust a single color, use the Options Set Palette command.) Set Entire Palette works like the controls on your TV. It is useful, for example, if you draw a sunset scene and want to redden all the colors.
+
+You change several factors to adjust the palette. Brightness adjusts the lightness of the entire palette. Contrast adjusts the range between the lightest and darkest colors on the entire palette. Hue selects the color you want to "add." The spectrum is arranged in a color wheel where red is 0, green is 120, cyan is 180, blue is 240, purple is 300, and 360 is red again. Tint adjusts the amount of the Hue you add or subtract from the palette.
+
+To adjust the color palette:
+ Choose Options Set Entire Palette.
+ Use the scroll bars to change the settings for Brightness, Contrast, Hue, and Tint.
+ Choose OK when you have finished adjusting the palette.
+
+³´µ You can press and drag the top bar on the dialog box to move it around the screen.  Use this if you need to uncover important parts of your drawing.
+#59
+Set Gradient
+Choose Options Set Gradient to change the orientation of the shading effect you create with the Effects Gradient command. You can select a vertical, horizontal, or radial (out from center) gradient.
+
+To use the gradient effect:
+ Choose Options Set Gradient.
+ In the dialog box, select the type of gradient you want to use.
+ Choose OK.
+#58
+Set Line Width
+Choose Options Set Line Width to change the width of the lines, curves, and borders MS Paintbrush draws on your screen. Set Line Width also adjusts the size of the Eraser, Color Eraser, Local Undo eraser, and Spraycan pattern.
+
+To set the line width using the Line Width Dialog Box:
+ Choose Options Set Line Width or click the triangle in the Width Box.
+ Type a new value in the Line Width box.
+ Choose OK.
+³´µ You can change the unit of measure by selecting Set Units and selecting a new unit.
+
+To set the line width quickly using the Width Box:
+ Click the arrows underneath the width value. Press and hold  to quickly make large changes.
+         or
+ Change the width value directly by selecting it and typing in a new width value, just like a normal editable number in a dialog box.
+³´µ The width value in the Width Box is always in units of pixels.
+#71
+Set Palette
+Choose Options Set Palette to change the red, green, and blue components of a single solid color on the screen. It works like the Set Entire Palette command, but it adjusts one color at a time. Use this command if you need to change the tint of one color on the screen or if a color is not printing correctly.
+
+Every color in the hardware palette is a solid shade. If you plan to print images, use only the hardware palette colors for best results. If you use color patterns, they may print with a checkerboard appearance.
+
+To adjust an individual hardware palette color:
+ Choose Options Set Palette.
+ Choose the solid color you want to adjust by clicking either in the drawing or in the Color Pattern Set.
+ Select the color model you want to use: RGB or HLS. RGB (red, green, blue) adjusts colors by changing the levels of red, green, and blue in the selected color. HLS (hue, lightness, and saturation) adjusts various values in the selected color.
+ Use the scroll bars to change the settings in the RGB or HLS boxes.
+ Choose OK when you have finished adjusting the color.
+
+If you have trouble creating a color, see Mixing RGB Colors.
+
+³´µ You can press and drag the top bar on the dialog box to move it around the screen.  Use this if you need to uncover important parts of your drawing.
+#104 Set Tile Pattern
+Tile Pattern
+Choose Set Tile Pattern to select a tile pattern you load from disk or the clipboard. The tile pattern can be any small .PCX or .TIF file. Set Tile Pattern loads a cutout image you saved with the Edit Cut, Edit Copy, or Edit Copy To command as the current Tile Pattern.
+
+Use a tile pattern to paint a geometric background in your drawing or to add a 3D effect.
+
+To use Tile Pattern:
+ Use the Options Set tile Pattern to load a tile pattern from disk or the clipboard.
+ Choose Effects Tile Pattern.
+ Choose either the Line or Filled Box tool.
+ Drag the tool to paint with the tile pattern.
+
+³´µ To adjust the distance between the tiles, change the line width.
+#14
+Set Units
+Choose Options Set Units to set the unit of measure you want to use in your drawing. You can use inches, centimeters, points, picas or pixels. A pixel is equal to one dot on the computer's screen. Picas and points are typographic terms. There are 72 points in an inch; twelve points in a pica. When you choose Options Set Unit and select a new unit of measure, all measurements in the drawing change. The line width display in the Width Triangle, however, is always in pixels.
+#74
+Get Palette
+Choose Options Get Palette to load a custom set of hardware color palette settings that you saved to disk with the Save Palette command. The palette file contains settings for the hardware palette (solid colors) and color patterns (combinations of solid colors). You may load one or both settings. If you load a hardware palette, the colors in your picture change.
+
+To load a custom palette:
+ Choose Options Get Palette.
+ Select the item you want to load in the Items list box. You can load color patterns, a hardware color palette, or both.
+ Select the file you want to load from the file list box (see File List Boxes). Palette files have a .PAL extension.
+#75
+Save Palette
+Choose Options Save Palette to save a Color Pattern Set you have edited. You use the Options Get Palette command to load the palette.
+
+To save a Color Pattern Set:
+ Choose Options Save Palette.
+ Type a name for the pattern file in the Filename box. MS Paintbrush automatically attaches a .PAL extension to the filename.
+ Choose Save to save the file.
+#3
+The Help Menu
+Use the commands on the Help menu to provide help and information about MS Paintbrush and its tools.
+
+You can read hints on using MS Paintbrush effectively in Help Short Cuts. You can display Context Sensitive and/or Information Line help in the caption bar at the top of the screen. You can get information about the system configuration with Help Statistics. And you can get the version number of MS Paintbrush in Help About.
+#113
+Context Sensitive Help
+Choose Help Context Sensitive Help and the caption bar displays a brief message about tools and commands as you use them.
+#114
+Information Line
+Choose Help Information Line to display mouse position and other measurements in the caption bar.
+
+³´µ Displaying the Information Line requires many calculations and may slow system performance.
+#43
+Statistics
+Choose Help Statistics to display information about the currently loaded image as well as information about your memory and hardware. The Statistics dialog box CANNOT be edited.
+
+ Image shows the width, height and number of colors in this picture.
+ Screen shows the name and resolutions of your video card.
+ Computer shows the amount of RAM (DOS and HEAP) and Disk space installed and remaining.
+ Printer shows the name and resolutions of the currently installed printer.
+#9999
+>>>>> End of Help File <<<<<
+Choose &Next to start at the beginning of the file.
+
+Choose &Previous to go to the last help entry.
+#0
+End-of-File
+

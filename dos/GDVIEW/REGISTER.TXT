@@ -1,0 +1,67 @@
+
+
+                             GD VIEW V0.92
+                  Copyright (c) 1996-98 Gerard de Melo
+                         Registration Information
+
+
+
+ --- Registering? What is all of this about? ---
+
+ GD View  is user-supported  software.  You are  required  to become a
+ registered user if you use it after the test period of 30 days. There
+ is no fixed registration fee - you could even register for free.  You
+ the  user  can   support  me  with   whatever  amount  you  think  is
+ appropriate.
+ By registering  you  encourage me  to continue the  development of GD
+ View and to add more features.  Remember that it is illegal to use it
+ after the test period without registering. After you register you can
+ stop GD View  from showing the  title screen and  before you  exit GD
+ View won't wait until you press a key any more.  
+
+
+
+ --- What if I do not want to register? ---
+
+ You  may not  use GD  View  when  the test period is  over unless you
+ register.  If you do  not register then you must  remove GD View from
+ your system.
+
+
+
+ --- I want to register! What do I have to do? ---
+
+ There are two registration methods:
+
+ 1) Standard Registrations
+
+    Print out the file REGISTER.FRM  and fill out the form.  If you do
+    not have a printer then prepare an equivalent letter.  Please make
+    sure that everything is readable. Send the form by mail to:
+
+    Gerard de Melo
+    Heidestr. 156
+    60385 Frankfurt am Main
+
+    Please make sure that any donations you send  are not visible from
+    the outside of the envelope.
+
+    Registration codes are sent out  exclusively via e-mail so a valid
+    e-mail  address must be  supplied  (go to  www.hotmail.com  to get
+    one).
+
+ 2) Online Registrations
+
+    To proceed point your Internet web browser to the address:
+    http://www.demelo.org/gdm/gdv/regmd.html
+
+ Your  registration  code  will  be  sent to you  as soon as  possible
+ (contact me if for some reason it takes longer than three weeks).
+ Once you have received it you can register your copy of GD View using
+ the SETUP  program.  You will receive  a more detailed description of
+ the process  with your key.  Entering the  correct  registration  key
+ automatically transforms your copy of GD View into a registered copy.
+
+ Contact me  if you  need to  make  special  arrangements  (e.g.  site
+ licenses).
+

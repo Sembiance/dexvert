@@ -1,0 +1,107 @@
+	MICROSOFT PAINTBRUSH README.DOC
+
+	This file includes information that supplements the "Microsoft
+	Paintbrush User's Guide".
+
+
+	MICROSOFT PAINTBRUSH:
+
+	Memory requirements:
+
+	MS Paintbrush works best on systems with 640Kb or more memory
+	installed.  It is possible for MS Paintbrush to run in systems
+	with less memory but performance, drawing size and color capabilities
+	are all impacted.
+
+	Remember that all "terminate and stay resident programs" use system
+	memory.  If you are experiencing memory limitation problems when
+	running MS Paintbrush you may want to remove these TSR programs from
+	memory before starting MS Paintbrush.
+
+	Canvas size limitations in VGA 640X480 16-color mode:
+
+	If you've installed MS Paintbrush for the VGA display adapter
+	and selected the 640X480 16-color mode then your canvas size
+	may be limited to less than a full screen.  You can increase the
+	canvas size in one of two ways. 
+	
+	First, you can reinstall MS Paintbrush by running PBSETUP from the
+	disk and directory where MS Paintbrush is installed and select
+	the same 640X480 VGA resolution but with 8 or 4 colors.
+
+	Alternatively, you can reinstall MS Paintbrush and select "none"
+	for your printer.
+
+	Either of these options will release enough memory to allow MS
+	Paintbrush to create a canvas that is at least as large as your
+	screen.
+	
+
+	Using Extended or Expanded memory to enhance Microsoft Paintbrush
+	performance:
+	
+	If you have extended or expanded memory you can enhance MS
+	Paintbrush performance as follows.  Set your extended or expanded 
+	memory up as a "ramdisk".  This requires ramdisk device driver 
+	software which typically comes with the memory or with DOS.  
+	Follow the device driver installation instructions to set up your 
+	ramdisk.  You will need a ramdisk of at least 128K bytes.  Next, 
+	make the following entry in your AUTOEXEC.BAT file.
+	
+	SET TMP=X:
+	
+	Replace X with the logical unit identifier of your ramdrive. 
+	Reboot your system to make these changes take effect.
+
+
+	PBSETUP:
+
+	Floppy only installations:
+	
+	If you use PBSETUP to build two Paintbrush diskettes, Run Disk A and
+	Run Disk B, and if you have 720K byte, 1.44 M byte or 1.2M byte disk
+	drives then, after running PBSETUP, you can create a single run
+	diskette.  Simply copy all the files from Run Disk B onto Run Disk A
+	and use Run Disk A to run Microsoft Paintbrush.
+
+
+	Specifying a Printer:
+	
+	To properly install Microsoft Paintbrush, you need to choose the
+	"Select a Printer" option, even if you do not have a printer
+	connected to your computer. In this case, simply choose "None"
+	from the printer list.
+
+	Okidata 192, 193, 292, and 293 Printers:
+
+	If you are using an Okidata 292, or 293 printer and the printer has a
+	color ribbon, you may need to change the printer COLOR setting from
+	BLK RBN to BLK.
+
+	You must run a printer setup program to change the default 7 bit
+	graphics setting to the 8 bit setting in order to use Microsoft
+	Paintbrush with an Okidata 192 or 193 printer with the standard
+	Microline ROM or an Okidata 292 or 293 printer with the standard
+	Microline personality module.  The title of this setting is APA-7/8
+	on some 192 or 193 printers, or B.I. G.-7/8 on other 192 or 193
+	printers. Check your Okidata documentation for directions to run
+	the printer setup program.
+
+	AT&T Display Enhancement Board:
+
+	Microsoft Paintbrush supports the AT&T Display Enhancement Board 
+	(DEB) in the 2-color, 640 x 400 mode only. 
+
+	IBM Enhanced Graphics Adapter:
+
+	If you have an IBM Enhanced Graphics Adapter with 64K of
+	on-board memory (as opposed to 256K) Microsoft Paintbrush runs
+	in the 640 x 200 16-color mode, even if you chose the IBM Enhanced
+	Graphics Adapter High-res. 16-color option on the PBSETUP adapter
+	list.
+
+	Changing Printers or Display Adapters:
+
+	If, after installing Microsoft Paintbrush, you want to change the
+	printer or display adapter you should run PBSETUP from the disk and
+	directory where Microsoft Paintbrush is installed.

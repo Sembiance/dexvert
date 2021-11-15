@@ -2,7 +2,7 @@
 
 >>> ******** General
 >>> loc : "local"
-Where to run this program at. One of: local, amigappc, gentoo, win2k, winxp
+Where to run this program at. One of: local, dos, amigappc, gentoo, win2k, winxp
 
 >>> website : "https://entropymine.com/deark/"
 A website URL For the program
@@ -48,7 +48,7 @@ Return the extension files produced by this program should be renamed to
 >>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
 
->>> pre = (state, p, r, cb) => {}
+>>> pre = async (runState) => {}
 This will be executed directly BEFORE the program is run (either in or exec)
 
 >>> post = async (runState) => { ... }
@@ -68,7 +68,8 @@ Some programs are buggy and will consume the entire hard drive. This is a way to
 >>> chain = "dexvert[asFormat:abc] -> dexvert[asFormat:mid]"
 Programs can't always produce the end result I want, so you can chain the outputs of one program into a nother program.
 
-
+>>> verify = async (r, dexFile) => { return false; }
+Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.
 
 
 

@@ -158,7 +158,9 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 
 	await xu.log3`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args}`;
 
-	const r = (await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()) || {};
+	const r = (await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)}))?.json()) || {};
+	console.log({r});
+	return r;
 
 	//await httpUtil.post(`http://${C.DEXSERV_HOST}:${C.DEXSERV_PORT}/qemuRun`, qemuData, {postAsJSON : true}, this);
 	//if(a.toString()!=="ok")

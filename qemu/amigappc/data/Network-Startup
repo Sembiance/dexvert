@@ -1,0 +1,7 @@
+; $VER: Network-Startup 53.2 (01.06.2011)
+
+AddNetInterface QUIET DEVS:NetInterfaces/~(#?.info)
+
+; Add below this line applications that need a running network
+
+NEWSHELL CON:10/10/500/300/dexvert/INACTIVE FROM HD:dexvert/launchSupervisor.script

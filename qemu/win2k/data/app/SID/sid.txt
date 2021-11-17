@@ -1,0 +1,37 @@
+[sid] - installshield 6/7 script decompiler
+v1.0 written by sn00pee
+
+introduction
+------------
+sid is designed to decompile installshield .inx scripts created with
+installshield 6 or 7. additionally it allows the user to take a few
+changes to the code and patch the script.
+
+features:
+- decompiles every .inx script file
+- automatically detects IS standard lib functions
+- patch parts of the script
+- easy to use program environment
+
+patching
+--------
+at the moment you can only patch operators, simply right click on the
+line which contains the operator to be changed and a list will appear.
+
+known problems
+--------------
+if you have any problems with standard IS functions then simply
+disable signatures in settings/enable signatures.
+
+to add in future releases
+-------------------------
+- publish sources
+- create documentation about the inx file format(haven't had any time)
+- improve patching
+- speed enhancements
+- improve helpfile :p
+
+contact
+-------
+for bug reports/suggestions try to reach me on efnet/linknet
+nick is sn00pee, you may also try to reach me in #learn2crack

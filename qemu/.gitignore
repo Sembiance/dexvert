@@ -1,0 +1,24 @@
+# HD images, ISOs and other commercial software should not be checked in
+win*/*.img
+win*/data/*.iso
+
+win2k/data/app/Office97Standard.zip
+win2k/data/app/PageStream5.0.5.8-windows.zip
+
+winxp/data/app/DirectorMX2004.exe
+winxp/data/app/fmerlin.exe
+winxp/data/app/TotalCADConverterX.exe
+winxp/data/app/Xtras/
+winxp/data/app/EXE2SWFExtractor.exe
+
+amiga*/*.img
+amiga*/data/*.iso
+amiga*/data/*.img
+amiga*/data/*.bsdiff
+
+macos*/*.img
+macos*/data/*.rom
+macos*/data/*.iso
+
+gentoo*/*.img
+gentoo*/data/*.iso

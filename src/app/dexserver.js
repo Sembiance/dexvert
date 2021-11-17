@@ -9,8 +9,7 @@ const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const startedAt = performance.now();
 
 xu.log`Cleaning up previous dexvert RAM installation...`;
-if(await fileUtil.exists(DEXVERT_RAM_DIR))
-	await Deno.remove(DEXVERT_RAM_DIR, {recursive : true});
+await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 
 const servers = await Server.loadServers();

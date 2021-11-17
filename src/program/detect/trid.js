@@ -10,7 +10,7 @@ export class trid extends Program
 	bin = "trid";
 	loc = "local";
 
-	args = r => [r.f.input.rel, "-n:5"]
+	args = r => [r.inFile(), "-n:5"]
 	post = r =>
 	{
 		r.meta.detections = [];

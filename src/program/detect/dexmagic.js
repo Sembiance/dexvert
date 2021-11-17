@@ -89,7 +89,7 @@ export class dexmagic extends Program
 	{
 		r.meta.detections = [];
 
-		const buf = await fileUtil.readFileBytes(r.f.input.absolute, DEXMAGIC_BYTES_MAX);
+		const buf = await fileUtil.readFileBytes(r.inFile({absolute : true}), DEXMAGIC_BYTES_MAX);
 		
 		for(const [matchid, checks] of Object.entries(DEXMAGIC_CHECKS))
 		{

@@ -223,7 +223,7 @@ Deno.test("rsyncTo", async () =>
 		"subDir/more_sub/third",
 		"subDir/txt.b",
 		"some.big.txt.file.txt"].map(v => path.join(tmpDirPath, v)));
-	await Deno.remove(tmpDirPath, {recursive : true});
+	await fileUtil.unlink(tmpDirPath, {recursive : true});
 
 	await Deno.mkdir(tmpDirPath);
 	let b = await a.rsyncTo(tmpDirPath, {type : "other"});
@@ -235,7 +235,7 @@ Deno.test("rsyncTo", async () =>
 	assert(!b.files.input);
 	assertStrictEquals(b.files.other.length, 2);
 	assertStrictEquals(b.all.length, 2);
-	await Deno.remove(tmpDirPath, {recursive : true});
+	await fileUtil.unlink(tmpDirPath, {recursive : true});
 
 	await Deno.mkdir(tmpDirPath);
 	b = await a.rsyncTo(tmpDirPath, {type : "other", relativeFrom : "/mnt/compendium/DevLab/dexvert/test/files/subDir"});
@@ -243,7 +243,7 @@ Deno.test("rsyncTo", async () =>
 		"more_sub",
 		"more_sub/c.txt",
 		"symlinkFile"].map(v => path.join(tmpDirPath, v)));
-	await Deno.remove(tmpDirPath, {recursive : true});
+	await fileUtil.unlink(tmpDirPath, {recursive : true});
 	assertStrictEquals(b.other.rel, "symlinkFile");
 	assertStrictEquals(b.other.isSymlink, true);
 });

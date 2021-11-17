@@ -7,6 +7,6 @@ export class pcx extends Format
 	ext           = [".pcx"];
 	mimeType      = "image/x-pcx";
 	magic         = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/];
-	converters    = ["imageAlchemy"]; // TODO: ["nconvert", "convert", "deark", "imageAlchemy", "graphicWorkshopProfessional"];
+	converters    = ["graphicWorkshopProfessional"]; // TODO: ["nconvert", "convert", "deark", "imageAlchemy", "graphicWorkshopProfessional"];
 	metaProviders = ["image"];
 }

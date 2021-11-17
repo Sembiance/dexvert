@@ -12,9 +12,9 @@ export class svgInfo extends Program
 	{
 		// convert to PNG to get color count and opaque info
 		const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");
-		await runUtil.run("resvg", ["--width", "500", r.f.input.rel, path.relative(r.f.root, pngFilePath)], {cwd : r.f.root, verbose : xu.verbose>=3});
+		await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {cwd : r.f.root, verbose : xu.verbose>=3});
 		const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
-		await Deno.remove(pngFilePath);
+		await fileUtil.unlink(pngFilePath);
 
 		if(imageInfo.opaque || imageInfo.colorCount>1)
 		{
@@ -24,7 +24,7 @@ export class svgInfo extends Program
 
 		if(r.f.input.size<xu.MB*30)
 		{
-			const svgData = xmlParse(await fileUtil.readFile(r.f.input.absolute));
+			const svgData = xmlParse(await fileUtil.readFile(r.inFile({absolute : true})));
 			if(!svgData || !svgData.svg || Object.keys(svgData.svg).filter(k => !k.startsWith("@")).length===0)
 			{
 				// If we have no children, doesn't matter if width/height/viewBox is set, there isn't anything to draw

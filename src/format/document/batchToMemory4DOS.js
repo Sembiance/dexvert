@@ -1,7 +1,7 @@
 /*
 import {Format} from "../../Format.js";
 
-export class 4DOSCompressedBatch extends Format
+export class batchToMemory4DOS extends Format
 {
 	name = "4DOS Compressed Batch-To-Memory File";
 	ext = [".btm"];

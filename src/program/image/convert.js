@@ -16,7 +16,7 @@ export class convert extends Program
 	bin  = "convert";
 	args = r =>
 	{
-		const a = [r.f.input.rel, "-strip"];
+		const a = [r.inFile(), "-strip"];
 		const outType = (r.flags.outType || "png");
 		if(outType==="png")
 			a.push("-define", "png:exclude-chunks=time");
@@ -24,7 +24,7 @@ export class convert extends Program
 			a.push("-flip");
 		if(r.flags.removeAlpha)
 			a.push("-alpha", "off");
-		a.push(path.join(r.f.outDir.rel, `out.${outType}`));
+		a.push(r.outFile(`out.${outType}`));
 		return a;
 	}
 

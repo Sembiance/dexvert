@@ -221,7 +221,7 @@ Deno.test("rename", async () =>
 
 	await a.rename(tmpFilename);
 
-	await Deno.remove(tmpPath);
+	await fileUtil.unlink(tmpPath);
 });
 
 Deno.test("pretty", async () =>

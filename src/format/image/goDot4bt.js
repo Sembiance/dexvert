@@ -1,7 +1,7 @@
 /*
 import {Format} from "../../Format.js";
 
-export class 4bt extends Format
+export class goDot4bt extends Format
 {
 	name = "GoDot 4Bit Image";
 	website = "http://fileformats.archiveteam.org/wiki/GoDot";

@@ -45,8 +45,8 @@ export class image extends Family
 		if(dexid.formatid==="svg")
 		{
 			const r = await Program.runProgram("svgInfo", dexFile);
-			await Deno.remove(r.f.outDir.absolute, {recursive : true});
-			await Deno.remove(r.f.homeDir.absolute, {recursive : true});
+			await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
+			await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
 			Object.assign(meta, r.meta);
 		}
 		else
@@ -143,8 +143,8 @@ export class image extends Family
 							meta[key.toLowerCase()] = val;
 					});
 				}
-				await Deno.remove(r.f.outDir.absolute, {recursive : true});
-				await Deno.remove(r.f.homeDir.absolute, {recursive : true});
+				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
+				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
 			}
 
 			if(metaProvider==="darkTable")

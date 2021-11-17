@@ -3,9 +3,9 @@ import {runUtil, fileUtil} from "xutil";
 import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
 import {identify} from "./identify.js";
 
-const TENSORSERV_PATH = "/mnt/ram/dexvert/tensor";
-const TENSORSERV_HOST = "localhost";
-const TENSORSERV_PORT = 17736;
+export const TENSORSERV_PATH = "/mnt/ram/dexvert/tensor";
+export const TENSORSERV_HOST = "localhost";
+export const TENSORSERV_PORT = 17736;
 
 const TENSOR_DIM = [224, 224];
 const RUN_OPTIONS = {timeout : xu.MINUTE*2};
@@ -50,13 +50,13 @@ export async function classifyImage(imagePath, modelName)
 		
 		const r = (await (await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()) || {};
 
-		await Deno.remove(tmpImagePath);
+		await fileUtil.unlink(tmpImagePath);
 		
 		if(r?.Confidences.length===2)
 			confidences.push(r.Confidences[0]);
 	}
 
-	await Deno.remove(pngTrimmedPath);
+	await fileUtil.unlink(pngTrimmedPath);
 
 	return confidences.average();
 }

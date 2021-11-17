@@ -71,7 +71,12 @@ Programs can't always produce the end result I want, so you can chain the output
 >>> verify = async (r, dexFile) => { return false; }
 Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.
 
-
+>>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
+Can return an object of QEMU specific data to be passed into util.qemu.run():
+	>>> cwd				Which directory to run in
+	>>> timeout			Maximum duration to allow it to run before stopping
+	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
+	>>> dontMaximize	Pass true to prevent the window from running maximized	
 
 
 OLD NODE BELOW:
@@ -123,11 +128,3 @@ Note, when changing the cwd, the input.filePath and output.dirPath will automati
 >>> redirectOutput = (state, p, r) => "/path/to/output.txt"
 Can return a file path string where stdout from the program should be redirected to
 
->>> qemuData = (state, p, r) => ({timeout : XU.MINUTE})
-Can return an object of QEMU specific data to be passed into util.qemu.run():
-	>>> osid			Which OS to use. Default: win2k
-	>>> cwd				Which directory to run in
-	>>> inFilePaths		An array of absolute file paths that we should copy into the c:\in\ dir
-	>>> timeout			Maximum duration to allow it to run before stopping
-	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
-	

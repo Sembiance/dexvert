@@ -1,6 +1,7 @@
 import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {FileSet} from "./FileSet.js";
+import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
 
 export class RunState
 {
@@ -20,6 +21,26 @@ export class RunState
 			flags     : {type : Object}
 		});
 		return runState;
+	}
+
+	// returns f.input.rel
+	inFile({backslash, absolute}={})
+	{
+		const result = this.f.input[absolute ? "absolute" : "rel"];
+		return backslash ? result.replaceAll("/", "\\") : result;
+	}
+
+	// will return f.outFile.rel if set, otherwise will return <f.outDir.rel>/<filename>
+	outFile(filename="outfile", {backslash, absolute}={})
+	{
+		const result = this.f.outFile ? this.f.outFile[absolute ? "absolute" : "rel"] : path.join(this.f.outDir[absolute ? "absolute" : "rel"], filename);
+		return backslash ? result.replaceAll("/", "\\") : result;
+	}
+
+	// returns r.f.outDir.rel
+	outDir({absolute}={})
+	{
+		return absolute ? this.f.outDir.absolute : this.f.outDir.rel;
 	}
 
 	serialize()

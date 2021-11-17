@@ -1,9 +1,4 @@
-Traceback (most recent call last):
-  File "<string>", line 11, in <module>
-  File "<string>", line 6, in <module>
-Exception: Requested Import plugin not available
-
-
+* Find iadl:
 gameshark
 game shark
 actionreplay
@@ -12,3 +7,5 @@ cheats
 codes
 game genie
 gamegenie
+
+

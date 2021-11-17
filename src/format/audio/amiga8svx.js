@@ -1,7 +1,7 @@
 /*
 import {Format} from "../../Format.js";
 
-export class 8svx extends Format
+export class amiga8svx extends Format
 {
 	name = "Amiga 8-bit Sampled Voice";
 	website = "http://fileformats.archiveteam.org/wiki/8SVX";

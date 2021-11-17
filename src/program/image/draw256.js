@@ -6,7 +6,7 @@ export class draw256 extends Program
 	unsafe  = true;
 	loc     = "dos";
 	bin     = "DRAW256/DRAW256.EXE";
-	args    = r => [`..\\..\\${r.f.input.rel.replaceAll("/", "\\")}`]
-	dosData = r => ({runIn : "prog", keys : ["s", `..\\..\\${r.f.outDir.rel.replaceAll("/", "\\")}\\F.PCX`, ["Return"], ["Escape"], "y"]});
+	args    = r => [`..\\..\\${r.inFile({backslash : true})}`]
+	dosData = r => ({runIn : "prog", keys : ["s", `..\\..\\${r.outFile("F.PCX", {backslash : true})}`, ["Return"], ["Escape"], "y"]});
 	chain   = "dexvert[asFormat:image/pcx]";
 }

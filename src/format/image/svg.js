@@ -1,5 +1,6 @@
 import {Format} from "../../Format.js";
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
 
 export class svg extends Format
 {
@@ -13,8 +14,8 @@ export class svg extends Format
 	meta = async inputFile =>
 	{
 		const svgInfoR = await Program.runProgram("svgInfo", inputFile);
-		await Deno.remove(svgInfoR.f.outDir.absolute, {recursive : true});
-		await Deno.remove(svgInfoR.f.homeDir.absolute, {recursive : true});
+		await fileUtil.unlink(svgInfoR.f.outDir.absolute, {recursive : true});
+		await fileUtil.unlink(svgInfoR.f.homeDir.absolute, {recursive : true});
 		return svgInfoR.meta;
 	}
 }

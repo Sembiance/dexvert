@@ -1,7 +1,7 @@
 /*
 import {Format} from "../../Format.js";
 
-export class 64c extends Format
+export class c64c extends Format
 {
 	name = "C64 8x8 Font";
 	ext = [".64c"];

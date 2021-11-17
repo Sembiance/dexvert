@@ -1,28 +1,15 @@
-/*
 import {Program} from "../../Program.js";
+import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {fileUtil} from "xutil";
 
 export class graphicWorkshopProfessional extends Program
 {
-	website = "http://www.mindworkshop.com/gwspro.html";
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	tiptoe = require("tiptoe"),
-	path = require("path");
-
-exports.meta =
-{
-	website : "http://www.mindworkshop.com/gwspro.html"
-};
-
-exports.qemu = () => "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.qemuData = (state, p, r) => ({
-	inFilePaths : [r.args[0], ...(state.extraFilenames || [])],
-	script : `
+	website  = "http://www.mindworkshop.com/gwspro.html";
+	loc      = "win2k";
+	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE"
+	args     = r => [r.inFile()]
+	qemuData = () => ({
+		script : `
 		$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 7)
 		If $mainWindowVisible = 0 Then
 			$errorVisible = WinWaitActive("[TITLE:Message]", "", 7)
@@ -63,17 +50,6 @@ exports.qemuData = (state, p, r) => ({
 		ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")
 		
 		Sleep(1000)`
-});
-
-exports.post = (state, p, r, cb) =>
-{
-	tiptoe(
-		function moveOutAndDeleteThumb()
-		{
-			p.util.file.unlink(path.join(state.output.absolute, "out.THN"))(state, p, this.parallel());
-			p.util.file.move(path.join(state.output.absolute, "out.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, this.parallel());
-		},
-		cb
-	);
-};
-*/
+	});
+	post = async r => await fileUtil.unlink(path.join(r.f.outDir.absolute, "out.THN"), {recusirve : true})
+}

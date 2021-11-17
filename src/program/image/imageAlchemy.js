@@ -6,6 +6,6 @@ export class imageAlchemy extends Program
 	website = "http://fileformats.archiveteam.org/wiki/Image_Alchemy";
 	loc = "dos";
 	bin = "ALCHEMY.EXE";
-	args = r => ["-t", r.f.input.rel, path.join(r.f.outDir.rel, "OUT.TIF")]
+	args = r => ["-t", r.inFile(), r.outFile("OUT.TIF")]
 	chain = "convert"
 }

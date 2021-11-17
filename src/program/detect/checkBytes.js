@@ -9,7 +9,7 @@ export class checkBytes extends Program
 	bin = Program.binPath("checkBytes/checkBytes");
 	loc = "local";
 
-	args = r => [r.f.input.rel]
+	args = r => [r.inFile()]
 	post = r =>
 	{
 		r.meta.detections = [];

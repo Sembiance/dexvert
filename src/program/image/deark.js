@@ -36,7 +36,7 @@ export class deark extends Program
 		if(r.flags.charOutType)
 			opts.push(`char:output=${r.flags.charOutType || "image"}`);
 		
-		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.f.outDir.rel, "-o", "out", r.f.input.rel];
+		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
 
 	verify = r =>

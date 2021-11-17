@@ -7,7 +7,7 @@ export class draw256 extends Format
 	ext         = [".vga"];
 	priority    = this.PRIORITY.VERYLOW;
 	mimeType    = "image/x-draw256-vga";
-	//unsupported = true;
+	unsupported = true;
 	notes       = "Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage";
-	converters = ["draw256", "abydosconvert"];
+	converters = ["abydosconvert", "draw256"];
 }

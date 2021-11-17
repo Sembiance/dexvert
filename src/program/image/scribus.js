@@ -39,13 +39,13 @@ import scribus
 
 scribus.newDocument((50000, 50000), (0, 0, 0, 0), scribus.PORTRAIT, 1, scribus.UNIT_POINTS, scribus.PAGE_1, 0, 1)
 scribus.setUnit(scribus.UNIT_POINTS)
-scribus.placeVectorFile("${r.f.input.rel}", 0, 0)
-scribus.savePageAsEPS("${path.join(r.f.outDir.rel, "out.eps")}")
+scribus.placeVectorFile("${r.inFile()}", 0, 0)
+scribus.savePageAsEPS("${r.outFile("out.eps")}")
 scribus.closeDoc()
 scribus.fileQuit()`);
 	}
 
-	args = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.f.input.rel]
+	args = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()]
 	runOptions = ({timeout : xu.MINUTE, virtualX : true})
 	chain = "inkscape"	// if I also wanted .png output, I could change inkscape to: dexvert[asFormat:image/eps]
 }

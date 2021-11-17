@@ -1,9 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once pcx/nconvert working, get the rest of the PCX converters working, even if QEMU
+* Finish PCX. If it touches qemu, get that fully working (with all OS types, test one format/program for each OS)
+After pcx fully working, double check dexid.test.js still working
+Then add a dexvert.test.js and ensure it works for image/pcx
 
-* Find a program that requires it to be ran in the output cwd and add easy support for this
+* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
 
 * Find a format that outputs an SVG file and test svgInfo in image.verify
 
@@ -30,6 +32,7 @@ archive/msCompound
 archive/macBinary
 text/txtByFilename
 font/amigaBitmapFont
+video/* (something that uses dosBox for video)
 
 * Now convert and identify any formats with:
 untrustworthy (which has been removed entirely, as programs are untrustworthy, not formats)

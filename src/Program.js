@@ -6,7 +6,8 @@ import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
-import {runDOS} from "./dosUtil.js";
+import {run as runDOS} from "./dosUtil.js";
+import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*2;
 
@@ -28,7 +29,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "dos", "amigappc", "gentoo", "win2k", "winxp"]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", ...QEMUIDS]},
 
 			// meta
 			gentooPackage  : {types : ["string", Array]},
@@ -47,6 +48,7 @@ export class Program
 			diskQuota : {type : "number", range : [1]},
 			outExt    : {types : ["function", "string"]},
 			dosData   : {type : "function", length : [0, 1]},
+			qemuData  : {type : "function", length : [0, 1]},
 			exec      : {type : "function", length : 1},
 			args      : {type : "function", length : 1},
 			verify    : {type : "function", length : [0, 2]},
@@ -112,6 +114,15 @@ export class Program
 
 			r.status = await runDOS(r.dosData);
 		}
+		else if(QEMUIDS.includes(this.loc))
+		{
+			r.qemuData = {f, cmd : this.bin, osid : this.loc};
+			r.qemuData.args = await this.args(r);
+			if(this.qemuData)
+				Object.assign(r.qemuData, await this.qemuData(r));
+
+			await runQEMU(r.qemuData);
+		}
 
 		if(f.outDir)
 		{
@@ -134,7 +145,7 @@ export class Program
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
 					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
-					await Deno.remove(newFilePath);
+					await fileUtil.unlink(newFilePath);
 					continue;
 				}
 
@@ -144,7 +155,7 @@ export class Program
 				if(this.verify && !(await this.verify(r, newFile)))
 				{
 					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to failing program.verify() function`;
-					await Deno.remove(newFilePath);
+					await fileUtil.unlink(newFilePath);
 					continue;
 				}
 
@@ -178,7 +189,7 @@ export class Program
 			const tmpF = await f.rsyncTo(tmpOutDirPath, {type : "new", relativeFrom : f.outDir.absolute});
 			await runUtil.run("sudo", ["umount", f.outDir.absolute]);
 			await tmpF.rsyncTo(f.outDir.absolute, {type : "new"});
-			await Deno.remove(tmpOutDirPath, {recursive : true});
+			await fileUtil.unlink(tmpOutDirPath, {recursive : true});
 			// don't need to do anything with the original f, everything should have the same path as before
 		}
 
@@ -201,7 +212,7 @@ export class Program
 						await f.addAll("new", chainF.files.new);
 						chainF.changeType("new", "prev");
 						f.remove("new", newFile);
-						await Deno.remove(newFile.absolute);
+						await fileUtil.unlink(newFile.absolute);
 					}
 				}
 			}

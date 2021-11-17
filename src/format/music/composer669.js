@@ -1,7 +1,7 @@
 /*
 import {Format} from "../../Format.js";
 
-export class 669 extends Format
+export class composer669 extends Format
 {
 	name = "Composer 669 Module";
 	website = "http://fileformats.archiveteam.org/wiki/669";

@@ -100,7 +100,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 			if(xu.verbose>=5)
 				xu.log5`${fg.red("NOT")} deleting cwd ${cwd} due to verbose>=5`;
 			else
-				await Deno.remove(cwd, {recursive : true});
+				await fileUtil.unlink(cwd, {recursive : true});
 		};
 
 		try
@@ -137,7 +137,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 						if(!isValid)
 						{
 							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
-							await Deno.remove(newFile.absolute);
+							await fileUtil.unlink(newFile.absolute);
 						}
 						else
 						{

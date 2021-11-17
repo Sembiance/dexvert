@@ -1,8 +1,8 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil, imageUtil} from "xutil";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
-import { parse as xmlParse } from "https://deno.land/x/xml@2.0.1/mod.ts";
+import {path} from "std";
+import {xmlParse} from "denoLandX";
 
 export class svgInfo extends Program
 {

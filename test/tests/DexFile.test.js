@@ -1,8 +1,6 @@
-import {assertStrictEquals} from "https://deno.land/std@0.111.0/testing/asserts.ts";
 import {DexFile} from "../../src/DexFile.js";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {path, assertStrictEquals, base64Encode} from "std";
 import {fileUtil} from "xutil";
-import {encode as base64Encode} from "https://deno.land/std@0.113.0/encoding/base64.ts";
 
 Deno.test("create", async () =>
 {

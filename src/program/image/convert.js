@@ -1,5 +1,5 @@
 import {Program} from "../../Program.js";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path} from "std";
 
 export class convert extends Program
 {

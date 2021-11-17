@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil} from "xutil";
-import {delay} from "https://deno.land/std@0.113.0/async/mod.ts";
+import {delay} from "std";
 
 export class xdisplay extends Server
 {
@@ -10,7 +10,7 @@ export class xdisplay extends Server
 		// If we don't have a DISPLAY variable, start up a background X display
 		if(Deno.env.get("DISPLAY"))
 		{
-			xu.log`X DISPLAY already exists!`;
+			this.log`DISPLAY environment variable already exists, not starting X`;
 			return;
 		}
 

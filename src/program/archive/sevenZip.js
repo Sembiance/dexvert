@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class 7z extends Program
+export class sevenZip extends Program
 {
 	website = "http://p7zip.sourceforge.net/";
 	gentooPackage = "app-arch/p7zip";

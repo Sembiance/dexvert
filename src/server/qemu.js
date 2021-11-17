@@ -1,10 +1,12 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil} from "xutil";
-import {delay} from "https://deno.land/std@0.113.0/async/mod.ts";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path, delay} from "std";
+import {Drash} from "denoLandX";
+import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
-const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
+const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
+const DEBUG = true;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
 const HOSTS =
@@ -29,10 +31,10 @@ const OS_DEFAULT =
 // We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
-	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
-	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
-	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
-	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
+	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] }//,
+	//winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	//amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
+	//gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
@@ -45,152 +47,218 @@ const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 
 export class qemu extends Server
 {
+	drashServer = null;
+	serversLaunched = false;
+	baseKeys = Object.keys(this);
+
+	// Called to prepare the QEMU environment for a given OS and then start QEMU
+	async startOS(osid, instanceid)
+	{
+		if(!INSTANCES[osid])
+			INSTANCES[osid] = {};
+		
+		const instance = {osid, instanceid, dirPath : path.join(QEMU_INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
+		instance.debug = DEBUG || OS[osid].debug;
+		instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
+		instance.inOutHostPort = +`${OS[osid].subnet}${20+instanceid}`;
+		instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
+		instance.scriptName = `go${OS[osid].scriptExt || OS_DEFAULT.scriptExt}`;
+		instance.inOutType = OS[osid].inOutType || OS_DEFAULT.inOutType;
+		INSTANCES[osid][instanceid] = instance;
+		
+		await Deno.mkdir(path.join(instance.dirPath, "in"), {recursive : true});
+		await Deno.mkdir(path.join(instance.dirPath, "out"), {recursive : true});
+
+		const imgFilePaths = ["hd.img", ...(OS[osid].extraImgs || [])].map(imgFilename => path.join(QEMU_INSTANCE_DIR_PATH, osid, imgFilename));
+		await imgFilePaths.parallelMap(imgFilePath => Deno.copyFile(imgFilePath, path.join(instance.dirPath, path.basename(imgFilePath))));
+		if(OS[osid].uefi)
+			await Deno.copyFile(UEFI_VARS_SRC_PATH, path.join(instance.dirPath, "OVMF_VARS.fd"));
+
+		const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
+		if(!instance.debug)
+			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
+		qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
+		qemuArgs.push("-m", `size=${OS[osid].ram || OS_DEFAULT.ram}`);
+		qemuArgs.push("-rtc", `base=${OS[osid].dateTime || OS_DEFAULT.dateTime}`);
+		if((OS[osid].cores || 1)>1)
+			qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
+		
+		let netDevVal = `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},id=nd1`;
+		if(instance.inOutType==="mount")
+			netDevVal += `,hostfwd=tcp:127.0.0.1:${instance.inOutHostPort}-${instance.ip}:${OS[osid].smbGuestPort || OS_DEFAULT.smbGuestPort}`;
+		else if(instance.inOutType==="ssh")
+			netDevVal += `,hostfwd=tcp:127.0.0.1:${instance.inOutHostPort}-${instance.ip}:${OS[osid].sshGuestPort || OS_DEFAULT.sshGuestPort}`;
+		qemuArgs.push("-netdev", netDevVal);
+
+		qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
+
+		(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
+
+		if(OS[osid].uefi)
+		{
+			qemuArgs.push("-drive", "if=pflash,format=raw,unit=0,file=/usr/share/edk2-ovmf/OVMF_CODE.fd,readonly=on");
+			qemuArgs.push("-drive", "if=pflash,format=raw,unit=1,file=OVMF_VARS.fd");
+		}
+
+		qemuArgs.push(...OS[osid].extraArgs || []);
+
+		const qemuRunOptions = {detached : true, cwd : instance.dirPath};
+		if(instance.debug)
+			qemuRunOptions.env = {DISPLAY : (Deno.hostname()==="crystalsummit" ? ":0.1" : ":0")};
+
+		this.log`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
+
+		instance.qemuRunOptions = qemuRunOptions;
+		instance.qemuArgs = qemuArgs;
+		const instanceJSON = JSON.stringify(instance);
+		const {p} = await runUtil.run(`qemu-system-${OS[osid].arch || OS_DEFAULT.arch}`, qemuArgs, qemuRunOptions);
+		instance.p = p;
+		instance.p.status().then(v =>
+		{
+			instance.ready = false;
+			instance.p = null;
+			this.log`${osid} #${instanceid} has exited with status ${v}`;
+		});
+
+		this.log`${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
+		await fileUtil.writeFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
+	}
+
+	// Called when the QEMU has fully booted and is ready to received files
+	async readyOS(instance)
+	{
+		this.log`${instance.osid} #${instance.instanceid} declared itself ready, mounting in/out...`;
+		if(instance.inOutType==="mount")
+		{
+			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
+			for(const v of ["in", "out"])
+				await runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)]);
+		}
+
+		this.log`${instance.osid} #${instance.instanceid} fully ready! (VNC ${5900 + instance.vncPort})`;
+		instance.ready = true;
+	}
+
+	async performRun(instance, runArgs)
+	{
+		const {body, reply} = runArgs;
+		this.log`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
+
+		let inOutErr = null;
+		await delay(xu.SECOND*5);	// TODO TEMPORARY
+		//await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
+
+		this.log`${body.osid} #${instance.instanceid} finished request`;
+		instance.busy = false;
+
+		reply.text(inOutErr ? inOutErr.toString() : "ok");
+	}
+
+	checkRunQueue()
+	{
+		if(RUN_QUEUE.length===0)
+			return setTimeout(() => this.checkRunQueue(), 100);
+		
+		const instance = Object.values(INSTANCES[RUN_QUEUE[0].body?.osid]).find(o => o.ready && !o.busy);
+		if(instance)
+		{
+			instance.busy = true;
+			this.performRun(instance, RUN_QUEUE.shift());
+		}
+
+		setTimeout(() => this.checkRunQueue(), 100);
+	}
+
 	async start()
 	{
-		
+		const self=this;
+		class qemuReady extends Drash.Resource
+		{
+			paths = ["/qemuReady"];
+			async GET(request, reply)
+			{
+				const body = Object.fromEntries(["osid", "ip"].map(k => ([k, request.queryParam(k)])));
+				self.log`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
+				await self.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
+				reply.text("ok");
+			}
+		}
+		class qemuRun extends Drash.Resource
+		{
+			paths = ["/qemuRun"];
+			POST(request, reply)
+			{
+				const body = Object.fromEntries(["osid", "timeout", "outDirPath", "inFilePaths", "script"].map(k => ([k, request.bodyParam(k)])));
+				self.log`Got qemuRun request ${xu.inspect(body).squeeze()}`;
+				RUN_QUEUE.push({body, request, reply});
+			}
+		}
+
+		this.drashServer = new Drash.Server({hostname : QEMU_SERVER_HOST, port : QEMU_SERVER_PORT, protocol : "http", resources : [qemuReady, qemuRun]});
+		this.drashServer.run();
+
+		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
+
+		this.log`Pre-cleaning ${QEMU_INSTANCE_DIR_PATH}`;
+		await fileUtil.unlink(QEMU_INSTANCE_DIR_PATH, {recursive : true});
+
+		for(const osid of Object.keys(OS))
+			await Deno.mkdir(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
+
+		this.log`Pre-copying img files...`;
+		for(const [osid, osInfo] of Object.entries(OS))
+		{
+			for(const imgFilePath of ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename)))
+			{
+				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
+				this.log`Copying to: ${imgDestFilePath}`;
+				await Deno.copyFile(imgFilePath, imgDestFilePath);
+			}
+		}
+
+		this.log`Starting instances...`;
+		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)));
+
+		this.log`Cleaning up HD images...`;
+		for(const osid of Object.keys(OS))
+			await fileUtil.unlink(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
+
+		this.serversLaunched = true;
+		this.checkRunQueue();
 	}
 
 	status()
 	{
-		
+		const instances = Object.values(INSTANCES).flatMap(o => Object.values(o));
+		return this.serversLaunched && instances.length>0 && instances.every(instance => instance.p && instance.ready);
 	}
 
-	stop()
+	async stopOS(instance)
 	{
+		this.log`Stopping ${instance.osid} #${instance.instanceid}...`;
+		if(instance.inOutType==="mount")
+		{
+			this.log`${instance.osid} #${instance.instanceid} unmounting in/out...`;
+			for(const v of ["in", "out"])
+				await runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)]);
+		}
+
+		this.log`${instance.osid} #${instance.instanceid} killing qemu child process...`;
+		if(instance.p)
+			instance.p.kill("SIGTERM");
+	}
+
+	async stop()
+	{
+		if(this.drashServer)
+			this.drashServer.close();
 		
+		for(const instance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
+			await this.stopOS(instance);
 	}
 }
 
 /*
-let serversLaunched = false;
-
-// Called to prepare the QEMU environment for a given OS and then start QEMU
-function startOS(osid, instanceid, cb)
-{
-	if(!INSTANCES[osid])
-		INSTANCES[osid] = {};
-	
-	const instance = {osid, instanceid, dirPath : path.join(C.QEMU_INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
-	instance.debug = DEBUG || OS[osid].debug;
-	instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
-	instance.inOutHostPort = +`${OS[osid].subnet}${20+instanceid}`;
-	instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
-	instance.scriptName = `go${OS[osid].scriptExt || OS_DEFAULT.scriptExt}`;
-	instance.inOutType = OS[osid].inOutType || OS_DEFAULT.inOutType;
-	INSTANCES[osid][instanceid] = instance;
-		
-	tiptoe(
-		function createInstanceDir()
-		{
-			fs.mkdir(path.join(instance.dirPath, "in"), {recursive : true}, this.parallel());
-			fs.mkdir(path.join(instance.dirPath, "out"), {recursive : true}, this.parallel());
-		},
-		function copyHDImages()
-		{
-			const imgFilePaths = ["hd.img", ...(OS[osid].extraImgs || [])].map(imgFilename => path.join(C.QEMU_INSTANCE_DIR_PATH, osid, imgFilename));
-			imgFilePaths.parallelForEach((imgFilePath, copycb) => fs.copyFile(imgFilePath, path.join(instance.dirPath, path.basename(imgFilePath)), copycb), this.parallel());
-
-			if(OS[osid].uefi)
-				fs.copyFile(UEFI_VARS_SRC_PATH, path.join(instance.dirPath, "OVMF_VARS.fd"), this.parallel());
-		},
-		function runQEMU()
-		{
-			const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
-			if(!instance.debug)
-				qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
-			qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
-			qemuArgs.push("-m", `size=${OS[osid].ram || OS_DEFAULT.ram}`);
-			qemuArgs.push("-rtc", `base=${OS[osid].dateTime || OS_DEFAULT.dateTime}`);
-			if((OS[osid].cores || 1)>1)
-				qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
-			
-			let netDevVal = `user,net=192.168.${OS[osid].subnet}.0/24,dhcpstart=${instance.ip},id=nd1`;
-			if(instance.inOutType==="mount")
-				netDevVal += `,hostfwd=tcp:127.0.0.1:${instance.inOutHostPort}-${instance.ip}:${OS[osid].smbGuestPort || OS_DEFAULT.smbGuestPort}`;
-			else if(instance.inOutType==="ssh")
-				netDevVal += `,hostfwd=tcp:127.0.0.1:${instance.inOutHostPort}-${instance.ip}:${OS[osid].sshGuestPort || OS_DEFAULT.sshGuestPort}`;
-			qemuArgs.push("-netdev", netDevVal);
-
-			qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
-
-			(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
-
-			if(OS[osid].uefi)
-			{
-				qemuArgs.push("-drive", "if=pflash,format=raw,unit=0,file=/usr/share/edk2-ovmf/OVMF_CODE.fd,readonly=on");
-				qemuArgs.push("-drive", "if=pflash,format=raw,unit=1,file=OVMF_VARS.fd");
-			}
-
-			qemuArgs.push(...OS[osid].extraArgs || []);
-
-			const qemuRunOptions = {silent : true, detached : true, cwd : instance.dirPath};
-			if(instance.debug)
-				qemuRunOptions.env = {DISPLAY : (os.hostname()==="crystalsummit" ? ":0.1" : ":0")};
-
-			XU.log`QEMU run for osid ${osid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${qemuArgs}`;
-
-			instance.qemuRunOptions = qemuRunOptions;
-			instance.qemuArgs = qemuArgs;
-			const instanceJSON = JSON.stringify(instance);
-
-			instance.cp = runUtil.run(`qemu-system-${OS[osid].arch || OS_DEFAULT.arch}`, qemuArgs, qemuRunOptions);
-			instance.cp.on("exit", () => { instance.ready = false; instance.cp = null; XU.log`qemu ${osid} #${instanceid} has exited.`; });
-			
-			XU.log`QEMU ${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
-
-			fs.writeFile(path.join(instance.dirPath, "instance.json"), instanceJSON, XU.UTF8, this);
-		},
-		cb
-	);
-}
-
-// Called when the QEMU has fully booted and is ready to received files
-function readyOS(osid, instanceid, cb)
-{
-	const instance = INSTANCES[osid][instanceid];
-
-	tiptoe(
-		function mountInOut()
-		{
-			XU.log`QEMU ${osid} #${instanceid} declared itself ready, mounting in/out...`;
-
-			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
-			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);
-		},
-		function setInstanceReady()
-		{
-			XU.log`QEMU ${osid} #${instanceid} fully ready! (VNC ${5900 + instance.vncPort})`;
-			instance.ready = true;
-
-			this();
-		},
-		cb
-	);
-}
-
-// Called when we need to stop our QEMU OS
-function stopOS(osid, instanceid, cb)
-{
-	const instance = INSTANCES[osid][instanceid];
-
-	tiptoe(
-		function unmountInOut()
-		{
-			XU.log`QEMU stopping ${osid} #${instanceid}... Unmounting in/out...`;
-			["in", "out"].serialForEach((v, subcb) => runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)], runUtil.SILENT, subcb), this);
-		},
-		function stopQEMU()
-		{
-			XU.log`QEMU ${osid} #${instanceid} killing qemu child process...`;
-
-			if(instance.cp)
-				instance.cp.kill();
-
-			this();
-		},
-		cb
-	);
-}
 
 const IN_OUT_LOGIC =
 {
@@ -215,7 +283,7 @@ const IN_OUT_LOGIC =
 					return this();
 					
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				XU.log`QEMU ${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize}`;
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize}`;
 
 				setTimeout(() => this(), timeToWait*XU.SECOND);
 			},
@@ -239,7 +307,7 @@ const IN_OUT_LOGIC =
 					return this();
 					
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				XU.log`QEMU ${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize}`;
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize}`;
 
 				setTimeout(() => this(), timeToWait*XU.SECOND);
 			},
@@ -342,126 +410,6 @@ const IN_OUT_LOGIC =
 			cb
 		);
 	}
-};
-
-
-function performRun(instance, runArgs)
-{
-	const {body, reply} = runArgs;
-	XU.log`QEMU ${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
-
-	tiptoe(
-		function performGoLogic()
-		{
-			IN_OUT_LOGIC[instance.inOutType](instance, runArgs, this);
-		},
-		function finishRun(err)
-		{
-			XU.log`QEMU ${body.osid} #${instance.instanceid} finished request`;
-			instance.busy = false;
-
-			reply.send(err ? `error ${err}` : "ok");
-		}
-	);
-}
-
-function checkRunQueue()
-{
-	if(RUN_QUEUE.length===0)
-		return setTimeout(checkRunQueue, 100);
-	
-	const instance = Object.values(INSTANCES[RUN_QUEUE[0].body?.osid]).find(o => o.ready && !o.busy);
-	if(instance)
-	{
-		instance.busy = true;
-		performRun(instance, RUN_QUEUE.shift());
-	}
-
-	setTimeout(checkRunQueue, 100);
-}
-
-// Starts up our background qemu servers
-exports.start = function start(cb)
-{
-	tiptoe(
-		function unmountDeadMounts()
-		{
-			runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), [], runUtil.SILENT, this);
-		},
-		function preClean()
-		{
-			XU.log`QEMU pre-cleaning ${C.QEMU_INSTANCE_DIR_PATH}...`;
-			fileUtil.unlink(C.QEMU_INSTANCE_DIR_PATH, this);
-		},
-		function mkOSInstanceDirs()
-		{
-			Object.keys(OS).parallelForEach((osid, subcb) => fs.mkdir(path.join(C.QEMU_INSTANCE_DIR_PATH, osid), {recursive : true}, subcb), this);
-		},
-		function preCopyHDImages()
-		{
-			XU.log`QEMU pre-copying img files...`;
-			Object.entries(OS).parallelForEach(([osid, osInfo], subcb) =>
-			{
-				const imgFilePaths = ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename));
-				imgFilePaths.serialForEach((imgFilePath, copycb) =>
-				{
-					const imgDestFilePath = path.join(C.QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
-					XU.log`QEMU copying to ${imgDestFilePath}...`;
-					fs.copyFile(imgFilePath, imgDestFilePath, copycb);
-				}, subcb);
-			}, this, Object.entries(OS).length);
-		},
-		function startOSInstances()
-		{
-			XU.log`QEMU starting instances...`;
-			Object.keys(OS).parallelForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).parallelForEach((instanceid, instancecb) => startOS(osid, instanceid, instancecb), subcb), this);
-		},
-		function cleanupHDImages()
-		{
-			Object.keys(OS).parallelForEach((osid, subcb) => fileUtil.unlink(path.join(C.QEMU_INSTANCE_DIR_PATH, osid), subcb), this);
-		},
-		function startCheckingQueue()
-		{
-			serversLaunched = true;
-
-			checkRunQueue();
-			this();
-		},
-		cb
-	);
-};
-
-// The QEMU supervisor.au3 script will call this when it's ready to go
-exports.registerRoutes = function registerRoutes(fastify)
-{
-	fastify.get("/qemuReady", (request, reply) =>
-	{
-		XU.log`Got /qemuReady request with query: ${request.query}`;
-		readyOS(request.query.osid, Object.values(INSTANCES[request.query.osid]).find(v => v.ip===request.query.ip).instanceid, () => reply.send("ok"));
-	});
-	fastify.post("/qemuRun", (request, reply) => { RUN_QUEUE.push({body : request.body, request, reply}); return undefined; });
-};
-
-// Return true if everything is ok
-exports.status = function status()
-{
-	return serversLaunched && Object.values(INSTANCES).flatMap(o => Object.values(o)).every(instance => instance.cp && instance.ready);
-};
-
-// Stops our qemu instances
-exports.stop = function stop(cb)
-{
-	tiptoe(
-		function killOSes()
-		{
-			Object.keys(OS).serialForEach((osid, subcb) => [].pushSequence(0, NUM_SERVERS-1).serialForEach((instanceid, instancecb) => stopOS(osid, instanceid, instancecb), subcb), this);
-		},
-		function waitForKilling()
-		{
-			XU.waitUntil(subcb => subcb(undefined, Object.values(INSTANCES).flatMap(o => Object.values(o)).some(o => o.ready)), stillReady => stillReady, this);
-		},
-		cb
-	);
 };
 
 */

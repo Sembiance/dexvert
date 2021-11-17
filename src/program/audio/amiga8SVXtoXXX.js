@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class 8SVXtoXXX extends Program
+export class amiga8SVXtoXXX extends Program
 {
 	website = "https://aminet.net/package/mus/misc/8SVXtoXXX";
 	unsafe = true;

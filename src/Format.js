@@ -1,10 +1,6 @@
 import {xu, fg} from "xu";
-import {fileUtil} from "xutil";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
-import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
 import {Family} from "./Family.js";
 import {validateClass} from "./validate.js";
-import unsupported from "./format/unsupported.js";
 
 export class Format
 {
@@ -17,7 +13,6 @@ export class Format
 		LOWEST   : 5
 	};
 
-	static formats = null;
 	formatid = this.constructor.name;
 	family = null;
 	familyid = null;
@@ -111,80 +106,5 @@ export class Format
 			post          : {type : "function", length : [0, 1]}
 		});
 		return format;
-	}
-
-	static deserialize(v)
-	{
-		return this.formats[v];
-	}
-
-	// loads all src/format/*/*.js files from disk as Format objects. These are cached in the static this.formats cache
-	static async loadFormats()
-	{
-		if(this.formats!==null)
-		{
-			await xu.waitUntil(() => Object.isObject(this.formats));
-			return this.formats;
-		}
-		
-		this.formats = false;
-		const formats = {};
-
-		const families = await Family.loadFamilies();
-
-		for(const formatFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "format"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
-		{
-			// TODO REMOVE BELOW AFTER CONVERTING ALL FORMATS
-			if(!(await fileUtil.readFile(formatFilePath)).includes(" extends Format") || (await fileUtil.readFile(formatFilePath)).startsWith("/*"))
-				continue;
-			// TODO REMOVE ABOVE AFTER CONVERTING ALL FORMATS
-
-			const formatModule = await import(formatFilePath);
-			const formatid = Object.keys(formatModule)[0];
-			const familyid = path.basename(path.dirname(formatFilePath));
-			if(!families[familyid])
-				throw new Error(`format [${formatid}] at [${formatFilePath}] is in a directory [${familyid}] that does not have a family class`);
-
-			// class name must match filename
-			assertStrictEquals(formatid, path.basename(formatFilePath, ".js"), `format file [${formatFilePath}] does not have a matching class name [${formatid}]`);
-
-			// check for duplicates
-			if(formats[formatid])
-				throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate of ${formats[formatid]}`);
-
-			// create the class and validate it
-			formats[formatid] = formatModule[formatid].create(families[familyid]);
-			if(!(formats[formatid] instanceof this))
-				throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
-		}
-
-		// process our 'unsupported.js' formats
-		for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
-		{
-			for(const [formatid, o] of Object.entries(unsupportedFormats))
-			{
-				const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes"];
-				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
-				if(extraKeys.length>0)
-					throw new Error(`unsupported format ${familyid}/${formatid} has extra keys that are not currently copied over to the Unknown class, add them: ${extraKeys}`);
-				
-				class Unsupported extends Format
-				{
-					unsupported = true;
-				}
-
-				formats[formatid] = Unsupported.create(families[familyid], format =>	// eslint-disable-line sembiance/shorter-arrow-funs
-				{
-					for(const supportedKey of supportedKeys)
-					{
-						if(Object.hasOwn(o, supportedKey))
-							format[supportedKey] = o[supportedKey];
-					}
-				});
-			}
-		}
-		
-		this.formats = formats;
-		return formats;
 	}
 }

@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil} from "xutil";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path} from "std";
 
 const SCRIBUS_PREF_FILENAMES = [".neversplash", "checkfonts150.xml", "prefs150.xml", "scribus150.rc", "scribusshapes.xml"];
 const SCRIBUS_PREF_SRC = path.join(xu.dirname(import.meta), "../../../scribus");

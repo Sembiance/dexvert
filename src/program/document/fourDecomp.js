@@ -1,7 +1,7 @@
 /*
 import {Program} from "../../Program.js";
 
-export class 4decomp extends Program
+export class fourDecomp extends Program
 {
 	website = "https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X";
 }

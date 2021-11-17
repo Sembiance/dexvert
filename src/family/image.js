@@ -2,9 +2,8 @@ import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
-import {DOMParser} from "https://deno.land/x/deno_dom@v0.1.17-alpha/deno-dom-native.ts";
-import {classifyImage} from "../tensorUtil.js";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {initDOMParser, DOMParser} from "denoLandX";
+import {path} from "std";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
 const TENSOR_PATH_EXCLUSIONS =
@@ -84,6 +83,9 @@ export class image extends Family
 		
 		if(!skipTensor)
 		{
+			// loaded dynamically because tensorUtil requires identify which requires formats and this is a family, anyways, circular dependency seen in util/buildFormats.js
+			const {classifyImage} = import("../tensorUtil.js");
+
 			// tensorUtil.classifyImage will convert these into PNG before sending to the tensor
 			const garbage = await classifyImage(dexFile.absolute, "garbage");
 			if(typeof garbage!=="number" || garbage<0 || garbage>1)
@@ -134,6 +136,7 @@ export class image extends Family
 				if(r.f.new)
 				{
 					const htmlRaw = await fileUtil.readFile(r.f.new.absolute);
+					await initDOMParser();
 					const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
 					Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
 					{

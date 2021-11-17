@@ -1,10 +1,10 @@
 import {xu} from "xu";
 import {runUtil, fileUtil} from "xutil";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {path} from "std";
 import {identify} from "./identify.js";
 
 export const TENSORSERV_PATH = "/mnt/ram/dexvert/tensor";
-export const TENSORSERV_HOST = "localhost";
+export const TENSORSERV_HOST = "127.0.0.1";
 export const TENSORSERV_PORT = 17736;
 
 const TENSOR_DIM = [224, 224];

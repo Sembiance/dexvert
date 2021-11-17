@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
-import {Format} from "./Format.js";
+import {formats} from "./format/formats.js";
 import {Program} from "./Program.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
@@ -23,8 +23,6 @@ export async function identify(inputFileRaw)
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f)))).flatMap(o => o.meta.detections);
 
 	xu.log4`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
-
-	const formats = await Format.loadFormats();
 
 	const otherFiles = (await Promise.all((await fileUtil.tree(f.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==f.input.absolute);
 	const otherDirs = await Promise.all((await fileUtil.tree(f.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));

@@ -1,7 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
-import {delay} from "https://deno.land/std@0.114.0/async/mod.ts";
+import {path, delay} from "std";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
 const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");

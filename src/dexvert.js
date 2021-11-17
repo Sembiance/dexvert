@@ -1,12 +1,12 @@
 import {xu, fg} from "xu";
 import {identify} from "./identify.js";
-import {Format} from "./Format.js";
+import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
 import {DexState} from "./DexState.js";
-import {fileUtil} from "xutil";
+import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {path} from "std";
 
 export async function dexvert(inputFile, outputDir, {asFormat}={})
 {
@@ -17,7 +17,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 	if(!outputDir.isDirectory)
 		throw new Error(`Invalid output directory, expected directory. ${inputFile.absolute}`);
 
-	const formats = await Format.loadFormats();
+	await runUtil.run("prlimit", ["--pid", Deno.pid, `--core=0`]);
 
 	const ids = [];
 	if(asFormat)
@@ -48,8 +48,6 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 		return;
 
 	xu.log2`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
-
-	//posix.setrlimit("core", {soft : 0});
 
 	const dexState = DexState.create({original : {input : inputFile, output : outputDir}});
 	for(const id of ids)

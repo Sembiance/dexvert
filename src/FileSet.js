@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {path} from "std";
 import {runUtil} from "xutil";
 import {DexFile} from "./DexFile.js";
 

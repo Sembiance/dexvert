@@ -1,4 +1,4 @@
-import { assert, assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
+import {assert, assertStrictEquals} from "std";
 
 export function validateClass(o, schema)
 {

@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path} from "std";
 
-export const QEMU_SERVER_HOST = "localhost";
+export const QEMU_SERVER_HOST = "127.0.0.1";
 export const QEMU_SERVER_PORT = 17735;
 export const QEMUIDS = ["win2k", "winxp", "amigappc", "gentoo"];
 
@@ -158,9 +158,11 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 
 	await xu.log3`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args}`;
 
-	const r = (await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)}))?.json()) || {};
+	const r = await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)});
 	console.log({r});
-	return r;
+	const rText = await r.text();
+	console.log({rText});
+	return rText;
 
 	//await httpUtil.post(`http://${C.DEXSERV_HOST}:${C.DEXSERV_PORT}/qemuRun`, qemuData, {postAsJSON : true}, this);
 	//if(a.toString()!=="ok")

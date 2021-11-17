@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil} from "xutil";
 import {Identification} from "../src/Identification.js";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
+import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

@@ -1,7 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
-import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
+import {path, assertStrictEquals} from "std";
 import {validateClass} from "./validate.js";
 
 export class Server
@@ -24,6 +23,11 @@ export class Server
 		});
 
 		return server;
+	}
+
+	log(strs, ...vals)
+	{
+		xu.log([`${xu.colon(fg.peach(this.constructor.name))}${strs[0]}`, ...strs.slice(1)], ...vals);
 	}
 
 	// loads all src/server/*.js files from disk as Server objects. These are cached in the static this.servers cache

@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {FileSet} from "./FileSet.js";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path} from "std";
 
 export class RunState
 {

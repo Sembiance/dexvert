@@ -1,8 +1,7 @@
 import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
-import {delay} from "https://deno.land/std@0.113.0/async/mod.ts";
 import {Server} from "../Server.js";
-import * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+import {path, delay} from "std";
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 
@@ -22,15 +21,6 @@ for(const [serverid, server] of Object.entries(servers))
 	xu.log`Server ${fg.peach(serverid)} started!`;
 }
 
-xu.log`Waiting for ${Object.keys(servers).length} servers to fully load...`;
-for(const [serverid, server] of Object.entries(servers))
-{
-	await xu.waitUntil(async () => (await server.status())===true);
-	xu.log`Server ${fg.peach(serverid)} fully loaded!`;
-}
-
-xu.log`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
-
 ["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await signalHandler(v)));
 async function signalHandler(sig)
 {
@@ -47,6 +37,16 @@ async function signalHandler(sig)
 	xu.log`Exiting...`;
 	Deno.exit(0);
 }
+
+xu.log`Waiting for ${Object.keys(servers).length} servers to fully load...`;
+for(const [serverid, server] of Object.entries(servers))
+{
+	xu.log`Waiting on server ${fg.peach(serverid)}...`;
+	await xu.waitUntil(async () => (await server.status())===true);
+	xu.log`Server ${fg.peach(serverid)} fully loaded!`;
+}
+
+xu.log`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
 
 await fileUtil.writeFile(path.join(DEXVERT_RAM_DIR, "serverRunning"), "true");
 

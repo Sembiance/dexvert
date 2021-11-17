@@ -1,7 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import * as path from "https://deno.land/std@0.111.0/path/mod.ts";
-import { assertStrictEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
+import {path} from "std";
 import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
@@ -13,7 +12,6 @@ const DEFAULT_TIMEOUT = xu.MINUTE*2;
 
 export class Program
 {
-	static programs = null;
 	programid = this.constructor.name;
 	loc = "local";
 	baseKeys = Object.keys(this);
@@ -236,7 +234,8 @@ export class Program
 			progOptions.flags = {};
 		Object.assign(progOptions.flags, flags);
 
-		const program = (await this.loadPrograms())[programid];
+		const {programs} = await import("./program/programs.js");
+		const program = programs[programid];
 		if(!program)
 			throw new Error(`Unknown programid: ${programid}`);
 
@@ -264,44 +263,5 @@ export class Program
 	static binPath(rel)
 	{
 		return path.join(xu.dirname(import.meta), "..", "bin", rel);
-	}
-
-	// loads all src/program/*/*.js files from disk as Program objects. These are cached in the static this.programs cache
-	static async loadPrograms()
-	{
-		if(this.programs!==null)
-		{
-			await xu.waitUntil(() => Object.isObject(this.programs));
-			return this.programs;
-		}
-		
-		this.programs = false;
-		const programs = {};
-
-		for(const programFilePath of await fileUtil.tree(path.join(xu.dirname(import.meta), "program"), {nodir : true, regex : /[^/]+\/.+\.js$/}))
-		{
-			// TODO REMOVE BELOW AFTER CONVERTING ALL PROGRAMS
-			if(!(await fileUtil.readFile(programFilePath)).includes(" extends Program") || (await fileUtil.readFile(programFilePath)).startsWith("/*"))
-				continue;
-			// TODO REMOVE ABOVE AFTER CONVERTING ALL PROGRAMS
-
-			const progamModule = await import(programFilePath);
-			const programid = Object.keys(progamModule)[0];
-
-			// class name must match filename
-			assertStrictEquals(programid, path.basename(programFilePath, ".js"), `program file [${programFilePath}] does not have a matching class name [${programid}]`);
-
-			// check for duplicates
-			if(programs[programid])
-				throw new Error(`program [${programid}] at ${programFilePath} is a duplicate of ${programs[programid]}`);
-
-			// create the class and validate it
-			programs[programid] = progamModule[programid].create();
-			if(!(programs[programid] instanceof this))
-				throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);
-		}
-		
-		this.programs = programs;
-		return this.programs;
 	}
 }

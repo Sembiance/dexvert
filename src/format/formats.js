@@ -46,6 +46,8 @@ import {cdr} from "./image/cdr.js";
 formats.cdr = cdr.create(families.image);
 import {artDirector} from "./image/artDirector.js";
 formats.artDirector = artDirector.create(families.image);
+import {bmp} from "./image/bmp.js";
+formats.bmp = bmp.create(families.image);
 import {mrw} from "./image/mrw.js";
 formats.mrw = mrw.create(families.image);
 import {autoSketchDrawing} from "./image/autoSketchDrawing.js";

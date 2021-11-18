@@ -1,35 +1,16 @@
-/*
 import {Program} from "../../Program.js";
+import {runUtil} from "xutil";
 
 export class fifView extends Program
 {
-	website = "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP";
-	unsafe = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	tiptoe = require("tiptoe"),
-	fileUtil = require("@sembiance/xutil").file,
-	runUtil = require("@sembiance/xutil").run;
-
-exports.meta =
-{
-	website : "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP",
-	unsafe  : true
-};
-
-exports.qemu = () => "c:\\dexvert\\FIFView\\FIFView.exe";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-
-exports.qemuData = (state, p, r) => ({
-	osid         : "winxp",
-	inFilePaths  : [r.args.last()],
-	dontMaximize : true,
-	script       : `
+	website  = "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP";
+	unsafe   = true;
+	loc      = "winxp";
+	bin      = "c:\\dexvert\\FIFView\\FIFView.exe"
+	args     = r => [r.inFile()]
+	qemuData = () => ({
+		dontMaximize : true,
+		script : `
 		#include <ScreenCapture.au3>
 
 		WinWaitActive("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)
@@ -43,7 +24,12 @@ exports.qemuData = (state, p, r) => ({
 		Send("x")
 
 		WinWaitClose("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)`
-});
+	});
+	post = async r => await runUtil.run("convert", [r.f.new.absolute, "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", "20%", "-trim", "+repage", r.f.new.absolute]);
+	chain = "dexvert[asFormat:image/bmp]"
+}
+
+/*
 
 exports.post = (state, p, r, cb) =>
 {

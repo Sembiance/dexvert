@@ -1,10 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Ditch Drash and roll my own server based as close to deno native http server as possible
+* Find a winxp format and a amigappc format that I can get working with qemu
 
-* Finish PCX. If it touches qemu, get that fully working (with all OS types, test one format/program for each OS)
-After pcx fully working, double check dexid.test.js still working
+* Now that pcx is fully working, double check dexid.test.js still working
 Then add a dexvert.test.js and ensure it works for image/pcx
 
 * Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)

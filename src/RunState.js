@@ -75,6 +75,13 @@ export class RunState
 			if(this.status)
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
 		}
+		else if(this.dosData)
+		{
+			r.push(` DOS ${fg.peach(this.qemuData.cmd)} ${(this.qemuData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
+			if(this.status)
+				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+		}
+		
 		if(xu.verbose>=3 && Object.keys(this.meta || {}).length>0)
 			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
 

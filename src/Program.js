@@ -163,7 +163,10 @@ export class Program
 		}
 
 		if(this.post)
-			await this.post(r);
+		{
+			try { await this.post(r); }
+			catch(err) { xu.log`Program post ${fg.orange(this.programid)} threw error ${err}`; }
+		}
 		
 		// if we have just a single new output file, we perform some renaming of it
 		if(f.outDir && f.files.new?.length===1)

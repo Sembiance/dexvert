@@ -1,6 +1,5 @@
 import {Program} from "../../Program.js";
 import {path} from "std";
-import {fileUtil} from "xutil";
 
 export class graphicWorkshopProfessional extends Program
 {

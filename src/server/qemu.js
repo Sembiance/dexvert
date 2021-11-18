@@ -31,10 +31,10 @@ const OS_DEFAULT =
 // We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
-	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] }//,
-	//winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
-	//amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
-	//gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
+	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
+	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
+	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
@@ -256,9 +256,10 @@ export class qemu extends Server
 	// Called when the QEMU has fully booted and is ready to received files
 	async readyOS(instance)
 	{
-		this.log`${instance.osid} #${instance.instanceid} declared itself ready, mounting in/out...`;
+		this.log`${instance.osid} #${instance.instanceid} declared itself ready!`;
 		if(instance.inOutType==="mount")
 		{
+			this.log`${instance.osid} #${instance.instanceid} mounting in/out...`;
 			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			for(const v of ["in", "out"])
 				await runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)]);

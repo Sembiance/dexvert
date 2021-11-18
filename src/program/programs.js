@@ -17,6 +17,8 @@ import {dexmagic} from "./detect/dexmagic.js";
 programs.dexmagic = dexmagic.create(programs.dexmagic);
 import {svgInfo} from "./image/svgInfo.js";
 programs.svgInfo = svgInfo.create(programs.svgInfo);
+import {fifView} from "./image/fifView.js";
+programs.fifView = fifView.create(programs.fifView);
 import {convert} from "./image/convert.js";
 programs.convert = convert.create(programs.convert);
 import {graphicWorkshopProfessional} from "./image/graphicWorkshopProfessional.js";

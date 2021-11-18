@@ -1,7 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Find a winxp format and a amigappc format that I can get working with qemu
+* Create a program/post/ dir with autoCropImage.js program that will do the convert fuzzing currently being done at bottom of fifView
+
+* Then in fifView remove the post and change the chain to "dexvert[asFormat:image/bmp] -> autoCropImage"
+
+* Test to make sure that works
+
+* Find an "amigappc" format that I can get working with qemu
+
+* Find a "gentoo" qemu format that I can get working with qemu
 
 * Now that pcx is fully working, double check dexid.test.js still working
 Then add a dexvert.test.js and ensure it works for image/pcx

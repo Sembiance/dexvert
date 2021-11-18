@@ -28,21 +28,3 @@ export class fifView extends Program
 	post = async r => await runUtil.run("convert", [r.f.new.absolute, "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", "20%", "-trim", "+repage", r.f.new.absolute]);
 	chain = "dexvert[asFormat:image/bmp]"
 }
-
-/*
-
-exports.post = (state, p, r, cb) =>
-{
-	tiptoe(
-		function trimOutput()
-		{
-			runUtil.run("convert", [path.join(state.output.absolute, "out.bmp"), "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", "20%", "-trim", "+repage", path.join(state.output.absolute, `${state.input.name}.png`)], runUtil.SILENT, this);
-		},
-		function removeBMP()
-		{
-			fileUtil.unlink(path.join(state.output.absolute, "out.bmp"), this);
-		},
-		cb
-	);
-};
-*/

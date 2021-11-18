@@ -119,7 +119,7 @@ export class Program
 			if(this.qemuData)
 				Object.assign(r.qemuData, await this.qemuData(r));
 
-			await runQEMU(r.qemuData);
+			r.status = await runQEMU(r.qemuData);
 		}
 
 		if(f.outDir)
@@ -209,8 +209,7 @@ export class Program
 					{
 						await f.addAll("new", chainF.files.new);
 						chainF.changeType("new", "prev");
-						f.remove("new", newFile);
-						await fileUtil.unlink(newFile.absolute);
+						await f.remove("new", newFile, {unlink : true});
 					}
 				}
 			}

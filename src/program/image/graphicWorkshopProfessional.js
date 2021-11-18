@@ -51,5 +51,5 @@ export class graphicWorkshopProfessional extends Program
 		
 		Sleep(1000)`
 	});
-	post = async r => await fileUtil.unlink(path.join(r.f.outDir.absolute, "out.THN"), {recusirve : true})
+	post = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"})
 }

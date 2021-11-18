@@ -2,7 +2,7 @@ import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil} from "xutil";
 import {path, delay} from "std";
-import {Drash} from "denoLandX";
+import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
 const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
@@ -45,9 +45,138 @@ const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 
+const IN_OUT_LOGIC =
+{
+	mount : async (instance, {body}) =>
+	{
+		const inDirPath = path.join(instance.dirPath, "in");
+		const outDirPath = path.join(instance.dirPath, "out");
+		const goFilePath = path.join(inDirPath, instance.scriptName);
+		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
+		const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
+
+		// We use rsync here to handle both files and directories
+		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")]));
+
+		// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
+		if(totalFilesSize>=DELAY_SIZE)
+		{
+			const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
+			this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+			await delay(timeToWait*xu.SECOND);
+		}
+
+		// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+		await fileUtil.writeFile(tmpGoFilePath, body.script);
+		await fileUtil.move(tmpGoFilePath, goFilePath, this);
+
+		// Wait for finish, which happens when the VM deletes the go file
+		await xu.waitUntil(async () => (!(await fileUtil.exists(goFilePath))));
+
+		// If the input file was >50MB then we should wait 1 second PER 50MB to allow the output files on the mount to fully catch up
+		if(totalFilesSize>=DELAY_SIZE)
+		{
+			const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
+			this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+			await delay(timeToWait*xu.SECOND);
+		}
+
+		// We use rsync here to preserve timestamps
+		await runUtil.run("rsync", ["-a", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")]);
+
+		await fileUtil.emptyDir(inDirPath);
+		await fileUtil.emptyDir(outDirPath);
+	},
+	ftp : async (instance, {body}) =>
+	{
+		const tmpInLHAFilePath = await fileUtil.genTempPath(undefined, ".lha");
+		const tmpInDirPath = await fileUtil.genTempPath();
+		const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
+		const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
+		const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
+		/*tiptoe(
+			function createTmpInDirPath()
+			{
+				fs.mkdir(tmpInDirPath, {recursive : true}, this);
+			},
+			function prepareInFiles()
+			{
+				// We use rsync here to handle both files and directories
+				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")], runUtil.SILENT, subcb), this.parallel());
+
+				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this.parallel());
+			},
+			function createInLHA()
+			{
+				// We create to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+				runUtil.run("lha", ["c", tmpInLHAFilePath, "*"], {silent : true, shell : "/bin/bash", cwd : tmpInDirPath}, this);
+			},
+			function moveInLHA()
+			{
+				fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
+			},
+			function waitForFinish()
+			{
+				XU.waitUntil(subcb => fileUtil.exists(inLHAFilePath, subcb), exists => !exists, this);
+			},
+			function extractrResults()
+			{
+				runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath], runUtil.SILENT, this);
+			},
+			function cleanFiles()
+			{
+				fileUtil.unlink(tmpInDirPath, this.parallel());
+				fileUtil.unlink(outLHAFilePath, this.parallel());
+			},
+			cb
+		);*/
+	},
+	ssh : async (instance, {body}) =>
+	{
+		const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
+		const sshPrefix = "dexvert@127.0.0.1";
+		const inDirPath = "/in";
+		const outDirPath = "/out";
+		const goFilePath = path.join(inDirPath, instance.scriptName);
+		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
+
+		/*tiptoe(
+			function copyInFiles()
+			{
+				// We use rsync here to handle both files and directories
+				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")], runUtil.SILENT, subcb), this);
+			},
+			function writeGoScript()
+			{
+				// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this);
+			},
+			function copyGoScript()
+			{
+				runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`], runUtil.SILENT, this);
+			},
+			function waitForFinish()
+			{
+				XU.waitUntil(subcb => runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath], runUtil.SILENT, subcb), outRaw => (outRaw && outRaw.trim()!==goFilePath), this);
+			},
+			function copyResults()
+			{
+				// We use rsync here to preserve timestamps
+				runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")], runUtil.SILENT, this);
+			},
+			function cleanFiles()
+			{
+				fileUtil.unlink(tmpGoFilePath, this.parallel());
+				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")], runUtil.SILENT, this.parallel());
+				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")], runUtil.SILENT, this.parallel());
+			},
+			cb
+		);*/
+	}
+};
+
 export class qemu extends Server
 {
-	drashServer = null;
 	serversLaunched = false;
 	baseKeys = Object.keys(this);
 
@@ -145,13 +274,11 @@ export class qemu extends Server
 		this.log`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 		let inOutErr = null;
-		await delay(xu.SECOND*5);	// TODO TEMPORARY
-		//await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-
+		await IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
 		this.log`${body.osid} #${instance.instanceid} finished request`;
 		instance.busy = false;
 
-		reply.text(inOutErr ? inOutErr.toString() : "ok");
+		reply(new Response(inOutErr ? inOutErr.toString() : "ok"));
 	}
 
 	checkRunQueue()
@@ -171,31 +298,22 @@ export class qemu extends Server
 
 	async start()
 	{
-		const self=this;
-		class qemuReady extends Drash.Resource
+		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT);
+		this.webServer.add("/qemuReady", async request =>
 		{
-			paths = ["/qemuReady"];
-			async GET(request, reply)
-			{
-				const body = Object.fromEntries(["osid", "ip"].map(k => ([k, request.queryParam(k)])));
-				self.log`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
-				await self.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
-				reply.text("ok");
-			}
-		}
-		class qemuRun extends Drash.Resource
+			const u = new URL(request.url);
+			const body = Object.fromEntries(["osid", "ip"].map(k => ([k, u.searchParams.get(k)])));
+			this.log`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
+			await this.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
+			return new Response("ok");
+		});
+		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
-			paths = ["/qemuRun"];
-			POST(request, reply)
-			{
-				const body = Object.fromEntries(["osid", "timeout", "outDirPath", "inFilePaths", "script"].map(k => ([k, request.bodyParam(k)])));
-				self.log`Got qemuRun request ${xu.inspect(body).squeeze()}`;
-				RUN_QUEUE.push({body, request, reply});
-			}
-		}
-
-		this.drashServer = new Drash.Server({hostname : QEMU_SERVER_HOST, port : QEMU_SERVER_PORT, protocol : "http", resources : [qemuReady, qemuRun]});
-		this.drashServer.run();
+			const body = await request.json();
+			this.log`Got qemuRun request for ${body.osid}`;
+			RUN_QUEUE.push({body, request, reply});
+		}, {detached : true, method : "POST"});
+		await this.webServer.start();
 
 		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
 
@@ -250,166 +368,10 @@ export class qemu extends Server
 
 	async stop()
 	{
-		if(this.drashServer)
-			this.drashServer.close();
+		if(this.webServer)
+			this.webServer.stop();
 		
 		for(const instance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
 			await this.stopOS(instance);
 	}
 }
-
-/*
-
-const IN_OUT_LOGIC =
-{
-	mount : (instance, {body}, cb) =>
-	{
-		const inDirPath = path.join(instance.dirPath, "in");
-		const outDirPath = path.join(instance.dirPath, "out");
-		const goFilePath = path.join(inDirPath, instance.scriptName);
-		const tmpGoFilePath = fileUtil.generateTempFilePath(undefined, path.extname(instance.scriptName));
-		const totalFilesSize = body.inFilePaths.map(inFilePath => fs.statSync(inFilePath).size).sum();
-
-		tiptoe(
-			function copyInFiles()
-			{
-				// We use rsync here to handle both files and directories
-				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")], runUtil.SILENT, subcb), this);
-			},
-			function waitForInputFiles()
-			{
-				// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
-				if(totalFilesSize<DELAY_SIZE)
-					return this();
-					
-				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize}`;
-
-				setTimeout(() => this(), timeToWait*XU.SECOND);
-			},
-			function writeGoScript()
-			{
-				// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this);
-			},
-			function moveGoScript()
-			{
-				fileUtil.move(tmpGoFilePath, goFilePath, this);
-			},
-			function waitForFinish()
-			{
-				XU.waitUntil(subcb => fileUtil.exists(goFilePath, subcb), exists => !exists, this);
-			},
-			function waitForOutputFiles()
-			{
-				// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
-				if(totalFilesSize<DELAY_SIZE)
-					return this();
-					
-				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize}`;
-
-				setTimeout(() => this(), timeToWait*XU.SECOND);
-			},
-			function copyResults()
-			{
-				// We use rsync here to preserve timestamps
-				runUtil.run("rsync", ["-aL", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")], runUtil.SILENT, this);
-			},
-			function cleanFiles()
-			{
-				fileUtil.emptyDir(inDirPath, this.parallel());
-				fileUtil.emptyDir(outDirPath, this.parallel());
-			},
-			cb
-		);
-	},
-	ftp : (instance, {body}, cb) =>
-	{
-		const tmpInLHAFilePath = fileUtil.generateTempFilePath(undefined, ".lha");
-		const tmpInDirPath = fileUtil.generateTempFilePath();
-		const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
-		const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
-		const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
-		tiptoe(
-			function createTmpInDirPath()
-			{
-				fs.mkdir(tmpInDirPath, {recursive : true}, this);
-			},
-			function prepareInFiles()
-			{
-				// We use rsync here to handle both files and directories
-				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")], runUtil.SILENT, subcb), this.parallel());
-
-				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this.parallel());
-			},
-			function createInLHA()
-			{
-				// We create to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-				runUtil.run("lha", ["c", tmpInLHAFilePath, "*"], {silent : true, shell : "/bin/bash", cwd : tmpInDirPath}, this);
-			},
-			function moveInLHA()
-			{
-				fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
-			},
-			function waitForFinish()
-			{
-				XU.waitUntil(subcb => fileUtil.exists(inLHAFilePath, subcb), exists => !exists, this);
-			},
-			function extractrResults()
-			{
-				runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath], runUtil.SILENT, this);
-			},
-			function cleanFiles()
-			{
-				fileUtil.unlink(tmpInDirPath, this.parallel());
-				fileUtil.unlink(outLHAFilePath, this.parallel());
-			},
-			cb
-		);
-	},
-	ssh : (instance, {body}, cb) =>
-	{
-		const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
-		const sshPrefix = "dexvert@127.0.0.1";
-		const inDirPath = "/in";
-		const outDirPath = "/out";
-		const goFilePath = path.join(inDirPath, instance.scriptName);
-		const tmpGoFilePath = fileUtil.generateTempFilePath(undefined, path.extname(instance.scriptName));
-
-		tiptoe(
-			function copyInFiles()
-			{
-				// We use rsync here to handle both files and directories
-				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")], runUtil.SILENT, subcb), this);
-			},
-			function writeGoScript()
-			{
-				// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this);
-			},
-			function copyGoScript()
-			{
-				runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`], runUtil.SILENT, this);
-			},
-			function waitForFinish()
-			{
-				XU.waitUntil(subcb => runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath], runUtil.SILENT, subcb), outRaw => (outRaw && outRaw.trim()!==goFilePath), this);
-			},
-			function copyResults()
-			{
-				// We use rsync here to preserve timestamps
-				runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")], runUtil.SILENT, this);
-			},
-			function cleanFiles()
-			{
-				fileUtil.unlink(tmpGoFilePath, this.parallel());
-				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")], runUtil.SILENT, this.parallel());
-				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")], runUtil.SILENT, this.parallel());
-			},
-			cb
-		);
-	}
-};
-
-*/

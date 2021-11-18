@@ -4,6 +4,7 @@ import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
 import {initDOMParser, DOMParser} from "denoLandX";
 import {path} from "std";
+import {programs} from "../program/programs.js";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
 const TENSOR_PATH_EXCLUSIONS =
@@ -56,7 +57,7 @@ export class image extends Family
 		if(!meta.width || !meta.height)
 			return false;
 		
-		const isUnsafe = Program.programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
+		const isUnsafe = programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
 
 		if(isUnsafe && meta.opaque && meta.colorCount<=1)
 			return false;
@@ -84,7 +85,7 @@ export class image extends Family
 		if(!skipTensor)
 		{
 			// loaded dynamically because tensorUtil requires identify which requires formats and this is a family, anyways, circular dependency seen in util/buildFormats.js
-			const {classifyImage} = import("../tensorUtil.js");
+			const {classifyImage} = await import("../tensorUtil.js");
 
 			// tensorUtil.classifyImage will convert these into PNG before sending to the tensor
 			const garbage = await classifyImage(dexFile.absolute, "garbage");

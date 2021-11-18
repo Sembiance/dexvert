@@ -156,15 +156,10 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 
 	qemuData.script = scriptLines.join("\n");
 
-	await xu.log3`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args}`;
-
-	const r = await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)});
-	console.log({r});
-	const rText = await r.text();
-	console.log({rText});
-	return rText;
-
-	//await httpUtil.post(`http://${C.DEXSERV_HOST}:${C.DEXSERV_PORT}/qemuRun`, qemuData, {postAsJSON : true}, this);
-	//if(a.toString()!=="ok")
-	//	throw new Error(a.toString());
+	await xu.log3`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
+	const r = await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)})).text();
+	if(r!=="ok")
+		throw new Error(r);
+		
+	return r;
 }

@@ -1,3 +1,7 @@
 #!/bin/bash
 
-sudo umount -l /mnt/dexvert/qemu/*/in /mnt/dexvert/qemu/*/out
+cd /mnt/dexvert/qemu || exit
+for f in *; do
+	sudo umount -l "$f"/in
+	sudo umount -l "$f"/out
+done

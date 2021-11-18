@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {path} from "std";
-import {runUtil} from "xutil";
+import {runUtil, fileUtil} from "xutil";
 import {DexFile} from "./DexFile.js";
 
 export class FileSet
@@ -49,9 +49,13 @@ export class FileSet
 			this.files[type].push(dexFile);
 	}
 
-	remove(type, file)
+	// removes the given file from this FileSet. If unlink is set to true, also deletes it from the disk
+	async remove(type, file, {unlink}={})
 	{
-		(this.files[type] || []).filterInPlace(v => v.absolute!==file.absolute);
+		const absolutePath = file instanceof DexFile ? file.absolute : file;
+		(this.files[type] || []).filterInPlace(v => v.absolute!==absolutePath);
+		if(unlink)
+			await fileUtil.unlink(absolutePath);
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it

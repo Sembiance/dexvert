@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Ditch Drash and roll my own server based as close to deno native http server as possible
+
 * Finish PCX. If it touches qemu, get that fully working (with all OS types, test one format/program for each OS)
 After pcx fully working, double check dexid.test.js still working
 Then add a dexvert.test.js and ensure it works for image/pcx

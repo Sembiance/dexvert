@@ -13,6 +13,9 @@ export class tensor extends Server
 		const SRC_DIR = path.join(xu.dirname(import.meta), "../../tensor");
 		const WIP_DIR = TENSORSERV_PATH;
 
+		this.log`Stopping previous tensor server docker...`;
+		await runUtil.run("docker", ["stop", "dexvert-tensor"]);
+
 		this.log`Removing existing tensor wip directories...`;
 		await fileUtil.unlink(WIP_DIR, {recursive : true}).catch(() => {});
 

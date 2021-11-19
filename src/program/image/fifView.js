@@ -1,5 +1,4 @@
 import {Program} from "../../Program.js";
-import {runUtil} from "xutil";
 
 export class fifView extends Program
 {
@@ -25,6 +24,5 @@ export class fifView extends Program
 
 		WinWaitClose("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)`
 	});
-	post = async r => await runUtil.run("convert", [r.f.new.absolute, "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", "20%", "-trim", "+repage", r.f.new.absolute]);
-	chain = "dexvert[asFormat:image/bmp]"
+	chain = "dexvert[asFormat:image/bmp] -> autoCropImage"
 }

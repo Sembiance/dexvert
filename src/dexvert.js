@@ -10,8 +10,8 @@ import {path} from "std";
 
 export async function dexvert(inputFile, outputDir, {asFormat}={})
 {
-	if(!(await fileUtil.exists("/mnt/ram/dexvert/serverRunning")))
-		throw new Error("DexServer not running!");
+	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
+		throw new Error("dexserver not running!");
 	if(!inputFile.isFile)
 		throw new Error(`Invalid input file, expected file. ${inputFile.absolute}`);
 	if(!outputDir.isDirectory)
@@ -32,14 +32,14 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 				asId[k==="ext" ? "extensions" : k] = formats[asFormatid][k];
 		}
 		ids.push(Identification.create(asId));
-		xu.log`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
+		xu.log1`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
 	}
 	else
 	{
-		xu.log`Getting identifications for ${inputFile.pretty()}`;
+		xu.log1`Getting identifications for ${inputFile.pretty()}`;
 		
 		const prevVerbose = xu.verbose;
-		xu.verbose = prevVerbose>=5 ? prevVerbose : 1;
+		xu.verbose = prevVerbose>=4 ? prevVerbose : 0;
 		ids.push(...(await identify(inputFile)).filter(id => id.from==="dexvert" && !id.unsupported));
 		xu.verbose = prevVerbose;
 	}
@@ -128,10 +128,17 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input});
 					dexState.ran.push(r);
 
+					xu.log3`Verifying ${(dexState.f.files.new || []).length} new files...`;
+
 					// verify output files
 					for(const newFile of dexState.f.files.new || [])
 					{
+						const prevVerbose = xu.verbose;
+						if(prevVerbose<4)
+							xu.verbose = 0;
 						const isValid = await dexState.format.family.verify(newFile, await identify(newFile), {dexState});
+						xu.verbose = prevVerbose;
+
 						if(!isValid)
 						{
 							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;

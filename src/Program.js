@@ -94,7 +94,7 @@ export class Program
 			r.runOptions = {cwd : f.root, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
-			if(xu.verbose>=5)
+			if(xu.verbose>=4)
 				r.runOptions.verbose = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, this.runOptions);
@@ -206,13 +206,18 @@ export class Program
 				{
 					chainF.removeType("input");
 					await chainF.add("input", newFile);
+
+					xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
+
 					await Program.runProgram(progRaw, chainF);
 					
 					if(chainF.new)
 					{
+						xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
 						await f.addAll("new", chainF.files.new);
+						if(!chainF.files.new.some(v => v.absolute===newFile.absolute))
+							await f.remove("new", newFile, {unlink : true});
 						chainF.changeType("new", "prev");
-						await f.remove("new", newFile, {unlink : true});
 					}
 				}
 			}

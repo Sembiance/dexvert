@@ -6,7 +6,7 @@ import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
 const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
-const DEBUG = true;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
+const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
 const HOSTS =
@@ -299,6 +299,12 @@ export class qemu extends Server
 
 	async start()
 	{
+		this.log`Unmounting previous mounts...`;
+		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
+
+		this.log`Stopping existing QEMU procs...`;
+		await runUtil.run("sudo", ["killall", "--wait", "qemu-system-x86_64", "qemu-system-i386", "qemu-system-ppc"]);
+
 		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT);
 		this.webServer.add("/qemuReady", async request =>
 		{
@@ -315,8 +321,6 @@ export class qemu extends Server
 			RUN_QUEUE.push({body, request, reply});
 		}, {detached : true, method : "POST"});
 		await this.webServer.start();
-
-		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
 
 		this.log`Pre-cleaning ${QEMU_INSTANCE_DIR_PATH}`;
 		await fileUtil.unlink(QEMU_INSTANCE_DIR_PATH, {recursive : true});

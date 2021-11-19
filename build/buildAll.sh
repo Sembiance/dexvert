@@ -1,3 +1,4 @@
 #!/bin/bash
-./buildFormats
-./buildPrograms
+cd `dirname $0`
+./buildFormats "$@"
+./buildPrograms "$@"

@@ -1,5 +1,4 @@
 import {Program} from "../../Program.js";
-import {path} from "std";
 
 export class convert extends Program
 {

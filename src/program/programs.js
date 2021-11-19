@@ -7,6 +7,8 @@ import {dexvert} from "./other/dexvert.js";
 programs.dexvert = dexvert.create(programs.dexvert);
 import {darktable_rs_identify} from "./meta/darktable_rs_identify.js";
 programs.darktable_rs_identify = darktable_rs_identify.create(programs.darktable_rs_identify);
+import {autoCropImage} from "./post/autoCropImage.js";
+programs.autoCropImage = autoCropImage.create(programs.autoCropImage);
 import {checkBytes} from "./detect/checkBytes.js";
 programs.checkBytes = checkBytes.create(programs.checkBytes);
 import {file} from "./detect/file.js";

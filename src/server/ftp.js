@@ -12,6 +12,9 @@ export class ftp extends Server
 
 	async startVSFTPD()
 	{
+		this.log`Stopping existing VSFTPD procs...`;
+		await runUtil.run("sudo", ["killall", "--wait", "vsftpd"]);
+
 		this.log`Starting VSFTPD...`;
 
 		const {p} = await runUtil.run("vsftpd", [path.join(xu.dirname(import.meta), "..", "..", "ftp", "amigappc-vsftpd.conf")], {detached : true});
@@ -41,13 +44,17 @@ export class ftp extends Server
 		return this.vsftpdProc!==null;
 	}
 
-	stop()
+	async stop()
 	{
 		this.log`Stopping VSFTPD...`;
 		
 		this.stopping = true;
 
 		if(this.vsftpdCP)
-			this.vsftpdCP.kill("SIGTERM");
+		{
+			// can't just do vsftpdCP.kill() because there may be child processes. we do it twice here, just to be sure. meh.
+			await runUtil.run("sudo", ["killall", "--wait", "vsftpd"]);
+			await runUtil.run("sudo", ["killall", "--wait", "vsftpd"]);
+		}
 	}
 }

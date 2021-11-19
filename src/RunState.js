@@ -85,10 +85,10 @@ export class RunState
 		if(xu.verbose>=3 && Object.keys(this.meta || {}).length>0)
 			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
 
-		if(xu.verbose>=4 && (this.stdout || "").trim().length>0)
-			r.push(`\n${pre}\t${xu.colon("stdout")}${this.stdout.squeeze()}`);
-		if(xu.verbose>=4 && (this.stderr || "").trim().length>0)
-			r.push(`\n${pre}\t${xu.colon("stderr")}${this.stderr.squeeze()}`);
+		if(xu.verbose>=5 || (xu.verbose>=4 && (this.stdout || "").trim().length>0))
+			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "").squeeze()}`);
+		if(xu.verbose>=5 || (xu.verbose>=4 && (this.stderr || "").trim().length>0))
+			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "").squeeze()}`);
 			
 		return r.join("");
 	}

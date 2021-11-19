@@ -34,6 +34,14 @@ export class tensor extends Server
 
 	async status()
 	{
+		//this.log`a`;
+		//const a = await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/status`).catch(err => console.log(err));
+		//if(!a)
+		//	return false;
+		//this.log`b`;
+		//const b = await a.json();
+		//this.log`c`;
+		//return b?.status==="a-ok";
 		return (await (await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/status`).catch(() => {}))?.json())?.status==="a-ok";
 	}
 

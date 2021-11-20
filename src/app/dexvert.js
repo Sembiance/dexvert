@@ -21,7 +21,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-xu.verbose = argv.verbose;
+xu.verbose = argv.json ? 0 : argv.verbose;
 
 const dexvertOptions = {};
 ["asFormat"].forEach(k =>

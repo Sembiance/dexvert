@@ -18,7 +18,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
-xu.verbose = argv.verbose;
+xu.verbose = argv.json ? 0 : argv.verbose;
 
 for(const inputFilePath of Array.force(argv.inputFilePath))
 {

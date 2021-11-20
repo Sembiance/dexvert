@@ -9,7 +9,6 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		format  : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
-		verbose : {desc : "Show additional info when processing"},
 		record  : {desc : "Take the results of the identifications and save them as future expected results"}
 	}});
 
@@ -22,7 +21,7 @@ const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
-printUtil.majorHeader("Identification Test");
+console.log(printUtil.majorHeader("Identification Test"));
 xu.log`Loading test data and finding sample files...`;
 
 const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
@@ -69,7 +68,6 @@ async function testSample(sampleFilePath)
 			return false;
 
 		delete id.extensions;
-		delete id.from;
 		delete id.unsupported;
 
 		return true;
@@ -82,7 +80,7 @@ async function testSample(sampleFilePath)
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return fail(`No test data for this file: ${fg.cyan("[")}${ids.map(id => id.pretty()).join(fg.cyan("] ["))}${fg.cyan("]")}`);
+		return fail(`No test data for this file`);
 	
 	for(const id of ids)
 	{

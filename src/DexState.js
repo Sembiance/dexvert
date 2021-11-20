@@ -35,6 +35,8 @@ export class DexPhase
 			o[key] = this[key].serialize();
 		o.meta = xu.parseJSON(JSON.stringify(this.meta));
 		o.ran = this.ran.map(v => v.serialize());
+		if(this.converter)
+			o.converter = this.converter;
 		return o;
 	}
 
@@ -107,6 +109,7 @@ export class DexState
 		if(this.phase)
 			o.phase = this.phase.serialize();
 		o.past = this.past.map(v => v.serialize());
+		o.processed = !!this.processed;
 		if(this.created)
 			o.created = this.created.serialize();
 		return o;

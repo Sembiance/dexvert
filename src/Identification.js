@@ -37,6 +37,8 @@ export class Identification
 
 	pretty(prefix="")
 	{
+		if(!this.from)
+			console.log(this);
 		const r = [prefix];
 		r.push(fg.orange(this.from.padStart(8, " ")));
 		r.push(` ${fg.white(this.confidence.toString().padStart(3, " "))}${fg.cyanDim("%")}`);

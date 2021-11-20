@@ -143,10 +143,21 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 						{
 							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
 							await fileUtil.unlink(newFile.absolute);
+							continue;
 						}
-						else
+
+						await dexState.f.add("output", newFile);
+
+						
+						// if a produced file is older than 2020, then we assume it's the proper date
+						if((new Date(newFile.ts)).getFullYear()<2020)
+							continue;
+						
+						// otherwise we set the output file to have the same date ts as the input file if it's newer than the output file
+						if(inputFile.ts<newFile.ts)
 						{
-							await dexState.f.add("output", newFile);
+							newFile.ts = inputFile.ts;
+							await Deno.utime(newFile.absolute, Math.floor(inputFile.ts/xu.SECOND), Math.floor(inputFile.ts/xu.SECOND));
 						}
 					}
 					dexState.f.removeType("new");
@@ -156,7 +167,10 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 					dexState.processed = true;
 
 				if(dexState.processed)
+				{
+					dexState.phase.converter = converter;
 					break;
+				}
 			}
 
 			// run any post-convergter post format function
@@ -165,7 +179,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 		}
 		catch(err)
 		{
-			xu.log1`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${err}`;
+			console.error(`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${xu.inspect(err)}`);
 		}
 
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made

@@ -90,46 +90,29 @@ const IN_OUT_LOGIC =
 	ftp : async (instance, {body}) =>
 	{
 		const tmpInLHAFilePath = await fileUtil.genTempPath(undefined, ".lha");
-		const tmpInDirPath = await fileUtil.genTempPath();
+		const tmpInDirPath = await fileUtil.genTempPath(undefined, "qemuftp");
 		const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
 		const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
 		const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
-		/*tiptoe(
-			function createTmpInDirPath()
-			{
-				fs.mkdir(tmpInDirPath, {recursive : true}, this);
-			},
-			function prepareInFiles()
-			{
-				// We use rsync here to handle both files and directories
-				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")], runUtil.SILENT, subcb), this.parallel());
 
-				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this.parallel());
-			},
-			function createInLHA()
-			{
-				// We create to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-				runUtil.run("lha", ["c", tmpInLHAFilePath, "*"], {silent : true, shell : "/bin/bash", cwd : tmpInDirPath}, this);
-			},
-			function moveInLHA()
-			{
-				fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
-			},
-			function waitForFinish()
-			{
-				XU.waitUntil(subcb => fileUtil.exists(inLHAFilePath, subcb), exists => !exists, this);
-			},
-			function extractrResults()
-			{
-				runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath], runUtil.SILENT, this);
-			},
-			function cleanFiles()
-			{
-				fileUtil.unlink(tmpInDirPath, this.parallel());
-				fileUtil.unlink(outLHAFilePath, this.parallel());
-			},
-			cb
-		);*/
+		await Deno.mkdir(tmpInDirPath, {recursive : true});
+
+		// We use rsync here to handle both files and directories
+		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
+
+		await fileUtil.writeFile(tmpGoFilePath, body.script);
+
+		// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+		await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});	//shell : "/bin/bash",
+		await fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
+
+		// Wait for finish, which happens when the VM deletes the lha file
+		await xu.waitUntil(async () => (!(await fileUtil.exists(inLHAFilePath))));
+
+		await runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath]);
+
+		await fileUtil.unlink(tmpInDirPath, {recursive : true});
+		await fileUtil.unlink(outLHAFilePath, {recursive : true});
 	},
 	ssh : async (instance, {body}) =>
 	{
@@ -139,6 +122,8 @@ const IN_OUT_LOGIC =
 		const outDirPath = "/out";
 		const goFilePath = path.join(inDirPath, instance.scriptName);
 		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
+
+		// TODO ALSO need to update qemuUtil for this section !!!
 
 		/*tiptoe(
 			function copyInFiles()

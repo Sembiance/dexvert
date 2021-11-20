@@ -1,21 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Find an "amigappc" format that I can get working with qemu
-
-* Find a "gentoo" qemu format that I can get working with qemu
-
-* Now that pcx is fully working, double check dexid.test.js still working
-Then add a dexvert.test.js and ensure it works for image/pcx
-
-* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
-
 * Find a format that outputs an SVG file and test svgInfo in image.verify
 
 * Find a format that has an outputValidator and test that
 
+* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
+
 * Fully identify and process:
-image/pcx
 image/qrt
 image/xwd
 image/fractalImageFormat
@@ -36,6 +28,8 @@ archive/macBinary
 text/txtByFilename
 font/amigaBitmapFont
 video/* (something that uses dosBox for video)
+
+* Find a "gentoo" qemu format that I can get working with qemu
 
 * Now convert and identify any formats with:
 untrustworthy (which has been removed entirely, as programs are untrustworthy, not formats)

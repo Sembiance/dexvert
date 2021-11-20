@@ -29,6 +29,8 @@ import {scribus} from "./image/scribus.js";
 programs.scribus = scribus.create(programs.scribus);
 import {inkscape} from "./image/inkscape.js";
 programs.inkscape = inkscape.create(programs.inkscape);
+import {DR2DtoPS} from "./image/DR2DtoPS.js";
+programs.DR2DtoPS = DR2DtoPS.create(programs.DR2DtoPS);
 import {runvga} from "./image/runvga.js";
 programs.runvga = runvga.create(programs.runvga);
 import {draw256} from "./image/draw256.js";

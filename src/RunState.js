@@ -54,6 +54,7 @@ export class RunState
 			if(Object.hasOwn(this, key))
 				o[key] = this[key];
 		}
+		// TODO Maybe add dosData/qemuData ?
 		return o;
 	}
 

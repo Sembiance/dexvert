@@ -96,6 +96,7 @@ export class Format
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			unsupported      : {type : "boolean"},
 			untouched        : {types : ["boolean", "function"]},
+			verify           : {type : "function", length : 1},
 
 			// conversion
 			metaProviders : {type : ["string"], enum : (family.metaids || [])},

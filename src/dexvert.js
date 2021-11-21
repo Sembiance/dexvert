@@ -37,11 +37,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 	else
 	{
 		xu.log1`Getting identifications for ${inputFile.pretty()}`;
-		
-		const prevVerbose = xu.verbose;
-		xu.verbose = prevVerbose>=4 ? prevVerbose : 0;
-		ids.push(...(await identify(inputFile)).filter(id => id.from==="dexvert" && !id.unsupported));
-		xu.verbose = prevVerbose;
+		ids.push(...(await identify(inputFile, {quiet : true})).filter(id => id.from==="dexvert" && !id.unsupported));
 	}
 
 	if(ids.length===0)
@@ -133,16 +129,14 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 					// verify output files
 					for(const newFile of dexState.f.files.new || [])
 					{
-						const prevVerbose = xu.verbose;
-						if(prevVerbose<4)
-							xu.verbose = 0;
-						const isValid = await dexState.format.family.verify(newFile, await identify(newFile), {dexState});
-						xu.verbose = prevVerbose;
-
+						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {quiet : true}));
 						if(!isValid)
 						{
 							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
-							await fileUtil.unlink(newFile.absolute);
+							if(xu.verbose>=5)
+								xu.log5`NOT deleting it, due to verbose>=5`;
+							else
+								await fileUtil.unlink(newFile.absolute);
 							continue;
 						}
 
@@ -195,180 +189,3 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 
 	return dexState;
 }
-
-/*
-
-// Returns true if we should continue checking the next identification
-function checkShouldContinue(state)
-{
-	if(state.processed)
-	{
-		if(state.verbose>=1)
-			XU.log`Processing ${`${XU.c.fg.green}succeeded`} with format: ${state.id.family}/${state.id.formatid}`;
-		
-		if(state.keepGoing && state.ids.length>0)
-			return true;
-		
-		return false;
-	}
-
-	if(state.ids.length===0 || state.unsupported)
-	{
-		if(state.verbose>=1)
-			XU.log`\nNo more formats to check.`;
-
-		if(!state.unsupported && !state.asFormat)
-			setFallthroughID(state);
-
-		return false;
-	}
-
-	return true;
-}
-
-// List of steps to perform for processing
-exports.steps =
-[
-	(state, p) => p.util.file.glob(state.output.absolute, "**", {nodir : true}, existingOutputFiles => existingOutputFiles.length===0, `Output directory ${state.output.absolute} is not empty`),
-	(state, p) => (state.asFormat ? p.util.flow.noop : p.util.flow.serial(p.identify.steps)),
-	() => exports.checkIdentification,
-	(state0, p0) => p0.util.flow.batchRepeatUntil([
-		() => exports.processNext,
-		(state, p) => p.util.file.findValidOutputFiles(true),
-		() => exports.updateProcessed,
-		() => exports.cleanup], checkShouldContinue)
-];
-
-// Called if we were not able to process it as anything, then we still want to set state.id to our "best guess", usually an unsupported file format
-function setFallthroughID(state)
-{
-	delete state.id;
-
-	// If we have any unsupported dexvert matches that were magic matches, include them here
-	const unsupportedIdentifications = state.identify.filter(id => id.from==="dexvert" && id.unsupported && id.matchType==="magic");
-	if(unsupportedIdentifications.length>=1)
-	{
-		state.unsupported = true;
-		state.id = unsupportedIdentifications.multiSort([id => id.matchType==="ext", id => id.confidence, id => C.FAMILIES.indexOf(id.family)], [true, true, false])[0];
-	}
-}
-
-// This will actually perform the processing of the next id in line (popped off the end for performance reasons)
-exports.processNext = function processNext(state, p, cb)
-{
-	if(state.unsupported || state.ids.length===0)
-		return p.util.meta.input(state, p, cb);
-
-	state.id = state.ids.shift();
-	
-	delete state.extraFilenames;
-
-	if(state.id.brute)
-	{
-		const bruteOutputDirPath = path.join(state.preBruteOutputDirPath, state.id.family, state.id.formatid);
-		fs.mkdirSync(bruteOutputDirPath, {recursive : true});
-		dexUtil.setStateOutput(state, bruteOutputDirPath);
-
-		if(state.keepGoing)
-			delete state.processed;
-		
-		if(state.id.bruteProgram)
-			p.formats[state.id.family][state.id.formatid] = { meta : {name : `Program: ${state.id.formatid}`}, steps : [() => ({program : state.id.formatid})]};
-	}
-
-	if(state.verbose>=1)
-		XU.log`Attempting to process as format: ${state.id.family}/${state.id.formatid}`;
-	
-	p.format = p.formats[state.id.family][state.id.formatid];
-	p.family = p.families[state.id.family];
-
-	function cbHandler(err)
-	{
-		if(err)
-		{
-			console.error(`Encountered error attempting to process ${state.input.absolute} as format: ${state.id.family}/${state.id.formatid}`);
-			if(state.verbose>=1)
-				console.log(state);
-			console.error(err);
-		}
-
-		setImmediate(cb);
-	}
-
-	p.util.flow.serial([
-		() => p.util.file.tmpCWDCreate,
-		subState =>
-		{
-			let ext=null;
-			if(p.format.meta.safeExt)
-				ext = p.format.meta.safeExt(state);
-			else if(p.format.meta.ext)
-				ext = (p.format.meta.ext.includes(subState.input.ext.toLowerCase()) ? subState.input.ext : (state.id.fileSizeMatchExt || p.format.meta.ext[0]));
-			else
-				ext = (state.id.fileSizeMatchExt || subState.input.ext || "");
-
-			return p.util.file.safeInput([true, "input"].includes(p.format.meta.keepFilename) ? state.input.name : "in", ext.toLowerCase(), [true, "input"].includes(p.format.meta.symlinkUnsafe));
-		},
-		() => p.util.file.safeOutput,
-		() => (ss, sp, scb) => ["filesRequired", "filesOptional"].flatMap(t => ((p.format.meta[t] || (() => []))(ss, ss.input.otherFiles, ss.input.otherDirs) || [])).unique().parallelForEach((v, vcb) =>
-		{
-			if(!ss.extraFilenames)
-				ss.extraFilenames = [];
-			const extraFilename = ([true, "extras"].includes(p.format.meta.keepFilename) ? path.basename(v, path.extname(v)) : "in") + path.extname(v).toLowerCase();
-			ss.extraFilenames.push(extraFilename);
-
-			const extraDestFilePath = path.join(ss.cwd, extraFilename);
-			const extraSrcFilePath = path.join(ss.input.dirPath, v);
-			if([true, "extras"].includes(p.format.meta.symlinkUnsafe))
-			{
-				if(fs.statSync(extraSrcFilePath).isDirectory())
-					fileUtil.copyDir(extraSrcFilePath, extraDestFilePath, vcb);
-				else
-					fs.copyFile(extraSrcFilePath, extraDestFilePath, vcb);
-			}
-			else
-			{
-				fs.symlink(extraSrcFilePath, extraDestFilePath, vcb);
-			}
-		}, scb),
-		() => p.util.meta.input,
-		...(p.format.preSteps || []),
-		subState => (subState.processed ? p.util.flow.noop : p.util.flow.serial(p.family.steps)),		// For files we don't need to convert, meta.input calls format.inputMeta which can set processed to true if the file is verified as valid
-		...(p.format.postSteps || []),
-		() => p.util.file.tmpCWDCleanup])(state, p, cbHandler);
-};
-
-// Will call the p.family.updateProcessed method which will set processed to true if the processing was successful
-// We can't put this directly into exports.steps above because state.id.family isn't set until this function is actually called
-exports.updateProcessed = function updateProcessed(state, p, cb)
-{
-	if(state.unsupported || !state.id)
-		return setImmediate(cb);
-
-	p.family.updateProcessed(state, p, cb);
-};
-
-// Called at the end of each processNext batch
-exports.cleanup = function cleanup(state, p, cb)
-{
-	if(state.unsupported)
-		return setImmediate(cb);
-	
-	const isBrute = state.id?.brute;
-	
-	if(!state.processed)
-	{
-		delete state.id;
-
-		// If we are brute forcing and were not successful, we need to delete the directory we created
-		if(isBrute)
-		{
-			fileUtil.unlink(state.output.absolute, cb);
-			return;
-		}
-	}
-
-	return setImmediate(cb);
-};
-
-*/

@@ -1,16 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Find a format that outputs an SVG file and test svgInfo in image.verify
+* Get the new 'renameOut.multiple' regex stuff working with abydosconvert
+TEST this with sunRaster/OPENING.SCR  (AFTERWARDS REMOVE abydosconvert AS A converter)
+Will want to temporarily disable the single file support and assume multiple output files
+"21312test filename47.001.svg".replace(/^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/, "$<pre>replacementStringHere$<post>")
 
-* Find a format that has an outputValidator and test that
+* Ensure abydosconvert is NOT a converter in sunRaster
 
-* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
-
-* Fully identify and process:
-image/qrt
-image/xwd
-image/fractalImageFormat
+* Add full dexvert support for:
 image/degasHiPI
 image/mur
 image/artistByEaton
@@ -22,12 +20,17 @@ image/apStar
 image/artDirector
 image/advancedArtStudio
 image/hiPic
+ALL OTHER IMAGES
+
+* Fully dexvert support:
 archive/windowsThumbDB
 archive/msCompound
 archive/macBinary
 text/txtByFilename
 font/amigaBitmapFont
 video/* (something that uses dosBox for video)
+
+* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
 
 * Find a "gentoo" qemu format that I can get working with qemu
 
@@ -55,6 +58,8 @@ filesRequired/filesOptional -> auxFiles
 * Maybe convert test-identify/test-process to have a live web page or fancy console status with boxes for every format type that turn red/green on success/failure
 
 * Make a src/app/dexbrute.js that will create Converters() for every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
+
+* Find all TODO comments and lint entire project
 
 /---------------\
 | High Priority |

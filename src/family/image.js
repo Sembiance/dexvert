@@ -29,7 +29,7 @@ export class image extends Family
 {
 	metaids = ["image", "darkTable", "ansiArt"];
 
-	async verify(dexFile, identifications, {dexState})
+	async verify(dexState, dexFile, identifications)
 	{
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
@@ -55,18 +55,30 @@ export class image extends Family
 		}
 
 		if(!meta.width || !meta.height)
+		{
+			xu.log3`Image failed verification due to no width (${meta.width}) or height (${meta.height})`;
 			return false;
+		}
 		
 		const isUnsafe = programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
 
 		if(isUnsafe && meta.opaque && meta.colorCount<=1)
+		{
+			xu.log3`Image failed verification due to being unsafe with an opaque result and 1 color`;
 			return false;
+		}
 
 		if(isUnsafe && [meta.width, meta.height].some(v => v>=15000))
+		{
+			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > 15000`;
 			return false;
+		}
 
-		if(dexid.formatid==="svg" && meta.colorCount<=1)
+		if(dexid.formatid==="svg" && meta.colorCount<2)
+		{
+			xu.log3`Image failed verification due to being unsafe an SVG with less than 2 colors.`;
 			return false;
+		}
 		
 		let skipTensor = null;
 
@@ -94,7 +106,7 @@ export class image extends Family
 
 			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
 			{
-				xu.log2`Image detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
+				xu.log2`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
 				await Deno.copyFile(dexFile.absolute, path.join(GARBAGE_DETECTED_DIR_PATH, `${garbage.noExponents()}-${Math.randomInt(1, 10000)}-${dexState.format.formatid}-${dexState.original.input.absolute.replaceAll("/", ":")}-${dexFile.rel.replaceAll("/", ":")}`));
 				return false;
 			}
@@ -102,6 +114,12 @@ export class image extends Family
 		else
 		{
 			xu.log2`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
+		}
+
+		if(dexState.phase?.format?.verify && !dexState.phase.format.verify({dexState, dexFile, identifications, meta}))
+		{
+			xu.log3`Image failed format.verify() call`;
+			return false;
 		}
 
 		return true;
@@ -127,6 +145,7 @@ export class image extends Family
 					xu.log4`imageUtil.getInfo() returned an err ${info.err}`;
 					delete info.err;
 				}
+				delete info.size;
 				Object.assign(meta, info);
 			}
 

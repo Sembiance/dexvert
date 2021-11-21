@@ -39,8 +39,8 @@ A function that returns an array of arguments to pass to the binary.
 This is executed before running the binary
 All args are relative to the CWD of dexState.input.root
 
->>> runOptions = ({virtualX : true, timeout : xu.MINUTE})
-An object of run options to be passed into runUtil.run. Will override defaults.
+>>> runOptions = ({virtualX : true, timeout : xu.MINUTE})   ||   runOptions = async (runState) => ({...})
+An object (or a function that returns an object) of run options to be passed into runUtil.run. Will override defaults.
 
 >>> outExt = ".svg"   ||   async (runState) => { ... }
 Return the extension files produced by this program should be renamed to
@@ -48,19 +48,24 @@ Return the extension files produced by this program should be renamed to
 >>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
 
+>>> stdoutFilePath = async (runState) => { ... }
+Return a filePath to redirect stdout to.
+
 >>> pre = async (runState) => {}
 This will be executed directly BEFORE the program is run (either in or exec)
 
 >>> post = async (runState) => { ... }
 This will be executed directly AFTER the program has finished running (either bin or exec)
 
->>> renameOut = { ext : ".png", name : true }
-If a single output file is produced, it can be automatically renamed.
-If ext is a string, the single output file will be given that extension
+>>> renameOut = { ext : ".png", name : true, multiple : /^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/ }
+Output files can be automatically renamed.
+If ext is a string, the output file will be given that extension
 default ext is different per family. So image is .png, audio is .wav, etc
 If ext is set to an untruthy value false/null/etc then it won't rename the ext
 If name is set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string.
-If name is set to false, the filename won't be renamed. 
+If name is set to false, the filename won't be renamed.
+If multiple files are possible, then a multiple regex prop can be specified and files will be matched against it.
+You can have a named group for "pre" and "post" and anything in-between those will be assumed to be the filename and will get the name specified in renameOut.name
 
 >>> diskQuota = xu.MB*20
 Some programs are buggy and will consume the entire hard drive. This is a way to limit that.

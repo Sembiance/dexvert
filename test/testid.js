@@ -95,7 +95,7 @@ async function testSample(sampleFilePath)
 	{
 		const id = ids.find(v => v.formatid===previd.formatid);
 		if(!id)
-			return fail(`Previous identification not detected: ${Identification.create(previd).pretty()}`);
+			return fail(`Previous identification not detected: ${xu.inspect(previd).squeeze()}`);
 	}
 
 	return pass(".");

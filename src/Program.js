@@ -38,7 +38,7 @@ export class Program
 			unsafe         : {type : "boolean"},
 			flags          : {type : Object},
 			renameOut      : {type : Object},
-			runOptions     : {type : Object},
+			runOptions     : {types : [Object, "function"]},
 
 			// execution
 			bin       : {type : "string"},
@@ -97,9 +97,9 @@ export class Program
 			if(xu.verbose>=4)
 				r.runOptions.verbose = true;
 			if(this.runOptions)
-				Object.assign(r.runOptions, this.runOptions);
+				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
-			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\` with options ${xu.inspect(r.runOptions).squeeze()}`;
+			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\`${xu.verbose>=4 ? ` with options ${xu.inspect(r.runOptions).squeeze()}` : ""}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
@@ -262,6 +262,8 @@ export class Program
 			await Deno.mkdir(homeDirPath, {recursive : true});
 			await f.add("homeDir", homeDirPath);
 		}
+
+		xu.log5`Program ${progRaw} converted to ${progOptions}`;
 		
 		return program.run(f, progOptions);
 	}

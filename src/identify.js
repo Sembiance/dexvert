@@ -16,8 +16,12 @@ function flexMatch(value, matcher, fullStringMatch)
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "3d", "font", "text", "executable", "rom", "other"];
 
-export async function identify(inputFileRaw)
+export async function identify(inputFileRaw, {quiet, silent}={})
 {
+	const prevVerbose = xu.verbose;
+	if(silent || (quiet && xu.verbose<4))
+		xu.verbose = 0;
+
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f)))).flatMap(o => o.meta.detections);
@@ -273,6 +277,8 @@ export async function identify(inputFileRaw)
 	];
 
 	xu.log5`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
+
+	xu.verbose = prevVerbose;
 
 	return result;
 }

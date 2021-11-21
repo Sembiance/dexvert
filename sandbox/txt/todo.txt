@@ -25,6 +25,8 @@
 
 * Add WavPack support (sox should work) (for sample files: `wget http://www.rarewares.org/wavpack/test_suite.zip`)
 
+* Get the 256C 'fractalImageFormat' files working. Will need to track down a different converter program. There is a photoshop plugin listed on the webpage, could use that with an older photoshop under winxp
+
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 

@@ -10,19 +10,34 @@ rx: 015905
 
 * Fix that problem, then test multiple runnings of testdexvert --format=image/threeDCK and get the dosUtil problem fixed
 
-Some file locking code for xvfb 
-https://stackoverflow.com/questions/30332137/xvfb-run-unreliable-when-multiple-instances-invoked-in-parallel
-
-May just need to do a waitUntil I see the x11 lock file appear before starting the process 
-Should also inspect this file, see what it has in it if there is further verification I can do
-
-Look at more Xvfb options
-https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zOSV2R3sc279085/$file/fotx100_v2r3.pdf
-
-Xvfb :1414 -extension GLX -nolisten tcp -nocursor -ac -xkbdir /usr/share/X11/xkb -screen 0 1920x1080x24
-unix  2      [ ACC ]     STREAM     LISTENING     572903   17323/Xvfb           @/tmp/.X11-unix/X1414
-unix  2      [ ACC ]     STREAM     LISTENING     572904   17323/Xvfb           /tmp/.X11-unix/X1414
-
-
 
 Test the testdexvert with the threeDCK and comment OUT the xu.stdout calls, see if that fixes the missing input
+
+Testing 8 sample files...
+[FAIL] image/threeDCK/test.run No result returned [stderr: dexvert failed with error: Error: DOS no video found in /mnt/ram/tmp/698_0image-threeDCK/dos { status: { success: true, code: 0 }, timedOut: false, stdout: "DOSBox version SVN\nCopyright 2002-2021 DOSBox Team, published under GNU GPL.\n---\nExit to error: Can'...", stderr: "" } DOSBox version SVN
+Copyright 2002-2021 DOSBox Team, published under GNU GPL.
+---
+Exit to error: Can't init SDL Couldn't open X11 display
+ 216
+    at run (file:///mnt/compendium/DevLab/dexvert/src/dosUtil.js:110:10)
+    at async runvga.run (file:///mnt/compendium/DevLab/dexvert/src/Program.js:113:15)
+    at async dexvert (file:///mnt/compendium/DevLab/dexvert/src/dexvert.js:136:16)
+    at async file:///mnt/compendium/DevLab/dexvert/src/app/dexvert.js:49:22] [stdout: No processed result.] but expected { processed: true, files: { "test.png": { size: 3961, ts: 1592315780905, sum: "8361308cb15d1ab765b8562eefc2189759a02e3c" } }, meta: {}, family: "image", format: "threeDCK", converter: "runvga" }
+..
+[FAIL] image/threeDCK/LOST.DAT No result returned [stderr: dexvert failed with error: Error: DOS no video found in /mnt/ram/tmp/5184_0image-threeDCK/dos { status: { success: true, code: 0 }, timedOut: false, stdout: "DOSBox version SVN\nCopyright 2002-2021 DOSBox Team, published under GNU GPL.\n---\nExit to error: Can'...", stderr: "" } DOSBox version SVN
+Copyright 2002-2021 DOSBox Team, published under GNU GPL.
+---
+Exit to error: Can't init SDL Couldn't open X11 display
+ 792
+    at run (file:///mnt/compendium/DevLab/dexvert/src/dosUtil.js:110:10)
+    at async runvga.run (file:///mnt/compendium/DevLab/dexvert/src/Program.js:113:15)
+    at async dexvert (file:///mnt/compendium/DevLab/dexvert/src/dexvert.js:136:16)
+    at async file:///mnt/compendium/DevLab/dexvert/src/app/dexvert.js:49:22] [stdout: No processed result.] but expected { processed: true, files: { "LOST.png": { size: 2289, ts: 1632511509370, sum: "030a16b4804243703130090e2f4989208ed479cb" } }, meta: {}, family: "image", format: "threeDCK", converter: "runvga" }
+....
+
+
+Possibilities:
+See if DOSBOX has an alternative back end vs SDL
+
+
+

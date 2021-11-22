@@ -1,6 +1,35 @@
 /--------------\
 | TOP Priority |
 \--------------/
+>>> DOSBOX SCRIPTING
+* Download latest DOSBox code (click Download Snapshot) from: https://sourceforge.net/p/dosbox/code-0/HEAD/tree/dosbox/trunk/
+* DO NOT apply any of my patches
+* Get it to compile and run
+* Add a SCRIPTGO command that will do a simple SDL_PushEvent to send a single keyboard press: https://wiki.libsdl.org/SDL_PushEvent
+  Example SDL_PushEvent code: https://github.com/MayaPosch/NymphCast/blob/12e62a1c3bde2fe61cf89ea891d612288d603e6f/src/server/NymphCastServer.cpp#L461
+* Now modify SCRIPTGO to start a thread, have that thread sleep for 10 seconds and then send the keyboard press (make sure I handle keydown/keyup ?)
+* Now modify SCRIPTGO to check an DOSBOX_SCRIPT environment variable and parse it and execute it in order
+  Need a way to delay in ms and also key presses (with optional key modifiers). Probably comma delimited list and then some other format
+  Can use numbers from /usr/include/SDL/SDL_keysym.h as a shortcut (probably load all these into dosUtil.js as a SDL_KEYCODES so I can just send the numbers directly) 
+  dosUtil is also what should do the OR'ing needed for modifiers (see in that same SDL_keysym.h the KMOD_LSHIFT keys)
+* Test it manually with runvga and a threeDCK file and actual keys
+* Now test it manually with DISPLAY= SDL_VIDEODRIVER=dummy DOSBOX_SCRIPT="..." dosbox
+* Now make a patch file with my new additions
+* Now add my patch file to my overlay with an updated version of the latest source (remember, need to download that to home and upload to telparia from there)
+* Now get that compiling
+* Test by hand the compiled version to ensure it's still working ok DISPLAY= SDL_VIDEODRIVER=dummy DOSBOX_SCRIPT="..." dosbox
+* Now update dosBoxUtil
+  Delete: runOptions.virtualX 
+     Add: env : {SDL_VIDEODRIVER : "dummy"}
+  Get rid of the entire xdotool and old keys
+  Have it instead translate the 'keys' into the appropriate environment variable and ensure it's set when launching dosbox
+* Now do a 'dextry' on a single threeDCK file to test
+* Now test: ./testdexvert --format=image/threeDCK
+* Now cross your fingers and test multiple testdexvert executions at once
+<<<
+
+* Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
+
 * Add full dexvert support for:
 image/degasHiPI
 image/mur

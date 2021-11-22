@@ -7,6 +7,6 @@ export class mrw extends Format
 	ext           = [".mrw"];
 	magic         = ["Minolta RAW", "Minolta Dimage camera raw", "Minolta Dimage RAW image"];
 	mimeType      = "image/x-minolta-mrw";
-	converters    = ["darktable-cli", "convert", "abydosconvert", "nconvert"]
+	converters    = ["darktable_cli", "convert", "abydosconvert", "nconvert"]
 	metaProviders = ["image", "darkTable"];
 }

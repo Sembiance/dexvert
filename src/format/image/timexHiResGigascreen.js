@@ -7,7 +7,7 @@ export class timexHiResGigascreen extends Format
 	website = "https://zxart.ee/eng/graphics/database/pictureType:timexhrg/sortParameter:date/sortOrder:desc/resultsType:zxitem/";
 	ext = [".hrg"];
 	fileSize = 24578;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "https://zxart.ee/eng/graphics/database/pictureType:timexhrg/sortParameter:date/sortOrder:desc/resultsType:zxitem/",
 	ext                 : [".hrg"],
 	fileSize            : 24578,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

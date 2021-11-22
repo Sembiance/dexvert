@@ -1,5 +1,5 @@
 import {DexFile} from "../../src/DexFile.js";
-import {path, assertStrictEquals, base64Encode} from "std";
+import {path, assert, assertStrictEquals, assertThrowsAsync, base64Encode} from "std";
 import {fileUtil} from "xutil";
 
 Deno.test("create", async () =>
@@ -109,6 +109,31 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.ts, 1_635_685_484_995);
 	assertStrictEquals(a.preExt, ".txt");
 	assertStrictEquals(a.preName, "b");
+
+	// non-existant file
+	await fileUtil.unlink("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir", {recursive : true});
+	a = await DexFile.create({root : "/mnt/compendium/DevLab/dexvert/test/files", rel : "noSuchDir/noSuchFile.txt"});
+	assertStrictEquals(a.rel, "noSuchDir/noSuchFile.txt");
+	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
+	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/noSuchDir/noSuchFile.txt");
+	assertStrictEquals(a.base, "noSuchFile.txt");
+	assertStrictEquals(a.dir, "/mnt/compendium/DevLab/dexvert/test/files/noSuchDir");
+	assertStrictEquals(a.name, "noSuchFile");
+	assertStrictEquals(a.ext, ".txt");
+	assertStrictEquals(Object.hasOwn(a, "isFile"), false);
+	assertStrictEquals(Object.hasOwn(a, "isDirectory"), false);
+	assertStrictEquals(Object.hasOwn(a, "isSymlink"), false);
+	assertStrictEquals(Object.hasOwn(a, "size"), false);
+	assertStrictEquals(Object.hasOwn(a, "ts"), false);
+	
+	await Deno.mkdir("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir");
+	await fileUtil.writeFile("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir/noSuchFile.txt", "some random\ndata");
+	await a.calcStats();
+	assertStrictEquals(a.isFile, true);
+	assertStrictEquals(a.isDirectory, false);
+	assertStrictEquals(a.isSymlink, false);
+	assertStrictEquals(a.size, 16);
+	assert(a.ts>0);
 });
 
 Deno.test("changeRoot", async () =>
@@ -216,10 +241,28 @@ Deno.test("rename", async () =>
 	assertStrictEquals(a.size, 6);
 	assertStrictEquals(a.preExt, ".somethingElse");
 	assertStrictEquals(a.preName, "png");
+	await a.rename(tmpFilename);
 
+	// existing
+	await Deno.copyFile(tmpPath, path.join(tmpDir, "test.png"));
+	assertThrowsAsync(async () => await a.rename("test.png"));
+	await a.rename("test.png", {autoRename : true});
+	assertStrictEquals(a.base, "test_0.png");
+	await a.rename(tmpFilename);
+	await Deno.copyFile(tmpPath, path.join(tmpDir, "test_0.png"));
+	await Deno.copyFile(tmpPath, path.join(tmpDir, "test_1.png"));
+	await Deno.copyFile(tmpPath, path.join(tmpDir, "test_2.png"));
+	await Deno.copyFile(tmpPath, path.join(tmpDir, "test_3.png"));
+	await a.rename("test.png", {autoRename : true});
+	assertStrictEquals(a.base, "test_4.png");
 	await a.rename(tmpFilename);
 
 	await fileUtil.unlink(tmpPath);
+	await fileUtil.unlink(path.join(tmpDir, "test.png"));
+	await fileUtil.unlink(path.join(tmpDir, "test_0.png"));
+	await fileUtil.unlink(path.join(tmpDir, "test_1.png"));
+	await fileUtil.unlink(path.join(tmpDir, "test_2.png"));
+	await fileUtil.unlink(path.join(tmpDir, "test_3.png"));
 });
 
 Deno.test("pretty", async () =>

@@ -10,7 +10,6 @@ export class pcBoard extends Format
 	mimeType = "text/x-pcboard";
 	magic = [{},"ISO-8859 text"];
 	weakMagic = true;
-	unsafe = true;
 	converters = ["ansilove"]
 }
 */
@@ -27,7 +26,6 @@ exports.meta =
 	mimeType       : "text/x-pcboard",
 	magic          : [/^data$/, "ISO-8859 text"],
 	weakMagic      : true,
-	unsafe         : true
 };
 
 // We do NOT use abydos, because it just falls back to ansilove

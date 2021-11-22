@@ -7,7 +7,7 @@ export class samarHiresInterlace extends Format
 	website = "http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace";
 	ext = [".shc"];
 	fileSize = 17920;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/SAMAR_Hires_Interlace",
 	ext                 : [".shc"],
 	fileSize            : 17920,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

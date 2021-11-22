@@ -55,13 +55,13 @@ export class Program
 		});
 
 		if(program.renameOut)
-			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}});
+			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}});
 
 		return program;
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, isChain}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -167,16 +167,29 @@ export class Program
 			try { await this.post(r); }
 			catch(err) { xu.log`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
-		
-		// if we have just a single new output file, we perform some renaming of it
-		if(f.outDir && f.files.new?.length===1)
+
+		// if we have some new files, time to rename them
+		if(f.outDir && f.files.new?.length)
 		{
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
-			const newFilename = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name)) + (ro.ext || f.new.ext);
-			if(newFilename!==f.new.base)
+			const newName = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name));
+			if(ro.regex)
 			{
-				xu.log2`${fg.orange(this.programid)} renaming single output file ${xu.bracket(f.new.pretty())} to ${newFilename}`;
-				await f.new.rename(newFilename);
+				for(const newFile of f.files.new)
+				{
+					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}$<post>`);
+					xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
+					await newFile.rename(replacementName, {replaceExisting : !!isChain});
+				}
+			}
+			else if(f.files.new.length===1)
+			{
+				const newFilename = newName + (ro.ext || f.new.ext);
+				if(newFilename!==f.new.base)
+				{
+					xu.log2`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
+					await f.new.rename(newFilename, {replaceExisting : !!isChain});
+				}
 			}
 		}
 
@@ -209,11 +222,17 @@ export class Program
 
 					xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
 
-					await Program.runProgram(progRaw, chainF);
+					await Program.runProgram(progRaw, chainF, {isChain : true});
 					
 					if(chainF.new)
 					{
 						xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
+
+						// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
+						// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
+						// in the future though we could use this code here to help add collision avoidance
+						//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
+						
 						await f.addAll("new", chainF.files.new);
 						if(!chainF.files.new.some(v => v.absolute===newFile.absolute))
 							await f.remove("new", newFile, {unlink : true});

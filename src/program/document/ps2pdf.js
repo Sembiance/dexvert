@@ -5,6 +5,7 @@ export class ps2pdf extends Program
 {
 	website = "https://ghostscript.com/";
 	gentooPackage = "app-text/ghostscript-gpl";
+	unsafe = true;
 }
 */
 
@@ -17,6 +18,7 @@ exports.meta =
 {
 	website       : "https://ghostscript.com/",
 	gentooPackage : "app-text/ghostscript-gpl"
+	unsafe : true;
 };
 
 exports.bin = () => "ps2pdf";

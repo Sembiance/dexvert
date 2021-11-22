@@ -7,7 +7,7 @@ export class vzi extends Format
 	website = "http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing";
 	ext = [".vzi"];
 	fileSize = 16000;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing",
 	ext                 : [".vzi"],
 	fileSize            : 16000,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

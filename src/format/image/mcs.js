@@ -7,7 +7,7 @@ export class mcs extends Format
 	website = "http://fileformats.archiveteam.org/wiki/MCS";
 	ext = [".mcs"];
 	fileSize = 10185;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/MCS",
 	ext                 : [".mcs"],
 	fileSize            : 10185,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

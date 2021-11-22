@@ -7,7 +7,7 @@ const FTP_BASE_DIR_PATH = "/mnt/ram/dexvert/ftp";
 
 export class ftp extends Server
 {
-	vsftpdProc = null;
+	p = null;
 	baseKeys = Object.keys(this);
 
 	async startVSFTPD()
@@ -18,10 +18,10 @@ export class ftp extends Server
 		this.log`Starting VSFTPD...`;
 
 		const {p} = await runUtil.run("vsftpd", [path.join(xu.dirname(import.meta), "..", "..", "ftp", "amigappc-vsftpd.conf")], {detached : true});
-		this.vsftpdProc = p;
-		this.vsftpdProc.status().then(async () =>
+		this.p = p;
+		this.p.status().then(async () =>
 		{
-			this.vsftpdCP = null;
+			this.p = null;
 
 			if(this.stopping)
 				return;
@@ -41,16 +41,16 @@ export class ftp extends Server
 
 	status()
 	{
-		return this.vsftpdProc!==null;
+		return this.p!==null;
 	}
 
-	stop()
+	async stop()
 	{
 		this.log`Stopping VSFTPD...`;
 		
 		this.stopping = true;
 
-		if(this.vsftpdCP)
-			this.vsftpdCP.kill("SIGTERM");
+		if(this.p)
+			await runUtil.kill(this.p, "SIGTERM");
 	}
 }

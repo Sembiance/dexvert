@@ -8,7 +8,6 @@ export class rtf extends Format
 	ext = [".rtf"];
 	forbidExtMatch = true;
 	magic = ["Rich Text Format"];
-	unsafe = true;
 	converters = ["fileMerlin","soffice"]
 }
 */
@@ -23,7 +22,6 @@ exports.meta =
 	ext            : [".rtf"],
 	forbidExtMatch : true,
 	magic          : ["Rich Text Format"],
-	unsafe         : true
 };
 
 exports.converterPriority = ["fileMerlin", "soffice"];

@@ -77,17 +77,27 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 		dexState.startPhase({format, id, f});
 
 		// rename the primary file to an easy filename that any program can handle: in<ext>
-		const cwdFilename = format.keepFilename ? inputFile.name : "in";
+		if(!format.keepFilename)
+		{
+			const cwdFilename = "in";
 
-		let cwdExt = null;
-		if(format.safeExt)
-			cwdExt = await format.safeExt(dexState);
-		else if(format.ext)
-			cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase()) || format.ext[0];
-		else
-			cwdExt = inputFile.ext;
-		
-		await f.input.rename(cwdFilename + cwdExt);
+			let cwdExt = null;
+			if(format.safeExt)
+				cwdExt = await format.safeExt(dexState);
+			else if(format.ext)
+				cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase()) || format.ext[0];
+			else
+				cwdExt = inputFile.ext;
+			
+			await f.input.rename(cwdFilename + cwdExt);
+
+			// by default we rename the aux files to match, unless keepFilename is set to true
+			if(f.aux)
+			{
+				for(const auxFile of f.files.aux)
+					await auxFile.rename(`${cwdFilename}${auxFile.ext.toLowerCase()}`);
+			}
+		}
 
 		const cleanup = async () =>
 		{
@@ -121,6 +131,8 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 				const progs = converter.split("&").map(v => v.trim());
 				for(const prog of progs)
 				{
+					xu.log4`Running converter ${prog}...`;
+
 					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input});
 					dexState.ran.push(r);
 
@@ -141,7 +153,6 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 						}
 
 						await dexState.f.add("output", newFile);
-
 						
 						// if a produced file is older than 2020, then we assume it's the proper date
 						if((new Date(newFile.ts)).getFullYear()<2020)
@@ -154,6 +165,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 							await Deno.utime(newFile.absolute, Math.floor(inputFile.ts/xu.SECOND), Math.floor(inputFile.ts/xu.SECOND));
 						}
 					}
+
 					dexState.f.removeType("new");
 				}
 
@@ -167,7 +179,7 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 				}
 			}
 
-			// run any post-convergter post format function
+			// run any post-converter post format function
 			if(format.post)
 				await format.post(dexState);
 		}

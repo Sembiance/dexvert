@@ -8,7 +8,6 @@ export class cmx extends Format
 	ext = [".cmx"];
 	forbidExtMatch = true;
 	magic = ["Corel Metafile Exchange Image","Corel Presentation Exchange File"];
-	unsafe = true;
 	converters = [{"program":"soffice","flags":{"sofficeType":"svg"}},"deark"]
 }
 */
@@ -23,7 +22,6 @@ exports.meta =
 	ext            : [".cmx"],
 	forbidExtMatch : true,
 	magic          : ["Corel Metafile Exchange Image", "Corel Presentation Exchange File"],
-	unsafe         : true
 };
 
 exports.converterPriority = [{program : "soffice", flags : {sofficeType : "svg"}}, "deark"];

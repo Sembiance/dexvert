@@ -9,7 +9,6 @@ export class ps extends Format
 	mimeType = "application/postscript";
 	magic = [{},{}];
 	forbiddenExt = [".eps"];
-	unsafe = true;
 	converters = ["ps2pdf"]
 }
 */
@@ -25,7 +24,6 @@ exports.meta =
 	mimeType     : "application/postscript",
 	magic        : [/^PostScript$/, /^PostScript document/],
 	forbiddenExt : [".eps"],
-	unsafe       : true
 };
 
 exports.converterPriority = ["ps2pdf"];	//, "inkscape", "uniconvertor", "abydosconvert", "nconvert"];

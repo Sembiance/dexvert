@@ -5,9 +5,8 @@ export class news extends Format
 {
 	name = "Newsgroup Content";
 	magic = ["saved news"];
-	unsafe = true;
 
-steps = [null];
+steps = [null];	// ROB DENO: Move steps to a program with exec, make sure to mark that program as unsafe
 }
 */
 /*
@@ -22,7 +21,6 @@ exports.meta =
 {
 	name   : "Newsgroup Content",
 	magic  : ["saved news"],
-	unsafe : true
 };
 
 const SEP_REGS =

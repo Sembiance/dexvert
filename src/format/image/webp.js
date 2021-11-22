@@ -1,31 +1,17 @@
-/*
 import {Format} from "../../Format.js";
 
 export class webp extends Format
 {
-	name = "WebP Image";
-	website = "http://fileformats.archiveteam.org/wiki/Webp";
-	ext = [".webp"];
-	mimeType = "image/webp";
-	magic = ["WebP bitmap",{},{}];
-	untouched = true;
-
-inputMeta = undefined;
+	name          = "WebP Image";
+	website       = "http://fileformats.archiveteam.org/wiki/Webp";
+	ext           = [".webp"];
+	mimeType      = "image/webp";
+	magic         = ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image$/];
+	untouched     = true;
+	metaProviders = ["image", "webpinfo"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
 
-exports.meta =
-{
-	name      : "WebP Image",
-	website   : "http://fileformats.archiveteam.org/wiki/Webp",
-	ext       : [".webp"],
-	mimeType  : "image/webp",
-	magic     : ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image$/],
-	untouched : true
-};
+/*
 
 exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
 	(state, p) => p.family.supportedInputMeta,

@@ -13,7 +13,7 @@ export class convert extends Program
 	};
 
 	bin  = "convert";
-	args = r =>
+	args = async r =>
 	{
 		const a = [r.inFile(), "-strip"];
 		const outType = (r.flags.outType || "png");
@@ -23,7 +23,7 @@ export class convert extends Program
 			a.push("-flip");
 		if(r.flags.removeAlpha)
 			a.push("-alpha", "off");
-		a.push(r.outFile(`out.${outType}`));
+		a.push(await r.outFile(`out.${outType}`));
 		return a;
 	}
 

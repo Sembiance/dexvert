@@ -4,6 +4,7 @@ import {Program} from "../../Program.js";
 export class fileMerlin extends Program
 {
 	website = "http://www.file-convert.com/flmn.htm";
+	unsafe = true;
 	flags = {"fileMerlinSrcFormat":"Which format to specify for the input format. Default: AUTO (let FileMerlin decide)","fileMerlinDestFormat":"Which format to specify for the output. Default: PDF","fileMerlinExt":"Which extension to use for the output file. Default: .pdf"};
 }
 */
@@ -17,6 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website : "http://www.file-convert.com/flmn.htm",
+	unsafe : true,
 	flags          :
 	{
 		// For a list of valid SRC and DEST format names, see programs_formats.txt

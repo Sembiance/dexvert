@@ -7,7 +7,7 @@ export class zxBorderScreen extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Border_Screen";
 	ext = [".bmc4",".bsc"];
 	fileSize = {".bsc":11136,".bmc4":11904};
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Border_Screen",
 	ext                 : [".bmc4", ".bsc"],
 	fileSize            : {".bsc" : 11136, ".bmc4" : 11904},
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

@@ -8,7 +8,7 @@ export class zx3 extends Format
 	ext = [".3"];
 	mimeType = "image/x-tricolor-rgb";
 	fileSize = 18432;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","abydosconvert"]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".3"],
 	mimeType            : "image/x-tricolor-rgb",
 	fileSize            : 18432,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "abydosconvert"];

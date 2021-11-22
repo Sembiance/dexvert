@@ -8,7 +8,7 @@ export class magicPainter extends Format
 	ext = [".mgp"];
 	magic = ["Magic Painter bitmap"];
 	fileSize = 3845;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".mgp"],
 	magic               : ["Magic Painter bitmap"],
 	fileSize            : 3845,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

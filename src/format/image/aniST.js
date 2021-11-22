@@ -8,5 +8,7 @@ export class aniST extends Format
 	ext            = [".scr", ".str"];
 	mimeType       = "image/x-ani-st";
 	converters     = [`abydosconvert[format:${this.mimeType}]`];
+	
+	// Make sure not to attempt to convert windows SCR files
 	forbiddenMagic = (new windowsSCR()).magic;
 }

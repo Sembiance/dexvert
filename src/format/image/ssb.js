@@ -7,7 +7,7 @@ export class ssb extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow";
 	ext = [".ssb"];
 	fileSize = 32768;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Sinbad_Slideshow",
 	ext                 : [".ssb"],
 	fileSize            : 32768,
-	forbidFileSizeMatch : true
+
 
 };
 

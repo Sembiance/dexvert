@@ -1,6 +1,7 @@
 import {xu, fg} from "xu";
 import {validateClass} from "./validate.js";
 import {FileSet} from "./FileSet.js";
+import {fileUtil} from "xutil";
 import {path} from "std";
 
 export class RunState
@@ -30,10 +31,22 @@ export class RunState
 		return backslash ? result.replaceAll("/", "\\") : result;
 	}
 
-	// will return f.outFile.rel if set, otherwise will return <f.outDir.rel>/<filename>
-	outFile(filename="outfile", {backslash, absolute}={})
+	// will return f.outFile if set, otherwise will return <f.outDir>/<filename> if it doesn't exist, otherwise it will return a non-existing filename in <f.outDir>/<random><filename>
+	async outFile(filename="outfile", {backslash, absolute}={})
 	{
-		const result = this.f.outFile ? this.f.outFile[absolute ? "absolute" : "rel"] : path.join(this.f.outDir[absolute ? "absolute" : "rel"], filename);
+		let result = null;
+		if(this.f.outFile)
+		{
+			result = this.f.outFile[absolute ? "absolute" : "rel"];
+		}
+		else
+		{
+			const newFilePath = path.join(this.f.outDir.absolute, filename);
+			result = (await fileUtil.exists(newFilePath) ? await fileUtil.genTempPath(this.f.outDir.absolute, filename) : newFilePath);
+			if(!absolute)
+				result = path.relative(this.f.root, result);
+		}
+
 		return backslash ? result.replaceAll("/", "\\") : result;
 	}
 
@@ -78,7 +91,7 @@ export class RunState
 		}
 		else if(this.dosData)
 		{
-			r.push(` DOS ${fg.peach(this.qemuData.cmd)} ${(this.qemuData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
+			r.push(` DOS ${fg.peach(this.dosData.cmd)} ${(this.dosData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
 		}

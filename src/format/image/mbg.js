@@ -7,7 +7,7 @@ export class mbg extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Mad_Designer";
 	ext = [".mbg"];
 	fileSize = 16384;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Mad_Designer",
 	ext                 : [".mbg"],
 	fileSize            : 16384,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

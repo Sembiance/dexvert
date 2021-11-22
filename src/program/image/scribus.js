@@ -40,7 +40,7 @@ import scribus
 scribus.newDocument((50000, 50000), (0, 0, 0, 0), scribus.PORTRAIT, 1, scribus.UNIT_POINTS, scribus.PAGE_1, 0, 1)
 scribus.setUnit(scribus.UNIT_POINTS)
 scribus.placeVectorFile("${r.inFile()}", 0, 0)
-scribus.savePageAsEPS("${r.outFile("out.eps")}")
+scribus.savePageAsEPS("${await r.outFile("out.eps")}")
 scribus.closeDoc()
 scribus.fileQuit()`);
 	}

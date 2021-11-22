@@ -5,6 +5,7 @@ export class antiword extends Program
 {
 	website = "http://www.winfield.demon.nl";
 	gentooPackage = "app-text/antiword";
+	unsafe = true;
 }
 */
 
@@ -19,6 +20,7 @@ exports.meta =
 {
 	website       : "http://www.winfield.demon.nl",
 	gentooPackage : "app-text/antiword"
+	unsafe : true;
 };
 
 exports.bin = () => "antiword";

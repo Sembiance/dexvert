@@ -6,7 +6,6 @@ export class sif extends Format
 	name = "Super-IRG";
 	ext = [".sif"];
 	fileSize = 2048;
-	forbidFileSizeMatch = true;
 
 steps = [null];
 }
@@ -20,7 +19,6 @@ exports.meta =
 	name                : "Super-IRG",
 	ext                 : [".sif"],
 	fileSize            : 2048,
-	forbidFileSizeMatch : true
 };
 
 exports.steps = [() => ({program : "recoil2png"})];

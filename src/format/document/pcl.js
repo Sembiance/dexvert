@@ -10,7 +10,6 @@ exports.meta =
 	forbiddenMagic : psMeta.magic, // Often Postscript files are mis-identified as PCL files. If it ends in .ps just never allow a match
 	mimeType       : "application/vnd.hp-PCL",
 	magic          : ["HP Printer Command Language", "HP PCL printer data"],
-	unsafe         : true
 };
 
 exports.converterPriority = ["gpcl6"];

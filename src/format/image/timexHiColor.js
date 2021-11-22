@@ -7,7 +7,7 @@ export class timexHiColor extends Format
 	website = "https://zxart.ee/eng/graphics/database/pictureType:timex81/sortParameter:date/sortOrder:desc/resultsType:zxitem/";
 	ext = [".scr"];
 	fileSize = 12288;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "https://zxart.ee/eng/graphics/database/pictureType:timex81/sortParameter:date/sortOrder:desc/resultsType:zxitem/",
 	ext                 : [".scr"],
 	fileSize            : 12288,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

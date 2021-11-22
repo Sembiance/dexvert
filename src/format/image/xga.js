@@ -8,7 +8,7 @@ export class xga extends Format
 	ext = [".xga"];
 	mimeType = "image/x-xga";
 	fileSize = [153600,368640];
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","abydosconvert"]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".xga"],
 	mimeType            : "image/x-xga",
 	fileSize            : [153600, 368640],
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "abydosconvert"];

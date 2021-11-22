@@ -7,7 +7,6 @@ export class amigaBASIC extends Format
 	ext = [".bas"];
 	forbidExtMatch = true;
 	magic = [{}];
-	unsafe = true;
 	converters = ["ab2ascii"]
 }
 */
@@ -21,7 +20,6 @@ exports.meta =
 	ext            : [".bas"],
 	forbidExtMatch : true,
 	magic          : [/^AmigaBASIC source$/],
-	unsafe         : true
 };
 
 exports.converterPriority = ["ab2ascii"];

@@ -8,7 +8,7 @@ export class blazingPaddles extends Format
 	ext = [".pi"];
 	mimeType = "image/x-blazing-paddles";
 	fileSize = [10240,10242];
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","nconvert","abydosconvert","view64"]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".pi"],
 	mimeType            : "image/x-blazing-paddles",
 	fileSize            : [10240, 10242],
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "nconvert", "abydosconvert", "view64"];

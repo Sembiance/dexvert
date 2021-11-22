@@ -67,20 +67,20 @@ export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, scre
 
 	xu.log3`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
 
-	const {p, xvfbPort} = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
-	let status = null;
-	p.status().then(v => { status = v; });
+	const {p, cb, xvfbPort} = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
+	const r = {};
+	cb().then(o => Object.assign(r, o));
 
 	if(keys)
 	{
 		await xu.waitUntil(async () => !!(await fileUtil.exists(path.join(dosDirPath, "STARTED.UP"))), {timeout});
 		const initialDelay = (keyOpts.delay || xu.SECOND*5);
 		xu.log3`DOS ${fg.orange(cmd)} waiting ${(initialDelay/xu.SECOND)} seconds before sending keys...`;
-		await xu.waitUntil(() => !!status, {timeout : initialDelay});
+		await xu.waitUntil(() => Object.keys(r).length>0, {timeout : initialDelay});
 
 		for(const key of Array.force(keys))
 		{
-			if(status)
+			if(Object.keys(r).length>0)
 				break;
 			
 			if(Object.isObject(key) && key.delay)
@@ -99,11 +99,15 @@ export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, scre
 		}
 	}
 
-	await xu.waitUntil(() => !!status, {timeout});
+	await xu.waitUntil(() => Object.keys(r).length>0, {timeout});
+	if(Object.keys(r).length===0)
+		await runUtil.kill(p, "SIGTERM");
 
 	if(video || screenshot)
 	{
 		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti([v => v]).at(-1);
+		if(!videoFilePath)
+			throw new Error(`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()} ${r.stdout} ${xvfbPort}`);
 		if(screenshot)
 		{
 			const {stdout : frameCountRaw} = await runUtil.run("ffprobe", ["-v", "0", "-select_streams", "v:0", "-count_frames", "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", videoFilePath]);
@@ -115,5 +119,5 @@ export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, scre
 		}
 	}
 		
-	return status;
+	return r;
 }

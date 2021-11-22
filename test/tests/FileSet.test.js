@@ -7,7 +7,7 @@ const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files"
 
 Deno.test("addFile", async () =>
 {
-	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+	let a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
 	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile");
@@ -35,6 +35,20 @@ Deno.test("addFile", async () =>
 
 	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
 	assertStrictEquals(a.files.input.length, 5);
+
+	// test modifying a file and adding it back
+	const tmpFilePath = await fileUtil.genTempPath();
+	await fileUtil.writeFile(tmpFilePath, "abc\n123");
+	a = await FileSet.create(path.dirname(tmpFilePath), "test", tmpFilePath);
+	assertStrictEquals(a.test.base, path.basename(tmpFilePath));
+	assertStrictEquals(a.test.size, 7);
+	await fileUtil.writeFile(tmpFilePath, "Hello, World!");
+	assertStrictEquals(a.test.base, path.basename(tmpFilePath));
+	assertStrictEquals(a.test.size, 7);
+	await a.add("test", tmpFilePath);
+	assertStrictEquals(a.test.base, path.basename(tmpFilePath));
+	assertStrictEquals(a.test.size, 13);
+	await fileUtil.unlink(tmpFilePath);
 });
 
 Deno.test("changeRoot", async () =>

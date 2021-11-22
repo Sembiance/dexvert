@@ -9,7 +9,6 @@ export class xb extends Format
 	forbidExtMatch = true;
 	mimeType = "image/x-xbin";
 	magic = ["XBIN image"];
-	unsafe = true;
 	converters = [{"program":"ansilove","flags":{"ansiloveType":"xb"}},"deark","abydosconvert"]
 
 inputMeta = undefined;
@@ -27,7 +26,6 @@ exports.meta =
 	forbidExtMatch : true,
 	mimeType       : "image/x-xbin",
 	magic          : ["XBIN image"],
-	unsafe    : true
 };
 
 exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "xb"}}, "deark", "abydosconvert"];

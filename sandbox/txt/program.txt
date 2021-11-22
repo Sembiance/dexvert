@@ -38,6 +38,7 @@ If you have 'bin' you can't have 'exec'
 A function that returns an array of arguments to pass to the binary.
 This is executed before running the binary
 All args are relative to the CWD of dexState.input.root
+Can run r.inFile() to get the input file or r.outFile("out.png") to get the outfile (or generate one called out.png) or r.outDir() for the output dir
 
 >>> runOptions = ({virtualX : true, timeout : xu.MINUTE})   ||   runOptions = async (runState) => ({...})
 An object (or a function that returns an object) of run options to be passed into runUtil.run. Will override defaults.
@@ -105,11 +106,6 @@ An array of binaries that this utilizes. Only set this if gentooPackages is an a
 
 >>> slow : true
 If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)
-
->>> symlinkUnsafe : true
-If the converter program doesn't handle symlinks, can set this to true.
-Normally we symlink to the file to be processed within a temporary CWD. If this is set to true, the file will be copied over instead.
-
 
 
 /-----------------\

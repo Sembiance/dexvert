@@ -13,5 +13,5 @@ export class nconvert extends Program
 
 	bin    = "nconvert";
 	outExt = ".png";
-	args   = r => [...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", r.outFile("out.png"), r.inFile()]
+	args   = async r => [...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", await r.outFile("out.png"), r.inFile()]
 }

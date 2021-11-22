@@ -8,7 +8,6 @@ export class binaryText extends Format
 	ext = [".bin"];
 	mimeType = "text/x-binary";
 	forbiddenMagic = ["ASCII text","ISO-8859 text","UTF-8 Unicode text","Non-ISO extended-ASCII text","ReStructuredText file","International EBCDIC text","UTF-8 Unicode text","Printable ASCII","Unicode text, UTF-8 text","Algol 68 source, ISO-8859 text"];
-	unsafe = true;
 	notes = "It's crazy hard to identify this file, and we err on the side of caution. So we only convert files that have meta data set in them.";
 	converters = undefined
 
@@ -28,7 +27,6 @@ exports.meta =
 	ext            : [".bin"],
 	mimeType       : "text/x-binary",
 	forbiddenMagic : C.TEXT_MAGIC,
-	unsafe         : true,
 	notes          : "It's crazy hard to identify this file, and we err on the side of caution. So we only convert files that have meta data set in them."
 };
 

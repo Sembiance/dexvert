@@ -8,7 +8,6 @@ export class wp extends Format
 	ext = [".wp",".wpd",".wp4",".wp5",".wp6",".wp7",".doc"];
 	forbidExtMatch = true;
 	magic = [{}];
-	unsafe = true;
 	converters = ["soffice","fileMerlin"]
 }
 */
@@ -23,7 +22,6 @@ exports.meta =
 	ext            : [".wp", ".wpd", ".wp4", ".wp5", ".wp6", ".wp7", ".doc"],
 	forbidExtMatch : true,
 	magic          : [/^WordPerfect.* [Dd]ocument/],
-	unsafe         : true
 };
 
 exports.converterPriority = ["soffice", "fileMerlin"];

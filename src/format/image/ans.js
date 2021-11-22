@@ -1,3 +1,4 @@
+/*
 import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
 
@@ -15,3 +16,4 @@ export class ans extends Format
 	converters     = ["ansilove[format:ans]", "deark", "ffmpeg[format:tty][codec:ansi][outType:gif]"];
 	//converters     = [{program : "ansilove", flags : {ansiloveType : "ans"}}, "deark", {program : "ffmpeg", flags : {ffmpegFormat : "tty", ffmpegCodec : "ansi", ffmpegExt : ".gif"}}];
 }
+*/

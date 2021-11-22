@@ -7,7 +7,7 @@ export class championsInterlace extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Champions%27_Interlace";
 	ext = [".cci",".cin"];
 	fileSize = {".cin":[15360,16004,16384]};
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Champions%27_Interlace",
 	ext                 : [".cci", ".cin"],
 	fileSize            : {".cin" : [15360, 16004, 16384]},
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

@@ -11,5 +11,5 @@ export class autoCropImage extends Program
 	};
 
 	bin  = "convert";
-	args = r => [r.inFile(), "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", r.outFile("out.png")]
+	args = async r => [r.inFile(), "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", await r.outFile("out.png")]
 }

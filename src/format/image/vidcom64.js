@@ -10,7 +10,7 @@ export class vidcom64 extends Format
 	magic = ["Drazpaint (C64) bitmap"];
 	weakMagic = true;
 	fileSize = 10050;
-	forbidFileSizeMatch = true;
+
 	converters = ["nconvert","recoil2png","abydosconvert","view64"]
 }
 */
@@ -27,7 +27,7 @@ exports.meta =
 	magic               : ["Drazpaint (C64) bitmap"], // Shares same magic identifier as Drazpaint
 	weakMagic           : true,
 	fileSize            : 10050,
-	forbidFileSizeMatch : true
+
 };
 
 // nconvert produces clearer output compared to recoil2png

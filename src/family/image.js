@@ -27,7 +27,7 @@ const GARBAGE_DETECTED_DIR_PATH = "/mnt/dexvert/garbageDetected";
 
 export class image extends Family
 {
-	metaids = ["image", "darkTable", "ansiArt"];
+	metaids = ["image", "darkTable", "ansiArt", ...Object.keys(programs)];
 
 	async verify(dexState, dexFile, identifications)
 	{
@@ -148,8 +148,7 @@ export class image extends Family
 				delete info.size;
 				Object.assign(meta, info);
 			}
-
-			if(metaProvider==="ansiArt")
+			else if(metaProvider==="ansiArt")
 			{
 				// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
 				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
@@ -169,12 +168,25 @@ export class image extends Family
 				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
 				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
 			}
-
-			if(metaProvider==="darkTable")
+			else if(metaProvider==="darkTable")
 			{
+				// camera images that darktable can identify
 				const r = await Program.runProgram("darktable_rs_identify", inputFile);
 				if(r.meta?.dimUncropped && r.meta.dimUncropped.split("x").length===2)
-					meta.image = { width : +r.meta.dimUncropped.split("x")[0], height : +r.meta.dimUncropped.split("x")[1] };
+					Object.assign(meta, { width : +r.meta.dimUncropped.split("x")[0], height : +r.meta.dimUncropped.split("x")[1] });
+
+				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
+				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+			}
+			else
+			{
+				// if none of the above, we assume it's a program
+				const r = await Program.runProgram(metaProvider, inputFile);
+				if(r.meta)
+					Object.assign(meta, r.meta);
+
+				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
+				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
 			}
 		}
 

@@ -6,7 +6,7 @@ export class pet extends Format
 	name = "PETSCII Editor";
 	ext = [".pet"];
 	fileSize = 2026;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -19,7 +19,7 @@ exports.meta =
 	name                : "PETSCII Editor",
 	ext                 : [".pet"],
 	fileSize            : 2026,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

@@ -8,7 +8,7 @@ export class facePainter extends Format
 	ext = [".fcp",".fpt"];
 	mimeType = "image/x-face-painter";
 	fileSize = 10004;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","abydosconvert","view64"]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".fcp", ".fpt"],
 	mimeType            : "image/x-face-painter",
 	fileSize            : 10004,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "abydosconvert", "view64"];

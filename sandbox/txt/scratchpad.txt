@@ -4,4 +4,25 @@ group: 14149708
 rx: 015905
 
 
-ppm/pgm
+* See if I can get xeyes working with a virtualX display
+
+* See if I can reproduce the problem with multiple running at once in runUtil
+
+* Fix that problem, then test multiple runnings of testdexvert --format=image/threeDCK and get the dosUtil problem fixed
+
+Some file locking code for xvfb 
+https://stackoverflow.com/questions/30332137/xvfb-run-unreliable-when-multiple-instances-invoked-in-parallel
+
+May just need to do a waitUntil I see the x11 lock file appear before starting the process 
+Should also inspect this file, see what it has in it if there is further verification I can do
+
+Look at more Xvfb options
+https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zOSV2R3sc279085/$file/fotx100_v2r3.pdf
+
+Xvfb :1414 -extension GLX -nolisten tcp -nocursor -ac -xkbdir /usr/share/X11/xkb -screen 0 1920x1080x24
+unix  2      [ ACC ]     STREAM     LISTENING     572903   17323/Xvfb           @/tmp/.X11-unix/X1414
+unix  2      [ ACC ]     STREAM     LISTENING     572904   17323/Xvfb           /tmp/.X11-unix/X1414
+
+
+
+Test the testdexvert with the threeDCK and comment OUT the xu.stdout calls, see if that fixes the missing input

@@ -7,7 +7,7 @@ export class dlm extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Dir_Logo_Maker";
 	ext = [".dlm"];
 	fileSize = 256;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 
 idCheck = undefined;
@@ -24,7 +24,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Dir_Logo_Maker",
 	ext                 : [".dlm"],
 	fileSize            : 256,
-	forbidFileSizeMatch : true
+
 };
 
 exports.idCheck = state => (fs.readFileSync(state.input.absolute)[0]==="B".charCodeAt(0));

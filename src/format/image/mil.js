@@ -7,7 +7,7 @@ export class mil extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Micro_Illustrator";
 	ext = [".mil"];
 	fileSize = 10022;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","nconvert"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Micro_Illustrator",
 	ext                 : [".mil"],
 	fileSize            : 10022,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "nconvert"];

@@ -22,8 +22,6 @@ export class advancedArtStudio extends Format
 		return otherFiles.filter(otherFile => [".scr", ".win"].map(ext => input.name.toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
 	};
 
-	converters    = ["recoil2png"]
-
-	// TODO need to figure out. maybe untouched?
-	//preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".pal"; }];
+	untouched  = ({f}) => f.input.ext.toLowerCase()=== ".pal";
+	converters = ["recoil2png"];
 }

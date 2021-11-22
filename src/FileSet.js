@@ -45,8 +45,11 @@ export class FileSet
 		if(dexFile.root!==this.root)
 			throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
 
-		if(!this.files[type].some(file => file.absolute===dexFile.absolute))
+		const existingDexFile = this.files[type].find(file => file.absolute===dexFile.absolute);
+		if(!existingDexFile)
 			this.files[type].push(dexFile);
+		else
+			await existingDexFile.calcStats();	// if we try to add an existing file, it's possible the file has changed on disk, so let's re-calc it's stats
 	}
 
 	// removes the given file from this FileSet. If unlink is set to true, also deletes it from the disk

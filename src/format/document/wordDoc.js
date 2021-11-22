@@ -8,7 +8,6 @@ export class wordDoc extends Format
 	ext = [".doc"];
 	forbidExtMatch = true;
 	magic = ["Microsoft Word document","Microsoft Word for Windows"];
-	unsafe = true;
 	converters = ["fileMerlin","antiword","soffice"]
 
 post = undefined;
@@ -25,7 +24,6 @@ exports.meta =
 	ext            : [".doc"],
 	forbidExtMatch : true,
 	magic          : ["Microsoft Word document", "Microsoft Word for Windows"],
-	unsafe         : true
 };
 
 exports.converterPriority = ["fileMerlin", "antiword", "soffice"];

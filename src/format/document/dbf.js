@@ -8,7 +8,6 @@ export class dbf extends Format
 	ext = [".dbf",".frx"];
 	forbidExtMatch = true;
 	magic = [{},"dBASE Database",{},"Table MS Visual FoxPro","FoxPro with memo DBF"];
-	unsafe = true;
 	converters = [{"program":"soffice","flags":{"sofficeType":"csv"}},"strings"]
 }
 */
@@ -23,7 +22,6 @@ exports.meta =
 	ext            : [".dbf", ".frx"],
 	forbidExtMatch : true,
 	magic          : [/^(?:FoxBase\+?\/?)?dBase .*DBF/, "dBASE Database", /^xBase .*DBF/, "Table MS Visual FoxPro", "FoxPro with memo DBF"],
-	unsafe         : true
 };
 
 exports.converterPriority = [{program : "soffice", flags : {sofficeType : "csv"}}, "strings"];

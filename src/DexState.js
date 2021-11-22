@@ -4,6 +4,7 @@ import {validateClass, validateObject} from "./validate.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Format} from "./Format.js";
+import {Family} from "./Family.js";
 import {Identification} from "./Identification.js";
 
 export class DexPhase
@@ -17,11 +18,13 @@ export class DexPhase
 	{
 		const dexPhase = new this();
 		Object.assign(dexPhase, o);
+		dexPhase.family = dexPhase.format.family;
 
 		validateClass(dexPhase, {
 			// required
 			f      : {type : FileSet, required : true},
 			format : {type : Format, required : true},
+			family : {type : Family, required : true},
 			id     : {type : Identification, required : true}
 		});
 		
@@ -31,7 +34,7 @@ export class DexPhase
 	serialize()
 	{
 		const o = {};
-		for(const key of ["f", "format", "id"])
+		for(const key of ["f", "format", "family", "id"])
 			o[key] = this[key].serialize();
 		o.meta = xu.parseJSON(JSON.stringify(this.meta));
 		o.ran = this.ran.map(v => v.serialize());

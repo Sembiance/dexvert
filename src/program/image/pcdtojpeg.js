@@ -6,5 +6,5 @@ export class pcdtojpeg extends Program
 	gentooPackage = "media-gfx/pcdtojpeg";
 	gentooOverlay = "dexvert";
 	bin           = "pcdtojpeg"
-	args          = r => ["-q", "100", r.inFile(), r.outFile("out.jpg")]
+	args          = async r => ["-q", "100", r.inFile(), await r.outFile("out.jpg")]
 }

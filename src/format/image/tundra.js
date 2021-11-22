@@ -9,7 +9,6 @@ export class tundra extends Format
 	forbidExtMatch = true;
 	mimeType = "text/x-tundra";
 	magic = ["TUNDRA text-mode graphics"];
-	unsafe = true;
 	converters = [{"program":"ansilove","flags":{"ansiloveType":"tnd"}},"abydosconvert"]
 }
 */
@@ -25,7 +24,6 @@ exports.meta =
 	forbidExtMatch : true,
 	mimeType       : "text/x-tundra",
 	magic          : ["TUNDRA text-mode graphics"],
-	unsafe    : true
 };
 
 exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "tnd"}}, "abydosconvert"];

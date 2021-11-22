@@ -9,5 +9,5 @@ export class draw256 extends Format
 	mimeType    = "image/x-draw256-vga";
 	unsupported = true;
 	notes       = "Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage";
-	converters = ["abydosconvert", "draw256"];
+	converters = [`abydosconvert[format:${this.mimeType}]`, "draw256"];
 }

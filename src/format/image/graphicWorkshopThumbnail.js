@@ -8,7 +8,7 @@ export class graphicWorkshopThumbnail extends Format
 	ext = [".thn"];
 	magic = ["Graphics Workshop for Windows Thumbnail"];
 	fileSize = 9480;
-	forbidFileSizeMatch = true;
+
 	converters = [{"program":"deark","flags":{"dearkModule":"gws_thn"}}]
 }
 */
@@ -23,7 +23,7 @@ exports.meta =
 	ext                 : [".thn"],
 	magic               : ["Graphics Workshop for Windows Thumbnail"],
 	fileSize            : 9480,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = [{ program : "deark", flags : {dearkModule : "gws_thn"} }];

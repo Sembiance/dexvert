@@ -7,6 +7,6 @@ export class draw256 extends Program
 	loc     = "dos";
 	bin     = "DRAW256/DRAW256.EXE";
 	args    = r => [`..\\..\\${r.inFile({backslash : true})}`]
-	dosData = r => ({runIn : "prog", keys : ["s", `..\\..\\${r.outFile("F.PCX", {backslash : true})}`, ["Return"], ["Escape"], "y"]});
+	dosData = async r => ({runIn : "prog", keys : ["s", `..\\..\\${await r.outFile("F.PCX", {backslash : true})}`, ["Return"], ["Escape"], "y"]});
 	chain   = "dexvert[asFormat:image/pcx]";
 }

@@ -1,5 +1,6 @@
 import {xu, fg} from "xu";
 import {path} from "std";
+import {fileUtil} from "xutil";
 
 export class DexFile
 {
@@ -13,12 +14,18 @@ export class DexFile
 		dexFile.transformed = Object.isObject(o) && o.transformed;
 
 		dexFile.calcProps();
-
-		const fileInfo = await Deno.lstat(dexFile.absolute);
-		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { dexFile[n] = fileInfo[n]; });
-		dexFile.ts = fileInfo.mtime.getTime();
+		
+		if(await fileUtil.exists(dexFile.absolute))
+			await dexFile.calcStats();
 
 		return dexFile;
+	}
+
+	async calcStats()
+	{
+		const fileInfo = await Deno.lstat(this.absolute);
+		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { this[n] = fileInfo[n]; });
+		this.ts = fileInfo.mtime.getTime();
 	}
 
 	calcProps()
@@ -45,9 +52,23 @@ export class DexFile
 	}
 
 	// renames this file to the newFilename
-	async rename(newFilename)
+	async rename(newFilename, {autoRename, replaceExisting}={})
 	{
-		const newAbsolute = path.join(this.dir, newFilename);
+		if(newFilename===this.base)
+			return;
+
+		let newAbsolute = path.join(this.dir, newFilename);
+		if(!replaceExisting && await fileUtil.exists(newAbsolute))
+		{
+			if(!autoRename)
+				throw new Error(`Dexfile.rename asked to rename ${this.absolute} to ${newAbsolute} but that already exists and autoRename wasn't set`);
+			
+			let i=0;
+			do
+				newAbsolute = path.join(this.dir, `${path.basename(newFilename, path.extname(newFilename))}_${i++}${path.extname(newFilename)}`);
+			while(await fileUtil.exists(newAbsolute));
+		}
+
 		await Deno.rename(this.absolute, newAbsolute);
 		this.absolute = newAbsolute;
 		this.rel = this.rel.includes("/") ? path.join(path.dirname(this.rel), newFilename) : newFilename;

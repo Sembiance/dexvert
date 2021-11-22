@@ -7,9 +7,8 @@ export class mbox extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Mbox";
 	ext = [".mbox"];
 	magic = ["Standard Unix Mailbox"];
-	unsafe = true;
 
-steps = [null];
+steps = [null];	// ROB DENO: Move steps to a program with exec, make sure to mark that program as unsafe
 }
 */
 /*
@@ -26,7 +25,6 @@ exports.meta =
 	website : "http://fileformats.archiveteam.org/wiki/Mbox",
 	ext     : [".mbox"],
 	magic   : ["Standard Unix Mailbox"],
-	unsafe  : true
 };
 
 const SEP_REGS =
@@ -34,6 +32,7 @@ const SEP_REGS =
 	/^From (?<sender>.+) (?<timestamp>(?<dayOfWeek>Sun|Mon|Tue|Wed|Thu|Fri|Sat) (?<month>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (?<day>[\d ]\d) (?<hour>[\d ]\d):(?<minute>[\d ]\d):(?<second>[\d ]\d) (?<year>\d{4}))$/,
 	/^From (?<sender>[^ ]+) (?<timestamp>.+)$/
 ];
+
 
 exports.steps =
 [

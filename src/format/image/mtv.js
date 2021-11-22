@@ -9,7 +9,6 @@ export class mtv extends Format
 	mimeType = "image/x-mtv";
 	magic = ["zlib compressed data"];
 	weakMagic = true;
-	untrustworthy = true;
 	converters = ["convert","nconvert","abydosconvert"]
 
 inputMeta = undefined;
@@ -27,7 +26,6 @@ exports.meta =
 	mimeType      : "image/x-mtv",
 	magic         : ["zlib compressed data"],
 	weakMagic     : true,
-	untrustworthy : true
 };
 
 exports.converterPriority = ["convert", "nconvert", "abydosconvert"];

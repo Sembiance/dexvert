@@ -9,7 +9,6 @@ export class iCEDraw extends Format
 	mimeType = "image/x-icedraw";
 	magic = ["iCEDraw graphic"];
 	forbiddenMagic = ["ASCII text","ISO-8859 text","UTF-8 Unicode text","Non-ISO extended-ASCII text","ReStructuredText file","International EBCDIC text","UTF-8 Unicode text","Printable ASCII","Unicode text, UTF-8 text","Algol 68 source, ISO-8859 text"];
-	unsafe = true;
 	converters = [{"program":"ansilove","flags":{"ansiloveType":"idf"}},"abydosconvert"]
 }
 */
@@ -26,7 +25,6 @@ exports.meta =
 	mimeType       : "image/x-icedraw",
 	magic          : ["iCEDraw graphic"],
 	forbiddenMagic : C.TEXT_MAGIC,
-	unsafe    : true
 };
 
 exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "idf"}}, "abydosconvert"];

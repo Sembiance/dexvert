@@ -7,7 +7,6 @@ export class fn2 extends Format
 	ext = [".fn2",".fnt",".fn8"];
 	safeExt = undefined;
 	fileSize = 2048;
-	forbidFileSizeMatch = true;
 
 steps = [null];
 }
@@ -22,7 +21,6 @@ exports.meta =
 	ext                 : [".fn2", ".fnt", ".fn8"],
 	safeExt             : () => ".fn2",
 	fileSize            : 2048,
-	forbidFileSizeMatch : true
 };
 
 exports.steps = [() => ({program : "recoil2png"})];

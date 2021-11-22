@@ -7,7 +7,6 @@ export class lotus123 extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Lotus_1-2-3";
 	ext = [".wks",".wk1",".wk2",".wk3",".wk4",".123",".wkb"];
 	magic = ["Lotus 123 Worksheet",{}];
-	unsafe = true;
 
 steps = [null,null];
 }
@@ -22,7 +21,6 @@ exports.meta =
 	website : "http://fileformats.archiveteam.org/wiki/Lotus_1-2-3",
 	ext     : [".wks", ".wk1", ".wk2", ".wk3", ".wk4", ".123", ".wkb"],
 	magic   : ["Lotus 123 Worksheet", /^Lotus 1-2-3 Wor[Kk][Ss]heet/],
-	unsafe  : true
 };
 
 // Several Lotus 123 docs back in the day were actually used for order forms and were meant to printed

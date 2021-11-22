@@ -11,7 +11,7 @@ export class p64 extends Format
 	weakMagic = true;
 	trustMagic = true;
 	fileSize = 10050;
-	forbidFileSizeMatch = true;
+
 	converters = ["nconvert","recoil2png","abydosconvert","view64"]
 }
 */
@@ -29,7 +29,7 @@ exports.meta =
 	weakMagic           : true,
 	trustMagic          : true,
 	fileSize            : 10050,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert", "view64"];

@@ -8,7 +8,6 @@ export class wri extends Format
 	ext = [".wri",".wr",".doc"];
 	forbidExtMatch = true;
 	magic = ["Windows Write Document",{},"Write for Windows Document"];
-	unsafe = true;
 	converters = ["soffice",{"program":"fileMerlin","flags":{"fileMerlinSrcFormat":"MSWR"}}]
 }
 */
@@ -23,7 +22,6 @@ exports.meta =
 	ext            : [".wri", ".wr", ".doc"],
 	forbidExtMatch : true,
 	magic          : ["Windows Write Document", /^Microsoft Write.* Document/, "Write for Windows Document"],
-	unsafe         : true
 };
 
 exports.converterPriority = ["soffice", {program : "fileMerlin", flags : {fileMerlinSrcFormat : "MSWR"}}];

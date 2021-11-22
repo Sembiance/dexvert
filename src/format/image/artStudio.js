@@ -9,7 +9,6 @@ export class artStudio extends Format
 	magic = ["C64 Hires bitmap"];
 	weakMagic = true;
 	fileSize = [9000,9001,9002,9003,9004,9005,9006,9007,9008,9009,9010];
-	forbidFileSizeMatch = true;
 	converters = ["recoil2png","view64"]
 }
 */
@@ -25,7 +24,6 @@ exports.meta =
 	magic               : ["C64 Hires bitmap"],
 	weakMagic           : true,
 	fileSize            : [].pushSequence(9000, 9010),
-	forbidFileSizeMatch : true
 };
 
 exports.converterPriority = ["recoil2png", "view64"];

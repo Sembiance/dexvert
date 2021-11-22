@@ -26,9 +26,9 @@ export class xdisplay extends Server
 		return true;
 	}
 
-	stop()
+	async stop()
 	{
 		if(this.xProc)
-			this.xProc.kill("SIGTERM");
+			await runUtil.kill(this.xProc, "SIGTERM");
 	}
 }

@@ -7,7 +7,7 @@ export class mcpp extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Paradox";
 	ext = [".mcpp"];
 	fileSize = 8008;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Paradox",
 	ext                 : [".mcpp"],
 	fileSize            : 8008,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

@@ -8,5 +8,6 @@ export class png extends Format
 	mimeType      = "image/png";
 	magic         = ["Portable Network Graphics", "PNG image data"];
 	untouched     = true;
+	fallback      = true;
 	metaProviders = ["image"];
 }

@@ -8,6 +8,6 @@ export class view64 extends Program
 	unsafe        = true;
 	bin           = "view64pnm";
 	args          = r => [r.inFile()];
-	runOptions    = r => ({stdoutFilePath : r.outFile("out.pnm")});
+	runOptions    = async r => ({stdoutFilePath : await r.outFile("out.pnm")});
 	chain         = "convert"
 }

@@ -7,7 +7,7 @@ export class rp extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Rainbow_Painter";
 	ext = [".rp"];
 	fileSize = 10242;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png","nconvert","view64"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/Rainbow_Painter",
 	ext                 : [".rp"],
 	fileSize            : 10242,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png", "nconvert", "view64"];

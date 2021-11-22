@@ -1,13 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get the new 'renameOut.multiple' regex stuff working with abydosconvert
-TEST this with sunRaster/OPENING.SCR  (AFTERWARDS REMOVE abydosconvert AS A converter)
-Will want to temporarily disable the single file support and assume multiple output files
-"21312test filename47.001.svg".replace(/^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/, "$<pre>replacementStringHere$<post>")
-
-* Ensure abydosconvert is NOT a converter in sunRaster
-
 * Add full dexvert support for:
 image/degasHiPI
 image/mur
@@ -58,6 +51,8 @@ filesRequired/filesOptional -> auxFiles
 * Maybe convert test-identify/test-process to have a live web page or fancy console status with boxes for every format type that turn red/green on success/failure
 
 * Make a src/app/dexbrute.js that will create Converters() for every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
+
+* Get rid of the testdexvert TODO for allowing one day off
 
 * Find all TODO comments and lint entire project
 

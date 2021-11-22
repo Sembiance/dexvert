@@ -7,5 +7,5 @@ export class recoil2png extends Program
 	gentooOverlay = "dexvert";
 	bin           = "recoil2png";
 	outExt        = ".png";
-	args          = r => ["-o", r.outFile("out.png"), r.inFile()]
+	args          = async r => ["-o", await r.outFile("out.png"), r.inFile()]
 }

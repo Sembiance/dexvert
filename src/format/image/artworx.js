@@ -1,3 +1,4 @@
+/*
 import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
 
@@ -14,3 +15,4 @@ export class artworx extends Format
 	//converters     = [{program : "ansilove", flags : {ansiloveType : "adf"}}, "deark", "abydosconvert"];
 	//inputMeta = (state, p, cb) => p.family.ansiArtInputMeta(state, p, cb);
 }
+*/

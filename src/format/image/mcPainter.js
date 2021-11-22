@@ -7,7 +7,7 @@ export class mcPainter extends Format
 	website = "http://fileformats.archiveteam.org/wiki/McPainter";
 	ext = [".mcp"];
 	fileSize = 16008;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/McPainter",
 	ext                 : [".mcp"],
 	fileSize            : 16008,
-	forbidFileSizeMatch : true
+
 };
 
 exports.converterPriority = ["recoil2png"];

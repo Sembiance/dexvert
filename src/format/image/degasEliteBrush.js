@@ -7,7 +7,7 @@ export class degasEliteBrush extends Format
 	website = "http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush";
 	ext = [".bru"];
 	fileSize = 64;
-	forbidFileSizeMatch = true;
+
 	converters = ["recoil2png"]
 }
 */
@@ -21,7 +21,7 @@ exports.meta =
 	website             : "http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush",
 	ext                 : [".bru"],
 	fileSize            : 64,
-	forbidFileSizeMatch : true
+
 
 };
 

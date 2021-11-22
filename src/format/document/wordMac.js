@@ -6,7 +6,6 @@ export class wordMac extends Format
 	name = "Macintosh Word Document";
 	website = "http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh";
 	magic = ["Word for the Macintosh document","Microsoft Word for Macintosh"];
-	unsafe = true;
 	converters = ["soffice"]
 }
 */
@@ -19,7 +18,6 @@ exports.meta =
 	name    : "Macintosh Word Document",
 	website : "http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh",
 	magic   : ["Word for the Macintosh document", "Microsoft Word for Macintosh"],
-	unsafe  : true
 };
 
 exports.converterPriority = ["soffice"];

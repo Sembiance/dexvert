@@ -134,6 +134,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 16);
 	assert(a.ts>0);
+	await fileUtil.unlink("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir", {recursive : true});
 });
 
 Deno.test("changeRoot", async () =>

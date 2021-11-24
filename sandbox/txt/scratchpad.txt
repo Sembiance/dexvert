@@ -40,4 +40,11 @@ Possibilities:
 See if DOSBOX has an alternative back end vs SDL
 
 
+<5 second default initial delay>
+"1", {delay : xu.SECOND*5}, "c"
 
+
+5000,1,5000,c
+
+
+d500,k1

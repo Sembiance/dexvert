@@ -4,6 +4,8 @@ import {path, delay} from "std";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
 const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");
+const LOWERCASE = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Escape", "Tab", "Backspace", "Enter", " ", "LeftAlt", "RightAlt", "LeftControl", "RightControl", "LeftShift", "RightShift", "CapsLock", "ScrollLock", "NumLock", "`", "-", "=", "\\", "[", "]", ";", '"', ".", ",", "/", null, "PrintScreen", "Pause", "Insert", "Home", "PageUp", "Delete", "End", "PageDown", "Left", "Up", "Down", "Right", "KP1", "KP2", "KP3", "KP4", "KP5", "KP6", "KP7", "KP8", "KP9", "KP0", "KPDivide", "KPMultiply", "KPMinus", "KPPlus", "KPEnter", "KPPeriod"];	// eslint-disable-line max-len
+const UPPERCASE = [null, "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "~", "_", "+", "|", "{", "}", ":", "'", "<", ">", "?"];	// eslint-disable-line max-len
 
 export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, keyOpts={}})
 {
@@ -24,25 +26,27 @@ export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, scre
 		"SET TMP=C:\\TMP",
 		"C:\\CTMOUSE\\CTMOUSE /3",
 		`mount E ${root}`,
-		"E:",
-		`COPY NUL ${path.basename(dosDirPath)}\\STARTED.UP`];
+		"E:"];
 	
 	function addBin(bin)
 	{
+		if(keys)
+			bootExecLines.push("SLEEP 1", "Z:\\SCRIPT.COM");
+
 		// if we want video or a screenshot and autoexec is not handling starting the video recording itself, then start video recording
 		if((video || screenshot) && !(autoExec || []).includes("VIDREC.COM start"))
-			bootExecLines.push("VIDREC.COM start");
+			bootExecLines.push("SLEEP 1", "Z:\\VIDREC.COM start");
 
 		bootExecLines.push(...Array.force(autoExec || bin));
 
 		// if we want video or a screenshot and autoexec isn't handling stopping the video recording itself, stop it here
 		if((video || screenshot) && !(autoExec || []).includes("VIDREC.COM stop"))
-			bootExecLines.push("VIDREC.COM stop");
+			bootExecLines.push("Z:\\VIDREC.COM stop");
 	}
 
 	if(runIn==="prog")
 	{
-		bootExecLines.push(`cd ${path.relative(root, path.join(dosDirPath, path.dirname(cmd))).replaceAll("/", "\\")}`);
+		bootExecLines.push(`CD ${path.relative(root, path.join(dosDirPath, path.dirname(cmd))).replaceAll("/", "\\")}`);
 		addBin(`${path.basename(cmd)} ${args.join(" ")}`);
 	}
 	else if(runIn==="out")
@@ -59,55 +63,70 @@ export async function run({cmd, args=[], root, autoExec, timeout=xu.MINUTE, scre
 
 	await fileUtil.writeFile(configFilePath, bootExecLines.join("\n"), "utf-8", {append : true});
 
-	const runOptions = {detached : true, liveOutput : xu.verbose>=4, timeout};
-	if(xu.verbose>=6)
-		runOptions.env = {DISPLAY : ":0"};
-	else
-		runOptions.virtualX = true;
-
-	xu.log3`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
-
-	const {p, cb, xvfbPort} = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
-	const r = {};
-	cb().then(o => Object.assign(r, o));
+	const runOptions = {liveOutput : xu.verbose>=4, timeout};
+	runOptions.env = xu.verbose>=6 ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
 
 	if(keys)
 	{
-		await xu.waitUntil(async () => !!(await fileUtil.exists(path.join(dosDirPath, "STARTED.UP"))), {timeout});
-		const initialDelay = (keyOpts.delay || xu.SECOND*5);
-		xu.log3`DOS ${fg.orange(cmd)} waiting ${(initialDelay/xu.SECOND)} seconds before sending keys...`;
-		await xu.waitUntil(() => Object.keys(r).length>0, {timeout : initialDelay});
-
+		const scriptEnv = [];
+		let ms = (keyOpts.delay || xu.SECOND*5);
 		for(const key of Array.force(keys))
 		{
-			if(Object.keys(r).length>0)
-				break;
-			
 			if(Object.isObject(key) && key.delay)
 			{
-				xu.log3`DOS ${fg.orange(cmd)} waiting ${key.delay}ms on key delay...`;
-				await delay(key.delay);
+				ms += key.delay;
 				continue;
 			}
 
-			xu.log3`DOS ${fg.orange(cmd)} sending key ${key}...`;
-			const xdotoolOptions = {verbose : xu.verbose>=5, liveOutput : xu.verbose>=5, timeout, env : {"DISPLAY" : `:${xvfbPort}`}};
-			await runUtil.run("xdotool", ["search", "--class", "dosbox", "windowfocus", Array.isArray(key) ? "key" : "type", "--delay", "100", Array.isArray(key) ? key[0] : key], xdotoolOptions);
+			for(const letter of (Array.isArray(key) ? key : key.split("")))
+			{
+				const keyid = UPPERCASE.includes(letter) ? UPPERCASE.indexOf(letter) : LOWERCASE.indexOf(letter);
+				if(keyid===-1)
+					throw new Error(`Invalid dos script key ${fg.yellow(letter)} for cmd ${cmd}`);
 
-			if(keyOpts.interval)
-				await delay(keyOpts.interval);
+				if(UPPERCASE.includes(letter))
+				{
+					scriptEnv.push(ms);
+					scriptEnv.push(LOWERCASE.indexOf("LeftShift"));
+					scriptEnv.push(1);
+
+					ms+=5;
+				}
+
+				scriptEnv.push(ms);
+				scriptEnv.push(keyid);
+				scriptEnv.push(1);
+
+				ms+=10;
+
+				scriptEnv.push(ms);
+				scriptEnv.push(keyid);
+				scriptEnv.push(0);
+
+				if(UPPERCASE.includes(letter))
+				{
+					ms += 5;
+
+					scriptEnv.push(ms);
+					scriptEnv.push(LOWERCASE.indexOf("LeftShift"));
+					scriptEnv.push(0);
+				}
+
+				ms+=100;
+			}
+
+			runOptions.env.SCRIPT = `${scriptEnv.join(",")},`;
 		}
 	}
 
-	await xu.waitUntil(() => Object.keys(r).length>0, {timeout});
-	if(Object.keys(r).length===0)
-		await runUtil.kill(p, "SIGTERM");
+	xu.log3`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
+	const r = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
 
 	if(video || screenshot)
 	{
 		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti([v => v]).at(-1);
 		if(!videoFilePath)
-			throw new Error(`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()} ${r.stdout} ${xvfbPort}`);
+			throw new Error(`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()}`);
 		if(screenshot)
 		{
 			const {stdout : frameCountRaw} = await runUtil.run("ffprobe", ["-v", "0", "-select_streams", "v:0", "-count_frames", "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", videoFilePath]);

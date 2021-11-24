@@ -1,4 +1,3 @@
-/*
 import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
 
@@ -11,8 +10,15 @@ export class artworx extends Format
 	magic          = [/^data$/];
 	forbiddenMagic = ["Amiga Disk image File", ...TEXT_MAGIC];
 	weakMagic      = true;
+	metaProviders  = ["ansiArt"];
 	//// deark messes up several images, but ansilove seems to handle them all
-	//converters     = [{program : "ansilove", flags : {ansiloveType : "adf"}}, "deark", "abydosconvert"];
-	//inputMeta = (state, p, cb) => p.family.ansiArtInputMeta(state, p, cb);
+	converters     = ["ansilove[format:adf]", "deark", "abydosconvert"];
 }
-*/
+
+/*
+
+// deark messes up several images, but ansilove seems to handle them all
+exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "adf"}}, "deark", "abydosconvert"];
+
+exports.inputMeta = (state, p, cb) => p.family.ansiArtInputMeta(state, p, cb);*/
+

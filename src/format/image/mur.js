@@ -5,6 +5,7 @@ export class mur extends Format
 	name          = "C.O.L.R. Object Editor";
 	website       = "http://fileformats.archiveteam.org/wiki/C.O.L.R._Object_Editor";
 	ext           = [".mur", ".pal"];
+
 	// Both .mur and .pal are required
 	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
 

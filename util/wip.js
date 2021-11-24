@@ -1,7 +1,5 @@
 import {xu} from "xu";
-import {delay} from "std";
+import {runUtil} from "xutil";
 
-const {rid} = await Deno.open("/tmp/test", {write : true, createNew : true}).catch(() => {});
-console.log({rid});
-await delay(xu.SECOND*1);
-Deno.close(rid);
+const r = await runUtil.run("dexvert", ["--json", "/mnt/compendium/DevLab/dexvert/test/sample/image/threeDCK/ADAM.RUN", "/home/sembiance/tmp/out/"]);
+console.log({r});

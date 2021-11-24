@@ -1,34 +1,21 @@
-/*
 import {Format} from "../../Format.js";
 
 export class gif extends Format
 {
-	name = "Graphics Interchange Format";
-	website = "http://fileformats.archiveteam.org/wiki/GIF";
-	ext = [".gif"];
-	mimeType = "image/gif";
-	magic = ["GIF image data",{}];
-	untouched = true;
+	name      = "Graphics Interchange Format";
+	website   = "http://fileformats.archiveteam.org/wiki/GIF";
+	ext       = [".gif"];
+	mimeType  = "image/gif";
+	magic     = ["GIF image data", /^GIF8[79]a bitmap$/];
+	untouched = r => r.meta.width && r.meta.height;	// if we were able to get our image meta info, then we are a valid GIF and should leave it alone
+	metaProviders = ["image", "gifsicle_info"];
 
-inputMeta = undefined;
+	// some GIF files are often corrupted and Imagemagick won't load them, thus no meta data. However nconvert can usually handle them, so we try converting to PNG if no meta data found
+	converters = ["nconvert"];
 }
-*/
+
 /*
-"use strict";
-const XU = require("@sembiance/xu");
 
-exports.meta =
-{
-	name      : "Graphics Interchange Format",
-	website   : "http://fileformats.archiveteam.org/wiki/GIF",
-	ext       : [".gif"],
-	mimeType  : "image/gif",
-	magic     : ["GIF image data", /^GIF8[79]a bitmap$/],
-	untouched : true
-};
-
-exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
-	(state, p) => p.family.supportedInputMeta,
 	(state, p) =>
 	{
 		// Some GIF files are often corrupted and Imagemagick won't load them, thus no meta data. However nconvert can usually handle them, so we try converting to PNG if no meta data found

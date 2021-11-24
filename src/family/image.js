@@ -165,8 +165,11 @@ export class image extends Family
 							meta[key.toLowerCase()] = val;
 					});
 				}
-				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
-				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+				if(xu.verbose<5)
+				{
+					await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
+					await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+				}
 			}
 			else if(metaProvider==="darkTable")
 			{

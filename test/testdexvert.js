@@ -9,7 +9,8 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test dexvert conversions for 1 or all formats",
 	opts    :
 	{
-		format  : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
+		format  : {desc : "Only test a single format: archive/zip", hasValue : true},
+		file    : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
 		record  : {desc : "Take the results of the conversions and save them as future expected results"},
 		report  : {desc : "Output an HTML report of the results."}
 	}});
@@ -54,11 +55,13 @@ xu.log`Finding sample files...`;
 const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH);
 xu.log`Found ${sampleFilePaths.length} sample files. Filtering those we don't have support for...`;
 sampleFilePaths.filterInPlace(sampleFilePath => Object.hasOwn(formats, path.basename(path.dirname(sampleFilePath))));
+if(argv.file)
+	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
 xu.log`Testing ${sampleFilePaths.length} sample files...`;
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
-	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")))
+	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 
 	xu.log`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
@@ -66,6 +69,7 @@ Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.rel
 		delete testData[extraFilePath];
 });
 
+const oldDataFormats = [];
 let passChain=0;
 async function testSample(sampleFilePath)
 {
@@ -139,8 +143,8 @@ async function testSample(sampleFilePath)
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
-	if(prevData.formatid)
-		prevData.format = prevData.formatid;
+	if(!prevData.format)
+		oldDataFormats.pushUnique(prevData.formatid);
 
 	const diskFamily = sampleSubFilePath.split("/")[0];
 	if(result.family && result.family!==diskFamily)
@@ -187,10 +191,10 @@ async function testSample(sampleFilePath)
 		}
 	}
 
-	if(result.family!==prevData.family)
+	if(prevData.family && result.family!==prevData.family)
 		return await fail(`Expected to have family ${fg.orange(prevData.family)} but got ${result.family}`);
 
-	if(result.format!==prevData.format)
+	if(prevData.format && result.format!==prevData.format)
 		return await fail(`Expected to have format ${fg.orange(prevData.format)} but got ${result.format}`);
 
 	if(prevData.meta)
@@ -202,7 +206,7 @@ async function testSample(sampleFilePath)
 		if(objDiff.length>0)
 			return fail(`Meta different: ${objDiff.squeeze()}`);
 	}
-	else if(result.meta)
+	else if(result.meta && Object.keys(result.meta).length>0)
 	{
 		return fail(`Expected no meta but got ${xu.inspect(result.meta).squeeze()} instead`);
 	}
@@ -228,6 +232,7 @@ async function writeOutputHTML()
 			body, html
 			{
 				background-color: black;
+				color: #ccc;
 			}
 
 			img
@@ -239,10 +244,22 @@ async function writeOutputHTML()
 				max-width: 350px;
 				max-height: 350px;
 			}
+
+			blink
+			{
+				animation: 1s linear infinite condemned_blink_effect;
+			}
+
+			@keyframes condemned_blink_effect
+			{
+  				0% { visibility: hidden; }
+  				50% { visibility: hidden; }
+  				100% { visibility: visible; }
+			}
 		</style>
 	</head>
 	<body>
-		${outputFiles.length.toLocaleString()} files<br>
+		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA: ${oldDataFormats.join(" ")}</blink><br>` : ""}${outputFiles.length.toLocaleString()} files<br>
 		${outputFiles.map(filePath =>
 	{
 		const ext = path.extname(filePath);
@@ -278,6 +295,9 @@ if(argv.record)
 	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 xu.log`\n\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+
+if(oldDataFormats.length>0)
+	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} ${oldDataFormats.join(" ")}`;
 
 if(argv.report)
 	await writeOutputHTML();

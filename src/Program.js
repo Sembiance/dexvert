@@ -90,7 +90,7 @@ export class Program
 		{
 			// run a program on disk
 			r.bin = this.bin;
-			r.args = await this.args(r);
+			r.args = (await this.args(r)).map(arg => arg.toString());
 			r.runOptions = {cwd : f.root, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
@@ -177,7 +177,7 @@ export class Program
 			{
 				for(const newFile of f.files.new)
 				{
-					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}$<post>`);
+					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}${f.files.new.length>1 ? "$<num>" : ""}$<post>`);
 					xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
 					await newFile.rename(replacementName, {replaceExisting : !!isChain});
 				}

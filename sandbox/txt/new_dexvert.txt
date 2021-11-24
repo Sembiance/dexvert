@@ -3,19 +3,7 @@
 \--------------/
 * Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
 
-* Add full dexvert support for:
-image/degasHiPI
-image/mur
-image/artistByEaton
-image/autoSketchDrawing
-image/artworx
-image/hsiRaw
-image/ans
-image/apStar
-image/artDirector
-image/advancedArtStudio
-image/hiPic
-ALL OTHER IMAGES
+* Add full dexvert support for: ALL IMAGES
 
 * Fully dexvert support:
 archive/windowsThumbDB

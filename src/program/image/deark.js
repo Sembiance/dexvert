@@ -38,8 +38,8 @@ export class deark extends Program
 		
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
-	// deark output names can be useful such as image/macPain/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
-	renameOut = {regex : /^.+\.\d{3}(?<post>\.?.*)$/};
+	// deark output names can be useful such as image/macPaint/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
+	renameOut = {regex : /^.+(?<num>\.\d{3})(?<post>\.?.*)$/};
 
 	verify = r =>
 	{

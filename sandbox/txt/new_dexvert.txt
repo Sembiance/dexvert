@@ -51,6 +51,7 @@ filesRequired/filesOptional -> auxFiles
 \---------------/
 * Check out image/avatar with older versions of abydosconvert AND the latest version
   It used to produce PNG files, but now produce glitched out webp files...
+  ALSO check out image/cebraText, it seems to maybe have the same problem
 
 * Once all done, go through the sandbox/wip/misIdentified files and figure out where they go, then delete the misIdentified folder
   These are files that I believe DID convert, but do not actually appear to be the image they are assigned to, so need to determine what type they actually are

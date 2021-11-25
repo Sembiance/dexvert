@@ -1,24 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class leadecom extends Program
 {
 	website = "https://archive.org/details/JPEG35_ZIP";
-	unsafe = true;
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "LEADTOOL/LEADECOM.EXE";
+	args    = async r => [r.inFile(), await r.outFile("OUT.TGA", {backslash : true}), "/TGA24"];
+	chain   = "dexvert[asFormat:image/tga]";
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "https://archive.org/details/JPEG35_ZIP",
-	unsafe  : true
-};
-
-exports.dos = () => "LEADTOOL/LEADECOM.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath, "OUT.TGA", "/TGA24"]);
-exports.post = (state, p, r, cb) => p.util.program.run("convert", {argsd : ["OUT.TGA"]})(state, p, cb);
-*/

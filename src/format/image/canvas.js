@@ -1,32 +1,27 @@
-/*
 import {Format} from "../../Format.js";
 
 export class canvas extends Format
 {
-	name = "Atari Canvas";
-	ext = [".cpt",".hbl",".ful"];
-	filesRequired = undefined;
-	filesOptional = undefined;
-	converters = ["recoil2png"]
+	name          = "Atari Canvas";
+	ext           = [".cpt", ".hbl", ".ful"];
+	
+	auxFiles = (input, otherFiles) =>
+	{
+		// .ful is standalone
+		if(input.ext.toLowerCase()===".ful")
+			return false;
+		
+		// .hbl is useless without a .cpt, but .hbl doesn't convert into anything, it's extra info
+		if(input.ext.toLowerCase()===".hbl")
+			return otherFiles.filter(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.cpt`);
+		
+		// .cpt can convert on it's own, but optionally uses an .hbl
+		const hblFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.hbl`);
+		return hblFile ? [hblFile] : false;
+	};
 
-preSteps = [null];
+	// Don't do anything with .hbl files
+	untouched = ({f}) => f.input.ext.toLowerCase()===".hbl"
+
+	converters    = ["recoil2png"]
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name          : "Atari Canvas",
-	ext           : [".cpt", ".hbl", ".ful"],
-	// .ful is standalone. .cpt can convert on it's own, but optionally uses a .hbl. .hbl is useless without a .cpt
-	filesRequired : (state, otherFiles) => ([".ful", ".cpt"].includes(state.input.ext.toLowerCase()) ? false : otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.name.toLowerCase()}.cpt`)),
-	filesOptional : (state, otherFiles) => ([".ful", ".hbl"].includes(state.input.ext.toLowerCase()) ? false : otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.name.toLowerCase()}.hbl`))
-};
-
-exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".hbl"; }];
-
-exports.converterPriority = ["recoil2png"];
-
-*/

@@ -106,15 +106,7 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 	}
 	else if(osid.startsWith("gentoo"))
 	{
-		// TODO need to figure out what to do here for the new way
-		/*
-		inFilePaths.forEach(inFilePath =>
-		{
-			if(inFilePath.startsWith("/"))
-				args.replaceAll(inFilePath, path.basename(inFilePath));
-		});*/
-
-		binAndArgs += `${cmd} ${args.map(v => `'${v.replaceAll("'", `'"'"'`)}'`).join(" ")}`;
+		binAndArgs += `${cmd} ${args.map(v => (inFilesRel.includes(v) ? path.basename(v) : v)).map(v => `'${v.replaceAll("'", `'"'"'`)}'`).join(" ")}`;
 	}
 
 	if(osid.startsWith("win"))

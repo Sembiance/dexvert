@@ -16,11 +16,8 @@ export class svgInfo extends Program
 		const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
 		await fileUtil.unlink(pngFilePath);
 
-		if(imageInfo.opaque || imageInfo.colorCount>1)
-		{
-			r.meta.opaque = imageInfo.opaque;
-			r.meta.colorCount = imageInfo.colorCount;
-		}
+		r.meta.opaque = imageInfo.opaque;
+		r.meta.colorCount = imageInfo.colorCount;
 
 		if(r.f.input.size<xu.MB*30)
 		{

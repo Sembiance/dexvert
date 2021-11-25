@@ -22,8 +22,6 @@ const OS_DEFAULT =
 	ram          : "1G",
 	smbGuestPort : 445,
 	sshGuestPort : 22,
-	inOutType    : "mount",
-	scriptExt    : ".au3",
 	machine      : "accel=kvm",
 	hdOpts       : ",if=ide"
 };
@@ -31,8 +29,8 @@ const OS_DEFAULT =
 // We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS =
 {
-	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
-	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },
+	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
+	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
 	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
 	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
 };
@@ -55,7 +53,7 @@ const IN_OUT_LOGIC =
 		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
 		const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
 
-		// We use rsync here to handle both files and directories
+		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")]));
 
 		// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
@@ -97,7 +95,7 @@ const IN_OUT_LOGIC =
 
 		await Deno.mkdir(tmpInDirPath, {recursive : true});
 
-		// We use rsync here to handle both files and directories
+		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
 
 		await fileUtil.writeFile(tmpGoFilePath, body.script);
@@ -123,40 +121,25 @@ const IN_OUT_LOGIC =
 		const goFilePath = path.join(inDirPath, instance.scriptName);
 		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
 
-		// TODO ALSO need to update qemuUtil for this section !!!
+		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
+		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
 
-		/*tiptoe(
-			function copyInFiles()
-			{
-				// We use rsync here to handle both files and directories
-				(body.inFilePaths || []).parallelForEach((inFilePath, subcb) => runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")], runUtil.SILENT, subcb), this);
-			},
-			function writeGoScript()
-			{
-				// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-				fs.writeFile(tmpGoFilePath, body.script, XU.UTF8, this);
-			},
-			function copyGoScript()
-			{
-				runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`], runUtil.SILENT, this);
-			},
-			function waitForFinish()
-			{
-				XU.waitUntil(subcb => runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath], runUtil.SILENT, subcb), outRaw => (outRaw && outRaw.trim()!==goFilePath), this);
-			},
-			function copyResults()
-			{
-				// We use rsync here to preserve timestamps
-				runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")], runUtil.SILENT, this);
-			},
-			function cleanFiles()
-			{
-				fileUtil.unlink(tmpGoFilePath, this.parallel());
-				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")], runUtil.SILENT, this.parallel());
-				runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")], runUtil.SILENT, this.parallel());
-			},
-			cb
-		);*/
+		await fileUtil.writeFile(tmpGoFilePath, body.script);
+		await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
+		
+		// Wait for finish, which happens when we detect that the go file has disappeared
+		await xu.waitUntil(async () =>
+		{
+			const {stdout} = await runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath]);
+			return (stdout.trim()!==goFilePath);
+		});
+
+		// We use rsync here to preserve timestamps
+		await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")]);
+
+		await fileUtil.unlink(tmpGoFilePath);
+		await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")]);
+		await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")]);
 	}
 };
 
@@ -176,8 +159,8 @@ export class qemu extends Server
 		instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
 		instance.inOutHostPort = +`${OS[osid].subnet}${20+instanceid}`;
 		instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
-		instance.scriptName = `go${OS[osid].scriptExt || OS_DEFAULT.scriptExt}`;
-		instance.inOutType = OS[osid].inOutType || OS_DEFAULT.inOutType;
+		instance.scriptName = `go${OS[osid].scriptExt}`;
+		instance.inOutType = OS[osid].inOutType;
 		INSTANCES[osid][instanceid] = instance;
 		
 		await Deno.mkdir(path.join(instance.dirPath, "in"), {recursive : true});

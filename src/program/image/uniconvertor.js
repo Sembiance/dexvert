@@ -1,35 +1,24 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class uniconvertor extends Program
 {
-	website = "https://sk1project.net/uc2/";
+	website       = "https://sk1project.net/uc2/";
 	gentooPackage = "media-gfx/uniconvertor";
 	gentooOverlay = "dexvert";
-	flags = {"uniconvertorExt":"Which extension to convert to (\".svg\", \".png\"). Default: .svg"};
+	flags         =
+	{
+		outType : `Which type to convert to (svg || png). Default: svg`
+	};
+
+	bin        = "uniconvertor";
+	args       = async r => [r.inFile(), await r.outFile(`out.${r.flags.outType || "svg"}`)]
+	runOptions = ({timeout : xu.MINUTE*3});
+	chain      = r => ((r.flags.outType || "svg")==="svg" ? "deDynamicSVG" : null);
 }
-*/
 
 /*
-"use strict";
-const XU = require("@sembiance/xu"),
-	tiptoe = require("tiptoe"),
-	fileUtil = require("@sembiance/xutil").file,
-	path = require("path");
 
-exports.meta =
-{
-	website       : "https://sk1project.net/uc2/",
-	gentooPackage : "media-gfx/uniconvertor",
-	gentooOverlay : "dexvert",
-	flags         :
-	{
-		uniconvertorExt : `Which extension to convert to (".svg", ".png"). Default: .svg`
-	}
-};
-
-exports.bin = () => "uniconvertor";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, `outfile${r.flags.uniconvertorExt || ".svg"}`)) => ([inPath, outPath]);
 exports.runOptions = () => ({timeout : XU.MINUTE*3});
 
 exports.post = (state, p, r, cb) =>

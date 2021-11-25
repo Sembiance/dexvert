@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get wmf working (which requires getting wmf2svg/uniconvertor/soffice working)
-
-* Get image/CADDrawDrawing working
-
 * Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
 
 * Add full dexvert support for: ALL IMAGES

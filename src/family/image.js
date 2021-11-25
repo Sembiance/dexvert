@@ -23,6 +23,9 @@ const MATCH_MAX_GARBAGE_PROBABILITIES =
 	fallback : 0.01
 };
 
+const UNSAFE_MAX_IMAGE_SIZE = 25000;
+const SKIP_TENSOR_MAX_IMAGE_SIZE = 6000;
+
 const GARBAGE_DETECTED_DIR_PATH = "/mnt/dexvert/garbageDetected";
 
 export class image extends Family
@@ -68,9 +71,9 @@ export class image extends Family
 			return false;
 		}
 
-		if(isUnsafe && [meta.width, meta.height].some(v => v>=20000))
+		if(isUnsafe && [meta.width, meta.height].some(v => v>=UNSAFE_MAX_IMAGE_SIZE))
 		{
-			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > 20000`;
+			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > ${UNSAFE_MAX_IMAGE_SIZE}`;
 			return false;
 		}
 
@@ -91,8 +94,8 @@ export class image extends Family
 			skipTensor = `Contains a known 'noisy' pattern in original file path`;
 		
 		// Don't classify if the dimensions are too big
-		if([meta.width, meta.height].some(v => v>=6000))
-			skipTensor = `Width or height is too big ${meta.width}x${meta.height}`;
+		if([meta.width, meta.height].some(v => v>=SKIP_TENSOR_MAX_IMAGE_SIZE))
+			skipTensor = `Width or height is larger than ${SKIP_TENSOR_MAX_IMAGE_SIZE} : ${meta.width}x${meta.height}`;
 		
 		if(!skipTensor)
 		{

@@ -8,7 +8,7 @@ import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
-const DEFAULT_TIMEOUT = xu.MINUTE*2;
+const DEFAULT_TIMEOUT = xu.MINUTE*5;
 
 export class Program
 {
@@ -42,17 +42,17 @@ export class Program
 
 			// execution
 			bin       : {type : "string"},
-			chain     : {type : "string"},
+			chain     : {types : ["function", "string"]},
 			diskQuota : {type : "number", range : [1]},
 			outExt    : {types : ["function", "string"]},
 			dosData   : {type : "function", length : [0, 1]},
 			qemuData  : {type : "function", length : [0, 1]},
-			exec      : {type : "function", length : 1},
-			args      : {type : "function", length : 1},
-			cwd       : {type : "function", length : 1},
+			exec      : {type : "function", length : [0, 1]},
+			args      : {type : "function", length : [0, 1]},
+			cwd       : {type : "function", length : [0, 1]},
 			verify    : {type : "function", length : [0, 2]},
-			pre       : {type : "function", length : 1},
-			post      : {type : "function", length : 1}
+			pre       : {type : "function", length : [0, 1]},
+			post      : {type : "function", length : [0, 1]}
 		});
 
 		if(program.renameOut)
@@ -97,7 +97,7 @@ export class Program
 		{
 			// run a program on disk
 			r.bin = this.bin;
-			r.args = (await this.args(r)).map(arg => arg.toString());
+			r.args = (this.args ? await this.args(r) : []).map(arg => arg.toString());
 			r.runOptions = {cwd : r.cwd, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
@@ -113,7 +113,7 @@ export class Program
 		else if(this.loc==="dos")
 		{
 			r.dosData = {root : f.root, cmd : this.bin};
-			r.dosData.args = await this.args(r);
+			r.dosData.args = this.args ? await this.args(r) : [];
 			if(this.dosData)
 				Object.assign(r.dosData, await this.dosData(r));
 
@@ -122,7 +122,7 @@ export class Program
 		else if(QEMUIDS.includes(this.loc))
 		{
 			r.qemuData = {f, cmd : this.bin, osid : this.loc};
-			r.qemuData.args = await this.args(r);
+			r.qemuData.args = this.args ? await this.args(r) : [];
 			if(this.qemuData)
 				Object.assign(r.qemuData, await this.qemuData(r));
 
@@ -217,13 +217,18 @@ export class Program
 		}
 
 		// check to see if we need to chain to another program
-		if((this.chain || chain) && f.files.new?.length>0)
+		const chainParts = [];
+		if(this.chain)
 		{
-			const chainParts = [];
-			if(this.chain)
-				chainParts.push(...this.chain.split("->"));
-			if(chain)
-				chainParts.push(...chain.split("->"));
+			const chainResult = (typeof this.chain==="function" ? await this.chain(r) : this.chain);
+			if(chainResult)
+				chainParts.push(...chainResult.split("->"));
+		}
+		if(chain)
+			chainParts.push(...chain.split("->"));
+
+		if(chainParts.length>0 && f.files.new?.length>0)
+		{
 			for(const [i, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 			{
 				const newFiles = Array.from(f.files.new);

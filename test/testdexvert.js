@@ -27,8 +27,17 @@ const FLEX_SIZE_FORMATS =
 	{
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
-		threeDCK           : 10
+		threeDCK           : 10,
+
+		// TODO TEMPROARY due to bug in abydos
+		avatar : 20
 	}
+};
+
+const DISK_FORMAT_MAP =
+{
+	// Both formats just have generic ext match
+	"artistByEaton/BLINKY.ART" : "asciiArtEditor"
 };
 
 const startTime = performance.now();
@@ -151,7 +160,7 @@ async function testSample(sampleFilePath)
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
 
 	const diskFormat = sampleSubFilePath.split("/")[1];
-	if(result.format && result.format!==diskFormat)
+	if(result.format && result.format!==diskFormat && !Object.entries(DISK_FORMAT_MAP).some(([k, v]) => sampleFilePath.endsWith(k) && v===result.format))
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
 
 	if(prevData.files && !result.files)

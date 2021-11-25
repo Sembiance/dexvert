@@ -7,7 +7,7 @@ export class voodooSupremeSynthesizer extends Format
 	ext = [".vss"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

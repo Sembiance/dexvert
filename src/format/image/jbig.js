@@ -10,7 +10,7 @@ export class jbig extends Format
 	notes = "Sample file mx.jbg converts to garbage, not sure why.";
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

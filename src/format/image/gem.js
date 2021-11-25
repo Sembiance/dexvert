@@ -8,7 +8,7 @@ export class gem extends Format
 	ext = [".img",".ximg",".timg"];
 	mimeType = "image/x-gem";
 	magic = ["GEM bitmap","GEM HYPERPAINT Image data","GEM Image data","Extended GEM bitmap",{}];
-	converters = ["recoil2png","abydosconvert","deark","nconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`,"deark","nconvert"]
 }
 */
 /*
@@ -27,6 +27,6 @@ exports.meta =
 // Recoil seems to handle all the files
 // Abydos and nconvert handle the color in flag_b24 and tru256
 // nconvert messes up some other images colorspaces (as usual for nconvert)
-exports.converterPriority = ["recoil2png", "abydosconvert", "deark", "nconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "deark", "nconvert"];
 
 */

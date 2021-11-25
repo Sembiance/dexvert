@@ -8,9 +8,9 @@ export class sgi extends Format
 	ext = [".sgi",".bw",".rgba",".rgb"];
 	mimeType = "image/x-sgi";
 	magic = ["Silicon Graphics bitmap","Silicon Graphics RGB bitmap","SGI image data"];
-	converters = ["convert","nconvert","abydosconvert"]
+	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : ["Silicon Graphics bitmap", "Silicon Graphics RGB bitmap", "SGI image data"]
 };
 
-exports.converterPriority = ["convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

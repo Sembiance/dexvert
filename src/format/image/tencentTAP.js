@@ -8,7 +8,7 @@ export class tencentTAP extends Format
 	ext = [".tap"];
 	mimeType = "image/vnd.tencent.tap";
 	magic = ["TAP (Tencent) bitmap"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["TAP (Tencent) bitmap"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

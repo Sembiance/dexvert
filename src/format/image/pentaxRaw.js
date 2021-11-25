@@ -8,9 +8,9 @@ export class pentaxRaw extends Format
 	ext = [".pef",".ptx"];
 	magic = ["Pentax RAW image"];
 	mimeType = "image/x-pentax-pef";
-	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-pentax-pef"
 };
 
-exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

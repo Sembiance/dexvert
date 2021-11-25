@@ -8,7 +8,7 @@ export class deliTrackerCustom extends Format
 	magic = ["Delitracker Customplay Module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

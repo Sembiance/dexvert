@@ -10,7 +10,7 @@ export class wpg extends Format
 	notes = "It's a vector format, but convert doesn't always properly convert it to an SVG. So we also convert it to a PNG";
 	converters = [[null,null],{"program":"deark"},{"program":"nconvert"}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class naiveNIA extends Format
 	ext = [".nia"];
 	mimeType = "image/nia";
 	magic = ["Naive Image format NIA animated bitmaps"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Naive Image format NIA animated bitmaps"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -32,14 +32,14 @@ export class deark extends Program
 		if(r.flags.file2)
 			a.push("-file2", r.flags.file2);
 		
-		const opts = Array.from(r.flags.opts || []);
+		const opts = Array.force(r.flags.opts || []);
 		if(r.flags.charOutType)
 			opts.push(`char:output=${r.flags.charOutType || "image"}`);
 		
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
 	// deark output names can be useful such as image/macPaint/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
-	renameOut = {regex : /^.+(?<num>\.\d{3})(?<post>\.?.*)$/};
+	renameOut = {regex : /^.+(?<num>\.\d{3})(?<post>\..+)$/};
 
 	verify = r =>
 	{
@@ -67,8 +67,6 @@ exports.meta =
 };
 
 // DEARK FORMATS: https://github.com/jsummers/deark/blob/master/formats.txt
-
-exports.BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
 
 exports.post = (state, p, r, cb) =>
 {

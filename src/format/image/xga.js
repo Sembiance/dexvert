@@ -9,7 +9,7 @@ export class xga extends Format
 	mimeType = "image/x-xga";
 	fileSize = [153600,368640];
 
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -12,7 +12,7 @@ export class ini extends Format
 	untouched = true;
 	hljsLang = "ini";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

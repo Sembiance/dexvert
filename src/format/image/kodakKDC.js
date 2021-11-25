@@ -8,9 +8,9 @@ export class kodakKDC extends Format
 	ext = [".kdc"];
 	magic = ["Kodak Digital Camera RAW image (DC serie)","Kodak Digital Camera RAW image (EasyShare serie)"];
 	mimeType = "image/x-kodak-kdc";
-	converters = ["darktable-cli","abydosconvert"]
+	converters = ["darktable_cli",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-kodak-kdc"
 };
 
-exports.converterPriority = ["darktable-cli", "abydosconvert"];
+exports.converterPriority = ["darktable_cli", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

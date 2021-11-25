@@ -11,7 +11,7 @@ export class pokeyNoise extends Format
 	filesOptional = undefined;
 	converters = [{"program":"uade123","flags":{"uadeType":"Pokeynoise"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

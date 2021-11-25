@@ -9,7 +9,7 @@ export class xm extends Format
 	magic = ["Fasttracker II module sound data","FastTracker 2 eXtended Module"];
 	converters = ["xmp","zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

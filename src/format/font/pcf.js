@@ -10,7 +10,7 @@ export class pcf extends Format
 
 steps = [null];
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

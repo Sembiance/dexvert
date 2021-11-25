@@ -7,7 +7,7 @@ export class gfaArtist extends Format
 	website = "http://fileformats.archiveteam.org/wiki/GFA_Artist";
 	ext = [".art"];
 	mimeType = "image/x-gfa-artist";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -22,6 +22,6 @@ exports.meta =
 	mimeType : "image/x-gfa-artist"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

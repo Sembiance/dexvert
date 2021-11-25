@@ -62,6 +62,7 @@ exports.post = (state, p, r, cb) =>
 				volTS = fallbackTS;
 
 			fs.utimes(path.join(state.output.absolute, volParts.volName), volTS.unix(), volTS.unix(), this.parallel());
+			// ROB! DENO ALERT! Need to make sure I update the DexFile.ts too!
 
 			lines.slice(1).parallelForEach((line, subcb) =>
 			{
@@ -86,6 +87,7 @@ exports.post = (state, p, r, cb) =>
 							return this();
 
 						fs.utimes(outputFilePath, ts.unix(), ts.unix(), this);
+						// ROB! DENO ALERT! Need to make sure I update the DexFile.ts too!
 					},
 					subcb
 				);

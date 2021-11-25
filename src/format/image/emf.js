@@ -8,7 +8,7 @@ export class emf extends Format
 	ext = [".emf"];
 	mimeType = "image/emf";
 	magic = ["Windows Enhanced Metafile","Microsoft Windows Enhanced Metafile"];
-	converters = ["deark","convert","abydosconvert","irfanView"]
+	converters = ["deark","convert",`abydosconvert[format:${this.mimeType}]`,"irfanView"]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile"]
 };
 
-exports.converterPriority = ["deark", "convert", "abydosconvert", "irfanView"];
+exports.converterPriority = ["deark", "convert", `abydosconvert[format:${this.mimeType}]`, "irfanView"];
 
 */

@@ -10,7 +10,7 @@ export class dds extends Format
 	magic = ["DirectX DirectDraw Surface","Microsoft DirectDraw Surface","DirectDraw Surface"];
 	converters = ["convert","nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

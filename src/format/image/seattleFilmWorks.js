@@ -8,7 +8,7 @@ export class seattleFilmWorks extends Format
 	ext = [".sfw",".pwp",".pwm",".alb"];
 	magic = ["Seattle FilmWorks"];
 	mimeType = "image/x-seattle-filmworks";
-	converters = ["convert","abydosconvert","nconvert"]
+	converters = ["convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType       : "image/x-seattle-filmworks"
 };
 
-exports.converterPriority = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 */

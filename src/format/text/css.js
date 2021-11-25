@@ -13,7 +13,7 @@ export class css extends Format
 	untouched = true;
 	hljsLang = "css";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class tcbTracker extends Format
 	magic = ["TCB Tracker module"];
 	converters = ["uade123","zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

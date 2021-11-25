@@ -10,7 +10,7 @@ export class pdf extends Format
 	magic = ["Adobe Portable Document Format","PDF document",{}];
 	untouched = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

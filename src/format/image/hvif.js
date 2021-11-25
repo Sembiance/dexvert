@@ -8,7 +8,7 @@ export class hvif extends Format
 	ext = [".hvif"];
 	mimeType = "image/x-hvif";
 	magic = ["Haiku Vector Icon Format"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Haiku Vector Icon Format"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

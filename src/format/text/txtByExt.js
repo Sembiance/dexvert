@@ -14,7 +14,7 @@ export class txtByExt extends Format
 	untouched = true;
 	fallback = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -10,7 +10,7 @@ export class exe extends Format
 	priority = 3;
 	converters = undefined
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -8,9 +8,9 @@ export class kodakDCR extends Format
 	ext = [".dcr"];
 	magic = [{}];
 	mimeType = "image/x-kodak-dcr";
-	converters = ["darktable-cli","abydosconvert"]
+	converters = ["darktable_cli",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-kodak-dcr"
 };
 
-exports.converterPriority = ["darktable-cli", "abydosconvert"];
+exports.converterPriority = ["darktable_cli", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

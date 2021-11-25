@@ -9,7 +9,7 @@ export class xbm extends Format
 	mimeType = "image/x-xbitmap";
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

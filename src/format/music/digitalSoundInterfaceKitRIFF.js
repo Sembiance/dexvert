@@ -8,7 +8,7 @@ export class digitalSoundInterfaceKitRIFF extends Format
 	magic = ["Digital Sound Interface Kit (RIFF) module"];
 	converters = ["zxtune123","openmpt123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

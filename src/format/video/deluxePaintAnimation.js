@@ -10,7 +10,7 @@ export class deluxePaintAnimation extends Format
 	notes = "Sample file HORSE.ANM doesn't convert for some reason";
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"anm"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

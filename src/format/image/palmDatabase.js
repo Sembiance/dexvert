@@ -9,7 +9,7 @@ export class palmDatabase extends Format
 	magic = ["Palm FireViewer bitmap","FireViewer/ImageViewer PalmOS document","Palm Pilot bitmap"];
 	converters = ["convert","nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

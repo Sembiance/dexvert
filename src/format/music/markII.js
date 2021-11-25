@@ -8,7 +8,7 @@ export class markII extends Format
 	magic = ["Mark II Sound-System module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

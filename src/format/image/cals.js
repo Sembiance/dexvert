@@ -9,7 +9,7 @@ export class cals extends Format
 	magic = ["CALS raster bitmap","CALS Compressed Bitmap"];
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

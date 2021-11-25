@@ -9,9 +9,9 @@ export class mtv extends Format
 	mimeType = "image/x-mtv";
 	magic = ["zlib compressed data"];
 	weakMagic = true;
-	converters = ["convert","nconvert","abydosconvert"]
+	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -28,7 +28,7 @@ exports.meta =
 	weakMagic     : true,
 };
 
-exports.converterPriority = ["convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

@@ -9,7 +9,7 @@ export class seanConran extends Format
 	magic = ["Sean Conran module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

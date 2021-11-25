@@ -6,7 +6,7 @@ export class spider extends Format
 	name = "SPIDER";
 	ext = [".spi",".spider"];
 	mimeType = "image/x-spider";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "image/x-spider"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

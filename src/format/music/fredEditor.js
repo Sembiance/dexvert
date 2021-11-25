@@ -9,7 +9,7 @@ export class fredEditor extends Format
 	magic = ["Fred Editor module"];
 	converters = [{"program":"uade123","flags":{"uadeType":"Fred"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class xps extends Format
 	ext = [".xps",".oxps"];
 	mimeType = "application/oxps";
 	magic = ["Open XML Paper Specification"];
-	converters = ["xpstopdf","abydosconvert"]
+	converters = ["xpstopdf",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Open XML Paper Specification"]
 };
 
-exports.converterPriority = ["xpstopdf", "abydosconvert"];
+exports.converterPriority = ["xpstopdf", `abydosconvert[format:${this.mimeType}]`];
 
 */

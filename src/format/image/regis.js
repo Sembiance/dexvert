@@ -6,7 +6,7 @@ export class regis extends Format
 	name = "ReGIS";
 	ext = [".regis"];
 	mimeType = "image/x-regis";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "image/x-regis"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

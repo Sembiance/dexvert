@@ -8,7 +8,7 @@ export class lionheart extends Format
 	magic = ["Lionheart module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

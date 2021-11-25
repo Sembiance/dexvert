@@ -9,7 +9,7 @@ export class musiclineModule extends Format
 	magic = ["Musicline module"];
 	converters = [{"program":"uade123","flags":{"uadeType":"MusiclineEditor"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

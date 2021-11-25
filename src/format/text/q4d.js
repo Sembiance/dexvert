@@ -11,7 +11,7 @@ export class q4d extends Format
 	encoding = "IBM-943";
 	untouched = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

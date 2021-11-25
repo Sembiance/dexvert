@@ -8,7 +8,7 @@ export class kyssKYG extends Format
 	ext = [".kyg"];
 	magic = ["KYG bitmap"];
 	mimeType = "image/x-kyss-graphics";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType : "image/x-kyss-graphics"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

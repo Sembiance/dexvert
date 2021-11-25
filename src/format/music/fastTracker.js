@@ -9,7 +9,7 @@ export class fastTracker extends Format
 	magic = ["8-channel Fasttracker module sound data","Fasttracker 8-channel Amiga Module"];
 	converters = ["zxtune123","xmp","openmpt123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -26,6 +26,6 @@ exports.meta =
 	forbiddenExt : [".eps"],
 };
 
-exports.converterPriority = ["ps2pdf"];	//, "inkscape", "uniconvertor", "abydosconvert", "nconvert"];
+exports.converterPriority = ["ps2pdf"];	//, "inkscape", "uniconvertor", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 */

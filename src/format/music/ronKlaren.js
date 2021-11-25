@@ -8,7 +8,7 @@ export class ronKlaren extends Format
 	magic = ["Ron Klaren module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

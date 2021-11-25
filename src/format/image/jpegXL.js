@@ -29,6 +29,6 @@ exports.meta =
 	notes       : "Modern format. Pain in the butt to build the JPEG-XL reference package, I started, see overlay/legacy/JPEG-XL but then gave up because meh."
 };
 
-//exports.converterPriority = ["djxl", "abydosconvert"];
+//exports.converterPriority = ["djxl", `abydosconvert[format:${this.mimeType}]`];
 
 */

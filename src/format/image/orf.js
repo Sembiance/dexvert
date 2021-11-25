@@ -8,9 +8,9 @@ export class orf extends Format
 	ext = [".orf"];
 	magic = ["Olympus RAW","Olympus ORF raw image data","Olympus digital camera RAW image"];
 	mimeType = "image/x-olympus-orf";
-	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-olympus-orf"
 };
 
-exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

@@ -8,7 +8,7 @@ export class flif extends Format
 	ext = [".flif"];
 	mimeType = "image/x-flif";
 	magic = ["Free Lossless Image Format","FLIF"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Free Lossless Image Format", "FLIF"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

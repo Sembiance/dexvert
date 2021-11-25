@@ -9,9 +9,9 @@ export class radiance extends Format
 	mimeType = "image/vnd.radiance";
 	magic = ["Radiance RGBE Image Format","Radiance HDR image data","Radiance High Dynamic Range bitmap"];
 	slow = true;
-	converters = ["pfsconvert","convert","nconvert","abydosconvert"]
+	converters = ["pfsconvert","convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -28,7 +28,7 @@ exports.meta =
 	slow          : true,
 };
 
-exports.converterPriority = ["pfsconvert", "convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["pfsconvert", "convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

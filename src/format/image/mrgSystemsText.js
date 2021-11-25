@@ -6,7 +6,7 @@ export class mrgSystemsText extends Format
 	name = "MRG Systems Teletext";
 	ext = [".tti"];
 	mimeType = "text/x.teletext.tti";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "text/x.teletext.tti"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

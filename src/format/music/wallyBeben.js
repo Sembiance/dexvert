@@ -8,7 +8,7 @@ export class wallyBeben extends Format
 	magic = ["Wall Beben module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

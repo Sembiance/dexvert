@@ -8,7 +8,7 @@ export class digitalSoundStudio extends Format
 	magic = ["Digital Sound Studio module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

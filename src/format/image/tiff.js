@@ -11,7 +11,7 @@ export class tiff extends Format
 	priority = 3;
 	converters = [{"program":"deark","flags":{"dearkNoThumbs":true}},"convert","imageAlchemy","graphicWorkshopProfessional"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

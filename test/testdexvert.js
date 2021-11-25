@@ -217,7 +217,7 @@ async function testSample(sampleFilePath)
 	if(!prevData.converter && result.converter)
 		return await fail(`Expected no converter but instead got ${fg.orange(result.converter)}`);
 
-	return await pass(".");
+	return await pass("·");
 }
 
 await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency);

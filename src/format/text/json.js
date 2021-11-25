@@ -10,7 +10,7 @@ export class json extends Format
 	untouched = true;
 	confidenceAdjust = undefined;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

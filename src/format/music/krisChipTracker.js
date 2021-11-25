@@ -8,7 +8,7 @@ export class krisChipTracker extends Format
 	magic = ["Kris Tracker / ChipTracker song/module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

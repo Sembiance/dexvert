@@ -9,9 +9,9 @@ export class xb extends Format
 	forbidExtMatch = true;
 	mimeType = "image/x-xbin";
 	magic = ["XBIN image"];
-	converters = [{"program":"ansilove","flags":{"ansiloveType":"xb"}},"deark","abydosconvert"]
+	converters = [{"program":"ansilove","flags":{"ansiloveType":"xb"}},"deark",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -28,7 +28,7 @@ exports.meta =
 	magic          : ["XBIN image"],
 };
 
-exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "xb"}}, "deark", "abydosconvert"];
+exports.converterPriority = [{program : "ansilove", flags : {ansiloveType : "xb"}}, "deark", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.ansiArtInputMeta(state, p, cb);
 

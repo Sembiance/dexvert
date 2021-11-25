@@ -13,4 +13,4 @@ exports.meta =
 
 exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x80, 0x00]));
 
-exports.converterPriority = ["recoil2png", "abydosconvert", "nconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];

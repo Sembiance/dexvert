@@ -9,7 +9,7 @@ export class rar extends Format
 	magic = ["RAR archive data","RAR compressed archive","RAR Archive"];
 	converters = ["unrar","UniExtract"]
 
-inputMeta = undefined;
+metaProviders = [""];
 
 post = undefined;
 }

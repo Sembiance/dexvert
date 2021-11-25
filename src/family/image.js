@@ -68,9 +68,9 @@ export class image extends Family
 			return false;
 		}
 
-		if(isUnsafe && [meta.width, meta.height].some(v => v>=15000))
+		if(isUnsafe && [meta.width, meta.height].some(v => v>=20000))
 		{
-			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > 15000`;
+			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > 20000`;
 			return false;
 		}
 

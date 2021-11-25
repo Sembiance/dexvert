@@ -8,7 +8,7 @@ export class neoDeskIcon extends Format
 	ext = [".nic"];
 	magic = ["NeoDesk icon"];
 	mimeType = "image/x-neodesk-icon";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 
 idCheck = undefined;
 }
@@ -38,6 +38,6 @@ exports.idCheck = (state, matches) =>
 	return size===2088 || size%244===0;
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

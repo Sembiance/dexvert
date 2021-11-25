@@ -10,7 +10,7 @@ export class koalaPaint extends Format
 	mimeType = "image/x-koa";
 	magic = ["Koala Paint"];
 	trustMagic = true;
-	converters = ["nconvert","abydosconvert","view64"]
+	converters = ["nconvert",`abydosconvert[format:${this.mimeType}]`,"view64"]
 
 idCheck = undefined;
 }
@@ -41,6 +41,6 @@ exports.meta =
 // Must be greater <= 10006 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller
 exports.idCheck = state => fs.statSync(state.input.absolute).size<=10006;
 
-exports.converterPriority = ["nconvert", "abydosconvert", "view64"];
+exports.converterPriority = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

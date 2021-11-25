@@ -10,7 +10,7 @@ export class mov extends Format
 	magic = ["Apple QuickTime movie","QuickTime Movie"];
 	converters = ["ffmpeg","xanim"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

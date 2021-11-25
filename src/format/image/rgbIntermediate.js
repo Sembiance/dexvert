@@ -6,7 +6,7 @@ export class rgbIntermediate extends Format
 	name = "Atari RGB Intermediate";
 	ext = [".rgb"];
 	mimeType = "image/x-atari-rgb-intermediate";
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "image/x-atari-rgb-intermediate"
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

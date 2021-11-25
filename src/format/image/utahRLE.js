@@ -9,7 +9,7 @@ export class utahRLE extends Format
 	magic = ["Utah Raster Toolkit bitmap","RLE image data"];
 	converters = ["convert","recoil2png"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

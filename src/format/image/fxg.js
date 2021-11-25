@@ -8,7 +8,7 @@ export class fxg extends Format
 	ext = [".fxg"];
 	magic = ["Flash XML Graphics"];
 	mimeType = "image/x-flash-xml-graphics";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType : "image/x-flash-xml-graphics"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

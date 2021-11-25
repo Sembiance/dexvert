@@ -9,7 +9,7 @@ export class hippel extends Format
 	magic = ["Hippel module","Hippel 7V module","Hippel COmpressed SOng module","Hippel-COSO Module sound file"];
 	converters = ["uade123",{"program":"uade123","flags":{"uadeType":"JochenHippel_UADE"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

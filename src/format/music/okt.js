@@ -9,7 +9,7 @@ export class okt extends Format
 	magic = ["Oktalyzer module","Oktalyzer Audio file"];
 	converters = ["xmp","zxtune123","openmpt123","uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

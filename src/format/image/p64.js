@@ -12,7 +12,7 @@ export class p64 extends Format
 	trustMagic = true;
 	fileSize = 10050;
 
-	converters = ["nconvert","recoil2png","abydosconvert","view64"]
+	converters = ["nconvert","recoil2png",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -32,6 +32,6 @@ exports.meta =
 
 };
 
-exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert", "view64"];
+exports.converterPriority = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

@@ -8,9 +8,9 @@ export class dpx extends Format
 	ext = [".dpx"];
 	mimeType = "image/x-digital-picture-exchange";
 	magic = [{},"DPX image data"];
-	converters = ["convert","abydosconvert","nconvert"]
+	converters = ["convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : [/^Digital Moving Picture Exchange [Bb]itmap/, "DPX image data"]
 };
 
-exports.converterPriority = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

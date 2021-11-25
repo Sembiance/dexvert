@@ -7,7 +7,7 @@ export class paulSummers extends Format
 	ext = [".snk"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

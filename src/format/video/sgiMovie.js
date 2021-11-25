@@ -9,7 +9,7 @@ export class sgiMovie extends Format
 	magic = ["SGI video","Silicon Graphics movie file"];
 	converters = ["ffmpeg","xanim"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

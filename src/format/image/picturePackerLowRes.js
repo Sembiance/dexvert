@@ -8,7 +8,7 @@ export class picturePackerLowRes extends Format
 	ext = [".pp1"];
 	mimeType = "image/x-stos-picturepacker-lowres";
 	magic = ["Picture Packer bitmap"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic            : ["Picture Packer bitmap"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

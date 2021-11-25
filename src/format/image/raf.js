@@ -8,9 +8,9 @@ export class raf extends Format
 	ext = [".raf"];
 	magic = ["Fujifilm Raw image"];
 	mimeType = "image/x-fuji-raf";
-	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-fuji-raf"
 };
 
-exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

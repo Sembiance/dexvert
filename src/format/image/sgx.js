@@ -10,7 +10,7 @@ export class sgx extends Format
 	magic = ["SuperView Graphics bitmap","SGX Graphics bitmap"];
 	mimeType = "image/x-superview";
 	notes = "Some image files are not yet supported such as testimg-lz77.sgx";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -28,6 +28,6 @@ exports.meta =
 	notes          : "Some image files are not yet supported such as testimg-lz77.sgx"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

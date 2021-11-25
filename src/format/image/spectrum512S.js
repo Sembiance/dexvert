@@ -9,7 +9,7 @@ export class spectrum512S extends Format
 	mimeType = "image/x-spectrum512-smooshed";
 	magic = ["Spectrum 512 compressed/smooshed bitmap"];
 	notes = "Some test files fail to convert correctly: AMBER_F, CANDLE, AI_R_010";
-	converters = ["recoil2png","abydosconvert","nconvert","deark"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`,"nconvert","deark"]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 	notes    : "Some test files fail to convert correctly: AMBER_F, CANDLE, AI_R_010"
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert", "nconvert", "deark"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert", "deark"];
 
 */

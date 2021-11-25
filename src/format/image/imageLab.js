@@ -8,7 +8,7 @@ export class imageLab extends Format
 	ext = [".b_w",".b&w"];
 	mimeType = "image/x-imagelab";
 	magic = ["ImageLab bitmap"];
-	converters = ["nconvert","abydosconvert"]
+	converters = ["nconvert",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["ImageLab bitmap"]
 };
 
-exports.converterPriority = ["nconvert", "abydosconvert"];
+exports.converterPriority = ["nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 */

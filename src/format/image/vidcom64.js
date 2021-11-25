@@ -11,7 +11,7 @@ export class vidcom64 extends Format
 	weakMagic = true;
 	fileSize = 10050;
 
-	converters = ["nconvert","recoil2png","abydosconvert","view64"]
+	converters = ["nconvert","recoil2png",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -31,6 +31,6 @@ exports.meta =
 };
 
 // nconvert produces clearer output compared to recoil2png
-exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert", "view64"];
+exports.converterPriority = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

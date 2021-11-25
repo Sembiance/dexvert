@@ -8,9 +8,9 @@ export class jng extends Format
 	ext = [".jng"];
 	mimeType = "image/x-jng";
 	magic = ["JPEG Network Graphics","JNG video data"];
-	converters = ["convert","nconvert","abydosconvert"]
+	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : ["JPEG Network Graphics", "JNG video data"]
 };
 
-exports.converterPriority = ["convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

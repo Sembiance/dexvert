@@ -8,7 +8,7 @@ export class naiveNIE extends Format
 	ext = [".nie"];
 	mimeType = "image/nie";
 	magic = ["Naive Image format NIE bitmap"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Naive Image format NIE bitmap"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

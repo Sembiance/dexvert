@@ -8,7 +8,7 @@ export class hiEddi extends Format
 	ext = [".hed"];
 	mimeType = "image/x-hi-eddi";
 	fileSize = 9218;
-	converters = ["nconvert","abydosconvert","view64"]
+	converters = ["nconvert",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	fileSize : 9218
 };
 
-exports.converterPriority = ["nconvert", "abydosconvert", "view64"];
+exports.converterPriority = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

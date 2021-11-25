@@ -8,7 +8,7 @@ export class specialFX extends Format
 	ext = [".jd",".doda"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

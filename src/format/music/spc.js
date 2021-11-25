@@ -9,7 +9,7 @@ export class spc extends Format
 	magic = ["SNES SPC700 sound file","Super Famicon/Super NES audio dump"];
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

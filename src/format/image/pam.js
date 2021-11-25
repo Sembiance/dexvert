@@ -10,7 +10,7 @@ export class pam extends Format
 	magic = ["Portable Arbitrary Map bitmap","Portable Any Map","Netpbm PAM image file"];
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

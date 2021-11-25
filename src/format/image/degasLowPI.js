@@ -14,4 +14,4 @@ exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer
 
 // abydosconvert hangs on KENSHIN.PI1
 // nconvert fails to handle certain files properly such as alf23.pi1
-exports.converterPriority = ["recoil2png", "abydosconvert", "nconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];

@@ -9,7 +9,7 @@ export class aif extends Format
 	magic = ["AIFF Audio Interchange File Format","IFF data, AIFF audio","Audio Interchange File Format"];
 	converters = ["sox","ffmpeg","vgmstream"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

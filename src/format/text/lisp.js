@@ -11,7 +11,7 @@ export class lisp extends Format
 	untouched = true;
 	hljsLang = "lisp";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

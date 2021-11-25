@@ -6,7 +6,7 @@ export class teletextPackets extends Format
 	name = "Teletext Packets";
 	ext = [".t42"];
 	mimeType = "text/x-t42-packets";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "text/x-t42-packets"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

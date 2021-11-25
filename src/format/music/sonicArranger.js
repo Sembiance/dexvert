@@ -8,7 +8,7 @@ export class sonicArranger extends Format
 	magic = ["Sonic Arranger module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class professionalSoundArtists extends Format
 	magic = ["Professional Sound Artists module","PSA archive data"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

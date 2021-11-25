@@ -9,7 +9,7 @@ export class multiTracker extends Format
 	magic = [{}];
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

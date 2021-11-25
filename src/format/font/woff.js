@@ -10,7 +10,7 @@ export class woff extends Format
 
 steps = [null];
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -10,6 +10,6 @@ export class xwd extends Format
 	magic         = ["X-Windows Screen Dump", "XWD X Windows Dump image data"];
 
 	// Neither nconvert nor convert properly handle all the files, but nconvert does a little bit better with color images
-	converters    = ["nconvert", "abydosconvert", "convert"]
+	converters    = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "convert"]
 	metaProviders = ["image"];
 }

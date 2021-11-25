@@ -8,7 +8,7 @@ export class info extends Format
 	ext = [".info"];
 	magic = [{},"Amiga Workbench project icon"];
 	mimeType = "image/x-amiga-icon";
-	converters = ["deark","abydosconvert"]
+	converters = ["deark",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType : "image/x-amiga-icon"
 };
 
-exports.converterPriority = ["deark", "abydosconvert"];
+exports.converterPriority = ["deark", `abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -9,7 +9,7 @@ export class kodakK25 extends Format
 	fileSize = [77888,140352];
 	magic = [{}];
 	mimeType = "image/x-kodak-k25";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 	mimeType : "image/x-kodak-k25"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -8,7 +8,7 @@ export class gameMusicCreator extends Format
 	ext = [".gmc"];
 	converters = ["uade123","xmp"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

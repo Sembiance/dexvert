@@ -8,7 +8,7 @@ export class cue extends Format
 	ext = [".cue"];
 	magic = ["ISO CDImage cue","Cue Sheet"];
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

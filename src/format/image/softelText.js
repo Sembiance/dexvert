@@ -6,7 +6,7 @@ export class softelText extends Format
 	name = "Softel Teletext";
 	ext = [".ep1"];
 	mimeType = "text/x-softel-teletext";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -20,6 +20,6 @@ exports.meta =
 	mimeType : "text/x-softel-teletext"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

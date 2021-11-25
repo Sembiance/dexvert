@@ -8,7 +8,7 @@ export class pabloPaint extends Format
 	ext = [".pa3",".ppp"];
 	mimeType = "image/x-pablo-packed-picture";
 	magic = ["PabloPaint packed bitmap"];
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["PabloPaint packed bitmap"]
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -9,7 +9,7 @@ export class amosSamples extends Format
 	magic = ["AMOS Samples Bank"];
 	converters = ["amosbank"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

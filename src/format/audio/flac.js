@@ -10,7 +10,7 @@ export class flac extends Format
 	magic = ["FLAC audio bitstream data","FLAC lossless compressed audio","FLAC (Free Lossless Audio Codec)"];
 	converters = ["sox"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

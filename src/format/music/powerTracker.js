@@ -7,7 +7,7 @@ export class powerTracker extends Format
 	ext = [".pt"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

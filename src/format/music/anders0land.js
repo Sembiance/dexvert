@@ -8,7 +8,7 @@ export class anders0land extends Format
 	magic = ["Anders 0land music"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

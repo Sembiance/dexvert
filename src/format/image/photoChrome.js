@@ -8,7 +8,7 @@ export class photoChrome extends Format
 	ext = [".pcs"];
 	mimeType = "image/x-photochrome-screen";
 	magic = ["PhotoChrome bitmap"];
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["PhotoChrome bitmap"]
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

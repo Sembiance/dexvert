@@ -9,7 +9,7 @@ export class rla extends Format
 	magic = ["Alias Wavefront Raster bitmap"];
 	converters = ["convert","nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

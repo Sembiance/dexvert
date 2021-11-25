@@ -9,7 +9,7 @@ export class generalDigiMusic extends Format
 	magic = ["General Digital Music"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

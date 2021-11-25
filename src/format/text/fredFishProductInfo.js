@@ -7,7 +7,7 @@ export class fredFishProductInfo extends Format
 	magic = ["Fred Fish's Product-Info"];
 	untouched = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

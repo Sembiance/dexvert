@@ -8,7 +8,7 @@ export class glueMon extends Format
 	magic = ["GlueMon module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

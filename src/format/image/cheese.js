@@ -8,7 +8,7 @@ export class cheese extends Format
 	ext = [".che"];
 	mimeType = "image/x-cheese";
 	fileSize = 20482;
-	converters = ["recoil2png","nconvert","abydosconvert","view64"]
+	converters = ["recoil2png","nconvert",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	fileSize : 20482
 };
 
-exports.converterPriority = ["recoil2png", "nconvert", "abydosconvert", "view64"];
+exports.converterPriority = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

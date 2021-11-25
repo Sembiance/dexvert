@@ -8,7 +8,7 @@ export class trs extends Format
 	ext = [".trs"];
 	magic = ["True Colour Sprites bitmap"];
 	mimeType = "image/x-spooky-sprites";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType    : "image/x-spooky-sprites"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

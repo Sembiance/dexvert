@@ -8,7 +8,7 @@ export class earAche extends Format
 	magic = ["EarAche module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

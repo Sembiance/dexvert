@@ -8,7 +8,7 @@ export class nrrd extends Format
 	ext = [".nrrd"];
 	magic = ["Nearly Raw Raster Data"];
 	mimeType = "image/x-nrrd";
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType : "image/x-nrrd"
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

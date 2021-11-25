@@ -8,9 +8,9 @@ export class viff extends Format
 	ext = [".viff",".xv"];
 	mimeType = "image/x-viff";
 	magic = ["Khoros Visualization Image File Format"];
-	converters = ["convert","abydosconvert"]
+	converters = ["convert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : ["Khoros Visualization Image File Format"]
 };
 
-exports.converterPriority = ["convert", "abydosconvert"];
+exports.converterPriority = ["convert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

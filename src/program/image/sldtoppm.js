@@ -1,13 +1,16 @@
-/*
 import {Program} from "../../Program.js";
 
 export class sldtoppm extends Program
 {
-	website = "http://netpbm.sourceforge.net/";
-	gentooPackage = "media-libs/netpbm";
+	website        = "http://netpbm.sourceforge.net/";
+	gentooPackage  = "media-libs/netpbm";
 	gentooUseFlags = "X jbig jpeg png postscript rle tiff xml zlib";
+	bin            = "sldtoppm";
+	args           = r => [r.inFile()];
+	runOptions     = async r => ({stdoutFilePath : await r.outFile("out.ppm")});
+	chain          = "convert";
 }
-*/
+
 
 /*
 "use strict";

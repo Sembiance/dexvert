@@ -10,7 +10,7 @@ export class fpx extends Format
 	magic = ["Generic OLE2","Composite Document File","OLE2 Compound Document Format"];
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

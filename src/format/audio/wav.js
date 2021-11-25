@@ -10,7 +10,7 @@ export class wav extends Format
 	magic = ["RIFF/WAVe standard Audio",{},"Waveform Audio (PCMWAVEFORMAT)"];
 	converters = ["ffmpeg"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

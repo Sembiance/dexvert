@@ -8,9 +8,9 @@ export class nikon extends Format
 	ext = [".nef",".nrw"];
 	magic = ["Nikon raw image",{}];
 	mimeType = "image/x-nikon-nef";
-	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-nikon-nef"
 };
 
-exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

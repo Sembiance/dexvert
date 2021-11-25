@@ -10,7 +10,7 @@ export class adobeType1 extends Format
 
 steps = [null];
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

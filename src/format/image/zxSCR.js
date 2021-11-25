@@ -10,9 +10,9 @@ export class zxSCR extends Format
 
 	mimeType = "image/x-zx-spectrum-standard-screen";
 	notes = "Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.";
-	converters = ["recoil2png","convert","nconvert","abydosconvert"]
+	converters = ["recoil2png","convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -30,7 +30,7 @@ exports.meta =
 	notes               : "Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this."
 };
 
-exports.converterPriority = ["recoil2png", "convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["recoil2png", "convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

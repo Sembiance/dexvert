@@ -8,7 +8,7 @@ export class stosBank extends Format
 	ext = [".mbk",".mbs"];
 	mimeType = "application/x-stos-memorybank";
 	magic = ["STOS Memory Bank","STOS data"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["STOS Memory Bank", "STOS data"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

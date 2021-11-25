@@ -8,7 +8,7 @@ export class x3f extends Format
 	ext = [".x3f"];
 	magic = ["Sigma RAW Image","Foveon X3F raw image data","Sigma - Foveon X3 raw picture"];
 	mimeType = "image/x-sigma-x3f";
-	converters = ["dcraw","convert","abydosconvert","nconvert"]
+	converters = ["dcraw","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	mimeType : "image/x-sigma-x3f"
 };
 
-exports.converterPriority = ["dcraw", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["dcraw", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 */

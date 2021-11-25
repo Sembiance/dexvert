@@ -8,12 +8,11 @@ export class farbfeld extends Format
 	ext = [".ff"];
 	mimeType = "image/x-farbfeld";
 	magic = [{}];
-	converters = ["deark","abydosconvert"]
+	converters = ["deark",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
 "use strict";
-/* eslint-disable prefer-named-capture-group */
 const XU = require("@sembiance/xu");
 
 exports.meta =
@@ -22,9 +21,9 @@ exports.meta =
 	website  : "http://fileformats.archiveteam.org/wiki/Farbfeld",
 	ext      : [".ff"],
 	mimeType : "image/x-farbfeld",
-	magic    : [/[Ff]arbfeld ([Ii]mage|bitmap)/]
+	magic    : [/[Ff]arbfeld ([Ii]mage|bitmap)/]	// eslint-disable-line prefer-named-capture-group
 };
 
-exports.converterPriority = ["deark", "abydosconvert"];
+exports.converterPriority = ["deark", `abydosconvert[format:${this.mimeType}]`];
 
 */

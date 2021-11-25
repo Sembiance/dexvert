@@ -10,7 +10,7 @@ export class xpm extends Format
 	magic = ["X PixMap bitmap","X-Windows Pixmap Image","X pixmap image"];
 	converters = ["convert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

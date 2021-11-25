@@ -12,7 +12,7 @@ export class batDOS extends Format
 	untouched = true;
 	hljsLang = "bat";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

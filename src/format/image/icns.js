@@ -8,7 +8,7 @@ export class icns extends Format
 	ext = [".icns"];
 	mimeType = "image/x-icns";
 	magic = ["Mac OS X icon","Apple Icon Image Format"];
-	converters = ["deark","abydosconvert"]
+	converters = ["deark",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Mac OS X icon", "Apple Icon Image Format"]
 };
 
-exports.converterPriority = ["deark", "abydosconvert"];
+exports.converterPriority = ["deark", `abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -10,7 +10,7 @@ export class deviceIndependentFile extends Format
 	magic = ["TeX DVI file","Device Independent Document"];
 	converters = ["dvi2pdf"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -9,7 +9,7 @@ export class packedAnimationFileVideo extends Format
 	notes = "Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362";
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"paf"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

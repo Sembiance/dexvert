@@ -10,7 +10,7 @@ export class lingoScript extends Format
 	weakMagic = true;
 	untouched = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

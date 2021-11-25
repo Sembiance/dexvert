@@ -7,7 +7,7 @@ export class soundControl extends Format
 	ext = [".sc"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

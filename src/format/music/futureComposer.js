@@ -9,7 +9,7 @@ export class futureComposer extends Format
 	magic = ["Future Composer "];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

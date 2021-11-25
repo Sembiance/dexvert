@@ -8,9 +8,9 @@ export class pfm extends Format
 	ext = [".pfm"];
 	mimeType = "image/x-portable-floatmap";
 	magic = ["Portable Float Map color bitmap"];
-	converters = ["convert","abydosconvert","nconvert"]
+	converters = ["convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : ["Portable Float Map color bitmap"]
 };
 
-exports.converterPriority = ["convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

@@ -9,7 +9,7 @@ export class theDraw extends Format
 	forbidExtMatch = true;
 	mimeType = "image/x-thedraw";
 	magic = ["TheDraw design"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 	magic          : ["TheDraw design"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

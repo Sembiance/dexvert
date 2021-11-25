@@ -10,7 +10,7 @@ export class csv extends Format
 	magic = ["CSV text"];
 	priority = 3;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

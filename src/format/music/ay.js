@@ -8,7 +8,7 @@ export class ay extends Format
 	magic = ["Spectrum 128 tune","AY chiptune"];
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

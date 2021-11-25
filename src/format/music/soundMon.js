@@ -10,7 +10,7 @@ export class soundMon extends Format
 	notes = "Not all files convert properly, such as CYBERSONG and SANXION";
 	converters = [{"program":"uade123","flags":{"uadeType":"SoundMon2.0"}},{"program":"uade123","flags":{"uadeType":"SoundMon2.2"}}]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

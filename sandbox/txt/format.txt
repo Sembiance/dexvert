@@ -129,3 +129,6 @@ A method that will be executed after converters have been attempted
 
 >>> verify = async ({dexState, dexFile, identifications, familySpecific...}) { ... }
 A method that will further verify that the given output file is proper. Currently only used by image family formats.
+
+>>> converters = ["recoil2png", ...]  ||  async dexState => ["recoil2png", "..."]
+An array of converters to try or a function that returns an array of converters to try.

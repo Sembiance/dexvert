@@ -8,7 +8,7 @@ export class vtf extends Format
 	ext = [".vtf"];
 	mimeType = "image/vnd.valve.source.texture";
 	magic = ["Valve Texture Format"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Valve Texture Format"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -13,7 +13,7 @@ export class fileList extends Format
 
 idCheck = undefined;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

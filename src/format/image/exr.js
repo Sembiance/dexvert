@@ -8,7 +8,7 @@ export class exr extends Format
 	ext = [".exr"];
 	mimeType = "image/x-exr";
 	magic = ["OpenEXR High Dynamic-Range bitmap","OpenEXR image data"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["OpenEXR High Dynamic-Range bitmap", "OpenEXR image data"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

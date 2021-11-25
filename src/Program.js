@@ -49,6 +49,7 @@ export class Program
 			qemuData  : {type : "function", length : [0, 1]},
 			exec      : {type : "function", length : 1},
 			args      : {type : "function", length : 1},
+			cwd       : {type : "function", length : 1},
 			verify    : {type : "function", length : [0, 2]},
 			pre       : {type : "function", length : 1},
 			post      : {type : "function", length : 1}
@@ -61,7 +62,7 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, isChain}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix, isChain}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -76,6 +77,12 @@ export class Program
 
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags});
+		r.cwd = f.root;
+		if(this.cwd)
+		{
+			const newCWD = await this.cwd(r);
+			r.cwd = newCWD.startsWith("/") ? newCWD : path.resolve(f.root, newCWD);
+		}
 
 		if(this.pre)
 			await this.pre(r);
@@ -91,7 +98,7 @@ export class Program
 			// run a program on disk
 			r.bin = this.bin;
 			r.args = (await this.args(r)).map(arg => arg.toString());
-			r.runOptions = {cwd : f.root, timeout};
+			r.runOptions = {cwd : r.cwd, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(xu.verbose>=4)
@@ -175,9 +182,11 @@ export class Program
 			const newName = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name));
 			if(ro.regex)
 			{
+				const filenamesWithoutNum = f.files.new.map(newFile => newFile.base.replace(ro.regex, `$<pre>${newName}$<post>`));
+				const numPart = (filenamesWithoutNum.unique().length<filenamesWithoutNum.length) ? "$<num>" : "";
 				for(const newFile of f.files.new)
 				{
-					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}${f.files.new.length>1 ? "$<num>" : ""}$<post>`);
+					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}${numPart}${suffix || ""}$<post>`);
 					xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
 					await newFile.rename(replacementName, {replaceExisting : !!isChain});
 				}
@@ -208,35 +217,71 @@ export class Program
 		}
 
 		// check to see if we need to chain to another program
-		if(this.chain && f.files.new?.length>0)
+		if((this.chain || chain) && f.files.new?.length>0)
 		{
-			for(const progRaw of this.chain.split("->").map(v => v.trim()))
+			const chainParts = [];
+			if(this.chain)
+				chainParts.push(...this.chain.split("->"));
+			if(chain)
+				chainParts.push(...chain.split("->"));
+			for(const [i, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 			{
 				const newFiles = Array.from(f.files.new);
 				const chainF = await f.clone();
 				chainF.changeType("new", "prev");
-				for(const newFile of newFiles)
+
+				const handleNewFiles = async () =>
+				{
+					if(!chainF.new)
+					{
+						xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
+						return;
+					}
+
+					xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
+
+					// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
+					// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
+					// in the future though we could use this code here to help add collision avoidance
+					//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
+					
+					await f.addAll("new", chainF.files.new);
+					for(const inputFile of chainF.files.input)
+					{
+						if(!chainF.files.new.some(v => v.absolute===inputFile.absolute))
+							await f.remove("new", inputFile, {unlink : true});
+					}
+					chainF.changeType("new", "prev");
+				};
+				
+				const chainProgOpts = {isChain : true};
+
+				// if we are the last item in the chain, pass the originalInput name
+				// we don't do this every time because some intermediate files may produce multiple output files that we don't want to clobber (ani/EYES2.gif if you add a middle step deark -> dexvert -> *joinAsGIF)
+				if(+i===chainParts.length-1)
+					chainProgOpts.originalInput = originalInput || f.input;
+
+				if(progRaw.startsWith("*"))
 				{
 					chainF.removeType("input");
-					await chainF.add("input", newFile);
+					await chainF.addAll("input", newFiles);
 
-					xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
+					xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
 
-					await Program.runProgram(progRaw, chainF, {isChain : true});
-					
-					if(chainF.new)
+					await Program.runProgram(progRaw.substring(1), chainF, chainProgOpts);
+					await handleNewFiles();
+				}
+				else
+				{
+					for(const newFile of newFiles)
 					{
-						xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
+						chainF.removeType("input");
+						await chainF.add("input", newFile);
 
-						// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
-						// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
-						// in the future though we could use this code here to help add collision avoidance
-						//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
-						
-						await f.addAll("new", chainF.files.new);
-						if(!chainF.files.new.some(v => v.absolute===newFile.absolute))
-							await f.remove("new", newFile, {unlink : true});
-						chainF.changeType("new", "prev");
+						xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
+
+						await Program.runProgram(progRaw, chainF, chainProgOpts);
+						await handleNewFiles();
 					}
 				}
 			}
@@ -248,12 +293,29 @@ export class Program
 	// runs the programid program
 	static async runProgram(progRaw, fRaw, progOptions={})
 	{
+		if(progRaw.includes("->"))
+		{
+			const chainParts = progRaw.split("->");
+			progOptions.chain = chainParts.slice(1).join("->");
+			progRaw = chainParts[0].trim();	// eslint-disable-line no-param-reassign
+		}
+
 		const {programid, flagsRaw=""} = progRaw.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
 		const flags = Object.fromEntries((flagsRaw.match(/\[[^:\]]+:?[^\]]*]/g) || []).map(flag =>
 		{
 			const {name, val} = flag.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/)?.groups || {};
 			return (name ? [name, (val.length>0 ? (val.isNumber() ? +val : val) : true)] : null);
-		}).filter(v => !!v));
+		}).filter(v => !!v).filter(([name, val]) =>
+		{
+			// see if any of the flags are actually programOptions
+			if(["suffix"].includes(name))
+			{
+				progOptions[name] = val;
+				return false;
+			}
+
+			return true;
+		}));
 
 		// run prog
 		if(!progOptions.flags)

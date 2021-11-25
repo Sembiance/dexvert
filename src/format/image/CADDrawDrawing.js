@@ -1,16 +1,28 @@
-/*
 import {Format} from "../../Format.js";
 
 export class CADDrawDrawing extends Format
 {
-	name = "TommySoftware CAD/Draw Drawing";
-	website = "https://archive.org/details/t425l1e_zip";
-	ext = [".t4g",".t3g",".t2g",".mpg"];
+	name           = "TommySoftware CAD/Draw Drawing";
+	website        = "https://archive.org/details/t425l1e_zip";
+	ext            = [".t4g", ".t3g", ".t2g", ".mpg"];
 	forbidExtMatch = true;
-	magic = ["TommySoftware CAD/Draw drawing","CAD/Draw TVG"];
-	converters = undefined
+	magic          = ["TommySoftware CAD/Draw drawing", "CAD/Draw TVG"];
+	converters     = r =>
+	{
+		switch(r.f.input.ext.toLowerCase())
+		{
+			case ".mpg":
+				return ["MPG_T2G -> T2G_T3G -> T3G_T4G -> CADDraw"];
+			case ".t2g":
+				return ["T2G_T3G -> T3G_T4G -> CADDraw"];
+			case ".t3g":
+				return ["T3G_T4G -> CADDraw"];
+			default:
+				return ["CADDraw"];
+		}
+	};
 }
-*/
+
 /*
 "use strict";
 const XU = require("@sembiance/xu"),

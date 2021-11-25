@@ -8,7 +8,7 @@ export class dicom extends Format
 	ext = [".dcm",".dic"];
 	mimeType = "application/dicom";
 	magic = ["DICOM medical imaging bitmap","Digital Imaging and Communications in Medicine File Format"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic      : ["DICOM medical imaging bitmap", "Digital Imaging and Communications in Medicine File Format"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

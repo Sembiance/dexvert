@@ -10,7 +10,7 @@ export class bdf extends Format
 
 steps = [null];
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

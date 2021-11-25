@@ -9,7 +9,7 @@ export class facePainter extends Format
 	mimeType = "image/x-face-painter";
 	fileSize = 10004;
 
-	converters = ["recoil2png","abydosconvert","view64"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert", "view64"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

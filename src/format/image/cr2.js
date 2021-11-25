@@ -8,9 +8,9 @@ export class cr2 extends Format
 	ext = [".cr2"];
 	magic = ["Canon RAW 2 format","Canon CR2 raw image data"];
 	mimeType = "image/x-canon-cr2";
-	converters = ["darktable-cli","convert","abydosconvert","nconvert"]
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	mimeType : "image/x-canon-cr2"
 };
 
-exports.converterPriority = ["darktable-cli", "convert", "abydosconvert", "nconvert"];
+exports.converterPriority = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 
 exports.inputMeta = (state, p, cb) => p.family.darkTableInputMeta(state, p, cb);
 

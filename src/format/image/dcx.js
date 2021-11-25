@@ -8,9 +8,9 @@ export class dcx extends Format
 	ext = [".dcx"];
 	mimeType = "image/x-dcx";
 	magic = ["Multipage Zsoft Paintbrush Bitmap Graphics","DCX multi-page PCX image data","Graphics Multipage PCX bitmap"];
-	converters = ["convert","nconvert","abydosconvert"]
+	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*
@@ -26,7 +26,7 @@ exports.meta =
 	magic    : ["Multipage Zsoft Paintbrush Bitmap Graphics", "DCX multi-page PCX image data", "Graphics Multipage PCX bitmap"]
 };
 
-exports.converterPriority = ["convert", "nconvert", "abydosconvert"];
+exports.converterPriority = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
 

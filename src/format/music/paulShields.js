@@ -7,7 +7,7 @@ export class paulShields extends Format
 	ext = [".ps"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -9,7 +9,7 @@ export class realTracker extends Format
 	magic = ["Real Tracker module"];
 	converters = ["xmp","zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

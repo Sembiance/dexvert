@@ -7,7 +7,7 @@ export class tobiasRichterSlideshow extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Tobias_Richter_Fullscreen_Slideshow";
 	ext = [".pci"];
 	mimeType = "image/x-tobias-richter-fullscreen-slideshow";
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -22,6 +22,6 @@ exports.meta =
 	mimeType : "image/x-tobias-richter-fullscreen-slideshow"
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

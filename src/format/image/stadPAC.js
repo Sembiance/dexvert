@@ -8,7 +8,7 @@ export class stadPAC extends Format
 	ext = [".pac",".seq"];
 	mimeType = "image/x-stad";
 	magic = ["STAD hi-res","Atari ST STAD bitmap image data"];
-	converters = ["nconvert","recoil2png","abydosconvert"]
+	converters = ["nconvert","recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["STAD hi-res", "Atari ST STAD bitmap image data"]
 };
 
-exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert"];
+exports.converterPriority = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

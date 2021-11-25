@@ -9,7 +9,7 @@ export class zip extends Format
 	magic = ["ZIP compressed archive","Zip archive data","ZIP Format",{},{},"Zip multi-volume archive data"];
 	converters = ["unzip","deark",{"program":"deark","flags":{"dearkOpts":["zip:scanmode"]}},"unar","7z","UniExtract"]
 
-inputMeta = undefined;
+metaProviders = [""];
 
 post = undefined;
 

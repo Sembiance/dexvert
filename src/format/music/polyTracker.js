@@ -9,7 +9,7 @@ export class polyTracker extends Format
 	magic = ["Poly Tracker PTM Module","Poly Tracker Module"];
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

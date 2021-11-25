@@ -50,9 +50,6 @@ export class Format
 		format.familyid = family.familyid;
 		if(preValidate)
 			preValidate(format);
-		
-		if((format.converters || []).includes("abydosconvert") && !format.mimeType)
-			throw new Error(`format [${this.formatid}] has abydosconvert as a converter but doesn't have a mimeType set which is required for abydos`);
 
 		validateClass(format, {
 			// required
@@ -100,7 +97,7 @@ export class Format
 
 			// conversion
 			metaProviders : {type : ["string"], enum : (family.metaids || [])},
-			converters    : {type : ["string", Object]},
+			converters    : {types : [Array, "function"]},
 			keepFilename  : {type : "boolean"},
 			safeExt       : {type : "function", length : [0, 1]},
 			pre           : {type : "function", length : [0, 1]},

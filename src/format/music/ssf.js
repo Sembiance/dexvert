@@ -10,7 +10,7 @@ export class ssf extends Format
 	notes = "Minissf files don't convert, not sure why yet.";
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

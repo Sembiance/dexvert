@@ -8,7 +8,7 @@ export class maniacsOfNoise extends Format
 	magic = ["M.O.N New module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

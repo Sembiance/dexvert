@@ -8,7 +8,7 @@ export class gx2 extends Format
 	ext = [".gx2"];
 	mimeType = "image/x-gx2";
 	magic = ["GX2 bitmap"];
-	converters = ["abydosconvert"]
+	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["GX2 bitmap"]
 };
 
-exports.converterPriority = ["abydosconvert"];
+exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
 
 */

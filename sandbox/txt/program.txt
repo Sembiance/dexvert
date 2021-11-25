@@ -43,14 +43,14 @@ Can run r.inFile() to get the input file or r.outFile("out.png") to get the outf
 >>> runOptions = ({virtualX : true, timeout : xu.MINUTE})   ||   runOptions = async (runState) => ({...})
 An object (or a function that returns an object) of run options to be passed into runUtil.run. Will override defaults.
 
+>>> cwd = async r => r.outDir()
+If cwd is set, the program will be run from within the supplied directory path instead of in the tmp dir
+
 >>> outExt = ".svg"   ||   async (runState) => { ... }
 Return the extension files produced by this program should be renamed to
 
 >>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
-
->>> stdoutFilePath = async (runState) => { ... }
-Return a filePath to redirect stdout to.
 
 >>> pre = async (runState) => {}
 This will be executed directly BEFORE the program is run (either in or exec)
@@ -120,10 +120,6 @@ A function that returns an array of steps to run serially
 >>> preArgs = (state, p, r, cb) => {}
 This is executed directly before calling args()
 
->>> cwd = (state, p, r) => state.output.absolute
-If set, the return result will be the new CWD.
-Normally I create a temporary CWD and do processing there.
-Note, when changing the cwd, the input.filePath and output.dirPath will automatically be updated with proper relative paths
 
 
 >>> redirectOutput = (state, p, r) => "/path/to/output.txt"

@@ -10,7 +10,7 @@ export class neochrome extends Format
 	fileSize = {".neo":32128};
 	filesRequired = undefined;
 	filesOptional = undefined;
-	converters = ["recoil2png","nconvert","abydosconvert"]
+	converters = ["recoil2png","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
 preSteps = [null];
 }
@@ -33,6 +33,6 @@ exports.meta =
 
 exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".rst"; }];
 
-exports.converterPriority = ["recoil2png", "nconvert", "abydosconvert"];
+exports.converterPriority = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 
 */

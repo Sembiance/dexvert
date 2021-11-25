@@ -12,7 +12,7 @@ export class asm extends Format
 	untouched = true;
 	hljsLang = "x86asm";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

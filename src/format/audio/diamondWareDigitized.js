@@ -10,7 +10,7 @@ export class diamondWareDigitized extends Format
 	magic = ["DiamondWare Digitized audio"];
 	converters = ["awaveStudio"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

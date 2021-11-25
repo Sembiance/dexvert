@@ -9,7 +9,7 @@ export class liquidTracker extends Format
 	magic = ["Liquid Tracker module"];
 	converters = ["xmp","zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

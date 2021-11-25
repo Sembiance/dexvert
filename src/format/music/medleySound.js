@@ -8,7 +8,7 @@ export class medleySound extends Format
 	magic = ["MedlySound module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

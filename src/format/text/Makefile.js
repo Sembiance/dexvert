@@ -13,7 +13,7 @@ export class Makefile extends Format
 	untouched = true;
 	hljsLang = "makefile";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

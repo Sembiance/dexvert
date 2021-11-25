@@ -9,7 +9,7 @@ export class digiTrakker extends Format
 	magic = ["DigiTrakker MDL Module","Digitrakker module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

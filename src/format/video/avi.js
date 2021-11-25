@@ -10,7 +10,7 @@ export class avi extends Format
 	magic = ["AVI Audio Video Interleaved",{},"Audio/Video Interleaved Format"];
 	converters = ["ffmpeg","xanim"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

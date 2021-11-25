@@ -8,7 +8,7 @@ export class asylum extends Format
 	magic = ["Asylum Music Format module"];
 	converters = ["xmp","openmpt123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

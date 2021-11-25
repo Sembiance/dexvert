@@ -10,7 +10,7 @@ export class latexAUXFile extends Format
 	weakMagic = true;
 	untouched = true;
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

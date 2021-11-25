@@ -8,7 +8,7 @@ export class mpp extends Format
 	ext = [".mpp"];
 	mimeType = "image/x-multi-palette-picture";
 	magic = ["Multi Palette Picture bitmap"];
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Multi Palette Picture bitmap"]
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

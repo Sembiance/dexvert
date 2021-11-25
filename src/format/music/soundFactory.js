@@ -8,7 +8,7 @@ export class soundFactory extends Format
 	ext = [".psf"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

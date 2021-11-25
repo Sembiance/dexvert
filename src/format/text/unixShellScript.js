@@ -12,7 +12,7 @@ export class unixShellScript extends Format
 	untouched = true;
 	hljsLang = "sh";
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

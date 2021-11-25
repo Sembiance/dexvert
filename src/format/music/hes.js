@@ -9,7 +9,7 @@ export class hes extends Format
 	magic = ["Hudson Entertainment System Sound Format dump"];
 	converters = ["zxtune123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

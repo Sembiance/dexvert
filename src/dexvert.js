@@ -123,17 +123,18 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 			if(format.pre)
 				await format.pre(dexState);
 			
-			xu.log3`\nTrying ${fg.yellowDim((format.converters || []).length)} ${format.formatid} converters...`;
+			const converters = Array.isArray(format.converters) ? format.converters : await format.converters(dexState);
+			xu.log3`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
 
 			// try each converter specificied, until we have output files or have been marked as processed
-			for(const converter of (format.converters || []))
+			for(const converter of (converters || []))
 			{
 				const progs = converter.split("&").map(v => v.trim());
-				for(const prog of progs)
+				for(const [i, prog] of Object.entries(progs))
 				{
 					xu.log4`Running converter ${prog}...`;
 
-					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input});
+					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0});
 					dexState.ran.push(r);
 
 					xu.log3`Verifying ${(dexState.f.files.new || []).length} new files...`;
@@ -152,18 +153,14 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 							continue;
 						}
 
-						await dexState.f.add("output", newFile);
-						
 						// if a produced file is older than 2020, then we assume it's the proper date
-						if((new Date(newFile.ts)).getFullYear()<2020)
-							continue;
-						
-						// otherwise we set the output file to have the same date ts as the input file if it's newer than the output file
-						if(inputFile.ts<newFile.ts)
+						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
 						{
 							newFile.ts = inputFile.ts;
 							await Deno.utime(newFile.absolute, Math.floor(inputFile.ts/xu.SECOND), Math.floor(inputFile.ts/xu.SECOND));
 						}
+
+						await dexState.f.add("output", newFile);
 					}
 
 					dexState.f.removeType("new");

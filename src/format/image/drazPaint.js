@@ -9,7 +9,7 @@ export class drazPaint extends Format
 	mimeType = "image/x-draz-paint";
 	magic = ["Drazpaint"];
 	weakMagic = true;
-	converters = ["nconvert","recoil2png","abydosconvert","view64"]
+	converters = ["nconvert","recoil2png",`abydosconvert[format:${this.mimeType}]`,"view64"]
 }
 */
 /*
@@ -26,6 +26,6 @@ exports.meta =
 	weakMagic : true
 };
 
-exports.converterPriority = ["nconvert", "recoil2png", "abydosconvert", "view64"];
+exports.converterPriority = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
 */

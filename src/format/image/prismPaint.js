@@ -8,7 +8,7 @@ export class prismPaint extends Format
 	ext = [".pnt",".tpi"];
 	mimeType = "image/x-prism-paint";
 	magic = ["Prism Paint bitmap"];
-	converters = ["recoil2png","abydosconvert"]
+	converters = ["recoil2png",`abydosconvert[format:${this.mimeType}]`]
 }
 */
 /*
@@ -24,6 +24,6 @@ exports.meta =
 	magic    : ["Prism Paint bitmap"]
 };
 
-exports.converterPriority = ["recoil2png", "abydosconvert"];
+exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 
 */

@@ -8,7 +8,7 @@ export class markCooksey extends Format
 	magic = ["Mark Cooksey module"];
 	converters = ["uade123"]
 
-inputMeta = undefined;
+metaProviders = [""];
 }
 */
 /*

@@ -1,26 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class dataShowSprite extends Format
 {
-	name = "DataShow Sprite";
-	ext = [".spr"];
-	magic = ["DataShow Sprite"];
+	name        = "DataShow Sprite";
+	ext         = [".spr"];
+	magic       = ["DataShow Sprite"];
 	unsupported = true;
-	notes = "Support for this format coming soon in abydos.";
+	notes       = "Support for this format coming soon thanks to abydos.";
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "DataShow Sprite",
-	ext         : [".spr"],
-	magic       : ["DataShow Sprite"],
-	unsupported : true,
-	notes       : "Support for this format coming soon in abydos."
-};
-
-*/

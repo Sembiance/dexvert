@@ -21,7 +21,7 @@ export class Identification
 			extensions       : {type : ["string"], allowEmpty : true},	// list of extensions that are expected with this type of identification
 			matchType        : {type : "string", enum : ["magic", "filename", "ext", "fileSize", "fallback"]}, 	// the type of identification match
 			unsupported      : {type : "boolean"},	// if true, this format is unsupported
-			fileSizeMatchExt : {type : "boolean"},	// if true, the original file matched the extension
+			fileSizeMatchExt : {type : "string"},	// if true, the original file matched the extension
 			auxFiles         : {type : [DexFile]}	// an array of DexFiles that are needed to support this identificatrion
 		});
 

@@ -1,24 +1,13 @@
-/*
 import {Program} from "../../Program.js";
 
 export class dgiwind extends Program
 {
 	website = "http://cd.textfiles.com/carousel344/003/CONV125.ZIP";
-	unsafe = true;
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "CONV125/DGIWIND.EXE";
+	args    = r => [r.inFile({backslash : true})];
+	cwd     = r => r.outDir();
+	dosData = () => ({runIn : "out"});
+	chain   = "dexvert[asFormat:image/msp]";
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "http://cd.textfiles.com/carousel344/003/CONV125.ZIP",
-	unsafe  : true
-};
-
-exports.dos = () => "CONV125/DGIWIND.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.post = (state, p, r, cb) => p.util.program.run("recoil2png", {argsd : ["IN.MSP"]})(state, p, cb);
-*/

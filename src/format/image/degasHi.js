@@ -1,17 +1,15 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class degasHi extends Format
 {
-	name     : "Degas High Resolution Picture",
-	website  : "http://fileformats.archiveteam.org/wiki/DEGAS_image",
-	ext      : [".pc3"],
-	mimeType : "image/x-pc3",
-	magic    : ["DEGAS hi-res compressed bitmap"]
-};
+	name     = "Degas High Resolution Picture";
+	website  = "http://fileformats.archiveteam.org/wiki/DEGAS_image";
+	ext      = [".pc3"];
+	mimeType = "image/x-pc3";
+	magic    = ["DEGAS hi-res compressed bitmap"];
 
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x80, 0x02]));
+	byteCheck = [{offset : 0, match : [0x80, 0x02]}];
 
-// nconvert fails to properly convert some files
-exports.converterPriority = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	// nconvert fails to properly convert some files
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+}

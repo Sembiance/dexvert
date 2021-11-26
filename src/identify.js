@@ -64,6 +64,9 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				let match=true;
 				for(const byteCheck of Array.force(format.byteCheck))
 				{
+					if(byteCheck.ext && byteCheck.ext!==inputFile.ext.toLowerCase())
+						break;
+						
 					for(let loc=byteCheck.offset, i=0;i<byteCheck.match.length;loc++, i++)
 					{
 						if(byteCheckBuf[loc]!==byteCheck.match[i])
@@ -202,7 +205,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				familyMatches.filename.push({...baseMatch, matchType : "filename"});
 
 			// fileSize matches start at confidence 20.
-			if(fileSizeMatch && format.allowFileSizeMatch)
+			if(fileSizeMatch && format.matchFileSize)
 			{
 				const m = {...baseMatch, matchType : "fileSize"};
 				if(fileSizeMatchExt)

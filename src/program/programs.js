@@ -53,6 +53,8 @@ import {irfanView} from "./image/irfanView.js";
 programs.irfanView = irfanView.create(programs.irfanView);
 import {fifView} from "./image/fifView.js";
 programs.fifView = fifView.create(programs.fifView);
+import {dgiwind} from "./image/dgiwind.js";
+programs.dgiwind = dgiwind.create(programs.dgiwind);
 import {view64} from "./image/view64.js";
 programs.view64 = view64.create(programs.view64);
 import {convert} from "./image/convert.js";

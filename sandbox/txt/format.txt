@@ -73,9 +73,10 @@ Some formats require other sibling files/directories to be present in order to c
 Return an array of DexFiles (filtered from otherFiles/otherDirs) or false if no files were required.
 If you return an empty array, that is stating the required files were not found and to not match against this format.
 
->>> byteCheck = {offset : 0, match : [0x00, 0x02] || "string"}  ||  byteCheck = [{}, {}...];
+>>> byteCheck = {ext : ".xyz", offset : 0, match : [0x00, 0x02] || "string"}  ||  byteCheck = [{}, {}...];
 A way to match against a particular part of the file as a way to double check the file is correct.
 Can be a single object or an array of objects. The match key can be a string or an array of bytes
+ext is a way to restrict the byte check to a given file extension and is OPTIONAL.
 
 >>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.

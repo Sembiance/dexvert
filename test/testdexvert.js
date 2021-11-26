@@ -94,7 +94,7 @@ async function testSample(sampleFilePath)
 		if(passChain>0)
 			passChain = 0;
 
-		if(argv.report)
+		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
 	}
 
@@ -103,7 +103,7 @@ async function testSample(sampleFilePath)
 		xu.stdoutWrite(c);
 		passChain++;
 
-		if(argv.report)
+		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
 		else
 			await fileUtil.unlink(tmpOutDirPath, {recursive : true});
@@ -308,5 +308,5 @@ xu.log`\n\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHu
 if(oldDataFormats.length>0)
 	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} ${oldDataFormats.join(" ")}`;
 
-if(argv.report)
+if(argv.report && !argv.record)
 	await writeOutputHTML();

@@ -9,7 +9,7 @@ export class disorderTracker extends Format
 	magic = ["Disorder Tracker 2 module"];
 	converters = ["zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

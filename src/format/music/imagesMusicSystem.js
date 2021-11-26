@@ -8,7 +8,7 @@ export class imagesMusicSystem extends Format
 	ext = [".ims"];
 	converters = ["uade123","xmp","zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

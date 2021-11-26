@@ -9,7 +9,7 @@ export class amComposer extends Format
 	magic = ["A.M.Composer 1.2 music"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class soundMaster extends Format
 	magic = ["Sound Master II module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

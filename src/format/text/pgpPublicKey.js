@@ -10,7 +10,7 @@ export class pgpPublicKey extends Format
 	magic = ["PGP public key block"];
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

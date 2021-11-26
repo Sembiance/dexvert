@@ -9,7 +9,7 @@ export class fuchsTracker extends Format
 	magic = ["Fuchs Tracker module"];
 	converters = ["xmp"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

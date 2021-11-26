@@ -9,7 +9,7 @@ export class hivelyTracker extends Format
 	magic = ["Hively Tracker module","Hively Tracker Song"];
 	converters = ["zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

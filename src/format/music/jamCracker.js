@@ -9,7 +9,7 @@ export class jamCracker extends Format
 	magic = [{}];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

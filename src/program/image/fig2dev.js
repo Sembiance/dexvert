@@ -40,4 +40,6 @@ export class fig2dev extends Program
 
 		await fileUtil.writeFile(svgOutFile.absolute, svgFileData);
 	};
+
+	chain    = r => ((r.flags.outType || "svg")==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);
 }

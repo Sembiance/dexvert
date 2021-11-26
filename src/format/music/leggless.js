@@ -8,7 +8,7 @@ export class leggless extends Format
 	magic = ["Leggless Music Editor module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

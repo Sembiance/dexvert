@@ -9,7 +9,7 @@ export class amosMusic extends Format
 	magic = ["AMOS Music Bank",{}];
 	converters = ["xmp"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -7,7 +7,7 @@ export class scummMusic extends Format
 	ext = [".scumm"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

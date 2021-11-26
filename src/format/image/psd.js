@@ -10,7 +10,7 @@ export class psd extends Format
 	magic = [{},{}];
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

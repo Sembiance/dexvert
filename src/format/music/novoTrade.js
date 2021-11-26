@@ -9,7 +9,7 @@ export class novoTrade extends Format
 	magic = ["NovoTrade Packer module"];
 	converters = ["uade123","xmp"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -10,7 +10,7 @@ export class vicar extends Format
 	magic = ["VICAR JPL image bitmap","PDS (VICAR) image data"];
 	converters = ["convert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

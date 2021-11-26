@@ -7,7 +7,7 @@ export class v2m extends Format
 	ext = [".v2m"];
 	converters = ["zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

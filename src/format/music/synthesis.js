@@ -8,7 +8,7 @@ export class synthesis extends Format
 	magic = [{}];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

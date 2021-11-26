@@ -9,7 +9,7 @@ export class voc extends Format
 	magic = ["Creative Voice audio","Creative Labs voice data"];
 	converters = ["sox"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class quadraComposer extends Format
 	magic = ["Quadra Composer module"];
 	converters = ["zxtune123","uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

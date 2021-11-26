@@ -9,7 +9,7 @@ export class advancedModuleFormat extends Format
 	magic = ["Advanced Module Format","AMF Module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

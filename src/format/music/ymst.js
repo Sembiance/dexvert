@@ -8,7 +8,7 @@ export class ymst extends Format
 	magic = ["YM2149 song"];
 	converters = [{"program":"uade123","flags":{"uadeType":"YM-2149"}}]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

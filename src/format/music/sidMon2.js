@@ -9,7 +9,7 @@ export class sidMon2 extends Format
 	magic = ["Sidmon II module","Sidmon 2.0 Module sound file"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

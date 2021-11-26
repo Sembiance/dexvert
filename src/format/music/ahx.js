@@ -9,7 +9,7 @@ export class ahx extends Format
 	magic = [{},"Abyss' Highest eXperience module"];
 	converters = ["uade123","zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

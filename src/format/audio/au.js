@@ -10,7 +10,7 @@ export class au extends Format
 	mimeType = "audio/basic";
 	converters = ["sox"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

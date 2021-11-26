@@ -11,7 +11,7 @@ export class uaem extends Format
 	filesRequired = undefined;
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

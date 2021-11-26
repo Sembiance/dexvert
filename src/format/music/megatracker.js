@@ -9,7 +9,7 @@ export class megatracker extends Format
 	magic = ["Megatracker module"];
 	converters = ["xmp"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

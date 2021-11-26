@@ -8,7 +8,7 @@ export class unis669 extends Format
 	magic = ["Unis 669 module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

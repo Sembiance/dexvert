@@ -8,7 +8,7 @@ export class pumaTracker extends Format
 	ext = [".puma"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

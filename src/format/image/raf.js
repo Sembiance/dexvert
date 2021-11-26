@@ -10,7 +10,7 @@ export class raf extends Format
 	mimeType = "image/x-fuji-raf";
 	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

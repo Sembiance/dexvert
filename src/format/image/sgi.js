@@ -10,7 +10,7 @@ export class sgi extends Format
 	magic = ["Silicon Graphics bitmap","Silicon Graphics RGB bitmap","SGI image data"];
 	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

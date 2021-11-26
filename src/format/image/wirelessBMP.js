@@ -9,7 +9,7 @@ export class wirelessBMP extends Format
 	mimeType = "image/vnd.wap.wbmp";
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

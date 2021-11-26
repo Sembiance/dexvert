@@ -10,7 +10,7 @@ export class mng extends Format
 	magic = ["Multiple-image Network Graphics bitmap","MNG video data"];
 	converters = [{"program":"convert","flags":{"convertExt":".webp"}}]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

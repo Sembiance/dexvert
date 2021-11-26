@@ -8,7 +8,7 @@ export class fashionTracker extends Format
 	magic = ["Fashion Tracker module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

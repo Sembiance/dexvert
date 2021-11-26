@@ -11,7 +11,7 @@ export class mpeg1 extends Format
 	magic = ["MPEG-1 Elementary Stream","MPEG-1 Program Stream","MPEG sequence, v1"];
 	converters = ["ffmpeg"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

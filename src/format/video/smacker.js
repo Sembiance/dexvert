@@ -9,7 +9,7 @@ export class smacker extends Format
 	magic = ["Smacker movie/video (original)","Smacker Video",{}];
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"smk"}}]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

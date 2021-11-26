@@ -13,7 +13,7 @@ export class html extends Format
 	trustMagic = true;
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

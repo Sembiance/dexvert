@@ -10,7 +10,7 @@ export class txt extends Format
 	fallback = true;
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

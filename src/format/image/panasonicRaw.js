@@ -11,7 +11,7 @@ export class panasonicRaw extends Format
 	mimeType = "image/x-panasonic-raw";
 	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

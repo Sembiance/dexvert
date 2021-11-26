@@ -11,7 +11,7 @@ export class bas extends Format
 	weakMagic = true;
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

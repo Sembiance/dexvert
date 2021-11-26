@@ -9,7 +9,7 @@ export class artOfNoise extends Format
 	magic = ["Art Of Noise Module sound file",{},"Art of Noise Tracker Song"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

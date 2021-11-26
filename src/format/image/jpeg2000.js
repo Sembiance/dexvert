@@ -10,7 +10,7 @@ export class jpeg2000 extends Format
 	magic = ["JPEG 2000","JP2 (JPEG 2000"];
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

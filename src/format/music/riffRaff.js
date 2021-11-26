@@ -8,7 +8,7 @@ export class riffRaff extends Format
 	magic = ["Riff Raff module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

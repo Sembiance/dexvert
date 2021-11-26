@@ -10,7 +10,7 @@ export class orf extends Format
 	mimeType = "image/x-olympus-orf";
 	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

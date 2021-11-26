@@ -8,7 +8,7 @@ export class actionamics extends Format
 	magic = ["Actionamics Sound Tool module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

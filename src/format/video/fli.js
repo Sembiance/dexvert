@@ -9,7 +9,7 @@ export class fli extends Format
 	magic = ["FLIC FLI video","FLI animation","AutoDesk FLIC Animation"];
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"flic"}},"xanim"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

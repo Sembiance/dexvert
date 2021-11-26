@@ -9,7 +9,7 @@ export class nsf extends Format
 	magic = ["NES Sound File","NES Sound Format rip"];
 	converters = ["zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

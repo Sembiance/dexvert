@@ -8,7 +8,7 @@ export class otaBitmap extends Format
 	ext = [".otb"];
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

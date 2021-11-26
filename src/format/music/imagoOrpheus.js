@@ -9,7 +9,7 @@ export class imagoOrpheus extends Format
 	magic = ["Imago Orpheus module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

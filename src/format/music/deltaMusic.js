@@ -8,7 +8,7 @@ export class deltaMusic extends Format
 	magic = ["Delta Music module","Delta Music 2 module"];
 	converters = [{"program":"uade123","flags":{"uadeType":"DeltaMusic1.3"}},{"program":"uade123","flags":{"uadeType":"DeltaMusic2.0"}}]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

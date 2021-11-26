@@ -10,7 +10,7 @@ export class miff extends Format
 	magic = ["MIFF image data","ImageMagick Machine independent File Format bitmap"];
 	converters = ["convert","nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

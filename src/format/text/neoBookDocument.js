@@ -9,7 +9,7 @@ export class neoBookDocument extends Format
 	magic = ["NeoBook for DOS document"];
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

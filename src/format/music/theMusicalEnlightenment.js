@@ -7,7 +7,7 @@ export class theMusicalEnlightenment extends Format
 	ext = [".tme"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

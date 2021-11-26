@@ -8,7 +8,7 @@ export class speedySystem extends Format
 	magic = ["Speedy System module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

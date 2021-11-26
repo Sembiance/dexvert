@@ -8,7 +8,7 @@ export class futurePlayer extends Format
 	magic = ["FuturePlayer module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

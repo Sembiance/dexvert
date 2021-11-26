@@ -8,7 +8,7 @@ export class multiMediaSound extends Format
 	magic = ["MultiMedia Sound module"];
 	converters = ["uade123","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

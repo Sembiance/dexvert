@@ -10,7 +10,7 @@ export class pentaxRaw extends Format
 	mimeType = "image/x-pentax-pef";
 	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -11,7 +11,7 @@ export class windowsAutorun extends Format
 	magic = ["Microsoft Windows Autorun file","AutoRun Info"];
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -10,7 +10,7 @@ export class kodakKDC extends Format
 	mimeType = "image/x-kodak-kdc";
 	converters = ["darktable_cli",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

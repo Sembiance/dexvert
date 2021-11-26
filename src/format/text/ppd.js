@@ -10,7 +10,7 @@ export class ppd extends Format
 	magic = ["PPD file","PostScript Printer Description"];
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

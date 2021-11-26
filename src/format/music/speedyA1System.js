@@ -7,7 +7,7 @@ export class speedyA1System extends Format
 	ext = [".sas"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

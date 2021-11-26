@@ -9,7 +9,7 @@ export class composer669 extends Format
 	magic = ["Composer 669 module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

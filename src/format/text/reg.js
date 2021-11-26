@@ -10,7 +10,7 @@ export class reg extends Format
 	magic = [{}];
 	untouched = true;
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -10,7 +10,7 @@ export class jng extends Format
 	magic = ["JPEG Network Graphics","JNG video data"];
 	converters = ["convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

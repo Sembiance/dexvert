@@ -9,7 +9,7 @@ export class mugician extends Format
 	magic = ["Mugician Module sound file","Digital Mugician module","Digital Mugician 2 module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

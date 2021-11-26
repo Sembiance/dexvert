@@ -9,7 +9,7 @@ export class avr extends Format
 	magic = [{}];
 	converters = ["sox","ffmpeg"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

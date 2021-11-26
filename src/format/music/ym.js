@@ -9,7 +9,7 @@ export class ym extends Format
 	magic = ["ST-Sound YM chiptune"];
 	converters = ["zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -8,7 +8,7 @@ export class octalyser extends Format
 	magic = [{}];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

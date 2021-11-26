@@ -9,7 +9,7 @@ export class extremeTracker extends Format
 	magic = ["Extreme Tracker AMS Module","Extreme's Tracker module"];
 	converters = ["zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

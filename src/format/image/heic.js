@@ -10,7 +10,7 @@ export class heic extends Format
 	magic = ["HEIF bitmap","High Efficiency Image File Format","ISO Media, HEIF Image"];
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

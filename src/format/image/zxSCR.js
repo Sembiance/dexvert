@@ -12,7 +12,7 @@ export class zxSCR extends Format
 	notes = "Some files are originally animated (S.O.M. Tetris and lenn1st) but converters don't support this.";
 	converters = ["recoil2png","convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

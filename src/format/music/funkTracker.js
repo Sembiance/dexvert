@@ -9,7 +9,7 @@ export class funkTracker extends Format
 	magic = ["FunkTracker module"];
 	converters = ["xmp","zxtune123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

@@ -9,7 +9,7 @@ export class mid extends Format
 	magic = ["MIDI Music","MIDI Audio","Standard MIDI data"];
 	notes = "Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows";
 
-metaProviders = [""];
+	metaProviders = [""];
 
 steps = [null,null,null];
 }

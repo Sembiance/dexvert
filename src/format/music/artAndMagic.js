@@ -9,7 +9,7 @@ export class artAndMagic extends Format
 	magic = ["Art And Magic module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

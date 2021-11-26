@@ -9,7 +9,7 @@ export class ogg extends Format
 	magic = ["OGG Vorbis audio","Ogg data, Vorbis audio"];
 	converters = ["sox"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

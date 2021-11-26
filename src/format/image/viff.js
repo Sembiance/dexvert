@@ -10,7 +10,7 @@ export class viff extends Format
 	magic = ["Khoros Visualization Image File Format"];
 	converters = ["convert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

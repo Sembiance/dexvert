@@ -8,7 +8,7 @@ export class jeroenTel extends Format
 	magic = ["M.O.N Old module"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

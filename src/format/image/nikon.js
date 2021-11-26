@@ -10,7 +10,7 @@ export class nikon extends Format
 	mimeType = "image/x-nikon-nef";
 	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

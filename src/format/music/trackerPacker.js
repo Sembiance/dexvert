@@ -9,7 +9,7 @@ export class trackerPacker extends Format
 	magic = ["Trackerpacker 3 Music"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

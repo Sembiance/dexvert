@@ -7,7 +7,7 @@ export class soundImages extends Format
 	ext = [".tw"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

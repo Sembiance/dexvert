@@ -10,7 +10,7 @@ export class tim extends Format
 	weakMagic = true;
 	converters = ["convert","recoil2png"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

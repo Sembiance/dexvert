@@ -10,7 +10,7 @@ export class pfm extends Format
 	magic = ["Portable Float Map color bitmap"];
 	converters = ["convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

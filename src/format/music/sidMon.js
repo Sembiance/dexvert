@@ -8,7 +8,7 @@ export class sidMon extends Format
 	ext = [".sid"];
 	converters = ["uade123"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

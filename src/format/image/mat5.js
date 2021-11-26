@@ -11,7 +11,7 @@ export class mat5 extends Format
 	notes = "I believe a .mat file can contain more than images, but right now we only support converting images.";
 	converters = ["convert"]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

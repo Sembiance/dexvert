@@ -8,7 +8,7 @@ export class sid extends Format
 	ext = [".sid",".psid",".mus"];
 	magic = ["Play SID Audio","PlaySID","SID tune"];
 
-metaProviders = [""];
+	metaProviders = [""];
 
 steps = [null,null,null];
 }

@@ -10,7 +10,7 @@ export class kodakDCR extends Format
 	mimeType = "image/x-kodak-dcr";
 	converters = ["darktable_cli",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

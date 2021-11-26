@@ -11,7 +11,7 @@ export class audioSculpture extends Format
 	filesOptional = undefined;
 	converters = [{"program":"uade123","flags":{"uadeType":"AudioSculpture"}}]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

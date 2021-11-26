@@ -11,7 +11,7 @@ export class radiance extends Format
 	slow = true;
 	converters = ["pfsconvert","convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

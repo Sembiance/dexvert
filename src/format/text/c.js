@@ -12,7 +12,7 @@ export class c extends Format
 	untouched = true;
 	hljsLang = "cpp";
 
-metaProviders = [""];
+	metaProviders = [""];
 }
 */
 /*

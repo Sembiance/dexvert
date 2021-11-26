@@ -122,11 +122,12 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	}
 
 	xu.log3`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
+	xu.log5`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
 	const r = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
 
 	if(video || screenshot)
 	{
-		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti([v => v]).at(-1);
+		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti().at(-1);
 		if(!videoFilePath)
 			throw new Error(`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()}`);
 		if(screenshot)

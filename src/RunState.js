@@ -37,7 +37,7 @@ export class RunState
 		{
 			const result = absolute ? input.absolute : path.relative(this.cwd, input.absolute);
 			return backslash ? result.replaceAll("/", "\\") : result;
-		}).sortMulti(v => v);
+		}).sortMulti();
 	}
 
 	// will return f.outFile if set, otherwise will return <f.outDir>/<filename> if it doesn't exist, otherwise it will return a non-existing filename in <f.outDir>/<random><filename>

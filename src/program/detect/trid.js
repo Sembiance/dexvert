@@ -1,5 +1,6 @@
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
+import {fileUtil} from "xutil";
 
 export class trid extends Program
 {
@@ -10,9 +11,18 @@ export class trid extends Program
 	bin = "trid";
 	loc = "local";
 
-	args = r => [r.inFile(), "-n:5"]
-	post = r =>
+	pre = async r =>
 	{
+		// trid is SUPER sensitive to certain filenames, so we copy it to a tmp file and run trid against that
+		r.tridTmpFilePath = await fileUtil.genTempPath();
+		await Deno.copyFile(r.f.input.absolute, r.tridTmpFilePath);
+	};
+
+	args = r => [r.tridTmpFilePath, "-n:5"]
+	post = async r =>
+	{
+		await fileUtil.unlink(r.tridTmpFilePath);
+
 		r.meta.detections = [];
 
 		r.stdout.split("\n").forEach(tridLine =>

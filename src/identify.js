@@ -89,7 +89,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 
 			// some formats requrie additional files or directories that may be used
 			let auxFiles = null;
-			if(format.auxFiles)
+			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0))
 			{
 				auxFiles = format.auxFiles(f.input, otherFiles, otherDirs);
 

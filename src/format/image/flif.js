@@ -1,29 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class flif extends Format
 {
-	name = "Free Lossless Image Format";
-	website = "http://fileformats.archiveteam.org/wiki/FLIF";
-	ext = [".flif"];
-	mimeType = "image/x-flif";
-	magic = ["Free Lossless Image Format","FLIF"];
+	name       = "Free Lossless Image Format";
+	website    = "http://fileformats.archiveteam.org/wiki/FLIF";
+	ext        = [".flif"];
+	mimeType   = "image/x-flif";
+	magic      = ["Free Lossless Image Format", "FLIF"];
 	converters = [`abydosconvert[format:${this.mimeType}]`]
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name     : "Free Lossless Image Format",
-	website  : "http://fileformats.archiveteam.org/wiki/FLIF",
-	ext      : [".flif"],
-	mimeType : "image/x-flif",
-	magic    : ["Free Lossless Image Format", "FLIF"]
-};
-
-exports.converterPriority = [`abydosconvert[format:${this.mimeType}]`];
-
-*/

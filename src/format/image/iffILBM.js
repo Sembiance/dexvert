@@ -18,7 +18,8 @@ export class iffILBM extends Format
 	// But it sometimes produces crazy fast color cycles and they can sometimes be so rapid that the original meaning of the image is lost
 	// It also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
 	// So we first run both abydosconvert and recoil2png. abydos will produce a .webp for it's animated output which the other programs don't produce
-	converters = [`abydosconvert[format:${this.mimeType}] & recoil2png`, "deark", "ffmpeg[format:iff]", "convert"];
+	converters    = [`abydosconvert[format:${this.mimeType}] & recoil2png`, "deark", "ffmpeg[format:iff]", "convert"];
+	metaProviders = ["image"];
 }
 
 // node version of dexvert was doing this, but I didn't see any sample files that exhibit have this problem thus I couldn't test, so I'm not sure it's needed anymore

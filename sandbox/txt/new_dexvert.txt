@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
+* Make the build/buildMDReadMe, etc
 
 * Add full dexvert support for: ALL IMAGES
 
@@ -49,6 +49,8 @@ filesRequired/filesOptional -> auxFiles
 /---------------\
 | High Priority |
 \---------------/
+* Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
+
 * Check out image/avatar with older versions of abydosconvert AND the latest version
   It used to produce PNG files, but now produce glitched out webp files...
   ALSO check out image/cebraText, it seems to maybe have the same problem

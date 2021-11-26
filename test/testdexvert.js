@@ -25,12 +25,16 @@ const FLEX_SIZE_FORMATS =
 {
 	image :
 	{
+		// Each iteration generates different clippath ids, sigh.
+		dxf : 1,
+
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		threeDCK           : 10,
 
 		// TODO TEMPROARY due to bug in abydos
-		avatar : 20
+		avatar    : 20,
+		cebraText : 20
 	}
 };
 
@@ -79,7 +83,10 @@ Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.rel
 });
 
 const oldDataFormats = [];
+let completed=0;
+let completedMark=0;
 let passChain=0;
+let failCount=0;
 async function testSample(sampleFilePath)
 {
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
@@ -88,14 +95,32 @@ async function testSample(sampleFilePath)
 	const r = await runUtil.run("dexvert", ["--json", sampleFilePath, tmpOutDirPath]);
 	const resultFull = xu.parseJSON(r.stdout);
 
+	function handleComplete()
+	{
+		// If we have more than 100 files we are testing, show progress every 10%
+		if(sampleFilePaths.length>100)
+		{
+			completed++;
+			const newMark = Math.floor((completed/sampleFilePaths.length)*10);
+			if(newMark>completedMark)
+			{
+				completedMark = newMark;
+				xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
+			}
+		}
+	}
 	function fail(msg)
 	{
+		failCount++;
+
 		xu.log`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}`;
 		if(passChain>0)
 			passChain = 0;
 
 		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
+
+		handleComplete();
 	}
 
 	async function pass(c=".")
@@ -107,6 +132,8 @@ async function testSample(sampleFilePath)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
 		else
 			await fileUtil.unlink(tmpOutDirPath, {recursive : true});
+
+		handleComplete();
 	}
 
 	if(!resultFull)
@@ -304,6 +331,8 @@ if(argv.record)
 	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 xu.log`\n\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+
+xu.log`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
 
 if(oldDataFormats.length>0)
 	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} ${oldDataFormats.join(" ")}`;

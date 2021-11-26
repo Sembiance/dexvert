@@ -39,10 +39,18 @@ for(const formatFilePath of formatFilePaths)
 		throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate of ${formats[formatid]}`);
 
 	// create the class and validate it
-	formats[formatid] = formatModule[formatid].create(families[familyid]);
-	if(!(formats[formatid] instanceof Format))
+	const format = formatModule[formatid].create(families[familyid]);
+	if(!(format instanceof Format))
 		throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
-	
+
+	// some manual checks on meta providers based on what converters are being used
+	for(const [converter, metaProvider] of Object.entries({"convert" : "image", "darktable_cli" : "darkTable", "ansilove" : "ansiArt"}))
+	{
+		if(Array.isArray(format.converters) && format.converters.some(v => v===converter || v.startsWith(`${converter}[`)) && !(format.metaProviders || []).includes(metaProvider))
+			throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
+	}
+
+	formats[formatid] = format;
 	relPaths.push([familyid, formatid, path.relative(formatDirPath, formatFilePath)]);
 }
 

@@ -9,5 +9,5 @@ export class drawview extends Program
 	bin           = "drawview";
 	runOptions    = ({virtualX : true});
 	args          = r => ["-e", r.outDir(), r.inFile()]
-	chain         = "deDynamicSVG -> autoCropSVG"	// The SVGs from acorn are often horribly cropped wrong and cut off, autoCropSVG will fix that
+	chain         = "deDynamicSVG[autoCrop]"	// The SVGs from acorn are often horribly cropped wrong and cut off, autoCrop flag will fix that will fix that
 }

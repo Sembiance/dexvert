@@ -34,6 +34,7 @@ const DEXMAGIC_CHECKS =
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
 	"CAD/Draw TVG"                : "TommySoftware TVG",
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
+	"DeskMate Paint Alt"		  : [{offset : 0, match : "PNT"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"MLDF BMHD file"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
 	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],

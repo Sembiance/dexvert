@@ -235,11 +235,16 @@ export class Program
 				const chainF = await f.clone();
 				chainF.changeType("new", "prev");
 
-				const handleNewFiles = async () =>
+				const handleNewFiles = async chainInputFiles =>
 				{
 					if(!chainF.new)
 					{
-						xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
+						xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${xu.verbose<5 ? `, deleting ${chainInputFiles.length} chain input files!` : ""}`;
+						if(xu.verbose<5)
+						{
+							for(const chainInputFile of chainInputFiles)
+								await f.remove("new", chainInputFile, {unlink : true});
+						}
 						return;
 					}
 
@@ -274,7 +279,7 @@ export class Program
 					xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
 
 					await Program.runProgram(progRaw.substring(1), chainF, chainProgOpts);
-					await handleNewFiles();
+					await handleNewFiles(newFiles);
 				}
 				else
 				{
@@ -286,7 +291,7 @@ export class Program
 						xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
 
 						await Program.runProgram(progRaw, chainF, chainProgOpts);
-						await handleNewFiles();
+						await handleNewFiles([newFile]);
 					}
 				}
 			}

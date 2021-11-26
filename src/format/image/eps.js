@@ -1,4 +1,3 @@
-import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class eps extends Format

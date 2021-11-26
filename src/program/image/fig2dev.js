@@ -1,34 +1,43 @@
-/*
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {xmlParse} from "denoLandX";
+import {path, base64Encode} from "std";
 
 export class fig2dev extends Program
 {
-	website = "https://www.xfig.org/";
+	website       = "https://www.xfig.org/";
 	gentooPackage = "media-gfx/transfig";
-	flags = {"fig2devType":"Which image format to convert to (\"png\" for example). Default: svg"};
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "https://www.xfig.org/",
-	gentooPackage : "media-gfx/transfig",
-	flags         :
+	flags         =
 	{
-		fig2devType : `Which image format to convert to ("png" for example). Default: svg`
-	}
-};
+		outType : `Which image format to convert to (png for example). Default: svg`
+	};
+	notes = "The output SVG has it's external image file references replaced with the base64 data uri, but this of course means only images supported by the browser/svg reader will be able to viewed. I could convert all images with dexvert first, but MEH."
 
-exports.bin = () => "fig2dev";
-exports.args = (state, p, r, inPath=state.input.base, outPath=path.join(state.output.dirPath, `outfile.${r.flags.fig2devType || "svg"}`)) => (["-L", (r.flags.fig2devType || "svg"), inPath, outPath]);
+	bin  = "fig2dev";
+	args = async r => ["-L", (r.flags.outType || "svg"), r.inFile(), await r.outFile(`out.${r.flags.outType || "svg"}`)];
+	
+	post = async r =>
+	{
+		// inline into the SVG any referenced images
+		const svgOutFile = (r.f.files.output || []).find(file => file.ext.toLowerCase()===".svg");
+		if(!svgOutFile)
+			return;
 
-// We run in the input dir in order to 'pull in' any referenced/embedded images
-exports.cwd = state => state.input.dirPath;
+		let svgFileData = await fileUtil.readFile(svgOutFile.absolute);
+		const svgData = xmlParse(svgFileData);
+		await Object.findReplace(svgData, (k, v) => (Object.isObject(v) && Object.hasOwn(v, "@xlink:href") && v["@xlink:href"].startsWith("file://")), async (k, v) =>
+		{
+			const xlinkHref = v["@xlink:href"];
+			const filePath = path.resolve(r.f.root, xlinkHref.substring("file://".length));
+			if(!await fileUtil.exists(filePath))
+				return v;
+			
+			// Did try just modifying the object and then doing xmlStringify() below when saving the file, sadly the xml module is not reliable, especially when stringifying, it failed to produce the same output
+			svgFileData = svgFileData.replaceAll(xlinkHref, `data:image;base64,${base64Encode(await fileUtil.readFile(filePath, null))}`);
 
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, `outfile.${r.flags.fig2devType || "svg"}`), path.join(state.output.absolute, `${state.input.name}.${r.flags.fig2devType || "svg"}`))(state, p, cb);
-*/
+			return v;
+		});
+
+		await fileUtil.writeFile(svgOutFile.absolute, svgFileData);
+	};
+}

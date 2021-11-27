@@ -28,13 +28,18 @@ const FLEX_SIZE_FORMATS =
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
+		// lottie2gif produces slightly different output on each iteration for some files, not sure why
+		lottie : 1,
+
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
+		naplps             : 5,
 		threeDCK           : 10,
 
 		// TODO TEMPROARY due to bug in abydos
-		avatar    : 20,
-		cebraText : 20
+		avatar         : 20,
+		cebraText      : 20,
+		mrgSystemsText : 20
 	}
 };
 
@@ -43,6 +48,7 @@ const DISK_FORMAT_MAP =
 [
 	// These formats share generic .ext only, no magic matches
 	[/image\/artistByEaton\/BLINKY\.ART$/, "asciiArtEditor"],
+	[/image\/gfaArtist\/.+$/, "asciiArtEditor"],
 
 	// Supporting/AUX files
 	[/image\/fig\/.+.(gif|jpg|xbm|xpm)$/, true]
@@ -69,7 +75,7 @@ xu.log`Loading test data and finding sample files...`;
 const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
 
 xu.log`Finding sample files...`;
-const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH);
+const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true});
 xu.log`Found ${sampleFilePaths.length} sample files. Filtering those we don't have support for...`;
 sampleFilePaths.filterInPlace(sampleFilePath => Object.hasOwn(formats, path.basename(path.dirname(sampleFilePath))));
 if(argv.file)
@@ -262,7 +268,7 @@ await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcur
 console.log("");	// gets us out of the period stdoud section onto a new line
 
 if(failures.length>0)
-	console.log(`\n${failures.join("\n")}`);
+	console.log(`\n${failures.sortMulti().join("\n")}`);
 
 async function writeOutputHTML()
 {

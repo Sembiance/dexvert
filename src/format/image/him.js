@@ -1,14 +1,10 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class him extends Format
 {
-	name    : "Hires Manager",
-	website : "http://fileformats.archiveteam.org/wiki/Hires_Manager",
-	ext     : [".him"]
-};
-
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x00, 0x40]));
-
-exports.converterPriority = ["recoil2png", "view64"];
+	name       = "Hires Manager";
+	website    = "http://fileformats.archiveteam.org/wiki/Hires_Manager";
+	ext        = [".him"];
+	byteCheck  = [{offset : 0, match : [0x00, 0x40]}];
+	converters = ["recoil2png", "view64"];
+}

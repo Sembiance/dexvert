@@ -1,14 +1,10 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class hlf extends Format
 {
-	name    : "Hires Interlace",
-	website : "http://fileformats.archiveteam.org/wiki/Hires_Interlace",
-	ext     : [".hlf"]
-};
-
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x00, 0x20]));
-
-exports.converterPriority = ["recoil2png"];
+	name       = "Hires Interlace";
+	website    = "http://fileformats.archiveteam.org/wiki/Hires_Interlace";
+	ext        = [".hlf"];
+	byteCheck  = [{offset : 0, match : [0x00, 0x20]}];
+	converters = ["recoil2png"];
+}

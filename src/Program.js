@@ -217,81 +217,84 @@ export class Program
 		}
 
 		// check to see if we need to chain to another program
-		const chainParts = [];
-		if(this.chain)
+		if(f.files.new?.length>0)
 		{
-			const chainResult = (typeof this.chain==="function" ? await this.chain(r) : this.chain);
-			if(chainResult)
-				chainParts.push(...chainResult.split("->"));
-		}
-		if(chain)
-			chainParts.push(...chain.split("->"));
-
-		if(chainParts.length>0 && f.files.new?.length>0)
-		{
-			for(const [i, progRaw] of Object.entries(chainParts.map(v => v.trim())))
+			const chainParts = [];
+			if(this.chain)
 			{
-				const newFiles = Array.from(f.files.new);
-				const chainF = await f.clone();
-				chainF.changeType("new", "prev");
+				const chainResult = (typeof this.chain==="function" ? await this.chain(r) : this.chain);
+				if(chainResult)
+					chainParts.push(...chainResult.split("->"));
+			}
+			if(chain)
+				chainParts.push(...chain.split("->"));
 
-				const handleNewFiles = async chainInputFiles =>
+			if(chainParts.length>0)
+			{
+				for(const [i, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 				{
-					if(!chainF.new)
-					{
-						xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${xu.verbose<5 ? `, deleting ${chainInputFiles.length} chain input files!` : ""}`;
-						if(xu.verbose<5)
-						{
-							for(const chainInputFile of chainInputFiles)
-								await f.remove("new", chainInputFile, {unlink : true});
-						}
-						return;
-					}
-
-					xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
-
-					// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
-					// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
-					// in the future though we could use this code here to help add collision avoidance
-					//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
-					
-					await f.addAll("new", chainF.files.new);
-					for(const inputFile of chainF.files.input)
-					{
-						if(!chainF.files.new.some(v => v.absolute===inputFile.absolute))
-							await f.remove("new", inputFile, {unlink : true});
-					}
+					const newFiles = Array.from(f.files.new);
+					const chainF = await f.clone();
 					chainF.changeType("new", "prev");
-				};
-				
-				const chainProgOpts = {isChain : true};
 
-				// if we are the last item in the chain, pass the originalInput name
-				// we don't do this every time because some intermediate files may produce multiple output files that we don't want to clobber (ani/EYES2.gif if you add a middle step deark -> dexvert -> *joinAsGIF)
-				if(+i===chainParts.length-1)
-					chainProgOpts.originalInput = originalInput || f.input;
+					const handleNewFiles = async chainInputFiles =>
+					{
+						if(!chainF.new)
+						{
+							xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${xu.verbose<5 ? `, deleting ${chainInputFiles.length} chain input files!` : ""}`;
+							if(xu.verbose<5)
+							{
+								for(const chainInputFile of chainInputFiles)
+									await f.remove("new", chainInputFile, {unlink : true});
+							}
+							return;
+						}
 
-				if(progRaw.startsWith("*"))
-				{
-					chainF.removeType("input");
-					await chainF.addAll("input", newFiles);
+						xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
 
-					xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
+						// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
+						// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
+						// in the future though we could use this code here to help add collision avoidance
+						//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
+						
+						await f.addAll("new", chainF.files.new);
+						for(const inputFile of chainF.files.input)
+						{
+							if(!chainF.files.new.some(v => v.absolute===inputFile.absolute))
+								await f.remove("new", inputFile, {unlink : true});
+						}
+						chainF.changeType("new", "prev");
+					};
+					
+					const chainProgOpts = {isChain : true};
 
-					await Program.runProgram(progRaw.substring(1), chainF, chainProgOpts);
-					await handleNewFiles(newFiles);
-				}
-				else
-				{
-					for(const newFile of newFiles)
+					// if we are the last item in the chain, pass the originalInput name
+					// we don't do this every time because some intermediate files may produce multiple output files that we don't want to clobber (ani/EYES2.gif if you add a middle step deark -> dexvert -> *joinAsGIF)
+					if(+i===chainParts.length-1)
+						chainProgOpts.originalInput = originalInput || f.input;
+
+					if(progRaw.startsWith("*"))
 					{
 						chainF.removeType("input");
-						await chainF.add("input", newFile);
+						await chainF.addAll("input", newFiles);
 
-						xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
+						xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
 
-						await Program.runProgram(progRaw, chainF, chainProgOpts);
-						await handleNewFiles([newFile]);
+						await Program.runProgram(progRaw.substring(1), chainF, chainProgOpts);
+						await handleNewFiles(newFiles);
+					}
+					else
+					{
+						for(const newFile of newFiles)
+						{
+							chainF.removeType("input");
+							await chainF.add("input", newFile);
+
+							xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
+
+							await Program.runProgram(progRaw, chainF, chainProgOpts);
+							await handleNewFiles([newFile]);
+						}
 					}
 				}
 			}

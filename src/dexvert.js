@@ -61,7 +61,6 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 			originalInputFileSet.addAll("aux", id.auxFiles);
 
 		// copy over our files to cwd, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
-		// TODO Need to test with a directory from auxfiles, like font/amigaBitmapFont
 		const f = await originalInputFileSet.rsyncTo(cwd);
 
 		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters

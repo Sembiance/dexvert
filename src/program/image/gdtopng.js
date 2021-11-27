@@ -1,29 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class gdtopng extends Program
 {
-	website = "https://libgd.org";
-	gentooPackage = "media-libs/gd";
+	website        = "https://libgd.org";
+	gentooPackage  = "media-libs/gd";
 	gentooUseFlags = "fontconfig jpeg png tiff truetype webp xpm zlib";
-	unsafe = true;
+	unsafe         = true;
+	bin            = "gdtopng";
+	args           = async r => [r.inFile(), await r.outFile("out.png")];
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website        : "https://libgd.org",
-	gentooPackage  : "media-libs/gd",
-	gentooUseFlags : "fontconfig jpeg png tiff truetype webp xpm zlib",
-	unsafe    : true
-};
-
-exports.bin = () => "gdtopng";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile.png")) => ([inPath, outPath]);
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);
-*/

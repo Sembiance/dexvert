@@ -1,25 +1,13 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class storyboardLiveShowPic extends Program
 {
 	website = "https://winworldpc.com/product/ibm-storyboard/live-20";
-	unsafe = true;
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "SBLIVE/SHOWPIC.EXE";
+	args    = r => [r.inFile()];
+	dosData = async r => ({keys : ["Escape"], keyOpts : {delay : xu.SECOND*15}, screenshot : {filePath : await r.outFile("out.png", {absolute : true}), frameLoc : 100}});
 }
-*/
 
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website : "https://winworldpc.com/product/ibm-storyboard/live-20",
-	unsafe  : true
-};
-
-exports.dos = () => "SBLIVE/SHOWPIC.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = state => ({keys : ["Escape"], keyOpts : {delay : XU.SECOND*15}, screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), frameLoc : 100}});
-*/

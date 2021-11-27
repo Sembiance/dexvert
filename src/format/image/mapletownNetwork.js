@@ -1,25 +1,17 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class mapletownNetwork extends Format
 {
-	name    : "Mapletown Network",
-	website  : "http://fileformats.archiveteam.org/wiki/Mapletown_Network",
-	ext     : [".ml1", ".mx1", ".nl3"]
-};
+	name       = "Mapletown Network";
+	website    = "http://fileformats.archiveteam.org/wiki/Mapletown_Network";
+	ext        = [".ml1", ".mx1", ".nl3"];
+	byteCheck  =
+	[
+		{ext : ".ml1", offset : 0, match : [0x31, 0x30, 0x30, 0x1A]},
+		{ext : ".mx1", offset : 0, match : [0x40, 0x40, 0x40, 0x20]},
+		{ext : ".nl3", offset : 0, match : [0x20, 0x20, 0x78, 0x25]}
+	];
+	converters = ["recoil2png"]
+}
 
-exports.idCheck = state =>
-{
-	const ext = state.input.ext.toLowerCase();
-	if(ext===".ml1")
-		return file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x31, 0x30, 0x30, 0x1A]));
-	if(ext===".mx1")
-		return file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x40, 0x40, 0x40, 0x20]));
-	if(ext===".nl3")
-		return file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x20, 0x20, 0x78, 0x25]));
-	
-	return true;
-};
 
-exports.converterPriority = ["recoil2png"];

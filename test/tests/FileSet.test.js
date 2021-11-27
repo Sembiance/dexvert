@@ -218,7 +218,7 @@ Deno.test("changeType", async () =>
 
 Deno.test("rsyncTo", async () =>
 {
-	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+	let a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
@@ -258,6 +258,16 @@ Deno.test("rsyncTo", async () =>
 	await fileUtil.unlink(tmpDirPath, {recursive : true});
 	assertStrictEquals(b.other.rel, "symlinkFile");
 	assertStrictEquals(b.other.isSymlink, true);
+
+	// dir file
+	a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
+		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir"]);
+	await Deno.mkdir(tmpDirPath);
+	b = await a.rsyncTo(tmpDirPath);
+	const bStat = await Deno.stat(path.join(tmpDirPath, "subDir", "more_sub", "c.txt"));
+	assertStrictEquals(bStat.size, 10);
+	await fileUtil.unlink(tmpDirPath, {recursive : true});
 });
 
 Deno.test("serialize", async () =>

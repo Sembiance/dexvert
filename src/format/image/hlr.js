@@ -1,16 +1,13 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class hlr extends Format
 {
-	name     : "ZX Spectrum Attributes Gigascreen",
-	website  : "http://fileformats.archiveteam.org/wiki/HLR",
-	ext      : [".hlr"],
-	magic    : ["GigaScreen bitmap"],
-	fileSize : 1628
-};
-
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x76, 0xAF, 0xD3]));
-
-exports.converterPriority = ["recoil2png"];
+	name       = "ZX Spectrum Attributes Gigascreen";
+	website    = "http://fileformats.archiveteam.org/wiki/HLR";
+	ext        = [".hlr"];
+	magic      = ["GigaScreen bitmap"];
+	fileSize   = 1628;
+	byteCheck  = [{offset : 0, match : [0x76, 0xAF, 0xD3]}];
+	notes      = "File is detected as garbage, but it's actually supposed to look that, but because it looks like garbage, we actually want tensor to keep identifying it as such: ht - Id-02 (2010) (Hackers Top 2010 Autumn Edition, 7).hlr"
+	converters = ["recoil2png"];
+}

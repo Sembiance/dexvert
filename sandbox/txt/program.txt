@@ -58,7 +58,7 @@ This will be executed directly BEFORE the program is run (either in or exec)
 >>> post = async (runState) => { ... }
 This will be executed directly AFTER the program has finished running (either bin or exec)
 
->>> renameOut = { ext : ".png", name : true, multiple : /^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/ }
+>>> renameOut = { ext : ".png", name : true, regex : /^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/ }
 Output files can be automatically renamed.
 If ext is a string, the output file will be given that extension
 default ext is different per family. So image is .png, audio is .wav, etc

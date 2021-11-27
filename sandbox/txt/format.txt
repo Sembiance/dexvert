@@ -42,7 +42,7 @@ Regexes match as a regex. Use /.../i for a case insensitive match
 
 >>> ******** File Size
 >>> fileSize = 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}
-If a number, files must be exactly this size.
+If a number, files must be exactly this size, unless if it's a negative number, then it MUST not be that size.
 If an array, files must be any of the sizes in the array.
 If an object, the keys are extensions and files with the given extension must be that file size.
 
@@ -77,6 +77,9 @@ If you return an empty array, that is stating the required files were not found 
 A way to match against a particular part of the file as a way to double check the file is correct.
 Can be a single object or an array of objects. The match key can be a string or an array of bytes
 ext is a way to restrict the byte check to a given file extension and is OPTIONAL.
+
+>>> idCheck = async (inputfile, detections) => { return true; }
+A custom function that must return true for any match to be made against this file
 
 >>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)
 Can adjust the confidence manually up or down. WARNING, this is a last resort hammer. Use VERY sparingly.

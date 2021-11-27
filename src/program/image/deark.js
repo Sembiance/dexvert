@@ -13,11 +13,6 @@ export class deark extends Program
 		"opts"        : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"    : "Don't extract any thumb files found",
 		"file2"       : "An extra file that can be used by deark module to get the correct palette or image names"
-		//"dearkGIFDelay"   : "Duration of delay between animation frames. Default: 12",
-		//"dearkJoinFrames" : "Treat output files as individual images frames of an animation and join them together as an MP4",
-		//"dearkKeepAsGIF"  : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4",
-		//"dearkRemoveDups" : "Remove any duplicate output files, based on sum. Default: false",
-		//"dearkReplaceExt" : "An object of keys that are extensions to replace with their values. Only works with a single output file."};
 	};
 
 	bin  = "deark";
@@ -39,7 +34,7 @@ export class deark extends Program
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
 	// deark output names can be useful such as image/macPaint/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
-	renameOut = {regex : /^.+(?<num>\.\d{3})(?<post>\..+)$/};
+	renameOut = {regex : /^.+?(?<num>\.\d{3})(?<post>\..+)$/};
 
 	verify = r =>
 	{
@@ -48,10 +43,12 @@ export class deark extends Program
 			return false;
 
 		return true;
-	}
+	};
 }
 
 /*
+OLD NODE CODE:
+
 exports.meta =
 {
 	flags :
@@ -59,8 +56,6 @@ exports.meta =
 		dearkGIFDelay   : "Duration of delay between animation frames. Default: 12",
 		dearkJoinFrames : "Treat output files as individual images frames of an animation and join them together as an MP4",
 		dearkKeepAsGIF  : "If dearkJoinFrames is set, leave the animation as a GIF, don't convert to MP4",
-		dearkModule     : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
-		dearkOpts       : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		dearkRemoveDups : "Remove any duplicate output files, based on sum. Default: false",
 		dearkReplaceExt : "An object of keys that are extensions to replace with their values. Only works with a single output file."
 	}

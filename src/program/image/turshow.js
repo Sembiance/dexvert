@@ -1,25 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class turshow extends Program
 {
 	website = "http://fileformats.archiveteam.org/wiki/NAPLPS";
-	unsafe = true;
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "TURSHOW/TURSHOW.EXE";
+	args    = r => [r.inFile()];
+	dosData = async r => ({screenshot : {filePath : await r.outFile("out.png", {absolute : true}), frameLoc : 95}});
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website : "http://fileformats.archiveteam.org/wiki/NAPLPS",
-	unsafe  : true
-};
-
-exports.dos = () => "TURSHOW/TURSHOW.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.dosData = state => ({screenshot : {filePath : path.join(state.output.absolute, `${state.input.name}.png`), frameLoc : 100}});
-*/

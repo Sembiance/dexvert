@@ -17,7 +17,7 @@ export class abydosconvert extends Program
 
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
 	runOptions = ({timeout : xu.MINUTE})
-	renameOut = {regex : /^.+(?<pre>\.\d{3})?(?<post>\.(?:png|svg|webp))$/};
+	renameOut = {regex : /.+?(?<num>\.\d{3})?(?<post>\.(?:png|svg|webp))$/};
 }
 
 /*

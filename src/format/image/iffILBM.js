@@ -26,24 +26,17 @@ export class iffILBM extends Format
 // may have been an ILBM that was used by some game that I now properly detect and handle as such
 /*
 exports.preSteps =
-[
-	function loadFileData()
+	const inputBuffer = fs.readFileSync(state.input.absolute, this);
+
+	// Some IFF files have a CMAP entries, but it's filled with all zeroes. Here we DELETE the CMAP entry if that's the case, so that the converter programs fall back on a 'default' palette of colors
+	const cmapLoc = inputBuffer.indexOf("CMAP");
+	if(cmapLoc===-1)
+		return this();
+	
+	const cmapSize = inputBuffer.readUInt32BE(cmapLoc+4);
+	if(Buffer.compare(inputBuffer.slice(cmapLoc+8, cmapLoc+8+cmapSize), Buffer.alloc(cmapSize, 0))===0)
 	{
-		fs.readFile(state.input.absolute, this);
-	},
-	function checkForNullCMAPPalette(inputBuffer)
-	{
-		// Some IFF files have a CMAP entries, but it's filled with all zeroes. Here we DELETE the CMAP entry if that's the case, so that the converter programs fall back on a 'default' palette of colors
-		const cmapLoc = inputBuffer.indexOf("CMAP");
-		if(cmapLoc===-1)
-			return this();
-		
-		const cmapSize = inputBuffer.readUInt32BE(cmapLoc+4);
-		if(Buffer.compare(inputBuffer.slice(cmapLoc+8, cmapLoc+8+cmapSize), Buffer.alloc(cmapSize, 0))===0)
-		{
-			state.input.filePath = fileUtil.generateTempFilePath("", ".ilbm");
-			return fs.writeFile(state.input.filePath, Buffer.concat([inputBuffer.slice(0, cmapLoc), inputBuffer.slice(cmapLoc+8+cmapSize)]), this);
-		}
-	);
-]
+		state.input.filePath = fileUtil.generateTempFilePath("", ".ilbm");
+		return fs.writeFile(state.input.filePath, Buffer.concat([inputBuffer.slice(0, cmapLoc), inputBuffer.slice(cmapLoc+8+cmapSize)]), this);
+	}
 */

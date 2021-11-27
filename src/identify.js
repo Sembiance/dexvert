@@ -36,7 +36,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 	const byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
 	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
-	FAMILY_MATCH_ORDER.forEach(familyid =>
+	for(const familyid of FAMILY_MATCH_ORDER)
 	{
 		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
 		for(const [formatid, format] of Object.entries(formats))
@@ -65,7 +65,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				for(const byteCheck of Array.force(format.byteCheck))
 				{
 					if(byteCheck.ext && byteCheck.ext!==inputFile.ext.toLowerCase())
-						break;
+						continue;
 						
 					for(let loc=byteCheck.offset, i=0;i<byteCheck.match.length;loc++, i++)
 					{
@@ -87,11 +87,18 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				}
 			}
 
-			// some formats requrie additional files or directories that may be used
+			// some formats require some sort of other check to ensure the file is valid
+			if(format.idCheck && !(await format.idCheck(inputFile, detections)))
+			{
+				xu.log4`Excluding format ${formatid} due to idCheck not succeeding.`;
+				continue;
+			}
+
+			// some formats require additional files or directories that may be used
 			let auxFiles = null;
 			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0))
 			{
-				auxFiles = format.auxFiles(f.input, otherFiles, otherDirs);
+				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs);
 
 				// If the filesRequired function returns false, then we don't have any required files
 				// If it returns an empty array then we fail to match
@@ -251,7 +258,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				matchesByFamily[matchType].push(m);
 			});
 		});
-	});
+	}
 
 	const matches = [...matchesByFamily.magic,
 		...matchesByFamily.ext.filter(em => !matchesByFamily.magic.some(mm => mm.magic===em.magic)),

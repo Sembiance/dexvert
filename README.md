@@ -1,9 +1,9 @@
 # dexvert - Decompress EXtract conVERT
-Convert **337** file formats (out of **613** known) into modern browser friendly ones (png/svg/pdf/mp3/mp4/...).
+Convert **337** file formats (out of **613** known) into modern browser friendly ones (png/svg/pdf/mp3/mp4/etc.).
 
 Utilizes [Deno](https://deno.land/) to leverage **59** helper programs running on **4** different operating systems under [QEMU](https://www.qemu.org/).
 
-See lists of [SUPPORTED](SUPPORTED.md) and [UNSUPPORTED](UNSUPPORTED.md) file formats.
+See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats.
 
 ## Install and Usage
 There is no easy way to install or use this yourself due to 3 factors:

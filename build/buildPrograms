@@ -1,2 +1,0 @@
-#!/bin/sh
-DENO_DIR=/mnt/compendium/.deno deno run --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-net --allow-read --allow-write buildPrograms.js "$@"

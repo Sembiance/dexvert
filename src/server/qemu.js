@@ -12,7 +12,7 @@ const DELAY_SIZE = xu.MB*50;
 const HOSTS =
 {
 	lostcrag      : { numServers :  2 },
-	crystalsummit : { numServers :  1 },
+	crystalsummit : { numServers :  2 },
 	chatsubo      : { numServers : 10 }
 };
 const OS_DEFAULT =

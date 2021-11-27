@@ -33,7 +33,7 @@ const FLEX_SIZE_FORMATS =
 
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
-		naplps             : 5,
+		naplps             : 7,
 		threeDCK           : 10,
 
 		// TODO TEMPROARY due to bug in abydos
@@ -54,6 +54,7 @@ const DISK_FORMAT_MAP =
 	[/image\/fig\/.+.(gif|jpg|xbm|xpm)$/, true]
 ];
 
+const DEXTEST_ROOT_DIR = "/mnt/ram/tmp/test";
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*3;
 const fileDurations = {};
@@ -100,7 +101,7 @@ const failures=[];
 async function testSample(sampleFilePath)
 {
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
-	const tmpOutDirPath = await fileUtil.genTempPath(`/mnt/ram/tmp/test-${path.basename(path.dirname(sampleFilePath))}`, `_${path.basename(sampleFilePath)}`);
+	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 	const r = await runUtil.run("dexvert", ["--json", sampleFilePath, tmpOutDirPath]);
 	const resultFull = xu.parseJSON(r.stdout);
@@ -341,6 +342,8 @@ async function writeOutputHTML()
 
 if(argv.record)
 	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
+
+await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"]);
 
 xu.log`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
 

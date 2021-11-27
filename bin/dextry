@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/mnt/compendium/DevLab/dexvert/build/buildAll.sh --silent
+/mnt/compendium/DevLab/dexvert/build/build --silent all
 
 command rm -rf ~/tmp/out
 mkdir -p ~/tmp/out

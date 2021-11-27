@@ -73,6 +73,12 @@ Some programs are buggy and will consume the entire hard drive. This is a way to
 
 >>> chain = "dexvert[asFormat:abc] -> dexvert[asFormat:mid]"  or  async (runState) => ""
 Programs can't always produce the end result I want, so you can chain the outputs of one program into a nother program.
+If an item begins with a * such as "*joinAsGIF" then all files will be sent as a single input array to 1 invocation of the chain (rather than the default of the chain being invoked for each file)
+If an item begins with a ? such as "?dexvert" then the async chainCheck() function is called and if it returns a falsy value then the chain won't be called for that file, otherwise it can return an object of flags to use for the chain call
+
+>>> chainCheck = async (r, dexFile, chainValue) => { return {asFormat : "image/jpeg2000"}; }
+Called only if a given chain item begins with a ? and you can return false to skip running the chainValue for the given dexFile or true to allow it.
+You can also return an Object to allow it AND set the key/vals in that object as flags to the chainValue invocation.
 
 >>> verify = async (r, dexFile) => { return false; }
 Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.

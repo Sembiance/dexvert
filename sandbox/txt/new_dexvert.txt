@@ -1,15 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Figure out how to handle icns/abydos.icns deark producing 2 .jp2 files and 3 .png files
-  Add option chaining in Program.js on line #288
-  If the chain begins with a question mark, then it will await call async chainCheck(chainFile, chainValue)
-  If that returns false, it won't run on that file. Otherwise it will.
-  If the result of that function is an Object, it's sent as flags for that call
-  Then I can do that in dear  chain = "?dexvert"
-  In the dexvert chainCheck() if the chainFile.ext===".jp2" then I can return {asFormat : "image/jpeg2000"}
-  Test this. Will need to handle filename clobbering on chains...
-
 * Make the MD build scripts build/buildMDReadMe, etc
 
 * Add full dexvert support for: ALL IMAGES
@@ -70,7 +61,7 @@ filesRequired/filesOptional -> auxFiles
 
 * Once ALL FORMATS identifcation fully working and tested, think about adding a 'prefix' match type that will match prefixes against extensions
 
-* Will likely need to create FileSet/DexFile/etc  static Class.parse() and class.toJSON() methods that utilize xu.parseJSON() and create objects and JSON.stringify them.
+* Once done and published, let bergam know about the new 'converters' column on the supported page
 
 * Try this as alternative to lobe, see how it does: https://teachablemachine.withgoogle.com/
 

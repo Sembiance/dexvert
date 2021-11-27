@@ -30,29 +30,30 @@ export class Program
 			loc       : {type : "string", required : true, enum : ["local", "dos", ...QEMUIDS]},
 
 			// meta
+			flags          : {type : Object},
 			gentooPackage  : {types : ["string", Array]},
 			gentooOverlay  : {type : "string"},
 			gentooUseFlags : {type : "string"},
-			website        : {type : "string", url : true},
 			notes          : {type : "string"},
-			unsafe         : {type : "boolean"},
-			flags          : {type : Object},
 			renameOut      : {type : Object},
 			runOptions     : {types : [Object, "function"]},
+			unsafe         : {type : "boolean"},
+			website        : {type : "string", url : true},
 
 			// execution
-			bin       : {type : "string"},
-			chain     : {types : ["function", "string"]},
-			diskQuota : {type : "number", range : [1]},
-			outExt    : {types : ["function", "string"]},
-			dosData   : {type : "function", length : [0, 1]},
-			qemuData  : {type : "function", length : [0, 1]},
-			exec      : {type : "function", length : [0, 1]},
-			args      : {type : "function", length : [0, 1]},
-			cwd       : {type : "function", length : [0, 1]},
-			verify    : {type : "function", length : [0, 2]},
-			pre       : {type : "function", length : [0, 1]},
-			post      : {type : "function", length : [0, 1]}
+			args       : {type : "function", length : [0, 1]},
+			bin        : {type : "string"},
+			chain      : {types : ["function", "string"]},
+			chainCheck : {type : "function", length : [0, 3]},
+			cwd        : {type : "function", length : [0, 1]},
+			diskQuota  : {type : "number", range : [1]},
+			dosData    : {type : "function", length : [0, 1]},
+			exec       : {type : "function", length : [0, 1]},
+			outExt     : {types : ["function", "string"]},
+			post       : {type : "function", length : [0, 1]},
+			pre        : {type : "function", length : [0, 1]},
+			qemuData   : {type : "function", length : [0, 1]},
+			verify     : {type : "function", length : [0, 2]}
 		});
 
 		if(program.renameOut)
@@ -231,7 +232,7 @@ export class Program
 
 			if(chainParts.length>0)
 			{
-				for(const [i, progRaw] of Object.entries(chainParts.map(v => v.trim())))
+				for(const [, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 				{
 					const newFiles = Array.from(f.files.new);
 					const chainF = await f.clone();
@@ -268,9 +269,9 @@ export class Program
 					
 					const chainProgOpts = {isChain : true};
 
-					// if we are the last item in the chain, pass the originalInput name
-					// we don't do this every time because some intermediate files may produce multiple output files that we don't want to clobber (ani/EYES2.gif if you add a middle step deark -> dexvert -> *joinAsGIF)
-					if(+i===chainParts.length-1)
+					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
+					// So we set originalInput so it's named properly
+					if(newFiles.length===1 || progRaw.startsWith("*"))
 						chainProgOpts.originalInput = originalInput || f.input;
 
 					if(progRaw.startsWith("*"))
@@ -287,12 +288,16 @@ export class Program
 					{
 						for(const newFile of newFiles)
 						{
+							const extraChainProgOpts = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, progRaw.substring(1)) : {};
+							if(!extraChainProgOpts)
+								continue;
+
 							chainF.removeType("input");
 							await chainF.add("input", newFile);
 
 							xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
 
-							await Program.runProgram(progRaw, chainF, chainProgOpts);
+							await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, chainF, {...chainProgOpts, ...(Object.isObject(extraChainProgOpts) ? extraChainProgOpts : {})});
 							await handleNewFiles([newFile]);
 						}
 					}

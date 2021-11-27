@@ -44,6 +44,10 @@ export class deark extends Program
 
 		return true;
 	};
+
+	// image/icns/abydos.icns produces 5 output files, 3 PNG and 2 JP2 (JPEG200)
+	chain = "?dexvert";
+	chainCheck = (r, chainFile) => (chainFile.ext.toLowerCase()===".jp2" ? {asFormat : "image/jpeg2000"} : false);	// TODO will likely add these formats in future: ".bmp", ".tif", ".tiff", ".qtif", ".pgc"
 }
 
 /*

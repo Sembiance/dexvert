@@ -7,5 +7,5 @@ export class turshow extends Program
 	loc     = "dos";
 	bin     = "TURSHOW/TURSHOW.EXE";
 	args    = r => [r.inFile()];
-	dosData = async r => ({screenshot : {filePath : await r.outFile("out.png", {absolute : true}), frameLoc : 95}});
+	dosData = async r => ({screenshot : {filePath : await r.outFile("out.png", {absolute : true}), frameLoc : 99}});
 }

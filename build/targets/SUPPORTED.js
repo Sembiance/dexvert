@@ -19,8 +19,8 @@ await Deno.mkdir(DUMMY_DIR_PATH);
 export default async function buildSUPPORTED()
 {
 	xu.log3`Writing SUPPORTED.md to disk...`;
-	await fileUtil.writeFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# **${Object.keys(supportedFormats).length.toLocaleString()}** Supported File Formats
-Converters are in priority order. That is, earlier entries support the format better than later converters.
+	await fileUtil.writeFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
+Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 

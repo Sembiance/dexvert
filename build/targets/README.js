@@ -11,19 +11,17 @@ export default async function buildREADME()
 {
 	xu.log3`Writing README.md to disk...`;
 	await fileUtil.writeFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - Decompress EXtract conVERT
-Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern browser friendly equilivants (png, svg, pdf, mp3, mp4, etc.).
+Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern browser friendly ones (png/svg/pdf/mp3/mp4/...).
 
 Utilizes [Deno](https://deno.land/) to leverage **${Object.keys(programs).length.toLocaleString()}** helper programs running on **${QEMUIDS.length}** different operating systems under [QEMU](https://www.qemu.org/).
 
-See [SUPPORTED.md](SUPPORTED.md) file formats and [UNSUPPORTED.md](UNSUPPORTED.md) file formats.
-
-Multiple file samples are available for each supported format: https://telparia.com/fileFormatSamples/
+See lists of [SUPPORTED](SUPPORTED.md) and [UNSUPPORTED](UNSUPPORTED.md) file formats.
 
 ## Install and Usage
 There is no easy way to install or use this yourself due to 3 factors:
-* Multiple commercial programs and operating systems are required to convert certain formats
-* Over **${Object.keys(programs).length.toLocaleString()}** programs need to be installed, several with [custom code patches](https://github.com/Sembiance/dexvert-gentoo-overlay)
+* Many commercial programs and OS's are not included but are needed to convert several formats
+* Over **${Object.keys(programs).length.toLocaleString()}** programs need to be installed, many with [custom code patches](https://github.com/Sembiance/dexvert-gentoo-overlay)
 * Various kernel and OS configurations need to be set just right
 
-Some day I plan on making a website available where you can upload a file and have it be identified and converted.`);
+Some day I may offer a website where you can upload a file and have it be identified and converted.`);
 }

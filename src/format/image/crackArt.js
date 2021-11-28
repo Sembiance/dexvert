@@ -6,5 +6,5 @@ export class crackArt extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Crack_Art";
 	ext        = [".ca1", ".ca2", ".ca3"];
 	magic      = ["Crack Art bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

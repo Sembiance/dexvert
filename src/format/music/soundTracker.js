@@ -8,7 +8,7 @@ export class soundTracker extends Format
 	priority = 3;
 	converters = ["xmp","uade123","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

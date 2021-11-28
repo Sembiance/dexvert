@@ -9,7 +9,7 @@ export class moduleDescriptionFile extends Format
 	forbidExtMatch = true;
 	magic = ["Open Cubic Player Module Information MDZ"];
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

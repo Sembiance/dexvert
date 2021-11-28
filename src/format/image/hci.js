@@ -5,5 +5,5 @@ export class hci extends Format
 	name       = "Atari HCI";
 	ext        = [".hci"];
 	fileSize   = 16006;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

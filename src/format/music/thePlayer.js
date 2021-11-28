@@ -9,7 +9,7 @@ export class thePlayer extends Format
 	magic = [{}];
 	converters = ["xmp",{"program":"uade123","flags":{"uadeType":"PTK-Prowiz"}}]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

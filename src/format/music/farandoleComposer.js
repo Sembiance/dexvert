@@ -9,7 +9,7 @@ export class farandoleComposer extends Format
 	magic = ["Farandole Composer module","Farandole Tracker Song"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

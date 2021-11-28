@@ -7,7 +7,7 @@ export class rag extends Format
 	website = "http://fileformats.archiveteam.org/wiki/RAG-D";
 	ext = [".rag"];
 	magic = ["RAG-D bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }
 */
 /*

@@ -7,5 +7,5 @@ export class magicPainter extends Format
 	ext        = [".mgp"];
 	magic      = ["Magic Painter bitmap"];
 	fileSize   = 3845;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

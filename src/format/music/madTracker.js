@@ -10,7 +10,7 @@ export class madTracker extends Format
 	notes = "Sample file a little rock/mt2 doesn't convert";
 	converters = ["zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -5,5 +5,5 @@ export class mle extends Format
 	name       = "Multi-Lace Editor";
 	website    = "http://fileformats.archiveteam.org/wiki/Multi-Lace_Editor";
 	ext        = [".mle"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

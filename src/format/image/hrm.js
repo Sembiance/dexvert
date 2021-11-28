@@ -4,5 +4,5 @@ export class hrm extends Format
 {
 	name       = "Atari Highres Medium";
 	ext        = [".hrm"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -11,7 +11,7 @@ export class xb extends Format
 	magic = ["XBIN image"];
 	converters = [{"program":"ansilove","flags":{"ansiloveType":"xb"}},"deark",`abydosconvert[format:${this.mimeType}]`]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

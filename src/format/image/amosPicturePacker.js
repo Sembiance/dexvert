@@ -6,5 +6,5 @@ export class amosPicturePacker extends Format
 	ext        = [".bin"];
 	mimeType   = "image/x-amos-picturepacker";
 	priority   = this.PRIORITY.LOW;
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

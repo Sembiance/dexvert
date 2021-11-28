@@ -6,5 +6,5 @@ export class gfb extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DeskPic";
 	ext        = [".gfb"];
 	magic      = ["DeskPic bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

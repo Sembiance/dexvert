@@ -11,7 +11,7 @@ export class amiga8svx extends Format
 	notes = "Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates.";
 	converters = [{"program":"ffmpeg"},"8SVXtoXXX"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 
 preSteps = [null];
 }

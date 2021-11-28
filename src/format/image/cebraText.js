@@ -7,5 +7,5 @@ export class cebraText extends Format
 	ext        = [".ttx"];
 	magic      = ["Cebra Teletext page"];
 	mimeType   = "application/x.teletext.ttx";
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

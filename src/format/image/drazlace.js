@@ -7,5 +7,5 @@ export class drazlace extends Format
 	ext            = [".drl", ".dlp"];
 	forbidExtMatch = true;
 	magic          = ["Drazlace bitmap"];
-	converters     = ["recoil2png", "view64"]
+	converters     = ["recoil2png", "view64"];
 }

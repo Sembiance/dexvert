@@ -6,7 +6,7 @@ export class ripIcon extends Format
 	name = "RIP Icon";
 	ext = [".icn"];
 	priority = 1;
-	converters = [{"program":"deark","flags":{"dearkModule":"ripicon"}}]
+	converters = [{"program":"deark","flags":{"dearkModule":"ripicon"}}];
 }
 */
 /*

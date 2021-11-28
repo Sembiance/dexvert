@@ -97,12 +97,12 @@ export class Format
 			verify           : {type : "function", length : 1},
 
 			// conversion
-			metaProviders : {type : ["string"], enum : (family.metaids || [])},
-			converters    : {types : [Array, "function"]},
-			keepFilename  : {type : "boolean"},
-			safeExt       : {type : "function", length : [0, 1]},
-			pre           : {type : "function", length : [0, 1]},
-			post          : {type : "function", length : [0, 1]}
+			converters   : {types : [Array, "function"]},
+			keepFilename : {type : "boolean"},
+			metaProvider : {type : ["string"], enum : (family.metaids || [])},
+			safeExt      : {type : "function", length : [0, 1]},
+			pre          : {type : "function", length : [0, 1]},
+			post         : {type : "function", length : [0, 1]}
 		});
 		return format;
 	}

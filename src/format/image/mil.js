@@ -6,5 +6,5 @@ export class mil extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Micro_Illustrator";
 	ext        = [".mil"];
 	fileSize   = 10022;
-	converters = ["recoil2png", "nconvert"]
+	converters = ["recoil2png", "nconvert"];
 }

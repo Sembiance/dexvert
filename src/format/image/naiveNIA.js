@@ -7,5 +7,5 @@ export class naiveNIA extends Format
 	ext        = [".nia"];
 	mimeType   = "image/nia";
 	magic      = ["Naive Image format NIA animated bitmaps"];
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

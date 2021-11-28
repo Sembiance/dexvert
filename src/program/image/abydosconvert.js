@@ -7,7 +7,7 @@ export class abydosconvert extends Program
 	gentooPackage = "media-gfx/abydosconvert";
 	gentooOverlay = "dexvert";
 	unsafe        = true;
-	bin           = "abydosconvert"
+	bin           = "abydosconvert";
 	flags         =
 	{
 		format : "Which format to use for conversion. This is a mime type. REQUIRED."
@@ -16,8 +16,17 @@ export class abydosconvert extends Program
 	args = r => ["--json", r.flags.format, r.inFile(), r.outDir()];
 
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
-	runOptions = ({timeout : xu.MINUTE})
-	renameOut = {regex : /.+?(?<num>\.\d{3})?(?<post>\.(?:png|svg|webp))$/};
+	runOptions = ({timeout : xu.MINUTE});
+	renameOut =
+	{
+		regex : /.+?(?<num>\.\d{3})?(?<ext>\.(?:png|svg|webp))$/,
+		renamer :
+		[
+			({suffix, newName}, {ext}) => [newName, suffix, ext],
+			({suffix}, {num, ext}) => [num.trimChars("."), suffix, ext]
+			//({fn, suffix}, {num, name, ext}) => { console.log({fn, num, name, ext}); return false; }
+		]
+	};
 }
 
 /*

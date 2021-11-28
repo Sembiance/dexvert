@@ -8,5 +8,5 @@ export class p4i extends Format
 	magic      = ["Picasso 64 Image", "Saracen Paint Image", "Koala Paint"];
 	weakMagic  = true;
 	trustMagic = true;	// Koala Paint is normally untrustworthy, but we trust it here
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

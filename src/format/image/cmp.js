@@ -6,5 +6,5 @@ export class cmp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CMP";
 	ext        = [".cmp"];
 	magic      = ["LEADTools CMP Image Compressed bitmap", "LEADToolsCompressed Image"];
-	converters = ["leadecom"]
+	converters = ["leadecom"];
 }

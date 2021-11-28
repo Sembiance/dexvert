@@ -1,29 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class pgx extends Format
 {
-	name = "Portfolio PGX";
-	website = "http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)";
-	ext = [".pgx"];
-	magic = ["Portfolio PGX bitmap"];
-	notes = "Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an MP4.";
-	converters = [{"program":"deark","flags":{"dearkKeepAsGIF":true,"dearkJoinFrames":true}}]
+	name       = "Portfolio PGX";
+	website    = "http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)";
+	ext        = [".pgx"];
+	magic      = ["Portfolio PGX bitmap"];
+	notes      = "Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an GIF";
+	converters = ["deark -> dexvert[asFormat:image/pgc] -> *joinAsGIF"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name    : "Portfolio PGX",
-	website : "http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)",
-	ext     : [".pgx"],
-	magic   : ["Portfolio PGX bitmap"],
-	notes   : "Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an MP4."
-};
-
-exports.converterPriority = [{program : "deark", flags : {dearkKeepAsGIF : true, dearkJoinFrames : true}}];
-
-*/

@@ -8,7 +8,7 @@ export class robHubbard extends Format
 	magic = ["Rob Hubbard chiptune","Rob Hubbard ST module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -10,7 +10,7 @@ export class mp3 extends Format
 	magic = ["LAME encoded MP3 audio",{},"MPEG ADTS, layer III","MPEG 1/2 Audio Layer 3"];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

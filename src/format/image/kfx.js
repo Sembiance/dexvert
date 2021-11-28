@@ -5,5 +5,5 @@ export class kfx extends Format
 	name       = "Atari KFX";
 	website    = "http://fileformats.archiveteam.org/wiki/KFX";
 	ext        = [".kfx"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -6,5 +6,5 @@ export class hrs extends Format
 	ext        = [".hrs", ".hir"];
 	magic      = ["Oric Tape Image"];
 	weakMagic  = true;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

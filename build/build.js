@@ -1,13 +1,8 @@
 import {xu} from "xu";
 import {printUtil, cmdUtil} from "xutil";
+import {path} from "std";
 
-import {default as formats} from "./targets/formats.js";
-import {default as programs} from "./targets/programs.js";
-import {default as README} from "./targets/README.js";
-import {default as SUPPORTED} from "./targets/SUPPORTED.js";
-import {default as UNSUPPORTED} from "./targets/UNSUPPORTED.js";
-const TARGETS = Object.fromEntries([["formats", formats], ["programs", programs], ["README", README], ["SUPPORTED", SUPPORTED], ["UNSUPPORTED", UNSUPPORTED]]);
-
+const TARGET_NAMES = ["programs", "formats", "README", "SUPPORTED", "UNSUPPORTED"];
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Builds one or more targets",
@@ -17,15 +12,17 @@ const argv = cmdUtil.cmdInit({
 	},
 	args :
 	[
-		{argid : "target", desc : "The target to build", required : true, multiple : true, allowed : ["all", ...Object.keys(TARGETS)]}
+		{argid : "target", desc : "The target to build", required : true, multiple : true, allowed : ["all", ...TARGET_NAMES]}
 	]});
 
 if(!argv.silent)
 	xu.verbose = 3;
 
-const targets = (argv.target.some(v => v.toLowerCase()==="all") ? Object.keys(TARGETS) : argv.target);
-for(const [i, target] of Object.entries(targets))
+const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES : argv.target);
+for(const [i, targetid] of Object.entries(targetids))
 {
-	xu.log3`${printUtil.majorHeader(target, +i>0 ? {prefix : "\n"} : {})}`;
-	await TARGETS[target]();
+	xu.log3`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;
+
+	// DO not be tempted to make the import static because the 'formats.js' outtput file might point to files that no longer exist and README/SUPPORTED/UNSUPPORTED targets load this
+	await (await import(path.join(xu.dirname(import.meta), "targets", `${targetid}.js`))).default();
 }

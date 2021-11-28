@@ -7,5 +7,5 @@ export class gx1 extends Format
 	ext        = [".gx1"];
 	mimeType   = "image/x-gx1";
 	magic      = ["GX1 bitmap"];
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

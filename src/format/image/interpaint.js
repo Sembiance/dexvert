@@ -8,5 +8,5 @@ export class interpaint extends Format
 	forbidExtMatch = true;
 	magic          = ["Interpaint bitmap"];
 	weakMagic      = true;
-	converters     = ["recoil2png", "nconvert", "view64"]
+	converters     = ["recoil2png", "nconvert", "view64"];
 }

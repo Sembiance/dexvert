@@ -15,6 +15,7 @@ export class neochrome extends Format
 	};
 
 	// Don't do anything with .rst files
-	untouched  = ({f}) => f.input.ext.toLowerCase()=== ".rst"
-	converters = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`]
+	untouched = ({f}) => f.input.ext.toLowerCase()=== ".rst";
+
+	converters = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 }

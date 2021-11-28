@@ -7,7 +7,7 @@ export class ripScrip extends Format
 	website = "http://fileformats.archiveteam.org/wiki/RIPscrip";
 	ext = [".rip"];
 	magic = ["RIPscript"];
-	converters = ["pabloDrawConsole"]
+	converters = ["pabloDrawConsole"];
 }
 */
 /*

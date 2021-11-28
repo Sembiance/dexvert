@@ -15,7 +15,7 @@ export class richardJoseph extends Format
 
 preSteps = [null];
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

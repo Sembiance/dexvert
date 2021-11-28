@@ -8,7 +8,7 @@ export class soundTrackerProII extends Format
 	magic = ["Spectrum Sound Tracker Pro 2 chiptune"];
 	converters = ["zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

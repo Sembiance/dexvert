@@ -7,7 +7,7 @@ export class steveBarrett extends Format
 	ext = [".sb"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

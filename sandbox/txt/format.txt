@@ -109,7 +109,7 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 Format specific function that takes in an input DexFile and should return meta about the input file
 
 >>> ******** Conversion
->>> metaProviders = ["image", "darkTable", "ansiArt"]
+>>> metaProvider = ["image", "darkTable", "ansiArt"]
 A list of meta providers to use to get info about the input file for this format.
 These are family specific
 

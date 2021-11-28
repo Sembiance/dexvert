@@ -9,7 +9,7 @@ export class flc extends Format
 	magic = ["FLIC FLC video","FLC animation","Autodesk Animator Pro FLIC"];
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"flic"}},"xanim"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

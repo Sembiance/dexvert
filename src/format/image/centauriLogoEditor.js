@@ -9,6 +9,5 @@ export class centauriLogoEditor extends Format
 	weakMagic  = true;
 	trustMagic = true;
 	fileSize   = 8194;
-
-	converters = ["recoil2png", "view64"]
+	converters = ["recoil2png", "view64"];
 }

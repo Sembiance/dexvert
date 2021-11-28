@@ -8,7 +8,7 @@ export class samCoupeSNG extends Format
 	notes = "Not all files converted, such as tetris.sng and shanhai.sng";
 	converters = ["zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

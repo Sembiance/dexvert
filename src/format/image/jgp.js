@@ -6,5 +6,5 @@ export class jgp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Jet_Graphics_Planner";
 	ext        = [".jgp"];
 	fileSize   = 2054;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

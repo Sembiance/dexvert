@@ -9,6 +9,7 @@ export class binaryText extends Format
 	mimeType       = "text/x-binary";
 	forbiddenMagic = TEXT_MAGIC;
 	notes          = "It's crazy hard to identify this file, and we err on the side of caution. So we only convert files that have meta data set in them.";
-	converters     = r => (Object.keys(r.meta).length>0 ? ["deark[module:bintext][charOutType:image]", "ansilove[format:bin]", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[codec:bintext][outType:png]"] : []);
-	metaProviders  = ["ansiArt", "ffprobe"];
+	metaProvider   = ["ansiArt", "ffprobe"];
+
+	converters = r => (Object.keys(r.meta).length>0 ? ["deark[module:bintext][charOutType:image]", "ansilove[format:bin]", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[codec:bintext][outType:png]"] : []);
 }

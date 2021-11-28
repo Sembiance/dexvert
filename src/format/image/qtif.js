@@ -9,7 +9,7 @@ export class qtif extends Format
 	mimeType = "image/qtif";
 	magic = ["QuickTime Image Format"];
 	notes = "Not all QTIF sub formats are not supported.";
-	converters = ["nconvert","deark",`abydosconvert[format:${this.mimeType}]`,"ffmpeg"]
+	converters = ["nconvert","deark",`abydosconvert[format:${this.mimeType}]`,"ffmpeg"];
 }
 */
 /*

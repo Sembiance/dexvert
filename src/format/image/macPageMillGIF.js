@@ -6,5 +6,5 @@ export class macPageMillGIF extends Format
 	ext            = [".gif"];
 	forbidExtMatch = true;
 	magic          = ["Mac PageMill's GIF bitmap"];
-	converters     = ["graphicWorkshopProfessional", "imageAlchemy"]
+	converters     = ["graphicWorkshopProfessional", "imageAlchemy"];
 }

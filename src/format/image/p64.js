@@ -10,5 +10,5 @@ export class p64 extends Format
 	weakMagic  = true;
 	trustMagic = true;
 	fileSize   = 10050;
-	converters = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"]
+	converters = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
 }

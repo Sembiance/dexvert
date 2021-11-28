@@ -8,5 +8,5 @@ export class avatar extends Format
 	ext            = [".avt"];
 	mimeType       = "text/x-avatar0";
 	forbiddenMagic = TEXT_MAGIC;
-	converters     = [`abydosconvert[format:${this.mimeType}]`]
+	converters     = [`abydosconvert[format:${this.mimeType}]`];
 }

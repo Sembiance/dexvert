@@ -6,5 +6,5 @@ export class ffli extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/FFLI";
 	ext        = [".ffli"];
 	magic      = ["Flickering Flexible Line Interpratation bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

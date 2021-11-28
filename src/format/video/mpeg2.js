@@ -10,7 +10,7 @@ export class mpeg2 extends Format
 	magic = ["MPEG-2 Elementary Stream","MPEG-2 Program Stream","MPEG sequence, v2"];
 	converters = ["ffmpeg","xanim"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

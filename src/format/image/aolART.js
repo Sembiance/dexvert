@@ -6,5 +6,5 @@ export class aolART extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)";
 	ext        = [".art"];
 	magic      = ["AOL ART image", "AOL ART (Johnson-Grace compressed) bitmap"];
-	converters = ["graphicWorkshopProfessional"]
+	converters = ["graphicWorkshopProfessional"];
 }

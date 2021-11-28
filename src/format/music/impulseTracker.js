@@ -9,7 +9,7 @@ export class impulseTracker extends Format
 	magic = ["Impulse Tracker module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -7,7 +7,7 @@ export class q4 extends Format
 	website = "http://fileformats.archiveteam.org/wiki/XLD4";
 	ext = [".q4"];
 	magic = ["XLD4 bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }
 */
 /*

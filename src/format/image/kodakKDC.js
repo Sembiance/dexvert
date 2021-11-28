@@ -2,11 +2,11 @@ import {Format} from "../../Format.js";
 
 export class kodakKDC extends Format
 {
-	name          = "Kodak RAW KDC";
-	website       = "http://fileformats.archiveteam.org/wiki/Kodak";
-	ext           = [".kdc"];
-	magic         = ["Kodak Digital Camera RAW image (DC serie)", "Kodak Digital Camera RAW image (EasyShare serie)"];
-	mimeType      = "image/x-kodak-kdc";
-	converters    = ["darktable_cli", `abydosconvert[format:${this.mimeType}]`]
-	metaProviders = ["darkTable"];
+	name         = "Kodak RAW KDC";
+	website      = "http://fileformats.archiveteam.org/wiki/Kodak";
+	ext          = [".kdc"];
+	magic        = ["Kodak Digital Camera RAW image (DC serie)", "Kodak Digital Camera RAW image (EasyShare serie)"];
+	mimeType     = "image/x-kodak-kdc";
+	metaProvider = ["darkTable"];
+	converters   = ["darktable_cli", `abydosconvert[format:${this.mimeType}]`];
 }

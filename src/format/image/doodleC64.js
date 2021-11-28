@@ -8,5 +8,5 @@ export class doodleC64 extends Format
 	magic         = ["Doodle bitmap (compressed)"];
 	fileSize      = {".dd" : [9218, 9026, 9346]};
 	matchFileSize = true;
-	converters    = ["recoil2png", "nconvert"]
+	converters    = ["recoil2png", "nconvert"];
 }

@@ -8,7 +8,7 @@ export class sunTronic extends Format
 	magic = ["SUNTronic module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

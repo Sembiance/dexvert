@@ -7,5 +7,5 @@ export class cur extends Format
 	ext        = [".cur"];
 	mimeType   = "application/ico";
 	magic      = ["MS Windows cursor resource", "Microsoft Windows Cursor"];
-	converters = ["deark"]
+	converters = ["deark"];
 }

@@ -8,6 +8,6 @@ export class panasonicRaw extends Format
 	forbidExtMatch = [".raw"];
 	magic          = ["Panasonic RAW image", "Panasonic Raw", "Leica RAW image"];
 	mimeType       = "image/x-panasonic-raw";
-	converters     = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"]
-	metaProviders  = ["image", "darkTable"];
+	metaProvider   = ["image", "darkTable"];
+	converters     = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 }

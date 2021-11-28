@@ -4,5 +4,5 @@ export class hereticIIMipMap extends Format
 {
 	name       = "Heretic II MipMap";
 	ext        = [".m8"];
-	converters = ["nconvert"]
+	converters = ["nconvert"];
 }

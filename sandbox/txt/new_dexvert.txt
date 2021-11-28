@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Make the MD build scripts build/buildMDReadMe, etc
-
 * Add full dexvert support for: ALL IMAGES
 
 * Fully dexvert support:

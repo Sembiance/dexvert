@@ -7,5 +7,5 @@ export class a2Sprites extends Format
 	ext        = [".spr"];
 	magic      = TEXT_MAGIC;
 	weakMagic  = true;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

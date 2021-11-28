@@ -7,5 +7,5 @@ export class hpi extends Format
 	ext        = [".hpi"];
 	magic      = ["Hemera Photo-Object Image bitmap"];
 	notes      = "Kevlar.hpi won't convert for some reason";
-	converters = ["nconvert", "deark"]
+	converters = ["nconvert", "deark"];
 }

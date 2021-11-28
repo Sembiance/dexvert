@@ -8,7 +8,7 @@ export class s98 extends Format
 	magic = ["PC88/PC9801 sound logs rip"];
 	converters = ["zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

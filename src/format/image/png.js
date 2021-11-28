@@ -9,5 +9,5 @@ export class png extends Format
 	magic         = ["Portable Network Graphics", "PNG image data"];
 	untouched     = true;
 	fallback      = true;
-	metaProviders = ["image"];
+	metaProvider = ["image"];
 }

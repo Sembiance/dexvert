@@ -7,7 +7,7 @@ export class quartetPSG extends Format
 	ext = [".sqt"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

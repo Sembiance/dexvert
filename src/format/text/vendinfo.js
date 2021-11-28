@@ -10,7 +10,7 @@ export class vendinfo extends Format
 	filename = [{}];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

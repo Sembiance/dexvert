@@ -7,5 +7,5 @@ export class imgScan extends Format
 	ext           = [".rwl", ".raw", ".rwh"];
 	fileSize      = {".rwl" : 64000, ".raw" : 128_000, ".rwh" : 256_000};
 	matchFileSize = true;
-	converters    = ["recoil2png"]
+	converters    = ["recoil2png"];
 }

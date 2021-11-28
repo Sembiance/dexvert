@@ -8,9 +8,8 @@ export class psd extends Format
 	ext = [".psd"];
 	mimeType = "image/vnd.adobe.photoshop";
 	magic = [{},{}];
-	converters = ["convert"]
-
-	metaProviders = [""];
+	metaProvider = [""];
+	converters = ["convert"];
 }
 */
 /*

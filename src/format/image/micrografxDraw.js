@@ -7,5 +7,5 @@ export class micrografxDraw extends Format
 	ext            = [".drw", ".drt", ".ds4", ".dsf"];
 	forbidExtMatch = true;
 	magic          = ["Micrografx Designer Drawing"];
-	converters     = ["scribus"]
+	converters     = ["scribus"];
 }

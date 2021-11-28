@@ -6,5 +6,5 @@ export class autoCADSlide extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AutoCAD_Slide";
 	ext        = [".sld"];
 	magic      = [/^AutoCAD Slide$/];
-	converters = ["sldtoppm"]
+	converters = ["sldtoppm"];
 }

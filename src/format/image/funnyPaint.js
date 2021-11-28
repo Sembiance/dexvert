@@ -7,5 +7,5 @@ export class funnyPaint extends Format
 	ext            = [".fun"];
 	forbidExtMatch = true;
 	magic          = ["Funny Paint"];
-	converters     = ["recoil2png"]
+	converters     = ["recoil2png"];
 }

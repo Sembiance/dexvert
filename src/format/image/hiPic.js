@@ -9,5 +9,5 @@ export class hiPic extends Format
 	weakMagic  = true;
 	trustMagic = true;	// Koala Paint is normally untrustworthy, but we trust it here
 	fileSize   = 9003;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

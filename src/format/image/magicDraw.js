@@ -5,5 +5,5 @@ export class magicDraw extends Format
 	name       = "Magic Draw";
 	website    = "http://fileformats.archiveteam.org/wiki/MagicDraw";
 	ext        = [".shr", ".hr"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

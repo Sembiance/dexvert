@@ -12,7 +12,7 @@ export class xml extends Format
 	untouched = true;
 	hljsLang = "xml";
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

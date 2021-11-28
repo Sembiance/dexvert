@@ -8,5 +8,5 @@ export class hdf4 extends Format
 	mimeType   = "application/x-hdf";
 	magic      = ["Hierarchical Data Format (version 4)", /^NCSA Hierarchical Data Format$/];
 	notes      = "nconvert doesn't seem to handle all files, such as input_256 and input_truecolor";
-	converters = ["nconvert"]
+	converters = ["nconvert"];
 }

@@ -6,5 +6,5 @@ export class paintShop extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PaintShop";
 	ext        = [".da4", ".psc"];
 	magic      = ["PaintShop plus Compressed bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

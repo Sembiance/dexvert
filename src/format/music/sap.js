@@ -9,7 +9,7 @@ export class sap extends Format
 	magic = ["Atari 8-bit SAP audio file","Slight Atari Player music format "];
 	converters = ["asapconv","zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

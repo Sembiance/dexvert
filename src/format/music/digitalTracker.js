@@ -9,7 +9,7 @@ export class digitalTracker extends Format
 	magic = ["Digital Tracker 1.9 module",{}];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

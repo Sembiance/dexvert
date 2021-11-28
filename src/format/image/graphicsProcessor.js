@@ -6,5 +6,5 @@ export class graphicsProcessor extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Graphics_Processor";
 	ext        = [".pg1", ".pg2", ".pg3"];
 	fileSize   = 32331;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

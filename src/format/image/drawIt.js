@@ -6,5 +6,5 @@ export class drawIt extends Format
 	ext           = [".dit"];
 	fileSize      = 3845;
 	matchFileSize = true;
-	converters    = ["recoil2png"]
+	converters    = ["recoil2png"];
 }

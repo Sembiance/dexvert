@@ -7,5 +7,5 @@ export class lp3 extends Format
 	ext        = [".lp3"];
 	magic      = ["Picasso 64 Image"];
 	weakMagic  = true;
-	converters = ["recoil2png", "view64"]
+	converters = ["recoil2png", "view64"];
 }

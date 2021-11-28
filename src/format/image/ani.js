@@ -7,5 +7,5 @@ export class ani extends Format
 	ext        = [".ani"];
 	mimeType   = "application/x-navi-animation";
 	magic      = ["Windows Animated Cursor", /^RIFF .* animated cursor$/];
-	converters = ["deark -> *joinAsGIF"]
+	converters = ["deark -> *joinAsGIF"];
 }

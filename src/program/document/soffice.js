@@ -13,7 +13,7 @@ export class soffice extends Program
 	
 	loc      = "gentoo";
 	bin      = "soffice";
-	args     = r => ["--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", "/out", r.inFile()]
+	args     = r => ["--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", "/out", r.inFile()];
 	qemuData = () => ({timeout : xu.MINUTE*2});
 	chain    = r => ((r.flags.outType || "svg")==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);
 }

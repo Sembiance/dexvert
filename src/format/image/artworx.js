@@ -10,7 +10,8 @@ export class artworx extends Format
 	magic          = [/^data$/];
 	forbiddenMagic = ["Amiga Disk image File", ...TEXT_MAGIC];
 	weakMagic      = true;
-	metaProviders  = ["ansiArt"];
+	metaProvider   = ["ansiArt"];
+	
 	// deark messes up several images, but ansilove seems to handle them all
-	converters     = ["ansilove[format:adf]", "deark", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["ansilove[format:adf]", "deark", `abydosconvert[format:${this.mimeType}]`];
 }

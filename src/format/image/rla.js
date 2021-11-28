@@ -7,9 +7,8 @@ export class rla extends Format
 	website = "http://fileformats.archiveteam.org/wiki/RLA";
 	ext = [".rla"];
 	magic = ["Alias Wavefront Raster bitmap"];
-	converters = ["convert","nconvert"]
-
-	metaProviders = [""];
+	metaProvider = [""];
+	converters = ["convert","nconvert"];
 }
 */
 /*

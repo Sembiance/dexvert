@@ -7,5 +7,5 @@ export class duStar extends Format
 	ext        = [".du1", ".du2", ".duo"];
 	mimeType   = "image/x-atari-duo";
 	fileSize   = 113_600;
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

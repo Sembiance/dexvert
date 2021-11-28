@@ -9,7 +9,7 @@ export class med extends Format
 	magic = ["OctaMED Pro music file",{},"OctaMED Music Editor module","MED_Song","OctaMED Soundstudio music file","MED music file"];
 	converters = ["xmp","openmpt123","zxtune123","uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

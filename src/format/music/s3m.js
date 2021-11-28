@@ -9,7 +9,7 @@ export class s3m extends Format
 	magic = ["ScreamTracker III Module sound data","Scream Tracker 3 module","Scream Tracker module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

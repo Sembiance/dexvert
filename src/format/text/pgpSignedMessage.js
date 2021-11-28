@@ -8,7 +8,7 @@ export class pgpSignedMessage extends Format
 	magic = ["PGP signed message","PGP clear text signed message"];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

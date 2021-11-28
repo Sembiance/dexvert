@@ -11,7 +11,7 @@ export class otf extends Format
 
 steps = [null];
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

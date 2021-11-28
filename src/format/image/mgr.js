@@ -6,5 +6,5 @@ export class mgr extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MGR_bitmap";
 	ext        = [".mgr"];
 	magic      = ["MGR bitmap"];
-	converters = ["nconvert"]
+	converters = ["nconvert"];
 }

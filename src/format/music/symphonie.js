@@ -8,7 +8,7 @@ export class symphonie extends Format
 	magic = ["Symphonie SymMOD music file","Symphonie Module"];
 	converters = ["zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

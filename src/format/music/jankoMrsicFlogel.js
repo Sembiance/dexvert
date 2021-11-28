@@ -8,7 +8,7 @@ export class jankoMrsicFlogel extends Format
 	magic = ["Janko Mrsic-Flogel module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

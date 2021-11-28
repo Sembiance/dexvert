@@ -7,5 +7,5 @@ export class kissCel extends Format
 	ext        = [".cel", ".kcf"];
 	mimeType   = "image/x-kiss-cel";
 	magic      = ["KiSS CEL bitmap"];
-	converters = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -6,5 +6,5 @@ export class artDirector extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Art_Director";
 	ext        = [".art"];
 	fileSize   = 32512;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

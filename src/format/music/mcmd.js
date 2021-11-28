@@ -8,7 +8,7 @@ export class mcmd extends Format
 	magic = ["MCMD module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

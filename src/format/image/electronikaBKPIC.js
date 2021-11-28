@@ -5,5 +5,5 @@ export class electronikaBKPIC extends Format
 	name       = "Electronika BK PIC";
 	ext        = [".pic"];
 	fileSize   = 16384;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

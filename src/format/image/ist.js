@@ -6,5 +6,5 @@ export class ist extends Format
 	website    = "http://madteam.atari8.info/index.php?prod=uzytki";
 	ext        = [".ist"];
 	fileSize   = 17184;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

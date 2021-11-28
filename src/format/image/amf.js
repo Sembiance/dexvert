@@ -8,5 +8,5 @@ export class amf extends Format
 	forbidExtMatch = true;
 	magic          = ["IFF data, AMFF AmigaMetaFile format"];
 	mimeType       = "image/x-amff";
-	converters     = [`abydosconvert[format:${this.mimeType}]`]
+	converters     = [`abydosconvert[format:${this.mimeType}]`];
 }

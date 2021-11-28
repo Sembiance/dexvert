@@ -8,7 +8,7 @@ export class webp extends Format
 	mimeType      = "image/webp";
 	magic         = ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image$/];
 	untouched     = true;
-	metaProviders = ["image", "webpinfo"];
+	metaProvider = ["image", "webpinfo"];
 }
 
 /*

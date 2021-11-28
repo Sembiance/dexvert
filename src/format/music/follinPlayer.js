@@ -8,7 +8,7 @@ export class follinPlayer extends Format
 	magic = ["Follin Player II module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

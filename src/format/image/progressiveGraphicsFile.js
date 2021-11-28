@@ -8,7 +8,7 @@ export class progressiveGraphicsFile extends Format
 	ext = [".pgf"];
 	magic = ["Progressive Graphics image data"];
 	mimeType = "image/x-pgf";
-	converters = ["pgf"]
+	converters = ["pgf"];
 }
 */
 /*

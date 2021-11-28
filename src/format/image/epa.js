@@ -10,5 +10,5 @@ export class epa extends Format
 	weakMagic      = true;
 
 	// nconvert, as usual, messes up several files
-	converters     = ["recoil2png", "deark", "nconvert"]
+	converters     = ["recoil2png", "deark", "nconvert"];
 }

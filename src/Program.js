@@ -35,7 +35,7 @@ export class Program
 			gentooOverlay  : {type : "string"},
 			gentooUseFlags : {type : "string"},
 			notes          : {type : "string"},
-			renameOut      : {type : Object},
+			renameOut      : {types : [Object, "boolean"]},
 			runOptions     : {types : [Object, "function"]},
 			unsafe         : {type : "boolean"},
 			website        : {type : "string", url : true},
@@ -56,14 +56,14 @@ export class Program
 			verify     : {type : "function", length : [0, 2]}
 		});
 
-		if(program.renameOut)
-			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}});
+		if(program.renameOut && Object.isObject(program.renameOut))
+			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}, renamer : {type : ["function"]}, multipleOnly : {type : "boolean"}});
 
 		return program;
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix, isChain}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -170,6 +170,10 @@ export class Program
 			}
 		}
 
+		// sort the filenames by depth and then by filename
+		if(f.files.new)
+			f.files.new.sortMulti([file => file.rel.split("/").length, file => file.base]);
+
 		if(this.post)
 		{
 			try { await this.post(r); }
@@ -177,24 +181,60 @@ export class Program
 		}
 
 		// if we have some new files, time to rename them
-		if(f.outDir && f.files.new?.length)
+		if(f.outDir && f.files.new?.length && this.renameOut!==false)
 		{
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
 			const newName = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name));
-			if(ro.regex)
+			const restreamerOpts = {newName, suffix, numFiles : f.files.new.length};
+
+			// See if we have more advanced renaming
+			if(ro.regex && (f.files.new.length>1 || !ro.multipleOnly))
 			{
-				const filenamesWithoutNum = f.files.new.map(newFile => newFile.base.replace(ro.regex, `$<pre>${newName}$<post>`));
-				const numPart = (filenamesWithoutNum.unique().length<filenamesWithoutNum.length) ? "$<num>" : "";
-				for(const newFile of f.files.new)
+				let renamer = null;
+				let renamerNum = null;
+				for(const [i, testRenamer] of Object.entries(ro.renamer))
 				{
-					const replacementName = newFile.base.replace(ro.regex, `$<pre>${newName}${numPart}${suffix || ""}$<post>`);
-					xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
-					await newFile.rename(replacementName, {replaceExisting : !!isChain});
+					const filenames = f.files.new.map(newFile =>
+					{
+						try
+						{
+							const parts = testRenamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {});
+							return (parts.length===0 || parts.some(part => typeof part!=="string")) ? null : parts.join("");
+						}
+						catch
+						{
+							return null;
+						}
+					});
+
+					xu.log4`Renamer #${i} produced: ${filenames}`;
+					if(filenames.some(filename => typeof filename!=="string") || filenames.unique().length<filenames.length)
+						continue;
+
+					renamerNum = +i;
+					renamer = testRenamer;
+					break;
+				}
+
+				if(renamer===null)
+				{
+					xu.log2`${xu.c.blink + fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names.`;
+				}
+				else
+				{
+					xu.log3`Picked renamer #${renamerNum} for renaming ${f.files.new.length} files...`;
+
+					for(const newFile of f.files.new)
+					{
+						const replacementName = renamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {}).join("");
+						xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
+						await newFile.rename(replacementName, {replaceExisting : !!isChain});
+					}
 				}
 			}
 			else if(f.files.new.length===1)
 			{
-				const newFilename = newName + (ro.ext || f.new.ext);
+				const newFilename = newName + suffix + (ro.ext || f.new.ext);
 				if(newFilename!==f.new.base)
 				{
 					xu.log2`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;

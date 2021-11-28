@@ -7,7 +7,7 @@ export class tomyTracker extends Format
 	ext = [".sg"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

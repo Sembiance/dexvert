@@ -6,5 +6,5 @@ export class dynamicPublisherScreen extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Dynamic_Publisher";
 	ext        = [".pct"];
 	magic      = ["Dynamic Publisher Picture/Screen"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -7,5 +7,5 @@ export class atariCAD extends Format
 	ext        = [".drg"];
 	mimeType   = "image/x-atari-cad";
 	fileSize   = 6400;
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

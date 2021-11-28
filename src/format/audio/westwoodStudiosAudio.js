@@ -9,7 +9,7 @@ export class westwoodStudiosAudio extends Format
 	magic = ["Westwood Studios audio"];
 	converters = ["ffmpeg"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

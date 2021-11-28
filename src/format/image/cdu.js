@@ -6,5 +6,5 @@ export class cdu extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CDU-Paint";
 	ext        = [".cdu"];
 	fileSize   = 10277;
-	converters = ["recoil2png", "view64"]
+	converters = ["recoil2png", "view64"];
 }

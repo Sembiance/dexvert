@@ -6,5 +6,5 @@ export class hcm extends Format
 	ext        = [".hcm"];
 	magic      = ["Hard Color Map bitmap"];
 	fileSize   = 8208;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -6,5 +6,5 @@ export class ldm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Ludek_Maker";
 	ext        = [".ldm"];
 	magic      = ["Ludek Maker bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

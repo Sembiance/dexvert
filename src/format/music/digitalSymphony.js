@@ -9,7 +9,7 @@ export class digitalSymphony extends Format
 	magic = ["Digital Symphony relocatable module","Digital Symphony song"];
 	converters = ["xmp","zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

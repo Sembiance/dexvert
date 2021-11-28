@@ -6,5 +6,5 @@ export class aseprite extends Format
 	website    = "https://www.aseprite.org/";
 	ext        = [".ase", ".aseprite"];
 	mimeType   = "image/x-aseprite";
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

@@ -8,7 +8,7 @@ export class soundProgrammingLanguage extends Format
 	magic = ["SOPROL Sound Programming Language module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

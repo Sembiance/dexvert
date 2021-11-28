@@ -9,7 +9,7 @@ export class soundFX extends Format
 	magic = [{}];
 	converters = ["xmp","uade123","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -6,5 +6,5 @@ export class grStar extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GR*";
 	ext        = [".gr7", ".gr8", ".gr9", ".g9s", ".sfd", ".gr9p", ".g10", ".g11"];
 	fileSize   = {".gr7" : 3844, ".gr8,.gr9" : [7680, 7682, 7684], ".g10" : 7689};
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

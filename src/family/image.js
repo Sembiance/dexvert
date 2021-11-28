@@ -131,11 +131,11 @@ export class image extends Family
 	// gets meta information for the given input and format
 	async meta(inputFile, format)
 	{
-		if(!format.metaProviders)
+		if(!format.metaProvider)
 			return;
 
 		const meta = {};
-		for(const metaProvider of format.metaProviders)
+		for(const metaProvider of format.metaProvider)
 		{
 			xu.log3`Getting meta from provider ${metaProvider}`;
 

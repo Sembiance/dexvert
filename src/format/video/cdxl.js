@@ -9,7 +9,7 @@ export class cdxl extends Format
 	magic = ["Amiga CDXL video"];
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"cdxl"}}]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -9,7 +9,7 @@ export class epicMegagamesMASI extends Format
 	magic = ["Epic Megagames MASI module"];
 	converters = ["xmp","zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

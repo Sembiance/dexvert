@@ -6,5 +6,5 @@ export class mcs extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MCS";
 	ext        = [".mcs"];
 	fileSize   = 10185;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

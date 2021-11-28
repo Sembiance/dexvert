@@ -14,7 +14,7 @@ export class lottie extends Format
 
 	// abydosconvert also supports this format, unfortuantely as of abydos-0.2.4 it currently doesn't animate correctly, not clearing canvas between frames
 	// So we just use lottie2gif instead which is included in rlottie
-	converters = ["lottie2gif"]
+	converters = ["lottie2gif"];
 
 	auxFiles = async (inputFile, otherFiles, otherDirs) =>
 	{

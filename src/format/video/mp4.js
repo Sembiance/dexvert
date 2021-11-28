@@ -10,7 +10,7 @@ export class mp4 extends Format
 	magic = [{},"MPEG-4 Media File",{},"ISO Media, MP4"];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

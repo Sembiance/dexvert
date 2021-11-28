@@ -8,7 +8,7 @@ export class howieDavies extends Format
 	magic = ["Howie Davies module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

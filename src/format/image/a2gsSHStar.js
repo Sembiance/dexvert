@@ -5,5 +5,5 @@ export class a2gsSHStar extends Format
 	name       = "Apple IIGS SH3/SHR";
 	ext        = [".sh3", ".shr"];
 	fileSize   = 38400;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

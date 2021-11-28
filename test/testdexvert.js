@@ -9,10 +9,11 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test dexvert conversions for 1 or all formats",
 	opts    :
 	{
-		format  : {desc : "Only test a single format: archive/zip", hasValue : true},
-		file    : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
-		record  : {desc : "Take the results of the conversions and save them as future expected results"},
-		report  : {desc : "Output an HTML report of the results."}
+		format     : {desc : "Only test a single format: archive/zip", hasValue : true},
+		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
+		record     : {desc : "Take the results of the conversions and save them as future expected results"},
+		report     : {desc : "Output an HTML report of the results."},
+		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."}
 	}});
 
 const FLEX_SIZE_PROGRAMS =
@@ -33,7 +34,7 @@ const FLEX_SIZE_FORMATS =
 
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
-		naplps             : 7,
+		naplps             : 20,
 		threeDCK           : 10,
 
 		// TODO TEMPROARY due to bug in abydos
@@ -49,12 +50,13 @@ const DISK_FORMAT_MAP =
 	// These formats share generic .ext only, no magic matches
 	[/image\/artistByEaton\/BLINKY\.ART$/, "asciiArtEditor"],
 	[/image\/gfaArtist\/.+$/, "asciiArtEditor"],
+	[/image\/pfsFirstPublisher\/.+$/, "artDirector"],
 
 	// Supporting/AUX files
 	[/image\/fig\/.+.(gif|jpg|xbm|xpm)$/, true]
 ];
 
-const DEXTEST_ROOT_DIR = "/mnt/ram/tmp/test";
+const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "-dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*3;
 const fileDurations = {};
@@ -66,11 +68,12 @@ const outputFiles = [];
 
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
+console.log(`${xu.c.clearScreen}./testdexvert ${Deno.args.join(" ")}`);
+console.log(printUtil.majorHeader("dexvert test").trim());
+xu.log`Root testing dir: ${DEXTEST_ROOT_DIR}`;
 xu.log`Rsyncing sample files to RAM...`;
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
-console.log(`${xu.c.clearScreen}./testdexvert ${Deno.args.join(" ")}`);
-console.log(printUtil.majorHeader("dexvert test").trim());
 xu.log`Loading test data and finding sample files...`;
 
 const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
@@ -126,6 +129,8 @@ async function testSample(sampleFilePath)
 
 		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
+		if(argv.liveErrors)
+			console.log(`\n${failures.at(-1)}`);
 		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
 
@@ -155,13 +160,19 @@ async function testSample(sampleFilePath)
 		if(testData[sampleSubFilePath]===false)
 			return pass(fg.white("."));
 
-		return await fail(`No result returned ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} but expected ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
+		return await fail(`${fg.pink("No result returned")} ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} but expected ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
 	}
 	
 	const result = {};
 	result.processed = resultFull.processed;
 	if(resultFull?.created?.files?.output?.length)
+	{
+		const misingFiles = (await resultFull.created.files.output.parallelMap(async ({absolute}) => ((await fileUtil.exists(absolute)) ? false : absolute))).filter(v => !!v);
+		if(misingFiles.length>0)
+			return await fail(`Some reported output files are missing from disk: ${misingFiles.join(" ")}`);
+
 		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({base, size, absolute, ts}) => [base, {size, ts, sum : await hashUtil.hashFile("sha1", absolute)}]));
+	}
 	result.meta = resultFull?.phase?.meta || {};
 	if(resultFull?.phase)
 	{

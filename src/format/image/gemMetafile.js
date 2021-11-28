@@ -8,5 +8,5 @@ export class gemMetafile extends Format
 	magic       = [/^GEM [Mm]etafile/];
 	unsupported = true;
 	notes       = "Vector file format that could be converted into SVG. abydos is working on adding support for this format.";
-	converters  = ["recoil2png"]
+	converters  = ["recoil2png"];
 }

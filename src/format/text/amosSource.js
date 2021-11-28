@@ -7,7 +7,7 @@ export class amosSource extends Format
 	ext = [".amossourcecode"];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

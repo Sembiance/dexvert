@@ -8,7 +8,7 @@ export class samCoupeCOP extends Format
 	notes = "Not all files converted such as shanhai.cop";
 	converters = ["zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

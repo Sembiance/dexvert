@@ -49,6 +49,8 @@ import {CADDraw} from "./image/CADDraw.js";
 programs.CADDraw = CADDraw.create(programs.CADDraw);
 import {abydosconvert} from "./image/abydosconvert.js";
 programs.abydosconvert = abydosconvert.create(programs.abydosconvert);
+import {qtPicViewer} from "./image/qtPicViewer.js";
+programs.qtPicViewer = qtPicViewer.create(programs.qtPicViewer);
 import {irfanView} from "./image/irfanView.js";
 programs.irfanView = irfanView.create(programs.irfanView);
 import {fifView} from "./image/fifView.js";

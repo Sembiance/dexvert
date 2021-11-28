@@ -7,5 +7,5 @@ export class dxf extends Format
 	ext        = [".dxf"];
 	mimeType   = "image/vnd.dxf";
 	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format"]
-	converters = ["ezdxf", "totalCADConverterX", "irfanView", "soffice[outType:svg][autoCropSVG]", "uniconvertor"]
+	converters = ["ezdxf", "totalCADConverterX", "irfanView", "soffice[outType:svg][autoCropSVG]", "uniconvertor"];
 }

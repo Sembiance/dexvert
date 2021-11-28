@@ -8,9 +8,8 @@ export class raf extends Format
 	ext = [".raf"];
 	magic = ["Fujifilm Raw image"];
 	mimeType = "image/x-fuji-raf";
-	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"]
-
-	metaProviders = [""];
+	metaProvider = [""];
+	converters = ["darktable_cli","convert",`abydosconvert[format:${this.mimeType}]`,"nconvert"];
 }
 */
 /*

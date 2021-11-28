@@ -6,5 +6,5 @@ export class pmd extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PMG_Designer";
 	ext        = [".pmd"];
 	magic      = ["PMG Designer bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

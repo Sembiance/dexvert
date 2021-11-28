@@ -6,5 +6,5 @@ export class deep extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/IFF-DEEP";
 	ext        = [".deep"];
 	magic      = ["IFF DEEP animation/bitmap", "IFF data, DEEP"];
-	converters = ["recoil2png", "ffmpeg[outType:png]"]
+	converters = ["recoil2png", "ffmpeg[outType:png]"];
 }

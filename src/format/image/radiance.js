@@ -9,9 +9,8 @@ export class radiance extends Format
 	mimeType = "image/vnd.radiance";
 	magic = ["Radiance RGBE Image Format","Radiance HDR image data","Radiance High Dynamic Range bitmap"];
 	slow = true;
-	converters = ["pfsconvert","convert","nconvert",`abydosconvert[format:${this.mimeType}]`]
-
-	metaProviders = [""];
+	metaProvider = [""];
+	converters = ["pfsconvert","convert","nconvert",`abydosconvert[format:${this.mimeType}]`];
 }
 */
 /*

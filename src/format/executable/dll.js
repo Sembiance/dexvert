@@ -9,7 +9,7 @@ export class dll extends Format
 	magic = ["Win32 Dynamic Link Library","PE32 executable (DLL)","MS-DOS executable, NE for MS Windows 3.x (DLL or font)"];
 	converters = undefined
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -6,5 +6,5 @@ export class colorViewSquash extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ColorViewSquash";
 	ext        = [".rgb"];
 	magic      = ["ColorViewSquash bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

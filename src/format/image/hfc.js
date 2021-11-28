@@ -4,5 +4,5 @@ export class hfc extends Format
 {
 	name       = "Hires FLI Designer";
 	ext        = [".hfc"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -8,7 +8,7 @@ export class synTracker extends Format
 	magic = ["SynTracker module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -9,7 +9,7 @@ export class digiBooster extends Format
 	magic = ["DIGIBooster module","DIGI Booster module","DIGI Booster Pro Module"];
 	converters = ["zxtune123","uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

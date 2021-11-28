@@ -9,7 +9,7 @@ export class pru2 extends Format
 	magic = ["Prorunner 2.0 Music"];
 	converters = ["xmp"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

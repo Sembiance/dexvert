@@ -8,6 +8,6 @@ export class macPaint extends Format
 	magic          = ["MacPaint image data"];
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package"];
-	converters     = ["deark", `abydosconvert[format:${this.mimeType}]`, "convert"]
-	metaProviders  = ["image"];
+	metaProvider   = ["image"];
+	converters     = ["deark", `abydosconvert[format:${this.mimeType}]`, "convert"];
 }

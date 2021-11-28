@@ -7,5 +7,5 @@ export class pabloPaint extends Format
 	ext        = [".pa3", ".ppp"];
 	mimeType   = "image/x-pablo-packed-picture";
 	magic      = ["PabloPaint packed bitmap"];
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

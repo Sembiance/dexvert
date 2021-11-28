@@ -8,7 +8,7 @@ export class amigaDOSScript extends Format
 	magic = ["AmigaDOS script"];
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

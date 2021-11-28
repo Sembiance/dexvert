@@ -8,7 +8,7 @@ export class tfmMusicMaker extends Format
 	magic = ["TFM Music Maker music"];
 	converters = ["zxtune123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

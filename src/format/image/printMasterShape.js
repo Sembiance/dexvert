@@ -1,31 +1,17 @@
-/*
 import {Format} from "../../Format.js";
 
 export class printMasterShape extends Format
 {
-	name = "PrintMaster Shape";
-	website = "http://fileformats.archiveteam.org/wiki/PrintMaster";
-	ext = [".shp"];
+	name           = "PrintMaster Shape";
+	website        = "http://fileformats.archiveteam.org/wiki/PrintMaster";
+	magic          = ["Printmaster Shape bitmap"];
+	ext            = [".shp"];
 	forbidExtMatch = true;
-	filesOptional = undefined;
-	magic = ["Printmaster Shape bitmap"];
-	converters = [{"program":"deark"}]
+	auxFiles       = (input, otherFiles) =>
+	{
+		// .neo can convert on it's own, but optionally uses an .rst
+		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.sdr`);
+		return otherFile ? [otherFile] : false;
+	};
+	converters = r => [`deark${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "PrintMaster Shape",
-	website        : "http://fileformats.archiveteam.org/wiki/PrintMaster",
-	ext            : [".shp"],
-	forbidExtMatch : true,
-	filesOptional  : (state, otherFiles) => otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.name.toLowerCase()}.sdr`),
-	magic          : ["Printmaster Shape bitmap"]
-};
-
-exports.converterPriority = [{program : "deark", flags : state => ({dearkFile2 : (state.extraFilenames || []).find(v => v.toLowerCase().endsWith(".sdr"))})}];
-
-*/

@@ -8,7 +8,7 @@ export class soundInvasion extends Format
 	magic = ["Sound Invasion Music System module","Sound Invasion Music System 2.0 module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

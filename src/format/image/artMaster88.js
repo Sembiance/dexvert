@@ -7,5 +7,5 @@ export class artMaster88 extends Format
 	ext        = [".img"];
 	magic      = ["ArtMaster88"];
 	mimeType   = "image/x-artmaster";
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -6,5 +6,5 @@ export class bgp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i";
 	ext        = [".bgp"];
 	magic      = ["Bugbiter APAC239i bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

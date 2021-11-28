@@ -9,7 +9,7 @@ export class seanConnolly extends Format
 	magic = ["Sean Connolly module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

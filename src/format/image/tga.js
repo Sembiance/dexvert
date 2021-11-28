@@ -7,7 +7,7 @@ export class tga extends Format
 	ext        = [".tga", ".targa", ".tpic", ".icb", ".vda", ".vst"];
 	mimeType   = "image/x-tga";
 	magic      = ["Truevision TGA", "Targa image data"];
-	metaProviders = ["image"];
+	metaProvider = ["image"];
 	
 	// ImageMagick sometimes doesn't detect that a TGA image has been rotated. These other converters seem to do a better job at that
 	// Only deark was able to correctly handle flag_b32.tga

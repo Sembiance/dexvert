@@ -6,5 +6,5 @@ export class newIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/NewIcons";
 	ext        = [".info"];
 	magic      = ["Amiga NewIcon"];
-	converters = ["deark"]
+	converters = ["deark"];
 }

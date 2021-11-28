@@ -7,5 +7,5 @@ export class multiArtist extends Format
 	ext        = [".mg1", ".mg2", ".mg4", ".mg8"];
 	magic      = ["MultiArtist bitmap", "multiArtist"];
 	fileSize   = {".mg1" : 19456, ".mg2" : 18688, ".mg4" : [15616, 18688], ".mg8" : 14080};
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

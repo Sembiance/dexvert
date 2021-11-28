@@ -9,7 +9,7 @@ export class velvetStudio extends Format
 	magic = ["Velvet Studio AMS Module","Velvet Studio Advanced Module System module"];
 	converters = ["zxtune123","openmpt123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

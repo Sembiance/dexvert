@@ -33,8 +33,24 @@ export class deark extends Program
 		
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
-	// deark output names can be useful such as image/macPaint/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
-	renameOut = {regex : /^.+?(?<num>\.\d{3})(?<post>\..+)$/};
+	// deark output names are an MINOR NIGHTMARE
+	// often they are just out.###.png (like image/amosIcons/)
+	// however sometimes it contains additional data like internal filenames like out.###.something.png (like image/glowicon/ and image/icns/)
+	// another example is image/macPaint/test.mac becoming out.000.Christie Brinkley.png which we want to turn into Christie Brinkley.png
+	// however it doesn't even always have an extension and can just be out.000.manifest
+	// it's different per format, which makes it pretty challenging to rename nicer at a program level, but this does a pretty good job at it
+	renameOut =
+	{
+		regex   : /^.+?(?<num>\.\d{3})?(?<name>\..+)?(?<ext>\..+)$/,
+		renamer :
+		[
+			({suffix}, {name, ext}) => [name.trimChars("."), suffix, ext],
+			({suffix}, {num, name, ext}) => [num.trimChars("."), name, suffix, ext],
+			({suffix, numFiles, newName}, {ext}) => (numFiles===1 ? [newName, suffix, ext] : []),
+			({suffix}, {num, name, ext}) => [num.trimChars("."), name || "", suffix, ext]
+			//({fn, suffix}, {num, name, ext}) => { console.log({fn, num, name, ext}); return false; }
+		]
+	};
 
 	verify = r =>
 	{
@@ -47,7 +63,7 @@ export class deark extends Program
 
 	// image/icns/abydos.icns produces 5 output files, 3 PNG and 2 JP2 (JPEG200)
 	chain = "?dexvert";
-	chainCheck = (r, chainFile) => (chainFile.ext.toLowerCase()===".jp2" ? {asFormat : "image/jpeg2000"} : false);	// TODO will likely add these formats in future: ".bmp", ".tif", ".tiff", ".qtif", ".pgc"
+	chainCheck = (r, chainFile) => (chainFile.ext.toLowerCase()===".jp2" ? {asFormat : "image/jpeg2000"} : false);	// TODO will likely add more formats in future: ".bmp", ".tif", ".tiff", ".qtif", ".pgc"
 }
 
 /*

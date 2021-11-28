@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/mnt/compendium/DevLab/dexvert/build/build --silent all
+/mnt/compendium/DevLab/dexvert/build/build --silent programs formats
 
 command rm -rf ~/tmp/out
 mkdir -p ~/tmp/out

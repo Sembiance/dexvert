@@ -6,5 +6,5 @@ export class msp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MSP_(Microsoft_Paint)";
 	ext        = [".msp"];
 	magic      = ["Microsoft Paint bitmap", /^M?icrosoft Paint image data/];
-	converters = ["recoil2png", "deark", "nconvert"]
+	converters = ["recoil2png", "deark", "nconvert"];
 }

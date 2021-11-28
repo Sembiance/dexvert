@@ -7,5 +7,5 @@ export class dlm extends Format
 	ext        = [".dlm"];
 	fileSize   = 256;
 	byteCheck  = [{offset : 0, match : ["B".charCodeAt(0)]}];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

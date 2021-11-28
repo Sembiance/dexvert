@@ -7,5 +7,5 @@ export class jpegXR extends Format
 	ext        = [".jxr", ".hdp", ".wdp", ".wmp"];
 	mimeType   = "image/vnd.ms-photo";
 	magic      = ["JPEG XR bitmap", "JPEG Extended Range", "JPEG-XR Image"];
-	converters = ["nconvert"]
+	converters = ["nconvert"];
 }

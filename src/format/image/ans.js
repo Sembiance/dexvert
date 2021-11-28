@@ -12,6 +12,6 @@ export class ans extends Format
 	mimeType       = "text/x-ansi";
 	magic          = ["ANSI escape sequence text", "ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/];
 	weakMagic      = [...TEXT_MAGIC, /^data$/];
-	metaProviders  = ["ansiArt"];
+	metaProvider   = ["ansiArt"];
 	converters     = ["ansilove[format:ans]", "deark", "ffmpeg[format:tty][codec:ansi][outType:gif]"];
 }

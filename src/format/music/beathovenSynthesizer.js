@@ -8,7 +8,7 @@ export class beathovenSynthesizer extends Format
 	magic = ["Beathoven Synthesizer module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

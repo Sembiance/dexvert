@@ -12,7 +12,7 @@ export class pl extends Format
 	untouched = true;
 	hljsLang = "perl";
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

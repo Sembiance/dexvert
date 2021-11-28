@@ -7,5 +7,5 @@ export class goDot4bt extends Format
 	ext            = [".4bt", ".clp"];
 	forbidExtMatch = [".clp"];
 	magic          = ["GoDot 4-bit graphics bitmap"];
-	converters     = ["recoil2png", "nconvert", "view64"]
+	converters     = ["recoil2png", "nconvert", "view64"];
 }

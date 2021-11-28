@@ -5,5 +5,5 @@ export class ing extends Format
 	name       = "ING 15";
 	website    = "http://fileformats.archiveteam.org/wiki/ING_15";
 	ext        = [".ing"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

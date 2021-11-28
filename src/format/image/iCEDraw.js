@@ -9,6 +9,6 @@ export class iCEDraw extends Format
 	mimeType       = "image/x-icedraw";
 	magic          = ["iCEDraw graphic"];
 	forbiddenMagic = TEXT_MAGIC;
-	metaProviders  = ["ansiArt"];
-	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`]
+	metaProvider   = ["ansiArt"];
+	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`];
 }

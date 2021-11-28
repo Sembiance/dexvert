@@ -5,5 +5,5 @@ export class hir extends Format
 	name       = "Print-Technik HIR Image";
 	ext        = [".hir"];
 	magic      = ["Print-Technik/PRO89xx Raw data bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

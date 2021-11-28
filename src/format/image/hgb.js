@@ -4,5 +4,5 @@ export class hgb extends Format
 {
 	name       = "HinterGrundBild";
 	ext        = [".hgb"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

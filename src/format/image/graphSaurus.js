@@ -24,5 +24,5 @@ export class graphSaurus extends Format
 	};
 
 	untouched  = ({f}) => f.input.ext.toLowerCase().startsWith(".pl");
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

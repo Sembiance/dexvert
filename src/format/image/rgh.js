@@ -7,7 +7,7 @@ export class rgh extends Format
 	website = "http://fileformats.archiveteam.org/wiki/ZZ_ROUGH";
 	ext = [".rgh"];
 	magic = ["ZZ ROUGH bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }
 */
 /*

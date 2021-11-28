@@ -38,8 +38,12 @@ export class DexPhase
 			o[key] = this[key].serialize();
 		o.meta = xu.parseJSON(JSON.stringify(this.meta));
 		o.ran = this.ran.map(v => v.serialize());
-		if(this.converter)
-			o.converter = this.converter;
+		for(const key of ["converter", "err"])
+		{
+			if(this[key])
+				o[key] = this[key];
+		}
+
 		return o;
 	}
 
@@ -115,6 +119,11 @@ export class DexState
 		o.processed = !!this.processed;
 		if(this.created)
 			o.created = this.created.serialize();
+		for(const key of ["duration"])
+		{
+			if(this[key])
+				o[key] = this[key];
+		}
 		return o;
 	}
 
@@ -130,8 +139,10 @@ export class DexState
 
 		r.push(`\n${prefix}${this.past.length>0 ? printUtil.minorHeader("ACTIVE PHASE") : ""}${this.phase.pretty(`${prefix}\t`)}`);
 		
-		r.push(`\n${xu.cf.fg.cyan("-".repeat(100))}`);
+		r.push(`\n${fg.cyan("-".repeat(100))}`);
 		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
+		if(this.duration)
+			r.push(`  ${xu.paren(`took ${fg.yellow((this.duration/xu.SECOND).secondsAsHumanReadable())}`)}`);
 		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);
 		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);
 		if(this.processed)

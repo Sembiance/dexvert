@@ -6,5 +6,5 @@ export class duneGraph extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DuneGraph";
 	ext        = [".dc1", ".dg1"];
 	magic      = ["DuneGraph Compressed bitmap", "DuneGraph Compressed bitma"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

@@ -8,7 +8,7 @@ export class rmi extends Format
 	ext = [".rmi"];
 	magic = ["RMI RIFF MIDI Music","RIFF-based MIDI",{}];
 
-	metaProviders = [""];
+	metaProvider = [""];
 
 steps = [null,null,null];
 }

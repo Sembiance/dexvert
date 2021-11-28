@@ -6,5 +6,5 @@ export class imagic extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture";
 	ext        = [".ic1", ".ic2", ".ic3"];
 	magic      = ["Imagic picture/animation bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

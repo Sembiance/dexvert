@@ -6,5 +6,5 @@ export class ags extends Format
 	website    = "http://g2f.atari8.info/";
 	ext        = [".ags"];
 	magic      = ["Atari Graphics Studio bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

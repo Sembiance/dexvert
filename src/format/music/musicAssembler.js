@@ -8,7 +8,7 @@ export class musicAssembler extends Format
 	magic = ["Music Assembler module"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -7,5 +7,5 @@ export class fbi extends Format
 	ext        = [".fbi"];
 	magic      = ["SysEx File"];
 	weakMagic  = true;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

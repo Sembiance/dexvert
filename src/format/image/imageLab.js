@@ -7,5 +7,5 @@ export class imageLab extends Format
 	ext        = [".b_w", ".b&w"];
 	mimeType   = "image/x-imagelab";
 	magic      = ["ImageLab bitmap"];
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`]
+	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`];
 }

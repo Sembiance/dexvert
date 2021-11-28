@@ -8,5 +8,5 @@ export class hdf5 extends Format
 	mimeType   = "application/x-hdf";
 	magic      = ["Hierarchical Data Format (version 5)", /^NCSA Hierarchical Data Format 5$/];
 	notes      = "Only support converting to grayscale.";
-	converters = ["h5topng"]
+	converters = ["h5topng"];
 }

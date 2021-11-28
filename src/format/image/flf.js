@@ -6,5 +6,5 @@ export class flf extends Format
 	website    = "https://lemonspawn.com/turbo-rascal-syntax-error-expected-but-begin/";
 	ext        = [".flf"];
 	magic      = ["Turbo Rascal Syntax Error"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

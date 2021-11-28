@@ -7,5 +7,5 @@ export class cvg extends Format
 	ext            = [".cvg"];
 	forbidExtMatch = true;	// The magic is pretty robust and without it, scribus takes ages spinning on invalid files
 	magic          = ["Calamus Vector Graphic"];
-	converters     = ["scribus"]
+	converters     = ["scribus"];
 }

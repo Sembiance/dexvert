@@ -8,5 +8,5 @@ export class artStudio extends Format
 	magic      = ["C64 Hires bitmap"];
 	weakMagic  = true;
 	fileSize   = [].pushSequence(9000, 9010);
-	converters = ["recoil2png", "view64"]
+	converters = ["recoil2png", "view64"];
 }

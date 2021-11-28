@@ -6,5 +6,5 @@ export class degasEliteBrush extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DEGAS_Elite_brush";
 	ext        = [".bru"];
 	fileSize   = 64;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

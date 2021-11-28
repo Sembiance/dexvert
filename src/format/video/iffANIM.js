@@ -9,7 +9,7 @@ export class iffANIM extends Format
 	magic = ["IFF data, ANIM animation","IFF ANIM"];
 	converters = [{"program":"ffmpeg","flags":{"ffmpegFormat":"iff"}},{"program":"xanim","flags":{"xanimDelay":6}}]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

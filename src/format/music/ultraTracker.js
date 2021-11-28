@@ -9,7 +9,7 @@ export class ultraTracker extends Format
 	magic = [{},"Ultra Tracker module"];
 	converters = ["zxtune123","awaveStudio"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

@@ -7,7 +7,7 @@ export class silmarils extends Format
 	ext = [".mok"];
 	converters = [{"program":"uade123","flags":{"uadeType":"Silmarils"}}]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

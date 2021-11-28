@@ -6,5 +6,5 @@ export class hiResPlayerMissile extends Format
 	ext        = [".hpm"];
 	fileSize   = [19203];
 	mimeType   = "image/x-hires-player-missile";
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

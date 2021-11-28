@@ -6,5 +6,5 @@ export class atariTools800Graphic extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AtariTools-800";
 	ext        = [".agp"];
 	fileSize   = 7690;
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

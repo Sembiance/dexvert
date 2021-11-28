@@ -1,3 +1,3 @@
 #!/bin/sh
-/mnt/compendium/DevLab/dexvert/build/buildAll.sh --silent
+/mnt/compendium/DevLab/dexvert/build/build --silent programs formats
 DENO_DIR=/mnt/compendium/.deno deno run --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-env --allow-read --allow-write --allow-run testdexvert.js "$@"

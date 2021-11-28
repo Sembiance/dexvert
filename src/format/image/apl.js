@@ -4,5 +4,5 @@ export class apl extends Format
 {
 	name       = "Atari Player Editor";
 	ext        = [".apl"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

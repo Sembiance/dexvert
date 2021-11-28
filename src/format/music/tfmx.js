@@ -11,7 +11,7 @@ export class tfmx extends Format
 	filesOptional = undefined;
 	converters = [{"program":"uade123","flags":{"uadeType":"TFMX"}},{"program":"uade123","flags":{"uadeType":"TFMX-7V"}},{"program":"uade123","flags":{"uadeType":"TFMX-7V-TFHD"}},{"program":"uade123","flags":{"uadeType":"TFMX-Pro"}},{"program":"uade123","flags":{"uadeType":"TFMX-Pro-TFHD"}},{"program":"uade123","flags":{"uadeType":"TFMX-TFHD"}},{"program":"uade123","flags":{"uadeType":"TFMX_ST"}}]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

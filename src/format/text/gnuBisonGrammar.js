@@ -10,7 +10,7 @@ export class gnuBisonGrammar extends Format
 	weakMagic = true;
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

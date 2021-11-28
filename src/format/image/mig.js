@@ -6,5 +6,5 @@ export class mig extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MIG";
 	ext        = [".mig"];
 	magic      = ["MSX compressed Image bitmap"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

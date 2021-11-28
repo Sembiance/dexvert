@@ -7,5 +7,5 @@ export class grafx2 extends Format
 	ext        = [".pkm"];
 	magic      = ["GrafX2 bitmap"];
 	mimeType   = "image/x-pkm";
-	converters = [`abydosconvert[format:${this.mimeType}]`]
+	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

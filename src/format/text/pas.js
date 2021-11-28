@@ -12,7 +12,7 @@ export class pas extends Format
 	untouched = true;
 	hljsLang = "delphi";
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

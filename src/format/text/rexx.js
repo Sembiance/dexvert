@@ -11,7 +11,7 @@ export class rexx extends Format
 	weakMagic = true;
 	untouched = true;
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

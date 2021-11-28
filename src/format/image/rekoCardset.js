@@ -7,7 +7,7 @@ export class rekoCardset extends Format
 	website = "https://www.rekonet.org/index.html";
 	ext = [".reko"];
 	magic = ["REKO cardset"];
-	converters = ["reko2png"]
+	converters = ["reko2png"];
 }
 */
 /*

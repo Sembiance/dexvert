@@ -7,7 +7,7 @@ export class peterVerswyvelen extends Format
 	ext = [".pvp"];
 	converters = ["uade123"]
 
-	metaProviders = [""];
+	metaProvider = [""];
 }
 */
 /*

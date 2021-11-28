@@ -5,8 +5,8 @@ export class graphicWorkshopProfessional extends Program
 {
 	website  = "http://www.mindworkshop.com/gwspro.html";
 	loc      = "win2k";
-	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE"
-	args     = r => [r.inFile()]
+	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE";
+	args     = r => [r.inFile()];
 	qemuData = () => ({
 		script : `
 			$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 7)
@@ -50,5 +50,5 @@ export class graphicWorkshopProfessional extends Program
 			
 			Sleep(1000)`
 	});
-	post = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"})
+	post = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});
 }

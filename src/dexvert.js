@@ -13,9 +13,11 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
 	if(!inputFile.isFile)
-		throw new Error(`Invalid input file, expected file. ${inputFile.absolute}`);
+		throw new Error(`Invalid input file, expected a file. ${inputFile.absolute}`);
 	if(!outputDir.isDirectory)
-		throw new Error(`Invalid output directory, expected directory. ${inputFile.absolute}`);
+		throw new Error(`Invalid output directory, expected a directory. ${outputDir.absolute}`);
+	
+	const startedAt = performance.now();
 
 	await runUtil.run("prlimit", ["--pid", Deno.pid, `--core=0`]);
 
@@ -181,7 +183,8 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 		}
 		catch(err)
 		{
-			console.error(`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${xu.inspect(err)}`);
+			dexState.phase.err = err;
+			xu.log1`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${xu.inspect(err)}`;
 		}
 
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made
@@ -195,5 +198,6 @@ export async function dexvert(inputFile, outputDir, {asFormat}={})
 			break;
 	}
 
+	dexState.duration = (performance.now()-startedAt);
 	return dexState;
 }

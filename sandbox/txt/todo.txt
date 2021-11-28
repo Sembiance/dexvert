@@ -9,10 +9,6 @@
   Then add support for: DataShow Graphic, DataShow Sprite, FAXX, lotusChart and MLDF.
   ALSO, go through the email he sent me on Oct 17 (I archived it)
 
-* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
-  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage
-  Then process the OS/2 CDs I have
-
 /---------------\
 | High Priority |
 \---------------/
@@ -26,6 +22,12 @@
 * Add WavPack support (sox should work) (for sample files: `wget http://www.rarewares.org/wavpack/test_suite.zip`)
 
 * Get the 256C 'fractalImageFormat' files working. Will need to track down a different converter program. There is a photoshop plugin listed on the webpage, could use that with an older photoshop under winxp
+
+* Find better support for Windows Clipboard .clp files, right now they all convert quite poorly
+
+* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
+  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage
+  Then process the OS/2 CDs I have
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm

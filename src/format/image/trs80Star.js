@@ -1,13 +1,9 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
 
-exports.meta =
+export class trs80Star extends Format
 {
-	name : "TRS-80",
-	ext  : [".grf", ".max", ".p41", ".pix"]
-};
-
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x00, 0x18]));
-
-exports.converterPriority = ["recoil2png"];
+	name       = "TRS-80";
+	ext        = [".grf", ".max", ".p41", ".pix"];
+	byteCheck  = [{offset : 0, match : [0x00, 0x18]}];
+	converters = ["recoil2png"];
+}

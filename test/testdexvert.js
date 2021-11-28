@@ -40,10 +40,11 @@ const FLEX_SIZE_FORMATS =
 		threeDCK           : 10,
 
 		// TODO TEMPROARY due to bug in abydos
-		avatar         : 20,
-		cebraText      : 20,
-		mrgSystemsText : 20,
-		softelText     : 20
+		avatar          : 20,
+		cebraText       : 20,
+		mrgSystemsText  : 20,
+		softelText      : 20,
+		teletextPackets : 20
 	}
 };
 

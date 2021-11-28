@@ -11,5 +11,5 @@ export class ansilove extends Program
 		format : "Which ansilove format to use. Default: Let ansilove decide"
 	};
 	bin = "ansilove";
-	args = async r => [...(r.flags.format ? ["-t", r.flags.format] : []), "-S", "-i", "-o", await r.outFile("out.png"), r.inFile()]
+	args = async r => [...(r.flags.format ? ["-t", r.flags.format] : []), "-S", "-i", "-o", await r.outFile("out.png"), r.inFile()];
 }

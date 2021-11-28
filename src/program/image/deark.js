@@ -68,6 +68,7 @@ export class deark extends Program
 		const chainFormat =
 		{
 			".bmp"  : "bmp",
+			".eps"  : "eps",
 			".jp2"  : "jpeg2000",
 			".qtif" : "qtif",
 			".tif"  : "tiff",

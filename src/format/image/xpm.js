@@ -2,11 +2,11 @@ import {Format} from "../../Format.js";
 
 export class xpm extends Format
 {
-	name          = "X11 Pixmap";
-	website       = "http://fileformats.archiveteam.org/wiki/XPM";
-	ext           = [".xpm", ".pm"];
-	mimeType      = "image/x-xpixmap";
-	magic         = ["X PixMap bitmap", "X-Windows Pixmap Image", "X pixmap image"];
-	converters    = ["convert"]
+	name         = "X11 Pixmap";
+	website      = "http://fileformats.archiveteam.org/wiki/XPM";
+	ext          = [".xpm", ".pm"];
+	mimeType     = "image/x-xpixmap";
+	magic        = ["X PixMap bitmap", "X-Windows Pixmap Image", "X pixmap image"];
 	metaProvider = ["image"];
+	converters   = ["convert"];
 }

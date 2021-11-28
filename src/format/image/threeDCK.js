@@ -7,5 +7,5 @@ export class threeDCK extends Format
 	forbidExtMatch = true;
 	magic          = ["3D Construction Kit game Runner"];
 	website        = "https://en.wikipedia.org/wiki/3D_Construction_Kit";
-	converters     = ["runvga"]
+	converters     = ["runvga"];
 }

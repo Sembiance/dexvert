@@ -51,6 +51,7 @@ export class Program
 			exec       : {type : "function", length : [0, 1]},
 			outExt     : {types : ["function", "string"]},
 			post       : {type : "function", length : [0, 1]},
+			postExec   : {type : "function", length : [0, 1]},
 			pre        : {type : "function", length : [0, 1]},
 			qemuData   : {type : "function", length : [0, 1]},
 			verify     : {type : "function", length : [0, 2]}
@@ -128,6 +129,12 @@ export class Program
 				Object.assign(r.qemuData, await this.qemuData(r));
 
 			r.status = await runQEMU(r.qemuData);
+		}
+
+		if(this.postExec)
+		{
+			try { await this.postExec(r); }
+			catch(err) { xu.log`Program postExec ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
 		if(f.outDir)

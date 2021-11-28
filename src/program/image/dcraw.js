@@ -1,26 +1,18 @@
-/*
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {path} from "std";
 
 export class dcraw extends Program
 {
-	website = "https://www.cybercom.net/~dcoffin/dcraw/";
-	gentooPackage = "media-gfx/dcraw";
+	website        = "https://www.cybercom.net/~dcoffin/dcraw/";
+	gentooPackage  = "media-gfx/dcraw";
 	gentooUseFlags = "jpeg nls";
+	bin            = "dcraw";
+	args           = r => [r.inFile()];
+	postExec       = async r =>
+	{
+		const ppmFilePaths = await fileUtil.tree(r.f.root, {regex : /\.ppm$/, nodir : true});
+		await ppmFilePaths.parallelMap(async ppmFilePath => await fileUtil.move(ppmFilePath, path.join(r.outDir({absolute : true}), path.basename(ppmFilePath))));
+	};
+	chain = "convert";
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "https://www.cybercom.net/~dcoffin/dcraw/",
-	gentooPackage  : "media-gfx/dcraw",
-	gentooUseFlags : "jpeg nls"
-};
-
-exports.bin = () => "dcraw";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.post = (state, p, r, cb) => p.util.program.run("convert", {argsd : ["in.ppm"]})(state, p, cb);
-*/

@@ -55,8 +55,11 @@ Instead of bin, you can just run abritrary code for this program.
 >>> pre = async (runState) => {}
 This will be executed directly BEFORE the program is run (either in or exec)
 
+>>> postExec = async (runState) => { ... }
+This will be executed DIRECTLY after the program has finished running (either bin or exec), but BEFORE new output files are auto detected by Program.js
+
 >>> post = async (runState) => { ... }
-This will be executed directly AFTER the program has finished running (either bin or exec)
+This will be executed after the program has finished running (either bin or exec) and after Program.js has found new output files
 
 >>> renameOut = { ext : ".png", name : true, regex : /^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/ }  ||  renameOut = false
 Output files can be automatically renamed.

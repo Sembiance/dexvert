@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
+import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -13,7 +14,8 @@ const argv = cmdUtil.cmdInit({
 		json            : {desc : "If set, will output results as JSON"},
 		jsonFile        : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
 		dontTransform   : {desc : "If a file can't be converted, dexvert will try different transforms (like trimming null bytes) to convert it."},
-		programFlag     : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true}
+		programFlag     : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
+		debug           : {desc : "Used temporarily when attempting to debug stuff"}
 	},
 	args :
 	[
@@ -23,8 +25,15 @@ const argv = cmdUtil.cmdInit({
 
 xu.verbose = argv.json ? 0 : argv.verbose;
 
+const debugLog = [];
+if(argv.debug)
+{
+	xu.verbose = 3;
+	xu.logger = v => debugLog.push(v);
+}
+
 const dexvertOptions = {};
-["asFormat"].forEach(k =>
+["asFormat", "debug"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];
@@ -47,6 +56,7 @@ async function handleDexState(dexState)
 }
 
 await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions));
+
 if(argv.dontTransform)
 {
 	xu.log1`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
@@ -54,8 +64,10 @@ if(argv.dontTransform)
 }
 
 // TODO do the two transforms now
+xu.log1`No processed result.`;
 
-xu.log`No processed result.`;
+if(argv.debug)
+	console.log(`Processing failed: ${debugLog.join("\n")}`);
 
 
 /*

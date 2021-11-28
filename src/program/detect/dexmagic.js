@@ -34,13 +34,15 @@ const DEXMAGIC_CHECKS =
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
 	"CAD/Draw TVG"                : "TommySoftware TVG",
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
-	"DeskMate Paint Alt"		  : [{offset : 0, match : "PNT"}],
+	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"MLDF BMHD file"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
 	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],
 	"NAPLPS Image"                : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
 	"PaintWorks"                  : [{offset : 54, match : "ANvisionA"}],
 	"Picasso 64 Image"            : [{offset : 0, match : [0x00, 0x18]}],
+	"Reko CardSet - RKP"          : [{offset : 0, match : "PCRKP"}],
+	"Reko CardSet - REKO"         : [{offset : 0, match : "PCREKO"}],
 	"Saracen Paint Image"         : [{offset : 0, match : [0x00, 0x78]}],
 	"Second Nature Slide Show"    : "Second Nature Software\r\nSlide Show\r\nCollection",
 	"ZX Spectrum BSP"             : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
@@ -84,7 +86,7 @@ const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => (c
 export class dexmagic extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/tree/master/src/program/detect/dexmagic.js";
-	loc = "local";
+	loc     = "local";
 
 	exec = async r =>
 	{
@@ -115,5 +117,5 @@ export class dexmagic extends Program
 			
 			r.meta.detections.push(Detection.create({value : matchid, from : "dexmagic", file : r.f.input}));
 		}
-	}
+	};
 }

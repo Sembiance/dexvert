@@ -49,8 +49,9 @@ filesRequired/filesOptional -> auxFiles
 \---------------/
 * Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
 
-* Check out image/avatar image/cebraText image/mrgSystemsText with older versions of abydosconvert AND the latest version
+* Check out image/avatar image/cebraText image/mrgSystemsText image/softelText with older versions of abydosconvert AND the latest version
   They used to produce PNG files, but now produce glitched out webp files...
+  After fixed, remove the temporary exceptions in testdexvert.js FLEX_SIZE_FORMATS
 
 * Check to see if abydosconvert still hangs on image/degasLowPI/KENSHIN.PI1 and if so email him about it and let him know. If he fixes it, update the comment in degasLowPI.js
 

@@ -20,7 +20,8 @@ const argv = cmdUtil.cmdInit({
 
 xu.verbose = argv.json ? 0 : argv.verbose;
 
-for(const inputFilePath of Array.force(argv.inputFilePath))
+const inputFilePaths = Array.force(argv.inputFilePath);
+for(const inputFilePath of inputFilePaths)
 {
 	const rows = await identify(await DexFile.create(inputFilePath));
 
@@ -33,6 +34,8 @@ for(const inputFilePath of Array.force(argv.inputFilePath))
 		Deno.exit(0);
 	}
 
+	if(inputFilePaths)
+		xu.log`${xu.colon(fg.peach("File"))} ${inputFilePath}`;
 	const maxes =
 	{
 		matchType : rows.map(({matchType}) => (matchType || "").length).max(),

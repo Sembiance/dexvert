@@ -17,5 +17,5 @@ export class svg extends Format
 		await fileUtil.unlink(svgInfoR.f.outDir.absolute, {recursive : true});
 		await fileUtil.unlink(svgInfoR.f.homeDir.absolute, {recursive : true});
 		return svgInfoR.meta;
-	}
+	};
 }

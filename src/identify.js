@@ -193,13 +193,13 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 						originalConfidence = Math.max(originalConfidence, detection.confidence);
 				}));
 
-				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, originalConfidence});
+				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, originalConfidence, hasWeakMagic});
 			}
 
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
 			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
 			{
-				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch};
+				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch, hasWeakMagic};
 				if(fileSizeMatch)
 					extFamilyMatch.matchesFileSize = true;
 				if(format.magic)
@@ -209,7 +209,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 
 			// Filename matches start at confidence 33.
 			if(filenameMatch)
-				familyMatches.filename.push({...baseMatch, matchType : "filename"});
+				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
 			// fileSize matches start at confidence 20.
 			if(fileSizeMatch && format.matchFileSize)
@@ -234,11 +234,11 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher
 			if(matchType==="ext")
-				familyMatches[matchType].sortMulti([m => m.priority, m => ((m.hasMagic && !m.matchesMagic) ? 1 : 0), m => (m.matchesFileSize ? 0 : 1)]);
+				familyMatches[matchType].sortMulti([m => m.priority, m => ((m.hasMagic && !m.matchesMagic) ? 1 : 0), m => (m.matchesFileSize ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)]);
 			else if(matchType==="magic")
-				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => m.originalConfidence], [false, false, true]);
+				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => m.originalConfidence, m => (m.hasWeakMagic ? 1 : 0)], [false, false, true, false]);
 			else
-				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1)]);
+				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)]);
 
 			familyMatches[matchType].forEach((m, i) =>
 			{

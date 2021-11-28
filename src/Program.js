@@ -307,12 +307,12 @@ export class Program
 						chainF.changeType("new", "prev");
 					};
 					
-					const chainProgOpts = {isChain : true};
+					const baseChainProgOpts = {isChain : true};
 
 					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
 					// So we set originalInput so it's named properly
 					if(newFiles.length===1 || progRaw.startsWith("*"))
-						chainProgOpts.originalInput = originalInput || f.input;
+						baseChainProgOpts.originalInput = originalInput || f.input;
 
 					if(progRaw.startsWith("*"))
 					{
@@ -321,23 +321,27 @@ export class Program
 
 						xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
 
-						await Program.runProgram(progRaw.substring(1), chainF, chainProgOpts);
+						await Program.runProgram(progRaw.substring(1), chainF, baseChainProgOpts);
 						await handleNewFiles(newFiles);
 					}
 					else
 					{
 						for(const newFile of newFiles)
 						{
-							const extraChainProgOpts = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, progRaw.substring(1)) : {};
-							if(!extraChainProgOpts)
+							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, progRaw.substring(1)) : {};
+							if(!chainProgFlags)
 								continue;
+							
+							const chainProgOpts = {...baseChainProgOpts};
+							if(Object.isObject(chainProgFlags))
+								chainProgOpts.flags = chainProgFlags;
 
 							chainF.removeType("input");
 							await chainF.add("input", newFile);
 
 							xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
 
-							await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, chainF, {...chainProgOpts, ...(Object.isObject(extraChainProgOpts) ? extraChainProgOpts : {})});
+							await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, chainF, chainProgOpts);
 							await handleNewFiles([newFile]);
 						}
 					}

@@ -1,29 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class pfsconvert extends Program
 {
-	website = "http://pfstools.sourceforge.net/";
-	gentooPackage = "media-gfx/pfstools";
+	website        = "http://pfstools.sourceforge.net/";
+	gentooPackage  = "media-gfx/pfstools";
 	gentooUseFlags = "fftw gsl imagemagick netpbm openexr opengl qt5 tiff";
-	gentooOverlay = "dexvert";
+	gentooOverlay  = "dexvert";
+	bin            = "pfsconvert";
+	args           = async r => [r.inFile(), await r.outFile("out.png")];
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website        : "http://pfstools.sourceforge.net/",
-	gentooPackage  : "media-gfx/pfstools",
-	gentooUseFlags : "fftw gsl imagemagick netpbm openexr opengl qt5 tiff",
-	gentooOverlay  : "dexvert"
-};
-
-exports.bin = () => "pfsconvert";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile.png")) => ([inPath, outPath]);
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.png"), path.join(state.output.absolute, `${state.input.name}.png`))(state, p, cb);
-*/

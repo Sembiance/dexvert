@@ -1,27 +1,9 @@
-/*
 import {Format} from "../../Format.js";
 
 export class ripIcon extends Format
 {
-	name = "RIP Icon";
-	ext = [".icn"];
-	priority = 1;
-	converters = [{"program":"deark","flags":{"dearkModule":"ripicon"}}];
+	name       = "RIP Icon";
+	ext        = [".icn"];
+	priority   = this.PRIORITY.HIGH;	// such a generic extension, but set high priority due to giving deark an explict module to use which seems to fail properly
+	converters = ["deark[module:ripicon]"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	C = require("../../C.js");
-	
-
-exports.meta =
-{
-	name     : "RIP Icon",
-	ext      : [".icn"],
-	priority : C.PRIORITY.HIGH
-};
-
-exports.converterPriority = [{ program : "deark", flags : {dearkModule : "ripicon"} }];
-
-*/

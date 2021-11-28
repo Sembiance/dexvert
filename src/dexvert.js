@@ -8,7 +8,7 @@ import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat}={})
+export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// eslint-disable-line no-unused-vars
 {
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");

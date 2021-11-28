@@ -13,7 +13,8 @@ const argv = cmdUtil.cmdInit({
 		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		report     : {desc : "Output an HTML report of the results."},
-		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."}
+		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."},
+		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
 
 const FLEX_SIZE_PROGRAMS =
@@ -29,8 +30,9 @@ const FLEX_SIZE_FORMATS =
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
-		// lottie2gif produces slightly different output on each iteration for some files, not sure why
-		lottie : 1,
+		// each running produces slightly different output, not sure why
+		lottie      : 1,
+		rekoCardset : 1,
 
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
@@ -40,7 +42,8 @@ const FLEX_SIZE_FORMATS =
 		// TODO TEMPROARY due to bug in abydos
 		avatar         : 20,
 		cebraText      : 20,
-		mrgSystemsText : 20
+		mrgSystemsText : 20,
+		softelText     : 20
 	}
 };
 
@@ -106,7 +109,7 @@ async function testSample(sampleFilePath)
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const r = await runUtil.run("dexvert", ["--json", sampleFilePath, tmpOutDirPath]);
+	const r = await runUtil.run("dexvert", [...(argv.debug ? ["--debug"] : []), "--json", sampleFilePath, tmpOutDirPath]);
 	const resultFull = xu.parseJSON(r.stdout);
 
 	function handleComplete()
@@ -160,7 +163,7 @@ async function testSample(sampleFilePath)
 		if(testData[sampleSubFilePath]===false)
 			return pass(fg.white("."));
 
-		return await fail(`${fg.pink("No result returned")} ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} but expected ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
+		return await fail(`${fg.pink("No result returned")} ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} ${fg.deepSkyblue("but expected")} ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
 	}
 	
 	const result = {};
@@ -195,17 +198,18 @@ async function testSample(sampleFilePath)
 	if(!Object.hasOwn(testData, sampleSubFilePath))
 		return await fail(`No test data for this file: ${xu.inspect(result).squeeze()}`);
 
+	const diskFamily = sampleSubFilePath.split("/")[0];
+	const diskFormat = sampleSubFilePath.split("/")[1];
+
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
 	if(!prevData.format)
-		oldDataFormats.pushUnique(prevData.formatid);
+		oldDataFormats.pushUnique(diskFormat);
 
-	const diskFamily = sampleSubFilePath.split("/")[0];
 	if(result.family && result.family!==diskFamily)
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
 
-	const diskFormat = sampleSubFilePath.split("/")[1];
 	if(result.format && result.format!==diskFormat && !(DISK_FORMAT_MAP.some(([regex, mapTo]) => regex.test(sampleFilePath) && (mapTo===true || mapTo===result.format))))
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
 
@@ -319,7 +323,7 @@ async function writeOutputHTML()
 		</style>
 	</head>
 	<body>
-		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA: ${oldDataFormats.join(" ")}</blink><br>` : ""}${outputFiles.length.toLocaleString()} files<br>
+		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.join(" ")}<br>` : ""}${outputFiles.length.toLocaleString()} files<br>
 		${outputFiles.map(filePath =>
 	{
 		const ext = path.extname(filePath);
@@ -361,7 +365,7 @@ xu.log`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHuma
 xu.log`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
 
 if(oldDataFormats.length>0)
-	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} ${oldDataFormats.join(" ")}`;
+	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} — ${oldDataFormats.join(" ")}`;
 
 if(argv.report && !argv.record)
 	await writeOutputHTML();

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then
+    echo "Usage: dexstash <family/format> <file> ..."
+    exit
+fi
+
+formatid="$1"
+shift
+
+if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ]; then
+	formatDir="/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
+	mkdir -p "$formatDir"
+
+	for filename in "$@"
+	do
+		if [ -f "$formatDir""$filename" ]; then
+			cp "$filename" "$formatDir""$(date +%s)_""$filename"
+		else
+			cp "$filename" "$formatDir"
+		fi
+	done
+
+	cd "$formatDir" || exit
+	sha1sum ./* | sort
+
+	echo -e "\n# of $formatid files: ""$(find "$formatDir" -type f | wc -l)"
+else
+	echo "Unknown format: $formatid"
+fi
+

@@ -1,16 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add full dexvert support for: ALL IMAGES
-
-* Several 'teletext' type images are not converting with current abydosconvert: avatar cebraText mrgSystemsText softelText teletextPackets
-  They used to produce PNG files, but now produce glitched out webp files...
-  Try the very latest abydos to see if it is fixed and produces PNG files
-  If still broken, try an older version of abydos and if it works there, double check the changeLog/emails didn't mention anything about teletext formats and email author and ask about it
-  After fixed, remove the temporary exceptions in testdexvert.js FLEX_SIZE_FORMATS
-
-* theDraw output from adbydos is messed up. Upgrade to latest version and test it again
-
 * Fully dexvert support:
 archive/windowsThumbDB
 archive/msCompound

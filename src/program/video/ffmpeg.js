@@ -13,7 +13,7 @@ export class ffmpeg extends Program
 		fps         : "What frame rate to specify for conversion. Default: Let ffmpeg decide",
 		rate        : "What rate to set for the output. Default: Let ffmpeg decide",
 		maxDuration : "Maximum duration (in seconds) to allow the output file to be"
-	}
+	};
 	bin = "ffmpeg";
 	args = async r =>
 	{
@@ -64,5 +64,5 @@ export class ffmpeg extends Program
 				a.push("-i", r.inFile(), "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", await r.outFile("out.mp4"));
 		}
 		return a;
-	}
+	};
 }

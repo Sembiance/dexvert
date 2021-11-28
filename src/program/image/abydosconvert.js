@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {runUtil} from "xutil";
 
 export class abydosconvert extends Program
 {
@@ -10,10 +11,16 @@ export class abydosconvert extends Program
 	bin           = "abydosconvert";
 	flags         =
 	{
-		format : "Which format to use for conversion. This is a mime type. REQUIRED."
+		format  : "Which format to use for conversion. This is a mime type. REQUIRED.",
+		outType : "Which format to output. 'png' is the only allowed option right now. Default: Let abydosconvert decide"
 	};
 
-	args = r => ["--json", r.flags.format, r.inFile(), r.outDir()];
+	args = r => [...(r.flags.outType==="png" ? ["--png"] : []), "--json", r.flags.format, r.inFile(), r.outDir()];
+
+	// abydos 0.2.9 has a bug where on FIRST run, it writes a file to HOME/.cache/abydos/plugins.cache
+	// It then proceeds to convert the file. HOWEVER on some image formats (avatar cebraText mrgSystemsText softelText teletextPackets) this first run will produce red artifacts on the image randomly
+	// Doing a --list first will 'prime' the HOME dir that was set up
+	pre = async r => await runUtil.run("abydosconvert", ["--list"], {env : {HOME : r.f.homeDir.absolute}});
 
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
 	runOptions = ({timeout : xu.MINUTE});

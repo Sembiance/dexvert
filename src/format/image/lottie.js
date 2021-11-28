@@ -8,13 +8,10 @@ export class lottie extends Format
 	name         = "Lottie";
 	website      = "https://github.com/Samsung/rlottie";
 	ext          = [".json"];
-	mimeType     = "application/json";
+	mimeType     = "image/x-lottie+json";
 	keepFilename = true;
 	notes        = "Will only match lottie files that include a layers property.";
-
-	// abydosconvert also supports this format, unfortuantely as of abydos-0.2.4 it currently doesn't animate correctly, not clearing canvas between frames
-	// So we just use lottie2gif instead which is included in rlottie
-	converters = ["lottie2gif"];
+	converters   = ["lottie2gif", `abydosconvert[format:${this.mimeType}]`];
 
 	auxFiles = async (inputFile, otherFiles, otherDirs) =>
 	{

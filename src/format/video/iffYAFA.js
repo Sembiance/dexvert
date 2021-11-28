@@ -10,6 +10,8 @@ export class iffYAFA extends Format
 	unsupported = true;
 	notes = "\nNo modern converter/player exists.\nFull file format details here: https://aminet.net/package/docs/misc/YAFA-doc\nAmiga converter here: https://aminet.net/package/gfx/misc/YAFA\nDead 404 converter here: http://eab.abime.net/showthread.php?t=85340";
 }
+
+ROBERT! FOR DENO VERSION, looks like abydos may now support this! Try with mimeType: video/x-yafa
 */
 /*
 "use strict";

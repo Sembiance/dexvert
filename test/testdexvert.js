@@ -37,14 +37,7 @@ const FLEX_SIZE_FORMATS =
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		naplps             : 20,
-		threeDCK           : 10,
-
-		// TODO TEMPROARY due to bug in abydos
-		avatar          : 20,
-		cebraText       : 20,
-		mrgSystemsText  : 20,
-		softelText      : 20,
-		teletextPackets : 20
+		threeDCK           : 10
 	}
 };
 

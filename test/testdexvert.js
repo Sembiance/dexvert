@@ -347,7 +347,7 @@ async function writeOutputHTML()
 				return `<iframe src="${filePathSafe}">`;
 		}
 
-		return `<a href="${filePathSafe}">${path.basename(filePath.escapeHTML())}</a>`;
+		return `<a href="${filePathSafe}">${path.basename(filePath.escapeHTML())}</a><br>`;
 	}).join("")}
 	</body>
 </html>`);

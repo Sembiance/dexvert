@@ -28,7 +28,7 @@ exports.bin = () => "extract-adf";
 // We extract into a temporary directory in CWD and then move the files after we are done
 // This is because extract-adf can produce VERY messed up files that not even standard linux utilities like 'find' can do anything with
 // So this prevents issues with really horribly output files gunking everything up
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	r.extractADFWipPath = fileUtil.generateTempFilePath(state.cwd, "-extract-adf");
 	fs.mkdir(r.extractADFWipPath, {recursive : true}, cb);

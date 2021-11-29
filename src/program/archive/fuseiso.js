@@ -23,7 +23,7 @@ exports.meta =
 };
 
 exports.bin = () => "fuseiso";
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	r.fuseisoMountDirPath = fileUtil.generateTempFilePath(state.cwd, "-fuseiso");
 	fs.mkdir(r.fuseisoMountDirPath, {recursive : true}, cb);

@@ -41,7 +41,7 @@ exports.bin = () => "timidity";
 // Some MIDI files are buggy and have 2 hour+ run times, others seem to loop for hours. So specify a sane timeout, it'll then handle the WAV that it did produce, which will be good enough
 exports.runOptions = () => ({timeout : XU.MINUTE*3});
 
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	if(!r.flags.midiFont)
 		r.flags.midiFont = INSTRUMENT_NAMES[0];

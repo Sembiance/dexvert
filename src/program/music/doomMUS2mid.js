@@ -23,7 +23,7 @@ exports.meta =
 
 exports.qemu = () => "c:\\dexvert\\slade\\SLADE.exe";
 
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	tiptoe(
 		function zipInFile()

@@ -87,7 +87,7 @@ There are likely to be filename collisions. I should also preserve those from th
   See smoe tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
-  WARNING! I need to assumed that it will be exploited. So I'll likely need to run virtual machines to do the actual conversions, or something
+  WARNING! I need to assumed that it will be exploited. So I will want to run dexvert on virtual machines. Not sure if I can run virtual machines like windows from WITHIN a virtual machine running gentoo+dexvert.... hrm...
 
 
 /----------------\

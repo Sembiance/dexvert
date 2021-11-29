@@ -2,7 +2,6 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
-import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -39,23 +38,50 @@ const dexvertOptions = {};
 		dexvertOptions[k] = argv[k];
 });
 
-async function handleDexState(dexState)
+async function handleDexState(dexState, lastTry)
 {
-	if(!dexState || !dexState.processed)
+	if(!dexState)
+	{
+		// if no dex state and our last try, just exit
+		if(lastTry)
+		{
+			xu.log1`No processed result.`;
+			Deno.exit(0);
+		}
+
 		return false;
+	}
 
-	if(argv.jsonFile)
-		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+	// send output if we are processed or it's our last try
+	const sendOutput = dexState.processed || lastTry;
 
-	if(argv.json)
-		console.log(JSON.stringify(dexState.serialize()));
-	else if(xu.verbose>=1)
-		console.log(`${dexState.pretty()}`);
+	if(sendOutput)
+	{
+		if(argv.jsonFile)
+			await fileUtil.writeFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
 
-	Deno.exit(0);
+		if(argv.json)
+			console.log(JSON.stringify(dexState.serialize()));
+		else if(xu.verbose>=1)
+			console.log(`${dexState.pretty()}`);
+		
+		// if we are not processed, then by default this is our lastTry so output that we have no result
+		if(!dexState.processed)
+		{
+			xu.log1`No processed result.`;
+
+			if(argv.debug)
+				console.log(`Processing failed: ${debugLog.join("\n")}`);
+		}
+
+		Deno.exit(0);
+	}
+
+	// otherwise we were not processed and it's not our last try, so return false and it will try a transform
+	return false;
 }
 
-await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions));
+await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions), true);	// TODO remove the last true here and put on the last transform once those are added back
 
 if(argv.dontTransform)
 {
@@ -63,12 +89,12 @@ if(argv.dontTransform)
 	Deno.exit(0);
 }
 
-// TODO do the two transforms now
-xu.log1`No processed result.`;
-
-if(argv.debug)
-	console.log(`Processing failed: ${debugLog.join("\n")}`);
-
+// TODO do the two transforms now BELOW
+// TRANSFORMED --- ROB DENO NOTE!
+//     As soon as I do a successful transform process, make sure it proudly shows up in the DexState output
+//     Then run a full test suite, see if anything new mis-identifies, those formats it mis-converts as might not be safe to operate on transformed formats. Already have support for that, just need to set 'transformUnsafe = true;' to the format
+// Lastly, consider adding to Program.js to never operate on files marked .transformed if the program is also marked .unsafe (this would be a new addition)
+// TODO do the two transforms now ABOVE
 
 /*
 const argv = cmdUtil.cmdInit(cmdData);

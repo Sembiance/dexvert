@@ -30,7 +30,7 @@ exports.meta =
 };
 
 exports.bin = () => "resource_dasm";
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	r.tmpDirPath = fileUtil.generateTempFilePath(state.cwd);
 	fs.mkdir(r.tmpDirPath, cb);

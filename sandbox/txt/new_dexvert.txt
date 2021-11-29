@@ -1,102 +1,90 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Fully dexvert support:
-archive/windowsThumbDB
-archive/msCompound
-archive/macBinary
-text/txtByFilename
-font/amigaBitmapFont
-video/* (something that uses dosBox for video)
+* Add audio
 
-* Find a DOS program that requires it to be ran in the output cwd and add easy support for this to dosUtil (archive family probably)
+* Add archive
+  First format to do: tar
+  Then
+  	Create a .tar file that will include symlinks outside of the dir. So have one symlink to / and another to like one dir up ../../outSideOfTar.txt
+	Ensure the tar is created as symlinks and not what the symlink points to
+	Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
+	Program.js should do this for EVERY new file it finds, check to see if the symlink exceeds bounds and delete the symlink if it does
 
-* Find a "gentoo" qemu format that I can get working with qemu
+* Add music
+  Here is where I should strongly consider adding some sort of 'prefix' type match type
+  Whether I do that or not, I should also consider supporting renaming of files based on the file.preName instead of file.name
 
-* Now convert and identify any formats with:
-untrustworthy (which has been removed entirely, as programs are untrustworthy, not formats)
-idCheck -> byteCheck
-filesRequired/filesOptional -> auxFiles
+* Add video
+  Start with something that uses dosBox and records a video
 
-* Now get processing working, again, starting with all the formats I've already converted, see above.
-  Create a .tar file that will include symlinks outside of the dir. So have one symlink to / and another to like one dir up ../../outSideOfTar.txt
-  Ensure the tar is created as symlinks and not what the symlink points to
-  Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
-  Also create a test/testdex.js file
-  Some of the formats will likely need 'transformUnsafe = true' flag added, but won't know right away. Make sure the output of process shows whether it was on a transformed file or not
-  Programs don't need preArgs() it can just be handlded in args now that it is async capable
-  Programs can be marked as unsafe (such as recoil2png). Make sure that transformed files are never sent to 'unsafe' programs
-  Program  flags are shorter and more generic:
-	inputType
-	outputType
-	fps
-	etc.
+* Add document
 
-* Now go through every other format, and test identification and processing for each one
+* Add font
+  Start with:
+	font/amigaBitmapFont
 
-* Maybe convert test-identify/test-process to have a live web page or fancy console status with boxes for every format type that turn red/green on success/failure
+* Add executable
 
-* Make a src/app/dexbrute.js that will create Converters() for every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
+* Add text
+  Start with:
+	text/txtByFilename
+
+* Add other
+
+* Now the test-process test case should be working 100%
 
 * Get rid of the testdexvert TODO for allowing one day off
 
-* Find all TODO comments and lint entire project
+* Find all remaining TODO comments (lintMyJSCode) and solve as many as I can
+
+* Now start working on test/testid.js (start with image/pcx). I will likely need to run each format by hand, manually (run once, check output, run record, proceeed to next format)
+  Sure, it's painful to have to do this again for every format, but this ensures it's correct because I lay my eye balls on it and I only have to do it once
+
+* Now that id is all done, run both testdex and testid and both should be passing 100%
+
+* Add all new dexvert paths to searchMyCode/shared/
+
+* Find all remaining TODO comments (lintMyJSCode) and finish ALL of them or move to todo.txt
+
+* Move whatever is left of DevLab/dexvert-node/ into DevLab/dexvert/sandbox/legacy/node/ then delete DevLab/dexvert-node/
+
+* Delete dexvert on github and rename dexvert-deno to dexvert and update dexvert/.git/config remote url too
+
+* Now email abydos Bergam and let him know about the new 'converters' column on the SUPPORTED.md page
+
+* Now add dexvert back to the "roles" for crystalsummit in DevLab/node-modules/xpriv/hostUtil.js
+
+* Now sync upload to chatsubo
+
+* Do chatsubo system wide update
+
+* Now get test/testid.js working 100% on chatsubo (this doesn't require dexserver be running)
+
+* Now get dexserver and test/testdexvert.js working 100% on chatsubo
+
+
 
 /---------------\
 | High Priority |
 \---------------/
-* Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
-
-* Check to see if abydosconvert still hangs on image/degasLowPI/KENSHIN.PI1 and if so email him about it and let him know. If he fixes it, update the comment in degasLowPI.js
-
-* Once all done, go through the sandbox/wip/misIdentified files and figure out where they go, then delete the misIdentified folder
+* Go through the sandbox/wip/misIdentified files and figure out where they go, then delete the misIdentified folder
   These are files that I believe DID convert, but do not actually appear to be the image they are assigned to, so need to determine what type they actually are
 
-* Once ALL FORMATS identifcation fully working and tested, think about adding a 'prefix' match type that will match prefixes against extensions
+* Make a src/app/dexbrute.js that will run a given format for each and every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
 
-* Once done and published, let bergam know about the new 'converters' column on the supported page
 
-* Try this as alternative to lobe, see how it does: https://teachablemachine.withgoogle.com/
-
-* To start, have all linux programs run locally, just as dexvert always has.
-  Eventually though, I want to be able to just have Program.loc default change to 'gentoo' and be able to run it all on gentoo qemu by default (maybe dynamic based on hostname or environment variable)
-* Create a new QEMU instance with dexvert:dexvert username that has X11 and boots up into awesomewm auto login auto start X
-DON'T DELETE OLD ONE, as I need to refer to it 
-Make a 10GB hd.img and a 40GB other.img that mounts as /mnt/extra then make symlinks
-/usr/portage -> /mnt/extra/usr/portage
-/usr/src     -> /mnt/extra/usr/src
-/var/tmp     -> /mnt/extra/var/tmp
-/usr/tmp     -> /mnt/extra/usr/tmp
-Of course only the hd.img is used in the final version
-* Use this new Gentoo QEMU instance to run all Linux conversion programs (so if they are exploited, somewhat more protected)
-Will need to update the 'supervisor.sh' script AND the QEMU server JS code to support a 'supervisorid' number.
-I'll want to run like 20x supervisor.sh scripts at once, since each QEMU instance can run more than 1 program at a time
-Will need to increase the ram from like 2GB to 10GB (since files get copied and processed into RAM) and size cores/instance count appropriately to not use all RAM.
-Will want to be able to specify the number of servers per OS type, so instead of numServers : 10 have numServers : {gentoo : 20, win2k : 10, winxp : 15, amigappc : 10}
-Both the supervisor script and the 'go' script should both disable core dumps with the equilivant linux command (ulimit?): posix.setrlimit("core", {soft : 0});
-
-* Make an apps.txt document for win2k/winxp that list the custom apps I installed, and where they are located and their version numbers and corresponding data/app/install.exe program
 
 
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Figure out what is 'eating' my input, see if I can reproduce it in a runUtil.test test and then see about fixing it in runUtil (I assume that's where it's happening)
+
+* Try this as alternative to lobe, see how it does: https://teachablemachine.withgoogle.com/
+
+* Make an apps.txt document for win2k/winxp that list the custom apps I installed, and where they are located and their version numbers and corresponding data/app/install.exe program
 
 
-/--------------\
-| Low Priority |
-\--------------/
-* Add dexvert back to searchMyCode/shared/ Was:
-	"DevLab/dexvert/util/*.js",
-	"DevLab/dexvert/bin/dex*",
-	"DevLab/dexvert/bin/*.js",
-	"DevLab/dexvert/bin/uniso",
-	"DevLab/dexvert/bin/modInfo",
-	"DevLab/dexvert/bin/photocd-info",
-	"DevLab/dexvert/test/*.js",
-	"DevLab/dexvert/tensor/*.js",
-	"DevLab/dexvert/src/**/*.js",
-	"DevLab/dexvert/server/*.js",
-<<<
 
 

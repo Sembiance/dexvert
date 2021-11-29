@@ -134,13 +134,18 @@ export class DexState
 		if(xu.verbose>=3 && this.past.length>0)
 		{
 			r.push(`\n${printUtil.majorHeader("DexState")}`);
-			r.push(`${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
+			r.push(`\n${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
 		}
 
 		r.push(`\n${prefix}${this.past.length>0 ? printUtil.minorHeader("ACTIVE PHASE") : ""}${this.phase.pretty(`${prefix}\t`)}`);
 		
 		r.push(`\n${fg.cyan("-".repeat(100))}`);
-		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)} ${this.format.untouched ? fg.deepSkyblue("**UNTOUCHED**") : ""}`);
+		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)}`);
+		if(this.format.untouched)
+			r.push(` ${fg.deepSkyblue("**UNTOUCHED**")}`);
+		if(this.f.input.transformed)
+			r.push(` ${fg.pink("**INPUT WAS TRANSFORMED**")}`);
+
 		if(this.duration)
 			r.push(`  ${xu.paren(`took ${fg.yellow((this.duration/xu.SECOND).secondsAsHumanReadable())}`)}`);
 		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);

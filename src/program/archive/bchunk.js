@@ -31,7 +31,7 @@ exports.meta =
 
 exports.bin = () => "bchunk";
 
-exports.preArgs = (state, p, r, cb) =>
+exports.preArgs = (state, p, r, cb) =>	// ROB DENO: preArgs stuff can now just be done inside of args itself, since it's async now
 {
 	r.bchunkWipPath = fileUtil.generateTempFilePath(state.cwd, "-bchunk");
 	fs.mkdir(r.bchunkWipPath, {recursive : true}, cb);

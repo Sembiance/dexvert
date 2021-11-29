@@ -11,6 +11,8 @@
 	Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
 	Program.js should do this for EVERY new file it finds, check to see if the symlink exceeds bounds and delete the symlink if it does
 
+* Add executable
+
 * Add music
   Here is where I should strongly consider adding some sort of 'prefix' type match type
   Whether I do that or not, I should also consider supporting renaming of files based on the file.preName instead of file.name
@@ -24,13 +26,9 @@
   Start with:
 	font/amigaBitmapFont
 
-* Add executable
-
 * Add text
   Start with:
 	text/txtByFilename
-
-* Add other
 
 * Now the test-process test case should be working 100%
 

@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class briefCompiledMacro extends Format
 {
-	name = "Brief Compiled Macro";
-	ext = [".cm"];
+	name           = "Brief Compiled Macro";
+	ext            = [".cm"];
 	forbidExtMatch = true;
-	magic = ["Brief Compiled Macro"];
-
-steps = [null];
+	magic          = ["Brief Compiled Macro"];
+	converters     = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Brief Compiled Macro",
-	ext            : [".cm"],
-	forbidExtMatch : true,
-	magic          : ["Brief Compiled Macro"]
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

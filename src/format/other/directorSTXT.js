@@ -1,30 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class directorSTXT extends Format
 {
-	name = "Director STXT";
-	ext = [".stxt"];
+	name           = "Director STXT";
+	ext            = [".stxt"];
 	forbidExtMatch = true;
-	magic = ["Director STXT"];
-	weakMagic = true;
-
-steps = [null];
+	magic          = ["Director STXT"];
+	weakMagic      = true;
+	converters     = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Director STXT",
-	ext            : [".stxt"],
-	forbidExtMatch : true,
-	magic          : ["Director STXT"],
-	weakMagic      : true
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

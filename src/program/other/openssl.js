@@ -1,42 +1,25 @@
-/*
+
 import {Program} from "../../Program.js";
 
 export class openssl extends Program
 {
-	website = "https://www.openssl.org/";
-	gentooPackage = "dev-libs/openssl";
+	website        = "https://www.openssl.org/";
+	gentooPackage  = "dev-libs/openssl";
 	gentooUseFlags = "asm zlib";
-	flags = {"sslCommand":"Which command to perform. REQUIRED FLAG","encodingType":"Encoding type of the certificate. Default: Let openssl decide (usually fails)"};
-	unsafe = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website        : "https://www.openssl.org/",
-	gentooPackage  : "dev-libs/openssl",
-	gentooUseFlags : "asm zlib",
-	flags :
+	unsafe         = true;
+	flags          =
 	{
-		sslCommand   : "Which command to perform. REQUIRED FLAG",
-		encodingType : "Encoding type of the certificate. Default: Let openssl decide (usually fails)"
-	},
-	unsafe : true
-};
-
-exports.bin = () => "openssl";
-exports.args = (state, p, r, inPath=state.input.filePath) =>
-{
-	const args = [r.flags.sslCommand, "-noout", "-text"];
-	if(r.flags.encodingType)
-		args.push("-inform", r.flags.encodingType);
-		
-	return [...args, "-in", inPath];
-};
-exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
-*/
+		command  : "Which command to perform. REQUIRED FLAG",
+		encoding : "Encoding type of the certificate. Default: Let openssl decide (usually fails)"
+	};
+	bin  = "openssl";
+	args = r =>
+	{
+		const a = [r.flags.command, "-noout", "-text"];
+		if(r.flags.encoding)
+			a.push("-inform", r.flags.encoding);
+			
+		return [...a, "-in", r.inFile()];
+	};
+	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+}

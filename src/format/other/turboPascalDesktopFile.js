@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class turboPascalDesktopFile extends Format
 {
-	name = "Turbo Pascal Desktop File";
-	ext = [".dsk"];
+	name           = "Turbo Pascal Desktop File";
+	ext            = [".dsk"];
 	forbidExtMatch = true;
-	magic = ["Turbo Pascal Desktop"];
-
-steps = [null];
+	magic          = ["Turbo Pascal Desktop"];
+	converters     = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Turbo Pascal Desktop File",
-	ext            : [".dsk"],
-	forbidExtMatch : true,
-	magic          : ["Turbo Pascal Desktop"]
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

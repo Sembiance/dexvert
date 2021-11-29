@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class borlandReflexDatabase extends Format
 {
-	name = "Borland Reflex Database";
-	ext = [".rxd"];
+	name           = "Borland Reflex Database";
+	ext            = [".rxd"];
 	forbidExtMatch = true;
-	magic = ["Borland Reflex Database"];
-
-steps = [null];
+	magic          = ["Borland Reflex Database"];
+	converters     = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Borland Reflex Database",
-	ext            : [".rxd"],
-	forbidExtMatch : true,
-	magic          : ["Borland Reflex Database"]
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

@@ -54,9 +54,10 @@ const DEXMAGIC_CHECKS =
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
 
 	// other
-	"Director STXT" : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
-	"OLB Library"   : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
-	"VCD Info File" : [{offset : 0, match : "VIDEO_CD"}],
+	"Atari ST Guide Hypertext" : [{offset : 0, match : "HDOC"}],
+	"Director STXT"            : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
+	"OLB Library"              : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
+	"VCD Info File"            : [{offset : 0, match : "VIDEO_CD"}],
 
 	// video
 	"RIFF ANIM file" : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],

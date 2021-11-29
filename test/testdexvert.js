@@ -1,4 +1,4 @@
-/* eslint-disable camelcase, prefer-named-capture-group */
+/* eslint-disable camelcase, prefer-named-capture-group, unicorn/better-regex */
 import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
@@ -45,16 +45,22 @@ const FLEX_SIZE_FORMATS =
 	}
 };
 
-// Regex is matched against the sample file tested and the second item is the format to allow to match to or true to allow any format
-const DISK_FORMAT_MAP =
+// Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
+const DISK_FAMILY_FORMAT_MAP =
 [
 	// These formats share generic .ext only, no magic matches
-	[/image\/artistByEaton\/BLINKY\.ART$/, "asciiArtEditor"],
-	[/image\/gfaArtist\/.+$/, "asciiArtEditor"],
-	[/image\/pfsFirstPublisher\/.+$/, "artDirector"],
+	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
+	[/image\/gfaArtist\/.+$/, "image", "asciiArtEditor"],
+	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
+
+	// Unsupported files that end up getting matched to other stuff
+	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
+	[/other\/microsoftChatCharacter\/armando.avb$/, "image", "tga"],
 
 	// Supporting/AUX files
-	[/image\/fig\/.+.(gif|jpg|xbm|xpm)$/, true]
+	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
+	[/other\/pogNames\/.+\.pog$/i, "image", true],
+	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "-dextest");
@@ -82,7 +88,14 @@ const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
 xu.log`Finding sample files...`;
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
 xu.log`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
-const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath => Object.hasOwn(formats, path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath).split("/")[0]));
+const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
+{
+	const sampleRel = path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath);
+	const sampleFormat = sampleRel.split("/")[argv.format.includes("/") ? 0 : 1];
+	return Object.hasOwn(formats, sampleFormat);
+});
+
+xu.log`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
 
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
@@ -206,10 +219,10 @@ async function testSample(sampleFilePath)
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
 
-	if(result.family && result.family!==diskFamily)
+	if(result.family && result.family!==diskFamily && !(DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family))))
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
 
-	if(result.format && result.format!==diskFormat && !(DISK_FORMAT_MAP.some(([regex, mapTo]) => regex.test(sampleFilePath) && (mapTo===true || mapTo===result.format))))
+	if(result.format && result.format!==diskFormat && !(DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily, mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format))))
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
 
 	if(prevData.files && !result.files)
@@ -319,6 +332,13 @@ async function writeOutputHTML()
   				50% { visibility: hidden; }
   				100% { visibility: visible; }
 			}
+
+			iframe
+			{
+				background-color: #aaa;
+				margin: 5px;
+				border: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -343,8 +363,9 @@ async function writeOutputHTML()
 			case ".mp3":
 				return `<audio src="${filePathSafe}">`;
 			
+			case ".txt":
 			case ".pdf":
-				return `<iframe src="${filePathSafe}">`;
+				return `<iframe src="${filePathSafe}"></iframe>`;
 		}
 
 		return `<a href="${filePathSafe}">${path.basename(filePath.escapeHTML())}</a><br>`;

@@ -1,25 +1,10 @@
-/*
 import {Program} from "../../Program.js";
 
 export class strings extends Program
 {
-	website = "https://www.gnu.org/software/binutils/";
+	website       = "https://www.gnu.org/software/binutils/";
 	gentooPackage = "sys-devel/binutils";
+	bin           = "strings";
+	args          = r => ["-a", r.inFile()];
+	runOptions    = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "https://www.gnu.org/software/binutils/",
-	gentooPackage : "sys-devel/binutils"
-};
-
-exports.bin = () => "strings";
-exports.args = (state, p, r, inPath=state.input.filePath) => (["-a", inPath]);
-exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
-*/

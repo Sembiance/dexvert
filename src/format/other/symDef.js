@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class symDef extends Format
 {
-	name = "SYMDEF File";
-	ext = [".symdef"];
-	magic = [{}];
-	weakMagic = true;
-
-steps = [null];
+	name       = "SYMDEF File";
+	ext        = [".symdef"];
+	magic      = [/^data$/];
+	weakMagic  = true;
+	converters = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name      : "SYMDEF File",
-	ext       : [".symdef"],
-	magic     : [/^data$/],
-	weakMagic : true
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

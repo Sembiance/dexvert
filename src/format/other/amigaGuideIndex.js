@@ -1,28 +1,11 @@
-/*
+
 import {Format} from "../../Format.js";
 
 export class amigaGuideIndex extends Format
 {
-	name = "Amigaguide Index";
-	ext = [".index"];
+	name           = "Amigaguide Index";
+	ext            = [".index"];
 	forbidExtMatch = true;
-	magic = ["Amigaguide Index"];
-
-steps = [null];
+	magic          = ["Amigaguide Index"];
+	converters     = ["strings"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Amigaguide Index",
-	ext            : [".index"],
-	forbidExtMatch : true,
-	magic          : ["Amigaguide Index"]
-};
-
-exports.steps = [() => ({program : "strings"})];
-
-*/

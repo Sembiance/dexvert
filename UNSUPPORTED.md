@@ -1,4 +1,4 @@
-# Unsupported File Formats (296)
+# Unsupported File Formats (298)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -82,7 +82,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 
 
 
-## Other (217)
+## Other (219)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -120,7 +120,7 @@ other | ArtEffect Brush |  |
 other | ArtEffect Convolution |  | 
 other | ASCII Font Metrics | .afm | 
 other | Atari CTB File | .ctb | [5 sample files](https://telparia.com/fileFormatSamples/unsupported/atariCTBFile/)
-other | Atari GEM OBM File | .obm | [10 sample files](https://telparia.com/fileFormatSamples/other/atariGEMOBM/)
+other | Atari GEM OBM File | .obm | [16 sample files](https://telparia.com/fileFormatSamples/unsupported/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | AutoCAD Compiled Menu | .mnx | 
@@ -139,7 +139,7 @@ other | BWSB Music and Sound Engine Driver | .mse |
 other | CAD/Draw Library | .tbl | 
 other | CAD/Draw Settings | .mpi | 
 other | CakeWalk Work File | .wrk | 
-other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/other/chaosultdGEMParameters/)
+other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 other | Chemview Animation Data | .d | 
 other | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 other | Confusion and Light Compressed Data | .cal | 
@@ -160,7 +160,7 @@ other | Descent Level | .rdl |
 other | DOOM Save Game | .dsg | 
 other | Dynamic Message System File | .msg | 
 other | Electronic Arts LIB container | .lib | 
-other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/other/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
+other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | Ensoniq VFX Patch File | .vfx | 
 other | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 other | File Express Index Header | .ixh | 
@@ -185,9 +185,10 @@ other | ICC Color Map | .iff |
 other | ICC Color Profile | .icc | 
 other | IFF Binary Patch | .pch .patch | 
 other | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
+other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://telparia.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Uninstall Script | .isu | 
 other | Intel Common Object File Format Object | .obj | 
-other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/other/javaClass/)
+other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/unsupported/javaClass/)
 other | Javelin Printer Driver | .pr .pr2 | 
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
@@ -206,6 +207,7 @@ other | MathCad Document | .mcd |
 other | MDIFF Patch File | .mdf | 
 other | MegaPaint Printer Driver | .trb | 
 other | Micro Lathe Object | .lat | 
+other | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://telparia.com/fileFormatSamples/other/microsoftChatCharacter/)
 other | Microsoft Printer Definition | .prd | 
 other | Microsoft Program Database | .pdb | 
 other | Microsoft Security Catalog | .cat | 
@@ -224,7 +226,7 @@ other | NeoPaint Printer Driver | .prd |
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
 other | Norton Change Directory Info | .ncd | 
-other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/other/olbLib/)
+other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | PatchMeister Driver | .pmdriver | 
 other | PGP Key Ring | .key .pgp | 

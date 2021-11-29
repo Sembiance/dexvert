@@ -14,5 +14,5 @@ export class file extends Program
 	post = r =>
 	{
 		r.meta.detections = r.stdout.trim().replaceAll("\n- , ", "\n- ").split("\n- ").filter(v => !!v).map((line, i) => Detection.create({value : line.trim(), from : "file", confidence : 100-i, file : r.f.input}));
-	}
+	};
 }

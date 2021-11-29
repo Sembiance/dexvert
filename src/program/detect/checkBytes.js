@@ -9,14 +9,9 @@ export class checkBytes extends Program
 	bin = Program.binPath("checkBytes/checkBytes");
 	loc = "local";
 
-	args = r => [r.inFile()]
+	args = r => [r.inFile()];
 	post = r =>
 	{
-		r.meta.detections = [];
-
-		if(r.stdout.trim().length===0)
-			return;
-		
-		r.meta.detections.push(Detection.create({value : r.stdout.trim(), from : "checkBytes", file : r.f.input}));
-	}
+		r.meta.detections = r.stdout.trim().split("\n").filter(v => !!v).map(line => Detection.create({value : line.trim(), from : "checkBytes", file : r.f.input}));
+	};
 }

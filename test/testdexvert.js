@@ -17,6 +17,9 @@ const argv = cmdUtil.cmdInit({
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
 
+// ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
+argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
+
 const FLEX_SIZE_PROGRAMS =
 {
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
@@ -31,8 +34,9 @@ const FLEX_SIZE_FORMATS =
 		dxf : 1,
 
 		// each running produces slightly different output, not sure why
-		lottie      : 1,
-		rekoCardset : 1,
+		lottie           : 0.1,
+		rekoCardset      : 0.1,
+		windowsClipboard : 0.1,
 
 		// Takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
@@ -76,9 +80,10 @@ xu.log`Loading test data and finding sample files...`;
 const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
 
 xu.log`Finding sample files...`;
-const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true});
-xu.log`Found ${sampleFilePaths.length} sample files. Filtering those we don't have support for...`;
-sampleFilePaths.filterInPlace(sampleFilePath => Object.hasOwn(formats, path.basename(path.dirname(sampleFilePath))));
+const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
+xu.log`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
+const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath => Object.hasOwn(formats, path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath).split("/")[0]));
+
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
 xu.log`Testing ${sampleFilePaths.length} sample files...`;

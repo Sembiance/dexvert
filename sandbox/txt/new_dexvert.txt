@@ -38,8 +38,12 @@
 
 * Find all remaining TODO comments (lintMyJSCode) and solve as many as I can
 
-* Now start working on test/testid.js (start with image/pcx). I will likely need to run each format by hand, manually (run once, check output, run record, proceeed to next format)
-  Sure, it's painful to have to do this again for every format, but this ensures it's correct because I lay my eye balls on it and I only have to do it once
+* Now start working on test/testid.js (start with image/pcx).
+I do NOT actually have to manually 'record' anew for every file format, existing data is same.
+So I should just be able to test entire families
+./testid --format=image
+Then fix an specific formats and record just those formats
+If for whatever reason I do need to do it by hand, I wrote a script to help, just run util/testids.sh
 
 * Now that id is all done, run both testdex and testid and both should be passing 100%
 

@@ -2,15 +2,23 @@ import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil} from "xutil";
 import {Identification} from "../src/Identification.js";
 import {path} from "std";
+import {formats} from "../src/format/formats.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test dexvert identification for 1 or all formats",
 	opts    :
 	{
-		format  : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
-		record  : {desc : "Take the results of the identifications and save them as future expected results"}
+		format : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
+		file   : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
+		record : {desc : "Take the results of the identifications and save them as future expected results"},
+		quiet  : {desc : "Output fewer messages."}
 	}});
+
+xu.verbose = argv.quiet ? 1 : 3;
+
+// ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
+argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
 const startTime = performance.now();
 const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "data", "identify.json");
@@ -21,23 +29,28 @@ const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
-console.log(printUtil.majorHeader("Identification Test"));
-xu.log`Loading test data and finding sample files...`;
+xu.log3`${printUtil.majorHeader("Identification Test")}`;
+xu.log3`Loading test data and finding sample files...`;
 
 const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
-const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH);
 
-xu.log`Testing ${sampleFilePaths.length} sample files...`;
+const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
+xu.log3`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
+const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath => Object.hasOwn(formats, path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath).split("/")[0]));
+if(argv.file)
+	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
-	if(!argv.format || !extraFilePath.startsWith(path.join(argv.format, "/")))
+	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 
-	xu.log`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
+	xu.log1`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
 	if(argv.record)
 		delete testData[extraFilePath];
 });
+
+xu.log1`Testing ${sampleFilePaths.length} sample files...`;
 
 let passChain=0;
 async function testSample(sampleFilePath)
@@ -48,7 +61,7 @@ async function testSample(sampleFilePath)
 	
 	function fail(msg)
 	{
-		xu.log`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${fg.orange(msg)}`;
+		xu.log1`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${fg.orange(msg)}`;
 		if(passChain>0)
 			passChain = 0;
 	}
@@ -107,4 +120,5 @@ if(argv.record)
 	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 //testUtil.logFinish();
-xu.log`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+xu.log1`\n`;
+xu.log2`Elapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;

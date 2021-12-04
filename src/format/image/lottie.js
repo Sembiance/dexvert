@@ -1,6 +1,5 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
-import {fileUtil} from "xutil";
 import {path} from "std";
 
 export class lottie extends Format
@@ -16,7 +15,7 @@ export class lottie extends Format
 	auxFiles = async (inputFile, otherFiles, otherDirs) =>
 	{
 		// Some lottie files include image assets
-		const parsed = xu.parseJSON(await fileUtil.readFile(inputFile.absolute), {});
+		const parsed = xu.parseJSON(await Deno.readTextFile(inputFile.absolute), {});
 		if(!parsed || !parsed.assets)
 			return false;
 		
@@ -36,5 +35,5 @@ export class lottie extends Format
 		return a.length>0 ? a : false;
 	};
 
-	idCheck = async inputFile => !!xu.parseJSON(await fileUtil.readFile(inputFile.absolute))?.layers;
+	idCheck = async inputFile => !!xu.parseJSON(await Deno.readTextFile(inputFile.absolute))?.layers;
 }

@@ -9,8 +9,7 @@ export class abydosconvert extends Program
 	gentooOverlay = "dexvert";
 	unsafe        = true;
 	bin           = "abydosconvert";
-	flags         =
-	{
+	flags         = {
 		format  : "Which format to use for conversion. This is a mime type. REQUIRED.",
 		outType : "Which format to output. 'png' is the only allowed option right now. Default: Let abydosconvert decide"
 	};
@@ -24,8 +23,7 @@ export class abydosconvert extends Program
 
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
 	runOptions = ({timeout : xu.MINUTE});
-	renameOut =
-	{
+	renameOut = {
 		regex : /.+?(?<num>\.\d{3})?(?<ext>\.(?:png|svg|webp))$/,
 		renamer :
 		[

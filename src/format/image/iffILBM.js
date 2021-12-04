@@ -3,13 +3,14 @@ import {Format} from "../../Format.js";
 
 export class iffILBM extends Format
 {
-	name         = "IFF Interleaved Bitmap Image";
-	website      = "http://fileformats.archiveteam.org/wiki/ILBM";
-	ext          = [".lbm", ".ilbm", ".iff", ".beam", ".dhr", ".dr", ".mp", ".dctv"];
-	mimeType     = "image/x-ilbm";
-	magic        = ["IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "DCTV encoded ILBM bitmap"];
-	metaProvider = ["image"];
-	notes        = xu.trim`
+	name           = "IFF Interleaved Bitmap Image";
+	website        = "http://fileformats.archiveteam.org/wiki/ILBM";
+	ext            = [".lbm", ".ilbm", ".iff", ".beam", ".dhr", ".dr", ".mp", ".dctv"];
+	mimeType       = "image/x-ilbm";
+	magic          = ["IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "DCTV encoded ILBM bitmap"];
+	forbiddenMagic = ["IFF Amiga Contiguous BitMap"];	// trid likes to identify IFF ACBM files as both ACBM and ILBM, so forbid the magic here and let iffACBM handle that
+	metaProvider   = ["image"];
+	notes          = xu.trim`
 		Some ILBM files were only used to hold a palette and nothing more. This won't convert those.
 		Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter.
 		DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort.

@@ -1,5 +1,4 @@
 import {xu} from "xu";
-import {fileUtil} from "xutil";
 import {path} from "std";
 import {formats} from "../../src/format/formats.js";
 import {programs} from "../../src/program/programs.js";
@@ -10,7 +9,7 @@ const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, f
 export default async function buildREADME()
 {
 	xu.log3`Writing README.md to disk...`;
-	await fileUtil.writeFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - Decompress EXtract conVERT
+	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern browser friendly ones (png/svg/pdf/mp3/mp4/etc.).
 
 Utilizes [Deno](https://deno.land/) to leverage **${Object.keys(programs).length.toLocaleString()}** helper programs running on **${QEMUIDS.length}** different operating systems under [QEMU](https://www.qemu.org/).

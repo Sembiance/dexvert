@@ -8,4 +8,5 @@ export class fractalImageFormat extends Format
 	forbidExtMatch = true;
 	magic          = ["Fractal Image Format bitmap"];
 	converters     = ["fifView"];
+	notes          = "The 256C versions don't convert with fifView. I need to track down a different converter that can handle those.";
 }

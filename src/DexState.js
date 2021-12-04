@@ -103,11 +103,11 @@ export class DexState
 	}
 
 	// convenience methods to access current phase properties
-	get f() { return this.phase.f; }
-	get format() { return this.phase.format; }
-	get meta() { return this.phase.meta; }
-	get ran() { return this.phase.ran; }
-	get id() { return this.phase.id; }
+	get f() { return this.phase?.f; }
+	get format() { return this.phase?.format; }
+	get meta() { return this.phase?.meta; }
+	get ran() { return this.phase?.ran; }
+	get id() { return this.phase?.id; }
 
 	serialize()
 	{
@@ -137,13 +137,13 @@ export class DexState
 			r.push(`\n${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
 		}
 
-		r.push(`\n${prefix}${this.past.length>0 ? printUtil.minorHeader("ACTIVE PHASE") : ""}${this.phase.pretty(`${prefix}\t`)}`);
+		r.push(`\n${prefix}${this.past.length>0 ? printUtil.minorHeader("ACTIVE PHASE") : ""}${this.phase ? this.phase.pretty(`${prefix}\t`) : ""}`);
 		
 		r.push(`\n${fg.cyan("-".repeat(100))}`);
 		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)}`);
-		if(this.format.untouched)
+		if(this.format?.untouched)
 			r.push(` ${fg.deepSkyblue("**UNTOUCHED**")}`);
-		if(this.f.input.transformed)
+		if(this.f?.input.transformed)
 			r.push(` ${fg.pink("**INPUT WAS TRANSFORMED**")}`);
 
 		if(this.duration)

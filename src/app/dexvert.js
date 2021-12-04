@@ -58,7 +58,7 @@ async function handleDexState(dexState, lastTry)
 	if(sendOutput)
 	{
 		if(argv.jsonFile)
-			await fileUtil.writeFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+			await Deno.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
 
 		if(argv.json)
 			console.log(JSON.stringify(dexState.serialize()));

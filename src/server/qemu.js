@@ -11,7 +11,7 @@ const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
 const HOSTS =
 {
-	lostcrag      : { numServers :  2 },
+	lostcrag      : { numServers :  4 },
 	crystalsummit : { numServers :  2 },
 	chatsubo      : { numServers : 10 }
 };
@@ -32,12 +32,11 @@ const OS =
 	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
 	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
 	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
-	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci"], inOutType : "ssh", scriptExt : ".sh", uefi : true }
+	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"], inOutType : "ssh", scriptExt : ".sh" }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
 
-const UEFI_VARS_SRC_PATH = "/usr/share/edk2-ovmf/OVMF_VARS.fd";
 const INSTANCES = {};
 const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = [];
@@ -65,7 +64,7 @@ const IN_OUT_LOGIC =
 		}
 
 		// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-		await fileUtil.writeFile(tmpGoFilePath, body.script);
+		await Deno.writeTextFile(tmpGoFilePath, body.script);
 		await fileUtil.move(tmpGoFilePath, goFilePath, this);
 
 		// Wait for finish, which happens when the VM deletes the go file
@@ -98,7 +97,7 @@ const IN_OUT_LOGIC =
 		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
 
-		await fileUtil.writeFile(tmpGoFilePath, body.script);
+		await Deno.writeTextFile(tmpGoFilePath, body.script);
 
 		// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
 		await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});	//shell : "/bin/bash",
@@ -124,7 +123,7 @@ const IN_OUT_LOGIC =
 		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
 
-		await fileUtil.writeFile(tmpGoFilePath, body.script);
+		await Deno.writeTextFile(tmpGoFilePath, body.script);
 		await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
 		
 		// Wait for finish, which happens when we detect that the go file has disappeared
@@ -168,8 +167,6 @@ export class qemu extends Server
 
 		const imgFilePaths = ["hd.img", ...(OS[osid].extraImgs || [])].map(imgFilename => path.join(QEMU_INSTANCE_DIR_PATH, osid, imgFilename));
 		await imgFilePaths.parallelMap(imgFilePath => Deno.copyFile(imgFilePath, path.join(instance.dirPath, path.basename(imgFilePath))));
-		if(OS[osid].uefi)
-			await Deno.copyFile(UEFI_VARS_SRC_PATH, path.join(instance.dirPath, "OVMF_VARS.fd"));
 
 		const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
 		if(!instance.debug)
@@ -190,12 +187,6 @@ export class qemu extends Server
 		qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
 
 		(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
-
-		if(OS[osid].uefi)
-		{
-			qemuArgs.push("-drive", "if=pflash,format=raw,unit=0,file=/usr/share/edk2-ovmf/OVMF_CODE.fd,readonly=on");
-			qemuArgs.push("-drive", "if=pflash,format=raw,unit=1,file=OVMF_VARS.fd");
-		}
 
 		qemuArgs.push(...OS[osid].extraArgs || []);
 
@@ -218,7 +209,7 @@ export class qemu extends Server
 		});
 
 		this.log`${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
-		await fileUtil.writeFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
+		await Deno.writeTextFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
 	}
 
 	// Called when the QEMU has fully booted and is ready to received files
@@ -290,29 +281,29 @@ export class qemu extends Server
 		}, {detached : true, method : "POST"});
 		await this.webServer.start();
 
-		this.log`Pre-cleaning ${QEMU_INSTANCE_DIR_PATH}`;
-		await fileUtil.unlink(QEMU_INSTANCE_DIR_PATH, {recursive : true});
+		this.log`Finding old QEMU instances...`;
+		const oldQEMUInstanceDirPaths = await fileUtil.tree(QEMU_INSTANCE_DIR_PATH, {depth : 1, nofile : true, regex : /-\d+$/});
+
+		this.log`Deleting ${oldQEMUInstanceDirPaths.length} previous QEMU instances...`;
+		for(const oldQEMUInstanceDirPath of oldQEMUInstanceDirPaths)
+			await fileUtil.unlink(oldQEMUInstanceDirPath, {recursive : true});
 
 		for(const osid of Object.keys(OS))
 			await Deno.mkdir(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
 
-		this.log`Pre-copying img files...`;
+		this.log`Ensuring img files are up to date...`;
 		for(const [osid, osInfo] of Object.entries(OS))
 		{
 			for(const imgFilePath of ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename)))
 			{
 				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
-				this.log`Copying to: ${imgDestFilePath}`;
-				await Deno.copyFile(imgFilePath, imgDestFilePath);
+				this.log`Rsyncing to: ${imgDestFilePath}`;
+				await runUtil.run("rsync", ["-a", imgFilePath, imgDestFilePath]);
 			}
 		}
 
 		this.log`Starting instances...`;
 		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)));
-
-		this.log`Cleaning up HD images...`;
-		for(const osid of Object.keys(OS))
-			await fileUtil.unlink(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

@@ -32,7 +32,7 @@ await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "
 xu.log3`${printUtil.majorHeader("Identification Test")}`;
 xu.log3`Loading test data and finding sample files...`;
 
-const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
+const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
 
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
 xu.log3`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
@@ -117,7 +117,7 @@ async function testSample(sampleFilePath)
 await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency);
 
 if(argv.record)
-	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
+	await Deno.writeTextFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 //testUtil.logFinish();
 xu.log1`\n`;

@@ -12,7 +12,7 @@ const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {
 	xu.log`Killing previous dexserver instance...`;
-	const prevDexservPID = await fileUtil.readFile(DEXSERVER_PID_FILE_PATH);
+	const prevDexservPID = await Deno.readTextFile(DEXSERVER_PID_FILE_PATH);
 	await runUtil.run("kill", [prevDexservPID]);
 	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
 }
@@ -20,6 +20,28 @@ if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 xu.log`Cleaning up previous dexvert RAM installation...`;
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
+
+async function signalHandler(sig)
+{
+	xu.log`Got signal ${sig}`;
+
+	xu.log`Stopping ${Object.keys(servers).length} servers...`;
+	for(const serverid of SERVER_ORDER.reverse())
+	{
+		xu.log`Stopping server ${fg.peach(serverid)}...`;
+		try
+		{
+			await servers[serverid].stop();
+		}
+		catch {}
+		xu.log`Server ${fg.peach(serverid)} stopped.`;
+	}
+	
+	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
+	xu.log`Exiting...`;
+	Deno.exit(0);
+}
+["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await signalHandler(v)));
 
 xu.log`Starting ${Object.keys(servers).length} servers...`;
 for(const serverid of SERVER_ORDER)
@@ -32,25 +54,7 @@ for(const serverid of SERVER_ORDER)
 	xu.log`Server ${fg.peach(serverid)} fully loaded!`;
 }
 
-await fileUtil.writeFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
+await Deno.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xu.log`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
-
-async function signalHandler(sig)
-{
-	xu.log`Got signal ${sig}`;
-
-	xu.log`Stopping ${Object.keys(servers).length} servers...`;
-	for(const serverid of SERVER_ORDER.reverse())
-	{
-		xu.log`Stopping server ${fg.peach(serverid)}...`;
-		await servers[serverid].stop();
-		xu.log`Server ${fg.peach(serverid)} stopped.`;
-	}
-	
-	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
-	xu.log`Exiting...`;
-	Deno.exit(0);
-}
-["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await signalHandler(v)));
 
 await delay(xu.YEAR);	// gonna run into an issue if it runs longer than 1 year rofl

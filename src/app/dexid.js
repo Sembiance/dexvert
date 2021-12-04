@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {cmdUtil, fileUtil, printUtil} from "xutil";
+import {cmdUtil, printUtil} from "xutil";
 import {identify} from "../identify.js";
 import {DexFile} from "../DexFile.js";
 
@@ -26,7 +26,7 @@ for(const inputFilePath of inputFilePaths)
 	const rows = await identify(await DexFile.create(inputFilePath));
 
 	if(argv.jsonFile)
-		await fileUtil.writeFile(argv.jsonFile, JSON.stringify(rows));
+		await Deno.writeTextFile(argv.jsonFile, JSON.stringify(rows));
 
 	if(argv.json)
 	{

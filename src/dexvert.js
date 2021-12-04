@@ -42,10 +42,8 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 		ids.push(...(await identify(inputFile, {quiet : true})).filter(id => id.from==="dexvert" && !id.unsupported));
 	}
 
-	if(ids.length===0)
-		return;
-
-	xu.log2`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
+	if(ids.length>0)
+		xu.log2`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 
 	const dexState = DexState.create({original : {input : inputFile, output : outputDir}});
 	for(const id of ids)

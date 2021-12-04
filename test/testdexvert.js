@@ -49,9 +49,11 @@ const FLEX_SIZE_FORMATS =
 const DISK_FAMILY_FORMAT_MAP =
 [
 	// These formats share generic .ext only, no magic matches
+	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
 	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
 	[/image\/gfaArtist\/.+$/, "image", "asciiArtEditor"],
 	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
+	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 
 	// Unsupported files that end up getting matched to other stuff
 	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
@@ -59,6 +61,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Supporting/AUX files
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
+	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
 	[/other\/pogNames\/.+\.pog$/i, "image", true],
 	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
@@ -83,7 +86,7 @@ await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "
 
 xu.log`Loading test data and finding sample files...`;
 
-const testData = xu.parseJSON(await fileUtil.readFile(DATA_FILE_PATH));
+const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
 
 xu.log`Finding sample files...`;
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
@@ -95,7 +98,8 @@ const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
 	return Object.hasOwn(formats, sampleFormat);
 });
 
-xu.log`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
+if(allSampleFilePaths.subtractAll(sampleFilePaths).length>0)
+	xu.log`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
 
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
@@ -216,13 +220,17 @@ async function testSample(sampleFilePath)
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
+
+	if(!result.processed)
+		return await pass(fg.white("."));
+
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
 
 	if(result.family && result.family!==diskFamily && !(DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family))))
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
 
-	if(result.format && result.format!==diskFormat && !(DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily, mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format))))
+	if(result.format && result.format!==diskFormat && !(DISK_FAMILY_FORMAT_MAP.some(([regex, , mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format))))
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
 
 	if(prevData.files && !result.files)
@@ -288,7 +296,7 @@ async function testSample(sampleFilePath)
 	if(!prevData.converter && result.converter)
 		return await fail(`Expected no converter but instead got ${fg.orange(result.converter)}`);
 
-	return await pass(fg.white("."));
+	return await pass(fg.white("·"));
 }
 
 await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency);
@@ -300,7 +308,7 @@ if(failures.length>0)
 
 async function writeOutputHTML()
 {
-	await fileUtil.writeFile("/mnt/ram/tmp/testdexvert.html", `
+	await Deno.writeTextFile("/mnt/ram/tmp/testdexvert.html", `
 <html>
 	<head>
 		<title>${argv.format.escapeHTML() || "ALL FILES"}</title>
@@ -376,7 +384,7 @@ async function writeOutputHTML()
 }
 
 if(argv.record)
-	await fileUtil.writeFile(DATA_FILE_PATH, JSON.stringify(testData));
+	await Deno.writeTextFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"]);
 

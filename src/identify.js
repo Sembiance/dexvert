@@ -113,7 +113,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 			}
 
 			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
-			const extMatch = ((!format.unsupported || format.byteCheck) || format.magic) && (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext));
+			const extMatch = (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext));	// ((!format.unsupported || format.byteCheck) || format.magic) &&
 			const filenameMatch = (format.filename || []).some(mfn => flexMatch(f.input.base, mfn, true));
 
 			let hasExpectedFileSize = false;

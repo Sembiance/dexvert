@@ -6,6 +6,7 @@ export class graphSaurus extends Format
 	website  = "http://fileformats.archiveteam.org/wiki/Graph_Saurus";
 	ext      = [".sr5", ".gl5", ".pl5", ".sr6", ".gl6", ".pl6", ".sr7", ".gl7", ".pl7", ".sr8", ".gl8", ".sri", ".srs"];
 	magic    = ["Graph Saurus bitmap", "MSX Graph Saurus"];
+	notes    = "Sample LOGO.GL5 doesn't convert.";
 	auxFiles = (input, otherFiles) =>
 	{
 		const ourExt = input.ext.toLowerCase();

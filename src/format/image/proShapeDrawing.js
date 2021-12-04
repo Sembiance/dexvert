@@ -6,4 +6,5 @@ export class proShapeDrawing extends Format
 	ext         = [".psp"];
 	magic       = ["ProShape drawing"];
 	unsupported = true;
+	notes       = "No known converter.";
 }

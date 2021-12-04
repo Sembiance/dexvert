@@ -12,9 +12,8 @@ export class scribus extends Program
 	gentooPackage  = "app-office/scribus";
 	gentooUseFlags = "boost minimal pdf templates";
 	unsafe         = true;
-
-	bin    = "scribus";
-	outExt = ".eps";
+	bin            = "scribus";
+	outExt         = ".eps";
 
 	pre = async r =>
 	{
@@ -34,7 +33,7 @@ export class scribus extends Program
 		// I later simplified that to just a getSize(groupObjects(getAllObjects()))
 		// Sadly some files have objects that don't seem to register with the API getAllObjects() and thus some of the image was always cut off
 		// So now I just make a really big document and then inkscape will crop that using the 'export-area-drawing flag. Works.
-		await fileUtil.writeFile(path.join(r.scribusDirPath, "conv.py"), `from scribus import *
+		await Deno.writeTextFile(path.join(r.scribusDirPath, "conv.py"), `from scribus import *
 import scribus
 
 scribus.newDocument((50000, 50000), (0, 0, 0, 0), scribus.PORTRAIT, 1, scribus.UNIT_POINTS, scribus.PAGE_1, 0, 1)
@@ -43,9 +42,9 @@ scribus.placeVectorFile("${r.inFile()}", 0, 0)
 scribus.savePageAsEPS("${await r.outFile("out.eps")}")
 scribus.closeDoc()
 scribus.fileQuit()`);
-	}
+	};
 
-	args = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()]
-	runOptions = ({timeout : xu.MINUTE, virtualX : true})
-	chain = "inkscape"	// if I also wanted .png output, I could change inkscape to: dexvert[asFormat:image/eps]
+	args       = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()];
+	runOptions = ({timeout : xu.MINUTE, virtualX : true});
+	chain      = "inkscape";	// if I also wanted .png output, I could change inkscape to: dexvert[asFormat:image/eps]
 }

@@ -157,7 +157,7 @@ export class image extends Family
 				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
 				if(r.f.new)
 				{
-					const htmlRaw = await fileUtil.readFile(r.f.new.absolute);
+					const htmlRaw = await Deno.readTextFile(r.f.new.absolute);
 					await initDOMParser();
 					const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
 					Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>

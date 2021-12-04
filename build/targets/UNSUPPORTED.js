@@ -8,7 +8,7 @@ const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", 
 export default async function buildUNSUPPORTED()
 {
 	xu.log3`Writing UNSUPPORTED.md to disk...`;
-	await fileUtil.writeFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
+	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 ${(await Object.values(unsupportedFormats).map(f => f.familyid).unique().sortMulti().parallelMap(async familyid => `

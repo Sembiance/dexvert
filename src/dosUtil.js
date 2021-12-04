@@ -63,7 +63,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	
 	bootExecLines.push("REBOOT.COM");	// this causes dosbox to exit, not reboot, which is what we want
 
-	await fileUtil.writeFile(configFilePath, bootExecLines.join("\n"), "utf-8", {append : true});
+	await Deno.writeTextFile(configFilePath, bootExecLines.join("\n"), {append : true});
 
 	const runOptions = {liveOutput : xu.verbose>=4, timeout};
 	runOptions.env = xu.verbose>=6 ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};

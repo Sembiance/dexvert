@@ -1,6 +1,5 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {fileUtil} from "xutil";
 
 export class lottie2gif extends Program
 {
@@ -10,7 +9,7 @@ export class lottie2gif extends Program
 	cwd           = r => r.outDir();
 	args          = async r =>
 	{
-		const parsed = xu.parseJSON(await fileUtil.readFile(r.inFile({absolute : true})), {});
+		const parsed = xu.parseJSON(await Deno.readTextFile(r.inFile({absolute : true})), {});
 		const args = [r.inFile()];
 		if(parsed.w && parsed.h)
 			args.push(`${parsed.w}x${parsed.h}`);

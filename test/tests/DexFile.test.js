@@ -127,7 +127,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(Object.hasOwn(a, "ts"), false);
 	
 	await Deno.mkdir("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir");
-	await fileUtil.writeFile("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir/noSuchFile.txt", "some random\ndata");
+	await Deno.writeTextFile("/mnt/compendium/DevLab/dexvert/test/files/noSuchDir/noSuchFile.txt", "some random\ndata");
 	await a.calcStats();
 	assertStrictEquals(a.isFile, true);
 	assertStrictEquals(a.isDirectory, false);

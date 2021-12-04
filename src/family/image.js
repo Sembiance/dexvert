@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
-import {imageUtil, fileUtil} from "xutil";
+import {imageUtil} from "xutil";
 import {initDOMParser, DOMParser} from "denoLandX";
 import {path} from "std";
 import {programs} from "../program/programs.js";
@@ -34,10 +34,11 @@ export class image extends Family
 
 	async verify(dexState, dexFile, identifications)
 	{
+		const xlog = dexState.xlog;
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{
-			xu.log2`DELETING OUTPUT due to not being identified as an image: ${dexFile.pretty()}`;
+			xlog.warn`DELETING OUTPUT due to not being identified as an image: ${dexFile.pretty()}`;
 			return false;
 		}
 
@@ -47,10 +48,9 @@ export class image extends Family
 		// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
 		if(dexid.formatid==="svg")
 		{
-			const r = await Program.runProgram("svgInfo", dexFile);
-			await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
-			await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+			const r = await Program.runProgram("svgInfo", dexFile, {xlog});
 			Object.assign(meta, r.meta);
+			await r.unlinkHomeOut();
 		}
 		else
 		{
@@ -59,7 +59,7 @@ export class image extends Family
 
 		if(!meta.width || !meta.height)
 		{
-			xu.log3`Image failed verification due to no width (${meta.width}) or height (${meta.height})`;
+			xlog.warn`Image failed verification due to no width (${meta.width}) or height (${meta.height})`;
 			return false;
 		}
 		
@@ -67,19 +67,19 @@ export class image extends Family
 
 		if(isUnsafe && meta.opaque && meta.colorCount<=1)
 		{
-			xu.log3`Image failed verification due to being unsafe with an opaque result and 1 color`;
+			xlog.warn`Image failed verification due to being unsafe with an opaque result and 1 color`;
 			return false;
 		}
 
 		if(isUnsafe && [meta.width, meta.height].some(v => v>=UNSAFE_MAX_IMAGE_SIZE))
 		{
-			xu.log3`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > ${UNSAFE_MAX_IMAGE_SIZE}`;
+			xlog.warn`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > ${UNSAFE_MAX_IMAGE_SIZE}`;
 			return false;
 		}
 
 		if(dexid.formatid==="svg" && meta.colorCount<2)
 		{
-			xu.log3`Image failed verification due to being unsafe an SVG with less than 2 colors.`;
+			xlog.warn`Image failed verification due to being unsafe an SVG with less than 2 colors.`;
 			return false;
 		}
 		
@@ -109,19 +109,19 @@ export class image extends Family
 
 			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
 			{
-				xu.log2`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
+				xlog.warn`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
 				await Deno.copyFile(dexFile.absolute, path.join(GARBAGE_DETECTED_DIR_PATH, `${garbage.noExponents()}-${Math.randomInt(1, 10000)}-${dexState.format.formatid}-${dexState.original.input.absolute.replaceAll("/", ":")}-${dexFile.rel.replaceAll("/", ":")}`));
 				return false;
 			}
 		}
 		else
 		{
-			xu.log2`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
+			xlog.warn`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
 		}
 
 		if(dexState.phase?.format?.verify && !dexState.phase.format.verify({dexState, dexFile, identifications, meta}))
 		{
-			xu.log3`Image failed format.verify() call`;
+			xlog.info`Image failed format.verify() call`;
 			return false;
 		}
 
@@ -129,7 +129,7 @@ export class image extends Family
 	}
 
 	// gets meta information for the given input and format
-	async meta(inputFile, format)
+	async meta(inputFile, format, xlog)
 	{
 		if(!format.metaProvider)
 			return;
@@ -137,7 +137,7 @@ export class image extends Family
 		const meta = {};
 		for(const metaProvider of format.metaProvider)
 		{
-			xu.log3`Getting meta from provider ${metaProvider}`;
+			xlog.info`Getting meta from provider ${metaProvider}`;
 
 			// imageMagick meta provider
 			if(metaProvider==="image")
@@ -145,7 +145,7 @@ export class image extends Family
 				const info = await imageUtil.getInfo(inputFile.absolute);
 				if(info.err)
 				{
-					xu.log4`imageUtil.getInfo() returned an err ${info.err}`;
+					xlog.warn`imageUtil.getInfo() returned an err ${info.err}`;
 					delete info.err;
 				}
 				delete info.size;
@@ -154,7 +154,7 @@ export class image extends Family
 			else if(metaProvider==="ansiArt")
 			{
 				// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
-				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}});
+				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}, xlog});
 				if(r.f.new)
 				{
 					const htmlRaw = await Deno.readTextFile(r.f.new.absolute);
@@ -168,31 +168,23 @@ export class image extends Family
 							meta[key.toLowerCase()] = val;
 					});
 				}
-				if(xu.verbose<5)
-				{
-					await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
-					await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
-				}
+				await r.unlinkHomeOut();
 			}
 			else if(metaProvider==="darkTable")
 			{
 				// camera images that darktable can identify
-				const r = await Program.runProgram("darktable_rs_identify", inputFile);
+				const r = await Program.runProgram("darktable_rs_identify", inputFile, {xlog});
 				if(r.meta?.dimUncropped && r.meta.dimUncropped.split("x").length===2)
 					Object.assign(meta, { width : +r.meta.dimUncropped.split("x")[0], height : +r.meta.dimUncropped.split("x")[1] });
-
-				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
-				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+				await r.unlinkHomeOut();
 			}
 			else
 			{
 				// if none of the above, we assume it's a program
-				const r = await Program.runProgram(metaProvider, inputFile);
+				const r = await Program.runProgram(metaProvider, inputFile, {xlog});
 				if(r.meta)
 					Object.assign(meta, r.meta);
-
-				await fileUtil.unlink(r.f.outDir.absolute, {recursive : true});
-				await fileUtil.unlink(r.f.homeDir.absolute, {recursive : true});
+				await r.unlinkHomeOut();
 			}
 		}
 

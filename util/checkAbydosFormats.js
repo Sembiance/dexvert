@@ -59,17 +59,17 @@ Array.from(doc.querySelectorAll("table.grid tr")).forEach(row =>
 	if(mimeTypes.length===0 || mimeTypes.some(mimeType => supportedMimeTypes.includes(mimeType)))
 		return;
 
-	xu.log`Unsupported abydos format: ${cells[0]} ${mimeTypes.join(", ")}`;
+	console.log(`Unsupported abydos format: ${cells[0]} ${mimeTypes.join(", ")}`);
 	unsupportedCount++;
 });
 
 for(const programMimeType of programMimeTypes)
 {
-	xu.log`Unsupported abydos format: ${programMimeType}`;
+	console.log(`Unsupported abydos format: ${programMimeType}`);
 	unsupportedCount++;
 }
 
-xu.log`\nUnsupported count: ${unsupportedCount}`;
+console.log(`\nUnsupported count: ${unsupportedCount}`);
 
 /*
 tiptoe(

@@ -29,7 +29,6 @@ export class abydosconvert extends Program
 		[
 			({suffix, newName}, {ext}) => [newName, suffix, ext],
 			({suffix}, {num, ext}) => [num.trimChars("."), suffix, ext]
-			//({fn, suffix}, {num, name, ext}) => { console.log({fn, num, name, ext}); return false; }
 		]
 	};
 }

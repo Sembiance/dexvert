@@ -7,7 +7,7 @@ const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");
 const LOWERCASE = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Escape", "Tab", "Backspace", "Enter", " ", "LeftAlt", "RightAlt", "LeftControl", "RightControl", "LeftShift", "RightShift", "CapsLock", "ScrollLock", "NumLock", "`", "-", "=", "\\", "[", "]", ";", '"', ".", ",", "/", null, "PrintScreen", "Pause", "Insert", "Home", "PageUp", "Delete", "End", "PageDown", "Left", "Up", "Down", "Right", "KP1", "KP2", "KP3", "KP4", "KP5", "KP6", "KP7", "KP8", "KP9", "KP0", "KPDivide", "KPMultiply", "KPMinus", "KPPlus", "KPEnter", "KPPeriod"];	// eslint-disable-line max-len
 const UPPERCASE = [null, "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "~", "_", "+", "|", "{", "}", ":", "'", "<", ">", "?"];	// eslint-disable-line max-len
 
-export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, keyOpts={}})
+export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, keyOpts={}, xlog})
 {
 	const dosDirPath = (await fileUtil.exists(path.join(root, "dos")) ? (await fileUtil.genTempPath(root, "dos")) : path.join(root, "dos"));
 	await Deno.mkdir(dosDirPath);
@@ -65,8 +65,8 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 
 	await Deno.writeTextFile(configFilePath, bootExecLines.join("\n"), {append : true});
 
-	const runOptions = {liveOutput : xu.verbose>=4, timeout};
-	runOptions.env = xu.verbose>=6 ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
+	const runOptions = {liveOutput : xlog.atLeast("debug"), timeout};
+	runOptions.env = xlog.atLeast("trace") ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
 
 	if(keys)
 	{
@@ -121,8 +121,8 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 		}
 	}
 
-	xu.log3`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
-	xu.log5`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
+	xlog.info`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
+	xlog.trace`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
 	const r = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
 
 	if(video || screenshot)
@@ -137,7 +137,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 		}
 		else
 		{
-			await Program.runProgram("ffmpeg", await FileSet.create({root, input : videoFilePath, outFile : video}), {flags : {outType : "mp4"}});
+			await Program.runProgram("ffmpeg", await FileSet.create({root, input : videoFilePath, outFile : video}), {flags : {outType : "mp4"}, xlog});
 		}
 	}
 		

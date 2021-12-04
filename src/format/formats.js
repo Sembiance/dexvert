@@ -1154,6 +1154,36 @@ import {installShieldScript} from "./other/installShieldScript.js";
 formats.installShieldScript = installShieldScript.create(families.other);
 import {windowsHelpFileContent} from "./other/windowsHelpFileContent.js";
 formats.windowsHelpFileContent = windowsHelpFileContent.create(families.other);
+import {downloadableSoundBank} from "./audio/downloadableSoundBank.js";
+formats.downloadableSoundBank = downloadableSoundBank.create(families.audio);
+import {amiga8svx} from "./audio/amiga8svx.js";
+formats.amiga8svx = amiga8svx.create(families.audio);
+import {diamondWareDigitized} from "./audio/diamondWareDigitized.js";
+formats.diamondWareDigitized = diamondWareDigitized.create(families.audio);
+import {adLibInstrumentBank} from "./audio/adLibInstrumentBank.js";
+formats.adLibInstrumentBank = adLibInstrumentBank.create(families.audio);
+import {wav} from "./audio/wav.js";
+formats.wav = wav.create(families.audio);
+import {dataShowSound} from "./audio/dataShowSound.js";
+formats.dataShowSound = dataShowSound.create(families.audio);
+import {artOfNoiseInstrument} from "./audio/artOfNoiseInstrument.js";
+formats.artOfNoiseInstrument = artOfNoiseInstrument.create(families.audio);
+import {mp3} from "./audio/mp3.js";
+formats.mp3 = mp3.create(families.audio);
+import {amSound} from "./audio/amSound.js";
+formats.amSound = amSound.create(families.audio);
+import {aif} from "./audio/aif.js";
+formats.aif = aif.create(families.audio);
+import {covoxADPCM} from "./audio/covoxADPCM.js";
+formats.covoxADPCM = covoxADPCM.create(families.audio);
+import {amosSamples} from "./audio/amosSamples.js";
+formats.amosSamples = amosSamples.create(families.audio);
+import {creativeLabsInstrumentBank} from "./audio/creativeLabsInstrumentBank.js";
+formats.creativeLabsInstrumentBank = creativeLabsInstrumentBank.create(families.audio);
+import {au} from "./audio/au.js";
+formats.au = au.create(families.audio);
+import {avr} from "./audio/avr.js";
+formats.avr = avr.create(families.audio);
 
 // process our 'unsupported.js' formats
 for(const [familyid, unsupportedFormats] of Object.entries(unsupported))

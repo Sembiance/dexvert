@@ -19,7 +19,8 @@ export class RunState
 			// required
 			programid : {type : "string", required : true},
 			f         : {type : FileSet, required : true},
-			flags     : {type : Object}
+			flags     : {type : Object},
+			xlog      : {}
 		});
 		return runState;
 	}
@@ -27,7 +28,7 @@ export class RunState
 	// returns f.input.rel
 	inFile({backslash, absolute}={})
 	{
-		const result = absolute ? this.f.input.absolute : path.relative(this.cwd, this.f.input.absolute);
+		const result = absolute ? (this.symlinkInToCWD ? path.join(this.cwd, this.f.input.base) : this.f.input.absolute) : (this.symlinkInToCWD ? this.f.input.base : path.relative(this.cwd, this.f.input.absolute));
 		return backslash ? result.replaceAll("/", "\\") : result;
 	}
 
@@ -65,6 +66,16 @@ export class RunState
 		return absolute ? this.f.outDir.absolute : path.relative(this.cwd, this.f.outDir.absolute);
 	}
 
+	// Removes from disk the outDir and homeDir of this RunState, used to cleanup temporary excess files from temporary program runs
+	async unlinkHomeOut()
+	{
+		if(!this.xlog.atLeast("debug"))
+		{
+			await fileUtil.unlink(this.f.outDir.absolute, {recursive : true});
+			await fileUtil.unlink(this.f.homeDir.absolute, {recursive : true});
+		}
+	}
+
 	serialize()
 	{
 		const o = {};
@@ -89,7 +100,7 @@ export class RunState
 			r.push(` ${fg.peach(this.bin)} ${(this.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
-			if(xu.verbose>=4)
+			if(this.xlog.atLeast("debug"))
 			{
 				r.push(`\n${pre}\t${xu.colon("   cwd")}${this.cwd}`);
 				r.push(`\n${pre}\t${xu.colon("  opts")}${xu.inspect(this.runOptions || {}).squeeze()}`);
@@ -108,12 +119,12 @@ export class RunState
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
 		}
 		
-		if(xu.verbose>=3 && Object.keys(this.meta || {}).length>0)
+		if(this.xlog.atLeast("info") && Object.keys(this.meta || {}).length>0)
 			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
 
-		if(xu.verbose>=5 || (xu.verbose>=4 && (this.stdout || "").trim().length>0))
+		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stdout || "").trim().length>0))
 			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "").squeeze()}`);
-		if(xu.verbose>=5 || (xu.verbose>=4 && (this.stderr || "").trim().length>0))
+		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stderr || "").trim().length>0))
 			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "").squeeze()}`);
 			
 		return r.join("");

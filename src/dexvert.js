@@ -8,7 +8,7 @@ import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// eslint-disable-line no-unused-vars
+export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={})
 {
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
@@ -34,22 +34,25 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 				asId[k==="ext" ? "extensions" : k] = formats[asFormatid][k];
 		}
 		ids.push(Identification.create(asId));
-		xu.log1`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
+		xlog.warn`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
 	}
 	else
 	{
-		xu.log1`Getting identifications for ${inputFile.pretty()}`;
-		ids.push(...(await identify(inputFile, {quiet : true})).filter(id => id.from==="dexvert" && !id.unsupported));
+		xlog.info`Getting identifications for ${inputFile.pretty()}`;
+		ids.push(...(await identify(inputFile, {logLevel : "error"})).filter(id => id.from==="dexvert"));
 	}
 
 	if(ids.length>0)
-		xu.log2`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
+		xlog.info`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 
-	const dexState = DexState.create({original : {input : inputFile, output : outputDir}});
+	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, xlog});
 	for(const id of ids)
 	{
+		if(id.unsupported)
+			continue;
+
 		const format = formats[id.formatid];
-		xu.log2`\nAttempting to process identification: ${id.pretty()}`;
+		xlog.info`\nAttempting to process identification: ${id.pretty()}`;
 
 		// create a temporary ram cwd where all programs will run at (by default)
 		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
@@ -100,15 +103,15 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 
 		const cleanup = async () =>
 		{
-			if(xu.verbose>=5)
-				xu.log5`${fg.red("NOT")} deleting cwd ${cwd} due to verbose>=5`;
+			if(xlog.atLeast("debug"))
+				xlog.debug`${fg.red("NOT")} deleting cwd ${cwd} due to logLevel`;
 			else
 				await fileUtil.unlink(cwd, {recursive : true});
 		};
 
 		try
 		{
-			Object.assign(dexState.meta, await format.getMeta(f.input));
+			Object.assign(dexState.meta, await format.getMeta(f.input, xlog));
 			
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
@@ -123,7 +126,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 				await format.pre(dexState);
 			
 			const converters = Array.isArray(format.converters) ? format.converters : await format.converters(dexState);
-			xu.log3`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
+			xlog.info`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
 
 			// try each converter specificied, until we have output files or have been marked as processed
 			for(const converter of (converters || []))
@@ -131,40 +134,42 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 				const progs = converter.split("&").map(v => v.trim());
 				for(const [i, prog] of Object.entries(progs))
 				{
-					xu.log4`Running converter ${prog}...`;
+					xlog.debug`Running converter ${prog}...`;
 
-					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0});
+					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, xlog});
 					dexState.ran.push(r);
 
-					xu.log3`Verifying ${(dexState.f.files.new || []).length} new files...`;
+					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
 
 					// verify output files
-					for(const newFile of dexState.f.files.new || [])
+					await (dexState.f.files.new || []).parallelMap(async newFile =>
 					{
-						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {quiet : true}));
+						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {logLevel : "error"}));
 						if(!isValid)
 						{
-							xu.log2`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
-							if(xu.verbose>=5)
-								xu.log5`NOT deleting it, due to verbose>=5`;
-							else
+							if(!xlog.atLeast("debug"))
+							{
+								xlog.warn`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
 								await fileUtil.unlink(newFile.absolute);
-							continue;
+							}
+							return;
 						}
 
 						// if a produced file is older than 2020, then we assume it's the proper date
 						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
 						{
+							// otherwise ensure the newly produce file has a timestamp equal to the input file
 							newFile.ts = inputFile.ts;
 							await Deno.utime(newFile.absolute, Math.floor(inputFile.ts/xu.SECOND), Math.floor(inputFile.ts/xu.SECOND));
 						}
 
 						await dexState.f.add("output", newFile);
-					}
+					});	// chain 10 output files at once, or 33% of OS CPU count, whichever is smaller
 
 					dexState.f.removeType("new");
 				}
 
+				xlog.info`Finished verifying files, yielded ${(dexState.f.files.output?.length || 0)} output files.`;
 				if((dexState.f.files.output?.length || 0)>0)
 					dexState.processed = true;
 
@@ -182,7 +187,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, debug}={})	// esl
 		catch(err)
 		{
 			dexState.phase.err = err;
-			xu.log1`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${xu.inspect(err)}`;
+			xlog.error`${fg.red(`${xu.c.blink}dexvert failed`)} with error: ${xu.inspect(err)}`;
 		}
 
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made

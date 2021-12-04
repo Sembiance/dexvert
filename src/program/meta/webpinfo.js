@@ -11,5 +11,5 @@ export class webpinfo extends Program
 	{
 		if(r.stdout.trim().includes("Animation: 1"))
 			r.meta.animated = true;
-	}
+	};
 }

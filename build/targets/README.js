@@ -6,9 +6,9 @@ import {QEMUIDS} from "../../src/qemuUtil.js";
 
 const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 
-export default async function buildREADME()
+export default async function buildREADME(xlog)
 {
-	xu.log3`Writing README.md to disk...`;
+	xlog.info`Writing README.md to disk...`;
 	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern browser friendly ones (png/svg/pdf/mp3/mp4/etc.).
 

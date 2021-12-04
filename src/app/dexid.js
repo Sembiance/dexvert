@@ -9,7 +9,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Identifies one or more files",
 	opts    :
 	{
-		verbose  : {desc : "Show additional info when identifying. Levels 0 to 5. Default: 0", defaultValue : 0},
+		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true}
 	},
@@ -18,12 +18,12 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
-xu.verbose = argv.json ? 0 : argv.verbose;
+const xlog = xu.xLog(argv.logLevel);
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
 {
-	const rows = await identify(await DexFile.create(inputFilePath));
+	const rows = await identify(await DexFile.create(inputFilePath), {xlog});
 
 	if(argv.jsonFile)
 		await Deno.writeTextFile(argv.jsonFile, JSON.stringify(rows));
@@ -35,7 +35,7 @@ for(const inputFilePath of inputFilePaths)
 	}
 
 	if(inputFilePaths)
-		xu.log`${xu.colon(fg.peach("File"))} ${inputFilePath}`;
+		console.log(`${xu.colon(fg.peach("File"))} ${inputFilePath}`);
 	const maxes =
 	{
 		matchType : rows.map(({matchType}) => (matchType || "").length).max(),

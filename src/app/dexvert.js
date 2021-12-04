@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil, fileUtil} from "xutil";
+import {cmdUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
 
@@ -8,13 +8,12 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> converting or extracting files into <outputDirPath>",
 	opts    :
 	{
-		verbose         : {desc : "Show additional info when processing. Levels 0 to 6. Default: 0", defaultValue : 0},
-		asFormat        : {desc : "Convert the format as [family/formatid]. Don't identify the file", hasValue : true},
-		json            : {desc : "If set, will output results as JSON"},
-		jsonFile        : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
-		dontTransform   : {desc : "If a file can't be converted, dexvert will try different transforms (like trimming null bytes) to convert it."},
-		programFlag     : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
-		debug           : {desc : "Used temporarily when attempting to debug stuff"}
+		logLevel      : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
+		asFormat      : {desc : "Convert the format as [family/formatid]. Don't identify the file", hasValue : true},
+		json          : {desc : "If set, will output results as JSON"},
+		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
+		dontTransform : {desc : "If a file can't be converted, dexvert will try different transforms (like trimming null bytes) to convert it."},
+		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true}
 	},
 	args :
 	[
@@ -22,17 +21,17 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-xu.verbose = argv.json ? 0 : argv.verbose;
+const xlog = xu.xLog(argv.json ? "none" : argv.logLevel);
 
 const debugLog = [];
-if(argv.debug)
+if(argv.logLevel==="debug")
 {
-	xu.verbose = 3;
-	xu.logger = v => debugLog.push(v);
+	xlog.level = "debug";
+	xlog.logger = v => debugLog.push(v);
 }
 
-const dexvertOptions = {};
-["asFormat", "debug"].forEach(k =>
+const dexvertOptions = {xlog};
+["asFormat"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];
@@ -45,7 +44,7 @@ async function handleDexState(dexState, lastTry)
 		// if no dex state and our last try, just exit
 		if(lastTry)
 		{
-			xu.log1`No processed result.`;
+			xlog.warn`No processed result.`;
 			Deno.exit(0);
 		}
 
@@ -62,15 +61,15 @@ async function handleDexState(dexState, lastTry)
 
 		if(argv.json)
 			console.log(JSON.stringify(dexState.serialize()));
-		else if(xu.verbose>=1)
+		else if(xlog.atLeast("fatal"))
 			console.log(`${dexState.pretty()}`);
 		
 		// if we are not processed, then by default this is our lastTry so output that we have no result
 		if(!dexState.processed)
 		{
-			xu.log1`No processed result.`;
+			xlog.warn`No processed result.`;
 
-			if(argv.debug)
+			if(argv.logLevel==="debug")
 				console.log(`Processing failed: ${debugLog.join("\n")}`);
 		}
 
@@ -85,7 +84,7 @@ await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), awa
 
 if(argv.dontTransform)
 {
-	xu.log1`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
+	xlog.warn`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
 	Deno.exit(0);
 }
 

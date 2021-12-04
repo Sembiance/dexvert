@@ -1,23 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* dexgentoo ran out of hard drive space
-* Create a new QEMU instance with dexvert:dexvert username that has X11 and boots up into awesomewm auto login auto start X
-DON'T DELETE OLD ONE, as I need to refer to it 
-Make a 10GB hd.img and a 40GB other.img that mounts as /mnt/extra then make symlinks
-/usr/portage -> /mnt/extra/usr/portage
-/usr/src     -> /mnt/extra/usr/src
-/var/tmp     -> /mnt/extra/var/tmp
-/usr/tmp     -> /mnt/extra/usr/tmp
-Of course only the hd.img is used in the final version
-* Use this new Gentoo QEMU instance to run all Linux conversion programs (so if they are exploited, somewhat more protected)
-Will need to update the 'supervisor.sh' script AND the QEMU server JS code to support a 'supervisorid' number.
-I'll want to run like 20x supervisor.sh scripts at once, since each QEMU instance can run more than 1 program at a time
-Will need to increase the ram from like 2GB to 10GB (since files get copied and processed into RAM) and size cores/instance count appropriately to not use all RAM.
-
-
-* Ensure renameOut equals false correctly disables all renaming
-
 * Add audio
 
 * Add archive
@@ -50,6 +33,8 @@ Will need to increase the ram from like 2GB to 10GB (since files get copied and 
 * Now the test-process test case should be working 100%
 
 * Add additional conversions with 'libvips' (see CLI conversion) https://www.libvips.org/API/current/using-cli.html
+
+* Remove the bottom comments in deark.js
 
 * Get rid of the testdexvert TODO for allowing one day off
 

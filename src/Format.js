@@ -19,12 +19,12 @@ export class Format
 	baseKeys = Object.keys(this);
 
 	// will get meta info for this particular format and the passed input fileset
-	async getMeta(inputFile)
+	async getMeta(inputFile, xlog)
 	{
 		const meta = {};
-		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this)) || {} : {});
+		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this, xlog)) || {} : {});
 		if(this.meta)
-			Object.assign(meta, (await this.meta(inputFile)) || {});
+			Object.assign(meta, (await this.meta(inputFile, xlog)) || {});
 		return meta;
 	}
 
@@ -88,7 +88,7 @@ export class Format
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},
 			idCheck          : {type : "function", length : [1, 2]},
-			meta             : {type : "function", length : 1},
+			meta             : {type : "function", length : [1, 2]},
 			transformUnsafe  : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},

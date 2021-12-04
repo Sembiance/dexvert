@@ -46,6 +46,9 @@ An object (or a function that returns an object) of run options to be passed int
 >>> cwd = async r => r.outDir()
 If cwd is set, the program will be run from within the supplied directory path instead of in the tmp dir
 
+>>> symlinkInToCWD = true
+If set to true, then a symlink to the input file will be placed in the cwd directory. It will be removed directly after program execution.
+
 >>> outExt = ".svg"   ||   async (runState) => { ... }
 Return the extension files produced by this program should be renamed to
 
@@ -61,16 +64,23 @@ This will be executed DIRECTLY after the program has finished running (either bi
 >>> post = async (runState) => { ... }
 This will be executed after the program has finished running (either bin or exec) and after Program.js has found new output files
 
->>> renameOut = { ext : ".png", name : true, regex : /^(?<pre>\d*_?)(?<name>.+)(?<post>\.\d{3}\.(?:png|svg|webp))$/ }  ||  renameOut = false
+>>> renameOut = {
+>>>             name : "hello",
+>>>            regex : /^.+?(?<num>\.\d{3})?(?<name>\..+)?(?<ext>\..+)$/,
+>>>          renamer : [ ({newName, suffix, numFiles, fn}, {...groupNames}) => {[name, suffix, ext]}, ... ],
+>>>     alwaysRename : true
+>>> }  ||  renameOut = false
 Output files can be automatically renamed.
-Set this to 'false' to prevent any output file renaming at all, otherwise set it to an object (the default)
-If ext is a string, the output file will be given that extension
-default ext is different per family. So image is .png, audio is .wav, etc
-If ext is set to an untruthy value false/null/etc then it won't rename the ext
-If name is set to true (the default) the filename will be renamed to the original input name. If set to a string, the filename will be renamed to that string.
-If name is set to false, the filename won't be renamed.
-If multiple files are possible, then a multiple regex prop can be specified and files will be matched against it.
-You can have a named group for "pre" and "post" and anything in-between those will be assumed to be the filename and will get the name specified in renameOut.name
+Set this to 'false' to prevent any output file renaming at all, otherwise set it to an object
+newName is set to f.input.name by default, but you can set renameOut.name to something else to override this
+If regex isn't set and there is only 1 file, it attempts to rename it: newName + suffix + (renameOut.ext || program.outExt || "")
+If regex is set then you should also set renamer
+The filename will be matched against the regex and a bunch of 'groups' will be created.
+Then it will call each renamer function in order, until the result of renaming produces all unique filenames.
+Each renamer function should return an array of strings to join together to form the filename.
+First rename arg is: {newName, suffix, numFiles, fn}  where suffix is potential extra suffix that should be added and fn is the original output filename
+Second arg is the groups that were produced from the regex match.
+By default it will only follow the regex renamer if there are more than 1 file, to override this set alwaysRename to true
 
 >>> diskQuota = xu.MB*20
 Some programs are buggy and will consume the entire hard drive. This is a way to limit that.

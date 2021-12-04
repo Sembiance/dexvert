@@ -31,7 +31,7 @@ export async function classifyImage(imagePath, modelName)
 	// convert to PNG
 	const pngTrimmedPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
 
-	const identifications = await identify(imagePath, {quiet : true});
+	const identifications = await identify(imagePath, {logLevel : "error"});
 
 	// We do the cwd and leading ./ to handle files that start with dashes
 	if(identifications.some(o => o.formatid==="svg"))	// eslint-disable-line unicorn/prefer-ternary

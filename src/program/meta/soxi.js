@@ -1,55 +1,34 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class soxi extends Program
 {
-	website = "http://sox.sourceforge.net";
-	gentooPackage = "media-sound/sox";
+	website        = "http://sox.sourceforge.net";
+	gentooPackage  = "media-sound/sox";
 	gentooUseFlags = "alsa amr encode flac id3tag mad ogg openmp png sndfile twolame wavpack";
-	informational = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "http://sox.sourceforge.net",
-	gentooPackage  : "media-sound/sox",
-	gentooUseFlags : "alsa amr encode flac id3tag mad ogg openmp png sndfile twolame wavpack",
-	informational  : true
-};
-
-exports.bin = () => "soxi";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.post = (state, p, r, cb) =>
-{
-	const meta = {};
-	if((r.results || "").includes("can't open input file"))
-		return setImmediate(cb);
-		
-	(r.results || "").trim().split("\n").forEach(line =>
+	bin            = "soxi";
+	args           = r => [r.inFile()];
+	post           = r =>
 	{
-		const {key, val} = (line.trim().match(/^(?<key>[^:]+)\s*:\s*(?<val>.+)$/) || {groups : {}}).groups;
-		if(key && val && !["Input File", "Comments", "File Size"].some(v => key.trim().startsWith(v)))
+		if(r.stdout.includes("can't open input file"))
+			return;
+		
+		r.stdout.trim().split("\n").forEach(line =>
 		{
-			const properKey = key.trim().toCamelCase();
-			if(properKey==="duration")
+			const {key, val} = (line.trim().match(/^(?<key>[^:]+)\s*:\s*(?<val>.+)$/) || {groups : {}}).groups;
+			if(key && val && !["Input File", "Comments", "File Size"].some(v => key.trim().startsWith(v)))
 			{
-				const parts = val.trim().match(/^(?<hour>\d+):(?<minute>\d+):(?<second>\d+)\.(?<ms>\d*)/).groups;
-				meta[properKey] = [...["hour", "minute", "second"].map(v => (XU[v.toUpperCase()]*(+parts[v]))), (+parts.ms)].sum();
+				const properKey = key.trim().toCamelCase();
+				if(properKey==="duration")
+				{
+					const parts = val.trim().match(/^(?<hour>\d+):(?<minute>\d+):(?<second>\d+)\.(?<ms>\d*)/).groups;
+					r.meta[properKey] = [...["hour", "minute", "second"].map(v => (xu[v.toUpperCase()]*(+parts[v]))), (+parts.ms)].sum();
+				}
+				else
+				{
+					r.meta[properKey] = (["channels", "sampleRate"].includes(properKey) ? +val.trim() : val.trim());
+				}
 			}
-			else
-			{
-				meta[properKey] = (["channels", "sampleRate"].includes(properKey) ? +val.trim() : val.trim());
-			}
-		}
-	});
-
-	Object.assign(r.meta, meta);
-
-	setImmediate(cb);
-};
-*/
+		});
+	};
+}

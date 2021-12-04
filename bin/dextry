@@ -5,4 +5,4 @@
 command rm -rf ~/tmp/out
 mkdir -p ~/tmp/out
 
-dexvert --verbose=3 "$@" ~/tmp/out/
+dexvert "$@" ~/tmp/out/

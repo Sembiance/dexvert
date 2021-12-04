@@ -9,13 +9,13 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Test dexvert identification for 1 or all formats",
 	opts    :
 	{
-		format : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
-		file   : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
-		record : {desc : "Take the results of the identifications and save them as future expected results"},
-		quiet  : {desc : "Output fewer messages."}
+		format   : {desc : "Only test a sinlgle format: archive/zip", hasValue : true},
+		file     : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
+		record   : {desc : "Take the results of the identifications and save them as future expected results"},
+		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
 	}});
 
-xu.verbose = argv.quiet ? 1 : 3;
+const xlog = xu.xLog(argv.logLevel);
 
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
@@ -29,13 +29,13 @@ const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
-xu.log3`${printUtil.majorHeader("Identification Test")}`;
-xu.log3`Loading test data and finding sample files...`;
+xlog.info`${printUtil.majorHeader("Identification Test")}`;
+xlog.info`Loading test data and finding sample files...`;
 
 const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
 
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
-xu.log3`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
+xlog.info`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
 const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath => Object.hasOwn(formats, path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath).split("/")[0]));
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
@@ -45,12 +45,12 @@ Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.rel
 	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 
-	xu.log1`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
+	xlog.warn`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
 	if(argv.record)
 		delete testData[extraFilePath];
 });
 
-xu.log1`Testing ${sampleFilePaths.length} sample files...`;
+xlog.warn`Testing ${sampleFilePaths.length} sample files...`;
 
 let passChain=0;
 async function testSample(sampleFilePath)
@@ -61,7 +61,7 @@ async function testSample(sampleFilePath)
 	
 	function fail(msg)
 	{
-		xu.log1`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${fg.orange(msg)}`;
+		xlog.error`${passChain>0 ? "\n" : ""}${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${fg.orange(msg)}`;
 		if(passChain>0)
 			passChain = 0;
 	}
@@ -120,5 +120,4 @@ if(argv.record)
 	await Deno.writeTextFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 //testUtil.logFinish();
-xu.log1`\n`;
-xu.log2`Elapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+xlog.warn`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;

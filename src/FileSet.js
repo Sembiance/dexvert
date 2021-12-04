@@ -101,13 +101,13 @@ export class FileSet
 		if(relativeFrom)
 			newFileSet.changeRoot(relativeFrom);
 
-		for(const file of (type ? this.files[type] : this.all))
+		await (type ? this.files[type] : this.all).parallelMap(async file =>
 		{
 			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			if(fileRel.includes("/"))
 				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
 			await runUtil.run("rsync", ["-a", path.join(relativeFrom || file.root, fileRel), path.join(targetRoot, file.isDirectory ? path.dirname(fileRel) : fileRel)]);
-		}
+		});
 
 		return newFileSet.changeRoot(targetRoot, {keepRel : true});
 	}

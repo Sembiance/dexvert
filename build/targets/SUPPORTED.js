@@ -16,9 +16,9 @@ await Deno.writeTextFile(DUMMY_FILE_PATH, "x");
 const DUMMY_DIR_PATH = await fileUtil.genTempPath();
 await Deno.mkdir(DUMMY_DIR_PATH);
 
-export default async function buildSUPPORTED()
+export default async function buildSUPPORTED(xlog)
 {
-	xu.log3`Writing SUPPORTED.md to disk...`;
+	xlog.info`Writing SUPPORTED.md to disk...`;
 	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
@@ -46,8 +46,9 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 			{
 				if(typeof f.converters==="function")
 				{
-					const dexState = DexState.create({original : {input : await DexFile.create(DUMMY_FILE_PATH), output : await DexFile.create(DUMMY_DIR_PATH)}});
-					dexState.startPhase({format : f, id : Identification.create({from : "dexvert", confidence : 100, magic : f.name}), f : await FileSet.create(path.dirname(DUMMY_FILE_PATH), "input", dexState.original.input)});
+					const id = Identification.create({from : "dexvert", confidence : 100, magic : f.name});
+					const dexState = DexState.create({original : {input : await DexFile.create(DUMMY_FILE_PATH), output : await DexFile.create(DUMMY_DIR_PATH)}, ids : [id]});
+					dexState.startPhase({format : f, id, f : await FileSet.create(path.dirname(DUMMY_FILE_PATH), "input", dexState.original.input)});
 					dexState.meta.yes = true;
 					
 					converters = await f.converters(dexState);
@@ -70,7 +71,7 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 `)).join("\n")}
 `);
 
-	xu.log3`Cleaning up...`;
+	xlog.info`Cleaning up...`;
 	await fileUtil.unlink(DUMMY_FILE_PATH);
 	await fileUtil.unlink(DUMMY_DIR_PATH);
 }

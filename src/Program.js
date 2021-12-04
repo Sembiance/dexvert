@@ -41,30 +41,31 @@ export class Program
 			website        : {type : "string", url : true},
 
 			// execution
-			args       : {type : "function", length : [0, 1]},
-			bin        : {type : "string"},
-			chain      : {types : ["function", "string"]},
-			chainCheck : {type : "function", length : [0, 3]},
-			cwd        : {type : "function", length : [0, 1]},
-			diskQuota  : {type : "number", range : [1]},
-			dosData    : {type : "function", length : [0, 1]},
-			exec       : {type : "function", length : [0, 1]},
-			outExt     : {types : ["function", "string"]},
-			post       : {type : "function", length : [0, 1]},
-			postExec   : {type : "function", length : [0, 1]},
-			pre        : {type : "function", length : [0, 1]},
-			qemuData   : {type : "function", length : [0, 1]},
-			verify     : {type : "function", length : [0, 2]}
+			args           : {type : "function", length : [0, 1]},
+			bin            : {type : "string"},
+			chain          : {types : ["function", "string"]},
+			chainCheck     : {type : "function", length : [0, 3]},
+			cwd            : {type : "function", length : [0, 1]},
+			symlinkInToCWD : {type : "boolean"},
+			diskQuota      : {type : "number", range : [1]},
+			dosData        : {type : "function", length : [0, 1]},
+			exec           : {type : "function", length : [0, 1]},
+			outExt         : {types : ["function", "string"]},
+			post           : {type : "function", length : [0, 1]},
+			postExec       : {type : "function", length : [0, 1]},
+			pre            : {type : "function", length : [0, 1]},
+			qemuData       : {type : "function", length : [0, 1]},
+			verify         : {type : "function", length : [0, 2]}
 		});
 
 		if(program.renameOut && Object.isObject(program.renameOut))
-			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}, renamer : {type : ["function"]}, multipleOnly : {type : "boolean"}});
+			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}, renamer : {type : ["function"]}, alwaysRename : {type : "boolean"}});
 
 		return program;
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, xlog=xu.xLog()}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -78,12 +79,18 @@ export class Program
 			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${this.diskQuota},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
 
 		// create a RunState to store program results/meta
-		const r = RunState.create({programid : this.programid, f, flags});
+		const r = RunState.create({programid : this.programid, f, flags, xlog});
 		r.cwd = f.root;
 		if(this.cwd)
 		{
 			const newCWD = await this.cwd(r);
 			r.cwd = newCWD.startsWith("/") ? newCWD : path.resolve(f.root, newCWD);
+		}
+
+		if(this.symlinkInToCWD)
+		{
+			await Deno.symlink(path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile())));
+			r.symlinkInToCWD = true;
 		}
 
 		if(this.pre)
@@ -92,7 +99,7 @@ export class Program
 		if(this.exec)
 		{
 			// run arbitrary javascript code
-			xu.log3`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
+			xlog.info`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
 			await this.exec(r);
 		}
 		else if(this.loc==="local")
@@ -103,18 +110,18 @@ export class Program
 			r.runOptions = {cwd : r.cwd, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
-			if(xu.verbose>=4)
+			if(xlog.atLeast("debug"))
 				r.runOptions.verbose = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
-			xu.log3`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\`${xu.verbose>=4 ? ` with options ${xu.inspect(r.runOptions).squeeze()}` : ""}`;
+			xlog.info`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\`${xlog.atLeast("debug") ? ` with options ${xu.inspect(r.runOptions).squeeze()}` : ""}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
 		else if(this.loc==="dos")
 		{
-			r.dosData = {root : f.root, cmd : this.bin};
+			r.dosData = {root : f.root, cmd : this.bin, xlog};
 			r.dosData.args = this.args ? await this.args(r) : [];
 			if(this.dosData)
 				Object.assign(r.dosData, await this.dosData(r));
@@ -123,7 +130,7 @@ export class Program
 		}
 		else if(QEMUIDS.includes(this.loc))
 		{
-			r.qemuData = {f, cmd : this.bin, osid : this.loc};
+			r.qemuData = {f, cmd : this.bin, osid : this.loc, xlog};
 			r.qemuData.args = this.args ? await this.args(r) : [];
 			if(this.qemuData)
 				Object.assign(r.qemuData, await this.qemuData(r));
@@ -134,8 +141,11 @@ export class Program
 		if(this.postExec)
 		{
 			try { await this.postExec(r); }
-			catch(err) { xu.log`Program postExec ${fg.orange(this.programid)} threw error ${err}`; }
+			catch(err) { xlog.error`Program postExec ${fg.orange(this.programid)} threw error ${err}`; }
 		}
+
+		if(this.symlinkInToCWD)
+			await fileUtil.unlink(r.inFile({absolute : true}));
 
 		if(f.outDir)
 		{
@@ -157,7 +167,7 @@ export class Program
 				// if the new file is identical to our input file, delete it
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
-					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
+					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
 					await fileUtil.unlink(newFilePath);
 					continue;
 				}
@@ -167,7 +177,7 @@ export class Program
 				// if this program has a custom verification step, check that
 				if(this.verify && !(await this.verify(r, newFile)))
 				{
-					xu.log2`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to failing program.verify() function`;
+					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to failing program.verify() function`;
 					await fileUtil.unlink(newFilePath);
 					continue;
 				}
@@ -184,7 +194,7 @@ export class Program
 		if(this.post)
 		{
 			try { await this.post(r); }
-			catch(err) { xu.log`Program post ${fg.orange(this.programid)} threw error ${err}`; }
+			catch(err) { xlog.error`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
 		// if we have some new files, time to rename them
@@ -195,7 +205,7 @@ export class Program
 			const restreamerOpts = {newName, suffix, numFiles : f.files.new.length};
 
 			// See if we have more advanced renaming
-			if(ro.regex && (f.files.new.length>1 || !ro.multipleOnly))
+			if(ro.regex && (f.files.new.length>1 || ro.alwaysRename))
 			{
 				let renamer = null;
 				let renamerNum = null;
@@ -214,7 +224,7 @@ export class Program
 						}
 					});
 
-					xu.log4`Renamer #${i} produced: ${filenames}`;
+					xlog.debug`Renamer #${i} produced: ${filenames}`;
 					if(filenames.some(filename => typeof filename!=="string") || filenames.unique().length<filenames.length)
 						continue;
 
@@ -225,16 +235,16 @@ export class Program
 
 				if(renamer===null)
 				{
-					xu.log2`${xu.c.blink + fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names.`;
+					xlog.warn`${xu.c.blink + fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names.`;
 				}
 				else
 				{
-					xu.log3`Picked renamer #${renamerNum} for renaming ${f.files.new.length} files...`;
+					xlog.info`Picked renamer #${renamerNum} for renaming ${f.files.new.length} files...`;
 
 					for(const newFile of f.files.new)
 					{
 						const replacementName = renamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {}).join("");
-						xu.log2`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
+						xlog.warn`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
 						await newFile.rename(replacementName, {replaceExisting : !!isChain});
 					}
 				}
@@ -244,13 +254,13 @@ export class Program
 				const newFilename = newName + suffix + (ro.ext || f.new.ext);
 				if(newFilename!==f.new.base)
 				{
-					xu.log2`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
+					xlog.warn`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
 					await f.new.rename(newFilename, {replaceExisting : !!isChain});
 				}
 			}
 		}
 
-		xu.log3`Program Result: ${r.pretty()}`;
+		xlog.info`Program Result: ${r.pretty()}`;
 
 		// if we have a disk quota, we need to make a temp out dir, rsync over our new files to it, unmount it and then rsync them back to the original outDir
 		if(this.diskQuota)
@@ -281,76 +291,66 @@ export class Program
 			{
 				for(const [, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 				{
-					const newFiles = Array.from(f.files.new);
-					const chainF = await f.clone();
-					chainF.changeType("new", "prev");
-
-					const handleNewFiles = async chainInputFiles =>
+					const handleNewFiles = async (chainResult, inputFiles) =>
 					{
-						if(!chainF.new)
+						if(!chainResult.f.new)
 						{
-							xu.log2`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${xu.verbose<5 ? `, deleting ${chainInputFiles.length} chain input files!` : ""}`;
-							if(xu.verbose<5)
+							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${!xlog.atLeast("debug") ? `, deleting ${inputFiles.length} chain input files!` : ""}`;
+							if(!xlog.atLeast("debug"))
 							{
-								for(const chainInputFile of chainInputFiles)
-									await f.remove("new", chainInputFile, {unlink : true});
+								for(const inputFile of inputFiles)
+									await f.remove("new", inputFile, {unlink : true});
 							}
 							return;
 						}
 
-						xu.log3`Chain ${progRaw} resulted in new files: ${chainF.files.new.map(v => v.rel).join(" ")}`;
+						// copy our new files over to our out dir. WARNING! This doesn't do ANY collision avoidance at all, so if there are duplicate filenames, they will overwrite the existing files
+						const newFileSet = await chainResult.f.rsyncTo(f.outDir.absolute, {type : "new", relativeFrom : chainResult.f.outDir.absolute});
+						newFileSet.changeRoot(f.root);
+						await f.addAll("new", newFileSet.files.new);
 
-						// we used to check here if any of our new chain files already exist in f.new from a previous iteration, then we re-calculated our stats
-						// however we now handle this automatically in FileSet.add when it already has the file it does a .calcStats() automatically
-						// in the future though we could use this code here to help add collision avoidance
-						//await (f.files.new || []).filter(v => chainF.files.new.some(oldNew => oldNew.rel===v.rel)).parallelMap(v => v.calcStats());
-						
-						await f.addAll("new", chainF.files.new);
-						for(const inputFile of chainF.files.input)
+						// remove any old input files that are not part of our new chain output/new files
+						for(const inputFile of inputFiles)
 						{
-							if(!chainF.files.new.some(v => v.absolute===inputFile.absolute))
+							if(!newFileSet.files.new.some(v => v.absolute===inputFile.absolute))
 								await f.remove("new", inputFile, {unlink : true});
 						}
-						chainF.changeType("new", "prev");
+
+						xlog.info`Chain ${progRaw} resulted in new files: ${newFileSet.files.new.map(v => v.rel).join(" ")}`;
+
+						await chainResult.unlinkHomeOut();
 					};
 					
-					const baseChainProgOpts = {isChain : true};
+					const baseChainProgOpts = {isChain : true, xlog};
+					const newFiles = Array.from(f.files.new);
 
 					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
 					// So we set originalInput so it's named properly
-					if(newFiles.length===1 || progRaw.startsWith("*"))
+					// Don't do this though if the current program has a custom renamer with alwaysRename set
+					if((newFiles.length===1 && !this.renameOut?.alwaysRename) || progRaw.startsWith("*"))
 						baseChainProgOpts.originalInput = originalInput || f.input;
 
 					if(progRaw.startsWith("*"))
 					{
-						chainF.removeType("input");
-						await chainF.addAll("input", newFiles);
-
-						xu.log3`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
-
-						await Program.runProgram(progRaw.substring(1), chainF, baseChainProgOpts);
-						await handleNewFiles(newFiles);
+						xlog.info`Chaining to ${progRaw} with ${newFiles.length} files ${newFiles.map(newFile => newFile.rel).join(" ")}`;
+						await handleNewFiles(await Program.runProgram(progRaw.substring(1), newFiles, baseChainProgOpts), newFiles);
 					}
 					else
 					{
-						for(const newFile of newFiles)
+						await newFiles.parallelMap(async newFile =>
 						{
+							// if chain starts with a question mark ? then we need to have a truthy response from chainCheck() in order to proceed with chaining this file
 							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, progRaw.substring(1)) : {};
 							if(!chainProgFlags)
-								continue;
-							
+								return;
+
 							const chainProgOpts = {...baseChainProgOpts};
 							if(Object.isObject(chainProgFlags))
 								chainProgOpts.flags = chainProgFlags;
 
-							chainF.removeType("input");
-							await chainF.add("input", newFile);
-
-							xu.log3`Chaining to ${progRaw} with file ${newFile.rel}`;
-
-							await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, chainF, chainProgOpts);
-							await handleNewFiles([newFile]);
-						}
+							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
+							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
+						});	// chain 10 output files at once, or 33% of OS CPU count, whichever is smaller
 					}
 				}
 			}
@@ -362,6 +362,7 @@ export class Program
 	// runs the programid program
 	static async runProgram(progRaw, fRaw, progOptions={})
 	{
+		const xlog = progOptions.xlog || xu.xLog();
 		if(progRaw.includes("->"))
 		{
 			const chainParts = progRaw.split("->");
@@ -401,19 +402,21 @@ export class Program
 		// if fRaw isn't a FileSet, then we will create a temporary one
 		if(!(fRaw instanceof FileSet))
 		{
-			const inputFile = fRaw instanceof DexFile ? fRaw.clone() : await DexFile.create(fRaw);
-			f = await FileSet.create(inputFile.root, "input", inputFile);
+			const inputFiles = await Array.force(fRaw).parallelMap(async v => (v instanceof DexFile ? v.clone() : await DexFile.create(v)));
+			f = await FileSet.create(inputFiles[0].root, "input", inputFiles);
 			
-			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}-out`);
+			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}_out`);
 			await Deno.mkdir(outDirPath, {recursive : true});
 			await f.add("outDir", outDirPath);
 
-			const homeDirPath = await fileUtil.genTempPath(undefined, `${programid}-home`);
+			const homeDirPath = await fileUtil.genTempPath(undefined, `${programid}_home`);
 			await Deno.mkdir(homeDirPath, {recursive : true});
 			await f.add("homeDir", homeDirPath);
 		}
 
-		xu.log5`Program ${progRaw} converted to ${progOptions}`;
+		const debugPart = xu.clone(progOptions);
+		delete debugPart.xlog;
+		xlog.debug`Program ${progRaw} converted to ${debugPart}`;
 		
 		return program.run(f, progOptions);
 	}

@@ -72,7 +72,7 @@ Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
 EndFunc`
 };
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize})
+export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, xlog})
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
@@ -148,8 +148,8 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 
 	qemuData.script = scriptLines.join("\n");
 
-	xu.log3`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
-	xu.log5`\tSCRIPT: ${qemuData.script}`;
+	xlog.info`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
+	xlog.trace`\tSCRIPT: ${qemuData.script}`;
 	const r = await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)})).text();
 	if(r!=="ok")
 		throw new Error(r);

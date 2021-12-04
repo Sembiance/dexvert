@@ -16,17 +16,15 @@ function flexMatch(value, matcher, fullStringMatch)
 // If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "rom", "other"];
 
-export async function identify(inputFileRaw, {quiet, silent}={})
+export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 {
-	const prevVerbose = xu.verbose;
-	if(silent || (quiet && xu.verbose<4))
-		xu.verbose = 0;
+	const xlog = _xlog || xu.xLog(logLevel);
 
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
-	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f)))).flatMap(o => o.meta.detections);
+	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f, {xlog})))).flatMap(o => o.meta.detections);
 
-	xu.log4`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
+	xlog.debug`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
 
 	const otherFiles = (await Promise.all((await fileUtil.tree(f.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==f.input.absolute);
 	const otherDirs = await Promise.all((await fileUtil.tree(f.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
@@ -50,14 +48,14 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 			// skip this format if any of our detections are forbidden magic values or our input filename has a forbidden extension
 			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => f.input.base.toLowerCase().endsWith(fext)))))
 			{
-				xu.log4`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
+				xlog.debug`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
 				continue;
 			}
 
 			// skip this format if it's marked as unsafe and our file has been transformed and we don't explictly allow transforming
 			if(f.input.transformed && format.transformUnsafe)
 			{
-				xu.log4`Excluding format ${formatid} due to input being a transformed file and the format being marked as transformUnsafe.`;
+				xlog.debug`Excluding format ${formatid} due to input being a transformed file and the format being marked as transformUnsafe.`;
 				continue;
 			}
 
@@ -85,7 +83,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 
 				if(!match)
 				{
-					xu.log4`Excluding format ${formatid} due to byteCheck not matching.`;
+					xlog.debug`Excluding format ${formatid} due to byteCheck not matching.`;
 					continue;
 				}
 			}
@@ -93,7 +91,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 			// some formats require some sort of other check to ensure the file is valid
 			if(format.idCheck && !(await format.idCheck(inputFile, detections)))
 			{
-				xu.log4`Excluding format ${formatid} due to idCheck not succeeding.`;
+				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
 				continue;
 			}
 
@@ -107,7 +105,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 				// If it returns an empty array then we fail to match
 				if(auxFiles!==false && auxFiles.length===0)
 				{
-					xu.log4`Excluding format ${formatid} due to requiredFiles not being present.`;
+					xlog.debug`Excluding format ${formatid} due to requiredFiles not being present.`;
 					continue;
 				}
 			}
@@ -289,9 +287,7 @@ export async function identify(inputFileRaw, {quiet, silent}={})
 		...detections.map(({from, confidence, value, extensions}) => Identification.create({from, confidence, magic : value, extensions}))
 	];
 
-	xu.log5`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
-
-	xu.verbose = prevVerbose;
+	xlog.debug`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
 
 	return result;
 }

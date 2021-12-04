@@ -25,7 +25,8 @@ export class DexPhase
 			f      : {type : FileSet, required : true},
 			format : {type : Format, required : true},
 			family : {type : Family, required : true},
-			id     : {type : Identification, required : true}
+			id     : {type : Identification, required : true},
+			xlog   : {}
 		});
 		
 		return dexPhase;
@@ -51,13 +52,13 @@ export class DexPhase
 	{
 		const r = [];
 		r.push(`${prefix}${xu.colon("format")}${this.format.pretty(`${prefix}\t`).trim()}`);
-		if(xu.verbose>=1)
+		if(this.xlog.atLeast("info"))
 			r.push(`\n${prefix}${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
-		if(xu.verbose>=2)
+		if(this.xlog.atLeast("info"))
 			r.push(`\n${prefix}${xu.colon("    id")}${this.id.pretty(`${prefix}\t`).trim()}`);
-		if(xu.verbose>=3)
+		if(this.xlog.atLeast("debug"))
 			r.push(`\n${prefix}${xu.colon("     f")}${this.f.pretty(`${prefix}\t`).trim()}`);
-		if(xu.verbose>=2)
+		if(this.xlog.atLeast("info"))
 		{
 			r.push(`\n${prefix}${xu.colon("   ran")}${fg.yellowDim(this.ran.length)} program${this.ran.length===1 ? "" : "s"}`);
 			if(this.ran.length>0)
@@ -81,7 +82,9 @@ export class DexState
 
 		validateClass(dexState, {
 			// required
-			original : {type : Object, required : true}
+			original : {type : Object, required : true},
+			ids      : {type : [Identification], required : true, allowEmpty : true},
+			xlog   : {}
 		});
 
 		validateObject(dexState.original, {
@@ -95,7 +98,7 @@ export class DexState
 	// starts the next phase
 	startPhase(o)
 	{
-		const dexPhase = o instanceof DexPhase ? o : DexPhase.create(o);
+		const dexPhase = o instanceof DexPhase ? o : DexPhase.create({xlog : this.xlog, ...o});
 		if(this.phase)
 			this.past.push(this.phase);
 		this.phase = dexPhase;
@@ -113,6 +116,7 @@ export class DexState
 	{
 		const o = {};
 		o.original = Object.fromEntries(Object.entries(this.original).map(([k, v]) => ([k, v.serialize()])));
+		o.ids = this.ids.map(v => v.serialize());
 		if(this.phase)
 			o.phase = this.phase.serialize();
 		o.past = this.past.map(v => v.serialize());
@@ -131,7 +135,7 @@ export class DexState
 	pretty(prefix="")
 	{
 		const r = [];
-		if(xu.verbose>=3 && this.past.length>0)
+		if(this.xlog.atLeast("info") && this.past.length>0)
 		{
 			r.push(`\n${printUtil.majorHeader("DexState")}`);
 			r.push(`\n${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);

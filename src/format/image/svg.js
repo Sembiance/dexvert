@@ -1,6 +1,5 @@
 import {Format} from "../../Format.js";
 import {Program} from "../../Program.js";
-import {fileUtil} from "xutil";
 
 export class svg extends Format
 {
@@ -11,11 +10,10 @@ export class svg extends Format
 	magic     = ["SVG Scalable Vector Graphics image"];
 	untouched = dexState => dexState.meta.width && dexState.meta.height;
 
-	meta = async inputFile =>
+	meta = async (inputFile, xlog) =>
 	{
-		const svgInfoR = await Program.runProgram("svgInfo", inputFile);
-		await fileUtil.unlink(svgInfoR.f.outDir.absolute, {recursive : true});
-		await fileUtil.unlink(svgInfoR.f.homeDir.absolute, {recursive : true});
+		const svgInfoR = await Program.runProgram("svgInfo", inputFile, {xlog});
+		await svgInfoR.unlinkHomeOut();
 		return svgInfoR.meta;
 	};
 }

@@ -5,9 +5,9 @@ import {formats} from "../../src/format/formats.js";
 
 const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
 const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
-export default async function buildUNSUPPORTED()
+export default async function buildUNSUPPORTED(xlog)
 {
-	xu.log3`Writing UNSUPPORTED.md to disk...`;
+	xlog.info`Writing UNSUPPORTED.md to disk...`;
 	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 

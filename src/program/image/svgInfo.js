@@ -12,7 +12,7 @@ export class svgInfo extends Program
 	{
 		// convert to PNG to get color count and opaque info
 		const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");
-		await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {cwd : r.f.root, verbose : xu.verbose>=3});
+		await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {cwd : r.f.root, verbose : r.xlog.atLeast("debug")});
 		const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
 		await fileUtil.unlink(pngFilePath);
 

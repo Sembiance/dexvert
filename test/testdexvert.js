@@ -4,6 +4,8 @@ import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
 import {formats} from "../src/format/formats.js";
 
+const xlog = xu.xLog();
+
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test dexvert conversions for 1 or all formats",
@@ -66,10 +68,17 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
 
+// Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format
+const UNPROCESSED_ALLOW_NO_IDS =
+[
+	"image/bbcDisplayRAM",
+	"image/teletext"
+];
+
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "-dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*3;
-const fileDurations = {};
+const slowFiles = [];
 const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "data", "process.json");
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
 const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
@@ -78,19 +87,18 @@ const outputFiles = [];
 
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
-console.log(`${xu.c.clearScreen}./testdexvert ${Deno.args.join(" ")}`);
-console.log(printUtil.majorHeader("dexvert test").trim());
-xu.log`Root testing dir: ${DEXTEST_ROOT_DIR}`;
-xu.log`Rsyncing sample files to RAM...`;
+xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
+xlog.info`Root testing dir: ${DEXTEST_ROOT_DIR}`;
+xlog.info`Rsyncing sample files to RAM...`;
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
-xu.log`Loading test data and finding sample files...`;
+xlog.info`Loading test data and finding sample files...`;
 
 const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
 
-xu.log`Finding sample files...`;
+xlog.info`Finding sample files...`;
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
-xu.log`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
+xlog.info`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
 const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
 {
 	const sampleRel = path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath);
@@ -99,18 +107,18 @@ const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
 });
 
 if(allSampleFilePaths.subtractAll(sampleFilePaths).length>0)
-	xu.log`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
+	xlog.info`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
 
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
-xu.log`Testing ${sampleFilePaths.length} sample files...`;
+xlog.info`Testing ${sampleFilePaths.length} sample files...`;
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
 	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 
-	xu.log`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
+	xlog.info`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
 	if(argv.record)
 		delete testData[extraFilePath];
 });
@@ -122,14 +130,19 @@ let failCount=0;
 const failures=[];
 async function testSample(sampleFilePath)
 {
+	const startedAt = performance.now();
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const r = await runUtil.run("dexvert", [...(argv.debug ? ["--debug"] : []), "--json", sampleFilePath, tmpOutDirPath]);
+	const r = await runUtil.run("dexvert", [...(argv.debug ? ["--logLevel=debug"] : []), "--json", sampleFilePath, tmpOutDirPath]);
 	const resultFull = xu.parseJSON(r.stdout);
 
 	function handleComplete()
 	{
+		const duration = performance.now()-startedAt;
+		if(duration>=SLOW_DURATION)
+			slowFiles.push(sampleSubFilePath);
+
 		// If we have more than 100 files we are testing, show progress every 10%
 		if(sampleFilePaths.length>100)
 		{
@@ -149,7 +162,7 @@ async function testSample(sampleFilePath)
 		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
-			console.log(`\n${failures.at(-1)}`);
+			xlog.info`\n${failures.at(-1)}`;
 		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
 
@@ -222,7 +235,12 @@ async function testSample(sampleFilePath)
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
 
 	if(!result.processed)
+	{
+		if(!resultFull.ids.some(id => id.family===diskFamily && id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`))
+			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFamily}/${diskFormat}`);
+
 		return await pass(fg.white("."));
+	}
 
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
@@ -301,16 +319,17 @@ async function testSample(sampleFilePath)
 
 await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency);
 
-console.log("");	// gets us out of the period stdoud section onto a new line
+xlog.info``;	// gets us out of the period stdoud section onto a new line
 
 if(failures.length>0)
-	console.log(`\n${failures.sortMulti().join("\n")}`);
+	xlog.info`\n${failures.sortMulti().join("\n")}`;
 
 async function writeOutputHTML()
 {
 	await Deno.writeTextFile("/mnt/ram/tmp/testdexvert.html", `
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>${argv.format.escapeHTML() || "ALL FILES"}</title>
 		<style>
 			body, html
@@ -327,6 +346,26 @@ async function writeOutputHTML()
 				background-color: grey;
 				max-width: 350px;
 				max-height: 350px;
+			}
+
+			.audio
+			{
+				width: 45%;
+				display: inline-block;
+				text-align: right;
+				line-height: 1.75em;
+				margin-bottom: 0.25em;
+			}
+
+			.audio label
+			{
+				vertical-align: top;
+			}
+
+			.audio audio
+			{
+				height: 1.5em;
+				width : 60%
 			}
 
 			blink
@@ -350,7 +389,7 @@ async function writeOutputHTML()
 		</style>
 	</head>
 	<body>
-		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.join(" ")}<br>` : ""}${outputFiles.length.toLocaleString()} files<br>
+		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.map(v => v.decolor()).join(" ")}<br>` : ""}${outputFiles.length.toLocaleString()} files<br>
 		${outputFiles.map(filePath =>
 	{
 		const ext = path.extname(filePath);
@@ -369,7 +408,7 @@ async function writeOutputHTML()
 
 			case ".wav":
 			case ".mp3":
-				return `<audio src="${filePathSafe}">`;
+				return `<span class="audio"><label>${path.basename(filePath)}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
 			
 			case ".txt":
 			case ".pdf":
@@ -380,7 +419,7 @@ async function writeOutputHTML()
 	}).join("")}
 	</body>
 </html>`);
-	xu.log`\nReport written to: file:///mnt/ram/tmp/testdexvert.html`;
+	xlog.info`\nReport written to: file:///mnt/ram/tmp/testdexvert.html`;
 }
 
 if(argv.record)
@@ -388,12 +427,17 @@ if(argv.record)
 
 await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"]);
 
-xu.log`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+xlog.info`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
 
-xu.log`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
+xlog.info`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
+
+if(slowFiles.length>0)
+	xlog.info`\nSlow files (${slowFiles.length.toLocaleString()}):\n\t${slowFiles.join("\n\t")}`;
 
 if(oldDataFormats.length>0)
-	xu.log`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} — ${oldDataFormats.join(" ")}`;
+	xlog.info`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} — ${oldDataFormats.join(" ")}`;
 
 if(argv.report && !argv.record)
 	await writeOutputHTML();
+
+await runUtil.run("stty", ["echo"]);

@@ -5,8 +5,7 @@ export class ffmpeg extends Program
 	website        = "https://ffmpeg.org/";
 	gentooPackage  = "media-video/ffmpeg";
 	gentooUseFlags = "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib";
-	flags          =
-	{
+	flags          = {
 		outType     : `Which format to output: png mp3 mp4 flac. Default is mp4`,
 		format      : "Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide",
 		codec       : "Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide",
@@ -33,14 +32,14 @@ export class ffmpeg extends Program
 				a.push("-i", r.inFile(), "-frames:v", "1", await r.outFile("out.png"));
 				break;
 
-			case "mp3":
+			case "wav":
 				a.push("-i", r.inFile());
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);
 				a.push("-c:a", "pcm_u8", await r.outFile("out.wav"));
 				break;
 
-			case "wav":
+			case "mp3":
 				a.push("-i", r.inFile());
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);

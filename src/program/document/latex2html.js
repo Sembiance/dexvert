@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class latex2html extends Program
 {
 	website = "https://www.latex2html.org/";
-	gentooPackage = "dev-tex/latex2html";
+	package = "dev-tex/latex2html";
 }
 */
 
@@ -17,7 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://www.latex2html.org/",
-	gentooPackage : "dev-tex/latex2html"
+	package : "dev-tex/latex2html"
 };
 
 // If you need more .sty files from CTAN, can download them recursively with: ncftpget -R -v "ftp://ftp.math.utah.edu/pub/ctan/tex-archive/macros/latex209/contrib/"

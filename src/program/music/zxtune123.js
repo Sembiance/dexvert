@@ -2,13 +2,12 @@ import {Program} from "../../Program.js";
 
 export class zxtune123 extends Program
 {
-	website       = "https://zxtune.bitbucket.io/";
-	gentooPackage = "media-sound/zxtune";
-	gentooOverlay = "dexvert";
-	bin           = "zxtune123";
-	args          = r => ["--silent", "--file", r.inFile(), `--wav=filename=${r.outDir()}/[Fullpath].wav`];
-	chain         = "ffmpeg[outType:mp3]";
-	renameOut      = {
+	website   = "https://zxtune.bitbucket.io/";
+	package   = "media-sound/zxtune";
+	bin       = "zxtune123";
+	args      = r => ["--silent", "--file", r.inFile(), `--wav=filename=${r.outDir()}/[Fullpath].wav`];
+	chain     = "ffmpeg[outType:mp3]";
+	renameOut = {
 		alwaysRename : true,
 		regex        : /_#(?<songNum>\d+)(?<ext>\.wav)$/,
 		renamer      :

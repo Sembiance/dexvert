@@ -2,10 +2,9 @@ import {Program} from "../../Program.js";
 
 export class ffmpeg extends Program
 {
-	website        = "https://ffmpeg.org/";
-	gentooPackage  = "media-video/ffmpeg";
-	gentooUseFlags = "X alsa amr bzip2 encode fontconfig gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib";
-	flags          = {
+	website = "https://ffmpeg.org/";
+	package = "media-video/ffmpeg";
+	flags   = {
 		outType     : `Which format to output: png mp3 mp4 flac. Default is mp4`,
 		format      : "Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide",
 		codec       : "Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide",

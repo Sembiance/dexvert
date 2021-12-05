@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class unice68 extends Program
 {
 	website = "https://sourceforge.net/projects/sc68/";
-	gentooPackage = "app-arch/unice68";
-	gentooOverlay = "dexvert";
+	package = "app-arch/unice68";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://sourceforge.net/projects/sc68/",
-	gentooPackage : "app-arch/unice68",
-	gentooOverlay : "dexvert"
+	package : "app-arch/unice68",
 };
 
 exports.bin = () => "unice68";

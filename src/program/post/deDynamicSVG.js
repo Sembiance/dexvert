@@ -3,14 +3,13 @@ import {runUtil} from "xutil";
 
 export class deDynamicSVG extends Program
 {
-	website       = "https://github.com/Sembiance/dexvert";
-	gentooPackage = "app-text/xmlstarlet";
-	unsafe        = true;
-	flags =
-	{
+	website = "https://github.com/Sembiance/dexvert";
+	package = "app-text/xmlstarlet";
+	unsafe  = true;
+	flags   = {
 		autoCrop : "Set this flag to also auto crop the SVG using inkscape"
-	}
-	exec          = async r =>
+	};
+	exec = async r =>
 	{
 		const outFilePath = await r.outFile("out.svg", {absolute : true});
 		await Deno.copyFile(r.inFile({absolute : true}), outFilePath);
@@ -27,5 +26,5 @@ export class deDynamicSVG extends Program
 
 		// This will take care of deleting any 'empty' elements that totalCADConverter often does
 		await runUtil.run("svgo", ["--multipass", "--final-newline", outFilePath]);
-	}
+	};
 }

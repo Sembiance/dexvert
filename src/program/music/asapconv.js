@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class asapconv extends Program
 {
 	website = "http://asap.sourceforge.net/";
-	gentooPackage = "media-sound/asap";
-	gentooOverlay = "dexvert";
+	package = "media-sound/asap";
 }
 */
 
@@ -20,8 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "http://asap.sourceforge.net/",
-	gentooPackage  : "media-sound/asap",
-	gentooOverlay  : "dexvert"
+	package  : "media-sound/asap",
 };
 
 exports.bin = () => "asapconv";

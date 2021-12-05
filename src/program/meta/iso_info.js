@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class iso_info extends Program
 {
 	website = "https://www.gnu.org/software/libcdio";
-	gentooPackage = "dev-libs/libcdio";
-	gentooUseFlags = "cddb cxx";
+	package = "dev-libs/libcdio";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://www.gnu.org/software/libcdio",
-	gentooPackage  : "dev-libs/libcdio",
-	gentooUseFlags : "cddb cxx",
+	package  : "dev-libs/libcdio",
 	informational  : true
 };
 

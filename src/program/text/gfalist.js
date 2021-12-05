@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class gfalist extends Program
 {
 	website = "https://github.com/Sembiance/gfalist";
-	gentooPackage = "dev-lang/gfalist";
-	gentooOverlay = "dexvert";
+	package = "dev-lang/gfalist";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/Sembiance/gfalist",
-	gentooPackage : "dev-lang/gfalist",
-	gentooOverlay : "dexvert"
+	package : "dev-lang/gfalist",
 };
 
 exports.bin = () => "gfalist";

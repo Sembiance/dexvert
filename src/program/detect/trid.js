@@ -4,12 +4,10 @@ import {fileUtil} from "xutil";
 
 export class trid extends Program
 {
-	website       = "https://mark0.net/soft-trid-e.html";
-	gentooPackage = "app-arch/trid";
-	gentooOverlay = "dexvert";
-
-	bin = "trid";
-	loc = "local";
+	website = "https://mark0.net/soft-trid-e.html";
+	package = "app-arch/trid";
+	bin     = "trid";
+	loc     = "local";
 
 	pre = async r =>
 	{
@@ -18,7 +16,7 @@ export class trid extends Program
 		await Deno.copyFile(r.f.input.absolute, r.tridTmpFilePath);
 	};
 
-	args = r => [r.tridTmpFilePath, "-n:5"]
+	args = r => [r.tridTmpFilePath, "-n:5"];
 	post = async r =>
 	{
 		await fileUtil.unlink(r.tridTmpFilePath);

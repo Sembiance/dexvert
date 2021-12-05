@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class midistar2mid extends Program
 {
 	website = "https://github.com/Sembiance/midistar2mid";
-	gentooPackage = "media-sound/midistar2mid";
-	gentooOverlay = "dexvert";
+	package = "media-sound/midistar2mid";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/Sembiance/midistar2mid",
-	gentooPackage : "media-sound/midistar2mid",
-	gentooOverlay : "dexvert"
+	package : "media-sound/midistar2mid",
 };
 
 exports.bin = () => "midistar2mid";

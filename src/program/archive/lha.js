@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class lha extends Program
 {
 	website = "https://github.com/jca02266/lha";
-	gentooPackage = "app-arch/lha";
+	package = "app-arch/lha";
 }
 */
 
@@ -15,7 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://github.com/jca02266/lha",
-	gentooPackage  : "app-arch/lha"
+	package  : "app-arch/lha"
 };
 
 exports.bin = () => "lha";

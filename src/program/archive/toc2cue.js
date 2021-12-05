@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class toc2cue extends Program
 {
 	website = "http://cdrdao.sourceforge.net/";
-	gentooPackage = "app-cdr/cdrdao";
-	gentooUseFlags = "encode mad vorbis";
+	package = "app-cdr/cdrdao";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "http://cdrdao.sourceforge.net/",
-	gentooPackage  : "app-cdr/cdrdao",
-	gentooUseFlags : "encode mad vorbis"
+	package  : "app-cdr/cdrdao",
 };
 
 exports.bin = () => "toc2cue";

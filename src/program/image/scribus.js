@@ -8,12 +8,11 @@ const SCRIBUS_PREF_SRC = path.join(xu.dirname(import.meta), "../../../scribus");
 
 export class scribus extends Program
 {
-	website        = "https://www.scribus.net/";
-	gentooPackage  = "app-office/scribus";
-	gentooUseFlags = "boost minimal pdf templates";
-	unsafe         = true;
-	bin            = "scribus";
-	outExt         = ".eps";
+	website = "https://www.scribus.net/";
+	package = "app-office/scribus";
+	unsafe  = true;
+	bin     = "scribus";
+	outExt  = ".eps";
 
 	pre = async r =>
 	{

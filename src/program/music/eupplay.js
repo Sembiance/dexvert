@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class eupplay extends Program
 {
 	website = "https://github.com/gzaffin/eupmini";
-	gentooPackage = "media-sound/eupmini";
-	gentooOverlay = "dexvert";
+	package = "media-sound/eupmini";
 	unsafe = true;
 }
 */
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/gzaffin/eupmini",
-	gentooPackage : "media-sound/eupmini",
-	gentooOverlay : "dexvert",
+	package : "media-sound/eupmini",
 	unsafe        : true
 };
 

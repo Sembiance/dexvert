@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class ab2ascii extends Program
 {
 	website = "http://aminet.net/package/dev/misc/ab2ascii-1.3";
-	gentooPackage = "dev-lang/ab2ascii";
-	gentooOverlay = "dexvert";
+	package = "dev-lang/ab2ascii";
 	unsafe = true;
 }
 */
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://aminet.net/package/dev/misc/ab2ascii-1.3",
-	gentooPackage : "dev-lang/ab2ascii",
-	gentooOverlay : "dexvert",
+	package : "dev-lang/ab2ascii",
 	unsafe   : true
 };
 

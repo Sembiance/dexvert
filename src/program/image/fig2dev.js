@@ -5,9 +5,9 @@ import {path, base64Encode} from "std";
 
 export class fig2dev extends Program
 {
-	website       = "https://www.xfig.org/";
-	gentooPackage = "media-gfx/transfig";
-	flags         = {
+	website = "https://www.xfig.org/";
+	package = "media-gfx/transfig";
+	flags   = {
 		outType : `Which image format to convert to (png for example). Default: svg`
 	};
 	notes = "The output SVG has it's external image file references replaced with the base64 data uri, but this of course means only images supported by the browser/svg reader will be able to viewed. I could convert all images with dexvert first, but MEH.";

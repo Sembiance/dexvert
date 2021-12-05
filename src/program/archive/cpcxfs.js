@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class cpcxfs extends Program
 {
 	website = "http://www.cpcwiki.eu/forum/applications/cpcxfs/";
-	gentooPackage = "app-arch/cpcxfs";
-	gentooOverlay = "dexvert";
+	package = "app-arch/cpcxfs";
 }
 */
 
@@ -16,8 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "http://www.cpcwiki.eu/forum/applications/cpcxfs/",
-	gentooPackage : "app-arch/cpcxfs",
-	gentooOverlay : "dexvert"
+	package : "app-arch/cpcxfs",
 };
 
 exports.bin = () => "cpcxfs";

@@ -1,17 +1,20 @@
-# Supported File Formats (552)
+# Supported File Formats (561)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (5)
+## Archive (8)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
+archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [unadf](http://lclevy.free.fr/adflib/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/adfFFS/)
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | uniso | [2 sample files](https://telparia.com/fileFormatSamples/archive/stDiskImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | IsoBuster | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/macBinary/)
+archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [3 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | 7z | [10 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
+archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) 7z UniExtract | [13 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Thumbs.db) | .db | [deark](https://entropymine.com/deark/) vinetto | [6 sample files](https://telparia.com/fileFormatSamples/archive/windowsThumbDB/)
 
 
@@ -527,12 +530,18 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (3)
+## Music (9)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
+music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/amComposer/)
+music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wiki/AHX_(Abyss)) | .ahx | [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/ahx/)
+music | Actionamics Sound Tool Module | .ast | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/actionamics/)
+music | [Advanced Module Format Module](http://fileformats.archiveteam.org/wiki/Dual_Module_Player_DSMI) | .amf | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [7 sample files](https://telparia.com/fileFormatSamples/music/advancedModuleFormat/)
+music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
+music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [amosTracker2mp3](https://github.com/Sembiance/dexvert/src/program/music/amosTracker2mp3.js) | [12 sample files](https://telparia.com/fileFormatSamples/music/amosTracker/)
 music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | [timidity](http://timidity.sourceforge.net/) | [11 sample files](https://telparia.com/fileFormatSamples/music/mid/) - Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows
 music | [NES Sound File](http://fileformats.archiveteam.org/wiki/NSF) | .nsf | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/nsf/)
-music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) uade123 mikmod2wav [zxtune123](https://zxtune.bitbucket.io/) | [16 sample files](https://telparia.com/fileFormatSamples/music/mod/)
+music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [mikmod2wav](https://github.com/Sembiance/mikmod2wav) [zxtune123](https://zxtune.bitbucket.io/) | [15 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 
 
 

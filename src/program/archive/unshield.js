@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class unshield extends Program
 {
 	website = "https://github.com/twogood/unshield";
-	gentooPackage = "app-arch/unshield";
+	package = "app-arch/unshield";
 	flags = {"unshieldUseOldCompression":"Set to true to instruct unshield to decompress using the old compression method. Default: false"};
 }
 */
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://github.com/twogood/unshield",
-	gentooPackage : "app-arch/unshield",
+	package : "app-arch/unshield",
 	flags :
 	{
 		unshieldUseOldCompression : "Set to true to instruct unshield to decompress using the old compression method. Default: false"

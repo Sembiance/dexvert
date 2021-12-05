@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class latex2pdf extends Program
 {
 	website = "http://latex2rtf.sourceforge.net/";
-	gentooPackage = "dev-tex/latex2rtf";
+	package = "dev-tex/latex2rtf";
 }
 */
 
@@ -18,7 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "http://latex2rtf.sourceforge.net/",
-	gentooPackage  : "dev-tex/latex2rtf"
+	package  : "dev-tex/latex2rtf"
 };
 
 // Converts to RTF and then uses soffice to convert to PDF

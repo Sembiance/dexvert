@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class ddjvu extends Program
 {
 	website = "http://djvu.sourceforge.net/";
-	gentooPackage = "app-text/djvu";
+	package = "app-text/djvu";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://djvu.sourceforge.net/",
-	gentooPackage : "app-text/djvu"
+	package : "app-text/djvu"
 };
 
 exports.bin = () => "ddjvu";

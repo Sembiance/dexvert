@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class adplay extends Program
 {
 	website = "https://github.com/adplug/adplay-unix";
-	gentooPackage = "media-sound/adplay";
+	package = "media-sound/adplay";
 }
 */
 
@@ -18,7 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/adplug/adplay-unix",
-	gentooPackage : "media-sound/adplay"
+	package : "media-sound/adplay"
 };
 
 exports.bin = () => "adplay";

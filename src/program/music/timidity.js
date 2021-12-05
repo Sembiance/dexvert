@@ -8,11 +8,10 @@ const INSTRUMENT_DIR_PATH = path.resolve(path.join(xu.dirname(import.meta), ".."
 
 export class timidity extends Program
 {
-	website        = "http://timidity.sourceforge.net/";
-	gentooPackage  = ["media-sound/timidity++", "media-sound/timidity-freepats", "media-sound/fluid-soundfont", "media-sound/timidity-eawpatches"];
-	gentooUseFlags = "X alsa flac gtk ncurses speex vorbis";
-	unsafe         = true;
-	flags          = {
+	website = "http://timidity.sourceforge.net/";
+	package = ["media-sound/timidity++", "media-sound/timidity-freepats", "media-sound/fluid-soundfont", "media-sound/timidity-eawpatches"];
+	unsafe  = true;
+	flags   = {
 		midiFont : `Which midifont to use to convert (${INSTRUMENT_NAMES.join(", ")}) Default: ${INSTRUMENT_NAMES[0]}`
 	};
 

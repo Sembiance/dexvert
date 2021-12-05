@@ -2,13 +2,12 @@ import {Program} from "../../Program.js";
 
 export class sldtoppm extends Program
 {
-	website        = "http://netpbm.sourceforge.net/";
-	gentooPackage  = "media-libs/netpbm";
-	gentooUseFlags = "X jbig jpeg png postscript rle tiff xml zlib";
-	bin            = "sldtoppm";
-	args           = r => [r.inFile()];
-	runOptions     = async r => ({stdoutFilePath : await r.outFile("out.ppm")});
-	chain          = "convert";
+	website    = "http://netpbm.sourceforge.net/";
+	package    = "media-libs/netpbm";
+	bin        = "sldtoppm";
+	args       = r => [r.inFile()];
+	runOptions = async r => ({stdoutFilePath : await r.outFile("out.ppm")});
+	chain      = "convert";
 }
 
 
@@ -20,8 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "http://netpbm.sourceforge.net/",
-	gentooPackage  : "media-libs/netpbm",
-	gentooUseFlags : "X jbig jpeg png postscript rle tiff xml zlib"
+	package  : "media-libs/netpbm",
 };
 
 exports.bin = () => "sldtoppm";

@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class gameextractor extends Program
 {
 	website = "http://www.watto.org/game_extractor.html";
-	gentooPackage = "games-util/gameextractor";
-	gentooOverlay = "dexvert";
+	package = "games-util/gameextractor";
 }
 */
 
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.watto.org/game_extractor.html",
-	gentooPackage : "games-util/gameextractor",
-	gentooOverlay : "dexvert"
+	package : "games-util/gameextractor",
 };
 
 exports.bin = () => "gameextractor";

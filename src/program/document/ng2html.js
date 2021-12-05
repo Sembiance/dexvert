@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class ng2html extends Program
 {
 	website = "http://www.davep.org/norton-guides/";
-	gentooPackage = "app-text/ng2html";
-	gentooOverlay = "dexvert";
+	package = "app-text/ng2html";
 	unsafe = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "http://www.davep.org/norton-guides/",
-	gentooPackage : "app-text/ng2html",
-	gentooOverlay : "dexvert",
+	package : "app-text/ng2html",
 	unsafe        : true
 };
 

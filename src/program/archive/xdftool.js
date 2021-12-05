@@ -1,32 +1,15 @@
-/*
 import {Program} from "../../Program.js";
 
 export class xdftool extends Program
 {
 	website = "http://lallafa.de/blog/amiga-projects/amitools/";
-	gentooPackage = "app-arch/amitools";
-	gentooOverlay = "dexvert";
+	package = "app-arch/amitools";
+	bin = "xdftool";
+	args = r => [r.inFile(), "unpack", r.outDir()];
 }
-*/
 
+// TODO the below
 /*
-"use strict";
-const XU = require("@sembiance/xu"),
-	tiptoe = require("tiptoe"),
-	moment = require("moment"),
-	path = require("path"),
-	fileUtil = require("@sembiance/xutil").file,
-	fs = require("fs");
-
-exports.meta =
-{
-	website       : "http://lallafa.de/blog/amiga-projects/amitools/",
-	gentooPackage : "app-arch/amitools",
-	gentooOverlay : "dexvert"
-};
-
-exports.bin = () => "xdftool";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => ([inPath, "unpack", outPath]);
 
 // The sole purpose of this function is to load the xdfmeta file and then set the appropriate timestamps on all the output files
 exports.post = (state, p, r, cb) =>

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class cabextract extends Program
 {
 	website = "https://www.cabextract.org.uk/";
-	gentooPackage = "app-arch/cabextract";
+	package = "app-arch/cabextract";
 }
 */
 
@@ -15,7 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://www.cabextract.org.uk/",
-	gentooPackage : "app-arch/cabextract"
+	package : "app-arch/cabextract"
 };
 
 exports.bin = () => "cabextract";

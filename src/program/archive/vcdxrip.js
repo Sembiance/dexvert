@@ -4,9 +4,8 @@ import {Program} from "../../Program.js";
 export class vcdxrip extends Program
 {
 	website = ["https://www.gnu.org/software/vcdimager","http://xmlstar.sourceforge.net/"];
-	gentooPackage = ["media-video/vcdimager","app-text/xmlstarlet"];
+	package = ["media-video/vcdimager","app-text/xmlstarlet"];
 	bin = ["vcdxrip","xmlstarlet"];
-	gentooUseFlags = "xml";
 	unsafe = true;
 }
 */
@@ -23,9 +22,8 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : ["https://www.gnu.org/software/vcdimager", "http://xmlstar.sourceforge.net/"],
-	gentooPackage  : ["media-video/vcdimager", "app-text/xmlstarlet"],
+	package  : ["media-video/vcdimager", "app-text/xmlstarlet"],
 	bin            : ["vcdxrip", "xmlstarlet"],
-	gentooUseFlags : "xml",
 	unsafe    : true
 };
 

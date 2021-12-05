@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class bdftopcf extends Program
 {
 	website = "https://gitlab.freedesktop.org/xorg/app/bdftopcf";
-	gentooPackage = "x11-apps/bdftopcf";
+	package = "x11-apps/bdftopcf";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://gitlab.freedesktop.org/xorg/app/bdftopcf",
-	gentooPackage : "x11-apps/bdftopcf"
+	package : "x11-apps/bdftopcf"
 };
 
 exports.bin = () => "bdftopcf";

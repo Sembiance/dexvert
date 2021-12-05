@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class unar extends Program
 {
 	website = "https://unarchiver.c3.cx/";
-	gentooPackage = "app-arch/unar";
+	package = "app-arch/unar";
 }
 */
 
@@ -19,7 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://unarchiver.c3.cx/",
-	gentooPackage : "app-arch/unar"
+	package : "app-arch/unar"
 };
 
 exports.bin = () => "unar";

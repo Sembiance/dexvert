@@ -2,11 +2,9 @@ import {Program} from "../../Program.js";
 
 export class convert extends Program
 {
-	website        = "https://www.imagemagick.org/";
-	gentooPackage  = "media-gfx/imagemagick";
-	gentooUseFlags = "X bzip2 cxx fontconfig fpx heif jbig jpeg jpeg2k lzma openmp png postscript svg tiff truetype webp wmf xml zlib";
-	flags          =
-	{
+	website = "https://www.imagemagick.org/";
+	package = "media-gfx/imagemagick";
+	flags   = {
 		outType     : `Which type to convert to (png || webp || svg). Default: png`,
 		flip        : "Set this to true to flip the image vertically. Default: false",
 		removeAlpha : "Set this to true to remove the alpha channel and produce a flat, opaque image. Default: false"
@@ -25,13 +23,13 @@ export class convert extends Program
 			a.push("-alpha", "off");
 		a.push(await r.outFile(`out.${outType}`));
 		return a;
-	}
+	};
 
 	post = r =>
 	{
 		if(r.stderr.toLowerCase().includes("read error"))
 			r.unsafe = true;
-	}
+	};
 }
 
 /*

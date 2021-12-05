@@ -3,12 +3,11 @@ import {Program} from "../../Program.js";
 
 export class soxi extends Program
 {
-	website        = "http://sox.sourceforge.net";
-	gentooPackage  = "media-sound/sox";
-	gentooUseFlags = "alsa amr encode flac id3tag mad ogg openmp png sndfile twolame wavpack";
-	bin            = "soxi";
-	args           = r => [r.inFile()];
-	post           = r =>
+	website = "http://sox.sourceforge.net";
+	package = "media-sound/sox";
+	bin     = "soxi";
+	args    = r => [r.inFile()];
+	post    = r =>
 	{
 		if(r.stdout.includes("can't open input file"))
 			return;

@@ -1,29 +1,12 @@
-/*
 import {Format} from "../../Format.js";
 
 export class adfFFS extends Format
 {
-	name = "Amiga Disk Format (FFS)";
-	website = "http://fileformats.archiveteam.org/wiki/ADF_(Amiga)";
-	ext = [".adf"];
-	fileSize = 901120;
-	magic = ["Amiga Disk image File (FFS)","Amiga FFS disk","Amiga Inter FFS disk","Amiga Fastdir FFS disk"];
-	converters = ["unadf","xdftool"]
+	name          = "Amiga Disk Format (FFS)";
+	website       = "http://fileformats.archiveteam.org/wiki/ADF_(Amiga)";
+	ext           = [".adf"];
+	fileSize      = 901_120;
+	matchFileSize = true;
+	magic         = ["Amiga Disk image File (FFS)", "Amiga FFS disk", "Amiga Inter FFS disk", "Amiga Fastdir FFS disk"];
+	converters    = ["unadf"];// TODO , "xdftool"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name     : "Amiga Disk Format (FFS)",
-	website  : "http://fileformats.archiveteam.org/wiki/ADF_(Amiga)",
-	ext      : [".adf"],
-	fileSize : 901120,
-	magic    : ["Amiga Disk image File (FFS)", "Amiga FFS disk", "Amiga Inter FFS disk", "Amiga Fastdir FFS disk"]
-};
-
-exports.converterPriority = ["unadf", "xdftool"];
-
-*/

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class antiword extends Program
 {
 	website = "http://www.winfield.demon.nl";
-	gentooPackage = "app-text/antiword";
+	package = "app-text/antiword";
 	unsafe = true;
 }
 */
@@ -19,7 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.winfield.demon.nl",
-	gentooPackage : "app-text/antiword"
+	package : "app-text/antiword"
 	unsafe : true;
 };
 

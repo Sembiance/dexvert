@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class zoo extends Program
 {
 	website = "https://packages.debian.org/jessie/zoo";
-	gentooPackage = "app-arch/zoo";
+	package = "app-arch/zoo";
 }
 */
 
@@ -15,7 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://packages.debian.org/jessie/zoo",
-	gentooPackage : "app-arch/zoo"
+	package : "app-arch/zoo"
 };
 
 exports.bin = () => "zoo";

@@ -3,11 +3,9 @@ import {Program} from "../../Program.js";
 
 export class nconvert extends Program
 {
-	website       = "https://www.xnview.com/en/nconvert/";
-	gentooPackage = "media-gfx/nconvert";
-	gentooOverlay = "dexvert";
-	flags         =
-	{
+	website = "https://www.xnview.com/en/nconvert/";
+	package = "media-gfx/nconvert";
+	flags   = {
 		format : "Which nconvert format to use for conversion. For list run `nconvert -help` Default: Let nconvert decide"
 	};
 

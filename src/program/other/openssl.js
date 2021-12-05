@@ -3,12 +3,10 @@ import {Program} from "../../Program.js";
 
 export class openssl extends Program
 {
-	website        = "https://www.openssl.org/";
-	gentooPackage  = "dev-libs/openssl";
-	gentooUseFlags = "asm zlib";
-	unsafe         = true;
-	flags          =
-	{
+	website = "https://www.openssl.org/";
+	package = "dev-libs/openssl";
+	unsafe  = true;
+	flags   = {
 		command  : "Which command to perform. REQUIRED FLAG",
 		encoding : "Encoding type of the certificate. Default: Let openssl decide (usually fails)"
 	};

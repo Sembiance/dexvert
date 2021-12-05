@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class texi2pdf extends Program
 {
 	website = "https://www.gnu.org/software/texinfo/";
-	gentooPackage = "sys-apps/texinfo";
+	package = "sys-apps/texinfo";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://www.gnu.org/software/texinfo/",
-	gentooPackage : "sys-apps/texinfo"
+	package : "sys-apps/texinfo"
 };
 
 exports.bin = () => "texi2pdf";

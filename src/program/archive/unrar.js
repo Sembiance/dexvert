@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class unrar extends Program
 {
 	website = "https://www.rarlab.com/rar_add.htm";
-	gentooPackage = "app-arch/unrar";
+	package = "app-arch/unrar";
 }
 */
 
@@ -15,7 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://www.rarlab.com/rar_add.htm",
-	gentooPackage : "app-arch/unrar"
+	package : "app-arch/unrar"
 };
 
 exports.bin = () => "unrar";

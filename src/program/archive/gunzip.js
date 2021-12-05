@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class gunzip extends Program
 {
 	website = "https://www.gnu.org/software/gzip/";
-	gentooPackage = "app-arch/gzip";
+	package = "app-arch/gzip";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://www.gnu.org/software/gzip/",
-	gentooPackage  : "app-arch/gzip"
+	package  : "app-arch/gzip"
 };
 
 exports.bin = () => "gunzip";

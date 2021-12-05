@@ -1,12 +1,14 @@
 /* eslint-disable brace-style */
-import {xu} from "xu";
-import {runUtil, cmdUtil, printUtil} from "xutil";
+import {xu, fg} from "xu";
+import {runUtil, cmdUtil, fileUtil, printUtil} from "xutil";
+import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Returns meta info about music file at <inputFilePath>",
 	opts    :
 	{
+		debug      : {desc : "Output debug info"},
 		jsonOutput : {desc : "Output results as JSON instead of being human readable"}
 	},
 	args :
@@ -14,14 +16,20 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "File path to identify", required : true}
 	]});
 
+const musicWAVFilePath = path.join(path.dirname(argv.inputFilePath), "music.wav");
+const noMusicWAV = await fileUtil.exists(musicWAVFilePath);
+
 const runOptions = {timeout : xu.SECOND*30};
 
 const {stderr : xmpInfoRaw} = await runUtil.run("xmp", ["-Cv", "-o", "/dev/null", argv.inputFilePath], runOptions);
-const {stderr : uadeInfoRaw} = await runUtil.run("uade123", ["-g", argv.inputFilePath], runOptions);
+const {stdout : uadeInfoRaw} = await runUtil.run("uade123", ["-g", argv.inputFilePath], runOptions);
 const {stdout : openMPTInfoRaw} = await runUtil.run("openmpt123", ["--info", argv.inputFilePath], runOptions);
 const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFilePath], runOptions);
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], {timeout : xu.SECOND*10});
 const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], runOptions);
+
+if(argv.debug)
+	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));
 
 const musicInfo = {};
 
@@ -32,6 +40,9 @@ try { infos.openMPT = parseOpenMPT(openMPTInfoRaw); } catch {}
 try { infos.mikmod = parseMikmod(mikmodInfoRaw); } catch {}
 try { infos.timidity = parseTimidity(timidityInfoRaw); } catch {}
 try { infos.zxtune = parseZXTune(zxtuneRaw); } catch {}
+
+if(argv.debug)
+	console.log(infos);
 
 const PRIORITY_ORDER = ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune"];
 for(const type of PRIORITY_ORDER)
@@ -46,6 +57,9 @@ for(const type of PRIORITY_ORDER)
 			musicInfo[propName] = subInfo[propName];
 	});
 }
+
+if(!noMusicWAV)
+	await fileUtil.unlink(musicWAVFilePath);
 
 if(argv.jsonOutput)
 	console.log(JSON.stringify(musicInfo));

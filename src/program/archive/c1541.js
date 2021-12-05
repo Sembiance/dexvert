@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class c1541 extends Program
 {
 	website = "https://vice-emu.sourceforge.io/";
-	gentooPackage = "app-emulation/vice";
-	gentooUseFlags = "alsa ffmpeg ipv6 nls png sdl sdlsound threads zlib";
+	package = "app-emulation/vice";
 }
 */
 
@@ -20,8 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://vice-emu.sourceforge.io/",
-	gentooPackage  : "app-emulation/vice",
-	gentooUseFlags : "alsa ffmpeg ipv6 nls png sdl sdlsound threads zlib"
+	package  : "app-emulation/vice",
 };
 
 // Some D64 disks such as barbarn2.d64 can cause c1541 to consume all available drive space. See VICE bug #1542: https://sourceforge.net/p/vice-emu/bugs/1542/

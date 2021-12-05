@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class dviinfox extends Program
 {
 	website = "http://tug.org/texlive/";
-	gentooPackage = "app-text/texlive";
-	gentooUseFlags = "X cjk extra graphics metapost png texi2html truetype xetex xml";
+	package = "app-text/texlive";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "http://tug.org/texlive/",
-	gentooPackage  : "app-text/texlive",
-	gentooUseFlags : "X cjk extra graphics metapost png texi2html truetype xetex xml",
+	package  : "app-text/texlive",
 	informational  : true
 };
 

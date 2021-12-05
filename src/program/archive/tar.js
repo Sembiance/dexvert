@@ -1,25 +1,10 @@
-/*
 import {Program} from "../../Program.js";
 
 export class tar extends Program
 {
-	website = "https://www.gnu.org/software/tar/";
-	gentooPackage = "app-arch/tar";
-	gentooUseFlags = "acl nls xattr";
+	website   = "https://www.gnu.org/software/tar/";
+	package   = "app-arch/tar";
+	bin       = "tar";
+	args      = r => ["-xf", r.inFile(), "-C", r.outDir()];
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "https://www.gnu.org/software/tar/",
-	gentooPackage  : "app-arch/tar",
-	gentooUseFlags : "acl nls xattr"
-};
-
-exports.bin = () => "tar";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => (["-xf", inPath, "-C", outPath]);
-*/

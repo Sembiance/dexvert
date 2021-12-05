@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class amigadepacker extends Program
 {
 	website = "http://zakalwe.fi/~shd/foss/amigadepacker/";
-	gentooPackage = "app-arch/amigadepacker";
-	gentooOverlay = "dexvert";
+	package = "app-arch/amigadepacker";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://zakalwe.fi/~shd/foss/amigadepacker/",
-	gentooPackage : "app-arch/amigadepacker",
-	gentooOverlay : "dexvert"
+	package : "app-arch/amigadepacker",
 };
 
 exports.bin = () => "amigadepacker";

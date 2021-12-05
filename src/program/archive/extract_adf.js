@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class extract_adf extends Program
 {
 	website = "https://github.com/mist64/extract-adf";
-	gentooPackage = "app-arch/extract-adf";
-	gentooOverlay = "dexvert";
+	package = "app-arch/extract-adf";
 }
 */
 
@@ -19,8 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://github.com/mist64/extract-adf",
-	gentooPackage  : "app-arch/extract-adf",
-	gentooOverlay  : "dexvert"
+	package  : "app-arch/extract-adf",
 };
 
 exports.bin = () => "extract-adf";

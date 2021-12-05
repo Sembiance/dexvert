@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class xpstopdf extends Program
 {
 	website = "https://wiki.gnome.org/Projects/libgxps";
-	gentooPackage = "app-text/libgxps";
-	gentooUseFlags = "introspection jpeg tiff";
+	package = "app-text/libgxps";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://wiki.gnome.org/Projects/libgxps",
-	gentooPackage  : "app-text/libgxps",
-	gentooUseFlags : "introspection jpeg tiff"
+	package  : "app-text/libgxps",
 };
 
 exports.bin = () => "xpstopdf";

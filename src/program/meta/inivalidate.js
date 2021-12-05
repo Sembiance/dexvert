@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class inivalidate extends Program
 {
 	website = "https://github.com/Sembiance/inivalidate";
-	gentooPackage = "app-arch/inivalidate";
-	gentooOverlay = "dexvert";
+	package = "app-arch/inivalidate";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://github.com/Sembiance/inivalidate",
-	gentooPackage : "app-arch/inivalidate",
-	gentooOverlay : "dexvert",
+	package : "app-arch/inivalidate",
 	informational : true
 };
 

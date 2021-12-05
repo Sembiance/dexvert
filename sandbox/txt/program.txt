@@ -13,16 +13,10 @@ An object of key/value pairs of various flag properties you can set when running
 >>> notes : "Blah blah"
 Additional notes about this program
 
->>> ******** Gentoo Specific Properties
->>> gentooOverlay : "dexvert"
-Which Gentoo overlay the package is found in, if applicable.
-
->>> gentooPackage : "app-arch/program"   ||   gentooPackage : ["app-arch/program", "app-text/program"]
+>>> package : "app-arch/program"   ||   package : ["app-arch/program", "app-text/program"]
 Which Gentoo package contains this program.
 Can be an array of packages. If so, meta.website and meta.bin must be an array too.
 
->>> gentooUseFlags : "png jpg midi"
-Which Gentoo USE flags should be set.
 
 >>> ******** Properties
 >>> unsafe : true
@@ -122,7 +116,7 @@ OLD NODE BELOW:
 | exports.meta Properties |
 \-------------------------/
 >>> bin : ["bchunk", "sudo"]
-An array of binaries that this utilizes. Only set this if gentooPackages is an array.
+An array of binaries that this utilizes. Only set this if packages is an array.
 
 >>> slow : true
 If set to true, this program is known to be quite slow and should not be run more than once per file (for transformed copies for example)

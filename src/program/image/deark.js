@@ -2,10 +2,9 @@ import {Program} from "../../Program.js";
 
 export class deark extends Program
 {
-	website       = "https://entropymine.com/deark/";
-	gentooPackage = "app-arch/deark";
-	gentooOverlay = "dexvert";
-	flags         = {
+	website = "https://entropymine.com/deark/";
+	package = "app-arch/deark";
+	flags   = {
 		"module"      : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
 		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
 		"opts"        : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",

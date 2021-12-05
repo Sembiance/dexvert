@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class grotag extends Program
 {
 	website = "http://grotag.sourceforge.net/";
-	gentooPackage = "app-text/grotag";
-	gentooOverlay = "dexvert";
+	package = "app-text/grotag";
 }
 */
 
@@ -21,8 +20,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://grotag.sourceforge.net/",
-	gentooPackage : "app-text/grotag",
-	gentooOverlay : "dexvert"
+	package : "app-text/grotag",
 };
 
 exports.bin = () => "grotag";

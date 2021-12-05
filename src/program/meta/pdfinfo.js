@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class pdfinfo extends Program
 {
 	website = "https://poppler.freedesktop.org/";
-	gentooPackage = "app-text/poppler";
-	gentooUseFlags = "cairo curl cxx introspection jpeg jpeg2k lcms png qt5 tiff utils";
+	package = "app-text/poppler";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://poppler.freedesktop.org/",
-	gentooPackage  : "app-text/poppler",
-	gentooUseFlags : "cairo curl cxx introspection jpeg jpeg2k lcms png qt5 tiff utils",
+	package  : "app-text/poppler",
 	informational  : true
 };
 

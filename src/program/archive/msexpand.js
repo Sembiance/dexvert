@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class msexpand extends Program
 {
 	website = "http://gnuwin32.sourceforge.net/packages/mscompress.htm";
-	gentooPackage = "app-arch/mscompress";
+	package = "app-arch/mscompress";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://gnuwin32.sourceforge.net/packages/mscompress.htm",
-	gentooPackage : "app-arch/mscompress"
+	package : "app-arch/mscompress"
 };
 
 exports.bin = () => "msexpand";

@@ -2,10 +2,10 @@ import {Program} from "../../Program.js";
 
 export class MPG_T2G extends Program
 {
-	website = "https://archive.org/details/t425l1e_zip";
-	unsafe = true;
-	loc = "win2k";
-	bin = "c:\\tscad4\\MPG_T2G.EXE";
+	website  = "https://archive.org/details/t425l1e_zip";
+	unsafe   = true;
+	loc      = "win2k";
+	bin      = "c:\\tscad4\\MPG_T2G.EXE";
 	qemuData = () => ({
 		script : `
 			$mainWindowVisible = WinWaitActive("[CLASS:ConvertWClass]", "", 5)

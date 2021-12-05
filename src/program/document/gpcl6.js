@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class gpcl6 extends Program
 {
 	website = "https://www.ghostscript.com/download/gpcldnld.html";
-	gentooPackage = "app-text/ghostpcl-bin";
-	gentooOverlay = "dexvert";
+	package = "app-text/ghostpcl-bin";
 	unsafe = true;
 }
 */
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://www.ghostscript.com/download/gpcldnld.html",
-	gentooPackage : "app-text/ghostpcl-bin",
-	gentooOverlay : "dexvert",
+	package : "app-text/ghostpcl-bin",
 	unsafe   : true
 };
 

@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class vinetto extends Program
 {
 	website = "https://github.com/AtesComp/Vinetto";
-	gentooPackage = "app-forensics/vinetto";
-	gentooOverlay = "dexvert";
+	package = "app-forensics/vinetto";
 }
 */
 
@@ -16,8 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://github.com/AtesComp/Vinetto",
-	gentooPackage : "app-forensics/vinetto",
-	gentooOverlay : "dexvert"
+	package : "app-forensics/vinetto",
 };
 
 exports.bin = () => "vinetto";

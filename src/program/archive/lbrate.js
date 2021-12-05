@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class lbrate extends Program
 {
 	website = "http://www.svgalib.org/rus/lbrate.html";
-	gentooPackage = "app-arch/lbrate";
-	gentooOverlay = "dexvert";
+	package = "app-arch/lbrate";
 }
 */
 
@@ -16,8 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "http://www.svgalib.org/rus/lbrate.html",
-	gentooPackage : "app-arch/lbrate",
-	gentooOverlay : "dexvert"
+	package : "app-arch/lbrate",
 };
 
 exports.bin = () => "lbrate";

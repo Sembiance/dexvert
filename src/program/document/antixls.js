@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class antixls extends Program
 {
 	website = "https://packages.gentoo.org/packages/app-text/antixls";
-	gentooPackage = "app-text/antixls";
+	package = "app-text/antixls";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://packages.gentoo.org/packages/app-text/antixls",
-	gentooPackage : "app-text/antixls"
+	package : "app-text/antixls"
 };
 
 exports.bin = () => "antixls";

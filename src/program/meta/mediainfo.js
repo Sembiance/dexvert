@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class mediainfo extends Program
 {
 	website = "https://github.com/MediaArea/MediaInfo";
-	gentooPackage = "media-video/mediainfo";
-	gentooUseFlags = "curl mms";
+	package = "media-video/mediainfo";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://github.com/MediaArea/MediaInfo",
-	gentooPackage  : "media-video/mediainfo",
-	gentooUseFlags : "curl mms",
+	package  : "media-video/mediainfo",
 	informational  : true
 };
 

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class fuseiso extends Program
 {
 	website = "https://sourceforge.net/projects/fuseiso";
-	gentooPackage = "sys-fs/fuseiso";
+	package = "sys-fs/fuseiso";
 }
 */
 
@@ -19,7 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://sourceforge.net/projects/fuseiso",
-	gentooPackage : "sys-fs/fuseiso"
+	package : "sys-fs/fuseiso"
 };
 
 exports.bin = () => "fuseiso";

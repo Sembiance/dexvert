@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class ffdec extends Program
 {
 	website = "https://github.com/jindrapetrik/jpexs-decompiler";
-	gentooPackage = "media-gfx/ffdec";
-	gentooOverlay = "dexvert";
+	package = "media-gfx/ffdec";
 	flags = {"ffdecKeepAsGIF":"Leave the animation as a GIF, don't convert to MP4","ffdecMaxFrames":"Maximum number of frames to extract. Default: 500"};
 }
 */
@@ -21,8 +20,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/jindrapetrik/jpexs-decompiler",
-	gentooPackage : "media-gfx/ffdec",
-	gentooOverlay : "dexvert",
+	package : "media-gfx/ffdec",
 	flags :
 	{
 		ffdecKeepAsGIF : "Leave the animation as a GIF, don't convert to MP4",

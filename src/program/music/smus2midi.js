@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class smus2midi extends Program
 {
 	website = "https://github.com/AugusteBonnin/smus2midi";
-	gentooPackage = "media-sound/smus2midi";
-	gentooOverlay = "dexvert";
+	package = "media-sound/smus2midi";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://github.com/AugusteBonnin/smus2midi",
-	gentooPackage  : "media-sound/smus2midi",
-	gentooOverlay  : "dexvert"
+	package  : "media-sound/smus2midi",
 };
 
 exports.bin = () => "smus2midi";

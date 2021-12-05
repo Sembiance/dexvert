@@ -29,7 +29,7 @@ const FLEX_SIZE_PROGRAMS =
 
 	// Can produce slightly different output each time
 	xmp             : 1,
-	soundFont2tomp3 : 1
+	soundFont2tomp3 : 3
 };
 
 const FLEX_SIZE_FORMATS =
@@ -98,7 +98,7 @@ await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "
 
 xlog.info`Loading test data and finding sample files...`;
 
-const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
+const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH), {});
 
 xlog.info`Finding sample files...`;
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
@@ -142,7 +142,7 @@ async function testSample(sampleFilePath)
 	//if(sampleFilePath.includes("psf2"))
 	//	dexvertArgs.clear().push("--logLevel=trace", sampleFilePath, tmpOutDirPath);		// , sampleFilePath.includes("psf2") ? {liveOutput : true} : {}
 	const r = await runUtil.run("dexvert", dexvertArgs);
-	const resultFull = xu.parseJSON(r.stdout);
+	const resultFull = xu.parseJSON(r.stdout, {});
 
 	function handleComplete()
 	{
@@ -210,7 +210,7 @@ async function testSample(sampleFilePath)
 		if(misingFiles.length>0)
 			return await fail(`Some reported output files are missing from disk: ${misingFiles.join(" ")}`);
 
-		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({base, size, absolute, ts}) => [base, {size, ts, sum : await hashUtil.hashFile("sha1", absolute)}]));
+		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("sha1", absolute)}]));
 	}
 	result.meta = resultFull?.phase?.meta || {};
 	if(resultFull?.phase)
@@ -356,8 +356,14 @@ async function writeOutputHTML()
 		<style>
 			body, html
 			{
-				background-color: black;
+				background-color: #1a1a1a;
 				color: #ccc;
+				font-family: "Terminus (TTF)";
+			}
+
+			a, a:visited
+			{
+				color: #8585ff;
 			}
 
 			img
@@ -416,6 +422,7 @@ async function writeOutputHTML()
 	{
 		const ext = path.extname(filePath);
 		const filePathSafe = `file://${filePath.escapeHTML()}`;
+		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
 		switch(ext)
 		{
 			case ".jpg":
@@ -430,14 +437,14 @@ async function writeOutputHTML()
 
 			case ".wav":
 			case ".mp3":
-				return `<span class="audio"><label>${path.basename(filePath)}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
+				return `<span class="audio"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
 			
 			case ".txt":
 			case ".pdf":
 				return `<iframe src="${filePathSafe}"></iframe>`;
 		}
 
-		return `<a href="${filePathSafe}">${path.basename(filePath.escapeHTML())}</a><br>`;
+		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;
 	}).join("")}
 	</body>
 </html>`);

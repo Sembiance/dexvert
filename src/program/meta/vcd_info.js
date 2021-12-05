@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class vcd_info extends Program
 {
 	website = "https://www.gnu.org/software/vcdimager";
-	gentooPackage = "media-video/vcdimager";
-	gentooUseFlags = "xml";
+	package = "media-video/vcdimager";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://www.gnu.org/software/vcdimager",
-	gentooPackage  : "media-video/vcdimager",
-	gentooUseFlags : "xml",
+	package  : "media-video/vcdimager",
 	informational  : true
 };
 

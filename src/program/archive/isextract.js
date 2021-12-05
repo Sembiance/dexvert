@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class isextract extends Program
 {
 	website = "https://github.com/OmniBlade/isextract";
-	gentooPackage = "app-arch/isextract";
+	package = "app-arch/isextract";
 }
 */
 
@@ -15,7 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://github.com/OmniBlade/isextract",
-	gentooPackage  : "app-arch/isextract"
+	package  : "app-arch/isextract"
 };
 
 exports.bin = () => "isextract";

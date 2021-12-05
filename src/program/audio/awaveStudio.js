@@ -40,10 +40,11 @@ export class awaveStudio extends Program
 	chain = "ffmpeg[outType:mp3]";
 	renameOut      = {
 		alwaysRename : true,
-		regex        : /in - in (?<num>\d+)(?<ext>\.wav)$/,
+		regex        : /in - (?:(?:in (?<num>\d+))|(?<name>.+))(?<ext>\.wav)$/,		// either in - NAME.wav  or  in - in - 33.wav
 		renamer      :
 		[
 			({suffix, newName}, {num, ext}) => [newName, " ", num, suffix, ext],
+			({suffix}, {name, ext}) => (name.length>0 ? [name, suffix, ext] : []),
 			({suffix, newName, newExt}) => [newName, suffix, newExt],
 			({fn}) => [fn]
 		]

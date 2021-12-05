@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class hypercard_dasm extends Program
 {
 	website = "https://github.com/fuzziqersoftware/resource_dasm";
-	gentooPackage = "app-arch/resource-dasm";
-	gentooOverlay = "dexvert";
+	package = "app-arch/resource-dasm";
 }
 */
 
@@ -16,8 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://github.com/fuzziqersoftware/resource_dasm",
-	gentooPackage : "app-arch/resource-dasm",
-	gentooOverlay : "dexvert"
+	package : "app-arch/resource-dasm",
 };
 
 exports.bin = () => "hypercard_dasm";

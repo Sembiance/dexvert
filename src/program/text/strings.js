@@ -2,9 +2,9 @@ import {Program} from "../../Program.js";
 
 export class strings extends Program
 {
-	website       = "https://www.gnu.org/software/binutils/";
-	gentooPackage = "sys-devel/binutils";
-	bin           = "strings";
-	args          = r => ["-a", r.inFile()];
-	runOptions    = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+	website    = "https://www.gnu.org/software/binutils/";
+	package    = "sys-devel/binutils";
+	bin        = "strings";
+	args       = r => ["-a", r.inFile()];
+	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 }

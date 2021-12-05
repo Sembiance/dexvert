@@ -38,5 +38,5 @@ export class CADDraw extends Program
 
 				WinWaitClose("[CLASS:MainWClassToso4]", "", 10)
 			EndIf`});
-	chain = "dexvert[asFormat:image/wmf]"
+	chain = "dexvert[asFormat:image/wmf]";
 }

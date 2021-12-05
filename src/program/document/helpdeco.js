@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class helpdeco extends Program
 {
 	website = "https://sourceforge.net/projects/helpdeco/";
-	gentooPackage = "app-arch/helpdeco";
-	gentooOverlay = "dexvert";
+	package = "app-arch/helpdeco";
 }
 */
 
@@ -20,8 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://sourceforge.net/projects/helpdeco/",
-	gentooPackage : "app-arch/helpdeco",
-	gentooOverlay : "dexvert"
+	package : "app-arch/helpdeco",
 };
 
 exports.bin = () => "helpdeco";

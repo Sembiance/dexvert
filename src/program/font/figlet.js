@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class figlet extends Program
 {
 	website = "http://www.figlet.org/";
-	gentooPackage = "app-misc/figlet";
+	package = "app-misc/figlet";
 }
 */
 
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.figlet.org/",
-	gentooPackage : "app-misc/figlet"
+	package : "app-misc/figlet"
 };
 
 exports.bin = () => "figlet";

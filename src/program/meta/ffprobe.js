@@ -3,18 +3,14 @@ import {Program} from "../../Program.js";
 export class ffprobe extends Program
 {
 	website = "https://ffmpeg.org/";
-	gentooPackage = "media-video/ffmpeg";
-	gentooUseFlags = "X alsa amr bzip2 dav1d encode fontconfig gnutls gpl iconv jpeg2k lzma mp3 network opengl openssl opus postproc svg theora threads truetype v4l vaapi vdpau vorbis vpx webp x264 xvid zlib";
-	bin = "ffprobe";
-	args = r => ["-show_streams", "-show_format", r.inFile()];
-	post = r =>
+	package = "media-video/ffmpeg";
+	bin     = "ffprobe";
+	args    = r => ["-show_streams", "-show_format", r.inFile()];
+	post    = r =>
 	{
 		let seenFormatSection = false;
 		r.stdout.trim().split("\n").forEach(line =>
 		{
-			if(line.trim().startsWith("format_long_name="))
-				r.meta.formatLongName = line.trim().substring("format_long_name=".length);
-
 			if(line.trim()==="[FORMAT]")
 			{
 				seenFormatSection = true;
@@ -24,9 +20,14 @@ export class ffprobe extends Program
 			if(!seenFormatSection)
 				return;
 			
-			const tag = (line.trim().match(/^TAG:(?<key>[^=]+)=(?<value>.+)$/) || {groups : {}}).groups;
+			const tag = (line.trim().match(/^(?<tag>TAG:)?(?<key>[^=]+)=(?<value>.+)$/) || {groups : {}}).groups;
 			if(tag.key && tag.value && tag.key.trim().length>0 && tag.value.trim().length>0)
-				r.meta[tag.key.trim()] = tag.value.trim();
+			{
+				const key = tag.key.trim().replaceAll("_", " ").toCamelCase();
+				if(["size", "probeScore", "filename"].includes(key))
+					return;
+				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? (+tag.value.trim()) : tag.value.trim();
+			}
 		});
-	}
+	};
 }

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class man2html extends Program
 {
 	website = "http://primates.ximian.com/~flucifredi/man/";
-	gentooPackage = "sys-apps/man2html";
+	package = "sys-apps/man2html";
 }
 */
 
@@ -18,7 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://primates.ximian.com/~flucifredi/man/",
-	gentooPackage : "sys-apps/man2html"
+	package : "sys-apps/man2html"
 };
 
 exports.bin = () => "man2html";

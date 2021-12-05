@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class resource_dasm extends Program
 {
 	website = "https://github.com/fuzziqersoftware/resource_dasm";
-	gentooPackage = "app-arch/resource-dasm";
-	gentooOverlay = "dexvert";
+	package = "app-arch/resource-dasm";
 	flags = {"copyOriginalOnFail":"If resource_dasm fails to produce an output file, copy the original file over"};
 }
 */
@@ -21,8 +20,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/fuzziqersoftware/resource_dasm",
-	gentooPackage : "app-arch/resource-dasm",
-	gentooOverlay : "dexvert",
+	package : "app-arch/resource-dasm",
 	flags :
 	{
 		copyOriginalOnFail : "If resource_dasm fails to produce an output file, copy the original file over"

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class sidplay2 extends Program
 {
 	website = "http://sidplay2.sourceforge.net/";
-	gentooPackage = "media-sound/sidplay";
+	package = "media-sound/sidplay";
 	flags = {"sidSubTune":"Specify which sub tune to convert, zero based. Default: 1","sidSongLength":"Duration of time to play the SID song. Default: Let sidplay2 decide"};
 }
 */
@@ -17,7 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://sidplay2.sourceforge.net/",
-	gentooPackage : "media-sound/sidplay",
+	package : "media-sound/sidplay",
 	flags         :
 	{
 		sidSubTune    : "Specify which sub tune to convert, zero based. Default: 1",

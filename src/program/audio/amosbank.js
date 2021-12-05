@@ -3,8 +3,7 @@ import {Program} from "../../Program.js";
 export class amosbank extends Program
 {
 	website        = "https://github.com/dschwen/amosbank";
-	gentooPackage  = "dev-lang/amosbank";
-	gentooOverlay  = "dexvert";
+	package        = "dev-lang/amosbank";
 	bin            = "amosbank";
 	symlinkInToCWD = true;
 	cwd            = r => r.outDir();

@@ -7,6 +7,7 @@ export class degasMedPI extends Format
 	ext       = [".pi2"];
 	mimeType  = "image/x-pi2";
 	magic     = ["DEGAS med-res bitmap"];
+	weakMagic = true;
 	byteCheck = [{offset : 0, match : [0x00, 0x01]}];
 
 	// nconvert properly handles aspect ratio

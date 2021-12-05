@@ -31,9 +31,7 @@ export class Program
 
 			// meta
 			flags          : {type : Object},
-			gentooPackage  : {types : ["string", Array]},
-			gentooOverlay  : {type : "string"},
-			gentooUseFlags : {type : "string"},
+			package  : {types : ["string", Array]},
 			notes          : {type : "string"},
 			renameOut      : {types : [Object, "boolean"]},
 			runOptions     : {types : [Object, "function"]},
@@ -166,20 +164,42 @@ export class Program
 			// now find any new files on disk in the output dir that we don't yet
 			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute)))
 			{
+				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
+
 				// if the new file is identical to our input file, delete it
 				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
-					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to being identical to input file ${f.input.pretty()}`;
+					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
 					await fileUtil.unlink(newFilePath);
 					continue;
 				}
 
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
+				if(newFile.isSymlink)
+				{
+					let linkPath = await Deno.readLink(newFilePath);
+					if(!linkPath.startsWith("/"))
+						linkPath = path.join(path.dirname(newFilePath), linkPath);
+					const linkPathRel = path.relative(f.outDir.absolute, linkPath);
+					if(linkPathRel.startsWith("../"))
+					{
+						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to linking to a file outside of the output dir: ${linkPath}`;
+						await fileUtil.unlink(newFilePath);
+						continue;
+					}
+
+					if((await Deno.lstat(linkPath)).isDirectory)
+					{
+						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to being a dir link, which can cause infinite loops and won't result in new files: ${path.basename(newFilePath)} -> ${linkPathRel}`;
+						await fileUtil.unlink(newFilePath);
+						continue;
+					}
+				}
 
 				// if this program has a custom verification step, check that
 				if(this.verify && !(await this.verify(r, newFile)))
 				{
-					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFilePath} due to failing program.verify() function`;
+					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to failing program.verify() function`;
 					await fileUtil.unlink(newFilePath);
 					continue;
 				}
@@ -205,9 +225,9 @@ export class Program
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
 			const getName = o =>
 			{
-				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa
-				// we already set this in DexFile.preName, so if that's set AND we have a format.ext that matches, then use preName over name
-				if(o.preName?.length && (format?.ext || []).some(ext => ext.toLowerCase()===`.${o.name.toLowerCase()}`))
+				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa, we already set this in DexFile.preName
+				// so if in our format.ext we have our name, then use preName as our name (unless preName is also in ext, then stick with name)
+				if(o.preName?.length && (format?.ext || []).some(ext => ext.toLowerCase()===`.${o.name.toLowerCase()}`) && !(format?.ext || []).some(ext => ext.toLowerCase()===`.${o.preName.toLowerCase()}`))
 					return o.preName;
 
 				return o.name;

@@ -2,10 +2,9 @@ import {Program} from "../../Program.js";
 
 export class joinAsGIF extends Program
 {
-	website        = "https://www.imagemagick.org/";
-	gentooPackage  = "media-gfx/imagemagick";
-	gentooUseFlags = "X bzip2 cxx fontconfig fpx heif jbig jpeg jpeg2k lzma openmp png postscript svg tiff truetype webp wmf xml zlib";
-	flags = {
+	website = "https://www.imagemagick.org/";
+	package = "media-gfx/imagemagick";
+	flags   = {
 		delay : "Amount of delay between GIF frames. Default: 12"
 	};
 

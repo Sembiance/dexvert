@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class arc extends Program
 {
 	website = "http://arc.sourceforge.net";
-	gentooPackage = "app-arch/arc";
+	package = "app-arch/arc";
 	unsafe = true;
 }
 */
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "http://arc.sourceforge.net",
-	gentooPackage : "app-arch/arc",
+	package : "app-arch/arc",
 	unsafe        : true
 };
 

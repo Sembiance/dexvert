@@ -21,8 +21,28 @@ export async function verifyAudio(dexState, dexFile, identifications)
 		return false;
 	}
 
-	// Used to use here `sox <file> -n stat` (see sandbox/legacy/soxStat.txt) but that isn't reliable for very short MP3s such as those from gusPatch/VIOLIN.PAT
-	// I could use `mplayer -identify -nocache -vo null -ao null <file>` or `ffmpeg -i <file>` to try and detect duration/etc
+	// So sox isn't reliable at providing a stat for clips under 1 second, so we use ffprobe to get duration of the MP3 and only get sox stat if duration>=1 second
+	// Alternative duration getters: `mplayer -identify -nocache -vo null -ao null <file>` or `ffmpeg -i <file>`
+	const ffprobeR = await Program.runProgram("ffprobe", dexFile, {xlog});
+	await ffprobeR.unlinkHomeOut();
+	if((ffprobeR.meta?.duration || 0)>=1)
+	{
+		const {stderr} = await runUtil.run("sox", [dexFile.rel, "-n", "stat"], {cwd : dexFile.root});
+		const soxStat = stderr.trim().split("\n").reduce((result, line="") =>	// eslint-disable-line unicorn/prefer-object-from-entries
+		{
+			const parts = line.split(":");
+			if(!parts || parts.length!==2)
+				return result;
+			result[parts[0].split(" ").filter(v => !!v).map(v => v.trim()).join(" ")] = parts[1].trim();
+			return result;
+		}, {});
+		
+		if(soxStat["sox FAIL formats"] || (soxStat["Maximum amplitude"]==="0.000000" && soxStat["Minimum amplitude"]==="0.000000" && soxStat["Midline amplitude"]==="0.000000"))
+		{
+			xlog.warn`Audio verification failed due to invalid sox stat ${soxStat}`;
+			return false;
+		}
+	}
 
 	return true;
 }

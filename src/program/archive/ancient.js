@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class ancient extends Program
 {
 	website = "https://github.com/temisu/ancient_format_decompressor";
-	gentooPackage = "app-arch/ancient";
-	gentooOverlay = "dexvert";
+	package = "app-arch/ancient";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/temisu/ancient_format_decompressor",
-	gentooPackage : "app-arch/ancient",
-	gentooOverlay : "dexvert"
+	package : "app-arch/ancient",
 };
 
 exports.bin = () => "ancient";

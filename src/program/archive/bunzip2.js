@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class bunzip2 extends Program
 {
 	website = "https://gitlab.com/federicomenaquintero/bzip2";
-	gentooPackage = "app-arch/bzip2";
-	gentooUseFlags = "split-usr";
+	package = "app-arch/bzip2";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://gitlab.com/federicomenaquintero/bzip2",
-	gentooPackage  : "app-arch/bzip2",
-	gentooUseFlags : "split-usr"
+	package  : "app-arch/bzip2",
 };
 
 exports.bin = () => "bunzip2";

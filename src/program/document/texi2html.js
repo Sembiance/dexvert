@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class texi2html extends Program
 {
 	website = "http://www.nongnu.org/texi2html/";
-	gentooPackage = "app-text/texi2html";
+	package = "app-text/texi2html";
 	unsafe = true;
 }
 */
@@ -17,7 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.nongnu.org/texi2html/",
-	gentooPackage : "app-text/texi2html",
+	package : "app-text/texi2html",
 	unsafe        : true
 };
 

@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class decrmtool extends Program
 {
 	website = "http://aminet.net/package/util/pack/decrunchmania-mos";
-	gentooPackage = "app-arch/decrunchmania";
-	gentooOverlay = "dexvert";
+	package = "app-arch/decrunchmania";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://aminet.net/package/util/pack/decrunchmania-mos",
-	gentooPackage : "app-arch/decrunchmania",
-	gentooOverlay : "dexvert"
+	package : "app-arch/decrunchmania",
 };
 
 exports.bin = () => "decrmtool";

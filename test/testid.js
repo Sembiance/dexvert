@@ -32,7 +32,7 @@ await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "
 xlog.info`${printUtil.majorHeader("Identification Test")}`;
 xlog.info`Loading test data and finding sample files...`;
 
-const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH));
+const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH), {});
 
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
 xlog.info`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
@@ -57,7 +57,7 @@ async function testSample(sampleFilePath)
 {
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const r = await runUtil.run("dexid", ["--json", sampleFilePath]);
-	const ids = xu.parseJSON(r.stdout);
+	const ids = xu.parseJSON(r.stdout, {});
 	
 	function fail(msg)
 	{

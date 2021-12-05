@@ -1,4 +1,4 @@
-# Unsupported File Formats (320)
+# Unsupported File Formats (323)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -107,6 +107,15 @@ image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/
 image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://telparia.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+
+
+
+## Music (3)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
+music | Aero Studio | .aero | [2 sample files](https://telparia.com/fileFormatSamples/music/aeroStudio/)
+music | All Sound Tracker Module | .ast | [2 sample files](https://telparia.com/fileFormatSamples/music/allSoundTracker/)
 
 
 

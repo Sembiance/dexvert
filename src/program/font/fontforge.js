@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class fontforge extends Program
 {
 	website = "https://fontforge.org";
-	gentooPackage = "media-gfx/fontforge";
-	gentooUseFlags = "X gif gtk jpeg png python readline svg tiff unicode";
+	package = "media-gfx/fontforge";
 }
 */
 
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website        : "https://fontforge.org",
-	gentooPackage  : "media-gfx/fontforge",
-	gentooUseFlags : "X gif gtk jpeg png python readline svg tiff unicode"
+	package  : "media-gfx/fontforge",
 };
 
 // Script API: https://fontforge.org/docs/scripting/python/fontforge.html

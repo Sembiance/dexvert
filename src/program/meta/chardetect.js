@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class chardetect extends Program
 {
 	website = "https://github.com/chardet/chardet";
-	gentooPackage = "dev-python/chardet";
+	package = "dev-python/chardet";
 	informational = true;
 }
 */
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://github.com/chardet/chardet",
-	gentooPackage  : "dev-python/chardet",
+	package  : "dev-python/chardet",
 	informational  : true
 };
 

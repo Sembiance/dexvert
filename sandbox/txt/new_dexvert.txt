@@ -1,21 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add audio/soundFont2 support
-
-* Add archive
-  First format to do: tar
-  Then
-  	Create a .tar file that will include symlinks outside of the dir. So have one symlink to / and another to like one dir up ../../outSideOfTar.txt
-	Ensure the tar is created as symlinks and not what the symlink points to
-	Then for processing make sure to check each output symlink and if it points to something outside of the top level, delete the symlink
-	Program.js should do this for EVERY new file it finds, check to see if the symlink exceeds bounds and delete the symlink if it does
-
-* Add executable
-
 * Add music
   Here is where I should strongly consider adding some sort of 'prefix' type match type
   Whether I do that or not, I should also consider supporting renaming of files based on the file.preName instead of file.name
+
+* Once this big is fixed: https://github.com/denoland/deno/issues/12998
+
+* Add archive
+
+* Add executable
 
 * Add video
   Start with something that uses dosBox and records a video

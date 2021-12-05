@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class ps2pdf extends Program
 {
 	website = "https://ghostscript.com/";
-	gentooPackage = "app-text/ghostscript-gpl";
+	package = "app-text/ghostscript-gpl";
 	unsafe = true;
 }
 */
@@ -17,7 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://ghostscript.com/",
-	gentooPackage : "app-text/ghostscript-gpl"
+	package : "app-text/ghostscript-gpl"
 	unsafe : true;
 };
 

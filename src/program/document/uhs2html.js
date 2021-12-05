@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class uhs2html extends Program
 {
 	website = "http://www.emulinks.de/software.html";
-	gentooPackage = "games-util/uhs2html";
+	package = "games-util/uhs2html";
 	unsafe = true;
 }
 */
@@ -17,7 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.emulinks.de/software.html",
-	gentooPackage : "games-util/uhs2html",
+	package : "games-util/uhs2html",
 	unsafe        : true
 };
 

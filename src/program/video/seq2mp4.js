@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class seq2mp4 extends Program
 {
 	website = "https://github.com/Sembiance/seq2mp4";
-	gentooPackage = "media-gfx/seq2mp4";
-	gentooOverlay = "dexvert";
+	package = "media-gfx/seq2mp4";
 	unsafe = true;
 }
 */
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/Sembiance/seq2mp4",
-	gentooPackage : "media-gfx/seq2mp4",
-	gentooOverlay : "dexvert",
+	package : "media-gfx/seq2mp4",
 	unsafe   : true
 };
 

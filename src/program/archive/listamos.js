@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class listamos extends Program
 {
 	website = "https://github.com/kyz/amostools/";
-	gentooPackage = "dev-lang/amostools";
-	gentooOverlay = "dexvert";
+	package = "dev-lang/amostools";
 }
 */
 
@@ -18,8 +17,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/kyz/amostools/",
-	gentooPackage : "dev-lang/amostools",
-	gentooOverlay : "dexvert"
+	package : "dev-lang/amostools",
 };
 
 // stackimport creates an 'in.xstk' subdir with all results

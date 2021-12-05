@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class swfextract extends Program
 {
 	website = "http://www.swftools.org/";
-	gentooPackage = "media-gfx/swftools";
-	gentooOverlay = "dexvert";
+	package = "media-gfx/swftools";
 }
 */
 
@@ -19,8 +18,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "http://www.swftools.org/",
-	gentooPackage : "media-gfx/swftools",
-	gentooOverlay : "dexvert"
+	package : "media-gfx/swftools",
 };
 
 exports.bin = () => "swfextract";

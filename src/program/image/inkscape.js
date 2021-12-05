@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class inkscape extends Program
 {
 	website        = "https://inkscape.org/";
-	gentooPackage  = "media-gfx/inkscape";
-	gentooUseFlags = "cdr dbus dia exif graphicsmagick jpeg openmp postscript visio wpg";
+	package  = "media-gfx/inkscape";
 	unsafe         = true;
 	bin            = "inkscape";
 	runOptions     = ({virtualX : true});

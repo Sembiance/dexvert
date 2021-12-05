@@ -5,8 +5,8 @@ export class fifView extends Program
 	website  = "http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP";
 	unsafe   = true;
 	loc      = "winxp";
-	bin      = "c:\\dexvert\\FIFView\\FIFView.exe"
-	args     = r => [r.inFile()]
+	bin      = "c:\\dexvert\\FIFView\\FIFView.exe";
+	args     = r => [r.inFile()];
 	qemuData = () => ({
 		dontMaximize : true,
 		script : `
@@ -29,5 +29,5 @@ export class fifView extends Program
 
 		WinWaitClose("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)`
 	});
-	chain = "dexvert[asFormat:image/bmp] -> autoCropImage"
+	chain = "dexvert[asFormat:image/bmp] -> autoCropImage";
 }

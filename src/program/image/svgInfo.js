@@ -6,9 +6,8 @@ import {xmlParse} from "denoLandX";
 
 export class svgInfo extends Program
 {
-	website       = "https://github.com/Sembiance/dexvert/bin/svgInfo.js";
-
-	exec = async r =>
+	website = "https://github.com/Sembiance/dexvert/bin/svgInfo.js";
+	exec    = async r =>
 	{
 		// convert to PNG to get color count and opaque info
 		const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");

@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class stackimport extends Program
 {
 	website = "https://github.com/uliwitness/stackimport/";
-	gentooPackage = "dev-util/stackimport";
+	package = "dev-util/stackimport";
 }
 */
 
@@ -19,7 +19,7 @@ const XU = require("@sembiance/xu"),
 exports.meta =
 {
 	website       : "https://github.com/uliwitness/stackimport/",
-	gentooPackage : "dev-util/stackimport"
+	package : "dev-util/stackimport"
 };
 
 exports.bin = () => "stackimport";

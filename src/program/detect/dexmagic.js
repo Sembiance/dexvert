@@ -88,8 +88,7 @@ export class dexmagic extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/tree/master/src/program/detect/dexmagic.js";
 	loc     = "local";
-
-	exec = async r =>
+	exec    = async r =>
 	{
 		r.meta.detections = [];
 

@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class otfinfo extends Program
 {
 	website = "http://www.lcdf.org/type/#typetools";
-	gentooPackage = "app-text/lcdf-typetools";
-	gentooUseFlags = "kpathsea";
+	package = "app-text/lcdf-typetools";
 	informational = true;
 }
 */
@@ -17,8 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "http://www.lcdf.org/type/#typetools",
-	gentooPackage  : "app-text/lcdf-typetools",
-	gentooUseFlags : "kpathsea",
+	package  : "app-text/lcdf-typetools",
 	informational  : true
 };
 

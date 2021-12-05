@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class fc_scan extends Program
 {
 	website = "https://fontconfig.org";
-	gentooPackage = "media-libs/fontconfig";
+	package = "media-libs/fontconfig";
 	informational = true;
 }
 */
@@ -16,7 +16,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website        : "https://fontconfig.org",
-	gentooPackage  : "media-libs/fontconfig",
+	package  : "media-libs/fontconfig",
 	informational  : true
 };
 

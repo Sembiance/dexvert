@@ -4,8 +4,7 @@ import {Program} from "../../Program.js";
 export class atr extends Program
 {
 	website = "https://github.com/jhallen/atari-tools";
-	gentooPackage = "app-arch/atari-tools";
-	gentooOverlay = "dexvert";
+	package = "app-arch/atari-tools";
 }
 */
 
@@ -16,8 +15,7 @@ const XU = require("@sembiance/xu");
 exports.meta =
 {
 	website       : "https://github.com/jhallen/atari-tools",
-	gentooPackage : "app-arch/atari-tools",
-	gentooOverlay : "dexvert"
+	package : "app-arch/atari-tools",
 };
 
 exports.bin = () => "atr";

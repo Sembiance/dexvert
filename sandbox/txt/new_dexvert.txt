@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add audio
+* Add audio/soundFont2 support
 
 * Add archive
   First format to do: tar
@@ -36,7 +36,7 @@
 
 * Remove the bottom comments in deark.js
 
-* Get rid of the testdexvert TODO for allowing one day off
+* Get rid of the testdexvert TODO for allowing one day off and prevData.inputMeta check
 
 * Find all remaining TODO comments (lintMyJSCode) and solve as many as I can
 

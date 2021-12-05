@@ -178,14 +178,6 @@ export class image extends Family
 					Object.assign(meta, { width : +r.meta.dimUncropped.split("x")[0], height : +r.meta.dimUncropped.split("x")[1] });
 				await r.unlinkHomeOut();
 			}
-			else
-			{
-				// if none of the above, we assume it's a program
-				const r = await Program.runProgram(metaProvider, inputFile, {xlog});
-				if(r.meta)
-					Object.assign(meta, r.meta);
-				await r.unlinkHomeOut();
-			}
 		}
 
 		return meta;

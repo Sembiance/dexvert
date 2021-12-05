@@ -1,24 +1,9 @@
-/*
 import {Format} from "../../Format.js";
 
 export class prolineVoice extends Format
 {
-	name = "Proline Voice";
-	ext = [".pvd"];
-	magic = ["Proline Voice Data"];
+	name        = "Proline Voice";
+	ext         = [".pvd"];
+	magic       = ["Proline Voice Data"];
 	unsupported = true;
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "Proline Voice",
-	ext         : [".pvd"],
-	magic       : ["Proline Voice Data"],
-	unsupported : true
-};
-
-*/

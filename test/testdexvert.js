@@ -25,7 +25,11 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 const FLEX_SIZE_PROGRAMS =
 {
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
-	darktable_cli : 0.1
+	darktable_cli : 0.1,
+
+	// Can produce slightly different output each time
+	xmp             : 1,
+	soundFont2tomp3 : 1
 };
 
 const FLEX_SIZE_FORMATS =
@@ -134,7 +138,10 @@ async function testSample(sampleFilePath)
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const r = await runUtil.run("dexvert", [...(argv.debug ? ["--logLevel=debug"] : []), "--json", sampleFilePath, tmpOutDirPath]);
+	const dexvertArgs = [...(argv.debug ? ["--logLevel=debug"] : []), "--json", sampleFilePath, tmpOutDirPath];
+	//if(sampleFilePath.includes("psf2"))
+	//	dexvertArgs.clear().push("--logLevel=trace", sampleFilePath, tmpOutDirPath);		// , sampleFilePath.includes("psf2") ? {liveOutput : true} : {}
+	const r = await runUtil.run("dexvert", dexvertArgs);
 	const resultFull = xu.parseJSON(r.stdout);
 
 	function handleComplete()
@@ -215,11 +222,11 @@ async function testSample(sampleFilePath)
 			result.converter = resultFull.phase.converter;
 	}
 	
-	if(testData?.[sampleSubFilePath]?.inputMeta)
-		delete testData[sampleSubFilePath].inputMeta;
-	
 	if(argv.record)
 	{
+		if(testData?.[sampleSubFilePath]?.inputMeta)
+			delete testData[sampleSubFilePath].inputMeta;
+
 		testData[sampleSubFilePath] = result;
 		return await pass("r");
 	}
@@ -303,6 +310,21 @@ async function testSample(sampleFilePath)
 		if(objDiff.length>0)
 			return fail(`Meta different: ${objDiff.squeeze()}`);
 	}
+	else if(prevData.inputMeta)
+	{
+		// TODO Remove once converted all
+		const oldMeta = {};
+		Object.values(prevData.inputMeta).forEach(o => Object.assign(oldMeta, o));
+		if(Object.keys(oldMeta).length>0)
+		{
+			if(Object.keys(result.meta || {}).length===0)
+				return fail(`Expected to find old meta but didn't get any. Old: ${xu.inspect(oldMeta)}`);
+			
+			const objDiff = diffUtil.diff(oldMeta, result.meta);
+			if(objDiff.length>0)
+				return fail(`OLD meta different from new: ${objDiff.squeeze()}`);
+		}
+	}
 	else if(result.meta && Object.keys(result.meta).length>0)
 	{
 		return fail(`Expected no meta but got ${xu.inspect(result.meta).squeeze()} instead`);
@@ -350,7 +372,7 @@ async function writeOutputHTML()
 
 			.audio
 			{
-				width: 45%;
+				width: 47%;
 				display: inline-block;
 				text-align: right;
 				line-height: 1.75em;
@@ -365,7 +387,7 @@ async function writeOutputHTML()
 			.audio audio
 			{
 				height: 1.5em;
-				width : 60%
+				width : 50%
 			}
 
 			blink
@@ -439,5 +461,3 @@ if(oldDataFormats.length>0)
 
 if(argv.report && !argv.record)
 	await writeOutputHTML();
-
-await runUtil.run("stty", ["echo"]);

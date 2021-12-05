@@ -1,0 +1,2 @@
+#!/bin/sh
+DENO_DIR=/mnt/compendium/.deno deno run --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-run --allow-env /mnt/compendium/DevLab/dexvert/bin/musicInfo.js "$@"

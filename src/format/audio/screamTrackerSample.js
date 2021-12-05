@@ -1,27 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class screamTrackerSample extends Format
 {
-	name = "Scream Tracker Sample";
-	ext = [".snd",".s3i",".smp"];
+	name           = "Scream Tracker Sample";
+	ext            = [".snd", ".s3i", ".smp"];
 	forbidExtMatch = true;
-	magic = ["Scream Tracker Sample","Scream Tracker/Digiplayer sample"];
-	converters = ["awaveStudio"]
+	magic          = ["Scream Tracker Sample", "Scream Tracker/Digiplayer sample"];
+	converters     = ["awaveStudio"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Scream Tracker Sample",
-	ext            : [".snd", ".s3i", ".smp"],
-	forbidExtMatch : true,
-	magic          : ["Scream Tracker Sample", "Scream Tracker/Digiplayer sample"]
-};
-
-exports.converterPriority = ["awaveStudio"];
-
-*/

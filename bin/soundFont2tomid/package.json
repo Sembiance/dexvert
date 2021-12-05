@@ -1,0 +1,15 @@
+{
+	"name"         : "soundFont2tomid",
+	"version"      : "0.0.1",
+	"description"  : "enter description here",
+	"author"       : "Robert Schultz <robert@cosmicrealms.com>",
+	"private"      : true,
+	"license"      : "UNLICENSED",
+	"engines"      : { "node" : ">=14" },
+	"dependencies" : {
+		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",
+		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
+		"midi-writer-js"   : "~2.0.1",
+		"tiptoe"           : "file:/mnt/compendium/DevLab/node-modules/tiptoe"
+	}
+}

@@ -65,7 +65,7 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, xlog=xu.xLog()}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, format, xlog=xu.xLog()}={})
 	{
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
@@ -112,6 +112,8 @@ export class Program
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(xlog.atLeast("debug"))
 				r.runOptions.verbose = true;
+			if(xlog.atLeast("trace"))
+				r.runOptions.liveOutput = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
@@ -201,8 +203,18 @@ export class Program
 		if(f.outDir && f.files.new?.length && this.renameOut!==false)
 		{
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
-			const newName = (ro.name===true ? (originalInput?.name || f.input.name) : (ro.name || f.new.name));
-			const restreamerOpts = {newName, suffix, numFiles : f.files.new.length};
+			const getName = o =>
+			{
+				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa
+				// we already set this in DexFile.preName, so if that's set AND we have a format.ext that matches, then use preName over name
+				if(o.preName?.length && (format?.ext || []).some(ext => ext.toLowerCase()===`.${o.name.toLowerCase()}`))
+					return o.preName;
+
+				return o.name;
+			};
+			const newName = (ro.name===true ? getName(originalInput || f.input) : (ro.name || getName(f.new)));
+			const newExt = (ro.ext || f.new.ext);
+			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length};
 
 			// See if we have more advanced renaming
 			if(ro.regex && (f.files.new.length>1 || ro.alwaysRename))
@@ -251,7 +263,7 @@ export class Program
 			}
 			else if(f.files.new.length===1)
 			{
-				const newFilename = newName + suffix + (ro.ext || f.new.ext);
+				const newFilename = newName + suffix + newExt;
 				if(newFilename!==f.new.base)
 				{
 					xlog.warn`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
@@ -321,14 +333,25 @@ export class Program
 						await chainResult.unlinkHomeOut();
 					};
 					
-					const baseChainProgOpts = {isChain : true, xlog};
+					const baseChainProgOpts = {isChain : true, format, xlog};
 					const newFiles = Array.from(f.files.new);
 
 					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
 					// So we set originalInput so it's named properly
 					// Don't do this though if the current program has a custom renamer with alwaysRename set
 					if((newFiles.length===1 && !this.renameOut?.alwaysRename) || progRaw.startsWith("*"))
-						baseChainProgOpts.originalInput = originalInput || f.input;
+					{
+						if(newFiles.length===1 && this.renameOut===false)	// eslint-disable-line unicorn/prefer-ternary
+						{
+							// if only 1 output file and we were instructed to NOT rename anything, then we should TRUST the newFile name and chain that as the original input
+							baseChainProgOpts.originalInput = newFiles[0];
+						}
+						else
+						{
+							// otherwise the originalInput should be set to either our very originalInput file or our current f.input
+							baseChainProgOpts.originalInput = originalInput || f.input;
+						}
+					}
 
 					if(progRaw.startsWith("*"))
 					{
@@ -419,6 +442,12 @@ export class Program
 		xlog.debug`Program ${progRaw} converted to ${debugPart}`;
 		
 		return program.run(f, progOptions);
+	}
+
+	static async hasProgram(programid)
+	{
+		const {programs} = await import("./program/programs.js");
+		return Object.hasOwn(programs, programid);
 	}
 
 	// forms a path to dexvert/bin/{rel}

@@ -136,7 +136,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 				{
 					xlog.debug`Running converter ${prog}...`;
 
-					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, xlog});
+					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog});
 					dexState.ran.push(r);
 
 					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;

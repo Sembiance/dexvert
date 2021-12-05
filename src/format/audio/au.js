@@ -8,5 +8,5 @@ export class au extends Format
 	magic        = ["NeXT/Sun sound", "Sun/NeXT audio data", "NeXT/Sun uLaw/AUdio format"];
 	mimeType     = "audio/basic";
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["ffmpeg[outType:mp3]", "sox"];
 }

@@ -1,5 +1,6 @@
 import {xu, fg} from "xu";
 import {Family} from "./Family.js";
+import {Program} from "./Program.js";
 import {validateClass} from "./validate.js";
 
 export class Format
@@ -22,9 +23,26 @@ export class Format
 	async getMeta(inputFile, xlog)
 	{
 		const meta = {};
+
+		// first if the family has a meta provider, call that
 		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this, xlog)) || {} : {});
+		
+		// next, if the format.metaProvider has a programid, call that
+		for(const metaProvider of (this.metaProvider || []))
+		{
+			if(!(await Program.hasProgram(metaProvider)))
+				continue;
+
+			const r = await Program.runProgram(metaProvider, inputFile, {xlog});
+			if(r.meta)
+				Object.assign(meta, r.meta);
+			await r.unlinkHomeOut();
+		}
+
+		// lastly, if the format itself has a meta function, call that
 		if(this.meta)
 			Object.assign(meta, (await this.meta(inputFile, xlog)) || {});
+
 		return meta;
 	}
 

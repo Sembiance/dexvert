@@ -1,16 +1,33 @@
-# Unsupported File Formats (303)
+# Unsupported File Formats (320)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
 
-## Audio (5)
+## Audio (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
+audio | Aegis Sonix Instrument | .instr | [21 sample files](https://telparia.com/fileFormatSamples/audio/sonixInstrument/) - The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 audio | AM Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/audio/amSound/)
 audio | Art of Noise Instrument | .fm | [5 sample files](https://telparia.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/)
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
+audio | HomeBrew Sound | .hse | [1 sample file](https://telparia.com/fileFormatSamples/audio/homeBrewSound/)
+audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://telparia.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
+audio | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://telparia.com/fileFormatSamples/audio/maxonMagicSoundSample/)
+audio | MED Synth Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/audio/medSynthSound/)
+audio | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://telparia.com/fileFormatSamples/audio/musicStudioSound/)
+audio | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://telparia.com/fileFormatSamples/audio/musiclineInstrument/)
+audio | [Playstation Sound Format](http://fileformats.archiveteam.org/wiki/PSF) | .psf .minipsf | [5 sample files](https://telparia.com/fileFormatSamples/audio/psf/) - sexypsf will play these, but it doesn't seem to have a way to save to disk as a WAV. It's open source, so I could modify it to support this, or seek an alternate converter. Being a more modern format and console only, not highly motivated.
+audio | Proline Voice | .pvd | [8 sample files](https://telparia.com/fileFormatSamples/audio/prolineVoice/)
+audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
+audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
+audio | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://telparia.com/fileFormatSamples/audio/soundBlasterInstrument/)
+audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://telparia.com/fileFormatSamples/audio/soundFont1/) - Awave Studio can technically convert these, but 99.9% of all SBK SoundFond 1 files just contain meta info that points to a samples in ROM, thus there isn't anything really to convert.
+audio | StoneTracker Sample | .sps | [3 sample files](https://telparia.com/fileFormatSamples/audio/stoneTrackerSample/)
+audio | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://telparia.com/fileFormatSamples/audio/stosSample/)
+audio | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://telparia.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
+audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fileFormatSamples/audio/zyxelVoice/)
 
 
 

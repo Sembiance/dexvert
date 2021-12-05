@@ -2,23 +2,18 @@ import {xu} from "xu";
 import {runUtil, fileUtil} from "xutil";
 import {path} from "std";
 
-const OUTDIR_PATH = "/home/sembiance/tmp/out/";
-const HOMEDIR_PATH = "/home/sembiance/tmp/home/";
+const tmpDirPath = await fileUtil.genTempPath();
+await Deno.mkdir(tmpDirPath);
+await Deno.copyFile("/mnt/compendium/DevLab/dexvert/test/sample/music/mod/MAIN2.SPD", path.join(tmpDirPath, "in.mod"));
 
-await fileUtil.unlink(OUTDIR_PATH, {recursive : true});
-await Deno.mkdir(OUTDIR_PATH);
-
-await fileUtil.unlink(HOMEDIR_PATH, {recursive : true});
-await Deno.mkdir(HOMEDIR_PATH);
-
-const runOptions =
+await [].pushSequence(1, 12).parallelMap(async i =>
 {
-	cwd     : path.dirname(OUTDIR_PATH),
-	verbose : true,
-	env     :
-	{
-		HOME : "/mnt/ram/tmp/3008_1image-theDraw/home"
-	}
-};
-const r = await runUtil.run("abydosconvert", ["--png", "--json", "image/x-thedraw", "in.td", OUTDIR_PATH], runOptions);
-console.log({r});
+	const outPath = path.join(tmpDirPath, `out${i}`);
+	await Deno.mkdir(outPath);
+	await runUtil.run("xmp", ["-o", `out${i}/out.wav`, "in.mod"], {liveOutput : true, cwd : tmpDirPath});
+	
+	//const p = Deno.run({cmd : ["xmp", "-o", `out${i}/out.wav`, "in.mod"], cwd : tmpDirPath, stdout : "null", stderr : "null", stdin : "null"});
+	//console.log(`a${i}`);
+	//const r = await p.status();
+	//console.log(`b${i}`, r);
+});

@@ -9,7 +9,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Identifies one or more files",
 	opts    :
 	{
-		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
+		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: warn", defaultValue : "warn"},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true}
 	},

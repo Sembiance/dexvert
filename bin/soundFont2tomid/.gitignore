@@ -1,0 +1,4 @@
+*.code-workspace
+.eslintrc.js
+node_modules/
+pnpm-lock.yaml

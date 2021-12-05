@@ -1,24 +1,9 @@
-/*
 import {Format} from "../../Format.js";
 
 export class stoneTrackerSample extends Format
 {
-	name = "StoneTracker Sample";
-	ext = [".sps"];
-	magic = ["StoneTracker Samples"];
+	name        = "StoneTracker Sample";
+	ext         = [".sps"];
+	magic       = ["StoneTracker Samples"];
 	unsupported = true;
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "StoneTracker Sample",
-	ext         : [".sps"],
-	magic       : ["StoneTracker Samples"],
-	unsupported : true
-};
-
-*/

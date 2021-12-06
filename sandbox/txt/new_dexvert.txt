@@ -1,6 +1,12 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Get music/smus working
+
+* Using this code as example: https://github.com/DeaDBeeF-Player/deadbeef/blob/dcd501175ab06cb8e61003a3a3fb78f0629aca0e/plugins/sc68/sc68/sc68.c
+  I should be able to figure out how to write C code that uses sc68 to create a proper WAV file
+  Then I can add support for music/sndh
+
 * Add music
   Here is where I should strongly consider adding some sort of 'prefix' type match type
   Whether I do that or not, I should also consider supporting renaming of files based on the file.preName instead of file.name

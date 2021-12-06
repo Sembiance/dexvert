@@ -1,29 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class jankoMrsicFlogel extends Format
 {
-	name = "Janko Mrsic-Flogel Module";
-	ext = [".jmf"];
-	magic = ["Janko Mrsic-Flogel module"];
-	converters = ["uade123"]
-
-	metaProvider = [""];
+	name         = "Janko Mrsic-Flogel Module";
+	ext          = [".jmf"];
+	magic        = ["Janko Mrsic-Flogel module"];
+	metaProvider = ["musicInfo"];
+	converters   = ["uade123"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name  : "Janko Mrsic-Flogel Module",
-	ext   : [".jmf"],
-	magic : ["Janko Mrsic-Flogel module"]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["uade123"];
-
-*/

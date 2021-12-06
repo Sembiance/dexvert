@@ -7,5 +7,5 @@ export class mikmod2wav extends Program
 	unsafe  = true;
 	bin     = "mikmod2wav";
 	args    = async r => ["--limitSeconds", "900", r.inFile(), await r.outFile("out.wav")];
-	chain   = "ffmpeg[outType:mp3]";
+	chain   = "sox";
 }

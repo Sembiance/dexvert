@@ -39,21 +39,23 @@ export class Program
 			website        : {type : "string", url : true},
 
 			// execution
-			args           : {type : "function", length : [0, 1]},
-			bin            : {type : "string"},
-			chain          : {types : ["function", "string"]},
-			chainCheck     : {type : "function", length : [0, 3]},
-			cwd            : {type : "function", length : [0, 1]},
-			symlinkInToCWD : {type : "boolean"},
-			diskQuota      : {type : "number", range : [1]},
-			dosData        : {type : "function", length : [0, 1]},
-			exec           : {type : "function", length : [0, 1]},
-			outExt         : {types : ["function", "string"]},
-			post           : {type : "function", length : [0, 1]},
-			postExec       : {type : "function", length : [0, 1]},
-			pre            : {type : "function", length : [0, 1]},
-			qemuData       : {type : "function", length : [0, 1]},
-			verify         : {type : "function", length : [0, 2]}
+			args             : {type : "function", length : [0, 1]},
+			allowDupOut      : {type : "boolean"},
+			bin              : {type : "string"},
+			chain            : {types : ["function", "string"]},
+			chainCheck       : {type : "function", length : [0, 3]},
+			cwd              : {type : "function", length : [0, 1]},
+			diskQuota        : {type : "number", range : [1]},
+			dosData          : {type : "function", length : [0, 1]},
+			exec             : {type : "function", length : [0, 1]},
+			filenameEncoding : {type : "string"},
+			outExt           : {types : ["function", "string"]},
+			post             : {type : "function", length : [0, 1]},
+			postExec         : {type : "function", length : [0, 1]},
+			pre              : {type : "function", length : [0, 1]},
+			qemuData         : {type : "function", length : [0, 1]},
+			symlinkInToCWD   : {type : "boolean"},
+			verify           : {type : "function", length : [0, 2]}
 		});
 
 		if(program.renameOut && Object.isObject(program.renameOut))
@@ -110,8 +112,6 @@ export class Program
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(xlog.atLeast("debug"))
 				r.runOptions.verbose = true;
-			if(xlog.atLeast("trace"))
-				r.runOptions.liveOutput = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
@@ -154,6 +154,9 @@ export class Program
 			// first we have to run fixPerms in order to ensure we can access the new files
 			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute});
 
+			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
+			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", this.filenameEncoding || "windows-1252", "-t", "UTF-8", f.outDir.absolute]);
+
 			// delete empty files/broken symlinks. find is very fast at this, so use that
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
 			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);
@@ -167,7 +170,7 @@ export class Program
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
 
 				// if the new file is identical to our input file, delete it
-				if(await fileUtil.areEqual(newFilePath, f.input.absolute))
+				if(await fileUtil.areEqual(newFilePath, f.input.absolute) && !this.allowDupOut)
 				{
 					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
 					await fileUtil.unlink(newFilePath);

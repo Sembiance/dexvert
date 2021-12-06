@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class masterTracksPro extends Format
 {
-	name = "Master Tracks Pro";
-	ext = [".mts"];
-	magic = ["TraX Music Track"];
+	name        = "Master Tracks Pro";
+	ext         = [".mts"];
+	magic       = ["TraX Music Track"];
 	unsupported = true;
-	notes = "Waiting for registered version of Master Tracks Pro software so I can convert to MIDI";
+	notes       = "So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.";
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "Master Tracks Pro",
-	ext         : [".mts"],
-	magic       : ["TraX Music Track"],
-	unsupported : true,
-	notes       : "Waiting for registered version of Master Tracks Pro software so I can convert to MIDI"
-};
-
-//exports.converterPriority = ["masterTracksPro"];
-
-*/

@@ -1,29 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class ymst extends Format
 {
-	name = "YMST Module";
-	ext = [".ymst"];
-	magic = ["YM2149 song"];
-	converters = [{"program":"uade123","flags":{"uadeType":"YM-2149"}}]
-
-	metaProvider = [""];
+	name         = "YMST Module";
+	ext          = [".ymst", ".ym"];
+	magic        = ["YM2149 song"];
+	metaProvider = ["musicInfo"];
+	converters   = ["uade123[player:YM-2149]"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name  : "YMST Module",
-	ext   : [".ymst"],
-	magic : ["YM2149 song"]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = [{program : "uade123", flags : {uadeType : "YM-2149"}}];
-
-*/

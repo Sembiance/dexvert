@@ -6,5 +6,5 @@ export class vgmstream extends Program
 	package = "media-sound/vgmstream-cli";
 	bin     = "vgmstream-cli";
 	args    = async r => ["-o", await r.outFile("out.wav"), "-i", r.inFile()];
-	chain   = "ffmpeg[outType:mp3]";
+	chain   = "sox";
 }

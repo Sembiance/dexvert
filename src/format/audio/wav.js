@@ -8,5 +8,5 @@ export class wav extends Format
 	mimeType     = "audio/x-wav";
 	magic        = ["RIFF/WAVe standard Audio", /^RIFF.* WAVE audio/, "Waveform Audio (PCMWAVEFORMAT)"];
 	metaProvider = ["soxi"];
-	converters   = ["ffmpeg[outType:mp3]"];
+	converters   = ["sox"];
 }

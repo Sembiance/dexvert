@@ -6,6 +6,7 @@ export class mod extends Format
 	name           = "Protracker Module";
 	website        = "http://fileformats.archiveteam.org/wiki/Amiga_Module";
 	ext            = [".mod", ".ptm", ".pt36"];
+	weakExt        = [".mod"];	// too generic, let mod/soundTracker grab it
 	magic          = [/.*Protracker module/, "Standard 4-channel Amiga module", "ProTracker IFF module"];
 	forbiddenMagic = TEXT_MAGIC;
 	metaProvider   = ["musicInfo"];

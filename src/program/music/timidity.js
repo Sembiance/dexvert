@@ -37,13 +37,5 @@ export class timidity extends Program
 		return ["-c", path.join(r.instrumentDirPath, "timidity.cfg"), "-Ow", "-o", await r.outFile("out.wav"), r.inFile()];
 	};
 
-	chain = "ffmpeg[outType:mp3]";
+	chain = "sox";
 }
-
-
-/*
-exports.post = (state, p, r, cb) => p.util.flow.parallel([
-	() => (INSTRUMENT_NAMES.includes(r.flags.midiFont) ? p.util.flow.noop : p.util.file.unlink(r.instrumentDirPath)),
-	() => p.util.file.move(path.join(state.output.absolute, "outfile.wav"), path.join(state.output.absolute, `${state.input.name}.wav`))
-])(state, p, cb);
-*/

@@ -1,35 +1,18 @@
-/*
 import {Format} from "../../Format.js";
 
 export class pokeyNoise extends Format
 {
-	name = "PokeyNoise Module";
-	ext = [".pn"];
-	magic = ["PokeyNoise chiptune"];
-	safeExt = undefined;
+	name         = "PokeyNoise Module";
+	ext          = [".pn"];
+	magic        = ["PokeyNoise chiptune"];
 	keepFilename = true;
-	filesOptional = undefined;
-	converters = [{"program":"uade123","flags":{"uadeType":"Pokeynoise"}}]
 
-	metaProvider = [""];
+	auxFiles = (input, otherFiles) =>
+	{
+		// Can optionally use a .info file
+		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.base.toLowerCase()}.info`);
+		return otherFile ? [otherFile] : false;
+	};
+	metaProvider = ["musicInfo"];
+	converters   = ["uade123[player:Pokeynoise]"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name          : "PokeyNoise Module",
-	ext           : [".pn"],
-	magic         : ["PokeyNoise chiptune"],
-	safeExt       : state => state.input.ext,
-	keepFilename  : true,
-	filesOptional : (state, otherFiles) => otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.base.toLowerCase()}.info`)
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = [{program : "uade123", flags : {uadeType : "Pokeynoise"}}];
-
-*/

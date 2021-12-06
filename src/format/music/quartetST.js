@@ -1,34 +1,23 @@
-/*
 import {Format} from "../../Format.js";
 
 export class quartetST extends Format
 {
-	name = "Quartet ST Module";
-	ext = [".qts"];
-	safeExt = undefined;
-	keepFilename = true;
-	filesOptional = undefined;
-	unsupported = true;
-	notes = "So this is supported in uade123 but there is no magic to identify the files and sadly the extensions come at the start and I don't have 'prefix' match support yet. Some day.";
+	name          = "Quartet ST Module";
+	ext           = [".qts", ".smp"];
+	matchPreExt   = true;
+	keepFilename  = true;
+	metaProvider  = ["musicInfo"];
+
+	// Both .qts and .smp are required and are often prefix extensions
+	auxFiles = (input, otherFiles) =>
+	{
+		const preExtMatch = this.ext.some(ext => ext.toLowerCase()===input.preExt.toLowerCase());
+		const otherExt = this.ext.find(ext => ext!==(preExtMatch ? input.preExt : input.ext));
+		return otherFiles.filter(file => (preExtMatch ? file.preName.toLowerCase()===input.preName.toLowerCase() : file.name.toLowerCase()===input.name.toLowerCase()) && otherExt===(preExtMatch ? file.preExt : file.ext));
+	};
+
+	// Don't do anything with .smp files
+	untouched = ({f}) => (f.input.ext.toLowerCase() || f.input.preExt.toLowerCase())===".smp";
+
+	converters = ["uade123[player:Quartet_ST]"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name          : "Quartet ST Module",
-	ext           : [".qts"],
-	safeExt       : state => state.input.ext,
-	keepFilename  : true,
-	filesOptional : (state, otherFiles) => otherFiles,	// Needs a corresponding smp file
-	unsupported   : true,
-	notes         : "So this is supported in uade123 but there is no magic to identify the files and sadly the extensions come at the start and I don't have 'prefix' match support yet. Some day."
-};
-
-//exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-//exports.converterPriority = [{program : "uade123", flags : {uadeType : "Quartet_ST"}}];
-
-*/

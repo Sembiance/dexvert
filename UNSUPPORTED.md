@@ -1,4 +1,4 @@
-# Unsupported File Formats (330)
+# Unsupported File Formats (385)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -110,7 +110,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 
 
 
-## Music (10)
+## Music (65)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -123,6 +123,61 @@ music | Atari Digi-Mix Module | .mix | [3 sample files](https://telparia.com/fil
 music | AXS Module | .axs | [2 sample files](https://telparia.com/fileFormatSamples/music/axsModule/)
 music | AY Amadeus Chiptune | .amad | [7 sample files](https://telparia.com/fileFormatSamples/music/ayAMAD/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. zxtune123 doesn't seem to support them either. I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
 music | AY STRC Module | .strc | [1 sample file](https://telparia.com/fileFormatSamples/music/aySTRC/)
+music | Beepola Module | .bbsong | [3 sample files](https://telparia.com/fileFormatSamples/music/beepola/)
+music | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Tracker_module) | .pis | [5 sample files](https://telparia.com/fileFormatSamples/music/beniTracker/)
+music | BeRoTracker Module | .brt | [2 sample files](https://telparia.com/fileFormatSamples/music/beRoTracker/) - A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/
+music | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://telparia.com/fileFormatSamples/music/cba/)
+music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
+music | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
+music | DeLuxe Music Score |  | [2 sample files](https://telparia.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
+music | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://telparia.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
+music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
+music | DreamStation Module | .dss | [3 sample files](https://telparia.com/fileFormatSamples/music/dreamStation/)
+music | [Drum Traker Module](http://fileformats.archiveteam.org/wiki/Drum_Traker_module) | .dtl | [15 sample files](https://telparia.com/fileFormatSamples/music/drumTraker/)
+music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [3 sample files](https://telparia.com/fileFormatSamples/music/dynamicStudio/)
+music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://telparia.com/fileFormatSamples/music/faceTheMusic/)
+music | FamiTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/famiTracker/) - Can maybe support this by running FamiTracker for windows and seeing if it has a converter: http://famitracker.com/
+music | FMTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/fmTracker/)
+music | GoatTracker Module | .sng | [6 sample files](https://telparia.com/fileFormatSamples/music/goatTracker/)
+music | [Graoumf Tracker Module](http://fileformats.archiveteam.org/wiki/Graoumf_Tracker_module) | .gtk .gt2 | [7 sample files](https://telparia.com/fileFormatSamples/music/graoumfTracker/) - Could probably add support with windows Graoumf Tracker: http://graoumftracker2.sourceforge.net/
+music | Ixalance Module | .ixs | [5 sample files](https://telparia.com/fileFormatSamples/music/ixalance/)
+music | JayTrax Module | .jxs | [4 sample files](https://telparia.com/fileFormatSamples/music/jayTrax/)
+music | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://telparia.com/fileFormatSamples/music/buzz/)
+music | Klystrack Module | .kt | [5 sample files](https://telparia.com/fileFormatSamples/music/klystrack/)
+music | Master Tracks Pro | .mts | So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.
+music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
+music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
+music | MusicMaker Module | .mm8 | [5 sample files](https://telparia.com/fileFormatSamples/music/musicMakerModule/)
+music | MVSTracker Module | .mus | [2 sample files](https://telparia.com/fileFormatSamples/music/mvsTracker/)
+music | MVX Module | .mvm | [4 sample files](https://telparia.com/fileFormatSamples/music/mvxModule/)
+music | NerdTracker Module | .ned | [4 sample files](https://telparia.com/fileFormatSamples/music/nerdTracker/)
+music | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://telparia.com/fileFormatSamples/music/noiseTrekker/)
+music | Onyx Music File Module | .omf | [4 sample files](https://telparia.com/fileFormatSamples/music/onyxMusicFile/)
+music | Organya Module | .org | [7 sample files](https://telparia.com/fileFormatSamples/music/organya/)
+music | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://telparia.com/fileFormatSamples/music/gameboyTracker/)
+music | Piston Collage Module | .ptcop | [6 sample files](https://telparia.com/fileFormatSamples/music/pistonCollage/)
+music | PollyTracker Module | .mod | [4 sample files](https://telparia.com/fileFormatSamples/music/pollyTracker/)
+music | Pro Trekkr Module | .ixs | [6 sample files](https://telparia.com/fileFormatSamples/music/proTrekkr/)
+music | Psycle Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/psycle/)
+music | [Quartet 4V Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | [9 sample files](https://telparia.com/fileFormatSamples/music/quartet4V/)
+music | RamTracker Module | .trk | [4 sample files](https://telparia.com/fileFormatSamples/music/ramTracker/)
+music | Renoise Module | .xrns .rns | [8 sample files](https://telparia.com/fileFormatSamples/music/renoise/)
+music | SBStudio Module | .pac | [3 sample files](https://telparia.com/fileFormatSamples/music/sbStudio/)
+music | [sc68 Atari ST Music](http://fileformats.archiveteam.org/wiki/SC68) | .sc68 | [6 sample files](https://telparia.com/fileFormatSamples/music/sc68/)
+music | ShroomPlayer Module | .sho | [5 sample files](https://telparia.com/fileFormatSamples/music/shroomPlayer/)
+music | Skale Tracker Module | .skm | [5 sample files](https://telparia.com/fileFormatSamples/music/skaleTracker/)
+music | [SNDH Module](http://fileformats.archiveteam.org/wiki/SNDH) | .sndh | [7 sample files](https://telparia.com/fileFormatSamples/music/sndh/) - Lots of Atari based converters at the website
+music | Sound Club Module | .sn .sn2 | [9 sample files](https://telparia.com/fileFormatSamples/music/soundClub/)
+music | STarKos Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/starkos/)
+music | StoneTracker Module | .spm | [6 sample files](https://telparia.com/fileFormatSamples/music/stoneTracker/)
+music | SunVox Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/sunVox/)
+music | SVArTracker Module | .svar | [3 sample files](https://telparia.com/fileFormatSamples/music/svarTracker/)
+music | Synder SNG-Player Module | .sng | [5 sample files](https://telparia.com/fileFormatSamples/music/synderSNG/) - An old 3bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/
+music | Synder Tracker Module | .sng | [2 sample files](https://telparia.com/fileFormatSamples/music/synderTrackerModule/)
+music | T'SoundSystem Source Module | .tss | [4 sample files](https://telparia.com/fileFormatSamples/music/tss/)
+music | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://telparia.com/fileFormatSamples/music/t0ast/)
+music | VGM Music Maker Module | .vge | [4 sample files](https://telparia.com/fileFormatSamples/music/vgmMusicMaker/)
+music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFormatSamples/music/vicTracker/)
 
 
 

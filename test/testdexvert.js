@@ -22,14 +22,21 @@ const argv = cmdUtil.cmdInit({
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
+// These are relative dir paths from test/sample/ that are just supporting files that need to be here but should be ignored for testing purposes
+const SUPPORTING_DIR_PATHS =
+[
+	"music/Instruments"
+];
+
 const FLEX_SIZE_PROGRAMS =
 {
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
 	darktable_cli : 0.1,
 
 	// Can produce slightly different output each time
-	xmp             : 1,
-	soundFont2tomp3 : 3
+	soundFont2tomp3 : 3,
+	xmp             : 2,
+	zxtune123       : 2
 };
 
 const FLEX_SIZE_FORMATS =
@@ -68,6 +75,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	// Supporting/AUX files
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
+	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
+	[/music\/tfmx\/smpl\..+$/i, true, true],
 	[/other\/pogNames\/.+\.pog$/i, "image", true],
 	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
@@ -76,7 +85,8 @@ const DISK_FAMILY_FORMAT_MAP =
 const UNPROCESSED_ALLOW_NO_IDS =
 [
 	"image/bbcDisplayRAM",
-	"image/teletext"
+	"image/teletext",
+	"music/richardJoseph"
 ];
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "-dextest");
@@ -92,7 +102,7 @@ const outputFiles = [];
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
-xlog.info`Root testing dir: ${DEXTEST_ROOT_DIR}`;
+xlog.info`Root testing dir: ${fg.deepSkyblue(`file://${DEXTEST_ROOT_DIR}`)}`;
 xlog.info`Rsyncing sample files to RAM...`;
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
@@ -102,6 +112,8 @@ const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH), {});
 
 xlog.info`Finding sample files...`;
 const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
+allSampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).startsWith(v)));
+
 xlog.info`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
 const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
 {
@@ -241,9 +253,12 @@ async function testSample(sampleFilePath)
 	if(prevData.processed!==result.processed)
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
 
+	const allowFamilyMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family)));
+	const allowFormatMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, , mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format)));
+
 	if(!result.processed)
 	{
-		if(!resultFull.ids.some(id => id.family===diskFamily && id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`))
+		if(!resultFull.ids.some(id => id.family===diskFamily && id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
 			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFamily}/${diskFormat}`);
 
 		return await pass(fg.white("."));
@@ -252,10 +267,10 @@ async function testSample(sampleFilePath)
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
 
-	if(result.family && result.family!==diskFamily && !(DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family))))
+	if(result.family && result.family!==diskFamily && !allowFamilyMismatch)
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
 
-	if(result.format && result.format!==diskFormat && !(DISK_FAMILY_FORMAT_MAP.some(([regex, , mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format))))
+	if(result.format && result.format!==diskFormat && !allowFormatMismatch)
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
 
 	if(prevData.files && !result.files)

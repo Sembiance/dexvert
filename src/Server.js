@@ -10,8 +10,7 @@ export class Server
 	static create(xlog)
 	{
 		const server = new this();
-
-		this.xlog = xlog;
+		server.xlog = xlog;
 
 		validateClass(server, {
 			// required

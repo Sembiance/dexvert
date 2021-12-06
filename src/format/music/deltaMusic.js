@@ -1,29 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class deltaMusic extends Format
 {
-	name = "Delta Music";
-	ext = [".dm2",".dm"];
-	magic = ["Delta Music module","Delta Music 2 module"];
-	converters = [{"program":"uade123","flags":{"uadeType":"DeltaMusic1.3"}},{"program":"uade123","flags":{"uadeType":"DeltaMusic2.0"}}]
-
-	metaProvider = [""];
+	name         = "Delta Music";
+	ext          = [".dm2", ".dm"];
+	magic        = ["Delta Music module", "Delta Music 2 module"];
+	metaProvider = ["musicInfo"];
+	converters   = ["uade123[player:DeltaMusic1.3]", "uade123[player:DeltaMusic2.0]"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name  : "Delta Music",
-	ext   : [".dm2", ".dm"],
-	magic : ["Delta Music module", "Delta Music 2 module"]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = [{program : "uade123", flags : {uadeType : "DeltaMusic1.3"}}, {program : "uade123", flags : {uadeType : "DeltaMusic2.0"}}];
-
-*/

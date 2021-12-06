@@ -1,31 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class novoTrade extends Format
 {
-	name = "NovoTrade Packer";
-	website = "http://fileformats.archiveteam.org/wiki/NovoTrade_Packer";
-	ext = [".ntp"];
-	magic = ["NovoTrade Packer module"];
-	converters = ["uade123","xmp"]
-
-	metaProvider = [""];
+	name         = "NovoTrade Packer";
+	website      = "http://fileformats.archiveteam.org/wiki/NovoTrade_Packer";
+	ext          = [".ntp"];
+	magic        = ["NovoTrade Packer module"];
+	metaProvider = ["musicInfo"];
+	converters   = ["uade123", "xmp"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name    : "NovoTrade Packer",
-	website : "http://fileformats.archiveteam.org/wiki/NovoTrade_Packer",
-	ext     : [".ntp"],
-	magic   : ["NovoTrade Packer module"]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["uade123", "xmp"];
-
-*/

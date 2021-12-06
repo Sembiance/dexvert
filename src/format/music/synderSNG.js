@@ -1,26 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class synderSNG extends Format
 {
-	name = "Synder SNG-Player Module";
-	ext = [".sng"];
-	magic = ["Synder SNG-Player module"];
+	name        = "Synder SNG-Player Module";
+	ext         = [".sng"];
+	magic       = ["Synder SNG-Player module"];
 	unsupported = true;
-	notes = "A player for Linux can be found: https://ftp.modland.com/pub/software/players/Linux/";
+	notes       = "An old 3bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/";
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "Synder SNG-Player Module",
-	ext         : [".sng"],
-	magic       : ["Synder SNG-Player module"],
-	unsupported : true,
-	notes       : "A player for Linux can be found: https://ftp.modland.com/pub/software/players/Linux/"
-};
-
-*/

@@ -1,31 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class sap extends Format
 {
-	name = "Slight Atari Player";
-	website = "http://fileformats.archiveteam.org/wiki/Slight_Atari_Player";
-	ext = [".sap"];
-	magic = ["Atari 8-bit SAP audio file","Slight Atari Player music format "];
-	converters = ["asapconv","zxtune123"]
-
-	metaProvider = [""];
+	name         = "Slight Atari Player";
+	website      = "http://fileformats.archiveteam.org/wiki/Slight_Atari_Player";
+	ext          = [".sap"];
+	magic        = ["Atari 8-bit SAP audio file", "Slight Atari Player music format "];	// trailing space intentional
+	metaProvider = ["musicInfo"];
+	converters   = ["asapconv", "zxtune123"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name    : "Slight Atari Player",
-	website : "http://fileformats.archiveteam.org/wiki/Slight_Atari_Player",
-	ext     : [".sap"],
-	magic   : ["Atari 8-bit SAP audio file", "Slight Atari Player music format "]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["asapconv", "zxtune123"];
-
-*/

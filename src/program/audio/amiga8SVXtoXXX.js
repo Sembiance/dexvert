@@ -7,5 +7,5 @@ export class amiga8SVXtoXXX extends Program
 	loc     = "amigappc";
 	bin     = "8SVXtoXXX";
 	args    = r => ["INPUT", r.inFile(), "OUTPUT", "HD:out/out.wav"];
-	chain   = "ffmpeg[outType:mp3]";
+	chain   = "sox";
 }

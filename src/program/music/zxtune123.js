@@ -6,15 +6,15 @@ export class zxtune123 extends Program
 	package   = "media-sound/zxtune";
 	bin       = "zxtune123";
 	args      = r => ["--silent", "--file", r.inFile(), `--wav=filename=${r.outDir()}/[Fullpath].wav`];
-	chain     = "ffmpeg[outType:mp3]";
 	renameOut = {
 		alwaysRename : true,
-		regex        : /_#(?<songNum>\d+)(?<ext>\.wav)$/,
+		regex        : /_(?:(?:#(?<songNum>\d+))|(?:\+(?<name>.+)))(?<ext>\.wav)$/,
 		renamer      :
 		[
 			({suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart(numFiles.toString().length, "0"), suffix, ext],
-			({suffix, newName, newExt}) => [newName, suffix, newExt],
-			({fn}) => [fn]
+			({suffix, newName}, {name, ext}) => (name && name.length>0 ? [newName, " ", name, suffix, ext] : ""),
+			({suffix, newName, newExt}) => [newName, suffix, newExt]
 		]
 	};
+	chain = "sox";
 }

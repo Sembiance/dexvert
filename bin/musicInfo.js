@@ -44,10 +44,24 @@ try { infos.zxtune = parseZXTune(zxtuneRaw); } catch {}
 if(argv.debug)
 	console.log(infos);
 
-const PRIORITY_ORDER = ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune"];
-for(const type of PRIORITY_ORDER)
+// Earlier program entries produce better meta data and are processed in priority order
+for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune"])
 {
 	const subInfo = infos[type];
+
+	// Trim certain properties
+	for(const propName of ["title", "type", "tracker", "author"])
+	{
+		if(subInfo[propName])
+		{
+			if(subInfo[propName].trim().length>0)
+				subInfo[propName] = subInfo[propName].trim();
+			else
+				delete subInfo[propName];
+		}
+	}
+
+	// now assign our properties to musicInfo
 	["title", "type", "tracker", "patternCount", "sampleCount", "trackCount", "instruments", "author"].forEach(propName =>
 	{
 		if(Object.hasOwn(musicInfo, propName))
@@ -56,6 +70,14 @@ for(const type of PRIORITY_ORDER)
 		if(subInfo[propName])
 			musicInfo[propName] = subInfo[propName];
 	});
+}
+
+// These two programs produce the best title (UTF8 characters properly rendered, see s3m/FISTROPI.S3M) So override title if we have these
+for(const type of ["zxtune", "openMPT"])	// in reverse priority since it clobbers previous
+{
+	const subInfo = infos[type];
+	if(subInfo.title)
+		musicInfo.title = subInfo.title;
 }
 
 if(!noMusicWAV)
@@ -204,7 +226,7 @@ function parseMikmod(infoRaw="")
 
 		if(instrumentSection)
 		{
-			if(line.trim().length>0)
+			if(line.trim().length>0 && line.trim()!=="(null)")
 				info.instruments.push(line);
 			return;
 		}

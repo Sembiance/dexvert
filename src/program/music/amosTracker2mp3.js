@@ -20,7 +20,7 @@ export class amosTracker2mp3 extends Program
 
 		// Now that we have an intermediate mod file, get our meta info from that
 		const musicInfoR = await Program.runProgram("musicInfo", outFilePath, {xlog : r.xlog});
-		r.meta = musicInfoR.meta;
+		Object.assign(r.meta, musicInfoR.meta);
 		await musicInfoR.unlinkHomeOut();
 	};
 	renameOut = false;

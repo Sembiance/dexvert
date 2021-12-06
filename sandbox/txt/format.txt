@@ -32,6 +32,9 @@ If an array, then none of the given extensions will be matched
 >>> weakExt = true   ||   weakExt = [".drk"]
 Either all extensions (if set to true) or specified extensions are weak and the file should not match if the magic is also weak.
 
+>>> matchPreExt = true
+Set to true to also match any 'pre' extension such as mod.africa
+
 
 >>> ******** Filename
 >>> filename = ["FILEID.BIZ", /^filename$/i]

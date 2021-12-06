@@ -85,6 +85,7 @@ export class Format
 			ext            : {type : ["string"]},
 			forbidExtMatch : {types : ["boolean", Array]},
 			forbiddenExt   : {type : ["string"]},
+			matchPreExt    : {type : "boolean"},
 			weakExt        : {types : ["boolean", Array]},
 
 			// identification - filename

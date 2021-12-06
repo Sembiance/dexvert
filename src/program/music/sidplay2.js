@@ -1,41 +1,30 @@
-/*
 import {Program} from "../../Program.js";
 
 export class sidplay2 extends Program
 {
 	website = "http://sidplay2.sourceforge.net/";
 	package = "media-sound/sidplay";
-	flags = {"sidSubTune":"Specify which sub tune to convert, zero based. Default: 1","sidSongLength":"Duration of time to play the SID song. Default: Let sidplay2 decide"};
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "http://sidplay2.sourceforge.net/",
-	package : "media-sound/sidplay",
-	flags         :
+	flags   = {
+		subSong    : "Specify which sub song to convert, zero based. Default: 1",
+		songLength : "Duration of time to play the SID song. Default: Let sidplay2 decide"
+	};
+	bin = "sidplay2";
+	args = async r =>
 	{
-		sidSubTune    : "Specify which sub tune to convert, zero based. Default: 1",
-		sidSongLength : "Duration of time to play the SID song. Default: Let sidplay2 decide"
-	}
-};
+		const a = [`-w${await r.outFile(`outfile_${(r.flags.subSong || 1)}.wav`)}`, `-o${r.flags.subSong || 1}`];
+		if(r.flags.songLength)
+			a.push(`-t${r.flags.songLength}`);
+		a.push(r.inFile());
 
-exports.bin = () => "sidplay2";
-exports.args = (state, p, r, inPath=state.input.filePath) =>
-{
-	r.sidPaddedSubTune = `${(r.flags.sidSubTune || 1)}`.padStart(3, "0");
-	const sidplayArgs = [`-w${path.join(state.output.dirPath, `outfile_${r.sidPaddedSubTune}.wav`)}`, `-o${r.flags.sidSubTune || 1}`];
-	if(r.flags.sidSongLength)
-		sidplayArgs.push(`-t${r.flags.sidSongLength}`);
-	sidplayArgs.push(inPath);
-
-	return sidplayArgs;
-};
-
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, `outfile_${r.sidPaddedSubTune}.wav`), path.join(state.output.absolute, `${state.input.name}_${r.sidPaddedSubTune}.wav`))(state, p, cb);
-*/
+		return a;
+	};
+	renameOut = {
+		alwaysRename : true,
+		regex        : /outfile_(?<songNum>\d+)(?<ext>\.wav)$/,
+		renamer      :
+		[
+			({suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart(numFiles.toString().length, "0"), suffix, ext]
+		]
+	};
+	chain = "sox";
+}

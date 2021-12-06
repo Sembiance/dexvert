@@ -31,16 +31,3 @@ export class convert extends Program
 			r.unsafe = true;
 	};
 }
-
-/*
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, `outfile${r.flags.convertExt || ".png"}`)) =>
-{
-	const convertArgs = [inPath, "-strip", "-define", "png:exclude-chunks=time"];
-	if(r.flags.flip)
-		convertArgs.push("-flip");
-	if(r.flags.removeAlpha)
-		convertArgs.push("-alpha", "off");
-	convertArgs.push(outPath);
-	return convertArgs;
-};
-*/

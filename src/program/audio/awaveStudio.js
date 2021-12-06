@@ -37,16 +37,15 @@ export class awaveStudio extends Program
 			
 			WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})`
 	});
-	chain = "ffmpeg[outType:mp3]";
+	chain = "sox";
 	renameOut      = {
 		alwaysRename : true,
 		regex        : /in - (?:(?:in (?<num>\d+))|(?<name>.+))(?<ext>\.wav)$/,		// either in - NAME.wav  or  in - in - 33.wav
 		renamer      :
 		[
 			({suffix, newName}, {num, ext}) => [newName, " ", num, suffix, ext],
-			({suffix}, {name, ext}) => (name.length>0 ? [name, suffix, ext] : []),
-			({suffix, newName, newExt}) => [newName, suffix, newExt],
-			({fn}) => [fn]
+			({suffix}, {name, ext}) => (name && name.length>0 ? [name, suffix, ext] : []),
+			({suffix, newName, newExt}) => [newName, suffix, newExt]
 		]
 	};
 }

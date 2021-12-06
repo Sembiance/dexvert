@@ -1,24 +1,9 @@
-/*
 import {Format} from "../../Format.js";
 
 export class synderTrackerModule extends Format
 {
-	name = "Synder Tracker Module";
-	ext = [".sng"];
-	magic = ["Synder Tracker module"];
+	name        = "Synder Tracker Module";
+	ext         = [".sng"];
+	magic       = ["Synder Tracker module"];
 	unsupported = true;
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "Synder Tracker Module",
-	ext         : [".sng"],
-	magic       : ["Synder Tracker module"],
-	unsupported : true
-};
-
-*/

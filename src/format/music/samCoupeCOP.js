@@ -1,29 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class samCoupeCOP extends Format
 {
-	name = "Sam Coupe COP Module";
-	ext = [".cop"];
-	notes = "Not all files converted such as shanhai.cop";
-	converters = ["zxtune123"]
-
-	metaProvider = [""];
+	name         = "Sam Coupe COP Module";
+	ext          = [".cop"];
+	notes        = "Not all files converted such as shanhai.cop";
+	metaProvider = ["musicInfo"];
+	converters   = ["zxtune123"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name : "Sam Coupe COP Module",
-	ext  : [".cop"],
-	notes : "Not all files converted such as shanhai.cop"
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["zxtune123"];
-
-*/

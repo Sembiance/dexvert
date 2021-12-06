@@ -1,29 +1,12 @@
-/*
 import {Format} from "../../Format.js";
 
 export class octalyser extends Format
 {
-	name = "Octalyser Module";
-	ext = [".mod"];
-	magic = [{}];
-	converters = ["xmp","zxtune123","openmpt123"]
-
-	metaProvider = [""];
+	name           = "Octalyser Module";
+	ext            = [".mod"];
+	weakExt        = [".mod"];	// too generic, let mod/soundTracker grab it
+	magic          = [/^Octalyser \d-channel STe\/Falcon Module$/];
+	metaProvider   = ["musicInfo"];
+	converters     = ["xmp", "zxtune123", "openmpt123"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
 
-exports.meta =
-{
-	name    : "Octalyser Module",
-	ext     : [".mod"],
-	magic   : [/^Octalyser \d-channel STe\/Falcon Module$/]
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["xmp", "zxtune123", "openmpt123"];
-
-*/

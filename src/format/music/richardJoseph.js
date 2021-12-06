@@ -1,44 +1,20 @@
-/*
 import {Format} from "../../Format.js";
 
 export class richardJoseph extends Format
 {
-	name = "Richard Joseph Module/Instrument";
-	website = "http://fileformats.archiveteam.org/wiki/Richard_Joseph";
-	ext = [".sng",".ins"];
+	name           = "Richard Joseph Module/Instrument";
+	website        = "http://fileformats.archiveteam.org/wiki/Richard_Joseph";
+	ext            = [".sng", ".ins"];
 	forbidExtMatch = true;
-	magic = ["RJP / Vectordean module","RJP / Vectordean instrument"];
-	safeExt = undefined;
-	keepFilename = true;
-	filesRequired = undefined;
-	converters = ["uade123"]
+	magic          = ["RJP / Vectordean module", "RJP / Vectordean instrument"];
+	keepFilename   = true;
+	metaProvider   = ["musicInfo"];
 
-preSteps = [null];
-
-	metaProvider = [""];
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Richard Joseph Module/Instrument",
-	website        : "http://fileformats.archiveteam.org/wiki/Richard_Joseph",
-	ext            : [".sng", ".ins"],
-	forbidExtMatch : true,
-	magic          : ["RJP / Vectordean module", "RJP / Vectordean instrument"],
-	safeExt        : state => state.input.ext,
-	keepFilename   : true,
 	// Both .sng and .ins are required
-	filesRequired : (state, otherFiles) => otherFiles.filter(otherFile => otherFile.toLowerCase()===(state.input.name.toLowerCase() + exports.meta.ext.find(ext => ext!==state.input.ext.toLowerCase())))
-};
+	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
 
-exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".ins"; }];
+	// Don't do anything with .ins files
+	untouched = ({f}) => f.input.ext.toLowerCase()===".ins";
 
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-exports.converterPriority = ["uade123"];
-
-*/
+	converters = ["uade123"];
+}

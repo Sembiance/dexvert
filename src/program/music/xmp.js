@@ -9,5 +9,5 @@ export class xmp extends Program
 	
 	// xmp often fails to produce a valid wav but does produce a 44 byte wav file of nothing
 	verify = (r, dexFile) => dexFile.size!==44;
-	chain  = "ffmpeg[outType:mp3]";
+	chain  = "sox";
 }

@@ -150,8 +150,8 @@ async function testSample(sampleFilePath)
 		if(duration>=SLOW_DURATION)
 			slowFiles.push(sampleSubFilePath);
 
-		// If we have more than 100 files we are testing, show progress every 10%
-		if(sampleFilePaths.length>100)
+		// If we have more than 60 files we are testing, show progress every 10%
+		if(sampleFilePaths.length>60)
 		{
 			completed++;
 			const newMark = Math.floor((completed/sampleFilePaths.length)*10);

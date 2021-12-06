@@ -75,6 +75,16 @@ export class DexFile
 		this.calcProps();
 	}
 
+	// moves a file up 1 or more directories
+	async moveUp(levels=1)
+	{
+		this.dir = path.resolve(this.dir, ...Array(levels).fill(".."));
+		const newAbsolute = path.join(this.dir, this.base);
+		this.rel = path.relative(this.root, newAbsolute);
+		await Deno.rename(this.absolute, newAbsolute);
+		this.absolute = newAbsolute;
+	}
+
 	// creates a copy of this
 	clone()
 	{

@@ -1,4 +1,4 @@
-# Supported File Formats (561)
+# Supported File Formats (567)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -530,7 +530,7 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (9)
+## Music (15)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/amComposer/)
@@ -539,6 +539,12 @@ music | Actionamics Sound Tool Module | .ast | [uade123](http://zakalwe.fi/uade)
 music | [Advanced Module Format Module](http://fileformats.archiveteam.org/wiki/Dual_Module_Player_DSMI) | .amf | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [7 sample files](https://telparia.com/fileFormatSamples/music/advancedModuleFormat/)
 music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
 music | [AMOS Tracker Bank](https://www.exotica.org.uk/wiki/AMOS_file_formats#Regular_memory_bank_format) | .abk | [amosTracker2mp3](https://github.com/Sembiance/dexvert/src/program/music/amosTracker2mp3.js) | [12 sample files](https://telparia.com/fileFormatSamples/music/amosTracker/)
+music | Anders 0land Module | .hot | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/anders0land/)
+music | [Art & Magic Module](http://fileformats.archiveteam.org/wiki/Art_%26_Magic) | .aam | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/artAndMagic/)
+music | [Art of Noise Module](http://fileformats.archiveteam.org/wiki/Art_of_Noise_module) | .aon | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/artOfNoise/)
+music | Asylum Module | .amf | [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [2 sample files](https://telparia.com/fileFormatSamples/music/asylum/)
+music | [Audio Sculpture Module](http://fileformats.archiveteam.org/wiki/Audio_Sculpture) | .adsc .as | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/audioSculpture/)
+music | AY Amadeus Chiptune | .ay .emul | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://telparia.com/fileFormatSamples/music/ay/)
 music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | [timidity](http://timidity.sourceforge.net/) | [11 sample files](https://telparia.com/fileFormatSamples/music/mid/) - Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows
 music | [NES Sound File](http://fileformats.archiveteam.org/wiki/NSF) | .nsf | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/nsf/)
 music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [mikmod2wav](https://github.com/Sembiance/mikmod2wav) [zxtune123](https://zxtune.bitbucket.io/) | [15 sample files](https://telparia.com/fileFormatSamples/music/mod/)

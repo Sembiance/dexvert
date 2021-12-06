@@ -26,7 +26,12 @@ export class ffprobe extends Program
 				const key = tag.key.trim().replaceAll("_", " ").toCamelCase();
 				if(["size", "probeScore", "filename"].includes(key))
 					return;
-				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? (+tag.value.trim()) : tag.value.trim();
+				
+				const value = tag.value.trim();
+				if(value==="N/A")
+					return;
+
+				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? +value : value;
 			}
 		});
 	};

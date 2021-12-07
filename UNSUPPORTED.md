@@ -1,4 +1,4 @@
-# Unsupported File Formats (385)
+# Unsupported File Formats (383)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -110,7 +110,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 
 
 
-## Music (65)
+## Music (63)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -163,13 +163,11 @@ music | [Quartet 4V Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | 
 music | RamTracker Module | .trk | [4 sample files](https://telparia.com/fileFormatSamples/music/ramTracker/)
 music | Renoise Module | .xrns .rns | [8 sample files](https://telparia.com/fileFormatSamples/music/renoise/)
 music | SBStudio Module | .pac | [3 sample files](https://telparia.com/fileFormatSamples/music/sbStudio/)
-music | [sc68 Atari ST Music](http://fileformats.archiveteam.org/wiki/SC68) | .sc68 | [6 sample files](https://telparia.com/fileFormatSamples/music/sc68/)
 music | ShroomPlayer Module | .sho | [5 sample files](https://telparia.com/fileFormatSamples/music/shroomPlayer/)
 music | Skale Tracker Module | .skm | [5 sample files](https://telparia.com/fileFormatSamples/music/skaleTracker/)
-music | [SNDH Module](http://fileformats.archiveteam.org/wiki/SNDH) | .sndh | [7 sample files](https://telparia.com/fileFormatSamples/music/sndh/) - Lots of Atari based converters at the website
 music | Sound Club Module | .sn .sn2 | [9 sample files](https://telparia.com/fileFormatSamples/music/soundClub/)
 music | STarKos Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/starkos/)
-music | StoneTracker Module | .spm | [6 sample files](https://telparia.com/fileFormatSamples/music/stoneTracker/)
+music | StoneTracker Module | .spm .sps | [6 sample files](https://telparia.com/fileFormatSamples/music/stoneTracker/)
 music | SunVox Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/sunVox/)
 music | SVArTracker Module | .svar | [3 sample files](https://telparia.com/fileFormatSamples/music/svarTracker/)
 music | Synder SNG-Player Module | .sng | [5 sample files](https://telparia.com/fileFormatSamples/music/synderSNG/) - An old 3bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/

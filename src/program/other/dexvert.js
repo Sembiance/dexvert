@@ -8,8 +8,7 @@ export class dexvert extends Program
 		asFormat : "Which format to convert as"
 	};
 
-	unsafe     = true;
-	bin        = "/mnt/compendium/.deno/bin/dexvert";
-	args       = r => [...(r.flags.asFormat ? [`--asFormat=${r.flags.asFormat}`] : []), `--logLevel=${r.xlog.atLeast("debug") ? r.xlog.level : "none"}`, r.inFile(), r.outDir()];
-	runOptions = ({liveOutput : true});
+	unsafe = true;
+	bin    = "/mnt/compendium/.deno/bin/dexvert";
+	args   = r => [...(r.flags.asFormat ? [`--asFormat=${r.flags.asFormat}`] : []), `--logLevel=${r.xlog.level}`, r.inFile(), r.outDir()];
 }

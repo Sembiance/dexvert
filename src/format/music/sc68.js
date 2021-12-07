@@ -6,5 +6,6 @@ export class sc68 extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/SC68";
 	ext         = [".sc68"];
 	magic       = ["sc68 Atari ST music", "sc68 soundchip music"];
-	unsupported = true;
+	converters = ["sndh2raw"];
+	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="sndh2raw").meta);
 }

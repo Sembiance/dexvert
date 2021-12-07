@@ -34,7 +34,8 @@ const FLEX_SIZE_PROGRAMS =
 	darktable_cli : 0.1,
 
 	// Can produce slightly different output each time
-	soundFont2tomp3 : 3,
+	doomMUS2mp3     : 2,
+	soundFont2tomp3 : 10,
 	xmp             : 2,
 	zxtune123       : 2
 };
@@ -55,6 +56,11 @@ const FLEX_SIZE_FORMATS =
 		fractalImageFormat : 7,
 		naplps             : 20,
 		threeDCK           : 10
+	},
+	music :
+	{
+		// sidplay generates different wavs each time, it
+		sid : 15
 	}
 };
 
@@ -89,7 +95,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/richardJoseph"
 ];
 
-const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "-dextest");
+const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*3;
 const slowFiles = [];
@@ -150,9 +156,8 @@ async function testSample(sampleFilePath)
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const dexvertArgs = [...(argv.debug ? ["--logLevel=debug"] : []), "--json", sampleFilePath, tmpOutDirPath];
-	//if(sampleFilePath.includes("psf2"))
-	//	dexvertArgs.clear().push("--logLevel=trace", sampleFilePath, tmpOutDirPath);		// , sampleFilePath.includes("psf2") ? {liveOutput : true} : {}
+	const logFilePath = await fileUtil.genTempPath(undefined, "testdexvert_log.txt");
+	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json", sampleFilePath, tmpOutDirPath];
 	const r = await runUtil.run("dexvert", dexvertArgs);
 	const resultFull = xu.parseJSON(r.stdout, {});
 
@@ -178,7 +183,7 @@ async function testSample(sampleFilePath)
 	{
 		failCount++;
 
-		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}`);
+		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg} ${fg.deepSkyblue(`file://${logFilePath}`)}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
@@ -191,6 +196,7 @@ async function testSample(sampleFilePath)
 	async function pass(c)
 	{
 		xu.stdoutWrite(c);
+		await fileUtil.unlink(logFilePath);
 
 		if(argv.report && !argv.record)
 			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);

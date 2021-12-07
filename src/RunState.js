@@ -69,7 +69,7 @@ export class RunState
 	// Removes from disk the outDir and homeDir of this RunState, used to cleanup temporary excess files from temporary program runs
 	async unlinkHomeOut()
 	{
-		if(!this.xlog.atLeast("debug"))
+		if(!this.xlog.atLeast("trace"))
 		{
 			await fileUtil.unlink(this.f.outDir.absolute, {recursive : true});
 			await fileUtil.unlink(this.f.homeDir.absolute, {recursive : true});

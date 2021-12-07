@@ -39,7 +39,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 	else
 	{
 		xlog.info`Getting identifications for ${inputFile.pretty()}`;
-		ids.push(...(await identify(inputFile, {logLevel : "error"})).filter(id => id.from==="dexvert"));
+		ids.push(...(await identify(inputFile, {xlog : xlog.clone("error")})).filter(id => id.from==="dexvert"));
 	}
 
 	if(ids.length>0)
@@ -55,7 +55,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 		xlog.info`\nAttempting to process identification: ${id.pretty()}`;
 
 		// create a temporary ram cwd where all programs will run at (by default)
-		const cwd = await fileUtil.genTempPath(undefined, `${id.family}-${id.formatid}`);
+		const cwd = await fileUtil.genTempPath(undefined, `${id.family}_${id.formatid}`);
 		await Deno.mkdir(cwd, {recursive : true});
 
 		// create a temporary fileSet with the original input file and aux files so we can rsync to our cwd
@@ -103,8 +103,8 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 
 		const cleanup = async () =>
 		{
-			if(xlog.atLeast("debug"))
-				xlog.debug`${fg.red("NOT")} deleting cwd ${cwd} due to logLevel`;
+			if(xlog.atLeast("trace"))
+				xlog.debug`${fg.red("NOT")} deleting cwd ${cwd}`;
 			else
 				await fileUtil.unlink(cwd, {recursive : true});
 		};
@@ -144,10 +144,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 					// verify output files
 					await (dexState.f.files.new || []).parallelMap(async newFile =>
 					{
-						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {logLevel : "error"}));
+						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {xlog : xlog.clone("error")}));
 						if(!isValid)
 						{
-							if(!xlog.atLeast("debug"))
+							if(!xlog.atLeast("trace"))
 							{
 								xlog.warn`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
 								await fileUtil.unlink(newFile.absolute);

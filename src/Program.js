@@ -110,8 +110,6 @@ export class Program
 			r.runOptions = {cwd : r.cwd, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
-			if(xlog.atLeast("debug"))
-				r.runOptions.verbose = true;
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
@@ -330,9 +328,10 @@ export class Program
 					{
 						if(!chainResult.f.new)
 						{
-							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files${!xlog.atLeast("debug") ? `, deleting ${inputFiles.length} chain input files!` : ""}`;
-							if(!xlog.atLeast("debug"))
+							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
+							if(!xlog.atLeast("trace"))
 							{
+								xlog.info`Deleting ${inputFiles.length} chain input files!`;
 								for(const inputFile of inputFiles)
 									await f.remove("new", inputFile, {unlink : true});
 							}

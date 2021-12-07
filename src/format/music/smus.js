@@ -33,26 +33,7 @@ export class smus extends Format
 		}, 1);
 	};
 	converters = ["uade123", "smus2midi", "smusmidi"];
-	verify // TODO needs to check the duration, which should be set from music family? see how I pass verification meta from image family
+
+	// Ensure the result is at least 1 second long, otherwise it likely didn't work and it should move to the next converter
+	verify = ({meta}) => meta.duration>=1;
 }
-
-/*
-
-
-exports.converterPriority =
-[
-	{program : "uade123", argsd : state => (["./in.smus", path.join(state.output.absolute, "outfile.wav")]), runOptions : state => ({cwd : state.smusWorkDir}) },
-	["smus2midi", {program : "dexvert", flags : {asFormat : "music/mid", deleteInput : true}, argsd : state => ([path.join(state.output.absolute, `${state.input.name}.mid`), state.output.absolute])}],
-	["smusmidi", {program : "dexvert", flags : {asFormat : "music/mid", deleteInput : true}, argsd : state => ([path.join(state.output.absolute, `${state.input.name}.mid`), state.output.absolute])}]
-];
-
-exports.postSteps = [
-	(state, p) =>
-	{
-		const smusWorkDir = state.smusWorkDir;
-		delete state.smusWorkDir;
-		return p.util.file.unlink(smusWorkDir);
-	}
-];
-
-*/

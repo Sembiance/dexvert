@@ -9,6 +9,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		logLevel      : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"},
+		logFile       : {desc : "Instead of outputing to stdout, log to a file", hasValue : true},
 		asFormat      : {desc : "Convert the format as [family/formatid]. Don't identify the file", hasValue : true},
 		json          : {desc : "If set, will output results as JSON"},
 		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
@@ -21,14 +22,11 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-const xlog = xu.xLog(argv.json ? "none" : argv.logLevel);
+const xlog = xu.xLog(argv.json && !argv.logFile ? "none" : argv.logLevel);
 
-const debugLog = [];
-if(argv.logLevel==="debug")
-{
-	xlog.level = "debug";
-	xlog.logger = v => debugLog.push(v);
-}
+const logLines = [];
+if(argv.logFile)
+	xlog.logger = v => logLines.push(v);
 
 const dexvertOptions = {xlog};
 ["asFormat"].forEach(k =>
@@ -37,16 +35,21 @@ const dexvertOptions = {xlog};
 		dexvertOptions[k] = argv[k];
 });
 
+async function handleExit(ignored)
+{
+	if(argv.logFile)
+		await Deno.writeTextFile(argv.logFile, `${logLines.join("\n")}\n`);
+	
+	Deno.exit(0);
+}
+
 async function handleDexState(dexState, lastTry)
 {
 	if(!dexState)
 	{
 		// if no dex state and our last try, just exit
 		if(lastTry)
-		{
-			xlog.warn`No processed result.`;
-			Deno.exit(0);
-		}
+			await handleExit(xlog.warn`No processed result.`);
 
 		return false;
 	}
@@ -61,19 +64,20 @@ async function handleDexState(dexState, lastTry)
 
 		if(argv.json)
 			console.log(JSON.stringify(dexState.serialize()));
-		else if(xlog.atLeast("fatal"))
-			console.log(`${dexState.pretty()}`);
+		
+		if(xlog.atLeast("fatal"))
+		{
+			if(argv.logFile)
+				xlog.warn`${dexState.pretty()}`;
+			else if(!argv.json)
+				console.log(`${dexState.pretty()}`);
+		}
 		
 		// if we are not processed, then by default this is our lastTry so output that we have no result
 		if(!dexState.processed)
-		{
 			xlog.warn`No processed result.`;
 
-			if(argv.logLevel==="debug")
-				console.log(`Processing failed: ${debugLog.join("\n")}`);
-		}
-
-		Deno.exit(0);
+		await handleExit();
 	}
 
 	// otherwise we were not processed and it's not our last try, so return false and it will try a transform
@@ -83,10 +87,7 @@ async function handleDexState(dexState, lastTry)
 await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions), true);	// TODO remove the last true here and put on the last transform once those are added back
 
 if(argv.dontTransform)
-{
-	xlog.warn`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`;
-	Deno.exit(0);
-}
+	await handleExit(xlog.warn`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`);
 
 // TODO do the two transforms now BELOW
 // TRANSFORMED --- ROB DENO NOTE!

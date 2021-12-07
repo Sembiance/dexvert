@@ -65,7 +65,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 
 	await Deno.writeTextFile(configFilePath, bootExecLines.join("\n"), {append : true});
 
-	const runOptions = {liveOutput : xlog.atLeast("debug"), timeout};
+	const runOptions = {timeout};
 	runOptions.env = xlog.atLeast("trace") ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
 
 	if(keys)
@@ -124,7 +124,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	xlog.info`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
 	xlog.trace`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
 	const r = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
-
+	xlog.debug`${r}`;
 	if(video || screenshot)
 	{
 		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti().at(-1);

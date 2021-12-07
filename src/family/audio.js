@@ -44,6 +44,12 @@ export async function verifyAudio(dexState, dexFile, identifications)
 		}
 	}
 
+	if(dexState.phase?.format?.verify && !dexState.phase.format.verify({dexState, dexFile, identifications, meta : ffprobeR.meta}))
+	{
+		xlog.info`Audio failed format.verify() call`;
+		return false;
+	}
+
 	return true;
 }
 

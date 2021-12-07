@@ -1,4 +1,4 @@
-# Supported File Formats (703)
+# Supported File Formats (705)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -530,7 +530,7 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (151)
+## Music (153)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/amComposer/)
@@ -640,6 +640,7 @@ music | Ron Klaren Module | .rk | [uade123](http://zakalwe.fi/uade) | [3 sample 
 music | Sam Coupe COP Module | .cop | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/samCoupeCOP/) - Not all files converted such as shanhai.cop
 music | Sam Coupe SNG Module | .sng | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/samCoupeSNG/) - Not all files converted, such as tetris.sng and shanhai.sng
 music | [Saturn Sound Format](http://fileformats.archiveteam.org/wiki/SSF) | .ssf .minissf .ssflib | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/ssf/) - Minissf files don't convert, not sure why yet.
+music | [sc68 Atari ST Music](http://fileformats.archiveteam.org/wiki/SC68) | .sc68 | [sndh2raw](https://github.com/Sembiance/sndh2raw) | [7 sample files](https://telparia.com/fileFormatSamples/music/sc68/)
 music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/S3M) | .s3m .stm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [17 sample files](https://telparia.com/fileFormatSamples/music/s3m/)
 music | SCUMM Music Module | .scumm | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://telparia.com/fileFormatSamples/music/scummMusic/)
 music | [Sean Connolly Module](http://fileformats.archiveteam.org/wiki/Sean_Connolly) | .scn | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/seanConnolly/)
@@ -647,8 +648,9 @@ music | [Sean Conran Module](http://fileformats.archiveteam.org/wiki/Sean_Conran
 music | [SidMon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid2 | [uade123](http://zakalwe.fi/uade) | [7 sample files](https://telparia.com/fileFormatSamples/music/sidMon2/)
 music | [SidMon Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/sidMon/)
 music | Silmarils Module | .mok | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/silmarils/)
-music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [uade123](http://zakalwe.fi/uade) smus2midi smusmidi | [10 sample files](https://telparia.com/fileFormatSamples/music/smus/) - The 'SMUS' format was used by many different programs including Sonix and Deluxe Music. This first tries to convert SONIX SMUS with instrument support using uade123. That cna fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples. SMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus) SMUSMIDI is pretty good, but it crashes on many files, requiring a full timeout wait of the rexx script.
+music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [uade123](http://zakalwe.fi/uade) [smus2midi](https://github.com/AugusteBonnin/smus2midi) [smusmidi](https://aminet.net/package/mus/midi/SMUSMIDI.lha) | [10 sample files](https://telparia.com/fileFormatSamples/music/smus/) - The 'SMUS' format was used by many different programs including Sonix and Deluxe Music. This first tries to convert SONIX SMUS with instrument support using uade123. That cna fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples. SMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus) SMUSMIDI is pretty good, but it crashes on many files, requiring a full timeout wait of the rexx script.
 music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Atari_Player) | .sap | [asapconv](http://asap.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/sap/)
+music | [SNDH Module](http://fileformats.archiveteam.org/wiki/SNDH) | .sndh | [sndh2raw](https://github.com/Sembiance/sndh2raw) | [7 sample files](https://telparia.com/fileFormatSamples/music/sndh/)
 music | Sonic Arrange Module | .sa | [uade123](http://zakalwe.fi/uade) | [10 sample files](https://telparia.com/fileFormatSamples/music/sonicArranger/)
 music | Sound Control Module | .sc | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/soundControl/)
 music | Sound Images Module | .tw | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/soundImages/)

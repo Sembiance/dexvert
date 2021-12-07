@@ -93,6 +93,13 @@ export class DexFile
 		return dexFile;
 	}
 
+	// sets the timestamp for this file
+	async setTS(newTS)
+	{
+		this.ts = newTS;
+		await Deno.utime(this.absolute, Math.floor(this.ts/xu.SECOND), Math.floor(this.ts/xu.SECOND));
+	}
+
 	// converts this to a serilizable object
 	serialize()
 	{

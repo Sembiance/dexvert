@@ -157,11 +157,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 
 						// if a produced file is older than 2020, then we assume it's the proper date
 						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
-						{
-							// otherwise ensure the newly produce file has a timestamp equal to the input file
-							newFile.ts = inputFile.ts;
-							await Deno.utime(newFile.absolute, Math.floor(inputFile.ts/xu.SECOND), Math.floor(inputFile.ts/xu.SECOND));
-						}
+							await newFile.setTS(inputFile.ts);	// otherwise ensure the newly produce file has a timestamp equal to the input file
 
 						await dexState.f.add("output", newFile);
 					});	// chain 10 output files at once, or 33% of OS CPU count, whichever is smaller

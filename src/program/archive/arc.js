@@ -1,26 +1,12 @@
-/*
 import {Program} from "../../Program.js";
 
 export class arc extends Program
 {
-	website = "http://arc.sourceforge.net";
-	package = "app-arch/arc";
-	unsafe = true;
+	website   = "http://arc.sourceforge.net";
+	package   = "app-arch/arc";
+	unsafe    = true;
+	bin       = "arc";
+	args      = r => ["x", r.inFile()];
+	cwd       = r => r.outDir();
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website       : "http://arc.sourceforge.net",
-	package : "app-arch/arc",
-	unsafe        : true
-};
-
-exports.bin = () => "arc";
-exports.args = (state, p, r, inPath=state.input.filePath) => (["x", inPath]);
-exports.cwd = state => state.output.absolute;
-*/

@@ -183,7 +183,7 @@ async function testSample(sampleFilePath)
 	{
 		failCount++;
 
-		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg} ${fg.deepSkyblue(`file://${logFilePath}`)}`);
+		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(`file://${tmpOutDirPath}`)}\n       ${fg.deepSkyblue(`file://${logFilePath}`)}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
@@ -295,7 +295,8 @@ async function testSample(sampleFilePath)
 		if(allowedSizeDiff===0)
 			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0);
 
-		for(const [name, {size, sum, ts}] of Object.entries(result.files))
+		// first make sure the files are the same
+		for(const [name, {size, sum}] of Object.entries(result.files))
 		{
 			const prevFile = prevData.files[name];
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
@@ -305,13 +306,19 @@ async function testSample(sampleFilePath)
 
 			if(allowedSizeDiff===0 && prevFile.sum!==sum)
 				return await fail(`Created file ${fg.peach(name)} SHA1 sum differs!`);
+		}
+
+		// Now check timestamps
+		for(const [name, {ts}] of Object.entries(result.files))
+		{
+			const prevFile = prevData.files[name];
 
 			const tsDate = new Date(ts);
 			const prevDate = typeof prevFile.ts==="string" ? dateParse(prevFile.ts, "yyyy-MM-dd") : new Date(prevFile.ts || Date.now());
 			if(tsDate.getFullYear()<2020 && prevDate.getFullYear()>=2020)
 				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 
-			if(prevDate.getFullYear()<2020 && tsDate.getTime()!==prevDate.getTime() && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY)	// TODO remove the 1 day off check
+			if(prevDate.getFullYear()<2020 && tsDate.getTime()!==prevDate.getTime() && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY*1.5)	// TODO remove the 1 day off check
 				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 		}
 	}

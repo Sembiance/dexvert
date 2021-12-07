@@ -42,109 +42,108 @@ const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 
-const IN_OUT_LOGIC =
-{
-	mount : async (instance, {body}) =>
-	{
-		const inDirPath = path.join(instance.dirPath, "in");
-		const outDirPath = path.join(instance.dirPath, "out");
-		const goFilePath = path.join(inDirPath, instance.scriptName);
-		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
-		const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
-
-		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")]));
-
-		// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
-		if(totalFilesSize>=DELAY_SIZE)
-		{
-			const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-			this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
-			await delay(timeToWait*xu.SECOND);
-		}
-
-		// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-		await Deno.writeTextFile(tmpGoFilePath, body.script);
-		await fileUtil.move(tmpGoFilePath, goFilePath, this);
-
-		// Wait for finish, which happens when the VM deletes the go file
-		await xu.waitUntil(async () => (!(await fileUtil.exists(goFilePath))));
-
-		// If the input file was >50MB then we should wait 1 second PER 50MB to allow the output files on the mount to fully catch up
-		if(totalFilesSize>=DELAY_SIZE)
-		{
-			const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-			this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
-			await delay(timeToWait*xu.SECOND);
-		}
-
-		// We use rsync here to preserve timestamps
-		await runUtil.run("rsync", ["-a", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")]);
-
-		await fileUtil.emptyDir(inDirPath);
-		await fileUtil.emptyDir(outDirPath);
-	},
-	ftp : async (instance, {body}) =>
-	{
-		const tmpInLHAFilePath = await fileUtil.genTempPath(undefined, ".lha");
-		const tmpInDirPath = await fileUtil.genTempPath(undefined, "qemuftp");
-		const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
-		const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
-		const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
-
-		await Deno.mkdir(tmpInDirPath, {recursive : true});
-
-		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
-
-		await Deno.writeTextFile(tmpGoFilePath, body.script);
-
-		// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-		await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});	//shell : "/bin/bash",
-		await fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
-
-		// Wait for finish, which happens when the VM deletes the lha file
-		await xu.waitUntil(async () => (!(await fileUtil.exists(inLHAFilePath))));
-
-		await runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath]);
-
-		await fileUtil.unlink(tmpInDirPath, {recursive : true});
-		await fileUtil.unlink(outLHAFilePath, {recursive : true});
-	},
-	ssh : async (instance, {body}) =>
-	{
-		const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
-		const sshPrefix = "dexvert@127.0.0.1";
-		const inDirPath = "/in";
-		const outDirPath = "/out";
-		const goFilePath = path.join(inDirPath, instance.scriptName);
-		const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
-
-		// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-		await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
-
-		await Deno.writeTextFile(tmpGoFilePath, body.script);
-		await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
-		
-		// Wait for finish, which happens when we detect that the go file has disappeared
-		await xu.waitUntil(async () =>
-		{
-			const {stdout} = await runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath]);
-			return (stdout.trim()!==goFilePath);
-		});
-
-		// We use rsync here to preserve timestamps
-		await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")]);
-
-		await fileUtil.unlink(tmpGoFilePath);
-		await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")]);
-		await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")]);
-	}
-};
-
 export class qemu extends Server
 {
 	serversLaunched = false;
+	IN_OUT_LOGIC = {
+		mount : async (instance, {body}) =>
+		{
+			const inDirPath = path.join(instance.dirPath, "in");
+			const outDirPath = path.join(instance.dirPath, "out");
+			const goFilePath = path.join(inDirPath, instance.scriptName);
+			const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
+			const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
+
+			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")]));
+
+			// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
+			if(totalFilesSize>=DELAY_SIZE)
+			{
+				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				await delay(timeToWait*xu.SECOND);
+			}
+
+			// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+			await Deno.writeTextFile(tmpGoFilePath, body.script);
+			await fileUtil.move(tmpGoFilePath, goFilePath, this);
+
+			// Wait for finish, which happens when the VM deletes the go file
+			await xu.waitUntil(async () => (!(await fileUtil.exists(goFilePath))));
+
+			// If the input file was >50MB then we should wait 1 second PER 50MB to allow the output files on the mount to fully catch up
+			if(totalFilesSize>=DELAY_SIZE)
+			{
+				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				await delay(timeToWait*xu.SECOND);
+			}
+
+			// We use rsync here to preserve timestamps
+			await runUtil.run("rsync", ["-a", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")]);
+
+			await fileUtil.emptyDir(inDirPath);
+			await fileUtil.emptyDir(outDirPath);
+		},
+		ftp : async (instance, {body}) =>
+		{
+			const tmpInLHAFilePath = await fileUtil.genTempPath(undefined, ".lha");
+			const tmpInDirPath = await fileUtil.genTempPath(undefined, "qemuftp");
+			const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
+			const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
+			const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
+
+			await Deno.mkdir(tmpInDirPath, {recursive : true});
+
+			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
+
+			await Deno.writeTextFile(tmpGoFilePath, body.script);
+
+			// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+			await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});	//shell : "/bin/bash",
+			await fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
+
+			// Wait for finish, which happens when the VM deletes the lha file
+			await xu.waitUntil(async () => (!(await fileUtil.exists(inLHAFilePath))));
+
+			await runUtil.run("lha", ["-x", `-w=${body.outDirPath}`, outLHAFilePath]);
+
+			await fileUtil.unlink(tmpInDirPath, {recursive : true});
+			await fileUtil.unlink(outLHAFilePath, {recursive : true});
+		},
+		ssh : async (instance, {body}) =>
+		{
+			const sshOpts = ["-i", path.join(QEMU_DIR_PATH, instance.osid, "dexvert_id_rsa"), "-o", "StrictHostKeyChecking=no", "-p", instance.inOutHostPort];
+			const sshPrefix = "dexvert@127.0.0.1";
+			const inDirPath = "/in";
+			const outDirPath = "/out";
+			const goFilePath = path.join(inDirPath, instance.scriptName);
+			const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
+
+			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
+
+			await Deno.writeTextFile(tmpGoFilePath, body.script);
+			await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
+			
+			// Wait for finish, which happens when we detect that the go file has disappeared
+			await xu.waitUntil(async () =>
+			{
+				const {stdout} = await runUtil.run("ssh", [...sshOpts, sshPrefix, "ls", goFilePath]);
+				return (stdout.trim()!==goFilePath);
+			});
+
+			// We use rsync here to preserve timestamps
+			await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")]);
+
+			await fileUtil.unlink(tmpGoFilePath);
+			await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")]);
+			await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(outDirPath, "*")]);
+		}
+	};
+	
 	baseKeys = Object.keys(this);
 
 	// Called to prepare the QEMU environment for a given OS and then start QEMU
@@ -234,9 +233,12 @@ export class qemu extends Server
 		this.log`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 		let inOutErr = null;
-		await IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
+		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
 		this.log`${body.osid} #${instance.instanceid} finished request`;
 		instance.busy = false;
+
+		if(inOutErr)
+			this.log`${instance.osid} ERROR ${inOutErr}`;
 
 		reply(new Response(inOutErr ? inOutErr.toString() : "ok"));
 	}

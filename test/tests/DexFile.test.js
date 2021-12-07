@@ -1,6 +1,6 @@
 import {DexFile} from "../../src/DexFile.js";
-import {path, assert, assertStrictEquals, assertThrowsAsync, base64Encode} from "std";
-import {fileUtil} from "xutil";
+import {path, assert, assertStrictEquals, assertThrowsAsync, base64Encode, dateFormat} from "std";
+import {fileUtil, runUtil} from "xutil";
 
 Deno.test("create", async () =>
 {
@@ -16,7 +16,7 @@ Deno.test("create", async () =>
 	assertStrictEquals(a.isDirectory, false);
 	assertStrictEquals(a.isSymlink, false);
 	assertStrictEquals(a.size, 6);
-	assertStrictEquals(a.ts, 1_635_685_469_027);
+	assertStrictEquals(a.ts, 1_635_688_339_000);
 	assertStrictEquals(a.preExt, ".some");
 	assertStrictEquals(a.preName, "big.txt.file.txt");
 
@@ -39,7 +39,7 @@ Deno.test("create", async () =>
 		assertStrictEquals(o.isDirectory, false);
 		assertStrictEquals(o.isSymlink, false);
 		assertStrictEquals(o.size, 6);
-		assertStrictEquals(o.ts, 1_635_685_469_027);
+		assertStrictEquals(o.ts, 1_635_688_339_000);
 		assertStrictEquals(o.preExt, ".some");
 		assertStrictEquals(o.preName, "big.txt.file.txt");
 	});
@@ -275,8 +275,26 @@ Deno.test("pretty", async () =>
 Deno.test("serialize", async () =>
 {
 	const a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
-	assertStrictEquals(JSON.stringify(a.serialize()), `{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027}`);	// eslint-disable-line max-len
+	assertStrictEquals(JSON.stringify(a.serialize()), `{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635688339000}`);	// eslint-disable-line max-len
 });
+
+Deno.test("setTS", async () =>
+{
+	const tmpPath = await fileUtil.genTempPath();
+	await runUtil.run("rsync", ["-a", "/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt", tmpPath]);
+	const a = await DexFile.create(tmpPath);
+	assertStrictEquals(a.ts, 1_635_688_339_000);
+	assertStrictEquals(new Date(a.ts).getMonth(), 9);
+	assertStrictEquals(new Date(a.ts).getDate(), 31);
+	assertStrictEquals(dateFormat(new Date(a.ts), "yyyy-MM-dd"), "2021-10-31");
+	const newDate = new Date("1978-07-04T12:24:36");
+	await a.setTS(newDate.getTime());
+	assertStrictEquals(new Date(a.ts).getMonth(), 6);
+	assertStrictEquals(new Date(a.ts).getDate(), 4);
+	assertStrictEquals(dateFormat(new Date(a.ts), "yyyy-MM-dd"), "1978-07-04");
+	await fileUtil.unlink(tmpPath);
+});
+
 
 Deno.test("deserialize", () =>
 {

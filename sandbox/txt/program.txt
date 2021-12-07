@@ -64,7 +64,7 @@ This will be executed DIRECTLY after the program has finished running (either bi
 This will be executed after the program has finished running (either bin or exec) and after Program.js has found new output files
 
 >>> renameOut = {
->>>             name : "hello",
+>>>             name : "hello", ||  (r, originalInput) => "hello"
 >>>            regex : /^.+?(?<num>\.\d{3})?(?<name>\..+)?(?<ext>\..+)$/,
 >>>          renamer : [ ({newName, suffix, numFiles, fn}, {...groupNames}) => {[name, suffix, ext]}, ... ],
 >>>     alwaysRename : true

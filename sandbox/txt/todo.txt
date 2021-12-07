@@ -7,8 +7,7 @@
 | High Priority |
 \---------------/
 * Add support for these formats:
-  music/sc68.js
-  music/sndh.js
+  music/cms  (LOOK at the dosbox source code itself, see how it handles it, probably not easy to extract, so maybe add a recordSound flag to dosbox the same way I do recordVideo flag that will output WAV when ran)
   music/graoumfTracker.js
   music/famiTracker.js
   audio/psf

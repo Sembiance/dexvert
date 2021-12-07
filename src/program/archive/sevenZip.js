@@ -1,17 +1,31 @@
-/*
 import {Program} from "../../Program.js";
 
 export class sevenZip extends Program
 {
 	website = "http://p7zip.sourceforge.net/";
 	package = "app-arch/p7zip";
-	flags = {"7zRSRCOnly":"Only care about the files contained within the output .rsrc folder for things like DLL/EXE extraction","7zSingleFile":"Likely just a single output result, so rename it to the name of the original input file","7zType":"What archive type to process as"};
+	flags   = {
+		"rsrcOnly"   : "Only care about the files contained within the output .rsrc folder for things like DLL/EXE extraction",
+		"singleFile" : "Likely just a single output result, so rename it to the name of the original input file",
+		"type"       : "What archive type to process as"
+	};
+	bin  = "7z";
+	args = r =>
+	{
+		const a = ["x", "-y"];
+
+		if(r.flags.type)
+			a.push(`-t${r.flags.type}`);
+
+		a.push(`-o${r.outDir()}`, r.inFile());
+
+		return a;
+	};
+	renameOut = r => (r.flags.singleFile ? {} : false);
 }
-*/
 
 /*
-"use strict";
-/* eslint-disable no-bitwise */
+ eslint-disable no-bitwise 
 const XU = require("@sembiance/xu"),
 	fileUtil = require("@sembiance/xutil").file,
 	runUtil = require("@sembiance/xutil").run,
@@ -20,36 +34,65 @@ const XU = require("@sembiance/xu"),
 	tiptoe = require("tiptoe"),
 	path = require("path");
 
-exports.meta =
+
+
+exports.post = (state, p, r, cb) =>
 {
-	website        : "http://p7zip.sourceforge.net/",
-	package  : "app-arch/p7zip",
-	flags :
-	{
-		"7zRSRCOnly"   : "Only care about the files contained within the output .rsrc folder for things like DLL/EXE extraction",
-		"7zSingleFile" : "Likely just a single output result, so rename it to the name of the original input file",
-		"7zType"       : "What archive type to process as"
-	}
-};
-
-exports.bin = () => "7z";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) =>
-{
-	const args = ["x", "-y"];
-	r.outPath = outPath;
-
-	if(r.flags["7zType"])
-		args.push(`-t${r.flags["7zType"]}`);
-
 	if(r.flags["7zRSRCOnly"])
 	{
-		r.tmpOutPath = fileUtil.generateTempFilePath(state.cwd, "7zRSRCOnly");
-		fs.mkdirSync(r.tmpOutPath);
+		const STRIP_FILENAMES = ["version.txt", "string.txt"];
+		tiptoe(
+			function findFiles()
+			{
+				// 7z extracts things like DIALOGs, but it's not in a format I can really do anything with, so let's just get rid of it
+				fileUtil.glob(r.tmpOutPath, "** /DIALOG/", this.parallel());
+				fileUtil.glob(r.tmpOutPath, "** /CURSOR/*", {nodir : true}, this.parallel());
+			},
+			function processFiles(unusefulPaths, cursorFilePaths)
+			{
+				(unusefulPaths || []).parallelForEach((unusefulPath, subcb) => p.util.file.unlink(unusefulPath)(state, p, subcb), this.parallel());
+
+				// The cursor files extracted by 7z are RAW bitmap data and are missing their header. So we read the bitmap data and create the proper CUR header
+				(cursorFilePaths || []).parallelForEach(fixCursor, this.parallel());
+			},
+			function moveRSRCFiles()
+			{
+				p.util.file.moveAllFiles(path.join(r.tmpOutPath, ".rsrc"), state.output.absolute)(state, p, this);
+			},
+			function stripNullBytes()
+			{
+				// Some output txt files have zero bytes every other byte, let's strip those out
+				STRIP_FILENAMES.parallelForEach((filename, subcb) =>
+				{
+					const filePath = path.join(state.output.absolute, filename);
+					if(fileUtil.existsSync(filePath))
+						runUtil.run(path.join(__dirname, "..", "..", "..", "transform", "stripGarbage", "stripGarbage"), ["--null", filePath, `${filePath}-stripped`], runUtil.SILENT, subcb);
+					else
+						setImmediate(subcb);
+				}, this);
+			},
+			function removeNonStrippedFiles()
+			{
+				STRIP_FILENAMES.parallelForEach((filename, subcb) =>
+				{
+					const filePath = path.join(state.output.absolute, filename);
+					if(fileUtil.existsSync(filePath))
+						fs.rename(`${filePath}-stripped`, filePath, subcb);
+					else
+						setImmediate(subcb);
+				}, this);
+			},
+			function removeTmpOutPath()
+			{
+				fileUtil.unlink(r.tmpOutPath, this);
+			},
+			cb
+		);
 	}
-
-	args.push(`-o${r.tmpOutPath || r.outPath}`, inPath);
-
-	return args;
+	else
+	{
+		setImmediate(cb);
+	}
 };
 
 function getBMPInfo(bmpBuffer)
@@ -191,65 +234,4 @@ function fixCursor(cursorFilePath, cb)
 	);
 }
 
-exports.post = (state, p, r, cb) =>
-{
-	if(r.flags["7zSingleFile"])
-		return p.util.file.move(path.join(state.output.absolute, "in"), path.join(state.output.absolute, `${state.input.name}`))(state, p, cb);
-	
-	if(r.flags["7zRSRCOnly"])
-	{
-		const STRIP_FILENAMES = ["version.txt", "string.txt"];
-		tiptoe(
-			function findFiles()
-			{
-				// 7z extracts things like DIALOGs, but it's not in a format I can really do anything with, so let's just get rid of it
-				fileUtil.glob(r.tmpOutPath, "**/DIALOG/", this.parallel());
-				fileUtil.glob(r.tmpOutPath, "**/CURSOR/*", {nodir : true}, this.parallel());
-			},
-			function processFiles(unusefulPaths, cursorFilePaths)
-			{
-				(unusefulPaths || []).parallelForEach((unusefulPath, subcb) => p.util.file.unlink(unusefulPath)(state, p, subcb), this.parallel());
-
-				// The cursor files extracted by 7z are RAW bitmap data and are missing their header. So we read the bitmap data and create the proper CUR header
-				(cursorFilePaths || []).parallelForEach(fixCursor, this.parallel());
-			},
-			function moveRSRCFiles()
-			{
-				p.util.file.moveAllFiles(path.join(r.tmpOutPath, ".rsrc"), state.output.absolute)(state, p, this);
-			},
-			function stripNullBytes()
-			{
-				// Some output txt files have zero bytes every other byte, let's strip those out
-				STRIP_FILENAMES.parallelForEach((filename, subcb) =>
-				{
-					const filePath = path.join(state.output.absolute, filename);
-					if(fileUtil.existsSync(filePath))
-						runUtil.run(path.join(__dirname, "..", "..", "..", "transform", "stripGarbage", "stripGarbage"), ["--null", filePath, `${filePath}-stripped`], runUtil.SILENT, subcb);
-					else
-						setImmediate(subcb);
-				}, this);
-			},
-			function removeNonStrippedFiles()
-			{
-				STRIP_FILENAMES.parallelForEach((filename, subcb) =>
-				{
-					const filePath = path.join(state.output.absolute, filename);
-					if(fileUtil.existsSync(filePath))
-						fs.rename(`${filePath}-stripped`, filePath, subcb);
-					else
-						setImmediate(subcb);
-				}, this);
-			},
-			function removeTmpOutPath()
-			{
-				fileUtil.unlink(r.tmpOutPath, this);
-			},
-			cb
-		);
-	}
-	else
-	{
-		setImmediate(cb);
-	}
-};
 */

@@ -149,7 +149,7 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 	qemuData.script = scriptLines.join("\n");
 
 	xlog.info`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
-	xlog.trace`\tSCRIPT: ${qemuData.script}`;
+	xlog.debug`\tSCRIPT: ${qemuData.script}`;
 	const r = await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)})).text();
 	if(r!=="ok")
 		throw new Error(r);

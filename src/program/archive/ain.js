@@ -1,22 +1,13 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class ain extends Program
 {
-	website = "https://www.sac.sk/download/pack/ain232.exe";
+	website   = "https://www.sac.sk/download/pack/ain232.exe";
+	loc       = "dos";
+	bin       = "AIN.EXE";
+	args      = r => ["x", r.inFile({backslash : true})];
+	cwd       = r => r.outDir();
+	dosData   = () => ({runIn : "out", keys : [["Enter"]], keyOpts : {delay : xu.SECOND*4}});
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "https://www.sac.sk/download/pack/ain232.exe"
-};
-
-exports.dos = () => "AIN.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath}`]);
-exports.dosData = (state, p, r) => ({autoExec : ["CD OUT", `..\\AIN.EXE x ${r.args}`], keys : [["Return"]], keyOpts : {delay : XU.SECOND*4}});
-*/

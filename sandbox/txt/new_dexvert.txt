@@ -1,15 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Using this code as example: https://github.com/DeaDBeeF-Player/deadbeef/blob/master/plugins/sc68/sc68/sc68.c
-  I should be able to figure out how to write C code that uses sc68 to create a proper WAV file
-  Then I can add support for music/sndh
+* Add text/cue support, will need to flesh out family/text.js (look at old dexvert, see what I did)
 
-* Add music
-  Here is where I should strongly consider adding some sort of 'prefix' type match type
-  Whether I do that or not, I should also consider supporting renaming of files based on the file.preName instead of file.name
-
-* Once this big is fixed: https://github.com/denoland/deno/issues/12998
+* Then add archive/cdi/*.cue to testdexvert excemptions and then test and then record archive/cdi
 
 * Add archive
 

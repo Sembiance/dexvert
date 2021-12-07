@@ -35,5 +35,5 @@ export class lottie extends Format
 		return a.length>0 ? a : false;
 	};
 
-	idCheck = async inputFile => !!xu.parseJSON(await Deno.readTextFile(inputFile.absolute))?.layers;
+	idCheck = async inputFile => inputFile.size<xu.MB*20 && !!xu.parseJSON(await Deno.readTextFile(inputFile.absolute))?.layers;
 }

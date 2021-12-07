@@ -9,6 +9,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
+const DEFAULT_FLAGS = ["filenameEncoding"];
 
 export class Program
 {
@@ -33,7 +34,7 @@ export class Program
 			flags          : {type : Object},
 			package  : {types : ["string", Array]},
 			notes          : {type : "string"},
-			renameOut      : {types : [Object, "boolean"]},
+			renameOut      : {types : ["function", Object, "boolean"]},
 			runOptions     : {types : [Object, "function"]},
 			unsafe         : {type : "boolean"},
 			website        : {type : "string", url : true},
@@ -48,7 +49,7 @@ export class Program
 			diskQuota        : {type : "number", range : [1]},
 			dosData          : {type : "function", length : [0, 1]},
 			exec             : {type : "function", length : [0, 1]},
-			filenameEncoding : {type : "string"},
+			filenameEncoding : {types : ["function", "string"]},
 			outExt           : {types : ["function", "string"]},
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
@@ -59,7 +60,7 @@ export class Program
 		});
 
 		if(program.renameOut && Object.isObject(program.renameOut))
-			validateObject(program.renameOut, {ext : {type : "string"}, name : {type : "boolean"}, regex : {type : RegExp}, renamer : {type : ["function"]}, alwaysRename : {type : "boolean"}});
+			validateObject(program.renameOut, {ext : {type : "string"}, name : {types : ["boolean", "string", "function"]}, regex : {type : RegExp}, renamer : {type : ["function"]}, alwaysRename : {type : "boolean"}});
 
 		return program;
 	}
@@ -70,7 +71,7 @@ export class Program
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 		
-		const unknownFlags = Object.keys(flags).subtractAll(Object.keys(this.flags || {}));
+		const unknownFlags = Object.keys(flags).subtractAll([...DEFAULT_FLAGS, ...Object.keys(this.flags || {})]);
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
 		
@@ -113,7 +114,8 @@ export class Program
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 				
-			xlog.info`Program ${fg.orange(this.programid)} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\`${xlog.atLeast("debug") ? ` with options ${xu.inspect(r.runOptions).squeeze()}` : ""}`;
+			xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
+			xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
 		}
@@ -153,7 +155,8 @@ export class Program
 			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute});
 
 			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
-			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", this.filenameEncoding || "windows-1252", "-t", "UTF-8", f.outDir.absolute]);
+			const targetEncoding = (flags.filenameEncoding || (typeof this.filenameEncoding==="function" ? await this.filenameEncoding(r) : this.filenameEncoding)) || "windows-1252";
+			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", targetEncoding, "-t", "UTF-8", f.outDir.absolute]);
 
 			// delete empty files/broken symlinks. find is very fast at this, so use that
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
@@ -220,10 +223,12 @@ export class Program
 			catch(err) { xlog.error`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
+		const renameOut = typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut;
+
 		// if we have some new files, time to rename them
-		if(f.outDir && f.files.new?.length && this.renameOut!==false)
+		if(f.outDir && f.files.new?.length && renameOut!==false)
 		{
-			const ro = Object.assign({ext : typeof this.outExt==="function" ? this.outExt(r) || "" : this.outExt || "", name : true}, this.renameOut);
+			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, renameOut);
 			const getName = o =>
 			{
 				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa, we already set this in DexFile.preName
@@ -233,7 +238,7 @@ export class Program
 
 				return o.name;
 			};
-			const newName = (ro.name===true ? getName(originalInput || f.input) : (ro.name || getName(f.new)));
+			const newName = (ro.name===true ? getName(originalInput || f.input) : ((typeof ro.name==="function" ? ro.name(r, originalInput) : ro.name) || getName(f.new)));
 			const newExt = (ro.ext || f.new.ext);
 			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length};
 
@@ -361,9 +366,9 @@ export class Program
 					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
 					// So we set originalInput so it's named properly
 					// Don't do this though if the current program has a custom renamer with alwaysRename set
-					if((newFiles.length===1 && !this.renameOut?.alwaysRename) || progRaw.startsWith("*"))
+					if((newFiles.length===1 && !renameOut?.alwaysRename) || progRaw.startsWith("*"))
 					{
-						if(newFiles.length===1 && this.renameOut===false)	// eslint-disable-line unicorn/prefer-ternary
+						if(newFiles.length===1 && renameOut===false)	// eslint-disable-line unicorn/prefer-ternary
 						{
 							// if only 1 output file and we were instructed to NOT rename anything, then we should TRUST the newFile name and chain that as the original input
 							baseChainProgOpts.originalInput = newFiles[0];

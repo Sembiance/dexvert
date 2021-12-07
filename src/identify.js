@@ -88,28 +88,6 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				}
 			}
 
-			// some formats require some sort of other check to ensure the file is valid
-			if(format.idCheck && !(await format.idCheck(inputFile, detections)))
-			{
-				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
-				continue;
-			}
-
-			// some formats require additional files or directories that may be used
-			let auxFiles = null;
-			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0))
-			{
-				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs);
-
-				// If the filesRequired function returns false, then we don't have any required files
-				// If it returns an empty array then we fail to match
-				if(auxFiles!==false && auxFiles.length===0)
-				{
-					xlog.debug`Excluding format ${formatid} due to requiredFiles not being present.`;
-					continue;
-				}
-			}
-
 			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
 			const extMatch = (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext) || (format.matchPreExt && ext.toLowerCase()===f.input.preExt.toLowerCase()));
 			const filenameMatch = (format.filename || []).some(mfn => flexMatch(f.input.base, mfn, true));
@@ -161,7 +139,31 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				return magicMatched;
 			}));
 
+			const hasAnyMatch = (extMatch || filenameMatch || fileSizeMatch || magicMatch);
+
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
+
+			// some formats require some sort of other check to ensure the file is valid
+			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections)))
+			{
+				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
+				continue;
+			}
+
+			// some formats require additional files or directories that may be used
+			let auxFiles = null;
+			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0) && hasAnyMatch)
+			{
+				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs);
+
+				// If the filesRequired function returns false, then we don't have any required files
+				// If it returns an empty array then we fail to match
+				if(auxFiles!==false && auxFiles.length===0)
+				{
+					xlog.debug`Excluding format ${formatid} due to requiredFiles not being present.`;
+					continue;
+				}
+			}
 			if(auxFiles)
 				baseMatch.auxFiles = auxFiles;
 			["charSet", "confidenceAdjust", "website", "mimeType", "fallback"].forEach(key =>

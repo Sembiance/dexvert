@@ -1,23 +1,10 @@
-/*
 import {Program} from "../../Program.js";
 
 export class cabextract extends Program
 {
-	website = "https://www.cabextract.org.uk/";
-	package = "app-arch/cabextract";
+	website   = "https://www.cabextract.org.uk/";
+	package   = "app-arch/cabextract";
+	bin       = "cabextract";
+	args      = r => ["--directory", r.outDir(), "--fix", r.inFile()];
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website       : "https://www.cabextract.org.uk/",
-	package : "app-arch/cabextract"
-};
-
-exports.bin = () => "cabextract";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => (["--directory", outPath, "--fix", inPath]);
-*/

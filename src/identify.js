@@ -11,6 +11,7 @@ function flexMatch(value, matcher, fullStringMatch)
 {
 	return ((typeof matcher==="string" && (fullStringMatch ? (value.toLowerCase()===matcher.toLowerCase()) : value.toLowerCase().startsWith(matcher.toLowerCase()))) || (matcher instanceof RegExp && value.match(matcher)));
 }
+export {flexMatch};
 
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
 // If you add any here, you also need to update retromission.com msdos.styl

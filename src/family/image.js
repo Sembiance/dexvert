@@ -32,9 +32,11 @@ export class image extends Family
 {
 	metaids = ["image", "darkTable", "ansiArt", ...Object.keys(programs)];
 
-	async verify(dexState, dexFile, identifications)
+	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
+		const {identify} = await import("../identify.js");
+		const identifications = await identify(dexFile, {xlog : xlog.clone("error")});
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{

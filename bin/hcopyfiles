@@ -1,0 +1,22 @@
+#!/bin/bash
+# shellcheck disable=SC2154
+
+lineNum=1
+hls -alb | while read -r line; do
+	subLineNum=1
+	type=$(echo -n "$line" | head -c 1)
+	hls -a1b | while read -r filename; do
+		if [ $subLineNum -eq $lineNum ]; then
+			if [ "$type" = "f" ]; then
+				escapedFilename=${filename//\'/\\"'"}
+				eval "safeFilename=$'$filename'"
+				safeFilename=${safeFilename//&/\\&}
+				eval "hcopy $'$escapedFilename' '$1'/$safeFilename"
+			fi
+		fi
+
+		subLineNum=$((subLineNum + 1))
+	done
+
+	lineNum=$((lineNum + 1))
+done

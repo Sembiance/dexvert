@@ -1,49 +1,20 @@
-/*
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class stackimport extends Program
 {
-	website = "https://github.com/uliwitness/stackimport/";
-	package = "dev-util/stackimport";
+	website       = "https://github.com/uliwitness/stackimport/";
+	package       = "dev-util/stackimport";
+	bin           = "stackimport";
+	args          = r => ["--dumprawblocks", r.inFile()];
+	cwd           = r => r.outDir();
+	mirrorInToCWD = true;
+	post          = async r =>
+	{
+		// check to see if we just have a single subdir output, if so, move all files in that one up one dir
+		const dirNames = r.f.files.new.map(file => path.dirname(file.rel)).unique();
+		if(dirNames.length===1 && dirNames[0].split("/").length===2)
+			await r.f.files.new.parallelMap(async file => await file.moveUp(1));
+	};
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	fileUtil = require("@sembiance/xutil").file,
-	tiptoe = require("tiptoe"),
-	fs = require("fs");
-
-exports.meta =
-{
-	website       : "https://github.com/uliwitness/stackimport/",
-	package : "dev-util/stackimport"
-};
-
-exports.bin = () => "stackimport";
-exports.args = (state, p, r, inPath="in") => (["--dumprawblocks", inPath]);
-exports.cwd = state => state.output.absolute;
-// We never want an extension when using this program
-exports.pre = (state, p, r, cb) => fs.symlink(state.input.absolute, path.join(state.output.absolute, "in"), cb);
-exports.post = (state, p, r, cb) =>
-{
-	// stackimport creates an 'in.xstk' subdir with all results
-	tiptoe(
-		function removeInSymlink()
-		{
-			fileUtil.unlink(path.join(state.output.absolute, "in"), this);
-		},
-		function moveOutputFiles()
-		{
-			p.util.file.moveAllFiles(path.join(state.output.absolute, "in.xstk"), state.output.absolute)(state, p, this);
-		},
-		function removeGeneratedDir()
-		{
-			fileUtil.unlink(path.join(state.output.absolute, "in.xstk"), this);
-		},
-		cb
-	);
-};
-*/

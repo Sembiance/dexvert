@@ -1,51 +1,21 @@
-/*
 import {Format} from "../../Format.js";
 
 export class installShieldCAB extends Format
 {
-	name = "InstallShield CAB";
-	website = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
-	ext = [".cab"];
-	magic = ["InstallShield CAB","InstallShield Cabinet archive","InstallShield compressed Archive"];
-	keepFilename = true;
-	filesOptional = undefined;
-	converters = ["unshield",{"program":"unshield","flags":{"unshieldUseOldCompression":true}},"winPack","gameextractor","UniExtract"]
-
-preSteps = [null];
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name          : "InstallShield CAB",
-	website       : "http://fileformats.archiveteam.org/wiki/InstallShield_CAB",
-	ext           : [".cab"],
-	magic         : ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield compressed Archive"],
-	keepFilename  : true,
-	filesOptional : (state, otherFiles) =>
+	name          = "InstallShield CAB";
+	website       = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
+	ext           = [".cab"];
+	magic         = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield compressed Archive"];
+	keepFilename  = true;
+	auxFiles     = (input, otherFiles) =>
 	{
-		const ourExt = state.input.ext.toLowerCase();
+		if(input.ext.toLowerCase()===".hdr")
+			return false;
 		
-		// .cab files often require .hdr files to extract, even a data2.cab would need a data1.hdr, so let's grab all .hdr files
-		if(ourExt===".cab")
-			return otherFiles.filter(otherFile => otherFile.toLowerCase().endsWith(".hdr"));
-
-		return false;
-	}
-};
-
-exports.preSteps = [state => { state.processed = state.processed || state.input.ext.toLowerCase()===".hdr"; }];
-
-exports.converterPriority =
-[
-	"unshield",
-	{program : "unshield", flags : {unshieldUseOldCompression : true}},
-	"winPack",
-	"gameextractor",
-	"UniExtract"
-];
-
-*/
+		// .cab files often require .hdr files to extract, even a data2.cab would need a data1.hdr, so let's grab ALL .hdr files
+		const hdrFiles = otherFiles.filter(file => file.ext.toLowerCase()===".hdr");
+		return hdrFiles.length>0 ? hdrFiles : false;
+	};
+	converters = ["unshield", "unshield[oldCompression]", "winPack", "gameextractor", "UniExtract"];
+	untouched  = ({f}) => f.input.ext.toLowerCase()===".hdr";
+}

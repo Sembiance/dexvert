@@ -1,24 +1,11 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class isextract extends Program
 {
-	website = "https://github.com/OmniBlade/isextract";
-	package = "app-arch/isextract";
+	website    = "https://github.com/OmniBlade/isextract";
+	package    = "app-arch/isextract";
+	bin        = "isextract";
+	args       = r => ["x", r.inFile(), r.outDir()];
+	runOptions = ({timeout : xu.MINUTE*2});
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "https://github.com/OmniBlade/isextract",
-	package  : "app-arch/isextract"
-};
-
-exports.bin = () => "isextract";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => (["x", inPath, outPath]);
-exports.runOptions = () => ({timeout : XU.MINUTE*2});
-*/

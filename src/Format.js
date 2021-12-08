@@ -20,8 +20,9 @@ export class Format
 	baseKeys = Object.keys(this);
 
 	// will get meta info for this particular format and the passed input fileset
-	async getMeta(inputFile, xlog)
+	async getMeta(inputFile, dexState)
 	{
+		const xlog = dexState.xlog;
 		const meta = {};
 
 		// first if the family has a meta provider, call that
@@ -41,7 +42,7 @@ export class Format
 
 		// lastly, if the format itself has a meta function, call that
 		if(this.meta)
-			Object.assign(meta, (await this.meta(inputFile, xlog)) || {});
+			Object.assign(meta, (await this.meta(inputFile, dexState)) || {});
 
 		return meta;
 	}

@@ -18,8 +18,12 @@
 
 * Find better support for Windows Clipboard .clp files, right now they all convert quite poorly
 
+* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
+  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
+  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
+
 * Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
-  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage
+  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage and archive/iconHeaven and others (see unsupported notes)
   Then process the OS/2 CDs I have
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel

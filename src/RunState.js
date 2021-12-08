@@ -28,7 +28,7 @@ export class RunState
 	// returns f.input.rel
 	inFile({backslash, absolute}={})
 	{
-		const result = absolute ? (this.symlinkInToCWD ? path.join(this.cwd, this.f.input.base) : this.f.input.absolute) : (this.symlinkInToCWD ? this.f.input.base : path.relative(this.cwd, this.f.input.absolute));
+		const result = absolute ? (this.mirrorInToCWD ? path.join(this.cwd, this.f.input.base) : this.f.input.absolute) : (this.mirrorInToCWD ? this.f.input.base : path.relative(this.cwd, this.f.input.absolute));
 		return backslash ? result.replaceAll("/", "\\") : result;
 	}
 

@@ -4,6 +4,7 @@ import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
 import {DexState} from "./DexState.js";
+import {DexFile} from "./DexFile.js";
 import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
@@ -27,28 +28,40 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 		const [asFamilyid, asFormatid] = asFormat.split("/");
 		if(!formats[asFormatid])
 			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);
-		const asId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : formats[asFormatid].name, matchType : "magic", confidence : 100};
+		const asFormatFormat = formats[asFormatid];
+		const asId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : asFormatFormat.name, matchType : "magic", confidence : 100};
 		for(const k of ["ext", "unsupported"])
 		{
-			if(formats[asFormatid][k])
-				asId[k==="ext" ? "extensions" : k] = formats[asFormatid][k];
+			if(asFormatFormat[k])
+				asId[k==="ext" ? "extensions" : k] = asFormatFormat[k];
 		}
+
+		// Since we are manually creating our Identification, we will need to manually call auxFiles
+		if(asFormatFormat.auxFiles)
+		{
+			const otherFiles = (await Promise.all((await fileUtil.tree(inputFile.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==inputFile.absolute);
+			const otherDirs = await Promise.all((await fileUtil.tree(inputFile.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
+			const auxFiles = await asFormatFormat.auxFiles(inputFile, otherFiles, otherDirs);
+			if(auxFiles)
+				asId.auxFiles = auxFiles;
+		}
+
 		ids.push(Identification.create(asId));
-		xlog.warn`Processing ${inputFile.pretty()} explicitly as format: ${ids[0].pretty()}`;
+		xlog.warn`Processing ${inputFile.pretty()} explicitly as format:\n\t${ids[0].pretty()}`;
 	}
 	else
 	{
 		xlog.info`Getting identifications for ${inputFile.pretty()}`;
-		ids.push(...(await identify(inputFile, {xlog : xlog.clone("error")})).filter(id => id.from==="dexvert"));
+		ids.push(...(await identify(inputFile, {xlog : xlog.clone("error")})));
 	}
 
-	if(ids.length>0)
+	if(ids.some(id => id.from==="dexvert"))
 		xlog.info`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 
 	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, xlog});
 	for(const id of ids)
 	{
-		if(id.unsupported)
+		if(id.from!=="dexvert" || id.unsupported)
 			continue;
 
 		const format = formats[id.formatid];
@@ -61,7 +74,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 		// create a temporary fileSet with the original input file and aux files so we can rsync to our cwd
 		const originalInputFileSet = await FileSet.create(inputFile.root, "input", inputFile);
 		if(id.auxFiles)
-			originalInputFileSet.addAll("aux", id.auxFiles);
+			await originalInputFileSet.addAll("aux", id.auxFiles);
 
 		// copy over our files to cwd, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
 		const f = await originalInputFileSet.rsyncTo(cwd);
@@ -111,7 +124,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 
 		try
 		{
-			Object.assign(dexState.meta, await format.getMeta(f.input, xlog));
+			Object.assign(dexState.meta, await format.getMeta(f.input, dexState));
 			
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
@@ -144,7 +157,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 					// verify output files
 					await (dexState.f.files.new || []).parallelMap(async newFile =>
 					{
-						const isValid = await dexState.format.family.verify(dexState, newFile, await identify(newFile, {xlog : xlog.clone("error")}));
+						const isValid = await dexState.format.family.verify(dexState, newFile);
 						if(!isValid)
 						{
 							if(!xlog.atLeast("trace"))
@@ -160,7 +173,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 							await newFile.setTS(inputFile.ts);	// otherwise ensure the newly produce file has a timestamp equal to the input file
 
 						await dexState.f.add("output", newFile);
-					});	// chain 10 output files at once, or 33% of OS CPU count, whichever is smaller
+					});
 
 					dexState.f.removeType("new");
 				}
@@ -189,7 +202,13 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made
 		// important to do this before cleanup() since that will delete all tmp dirs including output files
 		if(dexState.processed)
-			dexState.created = await dexState.f.rsyncTo(outputDir.absolute, {type : "output", relativeFrom : outDirPath});
+		{
+			await runUtil.run("rsync", ["-a", `${dexState.f.outDir.absolute}/`, `${outputDir.absolute}/`]);
+			dexState.created = await FileSet.create(outputDir.absolute, "output", await fileUtil.tree(outputDir.absolute, {nodir : true}));
+			// We used to rsync each file individually this way, but this was ungodly slow on large archives like SpanishScene.iso
+			// So now we just rsync our output directory... should be safe :)
+			//dexState.created = await dexState.f.rsyncTo(outputDir.absolute, {type : "output", relativeFrom : outDirPath});
+		}
 
 		await cleanup();
 

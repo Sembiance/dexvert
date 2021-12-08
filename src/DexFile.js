@@ -39,7 +39,7 @@ export class DexFile
 	}
 
 	// changes the root of this file to something else
-	changeRoot(newRoot, {keepRel}={})
+	changeRoot(newRoot, {keepRel, relativeFrom}={})
 	{
 		this.root = path.resolve(newRoot);
 		if(!keepRel)
@@ -47,6 +47,9 @@ export class DexFile
 
 		this.absolute = path.join(newRoot, this.rel);
 		this.dir = path.dirname(this.absolute);
+
+		if(relativeFrom)
+			this.rel = path.relative(relativeFrom, this.absolute);
 
 		return this;
 	}

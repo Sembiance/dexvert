@@ -3,8 +3,8 @@ import {verifyAudio} from "./audio.js";
 
 export class music extends Family
 {
-	async verify(dexState, dexFile, identifications)
+	async verify(dexState, dexFile)
 	{
-		return await verifyAudio(dexState, dexFile, identifications);
+		return await verifyAudio(dexState, dexFile);
 	}
 }

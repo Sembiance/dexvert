@@ -1,11 +1,11 @@
-# Supported File Formats (739)
+# Supported File Formats (746)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (42)
+## Archive (49)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [ain](https://www.sac.sk/download/pack/ain232.exe) | [4 sample files](https://telparia.com/fileFormatSamples/archive/ain/)
@@ -21,14 +21,15 @@ archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .a .lib | [
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .exe | [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/arj/)
 archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [arq](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [5 sample files](https://telparia.com/fileFormatSamples/archive/arq/)
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [7 sample files](https://telparia.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
-archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | uniso | [2 sample files](https://telparia.com/fileFormatSamples/archive/stDiskImage/)
+archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/stDiskImage/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/autoCADSlideLibrary/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/binHex/)
 archive | BOLT Game Data Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://telparia.com/fileFormatSamples/archive/broderbundMohawk/)
-archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/bz2/)
+archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [3 sample files](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [cabextract](https://www.cabextract.org.uk/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
 archive | CAZIP File | .caz | [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [5 sample files](https://telparia.com/fileFormatSamples/archive/cazip/)
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) | [25 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [DirMaster](https://style64.org/dirmaster) | [6 sample files](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
 archive | [Compact Disc-Interactive](http://fileformats.archiveteam.org/wiki/Cd-i) | .bin | [IsoBuster](https://www.isobuster.com/isobuster.php) | [4 sample files](https://telparia.com/fileFormatSamples/archive/cdi/)
@@ -40,8 +41,14 @@ archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/S
 archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder) | .imp | [ancient](https://github.com/temisu/ancient_format_decompressor) | [0 sample files](https://telparia.com/fileFormatSamples/archive/fileImploder/) - Found some files that identified as IMP! but don't decompress with ancient. So don't currently have any file samples for this format.
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [deark](https://entropymine.com/deark/) | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [unpcxgx](http://www.ctpax-x.org/?goto=files&show=104) | [11 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
-archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [gunzip](https://www.gnu.org/software/gzip/) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
+archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [sevenZip](http://p7zip.sourceforge.net/) [gunzip](https://www.gnu.org/software/gzip/) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
 archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](http://fileformats.archiveteam.org/wiki/HA) | [1 sample file](https://telparia.com/fileFormatSamples/archive/ha/)
+archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [hypercard_dasm](https://github.com/fuzziqersoftware/resource_dasm) [stackimport](https://github.com/uliwitness/stackimport/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
+archive | [IBM SaveDskF SKF Disk Image](http://fileformats.archiveteam.org/wiki/LoadDskF/SaveDskF) | .dsk | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ibmSaveDsk/)
+archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
+archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [4 sample files](https://telparia.com/fileFormatSamples/archive/impactILB/)
+archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
+archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/archive/installShieldZ/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/macBinary/)
 archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [3 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)

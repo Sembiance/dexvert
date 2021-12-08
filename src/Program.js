@@ -55,7 +55,7 @@ export class Program
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
 			qemuData         : {types : ["function", Object]},
-			symlinkInToCWD   : {type : "boolean"},
+			mirrorInToCWD    : {types : ["boolean", "string"]},
 			verify           : {type : "function", length : [0, 2]}
 		});
 
@@ -88,10 +88,13 @@ export class Program
 			r.cwd = newCWD.startsWith("/") ? newCWD : path.resolve(f.root, newCWD);
 		}
 
-		if(this.symlinkInToCWD)
+		if(this.mirrorInToCWD)
 		{
-			await Deno.symlink(path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile())));
-			r.symlinkInToCWD = true;
+			if(this.mirrorInToCWD==="copy")	// eslint-disable-line unicorn/prefer-ternary
+				await runUtil.run("rsync", [path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile()))]);
+			else
+				await Deno.symlink(path.join(r.cwd, r.inFile()), path.join(r.cwd, path.basename(r.inFile())));
+			r.mirrorInToCWD = true;
 		}
 
 		if(this.pre)
@@ -144,7 +147,7 @@ export class Program
 			catch(err) { xlog.error`Program postExec ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
-		if(this.symlinkInToCWD)
+		if(this.mirrorInToCWD)
 			await fileUtil.unlink(r.inFile({absolute : true}));
 
 		if(f.outDir)
@@ -152,31 +155,40 @@ export class Program
 			// we may have new files on disk in f.outDir
 
 			// first we have to run fixPerms in order to ensure we can access the new files
+			xlog.trace`Program ${fg.orange(this.programid)} fixing permissions...`;
 			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute});
 
 			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
+			xlog.trace`Program ${fg.orange(this.programid)} fixing filename encoding...`;
 			const targetEncoding = (flags.filenameEncoding || (typeof this.filenameEncoding==="function" ? await this.filenameEncoding(r) : this.filenameEncoding)) || "windows-1252";
 			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", targetEncoding, "-t", "UTF-8", f.outDir.absolute]);
 
 			// delete empty files/broken symlinks. find is very fast at this, so use that
+			xlog.trace`Program ${fg.orange(this.programid)} deleting empty files and broken symlinks...`;
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
 			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);
 
 			// also delete any 'special' files that may be dangerous to process. block special, character special named pipe, socket
+			xlog.trace`Program ${fg.orange(this.programid)} deleting special files...`;
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
 
 			// now find any new files on disk in the output dir that we don't yet
-			for(const newFilePath of (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute)))
+			xlog.trace`Program ${fg.orange(this.programid)} locating new files...`;
+			const newFilePaths = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute));
+
+			// if we have just 1 output file and it is is identical to our input file, delete it, to prevent infinite recursions
+			// it'd be nice to do this for every output file in the loop below, but it's too much of a performance hit
+			if(newFilePaths.length===1 && !this.allowDupOut && await fileUtil.areEqual(newFilePaths[0], f.input.absolute))
+			{
+				xlog.warn`Program ${fg.orange(this.programid)} deleting single output file ${path.relative(f.outDir.absolute, newFilePaths[0])} due to being identical to input file ${f.input.pretty()}`;
+				await fileUtil.unlink(newFilePaths[0]);
+				newFilePaths.clear();
+			}
+
+			xlog.trace`Program ${fg.orange(this.programid)} doing first pass on ${newFilePaths.length} new files...`;
+			await newFilePaths.parallelMap(async newFilePath =>
 			{
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
-
-				// if the new file is identical to our input file, delete it
-				if(await fileUtil.areEqual(newFilePath, f.input.absolute) && !this.allowDupOut)
-				{
-					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
-					await fileUtil.unlink(newFilePath);
-					continue;
-				}
 
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
 				if(newFile.isSymlink)
@@ -189,14 +201,14 @@ export class Program
 					{
 						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to linking to a file outside of the output dir: ${linkPath}`;
 						await fileUtil.unlink(newFilePath);
-						continue;
+						return;
 					}
 
 					if((await Deno.lstat(linkPath)).isDirectory)
 					{
 						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to being a dir link, which can cause infinite loops and won't result in new files: ${path.basename(newFilePath)} -> ${linkPathRel}`;
 						await fileUtil.unlink(newFilePath);
-						continue;
+						return;
 					}
 				}
 
@@ -205,17 +217,20 @@ export class Program
 				{
 					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to failing program.verify() function`;
 					await fileUtil.unlink(newFilePath);
-					continue;
+					return;
 				}
 
 				// add our new file to our fileset
 				await f.add("new", newFile);
-			}
+			});
 		}
 
 		// sort the filenames by depth and then by filename
 		if(f.files.new)
+		{
+			xlog.debug`Program ${fg.orange(this.programid)} located ${f.files.new.length} new files...`;
 			f.files.new.sortMulti([file => file.rel.split("/").length, file => file.base]);
+		}
 
 		if(this.post)
 		{
@@ -464,6 +479,9 @@ export class Program
 			await f.add("homeDir", homeDirPath);
 		}
 
+		if(progOptions.outFile)
+			await f.add("outFile", progOptions.outFile);
+
 		const debugPart = xu.clone(progOptions);
 		delete debugPart.xlog;
 		xlog.debug`Program ${progRaw} converted to ${debugPart}`;
@@ -481,5 +499,17 @@ export class Program
 	static binPath(rel)
 	{
 		return path.join(xu.dirname(import.meta), "..", "bin", rel);
+	}
+
+	// returns args needed to call a sub deno script
+	static denoArgs(...args)
+	{
+		return ["run", "--import-map", "/mnt/compendium/DevLab/deno/importMap.json", "--unstable", "--allow-read", "--allow-write", "--allow-env", "--allow-run", ...args];
+	}
+
+	// returns env needed to properly run deno scripts
+	static denoEnv()
+	{
+		return {DENO_DIR : "/mnt/compendium/.deno"};
 	}
 }

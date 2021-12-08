@@ -5,7 +5,7 @@ export class amosbank extends Program
 	website          = "https://github.com/dschwen/amosbank";
 	package          = "dev-lang/amosbank";
 	bin              = "amosbank";
-	symlinkInToCWD   = true;
+	mirrorInToCWD    = true;
 	cwd              = r => r.outDir();
 	args             = r => [r.inFile()];
 	filenameEncoding = "iso-8859-1";	// AmigaOS uses this: http://lclevy.free.fr/adflib/adf_info.html#p54

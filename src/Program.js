@@ -9,7 +9,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const DEFAULT_FLAGS = ["filenameEncoding"];
+const DEFAULT_FLAGS = ["filenameEncoding", "renameOut"];
 
 export class Program
 {
@@ -54,7 +54,7 @@ export class Program
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
-			qemuData         : {type : "function", length : [0, 1]},
+			qemuData         : {types : ["function", Object]},
 			symlinkInToCWD   : {type : "boolean"},
 			verify           : {type : "function", length : [0, 2]}
 		});
@@ -133,7 +133,7 @@ export class Program
 			r.qemuData = {f, cmd : this.bin, osid : this.loc, xlog};
 			r.qemuData.args = this.args ? await this.args(r) : [];
 			if(this.qemuData)
-				Object.assign(r.qemuData, await this.qemuData(r));
+				Object.assign(r.qemuData, typeof this.qemuData==="function" ? await this.qemuData(r) : this.qemuData);
 
 			r.status = await runQEMU(r.qemuData);
 		}
@@ -223,7 +223,7 @@ export class Program
 			catch(err) { xlog.error`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
-		const renameOut = typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut;
+		const renameOut = flags.renameOut || (typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut);
 
 		// if we have some new files, time to rename them
 		if(f.outDir && f.files.new?.length && renameOut!==false)

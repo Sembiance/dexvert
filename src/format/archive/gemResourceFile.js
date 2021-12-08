@@ -1,41 +1,15 @@
-/*
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class gemResourceFile extends Format
 {
-	name = "GEM Resource File";
+	name    = "GEM Resource File";
 	website = "http://fileformats.archiveteam.org/wiki/GEM_resource_file";
-	ext = [".rsc"];
-	notes = "\ndeark fails to work with some RSC file such as daleks.rsc and dungeon.rsc\nBetter support could be added by coding my own handler by following the format:\nhttp://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc";
-	converters = ["deark"]
-
-updateProcessed = undefined;
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name    : "GEM Resource File",
-	website : "http://fileformats.archiveteam.org/wiki/GEM_resource_file",
-	ext     : [".rsc"],
-	notes   : XU.trim`
+	ext     = [".rsc"];
+	notes   = xu.trim`
 		deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc
 		Better support could be added by coding my own handler by following the format:
-		http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc`
-};
-
-exports.converterPriority = ["deark"];
-
-exports.updateProcessed = (state, p, cb) =>
-{
-	const r = p.util.program.getRan(state, "deark");
-	if(!(r.results || "").trim().toLowerCase().includes("gem rsc, atari"))
-		state.processed = false;
-	
-	setImmediate(cb);
-};
-
-*/
+		http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc`;
+	converters = ["deark"];
+	verify     = ({dexState}) => !dexState.ran.find(({programid}) => programid==="deark")?.stdout?.includes("gem rsc, atari");
+}

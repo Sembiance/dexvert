@@ -8,7 +8,7 @@ export class qtPicViewer extends Program
 	loc      = "winxp";
 	bin      = "C:\\WINDOWS\\VIEWER.EXE";
 	args     = r => [r.inFile()];
-	qemuData = () => ({
+	qemuData = ({
 		script : `
 			;Wait for the picture sub window/control to appear
 			$mainWinActive = WinWaitActive("[TITLE:Picture Viewer]", "", 10)

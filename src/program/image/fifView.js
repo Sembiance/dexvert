@@ -7,7 +7,7 @@ export class fifView extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\FIFView\\FIFView.exe";
 	args     = r => [r.inFile()];
-	qemuData = () => ({
+	qemuData = ({
 		dontMaximize : true,
 		script : `
 		#include <ScreenCapture.au3>

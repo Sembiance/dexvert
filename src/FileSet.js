@@ -75,8 +75,8 @@ export class FileSet
 	async clone(types)
 	{
 		const fileSet = await FileSet.create(this.root);
-		for(const type of types ? Array.force(types) : Object.keys(this.files))
-			await fileSet.addAll(type, this.files[type].map(file => file.clone()));
+		for(const type of (types ? Array.force(types) : Object.keys(this.files)))
+			await fileSet.addAll(type, (this.files[type] || []).map(file => file.clone()));
 		return fileSet;
 	}
 
@@ -101,7 +101,7 @@ export class FileSet
 		if(relativeFrom)
 			newFileSet.changeRoot(relativeFrom);
 
-		await (type ? this.files[type] : this.all).parallelMap(async file =>
+		await (type ? (this.files[type] || []) : this.all).parallelMap(async file =>
 		{
 			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			if(fileRel.includes("/"))

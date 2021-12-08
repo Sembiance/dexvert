@@ -38,7 +38,7 @@ const dexvertOptions = {xlog};
 async function handleExit(ignored)
 {
 	if(argv.logFile)
-		await Deno.writeTextFile(argv.logFile, `${logLines.join("\n")}\n`);
+		await Deno.writeTextFile(argv.logFile, `${logLines.join("\n").decolor()}\n`);
 	
 	Deno.exit(0);
 }

@@ -12,7 +12,7 @@ export class IsoBuster extends Program
 	args = r => ["/ef:all:C:\\out", r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo"];
 
 	// IsoBuster can take a LONG time to run, but 20 minutes should be plenty for any file
-	qemuData = () => ({timeout : xu.MINUTE*20});
+	qemuData = ({timeout : xu.MINUTE*20});
 
 	renameOut = false;
 }

@@ -7,7 +7,7 @@ export class graphicWorkshopProfessional extends Program
 	loc      = "win2k";
 	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE";
 	args     = r => [r.inFile()];
-	qemuData = () => ({
+	qemuData = ({
 		script : `
 			$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 7)
 			If $mainWindowVisible = 0 Then

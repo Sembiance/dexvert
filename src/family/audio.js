@@ -21,11 +21,11 @@ export async function verifyAudio(dexState, dexFile, identifications)
 		return false;
 	}
 
-	// So sox isn't reliable at providing a stat for clips under 1 second, so we use ffprobe to get duration of the MP3 and only get sox stat if duration>=1 second
+	// So sox isn't reliable at providing a stat for very short clips, so we use ffprobe to get duration of the MP3 and only get sox stat if duration>=2 seconds
 	// Alternative duration getters: `mplayer -identify -nocache -vo null -ao null <file>` or `ffmpeg -i <file>`
 	const ffprobeR = await Program.runProgram("ffprobe", dexFile, {xlog});
 	await ffprobeR.unlinkHomeOut();
-	if((ffprobeR.meta?.duration || 0)>=1)
+	if((ffprobeR.meta?.duration || 0)>=2)
 	{
 		const {stderr} = await runUtil.run("sox", [dexFile.rel, "-n", "stat"], {cwd : dexFile.root});
 		const soxStat = stderr.trim().split("\n").reduce((result, line="") =>	// eslint-disable-line unicorn/prefer-object-from-entries
@@ -44,7 +44,7 @@ export async function verifyAudio(dexState, dexFile, identifications)
 		}
 	}
 
-	if(dexState.phase?.format?.verify && !dexState.phase.format.verify({dexState, dexFile, identifications, meta : ffprobeR.meta}))
+	if(dexState.phase?.format?.verify && !(await dexState.phase.format.verify({dexState, dexFile, identifications, meta : ffprobeR.meta})))
 	{
 		xlog.info`Audio failed format.verify() call`;
 		return false;

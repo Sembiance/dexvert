@@ -17,19 +17,19 @@ export class doomMUS2mp3 extends Program
 		await r.f.add("aux", r.zipFilePath);
 		return [path.basename(r.zipFilePath)];
 	};
-	qemuData = () => ({
+	qemuData = ({
 		script : `
 			WinWaitActive("[TITLE:SLADE; CLASS:wxWindowNR]", "", 10)
-			Sleep(2000)
+			Sleep(4000)
 			WaitForControl("[TITLE:SLADE; CLASS:wxWindowNR]", "", "[CLASS:Button; TEXT:Entries]", ${xu.SECOND*10})
-			Sleep(2000)
+			Sleep(4000)
 			Local $entriesPOS = ControlGetPos("[TITLE:SLADE; CLASS:wxWindowNR]", "", "[CLASS:Button; TEXT:Entries]")
 			MouseClick("right", $entriesPOS[0]+26, $entriesPOS[1]+104, 1)
-			Sleep(500)
+			Sleep(750)
 			Send("{UP}")
-			Sleep(250)
+			Sleep(500)
 			Send("{RIGHT}")
-			Sleep(250)
+			Sleep(500)
 			Send("{ENTER}")
 			Sleep(1000)
 			Send("^e")

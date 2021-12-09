@@ -5,7 +5,7 @@ export class xwd extends Format
 	name         = "X Window Dump";
 	website      = "http://fileformats.archiveteam.org/wiki/XWD";
 	ext          = [".xwd", ".dmp"];
-	safeExt      = () => ".xwd";
+	safeExt      = ".xwd";
 	mimeType     = "image/x-xwindowdump";
 	magic        = ["X-Windows Screen Dump", "XWD X Windows Dump image data"];
 	metaProvider = ["image"];

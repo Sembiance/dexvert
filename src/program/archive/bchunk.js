@@ -16,7 +16,7 @@ export class bchunk extends Program
 		const a = ["-w"];
 		if(r.flags.swapByteOrder)
 			a.push("-s");
-		a.push(r.inFile(), r.flags.cueFilePath, `${r.f.input.name}-`);
+		a.push(r.inFile(), r.flags.cueFilePath.replaceAll("DEXVERTCLOSEBRACKET", "]"), `${r.f.input.name}-`);
 		return a;
 	};
 

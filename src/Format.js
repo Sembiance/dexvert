@@ -120,7 +120,7 @@ export class Format
 			converters   : {types : [Array, "function"]},
 			keepFilename : {type : "boolean"},
 			metaProvider : {type : ["string"], enum : (family.metaids || [])},
-			safeExt      : {type : "function", length : [0, 1]},
+			safeExt      : {types : ["string", "function"]},
 			pre          : {type : "function", length : [0, 1]},
 			post         : {type : "function", length : [0, 1]}
 		});

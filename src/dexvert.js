@@ -98,7 +98,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 
 			let cwdExt = null;
 			if(format.safeExt)
-				cwdExt = await format.safeExt(dexState);
+				cwdExt = typeof format.safeExt==="function" ? await format.safeExt(dexState) : format.safeExt;
 			else if(format.ext)
 				cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase()) || format.ext[0];
 			else
@@ -138,7 +138,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 			if(format.pre)
 				await format.pre(dexState);
 			
-			const converters = Array.isArray(format.converters) ? format.converters : await format.converters(dexState);
+			const converters = format.converters ? (Array.isArray(format.converters) ? format.converters : await format.converters(dexState)) : [];
 			xlog.info`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
 
 			// try each converter specificied, until we have output files or have been marked as processed
@@ -157,14 +157,27 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 					// verify output files
 					await (dexState.f.files.new || []).parallelMap(async newFile =>
 					{
-						const isValid = await dexState.format.family.verify(dexState, newFile);
+						let isValid = true;
+						
+						// first, check family level validators
+						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
+						if(extraValidatorData===false)
+						{
+							xlog.warn`${newFile.pretty()} FAILED validation from family ${dexState.format.family.pretty()}`;
+							isValid = false;
+						}
+						
+						// if still valid, check format level validator
+						if(isValid && format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
+						{
+							xlog.warn`${newFile.pretty()} FAILED validation from format ${format.pretty()}`;
+							isValid = false;
+						}
+
 						if(!isValid)
 						{
 							if(!xlog.atLeast("trace"))
-							{
-								xlog.warn`${fg.red("DELETING OUTPUT FILE")} ${newFile.pretty()} due to failing verification from ${dexState.format.family.pretty()} family`;
 								await fileUtil.unlink(newFile.absolute);
-							}
 							return;
 						}
 

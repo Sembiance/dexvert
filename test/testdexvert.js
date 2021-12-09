@@ -33,11 +33,10 @@ const FLEX_SIZE_PROGRAMS =
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
 	darktable_cli : 0.1,
 
-	// Can produce slightly different output each time
-	doomMUS2mp3     : 2,
-	soundFont2tomp3 : 10,
-	xmp             : 2,
-	zxtune123       : 2
+	// Produces different WAV data each time
+	soundFont2tomp3 : 0.1,
+	sidplay2        : 0.1,
+	zxtune123       : 0.1
 };
 
 const FLEX_SIZE_FORMATS =
@@ -47,7 +46,7 @@ const FLEX_SIZE_FORMATS =
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
-		// each running produces slightly different output, not sure why
+		// each running produces slightly different output, not sure why, haven't investigated further
 		lottie           : 0.1,
 		rekoCardset      : 0.1,
 		windowsClipboard : 0.1,
@@ -56,11 +55,6 @@ const FLEX_SIZE_FORMATS =
 		fractalImageFormat : 7,
 		naplps             : 20,
 		threeDCK           : 10
-	},
-	music :
-	{
-		// sidplay generates different wavs each time, it
-		sid : 15
 	}
 };
 
@@ -79,6 +73,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/other\/microsoftChatCharacter\/armando.avb$/, "image", "tga"],
 
 	// Supporting/AUX files
+	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
@@ -108,6 +103,7 @@ const outputFiles = [];
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
+xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
 xlog.info`Root testing dir: ${fg.deepSkyblue(`file://${DEXTEST_ROOT_DIR}`)}`;
 xlog.info`Rsyncing sample files to RAM...`;
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
@@ -237,7 +233,7 @@ async function testSample(sampleFilePath)
 		result.format = resultFull.phase.format;
 
 		if(resultFull.phase.converter)
-			result.converter = resultFull.phase.converter;
+			result.converter = resultFull.phase.converter.split("[")[0];	// don't record any flags passed, they can be variable per running (bchunk cueFilePath for example)
 	}
 	
 	if(argv.record)

@@ -63,7 +63,7 @@ export class iso extends Format
 
 		// If it's a VideoCD, rip video using 'vcdxrip' and files with 'bchunk'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
-			return ["vcdxrip", "IsoBuster", `bchunk[cueFilePath:${cueFile.absolute}]`];
+			return ["vcdxrip", "IsoBuster", `bchunk[cueFilePath:${cueFile.absolute.replaceAll("]", "DEXVERTCLOSEBRACKET")}]`];
 
 		// If it's a PhotoCD, rip using fuseiso (this is because regular mount doesn't work with bin/cue and bchunk produces tracks seperately which has images merged together and invalid dir structure for this format)
 		if(dexState.meta?.photocd?.photocd)
@@ -72,7 +72,7 @@ export class iso extends Format
 		// If it's a BIN/CUE, run bchunk
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
 		if(cueFile)
-			return [`bchunk[cueFilePath:${cueFile.absolute}]`];
+			return [`bchunk[cueFilePath:${cueFile.absolute.replaceAll("]", "DEXVERTCLOSEBRACKET")}]`];
 
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available

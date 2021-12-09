@@ -46,13 +46,7 @@ export async function verifyAudio(dexState, dexFile)
 		}
 	}
 
-	if(dexState.phase?.format?.verify && !(await dexState.phase.format.verify({dexState, dexFile, identifications, meta : ffprobeR.meta})))
-	{
-		xlog.info`Audio failed format.verify() call`;
-		return false;
-	}
-
-	return true;
+	return {identifications, meta : ffprobeR.meta};
 }
 
 export class audio extends Family

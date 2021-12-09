@@ -1,4 +1,3 @@
-
 import {Program} from "../../Program.js";
 
 export class toc2cue extends Program

@@ -34,7 +34,8 @@ async function extractNormalISO()
 	const {stdout : mountStatus} = await runUtil.run("sudo", ["findmnt", "--output", "FSTYPE", "--noheadings", MOUNT_DIR_PATH]);
 
 	// Sometimes an ISO's ISO9660 side is corrupt and fails to mount, then mount falls back automatically to the hfs section if there is one
-	// But we can't use mount for HFS, so we detect that mount mounted an ISO in HFS mode, unmount it and then use extractHFSISO instead
+	// Also, sometimes we can't detect ahead of time in dexvert that it is an HFS ISO, but when we mount it, we discover it is
+	// Either way, we want to use our special extractHFSISO() method for handling HFS ISOs, so we unmount it and use extractHFSISO instead
 	if(mountStatus.trim().toLowerCase()==="hfs")
 	{
 		await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
@@ -92,6 +93,7 @@ async function hcopyFile(src, dest)
 	await Deno.rename(safeFilePath, dest);
 }
 
+/* Uncomment this if I end up splitting files into data/resource fork again
 function fixUnarFilename(unarFilename)
 {
 	// unar ends up creating it's own escaping scheme that we need to fix.
@@ -119,10 +121,9 @@ function fixUnarFilename(unarFilename)
 	} while(match);
 
 	return fixedFilename;
-}
+}*/
 
 // This will extract the HFS CD and automatically convert characters from Mac Standard Roman to UTF8: https://github.com/Distrotech/hfsutils/blob/master/doc/charset.txt
-// It will also utilize 'unar' to split each file into two potential files, one containing the datafork and one containing the resource fork (ending in .rsrc)
 async function extractHFSISO()
 {
 	const HCDNUM_BIN = path.join(xu.dirname(import.meta), "hcdnum");
@@ -145,8 +146,12 @@ async function extractHFSISO()
 			await hcopyFile(entry.filename, entry.destFilePath);
 		}
 
+		// This code used to use 'unar' to split each file into two potential files, one containing the datafork and one containing the resource fork (ending in .rsrc)
+		// First, I no longer like doing this, as macBinary support within dexvert itself has been enhanced
+		// Also I like to keep the original filenames, which are lost if I use unar to split the files
+		// Lastly, there is some sort of BUG in this code below with deno. Works fine if I dextry directly resultant Mac User Ultimate Mac Companion 1996.ugh file, but doesn't work in the bchunk chain to dexvert
 		// time to split our data fork and resource forks
-		await entries.parallelMap(async entry =>
+		/*await entries.parallelMap(async entry =>
 		{
 			if(entry.type!=="f")
 				return;
@@ -167,7 +172,7 @@ async function extractHFSISO()
 			}
 
 			await fileUtil.unlink(tmpUnpackDirPath, {recursive : true});
-		});
+		});*/
 
 		// now handle our directories
 		for(const [i, entry] of Object.entries(entries))
@@ -186,6 +191,9 @@ async function extractHFSISO()
 	await runUtil.run("hmount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
 	await recurseHFS("");
 	await runUtil.run("humount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
+	await fileUtil.unlink(path.join(MOUNT_DIR_PATH, ".hcwd"));
 }
 
+// main
 await (argv.hfs ? extractHFSISO() : extractNormalISO());
+await fileUtil.unlink(MOUNT_DIR_PATH, {recursive : true});

@@ -121,13 +121,7 @@ export class image extends Family
 			xlog.warn`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
 		}
 
-		if(dexState.phase?.format?.verify && !(await dexState.phase.format.verify({dexState, dexFile, identifications, meta})))
-		{
-			xlog.info`Image failed format.verify() call`;
-			return false;
-		}
-
-		return true;
+		return {identifications, meta};
 	}
 
 	// gets meta information for the given input and format

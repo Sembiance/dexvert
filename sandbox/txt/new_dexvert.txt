@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add text/cue support, will need to flesh out family/text.js (look at old dexvert, see what I did)
-
-* Then add archive/cdi/*.cue to testdexvert excemptions and then test and then record archive/cdi
-
 * Add archive
 
 * Add executable

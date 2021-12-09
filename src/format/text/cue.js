@@ -1,60 +1,44 @@
-/*
+import {xu} from "xu";
 import {Format} from "../../Format.js";
+import {Program} from "../../Program.js";
+import {runUtil} from "xutil";
 
 export class cue extends Format
 {
-	name = "ISO CUE Sheet";
-	website = "http://fileformats.archiveteam.org/wiki/CUE_and_BIN";
-	ext = [".cue"];
-	magic = ["ISO CDImage cue","Cue Sheet"];
-
-	metaProvider = [""];
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	cueParser = require("cue-parser");
-
-exports.meta =
-{
-	name    : "ISO CUE Sheet",
-	website : "http://fileformats.archiveteam.org/wiki/CUE_and_BIN",
-	ext     : [".cue"],
-	magic   : ["ISO CDImage cue", "Cue Sheet"]
-};
-
-exports.inputMeta = (state, p, cb) =>
-{
-	const cueData = cueParser.parse(state.input.absolute);
-	if(!cueData || !cueData.files || cueData.files.length===0)
-		return;
-	
-	state.input.meta.cue = JSON.parse(JSON.stringify(cueData));
-	Object.keys(state.input.meta.cue).forEach(k =>
+	name         = "ISO CUE Sheet";
+	website      = "http://fileformats.archiveteam.org/wiki/CUE_and_BIN";
+	ext          = [".cue"];
+	metaProvider = ["text"];
+	magic        = ["ISO CDImage cue", "Cue Sheet"];
+	untouched    = dexState => !!dexState.meta.cue;
+	meta         = async (inputFile, dexState) =>
 	{
-		if(state.input.meta.cue[k]===null)
-			delete state.input.meta.cue[k];
-	});
-
-	Object.keys(state.input.meta.cue.track || {}).forEach(k =>
-	{
-		if(state.input.meta.cue.track[k]===null)
-			delete state.input.meta.cue.track[k];
-	});
-
-	state.input.meta.cue.files.flatMap(file => file.tracks || []).forEach(track =>
-	{
-		Object.keys(track).forEach(k =>
+		const {stdout : cueDataRaw} = await runUtil.run(Program.binPath("parseCUE/parseCUE.js"), [inputFile.absolute]);
+		const cueData = xu.parseJSON(cueDataRaw, {});
+		if(Object.keys(cueData).length===0)
+			return;
+		
+		Object.keys(cueData).forEach(k =>
 		{
-			if(track[k]===null)
-				delete track[k];
+			if(cueData[k]===null)
+				delete cueData[k];
 		});
-	});
 
-	state.processed = true;
+		Object.keys(cueData.track || {}).forEach(k =>
+		{
+			if(cueData.track[k]===null)
+				delete cueData.track[k];
+		});
+		
+		cueData.files.flatMap(file => file.tracks || []).forEach(track =>
+		{
+			Object.keys(track).forEach(k =>
+			{
+				if(track[k]===null)
+					delete track[k];
+			});
+		});
 
-	p.family.supportedInputMeta(state, p, cb);
-};
-
-*/
+		dexState.meta.cue = cueData;
+	};
+}

@@ -7,5 +7,5 @@ export class windowsThumbDB extends Format
 	ext        = [".db"];
 	filename   = ["Thumbs.db"];
 	magic      = ["Windows Thumbnail Database"];
-	converters = ["deark", "vinetto"]
+	converters = ["deark", "vinetto"];
 }

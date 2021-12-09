@@ -12,7 +12,7 @@ export class Family
 		const family = new this();
 		validateClass(family, {
 			// meta
-			verify  : {type : "function", length : 2, required : true}, 	// verifies the new files and ensures they are valid
+			verify  : {type : "function", length : 2}, 	// verifies the new files and ensures they are valid
 			metaids : {type : ["string"]},	// list of meta provider id strings
 			meta    : {type : "function", length : [1]}
 		});

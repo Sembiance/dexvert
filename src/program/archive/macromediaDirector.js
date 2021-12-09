@@ -1,32 +1,21 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class macromediaDirector extends Program
 {
-	website = "https://www.buraks.com/swifty/xena.html";
-}
-*/
+	website  = "https://www.buraks.com/swifty/xena.html";
+	loc      = "winxp";
+	bin      = "c:\\Program Files\\Macromedia\\Director MX 2004\\Director.exe";
+	args     = r => [r.inFile()];
 
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	fs = require("fs"),
-	tiptoe = require("tiptoe"),
-	fileUtil = require("@sembiance/xutil").file;
+	// NOTE!! Even though we actually copy over the auxFiles xtras directory into WinXP, we DO NOT actually put the files where they need to go to function:
+	// C:\Program Files\Macromedia\Director MX 2004\Configuration\Xtras
+	// This is because if there are any duplicate files (which is almost always the case) then director won't launch correctly until those are removed
+	// So we would have to prune out any custom xtras from ones we already have on windows. We in theory could do that linux side before it gets in by just pre-generating hash sums of all files that ship default with director
+	// But meh. This seems like a lot of work for potentially no payoff. Like how would we even know how to 'handle' an xtra format anyways? We would have to add custom handling code, meh.
 
-exports.meta =
-{
-	website : "https://www.buraks.com/swifty/xena.html"
-};
-
-exports.qemu = () => "c:\\Program Files\\Macromedia\\Director MX 2004\\Director.exe";
-exports.args = (state, p, r, inPath=state.input.filePath) => [inPath];
-exports.qemuData = (state, p, r) =>
-{
-	const data = {	// eslint-disable-line sembiance/no-useless-variables
-		inFilePaths  : [r.args[0]],
-		osid         : "winxp",
-		script       : `
+	qemuData = r => ({
+		script : `
 			#include <GuiListView.au3>
 
 			Opt("WinTitleMatchMode", 2)
@@ -60,16 +49,16 @@ exports.qemuData = (state, p, r) =>
 				Send("{ENTER}")
 			EndIf
 
-			${r.args[0].endsWith(".dir") ? `
+			${r.inFile().toLowerCase().endsWith(".dir") ? `
 			Send("^4")
 			Send("^4")
 			` : ""}
 
 			; Wait for the 'Cast' sub window/control to appear
-			WaitForControl("Director MX 2004", "", "[CLASS:ASISubWndClass]", ${XU.SECOND*10})
+			WaitForControl("Director MX 2004", "", "[CLASS:ASISubWndClass]", ${xu.SECOND*10})
 
 			; Wait for the list of cast items to appear
-			Local $castListHandle = WaitForControl("Director MX 2004", "", "[CLASS:SysListView32; INSTANCE:5]", ${XU.SECOND*30})
+			Local $castListHandle = WaitForControl("Director MX 2004", "", "[CLASS:SysListView32; INSTANCE:5]", ${xu.SECOND*30})
 
 			Sleep(500)
 
@@ -78,12 +67,12 @@ exports.qemuData = (state, p, r) =>
 			; NOTE: Text is actual rich, but we lose all formatting because we just copy it into the clipboard and write that to a file
 			Func HandleText($itemNum, $filename)
 				Send("{Enter}")
-				Local $textControl = WaitForControl("Director MX 2004", "", "[CLASS:ASISubWndClass; TEXT:Untitled: Text]", ${XU.SECOND*2})
+				Local $textControl = WaitForControl("Director MX 2004", "", "[CLASS:ASISubWndClass; TEXT:Untitled: Text]", ${xu.SECOND*2})
 				Sleep(200)
 				Send("^a")
 				Sleep(50)
 				Send("^c")
-				WaitForClipChange(${XU.SECOND})
+				WaitForClipChange(${xu.SECOND})
 				FileWrite("c:\\out\\" & $filename & ".txt", ClipGet())
 				Send("^{F4}")
 			EndFunc
@@ -92,11 +81,11 @@ exports.qemuData = (state, p, r) =>
 			Func HandleExport($itemNum, $filename)
 				ClipPut($filename)
 				Send("^,")
-				Local $exportControl = WaitForControl("[CLASS:MMDialogWndClass]", "", "[CLASS:Button; TEXT:Cancel]", ${XU.SECOND*3}, "[TITLE:Director]", "[CLASS:Button; TEXT:OK]")
+				Local $exportControl = WaitForControl("[CLASS:MMDialogWndClass]", "", "[CLASS:Button; TEXT:Cancel]", ${xu.SECOND*3}, "[TITLE:Director]", "[CLASS:Button; TEXT:OK]")
 				If $exportControl Then
-					ProcessWaitClose("COPYFILE.exe", ${XU.SECOND*10})
+					ProcessWaitClose("COPYFILE.exe", ${xu.SECOND*10})
 					ControlClick("[CLASS:MMDialogWndClass]", "", "[CLASS:Button; TEXT:Cancel]")
-					WinWaitClose("[CLASS:MMDialogWndClass]", "", ${XU.SECOND*3})
+					WinWaitClose("[CLASS:MMDialogWndClass]", "", ${xu.SECOND*3})
 				EndIf
 				ControlFocus("Director MX 2004", "", $castListHandle)
 			EndFunc
@@ -167,49 +156,11 @@ exports.qemuData = (state, p, r) =>
 			EndIf
 
 			ProcessClose("Director.exe")
-			WaitForPID(ProcessExists("Director.exe"), ${XU.MINUTE*15})`
-	};
+			WaitForPID(ProcessExists("Director.exe"), ${xu.MINUTE})`
+	});
 
-	// NOTE!! Even though we actually copy over the xtras directory into WinXP, we DO NOT actually put the files where they need to go to function:
-	// C:\Program Files\Macromedia\Director MX 2004\Configuration\Xtras
-	// This is because if there are any duplicate files (which is almost always the case) then director won't launch correctly until those are removed
-	// So we would have to prune out any custom xtras from ones we already have on windows. We in theory could do that linux side before it gets in by just pre-generating hash sums of all files that ship default with director
-	// But meh. This seems like a lot of work for potentially no payoff. Like how would we even know how to 'handle' an xtra format anyways? We would have to add custom handling code, meh.
-	//const xtrasFilename = (state.extraFilenames || []).find(v => v.toLowerCase()==="xtras");
-	//if(xtrasFilename)
-	//	data.inFilePaths.push(xtrasFilename);
+	// Often SCRIPT files are just behaviors and end up being just 1 single empty byte in size, just delete these, they are not useful
+	verify = (r, dexFile) => dexFile.size>1 && !dexFile.base.toLowerCase().endsWith("_dexignored");
 
-	return data;
-};
-
-exports.post = (state, p, r, cb) =>
-{
-	tiptoe(
-		function findOutputFiles()
-		{
-			fileUtil.glob(state.output.absolute, "**", {nodir : true}, this);
-		},
-		function deleteBadOutputFiles(outputFilePaths)
-		{
-			if(outputFilePaths.length>0)
-				state.processed = true;
-
-			outputFilePaths.parallelForEach((outputFilePath, subcb) =>
-			{
-				// Often SCRIPT files are just behaviors and end up being just 1 single empty byte in size, just delete these, they are not useful
-				if(fs.statSync(outputFilePath).size<=1 || outputFilePath.toLowerCase().endsWith("_dexignored"))
-				{
-					if(state.verbose>=3)
-						XU.log`macromediaDirector deleting undesirable file: ${outputFilePath}`;
-					fileUtil.unlink(outputFilePath, subcb);
-				}
-				else
-				{
-					setImmediate(subcb);
-				}
-			}, this);
-		},
-		cb
-	);
-};
-*/
+	renameOut = false;
+}

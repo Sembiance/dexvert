@@ -8,4 +8,5 @@ export class unmdb extends Program
 	bin        = "deno";
 	args       = r => Program.denoArgs(Program.binPath("unmdb.js"), "--", r.inFile(), r.outDir());
 	runOptions = ({env : Program.denoEnv()});
+	renameOut  = false;
 }

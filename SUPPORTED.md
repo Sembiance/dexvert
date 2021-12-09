@@ -1,14 +1,15 @@
-# Supported File Formats (749)
+# Supported File Formats (758)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (49)
+## Archive (58)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [AIN Archive](http://fileformats.archiveteam.org/wiki/AIN) | .ain | [ain](https://www.sac.sk/download/pack/ain232.exe) | [4 sample files](https://telparia.com/fileFormatSamples/archive/ain/)
+archive | [Alcohol 120% MDF Image](http://fileformats.archiveteam.org/wiki/MDF_and_MDS) | .mdf | [MDFtoISO](http://www.mdftoiso.com/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [2 sample files](https://telparia.com/fileFormatSamples/archive/mdf/)
 archive | [Amiga Disk Format (FFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [unadf](http://lclevy.free.fr/adflib/) [xdftool](http://lallafa.de/blog/amiga-projects/amitools/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/adfFFS/)
 archive | [Amiga Disk Format (OFS)](http://fileformats.archiveteam.org/wiki/ADF_(Amiga)) | .adf | [unar](https://unarchiver.c3.cx/) [unadf](http://lclevy.free.fr/adflib/) [extract_adf](https://github.com/mist64/extract-adf) | [14 sample files](https://telparia.com/fileFormatSamples/archive/adfOFS/) - Some Amiga disks (such as voyager.adf) are non DOS (NDOS) disks with custom filesystems. Others are crazy corrupted and produce lots of really bad files, such as 117.adf These cannot be mounted by the amiga nor extracted with unar/unadf/adf-extractor These are custom disk formats that demo and game coders came up with to squeeze data out of em. Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.
 archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/wiki/Disk_Masher_System) | .dms .fms | [unar](https://unarchiver.c3.cx/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/dms/)
@@ -49,11 +50,19 @@ archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-ima
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [4 sample files](https://telparia.com/fileFormatSamples/archive/impactILB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/archive/installShieldZ/)
+archive | [Krita](http://fileformats.archiveteam.org/wiki/Krita) | .kra | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/kra/)
+archive | [LBR Archive](http://fileformats.archiveteam.org/wiki/LBR) | .lbr | [lbrate](http://www.svgalib.org/rus/lbrate.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/lbr/)
+archive | [Lempel-Ziv Archive](http://fileformats.archiveteam.org/wiki/LZX) | .lzx | [unar](https://unarchiver.c3.cx/) [unlzx](http://xavprods.free.fr/lzx/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/lzx/)
+archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .lhz .lzs .exe | [lha](https://github.com/jca02266/lha) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) [UniExtract](https://www.legroom.net/software/uniextract) [lhark](https://www.sac.sk/download/pack/lhark04d.zip) | [15 sample files](https://telparia.com/fileFormatSamples/archive/lha/)
+archive | Lucas Arts Game Data Archive | .gob | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/lucasArts/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [deark](https://entropymine.com/deark/) | [0 sample files](https://telparia.com/fileFormatSamples/archive/macBinary/)
+archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [dirOpener](https://www.buraks.com/swifty/xena.html) | [18 sample files](https://telparia.com/fileFormatSamples/archive/macromediaDirector/) - While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js
+archive | [Mailbox](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [unmbox](https://github.com/Sembiance/dexvert) | [7 sample files](https://telparia.com/fileFormatSamples/archive/mbox/)
 archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [3 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [unar](https://unarchiver.c3.cx/) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
+archive | SimTex LBX Game Data | .lbx | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://telparia.com/fileFormatSamples/archive/lbxGameData/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) 7z [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [3 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Thumbs.db) | .db | [deark](https://entropymine.com/deark/) [vinetto](https://github.com/AtesComp/Vinetto) | [6 sample files](https://telparia.com/fileFormatSamples/archive/windowsThumbDB/)

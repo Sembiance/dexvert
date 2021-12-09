@@ -7,7 +7,7 @@ export class deark extends Program
 	flags   = {
 		"module"      : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
 		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
-		"opts"        : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
+		"opt"         : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"    : "Don't extract any thumb files found",
 		"file2"       : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
@@ -24,7 +24,7 @@ export class deark extends Program
 		if(r.flags.file2)
 			a.push("-file2", r.flags.file2);
 		
-		const opts = Array.force(r.flags.opts || []);
+		const opts = Array.force(r.flags.opt || []);
 		if(r.flags.charOutType)
 			opts.push(`char:output=${r.flags.charOutType || "image"}`);
 		

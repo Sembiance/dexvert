@@ -238,7 +238,7 @@ export class Program
 			catch(err) { xlog.error`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 
-		const renameOut = flags.renameOut || (typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut);
+		const renameOut = Object.hasOwn(flags, "renameOut") ? flags.renameOut : (typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut);
 
 		// if we have some new files, time to rename them
 		if(f.outDir && f.files.new?.length && renameOut!==false)
@@ -333,9 +333,9 @@ export class Program
 			const chainParts = [];
 			if(this.chain)
 			{
-				const chainResult = (typeof this.chain==="function" ? await this.chain(r) : this.chain);
-				if(chainResult)
-					chainParts.push(...chainResult.split("->"));
+				const chainOutput = (typeof this.chain==="function" ? await this.chain(r) : this.chain);
+				if(chainOutput)
+					chainParts.push(...chainOutput.split("->"));
 			}
 			if(chain)
 				chainParts.push(...chain.split("->"));
@@ -435,22 +435,8 @@ export class Program
 			progRaw = chainParts[0].trim();	// eslint-disable-line no-param-reassign
 		}
 
-		const {programid, flagsRaw=""} = progRaw.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
-		const flags = Object.fromEntries((flagsRaw.match(/\[[^:\]]+:?[^\]]*]/g) || []).map(flag =>
-		{
-			const {name, val} = flag.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/)?.groups || {};
-			return (name ? [name, (val.length>0 ? (val.isNumber() ? +val : val) : true)] : null);
-		}).filter(v => !!v).filter(([name, val]) =>
-		{
-			// see if any of the flags are actually programOptions
-			if(["suffix"].includes(name))
-			{
-				progOptions[name] = val;
-				return false;
-			}
-
-			return true;
-		}));
+		const {programid, flags, progOptions : moreProgOptions} = Program.parseProgram(progRaw);
+		Object.assign(progOptions, moreProgOptions);
 
 		// run prog
 		if(!progOptions.flags)
@@ -489,9 +475,43 @@ export class Program
 		return program.run(f, progOptions);
 	}
 
-	static async hasProgram(programid)
+	static parseProgram(progRaw)
+	{
+		const progOptions = {};
+		const {programid, flagsRaw=""} = progRaw.match(/^\s*(?<programid>[^[]+)(?<flagsRaw>.*)$/).groups;
+		const flags = {};
+		
+		// We used to do an more succint Object.fromEntries() but beause we can have duplicate flag names which should be turned into an array (deark[opt:*][opt:*]) we have to do it this way
+		(flagsRaw.match(/\[[^:\]]+:?[^\]]*]/g) || []).forEach(flag =>
+		{
+			const {name, val} = flag.match(/\[(?<name>[^:\]]+):?(?<val>[^\]]*)]/)?.groups || {};
+			if(!name)
+				return;
+
+			const valFinal = (val.length>0 ? (val.isNumber() ? +val : (["true", "false"].includes(val) ? val==="true" : val)) : true);
+
+			// see if any of the flags are actually programOptions
+			if(["suffix"].includes(name))
+			{
+				progOptions[name] = valFinal;
+				return;
+			}
+
+			if(!Object.hasOwn(flags, name))
+				flags[name] = valFinal;
+			else if(Array.isArray(flags[name]))
+				flags[name].push(valFinal);
+			else
+				flags[name] = [flags[name], valFinal];
+		});
+
+		return {programid, flags, progOptions};
+	}
+
+	static async hasProgram(progRaw)
 	{
 		const {programs} = await import("./program/programs.js");
+		const {programid} = Program.parseProgram(progRaw);
 		return Object.hasOwn(programs, programid);
 	}
 

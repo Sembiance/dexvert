@@ -208,7 +208,7 @@ other | Adobe Multiple Master Metrics | .mmm |
 other | Adobe Photoshop Gradient | .grd | 
 other | Adobe Type Manager Font Information | .inf | 
 other | Alchemy Mindworks Resource | .res | 
-other | Alcohol 120% Media Descriptor | .mds | 
+other | Alcohol 120% Media Descriptor | .mds | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/mdfMediaDescriptor/)
 other | Allways Printer Driver | .apc .apd .apf | 
 other | Alpha Four Script | .scp | 
 other | AmiAtlas File | .borders .coasts .index .islands .prefs .rivers .route .town .countries .country | 

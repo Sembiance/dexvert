@@ -19,4 +19,5 @@ export class uniso extends Program
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};
 	runOptions = ({env : Program.denoEnv()});
+	renameOut  = false;
 }

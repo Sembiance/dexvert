@@ -9,6 +9,7 @@ const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
 const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
+const DELAY_AMOUNT = xu.SECOND/2;
 const HOSTS =
 {
 	lostcrag      : { numServers :  4 },
@@ -60,9 +61,9 @@ export class qemu extends Server
 			// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
 			if(totalFilesSize>=DELAY_SIZE)
 			{
-				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
-				await delay(timeToWait*xu.SECOND);
+				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				await delay(timeToWait);
 			}
 
 			// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
@@ -75,9 +76,9 @@ export class qemu extends Server
 			// If the input file was >50MB then we should wait 1 second PER 50MB to allow the output files on the mount to fully catch up
 			if(totalFilesSize>=DELAY_SIZE)
 			{
-				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE);
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
-				await delay(timeToWait*xu.SECOND);
+				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
+				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				await delay(timeToWait);
 			}
 
 			// We use rsync here to preserve timestamps

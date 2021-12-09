@@ -92,8 +92,8 @@ const UNPROCESSED_ALLOW_NO_IDS =
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
-const SLOW_DURATION = xu.MINUTE*3;
-const slowFiles = [];
+const SLOW_DURATION = xu.MINUTE*2;
+const slowFiles = {};
 const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "data", "process.json");
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
 const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
@@ -161,7 +161,7 @@ async function testSample(sampleFilePath)
 	{
 		const duration = performance.now()-startedAt;
 		if(duration>=SLOW_DURATION)
-			slowFiles.push(sampleSubFilePath);
+			slowFiles[sampleSubFilePath] = duration;
 
 		// If we have more than 60 files we are testing, show progress every 10%
 		if(sampleFilePaths.length>60)
@@ -207,11 +207,11 @@ async function testSample(sampleFilePath)
 		if(argv.record)
 		{
 			testData[sampleSubFilePath] = false;
-			return await pass("r");
+			return await pass(fg.red(`${xu.c.blink}r`));	// blinking red 'r' === no results found
 		}
 
 		if(testData[sampleSubFilePath]===false)
-			return pass(fg.white("."));
+			return pass(fg.whiteDim("."));
 
 		return await fail(`${fg.pink("No result returned")} ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} ${fg.deepSkyblue("but expected")} ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
 	}
@@ -242,7 +242,7 @@ async function testSample(sampleFilePath)
 			delete testData[sampleSubFilePath].inputMeta;
 
 		testData[sampleSubFilePath] = result;
-		return await pass("r");
+		return await pass(!resultFull?.created?.files?.output?.length ? fg.pink(`${xu.c.blink}r`) : fg.green("r"));		// blinking pink 'r' === no files found
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
@@ -263,7 +263,7 @@ async function testSample(sampleFilePath)
 		if(!resultFull.ids.some(id => id.family===diskFamily && id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
 			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFamily}/${diskFormat}`);
 
-		return await pass(fg.white("."));
+		return await pass(fg.fogGray("."));
 	}
 
 	if(!prevData.format)
@@ -359,6 +359,9 @@ async function testSample(sampleFilePath)
 
 	if(!prevData.converter && result.converter)
 		return await fail(`Expected no converter but instead got ${fg.orange(result.converter)}`);
+
+	if(prevData.converter!==result.converter)
+		return await fail(`Expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}`);
 
 	return await pass(fg.white("·"));
 }
@@ -484,8 +487,11 @@ xlog.info`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsH
 
 xlog.info`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
 
-if(slowFiles.length>0)
-	xlog.info`\nSlow files (${slowFiles.length.toLocaleString()}):\n\t${slowFiles.join("\n\t")}`;
+if(Object.keys(slowFiles).length>0)
+{
+	const slowSorted = Object.entries(slowFiles).sortMulti([([, v]) => v], [true]).map(([k, v]) => `\t${fg.orange((v/xu.SECOND).secondsAsHumanReadable({short : true}).padStart(8, " "))} ${fg.cyan("==>")} ${k}`);
+	xlog.info`\nSlow files (${Object.keys(slowFiles).length.toLocaleString()}):\n${slowSorted.join("\n")}`;
+}
 
 if(oldDataFormats.length>0)
 	xlog.info`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} — ${oldDataFormats.join(" ")}`;

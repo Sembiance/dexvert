@@ -1,4 +1,3 @@
-/*
 import {Format} from "../../Format.js";
 
 export class kra extends Format
@@ -10,4 +9,4 @@ export class kra extends Format
 	magic      = [/^Krita [Dd]ocument/];
 	converters = ["deark"];
 }
-*/
+

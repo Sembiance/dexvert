@@ -1,54 +1,21 @@
-/*
 import {Format} from "../../Format.js";
+import {path} from "std";
 
 export class lzx extends Format
 {
-	name = "Lempel-Ziv Archive";
-	website = "http://fileformats.archiveteam.org/wiki/LZX";
-	ext = [".lzx"];
-	magic = ["LZX compressed archive","LZX Amiga compressed archive"];
-	converters = ["unar","UniExtract"]
-
-postSteps = [null,null];
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	fileUtil = require("@sembiance/xutil").file,
-	path = require("path"),
-	fs = require("fs");
-
-exports.meta =
-{
-	name    : "Lempel-Ziv Archive",
-	website : "http://fileformats.archiveteam.org/wiki/LZX",
-	ext     : [".lzx"],
-	magic   : ["LZX compressed archive", "LZX Amiga compressed archive"]
-};
-
-exports.converterPriority = ["unar", "UniExtract"];
-
-// Sadly unar doesn't apply proper dates, so we use the 'unlzx' in list only mode to get our dates and then apply after extraction manually
-exports.postSteps =
-[
-	() => ({program : "unlzx", flags : {unlzxListOnly : true}}),
-	() => (state, p, cb) =>
+	name       = "Lempel-Ziv Archive";
+	website    = "http://fileformats.archiveteam.org/wiki/LZX";
+	ext        = [".lzx"];
+	magic      = ["LZX compressed archive", "LZX Amiga compressed archive"];
+	converters = ["unar", "unlzx", "UniExtract"];
+	post = async dexState =>
 	{
-		const unlzxMeta = p.util.program.getMeta(state, "unlzx");
-		if(!unlzxMeta || !unlzxMeta.fileProps)
-			return setImmediate(cb);
-		
-		Object.entries(unlzxMeta.fileProps).parallelForEach(([filename, props], subcb) =>
+		await Object.entries(dexState.meta.fileProps).parallelMap(async ([filename, props]) =>
 		{
-			const outFilePath = path.join(state.output.absolute, filename);
-			if(!fileUtil.existsSync(outFilePath))
-				return setImmediate(subcb);
-
-			fs.utimes(outFilePath, props.ts, props.ts, subcb);
-			// ROB! DENO ALERT! Need to make sure I update the DexFile.ts too!
-		}, cb);
-	}
-];
-
-*/
+			const outputFile = (dexState.f.files.output || []).find(file => file.absolute===path.join(dexState.f.outDir.absolute, filename));
+			if(outputFile)
+				await outputFile.setTS(props.ts);
+		});
+	};
+	metaProvider = ["unlzx[listOnly]"];
+}

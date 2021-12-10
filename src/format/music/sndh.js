@@ -7,5 +7,5 @@ export class sndh extends Format
 	ext        = [".sndh"];
 	magic      = ["SNDH Atari ST music SNDH Atari ST music", "SNDH Atari ST music", "Atari SoundHeader music"];
 	converters = ["sndh2raw"];
-	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="sndh2raw").meta);
+	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="sndh2raw")?.meta || {});
 }

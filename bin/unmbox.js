@@ -38,7 +38,7 @@ for await(const line of readLines(inputFile))
 	let sepMatch = null;
 	for(const SEP_REG of SEP_REGS)
 	{
-		sepMatch = line.match(SEP_REG);
+		sepMatch = line.trim().match(SEP_REG);
 		if(sepMatch)
 			break;
 	}

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import {path} from "std";
+import {path, dateFormat} from "std";
 import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
@@ -191,6 +191,8 @@ export class Program
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
 
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
+
+				// If we are a symlink, we need to make sure we are not pointing outside of our directory
 				if(newFile.isSymlink)
 				{
 					let linkPath = await Deno.readLink(newFilePath);
@@ -210,6 +212,15 @@ export class Program
 						await fileUtil.unlink(newFilePath);
 						return;
 					}
+				}
+
+				// some programs (such as mounting archive/rawPartition/Madame X Game.bin) leaves files with an epoch timestamp. If this happens reset it to input file date
+				if(newFile.ts===0)
+				{
+					if(newFile.isSymlink)	// eslint-disable-line unicorn/prefer-ternary
+						await runUtil.run("touch", ["-h", "-d", new Date((originalInput || f.input).ts).toISOString(), newFile.absolute]);	// to change symlink date we have leave deno and touch it
+					else
+						await newFile.setTS((originalInput || f.input).ts);
 				}
 
 				// if this program has a custom verification step, check that
@@ -255,10 +266,11 @@ export class Program
 			};
 			const newName = (ro.name===true ? getName(originalInput || f.input) : ((typeof ro.name==="function" ? ro.name(r, originalInput) : ro.name) || getName(f.new)));
 			const newExt = (ro.ext || f.new.ext);
-			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length};
+			const originalExt = originalInput ? originalInput.ext : null;
+			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length, originalExt};
 
 			// See if we have more advanced renaming
-			if(ro.regex && (f.files.new.length>1 || ro.alwaysRename))
+			if(ro.renamer && (f.files.new.length>1 || ro.alwaysRename))
 			{
 				let renamer = null;
 				let renamerNum = null;
@@ -268,7 +280,7 @@ export class Program
 					{
 						try
 						{
-							const parts = testRenamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {});
+							const parts = testRenamer({fn : newFile.base, ...restreamerOpts}, (ro.regex ? (newFile.base.match(ro.regex)?.groups || {}) : {}));
 							return (parts.length===0 || parts.some(part => typeof part!=="string")) ? null : parts.join("");
 						}
 						catch

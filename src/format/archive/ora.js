@@ -1,4 +1,3 @@
-/*
 import {Format} from "../../Format.js";
 
 export class ora extends Format
@@ -10,4 +9,4 @@ export class ora extends Format
 	magic      = ["OpenRaster Image Format", "OpenRaster bitmap"];
 	converters = ["deark"];
 }
-*/
+

@@ -1,35 +1,13 @@
-/*
 import {Format} from "../../Format.js";
 
 export class nrg extends Format
 {
-	name = "Nero CD Image";
-	website = "http://fileformats.archiveteam.org/wiki/NRG";
-	ext = [".nrg"];
-	magic = ["Nero CD image"];
-	priority = 0;
-	converters = [["nrg2iso",{"program":"dexvert","flags":{"deleteInput":true}}],"UniExtract"]
+	name       = "Nero CD Image";
+	website    = "http://fileformats.archiveteam.org/wiki/NRG";
+	ext        = [".nrg"];
+	magic      = ["Nero CD image"];
+	priority   = this.PRIORITY.TOP;	// NRG is often mis-identified as ISO
+	
+	// According to nrg2iso we just skip the first 307,200 bytes: http://gregory.kokanosky.free.fr/v4/linux/nrg2iso.en.html
+	converters = ["dd[bs:307200][skip:1] -> dexvert", "UniExtract"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	C = require("../../C.js");
-
-exports.meta =
-{
-	name    : "Nero CD Image",
-	website : "http://fileformats.archiveteam.org/wiki/NRG",
-	ext     : [".nrg"],
-	magic   : ["Nero CD image"],
-	priority : C.PRIORITY.TOP	// NRG is often mis-identified as ISO
-};
-
-exports.converterPriority =
-[
-	["nrg2iso", {program : "dexvert", flags : {deleteInput : true}, argsd : state => ([path.join(state.output.absolute, `${state.input.name}.iso`), state.output.absolute])}],
-	"UniExtract"
-];
-
-*/

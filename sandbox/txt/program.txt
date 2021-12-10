@@ -45,8 +45,8 @@ Default encoding: windows-1252
 >>> cwd = async r => r.outDir()
 If cwd is set, the program will be run from within the supplied directory path instead of in the tmp dir
 
->>> symlinkInToCWD = true
-If set to true, then a symlink to the input file will be placed in the cwd directory. It will be removed directly after program execution.
+>>> mirrorInToCWD = true  ||  mirrorInToCWD = "copy"
+If set to true, then a symlink to (or a copy of) the input file will be placed in the cwd directory. It will be removed directly after program execution.
 
 >>> outExt = ".svg"   ||   async (runState) => { ... }
 Return the extension files produced by this program should be renamed to

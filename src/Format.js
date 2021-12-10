@@ -90,7 +90,8 @@ export class Format
 			weakExt        : {types : ["boolean", Array]},
 
 			// identification - filename
-			filename : {type : ["string", RegExp]},
+			filename     : {type : ["string", RegExp]},
+			weakFilename : {type : "boolean"},
 
 			// identification - filename
 			fileSize      : {types : ["number", Array, Object]},

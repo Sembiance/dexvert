@@ -1,28 +1,11 @@
-/*
 import {Format} from "../../Format.js";
 
 export class mpq extends Format
 {
-	name = "MoPaQ Archive";
-	ext = [".mpq"];
-	magic = ["MoPaQ (MPQ) archive","MPQ Archive"];
+	name           = "MoPaQ Archive";
+	ext            = [".mpq"];
+	magic          = ["MoPaQ (MPQ) archive", "MPQ Archive"];
 	forbiddenMagic = ["StarCraft Map"];
-	unsupported = true;
-	notes = "Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx";
+	unsupported    = true;
+	notes          = "Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx";
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "MoPaQ Archive",
-	ext            : [".mpq"],
-	magic          : ["MoPaQ (MPQ) archive", "MPQ Archive"],
-	forbiddenMagic : ["StarCraft Map"],
-	unsupported    : true,
-	notes          : "Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx"
-};
-
-*/

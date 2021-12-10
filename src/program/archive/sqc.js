@@ -1,22 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class sqc extends Program
 {
-	website = "https://www.speedproject.com/download/old/";
+	website   = "https://www.speedproject.com/download/old/";
+	loc       = "win2k";
+	bin       = "c:\\Program Files\\SpeedProject\\Squeez 5\\sqc.exe";
+	args      = r => ["x", r.inFile()];
+	qemuData  = ({cwd : "c:\\out"});
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "https://www.speedproject.com/download/old/"
-};
-
-exports.qemu = () => "c:\\Program Files\\SpeedProject\\Squeez 5\\sqc.exe";
-exports.args = (state, p, r, inPath=state.input.filePath) => (["x", inPath]);
-exports.qemuData = (state, p, r) => ({cwd : "c:\\out", inFilePaths : [r.args.last()]});
-*/

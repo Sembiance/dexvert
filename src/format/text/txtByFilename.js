@@ -1,6 +1,5 @@
-import {Format} from "../../Format.js";
+/*import {Format} from "../../Format.js";
 import {TEXT_MAGIC} from "../../Detection.js";
-/* eslint-disable prefer-named-capture-group */
 
 export class txtByFilename extends Format
 {
@@ -10,9 +9,8 @@ export class txtByFilename extends Format
 	weakMagic        = true;
 	forbidMagicMatch = true;
 	priority         = this.PRIORITY.VERYLOW;
-	filename         =
-	[
-		/registra.tio/i, /register.*/i,
+	filename         = [
+		/registra.tio/i, /register.* /i,	// TODO I put a space before the forward slash, undo that
 		/descript.ion/i,
 		/file_id.*\.diz/i,
 		/^disk_ord.er.?$/i, /ordrform/i,
@@ -21,6 +19,7 @@ export class txtByFilename extends Format
 		/^.*manu.al$/i,
 		/[_-]te?xt$/i
 	];
+	weakFilename = true;
 	
 	untouched = true;
 	fallback  = true;
@@ -28,3 +27,4 @@ export class txtByFilename extends Format
 	// TODO the below
 	//inputMeta = p.family.supportedInputMeta(state, p, cb)
 }
+*/

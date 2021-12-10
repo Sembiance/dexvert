@@ -30,10 +30,14 @@ const SUPPORTING_DIR_PATHS =
 
 const FLEX_SIZE_PROGRAMS =
 {
+	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
+	xfdDecrunch : 0.1,
+	
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
 	darktable_cli : 0.1,
 
 	// Produces different WAV data each time
+	doomMUS2mp3     : 0.1,
 	soundFont2tomp3 : 0.1,
 	sidplay2        : 0.1,
 	zxtune123       : 0.1
@@ -41,6 +45,11 @@ const FLEX_SIZE_PROGRAMS =
 
 const FLEX_SIZE_FORMATS =
 {
+	archive :
+	{
+		// the PBMS generated are different each time
+		hypercard : 0.1
+	},
 	image :
 	{
 		// Each iteration generates different clippath ids, sigh.
@@ -74,6 +83,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
+	[/archive\/pog\/.+\.pnm$/i, "other", true],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],

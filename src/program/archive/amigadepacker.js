@@ -1,25 +1,9 @@
-/*
 import {Program} from "../../Program.js";
 
 export class amigadepacker extends Program
 {
 	website = "http://zakalwe.fi/~shd/foss/amigadepacker/";
 	package = "app-arch/amigadepacker";
+	bin     = "amigadepacker";
+	args    = async r => ["-o", await r.outFile("out"), r.inFile()];
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "http://zakalwe.fi/~shd/foss/amigadepacker/",
-	package : "app-arch/amigadepacker",
-};
-
-exports.bin = () => "amigadepacker";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile")) => (["-o", outPath, inPath]);
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile"), path.join(state.output.absolute, state.input.name))(state, p, cb);
-*/

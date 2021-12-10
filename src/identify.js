@@ -22,6 +22,11 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const xlog = _xlog || xu.xLog(logLevel);
 
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
+
+	// if it's a symlink, we're done!
+	if(inputFile.isSymlink)
+		return [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic", unsupported : true})];
+
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f, {xlog})))).flatMap(o => o.meta.detections);
 
@@ -185,6 +190,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
 			const hasWeakMagic = format.weakMagic===true || (Array.isArray(format.weakMagic) && detections.some(r => format.weakMagic.some(m => flexMatch(r.value, m))) && !detections.some(r => trustedMagic.some(m => flexMatch(r.value, m))));
+			const hasWeakFilename = format.weakFilename===true;
 
 			// Non-weak magic matches start at confidence 100.
 			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
@@ -212,7 +218,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			}
 
 			// Filename matches start at confidence 33.
-			if(filenameMatch)
+			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch))
 				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
 			// fileSize matches start at confidence 20.

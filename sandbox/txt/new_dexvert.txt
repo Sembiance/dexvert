@@ -3,6 +3,8 @@
 \--------------/
 * Add archive
 
+* Go through every program/archive/ and make sure renameOut = false is set for most of them
+
 * Add executable
 
 * Add video
@@ -15,8 +17,8 @@
 	font/amigaBitmapFont
 
 * Add text
-  Start with:
-	text/txtByFilename
+  STRONGLY consider ditching txtByFilename and txtByExt and just sticking with 'txt' as the fallback
+  Attempting to match on filename/ext to then try and show /^data$/ files usually leaves a messed up display because it's binary
 
 * Now the test-process test case should be working 100%
 

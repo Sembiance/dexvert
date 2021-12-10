@@ -129,6 +129,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{
+				dexState.untouched = true;
 				dexState.processed = true;
 				await cleanup();
 				break;

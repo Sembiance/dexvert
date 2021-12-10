@@ -42,6 +42,9 @@ Array of filenames this format may have.
 Strings must match exactly to the filename, case sensitive.
 Regexes match as a regex. Use /.../i for a case insensitive match
 
+>>> weakFilename = true
+Set to true and it must also match magic or extension to match
+
 
 >>> ******** File Size
 >>> fileSize = 28124   ||   fileSize : [8000, 9000, 10000]   ||   fileSize : {".gif" : 3192, ".png" : [24000, 24200]}

@@ -7,5 +7,5 @@ export class sc68 extends Format
 	ext         = [".sc68"];
 	magic       = ["sc68 Atari ST music", "sc68 soundchip music"];
 	converters = ["sndh2raw"];
-	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="sndh2raw").meta);
+	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="sndh2raw")?.meta || {});
 }

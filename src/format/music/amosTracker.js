@@ -8,5 +8,5 @@ export class amosTracker extends Format
 	ext        = [".abk"];
 	magic      = ["AMOS Memory Bank, Tracker format"];
 	converters = ["amosTracker2mp3"];
-	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="amosTracker2mp3").meta);
+	post       = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="amosTracker2mp3")?.meta || {});
 }

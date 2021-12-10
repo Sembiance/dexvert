@@ -1,25 +1,15 @@
-/*
 import {Program} from "../../Program.js";
 
 export class msexpand extends Program
 {
-	website = "http://gnuwin32.sourceforge.net/packages/mscompress.htm";
-	package = "app-arch/mscompress";
+	website       = "http://gnuwin32.sourceforge.net/packages/mscompress.htm";
+	package       = "app-arch/mscompress";
+	bin           = "msexpand";
+	args          = r => [r.inFile()];
+	cwd           = r => r.outDir();
+	mirrorInToCWD = true;
+	renameOut     = {
+		alwaysRename : true,
+		renamer      : [({newName, suffix, originalExt}) => [newName, suffix, originalExt.endsWith("_") ? originalExt.slice(0, -1) : originalExt]]
+	};
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "http://gnuwin32.sourceforge.net/packages/mscompress.htm",
-	package : "app-arch/mscompress"
-};
-
-exports.bin = () => "msexpand";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.cwd, "in"), path.join(state.output.absolute, path.basename(state.input.base, (p.format.meta.ext || ["_"])[0])))(state, p, cb);
-*/

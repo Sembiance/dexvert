@@ -145,7 +145,7 @@ export class DexState
 		
 		r.push(`\n${fg.cyan("-".repeat(100))}`);
 		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)}`);
-		if(this.format?.untouched)
+		if(this.untouched)
 			r.push(` ${fg.deepSkyblue("**UNTOUCHED**")}`);
 		if(this.f?.input.transformed)
 			r.push(` ${fg.pink("**INPUT WAS TRANSFORMED**")}`);

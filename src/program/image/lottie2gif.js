@@ -16,5 +16,6 @@ export class lottie2gif extends Program
 
 		return args;
 	};
+	renameOut = true;
 }
 

@@ -11,4 +11,5 @@ export class gifsicle_info extends Program
 		if(r.stdout.trim().split("\n").some(line => line.trim().match(/^\* .+ \d+ images$/)))
 			r.meta.animated = true;
 	};
+	renameOut = false;
 }

@@ -1,82 +1,34 @@
-/*
 import {Program} from "../../Program.js";
+import {fileUtil, runUtil} from "xutil";
+import {path} from "std";
 
 export class ffdec extends Program
 {
 	website = "https://github.com/jindrapetrik/jpexs-decompiler";
 	package = "media-gfx/ffdec";
-	flags = {"ffdecKeepAsGIF":"Leave the animation as a GIF, don't convert to MP4","ffdecMaxFrames":"Maximum number of frames to extract. Default: 500"};
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	fileUtil = require("@sembiance/xutil").file,
-	runUtil = require("@sembiance/xutil").run,
-	path = require("path"),
-	tiptoe = require("tiptoe");
-
-exports.meta =
-{
-	website       : "https://github.com/jindrapetrik/jpexs-decompiler",
-	package : "media-gfx/ffdec",
-	flags :
+	bin     = "ffdec";
+	args    = r => [
+		"-cli",
+		"-config", "loopMedia=false,parallelSpeedUpThreadCount=20",
+		"-exportTimeout", "120",	// Limit export time to 2 minutes. Any longer is likely due to tons of 'dynamic' shapes or large individual frames, don't need to extract all that stuff
+		"-select", "1-500",
+		"-export", "script,image,shape,morphshape,movie,font,frame,button,sound,binaryData,text", r.outDir(), r.inFile()];
+	postExec = async r =>
 	{
-		ffdecKeepAsGIF : "Leave the animation as a GIF, don't convert to MP4",
-		ffdecMaxFrames : "Maximum number of frames to extract. Default: 500"
-	}
-};
+		// we manually join our frames before Program encounters our output files
+		const framesDirPath = path.join(r.outDir({absolute : true}), "frames");
+		const frameFilePaths = (await fileUtil.tree(framesDirPath, {nodir : true, regex : /\.png$/i})).map(filePath => path.relative(framesDirPath, filePath)).sortMulti([filePath => (+path.basename(filePath, ".png"))]);
 
-exports.bin = () => "ffdec";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=state.output.dirPath) => ([
-	"-cli",
-	"-config", "loopMedia=false,parallelSpeedUpThreadCount=20",
-	"-exportTimeout", "120",	// Limit export time to 2 minutes. Any longer is likely due to tons of 'dynamic' shapes or large individual frames, don't need to extract all that stuff
-	"-select", `1-${r.flags.ffdecMaxFrames || 500}`,
-	"-export", "script,image,shape,morphshape,movie,font,frame,button,sound,binaryData,text", outPath, inPath]);	// Don't extract sprite because it's just generated from shapes/images and can be thousands of them
+		const {stdout : frameRateRaw} = await runUtil.run("swfdump", ["--rate", r.inFile()], {cwd : r.f.root});
+		const frameDelay = (100/(+frameRateRaw.match(/-r (?<rate>\d.+)/)?.groups?.rate));
+		const gifFilePath = await r.outFile(`${r.originalInput ? r.originalInput.name : "out"}.gif`, {absolute : true});
+		
+		await runUtil.run("convert", ["-delay", frameDelay.toString(), "-loop", "0", "-dispose", "previous", ...frameFilePaths, "-strip", gifFilePath], {cwd : framesDirPath});
+		await fileUtil.unlink(framesDirPath, {recursive : true});
+	};
 
-exports.post = (state, p, r, cb) =>
-{
-	const framesDirPath = path.join(state.output.absolute, "frames");
-
-	tiptoe(
-		function findFrames()
-		{
-			fileUtil.glob(framesDirPath, "*.png", {nodir : true}, this.parallel());
-
-			// ffdec leaves empty directories if it times out, so delete those
-			runUtil.run("find", [state.output.absolute, "-type", "d", "-empty", "-delete"], {silent : true, "ignore-stderr" : true}, this.parallel());
-		},
-		function getFrameRate(frameFilePaths)
-		{
-			if(frameFilePaths.length<=1)
-				return this.finish();
-
-			this.data.frameFilePaths = frameFilePaths.multiSort([frameFilePath => path.basename(frameFilePath, ".ext").padStart(10, "0")]);
-			runUtil.run("swfdump", ["--rate", r.args.last()], {silent : true, cwd : state.cwd}, this);
-		},
-		function joinFrames(frameRateRaw)
-		{
-			const frameDelay = (100/(+frameRateRaw.match(/-r (?<rate>\d.+)/)?.groups?.rate));
-			this.data.GIFFilePath = path.join(state.output.absolute, `${state.input.name}.gif`);
-			p.util.program.run("convert", {args : ["-delay", frameDelay.toString(), "-loop", "0", "-dispose", "previous", ...this.data.frameFilePaths, ...p.util.program.args(state, p, "convert").slice(1, -1), this.data.GIFFilePath]})(state, p, this);
-		},
-		function convertToMP4()
-		{
-			fileUtil.unlink(framesDirPath, this.parallel());
-
-			if(!r.flags.ffdecKeepAsGIF)
-				p.util.program.run("ffmpeg", {flags : {ffmpegExt : ".mp4"}, argsd : [this.data.GIFFilePath]})(state, p, this.parallel());
-		},
-		function removeSourceGIF()
-		{
-			if(r.flags.ffdecKeepAsGIF)
-				this();
-			else
-				fileUtil.unlink(this.data.GIFFilePath, this);
-		},
-		cb
-	);
-};
-*/
+	// send the output gif to ffmpeg to be turned into an MP4
+	chain      = "?ffmpeg";
+	chainCheck = (r, chainFile) => chainFile.dir===r.outDir({absolute : true}) && chainFile.ext===".gif";
+	renameOut  = false;
+}

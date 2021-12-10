@@ -7,4 +7,5 @@ export class dsstoreinfo extends Program
 	bin        = "dsstoreinfo";
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+	renameOut  = true;
 }

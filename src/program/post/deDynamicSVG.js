@@ -27,4 +27,5 @@ export class deDynamicSVG extends Program
 		// This will take care of deleting any 'empty' elements that totalCADConverter often does
 		await runUtil.run("svgo", ["--multipass", "--final-newline", outFilePath]);
 	};
+	renameOut = true;
 }

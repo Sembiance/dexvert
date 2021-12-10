@@ -7,7 +7,7 @@ const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");
 const LOWERCASE = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Escape", "Tab", "Backspace", "Enter", " ", "LeftAlt", "RightAlt", "LeftControl", "RightControl", "LeftShift", "RightShift", "CapsLock", "ScrollLock", "NumLock", "`", "-", "=", "\\", "[", "]", ";", '"', ".", ",", "/", null, "PrintScreen", "Pause", "Insert", "Home", "PageUp", "Delete", "End", "PageDown", "Left", "Up", "Down", "Right", "KP1", "KP2", "KP3", "KP4", "KP5", "KP6", "KP7", "KP8", "KP9", "KP0", "KPDivide", "KPMultiply", "KPMinus", "KPPlus", "KPEnter", "KPPeriod"];	// eslint-disable-line max-len
 const UPPERCASE = [null, "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "~", "_", "+", "|", "{", "}", ":", "'", "<", ">", "?"];	// eslint-disable-line max-len
 
-export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, keyOpts={}, xlog})
+export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, xlog})
 {
 	const dosDirPath = (await fileUtil.exists(path.join(root, "dos")) ? (await fileUtil.genTempPath(root, "dos")) : path.join(root, "dos"));
 	await Deno.mkdir(dosDirPath);
@@ -68,12 +68,15 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	const runOptions = {timeout};
 	runOptions.env = xlog.atLeast("trace") ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
 
+	let scriptFilePath = null;
 	if(keys)
 	{
-		const scriptEnv = [];
-		let ms = (keyOpts.delay || xu.SECOND*5);
+		const scriptData = [];
+		let ms = xu.SECOND*5;
 		for(const key of Array.force(keys))
 		{
+			xlog.trace`DOS pre-processing key: ${key}`;
+
 			if(Object.isObject(key) && key.delay)
 			{
 				ms += key.delay;
@@ -88,41 +91,43 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 
 				if(UPPERCASE.includes(letter))
 				{
-					scriptEnv.push(ms);
-					scriptEnv.push(LOWERCASE.indexOf("LeftShift"));
-					scriptEnv.push(1);
+					scriptData.push(ms);
+					scriptData.push(LOWERCASE.indexOf("LeftShift"));
+					scriptData.push(1);
 
 					ms+=5;
 				}
 
-				scriptEnv.push(ms);
-				scriptEnv.push(keyid);
-				scriptEnv.push(1);
+				scriptData.push(ms);
+				scriptData.push(keyid);
+				scriptData.push(1);
 
 				ms+=10;
 
-				scriptEnv.push(ms);
-				scriptEnv.push(keyid);
-				scriptEnv.push(0);
+				scriptData.push(ms);
+				scriptData.push(keyid);
+				scriptData.push(0);
 
 				if(UPPERCASE.includes(letter))
 				{
 					ms += 5;
 
-					scriptEnv.push(ms);
-					scriptEnv.push(LOWERCASE.indexOf("LeftShift"));
-					scriptEnv.push(0);
+					scriptData.push(ms);
+					scriptData.push(LOWERCASE.indexOf("LeftShift"));
+					scriptData.push(0);
 				}
 
 				ms+=100;
 			}
-
-			runOptions.env.SCRIPT = `${scriptEnv.join(",")},`;
 		}
+
+		scriptFilePath = await fileUtil.genTempPath(undefined, "dos_script");
+		await Deno.writeTextFile(scriptFilePath, `${scriptData.join(",")},`);
+		runOptions.env.SCRIPT = scriptFilePath;
 	}
 
 	xlog.info`DOS ${fg.orange(cmd)} launching ${fg.peach("dosbox")}...`;
-	xlog.trace`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
+	xlog.debug`\tAUTO EXEC: ${bootExecLines.join("\n\t")}`;
 	const r = await runUtil.run("dosbox", ["-conf", configFilePath], runOptions);
 	xlog.debug`${r}`;
 	if(video || screenshot)
@@ -140,6 +145,10 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 			await Program.runProgram("ffmpeg", await FileSet.create({root, input : videoFilePath, outFile : video}), {flags : {outType : "mp4"}, xlog});
 		}
 	}
+
+	if(scriptFilePath!==null)
+		await fileUtil.unlink(scriptFilePath);
+	await fileUtil.unlink(dosDirPath, {recursive : true});
 		
 	return r;
 }

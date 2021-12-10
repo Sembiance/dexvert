@@ -1,24 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class zoo extends Program
 {
-	website = "https://packages.debian.org/jessie/zoo";
-	package = "app-arch/zoo";
+	website   = "https://packages.debian.org/jessie/zoo";
+	package   = "app-arch/zoo";
+	bin       = "zoo";
+	cwd       = r => r.outDir();
+	args      = r => ["-extract", r.inFile()];
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website       : "https://packages.debian.org/jessie/zoo",
-	package : "app-arch/zoo"
-};
-
-exports.bin = () => "zoo";
-exports.args = (state, p, r, inPath=state.input.filePath) => (["-extract", inPath]);
-exports.cwd = state => state.output.absolute;
-*/

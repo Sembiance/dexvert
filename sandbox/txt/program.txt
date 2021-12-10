@@ -96,10 +96,15 @@ You can also return an Object to allow it AND set the key/vals in that object as
 >>> verify = async (r, dexFile) => { return false; }
 Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.
 
->>> qemuData = async (runState) => ({timeout : XU.MINUTE})
+>>> qemuData = ({script : ``})  ||  qemuData = async (runState) => ({timeout : XU.MINUTE})
 Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> cwd				Which directory to run in
 	>>> timeout			Maximum duration to allow it to run before stopping
 	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
 	>>> dontMaximize	Pass true to prevent the window from running maximized	
 
+>>> dosData = ({timeout : xu.SECOND*30})  ||  dosData = async (runState) => ({...})
+An object or a function that returns and object to be passed into dosUtil.run()
+	>>> timeout			Maximum duration of dosBox
+	>>> runIn			Can be "out" or "prog" to run the executable in the out or prog directory (default is E:\\)
+	>>> keys			An array of keys to press, 100ms interval between key presses. Strings are singles keys (or phrases). Special keys should be sub arrays like ["Enter"]. Can also use {delay : xu.SECOND} to insert extra delays between keys

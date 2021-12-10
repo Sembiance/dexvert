@@ -11,6 +11,7 @@ export class uade123 extends Program
 	args = async r => [...(r.flags.player ? ["-P", `/usr/share/uade/players/${r.flags.player}`] : []), "-t", "1800", "-e", "wav", "-f", await r.outFile("out.wav"), r.inFile()];	// -t 1800 limits songs to 30 minutes max
 
 	// uade often fails to produce a valid wav but does produce a 68 byte wav file of nothing
-	verify = (r, dexFile) => dexFile.size!==68;
-	chain  = "sox";
+	verify    = (r, dexFile) => dexFile.size!==68;
+	renameOut = true;
+	chain     = "sox";
 }

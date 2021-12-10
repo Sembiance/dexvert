@@ -29,12 +29,12 @@ export class Program
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
 			loc       : {type : "string", required : true, enum : ["local", "dos", ...QEMUIDS]},
+			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
 			flags          : {type : Object},
 			package  : {types : ["string", Array]},
 			notes          : {type : "string"},
-			renameOut      : {types : ["function", Object, "boolean"]},
 			runOptions     : {types : [Object, "function"]},
 			unsafe         : {type : "boolean"},
 			website        : {type : "string", url : true},
@@ -47,7 +47,7 @@ export class Program
 			chainCheck       : {type : "function", length : [0, 3]},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {type : "number", range : [1]},
-			dosData          : {type : "function", length : [0, 1]},
+			dosData          : {types : ["function", Object]},
 			exec             : {type : "function", length : [0, 1]},
 			filenameEncoding : {types : ["function", "string"]},
 			outExt           : {types : ["function", "string"]},
@@ -82,6 +82,8 @@ export class Program
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags, xlog});
 		r.cwd = f.root;
+		if(originalInput)
+			r.originalInput = originalInput;
 		if(this.cwd)
 		{
 			const newCWD = await this.cwd(r);
@@ -127,7 +129,7 @@ export class Program
 			r.dosData = {root : f.root, cmd : this.bin, xlog};
 			r.dosData.args = this.args ? await this.args(r) : [];
 			if(this.dosData)
-				Object.assign(r.dosData, await this.dosData(r));
+				Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
 
 			r.status = await runDOS(r.dosData);
 		}
@@ -254,7 +256,7 @@ export class Program
 		// if we have some new files, time to rename them
 		if(f.outDir && f.files.new?.length && renameOut!==false)
 		{
-			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, renameOut);
+			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, Object.isObject(renameOut) ? renameOut : {});
 			const getName = o =>
 			{
 				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa, we already set this in DexFile.preName

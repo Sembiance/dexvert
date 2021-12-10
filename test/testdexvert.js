@@ -36,10 +36,12 @@ const FLEX_SIZE_PROGRAMS =
 	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
 	darktable_cli : 0.1,
 
-	// Produces different WAV data each time
+	// Produces different data each time
 	doomMUS2mp3     : 0.1,
-	soundFont2tomp3 : 0.1,
+	ffdec           : 1.0,
 	sidplay2        : 0.1,
+	soundFont2tomp3 : 0.1,
+	EXE2SWFExtractor : 10,	// TODO temp
 	zxtune123       : 0.1
 };
 
@@ -67,6 +69,11 @@ const FLEX_SIZE_FORMATS =
 	}
 };
 
+const IGNORE_SIZE_FILEPATHS =
+[
+	/scripts\/.+\.as$/i	// archive/swf/cookie-hamster often produces very different script/**/*.as files
+];
+
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
@@ -78,6 +85,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 
 	// Unsupported files that end up getting matched to other stuff
+	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
 	[/other\/microsoftChatCharacter\/armando.avb$/, "image", "tga"],
 
@@ -160,9 +168,11 @@ async function testSample(sampleFilePath)
 {
 	const startedAt = performance.now();
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
-	const tmpOutDirPath = await fileUtil.genTempPath(path.join(DEXTEST_ROOT_DIR, path.basename(path.dirname(sampleFilePath))), `_${path.basename(sampleFilePath)}`);
+	const diskFamily = sampleSubFilePath.split("/")[0];
+	const diskFormat = sampleSubFilePath.split("/")[1];
+	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const logFilePath = await fileUtil.genTempPath(undefined, "testdexvert_log.txt");
+	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
 	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json", sampleFilePath, tmpOutDirPath];
 	const r = await runUtil.run("dexvert", dexvertArgs);
 	const resultFull = xu.parseJSON(r.stdout, {});
@@ -189,7 +199,7 @@ async function testSample(sampleFilePath)
 	{
 		failCount++;
 
-		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(`file://${tmpOutDirPath}`)}\n       ${fg.deepSkyblue(`file://${logFilePath}`)}`);
+		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(`file://${path.dirname(tmpOutDirPath)}`)}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
@@ -258,12 +268,9 @@ async function testSample(sampleFilePath)
 	if(!Object.hasOwn(testData, sampleSubFilePath))
 		return await fail(`No test data for this file: ${xu.inspect(result).squeeze()}`);
 
-	const diskFamily = sampleSubFilePath.split("/")[0];
-	const diskFormat = sampleSubFilePath.split("/")[1];
-
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
-		return fail(`Expected processed to be ${fg.orange(prevData.processed)} but got ${fg.orange(result.processed)}`);
+		return fail(`Expected processed to be ${fg.orange(prevData.processed)}${prevData.processed && prevData.converter ? ` ${xu.paren(prevData.converter)}` : ""} but got ${fg.orange(result.processed)}`);
 
 	const allowFamilyMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family)));
 	const allowFormatMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, , mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format)));
@@ -304,6 +311,9 @@ async function testSample(sampleFilePath)
 		// first make sure the files are the same
 		for(const [name, {size, sum}] of Object.entries(result.files))
 		{
+			if(IGNORE_SIZE_FILEPATHS.some(re => re.test(name)))
+				continue;
+
 			const prevFile = prevData.files[name];
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 

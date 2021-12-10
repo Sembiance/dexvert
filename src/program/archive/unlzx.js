@@ -30,4 +30,5 @@ export class unlzx extends Program
 			r.meta.fileProps[parts.filename] = {unpackedSize : parts.unpackedSize, packedSize : parts.packedSize, ts : ts.getTime(), attribs : parts.attribs};
 		});
 	};
+	renameOut = false;
 }

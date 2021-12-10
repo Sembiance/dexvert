@@ -19,5 +19,6 @@ export class openssl extends Program
 			
 		return [...a, "-in", r.inFile()];
 	};
+	renameOut  = true;
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 }

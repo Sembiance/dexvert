@@ -7,5 +7,6 @@ export class cistopbm extends Program
 	bin        = "cistopbm";
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.pbm")});
+	renameOut  = true;
 	chain      = "convert";
 }

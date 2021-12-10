@@ -10,6 +10,7 @@ export class adplay extends Program
 	runOptions = ({timeout : xu.MINUTE*2});
 
 	// adplay often fails to produce a valid wav but does produce a 44 byte wav file of nothing
-	verify = (r, dexFile) => dexFile.size!==44;
-	chain  = "sox";
+	verify    = (r, dexFile) => dexFile.size!==44;
+	renameOut = true;
+	chain     = "sox";
 }

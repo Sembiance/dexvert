@@ -12,5 +12,6 @@ export class uniconvertor extends Program
 	bin        = "uniconvertor";
 	args       = async r => [r.inFile(), await r.outFile(`out.${r.flags.outType || "svg"}`)];
 	runOptions = ({timeout : xu.MINUTE*3});
+	renameOut  = true;
 	chain      = r => ((r.flags.outType || "svg")==="svg" ? "deDynamicSVG" : null);
 }

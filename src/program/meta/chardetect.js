@@ -18,4 +18,5 @@ export class chardetect extends Program
 				r.meta.charSet = detectedCharSet;
 		}
 	};
+	renameOut = false;
 }

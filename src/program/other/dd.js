@@ -21,4 +21,5 @@ export class dd extends Program
 		a.push(`of=${await r.outFile("out")}`);
 		return a;
 	};
+	renameOut = true;
 }

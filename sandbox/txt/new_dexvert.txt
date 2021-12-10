@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add archive
-
-* Go through every program/archive/ and make sure renameOut = false is set for most of them
-
 * Add executable
 
 * Add video

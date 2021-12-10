@@ -93,4 +93,5 @@ export class ha extends Program
 
 		await fileUtil.unlink(listFilePath);
 	};
+	renameOut = false;
 }

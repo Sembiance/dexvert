@@ -24,4 +24,5 @@ export class xfdDecrunch extends Program
 			await file.calcStats();
 		});
 	};
+	renameOut = true;
 }

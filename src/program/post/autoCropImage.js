@@ -8,6 +8,7 @@ export class autoCropImage extends Program
 		fuzzPercentage : `What level of percentage to allow for fuzz. Default: 20`
 	};
 
-	bin  = "convert";
-	args = async r => [r.inFile(), "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", await r.outFile("out.png")];
+	bin       = "convert";
+	args      = async r => [r.inFile(), "-bordercolor", "#FFFFFF", "-border", "1x1", "-fuzz", `${r.flags.fuzzPercentage || 20}%`, "-trim", "+repage", await r.outFile("out.png")];
+	renameOut = true;
 }

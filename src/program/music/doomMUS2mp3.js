@@ -55,5 +55,6 @@ export class doomMUS2mp3 extends Program
 			
 			WaitForPID(ProcessExists("SLADE.exe"), ${xu.MINUTE})`
 	});
-	chain = "timidity";
+	renameOut = true;
+	chain     = "timidity";
 }

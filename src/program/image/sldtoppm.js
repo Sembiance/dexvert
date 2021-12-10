@@ -7,5 +7,6 @@ export class sldtoppm extends Program
 	bin        = "sldtoppm";
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.ppm")});
+	renameOut  = true;
 	chain      = "convert";
 }

@@ -29,5 +29,6 @@ export class fifView extends Program
 
 		WinWaitClose("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)`
 	});
-	chain = "dexvert[asFormat:image/bmp] -> autoCropImage";
+	renameOut = true;
+	chain     = "dexvert[asFormat:image/bmp] -> autoCropImage";
 }

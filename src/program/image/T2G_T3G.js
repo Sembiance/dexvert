@@ -38,5 +38,6 @@ export class T2G_T3G extends Program
 
 				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
 			EndIf`});
-	chain = "T3G_T4G";
+	renameOut = true;
+	chain     = "T3G_T4G";
 }

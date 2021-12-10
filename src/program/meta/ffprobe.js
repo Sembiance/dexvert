@@ -35,4 +35,5 @@ export class ffprobe extends Program
 			}
 		});
 	};
+	renameOut = false;
 }

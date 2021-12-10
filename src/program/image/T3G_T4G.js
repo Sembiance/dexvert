@@ -37,5 +37,6 @@ export class T3G_T4G extends Program
 
 				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
 			EndIf`});
-	chain = "CADDraw";
+	renameOut = true;
+	chain     = "CADDraw";
 }

@@ -8,5 +8,6 @@ export class dcraw extends Program
 	args          = r => [r.inFile()];
 	cwd           = r => r.outDir();
 	mirrorInToCWD = true;
+	renameOut     = true;
 	chain         = "convert";
 }

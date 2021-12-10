@@ -9,7 +9,8 @@ export class nconvert extends Program
 		format : "Which nconvert format to use for conversion. For list run `nconvert -help` Default: Let nconvert decide"
 	};
 
-	bin    = "nconvert";
-	outExt = ".png";
-	args   = async r => [...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", await r.outFile("out.png"), r.inFile()];
+	bin       = "nconvert";
+	outExt    = ".png";
+	args      = async r => [...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", await r.outFile("out.png"), r.inFile()];
+	renameOut = true;
 }

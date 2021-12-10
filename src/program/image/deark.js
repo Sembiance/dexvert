@@ -53,7 +53,7 @@ export class deark extends Program
 	// If I change anything, test with: image/macPaint  image/amosIcons  image/glowIcon  image/icns  archive/msa  image/wpg  image/shg
 	renameOut = {
 		alwaysRename : true,
-		regex        : /^out\.(?<num>\d{3})\.(?<rest>.+)$/,
+		regex        : /^out\.(?<num>\d{3,4})\.(?<rest>.+)$/,
 		renamer      :
 		[
 			({suffix, newName}, {rest}) => restRenamer(rest, suffix, newName),

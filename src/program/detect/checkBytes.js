@@ -12,4 +12,5 @@ export class checkBytes extends Program
 	{
 		r.meta.detections = r.stdout.trim().split("\n").filter(v => !!v).map(line => Detection.create({value : line.trim(), from : "checkBytes", file : r.f.input}));
 	};
+	renameOut = false;
 }

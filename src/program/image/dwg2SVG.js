@@ -8,5 +8,6 @@ export class dwg2SVG extends Program
 	bin        = "dwg2SVG";
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.svg")});
+	renameOut  = true;
 	chain      = "deDynamicSVG";
 }

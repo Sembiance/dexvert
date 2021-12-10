@@ -64,4 +64,5 @@ export class ffmpeg extends Program
 		}
 		return a;
 	};
+	renameOut = true;
 }

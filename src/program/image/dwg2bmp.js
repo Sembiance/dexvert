@@ -7,5 +7,6 @@ export class dwg2bmp extends Program
 	bin        = "dwg2bmp";
 	args       = async r => ["-quality=100", `-outfile=${await r.outFile("out.bmp")}`, r.inFile()];
 	runOptions = () => ({virtualX : true});
+	renameOut  = true;
 	chain      = "dexvert[asFormat:image/bmp]";
 }

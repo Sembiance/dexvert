@@ -8,5 +8,6 @@ export class view64 extends Program
 	bin        = "view64pnm";
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.pnm")});
+	renameOut  = true;
 	chain      = "convert";
 }

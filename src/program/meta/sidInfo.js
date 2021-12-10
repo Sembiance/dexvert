@@ -31,4 +31,5 @@ export class sidInfo extends Program
 		if(songLengths.length>0)
 			r.meta.sidSongLengths = songLengths;
 	};
+	renameOut = false;
 }

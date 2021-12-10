@@ -69,4 +69,5 @@ export class qtPicViewer extends Program
 					EndIf
 				EndIf
 			EndIf`});
+	renameOut = true;
 }

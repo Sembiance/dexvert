@@ -1,82 +1,54 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class swagReader extends Program
 {
 	website = "http://fileformats.archiveteam.org/wiki/SWG";
-	unsafe = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	tiptoe = require("tiptoe"),
-	path = require("path"),
-	fs = require("fs"),
-	fileUtil = require("@sembiance/xutil").file;
-
-exports.meta =
-{
-	website : "http://fileformats.archiveteam.org/wiki/SWG",
-	unsafe  : true
-};
-
-exports.dos = () => "SWAG/READER.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath}`]);
-
-exports.pre = (state, p, r, cb) =>
-{
-	const pasFiles = p.util.program.getRan(state, "swagv")?.pasFiles || [];
-
-	r.dosKeys = [["Return"]];
-
-	for(let i=0;i<pasFiles.length;i++)
+	unsafe  = true;
+	loc     = "dos";
+	bin     = "SWAG/READER.EXE";
+	args    = r => [`..\\..\\${r.inFile({backslash : true})}`];
+	dosData = async r =>
 	{
-		r.dosKeys.push("E", `E:\\OUT\\${i}.PAS`, ["Return"]);
-		if((i+1)<pasFiles.length)
-			r.dosKeys.push("N");
-	}
-
-	r.dosKeys.push(["Escape"], ["Escape"]);
-
-	setImmediate(cb);
-};
-
-// Can take some time to run, thus the 4 minute timeout
-exports.dosData = (state, p, r) => ({timeout : XU.MINUTE*10, includeDir : true, autoExec : ["CD SWAG", `READER.EXE ${r.args}`], keys : r.dosKeys, keyOpts : {delay : XU.SECOND*5, interval : 100}});
-
-exports.post = (state, p, r, cb) =>
-{
-	const pasFiles = p.util.program.getRan(state, "swagv")?.pasFiles || [];
-	if(!pasFiles.length)
-		return setImmediate(cb);
-
-	tiptoe(
-		function setDates()
+		const swagvR = await Program.runProgram("swagv", r.inFile({absolute : true}), {xlog : r.xlog});
+		const dosKeys = [["Enter"]];
+		await swagvR.unlinkHomeOut();
+	
+		r.pasFiles = swagvR.meta?.pasFiles;
+		if(!r.pasFiles || r.pasFiles.length===0)
 		{
-			pasFiles.parallelForEach((pasFile, subcb, i) =>
-			{
-				const pasFilePath = path.join(state.output.absolute, `${i}.PAS`);
-				if(!fileUtil.existsSync(pasFilePath))
-					return setImmediate(subcb);
-
-				fs.utimes(pasFilePath, pasFile.ts, pasFile.ts, subcb);
-				// ROB! DENO ALERT! Need to make sure I update the DexFile.ts too!
-			}, this);
-		},
-		function renameFiles()
+			r.xlog.warn`Failed to find and pasFiles from swagv run ${swagvR.meta}`;
+			return {timeout : xu.SECOND*10};
+		}
+		
+		for(let i=0;i<r.pasFiles.length;i++)
 		{
-			pasFiles.parallelForEach((pasFile, subcb, i) =>
-			{
-				const pasFilePath = path.join(state.output.absolute, `${i}.PAS`);
-				if(!fileUtil.existsSync(pasFilePath))
-					return setImmediate(subcb);
+			dosKeys.push("E", `E:\\OUT\\${i}.PAS`, ["Enter"]);
+			
+			// Can add this delay and the one further below to help ensure the files get extracted under high system load
+			//dosKeys.push({delay : 200});
 
-				fs.rename(pasFilePath, path.join(state.output.absolute, pasFile.filename), subcb);
-			}, this);
-		},
-		cb
-	);
-};
-*/
+			if((i+1)<r.pasFiles.length)
+				dosKeys.push("N");	// , {delay : 250}
+		}
+
+		dosKeys.push(["Escape"], ["Escape"]);
+
+		// Can take some time to run, thus the 10 minute timeout
+		return {runIn : "prog", timeout : xu.MINUTE*10, keys : [{delay : xu.SECOND*5}, ...dosKeys]};
+	};
+	post = async r =>
+	{
+		await r.pasFiles.parallelMap(async (pasFile, i) =>
+		{
+			const outputFile = r.f.files.new.find(file => file.absolute===path.join(r.outDir({absolute : true}), `${i}.PAS`));
+			if(outputFile)
+			{
+				await outputFile.rename(pasFile.filename);
+				await outputFile.setTS(pasFile.ts);
+			}
+		});
+	};
+	renameOut = false;
+}

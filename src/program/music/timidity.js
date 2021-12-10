@@ -37,5 +37,6 @@ export class timidity extends Program
 		return ["-c", path.join(r.instrumentDirPath, "timidity.cfg"), "-Ow", "-o", await r.outFile("out.wav"), r.inFile()];
 	};
 
+	renameOut = true;
 	chain = "sox";
 }

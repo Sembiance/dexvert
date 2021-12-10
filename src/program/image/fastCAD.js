@@ -30,5 +30,6 @@ export class fastCAD extends Program
 			ProcessClose("FCW32.EXE")
 			WaitForPID(ProcessExists("FCW32.EXE"), ${xu.SECOND*10})`
 	});
-	chain = "dexvert[asFormat:image/bmp]";
+	renameOut = true;
+	chain     = "dexvert[asFormat:image/bmp]";
 }

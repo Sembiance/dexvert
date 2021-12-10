@@ -7,4 +7,5 @@ export class strings extends Program
 	bin        = "strings";
 	args       = r => ["-a", r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+	renameOut  = true;
 }

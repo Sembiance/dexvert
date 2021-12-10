@@ -30,4 +30,5 @@ export class soxi extends Program
 			}
 		});
 	};
+	renameOut = false;
 }

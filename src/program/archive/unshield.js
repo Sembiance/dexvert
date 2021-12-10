@@ -7,6 +7,7 @@ export class unshield extends Program
 	flags   = {
 		oldCompression : "Set to true to instruct unshield to decompress using the old compression method. Default: false"
 	};
-	bin  = "unshield";
-	args = r => [...(r.flags.oldCompression ? ["-O"] : []), "-d", r.outDir(), "x", r.inFile()];
+	bin       = "unshield";
+	args      = r => [...(r.flags.oldCompression ? ["-O"] : []), "-d", r.outDir(), "x", r.inFile()];
+	renameOut = false;
 }

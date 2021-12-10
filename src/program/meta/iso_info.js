@@ -17,4 +17,5 @@ export class iso_info extends Program
 				r.meta[key.trim().toCamelCase()] = val.trim();
 		});
 	};
+	renameOut = false;
 }

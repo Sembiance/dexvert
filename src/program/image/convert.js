@@ -30,4 +30,5 @@ export class convert extends Program
 		if(r.stderr.toLowerCase().includes("read error"))
 			r.unsafe = true;
 	};
+	renameOut = true;
 }

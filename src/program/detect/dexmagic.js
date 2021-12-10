@@ -118,4 +118,5 @@ export class dexmagic extends Program
 			r.meta.detections.push(Detection.create({value : matchid, from : "dexmagic", file : r.f.input}));
 		}
 	};
+	renameOut = false;
 }

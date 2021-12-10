@@ -50,5 +50,6 @@ export class graphicWorkshopProfessional extends Program
 			
 			Sleep(1000)`
 	});
-	post = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});
+	post      = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});
+	renameOut = true;
 }

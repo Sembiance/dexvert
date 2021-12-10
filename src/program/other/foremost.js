@@ -17,4 +17,5 @@ export class foremost extends Program
 		if(dirNames.length===1 && dirNames[0].split("/").length===2)
 			await r.f.files.new.parallelMap(async file => await file.moveUp(1));
 	};
+	renameOut = true;
 }

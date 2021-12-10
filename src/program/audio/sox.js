@@ -37,5 +37,6 @@ export class sox extends Program
 	// We often send WAV files through SOX just to clean them up before going to FFMPEG. This sometimes results in an identical output file which is normally detected and deleted, but in this case we want to allow it
 	allowDupOut = true;
 	
-	chain = "ffmpeg[outType:mp3]";
+	chain     = "ffmpeg[outType:mp3]";
+	renameOut = true;
 }

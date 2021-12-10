@@ -8,4 +8,5 @@ export class musicInfo extends Program
 	args       = r => Program.denoArgs(Program.binPath("musicInfo.js"), "--jsonOutput", "--", r.inFile());
 	runOptions = ({env : Program.denoEnv()});
 	post       = r => Object.assign(r.meta, xu.parseJSON(r.stdout.trim(), {}));
+	renameOut  = false;
 }

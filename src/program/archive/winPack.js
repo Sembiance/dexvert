@@ -52,4 +52,5 @@ export class winPack extends Program
 
 			WaitForPID(ProcessExists("WinPack.exe"), ${xu.SECOND*10})`
 	});
+	renameOut = false;
 }

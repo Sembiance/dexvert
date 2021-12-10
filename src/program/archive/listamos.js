@@ -13,4 +13,5 @@ export class listamos extends Program
 		
 		await Deno.writeTextFile(await r.outFile("out.amosSourceCode", {absolute : true}), r.stdout.trim());
 	};
+	renameOut = true;
 }

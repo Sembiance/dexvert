@@ -146,12 +146,16 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 			for(const converter of (converters || []))
 			{
 				const progs = converter.split("&").map(v => v.trim());
+				let programProcessed = false;
 				for(const [i, prog] of Object.entries(progs))
 				{
 					xlog.debug`Running converter ${prog}...`;
 
 					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog});
 					dexState.ran.push(r);
+
+					if(r.processed)
+						programProcessed = true;
 
 					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
 
@@ -193,7 +197,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 				}
 
 				xlog.info`Finished verifying files, yielded ${(dexState.f.files.output?.length || 0)} output files.`;
-				if((dexState.f.files.output?.length || 0)>0)
+				if((dexState.f.files.output?.length || 0)>0 || programProcessed)
 					dexState.processed = true;
 
 				if(dexState.processed)

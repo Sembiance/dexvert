@@ -38,5 +38,6 @@ export class MPG_T2G extends Program
 
 				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
 			EndIf`});
-	chain = "T2G_T3G";
+	renameOut = true;
+	chain     = "T2G_T3G";
 }

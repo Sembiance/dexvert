@@ -8,4 +8,5 @@ export class isextract extends Program
 	bin        = "isextract";
 	args       = r => ["x", r.inFile(), r.outDir()];
 	runOptions = ({timeout : xu.MINUTE*2});
+	renameOut  = false;
 }

@@ -10,7 +10,6 @@ export class xdftool extends Program
 	bin              = "xdftool";
 	args             = r => [r.inFile(), "unpack", r.outDir()];
 	filenameEncoding = "iso-8859-1";	// AmigaOS uses this: http://lclevy.free.fr/adflib/adf_info.html#p54
-	renameOut        = false;
 	
 	// The sole purpose of this function is to load the xdfmeta file and then set the appropriate timestamps on all the output files
 	post = async r =>
@@ -49,4 +48,5 @@ export class xdftool extends Program
 			});
 		});
 	};
+	renameOut = false;
 }

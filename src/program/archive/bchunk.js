@@ -22,4 +22,5 @@ export class bchunk extends Program
 
 	// Convert with dexvert any resulting files from bchunk. This includes .iso and .wav files
 	chain = "dexvert";
+	renameOut = true;
 }

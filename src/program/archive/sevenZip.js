@@ -25,16 +25,7 @@ export class sevenZip extends Program
 }
 
 /*
- eslint-disable no-bitwise 
-const XU = require("@sembiance/xu"),
-	fileUtil = require("@sembiance/xutil").file,
-	runUtil = require("@sembiance/xutil").run,
 	{BUFReader} = require("@sembiance/bufreader"),
-	fs = require("fs"),
-	tiptoe = require("tiptoe"),
-	path = require("path");
-
-
 
 exports.post = (state, p, r, cb) =>
 {

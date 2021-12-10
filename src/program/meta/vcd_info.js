@@ -37,29 +37,5 @@ export class vcd_info extends Program
 			r.meta[propName] = props.val.trimChars(["`", "'"]);
 		});
 	};
+	renameOut = false;
 }
-
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "https://www.gnu.org/software/vcdimager",
-	package  : "media-video/vcdimager",
-	informational  : true
-};
-
-exports.bin = () => "vcd-info";
-exports.args = (state, p, r, inPath=state.input.filePath) => ();
-exports.post = (state, p, r, cb) =>
-{
-	const meta = {};
-	
-
-	Object.assign(r.meta, meta);
-
-	setImmediate(cb);
-};
-*/

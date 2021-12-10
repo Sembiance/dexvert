@@ -45,5 +45,6 @@ scribus.fileQuit()`);
 
 	args       = r => ["--prefs", r.scribusDirPath, "-ns", "-py", path.join(path.basename(r.scribusDirPath), "conv.py"), r.inFile()];
 	runOptions = ({timeout : xu.MINUTE, virtualX : true});
+	renameOut  = true;
 	chain      = "inkscape";	// if I also wanted .png output, I could change inkscape to: dexvert[asFormat:image/eps]
 }

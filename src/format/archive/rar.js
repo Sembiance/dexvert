@@ -7,7 +7,7 @@ export class rar extends Format
 	ext          = [".rar"];
 	magic        = ["RAR archive data", "RAR compressed archive", "RAR Archive"];
 	converters   = ["unrar", "UniExtract"];
-	metaProvider = ["unrarMeta"];
+	metaProvider = ["rarInfo"];
 	untouched    = dexState => !!dexState.meta.passwordProtected;
 	post         = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="unrar")?.meta || {});
 }

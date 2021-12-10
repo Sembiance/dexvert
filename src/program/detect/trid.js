@@ -36,4 +36,5 @@ export class trid extends Program
 			r.meta.detections.push(Detection.create(tridMatch));
 		});
 	};
+	renameOut = false;
 }

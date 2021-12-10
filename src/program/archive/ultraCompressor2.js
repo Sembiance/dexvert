@@ -1,22 +1,12 @@
-/*
 import {Program} from "../../Program.js";
 
 export class ultraCompressor2 extends Program
 {
-	website = "http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/";
+	website   = "http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/";
+	loc       = "dos";
+	bin       = "ULTRACMP/UC.EXE";
+	args      = r => ["ES", r.inFile({backslash : true}).toUpperCase()];
+	cwd       = r => r.outDir();
+	dosData   = () => ({runIn : "out"});
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website : "http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/"
-};
-
-exports.dos = () => "ULTRACMP/UC.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath.toUpperCase()}`]);
-exports.dosData = (state, p, r) => ({includeDir : true, autoExec : ["CD OUT", `..\\ULTRACMP\\UC.EXE ES ${r.args}`]});
-*/

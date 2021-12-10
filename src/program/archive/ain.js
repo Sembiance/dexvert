@@ -8,6 +8,6 @@ export class ain extends Program
 	bin       = "AIN.EXE";
 	args      = r => ["x", r.inFile({backslash : true})];
 	cwd       = r => r.outDir();
-	dosData   = () => ({runIn : "out", keys : [["Enter"]], keyOpts : {delay : xu.SECOND*4}});
+	dosData   = () => ({runIn : "out", keys : [{delay : xu.SECOND*4}, ["Enter"]]});
 	renameOut = false;
 }

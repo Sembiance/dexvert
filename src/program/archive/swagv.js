@@ -1,68 +1,46 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path, dateParse} from "std";
+import {fileUtil} from "xutil";
 
 export class swagv extends Program
 {
-	website = "http://fileformats.archiveteam.org/wiki/SWG";
-	unsafe = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	tiptoe = require("tiptoe"),
-	path = require("path"),
-	moment = require("moment"),
-	fs = require("fs"),
-	fileUtil = require("@sembiance/xutil").file;
-
-exports.meta =
-{
-	website : "http://fileformats.archiveteam.org/wiki/SWG",
-	unsafe  : true
-};
-
-exports.dos = () => "SWAG/SWAGV.EXE";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([`..\\${inPath}`]);
-exports.dosData = (state, p, r) => ({includeDir : true, autoExec : ["CD SWAG", `SWAGV.EXE /V ${r.args} > ..\\OUT\\DEXVERTL.TXT`]});
-
-exports.post = (state, p, r, cb) =>
-{
-	const listFilePath = path.join(state.output.absolute, "DEXVERTL.TXT");
-	
-	tiptoe(
-		function checkExistance()
+	website  = "http://fileformats.archiveteam.org/wiki/SWG";
+	unsafe   = true;
+	loc      = "dos";
+	bin      = "SWAG/SWAGV.EXE";
+	args     = r => ["/V", `..\\..\\${r.inFile()}`, ">", "..\\..\\OUT\\DEXVERTL.TXT"];
+	dosData  = ({runIn : "prog"});
+	postExec = async r =>
+	{
+		const listFilePath = path.join(r.f.root, "out", "DEXVERTL.TXT");
+		if(!(await fileUtil.exists(listFilePath)))
 		{
-			fileUtil.exists(listFilePath, this);
-		},
-		function loadFile(exists)
+			r.xlog.warn`Failed to find DEXVERTL.TXT from SWAGV.EXE execution: ${listFilePath}`;
+			return;
+		}
+
+		const listContentRaw = new TextDecoder("latin1").decode(await Deno.readFile(listFilePath));
+
+		const pasFiles = [];
+		for(const line of listContentRaw.split("\n"))
 		{
-			if(!exists)
-				return this.finish();
+			// Num  Length   Size  %   Date    Time  CRC  Attr Subject
+			//----- ------  ----- --- -------  ----- ---- ---- -----------------------------
+			//(  1)  37638  10462 73% 05-28-93 13:45 7349 ---w General PASCAL FAQ
+			const lineParts = (line.trim().match(/\(\s*(?<num>\d+)\)\s+(?<len>\d+)\s+(?<size>\d+)\s+(?<pct>\d+)%\s+(?<ts>\d+-\d+-\d+)\s+(?<tsTime>\d+:\d+)\s+(?<crc>\S+)\s+(?<attr>\S+)\s+(?<desc>.+)/) || {groups : null}).groups;
+			if(!lineParts)
+				continue;
 			
-			fs.readFile(listFilePath, {encoding : "latin1"}, this);
-		},
-		function extractFiles(listContentRaw)
-		{
-			const pasFiles = [];
-			listContentRaw.split("\n").forEach(line =>
-			{
-				// Num  Length   Size  %   Date    Time  CRC  Attr Subject
-				//----- ------  ----- --- -------  ----- ---- ---- -----------------------------
-				//(  1)  37638  10462 73% 05-28-93 13:45 7349 ---w General PASCAL FAQ
-				const lineParts = (line.trim().match(/\(\s*(?<num>\d+)\)\s+(?<len>\d+)\s+(?<size>\d+)\s+(?<pct>\d+)%\s+(?<ts>\d+-\d+-\d+)\s+(?<tsTime>\d+:\d+)\s+(?<crc>\S+)\s+(?<attr>\S+)\s+(?<desc>.+)/) || {groups : null}).groups;
-				if(!lineParts)
-					return;
-				
-				pasFiles.push({num : lineParts.num, filename : `${lineParts.num.toString().padStart(4, "0")}_${lineParts.desc.replaceAll("/", "-")}.pas`, ts : moment(lineParts.ts, "MM-DD-YY")?.unix()});
-			});
+			const tsParts = lineParts.ts.split("-");
+			tsParts.splice(2, 1, `${(+tsParts.at(-1))<20 ? "20" : "19"}${tsParts.at(-1)}`);
+			const tsPart = tsParts.join("-");
+			pasFiles.push({num : lineParts.num, filename : `${lineParts.num.toString().padStart(4, "0")}_${lineParts.desc.replaceAll("/", "-")}.pas`, ts : dateParse(tsPart, "MM-dd-yyyy")?.getTime()||0});
+		}
 
-			r.pasFiles = pasFiles;
+		r.meta.pasFiles = pasFiles;
 
-			fileUtil.unlink(listFilePath, this);
-		},
-		cb
-	);
-};
-*/
+		await fileUtil.unlink(listFilePath);
+	};
+	renameOut = false;
+}

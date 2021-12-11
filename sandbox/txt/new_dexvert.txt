@@ -2,6 +2,7 @@
 | TOP Priority |
 \--------------/
 * Add document
+  Start with 'pdf'
   the document.verify() function shouldn't REQUIRE it be document/pdf
   but if it detects document pdf then it should ensure it is valid like I do in document.js from node version
 

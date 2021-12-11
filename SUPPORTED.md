@@ -1,4 +1,4 @@
-# Supported File Formats (803)
+# Supported File Formats (807)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -149,10 +149,13 @@ document | IBM Revisable-Form Text | .rft .dca | fileMerlin word97 | [7 sample f
 
 
 
-## Executable (1)
+## Executable (4)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
+executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [5 sample files](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
+executable | Microsoft Windows Dynmic Link Library | .dll | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
+executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [17 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
+executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
 
 
 
@@ -786,7 +789,7 @@ music | YMST Module | .ymst .ym | [uade123](http://zakalwe.fi/uade) | [8 sample 
 
 
 
-## Other (56)
+## Other (57)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | All Identical Bytes |  |  | [1 sample file](https://telparia.com/fileFormatSamples/other/identicalBytes/)
@@ -811,6 +814,7 @@ other | dBase Label Design | .lbl | [strings](https://www.gnu.org/software/binut
 other | DER Encoded Certificate | .cer | [openssl](https://www.openssl.org/) | [1 sample file](https://telparia.com/fileFormatSamples/other/derCertificate/)
 other | Director STXT | .stxt | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/directorSTXT/)
 other | Empty File |  |  | [1 sample file](https://telparia.com/fileFormatSamples/other/emptyFile/)
+other | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_tokenized_file) | .gfa .bas | [gfalist](https://github.com/Sembiance/gfalist) | [13 sample files](https://telparia.com/fileFormatSamples/other/gfaBASICAtari/) - The gfalist program only supports decompiling tokenized files of version 3 and higher.
 other | GFA-BASIC Windows | .gfw | [strings](https://www.gnu.org/software/binutils/) | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
 other | IBM PC Overlay | .ovl | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/ibmPCOverlay/)
 other | InstallShield Package | .pkg | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/installShieldPackage/)

@@ -419,7 +419,8 @@ export class Program
 						await newFiles.parallelMap(async newFile =>
 						{
 							// if chain starts with a question mark ? then we need to have a truthy response from chainCheck() in order to proceed with chaining this file
-							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, progRaw.substring(1)) : {};
+							const {programid : chainProgramid} = Program.parseProgram(progRaw.substring(1));
+							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, chainProgramid) : {};
 							if(!chainProgFlags)
 								return;
 

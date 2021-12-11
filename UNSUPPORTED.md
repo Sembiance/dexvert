@@ -1,4 +1,4 @@
-# Unsupported File Formats (404)
+# Unsupported File Formats (406)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -57,7 +57,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Executable (17)
+## Executable (18)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -66,6 +66,7 @@ executable | Atari Control Panel Extension Module | .cpx | [10 sample files](htt
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
 executable | ELF Executable |  | 
+executable | FM-TownsOS App | .exp | [9 sample files](https://telparia.com/fileFormatSamples/executable/fmTownsOSApp/)
 executable | Linux i386 Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | Linux ZMAGIC Exectutable |  | 
@@ -205,7 +206,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (220)
+## Other (221)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -427,6 +428,7 @@ other | WordPerfect for Windows Button Bar | .wwb |
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm .wcm | 
 other | WordPerfect Printer Data | .all .prd | 
+other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/other/zbasic/)
 other | ZZT File | .zzt | 
 
 

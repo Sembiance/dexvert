@@ -29,12 +29,12 @@ export class Format
 		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this, xlog)) || {} : {});
 		
 		// next, if the format.metaProvider has a programid, call that
-		for(const metaProvider of (this.metaProvider || []))
+		for(const progRaw of (this.metaProvider || []))
 		{
-			if(!(await Program.hasProgram(metaProvider)))
+			if(!(await Program.hasProgram(progRaw)))
 				continue;
 
-			const r = await Program.runProgram(metaProvider, inputFile, {xlog});
+			const r = await Program.runProgram(progRaw, inputFile, {xlog});
 			if(r.meta)
 				Object.assign(meta, r.meta);
 			await r.unlinkHomeOut();
@@ -122,6 +122,7 @@ export class Format
 			keepFilename : {type : "boolean"},
 			metaProvider : {type : ["string"], enum : (family.metaids || [])},
 			safeExt      : {types : ["string", "function"]},
+			processed    : {type : "function", length : [0, 1]},
 			pre          : {type : "function", length : [0, 1]},
 			post         : {type : "function", length : [0, 1]}
 		});

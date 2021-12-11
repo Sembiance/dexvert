@@ -7,21 +7,12 @@ export class windowsSCR extends Format
 	forbidExtMatch = true;
 	magic          = ["Windows New Executable", "MS-DOS executable, NE for MS Windows 3.x", "Win16 NE executable", "Windows screen saver"];
 	weakMagic      = true;
-
-	converters = ["deark"];
-}
-
-/*
-TODO
-exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
-	() => ({program : "winedump"}),
-	(state, p) =>
+	metaProvider   = ["winedump"];
+	converters     = ["deark"];
+	
+	post = dexState =>
 	{
-		const winedumpMeta = p.util.program.getMeta(state, "winedump");
-		if(winedumpMeta)
-			state.input.meta[p.format.meta.formatid] = winedumpMeta;
-		
-		return p.util.flow.noop;
-	}
-])(state0, p0, cb);
-*/
+		if(Object.keys(dexState.meta).length>0)
+			dexState.processed = true;
+	};
+}

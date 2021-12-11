@@ -1,57 +1,30 @@
-/*
 import {Format} from "../../Format.js";
 
 export class exe extends Format
 {
-	name = "MS-DOS/Windows Executable";
+	name    = "MS-DOS/Windows Executable";
 	website = "http://fileformats.archiveteam.org/wiki/EXE";
-	ext = [".exe"];
-	magic = ["Generic Win/DOS Executable","DOS Executable Generic",{},{},{},"DOS Executable (alternate ZM id)","16bit DOS EXE PKLite compressed","PE32 executable",{},"Win16 NE executable"];
-	priority = 3;
-	converters = undefined
-
-	metaProvider = [""];
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	C = require("../../C.js");
-
-exports.meta =
-{
-	name     : "MS-DOS/Windows Executable",
-	website  : "http://fileformats.archiveteam.org/wiki/EXE",
-	ext      : [".exe"],
-	magic    :
-	[
+	ext     = [".exe"];
+	magic   = [
 		"Generic Win/DOS Executable", "DOS Executable Generic", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /compressed DOS Executable$/, "DOS Executable (alternate ZM id)", "16bit DOS EXE PKLite compressed",
 		"PE32 executable", /^Win\d\d Executable/, "Win16 NE executable"
-	],
-	priority : C.PRIORITY.LOW
-};
+	];
+	priority     = this.PRIORITY.LOW;
+	metaProvider = ["winedump"];
 
-// We throw msdos/win executables at deark and 7z which can often extract various embedded cursors, icons and images
-// We only do it if meta.exe is found, otheriwse we want a different format to handle this (such as dll)
-exports.converterPriority = (state, p) =>
-{
-	if(!state.input.meta[p.format.meta.formatid])
-		return [];
-	
-	return [{program : "7z", flags : {"7zType" : "PE", "7zRSRCOnly" : true}}, "deark"];
-};
-
-exports.inputMeta = (state0, p0, cb) => p0.util.flow.serial([
-	() => ({program : "winedump"}),
-	(state, p) =>
+	pre = dexState =>
 	{
-		const winedumpMeta = p.util.program.getMeta(state, "winedump");
-		// If we have meta from winedump and it's not a DLL file, then set the meta.exe which will allow deark to run later and processed = true to be set in executable.js
-		if(winedumpMeta && !(winedumpMeta?.fileheader?.characteristics || []).includes("DLL"))
-			state.input.meta[p.format.meta.formatid] = winedumpMeta;
-		
-		return p.util.flow.noop;
-	}
-])(state0, p0, cb);
+		// If we have meta from winedump and it's a DLL file, then delete the meta which will cause no converters to run
+		if((dexState.meta?.fileheader?.characteristics || []).includes("DLL"))
+			dexState.meta = {};
+	};
 
-*/
+	// We throw MSDOS/Win EXESs at deark and 7z which can often extract various embedded cursors, icons and images
+	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+
+	post = dexState =>
+	{
+		if(Object.keys(dexState.meta).length>0)
+			dexState.processed = true;
+	};
+}

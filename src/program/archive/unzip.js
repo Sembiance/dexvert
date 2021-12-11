@@ -17,10 +17,7 @@ export class unzip extends Program
 	post = r =>
 	{
 		if(r.stderr.includes("incorrect password"))
-		{
-			r.processed = true;
 			r.meta.passwordProtected = true;
-		}
 	};
 	renameOut = false;
 }

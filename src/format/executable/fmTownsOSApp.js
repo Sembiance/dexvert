@@ -1,14 +1,18 @@
-"use strict";
-const XU = require("@sembiance/xu"),
-	file = require("../../util/file.js");
+import {Format} from "../../Format.js";
+import {fileUtil} from "xutil";
 
-exports.meta =
+export class fmTownsOSApp extends Format
 {
-	name        : "FM-TownsOS App",
-	ext         : [".exp"],
-	magic       : ["FM-TownsOS EXP"],
-	weakMagic   : true,
-	unsupported : true
-};
+	name        = "FM-TownsOS App";
+	ext         = [".exp"];
+	magic       = ["FM-TownsOS EXP"];
+	weakMagic   = true;
+	unsupported = true;
 
-exports.idCheck = state => file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x50, 0x33])) || file.compareFileBytes(state.input.absolute, 0, Buffer.from([0x4D, 0x50]));
+	// We have to do this instead of byteCheck because we have two possible different headers to check and byteCheck doesn't currently support that
+	idCheck = async inputFile =>
+	{
+		const arr = await fileUtil.readFileBytes(inputFile.absolute, 2);
+		return [[0x50, 0x33], [0x4D, 0x50]].some(v => arr.indexOfX(v)===0);
+	};
+}

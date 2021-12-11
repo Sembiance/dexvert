@@ -18,9 +18,9 @@ export class awaveStudio extends Program
 
 			WinWaitActive("Open new file", "", 10)
 
-			Sleep(200)
+			Sleep(250)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
-			Sleep(200)
+			Sleep(250)
 
 			WinActivate("Select input files", "");
 			WinWaitActive("Select input files", "", 10)

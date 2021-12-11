@@ -27,8 +27,9 @@ export class ffdec extends Program
 		await fileUtil.unlink(framesDirPath, {recursive : true});
 	};
 
+	renameOut  = false;
+
 	// send the output gif to ffmpeg to be turned into an MP4
 	chain      = "?ffmpeg";
 	chainCheck = (r, chainFile) => chainFile.dir===r.outDir({absolute : true}) && chainFile.ext===".gif";
-	renameOut  = false;
 }

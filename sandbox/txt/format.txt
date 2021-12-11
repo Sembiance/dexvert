@@ -131,6 +131,10 @@ When processing, the extension used is this priority:
 3. Extension matched from a fileSize match
 4. The first extension in meta.ext array
 
+>>> processed = async (dexState) { ... }
+A method that will be executed after each converter is run, return true if we are processed.
+This works even if no output files
+
 >>> pre = async (dexState) { ... }
 A method that will be executed before any converters are attempted
 

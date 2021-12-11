@@ -1,12 +1,12 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add executable
+* Add document
+  the document.verify() function shouldn't REQUIRE it be document/pdf
+  but if it detects document pdf then it should ensure it is valid like I do in document.js from node version
 
 * Add video
   Start with something that uses dosBox and records a video
-
-* Add document
 
 * Add font
   Start with:

@@ -86,7 +86,7 @@ const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => (c
 
 export class dexmagic extends Program
 {
-	website = "https://github.com/Sembiance/dexvert/tree/master/src/program/detect/dexmagic.js";
+	website = "https://github.com/Sembiance/dexvert/";
 	loc     = "local";
 	exec    = async r =>
 	{

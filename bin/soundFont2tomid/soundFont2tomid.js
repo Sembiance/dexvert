@@ -6,6 +6,7 @@ const XU = require("@sembiance/xu"),
 	path = require("path"),
 	cmdUtil = require("@sembiance/xutil").cmd,
 	runUtil = require("@sembiance/xutil").run,
+	fileUtil = require("@sembiance/xutil").file,
 	MidiWriter = require("midi-writer-js");
 
 const argv = cmdUtil.cmdInit({
@@ -75,7 +76,9 @@ tiptoe(
 
 			midiFilePaths.push(path.join(argv.outputDirectory, `${o.bank.toString().padStart(3, "0")}-${o.preset.toString().padStart(3, "0")} - ${o.name.replaceAll("/", "-")}.mid`));
 			fs.writeFile(midiFilePaths.last(), new MidiWriter.Writer(track).buildFile(), subcb);
-		}, this);
+		}, this.parallel());
+
+		fileUtil.unlink(path.join(process.cwd(), "fluidsynth.wav"), this.parallel());
 	},
 	XU.FINISH
 );

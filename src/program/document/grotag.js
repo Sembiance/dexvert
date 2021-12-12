@@ -1,100 +1,71 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {path} from "std";
+import {initDOMParser, DOMParser} from "denoLandX";
 
 export class grotag extends Program
 {
 	website = "http://grotag.sourceforge.net/";
 	package = "app-text/grotag";
-}
-*/
+	bin     = "grotag";
 
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	tiptoe = require("tiptoe"),
-	domino = require("domino"),
-	fs = require("fs"),
-	fileUtil = require("@sembiance/xutil").file;
+	// Grotag requires absolute paths. Might be due to the way I call the jar file, not sure.
+	args    = r => ["-w", r.inFile({absolute : true}), r.outDir({absolute : true})];
 
-exports.meta =
-{
-	website       : "http://grotag.sourceforge.net/",
-	package : "app-text/grotag",
-};
+	// Grotag can hang at 100% on some guides such as sample bootgauge.guide
+	runOptions = ({timeout : xu.MINUTE*2});
 
-exports.bin = () => "grotag";
+	postExec = async r =>
+	{
+		// grotag creates a seperate CSS file and all HTML files include that. We are gonna inline the CSS into each HTML file and delete the CSS file and move the resulting HTML files up a directory
+		const cssFilePath = path.join(r.outDir({absolute : true}), "amigaguide.css");
 
-// Grotag requires absolute paths. Might be due to the way I call the jar file, not sure.
-exports.args = (state, p, r, inPath=state.input.absolute, outPath=state.output.absolute) => (["-w", inPath, outPath]);
+		const htmlFilePaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true, regex : /\.html$/i});
+		if(htmlFilePaths.length===0)
+			await fileUtil.unlink(cssFilePath);
 
-// Grotag can hang at 100% on some guides such as sample bootgauge.guide
-exports.runOptions = () => ({timeout : XU.MINUTE*3, killSignal : "SIGTERM"});
+		if(!await fileUtil.exists(cssFilePath))
+			return;
+		
+		const cssRaw = await Deno.readTextFile(cssFilePath);
 
-// The CSS produced by grotag includes this ugly big great outline on all links. Let's get rid of it
-exports.post = (state, p, r, cb) =>
-{
-	// grotag creates a seperate CSS file and all HTML files include that. We are gonna inline the CSS into each HTML file and delete the CSS file and move the resulting HTML files up a directory
-	const cssFilePath = path.join(state.output.absolute, "amigaguide.css");
+		// The CSS file often has a ton of trailing null bytes, get rid of those. Also all links have this annoying solid gray outline, get rid of that too.
+		const cssData = cssRaw.replaceAll("\0", "").trim().replaceAll("outline: solid gray", "");
 
-	tiptoe(
-		function findHTMLFiles()
+		await fileUtil.unlink(cssFilePath);
+
+		await initDOMParser();
+
+		await htmlFilePaths.parallelMap(async htmlFilePath =>
 		{
-			fileUtil.glob(state.output.absolute, "**/*.html", {nodir : true}, this);
-		},
-		function loadCSSAndHTMLFiles(htmlFilePaths)
-		{
-			const cssFileExists = fileUtil.existsSync(cssFilePath);
-			if(htmlFilePaths.length===0 || !cssFileExists)
-				return cssFileExists ? fileUtil.unlink(cssFilePath, err => this.finish(err)) : this.finish();
-				
-			this.data.htmlFilePaths = htmlFilePaths;
-			fs.readFile(cssFilePath, XU.UTF8, this.parallel());
-			htmlFilePaths.parallelForEach((htmlFilePath, subcb) => fs.readFile(htmlFilePath, XU.UTF8, subcb), this.parallel());
-		},
-		function saveModifiedHTML(cssRaw, htmlFilesRaw)
-		{
-			// The CSS file often has a ton of trailing null bytes, get rid of those. Also all links have this annoying solid gray outline, get rid of that too.
-			const cssData = cssRaw.replaceAll("\0", "").trim().replaceAll("outline: solid gray", "");
+			const doc = new DOMParser().parseFromString(await Deno.readTextFile(htmlFilePath), "text/html");
 
-			fileUtil.unlink(cssFilePath, this.parallel());
-
-			this.data.htmlFilePaths.parallelForEach((htmlFilePath, subcb, i) =>
+			// Delete any links we have to the external CSS file
+			Array.from(doc.querySelectorAll("link")).forEach(o =>
 			{
-				const doc = domino.createWindow(htmlFilesRaw[i]).document;
+				if((o.getAttribute("href") || "").includes("amigaguide.css"))
+					o.remove();
+			});
 
-				// Delete any links we have to the external CSS file
-				Array.from(doc.querySelectorAll("link")).forEach(o =>
-				{
-					if((o.getAttribute("href") || "").includes("amigaguide.css"))
-						o.remove();
-				});
+			// Create an inline STYLE tag and insert it into HEAD
+			const style = doc.createElement("style");
+			style.textContent = cssData;
+			doc.querySelector("head").appendChild(style);	// eslint-disable-line unicorn/prefer-dom-node-append
 
-				// Create an inline STYLE tag and insert it into HEAD
-				const style = doc.createElement("style");
-				style.textContent = cssData;
-				doc.querySelector("head").appendChild(style);	// eslint-disable-line unicorn/prefer-dom-node-append
+			// Properly encode any hyperlinks (to handle files that have question marks in them, (sample file amigaGuide/FICHEROS))
+			Array.from(doc.querySelectorAll("a")).forEach(a => a.setAttribute("href", decodeURIComponent(a.getAttribute("href")).encodeURLPath({skipEncodePercent : true})));
 
-				// Properly encode any hyperlinks (to handle files that have question marks in them, etc)
-				Array.from(doc.querySelectorAll("a")).forEach(a => a.setAttribute("href", a.getAttribute("href").encodeURLPath()));
+			// For whatever reason, grotag doesn't properly link the Index text to index.html, so we do it ourselves here
+			doc.body.insertBefore(doc.createTextNode(" | "), doc.body.childNodes[0]);
 
-				// For whatever reason, grotag doesn't properly link the Index text to index.html, so we do it ourselves here
-				const body = doc.querySelector("body");
-				Array.from(body.childNodes).forEach(o =>
-				{
-					if(o.nodeType===3 && o.textContent.includes("| Index |"))
-						o.textContent = ` | ${o.textContent.replaceAll("| Index |", "|")}`;
-				});
+			const topLink = doc.createElement("a");
+			topLink.setAttribute("href", "index.html");
+			topLink.textContent = "Index";
+			doc.body.insertBefore(topLink, doc.body.childNodes[0]);
 
-				const topLink = doc.createElement("a");
-				topLink.setAttribute("href", "index.html");
-				topLink.textContent = "Index";
-				body.insertBefore(topLink, body.childNodes[0]);
-
-				fs.writeFile(htmlFilePath, doc.outerHTML, XU.UTF8, subcb);
-			}, this.parallel());
-		},
-		cb
-	);
-};
-*/
+			await Deno.writeTextFile(htmlFilePath, `<html>${doc.head.outerHTML}${doc.body.outerHTML.replaceAll("Contents | Index | ", "")}</html>`);
+		});
+	};
+	renameOut = false;
+}

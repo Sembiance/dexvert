@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
-import {path, dateFormat} from "std";
+import {path} from "std";
 import {validateClass, validateObject} from "./validate.js";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
@@ -32,12 +32,12 @@ export class Program
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
-			flags          : {type : Object},
-			package  : {types : ["string", Array]},
-			notes          : {type : "string"},
-			runOptions     : {types : [Object, "function"]},
-			unsafe         : {type : "boolean"},
-			website        : {type : "string", url : true},
+			flags      : {type : Object},
+			package    : {types : ["string", Array]},
+			notes      : {type : "string"},
+			runOptions : {types : [Object, "function"]},
+			unsafe     : {type : "boolean"},
+			website    : {type : "string", url : true},
 
 			// execution
 			args             : {type : "function", length : [0, 1]},
@@ -54,6 +54,7 @@ export class Program
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
+			renameIn         : {type : "boolean"},
 			qemuData         : {types : ["function", Object]},
 			mirrorInToCWD    : {types : ["boolean", "string"]},
 			verify           : {type : "function", length : [0, 2]}
@@ -465,11 +466,52 @@ export class Program
 
 		let f = fRaw;
 
+		let srcFiles = null;
+		let safeFiles = null;
+
 		// if fRaw isn't a FileSet, then we will create a temporary one
 		if(!(fRaw instanceof FileSet))
 		{
-			const inputFiles = await Array.force(fRaw).parallelMap(async v => (v instanceof DexFile ? v.clone() : await DexFile.create(v)));
-			f = await FileSet.create(inputFiles[0].root, "input", inputFiles);
+			if(!Array.force(fRaw).every(v => v instanceof DexFile))
+				throw new Error("You must pass either a FileSet, DexFile or array of DexFiles to Program.runProgram");
+
+			const isFilenameSafe = filename =>
+			{
+				// if anything non-printable, fail
+				if(filename.length!==filename.replace(/[^ -~]/, "").length)
+					return false;
+				
+				// backslash, fail
+				if(filename.includes("\\"))
+					return false;
+
+				// if the first character is anything other than A-Z a-z 0-9 _
+				if(!(/\w/).test(filename.at(0)))
+					return false;
+
+				return true;
+			};
+
+			srcFiles = Array.force(fRaw);
+			if(program.renameIn!==false && !progOptions.skipSafeRename)
+			{
+				safeFiles = await srcFiles.parallelMap(async srcFile =>
+				{
+					if(isFilenameSafe(srcFile.base))
+						return srcFile;
+					
+					const safeFilename = path.basename(await fileUtil.genTempPath(srcFile.dir, srcFile.ext.replace(/[^ -~]/, "")));
+					xlog.info`Program ${progRaw} safe renaming ${srcFile.base} to ${safeFilename}`;
+					const safeFile = srcFile.clone();
+					await safeFile.rename(safeFilename);
+					return safeFile;
+				});
+
+				if(safeFiles.length===1 && !progOptions.originalInput)
+					progOptions.originalInput = srcFiles[0];
+			}
+
+			f = await FileSet.create(srcFiles[0].root, "input", safeFiles || srcFiles);
 			
 			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}_out`);
 			await Deno.mkdir(outDirPath, {recursive : true});
@@ -485,9 +527,30 @@ export class Program
 
 		const debugPart = xu.clone(progOptions);
 		delete debugPart.xlog;
-		xlog.debug`Program ${progRaw} converted to ${debugPart}`;
+		xlog.trace`Program ${progRaw} converted to ${debugPart}`;
 		
-		return program.run(f, progOptions);
+		const programResult = await program.run(f, progOptions);
+
+		if(srcFiles && safeFiles)
+		{
+			await safeFiles.parallelMap(async (safeFile, i) =>
+			{
+				const srcFile = srcFiles[i];
+				if(safeFile.absolute===srcFile.absolute)
+					return;
+				
+				if(!(await fileUtil.exists(safeFile.absolute)))
+				{
+					xlog.info`Program ${progRaw} safe path no longer exists ${safeFile.pretty()}`;
+					return;
+				}
+				
+				xlog.info`Program ${progRaw} safe reverting ${safeFile.base} to ${srcFile.base}`;
+				await safeFile.rename(srcFile.base);
+			});
+		}
+
+		return programResult;
 	}
 
 	static parseProgram(progRaw)

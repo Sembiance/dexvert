@@ -41,7 +41,6 @@ const FLEX_SIZE_PROGRAMS =
 	ffdec           : 1.0,
 	sidplay2        : 0.1,
 	soundFont2tomp3 : 0.1,
-	EXE2SWFExtractor : 10,	// TODO temp
 	zxtune123       : 0.1
 };
 
@@ -49,8 +48,14 @@ const FLEX_SIZE_FORMATS =
 {
 	archive :
 	{
-		// the PBMS generated are different each time
+		// the PBMs generated are different each time
 		hypercard : 0.1
+	},
+	document :
+	{
+		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
+		// So we just exempt all of the document category
+		"*" : 0.1
 	},
 	image :
 	{
@@ -96,7 +101,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
 	[/music\/tfmx\/smpl\..+$/i, true, true],
-	[/other\/pogNames\/.+\.pog$/i, "image", true],
+	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true],
+	[/other\/pogNames\/.+\.pog$/i, "archive", true],
 	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
 
@@ -304,7 +310,7 @@ async function testSample(sampleFilePath)
 		if(diffFiles?.length)
 			return await fail(`Created files are different: ${fg.orange(diffFiles)}`);
 
-		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || 0);
+		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		if(allowedSizeDiff===0)
 			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0);
 
@@ -460,6 +466,8 @@ async function writeOutputHTML()
 				background-color: #aaa;
 				margin: 5px;
 				border: 0;
+				width: 32%;
+				height: 200px;
 			}
 		</style>
 	</head>

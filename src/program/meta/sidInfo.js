@@ -5,7 +5,7 @@ import {path} from "std";
 
 export class sidInfo extends Program
 {
-	website = "https://github.com/Sembiance/dexvert/bin/svgInfo.js";
+	website = "https://github.com/Sembiance/dexvert/";
 	exec    = async r =>
 	{
 		const {stderr : sidInfoRaw} = await runUtil.run("sidplay2", ["-w/dev/null", "-t1", r.inFile()], {cwd : r.f.root, timeout : xu.MINUTE});

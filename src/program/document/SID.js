@@ -1,68 +1,55 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class SID extends Program
 {
-	website = "https://github.com/tylerapplebaum/setupinxhacking";
-}
-*/
+	website  = "https://github.com/tylerapplebaum/setupinxhacking";
+	loc      = "win2k";
+	bin      = "c:\\dexvert\\SID\\sid.exe";
+	args     = () => [];
+	qemuData = r => ({
+		script : `
+			WinWaitActive("[sid] sexy installshield decompiler", "", 10)
 
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
+			Sleep(500)
+			Send("!f")
+			Sleep(100)
+			Send("o")
+			Sleep(100)
 
-exports.meta =
-{
-	website : "https://github.com/tylerapplebaum/setupinxhacking"
-};
+			WinWaitActive("Choose file to decompile", "", 10)
+			Sleep(200)
+			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
+			WinWaitClose("Choose file to decompile", "", 10)
 
-exports.qemu = () => "c:\\dexvert\\SID\\sid.exe";
-exports.args = (state, p, r, inPath=state.input.filePath) => { r.inPath = inPath; };
-exports.qemuData = (state, p, r) => ({
-	inFilePaths : [r.inPath],
-	script : `
-		WinWaitActive("[sid] sexy installshield decompiler", "", 10)
+			Local $winHandle = WinGetHandle("[sid] sexy installshield decompiler")
 
-		Sleep(500)
-		Send("!f")
-		Sleep(100)
-		Send("o")
-		Sleep(100)
+			; Wait for the the progress bar to fill up
+			Local $pixelColor
+			Local $timer = TimerInit()
+			Do
+				$pixelColor = PixelGetColor(1015, 729, $winHandle)
+				If Hex($pixelColor) == "00000080" Then ExitLoop
+				Sleep(50)
+			Until TimerDiff($timer) > ${xu.MINUTE*2}
 
-		WinWaitActive("Choose file to decompile", "", 10)
-		Sleep(200)
-		Send("c:\\in\\${path.basename(r.inPath)}{ENTER}")
-		WinWaitClose("Choose file to decompile", "", 10)
+			Sleep(${xu.SECOND*10})
 
-		Local $winHandle = WinGetHandle("[sid] sexy installshield decompiler")
-
-		; Wait for the the progress bar to fill up
-		Local $pixelColor
-		Local $timer = TimerInit()
-		Do
-			$pixelColor = PixelGetColor(1015, 729, $winHandle)
-			If Hex($pixelColor) == "00000080" Then ExitLoop
+			ClipPut("")
+			Send("^a")
 			Sleep(50)
-		Until TimerDiff($timer) > ${XU.MINUTE*2}
+			Send("^c")
+			WaitForClipChange(${xu.SECOND})
+			FileWrite("c:\\out\\out.txt", ClipGet())
 
-		Sleep(${XU.SECOND*10})
-
-		ClipPut("")
-		Send("^a")
-		Sleep(50)
-		Send("^c")
-		WaitForClipChange(${XU.SECOND})
-		FileWrite("c:\\out\\out.txt", ClipGet())
-
-		Sleep(500)
-		Send("!f")
-		Sleep(100)
-		Send("q")
-		Sleep(100)
-		
-		WinWaitClose("[sid] sexy installshield decompiler", "", 10)`
-});
-
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "out.txt"), path.join(state.output.absolute, `${state.input.name}.txt`))(state, p, cb);
-*/
+			Sleep(500)
+			Send("!f")
+			Sleep(100)
+			Send("q")
+			Sleep(100)
+			
+			WinWaitClose("[sid] sexy installshield decompiler", "", 10)`
+	});
+	renameOut = true;
+}

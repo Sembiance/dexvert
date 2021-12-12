@@ -30,9 +30,8 @@ export class sevenZip extends Program
 		if(!r.flags.rsrcOnly)
 			return;
 
-		// the .rsrc directory is kinda useless, so we move any folders in it up one dir
-		const rsrcDirs = await fileUtil.tree(r.outDir({absolute : true}), {nofile : true, regex : /^\.rsrc\/[^/]+$/});
-		await rsrcDirs.parallelMap(async rsrcDir => await Deno.rename(rsrcDir, path.join(r.outDir({absolute : true}), path.relative(r.outDir({absolute : true}), rsrcDir).substring(".rsrc/".length))));
+		// the .rsrc directory is kinda useless, so we move anything in it up one dir
+		await fileUtil.moveAll(path.join(r.outDir({absolute : true}), ".rsrc"), r.outDir({absolute : true}));
 	};
 
 

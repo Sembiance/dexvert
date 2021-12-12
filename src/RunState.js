@@ -123,9 +123,9 @@ export class RunState
 			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
 
 		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stdout || "").trim().length>0))
-			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "").squeeze()}`);
+			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "").squeeze().innerTruncate(this.xlog.atLeast("trace") ? Number.MAX_SAFE_INTEGER : 200)}`);
 		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stderr || "").trim().length>0))
-			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "").squeeze()}`);
+			r.push(`\n${pre}\t${xu.colon("stderr")}${(this.stderr || "").squeeze().innerTruncate(this.xlog.atLeast("trace") ? Number.MAX_SAFE_INTEGER : 200)}`);
 			
 		return r.join("");
 	}

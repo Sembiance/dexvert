@@ -17,5 +17,4 @@ export class installShieldCAB extends Format
 		return hdrFiles.length>0 ? hdrFiles : false;
 	};
 	converters = ["unshield", "unshield[oldCompression]", "winPack", "gameextractor", "UniExtract"];
-	untouched  = ({f}) => f.input.ext.toLowerCase()===".hdr";
 }

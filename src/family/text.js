@@ -29,7 +29,7 @@ export class text extends Family
 					textMeta.charSet.declared = this.charSet;
 				
 				// detect our charSet
-				const chardetectR = await Program.runProgram("chardetect", inputFile.absolute, {xlog});
+				const chardetectR = await Program.runProgram("chardetect", inputFile, {xlog});
 				await chardetectR.unlinkHomeOut();
 				if(chardetectR.meta?.charSet)
 					textMeta.charSet.detected = chardetectR.meta.charSet;
@@ -38,7 +38,7 @@ export class text extends Family
 					delete textMeta.charSet;
 				
 				// detect whether we are verified as text
-				const fileR = await Program.runProgram("file", inputFile.absolute, {xlog});
+				const fileR = await Program.runProgram("file", inputFile, {xlog});
 				await fileR.unlinkHomeOut();
 
 				const {flexMatch} = await import("../identify.js");	// need to import this dynamically to avoid circular dependency

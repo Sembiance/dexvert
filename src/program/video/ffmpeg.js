@@ -15,6 +15,8 @@ export class ffmpeg extends Program
 	bin = "ffmpeg";
 	args = async r =>
 	{
+		const inFileArgs = ["-i", `file:${r.inFile()}`];	// without the file: prefix, if the filename contains a colon, ffmpeg will get confused
+
 		const noMeta = ["-bitexact", "-fflags", "+bitexact", "-flags:v", "+bitexact", "-flags:a", "+bitexact"];
 		const a = [];
 		if(r.flags.format)
@@ -29,29 +31,29 @@ export class ffmpeg extends Program
 		switch(r.flags.outType || "mp4")
 		{
 			case "png":
-				a.push("-i", r.inFile(), "-frames:v", "1", ...noMeta, await r.outFile("out.png"));
+				a.push(...inFileArgs, "-frames:v", "1", ...noMeta, await r.outFile("out.png"));
 				break;
 
 			case "wav":
-				a.push("-i", r.inFile());
+				a.push(...inFileArgs);
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);
 				a.push("-c:a", "pcm_u8", ...noMeta, await r.outFile("out.wav"));
 				break;
 
 			case "mp3":
-				a.push("-i", r.inFile());
+				a.push(...inFileArgs);
 				if(r.flags.rate)
 					a.push("-af", `asetrate=${r.flags.rate}`);
 				a.push("-c:a", "libmp3lame", "-b:a", "192k", ...noMeta, await r.outFile("out.mp3"));
 				break;
 
 			case "flac":
-				a.push("-i", r.inFile(), "-c:a", "flac", "-compression_level", "12", ...noMeta, await r.outFile("out.flac"));
+				a.push(...inFileArgs, "-c:a", "flac", "-compression_level", "12", ...noMeta, await r.outFile("out.flac"));
 				break;
 			
 			case "gif":
-				a.push("-i", r.inFile(), ...noMeta, await r.outFile("out.gif"));
+				a.push(...inFileArgs, ...noMeta, await r.outFile("out.gif"));
 				break;
 
 			default:
@@ -60,7 +62,7 @@ export class ffmpeg extends Program
 				// Also, this pixel format reduces quality and there isn't anything I can do about it. See the info here: https://awk.space/blog/pixel-perfect-webm/
 				// For PIXEL PERFECT conversion, I would use these args: ffmpegArgs.push("-i", inPath, "-c:v", "libx264rgb", "-crf", "0", "-preset", "ultrafast", outPath);
 				// Sadly that's not supported in most browsers. Sigh. I really don't want to support multiple video formats, for different devices, so I just choose the most compatible and live with the compression artifacts and decrease in quality.
-				a.push("-i", r.inFile(), "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", ...noMeta, await r.outFile("out.mp4"));
+				a.push(...inFileArgs, "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", ...noMeta, await r.outFile("out.mp4"));
 		}
 		return a;
 	};

@@ -72,12 +72,14 @@ Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
 EndFunc`
 };
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, xlog})
+export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, noAuxFiles, xlog})
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
 	
-	const inFiles = [f.input, ...(f.files.aux || [])];
+	const inFiles = [f.input];
+	if(!noAuxFiles)
+		inFiles.push(...(f.files.aux || []));
 	const inFilesRel = inFiles.map(v => v.rel);
 	qemuData.inFilePaths = inFiles.map(v => v.absolute);
 

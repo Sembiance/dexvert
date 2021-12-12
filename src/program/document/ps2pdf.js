@@ -1,27 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class ps2pdf extends Program
 {
-	website = "https://ghostscript.com/";
-	package = "app-text/ghostscript-gpl";
-	unsafe = true;
+	website   = "https://ghostscript.com/";
+	package   = "app-text/ghostscript-gpl";
+	unsafe    = true;
+	bin       = "ps2pdf";
+	args      = async r => [r.inFile(), await r.outFile("out.pdf")];
+	renameOut = true;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "https://ghostscript.com/",
-	package : "app-text/ghostscript-gpl"
-	unsafe : true;
-};
-
-exports.bin = () => "ps2pdf";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, "outfile.pdf")) => ([inPath, outPath]);
-exports.post = (state, p, r, cb) => p.util.file.move(path.join(state.output.absolute, "outfile.pdf"), path.join(state.output.absolute, `${state.input.name}.pdf`))(state, p, cb);
-*/

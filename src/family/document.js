@@ -1,5 +1,5 @@
 import {Family} from "../Family.js";
-import {runUtil} from "xutil";
+import {Program} from "../Program.js";
 
 export class document extends Family
 {
@@ -14,11 +14,10 @@ export class document extends Family
 			return true;
 		
 		// If the output file is a PDF, then we check it's bounding box, because often programs will produce an 'empty' PDF file when it fails to convert (such as fileMerlin)
-		const {stderr : bboxRaw} = await runUtil.run("gs", ["-dBATCH", "-dNOPAUSE", "-dQUIET", "-sDEVICE=bbox", dexFile.absolute]);
-		const boundingBoxLines = bboxRaw.split("\n").filter(v => v.startsWith("%%BoundingBox:"));
-		if(boundingBoxLines.filter(v => v.trim()==="%%BoundingBox: 0 0 0 0").length===boundingBoxLines.length)
+		const {meta : gsPDFMeta} = await Program.runProgram("gsPDFInfo", dexFile, {xlog, autoUnlink : true});
+		if(gsPDFMeta.boundingBoxes.filter(v => v.trim()==="%%BoundingBox: 0 0 0 0").length===gsPDFMeta.boundingBoxes.length)
 		{
-			xlog.warn`Document failed verification due to zero bounding box ${bboxRaw}`;
+			xlog.warn`Document failed verification due to zero bounding box: ${gsPDFMeta.boundingBoxes.join("   ")}`;
 			return false;
 		}
 

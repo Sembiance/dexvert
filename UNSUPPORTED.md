@@ -1,4 +1,4 @@
-# Unsupported File Formats (416)
+# Unsupported File Formats (430)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -57,9 +57,10 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (10)
+## Document (18)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
 document | AmigaWriter Documet |  | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://telparia.com/fileFormatSamples/document/calamusDocument/)
 document | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://telparia.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
@@ -70,6 +71,13 @@ document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki
 document | [Epic TFP Document](https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40) | .tfp | Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format
 document | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://telparia.com/fileFormatSamples/document/hotHelpText/)
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
+document | Lotus Symphony Worksheet | .wk1 wr1 | 
+document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
+document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
+document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb | [3 sample files](https://telparia.com/fileFormatSamples/document/multimediaViewerBook/)
+document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
+document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a somewhat used database program back in the day. Didn't really dig into what converters might be possible.
+document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 
 
 
@@ -470,4 +478,16 @@ poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileForm
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
 poly | [Vertex Binary 3D Object](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
+
+
+
+## Video (6)
+Family | Name | Extensions | Notes
+------ | ---- | ---------- | -----
+video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
+video | Accent Software Show Sequence | .seq | [11 sample files](https://telparia.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
+video | Animation Works Movie | .awm | [5 sample files](https://telparia.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
+video | Delphine CIN Video | .cin | [5 sample files](https://telparia.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
+video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
+video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/fileFormatSamples/video/dkAnimation/)
 

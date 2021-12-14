@@ -1,0 +1,1163 @@
+% @(#)iso.tex	2.6 dated 91/05/02 at 09:57:15
+
+\documentstyle{iso}
+% If you prefer not straining your eyes, try:
+% \documentstyle[10pt,onecolumn]{iso}
+
+\standard{LaTeX style}
+\title{Information processing --- The \iso\ LaTeX style --- Documentation}
+
+\documenttype{}
+\runninghead{ISO LaTeX style, version 2.6
+}
+
+% A command for referring to the ISO style
+\newcommand{\iso}{{\tt iso\/}}
+
+% \leftoffset might be needed if your printer is mis-aligned.
+% \leftoffset{1in}
+
+\newverbatim{example}
+
+% Give the right page numbering for camera-ready copy
+% \cameraready
+
+\begin{document}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% \foreword
+% An experimental foreword.
+% Shouldn't be necessary since ISO central secretariat set it.
+
+% \introduction
+% This document describes the \iso\ style for typesetting ISO standards using
+% LaTeX.
+% It is written using the \iso\ style to give an example of its use.
+
+\maketitle
+
+\section{Scope and field of application}
+This document
+\begin{itemize}
+\item describes how to use the \iso\ style;
+\item provides an example of the style's use.
+\end{itemize}
+
+It is intended for use by those writing ISO standards.
+
+\section{References}
+\label{references}
+\begin{references}
+\bibitem[ISO 8879]{sgml} Information processing ---
+    Text and office systems --- Standard
+    Generalised Markup Language (SGML).
+\bibitem[ISO 646]{charset} The 7-bit coded character set for information
+    processing interchange.
+\bibitem[BS 0]{bs0} A standard for standards.
+\end{references}
+
+\section{Definitions}
+\label{definitions}
+\definition{definition}
+\label{def.def}
+A definition is numbered in the same way as a clause but has a run-in
+header and does not appear in the table of contents; see
+\ref{div.special.def} for further details.
+
+\section{Document structure}
+\clause{General}
+A standard written using the \iso\ style must obey certain rules, as
+follows:
+\begin{enumerate}
+\item\label{structure.general.documentstyle}
+    The first non-comment line must be
+    \begin{verbatim}
+    \documentstyle{iso}
+    \end{verbatim}
+\begin{note}
+    The \iso\ style also allows optional arguments which specify 
+    point size and number of columns: see~\ref{columns} for details.
+    Other style options may also be used: see~\ref{compat.style} for
+    a discussion.
+\end{note}
+
+\item\label{structure.general.title}
+    This must be followed by two lines giving the number and title of
+    the standard, as follows:
+    \begin{verbatim}
+    \standard{1234}
+    \title{A standard for egg-sucking}
+    \end{verbatim}
+
+\begin{note}
+    An optional version number may also be given thus:
+    \begin{verbatim}
+    \version{1.6.4}
+    \end{verbatim}
+    This version number is then available in the body of the document with
+    the \verb|\theversion| command; for example, with the \verb|\version|
+    command above, \verb|\theversion| gives \version{1.6.4}\theversion.
+\end{note}
+
+\item Any user-defined LaTeX macros should follow the standard number
+    and title. There should then follow the begin document command:
+    \begin{verbatim}
+    \begin{document}
+    \end{verbatim}
+
+\item \label{structure.general.maketitle}
+    Then come the tables of contents (optional, see \ref{contents}),
+    foreword (optional, see \ref{special.foreword}), introduction
+    (optional, see \ref{special.intro}) and title commands.
+    The title command is written thus:
+    \begin{verbatim}
+    \maketitle
+    \end{verbatim}
+
+\item The structure of the rest of the document is described in \ref{divns}.
+    The document must finish with
+    \begin{verbatim}
+    \end{document}
+    \end{verbatim}
+    \end{enumerate}
+
+See annex \ref{annex.example} for an example standard.
+
+\clause{Divisions and subdivisions}
+\label{divns}
+
+\subclause{Names of divisions and subdivisions}
+The \iso\ style permits a document to be made up of the following divisions:
+part, section, clause, subclause, subsubclause, subsubsubclause.
+
+Each type of division is introduced in the normal LaTeX manner by a command,
+whose name is that of the division type, and a parameter which is the title of
+the division. For example:
+\begin{verbatim}
+\section{A typical section}
+\clause{This is a clause}
+\subclause{Winds light to variable}
+\subsubclause{The famous Eccles}
+\subsubsubclause{The Greenslade story}
+\end{verbatim}
+
+Each division generates a corresponding entry in the table of contents
+(see \ref{contents}).
+Starting a new division causes all subsidiary division
+numbers to start again from zero (e.g. starting a clause resets the
+subclause, subsubclause and subsubsubclause numbers to zero).
+\begin{note}
+This is a change from ordinary \LaTeX\ in which starting a division only
+resets the counter one level below, and not those at lower levels --- I
+regard this as a bug in \LaTeX.
+\end{note}
+
+There are also untitled versions of subsubclause and subsubsubclause
+introduced by \verb|\namelesssubsubclause| and \verb|\namelesssubsubsubclause|
+respectively.
+These have run-in headers and do not produce entries in the table of
+contents.
+
+Finally there is the lowest level of division: the paragraph.
+This is unnumbered and untitled and introduced by either \verb|\par|
+or a blank line.
+
+\subclause{Special divisions}
+\subsubclause{Tables of contents}
+\label{contents}
+Tables of contents are produced in the usual LaTeX manner, using
+\verb|\tableofcontents|, \verb|\listoffigures| and
+\verb|\listoftables|.
+These should come before the \verb|\maketitle|, see
+\ref{structure.general.maketitle}.
+\begin{note}
+If you find the table of contents too detailed, you can reduce the depth
+of division entered in the table by changing the \verb|tocdepth| counter.
+For instance
+\begin{verbatim}
+\setcounter{tocdepth}{2}
+\end{verbatim}
+gives a table of contents with entries only down to the clause level.
+\end{note}
+
+\subsubclause{Foreword}
+\label{special.foreword}
+The foreword to a standard appears after the tables of contents and is
+unnumbered.
+For this reason, it uses a special macro as follows:
+\begin{verbatim}
+\foreword
+\end{verbatim}
+In fact, the foreword to a standard is set by ISO central secretariat so
+it should not usually be necessary to include one in your documents.
+
+\subsubclause{Introduction}
+\label{special.intro}
+The introduction to a standard appears after the tables of contents and the
+foreword and is unnumbered.
+Like the foreword, it uses a special macro:
+\begin{verbatim}
+\introduction
+\end{verbatim}
+
+\subsubclause{References}
+The references section contains titles of normative documents to which
+reference is made in the body of the standard.
+The references section is constructed as follows:
+\begin{verbatim}
+\section{References}
+\begin{references}
+\bibitem[ISO 8879]{sgml} Information processing ---
+    Text and office systems --- Standard
+    Generalised Markup Language (SGML).
+\end{references}
+\end{verbatim}
+The output from this is shown in section \ref{references}.
+
+The second argument of the \verb|\bibitem| command is a label which is used
+in citing the document.
+For instance, \verb|\cite{sgml}| gives the output \cite{sgml}.
+\begin{note}
+If the first text in a paragraph is \verb|\cite|, then the paragraph
+will start in the wrong place.
+This is a LaTeX bug.
+\end{note}
+
+\subsubclause{Definitions}
+\label{div.special.def}
+A definition is numbered in the same way as a clause but has a run-in
+header and does not appear in the table of contents; see section
+\ref{definitions} for examples.
+A definition is entered as follows:
+\begin{verbatim}
+\definition{term} Text of definition...
+\end{verbatim}
+
+\begin{note}
+Definitions and clauses should not appear in the same section
+since they are numbered independently of each other.
+\end{note}
+
+\subsubclause{Annexes}
+The main body of a standard may be followed by annexes, each of which is
+either normative or informative.
+The first annex should be preceded by the \verb|\annex| command.
+Normative annexes are then introduced by the command:
+\begin{verbatim}
+\normative{Annex title}
+\end{verbatim}
+while informative annexes are introduced by the command:
+\begin{verbatim}
+\informative{Annex title}
+\end{verbatim}
+
+Annexes may be divided into clauses, subclauses etc in the same way as
+sections; the only difference is that annexes are numbered using upper-case
+letters rather than Roman numerals.
+\begin{notes}
+\item Users who are using the \iso\ style for documents other than standards may
+wish to continue using the \verb|\section| command to introduce annexes ---
+this produces a less obtrusive heading than the ISO recommended one and
+makes no mention of normative/informative.
+\item The ISO directives state that there should be no annexes numbered
+{\bf I} or {\bf O}.
+The \iso\ style does not implement this automatically, but you can achieve the
+same effect by placing, immediately before the {\bf I}'th and {\bf O}'th
+annexes, the command:
+\begin{verbatim}
+\addtocounter{section}{1}
+\end{verbatim}
+\end{notes}
+
+\section{Notes}
+\clause{General}
+ISO directives allow three types of note: an isolated note, a series of
+isolated notes at separate places within the same division, and a group of
+numbered notes.
+
+The \iso\ style allows another type of note, which is tied to a particular
+document version number.
+
+\clause{Note types}
+\subclause{Isolated}
+An isolated note is written as follows:
+\begin{verbatim}
+\begin{note}
+Text of note.
+\end{note}
+\end{verbatim}
+and appears in the text thus:
+\begin{note}
+Text of note.
+\end{note}
+
+\subclause{Series}
+Isolated notes in a series should be numbered sequentially.
+The number is given as an optional argument to the \verb|note|
+environment thus:
+\begin{verbatim}
+\begin{note}[17]
+Text of note.
+\end{note}
+\end{verbatim}
+The note appears in the text as follows:
+\begin{note}[17]
+Text of note.
+\end{note}
+
+\subclause{Grouped}
+A group of notes is written as follows:
+\begin{verbatim}
+\begin{notes}
+\item The first note.
+\item Another note.
+\item And so on.
+\end{notes}
+\end{verbatim}
+and appears thus:
+\begin{notes}
+\item The first note.
+\item Another note.
+\item And so on.
+\end{notes}
+
+\subclause{Version}
+A version note takes an argument which gives the document version number to
+which the note applies.
+The note is printed only if this argument is the same as the version number
+given in the
+\verb|\version| command (see \ref{structure.general.title}).
+For example, the text:
+\begin{verbatim}
+\version{1.6.4}
+
+\begin{versionnote}{1.3.2}
+A version note for version 1.3.2.
+\end{versionnote}
+
+\begin{versionnote}{1.6.4}
+A version note for version 1.6.4.
+\end{versionnote}
+\end{verbatim}
+gives the output:
+\version{1.6.4}
+\begin{versionnote}{1.3.2}
+A version note for version 1.3.2.
+\end{versionnote}
+
+\begin{versionnote}{1.6.4}
+A version note for version 1.6.4.
+\end{versionnote}
+
+\section{Lists}
+\clause{General}
+There are three types of list provided by the \iso\ style: itemized,
+enumerated and description.
+They are described in \ref{lists.types}.
+
+Lists may be nested up to four deep.
+If you exceed this limit, you have probably designed your standard badly.
+
+\clause{List types}
+\label{lists.types}
+\subclause{Itemized}
+Itemized lists are used when there is no need to identify the separate
+elements of the list.
+They are written as follows:
+\begin{verbatim}
+\begin{itemize}
+\item The first item.
+\item The next item. Entries may continue
+    over several lines if necessary.
+\end{itemize}
+\end{verbatim}
+The resulting output appears as follows:
+\begin{itemize}
+\item The first item.
+\item The next item. Entries may continue
+    over several lines if necessary.
+\end{itemize}
+
+\subclause{Enumerated}
+Enumerated lists are used when it is necessary to identify the separate
+list elements.
+They are written as follows:
+\begin{verbatim}
+\begin{enumerate}
+\item The first enumerated item.
+\item Another enumerated item.
+\end{enumerate}
+\end{verbatim}
+and the output appears as follows:
+\begin{enumerate}
+\item The first enumerated item.
+\item Another enumerated item.
+\end{enumerate}
+
+\subclause{Description}
+Description lists are used when each element of the list has a label.
+They are written as follows:
+\begin{verbatim}
+\begin{description}
+\item[Figure 1] An everyday object, seen from an
+    unusual angle.
+\item[Figure 2] An everyday angle, seen from an
+    unusual object.
+\end{description}
+\end{verbatim}
+and the output appears as follows:
+\begin{description}
+\item[Figure 1] An everyday object, seen from an
+    unusual angle.
+\item[Figure 2] An everyday angle, seen from an
+    unusual object.
+\end{description}
+
+\section{Special characters}
+\label{specialchars}
+\clause{General}
+The \iso\ style defines a few commands to access unusual elements of the
+LaTeX character set.
+These are given in the rest of this section.
+
+Some of the predefined LaTeX commands to do such things are given in
+\ref{guide.unusual}.
+There are many more in the LaTeX book.
+
+\clause{Reserved characters}
+\label{specialchars.reserved}
+LaTeX has ten reserved characters:
+\begin{verbatim}
+# $ % & ~ _ ^ \ { }
+\end{verbatim}
+
+These are available in the \iso\ style as
+\begin{verbatim}
+\# \$ \% \& \tilde \_ \caret \bslash \{ \}
+\end{verbatim}
+respectively.
+
+The `\bslash' character only exists in the TeX maths and typewriter fonts.
+The \verb|\bslash| command gives a maths backslash, except inside a
+\verb|\prog| command (see \ref{prog}), where it gives a typewriter
+backslash.
+\begin{note}
+\verb|\bslash| differs from TeX's \verb|\backslash| in two ways:
+\begin{itemize}
+\item It is defined as an ordinary character, rather than a delimiter.
+\item In PS-LaTeX, where the backslash character is available in all fonts,
+    \verb|\bslash| gives that character.
+\end{itemize}
+\end{note}
+
+\clause{Quotes}
+When you types quotes, \prog{\rquote} or \prog{\lquote}, in LaTeX, they
+appear as ' and ` respectively.
+You may prefer \rquote\ and \lquote\ in which case you can type
+\verb|\rquote| or \verb|\lquote| repectively (these stand for right and
+left quote --- I don't like these names but all the good ones have been
+taken by TeX).
+
+\section{Program text}
+\clause{Short text}
+\label{prog}
+It is usually convenient to set program text in a fixed-width font.
+The \verb|\prog| command allows you to do this: its argument is set in
+typewriter font.
+For example
+\begin{verbatim}
+the call of the \prog{wild}
+is answered in \prog{kind}.
+\end{verbatim}
+appears as: 
+the call of the \prog{wild}
+is answered in \prog{kind}.
+
+This command behaves exactly like a \verb|\tt| declaration (see
+\ref{guide.fonts}) except that:
+\begin{itemize}
+\item It redefines the \verb|\bslash|
+command (see \ref{specialchars.reserved} for details).
+\item It allows interword spacing to stretch or shrink a little;
+this allows LaTeX to pick better line breaks in two-column format.
+\end{itemize}
+
+\clause{Long text}
+\label{newverb}
+For longer pieces of program text, the \verb|verbatim| environment
+is used, see \ref{guide.verbatim} for details.
+The \iso\ style provides for the creation of multiple \verb|verbatim|
+environments with the \verb|\newverbatim| command; this allows different
+types of program text to be enclosed in different environments.
+Thus:
+\begin{verbatim}
+\newverbatim{example}
+\newverbatim{definition}
+\end{verbatim}
+creates two new environments, \verb|example| and \verb|definition|,
+each of whose contents is displayed in the same way; an automatic
+tool could now be written to, say, extract all example text and ensure
+that it is syntactically valid.
+
+\section{Index}
+The \iso\ style provides two types of index entry: by page number and
+by division number.
+The commands to produce these types of index are \verb|\pageindex| and
+\verb|\clauseindex| respectively; there should be at most one of these in
+a document and it should only appear in the preamble (i.e. between the
+\verb|\documentstyle| and the \verb|\begin{document}|), otherwise you are
+likely to get mixed page/clause indexing.
+
+The default indexing type is by page number; this is because indexing
+programs seem to be happier with it.
+Clause indexing is aesthetically preferable, if your indexing program
+can cope.
+
+\section{Headers and footers}
+By default, the \iso\ style gives page headers and footers according
+to ISO guidelines.
+These are:
+\begin{itemize}
+\item a header on page one, saying ``INTERNATIONAL STANDARD''.
+\item a running header at the top of every page, giving
+    the standard number, year and language.
+\item a running footer at the bottom of every page, giving the page
+    number.
+\end{itemize}
+
+The headers may be changed as follows:
+\begin{itemize}
+\item the header on page one is the argument to the
+    \verb|\documenttype| command.
+    Thus
+    \begin{verbatim}
+    \documenttype{NORME FRANCAISE}
+    \end{verbatim}
+    gives ``NORME FRANCAISE'' as the page one header.
+\item the running header consists of the argument to the
+    \verb|\runninghead| command.
+    Thus
+    \begin{verbatim}
+    \runninghead{Antipasto}
+    \end{verbatim}
+    gives ``Antipasto'' as the running header.
+\item the running footer consists of the argument to the
+    \verb|\runningfoot| command and the page number.
+    Thus
+    \begin{verbatim}
+    \runningfoot{Formaggio}
+    \end{verbatim}
+    gives ``Formaggio'' and the current page number as the running footer.
+\end{itemize}
+
+\begin{notes}
+\item Both headers appear on page one.
+\item The default definitions of the header commands are:
+    \begin{verbatim}
+    \runninghead{{\thestandard -\theyear(E)}}
+    \documenttype{{INTERNATIONAL STANDARD}}
+    \end{verbatim}
+\item The default definition of the footer command is:
+    \begin{verbatim}
+    \runningfoot{}
+    \end{verbatim}
+\item The document version number may be included in the running header
+    or footer by use of the \verb|\theversion| command (provided that a
+    version number has been given with the \verb|\version| command, see
+    \ref{structure.general.title}).
+\item In extremity, users may redefine
+    \verb|\@evenhead|, \verb|\@oddhead|, \verb|\@evenfoot| and
+    \verb|\@oddfoot| or use the \verb|\pagestyle|
+    command in the normal LaTeX manner.
+\item These headers do not use TeX marks and therefore changes to
+    \verb|\runninghead| or \verb|\runningfoot| in the body of a
+    document may take effect on the wrong page if you are unlucky.
+\end{notes}
+
+\section{Columns and text size}
+\label{columns}
+\clause{General}
+ISO guidelines say that standards should be set in two columns in nine
+point text; this is
+not suitable for some standards, such as \cite{sgml}, so the \iso\ style
+allows such standards to be set with one column and/or in ten point text
+by giving optional
+arguments to \verb|\documentstyle| (see \ref{structure.general.documentstyle}).
+
+The optional arguments are independent, so that any combination of one/two
+columns and nine/ten point text can be used.
+However, one column text in nine point is highly unreadable and two
+column text in ten point can give bad line breaks, so these combinations
+are not recommended.
+
+\clause{Columns}
+A standard may be set in one column using the \verb|onecolumn| optional
+argument, thus:
+\begin{verbatim}
+\documentstyle[onecolumn]{iso}
+\end{verbatim}
+If it is only necessary to set some parts of a document with one column, then
+the usual LaTeX commands \verb|\onecolumn| and \verb|\twocolumn| may be used.
+
+Two column text is the default, but you can explicitly demand it with:
+\begin{verbatim}
+\documentstyle[twocolumn]{iso}
+\end{verbatim}
+
+\clause{Text size}
+If a standard is to be set in one column, it is better to use ten point
+text for readability thus:
+\begin{verbatim}
+\documentstyle[onecolumn,10pt]{iso}
+\end{verbatim}
+
+Nine point text is the default, but you can explicitly demand it with:
+\begin{verbatim}
+\documentstyle[9pt]{iso}
+\end{verbatim}
+
+\section{Miscellaneous}
+
+\clause{Camera-ready copy}
+If a standard is to be sent to ISO Central Secretariat in camera-ready form,
+page numbering must start at page ii (leaving the front cover as page i),
+a copyright notice must appear at the foot of the first page of the tables
+of contents and,
+if the foreword is to be set by the Secretariat, a blank page must be left
+between the tables of contents and the introduction.
+The macro \verb|\cameraready| alters the pagenumbers in this fashion and sets
+the copyright notice.
+If used, it should only appear in the preamble, otherwise page numbering and
+size is likely to be unpredictable.
+Any document containing a \verb|\cameraready| command should also contain a
+\verb|\tableofcontents| command (see section~\ref{contents}), as the two
+interact.
+
+\clause{Compatibility}
+\subclause{PS-LaTeX}
+\subsubclause{General}
+PS-LaTeX is a PostScript-based version of LaTeX, which uses PostScript
+fonts rather than Computer Modern ones wherever possible.
+This is particularly useful to users of the \iso\ style as ISO's preferred
+fonts are Univers, Helvetica and Times Roman (see ``Notes to TC 97 Project
+Editors on presentation of draft International Standards (DIS)'', probably
+available from ISO/TC 97 Secretariat).
+
+PS-LaTeX was written by Mario Wolczko of the University of Manchester
+and copies are available from
+the Clarkson archive (\prog{archive-server@sun.soe.clarkson.edu}),
+the Aston archive (\prog{texserver@spock.aston.ac.uk}),
+me (\prog{ndn@seg.npl.co.uk}) or 
+Mario himself (\prog{mario@ux.cs.man.ac.uk}).
+Pre-requisites for running PS-LaTeX are: LaTeX, a PostScript output
+device and a DVI$\rightarrow$PostScript driver which recognises PostScript fonts
+(available from the above addresses).
+
+\subsubclause{Compatibility}
+The \iso\ style detects when it is running under PS-LaTeX and redefines
+the commands necessary to ensure unchanged output.
+As a result, an \iso\ style file can be run under LaTeX or PS-LaTeX
+with no alteration.
+
+\subsubclause{Line breaking}
+\label{misc.pslatex.lines}
+There can be some problems with line breaking under PS-LaTeX: some
+PostScript font metric files do not allow enough stretching of interword
+space for TeX's line breaking algorithm to do a good job.
+The \iso\ style therefore detects when it is running under PS-LaTeX and
+adjusts the interword spacing to what it considers to be a better value.
+If you do not like the result, you can put the following command before the
+\verb|\begin{document}|:
+\begin{verbatim}
+\defaultspacing
+\end{verbatim}
+When running under ordinary LaTeX, this command has no effect.
+
+\subclause{Style options}
+\label{compat.style}
+Style options fall into two classes:
+\begin{enumerate}
+\item Those which add facilities to LaTeX such as \prog{vdm} and
+    \prog{zed}.
+\item Those which change spacings (\verb|\textwidth| etc) such as
+    \prog{a4} and \prog{a4wide}.
+\end{enumerate}
+
+The \iso\ style can be used with style options of the first variety
+with only one proviso: some of these styles assume that the document is
+set in one of 10, 11 or 12 point; the default for \iso\ documents is
+9 point so the \iso\ style masquerades as 10 point for the benefit of
+these other styles.
+\begin{note}
+For LaTeX hackers: this is implemented by setting \verb|\@ptsize| to
+zero.
+\end{note}
+
+A little more caution should be used with the second variety of style
+option: since both they and the \iso\ style change layout parameters,
+the end result is unlikely to look like either an ISO standard or the
+type of document promised by the style option.
+However, there should not be any catastrophic results.
+
+\clause{Page alignment}
+ISO standards set text across most of the page width: if your printer is
+just slightly misaligned, this can result in text being lost off the edge
+of the page.
+If you have this problem, use the \verb|\leftoffset| command in the preamble.
+This command moves the left margin inwards by the amount of its
+argument (a negative argument moves the margin outwards).
+Thus \verb|\leftoffset{.5in}| moves the left margin in by $0.5$ inches.
+
+\clause{Line breaking}
+ISO standards are usually set in two-column format.
+LaTeX can have difficulty finding what it considers to be good line breaks
+in these circumstances, so the \iso\ style helps out by executing the
+\verb|\sloppy| and
+\verb|\verysloppy| commands which allow LaTeX to lower its high standards
+somewhat.
+There are corresponding \verb|\fussy| and \verb|\unverysloppy| commands
+respectively which restore LaTeX's default behaviour.
+
+See also section \ref{misc.pslatex.lines} for more on line breaking under
+PS-LaTeX.
+
+\clause{Sources}
+The \iso\ style is based on ``Notes to TC97 Project Editors on presentation
+draft International Standards (DIS)'' and ``Rules for drafting and presentation
+of International Standards''.
+It was produced by extensive modification of Leslie Lamport's ``article''
+style for LaTeX.
+
+\clause{Latest version}
+Your version of the \iso\ style is given in the running header of this
+document.
+You can find out the latest version number by sending an email message to
+\prog{info-server@seg.npl.co.uk} with the following body:
+\begin{verbatim}
+request: latex
+topic: version iso
+\end{verbatim}
+You will receive a message back of the form
+\begin{verbatim}
+% @(#)iso.sty   2.6 dated 91/05/02 at 09:57:15
+\end{verbatim}
+showing that the current version is 2.6.
+
+If you have an out of date version and would like the latest one, then send
+another email message to \prog{info-server@seg.npl.co.uk} with the following
+body:
+\begin{verbatim}
+request: latex
+topic: iso.tex
+topic: iso.sty
+topic: iso9.sty
+topic: iso10.sty
+\end{verbatim}
+This will cause the latest version of the \iso\ style files to be sent to you.
+
+\clause{Acknowledgements}
+The author would like to thank Tony Mansfield, Roger Scowen and Cath Baker
+for their patience during development of the \iso\ style and their
+sterling work in testing it.
+
+\clause{Author}
+The \iso\ style was written by:\\
+Nicolas North,\\
+Division of Information Technology and Computing,\\
+National Physical Laboratory,\\
+Teddington,\\
+Middlesex, TW11 0LW,\\
+U.K.\\
+\prog{ndn@seg.npl.co.uk}
+
+\annex
+
+\informative{An example standard}
+\label{annex.example}
+This annex shows the ASCII form of a typical standard.
+
+\begin{verbatim}
+\documentstyle{iso}
+
+\standard{1234}
+\title{An example standard}
+
+\begin{document}
+
+\tableofcontents
+
+\foreword
+The foreword goes here.
+
+\introduction
+The introduction goes here.
+
+\maketitle
+
+\section{The first section}
+\clause{The first clause}
+Text of the first clause.
+\subclause{The only subclause}
+
+\clause{Another clause}
+Text of the second clause.
+
+\section{Another section}
+Text of this section.
+
+\annex
+
+\informative{The first annex}
+Text of the annex.
+
+\end{document}
+\end{verbatim}
+
+This example describes a standard, number 1234, called ``An example
+standard''.
+It has a table of contents, a foreword and an introduction.
+These are followed by two sections and an informative annex.
+The first section  has two clauses and one subclause.
+
+\informative{Some LaTeX guidance}
+\clause{General}
+LaTeX (pronounced lay-tek or lah-tek) is a document preparation system
+consisting of a set of macros for Donald Knuth's typesetting system, TeX.
+The \iso\ style is, in its turn, a set of LaTeX macros.
+This has two implications: firstly that the facilities of LaTeX (and TeX) are
+available to users of the \iso\ style, and secondly that \iso\ style users
+should really have some knowledge of LaTeX before embarking on production of
+a standard.
+
+This annex gives a very brief summary of some of the more pertinent features
+of LaTeX.
+For more information, and examples, users should read, ``LaTeX: A Document
+Preparation System'' by Leslie Lamport (Addison-Wesley), the source text of
+this document and the \verb|iso.sty| file, probably in that order.
+Typesetting enthusiasts should also read, ``The TeXbook'' by Donald Knuth
+(Addison-Wesley).
+
+\clause{Document layout}
+LaTeX input is essentially free-format, with spaces, tabs and newlines used
+as separators.
+The important exception to this is that a blank line is regarded as a
+separator between paragraphs, so blank lines must be used with some care.
+
+{\em Commands\/} are introduced by the \verb|\| character, e.g.
+\verb|\annex| is a command to start on the annexes part of a standard.
+Command parameters are enclosed in braces (\verb|{}|), e.g.
+\verb|\label{foo}| creates a label called \verb|foo|.
+
+{\em Comments\/} are introduced by the \verb|%| character.
+This comments out everything to the next newline.
+There are no ``bracketed comments'' as in Pascal or C.
+
+{\em Braces\/} (\verb|{}|) are used for scoping: any change of style
+introduced after a \verb|{| is reversed by the matching \verb|}|.
+
+\clause{Fonts}
+\label{guide.fonts}
+LaTeX provides a number of fonts, the most useful of which are:
+{\rm roman}, {\em emphatic}, {\bf bold}, {\it italic} and {\tt typewriter
+(fixed width)}.
+These are introduced by \verb|\rm|, \verb|\em|, \verb|\bf|, \verb|\it| and
+\verb|\tt| respectively.
+The scope of these commands lasts until the next \verb|}| so, to set a 
+phrase in bold, you enter \verb|{\bf bold phrase}|, to give
+{\bf bold phrase}.
+
+\clause{Labels and references}
+Any point in a standard may be labelled, using the command
+\verb|\label{labelname}|.
+This gives \verb|labelname| the value of its division number in the document.
+For instance, \verb|\label{latex.ref}| at this point in this document
+\label{latex.ref} 
+gives \verb|latex.ref| the value of \ref{latex.ref}.
+
+A label may be referred to at any time by use of the command
+\verb|\ref{labelname}|.
+Thus the label \verb|latex.ref| is referred to by \verb|\ref{latex.ref}|,
+giving the value \ref{latex.ref}.
+
+\clause{Tables and figures}
+\subclause{General}
+It is impossible to give more than an inkling of the variety of tables and
+figures available in LaTeX in this document.
+Suffice it to say that almost any collection of material that you want
+tabulated can be set in LaTeX with the \verb|tabular| environment and that
+many line drawings can be produced with the \verb|picture| environment.
+As always, the LaTeX book has the details.
+
+\subclause{Tables}
+Tables are set using the \verb|table| environment.
+Anything can be put in a table, but usually it will be something set
+using the \verb|tabular| environment.
+The \verb|table| environment then decides where the table should go on the
+page, captions it and puts an entry in the list of tables.
+Table \ref{table.example} was produced with the following input:
+\begin{verbatim}
+\begin{table}[hb]
+\caption{Translations}
+\label{table.example}
+\begin{center}
+\begin{tabular}{|l||l|}
+\hline
+English & American \\
+\hline
+pavement & sidewalk \\
+colour & color \\
+prologue & prolog \\
+yes & affirmative
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\end{verbatim}
+
+The \verb|[hb]| indicates that the table should be set either here
+(\verb|h|) or at the bottom of the page (\verb|b|).
+
+The caption will be set where you put it in the table environment: at the
+bottom in this case.
+The label declaration must either be inside the argument to \verb|\caption|
+or after it in the table environment.
+
+\begin{table}[hb]
+\caption{Translations}
+\label{table.example}
+\begin{center}
+\begin{tabular}{|l||l|}
+\hline
+English & American \\
+\hline
+pavement & sidewalk \\
+colour & color \\
+prologue & prolog \\
+yes & affirmative \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+A list of all tables in your document may be obtained by including a
+\verb|\listoftables| command (see \ref{contents}).
+
+\subclause{Figures}
+Figures are set using the \verb|figure| environment.
+Anything can be put in a figure, but usually it will be something set
+using the \verb|picture| environment.
+The \verb|figure| environment then decides where the figure should go on the
+page, captions it and puts an entry in the list of figures.
+Figure \ref{figure.example} was produced with the following input:
+\begin{verbatim}
+\begin{figure}[hb]
+\caption{Stands the clock at ten to three}
+\label{figure.example}
+\begin{center}
+\setlength{\unitlength}{1mm}
+\begin{picture}(50,50)(-25,-25)
+\put(0,0){\circle{40}}
+\put(0,0){\vector(-4,3){5}}
+\put(0,0){\vector(1,0){5}}
+\end{picture}
+\end{center}
+\end{figure}
+\end{verbatim}
+A list of all figures in your document may be obtained by including a
+\verb|\listoffigures| command (see \ref{contents}).
+
+\begin{figure}[hb]
+\caption{Stands the clock at ten to three}
+\label{figure.example}
+\begin{center}
+\setlength{\unitlength}{1mm}
+\begin{picture}(50,50)(-25,-25)
+\put(0,0){\circle{40}}
+\put(0,0){\vector(-4,3){5}}
+\put(0,0){\vector(1,0){5}}
+\end{picture}
+\end{center}
+\end{figure}
+
+\clause{Unusual characters}
+\label{guide.unusual}
+Most \cite{charset} characters are easy to obtain by just typing them.
+Others have a special meaning to LaTeX and are therefore less easy to enter.
+A list of these and some other useful characters is shown in table
+\ref{table.chars}
+\begin{table}[ht]
+\caption{Useful characters}
+\label{table.chars}
+\begin{center}
+\begin{tabular}{ll}
+LaTeX input	&	Output \\
+\prog{\rquote}	&	' \\
+\prog{\rquote\rquote}	&	'' \\
+\prog{\lquote\lquote}	&	`` \\
+\verb|\#|	&	\# \\
+\verb|\$|	&	\$ \\
+\verb|\%|	&	\% \\
+\verb|\&|	&	\& \\
+\verb|\tilde|	&	\tilde \\
+\verb|\_|	&	\_ \\
+\verb|\caret|	&	\caret \\
+\verb|\bslash|	&	\bslash \\
+\verb|\{|	&	\{ \\
+\verb|\}|	&	\} \\
+\verb|\copyright|	&	\copyright \\
+\verb|\pounds|	&	\pounds
+\end{tabular}
+\end{center}
+\end{table}
+
+See section \ref{specialchars} for some more useful characters provided by
+the \iso\ style.
+
+\clause{Columns}
+The ISO guidelines ask for standards to be set in two columns.
+However, it is sometimes necessary to use single column text.
+This may be effected by using the \verb|\onecolumn| command.
+Return to two column text with the \verb|\twocolumn| command.
+See annex \ref{run} for an example of single column typesetting.
+
+Both of these commands start a new page and should therefore be used with
+discretion: the best place is prior to starting a new section.
+
+\clause{Verbatim text}
+\label{guide.verbatim}
+It is sometimes necessary to display text in a fixed width font.
+LaTeX provides the verbatim environment for this purpose.
+Text enclosed between \verb|\begin{verbatim}| and
+\verb|\end{verbatim}| is set exactly as in the input file, in the fixed
+width font.
+For example:
+\begin{example}
+\begin{verbatim}
+Some text
+  with   odd spacing
+   and line
+ breaks
+\end{verbatim}
+\end{example}
+%\verb|\end{verbatim}| \\
+is set as:
+\begin{verbatim}
+Some text
+  with   odd spacing
+   and line
+ breaks
+\end{verbatim}
+
+The maximum number of characters that can be fitted into a single column
+is about 45.
+
+The \iso\ style allows for the creation of multiple, differently
+named, \verb|verbatim| environments.
+See \ref{newverb} for details.
+
+\onecolumn
+\informative{Running LaTeX}
+\label{run}
+The method for running LaTeX will vary from site to site.
+This annex shows a typical run of LaTeX on this document at the National
+Physical Laboratory; the procedure at your site should not differ by much.
+User input follows the \verb|crumble%| prompt.
+
+\begin{verbatim}
+crumble% latex iso
+This is TeX, C Version 3.0
+(iso.tex
+LaTeX Version 2.09 <7 Dec 1989>
+(iso.sty
+Document Style `iso' <18 Jun 90>.
+(iso9.sty))
+No file iso.aux.
+No file iso.toc.
+No file iso.lof.
+No file iso.lot.
+[1]
+LaTeX Warning: Reference `div.special.def' on page 1 undefined.
+LaTeX Warning: Reference `contents' on page 1 undefined.
+LaTeX Warning: Reference `special.foreword' on page 1 undefined.
+LaTeX Warning: Reference `special.intro' on page 1 undefined.
+LaTeX Warning: Reference `divns' on page 1 undefined.
+LaTeX Warning: Reference `annex.example' on page 1 undefined.
+LaTeX Warning: Reference `contents' on page 1 undefined.
+LaTeX Warning: Reference `structure.general.maketitle' on page 1 undefined.
+[1]
+LaTeX Warning: Reference `references' on page 2 undefined.
+LaTeX Warning: Citation `sgml' on page 2 undefined.
+LaTeX Warning: Reference `definitions' on page 2 undefined.
+LaTeX Warning: Citation `bs0' on page 2 undefined.
+LaTeX Warning: Reference `lists.types' on page 2 undefined.
+[2]
+LaTeX Warning: Reference `guide.unusual' on page 3 undefined.
+LaTeX Warning: Reference `prog' on page 3 undefined.
+LaTeX Warning: Reference `guide.fonts' on page 3 undefined.
+LaTeX Warning: Reference `specialchars.reserved' on page 3 undefined.
+LaTeX Warning: Reference `guide.verbatim' on page 3 undefined.
+[3]
+LaTeX Warning: Citation `sgml' on page 4 undefined.
+LaTeX Warning: Reference `structure.general.documentstyle' on page 4 undefined.
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 519--528
+\ninrm me (\nintt ndn@seg.npl.co.uk\ninrm ) or Mario him-self
+[4]
+LaTeX Warning: Reference `misc.pslatex.lines' on page 5 undefined.
+
+Underfull \vbox (badness 2538) has occurred while \output is active [5]
+[6]
+LaTeX Warning: Reference `latex.ref' on page 7 undefined.
+LaTeX Warning: Reference `latex.ref' on page 7 undefined.
+LaTeX Warning: Reference `table.example' on page 7 undefined.
+LaTeX Warning: Reference `contents' on page 7 undefined.
+LaTeX Warning: Reference `figure.example' on page 7 undefined.
+
+Underfull \vbox (badness 4899) has occurred while \output is active [7]
+LaTeX Warning: Reference `contents' on page 8 undefined.
+LaTeX Warning: Citation `charset' on page 8 undefined.
+LaTeX Warning: Reference `table.chars' on page 8 undefined.
+LaTeX Warning: Reference `specialchars' on page 8 undefined.
+LaTeX Warning: Reference `run' on page 8 undefined.
+LaTeX Warning: Reference `newverb' on page 8 undefined.
+[8] [9] (iso.aux)
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+ )
+(see the transcript file for additional information)
+Output written on iso.dvi (10 pages, 38956 bytes).
+Transcript written on iso.log.
+crumble% latex iso
+latex iso
+This is TeX, C Version 3.0
+(iso.tex
+LaTeX Version 2.09 <7 Dec 1989>
+(iso.sty
+Document Style `iso' <18 Jun 90>.
+(iso9.sty)) (iso.aux) (iso.toc [1]) (iso.lof) (iso.lot) [2] [1] [2] [3]
+Underfull \hbox (badness 5274) in paragraph at lines 519--528
+\ninrm me (\nintt ndn@seg.npl.co.uk\ninrm ) or Mario him-self
+[4]
+Underfull \vbox (badness 2538) has occurred while \output is active [5]
+[6]
+Underfull \vbox (badness 4899) has occurred while \output is active [7]
+[8] [9] (iso.aux) )
+(see the transcript file for additional information)
+Output written on iso.dvi (11 pages, 62512 bytes).
+Transcript written on iso.log.
+\end{verbatim}
+
+Note that LaTeX has to be run twice: the first run stores information on
+cross-referencing and the table of contents in the files {\tt iso.aux} 
+and {\tt iso.toc} which is then used in the second run.
+LaTeX will inform you if it needs to be run more than once.
+
+You may get complaints about underfull or overfull boxes; these occur when
+LaTeX feels that it has made a bad line or page break.
+Often these breaks are not as bad as LaTeX feels and they can safely be
+ignored.
+\twocolumn
+\end{document}

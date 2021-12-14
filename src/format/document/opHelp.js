@@ -1,26 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class opHelp extends Format
 {
-	name = "OPHelp";
-	ext = [".hlp"];
-	magic = ["OPHelp Help"];
+	name        = "OPHelp";
+	ext         = [".hlp"];
+	magic       = ["OPHelp Help"];
 	unsupported = true;
-	notes = "Couldn't locate additional info for it";
+	notes       = "Couldn't locate additional info for it";
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name        : "OPHelp",
-	ext         : [".hlp"],
-	magic       : ["OPHelp Help"],
-	unsupported : true,
-	notes       : "Couldn't locate additional info for it"
-};
-
-*/

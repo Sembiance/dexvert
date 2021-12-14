@@ -1,22 +1,11 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class stosBAS2txt extends Program
 {
-	website = "https://github.com/Sembiance/dexvert";
+	website    = "https://github.com/Sembiance/dexvert";
+	bin        = "deno";
+	args       = async r => Program.denoArgs(Program.binPath("stosBAS2txt.js"), "--", r.inFile(), await r.outFile("out.txt"));
+	runOptions = ({env : Program.denoEnv()});
+	renameOut  = true;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website : "https://github.com/Sembiance/dexvert"
-};
-
-exports.bin = () => path.join(__dirname, "..", "..", "..", "bin", "stosBAS2txt.js");
-exports.args = (state, p, r, inPath=state.input.absolute, outPath=path.join(state.output.absolute, `${state.input.name}.txt`)) => ([...(state.verbose>=2 ? ["--verbose"] : ""), inPath, outPath]);
-*/

@@ -19,8 +19,9 @@ export class ffdec extends Program
 		const framesDirPath = path.join(r.outDir({absolute : true}), "frames");
 		const frameFilePaths = (await fileUtil.tree(framesDirPath, {nodir : true, regex : /\.png$/i})).map(filePath => path.relative(framesDirPath, filePath)).sortMulti([filePath => (+path.basename(filePath, ".png"))]);
 
-		const {stdout : frameRateRaw} = await runUtil.run("swfdump", ["--rate", r.inFile()], {cwd : r.f.root});
-		const frameDelay = (100/(+frameRateRaw.match(/-r (?<rate>\d.+)/)?.groups?.rate));
+		const swfdumpR = await Program.runProgram("swfdump", r.f.input, {xlog : r.xlog, autoUnlink : true});
+
+		const frameDelay = swfdumpR.meta.frameRate ? (100/swfdumpR.meta.frameRate) : 20;
 		const gifFilePath = await r.outFile(`${r.originalInput ? r.originalInput.name : "out"}.gif`, {absolute : true});
 		
 		await runUtil.run("convert", ["-delay", frameDelay.toString(), "-loop", "0", "-dispose", "previous", ...frameFilePaths, "-strip", gifFilePath], {cwd : framesDirPath});

@@ -12,7 +12,7 @@ export class xfdDecrunch extends Program
 	args = r => [r.inFile(), "HD:out/outfile"];
 	post = async r =>
 	{
-		if(!r.flags.addHeader)
+		if(!r.flags.addHeader || !r.f.files.new)
 			return;
 		
 		await r.f.files.new.parallelMap(async file =>

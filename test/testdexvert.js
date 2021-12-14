@@ -76,7 +76,8 @@ const FLEX_SIZE_FORMATS =
 
 const IGNORE_SIZE_FILEPATHS =
 [
-	/scripts\/.+\.as$/i	// archive/swf/cookie-hamster often produces very different script/**/*.as files
+	/image\/pict\/les38\.png$/i,	// for some reason, this image output flip flops back and forthe between 8KB and 36KB, not sure why
+	/scripts\/.+\.as$/i				// archive/swf/cookie-hamster often produces very different script/**/*.as files
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -429,7 +430,7 @@ async function writeOutputHTML()
 				max-height: 350px;
 			}
 
-			.audio
+			.media
 			{
 				width: 47%;
 				display: inline-block;
@@ -438,12 +439,17 @@ async function writeOutputHTML()
 				margin-bottom: 0.25em;
 			}
 
-			.audio label
+			.media label
 			{
 				vertical-align: top;
 			}
 
-			.audio audio
+			.media video
+			{
+				width : 50%;
+			}
+
+			.media audio
 			{
 				height: 1.5em;
 				width : 50%
@@ -478,7 +484,7 @@ async function writeOutputHTML()
 		const ext = path.extname(filePath);
 		const filePathSafe = `file://${filePath.escapeHTML()}`;
 		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
-		switch(ext)
+		switch(ext.toLowerCase())
 		{
 			case ".jpg":
 			case ".gif":
@@ -486,16 +492,17 @@ async function writeOutputHTML()
 			case ".webp":
 			case ".svg":
 				return `<img src="${filePathSafe}">`;
-			
+
 			case ".mp4":
-				return `<video src="${filePathSafe}">`;
+				return `<span class="media"><label>${relFilePath.escapeHTML()}</label><video controls="" muted="" playsinline="" src="${filePathSafe}"></video></span>`;
 
 			case ".wav":
 			case ".mp3":
-				return `<span class="audio"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
+				return `<span class="media"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
 			
 			case ".txt":
 			case ".pdf":
+			case ".html":
 				return `<iframe src="${filePathSafe}"></iframe>`;
 		}
 

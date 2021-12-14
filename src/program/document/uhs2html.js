@@ -1,27 +1,15 @@
-/*
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {path} from "std";
 
 export class uhs2html extends Program
 {
-	website = "http://www.emulinks.de/software.html";
-	package = "games-util/uhs2html";
-	unsafe = true;
+	website   = "http://www.emulinks.de/software.html";
+	package   = "games-util/uhs2html";
+	unsafe    = true;
+	bin       = "uhs2html";
+	args      = r => [r.inFile(), "dexout"];
+	postExec  = async r => await fileUtil.moveAll(path.join(r.outDir({absolute : true}), "dexout"), path.join(r.outDir({absolute : true})), {unlinkSrc : true});
+	cwd       = r => r.outDir();
+	renameOut = false;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "http://www.emulinks.de/software.html",
-	package : "games-util/uhs2html",
-	unsafe        : true
-};
-
-exports.bin = () => "uhs2html";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath, "outhtml"]);
-exports.post = (state, p, r, cb) => p.util.file.moveAllFiles(path.join(state.cwd, "outhtml"), state.output.absolute)(state, p, cb);
-*/

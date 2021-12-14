@@ -1,6 +1,5 @@
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
-import {runUtil} from "xutil";
 import {TEXT_MAGIC} from "../Detection.js";
 
 export class text extends Family
@@ -19,9 +18,9 @@ export class text extends Family
 			// imageMagick meta provider
 			if(metaProvider==="text")
 			{
-				const {stdout : lineCountRaw} = await runUtil.run("wc", ["-l", inputFile.absolute]);
-				const lineCount = +lineCountRaw.split(" ")[0];
-				if(isNaN(lineCount) || lineCount<1)
+				const wcR = await Program.runProgram("wc", inputFile, {xlog, autoUnlink : true});
+				const lineCount = wcR.meta?.lineCount;
+				if(!lineCount)
 					return;
 
 				const textMeta = {lineCount, charSet : {}};
@@ -29,8 +28,7 @@ export class text extends Family
 					textMeta.charSet.declared = this.charSet;
 				
 				// detect our charSet
-				const chardetectR = await Program.runProgram("chardetect", inputFile, {xlog});
-				await chardetectR.unlinkHomeOut();
+				const chardetectR = await Program.runProgram("chardetect", inputFile, {xlog, autoUnlink : true});
 				if(chardetectR.meta?.charSet)
 					textMeta.charSet.detected = chardetectR.meta.charSet;
 
@@ -38,8 +36,7 @@ export class text extends Family
 					delete textMeta.charSet;
 				
 				// detect whether we are verified as text
-				const fileR = await Program.runProgram("file", inputFile, {xlog});
-				await fileR.unlinkHomeOut();
+				const fileR = await Program.runProgram("file", inputFile, {xlog, autoUnlink : true});
 
 				const {flexMatch} = await import("../identify.js");	// need to import this dynamically to avoid circular dependency
 				if(fileR.meta.detections.map(v => v.value).some(v => TEXT_MAGIC.some(m => flexMatch(v.trimChars(",").trim(), m))))

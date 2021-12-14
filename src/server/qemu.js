@@ -32,7 +32,7 @@ const OS =
 {
 	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
 	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
-	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx" },
+	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx", runDelay : xu.SECOND*2},
 	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"], inOutType : "ssh", scriptExt : ".sh" }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
@@ -160,6 +160,8 @@ export class qemu extends Server
 		instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
 		instance.scriptName = `go${OS[osid].scriptExt}`;
 		instance.inOutType = OS[osid].inOutType;
+		if(OS[osid].runDelay)
+			instance.runDelay = OS[osid].runDelay;
 		INSTANCES[osid][instanceid] = instance;
 		
 		await Deno.mkdir(path.join(instance.dirPath, "in"), {recursive : true});
@@ -236,6 +238,11 @@ export class qemu extends Server
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
 		this.log`${body.osid} #${instance.instanceid} finished request`;
+		if(instance.runDelay)
+		{
+			this.log`${body.osid} delaying ${(instance.runDelay/xu.SECOND).secondsAsHumanReadable()} due to runInterval setting`;
+			await delay(instance.runDelay);
+		}
 		instance.busy = false;
 
 		if(inOutErr)
@@ -279,7 +286,7 @@ export class qemu extends Server
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.log`Got qemuRun request for ${body.osid}`;
+			this.log`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.length})`;
 			RUN_QUEUE.push({body, request, reply});
 		}, {detached : true, method : "POST"});
 		await this.webServer.start();

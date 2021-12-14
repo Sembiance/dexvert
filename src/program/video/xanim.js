@@ -1,41 +1,27 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class xanim extends Program
 {
 	website = "https://github.com/Sembiance/xanim";
 	package = "media-video/xanim";
-	unsafe = true;
-	notes = "The dexvert version of xanim has special export functionality, originally based on the loki xanim fork, but I've ehnhanced it to support other animation formats and output correctly on 32bit x11 displays";
-	flags = {"xanimDelay":"Duration of delay between animation frames. Default: 10"};
+	unsafe  = true;
+	notes   = "The dexvert version of xanim has special export functionality, originally based on the loki xanim fork, but I've ehnhanced it to support other animation formats and output correctly on 32bit x11 displays";
+	flags   = {
+		frameDelay : "Duration of delay between animation frames. Default: 10"
+	};
+	bin  = "xanim";
+	args = r => ["+Ze", "+l0", "-Zr", "+Ee", r.inFile()];
+	cwd  = r => r.outDir();
+
+	// xanim plays back in real time, so if the video is longer than 5 minutes, it just will get truncated
+	runOptions = ({virtualX : true, timeout : xu.MINUTE*5});
+	chain      = r => `*joinAsGIF[frameDelay:${r.flags.frameDelay || 10}] -> ffmpeg`;
+	renameOut  = false;
 }
-*/
+
 
 /*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path"),
-	fileUtil = require("@sembiance/xutil").file,
-	tiptoe = require("tiptoe");
-
-exports.meta =
-{
-	website       : "https://github.com/Sembiance/xanim",
-	package : "media-video/xanim",
-	unsafe        : true,
-	notes         : "The dexvert version of xanim has special export functionality, originally based on the loki xanim fork, but I've ehnhanced it to support other animation formats and output correctly on 32bit x11 displays",
-	flags         :
-	{
-		xanimDelay : "Duration of delay between animation frames. Default: 10"
-	}
-};
-
-exports.bin = () => "xanim";
-exports.args = (state, p, r, inPath=state.input.filePath, outPath=path.join(state.output.dirPath, `${state.input.name}.mp4`)) => { r.outPath = outPath; return ["+Ze", "+l0", "-Zr", "+Ee", inPath]; };
-
-// xanim plays back in real time, so if the video is longer than 4 minutes, it just will get truncated
-exports.runOptions = () => ({virtualX : true, timeout : XU.MINUTE*4});
-
 exports.post = (state, p, r, cb) =>
 {
 	tiptoe(

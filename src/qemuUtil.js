@@ -5,6 +5,10 @@ export const QEMU_SERVER_HOST = "127.0.0.1";
 export const QEMU_SERVER_PORT = 17735;
 export const QEMUIDS = ["win2k", "winxp", "amigappc", "gentoo"];
 
+// AUTOIT FUNCTIONS: https://www.autoitscript.com/autoit3/docs/functions.htm
+// AUTOIT LIB FUNCTIONS: https://www.autoitscript.com/autoit3/docs/libfunctions.htm
+// Send() Keys: https://www.autoitscript.com/autoit3/docs/functions/Send.htm
+// AUTOIT DLL INFO: https://www.autoitscript.com/forum/topic/93496-tutorial-on-dllcall-dllstructs/
 const AUTOIT_FUNCS =
 {
 	KillAll : `

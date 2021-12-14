@@ -1,4 +1,4 @@
-# Supported File Formats (837)
+# Supported File Formats (890)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -141,13 +141,14 @@ audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwoo
 
 
 
-## Document (32)
+## Document (72)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [9 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
 document | Amiga Catalog Translation file | .ct | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/catalogTranslation/)
 document | AmigaBASIC Source Code | .bas | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) | [10 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [guideml](http://aminet.net/package/text/hyper/guideml) [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
+document | [Atari STOS Basic](https://temlib.org/AtariForumWiki/index.php/STOS.BAS) | .bas | [stosBAS2txt](https://github.com/Sembiance/dexvert) | [12 sample files](https://telparia.com/fileFormatSamples/document/stosBAS/) - I tried using STOSBAS_detokenize.pl and chkbas and both failed. So I just wrote my own.
 document | Atari Works Database | .std | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/atariWorksDatabase/)
 document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/atariWorks/)
 document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/atariWorksSpreadsheet/)
@@ -159,6 +160,7 @@ document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.or
 document | [Device Independent File](http://fileformats.archiveteam.org/wiki/DVI_(Device_Independent_File_Format)) | .dvi | [dvi2pdf](http://tug.org/texlive/) | [11 sample files](https://telparia.com/fileFormatSamples/document/deviceIndependentFile/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [ddjvu](http://djvu.sourceforge.net/) | [2 sample files](https://telparia.com/fileFormatSamples/document/djvu/)
 document | EasyCalc Spreadsheet file | .calc | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/easyCalc/)
+document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [11 sample files](https://telparia.com/fileFormatSamples/document/xls/)
 document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/Farallon_Replica) | .rpl | [replica](https://gondwanaland.com/meta/history/) | [4 sample files](https://telparia.com/fileFormatSamples/document/farallonReplica/)
 document | Final Write Document |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/finalWrite/)
 document | FrameworkDocument | .fw2 .fw3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameworkDocument/)
@@ -166,16 +168,54 @@ document | GNU Info File | .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
 document | Home Accounts | .ha .ha2 | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/homeAccounts/)
 document | HotHelp Catalog | .cat | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/hotHelpCatalog/)
-document | IBM Revisable-Form Text | .rft .dca | [fileMerlin](http://www.file-convert.com/flmn.htm) word97 | [7 sample files](https://telparia.com/fileFormatSamples/document/revisableFormText/)
+document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [gpcl6](https://www.ghostscript.com/download/gpcldnld.html) | [11 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
+document | IBM Revisable-Form Text | .rft .dca | [fileMerlin](http://www.file-convert.com/flmn.htm) [word97](https://archive.org/details/office97standard_201912/) | [7 sample files](https://telparia.com/fileFormatSamples/document/revisableFormText/)
 document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/ibm-storyboard/) | .txm | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/ibmStoryboardDocument/) - Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out.
 document | InfoFile Database File | .flr | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | InstallShield Compiled Script | .inx | [SID](https://github.com/tylerapplebaum/setupinxhacking) | [5 sample files](https://telparia.com/fileFormatSamples/document/installShieldCompiledScript/)
 document | ITS International Module | .int | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/itsInternational/)
+document | [LaTeX Document](http://fileformats.archiveteam.org/wiki/LaTeX) | .tex .ltx | [latex2html](https://www.latex2html.org/) [latex2pdf](http://latex2rtf.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/latex/) - Images don't seem to work at all. Hrm. At least the text seems to make it out, which is good enough for later indexing.
+document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [soffice](https://www.libreoffice.org) | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
+document | Lotus Notes Database | .nsf | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/lotusNotes/)
+document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
+document | MacWrite Document | .mcw .doc | [soffice](https://www.libreoffice.org) | [6 sample files](https://telparia.com/fileFormatSamples/document/macWrite/)
+document | Magnetic Pages Article |  | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/magneticPages/)
+document | [MAN Page](http://fileformats.archiveteam.org/wiki/Man_page) | .man .1 .2 .3 .4 .5 .6 .7 .8 | [man2html](http://primates.ximian.com/~flucifredi/man/) | [11 sample files](https://telparia.com/fileFormatSamples/document/manPage/)
+document | MicroHelp | .slb | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/microHelp/)
+document | [Microsoft Works Document](http://fileformats.archiveteam.org/wiki/Microsoft_Works) | .wps .wp .doc | [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) | [12 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorks/)
+document | [Norton Guide](https://en.wikipedia.org/wiki/Norton_Guides) | .ng | [ng2html](http://www.davep.org/norton-guides/) | [11 sample files](https://telparia.com/fileFormatSamples/document/nortonGuide/)
+document | Novell DOS Client Message | .msg | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/novellDOSClientMessage/)
+document | Novell/C-Worthy Message Librarian | .msg .dat | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/messageLibrarian/)
+document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/oberonText/)
+document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)
+document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [ipf2txt](https://github.com/Sembiance/dexvert) | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Help/)
+document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
+document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
+document | Papyrus | .pap | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/papyrus/)
+document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [pco](https://vetusware.com/download/PC%20Outline%20for%20Windows%20PC%20Outline%201.0.a/?id=4597) | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
+document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/pcTypeDocument/)
+document | [PCBoard Programming Language Executable](https://en-academic.com/dic.nsf/enwiki/3064510) | .ppe | [pplx](http://files.mpoli.fi/unpacked/tlr/pcboard_bbs_utilities/agsppx20.zip/) | [10 sample files](https://telparia.com/fileFormatSamples/document/pcBoardPPE/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [4 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | [ps2pdf](https://ghostscript.com/) | [13 sample files](https://telparia.com/fileFormatSamples/document/ps/)
+document | Professional Write Document |  | [fileMerlin](http://www.file-convert.com/flmn.htm) | [6 sample files](https://telparia.com/fileFormatSamples/document/pfsWrite/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
+document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
+document | StarWriter Document | .tpl | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/starWriter/) - Soffice claims to support this format, but it wouldn't do anything with my .TPL files.
+document | Tempus Word Document | .twd | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/tempusWord/)
+document | Texinfo Document | .texinfo .texi | [texi2pdf](https://www.gnu.org/software/texinfo/) [texi2html](http://www.nongnu.org/texi2html/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/texInfo/)
+document | Text Plus Document | .txp | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/textPlus/)
+document | Timeworks Publisher/Publish It! | .dtp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/
+document | Twist Database file | .db | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/twistDB/)
+document | [Universal Hint System Document](http://fileformats.archiveteam.org/wiki/UHS) | .uhs | [uhs2html](http://www.emulinks.de/software.html) | [10 sample files](https://telparia.com/fileFormatSamples/document/uhs/)
+document | Wildcat! WCX | .wcx | [wccnosy](http://www.dreamlandbbs.com/filegate/wcf/4utl/index.html) | [12 sample files](https://telparia.com/fileFormatSamples/document/wildcatWCX/)
 document | [Windows Compiled HTML Help File](http://fileformats.archiveteam.org/wiki/CHM) | .chm | [archmage](https://github.com/dottedmag/archmage) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/document/chm/) - chmdeco and chmdump both failed to process IEXPLORE.CHM and I didn't try any others. FIND.CHM and ACCESSIB_18.CHM fail to extract with archmage.
-document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [hlp2pdf](https://github.com/Sembiance/dexvert/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
+document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [hlp2pdf](https://github.com/Sembiance/dexvert/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
+document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/wri/)
+document | WinWorks Document | .wpd | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/winWorks/)
+document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc | [fileMerlin](http://www.file-convert.com/flmn.htm) [antiword](http://www.winfield.demon.nl) [soffice](https://www.libreoffice.org) | [12 sample files](https://telparia.com/fileFormatSamples/document/wordDoc/)
+document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [12 sample files](https://telparia.com/fileFormatSamples/document/wp/)
+document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [wordStar](https://en.wikipedia.org/wiki/WordStar) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordStar/)
+document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
 
 
 
@@ -887,4 +927,23 @@ Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-example) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | 
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue |  | [6 sample files](https://telparia.com/fileFormatSamples/text/cue/)
+
+
+
+## Video (13)
+Family | Name | Extensions | Converters | Notes
+------ | ---- | ---------- | ---------- | -----
+video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/video/animaticFilm/)
+video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [10 sample files](https://telparia.com/fileFormatSamples/video/avi/)
+video | [Bink Video](http://fileformats.archiveteam.org/wiki/Bink_Video) | .bik .bik2 .bk2 | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://telparia.com/fileFormatSamples/video/bink/)
+video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
+video | [Cryo HNM/UBB Video](https://wiki.multimedia.cx/index.php?title=HNM) | .hnm .hns | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/cryoVideo/) - FFMPEG has support for HNM4 but not other versions. Don't currently have a sample of HNM4. So the current samples DO NOT convert, but in the future with HNM4, it should.
+video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Sequence) | .seq | [seq2mp4](https://github.com/Sembiance/seq2mp4) | [16 sample files](https://telparia.com/fileFormatSamples/video/cyberPaintSeq/)
+video | [DeluxePaint Animation](http://fileformats.archiveteam.org/wiki/DeluxePaint_Animation) | .anm | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/deluxePaintAnimation/) - Sample file HORSE.ANM doesn't convert for some reason
+video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft | [flick](http://cd.textfiles.com/silvercollection/disc2/GRAPHVEW/DASFLICK.ARJ) | [10 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - The format is documented, so someone could create a more modern converter
+video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [19 sample files](https://telparia.com/fileFormatSamples/video/dl/)
+video | Fantavision Movie | .mve | [fantavsn](https://winworldpc.com/product/fantavision/1x-dos) | [9 sample files](https://telparia.com/fileFormatSamples/video/fantavision/)
+video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
+video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
+video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v |  | [4 sample files](https://telparia.com/fileFormatSamples/video/mp4/)
 

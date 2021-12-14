@@ -1,25 +1,11 @@
-/*
 import {Program} from "../../Program.js";
 
 export class antixls extends Program
 {
-	website = "https://packages.gentoo.org/packages/app-text/antixls";
-	package = "app-text/antixls";
+	website    = "https://packages.gentoo.org/packages/app-text/antixls";
+	package    = "app-text/antixls";
+	bin        = "antixls";
+	args       = r => [r.inFile()];
+	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+	renameOut  = true;
 }
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "https://packages.gentoo.org/packages/app-text/antixls",
-	package : "app-text/antixls"
-};
-
-exports.bin = () => "antixls";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
-*/

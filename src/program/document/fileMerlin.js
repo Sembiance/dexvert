@@ -13,7 +13,17 @@ export class fileMerlin extends Program
 	loc       = "winxp";
 	bin       = "c:\\ACI Programs\\FMerlin\\fmn.exe";
 	args      = r => [`in(${r.inFile()})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
-	qemuData  = ({timeout : xu.MINUTE});
+	qemuData  = ({
+		timeout : xu.MINUTE,
+		script : `
+			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30});
+			$errorVisible = WinWaitActive("FileMerlin/Pdf (15-user) -- needs network setup", "", 7)
+			If $errorVisible Not = 0 Then
+				WinClose("FileMerlin/Pdf (15-user) -- needs network setup");
+			EndIf
+			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30});
+			ProcessClose("fmn.exe")
+			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*5});`});
 	verify    = (r, dexFile) => !dexFile.dir.endsWith("_g");
 	renameOut = true;
 }

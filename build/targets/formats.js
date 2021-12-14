@@ -25,7 +25,7 @@ export default async function buildFormats(xlog)
 		// TODO REMOVE ABOVE AFTER CONVERTING ALL FORMATS
 
 		const formatModule = await import(formatFilePath);
-		const formatid = Object.keys(formatModule)[0];
+		const formatid = Object.keys(formatModule).find(k => k.at(0)!=="_");
 		const familyid = path.basename(path.dirname(formatFilePath));
 		if(!families[familyid])
 			throw new Error(`format [${formatid}] at [${formatFilePath}] is in a directory [${familyid}] that does not have a family class`);

@@ -361,7 +361,7 @@ export class Program
 				{
 					const handleNewFiles = async (chainResult, inputFiles) =>
 					{
-						if(!chainResult.f.new)
+						if(!chainResult || !chainResult.f.new)
 						{
 							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
 							if(!xlog.atLeast("trace"))
@@ -441,9 +441,12 @@ export class Program
 	}
 
 	// runs the programid program
-	static async runProgram(progRaw, fRaw, progOptions={})
+	static async runProgram(progRaw, fRaw, _progOptions={})
 	{
-		const xlog = progOptions.xlog || xu.xLog();
+		const progOptions = xu.clone(_progOptions);
+		const xlog = progOptions.xlog;
+		if(!xlog)
+			throw new Error("Required xlog param for runProgram not found");
 		if(progRaw.includes("->"))
 		{
 			const chainParts = progRaw.split("->");
@@ -549,6 +552,9 @@ export class Program
 				await safeFile.rename(srcFile.base);
 			});
 		}
+
+		if(progOptions.autoUnlink)
+			await programResult.unlinkHomeOut();
 
 		return programResult;
 	}

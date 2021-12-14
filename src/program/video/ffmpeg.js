@@ -5,8 +5,8 @@ export class ffmpeg extends Program
 	website = "https://ffmpeg.org/";
 	package = "media-video/ffmpeg";
 	flags   = {
-		outType     : `Which format to output: png mp3 mp4 flac. WARNING! If input is a .wav, best to send through sox first, because ffmpeg can't handle anything except perfect WAV files. Default is mp4`,
 		format      : "Specify which format to treat the input file as. Run `ffmpeg -formats` for a list. Default: Let ffmpeg decide",
+		outType     : `Which format to output: png mp3 mp4 flac. WARNING! If input is a .wav, best to send through sox first, because ffmpeg can't handle anything except perfect WAV files. Default is mp4`,
 		codec       : "Specify which codec to treat the input file as. Run `ffmpeg -codecs` for a list. Default: Let ffmpeg decide",
 		fps         : "What frame rate to specify for conversion. Default: Let ffmpeg decide",
 		rate        : "What rate to set for the output. Default: Let ffmpeg decide",

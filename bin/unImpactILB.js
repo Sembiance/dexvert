@@ -44,7 +44,7 @@ while(pos<buf.length)
 	const filePath = path.join(argv.outputDirPath, filename.replaceAll("/", "-").replaceAll("..", "__"));
 	xlog.info`Extracting file ${filename} that is ${fileLen} bytes in size to ${filePath}`;
 	
-	await Deno.writeFile(filePath, buf.subarray(pos, pos+fileLen));
+	await Deno.writeFile(filePath, Uint8Array.from(buf.subarray(pos, pos+fileLen)));
 	pos+=fileLen;
 
 	// Always an extra byte at the end, seems to always be zero, maybe a padding byte

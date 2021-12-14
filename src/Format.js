@@ -29,14 +29,28 @@ export class Format
 		Object.assign(meta, this.family.meta ? (await this.family.meta(inputFile, this, xlog)) || {} : {});
 		
 		// next, if the format.metaProvider has a programid, call that
-		for(const progRaw of (this.metaProvider || []))
+		for(const metaProviderRaw of (this.metaProvider || []))
 		{
+			const metaProviderParts = metaProviderRaw.split("=>");
+			const progRaw = metaProviderParts[0].trim();
+			const metaProviderKey = metaProviderParts.length===2 ? metaProviderParts[1].trim() : null;
+			
 			if(!(await Program.hasProgram(progRaw)))
 				continue;
 
 			const r = await Program.runProgram(progRaw, inputFile, {xlog});
-			if(r.meta)
-				Object.assign(meta, r.meta);
+			if(r.meta && Object.keys(r.meta).length>0)
+			{
+				if(metaProviderKey)
+				{
+					meta[metaProviderKey] = {};
+					Object.assign(meta[metaProviderKey], r.meta);
+				}
+				else
+				{
+					Object.assign(meta, r.meta);
+				}
+			}
 			await r.unlinkHomeOut();
 		}
 

@@ -31,7 +31,7 @@ export class sevenZip extends Program
 			return;
 
 		// the .rsrc directory is kinda useless, so we move anything in it up one dir
-		await fileUtil.moveAll(path.join(r.outDir({absolute : true}), ".rsrc"), r.outDir({absolute : true}));
+		await fileUtil.moveAll(path.join(r.outDir({absolute : true}), ".rsrc"), r.outDir({absolute : true}), {unlinkSrc : true});
 	};
 
 

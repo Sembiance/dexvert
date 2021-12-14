@@ -1,0 +1,90 @@
+/-------------------------\
+| Required Kernel Configs |
+\-------------------------/
+>>> These are all required to be set in the kernel for dexvert to function properly. There may be more that I forgot to add here.
+
+    General setup  --->
+      <*> Control Group support  --->
+            [*] Memory controller
+            [*] Freezer controller
+            [*] Cpuset Controller
+            [*]   Include legacy /proc/<pid>/cpuset file
+            [*] Simple CPU accounting controller
+
+    Processor type and features --->
+      [*] NUMA Memory Allocation and Scheduler Support
+
+[*] Virtualization  --->
+      <*> Kernel-based Virtual Machine (KVM) support
+	  # Choose either Intel or AMD
+      <*>   KVM for Intel (and compatible) processors support
+	  <*>   KVM for AMD processors support
+
+[*] Networking support  --->
+    Networking options  --->
+	  <*> 802.1d Ethernet bridging
+	  [*]   IGMP/MLD snooping
+
+    Device Drivers  --->
+      [*] PCI support  --->
+	        [*] Message Signaled Interrupts (MSI and MSI-X)
+      [*] Network device support  --->
+            [*]   Network core driver support
+            <*>     MAC-VLAN support
+            <*>       MAC-VLAN based tap driver
+            <*>   Universal TUN/TAP device driver support
+      [*] VHOST drivers  --->
+            [*] Host kernel accelerator for virtio net
+            [*] Cross-endian support for vhost
+      [*] IOMMU Hardware Support  --->
+	        # Choose either Intel or AMD
+			[*] AMD IOMMU support
+			<*>   AMD IOMMU Version 2 driver
+            [*] Support for Intel IOMMU using DMA Remapping Devices
+            [*]   Support for Shared Virtual Memory with Intel IOMMU
+            [*]   Enable Intel DMA Remapping Devices by default
+
+    File systems  --->
+      <*> The Extended 4 (ext4) filesystem
+	  [*]   Ext4 Security Labels
+          CD-ROM/DVD Filesystems  --->
+    	    <*> ISO 9660 CDROM file system support
+    	    [*]   Microsoft Joliet CDROM extensions
+    	    [*]   Transparent decompression extension
+    	    <*>   UDF file system support
+    	  DOS/FAT/EXFAT/NT Filesystems  --->
+    	    <*> MSDOS fs support
+    	    <*> VFAT (Windows-95) fs support
+    	    (iso8859-1) Default iocharset for FAT
+    	    <*> exFAT filesystem support
+    		<*> NTFS file system support
+	      Pseudo filesystems  --->
+			[*] Include /proc/<pid>/task/<tid>/children file
+			-*- Tmpfs virtual memory file system support (former shm fs)
+      [*] Miscellaneous filesystems  --->
+            <*> ADFS file system support
+            <*> Amiga FFS file system support
+    		<*> Apple Macintosh file system support
+    		<*> Apple Extended HFS file system support
+    		<*> BeOS file system (BeFS) support (read only)
+    		<*> EFS file system support (read only)
+    		<*> Minix file system support
+    		<*> OS/2 HPFS file system support
+    		<*> ROM file system support
+    		<*> System V/Xenix/V7/Coherent file system support
+    		<*> UFS file system support
+    		<*> EROFS file system support
+      [*] Network File Systems  --->
+    	    <*> SMB3 and CIFS support (advanced network filesystem)
+    		[*]   Support legacy servers which use less secure dialects
+    		[*]     Support legacy servers which use weaker LANMAN security
+    		[*]   CIFS extended attributes
+      -*- Native language support  --->
+            <*> Codepage 437 (United States, Canada)
+    		<*> ASCII (United States)
+    		<*> NLS ISO 8859-1  (Latin 1; Western European Languages)
+    		-*- NLS UTF-8
+
+    Kernel hacking  --->
+          Generic Kernel Debugging Instruments  --->
+            [*] Debug Filesystem

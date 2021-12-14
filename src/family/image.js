@@ -49,15 +49,9 @@ export class image extends Family
 		// So we don't even bother doing getImageInfo/identify and we just load up the file, parse as XML and deduce width/height from that
 		// We can also check to make sure it actually has sub-elements, sometimes totalCADConverterX for example will produce an empty <svg></svg> file (NUTBOLT.DWG)
 		if(dexid.formatid==="svg")
-		{
-			const r = await Program.runProgram("svgInfo", dexFile, {xlog});
-			Object.assign(meta, r.meta);
-			await r.unlinkHomeOut();
-		}
+			Object.assign(meta, (await Program.runProgram("svgInfo", dexFile, {xlog, autoUnlink : true})).meta);
 		else
-		{
 			Object.assign(meta, await imageUtil.getInfo(dexFile.absolute));
-		}
 
 		if(!meta.width || !meta.height)
 		{
@@ -133,8 +127,6 @@ export class image extends Family
 		const meta = {};
 		for(const metaProvider of format.metaProvider)
 		{
-			xlog.info`Getting meta from provider ${metaProvider}`;
-
 			// imageMagick meta provider
 			if(metaProvider==="image")
 			{

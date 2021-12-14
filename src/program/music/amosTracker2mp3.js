@@ -20,9 +20,8 @@ export class amosTracker2mp3 extends Program
 		await Deno.writeFile(outFilePath, fileData.slice(20));
 
 		// Now that we have an intermediate mod file, get our meta info from that
-		const musicInfoR = await Program.runProgram("musicInfo", await DexFile.create({root : r.f.root, absolute : outFilePath}), {xlog : r.xlog});
+		const musicInfoR = await Program.runProgram("musicInfo", await DexFile.create({root : r.f.root, absolute : outFilePath}), {xlog : r.xlog, autoUnlink : true});
 		Object.assign(r.meta, musicInfoR.meta);
-		await musicInfoR.unlinkHomeOut();
 	};
 	renameOut = false;
 	chain     = "dexvert";

@@ -2,20 +2,19 @@ import {xu} from "xu";
 import {Format} from "../../Format.js";
 import {Program} from "../../Program.js";
 import {path} from "std";
-import {runUtil} from "xutil";
 
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem"];
 
-async function validCUEFile(dexState, cueFilePath)
+async function validCUEFile(dexState, cueFile)
 {
-	const {stdout : cueDataRaw} = await runUtil.run(Program.binPath("parseCUE/parseCUE.js"), [cueFilePath]);
-	return (xu.parseJSON(cueDataRaw, {}).files || []).filter(file => file.name).some(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()));
+	const cueInfoR = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog, autoUnlink : true});
+	return (cueInfoR.meta?.files || []).filter(file => file.name).some(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()));
 }
 
 async function findCUEFile(dexState)
 {
 	const auxFiles = (dexState.f.files.aux || []).filter(auxFile => auxFile.ext.toLowerCase()===".cue");
-	const validCUEFiles = await auxFiles.filterAsync(async auxFile => await validCUEFile(dexState, auxFile.absolute));
+	const validCUEFiles = await auxFiles.filterAsync(async auxFile => await validCUEFile(dexState, auxFile));
 	return validCUEFiles[0];
 }
 
@@ -111,9 +110,8 @@ export class iso extends Format
 
 		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info"].parallelMap(async programid =>
 		{
-			const r = await Program.runProgram(programid, inputFile, {xlog});
-			await r.unlinkHomeOut();
-			return [programid.split("_")[0], r.meta];
+			const infoR = await Program.runProgram(programid, inputFile, {xlog, autoUnlink : true});
+			return [programid.split("_")[0], infoR.meta];
 		})).filter(([, o]) => Object.keys(o).length>0));
 
 		Object.assign(dexState.meta, meta);

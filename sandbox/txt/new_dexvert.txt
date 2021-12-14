@@ -1,21 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Find uses of runUtil.run() and strongly consider replacing any in formats/families with Program versions,
-  for filename safety reasons. For sure:
-  doomMUS2mp3.js	"zip"
-  svgInfo			"resvg"
-  ffdec				"swfdump"
-  cue/iso			"parseCUE" (change to meta/cueInfo program)
-  text.js			"wc"
-  document.js		"gs"
-  audio				"sox" (make a soxStat program)
-
-* Add document
-  Start with 'pdf'
-  the document.verify() function shouldn't REQUIRE it be document/pdf
-  but if it detects document pdf then it should ensure it is valid like I do in document.js from node version
-
 * Add video
   ALL outputs from this family must be valid MP4 files (just like I ensure audio are MP3)
   Start with something that uses dosBox and records a video

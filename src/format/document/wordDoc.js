@@ -1,43 +1,24 @@
-/*
 import {Format} from "../../Format.js";
 
 export class wordDoc extends Format
 {
-	name = "Word Document";
-	website = "http://fileformats.archiveteam.org/wiki/DOC";
-	ext = [".doc"];
+	name           = "Word Document";
+	website        = "http://fileformats.archiveteam.org/wiki/DOC";
+	ext            = [".doc"];
 	forbidExtMatch = true;
-	magic = ["Microsoft Word document","Microsoft Word for Windows"];
-	converters = ["fileMerlin","antiword","soffice"]
-
-post = undefined;
-}
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "Word Document",
-	website        : "http://fileformats.archiveteam.org/wiki/DOC",
-	ext            : [".doc"],
-	forbidExtMatch : true,
-	magic          : ["Microsoft Word document", "Microsoft Word for Windows"],
-};
-
-exports.converterPriority = ["fileMerlin", "antiword", "soffice"];
-
-exports.post = (state, p, cb) =>
-{
-	if((p.util.program.getMeta(state, "antiword") || {}).passwordProtected)
+	magic          = ["Microsoft Word document", "Microsoft Word for Windows"];
+	converters     = ["fileMerlin", "antiword", "soffice"];
+	post = dexState =>
 	{
-		state.input.meta.wordDoc = {passwordProtected : true};
-		state.processed = true;
-	}
-		
-	setImmediate(cb);
-};
+		Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="antiword")?.meta || {});
+		if(dexState.meta.passwordProtected)
+		{
+			// can't do this in a 'untouched' callback because this meta data isn't available until after antiword converter has ran and the untouched method is called before converters
+			dexState.untouched = true;
+			dexState.processed = true;
+			return true;
+		}
 
-
-*/
+		return false;
+	};
+}

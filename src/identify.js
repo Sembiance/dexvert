@@ -76,7 +76,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 						
 					for(let loc=byteCheck.offset, i=0;i<byteCheck.match.length;loc++, i++)
 					{
-						if(byteCheckBuf[loc]!==byteCheck.match[i])
+						if(!Array.force(byteCheck.match[i]).includes(byteCheckBuf[loc]))
 						{
 							match = false;
 							break;

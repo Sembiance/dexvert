@@ -11,9 +11,8 @@ export class swagReader extends Program
 	args    = r => [`..\\..\\${r.inFile({backslash : true})}`];
 	dosData = async r =>
 	{
-		const swagvR = await Program.runProgram("swagv", r.f.input, {xlog : r.xlog});
+		const swagvR = await Program.runProgram("swagv", r.f.input, {xlog : r.xlog, autoUnlink : true});
 		const dosKeys = [["Enter"]];
-		await swagvR.unlinkHomeOut();
 	
 		r.pasFiles = swagvR.meta?.pasFiles;
 		if(!r.pasFiles || r.pasFiles.length===0)

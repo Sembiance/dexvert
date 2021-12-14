@@ -1,0 +1,442 @@
+% ISO DOCUMENT STYLE <91/05/02>
+%    for LaTeX version 2.09
+
+% @(#)iso9.sty	2.6 dated 91/05/02 at 09:57:07
+
+% File:       iso9.sty
+% Author:     Nicolas North
+% Email:      ndn@seg.npl.co.uk
+% Date:       91/05/02
+%
+% A rewrite of art10.doc to typeset in ISO central secretariat-approved
+% style.
+
+% This file is based on Leslie Lamport's art10.doc.
+
+%  ****************************************
+%  *               FONTS                  *
+%  ****************************************
+%
+
+\lineskip 1pt            % \lineskip is 1pt for all font sizes.
+\normallineskip 1pt
+\def\baselinestretch{1}
+
+% Each size-changing command \SIZE executes the command
+%        \@setsize\SIZE{BASELINESKIP}\FONTSIZE\@FONTSIZE
+% where:
+%   BASELINESKIP = Normal value of \baselineskip for that size.  (Actual 
+%                  value will be \baselinestretch * BASELINESKIP.)
+%
+%  \FONTSIZE     = Name of font-size command.  The currently available
+%                  (preloaded) font sizes are: \vpt (5pt), \vipt (6pt),
+%                  \viipt (etc.), \viiipt, \ixpt, \xpt, \xipt, \xiipt,
+%                  \xivpt, \xviipt, \xxpt, \xxvpt.
+%  \@FONTSIZE    = The same as the font-size command except with an
+%                  '@' in front---e.g., if \FONTSIZE = \xivpt then
+%                  \@FONTSIZE = \@xivpt.
+%
+% For reasons of efficiency that needn't concern the designer,
+% the document style defines \@normalsize instead of \normalsize .  This is
+% done only for \normalsize, not for any other size-changing commands.
+
+\def\@normalsize{\@setsize\normalsize{10pt}\ixpt\@ixpt
+\abovedisplayskip 10pt plus2pt minus5pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3pt%   
+\belowdisplayshortskip  6pt plus3pt minus3pt%
+\let\@listi\@listI}
+
+\def\small{\@setsize\small{9pt}\viiipt\@viiipt
+\abovedisplayskip 8.5pt plus 3pt minus 4pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus2pt%
+\belowdisplayshortskip 4pt plus2pt minus 2pt
+\def\@listi{\leftmargin\leftmargini%
+\let\isoclauseref\@currentlabel
+\itemindent\leftmargini}}
+
+\def\footnotesize{\@setsize\footnotesize{9pt}\viiipt\@viiipt
+\abovedisplayskip 6pt plus 2pt minus 4pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus 1pt%
+\belowdisplayshortskip 3pt plus 1pt minus 2pt
+\def\@listi{\leftmargin\leftmargini%
+\let\isoclauseref\@currentlabel
+\itemindent\leftmargini}}
+
+\def\scriptsize{\@setsize\scriptsize{8pt}\viipt\@viipt}
+\def\tiny{\@setsize\tiny{6pt}\vpt\@vpt}
+\def\large{\@setsize\large{11pt}\xpt\@xpt}
+\def\Large{\@setsize\Large{12pt}\xipt\@xipt}
+\def\LArge{\@setsize\LArge{18pt}\xivpt\@xivpt}  % used for annex headings
+\def\LARGE{\@setsize\LARGE{20pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+
+% The size font in which the copyright notice is set.
+% This should be 9pt.
+\def\@copyrightsize{\normalsize}
+
+\normalsize  % Choose the normalsize font.
+
+
+%  ****************************************
+%  *            PAGE LAYOUT               *
+%  ****************************************
+%
+% All margin dimensions measured from a point one inch from top and side
+% of page.  
+
+% SIDE MARGINS:
+% These are the margins used for setting stuff before the title.
+% \maketitle calls \iso@setmargins to set margins for the body of the
+%   standard.
+\if@twoside                 % Values for two-sided printing (the default):
+   \oddsidemargin  59mm     %   Left margin on odd-numbered pages.
+   \evensidemargin -14mm    %   Left margin on even-numbered pages.
+   \marginparwidth 8mm      %   Width of marginal notes (none in ISO standards).
+\else                       % Values for one-sided printing:
+			    %   (can't happen in ISO style)
+   \oddsidemargin  -23pt    %   Note that \oddsidemargin = \evensidemargin
+   \evensidemargin -23pt
+   \marginparwidth 90pt 
+\fi
+\marginparsep 1mm          % Horizontal space between outer margin and 
+                            % marginal note
+
+% Allow the user to shift the page across if their laser printer is
+% mis-aligned. There should really be a vertical version of this as well.
+\newdimen\@leftoffset \@leftoffset=\z@
+\def\leftoffset#1{
+    \setlength{\@leftoffset}{#1}
+    \advance\oddsidemargin by\@leftoffset
+    \advance\evensidemargin by \@leftoffset}
+
+% VERTICAL SPACING:        
+                         % Top of page:
+\topmargin -54pt         %    Nominal distance from top of page to top of
+                         %    box containing running head.
+\headheight 25pt         %    Height of box containing running head.
+\headsep 39pt            %    Space between running head and text.
+% \topskip = 10pt        %    '\baselineskip' for first line of page.
+                         % Bottom of page:
+\footskip 27pt           %    Distance from baseline of box containing foot 
+                         %    to baseline of last line of text.
+
+
+% DIMENSION OF TEXT:
+
+\textheight 240mm
+\textwidth 117mm         % Width of text line.
+                         % For two-column mode: 
+\columnsep 10mm          %    Space between columns 
+\columnseprule 0pt       %    Width of rule between columns.
+
+% A \raggedbottom command causes 'ragged bottom' pages: pages set to
+% natural height instead of being stretched to exactly \textheight.
+
+% Page layout for the body of the standard
+\def\iso@setmargins{
+    \global\oddsidemargin -4mm
+    \global\advance\oddsidemargin by\@leftoffset
+    \global\evensidemargin -14mm
+    \global\advance\evensidemargin by\@leftoffset
+    \global\textwidth 180mm}
+
+% FOOTNOTES:
+
+\footnotesep 6.65pt   % Height of strut placed at the beginning of every
+                      % footnote = height of normal \footnotesize strut,
+                      % so no extra space between footnotes.
+
+\skip\footins 9pt plus 4pt minus 2pt  % Space between last line of text and 
+                                      % top of first footnote.
+
+% FLOATS: (a float is something like a figure or table)
+%
+% NDN: I haven't changed the float parameters for the iso style
+%
+%  FOR FLOATS ON A TEXT PAGE:
+%
+%    ONE-COLUMN MODE OR SINGLE-COLUMN FLOATS IN TWO-COLUMN MODE:
+\floatsep 12pt plus 2pt minus 2pt        % Space between adjacent floats moved
+                                         % to top or bottom of text page.
+\textfloatsep 20pt plus 2pt minus 4pt    % Space between main text and floats
+                                         % at top or bottom of page.
+\intextsep 12pt plus 2pt minus 2pt       % Space between in-text figures and 
+                                         % text.
+\@maxsep 20pt                            % The maximum of \floatsep, 
+                                         % \textfloatsep and \intextsep (minus
+                                         % the stretch and shrink).
+%    TWO-COLUMN FLOATS IN TWO-COLUMN MODE:
+\dblfloatsep 12pt plus 2pt minus 2pt     % Same as \floatsep for double-column
+                                         % figures in two-column mode.
+\dbltextfloatsep 20pt plus 2pt minus 4pt % \textfloatsep for double-column 
+                                         % floats.
+\@dblmaxsep 20pt                         % The maximum of \dblfloatsep and 
+                                         % \dbltexfloatsep.
+
+%  FOR FLOATS ON A SEPARATE FLOAT PAGE OR COLUMN:
+%    ONE-COLUMN MODE OR SINGLE-COLUMN FLOATS IN TWO-COLUMN MODE:
+\@fptop 0pt plus 1fil    % Stretch at top of float page/column. (Must be    
+                         % 0pt plus ...)                                    
+\@fpsep 8pt plus 2fil    % Space between floats on float page/column.       
+\@fpbot 0pt plus 1fil    % Stretch at bottom of float page/column. (Must be 
+                         % 0pt plus ... )                                   
+
+%   DOUBLE-COLUMN FLOATS IN TWO-COLUMN MODE.
+\@dblfptop 0pt plus 1fil % Stretch at top of float page. (Must be 0pt plus ...)
+\@dblfpsep 8pt plus 2fil % Space between floats on float page.
+\@dblfpbot 0pt plus 1fil % Stretch at bottom of float page. (Must be 
+                         % 0pt plus ... )                                   
+% MARGINAL NOTES:
+%
+\marginparpush 5pt       % Minimum vertical separation between two marginal 
+                         % notes.
+
+
+%  ****************************************
+%  *           PARAGRAPHING               *
+%  ****************************************
+%
+\parskip \baselineskip             % Extra vertical space between paragraphs.
+\parindent 0pt                     % Width of paragraph indentation.
+%\topsep 0pt plus 1pt minus 1pt     % Extra vertical space, in addition to 
+                                   % \parskip, added above and below list and
+                                   % paragraphing environments.
+\partopsep 0pt plus 1pt minus 1pt  % Extra vertical space, in addition to 
+                                   % \parskip and \topsep, added when user
+                                   % leaves blank line before environment.
+%\itemsep 2pt plus 1pt minus 1pt    % Extra vertical space, in addition to
+                                   % \parskip, added between list items.
+
+% The following page-breaking penalties are defined
+% NDN: unchanged from art10.doc
+
+\@lowpenalty   51      % Produced by \nopagebreak[1] or \nolinebreak[1]
+\@medpenalty  151      % Produced by \nopagebreak[2] or \nolinebreak[2]
+\@highpenalty 301      % Produced by \nopagebreak[3] or \nolinebreak[3]
+
+\@beginparpenalty -\@lowpenalty    % Before a list or paragraph environment.
+\@endparpenalty   -\@lowpenalty    % After a list or paragraph environment.
+\@itempenalty     -\@lowpenalty    % Between list items.
+
+% \clubpenalty         % 'Club line'  at bottom of page.
+% \widowpenalty        % 'Widow line' at top of page.
+% \displaywidowpenalty % Math display widow line.
+% \predisplaypenalty   % Breaking before a math display.
+% \postdisplaypenalty  % Breaking after a math display.
+% \interlinepenalty    % Breaking at a line within a paragraph.
+% \brokenpenalty       % Breaking after a hyphenated line.
+
+
+%    ****************************************
+%    *             SECTIONS                 *
+%    ****************************************
+%
+
+% NDN: note that section names have changed from the usual LaTeX ones.
+
+% \secdef{UNSTARCMDS}{STARCMDS} :
+%    When defining a sectionioning command without using
+%    \@startsection, you can use \secdef as follows:
+%       \def\part { ... \secdef \CMDA \CMDB }
+%       \def\CMDA  [#1]#2{ ... }     % Command to define \part[...]{...}
+%       \def\CMDB  #1{ ... }         % Command to define \part*{...}
+
+% NDN: I haven't considered parts for the iso style yet, so this is just
+% as in art10.doc.
+\def\part{\par               % New paragraph
+   \addvspace{4ex}           % Adds vertical space above title.
+   \@afterindentfalse        % Suppresses indent in first paragraph.  Change
+   \secdef\@part\@spart}     % to \@afterindenttrue to have indent.
+
+\def\@part[#1]#2{\ifnum \c@secnumdepth >\m@ne    % IF secnumdepth > -1
+        \refstepcounter{part}                    %  THEN step part counter
+        \addcontentsline{toc}{part}{\thepart     %       add toc line
+        \hspace{1em}#1}\else                     %  ELSE add unnumbered line
+      \addcontentsline{toc}{part}{#1}\fi         % FI
+   { \parindent 0pt \raggedright 
+    \ifnum \c@secnumdepth >\m@ne   % IF secnumdepth > -1 
+      \Large \bf Part \thepart     %   THEN Print 'Part' and 
+      \par \nobreak                %          number in \Large boldface.
+    \fi                            % FI
+    \huge \bf                      % Select \huge boldface.
+    #2\markboth{}{}\par }          % Print title and set heading marks null.
+    \nobreak                       % TeX penalty to prevent page break.
+    \vskip 3ex                     % Space between title and text.
+   \@afterheading                  % Routine called after part and
+    }                              %     section heading.
+
+% Heading for \part* command
+\def\@spart#1{{\parindent 0pt \raggedright 
+    \huge \bf                       
+    #1\par}                         % Title.
+    \nobreak                        % TeX penalty to prevent page break.
+    \vskip 3ex                      % Space between title and text.
+    \@afterheading                  % Routine called after part and
+  }                                 %     section heading.
+
+% \@startsection {NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE} 
+%            optional * [ALTHEADING]{HEADING}
+%    Generic command to start a section.  
+%    NAME       : e.g., 'clause'
+%    LEVEL      : a number, denoting depth of section -- i.e., section=1,
+%                 clause = 2, etc.  A section number will be printed if
+%                 and only if LEVEL < or = the value of the secnumdepth
+%                 counter.
+%    INDENT     : Indentation of heading from left margin
+%    BEFORESKIP : Absolute value = skip to leave above the heading.  
+%                 If negative, then paragraph indent of text following 
+%                 heading is suppressed.
+%    AFTERSKIP  : if positive, then skip to leave below heading,
+%                       else - skip to leave to right of run-in heading.
+%    STYLE      : commands to set style
+%  If '*' missing, then increments the counter.  If it is present, then
+%  there should be no [ALTHEADING] argument.  A sectioning command
+%  is normally defined to \@startsection + its first six arguments.
+
+% A definition needs to set its number and title in
+%  different sizes so it manipulates its argument before passing it on
+%  to \@startsection.
+
+% These spacings are provisional only.
+
+\def\section{\@startsection {section}{1}{\z@}{3ex plus 1ex minus 
+    .2ex}{.1ex plus .1ex}{\Large\bf}}
+\def\clause{\@startsection{clause}{2}{\z@}{2ex plus .5ex minus
+   .2ex}{.1ex plus .1ex}{\large\bf}}
+\def\definition#1{\@startsection{definition}{2}{\z@}{2ex plus .5ex minus
+   .2ex}{-.5em plus -.1em minus -.1em}{\large\bf}%
+   {\protect{\normalsize\bf#1:\thinspace}}}
+\def\subclause{\@startsection{subclause}{3}{\z@}{2ex plus 1ex minus
+   .2ex}{.1ex plus .1ex}{\normalsize\bf}}
+\def\subsubclause{\@startsection
+     {subsubclause}{4}{\z@}{2ex plus 1ex minus .2ex}{.1ex plus .1ex}
+     {\normalsize\bf}}
+\def\namelesssubsubclause{\@startsection{namelesssubsubclause}{4}{\z@}{
+     2ex plus 1ex minus .2ex}{-.5em plus -.1em minus -.1em}{\normalsize\bf}{}}
+\def\subsubsubclause{\@startsection
+     {subsubsubclause}{5}{\parindent}{2ex plus 1ex minus 
+     .2ex}{.1ex plus .1ex}{\normalsize\bf}}
+\def\namelesssubsubsubclause{\@startsection{namelesssubsubsubclause}{5}{\z@}{
+     2ex plus 1ex minus .2ex}{-.5em plus -.1em minus -.1em}{\normalsize\bf}{}}
+
+% Header for introductory sections which are set in \LArge.
+% The spacing is provisional.
+\def\@introsection{\@startsection{section}{1}{\z@}{3ex plus 1ex minus 
+    .2ex}{.1ex plus .1ex}{\LArge\bf}*}
+
+
+% A special command for the foreword. This ensures that
+%  a new page is started and the title is in \LArge,
+%  starting 84mm from the top of the page.
+% If there is no foreword, we should skip a page number before the
+%  introduction (if there is one). \if@foreword allows us to test whether
+%  a foreword has appeared.
+\newif\if@foreword \@forewordfalse
+\def\foreword{
+\@forewordtrue\newpage\vspace*{39mm}\@introsection{Foreword}
+\addcontentsline{toc}{iso@intro}{\bf Foreword}}
+
+
+% A special command for introductory sections. Ensures that
+%  a new page is started, skipping a page number
+%  if there was no foreword and camera-ready copy is being produced and the
+%  title is in \LArge, starting 84mm from the top of the page.
+% The spacing around the header is currently that for sections.
+\def\introduction{
+\newpage\vspace*{39mm}\@introsection{Introduction}
+\addcontentsline{toc}{iso@intro}{\bf Introduction}
+\if@cameraready\if@foreword\else\stepcounter{page}\fi\fi}
+ 
+
+% Default initializations of \...mark commands.  (See below for their
+% use in defining page styles.
+%
+
+\def\sectionmark#1{}           % Preloaded definitions
+\def\clausemark#1{}
+\def\definitionmark#1{}
+\def\subclausemark#1{}
+\def\subsubclausemark#1{}
+\def\namelesssubsubclausemark#1{}
+\def\subsubsubclausemark#1{}
+\def\namelesssubsubsubclausemark#1{}
+
+% The value of the counter secnumdepth gives the depth of the
+% highest-level sectioning command that is to produce section numbers.
+%
+
+\setcounter{secnumdepth}{5}
+
+
+%    ****************************************
+%    *                LISTS                 *
+%    ****************************************
+%
+
+% The following commands are used to set the default values for the list
+% environment's parameters. See the LaTeX manual for an explanation of
+% the meanings of the parameters.  Defaults for the list environment are
+% set as follows.  First, \rightmargin, \listparindent and \itemindent
+% are set to 0pt.  Then, for a Kth level list, the command \@listK is
+% called, where 'K' denotes 'i', 'ii', ... , 'vi'.  (I.e., \@listiii is
+% called for a third-level list.)  By convention, \@listK should set
+% \leftmargin to \leftmarginK.
+%
+% For efficiency, level-one list's values are defined at top level, and
+% \@listi is defined to set only \leftmargin
+% NDN: list spacing is simple for ISO standards: everything is one line
+% apart, so listii, listiii etc are very simple.
+% ISO set all lists with a separation of 1em between label and text,
+% regardless of the label width - looks awful but there you are.
+
+\leftmargini 1em
+\leftmarginii 1em
+\leftmarginiii 1em
+\leftmarginiv 1em
+\leftmarginv 1em
+\leftmarginvi 1em
+
+\leftmargin\leftmargini
+\labelsep 1em
+\labelwidth 0pt
+% \parsep 4pt plus 2pt minus 1pt (Removed 9 Jun 87)
+
+% \@listI defines top level and \@listi values of
+% \leftmargin, \itemindent, \topsep, \parsep, and \itemsep
+% Sets up \isoclauseref so that enumerated lists can refer to it for labeling
+\def\@listI{\leftmargin\leftmargini \parsep\baselineskip%
+\itemindent\leftmargini
+\let\isoclauseref\@currentlabel
+\topsep 0pt plus 1pt minus 1pt%
+\itemsep 0pt plus 1pt minus 1pt}
+
+\let\@listi\@listI
+\@listi 
+
+
+\def\@listii{\leftmargin\leftmarginii
+   \let\isoclauseref\@currentlabel
+   \itemindent\leftmarginii}
+
+\def\@listiii{\leftmargin\leftmarginiii
+    \let\isoclauseref\@currentlabel
+    \itemindent\leftmarginiii}
+
+\def\@listiv{\leftmargin\leftmarginiv
+     \let\isoclauseref\@currentlabel
+     \itemindent\leftmarginiv}
+
+\def\@listv{\leftmargin\leftmarginv
+     \let\isoclauseref\@currentlabel
+     \itemindent\leftmarginv}
+
+\def\@listvi{\leftmargin\leftmarginvi
+     \let\isoclauseref\@currentlabel
+     \itemindent\leftmarginvi}
+
+
+

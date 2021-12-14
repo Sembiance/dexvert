@@ -1,7 +1,6 @@
 import {xu} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
-import {runUtil} from "xutil";
 
 export async function verifyAudio(dexState, dexFile)
 {
@@ -15,30 +14,19 @@ export async function verifyAudio(dexState, dexFile)
 		return false;
 	}
 
-	const r = await Program.runProgram("soxi", dexFile, {xlog});
-	await r.unlinkHomeOut();
-	if(!r.meta.sampleEncoding)
+	const soxiR = await Program.runProgram("soxi", dexFile, {xlog, autoUnlink : true});
+	if(!soxiR.meta.sampleEncoding)
 	{
-		xlog.warn`Audio failed verification due to not detecting a sample encoding: ${r.meta}`;
+		xlog.warn`Audio failed verification due to not detecting a sample encoding: ${soxiR.meta}`;
 		return false;
 	}
 
 	// So sox isn't reliable at providing a stat for very short clips, so we use ffprobe to get duration of the MP3 and only get sox stat if duration>=2 seconds
 	// Alternative duration getters: `mplayer -identify -nocache -vo null -ao null <file>` or `ffmpeg -i <file>`
-	const ffprobeR = await Program.runProgram("ffprobe", dexFile, {xlog});
-	await ffprobeR.unlinkHomeOut();
+	const ffprobeR = await Program.runProgram("ffprobe", dexFile, {xlog, autoUnlink : true});
 	if((ffprobeR.meta?.duration || 0)>=2)
 	{
-		const {stderr} = await runUtil.run("sox", [dexFile.rel, "-n", "stat"], {cwd : dexFile.root});
-		const soxStat = stderr.trim().split("\n").reduce((result, line="") =>	// eslint-disable-line unicorn/prefer-object-from-entries
-		{
-			const parts = line.split(":");
-			if(!parts || parts.length!==2)
-				return result;
-			result[parts[0].split(" ").filter(v => !!v).map(v => v.trim()).join(" ")] = parts[1].trim();
-			return result;
-		}, {});
-		
+		const {meta : soxStat} = await Program.runProgram("soxStat", dexFile, {xlog, autoUnlink : true});
 		if(soxStat["sox FAIL formats"] || (soxStat["Maximum amplitude"]==="0.000000" && soxStat["Minimum amplitude"]==="0.000000" && soxStat["Midline amplitude"]==="0.000000"))
 		{
 			xlog.warn`Audio verification failed due to invalid sox stat ${soxStat}`;

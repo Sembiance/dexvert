@@ -9,11 +9,5 @@ export class svg extends Format
 	mimeType  = "image/svg+xml";
 	magic     = ["SVG Scalable Vector Graphics image"];
 	untouched = dexState => dexState.meta.width && dexState.meta.height;
-
-	meta = async (inputFile, dexState) =>
-	{
-		const svgInfoR = await Program.runProgram("svgInfo", inputFile, {xlog : dexState.xlog});
-		await svgInfoR.unlinkHomeOut();
-		return svgInfoR.meta;
-	};
+	meta      = async (inputFile, dexState) => (await Program.runProgram("svgInfo", inputFile, {xlog : dexState.xlog, autoUnlink : true})).meta;
 }

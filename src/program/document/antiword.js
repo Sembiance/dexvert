@@ -1,44 +1,29 @@
-/*
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class antiword extends Program
 {
-	website = "http://www.winfield.demon.nl";
-	package = "app-text/antiword";
-	unsafe = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu"),
-	fileUtil = require("@sembiance/xutil").file,
-	fs = require("fs"),
-	path = require("path");
-
-exports.meta =
-{
-	website       : "http://www.winfield.demon.nl",
-	package : "app-text/antiword"
-	unsafe : true;
-};
-
-exports.bin = () => "antiword";
-exports.args = (state, p, r, inPath=state.input.filePath) => ([inPath]);
-exports.redirectOutput = state => path.join(state.output.absolute, `${state.input.name}.txt`);
-exports.post = (state, p, r, cb) =>
-{
-	const outFilePath = path.join(state.output.absolute, `${state.input.name}.txt`);
-
-	if(((r || {}).results || "").toLowerCase().includes("encrypted documents are not supported"))
+	website    = "http://www.winfield.demon.nl";
+	package    = "app-text/antiword";
+	unsafe     = true;
+	bin        = "antiword";
+	args       = r => [r.inFile()];
+	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
+	renameOut  = true;
+	verify       = (r, dexFile) =>
 	{
-		Object.assign(r.meta, {passwordProtected : true});
-		return fileUtil.unlink(outFilePath, cb);
-	}
+		if(dexFile.size>xu.MB*20)
+			return true;
 
-	if(fs.statSync(outFilePath).size<=2)
-		return fileUtil.unlink(outFilePath, cb);
+		if(r.stderr.toLowerCase().includes("encrypted documents are not supported"))
+		{
+			r.meta.passwordProtected = true;
+			return false;
+		}
 
-	setImmediate(cb);
-};
-*/
+		if(dexFile.size<=2)
+			return false;
+
+		return true;
+	};
+}

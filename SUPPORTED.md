@@ -1,4 +1,4 @@
-# Supported File Formats (890)
+# Supported File Formats (960)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -141,13 +141,13 @@ audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwoo
 
 
 
-## Document (72)
+## Document (73)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [9 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
 document | Amiga Catalog Translation file | .ct | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/catalogTranslation/)
 document | AmigaBASIC Source Code | .bas | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) | [10 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
-document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [guideml](http://aminet.net/package/text/hyper/guideml) [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
+document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
 document | [Atari STOS Basic](https://temlib.org/AtariForumWiki/index.php/STOS.BAS) | .bas | [stosBAS2txt](https://github.com/Sembiance/dexvert) | [12 sample files](https://telparia.com/fileFormatSamples/document/stosBAS/) - I tried using STOSBAS_detokenize.pl and chkbas and both failed. So I just wrote my own.
 document | Atari Works Database | .std | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/atariWorksDatabase/)
 document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/atariWorks/)
@@ -192,6 +192,7 @@ document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | Papyrus | .pap | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/papyrus/)
+document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a somewhat used database program back in the day. Didn't really dig into what converters might be possible.
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [pco](https://vetusware.com/download/PC%20Outline%20for%20Windows%20PC%20Outline%201.0.a/?id=4597) | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
 document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/pcTypeDocument/)
 document | [PCBoard Programming Language Executable](https://en-academic.com/dic.nsf/enwiki/3064510) | .ppe | [pplx](http://files.mpoli.fi/unpacked/tlr/pcboard_bbs_utilities/agsppx20.zip/) | [10 sample files](https://telparia.com/fileFormatSamples/document/pcBoardPPE/)
@@ -226,6 +227,35 @@ executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinar
 executable | Microsoft Windows Dynmic Link Library | .dll | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [17 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
+
+
+
+## Font (23)
+Family | Name | Extensions | Converters | Notes
+------ | ---- | ---------- | ---------- | -----
+font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://telparia.com/fileFormatSamples/font/adobeType1/)
+font | [Amiga Bitmap Font](http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font) | .font | [Fony](http://hukka.ncn.fi/?fony) | [42 sample files](https://telparia.com/fileFormatSamples/font/amigaBitmapFont/)
+font | Atari FontMaker | .fn2 .fnt .fn8 | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/font/fn2/)
+font | Atari SXS Font | .sxs | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/font/sxs/)
+font | [Blazing Paddles - Font](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .chr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/font/blazingPaddlesFont/)
+font | C64 8x8 Font | .64c | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://telparia.com/fileFormatSamples/font/c64c/)
+font | Daisy-Dot | .nlq | [recoil2png](http://recoil.sourceforge.net) | [16 sample files](https://telparia.com/fileFormatSamples/font/nlq/) - Most of the sample files do not convert with recoil2png. Maybe a different version?
+font | [Dynamic Publisher Font](http://fileformats.archiveteam.org/wiki/Dynamic_Publisher) | .fnt | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/font/dynamicPublisherFont/)
+font | [FIGlet Font](http://fileformats.archiveteam.org/wiki/FIGlet_font) | .flf | [figlet](http://www.figlet.org/) | [10 sample files](https://telparia.com/fileFormatSamples/font/figlet/)
+font | [FontForge File Format](http://fileformats.archiveteam.org/wiki/Spline_Font_Database) | .sfd | [fontforge](https://fontforge.org) | [1 sample file](https://telparia.com/fileFormatSamples/font/sfd/)
+font | [GEM Bitmap Font](http://fileformats.archiveteam.org/wiki/GEM_bitmap_font) | .gft .fnt | [deark](https://entropymine.com/deark/) | [29 sample files](https://telparia.com/fileFormatSamples/font/gemFont/)
+font | [Glyph Bitmap Distribution Format](http://fileformats.archiveteam.org/wiki/BDF) | .bdf | [bdftopcf](https://gitlab.freedesktop.org/xorg/app/bdftopcf) | [4 sample files](https://telparia.com/fileFormatSamples/font/bdf/)
+font | Interlace Character Editor | .ice | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://telparia.com/fileFormatSamples/font/ice/)
+font | [OpenType Font](http://fileformats.archiveteam.org/wiki/OpenType) | .otf | [fontPreview](https://github.com/Sembiance/dexvert) | [3 sample files](https://telparia.com/fileFormatSamples/font/otf/)
+font | Oric Font | .chs | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/font/oricFont/)
+font | [PC Screen Font](http://fileformats.archiveteam.org/wiki/PC_Screen_Font) | .psf .psfu | [deark](https://entropymine.com/deark/) | [6 sample files](https://telparia.com/fileFormatSamples/font/pcScreenFont/)
+font | [Portable Compiled Format](http://fileformats.archiveteam.org/wiki/PCF) | .pcf | [deark](https://entropymine.com/deark/) | [5 sample files](https://telparia.com/fileFormatSamples/font/pcf/)
+font | Shoot Em Up Construction Kit Font | .g | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/font/seuckFont/) - Only one file format has been located. To prevent false positives it assumes this format is 514 bytes long, always.
+font | Super-IRG | .sif | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/font/sif/)
+font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/font/f80/)
+font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TTF) | .ttf | [fontPreview](https://github.com/Sembiance/dexvert) | [15 sample files](https://telparia.com/fileFormatSamples/font/ttf/)
+font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [5 sample files](https://telparia.com/fileFormatSamples/font/woff/)
+font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/font/zxFont/)
 
 
 
@@ -922,18 +952,53 @@ other | Wordsearch Mania! Puzzle | .wsp | [strings](https://www.gnu.org/software
 
 
 
-## Text (2)
+## Text (36)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-example) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | 
+text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  |  | [13 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
+text | AMOS Source Code | .amossourcecode |  | [10 sample files](https://telparia.com/fileFormatSamples/text/amosSource/)
+text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm |  | [11 sample files](https://telparia.com/fileFormatSamples/text/asm/)
+text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas |  | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
+text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp |  | [15 sample files](https://telparia.com/fileFormatSamples/text/c/)
+text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css |  | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
+text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-example) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [2 sample files](https://telparia.com/fileFormatSamples/text/toc/)
+text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [4 sample files](https://telparia.com/fileFormatSamples/text/csv/)
+text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat |  | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
+text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [2 sample files](https://telparia.com/fileFormatSamples/text/xml/)
+text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://telparia.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
+text | Fred Fish's Product-Info |  |  | [13 sample files](https://telparia.com/fileFormatSamples/text/fredFishProductInfo/)
+text | [FS-UAE Meta File](https://fs-uae.net/docs/options/uaem-write-flags) | .uaem |  | 
+text | GNU Bison Grammar | .yy .y |  | 
+text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc |  | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
+text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [14 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue |  | [6 sample files](https://telparia.com/fileFormatSamples/text/cue/)
+text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [4 sample files](https://telparia.com/fileFormatSamples/text/json/)
+text | Latex Auxiliary File | .aux |  | [11 sample files](https://telparia.com/fileFormatSamples/text/latexAUXFile/)
+text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  |  | [10 sample files](https://telparia.com/fileFormatSamples/text/lingoScript/)
+text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
+text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp |  | [12 sample files](https://telparia.com/fileFormatSamples/text/lisp/)
+text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk |  | [12 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
+text | [Module Description File](https://www.cubic.org/player/doc/node73.htm) | .mdz |  | [1 sample file](https://telparia.com/fileFormatSamples/text/moduleDescriptionFile/)
+text | NeoBook Document | .pub |  | [2 sample files](https://telparia.com/fileFormatSamples/text/neoBookDocument/)
+text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx .rex |  | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
+text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 |  | [10 sample files](https://telparia.com/fileFormatSamples/text/pas/)
+text | [Perl Script](http://fileformats.archiveteam.org/wiki/Perl) | .pl |  | [11 sample files](https://telparia.com/fileFormatSamples/text/pl/)
+text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) | .asc .aexpk .pgp .pub |  | [11 sample files](https://telparia.com/fileFormatSamples/text/pgpPublicKey/)
+text | [PGP Signed Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [12 sample files](https://telparia.com/fileFormatSamples/text/pgpSignedMessage/)
+text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [5 sample files](https://telparia.com/fileFormatSamples/text/ppd/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) |  |  | [13 sample files](https://telparia.com/fileFormatSamples/text/txt/)
+text | VENDINFO | .diz |  | [10 sample files](https://telparia.com/fileFormatSamples/text/vendinfo/)
+text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
+text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat |  | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
+text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d |  | [5 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
 
 
 
-## Video (13)
+## Video (25)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/video/animaticFilm/)
+video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [11 sample files](https://telparia.com/fileFormatSamples/video/mov/)
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [10 sample files](https://telparia.com/fileFormatSamples/video/avi/)
 video | [Bink Video](http://fileformats.archiveteam.org/wiki/Bink_Video) | .bik .bik2 .bk2 | [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://telparia.com/fileFormatSamples/video/bink/)
 video | [CDXL](http://fileformats.archiveteam.org/wiki/CDXL) | .cdxl .xl | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/cdxl/)
@@ -945,5 +1010,16 @@ video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [xanim](h
 video | Fantavision Movie | .mve | [fantavsn](https://winworldpc.com/product/fantavision/1x-dos) | [9 sample files](https://telparia.com/fileFormatSamples/video/fantavision/)
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
+video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://telparia.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
+video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://telparia.com/fileFormatSamples/video/iffYAFA/)
+video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [12 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
+video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert.
+video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
+video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [3 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)
 video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v |  | [4 sample files](https://telparia.com/fileFormatSamples/video/mp4/)
+video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/video/neochromeAnimation/)
+video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
+video | [Silicon Graphics IRIX Movie](http://fileformats.archiveteam.org/wiki/SGI_movie) | .mv .movie .sgi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [3 sample files](https://telparia.com/fileFormatSamples/video/sgiMovie/)
+video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/smacker/)
+video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/video/videoMasterFilm/)
 

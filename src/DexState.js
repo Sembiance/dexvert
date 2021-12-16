@@ -148,7 +148,7 @@ export class DexState
 		if(this.untouched)
 			r.push(` ${fg.deepSkyblue("**UNTOUCHED**")}`);
 		if(this.f?.input.transformed)
-			r.push(` ${fg.pink("**INPUT WAS TRANSFORMED**")}`);
+			r.push(` ${fg.pink(`**TRANSFORMED ${xu.c.bold + this.f.input.transformed}**`)}`);
 
 		if(this.duration)
 			r.push(`  ${xu.paren(`took ${fg.yellow((this.duration/xu.SECOND).secondsAsHumanReadable())}`)}`);

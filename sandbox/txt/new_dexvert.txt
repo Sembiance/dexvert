@@ -1,28 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add video
-  ALL outputs from this family must be valid MP4 files (just like I ensure audio are MP3)
-  Start with something that uses dosBox and records a video
-
-* Add font
-  Start with:
-	font/amigaBitmapFont
-
-* Add text
-  STRONGLY consider ditching txtByFilename and txtByExt and just sticking with 'txt' as the fallback
-  Attempting to match on filename/ext to then try and show /^data$/ files usually leaves a messed up display because it's binary
-
-* Now the test-process test case should be working 100%
-
-* Add additional conversions with 'libvips' (see CLI conversion) https://www.libvips.org/API/current/using-cli.html
-
-* Remove the bottom comments in deark.js
-
-* Get rid of the testdexvert TODO for allowing one day off and prevData.inputMeta check
-
-* Find all remaining TODO comments (lintMyJSCode) and solve as many as I can
-
 * Now start working on test/testid.js (start with image/pcx).
 I do NOT actually have to manually 'record' anew for every file format, existing data is same.
 So I should just be able to test entire families
@@ -32,17 +10,9 @@ If for whatever reason I do need to do it by hand, I wrote a script to help, jus
 
 * Now that id is all done, run both testdex and testid and both should be passing 100%
 
-* Add all new dexvert paths to searchMyCode/shared/
-
-* Find all remaining TODO comments (lintMyJSCode) and finish ALL of them or move to todo.txt
-
-* Move whatever is left of DevLab/dexvert-node/ into DevLab/dexvert/sandbox/legacy/node/ then delete DevLab/dexvert-node/
-
 * Delete dexvert on github and rename dexvert-deno to dexvert and update dexvert/.git/config remote url too
 
 * Now email abydos Bergam and let him know about the new 'converters' column on the SUPPORTED.md page
-
-* Now add dexvert back to the "roles" for crystalsummit in DevLab/node-modules/xpriv/hostUtil.js
 
 * Now sync upload to chatsubo
 

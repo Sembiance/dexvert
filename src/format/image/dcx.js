@@ -8,5 +8,5 @@ export class dcx extends Format
 	mimeType     = "image/x-dcx";
 	magic        = ["Multipage Zsoft Paintbrush Bitmap Graphics", "DCX multi-page PCX image data", "Graphics Multipage PCX bitmap"];
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`]
+	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -1,5 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {path} from "std";
 
 export class xanim extends Program
 {
@@ -10,40 +12,14 @@ export class xanim extends Program
 	flags   = {
 		frameDelay : "Duration of delay between animation frames. Default: 10"
 	};
-	bin  = "xanim";
-	args = r => ["+Ze", "+l0", "-Zr", "+Ee", r.inFile()];
-	cwd  = r => r.outDir();
+	bin      = "xanim";
+	args     = r => ["+Ze", "+l0", "-Zr", "+Ee", r.inFile()];
+	
+	// We could run in cwd outDir, but some fiels like movieSetter rely on external files being in the same directory, so it's easiest to run in the default r.f.root cwd and then just move all the ppm files over afterwards
+	postExec = async r => (await (await fileUtil.tree(r.f.root, {nodir : true, depth : 1, regex : /\.ppm$/i})).parallelMap(async filePath => await Deno.rename(filePath, path.join(r.outDir({absolute : true}), path.basename(filePath)))));
 
 	// xanim plays back in real time, so if the video is longer than 5 minutes, it just will get truncated
 	runOptions = ({virtualX : true, timeout : xu.MINUTE*5});
 	chain      = r => `*joinAsGIF[frameDelay:${r.flags.frameDelay || 10}] -> ffmpeg`;
-	renameOut  = false;
+	renameOut  = true;
 }
-
-
-/*
-exports.post = (state, p, r, cb) =>
-{
-	tiptoe(
-		function findOutputFrames()
-		{
-			fileUtil.glob(state.cwd, "xanimf*.ppm", {nodir : true}, this);
-		},
-		function generateAnimatedGIF(frameFilePaths=[])
-		{
-			if(!frameFilePaths.length)
-				return this.finish();
-
-			this.data.GIFFilePath = fileUtil.generateTempFilePath(state.cwd, ".gif");
-			const convertArgs = ["-delay", `${r.flags.xanimDelay || 10}`, "-loop", "0", "-dispose", "previous"];
-			convertArgs.push(...frameFilePaths, ...p.util.program.args(state, p, "convert").slice(1, -1), this.data.GIFFilePath);
-			p.util.program.run("convert", {args : convertArgs})(state, p, this);
-		},
-		function convertToMP4()
-		{
-			p.util.program.run("ffmpeg", {flags : {ffmpegExt : ".mp4"}, argsd : [this.data.GIFFilePath, r.outPath]})(state, p, this);
-		},
-		cb
-	);
-};
-*/

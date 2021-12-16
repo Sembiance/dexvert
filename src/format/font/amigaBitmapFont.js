@@ -1,35 +1,17 @@
-/*
 import {Format} from "../../Format.js";
 
 export class amigaBitmapFont extends Format
 {
-	name = "Amiga Bitmap Font";
-	website = "http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font";
-	ext = [".font"];
-	magic = ["Amiga bitmap Font","AmigaOS bitmap font"];
-	trustMagic = true;
+	name         = "Amiga Bitmap Font";
+	website      = "http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font";
+	ext          = [".font"];
+	magic        = ["Amiga bitmap Font", "AmigaOS bitmap font"];
+	trustMagic   = true;
 	keepFilename = true;
-	filesOptional = undefined;
-
-steps = [null];
+	auxFiles     = (input, otherFiles, otherDirs) =>
+	{
+		const otherDir = otherDirs.find(o => o.base.toLowerCase()===input.name.toLowerCase());
+		return otherDir ? [otherDir] : false;
+	};
+	converters = ["Fony"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name          : "Amiga Bitmap Font",
-	website       : "http://fileformats.archiveteam.org/wiki/Amiga_bitmap_font",
-	ext           : [".font"],
-	magic         : ["Amiga bitmap Font", "AmigaOS bitmap font"],
-	trustMagic    : true,
-	keepFilename  : true,
-	filesOptional : (state, otherFiles, otherDirs) => otherDirs.filter(otherDir => otherDir===state.input.name)
-};
-
-exports.steps = [() => ({program : "Fony"})];
-
-
-*/

@@ -2,7 +2,6 @@
 import {xu, fg} from "xu";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
-import {formats} from "../src/format/formats.js";
 
 const xlog = xu.xLog();
 
@@ -33,12 +32,12 @@ const FLEX_SIZE_PROGRAMS =
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 	
-	// Produces slightly different PNG output each time it's ran. Probably meta data somewhere, but didn't research it much
-	darktable_cli : 0.1,
-
 	// Produces different data each time
+	darktable_cli   : 0.1,
 	doomMUS2mp3     : 0.1,
 	ffdec           : 1.0,
+	fontforge       : 0.1,
+	hlp2pdf         : 1.0,
 	sidplay2        : 0.1,
 	soundFont2tomp3 : 0.1,
 	zxtune123       : 0.1
@@ -67,22 +66,31 @@ const FLEX_SIZE_FORMATS =
 		rekoCardset      : 0.1,
 		windowsClipboard : 0.1,
 
-		// Takes a screenshot or a framegrab which can differ slightly on each run
+		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		naplps             : 20,
 		threeDCK           : 10
+	},
+	video :
+	{
+		// these are screen recordings from DOSBox and can differ a good bit between each run
+		disneyCFAST : 15,
+		fantavision : 15,
+		grasp       : 30
 	}
 };
 
 const IGNORE_SIZE_FILEPATHS =
 [
-	/image\/pict\/les38\.png$/i,	// for some reason, this image output flip flops back and forthe between 8KB and 36KB, not sure why
 	/scripts\/.+\.as$/i				// archive/swf/cookie-hamster often produces very different script/**/*.as files
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
+	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
+	[/text\/txt\/SPLIFT.PAS$/, "text", "pas"],
+
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
 	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
@@ -91,9 +99,14 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 
 	// Unsupported files that end up getting matched to other stuff
+	[/audio\/dataShowSound\/.+/i, "text", true],
+	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/music\/renoise\/.+/i, "archive", "zip"],
+	[/music\/tss\/.+/i, "text", true],
 	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
 	[/other\/microsoftChatCharacter\/armando.avb$/, "image", "tga"],
+	[/poly\/povRay\/.+/i, "text", true],
+	[/poly\/ydl\/.+/i, "text", true],
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
@@ -138,19 +151,8 @@ xlog.info`Loading test data and finding sample files...`;
 const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH), {});
 
 xlog.info`Finding sample files...`;
-const allSampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
-allSampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).startsWith(v)));
-
-xlog.info`Found ${allSampleFilePaths.length} sample files. Filtering those we don't have support for...`;
-const sampleFilePaths = allSampleFilePaths.filter(sampleFilePath =>
-{
-	const sampleRel = path.relative(path.join(SAMPLE_DIR_PATH, ".."), sampleFilePath);
-	const sampleFormat = sampleRel.split("/")[argv.format.includes("/") ? 0 : 1];
-	return Object.hasOwn(formats, sampleFormat);
-});
-
-if(allSampleFilePaths.subtractAll(sampleFilePaths).length>0)
-	xlog.info`Skipping files we don't have formats for yet:\n\t${allSampleFilePaths.subtractAll(sampleFilePaths).join("\n\t")}`;
+const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
+sampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).startsWith(v)));
 
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toLowerCase()));
@@ -284,8 +286,8 @@ async function testSample(sampleFilePath)
 
 	if(!result.processed)
 	{
-		if(!resultFull.ids.some(id => id.family===diskFamily && id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
-			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFamily}/${diskFormat}`);
+		if(!resultFull.ids.some(id => id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
+			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFormat}`);
 
 		return await pass(fg.fogGray("."));
 	}
@@ -341,7 +343,7 @@ async function testSample(sampleFilePath)
 			if(tsDate.getFullYear()<2020 && prevDate.getFullYear()>=2020)
 				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 
-			if(prevDate.getFullYear()<2020 && tsDate.getTime()!==prevDate.getTime() && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY*1.5)	// TODO remove the 1 day off check
+			if(prevDate.getFullYear()<2020 && tsDate.getTime()!==prevDate.getTime())
 				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 		}
 	}
@@ -360,21 +362,6 @@ async function testSample(sampleFilePath)
 		const objDiff = diffUtil.diff(prevData.meta, result.meta);
 		if(objDiff.length>0)
 			return fail(`Meta different: ${objDiff.squeeze()}`);
-	}
-	else if(prevData.inputMeta)
-	{
-		// TODO Remove once converted all
-		const oldMeta = {};
-		Object.values(prevData.inputMeta).forEach(o => Object.assign(oldMeta, o));
-		if(Object.keys(oldMeta).length>0)
-		{
-			if(Object.keys(result.meta || {}).length===0)
-				return fail(`Expected to find old meta but didn't get any. Old: ${xu.inspect(oldMeta)}`);
-			
-			const objDiff = diffUtil.diff(oldMeta, result.meta);
-			if(objDiff.length>0)
-				return fail(`OLD meta different from new: ${objDiff.squeeze()}`);
-		}
 	}
 	else if(result.meta && Object.keys(result.meta).length>0)
 	{

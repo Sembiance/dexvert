@@ -12,7 +12,7 @@
 #include <errno.h>
 #include <time.h>
 
-#define TRIM_GARBAGE_VERSION "1.0.0"
+#define TRIM_GARBAGE_VERSION "1.1.0"
 
 static void usage(void)
 {
@@ -21,6 +21,7 @@ static void usage(void)
 			"Trims all trailing 0x00 and 0x1A bytes from a file.\n"
 			"\n"
 			"Usage: trimGarbage <input> <output>\n"
+			"  -n, --newlines          Also trim newlines\n"
 			"  -h, --help              Output this help and exit\n"
 			"  -V, --version           Output version and exit\n"
 			"  -a, --ascii             Only trim if the rest of the file is ASCII\n"
@@ -29,6 +30,7 @@ static void usage(void)
 }
 
 bool ascii=false;
+bool newlines=false;
 char * inputFilePath=0;
 char * outputFilePath=0;
 
@@ -47,6 +49,10 @@ static void parse_options(int argc, char **argv)
 		else if(!strcmp(argv[i],"-a") || !strcmp(argv[i], "--ascii"))
 		{
 			ascii = true;
+		}
+		else if(!strcmp(argv[i],"-n") || !strcmp(argv[i], "--newlines"))
+		{
+			newlines = true;
 		}
 		else if(!strcmp(argv[i],"-V") || !strcmp(argv[i], "--version"))
 		{
@@ -115,7 +121,7 @@ int main(int argc, char ** argv)
 
 		if(!tdone)
 		{
-			if(c==26 || c==0)
+			if(c==26 || c==0 || (newlines && (c==13 || c==10)))
 			{
 				tcount++;
 				continue;
@@ -135,7 +141,7 @@ int main(int argc, char ** argv)
 		
 		if(c!=9 && c!=10 && c!=13 && (c<32 || c>126))
 		{
-			fprintf(stderr, "Encountered non-ascii byte 0x%x (%d) in input file [%s]\n", c, inputFilePath);
+			fprintf(stderr, "Encountered non-ascii byte 0x%x (%d) in input file [%s]\n", c, c, inputFilePath);
 			goto finish;
 		}
 	}

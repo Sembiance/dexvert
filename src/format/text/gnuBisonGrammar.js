@@ -1,32 +1,12 @@
-/*
 import {Format} from "../../Format.js";
 
 export class gnuBisonGrammar extends Format
 {
-	name = "GNU Bison Grammar";
-	ext = [".yy",".y"];
+	name           = "GNU Bison Grammar";
+	ext            = [".yy", ".y"];
 	forbidExtMatch = true;
-	magic = ["GNU Bison grammar"];
-	weakMagic = true;
-	untouched = true;
-
-	metaProvider = [""];
+	magic          = ["GNU Bison grammar"];
+	weakMagic      = true;
+	untouched      = true;
+	metaProvider   = ["text"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name           : "GNU Bison Grammar",
-	ext            : [".yy", ".y"],
-	forbidExtMatch : true,
-	magic          : ["GNU Bison grammar"],
-	weakMagic      : true,
-	untouched      : true
-};
-
-exports.inputMeta = (state, p, cb) => p.family.supportedInputMeta(state, p, cb);
-
-*/

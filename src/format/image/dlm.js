@@ -6,6 +6,6 @@ export class dlm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Dir_Logo_Maker";
 	ext        = [".dlm"];
 	fileSize   = 256;
-	byteCheck  = [{offset : 0, match : ["B".charCodeAt(0)]}];	// eslint-disable-line unicorn/prefer-code-point
+	byteCheck  = [{offset : 0, match : ["B".charCodeAt(0)]}];
 	converters = ["recoil2png"];
 }

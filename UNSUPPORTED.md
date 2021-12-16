@@ -1,4 +1,4 @@
-# Unsupported File Formats (430)
+# Unsupported File Formats (439)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -57,7 +57,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (18)
+## Document (17)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
@@ -76,7 +76,6 @@ document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fi
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb | [3 sample files](https://telparia.com/fileFormatSamples/document/multimediaViewerBook/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
-document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [3 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a somewhat used database program back in the day. Didn't really dig into what converters might be possible.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 
 
@@ -105,7 +104,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (19)
+## Font (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -118,14 +117,17 @@ font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSa
 font | Corel Wiffen Font | .wfn | 
 font | DynaCADD Vector Font | .fnt | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
+font | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://telparia.com/fileFormatSamples/font/intelliFont/)
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
 font | MacOS Font | .fnt | 
 font | PrintPartner Font | .font | 
 font | Signum Font | .e24 | 
+font | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://telparia.com/fileFormatSamples/font/speedo/)
 font | TeX Packed Font | .pf | 
 font | TheDraw Font | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | VFONT Font | .fnt | 
+font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 font | WordUp Graphics Toolkit Font | .wfn | 
 
 
@@ -481,13 +483,20 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (6)
+## Video (13)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
 video | Accent Software Show Sequence | .seq | [11 sample files](https://telparia.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 video | Animation Works Movie | .awm | [5 sample files](https://telparia.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
+video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim | [7 sample files](https://telparia.com/fileFormatSamples/video/iffSSA/) - Couldn't find any modern converter. Was able to locate some source that maybe can read the files: http://www.boomerangsworld.de/cms/tools/iff-convert.html
 video | Delphine CIN Video | .cin | [5 sample files](https://telparia.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/fileFormatSamples/video/dkAnimation/)
+video | Magic Lantern DIFF Animation | .diff | No known converter
+video | NTitler Animation | .nt | [8 sample files](https://telparia.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
+video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
+video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
+video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
+video | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://telparia.com/fileFormatSamples/video/zoetropeAnimation/)
 

@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-code-point */
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";

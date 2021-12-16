@@ -1,7 +1,9 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
+import {Program} from "../Program.js";
+import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -28,7 +30,7 @@ const logLines = [];
 if(argv.logFile)
 	xlog.logger = v => logLines.push(v);
 
-const dexvertOptions = {xlog};
+const dexvertOptions = {};
 ["asFormat"].forEach(k =>
 {
 	if(argv[k])
@@ -43,7 +45,8 @@ async function handleExit(ignored)
 	Deno.exit(0);
 }
 
-async function handleDexState(dexState, lastTry)
+let dexState = null;
+async function handleDexState(lastTry)
 {
 	if(!dexState)
 	{
@@ -56,7 +59,6 @@ async function handleDexState(dexState, lastTry)
 
 	// send output if we are processed or it's our last try
 	const sendOutput = dexState.processed || lastTry;
-
 	if(sendOutput)
 	{
 		if(argv.jsonFile)
@@ -84,54 +86,39 @@ async function handleDexState(dexState, lastTry)
 	return false;
 }
 
-await handleDexState(await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), dexvertOptions), true);	// TODO remove the last true here and put on the last transform once those are added back
+const inputFilePath = await DexFile.create(argv.inputFilePath);
+dexState = await dexvert(inputFilePath, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
+await handleDexState(argv.dontTransform);
 
-if(argv.dontTransform)
-	await handleExit(xlog.warn`No processed result, but option ${"dontTransform"} was specified so NOT trying any transforms.`);
-
-// TODO do the two transforms now BELOW
-// TRANSFORMED --- ROB DENO NOTE!
-//     As soon as I do a successful transform process, make sure it proudly shows up in the DexState output
-//     Then run a full test suite, see if anything new mis-identifies, those formats it mis-converts as might not be safe to operate on transformed formats. Already have support for that, just need to set 'transformUnsafe = true;' to the format
-// Lastly, consider adding to Program.js to never operate on files marked .transformed if the program is also marked .unsafe (this would be a new addition)
-// TODO do the two transforms now ABOVE
-
-/*
-const argv = cmdUtil.cmdInit(cmdData);
-const verbose = +(argv.verbose || 0);
-
-tiptoe(
-	function runProcess()
+// now we try trimming all trailing 0x00 and 0x1A bytes from files, as these often appear for text files
+// then it tries the same trimming but also trimming newlines (sample/text/c/EVAL2.c)
+// we used to also do stripGarbage here, which would remove ALL 0x00 bytes from the file and try, but it too often would result in a 'text' match and just wasn't very useful
+const TRANSFORM_TYPES = ["trimGarbage", ["trimGarbage", "--newlines"]];	// , "stripGarbage"
+for(const [i, transformTypeRaw] of Object.entries(TRANSFORM_TYPES))
+{
+	const transformDirPath = await fileUtil.genTempPath();
+	await Deno.mkdir(transformDirPath);
+	const transformFilePath = path.join(transformDirPath, inputFilePath.base);
+	const transformType = Array.isArray(transformTypeRaw) ? transformTypeRaw[0] : transformTypeRaw;
+	await runUtil.run(Program.binPath(`${transformType}/${transformType}`), [...(Array.isArray(transformTypeRaw) ? transformTypeRaw.slice(1) : []), inputFilePath.absolute, transformFilePath]);
+	if(!(await fileUtil.exists(transformFilePath)))
 	{
-		const processOptions = {verbose, programFlags : {}};
-		["useTmpOutputDir", "brute", "asFormat", "keepGoing", "alwaysBrute", "brutePrograms", "dontTransform"].forEach(k =>
-		{
-			if(argv.hasOwnProperty(k))
-				processOptions[k] = ["brute"].includes(k) ? argv[k].split(",") : argv[k];
-		});
-		
-		Array.force(argv.programFlag || []).forEach(flag =>
-		{
-			const flagProps = (flag.match(/(?<p>[^:]+):(?<k>[^:]+):(?<v>.+)/) || {groups : {}}).groups;
-			if(!processOptions.programFlags[flagProps.p])
-				processOptions.programFlags[flagProps.p] = {};
-			processOptions.programFlags[flagProps.p][flagProps.k] = flagProps.v;
-		});
-
-		dexvert.process(argv.inputFilePath, argv.outputDirPath, processOptions, this);
-	},
-	function printResults(state)
+		xlog.debug`No transform result for ${Array.force(transformTypeRaw).join(" ")}`;
+		await fileUtil.unlink(transformDirPath, {recursive : true});
+		continue;
+	}
+	
+	xlog.debug`Attempting dexvert with transform ${Array.force(transformTypeRaw).join(" ")}`;
+	const transformedInputFile = await DexFile.create(transformFilePath);
+	transformedInputFile.transformed = Array.force(transformTypeRaw).join(" ");
+	const transformedDexState = await dexvert(transformedInputFile, await DexFile.create(argv.outputDirPath), {xlog : (xlog.atLeast("debug") ? xlog : xlog.clone("error")), ...dexvertOptions});
+	await fileUtil.unlink(transformDirPath, {recursive : true});
+	if(transformedDexState.processed)
 	{
-		if(argv.outputStateToFile)
-			return fs.writeFile(argv.outputStateToFile, JSON.stringify(state), XU.UTF8, this);
+		dexState = transformedDexState;
+		await handleDexState((+i)===(TRANSFORM_TYPES.length-1));
+	}
+}
 
-		if(argv.outputState)
-			console.log(JSON.stringify(state));
-		else if(state.verbose>=2)
-			console.log(util.inspect(state, {colors : true, depth : Infinity}));
-
-		this();
-	},
-	XU.FINISH
-);
-*/
+// if we got this far, then neither transform produced a file, so we just fall back on our last dexState
+await handleDexState(true);

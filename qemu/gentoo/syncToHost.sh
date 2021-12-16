@@ -12,11 +12,8 @@ if [ "$1" == "crystalsummit" ]; then
 	fi
 fi
 
-echo "hd.img and extract.img are not normally synchronized to "$1", this will do that."
-echo "Should probably run this after any changes to the HD."
+echo "hd.img are not normally synchronized to "$1" due to the huge size of it."
+echo "This script will sync it up to the host, run manually after you finish making updates to it."
 
 echo -e "\nSynching hd.img..."
 rsync --progress /mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img sembiance@"$1":/mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img
-
-echo -e "\nSynching extra.img..."
-rsync --progress /mnt/compendium/DevLab/dexvert/qemu/gentoo/extra.img sembiance@"$1":/mnt/compendium/DevLab/dexvert/qemu/gentoo/extra.img

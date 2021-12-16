@@ -4,5 +4,5 @@ export class gls extends Format
 {
 	name       = "GLS";
 	ext        = [".gls"];
-	converters = ["recoil2png"]
+	converters = ["recoil2png"];
 }

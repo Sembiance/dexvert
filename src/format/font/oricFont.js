@@ -1,28 +1,10 @@
-/*
 import {Format} from "../../Format.js";
 
 export class oricFont extends Format
 {
-	name = "Oric Font";
-	ext = [".chs"];
-	magic = ["Oric Tape image"];
-	weakMagic = true;
-
-steps = [null];
+	name       = "Oric Font";
+	ext        = [".chs"];
+	magic      = ["Oric Tape image"];
+	weakMagic  = true;
+	converters = ["recoil2png"];
 }
-*/
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	name      : "Oric Font",
-	ext       : [".chs"],
-	magic     : ["Oric Tape image"],
-	weakMagic : true
-};
-
-exports.steps = [() => ({program : "recoil2png"})];
-
-*/

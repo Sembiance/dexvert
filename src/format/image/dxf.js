@@ -6,6 +6,6 @@ export class dxf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DXF";
 	ext        = [".dxf"];
 	mimeType   = "image/vnd.dxf";
-	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format"]
+	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format"];
 	converters = ["ezdxf", "totalCADConverterX", "irfanView", "soffice[outType:svg][autoCropSVG]", "uniconvertor"];
 }

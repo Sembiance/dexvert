@@ -6,6 +6,8 @@
 /---------------\
 | High Priority |
 \---------------/
+* Add additional conversions with 'libvips' (see CLI conversion) https://www.libvips.org/API/current/using-cli.html
+
 * Add support for these formats:
   music/renoise			Buy renoise for linux and use that to convert to MP3: https://www.renoise.com/products/renoise   (remove from testdexvert exceptions after)
   music/svarTracker		https://web.archive.org/web/20160818081932/http://www.svarsoft.com/download/svartracker_1_22_free_inst.exe

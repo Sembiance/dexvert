@@ -1,29 +1,6 @@
-/*
 import {Program} from "../../Program.js";
 
-export class fc_scan extends Program
-{
-	website = "https://fontconfig.org";
-	package = "media-libs/fontconfig";
-	informational = true;
-}
-*/
-
-/*
-"use strict";
-const XU = require("@sembiance/xu");
-
-exports.meta =
-{
-	website        : "https://fontconfig.org",
-	package  : "media-libs/fontconfig",
-	informational  : true
-};
-
-exports.bin = () => "fc-scan";
-
 // Valid properties: https://www.freedesktop.org/software/fontconfig/fontconfig-user.html#AEN21
-
 const STRINGS = ["family", "familyLang", "style", "styleLang", "fullName", "fullNameLang", "foundry", "rasterizer", "lang", "capability", "fontFormat", "fontFeatures", "nameLang", "prgName", "postscriptName", "charset"];
 const NUMS = ["size", "aspect", "pixelSize", "index", "scale", "dpi", "fontVersion"];
 const BOOLS = ["antialias", "hinting", "verticalLayout", "autoHint", "globalAdvance", "outline", "scalable", "color", "minspace", "embolden", "embeddedBitmap", "decorative"];
@@ -39,32 +16,37 @@ const LOOKUPS =
 };
 
 const PROPS = [...STRINGS, ...NUMS, ...BOOLS, ...Object.keys(LOOKUPS)];
-exports.args = (state, p, r, inPath=state.input.filePath) => (["--format", PROPS.map(PROP => `${PROP}:%{${PROP.toLowerCase()}}`).join("\n"), inPath]);
-exports.post = (state, p, r, cb) =>
+
+export class fc_scan extends Program
 {
-	const meta = {};
-	(r.results || "").split("\n").forEach(line =>
+	website = "https://fontconfig.org";
+	package = "media-libs/fontconfig";
+	bin     = "fc-scan";
+	args    = r => ["--format", PROPS.map(PROP => `${PROP}:%{${PROP.toLowerCase()}}`).join("\n"), r.inFile()];
+	post    = r =>
 	{
-		const [key, ...valueRaw] = line.split(":");
-		if(!PROPS.includes(key))
-			return;
+		const meta = {};
+		r.stdout.split("\n").forEach(line =>
+		{
+			const [key, ...valueRaw] = line.split(":");
+			if(!PROPS.includes(key))
+				return;
 
-		const value = valueRaw.join("").trim();
-		if(value.length===0 || value.startsWith(`%{${key.toLowerCase()}}`))
-			return;
+			const value = valueRaw.join("").trim();
+			if(value.length===0 || value.startsWith(`%{${key.toLowerCase()}}`))
+				return;
 
-		meta[key] = NUMS.includes(key) ? +value : (BOOLS.includes(key) ? value==="True" : value);
-		if(LOOKUPS[key])
-			meta[key] = LOOKUPS[key][meta[key]] || meta[key];
-		if(key==="lang")
-			meta[key] = meta[key].split("|");
-		
-		if(meta[key]==="unknown")
-			delete meta[key];
-	});
+			meta[key] = NUMS.includes(key) ? +value : (BOOLS.includes(key) ? value==="True" : value);
+			if(LOOKUPS[key])
+				meta[key] = LOOKUPS[key][meta[key]] || meta[key];
+			if(key==="lang")
+				meta[key] = meta[key].split("|");
+			
+			if(meta[key]==="unknown")
+				delete meta[key];
+		});
 
-	Object.assign(r.meta, meta);
-
-	setImmediate(cb);
-};
-*/
+		Object.assign(r.meta, meta);
+	};
+	renameOut = false;
+}

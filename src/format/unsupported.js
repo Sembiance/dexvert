@@ -1,4 +1,3 @@
-/* eslint-disable prefer-named-capture-group */
 import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'

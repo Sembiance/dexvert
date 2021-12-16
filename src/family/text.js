@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {TEXT_MAGIC} from "../Detection.js";
@@ -18,14 +19,26 @@ export class text extends Family
 			// imageMagick meta provider
 			if(metaProvider==="text")
 			{
-				const wcR = await Program.runProgram("wc", inputFile, {xlog, autoUnlink : true});
-				const lineCount = wcR.meta?.lineCount;
+				let lineCount = 0;
+
+				// if 20MB or less, read it in and count the newlines here, it's more accurate than 'wc'
+				if(inputFile.size<xu.MB*20)
+				{
+					const textRaw = await Deno.readTextFile(inputFile.absolute);
+					lineCount = textRaw.split(textRaw.includes("\n") ? "\n" : "\r").length;
+				}
+				else
+				{
+					const wcR = await Program.runProgram("wc", inputFile, {xlog, autoUnlink : true});
+					lineCount = wcR.meta?.lineCount;
+				}
+				
 				if(!lineCount)
 					return;
 
 				const textMeta = {lineCount, charSet : {}};
-				if(this.charSet)
-					textMeta.charSet.declared = this.charSet;
+				if(format.charSet)
+					textMeta.charSet.declared = format.charSet;
 				
 				// detect our charSet
 				const chardetectR = await Program.runProgram("chardetect", inputFile, {xlog, autoUnlink : true});

@@ -5,7 +5,7 @@ export class convert extends Program
 	website = "https://www.imagemagick.org/";
 	package = "media-gfx/imagemagick";
 	flags   = {
-		outType     : `Which type to convert to (png || webp || svg). Default: png`,
+		outType     : `Which type to convert to (png || gif || webp || svg). Default: png`,
 		flip        : "Set this to true to flip the image vertically. Default: false",
 		removeAlpha : "Set this to true to remove the alpha channel and produce a flat, opaque image. Default: false"
 	};

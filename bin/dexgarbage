@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "Preparing chatsubo detected garbage for transfer..."
+ssh sembiance@chatsubo rm -f /mnt/ram/tmp/garbageDetected.tgz
+ssh sembiance@chatsubo tar -I pigz -cf /mnt/ram/tmp/garbageDetected.tgz /mnt/dexvert/garbageDetected/
+
+echo "Downloading chatsubo detected garbage..."
+rsync --progress sembiance@chatsubo:/mnt/ram/tmp/garbageDetected.tgz /mnt/ram/tmp/garbageDetected.tgz
+ssh sembiance@chatsubo rm -f /mnt/ram/tmp/garbageDetected.tgz
+
+echo "Preparing destination directory..."
+rm -rf /mnt/dexvert/garbageDetected/
+mkdir -p /mnt/dexvert/garbageDetected/
+
+echo "Extracting chatsubo detected garbage..."
+tar -xf /mnt/ram/tmp/garbageDetected.tgz -C /mnt/dexvert/garbageDetected/ --strip-components=3
+rm -f /mnt/ram/tmp/garbageDetected.tgz
+
+cd /mnt/dexvert/garbageDetected/ || exit
+fixPerms
+
+mkdir -p /home/sembiance/Assorted/wip
+
+echo "Viewing detected garbage..."
+awesomeSwitchToWorkspace 9
+gqview /mnt/dexvert/garbageDetected/ &
+
+sleep 0.3
+
+xdotool search --onlyvisible --class GQview key ctrl+j
+sleep 0.1
+xdotool search --name "Pan View - GQview" key f
+
+wait
+
+echo "Clearing remote garbage images..."
+
+ssh sembiance@chatsubo rm -rf /mnt/dexvert/garbageDetected/
+ssh sembiance@chatsubo mkdir /mnt/dexvert/garbageDetected/
+
+echo "DONE HANDLING GARBAGE."

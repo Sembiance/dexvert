@@ -158,29 +158,23 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 					// verify output files
 					await (dexState.f.files.new || []).parallelMap(async newFile =>
 					{
-						let isValid = true;
+						const failValidation = async msg =>
+						{
+							xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
+							if(!xlog.atLeast("trace"))
+								await fileUtil.unlink(newFile.absolute);
+
+							return false;
+						};
 						
 						// first, check family level validators
 						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
 						if(extraValidatorData===false)
-						{
-							xlog.warn`${newFile.pretty()} FAILED validation from family ${dexState.format.family.pretty()}`;
-							isValid = false;
-						}
+							return failValidation(`family ${dexState.format.family.pretty()}`);
 						
 						// if still valid, check format level validator
-						if(isValid && format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
-						{
-							xlog.warn`${newFile.pretty()} FAILED validation from format ${format.pretty()}`;
-							isValid = false;
-						}
-
-						if(!isValid)
-						{
-							if(!xlog.atLeast("trace"))
-								await fileUtil.unlink(newFile.absolute);
-							return;
-						}
+						if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
+							return failValidation(`format ${format.pretty()}`);
 
 						// if a produced file is older than 2020, then we assume it's the proper date
 						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)

@@ -1,27 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Now sync upload to chatsubo
-
-* Do chatsubo system wide update -upDN world
-  Also do: emerge grotag
-
-* Now get dexserver and test/testdexvert.js working 100% on chatsubo
-
-* Now start working on test/testid.js (start with image/pcx).
-I do NOT actually have to manually 'record' anew for every file format, existing data is same.
-So I should just be able to test entire families
-./testid --format=image
-Then fix an specific formats and record just those formats
-If for whatever reason I do need to do it by hand, I wrote a script to help, just run util/testids.sh
-
-* Ensure both testid and testdexvert both pass 100%
-
-* Now make sure test/testid.js works 100% on chatsubo
-
 * Make a src/app/dexbrute.js that will run a given format for each and every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
-
-* Update lobe with new garbage and notGarbage files then re-run image test, see how it changes
+  Test it with like a regular jpg file, then a pcx file, then maybe an archive
 
 
 /---------------\
@@ -68,8 +49,6 @@ If for whatever reason I do need to do it by hand, I wrote a script to help, jus
   If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
-
-* Try this as alternative to lobe, see how it does: https://teachablemachine.withgoogle.com/
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 

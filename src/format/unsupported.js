@@ -179,7 +179,7 @@ export default
 		amigaXDFMeta                 : {name : "Amiga ADF XDF Meta", ext : [".xdfmeta"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
 		amosAmalBank                 : {name : "Amos Amal Animation Bank", ext : [".abk"], magic : ["AMOS AMAL Bank"]},
 		amosAsmBank                  : {name : "AMOS ASM Bank", ext : [".abk"], magic : ["AMOS Asm Bank"]},
-		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format"]},
+		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format", /^AMOS Basic memory bank.* type Data$/]},
 		amosWorkBank                 : {name : "AMOS Work Bank", ext : [".abk"], magic : ["AMOS Work Bank"]},
 		aniMouseTutorial             : {name : "AniMouse Tutorial", ext : [".sdemo"], magic : ["AniMouse Tutorial"]},
 		artEffectBrush               : {name : "ArtEffect Brush", magic : ["ArtEffect brush"]},

@@ -7,7 +7,7 @@ export class WoW extends Program
 	bin     = "WoW";
 	args    = r => ["-asc", r.inFile(), "HD:out/outfile.txt"];
 	
-	// When WoW fails, it produces files with a single newline in it, so we filter those out here
-	verify    = (r, dexFile) => dexFile.size>1;
+	// When WoW fails, it produces files with just a few newlines in it, so we filter those out here with a reasonable size check
+	verify    = (r, dexFile) => dexFile.size>=32;
 	renameOut = true;
 }

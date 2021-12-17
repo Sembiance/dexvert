@@ -43,7 +43,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	for(const familyid of FAMILY_MATCH_ORDER)
 	{
 		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
-		for(const [formatid, format] of Object.entries(formats))
+		for(const [formatid, format] of Object.entries(formats).sortMulti([([, vf]) => FAMILY_MATCH_ORDER.indexOf(vf.familyid), ([, vf]) => vf.formatid], [false, false]))	// the sortMulti ensures we have a predictable order
 		{
 			if(!FAMILY_MATCH_ORDER.includes(format.familyid))
 				throw new Error(`Format ${format.formatid} has a familyid ${format.familyid} that isn't pressent in FAMILY_MATCH_ORDER`);

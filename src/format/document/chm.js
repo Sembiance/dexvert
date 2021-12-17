@@ -6,6 +6,7 @@ export class chm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CHM";
 	ext        = [".chm"];
 	magic      = ["MS Windows HtmlHelp Data", "Windows HELP File"];
+	weakMagic  = ["Windows HELP File"];
 	notes      = "chmdeco and chmdump both failed to process IEXPLORE.CHM and I didn't try any others. FIND.CHM and ACCESSIB_18.CHM fail to extract with archmage.";
 	converters = ["archmage", "UniExtract"];
 }

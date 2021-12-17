@@ -33,14 +33,15 @@ const FLEX_SIZE_PROGRAMS =
 	xfdDecrunch : 0.1,
 	
 	// Produces different data each time
-	darktable_cli   : 0.1,
-	doomMUS2mp3     : 0.1,
-	ffdec           : 1.0,
-	fontforge       : 0.1,
-	hlp2pdf         : 1.0,
-	sidplay2        : 0.1,
-	soundFont2tomp3 : 0.1,
-	zxtune123       : 0.1
+	darktable_cli    : 0.1,
+	doomMUS2mp3      : 0.1,
+	EXE2SWFExtractor : 1.0,
+	ffdec            : 1.0,
+	fontforge        : 0.1,
+	hlp2pdf          : 10,
+	sidplay2         : 0.1,
+	soundFont2tomp3  : 0.1,
+	zxtune123        : 0.1
 };
 
 const FLEX_SIZE_FORMATS =
@@ -52,6 +53,9 @@ const FLEX_SIZE_FORMATS =
 	},
 	document :
 	{
+		// word DOC conversion sometimes differs WILDLY, haven't figured out why
+		wordDoc : 50,
+
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		// So we just exempt all of the document category
 		"*" : 0.1
@@ -88,6 +92,9 @@ const IGNORE_SIZE_FILEPATHS =
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
+	// Mis-classified as garbage, but they do look like garbage, so we allow it but it gets processed by deark as an archive
+	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
+
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/text\/txt\/SPLIFT.PAS$/, "text", "pas"],
 
@@ -100,12 +107,15 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/dataShowSound\/.+/i, "text", true],
+	[/document\/imf\/.+/i, "text", true],
+	[/document\/manPage\/glib\.man/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/music\/tss\/.+/i, "text", true],
 	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
 	[/other\/microsoftChatCharacter\/armando.avb$/, "image", "tga"],
 	[/poly\/povRay\/.+/i, "text", true],
+	[/poly\/vrml\/.+/i, "text", true],
 	[/poly\/ydl\/.+/i, "text", true],
 
 	// Supporting/AUX files
@@ -128,11 +138,16 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/richardJoseph"
 ];
 
+function getWebLink(filePath)
+{
+	return `file://${Deno.hostname()==="chatsubo" ? path.join("/mnt/chatsubo", path.relative("/mnt", filePath)) : filePath}`.escapeHTML();
+}
+
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*2;
 const slowFiles = {};
-const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "data", "process.json");
+const DATA_FILE_PATH = path.join("/mnt/dexvert/test", `${Deno.hostname()}.json`);
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
 const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
 const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.format] : []));
@@ -142,7 +157,7 @@ await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
-xlog.info`Root testing dir: ${fg.deepSkyblue(`file://${DEXTEST_ROOT_DIR}`)}`;
+xlog.info`Root testing dir: ${fg.deepSkyblue(getWebLink(DEXTEST_ROOT_DIR))}`;
 xlog.info`Rsyncing sample files to RAM...`;
 await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
@@ -208,7 +223,7 @@ async function testSample(sampleFilePath)
 	{
 		failCount++;
 
-		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(`file://${path.dirname(tmpOutDirPath)}`)}`);
+		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(getWebLink(path.dirname(tmpOutDirPath)))}`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
@@ -469,7 +484,7 @@ async function writeOutputHTML()
 		${outputFiles.map(filePath =>
 	{
 		const ext = path.extname(filePath);
-		const filePathSafe = `file://${filePath.escapeHTML()}`;
+		const filePathSafe = getWebLink(filePath);
 		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
 		switch(ext.toLowerCase())
 		{
@@ -497,7 +512,7 @@ async function writeOutputHTML()
 	}).join("")}
 	</body>
 </html>`);
-	xlog.info`\nReport written to: file:///mnt/ram/tmp/testdexvert.html`;
+	xlog.info`\nReport written to: ${getWebLink("/mnt/ram/tmp/testdexvert.html")}`;
 }
 
 if(argv.record)

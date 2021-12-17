@@ -31,4 +31,5 @@ export class convert extends Program
 			r.unsafe = true;
 	};
 	renameOut = true;
+	chain     = r => (r.flags.outType==="svg" ? "deDynamicSVG" : null);
 }

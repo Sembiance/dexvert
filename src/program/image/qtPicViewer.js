@@ -37,36 +37,7 @@ export class qtPicViewer extends Program
 
 					WinWaitClose("[TITLE:Picture Viewer]", "", 10)
 
-					Run('"C:\\WINDOWS\\SYSTEM32\\MSPAINT.EXE"', 'c:\\out', @SW_MAXIMIZE)
-
-					$msPaintWindowVisible = WinWaitActive("[CLASS:MSPaintApp]", "", 10)
-					If $msPaintWindowVisible Not = 0 Then
-						Send("^v")
-
-						ClipPut("")
-
-						Sleep(250)
-
-						Send("!f")
-						Sleep(200)
-						Send("a")
-
-						WinWaitActive("[TITLE:Save As]", "", 10)
-
-						Sleep(200)
-						Send("c:\\out\\out.png{TAB}p{ENTER}")
-
-						WinWaitClose("[TITLE:Save As]", "", 10)
-						Sleep(200)
-
-						Send("!f")
-						Sleep(200)
-						Send("x")
-						Sleep(200)
-						Send("n")
-
-						WinWaitClose("[CLASS:MSPaintApp]", "", 10)
-					EndIf
+					SaveClipboardWithMSPaint("WINDOWS", "c:\\out\\out.png")
 				EndIf
 			EndIf`});
 	renameOut = true;

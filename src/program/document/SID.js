@@ -7,6 +7,7 @@ export class SID extends Program
 	website  = "https://github.com/tylerapplebaum/setupinxhacking";
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\SID\\sid.exe";
+	unsafe   = true;
 	args     = () => [];
 	qemuData = r => ({
 		script : `

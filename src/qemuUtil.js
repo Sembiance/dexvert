@@ -73,6 +73,44 @@ Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)
 	If ProcessExists($pid) Then
 		ProcessClose($pid)
 	EndIf
+EndFunc`,
+	SaveClipboardWithMSPaint : `
+Func SaveClipboardWithMSPaint($winDir, $outFilePath)
+	Run('"C:\\' & $winDir & '\\SYSTEM32\\MSPAINT.EXE"', 'c:\\out', @SW_MAXIMIZE)
+
+	$msPaintWindowVisible = WinWaitActive("[CLASS:MSPaintApp]", "", 10)
+	If $msPaintWindowVisible Not = 0 Then
+		Send("^v")
+
+		$enlargeVisible = WinWaitActive("[CLASS:#32770]", "", 10)
+		If $enlargeVisible Not = 0 Then
+			ControlClick("[CLASS:#32770]", "", "[CLASS:Button; TEXT:&Yes]")
+		EndIf
+
+		ClipPut("")
+
+		Sleep(250)
+
+		Send("!f")
+		Sleep(200)
+		Send("a")
+
+		WinWaitActive("[TITLE:Save As]", "", 10)
+
+		Sleep(200)
+		Send($outFilePath & "{TAB}p{ENTER}")
+
+		WinWaitClose("[TITLE:Save As]", "", 10)
+		Sleep(200)
+
+		Send("!f")
+		Sleep(200)
+		Send("x")
+		Sleep(200)
+		Send("n")
+
+		WinWaitClose("[CLASS:MSPaintApp]", "", 10)
+	EndIf
 EndFunc`
 };
 

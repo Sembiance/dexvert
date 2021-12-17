@@ -58,8 +58,14 @@ export class image extends Family
 			xlog.warn`Image failed verification due to no width (${meta.width}) or height (${meta.height})`;
 			return false;
 		}
-		
+
 		const isUnsafe = programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
+
+		if(isUnsafe && meta.width===1 && meta.height===1)
+		{
+			xlog.warn`Image failed verification due to being unsafe with a 1x1 resulting image`;
+			return false;
+		}
 
 		if(isUnsafe && meta.opaque && meta.colorCount<=1)
 		{

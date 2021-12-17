@@ -15,7 +15,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> trying every safe program on it and saving results in <outputDirPath>",
 	opts    :
 	{
-		family : {desc : "Restrict programs to this family", hasValue : true}
+		family : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true}
 	},
 	args :
 	[
@@ -47,7 +47,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	if(EXCLUDE_FAMILIES.includes(familyid))
 		return;
 	
-	if(argv.family && familyid!==argv.family)
+	if(argv.family && !argv.family.split(",").includes(familyid))
 		return;
 	
 	if(program.unsafe)

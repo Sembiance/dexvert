@@ -209,6 +209,8 @@ import {recoil2png} from "./image/recoil2png.js";
 programs.recoil2png = recoil2png.create(programs.recoil2png);
 import {wmf2svg} from "./image/wmf2svg.js";
 programs.wmf2svg = wmf2svg.create(programs.wmf2svg);
+import {clipbrdWin2k} from "./image/clipbrdWin2k.js";
+programs.clipbrdWin2k = clipbrdWin2k.create(programs.clipbrdWin2k);
 import {lottie2gif} from "./image/lottie2gif.js";
 programs.lottie2gif = lottie2gif.create(programs.lottie2gif);
 import {drawview} from "./image/drawview.js";

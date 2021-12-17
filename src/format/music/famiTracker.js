@@ -6,5 +6,5 @@ export class famiTracker extends Format
 	ext         = [".fmt"];
 	magic       = ["FamiTracker module"];
 	unsupported = true;
-	notes       = "Can maybe support this by running FamiTracker for windows and seeing if it has a converter: http://famitracker.com/";
+	notes       = "I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...";
 }

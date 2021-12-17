@@ -2289,6 +2289,8 @@ import {stoneTrackerSample} from "./audio/stoneTrackerSample.js";
 formats.stoneTrackerSample = stoneTrackerSample.create(families.audio);
 import {flac} from "./audio/flac.js";
 formats.flac = flac.create(families.audio);
+import {wavPack} from "./audio/wavPack.js";
+formats.wavPack = wavPack.create(families.audio);
 import {maxonMagicSoundSample} from "./audio/maxonMagicSoundSample.js";
 formats.maxonMagicSoundSample = maxonMagicSoundSample.create(families.audio);
 import {amosSamples} from "./audio/amosSamples.js";

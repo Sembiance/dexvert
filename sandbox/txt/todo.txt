@@ -3,41 +3,24 @@
 \--------------/
 
 
+
 /---------------\
 | High Priority |
 \---------------/
-* Add additional conversions with 'libvips' (see CLI conversion) https://www.libvips.org/API/current/using-cli.html
 
-* Add support for these formats:
-  music/renoise			Buy renoise for linux and use that to convert to MP3: https://www.renoise.com/products/renoise   (remove from testdexvert exceptions after)
-  music/svarTracker		https://web.archive.org/web/20160818081932/http://www.svarsoft.com/download/svartracker_1_22_free_inst.exe
-  music/cms  (LOOK at the dosbox source code itself, see how it handles it, probably not easy to extract, so maybe add a recordSound flag to dosbox the same way I do recordVideo flag that will output WAV when ran)
-  music/graoumfTracker.js
-  music/famiTracker.js
-  audio/psf
-  Other music tracker formats?
-
-* Add WavPack support (sox should work) (for sample files: `wget http://www.rarewares.org/wavpack/test_suite.zip`)
-
-* Get the 256C 'fractalImageFormat' files working. Will need to track down a different converter program. There is a photoshop plugin listed on the webpage, could use that with an older photoshop under winxp
-
-* Find better support for Windows Clipboard .clp files, right now they all convert quite poorly
-
-* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
-  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
-  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
-
-* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
-  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage and archive/iconHeaven and others (see unsupported notes)
-  Then process the OS/2 CDs I have
-
-* Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
-  Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
+  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage and archive/iconHeaven and others (see unsupported notes)
+  Then process the OS/2 CDs I have
+
+* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
+  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
+  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
+
 * See about adding these formats:
   https://ftp.modland.com/pub/modules/Ad%20Lib/
   https://ftp.modland.com/pub/modules/Spectrum/
@@ -45,6 +28,9 @@
 * The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
   I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
   If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
+
+* Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
+  Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
 
@@ -55,7 +41,7 @@ Then the conversion app would have a much higher chance at being able to convert
 I could then create a retryFiles.js that would find all items and files that have processed false that match a given criteria (magic probably) and the re-run processFile for that item (which would likely mean breaking processFile fun into its on file, that shouldn't be too hard.)
 There are likely to be filename collisions. I should also preserve those from the original software over those just found in the wild
 
-* Create a NodeJS based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
+* Create a deno based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   See samples in: sandbox/samples/mail_news/
 

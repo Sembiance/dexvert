@@ -7,6 +7,7 @@ export class macromediaDirector extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Macromedia\\Director MX 2004\\Director.exe";
 	args     = r => [r.inFile()];
+	notes    = "Sometimes a file can fail to copy over if there is severe CPU load on the host system. Adding more delays would slow down extraction too much. Adding logic to check that things are ready is probably the best approach, but meh.";
 
 	// NOTE!! Even though we actually copy over the auxFiles xtras directory into WinXP, we DO NOT actually put the files where they need to go to function:
 	// C:\Program Files\Macromedia\Director MX 2004\Configuration\Xtras

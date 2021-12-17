@@ -1,5 +1,5 @@
 import {DexFile} from "../../src/DexFile.js";
-import {path, assert, assertStrictEquals, assertThrowsAsync, base64Encode, dateFormat} from "std";
+import {path, assert, assertStrictEquals, assertRejects, base64Encode, dateFormat} from "std";
 import {fileUtil, runUtil} from "xutil";
 
 Deno.test("create", async () =>
@@ -246,7 +246,7 @@ Deno.test("rename", async () =>
 
 	// existing
 	await Deno.copyFile(tmpPath, path.join(tmpDir, "test.png"));
-	assertThrowsAsync(async () => await a.rename("test.png"));
+	assertRejects(async () => await a.rename("test.png"));
 	await a.rename("test.png", {autoRename : true});
 	assertStrictEquals(a.base, "test_0.png");
 	await a.rename(tmpFilename);

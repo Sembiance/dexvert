@@ -6,6 +6,7 @@ import {Program} from "../Program.js";
 import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
+	cmdid   : "dexvert",
 	version : "1.0.0",
 	desc    : "Processes <inputFilePath> converting or extracting files into <outputDirPath>",
 	opts    :
@@ -86,8 +87,8 @@ async function handleDexState(lastTry)
 	return false;
 }
 
-const inputFilePath = await DexFile.create(argv.inputFilePath);
-dexState = await dexvert(inputFilePath, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
+const inputFile = await DexFile.create(argv.inputFilePath);
+dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
 await handleDexState(argv.dontTransform);
 
 // now we try trimming all trailing 0x00 and 0x1A bytes from files, as these often appear for text files
@@ -98,9 +99,9 @@ for(const [i, transformTypeRaw] of Object.entries(TRANSFORM_TYPES))
 {
 	const transformDirPath = await fileUtil.genTempPath();
 	await Deno.mkdir(transformDirPath);
-	const transformFilePath = path.join(transformDirPath, inputFilePath.base);
+	const transformFilePath = path.join(transformDirPath, inputFile.base);
 	const transformType = Array.isArray(transformTypeRaw) ? transformTypeRaw[0] : transformTypeRaw;
-	await runUtil.run(Program.binPath(`${transformType}/${transformType}`), [...(Array.isArray(transformTypeRaw) ? transformTypeRaw.slice(1) : []), inputFilePath.absolute, transformFilePath]);
+	await runUtil.run(Program.binPath(`${transformType}/${transformType}`), [...(Array.isArray(transformTypeRaw) ? transformTypeRaw.slice(1) : []), inputFile.absolute, transformFilePath]);
 	if(!(await fileUtil.exists(transformFilePath)))
 	{
 		xlog.debug`No transform result for ${Array.force(transformTypeRaw).join(" ")}`;

@@ -35,8 +35,6 @@ const FLEX_SIZE_PROGRAMS =
 	// Produces different data each time
 	darktable_cli    : 0.1,
 	doomMUS2mp3      : 0.1,
-	EXE2SWFExtractor : 1.0,
-	ffdec            : 1.0,
 	fontforge        : 0.1,
 	sidplay2         : 0.1,
 	soundFont2tomp3  : 0.1,
@@ -47,6 +45,10 @@ const FLEX_SIZE_FORMATS =
 {
 	archive :
 	{
+		// different each time due to way it generates frames
+		swf    : 5,
+		swfEXE : 5,
+
 		// the PBMs generated are different each time
 		hypercard : 0.1
 	},
@@ -58,7 +60,7 @@ const FLEX_SIZE_FORMATS =
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		// So we just exempt all of the document category
-		"*" : 0.1
+		"*" : 0.2
 	},
 	image :
 	{
@@ -84,6 +86,7 @@ const FLEX_SIZE_FORMATS =
 	}
 };
 
+// if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
 const IGNORE_SIZE_FILEPATHS =
 [
 	/scripts\/.+\.as$/i				// archive/swf/cookie-hamster often produces very different script/**/*.as files

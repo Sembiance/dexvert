@@ -1,9 +1,9 @@
 import {FileSet} from "../../src/FileSet.js";
 import {DexFile} from "../../src/DexFile.js";
 import {fileUtil} from "xutil";
-import {path, base64Encode, assertStrictEquals, assertThrowsAsync, assertEquals, assert} from "std";
+import {path, base64Encode, assertStrictEquals, assertRejects, assertEquals, assert} from "std";
 
-const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files":{"input":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/txt.b","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b","base":"txt.b","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"txt","ext":".b","preExt":".txt","preName":"b","isFile":true,"isDirectory":false,"isSymlink":false,"size":8,"ts":1635685484995},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/third","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third","base":"third","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"third","ext":"","preExt":"","preName":"third","isFile":false,"isDirectory":true,"isSymlink":false,"size":4096,"ts":1635685489475}],"other":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/symlinkFile","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile","base":"symlinkFile","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"symlinkFile","ext":"","preExt":"","preName":"symlinkFile","isFile":false,"isDirectory":false,"isSymlink":true,"size":14,"ts":1635685795866},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/c.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt","base":"c.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"c","ext":".txt","preExt":".c","preName":"txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":10,"ts":1635685592959}]}}`; // eslint-disable-line max-len
+const fileSetJSON = `{"root":"/mnt/compendium/DevLab/dexvert/test/files","files":{"input":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635688339000},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/txt.b","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b","base":"txt.b","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"txt","ext":".b","preExt":".txt","preName":"b","isFile":true,"isDirectory":false,"isSymlink":false,"size":8,"ts":1635685484995},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/third","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third","base":"third","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"third","ext":"","preExt":"","preName":"third","isFile":false,"isDirectory":true,"isSymlink":false,"size":4096,"ts":1635685489475}],"other":[{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/symlinkFile","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile","base":"symlinkFile","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir","name":"symlinkFile","ext":"","preExt":"","preName":"symlinkFile","isFile":false,"isDirectory":false,"isSymlink":true,"size":14,"ts":1635685795866},{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"subDir/more_sub/c.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt","base":"c.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub","name":"c","ext":".txt","preExt":".c","preName":"txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":10,"ts":1635685592959}]}}`; // eslint-disable-line max-len
 
 Deno.test("addFile", async () =>
 {
@@ -30,8 +30,8 @@ Deno.test("addFile", async () =>
 		assertStrictEquals(o.files.input[2].isSymlink, true);
 	});
 
-	assertThrowsAsync(async () => await a.add(await DexFile.create("/mnt/compendium/DevLab/dexvert/.gitignore")));
-	assertThrowsAsync(async () => await a.add(await DexFile.create("whatever", "/mnt/compendium/DevLab/dexvert/.gitignore")));
+	assertRejects(async () => await a.add(await DexFile.create("/mnt/compendium/DevLab/dexvert/.gitignore")));
+	assertRejects(async () => await a.add(await DexFile.create("whatever", "/mnt/compendium/DevLab/dexvert/.gitignore")));
 
 	await a.add("input", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt");
 	assertStrictEquals(a.files.input.length, 5);
@@ -228,22 +228,22 @@ Deno.test("rsyncTo", async () =>
 	await Deno.mkdir(tmpDirPath);
 	await a.rsyncTo(tmpDirPath);
 	assertEquals(await fileUtil.tree(tmpDirPath), [
+		"some.big.txt.file.txt",
 		"subDir",
 		"subDir/symlinkFile",
+		"subDir/txt.b",
 		"subDir/more_sub",
 		"subDir/more_sub/c.txt",
-		"subDir/more_sub/third",
-		"subDir/txt.b",
-		"some.big.txt.file.txt"].map(v => path.join(tmpDirPath, v)));
+		"subDir/more_sub/third"].map(v => path.join(tmpDirPath, v)));
 	await fileUtil.unlink(tmpDirPath, {recursive : true});
 
 	await Deno.mkdir(tmpDirPath);
 	let b = await a.rsyncTo(tmpDirPath, {type : "other"});
 	assertEquals(await fileUtil.tree(tmpDirPath), [
 		"subDir",
+		"subDir/symlinkFile",
 		"subDir/more_sub",
-		"subDir/more_sub/c.txt",
-		"subDir/symlinkFile"].map(v => path.join(tmpDirPath, v)));
+		"subDir/more_sub/c.txt"].map(v => path.join(tmpDirPath, v)));
 	assert(!b.files.input);
 	assertStrictEquals(b.files.other.length, 2);
 	assertStrictEquals(b.all.length, 2);
@@ -252,9 +252,9 @@ Deno.test("rsyncTo", async () =>
 	await Deno.mkdir(tmpDirPath);
 	b = await a.rsyncTo(tmpDirPath, {type : "other", relativeFrom : "/mnt/compendium/DevLab/dexvert/test/files/subDir"});
 	assertEquals(await fileUtil.tree(tmpDirPath), [
+		"symlinkFile",
 		"more_sub",
-		"more_sub/c.txt",
-		"symlinkFile"].map(v => path.join(tmpDirPath, v)));
+		"more_sub/c.txt"].map(v => path.join(tmpDirPath, v)));
 	await fileUtil.unlink(tmpDirPath, {recursive : true});
 	assertStrictEquals(b.other.rel, "symlinkFile");
 	assertStrictEquals(b.other.isSymlink, true);

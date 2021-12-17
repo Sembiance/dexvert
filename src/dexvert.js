@@ -9,7 +9,7 @@ import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, asId, xlog=xu.xLog()}={})
 {
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
@@ -29,11 +29,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 		if(!formats[asFormatid])
 			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);
 		const asFormatFormat = formats[asFormatid];
-		const asId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : asFormatFormat.name, matchType : "magic", confidence : 100};
+		const asFormatId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : asFormatFormat.name, matchType : "magic", confidence : 100};
 		for(const k of ["ext", "unsupported"])
 		{
 			if(asFormatFormat[k])
-				asId[k==="ext" ? "extensions" : k] = asFormatFormat[k];
+				asFormatId[k==="ext" ? "extensions" : k] = asFormatFormat[k];
 		}
 
 		// Since we are manually creating our Identification, we will need to manually call auxFiles
@@ -43,11 +43,16 @@ export async function dexvert(inputFile, outputDir, {asFormat, xlog=xu.xLog()}={
 			const otherDirs = await Promise.all((await fileUtil.tree(inputFile.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
 			const auxFiles = await asFormatFormat.auxFiles(inputFile, otherFiles, otherDirs);
 			if(auxFiles)
-				asId.auxFiles = auxFiles;
+				asFormatId.auxFiles = auxFiles;
 		}
 
-		ids.push(Identification.create(asId));
+		ids.push(Identification.create(asFormatId));
 		xlog.warn`Processing ${inputFile.pretty()} explicitly as format:\n\t${ids[0].pretty()}`;
+	}
+	else if(asId)
+	{
+		ids.push(asId);
+		xlog.warn`Processing ${inputFile.pretty()} explicitly with identification:\n\t${asId.pretty()}`;
 	}
 	else
 	{

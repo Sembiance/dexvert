@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Make a src/app/dexbrute.js that will run a given format for each and every program with a custom output path like /output/programid/ and will remove empty directories and output a final result too of what worked and what didn't
-  Test it with like a regular jpg file, then a pcx file, then maybe an archive
 
 
 /---------------\

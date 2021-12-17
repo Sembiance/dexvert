@@ -38,7 +38,6 @@ const FLEX_SIZE_PROGRAMS =
 	EXE2SWFExtractor : 1.0,
 	ffdec            : 1.0,
 	fontforge        : 0.1,
-	hlp2pdf          : 10,
 	sidplay2         : 0.1,
 	soundFont2tomp3  : 0.1,
 	zxtune123        : 0.1
@@ -53,7 +52,8 @@ const FLEX_SIZE_FORMATS =
 	},
 	document :
 	{
-		// word DOC conversion sometimes differs WILDLY, haven't figured out why
+		// word DOC and hlp conversion sometimes differs WILDLY, haven't figured out why
+		hlp     : 50,
 		wordDoc : 50,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data

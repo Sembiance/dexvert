@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {printUtil} from "xutil";
-import {validateClass, validateObject} from "./validate.js";
+import {validateClass, validateObject} from "validator";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Format} from "./Format.js";

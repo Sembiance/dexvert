@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {validateClass} from "./validate.js";
+import {validateClass} from "validator";
 
 export class Family
 {
@@ -27,10 +27,5 @@ export class Family
 	serialize()
 	{
 		return this.familyid;
-	}
-
-	static deserialize(v)
-	{
-		return this.families[v];
 	}
 }

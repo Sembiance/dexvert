@@ -59,4 +59,5 @@ for(const serverid of SERVER_ORDER)
 await Deno.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
 
-await delay(xu.YEAR);	// gonna run into an issue if it runs longer than 1 year rofl
+while(true)
+	await delay(xu.MONTH);

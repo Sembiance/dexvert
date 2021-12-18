@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {validateClass} from "./validate.js";
+import {validateClass} from "validator";
 
 export class Server
 {
@@ -10,7 +10,8 @@ export class Server
 	static create(xlog)
 	{
 		const server = new this();
-		server.xlog = xlog;
+		server.xlog = xlog.clone();
+		server.xlog.mapper = v => `${xu.colon(fg.peach(server.serverid))}${v}`;
 
 		validateClass(server, {
 			// required
@@ -22,10 +23,5 @@ export class Server
 		});
 
 		return server;
-	}
-
-	log(strs, ...vals)
-	{
-		this.xlog.info([`${xu.colon(fg.peach(this.constructor.name))}${strs[0]}`, ...strs.slice(1)], ...vals);
 	}
 }

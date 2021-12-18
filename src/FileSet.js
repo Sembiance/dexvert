@@ -112,15 +112,6 @@ export class FileSet
 		return newFileSet.changeRoot(targetRoot, {keepRel : true});
 	}
 
-	// deserializes an object into a Dexfile
-	static deserialize(o)
-	{
-		const fileSet = new this();
-		fileSet.root = o.root;
-		fileSet.files = Object.fromEntries(Object.entries(o.files).map(([k, v]) => ([k, v.map(dexFile => DexFile.deserialize(dexFile))])));
-		return fileSet;
-	}
-
 	// converts this to a serilizable object
 	serialize()
 	{

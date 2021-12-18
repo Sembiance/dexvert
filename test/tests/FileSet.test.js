@@ -151,13 +151,6 @@ Deno.test("clone", async () =>
 	assertStrictEquals(b.all.length, 2);
 });
 
-Deno.test("deserialize", () =>
-{
-	const a = FileSet.deserialize(JSON.parse(fileSetJSON));	// eslint-disable-line no-restricted-syntax
-	assertStrictEquals(base64Encode(a.pretty()), "RmlsZVNldCAbWzM2bSgbWzBtcm9vdCAbWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbMzZtKRtbMG0gaGFzIBtbMzNtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzkzbUQbWzBtIBtbOTdtICAgICAgG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9tb3JlX3N1Yi90aGlyZBtbMG0KCRtbOTdtb3RoZXI6IBtbMG0bWzk2bUwbWzBtIBtbOTdtICAgICAgG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9zeW1saW5rRmlsZRtbMG0KCRtbOTdtb3RoZXI6IBtbMG0bWzM4OzU7MjUwbUYbWzBtIBtbOTdtICAgMTBiG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9tb3JlX3N1Yi9jLnR4dBtbMG0=");	// eslint-disable-line max-len
-	assertStrictEquals(JSON.stringify(a.serialize()), fileSetJSON);
-});
-
 Deno.test("pretty", async () =>
 {
 	const a = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [

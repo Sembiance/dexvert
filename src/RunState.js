@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {validateClass} from "./validate.js";
+import {validateClass} from "validator";
 import {FileSet} from "./FileSet.js";
 import {fileUtil} from "xutil";
 import {path} from "std";

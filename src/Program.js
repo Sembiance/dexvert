@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
-import {validateClass, validateObject} from "./validate.js";
+import {validateClass, validateObject} from "validator";
 import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";

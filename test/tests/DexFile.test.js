@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {DexFile} from "../../src/DexFile.js";
 import {path, assert, assertStrictEquals, assertRejects, base64Encode, dateFormat} from "std";
 import {fileUtil, runUtil} from "xutil";
@@ -293,23 +294,4 @@ Deno.test("setTS", async () =>
 	assertStrictEquals(new Date(a.ts).getDate(), 4);
 	assertStrictEquals(dateFormat(new Date(a.ts), "yyyy-MM-dd"), "1978-07-04");
 	await fileUtil.unlink(tmpPath);
-});
-
-
-Deno.test("deserialize", () =>
-{
-	const a = DexFile.deserialize(JSON.parse(`{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635685469027}`));	// eslint-disable-line max-len, no-restricted-syntax
-	assertStrictEquals(a.root, "/mnt/compendium/DevLab/dexvert/test/files");
-	assertStrictEquals(a.absolute, "/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
-	assertStrictEquals(a.base, "some.big.txt.file.txt");
-	assertStrictEquals(a.dir, "/mnt/compendium/DevLab/dexvert/test/files");
-	assertStrictEquals(a.name, "some.big.txt.file");
-	assertStrictEquals(a.ext, ".txt");
-	assertStrictEquals(a.isFile, true);
-	assertStrictEquals(a.isDirectory, false);
-	assertStrictEquals(a.isSymlink, false);
-	assertStrictEquals(a.size, 6);
-	assertStrictEquals(a.ts, 1_635_685_469_027);
-	assertStrictEquals(a.preExt, ".some");
-	assertStrictEquals(a.preName, "big.txt.file.txt");
 });

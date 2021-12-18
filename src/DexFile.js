@@ -109,14 +109,6 @@ export class DexFile
 		return Object.fromEntries(Object.entries(this));
 	}
 
-	// deserializes an object into a Dexfile
-	static deserialize(o)
-	{
-		const dexfile = new this();
-		Object.assign(dexfile, o);
-		return dexfile;
-	}
-
 	// returns a pretty string representing this file
 	pretty(prefix="")
 	{

@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {validateClass} from "./validate.js";
+import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
 
 export class Identification

@@ -13,23 +13,23 @@ export class tensor extends Server
 		const SRC_DIR = path.join(xu.dirname(import.meta), "../../tensor");
 		const WIP_DIR = TENSORSERV_PATH;
 
-		this.log`Stopping previous tensor server docker...`;
+		this.xlog.info`Stopping previous tensor server docker...`;
 		await runUtil.run("docker", ["stop", "dexvert-tensor"]);
 
-		this.log`Removing existing tensor wip directories...`;
+		this.xlog.info`Removing existing tensor wip directories...`;
 		await fileUtil.unlink(WIP_DIR, {recursive : true}).catch(() => {});
 
-		this.log`Creating tensor wip directories...`;
+		this.xlog.info`Creating tensor wip directories...`;
 		for(const name of ["__pycache__", "garbage", "tmp"])
 			await Deno.mkdir(path.join(WIP_DIR, name), {recursive : true});
 
-		this.log`Copying tensor files...`;
+		this.xlog.info`Copying tensor files...`;
 		for(const name of ["tensorServer.sh", "tensorServer.py", "TensorModel.py", "garbage/model"])
 			await fs.copy(path.join(SRC_DIR, Array.isArray(name) ? name[0] : name), path.join(WIP_DIR, Array.isArray(name) ? name[1] : name));
 
-		this.log`Running tensor server docker...`;
+		this.xlog.info`Running tensor server docker...`;
 		const dockerArgs = ["run", "--name", "dexvert-tensor", "--gpus", "all", "--rm", "-p", `${TENSORSERV_HOST}:${TENSORSERV_PORT}:${TENSORSERV_PORT}`, "-v", `${WIP_DIR}:${WIP_DIR}`, "-w", WIP_DIR, "tensorflow/tensorflow:latest-gpu", "./tensorServer.sh"];
-		await runUtil.run("docker", dockerArgs, {verbose : true, detached : true, liveOutput : true, cwd : WIP_DIR});
+		await runUtil.run("docker", dockerArgs, {verbose : true, detached : true, stdoutcb : line => this.xlog.info`${line}`, stderrcb : line => this.xlog.warn`${line}`, cwd : WIP_DIR});
 	}
 
 	async status()

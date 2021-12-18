@@ -62,7 +62,7 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.info`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
 
@@ -77,7 +77,7 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.log`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.info`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
 
@@ -196,7 +196,7 @@ export class qemu extends Server
 		if(instance.debug)
 			qemuRunOptions.env = {DISPLAY : (Deno.hostname()==="crystalsummit" ? ":0.1" : ":0")};
 
-		this.log`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
+		this.xlog.info`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
 
 		instance.qemuRunOptions = qemuRunOptions;
 		instance.qemuArgs = qemuArgs;
@@ -207,46 +207,46 @@ export class qemu extends Server
 		{
 			instance.ready = false;
 			instance.p = null;
-			this.log`${osid} #${instanceid} has exited with status ${v}`;
+			this.xlog.warn`${osid} #${instanceid} has exited with status ${v}`;
 		});
 
-		this.log`${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
+		this.xlog.info`${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
 		await Deno.writeTextFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
 	}
 
 	// Called when the QEMU has fully booted and is ready to received files
 	async readyOS(instance)
 	{
-		this.log`${instance.osid} #${instance.instanceid} declared itself ready!`;
+		this.xlog.info`${instance.osid} #${instance.instanceid} declared itself ready!`;
 		if(instance.inOutType==="mount")
 		{
-			this.log`${instance.osid} #${instance.instanceid} mounting in/out...`;
+			this.xlog.info`${instance.osid} #${instance.instanceid} mounting in/out...`;
 			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			for(const v of ["in", "out"])
 				await runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)]);
 		}
 
-		this.log`${instance.osid} #${instance.instanceid} fully ready! (VNC ${5900 + instance.vncPort})`;
+		this.xlog.info`${instance.osid} #${instance.instanceid} fully ready! (VNC ${5900 + instance.vncPort})`;
 		instance.ready = true;
 	}
 
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
-		this.log`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
+		this.xlog.info`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-		this.log`${body.osid} #${instance.instanceid} finished request`;
+		this.xlog.info`${body.osid} #${instance.instanceid} finished request`;
 		if(instance.runDelay)
 		{
-			this.log`${body.osid} delaying ${(instance.runDelay/xu.SECOND).secondsAsHumanReadable()} due to runInterval setting`;
+			this.xlog.info`${body.osid} delaying ${(instance.runDelay/xu.SECOND).secondsAsHumanReadable()} due to runInterval setting`;
 			await delay(instance.runDelay);
 		}
 		instance.busy = false;
 
 		if(inOutErr)
-			this.log`${instance.osid} ERROR ${inOutErr}`;
+			this.xlog.error`${instance.osid} ERROR ${inOutErr}`;
 
 		reply(new Response(inOutErr ? inOutErr.toString() : "ok"));
 	}
@@ -268,51 +268,51 @@ export class qemu extends Server
 
 	async start()
 	{
-		this.log`Unmounting previous mounts...`;
+		this.xlog.info`Unmounting previous mounts...`;
 		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
 
-		this.log`Stopping existing QEMU procs...`;
+		this.xlog.info`Stopping existing QEMU procs...`;
 		await runUtil.run("sudo", ["killall", "--wait", "qemu-system-x86_64", "qemu-system-i386", "qemu-system-ppc"]);
 
-		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT);
+		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
 		this.webServer.add("/qemuReady", async request =>
 		{
 			const u = new URL(request.url);
 			const body = Object.fromEntries(["osid", "ip"].map(k => ([k, u.searchParams.get(k)])));
-			this.log`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
+			this.xlog.info`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
 			await this.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
 			return new Response("ok");
 		});
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.log`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.length})`;
+			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.length})`;
 			RUN_QUEUE.push({body, request, reply});
 		}, {detached : true, method : "POST"});
 		await this.webServer.start();
 
-		this.log`Finding old QEMU instances...`;
+		this.xlog.info`Finding old QEMU instances...`;
 		const oldQEMUInstanceDirPaths = await fileUtil.tree(QEMU_INSTANCE_DIR_PATH, {depth : 1, nofile : true, regex : /-\d+$/});
 
-		this.log`Deleting ${oldQEMUInstanceDirPaths.length} previous QEMU instances...`;
+		this.xlog.info`Deleting ${oldQEMUInstanceDirPaths.length} previous QEMU instances...`;
 		for(const oldQEMUInstanceDirPath of oldQEMUInstanceDirPaths)
 			await fileUtil.unlink(oldQEMUInstanceDirPath, {recursive : true});
 
 		for(const osid of Object.keys(OS))
 			await Deno.mkdir(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
 
-		this.log`Ensuring img files are up to date...`;
+		this.xlog.info`Ensuring img files are up to date...`;
 		for(const [osid, osInfo] of Object.entries(OS))
 		{
 			for(const imgFilePath of ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename)))
 			{
 				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
-				this.log`Rsyncing to: ${imgDestFilePath}`;
+				this.xlog.info`Rsyncing to: ${imgDestFilePath}`;
 				await runUtil.run("rsync", ["-a", imgFilePath, imgDestFilePath]);
 			}
 		}
 
-		this.log`Starting instances...`;
+		this.xlog.info`Starting instances...`;
 		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)));
 
 		this.serversLaunched = true;
@@ -327,15 +327,15 @@ export class qemu extends Server
 
 	async stopOS(instance)
 	{
-		this.log`Stopping ${instance.osid} #${instance.instanceid}...`;
+		this.xlog.info`Stopping ${instance.osid} #${instance.instanceid}...`;
 		if(instance.inOutType==="mount")
 		{
-			this.log`${instance.osid} #${instance.instanceid} unmounting in/out...`;
+			this.xlog.info`${instance.osid} #${instance.instanceid} unmounting in/out...`;
 			for(const v of ["in", "out"])
 				await runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)]);
 		}
 
-		this.log`${instance.osid} #${instance.instanceid} killing qemu child process...`;
+		this.xlog.info`${instance.osid} #${instance.instanceid} killing qemu child process...`;
 		if(instance.p)
 			instance.p.kill("SIGTERM");
 	}

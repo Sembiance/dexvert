@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {Family} from "./Family.js";
 import {Program} from "./Program.js";
-import {validateClass} from "./validate.js";
+import {validateClass} from "validator";
 
 export class Format
 {

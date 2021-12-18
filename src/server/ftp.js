@@ -12,10 +12,10 @@ export class ftp extends Server
 
 	async startVSFTPD()
 	{
-		this.log`Stopping existing VSFTPD procs...`;
+		this.xlog.info`Stopping existing VSFTPD procs...`;
 		await runUtil.run("sudo", ["killall", "--wait", "vsftpd"]);
 
-		this.log`Starting VSFTPD...`;
+		this.xlog.info`Starting VSFTPD...`;
 
 		const {p} = await runUtil.run("vsftpd", [path.join(xu.dirname(import.meta), "..", "..", "ftp", "amigappc-vsftpd.conf")], {detached : true});
 		this.p = p;
@@ -26,7 +26,7 @@ export class ftp extends Server
 			if(this.stopping)
 				return;
 
-			this.log`VSFTPD server has stopped! Restarting...`;
+			this.xlog.warn`VSFTPD server has stopped! Restarting...`;
 			await this.startVSFTPD();
 		});
 	}
@@ -46,7 +46,7 @@ export class ftp extends Server
 
 	async stop()
 	{
-		this.log`Stopping VSFTPD...`;
+		this.xlog.info`Stopping VSFTPD...`;
 		
 		this.stopping = true;
 

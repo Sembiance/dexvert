@@ -32,8 +32,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	xlog.debug`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
 
-	const otherFiles = (await Promise.all((await fileUtil.tree(f.root, {depth : 1, nodir : true})).map(v => DexFile.create(v)))).filter(file => file.absolute!==f.input.absolute);
-	const otherDirs = await Promise.all((await fileUtil.tree(f.root, {depth : 1, nofile : true})).map(v => DexFile.create(v)));
+	const otherFiles = (await (await fileUtil.tree(f.root, {depth : 1, nodir : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file && file.absolute!==f.input.absolute);
+	const otherDirs = (await (await fileUtil.tree(f.root, {depth : 1, nofile : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);
 
 	// find the largest byteChecks check and read that many bytes in
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();

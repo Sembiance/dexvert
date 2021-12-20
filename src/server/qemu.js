@@ -271,7 +271,7 @@ export class qemu extends Server
 		this.xlog.info`Unmounting previous mounts...`;
 		await runUtil.run(path.join(QEMU_DIR_PATH, "unmountDeadMounts.sh"), []);
 
-		this.xlog.info`Stopping existing QEMU procs...`;
+		this.xlog.info`Stopping all existing QEMU procs...`;
 		await runUtil.run("sudo", ["killall", "--wait", "qemu-system-x86_64", "qemu-system-i386", "qemu-system-ppc"]);
 
 		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});

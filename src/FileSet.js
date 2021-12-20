@@ -101,15 +101,27 @@ export class FileSet
 		if(relativeFrom)
 			newFileSet.changeRoot(relativeFrom);
 
+		const missingFilePaths = [];
 		await (type ? (this.files[type] || []) : this.all).parallelMap(async file =>
 		{
 			const fileRel = relativeFrom ? path.relative(relativeFrom, file.absolute) : file.rel;
 			if(fileRel.includes("/"))
 				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
-			await runUtil.run("rsync", ["-a", path.join(relativeFrom || file.root, fileRel), path.join(targetRoot, file.isDirectory ? path.dirname(fileRel) : fileRel)]);
+			const targetPath = path.join(targetRoot, file.isDirectory ? path.dirname(fileRel) : fileRel);
+			await runUtil.run("rsync", ["-a", path.join(relativeFrom || file.root, fileRel), targetPath]);
+
+			if(!(await fileUtil.exists(targetPath)))
+				missingFilePaths.push(targetPath);
 		});
 
-		return newFileSet.changeRoot(targetRoot, {keepRel : true});
+		newFileSet.changeRoot(targetRoot, {keepRel : true});
+
+		// if rsync didn't copy over any files for whatever reason we want to remove it from the newFileSet
+		// this can happen with retromission and 'auxFiles/otherDirs' as it creates and deletes other files in parallel, so can't depends on otherFiles/otherDirs to still be there
+		if(missingFilePaths.length>0)
+			newFileSet.files.all.filterInPlace(v => !missingFilePaths.includes(v.absolute));
+
+		return newFileSet;
 	}
 
 	// converts this to a serilizable object

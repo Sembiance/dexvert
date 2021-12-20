@@ -82,6 +82,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, xlog=xu.xLo
 			await originalInputFileSet.addAll("aux", id.auxFiles);
 
 		// copy over our files to cwd, this avoids issues with symlinks/file locks/programs modifying original source (though this latter case is only covered once, so don't do that heh)
+		// NOTE! This rsync may produce FEWER files than we asked it to copy over. This can happy with the 'auxFiles' as an external process may have deleted an otherFile/otherDir
 		const f = await originalInputFileSet.rsyncTo(cwd);
 
 		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters

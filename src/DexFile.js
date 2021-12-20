@@ -14,16 +14,16 @@ export class DexFile
 		dexFile.transformed = Object.isObject(o) && o.transformed;
 
 		dexFile.calcProps();
-		
-		if(await fileUtil.exists(dexFile.absolute))
-			await dexFile.calcStats();
+		await dexFile.calcStats();
 
 		return dexFile;
 	}
 
 	async calcStats()
 	{
-		const fileInfo = await Deno.lstat(this.absolute);
+		const fileInfo = await Deno.lstat(this.absolute).catch(() => {});	// we used to check if it exists first, but it could disappear between checking and lstat, so now we just try to lstat and fail gracefully
+		if(!fileInfo)
+			return;
 		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { this[n] = fileInfo[n]; });
 		this.ts = fileInfo.mtime.getTime();
 	}

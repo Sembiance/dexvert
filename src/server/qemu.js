@@ -274,7 +274,7 @@ export class qemu extends Server
 		this.xlog.info`Stopping all existing QEMU procs...`;
 		await runUtil.run("sudo", ["killall", "--wait", "qemu-system-x86_64", "qemu-system-i386", "qemu-system-ppc"]);
 
-		this.webServer = WebServer.create(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
+		this.webServer = new WebServer(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
 		this.webServer.add("/qemuReady", async request =>
 		{
 			const u = new URL(request.url);

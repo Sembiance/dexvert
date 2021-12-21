@@ -283,14 +283,13 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	});
 
 	// Now sort by confidence
-	// First sort by where it's from, with dexvert being at the top
-	// Next by confidence, higher the better
 	// Next, if the confidence is the same, extMatches have a higher priority
 	// Finally sort based on family type
 	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family)], [true, false, false]);
 
 	matches.push(...matchesByFamily.fallback);
 
+	// Here we stick the 'dexvert' matches ahead of other 'detections'
 	const result = [
 		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),	// eslint-disable-line max-len
 		...detections.map(({from, confidence, value, extensions}) => Identification.create({from, confidence, magic : value, extensions}))

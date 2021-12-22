@@ -366,6 +366,8 @@ export class Program
 							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
 							if(!xlog.atLeast("trace"))
 							{
+								await chainResult.unlinkHomeOut();
+								
 								xlog.info`Deleting ${inputFiles.length} chain input files!`;
 								for(const inputFile of inputFiles)
 									await f.remove("new", inputFile, {unlink : true});

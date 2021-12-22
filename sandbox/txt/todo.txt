@@ -10,7 +10,7 @@
 /---------------\
 | High Priority |
 \---------------/
-
+* Consider updating IsoBuster to 4.9: https://www.isobuster.com/news/isobuster_4.9_release_notes
 
 
 /-----------------\

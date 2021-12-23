@@ -148,6 +148,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const hasAnyMatch = (extMatch || filenameMatch || fileSizeMatch || magicMatch);
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
+			if(format.website)
+				baseMatch.website = format.website;
 
 			// some formats require some sort of other check to ensure the file is valid
 			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections)))
@@ -291,7 +293,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	// Here we stick the 'dexvert' matches ahead of other 'detections'
 	const result = [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt})),	// eslint-disable-line max-len
+		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website})),	// eslint-disable-line max-len
 		...detections.map(({from, confidence, value, extensions}) => Identification.create({from, confidence, magic : value, extensions}))
 	];
 

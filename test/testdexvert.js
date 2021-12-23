@@ -271,7 +271,7 @@ async function testSample(sampleFilePath)
 		if(misingFiles.length>0)
 			return await fail(`Some reported output files are missing from disk: ${misingFiles.join(" ")}`);
 
-		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("sha1", absolute)}]));
+		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("SHA-1", absolute)}]));
 	}
 	result.meta = resultFull?.phase?.meta || {};
 	if(resultFull?.phase)

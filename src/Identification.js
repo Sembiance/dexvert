@@ -18,6 +18,7 @@ export class Identification
 			// optional
 			family           : {type : "string"},	// the familyid of this identification
 			formatid         : {type : "string"},	// the formatid of the identification
+			website          : {type : "string"},	// the website for this formatid
 			extensions       : {type : ["string"], allowEmpty : true},	// list of extensions that are expected with this type of identification
 			matchType        : {type : "string", enum : ["magic", "filename", "ext", "fileSize", "fallback"]}, 	// the type of identification match
 			unsupported      : {type : "boolean"},	// if true, this format is unsupported

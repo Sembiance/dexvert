@@ -10,7 +10,7 @@ export class zipInfo extends Program
 	{
 		// Check to see if we have an archive comment
 		if(r.stdout.trim().length>0 && !r.stdout.includes("End-of-central-directory signature not found"))
-			r.meta.zip = {comment : r.stdout};	// Don't trim, to preserve whitespace
+			r.meta.comment = r.stdout;	// Don't trim, to preserve whitespace
 	};
 	renameOut = false;
 }

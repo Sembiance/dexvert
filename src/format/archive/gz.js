@@ -6,8 +6,8 @@ export class gz extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/GZ";
 	ext          = [".gz", ".gzip", ".z"];
 	keepFilename = true;
-	magic        = ["gzip compressed data", "GZipped data", "UNIX compressed data", "compress'd data"];
+	magic        = ["gzip compressed data", "GZipped data", "UNIX compressed data", "compress'd data", "gzip: Deflate"];
 	
 	// sevenZip will properly set timestamps. UniExtract will fully extract, but this is better than not handling at all
-	converters   = ["sevenZip", "gunzip", "UniExtract"];
+	converters   = ["sevenZip", "gunzip", "ancient", "UniExtract"];
 }

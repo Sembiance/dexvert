@@ -463,6 +463,8 @@ import {perlTextCheck} from "./detect/perlTextCheck.js";
 programs.perlTextCheck = perlTextCheck.create(programs.perlTextCheck);
 import {dexmagic} from "./detect/dexmagic.js";
 programs.dexmagic = dexmagic.create(programs.dexmagic);
+import {ancientID} from "./detect/ancientID.js";
+programs.ancientID = ancientID.create(programs.ancientID);
 import {amosbank} from "./audio/amosbank.js";
 programs.amosbank = amosbank.create(programs.amosbank);
 import {vgmstream} from "./audio/vgmstream.js";

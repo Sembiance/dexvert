@@ -3,7 +3,7 @@ import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
 
-export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck"];
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID"];
 
 export const TEXT_MAGIC_STRONG =
 [
@@ -42,6 +42,7 @@ const WEAK_VALUES =
 	/^DIY-Thermocam raw data/,
 	/^Dyalog APL/,
 	/^Generic INItialization configuration/,
+	/^GTA script/,
 	/^Hitachi SH/,
 	/^HTML document/,
 	/^iAPX 286 executable/,

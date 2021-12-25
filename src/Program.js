@@ -555,7 +555,7 @@ export class Program
 			});
 		}
 
-		if(progOptions.autoUnlink)
+		if(progOptions.autoUnlink && !(fRaw instanceof FileSet))
 			await programResult.unlinkHomeOut();
 
 		return programResult;

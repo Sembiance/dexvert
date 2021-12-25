@@ -10,6 +10,8 @@
 /---------------\
 | High Priority |
 \---------------/
+* document/wildcatWCX files often fails to convert when running tests, try and reproduce so I can figure out why
+
 * Consider updating IsoBuster to 4.9: https://www.isobuster.com/news/isobuster_4.9_release_notes
 
 

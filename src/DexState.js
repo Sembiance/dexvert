@@ -147,18 +147,15 @@ export class DexState
 		r.push(`\n${prefix}${xu.colon("  result")}${xu.c.bold}${this.processed ? fg.green("**PROCESSED**") : fg.red(`${xu.c.blink}**NOT PROCESSED**`)}`);
 		if(this.untouched)
 			r.push(` ${fg.deepSkyblue("**UNTOUCHED**")}`);
-		if(this.f?.input.transformed)
-			r.push(` ${fg.pink(`**TRANSFORMED ${xu.c.bold + this.f.input.transformed}**`)}`);
 
 		if(this.duration)
 			r.push(`  ${xu.paren(`took ${fg.yellow((this.duration/xu.SECOND).secondsAsHumanReadable())}`)}`);
+		if(this.processed)
+			r.push(`\n${prefix}${xu.colon("  format")}${this.format.pretty()}`);
 		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);
 		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);
 		if(this.processed)
-		{
-			r.push(`\n${prefix}${xu.colon("  format")}${this.format.pretty()}`);
 			r.push(`\n${prefix}${xu.colon("    meta")}${xu.inspect(this.meta).squeeze()}`);
-		}
 		if(this.created)
 			r.push(`\n${prefix}${xu.colon(" created")}${this.created.pretty(`${prefix}`).trim()}`);
 		return r.join("");

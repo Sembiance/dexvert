@@ -54,6 +54,7 @@ export class sevenZip extends Program
 	chain = "?stripGarbage -> ?fix7zCUR";
 	chainCheck = (r, chainFile, programid) =>
 	{
+		// the output txt files have 0x00 bytes intspaced every other byte, no idea why
 		if(programid==="stripGarbage" && ["version.txt", "string.txt"].includes(chainFile.base))
 			return true;
 		

@@ -459,6 +459,8 @@ import {checkBytes} from "./detect/checkBytes.js";
 programs.checkBytes = checkBytes.create(programs.checkBytes);
 import {trid} from "./detect/trid.js";
 programs.trid = trid.create(programs.trid);
+import {perlTextCheck} from "./detect/perlTextCheck.js";
+programs.perlTextCheck = perlTextCheck.create(programs.perlTextCheck);
 import {dexmagic} from "./detect/dexmagic.js";
 programs.dexmagic = dexmagic.create(programs.dexmagic);
 import {amosbank} from "./audio/amosbank.js";

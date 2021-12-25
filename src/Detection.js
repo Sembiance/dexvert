@@ -1,12 +1,31 @@
 import {xu, fg} from "xu";
 import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
+import {Program} from "./Program.js";
 
-export const TEXT_MAGIC =
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck"];
+
+export const TEXT_MAGIC_STRONG =
 [
-	"ASCII text", "ISO-8859 text", "UTF-8 Unicode text", "Non-ISO extended-ASCII text", "ReStructuredText file", "International EBCDIC text", "UTF-8 Unicode text", "Printable ASCII", "Unicode text, UTF-8 text",
-	"Algol 68 source, ISO-8859 text"	// Algol 68 is often mis-identified, usually confused with Pascal files. Just treat it as regular text
+	// checkBytes
+	"Printable ASCII",
+
+	// file
+	"ASCII text", "ISO-8859 text", "UTF-8 Unicode text", "Non-ISO extended-ASCII text", "ReStructuredText file", "International EBCDIC text", "UTF-8 Unicode text", "Unicode text, UTF-8 text",
+	"Algol 68 source, ISO-8859 text",	// Algol 68 is often mis-identified, usually confused with Pascal files. Just treat it as regular text
+
+	// trid
+	"Text - UTF-8 encoded"
 ];
+
+export const TEXT_MAGIC_WEAK =
+[
+	// perlTextCheck
+	"Likely Text (Perl)"
+];
+
+export const TEXT_MAGIC = [...TEXT_MAGIC_STRONG, ...TEXT_MAGIC_WEAK];
+
 
 /* eslint-disable prefer-named-capture-group */
 // These magics are VERY untrustworthy and any detections against them should be noted as such
@@ -177,4 +196,9 @@ export class Detection
 	{
 		return `${prefix}${fg.orange(this.from.padStart(8, " "))} ${fg.white(this.confidence.toString().padStart(3, " "))}% ${fg.magenta(this.value)}${this.weak ? fg.deepSkyblue("weak") : ""}`;
 	}
+}
+
+export async function getDetections(f, {xlog}={})
+{
+	return (await Promise.all(DETECTOR_PROGRAMS.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections);
 }

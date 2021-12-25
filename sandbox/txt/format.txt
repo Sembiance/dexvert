@@ -99,9 +99,6 @@ Specify that this match should be processed DEAD LAST as a match of last resort,
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
 
->>> transformUnsafe = true
-If set to true, this format isn't safe to transform
-
 >>> trustMagic = true
 If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
 

@@ -1,6 +1,7 @@
 import {xu, fg} from "xu";
 import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
+import {DETECTOR_PROGRAMS} from "./Detection.js";
 
 export class Identification
 {
@@ -12,7 +13,7 @@ export class Identification
 		validateClass(id, {
 			// required
 			magic      : {type : "string", required : true},					// the value of the identification
-			from       : {type : "string", required : true, enum : ["dexvert", "dexmagic", "file", "trid", "checkBytes"]}, // which programid produced the magic
+			from       : {type : "string", required : true, enum : ["dexvert", ...DETECTOR_PROGRAMS]}, // which programid produced the magic
 			confidence : {type : "number", required : true, range : [0, 100]},	// what confidence level this identification is
 
 			// optional

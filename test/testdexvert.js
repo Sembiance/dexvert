@@ -54,9 +54,10 @@ const FLEX_SIZE_FORMATS =
 	},
 	document :
 	{
-		// word DOC and hlp conversion sometimes differs WILDLY, haven't figured out why
-		hlp     : 50,
-		wordDoc : 50,
+		// these conversions sometimes differ WILDLY, haven't figured out why
+		hlp        : 50,
+		wildcatWCX : 80,
+		wordDoc    : 80,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		// So we just exempt all of the document category
@@ -82,7 +83,7 @@ const FLEX_SIZE_FORMATS =
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 15,
 		fantavision : 15,
-		grasp       : 30
+		grasp       : 40
 	}
 };
 
@@ -95,11 +96,18 @@ const IGNORE_SIZE_FILEPATHS =
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
-	// Mis-classified as garbage, but they do look like garbage, so we allow it but it gets processed by deark as an archive
+	// Mis-classified by tensor as garbage, but they do look like garbage, so we allow it but it gets processed by deark as an archive
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/text\/txt\/SPLIFT.PAS$/, "text", "pas"],
+
+	// These files have garbage on the end that prevent them from detected as what they should be. I used to 'trim' files on a 2nd and 3rd attempt to detect, but now with perlTextCheck, this can't be done and isn't needed
+	[/text\/c\/.+\.C/i, "text", "txt"],
+	[/text\/latexAUXFile\/LCAU.AUX$/i, "text", "txt"],
+
+	// These files don't convert with my converters and get identified to other things
+	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
 
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
@@ -112,6 +120,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/audio\/dataShowSound\/.+/i, "text", true],
 	[/document\/imf\/.+/i, "text", true],
 	[/document\/manPage\/glib\.man/i, "text", true],
+	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/music\/tss\/.+/i, "text", true],
@@ -148,7 +157,7 @@ function getWebLink(filePath)
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
-const SLOW_DURATION = xu.MINUTE*2;
+const SLOW_DURATION = xu.MINUTE*3;
 const slowFiles = {};
 const DATA_FILE_PATH = path.join("/mnt/dexvert/test", `${Deno.hostname()}.json`);
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
@@ -201,7 +210,7 @@ async function testSample(sampleFilePath)
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
 	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json", sampleFilePath, tmpOutDirPath];
-	const r = await runUtil.run("dexvert", dexvertArgs);
+	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*10});
 	const resultFull = xu.parseJSON(r.stdout, {});
 
 	function handleComplete()

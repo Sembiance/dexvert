@@ -1,10 +1,10 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {formats} from "./format/formats.js";
-import {Program} from "./Program.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
+import {getDetections} from "./Detection.js";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -28,7 +28,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		return [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic", unsupported : true})];
 
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
-	const detections = (await Promise.all(["file", "trid", "checkBytes", "dexmagic"].map(programid => Program.runProgram(programid, f, {xlog})))).flatMap(o => o.meta.detections);
+	const detections = await getDetections(f, {xlog});
 
 	xlog.debug`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
 
@@ -55,13 +55,6 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => f.input.base.toLowerCase().endsWith(fext)))))
 			{
 				xlog.debug`Excluding format ${formatid} due to forbiddenMagic or forbiddenExt`;
-				continue;
-			}
-
-			// skip this format if it's marked as unsafe and our file has been transformed and we don't explictly allow transforming
-			if(f.input.transformed && format.transformUnsafe)
-			{
-				xlog.debug`Excluding format ${formatid} due to input being a transformed file and the format being marked as transformUnsafe.`;
 				continue;
 			}
 

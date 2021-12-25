@@ -6,7 +6,7 @@ export class soffice extends Program
 	website = "https://www.libreoffice.org";
 	unsafe  = true;
 	flags   = {
-		outType     : `Which format to transform into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
+		outType     : `Which format to convert into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
 		autoCropSVG : "If set to true, the output SVG will be autocropped"
 	};
 	

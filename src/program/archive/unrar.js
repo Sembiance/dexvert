@@ -12,7 +12,7 @@ export class unrar extends Program
 		{
 			const commentGroups = (r.stdout.replaceAll("\n", "§").replaceAll("\r", "†").match(/Extracting from in\.rar§(?<comment>.+)§§Extracting /) || {groups : {}}).groups;
 			if(commentGroups.comment)
-				r.meta.comment = commentGroups.comment.replaceAll("§", "\n").replaceAll("†", "\r").trim();
+				r.meta.comment = commentGroups.comment.replaceAll("§", "\n").replaceAll("†", "\r").trimChars("\n\r");	// don't trim anything other than newlines, to preserve comment spacing
 		}
 	};
 	renameOut = false;

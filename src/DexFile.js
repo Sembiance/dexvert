@@ -11,7 +11,6 @@ export class DexFile
 		dexFile.root = path.join(typeof o==="string" ? (o.startsWith("/") ? path.dirname(o) : Deno.cwd()) : path.resolve(o.root));
 		dexFile.rel = typeof o==="string" ? (o.startsWith("/") ? path.basename(o) : o) : (o.absolute ? path.relative(dexFile.root, o.absolute) : o.rel);
 		dexFile.absolute = path.join(dexFile.root, dexFile.rel);
-		dexFile.transformed = Object.isObject(o) && o.transformed;
 
 		dexFile.calcProps();
 		await dexFile.calcStats();
@@ -116,8 +115,6 @@ export class DexFile
 		r.push(this.isDirectory ? fg.violet("D") : (this.isSymlink ? fg.cyan("L") : fg.fogGray("F")));
 		r.push(` ${fg.white((this.isFile ? this.size.bytesToSize() : "").padStart(6, " "))}`);
 		r.push(` ${fg.magenta(this.root)}${fg.cyan("/")}${fg.magenta(this.rel)}`);
-		if(this.transformed)
-			r.push(` ${fg.peach("transformed")}`);
 		return r.join("");
 	}
 }

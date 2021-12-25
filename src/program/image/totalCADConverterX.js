@@ -6,7 +6,7 @@ export class totalCADConverterX extends Program
 	flags   = {
 		// WARNING! I tried to do PNG and it complained about missing bcrypt.dll which is a Vista only file
 		// So raster output may require Vista or higher
-		outType : `Which format to transform into (svg pdf png, etc). See sandbox/app/totalCADXManual.txt for list. Default is: svg`
+		outType : `Which format to convert into (svg pdf png, etc). See sandbox/app/totalCADXManual.txt for list. Default is: svg`
 	};
 	loc       = "winxp";
 	bin       = "c:\\Program Files\\CoolUtils\\TotalCADConverterX\\CADConverterX.exe";

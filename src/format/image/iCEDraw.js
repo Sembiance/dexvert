@@ -1,5 +1,5 @@
 import {Format} from "../../Format.js";
-import {TEXT_MAGIC} from "../../Detection.js";
+import {TEXT_MAGIC_STRONG} from "../../Detection.js";
 
 export class iCEDraw extends Format
 {
@@ -8,7 +8,7 @@ export class iCEDraw extends Format
 	ext            = [".idf"];
 	mimeType       = "image/x-icedraw";
 	magic          = ["iCEDraw graphic"];
-	forbiddenMagic = TEXT_MAGIC;
+	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["ansiArt"];
 	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -276,7 +276,7 @@ Deno.test("pretty", async () =>
 Deno.test("serialize", async () =>
 {
 	const a = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt");
-	assertStrictEquals(JSON.stringify(a.serialize()), `{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","transformed":false,"base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635688339000}`);	// eslint-disable-line max-len
+	assertStrictEquals(JSON.stringify(a.serialize()), `{"root":"/mnt/compendium/DevLab/dexvert/test/files","rel":"some.big.txt.file.txt","absolute":"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt","base":"some.big.txt.file.txt","dir":"/mnt/compendium/DevLab/dexvert/test/files","name":"some.big.txt.file","ext":".txt","preExt":".some","preName":"big.txt.file.txt","isFile":true,"isDirectory":false,"isSymlink":false,"size":6,"ts":1635688339000}`);	// eslint-disable-line max-len
 });
 
 Deno.test("setTS", async () =>

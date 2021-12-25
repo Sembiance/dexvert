@@ -1,5 +1,5 @@
 import {Format} from "../../Format.js";
-import {TEXT_MAGIC} from "../../Detection.js";
+import {TEXT_MAGIC_STRONG} from "../../Detection.js";
 
 export class starTracker extends Format
 {
@@ -8,7 +8,7 @@ export class starTracker extends Format
 	ext            = [".mod"];
 	weakExt        = [".mod"];	// too generic, let mod/soundTracker grab it
 	magic          = [/^StarTrekker.* module$/, /Startracker module sound data/];
-	forbiddenMagic = TEXT_MAGIC;
+	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["musicInfo"];
 	converters     = ["xmp", "zxtune123"];
 }

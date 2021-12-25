@@ -64,7 +64,7 @@ export class Format
 	// returns a pretty string to output to console
 	pretty(prefix="")
 	{
-		return `${prefix}${fg.greenDim(this.name)} ${fg.yellow(this.familyid)}${fg.cyanDim("/")}${fg.yellowDim(this.formatid)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} ${xu.paren(fg.greenDim(this.website))}`;
+		return `${prefix}${fg.yellow(this.familyid)}${fg.cyanDim("/")}${fg.yellowDim(this.formatid)} ${fg.greenDim(this.name)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} ${xu.paren(fg.greenDim(this.website))}`;
 	}
 
 	serialize()
@@ -124,7 +124,6 @@ export class Format
 			fallback         : {type : "boolean"},
 			idCheck          : {type : "function", length : [1, 2]},
 			meta             : {type : "function", length : [1, 2]},
-			transformUnsafe  : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			unsupported      : {type : "boolean"},

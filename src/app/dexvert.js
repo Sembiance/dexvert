@@ -1,9 +1,7 @@
 import {xu} from "xu";
-import {cmdUtil, fileUtil, runUtil} from "xutil";
+import {cmdUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
-import {Program} from "../Program.js";
-import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -16,7 +14,6 @@ const argv = cmdUtil.cmdInit({
 		asFormat      : {desc : "Convert the format as [family/formatid]. Don't identify the file", hasValue : true},
 		json          : {desc : "If set, will output results as JSON"},
 		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
-		dontTransform : {desc : "If a file can't be converted, dexvert will try different transforms (like trimming null bytes) to convert it."},
 		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true}
 	},
 	args :
@@ -46,80 +43,27 @@ async function handleExit(ignored)
 	Deno.exit(0);
 }
 
-let dexState = null;
-async function handleDexState(lastTry)
-{
-	if(!dexState)
-	{
-		// if no dex state and our last try, just exit
-		if(lastTry)
-			await handleExit(xlog.warn`No processed result.`);
-
-		return false;
-	}
-
-	// send output if we are processed or it's our last try
-	const sendOutput = dexState.processed || lastTry;
-	if(sendOutput)
-	{
-		if(argv.jsonFile)
-			await Deno.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
-
-		if(argv.json)
-			console.log(JSON.stringify(dexState.serialize()));
-		
-		if(xlog.atLeast("fatal"))
-		{
-			if(argv.logFile)
-				xlog.warn`${dexState.pretty()}`;
-			else if(!argv.json)
-				console.log(`${dexState.pretty()}`);
-		}
-		
-		// if we are not processed, then by default this is our lastTry so output that we have no result
-		if(!dexState.processed)
-			xlog.warn`No processed result.`;
-
-		await handleExit();
-	}
-
-	// otherwise we were not processed and it's not our last try, so return false and it will try a transform
-	return false;
-}
-
 const inputFile = await DexFile.create(argv.inputFilePath);
-dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
-await handleDexState(argv.dontTransform);
+const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
+if(!dexState)
+	await handleExit(xlog.warn`No processed result.`);
 
-// now we try trimming all trailing 0x00 and 0x1A bytes from files, as these often appear for text files
-// then it tries the same trimming but also trimming newlines (sample/text/c/EVAL2.c)
-// we used to also do stripGarbage here, which would remove ALL 0x00 bytes from the file and try, but it too often would result in a 'text' match and just wasn't very useful
-const TRANSFORM_TYPES = ["trimGarbage", ["trimGarbage", "--newlines"]];	// , "stripGarbage"
-for(const [i, transformTypeRaw] of Object.entries(TRANSFORM_TYPES))
+if(argv.jsonFile)
+	await Deno.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+
+if(argv.json)
+	console.log(JSON.stringify(dexState.serialize()));
+
+if(xlog.atLeast("fatal"))
 {
-	const transformDirPath = await fileUtil.genTempPath();
-	await Deno.mkdir(transformDirPath);
-	const transformFilePath = path.join(transformDirPath, inputFile.base);
-	const transformType = Array.isArray(transformTypeRaw) ? transformTypeRaw[0] : transformTypeRaw;
-	await runUtil.run(Program.binPath(`${transformType}/${transformType}`), [...(Array.isArray(transformTypeRaw) ? transformTypeRaw.slice(1) : []), inputFile.absolute, transformFilePath]);
-	if(!(await fileUtil.exists(transformFilePath)))
-	{
-		xlog.debug`No transform result for ${Array.force(transformTypeRaw).join(" ")}`;
-		await fileUtil.unlink(transformDirPath, {recursive : true});
-		continue;
-	}
-	
-	xlog.debug`Attempting dexvert with transform ${Array.force(transformTypeRaw).join(" ")}`;
-	const transformedInputFile = await DexFile.create(transformFilePath);
-	transformedInputFile.transformed = Array.force(transformTypeRaw).join(" ");
-	const transformedDexState = await dexvert(transformedInputFile, await DexFile.create(argv.outputDirPath), {xlog : (xlog.atLeast("debug") ? xlog : xlog.clone("error")), ...dexvertOptions});
-	await fileUtil.unlink(transformDirPath, {recursive : true});
-	if(transformedDexState.processed)
-	{
-		dexState = transformedDexState;
-		await handleDexState((+i)===(TRANSFORM_TYPES.length-1));
-	}
+	if(argv.logFile)
+		xlog.warn`${dexState.pretty()}`;
+	else if(!argv.json)
+		console.log(`${dexState.pretty()}`);
 }
 
-// if we got this far, then neither transform produced a file, so we just fall back on our last dexState
-await handleDexState(true);
+// if we are not processed, then by default this is our lastTry so output that we have no result
+if(!dexState.processed)
+	xlog.warn`No processed result.`;
+
+await handleExit();

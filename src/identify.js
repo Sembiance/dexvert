@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {XLog} from "xlog";
 import {fileUtil} from "xutil";
 import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
@@ -19,7 +20,7 @@ const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "i
 
 export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 {
-	const xlog = _xlog || xu.xLog(logLevel);
+	const xlog = _xlog || new XLog(logLevel);
 
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 

@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {XLog} from "xlog";
 import {printUtil, cmdUtil} from "xutil";
 import {path} from "std";
 
@@ -15,7 +16,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "target", desc : "The target to build", required : true, multiple : true, allowed : ["all", ...TARGET_NAMES]}
 	]});
 
-const xlog = xu.xLog(argv.silent ? "none" : "info");
+const xlog = new XLog(argv.silent ? "none" : "info");
 
 const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES : argv.target);
 for(const [i, targetid] of Object.entries(targetids))

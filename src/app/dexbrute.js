@@ -1,4 +1,5 @@
 import {xu, fg} from "xu";
+import {XLog} from "xlog";
 import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {programs} from "../program/programs.js";
@@ -23,7 +24,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-const xlog = xu.xLog("info");
+const xlog = new XLog("info");
 
 const EXCLUDE_FAMILIES = ["detect", "meta", "other", "post"];
 const PROGRAM_BASE_PATH = path.join(xu.dirname(import.meta), "..", "program");

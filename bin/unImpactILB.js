@@ -1,7 +1,9 @@
 import {xu} from "xu";
 import {cmdUtil} from "xutil";
 import {path} from "std";
-const xlog = xu.xLog();
+import {XLog} from "xlog";
+
+const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

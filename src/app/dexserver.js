@@ -1,8 +1,9 @@
 import {xu, fg} from "xu";
+import {XLog} from "xlog";
 import {fileUtil, runUtil} from "xutil";
 import {path, delay} from "std";
 
-const xlog = xu.xLog();
+const xlog = new XLog();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");

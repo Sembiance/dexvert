@@ -1,4 +1,5 @@
 import {xu, fg} from "xu";
+import {XLog} from "xlog";
 import {cmdUtil, printUtil} from "xutil";
 import {identify} from "../identify.js";
 import {DexFile} from "../DexFile.js";
@@ -18,7 +19,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
-const xlog = xu.xLog(argv.logLevel);
+const xlog = new XLog(argv.logLevel);
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)

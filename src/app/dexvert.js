@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {XLog} from "xlog";
 import {cmdUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
@@ -22,11 +23,10 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-const xlog = xu.xLog(argv.json && !argv.logFile ? "none" : argv.logLevel);
-
-const logLines = [];
+const xlogOptions = {};
 if(argv.logFile)
-	xlog.logger = v => logLines.push(v);
+	xlogOptions.logFile = argv.logFile;
+const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogOptions);
 
 const dexvertOptions = {};
 ["asFormat"].forEach(k =>
@@ -37,9 +37,7 @@ const dexvertOptions = {};
 
 async function handleExit(ignored)
 {
-	if(argv.logFile)
-		await Deno.writeTextFile(argv.logFile, `${logLines.join("\n").decolor()}\n`);
-	
+	await xlog.flush();
 	Deno.exit(0);
 }
 

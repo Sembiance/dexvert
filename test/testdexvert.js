@@ -1,9 +1,10 @@
 /* eslint-disable camelcase, prefer-named-capture-group, unicorn/better-regex */
 import {xu, fg} from "xu";
+import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
 
-const xlog = xu.xLog();
+const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

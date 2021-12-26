@@ -153,7 +153,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 
 function getWebLink(filePath)
 {
-	return `file://${Deno.hostname()==="chatsubo" ? path.join("/mnt/chatsubo", path.relative("/mnt", filePath)) : filePath}`.escapeHTML();
+	return `file://${Deno.hostname()==="chatsubo" ? path.join("/mnt/chatsubo", path.relative("/mnt", filePath)) : filePath}`.encodeURLPath().escapeHTML();
 }
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");

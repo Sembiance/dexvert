@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class nullBytes extends Format
 {
 	name      = "All Null Bytes";
-	magic     = [/^All Null Bytes$/];	// WARNING: Do not match 'null bytes' from trid, it only checks the first X bytes for zeroes. So NOT trustworthy
+	magic     = [/^All Null Bytes$/];	// WARNING: Do not add a magic match for 'null bytes' from trid, it only checks the first X bytes for zeroes. So NOT trustworthy
+	idCheck   = inputFile => inputFile.size>8;	// Files 8 bytes or smaller are not worth matching
 	untouched = true;
 }

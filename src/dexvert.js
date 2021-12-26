@@ -217,7 +217,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, xlog=xu.xLo
 		// important to do this before cleanup() since that will delete all tmp dirs including output files
 		if(dexState.processed)
 		{
-			await runUtil.run("rsync", ["-a", `${dexState.f.outDir.absolute}/`, `${outputDir.absolute}/`]);
+			await runUtil.run("rsync", ["-a", "--prune-empty-dirs", `${dexState.f.outDir.absolute}/`, `${outputDir.absolute}/`]);
 			dexState.created = await FileSet.create(outputDir.absolute, "output", await fileUtil.tree(outputDir.absolute, {nodir : true}));
 			// We used to rsync each file individually this way, but this was ungodly slow on large archives like SpanishScene.iso
 			// So now we just rsync our output directory... should be safe :)

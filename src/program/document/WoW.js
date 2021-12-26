@@ -4,6 +4,7 @@ export class WoW extends Program
 {
 	website = "http://aminet.net/package/util/conv/WoW";
 	loc     = "amigappc";
+	unsafe  = true;
 	bin     = "WoW";
 	args    = r => ["-asc", r.inFile(), "HD:out/outfile.txt"];
 	

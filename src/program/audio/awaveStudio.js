@@ -22,20 +22,25 @@ export class awaveStudio extends Program
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			Sleep(250)
 
-			WinActivate("Select input files", "");
-			WinWaitActive("Select input files", "", 10)
-			ControlClick("Select input files", "", "[CLASS:Button; TEXT:&Next >]")
+			Local $errorVisible = WinWaitActive("Unknown file type!", "", 5)
+			If $errorVisible Not = 0 Then
+				ControlClick("Unknown file type!", "", "[TEXT:&Cancel]")
+			Else
+				WinActivate("Select input files", "");
+				WinWaitActive("Select input files", "", 10)
+				ControlClick("Select input files", "", "[CLASS:Button; TEXT:&Next >]")
 
-			WinWaitActive("Select output options", "", 10)
+				WinWaitActive("Select output options", "", 10)
 
-			Local $formatWAV = ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
-			ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
+				Local $formatWAV = ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
+				ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
 
-			ControlSetText("Select output options", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
+				ControlSetText("Select output options", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
 
-			ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
-			
-			WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})`
+				ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
+
+				WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})
+			EndIf`
 	});
 	chain = "sox";
 	renameOut      = {

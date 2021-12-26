@@ -4,6 +4,7 @@ export class wordStar extends Program
 {
 	website  = "https://en.wikipedia.org/wiki/WordStar";
 	loc      = "win2k";
+	unsafe   = true;
 	bin      = "c:\\WSWIN\\WSWIN.EXE";
 	args     = r => [r.inFile()];
 	qemuData = ({

@@ -41,6 +41,7 @@ for(const inputFilePath of inputFilePaths)
 		matchType : rows.map(({matchType}) => (matchType || "").length).max(),
 		family    : rows.map(({family}) => (family || "").length).max()
 	};
+
 	const printRows = rows.map(({from, family, confidence, magic, extensions, matchType, formatid, unsupported}) => ({
 		from : from==="dexvert" ? fg.green(from) : from,
 		confidence,

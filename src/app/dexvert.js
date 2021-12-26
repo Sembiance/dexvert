@@ -25,7 +25,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlogOptions = {};
 if(argv.logFile)
-	xlogOptions.logFile = argv.logFile;
+	xlogOptions.logFilePath = argv.logFile;
 const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogOptions);
 
 const dexvertOptions = {};

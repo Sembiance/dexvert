@@ -100,6 +100,7 @@ export class RunState
 			r.push(` ${fg.peach(this.bin)} ${(this.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+			
 			if(this.xlog.atLeast("debug"))
 			{
 				r.push(`\n${pre}\t${xu.colon("   cwd")}${this.cwd}`);

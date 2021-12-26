@@ -67,7 +67,8 @@ This will be executed after the program has finished running (either bin or exec
 >>>             name : "hello", ||  (r, originalInput) => "hello"
 >>>            regex : /^.+?(?<num>\.\d{3})?(?<name>\..+)?(?<ext>\..+)$/,
 >>>          renamer : [ ({newName, suffix, numFiles, fn}, {...groupNames}) => {[name, suffix, ext]}, ... ],
->>>     alwaysRename : true
+>>>     alwaysRename : true,
+>>>     preSensitive : true
 >>> }  ||  renameOut = false
 Output files can be automatically renamed.
 Set this to 'false' to prevent any output file renaming at all, otherwise set it to an object
@@ -80,6 +81,7 @@ Each renamer function should return an array of strings to join together to form
 First rename arg is: {newName, suffix, numFiles, fn}  where suffix is potential extra suffix that should be added and fn is the original output filename
 Second arg is the groups that were produced from the regex match.
 By default it will only follow the regex renamer if there are more than 1 file, to override this set alwaysRename to true
+If preSensitive is set, then this program tends to work with files that have extensions at the start and we should rename with that in mind. So mod.whatever becomes whatever.mod instead of mod
 
 >>> diskQuota = xu.MB*20
 Some programs are buggy and will consume the entire hard drive. This is a way to limit that.

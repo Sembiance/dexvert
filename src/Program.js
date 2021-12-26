@@ -62,7 +62,16 @@ export class Program
 		});
 
 		if(program.renameOut && Object.isObject(program.renameOut))
-			validateObject(program.renameOut, {ext : {type : "string"}, name : {types : ["boolean", "string", "function"]}, regex : {type : RegExp}, renamer : {type : ["function"]}, alwaysRename : {type : "boolean"}});
+		{
+			validateObject(program.renameOut, {
+				ext          : {types : ["string", "function"]},
+				name         : {types : ["boolean", "string", "function"]},
+				regex        : {type : RegExp},
+				renamer      : {type : ["function"]},
+				alwaysRename : {type : "boolean"},
+				preSensitive : {type : "boolean"}
+			});
+		}
 
 		return program;
 	}
@@ -259,6 +268,14 @@ export class Program
 		if(f.outDir && f.files.new?.length && renameOut!==false)
 		{
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, Object.isObject(renameOut) ? renameOut : {});
+			if(Object.isObject(renameOut) && renameOut.preSensitive)
+			{
+				if(!renameOut.name)
+					ro.name = (ignored, oi) => (oi.name.length<=3 && oi.preName.length>oi.name.length ? oi.preName : oi.name);
+				if(!renameOut.ext)
+					ro.ext = (ignored, oi) => (oi.name.length<=3 && oi.preName.length>oi.name.length ? oi.preExt : "");
+			}
+
 			const getName = o =>
 			{
 				// some files have the extension on the front of the file, like amiga with music/mod/mod.africa, we already set this in DexFile.preName
@@ -269,7 +286,7 @@ export class Program
 				return o.name;
 			};
 			const newName = (ro.name===true ? getName(originalInput || f.input) : ((typeof ro.name==="function" ? ro.name(r, originalInput) : ro.name) || getName(f.new)));
-			const newExt = (ro.ext || f.new.ext);
+			const newExt = ((typeof ro.ext==="function" ? ro.ext(r, originalInput) : ro.ext) || f.new.ext);
 			const originalExt = originalInput ? originalInput.ext : null;
 			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length, originalExt};
 
@@ -446,7 +463,7 @@ export class Program
 	// runs the programid program
 	static async runProgram(progRaw, fRaw, _progOptions={})
 	{
-		const progOptions = xu.clone(_progOptions);
+		const progOptions = Object.assign({}, _progOptions);
 		const xlog = progOptions.xlog;
 		if(!xlog)
 			throw new Error("Required xlog param for runProgram not found");
@@ -531,7 +548,7 @@ export class Program
 		if(progOptions.outFile)
 			await f.add("outFile", progOptions.outFile);
 
-		const debugPart = xu.clone(progOptions);
+		const debugPart = Object.assign({}, progOptions);
 		delete debugPart.xlog;
 		xlog.trace`Program ${progRaw} converted to ${debugPart}`;
 		

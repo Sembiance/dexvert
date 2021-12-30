@@ -351,6 +351,8 @@ import {wc} from "./meta/wc.js";
 programs.wc = wc.create(programs.wc);
 import {pdfinfo} from "./meta/pdfinfo.js";
 programs.pdfinfo = pdfinfo.create(programs.pdfinfo);
+import {webpmuxInfo} from "./meta/webpmuxInfo.js";
+programs.webpmuxInfo = webpmuxInfo.create(programs.webpmuxInfo);
 import {chardetect} from "./meta/chardetect.js";
 programs.chardetect = chardetect.create(programs.chardetect);
 import {musicInfo} from "./meta/musicInfo.js";

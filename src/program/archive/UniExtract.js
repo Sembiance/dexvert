@@ -20,7 +20,7 @@ export class UniExtract extends Program
 
 			WinWaitClose($mainWindow, "", 10)
 
-			Local $decisionWindow = WinWaitActive("Universal Extractor", "", 10)
+			Local $decisionWindow = WinWaitActive("Universal Extractor", "", 5)
 			If $decisionWindow Then
 				${r.flags.type ? `ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:${r.flags.type}]")` : ""}
 				ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&OK]")
@@ -33,7 +33,8 @@ export class UniExtract extends Program
 
 			WinWaitClose("Universal Extractor", "", 10)
 
-			ProcessWaitClose("UniExtract.exe", 10)`
+			ProcessWaitClose("UniExtract.exe", 5)
+			ProcessClose("Expander.exe")`
 	});
 	renameOut = false;
 }

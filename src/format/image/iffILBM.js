@@ -16,11 +16,13 @@ export class iffILBM extends Format
 		DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort.
 		CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)`;
 	
-	// abydosconvert handles IFF files the best (BY FAR), including color cycling animations in WEBP format (AH_Dan, AH_Eye, Watch, DECKER-BattleMech)
+	// abydosconvert is the only thing that can handle animated IFF files (color cycling, etc) (AH_Dan, AH_Eye, Watch, DECKER-BattleMech)
 	// But it sometimes produces crazy fast color cycles and they can sometimes be so rapid that the original meaning of the image is lost
-	// It also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
-	// So we first run both abydosconvert and recoil2png. abydos will produce a .webp for it's animated output which the other programs don't produce
-	converters    = [`abydosconvert[format:${this.mimeType}] & recoil2png`, "deark", "ffmpeg[format:iff]", "convert"];
+	// It also sometimes produces just a webp with all identical frames (which the program abydosconvert will automatically detect and delete in post())
+	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
+	// We start by running both abydosconvert and recoil2png at the same time, and recoil2png will overwrite any PNG produced by abydosconvert
+	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
+	converters    = [`abydosconvert[format:${this.mimeType}] & recoil2png`, `abydosconvert[format:${this.mimeType}][outType:png]`, "deark", "ffmpeg[format:iff]", "convert"];
 }
 
 // node version of dexvert was doing this, but I didn't see any sample files that exhibit have this problem thus I couldn't test, so I'm not sure it's needed anymore

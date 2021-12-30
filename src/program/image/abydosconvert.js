@@ -20,6 +20,20 @@ export class abydosconvert extends Program
 	// Doing a --list first will 'prime' the HOME dir that was set up
 	pre = async r => await runUtil.run("abydosconvert", ["--list"], {env : {HOME : r.f.homeDir.absolute}});
 
+	// webp files abydos produces have all identical frames, in these cases better to just delete the webp file and have it re-run and convert to PNG or let some other converter handle the PNG creation
+	verify = async (r, dexFile) =>
+	{
+		// abydosconvert will always put a .webp extension on it
+		if(dexFile.ext.toLowerCase()!==".webp")
+			return true;
+		
+		const {meta : webpInfo} = await Program.runProgram("webpmuxInfo", dexFile, {xlog : r.xlog, autoUnlink : true});
+		if(!webpInfo || !webpInfo?.numberOfFrames || (webpInfo?.frameSizesUnique || []).length<=1)
+			return false;
+
+		return true;
+	};
+
 	// Timeout is because abydos sometimes just hangs on a conversion eating 100% CPU forever. ignore-stderr is due to wanting a clean parse of the resulting JSON
 	runOptions = ({timeout : xu.MINUTE});
 	renameOut = {
@@ -31,14 +45,3 @@ export class abydosconvert extends Program
 		]
 	};
 }
-
-/*
-Old Node check:
-			// abydos has the nasty habit of producing 'empty' SVG files that are 0x0 when fed files that are not valid (such as image/sunRaster/OPENING.SCR which is interpreted as an image/aniST file)
-			// Sadly ImageMagick identifies this as having a width/height of 300x150 for whatever stupid reason, probably some stupid built in default
-			// So let's check the resulting JSON from abydos and if height & width are both zero and we only have .svg files as output, delete our output files
-			const abydosResult = XU.parseJSON(r.results, {});
-			if(abydosResult.width===0 && abydosResult.height===0 && !outputFilePaths.some(outputFilePath => !outputFilePath.toLowerCase().endsWith(".svg")))
-				return outputFilePaths.parallelForEach((outputFilePath, subcb) => fileUtil.unlink(outputFilePath, subcb), this);
-Could add this to a verify and check the stdout JSON to see and invalidate the output. So far though haven't come across this, and the OPENING.SCR doesn't yield any files now from latest abydosconvert
-*/

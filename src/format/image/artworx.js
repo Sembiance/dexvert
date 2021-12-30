@@ -8,10 +8,11 @@ export class artworx extends Format
 	ext            = [".adf"];
 	mimeType       = "image/x-artworx";
 	magic          = [/^data$/];
-	forbiddenMagic = ["Amiga Disk image File", ...TEXT_MAGIC];
+	forbiddenMagic = ["Amiga Disk image File", "AppleDouble encoded Macintosh file", "Mac AppleDouble encoded", ...TEXT_MAGIC];
 	weakMagic      = true;
-	metaProvider   = ["ansiArt"];
+	metaProvider   = ["ansiArt", "ffprobe"];
 	
-	// deark messes up several images, but ansilove seems to handle them all
-	converters = ["ansilove[format:adf]", "deark", `abydosconvert[format:${this.mimeType}]`];
+	// .adf can be somewhat common of an image format, so only convert if we have a formatName from ffprobe
+	// ansilove and ffmpeg both do great. deark messes up several images
+	converters = r => (Object.keys(r.meta).length>0 && r.meta.formatName ? ["ansilove[format:adf]", "ffmpeg[format:adf][outType:png]", "deark", `abydosconvert[format:${this.mimeType}]`] : []);
 }

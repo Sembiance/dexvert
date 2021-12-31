@@ -14,5 +14,5 @@ export class artworx extends Format
 	
 	// .adf can be somewhat common of an image format, so only convert if we have a formatName from ffprobe
 	// ansilove and ffmpeg both do great. deark messes up several images
-	converters = r => (Object.keys(r.meta).length>0 && r.meta.formatName ? ["ansilove[format:adf]", "ffmpeg[format:adf][outType:png]", "deark", `abydosconvert[format:${this.mimeType}]`] : []);
+	converters = r => (r.meta?.formatName==="adf" ? ["ansilove[format:adf]", "ffmpeg[format:adf][outType:png]", "deark", `abydosconvert[format:${this.mimeType}]`] : []);
 }

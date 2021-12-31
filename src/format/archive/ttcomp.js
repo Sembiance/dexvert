@@ -10,5 +10,6 @@ export class ttcomp extends Format
 	forbiddenExt = [".thm"];
 	idCheck      = inputFile => inputFile.preExt!==".thm";
 
+	// NOTE: Deark also supports extraction of these, but because deark will also convert so many other formats and TTComp is a very weak magic identification, we don't include it here
 	converters = ["ttdecomp"];
 }

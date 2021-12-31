@@ -1,6 +1,20 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* See about adding better deark MacOS resource type conversion:
+	Maybe I can parse more resource types (like vers) see what program extracted them and see about finding info about the resource types
+	Maybe even load up a mac to check out these files with resedit
+	http://www.weihenstephan.org/~michaste/pagetable/mac/Inside_Macintosh.pdf
+	Page 117
+	https://whitefiles.org/mac/pgs/t02.htm
+	https://developer.apple.com/library/archive/documentation/mac/pdf/MoreMacintoshToolbox.pdf
+	https://developer.apple.com/library/archive/documentation/mac/pdf/ResEditReference.pdf
+	https://vintageapple.org/inside_o/
+	https://blog.persistent.info/2021/04/git-resource-fork-hooks.html
+	http://www.mathemaesthetics.com/GenInfo.html
+	* Also look at some of these NPIC files to see if I can turn them into something useful
+	* http://dev.retromission.com/browse/23/Odyssey:%20The%20Legend%20of%20Nemesis.iso/Odyssey-The%20Legend%20of%20Nemesis/Graphics%20File/Graphics%20File.adf
+
 * Get this multi-bin/cue file working with dexvert: https://archive.org/details/betrayal-at-krondor-usa
 
 * Ensure I have support for: https://entropymine.wordpress.com/2021/12/19/notes-on-pklite-format-part-1/

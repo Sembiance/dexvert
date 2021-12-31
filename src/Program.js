@@ -33,12 +33,12 @@ export class Program
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
-			flags      : {type : Object},
-			package    : {types : ["string", Array]},
-			notes      : {type : "string"},
-			runOptions : {types : [Object, "function"]},
-			unsafe     : {type : "boolean"},
-			website    : {type : "string", url : true},
+			flags        : {type : Object},
+			notes        : {type : "string"},
+			package      : {types : ["string", Array]},
+			runOptions   : {types : [Object, "function"]},
+			unsafe       : {type : "boolean"},
+			website      : {type : "string", url : true},
 
 			// execution
 			args             : {type : "function", length : [0, 1]},
@@ -46,18 +46,19 @@ export class Program
 			bin              : {type : "string"},
 			chain            : {types : ["function", "string"]},
 			chainCheck       : {type : "function", length : [0, 3]},
+			checkForDups     : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {type : "number", range : [1]},
 			dosData          : {types : ["function", Object]},
 			exec             : {type : "function", length : [0, 1]},
 			filenameEncoding : {types : ["function", "string"]},
+			mirrorInToCWD    : {types : ["boolean", "string"]},
 			outExt           : {types : ["function", "string"]},
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
-			renameIn         : {type : "boolean"},
 			qemuData         : {types : ["function", Object]},
-			mirrorInToCWD    : {types : ["boolean", "string"]},
+			renameIn         : {type : "boolean"},
 			verify           : {type : "function", length : [0, 2]}
 		});
 
@@ -189,15 +190,6 @@ export class Program
 			xlog.trace`Program ${fg.orange(this.programid)} locating new files...`;
 			const newFilePaths = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute));
 
-			// if we have just 1 output file and it is is identical to our input file, delete it, to prevent infinite recursions
-			// it'd be nice to do this for every output file in the loop below, but it's too much of a performance hit
-			if(newFilePaths.length===1 && !this.allowDupOut && await fileUtil.areEqual(newFilePaths[0], f.input.absolute))
-			{
-				xlog.warn`Program ${fg.orange(this.programid)} deleting single output file ${path.relative(f.outDir.absolute, newFilePaths[0])} due to being identical to input file ${f.input.pretty()}`;
-				await fileUtil.unlink(newFilePaths[0]);
-				newFilePaths.clear();
-			}
-
 			xlog.trace`Program ${fg.orange(this.programid)} doing first pass on ${newFilePaths.length} new files...`;
 			await newFilePaths.parallelMap(async newFilePath =>
 			{
@@ -240,6 +232,15 @@ export class Program
 				if(this.verify && !(await this.verify(r, newFile)))
 				{
 					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to failing program.verify() function`;
+					await fileUtil.unlink(newFilePath);
+					return;
+				}
+
+				// check to see if the resulting file is identical to our input file (sample/executable/exe/Oidata)
+				// we always check if we have just 1 output file, otherwise we only check if checkForDups is set
+				if(!this.allowDupOut && (this.checkForDups || newFilePaths.length===1) && await fileUtil.areEqual(newFilePath, f.input.absolute))
+				{
+					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
 					await fileUtil.unlink(newFilePath);
 					return;
 				}

@@ -25,10 +25,7 @@ export class fastCAD extends Program
 
 			WinWaitClose("[TITLE:Rename & Save]", "", 10)
 
-			Sleep(500)
-
-			ProcessClose("FCW32.EXE")
-			WaitForPID(ProcessExists("FCW32.EXE"), ${xu.SECOND*10})`
+			Sleep(1000)`
 	});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp]";

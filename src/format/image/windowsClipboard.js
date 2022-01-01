@@ -6,5 +6,7 @@ export class windowsClipboard extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Windows_clipboard";
 	ext        = [".clp"];
 	magic      = ["Windows Clipboard"];
-	converters = ["clipbrdWin2k", "nconvert[format:clp]", "irfanView"];
+
+	// for deark, we rename out so things like Bitmap.ddb.png get renamed properly, but sometimes WMF files are also extracted, then we end up with out.###.whatever.ddb.png, but alas.
+	converters = ["deark[renameOut:true]", "clipbrdWin2k", "nconvert[format:clp]", "irfanView"];
 }

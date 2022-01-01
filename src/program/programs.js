@@ -287,6 +287,8 @@ import {archmage} from "./document/archmage.js";
 programs.archmage = archmage.create(programs.archmage);
 import {soffice} from "./document/soffice.js";
 programs.soffice = soffice.create(programs.soffice);
+import {helpdeco} from "./document/helpdeco.js";
+programs.helpdeco = helpdeco.create(programs.helpdeco);
 import {ng2html} from "./document/ng2html.js";
 programs.ng2html = ng2html.create(programs.ng2html);
 import {wordStar} from "./document/wordStar.js";

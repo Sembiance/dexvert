@@ -27,7 +27,7 @@ export class ediUnpack extends Program
 			Sleep(5000)
 
 			; Program tends to hang forever preventing any other instances from running, so we kill this process which kills the program
-			ProcessClose("ntvdm.exe")`
+			KillAll("ntvdm.exe")`
 	});
 	renameOut = false;
 }

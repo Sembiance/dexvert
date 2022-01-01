@@ -22,8 +22,6 @@ export class EXE2SWFExtractor extends Program
 
 			ControlClick("Sothink EXE to SWF Extractor", "", "[CLASS:Button; TEXT:OK]")
 
-			ProcessClose("EXE2SWFExtractor.exe")
-
 			WaitForPID(ProcessExists("EXE2SWFExtractor.exe"), ${xu.SECOND*10})`
 	});
 	chain     = "dexvert";

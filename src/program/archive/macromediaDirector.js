@@ -154,10 +154,7 @@ export class macromediaDirector extends Program
 			Local $saveChangesVisible = WinWaitActive("[TITLE:Director]", "", 3)
 			If $saveChangesVisible Not = 0 Then
 				ControlClick("[TITLE:Director]", "", "[CLASS:Button; TEXT:&No]")
-			EndIf
-
-			ProcessClose("Director.exe")
-			WaitForPID(ProcessExists("Director.exe"), ${xu.MINUTE})`
+			EndIf`
 	});
 
 	// Often SCRIPT files are just behaviors and end up being just 1 single empty byte in size, just delete these, they are not useful

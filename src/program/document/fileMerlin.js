@@ -21,9 +21,7 @@ export class fileMerlin extends Program
 			If $errorVisible Not = 0 Then
 				WinClose("FileMerlin/Pdf (15-user) -- needs network setup");
 			EndIf
-			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30});
-			ProcessClose("fmn.exe")
-			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*5});`});
+			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30})`});
 	verify    = (r, dexFile) => !dexFile.dir.endsWith("_g");
 	renameOut = true;
 }

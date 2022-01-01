@@ -113,6 +113,7 @@ Func SaveClipboardWithMSPaint($winDir, $outFilePath)
 	EndIf
 EndFunc`
 };
+const AUTO_INCLUDE_FUNCS = ["KillAll"];
 
 export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, noAuxFiles, xlog})
 {
@@ -156,17 +157,25 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 	if(osid.startsWith("win"))
 	{
 		// Build an AutoIt script
-		scriptLines.push(AUTOIT_FUNCS.KillAll);
+		scriptLines.push(...AUTO_INCLUDE_FUNCS.map(AUTO_INCLUDE_FUNC => AUTOIT_FUNCS[AUTO_INCLUDE_FUNC]));
 
 		if(!script && timeout)
 			scriptLines.push(AUTOIT_FUNCS.WaitForPID, AUTOIT_FUNCS.RunWaitWithTimeout);
 		else
-			scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (script.includes(funcName) ? funcText : null)).filter(v => !!v));
+			scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (!AUTO_INCLUDE_FUNCS.includes(funcName) && script.includes(funcName) ? funcText : null)).filter(v => !!v));
 
 		scriptLines.push(`Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
 		if(script)
 			scriptLines.push(script);
 		
+		// If a windows program crashes, windows will detect it and show this error, all we can do is press OK
+		scriptLines.push(`
+			Do
+				Local $programError = WinActive("[TITLE:Program Error]", "")
+				If $programError Not = 0 Then
+					ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")
+				EndIf
+			Until $programError = 0`);
 		scriptLines.push(`KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")`);
 	}
 	else if(osid.startsWith("amiga"))

@@ -37,7 +37,8 @@ tiptoe(
 	},
 	function loadRTF(rtfFilePaths=[])
 	{
-		if(rtfFilePaths.length!==1)
+		// if no RTF file or it's zero size, fail
+		if(rtfFilePaths.length!==1 || fs.statSync(rtfFilePaths[0]).size===0)
 			return this.jump(-1);
 
 		this.data.rtfFilePath = rtfFilePaths[0];

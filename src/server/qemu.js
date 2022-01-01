@@ -6,6 +6,8 @@ import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
 const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
+export {QEMU_INSTANCE_DIR_PATH};
+
 const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
@@ -233,7 +235,8 @@ export class qemu extends Server
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
-		this.xlog.info`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) performing run request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
+		this.xlog.info`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) run with file ${(body.inFilePaths || [])[0]}`;
+		this.xlog.debug`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) run with request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
@@ -246,7 +249,7 @@ export class qemu extends Server
 		instance.busy = false;
 
 		if(inOutErr)
-			this.xlog.error`${instance.osid} ERROR ${inOutErr}`;
+			this.xlog.error`${instance.osid} (VNC ${instance.vncPort}) ERROR ${inOutErr} with runArgs ${JSON.stringify(runArgs).squeeze()}`;
 
 		reply(new Response(inOutErr ? inOutErr.toString() : "ok"));
 	}

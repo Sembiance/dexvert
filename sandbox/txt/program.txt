@@ -40,7 +40,7 @@ Can run r.inFile() to get the input file or r.outFile("out.png") to get the outf
 An object (or a function that returns an object) of run options to be passed into runUtil.run. Will override defaults.
 To redirect stdout or stderr to a file, add runOptions value: stdoutFilePath or stderrFilePath
 
->>> filenameEncoding = "iso-8859-1"
+>>> filenameEncoding = "iso-8859-1"   ||    filenameEncoding = async (runState) => "MacRoman"
 What encoding the filenames produced by this program are in. Program.js will use convmv to convert them to UTF8 so deno can load/reference them.
 Default encoding: windows-1252
 

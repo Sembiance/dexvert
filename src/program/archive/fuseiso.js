@@ -15,7 +15,7 @@ export class fuseiso extends Program
 	};
 	postExec = async r =>
 	{
-		await runUtil.run("rsync", ["-a", `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
+		await runUtil.run("rsync", ["-sa", `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
 		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 	};
 	renameOut = false;

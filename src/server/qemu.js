@@ -58,7 +58,7 @@ export class qemu extends Server
 			const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
 
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(inDirPath, "/")]));
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(inDirPath, "/")]));
 
 			// If the input file is >50MB then we should wait 1 second PER 50MB to allow the mount to fully catch up
 			if(totalFilesSize>=DELAY_SIZE)
@@ -84,7 +84,7 @@ export class qemu extends Server
 			}
 
 			// We use rsync here to preserve timestamps
-			await runUtil.run("rsync", ["-a", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")]);
+			await runUtil.run("rsync", ["-sa", path.join(outDirPath, "/"), path.join(body.outDirPath, "/")]);
 
 			await fileUtil.emptyDir(inDirPath);
 			await fileUtil.emptyDir(outDirPath);
@@ -100,7 +100,7 @@ export class qemu extends Server
 			await Deno.mkdir(tmpInDirPath, {recursive : true});
 
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", inFilePath, path.join(tmpInDirPath, "/")]));
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(tmpInDirPath, "/")]));
 
 			await Deno.writeTextFile(tmpGoFilePath, body.script);
 
@@ -126,7 +126,7 @@ export class qemu extends Server
 			const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
 
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
-			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
+			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
 
 			await Deno.writeTextFile(tmpGoFilePath, body.script);
 			await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
@@ -139,7 +139,7 @@ export class qemu extends Server
 			});
 
 			// We use rsync here to preserve timestamps
-			await runUtil.run("rsync", ["-aL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")]);
+			await runUtil.run("rsync", ["-saL", "-e", `ssh ${sshOpts.join(" ")}`, path.join(`${sshPrefix}:${outDirPath}`, "/"), path.join(body.outDirPath, "/")]);
 
 			await fileUtil.unlink(tmpGoFilePath);
 			await runUtil.run("ssh", [...sshOpts, sshPrefix, "rm", "-rf", path.join(inDirPath, "*")]);
@@ -311,7 +311,7 @@ export class qemu extends Server
 			{
 				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
 				this.xlog.info`Rsyncing to: ${imgDestFilePath}`;
-				await runUtil.run("rsync", ["-a", imgFilePath, imgDestFilePath]);
+				await runUtil.run("rsync", ["-sa", imgFilePath, imgDestFilePath]);
 			}
 		}
 

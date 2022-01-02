@@ -28,7 +28,7 @@ export class tensor extends Server
 		{
 			const targetPath = path.join(WIP_DIR, name);
 			await Deno.mkdir(path.dirname(targetPath), {recursive : true});
-			await runUtil.run("rsync", ["-al", path.join(SRC_DIR, name), targetPath]);
+			await runUtil.run("rsync", ["-sal", path.join(SRC_DIR, name), targetPath]);
 		}
 
 		this.xlog.info`Running tensor server docker...`;

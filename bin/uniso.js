@@ -44,7 +44,7 @@ async function extractNormalISO()
 
 	// ALERT! In node, we used to use cp instead of rsync, but I couldn't get the shell /bin/bash thing to work right with cp and sudo under Deno. So I use rsync instead, we'll see if that chokes on certain filenames or not
 	//runUtil.run("sudo", ["cp", "--sparse=never", "--preserve=timestamps", "-r", "*", `"${OUT_DIR_PATH}/"`], {...RUN_OPTIONS, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
-	await runUtil.run("sudo", ["rsync", "-a", `${MOUNT_DIR_PATH}/`, `${OUT_DIR_PATH}/`]);
+	await runUtil.run("sudo", ["rsync", "-sa", `${MOUNT_DIR_PATH}/`, `${OUT_DIR_PATH}/`]);
 
 	await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
 }

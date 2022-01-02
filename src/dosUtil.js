@@ -14,8 +14,8 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	const dosDirPath = (await fileUtil.exists(path.join(root, "dos")) ? (await fileUtil.genTempPath(root, "dos")) : path.join(root, "dos"));
 	await Deno.mkdir(dosDirPath);
 
-	await runUtil.run("rsync", ["-a", path.join(DOS_SRC_PATH, (cmd.includes("/") ? path.dirname(cmd) : cmd)), path.join(dosDirPath)]);
-	await runUtil.run("rsync", ["-a", path.join(DOS_SRC_PATH, "c"), path.join(dosDirPath)]);
+	await runUtil.run("rsync", ["-sa", path.join(DOS_SRC_PATH, (cmd.includes("/") ? path.dirname(cmd) : cmd)), path.join(dosDirPath)]);
+	await runUtil.run("rsync", ["-sa", path.join(DOS_SRC_PATH, "c"), path.join(dosDirPath)]);
 
 	const configFilePath = await fileUtil.genTempPath(root, ".conf");
 	await Deno.copyFile(path.join(DOS_SRC_PATH, "dosbox.conf"), configFilePath);

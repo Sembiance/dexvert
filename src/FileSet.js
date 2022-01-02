@@ -108,7 +108,7 @@ export class FileSet
 			if(fileRel.includes("/"))
 				await Deno.mkdir(path.join(targetRoot, path.dirname(fileRel)), {recursive : true});
 			const targetPath = path.join(targetRoot, file.isDirectory ? path.dirname(fileRel) : fileRel);
-			await runUtil.run("rsync", ["-a", path.join(relativeFrom || file.root, fileRel), targetPath]);
+			await runUtil.run("rsync", ["-sa", path.join(relativeFrom || file.root, fileRel), targetPath]);
 
 			if(!(await fileUtil.exists(targetPath)))
 				missingFilePaths.push(targetPath);

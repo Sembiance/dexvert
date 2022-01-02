@@ -172,7 +172,7 @@ xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
 xlog.info`Root testing dir: ${fg.deepSkyblue(getWebLink(DEXTEST_ROOT_DIR))}`;
 xlog.info`Rsyncing sample files to RAM...`;
-await runUtil.run("rsync", ["--delete", "-avL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
+await runUtil.run("rsync", ["--delete", "-savL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
 xlog.info`Loading test data and finding sample files...`;
 

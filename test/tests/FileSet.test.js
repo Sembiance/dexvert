@@ -159,7 +159,7 @@ Deno.test("pretty", async () =>
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 	await a.addAll("other", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt"]);
 
-	assertStrictEquals(base64Encode(a.pretty()), "RmlsZVNldCAbWzM2bSgbWzBtcm9vdCAbWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbMzZtKRtbMG0gaGFzIBtbMzNtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA2YhtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zb21lLmJpZy50eHQuZmlsZS50eHQbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bSAgICA4YhtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zdWJEaXIvdHh0LmIbWzBtCgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzkzbUQbWzBtIBtbOTdtICAgICAgG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9tb3JlX3N1Yi90aGlyZBtbMG0KCRtbOTdtb3RoZXI6IBtbMG0bWzk2bUwbWzBtIBtbOTdtICAgICAgG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9zeW1saW5rRmlsZRtbMG0KCRtbOTdtb3RoZXI6IBtbMG0bWzM4OzU7MjUwbUYbWzBtIBtbOTdtICAgMTBiG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci9tb3JlX3N1Yi9jLnR4dBtbMG0=");	// eslint-disable-line max-len
+	assertStrictEquals(base64Encode(a.pretty()), "RmlsZVNldCAbWzM2bSgbWzBtcm9vdCAbWzM1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbMzZtKRtbMG0gaGFzIBtbMzNtNRtbMG0gZmlsZXM6CgkbWzk3bWlucHV0OiAbWzBtG1szODs1OzI1MG1GG1swbSAbWzk3bTYgYnl0ZXMbWzBtIBtbOTVtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbOTVtc29tZS5iaWcudHh0LmZpbGUudHh0G1swbQoJG1s5N21pbnB1dDogG1swbRtbMzg7NTsyNTBtRhtbMG0gG1s5N204IGJ5dGVzG1swbSAbWzk1bS9tbnQvY29tcGVuZGl1bS9EZXZMYWIvZGV4dmVydC90ZXN0L2ZpbGVzG1swbRtbOTZtLxtbMG0bWzk1bXN1YkRpci90eHQuYhtbMG0KCRtbOTdtaW5wdXQ6IBtbMG0bWzM4OzU7OTNtRBtbMG0gG1s5N20gICAgICAbWzBtIBtbOTVtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbOTVtc3ViRGlyL21vcmVfc3ViL3RoaXJkG1swbQoJG1s5N21vdGhlcjogG1swbRtbOTZtTBtbMG0gG1s5N20gICAgICAbWzBtIBtbOTVtL21udC9jb21wZW5kaXVtL0RldkxhYi9kZXh2ZXJ0L3Rlc3QvZmlsZXMbWzBtG1s5Nm0vG1swbRtbOTVtc3ViRGlyL3N5bWxpbmtGaWxlG1swbQoJG1s5N21vdGhlcjogG1swbRtbMzg7NTsyNTBtRhtbMG0gG1s5N20xMCBieXRlcxtbMG0gG1s5NW0vbW50L2NvbXBlbmRpdW0vRGV2TGFiL2RleHZlcnQvdGVzdC9maWxlcxtbMG0bWzk2bS8bWzBtG1s5NW1zdWJEaXIvbW9yZV9zdWIvYy50eHQbWzBt");	// eslint-disable-line max-len
 });
 
 Deno.test("removeType", async () =>
@@ -220,14 +220,14 @@ Deno.test("rsyncTo", async () =>
 	const tmpDirPath = await fileUtil.genTempPath();
 	await Deno.mkdir(tmpDirPath);
 	await a.rsyncTo(tmpDirPath);
-	assertEquals(await fileUtil.tree(tmpDirPath), [
+	assert([
 		"some.big.txt.file.txt",
 		"subDir",
 		"subDir/symlinkFile",
 		"subDir/txt.b",
 		"subDir/more_sub",
 		"subDir/more_sub/c.txt",
-		"subDir/more_sub/third"].map(v => path.join(tmpDirPath, v)));
+		"subDir/more_sub/third"].map(v => path.join(tmpDirPath, v)).includesAll(await fileUtil.tree(tmpDirPath)));
 	await fileUtil.unlink(tmpDirPath, {recursive : true});
 
 	await Deno.mkdir(tmpDirPath);

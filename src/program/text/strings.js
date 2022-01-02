@@ -5,6 +5,7 @@ export class strings extends Program
 	website    = "https://www.gnu.org/software/binutils/";
 	package    = "sys-devel/binutils";
 	bin        = "strings";
+	unsafe     = true;
 	args       = r => ["-a", r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 	renameOut  = true;

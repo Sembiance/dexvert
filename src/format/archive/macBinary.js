@@ -8,5 +8,5 @@ export class macBinary extends Format
 	ext            = [".bin"];
 	forbidExtMatch = true;
 	fallback       = true;
-	converters     = ["deark"];
+	converters     = ["deark", "unar"];
 }

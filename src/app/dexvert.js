@@ -29,7 +29,7 @@ if(argv.logFile)
 const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogOptions);
 
 const dexvertOptions = {};
-["asFormat"].forEach(k =>
+["asFormat", "programFlag"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];

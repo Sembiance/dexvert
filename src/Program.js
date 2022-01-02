@@ -11,6 +11,8 @@ import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const DEFAULT_FLAGS = ["filenameEncoding", "renameOut"];
+const GLOBAL_FLAGS = {};
+export {GLOBAL_FLAGS};
 
 export class Program
 {
@@ -80,6 +82,7 @@ export class Program
 	// runs the current program with the given input and output FileSets and various options
 	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, format, xlog=new XLog()}={})
 	{
+		flags = {...flags, ...GLOBAL_FLAGS[this.programid]};	// eslint-disable-line no-param-reassign
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 		

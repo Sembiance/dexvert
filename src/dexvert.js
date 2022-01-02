@@ -3,15 +3,23 @@ import {XLog} from "xlog";
 import {identify} from "./identify.js";
 import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
-import {Program} from "./Program.js";
+import {Program, GLOBAL_FLAGS} from "./Program.js";
 import {DexState} from "./DexState.js";
 import {DexFile} from "./DexFile.js";
 import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, asId, xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, asId, programFlag=[], xlog=new XLog()}={})
 {
+	for(const flagRaw of Array.force(programFlag))
+	{
+		const [programid, flagKey, flagValue] = flagRaw.split(":");
+		if(!Object.hasOwn(GLOBAL_FLAGS, programid))
+			GLOBAL_FLAGS[programid] = {};
+		GLOBAL_FLAGS[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
+	}
+
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
 	if(!inputFile.isFile)

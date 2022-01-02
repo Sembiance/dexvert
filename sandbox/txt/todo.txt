@@ -1,16 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* See about adding better deark MacOS resource type conversion (some DITL/MENU/vers in test/same/archive/rsrc/Odyssey\ 1.1.rsrc)
-  Latest deark code checked out in ~/Assorted/deark/
-  Maybe I can add more resource type support to deark, converting things into either formatted text or JSON
-  Inside Macintosh #1 (and maybe others) has detailed resource information (search for DITL). Books at: /mnt/compendium/documents/books/InsideMacintosh
-  Can use 'zathura' to view these PDFs under linux with fast search (/ forward slash to find, and n/N for next/prev match)
-  More resource info:
-	https://whitefiles.org/mac/pgs/t02.htm
-	https://blog.persistent.info/2021/04/git-resource-fork-hooks.html
-	http://www.mathemaesthetics.com/GenInfo.html
-	
 * Get this multi-bin/cue file working with dexvert: https://archive.org/details/betrayal-at-krondor-usa
 
 * Ensure I have support for: https://entropymine.wordpress.com/2021/12/19/notes-on-pklite-format-part-1/

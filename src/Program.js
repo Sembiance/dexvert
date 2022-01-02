@@ -130,7 +130,7 @@ export class Program
 				r.runOptions.env = {HOME : f.homeDir.absolute};
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
-				
+
 			xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
 			xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
@@ -164,7 +164,8 @@ export class Program
 		if(this.mirrorInToCWD)
 			await fileUtil.unlink(r.inFile({absolute : true}));
 
-		if(f.outDir)
+		// some programs like resource_dasm will DELETE the output directory if it wasn't able to extract, so we should check that it still exists
+		if(f.outDir && await fileUtil.exists(f.outDir.absolute))
 		{
 			// we may have new files on disk in f.outDir
 
@@ -552,7 +553,7 @@ export class Program
 
 		const debugPart = Object.assign({}, progOptions);
 		delete debugPart.xlog;
-		xlog.trace`Program ${progRaw} converted to ${debugPart}`;
+		xlog.trace`Program ${progRaw} converted to ${debugPart} with f ${f}`;
 		
 		const programResult = await program.run(f, progOptions);
 

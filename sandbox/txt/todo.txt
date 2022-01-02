@@ -1,12 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get this multi-bin/cue file working with dexvert: https://archive.org/details/betrayal-at-krondor-usa
 
-* Ensure I have support for: https://entropymine.wordpress.com/2021/12/19/notes-on-pklite-format-part-1/
-  The article mentions some archive that has a bunch of samples, to make sure I can identify
-
-* Need a dexvert way to pass in the swapAudioEndianess flag (then need to add this to retromission too)
 
 
 /---------------\

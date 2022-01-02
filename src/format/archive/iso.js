@@ -26,7 +26,10 @@ export class iso extends Format
 	magic        = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", ...HFS_MAGICS];
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
-	notes        = "Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported.";
+	notes        = xu.trim`
+		Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks).
+		Multi-track (such as Audio and Data) are also supported.
+		NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.`;
 	auxFiles     = (input, otherFiles) =>
 	{
 		const otherExts = [".cue", ".toc"];

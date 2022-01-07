@@ -194,5 +194,8 @@ async function extractHFSISO()
 }
 
 // main
-await (argv.hfs ? extractHFSISO() : extractNormalISO());
+if(argv.hfs)	// eslint-disable-line unicorn/prefer-ternary
+	await extractHFSISO();
+else
+	await extractNormalISO();
 await fileUtil.unlink(MOUNT_DIR_PATH, {recursive : true});

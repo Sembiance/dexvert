@@ -5,7 +5,7 @@ export class installShieldHDR extends Format
 	name        = "InstallShield HDR";
 	website     = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
 	ext         = [".hdr"];
-	magic       = ["InstallShield CAB"];
+	magic       = ["InstallShield setup header", "InstallShield CAB"];
 	weakMagic   = true;
 	unsupported = true;
 	notes       = "HDR files are meta data for installShieldCAB files and are not processed directly.";

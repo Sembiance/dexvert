@@ -10,14 +10,14 @@ export class ftp extends Server
 	p = null;
 	baseKeys = Object.keys(this);
 
-	async startVSFTPD()
+	async startUFTPD()
 	{
-		this.xlog.info`Stopping existing VSFTPD procs...`;
-		await runUtil.run("sudo", ["killall", "--wait", "vsftpd"]);
+		this.xlog.info`Stopping existing UFTPD procs...`;
+		await runUtil.run("sudo", ["killall", "--wait", "uftpd"]);
 
-		this.xlog.info`Starting VSFTPD...`;
+		this.xlog.info`Starting UFTPD...`;
 
-		const {p} = await runUtil.run("vsftpd", [path.join(xu.dirname(import.meta), "..", "..", "ftp", "amigappc-vsftpd.conf")], {detached : true});
+		const {p} = await runUtil.run("uftpd", ["-n", "-o", `ftp=7021,tftp=0,pasv_addr=192.168.52.2,writable`, FTP_BASE_DIR_PATH], {detached : true, stdoutcb : line => this.xlog.info`${line}`, stderrcb : line => this.xlog.warn`${line}`});
 		this.p = p;
 		this.p.status().then(async () =>
 		{
@@ -26,8 +26,8 @@ export class ftp extends Server
 			if(this.stopping)
 				return;
 
-			this.xlog.warn`VSFTPD server has stopped! Restarting...`;
-			await this.startVSFTPD();
+			this.xlog.error`UFTPD server has stopped! Restarting...`;
+			await this.startUFTPD();
 		});
 	}
 
@@ -36,7 +36,7 @@ export class ftp extends Server
 		for(const v of ["in", "out", "backup"])
 			await Deno.mkdir(path.join(FTP_BASE_DIR_PATH, v), {recursive : true});
 
-		await this.startVSFTPD();
+		await this.startUFTPD();
 	}
 
 	status()
@@ -46,11 +46,11 @@ export class ftp extends Server
 
 	async stop()
 	{
-		this.xlog.info`Stopping VSFTPD...`;
+		this.xlog.info`Stopping UFTPD...`;
 		
 		this.stopping = true;
 
 		if(this.p)
-			await runUtil.kill(this.p, "SIGTERM");
+			await runUtil.kill(this.p);
 	}
 }

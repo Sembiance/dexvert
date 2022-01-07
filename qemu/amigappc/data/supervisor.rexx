@@ -3,6 +3,7 @@ debugMode = 1
 myPid = readFile("RAM:supervisor.pid")
 
 ipAddress = getIPAddress()
+dbg("Our IP address: "ipAddress)
 r = runAndWait('wget --quiet --output-file=NIL: "http://192.168.52.2:17735/qemuReady?osid=amigappc&ip='ipAddress'"')
 
 inLHARemoteFile = "in/"ipAddress".lha"

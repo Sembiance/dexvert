@@ -81,6 +81,7 @@ export class deark extends Program
 			".bmp"  : "bmp",
 			".eps"  : "eps",
 			".jp2"  : "jpeg2000",
+			".pict" : "pict",
 			".qtif" : "qtif",
 			".tif"  : "tiff",
 			".tiff" : "tiff"

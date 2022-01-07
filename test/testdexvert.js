@@ -130,6 +130,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/poly\/povRay\/.+/i, "text", true],
 	[/poly\/vrml\/.+/i, "text", true],
 	[/poly\/ydl\/.+/i, "text", true],
+	[/unsupported\/emacsCompiledLisp\/FILES\.ELC/i, "text", true],
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],

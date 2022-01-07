@@ -634,7 +634,7 @@ export class Program
 	// returns args needed to call a sub deno script
 	static denoArgs(...args)
 	{
-		return ["run", "--import-map", "/mnt/compendium/DevLab/deno/importMap.json", "--unstable", "--allow-read", "--allow-write", "--allow-env", "--allow-run", ...args];
+		return ["run", "--import-map", "/mnt/compendium/DevLab/deno/importMap.json", "--no-check", "--unstable", "--allow-read", "--allow-write", "--allow-env", "--allow-run", ...args];
 	}
 
 	// returns env needed to properly run deno scripts

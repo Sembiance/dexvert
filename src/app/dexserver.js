@@ -1,9 +1,18 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
 
-const xlog = new XLog();
+const argv = cmdUtil.cmdInit({
+	cmdid   : "dexserver",
+	version : "1.0.0",
+	desc    : "Starts needed background services for dexvert to properly function",
+	opts    :
+	{
+		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
+	}});
+
+const xlog = new XLog(argv.logLevel);
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");

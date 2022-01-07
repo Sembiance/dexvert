@@ -30,7 +30,7 @@ const IGNORED_MIMES =
 	// Document formats
 	"application/oxps", "application/vnd.ms-xpsdocument",
 	"application/pdf", "application/x-pdf",
-	"image/vnd.djvu",
+	"image/vnd.djvu+multipage", "image/x-djvu", "image/vnd.djvu",
 
 	// Modern formats
 	"image/x-fuif",

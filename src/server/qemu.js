@@ -34,7 +34,7 @@ const OS =
 {
 	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
 	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
-	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx", runDelay : xu.SECOND*2},
+	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx"},
 	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"], inOutType : "ssh", scriptExt : ".sh" }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
@@ -44,9 +44,16 @@ const INSTANCES = {};
 const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
+const CHECK_QUEUE_INTERVAL = 50;
+
+function prelog(instance)
+{
+	return `${instance.osid} #${instance.instanceid} (VNC ${instance.vncPort}):`;
+}
 
 export class qemu extends Server
 {
+	checkQueueCounter = 0;
 	serversLaunched = false;
 	IN_OUT_LOGIC = {
 		mount : async (instance, {body}) =>
@@ -57,6 +64,8 @@ export class qemu extends Server
 			const tmpGoFilePath = await fileUtil.genTempPath(undefined, path.extname(instance.scriptName));
 			const totalFilesSize = (await body.inFilePaths.parallelMap(async inFilePath => (await Deno.stat(inFilePath)).size)).sum();
 
+			this.xlog.debug`${prelog(instance)} rsyncing files ${body.inFilePaths} to ${inDirPath}`;
+
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(inDirPath, "/")]));
 
@@ -64,13 +73,17 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.xlog.info`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.info`${prelog(instance)} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
+
+			this.xlog.debug`${prelog(instance)} Writing go script to tmp file ${tmpGoFilePath}`;
 
 			// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
 			await Deno.writeTextFile(tmpGoFilePath, body.script);
 			await fileUtil.move(tmpGoFilePath, goFilePath, this);
+
+			this.xlog.debug`${prelog(instance)} Awaiting VM to finish and delete the go script....`;
 
 			// Wait for finish, which happens when the VM deletes the go file
 			await xu.waitUntil(async () => (!(await fileUtil.exists(goFilePath))));
@@ -79,7 +92,7 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.xlog.info`${instance.osid} #${instance.instanceid} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.info`${prelog(instance)} waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
 
@@ -162,8 +175,6 @@ export class qemu extends Server
 		instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
 		instance.scriptName = `go${OS[osid].scriptExt}`;
 		instance.inOutType = OS[osid].inOutType;
-		if(OS[osid].runDelay)
-			instance.runDelay = OS[osid].runDelay;
 		INSTANCES[osid][instanceid] = instance;
 		
 		await Deno.mkdir(path.join(instance.dirPath, "in"), {recursive : true});
@@ -209,47 +220,48 @@ export class qemu extends Server
 		{
 			instance.ready = false;
 			instance.p = null;
-			this.xlog.warn`${osid} #${instanceid} has exited with status ${v}`;
+			this.xlog.warn`${prelog(instance)} has exited with status ${v}`;
 		});
 
-		this.xlog.info`${osid} #${instanceid} [${instance.ip}] launched (VNC port ${5900 + instance.vncPort}), waiting for it to boot...`;
+		this.xlog.info`${prelog(instance)} launched, waiting for it to boot...`;
 		await Deno.writeTextFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
 	}
 
 	// Called when the QEMU has fully booted and is ready to received files
 	async readyOS(instance)
 	{
-		this.xlog.info`${instance.osid} #${instance.instanceid} declared itself ready!`;
+		this.xlog.info`${prelog(instance)} declared itself ready!`;
 		if(instance.inOutType==="mount")
 		{
 			this.xlog.info`${instance.osid} #${instance.instanceid} mounting in/out...`;
 			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			for(const v of ["in", "out"])
-				await runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, path.join(instance.dirPath, v)]);
+			{
+				const mountDirPath = path.join(instance.dirPath, v);
+				const {stdout : mountStdout, stderr : mountStderr} = await runUtil.run("sudo", ["mount", ...mountArgs, `//127.0.0.1/${v}`, mountDirPath], {verbose : this.xlog.atLeast("debug")});
+				const {stdout : mountStatus} = await runUtil.run("sudo", ["findmnt", "--output", "FSTYPE", "--noheadings", mountDirPath]);
+				if(mountStatus.trim().toLowerCase()!=="cifs")
+					throw new Error(`Failed to mount ${v} with args ${mountArgs} to ${mountDirPath} with mount stdout ${mountStdout} and stderr ${mountStderr}`);
+			}
 		}
 
-		this.xlog.info`${instance.osid} #${instance.instanceid} fully ready! (VNC ${5900 + instance.vncPort})`;
+		this.xlog.info`${prelog(instance)} fully ready! (VNC ${5900 + instance.vncPort})`;
 		instance.ready = true;
 	}
 
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
-		this.xlog.info`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) run with file ${(body.inFilePaths || [])[0]}`;
-		this.xlog.debug`${body.osid} #${instance.instanceid} (VNC ${instance.vncPort}) run with request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
+		this.xlog.info`${prelog(instance)} run with file ${(body.inFilePaths || [])[0]}`;
+		this.xlog.debug`${prelog(instance)} run with request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-		this.xlog.info`${body.osid} #${instance.instanceid} finished request`;
-		if(instance.runDelay)
-		{
-			this.xlog.info`${body.osid} delaying ${(instance.runDelay/xu.SECOND).secondsAsHumanReadable()} due to runInterval setting`;
-			await delay(instance.runDelay);
-		}
+		this.xlog.info`${prelog(instance)} finished request`;
 		instance.busy = false;
 
 		if(inOutErr)
-			this.xlog.error`${instance.osid} (VNC ${instance.vncPort}) ERROR ${inOutErr} with runArgs ${JSON.stringify(runArgs).squeeze()}`;
+			this.xlog.error`${prelog(instance)} ERROR ${inOutErr} with runArgs ${JSON.stringify(runArgs).squeeze()}`;
 
 		reply(new Response(inOutErr ? inOutErr.toString() : "ok"));
 	}
@@ -257,16 +269,32 @@ export class qemu extends Server
 	checkRunQueue()
 	{
 		if(RUN_QUEUE.length===0)
-			return setTimeout(() => this.checkRunQueue(), 100);
-		
+		{
+			this.checkQueueCounter = 0;
+			return setTimeout(() => this.checkRunQueue(), CHECK_QUEUE_INTERVAL);
+		}
+
 		const instance = Object.values(INSTANCES[RUN_QUEUE[0].body?.osid]).find(o => o.ready && !o.busy);
 		if(instance)
 		{
+			this.checkQueueCounter = 0;
 			instance.busy = true;
 			this.performRun(instance, RUN_QUEUE.shift());
 		}
+		else
+		{
+			this.checkQueueCounter++;
+			if(this.checkQueueCounter>((xu.MINUTE/CHECK_QUEUE_INTERVAL)))
+			{
+				this.xlog.warn`QEMU queue has been stuck for over 1 minute with ${RUN_QUEUE.length} items in queue. Instance statuses:`;
+				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
+					this.xlog.warn`${fg.peach("STATUS OF")} ${prelog(subInstance)}: ${{ready : subInstance.ready, busy : subInstance.busy}}`;
 
-		setTimeout(() => this.checkRunQueue(), 100);
+				this.checkQueueCounter = 0;
+			}
+		}
+
+		setTimeout(() => this.checkRunQueue(), 0);
 	}
 
 	async start()
@@ -330,15 +358,15 @@ export class qemu extends Server
 
 	async stopOS(instance)
 	{
-		this.xlog.info`Stopping ${instance.osid} #${instance.instanceid}...`;
+		this.xlog.info`${prelog(instance)} stopping...`;
 		if(instance.inOutType==="mount")
 		{
-			this.xlog.info`${instance.osid} #${instance.instanceid} unmounting in/out...`;
+			this.xlog.info`${prelog(instance)} unmounting in/out...`;
 			for(const v of ["in", "out"])
 				await runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)]);
 		}
 
-		this.xlog.info`${instance.osid} #${instance.instanceid} killing qemu child process...`;
+		this.xlog.info`${prelog(instance)} killing qemu child process...`;
 		if(instance.p)
 			instance.p.kill("SIGTERM");
 	}

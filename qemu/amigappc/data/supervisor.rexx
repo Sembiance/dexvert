@@ -4,7 +4,7 @@ myPid = readFile("RAM:supervisor.pid")
 
 ipAddress = getIPAddress()
 dbg("Our IP address: "ipAddress)
-r = runAndWait('wget --quiet --output-file=NIL: "http://192.168.52.2:17735/qemuReady?osid=amigappc&ip='ipAddress'"')
+r = runAndWait('wget --quiet --output-file=NIL: --output-document=NIL: "http://192.168.52.2:17735/qemuReady?osid=amigappc&ip='ipAddress'"')
 
 inLHARemoteFile = "in/"ipAddress".lha"
 inLHALocalFile = "HD:tmp/in.lha"
@@ -22,18 +22,18 @@ DO FOREVER
 	
 	dbg("Running go.rexx")
 	ADDRESS command DELAY 25
-	r = runAndWaitWithTimeout("RX "goRexxFile, 180.0)
+	r = runAndWaitWithTimeout("RX "goRexxFile, 60.0)
 	
 	dbg("Creating out.lha")
 	r = runAndWait("lha -r -a -q a "outLHALocalFile" HD:out/ #?")
 	IF EXISTS(outLHALocalFile) THEN DO
 		dbg("Uploading out.lha")
-		r = ftpCmd("put "outLHALocalFile" "outLHARemotefile)
+		r = runAndWait("wget --quiet --output-file=NIL: --output-document=NIL: --post-file="outLHALocalFile' --timeout=10 "http://192.168.52.2:17735/qemuPOST?osid=amigappc&ip='ipAddress'"')
 		ADDRESS command DELETE outLHALocalFile FORCE QUIET
 	END
-
-	dbg("Deleting remote in.lha")
-	r = ftpCmd("delete "inLHARemoteFile)
+	ELSE DO
+		r = runAndWait('wget --quiet --output-file=NIL: --output-document=NIL: --timeout=10 "http://192.168.52.2:17735/qemuDONE?osid=amigappc&ip='ipAddress'"')
+	END
 END
 
 EXIT
@@ -45,11 +45,19 @@ dbg:
 	RETURN 0
 
 waitForGoRexx:
-	PROCEDURE EXPOSE inLHARemoteFile inLHALocalFile goRexxFile debugMode
+	PROCEDURE EXPOSE inLHARemoteFile inLHALocalFile goRexxFile debugMode ipAddress
 	DO FOREVER
 		ADDRESS command DELAY 25
-		r = ftpCmd("get "inLHARemoteFile" "inLHALocalFile)
+		r = runAndWait("wget --quiet --output-file=NIL: --output-document="inLHALocalFile' --timeout=10 "http://192.168.52.2:17735/qemuGET?osid=amigappc&ip='ipAddress'"')
 		IF ~ EXISTS(inLHALocalFile) THEN ITERATE
+		IF OPEN("INLHA", inLHALocalFile, "R") THEN DO
+			size = SEEK("INLHA", 0, "E")
+			CLOSE("INLHA")
+			IF SIZE=0 THEN DO
+				ADDRESS command DELETE inLHALocalFile FORCE QUIET
+				ITERATE
+			END
+		END
 		dbg("Found and extracting in.lha file")
 		ADDRESS command
 		LHA "-q x "inLHALocalFile" HD:in/"
@@ -71,17 +79,6 @@ getIPAddress:
 	result = readFile(ipFile)
 	ADDRESS command DELETE ifStatusFile ipLineFile ipFile QUIET
 	RETURN result
-
-ftpCmd:
-	PROCEDURE
-	PARSE ARG cmd
-	QUEUE "open 192.168.52.2 7021"
-	QUEUE "anonymous"
-	QUEUE "passive"
-	QUEUE cmd
-	QUEUE "quit"
-	ADDRESS command FTP ">NIL:"
-	RETURN 0
 
 runAndWaitWithTimeout:
 	PROCEDURE EXPOSE myPid

@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil} from "xutil";
-import {path, delay} from "std";
+import {path, delay, streams} from "std";
 import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
@@ -34,17 +34,22 @@ const OS =
 {
 	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
 	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
-	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "ftp", scriptExt : ".rexx"},
+	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "http", scriptExt : ".rexx"},
 	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"], inOutType : "ssh", scriptExt : ".sh" }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
+
+const HTTP_DIR_PATH = "/mnt/ram/dexvert/http";
+const HTTP_IN_DIR_PATH = path.join(HTTP_DIR_PATH, "in");
+const HTTP_OUT_DIR_PATH = path.join(HTTP_DIR_PATH, "out");
 
 const INSTANCES = {};
 const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = [];
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 const CHECK_QUEUE_INTERVAL = 50;
+const CHECK_QUEUE_TOO_LONG = xu.MINUTE*5;
 
 function prelog(instance)
 {
@@ -102,13 +107,13 @@ export class qemu extends Server
 			await fileUtil.emptyDir(inDirPath);
 			await fileUtil.emptyDir(outDirPath);
 		},
-		ftp : async (instance, {body}) =>
+		http : async (instance, {body}) =>
 		{
 			const tmpInLHAFilePath = await fileUtil.genTempPath(undefined, ".lha");
-			const tmpInDirPath = await fileUtil.genTempPath(undefined, "qemuftp");
+			const tmpInDirPath = await fileUtil.genTempPath(undefined, "qemuhttp");
 			const tmpGoFilePath = path.join(tmpInDirPath, instance.scriptName);
-			const inLHAFilePath = path.join("/mnt/ram/dexvert/ftp/in", `${instance.ip}.lha`);
-			const outLHAFilePath = path.join("/mnt/ram/dexvert/ftp/out", `${instance.ip}.lha`);
+			const inLHAFilePath = path.join(HTTP_IN_DIR_PATH, `${instance.ip}.lha`);
+			const outLHAFilePath = path.join(HTTP_OUT_DIR_PATH, `${instance.ip}.lha`);
 
 			await Deno.mkdir(tmpInDirPath, {recursive : true});
 
@@ -118,7 +123,7 @@ export class qemu extends Server
 			await Deno.writeTextFile(tmpGoFilePath, body.script);
 
 			// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-			await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});	//shell : "/bin/bash",
+			await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});
 			await fileUtil.move(tmpInLHAFilePath, inLHAFilePath, this);
 
 			// Wait for finish, which happens when the VM deletes the lha file
@@ -253,7 +258,7 @@ export class qemu extends Server
 	{
 		const {body, reply} = runArgs;
 		this.xlog.info`${prelog(instance)} run with file ${(body.inFilePaths || [])[0]}`;
-		this.xlog.debug`${prelog(instance)} run with request: ${{...body, script : body.script.trim().split("\n").find(v => v.startsWith("Run")) || body.script.trim().split("\n")[0]}}`;
+		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
@@ -284,7 +289,7 @@ export class qemu extends Server
 		else
 		{
 			this.checkQueueCounter++;
-			if(this.checkQueueCounter>((xu.MINUTE/CHECK_QUEUE_INTERVAL)))
+			if(this.checkQueueCounter>((CHECK_QUEUE_TOO_LONG/CHECK_QUEUE_INTERVAL)))
 			{
 				this.xlog.warn`QEMU queue has been stuck for over 1 minute with ${RUN_QUEUE.length} items in queue. Instance statuses:`;
 				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
@@ -306,6 +311,7 @@ export class qemu extends Server
 		await runUtil.run("sudo", ["killall", "--wait", "qemu-system-x86_64", "qemu-system-i386", "qemu-system-ppc"]);
 
 		this.webServer = new WebServer(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
+		
 		this.webServer.add("/qemuReady", async request =>
 		{
 			const u = new URL(request.url);
@@ -314,12 +320,46 @@ export class qemu extends Server
 			await this.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
 			return new Response("ok");
 		});
+		
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
 			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.length})`;
 			RUN_QUEUE.push({body, request, reply});
-		}, {detached : true, method : "POST"});
+		}, {detached : true, method : "POST", logCheck : () => false});
+		
+		await Deno.mkdir(HTTP_IN_DIR_PATH, {recursive : true});
+		await Deno.mkdir(HTTP_OUT_DIR_PATH, {recursive : true});
+		this.webServer.add("/qemuGET", async (request, reply) =>
+		{
+			const ipAddress = (new URL(request.url)).searchParams.get("ip");
+			this.xlog.debug`Got qemuGET from IP ${ipAddress}`;
+			const inLHAFilePath = path.join(HTTP_IN_DIR_PATH, `${ipAddress}.lha`);
+			if(!(await fileUtil.exists(inLHAFilePath)))
+				return reply(new Response(null, {status : 404}));
+						
+			const inLHA = await Deno.open(inLHAFilePath, {read : true});
+			reply(new Response(streams.readableStreamFromReader(inLHA), {headers : {"Content-Type" : "application/octet-stream"}}));
+		}, {detached : true, method : "GET", logCheck : () => false});
+
+		this.webServer.add("/qemuPOST", async (request, reply) =>
+		{
+			const ipAddress = (new URL(request.url)).searchParams.get("ip");
+			const requestArrayBuffer = await request.arrayBuffer();
+			this.xlog.debug`Got qemuPOST from IP ${ipAddress} with a buffer ${requestArrayBuffer.byteLength} bytes long`;
+			await Deno.writeFile(path.join(HTTP_OUT_DIR_PATH, `${ipAddress}.lha`), new Uint8Array(requestArrayBuffer));
+			await fileUtil.unlink(path.join(HTTP_IN_DIR_PATH, `${ipAddress}.lha`), {recursive : true});
+			reply(new Response("", {status : 200}));
+		}, {detached : true, method : "POST", logCheck : () => false});
+
+		this.webServer.add("/qemuDONE", async (request, reply) =>
+		{
+			const ipAddress = (new URL(request.url)).searchParams.get("ip");
+			this.xlog.debug`Got qemuDONE from IP ${ipAddress}`;
+			await fileUtil.unlink(path.join(HTTP_IN_DIR_PATH, `${ipAddress}.lha`), {recursive : true});
+			reply(new Response("", {status : 200}));
+		}, {detached : true, method : "GET"});
+
 		await this.webServer.start();
 
 		this.xlog.info`Finding old QEMU instances...`;

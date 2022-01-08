@@ -38,6 +38,7 @@ const FLEX_SIZE_PROGRAMS =
 	doomMUS2mp3      : 0.1,
 	fontforge        : 0.1,
 	sidplay2         : 0.1,
+	sndh2raw         : 0.1,
 	soundFont2tomp3  : 0.1,
 	zxtune123        : 0.1
 };

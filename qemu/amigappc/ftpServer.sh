@@ -1,4 +1,11 @@
 #!/bin/bash
-mkdir -p /mnt/ram/dexvert/ftp/in /mnt/ram/dexvert/ftp/out /mnt/ram/dexvert/ftp/backup
-echo "Starting UFTPD for dir: /mnt/ram/dexvert/ftp/"
-uftpd -l info -n -o ftp=7021,pasv_addr=192.168.52.2,writable /mnt/ram/dexvert/ftp
+mkdir -p ftp
+echo "You can use this to transfer files to/from amiga"
+echo "Stick files you want to serve in the 'ftp' dir"
+echo "On the amiga side do:"
+echo "  ftp"
+echo "  open 192.168.52.2 7021"
+echo "  anonymous"
+echo "  passive"
+
+uftpd -l info -n -o ftp=7021,pasv_addr=192.168.52.2,writable ftp

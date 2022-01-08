@@ -10,6 +10,17 @@ export class xfdDecrunch extends Program
 
 	bin  = "xfdDecrunch";
 	args = r => [r.inFile(), "HD:out/outfile"];
+	
+	// some files may be password protected (sample/archive/xpk/G-SpellMoon1.0)
+	// Below I tried to use a simple REXX script that will queue up 'password' as the test password and then run our actual bin, xfdDecrunch, thus preventing it from haning waiting for password input
+	// Sadly, while running the go.rexx script that is generate manually works fine on the amiga, it doesn't work when being run from the supervisor, and I could not figure out why
+	// so we just run the xfdDecrunch command directly and will just have to wait for the built in supervisor.rexx 60 second timeout. sigh.
+	/*qemuData = r => ({
+		script : [
+			`QUEUE "password"`,
+			`ADDRESS command xfdDecrunch "HD:in/${r.inFile()}" "HD:out/outfile" "FORCE" "NOASK" "NOXPKPWD"`
+		] });*/
+	
 	post = async r =>
 	{
 		if(!r.flags.addHeader || !r.f.files.new)

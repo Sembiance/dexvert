@@ -181,11 +181,11 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 	else if(osid.startsWith("amiga"))
 	{
 		// Build an Amiga script
-		scriptLines.push("/* dexvert go script */");
-		scriptLines.push(`ADDRESS command "${binAndArgs}"`);
-
+		scriptLines.push("/* dexvert go script */");	// A comment on the first line is REQUIRED for a script to be runnable!
 		if(script)
-			scriptLines.push(script);
+			scriptLines.push(...Array.force(script));
+		else
+			scriptLines.push(`ADDRESS command ${binAndArgs.includes(`"`) ? `'` : `"`}${binAndArgs}${binAndArgs.includes(`"`) ? `'` : `"`}`);
 		
 		scriptLines.push("EXIT");
 	}

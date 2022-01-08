@@ -46,11 +46,13 @@ const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPat
 if(!dexState)
 	await handleExit(xlog.warn`No processed result.`);
 
+const serializedState = (argv.jsonFile || argv.json) ? JSON.stringify(dexState.serialize()) : null;
+
 if(argv.jsonFile)
-	await Deno.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+	await Deno.writeTextFile(argv.jsonFile, serializedState);
 
 if(argv.json)
-	console.log(JSON.stringify(dexState.serialize()));
+	console.log(serializedState);
 
 if(xlog.atLeast("fatal"))
 {

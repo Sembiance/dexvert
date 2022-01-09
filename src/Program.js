@@ -294,7 +294,7 @@ export class Program
 			const newName = (ro.name===true ? getName(originalInput || f.input) : ((typeof ro.name==="function" ? ro.name(r, originalInput) : ro.name) || getName(f.new)));
 			const newExt = ((typeof ro.ext==="function" ? ro.ext(r, originalInput) : ro.ext) || f.new.ext);
 			const originalExt = originalInput ? originalInput.ext : null;
-			const restreamerOpts = {newName, newExt, suffix, numFiles : f.files.new.length, originalExt};
+			const restreamerOpts = {r, newName, newExt, suffix, numFiles : f.files.new.length, originalExt};
 
 			// See if we have more advanced renaming
 			if(ro.renamer && (f.files.new.length>1 || ro.alwaysRename))

@@ -5,6 +5,7 @@ export class sidplay2 extends Program
 	website = "http://sidplay2.sourceforge.net/";
 	package = "media-sound/sidplay";
 	flags   = {
+		songCount  : "Total number of songs in the SID",
 		subSong    : "Specify which sub song to convert, zero based. Default: 1",
 		songLength : "Duration of time to play the SID song. Default: Let sidplay2 decide"
 	};
@@ -23,7 +24,7 @@ export class sidplay2 extends Program
 		regex        : /outfile_(?<songNum>\d+)(?<ext>\.wav)$/,
 		renamer      :
 		[
-			({suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart(numFiles.toString().length, "0"), suffix, ext]
+			({r, suffix, newName, numFiles}, {songNum, ext}) => [newName, " ", songNum.padStart((r.flags.songCount || numFiles).toString().length, "0"), suffix, ext]
 		]
 	};
 	chain = "sox";

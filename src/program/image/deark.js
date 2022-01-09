@@ -3,12 +3,10 @@ import {Program} from "../../Program.js";
 function restRenamer(rest, suffix, newName)
 {
 	// if we don't have a period in our rest, then if it's a common extension fall back on our newName
-	//console.log({rest, suffix, newName});
 	if(!rest.includes("."))
 		return ["gif", "png", "ico", "jpg", "bmp", "eps", "svg", "jp2", "qtif", "tif", "tiff", "bin", "ptr", "icns", "wmf"].includes(rest) && newName ? [newName, suffix, ".", rest] : [suffix, rest];
 	
 	const restParts = rest.split(".");
-	//console.log({restParts});
 	return [restParts.slice(0, -1).join("."), suffix, ".", restParts.at(-1)];
 }
 

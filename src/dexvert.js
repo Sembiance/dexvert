@@ -10,14 +10,14 @@ import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, asId, programFlag=[], xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, asId, programFlag={}, xlog=new XLog()}={})
 {
-	for(const flagRaw of Array.force(programFlag))
+	Object.clear(GLOBAL_FLAGS);
+	for(const [programid, programFlags] of Object.entries(programFlag))
 	{
-		const [programid, flagKey, flagValue] = flagRaw.split(":");
 		if(!Object.hasOwn(GLOBAL_FLAGS, programid))
 			GLOBAL_FLAGS[programid] = {};
-		GLOBAL_FLAGS[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
+		Object.assign(GLOBAL_FLAGS[programid], programFlags);
 	}
 
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))

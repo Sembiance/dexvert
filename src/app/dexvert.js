@@ -29,7 +29,20 @@ if(argv.logFile)
 const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogOptions);
 
 const dexvertOptions = {};
-["asFormat", "programFlag"].forEach(k =>
+if(argv.programFlag)
+{
+	dexvertOptions.programFlags = {};
+	for(const flagRaw of Array.force(argv.programFlag))
+	{
+		const [programid, flagKey, flagValue] = flagRaw.split(":");
+
+		if(!Object.hasOwn(dexvertOptions, programid))
+			dexvertOptions[programid] = {};
+		dexvertOptions[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
+	}
+}
+
+["asFormat"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];

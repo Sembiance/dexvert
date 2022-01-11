@@ -102,6 +102,7 @@ const WEAK_VALUES =
 	/^DICOM medical imaging bitmap/,
 	/^Digital Micrograph Script$/,
 	/^DiskDupe 5\.12 disk image$/,
+	/^Drazpaint \(C64\) bitmap$/,
 	/^Flexible Line Interpretation bitmap$/,
 	/^F\.R\.A\.C\. project$/,
 	/^Generic INI configuration$/,

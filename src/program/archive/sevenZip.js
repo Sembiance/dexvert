@@ -45,8 +45,14 @@ export class sevenZip extends Program
 
 		const dexFileRel = path.relative(r.outDir({absolute : true}), dexFile.absolute);
 
-		// 7z extracts things like DIALOGs, but it's not in a format I can really do anything with, so let's just get rid of it
-		if(dexFileRel.startsWith("DIALOG/") || ["ENGINE", "CODE", "DATA"].includes(dexFileRel) || (!dexFileRel.includes("/") && dexFileRel.startsWith(".")))
+		// p7zip extracts things like DIALOGs and other files that are not in a format I can really do anything with, so let's just get rid of them
+		// List of resources: https://github.com/jinfeihan57/p7zip/blob/295dac87f657de12f6165cb9d81404e079651a50/CPP/7zip/Archive/PeHandler.cpp#L493
+		// GROUP_CURSOR and GROUP_ICON could be 'massaged' into a workable .CUR/.ICO, but I couldn't determine this path and neither p7zip nor wrestool support it: http://manpages.ubuntu.com/manpages/bionic/man1/wrestool.1.html
+		// VERSION is usually parsed by p7zip into version.txt, but some resources don't parse correclty (executable/exe/Keypad.exe)
+		// MENU could parsed out into a txt file representing the menu, but I'd have to find the binary format spec for these resources, for now, just ditch em
+		const SKIP_DIRS = ["ACCELERATOR", "DIALOG", "GROUP_CURSOR", "GROUP_ICON", "MENU", "VERSION"];
+		const SKIP_FILENAMES = ["ENGINE", "CODE", "DATA"];
+		if(SKIP_DIRS.some(v => dexFileRel.split("/").slice(0, -1).some(dirname => dirname.startsWith(v))) || SKIP_FILENAMES.includes(dexFileRel) || (!dexFileRel.includes("/") && dexFileRel.startsWith(".")))
 			return false;
 
 		return true;

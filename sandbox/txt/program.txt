@@ -106,6 +106,7 @@ Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> timeout			Maximum duration to allow it to run before stopping
 	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
 	>>> dontMaximize	Pass true to prevent the window from running maximized	
+	>>> quoteArgs		Set to true to quote args
 
 >>> dosData = ({timeout : xu.SECOND*30})  ||  dosData = async (runState) => ({...})
 An object or a function that returns and object to be passed into dosUtil.run()

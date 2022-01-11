@@ -105,6 +105,7 @@ export class RunState
 			{
 				r.push(`\n${pre}\t${xu.colon("   cwd")}${this.cwd}`);
 				r.push(`\n${pre}\t${xu.colon("  opts")}${xu.inspect(this.runOptions || {}).squeeze()}`);
+				r.push(`\n${pre}\t${xu.colon(" flags")}${xu.inspect(this.flags || {}).squeeze()}`);
 			}
 		}
 		else if(this.qemuData)

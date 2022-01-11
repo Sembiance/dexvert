@@ -115,7 +115,7 @@ EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, noAuxFiles, xlog})
+export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, xlog})
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
@@ -133,15 +133,9 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 		fullCmd = (/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`;
 		binAndArgs += `"${fullCmd}"`;
 
+		const q = quoteArgs ? '"' : "";
 		if(args.length>0)
-		{
-			binAndArgs += ` ${args.map(v => (inFilesRel.includes(v) ? `c:\\in\\${path.basename(v)}` : v)).map(_v =>
-			{
-				let v = _v;
-				[" ", "'"].forEach(c => { v = v.replaceAll(c, `' & "${c}" & '`); });
-				return v;
-			}).join(" ")}`;
-		}
+			binAndArgs += ` ${args.map(v => (inFilesRel.includes(v) ? `c:\\in\\${path.basename(v)}` : v)).map(v => `${q}${v.split("").map(c => ([" ", "'"].includes(c) ? `' & "${c}" & '` : (c==='"' ? `' & '"' & '` : c))).join("")}${q}`).join(" ")}`;
 	}
 	else if(osid.startsWith("amiga"))
 	{

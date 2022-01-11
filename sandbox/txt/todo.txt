@@ -7,6 +7,9 @@
 /---------------\
 | High Priority |
 \---------------/
+* Amiga bitmap font support converter: https://github.com/smugpie/amiga-bitmap-font-tools
+  Sadly it wouldn't work on any fonts, I filed a bug: https://github.com/smugpie/amiga-bitmap-font-tools/issues/2
+
 * document/wildcatWCX files often fails to convert when running tests, try and reproduce so I can figure out why
 
 * Consider updating IsoBuster to 4.9: https://www.isobuster.com/news/isobuster_4.9_release_notes
@@ -51,6 +54,9 @@ There are likely to be filename collisions. I should also preserve those from th
 /--------------\
 | Low Priority |
 \--------------/
+* Could add printer support to DOSBox: https://sourceforge.net/p/dosbox/patches/?limit=250
+  Then I could 'print' certain things, like EnvisionPublisher documents (look for others)
+
 * Improve ILBM animations. Probably need to use an amiga program under QEMU and export as either GIF or raw PNG frames
   Abydos author mentioned he would like to improve the animations
   PPaint can save as animated GIF, but dunno if it handles color cycling: http://www.ppaint.com/

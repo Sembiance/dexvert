@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class fileMerlin extends Program
 {
@@ -12,7 +13,7 @@ export class fileMerlin extends Program
 	};
 	loc       = "winxp";
 	bin       = "c:\\ACI Programs\\FMerlin\\fmn.exe";
-	args      = r => [`in(${r.inFile()})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
+	args      = r => [`in(${path.basename(r.inFile())})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
 	qemuData  = ({
 		timeout : xu.MINUTE,
 		script : `

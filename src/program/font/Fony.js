@@ -7,8 +7,9 @@ export class Fony extends Program
 	bin      = "Fony.exe";
 	args     = r => [r.inFile()];
 	qemuData = ({
+		quoteArgs : true,
 		script : `
-			$errorVisible = WinWaitActive("[TITLE:Error Loading Font]", "", 10)
+			$errorVisible = WinWaitActive("[TITLE:Error Loading Font]", "", 5)
 			If $errorVisible Not = 0 Then
 				ControlClick("[TITLE:Error Loading Font]", "", "[CLASS:TBitBtn; TEXT:OK]")
 			Else

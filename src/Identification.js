@@ -13,7 +13,7 @@ export class Identification
 		validateClass(id, {
 			// required
 			magic      : {type : "string", required : true},					// the value of the identification
-			from       : {type : "string", required : true, enum : ["dexvert", ...DETECTOR_PROGRAMS]}, // which programid produced the magic
+			from       : {type : "string", required : true, enum : ["dexvert", "single", ...DETECTOR_PROGRAMS]}, // which programid produced the magic
 			confidence : {type : "number", required : true, range : [0, 100]},	// what confidence level this identification is
 
 			// optional

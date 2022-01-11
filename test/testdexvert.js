@@ -28,19 +28,32 @@ const SUPPORTING_DIR_PATHS =
 	"music/Instruments"
 ];
 
+// these formats have files that won't identify due to not being in the proper disk locations, so we force the format
+const FORCE_FORMAT_AS =
+[
+	"font/amigaBitmapFontContent"
+];
+
+// these formats produce a single file, but the name is always different
+const SINGLE_FILE_DYNAMIC_NAMES =
+[
+	"font/amigaBitmapFontContent"
+];
+
 const FLEX_SIZE_PROGRAMS =
 {
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 	
 	// Produces different data each time
-	darktable_cli    : 0.1,
-	doomMUS2mp3      : 0.1,
-	fontforge        : 0.1,
-	sidplay2         : 0.1,
-	sndh2raw         : 0.1,
-	soundFont2tomp3  : 0.1,
-	zxtune123        : 0.1
+	amigaBitmapFontContentToOTF : 0.1,
+	darktable_cli               : 0.1,
+	doomMUS2mp3                 : 0.1,
+	fontforge                   : 0.1,
+	sidplay2                    : 0.1,
+	sndh2raw                    : 0.1,
+	soundFont2tomp3             : 0.1,
+	zxtune123                   : 0.1
 };
 
 const FLEX_SIZE_FORMATS =
@@ -209,10 +222,15 @@ async function testSample(sampleFilePath)
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const diskFamily = sampleSubFilePath.split("/")[0];
 	const diskFormat = sampleSubFilePath.split("/")[1];
+	const diskFormatid = `${diskFamily}/${diskFormat}`;
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
-	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json", sampleFilePath, tmpOutDirPath];
+	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json"];
+	if(FORCE_FORMAT_AS.includes(diskFormatid))
+		dexvertArgs.push(`--asFormat=${diskFormatid}`);
+	dexvertArgs.push(sampleFilePath, tmpOutDirPath);
+
 	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*10});
 	const resultFull = xu.parseJSON(r.stdout, {});
 
@@ -340,7 +358,7 @@ async function testSample(sampleFilePath)
 	if(result.files)
 	{
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
-		if(diffFiles?.length)
+		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid))
 			return await fail(`Created files are different: ${fg.orange(diffFiles)}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
@@ -353,7 +371,7 @@ async function testSample(sampleFilePath)
 			if(IGNORE_SIZE_FILEPATHS.some(re => re.test(name)))
 				continue;
 
-			const prevFile = prevData.files[name];
+			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 
 			if(sizeDiff!==0 && sizeDiff>allowedSizeDiff)
@@ -366,7 +384,7 @@ async function testSample(sampleFilePath)
 		// Now check timestamps
 		for(const [name, {ts}] of Object.entries(result.files))
 		{
-			const prevFile = prevData.files[name];
+			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
 
 			const tsDate = new Date(ts);
 			const prevDate = typeof prevFile.ts==="string" ? dateParse(prevFile.ts, "yyyy-MM-dd") : new Date(prevFile.ts || Date.now());

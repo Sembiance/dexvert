@@ -13,7 +13,7 @@ export class font extends Family
 		if(identifications.some(id => id.from==="dexvert" && id.family==="font" && id.formatid==="otf"))
 		{
 			const otfinfoR = await Program.runProgram("otfinfo", dexFile, {xlog, autoUnlink : true});
-			if(!otfinfoR.meta?.family)
+			if(!otfinfoR.meta?.family && !otfinfoR.meta?.subfamily && !otfinfoR.meta?.fullName && !otfinfoR.meta?.postScriptName)
 				return false;
 
 			return {identifications};

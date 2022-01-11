@@ -3,13 +3,9 @@
 \--------------/
 
 
-
 /---------------\
 | High Priority |
 \---------------/
-* Amiga bitmap font support converter: https://github.com/smugpie/amiga-bitmap-font-tools
-  Sadly it wouldn't work on any fonts, I filed a bug: https://github.com/smugpie/amiga-bitmap-font-tools/issues/2
-
 * document/wildcatWCX files often fails to convert when running tests, try and reproduce so I can figure out why
 
 * Consider updating IsoBuster to 4.9: https://www.isobuster.com/news/isobuster_4.9_release_notes

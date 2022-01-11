@@ -1519,6 +1519,8 @@ import {oricFont} from "./font/oricFont.js";
 formats.oricFont = oricFont.create(families.font);
 import {dynamicPublisherFont} from "./font/dynamicPublisherFont.js";
 formats.dynamicPublisherFont = dynamicPublisherFont.create(families.font);
+import {amigaBitmapFontContent} from "./font/amigaBitmapFontContent.js";
+formats.amigaBitmapFontContent = amigaBitmapFontContent.create(families.font);
 import {figlet} from "./font/figlet.js";
 formats.figlet = figlet.create(families.font);
 import {pcScreenFont} from "./font/pcScreenFont.js";

@@ -3,7 +3,7 @@ import {validateClass} from "validator";
 import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
 
-export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID"];
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector"];
 
 export const TEXT_MAGIC_STRONG =
 [

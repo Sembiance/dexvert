@@ -37,7 +37,6 @@ const FORCE_FORMAT_AS =
 // these formats produce a single file, but the name is always different
 const SINGLE_FILE_DYNAMIC_NAMES =
 [
-	"font/amigaBitmapFontContent"
 ];
 
 const FLEX_SIZE_PROGRAMS =

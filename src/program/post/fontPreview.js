@@ -12,14 +12,15 @@ export class fontPreview extends Program
 	args    = async r =>
 	{
 		r.svgPreviewFilePath = await fileUtil.genTempPath(r.f.root, ".svg");
+
 		await Deno.writeTextFile(r.svgPreviewFilePath, `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
         <style>
-			@font-face{font-family:&quot;${r.flags.family.escapeXML()}&quot;;src:url(&quot;${r.inFile({absolute : true}).escapeXML()}&quot;)}
+			@font-face{font-family:&quot;${r.flags.family.toString().escapeXML()}&quot;;src:url(&quot;${r.inFile({absolute : true}).escapeXML()}&quot;)}
         </style>
     </defs>
     <g>
-		<text font-size="18pt" font-family="${r.flags.family.escapeXML()}, Arial">
+		<text font-size="18pt" font-family="${r.flags.family.toString().escapeXML()}, Arial">
 			<tspan x="0" y="18pt">abcdefghijklmnopqrstuvwxyz</tspan>
 			<tspan x="0" dy="26pt">ABCDEFGHIJKLMNOPQRSTUVWXYZ</tspan>
 			<tspan x="0" dy="26pt">0123456789\`~!@#$%^&amp;*()-_+=&gt;,&lt;.[]{}|\\:;"'/?</tspan>
@@ -27,7 +28,7 @@ export class fontPreview extends Program
 			<tspan x="0" dy="26pt">ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß</tspan>
 			<tspan x="0" dy="26pt">àáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ</tspan>
 		</text>
-		<text dy="190pt" font-size="18pt" font-family="${r.flags.family.escapeXML()}, Arial">
+		<text dy="190pt" font-size="18pt" font-family="${r.flags.family.toString().escapeXML()}, Arial">
 			<tspan x="0" y="0">12</tspan><tspan x="28pt" font-size="12pt">The quick brown fox jumps over the lazy dog.</tspan>
 			<tspan x="0" dy="26pt">18</tspan><tspan x="28pt" font-size="18pt">The quick brown fox jumps over the lazy dog.</tspan>
 			<tspan x="0" dy="30pt">24</tspan><tspan x="28pt" font-size="24pt">The quick brown fox jumps over the lazy dog.</tspan>

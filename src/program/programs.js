@@ -87,6 +87,8 @@ import {macromediaDirector} from "./archive/macromediaDirector.js";
 programs.macromediaDirector = macromediaDirector.create(programs.macromediaDirector);
 import {listamos} from "./archive/listamos.js";
 programs.listamos = listamos.create(programs.listamos);
+import {dmg2img} from "./archive/dmg2img.js";
+programs.dmg2img = dmg2img.create(programs.dmg2img);
 import {hypercard_dasm} from "./archive/hypercard_dasm.js";
 programs.hypercard_dasm = hypercard_dasm.create(programs.hypercard_dasm);
 import {unpcxgx} from "./archive/unpcxgx.js";

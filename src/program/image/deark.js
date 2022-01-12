@@ -61,10 +61,14 @@ export class deark extends Program
 		]
 	};
 
-	verify = r =>
+	verify = (r, dexFile) =>
 	{
 		// Deark's newprintshop module can convert almost any file into a bunch of garbage. So if that was used with anything other than a .pog, nothing from it is worth keeping
 		if(r.stdout.includes("Module: newprintshop") && r.f.input.ext.toLowerCase()!==".pog")
+			return false;
+
+		// DMG files incorrectly identified as ZLIB when sent to deark produces invalid 512byte output files, so check that here and deny them
+		if(r.stdout.includes("zlib") && dexFile.ext===".unc" && dexFile.size===512)
 			return false;
 
 		return true;

@@ -7,5 +7,7 @@ export class rtf extends Format
 	ext            = [".rtf"];
 	forbidExtMatch = true;
 	magic          = ["Rich Text Format"];
-	converters     = ["fileMerlin", "soffice"];
+
+	// fileMerlin will convert RTF too, but it produces artifacts (page 30, 31, etc in document/rtf/DIGITIZE.RTF)
+	converters     = ["soffice", "fileMerlin"];
 }

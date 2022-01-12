@@ -15,7 +15,7 @@ export class unar extends Program
 		alwaysRename : true,
 		renamer      :
 		[
-			({fn}) => [fn.replaceAll("\r", "↵").replaceAll("\n", "↵")]
+			({fn}) => [fn.replaceAll("\r", "↵").replaceAll("\n", "↵").replaceAll("\t", "⇥")]
 		]
 	};
 }

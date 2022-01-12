@@ -104,6 +104,7 @@ export default
 		amigaEModule                 : {name : "Amiga E Module", ext : [".m"], magic : ["Amiga E module", "E module/library"]},
 		amigaLibrary                 : {name : "Amiga Hunk Library/Object", ext : [".lib", ".obj", ".o"], magic : ["AmigaOS object/library data", "Amiga Hunk library/object code"]},
 		amigaSharedLibrary           : {name : "Amiga Shared Library", ext : [".lib"], magic : ["AmigaOS shared library"]},
+		appleScriptCompiled          : {name : "Compiled AppleScript Script", magic : ["AppleScript compiled", "Compiled AppleScript script"]},
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
 		autoCADProtectedLISP         : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},

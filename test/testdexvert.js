@@ -104,7 +104,10 @@ const FLEX_SIZE_FORMATS =
 // if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
 const IGNORE_SIZE_FILEPATHS =
 [
-	/scripts\/.+\.as$/i				// archive/swf/cookie-hamster often produces very different script/**/*.as files
+	/scripts\/.+\.as$/i,			// archive/swf/cookie-hamster often produces very different script/**/*.as files
+
+	/lem2.webp$/,
+	/SUB2.webp$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format

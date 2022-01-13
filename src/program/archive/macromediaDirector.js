@@ -32,7 +32,12 @@ export class macromediaDirector extends Program
 			; Dismiss any replacement questions			
 			Local $whereIs
 			Do
-				$whereIs = WinWaitActive("Locate replacement", "", 3)
+				Sleep(3000)
+				$whereIs = WinActive("Locate replacement", "")
+				If $whereIs = 0 Then
+					$whereIs = WinActive("Where is", "")
+				EndIf
+
 				If $whereIs Not = 0 Then
 					Send("{ESCAPE}")
 				EndIf

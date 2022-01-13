@@ -115,7 +115,7 @@ EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, xlog})
+export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, xlog})
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
@@ -155,10 +155,16 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, timeout=x
 
 		if(!script && timeout)
 			scriptLines.push(AUTOIT_FUNCS.WaitForPID, AUTOIT_FUNCS.RunWaitWithTimeout);
-		else
+		
+		if(script)
 			scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (!AUTO_INCLUDE_FUNCS.includes(funcName) && script.includes(funcName) ? funcText : null)).filter(v => !!v));
+		if(scriptPre)
+		{
+			scriptLines.push(...Object.entries(AUTOIT_FUNCS).map(([funcName, funcText]) => (!AUTO_INCLUDE_FUNCS.includes(funcName) && scriptPre.includes(funcName) ? funcText : null)).filter(v => !!v));
+			scriptLines.push(scriptPre);
+		}
 
-		scriptLines.push(`Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
+		scriptLines.push(`$qemuProgramPID = Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
 		if(script)
 			scriptLines.push(script);
 		

@@ -104,6 +104,7 @@ Custom program specific verification function to ensure output file is proper. R
 Can return an object of QEMU specific data to be passed into util.qemu.run():
 	>>> cwd				Which directory to run in
 	>>> timeout			Maximum duration to allow it to run before stopping
+	>>> scriptPre       A list of AutoIt commands to run BEFORE the program executes
 	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
 	>>> dontMaximize	Pass true to prevent the window from running maximized	
 	>>> quoteArgs		Set to true to quote args

@@ -4,6 +4,13 @@ import {fileUtil, runUtil} from "xutil";
 import {QEMU_INSTANCE_DIR_PATH} from "../src/server/qemu.js";
 import {path} from "std";
 
+const MAX_ALLOWABLE_QEMU_DIFFS =
+{
+	win2k    : 0.2,
+	winxp    : 0.2,
+	amigappc : 0.3
+};
+
 const xlog = new XLog();
 
 const instanceJSONFilePaths = await fileUtil.tree(QEMU_INSTANCE_DIR_PATH, {nodir : true, regex : /instance\.json$/});
@@ -21,7 +28,10 @@ await instanceJSONFilePaths.parallelMap(async instanceJSONFilePath =>
 	await runUtil.run("vncsnapshot", ["-nojpeg", "-compresslevel", "0", "-vncQuality", "9", `127.0.0.1:${vncPort}`, snapshotFilePath]);
 	const {stdout : instanceDiff} = await runUtil.run("puzzle-diff", [path.join(xu.dirname(import.meta), "..", "qemu", "baseline-screenshots", `${osid}.png`), snapshotFilePath]);
 	await fileUtil.unlink(snapshotFilePath);
-	r.push({osid, instanceid, vncPort, diff : +instanceDiff.trim()});
+	const o = {osid, instanceid, vncPort, diff : +instanceDiff.trim()};
+	if(o.diff>MAX_ALLOWABLE_QEMU_DIFFS[osid])
+		o.dirty = true;
+	r.push(o);
 });
 
 await fileUtil.unlink(tmpSnapshotDirPath, {recursive : true});

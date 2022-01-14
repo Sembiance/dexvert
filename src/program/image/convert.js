@@ -13,7 +13,16 @@ export class convert extends Program
 	bin  = "convert";
 	args = async r =>
 	{
-		const a = [r.inFile(), "-strip"];
+		const a =
+		[
+			r.inFile(),
+			
+			// strip all metadata
+			"-strip",
+			
+			// treat the output filename exactly as given, don't interpret any percent signs that may be in it
+			"-define", "filename:literal=true"
+		];
 		const outType = (r.flags.outType || "png");
 		if(outType==="png")
 			a.push("-define", "png:exclude-chunks=time");

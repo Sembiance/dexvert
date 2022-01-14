@@ -111,7 +111,13 @@ Func SaveClipboardWithMSPaint($winDir, $outFilePath)
 
 		WinWaitClose("[CLASS:MSPaintApp]", "", 10)
 	EndIf
-EndFunc`
+EndFunc`,
+	CleanupSystray : `
+Func CleanupSystray()
+	MouseMove(312, 756)
+	MouseMove(1000, 756, 20)
+EndFunc
+	`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 

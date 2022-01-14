@@ -1,6 +1,2 @@
-#!/bin/bash
-
-localPort=$(((RANDOM%16000+15000)))
-remotePort=$((($1+5900)))
-ssh -f -o ExitOnForwardFailure=yes -L 127.0.0.1:"$localPort":127.0.0.1:"$remotePort" chatsubo sleep 5
-vncviewer 127.0.0.1:"$localPort"
+#!/bin/sh
+DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768 --no-check --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-run --allow-env /mnt/compendium/DevLab/dexvert/bin/dexqemuvnc.js "$@"

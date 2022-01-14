@@ -77,9 +77,9 @@ tiptoe(
 		this.data.bitmapFilePaths.parallelForEach((bitmapFilePath, subcb) =>
 		{
 			if(bitmapFilePath.endsWith(".shg"))
-				runUtil.run("convert", [`${bitmapFilePath}.000.bmp`, "-strip", "-define", "png:exclude-chunks=time", `${bitmapFilePath}.png`], {verbose : true}, subcb);
+				runUtil.run("convert", [`${bitmapFilePath}.000.bmp`, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", `${bitmapFilePath}.png`], {verbose : true}, subcb);
 			else
-				runUtil.run("convert", [bitmapFilePath, "-strip", "-define", "png:exclude-chunks=time", `${bitmapFilePath}.png`], {verbose : true}, subcb);
+				runUtil.run("convert", [bitmapFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", `${bitmapFilePath}.png`], {verbose : true}, subcb);
 		}, this);
 	},
 	function loadImages()

@@ -6,5 +6,5 @@ export class sit extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/SIT";
 	ext        = [".sit"];
 	magic      = ["StuffIt compressed archive", /StuffIt Archive/];
-	converters = ["unar", "UniExtract"];
+	converters = ["unar[mac]", "UniExtract"];
 }

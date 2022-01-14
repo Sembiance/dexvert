@@ -7,5 +7,5 @@ export class compactPro extends Format
 	ext        = [".cpt"];
 	magic      = ["Mac Compact Pro archive"];
 	priority   = this.PRIORITY.LOW;
-	converters = ["unar"];
+	converters = ["unar[mac]"];
 }

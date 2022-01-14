@@ -77,7 +77,9 @@ export class UniExtract extends Program
 			KillAll("uudeview.exe")
 			KillAll("WDOSXLE.EXE")
 			KillAll("WUN.EXE")
-			KillAll("xace.exe")`
+			KillAll("xace.exe")
+			
+			CleanupSystray()`
 	});
 	renameOut = false;
 }

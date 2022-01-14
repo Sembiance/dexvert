@@ -7,5 +7,5 @@ export class sea extends Format
 	ext        = [".sea"];
 	magic      = ["Macintosh Application (MacBinary)", "Preferred Executable Format"];
 	weakMagic  = true;
-	converters = ["unar"];
+	converters = ["unar[mac]"];
 }

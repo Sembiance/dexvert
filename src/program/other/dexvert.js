@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 
 export class dexvert extends Program
 {
@@ -10,7 +10,20 @@ export class dexvert extends Program
 
 	unsafe     = true;
 	bin        = "/mnt/compendium/.deno/bin/dexvert";
-	args       = r => [...(r.flags.asFormat ? [`--asFormat=${r.flags.asFormat}`] : []), `--logLevel=${r.xlog.level}`, "--", r.inFile(), r.outDir()];
+	args       = r =>
+	{
+		const a = [`--logLevel=${r.xlog.level}`];
+		if(r.flags.asFormat)
+			a.push(`--asFormat=${r.flags.asFormat}`);
+
+		const forbidProgram = new Set(RUNTIME.forbidProgram);
+		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)
+			forbidProgram.add(parentRunState.programid);
+			
+		a.push(...Array.from(forbidProgram, v => `--forbidProgram=${v}`));
+
+		return [...a, "--", r.inFile(), r.outDir()];
+	};
 	renameIn   = false;	// RunState.originalInput would be lost and dexvert should be able to handle any incoming filename
 	renameOut  = false;
 	runOptions = r => ({liveOutput : r.xlog.atLeast("trace")});

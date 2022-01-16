@@ -9,7 +9,7 @@ export class iconv extends Program
 		toEncoding   : "Encoding to translate into. Default: UTF-8"
 	};
 	bin        = "iconv";
-	args       = r => ["-f", r.flags.fromEncoding, "-t", r.flags.toEncoding || "UTF-8", r.inFile()];
+	args       = r => ["-c", "-f", r.flags.fromEncoding, "-t", r.flags.toEncoding || "UTF-8", r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 	renameOut  = true;
 }

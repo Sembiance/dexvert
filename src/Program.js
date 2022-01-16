@@ -11,8 +11,20 @@ import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const DEFAULT_FLAGS = ["filenameEncoding", "renameOut"];
-const GLOBAL_FLAGS = {};
-export {GLOBAL_FLAGS};
+
+// A global variable that contains certain flags and properties to adhere to until clearRuntime is called
+const RUNTIME =
+{
+	globalFlags   : {},
+	forbidProgram : new Set()
+};
+export {RUNTIME};
+
+export function clearRuntime()
+{
+	Object.clear(RUNTIME.globalFlags);
+	RUNTIME.forbidProgram.clear();
+}
 
 export class Program
 {
@@ -80,9 +92,9 @@ export class Program
 	}
 
 	// runs the current program with the given input and output FileSets and various options
-	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, format, xlog=new XLog()}={})
+	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, chainParent, format, xlog=new XLog()}={})
 	{
-		flags = {...flags, ...GLOBAL_FLAGS[this.programid]};	// eslint-disable-line no-param-reassign
+		flags = {...flags, ...RUNTIME.globalFlags[this.programid]};	// eslint-disable-line no-param-reassign
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 		
@@ -97,6 +109,8 @@ export class Program
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags, xlog});
 		r.cwd = f.root;
+		if(chainParent)
+			r.chainParent = chainParent;
 		if(originalInput)
 			r.originalInput = originalInput;
 		if(this.cwd)
@@ -416,7 +430,7 @@ export class Program
 						await chainResult.unlinkHomeOut();
 					};
 					
-					const baseChainProgOpts = {isChain : true, format, xlog};
+					const baseChainProgOpts = {isChain : true, format, xlog, chainParent : r};
 					const newFiles = Array.from(f.files.new);
 
 					// If we have just 1 file or we are taking multiple files and feeding them into 1 program, then we likely will have just 1 output file
@@ -481,6 +495,9 @@ export class Program
 		}
 
 		const {programid, flags, progOptions : moreProgOptions} = Program.parseProgram(progRaw);
+		if(RUNTIME.forbidProgram.has(programid))
+			return RunState.create({programid, xlog, f : fRaw instanceof FileSet ? fRaw : FileSet.create()});
+			
 		Object.assign(progOptions, moreProgOptions);
 
 		// run prog

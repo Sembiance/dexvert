@@ -19,8 +19,8 @@ export class RunState
 			// required
 			programid : {type : "string", required : true},
 			f         : {type : FileSet, required : true},
-			flags     : {type : Object},
-			xlog      : {}
+			xlog      : {required : true},
+			flags     : {type : Object}
 		});
 		return runState;
 	}

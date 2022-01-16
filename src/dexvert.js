@@ -3,22 +3,25 @@ import {XLog} from "xlog";
 import {identify} from "./identify.js";
 import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
-import {Program, GLOBAL_FLAGS} from "./Program.js";
+import {Program, clearRuntime, RUNTIME} from "./Program.js";
 import {DexState} from "./DexState.js";
 import {DexFile} from "./DexFile.js";
 import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, asId, programFlag={}, xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
-	Object.clear(GLOBAL_FLAGS);
+	clearRuntime();
 	for(const [programid, programFlags] of Object.entries(programFlag))
 	{
-		if(!Object.hasOwn(GLOBAL_FLAGS, programid))
-			GLOBAL_FLAGS[programid] = {};
-		Object.assign(GLOBAL_FLAGS[programid], programFlags);
+		if(!Object.hasOwn(RUNTIME.globalFlags, programid))
+			RUNTIME.globalFlags[programid] = {};
+		Object.assign(RUNTIME.globalFlags[programid], programFlags);
 	}
+
+	for(const progid of forbidProgram)
+		RUNTIME.forbidProgram.add(progid);
 
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
@@ -163,6 +166,12 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, programFlag
 				const progs = converter.split("&").map(v => v.trim());
 				for(const [i, prog] of Object.entries(progs))
 				{
+					if(RUNTIME.forbidProgram.has(Program.parseProgram(prog).programid))
+					{
+						xlog.info`Skipping converter ${prog} due to being in forbidProgram`;
+						continue;
+					}
+					
 					xlog.debug`Running converter ${prog}...`;
 
 					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog});

@@ -46,7 +46,7 @@ const HTTP_OUT_DIR_PATH = path.join(HTTP_DIR_PATH, "out");
 
 const INSTANCES = {};
 const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
-const RUN_QUEUE = [];
+const RUN_QUEUE = new Set();
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 const CHECK_QUEUE_INTERVAL = 50;
 const CHECK_QUEUE_TOO_LONG = xu.MINUTE*5;
@@ -273,25 +273,42 @@ export class qemu extends Server
 
 	checkRunQueue()
 	{
-		if(RUN_QUEUE.length===0)
+		if(RUN_QUEUE.size===0)
 		{
 			this.checkQueueCounter = 0;
 			return setTimeout(() => this.checkRunQueue(), CHECK_QUEUE_INTERVAL);
 		}
 
-		const instance = Object.values(INSTANCES[RUN_QUEUE[0].body?.osid]).find(o => o.ready && !o.busy);
-		if(instance)
+		const seenOSIDs = new Set();
+		const runPair = {};
+		for(const runTask of RUN_QUEUE)
+		{
+			if(seenOSIDs.has(runTask.body.osid))
+				continue;
+			
+			seenOSIDs.add(runTask.body.osid);
+			const instance = Object.values(INSTANCES[runTask.body.osid]).find(o => o.ready && !o.busy);
+			if(instance)
+			{
+				runPair.instance = instance;
+				runPair.runTask = runTask;
+				break;
+			}
+		}
+
+		if(runPair.instance && runPair.runTask)
 		{
 			this.checkQueueCounter = 0;
-			instance.busy = true;
-			this.performRun(instance, RUN_QUEUE.shift());
+			runPair.instance.busy = true;
+			RUN_QUEUE.delete(runPair.runTask);
+			this.performRun(runPair.instance, runPair.runTask);
 		}
 		else
 		{
 			this.checkQueueCounter++;
 			if(this.checkQueueCounter>((CHECK_QUEUE_TOO_LONG/CHECK_QUEUE_INTERVAL)))
 			{
-				this.xlog.warn`QEMU queue has been stuck for over 1 minute with ${RUN_QUEUE.length} items in queue. Instance statuses:`;
+				this.xlog.warn`QEMU queue has been stuck for over 1 minute with ${RUN_QUEUE.size} items in queue. Instance status:`;
 				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
 					this.xlog.warn`${fg.peach("STATUS OF")} ${prelog(subInstance)}: ${{ready : subInstance.ready, busy : subInstance.busy}}`;
 
@@ -324,8 +341,8 @@ export class qemu extends Server
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.length})`;
-			RUN_QUEUE.push({body, request, reply});
+			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.size})`;
+			RUN_QUEUE.add({body, request, reply});
 		}, {detached : true, method : "POST", logCheck : () => false});
 		
 		await Deno.mkdir(HTTP_IN_DIR_PATH, {recursive : true});

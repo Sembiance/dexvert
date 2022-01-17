@@ -136,17 +136,22 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	{
 		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti().at(-1);
 		if(!videoFilePath)
-			throw new Error(`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()}`);
-		if(screenshot)
 		{
-			const {stdout : frameCountRaw} = await runUtil.run("ffprobe", ["-v", "0", "-select_streams", "v:0", "-count_frames", "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", videoFilePath]);
-			await runUtil.run("ffmpeg", ["-i", videoFilePath, "-filter_complex", `select='eq(n,${Math.round(screenshot.frameLoc.scale(0, 100, 0, (+frameCountRaw.trim())-1))})'`, "-vframes", "1", screenshot.filePath]);
+			xlog.warn`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()}`;
 		}
 		else
 		{
-			const ffmpegFileSet = await FileSet.create(root, "input", videoFilePath);
-			await ffmpegFileSet.add("outFile", video);
-			await Program.runProgram("ffmpeg", ffmpegFileSet, {xlog});
+			if(screenshot)
+			{
+				const {stdout : frameCountRaw} = await runUtil.run("ffprobe", ["-v", "0", "-select_streams", "v:0", "-count_frames", "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", videoFilePath]);
+				await runUtil.run("ffmpeg", ["-i", videoFilePath, "-filter_complex", `select='eq(n,${Math.round(screenshot.frameLoc.scale(0, 100, 0, (+frameCountRaw.trim())-1))})'`, "-vframes", "1", screenshot.filePath]);
+			}
+			else
+			{
+				const ffmpegFileSet = await FileSet.create(root, "input", videoFilePath);
+				await ffmpegFileSet.add("outFile", video);
+				await Program.runProgram("ffmpeg", ffmpegFileSet, {xlog});
+			}
 		}
 	}
 

@@ -168,7 +168,7 @@ export class qemu extends Server
 	baseKeys = Object.keys(this);
 
 	// Called to prepare the QEMU environment for a given OS and then start QEMU
-	async startOS(osid, instanceid)
+	async startOS(osid, instanceid, startingFromStop)
 	{
 		if(!INSTANCES[osid])
 			INSTANCES[osid] = {};
@@ -221,11 +221,16 @@ export class qemu extends Server
 		const instanceJSON = JSON.stringify(instance);
 		const {p} = await runUtil.run(`qemu-system-${OS[osid].arch || OS_DEFAULT.arch}`, qemuArgs, qemuRunOptions);
 		instance.p = p;
-		instance.p.status().then(v =>
+		instance.p.status().then(async v =>
 		{
+			this.xlog[this.stopping ? "info" : "error"]`${prelog(instance)} has exited with status ${v}`;
+			if(!this.stopping && !startingFromStop)
+				await this.stopOS(instance);
 			instance.ready = false;
 			instance.p = null;
-			this.xlog.warn`${prelog(instance)} has exited with status ${v}`;
+			delete INSTANCES[osid][instanceid];
+			if(!this.stopping && !startingFromStop)
+				await this.startOS(osid, instance, true);
 		});
 
 		this.xlog.info`${prelog(instance)} launched, waiting for it to boot...`;
@@ -401,7 +406,7 @@ export class qemu extends Server
 		}
 
 		this.xlog.info`Starting instances...`;
-		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)));
+		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)), Number.MAX_SAFE_INTEGER);
 
 		this.serversLaunched = true;
 		this.checkRunQueue();
@@ -430,6 +435,8 @@ export class qemu extends Server
 
 	async stop()
 	{
+		this.stopping = true;
+		
 		if(this.webServer)
 			this.webServer.stop();
 		

@@ -14,6 +14,15 @@ export class lha extends Format
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 	// Luckilly 'lha' fails on these, so then I try lhark specific extractor
 	// See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
-	// NOTE: The lhark extractor doesn't preserve timestamps, which is why it's so low on the list
-	converters = ["lha", "sevenZip", "deark[opt:lha:lhark]", "UniExtract", "lhark"];
+	converters = dexState =>
+	{
+		const a = ["lha", "sevenZip", "deark[opt:lha:lhark]"];
+		
+		// Only send to UniExtract (win2k) if we have a magic match
+		if(dexState.phase.id.matchType==="magic")
+			a.push("UniExtract");
+
+		// NOTE: The lhark extractor doesn't preserve timestamps, which is why it's last on the list
+		return [...a, "lhark"];
+	};
 }

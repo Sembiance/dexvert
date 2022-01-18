@@ -1,7 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
 import {fileUtil, runUtil} from "xutil";
-import {QEMU_INSTANCE_DIR_PATH} from "../src/server/qemu.js";
 import {path} from "std";
 
 const MAX_ALLOWABLE_QEMU_DIFFS =
@@ -13,9 +12,9 @@ const MAX_ALLOWABLE_QEMU_DIFFS =
 
 const xlog = new XLog();
 
-const instanceJSONFilePaths = await fileUtil.tree(QEMU_INSTANCE_DIR_PATH, {nodir : true, regex : /instance\.json$/});
+const instanceJSONFilePaths = await fileUtil.tree("/mnt/dexvert/qemu", {nodir : true, regex : /instance\.json$/, depth : 2});
 if(instanceJSONFilePaths.length===0)
-	Deno.exit(xlog.warn`No instance JSON files found in dir: ${QEMU_INSTANCE_DIR_PATH}`);
+	Deno.exit(xlog.warn`No instance JSON files found in dir: /mnt/dexvert/qemu`);
 
 const tmpSnapshotDirPath = await fileUtil.genTempPath();
 await Deno.mkdir(tmpSnapshotDirPath);

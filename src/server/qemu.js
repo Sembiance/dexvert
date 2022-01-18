@@ -6,7 +6,6 @@ import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
 const QEMU_INSTANCE_DIR_PATH = "/mnt/dexvert/qemu";
-export {QEMU_INSTANCE_DIR_PATH};
 
 const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 const BASE_SUBNET = 50;

@@ -142,5 +142,8 @@ A method that will be executed after converters have been attempted
 >>> verify = async ({dexState, dexFile, familySpecific...}) { ... }
 A method that will further verify that the given output file is proper. Currently only used by image family formats.
 
+>>> verifyUntouched = true  ||  async dexState => true
+Untouched files are not verified if they are a magic match. To force verification, set to true or return true.
+
 >>> converters = ["recoil2png", ...]  ||  async dexState => ["recoil2png", "..."]
 An array of converters to try or a function that returns an array of converters to try.

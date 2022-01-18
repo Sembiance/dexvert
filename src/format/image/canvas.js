@@ -21,7 +21,7 @@ export class canvas extends Format
 	};
 
 	// Don't do anything with .hbl files
-	untouched = ({f}) => f.input.ext.toLowerCase()===".hbl";
-
-	converters = ["recoil2png"];
+	untouched       = ({f}) => f.input.ext.toLowerCase()===".hbl";
+	verifyUntouched = false;
+	converters      = ["recoil2png"];
 }

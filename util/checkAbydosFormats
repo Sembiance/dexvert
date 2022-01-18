@@ -1,2 +1,2 @@
 #!/bin/sh
-DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768 --no-check --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-read --allow-env --allow-net --allow-run /mnt/compendium/DevLab/dexvert/util/checkAbydosFormats.js "$@"
+DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768,--expose-gc --no-check --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-read --allow-env --allow-net --allow-run /mnt/compendium/DevLab/dexvert/util/checkAbydosFormats.js "$@"

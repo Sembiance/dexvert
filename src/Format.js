@@ -129,6 +129,7 @@ export class Format
 			unsupported      : {type : "boolean"},
 			untouched        : {types : ["boolean", "function"]},
 			verify           : {type : "function", length : 1},
+			verifyUntouched  : {types : ["boolean", "function"]},
 
 			// conversion
 			converters   : {types : [Array, "function"]},

@@ -430,7 +430,7 @@ export class qemu extends Server
 
 		this.xlog.info`${prelog(instance)} killing qemu child process...`;
 		if(instance.p)
-			instance.p.kill("SIGTERM");
+			await runUtil.kill(instance.p).catch(() => {});
 	}
 
 	async stop()

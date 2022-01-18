@@ -22,6 +22,7 @@ export class advancedArtStudio extends Format
 		return otherFiles.filter(otherFile => [".scr", ".win"].map(ext => input.name.toLowerCase() + ext).includes(otherFile.base.toLowerCase()));
 	};
 
-	untouched  = ({f}) => f.input.ext.toLowerCase()=== ".pal";
-	converters = ["recoil2png"];
+	untouched       = ({f}) => f.input.ext.toLowerCase()===".pal";
+	verifyUntouched = false;
+	converters      = ["recoil2png"];
 }

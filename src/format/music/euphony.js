@@ -12,8 +12,8 @@ export class euphony extends Format
 	auxFiles     = (input, otherFiles) => ([".fmb", ".pmb"].includes(input.ext.toLowerCase()) ? false : otherFiles.filter(otherFile => [".fmb", ".pmb"].includes(otherFile.ext.toLowerCase())));
 
 	// Don't do anything with .fmb/.pmb files
-	untouched = ({f}) => [".fmb", ".pmb"].includes(f.input.ext.toLowerCase());
-
-	metaProvider = ["musicInfo"];
-	converters   = ["eupplay"];
+	untouched       = ({f}) => [".fmb", ".pmb"].includes(f.input.ext.toLowerCase());
+	verifyUntouched = false;
+	metaProvider    = ["musicInfo"];
+	converters      = ["eupplay"];
 }

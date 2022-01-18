@@ -10,7 +10,7 @@ export class mur extends Format
 	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
 
 	// Don't do anything with .pal files
-	untouched = ({f}) => f.input.ext.toLowerCase()===".pal";
-	
-	converters = ["recoil2png"];
+	untouched       = ({f}) => f.input.ext.toLowerCase()===".pal";
+	verifyUntouched = false;
+	converters      = ["recoil2png"];
 }

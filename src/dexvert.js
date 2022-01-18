@@ -147,10 +147,27 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 			// if we are untouched, mark ourself as processed and cleanup
 			if(format.untouched===true || (typeof format.untouched==="function" && await format.untouched(dexState)))
 			{
-				dexState.untouched = true;
-				dexState.processed = true;
-				await cleanup();
-				break;
+				// check family verification if our match type isn't a magic one or if we explicitly set verifyFamily (unless verifyFamily explicity set to false)
+				const verifyUntouched = Object.hasOwn(format, "verifyUntouched") ? (typeof format.verifyUntouched==="function" ? await format.verifyUntouched(dexState) : !!format.verifyUntouched) : dexState.phase.id.matchType!=="magic";
+
+				let isValid = true;
+				if(verifyUntouched)
+				{
+					const extraValidatorData = format.family.verify ? (await dexState.format.family.verify(dexState, inputFile)) : {};
+					if(extraValidatorData===false)
+						isValid = false;
+					
+					if(extraValidatorData && format.verify && !(await format.verify({dexState, inputFile, ...extraValidatorData})))
+						isValid = false;
+				}
+				
+				if(isValid)
+				{
+					dexState.untouched = true;
+					dexState.processed = true;
+					await cleanup();
+					break;
+				}
 			}
 
 			// run any pre-converter pre format function

@@ -59,7 +59,7 @@ export class image extends Family
 			return false;
 		}
 
-		const isUnsafe = programs[dexState.ran.at(-1).programid].unsafe || dexState.ran.at(-1).unsafe;
+		const isUnsafe = programs[dexState.ran?.at(-1)?.programid]?.unsafe || dexState.ran?.at(-1)?.unsafe;
 
 		if(isUnsafe && meta.width===1 && meta.height===1)
 		{

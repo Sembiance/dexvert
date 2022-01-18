@@ -6,5 +6,6 @@ export class ttw extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/TTW";
 	ext        = [".cr"];
 	magic      = ["TTW Compressed File"];
+	packed     = true;
 	converters = ["xfdDecrunch"];
 }

@@ -6,6 +6,7 @@ export class ttcomp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/TTComp_archive";
 	magic      = ["TTComp archive"];	// VERY weak, but alas.
 	trustMagic = true;
+	packed     = true;
 	
 	// music/thomasHermann is mis-identified as ttcomp
 	forbiddenExt = [".thm"];

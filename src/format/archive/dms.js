@@ -6,5 +6,6 @@ export class dms extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Disk_Masher_System";
 	ext        = [".dms", ".fms"];
 	magic      = ["Disk Masher System compressed disk image", "DMS archive data", "DMS: Disk Masher System"];
-	converters = ["unar[filenameEncoding:iso-8859-1][renameOut]", "ancient"];
+	packed     = true;
+	converters = ["unar[filenameEncoding:iso-8859-1]", "ancient"];
 }

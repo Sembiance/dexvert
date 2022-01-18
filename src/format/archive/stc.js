@@ -6,5 +6,6 @@ export class stc extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/StoneCracker";
 	ext        = [".stc"];
 	magic      = [/^StoneCracker .*compressed$/, "S404: StoneCracker", "SC: StoneCracker"];
+	packed     = true;
 	converters = ["ancient", "amigadepacker"];
 }

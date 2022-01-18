@@ -4,5 +4,6 @@ export class powerPlayerMusicCruncher extends Format
 {
 	name       = "PowerPlayer Music Cruncher";
 	magic      = ["PowerplayerMusic Cruncher"];
+	packed     = true;
 	converters = ["xfdDecrunch"];
 }

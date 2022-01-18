@@ -191,7 +191,18 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 					
 					xlog.debug`Running converter ${prog}...`;
 
-					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog});
+					const flags = {};
+
+					// check to see if we are a packed format and we should set the program renameKeepFilename flag
+					if(format.packed)
+					{
+						if(!(format.ext || []).includes(inputFile.ext.toLowerCase()))
+							flags.renameKeepFilename = true;
+						else
+							flags.renameOut = true;
+					}
+
+					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog, flags});
 					dexState.ran.push(r);
 
 					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;

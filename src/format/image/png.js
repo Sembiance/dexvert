@@ -7,8 +7,8 @@ export class png extends Format
 	ext             = [".png"];
 	mimeType        = "image/png";
 	magic           = ["Portable Network Graphics", "PNG image data"];
-	untouched       = r => r.meta.format==="PNG" && r.meta.width && r.meta.height;
-	verifyUntouched = false;
+	untouched       = dexState => dexState.meta.width && dexState.meta.height;
+	verifyUntouched = dexState => dexState.meta.format!=="PNG";
 	fallback        = true;
 	metaProvider    = ["image"];
 }

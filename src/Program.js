@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const DEFAULT_FLAGS = ["filenameEncoding", "renameOut"];
+const GLOBAL_FLAGS = ["filenameEncoding", "renameKeepFilename", "renameOut"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -98,7 +98,7 @@ export class Program
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 		
-		const unknownFlags = Object.keys(flags).subtractAll([...DEFAULT_FLAGS, ...Object.keys(this.flags || {})]);
+		const unknownFlags = Object.keys(flags).subtractAll([...GLOBAL_FLAGS, ...Object.keys(this.flags || {})]);
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
 		
@@ -285,8 +285,14 @@ export class Program
 		const renameOut = Object.hasOwn(flags, "renameOut") ? flags.renameOut : (typeof this.renameOut==="function" ? await this.renameOut(r) : this.renameOut);
 
 		// if we have some new files, time to rename them
-		if(f.outDir && f.files.new?.length && renameOut!==false)
+		if(f.outDir && f.files.new?.length===1 && flags.renameKeepFilename)
 		{
+			// if just 1 file and we were instructed to renameKeepFilename, name the output the same as the input
+			await f.files.new[0].rename((originalInput || f.input).base, {replaceExisting : !!isChain});
+		}
+		else if(f.outDir && f.files.new?.length && renameOut!==false)
+		{
+			// Otherwise if we renameOut is not false, then proceed with renaming
 			const ro = Object.assign({ext : typeof this.outExt==="function" ? await this.outExt(r) || "" : this.outExt || "", name : true}, Object.isObject(renameOut) ? renameOut : {});
 			if(Object.isObject(renameOut) && renameOut.preSensitive)
 			{

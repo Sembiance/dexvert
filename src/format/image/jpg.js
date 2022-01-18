@@ -9,7 +9,7 @@ export class jpg extends Format
 	magic           = ["JFIF JPEG bitmap", "JPEG image data", "JPEG bitmap", "JPEG File Interchange Format"];
 	fallback        = true;	// Some other formats such as image/a4r can be mistaken for JPEG data by 'file' command, so we ensure we try other formats first before falling back to this
 	untouched       = r => r.meta.format==="JPEG" && r.meta.width && r.meta.height;
-	verifyUntouched = true;
+	verifyUntouched = false;
 	metaProvider    = ["image"];
 	converters      = ["imageAlchemy"];	// some jpgs are corrupt but imageAlchemy seems to be very flexible and can handle them
 }

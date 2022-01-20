@@ -1,4 +1,5 @@
 import {Program} from "../../Program.js";
+import {fileUtil, imageUtil} from "xutil";
 
 export class ffmpeg extends Program
 {
@@ -15,10 +16,24 @@ export class ffmpeg extends Program
 	bin = "ffmpeg";
 	args = async r =>
 	{
-		const inFileArgs = ["-i", `file:${r.inFile()}`];	// without the file: prefix, if the filename contains a colon, ffmpeg will get confused
+		const inFileArgs = [];
+		const inFilePaths = r.inFiles({absolute : true});
+		
+		if(inFilePaths.length>1)
+		{
+			r.imagesListFilePath = await fileUtil.genTempPath(undefined, ".txt");
+			inFileArgs.push("-i", r.imagesListFilePath);
+
+			for(const inFilePath of inFilePaths)
+				await Deno.writeTextFile(r.imagesListFilePath, `file '${inFilePath}'\n`, {append : true, create : true});
+		}
+		else
+		{
+			inFileArgs.push("-i", `file:${r.inFile()}`);	// without the file: prefix, if the filename contains a colon, ffmpeg will get confused
+		}
 
 		const noMeta = ["-bitexact", "-fflags", "+bitexact", "-flags:v", "+bitexact", "-flags:a", "+bitexact"];
-		const a = [];
+		const a = ["-y"];
 		if(r.flags.format)
 			a.push("-f", r.flags.format);
 		if(r.flags.codec)
@@ -28,10 +43,13 @@ export class ffmpeg extends Program
 		if(r.flags.maxDuration)
 			a.push("-t", r.flags.maxDuration);
 
+		if(inFilePaths.length>1)
+			a.push("-f", "concat", "-safe", "0");
+
 		switch(r.flags.outType || "mp4")
 		{
 			case "png":
-				a.push(...inFileArgs, "-frames:v", "1", ...noMeta, await r.outFile("out.png"));
+				a.push(...inFileArgs, "-frames:v", "1", ...noMeta, `file:${await r.outFile("out.png")}`);
 				break;
 
 			case "wav":
@@ -60,11 +78,27 @@ export class ffmpeg extends Program
 				// OK. So the `-pix_fmt yuv420p` is REQUIRED for iOS devices to actually play these videos.
 				// This then requires that the video WxH be divisible by 2, thus the 'pad' video filter
 				// Also, this pixel format reduces quality and there isn't anything I can do about it. See the info here: https://awk.space/blog/pixel-perfect-webm/
-				// For PIXEL PERFECT conversion, I would use these args: ffmpegArgs.push("-i", inPath, "-c:v", "libx264rgb", "-crf", "0", "-preset", "ultrafast", outPath);
+				// For PIXEL PERFECT conversion, I would use these args: ffmpegArgs.push(...inFileArgs, "-c:v", "libx264rgb", "-crf", "0", "-preset", "ultrafast", outPath);
 				// Sadly that's not supported in most browsers. Sigh. I really don't want to support multiple video formats, for different devices, so I just choose the most compatible and live with the compression artifacts and decrease in quality.
-				a.push(...inFileArgs, "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart", ...noMeta, await r.outFile("out.mp4"));
+				a.push(...inFileArgs, "-c:v", "libx264", "-vf", "pad='width=ceil(iw/2)*2:height=ceil(ih/2)*2'", "-crf", "15", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "faststart");
+				
+				if(inFilePaths.length>1)
+				{
+					const [w, h] = await imageUtil.getWidthHeight(inFilePaths[0]);
+					a.push("-aspect", `${w}:${h}`);
+				}
+
+				a.push(...noMeta, await r.outFile("out.mp4"));
 		}
+
 		return a;
 	};
+
+	post = async r =>
+	{
+		if(r.imagesListFilePath)
+			await fileUtil.unlink(r.imagesListFilePath, {recursive : true});
+	};
+
 	renameOut = true;
 }

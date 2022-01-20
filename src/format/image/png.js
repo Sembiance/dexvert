@@ -5,6 +5,7 @@ export class png extends Format
 	name            = "Portable Network Graphic";
 	website         = "http://fileformats.archiveteam.org/wiki/PNG";
 	ext             = [".png"];
+	forbidExtMatch  = true;
 	mimeType        = "image/png";
 	magic           = ["Portable Network Graphics", "PNG image data"];
 	untouched       = dexState => dexState.meta.width && dexState.meta.height;

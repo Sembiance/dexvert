@@ -12,22 +12,39 @@ export class iffILBM extends Format
 	metaProvider   = ["image"];
 	notes          = xu.trim`
 		Some ILBM files were only used to hold a palette and nothing more. This won't convert those.
-		Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter.
-		DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort.
-		CRNG chunk - Used for color shifting. Abydos supports some of these (used by Deluxe Paint)`;
-	
-	// abydosconvert is the only thing that can handle animated IFF files (color cycling, etc) (AH_Dan, AH_Eye, Watch, DECKER-BattleMech)
-	// But it sometimes produces crazy fast color cycles and they can sometimes be so rapid that the original meaning of the image is lost
-	// It also sometimes produces just a webp with all identical frames (which the program abydosconvert will automatically detect and delete in post())
+		DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort`;
+
+	// recoil2png produces the best still images for iffILBM files, with abydosconvert being a runner up
+	// abydosconvert can also produce animated WEBP files from color cycling ILBM files, but it handles several files poorly
 	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
-	// We start by running both abydosconvert and recoil2png at the same time, and recoil2png will overwrite any PNG produced by abydosconvert
+	// so instead we run my ilbm2frames program in combination with every converter, to produce both an animated file and a static file
+	// ilbm2frames won't produce frames unless there is color cycling
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
-	converters    = [`abydosconvert[format:${this.mimeType}] & recoil2png`, `abydosconvert[format:${this.mimeType}][outType:png]`, "deark", "ffmpeg[format:iff]", "convert"];
+	converters = [`recoil2png`, `abydosconvert[format:${this.mimeType}][outType:png]`, "deark", "ffmpeg[format:iff]", "convert"].map(v => `ilbm2frames -> *ffmpeg[fps:20][outType:gif] & ${v}`);
 }
+
+/* Other IFF ILBM converters:
+
+Tried:
+	https://github.com/scemino/ColorCycling		All images loaded are all corrupt
+	https://github.com/svanderburg/amiilbm		Amiga Only, but my ilbm2frames is based on code this uses
+	https://github.com/Gargaj/ILBMViewer		Windows Only, can't open much
+	https://github.com/wjaguar/mtPaint			Opens IFF images, but couldn't find way to see cycling
+	http://grafx2.chez.com						Opens IFF images, but couldn't find way to see cycling
+	https://github.com/jhuckaby/lbmtool			Converts files to JSON data
+
+Not tried:
+	http://www.effectgames.com/effect/article-Old_School_Color_Cycling_with_HTML5.html
+
+	http://www.randelshofer.ch/monte/
+	http://www.randelshofer.ch/monte/javadoc/org/monte/media/anim/ANIMDecoder.html
+*/
+
 
 // node version of dexvert was doing this, but I didn't see any sample files that exhibit have this problem thus I couldn't test, so I'm not sure it's needed anymore
 // may have been an ILBM that was used by some game that I now properly detect and handle as such
 /*
+// notes : Others have EMPTY (zeros) CMAP palettes which confuse the converter programs. So I detect this and remove the CMAP entry which allows the converters to fallback to a default converter.
 exports.preSteps =
 	const inputBuffer = fs.readFileSync(state.input.absolute, this);
 

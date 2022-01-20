@@ -251,6 +251,8 @@ import {qtPicViewer} from "./image/qtPicViewer.js";
 programs.qtPicViewer = qtPicViewer.create(programs.qtPicViewer);
 import {runvga} from "./image/runvga.js";
 programs.runvga = runvga.create(programs.runvga);
+import {ilbm2frames} from "./image/ilbm2frames.js";
+programs.ilbm2frames = ilbm2frames.create(programs.ilbm2frames);
 import {graphicWorkshopProfessional} from "./image/graphicWorkshopProfessional.js";
 programs.graphicWorkshopProfessional = graphicWorkshopProfessional.create(programs.graphicWorkshopProfessional);
 import {ezdxf} from "./image/ezdxf.js";

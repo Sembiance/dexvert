@@ -10,7 +10,7 @@ export class xanim extends Program
 	unsafe  = true;
 	notes   = "The dexvert version of xanim has special export functionality, originally based on the loki xanim fork, but I've ehnhanced it to support other animation formats and output correctly on 32bit x11 displays";
 	flags   = {
-		frameDelay : "Duration of delay between animation frames. Default: 10"
+		fps : "FPS of frames. Default: 10"
 	};
 	bin      = "xanim";
 	args     = r => ["+Ze", "+l0", "-Zr", "+Ee", r.inFile()];
@@ -20,6 +20,6 @@ export class xanim extends Program
 
 	// xanim plays back in real time, so if the video is longer than 5 minutes, it just will get truncated
 	runOptions = ({virtualX : true, timeout : xu.MINUTE*5});
-	chain      = r => `*joinAsGIF[frameDelay:${r.flags.frameDelay || 10}] -> ffmpeg`;
+	chain      = r => `*ffmpeg[fps:${r.flags.fps || 10}] -> ffmpeg`;
 	renameOut  = true;
 }

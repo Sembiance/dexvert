@@ -41,6 +41,9 @@ const SINGLE_FILE_DYNAMIC_NAMES =
 
 const FLEX_SIZE_PROGRAMS =
 {
+	// the ILBM color shifting program generates different frames each time
+	ilbm2frames : 10,
+
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 	
@@ -366,6 +369,8 @@ async function testSample(sampleFilePath)
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		if(allowedSizeDiff===0)
 			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0);
+		if(allowedSizeDiff===0)
+			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(0)?.programid] || 0);
 
 		// first make sure the files are the same
 		for(const [name, {size, sum}] of Object.entries(result.files))

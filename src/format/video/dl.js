@@ -9,5 +9,5 @@ export class dl extends Format
 	// dl files will start with 0x03, 0x02 or 0x01
 	byteCheck  = [{offset : 0, match : [[0x03, 0x02, 0x01]]}];
 	
-	converters = ["xanim", "deark[module:dlmaker] -> *joinAsGIF -> ffmpeg"];
+	converters = ["xanim", "deark[module:dlmaker] -> *ffmpeg[fps:10]"];
 }

@@ -24,7 +24,7 @@ export async function verifyAudio(dexState, dexFile)
 	// So sox isn't reliable at providing a stat for very short clips, so we use ffprobe to get duration of the MP3 and only get sox stat if duration>=2 seconds
 	// Alternative duration getters: `mplayer -identify -nocache -vo null -ao null <file>` or `ffmpeg -i <file>`
 	const ffprobeR = await Program.runProgram("ffprobe", dexFile, {xlog, autoUnlink : true});
-	if((ffprobeR.meta?.duration || 0)>=2)
+	if((ffprobeR.meta?.duration || 0)>=(xu.SECOND*2))
 	{
 		const {meta : soxStat} = await Program.runProgram("soxStat", dexFile, {xlog, autoUnlink : true});
 		if(soxStat["sox FAIL formats"] || (soxStat["Maximum amplitude"]==="0.000000" && soxStat["Minimum amplitude"]==="0.000000" && soxStat["Midline amplitude"]==="0.000000"))

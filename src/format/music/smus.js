@@ -35,5 +35,5 @@ export class smus extends Format
 	converters = ["uade123", "smus2midi", "smusmidi"];
 
 	// Ensure the result is at least 1 second long, otherwise it likely didn't work and it should move to the next converter
-	verify = ({meta}) => meta.duration>=1;
+	verify = ({meta}) => meta.duration>=xu.SECOND;
 }

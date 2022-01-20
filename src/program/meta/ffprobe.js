@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class ffprobe extends Program
@@ -31,7 +32,7 @@ export class ffprobe extends Program
 				if(value==="N/A")
 					return;
 
-				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? +value : value;
+				r.meta[key] = ["bitRate", "duration", "startTime", "nbStreams", "nbPrograms"].includes(key) ? (key==="duration" ? (+value)*xu.SECOND : +value) : value;
 			}
 		});
 	};

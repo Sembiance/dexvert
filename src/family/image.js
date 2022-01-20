@@ -19,8 +19,8 @@ const MATCH_MAX_GARBAGE_PROBABILITIES =
 	magic    : 0.7,
 	filename : 0.6,
 	ext      : 0.6,
-	fileSize : 0.01,
-	fallback : 0.01
+	fallback : 0.6,
+	fileSize : 0.01
 };
 
 const UNSAFE_MAX_IMAGE_SIZE = 25000;

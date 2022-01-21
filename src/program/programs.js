@@ -73,6 +73,8 @@ import {nwunpack} from "./archive/nwunpack.js";
 programs.nwunpack = nwunpack.create(programs.nwunpack);
 import {ha} from "./archive/ha.js";
 programs.ha = ha.create(programs.ha);
+import {undfm} from "./archive/undfm.js";
+programs.undfm = undfm.create(programs.undfm);
 import {vcdxrip} from "./archive/vcdxrip.js";
 programs.vcdxrip = vcdxrip.create(programs.vcdxrip);
 import {sevenZip} from "./archive/sevenZip.js";

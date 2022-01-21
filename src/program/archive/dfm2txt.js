@@ -10,4 +10,5 @@ export class dfm2txt extends Program
 	bin       = "dfm2txt.exe";
 	args      = r => [r.flags.type || "bin", r.inFile(), "c:\\out\\out.txt"];
 	renameOut = true;
+	chain     = "undfm";
 }

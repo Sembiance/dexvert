@@ -108,7 +108,6 @@ export default
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
 		autoCADProtectedLISP         : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
-		borlandDelphiBuilderForm     : {name : "Borland Delphi - C++ Builder Form", ext : [".dfm"], magic : ["Borland Delphi - C++ Builder Form"]},
 		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file", "Delphi 3 Compiled Unit"]},
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},

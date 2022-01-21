@@ -10,6 +10,7 @@ const DEXMAGIC_CHECKS =
 	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
 
 	// archive
+	"HTTP Response"       : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"IFF LIST file"       : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"            : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
 	"pcxLib compressed"   : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],

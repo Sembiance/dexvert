@@ -1,4 +1,4 @@
-# Unsupported File Formats (439)
+# Unsupported File Formats (438)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -231,7 +231,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (222)
+## Other (221)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -278,7 +278,6 @@ other | Babble! Data | .bab |
 other | Bars and Pipes File | .gchone .gchord .song | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
-other | Borland Delphi - C++ Builder Form | .dfm | 
 other | Borland Delphi Compiled Unit | .dcu | 
 other | Borland Graphics Interface Driver | .bgi | 
 other | Borland Language Library | .bll | 

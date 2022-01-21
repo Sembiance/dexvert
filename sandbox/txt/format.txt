@@ -84,7 +84,7 @@ A way to match against a particular part of the file as a way to double check th
 Can be a single object or an array of objects. The match key can be a string or an array of bytes
 ext is a way to restrict the byte check to a given file extension and is OPTIONAL.
 
->>> idCheck = async (inputfile, detections) => { return true; }
+>>> idCheck = async (inputFile, detections) => { return true; }
 A custom function that must return true for any match to be made against this file
 
 >>> confidenceAdjust : (inputFile, matchType, curConfidence) => (matchType==="ext" ? -20 : 0)

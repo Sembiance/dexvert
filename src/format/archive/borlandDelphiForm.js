@@ -1,0 +1,13 @@
+import {Format} from "../../Format.js";
+import {TEXT_MAGIC_STRONG} from "../../Detection.js";
+
+export class borlandDelphiForm extends Format
+{
+	name           = "Delphi Borland Form";
+	website        = "http://fileformats.archiveteam.org/wiki/Borland_Delphi_form";
+	ext            = [".dfm"];
+	filename       = [/^tform\d+$/i];
+	magic          = ["Delphi compiled form", "Borland Form", "Borland Delphi - C++ Builder Form"];
+	forbiddenMagic = TEXT_MAGIC_STRONG;
+	converters     = ["dfm2txt[type:bin] & dfm2txt[type:res]"];
+}

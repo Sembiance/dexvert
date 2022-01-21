@@ -9,6 +9,8 @@ import {gfalist} from "./text/gfalist.js";
 programs.gfalist = gfalist.create(programs.gfalist);
 import {microfoxGET} from "./archive/microfoxGET.js";
 programs.microfoxGET = microfoxGET.create(programs.microfoxGET);
+import {dfm2txt} from "./archive/dfm2txt.js";
+programs.dfm2txt = dfm2txt.create(programs.dfm2txt);
 import {cabextract} from "./archive/cabextract.js";
 programs.cabextract = cabextract.create(programs.cabextract);
 import {bchunk} from "./archive/bchunk.js";

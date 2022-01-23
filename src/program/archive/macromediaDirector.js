@@ -1,15 +1,16 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class macromediaDirector extends Program
 {
 	website  = "https://www.buraks.com/swifty/xena.html";
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Macromedia\\Director MX 2004\\Director.exe";
-	args     = r => [r.inFile()];
+	//args     = r => [r.inFile()];	// Director DOES support opening the file directly by passing it as an arg, but then we don't get a chance to first "Enable" our movie restorer Xtra
 	notes    = "Sometimes a file can fail to copy over if there is severe CPU load on the host system. Adding more delays would slow down extraction too much. Adding logic to check that things are ready is probably the best approach, but meh.";
 
-	// NOTE!! Even though we actually copy over the auxFiles xtras directory into WinXP, we DO NOT actually put the files where they need to go to function:
+	// NOTE!! We don't do anything with aux files like other Xtras distributed with the files
 	// C:\Program Files\Macromedia\Director MX 2004\Configuration\Xtras
 	// This is because if there are any duplicate files (which is almost always the case) then director won't launch correctly until those are removed
 	// So we would have to prune out any custom xtras from ones we already have on windows. We in theory could do that linux side before it gets in by just pre-generating hash sums of all files that ship default with director
@@ -23,6 +24,18 @@ export class macromediaDirector extends Program
 
 			WinWaitActive("Director MX 2004", "", 10)
 
+			; Enable out Movie Restorer XTra
+			Send("!x{UP}{UP}{RIGHT}{ENTER}")
+			WinWaitActive("", "Movie Restorer Tool Enabled Successfully", 10)
+			Send("{ENTER}")
+
+			Sleep(200)
+
+			Send("^o")
+			WinWaitActive("Open", "", 10)
+			Sleep(200)
+			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
+
 			; Dismiss Error dialog
 			Local $errorDialog = WinWaitActive("[TITLE:Error]", "", 3)
 			If $errorDialog Not = 0 Then
@@ -32,7 +45,8 @@ export class macromediaDirector extends Program
 			; Dismiss any replacement questions			
 			Local $whereIs
 			Do
-				Sleep(3000)
+				Sleep(500)
+
 				$whereIs = WinActive("Locate replacement", "")
 				If $whereIs = 0 Then
 					$whereIs = WinActive("Where is", "")
@@ -40,7 +54,10 @@ export class macromediaDirector extends Program
 
 				If $whereIs Not = 0 Then
 					Send("{ESCAPE}")
+					ContinueLoop
 				EndIf
+
+				Sleep(2500)
 			Until $whereIs = 0
 
 			; Dismiss Player Errors dialog
@@ -57,6 +74,7 @@ export class macromediaDirector extends Program
 
 			${r.inFile().toLowerCase().endsWith(".dir") ? `
 			Send("^4")
+			Sleep(200)
 			Send("^4")
 			` : ""}
 

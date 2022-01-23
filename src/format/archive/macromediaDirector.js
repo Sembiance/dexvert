@@ -22,8 +22,12 @@ export class macromediaDirector extends Format
 		// It handles both
 		// If it doesn't need to do anything, it ends up producing an identical output file, which it keeps with allowDupOut = true
 		// dirOpener will automatically chain it's result to macromediaDirector
-		"dirOpener"
+		"dirOpener",
 
-		// NOTE: If I encounter any instances where dirOpener fails to produce any file, I should add "macromediaDirector" here as a fallback
+		// Sometimes dirOpener fails to produce an output file (pbc99.dxr)
+		// So we just try directly with macromediaDirector, which as an Xtra installed that allows opening protected formats: https://github.com/tomysshadow/Movie-Restorer-Xtra
+		"macromediaDirector"
+		
+		// Possible other de-protector I haven't researched yet: https://archive.org/details/recover_cct
 	];
 }

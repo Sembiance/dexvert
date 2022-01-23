@@ -8,7 +8,8 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		offset : {desc : "If set, mount at the given offset", hasValue : true},
-		hfs    : {desc : "If set, CD will be treated as HFS MAC cd"}
+		hfs    : {desc : "If set, CD will be treated as HFS MAC cd"},
+		ts     : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()}
 	},
 	args :
 	[
@@ -114,9 +115,17 @@ async function extractHFSISO()
 			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, hfsFilenameToUTF8(entry.filename));
 			await hcopyFile(entry.filename, entry.destFilePath);
 
-			const month = {"jan" : 1, "feb" : 2, "mar" : 3, "apr" : 4, "may" : 5, "jun" : 6, "jul" : 7, "aug" : 8, "sep" : 9, "oct" : 10, "nov" : 11, "dec" : 12}[entry.month.toLowerCase()];
-			const dateString = `${entry.year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
-			const ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
+			// some files on HFS CD's have absurdly incorrect dates, like "Cool Demos/Demos/Troubled Souls Demo" on the Odyssey: Legend of Nemesis CD having a date of Jun 30, 1922
+			// so for those, fall back to something sane
+			const year = +entry.year;
+			let ts = argv.ts;
+			if(year && !isNaN(year) && year>=1972)
+			{
+				const month = {"jan" : 1, "feb" : 2, "mar" : 3, "apr" : 4, "may" : 5, "jun" : 6, "jul" : 7, "aug" : 8, "sep" : 9, "oct" : 10, "nov" : 11, "dec" : 12}[entry.month.toLowerCase()];
+				const dateString = `${entry.year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
+				ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
+			}
+			
 			await Deno.utime(entry.destFilePath, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
 		}
 

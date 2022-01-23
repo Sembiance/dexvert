@@ -10,7 +10,7 @@ export class uniso extends Program
 	bin        = "deno";
 	args       = r =>
 	{
-		const a = [];
+		const a = ["--ts", r.f.input.ts];
 		if(r.flags.offset)
 			a.push(`--offset=${r.flags.offset}`);
 		if(r.flags.hfs)

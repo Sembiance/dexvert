@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, encodeUtil} from "xutil";
-import {path} from "std";
+import {path, dateParse} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -105,7 +105,7 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-alb"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.trim().split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>f|d)i?\s.+(?<year>\d{4})\s(?<filename>.+)$/) || {}).groups);
+		const entries = entriesRaw.trim().split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>f|d)i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {}).groups);
 		for(const entry of entries)
 		{
 			if(entry.type!=="f")
@@ -113,6 +113,11 @@ async function extractHFSISO()
 			
 			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, hfsFilenameToUTF8(entry.filename));
 			await hcopyFile(entry.filename, entry.destFilePath);
+
+			const month = {"jan" : 1, "feb" : 2, "mar" : 3, "apr" : 4, "may" : 5, "jun" : 6, "jul" : 7, "aug" : 8, "sep" : 9, "oct" : 10, "nov" : 11, "dec" : 12}[entry.month.toLowerCase()];
+			const dateString = `${entry.year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
+			const ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
+			await Deno.utime(entry.destFilePath, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
 		}
 
 		// now handle our directories

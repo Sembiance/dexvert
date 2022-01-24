@@ -26,7 +26,8 @@ export class qt_flatt extends Program
 		script        : `
 			WaitForPID($qemuProgramPID, ${xu.MINUTE});
 			FileDelete("c:\\out\\QT-FLATT.BAT");
-			FileDelete("c:\\out\\QT-FLATT.EXE");`
+			FileDelete("c:\\out\\QT-FLATT.EXE");
+			KillAll("QT-FLATT.EXE");`
 	});
 	chain     = "dexvert";
 	renameOut = true;

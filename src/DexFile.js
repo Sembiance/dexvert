@@ -25,6 +25,14 @@ export class DexFile
 			return;
 		["isFile", "isDirectory", "isSymlink", "size"].forEach(n => { this[n] = fileInfo[n]; });
 		this.ts = fileInfo.mtime.getTime();
+
+		// so if the date of the file is earlier than 1970 (such as the extracted file from archive/macBinary/Demo Basin) then mtime underflows and instead of 0 or 1922 we get 2017. sigh.
+		// I tried adding the following code, but it slows everything to a CRAWL.
+		// Run stat on the file and it will return a negative number if less than the epoch, in which case we just set it to the epoch
+		// code elsewhere in dexvert is smart and if it sees an exact epoch date, it knows the date can't be trusted and acts accordingly
+		//const {stdout : tsRaw} = await runUtil.run("stat", ["-c", "%Y", `./${path.basename(this.absolute)}`], {cwd : path.dirname(this.absolute)});
+		//const tsNum = +(tsRaw.trim());
+		//this.ts = tsNum<0 ? 0 : tsNum*xu.SECOND;
 	}
 
 	calcProps()

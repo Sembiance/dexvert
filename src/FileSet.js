@@ -119,7 +119,7 @@ export class FileSet
 		// if rsync didn't copy over any files for whatever reason we want to remove it from the newFileSet
 		// this can happen with retromission and 'auxFiles/otherDirs' as it creates and deletes other files in parallel, so can't depends on otherFiles/otherDirs to still be there
 		if(missingFilePaths.length>0)
-			newFileSet.files.all.filterInPlace(v => !missingFilePaths.includes(v.absolute));
+			newFileSet.all.filterInPlace(v => !missingFilePaths.includes(v.absolute));
 
 		return newFileSet;
 	}

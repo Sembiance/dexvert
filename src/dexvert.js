@@ -208,8 +208,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
 
 					// verify output files
-					await (dexState.f.files.new || []).parallelMap(async newFile =>
+					await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
 					{
+						xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
+
 						const failValidation = async msg =>
 						{
 							xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
@@ -218,12 +220,12 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 
 							return false;
 						};
-						
+
 						// first, check family level validators
 						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
 						if(extraValidatorData===false)
 							return failValidation(`family ${dexState.format.family.pretty()}`);
-						
+
 						// if still valid, check format level validator
 						if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
 							return failValidation(`format ${format.pretty()}`);

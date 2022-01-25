@@ -499,4 +499,14 @@ import {soundFont2tomp3} from "./audio/soundFont2tomp3.js";
 programs.soundFont2tomp3 = soundFont2tomp3.create(programs.soundFont2tomp3);
 import {amiga8SVXtoXXX} from "./audio/amiga8SVXtoXXX.js";
 programs.amiga8SVXtoXXX = amiga8SVXtoXXX.create(programs.amiga8SVXtoXXX);
+
+const MAX_COUNTER = 46655;
+let V_COUNTER = 0;
+export async function reload()
+{
+	const {programs : newPrograms} = await import(`./programs.js?v=${Deno.pid.toString(36)}_${Math.randomInt(0, MAX_COUNTER).toString(36)}_${(V_COUNTER++).toString(36)}`);
+	Object.clear(programs);
+	Object.assign(programs, newPrograms);
+}
+
 export {programs};

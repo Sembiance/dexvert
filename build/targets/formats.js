@@ -86,6 +86,16 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 		formats[formatid].formatid = formatid;
 	}
 }
+
+const MAX_COUNTER = 46655;
+let V_COUNTER = 0;
+export async function reload()
+{
+	const {formats : newFormats} = await import(\`./formats.js?v=$\{Deno.pid.toString(36)}_$\{Math.randomInt(0, MAX_COUNTER).toString(36)}_$\{(V_COUNTER++).toString(36)}\`);
+	Object.clear(formats);
+	Object.assign(formats, newFormats);
+}
+
 export {formats};
 `);
 }

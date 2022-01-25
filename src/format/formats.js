@@ -2135,6 +2135,8 @@ import {jamMessageAreaHeaderFile} from "./other/jamMessageAreaHeaderFile.js";
 formats.jamMessageAreaHeaderFile = jamMessageAreaHeaderFile.create(families.other);
 import {noteWorthyComposure} from "./other/noteWorthyComposure.js";
 formats.noteWorthyComposure = noteWorthyComposure.create(families.other);
+import {compuserveInformationManagerDB} from "./other/compuserveInformationManagerDB.js";
+formats.compuserveInformationManagerDB = compuserveInformationManagerDB.create(families.other);
 import {borlandTurboVisionResource} from "./other/borlandTurboVisionResource.js";
 formats.borlandTurboVisionResource = borlandTurboVisionResource.create(families.other);
 import {cWorthyErrorLibrarian} from "./other/cWorthyErrorLibrarian.js";
@@ -2338,4 +2340,14 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 		formats[formatid].formatid = formatid;
 	}
 }
+
+const MAX_COUNTER = 46655;
+let V_COUNTER = 0;
+export async function reload()
+{
+	const {formats : newFormats} = await import(`./formats.js?v=${Deno.pid.toString(36)}_${Math.randomInt(0, MAX_COUNTER).toString(36)}_${(V_COUNTER++).toString(36)}`);
+	Object.clear(formats);
+	Object.assign(formats, newFormats);
+}
+
 export {formats};

@@ -4,8 +4,9 @@ export class uniso extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
 	flags   = {
-		offset : "Extract ISO starting at this particular byte offset. Default: 0",
-		hfs    : "Set this to true to process the iso as a MacOS HFS disc. Default: false"
+		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
+		hfs        : "Set this to true to process the iso as a MacOS HFS disc. Default: false",
+		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
 	bin        = "deno";
 	args       = r =>
@@ -15,6 +16,8 @@ export class uniso extends Program
 			a.push(`--offset=${r.flags.offset}`);
 		if(r.flags.hfs)
 			a.push("--hfs");
+		if(r.flags.checkMount)
+			a.push("--checkMount");
 		a.push(r.inFile(), r.outDir());
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};

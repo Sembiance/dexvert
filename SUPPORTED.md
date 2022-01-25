@@ -1,4 +1,4 @@
-# Supported File Formats (967)
+# Supported File Formats (968)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -896,7 +896,7 @@ music | YMST Module | .ymst .ym | [uade123](http://zakalwe.fi/uade) | [8 sample 
 
 
 
-## Other (57)
+## Other (58)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | All Identical Bytes |  |  | [2 sample files](https://telparia.com/fileFormatSamples/other/identicalBytes/)
@@ -915,6 +915,7 @@ other | C-Worthy Error Librarian Data | .dat | [strings](https://www.gnu.org/sof
 other | C-Worthy Form | .cwa | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/cWorthyForm/)
 other | C-Worthy Machine Overlay | .ovl | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/cWorthyOverlay/)
 other | Clarion Topspeed Data File | .tps | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/clarionTopspeed/)
+other | Compuserve Information Manager DB |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/other/compuserveInformationManagerDB/)
 other | Corel Plan Perfect | .pln | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/corelPlanPerfect/)
 other | Dart Desktop | .dsk | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/dartDesktop/)
 other | dBase Label Design | .lbl | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/dBaseLabelDesign/)

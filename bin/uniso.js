@@ -7,9 +7,10 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <input.iso> as an ISO and extracting into <outputDirPath>",
 	opts    :
 	{
-		offset : {desc : "If set, mount at the given offset", hasValue : true},
-		hfs    : {desc : "If set, CD will be treated as HFS MAC cd"},
-		ts     : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()}
+		offset     : {desc : "If set, mount at the given offset", hasValue : true},
+		hfs        : {desc : "If set, CD will be treated as HFS MAC cd"},
+		ts         : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
+		checkMount : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
 	},
 	args :
 	[
@@ -41,6 +42,16 @@ async function extractNormalISO()
 		await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
 		await extractHFSISO();
 		return;
+	}
+
+	if(argv.checkMount)
+	{
+		const {stderr} = await runUtil.run("ls", ["-R", MOUNT_DIR_PATH]);
+		if(stderr.toLowerCase().includes("input/output error"))
+		{
+			await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
+			return;
+		}
 	}
 
 	// ALERT! In node, we used to use cp instead of rsync, but I couldn't get the shell /bin/bash thing to work right with cp and sudo under Deno. So I use rsync instead, we'll see if that chokes on certain filenames or not

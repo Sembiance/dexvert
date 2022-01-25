@@ -266,7 +266,7 @@ export class qemu extends Server
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-		this.xlog.info`${prelog(instance)} finished request`;
+		this.xlog.info`${prelog(instance)} finished request (${RUN_QUEUE.size} queued)`;
 		instance.busy = false;
 
 		if(inOutErr)
@@ -345,7 +345,7 @@ export class qemu extends Server
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (before length: ${RUN_QUEUE.size})`;
+			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
 			RUN_QUEUE.add({body, request, reply});
 		}, {detached : true, method : "POST", logCheck : () => false});
 		

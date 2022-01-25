@@ -121,6 +121,8 @@ import {DirMaster} from "./archive/DirMaster.js";
 programs.DirMaster = DirMaster.create(programs.DirMaster);
 import {isextract} from "./archive/isextract.js";
 programs.isextract = isextract.create(programs.isextract);
+import {msa} from "./archive/msa.js";
+programs.msa = msa.create(programs.msa);
 import {lhark} from "./archive/lhark.js";
 programs.lhark = lhark.create(programs.lhark);
 import {vinetto} from "./archive/vinetto.js";

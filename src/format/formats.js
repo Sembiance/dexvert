@@ -2347,7 +2347,6 @@ export async function reload()
 	const {formats : newFormats} = await import(`./formats.js?v=${xu.randStr()}`);
 	Object.clear(formats);
 	Object.assign(formats, newFormats);
-	console.log(!!Object.keys(formats).includes("expresswarePrinterDefFile"));
 }
 
 export {formats};

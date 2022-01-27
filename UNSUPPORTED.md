@@ -1,4 +1,4 @@
-# Unsupported File Formats (438)
+# Unsupported File Formats (440)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -231,7 +231,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (221)
+## Other (223)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -258,6 +258,7 @@ other | Amiga E Module | .m |
 other | Amiga Hunk Library/Object | .lib .obj .o | 
 other | Amiga IFF Debug File | .debug | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/iffSDBG/)
 other | Amiga IFF DTYP |  | 
+other | Amiga Outline Tag | .otag | 
 other | Amiga Preferences | .prefs | 
 other | Amiga Shared Library | .lib | 
 other | Amos Amal Animation Bank | .abk | 
@@ -311,6 +312,7 @@ other | Dynamic Message System File | .msg |
 other | Electronic Arts LIB container | .lib | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | Ensoniq VFX Patch File | .vfx | 
+other | Expressware Printer Definition File | .pdf | 
 other | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 other | File Express Index Header | .ixh | 
 other | File Express Quick Scan | .qss | 

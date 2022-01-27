@@ -25,7 +25,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
-	if(!inputFile.isFile)
+	if(!inputFile.isFile && !inputFile.isSymlink)
 		throw new Error(`Invalid input file, expected a file. ${inputFile.absolute}`);
 	if(!outputDir.isDirectory)
 		throw new Error(`Invalid output directory, expected a directory. ${outputDir.absolute}`);
@@ -128,7 +128,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 			if(f.aux)
 			{
 				for(const auxFile of f.files.aux)
-					await auxFile.rename(`${cwdFilename}${auxFile.ext.toLowerCase()}`);
+				{
+					const newAuxFilename = `${cwdFilename}${auxFile.ext.toLowerCase()}`;
+					if(!(await fileUtil.exists(path.join(auxFile.dir, newAuxFilename))))
+						await auxFile.rename(newAuxFilename);
+				}
 			}
 		}
 

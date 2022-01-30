@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add sparseimage support: https://archive.org/details/cdrom-aztech-maccube-1995
+  https://en.wikipedia.org/wiki/Sparse_image
 
 
 /---------------\
@@ -53,14 +55,16 @@ There are likely to be filename collisions. I should also preserve those from th
 * Could add printer support to DOSBox: https://sourceforge.net/p/dosbox/patches/?limit=250
   Then I could 'print' certain things, like EnvisionPublisher documents (look for others)
 
+* Add 3D/Poly support. Can convert everything to GLTF/GLB format and use this viewer on the website: https://modelviewer.dev/
+  Software to convert DXF (and others) to GLB: https://github.com/assimp/assimp
+  Other software that works with GLB: https://github.khronos.org/glTF-Project-Explorer/
+
 * Improve ILBM animations. Probably need to use an amiga program under QEMU and export as either GIF or raw PNG frames
   Abydos author mentioned he would like to improve the animations
   PPaint can save as animated GIF, but dunno if it handles color cycling: http://www.ppaint.com/
   Maybe also check out Delxue Paint itself to see if it has any export capability: https://en.wikipedia.org/wiki/Deluxe_Paint
 
 * Support ANSI Music files: http://artscene.textfiles.com/ansimusic/
-
-* Figure out what format to create '3D' files to. Not even sure what software can handle opening things like VRML. Maybe start there and see what they can 'export' to. Maybe STL? Or maybe just 'render' each 3D file to a PNG and call it a day.
 
 * Add support for iffCTLG. Looks pretty easy to reverse engineer.
   Use this tool, looks fun to use: http://kaitai.io/  (or just use 010 Editor templates, see dexvert/010_templates/)

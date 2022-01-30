@@ -14,7 +14,7 @@ export class sevenZip extends Program
 	bin  = "7z";
 	args = r =>
 	{
-		const a = ["x", "-y"];
+		const a = ["x", "-y", "-ppassword"];
 
 		if(r.flags.type)
 			a.push(`-t${r.flags.type}`);
@@ -34,6 +34,12 @@ export class sevenZip extends Program
 		const rsrcDirPath = path.join(r.outDir({absolute : true}), ".rsrc");
 		if(await fileUtil.exists(rsrcDirPath) && (await Deno.lstat(rsrcDirPath)).isDirectory)
 			await fileUtil.moveAll(rsrcDirPath, r.outDir({absolute : true}), {unlinkSrc : true});
+	};
+
+	post = r =>
+	{
+		if(r.stderr.includes("Wrong password"))
+			r.meta.passwordProtected = true;
 	};
 
 	checkForDups = true;

@@ -12,7 +12,10 @@ export class zip extends Format
 	untouched      = dexState => dexState.ids.some(id => id.magic==="Zip archive data (empty)");
 	processed      = dexState =>
 	{
-		Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="unzip")?.meta || {});
+		// reverse priority order
+		for(const k of ["sevenZip", "unzip"])
+			Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid===k)?.meta || {});
+		
 		if(dexState.meta.passwordProtected)
 		{
 			// can't do this in a 'untouched' callback because this meta data isn't available until after unzip converter has ran and the untouched method is called before converters

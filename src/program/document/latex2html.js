@@ -13,7 +13,7 @@ export class latex2html extends Program
 
 	runOptions = ({
 		// Some files hang forever, like document/latex/LATEX.BUG
-		timeout : xu.SECOND*60,
+		timeout : xu.SECOND*10,
 
 		// Some files cause an infinite amount of stdout garbage, crashing deno (see text/txt/tabelle.txt)
 		stdoutNull : true,
@@ -28,6 +28,6 @@ export class latex2html extends Program
 	args = r => ["-tmp", r.f.root, "-noinfo", "-html_version", "3.2,unicode,frame,math", "-image_type", "png", "-dir", r.outDir(), r.inFile()];
 
 	// If latex2html craps out, it leaves just a single TMP dir behind. Delete it so that other converters can try converting. Also delete some other junk files it may leave
-	verify    = (r, dexFile) => !((dexFile.dir===r.outDir({absolute : true}) && ["images.log", "images.tex", "WARNINGS"].includes(dexFile.base)) || dexFile.rel.startsWith(`${r.outDir()}/TMP`));
+	verify    = (r, dexFile) => !((dexFile.dir===r.outDir({absolute : true}) && ["images.log", "images.tex", "images.pdf", "WARNINGS"].includes(dexFile.base)) || dexFile.rel.startsWith(`${r.outDir()}/TMP`));
 	renameOut = false;
 }

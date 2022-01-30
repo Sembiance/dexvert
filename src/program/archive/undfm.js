@@ -6,6 +6,7 @@ export class undfm extends Program
 	website    = "https://github.com/Sembiance/dexvert";
 	bin        = "deno";
 	args       = r => Program.denoArgs(Program.binPath("undfm.js"), "--", r.inFile(), r.outDir());
+	unsafe     = true;
 	runOptions = ({env : Program.denoEnv()});
 	renameOut  = false;
 }

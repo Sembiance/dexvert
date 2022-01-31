@@ -213,7 +213,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				familyMatches.ext.push(extFamilyMatch);
 			}
 
-			// Filename matches start at confidence 33.
+			// Filename matches start at confidence 44.
 			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch))
 				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
@@ -235,7 +235,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		Object.keys(familyMatches).forEach(matchType => { familyMatches[matchType] = familyMatches[matchType].filter(m => !m.fallback); });
 		familyMatches.fallback = fallbackMatches;
 
-		[["magic", 100], ["ext", 66], ["filename", 33], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
+		[["magic", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher

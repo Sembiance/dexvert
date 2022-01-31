@@ -7,5 +7,5 @@ export class voc extends Format
 	ext          = [".voc"];
 	magic        = ["Creative Voice audio", "Creative Labs voice data"];
 	metaProvider = ["soxi"];
-	converters   = ["sox"];
+	converters   = ["sox", "ffmpeg[format:voc][outType:mp3]"];
 }

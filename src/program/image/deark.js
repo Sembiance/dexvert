@@ -70,7 +70,7 @@ export class deark extends Program
 		// DMG files incorrectly identified as ZLIB when sent to deark produces invalid 512byte output files, so check that here and deny them
 		if(r.stdout.includes("zlib") && dexFile.ext===".unc" && dexFile.size===512)
 			return false;
-
+		
 		return true;
 	};
 

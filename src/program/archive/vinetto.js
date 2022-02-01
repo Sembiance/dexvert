@@ -1,31 +1,15 @@
 import {Program} from "../../Program.js";
 import {initDOMParser, DOMParser} from "denoLandX";
 import {dateParse, path} from "std";
-import {fileUtil, runUtil, imageUtil} from "xutil";
 
 export class vinetto extends Program
 {
 	website = "https://github.com/AtesComp/Vinetto";
 	package = "app-forensics/vinetto";
 	bin     = "vinetto";
-	args    = r => ["-o", r.outDir(), "--htmlrep", r.inFile()];
+	args    = r => ["-o", r.outDir(), "--invert", "--htmlrep", r.inFile()];
 	verify = async (r, dexFile) =>
 	{
-		if(dexFile.ext===".jpg")
-		{
-			// sometimes the JPG files output by vinetto are visually all black, but actuall has colors
-			// I haven't found a way to expose these colors, but I can detect the all black by converting to PPM and counting colors with that format
-			// I filed a bug about it: https://github.com/AtesComp/Vinetto/issues/2
-			const tmpPPMFilePath = await fileUtil.genTempPath(undefined, ".ppm");
-			await runUtil.run("convert", [dexFile.absolute, tmpPPMFilePath]);
-			const imageInfo = await imageUtil.getInfo(tmpPPMFilePath);
-			await fileUtil.unlink(tmpPPMFilePath, {recursive : true});
-			if(imageInfo && imageInfo.colorCount===1)
-				return false;
-
-			return true;
-		}
-
 		if(dexFile.ext!==".html")
 			return true;
 

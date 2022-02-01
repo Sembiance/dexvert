@@ -58,7 +58,7 @@ import {xu} from "xu";
 import {families} from "../family/families.js";
 import {Format} from "../Format.js";
 const formats = {};
-${relPaths.map(([familyid, formatid, relPath]) => `import {${formatid}} from "./${relPath}";\nformats.${formatid} = ${formatid}.create(families.${familyid});`).join("\n")}
+${relPaths.map(([familyid, formatid, relPath]) => `import {${formatid}} from "./${relPath}?v=${xu.randStr()}";\nformats.${formatid} = ${formatid}.create(families.${familyid});`).join("\n")}
 
 // process our 'unsupported.js' formats
 const {default : unsupported} = await import(\`./unsupported.js?v=$\{xu.randStr()}\`);

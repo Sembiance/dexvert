@@ -7,6 +7,8 @@ export class txt extends Format
 	name         = "Text File";
 	website      = "http://fileformats.archiveteam.org/wiki/Text";
 	magic        = TEXT_MAGIC;
+	ext          = [".txt"];
+	weakExt      = true;
 	priority     = this.PRIORITY.LOWEST;
 	fallback     = true;
 	untouched    = true;

@@ -28,3 +28,6 @@ export class exe extends Format
 			dexState.processed = true;
 	};
 }
+
+// Borland Delphi EXE/DLL extractor in sandbox/app/IDR/
+// It's not really needed though, as the delphi forms are usually Resources that get extracted by sevenZip and then handled by my borlandDelphiForm program

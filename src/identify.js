@@ -23,6 +23,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const xlog = _xlog || new XLog(logLevel);
 
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
+	if(inputFile.isDirectory)
+		return [Identification.create({from : "dexvert", confidence : 100, magic : "directory", family : "other", formatid : "directory", matchType : "magic", unsupported : true})];
 
 	// if it's a symlink, we're done!
 	if(inputFile.isSymlink)

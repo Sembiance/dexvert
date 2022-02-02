@@ -65,11 +65,11 @@ export class sevenZip extends Program
 	};
 	renameOut = r => (r.flags.singleFile ? {} : false);
 
-	chain = "?stripGarbage -> ?fix7zCUR";
+	chain = "?stripGarbage[null] -> ?fix7zCUR";
 	chainCheck = (r, chainFile, programid) =>
 	{
 		// the output txt files have 0x00 bytes intspaced every other byte, no idea why
-		if(programid==="stripGarbage" && ["version.txt", "string.txt"].includes(chainFile.base))
+		if(programid==="stripGarbage" && (["version.txt", "string.txt"].includes(chainFile.base) || path.basename(chainFile.dir)==="STRING"))
 			return true;
 		
 		if(programid==="fix7zCUR" && path.basename(chainFile.dir)==="CURSOR")

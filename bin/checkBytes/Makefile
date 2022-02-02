@@ -4,3 +4,6 @@ LIBS	=
 
 checkBytes: checkBytes.c
 	gcc $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
+
+clean:
+	rm -f checkBytes

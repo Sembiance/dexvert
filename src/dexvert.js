@@ -25,6 +25,8 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 
 	if(!(await fileUtil.exists("/mnt/ram/dexvert/dexserver.pid")))
 		throw new Error("dexserver not running!");
+	if(inputFile.isDirectory)
+		throw new Error(`Invalid input file, expected a file, got a directory: ${inputFile.absolute}`);
 	if(!inputFile.isFile && !inputFile.isSymlink)
 		throw new Error(`Invalid input file, expected a file. ${inputFile.absolute}`);
 	if(!outputDir.isDirectory)

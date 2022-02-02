@@ -12,7 +12,7 @@
 #include <errno.h>
 #include <time.h>
 
-#define CHECKBYTES_VERSION "1.0.0"
+#define CHECKBYTES_VERSION "1.1.0"
 
 #define MAX_FILE_SIZE 50000000	// 50BM or 50,000,000 bytes
 
@@ -79,12 +79,47 @@ const char * checkNullBytes(uint8_t * data, off_t size)
 {
 	for(off_t i=0;i<size;i++)
 	{
-		uint8_t c = data[i];
-		if(c!=0)
+		if(data[i]!=0)
 			return 0;
 	}
 
 	return "All Null Bytes";
+}
+
+const char * checkNullBytesAlternating(uint8_t * data, off_t size)
+{
+	bool null = data[0]==0;
+	bool trailNull = false;
+
+	for(off_t i=1;i<size;i++)
+	{
+		if(data[i]!=0)	// not null
+		{
+			// if we expecting all trailing nulls, return false
+			if(trailNull)
+				return 0;
+			
+			// if previous wasn't null, return false
+			if(!null)
+				return 0;
+		}
+		else	// null
+		{
+			if(trailNull)
+				continue;
+			
+			// if previous was null too, we might be in trailing null section, mark and continue
+			if(null)
+			{
+				trailNull = true;
+				continue;
+			}
+		}
+		
+		null = !null;
+	}
+
+	return "Null Bytes Alternating";
 }
 
 const char * checkIdenticalBytes(uint8_t * data, off_t size)
@@ -143,11 +178,13 @@ int main(int argc, char ** argv)
 	}
 
 	const char * result = 0;
-	if((result = checkASCII(data, s.st_size)))
+	if((result = checkASCII(data, s.st_size)))	// if we are ascii we can't be any of the below
+		printf("%s\n", result);	
+	else if((result = checkNullBytes(data, s.st_size)))	// if we are all null, we don't need to output we are identical, nor can we be alternating
 		printf("%s\n", result);
-	if((result = checkNullBytes(data, s.st_size)))
+	else if((result = checkIdenticalBytes(data, s.st_size)))	// if we are identical, we can't be alternating
 		printf("%s\n", result);
-	if((result = checkIdenticalBytes(data, s.st_size)))
+	else if((result = checkNullBytesAlternating(data, s.st_size)))
 		printf("%s\n", result);
 
 	cleanup:

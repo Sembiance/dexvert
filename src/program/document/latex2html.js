@@ -13,7 +13,7 @@ export class latex2html extends Program
 
 	runOptions = ({
 		// Some files hang forever, like document/latex/LATEX.BUG
-		timeout : xu.SECOND*10,
+		timeout : xu.MINUTE,
 
 		// Some files cause an infinite amount of stdout garbage, crashing deno (see text/txt/tabelle.txt)
 		stdoutNull : true,

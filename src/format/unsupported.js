@@ -229,6 +229,8 @@ export default
 		labViewVirtualInstrument     : {name : "LabView Virtual Instrument", ext : [".vi"], magic : ["National Instruments, LabVIEW File, Virtual Instrument", "LABView Virtual Instrument"]},
 		ldiffDifferencesData         : {name : "LDIFF Differences Data", ext : [".lzd"], magic : ["LDIFF differences data"]},
 		life3000Status               : {name : "LIFE 3000 Status", ext : [".lif"], magic : ["LIFE 3000 status"]},
+		linuxKernel                  : {name : "Linux Kernel", filename : ["vmlinuz", "bzImage"], magic : [/^Linux kernel$/, /^Linux kernel .*boot executable/, /^Linux .+kernel root/]},
+		linuxSwapFile                : {name : "Linux Swap File", filename : ["swapfile"], magic : ["Linux old swap file", "Linux swap file"]},
 		logicSimCircuit              : {name : "LogicSim Circuit", magic : ["LogicSim circuit"]},
 		lotus123FormattingData       : {name : "Lotus 1-2-3 Formatting Data", ext : [".fm3"], magic : ["Formatting Data for Lotus 1-2-3 worksheet"]},
 		lotus123SQZCompressed        : {name : "Lotus 1-2-3 SQZ! Compressed", ext : ["wq!"], magic : ["Lotus 123 SQZ! compressed Worksheet"]},

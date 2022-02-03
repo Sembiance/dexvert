@@ -38,7 +38,10 @@ export class wordStar extends Program
 				Send("n")
 			EndIf
 			
-			WinWaitClose("[TITLE:WSWin 2.0]", "", 10)`
+			WinWaitClose("[TITLE:WSWin 2.0]", "", 10)
+
+			; Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
+			KillAll("ntvdm.exe")`
 	});
 	renameOut = true;
 }

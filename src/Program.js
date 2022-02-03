@@ -403,11 +403,19 @@ export class Program
 			{
 				for(const [, progRaw] of Object.entries(chainParts.map(v => v.trim())))
 				{
+					// if any program in the chain marked it's state as processed, stop now
+					if(r.processed)
+						continue;
+
 					const handleNewFiles = async (chainResult, inputFiles) =>
 					{
 						if(!chainResult || !chainResult.f.new)
 						{
-							xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
+							if(chainResult.processed)
+								r.processed = true;
+							else
+								xlog.warn`Chain ${progRaw} did ${fg.red("NOT")} produce any new files!`;
+								
 							if(!xlog.atLeast("trace"))
 							{
 								await chainResult.unlinkHomeOut();
@@ -477,7 +485,7 @@ export class Program
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
-						});	// chain 10 output files at once, or 33% of OS CPU count, whichever is smaller
+						});	// parallelMap default is 10 files at once, or 33% of OS CPU count, whichever is smaller
 					}
 				}
 			}

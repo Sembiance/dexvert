@@ -72,6 +72,9 @@ If set to true, then this format will never match on 'magic'
 >>> weakMagic = true || ["Specific Magic", /^That is weak$/]
 If true, only match if magic matches AND ALSO ext/filename/fileSize matches.
 
+>>> trustMagic = true
+If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
+
 
 >>> ******** Other
 >>> auxFiles = (inputFile, otherFiles, otherDirs) => [file, file] || false
@@ -98,9 +101,6 @@ Specify that this match should be processed DEAD LAST as a match of last resort,
 >>> priority = C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW
-
->>> trustMagic = true
-If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting this to true.
 
 >>> unsupported = true
 If set to true, then this file can only be identified by not processed.

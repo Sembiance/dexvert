@@ -31,6 +31,9 @@ export const TEXT_MAGIC = [...TEXT_MAGIC_STRONG, ...TEXT_MAGIC_WEAK];
 // These magics are VERY untrustworthy and any detections against them should be noted as such
 const WEAK_VALUES =
 [
+	// dexmagic: WEAK checks
+	/^IFF CAT file$/,
+	
 	// FILE: Very weak checks:
 	/^AmigaOS bitmap font/,
 	/^Apple DiskCopy 4.2 image/,

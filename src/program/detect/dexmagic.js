@@ -11,6 +11,7 @@ const DEXMAGIC_CHECKS =
 
 	// archive
 	"HTTP Response"       : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
+	"IFF CAT file"        : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"       : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"            : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
 	"pcxLib compressed"   : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
@@ -34,6 +35,7 @@ const DEXMAGIC_CHECKS =
 	"Apple IIGS Preferred Format" : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
 	"CAD/Draw TVG"                : "TommySoftware TVG",
+	"CD-I IFF Image"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],

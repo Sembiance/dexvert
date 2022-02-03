@@ -229,7 +229,7 @@ export class qemu extends Server
 			instance.p = null;
 			delete INSTANCES[osid][instanceid];
 			if(!this.stopping && !startingFromStop)
-				await this.startOS(osid, instance, true);
+				await this.startOS(osid, instanceid, true);
 		});
 
 		this.xlog.info`${prelog(instance)} launched, waiting for it to boot...`;

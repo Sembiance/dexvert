@@ -211,6 +211,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog, flags});
 					dexState.ran.push(r);
 
+					// if our program explicitly states we are now processed, mark our dexState as such
+					if(r.processed)
+						dexState.processed = true;
+
 					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
 
 					// verify output files

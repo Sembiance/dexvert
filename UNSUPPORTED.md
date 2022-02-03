@@ -1,4 +1,4 @@
-# Unsupported File Formats (440)
+# Unsupported File Formats (443)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -132,13 +132,14 @@ font | WordUp Graphics Toolkit Font | .wfn |
 
 
 
-## Image (25)
+## Image (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | CD-I IFF Image |  | [9 sample files](https://telparia.com/fileFormatSamples/image/cdiIFFImage/) - No known converter.
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
@@ -231,7 +232,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (223)
+## Other (225)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -347,6 +348,8 @@ other | LabView Virtual Instrument | .vi |
 other | LDIFF Differences Data | .lzd | 
 other | Legend of Kyrandia EMC File | .emc | 
 other | LIFE 3000 Status | .lif | 
+other | Linux Kernel |  | 
+other | Linux Swap File |  | 
 other | LogicSim Circuit |  | 
 other | Lotus 1-2-3 Formatting Data | .fm3 | 
 other | Lotus 1-2-3 SQZ! Compressed | wq! | 

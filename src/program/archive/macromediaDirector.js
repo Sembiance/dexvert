@@ -181,7 +181,11 @@ export class macromediaDirector extends Program
 	});
 
 	// Often SCRIPT files are just behaviors and end up being just 1 single empty byte in size, just delete these, they are not useful
-	verify = (r, dexFile) => dexFile.size>1 && !dexFile.base.toLowerCase().endsWith("_dexignored");
+	verify = (r, dexFile) =>
+	{
+		r.processed = true;	// explicitly state that we have processed this file and are done
+		return dexFile.size>1 && !dexFile.base.toLowerCase().endsWith("_dexignored");
+	};
 
 	renameOut = false;
 }

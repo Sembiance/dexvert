@@ -86,6 +86,7 @@ const FLEX_SIZE_FORMATS =
 		dxf : 1,
 
 		// each running produces slightly different output, not sure why, haven't investigated further
+		ani              : 15,
 		lottie           : 0.1,
 		rekoCardset      : 0.1,
 		windowsClipboard : 0.1,
@@ -138,6 +139,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/dataShowSound\/.+/i, "text", true],
+	[/document\/hotHelpText\/.+\.txt$/i, "text", true],
 	[/document\/imf\/.+/i, "text", true],
 	[/document\/manPage\/glib\.man/i, "text", true],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],

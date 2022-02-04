@@ -12,5 +12,6 @@ export class amigaGuide extends Format
 	// Grotag is best because it'll have access to the 'otherFiles' and 'otherDirs'
 	// Used to use 'guideml' but it's just waaaay too buggy and hangs on almost every guide, often locking up files on the amiga.
 	// So we just do grotag and strings now
-	converters    = ["grotag", "strings"];
+	// We also try grotag first without any aux files so we don't pull in junk we don't need unless it's absolutely necessary (see sample mathtrans)
+	converters    = ["grotag[noAux]", "grotag", "strings"];
 }

@@ -20,6 +20,7 @@ const DEXMAGIC_CHECKS =
 	"WAD2 file"           : [{offset : 0, match : "WAD2"}],
 
 	// document
+	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
 	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],
 	"MacWrite Document"                       : [{offset : 0, match : [0x00, 0x06, 0x00]}, {offset : 4, match : [0x00, 0x06, 0x00, 0x02]}],
 	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],
@@ -34,7 +35,7 @@ const DEXMAGIC_CHECKS =
 	"Alias PIX"                   : [{offset : 4, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x18]}],
 	"Apple IIGS Preferred Format" : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
-	"CAD/Draw TVG"                : "TommySoftware TVG",
+	"CAD/Draw TVG"                : [{offset : 0, match : "TommySoftware TVG"}],
 	"CD-I IFF Image"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
@@ -47,7 +48,7 @@ const DEXMAGIC_CHECKS =
 	"Reko CardSet - RKP"          : [{offset : 0, match : "PCRKP"}],
 	"Reko CardSet - REKO"         : [{offset : 0, match : "PCREKO"}],
 	"Saracen Paint Image"         : [{offset : 0, match : [0x00, 0x78]}],
-	"Second Nature Slide Show"    : "Second Nature Software\r\nSlide Show\r\nCollection",
+	"Second Nature Slide Show"    : [{offset : 0, match : "Second Nature Software\r\nSlide Show\r\nCollection"}],
 	"ZX Spectrum BSP"             : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
 	"ZX Spectrum CHR"             : [{offset : 0, match : "chr"}, {offset : 3, match : [0x24]}],
 
@@ -79,13 +80,12 @@ const DEXMAGIC_CHECKS =
 };
 /* eslint-enable unicorn/no-hex-escape, max-len */
 
-Object.mapInPlace(DEXMAGIC_CHECKS, (k, v) => (typeof v==="string" ? ([k, [{offset : 0, match : v}]]) : [k, v]));
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 {
 	if(typeof check.match==="string")
 		check.match = (new TextEncoder()).encode(check.match);
 });
-const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => (check.offset+check.match.length)).max();
+const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => ((check.size || check.offset)+check.match.length)).max();
 
 export class dexmagic extends Program
 {
@@ -102,13 +102,20 @@ export class dexmagic extends Program
 			let match=true;
 			for(const check of checks)
 			{
-				for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
+				if(Object.hasOwn(check, "offset"))
 				{
-					if(buf[loc]!==check.match[i])
+					for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
 					{
-						match = false;
-						break;
+						if(buf[loc]!==check.match[i])
+						{
+							match = false;
+							break;
+						}
 					}
+				}
+				else if(Object.hasOwn(check, "size"))
+				{
+					match = buf.indexOfX(check.match)!==-1;
 				}
 
 				if(!match)

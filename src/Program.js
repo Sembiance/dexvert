@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["filenameEncoding", "renameKeepFilename", "renameOut"];
+const GLOBAL_FLAGS = ["filenameEncoding", "noAux", "renameKeepFilename", "renameOut"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -589,7 +589,23 @@ export class Program
 		delete debugPart.xlog;
 		xlog.trace`Program ${progRaw} converted to ${debugPart} with f ${f}`;
 		
+		// if we are instructed to not include aux files, rsync them somewhere else and delete the originals, then we resync right after back
+		let tmpAuxDir = null;
+		let noAuxF = null;
+		if(flags.noAux && f.files?.aux?.length)
+		{
+			tmpAuxDir = await fileUtil.genTempPath(undefined, "noAux");
+			await Deno.mkdir(tmpAuxDir);
+			noAuxF = await f.rsyncTo(tmpAuxDir, {type : "aux", unlink : true});
+		}
+
 		const programResult = await program.run(f, progOptions);
+
+		if(tmpAuxDir && noAuxF)
+		{
+			await noAuxF.rsyncTo(f.root);
+			await fileUtil.unlink(tmpAuxDir, {recursive : true});
+		}
 
 		if(srcFiles && safeFiles)
 		{

@@ -11,6 +11,7 @@ A website URL For the program
 An object of key/value pairs of various flag properties you can set when running the program to modify the behavior of this program
 There are a few 'global' flags that can be specified for any program:
 	filenameEncoding		Which encoding the filenames are likely to be in for proper conversion by convmv
+	noAux                   Don't include any aux files in this running of the program
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename
 	renameOut				A way to override the renameOut of a program
 

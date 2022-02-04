@@ -58,7 +58,7 @@ export class FileSet
 		const absolutePath = file instanceof DexFile ? file.absolute : file;
 		(this.files[type] || []).filterInPlace(v => v.absolute!==absolutePath);
 		if(unlink)
-			await fileUtil.unlink(absolutePath);
+			await fileUtil.unlink(absolutePath, {recursive : true});
 	}
 
 	// changes the root location of this FileSet and the DexFiles within it
@@ -95,7 +95,7 @@ export class FileSet
 	}
 
 	// rsync copies all files to targetRoot and returns a FileSet for the new root
-	async rsyncTo(targetRoot, {type, relativeFrom}={})
+	async rsyncTo(targetRoot, {type, relativeFrom, unlink}={})
 	{
 		const newFileSet = await this.clone(type ? [type] : null);
 		if(relativeFrom)
@@ -120,6 +120,9 @@ export class FileSet
 		// this can happen with retromission and 'auxFiles/otherDirs' as it creates and deletes other files in parallel, so can't depends on otherFiles/otherDirs to still be there
 		if(missingFilePaths.length>0)
 			newFileSet.all.filterInPlace(v => !missingFilePaths.includes(v.absolute));
+		
+		if(unlink)
+			await Array.from(type ? (this.files[type] || []) : this.all).parallelMap(async file => await this.remove(type || "all", file, {unlink}));
 
 		return newFileSet;
 	}

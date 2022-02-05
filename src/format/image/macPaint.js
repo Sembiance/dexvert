@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {TEXT_MAGIC} from "../../Detection.js";
 
 export class macPaint extends Format
 {
@@ -7,7 +8,7 @@ export class macPaint extends Format
 	ext            = [".mac", ".pntg", ".pic"];
 	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)"];
 	mimeType       = "image/x-macpaint";
-	forbiddenMagic = ["Installer VISE Mac package"];
+	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
 	converters     = ["deark", `abydosconvert[format:${this.mimeType}]`, "convert"];
 }

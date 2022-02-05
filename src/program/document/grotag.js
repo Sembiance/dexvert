@@ -14,7 +14,7 @@ export class grotag extends Program
 	args    = async r => [r.flags.format==="html" ? "--html" : "--docbook", r.inFile({absolute : true}), await r.outFile("out.xml", {absolute : true})];
 
 	// Grotag can hang at 100% on some guides such as sample bootgauge.guide
-	runOptions = ({timeout : xu.MINUTE*2});
+	runOptions = ({timeout : xu.MINUTE*1.5});
 	chain      = "?dblatex";
 	chainCheck = r => r.flags.format!=="html";
 	renameOut  = true;

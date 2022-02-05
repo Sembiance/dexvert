@@ -2,16 +2,12 @@ import {Format} from "../../Format.js";
 
 export class amigaGuide extends Format
 {
-	name         = "Amigaguide Document";
-	website      = "http://fileformats.archiveteam.org/wiki/AmigaGuide";
-	ext          = [".guide"];
-	magic        = ["Amigaguide hypertext document", "AmigaGuide file"];
-	keepFilename = true;
-	auxFiles     = (input, otherFiles, otherDirs) => ((otherFiles.length>0 || otherDirs.length>0) ? [...otherFiles, ...otherDirs] : false);	// Amiga Guides reference other guides and directories, so include symlinks to everything else
+	name    = "Amigaguide Document";
+	website = "http://fileformats.archiveteam.org/wiki/AmigaGuide";
+	ext     = [".guide"];
+	magic   = ["Amigaguide hypertext document", "AmigaGuide file"];
 	
-	// Grotag is best because it'll have access to the 'otherFiles' and 'otherDirs'
 	// Used to use 'guideml' but it's just waaaay too buggy and hangs on almost every guide, often locking up files on the amiga.
 	// So we just do grotag and strings now
-	// We also try grotag first without any aux files so we don't pull in junk we don't need unless it's absolutely necessary (see sample mathtrans)
-	converters    = ["grotag[noAux]", "grotag", "strings"];
+	converters    = ["grotag", "strings"];
 }

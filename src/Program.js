@@ -591,19 +591,22 @@ export class Program
 		
 		// if we are instructed to not include aux files, rsync them somewhere else and delete the originals, then we resync right after back
 		let tmpAuxDir = null;
-		let noAuxF = null;
+		let noAuxFiles = [];
 		if(flags.noAux && f.files?.aux?.length)
 		{
 			tmpAuxDir = await fileUtil.genTempPath(undefined, "noAux");
 			await Deno.mkdir(tmpAuxDir);
-			noAuxF = await f.rsyncTo(tmpAuxDir, {type : "aux", unlink : true});
+			noAuxFiles = f.files.aux;
+			delete f.files.aux;
+			await noAuxFiles.parallelMap(async file => await fileUtil.move(file.absolute, path.join(tmpAuxDir, file.base)));
 		}
 
 		const programResult = await program.run(f, progOptions);
 
-		if(tmpAuxDir && noAuxF)
+		if(tmpAuxDir && noAuxFiles)
 		{
-			await noAuxF.rsyncTo(f.root);
+			await noAuxFiles.parallelMap(async file => await fileUtil.move(path.join(tmpAuxDir, file.base), file.absolute));
+			f.files.aux = noAuxFiles;
 			await fileUtil.unlink(tmpAuxDir, {recursive : true});
 		}
 

@@ -6,5 +6,5 @@ export class lbr extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/LBR";
 	ext        = [".lbr"];
 	magic      = ["LBR archive data", "LU library"];
-	converters = ["lbrate"];
+	converters = ["deark", "lbrate"];
 }

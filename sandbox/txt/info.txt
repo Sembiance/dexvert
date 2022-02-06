@@ -1,3 +1,5 @@
+Future amiga VNC control: http://s.guillard.free.fr/AmiVNC/AmiVNC.htm
+
 /------------------------------------\
 | Other Converters (see formats.txt) |
 \------------------------------------/

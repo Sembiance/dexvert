@@ -6,5 +6,5 @@ export class installShieldZ extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/InstallShield_Z";
 	ext        = [".z"];
 	magic      = ["InstallShield Z archive"];
-	converters = ["isextract", "UniExtract[type:i3comp extraction]", "UniExtract[type:STIX extraction]"];
+	converters = ["isextract", "UniExtract[type:i3comp extraction]", "UniExtract[type:STIX extraction]", "deark[module:is_z]"];
 }

@@ -3,9 +3,9 @@ import {Format} from "../../Format.js";
 export class grafx2 extends Format
 {
 	name       = "GrafX2";
-	website    = "http://grafx2.chez.com/";
+	website    = "http://fileformats.archiveteam.org/wiki/PKM";
 	ext        = [".pkm"];
 	magic      = ["GrafX2 bitmap"];
 	mimeType   = "image/x-pkm";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = ["deark[module:pkm]", `abydosconvert[format:${this.mimeType}]`];
 }

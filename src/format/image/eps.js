@@ -1,12 +1,16 @@
 import {Format} from "../../Format.js";
 
+const _EPS_MAGIC = ["Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File Postscript"];
+const _EPS_EXT = [".eps", ".epsf", ".epsi", ".epi", ".ept"];
+export {_EPS_MAGIC, _EPS_EXT};
+
 export class eps extends Format
 {
 	name       = "Encapsulated PostScript";
 	website    = "http://fileformats.archiveteam.org/wiki/EPS";
-	ext        = [".eps", ".epsf", ".epsi", ".epi", ".ept"];
+	ext        = _EPS_EXT;
 	mimeType   = "application/eps";
-	magic      = ["Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File Postscript"];
-	notes      = "Sometimes it's a vector based image, sometimes not. Haven't determined a way to differentiate. So we just convert to PNG with nconvert and also to SVG with inkscape.";
-	converters = ["nconvert & inkscape"];
+	magic      = _EPS_MAGIC;
+	notes      = "We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf -> pdf2svg works much better and supports both raster and vector versions";
+	converters = ["ps2pdf -> pdf2svg"];
 }

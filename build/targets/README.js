@@ -12,9 +12,9 @@ export default async function buildREADME(xlog)
 	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - Decompress EXtract conVERT
 Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
 
-Utilizes [Deno](https://deno.land/) to leverage **${Object.keys(programs).length.toLocaleString()}** helper programs running on **${QEMUIDS.length}** different operating systems under [QEMU](https://www.qemu.org/)
-
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
+
+Utilizes [Deno](https://deno.land/) and **${Object.keys(programs).length.toLocaleString()}** helper programs running on **${QEMUIDS.length}** different operating systems under [QEMU](https://www.qemu.org/)
 
 ## Install and Usage
 There is no easy way to install or use this yourself due to 3 factors:

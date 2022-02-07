@@ -27,7 +27,7 @@ const OSIDs = ["win2k", "winxp", "amigappc", "gentoo"];
 if(!argv.vncid.isNumber() && !OSIDs.includes(argv.vncid))
 	Deno.exit(console.log(`Invalid VNCID. Must be a number or one of: ${OSIDs.join(" ")}`));
 
-const vncNumbers = OSIDs.includes(argv.vncid) ? [].pushSequence(OSID_OFFSET[argv.vncid], OSID_OFFSET[argv.vncid]+NUM_SERVERS) : [+argv.vncid];
+const vncNumbers = OSIDs.includes(argv.vncid) ? [].pushSequence(OSID_OFFSET[argv.vncid], OSID_OFFSET[argv.vncid]+(NUM_SERVERS-1)) : [+argv.vncid];
 
 for(const vncNumber of vncNumbers)
 {

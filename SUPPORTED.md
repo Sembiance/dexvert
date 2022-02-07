@@ -5,7 +5,7 @@ Extensions are in order of importance, with the format's primary extension appea
 
 
 
-## Archive (110)
+## Archive (111)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -114,6 +114,7 @@ archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
 archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
+archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [resourceHacker](http://www.angusj.com/resourcehacker/) [resourceEditor](http://melander.dk/reseditor/) | [23 sample files](https://telparia.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Thumbs.db) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/windowsThumbDB/)
 archive | You Don't Know Jack Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://telparia.com/fileFormatSamples/archive/youDontKnowJack/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [deark](https://entropymine.com/deark/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/zlib/)
@@ -900,7 +901,7 @@ music | YMST Module | .ymst .ym | [uade123](http://zakalwe.fi/uade) | [8 sample 
 
 
 
-## Other (59)
+## Other (58)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | All Identical Bytes |  |  | [2 sample files](https://telparia.com/fileFormatSamples/other/identicalBytes/)
@@ -938,7 +939,6 @@ other | Microsoft QuickPascal Unit | .qpu | [strings](https://www.gnu.org/softwa
 other | Microsoft Visual C Binary Resource | .aps | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/microsoftVisualCBinaryResource/)
 other | Microsoft Windows Help File Content | .cnt | [strings](https://www.gnu.org/software/binutils/) | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
 other | MS Visual FoxPro App | .app .fxp | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/msVisualFoxProApp/)
-other | MSVC Resource File | .res | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://telparia.com/fileFormatSamples/other/msvcRes/) - There is probably a better way to open these, maybe visual studio?
 other | NeXT TypedStream Data |  | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/other/typedStreamData/)
 other | NoteWorthy Composure | .nw | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
 other | Null Bytes Alternating |  | [stripGarbage](https://github.com/Sembiance/dexvert) | [5 sample files](https://telparia.com/fileFormatSamples/other/nullBytesAlternating/)

@@ -6,7 +6,7 @@ export class strings extends Program
 	package    = "sys-devel/binutils";
 	bin        = "strings";
 	unsafe     = true;
-	args       = r => ["-a", r.inFile()];
+	args       = r => ["--all", "--bytes=6", r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 	renameOut  = true;
 }

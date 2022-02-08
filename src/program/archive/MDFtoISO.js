@@ -29,7 +29,10 @@ export class MDFtoISO extends Program
 
 			WinWaitClose("MDF to ISO", "", 10)
 
-			ProcessWaitClose("mdftoiso.exe", 10)`
+			ProcessWaitClose("mdftoiso.exe", 10)
+
+			; MDFtoISO uses MDF2ISO behind the scenes
+			KillAll("mdf2iso.exe")`
 	});
 	renameOut = false;
 	chain     = "dexvert";

@@ -9,7 +9,7 @@ export class technicolorDream extends Format
 	{
 		// .lum can convert on it's own, but optionally uses a .col
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
-		return otherFile ? [otherFile] : false;
+		return otherFile ? [otherFile] : (input.ext.toLowerCase()===".col" ? [] : false);
 	};
 
 	// Don't do anything with .col files

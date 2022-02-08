@@ -13,11 +13,11 @@ import {path} from "std";
 export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
 	clearRuntime();
-	for(const [programid, programFlags] of Object.entries(programFlag))
+	for(const [programid, flags] of Object.entries(programFlag))
 	{
 		if(!Object.hasOwn(RUNTIME.globalFlags, programid))
 			RUNTIME.globalFlags[programid] = {};
-		Object.assign(RUNTIME.globalFlags[programid], programFlags);
+		Object.assign(RUNTIME.globalFlags[programid], flags);
 	}
 
 	for(const progid of forbidProgram)

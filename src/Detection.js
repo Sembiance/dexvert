@@ -13,7 +13,7 @@ export const TEXT_MAGIC_STRONG =
 	// file
 	"ASCII text", "ISO-8859 text", "UTF-8 Unicode text", "Non-ISO extended-ASCII text", "ReStructuredText file", "International EBCDIC text", "UTF-8 Unicode text", "Unicode text, UTF-8 text",
 	"Algol 68 source, ISO-8859 text",	// Algol 68 is often mis-identified, usually confused with Pascal files. Just treat it as regular text
-
+	
 	// trid
 	"Text - UTF-8 encoded"
 ];

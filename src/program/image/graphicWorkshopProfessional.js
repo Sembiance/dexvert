@@ -47,21 +47,10 @@ export class graphicWorkshopProfessional extends Program
 			
 			Sleep(1000)
 
-			Local $errorDlg
-			Do
-				$errorDlg = WinActive("[TITLE:Program Error]", "")
-				If $errorDlg = 0 Then
-					$errorDlg = WinActive("Application Error", "")
-				EndIf
-
-				If $errorDlg Not = 0 Then
-					Send("{ESCAPE}")
-					Send("{ESCAPE}")
-					Send("{ESCAPE}")
-					Sleep(200)
-					ContinueLoop
-				EndIf
-			Until $errorDlg = 0`
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")`
 	});
 	post      = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});
 	renameOut = true;

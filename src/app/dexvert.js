@@ -32,14 +32,14 @@ const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogO
 const dexvertOptions = {};
 if(argv.programFlag)
 {
-	dexvertOptions.programFlags = {};
+	dexvertOptions.programFlag = {};
 	for(const flagRaw of Array.force(argv.programFlag))
 	{
 		const [programid, flagKey, flagValue] = flagRaw.split(":");
 
-		if(!Object.hasOwn(dexvertOptions, programid))
-			dexvertOptions[programid] = {};
-		dexvertOptions[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
+		if(!Object.hasOwn(dexvertOptions.programFlag, programid))
+			dexvertOptions.programFlag[programid] = {};
+		dexvertOptions.programFlag[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
 	}
 }
 

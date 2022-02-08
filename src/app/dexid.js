@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, printUtil} from "xutil";
-import {identify} from "../identify.js";
+import {cmdUtil, printUtil, runUtil} from "xutil";
+import {path} from "std";
 import {DexFile} from "../DexFile.js";
 
 const argv = cmdUtil.cmdInit({
@@ -12,7 +12,8 @@ const argv = cmdUtil.cmdInit({
 	{
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: warn", defaultValue : "warn"},
 		json     : {desc : "Output JSON"},
-		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true}
+		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true},
+		rebuild  : {desc : "Rebuild formats and programs first"}
 	},
 	args :
 	[
@@ -20,6 +21,11 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const xlog = new XLog(argv.logLevel);
+
+if(argv.rebuild)
+	await runUtil.run("./build", ["all"], {cwd : path.join(xu.dirname(import.meta), "..", "..", "build")});
+
+const {identify} = await import("../identify.js");
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)

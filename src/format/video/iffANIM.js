@@ -7,5 +7,5 @@ export class iffANIM extends Format
 	ext          = [".anim", ".anm", ".sndanim"];
 	magic        = ["IFF data,  ANIM animation", "IFF ANIM"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:iff]", "xanim[fps:12]"];
+	converters   = ["ffmpeg[format:iff]", "xanim[fps:12]", "iff_convert[framesOnly] -> *ffmpeg[fps:15]"];
 }

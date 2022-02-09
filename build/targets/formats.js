@@ -40,7 +40,7 @@ export default async function buildFormats(xlog)
 		// some manual checks on meta providers based on what converters are being used
 		for(const [converter, metaProvider] of Object.entries({"convert" : "image", "darktable_cli" : "darkTable", "ansilove" : "ansiArt"}))
 		{
-			if(Array.isArray(format.converters) && format.converters.some(v => v===converter || v.startsWith(`${converter}[`)) && !(format.metaProvider || []).includes(metaProvider))
+			if(Array.isArray(format.converters) && format.converters.some(v => v===converter || (typeof v==="string" && v.startsWith(`${converter}[`))) && !(format.metaProvider || []).includes(metaProvider))
 				throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
 		}
 

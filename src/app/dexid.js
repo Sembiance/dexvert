@@ -23,9 +23,9 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.logLevel);
 
 if(argv.rebuild)
-	await runUtil.run("./build", ["all"], {cwd : path.join(xu.dirname(import.meta), "..", "..", "build")});
+	await runUtil.run("./build", ["programs", "formats"], {cwd : path.join(xu.dirname(import.meta), "..", "..", "build"), liveOutput : true});
 
-const {identify} = await import("../identify.js");
+const {identify} = await import(`../identify.js?v=${xu.randStr()}`);
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)

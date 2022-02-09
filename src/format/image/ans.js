@@ -13,5 +13,9 @@ export class ans extends Format
 	magic          = ["ANSI escape sequence text", "ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/];
 	weakMagic      = ["ISO-8859 text, with escape sequences", ...TEXT_MAGIC, /^data$/];
 	metaProvider   = ["ansiArt"];
-	converters     = ["ansilove[format:ans]", "deark", "ffmpeg[format:tty][codec:ansi][outType:gif]"];
+	converters     = [
+		"ansilove[format:ans]",
+		"deark",
+		dexState => (dexState.imageFailedTooTall ? null : "ffmpeg[format:tty][codec:ansi][outType:gif]")	// if we failed a previous converter due to being too tall, then don't convert to an animated GIF (text/txt/Newsletter)
+	];
 }

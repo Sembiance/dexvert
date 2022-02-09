@@ -9,4 +9,3 @@ export class fantavision extends Format
 	weakMagic  = true;
 	converters = ["fantavsn"];
 }
-

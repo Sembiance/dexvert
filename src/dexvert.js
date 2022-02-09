@@ -184,8 +184,12 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 			xlog.info`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
 
 			// try each converter specificied, until we have output files or have been marked as processed
-			for(const converter of (converters || []))
+			for(const converterRaw of (converters || []))
 			{
+				const converter = typeof converterRaw==="function" ? converterRaw(dexState) : converterRaw;
+				if(!converter)
+					continue;
+					
 				const progs = converter.split("&").map(v => v.trim());
 				for(const [i, prog] of Object.entries(progs))
 				{

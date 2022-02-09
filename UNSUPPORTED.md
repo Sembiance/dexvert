@@ -493,7 +493,7 @@ Family | Name | Extensions | Notes
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
 video | Accent Software Show Sequence | .seq | [11 sample files](https://telparia.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 video | Animation Works Movie | .awm | [5 sample files](https://telparia.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
-video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim | [7 sample files](https://telparia.com/fileFormatSamples/video/iffSSA/) - Couldn't find any modern converter. Was able to locate some source that maybe can read the files: http://www.boomerangsworld.de/cms/tools/iff-convert.html
+video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim | [7 sample files](https://telparia.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 video | Delphine CIN Video | .cin | [5 sample files](https://telparia.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/fileFormatSamples/video/dkAnimation/)

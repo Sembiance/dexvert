@@ -1,11 +1,11 @@
-# Supported File Formats (974)
+# Supported File Formats (976)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (111)
+## Archive (112)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -54,6 +54,7 @@ archive | HTTP Response |  |  | [1 sample file](https://telparia.com/fileFormatS
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [hypercard_dasm](https://github.com/fuzziqersoftware/resource_dasm) [stackimport](https://github.com/uliwitness/stackimport/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [IBM SaveDskF SKF Disk Image](http://fileformats.archiveteam.org/wiki/LoadDskF/SaveDskF) | .dsk | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ibmSaveDsk/)
 archive | IFF CAT file | .iff | [iffCATExtract](https://github.com/Sembiance/iffCATExtract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/iffCAT/)
+archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [9 sample files](https://telparia.com/fileFormatSamples/archive/iffFantavision/) - Don't have support to convert this to a movie yet, so classify it as an archive and just extract what we can from it.
 archive | [imageUSB](https://forums.passmark.com/other-software/5213-opening-imageusb-bin-output-file-with-different-software) | .usbimage | [dd](https://www.gnu.org/software/coreutils/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/imageUSB/)
 archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/Sembiance/dexvert) | [4 sample files](https://telparia.com/fileFormatSamples/archive/impactILB/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
@@ -103,7 +104,7 @@ archive | [Self Extracting Stuffit Archive](http://fileformats.archiveteam.org/w
 archive | SimTex LBX Game Data | .lbx | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://telparia.com/fileFormatSamples/archive/lbxGameData/)
 archive | [SQUASH Archive](http://fileformats.archiveteam.org/wiki/Squash_(RISC_OS)) |  | [deark](https://entropymine.com/deark/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/squash/) - Alternative de-archiver I didn't try: https://github.com/mjwoodcock/riscosarc/
 archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .sqx | [sqc](https://www.speedproject.com/download/old/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/sqx/)
-archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
+archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [16 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
 archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [5 sample files](https://telparia.com/fileFormatSamples/archive/swagPacket/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) 7z [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
@@ -125,7 +126,7 @@ archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [z
 ## Audio (21)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [amiga8SVXtoXXX](https://aminet.net/package/mus/misc/8SVXtoXXX) | [13 sample files](https://telparia.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
+audio | [Amiga 8-bit Sampled Voice](http://fileformats.archiveteam.org/wiki/8SVX) | .8svx .iff | [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [amiga8SVXtoXXX](https://aminet.net/package/mus/misc/8SVXtoXXX) | [13 sample files](https://telparia.com/fileFormatSamples/audio/amiga8svx/) - Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates. SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX
 audio | [AMOS Samples Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank#AMOS_Samples_Bank) | .abk | [amosbank](https://github.com/dschwen/amosbank) [dumpamos](https://github.com/kyz/amostools/) | [13 sample files](https://telparia.com/fileFormatSamples/audio/amosSamples/)
 audio | [Audio Interchange File Format](http://fileformats.archiveteam.org/wiki/AIFF) | .aif .aiff .aff | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [11 sample files](https://telparia.com/fileFormatSamples/audio/aif/)
 audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .avr | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/audio/avr/)
@@ -149,7 +150,7 @@ audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwoo
 
 
 
-## Document (74)
+## Document (75)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [9 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -180,6 +181,7 @@ document | HotHelp Catalog | .cat | [strings](https://www.gnu.org/software/binut
 document | [HP Printer Command Language](http://fileformats.archiveteam.org/wiki/PCL) | .pcl .prn | [gpcl6](https://www.ghostscript.com/download/gpcldnld.html) | [11 sample files](https://telparia.com/fileFormatSamples/document/pcl/)
 document | IBM Revisable-Form Text | .rft .dca | [fileMerlin](http://www.file-convert.com/flmn.htm) [word97](https://archive.org/details/office97standard_201912/) | [7 sample files](https://telparia.com/fileFormatSamples/document/revisableFormText/)
 document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/ibm-storyboard/) | .txm | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/ibmStoryboardDocument/) - Storboard 1.0.1 text maker can open these, but I didn't see any way to convert them to TXT nor 'print' them. So we just use strings which is pretty good at getting the text out.
+document | IFF Formatted Text | .iff .ftxt | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [4 sample files](https://telparia.com/fileFormatSamples/document/iffFormattedText/)
 document | InfoFile Database File | .flr | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | InstallShield Compiled Script | .inx | [SID](https://github.com/tylerapplebaum/setupinxhacking) | [5 sample files](https://telparia.com/fileFormatSamples/document/installShieldCompiledScript/)
 document | ITS International Module | .int | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/itsInternational/)
@@ -225,7 +227,7 @@ document | WinWorks Document | .wpd | [strings](https://www.gnu.org/software/bin
 document | [Word Document](http://fileformats.archiveteam.org/wiki/DOC) | .doc | [fileMerlin](http://www.file-convert.com/flmn.htm) [antiword](http://www.winfield.demon.nl) [soffice](https://www.libreoffice.org) | [12 sample files](https://telparia.com/fileFormatSamples/document/wordDoc/)
 document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPerfect) | .wp .wpd .wp4 .wp5 .wp6 .wp7 .doc | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [12 sample files](https://telparia.com/fileFormatSamples/document/wp/)
 document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [wordStar](https://en.wikipedia.org/wiki/WordStar) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordStar/)
-document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
+document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
 
 
 
@@ -473,9 +475,9 @@ image | [IBM Storyboard PIC](http://fileformats.archiveteam.org/wiki/Storyboard_
 image | [ICDRAW Icon](http://fileformats.archiveteam.org/wiki/ICDRAW_icon) | .ib3 .ibi | [recoil2png](http://recoil.sourceforge.net) | [18 sample files](https://telparia.com/fileFormatSamples/image/icdrawIcon/)
 image | [iCEDraw Format](http://fileformats.archiveteam.org/wiki/ICEDraw) | .idf | [ansilove](https://www.ansilove.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://telparia.com/fileFormatSamples/image/iCEDraw/)
 image | [IFF Amiga Contiguous Bitmap](http://fileformats.archiveteam.org/wiki/ILBM#ACBM) | .lbm .ilbm .iff .acbm | [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://telparia.com/fileFormatSamples/image/iffACBM/)
-image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp .dctv | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [82 sample files](https://telparia.com/fileFormatSamples/image/iffILBM/) - ILBM files are only converted to static PNG images. Color cyclying animated GIFs are not produced. This is because a HUGE number of ILBM files from back in the day have wacky color cycle data that yield extensive strobing or almost no change at all. Additionally, the animation support isn't fully working as some have info, but I haven't found ANY program that can handle them: V05AM.LBM V12.LBM V18.LBM V21.LBM V22.LBM V26.LBM Some ILBM files were only used to hold a palette and nothing more. This won't convert those. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort
+image | [IFF Interleaved Bitmap Image](http://fileformats.archiveteam.org/wiki/ILBM) | .lbm .ilbm .iff .beam .dhr .dr .mp .dctv | [recoil2png](http://recoil.sourceforge.net) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [82 sample files](https://telparia.com/fileFormatSamples/image/iffILBM/) - ILBM files are only converted to static PNG images. Color cyclying animated GIFs are not produced. This is because a HUGE number of ILBM files from back in the day have wacky color cycle data that yield extensive strobing or almost no change at all. Additionally, the animation support isn't fully working as some have info, but I haven't found ANY program that can handle them: V05AM.LBM V12.LBM V18.LBM V21.LBM V22.LBM V26.LBM Some ILBM files were only used to hold a palette and nothing more. This won't convert those. DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort
 image | [IFF RGBN Image](http://fileformats.archiveteam.org/wiki/ILBM) | .iff .rgbn | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/image/iffRGBN/)
-image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep | [recoil2png](http://recoil.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [12 sample files](https://telparia.com/fileFormatSamples/image/deep/)
+image | [IFF-DEEP](http://fileformats.archiveteam.org/wiki/IFF-DEEP) | .deep | [recoil2png](http://recoil.sourceforge.net) [ffmpeg](https://ffmpeg.org/) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [12 sample files](https://telparia.com/fileFormatSamples/image/deep/)
 image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .ish .ism | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [4 sample files](https://telparia.com/fileFormatSamples/image/imageSystem/)
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [3 sample files](https://telparia.com/fileFormatSamples/image/imageLab/)
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/imagic/)
@@ -1000,7 +1002,7 @@ text | [PGP Public Key](http://fileformats.archiveteam.org/wiki/PGP_public_key) 
 text | [PGP Signed Message](http://fileformats.archiveteam.org/wiki/PGP) |  |  | [12 sample files](https://telparia.com/fileFormatSamples/text/pgpSignedMessage/)
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [5 sample files](https://telparia.com/fileFormatSamples/text/ppd/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Text) |  |  | [4 sample files](https://telparia.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt |  | [18 sample files](https://telparia.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt |  | [19 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | VENDINFO | .diz |  | [10 sample files](https://telparia.com/fileFormatSamples/text/vendinfo/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat |  | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
@@ -1026,7 +1028,7 @@ video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | 
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
 video | [GRASP Animation Archive](http://fileformats.archiveteam.org/wiki/GRASP_GL) | .gl | [grasp4](https://winworldpc.com/product/fantavision/1x-dos) | [30 sample files](https://telparia.com/fileFormatSamples/video/grasp/) - Several GL files don't play correctly with GRASP4 (PENCIL.GL, ROCKET.GL, SCISSORS.GL, KITE.GL, ACORN.GL, UMBRELLA.GL, v7vga.gl, l&hardy.gl, ICE.GL, COUNT.GL, LEAF.GL), likely need a later version.
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://telparia.com/fileFormatSamples/video/iffYAFA/)
-video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [12 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
+video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [12 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [3 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)

@@ -7,5 +7,5 @@ export class iffSSA extends Format
 	ext         = [".ssa", ".anim"];
 	magic       = ["IFF data, SSA super smooth animation", "ClariSSA Super Smooth Animation"];
 	unsupported = true;
-	notes       = "Couldn't find any modern converter. Was able to locate some source that maybe can read the files: http://www.boomerangsworld.de/cms/tools/iff-convert.html";
+	notes       = "Couldn't find any working modern converter that works on any of the sample files.";
 }

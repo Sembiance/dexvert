@@ -75,6 +75,8 @@ export class image extends Family
 
 		if(isUnsafe && [meta.width, meta.height].some(v => v>=UNSAFE_MAX_IMAGE_SIZE))
 		{
+			if(meta.height>=UNSAFE_MAX_IMAGE_SIZE)
+				dexState.imageFailedTooTall = true;
 			xlog.warn`Image failed verification due to being unsafe with a width (${meta.width}) or height (${meta.height}) > ${UNSAFE_MAX_IMAGE_SIZE}`;
 			return false;
 		}

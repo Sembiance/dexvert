@@ -148,5 +148,5 @@ A method that will further verify that the given output file is proper. Currentl
 >>> verifyUntouched = true  ||  async dexState => true
 Untouched files are not verified if they are a magic match. To force verification, set to true or return true.
 
->>> converters = ["recoil2png", ...]  ||  async dexState => ["recoil2png", "..."]
+>>> converters = ["recoil2png", ...]  ||  async dexState => ["recoil2png", dexState => "", "..."]
 An array of converters to try or a function that returns an array of converters to try.

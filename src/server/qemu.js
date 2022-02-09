@@ -333,6 +333,8 @@ export class qemu extends Server
 
 		this.webServer = new WebServer(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
 		
+		this.webServer.add("/status", async () => new Response(JSON.stringify({queueSize : RUN_QUEUE.size})), {logCheck : () => false});	// eslint-disable-line require-await
+
 		this.webServer.add("/qemuReady", async request =>
 		{
 			const u = new URL(request.url);

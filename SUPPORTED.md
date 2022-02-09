@@ -899,7 +899,7 @@ music | V2 Module | .v2m | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample
 music | [Velvet Studio Module](http://fileformats.archiveteam.org/wiki/Velvet_Studio) | .ams | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [4 sample files](https://telparia.com/fileFormatSamples/music/velvetStudio/)
 music | Voodoo Supreme Synthesizer Module | .vss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/voodooSupremeSynthesizer/)
 music | Wall Beben Module | .wb | [uade123](http://zakalwe.fi/uade) | [6 sample files](https://telparia.com/fileFormatSamples/music/wallyBeben/)
-music | YMST Module | .ymst .ym | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/ymst/)
+music | YMST Module | .ymst .ym | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/ymst/) - UADE123 is the ONLY player I could find on linux and it only works with some YMST files I encountered. (ym.atomix doesn't work for example, see item #273 for more) Most other players (zxtune and audio overload) just wrap uade and have the same problems with the same files. XMPlay on Windows with the Delix plugin ((both in sandbox/app) https://support.xmplay.com/files_view.php?file_id=499) plays YMST files and outputs to WAV. Sadly it also fails to play the same YMST files that UADE123 chokes on. So, meh, guess I'm just outta luck here.
 
 
 

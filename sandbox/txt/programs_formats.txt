@@ -9105,3 +9105,15 @@ Wise Installer package	.exe
 XZ compressed file	.xz, .txz, .tar.xz
 ZIP archive	.zip, .jar, .xpi, .wz, .exe
 Zoo archive	.zoo
+
+
+>>> iff-convert (http://www.boomerangsworld.de/cms/tools/iff-convert.html)
+ILBM - almost full support for all variants, 2-256 colors, 64 extra-half-brite, HAM and HAM8 support, 24 bit depth. output images as ppm files and separate pgm mask file.
+DEEP - support for IFF DEEP files with Red, Green, Blue, and alpha component, the other components are not yet supported. output images as ppm files and separate pgm mask file.
+ANIM - support for ANIM types 2, 3, 4, 5, 7 and 8, but not all option variants. output frames as individual ppm files and separate pgm mask file.
+8SVX - output contained samples as wav files.
+FANT - FantaVision files. Extracts ILBM images.
+FTXT - extract text chunks as utf8 text.
+WOWO - WordWorth files. extract text chunks as utf8 text.
+SWRT - FinalWriter files. extract text chunks as utf8 text.
+SSA  - Clarissa animations. File are not fully valid IFF files as chunk lengths are not correctly written. iff-convert contains special handling for those chunks.

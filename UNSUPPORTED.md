@@ -1,4 +1,4 @@
-# Unsupported File Formats (443)
+# Unsupported File Formats (444)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -232,7 +232,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (225)
+## Other (226)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -244,6 +244,7 @@ other | Adobe Duotone Options | .ado |
 other | Adobe Multiple Master Metrics | .mmm | 
 other | Adobe Photoshop Gradient | .grd | 
 other | Adobe Type Manager Font Information | .inf | 
+other | Adventure Game Toolkit Strings | .d$$ | 
 other | Alchemy Mindworks Resource | .res | 
 other | Alcohol 120% Media Descriptor | .mds | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/mdfMediaDescriptor/)
 other | Allways Printer Driver | .apc .apd .apf | 

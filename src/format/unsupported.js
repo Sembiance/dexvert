@@ -52,6 +52,7 @@ export default
 		//////////
 		// Game //
 		//////////
+		adventureGameToolkitStrings : {name : "Adventure Game Toolkit Strings", ext : [".d$$"], magic : ["Adventure Game Toolkit temporary strings"]},
 		abuseLevel                  : {name : "Abuse Level", ext : [".lvl", ".spe"], magic : ["Abuse Level"]},
 		blockBreakerPattern         : {name : "Block Breaker Pattern", ext : [".blc"], magic : ["Block Breaker pattern"]},
 		chessAssistant              : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},

@@ -113,7 +113,7 @@ export default
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},
 		creativeSignalMicrocode      : {name : "Creative Signal Processor microcode", ext : [".csp"], magic : ["Creative Signal Processor microcode"]},
-		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs .*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
+		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
 		highSpeedPascalUnit          : {name : "High Speed Pascal Unit", ext : [".unit"], magic : ["High Speed Pascal compiled Unit"]},
 		iffSDBG                      : {name : "Amiga IFF Debug File", ext : [".debug"], magic : ["IFF SDBG file"]},
 		installShieldUninstallScript : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script"]},

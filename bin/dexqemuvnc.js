@@ -14,20 +14,27 @@ const argv = cmdUtil.cmdInit({
 		{argid : "vncid", desc : "Which number or osid to open", required : true}
 	]});
 
-const NUM_SERVERS = argv.dev ? (Deno.hostname()==="lostcrag" ? 4 : 2) : 10;
+const OSID_SERVER_COUNT =
+{
+	win2k    : 16,
+	winxp    : 16,
+	amigappc : 8,
+	gentoo   : 10
+};
+
 const OSID_OFFSET =
 {
-	win2k    : 10,
-	winxp    : 20,
-	amigappc : 30,
-	gentoo   : 40
+	win2k    : 100,
+	winxp    : 200,
+	amigappc : 300,
+	gentoo   : 400
 };
 
 const OSIDs = ["win2k", "winxp", "amigappc", "gentoo"];
 if(!argv.vncid.isNumber() && !OSIDs.includes(argv.vncid))
 	Deno.exit(console.log(`Invalid VNCID. Must be a number or one of: ${OSIDs.join(" ")}`));
 
-const vncNumbers = OSIDs.includes(argv.vncid) ? [].pushSequence(OSID_OFFSET[argv.vncid], OSID_OFFSET[argv.vncid]+(NUM_SERVERS-1)) : [+argv.vncid];
+const vncNumbers = OSIDs.includes(argv.vncid) ? [].pushSequence(OSID_OFFSET[argv.vncid], OSID_OFFSET[argv.vncid]+(OSID_SERVER_COUNT[argv.vncid]-1)) : [+argv.vncid];
 
 for(const vncNumber of vncNumbers)
 {

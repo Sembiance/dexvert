@@ -11,30 +11,24 @@ const DEBUG = false;	// Set this to true on lostcrag to restrict each VM to just
 const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
 const DELAY_AMOUNT = xu.SECOND/2;
-const HOSTS =
-{
-	lostcrag      : { numServers :  4 },
-	crystalsummit : { numServers :  2 },
-	chatsubo      : { numServers : 10 }
-};
+
+// We specify a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS_DEFAULT =
 {
-	arch         : "i386",
 	dateTime     : "2021-04-18T10:00:00",
-	ram          : "1G",
 	smbGuestPort : 445,
 	sshGuestPort : 22,
 	machine      : "accel=kvm",
 	hdOpts       : ",if=ide"
 };
 
-// We specific a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
+const qty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
 const OS =
 {
-	win2k    : { extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"], inOutType : "mount", scriptExt : ".au3" },
-	winxp    : { ram : "4G", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"], inOutType : "mount", scriptExt : ".au3" },
-	amigappc : { arch : "ppc", machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"], inOutType : "http", scriptExt : ".rexx"},
-	gentoo   : { arch : "x86_64", ram : "2G", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"], inOutType : "ssh", scriptExt : ".sh" }
+	win2k    : { qty : qty(16), ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
+	winxp    : { qty : qty(16), ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores, will break programs that took a hardware id snapshot on install
+	amigappc : { qty :  qty(8), ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
+	gentoo   : { qty : qty(10), ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
@@ -44,7 +38,6 @@ const HTTP_IN_DIR_PATH = path.join(HTTP_DIR_PATH, "in");
 const HTTP_OUT_DIR_PATH = path.join(HTTP_DIR_PATH, "out");
 
 const INSTANCES = {};
-const NUM_SERVERS = DEBUG ? 1 : HOSTS[Deno.hostname()]?.numServers || 1;
 const RUN_QUEUE = new Set();
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 const CHECK_QUEUE_INTERVAL = 50;
@@ -176,7 +169,7 @@ export class qemu extends Server
 		instance.debug = DEBUG || OS[osid].debug;
 		instance.ip = `192.168.${OS[osid].subnet}.${20+instanceid}`;
 		instance.inOutHostPort = +`${OS[osid].subnet}${20+instanceid}`;
-		instance.vncPort = ((OS[osid].subnet-BASE_SUBNET)*NUM_SERVERS)+10+instanceid;
+		instance.vncPort = (((OS[osid].subnet-BASE_SUBNET)+1)*100)+instanceid;
 		instance.scriptName = `go${OS[osid].scriptExt}`;
 		instance.inOutType = OS[osid].inOutType;
 		INSTANCES[osid][instanceid] = instance;
@@ -191,7 +184,7 @@ export class qemu extends Server
 		if(!instance.debug)
 			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
 		qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
-		qemuArgs.push("-m", `size=${OS[osid].ram || OS_DEFAULT.ram}`);
+		qemuArgs.push("-m", `size=${OS[osid].ram}`);
 		qemuArgs.push("-rtc", `base=${OS[osid].dateTime || OS_DEFAULT.dateTime}`);
 		if((OS[osid].cores || 1)>1)
 			qemuArgs.push("-smp", `cores=${OS[osid].cores}`);
@@ -213,16 +206,16 @@ export class qemu extends Server
 		if(instance.debug)
 			qemuRunOptions.env = {DISPLAY : (Deno.hostname()==="crystalsummit" ? ":0.1" : ":0")};
 
-		this.xlog.info`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch || OS_DEFAULT.arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
+		this.xlog.info`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
 
 		instance.qemuRunOptions = qemuRunOptions;
 		instance.qemuArgs = qemuArgs;
 		const instanceJSON = JSON.stringify(instance);
-		const {p} = await runUtil.run(`qemu-system-${OS[osid].arch || OS_DEFAULT.arch}`, qemuArgs, qemuRunOptions);
+		const {p, cb} = await runUtil.run(`qemu-system-${OS[osid].arch}`, qemuArgs, qemuRunOptions);
 		instance.p = p;
-		instance.p.status().then(async v =>
+		cb().then(async r =>
 		{
-			this.xlog[this.stopping ? "info" : "error"]`${prelog(instance)} has exited with status ${v}`;
+			this.xlog[this.stopping ? "info" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : `${r}`}`;
 			if(!this.stopping && !startingFromStop)
 				await this.stopOS(instance);
 			instance.ready = false;
@@ -407,7 +400,7 @@ export class qemu extends Server
 		}
 
 		this.xlog.info`Starting instances...`;
-		await Object.keys(OS).parallelMap(osid => [].pushSequence(0, NUM_SERVERS-1).parallelMap(instanceid => this.startOS(osid, instanceid)), Number.MAX_SAFE_INTEGER);
+		await Object.keys(OS).parallelMap(async osid => await [].pushSequence(0, OS[osid].qty-1).parallelMap(instanceid => this.startOS(osid, instanceid)), Object.keys(OS).length);
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

@@ -193,9 +193,16 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 				const progs = converter.split("&").map(v => v.trim());
 				for(const [i, prog] of Object.entries(progs))
 				{
-					if(RUNTIME.forbidProgram.has(Program.parseProgram(prog).programid))
+					const progProps = Program.parseProgram(prog);
+					if(RUNTIME.forbidProgram.has(progProps.programid))
 					{
 						xlog.info`Skipping converter ${prog} due to being in forbidProgram`;
+						continue;
+					}
+
+					if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
+					{
+						xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`;
 						continue;
 					}
 					

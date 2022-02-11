@@ -10,14 +10,5 @@ export class mod extends Format
 	magic          = [/.*Protracker module/, "Standard 4-channel Amiga module", "ProTracker IFF module"];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["musicInfo"];
-	converters     = dexState =>
-	{
-		const a = ["xmp", "uade123", "mikmod2wav", "zxtune123"];
-
-		// awaveStudio isn't safe to use for this format all willy nilly, so only use it if we are a magic match
-		if(dexState.id.matchType==="magic")
-			a.push("awaveStudio");
-
-		return a;
-	};
+	converters     = ["xmp", "uade123", "mikmod2wav", "zxtune123", "awaveStudio[matchType:magic]"];
 }

@@ -9117,3 +9117,12 @@ FTXT - extract text chunks as utf8 text.
 WOWO - WordWorth files. extract text chunks as utf8 text.
 SWRT - FinalWriter files. extract text chunks as utf8 text.
 SSA  - Clarissa animations. File are not fully valid IFF files as chunk lengths are not correctly written. iff-convert contains special handling for those chunks.
+
+
+>>> drawview (https://github.com/martenjj/drawview)
+Plain Draw file	DrawFile (AFF)	Draw, many others
+Draw file with extra data	DrawFile (AFF)	DrawPlus
+Compressed Draw	CmprDraw (C4B)	Chameleon, Poster, Vector
+Compressed with extras	VecFile (C56)	Vector
+Draw with tagged objects	Poster (CC3)	Poster
+Object library	DrawLib (810)	DrawPlus, Vector

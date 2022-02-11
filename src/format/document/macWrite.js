@@ -5,6 +5,6 @@ export class macWrite extends Format
 	name           = "MacWrite Document";
 	ext            = [".mcw", ".doc"];
 	forbidExtMatch = true;
-	magic          = [/^MacWrite [Dd]ocument/];
+	magic          = [/^MacWrite .*[Dd]ocument/];
 	converters     = ["soffice"];
 }

@@ -189,7 +189,7 @@ document | [LaTeX Document](http://fileformats.archiveteam.org/wiki/LaTeX) | .te
 document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [soffice](https://www.libreoffice.org) | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | Lotus Notes Database | .nsf | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/lotusNotes/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
-document | MacWrite Document | .mcw .doc | [soffice](https://www.libreoffice.org) | [6 sample files](https://telparia.com/fileFormatSamples/document/macWrite/)
+document | MacWrite Document | .mcw .doc | [soffice](https://www.libreoffice.org) | [8 sample files](https://telparia.com/fileFormatSamples/document/macWrite/)
 document | Magnetic Pages Article |  | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/magneticPages/)
 document | [MAN Page](http://fileformats.archiveteam.org/wiki/Man_page) | .man .1 .2 .3 .4 .5 .6 .7 .8 | [man2html](http://primates.ximian.com/~flucifredi/man/) | [11 sample files](https://telparia.com/fileFormatSamples/document/manPage/)
 document | MicroHelp | .slb | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/microHelp/)

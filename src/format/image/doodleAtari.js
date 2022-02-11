@@ -1,4 +1,6 @@
 import {Format} from "../../Format.js";
+import {_PNG_MAGIC} from "./png.js";
+import {_JPG_MAGIC} from "./jpg.js";
 
 export class doodleAtari extends Format
 {
@@ -7,5 +9,6 @@ export class doodleAtari extends Format
 	ext           = [".doo"];
 	fileSize      = 32000;
 	matchFileSize = true;
+	forbiddenMagic = [..._PNG_MAGIC, ..._JPG_MAGIC];
 	converters    = ["deark", "recoil2png"];
 }

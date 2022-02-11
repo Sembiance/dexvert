@@ -9,5 +9,5 @@ export class latex extends Format
 	keepFilename  = true;
 	auxFiles     = (input, otherFiles, otherDirs) => ((otherFiles.length>0 || otherDirs.length>0) ? [...otherFiles, ...otherDirs] : false);	// Latex files often reference several other files/directories, so include symlinks to everything else
 	notes         = "Images don't seem to work at all. Hrm. At least the text seems to make it out, which is good enough for later indexing.";
-	converters    = ["latex2html", "latex2pdf", "strings"];
+	converters    = ["latex2html", "latex2pdf", "strings[matchType:magic]"];
 }

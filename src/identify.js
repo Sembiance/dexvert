@@ -235,7 +235,18 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		const fallbackMatches = Object.values(familyMatches).flat().filter(m => m.fallback);
 		fallbackMatches.forEach(m => { m.matchType = "fallback"; });
 		Object.keys(familyMatches).forEach(matchType => { familyMatches[matchType] = familyMatches[matchType].filter(m => !m.fallback); });
-		familyMatches.fallback = fallbackMatches;
+		const seenFallbackFormats = new Set();
+		familyMatches.fallback = fallbackMatches.filter(({formatid}) =>
+		{
+			if(!formatid)
+				return true;
+
+			if(seenFallbackFormats.has(formatid))
+				return false;
+
+			seenFallbackFormats.add(formatid);
+			return true;
+		});
 
 		[["magic", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
@@ -280,12 +291,16 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			match.confidence = 1 + (match.matchesExt ? 1 : 0);
 	});
 
+	// Stick any fallback matches>=10 here first, before we sort
+	matches.push(...matchesByFamily.fallback.filter(id => id.confidence>=10));
+
 	// Now sort by confidence
 	// Next, if the confidence is the same, extMatches have a higher priority
 	// Finally sort based on family type
 	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family)], [true, false, false]);
 
-	matches.push(...matchesByFamily.fallback);
+	// finally, any fallback matches less than 10 go at the very end
+	matches.push(...matchesByFamily.fallback.filter(id => id.confidence<10));
 
 	// Here we stick the 'dexvert' matches ahead of other 'detections'
 	const result = [

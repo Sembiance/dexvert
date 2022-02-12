@@ -1,4 +1,4 @@
-# Unsupported File Formats (449)
+# Unsupported File Formats (450)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -134,7 +134,7 @@ font | WordUp Graphics Toolkit Font | .wfn |
 
 
 
-## Image (27)
+## Image (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -142,7 +142,6 @@ image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatS
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
 image | [CD-I IFF Image](http://fileformats.archiveteam.org/wiki/CD-I_IFF_IMAG) |  | [9 sample files](https://telparia.com/fileFormatSamples/image/cdiIFFImage/) - No known converter.
-image | CFLI Designer | .cfli | [3 sample files](https://telparia.com/fileFormatSamples/image/cfliDesigner/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
@@ -167,7 +166,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 
 
 
-## Music (64)
+## Music (66)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -202,6 +201,7 @@ music | Ixalance Module | .ixs | [5 sample files](https://telparia.com/fileForma
 music | JayTrax Module | .jxs | [4 sample files](https://telparia.com/fileFormatSamples/music/jayTrax/)
 music | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://telparia.com/fileFormatSamples/music/buzz/)
 music | Klystrack Module | .kt | [5 sample files](https://telparia.com/fileFormatSamples/music/klystrack/)
+music | Master Tracker AdLib Module | .mtr | [4 sample files](https://telparia.com/fileFormatSamples/music/masterTracker/)
 music | Master Tracks Pro | .mts | So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
@@ -212,6 +212,7 @@ music | NerdTracker Module | .ned | [4 sample files](https://telparia.com/fileFo
 music | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://telparia.com/fileFormatSamples/music/noiseTrekker/)
 music | Onyx Music File Module | .omf | [4 sample files](https://telparia.com/fileFormatSamples/music/onyxMusicFile/)
 music | Organya Module | .org | [7 sample files](https://telparia.com/fileFormatSamples/music/organya/)
+music | Palladix | .plx | [3 sample files](https://telparia.com/fileFormatSamples/music/palladix/)
 music | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://telparia.com/fileFormatSamples/music/gameboyTracker/)
 music | Piston Collage Module | .ptcop | [6 sample files](https://telparia.com/fileFormatSamples/music/pistonCollage/)
 music | PollyTracker Module | .mod | [4 sample files](https://telparia.com/fileFormatSamples/music/pollyTracker/)

@@ -1,7 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* See about adding these formats: https://ftp.modland.com/pub/modules/Ad%20Lib/
 
 
 /---------------\

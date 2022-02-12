@@ -7,5 +7,5 @@ export class s3m extends Format
 	ext          = [".s3m", ".stm"];
 	magic        = ["ScreamTracker III Module sound data", "Scream Tracker 3 module", "Scream Tracker module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["xmp", "zxtune123", "openmpt123"];
+	converters   = ["xmp", "zxtune123", "openmpt123", "adplay"];
 }

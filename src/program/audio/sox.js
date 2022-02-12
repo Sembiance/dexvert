@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class sox extends Program
@@ -6,12 +7,13 @@ export class sox extends Program
 	package     = "media-sound/sox";
 	bin         = "sox";
 	flags       = {
-		bits       : "Input bits per sample",
-		channels   : "Input channel count",
-		encoding   : "Input encoding",
-		endianness : "Input endianness. Valid: little || big.",
-		rate       : "Input sampling rate",
-		type       : "Input file type. Run `man soxformat` for a list"
+		bits        : "Input bits per sample",
+		channels    : "Input channel count",
+		encoding    : "Input encoding",
+		endianness  : "Input endianness. Valid: little || big.",
+		maxDuration : "Trim output file, limiting to maxDuration",
+		rate        : "Input sampling rate",
+		type        : "Input file type. Run `man soxformat` for a list"
 	};
 
 	args = async r =>
@@ -31,6 +33,10 @@ export class sox extends Program
 			a.push("-c", r.flags.channels);
 
 		a.push(r.inFile(), await r.outFile("out.wav"));
+
+		if(r.flags.maxDuration)
+			a.push("trim", "0", Number(+r.flags.maxDuration).toClock());
+
 		return a;
 	};
 

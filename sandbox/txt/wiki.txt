@@ -24,6 +24,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [https://zakalwe.fi/uade/ UADE]
 * [https://www.fmjsoft.com/awavestudio.html Awave Studio]
 * [http://www.watto.org/game_extractor.html Game Extractor]
+* [http://adplug.github.io/ AdPlug / AdPlay]
 
 == Sample files ==
 * https://telparia.com/fileFormatSamples/image/dpx/

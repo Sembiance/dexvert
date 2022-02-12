@@ -27,7 +27,7 @@ const {stdout : openMPTInfoRaw} = await runUtil.run("openmpt123", ["--info", arg
 const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFilePath], runOptions);
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], {timeout : xu.SECOND*10});
 const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], runOptions);
-const {stderr : adplayRaw} = await runUtil.run("adplay", ["--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], runOptions);
+const {stderr : adplayRaw} = await runUtil.run("adplay", ["--once", "--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], {timeout : xu.SECOND*10});
 
 if(argv.debug)
 	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw], ["adplayRaw", adplayRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));	// eslint-disable-line max-len

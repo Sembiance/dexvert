@@ -327,7 +327,7 @@ function parseAdplay(infoRaw="")
 			if(line.length>4)
 			{
 				const instrument = line.substring(4).trimEnd();
-				if(instrument!=="unnamed")
+				if(instrument!=="unnamed" && instrument.trim().length>0)
 					info.instruments.push(instrument);
 			}
 			return;

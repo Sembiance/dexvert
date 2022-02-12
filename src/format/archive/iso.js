@@ -71,23 +71,24 @@ export class iso extends Format
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
 
-		// If it's a BIN/CUE, run bchunk
-		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
-		// We try uniso first though, because sometimes the cue file is pretty useless
-		if(cueFile)
-			return ["uniso", `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
-
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available
 		// So we only set the uniso 'hfs' flag if we have an HFS track and we do NOT detect a regular ISO-9660 track (which was checked with iso-info in meta call)
 		const {flexMatch} = await import("../../identify.js");	// need to import this dynamically to avoid circular dependency
 		const isHFS = dexState.ids.some(id => HFS_MAGICS.some(matchAgainst => flexMatch(id.magic, matchAgainst)));
+		
+		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first, but fall back to HFS side to be safe
+		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
+		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]"]), "fuseiso"];
+
+		// If it's a BIN/CUE, run bchunk
+		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
+		// We try our regular converters first though, because sometimes the cue file is pretty useless
+		if(cueFile)
+			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
+
 		if(isHFS)
-		{
-			// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first, but fall back to HFS side to be safe
-			// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
-			return [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]"]), "fuseiso"];	// In either case we always fall back on fuseiso because some ISOs fail to work with uniso but fuseiso works ok
-		}
+			return hfsConverters;
 		
 		// Finally, we appear to have just a 'simple' iso file. So just use uniso and fallback on fuseiso
 		return ["uniso", "fuseiso"];

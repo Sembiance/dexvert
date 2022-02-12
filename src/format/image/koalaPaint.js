@@ -18,6 +18,6 @@ export class koalaPaint extends Format
 	trustMagic = true;	// Koala Paint is normally untrustworthy, but we trust it here
 	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
 
-	// Must be greater <= 10006 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller
-	idCheck = inputFile => inputFile.size<=10006;
+	// Must be <= 10018 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller and we found a 10018 sized file in the wild
+	idCheck = inputFile => inputFile.size<=10018;
 }

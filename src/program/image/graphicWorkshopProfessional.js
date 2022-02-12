@@ -47,6 +47,9 @@ export class graphicWorkshopProfessional extends Program
 			
 			Sleep(1000)
 
+			KillAll("GWSPRO.EXE")
+
+			Send("{ESCAPE}")
 			Send("{ESCAPE}")
 			Send("{ESCAPE}")
 			Send("{ESCAPE}")

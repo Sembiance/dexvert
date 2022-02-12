@@ -27,9 +27,10 @@ const {stdout : openMPTInfoRaw} = await runUtil.run("openmpt123", ["--info", arg
 const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFilePath], runOptions);
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], {timeout : xu.SECOND*10});
 const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], runOptions);
+const {stderr : adplayRaw} = await runUtil.run("adplay", ["--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], runOptions);
 
 if(argv.debug)
-	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));
+	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw], ["adplayRaw", adplayRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));	// eslint-disable-line max-len
 
 const musicInfo = {};
 
@@ -40,12 +41,13 @@ try { infos.openMPT = parseOpenMPT(openMPTInfoRaw); } catch {}
 try { infos.mikmod = parseMikmod(mikmodInfoRaw); } catch {}
 try { infos.timidity = parseTimidity(timidityInfoRaw); } catch {}
 try { infos.zxtune = parseZXTune(zxtuneRaw); } catch {}
+try { infos.adplay = parseAdplay(adplayRaw); } catch {}
 
 if(argv.debug)
 	console.log(infos);
 
 // Earlier program entries produce better meta data and are processed in priority order
-for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune"])
+for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "adplay"])
 {
 	const subInfo = infos[type];
 
@@ -299,6 +301,55 @@ function parseZXTune(infoRaw="")
 				delete info[propKey];
 		}
 	});
+
+	return info;
+}
+
+function parseAdplay(infoRaw="")
+{
+	const lines = (infoRaw || "").trim().split("\n");
+	if(lines.length===0)
+		return;
+
+	let instrumentSection = false;
+
+	const info = {instruments : []};
+	lines.forEach(line =>
+	{
+		if(line.startsWith("Instrument names:"))
+		{
+			instrumentSection = true;
+			return;
+		}
+
+		if(instrumentSection)
+		{
+			if(line.length>4)
+			{
+				const instrument = line.substring(4).trimEnd();
+				if(instrument!=="unnamed")
+					info.instruments.push(instrument);
+			}
+			return;
+		}
+
+		for(const [propKey, propInfo] of Object.entries({
+			title   : {re : /^Title\s*:(?<value>.+)$/},
+			type    : {re : /^Type\s*:(?<value>.+)$/},
+			author  : {re : /^Author\s*:(?<value>.+)$/}}))
+		{
+			const matchProps = line.match(propInfo.re);
+			if(!matchProps)
+				continue;
+			
+			info[propKey] = matchProps.groups.value.trim();
+			if(info[propKey].length===0)
+				delete info[propKey];
+		}
+	});
+
+	if(info.instruments.length===0)
+		delete info.instruments;
 
 	return info;
 }

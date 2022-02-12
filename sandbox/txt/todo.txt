@@ -1,8 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add sparseimage support: https://archive.org/details/cdrom-aztech-maccube-1995
-  https://en.wikipedia.org/wiki/Sparse_image
+* See about adding these formats: https://ftp.modland.com/pub/modules/Ad%20Lib/
 
 
 /---------------\
@@ -16,17 +15,9 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Add OS/2 support by using ArcaOS (was blue lion): https://www.youtube.com/watch?v=Utse8P_L8k0
+* Add OS/2 support by using ArcaOS (was blue lion) in QEMU: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage and archive/iconHeaven and others (see unsupported notes)
   Then process the OS/2 CDs I have
-
-* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
-  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
-  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
-
-* See about adding these formats:
-  https://ftp.modland.com/pub/modules/Ad%20Lib/
-  https://ftp.modland.com/pub/modules/Spectrum/
 
 * The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
   I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
@@ -37,13 +28,6 @@
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
 
-* GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
-
-* After retromission is pretty far along, grab a copy of every single .instr and .ss file found and stick em into music/smusInstruments (would have to check for naming collisions (where the files have different checksums) and potentially support that if there are a lot.
-Then the conversion app would have a much higher chance at being able to convert the files.
-I could then create a retryFiles.js that would find all items and files that have processed false that match a given criteria (magic probably) and the re-run processFile for that item (which would likely mean breaking processFile fun into its on file, that shouldn't be too hard.)
-There are likely to be filename collisions. I should also preserve those from the original software over those just found in the wild
-
 * Create a deno based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   See samples in: sandbox/samples/mail_news/
@@ -52,6 +36,14 @@ There are likely to be filename collisions. I should also preserve those from th
 /--------------\
 | Low Priority |
 \--------------/
+* GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
+
+* Add sparseimage conversion support (requires MacOS X qemu, see archive/sparseImage notes)
+
+* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
+  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
+  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
+
 * document/wildcatWCX files often fails to convert when running tests, try and reproduce so I can figure out why
 
 * Could add printer support to DOSBox: https://sourceforge.net/p/dosbox/patches/?limit=250

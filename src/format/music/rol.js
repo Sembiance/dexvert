@@ -31,5 +31,6 @@ export class rol extends Format
 			await Deno.symlink(bankFilePath, destBankFilePath);
 		});
 	};
-	converters = ["adplay"];
+	metaProvider = ["musicInfo"];
+	converters   = ["adplay"];
 }

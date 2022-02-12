@@ -4,6 +4,6 @@ export class afl extends Format
 {
 	name       = "AFLI-Editor Image";
 	website    = "http://fileformats.archiveteam.org/wiki/AFLI-Editor";
-	ext        = [".afl"];
+	ext        = [".afl", ".afli"];
 	converters = ["recoil2png", "view64"];
 }

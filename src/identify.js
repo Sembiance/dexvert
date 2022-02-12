@@ -184,6 +184,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 			if(weakMatch)
 				baseMatch.weak = true;
+			if(fileSizeMatch)
+				baseMatch.matchesFileSize = true;
 
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
@@ -208,8 +210,6 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch, hasWeakMagic};
-				if(fileSizeMatch)
-					extFamilyMatch.matchesFileSize = true;
 				if(format.magic)
 					extFamilyMatch.hasMagic = format.magic;
 				familyMatches.ext.push(extFamilyMatch);
@@ -255,7 +255,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			if(matchType==="ext")
 				familyMatches[matchType].sortMulti([m => m.priority, m => ((m.hasMagic && !m.matchesMagic) ? 1 : 0), m => (m.matchesFileSize ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)]);
 			else if(matchType==="magic")
-				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => m.originalConfidence, m => (m.hasWeakMagic ? 1 : 0)], [false, false, true, false]);
+				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => m.originalConfidence, m => (m.matchesFileSize ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)], [false, false, true, false, false]);
 			else
 				familyMatches[matchType].sortMulti([m => m.priority, m => (m.extMatch ? 0 : 1), m => (m.hasWeakMagic ? 1 : 0)]);
 

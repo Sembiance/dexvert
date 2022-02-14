@@ -18,7 +18,7 @@ export class timidity extends Program
 	bin = "timidity";
 
 	// Some MIDI files are buggy and have 2 hour+ run times, others seem to loop for hours. So specify a sane timeout, it'll then handle the WAV that it did produce, which will be good enough
-	runOptions = ({timeout : xu.MINUTE*3});
+	runOptions = ({timeout : xu.MINUTE*2});
 
 	args = async r =>
 	{
@@ -38,5 +38,5 @@ export class timidity extends Program
 	};
 
 	renameOut = true;
-	chain = "sox";
+	chain     = `sox[maxDuration:${xu.MINUTE*10}]`;
 }

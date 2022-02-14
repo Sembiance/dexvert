@@ -1,0 +1,3 @@
+#!/bin/bash
+
+shuf -zn10 -e /mnt/chatsubo/ram/tmp/wip/* | xargs -0 cp -vt ~/Assorted/

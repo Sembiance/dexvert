@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 function restRenamer(rest, suffix, newName)
@@ -70,7 +71,11 @@ export class deark extends Program
 		// DMG files incorrectly identified as ZLIB when sent to deark produces invalid 512byte output files, so check that here and deny them
 		if(r.stdout.includes("zlib") && dexFile.ext===".unc" && dexFile.size===512)
 			return false;
-		
+
+		// If a file extracts to >=25MB and that is more than 10x it's original size, it's unlikely to be correct (http://dev.retromission.com/view/224/Deathmatch%20Arsenal%20V1.0%20(Arsenal%20Computer).ISO/wads_003/hunt.zip/HUNT.WAD/THINGS)
+		if(r.stdout.includes("zlib") && dexFile.size>=xu.MB*25 && dexFile.size>=(r.f.input.size*10))
+			return false;
+
 		return true;
 	};
 

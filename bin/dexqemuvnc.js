@@ -38,7 +38,7 @@ const vncNumbers = OSIDs.includes(argv.vncid) ? [].pushSequence(OSID_OFFSET[argv
 
 for(const vncNumber of vncNumbers)
 {
-	const localPort = argv.dev ? vncNumber : Math.randomInt(13000, 44000);
+	const localPort = argv.dev ? vncNumber+5900 : Math.randomInt(13000, 44000);
 	if(!argv.dev)
 		await runUtil.run("ssh", ["-f", "-o", "ExitOnForwardFailure=yes", "-L", `127.0.0.1:${localPort}:127.0.0.1:${vncNumber+5900}`, "chatsubo", "sleep", "5"], {inheritEnv : true, verbose : true, liveOutput : true});
 

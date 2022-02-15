@@ -1,11 +1,11 @@
-# Supported File Formats (1,020)
+# Supported File Formats (1,026)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (112)
+## Archive (113)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -44,7 +44,7 @@ archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_
 archive | Descent Archive | .hog | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/descentArchive/)
 archive | Disk Doubler | .dd | [unar](https://unarchiver.c3.cx/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/diskDoubler/)
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/diskImage/)
-archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/) - The EDI Install Pro sample file archives PA.HL$ and DWSPYDLL.DL$ do not unpack with the ediUnpack version I have. Haven't found a more recent version yet.
+archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE) | [8 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder) | .imp | [ancient](https://github.com/temisu/ancient_format_decompressor) | [0 sample files](https://telparia.com/fileFormatSamples/archive/fileImploder/) - Found some files that identified as IMP! but don't decompress with ancient. So don't currently have any file samples for this format.
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [deark](https://entropymine.com/deark/) | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [unpcxgx](http://www.ctpax-x.org/?goto=files&show=104) | [11 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
@@ -73,8 +73,9 @@ archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wik
 archive | [Magic Shadow Archiver](http://fileformats.archiveteam.org/wiki/MSA_(Atari)) | .msa | [msa](https://web.archive.org/web/20060507110406/https://www.uni-ulm.de/~s_thuth/ix/msa-0.1.0.tar.gz) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/msa/) - Unable to extract anything from adr_1.msa. The msa.exe program also fails to find any data. Yet a hex editor shows data. No other converters known.
 archive | [Mailbox](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [unmbox](https://github.com/Sembiance/dexvert) | [7 sample files](https://telparia.com/fileFormatSamples/archive/mbox/)
 archive | [Microfox PUT Archive](http://fileformats.archiveteam.org/wiki/PUT) | .put .ins | [microfoxGET](https://archive.org/details/msdos_festival_PUT345) | [10 sample files](https://telparia.com/fileFormatSamples/archive/microfoxPUT/)
-archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [3 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)
+archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [4 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
+archive | Microsoft Windows Installer | .msi .msp | [sevenZip](http://p7zip.sourceforge.net/) [cabextract](https://www.cabextract.org.uk/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/microsoftWindowsInstaller/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) [msexpand_win2k](https://www.computerhope.com/expandhl.htm) [deark](https://entropymine.com/deark/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
@@ -150,7 +151,7 @@ audio | [Westwood Studios Audio](http://fileformats.archiveteam.org/wiki/Westwoo
 
 
 
-## Document (75)
+## Document (80)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [9 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -161,7 +162,10 @@ document | [Atari STOS Basic](https://temlib.org/AtariForumWiki/index.php/STOS.B
 document | Atari Works Database | .std | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/atariWorksDatabase/)
 document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/atariWorks/)
 document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/atariWorksSpreadsheet/)
+document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/borlandTurboVisionHelp/)
 document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile) | .crd | [deark](https://entropymine.com/deark/) [cardfile](http://www.geert.com/CardFile.htm) | [11 sample files](https://telparia.com/fileFormatSamples/document/cardfile/)
+document | Clarion Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/clarionHelp/)
+document | Clarion Memo | .mem | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/clarionMemo/)
 document | [Common Ground](http://fileformats.archiveteam.org/wiki/Common_Ground) | .dp | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/commonGround/) - Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.
 document | DataBase Professional Database | .db | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/dataBaseProfessional/)
 document | dBASE Multiple Index | .mdx | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/dBASEMultipleIndex/)
@@ -172,6 +176,7 @@ document | [DocBook](http://fileformats.archiveteam.org/wiki/DocBook) | .dbk .xm
 document | EasyCalc Spreadsheet file | .calc | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/easyCalc/)
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [11 sample files](https://telparia.com/fileFormatSamples/document/xls/)
 document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/Farallon_Replica) | .rpl | [replica](https://gondwanaland.com/meta/history/) | [4 sample files](https://telparia.com/fileFormatSamples/document/farallonReplica/)
+document | [FileMaker Pro 3 Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/fileMakerPro3/)
 document | Final Write Document |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/finalWrite/)
 document | FrameworkDocument | .fw2 .fw3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameworkDocument/)
 document | GNU Info File | .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/gnuInfo/)
@@ -196,6 +201,7 @@ document | MicroHelp | .slb | [strings](https://www.gnu.org/software/binutils/) 
 document | [Microsoft Works Document](http://fileformats.archiveteam.org/wiki/Microsoft_Works) | .wps .wp .doc | [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) | [12 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorks/)
 document | [Norton Guide](https://en.wikipedia.org/wiki/Norton_Guides) | .ng | [ng2html](http://www.davep.org/norton-guides/) | [11 sample files](https://telparia.com/fileFormatSamples/document/nortonGuide/)
 document | Novell DOS Client Message | .msg | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/novellDOSClientMessage/)
+document | Novell Help Librarian | .hlp | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/novellHelpLibrarian/)
 document | Novell/C-Worthy Message Librarian | .msg .dat | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/messageLibrarian/)
 document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/oberonText/)
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)

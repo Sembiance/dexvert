@@ -1,15 +1,16 @@
-# Unsupported File Formats (450)
+# Unsupported File Formats (452)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
 
-## Archive (22)
+## Archive (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
+archive | EDI Install LZSS2 Compressed Data | $ | [8 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZSS2/)
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://telparia.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 archive | HomeBrew Game Data Archive | .gw1 .gw2 .gw3 | [4 sample files](https://telparia.com/fileFormatSamples/archive/homeBrewArchive/)
@@ -238,7 +239,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (226)
+## Other (227)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -304,8 +305,9 @@ other | Confusion and Light Compressed Data | .cal |
 other | Corel Editor Macro | .edm | 
 other | Corel Shell Macro | .shm | 
 other | Corncob 3D Data File | .cct | 
+other | Cornel Huth Compressed Library | .li_ | 
 other | Create Adventure Games Project | .cag | 
-other | Creative Signal Processor microcode | .csp | 
+other | Creative Signal Processor Microcode | .csp | 
 other | Cybervision Monitor Info |  | 
 other | Cygnus Editor Default Settings |  | 
 other | Cygnus Editor Macros |  | 

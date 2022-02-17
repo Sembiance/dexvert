@@ -1,4 +1,4 @@
-# Unsupported File Formats (452)
+# Unsupported File Formats (453)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -472,7 +472,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (18)
+## Poly (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Studio Mesh | .3ds | [1 sample file](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
@@ -487,6 +487,7 @@ poly | [NorthCAD-3D](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .n3d |
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/poly/polyfilm/)
 poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
+poly | [QuickDraw 3D Metafile](http://fileformats.archiveteam.org/wiki/3DMF) | .3dmf | [5 sample files](https://telparia.com/fileFormatSamples/poly/quickDraw3D/)
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.

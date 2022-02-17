@@ -8,6 +8,9 @@
 \---------------/
 * Once CD-I IFF IMAG support is added (https://github.com/jsummers/deark/issues/40), re-process all CDs that have the cdiIFFImage format
 
+* Once EDI LZSS2 support is added, re-process all CD's that have it: 216 101 225 556 234
+
+
 * Consider updating IsoBuster to 4.9 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
 
 

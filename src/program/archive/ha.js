@@ -20,9 +20,13 @@ export class ha extends Program
 		
 		const fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
 		if(fileOutputPaths.length===0 || (fileOutputPaths.length===1 && fileOutputPaths.includes(listFilePath)))
+		{
+			await fileUtil.unlink(listFilePath);
 			return;
+		}
 
 		const listContentRaw = await Deno.readTextFile(listFilePath);
+		await fileUtil.unlink(listFilePath);
 		
 		let seenStart = false;
 		let seenEnd = false;
@@ -90,8 +94,6 @@ export class ha extends Program
 
 			await Deno.utime(fileOutputPath, Math.floor(o.ts/xu.SECOND), Math.floor(o.ts/xu.SECOND));
 		});
-
-		await fileUtil.unlink(listFilePath);
 	};
 	renameOut = false;
 }

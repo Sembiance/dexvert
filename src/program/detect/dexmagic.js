@@ -65,7 +65,8 @@ const DEXMAGIC_CHECKS =
 	"VCD Info File"            : [{offset : 0, match : "VIDEO_CD"}],
 
 	// video
-	"RIFF ANIM file" : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
+	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
+	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
 
 	// unsupported
 	"Amiga Action Reply 3 Freeze File" : [{offset : 0, match : [0x41, 0x52, 0x50, 0x33, 0x00]}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00]}, {offset : 22, match : Array(10).fill(0x00)}],

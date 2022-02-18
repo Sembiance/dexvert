@@ -46,6 +46,12 @@ export default
 		vFontFont             : {name : "VFONT Font", ext : [".fnt"], magic : ["VFONT Font"]},
 		wordUpToolkitFont     : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]}
 	},
+
+	music :
+	{
+		encoreMusicalNotation : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
+		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]}
+	},
 	
 	other :
 	{
@@ -192,6 +198,7 @@ export default
 		autoCADCompiledMenu          : {name : "AutoCAD Compiled Menu", ext : [".mnx"], magic : ["AutoCAD compiled Menu"]},
 		babbleData                   : {name : "Babble! Data", ext : [".bab"], magic : ["Babble! text data"]},
 		barsAndPipesFile             : {name : "Bars and Pipes File", ext : [".gchone", ".gchord", ".song"], magic : ["Bars and Pipes"]},
+		binaryColorFormat            : {name : "Binary Color Format", ext : [".bcf"], magic : ["Binary Color Format	"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},
 		cadDrawLibrary               : {name : "CAD/Draw Library", ext : [".tbl"], magic : ["TommySoftware CAD/Draw Library"]},
 		cadDrawSettings              : {name : "CAD/Draw Settings", ext : [".mpi"], magic : ["TommySoftware CAD/Draw settings"]},

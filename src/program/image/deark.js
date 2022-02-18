@@ -20,6 +20,7 @@ export class deark extends Program
 		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
 		"opt"         : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"    : "Don't extract any thumb files found",
+		"start"       : "Start processing with deark at a specific byte offset",
 		"file2"       : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
 
@@ -30,6 +31,8 @@ export class deark extends Program
 		const a = ["-maxfiles", "9999"];
 		if(r.flags.module)
 			a.push("-m", r.flags.module);
+		if(r.flags.start)
+			a.push("-start", r.flags.start);
 		if(r.flags.noThumbs)
 			a.push("-main");
 		if(r.flags.file2)

@@ -6,9 +6,11 @@
 /---------------\
 | High Priority |
 \---------------/
-* Once CD-I IFF IMAG support is added (https://github.com/jsummers/deark/issues/40), re-process all CDs that have the cdiIFFImage format
-
 * Once EDI LZSS2 support is added, re-process all CD's that have it: 216 101 225 556 234
+  Deark should hopefully extract the file with the proper filename (as seen in the header) (may need to remove the packed = true flag for this to work, and of course also the custmo module flags)
+  If deark doesn't do this, figure out a way I can do that myself. Maybe through some way of doing renameOut with a name argument
+
+* Once CD-I IFF IMAG support is added (https://github.com/jsummers/deark/issues/40), re-process all CDs that have the cdiIFFImage format
 
 
 * Consider updating IsoBuster to 4.9 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes

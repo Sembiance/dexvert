@@ -6,9 +6,10 @@ if [ "$#" -lt 2 ]; then
 fi
 
 formatid="$1"
+formatName=$(echo "$1" | cut -d'/' -f2)
 shift
 
-if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ]; then
+if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ] || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/unsupported.js; then
 	formatDir="/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
 	mkdir -p "$formatDir"
 

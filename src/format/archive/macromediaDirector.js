@@ -6,7 +6,7 @@ export class macromediaDirector extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Shockwave_(Director)";
 	ext            = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr"];
 	forbidExtMatch = true;
-	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container"];
+	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast"];
 	weakMagic      = ["Generic RIFX container"];
 	
 	auxFiles = (input, otherFiles, otherDirs) =>
@@ -24,11 +24,12 @@ export class macromediaDirector extends Format
 		// dirOpener will automatically chain it's result to macromediaDirector
 		"dirOpener",
 
+		// Some .cct files (T4.cct) can be converted to un-proceted .cst files and then opened
+		"recover_cct",
+
 		// Sometimes dirOpener fails to produce an output file (pbc99.dxr)
 		// So we just try directly with macromediaDirector, which as an Xtra installed that allows opening protected formats: https://github.com/tomysshadow/Movie-Restorer-Xtra
 		"macromediaDirector"
-		
-		// Possible other de-protector I haven't researched yet: https://archive.org/details/recover_cct
 	];
 }
 

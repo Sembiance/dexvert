@@ -7,5 +7,5 @@ export class dLusionDMF extends Format
 	ext          = [".dmf"];
 	magic        = ["Xtracker DMF Module", "D-Lusion Music Format module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "openmpt123"];
+	converters   = ["zxtune123[matchType:magic]", "openmpt123"];
 }

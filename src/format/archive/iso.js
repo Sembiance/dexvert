@@ -29,6 +29,7 @@ export class iso extends Format
 	notes        = xu.trim`
 		Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks).
 		Multi-track (such as Audio and Data) are also supported.
+		PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game.
 		NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.`;
 	auxFiles     = (input, otherFiles) =>
 	{

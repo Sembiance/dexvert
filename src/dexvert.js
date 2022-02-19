@@ -107,6 +107,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 		// create a 'home' dir (or a unique name if taken already) and run programs with a HOME env set to that, this avoids issues when running the same program multiple times at once and it uses some sort of HOME .config lock file
 		const homeFilePath = (await fileUtil.exists(path.join(cwd, "home")) ? (await fileUtil.genTempPath(cwd, "home")) : path.join(cwd, "home"));
 		await Deno.mkdir(homeFilePath, {recursive : true});
+		
+		// create the files needed for java v17 to work (needed for program acx (AppleCommander) to work)
+		await Deno.mkdir(path.join(homeFilePath, ".gentoo", "java-config-2"), {recursive : true});
+		await Deno.symlink("/usr/lib/jvm/openjdk-bin-17", path.join(homeFilePath, ".gentoo", "java-config-2", "current-user-vm"));
+
 		await f.add("homeDir", homeFilePath);
 
 		dexState.startPhase({format, id, f});

@@ -16,4 +16,6 @@ export class ibmStoryboardPic extends Format
 		Several encountered .PIC files that PICTYPE does say are valid don't show in SHOWPIC.EXE for whatever reason.`;
 	
 	converters = ["deark[module:storyboard][charOutType:image]", "imageAlchemy", "storyboardLiveShowPic"];
+
+	verify = ({meta}) => meta.colorCount>1;
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (455)
+# Unsupported File Formats (458)
 These formats can still be **identified** by dexvert, just can't be converted into modern ones.
 
 
@@ -59,11 +59,12 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (17)
+## Document (18)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
 document | AmigaWriter Documet |  | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
+document | Applesoft BASIC Source Code | .bas | [2 sample files](https://telparia.com/fileFormatSamples/document/applesoftBASIC/)
 document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://telparia.com/fileFormatSamples/document/calamusDocument/)
 document | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://telparia.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
 document | Clarion Database File | .dat | [49 sample files](https://telparia.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. soffice didn't do anything with it either.
@@ -240,7 +241,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (228)
+## Other (230)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -390,6 +391,7 @@ other | NeoPaint Palette | .pal |
 other | NeoPaint Printer Driver | .prd | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
+other | Nintendo ROM | .nes | 
 other | Norton Change Directory Info | .ncd | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
 other | Pascal Compiled Unit | .tpu .ppu | 
@@ -462,6 +464,7 @@ other | WarCraft Map | .pud |
 other | Windows Help Full Text Search Index | .fts | 
 other | Windows Help Global Index Data | .gid | 
 other | Windows LOGO Drawing Code | .lgo .lg | 
+other | Windows Shim Database | .sdb | 
 other | Windows Shortcut | .lnk | 
 other | Winzle Puzzle | .wzl | 
 other | WordPerfect Driver | .vrs | 

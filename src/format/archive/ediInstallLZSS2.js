@@ -7,5 +7,5 @@ export class ediInstallLZSS2 extends Format
 	forbidExtMatch = true;
 	packed         = true;
 	magic          = ["EDI Install Pro LZSS2 compressed data"];
-	converters     = ["deark[module:lzss_oku][start:25]"];
+	converters     = ["deark"];
 }

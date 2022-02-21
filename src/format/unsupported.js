@@ -168,7 +168,8 @@ export default
 		//////////
 		// ROMS //
 		//////////
-		gameBoy : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+		gameBoyROM  : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+		nintendoROM : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
 
 
 		///////////
@@ -297,6 +298,7 @@ export default
 		windowsHelpGIDIndex          : {name : "Windows Help Global Index Data", ext : [".gid"], magic : ["GID Help index", "MS Windows help Global Index"]},
 		windowsLogoDrawingCode       : {name : "Windows LOGO Drawing Code", ext : [".lgo", ".lg"], magic : ["Windows logo drawing code"]},
 		windowsProgramInfo           : {name : "Microsoft Windows Program Information File", ext : [".pif"], magic : ["Program Information File (Windows)", "Windows Program Information File"]},
+		windowsShimDatabase          : {name : "Windows Shim Database", ext : [".sdb"], magic : ["Windows application compatibility Shim DataBase", "Windows Shim Database"]},
 		windowsShortcut              : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut"]},
 		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},

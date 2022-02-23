@@ -72,6 +72,7 @@ const WEAK_VALUES =
 	/^RDI Acoustic Doppler Current Profiler/,
 	/^SysEx File/,
 	/^StarOffice Gallery theme/,
+	/^SVr\d curses screen image/,
 	/^TeX font metric data/,
 	/^troff or preprocessor input/,
 	/^Targa image data/,
@@ -119,6 +120,7 @@ const WEAK_VALUES =
 	/^Jovian Logic VI bitmap$/,
 	/^Jupiter Ace snapshot$/,
 	/^Koala Paint/,
+	/^LTP Nuclear ZX tape image$/,
 	/^Luxor ABC80 tokenized BASIC source$/,
 	/^Maple Common Binary file \(generic\)$/,
 	/^Melco embroidery design$/,
@@ -169,6 +171,7 @@ const WEAK_VALUES =
 	/^VXD Driver$/,
 	/^Windows Device Dependent Bitmap$/,
 	/^Windows Jump List$/,
+	/^Windows Icon/,
 
 	// TRID: Weak in some other way, such as global strings
 	/^Amiga Disk image File \(generic\)$/,

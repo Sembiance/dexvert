@@ -7,7 +7,7 @@ export class vinetto extends Program
 	website = "https://github.com/AtesComp/Vinetto";
 	package = "app-forensics/vinetto";
 	bin     = "vinetto";
-	args    = r => ["-o", r.outDir(), "--invert", "--htmlrep", r.inFile()];
+	args    = r => ["-o", r.outDir(), "--htmlrep", r.inFile()];
 	verify = async (r, dexFile) =>
 	{
 		if(dexFile.ext!==".html")

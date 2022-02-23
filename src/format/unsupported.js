@@ -44,6 +44,7 @@ export default
 		theDrawFont           : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"},
 		threeDCKFont          : {name : "3D Construction Kit Font", ext : [".3fd"], magic : [/^3D Construction Kit \d? ?Font$/]},
 		vFontFont             : {name : "VFONT Font", ext : [".fnt"], magic : ["VFONT Font"]},
+		westwoodFont          : {name : "Westwood Font", ext : [".fnt"], magic : ["Westwood Font Format"]},
 		wordUpToolkitFont     : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]}
 	},
 
@@ -224,6 +225,7 @@ export default
 		fileExpressIndexHeader       : {name : "File Express Index Header", ext : [".ixh"], magic : ["File Express Index Header"]},
 		fileExpressQuickScan         : {name : "File Express Quick Scan", ext : [".qss"], magic : ["File Express Quick Scan"]},
 		foxProMemo                   : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
+		fractalDesignPaperTexture    : {name : "Fractal Design Painter Paper Texture", ext : [".pap"], magic : ["Fractal Design Painter Paper texture"]},
 		gammaCAD                     : {name : "GammaCAD Document", ext : [".sym", ".gc1"], magic : ["GammaCAD drawing/symbol"]},
 		geoWorksGEOSData             : {name : "GeoWorks GEOS Data", ext : [".000", ".001", ".002", ".003", ".004", ".005", ".006", ".007", ".008", ".009", ".010", ".011", ".012", ".geo"], magic : ["GeoWorks data", "GeoWorks GEOS data"]},
 		harvardGraphicsChart         : {name : "Harvard Graphics Chart", ext : [".ch3"], magic : ["Harvard Graphics Chart"]},

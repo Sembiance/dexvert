@@ -9,7 +9,7 @@ export class graphicWorkshopProfessional extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		script : `
-			$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 7)
+			$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 10)
 			If $mainWindowVisible = 0 Then
 				$errorVisible = WinWaitActive("[TITLE:Message]", "", 7)
 				If $errorVisible Not = 0 Then

@@ -4,7 +4,7 @@ cd /in || exit
 GO_FILE_PATH="./go.sh"
 
 # Wait for everything to finish booting. I could do this more elegantly I suppose
-sleep 5
+sleep 10
 
 LOCALIP=$(ifconfig eth0 | grep "inet 192.168.53." | xargs | cut -d' ' -f2)
 wget -O /dev/null "http://192.168.53.2:17735/qemuReady?osid=gentoo&ip=""$LOCALIP"

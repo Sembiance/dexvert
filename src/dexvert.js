@@ -10,7 +10,7 @@ import {fileUtil, runUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
 	clearRuntime();
 	for(const [programid, flags] of Object.entries(programFlag))
@@ -231,30 +231,34 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, forbidProgr
 					if(r.processed)
 						dexState.processed = true;
 
-					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
+					if(!skipVerify)
+						xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
 
 					// verify output files
 					await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
 					{
-						xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
-
-						const failValidation = async msg =>
+						if(!skipVerify)
 						{
-							xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
-							if(!xlog.atLeast("trace"))
-								await fileUtil.unlink(newFile.absolute);
+							xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
 
-							return false;
-						};
+							const failValidation = async msg =>
+							{
+								xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
+								if(!xlog.atLeast("trace"))
+									await fileUtil.unlink(newFile.absolute);
 
-						// first, check family level validators
-						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
-						if(extraValidatorData===false)
-							return failValidation(`family ${dexState.format.family.pretty()}`);
+								return false;
+							};
 
-						// if still valid, check format level validator
-						if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
-							return failValidation(`format ${format.pretty()}`);
+							// first, check family level validators
+							const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
+							if(extraValidatorData===false)
+								return failValidation(`family ${dexState.format.family.pretty()}`);
+
+							// if still valid, check format level validator
+							if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
+								return failValidation(`format ${format.pretty()}`);
+						}
 
 						// if a produced file is older than 2020, then we assume it's the proper date
 						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)

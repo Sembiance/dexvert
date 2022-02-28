@@ -16,7 +16,8 @@ const argv = cmdUtil.cmdInit({
 		json          : {desc : "If set, will output results as JSON"},
 		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
 		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
-		forbidProgram : {desc : "A programid not to run. Used internally to prevent infinite recursions", hasValue : true, multiple : true}
+		forbidProgram : {desc : "A programid not to run. Used internally to prevent infinite recursions", hasValue : true, multiple : true},
+		skipVerify    : {desc : "Set to true to skip verifications of output files"}
 	},
 	args :
 	[
@@ -43,7 +44,7 @@ if(argv.programFlag)
 	}
 }
 
-["asFormat", "forbidProgram"].forEach(k =>
+["asFormat", "forbidProgram", "skipVerify"].forEach(k =>
 {
 	if(argv[k])
 		dexvertOptions[k] = argv[k];

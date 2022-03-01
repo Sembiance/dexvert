@@ -1,0 +1,139 @@
+Fri Mar  6 15:25:55 1992  Per Bothner  (bothner@cygnus.com)
+
+	* gnulib3.c:  Removed obsolete file.
+
+Thu Mar  5 16:40:09 1992  Per Bothner  (bothner@cygnus.com)
+
+	* *.cc:  Experiemnted with for each Foo.cc, adding
+	'#define _COMPILING_Foo' to control compilation of inlines in
+	Foo.h, then undid that change (see discussion in
+	../g_++-include/ChangeLog).  Net difference is thus some
+	minor tweaking.
+
+	* regex.cc:  Tweaks to remove warnings.
+
+Tue Mar  3 17:23:57 1992  Per Bothner  (bothner@cygnus.com)
+
+	* BitSet.cc:  Move BitSet::clear() here from BitSet.h,
+	and make non-inlined.
+
+Sun Mar  1 16:26:07 1992  Per Bothner  (bothner@cygnus.com)
+
+	* BitSet.cc, BitString.cc, Integer.cc, Rational.cc, String.cc:
+	Make error() methods return void, not volatile void, since
+	sometimes these error handlers *do* return.
+	* Fix.cc:  Fix parenthesization error.
+
+Sat Feb 29 14:07:32 1992  Michael Tiemann  (tiemann@cygnus.com)
+
+	* regex.cc (re_compile_pattern): Back out source code change that
+	was used to workaround a bug in g++.
+
+Wed Feb 26 18:04:40 1992  K. Richard Pixley  (rich@cygnus.com)
+
+	* Makefile.in, configure.in: removed traces of namesubdir,
+	  -subdirs, $(subdir), $(unsubdir), some rcs triggers.  Forced
+	  copyrights to '92, changed some from Cygnus to FSF.
+
+Wed Feb 26 12:37:43 1992  Per Bothner  (bothner at cygnus.com)
+
+	* BitSet.cc, BitString.cc, Integer.cc, Rational.cc,
+	String.cc, error.cc:  Use new _VOLATILE_VOID macro (from
+	builtin.h) (to allow compilation by other C++ compilers).
+	* BitSet.cc,regex.cc:  #include <string.h>.
+
+Thu Feb 20 21:46:17 1992  Per Bothner  (bothner at cygnus.com)
+
+	* Regex.cc, regex.cc:  Add some needed casts.
+
+Wed Feb 19 23:32:38 1992  Per Bothner  (bothner at cygnus.com)
+
+	* timer.cc:  Include sys/types.h, since it is no
+	longer automatically included by time.h.
+	* regex.cc:  Added a comment about being based on regex.c.
+
+Tue Feb 11 11:24:18 1992  Per Bothner  (bothner at cygnus.com)
+
+	* String.cc:  Only skip ws if appropriate.
+	* Complex.cc, Fix.cc, Integer.cc, Rational.cc:
+	Apply fix below to other cases of operator>>.
+	(And if the format is bad, set failbit, not badbit.)
+
+	* String.cc (String::operator>>, readline):
+	Use ipfx(0) instead of good() (unless _OLD_STREAMS).
+	Thus make sure to set the failbit (to prevent
+	infinite loops if eofbit is set without failbit).
+
+Mon Feb 10 11:20:13 1992  Per Bothner  (bothner at rtl.cygnus.com)
+
+	* String.C (String::operator const char*):  Don't
+	use the str() function to copy into an AllocRing
+	(since we're phasing out use of AllocRings).
+
+Wed Jan 29 12:51:05 1992  Per Bothner  (bothner at cygnus.com)
+
+	* Sample.cc:  Rename #included files to current names.
+
+Fri Jan 24 15:51:50 1992  Per Bothner  (bothner at cygnus.com)
+
+	* Makefile.in, configure.in: Some common rules moved to Make.defs.
+
+	* new.cc, delete.cc: Include stdlib.h instead of obsolete malloc.h.
+
+Fri Jan 17 15:03:28 1992  Per Bothner  (bothner at cygnus.com)
+
+	Merge in Doug Lea's latest version; other fixes.
+	* Most files:  Replaced copyright notice (the old
+	ones claimed to be part of GNU CC).
+	* Makefile.in (depend):  Tweak it.
+	* ACG.cc, AllocRing.cc, BitSet.cc, BitString.cc, GetOpt.cc,
+	RNG.cc, dtoa.cc:  Minor improvements.
+	* BitString.cc, Fix16.cc, Fix24.cc, String.cc:  Change (int)
+	to (unsigned int) various places, inspired by gcc-2 warnings.
+	* Complex.cc, CursesW.cc, Fix.cc, Integer.cc, Rational.cc,
+	String.cc:  Various changes to allow use with either the
+	old stream facility or the new iostream facility.
+	* regex.cc:  Use 'new char[]' instead of 'malloc()'.
+	* bcopy.cc:  Minor changes.  Rename bcopy -> libgxx_bcopy.
+	* malloc.c:  Use size_t consistently.
+	* regex.cc: New version from FSF (C++ -ified).
+	* minmax.cc:  New file.
+	* MIN.cc, MAX.cc, std.cc:  Removed.
+
+Sat Jan 11 14:44:17 1992  Michael Tiemann  (tiemann at cygnus.com)
+
+	* CursesW.cc, GetOpt.cc: Don't declare any static class members
+	`static' at top-level.
+
+Sun Jan  5 00:12:05 1992  Per Bothner  (bothner at cygnus.com)
+
+	* Makefile.in, configure.in:  Automated 'make depend' support.
+	* String.cc:  For now, use _bad instead of ios::badbit.
+	* File.cc, Filebuf.cc, PlotFile.cc, SFile.cc, filebuf.cc,
+	form.cc, istream.cc, itoa.cc, ostream.cc, streambuf.cc:
+	Moved to ../old-stream.
+	* Makefile.in: Move rules for Making the stream stuff to
+	../old-stream/Makefile.in.
+
+Fri Jan  3 17:00:40 1992  Per Bothner  (bothner at cygnus.com)
+
+	* Integer.cc, BitSet.cc, BitString.cc, Rational.cc:
+	Add #include <builtin.h> as needed.  It was included by the
+	old stream.h, but not by the new iostream.h.
+	* Integer.cc:  Merged in Doug Lea's changes to avoid
+	signed/unsigned warnings.
+	* Fix.cc, String.cc:  Fix some portabilty problems that
+	depended on the old stream code.
+
+Tue Dec 31 18:19:15 1991  Per Bothner  (bothner at cygnus.com)
+
+	* Makefile.in:  Move common definitions to ../Make.defs.
+	* configure.in:  Define host_makefile_frag to pull in Make.defs.
+
+Sat Dec 28 16:47:38 1991  Michael Tiemann  (tiemann at cygnus.com)
+
+	* regex.cc (re_compile_pattern,re_comp,main): Use `malloc' instead
+	of `new char[]' since we need to call realloc, and that doesn't
+	work with arrays allocated by new.
+	* Regex.cc (Regex::Regex): Ditto.
+

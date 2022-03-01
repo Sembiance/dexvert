@@ -63,6 +63,57 @@ static void parse_options(int argc, char **argv)
 	inputFilePath = argv[0];
 }
 
+struct dataState
+{
+	uint8_t * data;
+	off_t i;
+	off_t size;
+};
+
+int nextChar(struct dataState * state)
+{
+	if(state->i==state->size)
+		return EOF;
+
+	int c = state->data[state->i];
+	state->i++;	
+	return c;
+}
+
+off_t checkEscapeSequence(uint8_t * data, off_t start, off_t size)
+{
+	off_t count=0;
+
+	off_t i = start;
+	uint8_t c = data[++i];
+
+	// logic derived from: https://en.wikipedia.org/wiki/ANSI_escape_code
+
+	// CSI (Control Sequence Introducer)
+	if(c=='[')
+	{
+		//    parameter bytes: 0 or more bytes from 0x30 '0' to 0x3F '?'
+		for(i++;i<size && data[i]>='0' && data[i]<='?';i++);
+		
+		// intermediate bytes: 0 or more bytes from 0x20 ' ' to 0x2F '/'
+		for(;i<size && data[i]>=' ' && data[i]<='/';i++);
+		
+		//         final byte:   a single byte from 0x40 '@' to 0x7E '~'
+		c = data[i];
+		if(c<'@' || c>'~')
+			return 0;
+		
+		return i-start;
+	}
+	else if(c==']')
+	{
+		// TODO add support
+		return 0;
+	}
+
+	return 0;
+}
+
 const char * checkData(uint8_t * data, off_t size)
 {
 	bool printableASCII=true;
@@ -72,11 +123,28 @@ const char * checkData(uint8_t * data, off_t size)
 	uint8_t last=0;
 	bool null=data[0]==0;
 	bool trailNull=false;
+	uint32_t escapeSequenceCount=0;
 
 	for(off_t i=0;i<size;i++)
 	{
 		uint8_t c = data[i];
 
+		if(c==27)
+		{
+			allNull = false;
+			
+			off_t escapeLength = checkEscapeSequence(data, i, size);
+			if(escapeLength)
+			{
+				printf("got escape length %lu at offset %lu\n", escapeLength, i);
+				alternatingNull = false;
+				allIdentical = false;
+
+				i+=escapeLength;
+				continue;
+			}
+		}
+		
 		if(printableASCII && (c!=7 && c!=8 && c!=9 && c!=10 && c!=13 && (c<32 || c>126)))	// 7 (bell) and 8 (backspace) are not normally printable, but exists in ANSI files from the day
 			printableASCII = false;
 

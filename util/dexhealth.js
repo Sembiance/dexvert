@@ -20,7 +20,7 @@ if(instanceJSONFilePaths.length===0)
 const tmpSnapshotDirPath = await fileUtil.genTempPath();
 await Deno.mkdir(tmpSnapshotDirPath);
 
-const r = [];
+const qemu = [];
 await instanceJSONFilePaths.parallelMap(async instanceJSONFilePath =>
 {
 	const {osid, instanceid, vncPort} = xu.parseJSON(await Deno.readTextFile(instanceJSONFilePath));
@@ -39,9 +39,10 @@ await instanceJSONFilePaths.parallelMap(async instanceJSONFilePath =>
 	if(!["amigappc"].includes(osid))
 		o.orphanFileCount = (await ["in", "out"].parallelMap(async k => (await fileUtil.tree(path.join(QEMU_DIR_PATH, `${osid}-${instanceid}`, k))).length)).sum();
 
-	r.push(o);
+	qemu.push(o);
 });
 
 await fileUtil.unlink(tmpSnapshotDirPath, {recursive : true});
 
-console.log(JSON.stringify(r));
+const garbageCount = (await fileUtil.tree("/mnt/dexvert/garbageDetected", {nodir : true}))?.length || 0;
+console.log(JSON.stringify({qemu, garbageCount}));

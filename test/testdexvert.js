@@ -78,7 +78,7 @@ const FLEX_SIZE_FORMATS =
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		// So we just exempt all of the document category
-		"*" : 0.5
+		"*" : 1
 	},
 	image :
 	{

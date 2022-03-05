@@ -7,16 +7,21 @@ const STANDARD_BANK_FILE_PATHS = await fileUtil.tree(path.join(xu.dirname(import
 
 export class rol extends Format
 {
-	name    = "AdLib/Roland Song";
-	website = "http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song";
-	ext     = [".rol"];
-	magic   = ["AdLib Visual Composer music"];
-	notes   = "Couldn't convert GIRLIPEN.ROL for some reason";
+	name         = "AdLib/Roland Song";
+	website      = "http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song";
+	ext          = [".rol"];
+	magic        = ["AdLib Visual Composer music"];
+	notes        = "Couldn't convert GIRLIPEN.ROL for some reason";
+	keepFilename = true;
 
-	auxFiles = (input, otherFiles) =>
+	auxFiles = (input, otherFiles, otherDirs) =>
 	{
-		const bankFiles = otherFiles.filter(otherFile => otherFile.ext.toLowerCase()===".bnk");
-		return bankFiles.length>0 ? bankFiles : false;
+		const f = otherFiles.filter(otherFile => [".bnk", ".ins"].includes(otherFile.ext.toLowerCase()));
+		const insDir = otherDirs.find(otherDir => otherDir.name.toLowerCase()==="ins");
+		if(insDir)
+			f.push(insDir);
+
+		return f.length>0 ? f : false;
 	};
 
 	pre = async dexState =>
@@ -32,5 +37,5 @@ export class rol extends Format
 		});
 	};
 	metaProvider = ["musicInfo"];
-	converters   = ["adplay"];
+	converters   = ["adplay", "rol2mus"];
 }

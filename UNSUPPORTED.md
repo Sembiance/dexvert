@@ -1,5 +1,7 @@
-# Unsupported File Formats (461)
-These formats can still be **identified** by dexvert, just can't be converted into modern ones.
+# Unsupported File Formats (463)
+These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
+Some are not converted because they are not very useful, or are specific to a single application.<br>
+Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
@@ -108,7 +110,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (23)
+## Font (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -121,6 +123,7 @@ font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSa
 font | Corel Wiffen Font | .wfn | 
 font | DynaCADD Vector Font | .fnt | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
+font | GRX Font | .fnt | 
 font | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://telparia.com/fileFormatSamples/font/intelliFont/)
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
@@ -243,7 +246,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (231)
+## Other (232)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -405,6 +408,7 @@ other | Platinen Layout Programm Bibliotheken/library | .bib |
 other | Polyfilm Preferences | .prf | 
 other | Ports of Call Save Game | .trp | 
 other | Power Up! Album Project | .alb | 
+other | PowerBASIC Help | .pbh | 
 other | PowerBuilder Dynamic Library | .pbd | 
 other | Printer Font Metrics | .pfm | 
 other | Puzzle Buster Puzzle | .puz | 

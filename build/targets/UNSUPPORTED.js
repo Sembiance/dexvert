@@ -9,7 +9,9 @@ export default async function buildUNSUPPORTED(xlog)
 {
 	xlog.info`Writing UNSUPPORTED.md to disk...`;
 	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
-These formats can still be **identified** by dexvert, just can't be converted into modern ones.
+These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
+Some are not converted because they are not very useful, or are specific to a single application.<br>
+Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 ${(await Object.values(unsupportedFormats).map(f => f.familyid).unique().sortMulti().parallelMap(async familyid => `
 

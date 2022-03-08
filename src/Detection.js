@@ -176,6 +176,7 @@ const WEAK_VALUES =
 	// TRID: Weak in some other way, such as global strings
 	/^Amiga Disk image File \(generic\)$/,
 	/^Dan Bricklin's Demo/,
+	/^Novastorm Media audio$/,
 	/^Scalable Vector Graphics \(var\.3\)$/
 ];
 /* eslint-enable prefer-named-capture-group */

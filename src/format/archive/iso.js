@@ -86,7 +86,7 @@ export class iso extends Format
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
 		// We try our regular converters first though, because sometimes the cue file is pretty useless
 		if(cueFile)
-			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
+			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, "fuseiso"];
 
 		if(isHFS)
 			return hfsConverters;

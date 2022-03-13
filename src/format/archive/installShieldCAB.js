@@ -12,9 +12,14 @@ export class installShieldCAB extends Format
 		if(input.ext.toLowerCase()===".hdr")
 			return false;
 		
+		// if we are a .cab file and there is another DATA1.CAB file, don't do anything further, as the extraction of data1.cab will get the files from this cab file
+		if((/^data\d+.cab$/i).test(input.base) && otherFiles.some(file => file.base.toLowerCase()==="data1.cab"))
+			return [];
+		
 		// .cab files often require .hdr files to extract, even a data2.cab would need a data1.hdr, so let's grab ALL .hdr files
-		const hdrFiles = otherFiles.filter(file => file.ext.toLowerCase()===".hdr");
-		return hdrFiles.length>0 ? hdrFiles : false;
+		// also let's include all other .cab files so that multi-part cabs will extract properly
+		const hdrAndCabFiles = otherFiles.filter(file => [".hdr", ".cab"].includes(file.ext.toLowerCase()));
+		return hdrAndCabFiles.length>0 ? hdrAndCabFiles : false;
 	};
 	converters = ["unshield", "unshield[oldCompression]", "winPack", "gameextractor", "UniExtract"];
 }

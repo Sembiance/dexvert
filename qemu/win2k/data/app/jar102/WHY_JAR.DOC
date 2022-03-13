@@ -1,0 +1,108 @@
+
+    WHY_JAR.DOC                                              November 1996
+
+
+    This document describes the advantages of JAR.
+
+    JAR FEATURES:
+
+    1)  JAR has a 16-bit executable (JAR16.EXE) for DOS and a 32-bit
+        executable (JAR32.EXE) for Windows 95 and Windows NT.  The latter
+        takes full advantage of 32-bit instructions and the "flat" memory
+        model.
+
+        Data compressed in one operating system can be decompressed in
+        another.  JAR also supports optional filename translation when
+        extracting long filenames in DOS.
+
+    2)  A major feature of JAR is the ability to use additional memory for
+        better compression.  Unlike most other archivers, the DOS version
+        of JAR can use EMS or XMS memory to improve compression.
+
+        Memory usage is fully customizable.  You can specify how much
+        memory to use or you can let JAR auto-detect the optimal amount.
+
+        No matter how much memory has been used during compression,
+        decompression requires only about 400K of memory.
+
+        The JAR compression engine detects popular file formats to achieve
+        an improved compression rate.
+
+        JAR's compression speed is comparable with other archivers.
+        Decompression works much faster than compression. JAR32.EXE uses
+        32-bit instructions and thus is even more faster and compresses
+        better than the DOS version.
+
+        Please note that compression results are highly dependent upon the
+        type of data compressed.  We think that today (September 1996) JAR
+        achieves the BEST compression rate among ALL other popular
+        archivers (ARJ, PKZIP, RAR, UC2, LHA).
+
+    3)  Compared to the popular DOS archivers PKZIP, RAR, LHA, only JAR can
+        archive more than 50,000 files at one time.  This enables JAR to
+        handle very large disk drives.
+
+    4)  JAR provides the capability of archiving files to multiple volume
+        archives no matter what the destination media.  JAR can archive
+        files directly to diskettes no matter how large the input files
+        are.
+
+        Moreover, JAR allows one the option of changing archive volume size
+        or even the option of concatenating all of the volumes into one
+        archive.
+
+        The JAR data verification facilities help ensure reliable backups.
+
+    5)  JAR provides the facility to store EMPTY directories within its
+        archives.  This makes it easier to do FULL backups and that come
+        with EMPTY directories.
+
+    6)  JAR supports multiple CHAPTERS in an archive concept.
+
+        The advantage of a chapter archive over a series of separate
+        archives of the same set of files is that space can be saved when
+        files to be archived do not change or change slightly. One chapter
+        archive can produce the same results as one hundred standard
+        archive backups. In other words, one can update a chapter archive
+        one hundred times and fully recover any one of those updates.
+
+        Moreover, JAR uses a special compression method to optimize the
+        storage of the file and its subsequent modifications. Each chapter
+        may have its own comment and lock option. JAR keeps each chapter
+        creation and modification time. There are also many special
+        commands and options which allow flexibility with multiple
+        chapters.
+
+    7)  For data error recovery, JAR can store recovery records into an
+        archive which allow the repair of that archive if slightly damaged.
+        JAR also has a special command to recover still usable data from
+        a VERY damaged archive.
+
+        The JAR archive data structure with its header structure and 32 bit
+        CRC provides excellent archive stability and recovery capabilities.
+        In addition, JAR is the second archiver after ARJ that allows you
+        to test an archive during an archive process. With other archivers,
+        you may have already deleted the input files with a "move" command
+        before you could test the built archive. There is an option which
+        allows one to select an actual byte for byte file compare with the
+        original input files during archiving.
+
+    8)  JAR provides a security envelope facility to "seal" JAR archives
+        with a unique envelope signature.
+
+    9)  Unlike most other archivers, JAR also stores/restores the file
+        creation and access time along with the modification time.
+
+    10) JAR provides a special command which dumps archive header
+        information into a readable text file.  This is to aid the
+        development of third party JAR support programs.
+
+        JAR also provides a special test command to check the reliability
+        of JAR compressing and decompressing gigabytes of files with
+        limited free disk space.
+
+    11) The great number of JAR commands and options allow the user
+        outstanding flexibility in archiver usage.
+
+
+    end of document

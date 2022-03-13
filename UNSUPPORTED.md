@@ -1,4 +1,4 @@
-# Unsupported File Formats (463)
+# Unsupported File Formats (467)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -62,7 +62,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (18)
+## Document (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
@@ -80,6 +80,7 @@ document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Int
 document | Lotus Symphony Worksheet | .wk1 wr1 | 
 document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
+document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb | [3 sample files](https://telparia.com/fileFormatSamples/document/multimediaViewerBook/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
@@ -140,7 +141,7 @@ font | WordUp Graphics Toolkit Font | .wfn |
 
 
 
-## Image (26)
+## Image (27)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -168,6 +169,7 @@ image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileForm
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
+image | [Universal BitMap Format](http://retromission.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [8 sample files](https://telparia.com/fileFormatSamples/image/universalBitMapFormat/)
 image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://telparia.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 
 
@@ -246,7 +248,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (232)
+## Other (234)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -326,6 +328,7 @@ other | dBase Update | .upd |
 other | DeHackEd Patch | .deh | 
 other | Descent Level | .rdl | 
 other | DOOM Save Game | .dsg | 
+other | Dr.Web Anti-Virus Database | .vdb | 
 other | Dynamic Message System File | .msg | 
 other | Electronic Arts LIB container | .lib | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
@@ -361,6 +364,7 @@ other | Intel Common Object File Format Object | .obj |
 other | Java Class File | .class | [4 sample files](https://telparia.com/fileFormatSamples/unsupported/javaClass/)
 other | Javelin Printer Driver | .pr .pr2 | 
 other | Jazz Jackrabbit File | .0sc .0fn | 
+other | Kapersky Anti-Virus License Key | .key | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
 other | LabView Virtual Instrument | .vi | 
 other | LDIFF Differences Data | .lzd | 

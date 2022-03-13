@@ -43,6 +43,10 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Add support for Acorn Replay videos (#625 CineClips)
+  Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
+  Couldn't determine any support for QEMU (might have some though) but a fallback emulator, I'd have to run under windows 2k: http://www.riscos.com/shop/products/106/index.htm  
+
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 
 * Add sparseimage conversion support (requires MacOS X qemu, see archive/sparseImage notes)

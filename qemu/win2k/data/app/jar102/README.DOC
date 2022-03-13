@@ -1,0 +1,74 @@
+
+    README.DOC                                                 August 1997
+
+
+    This archive contains JAR shareware version 1.02.
+
+    The non-evaluation use of JAR in a business, commercial, government or
+    institutional environment requires a license.
+
+    This software as originally released by ARJ Software, Inc. came "sealed"
+    in an ARJ self-extracting archive with an ARJ-SECURITY envelope to
+    prevent tampering.  Re-archival of this software will destroy this
+    security feature "seal".
+
+
+    MAJOR FEATURES OF JAR INCLUDE:
+
+    Native DOS, Windows 95, and Windows NT support.
+
+    The ability to process and archive over 50,000 files at one time.
+
+    JAR provides excellent file compression in terms of resulting archive
+    size and speed.  Compared to the popular archivers, PKZIP, RAR, UC2, and
+    ARJ, JAR provides typically better compression.
+
+    JAR has the option to create multiple volume archives with one command
+    making JAR useful for making backups to multiple floppies or archiving a
+    very large file to several floppies without "SLICE"ing. JAR can also
+    concatenate multiple volumes into one volume.
+
+    A myriad of commands and options to provide outstanding flexibility in
+    archiver usage.
+
+
+    THIS ARCHIVE CONTAINS THE FOLLOWING FILES:
+
+    JAR102.EXE  -  An ARJ-SECURE "sealed" ARJ self-extracting archive
+                   containing the following files:
+
+                   FILE_ID.DIZ    - Program description file
+                   README.DOC     - This file
+                   AGENTS.DOC     - List of authorized ARJ and JAR agents
+                   CREDIT.CRD     - Form for handling credit card orders
+                   ERRORS.DOC     - Description of JAR error messages
+                   JAR.CFG        - Default JAR configuration file
+                   JAR.DOC        - Reference manual for JAR
+                   JAR16.EXE      - JAR DOS executable program
+                   JAR32.EXE      - JAR Win 32 bit executable program
+                   JAR_C.COM      - JAR DOS encryption module
+                   JAR_C.DLL      - JAR Win 32 bit encryption module
+                   INTRO.DOC      - Help file for new users
+                   LICENSE.DOC    - License policy for JAR
+                   ORDERFRM.DOC   - Order form for JAR
+                   REARJ.CFG      - Default REARJ configuration file for JAR
+                   REARJ.DOC      - REARJ user manual
+                   REARJ.EXE      - Archive conversion utility
+                   TESTJAR.BAT    - Batch file to test system compatibility
+                   TECHNOTE.DOC   - Technical information about JAR
+                   WHY_JAR.DOC    - Description of advantages of JAR
+                   WHATSNEW.DOC   - Changes to JAR from first BETA
+                   JARBACK.BAT    - Sample batch file to backup a drive
+                   JARINCR.BAT    - Batch file to incrementally backup a drive
+                   JARREST.BAT    - Batch file to restore a drive
+                   SAMPLE.J       - Sample JAR-SECURED archive
+                   CONVPROT.BAT   - Batch file to convert archive protection
+
+    NOTE: The export version of JAR does NOT contain the encryption modules,
+    JAR_C.COM and JAR_C.DLL, per USA export regulations.
+
+    To install the JAR software, simply copy JAR16.EXE, JAR32.EXE, JAR.CFG,
+    JAR_C.COM, and JAR_C.DLL to one of the directories named in your DOS
+    PATH statement found in your AUTOEXEC.BAT such as C:\DOS.
+
+    end of readme.doc

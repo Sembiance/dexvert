@@ -1,0 +1,192 @@
+
+    INTRO.DOC                                                November 1996
+
+
+    INTRODUCTION:
+
+
+    This document is intended for new users of the file archiver, JAR.
+
+    JAR is a program that allows the user to store one or more files in a
+    compressed format in an archive file.
+
+
+    INSTALLATION:
+
+
+    This assumes that you have already executed the self-extracting
+    distribution archive and extracted its archived files into a directory.
+
+    To install the JAR software, simply copy JAR16.EXE, JAR32.EXE, JAR.CFG,
+    REARJ.EXE, REARJ.CFG and optionally JAR_C.COM and JAR_C.DLL (available
+    in the non-export version only) to one of the directories named in your
+    DOS PATH statement found in your AUTOEXEC.BAT. On many PCs, this
+    directory may be C:\DOS or C:\BIN.
+
+    In addition, for a DOS machine or for a DOS environment one MB of
+    available XMS strongly recommended.  Four MB of EMS preferred for
+    outstanding compression.  More memory is better.  Detailed information
+    about memory usage is available in JAR.DOC in section "HOW JAR USES
+    AVAILABLE MEMORY".
+
+
+    JAR COMMAND USAGE:
+
+
+    The JAR archiver gives you a lot of flexibility in command usage. You
+    can use zero options or many options on a command line.
+
+    The basic command line consists of:
+    1) the command "JAR16" or "JAR32"
+    2) the JAR command letter(s) such as "a" (add), or "e" (extract)
+    3) the switch options such as "-r" (recurse through subdirectories)
+    4) the name of the JAR archive
+    5) the names of the selected files
+
+    JAR16 <command> [<options>] <archive_name> [<files>]
+
+    Switch options (-r, -hk, and so on) may be placed anywhere in the
+    command line after the command "JAR16".  The default for the selected
+    files is "*.*".
+
+    To run the 32-bit JAR version (for Windows 95 and Windows NT) instead
+    of the "JAR16" command you must specify "JAR32". "JAR32.EXE" is a
+    32-bit executable which does not run in DOS but works in Windows 95 and
+    Windows NT. "JAR32.EXE" is much faster and compresses better than the
+    DOS version "JAR16.EXE".
+
+
+    CREATING JAR ARCHIVES:
+
+
+    To create an JAR archive containing all of the files in the current
+    directory:
+
+       JAR16 a archive
+
+    To create an JAR archive in another directory containing all of the
+    files in the current directory:
+
+       JAR16 a directory\archive
+
+    To create an JAR archive containing all files with the ".DOC" extension
+    in the current directory:
+
+       JAR16 a archive *.DOC
+
+    To create an JAR archive containing all files with the ".DOC" and
+    ".EXE" extension in the current directory:
+
+       JAR16 a archive *.DOC *.EXE
+
+    To create an JAR archive containing all of the files in a named
+    directory:
+
+       JAR16 a archive named\*.*
+
+    To create an JAR archive containing all of the files in the named
+    directory and all files in subdirectories of the named directory:
+
+       JAR16 a -r archive named\*.*
+
+    For maximum compression, use the "-m3" or "-m4" options. For better
+    speed, use the -m1 option.
+
+       JAR16 a -r -m4 archive named\*.*
+
+    To use the 32-bit JAR version simply replace JAR16 with JAR32.
+
+
+    LISTING THE CONTENTS OF AN ARCHIVE:
+
+
+    To list all of the files in an archive:
+
+       JAR16 l archive
+
+    To list all of the files in short form:
+
+       JAR16 ls archive
+
+    It may be useful to redirect the listing to a file or pipe:
+
+       JAR16 ls archive > archive.lst
+       JAR16 ls archive | more
+
+    To view only the files with a ".DOC" file extension in an archive:
+
+       JAR16 v archive *.DOC
+
+
+    EXTRACTING JAR ARCHIVES:
+
+
+    To extract all of the files in an archive to the current directory:
+
+       JAR16 e archive
+
+    To extract all of the files in an archive to a named directory:
+
+       JAR16 e archive -onamed
+
+    To extract all files with the ".DOC" extension to the current
+    directory:
+
+       JAR16 e archive *.DOC
+
+    To extract all of the files in an archive recreating the original
+    directory structure:
+
+       JAR16 x archive
+
+
+    TESTING THE INTEGRITY OF AN ARCHIVE:
+
+
+    To test the contents of an archive:
+
+       JAR16 t archive
+
+    This testing verifies that the contents of the archive data matches the
+    original file. This is done using cyclical redundancy checksumming, CRC
+    for short. JAR uses a 32 bit CRC for increased reliability.
+
+
+    COMMON PROBLEMS USING JAR:
+
+
+    By default, JAR stores the path specified with the filename in the
+    archive.  "JAR16 a archive temp\*.*" will store the path "temp\" with
+    the filenames. Another alternative is to store the RELATIVE path using
+    the "-jf-" option.
+
+    When updating an JAR archive, JAR builds the new archive as a temporary
+    file in the same directory as the original archive. This can require a
+    lot of extra disk space. If you are adding files, you will need as much
+    free space as the original archive plus space for the added files.
+
+    When archiving files to DISKETTES, it is STRONGLY recommended that you
+    use the "-w" and "-hk" options.  The "-w" option sets a working
+    directory.  This should point to a fast disk drive directory.  The
+    "-hk" adds recovery records which will allow you to repair a slightly
+    damaged archive (this is a common problem when using diskettes).  In
+    addition, the "-jt" option may be used to test the created archive;
+    however, this requires a re-read of all the diskettes.
+
+    JAR16 a -wc:\ -hk a:archive *.*
+
+    When copying archives to DISKETTES, it is strongly recommended that you
+    verify that the diskette archives are intact.  Most damaged archives
+    involve diskettes.
+
+
+    FOR FURTHER STUDY:
+
+
+    JAR supports a great number of options for functions such as archiving
+    across multiple diskettes, accessing files with selected attributes,
+    selecting files by date, and more. See the JAR.DOC reference guide for
+    more information.
+
+
+    end of document

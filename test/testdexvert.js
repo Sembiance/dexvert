@@ -52,6 +52,7 @@ const FLEX_SIZE_PROGRAMS =
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
 	fontforge                   : 0.1,
+	fontographer                : 0.1,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
 	soundFont2tomp3             : 0.1,
@@ -89,6 +90,7 @@ const FLEX_SIZE_FORMATS =
 		ani              : 15,
 		lottie           : 0.1,
 		rekoCardset      : 0.1,
+		ssiTLB           : 0.1,
 		windowsClipboard : 0.1,
 
 		// takes a screenshot or a framegrab which can differ slightly on each run

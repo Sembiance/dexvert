@@ -1,0 +1,350 @@
+
+    JAR LICENSE POLICY                                         August 1997
+
+
+    The JAR archiver (JAR16 and JAR32), the encryption modules (JAR_C.COM
+    and JAR_C.DLL), the REARJ program, and the associated documentation are
+    copyright (c) 1990-97 ARJ Software, Inc., all rights reserved.  The JAR
+    software may not be circulated in any incomplete or modified form, nor
+    sold for profit, without written permission of ARJ Software, Inc.  The
+    JAR software refers to the package of JAR16.EXE, JAR32.EXE, JAR_C.COM,
+    JAR_C.DLL, and REARJ.EXE.  The word JAR refers to the JAR software
+    unless otherwise indicated.
+
+    If you distribute this software to others, you are required to
+    distribute the ENTIRE package consisting of the following files:
+
+    AGENTS.DOC
+    CREDIT.CRD
+    CONVPROT.BAT
+    ERRORS.DOC
+    README.DOC
+    FILE_ID.DIZ
+    INTRO.DOC
+    JAR.CFG
+    JAR.DOC
+    JAR16.EXE
+    JAR32.EXE
+    JARBACK.BAT
+    JARINCR.BAT
+    JARREST.BAT
+    JAR_C.COM
+    JAR_C.DLL
+    LICENSE.DOC
+    ORDERFRM.DOC
+    REARJ.CFG
+    REARJ.DOC
+    REARJ.EXE
+    TECHNOTE.DOC
+    TESTJAR.BAT
+    WHATSNEW.DOC
+    WHY_JAR.DOC
+    SAMPLE.J
+
+    NOTE: The export version of this distribution archive does NOT
+    contain the encryption modules, JAR_C.COM and JAR_C.DLL, per USA
+    export regulations.
+
+    We strongly prefer that the files be distributed in the format
+    originally released: JAR###.EXE (### = version) with the ARJ-SECURITY
+    envelope as created by ARJ Software, Inc.  If you must distribute the
+    JAR archive in another archive format, please archive the JAR###.EXE as
+    one file inside the other archive.  Re-archival of the software as
+    separate files means losing the ARJ security envelope.
+
+    As a brief description of JAR, we suggest the following:
+
+    "JAR is a file archiver that compresses files into a disk space saving
+    archive.  It is fast, powerful, reliable, and has a rich set of
+    features which include outstanding data compression, Windows 95/NT
+    long filename support, file version management, data recovery
+    protection, multiple volume archives (archives that span diskettes)
+    and much more."
+
+    You may NOT distribute the registered version of JAR except as noted in
+    your JAR license agreement.
+
+    The use and/or sale of the JAR software package is subject to the
+    following terms:
+
+
+    PERSONAL USE:
+
+    For personal use (at home and non-commercial), JAR may be freely used
+    and shared with others.  There is no REQUIRED registration fee for
+    non-commercial, non-business, non-institutional, non-government
+    personal use.  Instead, we ask that you share the JAR software with a
+    friend.
+
+    For personal use, the program REARJ may be freely used only by JAR
+    users.  A JAR user is one who uses JAR on a regular basis. Others who
+    wish to use REARJ must purchase a registration for the JAR package.
+
+    The user who registers receives several benefits:
+
+    * Technical support by telephone, fax, email, or mail.  You can get
+      help with any questions or problems you encounter in using JAR.
+
+    * Full access to all of the features of JAR via a registration serial
+      number.
+
+    * The use of the JAR-SECURITY envelope for data authentication.
+
+    * The satisfaction of knowing that you are supporting the development
+      of good, affordable software.
+
+
+    BULLETIN BOARD SYSTEM (BBS), WEB SITE, AND FTP SITE USE:
+
+    JAR and REARJ may be freely used on commercial and non-commercial
+    electronic file distribution sites (computer bulletin board systems,
+    WEB sites, FTP sites and so on) for the purpose of distributing *.J
+    archive files.  The JAR shareware distribution archive (JARnnn.EXE)
+    may be freely distributed by these sites.
+
+    JAR and REARJ may be freely used on non-commercial electronic file
+    distribution sites where JAR is one of the supported primary archive
+    formats.  The use of JAR and/or REARJ on a BBS where JAR is not one of
+    the supported primary archive formats requires a registration or site
+    license.
+
+    Support of JAR involves allowing JAR archives as uploads AND making
+    JAR archives available as downloads.
+
+
+    INSTITUTIONAL/COMMERCIAL INTERNAL USE LICENSE/REGISTRATION:
+
+    Any corporation, institution, government agency or business wishing to
+    use the JAR software in the course of its internal business must
+    purchase an JAR registration or SITE LICENSE. Any individual wishing
+    to use the JAR software within a corporation, institution, government
+    agency or business must purchase an JAR registration or SITE LICENSE.
+    The SITE LICENSE is provided for those who want to use JAR on multiple
+    computers.  A sample INTERNAL USE LICENSE for the internal use of the
+    JAR software is included at the end of this document. Please see the
+    ORDERFRM.DOC or write for terms.
+
+    Any corporation, institution, government agency or business may use
+    the unregistered shareware version of JAR only for evaluation purposes
+    and only for a thirty day period.  After the thirty day period, you
+    must either register JAR or discontinue its use.  While you are in the
+    process of registering JAR, you may continue to use the unregistered
+    JAR program until you receive your registration serial number.
+
+    This internal license does NOT license the inclusion of the JAR
+    software with a hardware/software package that is distributed
+    externally.
+
+    The unlimited SINGLE LOCATION SITE LICENSE permits JAR internal use
+    for an unlimited number of computers/users at one street address. This
+    definition of a SINGLE LOCATION SITE is subject to change.  The
+    unlimited MULTIPLE LOCATION SITE LICENSE permits JAR internal use for
+    an unlimited number of computers/users at all locations.
+
+    Each computer that uses JAR in any way requires licensing.  In
+    addition, computers that are being backed up with JAR via a file server
+    require licensing.  For example, if computer Z's data is copied to a
+    file server and that file server uses JAR to archive Z's data, then
+    computer Z needs to be licensed for JAR.
+
+    Examples of institutional or commercial use of JAR:
+
+    1)  Using JAR to backup your business programs and/or data.
+    2)  Using JAR to create archives for storing or transporting business
+        data.
+    3)  Using JAR on a company supplied home computer for company
+        business.
+    4)  Using JAR to backup your research programs and/or data.
+    5)  Using JAR on your home business computer for business purposes.
+
+    The above examples should NOT be considered the ONLY types of
+    institutional or commercial use of JAR.
+
+
+    SHAREWARE DISTRIBUTION USE BY INDIVIDUALS:
+
+    The use of JAR to create an JAR format archive (*.J) for the purpose
+    of distributing shareware or freeware to computer bulletin board
+    systems IS NOT considered commercial use.  However, any other use of
+    JAR in connection with a shareware product is commercial use.  For
+    example, using JAR to backup shareware source code is commercial use.
+
+
+    DISTRIBUTION LICENSE:
+
+    Standard JAR format archives (*.J) may be distributed without a
+    license.
+
+    Any corporation, institution, government agency or business wishing to
+    include JAR16, JAR32, JAR_C.COM, or JAR_C.DLL, or REARJ as an integral
+    part of a software and/or hardware package to be distributed externally
+    must purchase a DISTRIBUTION LICENSE. The use of JAR on one computer to
+    build the software and/or hardware package is included in the
+    DISTRIBUTION LICENSE.
+
+    The above requirement does NOT apply to those who did NOT initiate
+    the inclusion of the JAR software with the software and/or hardware
+    package.
+
+    Please write for terms providing your distribution details:
+
+    1)  Expected distribution numbers in total.
+    2)  The approximate value/price of the package.
+    3)  A brief description of the software/hardware.
+    4)  A description of how JAR will be used in the distribution.
+
+    If you wish to use the archiver JAR or the conversion program REARJ
+    in your application software, the pricing is similar to the INTERNAL
+    LICENSE price schedule.  Please write for terms.
+
+
+    RELIGIOUS ORGANIZATIONAL USE:
+
+    To obtain the donation of a SITE LICENSE and/or DISTRIBUTION LICENSE,
+    please write providing details of your organization's religious and
+    charitable activities and the intended use for JAR.  A free license
+    will be provided to qualifying organizations.  Qualifications will be
+    determined on a purely subjective basis.  Non-qualifying organizations
+    can always obtain licenses by purchase.
+
+    Non-religious non-profit organizations promoting causes that do not
+    conflict with our personal faith and ethics may also qualify for a
+    free license.
+
+
+    COMMERCIAL SALE:
+
+    Any software dealer or library may distribute the entire JAR package
+    in an unmodified form for a fee as long as the price charged for the
+    disk containing JAR does not exceed US $10.00.  You may NOT distribute
+    any registered version of JAR.
+
+    Any software dealer or library may distribute the entire JAR package
+    in an unmodified form when included in a CD-ROM shareware collection.
+    Moreover, permission is freely given for the use of the JAR software
+    to view and/or install CD-ROM shareware collections where the entire
+    JAR package is included.  No special license is required nor will a
+    special license be granted.
+
+    With these exceptions, the sale of JAR or its parts for profit,
+    either alone or together with other software or hardware, requires a
+    licensing agreement possibly providing for royalty payments.  Please
+    write for terms.
+
+
+    UPGRADE POLICY FOR JAR:
+
+    Registered/licensed users of JAR may upgrade JAR to the next DOT
+    release (1.1 to 1.2, etc) for a small diskette fee.  See the
+    ORDERFRM.DOC for details.  UNLIMITED MULTIPLE SITE LICENSE holders
+    will get unlimited free JAR upgrades.
+
+    Current ARJ licensees who purchase JAR licenses of EQUAL or LESSER
+    value get a fifty percent discount off the JAR license fee.  When
+    purchasing a JAR license of greater value, ARJ licensees will get a
+    fifty percent discount based upon an equivalent JAR license fee.  For
+    example, if a user has a five PC ARJ license and then purchases a 15 PC
+    JAR license, that user will receive a discount calculated by taking
+    fifty percent of the five PC JAR license fee.  Please note that the
+    licensee's ARJ license is still valid.  Please note that we consider
+    the older $2000 unlimited use site license equivalent to the new $2500
+    unlimited use single site license.
+
+
+    JAR-SECURITY ENVELOPE USE:
+
+    This feature is intended for but not limited to software developers
+    who wish to distribute archived software with some assurance that the
+    archived software in a validated JAR-SECURED archive will be secure.
+
+    All JAR registrations include a free JAR-SECURITY envelope.
+
+
+    DISCLAIMER:
+
+    This software (JAR16, JAR32, JAR_C.COM, JAR_C.DLL, REARJ, and
+    JAR-SECURITY) is provided on an "as is" basis without warranty of any
+    kind, expressed or implied, including but not limited to the implied
+    warranties of merchantability and fitness for a particular purpose.
+    The person using the software bears all risk as to the quality and
+    performance of the software.  ARJ Software, Inc. will not be liable for
+    any special, incidental, consequential, indirect or similar damages due
+    to loss of data or any other reason, even if ARJ Software, Inc. or an
+    agent of ARJ Software, Inc. has been advised of the possibility of such
+    damages.  In no event shall the liability of ARJ Software, Inc. for any
+    damages ever exceed the price paid for the license to use the software,
+    regardless of the form of the claim.
+
+
+    See ORDERFRM.DOC for ordering and payment information.
+
+
+    SAMPLE INTERNAL SITE LICENSE
+    ----------------------------
+
+    DO NOT submit this license with your order.  This is for your
+    examination only.  We reserve the right to change this license.
+
+
+    LICENSOR:
+
+    ARJ SOFTWARE, INC.
+    P.O. BOX 249
+    NORWOOD MA 02062
+    USA
+
+    ARJ SOFTWARE, INC. herein referred to as the LICENSOR hereby grants
+    [ORGANIZATION NAME] (LICENSEE) ------------------- a site license for
+    [NUMBER OF COMPUTERS LICENSED] computers for the use of the following
+    software programs:  JAR16.EXE, JAR32.EXE, JAR_C.COM, JAR_C.DLL, and
+    REARJ.
+
+    This is a perpetual license for the use of the software within
+    LICENSEE's organization, and is not transferable.  You are not
+    obtaining title to the software or any copyright rights.  This license
+    allows the internal use and copying of the software by LICENSEE on as
+    many computers as contracted for.  You may make as many copies of this
+    software as you need for backup purposes.  Distribution, repackaging,
+    or reselling of the software to third parties is not allowed under
+    this agreement.
+
+    The LICENSOR warrants that it is sole owner of the software and has
+    full power and authority to grant this license herein without consent
+    of any other party.
+
+    THE LICENSOR HEREBY DISCLAIMS ALL WARRANTIES RELATING TO THIS
+    SOFTWARE, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE, AND ALL SUCH WARRANTIES ARE EXPRESSLY AND SPECIFICALLY
+    DISCLAIMED.  THE PERSON USING THE SOFTWARE BEARS ALL RISK AS TO THE
+    QUALITY AND PERFORMANCE OF THE SOFTWARE.  NEITHER THE LICENSOR OR
+    ANYONE ELSE WHO HAS BEEN INVOLVED IN THE CREATION, PRODUCTION, OR
+    DELIVERY OF THIS SOFTWARE SHALL NOT BE LIABLE FOR ANY SPECIAL,
+    INCIDENTAL, CONSEQUENTIAL, INDIRECT OR SIMILAR DAMAGES DUE TO LOSS OF
+    DATA OR ANY OTHER REASON, EVEN IF THE LICENSOR OR AN AGENT OF THE
+    LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  IN NO
+    EVENT SHALL THE LICENSOR'S LIABILITY FOR ANY DAMAGES EVER EXCEED THE
+    PRICE PAID FOR THE LICENSE TO USE THE SOFTWARE, REGARDLESS OF THE FORM
+    OF THE CLAIM.
+
+    Some states do not allow the exclusion of the limit of liability for
+    consequential damages, so the above limitation may not apply to you.
+
+    This agreement shall be construed and enforced in accordance with the
+    laws of the STATE OF MASSACHUSETTS and shall inure to the benefit of
+    ARJ Software, Inc. and any successors, administrators, heirs and
+    assigns. Any action or proceeding brought by either party against the
+    other arising out of or related to this agreement shall be brought
+    only in a STATE or FEDERAL COURT of competent jurisdiction located in
+    MASSACHUSETTS.  The parties hereby consent to in personam jurisdiction
+    of said courts.
+
+
+    Robert K Jung           SIGNATURE: ________________________________
+    President
+    ARJ Software, Inc.           DATE: ________________________________
+
+    SAMPLE LICENSE ONLY
+
+    end of document
+

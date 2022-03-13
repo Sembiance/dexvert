@@ -1,0 +1,3177 @@
+
+    USER'S MANUAL FOR THE JAR ARCHIVER PROGRAM                 August 1997
+
+
+    TOPICS COVERED IN THIS DOCUMENT
+    -------------------------------
+
+    MAJOR FEATURES OF JAR
+    ARCHIVER BENCHMARKING
+    INSTALLATION
+    QUICK START TO USING JAR
+    CONVERTING OTHER ARCHIVE FILES TO JAR FORMAT
+    HOW TO USE JAR
+    IMPORTANT NOTES
+    USING JAR AS A BACKUP PROGRAM
+    JAR ERROR SITUATIONS
+    HOW JAR USES AVAILABLE MEMORY
+    ARCHIVE CHAPTERS
+    ARCHIVE VOLUMES
+    JAR USER ACTION PROMPTS
+    JAR COMMAND LINE SYNTAX
+    JAR COMMANDS
+    JAR SWITCH OPTIONS
+    CONFIGURATION FILE
+    CONFIGURATION FILE KEYWORDS
+    IMPORTANT DIFFERENCES BETWEEN JAR AND ARJ
+    JAR LIMITATIONS
+    JAR ARCHIVE ACCESS MODES
+    HOW JAR SHARES FILES TO COMPRESS
+    2000 YEAR PROBLEM AND JAR
+    JAR ARCHIVE FLAGS
+    JAR ERROR LEVELS
+    FREQUENTLY ASKED QUESTIONS
+    FINAL COMMENTS
+
+
+    MAJOR FEATURES OF JAR:
+
+
+      JAR comes as a 16-bit executable (JAR16.EXE) for DOS and a 32-bit
+      executable (JAR32.EXE) for Windows 95 and Windows NT (version 3.50 or
+      higher). The latter takes full advantage of 32-bit instructions and
+      the "flat" memory model. Sometimes this 32-bit executable is referred
+      to as the "Win32 JAR version".
+
+      Currently, JAR ranks as one of the best in compression in terms of
+      size reduction of the currently available archivers.  JAR compresses
+      significantly better than such popular archivers as PKZIP 2.04, UC2
+      rev 3, RAR 1.55, RAR 2, and LHA.  JAR uses a modified form of SOLID
+      archive technology to provide excellent compression, fast updates
+      and fast extraction.
+
+      The ability to process and archive more than 50,000 files at one
+      time.
+
+      JAR provides the CHAPTERS concept which allows one to store multiple
+      backups in the same archive using incremental compression.
+
+      Archive individual file or chapter comments with the option of
+      inputting comments from a file.
+
+      Support of ANSI style comments.
+
+      JAR has MS-DOS international language support for the proper casing
+      of filenames.
+
+      The ability to put the entire JAR command line in a response type
+      file as in "JAR @command.rsp".  Supports nested response files.
+
+      32 bit CRC file integrity check.
+
+      Total percentage milestone display for the entire archive build.
+
+      Option to test new archive before overwriting the original archive
+      including the option to do a byte for byte file compare during a
+      build.
+
+      Archives that can span diskettes. This allows the user to backup a
+      full hard disk drive to multiple floppies.  Recovery of individual
+      files is convenient because the JAR archive header keeps information
+      about the disk location of each file.
+
+      Built-in facility to recover files from broken archives. Also, the
+      capability to add recovery records to important archives which allow
+      one to repair damaged archives.
+
+      Internal integrity check in JAR to resist hacking or virus attacks.
+
+      Archive security envelope "seal" feature to resist tampering with
+      secured archives. This feature disallows ANY changes to a secured
+      archive.
+
+      Archive and chapters locking feature.
+
+      Password option to protect archived files both using authentication
+      or encryption.
+
+      Specification of the files to be added to or exclude from an archive
+      via one or more list files. In addition, JAR can generate a list
+      file.
+
+      Specification of files to be excluded from processing by JAR.
+
+      Special command to test JAR reliability. "testjar.bat" is a
+      ready-to-use batch file for testing on specified drive.
+
+      Optional long filenames translation into short names when extracting
+      files in DOS.
+
+      Configuration file which allows the customization of default JAR
+      behavior. Includes a set of default options for each command.
+
+      Breaks 640K DOS barrier using EMS and/or XMS.
+
+      Query option when wildcard selection is not suitable.
+
+      Files sorting in list commands.
+
+      32-bit JAR version allows the use or storage of both long and/or
+      short filenames. It uses filenames compatible with DOS OEM encoding.
+
+
+    ARCHIVER BENCHMARKING:
+
+
+      Benchmarking results are very dependent upon the data used for the
+      tests.  We compared JAR with some of the leading commercial
+      archivers: PKZIP 2.04g, UltraCompressor II Version 3, RAR 2.00 for
+      Win32, and RAR 2.00 for DOS.  LHA 2.X and ARJ 2.X are not included.
+      Their compression size numbers are very similar to those of PKZIP
+      2.04g.
+
+      COMPUTER: Pentium-100, 24MB memory, no external cache
+      OPERATING SYSTEM: Windows 95
+      CONFIG.SYS:
+         device=c:\win95\himem.sys
+         dos=high
+         files=40
+         devicehigh=c:\dos\power.exe
+      JAR.CFG:
+         32MemoryLimit=10240
+         CheckAvailableMemory=No
+
+      The only exception is JAR16.EXE which was tested in DOS 6.22 with 16M
+      of EMS memory.  This was due to the slow Windows 95 EMS
+      implementation which decreases JAR's performance relative to the
+      amount of EMS used (up to 1.5 times).   We recommend the use of
+      JAR32.EXE in Windows 95 and Windows NT.
+
+
+      FILE SET:  The Calgary Corpus (18 files totaling 3,251,493 bytes,
+      popular file set used to compression rates).
+
+      Archiver              Method      Compression time  Compressed size
+
+      JAR32                 Maximum           31s           903,863  (100%)
+      JAR32                 Default           21s           910,676  (101%)
+      JAR16 under DOS 6.22  Maximum           41s           935,675  (104%)
+            with 16MB EMS
+      JAR16 under DOS 6.22  Default           29s           945,690  (105%)
+            with 16MB EMS
+      RAR 2.00              -m5 -mde -s      261s           951,992  (105%)
+      RAR 2.00              Default solid     48s           997,418  (110%)
+      RAR 2.00              Default           41s         1,008,455  (112%)
+      RAR 2.00 for DOS      Default solid     25s         1,030,894  (114%)
+      UC2 rev 3             Default           30s         1,051,516  (116%)
+      PKZIP 2.04            Default           17s         1.074,550  (119%)
+
+
+      FILE SET:  Microsoft Visual C++ 1.52 (462 files and directories
+      totaling 18,806,153 bytes, mix of executables, text, DLLs, and object
+      files).
+
+      Archiver              Method      Compression time  Compressed size
+
+      JAR32                 Maximum          264s         5,984,311  (100%)
+      JAR16 under DOS 6.22  Maximum          341s         6,279,415  (105%)
+            with 16MB EMS
+      RAR 2.00              -m5 -mde -s     1004s         6,351,777  (106%)
+      JAR32                 Default          173s         7,050,008  (118%)
+      JAR16 under DOS 6.22  Default          250s         7,267,567  (121%)
+            with 16MB EMS
+      RAR 2.00              Default solid    273s         7,856,362  (131%)
+      RAR 2.00 for DOS      Default solid    151s         8,314,078  (139%)
+      UC2 rev 3             Default          190s         8,556,558  (143%)
+      PKZIP 2.04            -ex              140s         8,906,367  (149%)
+      PKZIP 2.04            Default           96s         8,945,476  (149%)
+
+      JAR16/JAR32 shows its best compression with large directories of
+      files.
+
+
+    INSTALLATION:
+
+
+      This assumes that you have already executed the self-extracting
+      distribution archive and extracted its archived files into a
+      directory.
+
+      To install the JAR software, simply copy JAR16.EXE, JAR32.EXE,
+      JAR.CFG, REARJ.EXE, REARJ.CFG and optionally JAR_C.COM, JAR_C.DLL
+      (available in non-export version only) to one of the directories
+      named in your DOS PATH statement found in your AUTOEXEC.BAT. On many
+      PCs, this directory may be C:\DOS or C:\BIN.
+
+      In addition, for a DOS machine or for a DOS environment one MB of
+      available XMS strongly recommended.  Four MB of EMS preferred for
+      outstanding compression.  More memory is better.  Detailed
+      information about memory usage is available in section "HOW JAR USES
+      AVAILABLE MEMORY".
+
+
+    QUICK START TO USING JAR:
+
+
+      See the document INTRO.DOC.
+
+
+    CONVERTING OTHER ARCHIVE FILES TO JAR FORMAT:
+
+
+      Included with this software is the program REARJ.  This program can
+      be used to individually or collectively convert archive files from
+      other formats to the JAR format.  Read REARJ.DOC for more details.
+
+
+    HOW TO USE JAR:
+
+
+      If you type JAR16 [return], you will see a simple help screen.
+
+      If you type JAR16 -? [return], you will see more detailed help
+      information.
+
+      Please note that unless specifically indicated, references to JAR16
+      also include JAR32.EXE.
+
+
+    IMPORTANT NOTES:
+
+
+      When using the "-w" working directory switch, JAR does not check on
+      space availability before overwriting the original archive if it
+      exists. Be sure that you have enough disk space for the new archive
+      before using the "-w" switch. If JAR aborts in this situation because
+      of disk space, JAR will keep the temporary archive.
+
+      Like ARJ and PKZIP, JAR requires extra disk space to UPDATE an
+      archive file. JAR will backup the original archive while it creates
+      the new archive, so enough room must be available for both archives
+      at the same time. Also JAR requires additional space for a swap file
+      which is used to store the archive header and a list of files to add
+      during processing.
+
+      By default during an add command, JAR will ALSO add to the archive
+      all directories scanned while searching for matching filenames.  Even
+      if NO files were found, JAR will build an archive if any directories
+      were scanned during the operation.  This behavior may be changed
+      by using the JAR configuration file.  See the "-hb" option and
+      the default configuration file for more information.
+
+      Currently, JAR will not extract overwriting a readonly file unless
+      the "-ha" option is specified.
+
+      JAR uses a configuration file to store global user settings. By
+      default the configuration file is named "JAR.CFG" and must be placed
+      into the same directory as the JAR16.EXE and JAR32.EXE directory.
+
+
+    USING JAR AS A BACKUP PROGRAM:
+
+
+      JAR can be used as a substitute for a backup program.
+
+      The following partial command lines illustrate a full backup command,
+      an incremental backup command, and a restore command. The only parts
+      missing are the names of the files to backup/restore.
+
+      JAR16 a backup1 -jt -r -m4 -b0
+      JAR16 a backup2 -hba1 -b0 -jt -r -m4
+      JAR16 x backup2
+
+      You may then copy archive into diskettes:
+
+      JAR16 y backup -oa:backup -vvas -hk
+
+      Or you may create backup directly on diskettes:
+
+      JAR16 a a:backup -jt -r -m4 -b0 -hk -wc:\ -vvas
+
+      You should familiarize yourself with the above switches so that you
+      can modify the above command lines as needed.
+
+      Another possibility for incremental backups is to use chapter
+      archives:
+
+      JAR16 ac chapters -ht1 -r -js1 -hl -hz
+
+      To restore the last chapter use:
+
+      JAR16 x chapters
+
+      To restore any other chapter (in our example #5) use:
+
+      JAR16 x chapters -jb5
+
+      It may be useful to review chapter comments:
+
+      JAR16 lc chapters
+
+      We also recommend you test JAR reliability with your computer and
+      software using the JAR "test" command.  See TESTJAR.BAT.
+
+
+    JAR ERROR SITUATIONS:
+
+
+      ADD:
+
+        If a user specified file is not found during an add, JAR will
+        continue processing. Note that files specified within an JAR
+        listfile that are not found during an add will NOT trigger an error
+        unless the "-hl" option is also specified.
+
+        In a disk full condition or any other file i/o error, JAR will
+        promptly terminate with an error condition and delete the temporary
+        archive.
+
+      MOVE:
+
+        JAR will only delete files after all them have been successfully
+        added to the archive.
+
+      EXTRACT:
+
+        In a disk full condition or any other file i/o error, JAR will
+        promptly terminate with an error condition and delete the current
+        output file.
+
+      CRC ERRORS OR BAD FILE DATA:
+
+        In the case where an JAR archive has been corrupted, JAR will
+        report a CRC error or a Bad file data error. These corruptions can
+        be the result of an unreliable diskette, a computer memory problem,
+        a file transfer glitch, or incompatible CACHING software or memory
+        manager.
+
+        Most of these errors are the result of file transfer glitches and
+        bad diskettes.
+
+      CRITICAL ERROR HANDLER:
+
+        JAR sets up an interactive critical error handler to handle DOS
+        critical errors like "sector not found" and "drive not ready". When
+        a critical error occurs, JAR will prompt the user with the message
+        "Retry Y/N?". The user may retry the failed operation by pressing
+        "Y". Pressing "N" will fail the operation. The user can press
+        Control BREAK to abort to DOS.
+
+        There is an option to disable the critical error handler in the JAR
+        configuration file.
+
+        JAR32.EXE doesn't have an interactive hardware error handler.
+
+
+    HOW JAR USES AVAILABLE MEMORY:
+
+
+      One of JAR's advantages is its ability to use additional memory for
+      better compression.  Unlike most other archivers the JAR DOS version
+      can use EMS or XMS to improve compression.
+
+
+      JAR DOS version
+
+        JAR uses a fixed amount of XMS memory to cache its overlay code
+        (about 300K) and requires an additional 500K of XMS memory for
+        better performance. When JAR compresses data it first looks at
+        available EMS memory. If there are more than about 640 Kbytes EMS
+        and the compression method is -m2..-m4 then JAR allocates EMS and
+        uses it to improve compression. You may specify that JAR use up to
+        16384 Kbytes of this memory. The more EMS - the better compression
+        achieved, but JAR will work slower.
+
+        If there is not enough EMS then JAR uses XMS instead. But "XMS
+        based" compression is significantly worse. JAR compression rate and
+        speed does not depend significantly on the XMS amount used. The
+        optimal value is less than 4 Mbytes. The JAR XMS engine consumes
+        about 60K more DOS conventional memory compared to the EMS engine.
+
+        When extracting, JAR uses available XMS or EMS for faster
+        decompression. The recommended value for data that has been
+        compressed using the "-m2" and "-m3" method is 1.5 Mbytes of free
+        EMS and/or XMS, for the "-m4" method, use at least 3 Mbytes of free
+        EMS/XMS. With less memory JAR may use a swap file instead (this
+        results in worse performance).
+
+        When both EMS and XMS are available JAR itself chooses the optimal
+        memory amount and type for the selected command.
+
+        The JAR DOS version requires EMS 4.0+ and XMS 2.0+ versions.
+
+        Although the JAR DOS version achieves significantly better
+        compression and uses less memory with EMS available, special care
+        is required to ensure that the EMS driver (such as EMM386.EXE) is
+        configured and works properly.
+
+        The EMS driver works in a more "complex" way than XMS. It searches
+        for a "hole" in DOS address space for the page frame. Usually it
+        also works with 386+ memory paging enabled. As result some older
+        DOS software or hardware may conflict with the EMS driver. Refer to
+        your memory manager documentation for details. We strongly
+        recommend that you ensure that DOS JAR works reliably with EMS
+        enabled using the "test" command. If you detected problems then you
+        must disable EMS usage using "EmsLimit=0" in the JAR configuration
+        file.
+
+        When running JAR in Windows 3.X or OS/2 be sure the PIF file/DOS
+        session settings allow JAR to use EMS and XMS. By default XMS and
+        EMS usage may be limited to 1 Mbyte. We recommend increasing these
+        settings to 4 Mbytes or more.
+
+
+      JAR Win32 version
+
+        JAR for Win32 requires about 1 Mbyte of memory for executable and
+        data. The compression engine may use additional free memory for
+        better compression since more available memory allows the JAR
+        compression engine to match strings at larger offset distances.
+
+        Very good compression is achieved when JAR uses 3-4 Mbytes of
+        memory. 8-10 Mbytes gives the best compression. JAR may use less
+        memory (0.5-3 Mbytes) for good compression, too.
+
+        The JAR Win32 version works significantly faster and compresses
+        better than the DOS version. So in Windows NT and Windows 95, you
+        should use the Win32 JAR version. In DOS, Windows 3.X and OS/2 -
+        use the DOS JAR version.
+
+
+      Both versions
+
+        The simplest way to tune JAR memory usage is to set
+        "CheckAvailableMemory=Yes" in the configuration file. Then JAR
+        detects the free physical memory currently available and uses it.
+        Note that JAR never uses more memory than the limits that are set
+        in the configuration file ("XmsLimit", "EmsLimit", "32MemoryLimit")
+        even if there is actually more free memory. If
+        "CheckAvailableMemory=Yes" you may use very large limit settings
+        (e.g., 8192 Kbytes each).
+
+        Experienced users may set "CheckAvailableMemory=No" and then
+        specify the "real" memory amounts in "XmsLimit", "EmsLimit",
+        "32MemoryLimit". Be sure that the memory specified is really
+        available; otherwise, in operating systems as Windows 95, Windows
+        NT, OS/2, intensive memory swapping may occur which will decrease
+        overall system performance. "CheckAvailableMemory=No" is also
+        recommended for batch processing. But again SPECIFY MEMORY AMOUNTS
+        that ARE REALLY AVAILABLE. It is better to specify a smaller memory
+        amount than wait for hours due to swapping.
+
+        The EMS implementation in Windows NT is slow. So for good
+        compression do not use the JAR DOS version. Use the JAR Win32
+        version instead.
+
+
+    ARCHIVE CHAPTERS
+
+
+      The advantage of a chapter archive over a series of separate archives
+      of the same set of files is that space can be saved when files to be
+      archived do not change or change slightly. One chapter archive can
+      produce the same results as one hundred standard archive backups. In
+      other words, one can update a chapter archive one hundred times and
+      fully recover any one of those updates.
+
+      Technically speaking, each file in a chapter archive has a chapter
+      lifespan range. When a file is backed up and has not changed since
+      the last backup, only the lifespan range is changed. A copy of the
+      file is NOT added to the archive since a copy already exists. If the
+      backed up file is different from the previous version, that file is
+      added to the archive with an appropriate chapter range. The previous
+      version of the file is still kept in the chapter archive.  When a
+      particular chapter is restored, JAR selects only the files whose
+      lifespan includes the chapter number requested. As an example,
+      suppose one made a series of daily chapter backups of a document
+      directory where only one document out of the one hundred documents
+      changes on a daily basis. The chapter archive would contain the
+      original one hundred documents plus a copy of each day's changed
+      document.
+
+      JAR provides a lot of services for chapter management: keeps chapter
+      creation/modification time, allows commenting or locking, can extract
+      a specified chapter and also, subsequent changes to it.
+
+      EXAMPLE
+
+        Suppose you started to develop a new programming project and
+        decided to use a JAR chapter archive for backups.
+
+        The project directory is "c:\prj\", so you have written a
+        special "back.bat" with the command line:
+
+        JAR16 ac archive c:\prj\*.* -r -x*.obj -x*.exe -jt
+
+        You are not interested in object or exe file backups so they are
+        excluded. "-jt" stands for temporary archive testing after each
+        update.
+
+        After some coding you have completed the "main.h" file. "back.bat"
+        adds this file into first archive chapter.
+
+        Next thing you have completed is the "main.c" file.  The second run
+        of "back.bat" detects that there is no change to "main.h" since the
+        previous chapter as file size and modification time have not
+        changed. So JAR compresses only the new "main.c" file.  As noted
+        before each file has a chapter lifespan range.  In your archive
+
+        main.h lifespan range became from 1 to 2  ("<1-2>" in JAR notation)
+        main.c - " - " -             from 2 to 2  ("<2-2>" in JAR notation)
+
+        Obviously JAR saved additional space as it did not compress and
+        save main.h twice.
+
+        JAR16 x archive -jb1
+
+        extracts file(s) which are included in the first chapter. That is
+        only "main.h". The "-jb1" option is used to select chapter #1.
+
+        JAR16 x archive -jb2
+
+        extracts the second chapter: both "main.c" and "main.h". The same
+        result occurs when extracting without the option "-jb2" since JAR
+        by default extracts (or lists/updates) the last chapter in the
+        archive.
+
+        Next step is a bug fix in file "main.h" and another backup.
+        JAR detects the change of "main.h" and no changes to "main.c". So now
+        the archive contains 3 files:
+
+        main.c <2-3>   main.h <1-2>   main.h <3-3>
+
+        (can be listed using   JAR16 ls archive -jb1-3 )
+
+        Yes, there are two files named "main.h". However, the first one
+        belongs to chapters 1 and 2 while the second belongs to chapter 3
+        only.  So with the "-jb" option you can fully reconstruct any of these
+        chapters.
+
+        If you used separate archives for each backup then they would
+        contain now 1+2+2=5 files (instead of only 3 files in chapters
+        case).  Moreover, in the case of chapter archives JAR optimizes the
+        compression as it detects that  main.h <1-2>  and  main.h <3-3>
+        do not differ very much, so it compresses only the difference
+        between them.
+
+        Suppose two days later your project contains 20 files. And chapter
+        archive contains 30 updates. You can list or extract any of them.
+        Archive is still very small as JAR compresses only changes between
+        chapters. If you used 30 separate archives instead of a single
+        chapter archive, they would occupy probably 10 times more disk space.
+
+        Suppose you noted that somewhere in the previous backups that an
+        important piece of code was deleted from "main.h".  You don't need
+        to search all 30 archives for this code!
+
+        JAR16 e archive main.h -jb1-30
+
+        extracts "main.h" from chapters 1-30 each into separate
+        directories. Chapters where "main.h" has not been changed are
+        skipped. The directory name is generated by enclosing in brackets
+        the lifespan start number.  As a result JAR extracts like this:
+
+        main.h <1-2>    to   (1)\main.h
+        main.h <3-15>   to   (3)\main.h
+        main.h <16-30>  to   (16)\main.h
+
+        You need to review only these 3 files to find the required code as
+        all other chapters contain duplicates. Upon a successful search you
+        may decide to comment chapter 3 with a special note about the useful
+        code using the:
+
+        JAR16 c archive -jb3 -hz
+
+        command.
+
+        So the main advantage of chapters archive is compact and convenient
+        storage of many updates within single archive.  There is easy
+        access to any chapters. And of course, there is major disk space
+        savings compare to multiple separate backups.  Even if you decide
+        to start a new archive backup after the 100'th chapter, your
+        savings in compressed size will be outstanding.
+
+        If you use a chapter archive as a backup mechanism, you should take
+        reasonable precautions in the care and use of such archives.  In
+        other words, these archives should be TESTED and COPIED to storage
+        media on a regular basis.
+
+
+      END OF EXAMPLE
+
+      Please read the "ac", "lc" commands, "-js" and "-jb" options for
+      further information about chapters.
+
+
+    ARCHIVE VOLUMES:
+
+
+      A JAR volume archive is an archive which is contained in two or more
+      files.  Individual JAR volumes are NOT separate archives. All of the
+      volumes taken together represent a single JAR archive.
+
+      One can list or extract files directly from a multiple volume
+      archive.  However, it is not possible to directly delete, update or
+      add files to a volume archive.  You must first concatenate the
+      volumes into a single archive and then do the update.
+
+      JAR volumes are suffixed in the following order: .j01, .j02, ...
+      .j99, .100, .101 ... .990.  The LAST VOLUME by default is suffixed
+      .j.  To reference a JAR volume archive,  all commands must specify
+      the LAST volume filename in the command line.
+
+      See the "-v" option and "y" command for details on how to create
+      volume archives, concatenate volumes, and resize or split archives.
+
+
+    JAR USER ACTION PROMPTS:
+
+
+      JAR prompts the user for action at certain times. There are several
+      types of prompts. One is for yes/no permission, another is for a
+      new filename, another is for archive comments.
+
+      The JAR yes/no user prompts provide a lot of flexibility. In
+      addition to the normal yes and no responses, JAR also accepts the
+      following responses: quit, always, skip, global, and command.
+
+      "Global" sets JAR to inhibit all subsequent user prompts by
+      assuming YES for all queries as if "-y" were specified.
+
+      "Always" sets JAR to assume YES for subsequent queries of the same
+      class. For example, answering ALWAYS to the overwrite query will
+      assume YES for ALL subsequent overwrite queries.
+
+      "Skip" sets JAR to assume NO for ALL subsequent queries of the same
+      class.
+
+      "Command" prompts for one DOS command and then executes it. JAR
+      then returns to expect an answer to the current yes/no query. Do
+      not install a TSR program using this command prompt as JAR may not
+      have enough memory left to continue execution.
+
+      Abbreviated responses such as "y", "n", "g", "a", "s", "c" are
+      allowed.
+
+
+    JAR COMMAND LINE SYNTAX:
+
+
+      JAR{16|32} <command> [<switch>...] <archive_name>[.j] [<arguments>...]
+
+      <arguments> ::= <switch> | <wildcard> | <filename> | <list_file> |
+                     <response_file>
+
+      <switch> ::= {'/'|'-'}<switch_character>['-'|<option>]
+
+      <list_file> ::= '!'<filename>
+
+      <response_file> ::= '@'<filename>
+
+      Commands and switches can be entered in upper or lower case.
+      Command is the first non-switch argument.
+
+      JAR supports the use of either "-" or "/" as the switch option
+      character. You may mix them.
+
+      -s        turns on switch "s"
+      -s-       turns off switch "s"
+      -sname    provides the name argument for switch "-s".
+
+      Wildcards or filenames with spaces must be quoted:
+
+      "c:\Program files\*" or
+      c:\"Program files"\*
+
+      Wildcards or filenames that can be parsed as a switch option must
+      be quoted, too. JAR parses a switch option until the first quote.
+      The remaining part may only be a switch argument:
+
+      -x     is switch
+      "-x"   is filename
+      -x-    turns off "-x" option
+      -x"-"  excludes filename "-"
+      -"x-"  reports error as "-" is not followed by a switch character
+             (instead argument 'x-' is supplied)
+
+      If you need to specify a quote character as an argument then you
+      must specify two consecutive quotes (and argument itself must be
+      quoted too):
+
+      JAR16 a test -g123""""4567  or
+      JAR16 a test -g"123""4567"
+
+      in both cases password
+
+      1234"4567
+
+      is specified.
+
+      Switch options can be combined to save command line length.
+      However, some switch options take optional string arguments and
+      therefore, must be the last option in a combined argument token
+      string because JAR accepts the rest of the argument token as the
+      optional argument. You can combine "-r" and "-y" to make "-ry". You
+      can combine "-wd:\" and "-r" with "-rwd:\", because the switch
+      option taking the string argument is last. Please note that
+      switches that only accept the "-", "0", "1", "2" modifiers can be
+      combined in any order.
+
+      WARNING:  The "j" in "-jX" option switch is a SHIFT symbol.
+      Therefore, a combined "-jftl" is a combination of "-jf", "-jt", and
+      "-jl", since the "j" shifts the meaning of subsequent symbols in
+      the argument token string.
+
+      Examples: -ryjftl   <=>  -r -y -jf -jt -jl
+                -b1ywd:\  <=>  -b1 -y -wd:\
+
+      The "h" is another SHIFT symbol.
+
+      The standard JAR file suffix is ".j".
+
+      The JAR archive name must be the first filename on the command line
+      after the command. The switches and other filenames can be in any
+      order.
+
+      Both JAR versions use wild name matching similar to Windows 95 (which
+      supercedes DOS wild name matching).
+
+      (*) wildcard means "a sequence of arbitrary characters" (includes
+      the empty sequence).  JAR interprets a wildcard (?) as "any character".
+      Unlike in DOS, wild names allow the arbitrary placing of (*) and (?)
+      wildcards.
+
+      If filename being matched doesn't have the extension and dot at the
+      end, then JAR in addition tries to match the filename with appended
+      '.'  (Example: "file" is considered "file.").
+
+      Examples: "*" or "*.*" means all files
+                "*."         means all files without extension
+                "*.DOC"      means all files with an extension of ".DOC"
+                "?B*"        means all files with a second character of "B"
+                "??"         means all two character length filenames
+                "*1*"        means all names that contains character "1"
+                "*.*.*"      means all names that contain two "." characters
+
+      NOTE: There are minor differences with Windows NT wildcard
+      matching. JAR interprets a wildcard (?) as "any character" instead
+      of "zero or one character".
+
+      The default for <wild_name> for all commands except for "d" is "*".
+      The argument "" may be used as the wildcard that never matches any
+      files.
+
+      You can supply one or more filenames for files containing lists of
+      files to be added to an archive. The filenames must be listed one
+      per line. The list filename(s) must be prefixed with "!" as in
+      "!listfile".
+
+      You can also build a long command line using response files.  The
+      response file is "included" into the command line at the specified
+      place. Multiple and nested response files are allowed. The command
+      line may be split over as many lines as necessary.
+
+      Example: JAR16 a archive @switches.txt @wildcards.txt
+
+
+    JAR COMMANDS:
+
+
+      a: Add files to archive
+
+        This is the basic command to add disk files to a JAR archive. If
+        you specify the "-r" switch (recurse subdirectories), JAR will add
+        all of the files in all of the subdirectories that match the
+        specified wildname.  Along with these files JAR also will add all of
+        the scanned subdirectories.
+
+        Note that this last action is similar to UC2 but different from ARJ
+        behavior.  See the "-hb" option for more information.
+
+        Examples: JAR16 a archive subdir\*
+                  Archive all files in directory "subdir".
+
+                  JAR32 a archive "c:\Program files\*" -r
+                  Archive all files in directory "Program files" and
+                  subdirectories.
+
+        NOTE: Both DOS and Win32 JAR versions ALWAYS use Windows 95 like
+        wildcard matching style. This means that "subdir\*" works like
+        "subdir\*.*". The wildname "subdir\*." selects files without
+        extension.
+
+        After add and listing commands with all files selected JAR shows
+        the total archived data ratio. This ratio does not include JAR
+        headers and recovery records. Only "pure" compressed data.
+
+        JAR compresses archive header. As a result whole archive size
+        differs time to time even when compressing the same data.
+
+
+      ac: Add new Chapter
+
+        The "ac" command works like the "a" command, but adds files into a
+        newly created chapter. JAR manages an almost unlimited number of
+        chapters.
+
+        See the "-js" option for IMPORTANT DETAILS about methods on how
+        files are added to a new chapter.
+
+        Example: JAR16 ac archive subdir\*
+                 Add all files in the directory "subdir" into new chapter
+
+        JAR uses two compression methods. The "solid" method is used to
+        compress files in the usual manner.  The "version" method is used
+        to compress files with the same path but within different chapters.
+        This method is optimized to compress only the DIFFERENCES between
+        files while updating from chapter to chapter.
+
+        NOTE: The current JAR version supports "version" compression method
+        only for files with a size less than about 500 Kbytes.
+
+        "Version" compression also allows faster updates to an archive. The
+        only exception is the first time that a new file version is
+        compressed. In this case JAR must change the compression method
+        used for the file (from "solid" to "version") and this takes
+        additional time. The next version update will be significantly
+        faster.
+
+        See the "-jb" option for more details how to extract or list chapters.
+
+
+      c: Comment archive files
+
+        This command allows you to comment the archive header or individual
+        files or archive chapters. JAR will prompt you for each comment.
+        The user will be prompted for up to 50 lines for each comment. A
+        line containing only a [return] will terminate the comment. The
+        user can choose to input comment data from a file by entering the
+        comment filename preceded by an "!" as in "!archive.txt" starting
+        in column 1 of the first comment line. This file is read as a text
+        file. Only the first 4096 bytes of the file will be accepted by
+        JAR.
+
+        To erase a comment from an archive, type [space] [return] on the
+        first comment line and [return] on the second comment line.
+
+        To add file comments but not archive comment, use following
+        command:
+
+        JAR16 c archive
+
+        To add the archive comment but not file comments, use the following
+        command:
+
+        JAR16 c archive -z
+
+        To add only the archive comment at the command line, use the
+        following command:
+
+        JAR16 c archive -zcomment.txt
+
+        To remove a comment via the command line, use predefined "NUL"
+        filename:
+
+        JAR16 c archive -zNUL
+
+        You may also comment an archive with other update commands:
+
+        JAR16 a -zcomment.txt archive *.txt
+
+        JAR allows the storing of ANSI style comments. While displaying
+        these comments JAR itself emulates ANSI.SYS driver behavior in a
+        virtual screen and then dumps the complete picture to the output.
+        NOTE: The virtual screen is two columns narrower than the current
+        "real" screen.
+
+
+      cfg: extract default configuration file
+
+        This command accepts a single argument - destination filename. If
+        it is omitted, JAR extracts the configuration file as "jar.cfg".
+
+        This command is useful if the configuration file is missing or
+        damaged.
+
+
+      d: Delete files from archive
+
+        This command allows you to delete files from the archive. When
+        wildcard selection is not suitable, you can use the "-q" switch to
+        set JAR to prompt you for deletion for each file selected. These
+        deleted files are physically removed from the archive.
+
+        Examples: JAR16 d archive *.c
+                  Delete all files in archive ending in ".c"
+
+                  JAR16 d -q archive *.c
+                  Prompt before deleting each file ending in ".c".
+
+        Even if JAR removes all the files, the empty archive WILL NOT be
+        deleted.
+
+        You can specify the "-n" (new) option to delete the files in the
+        archive that DO NOT EXIST on the disk. Then the "-o" option may be
+        used to specify the directory to scan.
+
+        Example: JAR16 d archive *.* -n
+
+
+      da: Delete files in All chapters
+
+        Delete the specified files in all chapters while showing the
+        deleted files with the corresponding chapter lifespan ranges. The
+        arguments are the same wildcards as used with the "d" command.
+
+        Example: JAR16 da archive *.c
+                 Deletes all files in all chapters ending in ".c".
+
+
+      dc: Delete Chapters
+
+        Delete chapters in the specified range. The command arguments are
+        chapter range "1-", "-2", "1-5" like. The "-x" option may be used
+        to exclude a range. Each file's chapter lifespan range is modified
+        with regard to the existing chapters. If there are no remaining
+        chapters then the file is removed.
+
+        Examples: JAR16 dc arch 5 6 8            deletes chapters 5, 6 and 8
+                  JAR16 dc arch 5-8 11-12 -x6-7  deletes chapters
+                                                   5, 8, 11, 12
+                  JAR16 dc arch "-10"            deletes first ten chapters
+                  JAR16 dc arch 10-              deletes all chapters
+                                                   from 10 and above
+
+
+      e: Extract files from archive
+
+        This command will extract one or more files from the archive to the
+        current directory or to the output directory if specified. JAR will
+        prompt the user before overwriting existing files unless the user
+        specifies the "-y" switch. If the user gives a "no" answer, JAR
+        will prompt must file be extracted to other filename. Then a "no"
+        answer skips file and "yes" prompts for new filename.
+
+        JAR does not ask overwrite permission while extracting existing
+        directories unless the archive directory and existing directory
+        attributes do not match.
+
+        The "-o" option can be used to specify the destination directory.
+
+        Example: JAR16 e archive -osoft\ *.c
+                 Extract all files ending in ".c" to subdirectory "soft".
+
+        If JAR encounters a CRC or Bad file data error during extraction,
+        JAR will delete the corrupted extracted file unless the "-jr"
+        option is used.
+
+        You can extract files from a specified chapter using the "-jb"
+        option:
+
+        JAR16 e archive *.txt -jb20
+
+        Using same option you can also extract files which span a specified
+        chapter range.
+
+        Example: JAR16 e archive file.txt -jb5-10
+                 Extracts the "file.txt" changes in chapters 5-10.
+
+        For convenience when extracting a chapter range, JAR places files
+        with different starting chapters into different directories
+        "(5)","(6)"... (brackets enclose starting chapter number).
+
+        NOTE: During extraction JAR DOES NOT EXTRACT DUPLICATE files into
+        all chapter directories from the file lifespan range. A file is
+        extracted ONLY into the starting chapter directory of the file.
+        This feature saves space and lets one easily find chapters where
+        the selected file has been changed.
+
+        So "JAR16 x archive -jb5-10" will reconstruct the full chapter 5,
+        BUT EXTRACT ONLY THE CHANGES in chapters 6-10.
+
+
+      f: Freshen files in archive
+
+        Update matching files in the archive that are OLDER than the
+        selected disk files.
+
+        Example: JAR16 f archive *.c *.h
+
+
+      l: List contents of archive
+
+        List contents of archive. You can get sorted output by using the
+        "-ju" option.
+
+        Example: JAR16 l archive *.c *.h
+
+        You can specify the "-n" (new) option to list the files in the
+        archive that DO NOT EXIST on the disk. The "-o" option may be used
+        to specify directory to scan.
+
+        Example: JAR16 l -n -oc:\source archive *.c *.h
+
+        When listing a few chapters JAR appends the corresponding file's
+        chapter lifespan range in the format "<from-to>".
+
+        Example: JAR16 l archive *.c *.h -jb1-10
+
+
+      lc: List Chapters
+
+        List chapter information: comment, creation and modification time,
+        and lock flag.  The command arguments are sets of chapter ranges as
+        in the "dc" command.
+
+        Example: JAR16 lc archive
+                 List all chapter information in archive
+
+
+      ls: List contents of archive (Short form)
+
+        List contents of archive in the shortest form.
+
+        Example: JAR16 ls archive *.c *.h
+
+
+      lt: List Technical information for shells
+
+        List technical information for archiver shell programs. This
+        command accepts a single parameter - a file that must not exist on
+        disk. JAR dumps the archive header information to this file.
+
+        Example: JAR16 lt archive header.txt
+
+        See TECHNOTE.DOC for details.
+
+
+      m: Move files to archive
+
+        The "m" command adds the selected files to the archive. If the adds
+        are successful, then the added files and directories are deleted.
+        The move command does not ask permission before deleting the files.
+
+        Example: JAR16 m archive soft\*.*
+
+        It is STRONGLY suggested that you always use the "-jt" option with
+        move commands to set JAR to verify the archive before deleting the
+        input files.
+
+
+      reg: register program
+
+        The "reg" registration command is available only in the JAR DOS
+        version.
+
+        When you order JAR, you will get a registration key which matches
+        the OWNER and security envelope SIGNATURE specified on the order
+        form.
+
+        The "reg" command simultaneously registers both JAR16.EXE and
+        JAR32.EXE. Both executables must be in the same directory before
+        processing. Since JAR will modify both executables, JAR16.EXE and
+        JAR32.EXE must not be in use.
+
+        If the "reg" command is executed without a filename argument, JAR
+        will prompt for the registration key interactively.  Otherwise, JAR
+        will search for the registration key within the file specified.
+
+        Examples:  JAR16 reg key.txt
+                   JAR16 reg
+
+
+      rh: Recover archive Header
+
+        This command is available only in Win32 JAR version. If your
+        archive is damaged, the remaining undamaged files may be recovered
+        in the following ways:
+
+        - you can try to extract files using the "-hx" option. This option
+          uses the recovery records (if available in archive) to repair
+          slightly damaged archives.
+
+        - you can try to extract files using the "-jr" option (this
+          prevents JAR from aborting on damaged files). The "-hx" and "-jr"
+          options can be combined.
+
+        Both listed options do not help if the archive header is damaged.
+
+        The "rh" command may recover useful archive data (if such) and the
+        header from a seriously damaged archive. It uses signatures to
+        search for valid compressed data chains. You must place all damaged
+        archive volumes into same directory and then run:
+
+        JAR32 rh archive
+
+        JAR will output the recovered archive into the current directory as
+        "$recover.j".  The archive may still contain partially damaged data
+        so it may be necessary to use the "-jr" option to extract data from
+        the archive.
+
+        NOTE: The "rh" command recovers only the most important archive
+        data: file contents, file CRC, file modification date but not time.
+        The file's chapter lifespan range information is lost, too, but JAR
+        tries to group different versions of the same file into different
+        chapters.
+
+        Be sure you specify the correct password and method for the
+        protected damaged file; otherwise, JAR will report that there is no
+        recoverable data.
+
+        After repair of archive with multiple chapters, "$recover.j" may
+        contain a smaller number of files than the original archive (even
+        if it has not been damaged).  This is due to the loss of "CHAPTER
+        range" information and as a result two files with the SAME DATA in
+        neighboring chapters may be recovered as a single file.
+
+        If you have lost one or more volumes of a multiple volume archive,
+        you can recover the archive with the following steps:
+
+        - place the existing volumes into a single directory.
+
+        - for lost volumes substitute any file over 64 bytes in size.
+          For example, you can replace a missing volume "archive.j02" with
+          a file that contains 65 spaces.
+
+        - execute JAR "rh" command.
+
+        JAR will not find recoverable data in such volume substitution;
+        however, these substitutions will allow the JAR "rh" command to
+        process through all the volumes.
+
+
+      sl: Scan Locked files
+
+        After command scans selected file set it tries to open each file
+        for reading. Files which JAR failed to open are listed. You can
+        copy this list into file using "-l" option. Later this list file
+        may be used to exclude locked files.
+
+        Command does not accept archive name.
+
+        Example:
+
+        JAR32 sl c:\* -r -l"To be excluded"
+
+        NOTE: When wildcard used with "-x" or "-x!" does not contain path
+        specified (only filename) then this wildcard is used to match to
+        ALL filenames (path is ignored). You must keep this in mind when
+        using exclude lists generated by "sl" command. Read "-x" option for
+        details.
+
+
+      t: Test integrity of archive
+
+        Test the contents of ALL files for the correct CRC value. JAR uses
+        a 32 bit CRC to validate the contents of the files.
+
+
+      test: test JAR reliability
+
+        This is the command to test the reliability of JAR compressing and
+        decompressing selected files. When executing this command JAR works
+        in similar way like "add" command.  But after each compressed file
+        portion JAR decompresses and tests files using comparison and then
+        removes compressed data. This saves disk space and allows JAR to
+        test gigabytes of files with limited free disk space.
+
+        This command requires a temporary archive filename which will be
+        used for testing.  The needed free disk space can be found from the
+        following table (in megabytes):
+
+        Compression method:       -m1,-m2,-m3             -m4
+
+        1,000 files to test            6M                 20M
+        5,000 files to test           10M                 30M
+        20,000 files to test          20M                 40M
+        50,000+ files                 60M                 60M
+
+        This table assumes that the JAR swap file is located on the same
+        drive as the temporary archive. Otherwise, use following table
+        (space for temporary archive/swap file):
+
+        Compression method:       -m1,-m2,-m3             -m4
+
+        1,000 files to test          4M/3M               20M/5M
+        5,000 files to test          4M/5M               20M/7M
+        20,000 files to test         4M/10M              20M/15M
+        50,000+ files                4M/30M              20M/30M
+
+        Depending on the free disk space JAR will also skip files too large
+        to test.  JAR must have enough space to store whole compressed file
+        before testing decompression and comparing contents.
+
+        When running this command JAR also uses additional methods to
+        detect conflicts with hardware or software, memory or disk
+        corruption. If JAR detects such problems then it will report the
+        following errors:
+
+          Wrong program flow detected at (<module>,<line>)
+          Possibly conflict with used software or hardware
+
+        or
+
+          Internal at (<module>,<line>)
+          Possibly conflict with hardware
+
+        We strongly recommend that you run such tests before using JAR,
+        especially for backup purposes. It is also useful to retest JAR
+        after hardware upgrades or installation of new memory managers or
+        other "critical" software.
+
+        TESTJAR.BAT contains a ready-to-run command line. You can modify
+        this batch file to test other compression methods (-m1,-m3, or -m4)
+        or other drives.
+
+        JAR16.EXE and JAR32.EXE should be tested separately in the intended
+        operating environments.
+
+        Example: JAR16 test archive c:\* d:\* -r -m1 -ho -jf -xwin386.swp
+                 Test compression/decompression of the files on few drives.
+                 "win386.swp" is excluded as it may be locked.
+
+        Be sure you exclude files which may be locked for reading during
+        testing; otherwise, JAR will abort on the locked file.
+
+        Testing may take a long time (hours or days). You can interrupt or
+        shorten any test by pressing CTL BREAK.
+
+        With the "-ht0" option JAR will test the decompression using CRC32
+        only instead of a file contents comparison. This may work faster.
+
+        It may be useful also to test encryption/protection using "-g" and
+        "-hg" options together with "test" command.
+
+
+      u: Update files to archive
+
+        Update older files in the archive and add files that are new to the
+        archive.
+
+        Example: JAR16 u software
+
+
+      v: Verbosely list contents of archive
+
+        This command lists the full pathname and comments of the archive
+        files as well as the same information as the "l" command. It also
+        shows the compression method, file access and creation time, and
+        host OS. This command may be used with the "-hf" options to look at
+        long filename translations.
+
+
+      x: eXtract files with full pathname
+
+        This command extracts one or more files from the archive to their
+        full paths in the current directory or to the output directory if
+        specified.
+
+        Example: JAR16 x archive *.c
+
+        Refer to the description of the "e" command for more information
+        about extraction.
+
+
+      y: copY archive with new options
+
+        The JAR "y" command provides an easy interface to the options that
+        change archive settings.
+
+        Examples: JAR16 y archive -jl            locks archive
+                  JAR16 y archive -g? -jg?       changes archive password
+                  JAR16 y archive -hk            adds recovery records to
+                                                   archive
+                  JAR16 y archive -hk-           removes recovery records
+                  JAR16 y archive -v20k -osplit  splits archive into 20K
+                                                   volumes
+                  JAR16 y split -oarchive        concatenates archive
+                                                   volumes back
+                  JAR16 y archive -hx            repairs damaged archive
+                                                   using recovery records
+
+        NOTE: When changing the password JAR always tests the archive.
+
+
+    JAR SWITCH OPTIONS:
+
+
+      b0: reset archive bits
+
+        The "-b0" switch does NOT affect file selection. It causes JAR to
+        reset the archive bits of added files. If the "f", "u", or "ac"
+        command has been selected, JAR will also reset the archive bits of
+        files that are already duplicated in the archive.
+
+        Example: JAR16 a e:archive c:\*.* -b0 -r
+                 archives all files on the C drive and resets all archive
+                 bits.
+
+        This option also causes JAR to reset the archive bit of extracted
+        files.
+
+        NOTE: JAR ignores archive bit set/reset errors. If error occurs
+        then added file archive bit value is not changed. For extracted
+        file archive bit remains set to 1.
+
+
+      b1: set archive bits
+
+        Works like "-b0" but sets the archive bit instead.
+
+
+      d: with Delete (move)
+
+        This switch with the "a" command is similar to the standard MOVE
+        command. Successfully added files will be deleted. When used with
+        the "f", "u", or "ac" command, JAR will also delete files that are
+        already duplicated in the archive. JAR will prompt the user before
+        deleting the files unless the "-y" or "-jyd" switch is specified.
+        Also, you can use the "m" command which does not prompt before
+        deleting the files.
+
+        Example: JAR16 a archive filename -d -y       is equivalent to
+                 JAR16 m archive filename
+
+        This option works with "add" type commands only.
+
+
+      f: Freshen existing files
+
+        This switch works only with the "e" and "x" commands.
+
+        "-f" specifies JAR to extract newer files from the archive.
+
+        "-f1" specifies to extract older files.
+
+        "-f2" specifies to files with a changed date/time or size.
+
+        NOTE: JAR ignores date/time comparison between directories (always
+        assumed are the same).
+
+        Example: JAR16 x archive -osource -f
+                 Extract newer files
+
+
+      g: specify archive password
+
+        This switch will specify the archive password. An archive can be
+        protected from unauthorized access by using a password with either
+        of two different protection methods.
+
+        The protection method may be specified using the "-hg" option. The
+        "Authenticate" method establishes an archive password WITHOUT the
+        actual encryption of its contents. The "GOST v1.01" method uses
+        GOST 28147-89 encryption in CBC mode to encrypt archive files (but
+        NOT archive header which contains comments and filenames).
+
+        With the default configuration file and without specifying the
+        protection method ("-hg") JAR uses the "Authenticate" method. The
+        "DefaultAccessProtection" setting in the CFG file allows one to
+        change this behavior.
+
+        NOTE: Encryption is not available in the export JAR version.
+
+        Once an archive is protected, JAR requires the password when
+        extracting or updating the archive.
+
+        JAR stores within the archive header a secure password hash. This
+        allows verification of the specified password before the actual
+        update/extract operation. But there is a very small (smaller than
+        1e-30) probability that the hash function will not detect an
+        incorrect password during an update operation. In this case,
+        different files may be encrypted using different passwords. So JAR
+        may report "CRC error" or "Bad data" when using the wrong password
+        for update.
+
+        Short and trivial passwords allow brute-force attacks against
+        protected archive. We recommend to use passwords longer than 16
+        characters. Special characters and digits in password also
+        recommended.
+
+        Example: JAR16 e archive -gpassword
+
+        If the "-g" option is followed by a question mark "?", JAR will
+        prompt the user for the password without displaying the password.
+        The backspace key can be used to erase characters.
+
+        Example: JAR16 a archive -g?
+
+        Use the "y" command with "-jg" option to remove/set password for an
+        already existing JAR archive.
+
+        Please save your password in a safe place. There is no trick,
+        trapdoor, or shortcut to recovering a lost password.
+
+        NOTE: The first JAR 1.01 BETA used the now obsolete
+               "Authentication" method to protect an archive. Please read
+               WHATSNEW.DOC for details.
+
+        NOTE: Concerning password to 256-bit GOST key conversion in "GOST
+              v1.01" method ...
+
+              The password is always cyclically filled to a complete 8
+              character block before further conversion into a 256-bit key.
+              For example, the password "abcdefgh0123" (1) is filled to
+              "abcdefgh0123abcd" (2). As a result, an archive with password
+              (1) may be decrypted using password (2) and vice-versa.
+
+              We have noted that such password "cyclical filling" is not
+              the best choice. However as long as the current method does
+              not affect encryption reliability we have decided to keep it
+              for compatibility with previous JAR BETA versions.
+
+              We are planning to release additional encryption method(s)
+              without this disadvantage. The current encryption methods
+              will be continued to be supported.
+
+
+      h: selects (second) alternate set of switch characters.
+
+        Works like the "-j" shift option but selects another set of switch
+        characters. See the "-j" switch for more details.
+
+
+      j: selects alternate set of switch characters.
+
+        This switch toggles the set of switch characters. The toggle is
+        reset at end at of each separate switch sequence back to the main
+        set of switch characters.
+
+        For example, "-jf" is not the same function as "-f".  However,
+        "-jjf" is the same as "-f" because of the double toggle.  Also,
+        "-jljf" is NOT the same as "-jl -jf".  The switch sequence "-jlf"
+        is the same as "-jl -jf". It is not recommended that you use these
+        combined shift sequences.
+
+
+      l: create List_name file
+
+        This switch will set JAR to dump to the filename specified after
+        the "-l" switch all of the filenames to be processed by this JAR
+        command.
+
+        For add type commands, this list contains all files that matched
+        the file wildnames given on the command line.
+
+        For "sl" command, this list contains files which JAR failed to open
+        for reading.
+
+        For other commands, the file will contain only the original
+        filenames and/or wildcard names. Other options do NOT affect the
+        output of filenames to this list file.
+
+        This list file can be used as a listfile on the command line.
+
+        Example: JAR16 a -lname.lst archive *.exe
+                 This example will create a file named "name.lst" with all
+                 scanned *.exe files.
+
+
+      m: with Method 1, 2, 3, 4
+
+        Method 1 = fastest compression. This method uses a small fixed
+        memory amount for compression in comparison with -m2..4 .
+
+        Method 2 = normal compression (default). JAR uses available memory
+        to improve compression.
+
+        Method 3 = better compression. This method works slower but may
+        improve compression a few percent.
+
+        Method 4 = best compression. This method may compress better with
+        large amounts of data (>2 Mbytes). "-m4" is not recommended for
+        archives that may be modified in future. JAR requires up to 12
+        Mbytes of additional disk space for a swap file when updating these
+        archives. In addition, updates are much slower compared to the
+        other methods.
+
+        Examples:  JAR16 a archive *.exe -m3
+                   Better compression
+
+                   JAR16 a archive *.exe -m4
+                   Uses the best compression
+
+        Recommended values of free memory for decompression depend on the
+        method used:
+
+        "-m1"              - does not require additional memory
+        "-m2" and "-m3"    - 1.5 Mbytes
+        "-m4"              - 3.0 Mbytes
+
+        These values are RECOMMENDED for optimal operation; however, JAR
+        will decompress files with less memory.
+
+        Usually methods "-m3" and "-m4" work 1.5 times slower than default
+        "-m2".
+
+        What is difference between these methods? JAR uses a greatly
+        improved LZ family algorithm.  "-m1"  matches strings at
+        short distances (comparable with PKZIP - about 32Kbytes). "-m2"
+        searches for strings at large distances (about 500K-1000Kbytes and
+        sometimes more) depending on the memory amount used. "-m3" method
+        works like "-m2" but does a more exhaustive slower search. "-m4"
+        matches strings at even larger distances and like "-m3" uses an
+        exhaustive search.
+
+        The second difference between methods is data block size. For
+        "-m1", "-m2", "-m3", JAR concatenates files into 1000K-1500Kbytes
+        pieces to obtain good compression and reasonable update speed.
+        This also makes a JAR archive more robust than a "FULLY" solid
+        archive (a damaged byte affects at most a single block, not the
+        whole archive).  The only drawback is a slight loss in compression
+        rate.
+
+        Before concatenating files into blocks JAR sorts them using a few
+        criteria (file extension, size) so that files with likely similar
+        structure tends to be compressed together.
+
+        "-m4" compresses better by concatenating files into significantly
+        larger blocks - up to 12Mbytes.
+
+        Therefore, we recommend the use of "-m2" for archives which may be
+        updated frequently and "-m4" for the "best and solid" compression.
+
+
+      n: only New files (not exist)
+
+        With the "a" command, add files that do not exist in the target
+        archive.
+
+        With the "d" command, delete files that do not exist in the target
+        directory.  With the list type command, list files that do not
+        exist.  Target directory may be specified using "-o" option.
+
+
+      o: Output directory/file
+
+        For commands which scan files this option specifies the destination
+        directory within the archive for scanned files.
+
+        Example: JAR16 a archive dir1\a.txt -oversion1 -jf-
+                 File will be added to archive as "version1\dir1\a.txt"
+
+        For extraction commands this option specifies the destination
+        directory where files are to be extracted.
+
+        Example: JAR16 e archive dir1\a.txt -oc:\version1 -jf-
+                 File will be extracted to "c:\version1\a.txt"
+
+        For the "y" command, this option specifies the updated archive
+        name. Currently, the "y" command together with "-o" option is the
+        only way to update a multi-volume JAR archive.
+
+        Examples: JAR16 y archive -oa:archive
+                  Copies archive to floppy
+
+                  JAR16 y archive -oa:archive -va
+                  Copies archive to multiple floppies and automatically
+                  splits to volumes
+
+        See the "y" command description for more details.
+
+        For the "d", "l", "v", "ls" commands with the "-n" (new files)
+        option, the "-o" option specifies the directory to scan.
+
+
+      q: Query on each file
+
+        This switch causes JAR to prompt the user prior to acting upon each
+        archived file for all but the "l", "lc", "ls", "lt", "rh", "t", "v"
+        and "y" commands. This allows you to selectively extract, delete,
+        add, etc.
+
+
+      r: Recurse subdirectories
+
+        This switch will set JAR to recurse any wildcards specified on the
+        command line by traversing all subdirectories scanning for matches.
+
+        JAR will also recurse non-wildcard filenames as in:
+        JAR16 a archive FILE.BBS -r
+
+        By default this option is ON for all commands that matches files
+        within archive ("c", "d", "e", "da", "l", "ls", "v", "x"). By
+        default this option is toggled OFF for all commands that scan files
+        ("a", "ac", "f", "m", "u", "test").
+
+        Examples: JAR16 l archive -r- *.doc
+                  List *.doc files only in root archive directory.
+
+                  JAR16 d archive *.doc
+                  Delete ALL *.doc files from archive
+
+                  JAR16 d archive test\*.doc -r-
+                  Delete *.doc files from test\ directory, but not
+                  subdirectories
+
+
+      s: set archive time-Stamp
+
+        This switch causes JAR to set the date-time stamp of the archive to
+        that of the newest file in the archive. This option works only with
+        update operations.
+
+        The "-s1" switch is used to keep the old archive date-time stamp.
+        The new archive will have the same date-time stamp as the original
+        archive.
+
+
+      u: Update files
+
+        This switch works only with the "e" and "x" commands.
+
+        "-u" specifies JAR to extract only newer and non-existing files
+        from the archive.
+
+        "-u1" specifies to extract only older and non-existing files.
+
+        "-u2" specifies to extract non-existing files and files that
+        date/time or size changed.
+
+        NOTE: JAR ignores date/time comparison between directories (always
+        assumed are the same).
+
+        Example: JAR16 x archive -osource -u2
+                 Extracts new or changed files
+
+
+      v: enable multiple Volumes
+
+        While creating a NEW archive this option specifies the new archive
+        volume size. This option cannot be used while updating an existing
+        archive. The only exception is the "y" command with the "-o"
+        option. As such, the "y" command allows one to split an archive, to
+        change the existing archive volume size, or to concatenate all the
+        volumes into one volume.
+
+        The "-v" option is unnecessary for non-update operations since the
+        JAR archive header contains information about each volume created
+        and its size. JAR will report an error when "-v" is used together
+        with unsupported command.
+
+        Thus while extracting a single file JAR will only prompt for the
+        required volume(s). To list the archive contents JAR usually
+        requires only the last volume (".j" default extension). In rare
+        cases, a few last volumes are required as the archive header may
+        not fit the last volume.
+
+        JAR volumes are suffixed in following order: .j01, .j02, ... .j99,
+        .100, .101 ... .990. The LAST VOLUME by default is suffixed .j and
+        it must be used in the command line for future access to the
+        archive. JAR supports up to 990 volumes.
+
+        IMPORTANT: The archive name specified in the command line is used
+        to name the LAST VOLUME. The other volumes are ALWAYS named with an
+        extension starting with .j01 and so on. This behavior differs from
+        that of the ARJ or RAR archivers. They use the command line archive
+        name for the first volume. Subsequent volumes have "incremented"
+        names. This is not so with JAR.
+
+        When creating new volumes on a removable drive JAR pauses and
+        checks that the diskette has been really changed. However, this
+        check is limited to 3 retries for the same volume. This test can be
+        inhibited with the "i" modifier. JAR does not do this check when
+        accessing volumes for reading or testing.
+
+        Example: JAR16 a a:archive -vi -va
+
+        The "-v" switch will accept the abbreviations 360, 720, 1200, and
+        1440. These will be translated to 362,000, 730,000, 1,213,000, and
+        1,457,000 bytes, respectively. Please note that if the available
+        disk space is less than the requested amount, JAR will prompt the
+        user for permission to continue. You can use the "K" modifier as a
+        shortcut for "000". For example, 100K means 100000. "K" does NOT
+        mean 1024.
+
+        The "-va" switch sets the disk space auto-detect option. JAR will
+        check for the disk space available on the target drive and try to
+        use all or most of it. This option is aimed at diskette usage.
+        Please note that this switch option detects free disk space. It
+        does NOT detect formatted disk space. If the space available is
+        less than 10,000 bytes, JAR will prompt the user for permission to
+        continue.
+
+        Examples: JAR16 a a:backup -va
+                  JAR16 a backup -v360
+
+        The "v" modifier turns on the next volume beep option. When you
+        select this option, JAR will sound a beep prior to the next volume.
+
+        The "r" modifier allows the reservation of disk space on the first
+        volume. The number after the "r" specifies the space to reserve.
+
+        Example: JAR16 a install -v360r50K
+                 Make first volume 50000 bytes smaller than 360K.
+
+        The switch modifier "s" can be used to make JAR execute one
+        specified system command prior creation of new volume or make JAR
+        pause for manual execution of system commands. This is useful for
+        purging target diskettes before JAR writes to them.
+
+        Note that JAR always checks the first diskette for the presence of
+        the JAR archive before executing the "-vs" argument. As a result
+        users who archive directly to unformatted diskettes using
+        -vs"FORMAT a:" will encounter a disk error on the first diskette.
+        To avoid this error, the user should use a formatted diskette for
+        the first diskette. Subsequent diskettes may be unformatted.
+
+        The switch modifier "z" is identical to the "s" modifier except
+        that the system command is not echoed to the screen.
+
+        Optionally, after the "s" modifier, you can specify a system
+        command or batch filename. JAR will automatically execute the
+        command or batch file before creating each new volume. If the
+        command has embedded blanks, then the switch option must be
+        surrounded by double quotes. The system command is executed before
+        JAR executes the auto-detect space option.
+
+        Examples: JAR16 a A:backup -vas
+                  JAR16 a A:backup -vvas
+                  JAR16 a A:backup -v360s
+                  JAR16 a A:backup -vv360s
+                  JAR16 a A:backup -vaspurge.bat
+                  JAR16 a A:backup -v360sdelete.bat
+                  JAR16 a A:backup -vas"FORMAT A:"
+                  JAR16 a A:backup -vas"DIR C:\"
+
+        The "-v" switch accepts its modifiers in any order. The "s" and "z"
+        modifiers must be last because any succeeding text is considered
+        the system command to execute.
+
+        You can suppress the next volume prompt with the "-y" or the "jyv"
+        option. However, when using the "-y" option with multiple volume
+        JAR archives on removable media drives, JAR will ALWAYS PROMPT for
+        the next diskette. The "-jyv" option WILL ALWAYS suppress the
+        prompt even for removable media.
+
+        During JAR operation in non-update commands, JAR will not abort
+        when it cannot open the correct sequential JAR volume archive. It
+        will report the open error and proceed to the prompt. At this point
+        it is possible to swap diskettes to put the correct volume in
+        place. This feature is disabled if the "next volume" prompt has
+        been disabled.
+
+        While creating a new volume, if JAR detects an existing file
+        with the same volume name, it asks permission to overwrite and
+        optionally prompts for a new filename. With the "-y" or "-jyo"
+        options, JAR overwrites this file without asking.
+
+
+      w: assign Work directory
+
+        This switch option is HIGHLY recommended if you are archiving
+        directly to diskettes.
+
+        By default, JAR builds a new JAR archive file in the same directory
+        as the old archive file. By specifying the "-w" switch, you can
+        specify the working directory where the temporary archive file will
+        be built. After the temporary archive file is built, it is copied
+        over the original archive and deleted.
+
+        Normally JAR requires enough disk space for the original archive
+        and the new temporary archive. Specifying the "-w" switch allows
+        you to move some of that disk space requirement to another
+        directory.
+
+        When using the "-w" switch while archiving to multiple volumes, JAR
+        will check the available disk space in the work directory. If there
+        is not enough space, JAR will prompt for permission to continue.
+        This prompt can be suppressed with the "-y" and "-jyk" switches.
+
+        If the copy of the temporary archive on top of the original archive
+        aborts, you must do the copy manually. JAR will not delete the
+        temporary archive in this error situation.
+
+        Example: JAR16 a -we:\temp\ archive *.c
+
+        For speed reasons, you should always use the "-w" option when
+        creating or modifying archives on diskettes. You should specify a
+        work directory on your hard disk or a sufficiently sized RAMDISK.
+
+        Example: JAR16 a -we:\ b:archive *.c
+
+
+      x: Exclude filenames
+
+        This switch is used to exclude filenames or wildnames from the list
+        of filenames to be processed.
+
+        Example: JAR16 a archive soft\* -r -x*.exe -x*.obj -xtest
+
+        This example will archive all files in the "soft" directory and
+        subdirectories except for any files named "test" or ending in
+        ".exe" and ".obj".
+
+        You can also specify an exclude file list by preceding the filename
+        with the list character "!". The exclude file list must contain a
+        list of filenames/wildnames specified one per line.
+
+        Example: JAR16 a archive soft\* -r -x!exclude.lst
+
+        You can specify a pathname to exclude as in:
+
+        JAR16 a archive \dir\*.* -r -x\dir\*.*
+
+        In the above example, JAR will exclude all files in \dir but not
+        the subdirectories in \dir.
+
+        The "-x" option also allows you to exclude an entire path including
+        subdirectories from being selected for processing.
+
+        Syntax: JAR16 a archive C:\*.* -xC:\TEMP\
+
+        The "\" after C:\TEMP indicates to JAR that everything below
+        C:\TEMP\ is to be excluded.
+
+        Note that the exclude directory option requires that the directory
+        be specified in the same relative path that the selected files use.
+
+        Example:
+        JAR16 a archive \temp\*.* -x\temp\firstdir    is correct usage
+        JAR16 a archive \temp\*.* -xC:\temp\firstdir  is NOT correct because
+                                                      of the C:
+
+        The "-x" switch also works for non-update commands like "e" and
+        "l".
+
+        Examples: JAR16 e archive -x*.exe
+                  Extract all files except *.exe files
+
+                  JAR16 l archive -x*.exe -x*.obj
+                  List all files except *.exe and *.obj
+
+                  JAR16 e archive \ -xdir\*.c
+                  Extract all files except *.c in directory "dir"
+
+        The "-x" switch with "lc" and "dc" allows the exclusion of chapter
+        ranges:
+
+        JAR16 lc archive -x1-50
+        List all chapters except first 50.
+
+
+      y: assume Yes on all queries
+
+        Use this switch for batch type uses of JAR. This switch disables
+        most of the normal user queries during JAR execution. Use this
+        switch to suppress overwrite queries in the "e" and "x" commands,
+        to suppress the make new directory query in the "e" and "x"
+        commands, to suppress the new filename prompt when an open file
+        operation fails in the "e" and "x" commands and to suppress the
+        next volume pause using the "-v" option to create volumes on the
+        hard disk.
+
+        The "-y" switch will NOT suppress the "-v" next volume prompt when
+        the archive is located on a drive with removable media such as a
+        diskette drive.
+
+        Use this option with due caution, especially during extraction as
+        this sets JAR to overwrite files. NOTE: JAR does not overwrite
+        readonly files unless the "-ha" option is used.
+
+        As an alternative, you can use the "-jy" option that lets you
+        suppress individual types of user queries.
+
+
+      z: supply file for archive comment
+
+        The "-z" switch has been provided to facilitate batch commenting of
+        JAR archives with the "c" command. When the "-z" option has been
+        specified with or without a comment file, JAR will only process the
+        archive header comment.
+
+        A comment file containing only a single blank can be used to erase
+        comments from JAR archives.
+
+        Syntax: JAR16 c archive -z
+                JAR16 c archive -zcomment.txt
+                JAR16 a archive -zcomment.txt
+
+        Another method to erase the comment is to specify the predefined
+        "NUL" filename:
+
+                JAR16 c all -zNUL
+
+        The "-z" option also allows one to dump the JAR archive header
+        comment to a file. This will extract only the main archive comment
+        and not the individual file comments.
+
+        Syntax: JAR16 e archive "" -zcomment.txt    dumps only the comment
+                JAR16 x archive -zcomment.txt       dumps comment and files
+
+
+      jb: select chapter or chapter range
+
+        Syntax: -jb10        Selects chapter 10
+                 -jb10-      Selects all chapters from 10 and above
+                 -jb-10      Selects chapters from 1 to 10
+                 -jb10-20    Selects chapters from 10 to 20
+                 -jb1-       Selects all chapters
+                 -jb"-"      Also selects all chapters
+
+        For listing commands ("v", "l", "ls"), this option specifies the
+        file chapter range to list.
+
+        Examples: JAR16 l archive -jb10
+                  Lists chapter 10
+
+                  JAR16 l archive -jb1-
+                  Lists all files in all chapters
+
+                  JAR16 l archive
+                  Lists LAST chapter
+
+        For the comment command ("c"), this option specifies the range
+        of chapters to comment or files in the chapter range to comment.
+
+        Examples: JAR16 c archive -hz -jb1-10
+                  Comment a few chapters
+
+                  JAR16 c archive -jb1-10
+                  Comments all files in chapters from 1 to 10
+
+                  JAR16 c archive -hz"Ansi comment".txt
+                  Comments last chapter from archive
+
+        Commenting will fail if the affected chapter is locked.
+
+        For extract commands ("e", "x"), this option specifies the chapter
+        to extract.
+
+        Examples: JAR16 x archive -jb5 -oc:\dest
+                  Extracts whole chapter 5 into "c:\dest"
+
+                  JAR16 x archive *.c
+                  Extracts selected files from LAST chapter
+
+        JAR can also extract one chapter and subsequent changes to it in
+        selected chapter range.
+
+        Example: JAR16 x archive -jb5-10 text.txt
+                 Will extract the full chapter 5 and ONLY the changed
+                 "text.txt" versions in chapters from 6 to 10. JAR uses the
+                 corresponding chapter number in destination path in the
+                 form "(5)","(6)"...
+
+        See also the "e" command for more details.
+
+        If selected operation affects few chapters at once then JAR shows
+        each file lifespan range in the format "<from-to>".
+
+        The switch "-jb" can not be used with other commands.
+
+        With update commands "a", "f", "m", "u", "d" you can access only
+        the LAST chapter. You can delete from a few chapters at once using
+        "da" or "dc" commands.
+
+
+      jf: store Full matched path
+
+        JAR uses two methods to store the scanned file path within an
+        archive. If the "-jf" option is ON then the full scanned file path
+        is stored. Only the drive letter and root slash is removed.
+
+        If the "-jf" option is OFF then the RELATIVE scanned file path with
+        respect to the wildcard is stored.
+
+        Examples:
+        JAR16 a all c:\dir1\dir2\a.txt -jf
+        file will be stored within archive as "dir1\dir2\a.txt"
+
+        JAR16 a all c:\dir1\dir2\a.txt -jf-
+        file will be stored within archive as "a.txt"
+
+        JAR does not support storing an archive path which contains ".\"
+        and "..\".  Only the path back to the ".\" or "..\" is stored (-jf
+        is ON).
+
+        Examples:
+        JAR16 a all c:\dir1\..\dir2\a.txt -jf
+        file will be stored within archive as "dir2\a.txt"
+
+        JAR16 a all c:\dir1\..\dir2\a.txt -jf-
+        file will be stored within archive as "a.txt"
+
+        This option affects only the commands that scan files ("a", "ac",
+        "u", "f", "m"). The default value for the "-jf" option may be
+        changed within the configuration file. See the "FullPath" keyword
+        for additional information.
+
+
+      jg: specify new password
+
+        This option with the "y" command can be used to remove or set or
+        change the archive password.
+
+        JAR16 y archive -goldpassword -jgnewpassword
+        Changes archive password
+
+        JAR16 y archive -gpassword -jg
+        Removes archive password
+
+        JAR16 y archive -jgpassword -hg1
+        Sets archive password (GOST encryption method)
+
+        With "-jg?" JAR will prompt for new password.
+
+        Example: JAR32 y archive -jg? -v20k -o"Split and garbled"
+                 splits and garbles archive into new "Split and garbled.j"
+                 archive
+
+        NOTE: After the password is changed JAR always tests the temporary
+        archive before overwriting the original archive.
+
+
+      jl: Lock archive
+
+        This option sets a global archive flag for update operations. An
+        archive with this flag set does not allow any archive
+        modifications. There is no way to clear this "Lock" flag. You can
+        only decompress or list files from a locked archive.
+
+        Example: JAR16 y archive -jl
+                 Lock existing archive
+
+
+      jl1: Lock existing chapters
+
+        This option locks all existing chapters. Any update operation that
+        attempts to modify locked chapters, files in locked chapters, or
+        their comments will fail. There is no way to "unlock" the chapter.
+        You can only decompress and list this chapter.
+
+        Unlike the "-jl" option, new chapters may be added to the archive
+        and they will not be locked.
+
+        Example: JAR16 ac archive c:\* -jl1
+                 Add new chapter and lock all chapters
+
+
+      jl2: make auto-Lockable archive
+
+        This option sets the global archive flag "auto-lock".  Now after
+        each "ac" command, JAR immediately locks the newly created chapter.
+        So you can only list files, extract files or add new chapters. No
+        other modifications are allowed.
+
+        Example: JAR16 y archive -jl2
+                 Makes existing archive "auto-lockable"
+
+        There is no way to clear "auto-lock" flag.
+
+
+      jr: Recover broken archive files
+
+        This option is available only in the Win32 JAR version.
+
+        This switch is used to access files in an archive corrupted either
+        with bad data or missing data. JAR will continue processing despite
+        these errors.
+
+        NOTE: JAR does not scan the whole archive during extraction as it
+        knows the exact location of each compressed file. So JAR can "skip
+        around" the damaged files if you exclude them from the requested
+        files set.
+
+        This switch also will allow the extraction of files with CRC or Bad
+        file data errors. Normally, JAR will delete these extracted files.
+
+        Example:  JAR32 e archive -jr
+
+        With this option JAR will NOT check that the supplied volume is
+        correct.  Substituting another volume is one possible workaround in
+        the case of a lost volume.
+
+
+      js: Select chapter creation mode
+
+        Each file in archive has a chapter lifespan range. When a file is
+        backed up using the "ac" command and has not changed since the last
+        chapter in archive, only the lifespan range is changed. A copy of
+        the file is NOT added to the archive since a copy already exists in
+        the archive. If the backed up file is different from the previous
+        version, then that file is added to the archive with an appropriate
+        chapter range.
+
+        The "-js" option selects method used to detect changed (different)
+        files.
+
+        If "-js0" is set, then JAR considers a file different if its size
+        or modification date/time or creation date/time do not equal the
+        corresponding values of the file stored within the archive in the
+        last chapter.
+
+        If "-js1" is specified JAR works like "-js0" but IGNORES a changed
+        creation time. So the file may have different creation date/time
+        but still will be considered as the same as the file in archive.
+        This option is useful when working with DOS tools. DOS programs do
+        not know about file creation time and so do not store/restore it
+        properly (e.g., DOS archivers). JAR for DOS assumes the scanned
+        file creation time is equal to the file modification time.  So the
+        "-js1" option is also useful when adding new chapters into the same
+        archive with both JAR for Win32 and JAR for DOS.
+
+        The "-js1" option is default.
+
+        With "-js0" or "-js1" JAR does NOT consider a file different if the
+        file attributes (read only/system/hidden/archive) are the only file
+        properties changed.
+
+        With "-js0" or "-js1" JAR NEVER adds copy of a directory. Instead,
+        JAR modifies the directory's chapter lifespan range.
+
+        You can also specify the "-js-" option.  Then JAR will assume ALL
+        files and directories are different in comparison with the last
+        archive chapter. This causes JAR to work slower as ALL files must
+        be compressed again.
+
+        NOTE: JAR uses a special compression method that compresses only
+        the difference between different file versions in subsequent
+        chapters. This produces a major compression improvement for a
+        multiple-chapter archive. Currently JAR does not use this
+        compression method if the file size is more than about 500 Kbytes.
+
+        The "-js" options may be used only with the "ac" command.  During
+        this command JAR reports all unchanged files as "marked". This
+        message may be turned off using a configuration file setting. See
+        the "HideMarkedFiles" keyword.
+
+        See the "ac" command for other details.
+
+
+      jt: Test temporary archive
+
+        The "-jt" switch can be used to set JAR to execute an archive
+        integrity check on an intermediate temporary archive before
+        overwriting any pre-existing original archive. If any error occurs,
+        JAR will not overwrite the original archive.
+
+        With the "-w" option JAR also will verify that the temporary
+        archive is successfully copied.
+
+        Example:  JAR16 m archive *.c -jt
+
+
+      ju0: sort files by name during listing
+
+        This option sorts files with the "l", "ls" and "v" commands. This
+        option is set by default. To prevent JAR from sorting, use the
+        "-ju-" option. This causes JAR to work a bit faster.
+
+        Example: JAR16 ls archive -ju0
+
+
+      ju1: sort files by extension during listing
+
+        This is like "-ju0" but it first sorts files by extension, then by
+        name.
+
+        Example: JAR16 ls archive -ju1
+
+
+      jx: hide archive contents
+
+        Together with any update command this option sets the "HIDDEN"
+        archive flag. When this flag is ON, JAR asks for the archive access
+        password for ALL operations.
+
+        By default (HIDDEN flag is OFF) JAR asks for the archive password
+        only when it is necessary. This means that the password is NOT
+        asked for when using list commands and some "y" and "c" commands.
+        The "-jx" option specifies JAR to ask for the password before any
+        operation with the archive.
+
+        The option is ignored for archives that are not protected/encrypted.
+
+        NOTE: This option only enables an internal JAR check, it does NOT
+              encrypt the JAR archive header. If you need a more secure
+              method for hiding archive header information then you need to
+              compress and encrypt this archive into another archive.
+
+        NOTE: Encryption is not available in export JAR version.
+
+        Example: JAR16 y archive -jx
+                 If "archive.j" is protected then this command "hides" archive
+                 contents
+                 JAR16 y archive -gpassword -jx-
+                 Now archive contents can be listed without specifying
+                 password
+
+
+      jy: suppress queries assuming Yes
+
+        This switch is used to suppress individual JAR user prompts.
+
+        Syntax: JAR16 e archive -jy<flags>
+
+        where <flags> is one or more of the following characters: c, d, k,
+        n, o, t, v. For each flag selected, JAR will act as if you had
+        answered YES to the suppressed question.
+
+        C - skip create directory query
+        D - skip delete files query
+        K - skip disk space availability query
+        N - skip new filename prompt
+        O - skip overwriting existing file query
+        T - skip overwriting directory attributes query
+        V - skip ok to proceed to next volume query
+
+        Example:  JAR16 x volume -v -jyco
+                  Suppress create, and overwrite prompts.
+
+        JAR will allow you to specify individual "jy" options in separate
+        switch strings as in "-jyo -jyc". You may inhibit a switch as in
+        "-jyc-".
+
+
+      jz: supply file for file comment
+
+        The "-jz" switch has been provided to facilitate batch commenting
+        of one or more files within an JAR archive. Only one comment file
+        can be specified. That file will be used to comment each file
+        specified on the command line.
+
+        A comment file containing only a single blank can be used to erase
+        comments from JAR archives. Another method to erase the comment is
+        to specify the predefined filename "NUL".
+
+        Example: JAR16 c archive -jzNUL
+
+
+      ha: ignore readonly Attribute
+
+        The "-ha" switch sets JAR to reset the attributes of a file to be
+        overwritten or a file to be deleted.  This allows the overwrite or
+        delete operation to proceed.
+
+        Examples: JAR16 e archive -ha
+                  JAR16 m archive -ha dir\*.*
+
+
+      hb: select files by attributes
+
+        Option requires parameter in the form:
+
+        [<bits which must be equal 0>'0'][<bits which must be equal 1>'1']
+
+        Bits encoded as:
+        a - archive
+        d - directory
+        h - hidden
+        r - readonly
+        s - system
+
+        To emulate the directory handling of archivers such as ARJ, you
+        should use the "-hbd0" option.  Normally, JAR will scan and add all
+        directories that are encountered as files are searched via the
+        wildcards.  With a command like "JAR a test c:\*.doc -r", JAR by
+        will search the C drive for all .DOC files and also add ALL
+        directories found on the C drive unless the option "-hbd0" is
+        specified.
+
+        Examples: JAR16 a archive c:\* -r -hba1 -b0
+                  Add all files with archive bit set and then reset this bit
+                  JAR16 a archive *.* -r -hbd0
+                  Do not add directories (allows a bit smaller archives)
+                  JAR16 e archive -hbsh0
+                  Extract all files except "system" or "hidden"
+                  JAR16 a archive *.* -hbd0r1
+                  Add readonly files (but NOT directories)
+
+
+      he: skip test of security Envelope
+
+        The "-he" switch sets JAR to skip the verification step when
+        processing a JAR-SECURED archive. If a JAR archive has a damaged
+        JAR-SECURITY envelope, you will have to use the "-he" option to
+        extract the archive.
+
+
+      hf: match long and short Filenames
+
+        This option affects only the Win32 JAR version and is only usable
+        with commands that scan files.
+
+        By default JAR matches wildcards using only long filenames. This
+        option will match both short and long scanned filenames. This dual
+        matching behavior is the default for the DIR command in Windows 95.
+
+        Suppose there is a file "New document.doc" with the short name
+        "NEWDOC~1.DOC". Then:
+
+        JAR32 a archive NEWDOC~1.doc
+        Will report "No such files"
+
+        JAR32 a archive -hf NEWDOC~1.doc
+        Will add file "New document.doc" to archive as its short name is
+        matched by wildcard
+
+        Example: JAR32 a archive *~* -x*2* -hf
+                 Add all files in current directory with a short or long
+                 filename that contains "~" but not "2"
+
+
+      hf1: use only short Filenames
+
+        This option affects only the Win32 JAR version and is only usable
+        with commands that scan files.
+
+        This switch disables long filenames usage. The Win32 JAR version
+        will work like the DOS version during file scanning.
+
+        Example: JAR32 a archive *~* -x*2* -hf1
+                 Add all files in current directory with a short filename that
+                 contains "~" but not "2"
+
+
+      hf2: convert long Filenames into short
+
+        This option sets JAR to do long filename translation during extract
+        and list commands. It is useful when extracting files in DOS that
+        have been previously compressed by the Win32 JAR version.
+
+        After reading the archive header JAR converts all long filenames
+        into a shortened form.  The process is similar to that done by
+        Windows 95 to generate short filenames.
+
+        During this conversion JAR substitutes characters that are not
+        supported in DOS filenames using underscore "_".  Then the filename
+        is trimmed to 8.3 form. If there is another file with the same
+        shortname, "~1","~2",... is appended until the generated shortname
+        is unique.
+
+        JAR guarantee that files from different directories will remain in
+        different directories after name conversion.
+
+        Suppose archive contains 3 files:
+        "long name\Document1.doc"
+        "long name2\Document2.doc"
+        "long name2\Document3.doc"
+
+        After conversion filenames will be:
+        "LONG_NAM\DOCUME~1.DOC"
+        "LONG_N~2\DOCUME~2.DOC"
+        "LONG_N~2\DOCUME~3.DOC" or so.
+
+        The exact generated short name also depends on the operating system
+        in which the file is stored. This is because the Win32 JAR version
+        always stores the SHORT filename (if available) along with the LONG
+        filename as a HINT for future filename translations. This HINT
+        takes precedence over the JAR filename trimming algorithm.
+
+        Before extraction you can review conversion results using the "v"
+        command and the "-hf2" option which will show both the original
+        long filename with the shortened name. The "l" and "ls" commands
+        with "-hf2" will show only the shortened filenames. Afterwards, you
+        can extract the files using:
+
+        JAR16 x archive -hf2
+
+        The "-hf2" option does not work with update commands.
+
+
+      hf3: convert long Filenames into short (second method)
+
+        This switch works exactly like "-hf2" but also converts those
+        filenames that contain "international" characters with hex code
+        greater than or equal to 0x80.  These characters are substituted
+        with the underscore "_".
+
+        This option helps to solve problems when extracting filenames
+        encoded using a different OEM code page.
+
+
+      hg: access protection method
+
+        This option accepts argument - method name. Currently, JAR can
+        protect the information in an archive from unauthorized access by
+        using either of two methods:
+
+        -hg"Authenticate" or
+        -hg"GOST v1.01"
+
+        The first method establishes archive password WITHOUT actual
+        encryption of its contents. The second method uses GOST 28147-89
+        encryption in CBC mode to encrypt archive files (but NOT archive
+        header which contains comments and filename information).
+
+        The "Authenticate" method sets JAR to make a password check before
+        processing the archive. If the password is incorrect then JAR
+        aborts. Thus the "Authenticate" method is very fast but the data in
+        the archive is NOT encrypted.
+
+        The "method" also can be chosen using shorthand notation "-hg0" for
+        "Authenticate" and "-hg1" for "GOST v1.01" encryption.
+
+        NOTE: Encryption is not available in export JAR version.
+
+        Any time you are creating a new archive and using the "-g" option
+        (specify password) you can select the protection method using the
+        "-hg" option. Otherwise, JAR will use the "DefaultAccessProtection"
+        setting in the CFG file (see description for more details). The
+        default CFG file specifies to use "Authenticate" if no "-hg" option
+        is specified.
+
+        You can also specify the method when protecting an unprotected
+        archive with the "y" command:
+
+        JAR16 y archive -jgpassword -hg1
+
+        If you need to change the protection method then you must first
+        remove the archive password:
+
+        JAR16 y archive -gpassword -jg
+
+        and then protect the archive as in the first example.
+
+        Because these two protection methods give significantly different
+        security levels, JAR prints different messages when accessing
+        protected archives. JAR prints that an archive is "PROTECTED" when
+        using the "Authenticate" method and "ENCRYPTED" when using the
+        "GOST" method.
+
+        To access protected archives, you need to specify the password for
+        most operations. The "-jx" option establishes a password check for
+        ALL operations.
+
+        See "-g", "-jg", "-jx" options for more details.
+
+        NOTE: The first JAR 1.01 BETA used the now obsolete
+        "Authentication" method to protect an archive.  Please read
+        WHATSNEW.DOC for details.
+
+
+      hk: add recovery records
+
+        This switch sets the global archive flag that specifies adding of
+        data recovery records to the archive after each update.
+
+        These records allow the repair of a slightly damaged archive. See
+        the "-hx" option on how to use previously stored recovery records.
+
+        This option increases the size of a medium size archive about 2
+        percent with a minimum of a 2 Kbyte increase. Large files (more
+        than 3 Mbytes) will expand about 0.5 percent in size. This
+        additional space is used to store tables which will allow the
+        repair of archive damage.
+
+        With a very high probability JAR is able to recover about 28 Kbytes
+        of damaged archive section(s) on a 1440K volume.
+
+        If your archive is damaged and recovery records are present then
+        JAR will report an error unless the "-hx" option is specified. This
+        option lets JAR recover damaged archive sections "on the fly".
+
+        The global archive "add recovery records" flag may be turned off on
+        any update using the option "-hk-".
+
+        Example: JAR16 y archive -hk
+                 Makes archive with "recovery records"
+
+                 JAR16 y archive -hk-
+                 Makes archive without "recovery records""
+
+
+      hl: warn of non-matching wildcards
+
+        With "-hl" switch JAR reports non-matching wildcards/filespecs
+        during an "add" type command ("a", "f", "m", "u", "ac"). A
+        wildcard/filespec is considered "non-matching" if it does NOT match
+        any files (NOT including directories).
+
+        JAR will subsequently return a non-zero DOS errorlevel when a
+        non-matching wildcard or filespec has been specified.
+
+        Example: JAR16 a a:backup !listfile -va -hl -hbd0
+
+
+      hm: On or after date YYMMDDHHMMSS
+
+        The switch "-hm" by itself will select files modified today. If
+        "-hm" is followed by a date and optionally a time, JAR will select
+        files modified on or after that date-time.
+
+        Example: JAR16 a test -hm9601021700
+                 means select files modified on or after Jan 2, 1996, 5:00 PM.
+
+        Years less than "80" will be considered as 21st century years.
+
+        There is no option for using other date-time formats.
+
+        The switch "-hmb" selects files modified before today. If "-hmb" is
+        followed by a date and optionally a time, JAR will select files
+        modified before that date-time.
+
+        JAR accepts the use of "-hm" and "-hmb" options simultaneously to
+        specify a range of selected dates. This is useful for selecting
+        files on a specific date.
+
+        Example: JAR16 a archive *.* -hm910101 -hmb910102
+
+        The "-hm" option and/or the "-hmb" option will default to today's
+        date at midnight (0000 hrs) when specified without dates.
+
+        The "-hmd" switch sets JAR to select files no older than the
+        specified number of days.  The days are calculated from midnight.
+
+        Examples: JAR16 a archive -hmd0    select files modified today
+                  JAR16 a archive -hmd1    select files modified yesterday
+                                           and today
+
+        "-hmd" and "-hmb" can be combined too.
+
+
+      ho: Output directory translation
+
+        For add type operations the "-ho" option allows one to specify the
+        file destination directory within an archive depending on the file
+        path on disk.
+
+        This option accepts an argument in the form:
+
+        -ho<archive path>:<disk path>
+
+        During add type operations, all files with the specified <disk
+        path> will be preceded with the corresponding <archive path> when
+        storing within an archive.
+
+        JAR allows one to specify a set of translations. In such a case,
+        the longest match is chosen.  The option "-ho-" disables all
+        translations.
+
+        Examples: JAR16 a archive c:\* d:\* -hodrive\c:c:\ -hodrive\d:d:\
+                  files from disk "c:" will be stored into "drive\c" and
+                  files from disk "d:" will be stored into "drive\d"
+
+                  JAR16 a archive src\* src\lib\* -holib:src\lib -hofiles:src
+                  stores files from "src\lib" into "lib\" and other
+                  files from "src\" into "files\"
+
+        NOTE: The destination directory for a file also depends on the "-o"
+        and "-jf" options. JAR compares the <disk path> letter by letter,
+        so you must specify path in the same form.
+
+        During extraction JAR does a backward translation (replaces
+        specified archive directory with destination directory).
+
+        Example: JAR16 x archive -hodrive\c:c:\ -hodrive\d:d:\
+                 files from "drive\c" will be extracted to "c:\" and from
+                 "drive\d" into "d:\". All other files extracted into current
+                 directory.
+
+        JAR does not support the storing of two files with the same path
+        within an archive.  Also, JAR does not support storing drive
+        letters within an archive.  The "-ho" option provides a workaround
+        for backing up and restoring data from/to different drives or
+        network servers using a single archive.
+
+        Example:
+        JAR16 a archive \\server\user\* c:\* -hod:\\server\user -hoc:c:
+
+        The "-ho" option without arguments selects the built-in default
+        translation.  The default option translates all drives "a:\",
+        "b:\"... into archive directories "_a_\", "_b_\"....
+
+
+      ht: Test new/updated files
+
+        This switch tests all newly compressed data. The "-ht0" option
+        tests data using the file's CRC32 value. The "-ht1" option tests
+        data by COMPARING the actual file contents.
+
+        Example: JAR16 a archive c:\* -r -ht1
+                 Verifies all added files using comparison
+
+        With the "-w" option JAR will verify that the temporary archive is
+        successfully copied.
+
+        When used with volume archive this option may cause JAR to re-read
+        previous volumes.
+
+        You can use "-jt" option to test the whole updated archive. See
+        this option for details.
+
+
+      hx: use recovery records
+
+        Sets JAR to use previously stored records to recover slight archive
+        damage. It may be used with any command.
+
+        It is recommended that this option be used with an existing archive
+        containing "recovery records" on update operations. JAR does not
+        detect archive damage unless the "-hx" option is specified or the
+        JAR decompression engine fails on damaged data.
+
+        Updating a damaged archive with "recovery records" without the
+        "-hx" option may result in JAR computing new recovery records using
+        corrupted data.
+
+        Examples: JAR16 e archive -hx
+                  Extract data from archive using recovery records
+
+                  JAR16 y archive -hx
+                  Repair damaged archive using recovery records
+
+
+      hy: add security envelope
+
+        JAR adds a security envelope to a JAR archive. This option is only
+        available in the registered JAR version.
+
+        The JAR-SECURITY ENVELOPE feature provides a facility similar to
+        other archivers. This feature disallows any type of modification,
+        even commenting, to a JAR-SECURE sealed archive by JAR. Moreover,
+        there are additional internal checks to determine if the JAR-SECURE
+        sealed archive has been modified in any way. This feature is
+        intended for use by software developers who distribute their
+        software in archived format or for businesses that distribute data
+        files. However, there can be no guarantee that this mechanism
+        cannot be defeated.
+
+        When processing a JAR-SECURED archive, JAR will display a message
+        indicating that JAR is verifying the security envelope. If the
+        envelope is damaged, a message will be displayed indicating so. If
+        the envelope is intact, then the JAR-SECURITY signature of the user
+        "sealing" the archive will be displayed.
+
+
+      hz: comment chapters
+
+        This switch is used to comment a chapter during an update
+        operation. It also may be used to specify a comment file.
+
+        Examples: JAR16 ac archive c:\* -hz
+                  Add new chapter and prompt for the comment for it
+
+                  JAR16 c archive -hzcomment.txt -jb1-10
+                  Comment chapters from 1 to 10 using file comment.txt
+
+                  JAR16 c archive -hznul -jb"-"
+                  Clears all chapter comments
+
+
+    CONFIGURATION FILE:
+
+
+      JAR uses a configuration file to store global user settings. By
+      default the configuration file is named "JAR.CFG" and must be placed
+      into the same directory as the JAR16.EXE and JAR32.EXE directory.
+
+      The environment variable JAR_CFG_FILE is used to specify an alternate
+      JAR configuration file location.
+
+      Example: SET JAR_CFG_FILE=c:\user\jar.cfg
+
+      The JAR configuration file format is very similar to Windows *.INI
+      files. It contains strings of three types:
+
+      1. Comments.  This string must start with ";" character
+
+      2. Keys with set values in the form:
+         <Key name>=<value>
+         Key name is case insensitive.
+
+      3. Section separators in the form:
+         '['<Section name>']'
+         Section name is case insensitive.
+
+      Example:
+      [OS/2 settings]
+      ColoredOutput=No
+      ; black and white output
+      SwapFileDirectory=h:\tmp
+
+      The given example contains one line with the section name, two lines
+      with keys, and one line with a comment.
+
+      On startup JAR reads predefined key values from the configuration
+      file and uses these values as global settings.
+
+      Sections are used to keep setting variants in a single file. You can
+      set the JAR_CFG_SECTION environment variable to a section name which
+      will take precedence over default values.
+
+      Example:
+
+      SwapFileDirectory=c:\tmp
+      [OS/2 settings]
+      SwapFileDirectory=d:\tmp
+      [Windows NT settings]
+      SwapFileDirectory=e:\tmp
+
+      If JAR_CFG_SECTION has the value "OS/2 settings" then the JAR swap
+      file will be located on drive D. If JAR_CFG_SECTION has the value
+      "Windows NT settings" then the JAR swap file will be located on drive
+      E. Otherwise, it will be located on drive C.
+
+      If JAR does not find a key in the configuration file then it uses
+      built-in default values.
+
+
+    CONFIGURATION FILE KEYWORDS:
+
+
+      The right side of "=" describes default key value (used if it is not
+      set within configuration file).
+
+
+      ColoredOutput=No
+
+        Possible values: Yes/No. Specifies the kind of JAR screen output.
+        Note that in colored mode JAR always uses black color as
+        background.
+
+
+      SwapFileDirectory=
+
+        JAR chooses the swap file valid directory in the following order:
+        - from CFG file but not equal to ""
+        - from TMP environment variable (DOS JAR version) or temporary
+          directory (Win32 JAR version)
+        - current directory
+
+        JAR swap file usage depends on the total files in archive and on
+        command type. JAR may need up to a 2 Mbytes swap file when updating
+        an existing medium-size archive (with about 1,000 files).
+
+        Example: SwapFileDirectory=c:\tmp
+
+
+      FullPath=Yes
+
+        Possible values: Yes/No. Specifies the "-jf" switch default for
+        JAR. Users who want ARJ-like file path storing should set this key
+        to "Yes". Users who want UC2-like file path storing should set this
+        key to "No".
+
+
+      DefaultAccessProtection=Authenticate
+
+        Possible values: "Authenticate" or "GOST v1.01". Specifies default
+        archive protection method. See "-hg" option for details.
+
+
+      XmsLimit=1024
+      EmsLimit=0
+
+        These settings LIMIT MAXIMUM XMS and EMS usage (in kilobytes) by
+        the program. These settings are used only by the DOS JAR version.
+        You can set corresponding values to 0 so JAR will not use XMS/EMS
+        at all.
+
+        It is strongly recommended to let JAR use at least 1024 kilobytes
+        of XMS for better performance. Recommended - 3072. JAR does not
+        necessarily use all the specified memory; instead, it chooses an
+        optimal value based upon need. The maximum practical value is 5120.
+
+        JAR uses EMS for better compression. JAR conventional memory
+        consumption also decreases by about 60 kilobytes when EMS is
+        available. Optimal value - 4096. Maximum amount used by JAR -
+        16384. When more EMS is available, a better compression rate can be
+        achieved.
+
+        IMPORTANT NOTE: See the CheckAvailableMemory keyword for memory
+        usage details.
+
+
+      CheckAvailableMemory=Yes
+
+        Possible values: Yes/No. If this key value is set to "Yes" then JAR
+        empirically tests available memory before the compression engine
+        starts and sets internal memory consumption limits that should not
+        result in a decrease in overall system performance.
+
+        Multitasking operating systems like OS/2 or Windows 95 report
+        available virtual memory instead of real "physical" memory. A large
+        allocation of virtual memory amount may drastically slow down the
+        OS or even hang it due to a lack of resources.
+
+        JAR uses memory access timings to allocate only "safe" memory
+        amounts.
+
+        If you are an experienced user you may toggle this feature off.
+        Then JAR will not test for available memory, but will use as much
+        as it decides but no more than the set current limits (see
+        XmsLimit, EmsLimit, 32MemoryLimit). JAR also starts faster when the
+        "No" value is set.
+
+        This setting is ignored by list and extraction JAR commands.
+
+
+      32MemoryLimit=0
+
+        Limits memory usage by the COMPRESSION ENGINE. This setting is used
+        only by the Win32 JAR version. Recommended value 4096. Maximum
+        which may be used - 10240 kilobytes.
+
+        IMPORTANT NOTE: See the CheckAvailableMemory keyword for memory
+        usage details.
+
+
+      DOS InteractiveCriticalErrorHandler=Yes
+
+        Possible values: Yes/No. The interactive handler asks "Abort,
+        Retry?" on such hardware errors like "Drive not ready". For batch
+        processing you can disable these prompts.
+
+        This setting is used only by the DOS JAR version.
+
+
+      ErrorsToStdout=No
+
+
+        If "Yes" then reports errors to stdout instead of stderr. So you
+        redirect error messages to a file using ">" or ">>" as well as all
+        other JAR output.
+
+
+      EmulateANSIComments=Yes
+
+        Possible values: Yes/No. This option is used to disable the JAR
+        ANSI comments emulation.
+
+
+      OptionsForCommand A=
+      OptionsForCommand AC=
+      ...
+
+        This group of keys is used to specify SEPARATE default options for
+        ANY JAR command. The specified options are parsed before the
+        command line is parsed.  So you always can overwrite this setting.
+
+        Examples: OptionsForCommand L=-ju1
+                  Now "l" command by default will sort files by extension
+
+                  OptionsForCommand V=-ju- -r-
+                  By default "v" command will not sort and recurse files
+
+
+      HideMarkedFiles=Yes
+
+        Possible values: Yes/No. This setting hides the "Marking file"
+        message for "ac" command.
+
+
+      DefaultColor=7
+      ErrorColor=12
+      SignalColor=15
+      CommentColor=3
+      HighlightColor=2
+
+        Possible values 0-15. It is used to customize colored JAR output.
+        The following table must be used for color translation:
+
+        BLACK   (0)    GREY          (8)
+        BLUE    (1)    LIGHT BLUE    (9)
+        GREEN   (2)    LIGHT GREEN   (10)
+        CYAN    (3)    LIGHT CYAN    (11)
+        RED     (4)    LIGHT RED     (12)
+        MAGENTA (5)    LIGHT MAGENTA (13)
+        BROWN   (6)    YELLOW        (14)
+        WHITE   (7)    LIGHT WHITE   (15)
+
+
+      HighIntensityColors=No
+
+        Possible values: Yes/No. It uses only "light" colors for JAR
+        output. This may be useful for windowed DOS sessions.
+
+
+    IMPORTANT DIFFERENCES BETWEEN JAR AND ARJ:
+
+
+      Most JAR commands and switches follow ARJ naming. This DOES NOT mean
+      that all JAR options and commands work exactly as in ARJ. Please read
+      the documentation for details.
+
+      These are a list of useful options that work slightly differently
+      from ARJ:
+
+      -b0 -b1 -r -jb -jf -hf -hg
+
+      These are a list of options that have different meanings:
+
+      -o -jg -jl -ju -js -jx -hm -ho -ht -hx -hz
+
+      JAR DOES NOT support the ARJ base/target directory option. JAR
+      provides the "-o" option instead.
+
+      JAR always adds files with "system" and "hidden" attributes. ARJ by
+      default does not.
+
+      By default during an add command, JAR adds all directories scanned
+      while searching for files that match the specified wildcards.  An
+      archive may be created with directory names only even if no files
+      were found.  For example, "JAR16 a archive c:\abcdefgh.* -r" would
+      create an archive containing every directory name on drive C and
+      probably no files.  Use the "-hbd0" option to not include the
+      directories.
+
+      By default for commands that scan an archive, JAR wildcarding uses
+      directory recursion.  This means that the specified directory and all
+      sub-directories will be scanned by the command.  To get ARJ-like
+      scanning behavior, you need to specify the "-r-" option to turn off
+      recursion.
+
+      Example: JAR16 x archive dir\docs\*.* -r-
+
+      There are significant differences in volume archives design. ARJ
+      volumes are like separate archives. JAR volumes are parts of a single
+      archive.
+
+      Unlike ARJ, JAR cannot join archives. Instead, JAR has the option of
+      using the "y" command to join volumes into a single "solid" archive.
+      It is also possible to change the archive volume size.
+
+      The JAR archive name specified in the command line is used to name
+      the LAST VOLUME. The other volumes are ALWAYS named with an extension
+      starting with .j01, .j02,  and so on. Conversely, ARJ uses the
+      command line archive name for the first volume and the next volume
+      name is generated incrementally.
+
+
+    JAR LIMITATIONS:
+
+
+      JAR uses a "central directory" scheme to store information about the
+      compressed files in an archive. Since such a directory may be very
+      large, JAR uses built-in virtual memory (VM) which allows JAR to work
+      in a limited amount of physical memory (then swap file is used). VM
+      is also used to store other intermediate data: list of files to add,
+      temporary compression buffers, etc.
+
+      During archive UPDATE operations VM size is limited to 25 Mbytes. If
+      JAR exceeds this then the update operation fails. As a result, the
+      maximum number of files that can be stored within an archive is about
+      80,000 files (depends on files path length). An archive compressed
+      with the "-m4" method can be updated if it contains less than about
+      40,000 files.
+
+      DOS JAR version memory usage:
+
+                   EMS available   No EMS, XMS only   No EMS and XMS
+                   -------------   ----------------   --------------
+
+      Update         431K(*)            484K              517K
+      commands
+
+      Extract         368K              434K              467K
+      commands
+
+      List            351K              351K              384K
+      commands
+
+      (*) - 484K for "-m1" method
+
+      "K" means kilobyte (1024 bytes)
+
+      Processing an ENCRYPTED archive requires an additional 8 Kbytes of
+      memory.
+
+      JAR32 is a console Win32 application and uses OEM encoding to process
+      and to store filenames. As a result JAR32 cannot process filenames
+      with characters which have no equivalent mapping into the current OEM
+      codepage. For example, special symbols like the copyright symbol
+      (circle c) usually have no equivalent.
+
+
+    JAR ARCHIVE ACCESS MODES:
+
+
+      Below is a description of the archive file opening modes used by JAR.
+      This information may be important when sharing archives on networks.
+
+      JAR does the following steps:
+
+      1. Opens archive file (last volume), reads archive header and then
+         closes archive file. Sometimes archive header does not fit in the
+         last volume and is distributed within the last few volumes.
+
+      2. Using the archive header information, JAR decides which archive
+         volume is required for future processing.
+
+      3. Opens necessary volume, reads data, opens another volume and so
+         on...
+
+      So even in case of a single volume, JAR opens an archive twice.
+      First to read the header and second to read the actual compressed
+      data.
+
+      On update type operations both DOS and Win32 JAR open an archive
+      using "DENY READ and WRITE" mode (exclusive mode).
+
+      On non-update type operations DOS JAR opens an archive using
+      "COMPATIBILITY" mode and Win32 JAR - using "DENY WRITE" mode.
+
+      As a result you can simultaneously list or extract from archives on
+      network.
+
+
+    HOW JAR SHARES FILES TO COMPRESS:
+
+
+      Win32 JAR version uses "DENY WRITE" mode and DOS JAR version uses
+      "COMPATIBILITY" mode while reading files to compress.
+
+
+    2000 YEAR PROBLEM AND JAR:
+
+
+      There is no 2000 year problem with JAR.
+
+      In all internal data structures and archive headers, JAR stores the
+      year using a 16-bit binary value. As a result, the valid year range
+      is 1 to 65535.
+
+      There is a minor limitation with the "-hm" option (select files using
+      date/time filter). Due to the option argument SYNTAX (and ONLY due to
+      this reason), this option accepts year dates in the range 1980 to
+      2079.
+
+
+    JAR ARCHIVE FLAGS:
+
+
+      JAR shows the archive flags and archive comment any time the archive
+      is accessed. Here is a list of possible flags with a short
+      explanation:
+
+      ENCRYPTED
+
+        Archive is protected using encryption.
+
+      PROTECTED
+
+        Archive is protected using "Authenticate" method.
+
+      PROTECTED(obsolete method)
+
+        Archive is protected using "Authentication" method. This obsolete
+        method was used by the first JAR 1.01 BETA.  Please read
+        WHATSNEW.DOC for details.
+
+      HIDDEN
+
+        Archive created using "-jx" option (requires password for any
+        command).
+
+      SECURED
+
+        JAR_SECURED archive created using "-hy" option.
+
+      RECOVERY RECORDS
+
+        Archive contains recovery records ("-hk" option).
+
+      LOCKED
+
+        Archive is locked using "-jl" option. Archive cannot be updated.
+
+      AUTO-LOCK
+
+        Archive is auto-lockable ("-jl2" option).
+
+
+    JAR ERROR LEVELS:
+
+
+      0 ->  success
+      1 ->  warning
+      2 ->  fatal error
+      3 ->  CRC error
+      5 ->  disk full or write error
+      6 ->  cannot open archive
+      7 ->  simple user error (bad parameters)
+      8 ->  not enough memory
+      9 ->  not a JAR archive
+      10 -> internal error
+      11 -> Ctrl+C pressed
+
+
+    FREQUENTLY ASKED QUESTIONS:
+
+
+      Q.  I compressed the same data twice. Why did JAR create archives
+          with different sizes?
+
+      A.  JAR uses a compressed archive header.  The header stores (along
+          with other data) the archive creation and modification time and
+          the file's last access time.  These values differ even when
+          archiving the same set of files.  Compressing these slightly
+          different headers results in different compressed header sizes
+          and therefore different JAR archive sizes.
+
+
+      Q.  JAR uses an archive header to store information about compressed
+          files. What happens to an archive if its header is damaged?
+
+      A.  For reliability the most important information about archived
+          files is duplicated and included with the compressed file data.
+          As a result even if a JAR archive header is damaged, you can
+          recover the archive and extract data using the "rh" command.
+
+          JAR uses signatures to search compressed data chains during a
+          repair.  So undamaged data may be recovered even in the case of
+          missing file directory and attribute information.
+
+          Keep in mind that the -m1,-m2 and -m3 compression methods
+          concatenate files into shorter blocks than -m4.  Thus data may
+          be recovered with a higher probability.  Recovery records
+          ("-hk") is another option which makes archive more resistant to
+          damage.
+
+
+      Q.  JAR by default stores all scanned directories into archive. Can
+          I have by default ARJ-like behavior (not store directories)?
+
+      A.  Yes, this is possible.  The default JAR.CFG file contains a
+          section which when uncommented sets JAR to use "-hbd0" option
+          ("skip directories") for add type commands.  An "-hb" option
+          specified on the command line overwrites this default.
+
+
+      Q.  Can I extract files with long filenames in DOS?
+
+      A.  DOS itself does not support long filenames and thus JAR can't
+          restore long filenames while running in this OS.
+
+          By default JAR will not use any conversions during extraction
+          and pass long filenames to DOS system calls directly. This
+          results in long filename truncation. As a result restored files
+          may contain spaces that are non-standard for DOS.
+
+          We recommend the use of the "-hf2" or "-hf3" options instead.
+          These set JAR to convert long file and directory names into
+          correct DOS short names using a similar algorithm to that used
+          by Windows 95 for aliases.  See JAR.DOC for details.
+
+
+    FINAL COMMENTS:
+
+
+      We do hope that you find this program as useful as we have. We would
+      appreciate any suggestions to improve this archiver.
+
+      You can reach us at:
+
+      Internet address:  robjung@world.std.com
+
+      CompuServe userid: 72077,445
+
+      JAR users are encouraged to use the above addresses to submit
+      questions, problems, and new features requests.
+
+
+      ***** UPDATED MAILING ADDRESS *****
+
+      ARJ Software, Inc.
+      P.O. Box 249
+      Norwood MA 02062
+      USA
+
+      Fax number: 781-769-4893
+
+      ***********************************
+
+
+    end of document

@@ -120,6 +120,7 @@ const WEAK_VALUES =
 	/^Jovian Logic VI bitmap$/,
 	/^Jupiter Ace snapshot$/,
 	/^Koala Paint/,
+	/^LTAC compressed audio/,
 	/^LTP Nuclear ZX tape image$/,
 	/^Luxor ABC80 tokenized BASIC source$/,
 	/^Maple Common Binary file \(generic\)$/,

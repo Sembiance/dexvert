@@ -1,0 +1,507 @@
+
+    USER'S MANUAL FOR THE REARJ ARCHIVE CONVERSION PROGRAM  September 1996
+
+
+       REARJ software and manual copyright (c) 1991-96 by ARJ Software.
+       All rights reserved.
+
+       REARJ version 2.25 release
+
+    *********************************************************************
+
+    REARJ originally was been designed to provide conversion to the ARJ
+    format.  However, it may be used to convert into the JAR format, too.
+    In this package, the REARJ.CFG file is modified to convert into the
+    JAR format by default using the DOS archiver version.
+
+    REARJ does not support long filenames.
+
+    *********************************************************************
+
+
+    INTRODUCTION:
+
+    REARJ is an archive conversion program designed to facilitate the
+    conversion between LZH, ZIP, PAK, ARC, DWC, HYP, LZS, ZOO, ARJ, JAR
+    archives.
+
+
+    MAJOR FEATURES:
+
+    Supports all major archiver programs (PAK, LHARC, PKZIP, ZOO, ARJ,
+    PKPAK, DWC, HYPER, LARC, LHA, JAR).
+
+    Supports file attributes within archives.
+
+    Supports directories within archives.
+
+    Supports converting archives within archives (ZIPs in a ZIP).
+
+    Ensures reliable archive conversion with a file count and total size
+    check.
+
+    Supports the use of virus checkers and BBS ad removers.
+
+    Supports recursive scanning through subdirectories.
+
+    Optional logging of conversions.
+
+
+    ********************
+    * WORDS OF CAUTION:*
+    ********************
+
+    If you plan to convert many archives at one time, it is STRONGLY
+    suggested that you make a backup of your hard disk.  This is a wise
+    precaution to take any time that you make major modifications to data
+    on your hard disk drive.
+
+    The standard REARJ conversion DOES NOT convert any archive comments
+    and volume labels.  They will be lost.
+
+    Some of the other archivers have significant bugs which can cause data
+    loss that REARJ cannot detect.  It is not the purpose of this document
+    to point out other program's shortcomings.  I suggest logging the
+    conversion output to a printer to facilitate checking for errors.
+
+    If the archives you are converting will ONLY extract to absolute
+    paths, you must use the /w option to set the working directory to an
+    empty root directory such as a RAMDRIVE.  This will allow extraction
+    to the root.
+
+    REARJ and the archiver executables must be located in the DOS PATH
+    directories.  This is due to REARJ creating and using a temporary
+    directory.
+
+    If you have changed the MS-DOS switch character from "/" to another
+    character via an undocumented MS-DOS interrupt or the TurboC
+    setswitchar() function, REARJ may not work properly with the default
+    REARJ.CFG configuration file.
+
+    The most thorough testing was done with ARJ as the target format and
+    ZIP as the original format.  In any case, you should verify that the
+    extract commands of your favorite archive formats in the configuration
+    file are correct.  The extract commands are the most important to get
+    right because REARJ has a built-in verification procedure to ensure
+    that the ADD commands executed properly.
+
+    You should NOT set the "-t1" option for ARJ in ARJ_SW or in the
+    REARJ.CFG configuration file.  This may cause file size mismatches.
+
+    Be sure you have enough disk space on your working directory to
+    extract the largest archive that you want to convert!!!
+
+
+    The versions of archivers tested:
+
+    ARJ   1.00, 1.10, 2.00, 2.10, 2.20, 2.21, 2.30, 2.41a, current release
+    LHA   2.12, 2.13
+    PAK   2.51
+    PKZIP 1.10
+    PKPAK 3.61
+    ZOO   2.01, 2.10
+    DWC   A5.01
+    LARC  3.33
+    HYPER 2.5
+    JAR   1.02
+
+
+    INSTALLATION:
+
+    Copy REARJ.EXE and REARJ.CFG to one of the DOS PATH directories.  They
+    do not have to be placed in the same directory.  The PATH directories
+    are usually set by the PATH command in your AUTOEXEC.BAT file.  At
+    this version of REARJ, changing its name to something else will cause
+    operation difficulties.
+
+    Be sure the archiver programs (ARJ, PAK, PKZIP, PKUNZIP, etc.) and
+    virus scanner are installed in a DOS PATH directory!  It is STRONGLY
+    recommended that the REARJ.CFG be modified to use FULL PATHNAMES to
+    specify all archiver executables.
+
+    This version assumes that you have the new SCAN version 80 and use
+    the new option /sub to scan subdirectories.  This version's
+    configuration file also assumes that SCAN.EXE is installed in
+    the directory C:\BIN.
+
+
+    OPERATION OF REARJ:
+
+    REARJ will build a temporary directory in the current directory and
+    extract the archive(s) to this directory.  REARJ will then build the
+    target archive(s) with the files in this directory.  If the target
+    archiver does not support reading of hidden or system files, REARJ
+    will reset those bits and then re-archive the files without those
+    attributes.  If the original archive has directories in it, REARJ will
+    extract it with full paths and re-archive it with full paths if the
+    target archiver supports directories.  In this case, if the archiver
+    does not support directories, REARJ will skip converting this archive.
+
+    If the "/a" option has been selected, REARJ will execute REARJ to
+    convert any internal archives of the same type to the target format.
+    Any "/s" option will be carried over to the recursive REARJ command.
+
+    As an extra test, REARJ will count the files extracted from the
+    original archive and total their sizes.  Then REARJ will extract the
+    new archive and count the files and total the sizes.  If the count and
+    size do not match, REARJ will skip converting the archive.
+
+    REARJ assumes that the supported archivers will pass a non-zero error
+    code when there is an operation failure.
+
+
+    COMMAND SYNTAX:
+
+    REARJ [switch options] filespec(s) or wildspec(s)
+
+    You can specify one or more filespecs on the command line.  These
+    filespecs can have paths and wildcards.  Up to 100 filespecs can be
+    accepted by REARJ.  If you specify *.* as a wildspec, REARJ will look
+    at all filenames, but will skip those filenames not ending in standard
+    archive suffixes.  If you specify the /r switch, REARJ will look for
+    filenames matching the filespec(s) in the current directory and all
+    subdirectories of the current directory.
+
+    The switch options and filespecs can be entered in any order.  REARJ
+    uses the default MS-DOS switch character "/".  REARJ uses the Turbo
+    C++ function getswitchar() to determine the MS-DOS switch character.
+    If the switch character is "-", REARJ will translate any UNIX style
+    pathnames to MS-DOS syntax ("dir/file" to "dir\file").
+
+
+    SWITCH OPTIONS:
+
+    /a - convert archives within archives
+
+         This option causes REARJ to recursively execute REARJ to convert
+         any archives of the original type found within the original
+         archive (ex. ZIPs within a ZIP).  This option requires additional
+         memory to execute successfully.
+
+         You may specify the type of internal archive to convert with the
+         "/a" option.
+
+         Examples:  REARJ *.zip /aLZH  convert only internal LZH archives.
+                    REARJ *.zip /a*    convert any internal archive.
+
+         If you use the "/a*" option, you may need to also specify "/u"
+         because of nested archives of the target type.
+
+    /b - execute command before extracting files
+
+         This option is used to specify a DOS command to be executed before
+         extracting the original archive.
+
+         In addition, REARJ passes the name of the original archive to
+         this command as a command line argument when executing it.  This
+         may cause a problem with DOS commands that expect no arguments.
+         A workaround would be to install the DOS command in a batch file.
+
+
+         This feature is to allow the user to prep the environment before
+         extracting the archive.  This can be used to prep for archive
+         comments or volume labels, etc.
+
+    /c - execute command on extracted files before counting them
+
+         This option is used to specify a DOS command to be executed upon
+         the extracted files before REARJ counts them for later
+         verification.  This is to allow executing a DOS or batch command
+         to clean up the extracted files (remove BBS advertisements, etc).
+         REARJ does not check for any returned error code from the
+         executed command.
+
+         In addition, REARJ passes the name of the original archive to
+         this command as a command line argument when executing it.  This
+         may cause a problem with DOS commands that expect no arguments.
+         A workaround would be to install the DOS command in a batch file.
+
+    /d - delete the original archive
+
+         This option causes REARJ to delete the original archive after a
+         successful conversion to the target format.  This option will NOT
+         delete read-only archives.
+
+    /e - do not return error if no archives were found
+
+         This option is used by the internal recursive REARJ.  This option
+         will cause REARJ to return a zero exit code if no matching
+         archives were found.  Usually, REARJ returns a non-zero exit
+         code for this condition.
+
+    /f - convert diskette archives
+
+         This option is used to facilitate the conversion of archives on a
+         diskette.  If you do not have sufficient space on the diskette to
+         keep the original archives, you MUST specify the "/d" option as
+         in "REARJ A:*.zip /f /d".
+
+         This option causes REARJ to build the target archive in the
+         CURRENT directory (not the working temporary directory).  After
+         verification, REARJ will, if specified, delete the original
+         archive and then copy the new archive to the diskette.  You
+         should make sure that the current directory does not contain any
+         archives before executing REARJ.
+
+    /i - check program integrity
+
+         This option causes REARJ to validate the REARJ program on disk.
+         If you are using a pre-3.0 MS-DOS revision, you will have to
+         specify the full program name as in "REARJ /i\util\rearj.exe".
+
+    /l - write conversion data to log file
+
+         This option causes REARJ to open a log file and record each
+         successful conversion in the log file.  The default log filename
+         is REARJ.LOG.  You can specify the log filename as in
+         "REARJ /lfilename *.ZIP".  If the log file already exists, REARJ
+         will append logging data to it.
+
+    /o - overwrite existing target archive
+
+         This switch is used to delete already existing target archives.
+         This is not used for updating archives.  Use the /u option for
+         updating an archive.
+
+    /q - query for each archive to convert
+
+         This switch causes REARJ to pause and prompt the user for
+         permission to convert individual archives.  Note that REARJ will
+         not prompt when skipping archives.
+
+    /r - recurse through subdirectories
+
+         This switch causes REARJ to look for archives in all included
+         subdirectories as well as in the current directory.  This switch
+         allows the user to convert all archives on a hard disk with one
+         command.
+
+    /s - skip verify of file count and total size
+
+         Skip the overhead of the file count and total size verification
+         process.  This verification costs an extra extraction, but this
+         check is worth the time, especially when converting a large
+         number of archives.
+
+    /t - specify the target archive type
+
+         The default target archive format is normally JAR.  This can be
+         changed by building an external REARJ.CFG file.  The first
+         archive type is always the default format.  To override the
+         default format, the user can specify the /t switch as in
+         "REARJ *.ZIP /tlzh".  The previous example has specified that LZH
+         is the target format.
+
+    /u - allow update of archive with backup
+
+         This switch is used to re-archive an archive, possibly to take
+         advantage of improved compression.  The original archive is
+         backed up by renaming it with the backup suffix which by default
+         is "BAK".  You may specify another backup suffix with the /u
+         option as in "REARJ *.ARJ /uar$" where the backup suffix is
+         "ar$".  Since this option creates a brand new archive, archive
+         comments will be lost.  Do NOT specify a "." in the suffix.
+
+    /v - execute configured command on extracted files
+
+         This switch is used to execute a configure command on the files
+         extracted from the original archive.  The intent is to allow
+         virus scanning of the archive contents.  The command must be
+         specified in the REARJ.CFG file.
+
+         The command may be placed in the REARJ.CFG file by inserting one
+         line ahead of the archive commands.  The line must start with the
+         word "VIRUS" followed by a blank and the external command.
+
+         Example:  VIRUS scan /nomem *.*
+
+         If the invoked command returns a non-zero error code, REARJ will
+         skip the conversion of that archive and log the error as code 13.
+
+         REARJ *.* /v
+
+    /w - set working directory
+
+         By default, REARJ creates a temporary working directory in the
+         current directory.  This option allows you to specify the working
+         directory.  The working directory must be EMPTY when invoking
+         REARJ.  This directory is used to hold the extracted files.
+         This is NOT considered the current directory for /f use.
+
+         Example:  REARJ *.* /wd:\
+
+         This option helps solve the absolute pathname extraction problem
+         that some archivers have.  If you set the working directory to an
+         empty root directory, the archiver can extract to the root and
+         REARJ will be able to find all of the files to re-archive them.
+         However, this option will NOT work for internal archives that
+         extract to absolute paths.
+
+    /x - exclude filenames or wildnames from the conversion process
+
+         You can exclude one or more files from the conversion process.
+         The filenames can contain wildcards.
+
+         REARJ *.ZIP /xONE.ZIP /xTWO.ZIP
+
+    /z - simulate conversion process
+
+         This switch causes REARJ to simulate the conversion process.  No
+         archives will be extracted, built, or deleted.
+
+
+    EXAMPLES:
+
+    REARJ *.ZIP             this converts all ZIP files in the current
+                            directory to JAR files.
+
+    REARJ *.ZIP *.ARC       this converts ZIP and ARC files to JAR
+                            files.
+
+    REARJ SOFT.ZIP          this converts only SOFT.ZIP to SOFT.J.
+
+    REARJ A:*.ZIP /f /d     convert ZIPs on A drive with deletion of
+                            each original archive upon successful
+                            conversion.
+
+    REARJ *.ARC /r          this converts all ARC files in the current
+                            directory and in subdirectories of the
+                            current directory to JAR files.
+
+    REARJ SOFT.ARJ /tZIP    this converts SOFT.ARJ to SOFT.ZIP.
+
+    REARJ *.J /u            re-archive all JAR archives.
+
+    REARJ *.* /v /wd:\      re-archive all archives and execute
+                            configured command on extracted files
+                            using d:\ as the temp directory.
+
+
+    EXTERNAL CONFIGURATION FILE
+
+    REARJ comes with a configuration file, REARJ.CFG, which supports
+    conversion between the ARJ, ARC, LZH, PAK, ZIP, DWC, LZS, HYP, ZOO,
+    JAR formats.  The commands PKPAK and PKUNPAK are used for ARC files.
+    The command LHA is used for LZH files.  You can change these defaults
+    by editing the configuration file.
+
+    The format of the configuration file is fairly simple.
+
+    The first line can optionally specify an external command to be
+    executed by REARJ when the "/v" option is selected.  This line must
+    start with the word "VIRUS" minus the quotes, followed by a space,
+    followed by the external command.  The external command MUST contain
+    a fully specified pathname for security reasons.
+
+    Example:  VIRUS C:\BIN\SCAN /nomem *.*
+
+    If you do not want to configure this item, DO NOT insert a blank line.
+
+    Each archive format requires four lines in the file.
+
+    The first line is the format suffix.
+
+    The second line is the archive ADD command with a %s in the place of
+    the archive name.  Any other percent signs in the command must be
+    preceded by "\" as in "\%".  The ADD command should support directory
+    inclusion and reading of hidden and/or system files.  REARJ will parse
+    this command line using the space character as the token separator.
+
+    If your ADD command requires DOS piping as the ZOO archiver requires,
+    you must precede the ADD command with the text "COMMAND /C ".
+
+    Example:  ARJ a -a -r -jt %s
+              COMMAND /C STUFF *.* | ZOO aI %s
+
+    The third line is the archive EXTRACT command with a %s in the
+    place of the archive name.  Any other percent signs in the command
+    must be preceded by "\" as in "\%".  The EXTRACT command should
+    support directory recreation if the archive contains directories.
+    The extraction of directories must be to child directories within the
+    current directory.  REARJ will parse this command line using the space
+    character as the token separator.
+
+    If your EXTRACT command requires DOS piping, you must precede the
+    EXTRACT command with the text "COMMAND /C ".  Beware that command exit
+    codes are not passed back to REARJ when using COMMAND /C.
+
+    The fourth line contains the letters "A" and/or "D" or no letters.
+    The "A" stands for the ability to process files with the hidden and/or
+    system attribute.  The "D" stands for full support of directory trees
+    within archives.  No letters (blank line) stands for no support for
+    hidden or system files or for archive containing directories.
+
+    There must be NO EXTRA blank lines or comments in the file.  You may
+    use leading blanks for clarity.
+
+    See the supplied REARJ.CFG for the current configuration.
+
+    If you use a different archiver program, you will need to either
+    rename the program to one of the supported ones or you will need to
+    modify the installed REARJ.CFG file.
+
+    If your original archive format supports extraction to absolute
+    directory paths as opposed to relative directory paths and you have
+    such archives containing absolute paths, you should not put directory
+    extraction in the REARJ.CFG file unless you use the /w option to set
+    the working directory to an empty root directory.
+
+    You can add comment handling to the ARJ command by adding the
+    "-zcomment.txt" option.  This is supported at ARJ 2.20 and above.
+
+
+    LOG FILE DATA
+
+    When logging is enabled, REARJ will log the action on each selected
+    file.  For successful conversions, REARJ logs the date-time, target
+    archive type, original archive size, new archive size, bytes saved,
+    and original archive name.
+
+    When selected files are skipped for any reason, REARJ will log an
+    entry in the log file (when logging is enabled) which specifies the
+    reason code for skipping the file.  The following are the codes:
+
+    1  = File not found
+    2  = File is not a configured archive type
+    3  = Target archive already exists
+    4  = Not enough disk space
+    5  = User skipped or user did not select update option
+    6  = UNPACK error
+    7  = PACK error
+    8  = Target cannot support directories
+    9  = Wrong file count
+    10 = Wrong total size
+    11 = Internal archive REARJ error
+    12 = Rename archive error
+    13 = Invoked /v command error (found a virus?)
+
+
+    LICENSE POLICY:
+
+    For personal (not at the office) use, the shareware version of REARJ
+    may be freely used only by JAR or ARJ users.  An user is one who uses
+    ARJ or JAR on a regular basis.  Others who wish to use REARJ must
+    purchase a registration or site license for the ARJ or JAR package.
+
+    Please refer to the LICENSE.DOC for more license information.
+
+
+    TECHNICAL SUPPORT:
+
+    Please report any bugs.  I will TRY to fix them.  See JAR.DOC for
+    details on how to contact me.
+
+
+    HISTORY:
+
+    2.30 - Created registered version of REARJ.
+
+    2.25 - Added pathname requirement for VIRUS configuration option.
+
+    2.24 - Fixed /f /d /u processing when updating an archive.
+
+    2.23 - Fixed /z processing with /f option.
+           Added -jg+ to ARJ in REARJ.CFG
+
+
+    end document

@@ -48,7 +48,12 @@ for await(const line of readLines(inputFile))
 						ext = ".jpg";
 						offset += 4;
 						break;
-					
+
+					case "TGIFImage":
+						ext = ".gif";
+						offset += 4;
+						break;
+
 					case "TIcon":
 						ext = ".ico";
 						break;

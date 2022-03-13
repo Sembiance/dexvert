@@ -1,0 +1,74 @@
+
+     WHATSNEW.DOC                                              August 1997
+
+
+     This lists the user visible changes to JAR
+
+
+     JAR 1.02 release
+
+     Added FAQ section to JAR.DOC.
+     Added error message #211.
+     Clarified error messages when working with volumes.
+     Corrected output in JAR "black and white" mode.
+     Fixed memory allocation problem.
+
+
+     JAR 1.01 BETA_3 TEST release
+
+     Allow archive sharing during non-update operations.
+     Clarified the error message sometimes encountered when accessing
+        a locked archive.
+     Added a few paragraphs to JAR.DOC with more details about chapter
+        archives.
+     Added "ErrorsToStdout" setting.
+     Changed "-js" option default from "-js0" to "-js1"
+     Modified the access/creation time handling by JAR32.EXE when the file
+        system does not support them. The unsupported date/time is replaced
+        with the modification date/time.
+     Improved "rh" command and "-jr" option work with truncated archive.
+     Fixed rare incorrect Ctrl+C handling.
+
+
+     JAR 1.01 BETA_2 TEST release
+
+     Renamed DOS JAR executable to JAR16.EXE.  User can rename either JAR
+        executable to JAR.EXE according to preference.
+     Modified JAR password authentication method.  Please read note (*)
+        below.
+     Changed testjar.bat to exclude system and hidden files such as
+        "sage.dat" in Windows 95.
+     Clarified the error messages encountered when using the "-v" option
+        with unsupported commands such as "e","x","l".
+     Added more detailed JAR archive signature identification information
+        to TECHNOTE.DOC.
+     Fixed compatibility problem with QEMM.  (Sometimes JAR refused to use
+        XMS memory under QEMM).
+     Fixed page fault when executing "test" command with archive argument
+        missing.
+
+     (*) NOTE: New "Authenticate" method details
+
+       JAR contains an exportable (from USA) archive protection method.
+       This method only checks for a valid archive password without using
+       actual data encryption.
+
+       In BETA_2, this method has been changed to permit ARJ Software to
+       distribute JAR decompressor sources without allowing access to
+       protected archive file data.  A modified algorithm independent of
+       the password is used to access protected data.  The decompressor
+       source will not contain this modified algorithm code.
+
+       This new method is called "Authenticate".  The old "Authentication"
+       method is supported during updates and extraction but NOT for
+       the creation of new archives.
+
+       The "-hg0" option is the shortcut for "-hgAuthenticate".
+
+       We strongly encourage you to convert archives protected using the
+       obsolete "Authentication" method to the new method. The file
+       "convprot.bat" is an example batch file which may be used for
+       conversion.  We apologize for any inconvenience caused by this
+       change.
+
+     end of WHATSNEW.DOC

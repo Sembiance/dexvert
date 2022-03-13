@@ -31,3 +31,5 @@ export class exe extends Format
 
 // Borland Delphi EXE/DLL extractor in sandbox/app/IDR/
 // It's not really needed though, as the delphi forms are usually Resources that get extracted by sevenZip and then handled by my borlandDelphiForm program
+
+// Alternative EXE meta info identifier: https://github.com/horsicq/Detect-It-Easy

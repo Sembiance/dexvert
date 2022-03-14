@@ -117,10 +117,10 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-alb"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.trim().split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>f|d)i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {}).groups);
+		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {}).groups);
 		for(const entry of entries)
 		{
-			if(entry.type!=="f")
+			if(entry.type==="d")
 				continue;
 			
 			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, hfsFilenameToUTF8(entry.filename));
@@ -143,7 +143,7 @@ async function extractHFSISO()
 		// now handle our directories
 		for(const [i, entry] of Object.entries(entries))
 		{
-			if(entry.type==="f")
+			if(entry.type!=="d")
 				continue;
 			
 			const lineNum = +i;

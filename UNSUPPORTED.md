@@ -1,4 +1,4 @@
-# Unsupported File Formats (470)
+# Unsupported File Formats (472)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -249,7 +249,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (236)
+## Other (238)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -443,6 +443,7 @@ other | SimCity 2000 Save Game Data | .sc .sc2 |
 other | SimCity City | .cty | 
 other | Slicks 'n' Slide Track | .ss | 
 other | SmartDraw Template | .sdt .sdr | 
+other | Snoop Capture | .snoop | 
 other | SNX Snapshot | .snx | 
 other | SoftDisk Library | .shl | 
 other | StarCraft Map | .scm .scx | 
@@ -456,6 +457,7 @@ other | Superbase Form | .sbv |
 other | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
 other | symlink |  | This format is a hardcoded match at the beginning of identify.js
 other | TADS | .t .gam | 
+other | TCPDUMP Style Capture | .dmp .pcap | 
 other | Telix Compiled Script | .slc | 
 other | TermInfo |  | 
 other | TeX Font Metric Data | .tfm | 

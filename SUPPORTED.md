@@ -1,4 +1,4 @@
-# Supported File Formats (1,060)
+# Supported File Formats (1,061)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -35,7 +35,7 @@ archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_e
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) [sevenZip](http://p7zip.sourceforge.net/) [ancient](https://github.com/temisu/ancient_format_decompressor) [UniExtract](https://www.legroom.net/software/uniextract) | [8 sample files](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [cabextract](https://www.cabextract.org.uk/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
 archive | [CAZIP File](http://fileformats.archiveteam.org/wiki/CAZIP) | .caz _ | [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [5 sample files](https://telparia.com/fileFormatSamples/archive/cazip/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) | [25 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) | [26 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.
 archive | [CISO Compressed ISO](https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/cso/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
 archive | [Commodore Tape Image](http://fileformats.archiveteam.org/wiki/T64) | .t64 | [DirMaster](https://style64.org/dirmaster) | [7 sample files](https://telparia.com/fileFormatSamples/archive/commodoreTapeImage/)
@@ -81,7 +81,7 @@ archive | [Mailbox](http://fileformats.archiveteam.org/wiki/Mbox) | .mbox | [unm
 archive | [Microfox PUT Archive](http://fileformats.archiveteam.org/wiki/PUT) | .put .ins | [microfoxGET](https://archive.org/details/msdos_festival_PUT345) | [10 sample files](https://telparia.com/fileFormatSamples/archive/microfoxPUT/)
 archive | Microsoft Access Database | .mdb | [unmdb](https://github.com/mdbtools/mdbtools) | [10 sample files](https://telparia.com/fileFormatSamples/archive/accessDatabase/)
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
-archive | Microsoft Windows Installer | .msi .msp | [sevenZip](http://p7zip.sourceforge.net/) [cabextract](https://www.cabextract.org.uk/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/microsoftWindowsInstaller/)
+archive | Microsoft Windows Installer | .msi .msp | [sevenZip](http://p7zip.sourceforge.net/) [cabextract](https://www.cabextract.org.uk/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/microsoftWindowsInstaller/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) [msexpand_win2k](https://www.computerhope.com/expandhl.htm) [deark](https://entropymine.com/deark/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [dd](https://www.gnu.org/software/coreutils/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/nrg/)
@@ -263,7 +263,7 @@ Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
 executable | Microsoft Windows Dynmic Link Library | .dll | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
-executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [23 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
+executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [24 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
 executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/executable/windowsSCR/)
 
 
@@ -299,7 +299,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (471)
+## Image (472)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [8 sample files](https://telparia.com/fileFormatSamples/image/threeDCK/)
@@ -553,7 +553,8 @@ image | [Lottie](https://github.com/Samsung/rlottie) | .json | [lottie2gif](http
 image | [Lotus 1-2-3 Chart](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3_Chart) | .pic | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://telparia.com/fileFormatSamples/image/lotusChart/)
 image | [Ludek Maker](http://fileformats.archiveteam.org/wiki/Ludek_Maker) | .ldm | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/ldm/)
 image | Mac PageMill's GIF Bitmap | .gif | [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [10 sample files](https://telparia.com/fileFormatSamples/image/macPageMillGIF/)
-image | MacBinary Image |  | [deark](https://entropymine.com/deark/) | [2 sample files](https://telparia.com/fileFormatSamples/image/macBinaryImage/) - Some images from old Mac systems have resource forks and are encoded in MacBinary.
+image | MacBinary Image |  | [deark](https://entropymine.com/deark/) | [3 sample files](https://telparia.com/fileFormatSamples/image/macBinaryImage/) - Some images from old Mac systems have resource forks and are encoded in MacBinary.
+image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [1 sample file](https://telparia.com/fileFormatSamples/image/macDraw/)
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2) [soffice](https://www.libreoffice.org) | [20 sample files](https://telparia.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://telparia.com/fileFormatSamples/image/icns/)
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) | [14 sample files](https://telparia.com/fileFormatSamples/image/macPaint/)

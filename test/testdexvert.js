@@ -402,7 +402,7 @@ async function testSample(sampleFilePath)
 			if(tsDate.getFullYear()<2020 && prevDate.getFullYear()>=2020)
 				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 
-			if(prevDate.getFullYear()<2020 && tsDate.getTime()!==prevDate.getTime())
+			if(prevDate.getFullYear()<2020 && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY)
 				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
 		}
 	}

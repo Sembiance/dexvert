@@ -14,6 +14,6 @@ export class rsrc extends Format
 		if(dexState.ids.some(id => id.magic==="Apple HFS/HFS+ resource fork") || dexState.original.input.ext.toLowerCase()===".rs")
 			a.push("resource_dasm");
 
-		return [...a, "deark[opt:applesd:extractrsrc=1] -> resource_dasm", "deark"];
+		return [...a, "deark[opt:applesd:extractrsrc=1] -> resource_dasm", "deark"];	// , "unar"
 	};
 }

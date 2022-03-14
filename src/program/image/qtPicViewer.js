@@ -39,6 +39,8 @@ export class qtPicViewer extends Program
 
 					SaveClipboardWithMSPaint("WINDOWS", "c:\\out\\out.png")
 				EndIf
-			EndIf`});
+			EndIf
+			
+			KillAll("viewer.exe")`});
 	renameOut = true;
 }

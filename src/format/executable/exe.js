@@ -20,7 +20,8 @@ export class exe extends Format
 	};
 
 	// We throw MSDOS/Win EXESs at deark and 7z which can often extract various embedded cursors, icons and images
-	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+	// We first try to extract as a ZIP file before resorting to processing as an executable
+	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:zip]", "sevenZip[type:PE][rsrcOnly]", "deark"] : []);
 
 	post = dexState =>
 	{

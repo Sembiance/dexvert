@@ -4,7 +4,7 @@ export class nullBytesAlternating extends Format
 {
 	name       = "Null Bytes Alternating";
 	magic      = [/^Null Bytes Alternating$/];
-	idCheck    = inputFile => inputFile.size>=16;	// Files 8 bytes or smaller are not worth matching
+	idCheck    = inputFile => inputFile.size>=16;	// Files less than 16 bytes are not worth matching
 	priority   = this.PRIORITY.LOW;
 	converters = ["stripGarbage[null]"];
 }

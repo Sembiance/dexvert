@@ -6,6 +6,8 @@
 
 * Try the hijaak cdroms on archive (And the one that I bought on eBay) to see if they support some formats I should add/enhance dexvert support for
 
+* Once deark fixes the palm bug (https://github.com/jsummers/deark/issues/44) re-process: http://dev.retromission.com/browse/724/Power_Hacker_2003.iso/E-zine/Magazines/InET/inet-palm.zip
+
 /---------------\
 | High Priority |
 \---------------/

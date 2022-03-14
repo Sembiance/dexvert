@@ -9,22 +9,6 @@ export class dexvert extends Program
 	};
 	unsafe = true;
 
-	/*exec   = async r =>
-	{
-		const {dexvert : dexvertInline} = await import("../../dexvert.js");
-		const dexvertOptions = { xlog : r.xlog };
-		if(r.flags.asFormat)
-			dexvertOptions.asFormat = r.flags.asFormat;
-		
-		const forbidProgram = new Set(RUNTIME.forbidProgram);
-		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)
-			forbidProgram.add(parentRunState.programid);
-		r.flags.forbidProgram = Array.from(forbidProgram);
-
-		const inlineDexState = await dexvertInline(r.f.input, r.f.outDir, dexvertOptions);
-		... TODO
-	};*/
-
 	bin  = "/mnt/compendium/.deno/bin/dexvert";
 	args = r =>
 	{

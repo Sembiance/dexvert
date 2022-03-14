@@ -1,4 +1,4 @@
-# Unsupported File Formats (467)
+# Unsupported File Formats (470)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -111,7 +111,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (24)
+## Font (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -129,6 +129,7 @@ font | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) |
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
 font | MacOS Font | .fnt | 
+font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://telparia.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 font | PrintPartner Font | .font | 
 font | Signum Font | .e24 | 
 font | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://telparia.com/fileFormatSamples/font/speedo/)
@@ -248,7 +249,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (234)
+## Other (236)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -345,6 +346,7 @@ other | Game Boy ROM | .gb .gbc |
 other | GammaCAD Document | .sym .gc1 | 
 other | Gee! Printer Driver | .pdr | 
 other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
+other | Gettext Machine Object | .gmo | 
 other | Half-Life 2 Save Game | .sav | 
 other | Harvard Graphics Chart | .ch3 | 
 other | High Speed Pascal Unit | .unit | 
@@ -356,6 +358,7 @@ other | Human Machine Interfaces Sound Driver | .386 |
 other | HyperPAD Pad | .pad | 
 other | ICC Color Map | .iff | 
 other | ICC Color Profile | .icc | 
+other | IDA Signatures | .sig | 
 other | IFF Binary Patch | .pch .patch | 
 other | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://telparia.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.

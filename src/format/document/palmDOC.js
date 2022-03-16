@@ -7,5 +7,5 @@ export class palmDOC extends Format
 	ext            = [".pdb", ".prc"];
 	forbidExtMatch = true;
 	magic          = ["PalmDOC text document", "AportisDoc/PalmDOC"];
-	converters     = ["soffice"];
+	converters     = ["ebook_convert", "soffice"];
 }

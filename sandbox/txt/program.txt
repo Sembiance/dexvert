@@ -1,13 +1,13 @@
 # Documentation for files in src/program/<type>/*.js
 
 >>> ******** General
->>> loc : "local"
+>>> loc = "local"
 Where to run this program at. One of: local, dos, amigappc, gentoo, win2k, winxp
 
->>> website : "https://entropymine.com/deark/"
+>>> website = "https://entropymine.com/deark/"
 A website URL For the program
 
->>> flags : { inFormat : "Force programid to use this format", ... }
+>>> flags = { inFormat : "Force programid to use this format", ... }
 An object of key/value pairs of various flag properties you can set when running the program to modify the behavior of this program
 There are a few 'global' flags that can be specified for any program:
 	filenameEncoding		Which encoding the filenames are likely to be in for proper conversion by convmv
@@ -16,19 +16,19 @@ There are a few 'global' flags that can be specified for any program:
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename
 	renameOut				A way to override the renameOut of a program
 
->>> notes : "Blah blah"
+>>> notes = "Blah blah"
 Additional notes about this program
 
->>> package : "app-arch/program"   ||   package : ["app-arch/program", "app-text/program"]
+>>> package = "app-arch/program"   ||   package : ["app-arch/program", "app-text/program"]
 Which Gentoo package contains this program.
 Can be an array of packages. If so, meta.website and meta.bin must be an array too.
 
 
 >>> ******** Properties
->>> unsafe : true
+>>> unsafe = true
 Set to true if this program isn't safe to use with all input files and may produce 'garbage' output
 
->>> checkForDups : true
+>>> checkForDups = true
 Set to true if this program can produce an output file identical to the original input, which we should delete to avoid infinite recursions
 
 >>> ******** Execute Properties

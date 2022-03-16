@@ -285,6 +285,7 @@ export default
 		rtPatchFile                  : {name : "RTPatch File", ext : [".rtp"], magic : ["RTPatch update/diff data"]},
 		sceneryAnimatorLandscape     : {name : "Scenery Animator Landscape", ext : [".scape"], magic : ["Scenery Animator landscape/keyframes"]},
 		sculpt3DTake                 : {name : "Sculpt 3D Take", ext : [".take"], magic : ["Sculpt 3D Take"]},
+		showPartnerMasteredShow      : {name : "Show Partner Mastered Show", ext : [".pro"], magic : ["Show Partner mastered show"]},
 		smartDrawTemplate            : {name : "SmartDraw Template", ext : [".sdt", ".sdr"], magic : ["SmartDraw template"]},
 		snoopCapture				 : {name : "Snoop Capture", ext : [".snoop"], magic : ["Snoop capture file"]},
 		snxSnapshot                  : {name : "SNX Snapshot", ext : [".snx"], magic : ["SNX Snapshot"]},

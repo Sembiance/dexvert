@@ -9191,3 +9191,28 @@ Unix/ASCII Type 1 (.pfa)
 OpenType PS (.otf)
 Fontographer font files (.fog)
 FontLab Studio font files (.vfb)
+
+
+>>> Calibre (ebook_convert)
+· AZW4 Input Options
+· CHM Input Options
+· Comic Input Options
+· DJVU Input Options
+· DOCX Input Options
+· EPUB Input Options
+· FB2 Input Options
+· HTLZ Input Options
+· HTML Input Options
+· LIT Input Options
+· LRF Input Options
+· MOBI Input Options
+· ODT Input Options
+· PDB Input Options
+· PDF Input Options
+· PML Input Options
+· RB Input Options
+· RTF Input Options
+· Recipe Input Options
+· SNB Input Options
+· TCR Input Options
+· TXT Input Options

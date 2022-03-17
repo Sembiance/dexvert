@@ -25,8 +25,13 @@
 | Medium Priority |
 \-----------------/
 * Add OS/2 support by using ArcaOS (was blue lion) in QEMU: https://www.youtube.com/watch?v=Utse8P_L8k0
-  Then add format support for: archive/os2FTCOMP and archive/os2InstallPackage and archive/iconHeaven and others (see unsupported notes)
-  Then process the OS/2 CDs I have
+  Then add format support for:
+	archive/os2FTCOMP
+	archive/os2InstallPackage
+	archive/iconHeaven
+	image/pmDraw
+	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
+	and others (see unsupported notes). Then re-process any CD's that have those formats on them (#570, etc)
 
 * The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
   I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.

@@ -64,7 +64,7 @@ export class Format
 	// returns a pretty string to output to console
 	pretty(prefix="")
 	{
-		return `${prefix}${fg.yellow(this.familyid)}${fg.cyanDim("/")}${fg.yellowDim(this.formatid)} ${fg.greenDim(this.name)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} ${xu.paren(fg.greenDim(this.website))}`;
+		return `${prefix}${fg.yellow(this.familyid)}${fg.cyanDim("/")}${fg.yellowDim(this.formatid)} ${fg.greenDim(this.name)}${this.unsupported ? fg.deepSkyblue(" unsupported") : ""} ${xu.paren(fg.greenDim(this.website || "no website"))}`;
 	}
 
 	serialize()

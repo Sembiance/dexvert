@@ -8,7 +8,7 @@ export class rar extends Format
 	magic        = ["RAR archive data", "RAR compressed archive", "RAR Archive"];
 	auxFiles     = (input, otherFiles) =>
 	{
-		// if we are a whatever.r## file and there is another whatever.rar file, don't do anything further, as the extraction of whatever.rar will get the files
+		// if we are a whatever.r## file and there IS a whatever.rar file, don't do anything further, as the extraction of whatever.rar will get the files
 		if((/\.r\d+$/i).test(input.ext) && otherFiles.some(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.rar`))
 			return [];
 		

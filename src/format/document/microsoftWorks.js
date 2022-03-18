@@ -7,6 +7,6 @@ export class microsoftWorks extends Format
 	ext            = [".wps", ".wp", ".doc"];
 	forbidExtMatch = true;
 	magic          = ["Microsoft Works", "Composite Document File"];
-	weakMagic      = ["Composite Document File", "Microsoft Works"];
+	weakMagic      = true;
 	converters     = ["fileMerlin[type:MSWKW*]", "soffice"];
 }

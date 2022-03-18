@@ -3,6 +3,11 @@ import {TEXT_MAGIC} from "../Detection.js";
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
 export default
 {
+	audio :
+	{
+		deluxeSoundSample : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]}
+	},
+
 	executable :
 	{
 		aDotOutExecutable : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/]},
@@ -27,6 +32,7 @@ export default
 	font :
 	{
 		amigaOSOutlineFont    : {name : "AmigaOS Outline Font", ext : [".font"], magic : ["AmigaOS outline font"]},
+		amiWriteFont          : {name : "AmiWrite Font", magic : ["Ami Write printer font"]},
 		averyFont             : {name : "Avery Font", ext : [".ff1"], magic : ["Avery Font"]},
 		bannerManiaFont       : {name : "Banner Mania Font", ext : [".fnt"], magic : ["Bannermania font"]},
 		borlandGraphicsFont   : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
@@ -135,6 +141,7 @@ export default
 		microsoftDebug               : {name : "Microsoft Separate Debug Format", ext : [".dbg"], magic : ["Microsoft separate Debug format"]},
 		microsoftVisualCFiles        : {name : "Microsoft Visual C Files", ext : [".bsc", ".sbr", ".wsp"], magic : ["MSVC .bsc", "MSVC .sbr", "MSVC .wsp"]},
 		netwareLoadableModule        : {name : "Netware Loadable Module", ext : [".nlm"], magic : [/^Net[Ww]are Loadable Module/]},
+		oberonSymbol                 : {name : "Oberon Symbol", ext : [".sym"], magic : ["Oberon V3 Symbol data"]},
 		olbLib                       : {name : "OLB Library", magic : ["OLB Library"]},
 		powerBasicHelp               : {name : "PowerBASIC Help", ext : [".pbh"], magic : ["PowerBASIC Help"]},
 		powerBuilderDynamicLibrary   : {name : "PowerBuilder Dynamic Library", ext : [".pbd"], magic : ["PowerBuilder Dynamic library"]},

@@ -170,6 +170,7 @@ const DISK_FAMILY_FORMAT_MAP =
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format
 const UNPROCESSED_ALLOW_NO_IDS =
 [
+	"archive/rar",
 	"image/bbcDisplayRAM",
 	"image/teletext",
 	"music/richardJoseph"

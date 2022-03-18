@@ -10,6 +10,7 @@ export const TENSORSERV_PORT = 17736;
 const TENSOR_DIM = [224, 224];
 const RUN_OPTIONS = {timeout : xu.MINUTE*2};
 
+const CROP_METHODS = ["centerCrop", "scaleDown"];
 async function cropImage({inPath, outPath, method="centerCrop"}={})
 {
 	if(!["centerCrop", "scaleDown", "smartCrop"].includes(method))
@@ -23,9 +24,18 @@ async function cropImage({inPath, outPath, method="centerCrop"}={})
 		await runUtil.run("convert", [inPath, "-background", "transparent", "-gravity", "center", "-crop", `${TENSOR_DIM.join("x")}+0+0`, "-extent", TENSOR_DIM.join("x"), "+repage", outPath], RUN_OPTIONS);
 }
 
+export async function preProcessPNG(imagePath, outDir)
+{
+	await Deno.mkdir(path.join(TENSORSERV_PATH, "tmp"), {recursive : true});
+	const pngTrimmedPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
+	await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
+	await runUtil.run("autocrop", [pngTrimmedPath], RUN_OPTIONS);
+	for(const CROP_METHOD of CROP_METHODS)
+		await cropImage({inPath : pngTrimmedPath, outPath : path.join(outDir, `${CROP_METHOD}_${path.basename(imagePath)}.png`), method : CROP_METHOD});
+}
+
 export async function classifyImage(imagePath, modelName)
 {
-	const CROP_METHODS = ["centerCrop", "scaleDown"];
 	const tmpImagePaths = await Promise.all(CROP_METHODS.map(v => fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), `_${v}.png`)));
 
 	// convert to PNG

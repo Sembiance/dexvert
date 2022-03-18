@@ -1,4 +1,4 @@
-# Unsupported File Formats (478)
+# Unsupported File Formats (481)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -34,7 +34,7 @@ archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileForm
 
 
 
-## Audio (22)
+## Audio (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -43,6 +43,7 @@ audio | AM Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/au
 audio | Art of Noise Instrument | .fm | [5 sample files](https://telparia.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/)
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
+audio | Deluxe Sound Sample | .instr | 
 audio | HomeBrew Sound | .hse | [1 sample file](https://telparia.com/fileFormatSamples/audio/homeBrewSound/)
 audio | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://telparia.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 audio | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://telparia.com/fileFormatSamples/audio/maxonMagicSoundSample/)
@@ -111,11 +112,12 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (27)
+## Font (28)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
 font | AmigaOS Outline Font | .font | 
+font | AmiWrite Font |  | 
 font | Avery Font | .ff1 | 
 font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
 font | Borland Graphics Font | .chr .bgi | 
@@ -252,7 +254,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (240)
+## Other (241)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -410,6 +412,7 @@ other | Netware Message | .msg |
 other | Nintendo ROM | .nes | 
 other | Norton Change Directory Info | .ncd | 
 other | Novell System PrintDef Device Definition | .pdf | 
+other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | PatchMeister Driver | .pmdriver | 

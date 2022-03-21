@@ -128,6 +128,7 @@ export default
 		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file", "Delphi 3 Compiled Unit"]},
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},
+		clipperPreLinkedLibrary      : {name : "Clipper Pre-Linked Library", ext : [".pll"], magic : ["Clipper Pre-Linked Library"]},
 		creativeSignalMicrocode      : {name : "Creative Signal Processor Microcode", ext : [".csp"], magic : ["Creative Signal Processor microcode"]},
 		cornelHuthComprssedLibrary   : {name : "Cornel Huth Compressed Library", ext : [".li_"], magic : ["Cornel Huth compressed library"]},
 		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},

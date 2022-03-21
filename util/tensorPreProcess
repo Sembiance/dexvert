@@ -1,2 +1,0 @@
-#!/bin/sh
-DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768 --no-check --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-run --allow-env --allow-read --allow-write /mnt/compendium/DevLab/dexvert/util/tensorPreProcess.js "$@"

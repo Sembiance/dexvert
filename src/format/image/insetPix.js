@@ -6,5 +6,5 @@ export class insetPix extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Inset_PIX";
 	ext        = [".pix"];
 	magic      = ["Inset PIX bitmap"];
-	converters = ["deark"];
+	converters = ["deark", "hiJaakExpress"];
 }

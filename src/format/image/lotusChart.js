@@ -8,5 +8,5 @@ export class lotusChart extends Format
 	forbidExtMatch = true;
 	mimeType       = "image/x-lotus-1-2-3-chart";
 	magic          = ["Lotus Picture"];
-	converters     = [`abydosconvert[format:${this.mimeType}]`];
+	converters     = [`abydosconvert[format:${this.mimeType}]`, "hiJaakExpress"];
 }

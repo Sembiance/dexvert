@@ -9,5 +9,5 @@ export class pict extends Format
 	mimeType       = "image/pict";
 	magic          = ["QuickDraw/PICT bitmap", "Macintosh PICT Image", "Claris clip art"];
 	metaProvider   = ["image"];
-	converters     = ["deark", "recoil2png", "nconvert", "convert", "qtPicViewer", "soffice[outType:png]"];
+	converters     = ["deark", "recoil2png", "nconvert", "convert", "qtPicViewer", "soffice[outType:png]", "hiJaakExpress"];
 }

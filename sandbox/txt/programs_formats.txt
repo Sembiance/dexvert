@@ -9216,3 +9216,100 @@ FontLab Studio font files (.vfb)
 · SNB Input Options
 · TCR Input Options
 · TXT Input Options
+
+
+
+>>> HiJaak Express
+Raster File Formats
+ATT AT&T Group 4
+BMP Windows\OS2 Bitmap
+CAL CALS Raster
+CPR Knowledge Access (Source only)
+CUT Dr. Halo
+DIB Windows Bitmap
+DBX Databeam (Source only)
+ED5 EDMICS 5 (Source only)
+ED6 EDMICS 6 (Source only)
+FAX Fax Type
+GED Wicat
+GIF CompuServe
+ICA IMB IOCA
+ICO Windows Icon
+IFF Amiga ILBM
+IMG GEM Paint
+JPG JPEG
+KFX Kofax Group 4
+LBM Amiga ILBM
+MAC MacPaint
+MSP Microsoft Paint
+NIF Navy Image File Format (Source only)
+PBM Portable Bitmap
+PCD Kodak Photo CD (Source only)
+PCX PC Paintbrush
+PGM Portable Bitmap
+PNG Portable Network Graphics (Source)
+PNM Portable Bitmap
+PPM Portable Bitmap
+PSD Adobe PhotoShop
+RGB Silicon Graphics RGB
+RLC Image Systems
+RLE Windows Bitmap (Destination only)
+SBP IBM Storyboard PIC (Source only)
+SGI Silicon Graphics RGB
+TGA TrueVision
+TIF Tagged Image File
+XBM X-Windows Bitmap
+XWD X-Windows Dump
+
+Metafile Formats
+AI Adobe Illustator
+CDR CorelDRAW 3 to 7
+CLP Window Clipboard (Source only)
+CMX Corel Metafile Exchange
+DRW Micrografx Draw
+EMF Enhanced Window Metafile
+EPS Encapsulated PostScript
+IGF Inset Graphics
+PCL HP LaserJet II
+PCT Macintosh PICT1
+PCT Macintosh PICT2
+PDW HiJaak Draw
+PIX Inset PIX
+SSK SmartSketch
+WMF Windows Metafile
+WPG WordPerfect Graphic
+
+Vector File Formats (HiJaak Express converts vector files to raster format, but does not convert raster files to vector format)
+CGM CGM Metafile
+GCA IBM GOCA
+GEM GEM Metafile
+P10 Tektronix Plot 10 (Source only)
+PIC Lotus PIC
+TXT ASCII Text
+Fax File Formats
+ADT Adtech perfectfax
+BRK Brooktrout Fax-Mail 96
+CAN Canon Navigator Fax
+CFP Complete PC FAX/Portable
+CG3 Generic fax format
+CPF Complete PC FAX
+DCX Intel DCX
+DXN Fujitsu DexNET
+EF3 Everex Everfax 24/96
+EFX Everex Everfax 24/96
+EZF Calculus EZ-Fax
+F96 Fremont Fax96
+FCX Faxable PCX
+FTF Faxable TIF
+GAM Gammalink Gamma Fax
+JET JetFax
+JTF Hayes JTFax
+MIF Xerox MicroFax
+OAZ OAZ Fax
+PRD PRODUCT R&D Fax File
+SCI SciFax
+SMF American Data Tech SMARTFAX
+TRI TriGem SoftFax
+TBF Imavox TurboFax
+TEF Relisys
+WPF U.S. Robotics WorldPort 2496

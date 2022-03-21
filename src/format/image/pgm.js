@@ -8,5 +8,5 @@ export class pgm extends Format
 	mimeType     = "image/x-portable-graymap";
 	magic        = ["Portable GrayMap bitmap", "Portable Grey Map", /^Netpbm image data .*greymap$/];
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "hiJaakExpress"];
 }

@@ -11,5 +11,5 @@ export class xwd extends Format
 	metaProvider = ["image"];
 
 	// Neither nconvert nor convert properly handle all the files, but nconvert does a little bit better with color images
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "convert"];
+	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress"];
 }

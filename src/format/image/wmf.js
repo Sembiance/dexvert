@@ -8,6 +8,6 @@ export class wmf extends Format
 	mimeType      = "image/wmf";
 	magic         = [/^Windows [Mm]etafile/];
 	notes         = "Some WMF files like 001.WMF just have an embedded PNG. So the initial programs that convert to SVG will fail, and fall back to convert which will produce a PNG.";
-	converters    = ["wmf2svg", "uniconvertor", "soffice[outType:svg]", "convert"];
+	converters    = ["wmf2svg", "uniconvertor", "soffice[outType:svg]", "convert", "hiJaakExpress"];
 	metaProvider = ["image"];
 }

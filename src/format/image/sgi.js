@@ -8,5 +8,5 @@ export class sgi extends Format
 	mimeType     = "image/x-sgi";
 	magic        = ["Silicon Graphics bitmap", "Silicon Graphics RGB bitmap", "SGI image data"];
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
+	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress"];
 }

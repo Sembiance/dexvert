@@ -7,5 +7,5 @@ export class xbm extends Format
 	ext          = [".xbm", ".bm"];
 	mimeType     = "image/x-xbitmap";
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "hiJaakExpress"];
 }

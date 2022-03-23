@@ -63,6 +63,10 @@ export class qemu extends Server
 
 			this.xlog.debug`${prelog(instance)} rsyncing files ${body.inFilePaths} to ${inDirPath}`;
 
+			// First make an attempt to clear the in and out dir of any previous stuck files
+			await fileUtil.emptyDir(inDirPath);
+			await fileUtil.emptyDir(outDirPath);
+
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(inDirPath, "/")]));
 
@@ -76,7 +80,7 @@ export class qemu extends Server
 
 			this.xlog.debug`${prelog(instance)} Writing go script to tmp file ${tmpGoFilePath}`;
 
-			// We write to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
+			// We write the go script to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
 			await Deno.writeTextFile(tmpGoFilePath, body.script);
 			await fileUtil.move(tmpGoFilePath, goFilePath, this);
 

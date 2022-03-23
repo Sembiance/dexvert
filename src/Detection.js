@@ -38,6 +38,7 @@ const WEAK_VALUES =
 	/^0421 Alliant compact executable/,
 	/^370 sysV/,
 	/^370 XA sysV/,
+	/^0420 Alliant virtual executable/,
 	/^5View capture file/,
 	/^AIX core file/,
 	/^ALAN game data/,
@@ -60,7 +61,7 @@ const WEAK_VALUES =
 	/^dBase I[IV]I? DBT/,
 	/^DIY-Thermocam raw data/,
 	/^Dyalog APL/,
-	/ECOFF executable/,		// yes, anywhere in the match
+	/ECOFF executable/,
 	/^Encore unsupported executable/,
 	/^Generic INItialization configuration/,
 	/^GeoSwath RDF$/,
@@ -83,6 +84,8 @@ const WEAK_VALUES =
 	/^MIPSEB Ucode/,
 	/^MMDF mailbox$/,
 	/^Motorola S-Record; binary data in text format$/,
+	/^MPEG-4 LOAS/,
+	/^MSXiE archive data/,
 	/^Novell LANalyzer capture file$/,
 	/^Perkin-Elmer executable/,
 	/^PEX Binary Archive$/,
@@ -98,6 +101,7 @@ const WEAK_VALUES =
 	/^raw G3/,
 	/^RDI Acoustic Doppler Current Profiler/,
 	/^Sega FILM\/CPK Multimedia/,
+	/spot sensor temperature/,
 	/^SysEx File/,
 	/^StarOffice Gallery theme/,
 	/^SVR2 pure executable/,
@@ -169,6 +173,7 @@ const WEAK_VALUES =
 	/^OMF - Relocatable Object Module Format$/,
 	/^OS\/2 Bitmap Graphics Array \(generic\)$/,
 	/^packPNM compressed /,
+	/^PaintShow Font$/,
 	/^PGN \(Portable Gaming Notation\) Compressed format$/,
 	/^Philips Respironics M-Series data format$/,
 	/^Pixel image$/,
@@ -226,7 +231,8 @@ const WEAK_VALUES =
 	/^Amiga Disk image File \(generic\)$/,
 	/^Dan Bricklin's Demo/,
 	/^Novastorm Media audio$/,
-	/^Scalable Vector Graphics \(var\.3\)$/
+	/^Scalable Vector Graphics \(var\.3\)$/,
+	/^Stunt Island Film$/
 ];
 /* eslint-enable prefer-named-capture-group */
 

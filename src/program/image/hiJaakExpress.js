@@ -12,7 +12,17 @@ export class hiJaakExpress extends Program
 			If $convertWindow Not = 0 Then
 				Send("c:\\out\\out.bmp{ENTER}")
 				WinWaitClose("HiJaak Convert", "", 20)
-			EndIf`
+			EndIf
+			
+			KillAll("loco.exe")
+			KillAll("Hijaak.exe")
+			KillAll("hjcvt32.exe")
+			
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")
+			Send("{ESCAPE}")`
 	});
 	renameOut = true;
 	chain     = "convert";

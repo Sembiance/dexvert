@@ -273,6 +273,7 @@ export default
 		microsoftSecurityCatalog     : {name : "Microsoft Security Catalog", ext : [".cat"], magic : ["Microsoft Security Catalog"]},
 		microsoftWordStyleSheet      : {name : "Microsoft Word Style Sheet", ext : [".sty"], magic : ["Microsoft Word for DOS Style sheet"]},
 		midiDrumMachine              : {name : "MIDI Drum Machine", ext : [".drm"], magic : ["Midi Drum Machine Drum"], notes : "Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum"},
+		muiBuilderProject            : {name : "MUI Builder Project", ext : [".muib"], magic : ["MUI Builder project"]},
 		netwareMessage               : {name : "Netware Message", ext : [".msg"], magic : ["NetWare Message"]},
 		nortonChangeDirInfo          : {name : "Norton Change Directory Info", ext : [".ncd"], magic : ["Norton Change Directory info"]},
 		novellSystemPrintDef         : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},

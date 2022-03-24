@@ -20,7 +20,7 @@ const argv = cmdUtil.cmdInit({
 	},
 	args :
 	[
-		{argid : "inputFilePath", desc : "The path to the file to convert", required : true},
+		{argid : "inputFilePath", desc : "The path to the file to process", required : true},
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 

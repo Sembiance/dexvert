@@ -8,5 +8,15 @@ export class powerPack extends Format
 	magic      = [/^Power Packer.* compressed data/, "PowerPacker compressed", "PP: PowerPacker"];
 	notes      = "Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.";
 	packed     = true;
+	untouched    = dexState =>
+	{
+		if(dexState.ids.some(id => id.magic==="PowerPacker compressed (password protected)"))
+		{
+			dexState.meta.passwordProtected = true;
+			return true;
+		}
+
+		return false;
+	};
 	converters = ["unar[filenameEncoding:iso-8859-1]", "ancient", "amigadepacker"];
 }

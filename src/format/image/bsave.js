@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
+const BSAVE_TYPES = ["cga2", "cga4", "cga16", "mcga", "wh2", "wh4", "wh16", "b256", "2col", "4col", "wh256"];		// "char" is also one, which produces an HTML file which we can't tensor verify, but haven't encountered a file that uses it yet, so we omit it
 
 export class bsave extends Format
 {

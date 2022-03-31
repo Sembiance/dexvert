@@ -6,5 +6,5 @@ export class palmResource extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PRC_(Palm_OS)";
 	ext        = [".prc"];
 	magic      = ["Palm Pilot executable"];
-	converters = ["deark[module:palmrc]"];
+	converters = ["deark[module:palmdb]"];
 }

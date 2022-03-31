@@ -1,4 +1,4 @@
-# Unsupported File Formats (488)
+# Unsupported File Formats (502)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -113,7 +113,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (28)
+## Font (29)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -144,6 +144,7 @@ font | VFONT Font | .fnt |
 font | Westwood Font | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/westwoodFont/)
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 font | WordUp Graphics Toolkit Font | .wfn | 
+font | X11/NeWS font family | .ff | 
 
 
 
@@ -154,7 +155,6 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
-image | [CD-I IFF Image](http://fileformats.archiveteam.org/wiki/CD-I_IFF_IMAG) |  | [9 sample files](https://telparia.com/fileFormatSamples/image/cdiIFFImage/) - No known converter.
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
@@ -170,6 +170,7 @@ image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Ico
 image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://telparia.com/fileFormatSamples/image/painterRIF/)
 image | PC-Draft-CAD Drawing | .dwg | 
+image | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://telparia.com/fileFormatSamples/image/pcrImage/)
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Just can't reliably detected this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
@@ -257,13 +258,14 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (245)
+## Other (258)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
 other | 3D Construction Kit Object | .3od .obj | 
 other | 3D Construction Kit Shape Data | .3sd | 
 other | 3D Construction Kit World Data | .kit | 
+other | 3D Studio Project | .prj | 
 other | Abuse Level | .lvl .spe | 
 other | Adobe Duotone Options | .ado | 
 other | Adobe Hyphenation/Spelling Dictionary | .hyp | 
@@ -271,6 +273,7 @@ other | Adobe Multiple Master Metrics | .mmm |
 other | Adobe Photoshop Gradient | .grd | 
 other | Adobe Type Manager Font Information | .inf | 
 other | Adventure Game Toolkit Strings | .d$$ | 
+other | Aegis Pro Motion Geometry | .geo | 
 other | Alchemy Mindworks Resource | .res | 
 other | Alcohol 120% Media Descriptor | .mds | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/mdfMediaDescriptor/)
 other | Allways Printer Driver | .apc .apd .apf | 
@@ -286,6 +289,7 @@ other | Amiga E Module | .m |
 other | Amiga Hunk Library/Object | .lib .obj .o | 
 other | Amiga IFF Debug File | .debug | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/iffSDBG/)
 other | Amiga IFF DTYP |  | 
+other | Amiga IFF GXUI | .gui | 
 other | Amiga Outline Tag | .otag | 
 other | Amiga Preferences | .prefs | 
 other | Amiga Shared Library | .lib | 
@@ -303,6 +307,7 @@ other | Audio Interface Library 3 Digital audio driver | .dig |
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | AutoCAD Compiled Menu | .mnx | 
 other | AutoCAD Protected LISP | .lsp | 
+other | AutoDesk 3D-Studio Material Library | .mli | 
 other | Babble! Data | .bab | 
 other | Bars and Pipes File | .gchone .gchord .song | 
 other | Binary Color Format | .bcf | 
@@ -317,6 +322,10 @@ other | BWSB Music and Sound Engine Driver | .mse |
 other | CAD/Draw Library | .tbl | 
 other | CAD/Draw Settings | .mpi | 
 other | CakeWalk Work File | .wrk | 
+other | Calamus Farb Color Table | .cft .cf | 
+other | Calamus Raster Information | .cri .cr | 
+other | Calamus Text Style List | .csl .cs | 
+other | Caligari TrueSpace Data |  | 
 other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 other | Chemview Animation Data | .d | 
 other | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
@@ -370,6 +379,7 @@ other | ICC Color Map | .iff |
 other | ICC Color Profile | .icc | 
 other | IDA Signatures | .sig | 
 other | IFF Binary Patch | .pch .patch | 
+other | Imagine Staging Data | .istg | 
 other | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://telparia.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Uninstall Script | .isu | 
@@ -391,6 +401,7 @@ other | Lotus 1-2-3 SQZ! Compressed | wq! |
 other | Lotus Magellan Viewer | .vw2 | 
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
+other | Maple Common Binary | .m | 
 other | MASI Music Driver | .mus | 
 other | MathCad Document | .mcd | 
 other | MDIFF Patch File | .mdf | 
@@ -477,15 +488,18 @@ other | Telix Compiled Script | .slc |
 other | TermInfo |  | 
 other | TeX Font Metric Data | .tfm | 
 other | TeX Virtual Font | .vf | 
+other | Thunderbyte AV | .dat .eci .ec .sig sig | 
 other | TimeZone Data | .tz | 
 other | Turbo Lightning Environment | .env | 
 other | Turbo Modula-2 Symbol Data | .sym | 
 other | Turbo Pascal Help | .hlp | 
 other | Type Library | .tlb | 
+other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://telparia.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 other | VCD Entries File | .vcd | 
 other | Vektor Grafix Driver | .drv | 
 other | VESA Display Identification File | .vdb | 
 other | VideoTracker Routine | .rot | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
+other | Vista Digital Elevation Map | .dem | 
 other | Visual Basic Extension | .vbx | 
 other | Visual Basic Tokenized Source | .bas | 
 other | Visual FoxPro Compound Index | .cdx | 

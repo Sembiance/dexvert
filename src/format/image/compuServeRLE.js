@@ -7,5 +7,5 @@ export class compuServeRLE extends Format
 	ext        = [".rle"];
 	magic      = ["CompuServe RLE bitmap"];
 	notes      = "RRCP1.RLE isn't able to be converted by recoil2png and cistopbm handles it better, but still a bit corrupted.";
-	converters = ["recoil2png", "cistopbm"];
+	converters = ["recoil2png", "deark", "cistopbm"];
 }

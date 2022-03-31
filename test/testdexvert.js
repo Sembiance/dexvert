@@ -78,8 +78,10 @@ const FLEX_SIZE_FORMATS =
 		wordDoc    : 80,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
-		// So we just exempt all of the document category
-		"*" : 1
+		"*:.pdf" : 2,
+
+		// HTML generation can change easily too
+		"*:.html" : 1
 	},
 	image :
 	{
@@ -123,11 +125,14 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
-	[/text\/txt\/SPLIFT.PAS$/, "text", "pas"],
+	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
+
+	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
+	[/archive\/macBinary\/bdh66306\.gif$/, "image", "gif"],
 
 	// These files have garbage on the end that prevent them from detected as what they should be. I used to 'trim' files on a 2nd and 3rd attempt to detect, but now with perlTextCheck, this can't be done and isn't needed
 	[/text\/c\/.+\.C/i, "text", "txt"],
-	[/text\/latexAUXFile\/LCAU.AUX$/i, "text", "txt"],
+	[/text\/latexAUXFile\/LCAU\.AUX$/i, "text", "txt"],
 
 	// These files don't convert with my converters and get identified to other things
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
@@ -241,7 +246,7 @@ async function testSample(sampleFilePath)
 		dexvertArgs.push(`--asFormat=${diskFormatid}`);
 	dexvertArgs.push(sampleFilePath, tmpOutDirPath);
 
-	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*10});
+	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*15, timeoutSignal : "SIGKILL", killChildren : true});
 	const resultFull = xu.parseJSON(r.stdout, {});
 
 	function handleComplete()
@@ -386,10 +391,11 @@ async function testSample(sampleFilePath)
 			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 
-			if(sizeDiff!==0 && sizeDiff>allowedSizeDiff)
-				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}`);
+			const allowedFileSizeDiff = FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff;
+			if(sizeDiff!==0 && sizeDiff>allowedFileSizeDiff)
+				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}`);
 
-			if(allowedSizeDiff===0 && prevFile.sum!==sum)
+			if(allowedFileSizeDiff===0 && prevFile.sum!==sum)
 				return await fail(`Created file ${fg.peach(name)} SHA1 sum differs!`);
 		}
 

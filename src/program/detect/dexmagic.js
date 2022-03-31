@@ -14,6 +14,7 @@ const DEXMAGIC_CHECKS =
 	"IFF CAT file"        : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"       : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"            : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
+	"MINICAT Archive"     : [{offset : 0, match : "MINICAT"}],
 	"pcxLib compressed"   : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"SCR Package"         : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File" : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
@@ -30,6 +31,9 @@ const DEXMAGIC_CHECKS =
 	// executable
 	"FM-TownsOS EXP P3" : [{offset : 0, match : "P3"}],
 	"FM-TownsOS EXP MP" : [{offset : 0, match : "MP"}],
+	
+	// font
+	"PCR Font" : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
 
 	// image
 	"Alias PIX"                   : [{offset : 4, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x18]}],
@@ -45,12 +49,14 @@ const DEXMAGIC_CHECKS =
 	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],
 	"NAPLPS Image"                : [{offset : 0, match : [0x0C, 0x0E, 0x20, 0x4C, 0x6F, 0x21, 0x48, 0x40, 0x40, 0x49, 0x3E, 0x40, 0x3C, 0x40, 0x40, 0x40, 0x3E]}],
 	"PaintWorks"                  : [{offset : 54, match : "ANvisionA"}],
+	"PCR Image"                   : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x10]}],
 	"Picasso 64 Image"            : [{offset : 0, match : [0x00, 0x18]}],
 	"Reko CardSet - RKP"          : [{offset : 0, match : "PCRKP"}],
 	"Reko CardSet - REKO"         : [{offset : 0, match : "PCREKO"}],
 	"Saracen Paint Image"         : [{offset : 0, match : [0x00, 0x78]}],
 	"Second Nature Slide Show"    : [{offset : 0, match : "Second Nature Software\r\nSlide Show\r\nCollection"}],
 	"Universal BitMap Format"     : [{offset : 0, match : "UBF92a"}],
+	"Young Picasso"               : [{offset : 0, match : [0x50, 0x00, 0x00, 0x50, 0x00, 0x00, 0x52, 0x00, 0x00]}],
 	"ZX Spectrum BSP"             : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
 	"ZX Spectrum CHR"             : [{offset : 0, match : "chr"}, {offset : 3, match : [0x24]}],
 
@@ -75,6 +81,7 @@ const DEXMAGIC_CHECKS =
 	"AMOS Memory Bank, Data format"    : [{offset : 0, match : "AmBk"}, {offset : 12, match : "Datas   "}],
 	"Atari CTB File"                   : [{offset : 0, match : "GSP22-CTB"}],
 	"Atari GEM OBM File"               : [{offset : 0, match : [0x00, 0x01, 0x00, 0x22, 0x00, 0x00]}, {offset : 17, match : Array(5).fill(0x00)}, {offset : 34, match : [0x00]}, {offset : 36, match : [0x00]}, {offset : 38, match : [0x00, 0x02]}, {offset : 53, match : Array(5).fill(0x00)}],
+	"IFF GXUI file"                    : [{offset : 0, match : "FORM"}, {offset : 8, match : "GXUI"}],
 	"IFF SDBG file"                    : [{offset : 0, match : "FORM"}, {offset : 8, match : "SDBG"}],
 	"RIFF MSXF file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MSXF"}],
 	"RIFF MxSt file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MxSt"}],

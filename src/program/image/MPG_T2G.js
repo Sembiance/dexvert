@@ -24,7 +24,7 @@ export class MPG_T2G extends Program
 				$exportVisible = WinWaitActive("[TITLE:Select target file]", "", 10)
 				If $exportVisible Not = 0 Then
 					Sleep(500)
-					MouseClick("left", 467, 396, 1, 0)
+					MouseClick("left", 467, 416, 1, 0)
 					Sleep(500)
 					Send("out.t2g{ENTER}")
 					WinWaitClose("[TITLE:Select target file]", "", 10)

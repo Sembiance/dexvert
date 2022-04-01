@@ -28,6 +28,8 @@ abydosconvert can produce animated WEBP files from color cycling ILBM files, but
 So I wrote my own program, ilbm2frames (that uses libiff behind the scenes). ilbm2frames won't produce frames unless there is color cycling
 If you use that, in combination with every converter, you can get both an animated file and a static file:
   converters = [`recoil2png`, "deark", "ffmpeg[format:iff]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`].map(v => `ilbm2frames -> *ffmpeg[fps:20][outType:gif] & ${v}`);
+However, there are a TON of IFF files out there with just truly wacky color cycling, almost like some sort of odd default from some program back in the day.
+So it's not really worth creating the animated versions, just way too much junk.
 
 Tried:
 	http://www.randelshofer.ch/multishow/		Does a good job at showing color cycling

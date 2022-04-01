@@ -1,4 +1,4 @@
-# Unsupported File Formats (502)
+# Unsupported File Formats (504)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -258,7 +258,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (258)
+## Other (260)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -380,6 +380,7 @@ other | ICC Color Profile | .icc |
 other | IDA Signatures | .sig | 
 other | IFF Binary Patch | .pch .patch | 
 other | Imagine Staging Data | .istg | 
+other | Index Volume GUID |  | 
 other | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 other | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://telparia.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
 other | InstallShield Uninstall Script | .isu | 
@@ -388,6 +389,7 @@ other | Java Class File | .class | [4 sample files](https://telparia.com/fileFor
 other | Javelin Printer Driver | .pr .pr2 | 
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | Kapersky Anti-Virus License Key | .key | 
+other | Kodak Precision Transform | .pt | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
 other | LabView Virtual Instrument | .vi | 
 other | LDIFF Differences Data | .lzd | 

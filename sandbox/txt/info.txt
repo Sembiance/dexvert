@@ -38,7 +38,10 @@ https://wiki.amigaos.net/wiki/IFF_Source_Code
 https://www.kim-minh.com/riffl/
 
 >>> Other
-http://www.vgmpf.com/Wiki/index.php?title=MDS
+General: http://fileformats.archiveteam.org/
+Video Game Music: http://www.vgmpf.com/Wiki/index.php?title=MDS
+Multimedia: https://wiki.multimedia.cx/index.php/JV
+
 https://www.fileformat.info/format/cloud.htm
 https://file-extension.net/seeker/file_extension_stc
 https://www.digipres.org/formats/sources/trid/

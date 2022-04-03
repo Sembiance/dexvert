@@ -6,7 +6,7 @@ function cleanMacFilename(fn)
 	let match = null;
 	do
 	{
-		match = (fn.match(/%(?<code>[A-Fa-f\d]{2})/) || {}).groups;
+		match = (fn.match(/%(?<code>[A-Fa-f\d]{2})/) || {})?.groups;
 		if(match)
 			fn = fn.replaceAll(`%${match.code}`, encodeUtil.MACOS_ROMAN_EXTENDED[Number.parseInt(match.code, 16)-128] || "□");	// eslint-disable-line no-param-reassign
 	} while(match);

@@ -264,9 +264,11 @@ File Imploder (and most of its clones)
 	FLT! (verification missing)
 	Dupa (verification missing)
 	PARA (verification missing)
+LOB's File Compressor
 PowerPacker
 	PP 1.1 (verification missing)
 	PP 2.0
+	Supports password bypassing (PX20)
 Rob Northen compressors.
 	RNC1: Both old and formats utilizing the same header. heuristics for detecting the current one
 	RNC2: RNC version 2 stream
@@ -2953,6 +2955,7 @@ Commodore 64	CDU	CDU-Paint	160x200	16 colors	1
 Commodore 64	CFLI	CFLI Designer	296x200	16 colors	1
 Commodore 64	CHE	Cheese	160x200	16 colors	1
 Commodore 64	CLE	Centauri Logo-Editor	160x200	4 colors	1
+Commodore 64	CLP	GoDot Clip	up to 320x200	16 colors	1
 Commodore 64	CTM	CharPad		16 colors	1
 Commodore 64	CWG	Create with Garfield	160x200	16 colors	1
 Commodore 64	DD, DDP	Doodle	320x200	16 colors	1
@@ -2976,7 +2979,7 @@ Commodore 64	GUN, IFL	Gunpaint	296x200		2
 Commodore 64	HBM, HIR, HPI, GIH, FGS	Hires-Bitmap	320x200	mono	1
 Commodore 64	HED	Hi-Eddi	320x200	16 colors	1
 Commodore 64	HET	Hires-Editor	320x200	16 colors	1
-Commodore 64	HFC	Hires FLI by Crest	296x112	16 colors	1
+Commodore 64	HFC, HFD	Hires FLI by Crest	296x112	16 colors	1
 Commodore 64	HIM	Hires Manager by Cosmos	296x192	16 colors	1
 Commodore 64	HLF	Hires Interlace by Feniks	320x200		2
 Commodore 64	HPC	Hi-Pic Creator	320x200	16 colors	1
@@ -3114,6 +3117,7 @@ ZX Spectrum	RGB		256x192	8 colors	3
 ZX Spectrum	SCR		256x192	15 colors	1
 ZX Spectrum	STL	Stellar	64x48		2
 ZX Spectrum	ZXP	ZX-Paintbrush	256x192	15 colors	1
+ZX Spectrum Profi	GRF	Profi	512x240	16 colors	1
 ZX Spectrum ULAplus	SCR	ULAplus	256x192	64 colors	1
 ZX Evolution	SXG	Speccy eXtended Graphics		256 colors	1
 ZX Spectrum Next	NXI		256x192	256 colors	1

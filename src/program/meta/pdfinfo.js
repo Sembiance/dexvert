@@ -14,7 +14,7 @@ export class pdfinfo extends Program
 		const BOOLS = ["tagged", "userproperties", "suspects", "javascript", "encrypted", "optimized"];
 		r.stdout.trim().split("\n").filter(v => !!v).forEach(infoLine =>
 		{
-			const infoProps = (infoLine.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {}).groups;
+			const infoProps = (infoLine.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {})?.groups;
 			if(!infoProps)
 				return;
 

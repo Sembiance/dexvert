@@ -8,7 +8,7 @@ export class soxStat extends Program
 	args    = r => [r.inFile(), "-n", "stat"];
 	post    = r =>
 	{
-		const meta = r.stderr.trim().split("\n").reduce((result, line="") =>	// eslint-disable-line unicorn/prefer-object-from-entries
+		const meta = r.stderr.trim().split("\n").reduce((result, line="") =>
 		{
 			const parts = line.split(":");
 			if(!parts || parts.length!==2)

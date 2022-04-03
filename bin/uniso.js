@@ -76,7 +76,7 @@ function hfsFilenameToUTF8(hfsFilename)
 	let utfFilename = hfsFilename.replaceAll("/", "⁄");	// Mac files can contain forward slashes, so we replace them with a unicode fraction slash
 	do
 	{
-		match = (utfFilename.match(/\\(?<code>\d{3})/) || {}).groups;
+		match = (utfFilename.match(/\\(?<code>\d{3})/) || {})?.groups;
 		if(match)
 		{
 			const charCode = HFS_OCTAL_TO_UTF8[Number.parseInt(match.code, 8).toString(16).padStart(2, "0").toUpperCase()] || 0x25A1;
@@ -84,7 +84,7 @@ function hfsFilenameToUTF8(hfsFilename)
 			continue;
 		}
 
-		match = (utfFilename.match(/\\(?<letter>.)/) || {}).groups;
+		match = (utfFilename.match(/\\(?<letter>.)/) || {})?.groups;
 		if(match)
 			utfFilename = utfFilename.replaceAll(`\\${match.letter}`, HFS_CHAR_TO_UTF8[match.letter] || "□");
 	} while(match);
@@ -117,7 +117,7 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-alb"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {}).groups);
+		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {})?.groups);
 		for(const entry of entries)
 		{
 			if(entry.type==="d")

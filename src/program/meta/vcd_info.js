@@ -27,7 +27,7 @@ export class vcd_info extends Program
 				return;
 			}
 
-			const props = (line.trimEnd().match(/^\s+(?<name>[^:]+):\s+(?<val>.+)$/) || {}).groups;
+			const props = (line.trimEnd().match(/^\s+(?<name>[^:]+):\s+(?<val>.+)$/) || {})?.groups;
 			if(!curHeader || !curHeader.endsWith("primary volume descriptor") || !props)
 				return;
 			

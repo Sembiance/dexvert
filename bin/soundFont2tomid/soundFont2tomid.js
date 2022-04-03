@@ -33,7 +33,7 @@ tiptoe(
 			if(!(/^\d/).test(line))
 				return;
 			
-			const props = (line.match(/(?<bank>\d+)-(?<preset>\d+)\s(?<name>.+)$/) || {}).groups;
+			const props = (line.match(/(?<bank>\d+)-(?<preset>\d+)\s(?<name>.+)$/) || {})?.groups;
 			if(!props)
 				return;
 			

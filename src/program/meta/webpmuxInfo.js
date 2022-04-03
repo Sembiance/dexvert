@@ -21,7 +21,7 @@ export class webpmuxInfo extends Program
 			}
 			else
 			{
-				const props = (line.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {}).groups;
+				const props = (line.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {})?.groups;
 				if(!props)
 					return;
 

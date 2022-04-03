@@ -6,6 +6,6 @@ export class darktable_rs_identify extends Program
 	package   = "media-gfx/darktable";
 	bin       = "darktable-rs-identify";
 	args      = r => [r.inFile()];
-	post      = r => Object.assign(r.meta, r.stdout.trim().split("\n").filter(v => !!v).map(line => (line.match(/^(?<k>[^:]+):\s+(?<v>.+)$/) || {groups : {}}).groups).reduce((result, {k, v}) => { result[k] = (v || "").replaceAll("/n", ""); return result; }, {}));	// eslint-disable-line unicorn/prefer-object-from-entries
+	post      = r => Object.assign(r.meta, r.stdout.trim().split("\n").filter(v => !!v).map(line => (line.match(/^(?<k>[^:]+):\s+(?<v>.+)$/) || {groups : {}}).groups).reduce((result, {k, v}) => { result[k] = (v || "").replaceAll("/n", ""); return result; }, {}));
 	renameOut = false;
 }

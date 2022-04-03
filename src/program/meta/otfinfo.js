@@ -11,7 +11,7 @@ export class otfinfo extends Program
 		const meta = {};
 		r.stdout.trim().split("\n").filter(v => !!v).forEach(line =>
 		{
-			const props = (line.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {}).groups;
+			const props = (line.trim().match(/^(?<name>[^:]+):\s+(?<val>.+)$/) || {})?.groups;
 			if(!props)
 				return;
 

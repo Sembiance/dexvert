@@ -30,7 +30,7 @@ export class winedump extends Program
 			}
 			else if(category)
 			{
-				const props = (line.match(/^\s*(?<key>[^:]+):\s+(?<val>.+)\s*$/) || {}).groups;
+				const props = (line.match(/^\s*(?<key>[^:]+):\s+(?<val>.+)\s*$/) || {})?.groups;
 				const propValue = props ? props.val : line.trim();
 				const propKey = props ? props.key.trim().strip("()-").toCamelCase() : null;
 

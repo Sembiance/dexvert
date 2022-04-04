@@ -11,4 +11,5 @@ export class iCEDraw extends Format
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["ansiArt"];
 	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`];
+	verify         = ({meta}) => meta.width>=16 && meta.height>=16;
 }

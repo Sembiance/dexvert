@@ -44,6 +44,7 @@ const DEXMAGIC_CHECKS =
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
+	"GoDot Clip"                  : [{offset : 0, match : "GOD1"}],
 	"Konica Quality Photo"        : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],
 	"MLDF BMHD file"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
 	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],

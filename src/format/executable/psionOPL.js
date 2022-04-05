@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-export class psionExecutable extends Format
+export class psionOPL extends Format
 {
 	name       = "Psion OPO/OPA Executable";
 	website    = "http://fileformats.archiveteam.org/wiki/Psion_OPO/OPA";

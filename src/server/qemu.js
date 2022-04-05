@@ -186,7 +186,7 @@ export class qemu extends Server
 
 		const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
 		if(!instance.debug)
-			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort}`);
+			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort},share=force-shared`);
 		qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
 		qemuArgs.push("-m", `size=${OS[osid].ram}`);
 		qemuArgs.push("-rtc", `base=${OS[osid].dateTime || OS_DEFAULT.dateTime}`);
@@ -423,12 +423,12 @@ export class qemu extends Server
 		{
 			this.xlog.info`${prelog(instance)} unmounting in/out...`;
 			for(const v of ["in", "out"])
-				await runUtil.run("sudo", ["umount", "-l", path.join(instance.dirPath, v)]);
+				await runUtil.run("sudo", ["umount", "-lf", path.join(instance.dirPath, v)]);
 		}
 
 		this.xlog.info`${prelog(instance)} killing qemu child process...`;
 		if(instance.p)
-			await runUtil.kill(instance.p).catch(() => {});
+			await runUtil.kill(instance.p, "SIGKILL").catch(() => {});
 	}
 
 	async stop()

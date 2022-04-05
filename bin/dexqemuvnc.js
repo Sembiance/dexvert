@@ -14,12 +14,13 @@ const argv = cmdUtil.cmdInit({
 		{argid : "vncid", desc : "Which number or osid to open", required : true}
 	]});
 
+const qty = maxQty => Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty));
 const OSID_SERVER_COUNT =
 {
-	win2k    : 16,
-	winxp    : 16,
-	amigappc : 8,
-	gentoo   : 10
+	win2k    : qty(16),
+	winxp    : qty(16),
+	amigappc : qty(8),
+	gentoo   : qty(10)
 };
 
 const OSID_OFFSET =
@@ -42,5 +43,5 @@ for(const vncNumber of vncNumbers)
 	if(!argv.dev)
 		await runUtil.run("ssh", ["-f", "-o", "ExitOnForwardFailure=yes", "-L", `127.0.0.1:${localPort}:127.0.0.1:${vncNumber+5900}`, "chatsubo", "sleep", "5"], {inheritEnv : true, verbose : true, liveOutput : true});
 
-	await runUtil.run("vncviewer", [`127.0.0.1:${localPort}`], {detached : true, inheritEnv : true});
+	await runUtil.run("vncviewer", ["-Shared", `127.0.0.1:${localPort}`], {detached : true, inheritEnv : true});
 }

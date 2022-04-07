@@ -1,4 +1,4 @@
-# Unsupported File Formats (512)
+# Unsupported File Formats (526)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -161,7 +161,7 @@ image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileForma
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
-image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/PRF_(Fastgraph)) | .prf | [12 sample files](https://telparia.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
+image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://telparia.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
@@ -261,7 +261,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (265)
+## Other (277)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -322,15 +322,19 @@ other | Borland Graphics Interface Driver | .bgi |
 other | Borland Language Library | .bll | 
 other | Borland Overlay | .ovr | 
 other | BOYAN Action Model | .bam | 
+other | Build Engine Demo Data | .dem | 
+other | Build Engine RFF Container | .rff | 
 other | BWSB Music and Sound Engine Driver | .mse | 
 other | CAD/Draw Library | .tbl | 
 other | CAD/Draw Settings | .mpi | 
+other | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
 other | CakeWalk Work File | .wrk | 
 other | Calamus Farb Color Table | .cft .cf | 
 other | Calamus Raster Information | .cri .cr | 
 other | Calamus Text Style List | .csl .cs | 
 other | Caligari TrueSpace Data |  | 
 other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
+other | Character Table Library | .tlb | 
 other | Chemview Animation Data | .d | 
 other | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 other | Clipper Pre-Linked Library | .pll | 
@@ -399,11 +403,13 @@ other | LabView Virtual Instrument | .vi |
 other | LDIFF Differences Data | .lzd | 
 other | Legend of Kyrandia EMC File | .emc | 
 other | LIFE 3000 Status | .lif | 
+other | Linux 8086 Object File | .o | 
 other | Linux Kernel |  | 
 other | Linux Swap File |  | 
 other | LogicSim Circuit |  | 
 other | Lotus 1-2-3 Formatting Data | .fm3 | 
 other | Lotus 1-2-3 SQZ! Compressed | wq! | 
+other | Lotus Freelance Presentation | .prz | 
 other | Lotus Magellan Viewer | .vw2 | 
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
@@ -412,8 +418,10 @@ other | MASI Music Driver | .mus |
 other | MathCad Document | .mcd | 
 other | MDIFF Patch File | .mdf | 
 other | MegaPaint Printer Driver | .trb | 
+other | MetaCreations Resource Composite File |  | 
 other | Micro Lathe Object | .lat | 
 other | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://telparia.com/fileFormatSamples/other/microsoftChatCharacter/)
+other | Microsoft Incremental Linker Data | .ilk | 
 other | Microsoft Printer Definition | .prd | 
 other | Microsoft Program Database | .pdb | 
 other | Microsoft Security Catalog | .cat | 
@@ -437,6 +445,7 @@ other | Norton Change Directory Info | .ncd |
 other | Novell System PrintDef Device Definition | .pdf | 
 other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
+other | PaperPort Slide Show | .fss | 
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | PatchMeister Driver | .pmdriver | 
 other | PGP Key Ring | .key .pgp | 
@@ -470,6 +479,7 @@ other | RIFF STYL File | .par | References a font for mac and windows and includ
 other | Rise of the Triad Level | .rtc .rtl | 
 other | ROT Object 3D Action | .rotact | 
 other | RTPatch File | .rtp | 
+other | Samplitude RAM Project | .rap | 
 other | Scenery Animator Landscape | .scape | 
 other | SciTech Driver | .drv | 
 other | Scorched Earth Mountain Data | .mtn | 
@@ -492,6 +502,7 @@ other | Super ZZT File | .szt |
 other | Superbase Form | .sbv | 
 other | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
 other | symlink |  | This format is a hardcoded match at the beginning of identify.js
+other | SYSLINUX loader | .sys | 
 other | TADS | .t .gam | 
 other | TCPDUMP Style Capture | .dmp .pcap | 
 other | Telix Compiled Script | .slc | 
@@ -522,6 +533,7 @@ other | Windows LOGO Drawing Code | .lgo .lg |
 other | Windows Shim Database | .sdb | 
 other | Windows Shortcut | .lnk | 
 other | Winzle Puzzle | .wzl | 
+other | Wipeout 2097 Track Data | .wad | 
 other | WordPerfect Driver | .vrs | 
 other | WordPerfect for Windows Button Bar | .wwb | 
 other | WordPerfect keyboard file | .wpk | 
@@ -532,13 +544,14 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (19)
+## Poly (20)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Studio Mesh | .3ds | [1 sample file](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | Caligari TrueSpace 3D Object | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
+poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | LightWave 3D Object | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
@@ -557,7 +570,7 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (14)
+## Video (15)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -571,6 +584,7 @@ video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/f
 video | Magic Lantern DIFF Animation | .diff | No known converter
 video | NTitler Animation | .nt | [8 sample files](https://telparia.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
+video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
 video | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://telparia.com/fileFormatSamples/video/zoetropeAnimation/)

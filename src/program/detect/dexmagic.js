@@ -20,6 +20,9 @@ const DEXMAGIC_CHECKS =
 	"TTW Compressed File" : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
 	"WAD2 file"           : [{offset : 0, match : "WAD2"}],
 
+	// audio
+	"EA BNK Audio" : [{offset : 0, match : "BNKl"}],
+
 	// document
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
 	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],

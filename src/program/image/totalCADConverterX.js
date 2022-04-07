@@ -10,7 +10,7 @@ export class totalCADConverterX extends Program
 	};
 	loc       = "winxp";
 	bin       = "c:\\Program Files\\CoolUtils\\TotalCADConverterX\\CADConverterX.exe";
-	args      = r => [r.inFile(), `c:\\out\\outfile.${r.flags.outputFileType || "svg"}`, "-WithoutBorder"];
+	args      = r => [r.inFile(), `c:\\out\\outfile.${r.flags.outType || "svg"}`, "-WithoutBorder"];
 	renameOut = true;
 	chain     = r => ((r.flags.outType || "svg")==="svg" ? "deDynamicSVG" : null);
 }

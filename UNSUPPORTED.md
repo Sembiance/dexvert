@@ -1,4 +1,4 @@
-# Unsupported File Formats (526)
+# Unsupported File Formats (530)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -151,7 +151,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (30)
+## Image (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -180,6 +180,7 @@ image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://telparia.com/fileFormatSamples/image/simpleVectorFormat/)
+image | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://telparia.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [Universal BitMap Format](http://retromission.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [8 sample files](https://telparia.com/fileFormatSamples/image/universalBitMapFormat/)
@@ -261,7 +262,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (277)
+## Other (280)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -355,6 +356,7 @@ other | dBase Query | .qbe |
 other | dBase Update | .upd | 
 other | DeHackEd Patch | .deh | 
 other | Descent Level | .rdl | 
+other | Dive File Format | .dff | 
 other | DOOM Save Game | .dsg | 
 other | Dr.Web Anti-Virus Database | .vdb | 
 other | Dynamic Message System File | .msg | 
@@ -426,6 +428,7 @@ other | Microsoft Printer Definition | .prd |
 other | Microsoft Program Database | .pdb | 
 other | Microsoft Security Catalog | .cat | 
 other | Microsoft Separate Debug Format | .dbg | 
+other | Microsoft Serialized Certificate Store | .sst | 
 other | Microsoft Visual C Files | .bsc .sbr .wsp | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Program Information File | .pif | 
@@ -448,6 +451,7 @@ other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples
 other | PaperPort Slide Show | .fss | 
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | PatchMeister Driver | .pmdriver | 
+other | PCAnywhere Data | .bhf | 
 other | PGP Key Ring | .key .pgp | 
 other | Platinen Layout Program Layout | .pla | 
 other | Platinen Layout Programm Bibliotheken/library | .bib | 

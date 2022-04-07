@@ -59,6 +59,7 @@ const DEXMAGIC_CHECKS =
 	"Reko CardSet - REKO"         : [{offset : 0, match : "PCREKO"}],
 	"Saracen Paint Image"         : [{offset : 0, match : [0x00, 0x78]}],
 	"Second Nature Slide Show"    : [{offset : 0, match : "Second Nature Software\r\nSlide Show\r\nCollection"}],
+	"SLP Image"                   : [{offset : 0, match : "2.0N"}],
 	"Universal BitMap Format"     : [{offset : 0, match : "UBF92a"}],
 	"Young Picasso"               : [{offset : 0, match : [0x50, 0x00, 0x00, 0x50, 0x00, 0x00, 0x52, 0x00, 0x00]}],
 	"ZX Spectrum BSP"             : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],

@@ -11,7 +11,7 @@ export class gameextractor extends Program
 	args = r => ["-extract", "-input", r.inFile({absolute : true}), "-output", r.outDir({absolute : true})];
 
 	// gameextractor always opens an X window (thus virtualX) and on some files it just hangs forever (thus timeout)
-	runOptions = ({virtualX : true, timeout : xu.MINUTE*1});
+	runOptions = ({virtualX : true, timeout : xu.MINUTE*1, killChildren : true});
 	renameOut  = false;
 
 	// Sometimes gameextractor files with _ge_decompressed suffixes in the INPUT dir. Since this is in the INPUT dir, I don't really care

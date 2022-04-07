@@ -1,11 +1,11 @@
-# Supported File Formats (1,116)
+# Supported File Formats (1,118)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (128)
+## Archive (129)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -31,7 +31,7 @@ archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/S
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/autoCADSlideLibrary/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/binHex/)
 archive | BOLT Game Data Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/boltGameData/)
-archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://telparia.com/fileFormatSamples/archive/broderbundMohawk/)
+archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://telparia.com/fileFormatSamples/archive/broderbundMohawk/)
 archive | Build Engine Group Container | .grp .dat | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/buildEngineGroup/)
 archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .bzip2 | [bunzip2](https://gitlab.com/federicomenaquintero/bzip2) [sevenZip](http://p7zip.sourceforge.net/) [ancient](https://github.com/temisu/ancient_format_decompressor) [UniExtract](https://www.legroom.net/software/uniextract) | [8 sample files](https://telparia.com/fileFormatSamples/archive/bz2/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [cabextract](https://www.cabextract.org.uk/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
@@ -50,6 +50,7 @@ archive | Disk Doubler | .dd | [unar](https://unarchiver.c3.cx/) | [5 sample fil
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/diskImage/)
 archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE) | [11 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | EDI Install LZSS2 Compressed Data | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZSS2/)
+archive | Ensemble Studios Data Resource | .drs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://telparia.com/fileFormatSamples/archive/ensembleStudiosDataResource/)
 archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder) | .imp | [ancient](https://github.com/temisu/ancient_format_decompressor) | [6 sample files](https://telparia.com/fileFormatSamples/archive/fileImploder/)
 archive | [FSH Archive](http://fileformats.archiveteam.org/wiki/FSH_(EA_Sports)) | .fsh | [fshtool](http://www.math.polytechnique.fr/cmat/auroux/nfs/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/fshArchive/)
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [deark](https://entropymine.com/deark/) | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
@@ -127,9 +128,9 @@ archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archiv
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [12 sample files](https://telparia.com/fileFormatSamples/archive/ttw/)
 archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [6 sample files](https://telparia.com/fileFormatSamples/archive/turboPacker/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
-archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
+archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
-archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
+archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
 archive | Warcraft 2 Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/warcraft2Archive/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [resourceHacker](http://www.angusj.com/resourcehacker/) [resourceEditor](http://melander.dk/reseditor/) [strings](https://www.gnu.org/software/binutils/) | [23 sample files](https://telparia.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Thumbs.db) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/windowsThumbDB/)
@@ -152,8 +153,8 @@ audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_A
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [17 sample files](https://telparia.com/fileFormatSamples/audio/voc/)
 audio | [DiamondWare Digitized Audio](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwd | [awaveStudio](https://archive.org/details/awave70_zip) | [10 sample files](https://telparia.com/fileFormatSamples/audio/diamondWareDigitized/)
 audio | [Downloadable Sound Bank](https://en.wikipedia.org/wiki/DLS_format) | .dls | [awaveStudio](https://archive.org/details/awave70_zip) | [2 sample files](https://telparia.com/fileFormatSamples/audio/downloadableSoundBank/)
-audio | Electronic Arts ASF | .asf | [vgmstream](https://github.com/vgmstream/vgmstream) | [5 sample files](https://telparia.com/fileFormatSamples/audio/eaASF/)
-audio | Electronic Arts BNK File | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [5 sample files](https://telparia.com/fileFormatSamples/audio/eaBNK/)
+audio | Electronic Arts ASF | .asf | [vgmstream](https://github.com/vgmstream/vgmstream) | [7 sample files](https://telparia.com/fileFormatSamples/audio/eaASF/)
+audio | Electronic Arts BNK File | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [7 sample files](https://telparia.com/fileFormatSamples/audio/eaBNK/)
 audio | Electronic Arts Sound hEADer | .tgv | [vgmstream](https://github.com/vgmstream/vgmstream) | [4 sample files](https://telparia.com/fileFormatSamples/audio/eaSEAD/)
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [Gravis Ultrasound Patch](http://fileformats.archiveteam.org/wiki/Gravis_Ultrasound_patch) | .pat | [awaveStudio](https://archive.org/details/awave70_zip) | [7 sample files](https://telparia.com/fileFormatSamples/audio/gusPatch/)
@@ -175,7 +176,7 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [3 sam
 
 
 
-## Document (115)
+## Document (116)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -208,7 +209,7 @@ document | [Envoy Document](https://en.wikipedia.org/wiki/Envoy_(WordPerfect)) |
 document | [EPUB](http://fileformats.archiveteam.org/wiki/EPUB) | .epub | [ebook_convert](https://calibre-ebook.com/) | [5 sample files](https://telparia.com/fileFormatSamples/document/epub/)
 document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [11 sample files](https://telparia.com/fileFormatSamples/document/xls/)
 document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/Farallon_Replica) | .rpl | [replica](https://gondwanaland.com/meta/history/) | [10 sample files](https://telparia.com/fileFormatSamples/document/farallonReplica/)
-document | [FileMaker Pro 3 Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/fileMakerPro3/)
+document | [FileMaker Pro Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/fileMakerPro/)
 document | Final Write Document |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/finalWrite/)
 document | First Choice Database | .fol .pfs | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/firstChoiceDatabase/)
 document | First Choice Document | .doc .pfs | [fileMerlin](http://www.file-convert.com/flmn.htm) | [5 sample files](https://telparia.com/fileFormatSamples/document/firstChoice/)
@@ -292,6 +293,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [wordStar](https://en.wikipedia.org/wiki/WordStar) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordStar/)
 document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
 document | [WriteNow Document](http://fileformats.archiveteam.org/wiki/WriteNow) |  | [soffice](https://www.libreoffice.org) | [5 sample files](https://telparia.com/fileFormatSamples/document/writeNow/)
+document | [Z-code for Z-machine](http://fileformats.archiveteam.org/wiki/Z-code) | .z1 .z2 .z3 .z4 .z5 .z6 .z7 .z8 | [txd](https://www.inform-fiction.org/zmachine/ztools.html) | [4 sample files](https://telparia.com/fileFormatSamples/document/zcode/)
 document | [Zinc Data](https://en.wikipedia.org/wiki/Zinc_Application_Framework) | .dat .znc .z_t | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/zincData/)
 
 
@@ -405,7 +407,7 @@ image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text))
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib .pic | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [hiJaakExpress](https://archive.org/details/hijaak-express) | [23 sample files](https://telparia.com/fileFormatSamples/image/bmp/)
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [4 sample files](https://telparia.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/blazingPaddlesWindow/)
-image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://telparia.com/fileFormatSamples/image/brenderPIX/)
+image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [5 sample files](https://telparia.com/fileFormatSamples/image/brenderPIX/)
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/bgp/)
 image | [C.O.L.R. Object Editor](http://fileformats.archiveteam.org/wiki/C.O.L.R._Object_Editor) | .mur .pal | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/mur/)
 image | [C64 Hires-Bitmap](http://fileformats.archiveteam.org/wiki/Hires-Bitmap) | .hbm .hir .hpi .gih .fgs | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [6 sample files](https://telparia.com/fileFormatSamples/image/c64HiRes/)
@@ -1165,7 +1167,7 @@ video | [Gremlin Digital Video](https://wiki.multimedia.cx/index.php/Gremlin_Dig
 video | [IFF YAFA Animation](http://fileformats.archiveteam.org/wiki/YAFA) | .yafa | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [7 sample files](https://telparia.com/fileFormatSamples/video/iffYAFA/)
 video | [Interchange File Format Animation](http://fileformats.archiveteam.org/wiki/ANIM) | .anim .anm .sndanim | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [12 sample files](https://telparia.com/fileFormatSamples/video/iffANIM/)
 video | [Interplay MVE Video](https://wiki.multimedia.cx/index.php/Interplay_MVE) | .mve | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/interplayMVE/)
-video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://telparia.com/fileFormatSamples/video/smush/)
+video | [LucasArts SMUSH Video](https://wiki.multimedia.cx/index.php/Smush) | .nut .san | [ffmpeg](https://ffmpeg.org/) | [5 sample files](https://telparia.com/fileFormatSamples/video/smush/)
 video | [MovieSetter Video](http://fileformats.archiveteam.org/wiki/MovieSetter) |  | [xanim](https://github.com/Sembiance/xanim) | [71 sample files](https://telparia.com/fileFormatSamples/video/movieSetter/) - Xanim doesn't play sound and couldn't find another linux based converter that supports sound. Only known solution now would be to convert it on a virtual amiga with MovieSetter itself probably. CYC and demo_5 don't convert.
 video | [MPEG-1](http://fileformats.archiveteam.org/wiki/MPEG-1) | .mpg .mp1 .mpeg .m1v | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/mpeg1/)
 video | [MPEG-2](http://fileformats.archiveteam.org/wiki/MPEG-2) | .mpg .mp2 .mpeg .m2v | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [4 sample files](https://telparia.com/fileFormatSamples/video/mpeg2/)
@@ -1173,7 +1175,7 @@ video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v |
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/video/neochromeAnimation/)
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/psygnosisYOP/)
-video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv .rmvb .rmf | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://telparia.com/fileFormatSamples/video/realVideo/)
+video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv .rmvb .rmf | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/realVideo/)
 video | [Silicon Graphics IRIX Movie](http://fileformats.archiveteam.org/wiki/SGI_movie) | .mv .movie .sgi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [4 sample files](https://telparia.com/fileFormatSamples/video/sgiMovie/)
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/smacker/)
 video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/video/videoMasterFilm/)

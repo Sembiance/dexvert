@@ -268,6 +268,7 @@ export const WEAK_VALUES =
 	/^ChemDraw model$/,
 	/^Dr\. Halo Font$/,
 	/^Dyalog APL transfer$/,
+	/^EPOC data store/,
 	/^FastCopy DIM disk image$/,
 	/^File List Creator list$/,
 	/^HandStory eBook$/,

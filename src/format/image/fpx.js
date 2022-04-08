@@ -8,5 +8,5 @@ export class fpx extends Format
 	mimeType     = "image/vnd.fpx";
 	magic        = ["Generic OLE2", "Composite Document File", "OLE2 Compound Document Format"];
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "corelPhotoPaint"];
 }

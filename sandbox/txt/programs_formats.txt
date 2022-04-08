@@ -9328,3 +9328,58 @@ TRI TriGem SoftFax
 TBF Imavox TurboFax
 TEF Relisys
 WPF U.S. Robotics WorldPort 2496
+
+
+>>> Corel Photo-Paint 8 (https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng)
+Bitmap File Types
+	Corel Photo-Paint (CPT)
+	TIFF Bitmap (TIF TIFF)
+	PaintBrush (PCX)
+	Windows Bitmap (BMP)
+	Compuserve Bitmap (GIF)
+	Kodak PhotoCD Image (PCD)
+	JPEG Bitmap (JPG)
+	Wavelet Compressed Bitmap (WI)
+	Adobe Photoshop (PSD)
+	CALS Compressed Bitmap (CAL)
+	GEM Paint File (IMG)
+	MacPaint Bitmap (MAC)
+	OS/2 Bitmap (BMP)
+	PicturePublisher 4 (PP4)
+	PicturePublisher 5 (PP5)
+	Scitex CT Bitmap (SCT)
+	Targa Bitmap (TGA)
+	Windows 3.1 CUR/ICO/EXE
+	Corel Raster Image (RAW)
+	Kodak FlashPix Image (FPX)
+Vector File Types
+	Corel WordPerfect Graphic (WPG)
+	Corel 3DMF
+	Desktop Color Seperation (DCS)
+	Adobe Illustrator (AI)
+	AutoCad (DXF)
+	Computer Graphics Metafile (CGM)
+	Corel CMX Compressed (CMX)
+	CorelDraw Compressed (CDX)
+	Corel Presentation Exchange 5.0/6/7 (CMX)
+	CorelDraw (CDR)
+	CorelTRACE (AI)
+	Encapsulated Postscript (EPS)
+	Enhanced Windows Metafile (EMF)
+	GEM File (GEM)
+	HPGL Plotter File (PLT/HGL/HPGL)
+	IBM PIF (PF)
+	Lotus PIC (PIC)
+	Macintosh PICT (PICT PCT)
+	MET Metafile (MET)
+	Micrografx 2.x/3.x (DRW)
+	NAP Metafile (NAP)
+	PostScript Interpreted (PS/PRN/EPS)
+	Windows Metafile (WMF)
+	Frame Vector Metafile (FMV)
+	Adobe Portable Document File (PDF)
+	AutoCad Drawing (DWG)
+Animation File Types
+	MPEG Animation (MPG)
+	QuickTime Movie (MOV)
+	Video for Windos (AVI)

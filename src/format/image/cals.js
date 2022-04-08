@@ -7,5 +7,5 @@ export class cals extends Format
 	ext          = [".ct1", ".cal", ".ras", ".ct2", ".ct3", ".nif", ".ct4", ".c4"];
 	magic        = ["CALS raster bitmap", "CALS Compressed Bitmap"];
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "corelPhotoPaint"];
 }

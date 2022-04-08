@@ -11,5 +11,5 @@ export class gem extends Format
 	// Recoil seems to handle all the files
 	// Abydos and nconvert handle the color in flag_b24 and tru256
 	// nconvert messes up some other images colorspaces (as usual for nconvert)
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "deark", "nconvert", "hiJaakExpress"];
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "deark", "nconvert", "hiJaakExpress", "corelPhotoPaint"];
 }

@@ -116,12 +116,65 @@ EndFunc`,
 Func CleanupSystray()
 	MouseMove(312, 756)
 	MouseMove(1000, 756, 20)
-EndFunc
-	`
+EndFunc`,
+	WindowRequire : `
+Func WindowRequire($title, $text, $max_duration)
+	Local $win = WinWaitActive($title, $text, $max_duration)
+	If $win = 0 Then
+		Exit 0
+	EndIf
+
+	return $win
+EndFunc`,
+	WindowFailure : `
+Func WindowFailure($title, $text, $max_duration, $dismissKeys=0)
+	Local $win = WinWaitActive($title, $text, $max_duration)
+	If $win Not = 0 Then
+		If $dismissKeys Not = 0 Then
+			Send($dismissKeys)
+		EndIf
+		Exit 0
+	EndIf
+EndFunc`,
+	WindowDismissWait : `
+Func WindowDismissWait($title, $text, $max_duration, $dismissKeys=0)
+	Local $win = WinWaitActive($title, $text, $max_duration)
+	If $win Not = 0 Then
+		If $dismissKeys Not = 0 Then
+			Send($dismissKeys)
+			WinWaitClose($win, $text, $max_duration)
+		EndIf
+		return $win
+	EndIf
+	return 0
+EndFunc`,
+	WindowDismiss : `
+Func WindowDismiss($title, $text, $dismissKeys=0)
+	Local $win = WinActive($title, $text)
+	If $win Not = 0 Then
+		If $dismissKeys Not = 0 Then
+			Send($dismissKeys)
+			WinWaitClose($win, $text, 3)
+		EndIf
+		return $win
+	EndIf
+	return 0
+EndFunc`,
+	CallUntil : `
+Func CallUntil($funcName, $max_duration)
+	Local $done = 0
+	Local $timer = TimerInit()
+	Do
+		$done = Call($funcName)
+
+		If $done Not = 0 Then ExitLoop
+		Sleep(50)
+	Until TimerDiff($timer) > $max_duration
+EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, xlog})
+export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
@@ -170,19 +223,26 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 			scriptLines.push(scriptPre);
 		}
 
+		scriptLines.push(`
+			OnAutoItExitRegister("ExitHandler")
+			Func ExitHandler()
+				; If a windows program crashes, windows will detect it and show this error, all we can do is press OK
+				Do
+					Local $programError = WinActive("[TITLE:Program Error]", "")
+					If $programError Not = 0 Then
+						ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")
+					EndIf
+				Until $programError = 0
+
+				; Now kill our program
+				KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")
+				${alsoKill.map(v => `KillAll("${v}")`).join("\n")}
+			EndFunc
+		`);
+
 		scriptLines.push(`$qemuProgramPID = Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
 		if(script)
 			scriptLines.push(script);
-		
-		// If a windows program crashes, windows will detect it and show this error, all we can do is press OK
-		scriptLines.push(`
-			Do
-				Local $programError = WinActive("[TITLE:Program Error]", "")
-				If $programError Not = 0 Then
-					ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")
-				EndIf
-			Until $programError = 0`);
-		scriptLines.push(`KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")`);
 	}
 	else if(osid.startsWith("amiga"))
 	{

@@ -1,4 +1,4 @@
-# Supported File Formats (1,136)
+# Supported File Formats (1,139)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -181,11 +181,12 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [3 sam
 
 
 
-## Document (120)
+## Document (123)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
 document | Amiga Catalog Translation file | .ct | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/catalogTranslation/)
+document | Amiga ProWrite Document |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/amigaProWrite/)
 document | AmigaBASIC Source Code | .bas | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) | [10 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [17 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
 document | askSam Database | .ask | [strings](https://www.gnu.org/software/binutils/) | 
@@ -223,6 +224,7 @@ document | First Choice Document | .doc .pfs | [fileMerlin](http://www.file-conv
 document | [FrameMaker](http://fileformats.archiveteam.org/wiki/FrameMaker) | .fm .frm doc | [frameMaker](https://winworldpc.com/product/framemaker/50) | [5 sample files](https://telparia.com/fileFormatSamples/document/frameMaker/)
 document | FrameworkDocument | .fw2 .fw3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameworkDocument/)
 document | GNU Info File | .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/gnuInfo/)
+document | Gold Disk Spreadsheet | .adv .pcf | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/goldDiskSpreadsheet/)
 document | Helm Multimedia Book |  | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/helmMultimediaBook/)
 document | [Help Librarian Help File](http://fileformats.archiveteam.org/wiki/Help_Librarian) | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/helpLibrarian/)
 document | Home Accounts | .ha .ha2 | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/homeAccounts/)
@@ -235,7 +237,7 @@ document | [IBM Storyboard Text Maker Document](https://winworldpc.com/product/i
 document | IBM Works for OS/2 | .lwp .lpw | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/ibmWorksForOS2/)
 document | IBM Writing Assistant |  | [strings](https://www.gnu.org/software/binutils/) | 
 document | IFF Formatted Text | .iff .ftxt | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [10 sample files](https://telparia.com/fileFormatSamples/document/iffFormattedText/)
-document | InfoFile Database File | .flr | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
+document | InfoFile Database File | .flr | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
 document | InstallShield Compiled Script | .inx | [SID](https://github.com/tylerapplebaum/setupinxhacking) | [8 sample files](https://telparia.com/fileFormatSamples/document/installShieldCompiledScript/)
 document | ITS International Module | .int | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/itsInternational/)
 document | [LaTeX Document](http://fileformats.archiveteam.org/wiki/LaTeX) | .tex .ltx | [latex2html](https://www.latex2html.org/) [latex2pdf](http://latex2rtf.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/latex/) - Images don't seem to work at all. Hrm. At least the text seems to make it out, which is good enough for later indexing.
@@ -259,6 +261,7 @@ document | [Office Open XML](http://fileformats.archiveteam.org/wiki/DOCX) | .do
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [4 sample files](https://telparia.com/fileFormatSamples/document/xps/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [ipf2txt](https://github.com/Sembiance/dexvert) | [15 sample files](https://telparia.com/fileFormatSamples/document/os2Help/) - The ipf2txt file is limited on what files it can convert due to 16-bit limitations.
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
+document | PageSetter Document | .ps | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/pageSetter/)
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
 document | Palm TealMeal Document | .pdb | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/palmTealMeal/)
 document | Palm ThoughtManager | .pdb | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/palmThoughtManager/)
@@ -812,7 +815,7 @@ image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Arti
 image | [Windows Clipboard](http://fileformats.archiveteam.org/wiki/Windows_clipboard) | .clp | [deark](https://entropymine.com/deark/) [clipbrdWin2k](https://microsoft.com) [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [8 sample files](https://telparia.com/fileFormatSamples/image/windowsClipboard/)
 image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp .wap wbm | [convert](https://www.imagemagick.org/) | [3 sample files](https://telparia.com/fileFormatSamples/image/wirelessBMP/)
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [17 sample files](https://telparia.com/fileFormatSamples/image/wpg/) - It's a vector format, but convert doesn't always properly convert it to an SVG. So we also convert it to a PNG
-image | [X Window Dump](http://fileformats.archiveteam.org/wiki/XWD) | .xwd .dmp | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [9 sample files](https://telparia.com/fileFormatSamples/image/xwd/)
+image | [X Window Dump](http://fileformats.archiveteam.org/wiki/XWD) | .xwd .dmp .xdm | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [9 sample files](https://telparia.com/fileFormatSamples/image/xwd/)
 image | [X11 Bitmap](http://fileformats.archiveteam.org/wiki/XBM) | .xbm .bm | [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [10 sample files](https://telparia.com/fileFormatSamples/image/xbm/)
 image | [X11 Pixmap](http://fileformats.archiveteam.org/wiki/XPM) | .xpm .pm | [convert](https://www.imagemagick.org/) | [10 sample files](https://telparia.com/fileFormatSamples/image/xpm/)
 image | [XFig](http://fileformats.archiveteam.org/wiki/Fig) | .fig | [fig2dev](https://www.xfig.org/) | [15 sample files](https://telparia.com/fileFormatSamples/image/fig/) - It's a vector format, but embedded bitmaps don't convert to SVG. So we convert to both SVG and PNG.
@@ -1004,7 +1007,7 @@ music | Sound Invasion Module | .is .is20 | [uade123](http://zakalwe.fi/uade) | 
 music | Sound Master Module | .sm .smpro .sm3 | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/soundMaster/)
 music | Sound Programming Language Module | .spl | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/soundProgrammingLanguage/)
 music | [SoundFactory Module](http://fileformats.archiveteam.org/wiki/Soundfactory) | .psf | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/soundFactory/)
-music | [SoundFX Module](http://fileformats.archiveteam.org/wiki/SoundFX_module) | .sfx .sfx2 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [9 sample files](https://telparia.com/fileFormatSamples/music/soundFX/)
+music | [SoundFX Module](http://fileformats.archiveteam.org/wiki/SoundFX_module) | .sfx .sfx2 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://telparia.com/fileFormatSamples/music/soundFX/)
 music | SoundTracker Module | .mod | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://telparia.com/fileFormatSamples/music/soundTracker/)
 music | Soundtracker Pro II Module | .stp | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [2 sample files](https://telparia.com/fileFormatSamples/music/soundTrackerProII/)
 music | [SPC](http://fileformats.archiveteam.org/wiki/SPC_(Audio)) | .spc | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://telparia.com/fileFormatSamples/music/spc/)
@@ -1091,7 +1094,7 @@ other | NoteWorthy Composure | .nw | [strings](https://www.gnu.org/software/binu
 other | Null Bytes Alternating |  | [stripGarbage](https://github.com/Sembiance/dexvert) | [5 sample files](https://telparia.com/fileFormatSamples/other/nullBytesAlternating/)
 other | ObjectVision Datafile | .ovd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
 other | OS/2 INI File | .ini | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/os2INI/) - Just usings `strings` seems to do a pretty good at extracting the contents. Additional tools to process these files: https://www.os2site.com/sw/util/ini/index.html
-other | PowerWindows Project | .pw | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/other/powerWindowsProject/)
+other | PowerWindows Project | .pw | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/powerWindowsProject/)
 other | [Print Shop Graphic POG Archive Names File](http://fileformats.archiveteam.org/wiki/PrintMaster) | .pnm | [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/other/pogNames/)
 other | [PrintMaster Shape Names](http://fileformats.archiveteam.org/wiki/PrintMaster) | .sdr | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/printMasterShapeNames/)
 other | QuickBASIC Tokenized Source | .bas | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/quickBasicTokenizedSource/)

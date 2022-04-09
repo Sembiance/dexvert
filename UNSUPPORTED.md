@@ -1,4 +1,4 @@
-# Unsupported File Formats (532)
+# Unsupported File Formats (535)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -35,7 +35,7 @@ archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileForm
 
 
 
-## Audio (24)
+## Audio (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -55,6 +55,7 @@ audio | [Playstation Sound Format](http://fileformats.archiveteam.org/wiki/PSF) 
 audio | Proline Voice | .pvd | [8 sample files](https://telparia.com/fileFormatSamples/audio/prolineVoice/)
 audio | Psion AICA Audio | .aik | [3 sample files](https://telparia.com/fileFormatSamples/audio/psionAIKAudio/)
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
+audio | Sonic Arranger instrument |  | No known converter
 audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
 audio | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://telparia.com/fileFormatSamples/audio/soundBlasterInstrument/)
 audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://telparia.com/fileFormatSamples/audio/soundFont1/) - Awave Studio can technically convert these, but 99.9% of all SBK SoundFond 1 files just contain meta info that points to a samples in ROM, thus there isn't anything really to convert.
@@ -262,7 +263,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (283)
+## Other (285)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -526,6 +527,8 @@ other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://tel
 other | VCD Entries File | .vcd | 
 other | Vektor Grafix Driver | .drv | 
 other | VESA Display Identification File | .vdb | 
+other | Video Music Box Progression | .prgn | 
+other | Video Music Box Style | .stle | 
 other | VideoTracker Routine | .rot | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 other | Vista Digital Elevation Map | .dem | 
 other | Visual Basic Extension | .vbx | 

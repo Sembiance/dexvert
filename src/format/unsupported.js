@@ -356,6 +356,8 @@ export default
 		vcdEntries                   : {name : "VCD Entries File", ext : [".vcd"], filename : ["entries.vcd"], magic : ["VCD Entries File"]},
 		vesaDisplayIdentification    : {name : "VESA Display Identification File", ext : [".vdb"], magic : ["VESA Display Identification File"]},
 		videoTrackerRoutine          : {name : "VideoTracker Routine", ext : [".rot"], magic : ["VideoTracker Routine"]},
+		videoMusicBoxProgression     : {name : "Video Music Box Progression", ext : [".prgn"], magic : ["Video Music Box Progression"]},
+		videoMusicBoxStyle           : {name : "Video Music Box Style", ext : [".stle"], magic : ["Video Music Box Style"]},
 		vistaDigitalElevationMap     : {name : "Vista Digital Elevation Map", ext : [".dem"], magic : ["Vista Digital Elevation Map"]},
 		visualFoxProCompoundIndex    : {name : "Visual FoxPro Compound Index", ext : [".cdx"], magic : ["Compound index MS Visual FoxPro"]},
 		vocalEyesSet                 : {name : "Vocal-Eyes Set", ext : [".set"], magic : ["Vocal-Eyes Set"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (528)
+# Unsupported File Formats (532)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -151,7 +151,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (30)
+## Image (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -177,6 +177,7 @@ image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/P
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
+image | Satori Paint | .cvs .rir | [6 sample files](https://telparia.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://telparia.com/fileFormatSamples/image/simpleVectorFormat/)
 image | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://telparia.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
@@ -261,7 +262,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (280)
+## Other (283)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -341,10 +342,13 @@ other | Clipper Pre-Linked Library | .pll |
 other | Compiled AppleScript Script |  | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 other | Confusion and Light Compressed Data | .cal | 
 other | Corel Editor Macro | .edm | 
+other | COREL Photo Paint User Defined Filter | .usr | 
+other | Corel PhotoPaint Tone Curve | .crv | 
 other | Corel Shell Macro | .shm | 
 other | Corncob 3D Data File | .cct | 
 other | Cornel Huth Compressed Library | .li_ | 
 other | Create Adventure Games Project | .cag | 
+other | Creative Graphics Library Driver | .cgl | 
 other | Creative Signal Processor Microcode | .csp | 
 other | Cybervision Monitor Info |  | 
 other | Cygnus Editor Default Settings |  | 

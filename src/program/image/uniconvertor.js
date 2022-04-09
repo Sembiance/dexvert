@@ -9,9 +9,10 @@ export class uniconvertor extends Program
 		outType : `Which type to convert to (svg || png). Default: svg`
 	};
 
-	bin        = "uniconvertor";
-	args       = async r => [r.inFile(), await r.outFile(`out.${r.flags.outType || "svg"}`)];
-	runOptions = ({timeout : xu.MINUTE*3});
-	renameOut  = true;
-	chain      = r => ((r.flags.outType || "svg")==="svg" ? "deDynamicSVG" : null);
+	loc       = "gentoo";	// when running LOTS of copies at once, the AppImage often fails, so we run on gentoo VM to ensure only 1 conversion at once
+	bin       = "uniconvertor";
+	args      = r => [r.inFile(), `/out/out.${r.flags.outType || "svg"}`];
+	qemuData  = ({timeout : xu.MINUTE*2});
+	chain     = r => ((r.flags.outType || "svg")==="svg" ? "deDynamicSVG" : null);
+	renameOut = true;
 }

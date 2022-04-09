@@ -16,7 +16,8 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> trying every safe program on it and saving results in <outputDirPath>",
 	opts    :
 	{
-		family : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true}
+		family : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
+		serial : {desc : "Run the programs serially..."}
 	},
 	args :
 	[
@@ -71,16 +72,18 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	await Deno.mkdir(outputDirPath, {recursive : true});
 	const outputDir = await DexFile.create(outputDirPath);
 
+	if(argv.serial)
+		xu.stdout(`Program ${familyid}/${programid} `);
 	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
 	const outputFiles = dexState.f.files.output || [];
 	if(outputFiles.length>0)
 	{
-		xlog.info`Program ${familyid}/${programid} produced ${outputFiles.length} files`;
+		xlog.info`${!argv.serial ? `Program ${familyid}/${programid} ` : ""}produced ${outputFiles.length} files`;
 	}
 	else
 	{
-		xlog.info`Program ${familyid}/${programid} ${fg.red("none")}`;
+		xlog.info`${!argv.serial ? `Program ${familyid}/${programid} ` : ""}${fg.red("none")}`;
 		await fileUtil.unlink(outputDirPath, {recursive : true});
 	}
-}, 10);
+}, argv.serial ? 1 : 10);
 

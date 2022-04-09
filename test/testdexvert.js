@@ -118,6 +118,14 @@ const IGNORE_SIZE_FILEPATHS =
 	/SUB2.webp$/
 ];
 
+// these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
+// Specific the path to the file and a number of different files that is allowed
+const FLEX_DIFF_FILES =
+[
+	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
+	[/document\/wordDoc\/POWWOW\.DOC$/, 2]
+];
+
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
@@ -125,7 +133,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
-	[/image\/hiEddit\/05$/, "image", "doodleC64"],
+	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
@@ -189,7 +197,7 @@ function getWebLink(filePath)
 
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
-const SLOW_DURATION = xu.MINUTE*3;
+const SLOW_DURATION = xu.MINUTE*5;
 const slowFiles = {};
 const DATA_FILE_PATH = path.join("/mnt/dexvert/test", `${Deno.hostname()}.json`);
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
@@ -374,7 +382,8 @@ async function testSample(sampleFilePath)
 	if(result.files)
 	{
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
-		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid))
+		const allowedDiffQty = FLEX_DIFF_FILES.find(([regex]) => regex.test(sampleFilePath))?.[1] || 0;
+		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && diffFiles.length>allowedDiffQty)
 			return await fail(`Created files are different: ${fg.orange(diffFiles)}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);

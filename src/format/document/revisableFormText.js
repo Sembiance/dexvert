@@ -6,5 +6,5 @@ export class revisableFormText extends Format
 	ext            = [".rft", ".dca"];
 	forbidExtMatch = true;
 	magic          = [/Revisable Form Text/];
-	converters     =  ["fileMerlin", "word97"];
+	converters     = ["fileMerlin", "word97"];
 }

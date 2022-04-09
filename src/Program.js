@@ -427,6 +427,8 @@ export class Program
 							return;
 						}
 
+						xlog.debug`Handling ${chainResult.f.all.length} chain file results...`;
+
 						// copy our new chain output files over to the dir the input files are in. WARNING! This doesn't do ANY collision avoidance at all, so if there are duplicate filenames, they will overwrite the existing files
 						const newFileSet = await chainResult.f.rsyncTo(inputFiles[0].dir.startsWith(f.outDir.absolute) ? inputFiles[0].dir : f.outDir.absolute, {type : "new", relativeFrom : chainResult.f.outDir.absolute});
 						newFileSet.changeRoot(f.root);

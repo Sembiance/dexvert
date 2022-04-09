@@ -5,7 +5,8 @@ export class dexvert extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
 	flags   = {
-		asFormat : "Which format to convert as"
+		asFormat   : "Which format to convert as",
+		skipVerify : "Don't verify output file"
 	};
 	unsafe = true;
 
@@ -15,6 +16,8 @@ export class dexvert extends Program
 		const a = [`--logLevel=${r.xlog.level}`];
 		if(r.flags.asFormat)
 			a.push(`--asFormat=${r.flags.asFormat}`);
+		if(r.flags.skipVerify)
+			a.push("--skipVerify");
 
 		const forbidProgram = new Set(RUNTIME.forbidProgram);
 		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)

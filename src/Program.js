@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -427,10 +427,23 @@ export class Program
 							return;
 						}
 
+						// copy our new chain output files over to the dir the input files are in. WARNING! This doesn't do ANY collision avoidance at all, so if there are duplicate filenames, they will overwrite the existing files
 						xlog.debug`Handling ${chainResult.f.all.length} chain file results...`;
 
-						// copy our new chain output files over to the dir the input files are in. WARNING! This doesn't do ANY collision avoidance at all, so if there are duplicate filenames, they will overwrite the existing files
-						const newFileSet = await chainResult.f.rsyncTo(inputFiles[0].dir.startsWith(f.outDir.absolute) ? inputFiles[0].dir : f.outDir.absolute, {type : "new", relativeFrom : chainResult.f.outDir.absolute});
+						const targetChainDirPath = inputFiles[0].dir.startsWith(f.outDir.absolute) ? inputFiles[0].dir : f.outDir.absolute;
+						let newFileSet=null;
+
+						if(chainResult.flags.bulkCopyOut)
+						{
+							await runUtil.run("rsync", ["-sa", `${chainResult.f.outDir.absolute}/`, targetChainDirPath]);
+							newFileSet = await FileSet.create(f.root);
+							await chainResult.f.files.new.parallelMap(async file => await newFileSet.add("new", path.join(targetChainDirPath, path.relative(chainResult.f.outDir.absolute, file.absolute))));
+						}
+						else
+						{
+							newFileSet = await chainResult.f.rsyncTo(targetChainDirPath, {type : "new", relativeFrom : chainResult.f.outDir.absolute});
+						}
+
 						newFileSet.changeRoot(f.root);
 						await f.addAll("new", newFileSet.files.new);
 
@@ -440,7 +453,7 @@ export class Program
 							if(!newFileSet.files.new.some(v => v.absolute===inputFile.absolute))
 								await f.remove("new", inputFile, {unlink : true});
 						}
-
+						
 						xlog.info`Chain ${progRaw} resulted in new files: ${newFileSet.files.new.map(v => v.rel).join(" ")}`;
 
 						await chainResult.unlinkHomeOut();

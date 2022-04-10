@@ -1,4 +1,4 @@
-# Unsupported File Formats (535)
+# Unsupported File Formats (536)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -152,7 +152,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (31)
+## Image (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -166,6 +166,7 @@ image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fas
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
+image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
 image | [JPEG XL](http://fileformats.archiveteam.org/wiki/JPEG_XL) | .jxl | [8 sample files](https://telparia.com/fileFormatSamples/image/jpegXL/) - Modern format. Pain in the butt to build the JPEG-XL reference package, I started, see overlay/legacy/JPEG-XL but then gave up because meh.
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.

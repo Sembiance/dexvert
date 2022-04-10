@@ -6,5 +6,5 @@ export class zlib extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Zlib";
 	forbiddenExt = [".dmg"];	// some DMG files identify as ZLIB data, which gameextractor errors out in converting, so never match .dmg files to ZLIB
 	magic        = ["zlib compressed data", "ZLIB compressed data"];
-	converters   = ["gameextractor", "deark[module:zlib]"];
+	converters   = ["gameextractor", "zlib_flate"];
 }

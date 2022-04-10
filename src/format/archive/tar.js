@@ -7,5 +7,5 @@ export class tar extends Format
 	ext            = [".tar", ".gtar"];
 	magic          = ["TAR - Tape ARchive", /.* tar archive/, /^tar archive$/];
 	forbiddenMagic = ["TFMX module sound data tar archive"];
-	converters     = ["tar", "7z", "UniExtract"];
+	converters     = ["tar", "sevenZip", "UniExtract"];
 }

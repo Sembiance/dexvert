@@ -11,7 +11,7 @@ mkdir "$tmpDirPath"
 
 cd "$1" || exit
 for f in *; do
-	deno run --v8-flags=--max-old-space-size=32768 --import-map /mnt/compendium/DevLab/deno/importMap.json --no-check --unstable --allow-read --allow-write --allow-run --allow-env /mnt/compendium/DevLab/dexvert/util/tensorPreProcess.js "$f" "$tmpDirPath"
+	deno run --v8-flags=--max-old-space-size=32768,--enable-experimental-regexp-engine-on-excessive-backtracks --import-map /mnt/compendium/DevLab/deno/importMap.json --no-check --unstable --allow-read --allow-write --allow-run --allow-env /mnt/compendium/DevLab/dexvert/util/tensorPreProcess.js "$f" "$tmpDirPath"
 done
 
 cd "$tmpDirPath" || exit

@@ -1,4 +1,4 @@
-# Unsupported File Formats (536)
+# Unsupported File Formats (544)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -66,7 +66,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (20)
+## Document (21)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
@@ -80,6 +80,7 @@ document | Cloanto C1-Text Document | .c1text | [1 sample file](https://telparia
 document | Dart Hypertext |  | [5 sample files](https://telparia.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://telparia.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Epic TFP Document](https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40) | .tfp | Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format
+document | FinalCalc Spreadsheet | .sheet | [1 sample file](https://telparia.com/fileFormatSamples/document/finalCalcSpreadsheet/)
 document | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://telparia.com/fileFormatSamples/document/hotHelpText/)
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
 document | Lotus Symphony Worksheet | .wk1 wr1 | 
@@ -116,7 +117,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (30)
+## Font (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -137,6 +138,7 @@ font | LinkWay Font | .fmf |
 font | Lotus Raster Font | .lrf | 
 font | Lotus Vector Font | .lvf | 
 font | MacOS Font | .fnt | 
+font | Personal Font Maker Font/Character Set | .fnt .set | 
 font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://telparia.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 font | PrintPartner Font | .font | 
 font | Psion Font | .fon | 
@@ -190,7 +192,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 
 
 
-## Music (68)
+## Music (69)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -231,6 +233,7 @@ music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Ma
 music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/) - So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
+music | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXPerformance/)
 music | MusicMaker Module | .mm8 | [5 sample files](https://telparia.com/fileFormatSamples/music/musicMakerModule/)
 music | MVSTracker Module | .mus | [2 sample files](https://telparia.com/fileFormatSamples/music/mvsTracker/)
 music | MVX Module | .mvm | [4 sample files](https://telparia.com/fileFormatSamples/music/mvxModule/)
@@ -264,7 +267,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (285)
+## Other (289)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -355,12 +358,14 @@ other | Creative Signal Processor Microcode | .csp |
 other | Cybervision Monitor Info |  | 
 other | Cygnus Editor Default Settings |  | 
 other | Cygnus Editor Macros |  | 
+other | Datastore Database |  | 
 other | dBase Compiled Object Program | .dbo | 
 other | dBase Index File | .ntx | 
 other | dBase Query | .qbe | 
 other | dBase Update | .upd | 
 other | DeHackEd Patch | .deh | 
 other | Descent Level | .rdl | 
+other | Digita Organiser Theme |  | 
 other | Dive File Format | .dff | 
 other | DOOM Save Game | .dsg | 
 other | Dr.Web Anti-Virus Database | .vdb | 
@@ -423,6 +428,7 @@ other | Mach-O m68k Object | .o |
 other | Maple Common Binary | .m | 
 other | MASI Music Driver | .mus | 
 other | MathCad Document | .mcd | 
+other | Maxon Resource Creation Tool Data | .rct | 
 other | MDIFF Patch File | .mdf | 
 other | MegaPaint Printer Driver | .trb | 
 other | MetaCreations Resource Composite File |  | 
@@ -501,6 +507,7 @@ other | SmartDraw Template | .sdt .sdr |
 other | Snoop Capture | .snoop | 
 other | SNX Snapshot | .snx | 
 other | SoftDisk Library | .shl | 
+other | Speculator Snapshot | .zx82 .zx | 
 other | StarCraft Map | .scm .scx | 
 other | Startrekker Module Info | .nt | 
 other | StarWriter Printer Driver | .gpm | 
@@ -580,12 +587,13 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (15)
+## Video (16)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
 video | Accent Software Show Sequence | .seq | [11 sample files](https://telparia.com/fileFormatSamples/video/accentShowSequence/) - Old MS-DOS software. Couldn't find a standalone player/converter, and also probably wasn't very popular.
 video | Adorage Animation | .awm | [1 sample file](https://telparia.com/fileFormatSamples/video/adorageAnimation/)
+video | Amiga Murder Video | .film | [6 sample files](https://telparia.com/fileFormatSamples/video/amigaMurder/)
 video | Animation Works Movie | .awm | [5 sample files](https://telparia.com/fileFormatSamples/video/animationWorks/) - Couldn't locate a converter or extractor
 video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim | [7 sample files](https://telparia.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 video | Delphine CIN Video | .cin | [5 sample files](https://telparia.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files

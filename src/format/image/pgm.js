@@ -9,4 +9,5 @@ export class pgm extends Format
 	magic        = ["Portable GrayMap bitmap", "Portable Grey Map", /^Netpbm image data .*greymap$/];
 	metaProvider = ["image"];
 	converters   = ["convert", "hiJaakExpress"];
+	verify       = ({meta}) => meta.width>2 && meta.height>2;
 }

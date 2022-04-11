@@ -9383,3 +9383,9 @@ Animation File Types
 	MPEG Animation (MPG)
 	QuickTime Movie (MOV)
 	Video for Windos (AVI)
+
+
+>>> DirMaster https://style64.org/dirmaster/documentation/
+disk image support: .d64, .d71, .d81, .d80, .d82, .d2m, .d4m, .dhd, .hdd (read only), .dnp, .dfi, .m2i (read only), .t64, .g64 (read only), .nib (read only)
+file support: .prg/.p00, .seq/.s00, .usr/.u00, .rel/.r00
+archive support: .arc, .sda, .lnx, .sfx, .ark, .lbr, .spy, .cvt, .wr3, zip/4 (1!..., 2!..., etc)

@@ -75,6 +75,7 @@ export const WEAK_VALUES =
 	/^GTA2 /,
 	/^Hitachi SH/,
 	/^HTML document/,
+	/^HP 48 binary/,
 	/^hp\d00/,
 	/^iAPX 286 executable/,
 	/^IRIS Showcase file/,
@@ -135,6 +136,8 @@ export const WEAK_VALUES =
 	/^TeX font metric data/,
 	/^troff or preprocessor input/,
 	/^Targa image data/,
+	/^Tower\/XP rel/,
+	/^Tower32/,
 	/^unicos \(cray\) executable/,
 	/^unknown demand paged pure executable/,
 	/^unknown readable demand paged pure executable/,
@@ -275,7 +278,7 @@ export const WEAK_VALUES =
 	/^Z-Code V\d adventure for Infocom Z-Machine$/,
 	/^ZX Microdrive cartridge image$/,
 	
-	// TRID: Checks for just zeroes or nearly all zeroes/FF's:
+	// TRID: Checks for just zeroes or a single repeating value:
 	/^Acorn RISC OS font/,
 	/^Adobe PhotoShop Brush$/,
 	/^AudioZip encoded audio$/,
@@ -318,6 +321,7 @@ export const WEAK_VALUES =
 	/^Torque Dynamix Three Space model/,
 	/^UbiArt Framework Cooked Asset$/,
 	/^V-Ray Material \(binary\)$/,
+	/^Virtual MC-10\/Alice tape image$/,
 	/^Visi On Overlay$/,
 	/^VXD Driver$/,
 	/^Warajevo Tape image format$/,

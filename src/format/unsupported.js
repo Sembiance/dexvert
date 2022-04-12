@@ -10,7 +10,7 @@ export default
 
 	executable :
 	{
-		aDotOutExecutable : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/]},
+		aDotOutExecutable : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/, /^a\.out NetBSD/]},
 		amigaExe          : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
 		atariCPX          : {name : "Atari Control Panel Extension Module", ext : [".cpx"], magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"], weakMagic : true},
 		atariSTExe        : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
@@ -47,6 +47,7 @@ export default
 		lotusRasterFont       : {name : "Lotus Raster Font", ext : [".lrf"], magic : ["Lotus Raster Font"]},
 		lotusVectorFont       : {name : "Lotus Vector Font", ext : [".lvf"], magic : ["Lotus Vector Font"]},
 		macOSFont             : {name : "MacOS Font", ext : [".fnt"], magic : ["Mac OSX datafork font, 'FONT'"]},
+		msxKanjiFont          : {name : "MSX Kanji Font", magic : ["MSX Kanji Font"]},
 		personalFontMakerFont : {name : "Personal Font Maker Font/Character Set", ext : [".fnt", ".set"], magic : ["Personal Font Maker Font/character Set"]},
 		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
 		psionFont             : {name : "Psion Font", ext : [".fon"], magic : ["Psion fast Font", "Psion Font"]},
@@ -229,6 +230,7 @@ export default
 		autoDesk3DStudioMaterialLib  : {name : "AutoDesk 3D-Studio Material Library", ext : [".mli"], magic : ["AutoDesk 3D-Studio Material-Library"]},
 		babbleData                   : {name : "Babble! Data", ext : [".bab"], magic : ["Babble! text data"]},
 		barsAndPipesFile             : {name : "Bars and Pipes File", ext : [".gchone", ".gchord", ".song"], magic : ["Bars and Pipes"]},
+		berkeleyDB                   : {name : "Berkeley DB", ext : [".db"], magic : ["Berkeley DB"]},
 		binaryColorFormat            : {name : "Binary Color Format", ext : [".bcf"], magic : ["Binary Color Format	"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},
 		buildEngineDemoData          : {name : "Build Engine Demo Data", ext : [".dem"], magic : ["Build engine Demo/replay data"]},
@@ -270,6 +272,7 @@ export default
 		fourDPaintProject            : {name : "4D Paint Project", ext : [".4dp"], magic : ["4D Paint Project"]},
 		foxProMemo                   : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fractalDesignPaperTexture    : {name : "Fractal Design Painter Paper Texture", ext : [".pap"], magic : ["Fractal Design Painter Paper texture"]},
+		frontPageBTreeIndex          : {name : "Front Page Binary-Tree Index", ext : [".btr"], magic : ["FrontPage Binary-tree index"]},
 		gammaCAD                     : {name : "GammaCAD Document", ext : [".sym", ".gc1"], magic : ["GammaCAD drawing/symbol"]},
 		geoWorksGEOSData             : {name : "GeoWorks GEOS Data", ext : [".000", ".001", ".002", ".003", ".004", ".005", ".006", ".007", ".008", ".009", ".010", ".011", ".012", ".geo"], magic : ["GeoWorks data", "GeoWorks GEOS data"]},
 		gettextMachineObject         : {name : "Gettext Machine Object", ext : [".gmo"], magic : ["GNU Gettext Machine Object"]},

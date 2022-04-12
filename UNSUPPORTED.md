@@ -1,4 +1,4 @@
-# Unsupported File Formats (552)
+# Unsupported File Formats (556)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -35,12 +35,13 @@ archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileForm
 
 
 
-## Audio (25)
+## Audio (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
 audio | Aegis Sonix Instrument | .instr | [21 sample files](https://telparia.com/fileFormatSamples/audio/sonixInstrument/) - The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 audio | AM Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/audio/amSound/)
+audio | Amiga 16VX Sound |  | [1 sample file](https://telparia.com/fileFormatSamples/audio/amiga16vx/)
 audio | Art of Noise Instrument | .fm | [5 sample files](https://telparia.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/)
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
@@ -117,7 +118,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (31)
+## Font (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -138,6 +139,7 @@ font | LinkWay Font | .fmf |
 font | Lotus Raster Font | .lrf | 
 font | Lotus Vector Font | .lvf | 
 font | MacOS Font | .fnt | 
+font | MSX Kanji Font |  | 
 font | Personal Font Maker Font/Character Set | .fnt .set | 
 font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://telparia.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 font | PrintPartner Font | .font | 
@@ -269,7 +271,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (295)
+## Other (297)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -323,6 +325,7 @@ other | AutoCAD Protected LISP | .lsp |
 other | AutoDesk 3D-Studio Material Library | .mli | 
 other | Babble! Data | .bab | 
 other | Bars and Pipes File | .gchone .gchord .song | 
+other | Berkeley DB | .db | 
 other | Binary Color Format | .bcf | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
@@ -384,6 +387,7 @@ other | File Express Quick Scan | .qss |
 other | Flight Sim Toolkit Terrain Data | .ftd | 
 other | FoxPro Memo File | .fpt | 
 other | Fractal Design Painter Paper Texture | .pap | 
+other | Front Page Binary-Tree Index | .btr | 
 other | Full Tilt Pinball Data | .dat | 
 other | Game Boy ROM | .gb .gbc | 
 other | GammaCAD Document | .sym .gc1 | 

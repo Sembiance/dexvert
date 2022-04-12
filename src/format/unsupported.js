@@ -220,6 +220,7 @@ export default
 		amosDatasBank                : {name : "AMOS Datas Bank", ext : [".abk"], magic : ["AMOS Data Bank", "AMOS Memory Bank, Data format", /^AMOS Basic memory bank.* type Data$/]},
 		amosWorkBank                 : {name : "AMOS Work Bank", ext : [".abk"], magic : ["AMOS Work Bank"]},
 		aniMouseTutorial             : {name : "AniMouse Tutorial", ext : [".sdemo"], magic : ["AniMouse Tutorial"]},
+		apAssistCompressedData       : {name : "ApAssist Compressed Data", magic : ["ApAssist compressed data"]},
 		artEffectBrush               : {name : "ArtEffect Brush", magic : ["ArtEffect brush"]},
 		artEffectConvolution         : {name : "ArtEffect Convolution", magic : ["ArtEffect convolution"]},
 		asciiFontMetrics             : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric", "Adobe/Outline Font Metric"]},
@@ -258,6 +259,7 @@ export default
 		dBaseUpdate                  : {name : "dBase Update", ext : [".upd"], magic : ["dBASE IV Update"]},
 		digitaORganiserTheme         : {name : "Digita Organiser Theme", magic : ["Digita Organiser theme"]},
 		dosCodePage                  : {name : "MS-DOS Code Page Info", ext : [".cp", ".cpi"], magic : ["DOS code page font data collection", "MS-DOS International Code Page Info"]},
+		drawStudioGradient           : { name : "DrawStudio Gradient", magic : ["DrawStudio gradient"]},
 		drWebAntiVirusDatabas        : {name : "Dr.Web Anti-Virus Database", ext : [".vdb"], magic : ["Dr.Web Anti-Virus Database"]},
 		dynamicMessageSystemFile     : {name : "Dynamic Message System File", ext : [".msg"], magic : ["Dynamic Message System"]},
 		ensoniqVFXPatchFile          : {name : "Ensoniq VFX Patch File", ext : [".vfx"], magic : ["SysEx File - Ensoniq"]},
@@ -271,6 +273,7 @@ export default
 		gammaCAD                     : {name : "GammaCAD Document", ext : [".sym", ".gc1"], magic : ["GammaCAD drawing/symbol"]},
 		geoWorksGEOSData             : {name : "GeoWorks GEOS Data", ext : [".000", ".001", ".002", ".003", ".004", ".005", ".006", ".007", ".008", ".009", ".010", ".011", ".012", ".geo"], magic : ["GeoWorks data", "GeoWorks GEOS data"]},
 		gettextMachineObject         : {name : "Gettext Machine Object", ext : [".gmo"], magic : ["GNU Gettext Machine Object"]},
+		gfxLab24Filter               : {name : "GfxLab24 Filter", magic : ["GfxLab24 filter"]},
 		harvardGraphicsChart         : {name : "Harvard Graphics Chart", ext : [".ch3"], magic : ["Harvard Graphics Chart"]},
 		hotMapRegionsDescription     : {name : "HotMap VBX Regions Description", ext : [".hmd"], magic : ["HotMap VBX regions Description"]},
 		hyperPadPad                  : {name : "HyperPAD Pad", ext : [".pad"], magic : ["HyperPAD Pad"]},
@@ -313,6 +316,7 @@ export default
 		nortonChangeDirInfo          : {name : "Norton Change Directory Info", ext : [".ncd"], magic : ["Norton Change Directory info"]},
 		novellSystemPrintDef         : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},
 		paperPortSlideShot           : {name : "PaperPort Slide Show", ext : [".fss"], magic : ["PaperPort slide show"]},
+		papillonPalette              : {name : "Papillon Palette", ext : [".pal", ".ppal"], magic : ["Papillon Palette"]},
 		pascalCompiledUnit           : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit"]},
 		pcAnywhere                   : {name : "PCAnywhere Data", ext : [".bhf"], magic : ["PCAnywhere32 Data"]},
 		pgpKeyRing                   : {name : "PGP Key Ring", ext : [".key", ".pgp"], magic : ["Pretty Good Privacy (PGP) Public Keyring", "OpenPGP Public Key Version"]},
@@ -355,6 +359,7 @@ export default
 		texVirtualFont               : {name : "TeX Virtual Font", ext : [".vf"], magic : [/^TeX [Vv]irtual [Ff]ont/]},
 		threeDStudioProject          : {name : "3D Studio Project", ext : [".prj"], magic : [/^3D Studio Project/]},
 		thunderbyteAV                : {name : "Thunderbyte AV", ext : [".dat", ".eci", ".ec", ".sig", "sig"], magic : ["Thunderbyte AV", "ThunderByte Antivirus"]},
+		thxTrackerInstrument         : {name : "THX Tracker Instrument", ext : [".ins"], magic : ["THX Tracker instrument"]},
 		timeZoneData                 : {name : "TimeZone Data", ext : [".tz"], magic : [/^[Tt]ime[Zz]one data/]},
 		typeLibrary                  : {name : "Type Library", ext : [".tlb"], magic : [/^Type Library \(Type[12]\)$/]},
 		uleadImageiioThumbnailInfo   : {name : "Ulead Imageioo Thumbnail Info", ext : [".pe3", ".pe4"], magic : ["Ulead Imageiio/Imaginfo thumbnail"]},
@@ -375,6 +380,7 @@ export default
 		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
 		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72"]},
-		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]}
+		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
+		yafaCompressionOptions       : {name : "YAFA Compression Options", magic : ["YAFA compression options"]}
 	}
 };

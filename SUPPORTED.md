@@ -1,4 +1,4 @@
-# Supported File Formats (1,150)
+# Supported File Formats (1,152)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -18,7 +18,7 @@ archive | [Amiga Disk Master System Archive](http://fileformats.archiveteam.org/
 archive | [Amiga XPK Archive](http://fileformats.archiveteam.org/wiki/XPK) | .xpk | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [14 sample files](https://telparia.com/fileFormatSamples/archive/xpk/)
 archive | AMOS Banks Group | .abk | [dumpamos](https://github.com/kyz/amostools/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/amosBanksGroup/)
 archive | [AMOS Basic Source Code Archive](http://fileformats.archiveteam.org/wiki/AMOS_BASIC_tokenized_file) | .amos | [listamos](https://github.com/kyz/amostools/) [dumpamos](https://github.com/kyz/amostools/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/amosSrc/)
-archive | [AMOS Memory Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank) | .abk | [dd](https://www.gnu.org/software/coreutils/) | [9 sample files](https://telparia.com/fileFormatSamples/archive/amosMemoryBank/)
+archive | [AMOS Memory Bank](http://fileformats.archiveteam.org/wiki/AMOS_Memory_Bank) | .abk | [dd](https://www.gnu.org/software/coreutils/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/amosMemoryBank/)
 archive | AMOS Power Packer Bank | .abk | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://telparia.com/fileFormatSamples/archive/amosPowerPackerBank/)
 archive | [AMOS Sprite Bank](http://fileformats.archiveteam.org/wiki/AMOS_Sprite_Bank) | .abk | [dumpamos](https://github.com/kyz/amostools/) | [17 sample files](https://telparia.com/fileFormatSamples/archive/amosSpriteBank/)
 archive | [Amstrad CPC Disk](http://fileformats.archiveteam.org/wiki/DSK_(CPCEMU)) | .dsk | [cpcxfs](http://www.cpcwiki.eu/forum/applications/cpcxfs/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/cpcDisk/)
@@ -78,7 +78,7 @@ archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .l
 archive | Lhwarp | .lhw | [unar](https://unarchiver.c3.cx/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/lhwarp/)
 archive | Lucas Arts Game Data Archive | .gob | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/lucasArts/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
-archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [deark](https://entropymine.com/deark/) [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/macBinary/)
+archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [deark](https://entropymine.com/deark/) [unar](https://unarchiver.c3.cx/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/macBinary/)
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) [macromediaDirector](https://www.buraks.com/swifty/xena.html) | [22 sample files](https://telparia.com/fileFormatSamples/archive/macromediaDirector/) - While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js
 archive | [Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/swf/)
@@ -138,7 +138,7 @@ archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
 archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
-archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
+archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
 archive | Warcraft 2 Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/warcraft2Archive/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [resourceHacker](http://www.angusj.com/resourcehacker/) [resourceEditor](http://melander.dk/reseditor/) [strings](https://www.gnu.org/software/binutils/) | [23 sample files](https://telparia.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Thumbs.db) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/windowsThumbDB/)
@@ -185,7 +185,7 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [3 sam
 
 
 
-## Document (127)
+## Document (128)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -290,6 +290,7 @@ document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?titl
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [11 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
 document | StarWriter Document | .tpl | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/starWriter/) - Soffice claims to support this format, but it wouldn't do anything with my .TPL files.
+document | STFax Script | .script | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/stFaxScript/)
 document | Sundial Clearlook | .ctx | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/sundialClearlook/)
 document | SuperCalc Worksheet | .cal | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/superCalc/)
 document | Tempus Word Document | .twd | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/tempusWord/)
@@ -631,7 +632,7 @@ image | [Ludek Maker](http://fileformats.archiveteam.org/wiki/Ludek_Maker) | .ld
 image | Mac PageMill's GIF Bitmap | .gif | [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [10 sample files](https://telparia.com/fileFormatSamples/image/macPageMillGIF/)
 image | MacBinary Image |  | [deark](https://entropymine.com/deark/) | [5 sample files](https://telparia.com/fileFormatSamples/image/macBinaryImage/) - Some images from old Mac systems have resource forks and are encoded in MacBinary.
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [soffice](https://www.libreoffice.org) [convert](https://www.imagemagick.org/) | [6 sample files](https://telparia.com/fileFormatSamples/image/macDraw/)
-image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2) [soffice](https://www.libreoffice.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [convert](https://www.imagemagick.org/) | [20 sample files](https://telparia.com/fileFormatSamples/image/pict/)
+image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2) [soffice](https://www.libreoffice.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [convert](https://www.imagemagick.org/) | [21 sample files](https://telparia.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://telparia.com/fileFormatSamples/image/icns/)
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [14 sample files](https://telparia.com/fileFormatSamples/image/macPaint/)
 image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel_Editor) | .cpi | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/cpi/)
@@ -1180,7 +1181,7 @@ text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d
 
 
 
-## Video (35)
+## Video (36)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 video | [Acorn Replay Video](http://fileformats.archiveteam.org/wiki/Acorn_Replay) | .rpl | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/acornReplayVideo/)
@@ -1213,6 +1214,7 @@ video | [MPEG4 Video](http://fileformats.archiveteam.org/wiki/MP4) | .mp4 .m4v |
 video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_Animation) | .ani | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/video/neochromeAnimation/)
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/psygnosisYOP/)
+video | [Quake II Cinematic Video](https://multimedia.cx/mirror/idcin.html) | .cin | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/quake2Cinematic/)
 video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv .rmvb .rmf | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/realVideo/)
 video | [Silicon Graphics IRIX Movie](http://fileformats.archiveteam.org/wiki/SGI_movie) | .mv .movie .sgi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [4 sample files](https://telparia.com/fileFormatSamples/video/sgiMovie/)
 video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/smacker/)

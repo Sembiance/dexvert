@@ -1,4 +1,4 @@
-# Unsupported File Formats (564)
+# Unsupported File Formats (566)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -272,7 +272,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (304)
+## Other (306)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -525,6 +525,7 @@ other | SmartDraw Template | .sdt .sdr |
 other | Snoop Capture | .snoop | 
 other | SNX Snapshot | .snx | 
 other | SoftDisk Library | .shl | 
+other | Sound Forge Peak Data | .sfk | 
 other | Speculator Snapshot | .zx82 .zx | 
 other | StarCraft Map | .scm .scx | 
 other | Startrekker Module Info | .nt | 
@@ -556,6 +557,7 @@ other | Vektor Grafix Driver | .drv |
 other | VESA Display Identification File | .vdb | 
 other | Video Music Box Progression | .prgn | 
 other | Video Music Box Style | .stle | 
+other | VideoFX2 Sequence | .seq | 
 other | VideoTracker Routine | .rot | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 other | Vista Digital Elevation Map | .dem | 
 other | Visual Basic Extension | .vbx | 

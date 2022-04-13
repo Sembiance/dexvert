@@ -22,6 +22,7 @@ export default
 		machOm68kExe      : {name : "Mach-O m68k Executable", magic : ["Mach-O m68k executable"]},
 		mipsECOFFExe      : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
 		msDOSDriver       : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
+		qDOSExe           : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
 		riscOSExe         : {name : "RISC OS Executable", magic : ["RISC OS AIF executable"]},
 		sparcDemandExe    : {name : "SPARC Demand Paged Exe", magic : ["SPARC demand paged dynamically linked executable not stripped"]},
 		superbaseProgram  : {name : "Superbase Program", ext : [".sbp"], magic : ["Superbase Program"]},
@@ -91,6 +92,7 @@ export default
 		homeBrewTile                : {name : "HomeBrew Tile", ext : [".hti"], magic : ["HomeBrew Tile"]},
 		infinityEngineFile          : {name : "Infinity Engine File", ext : [".dlg", ".cre", ".itm", ".are", ".tlk", ".spl", ".sto"], magic : ["Infinity Engine "]},
 		jazzJackrabbitFile          : {name : "Jazz Jackrabbit File", ext : [".0sc", ".0fn"], magic : ["Jazz Jackrabbit font/cutscene", "Jazz Jackrabbit map"]},
+		kolekoSaveState             : {name : "KOLEKO Save State", ext : [".rom"], magic : ["KOLEKO Save state"]},
 		legendOfKyrandiaEMCFile     : {name : "Legend of Kyrandia EMC File", ext : [".emc"], magic : ["Kyra Engine game data"]},
 		lucasFilmData               : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel"]},
 		midiMazeIIMaze              : {name : "MIDI-MAZE II Maze", ext : [".mze"], magic : ["MIDI-MAZE II Maze"]},
@@ -188,6 +190,7 @@ export default
 		sciTechDriver                 : {name : "SciTech Driver", ext : [".drv"], magic : ["SciTech Software UniVBE driver"]},
 		starWriterPrinterDriver       : {name : "StarWriter Printer Driver", ext : [".gpm"], magic : ["StarWriter for MS-DOS Graphics Printer driver"]},
 		starWriterVideoDriver         : {name : "StarWriter Video Driver", ext : [".hgd"], magic : ["StarWriter for MS-DOS Graphics video Driver"]},
+		threeDFXGlideDriver           : {name : "3DFX Glide driver", ext : [".dxe"], magic : ["3DFX Glide driver"]},
 		vektorGrafixDriver            : {name : "Vektor Grafix Driver", ext : [".drv"], magic : ["Vektor Grafix video Drivers"]},
 		wordPerfectDriver             : {name : "WordPerfect Driver", ext : [".vrs"], magic : ["Corel WordPerfect: Unknown filetype 36, v5.0"]},
 
@@ -197,7 +200,7 @@ export default
 		//////////
 		gameBoyROM  : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
 		nintendoROM : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
-
+		qlPluginROM : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
 
 		///////////
 		// Other //
@@ -209,6 +212,7 @@ export default
 		alchemyMindworksResource     : {name : "Alchemy Mindworks Resource", ext : [".res"], magic : ["Alchemy Mindworks Resource data"]},
 		adobeHyphenationDictionary   : {name : "Adobe Hyphenation/Spelling Dictionary", ext : [".hyp"], magic : ["Adobe Hyphenation/spelling dictionary"]},
 		aegisProMotionGeometry       : {name : "Aegis Pro Motion Geometry", ext : [".geo"], magic : ["Aegis ProMotion Geometry"]},
+		aibbLoadModule               : {name : "AIBB load Module", ext : [".module", ".aibb"], magic : ["AIBB load Module"]},
 		amiAtlasFile                 : {name : "AmiAtlas File", ext : [".borders", ".coasts", ".index", ".islands", ".prefs", ".rivers", ".route", ".town", ".countries", ".country"], magic : ["AmiAtlas "]},
 		amigaActionReplay3           : {name : "Amiga Action Replay 3 Freeze File", magic : ["Amiga Action Reply 3 Freeze File"]},
 		amigaBlkDev                  : {name : "Amiga ADF BlkDev File", ext : [".blkdev"], magic : [...TEXT_MAGIC, /^data$/], weakMagic : true},
@@ -232,6 +236,7 @@ export default
 		barsAndPipesFile             : {name : "Bars and Pipes File", ext : [".gchone", ".gchord", ".song"], magic : ["Bars and Pipes"]},
 		berkeleyDB                   : {name : "Berkeley DB", ext : [".db"], magic : ["Berkeley DB"]},
 		binaryColorFormat            : {name : "Binary Color Format", ext : [".bcf"], magic : ["Binary Color Format	"]},
+		binPatchPatch                : {name : "BinPatch Patch", ext : [".utp"], magic : ["BinPatch patch"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},
 		buildEngineDemoData          : {name : "Build Engine Demo Data", ext : [".dem"], magic : ["Build engine Demo/replay data"]},
 		buildEngineRFFContainer      : {name : "Build Engine RFF Container", ext : [".rff"], magic : ["Build Engine RFF encrypted container"]},
@@ -260,8 +265,10 @@ export default
 		dBaseQuery                   : {name : "dBase Query", ext : [".qbe"], magic : ["dBASE IV Query"]},
 		dBaseUpdate                  : {name : "dBase Update", ext : [".upd"], magic : ["dBASE IV Update"]},
 		digitaORganiserTheme         : {name : "Digita Organiser Theme", magic : ["Digita Organiser theme"]},
+		directoryOpusSettings        : {name : "Directory Opus Settings", magic : ["Directory Opus settings"]},
 		dosCodePage                  : {name : "MS-DOS Code Page Info", ext : [".cp", ".cpi"], magic : ["DOS code page font data collection", "MS-DOS International Code Page Info"]},
-		drawStudioGradient           : { name : "DrawStudio Gradient", magic : ["DrawStudio gradient"]},
+		drawStudioGradient           : {name : "DrawStudio Gradient", magic : ["DrawStudio gradient"]},
+		drawStudioPattern            : {name : "DrawStudio Pattern", magic : ["DrawStudio Pattern"]},
 		drWebAntiVirusDatabas        : {name : "Dr.Web Anti-Virus Database", ext : [".vdb"], magic : ["Dr.Web Anti-Virus Database"]},
 		dynamicMessageSystemFile     : {name : "Dynamic Message System File", ext : [".msg"], magic : ["Dynamic Message System"]},
 		ensoniqVFXPatchFile          : {name : "Ensoniq VFX Patch File", ext : [".vfx"], magic : ["SysEx File - Ensoniq"]},
@@ -342,7 +349,7 @@ export default
 		riffSTYL                     : {name : "RIFF STYL File", ext : [".par"], magic : ["RIFF STYL file"], notes : "References a font for mac and windows and includes some text in a TEXT chunk"},
 		rotObject3DAction            : {name : "ROT Object 3D Action", ext : [".rotact"], magic : ["ROT Object 3D Action"]},
 		rtPatchFile                  : {name : "RTPatch File", ext : [".rtp"], magic : ["RTPatch update/diff data"]},
-		samplitudeRAMProject         : {name : "Samplitude RAM Project", ext : [".rap"], magic : ["Samplitude RAM Project"]},
+		samplitudeProject            : {name : "Samplitude Project", ext : [".rap", ".vip"], magic : ["Samplitude RAM Project", "Samplitude Virtual Project"]},
 		sceneryAnimatorLandscape     : {name : "Scenery Animator Landscape", ext : [".scape"], magic : ["Scenery Animator landscape/keyframes"]},
 		sculpt3DTake                 : {name : "Sculpt 3D Take", ext : [".take"], magic : ["Sculpt 3D Take"]},
 		showPartnerMasteredShow      : {name : "Show Partner Mastered Show", ext : [".pro"], magic : ["Show Partner mastered show"]},

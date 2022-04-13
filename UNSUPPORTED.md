@@ -1,4 +1,4 @@
-# Unsupported File Formats (556)
+# Unsupported File Formats (564)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -94,7 +94,7 @@ document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fil
 
 
 
-## Executable (18)
+## Executable (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -112,6 +112,7 @@ executable | MacOS PPC PEF Executable |  |
 executable | MIPSL ECOFF Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
+executable | QDOS Executable |  | 
 executable | RISC OS Executable |  | 
 executable | SPARC Demand Paged Exe |  | 
 executable | Superbase Program | .sbp | 
@@ -271,7 +272,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (297)
+## Other (304)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -279,6 +280,7 @@ other | 3D Construction Kit Object | .3od .obj |
 other | 3D Construction Kit Shape Data | .3sd | 
 other | 3D Construction Kit World Data | .kit | 
 other | 3D Studio Project | .prj | 
+other | 3DFX Glide driver | .dxe | 
 other | 4D Paint Project | .4dp | [1 sample file](https://telparia.com/fileFormatSamples/other/fourDPaintProject/)
 other | Abuse Level | .lvl .spe | 
 other | Adobe Duotone Options | .ado | 
@@ -288,6 +290,7 @@ other | Adobe Photoshop Gradient | .grd |
 other | Adobe Type Manager Font Information | .inf | 
 other | Adventure Game Toolkit Strings | .d$$ | 
 other | Aegis Pro Motion Geometry | .geo | 
+other | AIBB load Module | .module .aibb | 
 other | Alchemy Mindworks Resource | .res | 
 other | Alcohol 120% Media Descriptor | .mds | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/mdfMediaDescriptor/)
 other | Allways Printer Driver | .apc .apd .apf | 
@@ -309,7 +312,7 @@ other | Amiga Preferences | .prefs |
 other | Amiga Shared Library | .lib | 
 other | Amos Amal Animation Bank | .abk | 
 other | AMOS ASM Bank | .abk | 
-other | AMOS Datas Bank | .abk | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/amosDatasBank/)
+other | AMOS Datas Bank | .abk | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/amosDatasBank/)
 other | AMOS Work Bank | .abk | 
 other | AniMouse Tutorial | .sdemo | 
 other | ApAssist Compressed Data |  | 
@@ -327,6 +330,7 @@ other | Babble! Data | .bab |
 other | Bars and Pipes File | .gchone .gchord .song | 
 other | Berkeley DB | .db | 
 other | Binary Color Format | .bcf | 
+other | BinPatch Patch | .utp | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
 other | Borland Delphi Compiled Unit | .dcu | 
@@ -372,10 +376,12 @@ other | dBase Update | .upd |
 other | DeHackEd Patch | .deh | 
 other | Descent Level | .rdl | 
 other | Digita Organiser Theme |  | 
+other | Directory Opus Settings |  | 
 other | Dive File Format | .dff | 
 other | DOOM Save Game | .dsg | 
 other | Dr.Web Anti-Virus Database | .vdb | 
 other | DrawStudio Gradient |  | 
+other | DrawStudio Pattern |  | 
 other | Dynamic Message System File | .msg | 
 other | Electronic Arts LIB container | .lib | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
@@ -419,6 +425,7 @@ other | Javelin Printer Driver | .pr .pr2 |
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | Kapersky Anti-Virus License Key | .key | 
 other | Kodak Precision Transform | .pt | 
+other | KOLEKO Save State | .rom | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
 other | LabView Virtual Instrument | .vi | 
 other | LDIFF Differences Data | .lzd | 
@@ -488,6 +495,7 @@ other | Psion Library | .dyl |
 other | Psion Physical Device Driver | .pdd | 
 other | Psion Printer Driver | .wdr | 
 other | Puzzle Buster Puzzle | .puz | 
+other | QL Plugin-ROM |  | 
 other | Quake II Map | .bsp | 
 other | Quake II Sprite Reference | .sp2 | 
 other | Quake Map | .bsp | 
@@ -504,7 +512,7 @@ other | RIFF STYL File | .par | References a font for mac and windows and includ
 other | Rise of the Triad Level | .rtc .rtl | 
 other | ROT Object 3D Action | .rotact | 
 other | RTPatch File | .rtp | 
-other | Samplitude RAM Project | .rap | 
+other | Samplitude Project | .rap .vip | 
 other | Scenery Animator Landscape | .scape | 
 other | SciTech Driver | .drv | 
 other | Scorched Earth Mountain Data | .mtn | 

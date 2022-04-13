@@ -5,7 +5,7 @@ export class iffANIM extends Format
 	name         = "Interchange File Format Animation";
 	website      = "http://fileformats.archiveteam.org/wiki/ANIM";
 	ext          = [".anim", ".anm", ".sndanim"];
-	magic        = ["IFF data,  ANIM animation", "IFF ANIM"];
+	magic        = ["IFF data, ANIM animation", "IFF ANIM"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:iff]", "xanim[fps:12]", "iff_convert[framesOnly] -> *ffmpeg[fps:15]"];
+	converters   = ["ffmpeg[format:iff]", "xanim[fps:12]", "iff_convert[framesOnly] -> *ffmpeg[fps:15]", "deark[module:IFF-ANIM] -> *ffmpeg[fps:15]"];
 }

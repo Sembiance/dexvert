@@ -7,5 +7,5 @@ export class xcf extends Format
 	ext        = [".xcf"];
 	mimeType   = "image/x-xcf";
 	magic      = ["The GIMP image format", "GIMP XCF image data", "Gimp Image File Format"];
-	converters = ["xcf2png"];
+	converters = ["xcf2png", "gimp"];
 }

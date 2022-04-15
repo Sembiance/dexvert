@@ -9,5 +9,5 @@ export class bmp extends Format
 	mimeType       = "image/bmp";
 	magic          = ["Windows Bitmap", "PC bitmap, Windows 3.x format", "Device independent bitmap graphic"];
 	metaProvider   = ["image"];
-	converters     = ["convert", "deark", "nconvert", "graphicWorkshopProfessional", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint"];
+	converters     = ["convert", "deark", "gimp", "nconvert", "graphicWorkshopProfessional", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint"];
 }

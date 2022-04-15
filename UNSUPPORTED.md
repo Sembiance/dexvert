@@ -1,11 +1,11 @@
-# Unsupported File Formats (566)
+# Unsupported File Formats (572)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (24)
+## Archive (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -32,10 +32,11 @@ archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFo
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
+archive | ZX Spectrum Tape Image | .tap | [4 sample files](https://telparia.com/fileFormatSamples/archive/zxSpectrumTape/)
 
 
 
-## Audio (26)
+## Audio (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -52,7 +53,6 @@ audio | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://telparia.com/f
 audio | MED Synth Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/audio/medSynthSound/)
 audio | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://telparia.com/fileFormatSamples/audio/musicStudioSound/)
 audio | [Musicline Instrument](https://www.musicline.org/) |  | [7 sample files](https://telparia.com/fileFormatSamples/audio/musiclineInstrument/)
-audio | [Playstation Sound Format](http://fileformats.archiveteam.org/wiki/PSF) | .psf .minipsf | [5 sample files](https://telparia.com/fileFormatSamples/audio/psf/) - sexypsf will play these, but it doesn't seem to have a way to save to disk as a WAV. It's open source, so I could modify it to support this, or seek an alternate converter. Being a more modern format and console only, not highly motivated.
 audio | Proline Voice | .pvd | [8 sample files](https://telparia.com/fileFormatSamples/audio/prolineVoice/)
 audio | Psion AICA Audio | .aik | [3 sample files](https://telparia.com/fileFormatSamples/audio/psionAIKAudio/)
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
@@ -119,7 +119,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (32)
+## Font (34)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -131,6 +131,7 @@ font | Borland Graphics Font | .chr .bgi |
 font | Bradford Font | .bf2 | 
 font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
 font | Corel Wiffen Font | .wfn | 
+font | DOS Code Page Font |  | 
 font | DynaCADD Vector Font | .fnt | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
 font | GRX Font | .fnt | 
@@ -151,15 +152,17 @@ font | TeX Packed Font | .pf |
 font | TheDraw Font | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | VFONT Font | .fnt | 
 font | Westwood Font | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/westwoodFont/)
+font | Wildfire 3D Font | .3dfont | 
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 font | WordUp Graphics Toolkit Font | .wfn | 
 font | X11/NeWS font family | .ff | 
 
 
 
-## Image (32)
+## Image (33)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
@@ -172,7 +175,6 @@ image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .f
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
-image | [JPEG XL](http://fileformats.archiveteam.org/wiki/JPEG_XL) | .jxl | [8 sample files](https://telparia.com/fileFormatSamples/image/jpegXL/) - Modern format. Pain in the butt to build the JPEG-XL reference package, I started, see overlay/legacy/JPEG-XL but then gave up because meh.
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
@@ -181,6 +183,7 @@ image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Pa
 image | PC-Draft-CAD Drawing | .dwg | 
 image | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://telparia.com/fileFormatSamples/image/pcrImage/)
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Just can't reliably detected this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
+image | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://telparia.com/fileFormatSamples/image/pixie/)
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [8 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
@@ -272,7 +275,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (306)
+## Other (309)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -382,6 +385,7 @@ other | DOOM Save Game | .dsg |
 other | Dr.Web Anti-Virus Database | .vdb | 
 other | DrawStudio Gradient |  | 
 other | DrawStudio Pattern |  | 
+other | Dune II Saved Game | .dat | 
 other | Dynamic Message System File | .msg | 
 other | Electronic Arts LIB container | .lib | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
@@ -424,6 +428,7 @@ other | Java Class File | .class | [4 sample files](https://telparia.com/fileFor
 other | Javelin Printer Driver | .pr .pr2 | 
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | Kapersky Anti-Virus License Key | .key | 
+other | KICK-Pascal Unit Interface | .u | 
 other | Kodak Precision Transform | .pt | 
 other | KOLEKO Save State | .rom | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
@@ -441,6 +446,7 @@ other | Lotus Freelance Presentation | .prz |
 other | Lotus Magellan Viewer | .vw2 | 
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
+other | MagiC64 Preferences | .prefs | 
 other | Maple Common Binary | .m | 
 other | MASI Music Driver | .mus | 
 other | MathCad Document | .mcd | 

@@ -10,5 +10,5 @@ export class dds extends Format
 	metaProvider = ["image"];
 	
 	// Both convert and nconvert sometimes produce an invalid image, but convert usually does better overall
-	converters = ["convert", "nconvert"];
+	converters = ["convert", "nconvert", "gimp"];
 }

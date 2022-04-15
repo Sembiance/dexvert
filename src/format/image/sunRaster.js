@@ -10,5 +10,5 @@ export class sunRaster extends Format
 	magic    = ["Sun Raster bitmap", /^Sun [Rr]aster [Ii]mage/];
 
 	// abydosconvert also supports this format, but it hangs in an infinite loop when passing it an invalid image, so we don't bother including it below
-	converters    = ["deark", "nconvert"];
+	converters = ["deark", "gimp", "nconvert"];
 }

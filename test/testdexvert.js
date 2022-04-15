@@ -123,7 +123,10 @@ const IGNORE_SIZE_FILEPATHS =
 const FLEX_DIFF_FILES =
 [
 	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
-	[/document\/wordDoc\/POWWOW\.DOC$/, 2]
+	[/document\/wordDoc\/POWWOW\.DOC$/, 2],
+	
+	// sometimes various .as scripts are exatracted, sometimes not
+	[/archive\/swf\/.+$/, 2]
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -187,7 +190,8 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/rar",
 	"image/bbcDisplayRAM",
 	"image/teletext",
-	"music/richardJoseph"
+	"music/richardJoseph",
+	"unsupported/binPatch"
 ];
 
 function getWebLink(filePath)
@@ -542,7 +546,7 @@ async function writeOutputHTML()
 	</head>
 	<body>
 		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.map(v => v.decolor()).join(" ")}<br>` : ""}${outputFiles.length.toLocaleString()} files<br>
-		${outputFiles.map(filePath =>
+		${outputFiles.sortMulti([filePath => path.basename(filePath)]).map(filePath =>
 	{
 		const ext = path.extname(filePath);
 		const filePathSafe = getWebLink(filePath);

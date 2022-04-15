@@ -7,5 +7,5 @@ export class aliasPIX extends Format
 	ext        = [".pix", ".alias", ".img", ".als"];
 	mimeType   = "image/x-alias-pix";
 	magic      = ["Alias PIX"];
-	converters = ["nconvert"];
+	converters = ["nconvert", "gimp"];
 }

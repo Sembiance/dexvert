@@ -31,30 +31,31 @@ def loadAndSave(inPath, outPath):
         ]
     ).index(1)
 
-	drawable = image.get_active_layer()
+	if type(image) is Gimp.Image:
+		drawable = image.get_active_layer()
 
-	pdb.run_procedure(
-        "file-png-save",
-        [
-            GObject.Value(Gimp.RunMode, Gimp.RunMode.NONINTERACTIVE),
-            GObject.Value(Gimp.Image, image),
-            GObject.Value(GObject.TYPE_INT, 1),
-            GObject.Value(
-                Gimp.ObjectArray, Gimp.ObjectArray.new(Gimp.Drawable, [drawable], 0)
-            ),
-            GObject.Value(
-                Gio.File,
-                Gio.File.new_for_path(outPath),
-            ),
-            GObject.Value(GObject.TYPE_BOOLEAN, 0),
-            GObject.Value(GObject.TYPE_INT, 9),
+		pdb.run_procedure(
+			"file-png-save",
+			[
+				GObject.Value(Gimp.RunMode, Gimp.RunMode.NONINTERACTIVE),
+				GObject.Value(Gimp.Image, image),
+				GObject.Value(GObject.TYPE_INT, 1),
+				GObject.Value(
+					Gimp.ObjectArray, Gimp.ObjectArray.new(Gimp.Drawable, [drawable], 0)
+				),
+				GObject.Value(
+					Gio.File,
+					Gio.File.new_for_path(outPath),
+				),
+				GObject.Value(GObject.TYPE_BOOLEAN, 0),
+				GObject.Value(GObject.TYPE_INT, 9),
 
-            GObject.Value(GObject.TYPE_BOOLEAN, False),
-            GObject.Value(GObject.TYPE_BOOLEAN, False),
-            GObject.Value(GObject.TYPE_BOOLEAN, False),
-            GObject.Value(GObject.TYPE_BOOLEAN, False)
-        ]
-    )
+				GObject.Value(GObject.TYPE_BOOLEAN, False),
+				GObject.Value(GObject.TYPE_BOOLEAN, False),
+				GObject.Value(GObject.TYPE_BOOLEAN, False),
+				GObject.Value(GObject.TYPE_BOOLEAN, False)
+			]
+		)
 
 	pdb.run_procedure(
 		"gimp-quit",
@@ -65,6 +66,6 @@ def loadAndSave(inPath, outPath):
 	};
 
 	args       = async r => ["-ni", "--batch-interpreter", "python-fu-eval", "-b", `import sys;sys.path=['.']+sys.path;import dexvert;dexvert.loadAndSave('${r.inFile()}', '${await r.outFile("out.png")}')`];
-	runOptions = ({timeout : xu.MINUTE*1.5, virtualX : true});
+	runOptions = ({timeout : xu.MINUTE*2, virtualX : true});
 	renameOut  = true;
 }

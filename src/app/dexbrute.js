@@ -73,7 +73,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	const outputDir = await DexFile.create(outputDirPath);
 
 	if(argv.serial)
-		xu.stdout(`Program ${familyid}/${programid} `);
+		xu.stdoutWrite(`Program ${familyid}/${programid} `);
 	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
 	const outputFiles = dexState.f.files.output || [];
 	if(outputFiles.length>0)

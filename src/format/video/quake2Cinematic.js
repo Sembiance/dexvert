@@ -7,6 +7,7 @@ export class quake2Cinematic extends Format
 	ext          = [".cin"];
 	weakExt      = true;
 	magic        = ["Id Software Quake II Cinematic video"];
+	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg"];
 }

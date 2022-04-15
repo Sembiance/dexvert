@@ -226,17 +226,24 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 		scriptLines.push(`
 			OnAutoItExitRegister("ExitHandler")
 			Func ExitHandler()
-				; If a windows program crashes, windows will detect it and show this error, all we can do is press OK
-				Do
-					Local $programError = WinActive("[TITLE:Program Error]", "")
-					If $programError Not = 0 Then
-						ControlClick("[TITLE:Program Error]", "", "[CLASS:Button; TEXT:OK]")
-					EndIf
-				Until $programError = 0
-
 				; Now kill our program
 				KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")
 				${alsoKill.map(v => `KillAll("${v}")`).join("\n")}
+
+				Local $errorWindow = 0
+				Do
+					$errorWindow = WinActive("[TITLE:Program Error]", "")
+					If $errorWindow Not = 0 Then
+						ControlClick($errorWindow, "", "[CLASS:Button; TEXT:OK]")
+						ContinueLoop
+					EndIf
+
+					$errorWindow = WinActive("[TITLE:Application Error]", "")
+					If $errorWindow Not = 0 Then
+						ControlClick($errorWindow, "", "[CLASS:Button; TEXT:&Close]")
+						ContinueLoop
+					EndIf
+				Until $errorWindow = 0
 			EndFunc
 		`);
 

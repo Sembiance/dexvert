@@ -291,6 +291,7 @@ export default
 		harvardGraphicsChart         : {name : "Harvard Graphics Chart", ext : [".ch3"], magic : ["Harvard Graphics Chart"]},
 		hotMapRegionsDescription     : {name : "HotMap VBX Regions Description", ext : [".hmd"], magic : ["HotMap VBX regions Description"]},
 		hyperPadPad                  : {name : "HyperPAD Pad", ext : [".pad"], magic : ["HyperPAD Pad"]},
+		iBrowseGlobalCache           : {name : "iBrowse Global Cache", magic : ["IBrowse Global Cache"]},
 		iccColorMap                  : {name : "ICC Color Map", ext : [".iff"], magic : ["IFF Color Map"]},
 		iccColorProfile              : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},
 		idaSignatures                : {name : "IDA Signatures", ext : [".sig"], magic : ["IDA Signatures"]},

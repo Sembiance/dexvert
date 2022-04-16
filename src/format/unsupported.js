@@ -32,7 +32,7 @@ export default
 
 	font :
 	{
-		amigaOSOutlineFont    : {name : "AmigaOS Outline Font", ext : [".font"], magic : ["AmigaOS outline font"]},
+		amigaOSOutlineFont    : {name : "AmigaOS Outline Font", ext : [".ofnt", ".font"], magic : ["AmigaOS outline font", "IFF Outline Font"]},
 		amiWriteFont          : {name : "AmiWrite Font", magic : ["Ami Write printer font"]},
 		averyFont             : {name : "Avery Font", ext : [".ff1"], magic : ["Avery Font"]},
 		bannerManiaFont       : {name : "Banner Mania Font", ext : [".fnt"], magic : ["Bannermania font"]},
@@ -61,7 +61,8 @@ export default
 		westwoodFont          : {name : "Westwood Font", ext : [".fnt"], magic : ["Westwood Font Format"]},
 		wildfire3DFont        : {name : "Wildfire 3D Font", ext : [".3dfont"], magic : ["Wildfire 3D Font"]},
 		wordUpToolkitFont     : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]},
-		x11NeWSFontFamily     : {name : "X11/NeWS font family", ext : [".ff"], magic : ["X11/NeWS font family"]}
+		x11NeWSFontFamily     : {name : "X11/NeWS font family", ext : [".ff"], magic : ["X11/NeWS font family"]},
+		xCADFont              : {name : "X-CAD Font", magic : ["X-CAD font"]}
 	},
 
 	music :
@@ -329,9 +330,11 @@ export default
 		microsoftWordStyleSheet      : {name : "Microsoft Word Style Sheet", ext : [".sty"], magic : ["Microsoft Word for DOS Style sheet"]},
 		midiDrumMachine              : {name : "MIDI Drum Machine", ext : [".drm"], magic : ["Midi Drum Machine Drum"], notes : "Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum"},
 		muiBuilderProject            : {name : "MUI Builder Project", ext : [".muib"], magic : ["MUI Builder project"]},
+		netCDF                       : {name : "NetCDF", ext : [".nc"], magic : ["NetCDF "]},
 		netwareMessage               : {name : "Netware Message", ext : [".msg"], magic : ["NetWare Message"]},
 		nortonChangeDirInfo          : {name : "Norton Change Directory Info", ext : [".ncd"], magic : ["Norton Change Directory info"]},
 		novellSystemPrintDef         : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},
+		nWiperShow					 : {name : "NWiper Show", ext : [".nw"], magic : ["NWiper show"]},
 		paperPortSlideShot           : {name : "PaperPort Slide Show", ext : [".fss"], magic : ["PaperPort slide show"]},
 		papillonPalette              : {name : "Papillon Palette", ext : [".pal", ".ppal"], magic : ["Papillon Palette"]},
 		pascalCompiledUnit           : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit"]},
@@ -401,6 +404,8 @@ export default
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
 		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72"]},
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
-		yafaCompressionOptions       : {name : "YAFA Compression Options", magic : ["YAFA compression options"]}
+		yafaCompressionOptions       : {name : "YAFA Compression Options", magic : ["YAFA compression options"]},
+		xCADModifierTable            : {name : "X-CAD Modifier Table", ext : [".obj"], magic : ["X-CAD Modifier Table"]},
+		xCADOverlay                  : {name : "X-CAD Overlay", magic : ["X-CAD overlay"]}
 	}
 };

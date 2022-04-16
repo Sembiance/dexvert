@@ -8,6 +8,7 @@ export const WEAK_VALUES =
 	
 	// FILE: Very weak checks:
 	/^, Monaural/,
+	/^, SYS/,
 	/^0421 Alliant compact executable/,
 	/^370 sysV/,
 	/^370 XA sysV/,
@@ -139,6 +140,7 @@ export const WEAK_VALUES =
 	/^SPARC demand paged/,
 	/^SoftQuad DESC or font file binary$/,
 	/^SoftQuad troff Context intermediate$/,
+	/^Sony PlayStation Audio/,
 	/^Sony PlayStation PSX image/,
 	/^Spectrum \.TAP data/,
 	/spot sensor temperature/,
@@ -290,6 +292,8 @@ export const WEAK_VALUES =
 	/^Text - UTF-16/,
 	/^TextEngine document \(generic\)$/,
 	/^That's Write document$/,
+	/^The Bee Archiver compressed archive$/,
+	/^THOR compressed data$/,
 	/^TTComp archive/,
 	/^VGAPaint 386 module$/,
 	/^Videoscape GEO mesh/,
@@ -301,18 +305,21 @@ export const WEAK_VALUES =
 	/^WordPerfect document \(Amiga\)$/,
 	/^X1 compressed archive$/,
 	/^XBase DataBase \(generic\)$/,
+	/^Xexor disk image$/,
 	/^Z-Code V\d adventure for Infocom Z-Machine$/,
 	/^ZX Microdrive cartridge image$/,
 	
 	// TRID: Checks for almost all zeroes or mostly just single repeating values:
 	/^Acorn RISC OS font/,
 	/^Adobe PhotoShop Brush$/,
+	/^Atari NeoChrome bitmap$/,
 	/^AudioZip encoded audio$/,
 	/^bCAD Drawing$/,
 	/^BS-DOS MB-0\d disk image$/,
 	/^Cadwork 2D Catalog$/,
 	/^CAJ database$/,
 	/^ChemDraw model$/,
+	/^Coordinate 3D \(subset of ADTech File Format\) file \(more generic\)$/,
 	/^Dr\. Halo Font$/,
 	/^Dyalog APL transfer$/,
 	/^EPOC data store/,
@@ -361,9 +368,11 @@ export const WEAK_VALUES =
 
 	// TRID: Weak in some other way, such as commonly used word prefix/global string
 	/^Amiga Disk image File \(generic\)$/,
+	/^Audio Disk Jockey bank$/,
 	/^Dan Bricklin's Demo/,
 	/^Fine Artist Chunked format/,
 	/^Game Boy Advance ROM$/,
+	/^Macromedia Director Java Resource - Video$/,
 	/^MegaZeux game$/,
 	/^Novastorm Media audio$/,
 	/^Pacific Warrior 2: Dogfight game data archive$/,

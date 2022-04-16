@@ -1,15 +1,16 @@
-# Unsupported File Formats (578)
+# Unsupported File Formats (586)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (26)
+## Archive (27)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
@@ -120,11 +121,11 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (34)
+## Font (35)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
-font | AmigaOS Outline Font | .font | 
+font | AmigaOS Outline Font | .ofnt .font | 
 font | AmiWrite Font |  | 
 font | Avery Font | .ff1 | 
 font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
@@ -156,11 +157,12 @@ font | Westwood Font | .fnt | [3 sample files](https://telparia.com/fileFormatSa
 font | Wildfire 3D Font | .3dfont | 
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt
 font | WordUp Graphics Toolkit Font | .wfn | 
+font | X-CAD Font |  | 
 font | X11/NeWS font family | .ff | 
 
 
 
-## Image (34)
+## Image (36)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
@@ -176,6 +178,7 @@ image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .f
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
 image | [IFF Retargetable Graphic](http://fileformats.archiveteam.org/wiki/RGFX) | .rgfx .rgx | [8 sample files](https://telparia.com/fileFormatSamples/image/rgfx/)
+image | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://telparia.com/fileFormatSamples/image/imagineTexture/)
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -197,6 +200,7 @@ image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSa
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [Universal BitMap Format](http://retromission.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [8 sample files](https://telparia.com/fileFormatSamples/image/universalBitMapFormat/)
 image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://telparia.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
 
 
 
@@ -278,7 +282,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (312)
+## Other (316)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -479,11 +483,13 @@ other | MS-DOS Code Page Info | .cp .cpi |
 other | MUI Builder Project | .muib | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
+other | NetCDF | .nc | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
 other | Nintendo ROM | .nes | 
 other | Norton Change Directory Info | .ncd | 
 other | Novell System PrintDef Device Definition | .pdf | 
+other | NWiper Show | .nw | 
 other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
 other | PaperPort Slide Show | .fss | 
@@ -590,6 +596,8 @@ other | WordPerfect for Windows Button Bar | .wwb |
 other | WordPerfect keyboard file | .wpk | 
 other | WordPerfect Macro File | .wpm .wcm | 
 other | WordPerfect Printer Data | .all .prd | 
+other | X-CAD Modifier Table | .obj | 
+other | X-CAD Overlay |  | 
 other | YAFA Compression Options |  | 
 other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/other/zbasic/)
 other | ZZT File | .zzt | 

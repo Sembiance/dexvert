@@ -1,4 +1,4 @@
-# Unsupported File Formats (576)
+# Unsupported File Formats (578)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -278,7 +278,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (310)
+## Other (312)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -407,6 +407,7 @@ other | GammaCAD Document | .sym .gc1 |
 other | Gee! Printer Driver | .pdr | 
 other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
 other | Gettext Machine Object | .gmo | 
+other | GfxLab24 Convolution Matrix |  | 
 other | GfxLab24 Filter |  | 
 other | Half-Life 2 Save Game | .sav | 
 other | Harvard Graphics Chart | .ch3 | 
@@ -576,6 +577,7 @@ other | Visual FoxPro Compound Index | .cdx |
 other | Visual Smalltalk Enterprise Objects Library | .sll | 
 other | Vocal-Eyes Set | .set | 
 other | WarCraft Map | .pud | 
+other | Watcom Profiler Sampling Data | .smp | 
 other | Windows Help Full Text Search Index | .fts | 
 other | Windows Help Global Index Data | .gid | 
 other | Windows LOGO Drawing Code | .lgo .lg | 

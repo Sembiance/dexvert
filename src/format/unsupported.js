@@ -391,6 +391,7 @@ export default
 		videoMusicBoxProgression     : {name : "Video Music Box Progression", ext : [".prgn"], magic : ["Video Music Box Progression"]},
 		videoMusicBoxStyle           : {name : "Video Music Box Style", ext : [".stle"], magic : ["Video Music Box Style"]},
 		vistaDigitalElevationMap     : {name : "Vista Digital Elevation Map", ext : [".dem"], magic : ["Vista Digital Elevation Map"]},
+		vistaMakepathSession         : {name : "Vista Makepath Session", ext : [".ses"], magic : ["Vista Makepath Session (v1.0)"]},
 		visualFoxProCompoundIndex    : {name : "Visual FoxPro Compound Index", ext : [".cdx"], magic : ["Compound index MS Visual FoxPro"]},
 		vocalEyesSet                 : {name : "Vocal-Eyes Set", ext : [".set"], magic : ["Vocal-Eyes Set"]},
 		watcomProfilerSamplingData   : {name : "Watcom Profiler Sampling Data", ext : [".smp"], magic : ["Watcom Profiler Sampling data"]},

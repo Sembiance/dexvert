@@ -6,12 +6,13 @@ export class advancedArtStudio extends Format
 	website       = "http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio";
 	ext           = [".ocp", ".scr", ".win", ".pal"];
 	fileSize      = {".ocp" : 10018};
-	auxFiles = (input, otherFiles) =>
+	matchFileSize = true;
+	auxFiles = (input, otherFiles, otherDirs, fileSizeMatchExt) =>
 	{
 		const ourExt = input.ext.toLowerCase();
 
 		// .ocp is standalone
-		if(ourExt===".ocp")
+		if([fileSizeMatchExt, ourExt].includes(".ocp"))
 			return false;
 		
 		// .scr/.win require a corresponding .pal file

@@ -1,4 +1,4 @@
-# Unsupported File Formats (586)
+# Unsupported File Formats (590)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -162,7 +162,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (36)
+## Image (38)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
@@ -170,6 +170,7 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
@@ -187,7 +188,8 @@ image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileForm
 image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://telparia.com/fileFormatSamples/image/painterRIF/)
 image | PC-Draft-CAD Drawing | .dwg | 
 image | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://telparia.com/fileFormatSamples/image/pcrImage/)
-image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Just can't reliably detected this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
+image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
+image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [2 sample files](https://telparia.com/fileFormatSamples/image/pixelPerfect/) - Can't reliably detect this format and recoil2png & view64 will convert almost any file you give it into garbage
 image | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://telparia.com/fileFormatSamples/image/pixie/)
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
@@ -204,7 +206,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (72)
+## Music (73)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -223,6 +225,7 @@ music | BeRoTracker Module | .brt | [2 sample files](https://telparia.com/fileFo
 music | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://telparia.com/fileFormatSamples/music/cba/)
 music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 music | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
+music | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://telparia.com/fileFormatSamples/music/cubaseSong/)
 music | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://telparia.com/fileFormatSamples/music/iffCMUS/)
 music | DeLuxe Music Score |  | [2 sample files](https://telparia.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
 music | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://telparia.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
@@ -282,7 +285,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (316)
+## Other (317)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -577,6 +580,7 @@ other | Video Music Box Style | .stle |
 other | VideoFX2 Sequence | .seq | 
 other | VideoTracker Routine | .rot | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 other | Vista Digital Elevation Map | .dem | 
+other | Vista Makepath Session | .ses | 
 other | Visual Basic Extension | .vbx | 
 other | Visual Basic Tokenized Source | .bas | 
 other | Visual FoxPro Compound Index | .cdx | 

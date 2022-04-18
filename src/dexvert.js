@@ -122,10 +122,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 			const cwdFilename = "in";
 
 			let cwdExt = null;
+
 			if(format.safeExt)
 				cwdExt = typeof format.safeExt==="function" ? await format.safeExt(dexState) : format.safeExt;
 			else if(format.ext)
-				cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase()) || format.ext[0];
+				cwdExt = format.ext.find(ext => ext===inputFile.ext.toLowerCase() || ext===id.fileSizeMatchExt) || format.ext[0];
 			else
 				cwdExt = inputFile.ext;
 			

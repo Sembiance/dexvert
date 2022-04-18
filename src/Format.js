@@ -118,7 +118,7 @@ export class Format
 			weakMagic        : {types : ["boolean", Array]},
 
 			// other
-			auxFiles         : {type : "function", length : [2, 3]},
+			auxFiles         : {type : "function", length : [2, 4]},
 			byteCheck        : {types : [Object, Array]},
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},

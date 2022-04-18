@@ -158,7 +158,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			let auxFiles = null;
 			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0) && hasAnyMatch)
 			{
-				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs);
+				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs, fileSizeMatchExt);
 
 				// If the filesRequired function returns false, then we don't have any required files
 				// If it returns an empty array then we fail to match

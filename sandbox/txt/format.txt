@@ -77,10 +77,11 @@ If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting
 
 
 >>> ******** Other
->>> auxFiles = (inputFile, otherFiles, otherDirs) => [file, file] || false
+>>> auxFiles = (inputFile, otherFiles, otherDirs, fileSizeMatchExt) => [file, file] || false
 Some formats require other sibling files/directories to be present in order to convert correctly.
 Return an array of DexFiles (filtered from otherFiles/otherDirs) or false if no files were required.
 If you return an empty array, that is stating the required files were not found and to not match against this format.
+Note: fileSizeMatchExt is set to the extension that fileSize matches, if it matches
 
 >>> byteCheck = {ext : ".xyz", offset : 0, match : [0x00, 0x02] || "string"}  ||  byteCheck = [{}, {}...];
 A way to match against a particular part of the file as a way to double check the file is correct.

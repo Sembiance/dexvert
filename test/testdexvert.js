@@ -153,8 +153,10 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
 	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
 	[/image\/gfaArtist\/.+$/, "image", "asciiArtEditor"],
-	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
+	[/image\/pixelPerfect\/.+$/, "image", true],
+	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
+	
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/dataShowSound\/.+/i, "text", true],
@@ -388,7 +390,7 @@ async function testSample(sampleFilePath)
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
 		const allowedDiffQty = FLEX_DIFF_FILES.find(([regex]) => regex.test(sampleFilePath))?.[1] || 0;
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && diffFiles.length>allowedDiffQty)
-			return await fail(`Created files are different: ${fg.orange(diffFiles)}`);
+			return await fail(`Created files are different: ${diffFiles}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		if(allowedSizeDiff===0)

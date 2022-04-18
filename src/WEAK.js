@@ -116,6 +116,7 @@ export const WEAK_VALUES =
 	/^MS Windows COFF /,
 	/^MSXiE archive data/,
 	/^mumps avl|blt global/,
+	/^MySQL table definition file Version 0/,
 	/^Novell LANalyzer capture file$/,
 	/^Perkin-Elmer executable/,
 	/^PEX Binary Archive$/,
@@ -179,6 +180,7 @@ export const WEAK_VALUES =
 
 	// TRID: Checks just 1-3 bytes:
 	/^1ST Word Plus Document$/,
+	/^3D-Calc spreadsheet$/,
 	/^5View capture/,
 	/^Advanced DB Master data/,
 	/^Affix file$/,
@@ -376,7 +378,7 @@ export const WEAK_VALUES =
 	/^Windows Jump List$/,
 	/^Windows Icon/,
 
-	// TRID: Weak in some other way, such as commonly used word prefix/global string
+	// TRID: Weak in some other way, such as commonly used word prefix/global string or ascending/descending bytes
 	/^Amiga Disk image File \(generic\)$/,
 	/^Audio Disk Jockey bank$/,
 	/^Dan Bricklin's Demo/,
@@ -385,6 +387,7 @@ export const WEAK_VALUES =
 	/^Macromedia Director Java Resource - Video$/,
 	/^MegaZeux game$/,
 	/^Novastorm Media audio$/,
+	/^OpenSceneGraph native binary format$/,
 	/^Pacific Warrior 2: Dogfight game data archive$/,
 	/^PackDir compressed archive$/,
 	/^Scalable Vector Graphics \(var\.3\)$/,

@@ -9,6 +9,6 @@ export class faxGroup3 extends Format
 	metaProvider = ["image"];
 	converters   = ["gimp", "nconvert", "convert"];	// abydos can also convert this, but it will convert garbage files (text/txt/SKILLS1.G3) and produce garbage, where nconvert/convert are more strict
 
-	// When it fails, it usually produes a huge image (text/txt/SKILLTXT.G3) and authentic ones are almost certain to be smaller than 2500px
-	verify = ({meta}) => meta.width<2500 && meta.height<2500;
+	// When it fails, it usually produes a huge/small image (text/txt/SKILLTXT.G3) and authentic ones are almost certain to be smaller than 2500px
+	verify = ({meta}) => meta.height>10 && meta.width>10 && meta.width<2500 && meta.height<2500;
 }

@@ -45,5 +45,5 @@ export class unadf extends Program
 			outputFile.setTS(fileDates[relPath].getTime());
 		}
 	};
-	renameOut        = false;
+	renameOut = false;
 }

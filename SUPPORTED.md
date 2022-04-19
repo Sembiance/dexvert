@@ -1,11 +1,11 @@
-# Supported File Formats (1,164)
+# Supported File Formats (1,165)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (138)
+## Archive (139)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -26,6 +26,7 @@ archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/DMG) | .dmg
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/appleDiskCopy/)
 archive | Apple DOS Disk Image | .dsk | [acx](https://github.com/AppleCommander/AppleCommander) | [5 sample files](https://telparia.com/fileFormatSamples/archive/appleDOSDiskImage/)
 archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .a .lib | [deark](https://entropymine.com/deark/) [ar](https://sourceware.org/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/arArchive/)
+archive | [ArcFS Archive](http://fileformats.archiveteam.org/wiki/ArcFS) | .arc | [nspark](https://github.com/mjwoodcock/nspark) [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/arcFS/)
 archive | [ARJ Archive](http://fileformats.archiveteam.org/wiki/ARJ) | .arj .exe | [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/arj/)
 archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [arq](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [6 sample files](https://telparia.com/fileFormatSamples/archive/arq/)
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
@@ -53,7 +54,7 @@ archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Format
 archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE) | [11 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | EDI Install LZSS2 Compressed Data | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZSS2/)
 archive | Ensemble Studios Data Resource | .drs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://telparia.com/fileFormatSamples/archive/ensembleStudiosDataResource/)
-archive | [EPOC Application Information File](http://fileformats.archiveteam.org/wiki/EPOC_AIF) | .aif | [deark](https://entropymine.com/deark/) | [9 sample files](https://telparia.com/fileFormatSamples/archive/epocAIF/)
+archive | [EPOC Application Information File](http://fileformats.archiveteam.org/wiki/EPOC_AIF) | .aif | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/epocAIF/)
 archive | [EPOC MultiBitmap](http://fileformats.archiveteam.org/wiki/EPOC_MBM) | .mbm | [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/epocMBM/)
 archive | [File Imploder](http://fileformats.archiveteam.org/wiki/File_Imploder) | .imp | [ancient](https://github.com/temisu/ancient_format_decompressor) | [11 sample files](https://telparia.com/fileFormatSamples/archive/fileImploder/)
 archive | [FSH Archive](http://fileformats.archiveteam.org/wiki/FSH_(EA_Sports)) | .fsh | [fshtool](http://www.math.polytechnique.fr/cmat/auroux/nfs/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/fshArchive/)
@@ -324,7 +325,7 @@ document | [WordPerfect document](http://fileformats.archiveteam.org/wiki/WordPe
 document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar) | .ws .ws3 .ws5 .ws7 .ws2 .wsd | [wordStar](https://en.wikipedia.org/wiki/WordStar) [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordStar/)
 document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
 document | [WriteNow Document](http://fileformats.archiveteam.org/wiki/WriteNow) |  | [soffice](https://www.libreoffice.org) | [5 sample files](https://telparia.com/fileFormatSamples/document/writeNow/)
-document | [Z-code for Z-machine](http://fileformats.archiveteam.org/wiki/Z-code) | .z1 .z2 .z3 .z4 .z5 .z6 .z7 .z8 | [txd](https://www.inform-fiction.org/zmachine/ztools.html) | [6 sample files](https://telparia.com/fileFormatSamples/document/zcode/)
+document | [Z-code for Z-machine](http://fileformats.archiveteam.org/wiki/Z-code) | .z1 .z2 .z3 .z4 .z5 .z6 .z7 .z8 | [txd](https://www.inform-fiction.org/zmachine/ztools.html) | [9 sample files](https://telparia.com/fileFormatSamples/document/zcode/)
 document | [Zinc Data](https://en.wikipedia.org/wiki/Zinc_Application_Framework) | .dat .znc .z_t | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/zincData/)
 
 
@@ -332,7 +333,7 @@ document | [Zinc Data](https://en.wikipedia.org/wiki/Zinc_Application_Framework)
 ## Executable (7)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/executable/epocExecutable/)
+executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/executable/epocExecutable/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
 executable | Microsoft Windows Dynmic Link Library | .dll | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [24 sample files](https://telparia.com/fileFormatSamples/executable/exe/)

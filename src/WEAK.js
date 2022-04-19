@@ -185,6 +185,7 @@ export const WEAK_VALUES =
 	/^Advanced DB Master data/,
 	/^Affix file$/,
 	/^Agfa\/Matrix SCODL bitmap$/,
+	/^Alpha Four data \(generic\)$/,
 	/^Amiga bitmap Font/,
 	/^Any Password data$/,
 	/^APE ProSystem Atari 8-bit disk image/,

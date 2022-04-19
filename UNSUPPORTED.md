@@ -1,4 +1,4 @@
-# Unsupported File Formats (591)
+# Unsupported File Formats (592)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -69,7 +69,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (22)
+## Document (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -88,6 +88,7 @@ document | FinalCalc Spreadsheet | .sheet | [1 sample file](https://telparia.com
 document | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://telparia.com/fileFormatSamples/document/hotHelpText/)
 document | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg | [1 sample file](https://telparia.com/fileFormatSamples/document/imf/) - With several RFC files describing the format, uou'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
 document | Lotus Symphony Worksheet | .wk1 wr1 | 
+document | [Lotus Word Pro](http://fileformats.archiveteam.org/wiki/Lotus_Word_Pro) | .lwp | [1 sample file](https://telparia.com/fileFormatSamples/document/lotusWordPro/)
 document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)

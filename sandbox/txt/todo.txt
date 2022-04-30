@@ -1,6 +1,40 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Stash more file format examples:
+https://example-files.online-convert.com/database/
+https://example-files.online-convert.com/document/
+https://example-files.online-convert.com/ebook/
+https://example-files.online-convert.com/maintenance/
+https://example-files.online-convert.com/misc/
+https://example-files.online-convert.com/presentation/
+https://example-files.online-convert.com/raster image/
+https://example-files.online-convert.com/spreadsheet/
+https://example-files.online-convert.com/testing/
+https://example-files.online-convert.com/vector image/
+https://example-files.online-convert.com/video/
+https://example-files.online-convert.com/website/
+https://www.digipres.org/#test-corpora
+
+* Add format: http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
+
+* Add programs:
+  http://xine.sourceforge.net/features
+  https://pandoc.org/
+  https://www.macdisk.com/conven.php
+  https://tomseditor.com/ (Tom's viewer with plugins (site may be  offline https://web.archive.org/web/20220411123456/)) Archive org seems to have captured the installer, but just in case it doesn't work a potentially older version is here: https://m.majorgeeks.com/files/details/toms_viewer.html
+  http://fileformats.archiveteam.org/wiki/OPTIKS
+  http://fileformats.archiveteam.org/wiki/Iconvert
+
+* Investigate adding a new identification program: https://github.com/richardlehane/siegfried
+
+* Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
+  If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows
+  For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
+  To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
+
+* Add to various programs that can be used in multiple families: bruteFlags : { image : { outType : ".png" } }
+  Then update the dexbrute program to check ALL programs, and include those in the folder (default family) and any that have a family specified in a bruteFlags property and make sure to use those flags (like deark for archives, ffmpeg for images, soffice for images, etc)
 
 
 /---------------\

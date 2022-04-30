@@ -53,6 +53,7 @@ const FLEX_SIZE_PROGRAMS =
 	doomMUS2mp3                 : 0.1,
 	fontforge                   : 0.1,
 	fontographer                : 0.1,
+	gimp                        : 0.5,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
 	soundFont2tomp3             : 0.1,
@@ -123,10 +124,11 @@ const IGNORE_SIZE_FILEPATHS =
 const FLEX_DIFF_FILES =
 [
 	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
-	[/document\/wordDoc\/POWWOW\.DOC$/, 2],
+	/document\/wordDoc\/POWWOW\.DOC$/,
 	
 	// sometimes various .as scripts are exatracted, sometimes not
-	[/archive\/swf\/.+$/, 2]
+	/archive\/swf\/.+$/,
+	/archive\/swfEXE\/.+$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -388,8 +390,8 @@ async function testSample(sampleFilePath)
 	if(result.files)
 	{
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
-		const allowedDiffQty = FLEX_DIFF_FILES.find(([regex]) => regex.test(sampleFilePath))?.[1] || 0;
-		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && diffFiles.length>allowedDiffQty)
+		const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
+		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
 			return await fail(`Created files are different: ${diffFiles}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
@@ -405,6 +407,9 @@ async function testSample(sampleFilePath)
 				continue;
 
 			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
+			if(!prevFile)	// can happen if FLEX_DIFF_FILES matches for this format/file
+				continue;
+
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 
 			const allowedFileSizeDiff = FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff;
@@ -419,6 +424,8 @@ async function testSample(sampleFilePath)
 		for(const [name, {ts}] of Object.entries(result.files))
 		{
 			const prevFile = SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) ? Object.values(prevData.files)[0] : prevData.files[name];
+			if(!prevFile)	// can happen if FLEX_DIFF_FILES matches for this format/file
+				continue;
 
 			const tsDate = new Date(ts);
 			const prevDate = typeof prevFile.ts==="string" ? dateParse(prevFile.ts, "yyyy-MM-dd") : new Date(prevFile.ts || Date.now());

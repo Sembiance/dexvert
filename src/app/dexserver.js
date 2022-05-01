@@ -24,7 +24,7 @@ const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {
 	xlog.info`Killing previous dexserver instance...`;
-	const prevDexservPID = await Deno.readTextFile(DEXSERVER_PID_FILE_PATH);
+	const prevDexservPID = await fileUtil.readTextFile(DEXSERVER_PID_FILE_PATH);
 	await runUtil.run("kill", [prevDexservPID]);
 	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
 }

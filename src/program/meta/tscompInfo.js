@@ -17,7 +17,7 @@ export class tscompInfo extends Program
 			return;
 		}
 
-		const filenamesRaw = await Deno.readTextFile(listFilePath);
+		const filenamesRaw = await fileUtil.readTextFile(listFilePath);
 		r.meta.tscompFilenames = filenamesRaw.split("\n").filter(line => line.trim().startsWith("=>")).map(line => line.trim().substring(2));
 
 		await fileUtil.unlink(listFilePath);

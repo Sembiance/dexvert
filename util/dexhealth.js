@@ -23,7 +23,7 @@ await Deno.mkdir(tmpSnapshotDirPath);
 const qemu = [];
 await instanceJSONFilePaths.parallelMap(async instanceJSONFilePath =>
 {
-	const {osid, instanceid, vncPort} = xu.parseJSON(await Deno.readTextFile(instanceJSONFilePath));
+	const {osid, instanceid, vncPort} = xu.parseJSON(await fileUtil.readTextFile(instanceJSONFilePath));
 	const o = {osid, instanceid, vncPort};
 
 	// check screenshot against good baselines

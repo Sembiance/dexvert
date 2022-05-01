@@ -51,6 +51,7 @@ const FLEX_SIZE_PROGRAMS =
 	amigaBitmapFontContentToOTF : 0.1,
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
+	Email_Outlook_Message       : 0.1,
 	fontforge                   : 0.1,
 	fontographer                : 0.1,
 	gimp                        : 0.5,
@@ -162,9 +163,11 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/dataShowSound\/.+/i, "text", true],
+	[/document\/hancomWord\/.+/i, "archive", true],
 	[/document\/hotHelpText\/.+\.txt$/i, "text", true],
 	[/document\/imf\/.+/i, "text", true],
 	[/document\/manPage\/glib\.man/i, "text", true],
+	[/document\/microsoftPublisher\/.+/i, "archive", true],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/music\/renoise\/.+/i, "archive", "zip"],
@@ -223,7 +226,7 @@ await runUtil.run("rsync", ["--delete", "-savL", path.join(SAMPLE_DIR_PATH_SRC, 
 
 xlog.info`Loading test data and finding sample files...`;
 
-const testData = xu.parseJSON(await Deno.readTextFile(DATA_FILE_PATH), {});
+const testData = xu.parseJSON(await fileUtil.readTextFile(DATA_FILE_PATH), {});
 
 xlog.info`Finding sample files...`;
 const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});

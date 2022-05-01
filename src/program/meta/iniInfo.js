@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 
 export class iniInfo extends Program
@@ -19,8 +20,8 @@ export class iniInfo extends Program
 		if(r.f.input.size<xu.MB*20)
 		{
 			// some INI file sections have periods at the start or end, which libconfini trims, so we handle that check here and return if any are not found which is usually because it's not an actual INI file
-			const iniRaw = await Deno.readTextFile(r.f.input.absolute);
-			if(meta.sectionNames.some(sectionName => sectionName && (!iniRaw.includes(`[${sectionName}`) && !iniRaw.includes(`${sectionName}]`))))
+			const iniRaw = await fileUtil.readTextFile(r.f.input.absolute);
+			if(iniRaw && meta.sectionNames.some(sectionName => sectionName && (!iniRaw.includes(`[${sectionName}`) && !iniRaw.includes(`${sectionName}]`))))
 				return;
 		}
 

@@ -25,7 +25,7 @@ export class ha extends Program
 			return;
 		}
 
-		const listContentRaw = await Deno.readTextFile(listFilePath);
+		const listContentRaw = await fileUtil.readTextFile(listFilePath);
 		await fileUtil.unlink(listFilePath);
 		
 		let seenStart = false;

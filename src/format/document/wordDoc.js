@@ -4,7 +4,7 @@ export class wordDoc extends Format
 {
 	name           = "Word Document";
 	website        = "http://fileformats.archiveteam.org/wiki/DOC";
-	ext            = [".doc"];
+	ext            = [".doc", ".dot"];
 	forbidExtMatch = true;
 	magic          = ["Microsoft Word document", "Microsoft Word for Windows"];
 	converters     = ["fileMerlin", "antiword", "soffice"];

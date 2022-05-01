@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
-import {imageUtil} from "xutil";
+import {imageUtil, fileUtil} from "xutil";
 import {initDOMParser, DOMParser} from "denoLandX";
 import {path} from "std";
 import {programs} from "../program/programs.js";
@@ -150,19 +150,23 @@ export class image extends Family
 			else if(metaProvider==="ansiArt")
 			{
 				// ansiArt, we convert with deark to html and then parse the HTML for meta info about the ansi art file
-				const r = await Program.runProgram("deark", inputFile, {flags : {charOutType : "html"}, xlog});
+				const r = await Program.runProgram("deark", inputFile, {flags : {module : "ansiart", charOutType : "html"}, xlog});
 				if(r.f.new)
 				{
-					const htmlRaw = await Deno.readTextFile(r.f.new.absolute);
-					await initDOMParser();
-					const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
-					Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
+					try
 					{
-						const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
-						const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
-						if(key && val && key.length>0 && val.length>0)
-							meta[key.toLowerCase()] = val;
-					});
+						const htmlRaw = await fileUtil.readTextFile(r.f.new.absolute);
+						await initDOMParser();
+						const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
+						Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
+						{
+							const key = (metaCell.querySelector("span.hn") || {textContent : ""}).textContent.trim().trimChars(":");
+							const val = (metaCell.querySelector("span.hv") || {textContent : ""}).textContent.trim().trimChars(":");
+							if(key && val && key.length>0 && val.length>0)
+								meta[key.toLowerCase()] = val;
+						});
+					}
+					catch {}
 				}
 				await r.unlinkHomeOut();
 			}

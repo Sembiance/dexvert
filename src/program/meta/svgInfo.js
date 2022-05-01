@@ -20,7 +20,7 @@ export class svgInfo extends Program
 
 		if(r.f.input.size<xu.MB*30)
 		{
-			const svgData = xmlParse(await Deno.readTextFile(r.inFile({absolute : true})));
+			const svgData = xmlParse(await fileUtil.readTextFile(r.inFile({absolute : true})));
 			if(!svgData || !svgData.svg || Object.keys(svgData.svg).filter(k => !k.startsWith("@")).length===0)
 			{
 				// If we have no children, doesn't matter if width/height/viewBox is set, there isn't anything to draw

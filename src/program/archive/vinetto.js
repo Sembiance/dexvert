@@ -1,3 +1,5 @@
+import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {initDOMParser, DOMParser} from "denoLandX";
 import {dateParse, path} from "std";
@@ -15,7 +17,7 @@ export class vinetto extends Program
 
 		await initDOMParser();
 	
-		const doc = new DOMParser().parseFromString(await Deno.readTextFile(dexFile.absolute), "text/html");
+		const doc = new DOMParser().parseFromString(await fileUtil.readTextFile(dexFile.absolute), "text/html");
 		const subs = doc.querySelectorAll("table.sub");
 		const filenameMap = {};
 		for(const sub of subs)

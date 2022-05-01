@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Format} from "../../Format.js";
 import {csvParse} from "std";
 
@@ -19,7 +20,7 @@ export class csv extends Format
 			return {};
 
 		const m = {};
-		const csvResult = await csvParse(await Deno.readTextFile(inputFile.absolute));
+		const csvResult = await csvParse(await fileUtil.readTextFile(inputFile.absolute));
 		if(csvResult && csvResult.length>0)
 			m.entryCount = csvResult.length;
 

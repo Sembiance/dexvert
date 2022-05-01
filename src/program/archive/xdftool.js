@@ -17,7 +17,7 @@ export class xdftool extends Program
 		const xdfmetaFilePaths = await fileUtil.tree(r.outDir({absolute : true}), {regex : /\.xdfmeta$/});
 		await xdfmetaFilePaths.parallelMap(async xdfmetaFilePath =>
 		{
-			const xdfmetaRaw = await Deno.readTextFile(xdfmetaFilePath);
+			const xdfmetaRaw = await fileUtil.readTextFile(xdfmetaFilePath);
 
 			// Meta format: https://github.com/cnvogelg/amitools/blob/974ad59645454e2490ce155407135e1cffbe61bb/amitools/fs/MetaDB.py
 			const lines = xdfmetaRaw.split("\n");

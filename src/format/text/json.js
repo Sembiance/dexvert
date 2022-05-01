@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Format} from "../../Format.js";
 
 export class json extends Format
@@ -16,7 +17,7 @@ export class json extends Format
 		if(inputFile.size>xu.MB*10)
 			return {};
 
-		const result = xu.parseJSON(await Deno.readTextFile(inputFile.absolute));
+		const result = xu.parseJSON(await fileUtil.readTextFile(inputFile.absolute));
 		if(!result)
 			return {};
 

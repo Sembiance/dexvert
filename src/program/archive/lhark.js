@@ -25,7 +25,7 @@ export class lhark extends Program
 			return;
 		}
 
-		const listContentRaw = await Deno.readTextFile(listFilePath);
+		const listContentRaw = await fileUtil.readTextFile(listFilePath);
 		await fileUtil.unlink(listFilePath);
 		await listContentRaw.split("\n").parallelMap(async line =>
 		{

@@ -1,4 +1,5 @@
 import {xu} from "xu";
+import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {path} from "std";
 
@@ -61,7 +62,7 @@ export class SID extends Program
 	});
 
 	// If our output is exactly 166 bytes and contains the word 'Error' then something went wrong
-	verify = async (r, dexFile) => dexFile.size!==166 || !(await Deno.readTextFile(dexFile.absolute)).includes("Error");
+	verify = async (r, dexFile) => dexFile.size!==166 || !(await fileUtil.readTextFile(dexFile.absolute)).includes("Error");
 
 	renameOut = true;
 }

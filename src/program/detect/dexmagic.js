@@ -27,6 +27,7 @@ const DEXMAGIC_CHECKS =
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
 	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],
 	"MacWrite Document"                       : [{offset : 0, match : [0x00, 0x06, 0x00]}, {offset : 4, match : [0x00, 0x06, 0x00, 0x02]}],
+	"Microsoft Publisher v1"                  : [{offset : 0, match : [0xE7, 0xAC, 0x2C, 0x00]}],
 	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],
 	"PCBoard Programming Language Executable" : [{offset : 0, match : "PCBoard Programming Language Executable"}],
 	"Wildcat WCX"                             : [{offset : 0, match : "GHSH"}],

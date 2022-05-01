@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {runUtil} from "xutil";
+import {runUtil, fileUtil} from "xutil";
 import {path} from "std";
 
 export class sidInfo extends Program
@@ -11,7 +11,7 @@ export class sidInfo extends Program
 		const {stderr : sidInfoRaw} = await runUtil.run("sidplay2", ["-w/dev/null", "-t1", r.inFile()], {cwd : r.f.root, timeout : xu.MINUTE});
 		r.meta.sidSubSongCount = +(sidInfoRaw.match(/Playlist.*\(tune \d+\/(?<subSongCount>\d+)/) || {groups : {}}).groups.subSongCount;
 
-		const songLengthsRaw = await Deno.readTextFile(path.join(xu.dirname(import.meta), "..", "..", "..", "music", "sid", "Songlengths.txt"));
+		const songLengthsRaw = await fileUtil.readTextFile(path.join(xu.dirname(import.meta), "..", "..", "..", "music", "sid", "Songlengths.txt"));
 		const songLengths = [];
 		
 		let nextLine=false;

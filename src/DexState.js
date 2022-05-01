@@ -138,7 +138,7 @@ export class DexState
 		if(this.xlog.atLeast("info") && this.past.length>0)
 		{
 			r.push(`\n${printUtil.majorHeader("DexState")}`);
-			r.push(`\n${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n")}`);
+			r.push(`\n${prefix}${xu.colon(fg.brown(" PAST PHASES"))}${fg.yellowDim(this.past.length)} phase${this.past.length===1 ? "" : "s"}\n${this.past.map(pastPhase => pastPhase.pretty(`${prefix}\t`)).join("\n\n")}`);
 		}
 
 		r.push(`\n${prefix}${this.past.length>0 ? printUtil.minorHeader("ACTIVE PHASE") : ""}${this.phase ? this.phase.pretty(`${prefix}\t`) : ""}`);

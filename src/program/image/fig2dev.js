@@ -20,7 +20,7 @@ export class fig2dev extends Program
 		if(!svgOutFile)
 			return;
 
-		let svgFileData = await Deno.readTextFile(svgOutFile.absolute);
+		let svgFileData = await fileUtil.readTextFile(svgOutFile.absolute);
 		const svgData = xmlParse(svgFileData);
 		await Object.findReplace(svgData, (k, v) => (Object.isObject(v) && Object.hasOwn(v, "@xlink:href") && v["@xlink:href"].startsWith("file://")), async (k, v) =>
 		{
@@ -30,7 +30,7 @@ export class fig2dev extends Program
 				return v;
 			
 			// Did try just modifying the object and then doing xmlStringify() below when saving the file, sadly the xml module is not reliable, especially when stringifying, it failed to produce the same output
-			svgFileData = svgFileData.replaceAll(xlinkHref, `data:image;base64,${base64Encode(await Deno.readTextFile(filePath, null))}`);
+			svgFileData = svgFileData.replaceAll(xlinkHref, `data:image;base64,${base64Encode(await fileUtil.readTextFile(filePath, null))}`);
 
 			return v;
 		});

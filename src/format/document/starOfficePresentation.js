@@ -1,0 +1,12 @@
+import {Format} from "../../Format.js";
+
+export class starOfficePresentation extends Format
+{
+	name           = "StarOffice Presentation";
+	website        = "http://fileformats.archiveteam.org/wiki/StarOffice_binary_formats";
+	ext            = [".sdd"];
+	forbidExtMatch = true;
+	magic          = ["StarOffice"];
+	weakMagic      = true;
+	converters     = ["soffice"];
+}

@@ -6,5 +6,5 @@ export class xls extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/XLS";
 	ext        = [".xls"];
 	magic      = ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet"];
-	converters = ["antixls"];
+	converters = ["soffice[matchType:magic]", "antixls"];
 }

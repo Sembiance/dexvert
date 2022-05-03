@@ -1,4 +1,4 @@
-# Supported File Formats (1,192)
+# Supported File Formats (1,196)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -203,7 +203,7 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [4 sam
 
 
 
-## Document (144)
+## Document (148)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -242,7 +242,7 @@ document | [Envoy Document](https://en.wikipedia.org/wiki/Envoy_(WordPerfect)) |
 document | EPOC Database |  | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/epocDatabase/)
 document | EPOC OPL Source | .opl | [psiconv](https://frodo.looijaard.name/project/psiconv) | [4 sample files](https://telparia.com/fileFormatSamples/document/epocOPLSource/)
 document | [EPUB](http://fileformats.archiveteam.org/wiki/EPUB) | .epub | [ebook_convert](https://calibre-ebook.com/) | [7 sample files](https://telparia.com/fileFormatSamples/document/epub/)
-document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [11 sample files](https://telparia.com/fileFormatSamples/document/xls/)
+document | [Excel Spreadsheet](http://fileformats.archiveteam.org/wiki/XLS) | .xls | [soffice](https://www.libreoffice.org) [antixls](https://packages.gentoo.org/packages/app-text/antixls) | [13 sample files](https://telparia.com/fileFormatSamples/document/xls/)
 document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/Farallon_Replica) | .rpl | [replica](https://gondwanaland.com/meta/history/) | [10 sample files](https://telparia.com/fileFormatSamples/document/farallonReplica/)
 document | [FictionBook](https://en.wikipedia.org/wiki/FictionBook) | .fb2 | [ebook_convert](https://calibre-ebook.com/) | [1 sample file](https://telparia.com/fileFormatSamples/document/fictionBook/)
 document | [FileMaker Pro Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/fileMakerPro/)
@@ -270,7 +270,7 @@ document | InstallShield Compiled Script | .inx | [SID](https://github.com/tyler
 document | ITS International Module | .int | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/itsInternational/)
 document | [LaTeX Document](http://fileformats.archiveteam.org/wiki/LaTeX) | .tex .ltx | [latex2html](https://www.latex2html.org/) [latex2pdf](http://latex2rtf.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/latex/) - Images don't seem to work at all. Hrm. At least the text seems to make it out, which is good enough for later indexing.
 document | Locomotive BASIC | .bas | [strings](https://www.gnu.org/software/binutils/) | 
-document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [soffice](https://www.libreoffice.org) | [13 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
+document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-3) | .wks .wk1 .wk2 .wk3 .wk4 .123 .wkb | [soffice](https://www.libreoffice.org) | [18 sample files](https://telparia.com/fileFormatSamples/document/lotus123/)
 document | Lotus Notes Database | .nsf | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/lotusNotes/)
 document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | MacWrite Document | .mcw .doc | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/macWrite/)
@@ -290,7 +290,7 @@ document | Novell Help Librarian | .hlp | [strings](https://www.gnu.org/software
 document | Novell/C-Worthy Message Librarian | .msg .dat | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/messageLibrarian/)
 document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/oberonText/)
 document | [Office Open XML](http://fileformats.archiveteam.org/wiki/DOCX) | .docx .docm .dotx | [soffice](https://www.libreoffice.org) | [6 sample files](https://telparia.com/fileFormatSamples/document/docx/)
-document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott | [soffice](https://www.libreoffice.org) | [4 sample files](https://telparia.com/fileFormatSamples/document/openDocument/)
+document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott .odp .ods | [soffice](https://www.libreoffice.org) | [6 sample files](https://telparia.com/fileFormatSamples/document/openDocument/)
 document | [Open XML Paper Specification](http://fileformats.archiveteam.org/wiki/XPS) | .xps .oxps | [xpstopdf](https://wiki.gnome.org/Projects/libgxps) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [5 sample files](https://telparia.com/fileFormatSamples/document/xps/)
 document | [OS/2 Help File](http://fileformats.archiveteam.org/wiki/INF/HLP_(OS/2)) | .hlp .inf | [ipf2txt](https://github.com/Sembiance/dexvert) | [15 sample files](https://telparia.com/fileFormatSamples/document/os2Help/) - The ipf2txt file is limited on what files it can convert due to 16-bit limitations.
 document | [OS/2 Message File](http://fileformats.archiveteam.org/wiki/MSG_(OS/2)) | .msg | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/os2Message/)
@@ -308,7 +308,7 @@ document | [PCBoard Programming Language Executable](https://en-academic.com/dic
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/peterNortonHelp/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [6 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | [ps2pdf](https://ghostscript.com/) | [11 sample files](https://telparia.com/fileFormatSamples/document/ps/)
-document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/powerPoint/)
+document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx | [soffice](https://www.libreoffice.org) | [15 sample files](https://telparia.com/fileFormatSamples/document/powerPoint/)
 document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/professionalPage/)
 document | Professional Write Document |  | [fileMerlin](http://www.file-convert.com/flmn.htm) | [8 sample files](https://telparia.com/fileFormatSamples/document/pfsWrite/)
 document | ProText Document |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/proText/)
@@ -319,14 +319,18 @@ document | [Psion Series 3 Word Document](http://fileformats.archiveteam.org/wik
 document | Psion Spreadsheet | .spr | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/psionSpreadsheet/)
 document | Psion TCR eBook | .tcr | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://telparia.com/fileFormatSamples/document/psionTCReBook/)
 document | [Python Compiled Bytecode](http://fileformats.archiveteam.org/wiki/Python) | .pyc .pyo | [pycdc](https://github.com/zrax/pycdc) | [8 sample files](https://telparia.com/fileFormatSamples/document/pythonCompiled/)
+document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .wq1 .wq2 .wb1 .wb2 .wb3 .qpw | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/quattroPro/)
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/quill/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [14 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
 document | [StarOffice Draw Document](http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)) | .sda | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/starOfficeDraw/)
-document | [StarWriter Document](http://fileformats.archiveteam.org/wiki/SDW) | .sdw .tpl | [soffice](https://www.libreoffice.org) [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/document/starWriter/) - Soffice doesn't support the older MS-DOS versions (.tpl files) but since I just fallback to strings, we allow it to convert to PDF because it basically does the same thing as strings in this case.
+document | [StarOffice Presentation](http://fileformats.archiveteam.org/wiki/StarOffice_binary_formats) | .sdd | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/starOfficePresentation/)
+document | [StarOffice Spreadsheet](http://fileformats.archiveteam.org/wiki/SDC) | .sdc .stc .sxc .vor | [soffice](https://www.libreoffice.org) | [4 sample files](https://telparia.com/fileFormatSamples/document/starOfficeSpreadsheet/)
+document | [StarWriter Document](http://fileformats.archiveteam.org/wiki/SDW) | .sdw .tpl | [soffice](https://www.libreoffice.org) [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/starWriter/) - Soffice doesn't support the older MS-DOS versions (.tpl files) but since I just fallback to strings, we allow it to convert to PDF because it basically does the same thing as strings in this case.
 document | STFax Script | .script | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/stFaxScript/)
 document | Sundial Clearlook | .ctx | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/sundialClearlook/)
 document | SuperCalc Worksheet | .cal | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/superCalc/)
+document | [SYmbolic LinK Spreadsheet](http://fileformats.archiveteam.org/wiki/SYLK) | .slk .sylk | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/sylkSpreadsheet/)
 document | Tempus Word Document | .twd | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/tempusWord/)
 document | Texinfo Document | .texinfo .texi | [texi2pdf](https://www.gnu.org/software/texinfo/) [texi2html](http://www.nongnu.org/texi2html/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/texInfo/)
 document | Text Engine Document | .std | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/textEngine/)
@@ -1183,9 +1187,9 @@ text | AMOS Source Code | .amossourcecode |  | [10 sample files](https://telpari
 text | [Assembly Source File](http://fileformats.archiveteam.org/wiki/Assembly_language) | .asm |  | [11 sample files](https://telparia.com/fileFormatSamples/text/asm/)
 text | [BASIC Source File](http://fileformats.archiveteam.org/wiki/BASIC) | .bas |  | [10 sample files](https://telparia.com/fileFormatSamples/text/bas/)
 text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c .h .cpp .cxx .cc .c++ .hpp |  | [15 sample files](https://telparia.com/fileFormatSamples/text/c/)
-text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css |  | [1 sample file](https://telparia.com/fileFormatSamples/text/css/)
+text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/CSS) | .css |  | [2 sample files](https://telparia.com/fileFormatSamples/text/css/)
 text | [CDRDAO TOC File](http://cdrdao.sourceforge.net/example.html#toc-file-example) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/text/toc/)
-text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [4 sample files](https://telparia.com/fileFormatSamples/text/csv/)
+text | [Comma Seperated Value File](http://fileformats.archiveteam.org/wiki/CSV) | .csv |  | [5 sample files](https://telparia.com/fileFormatSamples/text/csv/)
 text | [DOS Batch File](http://fileformats.archiveteam.org/wiki/BAT) | .bat |  | [11 sample files](https://telparia.com/fileFormatSamples/text/batDOS/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [2 sample files](https://telparia.com/fileFormatSamples/text/xml/)
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://telparia.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
@@ -1193,11 +1197,11 @@ text | Fred Fish's Product-Info |  |  | [13 sample files](https://telparia.com/f
 text | [FS-UAE Meta File](https://fs-uae.net/docs/options/uaem-write-flags) | .uaem |  | 
 text | GEDCOM Genealogy Text | .ged |  | [1 sample file](https://telparia.com/fileFormatSamples/text/gedcom/)
 text | GNU Bison Grammar | .yy .y |  | [3 sample files](https://telparia.com/fileFormatSamples/text/gnuBisonGrammar/)
-text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc |  | [7 sample files](https://telparia.com/fileFormatSamples/text/html/)
+text | [Hypertext Markup Language File](http://fileformats.archiveteam.org/wiki/HTML) | .html .htm .xhtml .xht .hhk .hhc |  | [9 sample files](https://telparia.com/fileFormatSamples/text/html/)
 text | [INI File](http://fileformats.archiveteam.org/wiki/INI) | .ini .inf .cfg .conf .nfo |  | [14 sample files](https://telparia.com/fileFormatSamples/text/ini/)
 text | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg |  | [2 sample files](https://telparia.com/fileFormatSamples/text/imf/) - With several RFC files describing the format, you'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue |  | [8 sample files](https://telparia.com/fileFormatSamples/text/cue/)
-text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [4 sample files](https://telparia.com/fileFormatSamples/text/json/)
+text | [JavaScript Object Notation](http://fileformats.archiveteam.org/wiki/JSON) | .json |  | [5 sample files](https://telparia.com/fileFormatSamples/text/json/)
 text | Latex Auxiliary File | .aux |  | [11 sample files](https://telparia.com/fileFormatSamples/text/latexAUXFile/)
 text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  |  | [10 sample files](https://telparia.com/fileFormatSamples/text/lingoScript/)
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)

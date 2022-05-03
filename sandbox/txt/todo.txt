@@ -2,9 +2,6 @@
 | TOP Priority |
 \--------------/
 * Stash more file format examples:
-https://example-files.online-convert.com/website/
-https://example-files.online-convert.com/presentation/
-https://example-files.online-convert.com/spreadsheet/
 https://example-files.online-convert.com/video/
 https://example-files.online-convert.com/misc/
 https://example-files.online-convert.com/raster image/

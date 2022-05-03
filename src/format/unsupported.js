@@ -210,6 +210,7 @@ export default
 		///////////
 		// Other //
 		///////////
+		activInspireFlipchart        : {name : "ActivInspire Flipchart", ext : [".flipchart"], magic : ["ActivInspire Flipchart"]},
 		adobeDuotoneOptions          : {name : "Adobe Duotone Options", ext : [".ado"], magic : ["Adobe Duotone Options"]},
 		adobeMultipleMasterMetrics   : {name : "Adobe Multiple Master Metrics", ext : [".mmm"], magic : ["Adobe Multiple Master font", "Adobe Type Manager Multiple Master Metrics"]},
 		adobePhotoshopGradient       : {name : "Adobe Photoshop Gradient", ext : [".grd"], magic : ["Adobe Photoshop gradient"]},
@@ -352,6 +353,7 @@ export default
 		reflectionsMaterial          : {name : "Reflections Material", ext : [".mat"], magic : ["Reflections Material"]},
 		reflectionsScene             : {name : "Reflections Scene", magic : ["Reflections scene/project"]},
 		relocatableObjectModule      : {name : "Relocatable Object Module", ext : [".obj", ".o"], magic : ["OMF - Relocatable Object Module Format", "8086 relocatable"]},
+		rfFlowDiagram                : {name : "RFFlow Diagram", ext : [".flo"], magic : ["RFFlow diagram"]},
 		riffMSXF                     : {name : "RIFF MSFX File", ext : [".sfx"], magic : ["RIFF MSFX file"], notes : "Just contains meta info about a given soundeffect usually distributed alongside it as a .wav"},
 		riffMxSt                     : {name : "RIFF MxSt File", ext : [".si"], magic : ["RIFF MxSt file"], notes : "References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff"},
 		riffPalette                  : {name : "RIFF Palette", ext : [".pal"], magic : ["RIFF Palette"]},

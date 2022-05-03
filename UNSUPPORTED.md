@@ -1,4 +1,4 @@
-# Unsupported File Formats (593)
+# Unsupported File Formats (595)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -289,7 +289,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (316)
+## Other (318)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -300,6 +300,7 @@ other | 3D Studio Project | .prj |
 other | 3DFX Glide driver | .dxe | 
 other | 4D Paint Project | .4dp | [1 sample file](https://telparia.com/fileFormatSamples/other/fourDPaintProject/)
 other | Abuse Level | .lvl .spe | 
+other | ActivInspire Flipchart | .flipchart | 
 other | Adobe Duotone Options | .ado | 
 other | Adobe Hyphenation/Spelling Dictionary | .hyp | 
 other | Adobe Multiple Master Metrics | .mmm | 
@@ -528,6 +529,7 @@ other | Reflections Data | .r3 |
 other | Reflections Material | .mat | 
 other | Reflections Scene |  | 
 other | Relocatable Object Module | .obj .o | 
+other | RFFlow Diagram | .flo | 
 other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 other | RIFF Palette | .pal | 

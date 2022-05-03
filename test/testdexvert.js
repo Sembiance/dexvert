@@ -401,10 +401,8 @@ async function testSample(sampleFilePath)
 			return await fail(`Created files are different: ${diffFiles}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
-		if(allowedSizeDiff===0)
-			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0);
-		if(allowedSizeDiff===0)
-			allowedSizeDiff = (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(0)?.programid] || 0);
+		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0));
+		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(0)?.programid] || 0));
 
 		// first make sure the files are the same
 		for(const [name, {size, sum}] of Object.entries(result.files))
@@ -418,7 +416,7 @@ async function testSample(sampleFilePath)
 
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 
-			const allowedFileSizeDiff = FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff;
+			const allowedFileSizeDiff = Math.max(FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff, allowedSizeDiff);
 			if(sizeDiff!==0 && sizeDiff>allowedFileSizeDiff)
 				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}`);
 

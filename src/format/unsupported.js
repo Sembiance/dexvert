@@ -290,7 +290,6 @@ export default
 		gettextMachineObject         : {name : "Gettext Machine Object", ext : [".gmo"], magic : ["GNU Gettext Machine Object"]},
 		gfxLab24ConvolutionMatrix    : {name : "GfxLab24 Convolution Matrix", magic : ["GfxLab24 convolution matrix"]},
 		gfxLab24Filter               : {name : "GfxLab24 Filter", magic : ["GfxLab24 filter"]},
-		harvardGraphicsChart         : {name : "Harvard Graphics Chart", ext : [".ch3"], magic : ["Harvard Graphics Chart"]},
 		hotMapRegionsDescription     : {name : "HotMap VBX Regions Description", ext : [".hmd"], magic : ["HotMap VBX regions Description"]},
 		hyperPadPad                  : {name : "HyperPAD Pad", ext : [".pad"], magic : ["HyperPAD Pad"]},
 		iBrowseGlobalCache           : {name : "iBrowse Global Cache", magic : ["IBrowse Global Cache"]},

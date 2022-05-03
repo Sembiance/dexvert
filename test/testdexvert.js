@@ -124,6 +124,9 @@ const IGNORE_SIZE_FILEPATHS =
 // Specific the path to the file and a number of different files that is allowed
 const FLEX_DIFF_FILES =
 [
+	// this specific file sometimes extracts a pict, sometimes a bmp, no idea why
+	/archive\/rsrc\/Speedometer 4\.02\.rsrc$/,
+	
 	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
 	/document\/wordDoc\/POWWOW\.DOC$/,
 	

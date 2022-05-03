@@ -9,5 +9,5 @@ export class dng extends Format
 	magic        = ["TIFF image data"];
 	weakMagic    = true;
 	metaProvider = ["image", "darkTable"];
-	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert", "canvas"];
 }

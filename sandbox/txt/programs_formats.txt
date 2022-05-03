@@ -9439,3 +9439,104 @@ X11 PixMap image (.xpm)
 X11 window dump (.xwd)
 X11 Mouse cursor (.xmc)
 ZSoft PCX image (.pcx, .pcc)
+
+
+>>> Canvas 14 (winxp)
+032/RAW - Phase One RAW
+AI - Adobe Illustrator Cs
+ARW - Sony RAW RAW
+BMP/RLE - Bitmap
+CAL - Support Raster Format
+CDR - Corel Draw
+CDT - Corel Draw Template
+CGM - Computer Graphics Metafile
+CH3 - Harvard Graphics Chart
+CMX - Corel Draw Clipart
+CR2 - Canon RAW CR2
+CRW - Canon RAW CRW
+CVI - Canvas Image File
+CVS - Canvas 3.5, artWORKS
+CVX/CNV/CV5 - Canvas
+DCR - Kodak RAW DCR
+DICOM Images
+DJV/DJVU/IW4 - AT&T DjVu Image
+DNG - DNG
+DOC - Microsoft Word
+DOCX - Microsoft Word
+DRW - Micrografx Draw
+DWF - Design Web Format (WHIP!)
+DWG - AutoCAD native files
+DXF - AutoCAD Drawing Interchange
+EMF - Enhanced Metafile
+EPS - Encapsulated PostScript
+ERF - Epson RAW ERF
+FMV - Framemaker Vector
+FPX - Kodak Flash Pix
+GEM - Digital Research
+GIF - GIF Animated/GIF Graphics
+HDR - HDR
+HGL/HPGL/HPG - Hewlett Packard
+HTML - Hypertext Markup Language
+ICH/JTD - Ichitaro versions 8, 9, 10, 11,
+ICL - ICL
+ICN - AT&T / Multigen
+ICO - Icon File
+IFF/LBM/ILBM - Interchange File Format image
+IGS/IGES - IGES Drawing
+JP2/JPX/JPK/J2K - JPEG 2000 JP2 File
+JPC/J2C - JPEG 2000 Codestream
+JPG/JPE/JPEG - JPEG Graphics
+KDC - Kodak RAW KDC
+MEF - Mamiya RAW
+MET - OS/2 PM Metafile
+MRW - Konica Minolta RAW
+NEF - Nikon RAW
+ORF - Olympus RAW
+PBM - Portable Bitmap
+PCD - Kodak Photo CD
+PCX - Paintbrush Bitmap
+PDF - Adobe Acrobad
+PEF - Penta RAW PEF
+PGM - Portable Greymap
+PIC - Lotus PIC
+PIC - Macintosh Picture
+PIC - Pegasus PIC
+PIX - Alias PIX
+PNG - Portable Network Graphics
+PPM - Portable Pixmap
+PPT - Microsoft Powerpoint
+PPTX - Microsoft Powerpoint
+PRN - Printer(PS) files
+PS/EPS - PostScript Files
+PSD/PDD - Photoshop
+PSP/PSPIMAGE/PSPBRUSH - Paint Shop Pro
+RAF - Fujifilm RAW
+RAS - Sun Raster
+RAW - Contax/Leica/Panasonic/Pentax RAW
+RAW/BAY - Casio RAW
+RAW/MOS/FFF/CS1 - RAW
+RAW/TXT/CSV - RAW Image
+RND - Autoshade
+RSB - Red Storm File Format
+RTF - Rich Text Format
+RW2 - Panasonic RAW RW2
+SGI/RGB/RGBA/BW/INT/INTA - SGI
+SRF/SR2 - SONY RAW
+SRS - Sun Raster
+SY3 - Harvard Graphics for windows
+TGA/VDA/ICB/VST - TARGA Bitmap
+TIF/TIFF - Canon RAW TIFF
+TIF/TIFF - Kodak RAW TIFF
+TIF/TIFF - TIFF Image
+TPL - Canvas Template
+TXT - Plain Text
+VSD - Visio Versions 5, 2000, 2002
+WBM/WBMP - Wireless BMP
+WMF - Windows Metafile
+WPD - WordPerfect
+WPG - WordPerfect Graphics
+XBM - X Bitmap
+XLC - Microsoft Excel Charts
+XLS - Microsoft Excel Windows
+XLSX - Microsoft Excel Windows
+XPM - X Pixmap

@@ -13,14 +13,14 @@ export class iffILBM extends Format
 	notes          = xu.trim`
 		ILBM files are only converted to static PNG images. Color cyclying animated GIFs are not produced.
 		This is because a HUGE number of ILBM files from back in the day have wacky color cycle data that yield extensive strobing or almost no change at all.
-		Additionally, the animation support isn't fully working as some have info, but I haven't found ANY program that can handle them: V05AM.LBM V12.LBM V18.LBM V21.LBM V22.LBM V26.LBM
+		Additionally, the animation support isn't fully working as some have REAL cycle data, but I haven't found ANY program that can handle them: V05AM.LBM V12.LBM V18.LBM V21.LBM V22.LBM V26.LBM
 		Some ILBM files were only used to hold a palette and nothing more. This won't convert those.
 		DPPS chunk - Present in some files and they don't convert correctly. Probably a 'Deluxe Paint' chunk of some sort`;
 
 	// recoil2png produces the best still images for iffILBM files, with abydosconvert being a runner up
 	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
-	converters = [`recoil2png`, "deark", "ffmpeg[format:iff]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert", "hiJaakExpress"];
+	converters = [`recoil2png`, "deark", "ffmpeg[format:iff]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert", "hiJaakExpress", "canvas"];
 }
 
 /* Other IFF ILBM converters:

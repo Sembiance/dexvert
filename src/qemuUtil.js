@@ -128,7 +128,13 @@ Func WindowRequire($title, $text, $max_duration)
 EndFunc`,
 	WindowFailure : `
 Func WindowFailure($title, $text, $max_duration, $dismissKeys=0)
-	Local $win = WinWaitActive($title, $text, $max_duration)
+	Local $win = 0
+	If $max_duration = -1 Then
+		$win = WinActive($title, $text)
+	Else
+		$win = WinWaitActive($title, $text, $max_duration)
+	EndIf
+
 	If $win Not = 0 Then
 		If $dismissKeys Not = 0 Then
 			Send($dismissKeys)

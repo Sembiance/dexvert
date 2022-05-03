@@ -6,5 +6,5 @@ export class hpgl extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HPGL";
 	ext        = [".hpgl"];
 	magic      = ["Hewlett-Packard Graphics Language"];
-	converters = ["totalCADConverterX", "corelPhotoPaint"];
+	converters = ["totalCADConverterX", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
 }

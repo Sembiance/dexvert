@@ -8,5 +8,5 @@ export class fpx extends Format
 	mimeType     = "image/vnd.fpx";
 	magic        = ["Generic OLE2", "Composite Document File", "OLE2 Compound Document Format"];
 	metaProvider = ["image"];
-	converters   = ["convert", "corelPhotoPaint"];
+	converters   = ["convert", "corelPhotoPaint"];	// canvas also supports this format, but only in a non-raster way which I don't trust enough with this generatic magic/ext
 }

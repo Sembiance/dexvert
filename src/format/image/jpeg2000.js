@@ -8,5 +8,5 @@ export class jpeg2000 extends Format
 	mimeType     = "image/jp2";
 	magic        = ["JPEG 2000", "JP2 (JPEG 2000"];
 	metaProvider = ["image"];
-	converters   = ["convert", "gimp"];
+	converters   = ["convert", "gimp", "canvas"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (594)
+# Unsupported File Formats (593)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -289,7 +289,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (317)
+## Other (316)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -421,7 +421,6 @@ other | Gettext Machine Object | .gmo |
 other | GfxLab24 Convolution Matrix |  | 
 other | GfxLab24 Filter |  | 
 other | Half-Life 2 Save Game | .sav | 
-other | Harvard Graphics Chart | .ch3 | 
 other | High Speed Pascal Unit | .unit | 
 other | HomeBrew Level | .hle | 
 other | HomeBrew Palette | .hpa | 
@@ -615,7 +614,7 @@ other | ZZT File | .zzt |
 ## Poly (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-poly | 3D Studio Mesh | .3ds | [1 sample file](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
+poly | 3D Studio Mesh | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | Caligari TrueSpace 3D Object | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)

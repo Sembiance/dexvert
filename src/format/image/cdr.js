@@ -7,5 +7,5 @@ export class cdr extends Format
 	ext            = [".cdr", ".cdt", ".cdx", ".cpx"];
 	forbidExtMatch = [".cpx"];
 	magic          = ["CorelDraw Document", "CorelDraw Drawing"];
-	converters     = ["scribus", "deark", "nconvert", "hiJaakExpress", "corelPhotoPaint"];
+	converters     = ["scribus", "deark", "nconvert", "hiJaakExpress", "corelPhotoPaint", "canvas"];
 }

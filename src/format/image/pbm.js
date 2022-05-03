@@ -8,5 +8,5 @@ export class pbm extends Format
 	mimeType     = "image/x-portable-bitmap";
 	magic        = ["Portable BitMap", "Portable Bitmap Image", /^Netpbm image data .*bitmap$/];
 	metaProvider = ["image"];
-	converters   = ["convert", "gimp", "hiJaakExpress"];
+	converters   = ["convert", "gimp", "hiJaakExpress", "canvas"];
 }

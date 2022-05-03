@@ -22,6 +22,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [https://zxtune.bitbucket.io/ zxtune]
 * [[XMP]]
 * [[Unar]]
+* [[Calibre]]
 * [https://zakalwe.fi/uade/ UADE]
 * [https://www.fmjsoft.com/awavestudio.html Awave Studio]
 * [http://www.watto.org/game_extractor.html Game Extractor]

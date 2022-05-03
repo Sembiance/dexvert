@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class studioMesh3D extends Format
 {
 	name        = "3D Studio Mesh";
+	website     = "http://fileformats.archiveteam.org/wiki/3DS";
 	ext         = [".3ds"];
 	magic       = ["3D Studio model", "3D Studio mesh"];
 	unsupported = true;

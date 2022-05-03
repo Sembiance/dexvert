@@ -1,4 +1,4 @@
-# Unsupported File Formats (595)
+# Unsupported File Formats (601)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -71,7 +71,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (23)
+## Document (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -96,7 +96,9 @@ document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/f
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb | [3 sample files](https://telparia.com/fileFormatSamples/document/multimediaViewerBook/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
+document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered any of these files 'in the wild' yet.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
+document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 
 
 
@@ -289,7 +291,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (318)
+## Other (320)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -344,6 +346,7 @@ other | Audio Interface Library 3 Music/MIDI driver | .mdi |
 other | AutoCAD Compiled Menu | .mnx | 
 other | AutoCAD Protected LISP | .lsp | 
 other | AutoDesk 3D-Studio Material Library | .mli | 
+other | AVS Video Editor Project | .vep | 
 other | Babble! Data | .bab | 
 other | Bars and Pipes File | .gchone .gchord .song | 
 other | Berkeley DB | .db | 
@@ -583,6 +586,7 @@ other | VESA Display Identification File | .vdb |
 other | Video Music Box Progression | .prgn | 
 other | Video Music Box Style | .stle | 
 other | VideoFX2 Sequence | .seq | 
+other | VideoPad Project | .vpj | 
 other | VideoTracker Routine | .rot | [10 sample files](https://telparia.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 other | Vista Digital Elevation Map | .dem | 
 other | Vista Makepath Session | .ses | 
@@ -613,19 +617,20 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (19)
+## Poly (20)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
-poly | 3D Studio Mesh | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
-poly | Caligari TrueSpace 3D Object | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
+poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
+poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
-poly | LightWave 3D Object | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
+poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
-poly | NetImmerse File | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
-poly | [NorthCAD-3D](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .n3d | 
+poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
+poly | NorthCAD-3D | .n3d | 
+poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [1 sample file](https://telparia.com/fileFormatSamples/poly/openNURBS/)
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/poly/polyfilm/)
 poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
@@ -633,12 +638,12 @@ poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSa
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
-poly | [Vertex Binary 3D Object](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d | 
+poly | Vertex Binary 3D Object | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
 
 
 
-## Video (16)
+## Video (17)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -656,5 +661,6 @@ video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL
 video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
+video | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://telparia.com/fileFormatSamples/video/sonyVegas/)
 video | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://telparia.com/fileFormatSamples/video/zoetropeAnimation/)
 

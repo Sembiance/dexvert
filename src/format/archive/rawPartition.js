@@ -5,7 +5,7 @@ const HFS_MAGICS = ["Macintosh HFS data"];
 export class rawPartition extends Format
 {
 	name       = "Raw Partition";
-	magic      = [/^DOS\/MBR boot sector/, ...HFS_MAGICS];
+	magic      = [/^DOS\/MBR boot sector/, ...HFS_MAGICS, "UDF filesystem data"];
 	converters = async dexState =>
 	{
 		const dosMBRID = dexState.ids.find(id => id.from==="file" && id.magic.startsWith("DOS/MBR boot sector"));

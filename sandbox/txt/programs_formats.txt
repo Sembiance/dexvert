@@ -9540,3 +9540,102 @@ XLC - Microsoft Excel Charts
 XLS - Microsoft Excel Windows
 XLSX - Microsoft Excel Windows
 XPM - X Pixmap
+
+
+>>> xine http://xine.sourceforge.net/features
+File formats (System layer / media types)
+	direct DVD playback (of unlocked/unencrypted DVDs, see below)
+	Video CD
+	Audio CD
+	BluRay
+	mpeg program streams (.mpg, .mpeg)
+	mpeg transport streams (.ts)
+	ogg (.ogg, .ogm)
+	avi (.avi)
+	asf (.asf, .wmv, .wma)
+	quicktime (.mov, .mp4)
+	mpeg-video (.mpv, .m2v)
+	mpeg-audio (.mp2, .mp3)
+	Sega Saturn FILM (.cpk)
+	Id Software RoQ (.roq)
+	wav (.wav)
+	Autodesk FLIC (.fli)
+	real (.rm, .ra, .ram)
+	raw dv (.dv)
+	network graphics format (.png, .mng)
+	Creative Voice (.voc)
+	Sun/NeXT SND/AU (.snd, .au)
+	Wing Commander III (.mve)
+	Westwood Studios files (.vqa, .aud)
+	Electronic Arts WVE (.wve)
+	AIFF (.aif, .aiff)
+	YUV4MPEG2 (.y4m)
+	SMJPEG (.mjpg)
+	raw AC3 (.ac3)
+	Dialogic VOX (.vox)
+	TechnoTrend PVA (.pva)
+	Playstation STR (.str)
+	Nullsoft Video (.nsv)
+	4X Technologies (.4xm)
+
+Audio codecs
+	mpeg audio (layer 1,2,3)
+	a/52 (aka ac3, dolby digital)
+	aac (used in .mp4 files)
+	dts (via external decoder)
+	vorbis
+	pcm
+	adpcm (MS/IMA/DVI/Dialogic)
+	mu-law and A-law
+	roq dpcm
+	Real Media dnet audio
+	Real Media 28.8 audio
+	DivX audio (WMA)
+	GSM 6.10
+	FLAC
+	NSF (NES sound format)
+	Speex
+	via external binary/win32 codecs (not included in xine):
+		MS GSM
+		Intel Music Coder
+		Voxware Metasound
+		ACELP.net
+		Real Media Sipro/Cook/dnet
+		QDesign Music 1/2 (QDM1/QDM2)
+	currently unsupported/untested Formats:
+		some formats frequently found in quicktime streams (Qualcomm Pure Voice…)
+
+Video codecs
+	mpeg 1/2
+	mpeg 4 (aka OpenDivX)
+	H.264
+	H.265 (HEVC)
+	AV1
+	VC-1
+	VP8, VP9
+	ms mpeg 4
+	divx 3/4/5
+	windows media video 7 & 8
+	motion jpeg
+	Cinepak
+	DV
+	ms video 1 (msvc)
+	ms rle
+	Sorenson SVQ1/SVQ3 (often used in Quicktime trailers)
+	creative yuv (cyuv)
+	roq video
+	QT RLE, SMC, RPZA
+	theora
+	via external binary/win32 codecs (not included in xine):
+		Indeo 3.1-5.0
+		Window Media Video 8,9
+		On2 VP3.1
+		I263
+		Real Media 2.0, 3.0, 4.0
+	unsupported/untested Formats:
+		3ivx
+		h263 (aka Real Video 1.0)
+		hardware decoding support:
+		VAAPI - mpeg2, mpeg4, H.264, H.265
+		VDPAU - mpeg2, mpeg4, H.264
+		MMAL (Raspberry PI) - mpeg2, mpeg4, H.264

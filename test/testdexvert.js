@@ -76,7 +76,7 @@ const FLEX_SIZE_FORMATS =
 	{
 		// these conversions sometimes differ WILDLY, haven't figured out why
 		hlp        : 50,
-		wildcatWCX : 80,
+		wildcatWCX : 90,
 		wordDoc    : 80,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data

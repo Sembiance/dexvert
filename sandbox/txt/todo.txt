@@ -1,18 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Stash more file format examples:
-https://example-files.online-convert.com/video/
-https://example-files.online-convert.com/misc/
-https://example-files.online-convert.com/raster image/
-https://www.digipres.org/#test-corpora
-
-* Add format: http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
+* Add format (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
 
 * Add programs:
-  http://xine.sourceforge.net/features
-  https://pandoc.org/
-  https://www.macdisk.com/conven.php
   https://tomseditor.com/ (Tom's viewer with plugins (site may be  offline https://web.archive.org/web/20220411123456/)) Archive org seems to have captured the installer, but just in case it doesn't work a potentially older version is here: https://m.majorgeeks.com/files/details/toms_viewer.html
   http://fileformats.archiveteam.org/wiki/OPTIKS
   http://fileformats.archiveteam.org/wiki/Iconvert

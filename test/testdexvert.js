@@ -171,6 +171,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/imf\/.+/i, "text", true],
 	[/document\/manPage\/glib\.man/i, "text", true],
 	[/document\/microsoftPublisher\/.+/i, "archive", true],
+	[/document\/vCard\/.+/i, "text", true],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/music\/renoise\/.+/i, "archive", "zip"],

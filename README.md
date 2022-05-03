@@ -3,12 +3,12 @@ Convert **1,204** file formats (out of **1,805** known) into modern equilivants 
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
-Utilizes [Deno](https://deno.land/) and **293** helper programs running on **4** different operating systems under [QEMU](https://www.qemu.org/)
+Utilizes [Deno](https://deno.land/) and **294** helper programs running on **4** different operating systems under [QEMU](https://www.qemu.org/)
 
 ## Install and Usage
 There is no easy way to install or use this yourself due to 3 factors:
 * Many commercial programs and OS's are not included but are needed to convert several formats
-* Over **293** programs need to be installed, many with [custom code patches](https://github.com/Sembiance/dexvert-gentoo-overlay)
+* Over **294** programs need to be installed, many with [custom code patches](https://github.com/Sembiance/dexvert-gentoo-overlay)
 * Various kernel and OS configurations need to be set just right
 
 Some day I may offer a website where you can upload a file and have it be identified and converted

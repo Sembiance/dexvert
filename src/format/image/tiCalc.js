@@ -7,5 +7,5 @@ export class tiCalc extends Format
 	ext        = [".82i", ".8ca", ".8ci", ".92i", ".73i", ".83i", ".8xi", ".85i", ".86i", ".89i", ".9xi", ".v2i"];
 	mimeType   = "application/x-ti-variable";
 	magic      = ["TI bitmap", "Texas Instruments file format", /^TI-[89][2356]\+? Graphic Calculator/];
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "deark"];
+	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "deark", "tomsViewer"];
 }

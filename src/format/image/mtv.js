@@ -9,5 +9,5 @@ export class mtv extends Format
 	magic        = ["zlib compressed data"];
 	weakMagic    = true;
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
+	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
 }

@@ -12,5 +12,5 @@ export class gif extends Format
 
 	// some GIF files are often corrupted and Imagemagick won't load them, thus no meta data. However nconvert can usually handle them, so we try converting to PNG if no meta data found
 	// deark handles some very old animated GIFs that are slightly broken such as 89aillus.gif by simply extracting out the individual frames
-	converters = ["nconvert", "deark[module:gif]", "hiJaakExpress", "corelPhotoPaint", "canvas"];
+	converters = ["nconvert", "deark[module:gif]", "hiJaakExpress", "corelPhotoPaint", "canvas", "tomsViewer"];
 }

@@ -6,5 +6,5 @@ export class qrt extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap";
 	ext            = [".qrt", ".dis", ".raw"];
 	forbiddenMagic = ["KryoFlux raw stream"];
-	converters     = ["nconvert"];
+	converters     = ["nconvert", "tomsViewer"];
 }

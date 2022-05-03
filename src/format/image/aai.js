@@ -7,5 +7,5 @@ export class aai extends Format
 	ext          = [".aai"];
 	mimeType     = "image/x-dune";
 	metaProvider = ["image"];
-	converters   = ["convert"];
+	converters   = ["convert", "tomsViewer"];
 }

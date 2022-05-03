@@ -8,5 +8,5 @@ export class pfm extends Format
 	mimeType     = "image/x-portable-floatmap";
 	magic        = ["Portable Float Map color bitmap"];
 	metaProvider = ["image"];
-	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "nconvert", "tomsViewer"];
 }

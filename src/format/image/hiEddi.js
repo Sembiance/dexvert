@@ -8,5 +8,5 @@ export class hiEddi extends Format
 	mimeType      = "image/x-hi-eddi";
 	fileSize      = 9218;
 	matchFileSize = true;
-	converters    = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
+	converters    = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "view64", "tomsViewer"];
 }

@@ -9639,3 +9639,485 @@ Video codecs
 		VAAPI - mpeg2, mpeg4, H.264, H.265
 		VDPAU - mpeg2, mpeg4, H.264
 		MMAL (Raspberry PI) - mpeg2, mpeg4, H.264
+
+
+>>> Tom's Viewer https://tomseditor.com/blog/viewer
+.PSA		Print Shop
+.256		
+.AP2		256, AP2
+.CH4		4x8 font
+.CH6		
+.CHS		6x8 font
+.64C		
+.CH8		8x8 font
+.PSD		Adobe Photoshop
+.OCP		Advanced Art Studio
+.AFL		AFLI-editor v2.0 by Topaz Beerlin
+.RLA		Alias/Wavefront image file
+.GRF		AMI BIOS Logo
+.AMI		Amica Paint, packed
+.ACBM		Amiga Continuous Bitmap
+.LBM		
+.IFF		
+.ILBM		Amiga IFF
+.ATK		Andrew Toolkit raster object
+.A4R		Anime 4ever
+.APP		APP
+.PICT		Apple Macintosh QuickDraw/PICT file
+.VOLLABEL		Apple Volume Label
+.PNT		Ark: Survival Evolved
+.ART		Art Director
+.ART		Art Studio
+.AAS		Art Studio
+.A64		Artist 64
+.4MI		Atari 4MI
+.4PL		Atari 4PL
+.ART		Atari 8 Artist
+.AGP		Atari AGP
+.ALL		Atari ALL
+.PZM		
+.DGP		
+.DGI		
+.ESC		
+.APV		
+.ILC		
+.AP3		Atari AP3
+.APC		
+.PLM		Atari APC
+.CPR		Atari CPR
+.DOO		Atari DOO
+.DRG		Atari DRG
+.FNT		Atari FNT
+.G10		Atari G10
+.GFB		Atari GFB
+.GR7		Atari GR7
+.GR8		Atari GR8
+.GR9		Atari GR9
+.HR		Atari HR
+.INP		Atari INP
+.MCH		Atari MCH
+.MGP		Atari MGP
+.MIS		Atari MIS
+.PIC		Atari PIC
+.PLA		Atari PLA
+.APL		Atari Player Editor
+.SHC		Atari SHC
+.4PM		AtariTools-800 4 players&missiles;
+.ACS		AtariTools-800 font
+.ATR		Attributes
+.HLR		Attributes Gigascreen
+.SLD		AutoCAD slide file
+.CEL		Autodesk Animator
+.KRO		AutoPano RAW
+.EPA		Award BIOS logo
+.INLIN		Base64-encoded inline image
+.YBM		Bennet Yee "face"
+.EYUV		Berkeley YUV
+.BPG		Better Portable Graphics
+.BG9		
+.G09		BG9/G09
+.BFLI		Big FLI
+.PIC		
+.RAD		Bio-Rad
+.BIORAD		Biorad confocal file
+.PI		Blazing Paddles
+.CHR		Blazing Paddles font
+.WND		Blazing Paddles Window
+.BOB		Bob Ray Tracer Bitmap
+.PIX		BRender PIX
+.BGP		Bugbiter APAC239i
+.RAW		Camera RAW
+.CRW		
+.CR2		Canon Digital Camera Raw Image
+.CPT		Canvas (compressed)
+.CDU		CDU-Paint
+.CCI		Champions Interlace (packed)
+.CIN		Champions' Interlace
+.CHE		Cheese
+.CIP		Cisco IP Phone
+.CLP		CLP
+.CMUWM		CMU window manager bitmap
+.CBR		
+.CBZ		Comix
+.CSV		Comma-Separated Value
+.FIASCO		Compressed FIASCO image
+.GIF		CompuServe Graphics Interchange Format
+.CIS		Compuserve RLE image
+.CALS		Continuous Acquisition and Life-cycle Support Type 1
+.CA2		
+.CA3		
+.CA1		CrackArt
+.CWG		Create with Garfield
+.NLQ		Daisy-Dot font
+.PC3		
+.PC1		
+.PC2		DEGAS Elite
+.BL2		
+.BL3		
+.BL1		DEGAS Elite block
+.BRU		DEGAS Elite brush
+.PI1		
+.PI3		
+.PI2		Degas/Degas Elite
+.DPH		
+.DEL		DelmPaint
+.DCM		DICOM
+.DDBUG		Diddle/DiddleBug sketches
+.DNG		Digital Negative
+.DIN		DIN
+.DLM		Dir Logo Maker
+.DDS		Direct Show Surface
+.DJVU		DJVU
+.QRT		
+.DIS		DKB Trace / Qrt raytrace
+.DOL		Dolphin Ed
+.DD		Doodle
+.BRUSH		Doodle brush file
+.JJ		Doodle, packed
+.DHR		Double High-Resolution
+.CUT		Dr. Halo CUT
+.DRL		Drazlace
+.DLP		Drazlace, packed
+.DRZ		Drazpaint
+.DRP		Drazpaint
+.DUO		
+.DU1		DU1, DUO
+.DU2		DU2
+.AAI		Dune Image
+.DGU		
+.DG1		DuneGraph
+.DGC		
+.DC1		DuneGraph (compressed)
+.ECI		ECI Graphic Editor
+.ECP		ECI Graphic Editor (compressed)
+.TRP		EggPaint
+.EPDF		Encapsulated Portable Document Format
+.ESM		Enhanced Simplex
+.ESCP2		ESC/P2 printer file
+.XIMG		Extended GEM Bit Image
+.FPT		Face Painter
+.FTC		Falcon True Color
+.FFLI		FFLI
+.FITS		Flexible Image Transport System
+.FTS		Flexible Image Transport System
+.FD2		FLI Designer
+.FLI		
+.BML		FLI Graph 2.2 by Blackmail
+.FMV		FrameMaker
+.PI4		
+.PI9		Fuckpaint
+.RAF		Fuji CCD-RAW Graphic File
+.FGS		Fun Graphics Machine
+.FWA		Fun with Art
+.FUN		
+.FP2		Funpaint
+.GD2		GD Library 2 Image
+.GD		GD Library Image
+.IMG		GEM Bit Image
+.GHG		Gephard Hires
+.GCD		Gigacad
+.GIG		Gigapaint Multicolor
+.GIH		Gigapaint-Hires
+.GBR		GIMP Brush
+.H		Gimp C++ Header
+.XCF		GIMP image
+.PAT		GIMP Pattern
+.4BT		GoDot
+.GOD		GodPaint
+.GOULD		Gould scanner file
+.SR8		Graph Saurus
+.DOT		Graph Visualization
+.G11		Graphics 11
+.SPC		Graphics Magician Picture Painter
+.HPM		Grass' Slideshow
+.GRF		
+.P41		
+.PIX		GRF, MAX, P41, PIX
+.G3		Group 3 fax file
+.FAX		Group 3 TIFF
+.IFL		
+.GUN		Gunpaint
+.HIP		Hard Interlace Picture
+.HR2		
+.HCI		HCI, HR2
+.HED		Hi-Eddi
+.HPC		Hi-Pic Creator
+.EXR		High dynamic-range (HDR) file format
+.HGR		High Resolution
+.HGB		HinterGrundBild
+.HIPS		HIPS file
+.HRS		HIR, HRS
+.HFC		Hires FLI by Crest
+.HLF		Hires Interlace by Feniks
+.HIM		Hires Manager by Cosmos
+.HBM		Hires-Bitmap
+.HIR		Hires-Bitmap
+.HAM6		Hold-And-Modify 6
+.HAM8		Hold-And-Modify 8
+.HDIFF		Horizontal difference image
+.PJ		HP PaintJet file
+.THINKJET		HP ThinkJet printer commands
+.HTM		HTML Table Image
+.HTML		HTML Table Image
+.KPS		IBM KIPS
+.ICN		ICE CIN
+.IMN		ICE MIN
+.IPC		ICE PCIN
+.IP2		ICE PCIN+
+.INFO		Icon
+.ISH		
+.ISM		Image System
+.TRU		IndyPaint
+.ING		ING 15
+.IIM		InShape IIM
+.INT		INT95a
+.ICE		Interlace Character Editor font
+.IGE		Interlace Graphics Editor
+.IHE		Interlace Hires Editor
+.IST		Interlace Studio
+.LEAF		Interleaf image
+.UYVY		Interleaved YUV raw image
+.IPH		Interpaint
+.IPT		Interpaint Multicolor
+.IPI		IPI
+.ITHMB		iPod Thumbnail
+.JBIG		JBIG image
+.JGP		Jet Graphics Planner
+.JPE		
+.JPG		
+.JFI		
+.JIF		
+.JFIF		
+.JPEG		Joint Photographic Experts Group JFIF
+.JP2K		JPEG 2000
+.JXR		JPEG extended range
+.J2C		
+.JPT		
+.J2K		JPEG-2000 Code Stream Syntax
+.JP2		JPEG-2000 JP2 File Format Syntax
+.VIFF		Khoros Visualization Image
+.KOA		Koala Painter
+.KLA		Koala Painter
+.GG		Koala Painter 2, packed
+.DCR		Kodak Digital Camera Raw Image
+.KPR		Kompresor do Animatora
+.LEO		Larka Edytor Obiekt
+.BBG		LdPic
+.RFG		LEGO Mindstorms EV3 Robot Graphics File
+.LISPM		Lisp Machine bitmap
+.LP3		Logo Painter 3/3+
+.SYS		Logo.sys
+.LDM		Ludek Maker
+.MAC		MacPaint
+.MACP		MacPaint
+.MBG		Mad Designer
+.RYS		Mamut
+.CPI		Marco Pixel Editor
+.MAT		MATLAB image format
+.MCS		MCS
+.MGR		MGR Window Manager bitmap
+.MIL		Micro Illustrator
+.MDA		Microdesign
+.AVI		Microsoft Audio/Visual Interleaved
+.CUR		Microsoft Cursor Icon
+.ICO		Microsoft icon
+.MSP		Microsoft Paint version 1 or 2
+.BMP		Microsoft Windows bitmap
+.DIB		Microsoft Windows Device Independent Bitmap
+.MLT		MLT
+.BB0		Mode 0
+.BB1		Mode 1
+.BB2		Mode 2
+.BB4		
+.SCS4		Mode 4
+.BB5		Mode 5
+.MONO		Mono Dump
+.MON		Mono Magic
+.BKG		
+.MIC		Movie Maker Background
+.SHP		Movie Maker Shape
+.MRF		MRF image
+.MTV		MTV / RayShade Image
+.OZB		Mu Online Bitmap
+.OZT		Mu Online Texture
+.MPP		Multi Palette Picture
+.MLE		Multi-Lace Editor
+.MG1		MultiArtist 8x1
+.MG2		MultiArtist 8x2
+.MG4		MultiArtist 8x4
+.MG8		MultiArtist 8x8
+.MC		Multicolor 8x1
+.MNG		Multiple-image Network Graphics
+.NEO		NeoChrome
+.NSR		Newsroom
+.NEF		Nikon Digital SLR Camera Raw Image File
+.NGF		Ninell Graphic Format
+.NGG		Nokia Group Graphics
+.NLM		Nokia Logo Manager
+.NOL		Nokia Operator Logo
+.NPM		Nokia Picture Message
+.565		OLPC 565
+.ORF		Olympus Digital Camera Raw Image File
+.OTB		On-the-air Bitmap
+.P11		P11
+.P4I		P4I
+.PK		Packed (PK) font
+.PMG		Paint Magic
+.PDB		Palm Pilot Image
+.PDBIM		Palm Pilot Image Viewer
+.PALM		Palm pixmap
+.MCPP		Paradox
+.PCL		PCL
+.PEF		Pentax Electronic File
+.PICON		Personal Icon
+.ART		Pfs First Publisher
+.PGX		PGX of JPEG 2000
+.PCDS		
+.PCD		Photo CD
+.PCS		PhotoChrome
+.P64		Picasso 64
+.PL4		PL4
+.PMD		PMG Designer by Karpowicz
+.2BP		Pocket PC Bitmap
+.PNM		
+.RPPM		
+.PGM		
+.RPGM		
+.PBM		
+.PPM		
+.RPBM		Portable aNy Map
+.PAM		Portable Arbitrary Map
+.PDF		Portable Document Format
+.PFM		Portable Float Map
+.APNG		
+.PNG		Portable Network Graphics
+.PGF		Portfolio Graphics
+.PGC		Portfolio Graphics Compressed
+.PGX		Portfolio PGX
+.BUM		Poser Bump Map
+.PSID		PostScript image
+.PFA		Postscript Type 1 font (ASCII)
+.PFB		Postscript Type 1 font (binary)
+.PSB		Print Shop
+.MBM		Psion Series 5 Bitmap
+.PZL		
+.CM		Puzzle image from X11
+.PTIF		Pyramid encoded TIFF
+.HDR		Radiance RGBE image
+.RP		Rainbow Painter
+.RM4		
+.RM0		
+.RM3		
+.RM1		
+.RM2		Rambrandt
+.RAW		RAW Dump
+.TXT		Raw text file
+.RIP		Rocky Interlace Picture
+.RPM		Run Paint
+.SAR		Saracen Paint
+.SBIG		SBIG CCDOPS
+.SVG		Scalable Vector Graphics
+.IPL		Scanalytics IPLab
+.SCT		SciTex
+.SCR		SCR
+.SCA		Screen 10
+.YJK		
+.SRS		
+.SCC		Screen 12
+.GRP		
+.SC2		Screen 2
+.GE5		
+.SC5		Screen 5
+.SC7		
+.GE7		Screen 7
+.SC8		Screen 8
+.SFW		Seattle File Works image
+.PWP		Seattle File Works multi-image file
+.SGE		Semi-Graphic logos Editor
+.SHR		SHR
+.X3F		Sigma Camera RAW Picture File
+.BW		
+.SGI		
+.RGB		
+.RGBA		Silicon Graphics RGB
+.P		Sinclair BASIC
+.HRZ		Slow Scan Television
+.DPX		SMPTE Digital Moving Picture Exchange 2.0
+.SIR		Solitaire file
+.MRW		Sony (Minolta) Raw Image File
+.ARW		Sony Digital Camera Alpha Raw Image
+.411		Sony Mavica
+.SPU		Spectrum 512
+.SPS		Spectrum 512 (smooshed)
+.SPOT		SPOT satellite images
+.SPR		Sprites
+.SRF		SRF image
+.PS1		ST-DEXL Pictures Set
+.PAC		STAD
+.AVS		Stardent AVS X
+.X		Stardent AVS X
+.ICON		Sun icon image
+.RAST		Sun rasterfile
+.SUN		SUN Rasterfile
+.SUNICON		Sunview icon
+.IRG		Super IRG
+.IR2		Super IRG 2
+.SIF		Super-IRG Font
+.SXS		SXS font
+.TIP		Taquart Interlace Picture
+.TGA		
+.TARGA		Targa
+.LUM		Technicolor Dream
+.73I		Texas Instruments Ti-73
+.82I		Texas Instruments Ti-82
+.83I		Texas Instruments Ti-83
+.8XI		Texas Instruments Ti-83+
+.85I		Texas Instruments Ti-85
+.86I		Texas Instruments Ti-86
+.92I		
+.9XI		Texas Instruments Ti-92
+.V2I		Texas Instruments Voyage 200
+.TIFF		TIFF
+.TIM		TIM
+.TN4		
+.TN3		
+.TN1		
+.TN2		
+.TNY		Tiny Stuff
+.MCI		Truepaint
+.MCP		Truepaint Packed
+.TXS		TXS
+.FS		Usenix FaceSaver file
+.RLE		Utah Run length encoded image file
+.PTX		V.Flash PTX
+.BM		
+.VBM		VBM/VDC BitMap
+.VZI		VertiZontal Interlacing
+.VIC		VIC
+.VICAR		VICAR rasterfile format
+.VID		Vidcom 64Paint
+.SKA		Video renting box SKA
+.RAP		Vidig Paint
+.VST		Vista
+.WRL		VRML v2.0 Texture
+.WEBP		WebP
+.WBZ		Webshots picture
+.WIG		Wigmore Artist 64
+.WZL		Winzle Puzzle
+.WBMP		Wireless bitmap
+.WPG		Word Perfect Graphics File
+.XWD		X Window Dump
+.XPM		X Windows system pixmap
+.XBM		X-Bitmap
+.XGA		XGA (Falcon)
+.XIM		Xim file
+.XLP		XL-Paint
+.MAX		XL-Paint MAX
+.XVMINI		XV VisualSchnauzer miniature
+.P7		Xv's Visual Schnauzer thumbnail format
+.YUV		YUV
+.ZEISS		Zeiss confocal file
+.DCX		ZSoft IBM PC multi-page Paintbrush image
+.PCX		ZSoft Paintbrush
+.3		ZX Spectrum's 3
+.ZXP		ZX-Paintbrush

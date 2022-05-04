@@ -10121,3 +10121,63 @@ Video codecs
 .PCX		ZSoft Paintbrush
 .3		ZX Spectrum's 3
 .ZXP		ZX-Paintbrush
+
+
+>>> OPTIKS 3.01 (DOS) http://fileformats.archiveteam.org/wiki/OPTIKS  (sandbox/app/OK301.ZIP)
+    File       Optiks  File  Description/ 
+  Extension    Support Type  Software Source 
+  =========    ======= ====  ================== 
+    .001       Yes     R     Complete FAX page file 
+    .ART       Yes     R     PFS First Publisher Clip Art 
+    .BAS       Yes     R     Basic Bload/Bsave  
+    .BSG       Yes     R     FONTASY (same as .RAW) 
+    .CA        Read    RB    NewsRoom Pro 
+    .CUT       Yes     R     Dr. Halo, Cut files 
+    .DAT       Read    RB    PrintShop 
+    .DCX       Read    RB    Panasonic Fax PCX libraries. 
+    .EPS       Some    VRL   Encapsulated Post Script 
+    .GIF       Some    R     Cserve Graphics Interchange format
+    .HPC(L)    Some    RV    Hewlett Packard's LaserJet Graphics
+    .IFF       Yes     R     Amiga Interchange Format File
+    .IMG       Yes     R     DataCopy Wips 
+    .IMG       Yes     R     GEM Paint 
+    .IMG       Yes     R     IBM Image support Facility 
+    .MAC       Yes     R     Apple Macintosh Macpaint 
+    .MAK       Yes     R     Apple Macintosh Macpaint, No Header
+    .MSP       Yes     R     Microsoft Windows Paint 
+    .PCR       Yes     R     OPTIKS/PCRGB 
+    .PCX .PCC  Yes     R     Zsoft PC Paintbrush 
+    .PDA       Yes     R     Palantir Scanner Graphics Files 
+    .PI1 .PI2  Yes     R     Atari Degas uncompressed images 
+    .PIC       Some    V     Lotus 
+    .PIC       v1.5    R     Mouse systems PC Paint 
+    .PIG       Yes     R     Ricoh Pixel Image Generator file 
+    .PRN       Some    VLR   Post Script, Any print image file 
+    .RAS       Yes     R     Show file Ras format 
+    .RAW       Yes     R     Basic Array format 
+    .RLE       Yes     R     Cserve, Teletext Run Length Encoded 
+    .SLD       Some    V     AutoCad Slide 
+    .SFL       Yes     R     Soft Font Single Letter 
+    .SFP       Yes     R     HP Soft Font 
+    .SHP       Read    RB    Printmaster, Newsmaster 
+    .TIF       Yes     R     Aldus/Microsoft Tag Image Format
+
+
+>>> ICONVERT 1.49 (DOS) http://fileformats.archiveteam.org/wiki/Iconvert  (sandbox/app/iconvrt2.zip)
+ASCII            (8x8 and 8x14)
+BASICA BLOAD     (Color and Hires)
+DOODLE           (CBM)
+Dr Halo II
+First Publisher  (ART and MAC)
+FONTASY          (Block and Pic)
+GEM
+GIF
+IFF
+NEWSMASTER
+NEWSROOM
+MACPAINT
+PC PAINTBRUSH    (Clip and Pic)
+PRINTMASTER      (IBM and CBM)
+PRINT SHOP       (IBM and CBM)
+RLE
+WINDOWS PAINT

@@ -16,7 +16,7 @@ const xlog = new XLog(argv.logLevel);
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["tensor", "qemu"];
+const SERVER_ORDER = ["siegfried", "tensor", "qemu"];
 
 const startedAt = performance.now();
 const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(xu.dirname(import.meta), `../server/${serverid}.js`)))[serverid].create(xlog)]));

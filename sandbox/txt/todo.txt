@@ -1,14 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add format (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
-
-* Add programs:
-  https://tomseditor.com/ (Tom's viewer with plugins (site may be  offline https://web.archive.org/web/20220411123456/)) Archive org seems to have captured the installer, but just in case it doesn't work a potentially older version is here: https://m.majorgeeks.com/files/details/toms_viewer.html
-  http://fileformats.archiveteam.org/wiki/OPTIKS
-  http://fileformats.archiveteam.org/wiki/Iconvert
-
 * Investigate adding a new identification program: https://github.com/richardlehane/siegfried
+
+* Add format (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
 
 * Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
   If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows

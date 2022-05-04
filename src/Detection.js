@@ -4,7 +4,7 @@ import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
 import {WEAK_VALUES} from "./WEAK.js";
 
-export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector"];
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried"];
 
 export const TEXT_MAGIC_STRONG =
 [
@@ -55,7 +55,7 @@ export class Detection
 	}
 }
 
-export async function getDetections(f, {xlog}={})
+export async function getDetections(f, {xlog, detectors=DETECTOR_PROGRAMS}={})
 {
-	return (await Promise.all(DETECTOR_PROGRAMS.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections);
+	return (await Promise.all(detectors.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections);
 }

@@ -1,6 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
+
+
+/---------------\
+| High Priority |
+\---------------/
+* Add to various programs that can be used in multiple families: bruteFlags : { image : { outType : ".png" } }
+  Then update the dexbrute program to check ALL programs, and include those in the folder (default family) and any that have a family specified in a bruteFlags property and make sure to use those flags (like deark for archives, ffmpeg for images, soffice for images, etc)
+  This also lays the ground work for a better 'Try Anyways' feature for dexvert.com
+
 * Add format (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
 
 * Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
@@ -8,25 +17,22 @@
   For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
   To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
 
-* Add to various programs that can be used in multiple families: bruteFlags : { image : { outType : ".png" } }
-  Then update the dexbrute program to check ALL programs, and include those in the folder (default family) and any that have a family specified in a bruteFlags property and make sure to use those flags (like deark for archives, ffmpeg for images, soffice for images, etc)
-
-
-/---------------\
-| High Priority |
-\---------------/
-* Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data
-
 * If deark adds better IFF IMAG support, re-process: 265 301 313 356 357 406 481 510 517 518 519 520 607 614 615 629 731 732 766 790 921 969
   Ideally this search should return 321+ matches:
   http://retromission.com/search?q=&qfields=content&qfields=filename&qfields=ext&formatid=cdiIFFImage&labelMatchType=any&label=&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&animated=&sortBy=_text_match&limit=100&nocache=true
-
-* Find a converter/decompiler for applesoft BASIC. Maybe I can use: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
 
 
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Try and understand the Multimedia Viewer Book format more, especially in regards to extracting content from MVB files, write my own extractor
+  http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book
+  After my sample files extract, process this CD: World Wide Web Directory on CD-ROM
+
+* Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
+
+* Find a converter/decompiler for applesoft BASIC. Maybe I can use: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
+
 * Add OS/2 support by using ArcaOS (was blue lion) in QEMU: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP
@@ -36,16 +42,7 @@
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
 	and others (see unsupported notes). Then re-process any CD's that have those formats on them (#570, etc)
 
-* Consider updating IsoBuster to 4.9 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
-
-* The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
-  I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
-  If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
-
-* Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
-  Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
-
-* Create a deno based parser that can parse internet e-mail/news formats to verify that they are indeed valid files
+* Create a deno based parser that can parse internet e-mail/news formats to verify that they are indeed valid files. Bonus points for converting HTML based emails into .html documents
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   See samples in: sandbox/samples/mail_news/
 
@@ -53,11 +50,20 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Consider updating IsoBuster to 4.9 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
+
+* The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
+  I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
+  If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
+
 * Add support for Acorn Replay videos (#625 CineClips)
   Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
   Couldn't determine any support for QEMU (might have some though) but a fallback emulator, I'd have to run under windows 2k: http://www.riscos.com/shop/products/106/index.htm  
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
+
+* Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
+  Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
 

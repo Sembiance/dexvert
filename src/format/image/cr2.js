@@ -5,7 +5,7 @@ export class cr2 extends Format
 	name         = "Canon RAW 2";
 	website      = "http://fileformats.archiveteam.org/wiki/Canon_RAW_2";
 	ext          = [".cr2"];
-	magic        = ["Canon RAW 2 format", "Canon CR2 raw image data"];
+	magic        = ["Canon RAW 2 format", "Canon CR2 raw image data", /^fmt\/592( |$)/];
 	mimeType     = "image/x-canon-cr2";
 	metaProvider = ["image", "darkTable"];
 	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];

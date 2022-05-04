@@ -6,7 +6,7 @@ export class bpg extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/BPG";
 	ext        = [".bpg"];
 	mimeType   = "image/x-bpg";
-	magic      = ["Better Portable Graphics", "BPG (Better Portable Graphics)"];
+	magic      = ["Better Portable Graphics", "BPG (Better Portable Graphics)", /^fmt\/687( |$)/];
 	notes      = "Some BPG files are animated, but dexvert doesn't support these yet. All BPG files are just converted into single PNG Files.";
 	converters = ["bpgdec"];
 }

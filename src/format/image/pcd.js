@@ -6,7 +6,7 @@ export class pcd extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Photo_CD";
 	ext          = [".pcd"];
 	mimeType     = "image/x-photo-cd";
-	magic        = [/Kodak Photo CD [Ii]mage/, "Kodak PhotoCD bitmap"];
+	magic        = [/Kodak Photo CD [Ii]mage/, "Kodak PhotoCD bitmap", /^fmt\/211( |$)/];
 	metaProvider = ["image"];
 	converters   = ["pcdtojpeg", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert", "hiJaakExpress", "corelPhotoPaint", "canvas", "tomsViewer"];
 

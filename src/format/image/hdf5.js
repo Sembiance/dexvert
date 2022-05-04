@@ -6,7 +6,7 @@ export class hdf5 extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HDF";
 	ext        = [".h5"];
 	mimeType   = "application/x-hdf";
-	magic      = ["Hierarchical Data Format (version 5)", /^NCSA Hierarchical Data Format 5$/];
+	magic      = ["Hierarchical Data Format (version 5)", /^NCSA Hierarchical Data Format 5$/, /^fmt\/807( |$)/];
 	notes      = "Only support converting to grayscale.";
 	converters = ["h5topng"];
 }

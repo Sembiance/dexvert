@@ -6,6 +6,6 @@ export class fits extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Flexible_Image_Transport_System";
 	ext        = [".fit", ".fits", ".fts", ".fz"];
 	mimeType   = "image/fits";
-	magic      = ["Flexible Image Transport System", "FITS image data"];
+	magic      = ["Flexible Image Transport System", "FITS image data", /^x-fmt\/383( |$)/];
 	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "gimp"];
 }

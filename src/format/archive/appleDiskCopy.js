@@ -4,6 +4,6 @@ export class appleDiskCopy extends Format
 {
 	name       = "Apple DiskCopy";
 	website    = "https://www.discferret.com/wiki/Apple_DiskCopy_4.2";
-	magic      = ["Apple DiskCopy", "DiskCopy "];
+	magic      = ["Apple DiskCopy", "DiskCopy ", /^fmt\/625( |$)/];
 	converters = ["dd[bs:84][skip:1] -> dexvert"];
 }

@@ -1,7 +1,7 @@
 import {Format} from "../../Format.js";
 import {_EPS_MAGIC, _EPS_EXT} from "../image/eps.js";
 
-const _PS_MAGIC = [/^PostScript$/, /^PostScript document/];
+const _PS_MAGIC = [/^PostScript$/, /^PostScript document/, /^x-fmt\/(406|408)( |$)/];
 const _PS_EXT = [".ps"];
 export {_PS_MAGIC, _PS_EXT};
 

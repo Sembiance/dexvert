@@ -7,6 +7,6 @@ export class lotusChart extends Format
 	ext            = [".pic"];
 	forbidExtMatch = true;
 	mimeType       = "image/x-lotus-1-2-3-chart";
-	magic          = ["Lotus Picture"];
+	magic          = ["Lotus Picture", /^x-fmt\/82( |$)/];
 	converters     = [`abydosconvert[format:${this.mimeType}]`, "hiJaakExpress", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
 }

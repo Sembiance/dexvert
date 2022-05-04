@@ -6,6 +6,6 @@ export class outlookMessage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Outlook_Item_File";
 	ext            = [".msg"];
 	forbidExtMatch = true;
-	magic          = ["CDFV2 Microsoft Outlook Message", "Outlook Message"];
+	magic          = ["CDFV2 Microsoft Outlook Message", "Outlook Message", /^x-fmt\/430( |$)/];
 	converters     = ["Email_Outlook_Message"];
 }

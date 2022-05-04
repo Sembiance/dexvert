@@ -5,6 +5,6 @@ export class cab extends Format
 	name       = "Cabinet";
 	website    = "http://fileformats.archiveteam.org/wiki/CAB2";
 	ext        = [".cab"];
-	magic      = [/^Microsoft Cabinet [Aa]rchive/];
+	magic      = [/^Microsoft Cabinet [Aa]rchive/, /^x-fmt\/414( |$)/];
 	converters = ["cabextract", "UniExtract"];
 }

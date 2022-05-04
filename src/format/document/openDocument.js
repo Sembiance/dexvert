@@ -6,6 +6,6 @@ export class openDocument extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/OpenDocument";
 	ext            = [".odm", ".odt", ".fodt", ".ott", ".odp", ".ods"];
 	forbidExtMatch = true;
-	magic          = ["OpenDocument Text", "OpenDocument Master Text document", "OpenDocument Master Document", "OpenDocument Presentation", "OpenDocument Spreadsheet document", "OpenDocument Spreadsheet"];
+	magic          = ["OpenDocument Text", "OpenDocument Master Text document", "OpenDocument Master Document", "OpenDocument Presentation", "OpenDocument Spreadsheet document", "OpenDocument Spreadsheet", /^fmt\/(291|293|295)( |$)/];
 	converters     = ["soffice"];
 }

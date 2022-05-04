@@ -6,7 +6,7 @@ export class ppm extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Netpbm_formats";
 	ext          = [".ppm", ".pnm"];
 	mimeType     = "image/x-portable-pixmap";
-	magic        = ["Portable PixMap bitmap", "Portable Pixel Map", /^Netpbm image data .*pixmap$/];
+	magic        = ["Portable PixMap bitmap", "Portable Pixel Map", /^Netpbm image data .*pixmap$/, /^fmt\/408( |$)/, /^x-fmt\/178( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "gimp", "hiJaakExpress", "canvas", "tomsViewer"];
 }

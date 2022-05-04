@@ -7,7 +7,7 @@ export class mod extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Amiga_Module";
 	ext            = [".mod", ".ptm", ".pt36"];
 	weakExt        = [".mod"];	// too generic, let music/soundTracker grab it
-	magic          = [/.*Protracker module/, "Standard 4-channel Amiga module", "ProTracker IFF module"];
+	magic          = [/.*Protracker module/, "Standard 4-channel Amiga module", "ProTracker IFF module", /^fmt\/716( |$)/];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	metaProvider   = ["musicInfo"];
 	converters     = ["xmp", "uade123", "mikmod2wav", "zxtune123", "awaveStudio[matchType:magic]"];

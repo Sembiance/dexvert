@@ -227,7 +227,7 @@ document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile)
 document | Central Point Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/centralPointHelp/)
 document | Clarion Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/clarionHelp/)
 document | Clarion Memo | .mem | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/clarionMemo/)
-document | [ClarisWorks Document](http://fileformats.archiveteam.org/wiki/ClarisWorks) | .cwk .cws | [soffice](https://www.libreoffice.org) [mwaw2text](https://sourceforge.net/p/libmwaw/wiki/Home/) | [8 sample files](https://telparia.com/fileFormatSamples/document/clarisWorks/)
+document | [ClarisWorks/AppleWorks Document](http://fileformats.archiveteam.org/wiki/ClarisWorks) | .cwk .cws | [soffice](https://www.libreoffice.org) [mwaw2text](https://sourceforge.net/p/libmwaw/wiki/Home/) | [8 sample files](https://telparia.com/fileFormatSamples/document/clarisWorks/)
 document | Codeview Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | 
 document | [Common Ground](http://fileformats.archiveteam.org/wiki/Common_Ground) | .dp | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/commonGround/) - Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.
 document | CZ Help | hlp | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/czHelp/)

@@ -5,7 +5,7 @@ export class neoDeskIcon extends Format
 	name       = "NeoDesk Icon";
 	website    = "http://fileformats.archiveteam.org/wiki/NeoDesk_icon";
 	ext        = [".nic"];
-	magic      = ["NeoDesk icon"];
+	magic      = ["NeoDesk icon", /^fmt\/1540( |$)/];
 	mimeType   = "image/x-neodesk-icon";
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 

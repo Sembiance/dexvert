@@ -6,6 +6,6 @@ export class epub extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/EPUB";
 	ext            = [".epub"];
 	forbidExtMatch = true;
-	magic          = ["EPUB document", "Open Publication Structure eBook"];
+	magic          = ["EPUB document", "Open Publication Structure eBook", /^fmt\/483( |$)/];
 	converters     = ["ebook_convert"];
 }

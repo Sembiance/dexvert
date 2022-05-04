@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _MOV_MAGIC = ["Apple QuickTime movie", "QuickTime Movie", "Mac QuickTime video", /^MacBinary II.+'MooV'/];
+const _MOV_MAGIC = ["Apple QuickTime movie", "QuickTime Movie", "Mac QuickTime video", /^MacBinary II.+'MooV'/, /^x-fmt\/384( |$)/];
 const _MOV_EXT = [".mov", ".omv", ".pmv", ".qt"];
 export {_MOV_MAGIC, _MOV_EXT};
 

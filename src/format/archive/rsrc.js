@@ -5,7 +5,7 @@ export class rsrc extends Format
 	name       = "MacOS Resource Fork";
 	website    = "http://fileformats.archiveteam.org/wiki/Macintosh_resource_file";
 	ext        = [".rsrc", ".rs"];
-	magic      = ["Mac OSX datafork font", "AppleDouble Resource Fork", "AppleDouble encoded Macintosh file", "Mac AppleDouble encoded", "Apple HFS/HFS+ resource fork"];
+	magic      = ["Mac OSX datafork font", "AppleDouble Resource Fork", "AppleDouble encoded Macintosh file", "Mac AppleDouble encoded", "Apple HFS/HFS+ resource fork", /^fmt\/503( |$)/];
 	converters = dexState =>
 	{
 		const a = [];

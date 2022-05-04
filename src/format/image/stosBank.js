@@ -6,6 +6,6 @@ export class stosBank extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/STOS_memory_bank";
 	ext        = [".mbk", ".mbs"];
 	mimeType   = "application/x-stos-memorybank";
-	magic      = ["STOS Memory Bank", "STOS data"];
+	magic      = ["STOS Memory Bank", "STOS data", /^fmt\/1467( |$)/];
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

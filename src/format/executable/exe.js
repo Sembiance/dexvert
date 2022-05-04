@@ -7,8 +7,7 @@ export class exe extends Format
 	ext     = [".exe"];
 	magic   = [
 		"Generic Win/DOS Executable", "DOS Executable Generic", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /compressed DOS Executable$/, "DOS Executable (alternate ZM id)", "16bit DOS EXE PKLite compressed",
-		"PE32 executable", /^Win\d\d Executable/, "Win16 NE executable"
-	];
+		"PE32 executable", /^Win\d\d Executable/, "Win16 NE executable", /^fmt\/899( |$)/, /^x-fmt\/(409|410)( |$)/];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

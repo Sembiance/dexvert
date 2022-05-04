@@ -6,7 +6,7 @@ export class mng extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MNG";
 	ext          = [".mng"];
 	mimeType     = "video/x-mng";
-	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data"];
+	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data", /^fmt\/528( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert[outType:webp]"];
 }

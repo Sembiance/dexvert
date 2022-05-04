@@ -5,7 +5,7 @@ export class otf extends Format
 	name         = "OpenType Font";
 	website      = "http://fileformats.archiveteam.org/wiki/OpenType";
 	ext          = [".otf"];
-	magic        = [/^OpenType [Ff]ont/];
+	magic        = [/^OpenType [Ff]ont/, /^fmt\/520( |$)/];
 	metaProvider = ["fc_scan"];
 	converters   = dexState => [`fontPreview[family:${dexState.meta.family}]`];
 }

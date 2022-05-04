@@ -5,7 +5,7 @@ export class firstChoiceDatabase extends Format
 	name           = "First Choice Database";
 	ext            = [".fol", ".pfs"];
 	forbidExtMatch = true;
-	magic          = ["First Choice database"];
+	magic          = ["First Choice database", /^fmt\/1284( |$)/];
 	weakMagic      = true;
 	converters     = ["strings"];
 }

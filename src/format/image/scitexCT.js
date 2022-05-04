@@ -6,6 +6,6 @@ export class scitexCT extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Scitex_CT";
 	ext            = [".ct"];
 	forbidExtMatch = true;
-	magic          = ["Scitex Continuous Tone bitmap"];
+	magic          = ["Scitex Continuous Tone bitmap", /^x-fmt\/146( |$)/];
 	converters     = ["nconvert", "corelPhotoPaint[outType:tiff]"];
 }

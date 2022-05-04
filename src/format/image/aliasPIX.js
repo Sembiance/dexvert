@@ -6,6 +6,6 @@ export class aliasPIX extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Alias_PIX";
 	ext        = [".pix", ".alias", ".img", ".als"];
 	mimeType   = "image/x-alias-pix";
-	magic      = ["Alias PIX"];
+	magic      = ["Alias PIX", /^fmt\/1092( |$)/];
 	converters = ["nconvert", "gimp", "canvas"];
 }

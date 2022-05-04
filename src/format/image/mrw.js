@@ -5,7 +5,7 @@ export class mrw extends Format
 	name         = "Minolta RAW";
 	website      = "http://fileformats.archiveteam.org/wiki/Minolta";
 	ext          = [".mrw"];
-	magic        = ["Minolta RAW", "Minolta Dimage camera raw", "Minolta Dimage RAW image"];
+	magic        = ["Minolta RAW", "Minolta Dimage camera raw", "Minolta Dimage RAW image", /^fmt\/669( |$)/];
 	mimeType     = "image/x-minolta-mrw";
 	metaProvider = ["image", "darkTable"];
 	converters   = ["darktable_cli", "convert", `abydosconvert[format:${this.mimeType}]`, "nconvert"];

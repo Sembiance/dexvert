@@ -5,7 +5,7 @@ export class nrrd extends Format
 	name       = "Nearly Raw Raster Data";
 	website    = "http://teem.sourceforge.net/nrrd/format.html";
 	ext        = [".nrrd"];
-	magic      = ["Nearly Raw Raster Data"];
+	magic      = ["Nearly Raw Raster Data", /^fmt\/(1002|1005)( |$)/];
 	mimeType   = "image/x-nrrd";
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

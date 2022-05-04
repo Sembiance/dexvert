@@ -5,6 +5,6 @@ export class autoCADSlide extends Format
 	name       = "AutoCAD Slide";
 	website    = "http://fileformats.archiveteam.org/wiki/AutoCAD_Slide";
 	ext        = [".sld"];
-	magic      = [/^AutoCAD Slide$/];
+	magic      = [/^AutoCAD Slide$/, /^x-fmt\/105( |$)/];
 	converters = ["sldtoppm"];
 }

@@ -6,6 +6,6 @@ export class microsoftReader extends Format
 	website        = "https://en.wikipedia.org/wiki/Microsoft_Reader";
 	ext            = [".lit"];
 	forbidExtMatch = true;
-	magic          = ["Microsoft Reader eBook"];
+	magic          = ["Microsoft Reader eBook", /^fmt\/867( |$)/];
 	converters     = ["ebook_convert"];
 }

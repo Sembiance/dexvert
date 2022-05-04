@@ -6,7 +6,7 @@ export class tiff extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/TIFF";
 	ext          = [".tif", ".tiff"];
 	mimeType     = "image/tiff";
-	magic        = ["Tagged Image File Format", "TIFF image data"];
+	magic        = ["Tagged Image File Format", "TIFF image data", /^fmt\/353( |$)/];
 	priority     = this.PRIORITY.LOW;	// Often other formats are mis-identified as TIFF files such RAW camera files like Sony ARW and kodak*
 	metaProvider = ["image"];
 

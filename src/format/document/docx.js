@@ -6,6 +6,6 @@ export class docx extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DOCX";
 	ext            = [".docx", ".docm", ".dotx"];
 	forbidExtMatch = true;
-	magic          = ["Microsoft OOXML", "Word Microsoft Office Open XML Format document"];
+	magic          = ["Microsoft OOXML", "Word Microsoft Office Open XML Format document", /^fmt\/523( |$)/];
 	converters     = ["soffice"];
 }

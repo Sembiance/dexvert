@@ -5,6 +5,6 @@ export class superCalc extends Format
 	name           = "SuperCalc Worksheet";
 	ext            = [".cal"];
 	forbidExtMatch = true;
-	magic          = ["SuperCalc worksheet", "SuperCalc 2/3 spreadsheet"];
+	magic          = ["SuperCalc worksheet", "SuperCalc 2/3 spreadsheet", /^fmt\/403( |$)/];
 	converters     = ["strings"];
 }

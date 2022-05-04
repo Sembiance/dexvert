@@ -23,7 +23,7 @@ export class iso extends Format
 	name         = "CD Disc Image";
 	website      = "http://fileformats.archiveteam.org/wiki/ISO_image";
 	ext          = [".iso", ".bin", ".hfs", ".ugh"];
-	magic        = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", ...HFS_MAGICS];
+	magic        = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS];
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
 	notes        = xu.trim`

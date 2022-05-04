@@ -5,6 +5,6 @@ export class hancomWord extends Format
 	name        = "Hancom Word";
 	website     = "http://fileformats.archiveteam.org/wiki/HWP";
 	ext         = [".hwp"];
-	magic       = ["Hangul (Korean) Word Processor File", "Hangul (Korean) Word Processor document"];
+	magic       = ["Hangul (Korean) Word Processor File", "Hangul (Korean) Word Processor document", /^fmt\/1084( |$)/];
 	unsupported = true;
 }

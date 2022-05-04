@@ -6,7 +6,7 @@ export class vicar extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/VICAR";
 	ext          = [".vicar", ".vic", ".img"];
 	mimeType     = "image/x-vicar";
-	magic        = ["VICAR JPL image bitmap", "PDS (VICAR) image data"];
+	magic        = ["VICAR JPL image bitmap", "PDS (VICAR) image data", /^fmt\/383( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -6,6 +6,6 @@ export class xps extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/XPS";
 	ext        = [".xps", ".oxps"];
 	mimeType   = "application/oxps";
-	magic      = ["Open XML Paper Specification"];
+	magic      = ["Open XML Paper Specification", /^fmt\/(189|657)( |$)/];
 	converters = ["xpstopdf", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -5,7 +5,7 @@ export class adobeType1 extends Format
 	name         = "Adobe Type 1 Font";
 	website      = "http://fileformats.archiveteam.org/wiki/Adobe_Type_1";
 	ext          = [".pfa", ".pfb"];
-	magic        = ["Adobe Type 1 Font", "Adobe PostScript Type 1 Font", "PostScript Type 1 font", "Adobe Printer Font Binary"];
+	magic        = ["Adobe Type 1 Font", "Adobe PostScript Type 1 Font", "PostScript Type 1 font", "Adobe Printer Font Binary", /^fmt\/525( |$)/];
 	metaProvider = ["fc_scan"];
 	converters   = ["fontforge"];
 }

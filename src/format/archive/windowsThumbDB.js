@@ -6,6 +6,6 @@ export class windowsThumbDB extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Thumbs.db";
 	ext        = [".db"];
 	filename   = ["Thumbs.db"];
-	magic      = ["Windows Thumbnail Database"];
+	magic      = ["Windows Thumbnail Database", /^fmt\/682( |$)/];
 	converters = ["vinetto", "deark"];
 }

@@ -6,6 +6,6 @@ export class bz2 extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/BZ2";
 	ext        = [".bz2", ".bzip2"];
 	packed     = true;
-	magic      = ["bzip2 compressed data", "bzip2 compressed archive", "BZIP2 Compressed Archive", "bz2: bzip2"];
+	magic      = ["bzip2 compressed data", "bzip2 compressed archive", "BZIP2 Compressed Archive", "bz2: bzip2", /^x-fmt\/268( |$)/];
 	converters = ["bunzip2", "sevenZip", "ancient", "UniExtract"];	// UniExtract will fully extract, but this is better than not handling at all
 }

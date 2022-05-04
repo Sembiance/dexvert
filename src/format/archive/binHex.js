@@ -6,7 +6,7 @@ export class binHex extends Format
 	name       = "BinHex";
 	website    = "http://fileformats.archiveteam.org/wiki/BinHex";
 	ext        = [".hqx", ".hcx", ".hex"];
-	magic      = TEXT_MAGIC;
-	weakMagic  = true;
+	magic      = [/^x-fmt\/416( |$)/, ...TEXT_MAGIC];
+	weakMagic  = TEXT_MAGIC;
 	converters = ["unar", "deark"];
 }

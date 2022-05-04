@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _EPS_MAGIC = ["Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File Postscript"];
+const _EPS_MAGIC = ["Encapsulated PostScript File Format", /^PostScript document.*type EPS/, "Encapsulated PostScript binary", "DOS EPS Binary File Postscript", /^fmt\/(122|123|124)( |$)/];
 const _EPS_EXT = [".eps", ".epsf", ".epsi", ".epi", ".ept"];
 export {_EPS_MAGIC, _EPS_EXT};
 

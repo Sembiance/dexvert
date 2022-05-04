@@ -12,7 +12,7 @@ export class avi extends Format
 	//keepFilename  : true,
 	//filesOptional : (state, otherFiles) => otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.name.toLowerCase()}.tss`),
 
-	magic        = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format"];
+	magic        = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", /^fmt\/5( |$)/];
 	metaProvider = ["mplayer"];
 	converters   = r => ["ffmpeg", `xanim[fps:${r.meta.fps || 10}]`];
 }

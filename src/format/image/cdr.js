@@ -6,6 +6,6 @@ export class cdr extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CorelDRAW";
 	ext            = [".cdr", ".cdt", ".cdx", ".cpx"];
 	forbidExtMatch = [".cpx"];
-	magic          = ["CorelDraw Document", "CorelDraw Drawing"];
+	magic          = ["CorelDraw Document", "CorelDraw Drawing", /^fmt\/(464|466)( |$)/, /^x-fmt\/379( |$)/];
 	converters     = ["scribus", "deark", "nconvert", "hiJaakExpress", "corelPhotoPaint", "canvas"];
 }

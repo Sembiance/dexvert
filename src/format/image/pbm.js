@@ -6,7 +6,7 @@ export class pbm extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/PBM";
 	ext          = [".pbm", ".pnm"];
 	mimeType     = "image/x-portable-bitmap";
-	magic        = ["Portable BitMap", "Portable Bitmap Image", /^Netpbm image data .*bitmap$/];
+	magic        = ["Portable BitMap", "Portable Bitmap Image", /^Netpbm image data .*bitmap$/, /^fmt\/409( |$)/, /^x-fmt\/164( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "gimp", "hiJaakExpress", "canvas", "tomsViewer"];
 }

@@ -4,6 +4,6 @@ export class dsstore extends Format
 {
 	name       = "Mac OS X Folder Info";
 	ext        = [".ds_store"];
-	magic      = ["Mac OS X folder information"];
+	magic      = ["Mac OS X folder information", /^fmt\/394( |$)/];
 	converters = ["dsstoreinfo"];
 }

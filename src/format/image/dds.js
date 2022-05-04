@@ -6,7 +6,7 @@ export class dds extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/DDS";
 	ext          = [".dds"];
 	mimeType     = "image/x-direct-draw-surface";
-	magic        = ["DirectX DirectDraw Surface", "Microsoft DirectDraw Surface", "DirectDraw Surface"];
+	magic        = ["DirectX DirectDraw Surface", "Microsoft DirectDraw Surface", "DirectDraw Surface", /^fmt\/1040( |$)/];
 	metaProvider = ["image"];
 	
 	// Both convert and nconvert sometimes produce an invalid image, but convert usually does better overall

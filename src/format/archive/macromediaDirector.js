@@ -6,7 +6,7 @@ export class macromediaDirector extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Shockwave_(Director)";
 	ext            = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr"];
 	forbidExtMatch = true;
-	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast"];
+	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", /^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/];
 	weakMagic      = ["Generic RIFX container"];
 	
 	auxFiles = (input, otherFiles, otherDirs) =>

@@ -6,6 +6,6 @@ export class broadBandEBook extends Format
 	website        = "https://en.wikipedia.org/wiki/BBeB";
 	ext            = [".lrf", ".lrx", ".lrs"];
 	forbidExtMatch = true;
-	magic          = ["BBeB ebook data", "Unencrypted BBeB - BroadBand eBook"];
+	magic          = ["BBeB ebook data", "Unencrypted BBeB - BroadBand eBook", /^fmt\/518( |$)/];
 	converters     = ["ebook_convert"];
 }

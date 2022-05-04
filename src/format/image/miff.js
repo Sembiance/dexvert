@@ -6,7 +6,7 @@ export class miff extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/MIFF";
 	ext          = [".miff", ".mif"];
 	mimeType     = "image/x-miff";
-	magic        = ["MIFF image data", "ImageMagick Machine independent File Format bitmap"];
+	magic        = ["MIFF image data", "ImageMagick Machine independent File Format bitmap", /^fmt\/930( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "nconvert"];
 }

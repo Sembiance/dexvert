@@ -5,6 +5,6 @@ export class mbox extends Format
 	name       = "Mailbox";
 	website    = "http://fileformats.archiveteam.org/wiki/Mbox";
 	ext        = [".mbox"];
-	magic      = ["Standard Unix Mailbox"];
+	magic      = ["Standard Unix Mailbox", /^fmt\/950( |$)/];
 	converters = ["unmbox"];
 }

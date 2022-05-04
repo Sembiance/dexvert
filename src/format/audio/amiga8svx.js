@@ -7,7 +7,7 @@ export class amiga8svx extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/8SVX";
 	ext          = [".8svx", ".iff"];
 	weakExt      = [".iff"];
-	magic        = ["Amiga IFF 8SVX audio", "IFF data, 8SVX", "Interchange File Format 8-bit Sampled Voice"];
+	magic        = ["Amiga IFF 8SVX audio", "IFF data, 8SVX", "Interchange File Format 8-bit Sampled Voice", /^fmt\/339( |$)/];
 	notes        = xu.trim`
 		Some 8SVX files don't have a sample rate in the file (test3.iff, sample01.ek___D.8svx). In these cases I try multiple different common sample rates.
 		SDL library I could use to create an 8svx2wav program: https://github.com/svanderburg/SDL_8SVX`;

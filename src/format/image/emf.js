@@ -6,7 +6,7 @@ export class emf extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/EMF";
 	ext          = [".emf"];
 	mimeType     = "image/emf";
-	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile"];
+	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile", /^fmt\/345( |$)/, /^x-fmt\/153( |$)/];
 	metaProvider = ["image"];
 	converters   = ["deark", "convert", `abydosconvert[format:${this.mimeType}]`, "irfanView", "hiJaakExpress", "canvas[matchType:magic][nonRaster]"];
 }

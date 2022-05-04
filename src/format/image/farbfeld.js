@@ -6,6 +6,6 @@ export class farbfeld extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Farbfeld";
 	ext        = [".ff"];
 	mimeType   = "image/x-farbfeld";
-	magic      = [/[Ff]arbfeld ([Ii]mage|bitmap)/];
+	magic      = [/[Ff]arbfeld ([Ii]mage|bitmap)/, /^fmt\/1133( |$)/];
 	converters = ["deark", `abydosconvert[format:${this.mimeType}]`];
 }

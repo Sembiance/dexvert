@@ -6,6 +6,6 @@ export class cur extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CUR";
 	ext        = [".cur"];
 	mimeType   = "application/ico";
-	magic      = ["MS Windows cursor resource", "Microsoft Windows Cursor"];
+	magic      = ["MS Windows cursor resource", "Microsoft Windows Cursor", /^fmt\/385( |$)/];
 	converters = ["deark", "gimp"];
 }

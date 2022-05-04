@@ -7,7 +7,7 @@ export class pict extends Format
 	ext            = [".pict", ".pic", ".pct"];
 	forbidExtMatch = true;	// way too common
 	mimeType       = "image/pict";
-	magic          = ["QuickDraw/PICT bitmap", "Macintosh PICT Image", "Claris clip art"];
+	magic          = ["QuickDraw/PICT bitmap", "Macintosh PICT Image", "Claris clip art", /^fmt\/341( |$)/, /^x-fmt\/80( |$)/];
 	metaProvider   = ["image"];
 	converters     = ["deark", "recoil2png", "nconvert", "qtPicViewer", "soffice[outType:png]", "hiJaakExpress", "corelPhotoPaint", "canvas", "convert"];	// convert has a habit of producing just a black square (sample: karo)
 }

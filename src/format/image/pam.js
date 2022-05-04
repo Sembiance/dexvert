@@ -6,7 +6,7 @@ export class pam extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/PAM";
 	ext          = [".pam"];
 	mimeType     = "image/x-portable-arbitrarymap";
-	magic        = ["Portable Arbitrary Map bitmap", "Portable Any Map", "Netpbm PAM image file"];
+	magic        = ["Portable Arbitrary Map bitmap", "Portable Any Map", "Netpbm PAM image file", /^fmt\/405( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "tomsViewer"];
 }

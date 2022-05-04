@@ -5,7 +5,7 @@ export class jamCracker extends Format
 	name         = "JamCracker Module";
 	website      = "http://fileformats.archiveteam.org/wiki/JAMCracker_Pro";
 	ext          = [".jc"];
-	magic        = [/^JamCracker [Mm]odule/];
+	magic        = [/^JamCracker [Mm]odule/, /^fmt\/975( |$)/];
 	metaProvider = ["musicInfo"];
 	converters   = ["uade123"];
 }

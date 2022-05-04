@@ -24,6 +24,7 @@ const SUPPORTING_DIR_PATHS =
 const IGNORED_FMTIDS =
 [
 	111,	// ASCII
+	134,	// MP3 Audio (weak)
 	208,	// Binary
 	1555	// text
 ];
@@ -32,7 +33,8 @@ const IGNORED_XFMTIDS =
 [
 	111,	// OLE2
 	157,	// IFF
-	195		// Generic Markup
+	195,	// Generic Markup
+	263		// ZIP
 ];
 
 const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3});

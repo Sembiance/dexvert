@@ -5,6 +5,6 @@ export class shar extends Format
 	name       = "SHell self-extracting ARchive";
 	website    = "http://fileformats.archiveteam.org/wiki/Shar";
 	ext        = [".shar", ".sha"];
-	magic      = ["shell archive text", "shar SHell self-extracting aRchive"];
+	magic      = ["shell archive text", "shar SHell self-extracting aRchive", /^fmt\/329( |$)/];
 	converters = ["unshar"];
 }

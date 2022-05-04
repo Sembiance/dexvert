@@ -5,6 +5,6 @@ export class zpaq extends Format
 	name       = "ZPAQ Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/ZPAQ";
 	ext        = [".zpaq"];
-	magic      = ["ZPAQ file", "zpaq compressed archive"];
+	magic      = ["ZPAQ file", "zpaq compressed archive", /^fmt\/1097( |$)/];
 	converters = ["zpaq"];
 }

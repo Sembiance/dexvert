@@ -6,7 +6,7 @@ export class starOfficeDraw extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)";
 	ext            = [".sda"];
 	forbidExtMatch = true;
-	magic          = ["StarOffice"];
-	weakMagic      = true;
+	magic          = ["StarOffice", /^x-fmt\/401( |$)/];
+	weakMagic      = ["StarOffice"];
 	converters     = ["soffice"];
 }

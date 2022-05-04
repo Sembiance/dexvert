@@ -5,6 +5,6 @@ export class cardfile extends Format
 	name       = "Cardfile Document";
 	website    = "http://fileformats.archiveteam.org/wiki/Cardfile";
 	ext        = [".crd"];
-	magic      = ["Windows Cardfile database", "Cardfile"];
+	magic      = ["Windows Cardfile database", "Cardfile", /^fmt\/1254( |$)/];
 	converters = ["deark & cardfile"];
 }

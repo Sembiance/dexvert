@@ -6,7 +6,7 @@ export class jng extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/JNG";
 	ext          = [".jng"];
 	mimeType     = "image/x-jng";
-	magic        = ["JPEG Network Graphics", "JNG video data"];
+	magic        = ["JPEG Network Graphics", "JNG video data", /^fmt\/529( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "nconvert", `abydosconvert[format:${this.mimeType}]`];
 }

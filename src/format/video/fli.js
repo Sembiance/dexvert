@@ -5,7 +5,7 @@ export class fli extends Format
 	name         = "FLIC FLI Video";
 	website      = "http://fileformats.archiveteam.org/wiki/FLIC";
 	ext          = [".fli"];
-	magic        = ["FLIC FLI video", "FLI animation", "AutoDesk FLIC Animation"];
+	magic        = ["FLIC FLI video", "FLI animation", "AutoDesk FLIC Animation", /^x-fmt\/154( |$)/];
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:flic]", "xanim"];
 }

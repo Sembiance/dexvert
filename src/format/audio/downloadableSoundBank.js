@@ -6,6 +6,6 @@ export class downloadableSoundBank extends Format
 	website        = "https://en.wikipedia.org/wiki/DLS_format";
 	ext            = [".dls"];
 	forbidExtMatch = true;
-	magic          = ["DownLoadable Sound bank"];
+	magic          = ["DownLoadable Sound bank", /^fmt\/955( |$)/];
 	converters     = ["awaveStudio"];
 }

@@ -5,7 +5,7 @@ export class rmi extends Format
 	name         = "RIFF MIDI Music";
 	website      = "http://fileformats.archiveteam.org/wiki/RIFF_MIDI";
 	ext          = [".rmi"];
-	magic        = ["RMI RIFF MIDI Music", "RIFF-based MIDI", /^RIFF.* data, MIDI$/];
+	magic        = ["RMI RIFF MIDI Music", "RIFF-based MIDI", /^RIFF.* data, MIDI$/, /^fmt\/956( |$)/];
 	metaProvider = ["musicInfo"];
 	converters   = ["timidity"];
 }

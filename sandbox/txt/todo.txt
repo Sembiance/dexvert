@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Investigate adding a new identification program: https://github.com/richardlehane/siegfried
-
 * Add format (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
 
 * Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)

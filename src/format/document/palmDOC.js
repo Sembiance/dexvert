@@ -6,6 +6,6 @@ export class palmDOC extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/PalmDOC";
 	ext            = [".pdb", ".prc"];
 	forbidExtMatch = true;
-	magic          = ["PalmDOC text document", "AportisDoc/PalmDOC"];
+	magic          = ["PalmDOC text document", "AportisDoc/PalmDOC", /^fmt\/396( |$)/];
 	converters     = ["ebook_convert", "soffice"];
 }

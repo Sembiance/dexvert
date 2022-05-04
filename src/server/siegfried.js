@@ -7,7 +7,7 @@ export class siegfried extends Server
 	async start()
 	{
 		this.xlog.info`Starting siegfried server...`;
-		const {p} = await runUtil.run("sf", ["-home", "/opt/siegfried-bin/siegfried/", "-nr", "-serve", "127.0.0.1:15138"], {detached : true});
+		const {p} = await runUtil.run("sf", ["-home", "/opt/siegfried-bin/siegfried/", "-nr", "-serve", "127.0.0.1:15138"], {detached : true, stdoutcb : line => this.xlog.info`${line}`, stderrcb : line => this.xlog.warn`${line}`});
 		this.p = p;
 	}
 

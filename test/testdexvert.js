@@ -142,6 +142,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
+	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
@@ -162,7 +163,6 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 	[/image\/pixelPerfect\/.+$/, "image", true],
 	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
-	
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/dataShowSound\/.+/i, "text", true],
@@ -445,7 +445,7 @@ async function testSample(sampleFilePath)
 	if(prevData.family && result.family!==prevData.family)
 		return await fail(`Expected to have family ${fg.orange(prevData.family)} but got ${result.family}`);
 
-	if(prevData.format && result.format!==prevData.format)
+	if(prevData.format && result.format!==prevData.format && !allowFormatMismatch)
 		return await fail(`Expected to have format ${fg.orange(prevData.format)} but got ${result.format}`);
 
 	if(prevData.meta)

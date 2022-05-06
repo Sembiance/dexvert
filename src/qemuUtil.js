@@ -143,9 +143,13 @@ Func WindowFailure($title, $text, $max_duration, $dismissKeys=0)
 	EndIf
 EndFunc`,
 	WindowDismissWait : `
-Func WindowDismissWait($title, $text, $max_duration, $dismissKeys=0)
+Func WindowDismissWait($title, $text, $max_duration, $dismissKeys=0, $dismissFunc=0)
 	Local $win = WinWaitActive($title, $text, $max_duration)
 	If $win Not = 0 Then
+		If $dismissFunc Not = 0 Then
+			Call($dismissFunc)
+			WinWaitClose($win, $text, $max_duration)
+		EndIf
 		If $dismissKeys Not = 0 Then
 			Send($dismissKeys)
 			WinWaitClose($win, $text, $max_duration)
@@ -155,12 +159,16 @@ Func WindowDismissWait($title, $text, $max_duration, $dismissKeys=0)
 	return 0
 EndFunc`,
 	WindowDismiss : `
-Func WindowDismiss($title, $text, $dismissKeys=0)
+Func WindowDismiss($title, $text, $dismissKeys=0, $dismissFunc=0)
 	Local $win = WinActive($title, $text)
 	If $win Not = 0 Then
+		If $dismissFunc Not = 0 Then
+			Call($dismissFunc)
+			WinWaitClose($win, $text, 2)
+		EndIf
 		If $dismissKeys Not = 0 Then
 			Send($dismissKeys)
-			WinWaitClose($win, $text, 3)
+			WinWaitClose($win, $text, 2)
 		EndIf
 		return $win
 	EndIf
@@ -176,6 +184,10 @@ Func CallUntil($funcName, $max_duration)
 		If $done Not = 0 Then ExitLoop
 		Sleep(50)
 	Until TimerDiff($timer) > $max_duration
+EndFunc`,
+	Pause : `
+Func Pause()
+	MsgBox(0, "pause", "pause")
 EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];

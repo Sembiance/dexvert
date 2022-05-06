@@ -7,5 +7,5 @@ export class micrografxDraw extends Format
 	ext            = [".drw", ".drt", ".ds4", ".dsf"];
 	forbidExtMatch = true;
 	magic          = ["Micrografx Designer Drawing", /^x-fmt\/(294|295)( |$)/];
-	converters     = ["scribus", "hiJaakExpress", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
+	converters     = ["scribus", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
 }

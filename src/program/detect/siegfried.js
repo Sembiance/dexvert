@@ -17,7 +17,10 @@ export class siegfried extends Program
 	{
 		r.meta.detections = [];
 
-		const rawText = (await (await fetch(`http://${SIEGFRIED_HOST}:${SIEGFRIED_PORT}/identify/${base64Encode(r.inFile({absolute : true}))}?base64=true&format=json`)).text());
+		const rawText = await xu.tryFallbackAsync(async () => await (await fetch(`http://${SIEGFRIED_HOST}:${SIEGFRIED_PORT}/identify/${base64Encode(r.inFile({absolute : true}))}?base64=true&format=json`)).text());
+		if(!rawText)
+			return;
+			
 		const rawResult = xu.parseJSON(rawText.replaceAll("\t", ""));
 		const matches = (rawResult?.files || []).find(({filename}) => path.basename(filename)===r.f.input.base)?.matches || [];
 		if(matches.length===0)

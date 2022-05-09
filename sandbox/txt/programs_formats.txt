@@ -10213,3 +10213,38 @@ Tag Image File Format (TIFF)
 Windows Bitmap (BMP)
 Windows DIB (DIB)
 Windows Metafile (WMF)
+
+
+>>> https://github.com/Malvineous/camoto-studio (NOT INSTALLED RIGHT NOW, See here for info on compile order: http://www.shikadi.net/camoto/desktop/)
+Captain Comic
+Captain Comic II: Fractured Reality
+Catacomb
+Catacomb II
+Cosmo's Cosmic Adventures
+Crystal Caves
+Dangerous Dave
+Dark Ages
+Doofus
+Duke Nukem
+Duke Nukem II
+God of Thunder
+Halloween Harry
+Highway Hunter
+Hocus Pocus
+Hugo 1: Hugo's House of Horrors
+Jill of the Jungle
+Kiloblaster
+Major Stryker
+Monster Bash
+Mystic Towers
+Raptor
+Rockford
+Scubaventure
+Secret Agent
+Solar Winds
+Trugg
+Vinyl Goddess From Mars
+Wacky Wheels
+Word Rescue
+Xargon
+Zone 66

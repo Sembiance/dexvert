@@ -6,7 +6,7 @@ export class wordDoc extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DOC";
 	ext            = [".doc", ".dot"];
 	forbidExtMatch = true;
-	magic          = ["Microsoft Word document", "Microsoft Word for Windows", /^fmt\/(37|39|40|609|754)( |$)/, /^x-fmt\/45( |$)/];
+	magic          = ["Microsoft Word document", "Microsoft Word for Windows", /^fmt\/(37|38|39|40|609|754)( |$)/, /^x-fmt\/45( |$)/];
 	converters     = ["fileMerlin", "antiword", "soffice"];
 	processed      = dexState =>
 	{

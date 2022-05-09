@@ -1,6 +1,9 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
 
+const _AVI_MAGIC = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", /^fmt\/5( |$)/];
+export {_AVI_MAGIC};
+
 export class avi extends Format
 {
 	name     = "Audio Video Interleaved Video";
@@ -12,7 +15,7 @@ export class avi extends Format
 	//keepFilename  : true,
 	//filesOptional : (state, otherFiles) => otherFiles.filter(otherFile => otherFile.toLowerCase()===`${state.input.name.toLowerCase()}.tss`),
 
-	magic        = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", /^fmt\/5( |$)/];
+	magic        = _AVI_MAGIC;
 	metaProvider = ["mplayer"];
-	converters   = r => ["ffmpeg", `xanim[fps:${r.meta.fps || 10}]`];
+	converters   = r => ["ffmpeg", "mencoderWinXP", `xanim[fps:${r.meta.fps || 10}]`];
 }

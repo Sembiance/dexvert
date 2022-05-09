@@ -8,7 +8,8 @@ export class picturePublisher extends Program
 	bin      = "c:\\Program Files\\Micrografx\\Picture Publisher\\Pp70.exe";
 	args     = r => [r.inFile()];
 	qemuData = r => ({
-		script : `
+		timeout : xu.MINUTE*2,
+		script  : `
 		$mainWindow = WindowRequire("Micrografx Picture Publisher", "", 5)
 
 		Func PhotoCDOpenDismiss()

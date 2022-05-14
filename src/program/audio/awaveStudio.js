@@ -4,11 +4,12 @@ import {path} from "std";
 
 export class awaveStudio extends Program
 {
-	website  = "https://archive.org/details/awave70_zip";
-	bin      = "c:\\Program Files\\Awave Studio\\Awave.exe";
-	args     = () => ["-BATCH"];
-	loc      = "win2k";
-	qemuData = r => ({
+	website    = "https://archive.org/details/awave70_zip";
+	bin        = "c:\\Program Files\\Awave Studio\\Awave.exe";
+	bruteFlags = { music : {} };
+	args       = () => ["-BATCH"];
+	loc        = "win2k";
+	qemuData   = r => ({
 		script : `
 			WinWaitActive("Select conversion type", "", 10)
 			ControlClick("Select conversion type", "", "[CLASS:Button; TEXT:&Next >]")

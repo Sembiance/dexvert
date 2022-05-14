@@ -16,8 +16,9 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> trying every safe program on it and saving results in <outputDirPath>",
 	opts    :
 	{
-		family : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
-		serial : {desc : "Run the programs serially..."}
+		allowUnsafe : {desc : "Run all programs, even those marked as unsafe"},
+		family      : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
+		serial      : {desc : "Run the programs serially..."}
 	},
 	args :
 	[
@@ -49,10 +50,10 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	if(EXCLUDE_FAMILIES.includes(familyid))
 		return;
 	
-	if(argv.family && !argv.family.split(",").includes(familyid))
+	if(argv.family && !argv.family.split(",").includesAny([familyid, ...(program.bruteFlags ? Object.keys(program.bruteFlags) : [])]))
 		return;
 	
-	if(program.unsafe)
+	if(program.unsafe && !argv.allowUnsafe)
 		return;
 
 	const formatid = `program${programid}`;
@@ -64,6 +65,8 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 		converters = [programid];
 	}
 
+	const programFlag = argv?.family?.split(",").find(v => !!program.bruteFlags?.[v]) || {};
+
 	const format = ProgramFormat.create(families[familyid]);
 	format.formatid = formatid;
 	formats[formatid] = format;
@@ -74,7 +77,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 
 	if(argv.serial)
 		xu.stdoutWrite(`Program ${familyid}/${programid} `);
-	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
+	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), programFlag, asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
 	const outputFiles = dexState.f.files.output || [];
 	if(outputFiles.length>0)
 	{

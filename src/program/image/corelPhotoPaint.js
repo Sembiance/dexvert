@@ -9,6 +9,7 @@ export class corelPhotoPaint extends Program
 	flags   = {
 		outType : "Which format to output. png usually works and is the default, but sometimes png isn't available, then use tiff"
 	};
+	bruteFlags = { poly : {}, video : {} };
 	args     = r => [r.inFile()];
 	qemuData = r => ({
 		alsoKill : ["cdrconv.exe"],

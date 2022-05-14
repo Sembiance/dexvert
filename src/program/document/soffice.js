@@ -9,6 +9,7 @@ export class soffice extends Program
 		outType     : `Which format to convert into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
 		autoCropSVG : "If set to true, the output SVG will be autocropped"
 	};
+	bruteFlags = { image : { outType : "png" } };
 	
 	loc       = "gentoo";
 	bin       = "soffice";

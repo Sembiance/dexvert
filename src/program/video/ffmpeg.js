@@ -13,6 +13,8 @@ export class ffmpeg extends Program
 		rate        : "What rate to set for the output. Default: Let ffmpeg decide",
 		maxDuration : "Maximum duration (in seconds) to allow the output file to be"
 	};
+	bruteFlags = { archive : {}, audio : { outType : "mp3" }, image : { outType : "png" }, music : { outType : "mp3" } };
+
 	bin = "ffmpeg";
 	args = async r =>
 	{

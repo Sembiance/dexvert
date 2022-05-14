@@ -1,6 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Update deark to latest version and add new support for new formats (See change log and git diff on the program_formats.txt)
+
+* Add format support (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
+
+
+/---------------\
+| High Priority |
+\---------------/
 * Make a TUI.js deno project
 Use ansi codes to control cursor/screen directly. See:
 https://github.com/aristocratos/btop/blob/main/src/btop_tools.hpp
@@ -10,22 +18,10 @@ Make a showcase.js file that will show all features, to use as a test case and d
 Have TUI expose Screen class that has .boxAdd() .boxRemove() and a array of boxes.
 It also exposes Box class with can include width/height properties which are numeric percentages (80 or 100) and/or rows/cols which are a numeric count of actual lines/columns. Maybe and align prop too for things within it. Box has a .add which adds drawable widgets like:
 Then start creating actual components like Text/Table/Log/etc that should implement by convention various methods.
+Do everything with arrays of arrays representing lines/cols. Each character (or multiple ansi codes for color) per array
+Multiple layers, thus can render bottom layer, then the one above it, and so on
+Then: Re-code dexbrute to use the new TUI.js
 
-* Re-code dexbrute to use the new TUI.js
-
-* Add to various programs that can be used in multiple families: bruteFlags : { image : { outType : ".png" } }
-  Start with deark as a test for an stx archive file
-  Then update the dexbrute program to check ALL programs, and include those in the folder (default family) and any that have a family specified in a bruteFlags property and make sure to use those flags (like deark for archives, ffmpeg for images, soffice for images, etc)
-  This also lays the ground work for a better 'Try Anyways' feature for dexvert.com
-
-* Update deark to latest version and add new support for new formats (See change log and git diff on the program_formats.txt)
-
-* Add format support (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
-
-
-/---------------\
-| High Priority |
-\---------------/
 * Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
   If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows
   For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args

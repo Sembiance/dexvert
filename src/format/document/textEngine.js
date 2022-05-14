@@ -6,5 +6,6 @@ export class textEngine extends Format
 	ext            = [".std"];
 	forbidExtMatch = true;
 	magic          = ["TextEngine document"];
+	weakMagic      = true;
 	converters     = ["strings"];
 }

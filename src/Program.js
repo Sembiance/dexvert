@@ -58,6 +58,7 @@ export class Program
 			args             : {type : "function", length : [0, 1]},
 			allowDupOut      : {type : "boolean"},
 			bin              : {type : "string"},
+			bruteFlags       : {type : Object},
 			chain            : {types : ["function", "string"]},
 			chainCheck       : {type : "function", length : [0, 3]},
 			checkForDups     : {type : "boolean"},

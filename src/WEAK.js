@@ -4,7 +4,7 @@
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|473|1260|1555)( |$)/,
+	/^fmt\/(111|134|208|473|1260|1555|1556|1562)( |$)/,
 	/^x-fmt\/(111|157|195)( |$)/,
 
 	// dexmagic: WEAK checks
@@ -197,8 +197,9 @@ export const WEAK_VALUES =
 	/^AngelCode Bitmap Font \(binary\)$/,
 	/^Any Password data$/,
 	/^APE ProSystem Atari 8-bit disk image/,
-	/^Atari XE Executable$/,
 	/^ARHANGEL compressed archive$/,
+	/^Atari XE Executable$/,
+	/^AutoDesk Revit Indexed Point Cloud$/,
 	/^Award BIOS logo bitmap \(\d+x\d+\)/,
 	/^AYFX Editor Bank$/,
 	/^BALZ compressed data$/,
@@ -227,6 +228,7 @@ export const WEAK_VALUES =
 	/^DEGAS med-res compressed bitmap$/,
 	/^DEGAS hi-res bitmap$/,
 	/^DEGAS hi-res compressed bitmap$/,
+	/^DeltaCad drawing$/,
 	/^DICOM medical imaging bitmap/,
 	/^Digital Micrograph Script$/,
 	/^Digital Video$/,
@@ -243,6 +245,7 @@ export const WEAK_VALUES =
 	/^Freeze! compressed archive$/,
 	/^GEM bitmap/,
 	/^Generic INI configuration$/,
+	/^Genecyst save state$/,
 	/^GIF bitmap \(generic\)$/,
 	/^GNU Privacy Guard public keyring \(generic\)$/,
 	/^GraphiCode Programmable Device Format$/,
@@ -331,6 +334,7 @@ export const WEAK_VALUES =
 	/^XBase DataBase \(generic\)$/,
 	/^Xexor disk image$/,
 	/^Z-Code V\d adventure for Infocom Z-Machine$/,
+	/^Zoo filter compressed format$/,
 	/^ZX Microdrive cartridge image$/,
 	
 	// TRID: Checks for almost all zeroes or mostly just single repeating values:
@@ -351,6 +355,7 @@ export const WEAK_VALUES =
 	/^EPOC data store/,
 	/^FastCopy DIM disk image$/,
 	/^File List Creator list$/,
+	/^Generic RIFF container$/,
 	/^HandStory eBook$/,
 	/^HP Logical Interchange Format disk image$/,
 	/^Id Software Quake II Cinematic video$/,

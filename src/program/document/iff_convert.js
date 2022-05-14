@@ -10,6 +10,8 @@ export class iff_convert extends Program
 		keepAll     : "Set to true to keep all files. Normally mask files are discarded.",
 		outType     : "Which type to convert to. For list run `iff-convert --help` Default: binary"
 	};
+	bruteFlags = { archive : {}, image : {}, video : {} };
+	
 	bin              = "iff-convert";
 	filenameEncoding = "iso-8859-1";	// AmigaOS uses this: http://lclevy.free.fr/adflib/adf_info.html#p54
 	args             = r => [`--output-dir=${r.outDir()}`, `--format=${r.flags.outType || "binary"}`, r.inFile()];

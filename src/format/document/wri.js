@@ -7,5 +7,5 @@ export class wri extends Format
 	ext            = [".wri", ".wr", ".doc"];
 	forbidExtMatch = true;
 	magic          = ["Windows Write Document", /^Microsoft Write.* Document/, "Write for Windows Document", /^x-fmt\/12( |$)/];
-	converters     = ["soffice", "fileMerlin[type:MSWR]"];
+	converters     = ["soffice", "fileMerlin[type:MSWR]", "word97"];
 }

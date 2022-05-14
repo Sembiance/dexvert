@@ -21,6 +21,8 @@ export class unar extends Program
 	flags   = {
 		"mac" : "Set this flag to treat the files extracted as mac files and rename them with the MACOS_ROMAN_EXTENDED charset."
 	};
+	bruteFlags = { executable : {} };
+
 	bin       = "unar";
 	args      = r => [...(r.flags.filenameEncoding ? ["-e", r.flags.filenameEncoding] : []), "-f", "-D", "-o", r.outDir(), r.inFile()];
 	

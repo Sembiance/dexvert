@@ -3,11 +3,12 @@ import {path} from "std";
 
 export class foremost extends Program
 {
-	website = "http://foremost.sourceforge.net/";
-	package = "app-forensics/foremost";
-	bin     = "foremost";
-	args    = r => [`-o${r.outDir()}`, r.inFile()];
-	post    = async r =>
+	website    = "http://foremost.sourceforge.net/";
+	package    = "app-forensics/foremost";
+	bruteFlags = { archive : {}, image : {} };
+	bin        = "foremost";
+	args       = r => [`-o${r.outDir()}`, r.inFile()];
+	post       = async r =>
 	{
 		// leaves behind an audit.txt file, remove it
 		await r.f.remove("new", r.f.files.new.find(file => file.base==="audit.txt"), {unlink : true});

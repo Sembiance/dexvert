@@ -4,9 +4,12 @@ import {Program} from "../../Program.js";
 export class unHLPMVB extends Program
 {
 	website    = "https://github.com/Sembiance/dexvert";
+	flags   = {
+		extractExtra : "Set to true to also extract any other non-referenced embedded files"
+	};
 	bin        = "deno";
 	unsafe     = true;
-	args       = r => Program.denoArgs(Program.binPath("unHLPMVB.js"), `--outFilename=${r.originalInput ? r.originalInput.name : "out"}`, "--", r.inFile(), r.outDir());
+	args       = r => Program.denoArgs(Program.binPath("unHLPMVB.js"), ...(r.flags.extractExtra ? ["--extractExtra"] : []), `--outFilename=${r.originalInput ? r.originalInput.name : "out"}`, "--", r.inFile(), r.outDir());
 	runOptions = ({env : Program.denoEnv()});
 	renameOut  = false;
 	chain      = "?dexvert[asFormat:document/rtf]";

@@ -6,5 +6,6 @@ export class jamMessageAreaHeaderFile extends Format
 	ext            = [".jhr"];
 	forbidExtMatch = true;
 	magic          = ["JAM message area header file"];
+	weakMagic      = true;
 	converters     = ["strings"];
 }

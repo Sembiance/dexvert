@@ -6,4 +6,5 @@ export class magicDraw extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MagicDraw";
 	ext        = [".shr", ".hr"];
 	converters = ["recoil2png"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

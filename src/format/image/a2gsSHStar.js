@@ -6,4 +6,5 @@ export class a2gsSHStar extends Format
 	ext        = [".sh3", ".shr"];
 	fileSize   = 38400;
 	converters = ["recoil2png"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

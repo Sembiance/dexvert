@@ -363,11 +363,7 @@ XPK-encapsulated files
 
 
 >>> deark (Linux - v1.5.5 - June 6, 2020) - ARCHIVE, IMAGE (https://github.com/jsummers/deark  https://entropymine.com/deark/)
-Deark -- Information about supported formats
-
-
 === Image format modules ===
-
 (Images that are not "extracted" will be converted to PNG, except as noted.)
 
 * ADEX .IMG (module="adex") (experimental)
@@ -1083,6 +1079,10 @@ Deark -- Information about supported formats
   Compressed file, used by EDI Install [Pro] from Eschalon Development.
   - Supports "LZSS1" and "LZSS2" formats, and the LZSSLib format.
 
+* EXEPACK (module="exepack")
+  Decompress an EXEPACK-compressed DOS EXE file.
+  - Not automatic; must use "-m exepack".
+
 * FAT (module="fat") (experimental/incomplete)
   - Limited support, mainly for floppy disk images.
 
@@ -1121,11 +1121,9 @@ Deark -- Information about supported formats
   Options
    -opt loaddskf:toraw - Convert to raw FAT/IMA format.
 
-* LZEXE (module="lzexe") (experimental)
+* LZEXE (module="lzexe")
   Decompress an LZEXE-compressed DOS EXE file.
-  - Not autodetected. Use "-m lzexe".
-  - The decompressed file will usually not be byte-for-byte the same as the
-    original, because LZEXE discards some information.
+  - Not automatic; must use "-m lzexe".
 
 * LZHUF (module="lzhuf")
   Compression software by Haruyasu Yoshizaki. A bare-bones container for
@@ -1188,9 +1186,9 @@ Deark -- Information about supported formats
    -opt pasti:toraw - Instead of decoding, extract to raw ".ST" format (this is
      usually a FAT format).
 
-* PKLITE (module="pklite") (experimental)
+* PKLITE (module="pklite")
   Decompress a PKLITE-compressed DOS EXE file or DOS COM file.
-  - For EXE format, you must use "-m pklite".
+  - For EXE format, you must use "-m pklite" or "-opt execomp".
   - Not all PKLITE format variants are supported.
 
 * RPM (package manager) (module="rpm")
@@ -1229,6 +1227,8 @@ Deark -- Information about supported formats
   Options
    -opt zip:scanmode - Attempt to read the file without using the ZIP "central
      directory". Not recommended, but allows some damaged ZIP files to be read.
+   -opt zip:reloc[=<new_offset>] - Instead of decoding, move the ZIP data to
+     the start of the file (or to new_offset).
 
 * zlib (module="zlib")
   - Raw zlib files are uncompressed.

@@ -5,6 +5,6 @@ export class paradoxDatabase extends Format
 	name           = "Paradox Database Table";
 	ext            = [".db"];
 	forbidExtMatch = true;
-	magic          = [/^fmt\/350( |$)/];
+	magic          = [/^fmt\/(350|351)( |$)/];
 	converters     = ["strings"];
 }

@@ -18,9 +18,9 @@ export class canvas extends Program
 		$mainWindow = WindowRequire("Canvas 14", "", 5)
 
 		Func PreOpenWindows()
-			WindowFailure("Canvas - Registration", "", -1, "{ESCAPE}")
-			WindowFailure("Canvas", "Register Canvas to finish", -1, "{ENTER}")
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
+			WindowDismiss("Canvas", "Register Canvas to finish", "{ENTER}")
+			WindowDismiss("Canvas - Registration", "", "{ESCAPE}")
 			WindowDismiss("Choose Resolution", "", "{ENTER}")
 			WindowDismiss("CGM/CGM Import Options", "", "{ENTER}")
 			WindowDismiss("DICOM Import Options", "", "{ENTER}")

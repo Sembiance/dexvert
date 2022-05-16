@@ -4,7 +4,7 @@
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|473|1260|1555|1556|1562)( |$)/,
+	/^fmt\/(111|134|208|347|473|1260|1555|1556|1562)( |$)/,
 	/^x-fmt\/(111|157|195)( |$)/,
 
 	// dexmagic: WEAK checks
@@ -108,6 +108,7 @@ export const WEAK_VALUES =
 	/^locale data table/,
 	/^Logitech Compress archive data$/,
 	/^lif file/,
+	/^MacBinary.* INVALID date/,
 	/^MacBinary II,/,
 	/^Maple help database$/,
 	/^Matlab v4/,
@@ -204,6 +205,7 @@ export const WEAK_VALUES =
 	/^AYFX Editor Bank$/,
 	/^BALZ compressed data$/,
 	/^Bcrypt Encrypted data$/,
+	/^Beasts and Bumpkins game data archive$/,
 	/^Bennet Yee's face format bitmap$/,
 	/Berkeley vfont/,
 	/^Big Crunch compressed file$/,
@@ -237,6 +239,7 @@ export const WEAK_VALUES =
 	/^Drazpaint \(C64\) bitmap$/,
 	/^DRM Content Format - Separate delivery file \(generic\)$/,
 	/^eFax Document \(generic\)$/,
+	/^Error Code Modeler$/,
 	/^eXtended Triton Format$/,
 	/^F64 disk image$/,
 	/^FinePrint saved output$/,
@@ -328,6 +331,7 @@ export const WEAK_VALUES =
 	/^WhatsApp encrypted database$/,
 	/^WillDraw Drawing$/,
 	/^WinArcadia Saved State$/,
+	/^WinPlot data/,
 	/^WLF WolfMAME recording info$/,
 	/^WordPerfect document \(Amiga\)$/,
 	/^X1 compressed archive$/,
@@ -399,6 +403,7 @@ export const WEAK_VALUES =
 	/^Windows Icon/,
 
 	// TRID: Weak in some other way, such as commonly used word prefix/global string or ascending/descending bytes
+	/^AceMoney data$/,
 	/^Amiga Disk image File \(generic\)$/,
 	/^Audio Disk Jockey bank$/,
 	/^Dan Bricklin's Demo/,
@@ -416,5 +421,6 @@ export const WEAK_VALUES =
 	/^Session Description Protocol \(with rem\)$/,
 	/^SMS Super File$/,
 	/^Stunt Island Film$/,
-	/^Summation Document Image Information Load File$/
+	/^Summation Document Image Information Load File$/,
+	/^Xilinx User Constraints File$/
 ];

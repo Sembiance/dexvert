@@ -8,4 +8,5 @@ export class aliasPIX extends Format
 	mimeType   = "image/x-alias-pix";
 	magic      = ["Alias PIX", /^fmt\/1092( |$)/];
 	converters = ["nconvert", "gimp", "canvas"];
+	verify     = ({meta}) => meta.width<12000 && meta.height<12000;
 }

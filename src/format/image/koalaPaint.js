@@ -20,4 +20,5 @@ export class koalaPaint extends Format
 
 	// Must be <= 10018 because either we are uncompressed (10003/10006) or we are compresed in which case we should be smaller and we found a 10018 sized file in the wild
 	idCheck = inputFile => inputFile.size<=10018;
+	verify  = ({meta}) => meta.colorCount>1;
 }

@@ -1,9 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update deark to latest version and add new support for new formats (See change log and git diff on the program_formats.txt)
-
-* Add format support (need to update deark first): http://fileformats.archiveteam.org/wiki/Dexxa_TIFF
 
 
 /---------------\
@@ -22,11 +19,6 @@ Do everything with arrays of arrays representing lines/cols. Each character (or 
 Multiple layers, thus can render bottom layer, then the one above it, and so on
 Then: Re-code dexbrute to use the new TUI.js
 
-* Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
-  If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows
-  For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
-  To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
-
 * If deark adds better IFF IMAG support, re-process: 265 301 313 356 357 406 481 510 517 518 519 520 607 614 615 629 731 732 766 790 921 969
   Ideally this search should return 321+ matches:
   http://retromission.com/search?q=&qfields=content&qfields=filename&qfields=ext&formatid=cdiIFFImage&labelMatchType=any&label=&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&animated=&sortBy=_text_match&limit=100&nocache=true
@@ -35,6 +27,9 @@ Then: Re-code dexbrute to use the new TUI.js
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Get the IFF-RGFX datatype installed and working on my Amiga:http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
+  Once it can view pictures, see about how I can convert into PNG, maybe with: https://aminet.net/package/gfx/conv/gfxcon
+
 * Try and understand the Multimedia Viewer Book format more, especially in regards to extracting content from MVB files, write my own extractor
   http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book
   After my sample files extract, process this CD: World Wide Web Directory on CD-ROM
@@ -109,7 +104,12 @@ Then: Re-code dexbrute to use the new TUI.js
   I could then use imagemagick (or something else) to piece together the proper image
   After this is added, re-process CDs on retromission: 512 535
 
-* Get other formats reverse engineered
+* Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
+  If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows
+  For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
+  To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
+
+* Get other formats reverse engineered. STARTED: https://telparia.com/fileFormatBounties.html
   Goal: Produce open source code (any language) that can run on Linux that can take an input file and produce one or more output PNG files
   Could also try posting on reddit r/ReverseEngineering/ or r/INAT
   Maybe offer a $5,000 bounty on one of the sites linked: https://en.wikipedia.org/wiki/Open-source_bounty

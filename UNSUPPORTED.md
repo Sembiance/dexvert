@@ -1,4 +1,4 @@
-# Unsupported File Formats (616)
+# Unsupported File Formats (630)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -12,7 +12,7 @@ archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Ane
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
-archive | Authorware Application | .app | [4 sample files](https://telparia.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
+archive | Authorware Application/Package | .app .apw | [9 sample files](https://telparia.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://telparia.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
@@ -134,7 +134,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (35)
+## Font (37)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -151,8 +151,10 @@ font | DynaCADD Vector Font | .fnt |
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
 font | GRX Font | .fnt | 
 font | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://telparia.com/fileFormatSamples/font/intelliFont/)
+font | Japanese Word Processor Kanji Font | .f00 | 
 font | LaserJet Soft Font | .sfl .sfp .sft | 
 font | LinkWay Font | .fmf | 
+font | Lotus Impress Font | .ifl | 
 font | Lotus Raster Font | .lrf | 
 font | Lotus Vector Font | .lvf | 
 font | MacOS Font | .fnt | 
@@ -175,7 +177,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (39)
+## Image (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
@@ -183,6 +185,7 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - No known converter.
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
@@ -216,11 +219,12 @@ image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSa
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [Universal BitMap Format](http://retromission.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [8 sample files](https://telparia.com/fileFormatSamples/image/universalBitMapFormat/)
 image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://telparia.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFormatSamples/image/windowsFAXCover/)
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
 
 
 
-## Music (73)
+## Music (75)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -244,6 +248,8 @@ music | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://telparia.com/f
 music | DeLuxe Music Score |  | [2 sample files](https://telparia.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
 music | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://telparia.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
 music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://telparia.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
+music | DirectMusic Segment |  | 
+music | DirectMusic Style | .sty | 
 music | DreamStation Module | .dss | [3 sample files](https://telparia.com/fileFormatSamples/music/dreamStation/)
 music | [Drum Traker Module](http://fileformats.archiveteam.org/wiki/Drum_Traker_module) | .dtl | [15 sample files](https://telparia.com/fileFormatSamples/music/drumTraker/)
 music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [3 sample files](https://telparia.com/fileFormatSamples/music/dynamicStudio/)
@@ -299,7 +305,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (326)
+## Other (334)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -351,6 +357,7 @@ other | Atari CTB File | .ctb | [5 sample files](https://telparia.com/fileFormat
 other | Atari GEM OBM File | .obm | [16 sample files](https://telparia.com/fileFormatSamples/unsupported/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
+other | Authorware Library | .apl | 
 other | AutoCAD Compiled Menu | .mnx | 
 other | AutoCAD Protected LISP | .lsp | 
 other | AutoDesk 3D-Studio Material Library | .mli | 
@@ -409,6 +416,7 @@ other | Digita Organiser Theme |  |
 other | Directory Opus Settings |  | 
 other | Dive File Format | .dff | 
 other | DOOM Save Game | .dsg | 
+other | Dr. Hardware Sysinfo | .dat | 
 other | Dr.Web Anti-Virus Database | .vdb | 
 other | DrawStudio Gradient |  | 
 other | DrawStudio Pattern |  | 
@@ -458,6 +466,7 @@ other | Javelin Printer Driver | .pr .pr2 |
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | Kapersky Anti-Virus License Key | .key | 
 other | KICK-Pascal Unit Interface | .u | 
+other | Klik'n'Play Game | .gam | 
 other | Kodak Precision Transform | .pt | 
 other | KOLEKO Save State | .rom | 
 other | KryoFlux Raw Stream | .raw | [1 sample file](https://telparia.com/fileFormatSamples/unsupported/kryoFluxRawStream/)
@@ -473,6 +482,7 @@ other | Lotus 1-2-3 Formatting Data | .fm3 |
 other | Lotus 1-2-3 SQZ! Compressed | wq! | 
 other | Lotus Freelance Presentation | .prz | 
 other | Lotus Magellan Viewer | .vw2 | 
+other | Lua bytecode |  | 
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
 other | MagiC64 Preferences | .prefs | 
@@ -484,6 +494,7 @@ other | MDIFF Patch File | .mdf |
 other | MegaPaint Printer Driver | .trb | 
 other | MetaCreations Resource Composite File |  | 
 other | Micro Lathe Object | .lat | 
+other | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://telparia.com/fileFormatSamples/other/microsoftAgentCharacter/)
 other | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://telparia.com/fileFormatSamples/other/microsoftChatCharacter/)
 other | Microsoft Incremental Linker Data | .ilk | 
 other | Microsoft Printer Definition | .prd | 
@@ -537,6 +548,7 @@ other | Quake II Map | .bsp |
 other | Quake II Sprite Reference | .sp2 | 
 other | Quake Map | .bsp | 
 other | QuickText Titles |  | 
+other | QuickTime Installer Cache | .qdat .qda | 
 other | Reflections Camera | .kam | 
 other | Reflections Data | .r3 | 
 other | Reflections Material | .mat | 
@@ -559,11 +571,13 @@ other | SCUMM main data container |  |
 other | Show Partner Mastered Show | .pro | 
 other | SimCity 2000 Save Game Data | .sc .sc2 | 
 other | SimCity City | .cty | 
+other | Skunny Kart Library Game Data | .lid | 
 other | Slicks 'n' Slide Track | .ss | 
 other | SmartDraw Template | .sdt .sdr | 
 other | Snoop Capture | .snoop | 
 other | SNX Snapshot | .snx | 
 other | SoftDisk Library | .shl | 
+other | Sonix MIDI Instrument | .instr | 
 other | Sound Forge Peak Data | .sfk | 
 other | Sound Images Sound Driver | .bin | 
 other | Speculator Snapshot | .zx82 .zx | 

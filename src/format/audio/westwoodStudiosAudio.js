@@ -6,7 +6,7 @@ export class westwoodStudiosAudio extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Westwood_Studios_AUD";
 	ext          = [".aud"];
 	magic        = ["Westwood Studios audio"];
-	metaProvider = ["soxi"];
+	metaProvider = ["ffprobe"];
 	notes        = "Sample file 991.AUD converts to just silence, not sure why.";
-	converters   = ["ffmpeg[outType:mp3]"];
+	converters   = ["ffmpeg[format:wsaud][outType:mp3]"];
 }

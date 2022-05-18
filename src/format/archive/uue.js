@@ -6,5 +6,5 @@ export class uue extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Uuencoding";
 	ext        = [".uue", ".uu"];
 	magic      = ["uuencoded", "UUencoded", /^fmt\/1102( |$)/];
-	converters = ["uudecode", "sqc", "UniExtract"];
+	converters = ["uudecode", "sqc", "izArc", "UniExtract"];
 }

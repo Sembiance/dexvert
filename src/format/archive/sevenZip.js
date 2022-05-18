@@ -7,5 +7,5 @@ export class sevenZip extends Format
 	ext        = [".7z"];
 	mimeType   = "application/x-7z-compressed";
 	magic      = ["7Zip format", "7-zip archive data", "7-Zip compressed archive", /^fmt\/484( |$)/];
-	converters = ["sevenZip"];
+	converters = ["sevenZip", "sqc"];
 }

@@ -7,7 +7,7 @@ export class zip extends Format
 	ext            = [".zip", ".exe"];
 	magic          = ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^x-fmt\/263( |$)/];
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
-	converters     = ["unzip", "deark", "deark[opt:zip:scanmode]", "sevenZip", "unar"];
+	converters     = ["unzip", "deark", "deark[opt:zip:scanmode]", "sevenZip", "unar", "sqc", "izArc"];
 	metaProvider   = ["zipInfo"];
 	untouched      = dexState => dexState.ids.some(id => id.magic==="Zip archive data (empty)");
 	processed      = dexState =>

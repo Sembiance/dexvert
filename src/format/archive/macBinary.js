@@ -4,9 +4,9 @@ export class macBinary extends Format
 {
 	name           = "MacBinary";
 	website        = "http://fileformats.archiveteam.org/wiki/MacBinary";
-	magic          = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1"];
+	magic          = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded"];
 	ext            = [".bin"];
 	forbidExtMatch = true;
 	fallback       = true;
-	converters     = ["deark[module:macbinary]", "unar[mac]"];
+	converters     = ["unar[mac]", "deark[module:macbinary]"];
 }

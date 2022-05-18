@@ -6,7 +6,7 @@ export class dbf extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DBF";
 	ext            = [".dbf", ".frx", ".dbt"];
 	forbidExtMatch = true;
-	magic          = [/^(?:FoxBase\+?\/?)?dBase .*DBF/, "dBASE Database", /^xBase .*DBF/, "Table MS Visual FoxPro", "FoxPro with memo DBF", /^dBase I[IV]I? DBT/];
+	magic          = [/^(?:FoxBase\+?\/?)?dBase .*DBF/, "dBASE Database", /^xBase .*DBF/, "Table MS Visual FoxPro", "FoxPro with memo DBF", /^dBase I[IV]I? DBT/, /^x-fmt\/9( |$)/];
 	weakMagic      = [/^dBase I[IV]I? DBT/];
 	converters     = ["soffice", "strings"];
 }

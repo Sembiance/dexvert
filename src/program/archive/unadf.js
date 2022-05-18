@@ -33,7 +33,7 @@ export class unadf extends Program
 			return [parts.filePath, dateParse(`${parts.day}.${parts.month}.${parts.year} ${parts.hour.padStart(2, "0")}:${parts.minute.padStart(2, "0")}:${parts.second.padStart(2, "0")}`, "dd.MM.yyyy HH:mm:ss")];
 		}).filter(v => !!v));
 		
-		for(const outputFile of r.f.files.new)
+		for(const outputFile of r.f.files.new || [])
 		{
 			const relPath = path.relative(r.outDir(), outputFile.rel);
 			if(!Object.hasOwn(fileDates, relPath))

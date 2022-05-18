@@ -10248,3 +10248,37 @@ Wacky Wheels
 Word Rescue
 Xargon
 Zone 66
+
+
+>>> SpeedCommander/sqc/Squeez 5 win2k (https://www.speedproject.com/sc/features/)
+7Z
+ACE
+ARJ
+BZIP
+CAB
+GZIP
+JAR
+LZH
+RAR
+SQX
+TAR
+UUE
+ZIP
+ZIPX
+
+
+>>> IZArc v1.2 command line win2k (https://www.izarc.org/)
+ZIP
+RAR
+ARJ
+CAB
+LHA (LZH)
+ARC
+ACE
+GZIP
+BZIP2
+TAR (TGZ, TBZ2)
+UUE
+ZOO
+JAR (JavaARchiver)
+

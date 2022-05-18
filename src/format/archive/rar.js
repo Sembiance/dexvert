@@ -17,7 +17,7 @@ export class rar extends Format
 		return pieces.length>0 ? pieces : false;
 	};
 
-	converters   = ["unrar", "UniExtract"];
+	converters   = ["unrar", "sqc", "izArc", "UniExtract"];
 	metaProvider = ["rarInfo"];
 	untouched    = dexState => !!dexState.meta.passwordProtected;
 	post         = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="unrar")?.meta || {});

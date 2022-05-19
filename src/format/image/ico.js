@@ -8,6 +8,6 @@ export class ico extends Format
 	magic      = ["Windows Icon", "MS Windows icon resource", "Icon File Format", /^x-fmt\/418( |$)/];
 	trustMagic = true;
 
-	// ICO file has multiple sub icons, which deark handles well. Fallback to nconvert
+	// ICO file has multiple sub icons, which deark handles well. Fallback to nconvert. pv can also convert, but often produces garbage.
 	converters = ["deark", "nconvert", "gimp", "hiJaakExpress", "canvas"];
 }

@@ -7,7 +7,7 @@ export class drHalo extends Format
 	ext          = [".cut", ".pal", ".pic"];
 	mimeType     = "application/dr-halo";
 	priority     = this.PRIORITY.LOW;
-	converters   = ["convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress"];
+	converters   = ["convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress", "pv"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
 	metaProvider = ["image"];
 
 	// Due to not having a good magic, we reject any created images less than 2 colors

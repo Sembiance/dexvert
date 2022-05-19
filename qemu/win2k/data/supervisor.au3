@@ -4,6 +4,12 @@ Func waitForGo()
 	While Not FileExists($goFilePath)
 		Sleep(100)
 	WEnd
+
+	While FileGetSize($goFilePath) = 0
+		Sleep(100)
+	WEnd
+
+	Sleep(100)
 EndFunc
 
 Sleep(2000)

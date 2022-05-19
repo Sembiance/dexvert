@@ -4,7 +4,15 @@ Func waitForGo()
 	While Not FileExists($goFilePath)
 		Sleep(100)
 	WEnd
+
+	While FileGetSize($goFilePath) = 0
+		Sleep(100)
+	WEnd
+
+	Sleep(100)
 EndFunc
+
+Sleep(2000)
 
 InetGet("http://192.168.51.2:17735/qemuReady?osid=winxp&ip=" & @IPAddress1, "c:\dexvert\qemuReadyResult.txt")
 

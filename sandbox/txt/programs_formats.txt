@@ -2641,12 +2641,12 @@ Misc. Types
 	Speech BASIC
 	Turtle BASIC
 
->>> recoil2png (Linux - v5.0.1 - Mar 18, 2020) (IMAGE) (https://sourceforge.net/projects/recoil/  See: /usr/share/doc/recoil*/formats.html
+>>> recoil2png (Linux - v6.1.1 - May 15, 2022) (IMAGE) (https://sourceforge.net/projects/recoil/  See: /usr/share/doc/recoil*/formats.html
 Platform	Extension	Description	Resolution	Depth	Frames
 Amiga	ABK	AMOS			1
 Amiga	ACBM	Amiga Continuous Bitmap			1
 Amiga	DEEP	TVPaint		16777216 colors	1
-Amiga	FLF	Turbo Rascal Syntax Error	320x200		1
+Amiga	FLF	Turbo Rascal Syntax Error	up to 320x256		1
 Amiga	HAM, HAM6	Hold-And-Modify 6		4096 colors	1
 Amiga	HAM8	Hold-And-Modify 8		16777216 colors	1
 Amiga	IFF, 256	Interchange File Format			1
@@ -2659,6 +2659,7 @@ Amiga	SHAM	Sliced HAM		4096 colors	1
 Amiga DCTV	DCT, DCTV	DCTV			1
 Amiga HAM-E	IFF	HAM-E	up to 384x480	184320 colors	1
 Amstrad CPC	CM5+GFX	Mode 5	288x256	27 colors	1
+Amstrad CPC	FLF	Turbo Rascal Syntax Error	up to 160x200	16 colors	1
 Amstrad CPC	FNT	8x8 font		mono	1
 Amstrad CPC	HGB	HinterGrundBild	512x256	mono	1
 Amstrad CPC	PPH+ODD+EVE	Perfect Pix	up to 384x272		2
@@ -2820,8 +2821,9 @@ Atari 8-bit VBXE	G2F	Graph2Font	up to 336x240	256 colors	1
 Atari Portfolio	PGC		240x64	mono	1
 Atari Portfolio	PGF		240x64	mono	1
 Atari ST/STE	ART	Art Director	320x200	16 colors	1
-Atari ST/STE	ART	GFA Artist	320x200	16 colors	1
+Atari ST/STE	ART	GFA Artist	320x200	512 colors	1
 Atari ST/STE	ART	Palette Master	320x200	512 colors	1
+Atari ST/STE	BIL	ColorSTar	320x200	16 colors	1
 Atari ST/STE	BL1	DEGAS Elite block		16 colors	1
 Atari ST/STE	BL2	DEGAS Elite block		4 colors	1
 Atari ST/STE	BL3	DEGAS Elite block		mono	1
@@ -2840,10 +2842,11 @@ Atari ST/STE	CPT	Canvas (compressed)			1
 Atari ST/STE	CPT+HBL	Canvas (raster)	up to 640x200		1
 Atari ST/STE	CRG	Calamus Raster Graphic		mono	1
 Atari ST/STE	DA4	PaintShop	640x800	mono	1
-Atari ST/STE	DOO	Doodle	640x400	mono	1
+Atari ST/STE	DOO, ART	Doodle	640x400	mono	1
 Atari ST/STE	DU1, DUO		416x273	136 colors	2
 Atari ST/STE	DU2		832x273	10 colors	2
 Atari ST/STE	EZA	EZ-Art Professional	320x200	16 colors	1
+Atari ST/STE	FLF	Turbo Rascal Syntax Error	320x200		1
 Atari ST/STE	FNT	8x16 font		mono	1
 Atari ST/STE	FNT	GDOS font		mono	1
 Atari ST/STE	FUL	Canvas (raster)	up to 640x200		1
@@ -2864,6 +2867,8 @@ Atari ST/STE	MUR+PAL	C.O.L.R. Object Editor	320x200	16 colors	1
 Atari ST/STE	NEO	NEOchrome			1
 Atari ST/STE	NEO	NEOchrome Master		512 colors	1
 Atari ST/STE	NEO+RST	NEOchrome Master	320x200	512 colors	1
+Atari ST/STE	OBJ	ColorSTar object	up to 320x200	16 colors	1
+Atari ST/STE	OBJ	MonoSTar object	up to 640x400	mono	1
 Atari ST/STE	P3C	D-GRAPH (compressed)	320x200	136 colors	2
 Atari ST/STE	PA3	Pablo Paint 2.5	640x400	mono	1
 Atari ST/STE	PAC	STAD	640x400	mono	1
@@ -2941,7 +2946,10 @@ BBC Micro	BB2	Mode 2	160x256	8 colors	1
 BBC Micro	BB4	Mode 4	320x256	mono	1
 BBC Micro	BB5	Mode 5	160x256	4 colors	1
 BBC Micro	BBG	LdPic	up to 640x256		1
+BBC Micro	FLF	Turbo Rascal Syntax Error	up to 320x256		1
+Commodore VIC-20	BP (arbitrary)	Best Paint	160x192	9 colors	1
 Commodore VIC-20	FLF	Turbo Rascal Syntax Error		8 colors	1
+Commodore VIC-20	PIC0 (arbitrary)+PIC1	Picasso	88x176	10 colors	1
 Commodore 64	4BT	GoDot	320x200	16 colors	1
 Commodore 64	64C	8x8 font		mono	1
 Commodore 64	A	SEUCK sprites		16 colors	1
@@ -3074,6 +3082,7 @@ Oric	CHS	6x8 font		mono	1
 Oric	HIR, HRS		240x200	8 colors	1
 PC	EPA	Award BIOS logo			1
 PC	HS2	Handy Scanner 2000 POSTERING		mono	1
+PC	FLF	Turbo Rascal Syntax Error	320x200		1
 PC	FNT	Image 72 font		mono	1
 PC	MSP	Microsoft Paint version 1 or 2		mono	1
 PlayStation	TIM	TIM		32768 colors	1
@@ -3104,6 +3113,7 @@ ZX Spectrum	CH$	CHR$			1 or 2
 ZX Spectrum	CH4	4x8 font		mono	1
 ZX Spectrum	CH6	6x8 font		mono	1
 ZX Spectrum	CH8	8x8 font		mono	1
+ZX Spectrum	FLF	Turbo Rascal Syntax Error	256x192	15 colors	1
 ZX Spectrum	HLR	Attributes Gigascreen	32x24 characters		2
 ZX Spectrum	IFL	Multicolor 8x2	256x192	15 colors	1
 ZX Spectrum	IMG	Gigascreen	256x192		2
@@ -10282,3 +10292,48 @@ UUE
 ZOO
 JAR (JavaARchiver)
 
+
+>>> PV.exe
+JPG         Baseline JPEG 8R8.
+TIF IBM and Macintosh, image processing software and desktop
+            Applications such as Pagemaker, Designer, Photostyler.
+TGA         Targa compatible Software.
+PCX         Paintbrush, Publisher.
+PIC PcPaint, Painter.
+SCx,RIX     Colorix, Winrix, RIX-Present.
+CUT         Dr Halo, Halovision, A4TECH - Scanner.
+LBM,IFF     Deluxe Paint fuer IBM und Commodore.
+GIF         Autodesk Animator, VPIC, VGIF, CSHOW, GWS...
+BMP,RLE,DIB Windows 3.0 and OS/2 applications.
+IMG,DTA Kontron IBAS, ZEISS DSM electron microscopes. 
+PCD         Kodak Photo CD Base Format 768x512. 
+CVP         Passbildphotografiereinheit (Cannon/Kodak?) 512x512 24Bit.
+JPG,JIF     Baseline JPEG 9R6 ( Image Alchemy ), lossless JPEG.
+JTF TIFF with JPEG compression.
+CEG         Edsun Continuous Edge Graphics (Mode d und f).
+GEM-IMG,XIMG images from GEM and Ventura Publisher, Atari ST.
+MSP images from MS Paint ,Windows 2.0.
+MAC Images from Macintosh -Paint.
+PIC         Macintosh PICT in 1,2,4,8 BPS.
+WPG word processing with raster graphics integration Word Perfect.
+ICO         Windows Icons
+PMC         A4TECH scanner.
+SFI         SIS Framegrabber.
+EPS         Encapsulated Postscript mit Rasterdatenfeld.
+RAS Sun raster file uncompressed.
+VI          Jovian.
+DCX         FAX Format mit PCC.
+IM KO-23 satellite image with 109 block error correction.
+SGF Starwriter word processing with graphics (Star Division Hamburg).
+SAT Eumetsat Wettersatellitenbild (BTXSAT Austria)
+RAW
+PNM         UNIX portable Bitmap 1,8,24 Bps (Jef Poskanzer);
+ACB,BBM     IFF Brushes , ACBM Files.
+DAT images of the frame grabber Video 1000/2000 by Fricke.
+FLM Uncompressed images of the Screenmachine I and II by FAST.
+FLI         Autodesk Animator FLIC's.
+FLC         Autodesk Animator Pro FLIC's.
+ANI The first image from Amiga animation files.
+DL          Animation.
+GL images contained in GRASP files.
+TXT,DOC,HLP,BAT text files with up to 128x73 characters.

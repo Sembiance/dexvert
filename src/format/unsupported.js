@@ -114,6 +114,7 @@ export default
 		riseOfTheTriadLevel         : {name : "Rise of the Triad Level", ext : [".rtc", ".rtl"], magic : ["Rise of the Triad level"]},
 		scorchedEarthMountainData   : {name : "Scorched Earth Mountain Data", ext : [".mtn"], magic : ["Scorched Earth Mountain range data"]},
 		scummMainData               : {name : "SCUMM main data container", magic : ["SCUMM main data container"]},
+		settlers2Map				: {name : "Settlers II Map", ext : [".swd", ".wld"], magic : ["Settlers II map"]},
 		simCity2000SaveGameData     : {name : "SimCity 2000 Save Game Data", ext : [".sc", ".sc2"], magic : ["SimCity 2000 save game/map data"]},
 		simCityCity                 : {name : "SimCity City", ext : [".cty"], magic : ["SimCity City"]},
 		skunnyKartGameData          : {name : "Skunny Kart Library Game Data", ext : [".lid"], magic : ["Skunny Kart Library game data"]},

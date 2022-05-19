@@ -1,4 +1,4 @@
-# Unsupported File Formats (632)
+# Unsupported File Formats (633)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -186,7 +186,7 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
-image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - No known converter.
+image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
@@ -307,7 +307,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (334)
+## Other (335)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -570,6 +570,7 @@ other | SciTech Driver | .drv |
 other | Scorched Earth Mountain Data | .mtn | 
 other | Sculpt 3D Take | .take | 
 other | SCUMM main data container |  | 
+other | Settlers II Map | .swd .wld | 
 other | Show Partner Mastered Show | .pro | 
 other | SimCity 2000 Save Game Data | .sc .sc2 | 
 other | SimCity City | .cty | 

@@ -6,5 +6,5 @@ export class continuousEdge extends Format
 	ext         = [".ceg"];
 	magic       = ["Continuous Edge Graphic bitmap"];
 	unsupported = true;
-	notes       = "No known converter.";
+	notes       = "PV says it can convert these, but didn't work on my 1 and only sample file.";
 }

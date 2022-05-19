@@ -12,5 +12,5 @@ export class jpg extends Format
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;
 	verifyUntouched  = dexState => dexState.meta.format!=="JPEG";
 	metaProvider     = ["image"];
-	converters       = ["imageAlchemy"];	// some jpgs are corrupt but imageAlchemy seems to be very flexible and can handle them
+	converters       = ["imageAlchemy", "pv"];	// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but imageAlchemy & pv seems to be very flexible and can handle them
 }

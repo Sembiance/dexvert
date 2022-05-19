@@ -106,6 +106,7 @@ export const WEAK_VALUES =
 	/^IRIS Showcase template/,
 	/jffs2 filesystem data/,
 	/^Java.*KeyStore$/,
+	/^JSON data$/,
 	/^JVT NAL sequence/,
 	/^little|big endian ispell/,
 	/^locale data table/,

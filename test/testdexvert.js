@@ -601,7 +601,7 @@ await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"])
 
 xlog.info`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
 
-xlog.info`\n${(sampleFilePaths.length-failCount)} out of ${sampleFilePaths.length} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
+xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
 
 if(Object.keys(slowFiles).length>0)
 {

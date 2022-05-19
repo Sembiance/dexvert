@@ -60,6 +60,7 @@ for(const fileListLine of fileListRaw.split("\n"))
 // now let's try creating an RTF, doesn't always work
 await runUtil.run("helpdeco", ["-r", "-y", inputFilePath], {cwd : tmpDirPath, timeout : xu.MINUTE*4});
 
+const cachedPNGData = {};
 const rtfFilePath = (await fileUtil.tree(tmpDirPath, {nodir : true, regex : /\.rtf$/i}))?.[0];	// we assume only 1 RTF file output, hopefully no MVB's embed actual RTF files in baggage
 if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 {
@@ -75,6 +76,10 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 			{
 				const rtfPNG = hex => `\\pard {\\pict\\pngblip\n${hex}}`;
 				const availableFilename = availableFilenames.has(filename) ? filename : (availableFilenames.has(path.basename(filename, path.extname(filename))) ? path.basename(filename, path.extname(filename)) : null);
+
+				if(cachedPNGData[availableFilename])
+					return rtfPNG(cachedPNGData[availableFilename]);
+
 				const importFilePath = path.join(tmpDirPath, filename);
 				if(!(await fileUtil.exists(importFilePath)))
 				{
@@ -90,7 +95,23 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 
 				const convertDirPath = await fileUtil.genTempPath(tmpDirPath);
 				await Deno.mkdir(convertDirPath);
-				const {stdout : stdoutDex} = await runUtil.run("dexvert", ["--json", importFilePath, convertDirPath], {timeout : xu.MINUTE*5, timeoutSignal : "SIGKILL", killChildren : true});
+
+				// for speed reasons, for BMP files (the bulk of the embedded images), we try trist to just just do a straight convert, instead of going through dexvert, 99% of the time this works just fine
+				const importExt = path.extname(importFilePath)?.toLowerCase();
+				if(importExt===".bmp")
+				{
+					const outPngFilePath = await fileUtil.genTempPath(convertDirPath, ".png");
+					await runUtil.run("convert", [importFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", outPngFilePath], {timeout : xu.MINUTE*2});
+					
+					if(await fileUtil.exists(outPngFilePath))
+					{
+						availableFilenames.delete(availableFilename);
+						cachedPNGData[availableFilename] = (await Deno.readFile(outPngFilePath)).asHex();
+						return rtfPNG(cachedPNGData[availableFilename]);
+					}
+				}
+
+				const {stdout : stdoutDex} = await runUtil.run("dexvert", ["--json", importFilePath, convertDirPath], {timeout : xu.MINUTE*3, timeoutSignal : "SIGKILL", killChildren : true});
 				const r = xu.parseJSON(stdoutDex);
 				if(!r?.created?.files?.output?.length)
 				{
@@ -116,13 +137,15 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					}
 
 					availableFilenames.delete(availableFilename);
-					return rtfPNG((await Deno.readFile(tmpPNGFilePath)).asHex());
+					cachedPNGData[availableFilename] = (await Deno.readFile(tmpPNGFilePath)).asHex();
+					return rtfPNG(cachedPNGData[availableFilename]);
 				}
 				else if(importOutputFile.ext.toLowerCase()===".png")
 				{
 					// PNG files can be directly embedded into the file
 					availableFilenames.delete(availableFilename);
-					return rtfPNG((await Deno.readFile(importOutputFile.absolute)).asHex());
+					cachedPNGData[availableFilename] = (await Deno.readFile(importOutputFile.absolute)).asHex();
+					return rtfPNG(cachedPNGData[availableFilename]);
 				}
 				else if(importOutputFile.ext.toLowerCase()===".mp4")
 				{
@@ -136,7 +159,8 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 						xlog.error`Failed to generate thumb for match ${m} for MP4 result with ffmpeg from ${filename} with dimensions ${vidWidth}x${vidHeight} with stdout ${stdoutVid} and stderr ${stderrVid}`;
 						return rtfPNG(BROKEN_IMAGE_PNG_HEX);
 					}
-					return rtfPNG((await Deno.readFile(tmpPNGFilePath)).asHex());
+					cachedPNGData[availableFilename] = (await Deno.readFile(tmpPNGFilePath)).asHex();
+					return rtfPNG(cachedPNGData[availableFilename]);
 				}
 
 				xlog.warn`Unexpected import conversion for match ${m} result from import file ${filename} at ${importFilePath} conversion. Got: ${importOutputFile}`;

@@ -329,6 +329,7 @@ export default
 		logicSimCircuit              : {name : "LogicSim Circuit", magic : ["LogicSim circuit"]},
 		lotus123FormattingData       : {name : "Lotus 1-2-3 Formatting Data", ext : [".fm3"], magic : ["Formatting Data for Lotus 1-2-3 worksheet"]},
 		lotus123SQZCompressed        : {name : "Lotus 1-2-3 SQZ! Compressed", ext : ["wq!"], magic : ["Lotus 123 SQZ! compressed Worksheet"]},
+		lotsApproachView             : {name : "Lotus Approach View", ext : [".vew"], magic : ["Lotus Approach View"]},
 		lotusFreelancePresentation   : {name : "Lotus Freelance Presentation", ext : [".prz"], magic : ["Lotus Freelance Graphics Presentation"]},
 		lotusMagellanViewer          : {name : "Lotus Magellan Viewer", ext : [".vw2"], magic : ["Lotus Magellan Viewer"]},
 		neoPaintPallette             : {name : "NeoPaint Palette", ext : [".pal"], magic : ["NeoPaint Palette"]},

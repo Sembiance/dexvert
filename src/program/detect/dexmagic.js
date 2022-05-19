@@ -10,15 +10,17 @@ const DEXMAGIC_CHECKS =
 	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
 
 	// archive
-	"HTTP Response"       : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
-	"IFF CAT file"        : [{offset : 0, match : "CAT "}],
-	"IFF LIST file"       : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
-	"imageUSB"            : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
-	"MINICAT Archive"     : [{offset : 0, match : "MINICAT"}],
-	"pcxLib compressed"   : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
-	"SCR Package"         : [{offset : 0, match : "This is SCR Package File"}],
-	"TTW Compressed File" : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
-	"WAD2 file"           : [{offset : 0, match : "WAD2"}],
+	"Anna-Marie Archive"                    : [{offset : 0, match : "Anna-Marie"}],
+	"Anna-Marie Archive (alt)"              : [{offset : -160, match : "Anna-Marie"}],
+	"HTTP Response"                         : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
+	"IFF CAT file"                          : [{offset : 0, match : "CAT "}],
+	"IFF LIST file"                         : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
+	"imageUSB"                              : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
+	"MINICAT Archive"                       : [{offset : 0, match : "MINICAT"}],
+	"pcxLib compressed"                     : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
+	"SCR Package"                           : [{offset : 0, match : "This is SCR Package File"}],
+	"TTW Compressed File"                   : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
+	"WAD2 file"                             : [{offset : 0, match : "WAD2"}],
 
 	// audio
 	"EA BNK Audio" : [{offset : 0, match : "BNKl"}],
@@ -102,7 +104,7 @@ Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 	if(typeof check.match==="string")
 		check.match = (new TextEncoder()).encode(check.match);
 });
-const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => ((check.size || check.offset)+check.match.length)).max();
+const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => ((check.size || check.offset || 0)+(check.match?.length || 0))).max();
 
 export class dexmagic extends Program
 {
@@ -119,14 +121,40 @@ export class dexmagic extends Program
 			let match=true;
 			for(const check of checks)
 			{
-				if(Object.hasOwn(check, "offset"))
+				if(Object.hasOwn(check, "fn"))
 				{
-					for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
+					match = await check.fn(r);
+				}
+				else if(Object.hasOwn(check, "offset"))
+				{
+					if(check.offset<0)
 					{
-						if(buf[loc]!==check.match[i])
+						if(Math.abs(check.offset)>r.f.input.size)
 						{
 							match = false;
 							break;
+						}
+						
+						// check from back of file, requires reading in what is needed, only allows one match
+						const backBuf = await fileUtil.readFileBytes(r.inFile({absolute : true}), check.match.length, check.offset);
+						for(let i=0;i<check.match.length;i++)
+						{
+							if(backBuf[i]!==check.match[i])
+							{
+								match = false;
+								break;
+							}
+						}
+					}
+					else
+					{
+						for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
+						{
+							if(buf[loc]!==check.match[i])
+							{
+								match = false;
+								break;
+							}
 						}
 					}
 				}

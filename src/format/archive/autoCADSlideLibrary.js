@@ -6,5 +6,5 @@ export class autoCADSlideLibrary extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AIN";
 	ext        = [".slb"];
 	magic      = ["AutoCAD Slide Library", /^x-fmt\/104( |$)/];
-	converters = ["deark"];
+	converters = ["unautoCADSlideLibrary", "deark"];
 }

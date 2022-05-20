@@ -24,6 +24,7 @@ const DEXMAGIC_CHECKS =
 
 	// audio
 	"EA BNK Audio" : [{offset : 0, match : "BNKl"}],
+	"KORG File"    : [{offset : 0, match : "KORG"}],
 
 	// document
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],

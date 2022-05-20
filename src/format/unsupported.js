@@ -5,7 +5,9 @@ export default
 {
 	audio :
 	{
-		deluxeSoundSample : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]}
+		deluxeSoundSample    : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
+		kurzweilK2Sample     : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
+		performanceMusicBank : {name : "Performance Music Bank", magic : ["Performance music bank"]}
 	},
 
 	executable :
@@ -55,6 +57,7 @@ export default
 		personalFontMakerFont : {name : "Personal Font Maker Font/Character Set", ext : [".fnt", ".set"], magic : ["Personal Font Maker Font/character Set"]},
 		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
 		psionFont             : {name : "Psion Font", ext : [".fon"], magic : ["Psion fast Font", "Psion Font"]},
+		ripTermFont           : {name : "RIPterm Font", ext : [".fnt"], magic : ["RIPterm Font"]},
 		signumFont            : {name : "Signum Font", ext : [".e24"], magic : ["Bitmapped Signum!2 printer font (screen)"]},
 		texPackedFont         : {name : "TeX Packed Font", ext : [".pf"], magic : [/^TeX [Pp]acked font/]},
 		theDrawFont           : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"},
@@ -136,6 +139,7 @@ export default
 		/////////////////
 		// Programming //
 		/////////////////
+		actorImageSnapshot           : {name : "Actor Image Snapshot", ext : [".ima"], magic : ["Actor Image snapshot"], weakMagic : true},
 		alphaFourScript              : {name : "Alpha Four Script", ext : [".scp"], magic : ["Alpha Four Script"]},
 		amigaBASICProtectedFile      : {name : "Amiga BASIC Protected File", ext : [".bas"], magic : ["AmigaBASIC source (protected)"]},
 		amigaEModule                 : {name : "Amiga E Module", ext : [".m"], magic : ["Amiga E module", "E module/library"]},
@@ -320,6 +324,7 @@ export default
 		kaperskyAntiVirusLicenseKey  : {name : "Kapersky Anti-Virus License Key", ext : [".key"], magic : ["Kaspersky Anti-virus for DOS license"]},
 		klikNPlayGame                : {name : "Klik'n'Play Game", ext : [".gam"], magic : ["Klik'n'Play game"], weakMagic : true},
 		kodakPrecisionTransform      : {name : "Kodak Precision Transform", ext : [".pt"], magic : ["Kodak Precision Transform"]},
+		korgFile                     : {name : "KORG File", ext : [".pcg", ".bsq", ".arr", ".sty", ".sng"], magic : ["KORG File"], weakMagic : true},
 		kryoFluxRawStream            : {name : "KryoFlux Raw Stream", ext : [".raw"], magic : ["KryoFlux raw stream", /^fmt\/656( |$)/]},
 		labViewVirtualInstrument     : {name : "LabView Virtual Instrument", ext : [".vi"], magic : ["National Instruments, LabVIEW File, Virtual Instrument", "LABView Virtual Instrument"]},
 		ldiffDifferencesData         : {name : "LDIFF Differences Data", ext : [".lzd"], magic : ["LDIFF differences data"]},

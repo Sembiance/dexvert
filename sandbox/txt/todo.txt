@@ -6,22 +6,7 @@
 /---------------\
 | High Priority |
 \---------------/
-* Make a TUI.js deno project
-Use ansi codes to control cursor/screen directly. See:
-https://github.com/aristocratos/btop/blob/main/src/btop_tools.hpp
-https://github.com/aristocratos/btop/blob/main/src/btop_draw.hpp
-And there .cpp relatives.
-Make a showcase.js file that will show all features, to use as a test case and during development
-Have TUI expose Screen class that has .boxAdd() .boxRemove() and a array of boxes.
-It also exposes Box class with can include width/height properties which are numeric percentages (80 or 100) and/or rows/cols which are a numeric count of actual lines/columns. Maybe and align prop too for things within it. Box has a .add which adds drawable widgets like:
-Then start creating actual components like Text/Table/Log/etc that should implement by convention various methods.
-Do everything with arrays of arrays representing lines/cols. Each character (or multiple ansi codes for color) per array
-Multiple layers, thus can render bottom layer, then the one above it, and so on
-Then: Re-code dexbrute to use the new TUI.js
 
-* If deark adds better IFF IMAG support, re-process: 265 301 313 356 357 406 481 510 517 518 519 520 607 614 615 629 731 732 766 790 921 969
-  Ideally this search should return 321+ matches:
-  http://retromission.com/search?q=&qfields=content&qfields=filename&qfields=ext&formatid=cdiIFFImage&labelMatchType=any&label=&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&animated=&sortBy=_text_match&limit=100&nocache=true
 
 
 /-----------------\
@@ -47,6 +32,10 @@ Then: Re-code dexbrute to use the new TUI.js
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   See samples in: sandbox/samples/mail_news/
 
+* If deark adds better IFF IMAG support, re-process: 265 301 313 356 357 406 481 510 517 518 519 520 607 614 615 629 731 732 766 790 921 969
+  Ideally this search should return 321+ matches:
+  http://retromission.com/search?q=&qfields=content&qfields=filename&qfields=ext&formatid=cdiIFFImage&labelMatchType=any&label=&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&animated=&sortBy=_text_match&limit=100&nocache=true
+  
 
 /--------------\
 | Low Priority |
@@ -75,6 +64,8 @@ Then: Re-code dexbrute to use the new TUI.js
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
+
+* If I've made my Deno TUI lib, re-code dexbrute to use it
 
 * Add sparseimage conversion support (requires MacOS X qemu, see archive/sparseImage notes)
 

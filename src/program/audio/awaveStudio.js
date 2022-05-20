@@ -23,25 +23,27 @@ export class awaveStudio extends Program
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			Sleep(250)
 
-			Local $errorVisible = WinWaitActive("Unknown file type!", "", 5)
-			If $errorVisible Not = 0 Then
-				ControlClick("Unknown file type!", "", "[TEXT:&Cancel]")
-			Else
-				WinActivate("Select input files", "");
-				WinWaitActive("Select input files", "", 10)
-				ControlClick("Select input files", "", "[CLASS:Button; TEXT:&Next >]")
+			Func ErrorWindows()
+				WindowFailure("Attention!", "You must add at least one", -1, "{ENTER}")
+				WindowFailure("Unknown file type!", "", -1, "{ENTER}")
+				WindowFailure("", "The file doesn't contain", -1, "{ENTER}")
+			EndFunc
+			CallUntil("ErrorWindows", ${xu.SECOND*3})
 
-				WinWaitActive("Select output options", "", 10)
+			WinActivate("Select input files", "");
+			WinWaitActive("Select input files", "", 10)
+			ControlClick("Select input files", "", "[CLASS:Button; TEXT:&Next >]")
 
-				Local $formatWAV = ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
-				ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
+			WinWaitActive("Select output options", "", 10)
 
-				ControlSetText("Select output options", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
+			Local $formatWAV = ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
+			ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
 
-				ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
+			ControlSetText("Select output options", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
 
-				WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})
-			EndIf`
+			ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
+
+			WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})`
 	});
 	chain = "sox";
 	renameOut      = {

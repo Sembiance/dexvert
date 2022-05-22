@@ -1,4 +1,4 @@
-# Unsupported File Formats (648)
+# Unsupported File Formats (653)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -76,7 +76,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (30)
+## Document (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -106,6 +106,7 @@ document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/f
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
+document | PPrint Page | .pag | 
 document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered any of these files 'in the wild' yet.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
@@ -138,7 +139,7 @@ executable | Superbase Program | .sbp |
 
 
 
-## Font (38)
+## Font (39)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -161,6 +162,7 @@ font | LinkWay Font | .fmf |
 font | Lotus Impress Font | .ifl | 
 font | Lotus Raster Font | .lrf | 
 font | Lotus Vector Font | .lvf | 
+font | MaconCAD Font | .mcfont | 
 font | MacOS Font | .fnt | 
 font | MSX Kanji Font |  | 
 font | Personal Font Maker Font/Character Set | .fnt .set | 
@@ -182,7 +184,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (46)
+## Image (47)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -208,6 +210,7 @@ image | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Textur
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
 image | Lotus Smart Icon | .smi | 
+image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
@@ -319,7 +322,7 @@ music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFor
 
 
 
-## Other (338)
+## Other (339)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -414,6 +417,7 @@ other | Corel Shell Macro | .shm |
 other | Corncob 3D Data File | .cct | 
 other | Cornel Huth Compressed Library | .li_ | 
 other | Create Adventure Games Project | .cag | 
+other | Create+Shade Lights | .lights | 
 other | Creative Graphics Library Driver | .cgl | 
 other | Creative Signal Processor Microcode | .csp | 
 other | Cybervision Monitor Info |  | 
@@ -663,12 +667,13 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (20)
+## Poly (21)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
+poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else

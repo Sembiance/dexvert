@@ -10337,3 +10337,11 @@ ANI The first image from Amiga animation files.
 DL          Animation.
 GL images contained in GRASP files.
 TXT,DOC,HLP,BAT text files with up to 128x73 characters.
+
+
+>>> nulib2
+.SHK
+.BXY
+.SEA (as created by GS/ShrinkIt)
+.BSE
+.BNY and .BQY Binary II archives

@@ -33,7 +33,7 @@ export class nspark extends Program
 			return [parts.filePath, dateParse(`${parts.day}.${month}.${parts.year} ${parts.time}`, "dd.MM.yyyy HH:mm:ss")];
 		}).filter(v => !!v));
 		
-		for(const outputFile of r.f.files.new)
+		for(const outputFile of r.f.files.new || [])
 		{
 			const relPath = path.relative(r.outDir({absolute : true}), outputFile.absolute);
 			if(!Object.hasOwn(fileDates, relPath))

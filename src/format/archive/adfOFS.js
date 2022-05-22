@@ -8,7 +8,7 @@ export class adfOFS extends Format
 	ext           = [".adf"];
 	fileSize      = 901_120;
 	matchFileSize = true;
-	magic         = ["Amiga Disk image File (OFS)", "Amiga DOS disk", /^fmt\/1361( |$)/];
+	magic         = ["Amiga Disk image File (OFS", "Amiga DOS disk", /^fmt\/1361( |$)/];
 	notes         = xu.trim`
 		Some Amiga disks (such as voyager.adf) are non DOS (NDOS) disks with custom filesystems.
 		Others are crazy corrupted and produce lots of really bad files, such as 117.adf

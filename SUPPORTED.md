@@ -1,11 +1,11 @@
-# Supported File Formats (1,230)
+# Supported File Formats (1,231)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (152)
+## Archive (153)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -33,6 +33,7 @@ archive | [ARQ Archive](http://fileformats.archiveteam.org/wiki/ARQ) | .arq | [a
 archive | [Atari ATR Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ATR) | .atr | [atr](https://github.com/jhallen/atari-tools) [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/atr/) - Several ATR disks (such as Rambrandt.ATR) don't seem to extract. Deark (and other ATR extraction tools) find them corrupted.
 archive | [Atari ST Floppy Disk Image](http://fileformats.archiveteam.org/wiki/ST_disk_image) | .st | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/stDiskImage/)
 archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) | .slb | [unautoCADSlideLibrary](https://github.com/Sembiance/dexvert) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/autoCADSlideLibrary/)
+archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [6 sample files](https://telparia.com/fileFormatSamples/archive/binary2/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/binHex/)
 archive | BOLT Game Data Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [5 sample files](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/broderbundMohawk/)
@@ -146,7 +147,7 @@ archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archiv
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [12 sample files](https://telparia.com/fileFormatSamples/archive/ttw/)
 archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [6 sample files](https://telparia.com/fileFormatSamples/archive/turboPacker/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
-archive | [UU Encoded Archive](http://fileformats.archiveteam.org/wiki/Uuencoding) | .uue .uu | [uudecode](https://www.gnu.org/software/sharutils/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [7 sample files](https://telparia.com/fileFormatSamples/archive/uue/)
+archive | [UU Encoded Archive](http://fileformats.archiveteam.org/wiki/Uuencoding) | .uue .uu | [uudecode](https://www.gnu.org/software/sharutils/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [10 sample files](https://telparia.com/fileFormatSamples/archive/uue/)
 archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
 archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
@@ -157,7 +158,7 @@ archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/T
 archive | [XZ Archive](http://fileformats.archiveteam.org/wiki/XZ) | .xz | [xz](https://tukaani.org/xz/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/xz/)
 archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) | .ync .yenc | [yydecode](http://yydecode.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://telparia.com/fileFormatSamples/archive/yEnc/)
 archive | You Don't Know Jack Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://telparia.com/fileFormatSamples/archive/youDontKnowJack/)
-archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/zlib/)
+archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) | [9 sample files](https://telparia.com/fileFormatSamples/archive/zlib/)
 archive | [Zoo Archive](http://fileformats.archiveteam.org/wiki/Zoo) | .zoo | [zoo](https://packages.debian.org/jessie/zoo) [deark](https://entropymine.com/deark/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/zoo/)
 archive | [ZPAQ Archive](http://fileformats.archiveteam.org/wiki/ZPAQ) | .zpaq | [zpaq](http://mattmahoney.net/dc/zpaq.html) | [3 sample files](https://telparia.com/fileFormatSamples/archive/zpaq/)
 
@@ -223,7 +224,7 @@ document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://do
 document | Across Crossword Puzzle | .puz | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/acrossCrosswordPuzzle/)
 document | [Amazon Kindle eBook](http://fileformats.archiveteam.org/wiki/AZW) | .azw .azw3 .azw4 | [ebook_convert](https://calibre-ebook.com/) | [3 sample files](https://telparia.com/fileFormatSamples/document/amazonKindleBook/)
 document | Amiga Catalog Translation file | .ct | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/catalogTranslation/)
-document | Amiga ProWrite Document |  | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/amigaProWrite/)
+document | Amiga ProWrite Document |  | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/amigaProWrite/)
 document | AmigaBASIC Source Code | .bas | [ab2ascii](http://aminet.net/package/dev/misc/ab2ascii-1.3) | [10 sample files](https://telparia.com/fileFormatSamples/document/amigaBASIC/)
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [17 sample files](https://telparia.com/fileFormatSamples/document/amigaGuide/)
 document | askSam Database | .ask | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/askSamDatabase/)
@@ -244,7 +245,7 @@ document | Codeview Help | .hlp | [strings](https://www.gnu.org/software/binutil
 document | [Common Ground](http://fileformats.archiveteam.org/wiki/Common_Ground) | .dp | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/commonGround/) - Can probably only be converted properly with the Common Ground software itself, which I was unable to locate.
 document | CZ Help | hlp | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/czHelp/)
 document | Dagesh Document | .dgs | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/dageshDocument/)
-document | DataBase Professional Database | .db | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/dataBaseProfessional/)
+document | DataBase Professional Database | .db | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/dataBaseProfessional/)
 document | dBASE Multiple Index | .mdx | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/dBASEMultipleIndex/)
 document | [dBase/FoxBase/XBase Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf .frx .dbt | [soffice](https://www.libreoffice.org) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/dbf/)
 document | Decision Pad Worksheet | .dpw | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/decisionPadWorksheet/)
@@ -328,7 +329,7 @@ document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/so
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [6 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
 document | [PostScript](http://fileformats.archiveteam.org/wiki/Postscript) | .ps | [ps2pdf](https://ghostscript.com/) | [11 sample files](https://telparia.com/fileFormatSamples/document/ps/)
 document | [Power Point](http://fileformats.archiveteam.org/wiki/Microsoft_PowerPoint) | .ppt .pp .ppsx .pptm .pptx | [soffice](https://www.libreoffice.org) | [15 sample files](https://telparia.com/fileFormatSamples/document/powerPoint/)
-document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/professionalPage/)
+document | Professional Page Document |  | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/professionalPage/)
 document | Professional Write Document |  | [fileMerlin](http://www.file-convert.com/flmn.htm) | [8 sample files](https://telparia.com/fileFormatSamples/document/pfsWrite/)
 document | ProText Document |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/proText/)
 document | Psion Agenda | .agn | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/psionAgenda/)
@@ -353,8 +354,8 @@ document | Symantec Q&A Database File | .dtf | [strings](https://www.gnu.org/sof
 document | [SYmbolic LinK Spreadsheet](http://fileformats.archiveteam.org/wiki/SYLK) | .slk .sylk | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/sylkSpreadsheet/)
 document | Tempus Word Document | .twd | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/tempusWord/)
 document | Texinfo Document | .texinfo .texi | [texi2pdf](https://www.gnu.org/software/texinfo/) [texi2html](http://www.nongnu.org/texi2html/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/texInfo/)
-document | Text Engine Document | .std | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/textEngine/)
-document | Text Plus Document | .txp | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/textPlus/)
+document | Text Engine Document | .std | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/textEngine/)
+document | Text Plus Document | .txp | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/textPlus/)
 document | Timeworks Publisher/Publish It! | .dtp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/  It may be related to Greenstreet Publisher, see that.
 document | Twist Database file | .db | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/twistDB/)
 document | UltraCard Stack |  | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/ultraCardStack/)
@@ -455,7 +456,7 @@ image | Artist by David Eaton | .art | [recoil2png](http://recoil.sourceforge.ne
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/ArtMaster88) | .img | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/artMaster88/)
 image | [ArtMaster88](http://fileformats.archiveteam.org/wiki/Young_Picasso) | .yp | [deark](https://entropymine.com/deark/) | [1 sample file](https://telparia.com/fileFormatSamples/image/youngPicasso/)
 image | [ArtWorx Data Format](http://fileformats.archiveteam.org/wiki/ArtWorx_Data_Format) | .adf |  | [9 sample files](https://telparia.com/fileFormatSamples/image/artworx/)
-image | [Ascii-Art Editor](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .art | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://telparia.com/fileFormatSamples/image/asciiArtEditor/)
+image | [Ascii-Art Editor](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .art | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://telparia.com/fileFormatSamples/image/asciiArtEditor/)
 image | [Asperite](https://www.aseprite.org/) | .ase .aseprite | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/aseprite/)
 image | [Atari AP* Image](http://fileformats.archiveteam.org/wiki/AP*) | .256 .ap2 .apa .apc .plm .mic | [recoil2png](http://recoil.sourceforge.net) | [35 sample files](https://telparia.com/fileFormatSamples/image/apStar/)
 image | [Atari APAC3 APP Image](http://fileformats.archiveteam.org/wiki/Apac3_APP) | .app .aps .ils .pls | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://telparia.com/fileFormatSamples/image/apac3App/)
@@ -953,7 +954,7 @@ music | [Composer 669 Module](http://fileformats.archiveteam.org/wiki/669) | .66
 music | [Creative Music Format](http://fileformats.archiveteam.org/wiki/Creative_Music_Format) | .cmf | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/cmf/) - If I encounter formats that don't convert, try falling back to sandbox/app/cmf2mid.exe
 music | [D-Lusion Music Format](http://fileformats.archiveteam.org/wiki/DMF) | .dmf | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://telparia.com/fileFormatSamples/music/dLusionDMF/)
 music | DeFy Tracker | .dtm | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/deFyTracker/)
-music | Delitracker Customplay Module | .cus | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/deliTrackerCustom/)
+music | Delitracker Customplay Module | .cus | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://telparia.com/fileFormatSamples/music/deliTrackerCustom/)
 music | Delta Music | .dm2 .dm | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/deltaMusic/)
 music | [DigiBooster Module](http://fileformats.archiveteam.org/wiki/DigiBooster_v1.x_module) | .digi .dbm | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [10 sample files](https://telparia.com/fileFormatSamples/music/digiBooster/)
 music | Digital FM | .dfm | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/digitalFM/)
@@ -1046,7 +1047,7 @@ music | Pro Sound Maker | .psm | [zxtune123](https://zxtune.bitbucket.io/) | [4 
 music | Pro Tracker | .pt1 .pt2 .pt3 | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/proTracker/)
 music | Professional Sound Artists Module | psa | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/professionalSoundArtists/)
 music | Promizer Module |  | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/promizer/)
-music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | [xmp](http://xmp.sourceforge.net/) | [8 sample files](https://telparia.com/fileFormatSamples/music/pru2/)
+music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/pru2/)
 music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [mikmod2wav](https://github.com/Sembiance/mikmod2wav) [zxtune123](https://zxtune.bitbucket.io/) [awaveStudio](https://archive.org/details/awave70_zip) | [16 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 music | [Puma Tracker Module](http://fileformats.archiveteam.org/wiki/Pumatracker_module) | .puma | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/pumaTracker/)
 music | Quadra Composer | .emod | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [6 sample files](https://telparia.com/fileFormatSamples/music/quadraComposer/)
@@ -1063,7 +1064,7 @@ music | Riff Raff Module | .riff | [uade123](http://zakalwe.fi/uade) | [4 sample
 music | Rob Hubbard Module | .rh .rho | [uade123](http://zakalwe.fi/uade) | [6 sample files](https://telparia.com/fileFormatSamples/music/robHubbard/)
 music | Ron Klaren Module | .rk | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/ronKlaren/)
 music | Sam Coupe COP Module | .cop | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/samCoupeCOP/) - Not all files converted such as shanhai.cop
-music | Sam Coupe SNG Module | .sng | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/samCoupeSNG/) - Not all files converted, such as tetris.sng and shanhai.sng
+music | Sam Coupe SNG Module | .sng | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://telparia.com/fileFormatSamples/music/samCoupeSNG/) - Not all files converted, such as tetris.sng and shanhai.sng
 music | [Saturn Sound Format](http://fileformats.archiveteam.org/wiki/SSF) | .ssf .minissf .ssflib | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/ssf/) - Minissf files don't convert, not sure why yet.
 music | [sc68 Atari ST Music](http://fileformats.archiveteam.org/wiki/SC68) | .sc68 | [sndh2raw](https://github.com/Sembiance/sndh2raw) | [7 sample files](https://telparia.com/fileFormatSamples/music/sc68/)
 music | [Scream Tracker Module](http://fileformats.archiveteam.org/wiki/S3M) | .s3m .stm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) [adplay](https://github.com/adplug/adplay-unix) | [20 sample files](https://telparia.com/fileFormatSamples/music/s3m/)
@@ -1131,7 +1132,7 @@ Family | Name | Extensions | Converters | Notes
 other | All Identical Bytes |  |  | [2 sample files](https://telparia.com/fileFormatSamples/other/identicalBytes/)
 other | All Null Bytes |  |  | [1 sample file](https://telparia.com/fileFormatSamples/other/nullBytes/)
 other | [Amiga IFF Catalog](http://fileformats.archiveteam.org/wiki/IFF) | .catalog | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/iffCTLG/)
-other | Amigaguide Index | .index | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/amigaGuideIndex/)
+other | Amigaguide Index | .index | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/amigaGuideIndex/)
 other | AMOS Menu Bank | .abk | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/amosMenuBank/)
 other | Asymetrix ToolBook File | .tbk | [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/)
 other | Atari ST Guide Hypertext | .hyp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/atariSTGuideHypertext/)

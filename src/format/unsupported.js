@@ -10,6 +10,11 @@ export default
 		performanceMusicBank : {name : "Performance Music Bank", magic : ["Performance music bank"]}
 	},
 
+	document :
+	{
+		pPrintPage : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]}
+	},
+
 	executable :
 	{
 		aDotOutExecutable : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/, /^a\.out NetBSD/]},
@@ -53,6 +58,7 @@ export default
 		lotusRasterFont       : {name : "Lotus Raster Font", ext : [".lrf"], magic : ["Lotus Raster Font"]},
 		lotusVectorFont       : {name : "Lotus Vector Font", ext : [".lvf"], magic : ["Lotus Vector Font"]},
 		macOSFont             : {name : "MacOS Font", ext : [".fnt"], magic : ["Mac OSX datafork font, 'FONT'"]},
+		maxonCADFont          : {name : "MaconCAD Font", ext : [".mcfont"], magic : ["MaxonCAD Font"]},
 		msxKanjiFont          : {name : "MSX Kanji Font", magic : ["MSX Kanji Font"]},
 		personalFontMakerFont : {name : "Personal Font Maker Font/Character Set", ext : [".fnt", ".set"], magic : ["Personal Font Maker Font/character Set"]},
 		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
@@ -76,6 +82,11 @@ export default
 		directMusicStyle      : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
 		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]}
+	},
+
+	poly :
+	{
+		createShade3DScene : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true}
 	},
 	
 	other :
@@ -278,6 +289,7 @@ export default
 		corelPhotoPaintToneCurve     : {name : "Corel PhotoPaint Tone Curve", ext : [".crv"], magic : ["Corel PhotoPaint Tone Curve"]},
 		corelPhotoPaintUserFilter    : {name : "COREL Photo Paint User Defined Filter", ext : [".usr"], magic : ["COREL Photo Paint User Defined Filter"]},
 		corelShellMacro              : {name : "Corel Shell Macro", ext : [".shm"], magic : ["Corel shell macro"]},
+		createShadeLights            : {name : "Create+Shade Lights", ext : [".lights"], magic : ["Create+Shade Lights"], weakMagic : true},
 		cybervisionMonitorInfo       : {name : "Cybervision Monitor Info", magic : ["Cybervision monitor info"]},
 		cygnusEdDefaultSettings      : {name : "Cygnus Editor Default Settings", filename : ["ceddefaults"], magic : ["CygnusEd default settings"]},
 		cygnusEdMacros               : {name : "Cygnus Editor Macros", filename : ["cedmacros"], magic : ["CygnusEd macros"]},

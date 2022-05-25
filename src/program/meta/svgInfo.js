@@ -9,14 +9,17 @@ export class svgInfo extends Program
 	website = "https://github.com/Sembiance/dexvert/";
 	exec    = async r =>
 	{
-		// convert to PNG to get color count and opaque info
-		const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");
-		await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {cwd : r.f.root});
-		const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
-		await fileUtil.unlink(pngFilePath);
-
-		r.meta.opaque = imageInfo.opaque;
-		r.meta.colorCount = imageInfo.colorCount;
+		try
+		{
+			// convert to PNG to get color count and opaque info
+			const pngFilePath = await fileUtil.genTempPath(r.f.root, ".png");
+			await runUtil.run("resvg", ["--width", "500", r.inFile(), path.relative(r.f.root, pngFilePath)], {timeout : xu.MINUTE*2, cwd : r.f.root});
+			const imageInfo = await imageUtil.getInfo(pngFilePath, {timeout : xu.SECOND*30});
+			await fileUtil.unlink(pngFilePath);
+			r.meta.opaque = imageInfo.opaque;
+			r.meta.colorCount = imageInfo.colorCount;
+		}
+		catch {}
 
 		if(r.f.input.size<xu.MB*30)
 		{

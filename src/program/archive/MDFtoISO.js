@@ -19,6 +19,8 @@ export class MDFtoISO extends Program
 
 			ControlClick("MDF to ISO", "", "[CLASS:TButton; TEXT:Convert]")
 
+			WindowFailure("Error", "", 5, "{ENTER}")
+
 			Local $isComplete = WinWaitActive("Information", "", 30)
 			If $isComplete Then
 				ControlClick("Information", "", "[CLASS:TButton; TEXT:OK]")

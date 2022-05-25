@@ -129,7 +129,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 					const svgWidth = r?.phase?.meta?.width || r?.phase?.meta?.canvasWidth || 100;
 					const svgHeight = r?.phase?.meta?.height || r?.phase?.meta?.canvasHeight || 100;
 					const tmpPNGFilePath = await fileUtil.genTempPath(tmpDirPath, ".png");
-					const {stdout : stdoutSVG, stderr : stderrSVG} = await runUtil.run("resvg", ["--width", svgWidth.toString(), "--height", svgHeight.toString(), importOutputFile.absolute, tmpPNGFilePath]);
+					const {stdout : stdoutSVG, stderr : stderrSVG} = await runUtil.run("resvg", ["--width", svgWidth.toString(), "--height", svgHeight.toString(), importOutputFile.absolute, tmpPNGFilePath], {timeout : xu.MINUTE});
 					if(!(await fileUtil.exists(tmpPNGFilePath)))
 					{
 						xlog.error`Failed to convert SVG for match ${m} result with resvg from ${filename} to PNG with stdout ${stdoutSVG} and stderr ${stderrSVG}`;

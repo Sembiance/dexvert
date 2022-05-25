@@ -28,6 +28,17 @@ export class ffdec extends Program
 		await fileUtil.unlink(framesDirPath, {recursive : true});
 	};
 
+	verify = (r, dexFile) =>
+	{
+		const dexFileRel = path.relative(r.outDir({absolute : true}), dexFile.absolute);
+		
+		// some files like 20001pt1.swf produce huge 900+MB image files. Here we delete any files in the 'images' directory larger than 3x the original file size
+		if(dexFileRel.split("/")[0]==="images" && dexFile.size>(r.f.input.size*3))
+			return false;
+
+		return true;
+	};
+
 	renameOut  = false;
 
 	// send the output gif to ffmpeg to be turned into an MP4

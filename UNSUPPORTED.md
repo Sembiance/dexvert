@@ -344,7 +344,6 @@ other | Adventure Game Toolkit Strings | .d$$ |
 other | Aegis Pro Motion Geometry | .geo | 
 other | AIBB load Module | .module .aibb | 
 other | Alchemy Mindworks Resource | .res | 
-other | Alcohol 120% Media Descriptor | .mds | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/mdfMediaDescriptor/)
 other | Allways Printer Driver | .apc .apd .apf | 
 other | Alpha Four Script | .scp | 
 other | AmiAtlas File | .borders .coasts .index .islands .prefs .rivers .route .town .countries .country | 
@@ -646,6 +645,7 @@ other | Visual Smalltalk Enterprise Objects Library | .sll |
 other | Vocal-Eyes Set | .set | 
 other | WarCraft Map | .pud | 
 other | Watcom Profiler Sampling Data | .smp | 
+other | Winamp Advanced Visualization Studio File | .avs | 
 other | Windows Calendar | .cal | 
 other | Windows Help Full Text Search Index | .fts | 
 other | Windows Help Global Index Data | .gid | 

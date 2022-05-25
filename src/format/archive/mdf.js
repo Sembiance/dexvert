@@ -8,5 +8,5 @@ export class mdf extends Format
 	magic      = ["ISO 9660 CD image"];
 	weakMagic  = true;
 	priority   = this.PRIORITY.TOP;
-	converters = ["MDFtoISO", "IsoBuster"];
+	converters = ["iat", "MDFtoISO", "IsoBuster"];
 }

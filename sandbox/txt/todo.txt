@@ -61,6 +61,7 @@
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
+  Other 3Do extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Figure out why this "eats" my input: test/testdexvert.js --format=music/sid

@@ -6,6 +6,8 @@
 /---------------\
 | High Priority |
 \---------------/
+* Asymetrix Toolbook: http://fileformats.archiveteam.org/wiki/Asymetrix_Toolbook
+  See about installing the original software and see if I can open and extract files from the .tbk files
 
 
 
@@ -53,6 +55,9 @@
 * The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
   I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
   If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
+
+* Could add support for Commodore BASIC programs by using `petcat` (already installed with VICE) or the more capable Windows Vista+ C64List (v4.04 in sandbox/app/): https://www.facebook.com/c64List
+  Sadly the magic for these (See the files expanded within archive/lynxArhive) are very weak, so I'd almost certainly need to do some more checking after the fact to verify they are indeed BASIC programs
 
 * Add support for Acorn Replay videos (#625 CineClips)
   Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2

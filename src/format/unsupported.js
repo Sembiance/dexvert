@@ -64,6 +64,7 @@ export default
 		printPartnerFont      : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
 		psionFont             : {name : "Psion Font", ext : [".fon"], magic : ["Psion fast Font", "Psion Font"]},
 		ripTermFont           : {name : "RIPterm Font", ext : [".fnt"], magic : ["RIPterm Font"]},
+		serverNaturalFormatFont : {name : "X11 Server Natural Format font", ext : [".snf"], magic : ["X11 Server Natural Format font", "X11 SNF font data"], weakMagic : true},
 		signumFont            : {name : "Signum Font", ext : [".e24"], magic : ["Bitmapped Signum!2 printer font (screen)"]},
 		texPackedFont         : {name : "TeX Packed Font", ext : [".pf"], magic : [/^TeX [Pp]acked font/]},
 		theDrawFont           : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"},
@@ -81,7 +82,8 @@ export default
 		directMusicSegment    : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
 		directMusicStyle      : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
-		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]}
+		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
+		yamahaESEQ            : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 
 	poly :
@@ -290,6 +292,7 @@ export default
 		corelPhotoPaintUserFilter    : {name : "COREL Photo Paint User Defined Filter", ext : [".usr"], magic : ["COREL Photo Paint User Defined Filter"]},
 		corelShellMacro              : {name : "Corel Shell Macro", ext : [".shm"], magic : ["Corel shell macro"]},
 		createShadeLights            : {name : "Create+Shade Lights", ext : [".lights"], magic : ["Create+Shade Lights"], weakMagic : true},
+		crystalAtariBrowserModule    : {name : "Crystal Atari Browser Module", ext : [".mdl"], magic : ["CAB Module"]},
 		cybervisionMonitorInfo       : {name : "Cybervision Monitor Info", magic : ["Cybervision monitor info"]},
 		cygnusEdDefaultSettings      : {name : "Cygnus Editor Default Settings", filename : ["ceddefaults"], magic : ["CygnusEd default settings"]},
 		cygnusEdMacros               : {name : "Cygnus Editor Macros", filename : ["cedmacros"], magic : ["CygnusEd macros"]},
@@ -333,6 +336,7 @@ export default
 		iffPrefs                     : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
 		imagineStagingData           : {name : "Imagine Staging Data", ext : [".istg"], magic : ["Imagine Staging data"]},
 		indexerVolumeGUID            : {name : "Index Volume GUID", magic : ["IndexerVolumeGuid"]},
+		internationalPatchingSystem  : {name : "International Patching System", ext : [".ips"], magic : ["International Patching System", "IPS patch file"], weakMagic : true},
 		kaperskyAntiVirusLicenseKey  : {name : "Kapersky Anti-Virus License Key", ext : [".key"], magic : ["Kaspersky Anti-virus for DOS license"]},
 		klikNPlayGame                : {name : "Klik'n'Play Game", ext : [".gam"], magic : ["Klik'n'Play game"], weakMagic : true},
 		kodakPrecisionTransform      : {name : "Kodak Precision Transform", ext : [".pt"], magic : ["Kodak Precision Transform"]},
@@ -427,6 +431,8 @@ export default
 		videoMusicBoxProgression     : {name : "Video Music Box Progression", ext : [".prgn"], magic : ["Video Music Box Progression"]},
 		videoMusicBoxStyle           : {name : "Video Music Box Style", ext : [".stle"], magic : ["Video Music Box Style"]},
 		videoPadProject              : {name : "VideoPad Project", ext : [".vpj"], magic : ["VideoPad project"]},
+		visionaireMesh               : {name : "Visionaire Mesh", ext : [".mesh"], magic : ["Visionaire Mesh"]},
+		visionaireProject            : {name : "Visionaire Project", ext : [".vis"], magic : ["Visionaire project"]},
 		vistaDigitalElevationMap     : {name : "Vista Digital Elevation Map", ext : [".dem"], magic : ["Vista Digital Elevation Map"]},
 		vistaMakepathSession         : {name : "Vista Makepath Session", ext : [".ses"], magic : ["Vista Makepath Session (v1.0)"]},
 		visualFoxProCompoundIndex    : {name : "Visual FoxPro Compound Index", ext : [".cdx"], magic : ["Compound index MS Visual FoxPro"]},
@@ -444,6 +450,7 @@ export default
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
 		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72"]},
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
+		wordWorthPreferences         : {name : "WordWorth Preferences", magic : ["WordWorth preferences"]},
 		yafaCompressionOptions       : {name : "YAFA Compression Options", magic : ["YAFA compression options"]},
 		xCADModifierTable            : {name : "X-CAD Modifier Table", ext : [".obj"], magic : ["X-CAD Modifier Table"]},
 		xCADOverlay                  : {name : "X-CAD Overlay", magic : ["X-CAD overlay"]}

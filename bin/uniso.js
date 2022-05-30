@@ -148,9 +148,14 @@ async function extractHFSISO()
 			
 			const lineNum = +i;
 			
+			const {stdout : wdBefore} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
 			await runUtil.run(HCDNUM_BIN, [`${(lineNum+1)}`], HFS_RUN_OPTIONS);
-			await recurseHFS(path.join(subPath, hfsFilenameToUTF8(entry.filename)));
-			await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
+			const {stdout : wdAfter} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
+			if(wdBefore!==wdAfter)	// only recurse in if the hcd succeeded
+			{
+				await recurseHFS(path.join(subPath, hfsFilenameToUTF8(entry.filename)));
+				await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
+			}
 		}
 	};
 

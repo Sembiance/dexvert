@@ -5,6 +5,6 @@ export class ibmStoryboardStory extends Format
 	name           = "IBM Storyboard Story";
 	ext            = [".sh", ".sh~"];
 	forbidExtMatch = true;
-	magic          = ["IBM Storyboard Story"];
+	magic          = ["IBM Storyboard Story", "IBM PC Storyboard Story"];
 	converters     = ["strings"];
 }

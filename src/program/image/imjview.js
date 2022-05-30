@@ -32,6 +32,8 @@ export class imjview extends Program
 
 				WinWaitClose("Open", "", 5)
 
+				WindowFailure("Error", "Unable to display", 3, "{ENTER}")
+
 				$viewWindowControl = WaitForControl("[CLASS:imjview frame]", "", "[CLASS:imjview child]", ${xu.SECOND*5})
 				If $viewWindowControl Not = 0 Then
 					$viewDim = WinGetClientSize($viewWindowControl)

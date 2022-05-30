@@ -6,7 +6,7 @@ export class wav extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/WAV";
 	ext          = [".wav"];
 	mimeType     = "audio/x-wav";
-	magic        = ["RIFF/WAVe standard Audio", /^RIFF.* WAVE audio/, "Waveform Audio (PCMWAVEFORMAT)", /^fmt\/(6|141|142)( |$)/];
+	magic        = ["RIFF/WAVe standard Audio", /^RIFF.*WAVE [aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", /^fmt\/(6|141|142)( |$)/];
 	metaProvider = ["soxi"];
 	converters   = ["sox", "ffmpeg[format:wav][outType:mp3]"];
 }

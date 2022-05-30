@@ -57,7 +57,7 @@ export class Program
 			// execution
 			args             : {type : "function", length : [0, 1]},
 			allowDupOut      : {type : "boolean"},
-			bin              : {type : "string"},
+			bin              : {types : ["function", "string"]},
 			bruteFlags       : {type : Object},
 			chain            : {types : ["function", "string"]},
 			chainCheck       : {type : "function", length : [0, 3]},
@@ -156,7 +156,7 @@ export class Program
 		}
 		else if(this.loc==="dos")
 		{
-			r.dosData = {root : f.root, cmd : this.bin, xlog};
+			r.dosData = {root : f.root, cmd : typeof this.bin==="function" ? await this.bin(r) : this.bin, xlog};
 			r.dosData.args = this.args ? await this.args(r) : [];
 			if(this.dosData)
 				Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);

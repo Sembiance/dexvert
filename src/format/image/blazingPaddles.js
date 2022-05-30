@@ -9,4 +9,5 @@ export class blazingPaddles extends Format
 	fileSize      = [10240, 10242];
 	matchFileSize = true;
 	converters    = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`, "view64"];
+	verify        = ({meta}) => meta.colorCount>1;
 }

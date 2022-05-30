@@ -58,6 +58,10 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 		bootExecLines.push(`CD OUT`);
 		addBin(`..\\${path.basename(dosDirPath)}\\${cmd.replaceAll("/", "\\")} ${args.join(" ")}`);
 	}
+	else if(runIn==="absolute")
+	{
+		addBin(`${cmd.replaceAll("/", "\\")} ${args.join(" ")}`);
+	}
 	else
 	{
 		addBin(`${path.basename(dosDirPath)}\\${cmd.replaceAll("/", "\\")} ${args.join(" ")}`);

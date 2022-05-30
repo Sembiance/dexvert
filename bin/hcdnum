@@ -12,6 +12,7 @@ hls -alb | while IFS= read -r line; do
 				escapedFilename=${escapedFilename//\}/\\\}}
 				escapedFilename=${escapedFilename//\'/\\"'"}
 				#escapedFilename=${filename//\'/\\"'"}
+				echo $escapedFilename
 				eval "hcd $'$escapedFilename'"
 			fi
 

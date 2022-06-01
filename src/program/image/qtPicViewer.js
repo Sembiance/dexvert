@@ -9,38 +9,36 @@ export class qtPicViewer extends Program
 	bin      = "C:\\WINDOWS\\VIEWER.EXE";
 	args     = r => [r.inFile()];
 	qemuData = ({
-		script : `
+		alsoKill : ["qtnotify.exe", "ntvdm.exe"],
+		script   : `
+			Func ErrorWindows()
+				WindowFailure("", "Could not open file", -1, "{ESCAPE}")
+				WindowFailure("", "Could not get picture", -1, "{ESCAPE}")
+				WindowFailure("[CLASS:#32770]", "", -1, "{ESCAPE}")
+			EndFunc
+
 			;Wait for the picture sub window/control to appear
 			$mainWinActive = WinWaitActive("[TITLE:Picture Viewer]", "", 10)
 			If $mainWinActive Not = 0 Then
-				$errorVisible = WinWaitActive("[CLASS:#32770]", "", 1)
-				If $errorVisible Not = 0 Then
-					Send("{ESCAPE}")
-					Sleep(100)
-					Send("!f")
-					Sleep(200)
-					Send("x")
-				Else
-					WaitForControl("[TITLE:Picture Viewer]", "", "[CLASS:ViewerPictureClass]", ${xu.SECOND*10})
+				CallUntil("ErrorWindows", ${xu.SECOND*3})
 				
-					Sleep(500)
-
-					Send("!e")
-					Sleep(200)
-					Send("c")
-
-					Sleep(250)
-
-					Send("!f")
-					Sleep(200)
-					Send("x")
-
-					WinWaitClose("[TITLE:Picture Viewer]", "", 10)
-
-					SaveClipboardWithMSPaint("WINDOWS", "c:\\out\\out.png")
-				EndIf
-			EndIf
+				WaitForControl("[TITLE:Picture Viewer]", "", "[CLASS:ViewerPictureClass]", ${xu.SECOND*10})
 			
-			KillAll("viewer.exe")`});
+				Sleep(500)
+
+				Send("!e")
+				Sleep(200)
+				Send("c")
+
+				Sleep(250)
+
+				Send("!f")
+				Sleep(200)
+				Send("x")
+
+				WinWaitClose("[TITLE:Picture Viewer]", "", 10)
+
+				SaveClipboardWithMSPaint("WINDOWS", "c:\\out\\out.png")
+			EndIf`});
 	renameOut = true;
 }

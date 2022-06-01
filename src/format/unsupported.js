@@ -3,6 +3,11 @@ import {TEXT_MAGIC} from "../Detection.js";
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
 export default
 {
+	archive :
+	{
+		snatchItDiskImage : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
+	},
+
 	audio :
 	{
 		deluxeSoundSample    : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
@@ -46,6 +51,7 @@ export default
 		borlandGraphicsFont   : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
 		bradfordFont          : {name : "Bradford Font", ext : [".bf2"], magic : ["Bradford Font"]},
 		calamusFont           : {name : "Calamus Font", ext : [".cfn"], magic : ["Calamus Font Data"]},
+		chiWriterScreenFont   : {name : "ChiWriter Screen Font", ext : [".sft"], magic : ["ChiWriter Screen Font"]},
 		corelWiffenFont       : {name : "Corel Wiffen Font", ext : [".wfn"], magic : ["Corel Font/Symbol"]},
 		dosCodePageFont       : {name : "DOS Code Page Font", magic : ["DOS code page font data"]},
 		dynaCADDVectorFont    : {name : "DynaCADD Vector Font", ext : [".fnt"], magic : ["DynaCADD vector Font"]},
@@ -88,7 +94,8 @@ export default
 
 	poly :
 	{
-		createShade3DScene : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true}
+		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
+		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]}
 	},
 	
 	other :

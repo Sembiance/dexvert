@@ -8,7 +8,8 @@ export class wordStar extends Program
 	bin      = "c:\\WSWIN\\WSWIN.EXE";
 	args     = r => [r.inFile()];
 	qemuData = ({
-		script : `
+		alsoKill : ["ntvdm.exe"],	// Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
+		script   : `
 			WinWaitActive("[TITLE:WSWin 2.0]", "", 10)
 
 			Sleep(1000)
@@ -38,10 +39,7 @@ export class wordStar extends Program
 				Send("n")
 			EndIf
 			
-			WinWaitClose("[TITLE:WSWin 2.0]", "", 10)
-
-			; Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
-			KillAll("ntvdm.exe")`
+			WinWaitClose("[TITLE:WSWin 2.0]", "", 10)`
 	});
 	renameOut = true;
 }

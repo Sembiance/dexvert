@@ -7,7 +7,7 @@ export class wordDoc extends Format
 	ext            = [".doc", ".dot"];
 	forbidExtMatch = true;
 	magic          = ["Microsoft WinWord", "Microsoft Word document", "Microsoft Word for Windows", /^fmt\/(37|38|39|40|609|754)( |$)/, /^x-fmt\/45( |$)/];
-	converters     = ["fileMerlin", "antiword", "soffice"];
+	converters     = ["soffice", "fileMerlin", "antiword"];
 	processed      = dexState =>
 	{
 		Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="antiword")?.meta || {});

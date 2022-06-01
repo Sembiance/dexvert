@@ -23,11 +23,11 @@ export class qt_flatt extends Program
 			FileWriteLine($batFile, "cd c:\\out");
 			FileWriteLine($batFile, "QT-FLATT.EXE ${path.basename(r.inFile())}");
 			FileClose($batFile);`,
-		script        : `
+		alsoKill : ["QT-FLATT.EXE"],
+		script   : `
 			WaitForPID($qemuProgramPID, ${xu.MINUTE});
 			FileDelete("c:\\out\\QT-FLATT.BAT");
-			FileDelete("c:\\out\\QT-FLATT.EXE");
-			KillAll("QT-FLATT.EXE");`
+			FileDelete("c:\\out\\QT-FLATT.EXE");`
 	});
 	chain     = "dexvert";
 	renameOut = true;

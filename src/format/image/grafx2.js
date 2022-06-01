@@ -8,4 +8,5 @@ export class grafx2 extends Format
 	magic      = ["GrafX2 bitmap"];
 	mimeType   = "image/x-pkm";
 	converters = ["deark[module:pkm]", `abydosconvert[format:${this.mimeType}]`];
+	verify     = ({meta}) => meta.colorCount>1;
 }

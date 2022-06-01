@@ -71,7 +71,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 
 	await Deno.writeTextFile(configFilePath, bootExecLines.join("\n"), {append : true});
 
-	const runOptions = {timeout};
+	const runOptions = {timeout, timeoutSignal : "SIGKILL"};
 	runOptions.env = xlog.atLeast("trace") ? {DISPLAY : ":0"} : {SDL_VIDEODRIVER : "dummy"};
 
 	let scriptFilePath = null;

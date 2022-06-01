@@ -71,6 +71,8 @@ export class iso extends Format
 		// If it's a PhotoCD, rip using fuseiso (this is because regular mount doesn't work with bin/cue and bchunk produces tracks seperately which has images merged together and invalid dir structure for this format)
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
+		
+		const FALLBACK_CONVERTERS = ["fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]"];
 
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available
@@ -86,13 +88,13 @@ export class iso extends Format
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
 		// We try our regular converters first though, because sometimes the cue file is pretty useless
 		if(cueFile)
-			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, "fuseiso"];
+			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, ...FALLBACK_CONVERTERS];
 
 		if(isHFS)
 			return hfsConverters;
 		
 		// Finally, we appear to have just a 'simple' iso file. So just use uniso and fallback on fuseiso
-		return ["uniso", "fuseiso"];
+		return ["uniso", ...FALLBACK_CONVERTERS];
 	};
 
 	meta = async (inputFile, dexState) =>

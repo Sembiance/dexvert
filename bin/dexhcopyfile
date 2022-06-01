@@ -1,4 +1,5 @@
 #!/bin/bash
 
 #cmd="hcopy "'$'"'"$1"'"" '"$2"'"
-eval "hcopy $'$1' '""$2""'"
+#echo "hcopy -- $'$1' '""$2""'"
+eval "hcopy -- $'$1' '""$2""'"

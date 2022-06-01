@@ -10,6 +10,10 @@ export class UniExtract extends Program
 	bin      = "c:\\dexvert\\uniextract161\\UniExtract.exe";
 	args     = r => [r.inFile()];
 	qemuData = r => ({
+		// UniExtract uses a ton of sub-programs to do it's magic, any one of which can 'hang' and keep files locked, so let's kill all potential sub-programs
+		alsoKill : ["UniExtract.exe", "7z.exe", "arc.exe", "arj.exe", "AspackDie.exe", "bin2iso.exe", "BOOZ.EXE", "cdirip.exe", "clit.exe", "cmdTotal.exe", "E_WISE_W.EXE", "Expander.exe", "EXTRACT.EXE", "extractMHT.exe",
+			"helpdeco.exe", "i3comp.exe", "i5comp.exe", "i6comp.exe", "innounp.exe", "IsXunpack.exe", "kgb_arch_decompress.exe", "lzop.exe", "MsiX.exe", "NBHextract.exe", "nrg2iso.exe", "pea.exe", "PEiD.exe",
+			"RAIU.EXE", "STIX_D.EXE", "tee.exe", "trid.exe", "UHARC02.EXE", "UHARC04.EXE", "unlzx.exe", "UnRAR.exe", "UNUHARC06.EXE", "unzip.exe", "upx.exe", "uudeview.exe", "WDOSXLE.EXE", "WUN.EXE", "xace.exe"],
 		script : `
 			Local $mainWindow = WinWaitActive("Universal Extractor", "", 10)
 
@@ -34,50 +38,6 @@ export class UniExtract extends Program
 			WinWaitClose("Universal Extractor", "", 10)
 
 			ProcessWaitClose("UniExtract.exe", 5)
-
-			; UniExtract uses a ton of sub-programs to do it's magic, any one of which can 'hang' and keep files locked, so let's kill all potential sub-programs
-			KillAll("UniExtract.exe")
-			KillAll("7z.exe")
-			KillAll("arc.exe")
-			KillAll("arj.exe")
-			KillAll("AspackDie.exe")
-			KillAll("bin2iso.exe")
-			KillAll("BOOZ.EXE")
-			KillAll("cdirip.exe")
-			KillAll("clit.exe")
-			KillAll("cmdTotal.exe")
-			KillAll("E_WISE_W.EXE")
-			KillAll("Expander.exe")
-			KillAll("EXTRACT.EXE")
-			KillAll("extractMHT.exe")
-			KillAll("helpdeco.exe")
-			KillAll("i3comp.exe")
-			KillAll("i5comp.exe")
-			KillAll("i6comp.exe")
-			KillAll("innounp.exe")
-			KillAll("IsXunpack.exe")
-			KillAll("kgb_arch_decompress.exe")
-			KillAll("lzop.exe")
-			KillAll("MsiX.exe")
-			KillAll("NBHextract.exe")
-			KillAll("nrg2iso.exe")
-			KillAll("pea.exe")
-			KillAll("PEiD.exe")
-			KillAll("RAIU.EXE")
-			KillAll("STIX_D.EXE")
-			KillAll("tee.exe")
-			KillAll("trid.exe")
-			KillAll("UHARC02.EXE")
-			KillAll("UHARC04.EXE")
-			KillAll("unlzx.exe")
-			KillAll("UnRAR.exe")
-			KillAll("UNUHARC06.EXE")
-			KillAll("unzip.exe")
-			KillAll("upx.exe")
-			KillAll("uudeview.exe")
-			KillAll("WDOSXLE.EXE")
-			KillAll("WUN.EXE")
-			KillAll("xace.exe")
 			
 			CleanupSystray()`
 	});

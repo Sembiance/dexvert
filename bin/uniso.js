@@ -99,7 +99,7 @@ async function hcopyFile(src, dest)
 	// Wasn't able to figure out how to escape properly the \r sequence found in so many HFS filenames, without resorting to calling out to a bash script that does some fancy eval magic I'll never understand
 	// Sadly, due to the use of eval it horribly handles weird quotes and other things, which isn't a problem for 'src' since hls will binary escape those, but it is an issue for the dest
 	// So we need to copy to a temp safe filename and then rename it
-	await runUtil.run(path.join(xu.dirname(import.meta), "dexhcopyfile"), [src.replaceAll("'", "\\047"), safeFilePath], HFS_RUN_OPTIONS);
+	await runUtil.run(path.join(xu.dirname(import.meta), "dexhcopyfile"), [src.replaceAll("'", "\\047").replaceAll("*", "\\*"), safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
 
 	await Deno.rename(safeFilePath, dest);
 }

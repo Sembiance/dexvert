@@ -9,7 +9,7 @@ export class kwikDraw extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		alsoKill : ["ntvdm.exe"],
-		script : `
+		script   : `
 			WindowRequire("KWIKDRAW", "This is a Freeware", 2)
 			ControlClick("KWIKDRAW", "This is a Freeware", "[CLASS:Button; TEXT:OK]")
 			WinWaitClose("KWIKDRAW", "This is a Freeware", 10)

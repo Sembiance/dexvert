@@ -9,4 +9,5 @@ export class radiance extends Format
 	magic        = ["Radiance RGBE Image Format", "Radiance HDR image data", "Radiance High Dynamic Range bitmap", /^fmt\/591( |$)/];
 	metaProvider = ["image"];
 	converters   = ["pfsconvert", "convert", "nconvert", `abydosconvert[format:${this.mimeType}]`, "gimp"];
+	verify       = ({meta}) => meta.colorCount>1;
 }

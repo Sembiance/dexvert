@@ -13,7 +13,7 @@ export class corelPhotoPaint extends Program
 	args     = r => [r.inFile()];
 	qemuData = r => ({
 		alsoKill : ["cdrconv.exe"],
-		script : `
+		script   : `
 		$mainWindow = WindowRequire("Corel PHOTO-PAINT 8", "", 5)
 		WindowFailure("Corel PHOTO-PAINT - Error", "", 2, "{ENTER}")
 		

@@ -10,7 +10,8 @@ export class imjview extends Program
 	bin      = "c:\\dexvert\\IMPACJ11\\IMJVIEW.EXE";
 	args     = () => [];
 	qemuData = r => ({
-		script : `
+		alsoKill : ["ntvdm.exe"],
+		script   : `
 			#include <ScreenCapture.au3>
 
 			; extension must be .imj
@@ -43,9 +44,7 @@ export class imjview extends Program
 				Send("!i");
 				Sleep(250);
 				Send("x");
-			EndIf
-			
-			KillAll("ntvdm.exe")`});
+			EndIf`});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp]";
 }

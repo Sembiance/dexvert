@@ -9,6 +9,7 @@ export class MDFtoISO extends Program
 	bin      = "c:\\Program Files\\MDF to ISO\\mdftoiso.exe";
 	args     = () => [];
 	qemuData = r => ({
+		alsoKill : ["mdf2iso.exe"],	// MDFtoISO uses MDF2ISO behind the scenes
 		script : `
 			WinWaitActive("MDF to ISO", "", 10)
 
@@ -31,10 +32,7 @@ export class MDFtoISO extends Program
 
 			WinWaitClose("MDF to ISO", "", 10)
 
-			ProcessWaitClose("mdftoiso.exe", 10)
-
-			; MDFtoISO uses MDF2ISO behind the scenes
-			KillAll("mdf2iso.exe")`
+			ProcessWaitClose("mdftoiso.exe", 10)`
 	});
 	renameOut = false;
 	chain     = "dexvert";

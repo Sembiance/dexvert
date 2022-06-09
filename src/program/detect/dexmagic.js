@@ -46,6 +46,7 @@ const DEXMAGIC_CHECKS =
 	"Alias PIX"                   : [{offset : 4, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x18]}],
 	"Apple IIGS Preferred Format" : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],
+	"Auto/FX Image"               : [{offset : 0, match : [0x89, 0x41, 0x46, 0x58]}],
 	"CAD/Draw TVG"                : [{offset : 0, match : "TommySoftware TVG"}],
 	"CD-I IFF Image"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],

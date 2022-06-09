@@ -2,6 +2,8 @@ import {xu} from "xu";
 import {Format} from "../../Format.js";
 import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
+import {_MACBINARY_MAGIC} from "./macBinary.js";
+import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem"];
 
@@ -20,10 +22,15 @@ async function findCUEFile(dexState)
 
 export class iso extends Format
 {
-	name         = "CD Disc Image";
-	website      = "http://fileformats.archiveteam.org/wiki/ISO_image";
-	ext          = [".iso", ".bin", ".hfs", ".ugh"];
-	magic        = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS];
+	name           = "CD Disc Image";
+	website        = "http://fileformats.archiveteam.org/wiki/ISO_image";
+	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img"];
+	forbidExtMatch = [".img"];
+
+	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
+	weakMagic      = _MACBINARY_MAGIC;
+	forbiddenMagic = _NULL_BYTES_MAGIC;
+
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
 	notes        = xu.trim`
@@ -31,6 +38,7 @@ export class iso extends Format
 		Multi-track (such as Audio and Data) are also supported.
 		PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game.
 		NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.`;
+
 	auxFiles     = (input, otherFiles) =>
 	{
 		const otherExts = [".cue", ".toc"];
@@ -72,7 +80,7 @@ export class iso extends Format
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
 		
-		const FALLBACK_CONVERTERS = ["fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]"];
+		const FALLBACK_CONVERTERS = ["fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]"];
 
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available
@@ -120,7 +128,7 @@ export class iso extends Format
 		{
 			const infoR = await Program.runProgram(programid, inputFile, {xlog, autoUnlink : true});
 			return [programid.split("_")[0], infoR.meta];
-		})).filter(([, o]) => Object.keys(o).length>0));
+		}, 1)).filter(([, o]) => Object.keys(o).length>0));		// We restrict to 1 at a time (serial) so that the 'safe renaming' doesn't collide with each other
 
 		Object.assign(dexState.meta, meta);
 	};

@@ -18,6 +18,9 @@ export class rawPartition extends Format
 
 		const {flexMatch} = await import("../../identify.js");	// need to import this dynamically to avoid circular dependency
 		const isHFS = dexState.ids.some(id => HFS_MAGICS.some(matchAgainst => flexMatch(id.magic, matchAgainst)));
-		return [`uniso${isHFS ? "[hfs]" : ""}`];
+		const converters = [`uniso${isHFS ? "[hfs]" : ""}`];
+		if(isHFS)
+			converters.push("deark[module:hfs]");
+		return converters;
 	};
 }

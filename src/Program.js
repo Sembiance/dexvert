@@ -61,6 +61,7 @@ export class Program
 			bruteFlags       : {type : Object},
 			chain            : {types : ["function", "string"]},
 			chainCheck       : {type : "function", length : [0, 3]},
+			chainPost        : {type : "function", length : [0, 1]},
 			checkForDups     : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {type : "number", range : [1]},
@@ -503,6 +504,12 @@ export class Program
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
 						});	// parallelMap default is 10 files at once, or 33% of OS CPU count, whichever is smaller
 					}
+				}
+
+				if(this.chainPost)
+				{
+					try { await this.chainPost(r); }
+					catch(err) { xlog.error`Program chainPost ${fg.orange(this.programid)} threw error ${err}`; }
 				}
 			}
 		}

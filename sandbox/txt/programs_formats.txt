@@ -6008,7 +6008,7 @@ Write	Game	Archives	Previews and/or Thumbnails
 
 >>> nconvert (v6.88 (Windows would be v7.39)) - IMAGE (https://www.xnview.com/en/nconvert/  `nconvert -help`)
 Name     Write  Description
--1            : Automatic (Only for input)
+ -1            : Automatic (Only for input)
 [*       ]     : JFIF based file 
 [2bp     ]     : Pocket PC Bitmap 
 [2d      ]     : Amapi 
@@ -6024,7 +6024,7 @@ Name     Write  Description
 [acorn   ]     : Acorn Sprite 
 [adex    ]     : ADEX 
 [adt     ]     : AdTech perfectfax 
-[afdesign�]     : Affinity designer 
+[afdesign]     : Affinity designer 
 [afphoto ]     : Affinity photo 
 [afx     ]     : Auto F/X 
 [ai      ]     : Adobe Illustrator 

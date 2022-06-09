@@ -10,4 +10,5 @@ export class centauriLogoEditor extends Format
 	trustMagic = true;
 	fileSize   = 8194;
 	converters = ["recoil2png", "view64"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

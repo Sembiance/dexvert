@@ -1,4 +1,4 @@
-# Unsupported File Formats (666)
+# Unsupported File Formats (677)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -115,7 +115,7 @@ document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard 
 
 
 
-## Executable (20)
+## Executable (21)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -138,6 +138,7 @@ executable | QDOS Executable |  |
 executable | RISC OS Executable |  | 
 executable | SPARC Demand Paged Exe |  | 
 executable | Superbase Program | .sbp | 
+executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
 
 
 
@@ -188,25 +189,31 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (49)
+## Image (57)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
+image | Applause Palette | .pal | 
+image | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://telparia.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 image | Artworx Drawing | .cwg | 
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | Calamus Vector Document | .cvd | 
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
+image | EasyCAD Drawing | .fcd | 
 image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [4 sample files](https://telparia.com/fileFormatSamples/image/excelChart/) - Canvas claims support for this, but I couldn't get it to convert any of my samples.
 image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://telparia.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
+image | Freelance Graphics Drawing | .drw | 
+image | FXG Bitmap | .fxg | [3 sample files](https://telparia.com/fileFormatSamples/image/fxgBitmap/)
 image | Greenstreet Drawing | .art | [6 sample files](https://telparia.com/fileFormatSamples/image/greenstreetDrawing/)
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
@@ -219,7 +226,9 @@ image | Lotus Smart Icon | .smi |
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
+image | MVP Paint Animation | .af | 
 image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+image | p.OS Workbench Icon | .info | 
 image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://telparia.com/fileFormatSamples/image/painterRIF/)
 image | PC-Draft-CAD Drawing | .dwg | 
 image | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://telparia.com/fileFormatSamples/image/pcrImage/)
@@ -329,7 +338,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (344)
+## Other (346)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -552,6 +561,7 @@ other | Novell System PrintDef Device Definition | .pdf |
 other | NWiper Show | .nw | 
 other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
+other | OS/2 Dynamic Link Library | .dll | 
 other | PaperPort Slide Show | .fss | 
 other | Papillon Palette | .pal .ppal | 
 other | Pascal Compiled Unit | .tpu .ppu | 
@@ -629,6 +639,7 @@ other | Telix Compiled Script | .slc |
 other | TermInfo |  | 
 other | TeX Font Metric Data | .tfm | 
 other | TeX Virtual Font | .vf | 
+other | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
 other | Thunderbyte AV | .dat .eci .ec .sig sig | 
 other | THX Tracker Instrument | .ins | 
 other | TimeZone Data | .tz | 

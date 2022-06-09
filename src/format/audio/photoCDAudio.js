@@ -6,6 +6,6 @@ export class photoCDAudio extends Format
 	ext            = [".pcd"];
 	forbidExtMatch = true;
 	filename       = [/^audio\d+\.pcd$/i];
-	converters     = ["sox[type:cdda]"];
-	notes          = "Files audio03.pcd and audio04.pcd don't convert properly. If I use sox type 'lpc' I can kinda hear some structure, so not sure what variant these files are.";
+	converters     = ["sox[type:raw][rate:44100][channels:2][bits:16][encoding:signed-integer]", "sox[type:cdda]"];
+	notes          = "Some files are CDDA (audio06.pcd) but others are some sort of raw, which default to above (audio54.pcd)";
 }

@@ -100,6 +100,7 @@ const FLEX_SIZE_FORMATS =
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		naplps             : 20,
+		theDrawCOM         : 5,
 		threeDCK           : 10
 	},
 	video :
@@ -143,7 +144,9 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
+	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
+	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok

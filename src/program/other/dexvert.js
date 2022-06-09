@@ -27,7 +27,7 @@ export class dexvert extends Program
 
 		return [...a, "--", r.inFile(), r.outDir()];
 	};
-	runOptions = r => ({liveOutput : r.xlog.atLeast("trace")});
+	runOptions = r => ({liveOutput : r.xlog.atLeast("trace"), timeout : xu.MINUTE*10});
 	renameIn   = false;	// RunState.originalInput would be lost and dexvert should be able to handle any incoming filename
 	renameOut  = false;
 }

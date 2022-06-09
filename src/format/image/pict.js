@@ -9,5 +9,9 @@ export class pict extends Format
 	mimeType       = "image/pict";
 	magic          = ["QuickDraw/PICT bitmap", "Macintosh PICT Image", "Claris clip art", /^fmt\/341( |$)/, /^x-fmt\/80( |$)/];
 	metaProvider   = ["image"];
-	converters     = ["deark", "recoil2png", "nconvert", "qtPicViewer", "soffice[outType:png]", "hiJaakExpress", "corelPhotoPaint", "canvas", "picturePublisher", "convert"];	// convert has a habit of producing just a black square
+	converters     = [
+		"deark", "recoil2png", "nconvert", "qtPicViewer", "soffice[outType:png]", "hiJaakExpress", "canvas", "picturePublisher", "tomsViewer", "imageAlchemy",
+		"corelPhotoPaint",	// corelPhotoPaint sometimes just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01)
+		"convert"			// convert has a habit of just producing a black square
+	];
 }

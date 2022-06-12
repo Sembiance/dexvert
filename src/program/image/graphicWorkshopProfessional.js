@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {path} from "std";
 
@@ -9,41 +10,37 @@ export class graphicWorkshopProfessional extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		script : `
-			$mainWindowVisible = WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 10)
-			If $mainWindowVisible = 0 Then
-				$errorVisible = WinWaitActive("[TITLE:Message]", "", 7)
-				If $errorVisible Not = 0 Then
-					ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:Ok]")
-					ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:No]")
+			Func MainWindowOrFailure()
+				WindowFailure("[TITLE:Message]", "Error opening file", -1, "{ESCAPE}")
 
-					Sleep(1500)
+				; Program can't save convert an animated gif, sigh, such as image/macPageMillGIF/MURPH.GIF
+				WindowFailure("[CLASS:GraphicWorkshopProfessionalAnimateGIF]", "", -1, "{ESCAPE}")
 
-					ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:Ok]")
-					ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:No]")
-				EndIf
-			Else
-				Sleep(1000)
-				Send("!p")
-				Sleep(100)
-				Send("a")
-				Sleep(100)
+				return WinActive("[CLASS:GraphicWorkshopProfessionalPicture]", "")
+			EndFunc
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
 
-				$exportVisible = WinWaitActive("[TITLE:Destination]", "", 5)
-				If $exportVisible Not = 0 Then
-					ControlClick("[TITLE:Destination]", "", "[CLASS:Button; TEXT:PNG]")
+			Sleep(1000)
+			Send("!p")
+			Sleep(100)
+			Send("a")
+			Sleep(100)
 
-					WinWaitActive("[TITLE:Save To]", "", 30)
-					ControlClick("[TITLE:Save To]", "", "[CLASS:Edit]")
+			$exportVisible = WinWaitActive("[TITLE:Destination]", "", 5)
+			If $exportVisible Not = 0 Then
+				ControlClick("[TITLE:Destination]", "", "[CLASS:Button; TEXT:PNG]")
 
-					Send("{HOME}{SHIFTDOWN}{END}{SHIFTUP}{BACKSPACE}c:\\out\\out.png")
-					ControlClick("[TITLE:Save To]", "", "[CLASS:Button; TEXT:&Save]")
+				WinWaitActive("[TITLE:Save To]", "", 30)
+				ControlClick("[TITLE:Save To]", "", "[CLASS:Edit]")
 
-					WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 30)
-					Sleep(200)
-				EndIf
+				Send("{HOME}{SHIFTDOWN}{END}{SHIFTUP}{BACKSPACE}c:\\out\\out.png")
+				ControlClick("[TITLE:Save To]", "", "[CLASS:Button; TEXT:&Save]")
 
-				WinClose("[CLASS:GraphicWorkshopProfessionalPicture]")
+				WinWaitActive("[CLASS:GraphicWorkshopProfessionalPicture]", "", 30)
+				Sleep(200)
 			EndIf
+
+			WinClose("[CLASS:GraphicWorkshopProfessionalPicture]")
 			
 			Sleep(1000)
 

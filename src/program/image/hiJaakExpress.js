@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class hiJaakExpress extends Program
@@ -8,16 +9,19 @@ export class hiJaakExpress extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		script : `
-			$convertWindow = WinWaitActive("HiJaak Convert", "", 5)
-			If $convertWindow Not = 0 Then
-				Send("c:\\out\\out.bmp{ENTER}")
-				WinWaitClose("HiJaak Convert", "", 20)
-			EndIf
+			Func MainWindowOrFailure()
+				WindowFailure("HiJaak Convert", "Error", 2, "{ESCAPE}")
+				return WinActive("HiJaak Convert", "Save as")
+			EndFunc
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			
+			Send("c:\\out\\out.bmp{ENTER}")
+			WinWaitClose($mainWindow, "", 10)
 			
 			KillAll("loco.exe")
 			KillAll("Hijaak.exe")
 			KillAll("hjcvt32.exe")
-			
+
 			Send("{ESCAPE}")
 			Send("{ESCAPE}")
 			Send("{ESCAPE}")

@@ -258,7 +258,7 @@ export class qemu extends Server
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
-		this.xlog.info`${prelog(instance)} run with file ${(body.inFilePaths || [])[0]}`;
+		this.xlog.info`${prelog(instance)} run with cmd ${body.cmd} and file ${(body.inFilePaths || [])[0]}`;
 		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
 
 		let inOutErr = null;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (680)
+# Unsupported File Formats (681)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -142,7 +142,7 @@ executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89
 
 
 
-## Font (41)
+## Font (42)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -179,6 +179,7 @@ font | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3
 font | TeX Packed Font | .pf | 
 font | TheDraw Font | .tdf | [1 sample file](https://telparia.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 font | VFONT Font | .fnt | 
+font | VGAPaint 386 Font | .vfn | 
 font | Westwood Font | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/westwoodFont/)
 font | Wildfire 3D Font | .3dfont | 
 font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://telparia.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt

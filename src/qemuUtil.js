@@ -184,10 +184,12 @@ Func CallUntil($funcName, $max_duration)
 		If $done Not = 0 Then ExitLoop
 		Sleep(50)
 	Until TimerDiff($timer) > $max_duration
+
+	return $done
 EndFunc`,
 	Pause : `
-Func Pause()
-	MsgBox(0, "pause", "pause")
+Func Pause($msg="pause")
+	MsgBox(0, "pause", $msg)
 EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
@@ -195,7 +197,7 @@ const AUTO_INCLUDE_FUNCS = ["KillAll"];
 export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
 	let fullCmd = cmd;
-	const qemuData = {osid, timeout, outDirPath : f.outDir.absolute};
+	const qemuData = {osid, cmd, timeout, outDirPath : f.outDir.absolute};
 	
 	const inFiles = [f.input];
 	if(!noAuxFiles)

@@ -76,6 +76,7 @@ export default
 		texPackedFont           : {name : "TeX Packed Font", ext : [".pf"], magic : [/^TeX [Pp]acked font/]},
 		theDrawFont             : {name : "TheDraw Font", ext : [".tdf"], magic : ["TheDraw Fonts"], notes : "Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it"},
 		threeDCKFont            : {name : "3D Construction Kit Font", ext : [".3fd"], magic : [/^3D Construction Kit \d? ?Font$/]},
+		vgaPaint386Font         : {name : "VGAPaint 386 Font", ext : [".vfn"], magic : ["VGAPaint 386 Font"]},
 		vFontFont               : {name : "VFONT Font", ext : [".fnt"], magic : ["VFONT Font"]},
 		westwoodFont            : {name : "Westwood Font", ext : [".fnt"], magic : ["Westwood Font Format"]},
 		wildfire3DFont          : {name : "Wildfire 3D Font", ext : [".3dfont"], magic : ["Wildfire 3D Font"]},

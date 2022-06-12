@@ -1,4 +1,4 @@
-# Supported File Formats (1,263)
+# Supported File Formats (1,265)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -223,7 +223,7 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [10 sa
 
 
 
-## Document (165)
+## Document (166)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -374,6 +374,7 @@ document | Twist Database file | .db | [strings](https://www.gnu.org/software/bi
 document | UltraCard Stack |  | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/ultraCardStack/)
 document | [Universal Hint System Document](http://fileformats.archiveteam.org/wiki/UHS) | .uhs | [uhs2html](http://www.emulinks.de/software.html) | [10 sample files](https://telparia.com/fileFormatSamples/document/uhs/)
 document | V.I.P. Phonebook | .dat | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/vipPhonebook/)
+document | VGAPaint 386 Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/vgaPaint386Help/)
 document | Visual XBase Form | .ww | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/visualXBaseForm/)
 document | VX-REXX Windows/Object Info | .vry .vrw | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/vxRexxInfo/)
 document | Wildcat! WCX | .wcx | [wccnosy](http://www.dreamlandbbs.com/filegate/wcf/4utl/index.html) | [12 sample files](https://telparia.com/fileFormatSamples/document/wildcatWCX/)
@@ -870,7 +871,7 @@ image | [Sun Raster Bitmap](http://fileformats.archiveteam.org/wiki/Sun_Raster) 
 image | [Super IRG/Super IRG 2](http://fileformats.archiveteam.org/wiki/Super_IRG) | .irg .ir2 | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/superIRG/)
 image | [SymbOS Graphic](http://fileformats.archiveteam.org/wiki/SymbOS_graphic) | .sgx | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/symbOSGraphic/)
 image | [Synthetic Arts](http://fileformats.archiveteam.org/wiki/Synthetic_Arts) | .srt | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/srt/)
-image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | [deark](https://entropymine.com/deark/) [convert](https://www.imagemagick.org/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [hiJaakExpress](https://archive.org/details/hijaak-express) [imjview](https://github.com/Sembiance/dexvert/blob/master/qemu/winxp/data/app/IMPACJ11.ZIP) [gimp](https://gimp.org) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [46 sample files](https://telparia.com/fileFormatSamples/image/tiff/)
+image | [Tagged Image File Format](http://fileformats.archiveteam.org/wiki/TIFF) | .tif .tiff | [deark](https://entropymine.com/deark/) [convert](https://www.imagemagick.org/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [hiJaakExpress](https://archive.org/details/hijaak-express) [imjview](https://github.com/Sembiance/dexvert/blob/master/qemu/winxp/data/app/IMPACJ11.ZIP) [gimp](https://gimp.org) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [47 sample files](https://telparia.com/fileFormatSamples/image/tiff/)
 image | [Taquart Interlace Picture](http://fileformats.archiveteam.org/wiki/Taquart_Interlace_Picture) | .tip | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://telparia.com/fileFormatSamples/image/taquart/)
 image | [Technicolor Dream](http://fileformats.archiveteam.org/wiki/Technicolor_Dream) | .lum .col | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://telparia.com/fileFormatSamples/image/technicolorDream/)
 image | Teletext Packets | .t42 | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/teletextPackets/)
@@ -1147,7 +1148,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files
 
 
 
-## Other (77)
+## Other (78)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | All Identical Bytes |  |  | [2 sample files](https://telparia.com/fileFormatSamples/other/identicalBytes/)
@@ -1166,6 +1167,7 @@ other | Brief Compiled Macro | .cm | [strings](https://www.gnu.org/software/binu
 other | C-Worthy Error Librarian Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/cWorthyErrorLibrarian/)
 other | C-Worthy Form | .cwa | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/cWorthyForm/)
 other | C-Worthy Machine Overlay | .ovl | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/cWorthyOverlay/)
+other | Calendar Creator Plus Project | .cce .bin | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/calendarCreatorPlus/)
 other | CanDo Variables/Data | .var .data | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/canDoVariables/)
 other | Clarion Topspeed Data File | .tps | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/clarionTopspeed/)
 other | Compuserve Information Manager DB |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/other/compuserveInformationManagerDB/)
@@ -1265,7 +1267,7 @@ text | [Lingo Script](http://fileformats.archiveteam.org/wiki/CSS) |  |  | [10 s
 text | [Linux/UNIX/POSIX Shell Script](http://fileformats.archiveteam.org/wiki/Bourne_shell_script) | .sh .x11 .gnu .csh .tsch |  | [10 sample files](https://telparia.com/fileFormatSamples/text/unixShellScript/)
 text | [Lisp/Scheme](http://fileformats.archiveteam.org/wiki/Lisp) | .lsp |  | [12 sample files](https://telparia.com/fileFormatSamples/text/lisp/)
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk |  | [12 sample files](https://telparia.com/fileFormatSamples/text/Makefile/)
-text | [Module Description File](https://www.cubic.org/player/doc/node73.htm) | .mdz |  | [8 sample files](https://telparia.com/fileFormatSamples/text/moduleDescriptionFile/)
+text | [Module Description File](https://www.cubic.org/player/doc/node73.htm) | .mdz |  | [11 sample files](https://telparia.com/fileFormatSamples/text/moduleDescriptionFile/)
 text | NeoBook Document | .pub |  | [8 sample files](https://telparia.com/fileFormatSamples/text/neoBookDocument/)
 text | [OS/2 REXX Batch file](https://www.tutorialspoint.com/rexx/index.htm) | .cmd .rexx .rex |  | [10 sample files](https://telparia.com/fileFormatSamples/text/rexx/)
 text | [Pascal/Delphi Source File](http://fileformats.archiveteam.org/wiki/Pascal) | .pas .tp5 |  | [10 sample files](https://telparia.com/fileFormatSamples/text/pas/)

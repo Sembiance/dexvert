@@ -1,4 +1,4 @@
-# Unsupported File Formats (677)
+# Unsupported File Formats (680)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -189,7 +189,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (57)
+## Image (58)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -214,6 +214,7 @@ image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fas
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | Freelance Graphics Drawing | .drw | 
 image | FXG Bitmap | .fxg | [3 sample files](https://telparia.com/fileFormatSamples/image/fxgBitmap/)
+image | GraphicWorks Vector Drawing | .dvg | 
 image | Greenstreet Drawing | .art | [6 sample files](https://telparia.com/fileFormatSamples/image/greenstreetDrawing/)
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
@@ -252,7 +253,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (80)
+## Music (81)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -297,6 +298,7 @@ music | Korg Song | .sng |
 music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://telparia.com/fileFormatSamples/music/masterTracker/)
 music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/) - So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
+music | Melody Maker Sing | .mm | 
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 music | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXPerformance/)
 music | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXSequence/)
@@ -338,7 +340,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (346)
+## Other (347)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -562,6 +564,7 @@ other | NWiper Show | .nw |
 other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
 other | OS/2 Dynamic Link Library | .dll | 
+other | PA-RISC Object Code | .o | 
 other | PaperPort Slide Show | .fss | 
 other | Papillon Palette | .pal .ppal | 
 other | Pascal Compiled Unit | .tpu .ppu | 

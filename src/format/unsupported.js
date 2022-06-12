@@ -86,13 +86,14 @@ export default
 
 	image :
 	{
-		applausePalette          : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
-		calamusVectorDocument    : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
-		easyCADDrawing           : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
-		freelanceGraphicsDrawing : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
-		fxgBitmap                : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
-		mvpPaintAnimation        : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
-		pOSWorkbenchIcon         : {name : "p.OS Workbench Icon", ext : [".info"], magic : ["p.OS-Workbench icon"]}
+		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
+		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
+		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
+		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
+		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
+		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
+		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
+		pOSWorkbenchIcon          : {name : "p.OS Workbench Icon", ext : [".info"], magic : ["p.OS-Workbench icon"]}
 	},
 
 	music :
@@ -101,6 +102,7 @@ export default
 		directMusicStyle      : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
 		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
+		melodyMakerSong       : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
 		yamahaESEQ            : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 
@@ -393,6 +395,7 @@ export default
 		os2DLL                       : {name : "OS/2 Dynamic Link Library", ext : [".dll"], magic : ["OS/2 Dynamic Link Library"]},
 		paperPortSlideShot           : {name : "PaperPort Slide Show", ext : [".fss"], magic : ["PaperPort slide show"]},
 		papillonPalette              : {name : "Papillon Palette", ext : [".pal", ".ppal"], magic : ["Papillon Palette"]},
+		paRISCObjectCode             : {name : "PA-RISC Object Code", ext : [".o"], magic : [/PA-RISC.* object code/, /PA-RISC.* relocatable object/], weakMagic : true},
 		pascalCompiledUnit           : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit"]},
 		pcAnywhere                   : {name : "PCAnywhere Data", ext : [".bhf"], magic : ["PCAnywhere32 Data"]},
 		pgpKeyRing                   : {name : "PGP Key Ring", ext : [".key", ".pgp"], magic : ["Pretty Good Privacy (PGP) Public Keyring", "OpenPGP Public Key Version"]},

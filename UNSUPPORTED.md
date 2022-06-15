@@ -1,11 +1,11 @@
-# Unsupported File Formats (681)
+# Unsupported File Formats (689)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (33)
+## Archive (34)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -35,6 +35,7 @@ archive | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_D
 archive | Setup Program Archive | .mva | [6 sample files](https://telparia.com/fileFormatSamples/archive/setupMVA/)
 archive | SNATCH-IT Disk Image | .cp2 .img | 
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [1 sample file](https://telparia.com/fileFormatSamples/archive/teledisk/)
 archive | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://telparia.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFormatSamples/archive/unixArchiveOld/)
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
@@ -78,7 +79,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (31)
+## Document (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -107,6 +108,7 @@ document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fi
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
+document | P-Suite |  | [6 sample files](https://telparia.com/fileFormatSamples/document/pSuite/)
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
 document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered any of these files 'in the wild' yet.
@@ -341,13 +343,13 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (347)
+## Other (351)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
 other | 3D Construction Kit Object | .3od .obj | 
 other | 3D Construction Kit Shape Data | .3sd | 
-other | 3D Construction Kit World Data | .kit | 
+other | 3D Construction Kit World Data | .kwd .kit | 
 other | 3D Studio Project | .prj | 
 other | 3DFX Glide driver | .dxe | 
 other | 4D Paint Project | .4dp | [1 sample file](https://telparia.com/fileFormatSamples/other/fourDPaintProject/)
@@ -459,6 +461,7 @@ other | Dr.Web Anti-Virus Database | .vdb |
 other | DrawStudio Gradient |  | 
 other | DrawStudio Pattern |  | 
 other | Dune II Saved Game | .dat | 
+other | DVD Info File | .ifo .bup | 
 other | Dynamic Message System File | .msg | 
 other | Dynamix Bitnmap | .bmp | 
 other | Electronic Arts LIB container | .lib | 
@@ -546,6 +549,7 @@ other | Microsoft Serialized Certificate Store | .sst |
 other | Microsoft Visual C Files | .bsc .sbr .wsp | 
 other | Microsoft Visual C Library | .lib | 
 other | Microsoft Windows Program Information File | .pif | 
+other | Microsoft Word Glossary | .gly | 
 other | Microsoft Word Style Sheet | .sty | 
 other | MIDI Drum Machine | .drm | Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum
 other | MIDI-MAZE II Maze | .mze | 
@@ -556,6 +560,7 @@ other | MUI Builder Project | .muib |
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | NetCDF | .nc | 
+other | NetShield Virus Pattern Library | .dat | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
 other | Nintendo ROM | .nes | 
@@ -571,6 +576,7 @@ other | Papillon Palette | .pal .ppal |
 other | Pascal Compiled Unit | .tpu .ppu | 
 other | PatchMeister Driver | .pmdriver | 
 other | PCAnywhere Data | .bhf | 
+other | Peak Graphical Waveform | .pk | 
 other | PGP Key Ring | .key .pgp | 
 other | Platinen Layout Program Layout | .pla | 
 other | Platinen Layout Programm Bibliotheken/library | .bib | 
@@ -694,7 +700,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (22)
+## Poly (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
@@ -705,6 +711,7 @@ poly | Create+Shade 3D Scene | .3d |
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
+poly | Infini-D Scene | .ids .id4 | 
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
 poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
@@ -722,7 +729,7 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (18)
+## Video (19)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -739,6 +746,7 @@ video | Magic Lantern DIFF Animation | .diff | No known converter
 video | NTitler Animation | .nt | [8 sample files](https://telparia.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
 video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
+video | RATVID Video | .vdo | 
 video | RIFF ANIM | .paf | [9 sample files](https://telparia.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://telparia.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
 video | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://telparia.com/fileFormatSamples/video/sonyVegas/)

@@ -1,6 +1,7 @@
 import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
+// NOTE: Not ALL unsupported fromats are listed here. Some are marked as 'unsupported' in the various format/family/subfiles.js
 export default
 {
 	archive :
@@ -109,8 +110,14 @@ export default
 
 	poly :
 	{
+		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
-		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]}
+		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]}
+	},
+
+	video :
+	{
+		ratvidVideo : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]}
 	},
 	
 	other :
@@ -164,7 +171,7 @@ export default
 		threeDCKArea                : {name : "3D Construction Kit Area", ext : [".3ad"], magic : [/^3D Construction Kit \d? ?Area$/]},
 		threeDCKObject              : {name : "3D Construction Kit Object", ext : [".3od", ".obj"], magic : ["3D Construction Kit Object", /^3D Construction Kit (\d? ?)Object$/]},
 		threeDCKShapeData           : {name : "3D Construction Kit Shape Data", ext : [".3sd"], magic : ["3D Construction Kit Shape data", /^3D Construction Kit \d? ?Shape data$/]},
-		threeDCKWorldData           : {name : "3D Construction Kit World Data", ext : [".kit"], magic : ["3D Construction Kit World data", /^3D Construction Kit \d? ?World data$/]},
+		threeDCKWorldData           : {name : "3D Construction Kit World Data", ext : [".kwd", ".kit"], magic : ["3D Construction Kit World data", /^3D Construction Kit \d? ?World [Dd]ata/]},
 		warCraftMap                 : {name : "WarCraft Map", ext : [".pud"], magic : ["WarCraft map"]},
 		winzlePuzzle                : {name : "Winzle Puzzle", ext : [".wzl"], magic : ["Winzle puzzle"]},
 		wipeout2097TrackData        : {name : "Wipeout 2097 Track Data", ext : [".wad"], magic : ["Wipeout 2097 track data"]},
@@ -331,6 +338,7 @@ export default
 		drawStudioPattern            : {name : "DrawStudio Pattern", magic : ["DrawStudio Pattern"]},
 		drHardwareSysInfo            : {name : "Dr. Hardware Sysinfo", ext : [".dat"], magic : ["Dr. Hardware Sysinfo data"]},
 		drWebAntiVirusDatabas        : {name : "Dr.Web Anti-Virus Database", ext : [".vdb"], magic : ["Dr.Web Anti-Virus Database"]},
+		dvdInfoFile                  : {name : "DVD Info File", ext : [".ifo", ".bup"], magic : ["Video manager", "DVD Info file", /^x-fmt\/419( |$)/]},
 		dynamicMessageSystemFile     : {name : "Dynamic Message System File", ext : [".msg"], magic : ["Dynamic Message System"]},
 		ensoniqVFXPatchFile          : {name : "Ensoniq VFX Patch File", ext : [".vfx"], magic : ["SysEx File - Ensoniq"]},
 		expresswarePrinterDefFile    : {name : "Expressware Printer Definition File", ext : [".pdf"], magic : ["Expressware Printer Definition File"]},
@@ -385,10 +393,12 @@ export default
 		microsoftPrinterDefinition   : {name : "Microsoft Printer Definition", ext : [".prd"], magic : ["Microsoft Printer Definition"]},
 		microsoftProgramDatabase     : {name : "Microsoft Program Database", ext : [".pdb"], magic : ["Microsoft Program DataBase", "MSVC program database"]},
 		microsoftSecurityCatalog     : {name : "Microsoft Security Catalog", ext : [".cat"], magic : ["Microsoft Security Catalog"]},
+		microsoftWordGlossary        : {name : "Microsoft Word Glossary", ext : [".gly"], magic : ["Microsoft Word for DOS Glossary"]},
 		microsoftWordStyleSheet      : {name : "Microsoft Word Style Sheet", ext : [".sty"], magic : ["Microsoft Word for DOS Style sheet"]},
 		midiDrumMachine              : {name : "MIDI Drum Machine", ext : [".drm"], magic : ["Midi Drum Machine Drum"], notes : "Program and source at: /browse/111/130%20MIDI%20Tool%20Box.iso/drum"},
 		muiBuilderProject            : {name : "MUI Builder Project", ext : [".muib"], magic : ["MUI Builder project"]},
 		netCDF                       : {name : "NetCDF", ext : [".nc"], magic : ["NetCDF "]},
+		netShieldVirusPattern        : {name : "NetShield Virus Pattern Library", ext : [".dat"], magic : ["NetShield virus pattern library"]},
 		netwareMessage               : {name : "Netware Message", ext : [".msg"], magic : ["NetWare Message"]},
 		nortonChangeDirInfo          : {name : "Norton Change Directory Info", ext : [".ncd"], magic : ["Norton Change Directory info"]},
 		novellSystemPrintDef         : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},
@@ -399,6 +409,7 @@ export default
 		paRISCObjectCode             : {name : "PA-RISC Object Code", ext : [".o"], magic : [/PA-RISC.* object code/, /PA-RISC.* relocatable object/], weakMagic : true},
 		pascalCompiledUnit           : {name : "Pascal Compiled Unit", ext : [".tpu", ".ppu"], magic : ["Borland Turbo Pascal compiled Unit", "FreePascal compiled Unit", "Pascal unit"]},
 		pcAnywhere                   : {name : "PCAnywhere Data", ext : [".bhf"], magic : ["PCAnywhere32 Data"]},
+		peakGraphicalWaveform        : {name : "Peak Graphical Waveform", ext : [".pk"], magic : [/^fmt\/330( |$)/]},
 		pgpKeyRing                   : {name : "PGP Key Ring", ext : [".key", ".pgp"], magic : ["Pretty Good Privacy (PGP) Public Keyring", "OpenPGP Public Key Version"]},
 		platinenLayoutBibliotheken   : {name : "Platinen Layout Programm Bibliotheken/library", ext : [".bib"], magic : ["Platinen Layout Programm Bibliotheken/library"]},
 		platinenLayoutLayout         : {name : "Platinen Layout Program Layout", ext : [".pla"], magic : ["Platinen Layout Programm Layout"]},

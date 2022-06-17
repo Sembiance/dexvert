@@ -252,11 +252,21 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 
 				AutoItSetOption("WinTitleMatchMode", 2)
 
-				Func DismissWindowsErrors()
-					WindowDismiss("Program Error", "", "{ESCAPE}")
-					WindowDismiss("Application Error", "", "{ESCAPE}")
-				EndFunc
-				$mainWindow = CallUntil("DismissWindowsErrors", ${xu.SECOND})
+				; We can't do 'CallUntil()' or 'WindowDismiss()' here because we are within the Exit handler and can't call custom functions. sigh.
+				Local $exitDismissTimer = TimerInit()
+				Do
+					Local $exitErrorWin = WinActive("Program Error", "")
+					If $exitErrorWin Not = 0 Then
+						Send("{ESCAPE}")
+					EndIf
+
+					$exitErrorWin = WinActive("Application Error", "")
+					If $exitErrorWin Not = 0 Then
+						Send("{ESCAPE}")
+					EndIf
+
+					Sleep(50)
+				Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
 			EndFunc
 		`);
 

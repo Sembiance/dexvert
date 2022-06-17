@@ -1,4 +1,4 @@
-# Unsupported File Formats (689)
+# Unsupported File Formats (699)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -144,7 +144,7 @@ executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89
 
 
 
-## Font (42)
+## Font (44)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -152,11 +152,13 @@ font | AmigaOS Outline Font | .ofnt .font |
 font | AmiWrite Font |  | 
 font | Avery Font | .ff1 | 
 font | Banner Mania Font | .fnt | [19 sample files](https://telparia.com/fileFormatSamples/font/bannerManiaFont/)
+font | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
 font | Borland Graphics Font | .chr .bgi | 
 font | Bradford Font | .bf2 | 
 font | Calamus Font | .cfn | [10 sample files](https://telparia.com/fileFormatSamples/font/calamusFont/)
 font | ChiWriter Screen Font | .sft | 
 font | Corel Wiffen Font | .wfn | 
+font | DemoManiac Font | .font | 
 font | DOS Code Page Font |  | 
 font | DynaCADD Vector Font | .fnt | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
@@ -192,7 +194,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (58)
+## Image (61)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -204,6 +206,7 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | CAD Vantage Drawing | .dwg | 
 image | Calamus Vector Document | .cvd | 
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
@@ -242,9 +245,11 @@ image | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_gra
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
+image | Quattro Pro Clip Art | .clp | 
 image | Satori Paint | .cvs .rir | [6 sample files](https://telparia.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://telparia.com/fileFormatSamples/image/simpleVectorFormat/)
+image | SkyRoads Bitmap | .lzs | 
 image | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://telparia.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 image | Telepaint | .ss .st | [7 sample files](https://telparia.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://telparia.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
@@ -343,7 +348,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (351)
+## Other (356)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -414,6 +419,7 @@ other | Borland Overlay | .ovr |
 other | BOYAN Action Model | .bam | 
 other | Build Engine Demo Data | .dem | 
 other | Build Engine RFF Container | .rff | 
+other | Butcher Shape | .shape | 
 other | BWSB Music and Sound Engine Driver | .mse | 
 other | CAD/Draw Library | .tbl | 
 other | CAD/Draw Settings | .mpi | 
@@ -474,6 +480,7 @@ other | File Express Quick Scan | .qss |
 other | Flight Sim Toolkit Terrain Data | .ftd | 
 other | FoxPro Memo File | .fpt | 
 other | Fractal Design Painter Paper Texture | .pap | 
+other | Fractal Weave Parameters | .wwv | 
 other | Front Page Binary-Tree Index | .btr | 
 other | Full Tilt Pinball Data | .dat | 
 other | Game Boy ROM | .gb .gbc | 
@@ -560,6 +567,7 @@ other | MUI Builder Project | .muib |
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | NetCDF | .nc | 
+other | Netscape Address Book | .nab | 
 other | NetShield Virus Pattern Library | .dat | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
@@ -642,6 +650,7 @@ other | Super ZZT File | .szt |
 other | Superbase Form | .sbv | 
 other | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
 other | symlink |  | This format is a hardcoded match at the beginning of identify.js
+other | Syslinux COM32 Module | .c32 | 
 other | SYSLINUX loader | .sys | 
 other | TADS | .t .gam | 
 other | TCPDUMP Style Capture | .dmp .pcap | 
@@ -656,6 +665,7 @@ other | TimeZone Data | .tz |
 other | Turbo Lightning Environment | .env | 
 other | Turbo Modula-2 Symbol Data | .sym | 
 other | Turbo Pascal Help | .hlp | 
+other | TVPaint Project | .tvpp .deep .aur | 
 other | Type Library | .tlb | 
 other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://telparia.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 other | VCD Entries File | .vcd | 

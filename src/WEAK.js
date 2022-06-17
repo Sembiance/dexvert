@@ -12,6 +12,7 @@ export const WEAK_VALUES =
 	
 	// FILE: Very weak checks:
 	/^, /,
+	/^\(non-conforming\)$/,
 	/^0421 Alliant compact executable/,
 	/^370 sysV/,
 	/^370 XA sysV/,
@@ -65,6 +66,7 @@ export const WEAK_VALUES =
 	/^dBase I[IV]I? DBT/,
 	/^DIF \(/,
 	/^disk quotas file/,
+	/^DitPack archive data$/,
 	/DIY-Thermocam raw data/,
 	/^DOS .*backed up sequence/,
 	/^DOS 2\.0 backup id file/,
@@ -258,6 +260,7 @@ export const WEAK_VALUES =
 	/^Digital Micrograph Script$/,
 	/^Digital Video$/,
 	/^DiskDupe 5\.12 disk image$/,
+	/^DitPack compressed data$/,
 	/^Doodle bitmap$/,
 	/^Drazpaint \(C64\) bitmap$/,
 	/^Dr\. Halo Palette$/,
@@ -389,7 +392,7 @@ export const WEAK_VALUES =
 	/^Zoo filter compressed format$/,
 	/^ZX Microdrive cartridge image$/,
 	
-	// TRID: Checks for almost all zeroes or mostly just single repeating values:
+	// TRID: Checks for almost all zeroes or repeating values/patterns:
 	/^3D Studio Shape$/,
 	/^A-Robots Fighting Robot Object$/,
 	/^Acorn RISC OS font/,
@@ -412,8 +415,10 @@ export const WEAK_VALUES =
 	/^FastCopy DIM disk image$/,
 	/^File List Creator list$/,
 	/^Generic RIFF container$/,
+	/^GnomeVFS$/,
 	/^HandStory eBook$/,
 	/^HP Logical Interchange Format disk image$/,
+	/^HP200LX System Application's Help$/,
 	/^Id Software Quake II Cinematic video$/,
 	/^Immaginaria TNG 3D scene$/,
 	/^Install Maker( Pro)? project$/,
@@ -499,6 +504,8 @@ export const WEAK_VALUES =
 	/^SMS Super File$/,
 	/^Stunt Island Film$/,
 	/^Summation Document Image Information Load File$/,
+	/^Super-Card Ami II copier$/,
 	/^TeslaCrypt\/Cryptowall encrypted$/,
+	/^UNIMod created by APlayer$/,
 	/^Xilinx User Constraints File$/
 ];

@@ -250,20 +250,13 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 				KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")
 				${alsoKill.map(v => `KillAll("${v}")`).join("\n")}
 
-				Local $errorWindow = 0
-				Do
-					$errorWindow = WinActive("[TITLE:Program Error]", "")
-					If $errorWindow Not = 0 Then
-						ControlClick($errorWindow, "", "[CLASS:Button; TEXT:OK]")
-						ContinueLoop
-					EndIf
+				AutoItSetOption("WinTitleMatchMode", 2)
 
-					$errorWindow = WinActive("[TITLE:Application Error]", "")
-					If $errorWindow Not = 0 Then
-						ControlClick($errorWindow, "", "[CLASS:Button; TEXT:&Close]")
-						ContinueLoop
-					EndIf
-				Until $errorWindow = 0
+				Func DismissWindowsErrors()
+					WindowDismiss("Program Error", "", "{ESCAPE}")
+					WindowDismiss("Application Error", "", "{ESCAPE}")
+				EndFunc
+				$mainWindow = CallUntil("DismissWindowsErrors", ${xu.SECOND})
 			EndFunc
 		`);
 

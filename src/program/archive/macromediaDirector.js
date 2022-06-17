@@ -36,41 +36,15 @@ export class macromediaDirector extends Program
 			Sleep(200)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 
-			; Dismiss Error dialog
-			Local $errorDialog = WinWaitActive("[TITLE:Error]", "", 3)
-			If $errorDialog Not = 0 Then
-				ControlClick("[TITLE:Error]", "", "[CLASS:Button; TEXT:OK]")
-			EndIf
-
-			; Dismiss any replacement questions			
-			Local $whereIs
-			Do
-				Sleep(500)
-
-				$whereIs = WinActive("Locate replacement", "")
-				If $whereIs = 0 Then
-					$whereIs = WinActive("Where is", "")
-				EndIf
-
-				If $whereIs Not = 0 Then
-					Send("{ESCAPE}")
-					ContinueLoop
-				EndIf
-
-				Sleep(2500)
-			Until $whereIs = 0
-
-			; Dismiss Player Errors dialog
-			$errorDialog = WinWaitActive("Director Player Error", "", 3)
-			If $errorDialog Not = 0 Then
-				ControlClick("Director Player Error", "", "[CLASS:Button; TEXT:OK]")
-			EndIf
-
-			; Dismiss any missing font
-			Local $fontMissing = WinWaitActive("Missing Fonts", "", 3)
-			If $fontMissing Not = 0 Then
-				Send("{ENTER}")
-			EndIf
+			; Dismiss Player Errors and missing fonts
+			Func DismissWarnings()
+				WindowDismiss("[TITLE:Error]", "", "{ENTER}")
+				WindowDismiss("Locate replacement", "", "{ESCAPE}")
+				WindowDismiss("Where is", "", "{ESCAPE}")
+				WindowDismiss("Director Player Error", "", "{ENTER}")
+				WindowDismiss("Missing Fonts", "", "{ENTER}")
+			EndFunc
+			CallUntil("DismissWarnings", ${xu.SECOND*3})			
 
 			${r.inFile().toLowerCase().endsWith(".dir") ? `
 			Send("^4")

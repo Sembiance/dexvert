@@ -19,6 +19,7 @@ export class canvas extends Program
 
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
+			WindowFailure("DWGdirect Exception", "", -1, "{ENTER}")
 			WindowDismiss("Canvas", "Register Canvas to finish", "{ENTER}")
 			WindowDismiss("Canvas - Registration", "", "{ESCAPE}")
 			WindowDismiss("Choose Resolution", "", "{ENTER}")

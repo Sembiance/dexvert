@@ -37,9 +37,7 @@ export class UniExtract extends Program
 
 			WinWaitClose("Universal Extractor", "", 10)
 
-			ProcessWaitClose("UniExtract.exe", 5)
-			
-			CleanupSystray()`
+			ProcessWaitClose("UniExtract.exe", 5)`
 	});
 	renameOut = false;
 }

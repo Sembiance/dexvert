@@ -112,11 +112,6 @@ Func SaveClipboardWithMSPaint($winDir, $outFilePath)
 		WinWaitClose("[CLASS:MSPaintApp]", "", 10)
 	EndIf
 EndFunc`,
-	CleanupSystray : `
-Func CleanupSystray()
-	MouseMove(312, 756)
-	MouseMove(1000, 756, 20)
-EndFunc`,
 	WindowRequire : `
 Func WindowRequire($title, $text, $max_duration)
 	Local $win = WinWaitActive($title, $text, $max_duration)
@@ -257,16 +252,20 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 				Do
 					Local $exitErrorWin = WinActive("Program Error", "")
 					If $exitErrorWin Not = 0 Then
-						Send("{ESCAPE}")
+						Send("{ENTER}")
 					EndIf
 
 					$exitErrorWin = WinActive("Application Error", "")
 					If $exitErrorWin Not = 0 Then
-						Send("{ESCAPE}")
+						Send("{ENTER}")
 					EndIf
 
 					Sleep(50)
 				Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
+
+				; This will move the mouse over the systray area, causing any 'aborted' program icons to be removed
+				MouseMove(312, 756)
+				MouseMove(1000, 756, 20)
 			EndFunc
 		`);
 

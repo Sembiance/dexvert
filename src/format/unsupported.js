@@ -122,7 +122,8 @@ export default
 
 	video :
 	{
-		ratvidVideo : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]}
+		ratvidVideo    : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
+		screenCamVideo : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"]}
 	},
 	
 	other :
@@ -327,6 +328,7 @@ export default
 		corelPhotoPaintUserFilter    : {name : "COREL Photo Paint User Defined Filter", ext : [".usr"], magic : ["COREL Photo Paint User Defined Filter"]},
 		corelShellMacro              : {name : "Corel Shell Macro", ext : [".shm"], magic : ["Corel shell macro"]},
 		createShadeLights            : {name : "Create+Shade Lights", ext : [".lights"], magic : ["Create+Shade Lights"], weakMagic : true},
+		cubaseDrumMap                : {name : "Cubase Drum Map", ext : [".drm"], magic : ["Cubase Drum Map"]},
 		crystalAtariBrowserModule    : {name : "Crystal Atari Browser Module", ext : [".mdl"], magic : ["CAB Module"]},
 		cybervisionMonitorInfo       : {name : "Cybervision Monitor Info", magic : ["Cybervision monitor info"]},
 		cygnusEdDefaultSettings      : {name : "Cygnus Editor Default Settings", filename : ["ceddefaults"], magic : ["CygnusEd default settings"]},

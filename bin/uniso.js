@@ -108,6 +108,7 @@ async function hcopyFile(src, dest)
 async function extractHFSISO()
 {
 	const HCDNUM_BIN = path.join(xu.dirname(import.meta), "hcdnum");
+	let volumeYear=null;
 
 	const recurseHFS = async function recurseHFS(subPath)
 	{
@@ -117,7 +118,7 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-alb"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<year>\d{4})\s(?<filename>.+)$/) || {})?.groups);
+		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/) || {})?.groups);
 		for(const entry of entries)
 		{
 			if(entry.type==="d")
@@ -128,12 +129,12 @@ async function extractHFSISO()
 
 			// some files on HFS CD's have absurdly incorrect dates, like "Cool Demos/Demos/Troubled Souls Demo" on the Odyssey: Legend of Nemesis CD having a date of Jun 30, 1922
 			// so for those, fall back to something sane
-			const year = +entry.year;
+			const year = entry.yearOrTime.includes(":") ? volumeYear : +entry.yearOrTime;
 			let ts = argv.ts;
 			if(year && !isNaN(year) && year>=1972)
 			{
 				const month = {"jan" : 1, "feb" : 2, "mar" : 3, "apr" : 4, "may" : 5, "jun" : 6, "jul" : 7, "aug" : 8, "sep" : 9, "oct" : 10, "nov" : 11, "dec" : 12}[entry.month.toLowerCase()];
-				const dateString = `${entry.year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
+				const dateString = `${year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
 				ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
 			}
 			
@@ -160,6 +161,12 @@ async function extractHFSISO()
 	};
 
 	await runUtil.run("hmount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
+
+	// Get our volume creation year to use as the default year as some files only specify the time and not the year (WWDC.iso)
+	const {stdout : volInfo} = await runUtil.run("hvol", [], HFS_RUN_OPTIONS);
+	const volCreationParts = (volInfo.match(/Volume was created on (?<dayOfWeek>[A-Z][a-z]{2})\s(?<month>[A-Z][a-z]{2})\s(?<day>[\d\s]\d)\s(?<time>\d\d:\d\d:\d\d)\s(?<year>\d{4})/) || {})?.groups;
+	volumeYear = +volCreationParts.year;
+	
 	await recurseHFS("");
 	await runUtil.run("humount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
 	await fileUtil.unlink(path.join(MOUNT_DIR_PATH, ".hcwd"));

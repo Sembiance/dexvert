@@ -360,6 +360,7 @@ export const WEAK_VALUES =
 	/^Spectrum 512 Anispec animation$/,
 	/^Spectrum emulator snapshot$/,
 	/^SpeedScript document \(C64\)$/,
+	/^Sprint User Interface$/,
 	/^SQ2 compressed data$/,
 	/^Stunt Island Resource$/,
 	/^SuperCard Pro flux image$/,

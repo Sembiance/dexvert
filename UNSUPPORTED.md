@@ -1,4 +1,4 @@
-# Unsupported File Formats (701)
+# Unsupported File Formats (706)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -261,7 +261,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (81)
+## Music (82)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -328,6 +328,7 @@ music | RamTracker Module | .trk | [4 sample files](https://telparia.com/fileFor
 music | [Renoise Module](http://fileformats.archiveteam.org/wiki/Renoise_song) | .xrns .rns | [8 sample files](https://telparia.com/fileFormatSamples/music/renoise/) - The XRNS format is just a ZIP file with samples inside as FLACS and a song XML. The archive/zip format will end up handling that. I tried using renoise program, but it doesn't have CLI conversion nor did it even work anyways to render a song. Sigh.
 music | Roland Music Sequence | .svq | [7 sample files](https://telparia.com/fileFormatSamples/music/rolandMusicSequence/) - Awave Studio claims support for these, but I was not able to get it to convert any SVQ files.
 music | SBStudio Module | .pac | [3 sample files](https://telparia.com/fileFormatSamples/music/sbStudio/)
+music | Scrull Music File | .smf | 
 music | ShroomPlayer Module | .sho | [5 sample files](https://telparia.com/fileFormatSamples/music/shroomPlayer/)
 music | Skale Tracker Module | .skm | [5 sample files](https://telparia.com/fileFormatSamples/music/skaleTracker/)
 music | Sound Club Module | .sn .sn2 | [9 sample files](https://telparia.com/fileFormatSamples/music/soundClub/)
@@ -348,7 +349,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (357)
+## Other (361)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -478,6 +479,7 @@ other | Expressware Printer Definition File | .pdf |
 other | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 other | File Express Index Header | .ixh | 
 other | File Express Quick Scan | .qss | 
+other | Flashback Object | .obj | 
 other | Flight Sim Toolkit Terrain Data | .ftd | 
 other | FoxPro Memo File | .fpt | 
 other | Fractal Design Painter Paper Texture | .pap | 
@@ -491,6 +493,7 @@ other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .
 other | Gettext Machine Object | .gmo | 
 other | GfxLab24 Convolution Matrix |  | 
 other | GfxLab24 Filter |  | 
+other | GW-BASIC Protected Source | .bas | 
 other | Half-Life 2 Save Game | .sav | 
 other | High Speed Pascal Unit | .unit | 
 other | HomeBrew Level | .hle | 
@@ -544,6 +547,7 @@ other | MathCad Document | .mcd |
 other | Maxon Resource Creation Tool Data | .rct | 
 other | MDIFF Patch File | .mdf | 
 other | MegaPaint Printer Driver | .trb | 
+other | Memory Manager Resource Data |  | 
 other | MetaCreations Resource Composite File |  | 
 other | Micro Lathe Object | .lat | 
 other | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://telparia.com/fileFormatSamples/other/microsoftAgentCharacter/)
@@ -607,6 +611,7 @@ other | Quake II Sprite Reference | .sp2 |
 other | Quake Map | .bsp | 
 other | QuickText Titles |  | 
 other | QuickTime Installer Cache | .qdat .qda | 
+other | Raptor GLB Encrypted Container | .glb | 
 other | Reflections Camera | .kam | 
 other | Reflections Data | .r3 | 
 other | Reflections Material | .mat | 

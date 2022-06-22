@@ -6,5 +6,6 @@ export class sprint extends Format
 	ext            = [".spr"];
 	forbidExtMatch = true;
 	magic          = ["Sprint document"];
+	weakMagic      = true;
 	converters     = ["strings"];
 }

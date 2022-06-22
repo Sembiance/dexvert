@@ -7,10 +7,10 @@ export class tscompInfo extends Program
 	website  = "http://fileformats.archiveteam.org/wiki/TSComp";
 	loc      = "dos";
 	bin      = "TSCOMP.EXE";
-	args     = r => ["-l", r.inFile({backslash : true}), ">", "..\\OUT\\TSFILES.TXT"];
+	args     = r => ["-l", r.inFile({backslash : true}), ">", "..\\OUT\\DEXVERTL.TXT"];
 	postExec = async r =>
 	{
-		const listFilePath = path.join(r.f.root, "out", "TSFILES.TXT");
+		const listFilePath = path.join(r.f.root, "out", "DEXVERTL.TXT");
 		if(!(await fileUtil.exists(listFilePath)))
 		{
 			r.xlog.warn`Failed to find DEXVERTL.TXT from SWAGV.EXE execution: ${listFilePath}`;

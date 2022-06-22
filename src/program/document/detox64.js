@@ -15,6 +15,11 @@ export class detox64 extends Program
 	verify = async (r, dexFile) =>
 	{
 		const lines = (new TextDecoder("utf-8").decode(await fileUtil.readFileBytes(dexFile.absolute, Math.min(dexFile.size, xu.KB*100)))).trim().split("\n").filter(v => !!v);
+		
+		// a 1 line BASIC program is not only un-interesting, but is also usually a false conversion
+		if(lines.length===1)
+			return false;
+
 		if(lines.some(line => !line.startsWith("0") && line.trim().length>0 && !(/^\d+\s[^\n]+$/).test(line.trim())))
 			return false;
 

@@ -5,6 +5,7 @@ export class iat extends Program
 	website    = "https://www.berlios.de/software/iso9660-analyzer-tool/";
 	package    = "app-cdr/iat";
 	bin        = "iat";
+	unsafe     = true;
 	args       = r => ["-i", r.inFile(), "--cue", "-o", "out"];
 	cwd        = r => r.outDir();
 	renameOut  = false;

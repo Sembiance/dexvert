@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class fifView extends Program
@@ -9,18 +10,22 @@ export class fifView extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		dontMaximize : true,
-		script : `
+		alsoKill     : ["ntvdm.exe"],
+		script       : `
 		#include <ScreenCapture.au3>
 
-		WinWaitActive("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)
-		Sleep(1000)
-
-		Local $hasError = WinWaitActive("Error", "Insufficient Memory To Perform That Action", 4)
-		If $hasError Then
-			ControlClick("Error", "", "[CLASS:Button; TEXT:OK]")
-		Else
-			_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", WinGetHandle("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]"), 4, 42, 644, 441, False);
+		Local $hasError=0;
+		Func ErrorWindows()
+			$hasError = WindowDismiss("Error", "", "{ESCAPE}") = 0 ? $hasError : 1
+		EndFunc
+		CallUntil("ErrorWindows", ${xu.SECOND*3})
+		If $hasError Not = 0 Then
+			Exit 0
 		EndIf
+
+		WindowRequire("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 3)
+
+		_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", WinGetHandle("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]"), 4, 42, 644, 441, False);
 
 		Sleep(500)
 		Send("!f")

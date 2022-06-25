@@ -22,6 +22,17 @@ export class detox64 extends Program
 
 		if(lines.some(line => !line.startsWith("0") && line.trim().length>0 && !(/^\d+\s[^\n]+$/).test(line.trim())))
 			return false;
+		
+		// verify that all our lines are numbers and are in ascending order
+		const lineNumbers = lines.map(line => line.trim().split(" ")).filter(parts => parts.length===2).map(parts => parts[0]);
+		let prevLineNumber = -1;
+		for(const lineNumber of lineNumbers)
+		{
+			if(!lineNumber.isNumber() || +lineNumber<=prevLineNumber)
+				return false;
+
+			prevLineNumber = +lineNumber;
+		}
 
 		return true;
 	};

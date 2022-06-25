@@ -1,11 +1,11 @@
-# Unsupported File Formats (706)
+# Unsupported File Formats (725)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (34)
+## Archive (35)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -13,6 +13,7 @@ archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) 
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 archive | Authorware Application/Package | .app .apw | [9 sample files](https://telparia.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
+archive | BZIP Compressed Archive | .bz | [2 sample files](https://telparia.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://telparia.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
@@ -79,7 +80,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (32)
+## Document (36)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -95,6 +96,7 @@ document | Cloanto C1-Text Document | .c1text | [1 sample file](https://telparia
 document | Dart Hypertext |  | [5 sample files](https://telparia.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
 document | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://telparia.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 document | [Epic TFP Document](https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40) | .tfp | Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format
+document | Excellence! Document | .doc | 
 document | FinalCalc Spreadsheet | .sheet | [1 sample file](https://telparia.com/fileFormatSamples/document/finalCalcSpreadsheet/)
 document | [Flow Charting](http://fileformats.archiveteam.org/wiki/Flow_Charting) | .cht .fcd .gfc .pdq .fc5 .fcx | [3 sample files](https://telparia.com/fileFormatSamples/document/flowCharting/)
 document | [Folio Database](http://fileformats.archiveteam.org/wiki/Folio_Infobase) | .nfo .sdw .fff .def | 
@@ -102,13 +104,16 @@ document | [Greenstreet Publisher Document/Snippet](http://fileformats.archivete
 document | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://telparia.com/fileFormatSamples/document/hancomWord/)
 document | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://telparia.com/fileFormatSamples/document/hotHelpText/)
 document | I.E.S. HyperText | .hyp | [6 sample files](https://telparia.com/fileFormatSamples/document/iesHyperText/)
+document | InterSpread Spreadsheet |  | 
 document | Lotus Symphony Worksheet | .wk1 wr1 | 
 document | [Lotus Word Pro](http://fileformats.archiveteam.org/wiki/Lotus_Word_Pro) | .lwp | [1 sample file](https://telparia.com/fileFormatSamples/document/lotusWordPro/)
 document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
-document | P-Suite |  | [6 sample files](https://telparia.com/fileFormatSamples/document/pSuite/)
+document | P-Suite |  | [5 sample files](https://telparia.com/fileFormatSamples/document/pSuite/)
+document | Pen Pal Database | .flr | 
+document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
 document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered any of these files 'in the wild' yet.
@@ -144,7 +149,7 @@ executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89
 
 
 
-## Font (44)
+## Font (45)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -178,6 +183,7 @@ font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .
 font | PrintPartner Font | .font | 
 font | Psion Font | .fon | 
 font | RIPterm Font | .fnt | 
+font | RISC OS Outline Font Data | outlines | 
 font | Signum Font | .e24 | 
 font | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://telparia.com/fileFormatSamples/font/speedo/)
 font | TeX Packed Font | .pf | 
@@ -194,7 +200,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (61)
+## Image (62)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -246,6 +252,7 @@ image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sam
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 image | Quattro Pro Clip Art | .clp | 
+image | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://telparia.com/fileFormatSamples/image/rleTRE/)
 image | Satori Paint | .cvs .rir | [6 sample files](https://telparia.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://telparia.com/fileFormatSamples/image/simpleVectorFormat/)
@@ -261,10 +268,12 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (82)
+## Music (85)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
+music | ADrum Drumkit | .kit | 
+music | ADrum Track |  | 
 music | Aero Studio | .aero | [2 sample files](https://telparia.com/fileFormatSamples/music/aeroStudio/)
 music | All Sound Tracker Module | .ast | [2 sample files](https://telparia.com/fileFormatSamples/music/allSoundTracker/)
 music | AND XSynth Module | .amx | [1 sample file](https://telparia.com/fileFormatSamples/music/andXSynth/)
@@ -341,6 +350,7 @@ music | [SVArTracker Module](https://www.kvraudio.com/product/svartracker-by-sva
 music | Synder SNG-Player Module | .sng | [5 sample files](https://telparia.com/fileFormatSamples/music/synderSNG/) - An old 3bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/
 music | Synder Tracker Module | .sng | [2 sample files](https://telparia.com/fileFormatSamples/music/synderTrackerModule/)
 music | T'SoundSystem Source Module | .tss | [4 sample files](https://telparia.com/fileFormatSamples/music/tss/)
+music | TechnoSound Turbo 2 Track | .track | [1 sample file](https://telparia.com/fileFormatSamples/music/technoSoundTurbo2Track/)
 music | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://telparia.com/fileFormatSamples/music/t0ast/)
 music | TraX Music Track | .mts | [5 sample files](https://telparia.com/fileFormatSamples/music/traXTrack/)
 music | VGM Music Maker Module | .vge | [4 sample files](https://telparia.com/fileFormatSamples/music/vgmMusicMaker/)
@@ -349,10 +359,11 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (361)
+## Other (370)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
+other | 3D Construction Kit Brushes | .3bd | 
 other | 3D Construction Kit Object | .3od .obj | 
 other | 3D Construction Kit Shape Data | .3sd | 
 other | 3D Construction Kit World Data | .kwd .kit | 
@@ -367,6 +378,7 @@ other | Adobe Hyphenation/Spelling Dictionary | .hyp |
 other | Adobe Multiple Master Metrics | .mmm | 
 other | Adobe Photoshop Gradient | .grd | 
 other | Adobe Type Manager Font Information | .inf | 
+other | Adorage preferences |  | 
 other | Adventure Game Toolkit Strings | .d$$ | 
 other | Aegis Pro Motion Geometry | .geo | 
 other | AIBB load Module | .module .aibb | 
@@ -458,6 +470,7 @@ other | dBase Index File | .ntx |
 other | dBase Query | .qbe | 
 other | dBase Update | .upd | 
 other | DeHackEd Patch | .deh | 
+other | DemoManiac Vectors | .dat | 
 other | DemoShield Demo | .dbd .bdd | 
 other | Descent Level | .rdl | 
 other | Digita Organiser Theme |  | 
@@ -541,6 +554,7 @@ other | Lua bytecode |  |
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
 other | MagiC64 Preferences | .prefs | 
+other | MapBrowser/MapWriter Vector Map Data | cbd | 
 other | Maple Common Binary | .m | 
 other | MASI Music Driver | .mus | 
 other | MathCad Document | .mcd | 
@@ -582,7 +596,9 @@ other | Novell System PrintDef Device Definition | .pdf |
 other | NWiper Show | .nw | 
 other | Oberon Symbol | .sym | 
 other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples/unsupported/olbLib/)
+other | OS/2 Device Driver | .sys | 
 other | OS/2 Dynamic Link Library | .dll | 
+other | OS/2 Extended File Attributes |  | 
 other | PA-RISC Object Code | .o | 
 other | PaperPort Slide Show | .fss | 
 other | Papillon Palette | .pal .ppal | 
@@ -622,6 +638,8 @@ other | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffec
 other | RIFF MxSt File | .si | References to other files, seems to be meta info only. Only info I could find, failed to process: https://github.com/dutchcoders/extract-riff
 other | RIFF Palette | .pal | 
 other | RIFF STYL File | .par | References a font for mac and windows and includes some text in a TEXT chunk
+other | RISC OS ALF Library |  | 
+other | RISC OS ARM Object File |  | 
 other | Rise of the Triad Level | .rtc .rtl | 
 other | ROT Object 3D Action | .rotact | 
 other | RTPatch File | .rtp | 
@@ -631,6 +649,7 @@ other | SciTech Driver | .drv |
 other | Scorched Earth Mountain Data | .mtn | 
 other | Sculpt 3D Take | .take | 
 other | SCUMM main data container |  | 
+other | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 other | Settlers II Map | .swd .wld | 
 other | Show Partner Mastered Show | .pro | 
 other | SimCity 2000 Save Game Data | .sc .sc2 | 

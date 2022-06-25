@@ -18,7 +18,11 @@ export default
 
 	document :
 	{
-		pPrintPage : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]}
+		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
+		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
+		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
+		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
+		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]}
 	},
 
 	executable :
@@ -73,6 +77,7 @@ export default
 		personalFontMakerFont   : {name : "Personal Font Maker Font/Character Set", ext : [".fnt", ".set"], magic : ["Personal Font Maker Font/character Set"]},
 		printPartnerFont        : {name : "PrintPartner Font", ext : [".font"], magic : ["PrintPartner Font"]},
 		psionFont               : {name : "Psion Font", ext : [".fon"], magic : ["Psion fast Font", "Psion Font"]},
+		riscOSOutlineFontData   : {name : "RISC OS Outline Font Data", ext : ["outlines"], magic : ["RISC OS outline font data", "RISC OS Outline Font"], weakMagic : true},
 		ripTermFont             : {name : "RIPterm Font", ext : [".fnt"], magic : ["RIPterm Font"]},
 		serverNaturalFormatFont : {name : "X11 Server Natural Format font", ext : [".snf"], magic : ["X11 Server Natural Format font", "X11 SNF font data"], weakMagic : true},
 		signumFont              : {name : "Signum Font", ext : [".e24"], magic : ["Bitmapped Signum!2 printer font (screen)"]},
@@ -105,13 +110,16 @@ export default
 
 	music :
 	{
-		directMusicSegment    : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
-		directMusicStyle      : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
-		encoreMusicalNotation : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
-		improviseMusicData    : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
-		melodyMakerSong       : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
-		scrullMusicFile       : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
-		yamahaESEQ            : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
+		aDrumDrumkit           : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
+		aDrumTrack             : {name : "ADrum Track", magic : ["ADrum track"]},
+		directMusicSegment     : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
+		directMusicStyle       : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
+		encoreMusicalNotation  : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
+		improviseMusicData     : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
+		melodyMakerSong        : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
+		scrullMusicFile        : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
+		technoSoundTurbo2Track : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
+		yamahaESEQ             : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 
 	poly :
@@ -178,6 +186,7 @@ export default
 		superZZTFile                : {name : "Super ZZT File", ext : [".szt"], magic : ["Super ZZT Game Creation System data format"]},
 		tads                        : {name : "TADS", ext : [".t", ".gam"], magic : ["TADS 2 Game", /^TADS .*game data$/]},
 		threeDCKArea                : {name : "3D Construction Kit Area", ext : [".3ad"], magic : [/^3D Construction Kit \d? ?Area$/]},
+		threeDCKBrushes             : {name : "3D Construction Kit Brushes", ext : [".3bd"], magic : ["3D Construction Kit Brushes data"]},
 		threeDCKObject              : {name : "3D Construction Kit Object", ext : [".3od", ".obj"], magic : ["3D Construction Kit Object", /^3D Construction Kit (\d? ?)Object$/]},
 		threeDCKShapeData           : {name : "3D Construction Kit Shape Data", ext : [".3sd"], magic : ["3D Construction Kit Shape data", /^3D Construction Kit \d? ?Shape data$/]},
 		threeDCKWorldData           : {name : "3D Construction Kit World Data", ext : [".kwd", ".kit"], magic : ["3D Construction Kit World data", /^3D Construction Kit \d? ?World [Dd]ata/]},
@@ -228,6 +237,8 @@ export default
 		powerBasicHelp               : {name : "PowerBASIC Help", ext : [".pbh"], magic : ["PowerBASIC Help"]},
 		powerBuilderDynamicLibrary   : {name : "PowerBuilder Dynamic Library", ext : [".pbd"], magic : ["PowerBuilder Dynamic library"]},
 		psionLibrary                 : {name : "Psion Library", ext : [".dyl"], magic : ["Psion Library"]},
+		riscOSALFLibrary             : {name : "RISC OS ALF Library", magic : ["RISC OS Chunk data, ALF library"]},
+		riscOSARMObjectFile          : {name : "RISC OS ARM Object File", magic : ["RISC OS Chunk data, AOF object"]},
 		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
 		turboLightningEnvironment    : {name : "Turbo Lightning Environment", ext : [".env"], magic : ["Turbo Lightning Environment"]},
 		turboModula2SymbolData       : {name : "Turbo Modula-2 Symbol Data", ext : [".sym"], magic : ["Turbo Modula-2 Symbol data"]},
@@ -254,6 +265,7 @@ export default
 		neoPaintPrinterDriver         : {name : "NeoPaint Printer Driver", ext : [".prd"], magic : ["NeoPaint Printer Driver"]},
 		megaPaintPrinterDriver        : {name : "MegaPaint Printer Driver", ext : [".trb"], magic : ["MegaPaint printer driver"]},
 		milesSoundSystemDriver        : {name : "Miles Sound System Driver", ext : [".adv"], magic : ["Miles Sound System real mode drivers"]},
+		os2DeviceDriver               : {name : "OS/2 Device Driver", ext : [".sys"], magic : ["OS/2 device driver"]},
 		patchMeisterDriver            : {name : "PatchMeister Driver", ext : [".pmdriver"], magic : ["PatchMeister Driver"]},
 		psionPrinterDriver            : {name : "Psion Printer Driver", ext : [".wdr"], magic : ["Psion Serie 3/3a printer driver", "Psion Series 5 printer driver"]},
 		psionPhysicalDeviceDriver     : {name : "Psion Physical Device Driver", ext : [".pdd"], magic : ["Psion Physical Device Driver"]},
@@ -270,6 +282,7 @@ export default
 		// ROMS //
 		//////////
 		gameBoyROM  : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+		genesisROM  : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
 		nintendoROM : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
 		qlPluginROM : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
 
@@ -277,6 +290,7 @@ export default
 		// Other //
 		///////////
 		activInspireFlipchart        : {name : "ActivInspire Flipchart", ext : [".flipchart"], magic : ["ActivInspire Flipchart"]},
+		adoragePreferences           : {name : "Adorage preferences", magic : ["Adorage preferences"]},
 		adobeDuotoneOptions          : {name : "Adobe Duotone Options", ext : [".ado"], magic : ["Adobe Duotone Options"]},
 		adobeMultipleMasterMetrics   : {name : "Adobe Multiple Master Metrics", ext : [".mmm"], magic : ["Adobe Multiple Master font", "Adobe Type Manager Multiple Master Metrics"]},
 		adobePhotoshopGradient       : {name : "Adobe Photoshop Gradient", ext : [".grd"], magic : ["Adobe Photoshop gradient"]},
@@ -342,6 +356,7 @@ export default
 		dBaseCompiledObjectProgram   : {name : "dBase Compiled Object Program", ext : [".dbo"], magic : ["dBASE compiled Object program"]},
 		dBaseQuery                   : {name : "dBase Query", ext : [".qbe"], magic : ["dBASE IV Query"]},
 		dBaseUpdate                  : {name : "dBase Update", ext : [".upd"], magic : ["dBASE IV Update"]},
+		demoManiacVectors            : {name : "DemoManiac Vectors", ext : [".dat"], magic : ["DemoManiac vectors"]},
 		demoShieldDemo               : {name : "DemoShield Demo", ext : [".dbd", ".bdd"], magic : ["DemoShield Demo"]},
 		digitaORganiserTheme         : {name : "Digita Organiser Theme", magic : ["Digita Organiser theme"]},
 		directoryOpusSettings        : {name : "Directory Opus Settings", magic : ["Directory Opus settings"]},
@@ -398,6 +413,7 @@ export default
 		lotusMagellanViewer          : {name : "Lotus Magellan Viewer", ext : [".vw2"], magic : ["Lotus Magellan Viewer"]},
 		neoPaintPallette             : {name : "NeoPaint Palette", ext : [".pal"], magic : ["NeoPaint Palette"]},
 		magicC64Preferences          : {name : "MagiC64 Preferences", ext : [".prefs"], magic : ["MagiC64 Preferences/settings"]},
+		mapBrowserVectorData         : {name : "MapBrowser/MapWriter Vector Map Data", ext : ["cbd"], magic : ["MapBrowser / MapWriter vector map data"]},
 		mathCadDocument              : {name : "MathCad Document", ext : [".mcd"], magic : ["Mathcad document"]},
 		maxonResourceCreationData    : {name : "Maxon Resource Creation Tool Data", ext : [".rct"], magic : ["Maxon Resource Creation Tool data"]},
 		memoryManagerResourceData    : {name : "Memory Manager Resource Data", magic : ["Memory Manager resource data"]},
@@ -418,6 +434,7 @@ export default
 		nortonChangeDirInfo          : {name : "Norton Change Directory Info", ext : [".ncd"], magic : ["Norton Change Directory info"]},
 		novellSystemPrintDef         : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},
 		nWiperShow					 : {name : "NWiper Show", ext : [".nw"], magic : ["NWiper show"]},
+		os2ExtendedFileAttributes    : {name : "OS/2 Extended File Attributes", magic : ["OS/2 EA Extended file Attributes"]},
 		os2DLL                       : {name : "OS/2 Dynamic Link Library", ext : [".dll"], magic : ["OS/2 Dynamic Link Library"]},
 		paperPortSlideShot           : {name : "PaperPort Slide Show", ext : [".fss"], magic : ["PaperPort slide show"]},
 		papillonPalette              : {name : "Papillon Palette", ext : [".pal", ".ppal"], magic : ["Papillon Palette"]},

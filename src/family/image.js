@@ -11,6 +11,7 @@ const TENSOR_PATH_EXCLUSIONS =
 [
 	"texture", "textura",
 	"background", "backgrnd",
+	"repeatable",
 	"stereo", "pattern", "brush", "noise", "illusion", "fractal", "border"
 ];
 

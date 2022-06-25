@@ -6,9 +6,9 @@ const progBasePath = Program.binPath("amiga-bitmap-font-tools");
 
 export class amigaBitmapFontContentToOTF extends Program
 {
-	website    = "https://github.com/smugpie/amiga-bitmap-font-tools";
-	bin        = path.join(progBasePath, "env/bin/python3");
-	args       = async r =>
+	website = "https://github.com/smugpie/amiga-bitmap-font-tools";
+	bin     = path.join(progBasePath, "env/bin/python3");
+	args    = async r =>
 	{
 		r.ufoTmpPath = await fileUtil.genTempPath(undefined, ".ufo");
 		return [path.join(progBasePath, "openAmigaFont.py"), "-i", r.inFile(), "-o", await r.outFile("out.otf"), "-f", "otf", "-t", r.ufoTmpPath];

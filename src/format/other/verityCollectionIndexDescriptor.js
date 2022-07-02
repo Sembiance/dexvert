@@ -5,7 +5,7 @@ export class verityCollectionIndexDescriptor extends Format
 	name           = "Verity Collection Index Descriptor";
 	ext            = [".wld", ".ddd", ".did", ".pdd", ".rsd"];
 	forbidExtMatch = true;
-	magic          = ["Verity Collection Index Descriptor"];
+	magic          = ["Verity Collection Index Descriptor", /^fmt\/461( |$)/];
 	weakMagic      = true;
 	converters     = ["strings"];
 }

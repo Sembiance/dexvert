@@ -28,6 +28,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [http://www.watto.org/game_extractor.html Game Extractor]
 * [http://adplug.github.io/ AdPlug / AdPlay]
 * [http://sox.sourceforge.net/ SoX]
+* [http://style64.org/dirmaster DirMaster]
 
 == Sample files ==
 * https://telparia.com/fileFormatSamples/image/dpx/

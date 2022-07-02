@@ -6,14 +6,18 @@ export default
 {
 	archive :
 	{
-		snatchItDiskImage : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
+		beOSInstallPackage : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
+		snatchItDiskImage  : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
 
 	audio :
 	{
-		deluxeSoundSample    : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
-		kurzweilK2Sample     : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
-		performanceMusicBank : {name : "Performance Music Bank", magic : ["Performance music bank"]}
+		audioWorksSoundSample      : {name : "AudioWorks Sound Sample", magic : ["AudioWorks sound sample"]},
+		deluxeSoundSample          : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
+		digitalSymphonySoundSample : {name : "Digital Symphony Sound Sample", magic : [/^Digital Symphony sound sample/]},
+		dmxOP2InstrumentData       : {name : "DMS OP2 Instrument Data", magic : ["DMX OP2 instrument data"]},
+		kurzweilK2Sample           : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
+		performanceMusicBank       : {name : "Performance Music Bank", magic : ["Performance music bank"]}
 	},
 
 	document :
@@ -64,6 +68,7 @@ export default
 		dosCodePageFont         : {name : "DOS Code Page Font", magic : ["DOS code page font data"]},
 		dynaCADDVectorFont      : {name : "DynaCADD Vector Font", ext : [".fnt"], magic : ["DynaCADD vector Font"]},
 		envisionPublisherFont   : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
+		geoWorksGEOSFont        : {name : "GeoWorks GEOS Font", ext : [".fnt"], magic : ["GeoWorks GEOS font"]},
 		grxFont                 : {name : "GRX Font", ext : [".fnt"], magic : ["GRX Font", "libGrx font data"]},
 		japaneseWPKanjiFont     : {name : "Japanese Word Processor Kanji Font", ext : [".f00"], magic : ["Japanese Word Processor Kanji Font"]},
 		laserJetSoftFont        : {name : "LaserJet Soft Font", ext : [".sfl", ".sfp", ".sft"], magic : ["LaserJet Soft Font"]},
@@ -102,6 +107,7 @@ export default
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
+		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
 		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
 		pOSWorkbenchIcon          : {name : "p.OS Workbench Icon", ext : [".info"], magic : ["p.OS-Workbench icon"]},
 		quattroProClipArt         : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
@@ -131,8 +137,9 @@ export default
 
 	video :
 	{
-		ratvidVideo    : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
-		screenCamVideo : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"]}
+		completeAnimatorFilm : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
+		ratvidVideo          : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
+		screenCamVideo       : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"]}
 	},
 	
 	other :
@@ -247,6 +254,7 @@ export default
 		visualBasicTokenizedSource   : {name : "Visual Basic Tokenized Source", ext : [".bas"], magic : [/^Visual Basic \d source \(tokenized\)$/]},
 		visualCLibrary               : {name : "Microsoft Visual C Library", ext : [".lib"], magic : ["Microsoft Visual C Library"]},
 		visualSmalltalkLibrary       : {name : "Visual Smalltalk Enterprise Objects Library", ext : [".sll"], magic : ["Visual Smalltalk Enterprise objects Library"]},
+		visualSourceSafeControlFile  : {name : "Visual SourceSafe Control File", ext : [".scc"], magic : [/^Visual SourceSafe control file \(var [12]\)$/, "Visual SourceSafe control file (var 3)"], weakMagic : ["Visual SourceSafe control file (var 3)"]},
 
 
 		/////////////
@@ -469,6 +477,7 @@ export default
 		sculpt3DTake                 : {name : "Sculpt 3D Take", ext : [".take"], magic : ["Sculpt 3D Take"]},
 		showPartnerMasteredShow      : {name : "Show Partner Mastered Show", ext : [".pro"], magic : ["Show Partner mastered show"]},
 		smartDrawTemplate            : {name : "SmartDraw Template", ext : [".sdt", ".sdr"], magic : ["SmartDraw template"]},
+		snifferCapture               : {name : "Sniffer Capture", ext : [".snf", ".trc"], magic : ["Sniffer capture"]},
 		snoopCapture				 : {name : "Snoop Capture", ext : [".snoop"], magic : ["Snoop capture file"]},
 		snxSnapshot                  : {name : "SNX Snapshot", ext : [".snx"], magic : ["SNX Snapshot"]},
 		softDiskLibrary              : {name : "SoftDisk Library", ext : [".shl"], magic : ["Softdisk Help Library format"]},
@@ -520,6 +529,7 @@ export default
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
 		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72"]},
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
+		wordStarPrinterDescFile      : {name : "WordStar Printer Description File", ext : [".pdf"], magic : ["WordStar Printer Description File"]},
 		wordWorthPreferences         : {name : "WordWorth Preferences", magic : ["WordWorth preferences"]},
 		yafaCompressionOptions       : {name : "YAFA Compression Options", magic : ["YAFA compression options"]},
 		xCADModifierTable            : {name : "X-CAD Modifier Table", ext : [".obj"], magic : ["X-CAD Modifier Table"]},

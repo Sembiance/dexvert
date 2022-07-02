@@ -59,9 +59,16 @@
 * Could add support for Commodore BASIC programs by using `petcat` (already installed with VICE) or the more capable Windows Vista+ C64List (v4.04 in sandbox/app/): https://www.facebook.com/c64List
   Sadly the magic for these (See the files expanded within archive/lynxArhive) are very weak, so I'd almost certainly need to do some more checking after the fact to verify they are indeed BASIC programs
 
-* Add support for Acorn Replay videos (#625 CineClips)
-  Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
-  Couldn't determine any support for QEMU (might have some though) but a fallback emulator, I'd have to run under windows 2k: http://www.riscos.com/shop/products/106/index.htm  
+* Add RiscOS support. QEMU doesn't currently support it enough to get RISC OS to even boot. Instead use either:
+	https://www.marutan.net/rpcemu/index.php
+	http://arcem.sourceforge.net/
+	http://b-em.bbcmicro.com/arculator/
+	http://www.virtualacorn.co.uk/product.htm  (only runs on Windows)
+ http://www.riscos.com/shop/products/106/index.htm  
+	Acorn Replay videos (#625 CineClips)
+  	Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
+	also:
+	  (unsupported/audio/audioWorksSoundSample)
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 

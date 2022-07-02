@@ -8,4 +8,5 @@ export class cals extends Format
 	magic        = ["CALS raster bitmap", "CALS Compressed Bitmap", /^x-fmt\/28( |$)/];
 	metaProvider = ["image"];
 	converters   = ["convert", "corelPhotoPaint"];
+	verify       = ({meta}) => meta.height>1 && meta.width>1;
 }

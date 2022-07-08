@@ -210,6 +210,8 @@ export class qemu extends Server
 		if(instance.debug)
 			qemuRunOptions.env = {DISPLAY : (Deno.hostname()==="crystalsummit" ? ":0.1" : ":0")};
 
+		await delay(Math.randomInt(xu.SECOND, xu.SECOND*5));
+
 		this.xlog.info`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
 
 		instance.qemuRunOptions = qemuRunOptions;

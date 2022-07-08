@@ -7,6 +7,6 @@ export class theDraw extends Format
 	ext            = [".td"];
 	forbidExtMatch = true;
 	mimeType       = "image/x-thedraw";
-	magic          = ["TheDraw design"];
+	magic          = ["TheDraw design", /^fmt\/1586( |$)/];
 	converters     = [`abydosconvert[format:${this.mimeType}]`];
 }

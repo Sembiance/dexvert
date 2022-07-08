@@ -62,6 +62,7 @@ export default
 		borlandGraphicsFont     : {name : "Borland Graphics Font", ext : [".chr", ".bgi"], magic : ["Borland font BGI Stroked Font", "BGI (Borland Graphics Interface) font", "Borland font"]},
 		bradfordFont            : {name : "Bradford Font", ext : [".bf2"], magic : ["Bradford Font"]},
 		calamusFont             : {name : "Calamus Font", ext : [".cfn"], magic : ["Calamus Font Data"]},
+		chiWriterPrinterFont    : {name : "ChiWriter Printer Font", ext : [".pft"], magic : ["ChiWriter Printer Font"]},
 		chiWriterScreenFont     : {name : "ChiWriter Screen Font", ext : [".sft"], magic : ["ChiWriter Screen Font"]},
 		corelWiffenFont         : {name : "Corel Wiffen Font", ext : [".wfn"], magic : ["Corel Font/Symbol"]},
 		demoManiacFont          : {name : "DemoManiac Font", ext : [".font"], magic : ["DemoManiac Font"]},
@@ -132,7 +133,8 @@ export default
 	{
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
-		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]}
+		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
+		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]}
 	},
 
 	video :
@@ -175,6 +177,7 @@ export default
 		midiMazeIIMaze              : {name : "MIDI-MAZE II Maze", ext : [".mze"], magic : ["MIDI-MAZE II Maze"]},
 		moonbaseGameData            : {name : "Moonbase Game Data", ext : [".mb"], magic : ["Moonbase game data"]},
 		portsOfCallSaveGame         : {name : "Ports of Call Save Game", ext : [".trp"], magic : ["Ports of Call savegame"]},
+		prsFormatResourceData       : {name : "PRS Format Resource Data", ext : [".prs"], magic : ["PRS Format Resource data"]},
 		puzzleBusterPuzzle          : {name : "Puzzle Buster Puzzle", ext : [".puz"], magic : ["Puzzle Buster Puzzle"]},
 		quakeMap                    : {name : "Quake Map", ext : [".bsp"], magic : ["Quake Map"]},
 		quake2Map                   : {name : "Quake II Map", ext : [".bsp"], magic : ["Quake2 map", "Quake II Map file"]},
@@ -215,6 +218,7 @@ export default
 		appleScriptCompiled          : {name : "Compiled AppleScript Script", magic : ["AppleScript compiled", "Compiled AppleScript script"]},
 		atariGEMOBM                  : {name : "Atari GEM OBM File", ext : [".obm"], magic : ["Atari GEM OBM File"]},
 		autoCADProtectedLISP         : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
+		beOSCodeWarriorProject       : {name : "BeOS CodeWarrior Project", ext : [".proj"], magic : ["BeOS CodeWarrior Project"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
 		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file", /^Delphi \d+ Compiled Unit/]},
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},

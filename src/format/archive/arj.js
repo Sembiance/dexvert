@@ -7,5 +7,5 @@ export class arj extends Format
 	ext            = [".arj", ".exe"];
 	forbidExtMatch = [".exe"];
 	magic          = ["ARJ compressed archive", "ARJ File Format", "ARJ archive data", "ARJ self-extracting archive", /^fmt\/610( |$)/];
-	converters     = ["unar", "sqc", "izArc", "UniExtract"];
+	converters     = ["unar", "sqc", "izArc", "UniExtract", "deark[module:arj]"];
 }

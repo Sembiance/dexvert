@@ -9,7 +9,7 @@
 	"dependencies" : {
 		"@sembiance/xu"    : "file:/mnt/compendium/DevLab/node-modules/xu",
 		"@sembiance/xutil" : "file:/mnt/compendium/DevLab/node-modules/xutil",
-		"midi-writer-js"   : "~2.0.1",
+		"midi-writer-js"   : "~2.1.0",
 		"tiptoe"           : "file:/mnt/compendium/DevLab/node-modules/tiptoe"
 	}
 }

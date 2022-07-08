@@ -4,7 +4,7 @@
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|347|473|1145|1260|1280|1555|1556|1562)( |$)/,
+	/^fmt\/(111|134|208|347|473|1145|1260|1280|1555|1556|1562|1575|1616)( |$)/,
 	/^x-fmt\/(111|157|195|342)( |$)/,
 
 	// dexmagic: WEAK checks
@@ -46,6 +46,7 @@ export const WEAK_VALUES =
 	/^Arhangel archive data/,
 	/^ARM COFF/,
 	/^ARMv7 Thumb/,
+	/^Atari DEGAS/,
 	/^Award BIOS Logo, \d+ x \d+/,
 	/^assembler source/,
 	/^b\.out/,
@@ -163,12 +164,13 @@ export const WEAK_VALUES =
 	/^RIFF \((big|little)-endian\) data$/,
 	/^RISC OS outline font data/,
 	/^Sega FILM\/CPK Multimedia/,
+	/^SHARC COFF binary/,
 	/^shared library TTComp archive data/,
-	/^SPARC demand paged/,
 	/^SoftQuad DESC or font file binary/,
 	/^SoftQuad troff Context intermediate$/,
 	/^Sony PlayStation Audio/,
 	/^Sony PlayStation PSX image/,
+	/^SPARC demand paged/,
 	/^Spectrum \.TAP data/,
 	/spot sensor temperature/,
 	/^SysEx File/,
@@ -210,6 +212,7 @@ export const WEAK_VALUES =
 	/^3M Printscape document \(v1\.x\)$/,
 	/^5View capture/,
 	/^777 compressed archive$/,
+	/^AAX compressed data$/,
 	/^Adobe PRC 3D model$/,
 	/^Advanced DB Master data/,
 	/^Affix file$/,
@@ -381,6 +384,7 @@ export const WEAK_VALUES =
 	/^Text - UTF-16/,
 	/^TextEngine document \(generic\)$/,
 	/^That's Write document$/,
+	/^The Apprentice: Los Angeles game data Archive$/,
 	/^The Bee Archiver compressed archive$/,
 	/^TheC64 Config\/Joystick\/Mode settings$/,
 	/^THOR compressed data$/,
@@ -515,6 +519,7 @@ export const WEAK_VALUES =
 	/^PackDir compressed archive$/,
 	/^Poser pose$/,
 	/^PPrint Image$/,
+	/^R3D data stream$/,
 	/^Red Baron 3D game data archive$/,
 	/^Red Sector Demo-Maker vector object$/,
 	/^Scalable Vector Graphics \(var\.3\)$/,
@@ -525,5 +530,6 @@ export const WEAK_VALUES =
 	/^Super-Card Ami II copier$/,
 	/^TeslaCrypt\/Cryptowall encrypted$/,
 	/^UNIMod created by APlayer$/,
+	/^WebAssembly module \(binary\)$/,
 	/^Xilinx User Constraints File$/
 ];

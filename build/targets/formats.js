@@ -66,7 +66,7 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 {
 	for(const [formatid, o] of Object.entries(unsupportedFormats))
 	{
-		const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes", "weakFilename"];
+		const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes", "website", "weakFilename"];
 		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 		if(extraKeys.length>0)
 			throw new Error(\`unsupported format \${familyid}/\${formatid} has extra keys that are not currently copied over to the Unknown class, add them: \${extraKeys}\`);

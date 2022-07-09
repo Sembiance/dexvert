@@ -5,7 +5,7 @@ Extensions are in order of importance, with the format's primary extension appea
 
 
 
-## Archive (171)
+## Archive (172)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -119,6 +119,7 @@ archive | Novalogic Game Data Archive | .pff | [gameextractor](http://www.watto.
 archive | [Novel NetWare Packed File](http://fileformats.archiveteam.org/wiki/NetWare_Packed_File) |  | [nwunpack](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [10 sample files](https://telparia.com/fileFormatSamples/archive/netWarePacked/)
 archive | [NPack Archive](http://fileformats.archiveteam.org/wiki/NPack) | .$ | [npack](http://fileformats.archiveteam.org/wiki/NPack) | [10 sample files](https://telparia.com/fileFormatSamples/archive/npack/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/os2BitmapArray/)
+archive | Pack-Fire compressed data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [2 sample files](https://telparia.com/fileFormatSamples/archive/packFire/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [unice68](http://sc68.atari.org/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://unarchiver.c3.cx/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/packIt/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/paintShopProBrowserCache/)
@@ -415,7 +416,7 @@ document | [Zinc Data](https://en.wikipedia.org/wiki/Zinc_Application_Framework)
 ## Executable (7)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/executable/epocExecutable/)
+executable | [EPOC/Symbian Executable](http://fileformats.archiveteam.org/wiki/EPOC/Symbian_executable) | .app .opx .opo .opl .dll | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/executable/epocExecutable/)
 executable | [MacOS Executable](http://fileformats.archiveteam.org/wiki/MacBinary) |  | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/executable/macOSExecutable/)
 executable | Microsoft Windows Dynmic Link Library | .dll | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/executable/dll/)
 executable | [MS-DOS/Windows Executable](http://fileformats.archiveteam.org/wiki/EXE) | .exe | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [24 sample files](https://telparia.com/fileFormatSamples/executable/exe/)
@@ -960,14 +961,14 @@ image | [ZZ_ROUGH](http://fileformats.archiveteam.org/wiki/ZZ_ROUGH) | .rgh | [r
 
 
 
-## Music (200)
+## Music (199)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 music | [A.M.Composer Module](http://fileformats.archiveteam.org/wiki/A.M._Composer_v1.2) | .amc | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/amComposer/)
 music | [Abyss Highest Experience Module](http://fileformats.archiveteam.org/wiki/AHX_(Abyss)) | .ahx | [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/ahx/)
-music | Actionamics Sound Tool Module | .ast | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/actionamics/)
+music | [Actionamics Sound Tool Module](http://fileformats.archiveteam.org/wiki/Actionamics_Sound_Tool) | .ast | [uade123](http://zakalwe.fi/uade) | [1 sample file](https://telparia.com/fileFormatSamples/music/actionamics/)
 music | [AdLib MUS](http://www.vgmpf.com/Wiki/index.php?title=MUS_(AdLib)) | .mus | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/adlibMUS/)
-music | AdLib Tracker 2 | .a2m | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/adLibTracker2/)
+music | [AdLib Tracker 2](http://fileformats.archiveteam.org/wiki/Adlib_Tracker_II_module) | .a2m | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/adLibTracker2/)
 music | [AdLib/Roland Song](http://fileformats.archiveteam.org/wiki/AdLib_Visual_Composer_/_Roland_Synthesizer_song) | .rol | [adplay](https://github.com/adplug/adplay-unix) [rol2mus](http://www.vgmpf.com/Wiki/index.php?title=AdLib_Convert) [rol2midi](http://www.vgmpf.com/Wiki/index.php?title=ROL_to_MIDI) | [20 sample files](https://telparia.com/fileFormatSamples/music/rol/) - Couldn't convert GIRLIPEN.ROL for some reason
 music | [Advanced Module Format Module](http://fileformats.archiveteam.org/wiki/Dual_Module_Player_DSMI) | .amf | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/advancedModuleFormat/)
 music | [AMOS Music Bank](http://fileformats.archiveteam.org/wiki/AMOS_Music_Bank) | .abk | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/amosMusic/)
@@ -979,11 +980,11 @@ music | Apogee IMF | .imf | [adplay](https://github.com/adplug/adplay-unix) | [9
 music | [Archimedes Tracker](http://fileformats.archiveteam.org/wiki/Archimedes_Tracker_module) | .musx | [xmp](http://xmp.sourceforge.net/) | [11 sample files](https://telparia.com/fileFormatSamples/music/archimedesTracker/)
 music | [Art & Magic Module](http://fileformats.archiveteam.org/wiki/Art_%26_Magic) | .aam | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/artAndMagic/)
 music | [Art of Noise Module](http://fileformats.archiveteam.org/wiki/Art_of_Noise_module) | .aon | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/artOfNoise/)
-music | ASC Sound Master | .asc | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://telparia.com/fileFormatSamples/music/ascSoundMaster/)
-music | Asylum Module | .amf | [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [4 sample files](https://telparia.com/fileFormatSamples/music/asylum/)
+music | [ASC Sound Master](http://fileformats.archiveteam.org/wiki/ASC_Sound_Master_module) | .asc | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://telparia.com/fileFormatSamples/music/ascSoundMaster/)
+music | [Asylum Module](http://fileformats.archiveteam.org/wiki/Asylum_Music_Format) | .amf | [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [4 sample files](https://telparia.com/fileFormatSamples/music/asylum/)
 music | [Audio Sculpture Module](http://fileformats.archiveteam.org/wiki/Audio_Sculpture) | .adsc .as | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/audioSculpture/)
 music | AY Amadeus Chiptune | .ay .emul | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/ay/)
-music | Beathoven Synthesizer Module | .bss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/beathovenSynthesizer/)
+music | [Beathoven Synthesizer Module](http://fileformats.archiveteam.org/wiki/Beathoven_Synthesiser) | .bss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/beathovenSynthesizer/)
 music | [Bob's AdLib](http://fileformats.archiveteam.org/wiki/Bob%27s_Adlib_Music) | .bam | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/bobsAdLib/)
 music | [Boom Tracker](http://fileformats.archiveteam.org/wiki/Boom_Tracker_v4.0_module) | .cff | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/boomTracker/)
 music | [Brian Postma SoundMon module](http://fileformats.archiveteam.org/wiki/Brian_Postma_SoundMon_v2.x_%26_v3.x_module) | .bp .bp3 | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/soundMon/) - Not all files convert properly, such as CYBERSONG and SANXION
@@ -1014,11 +1015,11 @@ music | [Extended Module](http://fileformats.archiveteam.org/wiki/XM) | .xm | [x
 music | eXtra Simple Music | .xsm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/extraSimpleMusic/)
 music | [Extreme's Tracker Module](http://fileformats.archiveteam.org/wiki/Extreme%27s_Tracker_module) | .ams | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/extremeTracker/)
 music | [Farandole Composer Module](http://fileformats.archiveteam.org/wiki/Farandole_Composer_module) | .far | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [6 sample files](https://telparia.com/fileFormatSamples/music/farandoleComposer/)
-music | Fashion Tracker Module | .ex | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/fashionTracker/)
+music | [Fashion Tracker Module](http://fileformats.archiveteam.org/wiki/Fashion_Tracker_module) | .ex | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/fashionTracker/)
 music | [FastTracker Module](http://fileformats.archiveteam.org/wiki/FastTracker_module) | .ft | [zxtune123](https://zxtune.bitbucket.io/) [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [12 sample files](https://telparia.com/fileFormatSamples/music/fastTracker/)
 music | Faust Music Creator | .sng | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/faustMusicCreator/)
 music | FM Kingtracker | .fmk | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/fmKingtracker/)
-music | Follin Player Module | .tf | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://telparia.com/fileFormatSamples/music/follinPlayer/)
+music | [Follin Player Module](http://fileformats.archiveteam.org/wiki/Follin_Player_II) | .tf | [uade123](http://zakalwe.fi/uade) | [5 sample files](https://telparia.com/fileFormatSamples/music/follinPlayer/)
 music | [Fred Editor Module](http://fileformats.archiveteam.org/wiki/Fred_Editor) | .fred .frd | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/fredEditor/)
 music | [Fuchs Tracker module](http://fileformats.archiveteam.org/wiki/Fuchs_Tracker) | .fuchs .ft | [xmp](http://xmp.sourceforge.net/) | [2 sample files](https://telparia.com/fileFormatSamples/music/fuchsTracker/)
 music | [FunkTracker Module](http://fileformats.archiveteam.org/wiki/FunkTracker_module) | .fnk | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/funkTracker/)
@@ -1032,7 +1033,7 @@ music | [Graoumf Tracker Module](http://fileformats.archiveteam.org/wiki/Graoumf
 music | Herad System | .sqx .agd .sdb | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/herad/)
 music | [Hippel Module](http://fileformats.archiveteam.org/wiki/Hippel) | .hip .hp .hip7 .hipc .soc .sog | [uade123](http://zakalwe.fi/uade) | [7 sample files](https://telparia.com/fileFormatSamples/music/hippel/)
 music | [Hively Tracker Module](http://fileformats.archiveteam.org/wiki/Hively_Tracker_module) | .hvl | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/hivelyTracker/)
-music | Howie Davies Module | .hd | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/howieDavies/)
+music | [Howie Davies Module](http://fileformats.archiveteam.org/wiki/Howie_Davies) | .hd | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/howieDavies/)
 music | HSC AdLib Composer | .hsc | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/hscAdLibComposer/)
 music | [Hudson Entertainment System Sound Format](http://fileformats.archiveteam.org/wiki/HES) | .hes | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/hes/)
 music | [Human Machine Interfaces MIDI Format](http://fileformats.archiveteam.org/wiki/HMI) | .hmi .hmp | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [10 sample files](https://telparia.com/fileFormatSamples/music/hmi/)
@@ -1040,27 +1041,27 @@ music | [Imagees Music System](http://fileformats.archiveteam.org/wiki/Images_Mu
 music | [Imago Orpheus Module](http://fileformats.archiveteam.org/wiki/Imago_Orpheus_module) | .imf | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [3 sample files](https://telparia.com/fileFormatSamples/music/imagoOrpheus/)
 music | [Impulse Tracker Module](http://fileformats.archiveteam.org/wiki/Impulse_Tracker_module) | .it | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/impulseTracker/)
 music | [JamCracker Module](http://fileformats.archiveteam.org/wiki/JAMCracker_Pro) | .jc | [uade123](http://zakalwe.fi/uade) | [10 sample files](https://telparia.com/fileFormatSamples/music/jamCracker/)
-music | Janko Mrsic-Flogel Module | .jmf | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/jankoMrsicFlogel/)
+music | [Janko Mrsic-Flogel Module](http://fileformats.archiveteam.org/wiki/Janko_Mrsic-Flogel) | .jmf | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/jankoMrsicFlogel/)
 music | JBM AdLib | .jbm | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/jbmAdLib/)
-music | Jeroen Tel Module | .jt | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/jeroenTel/)
-music | Ken's AdLib | .ksm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/kensAdLib/)
-music | Kris/Chip Tracker Module | .kris | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/krisChipTracker/)
+music | [Jeroen Tel Module](http://fileformats.archiveteam.org/wiki/Jeroen_Tel) | .jt | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/jeroenTel/)
+music | [Ken's AdLib](http://fileformats.archiveteam.org/wiki/Ken%27s_Adlib_Music) | .ksm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/kensAdLib/)
+music | [Kris/Chip Tracker Module](http://fileformats.archiveteam.org/wiki/KRIS_Packer_/_ChipTracker_module) | .kris | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/krisChipTracker/)
 music | [KSS Music File](http://fileformats.archiveteam.org/wiki/KSS) | .kss | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/kssMusic/) - Not all files convert correctly, such as prologue.kss and circus charlie.kss. Other software listed at website link, could try those to convert
-music | Leggless Music Editor Module | .lme | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/leggless/)
+music | [Leggless Music Editor Module](http://fileformats.archiveteam.org/wiki/Leggless_Music_Editor) | .lme | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/leggless/)
 music | Lionheart Module | .lion | [uade123](http://zakalwe.fi/uade) | [2 sample files](https://telparia.com/fileFormatSamples/music/lionheart/)
 music | [Liquid Tracker Module](http://fileformats.archiveteam.org/wiki/Liquid_Tracker_module) | .liq | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [2 sample files](https://telparia.com/fileFormatSamples/music/liquidTracker/)
 music | Loudness Sound System | .lds | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/loudnessSoundSystem/)
 music | LucasArts AdLib Module | .laa | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/lucasArtsAdLib/)
 music | [MadTracker Module](http://fileformats.archiveteam.org/wiki/MadTracker_2_module) | .mt2 | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [4 sample files](https://telparia.com/fileFormatSamples/music/madTracker/) - Sample file a little rock/mt2 doesn't convert
-music | Maniacs of Noise Module | .mon | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/maniacsOfNoise/)
-music | Mark Cooksey Module | .mc | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/markCooksey/)
+music | [Maniacs of Noise Module](http://fileformats.archiveteam.org/wiki/Maniacs_of_Noise) | .mon | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/maniacsOfNoise/)
+music | [Mark Cooksey Module](http://fileformats.archiveteam.org/wiki/Mark_Cooksey) | .mc | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/markCooksey/)
 music | Mark II Sound-System Module | .mk2 .mkii | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://telparia.com/fileFormatSamples/music/markII/)
 music | Martin Fernandez AdLib Module | .adlib | [adplay](https://github.com/adplug/adplay-unix) | [3 sample files](https://telparia.com/fileFormatSamples/music/martinFernandez/)
 music | MCMD Module | .mcmd | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/mcmd/)
 music | MedleySound Module | .mso | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/medleySound/)
 music | [Megatracker Module](http://fileformats.archiveteam.org/wiki/Megatracker_module) | .mgt | [xmp](http://xmp.sourceforge.net/) | [4 sample files](https://telparia.com/fileFormatSamples/music/megatracker/)
 music | [MIDI Music File](http://fileformats.archiveteam.org/wiki/MIDI) | .mid | [timidity](http://timidity.sourceforge.net/) | [15 sample files](https://telparia.com/fileFormatSamples/music/mid/) - Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows
-music | Mike Davies Module | .md | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/mikeDavies/)
+music | [Mike Davies Module](http://fileformats.archiveteam.org/wiki/Mike_Davies) | .md | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/mikeDavies/)
 music | MikMod Module | .uni | [mikmod2wav](https://github.com/Sembiance/mikmod2wav) | [2 sample files](https://telparia.com/fileFormatSamples/music/mikMod/)
 music | MK-Jamz AdLib Module | .mkj | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/mkJamz/)
 music | Mlat Tracker | .mad | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/mlatTracker/)
@@ -1089,19 +1090,18 @@ music | Promizer Module |  | [uade123](http://zakalwe.fi/uade) | [1 sample file]
 music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/pru2/)
 music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [mikmod2wav](https://github.com/Sembiance/mikmod2wav) [zxtune123](https://zxtune.bitbucket.io/) [awaveStudio](https://archive.org/details/awave70_zip) | [16 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 music | [Puma Tracker Module](http://fileformats.archiveteam.org/wiki/Pumatracker_module) | .puma | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/pumaTracker/)
-music | Quadra Composer | .emod | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [6 sample files](https://telparia.com/fileFormatSamples/music/quadraComposer/)
+music | [Quadra Composer](http://fileformats.archiveteam.org/wiki/Quadra_Composer_module) | .emod | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [6 sample files](https://telparia.com/fileFormatSamples/music/quadraComposer/)
 music | Quartet PSG Module | .sqt | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/quartetPSG/)
 music | Quartet ST Module | .qts .smp | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/quartetST/)
 music | Rdos Raw OPL | .raw .rac | [adplay](https://github.com/adplug/adplay-unix) | [5 sample files](https://telparia.com/fileFormatSamples/music/rdosRawOPL/)
 music | [Real Tracker Module](http://fileformats.archiveteam.org/wiki/Real_Tracker_module) | .rtm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [2 sample files](https://telparia.com/fileFormatSamples/music/realTracker/)
-music | [Reality AdLib Tracker](http://fileformats.archiveteam.org/wiki/Reality_AdLib_Tracker_module) | .rad | [adplay](https://github.com/adplug/adplay-unix) | [5 sample files](https://telparia.com/fileFormatSamples/music/realityTracker/)
-music | Reality AdLib Tracker | .sng | [adplay](https://github.com/adplug/adplay-unix) | [2 sample files](https://telparia.com/fileFormatSamples/music/sngPlayer/)
+music | [Reality AdLib Tracker](http://fileformats.archiveteam.org/wiki/Reality_AdLib_Tracker_module) | .rad .sng | [adplay](https://github.com/adplug/adplay-unix) | [7 sample files](https://telparia.com/fileFormatSamples/music/realityTracker/)
 music | [Richard Joseph Module/Instrument](http://fileformats.archiveteam.org/wiki/Richard_Joseph) | .sng .ins | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/richardJoseph/)
 music | [RIFF MIDI Music](http://fileformats.archiveteam.org/wiki/RIFF_MIDI) | .rmi | [timidity](http://timidity.sourceforge.net/) | [7 sample files](https://telparia.com/fileFormatSamples/music/rmi/)
 music | [RIFF MIDS File](http://fileformats.archiveteam.org/wiki/RIFF_MIDS) | .mds | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [12 sample files](https://telparia.com/fileFormatSamples/music/mds/)
 music | Riff Raff Module | .riff | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/riffRaff/)
-music | Rob Hubbard Module | .rh .rho | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/robHubbard/)
-music | Ron Klaren Module | .rk | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/ronKlaren/)
+music | [Rob Hubbard Module](http://fileformats.archiveteam.org/wiki/Rob_Hubbard) | .rh .rho | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/robHubbard/)
+music | [Ron Klaren Module](http://fileformats.archiveteam.org/wiki/Ron_Klaren) | .rk | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/ronKlaren/)
 music | Sam Coupe COP Module | .cop | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/samCoupeCOP/) - Not all files converted such as shanhai.cop
 music | Sam Coupe SNG Module | .sng | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://telparia.com/fileFormatSamples/music/samCoupeSNG/) - Not all files converted, such as tetris.sng and shanhai.sng
 music | [Saturn Sound Format](http://fileformats.archiveteam.org/wiki/SSF) | .ssf .minissf .ssflib | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/ssf/) - Minissf files don't convert, not sure why yet.
@@ -1112,7 +1112,7 @@ music | [Sean Connolly Module](http://fileformats.archiveteam.org/wiki/Sean_Conn
 music | [Sean Conran Module](http://fileformats.archiveteam.org/wiki/Sean_Conran) | .scr | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/seanConran/)
 music | [SidMon II Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid2 | [uade123](http://zakalwe.fi/uade) | [11 sample files](https://telparia.com/fileFormatSamples/music/sidMon2/)
 music | [SidMon Module](http://fileformats.archiveteam.org/wiki/Sidmon) | .sid | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/sidMon/)
-music | Silmarils Module | .mok | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/silmarils/)
+music | [Silmarils Module](http://fileformats.archiveteam.org/wiki/Silmarils) | .mok | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/silmarils/)
 music | [Simple Musical Score](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .smus .song | [uade123](http://zakalwe.fi/uade) [smus2midi](https://github.com/AugusteBonnin/smus2midi) [smusmidi](https://aminet.net/package/mus/midi/SMUSMIDI.lha) | [10 sample files](https://telparia.com/fileFormatSamples/music/smus/) - The 'SMUS' format was used by many different programs including Sonix and Deluxe Music. This first tries to convert SONIX SMUS with instrument support using uade123. That cna fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples. SMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus) SMUSMIDI is pretty good, but it crashes on many files, requiring a full timeout wait of the rexx script.
 music | [Slight Atari Player](http://fileformats.archiveteam.org/wiki/Slight_Atari_Player) | .sap | [asapconv](http://asap.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/sap/)
 music | [SNDH Module](http://fileformats.archiveteam.org/wiki/SNDH) | .sndh .snd | [sndh2raw](https://github.com/Sembiance/sndh2raw) | [10 sample files](https://telparia.com/fileFormatSamples/music/sndh/)
@@ -1136,7 +1136,7 @@ music | Speedy System Module | .ss | [uade123](http://zakalwe.fi/uade) | [3 samp
 music | SQ Tracker | .sqt | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://telparia.com/fileFormatSamples/music/sqTracker/)
 music | [ST-Sound YM Module](http://fileformats.archiveteam.org/wiki/YM) | .ym | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/ym/)
 music | [Star Tracker/StarTrekker Module](http://fileformats.archiveteam.org/wiki/StarTrekker_/_Star_Tracker_module) | .mod | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/starTracker/)
-music | Steve Barrett Module | .sb | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/steveBarrett/)
+music | [Steve Barrett Module](http://fileformats.archiveteam.org/wiki/Steve_Barrett) | .sb | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/steveBarrett/)
 music | SUNTronic Module | .sun | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/sunTronic/)
 music | [Surprise! AdLib Tracker](http://fileformats.archiveteam.org/wiki/Surprise!_Adlib_Tracker_v2.0) | .sat .sa2 | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/surpriseTracker/)
 music | Symphonie Module | .symmod | [zxtune123](https://zxtune.bitbucket.io/) | [12 sample files](https://telparia.com/fileFormatSamples/music/symphonie/)
@@ -1247,7 +1247,7 @@ other | Turbo Pascal Overlay | .ovr | [strings](https://www.gnu.org/software/bin
 other | VCD Info File | .vcd | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/other/vcdInfo/)
 other | Ventur Publisher Style Sheet | .sty | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/venturaPublisherStyleSheet/)
 other | Verity Collection Index Descriptor | .wld .ddd .did .pdd .rsd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/verityCollectionIndexDescriptor/)
-other | Vim Swap | .swp | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/vimSwap/)
+other | Vim Swap | .swp | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/vimSwap/)
 other | [Visual Basic Form](http://fileformats.archiveteam.org/wiki/VisualBasic_form) | .frm | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/visualBasicForm/)
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
 other | Windows Program Group | .grp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)
@@ -1331,8 +1331,8 @@ video | [Cyber Paint Sequence](http://fileformats.archiveteam.org/wiki/Cyber_Pai
 video | [DeluxePaint Animation](http://fileformats.archiveteam.org/wiki/DeluxePaint_Animation) | .anm | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/deluxePaintAnimation/) - Sample file HORSE.ANM doesn't convert for some reason
 video | [Disney Animation Studio CFAST](http://justsolve.archiveteam.org/wiki/CFAST_Disney_Animation_Studio) | .cft .sec | [flick](http://cd.textfiles.com/silvercollection/disc2/GRAPHVEW/DASFLICK.ARJ) | [14 sample files](https://telparia.com/fileFormatSamples/video/disneyCFAST/) - The format is documented, so someone could create a more modern converter
 video | [DL Video](http://fileformats.archiveteam.org/wiki/DL) | .dl | [xanim](https://github.com/Sembiance/xanim) [deark](https://entropymine.com/deark/) | [19 sample files](https://telparia.com/fileFormatSamples/video/dl/)
-video | Electronic Arts TCQ/TGV Video | .tgv | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/eaTCQ/)
-video | Fantavision Movie | .mve | [fantavsn](https://winworldpc.com/product/fantavision/1x-dos) | [11 sample files](https://telparia.com/fileFormatSamples/video/fantavision/)
+video | [Electronic Arts TCQ/TGV Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_TGV) | .tgv | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/eaTCQ/)
+video | [Fantavision Movie](http://fileformats.archiveteam.org/wiki/Fantavision) | .mve | [fantavsn](https://winworldpc.com/product/fantavision/1x-dos) | [11 sample files](https://telparia.com/fileFormatSamples/video/fantavision/)
 video | [Flash Video](http://fileformats.archiveteam.org/wiki/FLV) | .flv | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/flv/)
 video | [FLIC FLC Video](http://fileformats.archiveteam.org/wiki/FLIC) | .flc | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [10 sample files](https://telparia.com/fileFormatSamples/video/flc/)
 video | [FLIC FLI Video](http://fileformats.archiveteam.org/wiki/FLIC) | .fli | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [14 sample files](https://telparia.com/fileFormatSamples/video/fli/)
@@ -1360,5 +1360,5 @@ video | [Smacker Video](http://fileformats.archiveteam.org/wiki/Smacker) | .smk 
 video | [Video Master Film](http://fileformats.archiveteam.org/wiki/Video_Master_Film) | .flm .vid .vsq | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/video/videoMasterFilm/)
 video | [WEBM Video](http://fileformats.archiveteam.org/wiki/Webm) | .mkv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/webmVideo/)
 video | [Westwood Studios Vector Quantized Animation](https://wiki.multimedia.cx/index.php/VQA) | .vqa | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://telparia.com/fileFormatSamples/video/westwoodStudiosVQA/) - FFMPEG only has partial support. The HQ ones don't appear to be supported at all despite being documented out there. I tried VQA2AVI but that just produced black videos.
-video | Windows Media Video | .wmv .asf .xesc | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) | [12 sample files](https://telparia.com/fileFormatSamples/video/wmv/)
+video | [Windows Media Video](http://fileformats.archiveteam.org/wiki/WMV) | .wmv .asf .xesc | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) | [12 sample files](https://telparia.com/fileFormatSamples/video/wmv/)
 

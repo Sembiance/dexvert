@@ -23,6 +23,7 @@ export default
 	document :
 	{
 		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
+		interBaseDB            : {name : "InterBase/Firebird Database", ext : [".gdb", ".fdb"], magic : ["Firebird database"], notes : "In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh."},
 		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
@@ -141,7 +142,7 @@ export default
 	{
 		completeAnimatorFilm : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
 		ratvidVideo          : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
-		screenCamVideo       : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"]}
+		screenCamVideo       : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"], website : "https://wiki.multimedia.cx/index.php/SCM"}
 	},
 	
 	other :

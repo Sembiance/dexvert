@@ -4,6 +4,7 @@ import {Format} from "../../Format.js";
 export class ascSoundMaster extends Format
 {
 	name         = "ASC Sound Master";
+	website      = "http://fileformats.archiveteam.org/wiki/ASC_Sound_Master_module";
 	ext          = [".asc"];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123"];

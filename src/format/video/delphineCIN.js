@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class delphineCIN extends Format
 {
 	name        = "Delphine CIN Video";
+	website     = "https://wiki.multimedia.cx/index.php/Delphine_CIN";
 	ext         = [".cin"];
 	magic       = ["Delphine CIN video"];
 	unsupported = true;

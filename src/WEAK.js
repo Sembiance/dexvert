@@ -333,6 +333,7 @@ export const WEAK_VALUES =
 	/^MUX video$/,
 	/^Mythos Software LIB game data container$/,
 	/^NEC JIS encoded file$/,
+	/^Nokia Logo Manager bitmap$/,
 	/^null bytes$/,
 	/^Oberon V4 Symbol data$/,
 	/^OCAD map$/,

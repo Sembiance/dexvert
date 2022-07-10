@@ -6,8 +6,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Asymetrix Toolbook: http://fileformats.archiveteam.org/wiki/Asymetrix_Toolbook
-  See about installing the original software and see if I can open and extract files from the .tbk files
 
 
 /-----------------\
@@ -15,8 +13,8 @@
 \-----------------/
 * Get the IFF-RGFX datatype installed and working on my Amiga:http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
   Once it can view pictures, see about how I can convert into PNG, maybe with: https://aminet.net/package/gfx/conv/gfxcon
-
-* Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
+  Also see if I can add IFF YAFA support
+  If either of the above fails, then add to Low Priorty: Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
 
 * Find a converter/decompiler for applesoft BASIC. Maybe I can use: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
 
@@ -36,6 +34,11 @@
 * If deark adds better IFF IMAG support, re-process: 265 301 313 356 357 406 481 510 517 518 519 520 607 614 615 629 731 732 766 790 921 969
   Ideally this search should return 321+ matches:
   http://retromission.com/search?q=&qfields=content&qfields=filename&qfields=ext&formatid=cdiIFFImage&labelMatchType=any&label=&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&animated=&sortBy=_text_match&limit=100&nocache=true
+
+* Once I can find later versions of Asymetrix Toolbook (aka Multimedia ToolBook), use it to extract files from .tbk files
+  Note, quite possibly will need a seperate version for every possible versioned TBK file.
+  I tried ToolBook 3.0 (from winworld) on a photos.tbk and it said it needed a later version.
+  The only other copy I could find is on eBay, version 4.0 which I ordered is and is coming
 
 
 /--------------\

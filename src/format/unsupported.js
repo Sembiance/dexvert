@@ -7,6 +7,7 @@ export default
 	archive :
 	{
 		beOSInstallPackage : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
+		beOSResourceData   : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		snatchItDiskImage  : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
 

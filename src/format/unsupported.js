@@ -359,6 +359,7 @@ export default
 		corelPhotoPaintToneCurve     : {name : "Corel PhotoPaint Tone Curve", ext : [".crv"], magic : ["Corel PhotoPaint Tone Curve"]},
 		corelPhotoPaintUserFilter    : {name : "COREL Photo Paint User Defined Filter", ext : [".usr"], magic : ["COREL Photo Paint User Defined Filter"]},
 		corelShellMacro              : {name : "Corel Shell Macro", ext : [".shm"], magic : ["Corel shell macro"]},
+		cracklibPasswordIndex        : {name : "Cracklib Password Index", ext : [".pwi"], magic : ["Cracklib password index"]},
 		createShadeLights            : {name : "Create+Shade Lights", ext : [".lights"], magic : ["Create+Shade Lights"], weakMagic : true},
 		cubaseDrumMap                : {name : "Cubase Drum Map", ext : [".drm"], magic : ["Cubase Drum Map"]},
 		crystalAtariBrowserModule    : {name : "Crystal Atari Browser Module", ext : [".mdl"], magic : ["CAB Module"]},

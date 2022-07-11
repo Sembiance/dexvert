@@ -1,4 +1,4 @@
-# Unsupported File Formats (743)
+# Unsupported File Formats (744)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -370,7 +370,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (375)
+## Other (376)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -467,6 +467,7 @@ other | Corel PhotoPaint Tone Curve | .crv |
 other | Corel Shell Macro | .shm | 
 other | Corncob 3D Data File | .cct | 
 other | Cornel Huth Compressed Library | .li_ | 
+other | Cracklib Password Index | .pwi | 
 other | Create Adventure Games Project | .cag | 
 other | Create+Shade Lights | .lights | 
 other | Creative Graphics Library Driver | .cgl | 

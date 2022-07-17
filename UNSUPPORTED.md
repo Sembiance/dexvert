@@ -1,4 +1,4 @@
-# Unsupported File Formats (744)
+# Unsupported File Formats (746)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -370,7 +370,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (376)
+## Other (378)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -596,6 +596,8 @@ other | Miles Sound System Driver | .adv |
 other | Moonbase Game Data | .mb | 
 other | MS-DOS Code Page Info | .cp .cpi | 
 other | MUI Builder Project | .muib | 
+other | MySQL Index | .myi | 
+other | MySQL Table Definition | .frm | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
 other | NetCDF | .nc | 

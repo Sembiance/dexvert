@@ -1,7 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Add to wiki file format example links (was broken when I last checked)
+http://fileformats.archiveteam.org/wiki/PHP
+http://fileformats.archiveteam.org/wiki/Softimage_PIC
 
 /---------------\
 | High Priority |
@@ -49,7 +51,7 @@
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
 * Consider updating IsoBuster to 5.0 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
-  NOTE: This is a paid upgrade (see email for link with a 30% discount)
+  NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
 * Japanese visual novels have a variety of archive formats, many supported by this program: https://github.com/morkt/GARbro
   Sadly that program required .NET 4.6 or later, which doesn't work in Windows XP, so I'd need to use a vistaSP2 image: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements

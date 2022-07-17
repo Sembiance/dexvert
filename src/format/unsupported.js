@@ -244,6 +244,8 @@ export default
 		microsoftDebug               : {name : "Microsoft Separate Debug Format", ext : [".dbg"], magic : ["Microsoft separate Debug format"]},
 		microsoftIncrementalLinker   : {name : "Microsoft Incremental Linker Data", ext : [".ilk"], magic : ["Microsoft Incremental Linker data"]},
 		microsoftVisualCFiles        : {name : "Microsoft Visual C Files", ext : [".bsc", ".sbr", ".wsp"], magic : ["MSVC .bsc", "MSVC .sbr", "MSVC .wsp"]},
+		mySQLIndexFile               : {name : "MySQL Index", ext : [".myi"], magic : ["MySQL MyISAM index file", "MySQL MyISAM tables index", /^fmt\/1197( |$)/]},
+		mySQLTableDefinition         : {name : "MySQL Table Definition", ext : [".frm"], magic : ["MySQL table definition", /^MySQL Database.* Dictionary/, /^fmt\/868( |$)/]},
 		netwareLoadableModule        : {name : "Netware Loadable Module", ext : [".nlm"], magic : [/^Net[Ww]are Loadable Module/]},
 		oberonSymbol                 : {name : "Oberon Symbol", ext : [".sym"], magic : ["Oberon V3 Symbol data"]},
 		olbLib                       : {name : "OLB Library", magic : ["OLB Library"]},

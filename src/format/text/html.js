@@ -6,8 +6,10 @@ export class html extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/HTML";
 	ext            = [".html", ".htm", ".xhtml", ".xht", ".hhk", ".hhc"];
 	forbidExtMatch = true;
+	filename       = [/htm/];
+	weakFilename   = true;
 	mimeType       = "text/html";
-	magic          = [/^Hyper[Tt]ext Markup Language/, /^HTML document/, /^fmt\/(96|100|471)( |$)/];
+	magic          = [/^Hyper[Tt]ext Markup Language/, /^HTML document/, /^fmt\/(96|99|100|471)( |$)/];
 	weakMagic      = true;
 	trustMagic     = true;
 	untouched      = true;

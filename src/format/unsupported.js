@@ -6,9 +6,10 @@ export default
 {
 	archive :
 	{
-		beOSInstallPackage : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
-		beOSResourceData   : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
-		snatchItDiskImage  : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
+		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
+		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
+		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
+		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
 
 	audio :
@@ -28,7 +29,8 @@ export default
 		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
-		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]}
+		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]},
+		winFaxDocument         : {name : "WinFax Document", ext : [".fxm", ".fxr"], magic : ["WinFax Pro multipage document", "WinFax Sent / Received document"]}
 	},
 
 	executable :
@@ -104,6 +106,7 @@ export default
 	image :
 	{
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
+		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
@@ -111,10 +114,12 @@ export default
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
+		microsoftBorderArt        : {name : "Microsoft Border Art", ext : [".bdr"], magic : ["Microsoft Border art"]},
 		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
 		pOSWorkbenchIcon          : {name : "p.OS Workbench Icon", ext : [".info"], magic : ["p.OS-Workbench icon"]},
 		quattroProClipArt         : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
-		skyRoadsBitmap            : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true}
+		skyRoadsBitmap            : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},
+		winFaxCoverPage           : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]}
 	},
 
 	music :
@@ -390,6 +395,7 @@ export default
 		fileExpressIndexHeader       : {name : "File Express Index Header", ext : [".ixh"], magic : ["File Express Index Header"]},
 		fileExpressQuickScan         : {name : "File Express Quick Scan", ext : [".qss"], magic : ["File Express Quick Scan"]},
 		fourDPaintProject            : {name : "4D Paint Project", ext : [".4dp"], magic : ["4D Paint Project"]},
+		foxProCompoundIndex          : {name : "FoxPro Compound Index", ext : [".tdx", ".edx"], magic : [/^fmt\/375( |$)/]},
 		foxProMemo                   : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fractalDesignPaperTexture    : {name : "Fractal Design Painter Paper Texture", ext : [".pap"], magic : ["Fractal Design Painter Paper texture"]},
 		fractalWeaveParameters       : {name : "Fractal Weave Parameters", ext : [".wwv"], magic : ["FractalWeave parameters"]},
@@ -429,6 +435,7 @@ export default
 		lotusFreelancePresentation   : {name : "Lotus Freelance Presentation", ext : [".prz"], magic : ["Lotus Freelance Graphics Presentation"]},
 		lotusMagellanViewer          : {name : "Lotus Magellan Viewer", ext : [".vw2"], magic : ["Lotus Magellan Viewer"]},
 		neoPaintPallette             : {name : "NeoPaint Palette", ext : [".pal"], magic : ["NeoPaint Palette"]},
+		macromediaXtraCache          : {name : "Macromedia Xtra Cache", ext : [".mch"], magic : ["Macromedia Xtra Cache"]},
 		magicC64Preferences          : {name : "MagiC64 Preferences", ext : [".prefs"], magic : ["MagiC64 Preferences/settings"]},
 		mapBrowserVectorData         : {name : "MapBrowser/MapWriter Vector Map Data", ext : ["cbd"], magic : ["MapBrowser / MapWriter vector map data"]},
 		mathCadDocument              : {name : "MathCad Document", ext : [".mcd"], magic : ["Mathcad document"]},
@@ -506,6 +513,7 @@ export default
 		texVirtualFont               : {name : "TeX Virtual Font", ext : [".vf"], magic : [/^TeX [Vv]irtual [Ff]ont/]},
 		threeDStudioProject          : {name : "3D Studio Project", ext : [".prj"], magic : [/^3D Studio Project/]},
 		thunderbyteAV                : {name : "Thunderbyte AV", ext : [".dat", ".eci", ".ec", ".sig", "sig"], magic : ["Thunderbyte AV", "ThunderByte Antivirus"]},
+		threeDMovieMaker             : {name : "3D Movie Maker", ext : [".3mm", ".3th", ".chk", ".3cn"], magic : ["3D Movie Maker"]},
 		thxTrackerInstrument         : {name : "THX Tracker Instrument", ext : [".ins"], magic : ["THX Tracker instrument"]},
 		tiCalcBackup                 : {name : "Texas Instruments Calculator Backup", ext : [".73b", ".82b", ".83b", ".85b", ".86b", ".89b", ".92b"], magic : [/^TI-.* Graphing Calculator \(backup\)$/]},
 		timeZoneData                 : {name : "TimeZone Data", ext : [".tz"], magic : [/^[Tt]ime[Zz]one data/]},
@@ -536,7 +544,7 @@ export default
 		windowsShortcut              : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut"]},
 		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
-		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72"]},
+		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72", "Corel WordPerfect Macro"]},
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
 		wordStarPrinterDescFile      : {name : "WordStar Printer Description File", ext : [".pdf"], magic : ["WordStar Printer Description File"]},
 		wordWorthPreferences         : {name : "WordWorth Preferences", magic : ["WordWorth preferences"]},

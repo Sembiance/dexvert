@@ -24,6 +24,7 @@ export class awaveStudio extends Program
 			Sleep(250)
 
 			Func ErrorWindows()
+				WindowFailure("", "No wave data found!", -1, "{ENTER}")
 				WindowFailure("Attention!", "You must add at least one", -1, "{ENTER}")
 				WindowFailure("Unknown file type!", "", -1, "{ENTER}")
 				WindowFailure("", "The file doesn't contain", -1, "{ENTER}")

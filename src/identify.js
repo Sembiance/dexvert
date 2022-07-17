@@ -50,10 +50,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 		{
 			if(!FAMILY_MATCH_ORDER.includes(format.familyid))
 				throw new Error(`Format ${format.formatid} has a familyid ${format.familyid} that isn't pressent in FAMILY_MATCH_ORDER`);
-				
+
 			if(format.familyid!==familyid)
 				continue;
-
+				
 			// skip this format if any of our detections are forbidden magic values or our input filename has a forbidden extension
 			if(detections.some(detection => ((format.forbiddenMagic || []).some(fm => flexMatch(detection.value, fm)) || (format.forbiddenExt || []).some(fext => f.input.base.toLowerCase().endsWith(fext)))))
 			{

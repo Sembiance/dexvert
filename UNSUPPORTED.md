@@ -1,15 +1,16 @@
-# Unsupported File Formats (746)
+# Unsupported File Formats (754)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (38)
+## Archive (39)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+archive | Arts and Letters Clip Art Library | .yal | 
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
 archive | Authorware Application/Package | .app .apw | [9 sample files](https://telparia.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
@@ -86,7 +87,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (37)
+## Document (38)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -123,9 +124,10 @@ document | Pen Pal Database | .flr |
 document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
-document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered any of these files 'in the wild' yet.
+document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered very many of these files 'in the wild' yet.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
+document | WinFax Document | .fxm .fxr | 
 
 
 
@@ -210,12 +212,13 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (63)
+## Image (66)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 image | Applause Palette | .pal | 
+image | Arts and Letters Graphic | .ged | 
 image | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://telparia.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 image | Artworx Drawing | .cwg | 
 image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fileFormatSamples/image/atariGraphDiagram/) - No known converter. Atari ST graphing program by Hans-Christoph Ostendorf.
@@ -250,6 +253,7 @@ image | Lotus Smart Icon | .smi |
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
+image | Microsoft Border Art | .bdr | 
 image | MVP Paint Animation | .af | 
 image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | p.OS Workbench Icon | .info | 
@@ -275,6 +279,7 @@ image | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .
 image | [Universal BitMap Format](http://retromission.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [8 sample files](https://telparia.com/fileFormatSamples/image/universalBitMapFormat/)
 image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://telparia.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFormatSamples/image/windowsFAXCover/)
+image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
 
 
@@ -370,7 +375,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (378)
+## Other (381)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -378,6 +383,7 @@ other | 3D Construction Kit Brushes | .3bd |
 other | 3D Construction Kit Object | .3od .obj | 
 other | 3D Construction Kit Shape Data | .3sd | 
 other | 3D Construction Kit World Data | .kwd .kit | 
+other | 3D Movie Maker | .3mm .3th .chk .3cn | 
 other | 3D Studio Project | .prj | 
 other | 3DFX Glide driver | .dxe | 
 other | 4D Paint Project | .4dp | [1 sample file](https://telparia.com/fileFormatSamples/other/fourDPaintProject/)
@@ -507,6 +513,7 @@ other | File Express Index Header | .ixh |
 other | File Express Quick Scan | .qss | 
 other | Flashback Object | .obj | 
 other | Flight Sim Toolkit Terrain Data | .ftd | 
+other | FoxPro Compound Index | .tdx .edx | 
 other | FoxPro Memo File | .fpt | 
 other | Fractal Design Painter Paper Texture | .pap | 
 other | Fractal Weave Parameters | .wwv | 
@@ -566,6 +573,7 @@ other | Lotus Magellan Viewer | .vw2 |
 other | Lua bytecode |  | 
 other | LucasFilm Data | .lfd | 
 other | Mach-O m68k Object | .o | 
+other | Macromedia Xtra Cache | .mch | 
 other | MagiC64 Preferences | .prefs | 
 other | MapBrowser/MapWriter Vector Map Data | cbd | 
 other | Maple Common Binary | .m | 
@@ -742,7 +750,7 @@ other | Wipeout 2097 Track Data | .wad |
 other | WordPerfect Driver | .vrs | 
 other | WordPerfect for Windows Button Bar | .wwb | 
 other | WordPerfect keyboard file | .wpk | 
-other | WordPerfect Macro File | .wpm .wcm | 
+other | WordPerfect Macro File | .wpm .wcm | [1 sample file](https://telparia.com/fileFormatSamples/other/wordPerfectMacro/)
 other | WordPerfect Printer Data | .all .prd | 
 other | WordStar Printer Description File | .pdf | 
 other | WordWorth Preferences |  | 

@@ -6,6 +6,6 @@ export class paradoxDatabase extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Paradox_(database)";
 	ext            = [".db"];
 	forbidExtMatch = true;
-	magic          = [/^fmt\/(350|351|352)( |$)/];
+	magic          = [/^fmt\/(350|351|352)( |$)/, /^x-fmt\/147( |$)/];
 	converters     = ["pxview"];
 }

@@ -66,6 +66,9 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 {
 	for(const [formatid, o] of Object.entries(unsupportedFormats))
 	{
+		if(formats[formatid])
+			throw new Error(\`format [\${formatid}] in unsupported.js is a duplicate of \${formats[formatid]}\`);
+
 		const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes", "website", "weakFilename"];
 		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 		if(extraKeys.length>0)

@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class psiconv extends Program
@@ -11,5 +12,6 @@ export class psiconv extends Program
 	bin        = "psiconv";
 	args       = r => [`--type=${r.flags.outType || "HTML4"}`, r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile(`out.${(r.flags.outType || "HTML4")==="ASCII" ? "txt" : "html"}`)});
+	verify     = (r, dexFile) => dexFile.size>xu.KB;
 	renameOut  = true;
 }

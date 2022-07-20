@@ -9,6 +9,7 @@ export default
 		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
+		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
 
@@ -82,6 +83,7 @@ export default
 		lotusRasterFont         : {name : "Lotus Raster Font", ext : [".lrf"], magic : ["Lotus Raster Font"]},
 		lotusVectorFont         : {name : "Lotus Vector Font", ext : [".lvf"], magic : ["Lotus Vector Font"]},
 		macOSFont               : {name : "MacOS Font", ext : [".fnt"], magic : ["Mac OSX datafork font, 'FONT'"]},
+		matroxFont              : {name : "Matrox Font", ext : [".fnt"], magic : ["Matrox Font"]},
 		maxonCADFont            : {name : "MaconCAD Font", ext : [".mcfont"], magic : ["MaxonCAD Font"]},
 		msxKanjiFont            : {name : "MSX Kanji Font", magic : ["MSX Kanji Font"]},
 		personalFontMakerFont   : {name : "Personal Font Maker Font/Character Set", ext : [".fnt", ".set"], magic : ["Personal Font Maker Font/character Set"]},
@@ -112,6 +114,7 @@ export default
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
+		genericCADD				  : {name : "Generic CADD", ext : [".gcd"], magic : ["Generic CADD drawing"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
 		microsoftBorderArt        : {name : "Microsoft Border Art", ext : [".bdr"], magic : ["Microsoft Border art"]},
@@ -146,9 +149,10 @@ export default
 
 	video :
 	{
-		completeAnimatorFilm : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
-		ratvidVideo          : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
-		screenCamVideo       : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"], website : "https://wiki.multimedia.cx/index.php/SCM"}
+		completeAnimatorFilm    : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
+		knowledgeAdventureMovie : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},
+		ratvidVideo             : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
+		screenCamVideo          : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"], website : "https://wiki.multimedia.cx/index.php/SCM"}
 	},
 	
 	other :
@@ -259,6 +263,7 @@ export default
 		psionLibrary                 : {name : "Psion Library", ext : [".dyl"], magic : ["Psion Library"]},
 		riscOSALFLibrary             : {name : "RISC OS ALF Library", magic : ["RISC OS Chunk data, ALF library"]},
 		riscOSARMObjectFile          : {name : "RISC OS ARM Object File", magic : ["RISC OS Chunk data, AOF object"]},
+		sgmlCompiled                 : {name : "SGML Compiled", ext : [".mtl"], magic : ["Compiled SGML rules"]},
 		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
 		turboLightningEnvironment    : {name : "Turbo Lightning Environment", ext : [".env"], magic : ["Turbo Lightning Environment"]},
 		turboModula2SymbolData       : {name : "Turbo Modula-2 Symbol Data", ext : [".sym"], magic : ["Turbo Modula-2 Symbol data"]},
@@ -276,6 +281,7 @@ export default
 		ailMidiDriver                 : {name : "Audio Interface Library 3 Music/MIDI driver", ext : [".mdi"], magic : ["Audio Interface Library 3 Music/MIDI driver"]},
 		ailDigitalAudioDriver         : {name : "Audio Interface Library 3 Digital audio driver", ext : [".dig"], magic : ["Audio Interface Library 3 Digital audio driver"]},
 		allwaysPrinterDriver          : {name : "Allways Printer Driver", ext : [".apc", ".apd", ".apf"], magic : ["Allways Printer driver"]},
+		autoCADDOSRealModeADIDriver   : {name : "Autocad DOS Real Mode ADI Driver", ext : [".exp", ".ex%"], magic : ["Autocad DOS real mode ADI driver"]},
 		borlandDriver                 : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI Device Driver", "Borland Graphics printer driver"]},
 		bwsbMusicSoundDriver          : {name : "BWSB Music and Sound Engine Driver", ext : [".mse"], magic : ["BWSB Music and Sound Engine driver"]},
 		creativeGraphicsLibraryDriver : {name : "Creative Graphics Library Driver", ext : [".cgl"], magic : ["Creative Graphics Library driver"]},

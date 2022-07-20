@@ -1,11 +1,11 @@
-# Unsupported File Formats (754)
+# Unsupported File Formats (761)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (39)
+## Archive (40)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -17,6 +17,7 @@ archive | Authorware Application/Package | .app .apw | [9 sample files](https://
 archive | BeOS Installation Package | .pkg | 
 archive | BeOS Resource Data | .rsrc | 
 archive | BZIP Compressed Archive | .bz | [2 sample files](https://telparia.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
+archive | Colorado Memory System Package | .cmp | 
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://telparia.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
@@ -50,7 +51,7 @@ archive | ZX Spectrum Tape Image | .tap | [4 sample files](https://telparia.com/
 
 
 
-## Audio (31)
+## Audio (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -81,6 +82,7 @@ audio | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound
 audio | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://telparia.com/fileFormatSamples/audio/soundFont1/) - Awave Studio can technically convert these, but 99.9% of all SBK SoundFond 1 files just contain meta info that points to a samples in ROM, thus there isn't anything really to convert.
 audio | StoneTracker Sample | .sps | [3 sample files](https://telparia.com/fileFormatSamples/audio/stoneTrackerSample/)
 audio | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://telparia.com/fileFormatSamples/audio/stosSample/)
+audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [2 sample files](https://telparia.com/fileFormatSamples/audio/vqf/) - I attempted to use TwinDec from http://www.rarewares.org/rrw/nttvqf.php but it failed to decode my sample files
 audio | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://telparia.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 audio | [Yamaha Synthetic Music Mobile Application Format](https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF) | .mmf | [1 sample file](https://telparia.com/fileFormatSamples/audio/yamahaSMAF/)
 audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fileFormatSamples/audio/zyxelVoice/)
@@ -158,7 +160,7 @@ executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89
 
 
 
-## Font (48)
+## Font (49)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -188,6 +190,7 @@ font | Lotus Raster Font | .lrf |
 font | Lotus Vector Font | .lvf | 
 font | MaconCAD Font | .mcfont | 
 font | MacOS Font | .fnt | 
+font | Matrox Font | .fnt | 
 font | MSX Kanji Font |  | 
 font | Personal Font Maker Font/Character Set | .fnt .set | 
 font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://telparia.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
@@ -212,7 +215,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (66)
+## Image (67)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -239,6 +242,7 @@ image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fas
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | Freelance Graphics Drawing | .drw | 
 image | FXG Bitmap | .fxg | [3 sample files](https://telparia.com/fileFormatSamples/image/fxgBitmap/)
+image | Generic CADD | .gcd | 
 image | GraphicWorks Vector Drawing | .dvg | 
 image | Greenstreet Drawing | .art | [6 sample files](https://telparia.com/fileFormatSamples/image/greenstreetDrawing/)
 image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSamples/image/homeBrewIcon/)
@@ -375,7 +379,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (381)
+## Other (383)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -432,6 +436,7 @@ other | Audio Interface Library 3 Digital audio driver | .dig |
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
 other | Authorware Library | .apl | 
 other | AutoCAD Compiled Menu | .mnx | 
+other | Autocad DOS Real Mode ADI Driver | .exp .ex% | 
 other | AutoCAD Protected LISP | .lsp | 
 other | AutoDesk 3D-Studio Material Library | .mli | 
 other | AVS Video Editor Project | .vep | 
@@ -675,6 +680,7 @@ other | Sculpt 3D Take | .take |
 other | SCUMM main data container |  | 
 other | Sega Genesis/Megadrive/32x ROM | .bin .md | 
 other | Settlers II Map | .swd .wld | 
+other | SGML Compiled | .mtl | 
 other | Show Partner Mastered Show | .pro | 
 other | SimCity 2000 Save Game Data | .sc .sc2 | 
 other | SimCity City | .cty | 
@@ -792,7 +798,7 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (21)
+## Video (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -805,6 +811,7 @@ video | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) 
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/fileFormatSamples/video/dkAnimation/)
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [3 sample files](https://telparia.com/fileFormatSamples/video/idRoQ/)
+video | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 video | Magic Lantern DIFF Animation | .diff | No known converter
 video | NTitler Animation | .nt | [8 sample files](https://telparia.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://telparia.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0

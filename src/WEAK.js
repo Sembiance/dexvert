@@ -213,6 +213,7 @@ export const WEAK_VALUES =
 	/^5View capture/,
 	/^777 compressed archive$/,
 	/^AAX compressed data$/,
+	/^ABC notation \(old\)$/,
 	/^Adobe PRC 3D model$/,
 	/^Advanced DB Master data/,
 	/^Affix file$/,

@@ -1,7 +1,7 @@
 import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
-// NOTE: Not ALL unsupported fromats are listed here. Some are marked as 'unsupported' in the various format/family/subfiles.js
+// NOTE: Not ALL unsupported formats are listed here. Some are marked as 'unsupported' in the various format/family/subfiles.js
 export default
 {
 	archive :

@@ -13,6 +13,7 @@ export default async function buildFormats(xlog)
 
 	const relPaths = [];
 	const formats = {};
+	const existingFormatids = new Set();
 
 	for(const formatFilePath of formatFilePaths)
 	{
@@ -29,8 +30,8 @@ export default async function buildFormats(xlog)
 		assertStrictEquals(formatid, path.basename(formatFilePath, ".js"), `format file [${formatFilePath}] does not have a matching class name [${formatid}]`);
 
 		// check for duplicates
-		if(formats[formatid])
-			throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate of ${formats[formatid]}`);
+		if(existingFormatids.has(formatid.toLowerCase()))
+			throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate`);
 
 		// create the class and validate it
 		const format = formatModule[formatid].create(families[familyid]);
@@ -45,6 +46,7 @@ export default async function buildFormats(xlog)
 		}
 
 		formats[formatid] = format;
+		existingFormatids.add(formatid.toLowerCase());
 		relPaths.push([familyid, formatid, path.relative(formatDirPath, formatFilePath)]);
 	}
 
@@ -86,6 +88,39 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 				if(Object.hasOwn(o, supportedKey))
 					format[supportedKey] = o[supportedKey];
 			}
+		});
+		formats[formatid].formatid = formatid;
+	}
+}
+
+// process our 'simple.js' formats
+const {default : simple} = await import(\`./simple.js?v=$\{xu.randStr()}\`);
+for(const [familyid, simpleFormats] of Object.entries(simple))
+{
+	for(const [formatid, o] of Object.entries(simpleFormats))
+	{
+		if(formats[formatid])
+			throw new Error(\`format [\${formatid}] in simple.js is a duplicate\`);
+
+		const supportedKeys = ["name", "ext", "magic", "weakMagic", "trustMagic"];
+		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
+		if(extraKeys.length>0)
+			throw new Error(\`simple format \${familyid}/\${formatid} has extra keys that are not currently copied over to the Simple class, add them: \${extraKeys}\`);
+		
+		class Simple extends Format
+		{
+			converters = ["strings"];
+		}
+
+		formats[formatid] = Simple.create(families[familyid], format =>
+		{
+			for(const supportedKey of supportedKeys)
+			{
+				if(Object.hasOwn(o, supportedKey))
+					format[supportedKey] = o[supportedKey];
+			}
+			if(o.ext?.length)
+				format.forbidExtMatch = true;
 		});
 		formats[formatid].formatid = formatid;
 	}

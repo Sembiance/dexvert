@@ -24,14 +24,11 @@ for(const [formatid, format] of Object.entries(formats))
 		delete format[baseKey];
 	delete format.baseKeys;
 
-	const extraKeys = Object.keys(format).subtractAll(["name", "ext", "forbidExtMatch", "magic", "converters", "weakMagic", "trustMagic"]);
+	const extraKeys = Object.keys(format).subtractAll(["name", "ext", "forbidExtMatch", "magic", "converters", "weakMagic", "website", "trustMagic"]);
 	if(extraKeys.length>0)
 		continue;
 	
-	if(format.ext?.length && !format.forbidExtMatch)
-		continue;
-	
-	if(format.ext?.length)
+	if(!format.website)
 		continue;
 
 	delete format.forbidExtMatch;

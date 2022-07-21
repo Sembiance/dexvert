@@ -1,11 +1,11 @@
-# Unsupported File Formats (761)
+# Unsupported File Formats (763)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (40)
+## Archive (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -36,6 +36,7 @@ archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) 
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://telparia.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a QEMU emulated OS/2 machine. Maybe some day.
 archive | OS/2 Installation Package | .pkg .pak | [8 sample files](https://telparia.com/fileFormatSamples/archive/os2InstallPackage/) - Could support this with OS/2 unpack if I ever emulated OS/2
 archive | Pax Archive | .pax | [8 sample files](https://telparia.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
+archive | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 archive | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://telparia.com/fileFormatSamples/archive/ps1MemoryCard/)
 archive | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://telparia.com/fileFormatSamples/archive/redArchive/)
 archive | Setup Program Archive | .mva | [6 sample files](https://telparia.com/fileFormatSamples/archive/setupMVA/)
@@ -215,7 +216,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (67)
+## Image (68)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -262,6 +263,7 @@ image | MVP Paint Animation | .af |
 image | NeoPaint Pattern | .pat | [2 sample files](https://telparia.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
 image | p.OS Workbench Icon | .info | 
 image | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://telparia.com/fileFormatSamples/image/painterRIF/)
+image | Paintpro Bitmap | .tb1 .ppp | 
 image | PC-Draft-CAD Drawing | .dwg | 
 image | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://telparia.com/fileFormatSamples/image/pcrImage/)
 image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://telparia.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
@@ -756,7 +758,7 @@ other | Wipeout 2097 Track Data | .wad |
 other | WordPerfect Driver | .vrs | 
 other | WordPerfect for Windows Button Bar | .wwb | 
 other | WordPerfect keyboard file | .wpk | 
-other | WordPerfect Macro File | .wpm .wcm | [1 sample file](https://telparia.com/fileFormatSamples/other/wordPerfectMacro/)
+other | WordPerfect Macro File | .wpm .wcm | 
 other | WordPerfect Printer Data | .all .prd | 
 other | WordStar Printer Description File | .pdf | 
 other | WordWorth Preferences |  | 

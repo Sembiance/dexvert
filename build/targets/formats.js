@@ -102,7 +102,7 @@ for(const [familyid, simpleFormats] of Object.entries(simple))
 		if(formats[formatid])
 			throw new Error(\`format [\${formatid}] in simple.js is a duplicate\`);
 
-		const supportedKeys = ["name", "ext", "magic", "weakMagic", "trustMagic"];
+		const supportedKeys = ["name", "ext", "magic", "weakMagic", "trustMagic", "website"];
 		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 		if(extraKeys.length>0)
 			throw new Error(\`simple format \${familyid}/\${formatid} has extra keys that are not currently copied over to the Simple class, add them: \${extraKeys}\`);

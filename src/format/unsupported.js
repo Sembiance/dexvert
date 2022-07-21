@@ -10,6 +10,7 @@ export default
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
+		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
 
@@ -119,6 +120,7 @@ export default
 		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
 		microsoftBorderArt        : {name : "Microsoft Border Art", ext : [".bdr"], magic : ["Microsoft Border art"]},
 		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
+		paintproBitmap            : {name : "Paintpro Bitmap", ext : [".tb1", ".ppp"], magic : ["Paintpro bitmap"]},
 		pOSWorkbenchIcon          : {name : "p.OS Workbench Icon", ext : [".info"], magic : ["p.OS-Workbench icon"]},
 		quattroProClipArt         : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
 		skyRoadsBitmap            : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},

@@ -5,7 +5,7 @@ import {path, base64Encode} from "std";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM"];
 
 async function validCUEFile(dexState, cueFile)
 {
@@ -90,7 +90,7 @@ export class iso extends Format
 		
 		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first, but fall back to HFS side to be safe
 		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
-		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]"]), "fuseiso"];
+		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]"]), "fuseiso", "unar"];
 
 		// If it's a BIN/CUE, run bchunk
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed

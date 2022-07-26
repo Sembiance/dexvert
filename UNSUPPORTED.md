@@ -1,11 +1,11 @@
-# Unsupported File Formats (763)
+# Unsupported File Formats (770)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (41)
+## Archive (42)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -28,6 +28,7 @@ archive | IFF LIST File |  | [18 sample files](https://telparia.com/fileFormatSa
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [4 sample files](https://telparia.com/fileFormatSamples/archive/installShieldInstallerArchive/)
 archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://telparia.com/fileFormatSamples/archive/interfaze/)
+archive | Micrografx Archive | .mda | 
 archive | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
 archive | Newton Package | .pkg | 
@@ -90,11 +91,11 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (38)
+## Document (39)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
-document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [3 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
+document | [Aldus/Adobe PageMaker](http://fileformats.archiveteam.org/wiki/PageMaker) | .pmd .pmt .pm3 .pm4 .pm5 .pm6 .p65 | [7 sample files](https://telparia.com/fileFormatSamples/document/pageMaker/) - No known converter. It's a bit of a nightmare format, only well supported in the version the file was original created in. I have in sandbox/app/AdobePageMaker6.5 which seems to load v4 files. However the app pops up tons of font substitution confirmations, external file references, and other BS. Choosing not to bother supporting these right now, but if I start to discover a ton of them, I could rethink this.
 document | Amiga Vision Flow | .avf | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaVisionFlow/)
 document | AmigaWriter Documet |  | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 document | Applesoft BASIC Source Code | .bas | [2 sample files](https://telparia.com/fileFormatSamples/document/applesoftBASIC/)
@@ -127,17 +128,19 @@ document | Pen Pal Database | .flr |
 document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
-document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp | [1 sample file](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered very many of these files 'in the wild' yet.
+document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [4 sample files](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered very many of these files 'in the wild' yet.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
+document | Vizawrite Document |  | 
 document | WinFax Document | .fxm .fxr | 
 
 
 
-## Executable (21)
+## Executable (22)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
+executable | Adventure Game eXecutable | .agx | 
 executable | AmigaOS Executable |  | 
 executable | Atari Control Panel Extension Module | .cpx | [10 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
@@ -216,11 +219,12 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (68)
+## Image (69)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
+image | Animator PIC/CEL | .pic .cel | 
 image | Applause Palette | .pal | 
 image | Arts and Letters Graphic | .ged | 
 image | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://telparia.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
@@ -381,7 +385,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (383)
+## Other (386)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -472,6 +476,7 @@ other | Character Table Library | .tlb |
 other | Chemview Animation Data | .d | 
 other | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 other | Clipper Pre-Linked Library | .pll | 
+other | CloneCD CDImage SubChannel Data | .sub | 
 other | Compiled AppleScript Script |  | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 other | Confusion and Light Compressed Data | .cal | 
 other | Corel Editor Macro | .edm | 
@@ -520,6 +525,7 @@ other | File Express Index Header | .ixh |
 other | File Express Quick Scan | .qss | 
 other | Flashback Object | .obj | 
 other | Flight Sim Toolkit Terrain Data | .ftd | 
+other | FoxBase Multiple Index | .mdx | 
 other | FoxPro Compound Index | .tdx .edx | 
 other | FoxPro Memo File | .fpt | 
 other | Fractal Design Painter Paper Texture | .pap | 
@@ -533,6 +539,7 @@ other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .
 other | Gettext Machine Object | .gmo | 
 other | GfxLab24 Convolution Matrix |  | 
 other | GfxLab24 Filter |  | 
+other | GoDot C64 Image Processing |  | 
 other | GW-BASIC Protected Source | .bas | 
 other | Half-Life 2 Save Game | .sav | 
 other | High Speed Pascal Unit | .unit | 

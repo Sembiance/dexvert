@@ -44,6 +44,7 @@ export const WEAK_VALUES =
 	/^Apple DiskCopy 4.2 image/,
 	/^Apple QuickTime$/,
 	/^Arhangel archive data/,
+	/^aria2 control file/,
 	/^ARM COFF/,
 	/^ARMv7 Thumb/,
 	/^Atari DEGAS/,
@@ -509,6 +510,7 @@ export const WEAK_VALUES =
 	/^Dave 2 Huffman compressed game data$/,
 	/^Dockerfile$/,
 	/^Encrypted Blender 3D data$/,
+	/^EVE Online data \(generic\)$/,
 	/^Fine Artist Chunked format/,
 	/^Game Boy Advance ROM$/,
 	/^Generic IFF container$/,
@@ -540,6 +542,7 @@ export const WEAK_VALUES =
 	/^Super-Card Ami II copier$/,
 	/^TeslaCrypt\/Cryptowall encrypted$/,
 	/^UNIMod created by APlayer$/,
+	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,
 	/^Xilinx User Constraints File$/
 ];

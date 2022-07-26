@@ -10,6 +10,7 @@ export default
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
+		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
 	},
@@ -32,30 +33,32 @@ export default
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
 		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]},
+		vizawriteDocument      : {name : "Vizawrite Document", magic : ["Vizawrite document"]},
 		winFaxDocument         : {name : "WinFax Document", ext : [".fxm", ".fxr"], magic : ["WinFax Pro multipage document", "WinFax Sent / Received document"]}
 	},
 
 	executable :
 	{
-		aDotOutExecutable : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/, /^a\.out NetBSD/]},
-		amigaExe          : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
-		atariCPX          : {name : "Atari Control Panel Extension Module", ext : [".cpx"], magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"], weakMagic : true},
-		atariSTExe        : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
-		com               : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
-		elf               : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
-		linux386Exe       : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
-		omagic            : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
-		macPPCPEFExe      : {name : "MacOS PPC PEF Executable", magic : ["Preferred Executable Format (PowerPC)", "header for PowerPC PEF executable"]},
-		machOm68kExe      : {name : "Mach-O m68k Executable", magic : ["Mach-O m68k executable"]},
-		mipsECOFFExe      : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
-		msDOSDriver       : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
-		qDOSExe           : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
-		riscOSExe         : {name : "RISC OS Executable", magic : ["RISC OS AIF executable"]},
-		sparcDemandExe    : {name : "SPARC Demand Paged Exe", magic : ["SPARC demand paged dynamically linked executable not stripped"]},
-		superbaseProgram  : {name : "Superbase Program", ext : [".sbp"], magic : ["Superbase Program"]},
-		tiCalcProgram     : {name : "Texas Instruments Calculator Program", ext : [".73p", ".82p", ".83p", ".85p", ".86p", ".89p", ".92p"], magic : [/^TI-.* Graphing Calculator \(program\)$/]},
-		xex               : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true},
-		zmagicExe         : {name : "Linux ZMAGIC Exectutable", magic : ["Linux i/386 ZMAGIC executable", "Linux/i386 demand-paged executable (ZMAGIC)"]}
+		aDotOutExecutable       : {name : "a.out Executable", ext : [".o"], magic : [/^a\.out .*executable/, /^a\.out NetBSD/]},
+		adventureGameExecutable : {name : "Adventure Game eXecutable", ext : [".agx"], magic : ["Adventure Game eXecutable"]},
+		amigaExe                : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
+		atariCPX                : {name : "Atari Control Panel Extension Module", ext : [".cpx"], magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"], weakMagic : true},
+		atariSTExe              : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
+		com                     : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
+		elf                     : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
+		linux386Exe             : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
+		omagic                  : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
+		macPPCPEFExe            : {name : "MacOS PPC PEF Executable", magic : ["Preferred Executable Format (PowerPC)", "header for PowerPC PEF executable"]},
+		machOm68kExe            : {name : "Mach-O m68k Executable", magic : ["Mach-O m68k executable"]},
+		mipsECOFFExe            : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
+		msDOSDriver             : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
+		qDOSExe                 : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
+		riscOSExe               : {name : "RISC OS Executable", magic : ["RISC OS AIF executable"]},
+		sparcDemandExe          : {name : "SPARC Demand Paged Exe", magic : ["SPARC demand paged dynamically linked executable not stripped"]},
+		superbaseProgram        : {name : "Superbase Program", ext : [".sbp"], magic : ["Superbase Program"]},
+		tiCalcProgram           : {name : "Texas Instruments Calculator Program", ext : [".73p", ".82p", ".83p", ".85p", ".86p", ".89p", ".92p"], magic : [/^TI-.* Graphing Calculator \(program\)$/]},
+		xex                     : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true},
+		zmagicExe               : {name : "Linux ZMAGIC Exectutable", magic : ["Linux i/386 ZMAGIC executable", "Linux/i386 demand-paged executable (ZMAGIC)"]}
 	},
 
 	font :
@@ -108,6 +111,7 @@ export default
 
 	image :
 	{
+		animatorPICCEL            : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
@@ -370,6 +374,7 @@ export default
 		chaosultdGEMParameters       : {name : "CHAOSultdGEM Parameters", ext : [".chs"], magic : ["CHAOSultdGEM parameters"]},
 		characterTableLibrary        : {name : "Character Table Library", ext : [".tlb"], magic : ["Character Table Library"]},
 		chemViewAnimationData        : {name : "Chemview Animation Data", ext : [".d"], magic : ["CHEMVIEW animation Data"]},
+		cloneCDSubChannelData        : {name : "CloneCD CDImage SubChannel Data", ext : [".sub"], magic : ["Elaborate Bytes/SlySoft CloneCD CDImage (subchannel-data)"]},
 		corelEditorMacro             : {name : "Corel Editor Macro", ext : [".edm"], magic : ["Corel Editor macro"]},
 		corelPhotoPaintToneCurve     : {name : "Corel PhotoPaint Tone Curve", ext : [".crv"], magic : ["Corel PhotoPaint Tone Curve"]},
 		corelPhotoPaintUserFilter    : {name : "COREL Photo Paint User Defined Filter", ext : [".usr"], magic : ["COREL Photo Paint User Defined Filter"]},
@@ -403,6 +408,7 @@ export default
 		fileExpressIndexHeader       : {name : "File Express Index Header", ext : [".ixh"], magic : ["File Express Index Header"]},
 		fileExpressQuickScan         : {name : "File Express Quick Scan", ext : [".qss"], magic : ["File Express Quick Scan"]},
 		fourDPaintProject            : {name : "4D Paint Project", ext : [".4dp"], magic : ["4D Paint Project"]},
+		foxBaseMultipleIndex         : {name : "FoxBase Multiple Index", ext : [".mdx"], magic : ["FoxBase Multiple index"]},
 		foxProCompoundIndex          : {name : "FoxPro Compound Index", ext : [".tdx", ".edx"], magic : [/^fmt\/375( |$)/]},
 		foxProMemo                   : {name : "FoxPro Memo File", ext : [".fpt"], magic : ["Microsoft FoxPro Memo", "FoxPro FPT", "Sybase iAnywhere memo files"]},
 		fractalDesignPaperTexture    : {name : "Fractal Design Painter Paper Texture", ext : [".pap"], magic : ["Fractal Design Painter Paper texture"]},
@@ -413,6 +419,7 @@ export default
 		gettextMachineObject         : {name : "Gettext Machine Object", ext : [".gmo"], magic : ["GNU Gettext Machine Object"]},
 		gfxLab24ConvolutionMatrix    : {name : "GfxLab24 Convolution Matrix", magic : ["GfxLab24 convolution matrix"]},
 		gfxLab24Filter               : {name : "GfxLab24 Filter", magic : ["GfxLab24 filter"]},
+		goDotC64ImageProcessing      : {name : "GoDot C64 Image Processing", magic : ["GoDot C64 Image Processing"]},
 		hotMapRegionsDescription     : {name : "HotMap VBX Regions Description", ext : [".hmd"], magic : ["HotMap VBX regions Description"]},
 		hyperPadPad                  : {name : "HyperPAD Pad", ext : [".pad"], magic : ["HyperPAD Pad"]},
 		iBrowseGlobalCache           : {name : "iBrowse Global Cache", magic : ["IBrowse Global Cache"]},

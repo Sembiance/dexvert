@@ -1,11 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add to wiki file format example links (was broken when I last checked)
-http://fileformats.archiveteam.org/wiki/PHP
-http://fileformats.archiveteam.org/wiki/Softimage_PIC
-http://fileformats.archiveteam.org/wiki/Arts_%26_Letters_clip_art_library
-http://fileformats.archiveteam.org/wiki/Xara
+
 
 /---------------\
 | High Priority |

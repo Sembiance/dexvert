@@ -9,7 +9,7 @@ formatid="$1"
 formatName=$(echo "$1" | cut -d'/' -f2)
 shift
 
-if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ] || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/unsupported.js; then
+if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ] || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/unsupported.js || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/simple.js; then
 	formatDir="/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
 	mkdir -p "$formatDir"
 

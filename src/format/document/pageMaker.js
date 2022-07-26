@@ -6,7 +6,7 @@ export class pageMaker extends Format
 	name        = "Aldus/Adobe PageMaker";
 	website     = "http://fileformats.archiveteam.org/wiki/PageMaker";
 	ext         = [".pmd", ".pmt", ".pm3", ".pm4", ".pm5", ".pm6", ".p65"];
-	magic       = ["Aldus PageMaker document"];
+	magic       = ["Aldus PageMaker document", "Adobe PageMaker document"];
 	unsupported = true;
 	notes       = xu.trim`
 		No known converter.

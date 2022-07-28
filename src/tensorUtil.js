@@ -29,7 +29,11 @@ export async function preProcessPNG(imagePath, outDir)
 	await Deno.mkdir(path.join(TENSORSERV_PATH, "tmp"), {recursive : true});
 	const pngTrimmedPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
 	await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
-	await runUtil.run("autocrop", [pngTrimmedPath], RUN_OPTIONS);
+	
+	const tmpTrimPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
+	await runUtil.run("convert", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
+
 	for(const CROP_METHOD of CROP_METHODS)
 		await cropImage({inPath : pngTrimmedPath, outPath : path.join(outDir, `${CROP_METHOD}_${path.basename(imagePath)}.png`), method : CROP_METHOD});
 }
@@ -49,7 +53,9 @@ export async function classifyImage(imagePath, modelName)
 	else
 		await runUtil.run("convert", [`./${path.basename(imagePath)}[0]`, pngTrimmedPath], {...RUN_OPTIONS, cwd : path.dirname(imagePath)});	// We use [0] just in case the src image is an animation, so we just use the first frame
 
-	await runUtil.run("autocrop", [pngTrimmedPath], RUN_OPTIONS);
+	const tmpTrimPath = await fileUtil.genTempPath(path.join(TENSORSERV_PATH, "tmp"), ".png");
+	await runUtil.run("convert", ["-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngTrimmedPath, "-trim", "+repage", `PNG:${tmpTrimPath}`]);
+	await fileUtil.move(tmpTrimPath, pngTrimmedPath);
 
 	const confidences = [];
 	for(const [i, tmpImagePath] of tmpImagePaths.entries())

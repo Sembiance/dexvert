@@ -128,6 +128,7 @@ export const WEAK_VALUES =
 	/^mc68k COFF /,
 	/^mc68k executable/,
 	/^Microsoft a\.out/,
+	/^Microsoft Visual C\/OMF library$/,
 	/^MIPSE[BL][ -]/,
 	/^MIT scheme/,
 	/^MMDF mailbox$/,

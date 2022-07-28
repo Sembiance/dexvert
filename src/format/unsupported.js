@@ -12,7 +12,8 @@ export default
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
-		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]}
+		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]},
+		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]}
 	},
 
 	audio :
@@ -50,6 +51,7 @@ export default
 		omagic                  : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
 		macPPCPEFExe            : {name : "MacOS PPC PEF Executable", magic : ["Preferred Executable Format (PowerPC)", "header for PowerPC PEF executable"]},
 		machOm68kExe            : {name : "Mach-O m68k Executable", magic : ["Mach-O m68k executable"]},
+		microsoftCompiledHelp2  : {name : "Microsoft Compiled Help 2", ext : [".HxS", ".HxI"], magic : ["Microsoft compiled help format 2"], website : "http://fileformats.archiveteam.org/wiki/Microsoft_Help_2"},
 		mipsECOFFExe            : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
 		msDOSDriver             : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
 		qDOSExe                 : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
@@ -148,8 +150,10 @@ export default
 	poly :
 	{
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
+		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
+		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
 		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]}
 	},
 
@@ -241,6 +245,8 @@ export default
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},
 		clipperPreLinkedLibrary      : {name : "Clipper Pre-Linked Library", ext : [".pll"], magic : ["Clipper Pre-Linked Library"]},
+		codeWarriorProject           : {name : "CodeWarrior Project", ext : [".mcp"], magic : ["CodeWarrior Project"]},
+		coffLibrary                  : {name : "COFF Library", ext : [".lib", ".obj", ".a"], magic : ["Common Object File Format (COFF) Library"]},
 		creativeSignalMicrocode      : {name : "Creative Signal Processor Microcode", ext : [".csp"], magic : ["Creative Signal Processor microcode"]},
 		cornelHuthComprssedLibrary   : {name : "Cornel Huth Compressed Library", ext : [".li_"], magic : ["Cornel Huth compressed library"]},
 		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
@@ -257,6 +263,8 @@ export default
 		mapleCommonBinary            : {name : "Maple Common Binary", ext : [".m"], magic : ["Maple Common Binary"]},
 		mdiffPatchFile               : {name : "MDIFF Patch File", ext : [".mdf"], magic : ["MDIFF patch"]},
 		microsoftDebug               : {name : "Microsoft Separate Debug Format", ext : [".dbg"], magic : ["Microsoft separate Debug format"]},
+		microsoftDirectInputFFE      : {name : "Microsoft DirectInput Force Feedback Effect", ext : [".ffe"], magic : ["Microsoft DirectInput Force Feedback Effect"]},
+		microsoftDierctMusicSegments : {name : "Microsoft DirectMusic Segments Type", ext : [".sgt"], magic : ["Microsoft DirectMusic Segments Type"]},
 		microsoftIncrementalLinker   : {name : "Microsoft Incremental Linker Data", ext : [".ilk"], magic : ["Microsoft Incremental Linker data"]},
 		microsoftVisualCFiles        : {name : "Microsoft Visual C Files", ext : [".bsc", ".sbr", ".wsp"], magic : ["MSVC .bsc", "MSVC .sbr", "MSVC .wsp"]},
 		mySQLIndexFile               : {name : "MySQL Index", ext : [".myi"], magic : ["MySQL MyISAM index file", "MySQL MyISAM tables index", /^fmt\/1197( |$)/]},
@@ -330,6 +338,8 @@ export default
 		adobeTypeFontInfo            : {name : "Adobe Type Manager Font Information", ext : [".inf"], magic : ["Adobe Type Manager Font Information"]},
 		alchemyMindworksResource     : {name : "Alchemy Mindworks Resource", ext : [".res"], magic : ["Alchemy Mindworks Resource data"]},
 		adobeHyphenationDictionary   : {name : "Adobe Hyphenation/Spelling Dictionary", ext : [".hyp"], magic : ["Adobe Hyphenation/spelling dictionary"]},
+		adobePhotoshopColorBook      : {name : "Adobe Photoshop Color Book", ext : [".acb"], magic : ["Adobe Photoshop Color Book"]},
+		adobePhotoshopCustomShape    : {name : "Adobe Photoshop Custom Shape", ext : [".csh"], magic : ["Adobe Photoshop Custom Shape"]},
 		aegisProMotionGeometry       : {name : "Aegis Pro Motion Geometry", ext : [".geo"], magic : ["Aegis ProMotion Geometry"]},
 		aibbLoadModule               : {name : "AIBB load Module", ext : [".module", ".aibb"], magic : ["AIBB load Module"]},
 		amiAtlasFile                 : {name : "AmiAtlas File", ext : [".borders", ".coasts", ".index", ".islands", ".prefs", ".rivers", ".route", ".town", ".countries", ".country"], magic : ["AmiAtlas "]},
@@ -459,6 +469,7 @@ export default
 		metaCreationsResourceFile    : {name : "MetaCreations Resource Composite File", magic : ["MetaCreations Resource Composite File (generic)", "Axiom Composite File Management System"]},
 		microLatheObject             : {name : "Micro Lathe Object", ext : [".lat"], magic : ["MicroLathe object"]},
 		microsoftCertificateStore    : {name : "Microsoft Serialized Certificate Store", ext : [".sst"], magic : ["Microsoft Serialized certificate Store"]},
+		microsoftFastFindIndex       : {name : "Microsoft FastFind Index", ext : [".ffx"], magic : ["Microsoft Fast Find Index"]},
 		microsoftPrinterDefinition   : {name : "Microsoft Printer Definition", ext : [".prd"], magic : ["Microsoft Printer Definition"]},
 		microsoftProgramDatabase     : {name : "Microsoft Program Database", ext : [".pdb"], magic : ["Microsoft Program DataBase", "MSVC program database"]},
 		microsoftSecurityCatalog     : {name : "Microsoft Security Catalog", ext : [".cat"], magic : ["Microsoft Security Catalog"]},

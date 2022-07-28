@@ -1,11 +1,11 @@
-# Unsupported File Formats (770)
+# Unsupported File Formats (782)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (42)
+## Archive (43)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -46,6 +46,7 @@ archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .c
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [1 sample file](https://telparia.com/fileFormatSamples/archive/teledisk/)
 archive | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://telparia.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFormatSamples/archive/unixArchiveOld/)
+archive | Unreal Package | .ut2 .uasset | 
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
@@ -136,7 +137,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (22)
+## Executable (23)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -153,6 +154,7 @@ executable | Linux OMAGIC Executable |  |
 executable | Linux ZMAGIC Exectutable |  | 
 executable | Mach-O m68k Executable |  | 
 executable | MacOS PPC PEF Executable |  | 
+executable | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 executable | MIPSL ECOFF Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
@@ -294,7 +296,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (85)
+## Music (86)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -355,6 +357,7 @@ music | Organya Module | .org | [7 sample files](https://telparia.com/fileFormat
 music | Palladix | .plx | [3 sample files](https://telparia.com/fileFormatSamples/music/palladix/)
 music | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://telparia.com/fileFormatSamples/music/gameboyTracker/)
 music | Piston Collage Module | .ptcop | [6 sample files](https://telparia.com/fileFormatSamples/music/pistonCollage/)
+music | PlayerPro Module | .mad | [6 sample files](https://telparia.com/fileFormatSamples/music/playerPro/)
 music | PollyTracker Module | .mod | [4 sample files](https://telparia.com/fileFormatSamples/music/pollyTracker/)
 music | Pro Trekkr Module | .ixs | [6 sample files](https://telparia.com/fileFormatSamples/music/proTrekkr/)
 music | Psycle Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/psycle/)
@@ -385,7 +388,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (386)
+## Other (393)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -403,6 +406,8 @@ other | Actor Image Snapshot | .ima |
 other | Adobe Duotone Options | .ado | 
 other | Adobe Hyphenation/Spelling Dictionary | .hyp | 
 other | Adobe Multiple Master Metrics | .mmm | 
+other | Adobe Photoshop Color Book | .acb | 
+other | Adobe Photoshop Custom Shape | .csh | 
 other | Adobe Photoshop Gradient | .grd | 
 other | Adobe Type Manager Font Information | .inf | 
 other | Adorage preferences |  | 
@@ -477,6 +482,8 @@ other | Chemview Animation Data | .d |
 other | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 other | Clipper Pre-Linked Library | .pll | 
 other | CloneCD CDImage SubChannel Data | .sub | 
+other | CodeWarrior Project | .mcp | 
+other | COFF Library | .lib .obj .a | 
 other | Compiled AppleScript Script |  | [2 sample files](https://telparia.com/fileFormatSamples/unsupported/appleScriptCompiled/)
 other | Confusion and Light Compressed Data | .cal | 
 other | Corel Editor Macro | .edm | 
@@ -601,6 +608,9 @@ other | MetaCreations Resource Composite File |  |
 other | Micro Lathe Object | .lat | 
 other | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://telparia.com/fileFormatSamples/other/microsoftAgentCharacter/)
 other | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://telparia.com/fileFormatSamples/other/microsoftChatCharacter/)
+other | Microsoft DirectInput Force Feedback Effect | .ffe | 
+other | Microsoft DirectMusic Segments Type | .sgt | 
+other | Microsoft FastFind Index | .ffx | 
 other | Microsoft Incremental Linker Data | .ilk | 
 other | Microsoft Printer Definition | .prd | 
 other | Microsoft Program Database | .pdb | 
@@ -777,11 +787,12 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (24)
+## Poly (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | AutoShade Rendering Slide | .rnd | 
+poly | Blender 3D | .blend | 
 poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | Create+Shade 3D Scene | .3d | 
@@ -790,6 +801,7 @@ poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSam
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | Infini-D Scene | .ids .id4 | 
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
+poly | MilkShape 3D Model | .ms3d | 
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
 poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
 poly | NorthCAD-3D | .n3d | 

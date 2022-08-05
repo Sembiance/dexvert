@@ -11,5 +11,5 @@ export class macBinary extends Format
 	forbidExtMatch = true;
 	magic          = _MACBINARY_MAGIC;
 	fallback       = true;
-	converters     = ["unar[mac]", "deark[module:macbinary]"];
+	converters     = ["unar[mac]", "deark[module:macbinary]", "deark[module:macbinary]", "deark[module:macrsrc]"];	// MacBinary 1 files (preview.pix) are technically rsrc files, but only seem to work with macrssrc deark extraction
 }

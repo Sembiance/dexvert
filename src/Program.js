@@ -189,8 +189,8 @@ export class Program
 			// we may have new files on disk in f.outDir
 
 			// first we have to run fixPerms in order to ensure we can access the new files
-			xlog.trace`Program ${fg.orange(this.programid)} fixing permissions...`;
-			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute});
+			xlog.info`Program ${fg.orange(this.programid)} fixing permissions for: ${f.outDir.absolute}...`;
+			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute, liveOutput : true});
 
 			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
 			// can run `convmv --list` for a list of valid encoding names

@@ -1,11 +1,11 @@
-# Unsupported File Formats (782)
+# Unsupported File Formats (791)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (43)
+## Archive (45)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -34,6 +34,7 @@ archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fi
 archive | Newton Package | .pkg | 
 archive | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://telparia.com/fileFormatSamples/archive/omnisStudio/)
 archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager program can extract these files, but I couldn't get it to run under linux, so meh.
+archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://telparia.com/fileFormatSamples/archive/oricTape/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://telparia.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a QEMU emulated OS/2 machine. Maybe some day.
 archive | OS/2 Installation Package | .pkg .pak | [8 sample files](https://telparia.com/fileFormatSamples/archive/os2InstallPackage/) - Could support this with OS/2 unpack if I ever emulated OS/2
 archive | Pax Archive | .pax | [8 sample files](https://telparia.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
@@ -42,6 +43,7 @@ archive | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .
 archive | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://telparia.com/fileFormatSamples/archive/redArchive/)
 archive | Setup Program Archive | .mva | [6 sample files](https://telparia.com/fileFormatSamples/archive/setupMVA/)
 archive | SNATCH-IT Disk Image | .cp2 .img | 
+archive | SPIS TCompress |  | 
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [1 sample file](https://telparia.com/fileFormatSamples/archive/teledisk/)
 archive | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://telparia.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
@@ -54,7 +56,7 @@ archive | ZX Spectrum Tape Image | .tap | [4 sample files](https://telparia.com/
 
 
 
-## Audio (32)
+## Audio (33)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://telparia.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -79,6 +81,7 @@ audio | Performance Music Bank |  |
 audio | Proline Voice | .pvd | [8 sample files](https://telparia.com/fileFormatSamples/audio/prolineVoice/)
 audio | Psion AICA Audio | .aik | [3 sample files](https://telparia.com/fileFormatSamples/audio/psionAIKAudio/)
 audio | [Quattro Pro Sound File](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .snd | [7 sample files](https://telparia.com/fileFormatSamples/audio/quattroProSound/) - Quattro Pro 3.0 allowed creation of slide shows which could include sounds. Couldn't locate any further information on these files except that they might be soundblaster compataible. Couldn't find anything to play them.
+audio | Rich Music Format | .rmf | [4 sample files](https://telparia.com/fileFormatSamples/audio/richMusicFormat/)
 audio | Sonic Arranger instrument |  | No known converter
 audio | Sonix Sound Sample | .ss | [18 sample files](https://telparia.com/fileFormatSamples/audio/sonixSoundSample/) - These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's
 audio | [Sound Blaster Instrument](http://fileformats.archiveteam.org/wiki/Sound_Blaster_Instrument) | .sbi | [10 sample files](https://telparia.com/fileFormatSamples/audio/soundBlasterInstrument/)
@@ -137,7 +140,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (23)
+## Executable (25)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -152,7 +155,9 @@ executable | HP Palmtop Executable | .exm | [2 sample files](https://telparia.co
 executable | Linux i386 Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | Linux ZMAGIC Exectutable |  | 
+executable | Mac OS X Universal Shared Library | .dylib | 
 executable | Mach-O m68k Executable |  | 
+executable | Mach-O PPC Executable |  | 
 executable | MacOS PPC PEF Executable |  | 
 executable | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 executable | MIPSL ECOFF Executable |  | 
@@ -296,7 +301,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (86)
+## Music (88)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -333,6 +338,7 @@ music | FamiTracker Module | .fmt | [4 sample files](https://telparia.com/fileFo
 music | Flash Tracker | .fls | [5 sample files](https://telparia.com/fileFormatSamples/music/flashTracker/)
 music | FMTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/fmTracker/)
 music | Fuxoft AY Language | .fxm | [5 sample files](https://telparia.com/fileFormatSamples/music/fuxoftAYLanguage/)
+music | [GMOD Module](http://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 music | GoatTracker Module | .sng | [6 sample files](https://telparia.com/fileFormatSamples/music/goatTracker/)
 music | Improvise Music Data | .imp | [5 sample files](https://telparia.com/fileFormatSamples/unsupported/improviseMusicData/)
 music | Ixalance Module | .ixs | [5 sample files](https://telparia.com/fileFormatSamples/music/ixalance/)
@@ -384,11 +390,12 @@ music | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https:/
 music | TraX Music Track | .mts | [5 sample files](https://telparia.com/fileFormatSamples/music/traXTrack/)
 music | VGM Music Maker Module | .vge | [4 sample files](https://telparia.com/fileFormatSamples/music/vgmMusicMaker/)
 music | Vic-Tracker Module | .vt | [5 sample files](https://telparia.com/fileFormatSamples/music/vicTracker/)
+music | Wanton Packer | .wn | [1 sample file](https://telparia.com/fileFormatSamples/music/wantonPacker/)
 music | Yamaha e-SEQ Music | .esq .fil | 
 
 
 
-## Other (393)
+## Other (395)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -613,6 +620,7 @@ other | Microsoft DirectMusic Segments Type | .sgt |
 other | Microsoft FastFind Index | .ffx | 
 other | Microsoft Incremental Linker Data | .ilk | 
 other | Microsoft Printer Definition | .prd | 
+other | Microsoft Private Key | .pkv | 
 other | Microsoft Program Database | .pdb | 
 other | Microsoft Security Catalog | .cat | 
 other | Microsoft Separate Debug Format | .dbg | 
@@ -714,6 +722,7 @@ other | Sonix MIDI Instrument | .instr |
 other | Sound Forge Peak Data | .sfk | 
 other | Sound Images Sound Driver | .bin | 
 other | Speculator Snapshot | .zx82 .zx | 
+other | SQLite2 Database | .sqlite .sqlite2 .db | 
 other | StarCraft Map | .scm .scx | 
 other | Startrekker Module Info | .nt | 
 other | StarWriter Formula | .frm | 

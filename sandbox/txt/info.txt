@@ -42,6 +42,7 @@ https://www.kim-minh.com/riffl/
          General: http://fileformats.archiveteam.org/
       Multimedia: https://wiki.multimedia.cx/index.php/JV
 Video Game Music: http://www.vgmpf.com/Wiki/index.php?title=MDS
+           Games: http://wiki.xentax.com/index.php/Game_File_Format_Central
 
 https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF
 https://www.fileformat.info/format/cloud.htm

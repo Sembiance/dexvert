@@ -13,6 +13,7 @@ export default
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]},
+		spisTCompress                : {name : "SPIS TCompress", magic : ["SPIS TCompress archive"]},
 		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]}
 	},
 
@@ -23,7 +24,8 @@ export default
 		digitalSymphonySoundSample : {name : "Digital Symphony Sound Sample", magic : [/^Digital Symphony sound sample/]},
 		dmxOP2InstrumentData       : {name : "DMS OP2 Instrument Data", magic : ["DMX OP2 instrument data"]},
 		kurzweilK2Sample           : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
-		performanceMusicBank       : {name : "Performance Music Bank", magic : ["Performance music bank"]}
+		performanceMusicBank       : {name : "Performance Music Bank", magic : ["Performance music bank"]},
+		richMusicFormat            : {name : "Rich Music Format", ext : [".rmf"], magic : ["Rich Music Format"]}
 	},
 
 	document :
@@ -49,8 +51,10 @@ export default
 		elf                     : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
 		linux386Exe             : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
 		omagic                  : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
+		macOSXUniversalLibrary  : {name : "Mac OS X Universal Shared Library", ext : [".dylib"], magic : ["Mac OS X Mach-O universal Dynamically linked shared Library"]},
 		macPPCPEFExe            : {name : "MacOS PPC PEF Executable", magic : ["Preferred Executable Format (PowerPC)", "header for PowerPC PEF executable"]},
 		machOm68kExe            : {name : "Mach-O m68k Executable", magic : ["Mach-O m68k executable"]},
+		machOPPCExe             : {name : "Mach-O PPC Executable", magic : ["Mach-O ppc executable", "Mac OS X Mach-O 32-bit PPC executable", /^fmt\/692( |$)/]},
 		microsoftCompiledHelp2  : {name : "Microsoft Compiled Help 2", ext : [".HxS", ".HxI"], magic : ["Microsoft compiled help format 2"], website : "http://fileformats.archiveteam.org/wiki/Microsoft_Help_2"},
 		mipsECOFFExe            : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
 		msDOSDriver             : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
@@ -144,6 +148,7 @@ export default
 		melodyMakerSong        : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
 		scrullMusicFile        : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
 		technoSoundTurbo2Track : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
+		wantonPacker           : {name : "Wanton Packer", ext : [".wn"], magic : ["Wanton Packer song/module"]},
 		yamahaESEQ             : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 
@@ -278,6 +283,7 @@ export default
 		riscOSALFLibrary             : {name : "RISC OS ALF Library", magic : ["RISC OS Chunk data, ALF library"]},
 		riscOSARMObjectFile          : {name : "RISC OS ARM Object File", magic : ["RISC OS Chunk data, AOF object"]},
 		sgmlCompiled                 : {name : "SGML Compiled", ext : [".mtl"], magic : ["Compiled SGML rules"]},
+		sqlite2Database              : {name : "SQLite2 Database", ext : [".sqlite", ".sqlite2", ".db"], magic : ["SQLite 2.x database", /^fmt\/1135( |$)/]},
 		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
 		turboLightningEnvironment    : {name : "Turbo Lightning Environment", ext : [".env"], magic : ["Turbo Lightning Environment"]},
 		turboModula2SymbolData       : {name : "Turbo Modula-2 Symbol Data", ext : [".sym"], magic : ["Turbo Modula-2 Symbol data"]},
@@ -471,6 +477,7 @@ export default
 		microsoftCertificateStore    : {name : "Microsoft Serialized Certificate Store", ext : [".sst"], magic : ["Microsoft Serialized certificate Store"]},
 		microsoftFastFindIndex       : {name : "Microsoft FastFind Index", ext : [".ffx"], magic : ["Microsoft Fast Find Index"]},
 		microsoftPrinterDefinition   : {name : "Microsoft Printer Definition", ext : [".prd"], magic : ["Microsoft Printer Definition"]},
+		microsoftPrivateKey          : {name : "Microsoft Private Key", ext : [".pkv"], magic : ["Microsoft Private Key format"]},
 		microsoftProgramDatabase     : {name : "Microsoft Program Database", ext : [".pdb"], magic : ["Microsoft Program DataBase", "MSVC program database"]},
 		microsoftSecurityCatalog     : {name : "Microsoft Security Catalog", ext : [".cat"], magic : ["Microsoft Security Catalog"]},
 		microsoftWordGlossary        : {name : "Microsoft Word Glossary", ext : [".gly"], magic : ["Microsoft Word for DOS Glossary"]},
@@ -570,7 +577,7 @@ export default
 		windowsShortcut              : {name : "Windows Shortcut", ext : [".lnk"], magic : ["Windows Shortcut", "MS Windows shortcut"]},
 		wordPerfectButtonBar         : {name : "WordPerfect for Windows Button Bar", ext : [".wwb"], magic : ["Corel WordPerfect: Unknown filetype 56"]},
 		wordPerfectKeyboardFile      : {name : "WordPerfect keyboard file", ext : [".wpk"], magic : ["WordPerfect keyboard file"]},
-		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72", "Corel WordPerfect Macro"]},
+		wordPerfectMacro             : {name : "WordPerfect Macro File", ext : [".wpm", ".wcm"], magic : [/^WordPerfect [Mm]acro/, "Corel WordPerfect: Unknown filetype 72", "Corel WordPerfect Macro", "WordPerfect (generic)"], weakMagic : ["WordPerfect (generic)"]},
 		wordPerfectPrinterData       : {name : "WordPerfect Printer Data", ext : [".all", ".prd"], magic : ["WordPerfect printer data"]},
 		wordStarPrinterDescFile      : {name : "WordStar Printer Description File", ext : [".pdf"], magic : ["WordStar Printer Description File"]},
 		wordWorthPreferences         : {name : "WordWorth Preferences", magic : ["WordWorth preferences"]},

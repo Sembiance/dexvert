@@ -177,4 +177,6 @@ if(argv.hfs)	// eslint-disable-line unicorn/prefer-ternary
 	await extractHFSISO();
 else
 	await extractNormalISO();
+await runUtil.run("sudo", ["chown", "sembiance:users", OUT_DIR_PATH]);
+await runUtil.run("chmod", ["777", OUT_DIR_PATH]);
 await fileUtil.unlink(MOUNT_DIR_PATH, {recursive : true});

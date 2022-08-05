@@ -8,6 +8,6 @@ export class aliasPIX extends Format
 	weakExt    = true;
 	mimeType   = "image/x-alias-pix";
 	magic      = ["Alias PIX", /^fmt\/1092( |$)/];
-	converters = ["nconvert", "deark", "gimp", "canvas[matchType:magic]"];
+	converters = ["nconvert", "deark[module:alias_pix]", "gimp", "canvas[matchType:magic]"];
 	verify     = ({meta}) => meta.width<12000 && meta.height<12000;
 }

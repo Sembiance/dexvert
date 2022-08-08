@@ -1,0 +1,28 @@
+import {xu} from "xu";
+import {runUtil} from "xutil";
+import {switchToWorkspace, setLayout, runTerminal, runTerminalCommand} from "awesomewm";
+
+const runOptions = {inheritEnv : true};
+await switchToWorkspace(1, 2);
+await runTerminal("dexserver\n");
+await runTerminal("retrodev\n");
+
+await switchToWorkspace(2, 2);
+await setLayout("browserVerticalDev", 2, 2);
+const {wid : ccWID} = await runTerminal();
+await runUtil.run("mychrome", ["--new-window", "http://admin.retromission.com"], runOptions);	// can't associate to a chrome window, so we just run manually here
+await runTerminalCommand(ccWID, "ssh sembiance@chatsubo\nreset\n");
+await runTerminalCommand(ccWID, "ssh sembiance@chatsubo\nreset\n", {newTab : true});
+await runTerminalCommand(ccWID, "ssh sembiance@pax\nreset\n", {newTab : true});
+await runTerminalCommand(ccWID, "", {newTab : true});
+
+await switchToWorkspace(4, 2);
+const {wid : devBottomWID} = await runTerminal();
+const {wid : devTopWID} = await runTerminal();
+await runTerminalCommand(devTopWID, "cd Assorted\nreset\n");
+await runTerminalCommand(devTopWID, "cd Assorted\nreset\n", {newTab : true});
+
+await runTerminalCommand(devBottomWID, "cd /mnt/compendium/DevLab/dexvert/test/sample\nreset\n");
+await runTerminalCommand(devBottomWID, "cd /mnt/compendium/DevLab/dexvert/sandbox/triddefs/defs\nreset\n", {newTab : true});
+await runTerminalCommand(devBottomWID, "cd /usr/share/misc/magic\nreset\n", {newTab : true});
+await runTerminalCommand(devBottomWID, "", {newTab : true});

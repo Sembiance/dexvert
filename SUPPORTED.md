@@ -1,4 +1,4 @@
-# Supported File Formats (1,320)
+# Supported File Formats (1,322)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -214,7 +214,7 @@ audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_i
 audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [Gravis Ultrasound Patch](http://fileformats.archiveteam.org/wiki/Gravis_Ultrasound_patch) | .pat .sbs | [awaveStudio](https://archive.org/details/awave70_zip) | [14 sample files](https://telparia.com/fileFormatSamples/audio/gusPatch/)
 audio | [GSM Audio](http://fileformats.archiveteam.org/wiki/GSM) | .gsm | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/audio/gsm/)
-audio | [MacroSystem Audio](http://fileformats.archiveteam.org/wiki/IFF-MAUD) | .maud | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/awave70_zip) | [9 sample files](https://telparia.com/fileFormatSamples/audio/maud/)
+audio | [MacroSystem Audio](http://fileformats.archiveteam.org/wiki/IFF-MAUD) | .maud | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/awave70_zip) | [11 sample files](https://telparia.com/fileFormatSamples/audio/maud/)
 audio | [Matroska Audio](http://fileformats.archiveteam.org/wiki/Matroska_Audio) | .mka | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://telparia.com/fileFormatSamples/audio/mka/)
 audio | MIDI Sample Dump | .sds | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/awave70_zip) | [8 sample files](https://telparia.com/fileFormatSamples/audio/midiSampleDump/)
 audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey%27s_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://telparia.com/fileFormatSamples/audio/monkeysAudio/)
@@ -231,7 +231,7 @@ audio | [Qualcomm Purevoice Audio](http://fileformats.archiveteam.org/wiki/Qualc
 audio | [RealAudio](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .ra .rma .rmf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://telparia.com/fileFormatSamples/audio/realAudio/)
 audio | Sample DUMP Exchange Audio | .sdx | [awaveStudio](https://archive.org/details/awave70_zip) | [1 sample file](https://telparia.com/fileFormatSamples/audio/sampleDUMPExchange/)
 audio | Scream Tracker Sample | .snd .s3i .smp | [awaveStudio](https://archive.org/details/awave70_zip) | [10 sample files](https://telparia.com/fileFormatSamples/audio/screamTrackerSample/)
-audio | [ShockWave Audio](http://fileformats.archiveteam.org/wiki/SWA) | .swa | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [7 sample files](https://telparia.com/fileFormatSamples/audio/shockWaveAudio/)
+audio | [ShockWave Audio](http://fileformats.archiveteam.org/wiki/SWA) | .swa | [ffmpeg](https://ffmpeg.org/) [vgmstream](https://github.com/vgmstream/vgmstream) | [8 sample files](https://telparia.com/fileFormatSamples/audio/shockWaveAudio/)
 audio | [Sierra Audio](https://wiki.multimedia.cx/index.php/Sierra_Audio) | .sfx .sol | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/audio/sierraAudio/)
 audio | [SoundFont 2.0](http://fileformats.archiveteam.org/wiki/SoundFont_2.0) | .sf2 .sbk | [soundFont2tomp3](https://github.com/Sembiance/dexvert/) [awaveStudio](https://archive.org/details/awave70_zip) | [10 sample files](https://telparia.com/fileFormatSamples/audio/soundFont2/)
 audio | [Sun Microsystems Audio File](http://fileformats.archiveteam.org/wiki/AU) | .au .snd | [ffmpeg](https://ffmpeg.org/) [sox](http://sox.sourceforge.net) | [12 sample files](https://telparia.com/fileFormatSamples/audio/au/)
@@ -334,7 +334,7 @@ document | [Microsoft Publisher Document](http://fileformats.archiveteam.org/wik
 document | [Microsoft Reader eBook](https://en.wikipedia.org/wiki/Microsoft_Reader) | .lit | [ebook_convert](https://calibre-ebook.com/) | [3 sample files](https://telparia.com/fileFormatSamples/document/microsoftReader/)
 document | [Microsoft Visio](http://fileformats.archiveteam.org/wiki/Visio) | .vsd .vss .vst .vdx .vsx .vtx | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/visio/)
 document | Microsoft Word for DOS Document | doc dcx | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/wordDocDOS/)
-document | [Microsoft Works Database](http://fileformats.archiveteam.org/wiki/Microsoft_Works_Database) | .wdb | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorksDatabase/)
+document | [Microsoft Works Database](http://fileformats.archiveteam.org/wiki/Microsoft_Works_Database) | .wdb | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorksDatabase/)
 document | [Microsoft Works Document](http://fileformats.archiveteam.org/wiki/Microsoft_Works) | .wps .wp .doc | [fileMerlin](http://www.file-convert.com/flmn.htm) [soffice](https://www.libreoffice.org) | [13 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorks/)
 document | [Mobipocket Reader eBook](https://en.wikipedia.org/wiki/Mobipocket) | .mobi .prc | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://telparia.com/fileFormatSamples/document/mobi/)
 document | [Multimedia Viewer Book](http://fileformats.archiveteam.org/wiki/Multimedia_Viewer_Book) | .mvb | [unHLPMVB](https://github.com/Sembiance/dexvert) | [10 sample files](https://telparia.com/fileFormatSamples/document/multimediaViewerBook/)
@@ -470,7 +470,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (501)
+## Image (502)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://telparia.com/fileFormatSamples/image/threeDCK/)
@@ -478,7 +478,7 @@ image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_S
 image | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [drawview](http://www.keelhaul.me.uk/acorn/drawview/) | [10 sample files](https://telparia.com/fileFormatSamples/image/acornDraw/)
 image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | [convert](https://www.imagemagick.org/) [gimp](https://gimp.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) | [13 sample files](https://telparia.com/fileFormatSamples/image/psd/)
 image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | [recoil2png](http://recoil.sourceforge.net) | [22 sample files](https://telparia.com/fileFormatSamples/image/advancedArtStudio/)
-image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [9 sample files](https://telparia.com/fileFormatSamples/image/aliasPIX/)
+image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [12 sample files](https://telparia.com/fileFormatSamples/image/aliasPIX/)
 image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://telparia.com/fileFormatSamples/image/rla/)
 image | [Amica Paint](http://fileformats.archiveteam.org/wiki/Amica_Paint) | .ami | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [13 sample files](https://telparia.com/fileFormatSamples/image/ami/)
 image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Amiga_Metafile) | .amf | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://telparia.com/fileFormatSamples/image/amf/)
@@ -748,7 +748,7 @@ image | MacBinary Image |  | [deark](https://entropymine.com/deark/) | [11 sampl
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [soffice](https://www.libreoffice.org) [convert](https://www.imagemagick.org/) | [14 sample files](https://telparia.com/fileFormatSamples/image/macDraw/)
 image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [deark](https://entropymine.com/deark/) [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2) [soffice](https://www.libreoffice.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [tomsViewer](https://tomseditor.com/blog/viewer) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [convert](https://www.imagemagick.org/) | [23 sample files](https://telparia.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://telparia.com/fileFormatSamples/image/icns/)
-image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [tomsViewer](https://tomseditor.com/blog/viewer) | [19 sample files](https://telparia.com/fileFormatSamples/image/macPaint/)
+image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic .macp | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [tomsViewer](https://tomseditor.com/blog/viewer) | [19 sample files](https://telparia.com/fileFormatSamples/image/macPaint/)
 image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel_Editor) | .cpi | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/cpi/)
 image | [Mad Designer](http://fileformats.archiveteam.org/wiki/Mad_Designer) | .mbg | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/mbg/)
 image | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://telparia.com/fileFormatSamples/image/madStudio/)
@@ -825,6 +825,7 @@ image | [PES Embroidery File](http://fileformats.archiveteam.org/wiki/PES) | .pe
 image | PETSCII Editor | .pet | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/pet/)
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) | [17 sample files](https://telparia.com/fileFormatSamples/image/pfsFirstPublisher/)
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://telparia.com/fileFormatSamples/image/photoChrome/)
+image | [PhotoDraw MIX](http://fileformats.archiveteam.org/wiki/MIX_(PhotoDraw)) | .mix | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://telparia.com/fileFormatSamples/image/photoDrawMIX/) - Only thumbnail extraction is supported.
 image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/image/p64/)
 image | [Picture Publisher](http://fileformats.archiveteam.org/wiki/Picture_Publisher) | .pp5 .pp4 .ppf | [nconvert](https://www.xnview.com/en/nconvert/) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [1 sample file](https://telparia.com/fileFormatSamples/image/picturePublisher/) - Couldn't actually get any of my sample files to convert.
 image | [PixArt](http://fileformats.archiveteam.org/wiki/PixArt) | .pix | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/image/pixArt/)
@@ -936,7 +937,7 @@ image | [TXS](http://fileformats.archiveteam.org/wiki/TXS) | .txs | [recoil2png]
 image | [Utah RLE](http://fileformats.archiveteam.org/wiki/Utah_RLE) | .rle | [convert](https://www.imagemagick.org/) [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://telparia.com/fileFormatSamples/image/utahRLE/)
 image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Texture_Format) | .vtf | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [1 sample file](https://telparia.com/fileFormatSamples/image/vtf/)
 image | [VDC BitMap](http://fileformats.archiveteam.org/wiki/VBM_(VDC_BitMap)) | .vbm .bm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [7 sample files](https://telparia.com/fileFormatSamples/image/vbm/)
-image | [VertiZontal Interlacing](http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing) | .vzi | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://telparia.com/fileFormatSamples/image/vzi/)
+image | [VertiZontal Interlacing](http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing) | .vzi | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/vzi/)
 image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [3 sample files](https://telparia.com/fileFormatSamples/image/vidcom64/)
 image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [6 sample files](https://telparia.com/fileFormatSamples/image/vicar/)
 image | [Vidig Paint](http://fileformats.archiveteam.org/wiki/Vidig_Paint) | .rap | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://telparia.com/fileFormatSamples/image/rap/)
@@ -1044,10 +1045,10 @@ music | FuturePlayer Module | .fp | [uade123](http://zakalwe.fi/uade) | [2 sampl
 music | [Game Music Creator Module](http://fileformats.archiveteam.org/wiki/Game_Music_Creator) | .gmc | [uade123](http://zakalwe.fi/uade) [xmp](http://xmp.sourceforge.net/) | [4 sample files](https://telparia.com/fileFormatSamples/music/gameMusicCreator/)
 music | [General Digital Music](http://fileformats.archiveteam.org/wiki/General_Digital_Music_module) | .gdm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [10 sample files](https://telparia.com/fileFormatSamples/music/generalDigiMusic/)
 music | Global Tracker | .gtr | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/globalTracker/)
-music | GlueMon Module | .glue | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/glueMon/)
+music | GlueMon Module | .glue | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/glueMon/)
 music | [Graoumf Tracker Module](http://fileformats.archiveteam.org/wiki/Graoumf_Tracker_module) | .gtk .gt2 | [xmp](http://xmp.sourceforge.net/) | [7 sample files](https://telparia.com/fileFormatSamples/music/graoumfTracker/) - xmp had some support for .gtk, which was commented out, but I enabled it by uncommenting it. Seems to convert the sample GTK files just fine. mikmod tried to add .gt2 support, but it was abandoned and is dead code now. I tried enabling it with a patch, no luck, just segfaults. I also tried using the original tracker http://graoumftracker2.sourceforge.net/ without much luck.
 music | Herad System | .sqx .agd .sdb | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/herad/)
-music | [Hippel Module](http://fileformats.archiveteam.org/wiki/Hippel) | .hip .hp .hip7 .hipc .soc .sog | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/hippel/)
+music | [Hippel Module](http://fileformats.archiveteam.org/wiki/Hippel) | .hip .hp .hip7 .hipc .soc .sog | [uade123](http://zakalwe.fi/uade) | [13 sample files](https://telparia.com/fileFormatSamples/music/hippel/)
 music | [Hively Tracker Module](http://fileformats.archiveteam.org/wiki/Hively_Tracker_module) | .hvl | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/hivelyTracker/)
 music | [Howie Davies Module](http://fileformats.archiveteam.org/wiki/Howie_Davies) | .hd | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/howieDavies/)
 music | HSC AdLib Composer | .hsc | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/hscAdLibComposer/)
@@ -1106,7 +1107,7 @@ music | Promizer Module |  | [uade123](http://zakalwe.fi/uade) | [1 sample file]
 music | [Prorunner Module](http://fileformats.archiveteam.org/wiki/Prorunner) | .pru2 | [xmp](http://xmp.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/pru2/)
 music | [Protracker Module](http://fileformats.archiveteam.org/wiki/Amiga_Module) | .mod .ptm .pt36 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [mikmod2wav](https://github.com/Sembiance/mikmod2wav) [zxtune123](https://zxtune.bitbucket.io/) [awaveStudio](https://archive.org/details/awave70_zip) | [16 sample files](https://telparia.com/fileFormatSamples/music/mod/)
 music | [Puma Tracker Module](http://fileformats.archiveteam.org/wiki/Pumatracker_module) | .puma | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/pumaTracker/)
-music | [Quadra Composer](http://fileformats.archiveteam.org/wiki/Quadra_Composer_module) | .emod | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/quadraComposer/)
+music | [Quadra Composer](http://fileformats.archiveteam.org/wiki/Quadra_Composer_module) | .emod | [zxtune123](https://zxtune.bitbucket.io/) [uade123](http://zakalwe.fi/uade) | [10 sample files](https://telparia.com/fileFormatSamples/music/quadraComposer/)
 music | Quartet PSG Module | .sqt | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/quartetPSG/)
 music | Quartet ST Module | .qts .smp | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/quartetST/)
 music | Rdos Raw OPL | .raw .rac | [adplay](https://github.com/adplug/adplay-unix) | [5 sample files](https://telparia.com/fileFormatSamples/music/rdosRawOPL/)
@@ -1117,7 +1118,7 @@ music | [RIFF MIDI Music](http://fileformats.archiveteam.org/wiki/RIFF_MIDI) | .
 music | [RIFF MIDS File](http://fileformats.archiveteam.org/wiki/RIFF_MIDS) | .mds | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [12 sample files](https://telparia.com/fileFormatSamples/music/mds/)
 music | Riff Raff Module | .riff | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/riffRaff/)
 music | [Rob Hubbard Module](http://fileformats.archiveteam.org/wiki/Rob_Hubbard) | .rh .rho | [uade123](http://zakalwe.fi/uade) | [9 sample files](https://telparia.com/fileFormatSamples/music/robHubbard/)
-music | [Ron Klaren Module](http://fileformats.archiveteam.org/wiki/Ron_Klaren) | .rk | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/ronKlaren/)
+music | [Ron Klaren Module](http://fileformats.archiveteam.org/wiki/Ron_Klaren) | .rk .rkb | [uade123](http://zakalwe.fi/uade) | [13 sample files](https://telparia.com/fileFormatSamples/music/ronKlaren/)
 music | Sam Coupe COP Module | .cop | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/samCoupeCOP/) - Not all files converted such as shanhai.cop
 music | Sam Coupe SNG Module | .sng | [zxtune123](https://zxtune.bitbucket.io/) | [8 sample files](https://telparia.com/fileFormatSamples/music/samCoupeSNG/) - Not all files converted, such as tetris.sng and shanhai.sng
 music | [Saturn Sound Format](http://fileformats.archiveteam.org/wiki/SSF) | .ssf .minissf .ssflib | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/ssf/) - Minissf files don't convert, not sure why yet.
@@ -1141,7 +1142,7 @@ music | Sound Programming Language Module | .spl | [uade123](http://zakalwe.fi/u
 music | [SoundFactory Module](http://fileformats.archiveteam.org/wiki/Soundfactory) | .psf | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/soundFactory/)
 music | [SoundFX Module](http://fileformats.archiveteam.org/wiki/SoundFX_module) | .sfx .sfx2 | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/soundFX/)
 music | SoundTracker Module | .mod | [xmp](http://xmp.sourceforge.net/) [uade123](http://zakalwe.fi/uade) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/soundTracker/)
-music | Soundtracker Pro II Module | .stp | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [4 sample files](https://telparia.com/fileFormatSamples/music/soundTrackerProII/)
+music | Soundtracker Pro II Module | .stp | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [6 sample files](https://telparia.com/fileFormatSamples/music/soundTrackerProII/)
 music | [SPC](http://fileformats.archiveteam.org/wiki/SPC_(Audio)) | .spc | [zxtune123](https://zxtune.bitbucket.io/) | [7 sample files](https://telparia.com/fileFormatSamples/music/spc/)
 music | [Special FX Module](http://fileformats.archiveteam.org/wiki/Special_FX) | .jd .doda | [uade123](http://zakalwe.fi/uade) | [8 sample files](https://telparia.com/fileFormatSamples/music/specialFX/)
 music | Spectrum Fast Tracker | .ftc | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/spectrumFastTracker/)
@@ -1182,7 +1183,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files
 
 
 
-## Other (96)
+## Other (97)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | 
@@ -1234,6 +1235,7 @@ other | InstallShield Script | .ins | [strings](https://www.gnu.org/software/bin
 other | JAM Message Area Header File | .jhr | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/jamMessageAreaHeaderFile/)
 other | Javelin Case Study | .cas | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/javelinCaseStudy/)
 other | Mac OS X Folder Info | .ds_store | [dsstoreinfo](https://github.com/gehaxelt/Python-dsstore) | [10 sample files](https://telparia.com/fileFormatSamples/other/dsstore/)
+other | Maxon Multimedia Script |  | [strings](https://www.gnu.org/software/binutils/) | 
 other | MetaEdit Method Definition | .mof | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/metaEditMethodDefinition/)
 other | Microsoft Developer Studio Project | .mdp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/developerStudioProject/)
 other | Microsoft QuickPascal Unit | .qpu | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/other/quickPascalUnit/)
@@ -1272,7 +1274,7 @@ other | Turbo Pascal Overlay | .ovr | [strings](https://www.gnu.org/software/bin
 other | VCD Info File | .vcd | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/other/vcdInfo/)
 other | Ventur Publisher Style Sheet | .sty | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/venturaPublisherStyleSheet/)
 other | Verity Collection Index Descriptor | .wld .ddd .did .pdd .rsd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/verityCollectionIndexDescriptor/)
-other | Vim Swap | .swp | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/vimSwap/)
+other | Vim Swap | .swp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/vimSwap/)
 other | [Visual Basic Form](http://fileformats.archiveteam.org/wiki/VisualBasic_form) | .frm | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/visualBasicForm/)
 other | [Visual Basic Project](http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file) | .mak | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/visualBasicProject/)
 other | Windows Program Group | .grp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/windowsProgramGroup/)

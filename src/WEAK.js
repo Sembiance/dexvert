@@ -5,7 +5,7 @@ export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
 	/^fmt\/(111|134|208|347|473|1145|1260|1280|1555|1556|1562|1575|1616)( |$)/,
-	/^x-fmt\/(8|111|157|195|342)( |$)/,
+	/^x-fmt\/(8|10|111|157|195|342)( |$)/,
 
 	// dexmagic: WEAK checks
 	/^IFF CAT file$/,
@@ -160,6 +160,7 @@ export const WEAK_VALUES =
 	/^PGP Secret Sub-key/,
 	/^PGP symmetric key encrypted data/,
 	/^PDP-11/,
+	/^Python script, /,
 	/^QL OS dump data/,
 	/^QuArk archive data/,
 	/^RAD Game Tools Smacker Multimedia/,
@@ -265,6 +266,7 @@ export const WEAK_VALUES =
 	/^Cubic Tiny XM module$/,
 	/^CyberAIDS infected Apple 2 executable$/,
 	/^Cybiko Picture bitmap$/,
+	/^Dalet Sound format audio (old)$/,
 	/^[Dd]ar archive/,
 	/^dBASE 5\.0 Multiple index$/,
 	/^dBASE IV Multiple index$/,
@@ -406,6 +408,7 @@ export const WEAK_VALUES =
 	/^Tiny Tafel format$/,
 	/^TriloTracker Sample$/,
 	/^Trilo Tracker chiptune$/,
+	/^TRS-80 Level II BASIC tokenized source$/,
 	/^TRSI Sound Monitor song$/,
 	/^TTComp archive/,
 	/^Turbo Pascal Symbol Table$/,
@@ -525,6 +528,7 @@ export const WEAK_VALUES =
 	/^Fine Artist Chunked format/,
 	/^Game Boy Advance ROM$/,
 	/^Generic IFF container$/,
+	/^Gerber format$/,
 	/^Grand Theft Auto: San Andreas game data archive$/,
 	/^Haines NFF scene/,
 	/^LEGO Mindstorms EV3 brick executable code$/,
@@ -555,5 +559,6 @@ export const WEAK_VALUES =
 	/^UNIMod created by APlayer$/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,
+	/^Wii Model Animation$/,
 	/^Xilinx User Constraints File$/
 ];

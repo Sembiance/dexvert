@@ -144,6 +144,7 @@ export default
 		installShieldScript             : {name : "InstallShield Script", ext : [".ins"], magic : ["InstallShield Script"]},
 		jamMessageAreaHeaderFile        : {name : "JAM Message Area Header File", ext : [".jhr"], magic : ["JAM message area header file"], weakMagic : true},
 		javelinCaseStudy                : {name : "Javelin Case Study", ext : [".cas"], magic : ["Javelin Case study"]},
+		maxonMultimediaScript           : {name : "Maxon Multimedia Script", magic : ["MaxonMULTIMEDIA script"]},
 		metaEditMethodDefinition        : {name : "MetaEdit Method Definition", ext : [".mof"], magic : ["MetaEdit Method definition"]},
 		microsoftVisualCBinaryResource  : {name : "Microsoft Visual C Binary Resource", ext : [".aps"], magic : ["Microsoft Visual C .APS file", "Visual C++ binary resource"]},
 		microStationResource            : {name : "MicroStation Resource Data", ext : [".dat", ".ma"], magic : ["MicroStation Resource data"]},

@@ -188,6 +188,7 @@ export default
 		duneIISavedGame             : {name : "Dune II Saved Game", ext : [".dat"], magic : ["Dune II saved game"]},
 		dynamixBitmap               : {name : "Dynamix Bitnmap", ext : [".bmp"], magic : ["Dynamix Bitmap data container"]},
 		electronicArtsLibContainer  : {name : "Electronic Arts LIB container", ext : [".lib"], magic : ["Electronic Arts LIB container"]},
+		f1gpEdData                  : {name : "F1GP-Ed Data", ext : [".events", ".settings"], magic : ["F1GP-Ed"], weakMagic : true},
 		flashbackObject             : {name : "Flashback Object", ext : [".obj"], magic : ["Flashback Object"]},
 		flightSimToolkitTerrain     : {name : "Flight Sim Toolkit Terrain Data", ext : [".ftd"], magic : ["Flight Sim Toolkit Terrain Data"]},
 		fullTiltPinballData         : {name : "Full Tilt Pinball Data", ext : [".dat"], magic : ["Full Tilt! Pinball table data"]},

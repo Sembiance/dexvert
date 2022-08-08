@@ -120,6 +120,7 @@ export default
 		animatorPICCEL            : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
+		blueScanDrawing           : {name : "Blue Scan Drawing", ext : [".blsc"], magic : ["Blue Scan drawing"]},
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
@@ -159,7 +160,8 @@ export default
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
-		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]}
+		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]},
+		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]}
 	},
 
 	video :

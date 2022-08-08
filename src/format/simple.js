@@ -49,6 +49,7 @@ export default
 		hyperTextVSUM            : {name : "HyperText VSUM", ext : [".xdb"], magic : ["HyperText VSUM"]},
 		ibmStoryboardStory       : {name : "IBM Storyboard Story", ext : [".sh", ".sh~"], magic : ["IBM Storyboard Story", "IBM PC Storyboard Story"]},
 		ibmWorksForOS2           : {name : "IBM Works for OS/2", ext : [".lwp", ".lpw"], magic : ["IBM Works for OS/2 word processor document"]},
+		iffDOCDesktopPublishing  : {name : "IFF DOC Desktop Publishing", magic : ["IFF data, DOC desktop publishing document"]},
 		itsInternational         : {name : "ITS International Module", ext : [".int"], magic : ["ITS international module"]},
 		kamasOutline             : {name : "KAMAS Outline", ext : [".kam"], magic : ["KAMAS Outline"]},
 		locomotiveBASIC          : {name : "Locomotive BASIC", ext : [".bas"], magic : ["Amstrad CPC Locomotive BASIC tokenized source"]},

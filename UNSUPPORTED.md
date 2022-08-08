@@ -1,4 +1,4 @@
-# Unsupported File Formats (792)
+# Unsupported File Formats (794)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -226,7 +226,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (69)
+## Image (70)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -240,6 +240,7 @@ image | Atari ST Graph Diagram | .dia | [3 sample files](https://telparia.com/fi
 image | AutoCAD Shape | .shx | [6 sample files](https://telparia.com/fileFormatSamples/image/autoCADShape/)
 image | AutoSketch Drawing | .skd | [5 sample files](https://telparia.com/fileFormatSamples/image/autoSketchDrawing/)
 image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
+image | Blue Scan Drawing | .blsc | 
 image | CAD Vantage Drawing | .dwg | 
 image | Calamus Vector Document | .cvd | 
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
@@ -797,9 +798,10 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (26)
+## Poly (27)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | AutoShade Rendering Slide | .rnd | 
 poly | Blender 3D | .blend | 

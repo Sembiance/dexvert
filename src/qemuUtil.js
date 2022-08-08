@@ -264,8 +264,8 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 				Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
 
 				; This will move the mouse over the systray area, causing any 'aborted' program icons to be removed
-				MouseMove(312, 756)
-				MouseMove(1000, 756, 20)
+				MouseMove(312, 756, 1)
+				MouseMove(1000, 756, 15)
 			EndFunc
 		`);
 

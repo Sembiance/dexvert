@@ -5,7 +5,7 @@ export class rnc extends Format
 	name       = "Pro-Pack - Rob Northern Compression";
 	website    = "http://fileformats.archiveteam.org/wiki/RNC";
 	ext        = [".rnc"];
-	magic      = ["Rob Northen Compression", "PRO-PACK archive data", "RNC1: Rob Northen RNC1 Compressor"];
+	magic      = ["Rob Northen Compression", "PRO-PACK archive data", "RNC1: Rob Northen RNC1 Compressor", "RNC / PRO-PACK archive"];
 	packed     = true;
 	converters = ["ancient"];
 }

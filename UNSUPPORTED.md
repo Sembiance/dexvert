@@ -1,11 +1,11 @@
-# Unsupported File Formats (794)
+# Unsupported File Formats (801)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (45)
+## Archive (46)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
@@ -42,6 +42,7 @@ archive | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .
 archive | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://telparia.com/fileFormatSamples/archive/ps1MemoryCard/)
 archive | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://telparia.com/fileFormatSamples/archive/redArchive/)
 archive | Setup Program Archive | .mva | [6 sample files](https://telparia.com/fileFormatSamples/archive/setupMVA/)
+archive | Shockwave Flash Debug | .swd | 
 archive | SNATCH-IT Disk Image | .cp2 .img | 
 archive | SPIS TCompress |  | 
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
@@ -302,7 +303,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (88)
+## Music (90)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -338,6 +339,7 @@ music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .
 music | FamiTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
 music | Flash Tracker | .fls | [5 sample files](https://telparia.com/fileFormatSamples/music/flashTracker/)
 music | FMTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/fmTracker/)
+music | Fred Editor Soundtrack |  | [2 sample files](https://telparia.com/fileFormatSamples/music/fredEditorSoundTrack/)
 music | Fuxoft AY Language | .fxm | [5 sample files](https://telparia.com/fileFormatSamples/music/fuxoftAYLanguage/)
 music | [GMOD Module](http://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 music | GoatTracker Module | .sng | [6 sample files](https://telparia.com/fileFormatSamples/music/goatTracker/)
@@ -358,6 +360,7 @@ music | MusicMaker Module | .mm8 | [5 sample files](https://telparia.com/fileFor
 music | MVSTracker Module | .mus | [2 sample files](https://telparia.com/fileFormatSamples/music/mvsTracker/)
 music | MVX Module | .mvm | [4 sample files](https://telparia.com/fileFormatSamples/music/mvxModule/)
 music | NerdTracker Module | .ned | [4 sample files](https://telparia.com/fileFormatSamples/music/nerdTracker/)
+music | NoiseRunner Module | .nr | [1 sample file](https://telparia.com/fileFormatSamples/music/noiseRunner/)
 music | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://telparia.com/fileFormatSamples/music/noiseTrekker/)
 music | Onyx Music File Module | .omf | [4 sample files](https://telparia.com/fileFormatSamples/music/onyxMusicFile/)
 music | Organya Module | .org | [7 sample files](https://telparia.com/fileFormatSamples/music/organya/)
@@ -396,7 +399,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (396)
+## Other (400)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -449,6 +452,8 @@ other | ApAssist Compressed Data |  |
 other | ArtEffect Brush |  | 
 other | ArtEffect Convolution |  | 
 other | ASCII Font Metrics | .afm | 
+other | Astound Actor | .act | 
+other | Atari Cassette Tape Image | .cas | 
 other | Atari CTB File | .ctb | [5 sample files](https://telparia.com/fileFormatSamples/unsupported/atariCTBFile/)
 other | Atari GEM OBM File | .obm | [16 sample files](https://telparia.com/fileFormatSamples/unsupported/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
@@ -519,6 +524,7 @@ other | DeHackEd Patch | .deh |
 other | DemoManiac Vectors | .dat | 
 other | DemoShield Demo | .dbd .bdd | 
 other | Descent Level | .rdl | 
+other | Diablo 1 Item Safe | .itm | 
 other | Digita Organiser Theme |  | 
 other | Directory Opus Settings |  | 
 other | Dive File Format | .dff | 
@@ -656,6 +662,7 @@ other | OLB Library |  | [7 sample files](https://telparia.com/fileFormatSamples
 other | OS/2 Device Driver | .sys | 
 other | OS/2 Dynamic Link Library | .dll | 
 other | OS/2 Extended File Attributes |  | 
+other | OS9/68k Module |  | 
 other | PA-RISC Object Code | .o | 
 other | PaperPort Slide Show | .fss | 
 other | Papillon Palette | .pal .ppal | 

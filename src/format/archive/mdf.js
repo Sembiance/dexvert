@@ -8,5 +8,5 @@ export class mdf extends Format
 	magic      = ["ISO 9660 CD image"];
 	weakMagic  = true;
 	priority   = this.PRIORITY.TOP;
-	converters = ["uniso", "iat", "MDFtoISO", "IsoBuster"];	// Sometimes it's just an ISO file that uniso can handle, so try that first, otherwise 'iat' only produces a single .cue file and no bin
+	converters = ["dexvert[asFormat:archive/iso]", "iat", "MDFtoISO", "IsoBuster"];	// Sometimes it's just an ISO file that uniso can handle, so try that first, otherwise 'iat' only produces a single .cue file and no bin
 }

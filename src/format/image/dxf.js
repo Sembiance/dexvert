@@ -7,5 +7,7 @@ export class dxf extends Format
 	ext        = [".dxf"];
 	mimeType   = "image/vnd.dxf";
 	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format", /^fmt\/(63|77|435)( |$)/];
+
+	// corelDRAW often will just output a blank white image
 	converters = ["ezdxf", "totalCADConverterX", "irfanView", "soffice[outType:svg][autoCropSVG]", "uniconvertor", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
 }

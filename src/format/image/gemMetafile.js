@@ -7,5 +7,5 @@ export class gemMetafile extends Format
 	ext        = [".gem", ".gdi"];
 	magic      = [/^GEM [Mm]etafile/, /^fmt\/542( |$)/];
 	notes      = "Vector file format that could be converted into SVG. abydos is working on adding support for this format.";
-	converters = ["corelPhotoPaint"];
+	converters = ["corelPhotoPaint", "corelDRAW"];
 }

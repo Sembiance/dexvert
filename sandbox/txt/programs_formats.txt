@@ -10345,3 +10345,32 @@ TXT,DOC,HLP,BAT text files with up to 128x73 characters.
 .SEA (as created by GS/ShrinkIt)
 .BSE
 .BNY and .BQY Binary II archives
+
+
+>>> Corel Draw 5 (win2k)
+CorelDraw! 						.cdr
+Corel Presentation Exchange		.cmx
+CorelCHART Chart				.cch
+CorelTRACE						.eps
+Windows Bitmap					.bmp, .dib, .rle
+CompuServe Bitmap				.gif
+Computer Graphics Metafile		.cgm
+JPEG Bitmap						.jpg, .gif, .jtf, .cmp
+Kodak Photo CD Image			.pcd
+Paintbrush						.pcx
+Scitex CT Bitmap				.sct, .ct
+Targa Bitmap					.tga, .vda, .icb, .vst
+TIFF Bitmap						.tif, .sep, .cpt
+Windows Metafile 				.wmf
+Adobe Illustrator 1.1, 88, 3.0	.ai, .eps
+AutoCAD DXF						.dxf
+GEM File						.gem
+HPGL Plotter File				.plt
+IBM PIF							.pif
+Lotus PIC						.pic
+Macintosh PICT					.pct
+Micrografx 2.x, 3.x				.drw
+PostScript (Interpreted)		.eps, .ps
+EPS (Placeable)					.eps, .ps, .ai
+AMI Professional 2.0, 3.0		.sam
+WordPerfect Graphic				.wpg

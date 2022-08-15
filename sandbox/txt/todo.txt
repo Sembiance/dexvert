@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add CorelDraw (installed under Win2k) as a program and add it to all formats it supports as a converter
+
 
 /---------------\
 | High Priority |

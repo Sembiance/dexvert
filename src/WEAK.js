@@ -107,6 +107,7 @@ export const WEAK_VALUES =
 	/^HTML document/,
 	/^HP 48 binary/,
 	/^hp\d00/,
+	/^i386 COFF object$/,
 	/^iAPX 286 executable/,
 	/^ICE authority data$/,
 	/^IFF data$/,

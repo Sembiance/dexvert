@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_MS_WORKS_DB_MAGIC} from "./microsoftWorksDatabase.js";
 
 export class microsoftWorks extends Format
 {
@@ -7,6 +8,7 @@ export class microsoftWorks extends Format
 	ext            = [".wps", ".wp", ".doc"];
 	forbidExtMatch = true;
 	magic          = ["Microsoft Works", "Composite Document File", /^OLE 2 Compound Document.* Microsoft Works.* document/, /^fmt\/(163|233|258)( |$)/];
+	forbiddenMagic = _MS_WORKS_DB_MAGIC;
 	weakMagic      = ["Microsoft Works", "Composite Document File", /^OLE 2 Compound Document.* Microsoft Works.* document/];
 	converters     = ["fileMerlin[type:MSWKW*]", "soffice"];
 }

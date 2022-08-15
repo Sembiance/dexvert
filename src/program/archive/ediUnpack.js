@@ -14,7 +14,7 @@ export class ediUnpack extends Program
 			Sleep(2000)
 			MouseClick("left", 316, 86, 2, 0)
 			Sleep(1000)
-			MouseClick("left", 316, 136, 2, 0)
+			MouseClick("left", 316, 150, 2, 0)
 			Sleep(1000)
 			MouseClick("left", 25, 156, 1, 0)
 			Sleep(1000)

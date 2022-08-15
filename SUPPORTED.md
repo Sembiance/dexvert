@@ -1,4 +1,4 @@
-# Supported File Formats (1,329)
+# Supported File Formats (1,330)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1298,7 +1298,7 @@ poly | [QuickDraw 3D Metafile](http://fileformats.archiveteam.org/wiki/3DMF) | .
 
 
 
-## Text (42)
+## Text (43)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  |  | [13 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -1341,6 +1341,7 @@ text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Text) |  |  | [10
 text | [Text File](http://fileformats.archiveteam.org/wiki/Text) | .txt |  | [27 sample files](https://telparia.com/fileFormatSamples/text/txt/)
 text | VENDINFO | .diz |  | [10 sample files](https://telparia.com/fileFormatSamples/text/vendinfo/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsAutorun/)
+text | Windows Policy Administrative Template |  |  | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsPolicyAdminTemplate/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat |  | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d |  | [6 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
 

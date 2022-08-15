@@ -6,6 +6,6 @@ export class clarisWorks extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ClarisWorks";
 	ext            = [".cwk", ".cws"];
 	forbidExtMatch = true;
-	magic          = [/AppleWorks\/ClarisWorks .+Document/, "Claris Works document", /^fmt\/(736|743|744|748|749)( |$)/];
+	magic          = [/AppleWorks\/ClarisWorks .+Document/, "Claris Works document", /^fmt\/(736|743|744|748|749|846)( |$)/];
 	converters     = ["soffice", "mwaw2text"];
 }

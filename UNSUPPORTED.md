@@ -1,4 +1,4 @@
-# Unsupported File Formats (801)
+# Unsupported File Formats (803)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -399,7 +399,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (400)
+## Other (402)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -588,6 +588,7 @@ other | Javelin Printer Driver | .pr .pr2 |
 other | Jazz Jackrabbit File | .0sc .0fn | 
 other | Kapersky Anti-Virus License Key | .key | 
 other | KICK-Pascal Unit Interface | .u | 
+other | KiSS CEL Color Palette | .kcf | 
 other | Klik'n'Play Game | .gam | 
 other | Kodak Precision Transform | .pt | 
 other | KOLEKO Save State | .rom | 
@@ -671,6 +672,7 @@ other | PatchMeister Driver | .pmdriver |
 other | PCAnywhere Data | .bhf | 
 other | Peak Graphical Waveform | .pk | 
 other | PGP Key Ring | .key .pgp | 
+other | PhotoImpressions Album | .abm | 
 other | Platinen Layout Program Layout | .pla | 
 other | Platinen Layout Programm Bibliotheken/library | .bib | 
 other | Polyfilm Preferences | .prf | 

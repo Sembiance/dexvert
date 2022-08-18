@@ -22,6 +22,9 @@ export class bchunk extends Program
 		return a;
 	};
 
+	// Multi-track bin/cue with seperate bins per audio track produces 44 byte sized wavs with nothing but silence in them
+	verify = (r, dexFile) => dexFile.ext.toLowerCase()!==".wav" || dexFile.size!==44;
+
 	// Convert with dexvert any resulting files from bchunk. This includes .iso and .wav files
 	chain     = "dexvert[skipVerify][bulkCopyOut]";
 	renameOut = true;

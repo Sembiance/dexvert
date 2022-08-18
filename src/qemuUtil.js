@@ -260,6 +260,11 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 						Send("{ENTER}")
 					EndIf
 
+					$exitErrorWin = WinActive("", "An error has occurred in your application")
+					If $exitErrorWin Not = 0 Then
+						ControlClick("", "An error has occurred in your application", "[CLASS:Button; TEXT:&Close]")
+					EndIf
+
 					Sleep(50)
 				Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
 

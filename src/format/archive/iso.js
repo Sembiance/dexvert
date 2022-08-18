@@ -24,7 +24,7 @@ export class iso extends Format
 {
 	name           = "CD Disc Image";
 	website        = "http://fileformats.archiveteam.org/wiki/ISO_image";
-	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img"];
+	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
 	forbidExtMatch = [".img"];
 
 	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
@@ -37,7 +37,7 @@ export class iso extends Format
 		Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks).
 		Multi-track (such as Audio and Data) are also supported.
 		PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game.
-		NOTE: If the tracks are split across multiple .bin files, this is NOT currently supported.`;
+		NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)`;
 
 	auxFiles     = (input, otherFiles) =>
 	{
@@ -71,6 +71,45 @@ export class iso extends Format
 	converters = async dexState =>
 	{
 		const cueFile = await findCUEFile(dexState);
+		if(cueFile)
+		{
+			// Check to see if we are have tracks split across multiple .bin files
+			const {meta : cueFileMeta} = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog, autoUnlink : true});
+			if(cueFileMeta.files.map(({name}) => name).unique().length>1)
+			{
+				if(cueFileMeta.files[0].name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()))
+				{
+					// first entry, combine all leading DATA tracks and re-try with dexvert and the combined file
+					// NOTE: This currently only works if the file names in the CUE match exactly what is on disk
+					dexState.xlog.debug`First data entry track of multi-bin file CUE/BIN. Concatenating all leading DATA tracks and passing along to dexvert as a converter.`;
+					const dataTrackNames = [];
+					for(const file of cueFileMeta.files)
+					{
+						if(file.tracks.some(track => track.type.toLowerCase()==="audio"))
+							break;
+						
+						dataTrackNames.push(file.name);
+					}
+
+					if(dataTrackNames.length>1)
+						return [`cat[outputFilename:merged.iso][inputFilePaths:${base64Encode(JSON.stringify(dataTrackNames.map(dataTrackName => path.join(dexState.original.input.dir, dataTrackName))))}]`];
+
+					// 1 or fewer non-audio tracks, just let it fall through and use the default converters
+				}
+				else if(cueFileMeta.files.filter(file => file.name).find(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase())).tracks.some(track => track.type.toLowerCase()==="audio"))
+				{
+					// Audio track, let it be handled normally
+					dexState.xlog.debug`Audio track, let it be handled normally`;
+				}
+				else
+				{
+					// Some other track, ignore it
+					dexState.xlog.debug`Some other track, should hopefully be included in track 1 conversion, but it's being ignored here.`;
+					dexState.processed = true;
+					return [];
+				}
+			}
+		}
 
 		// If it's a VideoCD, rip video using 'vcdxrip' and files with 'bchunk'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
@@ -90,7 +129,7 @@ export class iso extends Format
 		
 		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first, but fall back to HFS side to be safe
 		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
-		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]"]), "fuseiso", "unar"];
+		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]", "uniso"]), "fuseiso", "unar"];
 
 		// If it's a BIN/CUE, run bchunk
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed

@@ -1,7 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Get archive/autoCADSlideLibrary fixed so it always extracts all files.
+  Even a bash script (when run in parellel) only seems to get some of the files sometimes and others other times
+  Using sample/archive/autoCADSlideLibrary/DHELP.SLB file, create a serial bash script and run that a bunch and see if that works
+  Then if not, try adding some sleeps in-between.
+  If stil not working, uhm... no idea? Guess just give up.
 
 /---------------\
 | High Priority |

@@ -496,6 +496,7 @@ export const WEAK_VALUES =
 	/^Quarterdeck Installation Package$/,
 	/^Sierra AGI music format$/,
 	/^Speccy snapshot$/,
+	/^Stunt Island Resource \(generic\)$/,
 	/^Sybase iAnywhere database files$/,
 	/^Table Apollo \(DBF\) Database Engine$/,
 	/^Take Command: 2nd Manassas game data archive$/,

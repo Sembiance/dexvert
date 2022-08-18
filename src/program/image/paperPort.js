@@ -31,8 +31,7 @@ export class paperPort extends Program
 			Sleep(200)
 			Send("x")
 			
-			FileRecycleEmpty()	; Deleting the imported file above only moves it to the recycle bin, so let's empty it
-			DirRemove("c:\\in\\out")`
+			FileRecycleEmpty()	; Deleting the imported file above only moves it to the recycle bin, so let's empty it`
 	});
 	renameOut = true;
 }

@@ -100,7 +100,8 @@ export default
 		wingzHelp                : {name : "Wingz Help", magic : [/^Wingz [Hh]elp/]},
 		wingzSpreadsheet         : {name : "Wingz Spreadsheet", ext : [".wkz"], magic : ["Wingz spreadsheet"]},
 		winWorks                 : {name : "WinWorks Document", ext : [".wpd"], magic : ["WinWorks text Document"]},
-		zincData                 : {name : "Zinc Data", ext : [".dat", ".znc", ".z_t"], magic : ["Zinc Data"], website : "https://en.wikipedia.org/wiki/Zinc_Application_Framework"}
+		zincData                 : {name : "Zinc Data", ext : [".dat", ".znc", ".z_t"], magic : ["Zinc Data"], website : "https://en.wikipedia.org/wiki/Zinc_Application_Framework"},
+		zxSpectrumDOSBASICSource : {name : "ZX Spectrum DOS BASIC Source Code", ext : [".bas"], magic : ["ZX spectrum +3 DOS BASIC source"]}
 	},
 	
 	other :

@@ -13,6 +13,7 @@ export default
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		shockwaveFlashDebug          : {name : "Shockwave Flash Debug", ext : [".swd"], magic : ["Flash file with debug info"]},
+		sixtyFourLANContainer		 : {name : "64LAN Container", ext : [".l64"], magic : ["64LAN container"]},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]},
 		spisTCompress                : {name : "SPIS TCompress", magic : ["SPIS TCompress archive"]},
 		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]}
@@ -24,6 +25,7 @@ export default
 		deluxeSoundSample          : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
 		digitalSymphonySoundSample : {name : "Digital Symphony Sound Sample", magic : [/^Digital Symphony sound sample/]},
 		dmxOP2InstrumentData       : {name : "DMS OP2 Instrument Data", magic : ["DMX OP2 instrument data"]},
+		kixtartSPK                 : {name : "KixTart SPK Notation", ext : [".spk"], magic : ["KiXtart SPK notation format"]},
 		kurzweilK2Sample           : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
 		performanceMusicBank       : {name : "Performance Music Bank", magic : ["Performance music bank"]},
 		richMusicFormat            : {name : "Rich Music Format", ext : [".rmf"], magic : ["Rich Music Format"]}
@@ -168,6 +170,7 @@ export default
 
 	video :
 	{
+		astoundAnimation		: {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
 		completeAnimatorFilm    : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
 		knowledgeAdventureMovie : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},
 		ratvidVideo             : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},

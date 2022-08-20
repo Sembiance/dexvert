@@ -119,7 +119,7 @@ export class iso extends Format
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
 		
-		const FALLBACK_CONVERTERS = ["fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]"];
+		const FALLBACK_CONVERTERS = ["uniso[block:512]", "fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]"];
 
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available
@@ -129,7 +129,7 @@ export class iso extends Format
 		
 		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first, but fall back to HFS side to be safe
 		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
-		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]", "uniso"]), "fuseiso", "unar"];
+		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]", "uniso"]), "uniso[block:512]", "fuseiso", "unar"];
 
 		// If it's a BIN/CUE, run bchunk
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed

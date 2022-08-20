@@ -1,4 +1,4 @@
-# Unsupported File Formats (806)
+# Unsupported File Formats (809)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -98,7 +98,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (39)
+## Document (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -130,12 +130,14 @@ document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fi
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 document | OPHelp | .hlp | [5 sample files](https://telparia.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
+document | OrCAD Schematic | .sch .sht | 
 document | P-Suite |  | [5 sample files](https://telparia.com/fileFormatSamples/document/pSuite/)
 document | Pen Pal Database | .flr | 
 document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
 document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [4 sample files](https://telparia.com/fileFormatSamples/document/quarkXPress/) - Could install QuarkXPress on WinXP, but haven't encountered very many of these files 'in the wild' yet.
+document | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Pageplus) | .ppp .ppx .ppb .ppt | [9 sample files](https://telparia.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 document | Vizawrite Document |  | 
@@ -229,7 +231,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (70)
+## Image (71)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -246,6 +248,7 @@ image | BBC Display RAM Dump |  | [1 sample file](https://telparia.com/fileForma
 image | Blue Scan Drawing | .blsc | 
 image | CAD Vantage Drawing | .dwg | 
 image | Calamus Vector Document | .cvd | 
+image | Chompsters Sprite | .spr | 
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)

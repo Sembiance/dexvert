@@ -8,6 +8,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		offset     : {desc : "If set, mount at the given offset", hasValue : true},
+		block      : {desc : "If set, specify a given block size for the ISO image.", hasValue : true},
 		hfs        : {desc : "If set, CD will be treated as HFS MAC cd"},
 		ts         : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
 		checkMount : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
@@ -27,8 +28,8 @@ await Deno.mkdir(MOUNT_DIR_PATH);
 async function extractNormalISO()
 {
 	const mountArgs = [];
-	if(argv.offset)
-		mountArgs.push("-o", `loop,offset=${argv.offset}`);
+	if(argv.offset || argv.block)
+		mountArgs.push("-o", `loop${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
 
 	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH]);
 

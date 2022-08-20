@@ -5,6 +5,7 @@ export class uniso extends Program
 	website = "https://github.com/Sembiance/dexvert/";
 	flags   = {
 		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
+		block      : "Specify the block size in bytes",
 		hfs        : "Set this to true to process the iso as a MacOS HFS disc. Default: false",
 		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
@@ -14,6 +15,8 @@ export class uniso extends Program
 		const a = ["--ts", r.f.input.ts];
 		if(r.flags.offset)
 			a.push(`--offset=${r.flags.offset}`);
+		if(r.flags.block)
+			a.push(`--block=${r.flags.block}`);
 		if(r.flags.hfs)
 			a.push("--hfs");
 		if(r.flags.checkMount)

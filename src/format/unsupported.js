@@ -167,6 +167,7 @@ export default
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
 		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]},
+		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
 		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]}
 	},
 
@@ -263,6 +264,7 @@ export default
 		clipperPreLinkedLibrary      : {name : "Clipper Pre-Linked Library", ext : [".pll"], magic : ["Clipper Pre-Linked Library"]},
 		codeWarriorProject           : {name : "CodeWarrior Project", ext : [".mcp"], magic : ["CodeWarrior Project"]},
 		coffLibrary                  : {name : "COFF Library", ext : [".lib", ".obj", ".a"], magic : ["Common Object File Format (COFF) Library"]},
+		coolPageProject 			 : {name : "Cool Page Project", ext : [".cpg"], magic : ["Cool Page Project"]},
 		creativeSignalMicrocode      : {name : "Creative Signal Processor Microcode", ext : [".csp"], magic : ["Creative Signal Processor microcode"]},
 		cornelHuthComprssedLibrary   : {name : "Cornel Huth Compressed Library", ext : [".li_"], magic : ["Cornel Huth compressed library"]},
 		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
@@ -471,7 +473,7 @@ export default
 		labViewVirtualInstrument     : {name : "LabView Virtual Instrument", ext : [".vi"], magic : ["National Instruments, LabVIEW File, Virtual Instrument", "LABView Virtual Instrument"]},
 		ldiffDifferencesData         : {name : "LDIFF Differences Data", ext : [".lzd"], magic : ["LDIFF differences data"]},
 		life3000Status               : {name : "LIFE 3000 Status", ext : [".lif"], magic : ["LIFE 3000 status"]},
-		linuxKernel                  : {name : "Linux Kernel", filename : ["vmlinuz", "bzImage"], magic : [/^Linux kernel$/, /^Linux kernel .*boot executable/, /^Linux .+kernel root/]},
+		linuxKernel                  : {name : "Linux Kernel", filename : ["vmlinuz", "bzImage"], magic : [/^Linux kernel$/, /^Linux kernel .*boot executable/, /^Linux .+kernel root/, "Linux kernel from prehistoric times", "Linux kernel version 1.3.79 or older"]},
 		linuxSwapFile                : {name : "Linux Swap File", filename : ["swapfile"], magic : ["Linux old swap file", "Linux swap file"]},
 		logicSimCircuit              : {name : "LogicSim Circuit", magic : ["LogicSim circuit"]},
 		lotus123FormattingData       : {name : "Lotus 1-2-3 Formatting Data", ext : [".fm3"], magic : ["Formatting Data for Lotus 1-2-3 worksheet"]},
@@ -487,6 +489,8 @@ export default
 		maxonResourceCreationData    : {name : "Maxon Resource Creation Tool Data", ext : [".rct"], magic : ["Maxon Resource Creation Tool data"]},
 		memoryManagerResourceData    : {name : "Memory Manager Resource Data", magic : ["Memory Manager resource data"]},
 		metaCreationsResourceFile    : {name : "MetaCreations Resource Composite File", magic : ["MetaCreations Resource Composite File (generic)", "Axiom Composite File Management System"]},
+		microFocusFile               : {name : "Micro Focus File", ext : [".dat"], magic : ["Micro Focus File with Header"], weakMagic : true},
+		microFocusIndexFile		     : {name : "Micro Focus Index File", ext : [".idx"], magic : ["Micro Focus Index File"], weakMagic : true},
 		microLatheObject             : {name : "Micro Lathe Object", ext : [".lat"], magic : ["MicroLathe object"]},
 		microsoftCertificateStore    : {name : "Microsoft Serialized Certificate Store", ext : [".sst"], magic : ["Microsoft Serialized certificate Store"]},
 		microsoftFastFindIndex       : {name : "Microsoft FastFind Index", ext : [".ffx"], magic : ["Microsoft Fast Find Index"]},

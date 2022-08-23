@@ -119,7 +119,12 @@ export class iso extends Format
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
 		
-		const FALLBACK_CONVERTERS = ["uniso[block:512]", "fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]"];
+		const FALLBACK_CONVERTERS =
+		[
+			"uniso[block:512]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
+			"fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]",
+			"cabextract[matchType:magic]"	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
+		];
 
 		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
 		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available

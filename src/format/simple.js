@@ -55,6 +55,7 @@ export default
 		locomotiveBASIC          : {name : "Locomotive BASIC", ext : [".bas"], magic : ["Amstrad CPC Locomotive BASIC tokenized source"]},
 		lotusManuscript          : {name : "Lotus Manuscript Document", ext : [".doc"], magic : ["Lotus Manuscript Document"]},
 		lotusNotes               : {name : "Lotus Notes Database", ext : [".nsf"], magic : ["Lotus Notes database"]},
+		lotusScreenCamScript     : {name : "Lotus ScreenCam Caption Script", ext : [".scs"], magic : ["Lotus ScreenCam Caption Script"]},
 		magneticPages            : {name : "Magnetic Pages Article", magic : ["Magnetic Pages article"]},
 		messageLibrarian         : {name : "Novell/C-Worthy Message Librarian", ext : [".msg", ".dat"], magic : [/^Novell [Mm]essage [Ll]ibrarian [Dd]ata/, "C-Worthy Message Librarian Data"]},
 		microHelp                : {name : "MicroHelp", ext : [".slb"], magic : ["MicroHelp Library"]},

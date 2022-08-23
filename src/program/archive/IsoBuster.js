@@ -16,10 +16,12 @@ export class IsoBuster extends Program
 		
 		// normally, if the command works, we don't need to do anything at all with the script, but if a bad file is sent it might show an error we need to cancel (http://retromission.com/view/3/World's%20Best%20Butts%20(1995).iso/viewers/pep13.zip/SERIOUS1.BIN)
 		script : `
-			Local $errorVisible = WinWaitActive("No file systems and/or files found", "", 10)
+			Local $errorVisible = WinWaitActive("No file systems and/or files found", "", 5)
 			If $errorVisible Not = 0 Then
 				ControlClick("No file systems and/or files found", "", "[TEXT:&Cancel]")
 			EndIf
+
+			WindowDismissWait("Friendly warning", "", 5, "{ENTER}")
 			
 			WaitForPID(ProcessExists("IsoBuster.exe"), ${xu.MINUTE*10})`
 	});

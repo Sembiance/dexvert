@@ -8,6 +8,7 @@ fi
 formatid="$1"
 formatName=$(echo "$1" | cut -d'/' -f2)
 shift
+copiedAny=0
 
 if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ] || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/unsupported.js || grep -Fq "$formatName" /mnt/compendium/DevLab/dexvert/src/format/simple.js; then
 	formatDir="/mnt/compendium/DevLab/dexvert/test/sample/""$formatid""/"
@@ -15,17 +16,31 @@ if [ -f "/mnt/compendium/DevLab/dexvert/src/format/""$formatid"".js" ] || grep -
 
 	for filename in "$@"
 	do
-		if [ -f "$formatDir""$filename" ]; then
-			cp "$filename" "$formatDir""$(date +%s)_""$filename"
+		existingShaSums=$(sha1sum "$formatDir"* | cut -d' ' -f1)
+		ourSum=$(sha1sum "$filename" | cut -d' ' -f1)
+
+		# check if $ourSum is in list of lines $existingShaSums
+		if grep -Fq "$ourSum" <<< "$existingShaSums"; then
+			echo "SKIPPING $filename <--- dup file"
 		else
-			cp "$filename" "$formatDir"
+			echo " COPYING $filename"
+			copiedAny=1
+			if [ -f "$formatDir""$filename" ]; then
+				cp "$filename" "$formatDir""$(date +%s)_""$filename"
+			else
+				cp "$filename" "$formatDir"
+			fi
 		fi
 	done
 
-	cd "$formatDir" || exit
-	sha1sum ./* | sort
-
-	echo -e "\n# of $formatid files: ""$(find "$formatDir" -type f | wc -l)"
+	# check to see if copiedAny is 1
+	if [ "$copiedAny" -eq 1 ]; then
+		echo ""
+		sha1sum "$formatDir"* | sort
+		echo -e "\n# of $formatid files: ""$(find "$formatDir" -type f | wc -l)"
+	else
+		echo -e "\nNo files copied to $formatDir"
+	fi
 else
 	echo "Unknown format: $formatid"
 fi

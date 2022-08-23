@@ -1,6 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Get AARU support working: https://github.com/aaru-dps/Aaru
+  http://retromission.com/view/4313/Disc%20Dump/CD32_11.aaruf
+  http://dev.retromission.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
+  Then add that converter as an option to all formats that it supports
+
+* Add support for The Print Shop Deluxe Graphics library:
+  http://retromission.com/view/4974/Handwritten%20Fonts.iso/previews/famousmg/famousmg.psg
+  http://retromission.com/view/4974/Handwritten%20Fonts.iso/previews/artparts/apsamplr.psg
+
 * Get archive/autoCADSlideLibrary fixed so it always extracts all files.
   Even a bash script (when run in parellel) only seems to get some of the files sometimes and others other times
   Using sample/archive/autoCADSlideLibrary/DHELP.SLB file, create a serial bash script and run that a bunch and see if that works

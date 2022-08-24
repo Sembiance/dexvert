@@ -6,6 +6,7 @@ export default
 {
 	archive :
 	{
+		abackupDiskImage             : {name : "ABackup Disk Image", ext : [".adf"], magic : ["ABackup backup disk image"]},
 		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
@@ -88,6 +89,7 @@ export default
 		dosCodePageFont         : {name : "DOS Code Page Font", magic : ["DOS code page font data"]},
 		dynaCADDVectorFont      : {name : "DynaCADD Vector Font", ext : [".fnt"], magic : ["DynaCADD vector Font"]},
 		envisionPublisherFont   : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
+		expertDrawFont          : {name : "ExpertDraw Font", ext : [".expf"], magic : ["ExpertDraw Font"], weakMagic : true},
 		geoWorksGEOSFont        : {name : "GeoWorks GEOS Font", ext : [".fnt"], magic : ["GeoWorks GEOS font"]},
 		grxFont                 : {name : "GRX Font", ext : [".fnt"], magic : ["GRX Font", "libGrx font data"]},
 		japaneseWPKanjiFont     : {name : "Japanese Word Processor Kanji Font", ext : [".f00"], magic : ["Japanese Word Processor Kanji Font"]},

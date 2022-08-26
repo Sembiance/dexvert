@@ -1,11 +1,11 @@
-# Unsupported File Formats (815)
+# Unsupported File Formats (818)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (48)
+## Archive (49)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -54,6 +54,7 @@ archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFo
 archive | Unreal Package | .ut2 .uasset | 
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
+archive | WWarp Disk Image | .wwp | 
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 archive | ZX Spectrum Tape Image | .tap | [4 sample files](https://telparia.com/fileFormatSamples/archive/zxSpectrumTape/)
 
@@ -233,7 +234,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (71)
+## Image (72)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -274,6 +275,7 @@ image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad
 image | JAM Bitmap | .jam | 
 image | KeyCAD Complete Drawing | .kcf | [7 sample files](https://telparia.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
+image | [Loadstar SHP](http://fileformats.archiveteam.org/wiki/SHP_(Loadstar)) | shp | [8 sample files](https://telparia.com/fileFormatSamples/image/loadstarSHP/)
 image | Lotus Smart Icon | .smi | 
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -406,7 +408,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (405)
+## Other (406)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -430,6 +432,7 @@ other | Adobe Photoshop Gradient | .grd |
 other | Adobe Type Manager Font Information | .inf | 
 other | Adorage preferences |  | 
 other | Adventure Game Toolkit Strings | .d$$ | 
+other | Aegis Impact! Slideshow | .sld | 
 other | Aegis Pro Motion Geometry | .geo | 
 other | AIBB load Module | .module .aibb | 
 other | Alchemy Mindworks Resource | .res | 

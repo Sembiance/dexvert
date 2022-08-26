@@ -17,7 +17,8 @@ export default
 		sixtyFourLANContainer		 : {name : "64LAN Container", ext : [".l64"], magic : ["64LAN container"]},
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]},
 		spisTCompress                : {name : "SPIS TCompress", magic : ["SPIS TCompress archive"]},
-		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]}
+		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]},
+		wwarpDiskImage               : {name : "WWarp Disk Image", ext : [".wwp"], magic : ["WWarp disk image"]}
 	},
 
 	audio :
@@ -250,6 +251,7 @@ export default
 		// Programming //
 		/////////////////
 		actorImageSnapshot           : {name : "Actor Image Snapshot", ext : [".ima"], magic : ["Actor Image snapshot"], weakMagic : true},
+		aegisImpactSlideshow         : {name : "Aegis Impact! Slideshow", ext : [".sld"], magic : ["Aegis Impact! Slideshow"]},
 		alphaFourScript              : {name : "Alpha Four Script", ext : [".scp"], magic : ["Alpha Four Script"]},
 		amigaBASICProtectedFile      : {name : "Amiga BASIC Protected File", ext : [".bas"], magic : ["AmigaBASIC source (protected)"]},
 		amigaEModule                 : {name : "Amiga E Module", ext : [".m"], magic : ["Amiga E module", "E module/library"]},

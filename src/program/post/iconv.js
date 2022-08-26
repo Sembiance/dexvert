@@ -5,7 +5,7 @@ export class iconv extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
 	flags   = {
-		fromEncoding : "Encoding to translate from. REQUIRED",
+		fromEncoding : "Encoding to translate from. REQUIRED. For list, run: iconv --list",
 		toEncoding   : "Encoding to translate into. Default: UTF-8"
 	};
 	bin        = "iconv";

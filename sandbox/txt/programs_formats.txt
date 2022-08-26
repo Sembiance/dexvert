@@ -2641,7 +2641,7 @@ Misc. Types
 	Speech BASIC
 	Turtle BASIC
 
->>> recoil2png (Linux - v6.1.1 - May 15, 2022) (IMAGE) (https://sourceforge.net/projects/recoil/  See: /usr/share/doc/recoil*/formats.html
+>>> recoil2png (Linux - v6.3.0 - May 15, 2022) (IMAGE) (https://sourceforge.net/projects/recoil/  See: /usr/share/doc/recoil*/formats.html
 Platform	Extension	Description	Resolution	Depth	Frames
 Amiga	ABK	AMOS			1
 Amiga	ACBM	Amiga Continuous Bitmap			1
@@ -2812,6 +2812,7 @@ Atari 8-bit	TL4	Mad Studio ANTIC 4 tile	up to 16x40	5 colors	1
 Atari 8-bit	TX0	Texture Maker0 16x16x16	16x16	16 colors	1
 Atari 8-bit	TXE	Texture Editor by Mikey	80x96	16-level grayscale	1
 Atari 8-bit	TXS		16x16	16-level grayscale	1
+Atari 8-bit	VSC+G2F	Graph2Font vertical scroll		256 colors	1
 Atari 8-bit	VZI	VertiZontal Interlacing	160x200	31-level grayscale	2
 Atari 8-bit	WND	Blazing Paddles window	up to 160x192	4 colors	1
 Atari 8-bit	XLP	XL-Paint	up to 160x200	7 colors	2
@@ -2955,46 +2956,56 @@ Commodore 64	64C	8x8 font		mono	1
 Commodore 64	A	SEUCK sprites		16 colors	1
 Commodore 64	A64, WIG	Wigmore Artist 64	160x200	16 colors	1
 Commodore 64	AAS, ART	Art Studio	320x200	16 colors	1
-Commodore 64	AFL	AFLI-editor v2.0 by Topaz Beerlin	296x200	16 colors	1
+Commodore 64	AFL	AFLI-editor	296x200	16 colors	1
 Commodore 64	AMI	Amica Paint	160x200	16 colors	1
-Commodore 64	BFLI	Big FLI	148x400	16 colors	1
-Commodore 64	BML, FLI	FLI Graph 2.2 by Blackmail	148x200	16 colors	1
+Commodore 64	BDP	Boogie Down Paint	160x200	16 colors	1
+Commodore 64	BFL, BFLI	Big FLI	148x400	16 colors	1
+Commodore 64	BML, FLI, FLG	FLI Graph	148x200	16 colors	1
 Commodore 64	CDU	CDU-Paint	160x200	16 colors	1
 Commodore 64	CFLI	CFLI Designer	296x200	16 colors	1
 Commodore 64	CHE	Cheese	160x200	16 colors	1
 Commodore 64	CLE	Centauri Logo-Editor	160x200	4 colors	1
-Commodore 64	CLP	GoDot Clip	up to 320x200	16 colors	1
+Commodore 64	CLP	GoDot clip	up to 320x200	16 colors	1
 Commodore 64	CTM	CharPad		16 colors	1
 Commodore 64	CWG	Create with Garfield	160x200	16 colors	1
 Commodore 64	DD, DDP	Doodle	320x200	16 colors	1
-Commodore 64	DOL	Dolphin Ed	160x200	16 colors	1
+Commodore 64	DOL, BED	Dolphin Ed	160x200	16 colors	1
 Commodore 64	DRL, DLP	Drazlace	up to 320x200		2
 Commodore 64	DRZ, DRP	Drazpaint	160x200	16 colors	1
 Commodore 64	ECI	ECI Graphic Editor	296x200		2
 Commodore 64	ECP	ECI Graphic Editor (compressed)	296x200		2
+Commodore 64	EMC	EMC-editor	148x192	16 colors	1
+Commodore 64	ESH	Extend Super Hires Interlace Editor	192x200		2
 Commodore 64	FBI	Flip	148x200	16 colors	1
 Commodore 64	FCP, FPT	Face Painter	160x200	16 colors	1
 Commodore 64	FD2	FLI Designer	148x200	16 colors	1
-Commodore 64	FFLI		148x200		2
+Commodore 64	FED	FLI Editor	148x200	16 colors	1
+Commodore 64	FFL, FFLI	Flash FLI	148x200		2
 Commodore 64	FLF	Turbo Rascal Syntax Error		16 colors	1
 Commodore 64	FLI	FLI	148x200	16 colors	1
+Commodore 64	FLM	Flimatic	up to 296x200	16 colors	1
+Commodore 64	FP	Fuckpaint	320x200		2
 Commodore 64	FUN, FP2	Funpaint	296x200		2
 Commodore 64	FPR	FLI Profi	160x200	16 colors	1
 Commodore 64	G	SEUCK font		mono	1
 Commodore 64	GCD, MON		320x200	mono	1
 Commodore 64	GG	Koala Painter (compressed)	320x200	16 colors	1
 Commodore 64	GUN, IFL	Gunpaint	296x200		2
-Commodore 64	HBM, HIR, HPI, GIH, FGS	Hires-Bitmap	320x200	mono	1
+Commodore 64	HBM, HIR, HPI, FGS	Hires-Bitmap	320x200	mono	1
+Commodore 64	HCB	HCB-editor	148x200	16 colors	1
 Commodore 64	HED	Hi-Eddi	320x200	16 colors	1
 Commodore 64	HET	Hires-Editor	320x200	16 colors	1
-Commodore 64	HFC, HFD	Hires FLI by Crest	296x112	16 colors	1
-Commodore 64	HIM	Hires Manager by Cosmos	296x192	16 colors	1
-Commodore 64	HLF	Hires Interlace by Feniks	320x200		2
+Commodore 64	HFC, HFD	Hires FLI Designer	296x112	16 colors	1
+Commodore 64	HIM	Hires Manager	296x192	16 colors	1
+Commodore 64	HLE	Hireslace Editor	320x200		2
+Commodore 64	HLF, HIE	Hires Interlace	320x200		2
 Commodore 64	HPC	Hi-Pic Creator	320x200	16 colors	1
 Commodore 64	IHE	Interlace Hires Editor	320x200	3 colors	2
-Commodore 64	IPH, HRE	Interpaint	320x200	16 colors	1
+Commodore 64	ILE	Interlaced Logo Editor	320x48	10 colors	2
+Commodore 64	IPH, GIG, HPI, HRE	Interpaint	320x200	16 colors	1
 Commodore 64	IPT, LRE	Interpaint	160x200	16 colors	1
 Commodore 64	ISH	Image System	320x200	16 colors	1
+Commodore 64	ISH	Interlace-Super-Hires Painter	320x200		2
 Commodore 64	ISM	Image System	160x200	16 colors	1
 Commodore 64	JJ	Doodle (compressed)	320x200	16 colors	1
 Commodore 64	GIG, KLA, KOA	Koala Painter	160x200	16 colors	1
@@ -3002,21 +3013,43 @@ Commodore 64	LP3	Logo Painter 3/3+	160x400	4 colors	1
 Commodore 64	MCI	True Paint	320x200		2
 Commodore 64	MIL	Micro Illustrator	160x200	16 colors	1
 Commodore 64	MLE	Multi-Lace Editor	320x56	10 colors	2
-Commodore 64	OCP	Advanced Art Studio	160x200	16 colors	1
+Commodore 64	MUF	MUFLI Editor	296x200	16 colors	1
+Commodore 64	MUI	MUIFLI Editor	296x200		2
+Commodore 64	MUP	MUFLI Editor (compressed)	296x200	16 colors	1
+Commodore 64	MWI, MWIN	Art Studio window	up to 160x200	16 colors	1
+Commodore 64	NUF	NUFLI Editor	320x200	16 colors	1
+Commodore 64	NUP	NUFLI Editor (compressed)	320x200	16 colors	1
+Commodore 64	OCP, MPI, MPIC	Advanced Art Studio	160x200	16 colors	1
 Commodore 64	P64, FLY	Picasso 64	160x200	16 colors	1
 Commodore 64	PDR	PetDraw64	40x25 characters	16 colors	1
 Commodore 64	PET	PETSCII Editor	40x25 characters	16 colors	1
-Commodore 64	PI	Blazing Paddles	160x200	16 colors	1
+Commodore 64	PI, BPL	Blazing Paddles	160x200	16 colors	1
 Commodore 64	PMG	Paint Magic	160x200	16 colors	1
 Commodore 64	PP	Pixel Perfect	296x200		2
 Commodore 64	PPP	Pixel Perfect (compressed)	296x200		2
 Commodore 64	RP	Rainbow Painter	160x200	16 colors	1
+Commodore 64	RPH	Run Paint	320x200	16 colors	1
 Commodore 64	RPM	Run Paint	160x200	16 colors	1
+Commodore 64	RPO, GIH	Run Paint	320x200	mono	1
 Commodore 64	SAR	Saracen Paint	160x200	16 colors	1
 Commodore 64	SCR+COL	PETSCII Editor	40x25 characters	16 colors	1
+Commodore 64	SH1	Super-hires Editor I	96x168	16 colors	1
+Commodore 64	SH2	Super-hires Editor II	192x168	16 colors	1
+Commodore 64	SHE	Super Hires Editor	96x88	16 colors	1
+Commodore 64	SHE	Super Hires Editor 2	192x168	16 colors	1
+Commodore 64	SHF	Super Hires FLI Editor	up to 208x167	16 colors	1
+Commodore 64	SHI	Super Hires Interlace Editor	96x200		2
+Commodore 64	SHS	Super Hires Studio	320x200	16 colors	1
+Commodore 64	SHX	SHF-XL Edit	144x168	16 colors	1
+Commodore 64	SIF	Super Hires Interlace FLI Editor	96x167		2
 Commodore 64	SPD	SpritePad			1
+Commodore 64	UFL	UFLI-editor	288x200	16 colors	1
+Commodore 64	UIF	UIFLI-editor	288x200		2
+Commodore 64	VHI	Vertical Hires Interlace Editor	320x200		2
 Commodore 64	VIC		up to 320x200	16 colors	1
-Commodore 64	VID	Vidcom 64Paint	160x200	16 colors	1
+Commodore 64	VID	Vidcom 64	160x200	16 colors	1
+Commodore 64	XFL	X-FLI Editor	192x167	16 colors	1
+Commodore 64	ZOM	Zoomatic	160x200	16 colors	1
 Commodore 16/116/Plus4	P4I	Botticelli	320x200	121 colors	1
 Commodore 16/116/Plus4	P4I	Multi Botticelli	160x200	121 colors	1
 Commodore 16/116/Plus4	P4I		128x64	4 colors	1
@@ -3024,6 +3057,8 @@ Commodore 128	BM, VBM	VDC BitMap		mono	1
 Commodore 128	BRUS, PICT	BASIC 8		mono	1
 Commodore 128	IP	I Paint		16 colors	1
 Electronika BK	PIC		256x256	4 colors	1
+Electronika BK	BKS		up to 512x256		1 or 2
+Electronika MC 0515	SCR		640x200	mono	1
 FM Towns	PI				1
 FM Towns	PIC				1
 HP 48	GRB, GRO	GROB		mono	1
@@ -3101,6 +3136,7 @@ TRS-80	SHR	MagicDraw	640x240	mono	1
 TRS-80 Color Computer	CLP		40x56	mono	1
 TRS-80 Color Computer	GRF, MAX, P41, PIX		256x192	mono	1
 TRS-80 Color Computer	P11		128x96	4 colors	1
+Vector-06C	SPR	256		16 colors	1
 ZX81	P	Sinclair BASIC	32x24 characters	mono	1
 ZX81	RAW	ZXPaintyONE v2.0	32x24 characters	mono	1
 ZX81	ZP1 (arbitrary)	ZXpaintyONE	32x24 characters	mono	1
@@ -3113,6 +3149,7 @@ ZX Spectrum	CH$	CHR$			1 or 2
 ZX Spectrum	CH4	4x8 font		mono	1
 ZX Spectrum	CH6	6x8 font		mono	1
 ZX Spectrum	CH8	8x8 font		mono	1
+ZX Spectrum	CHX	Big font		15 colors	1
 ZX Spectrum	FLF	Turbo Rascal Syntax Error	256x192	15 colors	1
 ZX Spectrum	HLR	Attributes Gigascreen	32x24 characters		2
 ZX Spectrum	IFL	Multicolor 8x2	256x192	15 colors	1
@@ -3125,8 +3162,10 @@ ZX Spectrum	MG8	MultiArtist 8x8	256x192		2
 ZX Spectrum	MLT		256x192	15 colors	1
 ZX Spectrum	RGB		256x192	8 colors	3
 ZX Spectrum	SCR		256x192	15 colors	1
+ZX Spectrum	SEV	SevenuP	up to 256x192	15 colors	1
 ZX Spectrum	STL	Stellar	64x48		2
-ZX Spectrum	ZXP	ZX-Paintbrush	256x192	15 colors	1
+ZX Spectrum	ZXP	ZX-Paintbrush		15 colors	1
+ZX Spectrum	ZXS	SpecSCII	256x192	15 colors	1
 ZX Spectrum Profi	GRF	Profi	512x240	16 colors	1
 ZX Spectrum ULAplus	SCR	ULAplus	256x192	64 colors	1
 ZX Evolution	SXG	Speccy eXtended Graphics		256 colors	1

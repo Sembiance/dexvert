@@ -9,6 +9,7 @@ export default
 	{
 		acrossCrosswordPuzzle    : {name : "Across Crossword Puzzle", ext : [".puz"], magic : ["PUZ crossword puzzle", "Across crossword puzzle"]},
 		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa"], magic : ["ACT! word processor document"]},
+		adorageScript			 : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
 		amigaProWrite 			 : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam database", "askSam Windows database"]},
 		atariWorks               : {name : "Atari Works Document", ext : [".stw"], magic : ["Atari Works Wordprocessor document"]},
@@ -142,6 +143,7 @@ export default
 		gfaBasicWindows                 : {name : "GFA-BASIC Windows", ext : [".gfw"], magic : ["GFA-BASIC Windows v3 tokenized source"]},
 		harvardTotalProject             : {name : "Harvard Total Project Manager Project", ext : [".prj"], magic : ["Harvard Total Project Manager Project"]},
 		ibmPCOverlay                    : {name : "IBM PC Overlay", ext : [".ovl"], magic : ["IBM PC Overlay"]},
+		iBrowseCookies                  : {name : "iBrowse Cookies", filename : ["Cookies"], magic : ["IBrowse Cookies"]},
 		iffCTLG                         : {name : "Amiga IFF Catalog", ext : [".catalog"], magic : ["IFF data, CTLG message catalog", "Amiga Catalog translation format"], website : "http://fileformats.archiveteam.org/wiki/IFF"},
 		installShieldPackage            : {name : "InstallShield Package", ext : [".pkg"], magic : ["InstallShield compiled setup Package"]},
 		installShieldScript             : {name : "InstallShield Script", ext : [".ins"], magic : ["InstallShield Script"]},

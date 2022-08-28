@@ -1,4 +1,4 @@
-# Unsupported File Formats (818)
+# Unsupported File Formats (823)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -234,7 +234,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (72)
+## Image (73)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -257,6 +257,7 @@ image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSam
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
+image | Drawing Interchange Binary Format | .dxb | 
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 image | EasyCAD Drawing | .fcd | 
 image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [7 sample files](https://telparia.com/fileFormatSamples/image/excelChart/) - Canvas claims support for this, but I couldn't get it to convert any of my samples.
@@ -275,7 +276,7 @@ image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad
 image | JAM Bitmap | .jam | 
 image | KeyCAD Complete Drawing | .kcf | [7 sample files](https://telparia.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
-image | [Loadstar SHP](http://fileformats.archiveteam.org/wiki/SHP_(Loadstar)) | shp | [8 sample files](https://telparia.com/fileFormatSamples/image/loadstarSHP/)
+image | [Loadstar SHP](http://fileformats.archiveteam.org/wiki/SHP_(Loadstar)) | shp | [32 sample files](https://telparia.com/fileFormatSamples/image/loadstarSHP/)
 image | Lotus Smart Icon | .smi | 
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -408,7 +409,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (406)
+## Other (408)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -704,10 +705,12 @@ other | Puzzle Buster Puzzle | .puz |
 other | QL Plugin-ROM |  | 
 other | Quake II Map | .bsp | 
 other | Quake II Sprite Reference | .sp2 | 
+other | Quake III Map | .bsp | 
 other | Quake Map | .bsp | 
 other | QuickText Titles |  | 
 other | QuickTime Installer Cache | .qdat .qda | 
 other | Raptor GLB Encrypted Container | .glb | 
+other | Raven Software Compiled Script | .ibi | 
 other | Reflections Camera | .kam | 
 other | Reflections Data | .r3 | 
 other | Reflections Material | .mat | 
@@ -820,7 +823,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (28)
+## Poly (30)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -843,6 +846,8 @@ poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm 
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/poly/polyfilm/)
 poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
+poly | Quake 3 Model | .md3 | 
+poly | Raven Object File Format | .rof | 
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.

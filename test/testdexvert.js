@@ -139,8 +139,10 @@ const FLEX_DIFF_FILES =
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
-	// Mis-classified by tensor as garbage, but they do look like garbage, so we allow it but it gets processed by deark as an archive
+	// Mis-classified by tensor as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
+	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
+	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],

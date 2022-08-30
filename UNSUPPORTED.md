@@ -1,4 +1,4 @@
-# Unsupported File Formats (823)
+# Unsupported File Formats (826)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -276,9 +276,9 @@ image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad
 image | JAM Bitmap | .jam | 
 image | KeyCAD Complete Drawing | .kcf | [7 sample files](https://telparia.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
-image | [Loadstar SHP](http://fileformats.archiveteam.org/wiki/SHP_(Loadstar)) | shp | [32 sample files](https://telparia.com/fileFormatSamples/image/loadstarSHP/)
 image | Lotus Smart Icon | .smi | 
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
+image | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [8 sample files](https://telparia.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 image | Microsoft Border Art | .bdr | 
@@ -409,7 +409,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (408)
+## Other (409)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -439,6 +439,7 @@ other | AIBB load Module | .module .aibb |
 other | Alchemy Mindworks Resource | .res | 
 other | Allways Printer Driver | .apc .apd .apf | 
 other | Alpha Four Script | .scp | 
+other | Altera Waveform Design File | .wdf | 
 other | AmiAtlas File | .borders .coasts .index .islands .prefs .rivers .route .town .countries .country | 
 other | Amiga Action Replay 3 Freeze File |  | [4 sample files](https://telparia.com/fileFormatSamples/unsupported/amigaActionReplay3/)
 other | Amiga ADF BlkDev File | .blkdev | 
@@ -823,7 +824,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (30)
+## Poly (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -835,6 +836,7 @@ poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [
 poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
+poly | Half Life Model | .mdl | [12 sample files](https://telparia.com/fileFormatSamples/poly/halfLifeModel/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | Infini-D Scene | .ids .id4 | 
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
@@ -859,7 +861,7 @@ poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wi
 
 
 
-## Video (23)
+## Video (24)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 video | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://telparia.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -870,6 +872,7 @@ video | Animation Works Movie | .awm | [5 sample files](https://telparia.com/fil
 video | Astound Animation | .awa | 
 video | [ClariSSA Super Smooth Animation](http://fileformats.archiveteam.org/wiki/IFF-SSA) | .ssa .anim | [7 sample files](https://telparia.com/fileFormatSamples/video/iffSSA/) - Couldn't find any working modern converter that works on any of the sample files.
 video | [Delphine CIN Video](https://wiki.multimedia.cx/index.php/Delphine_CIN) | .cin | [5 sample files](https://telparia.com/fileFormatSamples/video/delphineCIN/) - FFMPEG has support for something called Delphine Software International CIN, but it couldn't convert the test files
+video | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/eaMADVideo/)
 video | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://telparia.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 video | DK Multimedia Animation | .ani | [7 sample files](https://telparia.com/fileFormatSamples/video/dkAnimation/)
 video | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [3 sample files](https://telparia.com/fileFormatSamples/video/idRoQ/)

@@ -11,7 +11,8 @@ export class canvas extends Program
 	};
 	args     = r => [r.inFile()];
 	qemuData = r => ({
-		script : `
+		alsoKill : ["CanvasInTouch2.exe"],
+		script   : `
 		AutoItSetOption("PixelCoordMode", 0)
 		AutoItSetOption("SendKeyDelay", 20)
 

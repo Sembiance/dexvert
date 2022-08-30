@@ -15,7 +15,7 @@ export class corelDRAW extends Program
 			Send("!fi")
 			$importWindow = WindowRequire("Import", "", 5)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
-			WinWaitClose($importWindow, "", 0)
+			WinWaitClose($importWindow, "", 10)
 
 			Func PostImportWindows()
 				WindowFailure("Filter Error", "", -1, "{ENTER}")

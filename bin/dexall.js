@@ -25,4 +25,4 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	const outputSubDirPath = path.join(outputDirPath, path.basename(inputFilePath));
 	await Deno.mkdir(outputSubDirPath, {recursive : true});
 	await runUtil.run("deno", runUtil.denoArgs("--allow-all", "/mnt/compendium/DevLab/dexvert/src/app/dexvert.js", inputFilePath, outputSubDirPath), runUtil.denoRunOpts());
-});
+}, Math.floor(navigator.hardwareConcurrency*0.90));

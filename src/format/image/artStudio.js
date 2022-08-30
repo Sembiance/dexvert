@@ -7,6 +7,6 @@ export class artStudio extends Format
 	ext        = [".art", ".aas"];
 	magic      = ["C64 Hires bitmap"];
 	weakMagic  = true;
-	fileSize   = [].pushSequence(9000, 9010);
+	fileSize   = [...[].pushSequence(9000, 9010), 10018];
 	converters = ["recoil2png", "view64"];
 }

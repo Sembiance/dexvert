@@ -8,4 +8,5 @@ export class a2Sprites extends Format
 	magic      = TEXT_MAGIC;
 	weakMagic  = true;
 	converters = ["recoil2png"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

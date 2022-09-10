@@ -1,16 +1,15 @@
-# Unsupported File Formats (826)
+# Unsupported File Formats (827)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
 
 
 
-## Archive (49)
+## Archive (48)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 archive | ABackup Disk Image | .adf | 
-archive | [Anex86 PC98 Floppy Image](http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image) | .fdi | [12 sample files](https://telparia.com/fileFormatSamples/archive/anex86FDI/) - The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. Removing the 4k header and attempting to mount the raw image fails. Likely because of a disk format unique to PC98. I was able to extract the files by creating a HDD image with anex86 and formatting it by following: http://www.retroprograms.com/mirrors/Protocatbert/protocat.htm After that I could run anex86 with dos6.2 in FDD #1 and the FDI image in FDD #2. Then hit Escape and at the DOS prompt I could COPY B:* C: Then I exited anex86 and then I was able to use wine editdisk.exe to open the HDD image, ctrl-a all the files and ctrl-e extract them. So I could automate this and support FDI extraction. But right now I just don't see the value in doing so.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 archive | Arts and Letters Clip Art Library | .yal | 
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
@@ -313,7 +312,7 @@ image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSa
 
 
 
-## Music (90)
+## Music (91)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -345,6 +344,7 @@ music | DreamStation Module | .dss | [3 sample files](https://telparia.com/fileF
 music | [Drum Traker Module](http://fileformats.archiveteam.org/wiki/Drum_Traker_module) | .dtl | [15 sample files](https://telparia.com/fileFormatSamples/music/drumTraker/)
 music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [3 sample files](https://telparia.com/fileFormatSamples/music/dynamicStudio/)
 music | Encore Musical Notation | .enc .mus | [3 sample files](https://telparia.com/fileFormatSamples/music/encoreMusicalNotation/)
+music | [Extended MOD](http://fileformats.archiveteam.org/wiki/Extended_MOD) | .emd | [2 sample files](https://telparia.com/fileFormatSamples/music/extendedMOD/)
 music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://telparia.com/fileFormatSamples/music/faceTheMusic/)
 music | FamiTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
 music | Flash Tracker | .fls | [5 sample files](https://telparia.com/fileFormatSamples/music/flashTracker/)
@@ -824,7 +824,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (31)
+## Poly (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -856,6 +856,7 @@ poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileForm
 poly | SGI Open Inventor Scene Graph | .iv | 
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
 poly | Simply 3D Geometry | .ged | 
+poly | SuperScape Virtual Reality | .svr | 
 poly | Vertex Binary 3D Object | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
 

@@ -175,6 +175,7 @@ export default
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
+		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},
 		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]}
 	},
 

@@ -86,6 +86,7 @@ export default
 		riscOSBBCBasic           : {name : "RISC OS BBC BASIC V Source", magic : ["RISC OS BBC BASIC V source"]},
 		sprint                   : {name : "Sprint Document", ext : [".spr"], magic : ["Sprint document"], weakMagic : true},
 		stFaxScript              : {name : "STFax Script", ext : [".script"], magic : ["STFax Script"]},
+		stWriter                 : {name : "ST Writer Document", magic : ["ST Writer document"]},
 		sundialClearlook         : {name : "Sundial Clearlook", ext : [".ctx"], magic : ["Sundial Clearlook document"]},
 		superCalc                : {name : "SuperCalc Worksheet", ext : [".cal"], magic : ["SuperCalc worksheet", "SuperCalc 2/3 spreadsheet", /^fmt\/403( |$)/]},
 		symantecQADatabase       : {name : "Symantec Q&A Database File", ext : [".dtf"], magic : ["Symantec QandA Database File"]},

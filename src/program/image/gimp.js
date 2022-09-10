@@ -4,9 +4,11 @@ import {Program} from "../../Program.js";
 
 export class gimp extends Program
 {
-	website   = "https://gimp.org";
-	package   = "media-gfx/gimp";
-	bin       = "gimp";
+	website = "https://gimp.org";
+	package = "media-gfx/gimp";
+
+	// NOTE: I snapshotted gimp-2.99.10-r1 on Sep 2022 because later versions broke python plugin support
+	bin = "/usr/bin/gimp";	// Full path to ensure the python enabled gimp version is used instead of the appimage one
 
 	pre = async r =>
 	{

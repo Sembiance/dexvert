@@ -1,13 +1,15 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, encodeUtil} from "xutil";
 import {path} from "std";
 
 export class resource_dasm extends Program
 {
-	website   = "https://github.com/fuzziqersoftware/resource_dasm";
-	package   = "app-arch/resource-dasm";
-	bin       = "resource_dasm";
-	args      = r => ["--data-fork", r.inFile(), r.outDir()];
+	website    = "https://github.com/fuzziqersoftware/resource_dasm";
+	package    = "app-arch/resource-dasm";
+	bin        = "resource_dasm";
+	args       = r => ["--data-fork", r.inFile(), r.outDir()];
+	runOptions = ({timeout : xu.MINUTE*10, killChildren : true});	// resource_dasm calls picttoppm which can hang (see sample archive/rsrc/Extend Demo ReadMe.rsrc)
 
 	postExec = async r =>
 	{

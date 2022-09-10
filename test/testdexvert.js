@@ -146,9 +146,11 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
+	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
+	[/other\/iBrowseCookies\/Cookies \(2\)/, "text", true],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
@@ -176,6 +178,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/imf\/.+/i, "text", true],
 	[/document\/manPage\/glib\.man/i, "text", true],
 	[/document\/microsoftPublisher\/.+/i, "archive", true],
+	[/document\/pagePlus\/.+/i, "archive", true],
 	[/document\/vCard\/.+/i, "text", true],
 	[/image\/excelChart\/.+/i, "document", "xls"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
@@ -208,6 +211,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"image/bbcDisplayRAM",
 	"image/teletext",
 	"music/richardJoseph",
+	"other/iBrowseCookies",		// Must match filename 'Cookies' but can't have more than 1 with that extension
 	"unsupported/binPatch"
 ];
 

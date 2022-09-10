@@ -10,7 +10,7 @@ await runTerminal("retrodev\n");
 await switchToWorkspace(2, 2);
 await setLayout("browserVerticalDev", 2, 2);
 const {wid : ccWID} = await runTerminal();
-await runUtil.run("mychrome", ["--new-window", "http://admin.retromission.com"], {detached : true, ...runOptions});	// can't associate to a chrome window, so we just run manually here
+await runUtil.run("mychrome", ["--new-window", "http://overseer.retromission.com"], {detached : true, ...runOptions});	// can't associate to a chrome window, so we just run manually here
 await runTerminalCommand(ccWID, "ssh sembiance@chatsubo\nreset\n");
 await runTerminalCommand(ccWID, "ssh sembiance@chatsubo\nreset\n", {newTab : true});
 await runTerminalCommand(ccWID, "ssh sembiance@pax\nreset\n", {newTab : true});

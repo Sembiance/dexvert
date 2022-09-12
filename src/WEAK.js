@@ -551,6 +551,7 @@ export const WEAK_VALUES =
 	/^Dan Bricklin's Demo/,
 	/^Dave 2 Huffman compressed game data$/,
 	/^Dockerfile$/,
+	/^Dynamix Screen data container$/,
 	/^Encrypted Blender 3D data$/,
 	/^EVE Online data \(generic\)$/,
 	/^Falcon Sequence \(old\)$/,

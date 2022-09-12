@@ -1,4 +1,4 @@
-# Unsupported File Formats (827)
+# Unsupported File Formats (829)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -233,13 +233,14 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (73)
+## Image (74)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 image | Animator PIC/CEL | .pic .cel | 
 image | Applause Palette | .pal | 
+image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
 image | Arts and Letters Graphic | .ged | 
 image | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://telparia.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 image | Artworx Drawing | .cwg | 
@@ -824,7 +825,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (32)
+## Poly (33)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -836,6 +837,7 @@ poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [
 poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
+poly | DynaCADD Part | .prt .dpt | 
 poly | Half Life Model | .mdl | [12 sample files](https://telparia.com/fileFormatSamples/poly/halfLifeModel/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | Infini-D Scene | .ids .id4 | 

@@ -168,6 +168,7 @@ export default
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
 		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
+		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
 		halfLifeModel           : {name : "Half Life Model", ext : [".mdl"], magic : ["Half-life Model"]},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},

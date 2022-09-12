@@ -1,4 +1,4 @@
-# Supported File Formats (1,354)
+# Supported File Formats (1,355)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -79,7 +79,7 @@ archive | [FSH Archive](http://fileformats.archiveteam.org/wiki/FSH_(EA_Sports))
 archive | [GEM Resource File](http://fileformats.archiveteam.org/wiki/GEM_resource_file) | .rsc | [deark](https://entropymine.com/deark/) | [26 sample files](https://telparia.com/fileFormatSamples/archive/gemResourceFile/) - deark fails to work with some RSC file such as daleks.rsc and dungeon.rsc Better support could be added by coding my own handler by following the format: http://cd.textfiles.com/ataricompendium/BOOK/HTML/APPENDC.HTM#rsc
 archive | [Genus Graphics Library Compressed Archive](http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library) | .gx .gxl | [unpcxgx](http://www.ctpax-x.org/?goto=files&show=104) | [11 sample files](https://telparia.com/fileFormatSamples/archive/gxlib/)
 archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip .z | [sevenZip](http://p7zip.sourceforge.net/) [gunzip](https://www.gnu.org/software/gzip/) [ancient](https://github.com/temisu/ancient_format_decompressor) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [18 sample files](https://telparia.com/fileFormatSamples/archive/gz/)
-archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](http://fileformats.archiveteam.org/wiki/HA) | [5 sample files](https://telparia.com/fileFormatSamples/archive/ha/)
+archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](http://fileformats.archiveteam.org/wiki/HA) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ha/)
 archive | [Hamarsoft HAP Archive](http://fileformats.archiveteam.org/wiki/HAP) | .hap | [hap210](https://archive.org/details/msdos_festival_HAPPAH21) | [2 sample files](https://telparia.com/fileFormatSamples/archive/hap/)
 archive | [Hammer](http://fileformats.archiveteam.org/wiki/Hammer_(compression)) | .hmr | [hammer_decomp](https://github.com/Treeki/RandomStuff/blob/master/hammer_decomp.py) | [5 sample files](https://telparia.com/fileFormatSamples/archive/hammer/)
 archive | HTTP Response |  |  | [6 sample files](https://telparia.com/fileFormatSamples/archive/httpResponse/)
@@ -129,7 +129,7 @@ archive | [Novel NetWare Packed File](http://fileformats.archiveteam.org/wiki/Ne
 archive | [NPack Archive](http://fileformats.archiveteam.org/wiki/NPack) | .$ | [npack](http://fileformats.archiveteam.org/wiki/NPack) | [10 sample files](https://telparia.com/fileFormatSamples/archive/npack/)
 archive | [NuFX Archive](http://fileformats.archiveteam.org/wiki/NuFX) | .bxy .shk | [nulib2](https://github.com/fadden/nulib2) [acx](https://github.com/AppleCommander/AppleCommander) | [1 sample file](https://telparia.com/fileFormatSamples/archive/nuFX/)
 archive | [OS/2 Bitmap Array](http://fileformats.archiveteam.org/wiki/OS/2_Bitmap_Array) | .bga .bmp .ico | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/os2BitmapArray/)
-archive | Pack-Fire compressed data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [3 sample files](https://telparia.com/fileFormatSamples/archive/packFire/)
+archive | Pack-Fire compressed data |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/packFire/)
 archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |  | [unice68](http://sc68.atari.org/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/packIce/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://unarchiver.c3.cx/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/packIt/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/paintShopProBrowserCache/)
@@ -176,7 +176,7 @@ archive | Transport Neutral Encapsulation Format | .tnef .dat | [ytnef](https://
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [4 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | [11 sample files](https://telparia.com/fileFormatSamples/archive/ttcomp/)
 archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .cr | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [13 sample files](https://telparia.com/fileFormatSamples/archive/ttw/)
-archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://telparia.com/fileFormatSamples/archive/turboPacker/)
+archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://telparia.com/fileFormatSamples/archive/turboPacker/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [13 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
 archive | [UU Encoded Archive](http://fileformats.archiveteam.org/wiki/Uuencoding) | .uue .uu | [uudecode](https://www.gnu.org/software/sharutils/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [10 sample files](https://telparia.com/fileFormatSamples/archive/uue/)
 archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
@@ -219,7 +219,7 @@ audio | Electronic Arts BNK File | .bnk | [vgmstream](https://github.com/vgmstre
 audio | Electronic Arts Sound hEADer | .tgv | [vgmstream](https://github.com/vgmstream/vgmstream) | [4 sample files](https://telparia.com/fileFormatSamples/audio/eaSEAD/)
 audio | Ensoniq Disk Image | .gkh .eds .eda .ede .edt .edv | [awaveStudio](https://archive.org/details/awave70_zip) | [9 sample files](https://telparia.com/fileFormatSamples/audio/ensoniqDiskImage/)
 audio | [eXtended Instrument](http://fileformats.archiveteam.org/wiki/Extended_instrument) | .xi | [awaveStudio](https://archive.org/details/awave70_zip) | [10 sample files](https://telparia.com/fileFormatSamples/audio/eXtendedInstrument/)
-audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/audio/flac/)
+audio | [Free Lossless Audio Codece](http://fileformats.archiveteam.org/wiki/FLAC) | .flac | [sox](http://sox.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/audio/flac/)
 audio | [Gravis Ultrasound Patch](http://fileformats.archiveteam.org/wiki/Gravis_Ultrasound_patch) | .pat .sbs | [awaveStudio](https://archive.org/details/awave70_zip) | [14 sample files](https://telparia.com/fileFormatSamples/audio/gusPatch/)
 audio | [GSM Audio](http://fileformats.archiveteam.org/wiki/GSM) | .gsm | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/audio/gsm/)
 audio | Impulse Tracker Sample |  | [awaveStudio](https://archive.org/details/awave70_zip) | [4 sample files](https://telparia.com/fileFormatSamples/audio/impulseTrackerSample/)
@@ -253,7 +253,7 @@ audio | Windows Media Audio | .wma .asf | [ffmpeg](https://ffmpeg.org/) | [10 sa
 
 
 
-## Document (184)
+## Document (185)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -269,7 +269,7 @@ document | askSam Database | .ask | [strings](https://www.gnu.org/software/binut
 document | [Atari STOS Basic](https://temlib.org/AtariForumWiki/index.php/STOS.BAS) | .bas | [stosBAS2txt](https://github.com/Sembiance/dexvert) | [12 sample files](https://telparia.com/fileFormatSamples/document/stosBAS/) - I tried using STOSBAS_detokenize.pl and chkbas and both failed. So I just wrote my own.
 document | Atari Works Database | .std | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/atariWorksDatabase/)
 document | Atari Works Document | .stw | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/atariWorks/)
-document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/atariWorksSpreadsheet/)
+document | Atari Works Spreadsheet | .sts | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/atariWorksSpreadsheet/)
 document | Bank Book for Windows Account Data | .dat | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/bankBookForWindows/)
 document | Borland Turbo Vision Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/borlandTurboVisionHelp/)
 document | [Broad Band eBook](https://en.wikipedia.org/wiki/BBeB) | .lrf .lrx .lrs | [ebook_convert](https://calibre-ebook.com/) | [1 sample file](https://telparia.com/fileFormatSamples/document/broadBandEBook/)
@@ -309,7 +309,7 @@ document | [Farallon Replica Document](http://fileformats.archiveteam.org/wiki/F
 document | [FictionBook](https://en.wikipedia.org/wiki/FictionBook) | .fb2 | [ebook_convert](https://calibre-ebook.com/) | [1 sample file](https://telparia.com/fileFormatSamples/document/fictionBook/)
 document | [FileMaker Pro Database](http://fileformats.archiveteam.org/wiki/FileMaker_Pro) | .fp3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/fileMakerPro/)
 document | Final Write Document |  | [WoW](http://aminet.net/package/util/conv/WoW) [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/finalWrite/)
-document | First Choice Database | .fol .pfs | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/firstChoiceDatabase/)
+document | First Choice Database | .fol .pfs | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/firstChoiceDatabase/)
 document | First Choice Document | .doc .pfs | [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/firstChoice/)
 document | Form Master Form | .frm | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/formMasterForm/)
 document | [FrameMaker](http://fileformats.archiveteam.org/wiki/FrameMaker) | .fm .frm doc | [frameMaker](https://winworldpc.com/product/framemaker/50) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameMaker/)
@@ -348,7 +348,7 @@ document | [MAN Page](http://fileformats.archiveteam.org/wiki/Man_page) | .man .
 document | MicroHelp | .slb | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/microHelp/)
 document | Microsoft Lesson | .les .lsn | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/microsoftLesson/)
 document | [Microsoft Publisher Document](http://fileformats.archiveteam.org/wiki/Microsoft_Publisher) | .pub | [soffice](https://www.libreoffice.org) | [11 sample files](https://telparia.com/fileFormatSamples/document/microsoftPublisher/) - Older files like v1, v2, 95 and 98 don't convert. I tried installing Publisher 98 from WinWorld, and it couldn't open v1/v2/95. It could open 97, but it didn't allow you to save it as any other format. So meh.
-document | [Microsoft Reader eBook](https://en.wikipedia.org/wiki/Microsoft_Reader) | .lit | [ebook_convert](https://calibre-ebook.com/) | [3 sample files](https://telparia.com/fileFormatSamples/document/microsoftReader/)
+document | [Microsoft Reader eBook](https://en.wikipedia.org/wiki/Microsoft_Reader) | .lit | [ebook_convert](https://calibre-ebook.com/) | [7 sample files](https://telparia.com/fileFormatSamples/document/microsoftReader/)
 document | [Microsoft Visio](http://fileformats.archiveteam.org/wiki/Visio) | .vsd .vss .vst .vdx .vsx .vtx | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/visio/)
 document | Microsoft Word for DOS Document | doc dcx | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/wordDocDOS/)
 document | [Microsoft Works Database](http://fileformats.archiveteam.org/wiki/Microsoft_Works_Database) | .wdb | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/microsoftWorksDatabase/)
@@ -377,7 +377,7 @@ document | Papyrus | .pap | [strings](https://www.gnu.org/software/binutils/) | 
 document | [Paradox Database Table](http://fileformats.archiveteam.org/wiki/Paradox_(database)) | .db | [pxview](https://sourceforge.net/projects/pxlib/files/pxview/) | [13 sample files](https://telparia.com/fileFormatSamples/document/paradoxDatabase/)
 document | [PC-File](http://fileformats.archiveteam.org/wiki/PC-FILE) | .dbf .rep | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/pcFile/) - Was a somewhat used database program back in the day. Didn't really dig into what converters might be possible.
 document | [PC-Outline Document](http://fileformats.archiveteam.org/wiki/PC-Outline) | .pco | [pco](https://vetusware.com/download/PC%20Outline%20for%20Windows%20PC%20Outline%201.0.a/?id=4597) | [10 sample files](https://telparia.com/fileFormatSamples/document/pco/)
-document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/pcTypeDocument/)
+document | PC-Type Document | .pct | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/pcTypeDocument/)
 document | [PCBoard Programming Language Executable](https://en-academic.com/dic.nsf/enwiki/3064510) | .ppe | [pplx](http://files.mpoli.fi/unpacked/tlr/pcboard_bbs_utilities/agsppx20.zip/) | [10 sample files](https://telparia.com/fileFormatSamples/document/pcBoardPPE/)
 document | Peter Norton Computing Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/peterNortonHelp/)
 document | [Portable Document Format](http://fileformats.archiveteam.org/wiki/PDF) | .pdf |  | [6 sample files](https://telparia.com/fileFormatSamples/document/pdf/)
@@ -399,7 +399,7 @@ document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?titl
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [14 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/riscOSBBCBasic/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
-document | ST Writer Document |  | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/stWriter/)
+document | ST Writer Document |  | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/stWriter/)
 document | [StarOffice Draw Document](http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)) | .sda | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/starOfficeDraw/)
 document | [StarOffice Presentation](http://fileformats.archiveteam.org/wiki/StarOffice_binary_formats) | .sdd | [soffice](https://www.libreoffice.org) | [3 sample files](https://telparia.com/fileFormatSamples/document/starOfficePresentation/)
 document | [StarOffice Spreadsheet](http://fileformats.archiveteam.org/wiki/SDC) | .sdc .stc .sxc .vor | [soffice](https://www.libreoffice.org) | [9 sample files](https://telparia.com/fileFormatSamples/document/starOfficeSpreadsheet/)
@@ -413,6 +413,7 @@ document | Tempus Word Document | .twd | [strings](https://www.gnu.org/software/
 document | Texinfo Document | .texinfo .texi | [texi2pdf](https://www.gnu.org/software/texinfo/) [texi2html](http://www.nongnu.org/texi2html/) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/texInfo/)
 document | Text Engine Document | .std | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/textEngine/)
 document | Text Plus Document | .txp | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/textPlus/)
+document | TextMaker Document | .tmd | [strings](https://www.gnu.org/software/binutils/) | 
 document | The Works! Spreadsheet | .sht | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/theWorksSpreadsheet/)
 document | Timeworks Publisher/Publish It! | .dtp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/timeworksPublisher/) - All I could find on it: https://sparcie.wordpress.com/2018/01/22/open-access-for-dos/  It may be related to Greenstreet Publisher, see that.
 document | Twist Database file | .db | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/twistDB/)
@@ -490,7 +491,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (507)
+## Image (506)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://telparia.com/fileFormatSamples/image/threeDCK/)
@@ -512,7 +513,6 @@ image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ev
 image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice .ansi .asc .gbs | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) | [48 sample files](https://telparia.com/fileFormatSamples/image/ans/)
 image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [11 sample files](https://telparia.com/fileFormatSamples/image/aolART/)
 image | Apple II High Res | .hgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/a2HighRes/)
-image | Apple II Sprites | .spr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/)
 image | Apple IIe Double High-Resolution | .dhgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/a2eDoubleHighRes/)
 image | Apple IIGS Preferred Format | .gs .iigs .pnt .shr | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/a2gsPreferred/)
 image | Apple IIGS SH3/SHR | .sh3 .shr | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/a2gsSHStar/)
@@ -588,7 +588,7 @@ image | [Corel Photo-Paint Image](http://fileformats.archiveteam.org/wiki/Corel_
 image | [Corel Wavelet](http://fileformats.archiveteam.org/wiki/Corel_Wavelet) | .wi .wvl | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [1 sample file](https://telparia.com/fileFormatSamples/image/corelWavelet/)
 image | [CorelDraw Document](http://fileformats.archiveteam.org/wiki/CorelDRAW) | .cdr .cdt .cdx .cpx | [scribus](https://www.scribus.net/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [15 sample files](https://telparia.com/fileFormatSamples/image/cdr/)
 image | [Crack Art](http://fileformats.archiveteam.org/wiki/Crack_Art) | .ca1 .ca2 .ca3 | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://telparia.com/fileFormatSamples/image/crackArt/)
-image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/cyberPaintCel/)
+image | [Cyber Paint Cell](http://fileformats.archiveteam.org/wiki/Cyber_Paint_Cell) | .cel | [recoil2png](http://recoil.sourceforge.net) | [14 sample files](https://telparia.com/fileFormatSamples/image/cyberPaintCel/)
 image | D-GRAPH P3C | .p3c | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/p3c/)
 image | [Dali](http://fileformats.archiveteam.org/wiki/Dali) | .sd0 .sd1 .sd2 .hpk .lpk .mpk | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [14 sample files](https://telparia.com/fileFormatSamples/image/dali/)
 image | DataShow Graphic | .gra | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/dataShowGraphic/)
@@ -631,7 +631,7 @@ image | [ECI Graphic Editor](http://fileformats.archiveteam.org/wiki/ECI_Graphic
 image | [EggPaint / True Colour Picture](http://fileformats.archiveteam.org/wiki/EggPaint) | .trp | [recoil2png](http://recoil.sourceforge.net) | [28 sample files](https://telparia.com/fileFormatSamples/image/eggPaint/)
 image | Electronika BK PIC | .pic | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/image/electronikaBKPIC/)
 image | [Encapsulated PostScript](http://fileformats.archiveteam.org/wiki/EPS) | .eps .epsf .epsi .epi .ept | [ps2pdf](https://ghostscript.com/) [inkscape](https://inkscape.org/) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) | [26 sample files](https://telparia.com/fileFormatSamples/image/eps/) - We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf -> pdf2svg works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001
-image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://telparia.com/fileFormatSamples/image/esm/)
+image | [Enhanced Simplex](http://fileformats.archiveteam.org/wiki/Enhanced_Simplex) | .esm | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) | [9 sample files](https://telparia.com/fileFormatSamples/image/esm/)
 image | [Envision](http://fileformats.archiveteam.org/wiki/Envision) | .map | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/image/envision/)
 image | [Epson RAW File](http://fileformats.archiveteam.org/wiki/ERF) | .erf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://telparia.com/fileFormatSamples/image/erf/)
 image | [Extended Binary](http://fileformats.archiveteam.org/wiki/XBIN) | .xb | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://telparia.com/fileFormatSamples/image/xb/)
@@ -654,11 +654,11 @@ image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLI
 image | FreeHand Drawing | .fh .fh2 .fh3 .fh4 .fh5 .fh6 .fh7 .fh8 .fh9 | [soffice](https://www.libreoffice.org) [scribus](https://www.scribus.net/) | [11 sample files](https://telparia.com/fileFormatSamples/image/freeHandDrawing/)
 image | [Fujifilm RAW](http://fileformats.archiveteam.org/wiki/RAF) | .raf | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [4 sample files](https://telparia.com/fileFormatSamples/image/raf/)
 image | [Fullscreen Construction Kit](http://fileformats.archiveteam.org/wiki/Fullscreen_Construction_Kit) | .kid | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://telparia.com/fileFormatSamples/image/kid/)
-image | [Fun With Art](http://fileformats.archiveteam.org/wiki/Fun_with_Art) | .fwa | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/fwa/)
+image | [Fun With Art](http://fileformats.archiveteam.org/wiki/Fun_with_Art) | .fwa | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/image/fwa/)
 image | [Funny Paint](http://fileformats.archiveteam.org/wiki/Funny_Paint) | .fun | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://telparia.com/fileFormatSamples/image/funnyPaint/)
 image | [Funpaint](http://fileformats.archiveteam.org/wiki/Funpaint) | .fp2 .fun | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [12 sample files](https://telparia.com/fileFormatSamples/image/funpaint/)
 image | [Fuzzy Bitmap](http://fileformats.archiveteam.org/wiki/FBM_image) | .fbm .cbm | [fbm2tga](http://fileformats.archiveteam.org/wiki/FBM_image) [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://telparia.com/fileFormatSamples/image/fuzzyBitmap/)
-image | [GED](http://fileformats.archiveteam.org/wiki/GED) | .ged | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/ged/)
+image | [GED](http://fileformats.archiveteam.org/wiki/GED) | .ged | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://telparia.com/fileFormatSamples/image/ged/)
 image | [GEM Raster Bitmap](http://fileformats.archiveteam.org/wiki/GEM_Raster) | .img .ximg .timg | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [21 sample files](https://telparia.com/fileFormatSamples/image/gem/)
 image | [GEM Vector Metafile](http://fileformats.archiveteam.org/wiki/GEM_VDI_Metafile) | .gem .gdi | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [16 sample files](https://telparia.com/fileFormatSamples/image/gemMetafile/) - Vector file format that could be converted into SVG. abydos is working on adding support for this format.
 image | [GEM-View Dither](https://www.atariuptodate.de/en/768/gem-view) | .dit | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://telparia.com/fileFormatSamples/image/gemViewDither/)
@@ -721,7 +721,7 @@ image | [Image System](http://fileformats.archiveteam.org/wiki/Image_System) | .
 image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintTechnic) | .b_w .b&w | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [5 sample files](https://telparia.com/fileFormatSamples/image/imageLab/)
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/imagic/)
 image | [IMG Scan](http://fileformats.archiveteam.org/wiki/IMG_Scan) | .rwl .raw .rwh | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/image/imgScan/)
-image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/indyPaint/)
+image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://telparia.com/fileFormatSamples/image/indyPaint/)
 image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/ing/)
 image | [Inset PIX](http://fileformats.archiveteam.org/wiki/Inset_PIX) | .pix | [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [11 sample files](https://telparia.com/fileFormatSamples/image/insetPix/)
 image | [InShape 3D IIM](http://fileformats.archiveteam.org/wiki/InShape_IIM) | .iim | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://telparia.com/fileFormatSamples/image/iim/)
@@ -888,7 +888,7 @@ image | [RAMbrandt](http://fileformats.archiveteam.org/wiki/RAMbrandt) | .rm0 .r
 image | ReGIS | .regis | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [1 sample file](https://telparia.com/fileFormatSamples/image/regis/)
 image | [REKO Cardset](https://www.rekonet.org/index.html) | .reko .deck .rkp | [reko2png](https://github.com/Sembiance/reko2png) | [11 sample files](https://telparia.com/fileFormatSamples/image/rekoCardset/) - Royo.RKP doesn't convert, not sure why
 image | [Rembrandt True Color Picture](http://fileformats.archiveteam.org/wiki/Rembrandt) | .tcp | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/rembrandt/)
-image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [pabloDrawConsole](http://picoe.ca/products/pablodraw/) | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/)
+image | [Remote Imaging Protocol Script](http://fileformats.archiveteam.org/wiki/RIPscrip) | .rip | [pabloDraw](http://picoe.ca/products/pablodraw/) | [15 sample files](https://telparia.com/fileFormatSamples/image/ripScrip/)
 image | RIP Icon | .icn | [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/image/ripIcon/)
 image | [Rocky Interlace Picture](http://fileformats.archiveteam.org/wiki/Rocky_Interlace_Picture) | .rip | [recoil2png](http://recoil.sourceforge.net) | [138 sample files](https://telparia.com/fileFormatSamples/image/rockyInterlace/)
 image | [RUN Paint](http://fileformats.archiveteam.org/wiki/RUN_Paint) | .rpm .rph .rpo | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [view64](http://view64.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/image/runPaint/)
@@ -1208,7 +1208,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files
 
 
 
-## Other (99)
+## Other (100)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1236,7 +1236,7 @@ other | CanDo Variables/Data | .var .data | [strings](https://www.gnu.org/softwa
 other | Clarion Topspeed Data File | .tps | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/clarionTopspeed/)
 other | Compuserve Information Manager DB |  | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/other/compuserveInformationManagerDB/)
 other | Corel Plan Perfect | .pln | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/corelPlanPerfect/)
-other | Cubic Player Module Information Database | .dat | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/cubicPlayerModuleInfoDB/)
+other | Cubic Player Module Information Database | .dat | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/cubicPlayerModuleInfoDB/)
 other | Dart Desktop | .dsk | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/dartDesktop/)
 other | Databench Data |  | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/databenchData/)
 other | DB2 Bind | .bnd | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://telparia.com/fileFormatSamples/other/db2Bind/)
@@ -1253,7 +1253,7 @@ other | [GFA-BASIC Atari](http://fileformats.archiveteam.org/wiki/Atari_BASIC_to
 other | GFA-BASIC MS-DOS | .gfa .bas | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/gfaBASICMSDOS/)
 other | GFA-BASIC Windows | .gfw | [strings](https://www.gnu.org/software/binutils/) | [14 sample files](https://telparia.com/fileFormatSamples/other/gfaBasicWindows/)
 other | Harvard Total Project Manager Project | .prj | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/other/harvardTotalProject/)
-other | HyperTerminal Data File | .ht | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/hyperTerminalDataFile/)
+other | HyperTerminal Data File | .ht | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/hyperTerminalDataFile/)
 other | IBM PC Overlay | .ovl | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/ibmPCOverlay/)
 other | iBrowse Cookies |  | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/iBrowseCookies/)
 other | InstallShield Package | .pkg | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/installShieldPackage/)
@@ -1267,6 +1267,7 @@ other | Microsoft Developer Studio Project | .mdp | [strings](https://www.gnu.or
 other | Microsoft QuickPascal Unit | .qpu | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/quickPascalUnit/)
 other | Microsoft Visual C Binary Resource | .aps | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/microsoftVisualCBinaryResource/)
 other | Microsoft Visual C PCH file |  | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/other/msvcPCH/)
+other | Microsoft WinCE Install Header | .000 | [strings](https://www.gnu.org/software/binutils/) | 
 other | Microsoft Windows Help File Content | .cnt | [strings](https://www.gnu.org/software/binutils/) | [18 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
 other | MicroStation Resource Data | .dat .ma | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/microStationResource/)
 other | MIDI Instrument Definition File | .idf | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/other/midiInstrumentDefinitionFile/)
@@ -1308,7 +1309,7 @@ other | Windows Program Group | .grp | [strings](https://www.gnu.org/software/bi
 other | Windows Registry Hive | .hiv .dat | [hivexml](https://libguestfs.org) | [2 sample files](https://telparia.com/fileFormatSamples/other/registryHive/)
 other | Wingz Script | .scz | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/other/wingzScript/)
 other | Wordsearch Mania! Puzzle | .wsp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/wordSearchManiaPuzzle/)
-other | WordStar Macro | .wsm | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/wordStarMacro/)
+other | WordStar Macro | .wsm | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/wordStarMacro/)
 other | Zing! Directory Info | .zing | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/zingDirectoryInfo/)
 
 
@@ -1378,7 +1379,7 @@ video | [Acorn Replay Video](http://fileformats.archiveteam.org/wiki/Acorn_Repla
 video | [Animatic Film](http://fileformats.archiveteam.org/wiki/Animatic_Film) | .flm | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/video/animaticFilm/)
 video | [Apple QuickTime movie](http://fileformats.archiveteam.org/wiki/MOV) | .mov .omv .pmv .qt | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) [qt_flatt](https://www.macdisk.com/quickten.php) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [23 sample files](https://telparia.com/fileFormatSamples/video/mov/)
 video | [Audio Video Interleaved Video](http://fileformats.archiveteam.org/wiki/AVI) | .avi .divx | [ffmpeg](https://ffmpeg.org/) [mencoderWinXP](https://oss.netfarm.it/mplayer/) [xanim](https://github.com/Sembiance/xanim) | [17 sample files](https://telparia.com/fileFormatSamples/video/avi/)
-video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [ffmpeg](https://ffmpeg.org/) | [2 sample files](https://telparia.com/fileFormatSamples/video/beamSoftwareSIFF/)
+video | [Beam Software SIFF Video](https://wiki.multimedia.cx/index.php/SIFF) | .vb .vbc | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/beamSoftwareSIFF/)
 video | [Bethesda Softworks Video](https://wiki.multimedia.cx/index.php/Bethsoft_VID) | .vid | [ffmpeg](https://ffmpeg.org/) | [7 sample files](https://telparia.com/fileFormatSamples/video/bethsoftVid/)
 video | [Bink Video](http://fileformats.archiveteam.org/wiki/Bink_Video) | .bik .bik2 .bk2 | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/bink/)
 video | [Bitmap Brotehrs JV Video](https://wiki.multimedia.cx/index.php/JV) | .jv | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://telparia.com/fileFormatSamples/video/bitmapBrothersJV/)

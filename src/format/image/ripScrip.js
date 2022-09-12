@@ -7,5 +7,5 @@ export class ripScrip extends Format
 	ext        = [".rip"];
 	magic      = ["RIPscript", "ANSI escape sequence text"];
 	weakMagic  = ["ANSI escape sequence text"];
-	converters = ["pabloDrawConsole"];
+	converters = ["pabloDraw"];
 }

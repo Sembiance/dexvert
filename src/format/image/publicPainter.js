@@ -6,6 +6,6 @@ export class publicPainter extends Format
 	name       = "Public  Painter";
 	website    = "http://fileformats.archiveteam.org/wiki/Public_Painter";
 	ext        = [".cmp"];
-	idCheck    = inputFile => inputFile.size<(xu.KB*40);	// Pretty weak match, just an extension, so do a little sanity checking on file size. Haven't encountered any larger than 30k, so restrict to 40k or less
+	idCheck    = inputFile => inputFile.size<(xu.KB*32);	// Pretty weak match, just an extension, so do a little sanity checking on file size. Haven't encountered any larger than 30k, so restrict to 32k or less
 	converters = ["recoil2png"];
 }

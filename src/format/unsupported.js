@@ -233,6 +233,7 @@ export default
 		raptorGLBEncryptedContainer : {name : "Raptor GLB Encrypted Container", ext : [".glb"], magic : ["Raptor GLB encrypted container"]},
 		ravenSoftCompiledScript     : {name : "Raven Software Compiled Script", ext : [".ibi"], magic : ["Raven Software compiled script"]},
 		riseOfTheTriadLevel         : {name : "Rise of the Triad Level", ext : [".rtc", ".rtl"], magic : ["Rise of the Triad level"]},
+		rpgMakerMap                 : {name : "RPG Maker Map", ext : [".lmu"], magic : ["RPG Maker 2000/2003 Map"], notes : "EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work"},
 		scorchedEarthMountainData   : {name : "Scorched Earth Mountain Data", ext : [".mtn"], magic : ["Scorched Earth Mountain range data"]},
 		scummMainData               : {name : "SCUMM main data container", magic : ["SCUMM main data container"]},
 		settlers2Map				: {name : "Settlers II Map", ext : [".swd", ".wld"], magic : ["Settlers II map"]},

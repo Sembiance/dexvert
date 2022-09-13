@@ -582,6 +582,7 @@ export const WEAK_VALUES =
 	/^Scribe Markup$/,
 	/^Session Description Protocol \(with rem\)$/,
 	/^SMS Super File$/,
+	/^SMS XYZ data$/,
 	/^Stunt Island Film$/,
 	/^Summation Document Image Information Load File$/,
 	/^Super-Card Ami II copier$/,

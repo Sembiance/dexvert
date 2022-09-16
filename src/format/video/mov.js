@@ -13,5 +13,5 @@ export class mov extends Format
 	magic        = _MOV_MAGIC;
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg", "xanim", "qt_flatt", "mencoderWinXP", "corelPhotoPaint[outType:avi]"];
+	converters   = ["ffmpeg", "qt_flatt", "mencoderWinXP", "corelPhotoPaint[outType:avi]", "xanim"];
 }

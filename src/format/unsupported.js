@@ -35,6 +35,7 @@ export default
 
 	document :
 	{
+		dBASECompiledForm      : {name : "dBASE Compiled Form", ext : [".fro", ".fmo"], magic : ["dBASE compiled Form", "dBASE compiled Format"]},
 		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
 		interBaseDB            : {name : "InterBase/Firebird Database", ext : [".gdb", ".fdb"], magic : ["Firebird database"], notes : "In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh."},
 		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
@@ -149,18 +150,19 @@ export default
 
 	music :
 	{
-		aDrumDrumkit           : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
-		aDrumTrack             : {name : "ADrum Track", magic : ["ADrum track"]},
-		directMusicSegment     : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
-		directMusicStyle       : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
-		encoreMusicalNotation  : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
-		fredEditorSoundTrack   : {name : "Fred Editor Soundtrack", magic : ["Fred Editor SoundTrack"]},
-		improviseMusicData     : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
-		melodyMakerSong        : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
-		scrullMusicFile        : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
-		technoSoundTurbo2Track : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
-		wantonPacker           : {name : "Wanton Packer", ext : [".wn"], magic : ["Wanton Packer song/module"]},
-		yamahaESEQ             : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
+		aDrumDrumkit            : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
+		aDrumTrack              : {name : "ADrum Track", magic : ["ADrum track"]},
+		directMusicSegment      : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
+		directMusicStyle        : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
+		encoreMusicalNotation   : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
+		fredEditorSoundTrack    : {name : "Fred Editor Soundtrack", magic : ["Fred Editor SoundTrack"]},
+		improviseMusicData      : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
+		melodyMakerSong         : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
+		rolandMIDIMusicRecorder : {name : "Roland MIDI Music Recorder Song", ext : [".sng"], magic : ["Roland Midi Music Recorder song"], weakMagic : true},
+		scrullMusicFile         : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
+		technoSoundTurbo2Track  : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
+		wantonPacker            : {name : "Wanton Packer", ext : [".wn"], magic : ["Wanton Packer song/module"]},
+		yamahaESEQ              : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 
 	poly :

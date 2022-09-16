@@ -33,9 +33,10 @@ xlog.info`Cleaning up previous dexvert RAM installation...`;
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 
-async function signalHandler(sig)
+async function stopDexserver(sig)
 {
-	xlog.info`Got signal ${sig}`;
+	if(sig)
+		xlog.info`Got signal ${sig}`;
 
 	xlog.info`Stopping ${Object.keys(servers).length} servers...`;
 	for(const serverid of SERVER_ORDER.reverse())
@@ -53,7 +54,16 @@ async function signalHandler(sig)
 	xlog.info`Exiting...`;
 	Deno.exit(0);
 }
-["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await signalHandler(v)));
+["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await stopDexserver(v)));
+
+xu.waitUntil(async () =>
+{
+	if(!(await fileUtil.exists("/mnt/ram/tmp/stopdexserver")))
+		return false;
+	
+	await fileUtil.unlink("/mnt/ram/tmp/stopdexserver", {recursive : true});
+	await stopDexserver();
+}, {interval : xu.SECOND*2});
 
 xlog.info`Starting ${Object.keys(servers).length} servers...`;
 for(const serverid of SERVER_ORDER)

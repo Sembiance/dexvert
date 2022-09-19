@@ -167,6 +167,7 @@ export default
 
 	poly :
 	{
+		esriShape               : {name : "ESRI/ArcView Shape", ext : [".shp"], magic : ["ArcView Shape", "ESRI Shapefile", /^x-fmt\/235( |$)/], weakMagic : ["ESRI Shapefile"]},
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
 		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
@@ -210,6 +211,10 @@ export default
 		duneIISavedGame             : {name : "Dune II Saved Game", ext : [".dat"], magic : ["Dune II saved game"]},
 		dynamixBitmap               : {name : "Dynamix Bitnmap", ext : [".bmp"], magic : ["Dynamix Bitmap data container"]},
 		electronicArtsLibContainer  : {name : "Electronic Arts LIB container", ext : [".lib"], magic : ["Electronic Arts LIB container"]},
+		esriCoverageAnnotation      : {name : "ESRI ArcInfo Coverage Annotation", magic : [/^fmt\/1591( |$)/]},
+		esriDataBaseIndex           : {name : "ESRI/ArcView DataBase Index", ext : [".shx"], magic : ["ArcView DataBase Index", "ESRI Shapefile", /^fmt\/277( |$)/], weakMagic : true},
+		esriGridNIT                 : {name : "ESRI ArcInfo Grid NIT", ext : [".nit"], magic : [/^fmt\/1596( |$)/]},
+		esriSpatialIndex            : {name : "ESRI Spatial Index",  magic : [/^fmt\/319( |$)/]},
 		f1gpEdData                  : {name : "F1GP-Ed Data", ext : [".events", ".settings"], magic : ["F1GP-Ed"], weakMagic : true},
 		flashbackObject             : {name : "Flashback Object", ext : [".obj"], magic : ["Flashback Object"]},
 		flightSimToolkitTerrain     : {name : "Flight Sim Toolkit Terrain Data", ext : [".ftd"], magic : ["Flight Sim Toolkit Terrain Data"]},

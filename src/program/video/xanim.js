@@ -19,7 +19,7 @@ export class xanim extends Program
 	postExec = async r => (await (await fileUtil.tree(r.f.root, {nodir : true, depth : 1, regex : /\.ppm$/i})).parallelMap(async filePath => await Deno.rename(filePath, path.join(r.outDir({absolute : true}), path.basename(filePath)))));
 
 	// xanim plays back in real time, so if the video is longer than 3 minutes, it just will get truncated
-	runOptions = ({virtualX : true, timeout : xu.MINUTE*3, killChildren : true});
+	runOptions = ({virtualX : true, timeout : xu.MINUTE*3, timeoutSignal : "SIGKILL", killChildren : true});
 	chain      = r => `*ffmpeg[fps:${r.flags.fps || 10}] -> ffmpeg`;
 	renameOut  = true;
 }

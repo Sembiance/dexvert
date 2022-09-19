@@ -1,4 +1,4 @@
-# Unsupported File Formats (832)
+# Unsupported File Formats (837)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -412,7 +412,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (410)
+## Other (414)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -556,6 +556,10 @@ other | Dynamix Bitnmap | .bmp |
 other | Electronic Arts LIB container | .lib | 
 other | Emacs Compiled Lisp | .elc | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 other | Ensoniq VFX Patch File | .vfx | 
+other | ESRI ArcInfo Coverage Annotation |  | 
+other | ESRI ArcInfo Grid NIT | .nit | 
+other | ESRI Spatial Index |  | 
+other | ESRI/ArcView DataBase Index | .shx | 
 other | Expressware Printer Definition File | .pdf | 
 other | F1GP-Ed Data | .events .settings | 
 other | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
@@ -828,7 +832,7 @@ other | ZZT File | .zzt |
 
 
 
-## Poly (33)
+## Poly (34)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -841,6 +845,7 @@ poly | Create+Shade 3D Scene | .3d |
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | DynaCADD Part | .prt .dpt | 
+poly | ESRI/ArcView Shape | .shp | 
 poly | Half Life Model | .mdl | [12 sample files](https://telparia.com/fileFormatSamples/poly/halfLifeModel/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | Infini-D Scene | .ids .id4 | 

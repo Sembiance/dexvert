@@ -36,8 +36,15 @@ export class macromediaDirector extends Program
 			Sleep(200)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 
+			; Wait for long running font building
+			Func FontBuilding()
+				WinWaitClose("Font Progress", "", 40)
+			EndFunc
+			CallUntil("FontBuilding", ${xu.SECOND*3})
+
 			; Dismiss Player Errors and missing fonts
 			Func DismissWarnings()
+				WinWaitClose("Font Progress", "", 30)
 				WindowDismiss("[TITLE:Error]", "", "{ENTER}")
 				WindowDismiss("Locate replacement", "", "{ESCAPE}")
 				WindowDismiss("Where is", "", "{ESCAPE}")

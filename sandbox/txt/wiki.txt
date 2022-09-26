@@ -19,6 +19,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [[RECOIL]]
 * {{Deark}}
 * [http://snisurset.net/code/abydos/ abydos]
+* [https://sk1project.net/uc2/ UniConvertor]
 * [https://zxtune.bitbucket.io/ zxtune]
 * [[XMP]]
 * [[Unar]]

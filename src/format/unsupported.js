@@ -157,6 +157,7 @@ export default
 		directMusicSegment      : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
 		directMusicStyle        : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation   : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
+		facSoundtrackerModule   : {name : "FAC Soundtracker Module", ext : [".mus"], magic : ["FAC Soundtracker module"]},
 		fredEditorSoundTrack    : {name : "Fred Editor Soundtrack", magic : ["Fred Editor SoundTrack"]},
 		improviseMusicData      : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
 		melodyMakerSong         : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},

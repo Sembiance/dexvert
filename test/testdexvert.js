@@ -93,6 +93,7 @@ const FLEX_SIZE_FORMATS =
 		// each running produces slightly different output, not sure why, haven't investigated further
 		ani              : 15,
 		lottie           : 0.1,
+		pes              : 0.1,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
 		windowsClipboard : 0.1,
@@ -150,7 +151,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
-	[/other\/iBrowseCookies\/Cookies \(2\)/, "text", true],
+	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
@@ -167,6 +168,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
 	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
 	[/image\/gfaArtist\/.+$/, "image", "asciiArtEditor"],
+	[/image\/magicDraw\/.+$/, "image", "a2gsSHStar"],
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 	[/image\/pixelPerfect\/.+$/, "image", true],
 	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],

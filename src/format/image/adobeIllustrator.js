@@ -6,6 +6,7 @@ export class adobeIllustrator extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Adobe_Illustrator_Artwork";
 	ext        = [".ai"];
 	magic      = ["Adobe Illustrator graphics", /^fmt\/422( |$)/];
-	priority   = this.PRIORITY.LOW;	// Allow EPS to get it first
+	weakMagic  = true;
 	converters = ["adobeIllustrator", "corelPhotoPaint", "picturePublisher", "hiJaakExpress", "corelDRAW"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

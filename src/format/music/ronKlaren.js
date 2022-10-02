@@ -7,7 +7,6 @@ export class ronKlaren extends Format
 	ext          = [".rk", ".rkb"];
 	matchPreExt  = true;
 	magic        = ["Ron Klaren module", "CustomMade module"];
-	weakMagic    = ["CustomMade module"];
 	metaProvider = ["musicInfo"];
 	converters   = ["uade123"];
 }

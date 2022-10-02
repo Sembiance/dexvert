@@ -111,7 +111,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 					{
 						if(extEntry.split(",").some(ext => f.input.base.toLowerCase().endsWith(ext)))
 						{
-							hasExpectedFileSize = true;
+							if(!Array.force(sizeEntry).includes("*"))
+								hasExpectedFileSize = true;
 							if(Array.force(sizeEntry).includes(f.input.size))
 								fileSizeMatch = true;
 						}

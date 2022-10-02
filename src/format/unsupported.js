@@ -132,6 +132,7 @@ export default
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
 		chompstersSprite          : {name : "Chompsters Sprite", ext : [".spr"], magic : ["Chompsters Sprite"]},
+		crayolaArtStudio          : {name : "Crayola Art Studio", ext : [".art"], magic : ["Crayola Art Studio graphic Art"], weakMagic : true},
 		drawingInterchangeBinary  : {name : "Drawing Interchange Binary Format", ext : [".dxb"], magic : ["AutoCAD Drawing Exchange Binary Format", /^fmt\/54( |$)/]},
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
@@ -152,6 +153,7 @@ export default
 	{
 		aDrumDrumkit            : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
 		aDrumTrack              : {name : "ADrum Track", magic : ["ADrum track"]},
+		cyberTracker64Chiptune  : {name : "CyberTracker 64 Chiptune", ext : [".ct"], magic : ["CyberTracker 64 chiptune"]},
 		directMusicSegment      : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
 		directMusicStyle        : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation   : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},

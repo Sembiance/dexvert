@@ -15,14 +15,19 @@ export class fileMerlin extends Program
 	bin       = "c:\\ACI Programs\\FMerlin\\fmn.exe";
 	args      = r => [`in(${path.basename(r.inFile())})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
 	qemuData  = ({
-		timeout : xu.MINUTE,
-		script : `
-			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30});
-			$errorVisible = WinWaitActive("FileMerlin/Pdf (15-user) -- needs network setup", "", 7)
-			If $errorVisible Not = 0 Then
-				WinClose("FileMerlin/Pdf (15-user) -- needs network setup");
-			EndIf
-			WaitForPID(ProcessExists("fmn.exe"), ${xu.SECOND*30})`});
+		timeout  : xu.MINUTE,
+		alsoKill : ["drwtsn32.exe"],
+		script   : `
+			; Wait 5 seconds for it to handle the file on it's own and Exit if the process finished
+			If Not WaitForPID("fmn.exe", ${xu.SECOND*5}) Then Exit 0
+
+			; Otherwise we may have a warning we need to dismiss
+			Func DismissWarnings()
+				WinClose("FileMerlin/Pdf (15-user) -- needs network setup")
+			EndFunc
+			CallUntil("DismissWarnings", ${xu.SECOND*5})
+
+			WaitForPID("fmn.exe", ${xu.SECOND*10})`});
 	verify    = (r, dexFile) => !dexFile.dir.endsWith("_g");
 	renameOut = true;
 }

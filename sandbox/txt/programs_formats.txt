@@ -10413,3 +10413,26 @@ PostScript (Interpreted)		.eps, .ps
 EPS (Placeable)					.eps, .ps, .ai
 AMI Professional 2.0, 3.0		.sam
 WordPerfect Graphic				.wpg
+
+
+>>> Adobe Illustrator 8.0.1 (winxp)
+Amiga IFF
+BMP
+DXF
+Filmstrip
+Freehand
+GIF89a
+Illustrastor
+Illustrastor EPS
+JPEG
+Kodak ICC Photo CD
+MS RTF
+MS Word
+Parsed EPS
+PCX
+Photoshop 5
+Pixar
+PNG
+Targa
+Text TIFF
+WordPerfect

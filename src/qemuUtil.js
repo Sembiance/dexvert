@@ -65,6 +65,8 @@ Func WaitForPID($pid, $max_duration)
 		If Not ProcessExists($pid) Then ExitLoop
 		Sleep(50)
 	Until TimerDiff($timer) > $max_duration
+
+	return ProcessExists($pid)
 EndFunc`,
 	RunWaitWithTimeout : `
 Func RunWaitWithTimeout($program, $workingdir, $show_flag, $max_duration)

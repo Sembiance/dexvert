@@ -2,9 +2,10 @@ import {Format} from "../../Format.js";
 
 export class wordStar extends Format
 {
-	name       = "WordStar Document";
-	website    = "http://fileformats.archiveteam.org/wiki/Wordstar";
-	ext        = [".ws", ".ws3", ".ws5", ".ws7", ".ws2", ".wsd"];
-	magic      = [/^WordStar .*document/, /^x-fmt\/(205|236|237|261)( |$)/];
-	converters = ["wordStar", "fileMerlin"];
+	name           = "WordStar Document";
+	website        = "http://fileformats.archiveteam.org/wiki/Wordstar";
+	ext            = [".ws", ".ws3", ".ws5", ".ws7", ".ws2", ".wsd"];
+	forbidExtMatch = [".ws"];
+	magic          = [/^WordStar .*document/, /^x-fmt\/(205|236|237|261)( |$)/];
+	converters     = ["wordStar", "fileMerlin"];
 }

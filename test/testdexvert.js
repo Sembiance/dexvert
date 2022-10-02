@@ -180,6 +180,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/microsoftPublisher\/.+/i, "archive", true],
 	[/document\/pagePlus\/.+/i, "archive", true],
 	[/document\/vCard\/.+/i, "text", true],
+	[/image\/a2Sprites\/.+/i, "text", true],
 	[/image\/excelChart\/.+/i, "document", "xls"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],

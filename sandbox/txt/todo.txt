@@ -126,6 +126,9 @@
   As that tool looks like I can take the result and use it directly within dexvert. Woot.
   For inspiration help: http://formats.kaitai.io/riff/index.html
 
+* Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
+  Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
+
 * Could improve PICT support by pieceing back together certain multi-images. For example pict/5_clamsh.ell bbq flower_p.ans 2kangaro.o all extract multiple images that stack on top of each other to produce the final image
   Running deark with the '-d' option you can get the 'dstRect' info (https://github.com/jsummers/deark/issues/41#issuecomment-1032667777)
   I could then use imagemagick (or something else) to piece together the proper image

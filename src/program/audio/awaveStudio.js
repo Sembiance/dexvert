@@ -45,7 +45,7 @@ export class awaveStudio extends Program
 
 			ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
 
-			WaitForPID(ProcessExists("Awave.exe"), ${xu.MINUTE*5})`
+			WaitForPID("Awave.exe", ${xu.MINUTE*5})`
 	});
 	chain = "sox";
 	renameOut      = {

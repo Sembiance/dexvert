@@ -28,6 +28,7 @@ const out = {};
 if(br.str(10)!=="Lionpoulos")
 	Deno.exit(console.log(`Error: Magic string 'Lionpoulos' not found!`));
 
+console.log(br.pos, br.endianness);
 const srcLen = br.uint32();
 console.log(`Tokenized code is ${srcLen} bytes long`);
 

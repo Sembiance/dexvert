@@ -23,7 +23,7 @@ export class IsoBuster extends Program
 
 			WindowDismissWait("Friendly warning", "", 5, "{ENTER}")
 			
-			WaitForPID(ProcessExists("IsoBuster.exe"), ${xu.MINUTE*10})`
+			WaitForPID("IsoBuster.exe", ${xu.MINUTE*10})`
 	});
 
 	renameOut = false;

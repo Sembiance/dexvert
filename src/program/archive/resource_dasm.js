@@ -18,7 +18,7 @@ export class resource_dasm extends Program
 		const fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
 		if(fileOutputPaths.length===0)
 			return;
-
+		
 		for(const fileOutputPath of fileOutputPaths)
 		{
 			const filename = path.basename(fileOutputPath);

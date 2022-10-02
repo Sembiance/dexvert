@@ -22,6 +22,7 @@ export default
 		centralPointHelp         : {name : "Central Point Help", ext : [".hlp"], magic : ["Central Point Software Help data"]},
 		clarionHelp              : {name : "Clarion Help", ext : [".hlp"], magic : ["Clarion for DOS Help", "Clarion Developer (v2 and above) help data"], trustMagic : true},
 		clarionMemo              : {name : "Clarion Memo", ext : [".mem"], magic : ["Clarion Developer (v2 and above) memo data"]},
+		clarisWorksDatabase      : {name : "ClarisWorks Database", ext : [".db"], magic : [/^fmt\/848( |$)/]},
 		codeViewHelp             : {name : "Codeview Help", ext : [".hlp"], magic : ["Codeview Help"]},
 		corelPresentations       : {name : "Corel/WordPerfect Presentations", ext : [".shw", ".mst", ".prt"], magic : ["WordPerfect Presentations", "WordPerfect/Corel Presentations"]},
 		czHelp                   : {name : "CZ Help", ext : ["hlp"], magic : ["CZ Help"]},

@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class wordStar extends Program
@@ -12,17 +13,11 @@ export class wordStar extends Program
 		script   : `
 			WinWaitActive("[TITLE:WSWin 2.0]", "", 10)
 
-			Sleep(1000)
-
-			$warningVisible = WinWaitActive("[TITLE:Warning]", "", 5)
-			If $warningVisible Not = 0 Then
-				Send("{ENTER}")
-			EndIf
-
-			$noPrinterVisible = WinWaitActive("[TITLE:WSWin 2.0]", "No printer is installed", 5)
-			If $noPrinterVisible Not = 0 Then
-				Send("{ENTER}")
-			EndIf
+			Func DismissWarnings()
+				WindowDismiss("[TITLE:Warning]", "", "{ENTER}")
+				WindowDismiss("[TITLE:WSWin 2.0]", "No printer is installed", "{ENTER}")
+			EndFunc
+			CallUntil("DismissWarnings", ${xu.SECOND*3})
 
 			Send("^+e")
 

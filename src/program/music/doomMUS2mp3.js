@@ -53,7 +53,7 @@ export class doomMUS2mp3 extends Program
 
 			WinWaitClose("[TITLE:SLADE; CLASS:wxWindowNR]", "", 100)
 			
-			WaitForPID(ProcessExists("SLADE.exe"), ${xu.MINUTE})`
+			WaitForPID("SLADE.exe", ${xu.MINUTE})`
 	});
 	renameOut = true;
 	chain     = "timidity";

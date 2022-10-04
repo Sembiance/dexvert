@@ -36,8 +36,7 @@ export class FileSet
 		if(!(o instanceof DexFile || typeof o==="string"))
 			throw new TypeError(`Can't add file ${o} to FileSet due to being an unknown type ${typeof o}`);
 
-		if(!this.files[type])
-			this.files[type] = [];
+		this.files[type] ||= [];
 		if(!Object.hasOwn(this, type))
 			Object.defineProperty(this, type, {get : () => (this.files[type] || [])[0]});
 

@@ -538,8 +538,7 @@ export class Program
 		Object.assign(progOptions, moreProgOptions);
 
 		// run prog
-		if(!progOptions.flags)
-			progOptions.flags = {};
+		progOptions.flags ||= {};
 		Object.assign(progOptions.flags, flags);
 
 		const {programs} = await import("./program/programs.js");

@@ -65,8 +65,7 @@ async function idSample(sampleFilePath)
 		if(id.from!=="siegfried" || IGNORED_FMTIDS.some(IGNORED_FMTID => id.value.startsWith(`fmt/${IGNORED_FMTID}`)) || IGNORED_XFMTIDS.some(IGNORED_XFMTID => id.value.startsWith(`x-fmt/${IGNORED_XFMTID}`)))
 			continue;
 
-		if(!newMagics[diskFormatid])
-			newMagics[diskFormatid] = new Set();
+		newMagics[diskFormatid] ||= new Set();
 		
 		if(newMagics[diskFormatid].has(id.value))
 			continue;

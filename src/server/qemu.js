@@ -166,8 +166,7 @@ export class qemu extends Server
 	// Called to prepare the QEMU environment for a given OS and then start QEMU
 	async startOS(osid, instanceid, startingFromStop)
 	{
-		if(!INSTANCES[osid])
-			INSTANCES[osid] = {};
+		INSTANCES[osid] ||= {};
 		
 		const instance = {osid, instanceid, dirPath : path.join(QEMU_INSTANCE_DIR_PATH, `${osid}-${instanceid}`), ready : false, busy : false};
 		instance.debug = DEBUG || OS[osid].debug;

@@ -42,8 +42,7 @@ export class winedump extends Program
 
 				if(KEY_VAL_HEADERS.includes(category))
 				{
-					if(!meta[category])
-						meta[category] = {};
+					meta[category] ||= {};
 
 					if(subcat)
 					{
@@ -64,9 +63,7 @@ export class winedump extends Program
 				}
 				else
 				{
-					if(!meta[category])
-						meta[category] = [];
-					
+					meta[category] ||= [];
 					meta[category].push(propValue);
 				}
 			}

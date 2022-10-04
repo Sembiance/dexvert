@@ -31,8 +31,7 @@ for(const [programid, program] of Object.entries(programs))
 				if(programFamilies[converterid]!==format.familyid)
 				{
 					const fullConverterid = `${programFamilies[converterid]}/${converterid}`;
-					if(!otherFamilies[fullConverterid])
-						otherFamilies[fullConverterid] = new Set();
+					otherFamilies[fullConverterid] ||= new Set();
 					otherFamilies[fullConverterid].add(format.familyid);
 					xlog.info`Converter ${fullConverterid} family mismatch in format ${format.familyid}/${formatid}`;
 				}

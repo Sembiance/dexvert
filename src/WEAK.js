@@ -563,6 +563,7 @@ export const WEAK_VALUES =
 	/^Haines NFF scene/,
 	/^LEGO Mindstorms EV3 brick executable code$/,
 	/^Macromedia Director Java Resource - Video$/,
+	/^Magic and Mayhem sprites$/,
 	/^MegaZeux game$/,
 	/^Midtown Madness 2 game data archive$/,
 	/^Music Macro Language$/,

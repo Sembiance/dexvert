@@ -1,4 +1,4 @@
-# Unsupported File Formats (840)
+# Unsupported File Formats (843)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -147,7 +147,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (25)
+## Executable (26)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -163,6 +163,7 @@ executable | Linux i386 Executable |  |
 executable | Linux OMAGIC Executable |  | 
 executable | Linux ZMAGIC Exectutable |  | 
 executable | Mac OS X Universal Shared Library | .dylib | 
+executable | Mach-O Intel Executable |  | 
 executable | Mach-O m68k Executable |  | 
 executable | Mach-O PPC Executable |  | 
 executable | MacOS PPC PEF Executable |  | 
@@ -234,7 +235,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (75)
+## Image (76)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -312,6 +313,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFormatSamples/image/windowsFAXCover/)
 image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
+image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC2/)
 
 
 
@@ -415,7 +417,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (414)
+## Other (415)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -622,6 +624,7 @@ other | LDIFF Differences Data | .lzd |
 other | Legend of Kyrandia EMC File | .emc | 
 other | LIFE 3000 Status | .lif | 
 other | Linux 8086 Object File | .o | 
+other | Linux i386 Object File | .o | 
 other | Linux Kernel |  | 
 other | Linux Swap File |  | 
 other | LogicSim Circuit |  | 

@@ -8,7 +8,7 @@ export default
 	document :
 	{
 		acrossCrosswordPuzzle    : {name : "Across Crossword Puzzle", ext : [".puz"], magic : ["PUZ crossword puzzle", "Across crossword puzzle"]},
-		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa"], magic : ["ACT! word processor document"]},
+		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa", ".tpl", ".rep", ".wpd"], magic : ["ACT! word processor document"], weakMagic : true},
 		adorageScript			 : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
 		amigaProWrite 			 : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam database", "askSam Windows database"]},

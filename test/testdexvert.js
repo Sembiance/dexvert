@@ -70,7 +70,10 @@ const FLEX_SIZE_FORMATS =
 		swfEXE : 5,
 
 		// the PBMs generated are different each time
-		hypercard : 0.1
+		hypercard : 0.1,
+
+		// different PDF each time
+		tnef : 0.1
 	},
 	document :
 	{
@@ -117,7 +120,7 @@ const FLEX_SIZE_FORMATS =
 const IGNORE_SIZE_FILEPATHS =
 [
 	/scripts\/.+\.as$/i,			// archive/swf/cookie-hamster often produces very different script/**/*.as files
-
+	/\^\^ sweet heart.png$/,
 	/lem2.webp$/,
 	/SUB2.webp$/
 ];

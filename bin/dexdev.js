@@ -25,4 +25,4 @@ await runTerminalCommand(devTopWID, "cd Assorted\nreset\n", {newTab : true});
 await runTerminalCommand(devBottomWID, "cd /mnt/compendium/DevLab/dexvert/test/sample\nreset\n", {cmdDelay : 400});
 await runTerminalCommand(devBottomWID, "cd /mnt/compendium/DevLab/dexvert/sandbox/triddefs/defs\nreset\n", {newTab : true});
 await runTerminalCommand(devBottomWID, "cd /usr/share/misc/magic\nreset\n", {newTab : true});
-await runTerminalCommand(devBottomWID, "", {newTab : true});
+await runTerminalCommand(devBottomWID, "cd /mnt/compendium/DevLab/dexvert/test\n", {newTab : true});

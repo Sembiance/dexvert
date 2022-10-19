@@ -1,2 +1,0 @@
-#!/bin/sh
-DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768,--enable-experimental-regexp-engine-on-excessive-backtracks --no-check --no-config --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-run --allow-env --allow-sys /mnt/compendium/DevLab/dexvert/bin/dexqemuvnc.js "$@"

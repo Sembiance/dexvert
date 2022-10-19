@@ -1,8 +1,0 @@
-#!/bin/bash
-
-/mnt/compendium/DevLab/dexvert/build/build --silent programs formats
-
-command rm -rf ~/tmp/out
-mkdir -p ~/tmp/out
-
-dexvert "$@" ~/tmp/out/

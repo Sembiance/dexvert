@@ -14,7 +14,7 @@ export class IsoBuster extends Program
 	qemuData = ({
 		timeout : xu.MINUTE*10,	// IsoBuster can take a LONG time to run, but 10 minutes should be plenty for any file
 		
-		// normally, if the command works, we don't need to do anything at all with the script, but if a bad file is sent it might show an error we need to cancel (http://retromission.com/view/3/World's%20Best%20Butts%20(1995).iso/viewers/pep13.zip/SERIOUS1.BIN)
+		// normally, if the command works, we don't need to do anything at all with the script, but if a bad file is sent it might show an error we need to cancel (http://discmaster.textfiles.com/view/3/World's%20Best%20Butts%20(1995).iso/viewers/pep13.zip/SERIOUS1.BIN)
 		script : `
 			Local $errorVisible = WinWaitActive("No file systems and/or files found", "", 5)
 			If $errorVisible Not = 0 Then

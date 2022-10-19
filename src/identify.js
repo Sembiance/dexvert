@@ -15,7 +15,6 @@ function flexMatch(value, matcher, fullStringMatch)
 export {flexMatch};
 
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
-// If you add any here, you also need to update retromission.com msdos.styl
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "rom", "other"];
 
 export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})

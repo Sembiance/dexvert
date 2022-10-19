@@ -31,7 +31,7 @@ export default async function buildPrograms(xlog)
 			throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);
 		
 		if(programs[programid].allowDupOut && !programs[programid].chain && !["unHexACX"].includes(programid))
-			xlog.warn`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion in retromission`;
+			xlog.warn`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion on processing server`;
 		
 		relPaths.push([programid, path.relative(programDirPath, programFilePath)]);
 	}

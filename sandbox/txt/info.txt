@@ -48,6 +48,6 @@ https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF
 https://www.fileformat.info/format/cloud.htm
 https://file-extension.net/seeker/file_extension_stc
 https://www.digipres.org/formats/sources/trid/
-file:///mnt/compendium/DevLab/retromission/sandbox/websites/wotsit.org/default.html
+/sandbox/websites/wotsit.org/default.html
 https://fileinfo.com/
 https://www.amiga-stuff.com/crunchers-id.html

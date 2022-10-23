@@ -254,7 +254,7 @@ export default
 		slicksNSlidesTrack          : {name : "Slicks 'n' Slide Track", ext : [".ss"], magic : ["Slicks 'n' Slide track data"]},
 		starCraftMap                : {name : "StarCraft Map", ext : [".scm", ".scx"], magic : ["StarCraft Map"]},
 		su27FlankerMission          : {name : "Su-27 Flanker Mission", ext : [".mis"], magic : ["Su-27 Flanker Mission"]},
-		superZZTFile                : {name : "Super ZZT File", ext : [".szt"], magic : ["Super ZZT Game Creation System data format"]},
+		superZZTFile                : {name : "Super ZZT File", ext : [".szt"], magic : ["Super ZZT Game Creation System data format"], weakMagic : true},
 		tads                        : {name : "TADS", ext : [".t", ".gam"], magic : ["TADS 2 Game", /^TADS .*game data$/]},
 		threeDCKArea                : {name : "3D Construction Kit Area", ext : [".3ad"], magic : [/^3D Construction Kit \d? ?Area$/]},
 		threeDCKBrushes             : {name : "3D Construction Kit Brushes", ext : [".3bd"], magic : ["3D Construction Kit Brushes data"]},
@@ -264,7 +264,7 @@ export default
 		warCraftMap                 : {name : "WarCraft Map", ext : [".pud"], magic : ["WarCraft map"]},
 		winzlePuzzle                : {name : "Winzle Puzzle", ext : [".wzl"], magic : ["Winzle puzzle"]},
 		wipeout2097TrackData        : {name : "Wipeout 2097 Track Data", ext : [".wad"], magic : ["Wipeout 2097 track data"]},
-		zztFile                     : {name : "ZZT File", ext : [".zzt"], magic : ["ZZT Game Creation System data format"]},
+		zztFile                     : {name : "ZZT File", ext : [".zzt"], magic : ["ZZT Game Creation System data format"], weakMagic : true},
 
 
 		/////////////////

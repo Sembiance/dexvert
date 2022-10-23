@@ -14,8 +14,9 @@ export class file extends Program
 		let fileMatch = null;
 		for(let line of r.stdout.trim().split("\n"))
 		{
-			line = line.replace(/^- /g, "").trim();
-			line = line.replace(/^FILE_SIZE=\d+/, "").trim();
+			line = line.replace(/^- /g, "");
+			line = line.replace(/^\s*FILE_SIZE=\d+/, "");
+
 			if(!line.length)
 				continue;
 
@@ -24,8 +25,8 @@ export class file extends Program
 				fileMatch = line;
 				continue;
 			}
-			
-			if([", ", "], ", "), ", "(", "; "].some(v => line.startsWith(v)) || fileMatch.trim().endsWith("["))
+
+			if(line.startsWith(" ") || [", ", "], ", "), ", "(", "; "].some(v => line.trim().startsWith(v)) || fileMatch.trim().endsWith("["))
 			{
 				fileMatch += line;
 				continue;

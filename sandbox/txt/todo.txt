@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Consider using Tcl to do character encoding conversions? Iconv currently works ok, so maybe too risky to change at this point.
+  See a link in Issue #3 that has some Tcl code to do conversion (along with a script for it). Snippet: puts out.txt [encoding convertfrom macJapan [read in.txt]]
+
 * Potentially render ZZT/SuperZZT worlds out to PNG for preview: https://github.com/Sembiance/dexvert/issues/1
 
 * Improve MegaZeux detection (right now it's classified as 'weak'): https://github.com/Sembiance/dexvert/issues/2

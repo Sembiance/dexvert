@@ -25,6 +25,7 @@ export class awaveStudio extends Program
 
 			Func ErrorWindows()
 				WindowFailure("", "No wave data found!", -1, "{ENTER}")
+				WindowFailure("", "Invalid float", -1, "{ENTER}")
 				WindowFailure("", "Not a Sound Font file", -1, "{ENTER}")
 				WindowFailure("Attention!", "You must add at least one", -1, "{ENTER}")
 				WindowFailure("Unknown file type!", "", -1, "{ENTER}")

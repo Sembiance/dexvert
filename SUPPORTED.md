@@ -1,4 +1,4 @@
-# Supported File Formats (1,368)
+# Supported File Formats (1,369)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -257,7 +257,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (187)
+## Document (188)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -404,6 +404,7 @@ document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | 
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/quill/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [14 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/riscOSBBCBasic/)
+document | [Softdisk Text Compressor Document](http://justsolve.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [8 sample files](https://telparia.com/fileFormatSamples/document/softdiskTextCompressed/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
 document | ST Writer Document |  | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://telparia.com/fileFormatSamples/document/stWriter/)
 document | [StarOffice Draw Document](http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)) | .sda | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/starOfficeDraw/)
@@ -746,7 +747,7 @@ image | [JPEG 2000](http://fileformats.archiveteam.org/wiki/JPEG_2000) | .jp2 | 
 image | [JPEG Network Graphics](http://fileformats.archiveteam.org/wiki/JNG) | .jng | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://telparia.com/fileFormatSamples/image/jng/)
 image | [JPEG XL](http://fileformats.archiveteam.org/wiki/JPEG_XL) | .jxl | [gimp](https://gimp.org) | [8 sample files](https://telparia.com/fileFormatSamples/image/jpegXL/)
 image | [JPEG XR](http://fileformats.archiveteam.org/wiki/JPEG_XR) | .jxr .hdp .wdp .wmp | [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://telparia.com/fileFormatSamples/image/jpegXR/)
-image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [tomsViewer](https://tomseditor.com/blog/viewer) | [4 sample files](https://telparia.com/fileFormatSamples/image/viff/)
+image | [Khoros Visualization Image](http://fileformats.archiveteam.org/wiki/VIFF) | .viff .xv | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [tomsViewer](https://tomseditor.com/blog/viewer) | [9 sample files](https://telparia.com/fileFormatSamples/image/viff/)
 image | [Kisekae Set System Cell](http://fileformats.archiveteam.org/wiki/KiSS_CEL) | .cel .kcf | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [gimp](https://gimp.org) | [11 sample files](https://telparia.com/fileFormatSamples/image/kissCel/)
 image | [Koala Microillustrator](http://fileformats.archiveteam.org/wiki/Koala_MicroIllustrator) | .pic | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [29 sample files](https://telparia.com/fileFormatSamples/image/koalaMicroillustrator/) - APOLLO.PIC and STARWAR.PIC don't seem to be handled by recoil or view64, they may be invalid/corrupt.
 image | [Koala Paint](http://fileformats.archiveteam.org/wiki/KoalaPainter) | .koa .gig .kla .gg .koala | [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://telparia.com/fileFormatSamples/image/koalaPaint/)
@@ -784,7 +785,7 @@ image | [Mad Designer](http://fileformats.archiveteam.org/wiki/Mad_Designer) | .
 image | [Magic Draw](http://fileformats.archiveteam.org/wiki/MagicDraw) | .shr .hr | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://telparia.com/fileFormatSamples/image/magicDraw/)
 image | [Magic Painter](http://fileformats.archiveteam.org/wiki/Magic_Painter) | .mgp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/magicPainter/)
 image | MagicDesk Icon | .icn | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/image/magicDeskIcon/)
-image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://telparia.com/fileFormatSamples/image/miff/)
+image | [Magick Image File Format](http://fileformats.archiveteam.org/wiki/MIFF) | .miff .mif | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [9 sample files](https://telparia.com/fileFormatSamples/image/miff/)
 image | [MAKIchan Graphic](http://fileformats.archiveteam.org/wiki/MAKIchan_Graphics) | .mag .max .mki | [recoil2png](http://recoil.sourceforge.net) | [34 sample files](https://telparia.com/fileFormatSamples/image/makichan/)
 image | [Mamut RYS](http://fileformats.archiveteam.org/wiki/Mamut) | .rys | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/rys/)
 image | [Manager Windowing System Bitmap](http://fileformats.archiveteam.org/wiki/MGR_bitmap) | .mgr | [nconvert](https://www.xnview.com/en/nconvert/) | [16 sample files](https://telparia.com/fileFormatSamples/image/mgr/)

@@ -34,6 +34,11 @@ const FORCE_FORMAT_AS =
 	"font/amigaBitmapFontContent"
 ];
 
+const FORMAT_OS_HINT =
+{
+	"image/printfox" : "commodore"
+};
+
 // these formats produce a single file, but the name is always different
 const SINGLE_FILE_DYNAMIC_NAMES =
 [
@@ -282,6 +287,9 @@ async function testSample(sampleFilePath)
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
 	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json"];
+	if(FORMAT_OS_HINT[diskFormatid])
+		dexvertArgs.push(`--programFlag=osHint:${FORMAT_OS_HINT[diskFormatid]}`);
+
 	if(FORCE_FORMAT_AS.includes(diskFormatid))
 		dexvertArgs.push(`--asFormat=${diskFormatid}`);
 	dexvertArgs.push(sampleFilePath, tmpOutDirPath);

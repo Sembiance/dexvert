@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {RUNTIME} from "../../Program.js";
 
 export class printfox extends Format
 {
@@ -6,8 +7,10 @@ export class printfox extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Printfox_bitmap";
 	ext        = [".gb", ".bs", ".pg"];
 	magic      = ["PrintFox/Pagefox bitmap"];
-	weakMagic  = true;
 	trustMagic = true;
+
+	// Since this is such a weak match, only allow if we are an extMatch OR we have explicitly set an environment variable as commodore
+	idCheck = (inputFile, detections, {extMatch}) => extMatch || RUNTIME.globalFlags?.osHint?.commodore;
 
 	// We used to allow .bin as well, but the 'magic' is so totally weak (just a single character at the start of the file) that we simply can't allow it out in the wild
 	// The following two lines can be re-instated if you want to add .bin back as an extension above, assuming you can figure out a way further identify the file

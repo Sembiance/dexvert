@@ -16,7 +16,9 @@ export class detox64 extends Program
 	{
 		const lines = (new TextDecoder("utf-8").decode(await fileUtil.readFileBytes(dexFile.absolute, Math.min(dexFile.size, xu.KB*100)))).trim().split("\n").filter(v => !!v);
 		
-		// a 1 line BASIC program is not only un-interesting, but is also usually a false conversion
+		// a 1 line BASIC program is not only un-interesting, but is also "usually" a false conversion
+		// there are exceptions of course, such as a single SYS call out: 1991 SYS4894:REM(C) 1991 BY VISLOGIC
+		// but that's still pretty unintersting (except for the REM part) so better to ditch it then have thousands of false positives
 		if(lines.length===1)
 			return false;
 

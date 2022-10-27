@@ -107,9 +107,6 @@
   I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
   If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
 
-* Could add support for Commodore BASIC programs by using `petcat` (already installed with VICE) or the more capable Windows Vista+ C64List (v4.04 in sandbox/app/): https://www.facebook.com/c64List
-  Sadly the magic for these (See the files expanded within archive/lynxArhive) are very weak, so I'd almost certainly need to do some more checking after the fact to verify they are indeed BASIC programs
-
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel

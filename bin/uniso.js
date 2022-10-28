@@ -110,6 +110,7 @@ async function extractHFSISO()
 {
 	const HCDNUM_BIN = path.join(xu.dirname(import.meta), "hcdnum");
 	let volumeYear=null;
+	const seenDirectories = new Set();
 
 	const recurseHFS = async function recurseHFS(subPath)
 	{
@@ -150,11 +151,19 @@ async function extractHFSISO()
 			
 			const lineNum = +i;
 			
-			const {stdout : wdBefore} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
+			// I used to get the cwd both before and after the cd, but if a directory is an alias to a parent directory, this didn't work
+			// So now I just maintain a set of seen cwds and if we've seen it before, skip it
+			//const {stdout : wdBefore} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
+			
+			// So I call out to my 'hcdnum' script due to the crazy escaping needed to change to various directories
+			// An ALTERNATIVE to this is using the 'catalog id' which is a unique number for everything dir/file on the disk (hls -albi)
+			// There is no command though provided to change to a directory by catalog id, but I did code my own in sandbox/legacy/hcdcatalog.c
+			// So if this gives me much more trouble below, then I can patch hfsutils with my hcdcatalog.c and use that instead
 			await runUtil.run(HCDNUM_BIN, [`${(lineNum+1)}`], HFS_RUN_OPTIONS);
 			const {stdout : wdAfter} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
-			if(wdBefore!==wdAfter)	// only recurse in if the hcd succeeded
+			if(!seenDirectories.has(wdAfter))	// only recurse in if the hcd succeeded and we haven't already been there
 			{
+				seenDirectories.add(wdAfter);
 				await recurseHFS(path.join(subPath, hfsFilenameToUTF8(entry.filename)));
 				await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 			}

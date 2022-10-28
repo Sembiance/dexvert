@@ -1,11 +1,11 @@
-# Supported File Formats (1,369)
+# Supported File Formats (1,370)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (186)
+## Archive (187)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -49,7 +49,7 @@ archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .b
 archive | [C64 LiBRary](http://fileformats.archiveteam.org/wiki/LBR_(Commodore)) | .lbr | [DirMaster](https://style64.org/dirmaster) | [8 sample files](https://telparia.com/fileFormatSamples/archive/c64Library/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [cabextract](https://www.cabextract.org.uk/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
 archive | [CAZIP File](http://fileformats.archiveteam.org/wiki/CAZIP) | .caz _ | [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [11 sample files](https://telparia.com/fileFormatSamples/archive/cazip/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) [deark](https://entropymine.com/deark/) [IsoBuster](https://www.isobuster.com/isobuster.php) [cabextract](https://www.cabextract.org.uk/) | [47 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) [deark](https://entropymine.com/deark/) [IsoBuster](https://www.isobuster.com/isobuster.php) [cabextract](https://www.cabextract.org.uk/) | [48 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
 archive | Chasm BIN Archive | .bin | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/chasmBINArchive/)
 archive | [CISO Compressed ISO](https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/cso/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
@@ -68,6 +68,7 @@ archive | Disk Doubler | .dd | [unar](https://unarchiver.c3.cx/) | [10 sample fi
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/diskImage/)
 archive | Dynamix Game Data Archive | .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/threeDUltraMiniGolfGameData/)
 archive | Dynamix Game Data Archive | .dyn | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/dynamixGameData/)
+archive | Earth and Beyond Game Data Archive | .mix | [gameextractor](http://www.watto.org/game_extractor.html) | 
 archive | EDI Install LZS Compressed Data | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE) | [11 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | EDI Install LZSS2 Compressed Data | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ediInstallLZSS2/)
 archive | Ensemble Studios Data Resource | .drs | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://telparia.com/fileFormatSamples/archive/ensembleStudiosDataResource/)
@@ -404,7 +405,7 @@ document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | 
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/quill/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [14 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/riscOSBBCBasic/)
-document | [Softdisk Text Compressor Document](http://justsolve.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [8 sample files](https://telparia.com/fileFormatSamples/document/softdiskTextCompressed/)
+document | [Softdisk Text Compressor Document](http://justsolve.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [13 sample files](https://telparia.com/fileFormatSamples/document/softdiskTextCompressed/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
 document | ST Writer Document |  | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://telparia.com/fileFormatSamples/document/stWriter/)
 document | [StarOffice Draw Document](http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)) | .sda | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/starOfficeDraw/)
@@ -880,7 +881,7 @@ image | [Portfolio Graphics Compressed](http://fileformats.archiveteam.org/wiki/
 image | [Portfolio PGX](http://fileformats.archiveteam.org/wiki/PGX_(Portfolio)) | .pgx | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/image/pgx/) - Sometimes instead of a single bitmap, it's multiple frames to a animation which we then convert into an GIF. Each PGC file within the PGX specifies have how long to delay between each frame, so we could make a better GIF: https://www.idealine.info/portfolio/library/text/pgxspec.txt
 image | [PowerGraphics](http://fileformats.archiveteam.org/wiki/PowerGraphics) | .pgr | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/pgr/)
 image | Print-Technik HIR Image | .hir | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/hir/)
-image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg | [nconvert](https://www.xnview.com/en/nconvert/) | [29 sample files](https://telparia.com/fileFormatSamples/image/printfox/)
+image | [Printfox/Pagefox Bitmap](http://fileformats.archiveteam.org/wiki/Printfox_bitmap) | .gb .bs .pg | [nconvert](https://www.xnview.com/en/nconvert/) | [34 sample files](https://telparia.com/fileFormatSamples/image/printfox/)
 image | [PrintMaster Shape](http://fileformats.archiveteam.org/wiki/PrintMaster) | .shp | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/image/printMasterShape/)
 image | [Prism Paint](http://fileformats.archiveteam.org/wiki/Prism_Paint) | .pnt .tpi | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://telparia.com/fileFormatSamples/image/prismPaint/)
 image | [Progressive Graphics File](http://fileformats.archiveteam.org/wiki/PGF_(Progressive_Graphics_File)) | .pgf | [pgf](https://www.libpgf.org/) | [10 sample files](https://telparia.com/fileFormatSamples/image/progressiveGraphicsFile/)

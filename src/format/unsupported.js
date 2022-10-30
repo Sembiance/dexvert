@@ -313,7 +313,7 @@ export default
 		mySQLIndexFile               : {name : "MySQL Index", ext : [".myi"], magic : ["MySQL MyISAM index file", "MySQL MyISAM tables index", /^fmt\/1197( |$)/]},
 		mySQLTableDefinition         : {name : "MySQL Table Definition", ext : [".frm"], magic : ["MySQL table definition", /^MySQL Database.* Dictionary/, /^fmt\/868( |$)/]},
 		netwareLoadableModule        : {name : "Netware Loadable Module", ext : [".nlm"], magic : [/^Net[Ww]are Loadable Module/]},
-		oberonSymbol                 : {name : "Oberon Symbol", ext : [".sym"], magic : ["Oberon V3 Symbol data"]},
+		oberonSymbol                 : {name : "Oberon Symbol", ext : [".sym"], magic : ["Oberon V3 Symbol data", "Oberon/F Symbol File"]},
 		olbLib                       : {name : "OLB Library", magic : ["OLB Library"]},
 		powerBasicHelp               : {name : "PowerBASIC Help", ext : [".pbh"], magic : ["PowerBASIC Help"]},
 		powerBuilderDynamicLibrary   : {name : "PowerBuilder Dynamic Library", ext : [".pbd"], magic : ["PowerBuilder Dynamic library"]},

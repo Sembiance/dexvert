@@ -1,11 +1,11 @@
-# Supported File Formats (1,370)
+# Supported File Formats (1,372)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (187)
+## Archive (188)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -110,7 +110,7 @@ archive | Lucas Arts Game Data Archive | .gob | [gameextractor](http://www.watto
 archive | LyNX Archive | .lnx | [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/lynxArchive/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/archive/macBinary/)
-archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
+archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [deark](https://entropymine.com/deark/) | [18 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) [macromediaDirector](https://www.buraks.com/swifty/xena.html) | [24 sample files](https://telparia.com/fileFormatSamples/archive/macromediaDirector/) - While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js
 archive | [Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://telparia.com/fileFormatSamples/archive/swf/)
 archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wiki/SWF) | .exe | [EXE2SWFExtractor](https://sothink.com/product/flashdecompiler/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/swfEXE/)
@@ -182,6 +182,7 @@ archive | [TTW Compressed File](http://fileformats.archiveteam.org/wiki/TTW) | .
 archive | [Turbo Packer](http://fileformats.archiveteam.org/wiki/Turbo_Packer) |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://telparia.com/fileFormatSamples/archive/turboPacker/)
 archive | [UltraCompressor II Archive](http://fileformats.archiveteam.org/wiki/UC2) | .uc2 | [ultraCompressor2](http://files.mpoli.fi/unpacked/software/dos/compress/quant097.zip/) | [13 sample files](https://telparia.com/fileFormatSamples/archive/ultraCompressor2/)
 archive | [UU Encoded Archive](http://fileformats.archiveteam.org/wiki/Uuencoding) | .uue .uu | [uudecode](https://www.gnu.org/software/sharutils/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [10 sample files](https://telparia.com/fileFormatSamples/archive/uue/)
+archive | [Visual Novel DPK Archive](http://fileformats.archiveteam.org/wiki/DPK) | .dpk | [undpk](http://fileformats.archiveteam.org/wiki/DPK) | [4 sample files](https://telparia.com/fileFormatSamples/archive/visualNovelDPK/)
 archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
 archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [deark](https://entropymine.com/deark/) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
 archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
@@ -258,7 +259,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (188)
+## Document (189)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -366,6 +367,7 @@ document | [Norton Guide](https://en.wikipedia.org/wiki/Norton_Guides) | .ng | [
 document | Novell DOS Client Message | .msg | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/novellDOSClientMessage/)
 document | Novell Help Librarian | .hlp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/novellHelpLibrarian/)
 document | Novell/C-Worthy Message Librarian | .msg .dat | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/messageLibrarian/)
+document | Oberon Document | .odc | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/oberonDocument/)
 document | Oberon Text | .mod | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/oberonText/)
 document | [Office Open XML](http://fileformats.archiveteam.org/wiki/DOCX) | .docx .docm .dotx | [soffice](https://www.libreoffice.org) | [6 sample files](https://telparia.com/fileFormatSamples/document/docx/)
 document | [Open Document Format for Office Applications](http://fileformats.archiveteam.org/wiki/OpenDocument) | .odm .odt .fodt .ott .odp .ods | [soffice](https://www.libreoffice.org) | [9 sample files](https://telparia.com/fileFormatSamples/document/openDocument/)
@@ -1314,7 +1316,7 @@ other | Turbo Pascal Chain module | .chn | [strings](https://www.gnu.org/softwar
 other | Turbo Pascal Configuration File | .tp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalConfiguration/)
 other | Turbo Pascal Desktop File | .dsk | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalDesktopFile/)
 other | Turbo Pascal Overlay | .ovr | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/turboPascalOverlay/)
-other | VCD Info File | .vcd | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/vcdInfo/)
+other | VCD Info File | .vcd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/vcdInfo/)
 other | Ventur Publisher Style Sheet | .sty | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/venturaPublisherStyleSheet/)
 other | Verity Collection Index Descriptor | .wld .ddd .did .pdd .rsd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/verityCollectionIndexDescriptor/)
 other | Vim Swap | .swp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/vimSwap/)

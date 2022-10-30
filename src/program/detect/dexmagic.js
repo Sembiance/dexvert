@@ -20,6 +20,7 @@ const DEXMAGIC_CHECKS =
 	"pcxLib compressed"                     : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"SCR Package"                           : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File"                   : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
+	"Visual Novel DPK Archive"              : [{offset : 0, match : "PA"}],
 	"WAD2 file"                             : [{offset : 0, match : "WAD2"}],
 
 	// audio

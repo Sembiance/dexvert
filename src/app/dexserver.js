@@ -3,6 +3,8 @@ import {XLog} from "xlog";
 import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
 
+await runUtil.checkNumserver();
+
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexserver",
 	version : "1.0.0",

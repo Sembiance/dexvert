@@ -166,6 +166,7 @@ export default
 		msWinCEInstallHeader            : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header"]},
 		noteWorthyComposure             : {name : "NoteWorthy Composure", ext : [".nw"], magic : ["NoteWorthy song"]},
 		novellErrorLibrarian            : {name : "Novell Error Librarian", ext : [".dat", ".idx"], magic : ["Novell Error Librarian Data"]},
+		nsFileWrapperSerializedData     : {name : "NSFileWrapper Serialized Data", magic : ["NSFileWrapper serialized data"]},
 		omnisStudioDatabase             : {name : "Omnis Studio Database", ext : [".df1", ".lbr"], magic : ["Omnis Studio Database"]},
 		objectVisionDatafile            : {name : "ObjectVision Datafile", ext : [".ovd"], magic : ["ObjectVision Datafile"]},
 		powerWindowsProject             : {name : "PowerWindows Project", ext : [".pw"], magic : ["PowerWindows Project"]},

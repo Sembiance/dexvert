@@ -1,11 +1,11 @@
-# Supported File Formats (1,372)
+# Supported File Formats (1,375)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (188)
+## Archive (190)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -49,7 +49,7 @@ archive | [BZip2 archive](http://fileformats.archiveteam.org/wiki/BZ2) | .bz2 .b
 archive | [C64 LiBRary](http://fileformats.archiveteam.org/wiki/LBR_(Commodore)) | .lbr | [DirMaster](https://style64.org/dirmaster) | [8 sample files](https://telparia.com/fileFormatSamples/archive/c64Library/)
 archive | [Cabinet](http://fileformats.archiveteam.org/wiki/CAB2) | .cab | [cabextract](https://www.cabextract.org.uk/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [12 sample files](https://telparia.com/fileFormatSamples/archive/cab/)
 archive | [CAZIP File](http://fileformats.archiveteam.org/wiki/CAZIP) | .caz _ | [cazip](https://support.broadcom.com/external/content/release-announcements/CAZIP.exe-CAZIPXP.exe-and-Applyptf/7844) | [11 sample files](https://telparia.com/fileFormatSamples/archive/cazip/)
-archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) [deark](https://entropymine.com/deark/) [IsoBuster](https://www.isobuster.com/isobuster.php) [cabextract](https://www.cabextract.org.uk/) | [48 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
+archive | [CD Disc Image](http://fileformats.archiveteam.org/wiki/ISO_image) | .iso .bin .hfs .ugh .img .toast | [uniso](https://github.com/Sembiance/dexvert/) [fuseiso](https://sourceforge.net/projects/fuseiso) [deark](https://entropymine.com/deark/) [IsoBuster](https://www.isobuster.com/isobuster.php) [cabextract](https://www.cabextract.org.uk/) | [49 sample files](https://telparia.com/fileFormatSamples/archive/iso/) - Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks). Multi-track (such as Audio and Data) are also supported. PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs, etach CD's data tracks are different per game. NOTE: If the tracks are split across multiple .bin files, the 'first track' will merge with following non-audio tracks (which won't be processed, unless of type audio, those get processed alone)
 archive | Chasm BIN Archive | .bin | [gameextractor](http://www.watto.org/game_extractor.html) | [1 sample file](https://telparia.com/fileFormatSamples/archive/chasmBINArchive/)
 archive | [CISO Compressed ISO](https://en.wikipedia.org/wiki/.CSO) | .cso .ciso | [sevenZip](http://p7zip.sourceforge.net/) | [1 sample file](https://telparia.com/fileFormatSamples/archive/cso/)
 archive | [Commodore Disk Image](http://fileformats.archiveteam.org/wiki/D64) | .d64 .d81 .d71 .g64 | [c1541](https://vice-emu.sourceforge.io/) [DirMaster](https://style64.org/dirmaster) | [12 sample files](https://telparia.com/fileFormatSamples/archive/commodoreDiskImage/)
@@ -127,6 +127,8 @@ archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_i
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [dd](https://www.gnu.org/software/coreutils/) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [UniExtract](https://www.legroom.net/software/uniextract) | [3 sample files](https://telparia.com/fileFormatSamples/archive/nrg/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://telparia.com/fileFormatSamples/archive/news/)
+archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/nextDiskImage/)
+archive | NeXT Disk Image Dump | .diskimage | [dd](https://www.gnu.org/software/coreutils/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/nextDiskImageDump/)
 archive | Novalogic Game Data Archive | .pff | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://telparia.com/fileFormatSamples/archive/novalogicGameData/)
 archive | [Novel NetWare Packed File](http://fileformats.archiveteam.org/wiki/NetWare_Packed_File) |  | [nwunpack](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [10 sample files](https://telparia.com/fileFormatSamples/archive/netWarePacked/)
 archive | [NPack Archive](http://fileformats.archiveteam.org/wiki/NPack) | .$ | [npack](http://fileformats.archiveteam.org/wiki/NPack) | [10 sample files](https://telparia.com/fileFormatSamples/archive/npack/)
@@ -1225,7 +1227,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files
 
 
 
-## Other (100)
+## Other (101)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1293,6 +1295,7 @@ other | MS Visual FoxPro App | .app .fxp | [strings](https://www.gnu.org/softwar
 other | NeXT TypedStream Data |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/typedStreamData/)
 other | NoteWorthy Composure | .nw | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/noteWorthyComposure/)
 other | Novell Error Librarian | .dat .idx | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/other/novellErrorLibrarian/)
+other | NSFileWrapper Serialized Data |  | [strings](https://www.gnu.org/software/binutils/) | 
 other | Null Bytes Alternating |  | [stripGarbage](https://github.com/Sembiance/dexvert) | [5 sample files](https://telparia.com/fileFormatSamples/other/nullBytesAlternating/)
 other | ObjectVision Datafile | .ovd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/objectVisionDatafile/)
 other | Omnis Studio Database | .df1 .lbr | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/omnisStudioDatabase/)

@@ -1,4 +1,4 @@
-# Unsupported File Formats (843)
+# Unsupported File Formats (847)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -147,7 +147,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (26)
+## Executable (28)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -162,10 +162,12 @@ executable | HP Palmtop Executable | .exm | [2 sample files](https://telparia.co
 executable | Linux i386 Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | Linux ZMAGIC Exectutable |  | 
+executable | Mac OS X Universal Binary |  | 
 executable | Mac OS X Universal Shared Library | .dylib | 
 executable | Mach-O Intel Executable |  | 
 executable | Mach-O m68k Executable |  | 
 executable | Mach-O PPC Executable |  | 
+executable | Mach-O SPARC Executable |  | 
 executable | MacOS PPC PEF Executable |  | 
 executable | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki/Microsoft_Help_2) | .HxS .HxI | 
 executable | MIPSL ECOFF Executable |  | 
@@ -417,7 +419,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (415)
+## Other (417)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -635,7 +637,9 @@ other | Lotus Freelance Presentation | .prz |
 other | Lotus Magellan Viewer | .vw2 | 
 other | Lua bytecode |  | 
 other | LucasFilm Data | .lfd | 
+other | Mach-O HPPA Object | .o | 
 other | Mach-O m68k Object | .o | 
+other | Mach-O SPARC Object | .o | 
 other | Macromedia Xtra Cache | .mch | 
 other | MagiC64 Preferences | .prefs | 
 other | MapBrowser/MapWriter Vector Map Data | cbd | 

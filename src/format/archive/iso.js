@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 import {path, base64Encode} from "std";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
@@ -136,17 +136,19 @@ export class iso extends Format
 		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
 		const hfsConverters = [...(dexState.meta?.iso?.isISO ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]", "uniso"]), "uniso[block:512]", "fuseiso", "unar"];
 
+		const unisoConverters = RUNTIME.globalFlags?.osHint?.nextstep ? ["uniso[nextstep]", "uniso"] : ["uniso"];
+
 		// If it's a BIN/CUE, run bchunk
 		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
 		// We try our regular converters first though, because sometimes the cue file is pretty useless
 		if(cueFile)
-			return [...(isHFS ? hfsConverters : ["uniso"]), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, ...FALLBACK_CONVERTERS];
+			return [...(isHFS ? hfsConverters : unisoConverters), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, ...FALLBACK_CONVERTERS];
 
 		if(isHFS)
 			return hfsConverters;
 		
 		// Finally, we appear to have just a 'simple' iso file. So just use uniso and fallback on fuseiso
-		return ["uniso", ...FALLBACK_CONVERTERS];
+		return [...unisoConverters, ...FALLBACK_CONVERTERS];
 	};
 
 	meta = async (inputFile, dexState) =>

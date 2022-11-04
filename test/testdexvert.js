@@ -36,7 +36,8 @@ const FORCE_FORMAT_AS =
 
 const FORMAT_OS_HINT =
 {
-	"image/printfox" : "commodore"
+	"image/printfox" : "commodore",
+	"archive/iso"    : {"OS_user_4.0.iso" : "nextstep"}
 };
 
 // these formats produce a single file, but the name is always different
@@ -287,8 +288,10 @@ async function testSample(sampleFilePath)
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
 	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json"];
-	if(FORMAT_OS_HINT[diskFormatid])
+	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
 		dexvertArgs.push(`--programFlag=osHint:${FORMAT_OS_HINT[diskFormatid]}`);
+	else if(Object.isObject(FORMAT_OS_HINT[diskFormatid]) && FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)])
+		dexvertArgs.push(`--programFlag=osHint:${FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]}`);
 
 	if(FORCE_FORMAT_AS.includes(diskFormatid))
 		dexvertArgs.push(`--asFormat=${diskFormatid}`);

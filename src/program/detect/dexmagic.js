@@ -17,6 +17,7 @@ const DEXMAGIC_CHECKS =
 	"IFF LIST file"                         : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"                              : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
 	"MINICAT Archive"                       : [{offset : 0, match : "MINICAT"}],
+	"NeXT Disk Image Dump"                  : [{offset : 46, match : "dlV3"}],
 	"pcxLib compressed"                     : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
 	"SCR Package"                           : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File"                   : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],

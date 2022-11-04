@@ -7,6 +7,7 @@ export class uniso extends Program
 		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
 		block      : "Specify the block size in bytes",
 		hfs        : "Set this to true to process the iso as a MacOS HFS disc. Default: false",
+		nextstep   : "Set this to true to process the iso as a NeXTSTEP disc. Default: false",
 		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
 	bin        = "deno";
@@ -19,6 +20,8 @@ export class uniso extends Program
 			a.push(`--block=${r.flags.block}`);
 		if(r.flags.hfs)
 			a.push("--hfs");
+		if(r.flags.nextstep)
+			a.push("--nextstep");
 		if(r.flags.checkMount)
 			a.push("--checkMount");
 		a.push(r.inFile(), r.outDir());

@@ -1,6 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add support SGI Irix CDs: https://archive.org/details/sgi-irix-6.2-applications-1996-may
+  CD format might be: https://www.linux.org/threads/extent-file-system-efs.8904/
+  .idb file read with https://gist.github.com/Sgeo/ff7c568e81b7efa09250dc3fc1253569
+
 * Consider using Tcl to do character encoding conversions? Iconv currently works ok, so maybe too risky to change at this point.
   See a link in Issue #3 that has some Tcl code to do conversion (along with a script for it). Snippet: puts out.txt [encoding convertfrom macJapan [read in.txt]]
 

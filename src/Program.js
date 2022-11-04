@@ -199,7 +199,8 @@ export class Program
 			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", targetEncoding, "-t", "UTF-8", f.outDir.absolute]);
 
 			// delete empty files/broken symlinks. find is very fast at this, so use that
-			xlog.trace`Program ${fg.orange(this.programid)} deleting empty files and broken symlinks...`;
+			xlog.trace`Program ${fg.orange(this.programid)} deleting directory symlinks, empty filesm and broken symlinks...`;
+			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "-xtype", "d", "-delete"]);
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
 			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);
 
@@ -228,13 +229,6 @@ export class Program
 					if(linkPathRel.startsWith("../"))
 					{
 						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to linking to a file outside of the output dir: ${linkPath}`;
-						await fileUtil.unlink(newFilePath);
-						return;
-					}
-
-					if((await Deno.lstat(linkPath)).isDirectory)
-					{
-						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} due to being a dir link, which can cause infinite loops and won't result in new files: ${path.basename(newFilePath)} -> ${linkPathRel}`;
 						await fileUtil.unlink(newFilePath);
 						return;
 					}

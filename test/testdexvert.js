@@ -206,6 +206,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
+	[/archive\/irixIDBArchive\/license_eoe\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", true],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],

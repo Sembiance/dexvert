@@ -1,11 +1,11 @@
-# Supported File Formats (1,375)
+# Supported File Formats (1,376)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (190)
+## Archive (191)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -95,6 +95,7 @@ archive | Impact Screensaver ILB File | .ilb | [unImpactILB](https://github.com/
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://telparia.com/fileFormatSamples/archive/installShieldCAB/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/installShieldZ/)
 archive | Interstate Series Game Data | .zfs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://telparia.com/fileFormatSamples/archive/interstateGameData/)
+archive | IRIX IDB/SW Archive | .idb | [irixswextract](https://gist.github.com/Sgeo/ff7c568e81b7efa09250dc3fc1253569) | [5 sample files](https://telparia.com/fileFormatSamples/archive/irixIDBArchive/)
 archive | JAM Packer Compressed File |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://telparia.com/fileFormatSamples/archive/jamPacker/)
 archive | Jane's Longbow 2 Archive | .tre | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://telparia.com/fileFormatSamples/archive/janesLongbow2/)
 archive | [JAR Archive (ARJ Software)](http://fileformats.archiveteam.org/wiki/JAR_(ARJ_Software)) | .j | [jar32](http://www.arjsoftware.com/jar.htm) | [3 sample files](https://telparia.com/fileFormatSamples/archive/jarARJ/)
@@ -110,7 +111,7 @@ archive | Lucas Arts Game Data Archive | .gob | [gameextractor](http://www.watto
 archive | LyNX Archive | .lnx | [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/lynxArchive/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://unarchiver.c3.cx/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/compactPro/)
 archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [14 sample files](https://telparia.com/fileFormatSamples/archive/macBinary/)
-archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [deark](https://entropymine.com/deark/) | [18 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
+archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [deark](https://entropymine.com/deark/) | [20 sample files](https://telparia.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) [macromediaDirector](https://www.buraks.com/swifty/xena.html) | [24 sample files](https://telparia.com/fileFormatSamples/archive/macromediaDirector/) - While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js
 archive | [Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://telparia.com/fileFormatSamples/archive/swf/)
 archive | [Macromedia Flash Compiled EXE](http://fileformats.archiveteam.org/wiki/SWF) | .exe | [EXE2SWFExtractor](https://sothink.com/product/flashdecompiler/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/swfEXE/)
@@ -322,7 +323,7 @@ document | First Choice Database | .fol .pfs | [strings](https://www.gnu.org/sof
 document | First Choice Document | .doc .pfs | [fileMerlin](http://www.file-convert.com/flmn.htm) | [10 sample files](https://telparia.com/fileFormatSamples/document/firstChoice/)
 document | Form Master Form | .frm | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/formMasterForm/)
 document | [FrameMaker](http://fileformats.archiveteam.org/wiki/FrameMaker) | .fm .frm doc | [frameMaker](https://winworldpc.com/product/framemaker/50) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameMaker/)
-document | FrameMaker Book | .book | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/frameMakerBook/)
+document | FrameMaker Book | .book | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/frameMakerBook/)
 document | FrameworkDocument | .fw2 .fw3 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/frameworkDocument/)
 document | GNU Info File | .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/gnuInfo/)
 document | Gold Disk Spreadsheet | .adv .pcf | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/goldDiskSpreadsheet/)
@@ -1242,7 +1243,7 @@ other | Apple Property List | .nib | [deark](https://entropymine.com/deark/) | [
 other | [Asymetrix ToolBook File](http://fileformats.archiveteam.org/wiki/Asymetrix_Toolbook) | .tbk .sbk | [strings](https://www.gnu.org/software/binutils/) | [15 sample files](https://telparia.com/fileFormatSamples/other/asymetrixToolbook/) - Goal is to use the original ToolBook software to open and extract the files. Only version I could find is 3.0 which wouldn't open the sample files. Looking for a later version. Unfortunately, the files are version locked to specific engines according to: https://tb.sumtotalsystems.com/KBFiles/kb/ToolBook%20Knowledge%20Base.html?RuntimeEngines.html This would then require having to install multiple versions of ToolBook and trying each one to see if it can open and edit a given TBK file.
 other | Atari ST Guide Hypertext | .hyp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/atariSTGuideHypertext/)
 other | Atari ST Guide REF Links | .ref | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/atariSTGuideREF/)
-other | bbX File |  | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/other/bbxFile/)
+other | bbX File |  | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/bbxFile/)
 other | Borland C/C++ Project | .prj | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/borlandCProject/)
 other | Borland Reflex Database | .rxd | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/borlandReflexDatabase/)
 other | Borland Turbo Vision Resource | .res .tvr | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/borlandTurboVisionResource/)

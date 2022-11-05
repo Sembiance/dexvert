@@ -53,7 +53,7 @@ export class resource_dasm extends Program
 		const fontGlyphs = {};
 		for(const fileOutputPath of fileOutputPaths)
 		{
-			const {code, num, glyph} = path.basename(fileOutputPath).match(/(?<code>\w{4})_(?<num>\d+)_glyph_(?<glyph>\w+)\.bmp$/)?.groups || {};
+			const {code, num, glyph} = path.basename(fileOutputPath).match(/(?<code>\w{4})_(?<num>-?\d+)_.*glyph_(?<glyph>\w+)\.bmp$/)?.groups || {};
 			if(!code || !num || !glyph)
 				continue;
 			
@@ -74,7 +74,7 @@ export class resource_dasm extends Program
 		const txtResources = {};
 		for(const fileOutputPath of fileOutputPaths)
 		{
-			const {code, num, name} = path.basename(fileOutputPath).match(/(?<code>STR#)_(?<num>\d+)_(?<name>.+)\.txt$/)?.groups || {};
+			const {code, num, name} = path.basename(fileOutputPath).match(/(?<code>STR#)_(?<num>-?\d+)_(?<name>.+)\.txt$/)?.groups || {};
 			if(!code || !num || !name)
 				continue;
 

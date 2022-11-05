@@ -1,4 +1,4 @@
-# Unsupported File Formats (847)
+# Unsupported File Formats (848)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
@@ -147,7 +147,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (28)
+## Executable (29)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -164,6 +164,7 @@ executable | Linux OMAGIC Executable |  |
 executable | Linux ZMAGIC Exectutable |  | 
 executable | Mac OS X Universal Binary |  | 
 executable | Mac OS X Universal Shared Library | .dylib | 
+executable | Mach-O HPPA Executable |  | 
 executable | Mach-O Intel Executable |  | 
 executable | Mach-O m68k Executable |  | 
 executable | Mach-O PPC Executable |  | 

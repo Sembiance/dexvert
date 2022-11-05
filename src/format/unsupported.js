@@ -61,6 +61,7 @@ export default
 		macOSXUniversalBinary   : {name : "Mac OS X Universal Binary", magic : ["Mach-O universal binary", "Mac OS X Universal Binary"]},
 		macOSXUniversalLibrary  : {name : "Mac OS X Universal Shared Library", ext : [".dylib"], magic : ["Mac OS X Mach-O universal Dynamically linked shared Library"]},
 		macPPCPEFExe            : {name : "MacOS PPC PEF Executable", magic : ["Preferred Executable Format (PowerPC)", "header for PowerPC PEF executable"]},
+		machOHPPAExe            : {name : "Mach-O HPPA Executable", magic : [/Mach-O hppa .*executable/]},
 		machOIntelExe           : {name : "Mach-O Intel Executable", magic : [/Mac OS X Mach-O 32-bit Intel .*executable/]},
 		machOm68kExe            : {name : "Mach-O m68k Executable", magic : [/^Mach-O m68k .*executable/, "Mach-O i386"]},
 		machOPPCExe             : {name : "Mach-O PPC Executable", magic : [/^Mach-O ppc .*executable/, /^Mac OS X Mach-O 32-bit PPC .*executable/]},

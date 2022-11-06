@@ -37,7 +37,7 @@ const FORCE_FORMAT_AS =
 const FORMAT_OS_HINT =
 {
 	"image/printfox" : "commodore",
-	"archive/iso"    : {"OS_user_4.0.iso" : "nextstep", "Random-Dot 3D.iso" : "macintoshjp", "Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp"},
+	"archive/iso"    : {"OS_user_4.0.iso" : "nextstep", "Random-Dot 3D.iso" : "macintoshjp", "Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp", "MAC100-1999-02.ISO" : "macintoshjp"},
 	"archive/sit"    : {"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp", "StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ" : "macintoshjp"}
 };
 

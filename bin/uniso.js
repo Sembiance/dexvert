@@ -1,6 +1,9 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, encodeUtil} from "xutil";
 import {path, dateParse} from "std";
+import {XLog} from "xlog";
+
+const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -93,7 +96,7 @@ async function extractHFSISO()
 {
 	const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.octal, region : argv.macEncoding};
 	let volumeYear=null;
-	const seenDirectories = new Set();
+	const seenIds = new Set();
 
 	const recurseHFS = async function recurseHFS(subPath)
 	{
@@ -131,13 +134,22 @@ async function extractHFSISO()
 			if(entry.type!=="d")
 				continue;
 			
-			if(!seenDirectories.has(entry.id))
+			await runUtil.run("hcdi", [entry.id], HFS_RUN_OPTIONS);
+			const {stdout} = await runUtil.run("hpwdi", [], HFS_RUN_OPTIONS);
+			const idAfter = stdout.trim();
+
+			if(seenIds.has(idAfter))
 			{
-				seenDirectories.add(entry.id);
-				await runUtil.run("hcdi", [entry.id], HFS_RUN_OPTIONS);
-				await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts})));
-				await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
+				if((+entry.id)!==(+idAfter))
+					xlog.warn`Failed to change into directory id ${entry.id} with name ${entry.filename} inside of ${subPath}`;
+				else
+					xlog.warn`Skipping dir ${+entry.id} ${entry.filename} inside of ${subPath} as we've already seen it`;
+				continue;
 			}
+			
+			seenIds.add(idAfter);
+			await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts})));
+			await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 		}
 	};
 

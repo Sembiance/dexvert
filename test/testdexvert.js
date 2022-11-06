@@ -37,7 +37,8 @@ const FORCE_FORMAT_AS =
 const FORMAT_OS_HINT =
 {
 	"image/printfox" : "commodore",
-	"archive/iso"    : {"OS_user_4.0.iso" : "nextstep"}
+	"archive/iso"    : {"OS_user_4.0.iso" : "nextstep"},
+	"archive/sit"    : {"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp", "StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ" : "macintoshjp"}
 };
 
 // these formats produce a single file, but the name is always different

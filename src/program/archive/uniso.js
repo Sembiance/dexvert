@@ -1,4 +1,4 @@
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 
 export class uniso extends Program
 {
@@ -19,7 +19,10 @@ export class uniso extends Program
 		if(r.flags.block)
 			a.push(`--block=${r.flags.block}`);
 		if(r.flags.hfs)
+		{
 			a.push("--hfs");
+			a.push(`--macEncoding=${RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"}`);
+		}
 		if(r.flags.nextstep)
 			a.push("--nextstep");
 		if(r.flags.checkMount)

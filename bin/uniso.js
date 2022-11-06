@@ -7,12 +7,13 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <input.iso> as an ISO and extracting into <outputDirPath>",
 	opts    :
 	{
-		offset     : {desc : "If set, mount at the given offset", hasValue : true},
-		block      : {desc : "If set, specify a given block size for the ISO image.", hasValue : true},
-		hfs        : {desc : "If set, CD will be treated as HFS MAC cd"},
-		nextstep   : {desc : "If set, CD will be treated as NeXTSTEP cd"},
-		ts         : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
-		checkMount : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
+		offset      : {desc : "If set, mount at the given offset", hasValue : true},
+		block       : {desc : "If set, specify a given block size for the ISO image.", hasValue : true},
+		hfs         : {desc : "If set, CD will be treated as HFS MAC cd"},
+		nextstep    : {desc : "If set, CD will be treated as NeXTSTEP cd"},
+		ts          : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
+		macEncoding : {desc : "Specify the Mac encoding to decode HFS filenames. Valid: roman | japan", hasValue : true, defaultValue : "roman"},
+		checkMount  : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
 	},
 	args :
 	[
@@ -68,49 +69,35 @@ async function extractNormalISO()
 ///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// HFS ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-const HFS_OCTAL_TO_UTF8 = Object.fromEntries(encodeUtil.MACOS_ROMAN_EXTENDED.map((v, i) => ([(128+i).toString(16).toUpperCase(), v.charCodeAt(0)])));
-const HFS_CHAR_TO_UTF8 = {" " : " ", t : "⇥", r : "↵", n : "␤"};
+
 // All the hfsutils store their 'state' in a file written to home, we set the 'HOME' env to be our mount directory in order to not clobber other extractions taking place at the same time
 const HFS_RUN_OPTIONS = {env : {"HOME" : MOUNT_DIR_PATH}};
 
-// will convert an hfsFilename to a UTF-8 equlivant
-function hfsFilenameToUTF8(hfsFilename)
-{
-	let match = null;
-	let utfFilename = hfsFilename.replaceAll("/", "⁄");	// Mac files can contain forward slashes, so we replace them with a unicode fraction slash
-	do
-	{
-		match = (utfFilename.match(/\\(?<code>\d{3})/) || {})?.groups;
-		if(match)
-		{
-			const charCode = HFS_OCTAL_TO_UTF8[Number.parseInt(match.code, 8).toString(16).padStart(2, "0").toUpperCase()] || 0x25A1;
-			utfFilename = utfFilename.replaceAll(`\\${match.code}`, String.fromCharCode(charCode));
-			continue;
-		}
-
-		match = (utfFilename.match(/\\(?<letter>.)/) || {})?.groups;
-		if(match)
-			utfFilename = utfFilename.replaceAll(`\\${match.letter}`, HFS_CHAR_TO_UTF8[match.letter] || "□");
-	} while(match);
-
-	return utfFilename;
-}
-
-async function hcopyFile(src, dest)
+async function hcopyFile(src, dest, ts)
 {
 	const safeFilePath = await fileUtil.genTempPath(OUT_DIR_PATH);
 
 	// Wasn't able to figure out how to escape properly the \r sequence found in so many HFS filenames, without resorting to calling out to a bash script that does some fancy eval magic I'll never understand
 	// Sadly, due to the use of eval it horribly handles weird quotes and other things, which isn't a problem for 'src' since hls will binary escape those, but it is an issue for the dest
 	// So we need to copy to a temp safe filename and then rename it
+	// Ok, so hcopyfile chokes pretty bad on MacJP encoded filenames, thus the try catch below, but the end goal is creating my own hcopy/hcd that uses catalog id numbers instead
 	await runUtil.run(path.join(xu.dirname(import.meta), "dexhcopyfile"), [src.replaceAll("'", "\\047").replaceAll("*", "\\*"), safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
 
-	await Deno.rename(safeFilePath, dest);
+	try
+	{
+		await Deno.rename(safeFilePath, dest);
+		await Deno.utime(dest, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
+	}
+	catch(err)
+	{
+		console.error(`Failed to copy ${src} to ${dest} due to ${err}`);
+	}
 }
 
 // This will extract the HFS CD and automatically convert characters from Mac Standard Roman to UTF8: https://github.com/Distrotech/hfsutils/blob/master/doc/charset.txt
 async function extractHFSISO()
 {
+	const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.octal, region : argv.macEncoding};
 	const HCDNUM_BIN = path.join(xu.dirname(import.meta), "hcdnum");
 	let volumeYear=null;
 	const seenDirectories = new Set();
@@ -129,8 +116,7 @@ async function extractHFSISO()
 			if(entry.type==="d")
 				continue;
 			
-			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, hfsFilenameToUTF8(entry.filename));
-			await hcopyFile(entry.filename, entry.destFilePath);
+			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts}));
 
 			// some files on HFS CD's have absurdly incorrect dates, like "Cool Demos/Demos/Troubled Souls Demo" on the Odyssey: Legend of Nemesis CD having a date of Jun 30, 1922
 			// so for those, fall back to something sane
@@ -142,8 +128,8 @@ async function extractHFSISO()
 				const dateString = `${year}-${month.toString().padStart(2, "0")}-${entry.day.trim().padStart(2, "0")} 00:00:00`;
 				ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
 			}
-			
-			await Deno.utime(entry.destFilePath, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
+
+			await hcopyFile(entry.filename, entry.destFilePath, ts);
 		}
 
 		// now handle our directories
@@ -154,9 +140,7 @@ async function extractHFSISO()
 			
 			const lineNum = +i;
 			
-			// I used to get the cwd both before and after the cd, but if a directory is an alias to a parent directory, this didn't work
-			// So now I just maintain a set of seen cwds and if we've seen it before, skip it
-			//const {stdout : wdBefore} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
+			// I used to get the cwd before and after the cd, but if a dir is an alias to a parent dir, this failed. So now I maintain a set of seen cwds and skip it if we've seen it before
 			
 			// So I call out to my 'hcdnum' script due to the crazy escaping needed to change to various directories
 			// An ALTERNATIVE to this is using the 'catalog id' which is a unique number for everything dir/file on the disk (hls -albi)
@@ -167,7 +151,7 @@ async function extractHFSISO()
 			if(!seenDirectories.has(wdAfter))	// only recurse in if the hcd succeeded and we haven't already been there
 			{
 				seenDirectories.add(wdAfter);
-				await recurseHFS(path.join(subPath, hfsFilenameToUTF8(entry.filename)));
+				await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts})));
 				await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 			}
 		}

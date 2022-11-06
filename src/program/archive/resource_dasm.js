@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 import {fileUtil, encodeUtil, runUtil} from "xutil";
 import {path} from "std";
 
@@ -16,10 +16,13 @@ export class resource_dasm extends Program
 	// If need to understand some resource types better: https://whitefiles.org/mac/pgs/t02.htm
 	postExec = async r =>
 	{
-		let fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
+		const outDirPath = r.outDir({absolute : true});
+
+		let fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		if(fileOutputPaths.length===0)
 			return;
 
+		// first remoev the input filename prefix
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const filename = path.basename(fileOutputPath);
@@ -30,23 +33,19 @@ export class resource_dasm extends Program
 		
 		// resource_dasm will output any non-ascii MacOS Roman characters as URL encoded signs like %A5
 		// Here we replace them with the proper unicode characters: https://en.wikipedia.org/wiki/Mac_OS_Roman
+		const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
-			let renamedFileOutputPath = fileOutputPath;
+			const subPath = path.relative(outDirPath, fileOutputPath);
+			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintoshFilename({filename : v, ...decodeOpts}))).join("/");
+			if(subPath===newSubPath)
+				return fileOutputPath;
+			
+			// we have to mkdir and rename because some files like archive/sit/LOOPDELO.SIT have two different directories, one encoded one not encoded but when decoded they are equal
+			await Deno.mkdir(path.join(outDirPath, path.dirname(newSubPath)), {recursive : true});
+			await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
 
-			for(let i=0;i<encodeUtil.MACOS_ROMAN_EXTENDED.length;i++)
-			{
-				const hexCode = (i+0x80).toString(16).toUpperCase();	// resource_dasm seems to output capital hexadecimal letters
-				const filename = path.basename(renamedFileOutputPath);
-				if(!filename.includes(`%${hexCode}`))
-					continue;
-				
-				const newFileOutputPath = path.join(path.dirname(renamedFileOutputPath), filename.replaceAll(`%${hexCode}`, encodeUtil.MACOS_ROMAN_EXTENDED[i]));
-				await Deno.rename(renamedFileOutputPath, newFileOutputPath);
-				renamedFileOutputPath = newFileOutputPath;
-			}
-
-			return renamedFileOutputPath;
+			return path.join(outDirPath, newSubPath);
 		});
 
 		// for fonts, every single glyph is a seperate file which generates huge numbers of files for Mac font CDs, so let's just combine all the glyphs together

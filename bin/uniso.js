@@ -73,15 +73,10 @@ async function extractNormalISO()
 // All the hfsutils store their 'state' in a file written to home, we set the 'HOME' env to be our mount directory in order to not clobber other extractions taking place at the same time
 const HFS_RUN_OPTIONS = {env : {"HOME" : MOUNT_DIR_PATH}};
 
-async function hcopyFile(src, dest, ts)
+async function hcopyFile(id, dest, ts)
 {
 	const safeFilePath = await fileUtil.genTempPath(OUT_DIR_PATH);
-
-	// Wasn't able to figure out how to escape properly the \r sequence found in so many HFS filenames, without resorting to calling out to a bash script that does some fancy eval magic I'll never understand
-	// Sadly, due to the use of eval it horribly handles weird quotes and other things, which isn't a problem for 'src' since hls will binary escape those, but it is an issue for the dest
-	// So we need to copy to a temp safe filename and then rename it
-	// Ok, so hcopyfile chokes pretty bad on MacJP encoded filenames, thus the try catch below, but the end goal is creating my own hcopy/hcd that uses catalog id numbers instead
-	await runUtil.run(path.join(xu.dirname(import.meta), "dexhcopyfile"), [src.replaceAll("'", "\\047").replaceAll("*", "\\*"), safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
+	await runUtil.run("hcopyi", [id, safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
 
 	try
 	{
@@ -90,15 +85,13 @@ async function hcopyFile(src, dest, ts)
 	}
 	catch(err)
 	{
-		console.error(`Failed to copy ${src} to ${dest} due to ${err}`);
+		console.error(`Failed to copy id ${id} to ${dest} due to ${err}`);
 	}
 }
 
-// This will extract the HFS CD and automatically convert characters from Mac Standard Roman to UTF8: https://github.com/Distrotech/hfsutils/blob/master/doc/charset.txt
 async function extractHFSISO()
 {
 	const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.octal, region : argv.macEncoding};
-	const HCDNUM_BIN = path.join(xu.dirname(import.meta), "hcdnum");
 	let volumeYear=null;
 	const seenDirectories = new Set();
 
@@ -107,10 +100,10 @@ async function extractHFSISO()
 		await Deno.mkdir(path.join(OUT_DIR_PATH, subPath), {recursive : true});
 		
 		// get list
-		const {stdout : entriesRaw} = await runUtil.run("hls", ["-alb"], HFS_RUN_OPTIONS);
+		const {stdout : entriesRaw} = await runUtil.run("hls", ["-albi"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/) || {})?.groups);
+		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/) || {})?.groups);
 		for(const entry of entries)
 		{
 			if(entry.type==="d")
@@ -129,28 +122,19 @@ async function extractHFSISO()
 				ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
 			}
 
-			await hcopyFile(entry.filename, entry.destFilePath, ts);
+			await hcopyFile(entry.id, entry.destFilePath, ts);
 		}
 
 		// now handle our directories
-		for(const [i, entry] of Object.entries(entries))
+		for(const entry of entries)
 		{
 			if(entry.type!=="d")
 				continue;
 			
-			const lineNum = +i;
-			
-			// I used to get the cwd before and after the cd, but if a dir is an alias to a parent dir, this failed. So now I maintain a set of seen cwds and skip it if we've seen it before
-			
-			// So I call out to my 'hcdnum' script due to the crazy escaping needed to change to various directories
-			// An ALTERNATIVE to this is using the 'catalog id' which is a unique number for everything dir/file on the disk (hls -albi)
-			// There is no command though provided to change to a directory by catalog id, but I did code my own in sandbox/legacy/hcdcatalog.c
-			// So if this gives me much more trouble below, then I can patch hfsutils with my hcdcatalog.c and use that instead
-			await runUtil.run(HCDNUM_BIN, [`${(lineNum+1)}`], HFS_RUN_OPTIONS);
-			const {stdout : wdAfter} = await runUtil.run("hpwd", [], HFS_RUN_OPTIONS);
-			if(!seenDirectories.has(wdAfter))	// only recurse in if the hcd succeeded and we haven't already been there
+			if(!seenDirectories.has(entry.id))
 			{
-				seenDirectories.add(wdAfter);
+				seenDirectories.add(entry.id);
+				await runUtil.run("hcdi", [entry.id], HFS_RUN_OPTIONS);
 				await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts})));
 				await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 			}

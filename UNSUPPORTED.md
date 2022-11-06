@@ -1,7 +1,7 @@
-# Unsupported File Formats (848)
+# Unsupported File Formats (850)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
-Others are not converted because there are no known programs to do so. For these formats I maintain a <a href="https://telparia.com/fileFormatBounties.html">bounty list</a> so we can get converter programs written.
+Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
@@ -238,7 +238,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (76)
+## Image (77)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -279,6 +279,7 @@ image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFo
 image | [IFF Retargetable Graphic](http://fileformats.archiveteam.org/wiki/RGFX) | .rgfx .rgx | [8 sample files](https://telparia.com/fileFormatSamples/image/rgfx/)
 image | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://telparia.com/fileFormatSamples/image/imagineTexture/)
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
+image | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 image | JAM Bitmap | .jam | 
 image | KeyCAD Complete Drawing | .kcf | [7 sample files](https://telparia.com/fileFormatSamples/image/keyCADCompleteDrawing/)
 image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/fileFormatSamples/image/leonardsSketchDrawing/) - Fairly obscure CAD type drawing program. Not aware of any drawings that were not those that were included with the program, so format not worth supporting.
@@ -420,7 +421,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (417)
+## Other (418)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -640,6 +641,7 @@ other | Lua bytecode |  |
 other | LucasFilm Data | .lfd | 
 other | Mach-O HPPA Object | .o | 
 other | Mach-O m68k Object | .o | 
+other | Mach-O Object | .o | 
 other | Mach-O SPARC Object | .o | 
 other | Macromedia Xtra Cache | .mch | 
 other | MagiC64 Preferences | .prefs | 

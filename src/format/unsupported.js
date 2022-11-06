@@ -305,6 +305,7 @@ export default
 		linux8086ObjectFile          : {name : "Linux 8086 Object File", ext : [".o"], magic : ["Linux-8086 object file"]},
 		linuxi386ObjectFile          : {name : "Linux i386 Object File", ext : [".o"], magic : ["Linux/i386 object file"]},
 		luaBytecode                  : {name : "Lua bytecode", magic : ["Lua bytecode"]},
+		machOObject                  : {name : "Mach-O Object", ext : [".o"], magic : [/^Mach-O object$/], weakMagic : true},
 		machOM68kObject              : {name : "Mach-O m68k Object", ext : [".o"], magic : [/^Mach-O m68k .*object/]},
 		machOHPPAObject              : {name : "Mach-O HPPA Object", ext : [".o"], magic : [/^Mach-O hppa .*object/]},
 		machOSparcObject             : {name : "Mach-O SPARC Object", ext : [".o"], magic : [/^Mach-O SPARC .*object/]},

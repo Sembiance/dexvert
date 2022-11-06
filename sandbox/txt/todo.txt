@@ -1,10 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add support SGI Irix CDs: https://archive.org/details/sgi-irix-6.2-applications-1996-may
-  CD format might be: https://www.linux.org/threads/extent-file-system-efs.8904/
-  .idb file read with https://gist.github.com/Sgeo/ff7c568e81b7efa09250dc3fc1253569
-
 * Consider using Tcl to do character encoding conversions? Iconv currently works ok, so maybe too risky to change at this point.
   See a link in Issue #3 that has some Tcl code to do conversion (along with a script for it). Snippet: puts out.txt [encoding convertfrom macJapan [read in.txt]]
 
@@ -27,6 +23,9 @@
   Then if not, try adding some sleeps in-between.
   If stil not working, uhm... no idea? Guess just give up.
 
+* Add support for VRML. Possible renderers: https://github.com/castle-engine/view3dscene, Blender, Blaxxun Contact 4.4
+  Would love have it be interactive in the browser. See the 3D/Poly support note below:
+
 
 /---------------\
 | High Priority |
@@ -35,10 +34,13 @@
   http://discmaster.textfiles.com/search?q=.p2&qfields=ext&itemid=6354&itemid=6355&itemid=6356&itemid=6357&itemid=6358&label=&labelMatchType=any&sizeMin=&sizeMax=&durationMin=&durationMax=&widthMin=&heightMin=&widthMax=&heightMax=&tsMin=&tsMax=&nsfw=2&nsfwOnly=0&animated=&sortBy=_text_match&limit=100
 
 * Add 3D/Poly support. Can convert everything to GLTF/GLB format and use this viewer on the website: https://modelviewer.dev/
+  Or use X3D instead?  https://cadexchanger.com/blog/3d-formats-overview-vrml-and-x3d/
   3DS is 3DS Max, so use that to convert things like: http://discmaster.textfiles.com/browse/1268/Graphics%20Plus.iso/media/objects/3ds/ve_space/romulan.zip
   Software to convert DXF (and others) to GLB: https://github.com/assimp/assimp
   Other software that works with GLB: https://github.khronos.org/glTF-Project-Explorer/
+  https://castle-engine.io/view3dscene.php
   Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
+  https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
 
 
 /-----------------\

@@ -1,5 +1,6 @@
 import {xu, fg} from "xu";
 import {path} from "std";
+import {RUNTIME} from "./Program.js";
 
 export const QEMU_SERVER_HOST = "127.0.0.1";
 export const QEMU_SERVER_PORT = 17735;
@@ -195,6 +196,9 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 {
 	let fullCmd = cmd;
 	const qemuData = {osid, cmd, timeout, outDirPath : f.outDir.absolute};
+
+	if(RUNTIME.globalFlags.qemuPriority)
+		qemuData.qemuPriority = true;
 	
 	const inFiles = [f.input];
 	if(!noAuxFiles)
@@ -304,6 +308,7 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre
 	qemuData.script = scriptLines.join("\n");
 
 	xlog.info`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
+	xlog.debug`qemuData: ${qemuData}`;
 	xlog.debug`\tSCRIPT: ${qemuData.script}`;
 	const r = await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)})).text();
 	if(r!=="ok")

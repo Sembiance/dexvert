@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -482,13 +482,17 @@ export class Program
 					}
 					else
 					{
-						await newFiles.parallelMap(async newFile =>
+						// we used to parallelMap these, but that can cause a system to lock up with too many parallel processes
+						if(newFiles.length>100)
+							xlog.warn`Program ${r.programid} is chaining ${newFiles.length.toLocaleString()} files to ${progRaw}. This may take some time...`;
+
+						for(const newFile of newFiles)
 						{
 							// if chain starts with a question mark ? then we need to have a truthy response from chainCheck() in order to proceed with chaining this file
 							const {programid : chainProgramid} = Program.parseProgram(progRaw.substring(1));
 							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, chainProgramid) : {};
 							if(!chainProgFlags)
-								return;
+								continue;
 
 							const chainProgOpts = {...baseChainProgOpts};
 							if(Object.isObject(chainProgFlags))
@@ -496,7 +500,7 @@ export class Program
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
-						});	// parallelMap default is 10 files at once, or 33% of OS CPU count, whichever is smaller
+						}
 					}
 				}
 

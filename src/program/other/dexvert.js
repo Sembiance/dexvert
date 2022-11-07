@@ -13,7 +13,7 @@ export class dexvert extends Program
 	bin  = "/mnt/compendium/.deno/bin/dexvert";
 	args = r =>
 	{
-		const a = [`--logLevel=${r.xlog.level}`];
+		const a = [`--logLevel=${r.xlog.level}`, `--programFlag=qemuPriority:true`];
 		if(r.flags.asFormat)
 			a.push(`--asFormat=${r.flags.asFormat}`);
 		if(r.flags.skipVerify)

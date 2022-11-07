@@ -1,5 +1,7 @@
 import {xu} from "xu";
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
+import {encodeUtil, fileUtil} from "xutil";
+import {path} from "std";
 
 function restRenamer(rest, suffix, newName)
 {
@@ -16,6 +18,7 @@ export class deark extends Program
 	website = "https://entropymine.com/deark/";
 	package = "app-arch/deark";
 	flags   = {
+		"mac"         : "Set this flag to treat the files extracted as mac files and rename them",
 		"module"      : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
 		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
 		"opt"         : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
@@ -44,6 +47,28 @@ export class deark extends Program
 			opts.push(`char:output=${r.flags.charOutType || "image"}`);
 		
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
+	};
+
+	postExec = async r =>
+	{
+		// only need to do this if we are macintoshjp region, otherwise deark correctly converts filenames to roman
+		if(!r.flags.mac || !RUNTIME.globalFlags?.osHint?.macintoshjp)
+			return;
+
+		const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.romanUTF8, region : "japan"};
+		const outDirPath = r.outDir({absolute : true});
+		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+		await fileOutputPaths.parallelMap(async fileOutputPath =>
+		{
+			const subPath = path.relative(outDirPath, fileOutputPath);
+			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintoshFilename({filename : v, ...decodeOpts}))).join("/");
+			if(subPath===newSubPath)
+				return;
+			
+			// we have to mkdir and rename because some files like archive/sit/LOOPDELO.SIT have two different directories, one encoded one not encoded but when decoded they are equal
+			await Deno.mkdir(path.join(outDirPath, path.dirname(newSubPath)), {recursive : true});
+			await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
+		});
 	};
 
 	// deark output names are an MINOR NIGHTMARE

@@ -10,5 +10,5 @@ export class macPaint extends Format
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
-	converters     = ["deark", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress", "pv[matchType:magic]", "corelPhotoPaint", "tomsViewer"];
+	converters     = ["deark[mac]", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress", "pv[matchType:magic]", "corelPhotoPaint", "tomsViewer"];
 }

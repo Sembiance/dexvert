@@ -8,5 +8,5 @@ export class macDraw extends Format
 	forbidExtMatch = true;
 	magic          = ["MacDraw drawing", /^fmt\/(1426|1427)( |$)/];
 	metaProvider   = ["image"];
-	converters     = ["deark", "nconvert", "soffice[outType:png]", "convert"];	// convert has a habit of producing just a black square
+	converters     = ["deark[mac]", "nconvert", "soffice[outType:png]", "convert"];	// convert has a habit of producing just a black square
 }

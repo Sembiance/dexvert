@@ -63,7 +63,7 @@ export class resource_dasm extends Program
 		}
 
 		// for certain other text resource types, they are not very useful individually, so just combine into a single .txt file
-		for(const type of ["ALRT", "CNTL", "DITL", "DLOG", "MENU"])
+		for(const type of ["ALRT", "CNTL", "DITL", "DLOG", "MENU", "WIND"])
 		{
 			const typeFilePaths = fileOutputPaths.filter(v => path.basename(v).startsWith(`${type}_`) && v.endsWith(".txt"));
 			if(!typeFilePaths.length)
@@ -144,7 +144,7 @@ export class resource_dasm extends Program
 				await fileUtil.unlink(bmpFilePath);
 				fileOutputPaths.removeOnce(bmpFilePath);
 			}
-		}, 5);
+		}, 2);
 	};
 
 	renameOut = {

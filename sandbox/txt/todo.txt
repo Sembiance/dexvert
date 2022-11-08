@@ -1,6 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Fix test discovered bug (might be fixed now that I delete the special/block files first)
+ [FAIL] archive/linuxEXTFilesystem/filesys-ELF-2.0.x Some reported output files are missing from disk: /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/serial2 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/serial1 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/nfsd /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/mouse /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/modem2 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/modem1 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd1H720 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd1H360 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd0H720 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd0H360 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/console /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/XOR
+
+* Update deark which includes drhalo PIC support and add support for files screen* here: http://discmaster.textfiles.com/browse/4569/BetweenHeavenHell.cdr/200/150
+  Update http://fileformats.archiveteam.org/wiki/Dr._Halo_PIC that deark supports it
+  Then probably re-process CD 4569
+  Make sure to look at deark changelog for ALL changes since last, and add support for other formats too
+
 * Potentially render ZZT/SuperZZT worlds out to PNG for preview: https://github.com/Sembiance/dexvert/issues/1
 
 * Improve MegaZeux detection (right now it's classified as 'weak'): https://github.com/Sembiance/dexvert/issues/2

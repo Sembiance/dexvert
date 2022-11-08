@@ -198,15 +198,12 @@ export class Program
 			const targetEncoding = (flags.filenameEncoding || (typeof this.filenameEncoding==="function" ? await this.filenameEncoding(r) : this.filenameEncoding)) || "windows-1252";
 			await runUtil.run("convmv", ["-r", "--qfrom", "--qto", "--notest", "-f", targetEncoding, "-t", "UTF-8", f.outDir.absolute]);
 
-			// delete empty files/broken symlinks. find is very fast at this, so use that
-			xlog.trace`Program ${fg.orange(this.programid)} deleting directory symlinks, empty filesm and broken symlinks...`;
-			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "-xtype", "d", "-delete"]);
-			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);
-			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);
-
-			// also delete any 'special' files that may be dangerous to process. block special, character special named pipe, socket
-			xlog.trace`Program ${fg.orange(this.programid)} deleting special files...`;
-			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);
+			// delete various things
+			xlog.trace`Program ${fg.orange(this.programid)} deleting directory symlinks, empty files, 'special' files, and broken symlinks...`;
+			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "-xtype", "d", "-delete"]);		// delete directory symlinks, which are dangerous as they could point outside of the output directory
+			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);				// delete special files like block, named pipes, sockets, etc
+			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);			// delete empty files
+			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);					// delete broken symlinks. make sure we do this last just in case a symlink becomes broken because we have deleted the file it points to above
 
 			// now find any new files on disk in the output dir that we don't yet
 			xlog.trace`Program ${fg.orange(this.programid)} locating new files...`;

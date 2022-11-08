@@ -506,6 +506,7 @@ export const WEAK_VALUES =
 	/^OS\/2 Dynamic Link Library \(no DOS stub\)$/,
 	/^PACKER compressed archive$/,
 	/^Palantir WinTime Plan$/,
+	/^Palm Address Book$/,
 	/^Pegasus SPS encoded audio$/,
 	/^Photoshop Action$/,
 	/^PlayStation Hierarchical 3D Model Data$/,

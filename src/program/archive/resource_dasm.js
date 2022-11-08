@@ -22,7 +22,7 @@ export class resource_dasm extends Program
 		if(fileOutputPaths.length===0)
 			return;
 
-		// first remoev the input filename prefix
+		// first remove the input filename prefix
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const filename = path.basename(fileOutputPath);
@@ -48,6 +48,38 @@ export class resource_dasm extends Program
 			return path.join(outDirPath, newSubPath);
 		});
 
+		// some file types are not interesting, delete them
+		for(const type of ["CODE"])
+		{
+			const typeFilePaths = fileOutputPaths.filter(v => path.basename(v).startsWith(`${type}_`) && v.endsWith(".txt"));
+			if(!typeFilePaths.length)
+				continue;
+
+			for(const typeFilePath of typeFilePaths)
+			{
+				await fileUtil.unlink(typeFilePath);
+				fileOutputPaths.removeOnce(typeFilePath);
+			}
+		}
+
+		// for certain other text resource types, they are not very useful individually, so just combine into a single .txt file
+		for(const type of ["ALRT", "CNTL", "DITL", "DLOG", "MENU"])
+		{
+			const typeFilePaths = fileOutputPaths.filter(v => path.basename(v).startsWith(`${type}_`) && v.endsWith(".txt"));
+			if(!typeFilePaths.length)
+				continue;
+
+			const typeCombinedFilePath = path.join(outDirPath, `${type}.txt`);
+			for(const typeFilePath of typeFilePaths)
+			{
+				await Deno.writeTextFile(typeCombinedFilePath, `${path.basename(typeFilePath)}\n`, {append : true});
+				await Deno.writeFile(typeCombinedFilePath, await Deno.readFile(typeFilePath), {append : true});
+				await Deno.writeTextFile(typeCombinedFilePath, "\n\n", {append : true});
+				await fileUtil.unlink(typeFilePath);
+				fileOutputPaths.removeOnce(typeFilePath);
+			}
+		}
+
 		// for fonts, every single glyph is a seperate file which generates huge numbers of files for Mac font CDs, so let's just combine all the glyphs together
 		const fontGlyphs = {};
 		for(const fileOutputPath of fileOutputPaths)
@@ -66,10 +98,14 @@ export class resource_dasm extends Program
 			const cols = Math.min(filePaths.length, FONT_SPRITE_COLS);
 			const rows = Math.ceil(filePaths.length/FONT_SPRITE_COLS);
 			await runUtil.run("montage", [...filePaths, "-tile", `${cols}x${rows}`, "-geometry", "+0+0", path.join(r.outDir({absolute : true}), `${fontid}.png`)], {timeout : xu.MINUTE*2});
-			await filePaths.parallelMap(fileUtil.unlink);
+			await filePaths.parallelMap(async filePath =>
+			{
+				await fileUtil.unlink(filePath);
+				fileOutputPaths.removeOnce(filePath);
+			});
 		});
 
-		// for STR# resources, these are often tiny little files with just a few words. Let's combine them into a single .txt file
+		// for STR# resources, these are often tiny little files with just a few words. Let's combine them into a single .txt files while preserving their id numbers
 		const txtResources = {};
 		for(const fileOutputPath of fileOutputPaths)
 		{
@@ -90,8 +126,25 @@ export class resource_dasm extends Program
 				await Deno.writeFile(textFilePath, await Deno.readFile(filePath), {append : true});
 				await Deno.writeTextFile(textFilePath, "\n\n", {append : true});
 			}
-			await filePaths.parallelMap(fileUtil.unlink);
+			await filePaths.parallelMap(async filePath =>
+			{
+				await fileUtil.unlink(filePath);
+				fileOutputPaths.removeOnce(filePath);
+			});
 		});
+
+		// all .bmp files, attempt to just quick convert using imagemagick. resources can have a ton of BMP files, this saves a lot of time further down the line and reduces duplication
+		const bmpFilePaths = fileOutputPaths.filter(v => v.endsWith(".bmp"));
+		await bmpFilePaths.parallelMap(async bmpFilePath =>
+		{
+			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
+			await runUtil.run("convert", [bmpFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});
+			if(await fileUtil.exists(pngFilePath))
+			{
+				await fileUtil.unlink(bmpFilePath);
+				fileOutputPaths.removeOnce(bmpFilePath);
+			}
+		}, 5);
 	};
 
 	renameOut = {

@@ -145,7 +145,7 @@ export const WEAK_VALUES =
 	/^Microsoft Visual C\/OMF library$/,
 	/^MIPSE[BL][ -]/,
 	/^MIT scheme/,
-	/^MMDF mailbox$/,
+	/^MMDF mailbox/,
 	/^Motorola S-Record; binary data in text format$/,
 	/^MPEG ADTS, layer I(,|$)/,
 	/^MPEG-4 LOAS/,

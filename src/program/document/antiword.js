@@ -10,7 +10,7 @@ export class antiword extends Program
 	args       = r => [r.inFile()];
 	runOptions = async r => ({stdoutFilePath : await r.outFile("out.txt")});
 	renameOut  = true;
-	verify       = (r, dexFile) =>
+	verify     = (r, dexFile) =>
 	{
 		if(dexFile.size>xu.MB*20)
 			return true;

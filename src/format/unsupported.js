@@ -11,6 +11,7 @@ export default
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
+		metaCardStack                : {name : "MetaCard Stack", ext : [".rev"], magic : ["Revolution MetaCard stack"]},
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		pgnPackArchive               : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		shockwaveFlashDebug          : {name : "Shockwave Flash Debug", ext : [".swd"], magic : ["Flash file with debug info"]},
@@ -96,6 +97,7 @@ export default
 		dynaCADDVectorFont      : {name : "DynaCADD Vector Font", ext : [".fnt"], magic : ["DynaCADD vector Font"]},
 		envisionPublisherFont   : {name : "Envision Publisher Font", ext : [".svf"], magic : ["EnVision Publisher DTP Font"]},
 		expertDrawFont          : {name : "ExpertDraw Font", ext : [".expf"], magic : ["ExpertDraw Font"], weakMagic : true},
+		frameMakerBitmappedFont : {name : "FrameMaker Font", ext : [".bfont"], magic : ["FrameMaker Font file", "FrameMaker Bitmapped screen Font"]},
 		geoWorksGEOSFont        : {name : "GeoWorks GEOS Font", ext : [".fnt"], magic : ["GeoWorks GEOS font"]},
 		grxFont                 : {name : "GRX Font", ext : [".fnt"], magic : ["GRX Font", "libGrx font data"]},
 		japaneseWPKanjiFont     : {name : "Japanese Word Processor Kanji Font", ext : [".f00"], magic : ["Japanese Word Processor Kanji Font"]},
@@ -123,6 +125,7 @@ export default
 		westwoodFont            : {name : "Westwood Font", ext : [".fnt"], magic : ["Westwood Font Format"]},
 		wildfire3DFont          : {name : "Wildfire 3D Font", ext : [".3dfont"], magic : ["Wildfire 3D Font"]},
 		wordUpToolkitFont       : {name : "WordUp Graphics Toolkit Font", ext : [".wfn"], magic : ["Wordup Graphics Toolkit Font"]},
+		x11NeWSBitmapFont       : {name : "X11/NeWS Bitmap Font", ext : [".fb"], magic : ["X11/NeWS bitmap font"]},
 		x11NeWSFontFamily       : {name : "X11/NeWS font family", ext : [".ff"], magic : ["X11/NeWS font family"]},
 		xCADFont                : {name : "X-CAD Font", magic : ["X-CAD font"]}
 	},
@@ -324,6 +327,7 @@ export default
 		powerBasicHelp               : {name : "PowerBASIC Help", ext : [".pbh"], magic : ["PowerBASIC Help"]},
 		powerBuilderDynamicLibrary   : {name : "PowerBuilder Dynamic Library", ext : [".pbd"], magic : ["PowerBuilder Dynamic library"]},
 		psionLibrary                 : {name : "Psion Library", ext : [".dyl"], magic : ["Psion Library"]},
+		realBasicProject             : {name : "RealBasic Project", ext : [".rbp"], magic : ["REALbasic/Xojo Project"]},
 		riscOSALFLibrary             : {name : "RISC OS ALF Library", magic : ["RISC OS Chunk data, ALF library"]},
 		riscOSARMObjectFile          : {name : "RISC OS ARM Object File", magic : ["RISC OS Chunk data, AOF object"]},
 		sgmlCompiled                 : {name : "SGML Compiled", ext : [".mtl"], magic : ["Compiled SGML rules"]},
@@ -337,6 +341,7 @@ export default
 		visualCLibrary               : {name : "Microsoft Visual C Library", ext : [".lib"], magic : ["Microsoft Visual C Library", "Microsoft Visual C/OMF library"]},
 		visualSmalltalkLibrary       : {name : "Visual Smalltalk Enterprise Objects Library", ext : [".sll"], magic : ["Visual Smalltalk Enterprise objects Library"]},
 		visualSourceSafeControlFile  : {name : "Visual SourceSafe Control File", ext : [".scc"], magic : [/^Visual SourceSafe control file \(var [12]\)$/, "Visual SourceSafe control file (var 3)"], weakMagic : ["Visual SourceSafe control file (var 3)"]},
+		xpcomTypeLibrary			 : {name : "XPCOM Type Library", ext : [".xpt"], magic : ["XPCOM Type Library", "XPConnect Typelib"]},
 
 
 		/////////////

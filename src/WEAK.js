@@ -487,6 +487,7 @@ export const WEAK_VALUES =
 	/^HP Logical Interchange Format disk image$/,
 	/^HP200LX System Application's Help$/,
 	/^Id Software Quake II Cinematic video$/,
+	/^IDL binary format save file$/,
 	/^Immaginaria TNG 3D scene$/,
 	/^Install Maker( Pro)? project$/,
 	/^Intel CPU Microcode$/,

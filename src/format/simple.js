@@ -75,6 +75,7 @@ export default
 		palmTealMeal             : {name : "Palm TealMeal Document", ext : [".pdb"], magic : ["Palm TealMeal"]},
 		palmThoughtManager       : {name : "Palm ThoughtManager", ext : [".pdb"], magic : ["Palm ThoughtManager"]},
 		papyrus                  : {name : "Papyrus", ext : [".pap"], magic : ["Papyrus document"]},
+		pcpHelpText              : {name : "PCP Help Text", ext : [".pag"], magic : ["PCP Help Text"]},
 		pcTypeDocument           : {name : "PC-Type Document", ext : [".pct"], magic : ["PC-Type document"]},
 		peterNortonHelp          : {name : "Peter Norton Computing Help", ext : [".hlp"], magic : ["Peter Norton Computing Help"]},
 		professionalPage         : {name : "Professional Page Document", magic : ["Professional Page document"]},

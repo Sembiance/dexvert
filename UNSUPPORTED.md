@@ -1,11 +1,11 @@
-# Unsupported File Formats (850)
+# Unsupported File Formats (856)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (48)
+## Archive (49)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -29,6 +29,7 @@ archive | IFF LIST File |  | [18 sample files](https://telparia.com/fileFormatSa
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [4 sample files](https://telparia.com/fileFormatSamples/archive/installShieldInstallerArchive/)
 archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://telparia.com/fileFormatSamples/archive/interfaze/)
+archive | MetaCard Stack | .rev | 
 archive | Micrografx Archive | .mda | 
 archive | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
@@ -182,7 +183,7 @@ executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89
 
 
 
-## Font (50)
+## Font (53)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 font | 3D Construction Kit Font | .3fd | 
@@ -202,6 +203,8 @@ font | DOS Code Page Font |  |
 font | DynaCADD Vector Font | .fnt | 
 font | Envision Publisher Font | .svf | [3 sample files](https://telparia.com/fileFormatSamples/font/envisionPublisherFont/)
 font | ExpertDraw Font | .expf | 
+font | [F3 Font](http://fileformats.archiveteam.org/wiki/F3_font) | .f3b | 
+font | FrameMaker Font | .bfont | 
 font | GeoWorks GEOS Font | .fnt | 
 font | GRX Font | .fnt | 
 font | [IntelliFont Font](http://fileformats.archiveteam.org/wiki/IntelliFont) | .lib .type | [7 sample files](https://telparia.com/fileFormatSamples/font/intelliFont/)
@@ -234,6 +237,7 @@ font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)
 font | WordUp Graphics Toolkit Font | .wfn | 
 font | X-CAD Font |  | 
 font | X11 Server Natural Format font | .snf | 
+font | X11/NeWS Bitmap Font | .fb | 
 font | X11/NeWS font family | .ff | 
 
 
@@ -421,7 +425,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (418)
+## Other (420)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -732,6 +736,7 @@ other | QuickText Titles |  |
 other | QuickTime Installer Cache | .qdat .qda | 
 other | Raptor GLB Encrypted Container | .glb | 
 other | Raven Software Compiled Script | .ibi | 
+other | RealBasic Project | .rbp | 
 other | Reflections Camera | .kam | 
 other | Reflections Data | .r3 | 
 other | Reflections Material | .mat | 
@@ -839,6 +844,7 @@ other | WordStar Printer Description File | .pdf |
 other | WordWorth Preferences |  | 
 other | X-CAD Modifier Table | .obj | 
 other | X-CAD Overlay |  | 
+other | XPCOM Type Library | .xpt | 
 other | YAFA Compression Options |  | 
 other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/other/zbasic/)
 other | ZZT File | .zzt | 

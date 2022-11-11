@@ -186,6 +186,7 @@ export default
 		turboDebuggerConfig             : {name : "Turbo Debugger Configuration", ext : [".td", ".td2"], magic : ["Turbo Debugger configuration"]},
 		turboPascalChainModule          : {name : "Turbo Pascal Chain module", ext : [".chn"], magic : [/^Turbo Pascal [23].0 Chain module$/]},
 		turboPascalConfiguration        : {name : "Turbo Pascal Configuration File", ext : [".tp"], magic : ["Turbo Pascal configuration"]},
+		turboPascalCompiledCPMCOM	    : {name : "Turbo Pascal Compiled 8bit CP/M-80 COM", ext : [".com"], magic : ["8bit CP/M-80 COM Turbo Pascal compiled"]},
 		turboPascalDesktopFile          : {name : "Turbo Pascal Desktop File", ext : [".dsk"], magic : ["Turbo Pascal Desktop"]},
 		turboPascalOverlay              : {name : "Turbo Pascal Overlay", ext : [".ovr"], magic : ["Turbo Pascal Overlay"]},
 		typedStreamData                 : {name : "NeXT TypedStream Data", magic : ["NeXT typedstream serialized data", "NeXT/Apple typedstream data"]},

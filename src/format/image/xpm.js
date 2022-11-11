@@ -8,5 +8,5 @@ export class xpm extends Format
 	mimeType     = "image/x-xpixmap";
 	magic        = ["X PixMap bitmap", "X-Windows Pixmap Image", "X pixmap image", /^x-fmt\/208( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "gimp", "canvas"];
+	converters   = ["convert", "gimp", "canvas", "ffmpeg[outType:png]"];
 }

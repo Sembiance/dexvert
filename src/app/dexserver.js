@@ -17,6 +17,46 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.logLevel);
 const startedAt = performance.now();
 
+if(["crystalsummit", "lostcrag"].includes(Deno.hostname()))
+{
+	xlog.info`Building programs & formats...`;
+	await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "build", "build.js"), "programs", "formats"), runUtil.denoRunOpts({liveOutput : true}));
+
+	await ["format", "program"].parallelMap(async type =>
+	{
+		let rebuilding = false;
+		let dirty = false;
+		const rebuildType = async line =>
+		{
+			if(line.endsWith(`${type}s.js`) || dirty)
+				return;
+
+			if(rebuilding)
+			{
+				dirty = true;
+				return;
+			}
+
+			rebuilding = true;
+			xlog.info`Change detected with ${type} rebuilding...`;
+			(await Deno.create(`/mnt/ram/dexvert/rebuilding-${type}`)).close();
+			await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "build", "build.js"), `${type}s`), runUtil.denoRunOpts());
+			await fileUtil.unlink(`/mnt/ram/dexvert/rebuilding-${type}`);
+			rebuilding = false;
+			xlog.info`${type} has been rebuilt.`;
+
+			if(dirty)
+			{
+				dirty = false;
+				return rebuildType();
+			}
+		};
+
+		await runUtil.run("inotifywait", ["-mr", "-e", "close_write", "-e", "delete", "-e", "moved_from", "-e", "moved_to", path.join(xu.dirname(import.meta), "..", type)], {detached : true, stdoutcb : rebuildType});
+		xlog.info`Listening for any changes to src/${type} files and rebuilding if any are found.`;
+	});
+}
+
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
 const SERVER_ORDER = ["siegfried", "tensor", "qemu"];

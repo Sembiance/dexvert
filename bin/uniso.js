@@ -94,7 +94,7 @@ async function hcopyFile(id, dest, ts)
 
 async function extractHFSISO()
 {
-	const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.octal, region : argv.macEncoding};
+	const decodeOpts = {processors : encodeUtil.macintoshProcessors.octal, region : argv.macEncoding};
 	let volumeYear=null;
 	const seenIds = new Set();
 
@@ -112,7 +112,7 @@ async function extractHFSISO()
 			if(entry.type==="d")
 				continue;
 			
-			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts}));
+			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...decodeOpts}));
 
 			// some files on HFS CD's have absurdly incorrect dates, like "Cool Demos/Demos/Troubled Souls Demo" on the Odyssey: Legend of Nemesis CD having a date of Jun 30, 1922
 			// so for those, fall back to something sane
@@ -148,7 +148,7 @@ async function extractHFSISO()
 			}
 			
 			seenIds.add(idAfter);
-			await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintoshFilename({filename : entry.filename, ...decodeOpts})));
+			await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...decodeOpts})));
 			await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 		}
 	};

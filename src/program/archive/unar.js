@@ -18,13 +18,13 @@ export class unar extends Program
 		if(!r.flags.mac)
 			return;
 
-		const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
+		const decodeOpts = {processors : encodeUtil.macintoshProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
 		const outDirPath = r.outDir({absolute : true});
 		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const subPath = path.relative(outDirPath, fileOutputPath);
-			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintoshFilename({filename : v, ...decodeOpts}))).join("/");
+			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintosh({data : v, ...decodeOpts}))).join("/");
 			if(subPath===newSubPath)
 				return;
 			

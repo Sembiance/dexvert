@@ -43,7 +43,7 @@ export default async function buildPrograms(xlog)
 // DO NOT EDIT MANUALLY
 import {xu} from "xu";
 const programs = {};
-${relPaths.map(([programid, relPath]) => `import {${programid}} from "./${relPath}?v=${xu.randStr()}";\nprograms.${programid} = ${programid}.create(programs.${programid});`).join("\n")}
+${relPaths.map(([programid, relPath]) => `import {${programid}} from "./${relPath}";\nprograms.${programid} = ${programid}.create(programs.${programid});`).join("\n")}
 
 export async function reload()
 {

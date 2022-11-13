@@ -55,13 +55,13 @@ export class deark extends Program
 		if(!r.flags.mac || !RUNTIME.globalFlags?.osHint?.macintoshjp)
 			return;
 
-		const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.romanUTF8, region : "japan"};
+		const decodeOpts = {processors : encodeUtil.macintoshProcessors.romanUTF8, region : "japan"};
 		const outDirPath = r.outDir({absolute : true});
 		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const subPath = path.relative(outDirPath, fileOutputPath);
-			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintoshFilename({filename : v, ...decodeOpts}))).join("/");
+			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintosh({data : v, ...decodeOpts}))).join("/");
 			if(subPath===newSubPath)
 				return;
 			

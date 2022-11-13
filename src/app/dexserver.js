@@ -52,7 +52,7 @@ if(["crystalsummit", "lostcrag"].includes(Deno.hostname()))
 			}
 		};
 
-		await runUtil.run("inotifywait", ["-mr", "-e", "close_write", "-e", "delete", "-e", "moved_from", "-e", "moved_to", path.join(xu.dirname(import.meta), "..", type)], {detached : true, stdoutcb : rebuildType});
+		await runUtil.run("inotifywait", ["-mr", "-e", "create", "-e", "delete", "-e", "moved_from", "-e", "moved_to", path.join(xu.dirname(import.meta), "..", type)], {detached : true, stdoutcb : rebuildType});
 		xlog.info`Listening for any changes to src/${type} files and rebuilding if any are found.`;
 	});
 }

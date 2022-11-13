@@ -7,7 +7,7 @@ export class file extends Program
 	package = "sys-apps/file";
 	bin     = "file";
 	loc     = "local";
-	args    = r => ["--dereference", "--brief", "--keep-going", "--raw", r.inFile()];
+	args    = r => ["--dereference", "--brief", "--keep-going", "--raw", "--", r.inFile()];
 	post    = r =>
 	{
 		const fileMatches = [];

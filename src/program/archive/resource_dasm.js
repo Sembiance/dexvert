@@ -33,11 +33,11 @@ export class resource_dasm extends Program
 		
 		// resource_dasm will output any non-ascii MacOS Roman characters as URL encoded signs like %A5
 		// Here we replace them with the proper unicode characters: https://en.wikipedia.org/wiki/Mac_OS_Roman
-		const decodeOpts = {processors : encodeUtil.macintoshFilenameProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
+		const decodeOpts = {processors : encodeUtil.macintoshProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const subPath = path.relative(outDirPath, fileOutputPath);
-			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintoshFilename({filename : v, ...decodeOpts}))).join("/");
+			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintosh({data : v, ...decodeOpts}))).join("/");
 			if(subPath===newSubPath)
 				return fileOutputPath;
 			

@@ -1,5 +1,4 @@
 import {Format} from "../../Format.js";
-import {RUNTIME} from "../../Program.js";
 
 export class html extends Format
 {
@@ -13,7 +12,6 @@ export class html extends Format
 	magic          = [/^Hyper[Tt]ext Markup Language/, /^HTML document/, /^fmt\/(96|98|99|100|471)( |$)/];
 	weakMagic      = true;
 	trustMagic     = true;
-	untouched      = () => !RUNTIME.globalFlags?.osHint?.macintoshjp;
+	untouched      = true;
 	metaProvider   = ["text"];
-	converters     = () => [`decodeMacintosh[fileEncoding:iso-8859-1][processor:romanUTF8][region:japan] -> fixMacJPHTML`];	// converters are only used if untouched is false, which only happens if we are japan region
 }

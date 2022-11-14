@@ -1,4 +1,4 @@
-# Unsupported File Formats (856)
+# Unsupported File Formats (857)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -425,7 +425,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (420)
+## Other (421)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -656,6 +656,7 @@ other | MathCad Document | .mcd |
 other | Maxon Resource Creation Tool Data | .rct | 
 other | MDIFF Patch File | .mdf | 
 other | MegaPaint Printer Driver | .trb | 
+other | MegaZeux World | .mzx | [3 sample files](https://telparia.com/fileFormatSamples/other/megaZeuxWorld/)
 other | Memory Manager Resource Data |  | 
 other | MetaCreations Resource Composite File |  | 
 other | Micro Focus File | .dat | 

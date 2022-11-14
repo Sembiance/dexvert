@@ -3,6 +3,9 @@ import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 
+// Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
+// All offsets matches must match (except a match array that has a subarray, the subarry is a list of possible matches for that byte position)
+
 /* eslint-disable unicorn/no-hex-escape, max-len */
 const DEXMAGIC_CHECKS =
 {
@@ -79,10 +82,13 @@ const DEXMAGIC_CHECKS =
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
 
 	// other
-	"Atari ST Guide Hypertext" : [{offset : 0, match : "HDOC"}],
-	"Director STXT"            : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
-	"OLB Library"              : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
-	"VCD Info File"            : [{offset : 0, match : "VIDEO_CD"}],
+	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],
+	"Director STXT"                    : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
+	"OLB Library"                      : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
+	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
+	"MegaZeux World"                   : [{offset : 25, match : [0x00]}, {offset : 26, match : ["M", ["Z", 0x02]]}],
+	"MegaZeux World (Encrypted)"       : [{offset : 25, match : [0x01]}, {offset : 41, match : ["M", ["Z", 0x02]]}],
+	"MegaZeux World (Encrypted) (Alt)" : [{offset : 25, match : [0x01]}, {offset : 42, match : ["M", ["Z", 0x02]]}],
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
@@ -103,6 +109,40 @@ const DEXMAGIC_CHECKS =
 };
 /* eslint-enable unicorn/no-hex-escape, max-len */
 
+const DEXMAGIC_FILE_META_CHECKS =
+[
+	// uniso[hfs] will output the macintosh file type for each output file. This may be fed back into a future dexvert/identifcation as fileMeta. So we check that here
+	meta =>
+	{
+		switch(meta?.macFileType)
+		{
+			case "TEXT":
+			case "ttro":
+				return "Macintosh Text File";
+			
+			case "GIFf":
+				return "Macintosh GIF";
+			
+			case "PICT":
+				return "Macintosh PICT";
+			
+			case "TIFF":
+				return "Macintosh TIFF";
+			
+			case "DRWG":
+				return "Macintosh MacDraw II Document";
+			
+			case "PNTG":
+				return "Macintosh MacPaint Document";
+			
+			case "SIT5":
+				return "Macintosh StuffIt 5 Archive";
+		}
+
+		return null;
+	}
+];
+
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 {
 	if(typeof check.match==="string")
@@ -117,6 +157,16 @@ export class dexmagic extends Program
 	exec    = async r =>
 	{
 		r.meta.detections = [];
+
+		if(r.f.input.meta)
+		{
+			for(const fmc of DEXMAGIC_FILE_META_CHECKS)
+			{
+				const value = fmc(r.f.input.meta);
+				if(value)
+					r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
+			}
+		}
 
 		const buf = await fileUtil.readFileBytes(r.inFile({absolute : true}), DEXMAGIC_BYTES_MAX);
 		
@@ -154,10 +204,22 @@ export class dexmagic extends Program
 					{
 						for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
 						{
-							if(buf[loc]!==check.match[i])
+							if(Array.isArray(check.match[i]))
 							{
-								match = false;
-								break;
+								if(!check.match[i].map(v => (typeof v==="string" ? v.charCodeAt(0) : v)).includes(buf[loc]))
+								{
+									match = false;
+									break;
+								}
+							}
+							else
+							{
+								const matchByte = typeof check.match[i]==="string" ? check.match[i].charCodeAt(0) : check.match[i];
+								if(buf[loc]!==matchByte)
+								{
+									match = false;
+									break;
+								}
 							}
 						}
 					}

@@ -1,9 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, encodeUtil} from "xutil";
 import {path, dateParse} from "std";
-import {XLog} from "xlog";
-
-const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -76,25 +73,10 @@ async function extractNormalISO()
 // All the hfsutils store their 'state' in a file written to home, we set the 'HOME' env to be our mount directory in order to not clobber other extractions taking place at the same time
 const HFS_RUN_OPTIONS = {env : {"HOME" : MOUNT_DIR_PATH}};
 
-async function hcopyFile(id, dest, ts)
-{
-	const safeFilePath = await fileUtil.genTempPath(OUT_DIR_PATH);
-	await runUtil.run("hcopyi", [id, safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
-
-	try
-	{
-		await Deno.rename(safeFilePath, dest);
-		await Deno.utime(dest, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
-	}
-	catch(err)
-	{
-		console.error(`Failed to copy id ${id} to ${dest} due to ${err}`);
-	}
-}
-
 async function extractHFSISO()
 {
-	const decodeOpts = {processors : encodeUtil.macintoshProcessors.octal, region : argv.macEncoding};
+	const metadata = {fileMeta : {}};
+	const filenameDecodeOpts = {processors : encodeUtil.macintoshProcessors.octal, region : argv.macEncoding};
 	let volumeYear=null;
 	const seenIds = new Set();
 
@@ -106,13 +88,14 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-albi"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(/^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/) || {})?.groups);
+		const hlsRegex = /^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s+(?<fileType>[^/]+)?\/?\S+.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/;
+		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(hlsRegex) || {})?.groups);
 		for(const entry of entries)
 		{
 			if(entry.type==="d")
 				continue;
 			
-			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...decodeOpts}));
+			entry.destFilePath = path.join(OUT_DIR_PATH, subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...filenameDecodeOpts}));
 
 			// some files on HFS CD's have absurdly incorrect dates, like "Cool Demos/Demos/Troubled Souls Demo" on the Odyssey: Legend of Nemesis CD having a date of Jun 30, 1922
 			// so for those, fall back to something sane
@@ -125,7 +108,21 @@ async function extractHFSISO()
 				ts = dateParse(dateString, "yyyy-MM-dd HH:mm:ss").getTime();
 			}
 
-			await hcopyFile(entry.id, entry.destFilePath, ts);
+			const safeFilePath = await fileUtil.genTempPath(OUT_DIR_PATH);
+
+			// if we are a text file, we should always extract as raw and let programs further up the stack worry about decoding it properly. this way if a raw output text file is viewed on an actual Mac, it would render just fine
+			await runUtil.run("hcopyi", [...(["text", "ttro"].includes(entry?.fileType?.toLowerCase()) ? ["-r"] : []), entry.id, safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
+			metadata.fileMeta[path.relative(OUT_DIR_PATH, entry.destFilePath)] = {macFileType : entry.fileType};
+
+			try
+			{
+				await Deno.rename(safeFilePath, entry.destFilePath);
+				await Deno.utime(entry.destFilePath, Math.floor(ts/xu.SECOND), Math.floor(ts/xu.SECOND));
+			}
+			catch(err)
+			{
+				console.error(`Failed to copy id ${entry.id} to ${entry.destFilePath} due to ${err}`);
+			}
 		}
 
 		// now handle our directories
@@ -141,14 +138,14 @@ async function extractHFSISO()
 			if(seenIds.has(idAfter))
 			{
 				if((+entry.id)!==(+idAfter))
-					xlog.warn`Failed to change into directory id ${entry.id} with name ${entry.filename} inside of ${subPath}`;
+					console.error(`Failed to change into directory id ${entry.id} with name ${entry.filename} inside of ${subPath}`);
 				else
-					xlog.warn`Skipping dir ${+entry.id} ${entry.filename} inside of ${subPath} as we've already seen it`;
+					console.error(`Skipping dir ${+entry.id} ${entry.filename} inside of ${subPath} as we've already seen it`);
 				continue;
 			}
 			
 			seenIds.add(idAfter);
-			await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...decodeOpts})));
+			await recurseHFS(path.join(subPath, await encodeUtil.decodeMacintosh({data : entry.filename, ...filenameDecodeOpts})));
 			await runUtil.run("hcd", ["::"], HFS_RUN_OPTIONS);
 		}
 	};
@@ -163,6 +160,8 @@ async function extractHFSISO()
 	await recurseHFS("");
 	await runUtil.run("humount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
 	await fileUtil.unlink(path.join(MOUNT_DIR_PATH, ".hcwd"));
+
+	console.log(JSON.stringify(metadata));
 }
 
 // main

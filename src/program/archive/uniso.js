@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program, RUNTIME} from "../../Program.js";
 
 export class uniso extends Program
@@ -31,5 +32,6 @@ export class uniso extends Program
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};
 	runOptions = ({env : Program.denoEnv()});
+	post       = r => Object.assign(r.meta, xu.parseJSON(r.stdout, {}));
 	renameOut  = false;
 }

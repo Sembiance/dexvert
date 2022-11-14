@@ -17,7 +17,8 @@ const argv = cmdUtil.cmdInit({
 		jsonFile      : {desc : "If set, will output results as JSON to the given filePath", hasValue : true},
 		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
 		forbidProgram : {desc : "A programid not to run. Used internally to prevent infinite recursions", hasValue : true, multiple : true},
-		skipVerify    : {desc : "Set to true to skip verifications of output files"}
+		skipVerify    : {desc : "Set to true to skip verifications of output files"},
+		fileMeta      : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true}
 	},
 	args :
 	[
@@ -57,6 +58,9 @@ async function handleExit(ignored)
 }
 
 const inputFile = await DexFile.create(argv.inputFilePath);
+if(argv.fileMeta)
+	inputFile.meta = xu.parseJSON(argv.fileMeta, {});
+
 const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
 if(!dexState)
 	await handleExit(xlog.warn`No processed result.`);

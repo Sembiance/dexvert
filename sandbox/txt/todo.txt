@@ -1,25 +1,16 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Fix test discovered bug (might be fixed now that I delete the special/block files first)
- [FAIL] archive/linuxEXTFilesystem/filesys-ELF-2.0.x Some reported output files are missing from disk: /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/serial2 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/serial1 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/nfsd /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/mouse /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/modem2 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/modem1 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd1H720 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd1H360 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd0H720 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/fd0H360 /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/console /mnt/ram/tmp/3nsn_oi0_0_dextest/archive/linuxEXTFilesystem/filesys-ELF-2.0.x/out/dev/XOR
-
 * Update deark which includes drhalo PIC support and add support for files screen* here: http://discmaster.textfiles.com/browse/4569/BetweenHeavenHell.cdr/200/150
   Update http://fileformats.archiveteam.org/wiki/Dr._Halo_PIC that deark supports it
   Then probably re-process CD 4569
   Make sure to look at deark changelog for ALL changes since last, and add support for other formats too
   Then check the *.TEM files here and reprocess the CD if better in the new deark: http://discmaster.textfiles.com/browse/1831/The%20World%20of%20Computer%20Software.iso/sbl5.zip
 
-* Potentially render ZZT/SuperZZT worlds out to PNG for preview: https://github.com/Sembiance/dexvert/issues/1
-
-* Improve MegaZeux detection (right now it's classified as 'weak'): https://github.com/Sembiance/dexvert/issues/2
-
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
 
 * Add image converter support (oiiotool/iconvert) for all formats supprted by: https://github.com/OpenImageIO/oiio
-
-* Add this as an additional decrypter for flash files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
 
 * Get AARU support working: https://github.com/aaru-dps/Aaru
   http://discmaster.textfiles.com/view/4313/Disc%20Dump/CD32_11.aaruf
@@ -28,9 +19,15 @@
 
 * Get archive/autoCADSlideLibrary fixed so it always extracts all files.
   Even a bash script (when run in parellel) only seems to get some of the files sometimes and others other times
+  Maybe best to get a list of each sub file and then use xwork to extract each one. Should work?
+  Alternative::
   Using sample/archive/autoCADSlideLibrary/DHELP.SLB file, create a serial bash script and run that a bunch and see if that works
   Then if not, try adding some sleeps in-between.
   If stil not working, uhm... no idea? Guess just give up.
+
+* See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
+  https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
+  Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
 
 
 /---------------\
@@ -47,6 +44,14 @@
   Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
   https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
 * Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip
+  Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
+
+* Once debby adds a way to leverage SCUMMVM to extract Director 3 files: https://discord.com/channels/350407629849493504/1033065501984817252/1038538531905208340
+  Then process some of those files.
+
+* Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
+
+* Potentially render ZZT/SuperZZT worlds out to PNG for preview: https://github.com/Sembiance/dexvert/issues/1
 
 /-----------------\
 | Medium Priority |

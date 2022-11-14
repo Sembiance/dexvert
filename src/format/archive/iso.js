@@ -178,4 +178,5 @@ export class iso extends Format
 
 		Object.assign(dexState.meta, meta);
 	};
+	post = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid, meta}) => programid==="uniso" && meta?.fileMeta)?.meta || {});
 }

@@ -13,7 +13,8 @@ const argv = cmdUtil.cmdInit({
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: warn", defaultValue : "warn"},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true},
-		rebuild  : {desc : "Rebuild formats and programs first"}
+		rebuild  : {desc : "Rebuild formats and programs first"},
+		fileMeta : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true}
 	},
 	args :
 	[
@@ -30,7 +31,11 @@ const {identify} = await import(`../identify.js?v=${xu.randStr()}`);
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
 {
-	const rows = await identify(await DexFile.create(inputFilePath), {xlog});
+	const inputFile = await DexFile.create(inputFilePath);
+	if(argv.fileMeta)
+		inputFile.meta = xu.parseJSON(argv.fileMeta, {});
+		
+	const rows = await identify(inputFile, {xlog});
 
 	if(argv.jsonFile)
 		await Deno.writeTextFile(argv.jsonFile, JSON.stringify(rows));

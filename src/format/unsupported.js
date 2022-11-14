@@ -238,6 +238,7 @@ export default
 		kolekoSaveState             : {name : "KOLEKO Save State", ext : [".rom"], magic : ["KOLEKO Save state"]},
 		legendOfKyrandiaEMCFile     : {name : "Legend of Kyrandia EMC File", ext : [".emc"], magic : ["Kyra Engine game data"]},
 		lucasFilmData               : {name : "LucasFilm Data", ext : [".lfd"], magic : ["LucasFilm Data", "Lucas Film Data - Panel"]},
+		megaZeuxWorld			    : {name : "MegaZeux World", ext : [".mzx"], magic : ["MegaZeux World"], weakMagic : true},
 		midiMazeIIMaze              : {name : "MIDI-MAZE II Maze", ext : [".mze"], magic : ["MIDI-MAZE II Maze"]},
 		moonbaseGameData            : {name : "Moonbase Game Data", ext : [".mb"], magic : ["Moonbase game data"]},
 		portsOfCallSaveGame         : {name : "Ports of Call Save Game", ext : [".trp"], magic : ["Ports of Call savegame"]},

@@ -84,11 +84,13 @@ const DEXMAGIC_CHECKS =
 	// other
 	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],
 	"Director STXT"                    : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
-	"OLB Library"                      : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
-	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
+	"MegaZeux Board"                   : [{offset : 0, match : [0xFF]}, {offset : 1, match : ["M", ["B", 0x02]]}],
+	"MegaZeux Save"                    : [{offset : 0, match : ["M", "Z", ["S", "X"], ["V", "S", 0x02]]}],
 	"MegaZeux World"                   : [{offset : 25, match : [0x00]}, {offset : 26, match : ["M", ["Z", 0x02]]}],
 	"MegaZeux World (Encrypted)"       : [{offset : 25, match : [0x01]}, {offset : 41, match : ["M", ["Z", 0x02]]}],
 	"MegaZeux World (Encrypted) (Alt)" : [{offset : 25, match : [0x01]}, {offset : 42, match : ["M", ["Z", 0x02]]}],
+	"OLB Library"                      : [{offset : 0, match : "Gnu is Not eUnuchs"}, {offset : 18, match : [0x2E, 0x0A, 0x5F, 0x5F, 0x2E]}, {offset : 23, match : "SYMDEF"}],
+	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],

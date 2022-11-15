@@ -273,7 +273,6 @@ export default
 		warCraftMap                 : {name : "WarCraft Map", ext : [".pud"], magic : ["WarCraft map"]},
 		winzlePuzzle                : {name : "Winzle Puzzle", ext : [".wzl"], magic : ["Winzle puzzle"]},
 		wipeout2097TrackData        : {name : "Wipeout 2097 Track Data", ext : [".wad"], magic : ["Wipeout 2097 track data"]},
-		zztFile                     : {name : "ZZT File", ext : [".zzt"], magic : ["ZZT Game Creation System data format"], weakMagic : true},
 
 
 		/////////////////

@@ -9,6 +9,7 @@ export const WEAK_VALUES =
 
 	// dexmagic: WEAK checks
 	/^IFF CAT file$/,
+	/^ZZT World$/,
 	
 	// FILE: Very weak checks:
 	/^, /,
@@ -594,5 +595,6 @@ export const WEAK_VALUES =
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,
 	/^Wii Model Animation$/,
-	/^Xilinx User Constraints File$/
+	/^Xilinx User Constraints File$/,
+	/^ZZT Game Creation System/
 ];

@@ -36,7 +36,7 @@ const FORCE_FORMAT_AS =
 
 const FORMAT_OS_HINT =
 {
-	"archive/iso"          : {"OS_user_4.0.iso" : "nextstep", "Random-Dot 3D.iso" : "macintoshjp", "Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp", "MAC100-1999-02.ISO" : "macintoshjp"},
+	"archive/iso"          : {"OS_user_4.0.iso" : "nextstep", "Random-Dot 3D.iso" : "macintoshjp", "Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp", "MAC100-1999-02.ISO" : "macintoshjp", "MACPEOPLE-1998-03-01.ISO" : "macintoshjp"},
 	"archive/sit"          : {"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp", "StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ" : "macintoshjp"},
 	"image/macBinaryImage" : {"01-1-tiff-手塚莉絵" : "macintoshjp"},
 	"image/printfox"       : "commodore",
@@ -209,7 +209,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
-	[/archive\/irixIDBArchive\/license_eoe\.?(books|man|sw|$)/i, true, true],
+	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", true],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],

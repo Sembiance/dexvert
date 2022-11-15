@@ -1,4 +1,4 @@
-# Unsupported File Formats (859)
+# Unsupported File Formats (858)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -425,7 +425,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (423)
+## Other (422)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -850,7 +850,6 @@ other | X-CAD Overlay |  |
 other | XPCOM Type Library | .xpt | 
 other | YAFA Compression Options |  | 
 other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/other/zbasic/)
-other | ZZT File | .zzt | 
 
 
 

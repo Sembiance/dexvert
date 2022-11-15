@@ -1,4 +1,4 @@
-# Supported File Formats (1,384)
+# Supported File Formats (1,385)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -1235,7 +1235,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) | [3 sample files
 
 
 
-## Other (102)
+## Other (103)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1340,6 +1340,7 @@ other | Wingz Script | .scz | [strings](https://www.gnu.org/software/binutils/) 
 other | Wordsearch Mania! Puzzle | .wsp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/wordSearchManiaPuzzle/)
 other | WordStar Macro | .wsm | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/wordStarMacro/)
 other | Zing! Directory Info | .zing | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/zingDirectoryInfo/)
+other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScreenshotter](https://github.com/Sembiance/dexvert/tree/master/bin/zztScreenshotter) | 
 
 
 

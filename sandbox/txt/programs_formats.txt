@@ -364,6 +364,7 @@ XPK-encapsulated files
 
 >>> deark (Linux - v1.5.5 - June 6, 2020) - ARCHIVE, IMAGE (https://github.com/jsummers/deark  https://entropymine.com/deark/)
 === Image format modules ===
+
 (Images that are not "extracted" will be converted to PNG, except as noted.)
 
 * ADEX .IMG (module="adex") (experimental)
@@ -479,6 +480,9 @@ XPK-encapsulated files
   Options
    -opt ole1:extractall - Extract unidentified OLE objects
 
+* CD-I IFF-IMAG (module="cdi_imag") (experimental/incomplete)
+  A format used on some CD-i discs.
+
 * COKE (Atari Falcon) (*.tg1) (module="coke")
 
 * Compface intermediate format (module="compfacei")
@@ -522,6 +526,12 @@ XPK-encapsulated files
   - Supports high resolution (640x400) only
 
 * Dr. Halo .CUT (module="drhalocut")
+  Options
+   -file2 <file.pal> - Read the palette from this file.
+   -opt drhalocut:pal=pc16 - Use standard 16-color palette if possible.
+
+* Dr. Halo .PIC (module="drhalopic")
+  - Most of the common image types are supported.
   Options
    -file2 <file.pal> - Read the palette from this file.
 
@@ -714,6 +724,9 @@ XPK-encapsulated files
 
 * OLPC .565 firmware icon (module="olpc565")
 
+* OS/2 boot logo (module="os2bootlogo")
+  - You may have to use "-m os2bootlogo" in some cases.
+
 * OS/2 Icon, Pointer, Bitmap Array formats (module="os2bmp")
   - Converts icons & pointers to individual PNG files.
   - Icon, pointer, and BMP image files are extracted from Bitmap Array files.
@@ -866,7 +879,7 @@ XPK-encapsulated files
    -opt atari:palbits=<n> (refer to readme.md)
 
 * Storyboard PIC/CAP (module="storyboard") (experimental)
-  - Only the old format from IBM PC Storyboard is supported.
+  - Old ("EP_CAP") and new formats are mostly supported.
 
 * STOS Memory Bank (.mbk) (module="stos")
   - Decode "sprite bank" images
@@ -951,7 +964,6 @@ XPK-encapsulated files
 
 * Young Picasso (.YP) (module="young_picasso")
   An old paint program by BlueBlueview Software.
-  - Early versions may not be supported, or may require "-m young_picasso".
 
 * ZBR ((Zoner) Zebra Metafile) (module="zbr")
   - Extract the preview image.
@@ -991,21 +1003,11 @@ XPK-encapsulated files
 
 * ADF (Amiga disk image) (module="amiga_adf") (experimental)
 
-* ar001 (module="ar001")
-  "ar" archiver by Haruhiko Okumura, first version.
-
-* ARC archive (module="arc")
-  - Some rare compression methods are not supported.
-
-* ArcFS (module="arcfs")
-
-* ArcMac (module="arcmac") (experimental)
-  Variant of ARC.
-
-* ARJ (module="arj") (experimental)
-
 * AmBs (AMOS "Banks" aggregate format) (module="abk")
   - Extract AmSp, AmIc, AmBk files.
+
+* Apple II disk image (module="apple2_dsk") (experimental)
+  - Limited support. Only Apple DOS 16-sector.
 
 * Apple Partition Map (module="apm") (experimental)
 
@@ -1020,6 +1022,25 @@ XPK-encapsulated files
 
 * ar (.a archive/library format) (module="ar") (experimental/incomplete)
   - Supports System V long filenames
+
+* ar001 (module="ar001")
+  "ar" archiver by Haruhiko Okumura, first version.
+
+* ARC archive (module="arc")
+  - Some rare compression methods are not supported.
+
+* ArcFS (module="arcfs")
+
+* ArcMac (module="arcmac") (experimental)
+  Variant of ARC.
+
+* ARJ (module="arj")
+  Options
+   -opt arj:entrypoint=<n> : Specify the offset of ARJ data.
+   -opt arj:scan=0 : Disable scanning for the ARJ data.
+   -opt arj:reloc[=<n>] : Move the ARJ data, and disable some types of
+     security/protection. Use with "-m arj" to convert most any self-extracting
+     ARJ archive to plain ARJ.
 
 * ARX (module="arx") (experimental)
   Variant of LHA. Deark tries to convert it to LHA.
@@ -1051,7 +1072,7 @@ XPK-encapsulated files
 * CRLZH (module="crlzh")
   An old compressed file format used mainly on CP/M.
 
-* Crunch (module="crunch")
+* Crunch (module="crunch") (incomplete)
   An old compressed file format used mainly on CP/M.
   - The header can be parsed, but only the rare v1.x format can be
     decompressed.
@@ -1085,6 +1106,9 @@ XPK-encapsulated files
 
 * FAT (module="fat") (experimental/incomplete)
   - Limited support, mainly for floppy disk images.
+
+* GX Library (module="gxlib")
+  Aggregate format by Genus Microprogramming.
 
 * Gzip (module="gzip")
 
@@ -1144,6 +1168,8 @@ XPK-encapsulated files
 * MacBinary (module="macbinary")
   - You may have to use "-m macbinary".
 
+* MDCD archive (module="mdcd")
+
 * Microsoft Compound File Binary (module="cfb")
   - Streams are not extracted by default, but some streams contain images and
     other objects that can be extracted.
@@ -1154,6 +1180,10 @@ XPK-encapsulated files
    -opt cfb:fmt=thumbsdb - Treat the file as a Thumbs.db file.
 
 * Microsoft Installation Compression (module="mscompress")
+
+* MOOF (module="moof") (incomplete)
+  Macintosh floppy disk image format.
+  - Some metadata is parsed, but the disk contents are not extracted or listed.
 
 * MSA (Magic Shadow Archiver) (module="msa") (experimental)
   - Atari ST disk image format.
@@ -1186,13 +1216,28 @@ XPK-encapsulated files
    -opt pasti:toraw - Instead of decoding, extract to raw ".ST" format (this is
      usually a FAT format).
 
+* PCX Library (module="pcxlib")
+  Aggregate format by Genus Microprogramming.
+
 * PKLITE (module="pklite")
   Decompress a PKLITE-compressed DOS EXE file or DOS COM file.
   - For EXE format, you must use "-m pklite" or "-opt execomp".
   - Not all PKLITE format variants are supported.
+  Options
+   -opt pklite:raw - Instead of an EXE file, write raw decompressed data
+
+* RAR (module="rar")
+  - Files can be parsed, but there is usually nothing that can be extracted
+    from them.
 
 * RPM (package manager) (module="rpm")
   - Extract compressed cpio file.
+
+* QIP (Quarterdeck) (module="qip") (experimental)
+  An obscure installer format.
+
+* SCO compress LZH (module="compress_lzh")
+  Variant of 'compress'.
 
 * SIS (EPOC/Symbian archive) (module="sis")
   - EPOC release 3/4/5/6
@@ -1288,8 +1333,7 @@ XPK-encapsulated files
 * CLP - Saved Windows clipboard (module="clp") (experimental)
   Options
    -opt clp:extractall - Extract all data items
-   -opt clp:oemenc=<...> - The encoding for OEM Text items. Same options as
-     -inenc.
+   -opt oemenc=<...> - The encoding for OEM Text items. Same options as -inenc.
 
 * Copy (module="copy")
   - "Extract" the entire file. Use with -start and -size to extract part of
@@ -1324,7 +1368,7 @@ XPK-encapsulated files
     actual BMP file(s).
   - Extract icons and cursors from LX files. Note that these will use OS/2
     format. Reprocess them with Deark to convert to PNG.
-  - In some cases, extract the arhive from a self-extracting archive.
+  - In some cases, extract the archive from a self-extracting archive.
 
 * FLAC audio (module="flac")
 
@@ -1364,6 +1408,7 @@ XPK-encapsulated files
   This is the format generally used by Mac resource forks.
   Options
    -opt macrsrc:extractraw - Extract all resources directly to files.
+   -opt macrsrc:combinesicn - Put 'small icon' (SICN) sets in a single image.
 
 * MIDI (module="midi")
   - Files can be parsed, but there is usually nothing that can be extracted
@@ -1409,6 +1454,15 @@ XPK-encapsulated files
 * Photoshop Styles format (.asl) (module="ps_styles")
   - Files can be parsed, but there is usually nothing that can be extracted
     from them.
+
+* PIF (Windows Program Information File) (module="pif") (incomplete)
+  - Files can be parsed, but there is usually nothing that can be extracted
+    from them.
+  Options
+   -opt oemenc=<...> - The encoding for OEM Text items. Same options as -inenc.
+
+* PIF/DESQview (module="desqview_dvp") (incomplete)
+  - Similar to PIF (Windows).
 
 * Plain text (module="plaintext")
   Read a plain text file, and write it as UTF-8.

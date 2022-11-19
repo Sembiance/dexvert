@@ -22,6 +22,7 @@ export class stackimport extends Program
 			return;
 
 		const patPBMFilePaths = [];
+		const otherPBMFilePaths = [];
 
 		// combine card_*.xml files into one cards.xml file
 		const cardsXMLFilePath = path.join(outDirPath, "cards.xml");
@@ -53,10 +54,17 @@ export class stackimport extends Program
 				patPBMFilePaths.push(fileOutputPath);
 				continue;
 			}
+			else if(filename.toLowerCase().endsWith(".pbm"))
+			{
+				otherPBMFilePaths.push(fileOutputPath);
+				continue;
+			}
 
 			if(path.relative(outDirPath, fileOutputPath).split("/").length===2)
 				await Deno.rename(fileOutputPath, path.join(outDirPath, filename));
 		}
+
+		// WARNING: Do not attempt to use fileOutputPaths below here, it no longer is correct due to the renaming operation above
 
 		// for PAT files, they are so tiny and insignificant and almost always identical for every hypercard stack, just combine them into a big PAT file
 		if(patPBMFilePaths.length>0)
@@ -66,6 +74,15 @@ export class stackimport extends Program
 			await runUtil.run("montage", [...patPBMFilePaths, "-tile", `${cols}x${rows}`, "-geometry", "+0+0", path.join(outDirPath, `PATs.png`)], {timeout : xu.MINUTE*2});
 			await patPBMFilePaths.parallelMap(fileUtil.unlink);
 		}
+
+		// convert all remaining .pbm files to .png with imagemagick
+		await otherPBMFilePaths.parallelMap(async imageFilePath =>
+		{
+			const pngFilePath = path.join(outDirPath, `${path.basename(imageFilePath, ".pbm")}.png`);
+			await runUtil.run("convert", [imageFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});
+			if(await fileUtil.exists(pngFilePath))
+				await fileUtil.unlink(imageFilePath);
+		}, 2);
 	};
 	renameOut = false;
 }

@@ -136,7 +136,7 @@ const DEXMAGIC_FILE_META_CHECKS =
 				return "Macintosh MacDraw II Document";
 			
 			case "PNTG":
-				return "Macintosh MacPaint Document";
+				return "Macintosh MacPaint";
 			
 			case "SIT5":
 				return "Macintosh StuffIt 5 Archive";

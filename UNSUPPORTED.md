@@ -1,11 +1,11 @@
-# Unsupported File Formats (858)
+# Unsupported File Formats (857)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (49)
+## Archive (48)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -56,7 +56,6 @@ archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/V
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 archive | WWarp Disk Image | .wwp | 
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
-archive | ZX Spectrum Tape Image | .tap | [4 sample files](https://telparia.com/fileFormatSamples/archive/zxSpectrumTape/)
 
 
 

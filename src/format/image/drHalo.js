@@ -7,7 +7,7 @@ export class drHalo extends Format
 	ext          = [".cut", ".pal", ".pic"];
 	mimeType     = "application/dr-halo";
 	priority     = this.PRIORITY.LOW;
-	converters   = ["convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress", "pv"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
+	converters   = ["deark", "convert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "hiJaakExpress", "pv"];	// pv can produce very dark, nearly black images (KLINGON.CUT)
 	metaProvider = ["image"];
 	magic        = ["Dr. Halo device dependent bitmap"];
 	weakMagic    = true;

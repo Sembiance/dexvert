@@ -6,5 +6,5 @@ export class cdiIFFImage extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/CD-I_IFF_IMAG";
 	magic       = ["CD-I IFF Image", "IFF data, CD-i image"];
 	notes       = "Deark has partial support, but it's the only converter that has any support at all.";
-	converters  = ["deark"];
+	converters  = ["deark[module:cdi_imag]"];
 }

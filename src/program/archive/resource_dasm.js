@@ -63,7 +63,7 @@ export class resource_dasm extends Program
 		}
 
 		// for certain other text resource types, they are not very useful individually, so just combine into a single .txt file
-		for(const type of ["ALRT", "CNTL", "DITL", "DLOG", "MENU", "WIND"])
+		for(const type of ["ALRT", "BNDL", "CNTL", "DITL", "DLOG", "FREF", "MENU", "TMPL", "TYP#", "WIND"])
 		{
 			const typeFilePaths = fileOutputPaths.filter(v => path.basename(v).startsWith(`${type}_`) && v.endsWith(".txt"));
 			if(!typeFilePaths.length)
@@ -80,30 +80,33 @@ export class resource_dasm extends Program
 			}
 		}
 
-		// for fonts, every single glyph is a seperate file which generates huge numbers of files for Mac font CDs, so let's just combine all the glyphs together
-		const fontGlyphs = {};
-		for(const fileOutputPath of fileOutputPaths)
+		// some images, like font glyphs, PAT#, etc should be be combined together into a single image file
+		for(const regex of [/^(?<code>\w{4})_(?<num>-?\d+)_.*glyph_\w+\.bmp$/, /^(?<code>PAT#)_(?<num>-?\d+)_.+\.bmp$/])
 		{
-			const {code, num, glyph} = path.basename(fileOutputPath).match(/(?<code>\w{4})_(?<num>-?\d+)_.*glyph_(?<glyph>\w+)\.bmp$/)?.groups || {};
-			if(!code || !num || !glyph)
-				continue;
-			
-			const fontid = `${code}_${num}`;
-			fontGlyphs[fontid] ||= [];
-			fontGlyphs[fontid].push(fileOutputPath);
-		}
-
-		await Object.entries(fontGlyphs).parallelMap(async ([fontid, filePaths]) =>
-		{
-			const cols = Math.min(filePaths.length, FONT_SPRITE_COLS);
-			const rows = Math.ceil(filePaths.length/FONT_SPRITE_COLS);
-			await runUtil.run("montage", [...filePaths, "-tile", `${cols}x${rows}`, "-geometry", "+0+0", path.join(r.outDir({absolute : true}), `${fontid}.png`)], {timeout : xu.MINUTE*2});
-			await filePaths.parallelMap(async filePath =>
+			const subImages = {};
+			for(const fileOutputPath of fileOutputPaths)
 			{
-				await fileUtil.unlink(filePath);
-				fileOutputPaths.removeOnce(filePath);
+				const {code, num} = path.basename(fileOutputPath).match(regex)?.groups || {};
+				if(!code || !num)
+					continue;
+				
+				const imageid = `${code}_${num}`;
+				subImages[imageid] ||= [];
+				subImages[imageid].push(fileOutputPath);
+			}
+
+			await Object.entries(subImages).parallelMap(async ([fontid, filePaths]) =>
+			{
+				const cols = Math.min(filePaths.length, FONT_SPRITE_COLS);
+				const rows = Math.ceil(filePaths.length/FONT_SPRITE_COLS);
+				await runUtil.run("montage", [...filePaths, "-tile", `${cols}x${rows}`, "-geometry", "+0+0", path.join(r.outDir({absolute : true}), `${fontid}.png`)], {timeout : xu.MINUTE*2});
+				await filePaths.parallelMap(async filePath =>
+				{
+					await fileUtil.unlink(filePath);
+					fileOutputPaths.removeOnce(filePath);
+				});
 			});
-		});
+		}
 
 		// for STR# resources, these are often tiny little files with just a few words. Let's combine them into a single .txt files while preserving their id numbers
 		const txtResources = {};
@@ -133,9 +136,8 @@ export class resource_dasm extends Program
 			});
 		});
 
-		// all .bmp files, attempt to just quick convert using imagemagick. resources can have a ton of BMP files, this saves a lot of time further down the line and reduces duplication
-		const bmpFilePaths = fileOutputPaths.filter(v => v.endsWith(".bmp"));
-		await bmpFilePaths.parallelMap(async bmpFilePath =>
+		// all .bmp files, just quick convert using imagemagick. resources can have a ton of BMP files, this saves a lot of time further down the line and reduces duplication
+		await fileOutputPaths.filter(v => v.endsWith(".bmp")).parallelMap(async bmpFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
 			await runUtil.run("convert", [bmpFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});

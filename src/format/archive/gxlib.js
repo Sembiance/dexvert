@@ -6,5 +6,5 @@ export class gxlib extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Genus_Graphics_Library";
 	ext        = [".gx", ".gxl"];
 	magic      = ["Genus Graphics Library"];
-	converters = ["unpcxgx"];
+	converters = ["deark[module:gxlib]", "unpcxgx"];
 }

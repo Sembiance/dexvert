@@ -1,12 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update deark which includes drhalo PIC support and add support for files screen* here: http://discmaster.textfiles.com/browse/4569/BetweenHeavenHell.cdr/200/150
-  Update http://fileformats.archiveteam.org/wiki/Dr._Halo_PIC that deark supports it
-  Then probably re-process CD 4569
-  Make sure to look at deark changelog for ALL changes since last, and add support for other formats too
-  Then check the *.TEM files here and reprocess the CD if better in the new deark: http://discmaster.textfiles.com/browse/1831/The%20World%20of%20Computer%20Software.iso/sbl5.zip
-
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
 
@@ -51,7 +45,6 @@
 
 * Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
 
-* Potentially render ZZT/SuperZZT worlds out to PNG for preview: https://github.com/Sembiance/dexvert/issues/1
 
 /-----------------\
 | Medium Priority |
@@ -106,6 +99,10 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+  Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
+  From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+
 * Add support for The Print Shop Deluxe Graphics library:
   http://discmaster.textfiles.com/view/4974/Handwritten%20Fonts.iso/previews/famousmg/famousmg.psg
   http://discmaster.textfiles.com/view/4974/Handwritten%20Fonts.iso/previews/artparts/apsamplr.psg

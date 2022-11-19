@@ -7,5 +7,5 @@ export class scoCompress extends Format
 	safeExt    = ".gz";
 	magic      = ["SCO compress"];
 	packed     = true;
-	converters = ["gunzip"];
+	converters = ["gunzip", "deark[module:compress_lzh]"];
 }

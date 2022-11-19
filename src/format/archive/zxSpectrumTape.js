@@ -6,5 +6,5 @@ export class zxSpectrumTape extends Format
 	ext         = [".tap"];
 	magic       = ["ZX Spectrum Tape image", "Spectrum .TAP data", /^fmt\/801( |$)/];
 	weakMagic   = true;
-	unsupported = true;
+	converters  = ["hcdisk"];
 }

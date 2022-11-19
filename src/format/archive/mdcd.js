@@ -6,5 +6,5 @@ export class mdcd extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MDCD";
 	ext        = [".md", ".cd"];
 	magic      = ["MDCD compressed archive", "MDCD archive data"];
-	converters = ["mdcd"];
+	converters = ["deark[module:mdcd]", "mdcd"];
 }

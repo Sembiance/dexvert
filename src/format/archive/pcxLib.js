@@ -6,5 +6,5 @@ export class pcxLib extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PCX_Library";
 	ext        = [".pcl"];
 	magic      = ["pcxLib compressed", "PCX Library game data container"];
-	converters = ["unpcxgx"];
+	converters = ["deark[module:pcxlib]", "unpcxgx"];
 }

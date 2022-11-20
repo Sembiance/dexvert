@@ -13,7 +13,7 @@ export class pict extends Format
 		"deark[mac]", "recoil2png", "qtPicViewer", "soffice[outType:png]", "hiJaakExpress", "canvas", "picturePublisher",
 		"deark[module:macbinary] -> deark",	// Can handle MacBinary-encoded PICT files such as samples 35, 039 and 06
 		"imageAlchemy",
-		"corelDraw",
+		"corelDRAW",
 		"corelPhotoPaint",	// corelPhotoPaint sometimes just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01)
 		"tomsViewer",		// For some PICTS will only produce the 'thumbnail' (samples 35, 039 and 06). For these files, corelPhotoPaint produces a full image so this converter is tried after that one
 		"nconvert",			// nconvert produces just a black image PICT v2 format picts: p#.pic

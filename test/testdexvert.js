@@ -36,7 +36,15 @@ const FORCE_FORMAT_AS =
 
 const FORMAT_OS_HINT =
 {
-	"archive/iso"          : {"OS_user_4.0.iso" : "nextstep", "Random-Dot 3D.iso" : "macintoshjp", "Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp", "MAC100-1999-02.ISO" : "macintoshjp", "MACPEOPLE-1998-03-01.ISO" : "macintoshjp"},
+	"archive/iso"          :
+	{
+		"OS_user_4.0.iso" : "nextstep",
+		"Random-Dot 3D.iso" : "macintoshjp",
+		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
+		"MAC100-1999-02.ISO" : "macintoshjp",
+		"MACPEOPLE-1998-03-01.ISO" : "macintoshjp",
+		"MACPEOPLE-1999-02-01.ISO" : "macintoshjp"	// is dual both PC and Mac but 99% of the stuff is on mac side
+	},
 	"archive/sit"          : {"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp", "StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ" : "macintoshjp"},
 	"image/macBinaryImage" : {"01-1-tiff-手塚莉絵" : "macintoshjp"},
 	"image/printfox"       : "commodore",

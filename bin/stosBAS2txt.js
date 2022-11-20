@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil} from "xutil";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 
 const argv = cmdUtil.cmdInit({
@@ -87,4 +87,4 @@ while(!br.eof())
 	//	XU.log`${lineNum.toString()} ${out[lineNum]}`;
 }
 
-await Deno.writeTextFile(argv.outputFilePath, `${Object.entries(out).sortMulti([([lineNum]) => lineNum]).map(([lineNum, lineVal]) => `${lineNum} ${lineVal}`).join("\n")}\n`);
+await fileUtil.writeTextFile(argv.outputFilePath, `${Object.entries(out).sortMulti([([lineNum]) => lineNum]).map(([lineNum, lineVal]) => `${lineNum} ${lineVal}`).join("\n")}\n`);

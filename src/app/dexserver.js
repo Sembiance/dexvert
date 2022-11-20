@@ -118,7 +118,7 @@ for(const serverid of SERVER_ORDER)
 	xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
 }
 
-await Deno.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
+await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
 
 while(true)

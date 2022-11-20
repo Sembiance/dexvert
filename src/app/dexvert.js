@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {DexFile} from "../DexFile.js";
 
@@ -68,7 +68,7 @@ if(!dexState)
 const serializedState = (argv.jsonFile || argv.json) ? JSON.stringify(dexState.serialize()) : null;
 
 if(argv.jsonFile)
-	await Deno.writeTextFile(argv.jsonFile, serializedState);
+	await fileUtil.writeTextFile(argv.jsonFile, serializedState);
 
 if(argv.json)
 	console.log(serializedState);

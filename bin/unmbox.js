@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil} from "xutil";
 import {path, readLines} from "std";
 
 const argv = cmdUtil.cmdInit({
@@ -48,7 +48,7 @@ for await(const line of readLines(inputFile))
 		if(Object.keys(msg).length>0)
 		{
 			msg.lines.pop();	// Our last message line was empty and was the end of message line, so just pop it off and discard it
-			await Deno.writeTextFile(path.join(argv.outputDirPath, `${Number(msgCount++).toString().padStart(6, "0")}_${msg.meta.sender.innerTruncate(30)}_${msg.meta.timestamp}.msg`), msg.lines.join("\r\n"));
+			await fileUtil.writeTextFile(path.join(argv.outputDirPath, `${Number(msgCount++).toString().padStart(6, "0")}_${msg.meta.sender.innerTruncate(30)}_${msg.meta.timestamp}.msg`), msg.lines.join("\r\n"));
 		}
 
 		msg = {meta : {sender : sepMatch.groups.sender, timestamp : sepMatch.groups.timestamp}, lines : []};

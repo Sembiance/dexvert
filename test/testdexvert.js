@@ -223,6 +223,7 @@ const DISK_FAMILY_FORMAT_MAP =
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format
 const UNPROCESSED_ALLOW_NO_IDS =
 [
+	"archive/irixIDBArchive",
 	"archive/rar",
 	"image/bbcDisplayRAM",
 	"image/teletext",
@@ -514,7 +515,7 @@ if(failures.length>0)
 
 async function writeOutputHTML()
 {
-	await Deno.writeTextFile("/mnt/ram/tmp/testdexvert.html", `
+	await fileUtil.writeTextFile("/mnt/ram/tmp/testdexvert.html", `
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -626,7 +627,7 @@ async function writeOutputHTML()
 }
 
 if(argv.record)
-	await Deno.writeTextFile(DATA_FILE_PATH, JSON.stringify(testData));
+	await fileUtil.writeTextFile(DATA_FILE_PATH, JSON.stringify(testData));
 
 await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"]);
 

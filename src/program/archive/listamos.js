@@ -1,4 +1,5 @@
 import {Program} from "../../Program.js";
+import {fileUtil} from "xutil";
 
 export class listamos extends Program
 {
@@ -11,7 +12,7 @@ export class listamos extends Program
 		if(r.stdout.trim().endsWith("not an AMOS source file"))
 			return;
 		
-		await Deno.writeTextFile(await r.outFile("out.amosSourceCode", {absolute : true}), r.stdout.trim());
+		await fileUtil.writeTextFile(await r.outFile("out.amosSourceCode", {absolute : true}), r.stdout.trim());
 	};
 	renameOut = true;
 }

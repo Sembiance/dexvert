@@ -41,9 +41,9 @@ export class stackimport extends Program
 				}
 				
 				// otherwise, combine the little card_*.xml files into one big cards.xml file
-				await Deno.writeTextFile(cardsXMLFilePath, `${filename}\n`, {append : true});
+				await fileUtil.writeTextFile(cardsXMLFilePath, `${filename}\n`, {append : true});
 				await Deno.writeFile(cardsXMLFilePath, await Deno.readFile(fileOutputPath), {append : true});
-				await Deno.writeTextFile(cardsXMLFilePath, "\n\n", {append : true});
+				await fileUtil.writeTextFile(cardsXMLFilePath, "\n\n", {append : true});
 				await fileUtil.unlink(fileOutputPath);
 				continue;
 			}

@@ -38,11 +38,11 @@ Deno.test("addFile", async () =>
 
 	// test modifying a file and adding it back
 	const tmpFilePath = await fileUtil.genTempPath();
-	await Deno.writeTextFile(tmpFilePath, "abc\n123");
+	await fileUtil.writeTextFile(tmpFilePath, "abc\n123");
 	a = await FileSet.create(path.dirname(tmpFilePath), "test", tmpFilePath);
 	assertStrictEquals(a.test.base, path.basename(tmpFilePath));
 	assertStrictEquals(a.test.size, 7);
-	await Deno.writeTextFile(tmpFilePath, "Hello, World!");
+	await fileUtil.writeTextFile(tmpFilePath, "Hello, World!");
 	assertStrictEquals(a.test.base, path.basename(tmpFilePath));
 	assertStrictEquals(a.test.size, 7);
 	await a.add("test", tmpFilePath);

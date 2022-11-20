@@ -81,7 +81,7 @@ export class qemu extends Server
 			this.xlog.debug`${prelog(instance)} Writing go script to tmp file ${tmpGoFilePath}`;
 
 			// We write the go script to a temp file first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
-			await Deno.writeTextFile(tmpGoFilePath, body.script);
+			await fileUtil.writeTextFile(tmpGoFilePath, body.script);
 			await fileUtil.move(tmpGoFilePath, goFilePath, this);
 
 			this.xlog.debug`${prelog(instance)} Awaiting VM to finish and delete the go script....`;
@@ -116,7 +116,7 @@ export class qemu extends Server
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", inFilePath, path.join(tmpInDirPath, "/")]));
 
-			await Deno.writeTextFile(tmpGoFilePath, body.script);
+			await fileUtil.writeTextFile(tmpGoFilePath, body.script);
 
 			// We create to a temp LHA first, and then copy it over in one go to prevent the supervisor from picking up an incomplete file
 			await runUtil.run("lha", ["c", tmpInLHAFilePath, instance.scriptName, ...(body.inFilePaths || []).map(v => path.basename(v))], {cwd : tmpInDirPath});
@@ -142,7 +142,7 @@ export class qemu extends Server
 			// We use rsync here to handle both files and directories, it handles preserving timestamps, etc
 			await (body.inFilePaths || []).parallelMap(async inFilePath => await runUtil.run("rsync", ["-saL", "-e", `ssh ${sshOpts.join(" ")}`, inFilePath, path.join(`${sshPrefix}:${inDirPath}`, "/")]));
 
-			await Deno.writeTextFile(tmpGoFilePath, body.script);
+			await fileUtil.writeTextFile(tmpGoFilePath, body.script);
 			await runUtil.run("scp", [...sshOpts.map(v => (v==="-p" ? "-P" : v)), tmpGoFilePath, `${sshPrefix}:${goFilePath}`]);
 			
 			// Wait for finish, which happens when we detect that the go file has disappeared
@@ -231,7 +231,7 @@ export class qemu extends Server
 		});
 
 		this.xlog.info`${prelog(instance)} launched, waiting for it to boot...`;
-		await Deno.writeTextFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
+		await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.json"), instanceJSON);
 	}
 
 	// Called when the QEMU has fully booted and is ready to received files

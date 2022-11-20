@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {path} from "std";
+import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 
 export class gimp extends Program
@@ -14,7 +15,7 @@ export class gimp extends Program
 	{
 		// big thanks to this GIST for teaching me python 3 syntax for GIMP: https://github.com/nicolalandro/u2net_gimp_plugin/blob/639fd6cb7bed3d7b920c0b0666fcda3c3506e2d4/u2net_gimp_plugin.py
 		// I could recode the below with JavaScript if I so chose: https://gitlab.gnome.org/GNOME/gimp/-/blob/master/extensions/goat-exercises/goat-exercise-gjs.js
-		await Deno.writeTextFile(path.join(r.f.root, "dexvert.py"), `import gi
+		await fileUtil.writeTextFile(path.join(r.f.root, "dexvert.py"), `import gi
 from gi.repository import GObject
 from gi.repository import Gimp
 from gi.repository import Gio

@@ -13,7 +13,7 @@ export class fontPreview extends Program
 	{
 		r.svgPreviewFilePath = await fileUtil.genTempPath(r.f.root, ".svg");
 
-		await Deno.writeTextFile(r.svgPreviewFilePath, `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+		await fileUtil.writeTextFile(r.svgPreviewFilePath, `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
         <style>
 			@font-face{font-family:&quot;${r.flags.family.toString().escapeXML()}&quot;;src:url(&quot;${r.inFile({absolute : true}).escapeXML()}&quot;)}

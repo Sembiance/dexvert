@@ -31,7 +31,7 @@ export class timidity extends Program
 		{
 			await Deno.mkdir(r.instrumentDirPath, {recursive : true});
 			await Deno.symlink(midiFont, path.join(r.instrumentDirPath, path.basename(midiFont)));
-			await Deno.writeTextFile(path.join(r.instrumentDirPath, "timidity.cfg"), `dir ${r.instrumentDirPath}\nsoundfont "${path.basename(midiFont)}" order=0`);
+			await fileUtil.writeTextFile(path.join(r.instrumentDirPath, "timidity.cfg"), `dir ${r.instrumentDirPath}\nsoundfont "${path.basename(midiFont)}" order=0`);
 		}
 		
 		return ["-c", path.join(r.instrumentDirPath, "timidity.cfg"), "-Ow", "-o", await r.outFile("out.wav"), r.inFile()];

@@ -35,7 +35,7 @@ export class fig2dev extends Program
 			return v;
 		});
 
-		await Deno.writeTextFile(svgOutFile.absolute, svgFileData);
+		await fileUtil.writeTextFile(svgOutFile.absolute, svgFileData);
 	};
 
 	renameOut = true;

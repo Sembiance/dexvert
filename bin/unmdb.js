@@ -71,5 +71,5 @@ await Object.entries(schema).parallelMap(async ([tableName, tableSchema]) =>
 		await fileUtil.unlink(binaryOutDir);
 		
 	const tableOutputData = {schema : tableSchema, data : tableRows};
-	await Deno.writeTextFile(path.join(argv.outputDirPath, `${tableName}.json`), JSON.stringify(tableOutputData));
+	await fileUtil.writeTextFile(path.join(argv.outputDirPath, `${tableName}.json`), JSON.stringify(tableOutputData));
 });

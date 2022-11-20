@@ -70,7 +70,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 	const rtfLines = (await fileUtil.readTextFile(rtfFilePath)).split("\n");
 
 	const outputRTFFilePath = path.join(argv.outputDirPath, `${argv.outFilename}.rtf`);
-	await Deno.writeTextFile(outputRTFFilePath, (await rtfLines.parallelMap(async rtfLine =>
+	await fileUtil.writeTextFile(outputRTFFilePath, (await rtfLines.parallelMap(async rtfLine =>
 	{
 		for(const {regex : imageRefRegex} of IMAGE_REF_REGEXES)
 		{

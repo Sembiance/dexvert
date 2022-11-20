@@ -12,14 +12,14 @@ const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, f
 const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
 
 const DUMMY_FILE_PATH = await fileUtil.genTempPath();
-await Deno.writeTextFile(DUMMY_FILE_PATH, "x");
+await fileUtil.writeTextFile(DUMMY_FILE_PATH, "x");
 const DUMMY_DIR_PATH = await fileUtil.genTempPath();
 await Deno.mkdir(DUMMY_DIR_PATH);
 
 export default async function buildSUPPORTED(xlog)
 {
 	xlog.info`Writing SUPPORTED.md to disk...`;
-	await Deno.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
+	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.

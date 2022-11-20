@@ -32,7 +32,7 @@ export class scribus extends Program
 		// I later simplified that to just a getSize(groupObjects(getAllObjects()))
 		// Sadly some files have objects that don't seem to register with the API getAllObjects() and thus some of the image was always cut off
 		// So now I just make a really big document and then inkscape will crop that using the 'export-area-drawing flag. Works.
-		await Deno.writeTextFile(path.join(r.scribusDirPath, "conv.py"), `from scribus import *
+		await fileUtil.writeTextFile(path.join(r.scribusDirPath, "conv.py"), `from scribus import *
 import scribus
 
 scribus.newDocument((50000, 50000), (0, 0, 0, 0), scribus.PORTRAIT, 1, scribus.UNIT_POINTS, scribus.PAGE_1, 0, 1)

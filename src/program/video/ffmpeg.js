@@ -27,7 +27,7 @@ export class ffmpeg extends Program
 			inFileArgs.push("-i", r.imagesListFilePath);
 
 			for(const inFilePath of inFilePaths)
-				await Deno.writeTextFile(r.imagesListFilePath, `file '${inFilePath}'\n`, {append : true, create : true});
+				await fileUtil.writeTextFile(r.imagesListFilePath, `file '${inFilePath}'\n`, {append : true, create : true});
 		}
 		else
 		{

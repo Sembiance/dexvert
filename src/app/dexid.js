@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, printUtil, runUtil} from "xutil";
+import {cmdUtil, printUtil, runUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {DexFile} from "../DexFile.js";
 
@@ -38,7 +38,7 @@ for(const inputFilePath of inputFilePaths)
 	const rows = await identify(inputFile, {xlog});
 
 	if(argv.jsonFile)
-		await Deno.writeTextFile(argv.jsonFile, JSON.stringify(rows));
+		await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(rows));
 
 	if(argv.json)
 	{

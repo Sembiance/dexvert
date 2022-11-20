@@ -29,7 +29,7 @@ export class vcdxrip extends Program
 		// vcdxrip creates an XML file with a comment with the current command being executed which causes this file to change from run to run due to temp dir, etc.
 		// Supposed to be able to pass "--no-command-comment" to vcdxrip to prevent this, but it does not work for me. So we use xmlstarlet to strip out comments
 		const {stdout : xmlRaw} = await runUtil.run("xmlstarlet", ["-q", "c14n", "--without-comments", videoCDXMLFilePath]);
-		await Deno.writeTextFile(videoCDXMLFilePath, xmlRaw);
+		await fileUtil.writeTextFile(videoCDXMLFilePath, xmlRaw);
 	};
 	renameOut = false;
 }

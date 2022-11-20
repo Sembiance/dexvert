@@ -72,9 +72,9 @@ export class resource_dasm extends Program
 			const typeCombinedFilePath = path.join(outDirPath, `${type}.txt`);
 			for(const typeFilePath of typeFilePaths)
 			{
-				await Deno.writeTextFile(typeCombinedFilePath, `${path.basename(typeFilePath)}\n`, {append : true});
+				await fileUtil.writeTextFile(typeCombinedFilePath, `${path.basename(typeFilePath)}\n`, {append : true});
 				await Deno.writeFile(typeCombinedFilePath, await Deno.readFile(typeFilePath), {append : true});
-				await Deno.writeTextFile(typeCombinedFilePath, "\n\n", {append : true});
+				await fileUtil.writeTextFile(typeCombinedFilePath, "\n\n", {append : true});
 				await fileUtil.unlink(typeFilePath);
 				fileOutputPaths.removeOnce(typeFilePath);
 			}
@@ -127,7 +127,7 @@ export class resource_dasm extends Program
 			for(const filePath of filePaths)
 			{
 				await Deno.writeFile(textFilePath, await Deno.readFile(filePath), {append : true});
-				await Deno.writeTextFile(textFilePath, "\n\n", {append : true});
+				await fileUtil.writeTextFile(textFilePath, "\n\n", {append : true});
 			}
 			await filePaths.parallelMap(async filePath =>
 			{

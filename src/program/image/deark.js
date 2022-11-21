@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program, RUNTIME} from "../../Program.js";
-import {encodeUtil, fileUtil} from "xutil";
+import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
 
 function restRenamer(rest, suffix, newName)
@@ -23,6 +23,7 @@ export class deark extends Program
 		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
 		"opt"         : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"    : "Don't extract any thumb files found",
+		"recombine"   : "Try to recombine multiple output images back into a single output image",
 		"start"       : "Start processing with deark at a specific byte offset",
 		"file2"       : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
@@ -41,6 +42,8 @@ export class deark extends Program
 			a.push("-main");
 		if(r.flags.file2)
 			a.push("-file2", r.flags.file2);
+		if(r.flags.recombine)
+			a.push("-d");
 		
 		const opts = Array.force(r.flags.opt || []);
 		if(r.flags.charOutType)
@@ -51,24 +54,69 @@ export class deark extends Program
 
 	postExec = async r =>
 	{
-		// only need to do this if we are macintoshjp region, otherwise deark correctly converts filenames to roman
-		if(!r.flags.mac || !RUNTIME.globalFlags?.osHint?.macintoshjp)
-			return;
-
-		const decodeOpts = {processors : encodeUtil.macintoshProcessors.romanUTF8, region : "japan"};
 		const outDirPath = r.outDir({absolute : true});
-		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-		await fileOutputPaths.parallelMap(async fileOutputPath =>
+
+		// deark doesn't correctly decode Mac Japan encoded filenames
+		if(r.flags.mac && RUNTIME.globalFlags?.osHint?.macintoshjp)
 		{
-			const subPath = path.relative(outDirPath, fileOutputPath);
-			const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintosh({data : v, ...decodeOpts}))).join("/");
-			if(subPath===newSubPath)
-				return;
-			
-			// we have to mkdir and rename because some files like archive/sit/LOOPDELO.SIT have two different directories, one encoded one not encoded but when decoded they are equal
-			await Deno.mkdir(path.join(outDirPath, path.dirname(newSubPath)), {recursive : true});
-			await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
-		});
+			const decodeOpts = {processors : encodeUtil.macintoshProcessors.romanUTF8, region : "japan"};
+			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+			await fileOutputPaths.parallelMap(async fileOutputPath =>
+			{
+				const subPath = path.relative(outDirPath, fileOutputPath);
+				const newSubPath = (await subPath.split("/").parallelMap(async v => await encodeUtil.decodeMacintosh({data : v, ...decodeOpts}))).join("/");
+				if(subPath===newSubPath)
+					return;
+				
+				// we have to mkdir and rename because some files like archive/sit/LOOPDELO.SIT have two different directories, one encoded one not encoded but when decoded they are equal
+				await Deno.mkdir(path.join(outDirPath, path.dirname(newSubPath)), {recursive : true});
+				await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
+			});
+		}
+
+		// for some image formats for some images (like PICT Daniel sample) deark will output multiple image files that are actually 1 single image. See: https://github.com/jsummers/deark/issues/41
+		if(r.flags.recombine)
+		{
+			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+			const imgInfo = {parts : []};
+
+			for(const line of r.stdout.split("\n"))
+			{
+				const rectInfo = (line.match(/srcRect:\s\((?<x>\d+),(?<y>\d+)\)-\((?<w>\d+),(?<h>\d+)\)$/) || {})?.groups;
+				if(rectInfo)
+				{
+					["w", "h"].forEach(k => { imgInfo[k] = Math.max(+rectInfo[k], imgInfo[k] || 0); });
+					["x", "y"].forEach(k => { imgInfo[k] = +rectInfo[k]; });
+					continue;
+				}
+
+				const filenameInfo = (line.match(/^Writing\s(?<filename>.+)$/) || {})?.groups;
+				if(filenameInfo)
+				{
+					imgInfo.parts.push({filename : filenameInfo.filename, x : imgInfo.x, y : imgInfo.y});
+					delete imgInfo.x;
+					delete imgInfo.y;
+					continue;		// eslint-disable-line sonarjs/no-redundant-jump
+				}
+			}
+
+			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1)
+			{
+				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
+				await runUtil.run("convert", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
+				for(const part of imgInfo.parts)
+				{
+					const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(part.filename));
+					if(!srcFilePath)
+						r.xlog.warn`Unable to find deark sub image part ${part.filename} from possibles: [${fileOutputPaths.join("] [")}]`;
+					
+					await runUtil.run("composite", ["-gravity", "NorthWest", "-geometry", `+${part.x}+${part.y}`, srcFilePath, combinedFilePath, combinedFilePath]);
+					await fileUtil.unlink(srcFilePath);
+				}
+
+				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", "-strip", "-define", "png:exclude-chunks=time", path.join(outDirPath, `${r.originalInput.name}.png`)]);
+			}
+		}
 	};
 
 	// deark output names are an MINOR NIGHTMARE
@@ -112,6 +160,12 @@ export class deark extends Program
 	chain = "?dexvert";
 	chainCheck = (r, chainFile) =>
 	{
+		// very hacky, but this one file BINDDLL.DLL appears on almost every shareware CD and it has 43 BMP files embedded in it
+		// unfortunately each BMP file is just 'static' garbage, and according to deark this is just how they actually are in the file: https://github.com/jsummers/deark/issues/55
+		// and because we have a wide number of programs we try to convert BMP output, this one DLL file can take like 2 hours to process. So we just skip converting any BMP files from this DLL :)
+		if(["binddll.dll"].includes(r.originalInput?.base?.toLowerCase()))
+			return false;
+
 		const chainFormat =
 		{
 			".bmp"  : "bmp",

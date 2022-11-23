@@ -100,7 +100,10 @@ export class deark extends Program
 				}
 			}
 
-			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1)
+			r.xlog.debug`${imgInfo}`;
+
+			// if we have a width and height and more than 1 part and none of those parts have the same x/y coordinate (PICT_2021.pict) then we can recombine them
+			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1 && imgInfo.parts.length===imgInfo.parts.map(({x, y}) => `${x}x${y}`).unique().length)
 			{
 				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
 				await runUtil.run("convert", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);

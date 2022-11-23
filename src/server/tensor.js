@@ -8,8 +8,6 @@ export class tensor extends Server
 {
 	async start()
 	{
-		await Deno.mkdir("/mnt/dexvert/garbageDetected", {recursive : true});
-
 		const SRC_DIR = path.join(xu.dirname(import.meta), "../../tensor");
 		const WIP_DIR = TENSORSERV_PATH;
 

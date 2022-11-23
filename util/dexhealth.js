@@ -43,6 +43,4 @@ await instanceJSONFilePaths.parallelMap(async instanceJSONFilePath =>
 });
 
 await fileUtil.unlink(tmpSnapshotDirPath, {recursive : true});
-
-const garbageCount = (await fileUtil.tree("/mnt/dexvert/garbageDetected", {nodir : true}))?.length || 0;
-console.log(JSON.stringify({qemu, garbageCount}));
+console.log(JSON.stringify({qemu}));

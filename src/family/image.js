@@ -3,7 +3,6 @@ import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
 import {initDOMParser, DOMParser} from "denoLandX";
-import {path} from "std";
 import {programs} from "../program/programs.js";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
@@ -26,8 +25,6 @@ const MATCH_MAX_GARBAGE_PROBABILITIES =
 
 const UNSAFE_MAX_IMAGE_SIZE = 25000;
 const SKIP_TENSOR_MAX_IMAGE_SIZE = 6000;
-
-const GARBAGE_DETECTED_DIR_PATH = "/mnt/dexvert/garbageDetected";
 
 export class image extends Family
 {
@@ -113,11 +110,7 @@ export class image extends Family
 				throw new Error(`Got invalid garabge result for ${dexFile.pretty()} ${dexState.original.input.pretty()} ${garbage}`);
 
 			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
-			{
-				xlog.warn`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`;
-				await Deno.copyFile(dexFile.absolute, path.join(GARBAGE_DETECTED_DIR_PATH, `${garbage.noExponents()}-${Math.randomInt(1, 10000)}-${dexState.format.formatid}-${dexState.original.input.absolute.replaceAll("/", ":")}-${dexFile.rel.replaceAll("/", ":")}`));
-				return false;
-			}
+				return xlog.warn`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`, false;
 		}
 		else
 		{

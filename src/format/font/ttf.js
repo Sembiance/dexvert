@@ -7,5 +7,5 @@ export class ttf extends Format
 	ext          = [".ttf"];
 	magic        = ["TrueType Font", "TrueType Font data", /^x-fmt\/453( |$)/];
 	metaProvider = ["fc_scan"];
-	converters   = dexState => [`fontPreview[family:${dexState.meta.family}]`];
+	converters   = ["convert[format:TTF]"];
 }

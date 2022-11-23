@@ -7,5 +7,5 @@ export class otf extends Format
 	ext          = [".otf"];
 	magic        = [/^OpenType [Ff]ont/, /^fmt\/520( |$)/];
 	metaProvider = ["fc_scan"];
-	converters   = dexState => [`fontPreview[family:${dexState.meta.family}]`];
+	converters   = ["convert[format:OTF]"];
 }

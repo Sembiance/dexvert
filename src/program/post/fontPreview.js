@@ -11,6 +11,12 @@ export class fontPreview extends Program
 	};
 	args    = async r =>
 	{
+		if(!r.flags.family)
+		{
+			r.xlog.warn`No font family specified for fontPreview for file: ${r.originalInput.base}`;
+			return ["--verb=FileQuit"];
+		}
+
 		r.svgPreviewFilePath = await fileUtil.genTempPath(r.f.root, ".svg");
 
 		await fileUtil.writeTextFile(r.svgPreviewFilePath, `<svg xmlns="http://www.w3.org/2000/svg" version="1.1">

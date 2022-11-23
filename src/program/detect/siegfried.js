@@ -11,7 +11,7 @@ const WARNINGS_ALLOW = ["extension mismatch", "match on text only"];
 export class siegfried extends Program
 {
 	website = "https://github.com/richardlehane/siegfried";
-	package = "app-arch/siegfried";
+	package = "app-arch/siegfried-bin";
 	loc     = "local";
 	exec    = async r =>
 	{

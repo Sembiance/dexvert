@@ -20,8 +20,8 @@ export class csv extends Format
 			return {};
 
 		const m = {};
-		const csvResult = await csvParse(await fileUtil.readTextFile(inputFile.absolute));
-		if(csvResult && csvResult.length>0)
+		const csvResult = await xu.tryFallbackAsync(async () => await csvParse(await fileUtil.readTextFile(inputFile.absolute)));
+		if(csvResult?.length)
 			m.entryCount = csvResult.length;
 
 		return m;

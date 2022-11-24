@@ -33,4 +33,4 @@ for(const line of stderr.split("\n"))
 	filenames.add(filename);
 }
 
-await Array.from(filenames).parallelMap(async filename => await runUtil.run("sldtoppm", ["-lib", filename, argv.inputFilePath], {stdoutEncoding : "binary", stdoutFilePath : path.join(argv.outputDirPath, `${filename}.ppm`)}));
+await Array.from(filenames).parallelMap(async filename => await runUtil.run("sldtoppm", ["-Lib", filename, argv.inputFilePath], {stdoutEncoding : "binary", stdoutFilePath : path.join(argv.outputDirPath, `${filename}.ppm`)}));

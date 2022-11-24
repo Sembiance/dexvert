@@ -7,6 +7,7 @@ import {xmlParse} from "denoLandX";
 export class svgInfo extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
+	package = "media-libs/resvg";
 	exec    = async r =>
 	{
 		try

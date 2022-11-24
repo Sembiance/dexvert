@@ -5,7 +5,7 @@ import {runUtil} from "xutil";
 export class deDynamicSVG extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
-	package = "app-text/xmlstarlet";
+	package = ["app-text/xmlstarlet", "net-libs/nodejs"];	// nodejs is for svgo
 	unsafe  = true;
 	flags   = {
 		autoCrop : "Set this flag to also auto crop the SVG using inkscape"
@@ -31,7 +31,7 @@ export class deDynamicSVG extends Program
 		// Don't optimize huge SVG files (like image/svg/grandcan.svg) because it will just run almost forever
 		const {size} = await Deno.lstat(outFilePath);
 		if(size<xu.MB*3)
-			await runUtil.run("svgo", ["--multipass", "--final-newline", outFilePath], RUN_OPTIONS);
+			await runUtil.run(Program.binPath("svgo/node_modules/.bin/svgo"), ["--multipass", "--final-newline", outFilePath], RUN_OPTIONS);
 	};
 	renameOut = true;
 }

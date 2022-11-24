@@ -30,8 +30,9 @@ export class tensor extends Server
 		}
 
 		this.xlog.info`Running tensor server docker...`;
-		const tensorDockerTag = Deno.hostname()==="crystalsummit" ? "tensorflow/tensorflow" : "tensorflow/tensorflow:latest-gpu";
-		const tensorGPUArgs = Deno.hostname()==="crystalsummit" ? [] : ["--gpus", "all"];
+		const hasGPU = ["lostcrag", "chatsubo"].includes(Deno.hostname());
+		const tensorDockerTag = hasGPU ? "tensorflow/tensorflow:latest-gpu" : "tensorflow/tensorflow";
+		const tensorGPUArgs = hasGPU ? ["--gpus", "all"] : [];
 		const dockerArgs = ["run", "--name", "dexvert-tensor", ...tensorGPUArgs, "--rm", "-p", `${TENSORSERV_HOST}:${TENSORSERV_PORT}:${TENSORSERV_PORT}`, "-v", `${WIP_DIR}:${WIP_DIR}`, "-w", WIP_DIR, tensorDockerTag, "./tensorServer.sh"];
 		await runUtil.run("docker", dockerArgs, {verbose : true, detached : true, stdoutcb : line => this.xlog.info`${line}`, stderrcb : line => this.xlog.warn`${line}`, cwd : WIP_DIR});
 	}

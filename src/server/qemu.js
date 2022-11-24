@@ -22,7 +22,7 @@ const OS_DEFAULT =
 	hdOpts       : ",if=ide"
 };
 
-const qty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
+const qty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, (Deno.hostname().startsWith("slim") ? maxQty*0.5 : ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty)))));
 const OS =
 {
 	win2k    : { qty : qty(16), ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },

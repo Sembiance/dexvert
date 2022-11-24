@@ -116,6 +116,7 @@ const FLEX_SIZE_FORMATS =
 		pes              : 0.1,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
+		theDraw          : 0.1,
 		windowsClipboard : 0.1,
 
 		// takes a screenshot or a framegrab which can differ slightly on each run
@@ -249,7 +250,7 @@ const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*5;
 const slowFiles = {};
-const DATA_FILE_PATH = path.join("/mnt/dexvert/test", `${Deno.hostname()}.json`);
+const DATA_FILE_PATH = "/mnt/dexvert/testExpected.json";
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
 const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
 const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.format] : []));

@@ -7,5 +7,5 @@ export class unautoCADSlideLibrary extends Program
 	args       = r => Program.denoArgs(Program.binPath("unautoCADSlideLibrary.js"), "--", r.inFile(), r.outDir());
 	runOptions = ({env : Program.denoEnv()});
 	renameOut  = false;
-	chain      = "dexvert[asFormat:image/ppm]";
+	chain      = "convert";
 }

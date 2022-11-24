@@ -11,18 +11,13 @@
   http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
   Then add that converter as an option to all formats that it supports
 
-* Get archive/autoCADSlideLibrary fixed so it always extracts all files.
-  Even a bash script (when run in parellel) only seems to get some of the files sometimes and others other times
-  Maybe best to get a list of each sub file and then use xwork to extract each one. Should work?
-  Alternative::
-  Using sample/archive/autoCADSlideLibrary/DHELP.SLB file, create a serial bash script and run that a bunch and see if that works
-  Then if not, try adding some sleeps in-between.
-  If stil not working, uhm... no idea? Guess just give up.
-
 * See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
   https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
   Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
 
+* See if I could handle extraction of TEXT data better from certain director files:
+  http://discmaster.textfiles.com/view/4274/CD-Rom%20now%20n.21.iso/director/stones.dir/00025_Field_25.txt
+  If I improve it, reply here: https://discord.com/channels/350407629849493504/1033065501984817252/1044841211090960424
 
 /---------------\
 | High Priority |

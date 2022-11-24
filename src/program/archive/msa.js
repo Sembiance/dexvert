@@ -9,5 +9,5 @@ export class msa extends Program
 	cwd           = r => r.outDir();
 	mirrorInToCWD = true;
 	renameOut     = true;
-	chain         = "uniso[checkMount]";
+	chain         = "uniso";
 }

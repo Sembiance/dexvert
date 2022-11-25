@@ -31,7 +31,7 @@ export class acx extends Program
 						
 			return [parts.filename.toLowerCase(), dateParse(`${parts.day}.${parts.month}.${parts.year} 00:00:00`, "dd.MM.yyyy HH:mm:ss")];
 		}).filter(v => !!v));
-		
+
 		for(const outputFile of r.f.files.new || [])
 		{
 			let filename = outputFile.base.toLowerCase();
@@ -41,7 +41,7 @@ export class acx extends Program
 			if(!Object.hasOwn(fileDates, filename))	// we don't log a warning because non-ProDOS disks don't have dates
 				continue;
 
-			outputFile.setTS(fileDates[filename].getTime());
+			await outputFile.setTS(fileDates[filename].getTime());
 		}
 	};
 }

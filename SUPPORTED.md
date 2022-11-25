@@ -1,4 +1,4 @@
-# Supported File Formats (1,389)
+# Supported File Formats (1,388)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -271,7 +271,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (190)
+## Document (189)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -351,7 +351,6 @@ document | IBM Writing Assistant |  | [strings](https://www.gnu.org/software/bin
 document | IFF DOC Desktop Publishing |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/iffDOCDesktopPublishing/)
 document | IFF Formatted Text | .iff .ftxt | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [10 sample files](https://telparia.com/fileFormatSamples/document/iffFormattedText/)
 document | InfoFile Database File | .flr | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://telparia.com/fileFormatSamples/document/infoFile/) - Very obscure amiga database program.
-document | InstallShield Compiled Script | .inx | [SID](https://github.com/tylerapplebaum/setupinxhacking) | [10 sample files](https://telparia.com/fileFormatSamples/document/installShieldCompiledScript/)
 document | ITS International Module | .int | [strings](https://www.gnu.org/software/binutils/) | [7 sample files](https://telparia.com/fileFormatSamples/document/itsInternational/)
 document | KAMAS Outline | .kam | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/kamasOutline/)
 document | [LaTeX Document](http://fileformats.archiveteam.org/wiki/LaTeX) | .tex .ltx | [latex2html](https://www.latex2html.org/) [latex2pdf](http://latex2rtf.sourceforge.net/) [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/document/latex/) - Images don't seem to work at all. Hrm. At least the text seems to make it out, which is good enough for later indexing.

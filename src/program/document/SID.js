@@ -46,9 +46,9 @@ export class SID extends Program
 
 				ClipPut("")
 				Send("^a")
-				Sleep(50)
+				Sleep(${xu.SECOND*10})
 				Send("^c")
-				WaitForClipChange(${xu.SECOND})
+				WaitForClipChange(${xu.SECOND*5})
 				FileWrite("c:\\out\\out.txt", ClipGet())
 
 				Sleep(500)
@@ -58,11 +58,12 @@ export class SID extends Program
 				Sleep(100)
 				
 				WinWaitClose("[sid] sexy installshield decompiler", "", 10)
-			EndIf`
+			EndIf
+			
+			Sleep(1000)`
 	});
 
 	// If our output is exactly 166 bytes and contains the word 'Error' then something went wrong
-	verify = async (r, dexFile) => dexFile.size!==166 || !(await fileUtil.readTextFile(dexFile.absolute)).includes("Error");
-
+	verify    = async (r, dexFile) => dexFile.size!==166 || !(await fileUtil.readTextFile(dexFile.absolute)).includes("Error");
 	renameOut = true;
 }

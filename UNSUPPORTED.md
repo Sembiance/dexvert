@@ -1,4 +1,4 @@
-# Unsupported File Formats (857)
+# Unsupported File Formats (858)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -99,7 +99,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (42)
+## Document (43)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -124,6 +124,7 @@ document | [Greenstreet Publisher Document/Snippet](http://fileformats.archivete
 document | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://telparia.com/fileFormatSamples/document/hancomWord/)
 document | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://telparia.com/fileFormatSamples/document/hotHelpText/)
 document | I.E.S. HyperText | .hyp | [6 sample files](https://telparia.com/fileFormatSamples/document/iesHyperText/)
+document | InstallShield Compiled Script | .inx | [10 sample files](https://telparia.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
 document | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
 document | InterSpread Spreadsheet |  | 
 document | Lotus Symphony Worksheet | .wk1 wr1 | 

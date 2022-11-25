@@ -1,4 +1,4 @@
-/* eslint-disable camelcase, prefer-named-capture-group, unicorn/better-regex, sonarjs/no-empty-collection */
+/* eslint-disable camelcase, prefer-named-capture-group, unicorn/better-regex, sonarjs/no-empty-collection, max-len */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -87,7 +87,7 @@ const FLEX_SIZE_FORMATS =
 		swfEXE : 5,
 
 		// the PBMs generated are different each time
-		hypercard : 0.1,
+		hypercard : 0.2,
 
 		// different PDF each time
 		tnef : 0.1
@@ -129,8 +129,8 @@ const FLEX_SIZE_FORMATS =
 	{
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
-		fantavision : 25,
-		grasp       : 40
+		fantavision : 60,
+		grasp       : 60
 	}
 };
 
@@ -422,25 +422,27 @@ async function testSample(sampleFilePath)
 
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
+	
+	const converterMismatch = prevData.converter!==result.converter ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
 
 	if(result.family && result.family!==diskFamily && !allowFamilyMismatch)
-		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}`);
+		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}${converterMismatch}`);
 
 	if(result.format && result.format!==diskFormat && !allowFormatMismatch)
-		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}`);
+		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}${converterMismatch}`);
 
 	if(prevData.files && !result.files)
-		return await fail(`Expected to have ${fg.yellow(Object.keys(prevData.files).length)} files but found ${fg.yellow(0)} instead`);
+		return await fail(`Expected to have ${fg.yellow(Object.keys(prevData.files).length)} files but found ${fg.yellow(0)} instead${converterMismatch}`);
 
 	if(!prevData.files && result.files)
-		return await fail(`Expected to have ${fg.yellow(0)} files but found ${fg.yellow(Object.keys(result.files).length)} instead`);
+		return await fail(`Expected to have ${fg.yellow(0)} files but found ${fg.yellow(Object.keys(result.files).length)} instead${converterMismatch}`);
 
 	if(result.files)
 	{
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
 		const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
-			return await fail(`Created files are different: ${diffFiles}`);
+			return await fail(`Created files are different: ${diffFiles}${converterMismatch}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0));
@@ -460,10 +462,10 @@ async function testSample(sampleFilePath)
 
 			const allowedFileSizeDiff = Math.max(FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff, allowedSizeDiff);
 			if(sizeDiff!==0 && sizeDiff>allowedFileSizeDiff)
-				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}`);
+				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}${converterMismatch}`);
 
 			if(allowedFileSizeDiff===0 && prevFile.sum!==sum)
-				return await fail(`Created file ${fg.peach(name)} SHA1 sum differs!`);
+				return await fail(`Created file ${fg.peach(name)} SHA1 sum differs, but file is the expected size.${converterMismatch}`);
 		}
 
 		// Now check timestamps
@@ -476,23 +478,23 @@ async function testSample(sampleFilePath)
 			const tsDate = new Date(ts);
 			const prevDate = typeof prevFile.ts==="string" ? dateParse(prevFile.ts, "yyyy-MM-dd") : new Date(prevFile.ts || Date.now());
 			if(tsDate.getFullYear()<2020 && prevDate.getFullYear()>=2020)
-				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
+				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}${converterMismatch}`);
 
 			if(prevDate.getFullYear()<2020 && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY)
-				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}`);
+				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}${converterMismatch}`);
 		}
 	}
 
 	if(prevData.family && result.family!==prevData.family)
-		return await fail(`Expected to have family ${fg.orange(prevData.family)} but got ${result.family}`);
+		return await fail(`Expected to have family ${fg.orange(prevData.family)} but got ${result.family}${converterMismatch}`);
 
 	if(prevData.format && result.format!==prevData.format && !allowFormatMismatch)
-		return await fail(`Expected to have format ${fg.orange(prevData.format)} but got ${result.format}`);
+		return await fail(`Expected to have format ${fg.orange(prevData.format)} but got ${result.format}${converterMismatch}`);
 
 	if(prevData.meta)
 	{
 		if(!result.meta)
-			return fail(`Expected to have meta ${xu.inspect(prevData.meta).squeeze()} but have none`);
+			return fail(`Expected to have meta ${xu.inspect(prevData.meta).squeeze()} but have none${converterMismatch}`);
 
 		const objDiff = diffUtil.diff(prevData.meta, result.meta);
 		if(objDiff.length>0)
@@ -500,7 +502,7 @@ async function testSample(sampleFilePath)
 	}
 	else if(result.meta && Object.keys(result.meta).length>0)
 	{
-		return fail(`Expected no meta but got ${xu.inspect(result.meta).squeeze()} instead`);
+		return fail(`Expected no meta but got ${xu.inspect(result.meta).squeeze()} instead${converterMismatch}`);
 	}
 
 	if(prevData.converter && !result.converter)
@@ -509,13 +511,13 @@ async function testSample(sampleFilePath)
 	if(!prevData.converter && result.converter)
 		return await fail(`Expected no converter but instead got ${fg.orange(result.converter)}`);
 
-	if(prevData.converter!==result.converter)
-		return await fail(`Expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}`);
+	if(converterMismatch?.length)
+		return await fail(converterMismatch);
 
 	return await pass(fg.white("·"));
 }
 
-await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency);
+await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency*0.80);	// don't be tempted to increase this higher as you end up starving out CPU from QEMU or other processes and get unexpected failures
 
 xlog.info``;	// gets us out of the period stdoud section onto a new line
 
@@ -642,7 +644,7 @@ await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"])
 
 xlog.info`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
 
-xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;	// eslint-disable-line max-len
+xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;
 
 if(Object.keys(slowFiles).length>0)
 {

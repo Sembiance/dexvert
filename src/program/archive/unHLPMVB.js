@@ -3,7 +3,8 @@ import {Program} from "../../Program.js";
 
 export class unHLPMVB extends Program
 {
-	website    = "https://github.com/Sembiance/dexvert";
+	website = "https://github.com/Sembiance/dexvert";
+	package = ["app-arch/helpdeco", "media-libs/resvg"];
 	flags   = {
 		extractExtra : "Set to true to also extract any other non-referenced embedded files"
 	};

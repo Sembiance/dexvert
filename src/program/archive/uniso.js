@@ -4,6 +4,7 @@ import {Program, RUNTIME} from "../../Program.js";
 export class uniso extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
+	package = "sys-fs/hfsutils";
 	flags   = {
 		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
 		block      : "Specify the block size in bytes",

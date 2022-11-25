@@ -15,7 +15,7 @@ function flexMatch(value, matcher, fullStringMatch)
 export {flexMatch};
 
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
-const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "rom", "other"];
+const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "other"];
 
 export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 {

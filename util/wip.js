@@ -11,6 +11,6 @@ import {programs} from "../src/program/programs.js";
 
 const xlog = new XLog("info");
 
-console.log(await encodeUtil.decode(await Deno.readFile(Deno.args[0]), "MACINTOSH"));
+await fileUtil.writeTextFile("/tmp/test.txt", await encodeUtil.decode(await Deno.readFile(Deno.args[0]), "MACINTOSH"));
 //console.log(await encodeUtil.decode(await Deno.readFile(Deno.args[0]), "MACINTOSHJP"));
 //console.log(await encodeUtil.decodeMacintosh({data : await Deno.readFile(Deno.args[0]), region : "japan", preserveWhitespace : true}));

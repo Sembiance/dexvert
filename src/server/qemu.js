@@ -41,7 +41,7 @@ const INSTANCES = {};
 const RUN_QUEUE = new Set();
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 const CHECK_QUEUE_INTERVAL = 50;
-const CHECK_QUEUE_TOO_LONG = xu.MINUTE*5;
+const CHECK_QUEUE_TOO_LONG = xu.MINUTE*10;
 
 function prelog(instance)
 {
@@ -220,7 +220,7 @@ export class qemu extends Server
 		instance.p = p;
 		cb().then(async r =>
 		{
-			this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : `${r}`}`;
+			this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : JSON.stringify(r)}`;
 			if(!this.stopping && !startingFromStop)
 				await this.stopOS(instance);
 			instance.ready = false;

@@ -51,6 +51,9 @@ export class vinetto extends Program
 	};
 	post = async r =>
 	{
+		if(!r.filenameMap)
+			return;
+			
 		await Object.entries(r.filenameMap).parallelMap(async ([filename, fileInfo]) =>
 		{
 			const outputFile = r.f.files.new.find(file => file.base===filename);

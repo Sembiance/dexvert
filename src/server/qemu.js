@@ -74,7 +74,7 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.xlog.info`${prelog(instance)} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.debug`${prelog(instance)} is waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the INPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
 
@@ -93,7 +93,7 @@ export class qemu extends Server
 			if(totalFilesSize>=DELAY_SIZE)
 			{
 				const timeToWait = Math.floor(totalFilesSize/DELAY_SIZE)*DELAY_AMOUNT;
-				this.xlog.info`${prelog(instance)} waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
+				this.xlog.debug`${prelog(instance)} waiting ${timeToWait/xu.SECOND} seconds for the mount to fully see the OUPUT files due to their large size ${totalFilesSize.bytesToSize()}`;
 				await delay(timeToWait);
 			}
 
@@ -211,7 +211,7 @@ export class qemu extends Server
 
 		await delay(Math.randomInt(xu.SECOND, xu.SECOND*5));
 
-		this.xlog.info`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
+		this.xlog.debug`Launching ${osid} #${instanceid}: qemu-system-${OS[osid].arch} ${xu.inspect(qemuArgs).squeeze()} and options ${xu.inspect(qemuRunOptions).squeeze()}`;
 
 		instance.qemuRunOptions = qemuRunOptions;
 		instance.qemuArgs = qemuArgs;
@@ -220,7 +220,7 @@ export class qemu extends Server
 		instance.p = p;
 		cb().then(async r =>
 		{
-			this.xlog[this.stopping ? "info" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : `${r}`}`;
+			this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : `${r}`}`;
 			if(!this.stopping && !startingFromStop)
 				await this.stopOS(instance);
 			instance.ready = false;
@@ -237,10 +237,10 @@ export class qemu extends Server
 	// Called when the QEMU has fully booted and is ready to received files
 	async readyOS(instance)
 	{
-		this.xlog.info`${prelog(instance)} declared itself ready!`;
+		this.xlog.debug`${prelog(instance)} declared itself ready!`;
 		if(instance.inOutType==="mount")
 		{
-			this.xlog.info`${instance.osid} #${instance.instanceid} mounting in/out...`;
+			this.xlog.debug`${instance.osid} #${instance.instanceid} mounting in/out...`;
 			const mountArgs = ["-t", "cifs", "-o", `user=dexvert,pass=dexvert,port=${instance.inOutHostPort},vers=1.0,sec=ntlm,gid=1000,uid=7777`];
 			for(const v of ["in", "out"])
 			{
@@ -259,12 +259,12 @@ export class qemu extends Server
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
-		this.xlog.info`${prelog(instance)} run with cmd ${body.cmd} and file ${(body.inFilePaths || [])[0]}`;
+		this.xlog.debug`${prelog(instance)} run with cmd ${body.cmd} and file ${(body.inFilePaths || [])[0]}`;
 		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
 
 		let inOutErr = null;
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-		this.xlog.info`${prelog(instance)} finished request (${RUN_QUEUE.size} queued)`;
+		this.xlog.debug`${prelog(instance)} finished request (${RUN_QUEUE.size} queued)`;
 		instance.busy = false;
 
 		if(inOutErr)
@@ -340,15 +340,15 @@ export class qemu extends Server
 		{
 			const u = new URL(request.url);
 			const body = Object.fromEntries(["osid", "ip"].map(k => ([k, u.searchParams.get(k)])));
-			this.xlog.info`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
+			this.xlog.debug`Got qemuReady request from ${fg.peach(body.osid)}${fg.cyan("@")}${fg.yellow(body.ip)}`;
 			await this.readyOS(Object.values(INSTANCES[body.osid]).find(v => v.ip===body.ip));
 			return new Response("ok");
-		});
+		}, {logCheck : () => false});
 		
 		this.webServer.add("/qemuRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.xlog.info`Got qemuRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
+			this.xlog.debug`Got qemuRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
 			RUN_QUEUE.add({body, request, reply});
 		}, {detached : true, method : "POST", logCheck : () => false});
 		
@@ -422,15 +422,15 @@ export class qemu extends Server
 
 	async stopOS(instance)
 	{
-		this.xlog.info`${prelog(instance)} stopping...`;
+		this.xlog.debug`${prelog(instance)} stopping...`;
 		if(instance.inOutType==="mount")
 		{
-			this.xlog.info`${prelog(instance)} unmounting in/out...`;
+			this.xlog.debug`${prelog(instance)} unmounting in/out...`;
 			for(const v of ["in", "out"])
 				await runUtil.run("sudo", ["umount", "-lf", path.join(instance.dirPath, v)], {timeout : xu.SECOND*20});
 		}
 
-		this.xlog.info`${prelog(instance)} killing qemu child process...`;
+		this.xlog.debug`${prelog(instance)} killing qemu child process...`;
 		if(instance.p)
 			await runUtil.kill(instance.p, "SIGKILL").catch(() => {});
 	}

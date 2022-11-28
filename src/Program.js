@@ -216,6 +216,13 @@ export class Program
 
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
 
+				if(newFile.size>xu.GB)
+				{
+					xlog.warn`Deleting a file produced by ${fg.orange(this.programid)} that is ${newFile.size.bytesToSize()} as it exceeds the arbitrary 1GB size sanity check limit: ${fg.green(newFileRel)}`;
+					await fileUtil.unlink(newFilePath);
+					return;
+				}
+
 				// If we are a symlink, we need to make sure we are not pointing outside of our directory
 				if(newFile.isSymlink)
 				{

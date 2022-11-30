@@ -26,7 +26,7 @@ const xlog = new XLog(argv.logLevel);
 if(argv.rebuild)
 	await runUtil.run("./build", ["programs", "formats"], {cwd : path.join(xu.dirname(import.meta), "..", "..", "build"), liveOutput : true});
 
-const {identify} = await import(`../identify.js?v=${xu.randStr()}`);
+const {identify} = await import(`../identify.js`);
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)

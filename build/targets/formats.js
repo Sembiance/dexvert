@@ -64,7 +64,7 @@ const formats = {};
 ${relPaths.map(([familyid, formatid, relPath]) => `import {${formatid}} from "./${relPath}";\nformats.${formatid} = ${formatid}.create(families.${familyid});`).join("\n")}
 
 // process our 'unsupported.js' formats
-const {default : unsupported} = await import(\`./unsupported.js?v=$\{xu.randStr()}\`);
+const {default : unsupported} = await import("./unsupported.js");
 for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 {
 	for(const [formatid, o] of Object.entries(unsupportedFormats))
@@ -95,7 +95,7 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 }
 
 // process our 'simple.js' formats
-const {default : simple} = await import(\`./simple.js?v=$\{xu.randStr()}\`);
+const {default : simple} = await import("./simple.js");
 for(const [familyid, simpleFormats] of Object.entries(simple))
 {
 	for(const [formatid, o] of Object.entries(simpleFormats))
@@ -125,13 +125,6 @@ for(const [familyid, simpleFormats] of Object.entries(simple))
 		});
 		formats[formatid].formatid = formatid;
 	}
-}
-
-export async function reload()
-{
-	const {formats : newFormats} = await import(\`./formats.js?v=$\{xu.randStr()}\`);
-	Object.clear(formats);
-	Object.assign(formats, newFormats);
 }
 
 export {formats};

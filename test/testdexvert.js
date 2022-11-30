@@ -100,7 +100,7 @@ const FLEX_SIZE_FORMATS =
 		wordDoc    : 80,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
-		"*:.pdf" : 2,
+		"*:.pdf" : 3,
 
 		// HTML generation can change easily too
 		"*:.html" : 1

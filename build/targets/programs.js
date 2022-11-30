@@ -45,13 +45,6 @@ import {xu} from "xu";
 const programs = {};
 ${relPaths.map(([programid, relPath]) => `import {${programid}} from "./${relPath}";\nprograms.${programid} = ${programid}.create(programs.${programid});`).join("\n")}
 
-export async function reload()
-{
-	const {programs : newPrograms} = await import(\`./programs.js?v=$\{xu.randStr()}\`);
-	Object.clear(programs);
-	Object.assign(programs, newPrograms);
-}
-
 export {programs};
 `);
 }

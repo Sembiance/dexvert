@@ -15,7 +15,7 @@ export class exe extends Format
 	{
 		// If we have meta from winedump and it's a DLL file, then delete the meta which will cause no converters to run
 		if((dexState.meta?.fileheader?.characteristics || []).includes("DLL"))
-			dexState.meta = {};
+			Object.clear(dexState.meta);
 	};
 
 	// We throw MSDOS/Win EXESs at deark and 7z which can often extract various embedded cursors, icons and images

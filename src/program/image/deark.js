@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {Program, RUNTIME} from "../../Program.js";
+import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
 
@@ -117,9 +117,38 @@ export class deark extends Program
 					await fileUtil.unlink(srcFilePath);
 				}
 
-				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", "-strip", "-define", "png:exclude-chunks=time", path.join(outDirPath, `${r.originalInput.name}.png`)]);
+				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
 			}
 		}
+
+		// now we may be left with certain image formats like .bmp, .pict, .tiff, etc.
+		// we used to wait until the end of the program and chained these to dexvert, but this took FOREVER
+		// the reason we chained is because some of these formats are not supported by imagemagick, so the full dexvert converter chain is needed
+		// but the vast majority will quickly convert with the first program each format is handled by
+		// so for 'some' formats we will do a quick conversion here, and then any we don't do or that don't work, the chain check at the end will take care of
+		// this introduces a 'slight' risk that some conversions that maybe fail but still prodce like a black image will be missed, but it's WAY worth it for the speed gain
+		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+		await fileOutputPaths.parallelMap(async fileOutputPath =>
+		{
+			const runOpts = {timeout : xu.MINUTE};
+			const ext = path.extname(fileOutputPath);
+			const pngFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
+			if([".bmp", ".jp2", ".tif", ".tiff"].includes(ext.toLowerCase()))
+				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
+			else if([".qtif"].includes(ext.toLowerCase()))
+				await runUtil.run("nconvert", ["-out", "png", "-o", pngFilePath, fileOutputPath], runOpts);
+			else
+				return;
+
+			if(await fileUtil.exists(pngFilePath))
+			{
+				const fileInfo = await Deno.lstat(fileOutputPath).catch(() => {});
+				if(fileInfo)
+					await Deno.utime(pngFilePath, Math.floor(fileInfo.mtime.getTime()/xu.SECOND), Math.floor(fileInfo.mtime.getTime()/xu.SECOND));
+				
+				await fileUtil.unlink(fileOutputPath);
+			}
+		}, 2);
 	};
 
 	// deark output names are an MINOR NIGHTMARE
@@ -160,14 +189,17 @@ export class deark extends Program
 	};
 
 	// image/icns/abydos.icns produces 5 output files, 3 PNG and 2 JP2 (JPEG200)
-	chain = "?dexvert";
-	chainCheck = (r, chainFile) =>
+	chain = "?resource_dasm -> ?dexvert";
+	chainCheck = (r, chainFile, programid) =>
 	{
 		// very hacky, but this one file BINDDLL.DLL appears on almost every shareware CD and it has 43 BMP files embedded in it
 		// unfortunately each BMP file is just 'static' garbage, and according to deark this is just how they actually are in the file: https://github.com/jsummers/deark/issues/55
 		// and because we have a wide number of programs we try to convert BMP output, this one DLL file can take like 2 hours to process. So we just skip converting any BMP files from this DLL :)
 		if(["binddll.dll"].includes(r.originalInput?.base?.toLowerCase()))
 			return false;
+
+		if(programid==="resource_dasm")
+			return chainFile.ext.toLowerCase()===".rsrc";
 
 		const chainFormat =
 		{

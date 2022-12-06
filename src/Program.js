@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, sysUtil} from "xutil";
 import {path} from "std";
 import {validateClass, validateObject} from "validator";
 import {RunState} from "./RunState.js";
@@ -25,6 +25,9 @@ export function clearRuntime()
 	Object.clear(RUNTIME.globalFlags);
 	RUNTIME.forbidProgram.clear();
 }
+
+const CONVERT_PNG_ARGS = ["-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time"];
+export {CONVERT_PNG_ARGS};
 
 export class Program
 {
@@ -486,17 +489,25 @@ export class Program
 					}
 					else
 					{
-						// we used to parallelMap these, but that can cause a system to lock up with too many parallel processes
 						if(newFiles.length>100)
 							xlog.warn`Program ${r.programid} is chaining ${newFiles.length.toLocaleString()} files to ${progRaw}. This may take some time...`;
 
-						for(const newFile of newFiles)
+						// we used to chain tons in parallel, but that can cause a system to lock up with too many parallel processes
+						let chainAtOnce = 1;
+						if(newFiles.length>5)
+						{
+							const idleUsage = await sysUtil.getCPUIdleUsage();
+							chainAtOnce = Math.max(1, Math.floor(idleUsage.scale(0, 100, 1, navigator.hardwareConcurrency*0.50)));
+							xlog.info`Chaining >5 files with an idleUsage of ${idleUsage}%, so we will chain ${chainAtOnce} at a time`;
+						}
+
+						await newFiles.parallelMap(async newFile =>
 						{
 							// if chain starts with a question mark ? then we need to have a truthy response from chainCheck() in order to proceed with chaining this file
 							const {programid : chainProgramid} = Program.parseProgram(progRaw.substring(1));
 							const chainProgFlags = progRaw.startsWith("?") ? await this.chainCheck(r, newFile, chainProgramid) : {};
 							if(!chainProgFlags)
-								continue;
+								return;
 
 							const chainProgOpts = {...baseChainProgOpts};
 							if(Object.isObject(chainProgFlags))
@@ -504,7 +515,7 @@ export class Program
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
-						}
+						}, chainAtOnce);
 					}
 				}
 

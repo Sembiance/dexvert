@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {Program} from "../../Program.js";
+import {Program, CONVERT_PNG_ARGS} from "../../Program.js";
 import {fileUtil, runUtil, hashUtil} from "xutil";
 import {path} from "std";
 
@@ -24,7 +24,7 @@ export class hypercard_dasm extends Program
 		await bmpFilePaths.parallelMap(async bmpFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
-			await runUtil.run("convert", [bmpFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});
+			await runUtil.run("convert", [bmpFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 			{
 				await fileUtil.unlink(bmpFilePath);

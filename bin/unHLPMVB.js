@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
+import {CONVERT_PNG_ARGS} from "../src/Program.js";
 import {path} from "std";
 import {XLog} from "xlog";
 
@@ -103,7 +104,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 				if(importExt===".bmp")
 				{
 					const outPngFilePath = await fileUtil.genTempPath(convertDirPath, ".png");
-					await runUtil.run("convert", [importFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", outPngFilePath], {timeout : xu.MINUTE*2});
+					await runUtil.run("convert", [importFilePath, ...CONVERT_PNG_ARGS, outPngFilePath], {timeout : xu.MINUTE*2});
 					
 					if(await fileUtil.exists(outPngFilePath))
 					{

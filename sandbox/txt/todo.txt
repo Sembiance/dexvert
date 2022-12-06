@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Update to latest resource_dasm and then check to see if this file: test/sample/archive/rsrc/DiskGuardian.rsrc
+  Still produces some 'text' output. Should look like: ~/tmp/goodOut
+
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
 

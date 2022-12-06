@@ -1,5 +1,6 @@
+/* eslint-disable prefer-named-capture-group, max-len */
 import {xu} from "xu";
-import {Program, RUNTIME} from "../../Program.js";
+import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {fileUtil, encodeUtil, runUtil} from "xutil";
 import {path} from "std";
 
@@ -7,13 +8,13 @@ const FONT_SPRITE_COLS = 40;
 
 export class resource_dasm extends Program
 {
-	website    = "https://github.com/fuzziqersoftware/resource_dasm";
-	package    = "app-arch/resource-dasm";
-	bin        = "resource_dasm";
-	args       = r => ["--data-fork", r.inFile(), r.outDir()];
-	runOptions = ({timeout : xu.MINUTE*10, killChildren : true});	// resource_dasm calls picttoppm which can hang (see sample archive/rsrc/Extend Demo ReadMe.rsrc)
+	website = "https://github.com/fuzziqersoftware/resource_dasm";
+	package = "app-arch/resource-dasm";
+	bin     = "resource_dasm";
+	args    = r => ["--skip-external-decoders", "--image-format=png", "--data-fork", r.inFile(), r.outDir()];
 
 	// If need to understand some resource types better: https://whitefiles.org/mac/pgs/t02.htm
+	// Also: https://github.com/fuzziqersoftware/resource_dasm/blob/master/README.md
 	postExec = async r =>
 	{
 		const outDirPath = r.outDir({absolute : true});
@@ -26,7 +27,7 @@ export class resource_dasm extends Program
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const filename = path.basename(fileOutputPath);
-			const newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args[1]).length+1));
+			const newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args.at(-2)).length+1));
 			await Deno.rename(fileOutputPath, newFileOutputPath);
 			return newFileOutputPath;
 		});
@@ -49,9 +50,21 @@ export class resource_dasm extends Program
 		});
 
 		// some file types are not interesting, delete them
-		for(const type of ["CODE"])
+		const removeRegexes =
+		[
+			// Just code dumps
+			...["ADBS", "adio", "AINI", "atlk", "boot", "CDEF", "cdek", "cdev", "cfrg", "citt", "clok", "cmtb", "cmu!", "CODE", "code", "dcmp", "dcod", "dem ", "dimg", "drvr", "DRVR", "enet", "epch", "expt", "FKEY", "fovr", "gcko", "gdef", "GDEF", "gnld", "INIT", "krnl", "LDEF", "lmgr", "lodr", "ltlk", "MBDF", "MDEF", "mntr", "ncmp", "ndlc", "ndmc", "ndrv", "nift", "nitt", "nlib", "nsnd", "nsrd", "ntrb", "osl ", "otdr", "otlm", "PACK", "pnll", "ppct", "proc", "PTCH", "ptch", "pthg", "qtcm", "ROvr", "RSSC", "scal", "scod", "SERD", "sfvr", "shal", "sift", "SMOD", "snth", "tdig", "tokn", "vdig", "wart", "WDEF", "XCMD", "XFCN"].map(v => new RegExp(`^${v}_.+\\.txt$`)),
+
+			// Just font information, kerning, etc, not particularly useful
+			/^FONT_.+_description\.txt$/,
+
+			// Usually a .png is produced as well
+			/^(actb|cctb|clut|dctb|fctb|pltt|wctb)_.+\.(act|bin)$/,
+			/^(icl[48]|ICN#|ics[48#])_.+\.icns$/
+		];
+		for(const regex of removeRegexes)
 		{
-			const typeFilePaths = fileOutputPaths.filter(v => path.basename(v).startsWith(`${type}_`) && v.endsWith(".txt"));
+			const typeFilePaths = fileOutputPaths.filter(v => regex.test(path.basename(v)));
 			if(!typeFilePaths.length)
 				continue;
 
@@ -80,8 +93,39 @@ export class resource_dasm extends Program
 			}
 		}
 
+		// icons that have a merged composite, delete the other versions
+		const filePathsToRemove = new Set();
+		const filePathsToAdd = [];
+		await fileOutputPaths.filter(v => v.includes("_composite.")).parallelMap(async compositeFilePath =>
+		{
+			const iconPrefix = path.basename(compositeFilePath).split("_composite.")[0].replace(/^(?<code>\w{4})_(?<num>-?\d+)_.+$/, "$1_$2");
+			for(const filePath of fileOutputPaths)
+			{
+				const filename = path.basename(filePath);
+				if(!filename.includes("_composite.") && filename.startsWith(iconPrefix))
+					filePathsToRemove.add(filePath);
+			}
+
+			const newFilePath = compositeFilePath.replace("_composite.", ".");
+			await Deno.rename(compositeFilePath, newFilePath);
+			fileOutputPaths.removeOnce(compositeFilePath);
+			filePathsToAdd.push(newFilePath);
+		});
+		fileOutputPaths.push(...filePathsToAdd);
+		await Array.from(filePathsToRemove.values()).parallelMap(async filePath =>
+		{
+			await fileUtil.unlink(filePath);
+			fileOutputPaths.removeOnce(filePath);
+		});
+
 		// some images, like font glyphs, PAT#, etc should be be combined together into a single image file
-		for(const regex of [/^(?<code>\w{4})_(?<num>-?\d+)_.*glyph_\w+\.bmp$/, /^(?<code>PAT#)_(?<num>-?\d+)_.+\.bmp$/])
+		const combineRegexes =
+		[
+			/^(?<code>\w{4})_(?<num>-?\d+)_.*glyph_\w+\.png$/,
+			/^(?<code>icns|ic[ms][48#])_(?<num>-?\d+)_.+\.png$/,
+			/^(?<code>(PAT#|SICN))_(?<num>-?\d+)_.+\.png$/
+		];
+		for(const regex of combineRegexes)
 		{
 			const subImages = {};
 			for(const fileOutputPath of fileOutputPaths)
@@ -137,10 +181,11 @@ export class resource_dasm extends Program
 		});
 
 		// all .bmp files, just quick convert using imagemagick. resources can have a ton of BMP files, this saves a lot of time further down the line and reduces duplication
+		// no teven sure this is needed anymore as more recent resource_dasm generates PNG files, but I leave this here just in case
 		await fileOutputPaths.filter(v => v.endsWith(".bmp")).parallelMap(async bmpFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
-			await runUtil.run("convert", [bmpFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});
+			await runUtil.run("convert", [bmpFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 			{
 				await fileUtil.unlink(bmpFilePath);

@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {Program} from "../../Program.js";
+import {Program, CONVERT_PNG_ARGS} from "../../Program.js";
 import {path} from "std";
 import {fileUtil, runUtil} from "xutil";
 
@@ -79,7 +79,7 @@ export class stackimport extends Program
 		await otherPBMFilePaths.parallelMap(async imageFilePath =>
 		{
 			const pngFilePath = path.join(outDirPath, `${path.basename(imageFilePath, ".pbm")}.png`);
-			await runUtil.run("convert", [imageFilePath, "-strip", "-define", "filename:literal=true", "-define", "png:exclude-chunks=time", pngFilePath], {timeout : xu.MINUTE});
+			await runUtil.run("convert", [imageFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 				await fileUtil.unlink(imageFilePath);
 		}, 2);

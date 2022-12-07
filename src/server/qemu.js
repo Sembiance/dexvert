@@ -382,7 +382,7 @@ export class qemu extends Server
 			this.xlog.debug`Got qemuDONE from IP ${ipAddress}`;
 			await fileUtil.unlink(path.join(HTTP_IN_DIR_PATH, `${ipAddress}.lha`), {recursive : true});
 			reply(new Response("", {status : 200}));
-		}, {detached : true, method : "GET"});
+		}, {detached : true, method : "GET", logCheck : () => false});
 
 		await this.webServer.start();
 

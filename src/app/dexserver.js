@@ -93,9 +93,6 @@ async function stopDexserver(sig)
 		catch {}
 		xlog.info`Server ${fg.peach(serverid)} stopped.`;
 	}
-	
-	xlog.info`Cleaning up dexvert temp files...`;
-	await runUtil.run(path.join(xu.dirname(import.meta), "..", "..", "bin", "cleanupTmp.sh"));
 
 	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
 	xlog.info`Exiting...`;

@@ -135,7 +135,7 @@ export class iso extends Format
 		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first (unless our osHint says Macintosh) then fall back to HFS side
 		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
 		const macHinted = RUNTIME.globalFlags?.osHint?.macintosh || RUNTIME.globalFlags?.osHint?.macintoshjp;
-		const hfsConverters = [...((dexState.meta?.iso?.isISO && !macHinted) ? ["uniso", "uniso[hfs]"] : ["uniso[hfs]", "uniso"]), "uniso[block:512]", "fuseiso", "unar"];
+		const hfsConverters = [...((dexState.meta?.iso?.isISO && !macHinted) ? ["uniso", "uniso[hfsplus]", "uniso[hfs]"] : ["uniso[hfsplus]", "uniso[hfs]", "uniso"]), "uniso[block:512]", "fuseiso", "unar"];
 
 		const unisoConverters = RUNTIME.globalFlags?.osHint?.nextstep ? ["uniso[nextstep]", "uniso"] : ["uniso"];
 

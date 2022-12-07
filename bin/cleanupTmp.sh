@@ -5,7 +5,7 @@
 
 cd /tmp || exit
 rm -f .X*lock
-rm -rf cxf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip*
+rm -rf cxf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* magick* server*.xkm ./*openraster __autograph*
 umount .mount_ink*
 rm -rf .mount_ink*
 

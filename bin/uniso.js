@@ -10,6 +10,7 @@ const argv = cmdUtil.cmdInit({
 		offset      : {desc : "If set, mount at the given offset", hasValue : true},
 		block       : {desc : "If set, specify a given block size for the ISO image.", hasValue : true},
 		hfs         : {desc : "If set, CD will be treated as HFS MAC cd"},
+		hfsplus     : {desc : "If set, CD will be treated as HFS+ MAC cd"},
 		nextstep    : {desc : "If set, CD will be treated as NeXTSTEP cd"},
 		ts          : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
 		macEncoding : {desc : "Specify the Mac encoding to decode HFS filenames. Valid: roman | japan", hasValue : true, defaultValue : "roman"},
@@ -34,6 +35,8 @@ async function extractNormalISO()
 		mountArgs.push("-o", `loop${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
 	if(argv.nextstep)
 		mountArgs.push("-t", "ufs", "-o", "ufstype=nextstep-cd");
+	if(argv.hfsplus)
+		mountArgs.push("-t", "hfsplus");
 
 	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH]);
 

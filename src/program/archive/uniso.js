@@ -9,6 +9,7 @@ export class uniso extends Program
 		offset     : "Extract ISO starting at this particular byte offset. Default: 0",
 		block      : "Specify the block size in bytes",
 		hfs        : "Set this to true to process the iso as a MacOS HFS disc. Default: false",
+		hfsplus    : "Set this to true to process the iso as a MacOS HFS+ disc. Default: false",
 		nextstep   : "Set this to true to process the iso as a NeXTSTEP disc. Default: false",
 		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
@@ -25,6 +26,8 @@ export class uniso extends Program
 			a.push("--hfs");
 			a.push(`--macEncoding=${RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"}`);
 		}
+		if(r.flags.hfsplus)
+			a.push("--hfsplus");
 		if(r.flags.nextstep)
 			a.push("--nextstep");
 		if(r.flags.checkMount)

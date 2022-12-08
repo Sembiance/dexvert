@@ -69,6 +69,7 @@ export default
 		novellHelpLibrarian      : {name : "Novell Help Librarian", ext : [".hlp"], magic : ["Novell Help Librarian Data"]},
 		oberonDocument           : {name : "Oberon Document", ext : [".odc"], magic : ["Oberon/F Document"]},
 		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"]},
+		orgPlus                  : {name : "OrgPlus", ext : [".opx", ".ops"], magic : ["OrgPlus Organization Chart", /^fmt\/1457( |$)/]},
 		os2Message               : {name : "OS/2 Message File", ext : [".msg"], magic : [/^OS\/2 help [Mm]essage/], website : "http://fileformats.archiveteam.org/wiki/MSG_(OS/2)"},
 		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro"]},
 		pageSetter               : {name : "PageSetter Document", ext : [".ps"], magic : [/^PageSetter I{0,3} ?document/]},

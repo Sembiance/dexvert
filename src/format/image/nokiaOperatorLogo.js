@@ -7,4 +7,5 @@ export class nokiaOperatorLogo extends Format
 	ext        = [".nol"];
 	magic      = ["Nokia Operator Logo bitmap"];
 	converters = ["deark", "nconvert"];
+	verify     = ({meta}) => meta.width<5000 && meta.height<5000;
 }

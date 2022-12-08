@@ -1,26 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update to latest resource_dasm and then check to see if this file: test/sample/archive/rsrc/DiskGuardian.rsrc
-  Still produces some 'text' output. Should look like: ~/tmp/goodOut
 
-* Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
-  Could convert a known RAW diskImage format into another and then use that to help dexid
-
-* Add image converter support (oiiotool/iconvert) for all formats supprted by: https://github.com/OpenImageIO/oiio
-
-* Get AARU support working: https://github.com/aaru-dps/Aaru
-  http://discmaster.textfiles.com/view/4313/Disc%20Dump/CD32_11.aaruf
-  http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
-  Then add that converter as an option to all formats that it supports
-
-* See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
-  https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
-  Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
-
-* See if I could handle extraction of TEXT data better from certain director files:
-  http://discmaster.textfiles.com/view/4274/CD-Rom%20now%20n.21.iso/director/stones.dir/00025_Field_25.txt
-  If I improve it, reply here: https://discord.com/channels/350407629849493504/1033065501984817252/1044841211090960424
 
 /---------------\
 | High Priority |
@@ -44,6 +25,19 @@
   Then process some of those files.
 
 * Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
+
+* Get AARU support working: https://github.com/aaru-dps/Aaru
+  http://discmaster.textfiles.com/view/4313/Disc%20Dump/CD32_11.aaruf
+  http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
+  Then add that converter as an option to all formats that it supports
+
+* See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
+  https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
+  Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
+
+* See if I could handle extraction of TEXT data better from certain director files:
+  http://discmaster.textfiles.com/view/4274/CD-Rom%20now%20n.21.iso/director/stones.dir/00025_Field_25.txt
+  If I improve it, reply here: https://discord.com/channels/350407629849493504/1033065501984817252/1044841211090960424
 
 
 /-----------------\
@@ -99,7 +93,12 @@
 /--------------\
 | Low Priority |
 \--------------/
-* Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+* Add image converter support (oiiotool/iconvert) for all formats supprted by: https://github.com/OpenImageIO/oiio
+
+* Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
+  Could convert a known RAW diskImage format into another and then use that to help dexid
+* 
+Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
   Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
   From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 

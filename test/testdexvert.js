@@ -442,7 +442,7 @@ async function testSample(sampleFilePath)
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
 		const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
-			return await fail(`Created files are different: ${diffFiles}${converterMismatch}`);
+			return await fail(`Created files are different: ${diffFiles.innerTruncate(4000)}${converterMismatch}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0));

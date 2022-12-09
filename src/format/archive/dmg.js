@@ -1,5 +1,8 @@
 import {Format} from "../../Format.js";
 
+const _DMG_DISK_IMAGE_MAGIC = [/^fmt\/1071( |$)/];
+export {_DMG_DISK_IMAGE_MAGIC};
+
 export class dmg extends Format
 {
 	name       = "Apple Disk Image";
@@ -7,7 +10,7 @@ export class dmg extends Format
 	ext        = [".dmg"];
 	priority    = this.PRIORITY.LOW;
 	// for some reason, some DMG files identify as ZLIB data
-	magic      = ["zlib compressed data", "ZLIB compressed data", /^fmt\/1071( |$)/];
+	magic      = ["zlib compressed data", "ZLIB compressed data", ..._DMG_DISK_IMAGE_MAGIC];
 	weakMagic  = true;
 	converters = ["dmg2img"];
 }

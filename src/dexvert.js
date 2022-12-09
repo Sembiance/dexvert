@@ -192,100 +192,139 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 			// run any pre-converter pre format function
 			if(format.pre)
 				await format.pre(dexState);
-			
-			const converters = format.converters ? (Array.isArray(format.converters) ? format.converters : await format.converters(dexState)) : [];
-			xlog.info`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
 
-			// try each converter specificied, until we have output files or have been marked as processed
-			for(const converterRaw of (converters || []))
+			const tryProg = async function tryProg(prog, {isChain}={})
 			{
-				const converter = typeof converterRaw==="function" ? converterRaw(dexState) : converterRaw;
-				if(!converter)
-					continue;
-					
-				const progs = converter.split("&").map(v => v.trim());
-				for(const [i, prog] of Object.entries(progs))
+				const progProps = Program.parseProgram(prog);
+				if(RUNTIME.forbidProgram.has(progProps.programid))
+					return xlog.info`Skipping converter ${prog} due to being in forbidProgram`, false;
+
+				if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
+					return xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`, false;
+				
+				xlog.debug`Running converter ${prog}...`;
+
+				const flags = {};
+
+				// check to see if we are a packed format and we should set the program renameKeepFilename flag
+				if(format.packed)
 				{
-					const progProps = Program.parseProgram(prog);
-					if(RUNTIME.forbidProgram.has(progProps.programid))
-					{
-						xlog.info`Skipping converter ${prog} due to being in forbidProgram`;
-						continue;
-					}
-
-					if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
-					{
-						xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`;
-						continue;
-					}
-					
-					xlog.debug`Running converter ${prog}...`;
-
-					const flags = {};
-
-					// check to see if we are a packed format and we should set the program renameKeepFilename flag
-					if(format.packed)
-					{
-						if(!(format.ext || []).includes(inputFile.ext.toLowerCase()))
-							flags.renameKeepFilename = true;
-						else
-							flags.renameOut = true;
-					}
-
-					const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain : i>0, format, xlog, flags});
-					dexState.ran.push(r);
-
-					// if our program explicitly states we are now processed, mark our dexState as such
-					if(r.processed)
-						dexState.processed = true;
-
-					if(!skipVerify)
-						xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
-
-					// verify output files
-					await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
-					{
-						if(!skipVerify)
-						{
-							xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
-
-							const failValidation = async msg =>
-							{
-								xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
-								if(!xlog.atLeast("trace"))
-									await fileUtil.unlink(newFile.absolute);
-
-								return false;
-							};
-
-							// first, check family level validators
-							const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
-							if(extraValidatorData===false)
-								return failValidation(`family ${dexState.format.family.pretty()}`);
-
-							// if still valid, check format level validator
-							if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
-								return failValidation(`format ${format.pretty()}`);
-						}
-
-						// if a produced file is older than 2020, then we assume it's the proper date
-						if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
-							await newFile.setTS(inputFile.ts);	// otherwise ensure the newly produce file has a timestamp equal to the input file
-
-						await dexState.f.add("output", newFile);
-					});
-
-					dexState.f.removeType("new");
+					if(!(format.ext || []).includes(inputFile.ext.toLowerCase()))
+						flags.renameKeepFilename = true;
+					else
+						flags.renameOut = true;
 				}
 
-				xlog.info`Finished verifying files, yielded ${(dexState.f.files.output?.length || 0)} output files.`;
-				if((dexState.f.files.output?.length || 0)>0 || (format.processed && await format.processed(dexState)))
+				const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain, format, xlog, flags});
+				dexState.ran.push(r);
+
+				// if our program explicitly states we are now processed, mark our dexState as such
+				if(r.processed)
 					dexState.processed = true;
 
-				if(dexState.processed)
+				if(!skipVerify)
+					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
+
+				let producedNewFiles = false;
+
+				// verify output files
+				await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
 				{
-					dexState.phase.converter = converter;
-					break;
+					if(!skipVerify)
+					{
+						xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
+
+						const failValidation = async msg =>
+						{
+							xlog.warn`${newFile.pretty()} FAILED validation ${msg}`;
+							if(!xlog.atLeast("trace"))
+								await fileUtil.unlink(newFile.absolute);
+
+							return false;
+						};
+
+						// first, check family level validators
+						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
+						if(extraValidatorData===false)
+							return failValidation(`family ${dexState.format.family.pretty()}`);
+
+						// if still valid, check format level validator
+						if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
+							return failValidation(`format ${format.pretty()}`);
+					}
+
+					// if a produced file is older than 2020, then we assume it's the proper date
+					if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
+						await newFile.setTS(inputFile.ts);	// otherwise ensure the newly produce file has a timestamp equal to the input file
+
+					producedNewFiles = true;
+					await dexState.f.add("output", newFile);
+				});
+
+				if(producedNewFiles)
+					xlog.info`Finished verifying files, yielded ${(dexState.f.files.new?.length || 0)} new files.`;
+
+				dexState.f.removeType("new");
+
+				return producedNewFiles;
+			};
+
+			const converters = format.converters ? (Array.isArray(format.converters) ? format.converters : await format.converters(dexState)) : [];
+
+			const checkIfProcessed = async function checkIfProcessed(phaseConverter)
+			{
+				if((dexState.f.files.output?.length || 0)>0 || (format.processed && await format.processed(dexState)))
+					dexState.processed = true;
+				
+				if(dexState.processed && phaseConverter)
+					dexState.phase.converter = phaseConverter;
+
+				return dexState.processed;
+			};
+
+			if(converters.some(v => Array.isArray(v)))
+			{
+				// The 'new' approach (see archive/iso.js), an array of arrays
+				// In order, each array should be performaned (regardless of outcome of previous array). For each array, try each program in order, stopping if any produce new files
+				xlog.info`\nTrying ${fg.yellowDim(converters.length)} batches of ${format.formatid} converters...`;
+
+				const phaseConverters = [];
+				for(const [i, batchRaw] of Object.entries(converters))
+				{
+					const batch = typeof batchRaw==="function" ? batchRaw(dexState) : batchRaw;
+					xlog.info`\nTrying ${fg.yellowDim(batch.length)} converters in batch ${i}...`;
+
+					for(const converter of batch)
+					{
+						if(!await tryProg(converter))
+							continue;
+						
+						phaseConverters.push(converter);
+						break;
+					}
+				}
+
+				if(phaseConverters.length)
+					await checkIfProcessed(phaseConverters.join(" & "));
+			}
+			else
+			{
+				// The 'classic' approach and array of strings (or a function that returns a string)
+				// Each string is a program to run. Sometimes that string is two programs to both run like prog1 & prog2
+				xlog.info`\nTrying ${fg.yellowDim(converters.length)} ${format.formatid} converters...`;
+
+				for(const converterRaw of (converters || []))
+				{
+					const converter = typeof converterRaw==="function" ? converterRaw(dexState) : converterRaw;
+					if(!converter)
+						continue;
+						
+					const progs = converter.split("&").map(v => v.trim());
+					for(const [i, prog] of Object.entries(progs))
+						await tryProg(prog, {isChain : i>0});
+
+					if(await checkIfProcessed(converter))
+						break;
 				}
 			}
 

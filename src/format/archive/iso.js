@@ -1,7 +1,10 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
-import {Program, RUNTIME} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
+import {XLog} from "xlog";
+import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 
@@ -9,7 +12,7 @@ const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*App
 
 async function validCUEFile(dexState, cueFile)
 {
-	const cueInfoR = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog, autoUnlink : true});
+	const cueInfoR = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog.atLeast("debug") ? dexState.xlog : new XLog("none"), autoUnlink : true});
 	return (cueInfoR.meta?.files || []).filter(file => file.name).some(file => file.name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()));
 }
 
@@ -29,7 +32,7 @@ export class iso extends Format
 
 	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
 	weakMagic      = _MACBINARY_MAGIC;
-	forbiddenMagic = _NULL_BYTES_MAGIC;
+	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
@@ -119,37 +122,46 @@ export class iso extends Format
 		if(dexState.meta?.photocd?.photocd)
 			return ["fuseiso"];
 		
-		const FALLBACK_CONVERTERS =
-		[
-			"uniso[block:512]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
-			"fuseiso", "deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]", "IsoBuster[matchType:magic]",
-			"cabextract[matchType:magic]"	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
+		// We ASSUME that we'll never encounter a CD or disk that has a root level file/directory named: dexvert_nextstep, dexvert_mac, or dexvert_pc
+		return [
+			// We do a little trick here. We blindly try nextstep and hfsplus/hfs. These won't produce output files if the ISO isn't in that format
+			["uniso[nextstep]"].map(v => `${v}[subOutDir:dexvert_nextstep]`),
+			["uniso[hfsplus]", "uniso[hfs]"].map(v => `${v}[subOutDir:dexvert_mac]`),
+
+			subState =>
+			{
+				const r = [
+					"uniso"
+				];
+
+				// If we haven't't found any nextstep/hfsplus/hfs, then safe to try additional converters that may also handle those formats
+				// If it's a BIN/CUE, run bchunk
+				// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
+				// We try our regular uniso/fuseiso converters first though, because sometimes the cue file is pretty useless and using it can actually just cause problems
+				if(!subState.f.files?.output?.length && cueFile)
+					r.push(`bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`);
+
+				r.push(
+					"uniso[block:512]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
+					"fuseiso"
+				);
+
+				if(!subState.f.files?.output?.length)
+				{
+					r.push(
+						"deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]",
+						"IsoBuster[matchType:magic]"
+					);
+				}
+
+				r.push("cabextract[matchType:magic]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
+
+				if(dexState.original.input.ext.toLowerCase()===".iso")
+					r.push("unar[matchType:magic]"); 	// Magazine Rack.iso can only being extracted with unar, weird
+
+				return r.map(v => `${v}[subOutDir:dexvert_pc]`);
+			}
 		];
-
-		// CDs can be Mac HFS CDs, or even hybrid Mac/PC CDs that have both HFS and non-HFS tracks
-		// HFS isn't as ideal to extract due to all the resource forked files, so we prefer to extract the PC/ISO version if available
-		// So we only set the uniso 'hfs' flag if we have an HFS track and we do NOT detect a regular ISO-9660 track (which was checked with iso-info in meta call)
-		const {flexMatch} = await import("../../identify.js");	// need to import this dynamically to avoid circular dependency
-		const isHFS = dexState.ids.some(id => HFS_MAGICS.some(matchAgainst => flexMatch(id.magic, matchAgainst)));
-		
-		// Sometimes the PC side is present, but is empty/blank (Odyssey Legend of Nemesis) so if we detect isISO, we try PC side first (unless our osHint says Macintosh) then fall back to HFS side
-		// If isISO isn't set at all (Mac User Ultimate Mac Companion 1996.bin) then we just extract the hfs side
-		const macHinted = RUNTIME.globalFlags?.osHint?.macintosh || RUNTIME.globalFlags?.osHint?.macintoshjp;
-		const hfsConverters = [...((dexState.meta?.iso?.isISO && !macHinted) ? ["uniso", "uniso[hfsplus]", "uniso[hfs]"] : ["uniso[hfsplus]", "uniso[hfs]", "uniso"]), "uniso[block:512]", "fuseiso", "unar"];
-
-		const unisoConverters = RUNTIME.globalFlags?.osHint?.nextstep ? ["uniso[nextstep]", "uniso"] : ["uniso"];
-
-		// If it's a BIN/CUE, run bchunk
-		// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
-		// We try our regular converters first though, because sometimes the cue file is pretty useless
-		if(cueFile)
-			return [...(isHFS ? hfsConverters : unisoConverters), `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`, ...FALLBACK_CONVERTERS];
-
-		if(isHFS)
-			return hfsConverters;
-		
-		// Finally, we appear to have just a 'simple' iso file. So just use uniso and fallback on fuseiso
-		return [...unisoConverters, ...FALLBACK_CONVERTERS];
 	};
 
 	meta = async (inputFile, dexState) =>
@@ -179,5 +191,34 @@ export class iso extends Format
 
 		Object.assign(dexState.meta, meta);
 	};
-	post = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid, meta}) => programid==="uniso" && meta?.fileMeta)?.meta || {});
+	post = async dexState =>
+	{
+		Object.assign(dexState.meta, dexState.ran.find(({programid, meta}) => programid==="uniso" && meta?.fileMeta)?.meta || {});
+
+		// might produce up to 3 subdirectories. Delete any that are empty and if we have only 1 that has files then move those files up one level and delete the now empty subdirectory
+		const types = await ["dexvert_nextstep", "dexvert_mac", "dexvert_pc"].parallelMap(async typeid =>
+		{
+			const r = {typeid, dirPath : path.join(dexState.f.outDir.absolute, typeid)};
+			r.subPaths = await fileUtil.tree(r.dirPath, {depth : 1});
+			return r;
+		});
+
+		const positiveTypes = types.filter(({subPaths}) => subPaths.length>0);
+		for(const type of types)
+		{
+			if(type.subPaths.length===0)
+				await fileUtil.unlink(type.dirPath);
+			else if(positiveTypes.length>1)
+				await Deno.rename(type.dirPath, path.join(path.dirname(type.dirPath), type.typeid.replaceAll("dexvert_", "")));
+		}
+
+		// if we have only one positive type, we need to move all files/folders in that dir up one level
+		if(positiveTypes.length===1)
+		{
+			const type = positiveTypes[0];
+			for(const subPath of type.subPaths)
+				await Deno.rename(subPath, path.join(path.dirname(type.dirPath), path.basename(subPath)));
+			await fileUtil.unlink(type.dirPath);
+		}
+	};
 }

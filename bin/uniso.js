@@ -43,14 +43,9 @@ async function extractNormalISO()
 	const {stdout : mountStatus} = await runUtil.run("sudo", ["findmnt", "--output", "FSTYPE", "--noheadings", MOUNT_DIR_PATH]);
 
 	// Sometimes an ISO's ISO9660 side is corrupt and fails to mount, then mount falls back automatically to the hfs section if there is one
-	// Also, sometimes we can't detect ahead of time in dexvert that it is an HFS ISO, but when we mount it, we discover it is
-	// Either way, we want to use our special extractHFSISO() method for handling HFS ISOs, so we unmount it and use extractHFSISO instead
-	if(mountStatus.trim().toLowerCase()==="hfs")
-	{
-		await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
-		await extractHFSISO();
-		return;
-	}
+	// But we don't want to use mount's built in HFS support, we explicitly handle HFS vs non HFS at a higher level, so we abort the mission here
+	if(mountStatus.trim().toLowerCase().startsWith("hfs") && !argv.hfs && !argv.hfsplus)
+		return await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
 
 	if(argv.checkMount)
 	{

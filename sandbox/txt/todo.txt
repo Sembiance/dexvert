@@ -1,7 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything. For example: This doesn't extract right: http://discmaster.textfiles.com/browse/2673/250_TCF.iso
+Try these params: https://community.flexera.com/t5/InstallShield-Knowledge-Base/Installshield-Setup-exe-Command-Line-Parameters/ta-p/4270
+Also try loading up installshield itself and see if I can open them or something:
+https://archive.org/details/install-shield-6.2-pro-std.-7z
+https://archive.org/details/installshield1150premier
 
 /---------------\
 | High Priority |

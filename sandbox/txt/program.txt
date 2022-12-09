@@ -17,6 +17,7 @@ There are a few 'global' flags that can be specified for any program:
 	osHint					Can set various platforms like commodore:true in order to enable a slightly wider identification scope for matching and converting files
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename
 	renameOut				A way to override the renameOut of a program
+	subOutDir				Will cause all program output files to go in a newly created subdirectory
 
 >>> notes = "Blah blah"
 Additional notes about this program

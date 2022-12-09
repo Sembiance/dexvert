@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -617,6 +617,17 @@ export class Program
 			await f.add("homeDir", homeDirPath);
 		}
 
+		let originalOutDir = null;
+		if(flags.subOutDir)
+		{
+			originalOutDir = f.outDir.absolute;
+
+			const subOutDirPath = path.join(f.outDir.absolute, flags.subOutDir);
+			await Deno.mkdir(subOutDirPath, {recursive : true});
+			await f.removeType("outDir");
+			await f.add("outDir", subOutDirPath);
+		}
+
 		if(progOptions.outFile)
 			await f.add("outFile", progOptions.outFile);
 
@@ -666,6 +677,12 @@ export class Program
 
 		if(progOptions.autoUnlink && !(fRaw instanceof FileSet))
 			await programResult.unlinkHomeOut();
+		
+		if(originalOutDir)
+		{
+			await f.removeType("outDir");
+			await f.add("outDir", originalOutDir);
+		}
 
 		return programResult;
 	}

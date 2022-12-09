@@ -50,6 +50,8 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 				dexState.meta.yes = true;
 
 				converters = typeof f.converters==="function" ? await f.converters(dexState) : f.converters;
+				if(converters.some(v => Array.isArray(v)))
+					converters = converters.flatMap(converter => (typeof converter==="function" ? converter(dexState) : converter)).unique();
 				converters = converters.map(converter => (typeof converter==="function" ? converter(dexState) : converter));
 				converters = converters.map(converter => converter.split("->")[0].trim().split("[")[0].trim());	// get rid of chains
 				converters = converters.flatMap(converter => converter.split("&").map(v => v.trim())).unique();	// expand out those that call multiple programs at once and remove duplicates (image/fig (XFig) for example)

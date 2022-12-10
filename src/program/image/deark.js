@@ -133,8 +133,10 @@ export class deark extends Program
 			const runOpts = {timeout : xu.MINUTE};
 			const ext = path.extname(fileOutputPath);
 			const pngFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
-			if([".bmp", ".jp2", ".tif", ".tiff"].includes(ext.toLowerCase()))
+			if([".bmp", ".jp2"].includes(ext.toLowerCase()))
 				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
+			else if([".tif", ".tiff"].includes(ext.toLowerCase()))
+				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
 			else if([".qtif"].includes(ext.toLowerCase()))
 				await runUtil.run("nconvert", ["-out", "png", "-o", pngFilePath, fileOutputPath], runOpts);
 			else

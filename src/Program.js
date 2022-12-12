@@ -412,7 +412,7 @@ export class Program
 
 					const handleNewFiles = async (chainResult, inputFiles) =>
 					{
-						if(!chainResult || !chainResult.f.new)
+						if(!chainResult?.f?.new)
 						{
 							if(chainResult.processed)
 								r.processed = true;

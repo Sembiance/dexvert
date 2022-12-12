@@ -278,7 +278,7 @@ xlog.info`Testing ${sampleFilePaths.length} sample files...`;
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
-	if(!argv.format || !argv.format.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
+	if(!argv?.format?.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 
 	xlog.info`${fg.cyan("[") + xu.c.blink + fg.red("EXTRA") + fg.cyan("]")} file path detected: ${extraFilePath}`;
@@ -311,7 +311,7 @@ async function testSample(sampleFilePath)
 		dexvertArgs.push(`--asFormat=${diskFormatid}`);
 	dexvertArgs.push(sampleFilePath, tmpOutDirPath);
 
-	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*15, timeoutSignal : "SIGKILL", killChildren : true});
+	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*25, timeoutSignal : "SIGKILL", killChildren : true});
 	const resultFull = xu.parseJSON(r.stdout, {});
 
 	function handleComplete()

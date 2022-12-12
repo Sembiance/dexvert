@@ -41,7 +41,7 @@ if(argv.programFlag)
 
 		if(!Object.hasOwn(dexvertOptions.programFlag, programid))
 			dexvertOptions.programFlag[programid] = {};
-		dexvertOptions.programFlag[programid][flagKey] = (typeof flagValue==="undefined" ? true : flagValue);
+		dexvertOptions.programFlag[programid][flagKey] = (flagValue===undefined ? true : flagValue);
 	}
 }
 

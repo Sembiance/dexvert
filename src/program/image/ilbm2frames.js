@@ -16,7 +16,7 @@ export class ilbm2frames extends Program
 		const data = xu.parseJSON(r.stdout);
 		let keepFrames = true;
 		// check to see we have image data JSON. If we don't it's possible we segfaulted, but nothing I can do about that and the image was unlikely to have produced good frames anyways
-		if(!data || !data.imageCount || !data.images?.length || !data.images[0])
+		if(!data?.imageCount || !data.images?.length || !data.images[0])
 		{
 			keepFrames = false;
 		}

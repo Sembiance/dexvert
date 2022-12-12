@@ -28,7 +28,7 @@ export class abydosconvert extends Program
 			return true;
 		
 		const {meta : webpInfo} = await Program.runProgram("webpmuxInfo", dexFile, {xlog : r.xlog, autoUnlink : true});
-		if(!webpInfo || !webpInfo?.numberOfFrames || (webpInfo?.frameSizesUnique || []).length<=1)
+		if(!webpInfo?.numberOfFrames || (webpInfo?.frameSizesUnique || []).length<=1)
 			return false;
 
 		return true;

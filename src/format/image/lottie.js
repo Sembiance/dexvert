@@ -17,7 +17,7 @@ export class lottie extends Format
 	{
 		// Some lottie files include image assets
 		const parsed = xu.parseJSON(await fileUtil.readTextFile(inputFile.absolute), {});
-		if(!parsed || !parsed.assets)
+		if(!parsed?.assets)
 			return false;
 		
 		const a = [];

@@ -28,7 +28,7 @@ export class vcd_info extends Program
 			}
 
 			const props = (line.trimEnd().match(/^\s+(?<name>[^:]+):\s+(?<val>.+)$/) || {})?.groups;
-			if(!curHeader || !curHeader.endsWith("primary volume descriptor") || !props)
+			if(!curHeader?.endsWith("primary volume descriptor") || !props)
 				return;
 			
 			let propName = {"ID" : "id", "ISO size" : "isoSize"}[props.name] || props.name.toCamelCase().replaceAll(" ", "").trim();

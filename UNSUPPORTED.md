@@ -1,4 +1,4 @@
-# Unsupported File Formats (858)
+# Unsupported File Formats (860)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -853,7 +853,7 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (34)
+## Poly (36)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -866,6 +866,7 @@ poly | Create+Shade 3D Scene | .3d |
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)
 poly | DynaCADD Part | .prt .dpt | 
+poly | Electric Image 3D File | .fact | 
 poly | ESRI/ArcView Shape | .shp | 
 poly | Half Life Model | .mdl | [12 sample files](https://telparia.com/fileFormatSamples/poly/halfLifeModel/)
 poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://telparia.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
@@ -890,6 +891,7 @@ poly | Simply 3D Geometry | .ged |
 poly | SuperScape Virtual Reality | .svr | 
 poly | Vertex Binary 3D Object | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
+poly | Virtus VR Scene | .vvr | 
 
 
 

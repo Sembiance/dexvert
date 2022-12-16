@@ -13,6 +13,7 @@ const DEXMAGIC_CHECKS =
 	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
 
 	// archive
+	"ActiveMime (Base64 Encoded)"           : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"                    : [{offset : 0, match : "Anna-Marie"}],
 	"Anna-Marie Archive (alt)"              : [{offset : -160, match : "Anna-Marie"}],
 	"HTTP Response"                         : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],

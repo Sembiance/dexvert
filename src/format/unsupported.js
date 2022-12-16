@@ -182,6 +182,7 @@ export default
 		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
+		electricImage3DFile     : {name : "Electric Image 3D File", ext : [".fact"], magic : ["ElectricImage 3D file"]},
 		halfLifeModel           : {name : "Half Life Model", ext : [".mdl"], magic : ["Half-life Model"]},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
@@ -190,7 +191,8 @@ export default
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
 		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},
-		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]}
+		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]},
+		virtusVRScene           : {name : "Virtus VR Scene", ext : [".vvr"], magic : ["Virtus VR scene"]}
 	},
 
 	video :

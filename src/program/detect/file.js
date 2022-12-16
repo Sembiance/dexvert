@@ -26,7 +26,7 @@ export class file extends Program
 				continue;
 			}
 
-			if(line.startsWith(" ") || [", ", "], ", "), ", "(", "; "].some(v => line.trim().startsWith(v)) || fileMatch.trim().endsWith("["))
+			if(line.startsWith(" ") || [", ", "], ", "), ", "(", "; "].some(v => line.trim().startsWith(v)) || fileMatch.trim().endsWith("[") || line==="]")
 			{
 				fileMatch += line;
 				continue;

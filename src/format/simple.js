@@ -153,6 +153,7 @@ export default
 		ibmPCOverlay                    : {name : "IBM PC Overlay", ext : [".ovl"], magic : ["IBM PC Overlay"]},
 		iBrowseCookies                  : {name : "iBrowse Cookies", filename : ["Cookies"], magic : ["IBrowse Cookies"]},
 		iffCTLG                         : {name : "Amiga IFF Catalog", ext : [".catalog"], magic : ["IFF data, CTLG message catalog", "Amiga Catalog translation format"], website : "http://fileformats.archiveteam.org/wiki/IFF"},
+		innoSetupLog                    : {name : "Inno Setup Log", ext : [".dat"], magic : ["Inno Setup Uninstall Log", "InnoSetup Log"]},
 		installShieldPackage            : {name : "InstallShield Package", ext : [".pkg"], magic : ["InstallShield compiled setup Package"]},
 		installShieldScript             : {name : "InstallShield Script", ext : [".ins"], magic : ["InstallShield Script"]},
 		jamMessageAreaHeaderFile        : {name : "JAM Message Area Header File", ext : [".jhr"], magic : ["JAM message area header file"], weakMagic : true},

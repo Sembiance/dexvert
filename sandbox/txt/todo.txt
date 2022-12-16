@@ -102,7 +102,7 @@ https://archive.org/details/installshield1150premier
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
 * 
-Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
   Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
   From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 

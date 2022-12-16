@@ -227,6 +227,7 @@ export const WEAK_VALUES =
 	/^XENIX 8086 relocatable/,
 	/^x86 OpenFirmware FORTH Dictionary/,
 	/^xBase index/,
+	/^xBase, root pointer/,
 	/^YAC archive data/,
 	/^Zebra Metafile graphic/,
 
@@ -341,6 +342,7 @@ export const WEAK_VALUES =
 	/^Leonard Guides compiled data$/,
 	/^Lepton bitmap/,
 	/^Lepton UJG bitmap$/,
+	/^LinkWay data$/,
 	/^LLVM Bitcode \(generic\)$/,
 	/^Lotus Manuscript bitmap$/,
 	/^LTAC compressed audio/,
@@ -539,7 +541,8 @@ export const WEAK_VALUES =
 	/^Windows Icon/,
 	/^Xerox EDMICS-MMR bitmap$/,
 
-	// TRID: Weak in some other way, such as commonly used word prefix/global string or ascending/descending bytes
+	// TRID: Weak in some other way, such as commonly used word prefix/global/chars string or ascending/descending bytes
+	/^4th Dimension database$/,
 	/^A-10 Tank Killer game data archive$/,
 	/^AceMoney data$/,
 	/^Adobe FilmStrip$/,
@@ -550,6 +553,7 @@ export const WEAK_VALUES =
 	/^Chasys Draw IES convolution Matrix$/,
 	/^Chasys Draw IES Gradient$/,
 	/^Chasys Draw IES metadata$/,
+	/^Colin McRae Rally 2 game data archive$/,
 	/^COM\+ catalog file$/,	// Most matches to this are probably correct, but it's a near worthless file so just ignore it
 	/^Dan Bricklin's Demo/,
 	/^Dave 2 Huffman compressed game data$/,
@@ -567,6 +571,7 @@ export const WEAK_VALUES =
 	/^LEGO Mindstorms EV3 brick executable code$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
+	/^Mariner Write Document$/,
 	/^MegaZeux game$/,
 	/^Midtown Madness 2 game data archive$/,
 	/^Music Macro Language$/,

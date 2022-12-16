@@ -46,6 +46,9 @@ export default async function buildFormats(xlog)
 				throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
 		}
 
+		if(Object.hasOwn(format, "forbidExtMatch") && !Object.hasOwn(format, "ext"))
+			xlog.error`format ${formatid} has forbidExtMatch, but no ext`;
+
 		formats[formatid] = format;
 		existingFormatids.add(formatid.toLowerCase());
 		relPaths.push([familyid, formatid, path.relative(formatDirPath, formatFilePath)]);

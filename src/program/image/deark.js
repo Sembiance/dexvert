@@ -18,14 +18,15 @@ export class deark extends Program
 	website = "https://entropymine.com/deark/";
 	package = "app-arch/deark";
 	flags   = {
-		"mac"         : "Set this flag to treat the files extracted as mac files and rename them",
-		"module"      : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
-		"charOutType" : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
-		"opt"         : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
-		"noThumbs"    : "Don't extract any thumb files found",
-		"recombine"   : "Try to recombine multiple output images back into a single output image",
-		"start"       : "Start processing with deark at a specific byte offset",
-		"file2"       : "An extra file that can be used by deark module to get the correct palette or image names"
+		"mac"           : "Set this flag to treat the files extracted as mac files and rename them",
+		"module"        : "Which deark module to forcibly set. For list run `deark -modules` Default: Let deark decide",
+		"charOutType"   : "Which type of output to use when converting character based files. Can be \"image\" or \"html\" Default: Let deark decide.",
+		"opt"           : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
+		"noThumbs"      : "Don't extract any thumb files found",
+		"recombine"     : "Try to recombine multiple output images back into a single output image",
+		"alwaysConvert" : "Always convert output files using convert[removeAlpha]",
+		"start"         : "Start processing with deark at a specific byte offset",
+		"file2"         : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
 	bruteFlags = { archive : {}, executable : {}, document : {}, font : { charOutType : "image" }, video : {} };
 
@@ -139,6 +140,8 @@ export class deark extends Program
 				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
 			else if([".qtif"].includes(ext.toLowerCase()))
 				await runUtil.run("nconvert", ["-out", "png", "-o", pngFilePath, fileOutputPath], runOpts);
+			else if(r.flags.alwaysConvert)
+				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
 			else
 				return;
 

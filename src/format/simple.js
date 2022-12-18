@@ -100,6 +100,7 @@ export default
 		textPlus                 : {name : "Text Plus Document", ext : [".txp"], magic : ["Text Plus document"]},
 		theWorksSpreadsheet      : {name : "The Works! Spreadsheet", ext : [".sht"], magic : ["The Works! Spreadsheet"]},
 		twistDB                  : {name : "Twist Database file", ext : [".db"], magic : ["Twist DataBase"]},
+		usefulNotesNote          : {name : "Useful Notes Note", ext : [".uno"], magic : ["Useful Notes Note"], weakMagic : true},
 		vendInfoDataRecord       : {name : "VENDINFO Data Record", magic : ["VENDINFO data record"]},
 		vgaPaint386Help          : {name : "VGAPaint 386 Help", ext : [".hlp"], magic : ["VGAPaint 386 Help"]},
 		vipPhonebook             : {name : "V.I.P. Phonebook", ext : [".dat"], magic : ["V.I.P. phonebook data"]},

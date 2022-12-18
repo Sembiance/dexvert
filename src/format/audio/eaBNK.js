@@ -7,5 +7,5 @@ export class eaBNK extends Format
 	ext            = [".bnk"];
 	forbidExtMatch = true;
 	magic          = ["EA BNK Audio"];
-	converters     = ["vgmstream"];
+	converters     = ["vgmstream[extractAll]"];
 }

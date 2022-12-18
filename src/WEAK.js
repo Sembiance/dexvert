@@ -357,6 +357,7 @@ export const WEAK_VALUES =
 	/^MegaZeux world data/,
 	/^Melco embroidery design$/,
 	/^Microsoft Help \(old\)$/,
+	/^Microsoft Web query$/,
 	/^Mini Office II SpreadSheet$/,
 	/^MosASCII Project Workspace$/,
 	/^Mozart functor$/,

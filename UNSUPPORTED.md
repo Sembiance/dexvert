@@ -1,4 +1,4 @@
-# Unsupported File Formats (860)
+# Unsupported File Formats (862)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -425,7 +425,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (422)
+## Other (424)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -648,6 +648,7 @@ other | Mach-O m68k Object | .o |
 other | Mach-O Object | .o | 
 other | Mach-O SPARC Object | .o | 
 other | Macromedia Xtra Cache | .mch | 
+other | Maestro Music |  | 
 other | MagiC64 Preferences | .prefs | 
 other | MapBrowser/MapWriter Vector Map Data | cbd | 
 other | Maple Common Binary | .m | 
@@ -707,6 +708,7 @@ other | OS/2 Dynamic Link Library | .dll |
 other | OS/2 Extended File Attributes |  | 
 other | OS9/68k Module |  | 
 other | PA-RISC Object Code | .o | 
+other | Painter's Apprentice Printer Info | .pri | 
 other | PaperPort Slide Show | .fss | 
 other | Papillon Palette | .pal .ppal | 
 other | Pascal Compiled Unit | .tpu .ppu | 

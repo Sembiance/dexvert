@@ -86,6 +86,7 @@ https://archive.org/details/installshield1150premier
 	http://www.virtualacorn.co.uk/product.htm  (only runs on Windows)
  http://www.riscos.com/shop/products/106/index.htm  
 	Reprocess:
+	  #10632
 	  Acorn Replay videos (#625 CineClips) http://discmaster.textfiles.com/browse/625
 	  ArtWorks ClipArt 1
   	Will want to find CineWorks application and probably stick to version 3.x of RiscOS: https://www.riscosopen.org/forum/forums/5/topics/248?page=2
@@ -114,7 +115,7 @@ Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-* Consider updating IsoBuster to 5.0 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
+* Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
 * Japanese visual novels have a variety of archive formats, many supported by this program: https://github.com/morkt/GARbro

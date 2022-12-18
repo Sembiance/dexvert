@@ -6,5 +6,5 @@ export class os2BootLogo extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/OS/2_Boot_Logo";
 	ext        = [".lgo"];
 	converters = ["deark[module:os2bootlogo]"];
-	verify     = ({meta}) => meta.colorCount>1;
+	verify     = ({meta}) => meta.colorCount>2;
 }

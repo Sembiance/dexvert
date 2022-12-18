@@ -6,4 +6,5 @@ export class mrgSystemsText extends Format
 	ext        = [".tti"];
 	mimeType   = "text/x.teletext.tti";
 	converters = [`abydosconvert[format:${this.mimeType}]`];
+	verify     = ({meta}) => meta.colorCount>2;
 }

@@ -131,7 +131,7 @@ export class iso extends Format
 			subState =>
 			{
 				const r = [
-					"uniso"
+					"uniso[checkMount]"		// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 				];
 
 				// If we haven't't found any nextstep/hfsplus/hfs, then safe to try additional converters that may also handle those formats
@@ -142,12 +142,15 @@ export class iso extends Format
 					r.push(`bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`);
 
 				r.push(
-					"uniso[block:512]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
+					"uniso[block:512][checkMount]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
 					"fuseiso"
 				);
 
 				if(!subState.f.files?.output?.length)
 				{
+					if(dexState.original.input.ext.toLowerCase()===".iso")
+						r.push("unar[matchType:magic]"); 	// Magazine Rack.iso can only being extracted with unar, weird
+
 					r.push(
 						"deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]",
 						"IsoBuster[matchType:magic]"
@@ -155,9 +158,8 @@ export class iso extends Format
 				}
 
 				r.push("cabextract[matchType:magic]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
-
-				if(dexState.original.input.ext.toLowerCase()===".iso")
-					r.push("unar[matchType:magic]"); 	// Magazine Rack.iso can only being extracted with unar, weird
+				
+				r.push("uniso", "uniso[block:512]");	// Fall back to uniso even with read/write errors
 
 				return r.map(v => `${v}[subOutDir:dexvert_pc]`);
 			}

@@ -30,7 +30,7 @@ export class fig2dev extends Program
 				return v;
 			
 			// Did try just modifying the object and then doing xmlStringify() below when saving the file, sadly the xml module is not reliable, especially when stringifying, it failed to produce the same output
-			svgFileData = svgFileData.replaceAll(xlinkHref, `data:image;base64,${base64Encode(await fileUtil.readFile(filePath))}`);
+			svgFileData = svgFileData.replaceAll(xlinkHref, `data:image;base64,${base64Encode(await Deno.readFile(filePath))}`);
 
 			return v;
 		});

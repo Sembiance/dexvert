@@ -1,11 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything. For example: This doesn't extract right: http://discmaster.textfiles.com/browse/2673/250_TCF.iso
-Try these params: https://community.flexera.com/t5/InstallShield-Knowledge-Base/Installshield-Setup-exe-Command-Line-Parameters/ta-p/4270
-Also try loading up installshield itself and see if I can open them or something:
-https://archive.org/details/install-shield-6.2-pro-std.-7z
-https://archive.org/details/installshield1150premier
 
 /---------------\
 | High Priority |
@@ -54,6 +49,12 @@ https://archive.org/details/installshield1150premier
   Once it can view pictures, see about how I can convert into PNG, maybe with: https://aminet.net/package/gfx/conv/gfxcon
   Also see if I can add IFF YAFA support
   If either of the above fails, then add to Low Priorty: Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
+
+* InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything. For example: This doesn't extract right: http://discmaster.textfiles.com/browse/2673/250_TCF.iso
+Try these params: https://community.flexera.com/t5/InstallShield-Knowledge-Base/Installshield-Setup-exe-Command-Line-Parameters/ta-p/4270
+Also try loading up installshield itself and see if I can open them or something:
+https://archive.org/details/install-shield-6.2-pro-std.-7z
+https://archive.org/details/installshield1150premier
 
 * Find a converter/decompiler for applesoft BASIC. Maybe I can use: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
 

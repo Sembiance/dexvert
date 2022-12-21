@@ -13,6 +13,10 @@ export class vgmstream extends Program
 	renameOut  = {
 		alwaysRename : true,
 		regex        : /out_(?<num>\d+)\.wav$/,
-		renamer      : [({newName}, {num}) => [newName, "_", num, ".wav"]]
+		renamer      :
+		[
+			({newName}) => [newName, ".wav"],
+			({newName}, {num}) => [newName, "_", num, ".wav"]
+		]
 	};
 }

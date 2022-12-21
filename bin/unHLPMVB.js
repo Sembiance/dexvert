@@ -49,7 +49,7 @@ const NON_FILENAMES =
 ];
 const NON_FILENAME_SUFFIXES = ["wbtree", "wdata", "wmap", "kwbtree", "kwdata", "kwmap", ".gid", ".grp", ".tbl"];
 
-const {stdout : fileListRaw} = await runUtil.run("helpdeco", ["-d", inputFilePath], {timeout : xu.MINUTE});
+const {stdout : fileListRaw} = await runUtil.run("helpdeco", ["-d", inputFilePath], {timeout : xu.MINUTE, timeoutSignal : "SIGKILL"});
 for(const fileListLine of fileListRaw.split("\n"))
 {
 	const {filename1, filename2} = fileListLine.trim().match(/^\|?(?<filename1>\S+)\s+\S+\s\|\s\|?(?<filename2>\S+)\s+\S+$/)?.groups || {};
@@ -61,7 +61,7 @@ for(const fileListLine of fileListRaw.split("\n"))
 }
 
 // now let's try creating an RTF, doesn't always work
-await runUtil.run("helpdeco", ["-r", "-y", inputFilePath], {cwd : tmpDirPath, timeout : xu.MINUTE*4});
+await runUtil.run("helpdeco", ["-r", "-y", inputFilePath], {cwd : tmpDirPath, timeout : xu.MINUTE*4, timeoutSignal : "SIGKILL"});
 
 const cachedPNGData = {};
 const rtfFilePath = (await fileUtil.tree(tmpDirPath, {nodir : true, regex : /\.rtf$/i}))?.[0];	// we assume only 1 RTF file output, hopefully no MVB's embed actual RTF files in baggage
@@ -93,7 +93,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 						return rtfPNG(BROKEN_IMAGE_PNG_HEX);
 					}
 
-					await runUtil.run("helpdeco", [inputFilePath, availableFilename, importFilePath], {timeout : xu.SECOND*20});
+					await runUtil.run("helpdeco", [inputFilePath, availableFilename, importFilePath], {timeout : xu.SECOND*20, timeoutSignal : "SIGKILL"});
 				}
 
 				const convertDirPath = await fileUtil.genTempPath(tmpDirPath);

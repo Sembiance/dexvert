@@ -11,6 +11,7 @@ export default
 		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa", ".tpl", ".rep", ".wpd"], magic : ["ACT! word processor document"], weakMagic : true},
 		adorageScript			 : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
 		amigaProWrite 			 : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
+		appleWorksDocument       : {name : "AppleWorks Document", magic : ["AppleWorks Word Processor"]},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam database", "askSam Windows database"]},
 		atariWorks               : {name : "Atari Works Document", ext : [".stw"], magic : ["Atari Works Wordprocessor document"]},
 		atariWorksDatabase       : {name : "Atari Works Database", ext : [".std"], magic : ["Atari Works Database"]},

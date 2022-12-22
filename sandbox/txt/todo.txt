@@ -94,6 +94,7 @@ https://archive.org/details/installshield1150premier
 	also:
 	  (unsupported/audio/audioWorksSoundSample)
 	After added, register rated 4 items: Archive Magazine, Archimedes *, ARM Club, APDL*, Archimedes, RISCafe
+	Including re-registering manually on command line: /mnt/retromission/ia/3/327a4eeb2a6d94439c0d09d381255cabbf223e06
 
 
 /--------------\

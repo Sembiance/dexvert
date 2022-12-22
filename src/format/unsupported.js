@@ -139,6 +139,7 @@ export default
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
 		chompstersSprite          : {name : "Chompsters Sprite", ext : [".spr"], magic : ["Chompsters Sprite"]},
+		clarisDraw                : {name : "Claris Draw", ext : [".cdd"], magic : ["Claris Draw document"]},
 		crayolaArtStudio          : {name : "Crayola Art Studio", ext : [".art"], magic : ["Crayola Art Studio graphic Art"], weakMagic : true},
 		drawingInterchangeBinary  : {name : "Drawing Interchange Binary Format", ext : [".dxb"], magic : ["AutoCAD Drawing Exchange Binary Format", /^fmt\/54( |$)/]},
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
@@ -190,6 +191,7 @@ export default
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
+		strataStudioProVis      : {name : "Strata StudioPro Vis", magic : [/^fmt\/1204( |$)/]},
 		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},
 		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]},
 		virtusVRScene           : {name : "Virtus VR Scene", ext : [".vvr"], magic : ["Virtus VR scene"]}

@@ -19,7 +19,9 @@ async function validCUEFile(dexState, cueFile)
 async function findCUEFile(dexState)
 {
 	const auxFiles = (dexState.f.files.aux || []).filter(auxFile => auxFile.ext.toLowerCase()===".cue");
-	const validCUEFiles = await auxFiles.filterAsync(async auxFile => await validCUEFile(dexState, auxFile));
+	let validCUEFiles = await auxFiles.filterAsync(async auxFile => await validCUEFile(dexState, auxFile));
+	if(validCUEFiles.length===0)
+		validCUEFiles = auxFiles.filter(auxFile => auxFile.name.toLowerCase()===dexState.f.input.name.toLowerCase());
 	return validCUEFiles[0];
 }
 

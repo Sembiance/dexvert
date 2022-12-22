@@ -1,4 +1,4 @@
-# Unsupported File Formats (862)
+# Unsupported File Formats (864)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -242,7 +242,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (77)
+## Image (78)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -261,6 +261,7 @@ image | Blue Scan Drawing | .blsc |
 image | CAD Vantage Drawing | .dwg | 
 image | Calamus Vector Document | .cvd | 
 image | Chompsters Sprite | .spr | 
+image | Claris Draw | .cdd | 
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | Crayola Art Studio | .art | 
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
@@ -855,7 +856,7 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (36)
+## Poly (37)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -890,6 +891,7 @@ poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileForm
 poly | SGI Open Inventor Scene Graph | .iv | 
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
 poly | Simply 3D Geometry | .ged | 
+poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 
 poly | Vertex Binary 3D Object | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.

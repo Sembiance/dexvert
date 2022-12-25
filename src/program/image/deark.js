@@ -2,7 +2,6 @@ import {xu} from "xu";
 import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
-import {FileSet} from "../../FileSet.js";
 import {DexFile} from "../../DexFile.js";
 
 function restRenamer(rest, suffix, newName)

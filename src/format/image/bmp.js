@@ -13,7 +13,7 @@ export class bmp extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Mac BMP bitmap (MacBinary)"))
-			r.push("deark[mac][convertAsExt:.bmp]");
+			r.push("deark[mac][deleteADF][convertAsExt:.bmp]");
 		r.push("convert", "deark", "gimp", "nconvert", "ffmpeg[outType:png]", "graphicWorkshopProfessional", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint", "canvas[matchType:magic]", "tomsViewer", "pv[matchType:magic]");
 		return r;
 	};

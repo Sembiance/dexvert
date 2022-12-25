@@ -3,6 +3,7 @@ import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
 import {FileSet} from "../../FileSet.js";
+import {DexFile} from "../../DexFile.js";
 
 function restRenamer(rest, suffix, newName)
 {
@@ -25,7 +26,9 @@ export class deark extends Program
 		"opt"           : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"      : "Don't extract any thumb files found",
 		"recombine"     : "Try to recombine multiple output images back into a single output image",
+		"deleteADF"     : "Set this to delete the output ADF file as it's not needed. This is mainly used when a simple image format like TIFF is wrapped as a MacBinary file.",
 		"convertAsExt"  : "Use this ext as a hint as to what to convert as",
+		"dontConvert"   : "Set this to true to not auto convert any output files. This is mostly to prevent infinite recursion with deark -> deark",
 		"alwaysConvert" : "Always convert output files using convert[removeAlpha]",
 		"start"         : "Start processing with deark at a specific byte offset",
 		"file2"         : "An extra file that can be used by deark module to get the correct palette or image names"
@@ -51,7 +54,7 @@ export class deark extends Program
 		const opts = Array.force(r.flags.opt || []);
 		if(r.flags.charOutType)
 			opts.push(`char:output=${r.flags.charOutType || "image"}`);
-		
+
 		return [...a, ...opts.flatMap(opt => (["-opt", opt])), "-od", r.outDir(), "-o", "out", r.inFile()];
 	};
 
@@ -133,28 +136,57 @@ export class deark extends Program
 		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
-			const runOpts = {timeout : xu.MINUTE};
-			const ext = path.extname(fileOutputPath);
-			const pngFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
-			const extMatches = [ext.toLowerCase(), ...(r.flags.convertAsExt ? [r.flags.convertAsExt] : [])];
-			if([".bmp", ".jp2"].includesAny(extMatches))
-				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
-			else if([".tif", ".tiff"].includesAny(extMatches))
-				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
-			else if([".qtif"].includesAny(extMatches))
-				await runUtil.run("nconvert", ["-out", "png", "-o", pngFilePath, fileOutputPath], runOpts);
-			else if([".eps"].includesAny(extMatches))
-				await Program.runProgram("ps2pdf[svg]", await FileSet.create(outDirPath, "input", fileOutputPath, "outFile", path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.svg`)), {xlog : r.xlog});
-			else if(r.flags.alwaysConvert)
-				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
-			else
+			if(r.flags.deleteADF && fileOutputPath.toLowerCase().endsWith(".adf"))
+				return await fileUtil.unlink(fileOutputPath);
+
+			if(r.flags.dontConvert)
 				return;
 
-			if(await fileUtil.exists(pngFilePath))
+			const runOpts = {timeout : xu.MINUTE};
+			const ext = path.extname(fileOutputPath);
+			let convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
+			const extMatches = [ext.toLowerCase(), ...(r.flags.convertAsExt ? [r.flags.convertAsExt] : [])];
+			if([".bmp", ".jp2"].includesAny(extMatches))
+			{
+				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
+			}
+			else if([".tif", ".tiff"].includesAny(extMatches))
+			{
+				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
+			}
+			else if([".qtif"].includesAny(extMatches))
+			{
+				await runUtil.run("nconvert", ["-out", "png", "-o", convertedFilePath, fileOutputPath], runOpts);
+			}
+			else if([".eps"].includesAny(extMatches))
+			{
+				const svgFilePath = (await Program.runProgram("ps2pdf[svg]", await DexFile.create(fileOutputPath), {xlog : r.xlog}))?.f?.new?.absolute;
+				if(svgFilePath)
+				{
+					convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.svg`);
+					await fileUtil.move(svgFilePath, convertedFilePath);
+				}
+			}
+			else if([".pict"].includesAny(extMatches))
+			{
+				const pngFilePath = (await Program.runProgram("deark[mac][recombine][dontConvert]", await DexFile.create(fileOutputPath), {xlog : r.xlog}))?.f?.new?.absolute;
+				if(pngFilePath)
+					await fileUtil.move(pngFilePath, convertedFilePath);
+			}
+			else if(r.flags.alwaysConvert)
+			{
+				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
+			}
+			else
+			{
+				return;
+			}
+
+			if(await fileUtil.exists(convertedFilePath))
 			{
 				const fileInfo = await Deno.lstat(fileOutputPath).catch(() => {});
 				if(fileInfo)
-					await Deno.utime(pngFilePath, Math.floor(fileInfo.mtime.getTime()/xu.SECOND), Math.floor(fileInfo.mtime.getTime()/xu.SECOND));
+					await Deno.utime(convertedFilePath, Math.floor(fileInfo.mtime.getTime()/xu.SECOND), Math.floor(fileInfo.mtime.getTime()/xu.SECOND));
 				
 				await fileUtil.unlink(fileOutputPath);
 			}

@@ -114,6 +114,7 @@ for(const [familyid, simpleFormats] of Object.entries(simple))
 		class Simple extends Format
 		{
 			converters = ["strings"];
+			packed     = true;
 		}
 
 		formats[formatid] = Simple.create(families[familyid], format =>

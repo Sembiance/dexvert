@@ -16,7 +16,7 @@ export class eps extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Macintosh Encapsulated Postscript (MacBinary)"))
-			r.push("deark[mac][convertAsExt:.eps]");
+			r.push("deark[mac][deleteADF][convertAsExt:.eps]");
 		r.push("ps2pdf[svg]", "inkscape", "gimp", "nconvert", "corelDRAW", "hiJaakExpress", "canvas[matchType:magic][nonRaster]", "picturePublisher", "corelDRAW");
 		return r;
 	};

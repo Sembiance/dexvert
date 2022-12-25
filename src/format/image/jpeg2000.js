@@ -12,7 +12,7 @@ export class jpeg2000 extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Mac JPEG 2000 bitmap (MacBinary)"))
-			r.push("deark[mac][convertAsExt:.jp2]");
+			r.push("deark[mac][deleteADF][convertAsExt:.jp2]");
 		r.push("convert", "gimp", "canvas");
 		return r;
 	};

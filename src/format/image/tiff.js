@@ -17,7 +17,7 @@ export class tiff extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Macintosh TIFF bitmap (MacBinary)"))
-			r.push("deark[mac][convertAsExt:.tiff]");
+			r.push("deark[mac][deleteADF][convertAsExt:.tiff]");
 		r.push("deark[noThumbs]", "convert", "imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "imjview", "gimp", "corelPhotoPaint", "canvas", "tomsViewer", "picturePublisher", "corelDRAW", "pv[matchType:magic]");
 		return r;
 	};

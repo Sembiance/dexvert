@@ -526,6 +526,10 @@ export class Program
 				}
 			}
 		}
+		else
+		{
+			xlog.debug`No new files detected from ${r.programid}`;
+		}
 
 		return r;
 	}

@@ -7,7 +7,7 @@ export class lha extends Format
 	ext        = [".lha", ".lhz", ".lzs", ".exe", ".lzh"];
 
 	// If it's a self-extracting archive, ensure it has a .exe extension
-	safeExt = dexState => (dexState.ids.some(id => id.magic.startsWith("LHA self-extracting")) ? ".exe" : ".lha");
+	safeExt = dexState => (dexState.hasMagics("LHA self-extracting") ? ".exe" : ".lha");
 
 	magic = ["LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHA self-extracting", "LHarc self-extracting archive", /^LHarc .*archive data/, "LArc compressed archive", /^fmt\/626( |$)/];
 	

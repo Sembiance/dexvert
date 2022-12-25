@@ -75,7 +75,7 @@ for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 		if(formats[formatid])
 			throw new Error(\`format [\${formatid}] in unsupported.js is a duplicate of \${formats[formatid]}\`);
 
-		const supportedKeys = ["name", "ext", "magic", "weakMagic", "filename", "notes", "website", "weakFilename"];
+		const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "notes", "weakFilename", "weakMagic", "website"];
 		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 		if(extraKeys.length>0)
 			throw new Error(\`unsupported format \${familyid}/\${formatid} has extra keys that are not currently copied over to the Unknown class, add them: \${extraKeys}\`);
@@ -106,7 +106,7 @@ for(const [familyid, simpleFormats] of Object.entries(simple))
 		if(formats[formatid])
 			throw new Error(\`format [\${formatid}] in simple.js is a duplicate\`);
 
-		const supportedKeys = ["name", "ext", "magic", "filename", "weakMagic", "trustMagic", "website"];
+		const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
 		const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 		if(extraKeys.length>0)
 			throw new Error(\`simple format \${familyid}/\${formatid} has extra keys that are not currently copied over to the Simple class, add them: \${extraKeys}\`);

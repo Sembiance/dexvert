@@ -9,7 +9,7 @@ export class zip extends Format
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters     = ["unzip", "deark", "deark[opt:zip:scanmode]", "sevenZip", "unar", "sqc", "izArc"];
 	metaProvider   = ["zipInfo"];
-	untouched      = dexState => dexState.ids.some(id => id.magic==="Zip archive data (empty)");
+	untouched      = dexState => dexState.hasMagics("Zip archive data (empty)");
 	processed      = dexState =>
 	{
 		// reverse priority order

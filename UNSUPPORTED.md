@@ -1,4 +1,4 @@
-# Unsupported File Formats (864)
+# Unsupported File Formats (865)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -242,7 +242,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (78)
+## Image (79)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -322,6 +322,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFormatSamples/image/windowsFAXCover/)
 image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
+image | [xRes Image](http://fileformats.archiveteam.org/wiki/XRes) | .lrg | [6 sample files](https://telparia.com/fileFormatSamples/image/xRes/) - Have xRes 3.0 in sandbox/app but even though it installed in both Win2k and WinXP it doesn't launch, just exits. Could try with Vista or maybe it's a lost cause. Only encountered on 1 CD so far.
 image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC2/)
 
 

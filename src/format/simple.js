@@ -1,3 +1,5 @@
+import {TEXT_MAGIC} from "../Detection.js";
+
 // All of the formats in this file are 'simple' files that should just be handled with the 'strings' program and are not worthy of having their own file
 // Because 'strings' will take any file, ONLY include items here that have 'strong' magic (or mark the magic as weak when paired with an ext)
 // Each entry also has the following properties added:
@@ -11,7 +13,7 @@ export default
 		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa", ".tpl", ".rep", ".wpd"], magic : ["ACT! word processor document"], weakMagic : true},
 		adorageScript			 : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
 		amigaProWrite 			 : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
-		appleWorksDocument       : {name : "AppleWorks Document", magic : ["AppleWorks Word Processor"]},
+		appleWorksDocument       : {name : "AppleWorks Document", magic : ["AppleWorks Word Processor"], forbiddenMagic : TEXT_MAGIC},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam database", "askSam Windows database"]},
 		atariWorks               : {name : "Atari Works Document", ext : [".stw"], magic : ["Atari Works Wordprocessor document"]},
 		atariWorksDatabase       : {name : "Atari Works Database", ext : [".std"], magic : ["Atari Works Database"]},

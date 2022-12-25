@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
+import {FileSet} from "../../FileSet.js";
 
 function restRenamer(rest, suffix, newName)
 {
@@ -24,6 +25,7 @@ export class deark extends Program
 		"opt"           : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		"noThumbs"      : "Don't extract any thumb files found",
 		"recombine"     : "Try to recombine multiple output images back into a single output image",
+		"convertAsExt"  : "Use this ext as a hint as to what to convert as",
 		"alwaysConvert" : "Always convert output files using convert[removeAlpha]",
 		"start"         : "Start processing with deark at a specific byte offset",
 		"file2"         : "An extra file that can be used by deark module to get the correct palette or image names"
@@ -134,12 +136,15 @@ export class deark extends Program
 			const runOpts = {timeout : xu.MINUTE};
 			const ext = path.extname(fileOutputPath);
 			const pngFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
-			if([".bmp", ".jp2"].includes(ext.toLowerCase()))
+			const extMatches = [ext.toLowerCase(), ...(r.flags.convertAsExt ? [r.flags.convertAsExt] : [])];
+			if([".bmp", ".jp2"].includesAny(extMatches))
 				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
-			else if([".tif", ".tiff"].includes(ext.toLowerCase()))
+			else if([".tif", ".tiff"].includesAny(extMatches))
 				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
-			else if([".qtif"].includes(ext.toLowerCase()))
+			else if([".qtif"].includesAny(extMatches))
 				await runUtil.run("nconvert", ["-out", "png", "-o", pngFilePath, fileOutputPath], runOpts);
+			else if([".eps"].includesAny(extMatches))
+				await Program.runProgram("ps2pdf[svg]", await FileSet.create(outDirPath, "input", fileOutputPath, "outFile", path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.svg`)), {xlog : r.xlog});
 			else if(r.flags.alwaysConvert)
 				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, pngFilePath], runOpts);
 			else

@@ -14,7 +14,7 @@ export class rsrc extends Format
 	{
 		const a = [];
 
-		if(dexState.ids.some(id => APPLE_DOUBLE_MAGIC.includes(id.magic)))
+		if(dexState.hasMagics(APPLE_DOUBLE_MAGIC))
 			a.push("deark[opt:applesd:extractrsrc=1]");
 
 		return [...a, "resource_dasm", "deark"];	// , "unar"

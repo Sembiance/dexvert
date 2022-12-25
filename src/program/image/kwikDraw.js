@@ -36,5 +36,5 @@ export class kwikDraw extends Program
 			Sleep(200)`
 	});
 	renameOut = true;
-	chain     = "ps2pdf -> pdf2svg";
+	chain     = "ps2pdf[svg]";
 }

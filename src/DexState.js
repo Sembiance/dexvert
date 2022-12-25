@@ -6,6 +6,7 @@ import {DexFile} from "./DexFile.js";
 import {Format} from "./Format.js";
 import {Family} from "./Family.js";
 import {Identification} from "./Identification.js";
+import {flexMatch} from "./identify.js";
 
 export class DexPhase
 {
@@ -111,6 +112,11 @@ export class DexState
 	get meta() { return this.phase?.meta; }
 	get ran() { return this.phase?.ran; }
 	get id() { return this.phase?.id; }
+
+	hasMagics(magics)
+	{
+		return this.ids.some(id => Array.force(magics).some(matchAgainst => flexMatch(id.magic, matchAgainst)));
+	}
 
 	serialize()
 	{

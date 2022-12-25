@@ -9,11 +9,11 @@ export class FileSet
 	files = {};
 
 	// builder to get around the fact that constructors can't be async
-	static async create(root, type, files)
+	static async create(root, ...typesFiles)
 	{
 		const fileSet = new this();
 		fileSet.root = path.resolve(root);
-		if(type && files)
+		for(const [type, files] of typesFiles.chunk(2))
 			await fileSet.addAll(type, Array.force(files));
 		return fileSet;
 	}

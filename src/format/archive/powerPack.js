@@ -10,7 +10,7 @@ export class powerPack extends Format
 	packed     = true;
 	untouched    = dexState =>
 	{
-		if(dexState.ids.some(id => id.magic==="PowerPacker compressed (password protected)"))
+		if(dexState.hasMagics("PowerPacker compressed (password protected)"))
 		{
 			dexState.meta.passwordProtected = true;
 			return true;

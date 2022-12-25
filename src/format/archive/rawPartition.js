@@ -6,7 +6,7 @@ export class rawPartition extends Format
 {
 	name       = "Raw Partition";
 	magic      = [/^DOS\/MBR boot sector/, ...HFS_MAGICS, "UDF filesystem data", /^fmt\/(468|1087|1105)( |$)/];
-	converters = async dexState =>
+	converters = dexState =>
 	{
 		const dosMBRID = dexState.ids.find(id => id.from==="file" && id.magic.startsWith("DOS/MBR boot sector"));
 		if(dosMBRID)
@@ -16,8 +16,7 @@ export class rawPartition extends Format
 				return [`uniso[offset:${(+startSector)*512}]`];
 		}
 
-		const {flexMatch} = await import("../../identify.js");	// need to import this dynamically to avoid circular dependency
-		const isHFS = dexState.ids.some(id => HFS_MAGICS.some(matchAgainst => flexMatch(id.magic, matchAgainst)));
+		const isHFS = dexState.hasMagics(HFS_MAGICS);
 		const converters = [`uniso${isHFS ? "[hfs]" : ""}`];
 		if(isHFS)
 			converters.push("deark[module:hfs]");

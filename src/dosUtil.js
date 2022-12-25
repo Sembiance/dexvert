@@ -9,7 +9,7 @@ const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");
 const LOWERCASE = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Escape", "Tab", "Backspace", "Enter", " ", "LeftAlt", "RightAlt", "LeftControl", "RightControl", "LeftShift", "RightShift", "CapsLock", "ScrollLock", "NumLock", "`", "-", "=", "\\", "[", "]", ";", '"', ".", ",", "/", null, "PrintScreen", "Pause", "Insert", "Home", "PageUp", "Delete", "End", "PageDown", "Left", "Up", "Down", "Right", "KP1", "KP2", "KP3", "KP4", "KP5", "KP6", "KP7", "KP8", "KP9", "KP0", "KPDivide", "KPMultiply", "KPMinus", "KPPlus", "KPEnter", "KPPeriod"];	// eslint-disable-line max-len
 const UPPERCASE = [null, "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "~", "_", "+", "|", "{", "}", ":", "'", "<", ">", "?"];	// eslint-disable-line max-len
 
-export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, xlog})
+export async function run({cmd, args=[], root, preExec, autoExec, postExec, timeout=xu.MINUTE, screenshot, video, runIn, keys, xlog})
 {
 	const dosDirPath = (await fileUtil.exists(path.join(root, "dos")) ? (await fileUtil.genTempPath(root, "dos")) : path.join(root, "dos"));
 	await Deno.mkdir(dosDirPath);
@@ -32,6 +32,9 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 	
 	function addBin(bin)
 	{
+		if(preExec)
+			bootExecLines.push(...Array.force(preExec));
+			
 		if(keys)
 			bootExecLines.push("SLEEP 1", "Z:\\SCRIPT.COM");
 
@@ -67,7 +70,8 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 		addBin(`${path.basename(dosDirPath)}\\${cmd.replaceAll("/", "\\")} ${args.join(" ")}`);
 	}
 	
-	bootExecLines.push("REBOOT.COM");	// this causes dosbox to exit, not reboot, which is what we want
+	if(!xlog.atLeast("trace"))
+		bootExecLines.push("REBOOT.COM");	// this causes dosbox to exit, not reboot, which is what we want
 
 	await fileUtil.writeTextFile(configFilePath, bootExecLines.join("\n"), {append : true});
 
@@ -152,9 +156,7 @@ export async function run({cmd, args=[], root, autoExec, postExec, timeout=xu.MI
 			}
 			else
 			{
-				const ffmpegFileSet = await FileSet.create(root, "input", videoFilePath);
-				await ffmpegFileSet.add("outFile", video);
-				await Program.runProgram("ffmpeg", ffmpegFileSet, {xlog});
+				await Program.runProgram("ffmpeg", await FileSet.create(root, "input", videoFilePath, "outFile", video), {xlog});
 			}
 		}
 	}

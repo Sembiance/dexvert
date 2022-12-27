@@ -24,11 +24,13 @@ export class resource_dasm extends Program
 		if(fileOutputPaths.length===0)
 			return;
 
-		// first remove the input filename prefix
+		// first remove the input filename prefix and any .bin extensions (so we don't it later)
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const filename = path.basename(fileOutputPath);
-			const newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args.at(-2)).length+1));
+			let newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args.at(-2)).length+1));
+			if(newFileOutputPath.endsWith(".bin"))
+				newFileOutputPath = newFileOutputPath.substring(0, newFileOutputPath.length-4);
 			await Deno.rename(fileOutputPath, newFileOutputPath);
 			return newFileOutputPath;
 		});

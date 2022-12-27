@@ -7,6 +7,6 @@ export class amosPicturePacker extends Format
 	ext        = [".bin"];
 	mimeType   = "image/x-amos-picturepacker";
 	priority   = this.PRIORITY.LOW;
-	idCheck    = inputFile => inputFile.size<=xu.MB*2;	// .bin is so generic, only try converting if less than 2MB, otherwise it's unlikely to be this format
+	idCheck    = inputFile => inputFile.size<=xu.KB*50;	// .bin is so generic, only try converting if less than 50KB as I've never seen an image in this format be larger than this
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

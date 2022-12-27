@@ -25,8 +25,8 @@ const OS_DEFAULT =
 const qty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
 const OS =
 {
-	win2k    : { qty : qty(10), ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
-	winxp    : { qty : qty(10), ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores, will break programs that took a hardware id snapshot on install
+	win2k    : { qty : qty(14), ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
+	winxp    : { qty : qty(14), ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores, will break programs that took a hardware id snapshot on install
 	amigappc : { qty :  qty(3), ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
 	gentoo   : { qty :  qty(4), ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
@@ -334,7 +334,15 @@ export class qemu extends Server
 
 		this.webServer = new WebServer(QEMU_SERVER_HOST, QEMU_SERVER_PORT, {xlog : this.xlog});
 		
-		this.webServer.add("/status", async () => new Response(JSON.stringify({queueSize : RUN_QUEUE.size})), {logCheck : () => false});	// eslint-disable-line require-await
+		this.webServer.add("/status", async () =>	// eslint-disable-line require-await
+		{
+			const r = {queueSize : RUN_QUEUE.size, activeSize : Object.values(INSTANCES).flatMap(o => Object.values(o)).filter(v => v.ready && v.busy).length};
+			if(RUN_QUEUE.size)
+				r.queue = Array.from(RUN_QUEUE, v => v.body);
+				
+			r.instancesAvailable = Object.fromEntries(Object.entries(INSTANCES).map(([osid, instances]) => ([osid, Object.values(instances).filter(v => v.ready && !v.busy).length])));
+			return new Response(JSON.stringify(r));
+		}, {logCheck : () => false});
 
 		this.webServer.add("/qemuReady", async request =>
 		{

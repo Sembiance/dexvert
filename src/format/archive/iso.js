@@ -30,7 +30,7 @@ export class iso extends Format
 	name           = "CD Disc Image";
 	website        = "http://fileformats.archiveteam.org/wiki/ISO_image";
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
-	forbidExtMatch = [".img"];
+	forbidExtMatch = [".img", ".bin"];	// way too common
 
 	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
 	weakMagic      = _MACBINARY_MAGIC;
@@ -80,7 +80,7 @@ export class iso extends Format
 		{
 			// Check to see if we are have tracks split across multiple .bin files
 			const {meta : cueFileMeta} = await Program.runProgram("cueInfo", cueFile, {xlog : dexState.xlog, autoUnlink : true});
-			if(cueFileMeta.files.map(({name}) => name).unique().length>1)
+			if((cueFileMeta?.files || []).map(({name}) => name).unique().length>1)
 			{
 				if(cueFileMeta.files[0].name.toLowerCase().endsWith(dexState.f.input.base.toLowerCase()))
 				{

@@ -152,14 +152,18 @@ async function extractHFSISO()
 
 	// Get our volume creation year to use as the default year as some files only specify the time and not the year (WWDC.iso)
 	const {stdout : volInfo} = await runUtil.run("hvol", [], HFS_RUN_OPTIONS);
+	if(volInfo.includes("No known volumes"))
+		return;
+
 	const volCreationParts = (volInfo.match(/Volume was created on (?<dayOfWeek>[A-Z][a-z]{2})\s(?<month>[A-Z][a-z]{2})\s(?<day>[\d\s]\d)\s(?<time>\d\d:\d\d:\d\d)\s(?<year>\d{4})/) || {})?.groups;
-	volumeYear = +volCreationParts.year;
+	volumeYear = +(volCreationParts?.year || new Date((await Deno.stat(IN_FILE_PATH)).mtime).getFullYear());
 	
 	await recurseHFS("");
 	await runUtil.run("humount", [IN_FILE_PATH], HFS_RUN_OPTIONS);
 	await fileUtil.unlink(path.join(MOUNT_DIR_PATH, ".hcwd"));
 
-	console.log(JSON.stringify(metadata));
+	if(Object.keys(metadata.fileMeta).length>0)
+		console.log(JSON.stringify(metadata));
 }
 
 // main

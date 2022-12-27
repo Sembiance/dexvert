@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, sysUtil} from "xutil";
 import {path} from "std";
 import {validateClass, validateObject} from "validator";
 import {RunState} from "./RunState.js";
@@ -8,7 +8,6 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
-import {optimalParallelism} from "./dexUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
@@ -504,7 +503,7 @@ export class Program
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
-						}, await optimalParallelism(newFiles.length));
+						}, await sysUtil.optimalParallelism(newFiles.length));
 					}
 				}
 

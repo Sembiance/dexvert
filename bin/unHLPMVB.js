@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil, fileUtil, runUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, sysUtil} from "xutil";
 import {CONVERT_PNG_ARGS} from "../src/Program.js";
 import {path} from "std";
 import {XLog} from "xlog";
@@ -187,7 +187,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 		}
 
 		return rtfLine;
-	})).join("\n"));
+	}, await sysUtil.optimalParallelism(rtfLines.length))).join("\n"));
 }
 
 // now extract any extra non-referenced files if the --extractExtra option was set
@@ -206,7 +206,7 @@ if(argv.extractExtra)
 			xlog.warn`Extra file ${availableFilename} is either 0 bytes or is more than ${ALLOWED_IMAGE_SIZE_MULTI} times larger than the original input size. Deleting it, as it's likely a bug extraction.`;
 			await fileUtil.unlink(extraOutputFilePath);
 		}
-	});
+	}, await sysUtil.optimalParallelism(availableFilenames.size));
 }
 
 await fileUtil.unlink(tmpDirPath, {recursive : true});

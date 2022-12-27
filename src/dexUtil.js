@@ -79,19 +79,8 @@ export async function quickConvertImages(r, fileOutputPaths)
 			await fileUtil.unlink(fileOutputPath);
 			filePathsToRemove.push(fileOutputPath);
 		}
-	}, await optimalParallelism(fileOutputPaths.length));
+	}, await sysUtil.optimalParallelism(fileOutputPaths.length));
 
 	for(const filePathToRemove of filePathsToRemove)
 		fileOutputPaths.removeOnce(filePathToRemove);
-}
-
-export async function optimalParallelism(numFiles)
-{
-	if(numFiles<5)
-		return 1;
-
-	let optimalCount = 1;
-	const idleUsage = await sysUtil.getCPUIdleUsage();
-	optimalCount = Math.max(1, Math.floor(idleUsage.scale(0, 100, 1, navigator.hardwareConcurrency*0.50)));
-	return optimalCount;
 }

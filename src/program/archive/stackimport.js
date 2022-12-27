@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {Program, CONVERT_PNG_ARGS} from "../../Program.js";
 import {path} from "std";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, sysUtil} from "xutil";
 
 const PAT_SPRITE_COLS = 20;
 
@@ -82,7 +82,7 @@ export class stackimport extends Program
 			await runUtil.run("convert", [imageFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
 			if(await fileUtil.exists(pngFilePath))
 				await fileUtil.unlink(imageFilePath);
-		}, 2);
+		}, await sysUtil.optimalParallelism(otherPBMFilePaths.length));
 	};
 	renameOut = false;
 }

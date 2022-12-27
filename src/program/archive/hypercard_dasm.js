@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program, CONVERT_PNG_ARGS} from "../../Program.js";
-import {fileUtil, runUtil, hashUtil} from "xutil";
+import {fileUtil, runUtil, hashUtil, sysUtil} from "xutil";
 import {path} from "std";
 
 export class hypercard_dasm extends Program
@@ -35,7 +35,7 @@ export class hypercard_dasm extends Program
 				pngHashes[hash] ||= [];
 				pngHashes[hash].push(pngFilePath);
 			}
-		}, 2);
+		}, await sysUtil.optimalParallelism(bmpFilePaths.length));
 
 		// now that we have all the hashes, we can remove any duplicate png files
 		await Object.values(pngHashes).parallelMap(async pngFilePaths => await pngFilePaths.slice(1).parallelMap(fileUtil.unlink));

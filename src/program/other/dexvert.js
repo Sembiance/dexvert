@@ -1,5 +1,8 @@
 import {xu} from "xu";
 import {Program, RUNTIME} from "../../Program.js";
+import {fileUtil} from "xutil";
+import {path} from "std";
+import {DexFile} from "../../DexFile.js";
 
 export class dexvert extends Program
 {
@@ -9,25 +12,29 @@ export class dexvert extends Program
 		skipVerify : "Don't verify output file"
 	};
 	unsafe = true;
-
-	bin  = "/mnt/compendium/.deno/bin/dexvert";
-	args = r =>
+	loc    = "local";
+	exec   = async r =>
 	{
-		const a = [`--logLevel=${r.xlog.level}`, `--programFlag=qemuPriority:true`];
+		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js"));
+		
+		const dexOpts = {xlog : r.xlog.clone(r.xlog.level==="info" ? "warn" : r.xlog.level), programFlag : {qemuPriority : true}};
 		if(r.flags.asFormat)
-			a.push(`--asFormat=${r.flags.asFormat}`);
+			dexOpts.asFormat = r.flags.asFormat;
 		if(r.flags.skipVerify)
-			a.push("--skipVerify");
+			dexOpts.skipVerify = true;
 
 		const forbidProgram = new Set(RUNTIME.forbidProgram);
 		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)
 			forbidProgram.add(parentRunState.programid);
-			
-		a.push(...Array.from(forbidProgram, v => `--forbidProgram=${v}`));
+		dexOpts.forbidProgram = Array.from(forbidProgram);
 
-		return [...a, "--", r.inFile(), r.outDir()];
+		const outDirPath = r.outDir({absolute : true});
+		const tmpOutDirPath = await fileUtil.genTempPath(undefined, "_program_other_dexvert");
+		await Deno.mkdir(tmpOutDirPath);
+		const createdFiles = (await dexvertFunc(await DexFile.create(r.inFile({absolute : true})), await DexFile.create(tmpOutDirPath), dexOpts))?.created?.files?.output || [];
+		await createdFiles.parallelMap(async createdFile => await fileUtil.move(createdFile.absolute, path.join(outDirPath, createdFile.base)));
+		await fileUtil.unlink(tmpOutDirPath, {recursive : true});
 	};
-	runOptions = r => ({liveOutput : r.xlog.atLeast("trace"), timeout : xu.MINUTE*10});
-	renameIn   = false;	// RunState.originalInput would be lost and dexvert should be able to handle any incoming filename
-	renameOut  = false;
+	renameIn  = false;	// RunState.originalInput would be lost and dexvert should be able to handle any incoming filename
+	renameOut = false;
 }

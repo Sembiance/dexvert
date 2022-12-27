@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
 import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
-import {DexFile} from "../../DexFile.js";
+import {quickConvertImages} from "../../dexUtil.js";
 
 function restRenamer(rest, suffix, newName)
 {
@@ -27,7 +27,6 @@ export class deark extends Program
 		"recombine"     : "Try to recombine multiple output images back into a single output image",
 		"deleteADF"     : "Set this to delete the output ADF file as it's not needed. This is mainly used when a simple image format like TIFF is wrapped as a MacBinary file.",
 		"convertAsExt"  : "Use this ext as a hint as to what to convert as",
-		"dontConvert"   : "Set this to true to not auto convert any output files. This is mostly to prevent infinite recursion with deark -> deark",
 		"alwaysConvert" : "Always convert output files using convert[removeAlpha]",
 		"start"         : "Start processing with deark at a specific byte offset",
 		"file2"         : "An extra file that can be used by deark module to get the correct palette or image names"
@@ -105,21 +104,24 @@ export class deark extends Program
 				}
 			}
 
-			r.xlog.debug`${imgInfo}`;
-
 			// if we have a width and height and more than 1 part and none of those parts have the same x/y coordinate (PICT_2021.pict) then we can recombine them
 			if(imgInfo.w && imgInfo.h && imgInfo.parts.length>1 && imgInfo.parts.length===imgInfo.parts.map(({x, y}) => `${x}x${y}`).unique().length)
 			{
+				r.xlog.debug`${imgInfo}`;
 				const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
 				await runUtil.run("convert", ["-size", `${imgInfo.w}x${imgInfo.h}`, "canvas:transparent", `PNG32:${combinedFilePath}`]);
 				for(const part of imgInfo.parts)
 				{
-					const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(part.filename));
+					const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(path.basename(part.filename)));
 					if(!srcFilePath)
+					{
 						r.xlog.warn`Unable to find deark sub image part ${part.filename} from possibles: [${fileOutputPaths.join("] [")}]`;
-					
-					await runUtil.run("composite", ["-gravity", "NorthWest", "-geometry", `+${part.x}+${part.y}`, srcFilePath, combinedFilePath, combinedFilePath]);
-					await fileUtil.unlink(srcFilePath);
+					}
+					else
+					{
+						await runUtil.run("composite", ["-gravity", "NorthWest", "-geometry", `+${part.x}+${part.y}`, srcFilePath, combinedFilePath, combinedFilePath]);
+						await fileUtil.unlink(srcFilePath);
+					}
 				}
 
 				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
@@ -132,64 +134,7 @@ export class deark extends Program
 		// but the vast majority will quickly convert with the first program each format is handled by
 		// so for 'some' formats we will do a quick conversion here, and then any we don't do or that don't work, the chain check at the end will take care of
 		// this introduces a 'slight' risk that some conversions that maybe fail but still prodce like a black image will be missed, but it's WAY worth it for the speed gain
-		const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-		await fileOutputPaths.parallelMap(async fileOutputPath =>
-		{
-			if(r.flags.deleteADF && fileOutputPath.toLowerCase().endsWith(".adf"))
-				return await fileUtil.unlink(fileOutputPath);
-
-			if(r.flags.dontConvert)
-				return;
-
-			const runOpts = {timeout : xu.MINUTE};
-			const ext = path.extname(fileOutputPath);
-			let convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.png`);
-			const extMatches = [ext.toLowerCase(), ...(r.flags.convertAsExt ? [r.flags.convertAsExt] : [])];
-			if([".bmp", ".jp2"].includesAny(extMatches))
-			{
-				await runUtil.run("convert", [fileOutputPath, ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
-			}
-			else if([".tif", ".tiff"].includesAny(extMatches))
-			{
-				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);	// some .tiff files like hi158.tiff convert as 100% transparent but this fixes it
-			}
-			else if([".qtif"].includesAny(extMatches))
-			{
-				await runUtil.run("nconvert", ["-out", "png", "-o", convertedFilePath, fileOutputPath], runOpts);
-			}
-			else if([".eps"].includesAny(extMatches))
-			{
-				const svgFilePath = (await Program.runProgram("ps2pdf[svg]", await DexFile.create(fileOutputPath), {xlog : r.xlog}))?.f?.new?.absolute;
-				if(svgFilePath)
-				{
-					convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.svg`);
-					await fileUtil.move(svgFilePath, convertedFilePath);
-				}
-			}
-			else if([".pict"].includesAny(extMatches))
-			{
-				const pngFilePath = (await Program.runProgram("deark[mac][recombine][dontConvert]", await DexFile.create(fileOutputPath), {xlog : r.xlog}))?.f?.new?.absolute;
-				if(pngFilePath)
-					await fileUtil.move(pngFilePath, convertedFilePath);
-			}
-			else if(r.flags.alwaysConvert)
-			{
-				await runUtil.run("convert", [fileOutputPath, "-alpha", "off", ...CONVERT_PNG_ARGS, convertedFilePath], runOpts);
-			}
-			else
-			{
-				return;
-			}
-
-			if(await fileUtil.exists(convertedFilePath))
-			{
-				const fileInfo = await Deno.lstat(fileOutputPath).catch(() => {});
-				if(fileInfo)
-					await Deno.utime(convertedFilePath, Math.floor(fileInfo.mtime.getTime()/xu.SECOND), Math.floor(fileInfo.mtime.getTime()/xu.SECOND));
-				
-				await fileUtil.unlink(fileOutputPath);
-			}
-		}, 2);
+		await quickConvertImages(r, await fileUtil.tree(outDirPath, {nodir : true}));
 	};
 
 	// deark output names are an MINOR NIGHTMARE

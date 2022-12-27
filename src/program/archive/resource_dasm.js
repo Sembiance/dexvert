@@ -1,8 +1,9 @@
 /* eslint-disable prefer-named-capture-group, max-len */
 import {xu} from "xu";
-import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 import {fileUtil, encodeUtil, runUtil} from "xutil";
 import {path} from "std";
+import {quickConvertImages} from "../../dexUtil.js";
 
 const FONT_SPRITE_COLS = 40;
 
@@ -180,18 +181,7 @@ export class resource_dasm extends Program
 			});
 		});
 
-		// all .bmp files, just quick convert using imagemagick. resources can have a ton of BMP files, this saves a lot of time further down the line and reduces duplication
-		// no teven sure this is needed anymore as more recent resource_dasm generates PNG files, but I leave this here just in case
-		await fileOutputPaths.filter(v => v.endsWith(".bmp")).parallelMap(async bmpFilePath =>
-		{
-			const pngFilePath = path.join(outDirPath, `${path.basename(bmpFilePath, ".bmp")}.png`);
-			await runUtil.run("convert", [bmpFilePath, ...CONVERT_PNG_ARGS, pngFilePath], {timeout : xu.MINUTE});
-			if(await fileUtil.exists(pngFilePath))
-			{
-				await fileUtil.unlink(bmpFilePath);
-				fileOutputPaths.removeOnce(bmpFilePath);
-			}
-		}, 2);
+		await quickConvertImages(r, fileOutputPaths);
 	};
 
 	renameOut = {

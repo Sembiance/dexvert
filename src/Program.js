@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil, sysUtil} from "xutil";
+import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
 import {validateClass, validateObject} from "validator";
 import {RunState} from "./RunState.js";
@@ -8,6 +8,7 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
+import {optimalParallelism} from "./dexUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
@@ -350,7 +351,7 @@ export class Program
 
 				if(renamer===null)
 				{
-					xlog.warn`${xu.c.blink + fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names.`;
+					xlog.info`${fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names`;
 				}
 				else
 				{
@@ -359,7 +360,7 @@ export class Program
 					for(const newFile of f.files.new)
 					{
 						const replacementName = renamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {}).join("");
-						xlog.warn`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
+						xlog.info`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
 						await newFile.rename(replacementName, {replaceExisting : !!isChain});
 					}
 				}
@@ -369,7 +370,7 @@ export class Program
 				const newFilename = newName + suffix + newExt;
 				if(newFilename!==f.new.base)
 				{
-					xlog.warn`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
+					xlog.info`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
 					await f.new.rename(newFilename, {replaceExisting : !!isChain});
 				}
 			}
@@ -457,7 +458,7 @@ export class Program
 								await f.remove("new", inputFile, {unlink : true});
 						}
 						
-						xlog.info`Chain ${progRaw} resulted in new files: ${newFileSet.files.new.map(v => v.rel).join(" ")}`;
+						xlog.info`Chain ${progRaw} resulted in ${newFileSet.files.new.length.toLocaleString()} new files: ${newFileSet.files.new.map(v => v.rel).join(" ").innerTruncate(300)}`;
 
 						await chainResult.unlinkHomeOut();
 					};
@@ -489,18 +490,6 @@ export class Program
 					}
 					else
 					{
-						if(newFiles.length>100)
-							xlog.warn`Program ${r.programid} is chaining ${newFiles.length.toLocaleString()} files to ${progRaw}. This may take some time...`;
-
-						// we used to chain tons in parallel, but that can cause a system to lock up with too many parallel processes
-						let chainAtOnce = 1;
-						if(newFiles.length>5)
-						{
-							const idleUsage = await sysUtil.getCPUIdleUsage();
-							chainAtOnce = Math.max(1, Math.floor(idleUsage.scale(0, 100, 1, navigator.hardwareConcurrency*0.50)));
-							xlog.info`Chaining >5 files with an idleUsage of ${idleUsage}%, so we will chain ${chainAtOnce} at a time`;
-						}
-
 						await newFiles.parallelMap(async newFile =>
 						{
 							// if chain starts with a question mark ? then we need to have a truthy response from chainCheck() in order to proceed with chaining this file
@@ -515,7 +504,7 @@ export class Program
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
 							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
-						}, chainAtOnce);
+						}, await optimalParallelism(newFiles.length));
 					}
 				}
 

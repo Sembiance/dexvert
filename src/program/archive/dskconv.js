@@ -7,6 +7,7 @@ export class dskconv extends Program
 	checkForDups = true;
 	unsafe       = true;
 	bin          = "dskconv";
-	args         = async r => [r.inFile(), "-otype", "raw", await r.outFile("out")];
+	args         = async r => [r.inFile(), "-otype", "raw", await r.outFile("out.img")];
 	renameOut    = true;
+	chain        = "dexvert[asFormat:archive/rawPartition]";
 }

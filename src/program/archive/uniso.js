@@ -13,8 +13,8 @@ export class uniso extends Program
 		nextstep   : "Set this to true to process the iso as a NeXTSTEP disc. Default: false",
 		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
-	bin        = "deno";
-	args       = r =>
+	bin  = "deno";
+	args = r =>
 	{
 		const a = ["--ts", r.f.input.ts];
 		if(r.flags.offset)

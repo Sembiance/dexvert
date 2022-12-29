@@ -123,7 +123,7 @@ export class Format
 			confidenceAdjust : {type : "function"},
 			fallback         : {type : "boolean"},
 			idCheck          : {type : "function", length : [1, 3]},
-			meta             : {type : "function", length : [1, 2]},
+			meta             : {type : "function", length : [0, 2]},
 			packed           : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			trustMagic       : {type : "boolean"},

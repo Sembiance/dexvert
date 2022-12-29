@@ -538,7 +538,7 @@ export class Program
 
 		const {programid, flags, progOptions : moreProgOptions} = Program.parseProgram(progRaw);
 		if(RUNTIME.forbidProgram.has(programid))
-			return RunState.create({programid, xlog, f : fRaw instanceof FileSet ? fRaw : FileSet.create()});
+			return RunState.create({programid, xlog, f : fRaw instanceof FileSet ? fRaw : await FileSet.create(fRaw instanceof DexFile ? fRaw.root : path.dirname(fRaw), "input", fRaw)});
 			
 		Object.assign(progOptions, moreProgOptions);
 

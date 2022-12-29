@@ -28,9 +28,7 @@ export class resource_dasm extends Program
 		fileOutputPaths = await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{
 			const filename = path.basename(fileOutputPath);
-			let newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args.at(-2)).length+1));
-			if(newFileOutputPath.endsWith(".bin"))
-				newFileOutputPath = newFileOutputPath.substring(0, newFileOutputPath.length-4);
+			const newFileOutputPath = path.join(path.dirname(fileOutputPath), filename.substring(path.basename(r.args.at(-2)).length+1));
 			await Deno.rename(fileOutputPath, newFileOutputPath);
 			return newFileOutputPath;
 		});
@@ -184,6 +182,9 @@ export class resource_dasm extends Program
 		});
 
 		await quickConvertImages(r, fileOutputPaths);
+
+		// finally any .bin files left, drop the .bin extension
+		await (await fileUtil.tree(outDirPath, {nodir : true, regex : /\.bin$/})).parallelMap(async fileOutputPath => await Deno.rename(fileOutputPath, fileOutputPath.substring(0, fileOutputPath.length-4)));
 	};
 
 	renameOut = {

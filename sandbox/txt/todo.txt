@@ -17,7 +17,7 @@
   https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
 * Would be great if on the 'browse' page each model could be viewed inline in a small thumbnail sized interactive viewer. Though this may be too intensive? Maybe generate thumbs for each one, as we do for images and show the thumbs instead
   For a Before/After screenshot, can use search results: http://discmaster.textfiles.com/search?q=3dmf&itemid=9374
-* Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip
+* Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
   Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
 
 * Once debby adds a way to leverage SCUMMVM to extract Director 3 files: https://discord.com/channels/350407629849493504/1033065501984817252/1038538531905208340

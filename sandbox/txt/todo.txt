@@ -1,6 +1,17 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Install ClarisWorks under Windows XP and see if it can open up:
+  document/clarisWorks
+  image/pict/PICT_129.pict and image/pict/pict_001 
+  image/pict/*
+  The 'Animals' item from: https://www.macintoshrepository.org/1913-clarisworks-clip-art
+  Then consider setting ClarisWorks as a prefered converter for those.
+  See what else ClarisWorks can open
+
+* Improve recombining of images in deark, some are not doing it properly:
+  Start with:  • Figure 5 Window in List Mode.pict
+  Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
 
 /---------------\
 | High Priority |

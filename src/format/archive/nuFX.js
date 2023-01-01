@@ -2,9 +2,9 @@ import {Format} from "../../Format.js";
 
 export class nuFX extends Format
 {
-	name       = "NuFX Archive";
+	name       = "NuFX/ShrinkIt Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/NuFX";
 	ext        = [".bxy", ".shk"];
-	magic      = ["current ar archive", "ar archive"];
+	magic      = ["NuFile archive", "NuFX archive", /^fmt\/850( |$)/];
 	converters = ["nulib2", "acx"];
 }

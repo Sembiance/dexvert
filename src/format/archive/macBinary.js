@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _MACBINARY_MAGIC = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded"];
+const _MACBINARY_MAGIC = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded", "MacBinary 3"];
 export {_MACBINARY_MAGIC};
 
 export class macBinary extends Format

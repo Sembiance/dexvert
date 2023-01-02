@@ -1,4 +1,4 @@
-# Unsupported File Formats (864)
+# Unsupported File Formats (872)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -426,7 +426,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (424)
+## Other (429)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -518,6 +518,7 @@ other | Calamus Farb Color Table | .cft .cf |
 other | Calamus Raster Information | .cri .cr | 
 other | Calamus Text Style List | .csl .cs | 
 other | Caligari TrueSpace Data |  | 
+other | Call of Duty Map | .d3dbsp .bsp | 
 other | CHAOSultdGEM Parameters | .chs | [8 sample files](https://telparia.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 other | Character Table Library | .tlb | 
 other | Chemview Animation Data | .d | 
@@ -784,6 +785,7 @@ other | Sound Images Sound Driver | .bin |
 other | Speculator Snapshot | .zx82 .zx | 
 other | SQLite2 Database | .sqlite .sqlite2 .db | 
 other | StarCraft Map | .scm .scx | 
+other | StarCraft Replay | .rep | 
 other | Startrekker Module Info | .nt | 
 other | StarWriter Formula | .frm | 
 other | StarWriter Printer Driver | .gpm | 
@@ -812,6 +814,7 @@ other | Turbo Pascal Help | .hlp |
 other | TVPaint Project | .tvpp .deep .aur | 
 other | Type Library | .tlb | 
 other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://telparia.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
+other | Valve Source Map | .bsp | 
 other | VCD Entries File | .vcd | 
 other | Vektor Grafix Driver | .drv | 
 other | VESA Display Identification File | .vdb | 
@@ -830,6 +833,8 @@ other | Visual FoxPro Compound Index | .cdx |
 other | Visual Smalltalk Enterprise Objects Library | .sll | 
 other | Visual SourceSafe Control File | .scc | 
 other | Vocal-Eyes Set | .set | 
+other | WarCraft III Map | .w3m | 
+other | WarCraft III Recorded Game | .w3g | 
 other | WarCraft Map | .pud | 
 other | Watcom Profiler Sampling Data | .smp | 
 other | Winamp Advanced Visualization Studio File | .avs | 
@@ -856,7 +861,7 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (37)
+## Poly (40)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -879,12 +884,14 @@ poly | MilkShape 3D Model | .ms3d |
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
 poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
 poly | NorthCAD-3D | .n3d | 
+poly | OGRE Mesh | .mesh | 
 poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [1 sample file](https://telparia.com/fileFormatSamples/poly/openNURBS/)
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/poly/polyfilm/)
 poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/)
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
 poly | Quake 3 Model | .md3 | 
 poly | Raven Object File Format | .rof | 
+poly | Ray Dream Designer Scene | .rd4 | 
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
@@ -893,6 +900,7 @@ poly | [SGI Yet Another Object Description Language](http://fileformats.archivet
 poly | Simply 3D Geometry | .ged | 
 poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 
+poly | Valve Studio Model Vertices | .vvd | 
 poly | Vertex Binary 3D Object | .3d | 
 poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://telparia.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
 poly | Virtus VR Scene | .vvr | 

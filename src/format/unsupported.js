@@ -438,6 +438,7 @@ export default
 		babbleData                   : {name : "Babble! Data", ext : [".bab"], magic : ["Babble! text data"]},
 		barsAndPipesFile             : {name : "Bars and Pipes File", ext : [".gchone", ".gchord", ".song"], magic : ["Bars and Pipes"]},
 		berkeleyDB                   : {name : "Berkeley DB", ext : [".db"], magic : ["Berkeley DB"]},
+		billOfMaterials              : {name : "Bill of Materials", ext : [".bom"], magic : ["Bill Of Materials", "Mac OS X bill of materials"]},
 		binaryColorFormat            : {name : "Binary Color Format", ext : [".bcf"], magic : ["Binary Color Format	"]},
 		binPatchPatch                : {name : "BinPatch Patch", ext : [".utp"], magic : ["BinPatch patch"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},

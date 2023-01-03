@@ -73,7 +73,7 @@ https://archive.org/details/installshield1150premier
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
 	and others (see unsupported notes). Then re-process any CD's that have those formats on them (#570, etc)
 
-* Create a deno based parser that can parse internet e-mail/news formats to verify that they are indeed valid files. Bonus points for converting HTML based emails into .html documents
+* Create a deno based parser that can parse text/imf internet message format, internet e-mail/news formats to verify that they are indeed valid files. Bonus points for converting HTML based emails into .html documents
   http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format
   See samples in: sandbox/samples/mail_news/
 

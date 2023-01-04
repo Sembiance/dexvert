@@ -37,8 +37,9 @@ export class vinetto extends Program
 
 			catalogIDs.forEach((catalogID, i) =>
 			{
-				const {ts, filename} = catalogInfos.find(({catalogid}) => catalogid===catalogID);
-				filenameMap[filenames[i]] = {ts : dateParse(ts, "yyyy-MM-ddTHH:mm:ss")?.getTime(), filename : path.basename(filename.replaceAll("\\", "/"))};	// filename could be an absolute path (windows or unix variety)
+				const {ts, filename} = catalogInfos.find(({catalogid}) => catalogid===catalogID) || {};
+				if(ts && filename)
+					filenameMap[filenames[i]] = {ts : dateParse(ts, "yyyy-MM-ddTHH:mm:ss")?.getTime(), filename : path.basename(filename.replaceAll("\\", "/"))};	// filename could be an absolute path (windows or unix variety)
 			});
 		}
 

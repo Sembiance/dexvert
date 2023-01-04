@@ -24,22 +24,29 @@ export class svgInfo extends Program
 
 		if(r.f.input.size<xu.MB*30)
 		{
-			const svgData = xmlParse(await fileUtil.readTextFile(r.inFile({absolute : true})));
-			if(!svgData?.svg || Object.keys(svgData.svg).filter(k => !k.startsWith("@")).length===0)
+			try
 			{
-				// If we have no children, doesn't matter if width/height/viewBox is set, there isn't anything to draw
-				Object.assign(r.meta, {width : 0, height : 0});
+				const svgData = xmlParse(await fileUtil.readTextFile(r.inFile({absolute : true})));
+				if(!svgData?.svg || Object.keys(svgData.svg).filter(k => !k.startsWith("@")).length===0)
+				{
+					// If we have no children, doesn't matter if width/height/viewBox is set, there isn't anything to draw
+					Object.assign(r.meta, {width : 0, height : 0});
+				}
+				else if(svgData.svg?.["@width"] && svgData.svg?.["@height"])
+				{
+					Object.assign(r.meta, {width : +svgData.svg["@width"].toString().match(/\d+/)[0], height : +svgData.svg["@height"].toString().match(/\d+/)[0]});
+				}
+				else if(svgData.svg?.["@viewBox"])
+				{
+					const [x, y, width, height] = svgData.svg["@viewBox"].split(" ").map(v => +v);
+					Object.assign(r.meta, {width : width-x, height : height-y});
+				}
+				else
+				{
+					Object.assign(r.meta, {width : 0, height : 0});
+				}
 			}
-			else if(svgData.svg?.["@width"] && svgData.svg?.["@height"])
-			{
-				Object.assign(r.meta, {width : +svgData.svg["@width"].toString().match(/\d+/)[0], height : +svgData.svg["@height"].toString().match(/\d+/)[0]});
-			}
-			else if(svgData.svg?.["@viewBox"])
-			{
-				const [x, y, width, height] = svgData.svg["@viewBox"].split(" ").map(v => +v);
-				Object.assign(r.meta, {width : width-x, height : height-y});
-			}
-			else
+			catch
 			{
 				Object.assign(r.meta, {width : 0, height : 0});
 			}

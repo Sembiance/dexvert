@@ -61,9 +61,14 @@ export class RunState
 	}
 
 	// returns r.f.outDir.rel
-	outDir({absolute}={})
+	outDir({absolute, trailingSlash}={})
 	{
-		return absolute ? this.f.outDir.absolute : path.relative(this.cwd, this.f.outDir.absolute);
+		let result = absolute ? this.f.outDir.absolute : path.relative(this.cwd, this.f.outDir.absolute);
+		
+		if(trailingSlash)
+			result = path.join(result, "/");
+
+		return result;
 	}
 
 	// Removes from disk the outDir and homeDir of this RunState, used to cleanup temporary excess files from temporary program runs

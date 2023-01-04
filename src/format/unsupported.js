@@ -391,10 +391,11 @@ export default
 		//////////
 		// ROMS //
 		//////////
-		gameBoyROM  : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
-		genesisROM  : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
-		nintendoROM : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
-		qlPluginROM : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
+		atari7800ROM : {name : "Atari 7800 ROM", ext : [".a78"], magic : ["Atari 7800 ROM"]},
+		gameBoyROM   : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+		genesisROM   : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
+		nintendoROM  : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
+		qlPluginROM  : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
 
 		///////////
 		// Other //

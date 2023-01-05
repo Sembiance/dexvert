@@ -7,6 +7,8 @@ win2k/data/app/HijaakExpress.iso
 win2k/data/app/Office97Standard.zip
 win2k/data/app/PageStream5.0.5.8-windows.zip
 win2k/data/app/PaperPort Deluxe 6.1 (Windows)(1999).iso
+win2k/data/app/Acrobat 5.0/
+win2k/data/app/Aldus PageMaker 5.0/
 
 winxp/data/app/AdobeIllustrator8.0.1.iso
 winxp/data/app/DirectorMX2004.exe
@@ -18,6 +20,9 @@ winxp/data/app/FG523WinFull-4868.exe
 winxp/data/app/Corel-PhotoPaint8-Program-Win95.iso
 winxp/data/app/Canvas14/
 winxp/data/app/MGX_GS_APPS.ISO
+winxp/data/app/Acrobat 5.0/
+winxp/data/app/PageMaker 7.0/
+winxp/data/app/QuarkXPress Passport 6.1.iso
 
 amiga*/*.img
 amiga*/data/*.iso

@@ -204,6 +204,7 @@ export default
 	{
 		astoundAnimation		: {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
 		completeAnimatorFilm    : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
+		fujitsuMovie            : {name : "Fujitsu Movie", ext : [".mve"], magic : ["Fujitsu Movie format video"]},
 		knowledgeAdventureMovie : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},
 		ratvidVideo             : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
 		screenCamVideo          : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"], website : "https://wiki.multimedia.cx/index.php/SCM"}

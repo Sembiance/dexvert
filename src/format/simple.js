@@ -20,7 +20,7 @@ export default
 		atariWorksSpreadsheet    : {name : "Atari Works Spreadsheet", ext : [".sts"], magic : ["Atari Works Spreadsheet"]},
 		bankBookForWindows       : {name : "Bank Book for Windows Account Data", ext : [".dat"], magic : ["Bank Book for Windows account Data"]},
 		borlandTurboVisionHelp   : {name : "Borland Turbo Vision Help", ext : [".hlp"], magic : ["Borland Turbo Vision Help"]},
-		cambridgeZ88Basic        : {name : "Cambridge Z88 Basic", ext : [".bas"], magic : ["Cambridge Z88 BASIC tokenized source"]},
+		cambridgeZ88Basic        : {name : "Cambridge Z88 Basic", ext : [".bas"], magic : ["Cambridge Z88 BASIC tokenized source"], weakMagic : true},
 		catalogTranslation       : {name : "Amiga Catalog Translation file", ext : [".ct"], magic : ["catalog translation"]},
 		centralPointHelp         : {name : "Central Point Help", ext : [".hlp"], magic : ["Central Point Software Help data"]},
 		clarionHelp              : {name : "Clarion Help", ext : [".hlp"], magic : ["Clarion for DOS Help", "Clarion Developer (v2 and above) help data"], trustMagic : true},

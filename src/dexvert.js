@@ -123,10 +123,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 
 			let cwdExt = null;
 
-			if(format.safeExt)
+			if(Object.hasOwn(format, "safeExt"))
 			{
 				cwdExt = typeof format.safeExt==="function" ? await format.safeExt(dexState) : format.safeExt;
-				xlog.debug`format has safeext function and returned ${cwdExt}`;
+				xlog.debug`format has safeExt function and returned ${cwdExt}`;
 			}
 			
 			if(cwdExt===null)

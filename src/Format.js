@@ -136,7 +136,7 @@ export class Format
 			converters   : {types : [Array, "function"]},
 			keepFilename : {type : "boolean"},
 			metaProvider : {type : ["string"], enum : (family.metaids || [])},
-			safeExt      : {types : ["string", "function"]},
+			safeExt      : {types : ["string", "function"], allowEmpty : true},
 			processed    : {type : "function", length : [0, 1]},
 			pre          : {type : "function", length : [0, 1]},
 			post         : {type : "function", length : [0, 1]}

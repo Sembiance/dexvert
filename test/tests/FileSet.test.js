@@ -16,7 +16,10 @@ Deno.test("addFile", async () =>
 	const b = await FileSet.create("/mnt/compendium/DevLab/dexvert/test/files", "input", [
 		"/mnt/compendium/DevLab/dexvert/test/files/some.big.txt.file.txt",
 		"/mnt/compendium/DevLab/dexvert/test/files/subDir/txt.b"]);
-	await b.addAll("input", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt", "/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
+	await b.addAll("input", ["/mnt/compendium/DevLab/dexvert/test/files/subDir/symlinkFile",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/c.txt",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third",
+		"/mnt/compendium/DevLab/dexvert/test/files/subDir/more_sub/third"]);
 
 	[a, b].forEach(o =>
 	{

@@ -65,6 +65,8 @@ const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPat
 if(!dexState)
 	await handleExit(xlog.warn`No processed result.`);
 
+if(argv.jsonFile || argv.json)
+	xlog.debug`Stringifying and serializing state...`;
 const serializedState = (argv.jsonFile || argv.json) ? JSON.stringify(dexState.serialize()) : null;
 
 if(argv.jsonFile)
@@ -76,9 +78,14 @@ if(argv.json)
 if(xlog.atLeast("fatal"))
 {
 	if(argv.logFile)
+	{
 		xlog.warn`${dexState.pretty()}`;
+	}
 	else if(!argv.json)
+	{
+		xlog.debug`Outputting prettyfied state to console...`;
 		console.log(`${dexState.pretty()}`);
+	}
 }
 
 // if we are not processed, then by default this is our lastTry so output that we have no result

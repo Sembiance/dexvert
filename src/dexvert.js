@@ -154,9 +154,14 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 		const cleanup = async () =>
 		{
 			if(xlog.atLeast("trace"))
+			{
 				xlog.debug`${fg.red("NOT")} deleting cwd ${cwd}`;
+			}
 			else
+			{
+				xlog.debug`Deleting cwd ${cwd}...`;
 				await fileUtil.unlink(cwd, {recursive : true});
+			}
 		};
 
 		try
@@ -223,16 +228,15 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 					dexState.processed = true;
 
 				if(!skipVerify)
-					xlog.info`Verifying ${(dexState.f.files.new || []).length} new files...`;
-
-				let producedNewFiles = false;
+					xlog.info`Verifying ${(dexState.f.files.new || []).length.toLocaleString()} new files...`;
 
 				// verify output files
+				const newlyProducedFiles = [];
 				await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
 				{
 					if(!skipVerify)
 					{
-						xlog.debug`Veriyfing file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
+						xlog.debug`Verifying file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
 
 						const failValidation = async msg =>
 						{
@@ -257,16 +261,18 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 					if((new Date(newFile.ts)).getFullYear()>=2020 && inputFile.ts<newFile.ts)
 						await newFile.setTS(inputFile.ts);	// otherwise ensure the newly produce file has a timestamp equal to the input file
 
-					producedNewFiles = true;
-					await dexState.f.add("output", newFile);
+					newlyProducedFiles.push(newFile);
 				});
 
-				if(producedNewFiles)
-					xlog.info`Finished verifying files, yielded ${(dexState.f.files.new?.length || 0)} new files.`;
+				if(newlyProducedFiles.length)
+				{
+					xlog.info`Finished verifying files, yielded ${newlyProducedFiles.length.toLocaleString()} new files. Adding as output...`;
+					await dexState.f.addAll("output", newlyProducedFiles);
+				}
 
 				dexState.f.removeType("new");
 
-				return producedNewFiles;
+				return !!newlyProducedFiles.length;
 			};
 
 			const converters = format.converters ? (Array.isArray(format.converters) ? format.converters : await format.converters(dexState)) : [];
@@ -342,7 +348,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 		// important to do this before cleanup() since that will delete all tmp dirs including output files
 		if(dexState.processed)
 		{
+			xlog.debug`Rsyncing output files back to target output directory...`;
 			await runUtil.run("rsync", ["-a", "--prune-empty-dirs", `${dexState.f.outDir.absolute}/`, `${outputDir.absolute}/`]);
+
+			xlog.debug`Creating FileSet for output files...`;
 			dexState.created = await FileSet.create(outputDir.absolute, "output", await fileUtil.tree(outputDir.absolute, {nodir : true}));
 			// We used to rsync each file individually this way, but this was ungodly slow on large archives like SpanishScene.iso
 			// So now we just rsync our output directory... should be safe :)

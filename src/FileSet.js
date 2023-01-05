@@ -20,15 +20,17 @@ export class FileSet
 
 	async addAll(type, files)
 	{
+		// Creaet a set of existing absolute paths for this addAll operation. Helps vastly speed up adding tons of files by avoiding having to do a 'find' operation for every addition
+		const existingAbsolutePaths = Object.fromEntries((this.files[type] || []).map(f => ([f.absolute, f])));
 		for(const file of files)
-			await this.add(type, file);
+			await this.add(type, file, existingAbsolutePaths);
 		
 		// Doing this below instead of the above would be faster probably, but would yield files being added potentially out of order, which might be important to maintain
 		//await Promise.all(files.map(file => this.add(type, file)));
 	}
 
 	// adds the given file of type type. If o is already a Dexfile, don't need to await
-	async add(type, o)
+	async add(type, o, existingAbsolutePaths)
 	{
 		if(!type)
 			throw new TypeError(`No type specified, required.`);
@@ -44,11 +46,17 @@ export class FileSet
 		if(dexFile.root!==this.root)
 			throw new Error(`Can't add dex file ${o.pretty()} due to root not matching FileSet root: ${this.root}`);
 
-		const existingDexFile = this.files[type].find(file => file.absolute===dexFile.absolute);
+		const existingDexFile = existingAbsolutePaths ? existingAbsolutePaths[dexFile.absolute] : this.files[type].find(file => file.absolute===dexFile.absolute);
 		if(!existingDexFile)
+		{
+			if(existingAbsolutePaths)
+				existingAbsolutePaths[dexFile.absolute] = dexFile;
 			this.files[type].push(dexFile);
+		}
 		else
+		{
 			await existingDexFile.calcStats();	// if we try to add an existing file, it's possible the file has changed on disk, so let's re-calc it's stats
+		}
 	}
 
 	// removes the given file from this FileSet. If unlink is set to true, also deletes it from the disk
@@ -137,13 +145,13 @@ export class FileSet
 
 	pretty(prefix="")
 	{
-		const r = [];
+		let r = [];
 		r.push(`${prefix}FileSet ${xu.paren(`root ${fg.magentaDim(this.root)}`)} has ${fg.yellowDim(this.all.length.toLocaleString())} file${this.all.length===1 ? "" : "s"}:`);
 		if(this.all.length>0)
 		{
 			const longestType = Object.keys(this.files).map(v => v.length).max();
 			for(const [type, typeFiles] of Object.entries(this.files))
-				r.push(...typeFiles.map(f => f.pretty(`\n${prefix}\t${fg.white(`${type.padStart(longestType, " ")}: `)}`)));
+				r = r.concat(typeFiles.map(f => f.pretty(`\n${prefix}\t${fg.white(`${type.padStart(longestType, " ")}: `)}`)));		// eslint-disable-line sembiance/disfavor-array-concat
 		}
 		return r.join("");
 	}

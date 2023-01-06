@@ -194,7 +194,18 @@ EndFunc`,
 	Pause : `
 Func Pause($msg="pause")
 	MsgBox(0, "pause", $msg)
-EndFunc`
+EndFunc`,
+	DebugListWindowTitles : `
+	Func DebugListWindowTitles()
+		Local $aList = WinList()
+
+		; Loop through the array displaying only visible windows with a title.
+		For $i = 1 To $aList[0][0]
+			If $aList[$i][0] <> "" And BitAND(WinGetState($aList[$i][1]), 2) Then
+				MsgBox(0, "", "Title: " & $aList[$i][0] & @CRLF & "Handle: " & $aList[$i][1])
+			EndIf
+		Next
+	EndFunc`
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 

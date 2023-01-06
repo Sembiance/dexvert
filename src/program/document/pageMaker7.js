@@ -9,7 +9,7 @@ export class pageMaker7 extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		script : `
-			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 10)
+			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 5)
 			Func PreOpenWindows()
 				WindowFailure("Adobe PageMaker", "Cannot open file", -1, "{ENTER}")
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Cannot load your target printer", "{ENTER}")

@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Set up pageMaker5 program (first priority on pageMaker format) that uses win2k aldus pagemaker 5 and print to pdf
-
 * Replace usages of Send("!f") Delay(200) menu things with SendSlow() call instead
 
 * Re-run dexvert test suite on slim0

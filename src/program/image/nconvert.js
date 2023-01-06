@@ -13,5 +13,13 @@ export class nconvert extends Program
 	bin       = "nconvert";
 	outExt    = ".png";
 	args      = async r => [...(r.flags.extractAll ? ["-xall"] : []), ...(r.flags.format ? ["-in", r.flags.format] : []), "-out", "png", "-o", await r.outFile("out.png"), r.inFile()];
-	renameOut = true;
+	renameOut = {
+		alwaysRename : true,
+		regex        : /^out-(?<num>\d+)(?<ext>\.[^.]+)$/,	// this regex assumes the input filename doesn't have an underscore
+		renamer      :
+		[
+			({numFiles}, {num, ext}) => [num.padStart(numFiles.toString().length, "0"), ext],
+			({newName, newExt}) => [newName, newExt]
+		]
+	};
 }

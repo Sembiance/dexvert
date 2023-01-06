@@ -10,13 +10,13 @@ export class paperPort extends Program
 	qemuData = r => ({
 		script   : `
 			$mainWindow = WindowRequire("Visioneer PaperPort", "", 10)
-			Send("!fi")
+			SendSlow("!fi")
 			$importWindow = WindowRequire("Import", "", 5)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			WinWaitClose($importWindow, "", 10)
 			WinWaitActive($mainWindow, "", 5)
 
-			Send("!fe")
+			SendSlow("!fe")
 
 			$exportWindow = WindowRequire("Export", "", 5)
 			Send("c:\\out\\out.png{TAB}{DOWN}{END}{UP}{ENTER}{ENTER}")
@@ -27,9 +27,7 @@ export class paperPort extends Program
 			Send("{DELETE}")	; Importing the file copies it over to some working directory, so let's delete it
 			Sleep(1000)
 			
-			Send("!f")
-			Sleep(200)
-			Send("x")
+			SendSlow("!fx")
 			
 			FileRecycleEmpty()	; Deleting the imported file above only moves it to the recycle bin, so let's empty it`
 	});

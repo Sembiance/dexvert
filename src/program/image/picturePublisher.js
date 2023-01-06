@@ -33,7 +33,7 @@ export class picturePublisher extends Program
 		WinWaitClose($saveAsWindow, "", 5)
 
 		WinWaitActive($mainWindow, "", 3)
-		Send("!fx")`
+		SendSlow("!fx")`
 	});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp]";

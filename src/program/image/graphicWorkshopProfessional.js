@@ -22,10 +22,7 @@ export class graphicWorkshopProfessional extends Program
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
 
 			Sleep(1000)
-			Send("!p")
-			Sleep(100)
-			Send("a")
-			Sleep(100)
+			SendSlow("!pa")
 
 			$exportVisible = WinWaitActive("[TITLE:Destination]", "", 5)
 			If $exportVisible Not = 0 Then
@@ -47,11 +44,7 @@ export class graphicWorkshopProfessional extends Program
 
 			KillAll("GWSPRO.EXE")
 
-			Send("{ESCAPE}")
-			Send("{ESCAPE}")
-			Send("{ESCAPE}")
-			Send("{ESCAPE}")
-			Send("{ESCAPE}")`
+			SendSlow("{ESCAPE}{ESCAPE}{ESCAPE}{ESCAPE}{ESCAPE}")`
 	});
 	post      = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});
 	renameOut = true;

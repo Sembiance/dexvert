@@ -26,15 +26,11 @@ export class qtPicViewer extends Program
 			
 				Sleep(500)
 
-				Send("!e")
-				Sleep(200)
-				Send("c")
+				SendSlow("!ec")
 
 				Sleep(250)
 
-				Send("!f")
-				Sleep(200)
-				Send("x")
+				SendSlow("!fx")
 
 				WinWaitClose("[TITLE:Picture Viewer]", "", 10)
 

@@ -15,13 +15,7 @@ export class Fony extends Program
 			Else
 				WinWaitActive("[CLASS:TFMain]", "", 30)
 				Sleep(1000)
-				Send("!f")
-				Sleep(100)
-				Send("e")
-				Sleep(100)
-				Send("{DOWN}")
-				Sleep(100)
-				Send("{ENTER}")
+				SendSlow("!fe{DOWN}{ENTER}")
 
 				$exportVisible = WinWaitActive("[CLASS:TFBDFExport; TITLE:BDF Export]", "", 7)
 				If $exportVisible Not = 0 Then
@@ -37,9 +31,7 @@ export class Fony extends Program
 					Sleep(200)
 				EndIf
 
-				Send("!f")
-				Sleep(100)
-				Send("x")
+				SendSlow("!fx")
 			EndIf`
 	});
 	renameOut = true;

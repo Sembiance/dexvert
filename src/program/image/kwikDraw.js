@@ -20,9 +20,7 @@ export class kwikDraw extends Program
 				WinWaitClose("KWIKDRAW", "Converting", 5)
 			EndIf
 			WinWaitActive("[CLASS:KWIKDRAW]", "", 10)
-			Send("!f")
-			Sleep(200)
-			Send("p")
+			SendSlow("!fp")
 			WinWaitActive("PRINT", "", 10)
 			ControlClick("PRINT", "", "[CLASS:Button; TEXT:Print]")
 			WinWaitActive("Print to File", "", 10)
@@ -30,10 +28,7 @@ export class kwikDraw extends Program
 			WinWaitClose("Print to File", "", 10)
 			Sleep(5000)
 			WinWaitActive("[CLASS:KWIKDRAW]", "", 10)
-			Send("!f")
-			Sleep(200)
-			Send("x")
-			Sleep(200)`
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 	chain     = "ps2pdf[svg]";

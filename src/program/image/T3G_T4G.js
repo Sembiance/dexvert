@@ -30,10 +30,7 @@ export class T3G_T4G extends Program
 				EndIf
 
 				Sleep(500)
-				Send("!f")
-				Sleep(100)
-				Send("x")
-				Sleep(100)
+				SendSlow("!fx")
 
 				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
 			EndIf`});

@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class frameMaker extends Program
@@ -9,70 +10,29 @@ export class frameMaker extends Program
 	args     = r => [r.inFile()];
 	qemuData = ({
 		script : `
-			$noPrinterWin = WinWaitActive("FrameMaker", "Can't find a compatible default printer", 5)
-			If $noPrinterWin Not = 0 Then
-				ControlClick("FrameMaker", "Can't find a compatible default printer", "[CLASS:Button; TEXT:OK]")
+			$mainWindow = WindowRequire("FrameMaker", "", 5)
+			Func PreOpenWindows()
+				WindowDismiss("FrameMaker", "will be converted to the current release", "{ENTER}")
+				WindowDismiss("FrameMaker", "unavailable font", "{ENTER}")
+				WindowDismiss("FrameMaker", "unavailable language", "{ENTER}")
+				WindowDismiss("Missing File", "", "{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{DOWN}{ENTER}")
+				WindowDismiss("FrameMaker", "Cannot display", "{ENTER}")
+				WindowDismiss("FrameMaker", "does not exist", "{ENTER}")
+			EndFunc
+			CallUntil("PreOpenWindows", ${xu.SECOND*4})
 
-				$oldDocWin = WinWaitActive("FrameMaker", "will be converted to the current release", 5)
-				If $oldDocWin Not = 0 Then
-					ControlClick("FrameMaker", "will be converted to the current release", "[CLASS:Button; TEXT:OK]")
-				EndIf
+			SendSlow("!fa", 250)
 
-				$missingFontWin = WinWaitActive("FrameMaker", "unavailable font", 5)
-				If $missingFontWin Not = 0 Then
-					ControlClick("FrameMaker", "unavailable font", "[CLASS:Button; TEXT:OK]")
-				EndIf
+			$saveAsWindow = WindowRequire("Save Document", "", 5)
+			Send("c:\\out\\out.rtf{TAB}{TAB}{TAB}{TAB}{TAB}r{ENTER}")
+			WinWaitClose($saveAsWindow, "", 5)
 
-				$missingLanguageWin = WinWaitActive("FrameMaker", "unavailable language", 5)
-				If $missingLanguageWin Not = 0 Then
-					ControlClick("FrameMaker", "unavailable language", "[CLASS:Button; TEXT:OK]")
-				EndIf
+			SendSlow("!fx", 250)
 
-				$missingFileWin = WinWaitActive("Missing File", "", 5)
-				If $missingFileWin Not = 0 Then
-					Send("{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{DOWN}{ENTER}")
-					WinWaitClose("Missing File", "", 5)
-				EndIf
-
-				Local $errorWin
-				Do
-					Sleep(500)
-
-					$errorWin = WinActive("FrameMaker", "does not exist")
-					If $errorWin Not = 0 Then
-						ControlClick("FrameMaker", "does not exist", "[CLASS:Button; TEXT:OK]")
-					EndIf
-
-					$errorWin = WinActive("FrameMaker", "Cannot display")
-					If $errorWin Not = 0 Then
-						ControlClick("FrameMaker", "Cannot display", "[CLASS:Button; TEXT:OK]")
-					EndIf					
-
-					Sleep(1000)
-				Until $errorWin = 0
-
-				WinWaitActive("FrameMaker", "", 5)
-								
-				Sleep(1000)
-				Send("!f")
-				Sleep(250)
-				Send("a")
-
-				WinWaitActive("Save Document", "", 5)
-
-				Send("c:\\out\\out.rtf{TAB}{TAB}{TAB}{TAB}{TAB}r{ENTER}")
-
-				WinWaitClose("Save Document", "", 5)
-
-				Send("!f")
-				Sleep(250)
-				Send("x")
-
-				$unsavedWin = WinWaitActive("FrameMaker", "Unsaved", 5)
-				If $unsavedWin Not = 0 Then
-					ControlClick("FrameMaker", "Unsaved", "[CLASS:Button; TEXT:&No]")
-				EndIf
-			EndIf`
+			Func PostExitWindows()
+				WindowDismiss("FrameMaker", "Unsaved", "n")
+			EndFunc
+			CallUntil("PostExitWindows", ${xu.SECOND*3})`
 	});
 	chain     = "dexvert[asFormat:document/rtf]";
 	renameOut = true;

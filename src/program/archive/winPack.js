@@ -25,29 +25,19 @@ export class winPack extends Program
 			Else
 				Sleep(1000)
 
-				Send("!f")
-				Sleep(200)
-				Send("u")
+				SendSlow("!fu")
 
 				WinWaitActive("[TITLE:Browse for Folder]", "", 10)
 
 				Sleep(1000)
 
-				Send("{DOWN}")
-				Sleep(100)
-				Send("{RIGHT}")
-				Sleep(100)
-				Send("o")
-				Sleep(200)
-				Send("{ENTER}")
+				SendSlow("{DOWN}{RIGHT}o{ENTER}")
 
 				WinWaitClose("[TITLE:Browse for Folder]", "", 10)
 
 				Sleep(1000)
 
-				Send("!f")
-				Sleep(200)
-				Send("x")
+				SendSlow("!fx")
 			EndIf
 
 			WaitForPID("WinPack.exe", ${xu.SECOND*10})`

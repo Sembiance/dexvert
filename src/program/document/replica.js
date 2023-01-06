@@ -11,10 +11,7 @@ export class replica extends Program
 		script : `
 			WinWaitActive("[CLASS:DPMDIFrameClass]", "", 20)
 		
-			Sleep(200)
-			Send("!f")
-			Sleep(200)
-			Send("a")
+			SendSlow("!fa")
 
 			WinWaitActive("[TITLE:Save As]", "", 10)
 
@@ -24,10 +21,7 @@ export class replica extends Program
 			WinWaitClose("[TITLE:Save As]", "", 10)
 			Sleep(200)
 
-			Sleep(200)
-			Send("!f")
-			Sleep(200)
-			Send("x")
+			SendSlow("!fx")
 			
 			WinWaitClose("[CLASS:DPMDIFrameClass]", "", 10)`
 	});

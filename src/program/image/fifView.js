@@ -28,9 +28,7 @@ export class fifView extends Program
 		_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", WinGetHandle("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]"), 4, 42, 644, 441, False);
 
 		Sleep(500)
-		Send("!f")
-		Sleep(100)
-		Send("x")
+		SendSlow("!fx")
 
 		WinWaitClose("[TITLE:Fractal Viewer Helper App; CLASS:DECO_NT_Class]", "", 10)`
 	});

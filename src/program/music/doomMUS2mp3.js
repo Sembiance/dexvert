@@ -26,13 +26,7 @@ export class doomMUS2mp3 extends Program
 			Local $entriesPOS = ControlGetPos("[TITLE:SLADE; CLASS:wxWindowNR]", "", "[CLASS:Button; TEXT:Entries]")
 			MouseClick("right", $entriesPOS[0]+26, $entriesPOS[1]+104, 1)
 			Sleep(750)
-			Send("{UP}")
-			Sleep(500)
-			Send("{RIGHT}")
-			Sleep(500)
-			Send("{ENTER}")
-			Sleep(1000)
-			Send("^e")
+			SendSlow("{UP}{RIGHT}{ENTER}^e", 700)
 
 			WinWaitActive("Export Entry", "", 10)
 			WaitForControl("Export Entry", "", "[CLASS:Edit; INSTANCE:1]", ${xu.SECOND*10})
@@ -43,9 +37,7 @@ export class doomMUS2mp3 extends Program
 
 			WinWaitClose("Export Entry", "", 10)
 
-			Send("!f")
-			Sleep(200)
-			Send("x")
+			SendSlow("!fx")
 
 			WinWaitActive("Unsaved Changes", "", 10)
 			WaitForControl("Unsaved Changes", "", "[CLASS:Button; TEXT:&No]", ${xu.SECOND*10})

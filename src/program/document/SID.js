@@ -15,10 +15,7 @@ export class SID extends Program
 			WinWaitActive("[sid] sexy installshield decompiler", "", 10)
 
 			Sleep(500)
-			Send("!f")
-			Sleep(100)
-			Send("o")
-			Sleep(100)
+			SendSlow("!fo")
 
 			WinWaitActive("Choose file to decompile", "", 10)
 			Sleep(200)
@@ -52,10 +49,7 @@ export class SID extends Program
 				FileWrite("c:\\out\\out.txt", ClipGet())
 
 				Sleep(500)
-				Send("!f")
-				Sleep(100)
-				Send("q")
-				Sleep(100)
+				SendSlow("!fq")
 				
 				WinWaitClose("[sid] sexy installshield decompiler", "", 10)
 			EndIf

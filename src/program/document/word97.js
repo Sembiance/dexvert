@@ -11,9 +11,7 @@ export class word97 extends Program
 		script : `
 			$mainWindow = WindowRequire("[TITLE:Microsoft Word - ]", "", 10)
 			
-			Send("!f")
-			Sleep(200)
-			Send("a")
+			SendSlow("!fa")
 
 			$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 10)
 
@@ -23,9 +21,7 @@ export class word97 extends Program
 			WinWaitClose($saveAsWindow, "", 5)
 			Sleep(200)
 
-			Send("!f")
-			Sleep(200)
-			Send("x")`
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 	chain     = "dexvert[asFormat:document/wordDoc]";

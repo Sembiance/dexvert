@@ -1,12 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Replace usages of Send("!f") Delay(200) menu things with SendSlow() call instead
-
-* Re-run dexvert test suite on slim0
-  If things for win2k fail oddly, it might be due to re-enabling the printer spoolers, I seem to recall this giving me trouble earlier
-  Could try disabling it on startup and then 'starting it' as part of the supervisor startup script on win2k only (which I feel like I also tried before?)
-
 * Improve recombining of PICT images in deark, some are not doing it properly:
   Start with:  • Figure 5 Window in List Mode.pict
   Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )

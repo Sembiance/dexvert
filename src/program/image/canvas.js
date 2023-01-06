@@ -41,7 +41,7 @@ export class canvas extends Program
 			; couldn't find a way to prevent it and the only way to detect is if we have more than 1 page/layer/object
 			; I'd love to check this directly with a text check byut 
 			; so I have to resort to using a PxelChecksum. Not sure how fragile this is or not
-			Send("!fi")
+			SendSlow("!fi")
 			$propWindow = WindowRequire("Document Properties", "", 5)
 			Send("+{TAB}+{TAB}+{TAB}{HOME}{RIGHT}")
 

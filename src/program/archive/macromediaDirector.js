@@ -54,9 +54,7 @@ export class macromediaDirector extends Program
 			CallUntil("DismissWarnings", ${xu.SECOND*3})
 
 			${r.inFile().toLowerCase().endsWith(".dir") ? `
-			Send("^4")
-			Sleep(200)
-			Send("^4")
+			SendSlow("^4^4")
 			` : ""}
 
 			; Wait for the 'Cast' sub window/control to appear
@@ -153,7 +151,7 @@ export class macromediaDirector extends Program
 				Send("{DOWN}")
 			Next
 
-			Send("!fx")
+			SendSlow("!fx")
 
 			Local $saveChangesVisible = WinWaitActive("[TITLE:Director]", "", 3)
 			If $saveChangesVisible Not = 0 Then

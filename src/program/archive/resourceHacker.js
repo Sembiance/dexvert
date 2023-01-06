@@ -23,9 +23,7 @@ export class resourceHacker extends Program
 
 			Sleep(200)
 			
-			Send("!f")
-			Sleep(250)
-			Send("x")`
+			SendSlow("!fx")`
 	});
 	renameOut = {
 		alwaysRename : true,

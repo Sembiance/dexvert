@@ -12,10 +12,7 @@ export class CADDraw extends Program
 			$mainWindowVisible = WinWaitActive("[CLASS:MainWClassToso4]", "", 5)
 			If $mainWindowVisible Not = 0 Then
 				Sleep(500)
-				Send("!f")
-				Sleep(100)
-				Send("a")
-				Sleep(100)
+				SendSlow("!fa")
 
 				$exportVisible = WinWaitActive("[TITLE:Save Drawing as...]", "", 10)
 				If $exportVisible Not = 0 Then
@@ -31,10 +28,7 @@ export class CADDraw extends Program
 				EndIf
 
 				Sleep(500)
-				Send("!f")
-				Sleep(100)
-				Send("x")
-				Sleep(100)
+				SendSlow("!fx")
 
 				WinWaitClose("[CLASS:MainWClassToso4]", "", 10)
 			EndIf`});

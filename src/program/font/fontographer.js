@@ -10,10 +10,7 @@ export class fontographer extends Program
 		script : `
 			WinWaitActive("Fontographer 5.2", "", 10)
 			Sleep(500)
-			Send("!f")
-			Sleep(100)
-			Send("g")
-			Sleep(100)
+			SendSlow("!fg")
 
 			WinWaitActive("Generate Font Files", "", 10)
 			Sleep(100)
@@ -21,10 +18,7 @@ export class fontographer extends Program
 			WinWaitClose("Generate Font Files", "", 10)
 			Sleep(500)
 
-			Send("!f")
-			Sleep(100)
-			Send("x")
-			Sleep(100)`
+			SendSlow("!fx")`
 	});
 	renameOut = false;
 }

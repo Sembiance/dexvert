@@ -12,7 +12,7 @@ export class corelDRAW extends Program
 		script   : `
 			$mainWindow = WindowRequire("CorelDRAW", "", 10)
 
-			Send("!fi")
+			SendSlow("!fi")
 			$importWindow = WindowRequire("Import", "", 5)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			WinWaitClose($importWindow, "", 10)
@@ -28,7 +28,7 @@ export class corelDRAW extends Program
 
 			WinWaitActive($mainWindow, "", 10)
 
-			Send("!fe")
+			SendSlow("!fe")
 
 			WindowRequire("Export", "", 5)
 			Send("c:\\out\\out.bmp{TAB}{TAB}{TAB}{HOME}w{ENTER}")
@@ -39,9 +39,7 @@ export class corelDRAW extends Program
 
 			WinWaitActive($mainWindow, "", 3)
 
-			Send("!f")
-			Sleep(200)
-			Send("x")
+			SendSlow("!fx")
 			
 			WindowDismissWait("CorelDRAW!", "Save current changes", 3, "n")`
 	});

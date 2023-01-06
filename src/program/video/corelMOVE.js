@@ -12,7 +12,7 @@ export class corelMOVE extends Program
 		alsoKill : ["ntvdm.exe"],
 		script   : `
 			$mainWindow = WindowRequire("CorelMOVE - ${path.basename(r.inFile()).toUpperCase()}", "", 10)
-			Send("!fem")
+			SendSlow("!fem")
 			WindowRequire("Export To Movie", "", 5)
 			Send("c:\\out\\out.avi{ENTER}")
 			WindowRequire("Compression Method", "", 5)
@@ -22,9 +22,7 @@ export class corelMOVE extends Program
 			WinWaitClose($exportWindow, "", 30)
 			WinWaitActive($mainWindow, "", 3)
 			
-			Send("!f")
-			Sleep(200)
-			Send("x")`
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 	chain     = `dexvert[asFormat:video/avi]`;

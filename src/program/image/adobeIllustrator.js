@@ -20,7 +20,7 @@ export class adobeIllustrator extends Program
 		WaitForControl($mainWindow, "", "[CLASS:MDIClass]", ${xu.SECOND*7})
 
 		; Vector Save As (exporting as PNG/BMP doesn't seem to work, probably because I didn't install the correct plugins)
-		Send("!fa")
+		SendSlow("!fa")
 		$saveWindow = WindowRequire("Save This Document As:", "", 5)
 		Send("c:\\out{ENTER}out{TAB}{DOWN}{END}{ENTER}{ENTER}")
 		WinWaitClose($saveWindow, "", 5)

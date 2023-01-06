@@ -26,9 +26,7 @@ export class cardfile extends Program
 				FileWrite("c:\\out\\out.txt", ClipGet())
 			EndIf
 
-			Send("!f")
-			Sleep(200)
-			Send("x")`
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 }

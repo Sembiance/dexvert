@@ -32,9 +32,7 @@ export class pageMaker4 extends Program
 
 			If WindowDismissWait("PageMaker 4.0", "Page and paper orientation", 5, "{TAB}{SPACE}") Not = 0 Then
 				Sleep(1000)
-				Send("!s")
-				SendSlow("{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}")
-				Send("^p")
+				SendSlow("!s{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}^p")
 				Sleep(2000)
 				Send("{ENTER}")
 			EndIf

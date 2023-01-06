@@ -19,10 +19,7 @@ export class envoyViewer extends Program
 				Sleep(5000)
 				WinActivate($mainWindow)
 				WinWaitActive($mainWindow, "", 10)
-				Send("!f")
-				Sleep(200)
-				Send("x")
-				Sleep(200)
+				SendSlow("!fx")
 			EndIf`
 	});
 	renameOut = true;

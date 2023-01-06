@@ -14,11 +14,7 @@ export class PageStream extends Program
 			WinWaitActive("Font Substitution", "", 10)
 			ControlClick("Font Substitution", "", "[CLASS:Button; TEXT:OK]")
 
-			Sleep(500)
-			Send("!f")
-			Sleep(100)
-			Send("D")
-			Sleep(100)
+			SendSlow("!fD")
 
 			WinWaitActive("Save As PDF", "", 10)
 			ControlClick("Save As PDF", "", "[CLASS:Button; TEXT:Save]")

@@ -21,9 +21,7 @@ export class imjview extends Program
 			If $mainWindow Not = 0 Then
 				Send("{ENTER}");
 				WinWaitClose("Pegasus IMPACJ Demonstration Product", "", 5)
-				Send("!i");
-				Sleep(250);
-				Send("o");
+				SendSlow("!io", 250);
 				Sleep(500);
 
 				$openWindow = WinWaitActive("Open", "", 5)
@@ -41,9 +39,7 @@ export class imjview extends Program
 					_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", $viewWindowControl, 4, 23, $viewDim[0]-4, $viewDim[1]-4, False)
 				EndIf
 
-				Send("!i");
-				Sleep(250);
-				Send("x");
+				SendSlow("!ix");
 			EndIf`});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp]";

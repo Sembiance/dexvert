@@ -13,7 +13,7 @@ export class resourceEditor extends Program
 
 			AutoItSetOption("SendKeyDelay", 20)
 
-			Send("!f")
+			SendSlow("!f")
 			Sleep(250)
 			Send("{DOWN}{DOWN}{DOWN}{DOWN}{ENTER}")
 
@@ -29,9 +29,7 @@ export class resourceEditor extends Program
 
 			Sleep(200)
 			
-			Send("!f")
-			Sleep(250)
-			Send("x")`
+			SendSlow("!fx", 250)`
 	});
 	renameOut = {
 		alwaysRename : true,

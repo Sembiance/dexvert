@@ -21,19 +21,14 @@ export class clipbrdWin2k extends Program
 
 				; switch to the actual clip we opened
 				Sleep(500)
-				Send("!w")
-				Sleep(100)
-				Send("1")
+				SendSlow("!w1")
 				Sleep(2000)
 
 				; open mspaint, paste it and save it as a png
 				SaveClipboardWithMSPaint("WINNT", "c:\\out\\out.png")
 
 				Sleep(500)
-				Send("!f")
-				Sleep(100)
-				Send("x")
-				Sleep(100)
+				SendSlow("!fx")
 
 				WinWaitClose("ClipBook Viewer", "", 5)
 			EndIf`});

@@ -22,7 +22,7 @@ export class pageMaker7 extends Program
 			Send("^S")
 
 			$saveAsWindow = WindowRequire("Save Publication", "", 5)
-			Send("c:\\TEMP\\deleteme.pmd{ENTER}")
+			Send("c:\\TEMP\\document.pmd{ENTER}")
 
 			Func PostSaveAsWindows()
 				WindowDismiss("[TITLE:Adobe PageMaker]", "Cannot save as", "{ENTER}")

@@ -225,12 +225,20 @@ export class Program
 					return;
 				}
 
-				// If we are a symlink, we need to make sure we are not pointing outside of our directory
+				// If we are a symlink, we need to make sure we are not pointing outside of our directory or linking to ourself
 				if(newFile.isSymlink)
 				{
 					let linkPath = await Deno.readLink(newFilePath);
 					if(!linkPath.startsWith("/"))
 						linkPath = path.join(path.dirname(newFilePath), linkPath);
+
+					if(linkPath===newFilePath)
+					{
+						xlog.warn`Program ${fg.orange(this.programid)} deleting output symlink ${newFileRel} that links to itself`;
+						await Deno.remove(newFilePath);		// We have to use Deno.remove() here manually because fileUtil.unlink tries to perform a stat() on it which will fail due to infinite recursion
+						return;
+					}
+
 					const linkPathRel = path.relative(f.outDir.absolute, linkPath);
 					if(linkPathRel.startsWith("../"))
 					{

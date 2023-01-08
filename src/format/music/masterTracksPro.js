@@ -6,5 +6,5 @@ export class masterTracksPro extends Format
 	ext         = [".mts"];
 	magic       = ["Master Tracks Score"];
 	unsupported = true;
-	notes       = "So the Pro version of Master Tracks Pro software, which I own, can convert this to MIDI, but it only runs on Vista/7/8/10. I could add a QEMU server for Win 7 I suppose, but not really worth it for 1 format.";
+	notes       = "Master Tracks Pro (app in sandbox/app/master_tracks_pro_full.exe and S/N is in email) can convert this to MIDI, but it only runs on Vista/7/8/10.";
 }

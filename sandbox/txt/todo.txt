@@ -24,6 +24,9 @@
   Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
 * Would also be cool if it could convert and render entire levels liek Warcraft maps, warcraft 3 maps, doom, hexen, quake and valve maps, etc
 * poly/rayDreamDesignerScene openable in Corel Draw 7?
+* Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
+  Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
+  From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 
 * Once debby adds a way to leverage SCUMMVM to extract Director 3 files: https://discord.com/channels/350407629849493504/1033065501984817252/1038538531905208340
   Then process some of those files.
@@ -110,10 +113,6 @@ https://archive.org/details/installshield1150premier
 
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
-* 
-Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
-  Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
-  From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 
 * Add support for The Print Shop Deluxe Graphics library:
   http://discmaster.textfiles.com/view/4974/Handwritten%20Fonts.iso/previews/famousmg/famousmg.psg
@@ -131,47 +130,29 @@ Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20
   If I do go down this route, I can re-process: http://discmaster.textfiles.com/browse/1123
   Someone else mentioned on github that it works with wine-mono
 
-* The program 'Master Tracks Pro' (to support music/masterTracksPro of which I forgot to add sample files) only works in Vista or later.
-  I could create another VMWare image with Vista and use it to run it, but seems like overkill for just 1 program for 1 format.
-  If I choose to do this, the app is in sandbox/app/master_tracks_pro_full.exe and S/N is in email.
-
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
+
+* Support Forgotten Realms Gold Box DAX extraction. I'm only aware of "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) that can do it, but it requires DOTNet, which means Vista or later
+  Code for it here: https://github.com/simeonpilgrim/goldboxexplorer
+  Also no current identification on .dax files: http://discmaster.textfiles.com/search?q=Dax&qfields=ext&family=unknown&sortBy=itemid
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
   Other 3Do extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
-* Figure out why this "eats" my input: test/testdexvert.js --format=music/sid
-
-* If I've made my Deno TUI lib, re-code dexbrute to use it
-
 * Add sparseimage conversion support (requires MacOS X qemu, see archive/sparseImage notes)
 
-* Add better hypercard support. Right now stackimport segfaults on almost every stack and only extracts some of the files
-  Write my own deno based extractor based on the format specs: https://github.com/PierreLorenzi/HyperCardPreview/blob/master/StackFormat.md
-  Reference of course stackimport and HyperCardPreview code as needed to see how to handle any particular conversion
-
-* document/wildcatWCX files often fails to convert when running tests, try and reproduce so I can figure out why
+* If I've made my Deno TUI lib, re-code dexbrute to use it
 
 * Could add printer support to DOSBox: https://sourceforge.net/p/dosbox/patches/?limit=250
   Then I could 'print' certain things, like EnvisionPublisher documents (look for others)
 
-* Improve ILBM animations. Probably need to use an amiga program under QEMU and export as either GIF or raw PNG frames
-  Abydos author mentioned he would like to improve the animations
-  PPaint can save as animated GIF, but dunno if it handles color cycling: http://www.ppaint.com/
-  Maybe also check out Delxue Paint itself to see if it has any export capability: https://en.wikipedia.org/wiki/Deluxe_Paint
-
 * Support ANSI Music files: http://artscene.textfiles.com/ansimusic/
-
-* Add support for iffCTLG. Looks pretty easy to reverse engineer.
-  Use this tool, looks fun to use: http://kaitai.io/  (or just use 010 Editor templates, see dexvert/010_templates/)
-  As that tool looks like I can take the result and use it directly within dexvert. Woot.
-  For inspiration help: http://formats.kaitai.io/riff/index.html
 
 * Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
   Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
 
-* Add Graphic Converter (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
+* Add Graphic Converter OS X (https://www.lemkesoft.de/en/products/graphicconverter/key-features/import-and-export-formats) to my Mac Mini OSX and test CLI to convert PCX (see Help->CLI Commands)
   If that works, for QEMU OSX: https://github.com/kholia/OSX-KVM or https://github.com/foxlet/macOS-Simple-KVM or https://www.emaculation.com/doku.php/ppc-osx-on-qemu-for-windows
   For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
   To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
@@ -203,8 +184,6 @@ Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20
 | Probably Never |
 \----------------/
 * Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
-
-* Create a 'dexvert-remote' NPM  package that will provide the same 'dexvert inputFilePath outputDirPath' command line tool but it will upload the file to the website and then download the results all seamlessly (with progress bar)
 
 * Convert bitmap fonts to more usable vector fonts by trying to "autotrace" the fonts, or utilize a pro tool like: https://www.fontlab.com/font-editor/bitfonter/   or   https://www.fontlab.com/font-converter/transtype/
 

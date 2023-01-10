@@ -39,5 +39,6 @@ export class UniExtract extends Program
 
 			ProcessWaitClose("UniExtract.exe", 5)`
 	});
-	renameOut = false;
+	checkForDups = true;
+	renameOut    = false;
 }

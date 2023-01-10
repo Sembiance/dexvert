@@ -125,16 +125,15 @@ https://archive.org/details/installshield1150premier
 * Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
-* Japanese visual novels have a variety of archive formats, many supported by this program: https://github.com/morkt/GARbro
-  Sadly that program required .NET 4.6 or later, which doesn't work in Windows XP, so I'd need to use a vistaSP2 image: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
-  If I do go down this route, I can re-process: http://discmaster.textfiles.com/browse/1123
-  Someone else mentioned on github that it works with wine-mono
+* Creating a Vista SP2 QEMU image would allow runnign DotNet programs: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
+  This ability would allow conversion/extraction of several additional formats:
+	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
+	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
+	image/xRes: Using sandbox/app/xRes 3.0.iso  it didn't run in Win2k/WinXP, but might? run under Vista. Only encountered on 1 CD so far
+	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
+	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
-
-* Support Forgotten Realms Gold Box DAX extraction. I'm only aware of "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) that can do it, but it requires DOTNet, which means Vista or later
-  Code for it here: https://github.com/simeonpilgrim/goldboxexplorer
-  Also no current identification on .dax files: http://discmaster.textfiles.com/search?q=Dax&qfields=ext&family=unknown&sortBy=itemid
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
   Other 3Do extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0

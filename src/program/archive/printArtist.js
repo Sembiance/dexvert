@@ -4,6 +4,7 @@ import {Program} from "../../Program.js";
 export class printArtist extends Program
 {
 	website  = "https://winworldpc.com/product/instant-artist-print/60";
+	unsafe   = true;
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\SIERRA\\PA6\\PRTARTST.EXE";
 	qemuData = ({

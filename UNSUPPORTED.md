@@ -1,11 +1,11 @@
-# Unsupported File Formats (874)
+# Unsupported File Formats (876)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (48)
+## Archive (50)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -20,6 +20,7 @@ archive | BeOS Installation Package | .pkg |
 archive | BeOS Resource Data | .rsrc | 
 archive | BZIP Compressed Archive | .bz | [2 sample files](https://telparia.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 archive | Colorado Memory System Package | .cmp | 
+archive | Commodore 16 Tape | .tap | 
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://telparia.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
@@ -56,6 +57,7 @@ archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/V
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 archive | WWarp Disk Image | .wwp | 
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
+archive | ZX Spectrum TZX Tape | .tzx | 
 
 
 
@@ -320,7 +322,7 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFormatSamples/image/windowsFAXCover/)
 image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
-image | [xRes Image](http://fileformats.archiveteam.org/wiki/XRes) | .lrg | [6 sample files](https://telparia.com/fileFormatSamples/image/xRes/) - Have xRes 3.0 in sandbox/app but even though it installed in both Win2k and WinXP it doesn't launch, just exits. Could try with Vista or maybe it's a lost cause. Only encountered on 1 CD so far.
+image | [xRes Image](http://fileformats.archiveteam.org/wiki/XRes) | .lrg | [6 sample files](https://telparia.com/fileFormatSamples/image/xRes/)
 image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC2/)
 
 
@@ -375,7 +377,7 @@ music | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://telparia.com/
 music | Klystrack Module | .kt | [5 sample files](https://telparia.com/fileFormatSamples/music/klystrack/)
 music | Korg Song | .sng | 
 music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://telparia.com/fileFormatSamples/music/masterTracker/)
-music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/) - Master Tracks Pro (app in sandbox/app/master_tracks_pro_full.exe and S/N is in email) can convert this to MIDI, but it only runs on Vista/7/8/10.
+music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/)
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
 music | Melody Maker Sing | .mm | 
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi

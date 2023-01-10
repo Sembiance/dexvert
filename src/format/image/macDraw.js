@@ -4,9 +4,9 @@ export class macDraw extends Format
 {
 	name           = "MacDraw";
 	website        = "http://fileformats.archiveteam.org/wiki/MacDraw";
-	ext            = [".pict"];
+	ext            = [".pict", ".drw"];
 	forbidExtMatch = true;
-	magic          = ["MacDraw drawing", /^fmt\/(1426|1427)( |$)/];
+	magic          = ["MacDraw drawing", /^fmt\/(1426|1427|1428)( |$)/];
 	metaProvider   = ["image"];
 	converters     = ["deark[mac]", "nconvert", "soffice[outType:png]", "convert"];	// convert has a habit of producing just a black square
 }

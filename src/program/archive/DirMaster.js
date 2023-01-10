@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class DirMaster extends Program
@@ -6,7 +7,10 @@ export class DirMaster extends Program
 	loc      = "winxp";
 	bin      = "DirMaster.exe";
 	args     = r => ["--exportall", r.inFile()];
-	qemuData = ({cwd : "c:\\out"});
+	qemuData = ({
+		timeout : xu.MINUTE*10,
+		cwd     : "c:\\out"
+	});
 	renameOut = {
 		alwaysRename : true,
 		regex        : /(?<name>.+)\.prg$/,

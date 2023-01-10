@@ -10,6 +10,7 @@ export default
 		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
+		c16Tape                      : {name : "Commodore 16 Tape", ext : [".tap"], magic : ["C16 Tape image format"]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
 		metaCardStack                : {name : "MetaCard Stack", ext : [".rev"], magic : ["Revolution MetaCard stack"]},
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
@@ -19,7 +20,8 @@ export default
 		snatchItDiskImage            : {name : "SNATCH-IT Disk Image", ext : [".cp2", ".img"], magic : ["SNATCH-IT disk image"]},
 		spisTCompress                : {name : "SPIS TCompress", magic : ["SPIS TCompress archive"]},
 		unrealPackage                : {name : "Unreal Package", ext : [".ut2", ".uasset"], magic : ["Unreal Package"]},
-		wwarpDiskImage               : {name : "WWarp Disk Image", ext : [".wwp"], magic : ["WWarp disk image"]}
+		wwarpDiskImage               : {name : "WWarp Disk Image", ext : [".wwp"], magic : ["WWarp disk image"]},
+		zxSpectrumTZXTape            : {name : "ZX Spectrum TZX Tape", ext : [".tzx"], magic : ["Spectrum .TZX data", "ZX Spectrum Tape image", /^fmt\/1000( |$)/]}
 	},
 
 	audio :

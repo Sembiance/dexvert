@@ -1,4 +1,4 @@
-# Supported File Formats (1,422)
+# Supported File Formats (1,424)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -196,7 +196,7 @@ archive | [Squeez SQX Archive](http://fileformats.archiveteam.org/wiki/SQX) | .s
 archive | [Squeeze Archive](http://fileformats.archiveteam.org/wiki/Squeeze) |  | [unar](https://unarchiver.c3.cx/) [lbrate](http://www.svgalib.org/rus/lbrate.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/squeeze/)
 archive | Starsiege Archive | .vol | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/starsiegeArchive/)
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [16 sample files](https://telparia.com/fileFormatSamples/archive/stc/)
-archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
+archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/SIT) | .sit | [unar](https://unarchiver.c3.cx/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/archive/sit/)
 archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/sunPackageDataStream/)
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [12 sample files](https://telparia.com/fileFormatSamples/archive/swagPacket/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [15 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
@@ -292,7 +292,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (195)
+## Document (197)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -319,6 +319,7 @@ document | [Cardfile Document](http://fileformats.archiveteam.org/wiki/Cardfile)
 document | Central Point Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/centralPointHelp/)
 document | Clarion Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/clarionHelp/)
 document | Clarion Memo | .mem | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/clarionMemo/)
+document | [ClarisWorks Databaset](http://fileformats.archiveteam.org/wiki/ClarisWorks) | .db | [soffice](https://www.libreoffice.org) [mwaw2text](https://sourceforge.net/p/libmwaw/wiki/Home/) | [6 sample files](https://telparia.com/fileFormatSamples/document/clarisWorksDatabase/)
 document | [ClarisWorks/AppleWorks Document](http://fileformats.archiveteam.org/wiki/ClarisWorks) | .cwk .cws | [soffice](https://www.libreoffice.org) [mwaw2text](https://sourceforge.net/p/libmwaw/wiki/Home/) | [13 sample files](https://telparia.com/fileFormatSamples/document/clarisWorks/)
 document | Codeview Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/codeViewHelp/)
 document | [Commodore BASIC](http://fileformats.archiveteam.org/wiki/Commodore_BASIC_tokenized_file) | .prg .bas | [detox64](https://github.com/vroby65/detox64) | [11 sample files](https://telparia.com/fileFormatSamples/document/cbmBasic/)
@@ -413,6 +414,7 @@ document | [Outlook Message](http://fileformats.archiveteam.org/wiki/Outlook_Ite
 document | Ovation Pro Document | .dpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/ovationPro/)
 document | PageSetter Document | .ps | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/pageSetter/)
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
+document | Palm PeanutReader e-book | .pdb | [ebook_convert](https://calibre-ebook.com/) | [3 sample files](https://telparia.com/fileFormatSamples/document/palmPeanutReaderEBook/)
 document | Palm TealMeal Document | .pdb | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/palmTealMeal/)
 document | Palm ThoughtManager | .pdb | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/palmThoughtManager/)
 document | [PalmDOC](http://fileformats.archiveteam.org/wiki/PalmDOC) | .pdb .prc | [ebook_convert](https://calibre-ebook.com/) [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/palmDOC/)
@@ -448,7 +450,7 @@ document | [Softdisk Text Compressor Document](http://justsolve.archiveteam.org/
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
 document | ST Writer Document |  | [strings](https://www.gnu.org/software/binutils/) | [16 sample files](https://telparia.com/fileFormatSamples/document/stWriter/)
 document | [StarOffice Draw Document](http://fileformats.archiveteam.org/wiki/SDA_(StarOffice)) | .sda | [soffice](https://www.libreoffice.org) | [11 sample files](https://telparia.com/fileFormatSamples/document/starOfficeDraw/)
-document | [StarOffice Presentation](http://fileformats.archiveteam.org/wiki/StarOffice_binary_formats) | .sdd | [soffice](https://www.libreoffice.org) | [8 sample files](https://telparia.com/fileFormatSamples/document/starOfficePresentation/)
+document | [StarOffice Presentation](http://fileformats.archiveteam.org/wiki/StarOffice_binary_formats) | .sdd | [soffice](https://www.libreoffice.org) | [11 sample files](https://telparia.com/fileFormatSamples/document/starOfficePresentation/)
 document | [StarOffice Spreadsheet](http://fileformats.archiveteam.org/wiki/SDC) | .sdc .stc .sxc .vor | [soffice](https://www.libreoffice.org) | [11 sample files](https://telparia.com/fileFormatSamples/document/starOfficeSpreadsheet/)
 document | [StarWriter Document](http://fileformats.archiveteam.org/wiki/SDW) | .sdw .tpl .vor | [soffice](https://www.libreoffice.org) [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/document/starWriter/) - Soffice doesn't support the older MS-DOS versions (.tpl files) but since I just fallback to strings, we allow it to convert to PDF because it basically does the same thing as strings in this case.
 document | STFax Script | .script | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/stFaxScript/)
@@ -1480,7 +1482,7 @@ video | [NEOchrome Animation](http://fileformats.archiveteam.org/wiki/NEOchrome_
 video | [Ogg Theora Video](http://fileformats.archiveteam.org/wiki/Theora) | .ogg .ogv | [ffmpeg](https://ffmpeg.org/) | [3 sample files](https://telparia.com/fileFormatSamples/video/oggTheoraVideo/)
 video | Packed Animation File Video | .paf | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/packedAnimationFileVideo/) - Only 1 sample file has been located and ffmpeg (the only converter I could find) fails to process it. Submitted an ffmpeg bug: https://trac.ffmpeg.org/ticket/9362
 video | [Psygnosis YOP Video](https://wiki.multimedia.cx/index.php/Psygnosis_YOP) | .yop | [ffmpeg](https://ffmpeg.org/) | [1 sample file](https://telparia.com/fileFormatSamples/video/psygnosisYOP/)
-video | [Quake II Cinematic Video](https://multimedia.cx/mirror/idcin.html) | .cin | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://telparia.com/fileFormatSamples/video/quake2Cinematic/)
+video | [Quake II Cinematic Video](https://multimedia.cx/mirror/idcin.html) | .cin | [ffmpeg](https://ffmpeg.org/) | [5 sample files](https://telparia.com/fileFormatSamples/video/quake2Cinematic/)
 video | [RealVideo](http://fileformats.archiveteam.org/wiki/RealMedia) | .rm .rv .rmvb .rmf | [ffmpeg](https://ffmpeg.org/) | [11 sample files](https://telparia.com/fileFormatSamples/video/realVideo/)
 video | [Sierra Video and Music Data](https://wiki.multimedia.cx/index.php/VMD) | .vmd | [ffmpeg](https://ffmpeg.org/) | [10 sample files](https://telparia.com/fileFormatSamples/video/sierraVMD/)
 video | [Silicon Graphics IRIX Movie](http://fileformats.archiveteam.org/wiki/SGI_movie) | .mv .movie .sgi | [ffmpeg](https://ffmpeg.org/) [xanim](https://github.com/Sembiance/xanim) | [11 sample files](https://telparia.com/fileFormatSamples/video/sgiMovie/)

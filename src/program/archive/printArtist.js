@@ -67,5 +67,6 @@ export class printArtist extends Program
 			CallUntil("PostExitWindows", ${xu.SECOND*3})`
 	});
 	renameOut = false;
+	verify    = (r, dexFile) => dexFile.base!=="Blank.eps";
 	chain = "ps2pdf[fromEPS][svg]";
 }

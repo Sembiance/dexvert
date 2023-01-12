@@ -91,6 +91,7 @@ export default
 		qAndADocument            : {name : "Q&A Document", ext : [".doc"], magic : ["Q and A Document", /^fmt\/1045( |$)/]},
 		quill                    : {name : "Quill Document", ext : [".doc"], magic : ["Quill Document"], website : "http://www.rwapadventures.com/ql_wiki/index.php?title=Quill"},
 		riscOSBBCBasic           : {name : "RISC OS BBC BASIC V Source", magic : ["RISC OS BBC BASIC V source"]},
+		samnaWordDocument        : {name : "Samna Word Document", ext : [".sm"], magic : ["Samna Word Document"]},
 		smartSoftwareDocument    : {name : "Smart Software Document", ext : [".doc"], magic : ["Smart Software Document"]},
 		sprint                   : {name : "Sprint Document", ext : [".spr"], magic : ["Sprint document"], weakMagic : true},
 		stFaxScript              : {name : "STFax Script", ext : [".script"], magic : ["STFax Script"]},

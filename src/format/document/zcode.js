@@ -6,6 +6,7 @@ export class zcode extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Z-code";
 	ext        = [].pushSequence(1, 8).map(v => `.z${v}`);
 	magic      = [/Infocom .*Z-machine/, "Z-Code V"];
+	filename   = [/^STORY\d+$/];
 	weakMagic  = true;
-	converters = ["txd"];
+	converters = ["unZCode"];
 }

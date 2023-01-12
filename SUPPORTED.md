@@ -1,11 +1,11 @@
-# Supported File Formats (1,424)
+# Supported File Formats (1,425)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (218)
+## Archive (219)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -43,6 +43,7 @@ archive | [AutoCAD Slide Library](http://fileformats.archiveteam.org/wiki/AIN) |
 archive | Bank Game Data Archive | .bnk | [gameextractor](http://www.watto.org/game_extractor.html) | [7 sample files](https://telparia.com/fileFormatSamples/archive/bankGameData/)
 archive | [Binary ][ Archive](http://fileformats.archiveteam.org/wiki/Binary_II) | .bny .bqy | [nulib2](https://github.com/fadden/nulib2) | [13 sample files](https://telparia.com/fileFormatSamples/archive/binary2/)
 archive | [BinHex](http://fileformats.archiveteam.org/wiki/BinHex) | .hqx .hcx .hex | [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/binHex/)
+archive | [Blorb Interactive Fiction Package](http://justsolve.archiveteam.org/wiki/Blorb) | .blorb .gblorb .zblorb .blb .glb .zlb | [blorbtar](https://www.ifarchive.org/if-archive/programming/blorb/blorbtar-0.1.pl) | [7 sample files](https://telparia.com/fileFormatSamples/archive/blorb/)
 archive | BOLT Game Data Archive | .blt | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://telparia.com/fileFormatSamples/archive/boltGameData/)
 archive | Broderbund Mohawk | .mhk | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/broderbundMohawk/)
 archive | Build Engine Group Container | .grp .dat | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://telparia.com/fileFormatSamples/archive/buildEngineGroup/)
@@ -168,7 +169,7 @@ archive | PMarc SFX Archive | .com | [lha](https://github.com/jca02266/lha) | [1
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [unar](https://unarchiver.c3.cx/) [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [16 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | PowerPlayer Music Cruncher |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/powerPlayerMusicCruncher/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [deark](https://entropymine.com/deark/) | [15 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
-archive | [Print/Instant Artist](http://fileformats.archiveteam.org/wiki/Instant_Artist_GFX) | .gfx | [printArtist](https://winworldpc.com/product/instant-artist-print/60) | [7 sample files](https://telparia.com/fileFormatSamples/archive/printArtist/)
+archive | [Print/Instant Artist](http://fileformats.archiveteam.org/wiki/Instant_Artist_GFX) | .gfx | [printArtist](https://winworldpc.com/product/instant-artist-print/60) | [8 sample files](https://telparia.com/fileFormatSamples/archive/printArtist/)
 archive | [PrintPartner Graphics Bitmaps](http://fileformats.archiveteam.org/wiki/PrintPartner) | .gph | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/printPartnerGraphics/)
 archive | [Pro-Pack - Rob Northern Compression](http://fileformats.archiveteam.org/wiki/RNC) | .rnc | [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://telparia.com/fileFormatSamples/archive/rnc/)
 archive | [Quake PAK](http://fileformats.archiveteam.org/wiki/Quake_PAK) | .pak | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/quakePAK/)
@@ -177,7 +178,7 @@ archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/
 archive | Raw Partition |  | [uniso](https://github.com/Sembiance/dexvert/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/rawPartition/)
 archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/wiki/RPM) | .rpm | [deark](https://entropymine.com/deark/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/rpm/)
 archive | [RIFF (Generic Fallback)](http://fileformats.archiveteam.org/wiki/RIFF) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/riff/)
-archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib .dib | [deark](https://entropymine.com/deark/) | [7 sample files](https://telparia.com/fileFormatSamples/archive/riffRDIB/)
+archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib .dib | [deark](https://entropymine.com/deark/) | [8 sample files](https://telparia.com/fileFormatSamples/archive/riffRDIB/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [unrar](https://www.rarlab.com/rar_add.htm) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [SCO Compress](http://fileformats.archiveteam.org/wiki/SCO_compress_LZH) |  | [gunzip](https://www.gnu.org/software/gzip/) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/scoCompress/)
 archive | SCR Package | .spz | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/scrPackage/) - The format contains JPEG files, but I think it's done something to them as any extraction produces slightly corrupted results and just small images. Still, better than nothing.
@@ -264,7 +265,7 @@ audio | [Maxis XA Audio](https://wiki.multimedia.cx/index.php/Maxis_XA) | .xa | 
 audio | MIDI Sample Dump | .sds | [sox](http://sox.sourceforge.net) [awaveStudio](https://archive.org/details/awave70_zip) | [8 sample files](https://telparia.com/fileFormatSamples/audio/midiSampleDump/)
 audio | [Monkey's Audio](http://fileformats.archiveteam.org/wiki/Monkey%27s_Audio) | .ape | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) | [1 sample file](https://telparia.com/fileFormatSamples/audio/monkeysAudio/)
 audio | MPEG ADTS Layer II | .mp2 | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://telparia.com/fileFormatSamples/audio/mp2/)
-audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 .mpga .mpg |  | [5 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
+audio | [MPG Layer 3 Audio File](http://fileformats.archiveteam.org/wiki/MP3) | .mp3 .mpga .mpg |  | [6 sample files](https://telparia.com/fileFormatSamples/audio/mp3/)
 audio | [Ogg Vorbis Audio](http://fileformats.archiveteam.org/wiki/Ogg) | .ogg .oga | [sox](http://sox.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/audio/ogg/)
 audio | [Opus Audio](http://fileformats.archiveteam.org/wiki/Opus) | .opus | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [6 sample files](https://telparia.com/fileFormatSamples/audio/opus/)
 audio | PhotoCD Audio | .pcd | [sox](http://sox.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/audio/photoCDAudio/) - Some files are CDDA (audio06.pcd) but others are some sort of raw, which default to above (audio54.pcd)
@@ -292,7 +293,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (197)
+## Document (198)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4DOS Compressed Batch-To-Memory File | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://telparia.com/fileFormatSamples/document/batchToMemory4DOS/)
@@ -382,7 +383,7 @@ document | [Lotus 1-2-3 File](http://fileformats.archiveteam.org/wiki/Lotus_1-2-
 document | Lotus Manuscript Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://telparia.com/fileFormatSamples/document/lotusManuscript/)
 document | Lotus Notes Database | .nsf | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/lotusNotes/)
 document | Lotus ScreenCam Caption Script | .scs | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/lotusScreenCamScript/)
-document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
+document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) | [11 sample files](https://telparia.com/fileFormatSamples/document/wordMac/)
 document | MacWrite Document | .mcw .doc | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/macWrite/)
 document | Magnetic Pages Article |  | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/magneticPages/)
 document | [MAN Page](http://fileformats.archiveteam.org/wiki/Man_page) | .man .1 .2 .3 .4 .5 .6 .7 .8 | [man2html](http://primates.ximian.com/~flucifredi/man/) | [11 sample files](https://telparia.com/fileFormatSamples/document/manPage/)
@@ -440,11 +441,12 @@ document | Psion Spreadsheet | .spr | [strings](https://www.gnu.org/software/bin
 document | Psion TCR eBook | .tcr | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://telparia.com/fileFormatSamples/document/psionTCReBook/)
 document | [Python Compiled Bytecode](http://fileformats.archiveteam.org/wiki/Python) | .pyc .pyo | [pycdc](https://github.com/zrax/pycdc) | [10 sample files](https://telparia.com/fileFormatSamples/document/pythonCompiled/)
 document | Q&A Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/qAndADocument/)
-document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [quarkXPress6](https://archive.org/details/quarkxpress6.1version6.1r02004) [pageMaker7QuarkConverter](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) | [19 sample files](https://telparia.com/fileFormatSamples/document/quarkXPress/)
+document | [QuarkXPress](http://fileformats.archiveteam.org/wiki/QuarkXPress) | .qxd .qxp .qxd report | [quarkXPress6](https://archive.org/details/quarkxpress6.1version6.1r02004) [pageMaker7QuarkConverter](https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219) | [20 sample files](https://telparia.com/fileFormatSamples/document/quarkXPress/)
 document | [Quattro Pro](http://fileformats.archiveteam.org/wiki/Quattro_Pro) | .wq1 .wq2 .wb1 .wb2 .wb3 .qpw | [soffice](https://www.libreoffice.org) | [1 sample file](https://telparia.com/fileFormatSamples/document/quattroPro/)
 document | [Quill Document](http://www.rwapadventures.com/ql_wiki/index.php?title=Quill) | .doc | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://telparia.com/fileFormatSamples/document/quill/)
 document | [Rich Text Format](http://fileformats.archiveteam.org/wiki/RTF) | .rtf | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) | [14 sample files](https://telparia.com/fileFormatSamples/document/rtf/)
 document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/riscOSBBCBasic/)
+document | Samna Word Document | .sm | [strings](https://www.gnu.org/software/binutils/) | 
 document | Smart Software Document | .doc | [strings](https://www.gnu.org/software/binutils/) | 
 document | [Softdisk Text Compressor Document](http://justsolve.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [13 sample files](https://telparia.com/fileFormatSamples/document/softdiskTextCompressed/)
 document | Sprint Document | .spr | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/sprint/)
@@ -489,7 +491,7 @@ document | [WordStar Document](http://fileformats.archiveteam.org/wiki/Wordstar)
 document | WordWorth |  | [WoW](http://aminet.net/package/util/conv/WoW) [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/wordWorth/)
 document | [WriteNow Document](http://fileformats.archiveteam.org/wiki/WriteNow) |  | [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/writeNow/)
 document | Xerox InterPress Document | .ip .ip2 | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://telparia.com/fileFormatSamples/document/interPress/)
-document | [Z-code for Z-machine](http://fileformats.archiveteam.org/wiki/Z-code) | .z1 .z2 .z3 .z4 .z5 .z6 .z7 .z8 | [txd](https://www.inform-fiction.org/zmachine/ztools.html) | [10 sample files](https://telparia.com/fileFormatSamples/document/zcode/)
+document | [Z-code for Z-machine](http://fileformats.archiveteam.org/wiki/Z-code) | .z1 .z2 .z3 .z4 .z5 .z6 .z7 .z8 | [unZCode](https://www.inform-fiction.org/zmachine/ztools.html) | [11 sample files](https://telparia.com/fileFormatSamples/document/zcode/)
 document | [Zinc Data](https://en.wikipedia.org/wiki/Zinc_Application_Framework) | .dat .znc .z_t | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/zincData/)
 document | ZX Spectrum DOS BASIC Source Code | .bas | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/zxSpectrumDOSBASICSource/)
 
@@ -542,7 +544,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (516)
+## Image (515)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://telparia.com/fileFormatSamples/image/threeDCK/)
@@ -608,7 +610,7 @@ image | [Binary Text](http://fileformats.archiveteam.org/wiki/BIN_(Binary_Text))
 image | [Bitmap Image](http://fileformats.archiveteam.org/wiki/BMP) | .bmp .rle .dib .pic | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [nconvert](https://www.xnview.com/en/nconvert/) [ffmpeg](https://ffmpeg.org/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) | [29 sample files](https://telparia.com/fileFormatSamples/image/bmp/)
 image | [Blazing Paddles](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .pi | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [12 sample files](https://telparia.com/fileFormatSamples/image/blazingPaddles/)
 image | [Blazing Paddles - Window](http://fileformats.archiveteam.org/wiki/Blazing_Paddles) | .wnd | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/blazingPaddlesWindow/)
-image | [Blizzard Picture](http://fileformats.archiveteam.org/wiki/BLP) | .blp | [nconvert](https://www.xnview.com/en/nconvert/) [uniconvertor](https://sk1project.net/uc2/) | [9 sample files](https://telparia.com/fileFormatSamples/image/blizzardPicture/)
+image | [Blizzard Picture](http://fileformats.archiveteam.org/wiki/BLP) | .blp | [nconvert](https://www.xnview.com/en/nconvert/) [uniconvertor](https://sk1project.net/uc2/) | [10 sample files](https://telparia.com/fileFormatSamples/image/blizzardPicture/)
 image | Bootsplash Image |  | [tomsViewer](https://tomseditor.com/blog/viewer) | [3 sample files](https://telparia.com/fileFormatSamples/image/bootsplash/)
 image | [BRender PIX](http://fileformats.archiveteam.org/wiki/BRender_PIX) | .pix | [ffmpeg](https://ffmpeg.org/) | [13 sample files](https://telparia.com/fileFormatSamples/image/brenderPIX/)
 image | [Bugbiter APAC239i](http://fileformats.archiveteam.org/wiki/Bugbiter_APAC239i) | .bgp | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/bgp/)
@@ -778,7 +780,7 @@ image | [ImageLab Image](http://fileformats.archiveteam.org/wiki/ImageLab/PrintT
 image | [Imagic](http://fileformats.archiveteam.org/wiki/Imagic_Film/Picture) | .ic1 .ic2 .ic3 | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/imagic/)
 image | [IMG Scan](http://fileformats.archiveteam.org/wiki/IMG_Scan) | .rwl .raw .rwh | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/image/imgScan/)
 image | [IndyPaint](http://fileformats.archiveteam.org/wiki/IndyPaint) | .tru | [recoil2png](http://recoil.sourceforge.net) | [6 sample files](https://telparia.com/fileFormatSamples/image/indyPaint/)
-image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/ing/)
+image | [ING 15](http://fileformats.archiveteam.org/wiki/ING_15) | .ing | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/ing/)
 image | [Inset PIX](http://fileformats.archiveteam.org/wiki/Inset_PIX) | .pix | [deark](https://entropymine.com/deark/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [11 sample files](https://telparia.com/fileFormatSamples/image/insetPix/)
 image | [InShape 3D IIM](http://fileformats.archiveteam.org/wiki/InShape_IIM) | .iim | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://telparia.com/fileFormatSamples/image/iim/)
 image | [INT95a](http://fileformats.archiveteam.org/wiki/INT95a) | .int | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/int95a/)
@@ -961,7 +963,6 @@ image | [Second Nature Screensaver Graphic](http://fileformats.archiveteam.org/w
 image | [Segmented Hypergraphics Bitmap](http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics) | .shg | [deark](https://entropymine.com/deark/) | [12 sample files](https://telparia.com/fileFormatSamples/image/shg/)
 image | [Semi-Graphics Logos Editor](http://fileformats.archiveteam.org/wiki/Semi-Graphic_logos_Editor) | .sge | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/sge/)
 image | [SGX Graphics File Format](http://fileformats.archiveteam.org/wiki/SGX) | .sgx .svg | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [3 sample files](https://telparia.com/fileFormatSamples/image/sgx/) - Some image files are not yet supported such as testimg-lz77.sgx
-image | SHF-XL Edit | .shx .shf | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://telparia.com/fileFormatSamples/image/shfXLEdit/)
 image | [Shoot 'Em Up Construction Kit Sprite](http://fileformats.archiveteam.org/wiki/Shoot_%27Em_Up_Construction_Kit) | .a | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://telparia.com/fileFormatSamples/image/seuckSprite/)
 image | [Sigma/Foveon X3F](http://fileformats.archiveteam.org/wiki/X3F) | .x3f | [dcraw](https://www.cybercom.net/~dcoffin/dcraw/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [3 sample files](https://telparia.com/fileFormatSamples/image/x3f/)
 image | [Silicon Graphics Image](http://fileformats.archiveteam.org/wiki/SGI_(image_file_format)) | .sgi .bw .rgba .rgb | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) [gimp](https://gimp.org) [abydosconvert](https://github.com/Sembiance/abydosconvert) [ffmpeg](https://ffmpeg.org/) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) | [12 sample files](https://telparia.com/fileFormatSamples/image/sgi/)
@@ -1025,7 +1026,7 @@ image | [Valve Texture Format](http://fileformats.archiveteam.org/wiki/Valve_Tex
 image | [VDC BitMap](http://fileformats.archiveteam.org/wiki/VBM_(VDC_BitMap)) | .vbm .bm | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [17 sample files](https://telparia.com/fileFormatSamples/image/vbm/)
 image | [VertiZontal Interlacing](http://fileformats.archiveteam.org/wiki/VertiZontal_Interlacing) | .vzi | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/vzi/)
 image | [Vidcom 64](http://fileformats.archiveteam.org/wiki/Vidcom_64) | .vid | [nconvert](https://www.xnview.com/en/nconvert/) [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/image/vidcom64/)
-image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://telparia.com/fileFormatSamples/image/vicar/)
+image | [Video Image Communication and Retrieval](http://fileformats.archiveteam.org/wiki/VICAR) | .vicar .vic .img | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://telparia.com/fileFormatSamples/image/vicar/)
 image | [Vidig Paint](http://fileformats.archiveteam.org/wiki/Vidig_Paint) | .rap | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://telparia.com/fileFormatSamples/image/rap/)
 image | [WebP Image](http://fileformats.archiveteam.org/wiki/Webp) | .webp |  | [6 sample files](https://telparia.com/fileFormatSamples/image/webp/)
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) [tomsViewer](https://tomseditor.com/blog/viewer) | [2 sample files](https://telparia.com/fileFormatSamples/image/artist64/)
@@ -1111,14 +1112,14 @@ music | [DigiTrakker Module](http://fileformats.archiveteam.org/wiki/Digitrakker
 music | [Disorder Tracker Module](http://fileformats.archiveteam.org/wiki/669) | .plm | [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [3 sample files](https://telparia.com/fileFormatSamples/music/disorderTracker/)
 music | [Doom/Heretic Music](http://fileformats.archiveteam.org/wiki/Doom_MUS) | .mus | [doomMUS2mp3](http://slade.mancubus.net/) | [10 sample files](https://telparia.com/fileFormatSamples/music/doomMUS/)
 music | EarAche Module | .ea | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/earAche/)
-music | [Edlib](http://fileformats.archiveteam.org/wiki/EdLib_packed_module) | .d00 | [adplay](https://github.com/adplug/adplay-unix) | [8 sample files](https://telparia.com/fileFormatSamples/music/edlib/) - Packed .edl and .d01 modules not supported.
+music | [Edlib](http://fileformats.archiveteam.org/wiki/EdLib_packed_module) | .d00 | [adplay](https://github.com/adplug/adplay-unix) | [10 sample files](https://telparia.com/fileFormatSamples/music/edlib/) - Packed .edl and .d01 modules not supported.
 music | [Epic Megagames MASI Module](http://fileformats.archiveteam.org/wiki/Epic_Megagames_MASI) | .psm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/epicMegagamesMASI/)
 music | [EUPHONY Module](http://fileformats.archiveteam.org/wiki/EUPHONY) | .eup .fmb .pmb | [eupplay](https://github.com/gzaffin/eupmini) | [14 sample files](https://telparia.com/fileFormatSamples/music/euphony/)
 music | eXotic AdLib | .xad | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/eXoticADLib/)
 music | [Extended MIDI](http://fileformats.archiveteam.org/wiki/XMI_(Extended_MIDI)) | .xmi | [midistar2mp3](https://github.com/Sembiance/midistar2mid) | [11 sample files](https://telparia.com/fileFormatSamples/music/xmi/)
 music | [Extended Module](http://fileformats.archiveteam.org/wiki/XM) | .xm | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) | [11 sample files](https://telparia.com/fileFormatSamples/music/xm/)
 music | eXtra Simple Music | .xsm | [adplay](https://github.com/adplug/adplay-unix) | [4 sample files](https://telparia.com/fileFormatSamples/music/extraSimpleMusic/)
-music | [Extreme's Tracker Module](http://fileformats.archiveteam.org/wiki/Extreme%27s_Tracker_module) | .ams | [zxtune123](https://zxtune.bitbucket.io/) | [4 sample files](https://telparia.com/fileFormatSamples/music/extremeTracker/)
+music | [Extreme's Tracker Module](http://fileformats.archiveteam.org/wiki/Extreme%27s_Tracker_module) | .ams | [zxtune123](https://zxtune.bitbucket.io/) | [5 sample files](https://telparia.com/fileFormatSamples/music/extremeTracker/)
 music | [Farandole Composer Module](http://fileformats.archiveteam.org/wiki/Farandole_Composer_module) | .far | [xmp](http://xmp.sourceforge.net/) [zxtune123](https://zxtune.bitbucket.io/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [13 sample files](https://telparia.com/fileFormatSamples/music/farandoleComposer/)
 music | [Fashion Tracker Module](http://fileformats.archiveteam.org/wiki/Fashion_Tracker_module) | .ex | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/fashionTracker/)
 music | [FastTracker Module](http://fileformats.archiveteam.org/wiki/FastTracker_module) | .ft | [zxtune123](https://zxtune.bitbucket.io/) [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [12 sample files](https://telparia.com/fileFormatSamples/music/fastTracker/)

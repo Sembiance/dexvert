@@ -1,4 +1,4 @@
-# Unsupported File Formats (876)
+# Unsupported File Formats (877)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -242,7 +242,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (79)
+## Image (80)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -311,6 +311,7 @@ image | Quattro Pro Clip Art | .clp |
 image | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://telparia.com/fileFormatSamples/image/rleTRE/)
 image | Satori Paint | .cvs .rir | [6 sample files](https://telparia.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://telparia.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
+image | SHF-XL Edit | .shx .shf | [2 sample files](https://telparia.com/fileFormatSamples/image/shfXLEdit/) - Due to no known magic and how recoil2png will convert ANYTHING, we disable this for now.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://telparia.com/fileFormatSamples/image/simpleVectorFormat/)
 image | SkyRoads Bitmap | .lzs | 
 image | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://telparia.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.

@@ -30,11 +30,20 @@
 
 * Once debby adds a way to leverage SCUMMVM to extract Director 3 files: https://discord.com/channels/350407629849493504/1033065501984817252/1038538531905208340
   Then process some of those files.
+  Someone may be rigging up SCUMMVM to extract .MMM assets: https://discord.com/channels/350407629849493504/1033065501984817252/1038559070258462760
+  Once they do that, add support for this to dexvert and then reprocess those formats. Will want to delete the video/riffMultimediaMovie format and come up with a new archive/director3RIFFMMM
 
 * Get AARU support working: https://github.com/aaru-dps/Aaru
   http://discmaster.textfiles.com/view/4313/Disc%20Dump/CD32_11.aaruf
   http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
   Then add that converter as an option to all formats that it supports
+
+* Wasn't able to convert this HFS disk image: http://discmaster.textfiles.com/browse/13263
+  The .Bin is a compact pro archive and the .img inside identifies as Macintosh HFS data, but can't do anything with it
+  It didn't work in IsoBuster or hmount or HFSExplorer. It also didn't mount as HD or ISO with the QEMU MacOSPPC emulator
+  I posted a review on archive.org asking if anyone knew of anything that can hadnle it: https://archive.org/details/GigaROM2.0.img
+  In order for me to handle it without more info, I could try other programs like: https://getdataforensics.com/product/mount-image-pro/
+  Or something from OS X
 
 
 

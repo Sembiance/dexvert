@@ -32,7 +32,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = await getDetections(f, {xlog});
 
-	xlog.debug`raw detections:\n${detections.map(v => v.pretty("\t")).join("\n")}`;
+	xlog.debug`raw detections:\n${detections.map(v => v?.pretty("\t") || v).join("\n")}`;
 
 	const otherFiles = (await (await fileUtil.tree(f.root, {depth : 1, nodir : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file && file.absolute!==f.input.absolute);
 	const otherDirs = (await (await fileUtil.tree(f.root, {depth : 1, nofile : true})).parallelMap(async v => await DexFile.create(v))).filter(file => !!file);

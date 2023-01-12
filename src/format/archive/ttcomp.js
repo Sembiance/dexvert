@@ -13,7 +13,7 @@ export class ttcomp extends Format
 	idCheck      = inputFile => inputFile.preExt!==".thm";
 
 	// mac binary files are also sometimes identified as this
-	forbiddenMagic = ["MacBinary 2", "MacBinary II"];
+	forbiddenMagic = [/MacBinary/];
 
 	// NOTE: Deark also supports extraction of these, but because deark will also convert so many other formats and TTComp is a VERY weak magic identification, we don't include it here
 	converters = ["ttdecomp"];

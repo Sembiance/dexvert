@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
-import {initDOMParser, DOMParser} from "denoLandX";
+import {DOMParser} from "denoLandX";
 import {dateParse, path} from "std";
 
 export class vinetto extends Program
@@ -14,8 +14,6 @@ export class vinetto extends Program
 	{
 		if(dexFile.ext!==".html")
 			return true;
-
-		await initDOMParser();
 	
 		const doc = new DOMParser().parseFromString(await fileUtil.readTextFile(dexFile.absolute), "text/html");
 		const subs = doc.querySelectorAll("table.sub");

@@ -2,7 +2,7 @@ import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
-import {initDOMParser, DOMParser} from "denoLandX";
+import {DOMParser} from "denoLandX";
 import {programs} from "../program/programs.js";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
@@ -150,7 +150,6 @@ export class image extends Family
 					try
 					{
 						const htmlRaw = await fileUtil.readTextFile(r.f.new.absolute);
-						await initDOMParser();
 						const doc = new DOMParser().parseFromString(htmlRaw, "text/html");
 						Array.from(doc.querySelectorAll("table.htt td.htc")).forEach(metaCell =>
 						{

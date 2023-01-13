@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {initDOMParser, DOMParser} from "denoLandX";
+import {DOMParser} from "denoLandX";
 import {formats} from "../src/format/formats.js";
 import {runUtil} from "xutil";
 
@@ -46,7 +46,6 @@ const {stdout : programMimeTypesRaw} = await runUtil.run("abydosconvert", ["--li
 const programMimeTypes = programMimeTypesRaw.trim().split("\n").subtractAll(supportedMimeTypes).subtractAll(IGNORED_MIMES);
 
 let unsupportedCount = 0;
-await initDOMParser();
 const doc = new DOMParser().parseFromString(formatsHTMLRaw, "text/html");
 Array.from(doc.querySelectorAll("table.grid tr")).forEach(row =>
 {

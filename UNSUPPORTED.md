@@ -1,17 +1,18 @@
-# Unsupported File Formats (877)
+# Unsupported File Formats (878)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (50)
+## Archive (51)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 archive | ABackup Disk Image | .adf | 
 archive | Aldus Zip Compressed File |  | No known extractor program.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .a .lib | [11 sample files](https://telparia.com/fileFormatSamples/archive/arArchive/) - We used to convert with deark/ar but all that usually is stored inside is .o object which are not interesting and some .a files like libphobos2.a produce 9,999 files which is a lot of noise.
 archive | Arts and Letters Clip Art Library | .yal | 
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 archive | ASetup Installer Archive | .arv | [4 sample files](https://telparia.com/fileFormatSamples/archive/aSetup/) - No known extractor program.

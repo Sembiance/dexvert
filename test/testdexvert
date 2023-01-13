@@ -1,2 +1,5 @@
 #!/bin/sh
-DENO_DIR=/mnt/compendium/.deno deno run --v8-flags=--max-old-space-size=32768,--enable-experimental-regexp-engine-on-excessive-backtracks --no-check --no-npm --unstable --import-map /mnt/compendium/DevLab/deno/importMap.json --allow-all /mnt/compendium/DevLab/dexvert/test/testdexvert.js "$@"
+shopt -s expand_aliases
+source /etc/bash/bashrc.d/bash_aliases
+
+dra /mnt/compendium/DevLab/dexvert/test/testdexvert.js "$@"

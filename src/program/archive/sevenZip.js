@@ -26,14 +26,16 @@ export class sevenZip extends Program
 
 	postExec = async r =>
 	{
-		// we only move files if we are in rsrcOnly mode
-		if(!r.flags.rsrcOnly)
+		const topLevelDirs = await fileUtil.tree(r.outDir({absolute : true}), {depth : 1});
+		if(topLevelDirs.length!==1 && !r.flags.rsrcOnly)
 			return;
 
-		// the .rsrc directory is kinda useless, so we move anything in it up one dir
-		const rsrcDirPath = path.join(r.outDir({absolute : true}), ".rsrc");
-		if(await fileUtil.exists(rsrcDirPath) && (await Deno.lstat(rsrcDirPath)).isDirectory)
-			await fileUtil.moveAll(rsrcDirPath, r.outDir({absolute : true}), {unlinkSrc : true});
+		for(const singleDirName of [".rsrc", "$0"])
+		{
+			const singleDirPath = path.join(r.outDir({absolute : true}), singleDirName);
+			if(await fileUtil.exists(singleDirPath) && (await Deno.lstat(singleDirPath)).isDirectory)
+				await fileUtil.moveAll(singleDirPath, r.outDir({absolute : true}), {unlinkSrc : true});
+		}
 	};
 
 	post = r =>

@@ -3226,6 +3226,62 @@ ZX Evolution	SXG	Speccy eXtended Graphics		256 colors	1
 ZX Spectrum Next	NXI		256x192	256 colors	1
 
 
+>>> 7-zip sevenZip
+ 0 C   F         7z       7z            7 z BC AF ' 1C
+ 0               APM      apm           E R
+ 0               Ar       ar a deb lib  ! < a r c h > 0A
+ 0               Arj      arj           ` EA
+ 0 CK            bzip2    bz2 bzip2 tbz2 (.tar) tbz (.tar) B Z h
+ 0     F         Cab      cab           M S C F 00 00 00 00
+ 0               Chm      chm chi chq chw I T S F 03 00 00 00 ` 00 00 00
+ 0     F         Hxs      hxs hxi hxr hxq hxw lit I T O L I T L S 01 00 00 00 ( 00 00 00
+ 0               Compound msi msp doc xls ppt D0 CF 11 E0 A1 B1 1A E1
+ 0      M        Cpio     cpio          0 7 0 7 0  ||  C7 q  ||  q C7
+ 0               CramFS   cramfs        offset=16 C o m p r e s s e d 20 R O M F S
+ 0       G  B    Dmg      dmg           k o l y 00 00 00 04 00 00 02 00
+ 0           E   ELF      elf            E L F
+ 0               Ext      ext ext2 ext3 ext4 img offset=1080 S EF
+ 0               FAT      fat img       offset=510 U AA
+ 0               FLV      flv           F L V 01
+ 0 CK            gzip     gz gzip tgz (.tar) tpz (.tar) 1F 8B 08
+ 0               GPT      gpt mbr       offset=512 E F I 20 P A R T 00 00 01 00
+ 0      M        HFS      hfs hfsx      offset=1024 H + 00 04  ||  H X 00 05
+ 0        O      IHex     ihex          
+ 0               Iso      iso img       offset=32769 C D 0 0 1
+ 0               Lzh      lzh lha       offset=2 - l h
+ 0  K     O      lzma     lzma          
+ 0  K            lzma86   lzma86        
+ 0      M    E   MachO    macho         CE FA ED FE  ||  CF FA ED FE  ||  FE ED FA CE  ||  FE ED FA CF
+ 0         P     MBR      mbr           
+ 0               MsLZ     mslz          S Z D D 88 F0 ' 3 A
+ 0      M        Mub      mub           CA FE BA BE 00 00 00  ||  B9 FA F1 0E
+ 0     F G       Nsis     nsis          offset=4 EF BE AD DE N u l l s o f t I n s t
+ 0               NTFS     ntfs img      offset=3 N T F S 20 20 20 20 00
+ 0           E   PE       exe dll sys   M Z
+ 0           E   TE       te            V Z
+ 0               Ppmd     pmd           8F AF AC 84
+ 0               QCOW     qcow qcow2 qcow2c Q F I FB 00 00 00
+ 0     F         Rar      rar r00       R a r ! 1A 07 00
+ 0     F         Rar5     rar r00       R a r ! 1A 07 01 00
+ 0               Rpm      rpm           ED AB EE DB
+ 0               Split    001           
+ 0      M        SquashFS squashfs      h s q s  ||  s q s h  ||  s h s q
+ 0 C    M        SWFc     swf (~.swf)   C W S  ||  Z W S
+ 0  K            SWF      swf           F W S
+ 0 C      O   LH tar      tar ova       offset=257 u s t a r
+ 0        O      Udf      udf iso img   offset=32768 01 C D 0 0 1
+ 0     F         UEFIc    scap          BD 86 f ; v 0D 0 @ B7 0E B5 Q 9E / C5 A0
+ 0     F         UEFIf    uefif         offset=16 D9 T 93 z h 04 J D 81 CE 0B F6 17 D8 90 DF
+ 0               VDI      vdi           offset=64  10 DA BE
+ 0       G       VHD      vhd           c o n e c t i x 00 00
+ 0               VMDK     vmdk          K D M V
+ 0 C SN       LH wim      wim swm esd   M S W I M 00 00 00
+ 0               Xar      xar pkg       x a r ! 00 1C
+ 0 CK            xz       xz txz (.tar) FD 7 z X Z 00
+ 0               Z        z taz (.tar)  1F 9D
+ 0 C   FMG       zip      zip z01 zipx jar xpi odt ods docx xlsx epub P K 03 04  ||  P K 05 06  ||  P K 07 08 P K  ||  P K 0 0 P K
+
+
 >>> GameExtractor (Linux - v3.10 - June 7, 2020) (https://sourceforge.net/projects/gameextractor/files/  http://www.watto.org/game_extractor.html)
 Write	Game	Archives	Previews and/or Thumbnails
  	!Dead Pixels Adventure!	*.win	*.png *.wav

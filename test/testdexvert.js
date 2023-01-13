@@ -3,6 +3,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
+import {XWorkerPool} from "XWorkerPool";
 
 const xlog = new XLog();
 
@@ -246,9 +247,10 @@ function getWebLink(filePath)
 	return `file://${Deno.hostname()==="pax" ? path.join("/mnt/pax", path.relative("/mnt", filePath)) : filePath}`.encodeURLPath().escapeHTML();
 }
 
+const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*0.70);
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
-const SLOW_DURATION = xu.MINUTE*5;
+const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};
 const DATA_FILE_PATH = "/mnt/dexvert/testExpected.json";
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
@@ -274,7 +276,6 @@ sampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => 
 
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toString().toLowerCase()));
-xlog.info`Testing ${sampleFilePaths.length} sample files...`;
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
@@ -291,28 +292,20 @@ let completed=0;
 let completedMark=0;
 let failCount=0;
 const failures=[];
-async function testSample(sampleFilePath)
+let workercbCount = 0;
+async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 {
+	if(!sampleFilePath)
+	{
+		workercbCount++;
+		return xlog.error`Failed to get sampleFilePath back from worker!`;
+	}
+	
 	const startedAt = performance.now();
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const diskFamily = sampleSubFilePath.split("/")[0];
 	const diskFormat = sampleSubFilePath.split("/")[1];
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
-	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
-	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
-	const dexvertArgs = ["--logLevel=debug", `--logFile=${logFilePath}`, "--json"];
-	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
-		dexvertArgs.push(`--programFlag=osHint:${FORMAT_OS_HINT[diskFormatid]}`);
-	else if(Object.isObject(FORMAT_OS_HINT[diskFormatid]) && FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)])
-		dexvertArgs.push(`--programFlag=osHint:${FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]}`);
-
-	if(FORCE_FORMAT_AS.includes(diskFormatid))
-		dexvertArgs.push(`--asFormat=${diskFormatid}`);
-	dexvertArgs.push(sampleFilePath, tmpOutDirPath);
-
-	const r = await runUtil.run("dexvert", dexvertArgs, {timeout : xu.MINUTE*25, timeoutSignal : "SIGKILL", killChildren : true});
-	const resultFull = xu.parseJSON(r.stdout, {});
 
 	function handleComplete()
 	{
@@ -331,17 +324,20 @@ async function testSample(sampleFilePath)
 				xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
 			}
 		}
+
+		workercbCount++;
 	}
+
 	function fail(msg)
 	{
 		failCount++;
 
-		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n       ${fg.deepSkyblue(getWebLink(path.dirname(tmpOutDirPath)))}`);
+		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n`);
 		xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
 		if(argv.report && !argv.record)
-			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
+			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
 
 		handleComplete();
 	}
@@ -349,17 +345,16 @@ async function testSample(sampleFilePath)
 	async function pass(c)
 	{
 		xu.stdoutWrite(c);
-		await fileUtil.unlink(logFilePath);
 
 		if(argv.report && !argv.record)
-			outputFiles.push(...resultFull?.created?.files?.output?.map(v => v.absolute) || []);
+			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
 		else
-			await fileUtil.unlink(tmpOutDirPath, {recursive : true});
+			await fileUtil.unlink(path.dirname(tmpOutDirPath), {recursive : true});
 
 		handleComplete();
 	}
 
-	if(!resultFull)
+	if(!dexData)
 	{
 		if(argv.record)
 		{
@@ -370,27 +365,27 @@ async function testSample(sampleFilePath)
 		if(testData[sampleSubFilePath]===false)
 			return pass(fg.whiteDim("."));
 
-		return await fail(`${fg.pink("No result returned")} ${xu.bracket(`stderr: ${r.stderr.trim()}`)} ${xu.bracket(`stdout: ${r.stdout.trim()}`)} ${fg.deepSkyblue("but expected")} ${xu.inspect(testData[sampleSubFilePath]).squeeze()}`);
+		return await fail(`${fg.pink("No dexData result returned")} ${fg.deepSkyblue("but expected")} ${xu.inspect(testData[sampleSubFilePath]).squeeze()} with err ${err}`);
 	}
-	
+
 	const result = {};
-	result.processed = resultFull.processed;
-	if(resultFull?.created?.files?.output?.length)
+	result.processed = dexData.processed;
+	if(dexData?.created?.files?.output?.length)
 	{
-		const misingFiles = (await resultFull.created.files.output.parallelMap(async ({absolute}) => ((await fileUtil.exists(absolute)) ? false : absolute))).filter(v => !!v);
+		const misingFiles = (await dexData.created.files.output.parallelMap(async ({absolute}) => ((await fileUtil.exists(absolute)) ? false : absolute))).filter(v => !!v);
 		if(misingFiles.length>0)
 			return await fail(`Some reported output files are missing from disk: ${misingFiles.join(" ")}`);
 
-		result.files = Object.fromEntries(await resultFull.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("SHA-1", absolute)}]));
+		result.files = Object.fromEntries(await dexData.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("SHA-1", absolute)}]));
 	}
-	result.meta = resultFull?.phase?.meta || {};
-	if(resultFull?.phase)
+	result.meta = dexData?.phase?.meta || {};
+	if(dexData?.phase)
 	{
-		result.family = resultFull.phase.family;
-		result.format = resultFull.phase.format;
+		result.family = dexData.phase.family;
+		result.format = dexData.phase.format;
 
-		if(resultFull.phase.converter)
-			result.converter = resultFull.phase.converter.split("[")[0];	// don't record any flags passed, they can be variable per running (bchunk cueFilePath for example)
+		if(dexData.phase.converter)
+			result.converter = dexData.phase.converter.split("[")[0];	// don't record any flags passed, they can be variable per running (bchunk cueFilePath for example)
 	}
 	
 	if(argv.record)
@@ -399,7 +394,7 @@ async function testSample(sampleFilePath)
 			delete testData[sampleSubFilePath].inputMeta;
 
 		testData[sampleSubFilePath] = result;
-		return await pass(!resultFull?.created?.files?.output?.length ? fg.pink(`${xu.c.blink}r`) : fg.green("r"));		// blinking pink 'r' === no files found
+		return await pass(!dexData?.created?.files?.output?.length ? fg.pink(`${xu.c.blink}r`) : fg.green("r"));		// blinking pink 'r' === no files found
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
@@ -414,7 +409,7 @@ async function testSample(sampleFilePath)
 
 	if(!result.processed)
 	{
-		if(!resultFull.ids.some(id => id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
+		if(!dexData.ids.some(id => id.formatid===diskFormat) && !UNPROCESSED_ALLOW_NO_IDS.includes(`${diskFamily}/${diskFormat}`) && (!allowFamilyMismatch || !allowFormatMismatch))
 			return await fail(`Processed is false (which was expected), but no id detected matching: ${diskFormat}`);
 
 		return await pass(fg.fogGray("."));
@@ -445,8 +440,8 @@ async function testSample(sampleFilePath)
 			return await fail(`Created files are different: ${diffFiles.innerTruncate(4000)}${converterMismatch}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
-		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(-1)?.programid] || 0));
-		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[resultFull?.phase?.ran?.at(0)?.programid] || 0));
+		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[dexData?.phase?.ran?.at(-1)?.programid] || 0));
+		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[dexData?.phase?.ran?.at(0)?.programid] || 0));
 
 		// first make sure the files are the same
 		for(const [name, {size, sum}] of Object.entries(result.files))
@@ -517,7 +512,40 @@ async function testSample(sampleFilePath)
 	return await pass(fg.white("·"));
 }
 
-await sampleFilePaths.shuffle().parallelMap(testSample, navigator.hardwareConcurrency*0.80);	// don't be tempted to increase this higher as you end up starving out CPU from QEMU or other processes and get unexpected failures
+xlog.info`Starting testWorker pool of ${NUM_WORKERS} workers...`;
+const pool = new XWorkerPool({workercb, xlog});
+await pool.start(path.join(xu.dirname(import.meta), "testWorker.js"), {size : NUM_WORKERS});
+
+xlog.info`Testing ${sampleFilePaths.length} sample files...`;
+pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
+{
+	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
+	const diskFamily = sampleSubFilePath.split("/")[0];
+	const diskFormat = sampleSubFilePath.split("/")[1];
+	const diskFormatid = `${diskFamily}/${diskFormat}`;
+	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
+	await Deno.mkdir(tmpOutDirPath, {recursive : true});
+	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
+
+	const o = {sampleFilePath, tmpOutDirPath, logFilePath, programFlag : {}};
+	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
+	{
+		o.programFlag.osHint = {};
+		o.programFlag.osHint[FORMAT_OS_HINT[diskFormatid]] = true;
+	}
+	else if(Object.isObject(FORMAT_OS_HINT[diskFormatid]) && FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)])
+	{
+		o.programFlag.osHint = {};
+		o.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
+	}
+	if(FORCE_FORMAT_AS.includes(diskFormatid))
+		o.asFormat = diskFormatid;
+
+	return o;
+}));
+
+await xu.waitUntil(() => workercbCount===sampleFilePaths.length);
+await pool.stop();
 
 xlog.info``;	// gets us out of the period stdoud section onto a new line
 
@@ -586,9 +614,9 @@ async function writeOutputHTML()
 
 			@keyframes condemned_blink_effect
 			{
-  				0% { visibility: hidden; }
-  				50% { visibility: hidden; }
-  				100% { visibility: visible; }
+				0% { visibility: hidden; }
+				50% { visibility: hidden; }
+				100% { visibility: visible; }
 			}
 
 			iframe

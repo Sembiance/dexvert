@@ -7,6 +7,7 @@
   Start with:  • Figure 5 Window in List Mode.pict
   Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
 
+
 /---------------\
 | High Priority |
 \---------------/

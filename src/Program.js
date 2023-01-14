@@ -218,7 +218,7 @@ export class Program
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
 
-				if(newFile.size>xu.GB)
+				if(newFile.size>xu.GB && f.input.size<xu.GB)
 				{
 					xlog.warn`Deleting a file produced by ${fg.orange(this.programid)} that is ${newFile.size.bytesToSize()} as it exceeds the arbitrary 1GB size sanity check limit: ${fg.green(newFileRel)}`;
 					await fileUtil.unlink(newFilePath);

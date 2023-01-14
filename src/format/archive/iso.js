@@ -163,6 +163,9 @@ export class iso extends Format
 				
 				r.push("uniso", "uniso[block:512]");	// Fall back to uniso even with read/write errors
 
+				if(dexState.hasMagics("null bytes"))	// Some isos have a lot of null bytes at the beginning which screws up other converters bu 7z seems to handle it (Cracking I..iso)
+					r.push("sevenZip");
+
 				return r.map(v => `${v}[subOutDir:dexvert_pc]`);
 			}
 		];

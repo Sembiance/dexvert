@@ -200,8 +200,6 @@ export class iso extends Format
 	};
 	post = async dexState =>
 	{
-		Object.assign(dexState.meta, dexState.ran.find(({programid, meta}) => programid==="uniso" && meta?.fileMeta)?.meta || {});
-
 		// might produce up to 3 subdirectories. Delete any that are empty and if we have only 1 that has files then move those files up one level and delete the now empty subdirectory
 		const types = await ["dexvert_nextstep", "dexvert_mac", "dexvert_pc"].parallelMap(async typeid =>
 		{

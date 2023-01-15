@@ -86,7 +86,7 @@ async function extractHFSISO()
 		const {stdout : entriesRaw} = await runUtil.run("hls", ["-albi"], HFS_RUN_OPTIONS);
 
 		// copy out files
-		const hlsRegex = /^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s+(?<fileType>[^/]+)?\/?\S+.+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/;
+		const hlsRegex = /^\s*(?<id>\d+)\s+(?<type>[Fdf])i?\s+(?<fileType>[^/]+)?\/?(?<fileCreator>\S+).+(?<month>[A-Z][a-z]{2})\s+(?<day>[\s\d]\d)\s+(?<yearOrTime>\d\d:\d\d|\d{4})\s?(?<filename>.+)$/;
 		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(hlsRegex) || {})?.groups);
 		for(const entry of entries)
 		{
@@ -110,7 +110,13 @@ async function extractHFSISO()
 
 			// if we are a text file, we should always extract as raw and let programs further up the stack worry about decoding it properly. this way if a raw output text file is viewed on an actual Mac, it would render just fine
 			await runUtil.run("hcopyi", [...(["text", "ttro"].includes(entry?.fileType?.toLowerCase()) ? ["-r"] : []), entry.id, safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
-			metadata.fileMeta[path.relative(OUT_DIR_PATH, entry.destFilePath)] = {macFileType : entry.fileType};
+			const entryFileMeta = {};
+			if(entry.fileType?.length)
+				entryFileMeta.macFileType = entry.fileType;
+			if(entry.fileCreator?.length && entry.fileCreator!=="/")
+				entryFileMeta.macFileCreator = entry.fileCreator;
+			if(Object.keys(entryFileMeta).length>0)
+				metadata.fileMeta[path.relative(OUT_DIR_PATH, entry.destFilePath)] = entryFileMeta;
 
 			try
 			{

@@ -334,6 +334,16 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 				}
 			}
 
+			// auto assign any meta.fileMeta results from any programs to the runState meta
+			for(const r of dexState.ran || [])
+			{
+				if(!r.meta?.fileMeta)
+					continue;
+				
+				dexState.meta.fileMeta ||= {};
+				Object.assign(dexState.meta.fileMeta, r.meta.fileMeta);
+			}
+
 			// run any post-converter post format function
 			if(format.post)
 				await format.post(dexState);

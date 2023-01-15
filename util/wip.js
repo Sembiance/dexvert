@@ -12,8 +12,13 @@ import {programs} from "../src/program/programs.js";
 
 const xlog = new XLog("info");
 
-const hrm = await fileUtil.tree("/home/sembiance/tmp/out", {nodir : true});
-const test = await FileSet.create("/home/sembiance/tmp/out", "output", hrm);
+const v = new Uint8Array(4);
+v.setUInt32BE(0, 1953790068);	// XADFileCreator
+console.log(v.getString(0, 4));
+
+v.setUInt32BE(0, 1413830740);	// XADFileType
+console.log(v.getString(0, 4));
+
 
 //await fileUtil.writeTextFile("/tmp/test.txt", await encodeUtil.decode(await Deno.readFile(Deno.args[0]), "MACINTOSH"));
 //console.log(await encodeUtil.decode(await Deno.readFile(Deno.args[0]), "MACINTOSHJP"));

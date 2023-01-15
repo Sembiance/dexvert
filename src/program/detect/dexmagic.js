@@ -116,31 +116,35 @@ const DEXMAGIC_CHECKS =
 const DEXMAGIC_FILE_META_CHECKS =
 [
 	// uniso[hfs] will output the macintosh file type for each output file. This may be fed back into a future dexvert/identifcation as fileMeta. So we check that here
-	meta =>
+	// file and creator types: sandbox/txt/MacOS_File_Types_and_Creator_Codes.pdf
+	({macFileType, macCreatorType}) =>	// eslint-disable-line no-unused-vars
 	{
-		switch(meta?.macFileType)
+		switch(macFileType)
 		{
-			case "TEXT":
-			case "ttro":
-				return "Macintosh Text File";
-			
+			case "DRWG":
+				return "Macintosh MacDraw II Document";
+
 			case "GIFf":
 				return "Macintosh GIF";
 			
+			case "MooV":
+				return "Macintosh QuickTime Movie";
+			
 			case "PICT":
 				return "Macintosh PICT";
-			
-			case "TIFF":
-				return "Macintosh TIFF";
-			
-			case "DRWG":
-				return "Macintosh MacDraw II Document";
 			
 			case "PNTG":
 				return "Macintosh MacPaint";
 			
 			case "SIT5":
 				return "Macintosh StuffIt 5 Archive";
+
+			case "TEXT":
+			case "ttro":
+				return "Macintosh Text File";
+
+			case "TIFF":
+				return "Macintosh TIFF";
 		}
 
 		return null;

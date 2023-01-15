@@ -1,6 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
+  https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
+  	http://discmaster.textfiles.com/view/10348/MACPOWER-1998-08.ISO.7z/MACPOWER-1998-08.ISO/mac/Shareware%20Paradise/P_%20POCKET/P_%20POCKET(68k).sit/P_%20POCKET(68k)/Pickle'sPocket
+  https://github.com/Sembiance/dexvert/issues/11
+  	http://discmaster.textfiles.com/view/9351/MACPEOPLE-1997-04-15.ISO.7z/MACPEOPLE-1997-04-15.ISO/%E4%BD%93%E9%A8%93%E7%89%88%E3%82%BD%E3%83%95%E3%83%88/The%20Tower%20DEMO%E2%86%B5%E2%86%B5/The%20Tower%20DEMO/The%20Tower%20DEMO
+  Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
+  Afterwards, reprocess #10348 and potentially other Mac CDs
+
 * Consider adding 'Detect-It-Easy' as an identifier: https://github.com/horsicq/Detect-It-Easy
 
 * Improve recombining of PICT images in deark, some are not doing it properly:
@@ -56,10 +64,6 @@
 | Medium Priority |
 \-----------------/
 * Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
-
-* See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
-  https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
-  Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
 
 * See if I could handle extraction of TEXT data better from certain director files:
   http://discmaster.textfiles.com/view/4274/CD-Rom%20now%20n.21.iso/director/stones.dir/00025_Field_25.txt

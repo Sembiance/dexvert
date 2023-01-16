@@ -1,4 +1,4 @@
-# Unsupported File Formats (878)
+# Unsupported File Formats (879)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -243,7 +243,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (80)
+## Image (81)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -284,6 +284,7 @@ image | HomeBrew Icon | .hic | [1 sample file](https://telparia.com/fileFormatSa
 image | ID Software Sprite | .spr | [3 sample files](https://telparia.com/fileFormatSamples/image/idSoftwareSprite/)
 image | [IFF Retargetable Graphic](http://fileformats.archiveteam.org/wiki/RGFX) | .rgfx .rgx | [8 sample files](https://telparia.com/fileFormatSamples/image/rgfx/)
 image | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://telparia.com/fileFormatSamples/image/imagineTexture/)
+image | Intergraph Raster RGB | .rgb | 
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://telparia.com/fileFormatSamples/image/introCAD/)
 image | IRIS Showcase Presentation/Drawing | .sc .showcase | 
 image | JAM Bitmap | .jam | 

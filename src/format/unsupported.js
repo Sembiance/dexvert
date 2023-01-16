@@ -149,6 +149,7 @@ export default
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
 		genericCADD				  : {name : "Generic CADD", ext : [".gcd"], magic : ["Generic CADD drawing"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
+		intergraphRasterRGB       : {name : "Intergraph Raster RGB", ext : [".rgb"], magic : ["Intergraph Raster bitmap (Adaptive RLE RGB)"]},
 		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
 		microsoftBorderArt        : {name : "Microsoft Border Art", ext : [".bdr"], magic : ["Microsoft Border art"]},
 		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},

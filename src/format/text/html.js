@@ -1,10 +1,11 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class html extends Format
 {
 	name           = "Hypertext Markup Language File";
 	website        = "http://fileformats.archiveteam.org/wiki/HTML";
-	ext            = [".html", ".htm", ".xhtml", ".xht", ".hhk", ".hhc"];
+	ext            = [".html", ".htm", ".xhtml", ".xht", ".hhk", ".hhc", ".hts", ".htx", ".shtml", ".phtml"];
 	forbidExtMatch = true;
 	filename       = [/htm/];
 	weakFilename   = true;
@@ -14,4 +15,5 @@ export class html extends Format
 	trustMagic     = true;
 	untouched      = true;
 	metaProvider   = ["text"];
+	notes          = "I tried some ways I could relax this in order to properly detect HTML files that have no extension, but DOM parsers are really lenient and will parse almost anything as HTML. More than that is too CPU intensive.";
 }

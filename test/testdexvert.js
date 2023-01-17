@@ -398,7 +398,7 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return await fail(`No test data for this file: ${xu.inspect(result).squeeze()}`);
+		return await fail(`No test data for this file: ${xu.inspect(result).squeeze().innerTruncate(3000)}`);
 
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
@@ -437,7 +437,7 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
 		const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
-			return await fail(`Created files are different: ${diffFiles.innerTruncate(4000)}${converterMismatch}`);
+			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)}${converterMismatch}`);
 
 		let allowedSizeDiff = (FLEX_SIZE_FORMATS?.[result.family]?.[result.format] || FLEX_SIZE_FORMATS?.[result.family]?.["*"] || 0);
 		allowedSizeDiff = Math.max(allowedSizeDiff, (FLEX_SIZE_PROGRAMS?.[dexData?.phase?.ran?.at(-1)?.programid] || 0));

@@ -307,7 +307,7 @@ export default
 		autoCADProtectedLISP         : {name : "AutoCAD Protected LISP", ext : [".lsp"], magic : ["AutoCAD Protected LISP Code"]},
 		beOSCodeWarriorProject       : {name : "BeOS CodeWarrior Project", ext : [".proj"], magic : ["BeOS CodeWarrior Project"]},
 		bnuportPatchTable            : {name : "BNUPORT Patch Table", ext : [".pat"], magic : ["BNUPORT Patch Table"]},
-		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file", /^Delphi \d+ Compiled Unit/]},
+		borlandDelphiCompiledUnit    : {name : "Borland Delphi Compiled Unit", ext : [".dcu"], magic : ["Borland Delphi .DCU file", "Borland Delphi 6 Library", /^Delphi \d+ Compiled Unit/]},
 		borlandLanguageLibrary       : {name : "Borland Language Library", ext : [".bll"], magic : ["Borland Language Library"]},
 		borlandOverlay               : {name : "Borland Overlay", ext : [".ovr"], magic : ["Borland Overlay"]},
 		clipperPreLinkedLibrary      : {name : "Clipper Pre-Linked Library", ext : [".pll"], magic : ["Clipper Pre-Linked Library"]},
@@ -400,6 +400,7 @@ export default
 		gameBoyROM   : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
 		genesisROM   : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
 		nintendoROM  : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
+		n64ROM       : {name : "Nintendo 64 ROM", ext : [".v64"], magic : ["Nintendo 64 ROM", "Doctor V64 ROM dump"]},
 		qlPluginROM  : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
 
 		///////////

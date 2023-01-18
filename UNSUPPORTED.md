@@ -1,4 +1,4 @@
-# Unsupported File Formats (879)
+# Unsupported File Formats (881)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -430,7 +430,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (431)
+## Other (432)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -705,6 +705,7 @@ other | Netscape Address Book | .nab |
 other | NetShield Virus Pattern Library | .dat | 
 other | Netware Loadable Module | .nlm | 
 other | Netware Message | .msg | 
+other | Nintendo 64 ROM | .v64 | 
 other | Nintendo ROM | .nes | 
 other | Norton Change Directory Info | .ncd | 
 other | Novell System PrintDef Device Definition | .pdf | 
@@ -867,7 +868,7 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (40)
+## Poly (41)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -903,6 +904,7 @@ poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatS
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
 poly | SGI Open Inventor Scene Graph | .iv | 
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
+poly | Shockwave 3D Scene Export | .w3d | 
 poly | Simply 3D Geometry | .ged | 
 poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 

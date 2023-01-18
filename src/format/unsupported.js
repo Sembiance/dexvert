@@ -195,6 +195,7 @@ export default
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		rayDreamDesignerScene   : {name : "Ray Dream Designer Scene", ext : [".rd4"], magic : ["Ray Dream Designer scene2"]},
+		shockwave3DSceneExport  : {name : "Shockwave 3D Scene Export", ext : [".w3d"], magic : ["Shockwave 3D Scene Export"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
 		strataStudioProVis      : {name : "Strata StudioPro Vis", magic : [/^fmt\/1204( |$)/]},
 		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},

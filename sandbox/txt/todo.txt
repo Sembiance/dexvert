@@ -49,16 +49,6 @@
   http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
   Then add that converter as an option to all formats that it supports
 
-* Wasn't able to convert these HFS disk images:
-	http://discmaster.textfiles.com/browse/13263
-	http://discmaster.textfiles.com/browse/13616
-  The .Bin is a compact pro archive and the .img inside identifies as Macintosh HFS data, but can't do anything with it
-  It didn't work in IsoBuster or hmount or HFSExplorer. It also didn't mount as HD or ISO with the QEMU MacOSPPC emulator
-  I posted a review on archive.org asking if anyone knew of anything that can hadnle it: https://archive.org/details/GigaROM2.0.img
-  In order for me to handle it without more info, I could try other programs like: https://getdataforensics.com/product/mount-image-pro/
-  Or something from OS X
-
-
 
 /-----------------\
 | Medium Priority |

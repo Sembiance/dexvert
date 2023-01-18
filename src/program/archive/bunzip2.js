@@ -8,6 +8,7 @@ export class bunzip2 extends Program
 	args          = r => ["--force", r.inFile()];
 	cwd           = r => r.outDir();
 	mirrorInToCWD = "copy";
+	unsafe        = true;
 	checkForDups  = true;
 	renameOut     = false;
 }

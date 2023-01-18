@@ -207,6 +207,7 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-type", "b,c,p,s", "-delete"]);				// delete special files like block, named pipes, sockets, etc
 			await runUtil.run("find", [f.outDir.absolute, "-type", "f", "-empty", "-delete"]);			// delete empty files
 			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);					// delete broken symlinks. make sure we do this last just in case a symlink becomes broken because we have deleted the file it points to above
+			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "!", "-readable", "-delete"]);	// delete unreadable symlinks, this is a workaround for broken symlinks that point to directories that don't exist and thus don't get caught by the above
 
 			// now find any new files on disk in the output dir that we don't yet
 			xlog.debug`Program ${fg.orange(this.programid)} locating new files...`;

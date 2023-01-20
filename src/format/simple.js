@@ -203,7 +203,7 @@ export default
 		vimSwap                         : {name : "Vim Swap", ext : [".swp"], magic : ["Vim swap"]},
 		visualBasicForm                 : {name : "Visual Basic Form", ext : [".frm"], magic : ["Visual Basic Form", /^fmt\/(1541|1542)( |$)/], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_form"},
 		visualBasicProject              : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file"},
-		windowsHelpFileContent          : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content"]},
+		windowsHelpFileContent          : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content"], weakMagic : ["Help File Contents"]},
 		windowsProgramGroup             : {name : "Windows Program Group", ext : [".grp"], magic : ["Windows Program Manager Group", "Windows 3.x .GRP file"]},
 		wingzScript                     : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"]},
 		wordSearchManiaPuzzle           : {name : "Wordsearch Mania! Puzzle", ext : [".wsp"], magic : ["Wordsearch Mania! Puzzle"]},

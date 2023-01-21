@@ -57,6 +57,7 @@ export default
 		amigaExe                : {name : "AmigaOS Executable", magic : ["AmigaOS loadseg()ble executable/binary", "Amiga Hunk executable"]},
 		atariCPX                : {name : "Atari Control Panel Extension Module", ext : [".cpx"], magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"], weakMagic : true},
 		atariSTExe              : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
+		blackberryExecutable    : {name : "BlackBerry Executable", ext : [".cod"], magic : ["Blackberry Binary Executable"]},
 		com                     : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
 		elf                     : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
 		linux386Exe             : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
@@ -134,6 +135,7 @@ export default
 
 	image :
 	{
+		aldusIntelliDrawDrawing   : {name : "Aldus IntelliDraw Drawing", ext : [".idw"], magic : ["Aldus IntelliDraw Drawing"]},
 		animatorPICCEL            : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
@@ -346,6 +348,7 @@ export default
 		powerBasicHelp               : {name : "PowerBASIC Help", ext : [".pbh"], magic : ["PowerBASIC Help"]},
 		powerBuilderDynamicLibrary   : {name : "PowerBuilder Dynamic Library", ext : [".pbd"], magic : ["PowerBuilder Dynamic library"]},
 		psionLibrary                 : {name : "Psion Library", ext : [".dyl"], magic : ["Psion Library"]},
+		qtMessage                    : {name : "Qt Message", ext : [".qm"], magic : ["Qt Message", "Qt Translation file"]},
 		realBasicProject             : {name : "RealBasic Project", ext : [".rbp"], magic : ["REALbasic/Xojo Project"]},
 		riscOSALFLibrary             : {name : "RISC OS ALF Library", magic : ["RISC OS Chunk data, ALF library"]},
 		riscOSARMObjectFile          : {name : "RISC OS ARM Object File", magic : ["RISC OS Chunk data, AOF object"]},

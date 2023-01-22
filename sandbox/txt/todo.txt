@@ -49,10 +49,18 @@
   http://discmaster.textfiles.com/view/4314/Disc%20Dump/CD32Gamer9.dicf
   Then add that converter as an option to all formats that it supports
 
-
 /-----------------\
 | Medium Priority |
 \-----------------/
+* ISOs I was unable to process:
+	https://archive.org/details/NASASpaceSCienceSamplerV1
+	https://archive.org/details/cdrom_Muzyka_z_filmu_zmruz_oczy
+	https://archive.org/details/Music_Madness_Volume_I_I_-_Porcupine_Productions		bchunk merged into an HFS ISO, but the 'PM' magic is at offset 504 instead of 512. I added 8x 0x00 bytes and then it worked
+* These seem to be Disk Copy 5/6, which I may be able to extract/convert with MacOS Classic and this: http://macintoshgarden.org/apps/disk-copy-6
+	https://archive.org/details/GigaROM2.0.img
+	https://archive.org/details/InfoMac5Disk1.img
+	https://archive.org/details/InfoMac5Disk2.img
+
 * Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
 
 * See if I could handle extraction of TEXT data better from certain director files:

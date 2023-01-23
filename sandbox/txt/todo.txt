@@ -61,6 +61,9 @@
 	https://archive.org/details/InfoMac5Disk1.img
 	https://archive.org/details/InfoMac5Disk2.img
 
+* See if I can extract and of the compression I encountered in sandbox/unknownCompression (maybe try: https://www.sac.sk/files.php?d=7&l=)
+  Any I add, will need to do a search of unknown files HTML to find that magic
+
 * Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
 
 * See if I could handle extraction of TEXT data better from certain director files:

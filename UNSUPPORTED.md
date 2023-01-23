@@ -1,4 +1,4 @@
-# Unsupported File Formats (881)
+# Unsupported File Formats (884)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -149,7 +149,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (29)
+## Executable (30)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -158,6 +158,7 @@ executable | AmigaOS Executable |  |
 executable | Atari Control Panel Extension Module | .cpx | [10 sample files](https://telparia.com/fileFormatSamples/executable/atariCPX/)
 executable | Atari Executable | .xex | [4 sample files](https://telparia.com/fileFormatSamples/executable/xex/)
 executable | Atari ST Executable |  | [11 sample files](https://telparia.com/fileFormatSamples/executable/atariSTExe/)
+executable | BlackBerry Executable | .cod | 
 executable | ELF Executable |  | 
 executable | FM-TownsOS App | .exp | [9 sample files](https://telparia.com/fileFormatSamples/executable/fmTownsOSApp/)
 executable | HP Palmtop Executable | .exm | [2 sample files](https://telparia.com/fileFormatSamples/executable/hpPalmtopExecutable/)
@@ -243,11 +244,12 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (81)
+## Image (82)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
+image | Aldus IntelliDraw Drawing | .idw | 
 image | Animator PIC/CEL | .pic .cel | 
 image | Applause Palette | .pal | 
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
@@ -430,7 +432,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (432)
+## Other (433)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -742,6 +744,7 @@ other | Psion Physical Device Driver | .pdd |
 other | Psion Printer Driver | .wdr | 
 other | Puzzle Buster Puzzle | .puz | 
 other | QL Plugin-ROM |  | 
+other | Qt Message | .qm | 
 other | Quake II Map | .bsp | 
 other | Quake II Sprite Reference | .sp2 | 
 other | Quake III Map | .bsp | 

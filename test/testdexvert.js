@@ -37,19 +37,37 @@ const FORCE_FORMAT_AS =
 
 const FORMAT_OS_HINT =
 {
-	"archive/iso"          :
+	"archive/iso" :
 	{
-		"OS_user_4.0.iso" : "nextstep",
-		"Random-Dot 3D.iso" : "macintoshjp",
+		"OS_user_4.0.iso"                     : "nextstep",
+		"Random-Dot 3D.iso"                   : "macintoshjp",
 		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
-		"MAC100-1999-02.ISO" : "macintoshjp",
-		"MACPEOPLE-1998-03-01.ISO" : "macintoshjp",
-		"MACPEOPLE-1999-02-01.ISO" : "macintoshjp"	// is dual both PC and Mac but 99% of the stuff is on mac side
+		"MAC100-1999-02.ISO"                  : "macintoshjp",
+		"MACPEOPLE-1998-03-01.ISO"            : "macintoshjp",
+		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp"	// is dual both PC and Mac but 99% of the stuff is on mac side
 	},
-	"archive/sit"          : {"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp", "StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ" : "macintoshjp"},
-	"image/macBinaryImage" : {"01-1-tiff-手塚莉絵" : "macintoshjp"},
-	"image/printfox"       : "commodore",
-	"text/html"            : {"apple.html" : "macintoshjp"}
+	"archive/sit" :
+	{
+		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",
+		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp"
+	},
+	"image/macBinaryImage" :
+	{
+		"01-1-tiff-手塚莉絵" : "macintoshjp"
+	},
+	"image/printfox" : "commodore",
+	"text/html"      :
+	{
+		"apple.html" : "macintoshjp"
+	}
+};
+
+const FORMAT_PROGRAM_FLAG =
+{
+	"archive/iso" :
+	{
+		"PanicDisc (PANIC.COM).bin" : {bchunk : {forceMode1 : true}}
+	}
 };
 
 // these formats produce a single file, but the name is always different
@@ -538,6 +556,8 @@ pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		o.programFlag.osHint = {};
 		o.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
 	}
+	if(Object.isObject(FORMAT_PROGRAM_FLAG[diskFormatid]) && FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)])
+		Object.assign(o.programFlag, FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)]);
 	if(FORCE_FORMAT_AS.includes(diskFormatid))
 		o.asFormat = diskFormatid;
 

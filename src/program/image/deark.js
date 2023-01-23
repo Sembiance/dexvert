@@ -28,6 +28,7 @@ export class deark extends Program
 		"deleteADF"     : "Set this to delete the output ADF file as it's not needed. This is mainly used when a simple image format like TIFF is wrapped as a MacBinary file.",
 		"convertAsExt"  : "Use this ext as a hint as to what to convert as",
 		"alwaysConvert" : "Always convert output files using convert[removeAlpha]",
+		"extractAll"    : "Extract all files, sets the -a flag used by some modules",
 		"start"         : "Start processing with deark at a specific byte offset",
 		"file2"         : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
@@ -48,6 +49,8 @@ export class deark extends Program
 			a.push("-file2", r.flags.file2);
 		if(r.flags.recombine)
 			a.push("-d");
+		if(r.flags.extractAll)
+			a.push("-a");
 		
 		const opts = Array.force(r.flags.opt || []);
 		if(r.flags.charOutType)

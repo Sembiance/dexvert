@@ -73,6 +73,7 @@ export default
 		microsoftCompiledHelp2  : {name : "Microsoft Compiled Help 2", ext : [".HxS", ".HxI"], magic : ["Microsoft compiled help format 2"], website : "http://fileformats.archiveteam.org/wiki/Microsoft_Help_2"},
 		mipsECOFFExe            : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
 		msDOSDriver             : {name : "MS-DOS Driver", ext : [".sys", ".drv"], magic : [/^DOS executable \(.+ device driver/], weakMagic : true},
+		palmOSDynamicLibrary    : {name : "Palm OS Dynamic Library", ext : [".prc"], magic : ["Palm OS dynamic library"], weakMagic : true},
 		qDOSExe                 : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
 		riscOSExe               : {name : "RISC OS Executable", magic : ["RISC OS AIF executable"]},
 		sparcDemandExe          : {name : "SPARC Demand Paged Exe", magic : ["SPARC demand paged dynamically linked executable not stripped"]},

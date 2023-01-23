@@ -1,11 +1,11 @@
-# Supported File Formats (1,430)
+# Supported File Formats (1,431)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (220)
+## Archive (221)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -118,7 +118,7 @@ archive | [LHArc Archive](http://fileformats.archiveteam.org/wiki/LHA) | .lha .l
 archive | Lhwarp | .lhw | [unar](https://unarchiver.c3.cx/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/lhwarp/)
 archive | [LIMIT Archive](http://fileformats.archiveteam.org/wiki/LIMIT) | .lin | [limit](http://cd.textfiles.com/nightowl/nopv13/014A/LIMIT12.ZIP) | [2 sample files](https://telparia.com/fileFormatSamples/archive/limit/)
 archive | Linux Extended Filesystem | .img .ext2 .ext3 .ext4 | [sevenZip](http://p7zip.sourceforge.net/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/linuxEXTFilesystem/)
-archive | LOB Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [8 sample files](https://telparia.com/fileFormatSamples/archive/lobCompressed/)
+archive | LOB Compressed |  | [ancient](https://github.com/temisu/ancient_format_decompressor) | [10 sample files](https://telparia.com/fileFormatSamples/archive/lobCompressed/)
 archive | Looking Glass Resource | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/lookingGlass/)
 archive | Lucas Arts Game Data Archive | .gob | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/lucasArts/)
 archive | LyNX Archive | .lnx | [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/lynxArchive/)
@@ -156,6 +156,7 @@ archive | [Pack200 Compressed JAR](https://docs.oracle.com/en/java/javase/13/doc
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://unarchiver.c3.cx/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/packIt/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/paintShopProBrowserCache/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [unar](https://unarchiver.c3.cx/) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/archive/arc/)
+archive | [Palm Query Application](http://fileformats.archiveteam.org/wiki/PQA) | .pqa | [deark](https://entropymine.com/deark/) | [7 sample files](https://telparia.com/fileFormatSamples/archive/palmQueryApplication/)
 archive | [Palm Resource](http://fileformats.archiveteam.org/wiki/PRC_(Palm_OS)) | .prc | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/palmResource/)
 archive | [Paradox Database Memo Field BLOB](http://fileformats.archiveteam.org/wiki/Paradox_(database)) | .mb | [foremost](http://foremost.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/paradoxDatabaseBlob/) - I tried using pxview to convert these, but it just segfaults, so fallback to foremost.
 archive | [PASTI Disk Image](http://fileformats.archiveteam.org/wiki/STX) | .stx | [deark](https://entropymine.com/deark/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/stx/)
@@ -203,7 +204,7 @@ archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [s
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [td02imd](http://dunfield.classiccmp.org/img42841/teledisk.htm/) [dskconv](http://www.seasip.info/Unix/LibDsk/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/teledisk/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [deark](https://entropymine.com/deark/) [tscomp](http://fileformats.archiveteam.org/wiki/TSComp) | [10 sample files](https://telparia.com/fileFormatSamples/archive/tscomp/)
-archive | Thunder Compressed File | .jpm | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [7 sample files](https://telparia.com/fileFormatSamples/archive/thunderCompressed/)
+archive | Thunder Compressed File | .jpm | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [9 sample files](https://telparia.com/fileFormatSamples/archive/thunderCompressed/)
 archive | Transport Neutral Encapsulation Format | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://telparia.com/fileFormatSamples/archive/tnef/)
 archive | [TRS-80 Disk Image](http://fileformats.archiveteam.org/wiki/DMK) | .dmk .dsk | [trsread](http://www.trs-80emulators.com/trsread-trswrite.html) | [7 sample files](https://telparia.com/fileFormatSamples/archive/dmk/)
 archive | [TTComp Archive](http://fileformats.archiveteam.org/wiki/TTComp_archive) |  | [ttdecomp](http://www.exelana.com/techie/c/ttdecomp.html) | [11 sample files](https://telparia.com/fileFormatSamples/archive/ttcomp/)
@@ -417,9 +418,9 @@ document | [Outlook Message](http://fileformats.archiveteam.org/wiki/Outlook_Ite
 document | Ovation Pro Document | .dpd | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/ovationPro/)
 document | PageSetter Document | .ps | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/pageSetter/)
 document | [PageStream Document](https://en.wikipedia.org/wiki/PageStream) | .pgs | [PageStream](https://pagestream.org/) [strings](https://www.gnu.org/software/binutils/) | [19 sample files](https://telparia.com/fileFormatSamples/document/pageStreamDocument/)
-document | Palm MobileDB Database | .pdb | [pdb2csv](https://sourceforge.net/projects/palm-db-tools/) | [5 sample files](https://telparia.com/fileFormatSamples/document/mobildDBDatabase/)
-document | Palm PeanutReader e-book | .pdb | [ebook_convert](https://calibre-ebook.com/) | [3 sample files](https://telparia.com/fileFormatSamples/document/palmPeanutReaderEBook/)
-document | Palm TealMeal Document | .pdb | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/palmTealMeal/)
+document | Palm MobileDB Database | .pdb | [pdb2csv](https://sourceforge.net/projects/palm-db-tools/) | [7 sample files](https://telparia.com/fileFormatSamples/document/mobildDBDatabase/)
+document | Palm PeanutReader e-book | .pdb | [ebook_convert](https://calibre-ebook.com/) | [5 sample files](https://telparia.com/fileFormatSamples/document/palmPeanutReaderEBook/)
+document | Palm TealMeal Document | .pdb | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/document/palmTealMeal/)
 document | Palm ThoughtManager | .pdb | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/document/palmThoughtManager/)
 document | [PalmDOC](http://fileformats.archiveteam.org/wiki/PalmDOC) | .pdb .prc | [ebook_convert](https://calibre-ebook.com/) [soffice](https://www.libreoffice.org) | [10 sample files](https://telparia.com/fileFormatSamples/document/palmDOC/)
 document | Papyrus | .pap | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/document/papyrus/)
@@ -482,7 +483,7 @@ document | VX-REXX Windows/Object Info | .vry .vrw | [strings](https://www.gnu.o
 document | Wildcat! WCX | .wcx | [wccnosy](http://www.dreamlandbbs.com/filegate/wcf/4utl/index.html) | [12 sample files](https://telparia.com/fileFormatSamples/document/wildcatWCX/)
 document | Winamp Compiled Maki Script | .maki | [makiDecompiler](https://web.archive.org/web/20131020030559/http://www.rengels.de/maki_decompiler/download.html) | [7 sample files](https://telparia.com/fileFormatSamples/document/winampCompiledMakiScript/)
 document | WinAsks Questionnaire | .wap .wa | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/document/winAsksQuestionaire/)
-document | Windows 3.1 Registry |  | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://telparia.com/fileFormatSamples/document/windows31Registry/)
+document | Windows 3.1 Registry |  | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://telparia.com/fileFormatSamples/document/windows31Registry/)
 document | [Windows Compiled HTML Help File](http://fileformats.archiveteam.org/wiki/CHM) | .chm | [archmage](https://github.com/dottedmag/archmage) [UniExtract](https://www.legroom.net/software/uniextract) | [11 sample files](https://telparia.com/fileFormatSamples/document/chm/) - chmdeco and chmdump both failed to process IEXPLORE.CHM and I didn't try any others. FIND.CHM and ACCESSIB_18.CHM fail to extract with archmage.
 document | [Windows Help File](http://fileformats.archiveteam.org/wiki/HLP) | .hlp | [unHLPMVB](https://github.com/Sembiance/dexvert) | [22 sample files](https://telparia.com/fileFormatSamples/document/hlp/)
 document | [Windows Write Document](http://fileformats.archiveteam.org/wiki/WRI) | .wri .wr .doc | [soffice](https://www.libreoffice.org) [fileMerlin](http://www.file-convert.com/flmn.htm) [word97](https://archive.org/details/office97standard_201912/) | [13 sample files](https://telparia.com/fileFormatSamples/document/wri/)
@@ -922,7 +923,7 @@ image | [PL4](http://fileformats.archiveteam.org/wiki/PL4) | .pl4 | [recoil2png]
 image | [Planetary Data System](http://fileformats.archiveteam.org/wiki/PDS) | .imq .img .pds | [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) | [10 sample files](https://telparia.com/fileFormatSamples/image/pds/)
 image | [PlayStation TIM](http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)) | .tim | [convert](https://www.imagemagick.org/) [recoil2png](http://recoil.sourceforge.net) | [12 sample files](https://telparia.com/fileFormatSamples/image/tim/)
 image | [PMG Designer](http://fileformats.archiveteam.org/wiki/PMG_Designer) | .pmd | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://telparia.com/fileFormatSamples/image/pmd/)
-image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | [convert](https://www.imagemagick.org/) [tomsViewer](https://tomseditor.com/blog/viewer) | [7 sample files](https://telparia.com/fileFormatSamples/image/pam/)
+image | [Portable Arbitrary Map](http://fileformats.archiveteam.org/wiki/PAM) | .pam | [convert](https://www.imagemagick.org/) [tomsViewer](https://tomseditor.com/blog/viewer) | [8 sample files](https://telparia.com/fileFormatSamples/image/pam/)
 image | [Portable Bitmap](http://fileformats.archiveteam.org/wiki/PBM) | .pbm .pnm | [convert](https://www.imagemagick.org/) [gimp](https://gimp.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) | [11 sample files](https://telparia.com/fileFormatSamples/image/pbm/)
 image | [Portable Float Map](http://fileformats.archiveteam.org/wiki/PFM) | .pfm | [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) [tomsViewer](https://tomseditor.com/blog/viewer) | [4 sample files](https://telparia.com/fileFormatSamples/image/pfm/)
 image | [Portable Greyscale](http://fileformats.archiveteam.org/wiki/PGM) | .pgm .pnm | [convert](https://www.imagemagick.org/) [gimp](https://gimp.org) [hiJaakExpress](https://archive.org/details/hijaak-express) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) | [11 sample files](https://telparia.com/fileFormatSamples/image/pgm/)
@@ -979,7 +980,7 @@ image | [Softimage PIC Bitmap](http://fileformats.archiveteam.org/wiki/Softimage
 image | [Sony RAW](http://fileformats.archiveteam.org/wiki/Sony_ARW) | .arw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://telparia.com/fileFormatSamples/image/arw/)
 image | Speccy eXtended Graphic | .sxg | [recoil2png](http://recoil.sourceforge.net) | [8 sample files](https://telparia.com/fileFormatSamples/image/sxg/)
 image | [Spectrum 512 Compressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spc | [recoil2png](http://recoil.sourceforge.net) | [10 sample files](https://telparia.com/fileFormatSamples/image/spectrum512C/)
-image | [Spectrum 512 Extended](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spx | [recoil2png](http://recoil.sourceforge.net) | [7 sample files](https://telparia.com/fileFormatSamples/image/spectrum512X/)
+image | [Spectrum 512 Extended](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spx | [recoil2png](http://recoil.sourceforge.net) | [9 sample files](https://telparia.com/fileFormatSamples/image/spectrum512X/)
 image | [Spectrum 512 Smooshed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .sps | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/image/spectrum512S/) - Some test files fail to convert correctly: AMBER_F, CANDLE, AI_R_010
 image | [Spectrum 512 Uncompressed](http://fileformats.archiveteam.org/wiki/Spectrum_512_formats) | .spu | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://telparia.com/fileFormatSamples/image/spectrum512U/)
 image | SPIDER | .spi .spider | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/spider/)
@@ -1089,7 +1090,7 @@ music | [Archimedes Tracker](http://fileformats.archiveteam.org/wiki/Archimedes_
 music | [Art & Magic Module](http://fileformats.archiveteam.org/wiki/Art_%26_Magic) | .aam | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/artAndMagic/)
 music | [Art of Noise Module](http://fileformats.archiveteam.org/wiki/Art_of_Noise_module) | .aon | [uade123](http://zakalwe.fi/uade) | [12 sample files](https://telparia.com/fileFormatSamples/music/artOfNoise/)
 music | [ASC Sound Master](http://fileformats.archiveteam.org/wiki/ASC_Sound_Master_module) | .asc | [zxtune123](https://zxtune.bitbucket.io/) | [6 sample files](https://telparia.com/fileFormatSamples/music/ascSoundMaster/)
-music | [Asylum Module](http://fileformats.archiveteam.org/wiki/Asylum_Music_Format) | .amf | [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [9 sample files](https://telparia.com/fileFormatSamples/music/asylum/)
+music | [Asylum Module](http://fileformats.archiveteam.org/wiki/Asylum_Music_Format) | .amf | [xmp](http://xmp.sourceforge.net/) [openmpt123](https://lib.openmpt.org/libopenmpt/) | [11 sample files](https://telparia.com/fileFormatSamples/music/asylum/)
 music | [Audio Sculpture Module](http://fileformats.archiveteam.org/wiki/Audio_Sculpture) | .adsc .as | [uade123](http://zakalwe.fi/uade) | [4 sample files](https://telparia.com/fileFormatSamples/music/audioSculpture/)
 music | AY Amadeus Chiptune | .ay .emul | [zxtune123](https://zxtune.bitbucket.io/) | [10 sample files](https://telparia.com/fileFormatSamples/music/ay/)
 music | [Beathoven Synthesizer Module](http://fileformats.archiveteam.org/wiki/Beathoven_Synthesiser) | .bss | [uade123](http://zakalwe.fi/uade) | [3 sample files](https://telparia.com/fileFormatSamples/music/beathovenSynthesizer/)

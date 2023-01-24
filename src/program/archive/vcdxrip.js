@@ -22,21 +22,30 @@ export class vcdxrip extends Program
 		await Program.runProgram("cdemuReRip", await FileSet.create(r.f.root, "input", r.f.input, "outDir", r.tmpBINCUEDirPath), {xlog : r.xlog});
 		return [`--nofiles`, `--bin-file=${path.join(r.tmpBINCUEDirPath, "out.bin")}`];
 	};
-	cwd     = r => r.outDir();
+	cwd      = r => r.outDir();
 	postExec = async r =>
 	{
-		if(r.tmpBINCUEDirPath)
-			await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});
-			
 		const avseqFilePath = path.join(r.outDir({absolute : true}), "avseq01.mpg");
 		
-		if(!await fileUtil.exists(avseqFilePath) ||	// we must have this file, or the VCD extraction didn't succeed
-			(r.stdout + r.stderr).includes("encountered non-form2 sector -- leaving loop"))	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
+		// We used to check for this error: (r.stdout + r.stderr).includes("encountered non-form2 sector -- leaving loop")
+		// If it was present, we assumed a complete failure and exited early. But *something* is better than *nothing*
+		// This is the case with http://discmaster.textfiles.com/browse/15859
+		// So now we proceed so long as we have an mpg file that is not empty
+		if(!await fileUtil.exists(avseqFilePath) && (await Deno.stat(avseqFilePath)).size)	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
 		{
+			if(r.tmpBINCUEDirPath)
+				await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});
+
 			// so delete whatever was extracted so no files are detected and other converters can try
 			await fileUtil.emptyDir(r.outDir({absolute : true}));
 			return;
 		}
+
+		// We successfully extracted the video files, but we should also extract the 'regular' files on the disc as well
+		await Program.runProgram("fuseiso[excludeVCD]", await FileSet.create(r.f.root, "input", r.tmpBINCUEDirPath ? path.join(r.tmpBINCUEDirPath, "out.bin") : r.f.input, "outDir", r.f.outDir), {xlog : r.xlog});
+
+		if(r.tmpBINCUEDirPath)
+			await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});
 
 		const videoCDXMLFilePath = path.join(r.outDir({absolute : true}), "videocd.xml");
 		if(!await fileUtil.exists(videoCDXMLFilePath))

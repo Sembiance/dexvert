@@ -1,17 +1,33 @@
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
+import {FileSet} from "../../FileSet.js";
 
 export class vcdxrip extends Program
 {
 	website = "https://www.gnu.org/software/vcdimager";
 	package = "media-video/vcdimager";
 	unsafe  = true;
+	flags   = {
+		reRip : "If set to true, we have an VCD that was ripped incorrectly, so we will virtually mount it with cdemu and re-rip it as BIN/CUE with cdrdao then process those results"
+	};
 	bin     = "vcdxrip";
-	args    = r => [`--nofiles`, `--bin-file=${r.inFile({absolute : true})}`];
+	args    = async r =>
+	{
+		if(!r.flags.reRip)
+			return [`--nofiles`, `--bin-file=${r.inFile({absolute : true})}`];
+
+		r.tmpBINCUEDirPath = await fileUtil.genTempPath(undefined, "_vcdxrip_bincue");
+		await Deno.mkdir(r.tmpBINCUEDirPath);
+		await Program.runProgram("cdemuReRip", await FileSet.create(r.f.root, "input", r.f.input, "outDir", r.tmpBINCUEDirPath), {xlog : r.xlog});
+		return [`--nofiles`, `--bin-file=${path.join(r.tmpBINCUEDirPath, "out.bin")}`];
+	};
 	cwd     = r => r.outDir();
 	postExec = async r =>
 	{
+		if(r.tmpBINCUEDirPath)
+			await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});
+			
 		const avseqFilePath = path.join(r.outDir({absolute : true}), "avseq01.mpg");
 		
 		if(!await fileUtil.exists(avseqFilePath) ||	// we must have this file, or the VCD extraction didn't succeed

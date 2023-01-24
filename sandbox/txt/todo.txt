@@ -15,6 +15,9 @@
   Start with:  • Figure 5 Window in List Mode.pict
   Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
 
+* Add POVRAY rendering support, see the notes in povRay.js
+  Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
+  Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
 
 /---------------\
 | High Priority |
@@ -53,11 +56,7 @@
 | Medium Priority |
 \-----------------/
 * ISOs I was unable to process:
-	https://archive.org/details/NASASpaceSCienceSamplerV1
-	https://archive.org/details/cdrom_Muzyka_z_filmu_zmruz_oczy
-	https://archive.org/details/Music_Madness_Volume_I_I_-_Porcupine_Productions		bchunk merged into an HFS ISO, but the 'PM' magic is at offset 504 instead of 512. I added 8x 0x00 bytes and then it worked
-	https://archive.org/details/PanicDiscPANIC.COM
-* These seem to be Disk Copy 5/6, which I may be able to extract/convert with MacOS Classic and this: http://macintoshgarden.org/apps/disk-copy-6
+	Tese seem to be Disk Copy 5/6, which I may be able to extract/convert with MacOS Classic and this: http://macintoshgarden.org/apps/disk-copy-6
 	https://archive.org/details/GigaROM2.0.img
 	https://archive.org/details/InfoMac5Disk1.img
 	https://archive.org/details/InfoMac5Disk2.img

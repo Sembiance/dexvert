@@ -75,6 +75,9 @@ export class iso extends Format
 
 	converters = async dexState =>
 	{
+		const fuseTree = dexState.meta?.fuseTree?.tree || [];
+		delete dexState.meta?.fuseTree;
+
 		const cueFile = await findCUEFile(dexState);
 		if(cueFile)
 		{
@@ -119,6 +122,8 @@ export class iso extends Format
 		// If it's a VideoCD, rip video using 'vcdxrip' and files with 'bchunk'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
 			return ["vcdxrip", "IsoBuster", `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
+		else if(fuseTree.some(v => v.toLowerCase().startsWith("mpegav/avseq")))
+			return ["vcdxrip[reRip]"];
 
 		// If it's a PhotoCD, rip using fuseiso (this is because regular mount doesn't work with bin/cue and bchunk produces tracks seperately which has images merged together and invalid dir structure for this format)
 		if(dexState.meta?.photocd?.photocd)
@@ -190,7 +195,7 @@ export class iso extends Format
 			cueFile = await findCUEFile(dexState);
 		}
 
-		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info"].parallelMap(async programid =>
+		const meta = Object.fromEntries((await ["iso_info", "vcd_info", "photocd_info", "fuseTree"].parallelMap(async programid =>
 		{
 			const infoR = await Program.runProgram(programid, inputFile, {xlog, autoUnlink : true});
 			return [programid.split("_")[0], infoR.meta];

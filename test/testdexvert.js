@@ -311,6 +311,7 @@ let completedMark=0;
 let failCount=0;
 const failures=[];
 let workercbCount = 0;
+const newSuccesses = [];
 async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 {
 	if(!sampleFilePath)
@@ -372,6 +373,20 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 		handleComplete();
 	}
 
+	async function newSuccess()
+	{
+		xu.stdoutWrite(xu.c.blink + fg.green("N"));
+
+		newSuccesses.push(`--format=${diskFormatid} --file='${path.relative(diskFormatid, sampleSubFilePath)}'`);
+
+		if(argv.report && !argv.record)
+			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
+		else
+			await fileUtil.unlink(path.dirname(tmpOutDirPath), {recursive : true});
+
+		handleComplete();
+	}
+
 	if(!dexData)
 	{
 		if(argv.record)
@@ -416,7 +431,7 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return await fail(`No test data for this file: ${xu.inspect(result).squeeze().innerTruncate(3000)}`);
+		return result.processed ? await newSuccess() : await fail(`No test data for this file: ${xu.inspect(result).squeeze().innerTruncate(3000)}`);
 
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
@@ -530,9 +545,10 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 	return await pass(fg.white("·"));
 }
 
-xlog.info`Starting testWorker pool of ${NUM_WORKERS} workers...`;
+const numWorkers = Math.min(sampleFilePaths.length, NUM_WORKERS);
+xlog.info`Starting testWorker pool of ${numWorkers} workers...`;
 const pool = new XWorkerPool({workercb, xlog});
-await pool.start(path.join(xu.dirname(import.meta), "testWorker.js"), {size : NUM_WORKERS});
+await pool.start(path.join(xu.dirname(import.meta), "testWorker.js"), {size : numWorkers});
 
 xlog.info`Testing ${sampleFilePaths.length} sample files...`;
 pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
@@ -571,6 +587,17 @@ xlog.info``;	// gets us out of the period stdoud section onto a new line
 
 if(failures.length>0)
 	xlog.info`\n${failures.sortMulti().join("\n")}`;
+
+if(newSuccesses.length>0)
+{
+	const recordNewSuccessesScriptFilePath = await fileUtil.genTempPath(undefined, ".sh");
+	xlog.info`\n${newSuccesses.length.toLocaleString()} new successes. Execute to record: ${recordNewSuccessesScriptFilePath}`;
+	await fileUtil.writeTextFile(recordNewSuccessesScriptFilePath, `#!/bin/bash
+cd /mnt/compendium/DevLab/dexvert/test || exit
+${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}
+`);
+	await runUtil.run("chmod", ["755", recordNewSuccessesScriptFilePath]);
+}
 
 async function writeOutputHTML()
 {

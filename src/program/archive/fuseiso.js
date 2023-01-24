@@ -5,6 +5,9 @@ export class fuseiso extends Program
 {
 	website = "https://sourceforge.net/projects/fuseiso";
 	package = "sys-fs/fuseiso";
+	flags   = {
+		excludeVCD : "If set to true, this is a VCD and we should exclude VCD files as they handled by vcdxrip"
+	};
 	bin     = "fuseiso";
 	args    = async r =>
 	{
@@ -15,7 +18,7 @@ export class fuseiso extends Program
 	};
 	postExec = async r =>
 	{
-		await runUtil.run("rsync", ["-sa", `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
+		await runUtil.run("rsync", ["-sa", ...(r.flags.excludeVCD ? ["--exclude=/mpegav/", "--exclude=/vcd/", "--exclude=/cdi/"] : []), `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
 		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 	};
 	renameOut = false;

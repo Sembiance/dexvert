@@ -18,7 +18,7 @@ export class fuseiso extends Program
 	};
 	postExec = async r =>
 	{
-		await runUtil.run("rsync", ["-sa", ...(r.flags.excludeVCD ? ["--exclude=/mpegav/", "--exclude=/vcd/", "--exclude=/cdi/"] : []), `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
+		await runUtil.run("rsync", ["-sa", ...(r.flags.excludeVCD ? ["cdi", "ext", "mpegav", "vcd"].flatMap(v => ([`--exclude=/${v}/`, `--exclude=/${v.toUpperCase()}/`])) : []), `${r.fuseISOMountDirPath}/`, `${r.outDir({absolute : true})}/`]);
 		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 	};
 	renameOut = false;

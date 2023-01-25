@@ -198,7 +198,7 @@ export default
 		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]},
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
-		rayDreamDesignerScene   : {name : "Ray Dream Designer Scene", ext : [".rd4"], magic : ["Ray Dream Designer scene2"]},
+		rayDreamDesignerScene   : {name : "Ray Dream Designer Scene", ext : [".rd4", ".rds"], magic : ["Ray Dream Designer scene", "Ray Dream Studio"]},
 		rayDreamBRW             : {name : "Ray Dream BRW", ext : [".brw"], magic : ["Ray Dream data"]},
 		shockwave3DSceneExport  : {name : "Shockwave 3D Scene Export", ext : [".w3d"], magic : ["Shockwave 3D Scene Export"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},

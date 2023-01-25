@@ -7,4 +7,5 @@ export class webshotsPicture extends Format
 	ext        = [".wb1", ".wbz", ".wbd", ".wbc", ".wbp"];
 	magic      = ["Webshots Image"];
 	converters = ["nconvert"];
+	verify     = ({meta}) => meta.colorCount>1;
 }

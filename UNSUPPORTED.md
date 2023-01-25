@@ -1,4 +1,4 @@
-# Unsupported File Formats (886)
+# Unsupported File Formats (888)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -246,12 +246,13 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (82)
+## Image (83)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 image | Aldus IntelliDraw Drawing | .idw | 
+image | AmiDraw Drawing | .sdw | 
 image | Animator PIC/CEL | .pic .cel | 
 image | Applause Palette | .pal | 
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
@@ -873,7 +874,7 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (41)
+## Poly (42)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -899,10 +900,11 @@ poly | NorthCAD-3D | .n3d |
 poly | OGRE Mesh | .mesh | 
 poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [1 sample file](https://telparia.com/fileFormatSamples/poly/openNURBS/)
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileFormatSamples/poly/polyfilm/)
-poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/)
+poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ 		So I'd need to try most recent (system installed version) to oldest until one works 		I have compiled povray1 as dexvert/bin/povray/povray1 		Additionally includes sometimes point to files in other directories so I'd have to go 'fetch' them and bring them into the same directory 		Next, includes are case sensitive but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case 		POVRAY1 also generates some broken TGAs that only seem to convert with nconvert
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
 poly | Quake 3 Model | .md3 | 
 poly | Raven Object File Format | .rof | 
+poly | Ray Dream BRW | .brw | 
 poly | Ray Dream Designer Scene | .rd4 | 
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)

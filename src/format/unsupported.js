@@ -137,6 +137,7 @@ export default
 	image :
 	{
 		aldusIntelliDrawDrawing   : {name : "Aldus IntelliDraw Drawing", ext : [".idw"], magic : ["Aldus IntelliDraw Drawing"]},
+		amiDrawDrawing            : {name : "AmiDraw Drawing", ext : [".sdw"], magic : ["AmiDraw Drawing"], weakMagic : true},
 		animatorPICCEL            : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},
@@ -198,6 +199,7 @@ export default
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		rayDreamDesignerScene   : {name : "Ray Dream Designer Scene", ext : [".rd4"], magic : ["Ray Dream Designer scene2"]},
+		rayDreamBRW             : {name : "Ray Dream BRW", ext : [".brw"], magic : ["Ray Dream data"]},
 		shockwave3DSceneExport  : {name : "Shockwave 3D Scene Export", ext : [".w3d"], magic : ["Shockwave 3D Scene Export"]},
 		simply3DGeometry		: {name : "Simply 3D Geometry", ext : [".ged"], magic : ["Simply 3D Geometry"]},
 		strataStudioProVis      : {name : "Strata StudioPro Vis", magic : [/^fmt\/1204( |$)/]},

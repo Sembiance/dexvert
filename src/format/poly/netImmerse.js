@@ -5,6 +5,6 @@ export class netImmerse extends Format
 	name        = "NetImmerse File";
 	website     = "http://fileformats.archiveteam.org/wiki/NIF";
 	ext         = [".nif"];
-	magic       = ["NetImmerse file format"];
+	magic       = ["NetImmerse file format", "GameBryo file format", "Gamebryo game engine file"];
 	unsupported = true;
 }

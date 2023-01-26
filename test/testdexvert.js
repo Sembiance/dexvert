@@ -51,15 +51,18 @@ const FORMAT_OS_HINT =
 		"SAM_4.5.1_Patcher_PPC Fol9633.sit" : "macintoshjp",
 		"StuffIt Expander 6.0J ｲﾝｽﾄｰﾗ"      : "macintoshjp"
 	},
-	"image/macBinaryImage" :
+	"archive/zip" : { "LamenDB.zip" : "macintoshjp" },
+	"document/dbf"         :
 	{
-		"01-1-tiff-手塚莉絵" : "macintoshjp"
+		"DEMO.ADB" : "fmtownsjpy",
+		"DEMO.DBF" : "fmtownsjpy",
+		"DEMO.HDB" : "fmtownsjpy"
 	},
-	"image/printfox" : "commodore",
-	"text/html"      :
-	{
-		"apple.html" : "macintoshjp"
-	}
+	"document/lotus123"    : { "_ç_[_ß_ñ_î_ñ.123" : "fmtownsjpy" },
+	"document/wri"         : { "readme2.wri" : "fmtownsjpy"	},
+	"image/macBinaryImage" : { "01-1-tiff-手塚莉絵" : "macintoshjp" },
+	"image/printfox"       : "commodore",
+	"text/html"            : { "apple.html" : "macintoshjp" }
 };
 
 const FORMAT_PROGRAM_FLAG =
@@ -373,7 +376,7 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 		handleComplete();
 	}
 
-	async function newSuccess()
+	function newSuccess()
 	{
 		xu.stdoutWrite(xu.c.blink + fg.green("N"));
 
@@ -381,8 +384,6 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 
 		if(argv.report && !argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
-		else
-			await fileUtil.unlink(path.dirname(tmpOutDirPath), {recursive : true});
 
 		handleComplete();
 	}

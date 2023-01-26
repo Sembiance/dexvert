@@ -6,7 +6,7 @@ export class qtif extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/QTIF";
 	ext        = [".qtif", ".qif"];
 	mimeType   = "image/qtif";
-	magic      = ["QuickTime Image Format"];
+	magic      = ["QuickTime Image Format", "Apple QuickTime image"];
 	notes      = "Not all QTIF sub formats are not supported.";
-	converters = ["nconvert", "deark[mac]", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[outType:png]"];
+	converters = ["deark[mac]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[outType:png]"];
 }

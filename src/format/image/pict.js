@@ -22,8 +22,8 @@ export class pict extends Format
 
 		const clarisClipArtConverters =
 		[
-			"soffice[outType:png]", // soffice csometimes produces just text that says "QuickTime and aPh..." which doesn't get detected
-			"corelPhotoPaint"		// corelPhotoPaint sometimes just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01)
+			"soffice[outType:png]"//, // soffice csometimes produces just text that says "QuickTime and aPh..." which doesn't get detected
+			//"corelPhotoPaint"		// corelPhotoPaint often just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01 and sample/image/pict/747_007)
 		];
 
 		// If we have this magic, then the other converters are unlikely to produce an image, so put these first

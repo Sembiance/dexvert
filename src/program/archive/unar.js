@@ -5,8 +5,8 @@ import {path} from "std";
 
 export class unar extends Program
 {
-	website   = "https://unarchiver.c3.cx/";
-	package   = "app-arch/unar";
+	website = "https://unarchiver.c3.cx/";
+	package = "app-arch/unar";
 	flags   = {
 		"mac"  : "Set this flag to treat the files extracted as mac files and rename them",
 		"type" : "What type to process the file as. Kinda hacky, relies on this string being present at the end of the first line as : <type>"
@@ -62,7 +62,7 @@ export class unar extends Program
 		if(Object.keys(r.meta.fileMeta).length===0)
 			delete r.meta.fileMeta;
 	};
-	verify = r => !r.flags.type || r.stdout?.trim()?.split("\n")?.[0]?.toLowerCase()?.endsWith(`: ${r.flags.type.toLowerCase()}`);
+	verify    = r => !r.flags.type || r.stdout?.trim()?.split("\n")?.[0]?.toLowerCase()?.endsWith(`: ${r.flags.type.toLowerCase()}`);
 	renameOut = false;
 }
 

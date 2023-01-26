@@ -1,4 +1,4 @@
-import {Program} from "../../Program.js";
+import {Program, RUNTIME} from "../../Program.js";
 import {path} from "std";
 import {fileUtil} from "xutil";
 
@@ -23,6 +23,15 @@ export class sevenZip extends Program
 
 		return a;
 	};
+
+	runOptions = () =>
+	{
+		if(RUNTIME.globalFlags?.osHint?.macintoshjp || RUNTIME.globalFlags?.osHint?.fmtownsjpy)
+			return {env : {LANG : "ja_JP"}};
+		
+		return {};
+	};
+	filenameEncoding = () => (RUNTIME.globalFlags?.osHint?.macintoshjp || RUNTIME.globalFlags?.osHint?.fmtownsjpy ? "cp932" : "windows-1252");
 
 	postExec = async r =>
 	{

@@ -33,7 +33,15 @@ export async function quickConvertImages(r, fileOutputPaths)
 		}
 		else if([".qtif"].includesAny(extMatches))
 		{
-			await runUtil.run("nconvert", ["-out", "png", "-o", convertedFilePath, fileOutputPath], runOpts);
+			const subR = await Program.runProgram("deark[mac]", await DexFile.create(fileOutputPath), {xlog : r.xlog});
+			const subFiles = Array.force(subR?.f?.files?.new || []);
+			if(subFiles.length)
+			{
+				convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}${subFiles[0].ext}`);
+				await fileUtil.move(subFiles[0].absolute, convertedFilePath);
+			}
+
+			await subR.unlinkHomeOut();
 		}
 		else if([".eps"].includesAny(extMatches))
 		{
@@ -54,12 +62,18 @@ export async function quickConvertImages(r, fileOutputPaths)
 			const combinedFiles = Array.force(combinedR?.f?.files?.new || []);
 			if(combinedFiles.length)
 			{
+				convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}${combinedFiles[0].ext}`);
 				await fileUtil.move(combinedFiles[0].absolute, convertedFilePath);
 				if(combinedFiles.length>1)
 					r.xlog.warn`Recombining pict produced more than 1 output file, only keeping the first one!`;
 			}
 
 			await combinedR.unlinkHomeOut();
+		}
+		else if([".pcd"].includesAny(extMatches))
+		{
+			convertedFilePath = path.join(outDirPath, `${path.basename(fileOutputPath, ext)}.jpg`);
+			await runUtil.run("pcdtojpeg", ["-q", "100", fileOutputPath, convertedFilePath], runOpts);
 		}
 		else if(r.flags.alwaysConvert)
 		{

@@ -8,5 +8,5 @@ export class dbf extends Format
 	forbidExtMatch = true;
 	magic          = [/^(?:FoxBase\+?\/?)?dBase .*DBF/, "dBASE Database", /^xBase .*DBF/, "Table MS Visual FoxPro", "FoxPro with memo DBF", "Visual FoxPro", /^dBase I[IV]I? DBT/, /^x-fmt\/(9|271)( |$)/, /^fmt\/(373|374)( |$)/];
 	weakMagic      = [/^dBase I[IV]I? DBT/, "Visual FoxPro"];
-	converters     = ["soffice", "strings"];
+	converters     = ["soffice[format:dBase]", "strings"];
 }

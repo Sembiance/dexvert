@@ -19,7 +19,7 @@ export class fuseTree extends Program
 		if(!stderr.toLowerCase().includes("input/output error"))
 			return;
 		
-		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath], {liveOutput : true});
+		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 		await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
 		delete r.fuseISOMountDirPath;
 	};
@@ -32,7 +32,7 @@ export class fuseTree extends Program
 		if(!r.meta.tree?.length)
 			delete r.meta.tree;
 
-		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath], {liveOutput : true});
+		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 		await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
 	};
 	renameOut = false;

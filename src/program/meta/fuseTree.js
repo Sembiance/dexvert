@@ -13,16 +13,27 @@ export class fuseTree extends Program
 		await Deno.mkdir(r.fuseISOMountDirPath);
 		return [r.inFile(), r.fuseISOMountDirPath];
 	};
+	postExec = async r =>
+	{
+		const {stderr} = await runUtil.run("ls", ["-R", r.fuseISOMountDirPath]);
+		if(!stderr.toLowerCase().includes("input/output error"))
+			return;
+		
+		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath], {liveOutput : true});
+		await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
+		delete r.fuseISOMountDirPath;
+	};
 	post = async r =>
 	{
-		const {stderr} = await runUtil.run("ls", [r.fuseISOMountDirPath]);
-		if(stderr.trim().length===0)
-		{
-			r.meta.tree = ((await fileUtil.tree(r.fuseISOMountDirPath)) || []).map(v => path.relative(r.fuseISOMountDirPath, v));
-			if(!r.meta.tree?.length)
-				delete r.meta.tree;
-		}
-		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
+		if(!r.fuseISOMountDirPath)
+			return;
+
+		r.meta.tree = ((await fileUtil.tree(r.fuseISOMountDirPath)) || []).map(v => path.relative(r.fuseISOMountDirPath, v));
+		if(!r.meta.tree?.length)
+			delete r.meta.tree;
+
+		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath], {liveOutput : true});
+		await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
 	};
 	renameOut = false;
 }

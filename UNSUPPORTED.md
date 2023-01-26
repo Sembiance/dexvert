@@ -905,7 +905,7 @@ poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 
 poly | Quake 3 Model | .md3 | 
 poly | Raven Object File Format | .rof | 
 poly | Ray Dream BRW | .brw | 
-poly | Ray Dream Designer Scene | .rd4 | 
+poly | Ray Dream Designer Scene | .rd4 .rds | 
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.

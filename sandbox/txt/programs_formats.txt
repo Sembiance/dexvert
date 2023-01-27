@@ -10546,3 +10546,129 @@ PNG
 Targa
 Text TIFF
 WordPerfect
+
+
+>>> gamemus 1.2 from libgamemusic  https://github.com/Malvineous/libgamemusic
+ins-adlib            Ad Lib INS instrument                    [*.ins]
+cmf-creativelabs     Creative Labs Music File                 [*.cmf]
+cdfm-zone66          Renaissance CDFM                         [*.z66; *.670]
+cdfm-zone66-gus      Renaissance CDFM (GUS)                   [*.z66; *.670]
+dro-dosbox-v1        DOSBox Raw OPL version 1                 [*.dro]
+dro-dosbox-v2        DOSBox Raw OPL version 2                 [*.dro]
+dsm-dsik             Digital Sound Interface Kit Module       [*.dsm]
+got                  God of Thunder
+ibk-instrumentbank   IBK Instrument Bank                      [*.ibk]
+imf-idsoftware-type0 id Software Music Format (type-0, 560Hz) [*.imf; *.mni]
+imf-idsoftware-type1 id Software Music Format (type-1, 560Hz) [*.imf; *.mni]
+wlf-idsoftware-type0 id Software Music Format (type-0, 700Hz) [*.wlf]
+wlf-idsoftware-type1 id Software Music Format (type-1, 700Hz) [*.wlf]
+imf-idsoftware-duke2 id Software Music Format (type-0, 280Hz) [*.imf]
+klm-wacky            Wacky Wheels Adlib Music File            [*.klm]
+mid-type0            Standard MIDI File (type-0/single track) [*.mdi; *.mid]
+mus-dmx              DMX audio library MIDI File (normal tempo) [*.mus]
+mus-dmx-raptor       DMX audio library MIDI File (Raptor tempo) [*.mus]
+mus-vinyl            Vinyl Goddess From Mars Music File       [*.mus]
+raw-rdos             Rdos raw OPL capture                     [*.raw]
+s3m-screamtracker    ScreamTracker 3 Module                   [*.s3m]
+tbsa-doofus          The Bone Shaker Architect                [*.bsa]
+
+
+>>> gamearch 1.2 from libgamearchive	https://github.com/Malvineous/libgamearchive
+Alien Breed Tower Assault (.epf)
+Arcade Pool (.epf)
+Asterix & Obelix (.epf)
+BlackThorne (.dat)
+Blood (.rff)
+Cosmo's Cosmic Adventures (.vol, .stn)
+Crystal Caves (.exe)
+Dangerous Dave (.exe)
+Dark Ages (file05.da[123])
+Death Rally (.bpa)
+Descent (.hog)
+Doofus (.g-d)
+Doom (.wad)
+Duke Nukem II (.cmp)
+Duke Nukem 3D (.grp, .rts)
+Galactix (.glb)
+Gateworld (*data.gw[123])
+God of Thunder (.dat) [no decompression yet]
+Halloween Harry (.bnk, harry.-0)
+Highway Hunter (.dat)
+Heretic (.wad)
+Hexen (.wad)
+Hocus Pocus (.dat)
+Hugo II: Whodunit? and Hugo III: Jungle of Doom! (.dat)
+Incredible Machine, The (resource.*)
+In Search of Dr. Riptide (.dat)
+Jungle Book, The (.epf)
+Lion King, The (.epf)
+Lost Vikings (.dat)
+Major Stryker (.ms[123])
+Monster Bash (.dat)
+Mystic Towers (.dat)
+Overdrive (.epf)
+Prehistorik (.cur, .vga)
+Project X (.epf)
+Raptor (.glb)
+Rise of the Triad (.wad, .rts)
+Redneck Rampage (.grp, .rts)
+Sango Fighter (.dat, .pcm, and many others)
+Sensible Golf (.epf)
+Sherlock Holmes, The Lost Files of (.lib)
+SkyRoads (.lzs)
+Shadow Warrior (.grp, .rts)
+Spirou (.epf)
+Stargunner (.dlt)
+Stellar 7 (.res)
+Terminal Velocity (.pod)
+Tin Tin in Tibet (.epf)
+Universe (.epf)
+Vinyl Goddess From Mars (.lbr)
+Wacky Wheels (.dat)
+WarCraft: Orcs & Humans (.dat)
+Word Rescue (.1)
+Zool (.dat) [no decompression yet]
+
+>>> gameimg and gametls from libgamegraphics	https://github.com/Malvineous/libgamegraphics
+Catacomb/Catacomb II (tiles)
+Captain Comic (tiles, sprites and fullscreen images)
+Captain Comic II (tiles, fullscreen, no sprites yet)
+Cosmo's Cosmic Adventures (tiles, fullscreen, sprites [read-only])
+Crystal Caves (tiles, sprites and fullscreen images)
+Dangerous Dave (tiles)
+Duke Nukem II (tiles and fullscreen images)
+God of Thunder (tiles)
+Halloween Harry (tiles and fullscreen images)
+Jill of the Jungle (tiles, read-only)
+Major Stryker
+Monster Bash (tiles)
+Raptor (some fullscreen)
+Secret Agent (tiles, sprites and fullscreen images)
+Shadow Warrior 1993 Beta (tiles, images)
+Vinyl Goddess From Mars (tiles, some fullscreen)
+Wacky Wheels (tiles and fullscreen images)
+Word Rescue (tiles and fullscreen images)
+Xargon (tiles, read-only)
+Zone 66 (tiles)
+
+>>> gamemap from libgamemaps		https://github.com/Malvineous/libgamemaps
+Captain Comic
+Cosmo's Cosmic Adventures (partial)
+Crystal Caves
+Dangerous Dave
+Dark Ages
+Duke Nukem I (partial)
+Duke Nukem II (partial)
+God of Thunder (partial)
+Halloween Harry (partial)
+Hocus Pocus (partial)
+Jill of the Jungle (partial)
+Monster Bash (partial)
+Rockford
+Scubaventure
+Secret Agent
+Vinyl Goddess From Mars (partial)
+Wacky Wheels
+Word Rescue
+Xargon (partial)
+Zone 66 (partial)

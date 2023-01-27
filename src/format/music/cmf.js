@@ -8,5 +8,5 @@ export class cmf extends Format
 	magic        = ["Creative Music Format", "Creative Music (CMF) data"];
 	notes        = "If I encounter formats that don't convert, try falling back to sandbox/app/cmf2mid.exe";
 	metaProvider = ["musicInfo"];
-	converters   = ["adplay"];
+	converters   = ["adplay", "gamemus[format:cmf-creativelabs]"];
 }

@@ -5,5 +5,5 @@ export class apogeeIMF extends Format
 	name         = "Apogee IMF";
 	ext          = [".imf"];
 	metaProvider = ["musicInfo"];
-	converters   = ["adplay"];
+	converters   = ["adplay", "gamemus"];
 }

@@ -72,7 +72,7 @@ audio | AM Sound |  | [4 sample files](https://telparia.com/fileFormatSamples/au
 audio | Amiga 16VX Sound |  | [1 sample file](https://telparia.com/fileFormatSamples/audio/amiga16vx/)
 audio | Art of Noise Instrument | .fm | [5 sample files](https://telparia.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 audio | AudioWorks Sound Sample |  | 
-audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/)
+audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://telparia.com/fileFormatSamples/audio/creativeLabsInstrumentBank/) - gamemus supports reading this format, but doesn't have a way to convert or extract it
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://telparia.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
 audio | Deluxe Sound Sample | .instr | 
 audio | Digital Symphony Sound Sample |  | 

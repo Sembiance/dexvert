@@ -7,5 +7,5 @@ export class adlibMUS extends Format
 	ext            = [".mus"];
 	forbidExtMatch = true;
 	magic          = ["AdLib MUS"];
-	converters     = ["adplay"];
+	converters     = ["adplay", "gamemus"];	// gamemus will only really handle a tiny tiny subset
 }

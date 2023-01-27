@@ -8,5 +8,5 @@ export class mid extends Format
 	magic        = ["MIDI Music", "MIDI Audio", "Standard MIDI data", "Karaoke MIDI", /^x-fmt\/230( |$)/];
 	notes        = "Default instrument library used is 'eaw'. Others available: fluid, roland, creative, freepats, windows";
 	metaProvider = ["musicInfo"];
-	converters   = ["timidity"];
+	converters   = ["timidity", "gamemusic[format:mid-type0]"];
 }

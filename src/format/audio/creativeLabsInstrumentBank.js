@@ -7,4 +7,5 @@ export class creativeLabsInstrumentBank extends Format
 	ext         = [".ibk"];
 	magic       = ["IBK instrument data", "Sound Blaster Instrument Bank"];
 	unsupported = true;
+	notes       = "gamemus supports reading this format, but doesn't have a way to convert or extract it";
 }

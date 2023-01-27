@@ -6,5 +6,5 @@ export class digitalSoundInterfaceKitRIFF extends Format
 	ext          = [".dsm"];
 	magic        = ["Digital Sound Interface Kit (RIFF) module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "openmpt123"];
+	converters   = ["zxtune123", "openmpt123", "gamemus[format:dsm-dsik]"];
 }

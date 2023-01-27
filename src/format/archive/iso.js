@@ -8,7 +8,7 @@ import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image"];
 
 async function validCUEFile(dexState, cueFile)
 {
@@ -32,7 +32,7 @@ export class iso extends Format
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
 	forbidExtMatch = [".img", ".bin"];	// way too common
 
-	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
+	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "BIN with CUE", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
 	weakMagic      = _MACBINARY_MAGIC;
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 

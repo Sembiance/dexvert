@@ -1,4 +1,4 @@
-# Unsupported File Formats (888)
+# Unsupported File Formats (895)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -435,7 +435,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (433)
+## Other (437)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -575,6 +575,7 @@ other | Dr. Hardware Sysinfo | .dat |
 other | Dr.Web Anti-Virus Database | .vdb | 
 other | DrawStudio Gradient |  | 
 other | DrawStudio Pattern |  | 
+other | Dreamcast Disc | .bin | 
 other | Dune II Saved Game | .dat | 
 other | DVD Info File | .ifo .bup | 
 other | Dynamic Message System File | .msg | 
@@ -600,6 +601,7 @@ other | Fractal Design Painter Paper Texture | .pap |
 other | Fractal Weave Parameters | .wwv | 
 other | Front Page Binary-Tree Index | .btr | 
 other | Full Tilt Pinball Data | .dat | 
+other | Game Boy Advance ROM | .gba | 
 other | Game Boy ROM | .gb .gbc | 
 other | GammaCAD Document | .sym .gc1 | 
 other | Gee! Printer Driver | .pdr | 
@@ -780,6 +782,7 @@ other | Scorched Earth Mountain Data | .mtn |
 other | Sculpt 3D Take | .take | 
 other | SCUMM main data container |  | 
 other | Sega Genesis/Megadrive/32x ROM | .bin .md | 
+other | Sega Master System ROM | .sms | 
 other | Settlers II Map | .swd .wld | 
 other | SGML Compiled | .mtl | 
 other | Show Partner Mastered Show | .pro | 
@@ -829,6 +832,7 @@ other | Type Library | .tlb |
 other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://telparia.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 other | Valve Source Map | .bsp | 
 other | VCD Entries File | .vcd | 
+other | Vectrex Game ROM | .vec .gam .bin | 
 other | Vektor Grafix Driver | .drv | 
 other | VESA Display Identification File | .vdb | 
 other | Video Music Box Progression | .prgn | 
@@ -874,13 +878,14 @@ other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/
 
 
 
-## Poly (42)
+## Poly (45)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
 poly | AutoShade Rendering Slide | .rnd | 
 poly | Blender 3D | .blend | 
+poly | [Blitz3D Object](http://fileformats.archiveteam.org/wiki/Blitz3D_Model) | .b3d | 
 poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | Create+Shade 3D Scene | .3d | 
@@ -894,6 +899,7 @@ poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TD
 poly | Infini-D Scene | .ids .id4 | 
 poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://telparia.com/fileFormatSamples/poly/lightWave/)
 poly | MilkShape 3D Model | .ms3d | 
+poly | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 
 poly | MoRay 3D Model | .mdl | [18 sample files](https://telparia.com/fileFormatSamples/poly/moRay/)
 poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://telparia.com/fileFormatSamples/poly/netImmerse/)
 poly | NorthCAD-3D | .n3d | 
@@ -903,6 +909,7 @@ poly | Polyfilm 3D Model | .3d | [8 sample files](https://telparia.com/fileForma
 poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [1 sample file](https://telparia.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ 		So I'd need to try most recent (system installed version) to oldest until one works 		I have compiled povray1 as dexvert/bin/povray/povray1 		Additionally includes sometimes point to files in other directories so I'd have to go 'fetch' them and bring them into the same directory 		Next, includes are case sensitive but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case 		POVRAY1 also generates some broken TGAs that only seem to convert with nconvert
 poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://telparia.com/fileFormatSamples/poly/quake2Model/)
 poly | Quake 3 Model | .md3 | 
+poly | Rad Cad Drawing | .cad | 
 poly | Raven Object File Format | .rof | 
 poly | Ray Dream BRW | .brw | 
 poly | Ray Dream Designer Scene | .rd4 .rds | 

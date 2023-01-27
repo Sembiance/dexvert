@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
+import {path} from "std";
 
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
 // All offsets matches must match (except a match array that has a subarray, the subarry is a list of possible matches for that byte position)
@@ -152,6 +153,20 @@ const DEXMAGIC_FILE_META_CHECKS =
 	}
 ];
 
+const DEXMAGIC_CUSTOMS =
+[
+	// sometimes a .bin file can be valid but not match any magics at all, but format iso doesn't match on .bin extension due to how common it is
+	// So we just do a quick check to see if we have a corresponding .cue file in the same dir
+	async function checkBinCue(r)
+	{
+		if(r.f.input.ext?.toLowerCase()!==".bin")
+			return;
+		
+		if(await fileUtil.exists(path.join(r.f.input.dir, `${r.f.input.name}.cue`)))
+			return "BIN with CUE";
+	}
+];
+
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 {
 	if(typeof check.match==="string")
@@ -175,6 +190,13 @@ export class dexmagic extends Program
 				if(value)
 					r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
 			}
+		}
+
+		for(const custom of DEXMAGIC_CUSTOMS)
+		{
+			const value = await custom(r);
+			if(value)
+				r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
 		}
 
 		const buf = await fileUtil.readFileBytes(r.inFile({absolute : true}), DEXMAGIC_BYTES_MAX);

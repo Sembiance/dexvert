@@ -188,15 +188,18 @@ export default
 		esriShape               : {name : "ESRI/ArcView Shape", ext : [".shp"], magic : ["ArcView Shape", "ESRI Shapefile", /^x-fmt\/235( |$)/], weakMagic : ["ESRI Shapefile"]},
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
 		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
+		blitz3DObject           : {name : "Blitz3D Object", ext : [".b3d"], magic : ["Blitz3d object", /^fmt\/1182( |$)/], website : "http://fileformats.archiveteam.org/wiki/Blitz3D_Model"},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
 		electricImage3DFile     : {name : "Electric Image 3D File", ext : [".fact"], magic : ["ElectricImage 3D file"]},
 		halfLifeModel           : {name : "Half Life Model", ext : [".mdl"], magic : ["Half-life Model"]},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
+		mobile3DGraphic			: {name : "Mobile 3D Graphic", ext : [".m3g"], magic : ["Mobile 3D Graphics"], website : "http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html"},
 		ogreMesh                : {name : "OGRE Mesh", ext : [".mesh"], magic : ["OGRE Mesh", /^fmt\/1188( |$)/]},
 		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]},
 		quake3Model             : {name : "Quake 3 Model", ext : [".md3"], magic : ["Quake III Arena model"]},
+		radCadDrawing           : {name : "Rad Cad Drawing", ext : [".cad"], magic : ["Rad Cad drawing"]},
 		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		rayDreamDesignerScene   : {name : "Ray Dream Designer Scene", ext : [".rd4", ".rds"], magic : ["Ray Dream Designer scene", "Ray Dream Studio"]},
 		rayDreamBRW             : {name : "Ray Dream BRW", ext : [".brw"], magic : ["Ray Dream data"]},
@@ -402,12 +405,16 @@ export default
 		//////////
 		// ROMS //
 		//////////
-		atari7800ROM : {name : "Atari 7800 ROM", ext : [".a78"], magic : ["Atari 7800 ROM"]},
-		gameBoyROM   : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
-		genesisROM   : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
-		nintendoROM  : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
-		n64ROM       : {name : "Nintendo 64 ROM", ext : [".v64"], magic : ["Nintendo 64 ROM", "Doctor V64 ROM dump"]},
-		qlPluginROM  : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
+		atari7800ROM        : {name : "Atari 7800 ROM", ext : [".a78"], magic : ["Atari 7800 ROM"]},
+		dreamcastDisc       : {name : "Dreamcast Disc", ext : [".bin"], magic : ["Sega Dreamcast disc image"]},
+		gameBoyROM          : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
+		gameBoyAdvanceROM   : {name : "Game Boy Advance ROM", ext : [".gba"], magic : ["Game Boy Advance ROM image"]},
+		genesisROM          : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
+		nintendoROM         : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
+		n64ROM              : {name : "Nintendo 64 ROM", ext : [".v64"], magic : ["Nintendo 64 ROM", "Doctor V64 ROM dump"]},
+		qlPluginROM         : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},
+		segaMasterSystemROM : {name : "Sega Master System ROM", ext : [".sms"], magic : ["Sega Master System ROM image"]},
+		vectrexGameROM      : {name : "Vectrex Game ROM", ext : [".vec", ".gam", ".bin"], magic : ["Vectrex game ROM"]},
 
 		///////////
 		// Other //

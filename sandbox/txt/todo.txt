@@ -61,6 +61,16 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Creating a Vista SP2 64bit QEMU image would allow running DotNet programs: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
+  This ability would allow conversion/extraction of several additional formats:
+	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
+	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
+	image/xRes: Using sandbox/app/xRes 3.0.iso  it didn't run in Win2k/WinXP, but might? run under Vista. Only encountered on 1 CD so far
+	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
+	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
+	Konverter can support lots of formats: https://www.logipole.com/konvertor-en.htm
+	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
+
 * ISOs I was unable to process:
 	Tese seem to be Disk Copy 5/6, which I may be able to extract/convert with MacOS Classic and this: http://macintoshgarden.org/apps/disk-copy-6
 	https://archive.org/details/GigaROM2.0.img
@@ -151,15 +161,6 @@ https://archive.org/details/installshield1150premier
 
 * Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
-
-* Creating a Vista SP2 QEMU image would allow runnign DotNet programs: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
-  This ability would allow conversion/extraction of several additional formats:
-	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
-	image/xRes: Using sandbox/app/xRes 3.0.iso  it didn't run in Win2k/WinXP, but might? run under Vista. Only encountered on 1 CD so far
-	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
-	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
-	Konverter can support lots of formats: https://www.logipole.com/konvertor-en.htm
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 

@@ -1,12 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add archive supported by 'gamearch' from: https://github.com/Malvineous/libgamearchive
-  Research them here: https://moddingwiki.shikadi.net
-http://discmaster.textfiles.com/view/15064/mmcd01-apr1995-cd.iso/entrtain/fun/wacky/wacky.dat
-http://discmaster.textfiles.com/view/4350/ClassicFond04.iso/arcade/got.zip/GOTRES.DAT
-http://discmaster.textfiles.com/view/16624/Shareware%20Universe%20The%20Gold%20Collection.iso/games/vinyl/vinyl.zip/GODDESS.LBR
-
 * Add graphics supported 'gameimg' and 'gametls' from: https://github.com/Malvineous/libgamegraphics
   Research them here: https://moddingwiki.shikadi.net
 
@@ -52,6 +46,7 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   https://castle-engine.io/view3dscene.php
   Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
   https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
+* For THUMBNAILS of polys, just a PNG screenshot, but with a line/globe/3d model looking icon in the bottom right corner of the thumbnail
 * Ray Dream Studio 5.5 works ok on Windows XP and loaded some sample RDS files I tried: http://discmaster.textfiles.com/browse/16286/Ray%20Dream%20Studio%205.5%20(MetaCreations)(1999).iso/pc
   It has multiple export options. Make sure files get the .rds extension, without it they wouldn't open (http://discmaster.textfiles.com/view/16284/Ray%20Dream%20Studio%20(CDRAYD1)%20(Ray%20Dream)%20(1995).iso/Dream%20Models/Lifeform/PENGUIN)
 * Add support for VRML. Possible renderers: https://github.com/castle-engine/view3dscene, Blender, Blaxxun Contact 4.4
@@ -60,8 +55,10 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   For a Before/After screenshot, can use search results: http://discmaster.textfiles.com/search?q=3dmf&itemid=9374
 * Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
   Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
+* Would be amazing if other levels (Hexen, Heretic, Unreal, Wolfenstein 3D, Quake, etc) were flyable too!
 * Would also be cool if it could convert and render entire levels liek Warcraft maps, warcraft 3 maps, doom, hexen, quake and valve maps, etc
 * poly/rayDreamDesignerScene openable in Corel Draw 7?
+
 * Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
   Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
   From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg

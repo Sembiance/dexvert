@@ -1,11 +1,11 @@
-# Supported File Formats (1,447)
+# Supported File Formats (1,454)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (232)
+## Archive (239)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) | [4 sample files](https://telparia.com/fileFormatSamples/archive/sevenZip/)
@@ -67,12 +67,14 @@ archive | [CrLZH Compressed](http://fileformats.archiveteam.org/wiki/CrLZH) | .y
 archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | [unar](https://unarchiver.c3.cx/) [lbrate](http://www.svgalib.org/rus/lbrate.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/crunch/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunchmania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/crunchMania/)
 archive | Daemon Tools Media Data eXtended Image | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://telparia.com/fileFormatSamples/archive/mdx/)
+archive | [Dark Ages Map Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://telparia.com/fileFormatSamples/archive/darkAgesMapArchive/)
 archive | [Delphi Borland Form](http://fileformats.archiveteam.org/wiki/Borland_Delphi_form) | .dfm | [dfm2txt](http://github.com/Sembiance/dexvert) | [11 sample files](https://telparia.com/fileFormatSamples/archive/borlandDelphiForm/)
 archive | Descent Archive | .hog | [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/descentArchive/)
 archive | [DIET](http://fileformats.archiveteam.org/wiki/DIET_(compression)) |  | [diet](http://fileformats.archiveteam.org/wiki/DIET_(compression)) | [10 sample files](https://telparia.com/fileFormatSamples/archive/diet/)
 archive | Disk Doubler | .dd | [unar](https://unarchiver.c3.cx/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/diskDoubler/)
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Disk_Image_Formats) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/diskImage/)
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
+archive | [Dr. Riptide Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [4 sample files](https://telparia.com/fileFormatSamples/archive/drRiptideArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [2 sample files](https://telparia.com/fileFormatSamples/archive/dragonVDK/)
 archive | Dynamix Game Data Archive | .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/threeDUltraMiniGolfGameData/)
 archive | Dynamix Game Data Archive | .dyn | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://telparia.com/fileFormatSamples/archive/dynamixGameData/)
@@ -95,6 +97,8 @@ archive | [GZip archive](http://fileformats.archiveteam.org/wiki/GZ) | .gz .gzip
 archive | [HA Archive](http://fileformats.archiveteam.org/wiki/HA) | .ha | [ha](http://fileformats.archiveteam.org/wiki/HA) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ha/)
 archive | [Hamarsoft HAP Archive](http://fileformats.archiveteam.org/wiki/HAP) | .hap | [hap210](https://archive.org/details/msdos_festival_HAPPAH21) [hap306](https://archive.org/details/msdos_festival_HAPPAH21) | [4 sample files](https://telparia.com/fileFormatSamples/archive/hap/)
 archive | [Hammer](http://fileformats.archiveteam.org/wiki/Hammer_(compression)) | .hmr | [hammer_decomp](https://github.com/Treeki/RandomStuff/blob/master/hammer_decomp.py) | [10 sample files](https://telparia.com/fileFormatSamples/archive/hammer/)
+archive | [Highway Hunter DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Highway_Hunter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://telparia.com/fileFormatSamples/archive/highwayHunterDATArchive/)
+archive | [HomeBrew Game Data Archive](https://moddingwiki.shikadi.net/wiki/HomeBrew_File_Folder_Format) | .gw1 .gw2 .gw3 | [gamearch](https://github.com/Malvineous/libgamearchive) | [7 sample files](https://telparia.com/fileFormatSamples/archive/homeBrewArchive/)
 archive | HTTP Response |  |  | [11 sample files](https://telparia.com/fileFormatSamples/archive/httpResponse/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [hypercard_dasm](https://github.com/fuzziqersoftware/resource_dasm) [stackimport](https://github.com/uliwitness/stackimport/) | [15 sample files](https://telparia.com/fileFormatSamples/archive/hypercard/)
 archive | [IBM SaveDskF SKF Disk Image](http://fileformats.archiveteam.org/wiki/LoadDskF/SaveDskF) | .dsk | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/ibmSaveDsk/)
@@ -146,6 +150,7 @@ archive | [Monster Bash DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Fo
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) [msexpand_win2k](https://www.computerhope.com/expandhl.htm) [deark](https://entropymine.com/deark/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [deark](https://entropymine.com/deark/) | [5 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Mystic Towers DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Mystic_Towers)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://telparia.com/fileFormatSamples/archive/mysticTowersDAT/)
+archive | [Mythos Software LIB Archive](https://moddingwiki.shikadi.net/wiki/LIB_Format_(Mythos_Software)) | .lib | [gamearch](https://github.com/Malvineous/libgamearchive) | [4 sample files](https://telparia.com/fileFormatSamples/archive/mythosSoftwareLIBArchive/)
 archive | [Nero CD Image](http://fileformats.archiveteam.org/wiki/NRG) | .nrg | [dd](https://www.gnu.org/software/coreutils/) [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) [UniExtract](https://www.legroom.net/software/uniextract) | [3 sample files](https://telparia.com/fileFormatSamples/archive/nrg/)
 archive | Newsgroup Content |  | [unnews](https://github.com/Sembiance/dexvert) | [11 sample files](https://telparia.com/fileFormatSamples/archive/news/)
 archive | NeXT Disk Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/nextDiskImage/)
@@ -175,6 +180,7 @@ archive | PMarc SFX Archive | .com | [lha](https://github.com/jca02266/lha) | [1
 archive | [POD Archive](https://moddingwiki.shikadi.net/wiki/POD_Format) | .pod | [gamearch](https://github.com/Malvineous/libgamearchive) | [7 sample files](https://telparia.com/fileFormatSamples/archive/podArchive/)
 archive | [PowerPacker Archive](http://fileformats.archiveteam.org/wiki/PowerPacker) | .pp | [unar](https://unarchiver.c3.cx/) [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [16 sample files](https://telparia.com/fileFormatSamples/archive/powerPack/) - Some files (Image & Aonia) won't extract (tried unar, ancient, ppunpack). I could install PowerPacker on the QEMU amiga and decrunch there. I looked at v4.0 and it was a nightmare to install, so I punted.
 archive | PowerPlayer Music Cruncher |  | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [11 sample files](https://telparia.com/fileFormatSamples/archive/powerPlayerMusicCruncher/)
+archive | [Prehistorik CUR Archive](https://moddingwiki.shikadi.net/wiki/CUR_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [4 sample files](https://telparia.com/fileFormatSamples/archive/prehistorikCURArchive/)
 archive | [Print Shop Graphic POG Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pog | [deark](https://entropymine.com/deark/) | [15 sample files](https://telparia.com/fileFormatSamples/archive/pog/)
 archive | [Print/Instant Artist](http://fileformats.archiveteam.org/wiki/Instant_Artist_GFX) | .gfx | [printArtist](https://winworldpc.com/product/instant-artist-print/60) | [11 sample files](https://telparia.com/fileFormatSamples/archive/printArtist/)
 archive | [PrintPartner Graphics Bitmaps](http://fileformats.archiveteam.org/wiki/PrintPartner) | .gph | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/printPartnerGraphics/)
@@ -187,6 +193,7 @@ archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/w
 archive | [RIFF (Generic Fallback)](http://fileformats.archiveteam.org/wiki/RIFF) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/riff/)
 archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib .dib | [deark](https://entropymine.com/deark/) | [9 sample files](https://telparia.com/fileFormatSamples/archive/riffRDIB/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [unrar](https://www.rarlab.com/rar_add.htm) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
+archive | [Sango Fighter DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [8 sample files](https://telparia.com/fileFormatSamples/archive/sangoFighterDATArchive/)
 archive | [SCO Compress](http://fileformats.archiveteam.org/wiki/SCO_compress_LZH) |  | [gunzip](https://www.gnu.org/software/gzip/) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/scoCompress/)
 archive | SCR Package | .spz | [foremost](http://foremost.sourceforge.net/) | [2 sample files](https://telparia.com/fileFormatSamples/archive/scrPackage/) - The format contains JPEG files, but I think it's done something to them as any extraction produces slightly corrupted results and just small images. Still, better than nothing.
 archive | [SCUMM digitized Sounds](https://wiki.scummvm.org/index.php/SCUMM/Technical_Reference/Sound_resources) | .sou | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://telparia.com/fileFormatSamples/archive/scummDigitizedSounds/)

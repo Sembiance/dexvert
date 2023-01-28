@@ -463,7 +463,6 @@ export default
 		binPatchPatch                : {name : "BinPatch Patch", ext : [".utp"], magic : ["BinPatch patch"]},
 		boyanActionModule            : {name : "BOYAN Action Model", ext : [".bam"], magic : ["BOYAN Action Module"]},
 		buildEngineDemoData          : {name : "Build Engine Demo Data", ext : [".dem"], magic : ["Build engine Demo/replay data"]},
-		buildEngineRFFContainer      : {name : "Build Engine RFF Container", ext : [".rff"], magic : ["Build Engine RFF encrypted container"]},
 		butcherShape                 : {name : "Butcher Shape", ext : [".shape"], magic : ["Butcher Shape"]},
 		cadDrawLibrary               : {name : "CAD/Draw Library", ext : [".tbl"], magic : ["TommySoftware CAD/Draw Library"]},
 		cadDrawSettings              : {name : "CAD/Draw Settings", ext : [".mpi"], magic : ["TommySoftware CAD/Draw settings"]},

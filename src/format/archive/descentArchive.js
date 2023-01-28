@@ -5,5 +5,5 @@ export class descentArchive extends Format
 	name       = "Descent Archive";
 	ext        = [".hog"];
 	magic      = ["Descent game data archive"];
-	converters = ["gameextractor"];
+	converters = ["gamearch", "gameextractor"];
 }

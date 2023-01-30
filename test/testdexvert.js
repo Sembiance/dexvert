@@ -121,6 +121,9 @@ const FLEX_SIZE_FORMATS =
 		wildcatWCX : 90,
 		wordDoc    : 80,
 
+		// very subtle differences each time, not sure why
+		winampCompiledMakiScript : 0.1,
+
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
 		"*:.pdf" : 5,
 
@@ -166,7 +169,6 @@ const IGNORE_SIZE_FILEPATHS =
 ];
 
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
-// Specific the path to the file and a number of different files that is allowed
 const FLEX_DIFF_FILES =
 [
 	// this specific file sometimes extracts a pict, sometimes a bmp, no idea why

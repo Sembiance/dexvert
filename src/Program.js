@@ -66,6 +66,7 @@ export class Program
 			chainCheck       : {type : "function", length : [0, 3]},
 			chainPost        : {type : "function", length : [0, 1]},
 			checkForDups     : {type : "boolean"},
+			failOnDups       : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {type : "number", range : [1]},
 			dosData          : {types : ["function", Object]},
@@ -214,6 +215,7 @@ export class Program
 			const newFilePaths = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute));
 
 			xlog.debug`Program ${fg.orange(this.programid)} sanity filtering ${newFilePaths.length.toLocaleString()} new files...`;
+			let foundDups = false;
 			const newDexFiles = (await newFilePaths.parallelMap(async newFilePath =>
 			{
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
@@ -271,6 +273,7 @@ export class Program
 				if(f.input.size<xu.MB*25 && !this.allowDupOut && (this.checkForDups || newFilePaths.length===1) && await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
 					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
+					foundDups = true;
 					await fileUtil.unlink(newFilePath);
 					return;
 				}
@@ -278,8 +281,18 @@ export class Program
 				return newFile;
 			})).filter(v => !!v);
 
-			xlog.debug`Adding ${newDexFiles.length.toLocaleString()} new files to file set...`;
-			await f.addAll("new", newDexFiles);
+			if(foundDups && this.failOnDups)
+			{
+				xlog.warn`Program ${fg.orange(this.programid)} is aborting due to finding duplicate output files`;
+				await newDexFiles.parallelMap(async newDexFile => await fileUtil.unlink(newDexFile.absolute));
+				newDexFiles.clear();
+			}
+
+			if(newDexFiles.length>0)
+			{
+				xlog.debug`Adding ${newDexFiles.length.toLocaleString()} new files to file set...`;
+				await f.addAll("new", newDexFiles);
+			}
 		}
 
 		// sort the filenames by depth and then by filename

@@ -1,4 +1,4 @@
-# Supported File Formats (1,454)
+# Supported File Formats (1,456)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -146,7 +146,7 @@ archive | [Microsoft Access Database](http://fileformats.archiveteam.org/wiki/Ac
 archive | [Microsoft Compound Document](http://fileformats.archiveteam.org/wiki/Microsoft_Compound_File) |  | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) [deark](https://entropymine.com/deark/) | [13 sample files](https://telparia.com/fileFormatSamples/archive/msCompound/)
 archive | Microsoft Windows Installer | .msi .msp | [sevenZip](http://p7zip.sourceforge.net/) [cabextract](https://www.cabextract.org.uk/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/microsoftWindowsInstaller/)
 archive | MINICAT Archive | .cat | [foremost](http://foremost.sourceforge.net/) | [6 sample files](https://telparia.com/fileFormatSamples/archive/minicat/)
-archive | [Monster Bash DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://telparia.com/fileFormatSamples/archive/monsterBashDAT/)
+archive | [Monster Bash DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://telparia.com/fileFormatSamples/archive/monsterBashDAT/)
 archive | [MS Compress Archive](http://fileformats.archiveteam.org/wiki/MS-DOS_installation_compression) | _ .exe | [msexpand](http://gnuwin32.sourceforge.net/packages/mscompress.htm) [msexpand_win2k](https://www.computerhope.com/expandhl.htm) [deark](https://entropymine.com/deark/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://telparia.com/fileFormatSamples/archive/msCompress/)
 archive | [Multi-Picture Format](http://fileformats.archiveteam.org/wiki/Multi-Picture_Format) | .mpo | [deark](https://entropymine.com/deark/) | [5 sample files](https://telparia.com/fileFormatSamples/archive/mpo/)
 archive | [Mystic Towers DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Mystic_Towers)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [1 sample file](https://telparia.com/fileFormatSamples/archive/mysticTowersDAT/)
@@ -218,7 +218,7 @@ archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.n
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [12 sample files](https://telparia.com/fileFormatSamples/archive/swagPacket/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tar) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [16 sample files](https://telparia.com/fileFormatSamples/archive/tar/)
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [td02imd](http://dunfield.classiccmp.org/img42841/teledisk.htm/) [dskconv](http://www.seasip.info/Unix/LibDsk/) | [12 sample files](https://telparia.com/fileFormatSamples/archive/teledisk/)
-archive | [The Lost Vikings DAT Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | 
+archive | [The Lost Vikings DAT Archive](https://moddingwiki.shikadi.net/wiki/The_Lost_Vikings) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://telparia.com/fileFormatSamples/archive/lostVikingsDAT/)
 archive | [The Sterling COMPressor archive](http://fileformats.archiveteam.org/wiki/TSComp) |  | [deark](https://entropymine.com/deark/) [tscomp](http://fileformats.archiveteam.org/wiki/TSComp) | [10 sample files](https://telparia.com/fileFormatSamples/archive/tscomp/)
 archive | Thunder Compressed File | .jpm | [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [10 sample files](https://telparia.com/fileFormatSamples/archive/thunderCompressed/)
 archive | Transport Neutral Encapsulation Format | .tnef .dat | [ytnef](https://github.com/Yeraze/ytnef) | [10 sample files](https://telparia.com/fileFormatSamples/archive/tnef/)
@@ -232,7 +232,7 @@ archive | [Vinyl Goddess from Mars LBR Archive](https://moddingwiki.shikadi.net/
 archive | [Visual Novel DPK Archive](http://fileformats.archiveteam.org/wiki/DPK) | .dpk | [undpk](http://fileformats.archiveteam.org/wiki/DPK) | [4 sample files](https://telparia.com/fileFormatSamples/archive/visualNovelDPK/)
 archive | [VIV BIGF](http://fileformats.archiveteam.org/wiki/VIV) | .viv .big | [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/vivBIGF/)
 archive | [Wacky Wheels Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Wacky_Wheels)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [3 sample files](https://telparia.com/fileFormatSamples/archive/wackyWheelsArchive/)
-archive | [WAD](https://moddingwiki.shikadi.net/wiki/WAD_Format) | .wad | [deark](https://entropymine.com/deark/) [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [12 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
+archive | [WAD](https://moddingwiki.shikadi.net/wiki/WAD_Format) | .wad | [deark](https://entropymine.com/deark/) [gamearch](https://github.com/Malvineous/libgamearchive) [gameextractor](http://www.watto.org/game_extractor.html) | [13 sample files](https://telparia.com/fileFormatSamples/archive/wad/)
 archive | [WAD2](http://www.gamers.org/dEngine/quake/spec/quake-spec34/qkspec_7.htm) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/wad2/)
 archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc | [Warcat](https://pypi.org/project/Warcat) | [1 sample file](https://telparia.com/fileFormatSamples/archive/warc/)
 archive | Warcraft 2 Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://telparia.com/fileFormatSamples/archive/warcraft2Archive/)
@@ -568,7 +568,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (516)
+## Image (517)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](https://en.wikipedia.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://telparia.com/fileFormatSamples/image/threeDCK/)
@@ -880,6 +880,7 @@ image | [MIG](http://fileformats.archiveteam.org/wiki/MIG) | .mig | [recoil2png]
 image | [Milti Palette Picture](http://fileformats.archiveteam.org/wiki/Multi_Palette_Picture) | .mpp | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [8 sample files](https://telparia.com/fileFormatSamples/image/mpp/)
 image | [Minolta RAW](http://fileformats.archiveteam.org/wiki/Minolta) | .mrw | [darktable_cli](https://www.darktable.org/) [convert](https://www.imagemagick.org/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [nconvert](https://www.xnview.com/en/nconvert/) | [2 sample files](https://telparia.com/fileFormatSamples/image/mrw/)
 image | [Mono Magic](http://fileformats.archiveteam.org/wiki/Mono_Magic) | .mon | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://telparia.com/fileFormatSamples/image/monoMagic/)
+image | [Monster Bash Tile](https://moddingwiki.shikadi.net/wiki/Monster_Bash_Tileset_Format) | .tbg .tfg .tbn .pbg .pfg .pbn | [gametls](https://github.com/Malvineous/libgamegraphics) | [15 sample files](https://telparia.com/fileFormatSamples/image/monsterBashTile/)
 image | [Movie Maker](http://fileformats.archiveteam.org/wiki/Movie_Maker) | .bkg .shp | [recoil2png](http://recoil.sourceforge.net) | [23 sample files](https://telparia.com/fileFormatSamples/image/movieMaker/)
 image | MRG Systems Teletext | .tti | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://telparia.com/fileFormatSamples/image/mrgSystemsText/)
 image | [MSX BASIX Graphic](http://fileformats.archiveteam.org/wiki/MSX_BASIC_graphics) | .sc2 .grp .sc3 .sc4 .sc5 .ge5 .s15 .sc6 .s16 .sc7 .ge7 .s17 .sc8 .ge8 .s18 .sca .s1a .scc .srs .yjk .s1c | [recoil2png](http://recoil.sourceforge.net) | [46 sample files](https://telparia.com/fileFormatSamples/image/msxBASIC/)
@@ -1411,9 +1412,10 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 
 
 
-## Poly (2)
+## Poly (3)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
+poly | [LightWave 3D Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene) | .lws .scn |  | [4 sample files](https://telparia.com/fileFormatSamples/poly/lightWave3DScene/)
 poly | [QuickDraw 3D Metafile](http://fileformats.archiveteam.org/wiki/3DMF) | .3dmf | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [11 sample files](https://telparia.com/fileFormatSamples/poly/quickDraw3D/)
 poly | [SketchUp Model](http://fileformats.archiveteam.org/wiki/SKP) | .skp | [nconvert](https://www.xnview.com/en/nconvert/) | [1 sample file](https://telparia.com/fileFormatSamples/poly/sketchUp/)
 

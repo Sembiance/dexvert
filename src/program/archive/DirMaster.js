@@ -6,9 +6,12 @@ export class DirMaster extends Program
 	website  = "https://style64.org/dirmaster";
 	loc      = "winxp";
 	bin      = "DirMaster.exe";
+	flags   = {
+		timeout : "Stop after X ms. Default: 3 minutes"
+	};
 	args     = r => ["--exportall", r.inFile()];
-	qemuData = ({
-		timeout : xu.MINUTE*10,
+	qemuData = r => ({
+		timeout : (+(r.flags.timeout || xu.MINUTE*3)),
 		cwd     : "c:\\out"
 	});
 	renameOut = {

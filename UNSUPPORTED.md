@@ -1,4 +1,4 @@
-# Unsupported File Formats (893)
+# Unsupported File Formats (895)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -102,7 +102,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (41)
+## Document (42)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Alan Interactive Fiction | .acd | 
@@ -142,6 +142,7 @@ document | Pen Pal Document | .wtr |
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://telparia.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
 document | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Pageplus) | .ppp .ppx .ppb .ppt | [9 sample files](https://telparia.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
+document | Storybook Weaver Story | .swd .sts | 
 document | TurboCalc Document | .tcd | [4 sample files](https://telparia.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://telparia.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 document | Vizawrite Document |  | 
@@ -245,7 +246,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (83)
+## Image (84)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -297,6 +298,7 @@ image | LEONARD'S Sketch Drawing | .ogf | [6 sample files](https://telparia.com/
 image | Lotus Smart Icon | .smi | 
 image | MaconCAD Drawing | .mc2 | [1 sample file](https://telparia.com/fileFormatSamples/image/maxonCADDrawing/)
 image | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [8 sample files](https://telparia.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
+image | MegaPaint Vector | .vek | 
 image | Micro Illustrator | .mic | [1 sample file](https://telparia.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://telparia.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
 image | Microsoft Border Art | .bdr | 

@@ -46,6 +46,7 @@ export default
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
 		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]},
+		storybookWeaver		   : {name : "Storybook Weaver Story", ext : [".swd", ".sts"], magic : ["Storybook Weaver Deluxe"]},
 		vizawriteDocument      : {name : "Vizawrite Document", magic : ["Vizawrite document"]},
 		winFaxDocument         : {name : "WinFax Document", ext : [".fxm", ".fxr"], magic : ["WinFax Pro multipage document", "WinFax Sent / Received document"]}
 	},
@@ -155,6 +156,7 @@ export default
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		intergraphRasterRGB       : {name : "Intergraph Raster RGB", ext : [".rgb"], magic : ["Intergraph Raster bitmap (Adaptive RLE RGB)"]},
 		jamBitmap                 : {name : "JAM Bitmap", ext : [".jam"], magic : ["JAM bitmap"]},
+		megaPaintVector           : {name : "MegaPaint Vector", ext : [".vek"], magic : ["MegaPaint Vector format"]},
 		microsoftBorderArt        : {name : "Microsoft Border Art", ext : [".bdr"], magic : ["Microsoft Border art"]},
 		mvpPaintAnimation         : {name : "MVP Paint Animation", ext : [".af"], magic : ["MVP Paint Animation Format"]},
 		paintproBitmap            : {name : "Paintpro Bitmap", ext : [".tb1", ".ppp"], magic : ["Paintpro bitmap"]},

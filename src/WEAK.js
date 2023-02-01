@@ -109,6 +109,7 @@ export const WEAK_VALUES =
 	/^GTA script/,
 	/^GTA1 /,
 	/^GTA2 /,
+	/^HIT archive data$/,
 	/^Hitachi SH/,
 	/^HTML document/,
 	/^HP 48 binary/,

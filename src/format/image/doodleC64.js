@@ -6,6 +6,7 @@ export class doodleC64 extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Doodle!_(C64)";
 	ext            = [".dd", ".jj"];
 	magic          = ["Doodle bitmap (compressed)"];
+	priority       = this.PRIORITY.LOW;
 	fileSize       = {".dd" : [9218, 9026, 9346]};
 	matchFileSize  = true;
 	converters     = ["recoil2png", "nconvert"];

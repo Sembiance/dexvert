@@ -1,11 +1,11 @@
-# Unsupported File Formats (895)
+# Unsupported File Formats (900)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (51)
+## Archive (52)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -20,6 +20,7 @@ archive | Authorware Application/Package | .app .apw | [9 sample files](https://
 archive | BeOS Installation Package | .pkg | 
 archive | BeOS Resource Data | .rsrc | 
 archive | BZIP Compressed Archive | .bz | [2 sample files](https://telparia.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
+archive | CCS64 Cartridge | .crt .car | 
 archive | Colorado Memory System Package | .cmp | 
 archive | Commodore 16 Tape | .tap | 
 archive | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://telparia.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
@@ -336,7 +337,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (94)
+## Music (96)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -385,10 +386,12 @@ music | JayTrax Module | .jxs | [4 sample files](https://telparia.com/fileFormat
 music | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://telparia.com/fileFormatSamples/music/buzz/)
 music | Klystrack Module | .kt | [5 sample files](https://telparia.com/fileFormatSamples/music/klystrack/)
 music | Korg Song | .sng | 
+music | Koustracker Module | .sok | 
 music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://telparia.com/fileFormatSamples/music/masterTracker/)
 music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/)
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
 music | Melody Maker Sing | .mm | 
+music | MSX Protracker Module | .pro | 
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 music | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXPerformance/)
 music | [Music-X Sequence](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .seq | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXSequence/)
@@ -436,7 +439,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (436)
+## Other (438)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -510,6 +513,7 @@ other | BeOS CodeWarrior Project | .proj |
 other | Berkeley DB | .db | 
 other | Bill of Materials | .bom | 
 other | Binary Color Format | .bcf | 
+other | Binary Delta Compressed Patch |  | 
 other | BinPatch Patch | .utp | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
@@ -875,6 +879,7 @@ other | X-CAD Overlay |  |
 other | XPCOM Type Library | .xpt | 
 other | YAFA Compression Options |  | 
 other | ZBASIC | .bas | [6 sample files](https://telparia.com/fileFormatSamples/other/zbasic/)
+other | ZSNES Save State | .zst | 
 
 
 

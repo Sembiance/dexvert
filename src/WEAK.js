@@ -9,6 +9,7 @@ export const WEAK_VALUES =
 
 	// dexmagic: WEAK checks
 	/^IFF CAT file$/,
+	/^Visual Novel DPK Archive$/,
 	/^ZZT World$/,
 	
 	// FILE: Very weak checks:

@@ -283,6 +283,8 @@ const outputFiles = [];
 
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
+await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "build", "build.js"), "programs", "formats"), runUtil.denoRunOpts({liveOutput : true}));
+
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
 xlog.info`Root testing dir: ${fg.deepSkyblue(getWebLink(DEXTEST_ROOT_DIR))}`;

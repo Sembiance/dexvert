@@ -11,6 +11,7 @@ export default
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		c16Tape                      : {name : "Commodore 16 Tape", ext : [".tap"], magic : ["C16 Tape image format"]},
+		ccs64Cartridge		 	     : {name : "CCS64 Cartridge", ext : [".crt", ".car"], magic : ["C64 Cartridge image", "Commodore 64 cartridge", /^fmt\/822( |$)/]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
 		metaCardStack                : {name : "MetaCard Stack", ext : [".rev"], magic : ["Revolution MetaCard stack"]},
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
@@ -178,6 +179,8 @@ export default
 		fredEditorSoundTrack    : {name : "Fred Editor Soundtrack", magic : ["Fred Editor SoundTrack"]},
 		improviseMusicData      : {name : "Improvise Music Data", ext : [".imp"], magic : ["Improvise music data"]},
 		melodyMakerSong         : {name : "Melody Maker Sing", ext : [".mm"], magic : ["Melody Maker song"]},
+		msxProtrackerModule     : {name : "MSX Protracker Module", ext : [".pro"], magic : ["MSX Protracker 1.0 module"]},
+		koustrackerModule       : {name : "Koustracker Module", ext : [".sok"], magic : ["Koustracker module"]},
 		rolandMIDIMusicRecorder : {name : "Roland MIDI Music Recorder Song", ext : [".sng"], magic : ["Roland Midi Music Recorder song"], weakMagic : true},
 		scrullMusicFile         : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
 		technoSoundTurbo2Track  : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
@@ -231,6 +234,7 @@ export default
 		//////////
 		adventureGameToolkitStrings : {name : "Adventure Game Toolkit Strings", ext : [".d$$"], magic : ["Adventure Game Toolkit temporary strings"]},
 		abuseLevel                  : {name : "Abuse Level", ext : [".lvl", ".spe"], magic : ["Abuse Level"]},
+		binaryDeltaCompressedPatch  : {name : "Binary Delta Compressed Patch", magic : ["Binary Delta Compressed Patch"]},
 		blockBreakerPattern         : {name : "Block Breaker Pattern", ext : [".blc"], magic : ["Block Breaker pattern"]},
 		callOfDutyMap               : {name : "Call of Duty Map", ext : [".d3dbsp", ".bsp"], magic : ["Call of Duty map"]},
 		chessAssistant              : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},
@@ -300,6 +304,7 @@ export default
 		warCraft3RecordedGame       : {name : "WarCraft III Recorded Game", ext : [".w3g"], magic : ["WarCraft III Recorded Game", "Warcraft III recorded game"]},
 		winzlePuzzle                : {name : "Winzle Puzzle", ext : [".wzl"], magic : ["Winzle puzzle"]},
 		wipeout2097TrackData        : {name : "Wipeout 2097 Track Data", ext : [".wad"], magic : ["Wipeout 2097 track data"]},
+		zsnesSaveSate               : {name : "ZSNES Save State", ext : [".zst"], magic : ["ZSNES Save State"]},
 
 
 		/////////////////

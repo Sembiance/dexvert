@@ -17,29 +17,39 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory to place generated BIN/CUE", required : true}
 	]});
 
-await runUtil.run("sudo", ["modprobe", "vhba"]);
-const {xvfbPort, cb} = await runUtil.run("sudo", ["cdemu-daemon"], {detached : true, virtualX : true});
+let xvfbPort=null, cb=null;
 
-await delay(xu.SECOND*5);
-
-let {stdout : cdemuStatus} = await runUtil.run("sudo", ["cdemu", "status"], {timeout : xu.SECOND*5, killChildren : true, env : {DISPLAY : `:${xvfbPort}`}});
-if(!cdemuStatus?.includes("0     False"))
+try
 {
-	await runUtil.run("sudo", ["killall", "cdemu-daemon"]);
-	Deno.exit(xlog.warn`Failed to load cdemu-daemon`);
+	await runUtil.run("sudo", ["modprobe", "vhba"]);
+	({xvfbPort, cb} = await runUtil.run("sudo", ["cdemu-daemon"], {detached : true, virtualX : true}));
+
+	await delay(xu.SECOND*5);
+
+	let {stdout : cdemuStatus} = await runUtil.run("sudo", ["cdemu", "status"], {timeout : xu.SECOND*5, killChildren : true, env : {DISPLAY : `:${xvfbPort}`}});
+	if(!cdemuStatus?.includes("0     False"))
+	{
+		await runUtil.run("sudo", ["killall", "cdemu-daemon"]);
+		Deno.exit(xlog.warn`Failed to load cdemu-daemon`);
+	}
+
+	await runUtil.run("sudo", ["cdemu", "load", "0", path.resolve(argv.inputFilePath)], {env : {DISPLAY : `:${xvfbPort}`}});
+
+	({stdout : cdemuStatus} = await runUtil.run("sudo", ["cdemu", "status"], {timeout : xu.SECOND*5, killChildren : true, env : {DISPLAY : `:${xvfbPort}`}}));
+	if(!cdemuStatus?.includes("0     True"))
+	{
+		await runUtil.run("sudo", ["killall", "cdemu-daemon"]);
+		Deno.exit(xlog.warn`Failed to load ISO with cdemu`);
+	}
+
+	await runUtil.run("cdrdao", ["read-cd", "--read-raw", "--datafile", "out.bin", "--device", "/dev/sr0", "out.toc"], {cwd : argv.outputDirPath});
+	await runUtil.run("toc2cue", ["out.toc", "out.cue"], {cwd : argv.outputDirPath});
 }
-
-await runUtil.run("sudo", ["cdemu", "load", "0", path.resolve(argv.inputFilePath)], {env : {DISPLAY : `:${xvfbPort}`}});
-
-({stdout : cdemuStatus} = await runUtil.run("sudo", ["cdemu", "status"], {timeout : xu.SECOND*5, killChildren : true, env : {DISPLAY : `:${xvfbPort}`}}));
-if(!cdemuStatus?.includes("0     True"))
+catch(err)
 {
-	await runUtil.run("sudo", ["killall", "cdemu-daemon"]);
-	Deno.exit(xlog.warn`Failed to load ISO with cdemu`);
+	console.error(err);
 }
-
-await runUtil.run("cdrdao", ["read-cd", "--read-raw", "--datafile", "out.bin", "--device", "/dev/sr0", "out.toc"], {cwd : argv.outputDirPath});
-await runUtil.run("toc2cue", ["out.toc", "out.cue"], {cwd : argv.outputDirPath});
 
 await runUtil.run("sudo", ["killall", "cdemu-daemon"]);	// can't kill the process with runUtil.kill(p) due to the way sudo works? Not even killChildren helped.
-await cb();
+if(cb)
+	await cb();

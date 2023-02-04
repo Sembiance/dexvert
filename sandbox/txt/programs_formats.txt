@@ -10672,3 +10672,11 @@ Wacky Wheels
 Word Rescue
 Xargon (partial)
 Zone 66 (partial)
+
+>>> libkss (kss2wav)		https://github.com/digital-sound-antiques/libkss
+.kss
+.mgs
+.bgm
+.opx
+.mpk
+.mbm

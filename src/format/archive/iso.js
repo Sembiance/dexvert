@@ -5,6 +5,7 @@ import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
 import {XLog} from "xlog";
 import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
+import {_COMPACT_PRO_MAGIC} from "./compactPro.js";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 
@@ -164,7 +165,8 @@ export class iso extends Format
 					);
 				}
 
-				r.push("cabextract[matchType:magic]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
+				if(!dexState.hasMagics(_COMPACT_PRO_MAGIC))	// don't include cabextract if Compact Pro is detected (sample/archive/compactPro/King.img.bin) due to unar needing to be the proper extractor
+					r.push("cabextract[matchType:magic]");	// Hobby PC 17.bin/cue has an audio track first, which bchunk does extract the ISO but only 'cabextract' can extract the ISO data, no idea why
 				
 				r.push("uniso", "uniso[block:512]");	// Fall back to uniso even with read/write errors
 

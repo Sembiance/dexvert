@@ -7,6 +7,7 @@ export default
 	archive :
 	{
 		abackupDiskImage             : {name : "ABackup Disk Image", ext : [".adf"], magic : ["ABackup backup disk image"]},
+		aixBackupRestore             : {name : "AIX backup/restore", ext : [".img"], magic : ["AIX backup/restore format file"]},
 		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
@@ -218,6 +219,7 @@ export default
 		strataStudioProVis      : {name : "Strata StudioPro Vis", magic : [/^fmt\/1204( |$)/]},
 		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},
 		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]},
+		threeDStudioLoftObject  : {name : "3D Studio Loft Object", ext : [".lft"], magic : ["3D Studio Loft Object"], weakMagic : true},
 		valveModelVertices      : {name : "Valve Studio Model Vertices", ext : [".vvd"], magic : ["Valve Studio Model Vertex Data"]},
 		virtusVRScene           : {name : "Virtus VR Scene", ext : [".vvr"], magic : ["Virtus VR scene"]}
 	},

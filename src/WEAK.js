@@ -499,6 +499,7 @@ export const WEAK_VALUES =
 	/^Intel CPU Microcode$/,
 	/^Inset PIX bitmap$/,
 	/^Lotus 123\/Symphony worksheet\/format\/configuration \(V1-V2\)$/,
+	/^Luigi's Mansion 3D model$/,
 	/^M99 compressed data$/,
 	/^MacBinary [12]$/,
 	/^MapInfo MapBasic tabular DataBase$/,
@@ -558,6 +559,7 @@ export const WEAK_VALUES =
 	/^Chasys Draw IES metadata$/,
 	/^Colin McRae Rally 2 game data archive$/,
 	/^COM\+ catalog file$/,	// Most matches to this are probably correct, but it's a near worthless file so just ignore it
+	/^Cookeo recipe$/,
 	/^Dan Bricklin's Demo/,
 	/^Dave 2 Huffman compressed game data$/,
 	/^Dockerfile$/,

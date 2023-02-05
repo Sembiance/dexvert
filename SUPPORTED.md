@@ -1,4 +1,4 @@
-# Supported File Formats (1,462)
+# Supported File Formats (1,463)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -192,7 +192,7 @@ archive | [Quarterdeck Installation Package](http://fileformats.archiveteam.org/
 archive | Raw Partition |  | [uniso](https://github.com/Sembiance/dexvert/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/rawPartition/)
 archive | [Red Hat Package Manager Archive](http://fileformats.archiveteam.org/wiki/RPM) | .rpm | [deark](https://entropymine.com/deark/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://unarchiver.c3.cx/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/rpm/)
 archive | [RIFF (Generic Fallback)](http://fileformats.archiveteam.org/wiki/RIFF) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/riff/)
-archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib .dib | [deark](https://entropymine.com/deark/) | [9 sample files](https://telparia.com/fileFormatSamples/archive/riffRDIB/)
+archive | [RIFF RDIB](http://fileformats.archiveteam.org/wiki/RDIB) | .rdi .rib .dib | [deark](https://entropymine.com/deark/) | [10 sample files](https://telparia.com/fileFormatSamples/archive/riffRDIB/)
 archive | [Roshal Archive](http://fileformats.archiveteam.org/wiki/RAR) | .rar | [unrar](https://www.rarlab.com/rar_add.htm) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [13 sample files](https://telparia.com/fileFormatSamples/archive/rar/)
 archive | [Sango Fighter DAT Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [9 sample files](https://telparia.com/fileFormatSamples/archive/sangoFighterDATArchive/)
 archive | [SCO Compress](http://fileformats.archiveteam.org/wiki/SCO_compress_LZH) |  | [gunzip](https://www.gnu.org/software/gzip/) [deark](https://entropymine.com/deark/) | [11 sample files](https://telparia.com/fileFormatSamples/archive/scoCompress/)
@@ -580,7 +580,7 @@ image | [Adobe Photoshop](http://fileformats.archiveteam.org/wiki/PSD) | .psd | 
 image | [Advanced Art Studio](http://fileformats.archiveteam.org/wiki/Advanced_Art_Studio) | .ocp .scr .win .pal | [recoil2png](http://recoil.sourceforge.net) | [22 sample files](https://telparia.com/fileFormatSamples/image/advancedArtStudio/)
 image | [Alias Maya IFF Image](http://fileformats.archiveteam.org/wiki/Maya_IFF) | .iff .tdi | [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://telparia.com/fileFormatSamples/image/mayaIFF/)
 image | [Alias PIX Image](http://fileformats.archiveteam.org/wiki/Alias_PIX) | .pix .alias .img .als | [nconvert](https://www.xnview.com/en/nconvert/) [deark](https://entropymine.com/deark/) [gimp](https://gimp.org) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [12 sample files](https://telparia.com/fileFormatSamples/image/aliasPIX/)
-image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [6 sample files](https://telparia.com/fileFormatSamples/image/rla/)
+image | [Alias Wavefront RLA](http://fileformats.archiveteam.org/wiki/RLA) | .rla | [convert](https://www.imagemagick.org/) [nconvert](https://www.xnview.com/en/nconvert/) | [7 sample files](https://telparia.com/fileFormatSamples/image/rla/)
 image | [Amica Paint](http://fileformats.archiveteam.org/wiki/Amica_Paint) | .ami | [recoil2png](http://recoil.sourceforge.net) [view64](http://view64.sourceforge.net/) | [13 sample files](https://telparia.com/fileFormatSamples/image/ami/)
 image | [Amiga Metafile Vector Image](http://fileformats.archiveteam.org/wiki/Amiga_Metafile) | .amf | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://telparia.com/fileFormatSamples/image/amf/)
 image | [Amiga Workbench Icon](http://fileformats.archiveteam.org/wiki/Amiga_Workbench_icon) | .info | [deark](https://entropymine.com/deark/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://telparia.com/fileFormatSamples/image/info/)
@@ -1370,7 +1370,7 @@ other | Microsoft Visual C PCH file |  | [strings](https://www.gnu.org/software/
 other | Microsoft WinCE Install Header | .000 | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://telparia.com/fileFormatSamples/other/msWinCEInstallHeader/)
 other | Microsoft Windows Help File Content | .cnt | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/windowsHelpFileContent/)
 other | MicroStation Resource Data | .dat .ma | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/microStationResource/)
-other | MIDI Instrument Definition File | .idf | [strings](https://www.gnu.org/software/binutils/) | [5 sample files](https://telparia.com/fileFormatSamples/other/midiInstrumentDefinitionFile/)
+other | MIDI Instrument Definition File | .idf | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://telparia.com/fileFormatSamples/other/midiInstrumentDefinitionFile/)
 other | Money Matters Data | .mm | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://telparia.com/fileFormatSamples/other/moneyMatters/)
 other | MS Visual FoxPro App | .app .fxp | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://telparia.com/fileFormatSamples/other/msVisualFoxProApp/)
 other | NeXT TypedStream Data |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://telparia.com/fileFormatSamples/other/typedStreamData/)
@@ -1420,13 +1420,13 @@ other | [ZZT File](http://fileformats.archiveteam.org/wiki/ZZT) | .zzt | [zztScr
 ## Poly (3)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-poly | [LightWave 3D Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene) | .lws .scn |  | [8 sample files](https://telparia.com/fileFormatSamples/poly/lightWave3DScene/)
+poly | [LightWave 3D Scene](http://fileformats.archiveteam.org/wiki/LightWave_Scene) | .lws .scn |  | [9 sample files](https://telparia.com/fileFormatSamples/poly/lightWave3DScene/)
 poly | [QuickDraw 3D Metafile](http://fileformats.archiveteam.org/wiki/3DMF) | .3dmf | [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) | [11 sample files](https://telparia.com/fileFormatSamples/poly/quickDraw3D/)
 poly | [SketchUp Model](http://fileformats.archiveteam.org/wiki/SKP) | .skp | [nconvert](https://www.xnview.com/en/nconvert/) | [5 sample files](https://telparia.com/fileFormatSamples/poly/sketchUp/)
 
 
 
-## Text (44)
+## Text (45)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  |  | [13 sample files](https://telparia.com/fileFormatSamples/text/amigaDOSScript/)
@@ -1472,6 +1472,7 @@ text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windo
 text | Windows Policy Administrative Template | .adm |  | [10 sample files](https://telparia.com/fileFormatSamples/text/windowsPolicyAdminTemplateText/)
 text | Windows Policy Administrative Template - Unicode | .adm |  | [10 sample files](https://telparia.com/fileFormatSamples/text/windowsPolicyAdminTemplate/)
 text | [Windows Registry Data](http://fileformats.archiveteam.org/wiki/Windows_Registry) | .reg .dat |  | [10 sample files](https://telparia.com/fileFormatSamples/text/reg/)
+text | Windows Setup INFormation |  |  | [1 sample file](https://telparia.com/fileFormatSamples/text/windowsSetupINFormation/)
 text | [XLD4 Data Document](http://fileformats.archiveteam.org/wiki/XLD4) | .q4d |  | [6 sample files](https://telparia.com/fileFormatSamples/text/q4d/)
 
 

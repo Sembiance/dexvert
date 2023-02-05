@@ -26,7 +26,7 @@ export default
 		clarionHelp              : {name : "Clarion Help", ext : [".hlp"], magic : ["Clarion for DOS Help", "Clarion Developer (v2 and above) help data"], trustMagic : true},
 		clarionMemo              : {name : "Clarion Memo", ext : [".mem"], magic : ["Clarion Developer (v2 and above) memo data"]},
 		codeViewHelp             : {name : "Codeview Help", ext : [".hlp"], magic : ["Codeview Help"]},
-		corelPresentations       : {name : "Corel/WordPerfect Presentations", ext : [".shw", ".mst", ".prt"], magic : ["WordPerfect Presentations", "WordPerfect/Corel Presentations"]},
+		corelPresentations       : {name : "Corel/WordPerfect Presentations", ext : [".shw", ".mst", ".prt"], magic : ["WordPerfect Presentations", "WordPerfect/Corel Presentations", /^fmt\/878( |$)/]},
 		czHelp                   : {name : "CZ Help", ext : ["hlp"], magic : ["CZ Help"]},
 		dageshDocument           : {name : "Dagesh Document", ext : [".dgs"], magic : ["Dagesh document"]},
 		dataBaseProfessional     : {name : "DataBase Professional Database", ext : [".db"], magic : ["DataBase Professional database"]},

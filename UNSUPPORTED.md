@@ -1,11 +1,11 @@
-# Unsupported File Formats (900)
+# Unsupported File Formats (906)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (52)
+## Archive (55)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -35,6 +35,7 @@ archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interf
 archive | MetaCard Stack | .rev | 
 archive | Micrografx Archive | .mda | 
 archive | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
+archive | MSX Cassette Tape | .cas | 
 archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
 archive | Newton Package | .pkg | 
 archive | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://telparia.com/fileFormatSamples/archive/omnisStudio/)
@@ -57,7 +58,9 @@ archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFo
 archive | Unreal Package | .ut2 .uasset | 
 archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://telparia.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://telparia.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
+archive | WRAptor Archive | .wra .wr3 | [5 sample files](https://telparia.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 archive | WWarp Disk Image | .wwp | 
+archive | XelaSoft Archive | .xsa | 
 archive | ZOOM Disk Image | .zom | [1 sample file](https://telparia.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 archive | ZX Spectrum TZX Tape | .tzx | 
 
@@ -151,7 +154,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (31)
+## Executable (32)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -179,6 +182,7 @@ executable | [Microsoft Compiled Help 2](http://fileformats.archiveteam.org/wiki
 executable | MIPSL ECOFF Executable |  | 
 executable | MS-DOS COM Executable | .com .c0m | [4 sample files](https://telparia.com/fileFormatSamples/executable/com/)
 executable | MS-DOS Driver | .sys .drv | 
+executable | MSX Terminate and Stay Resident Executable | .tsr | 
 executable | Palm OS Dynamic Library | .prc | 
 executable | QDOS Executable |  | 
 executable | RISC OS Executable |  | 
@@ -883,7 +887,7 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (45)
+## Poly (47)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3D Dgf Model | .dgf .3dgfo | 
@@ -919,12 +923,14 @@ poly | Raven Object File Format | .rof |
 poly | Ray Dream BRW | .brw | 
 poly | Ray Dream Designer Scene | .rd4 .rds | 
 poly | Real 3D | .real .obj | [4 sample files](https://telparia.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
+poly | Renderit3D Data | .r3d | 
 poly | ROT! Object | .rotobj | [5 sample files](https://telparia.com/fileFormatSamples/poly/rotObject/)
 poly | Sculpt 3D Scene | .scene | [2 sample files](https://telparia.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
 poly | SGI Open Inventor Scene Graph | .iv | 
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://telparia.com/fileFormatSamples/poly/ydl/)
 poly | Shockwave 3D Scene Export | .w3d | 
 poly | Simply 3D Geometry | .ged | 
+poly | Strata 3D Shape | .ssh | 
 poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 
 poly | Valve Studio Model Vertices | .vvd | 

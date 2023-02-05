@@ -4,5 +4,5 @@ export class vic extends Format
 {
 	name       = "Commodore 64 VIC";
 	ext        = [".vic"];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "view64"];
 }

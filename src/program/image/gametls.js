@@ -8,6 +8,7 @@ export class gametls extends Program
 	website      = "https://github.com/Malvineous/libgamegraphics";
 	package      = "dev-libs/libgamegraphics";
 	bin          = "gametls";
+	unsafe       = true;
 	flags        = {
 		type     : "The file type of the input file",
 		colCount : "Number of columns in the output image. Default is 20."

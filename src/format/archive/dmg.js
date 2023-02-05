@@ -8,9 +8,9 @@ export class dmg extends Format
 	name       = "Apple Disk Image";
 	website    = "http://fileformats.archiveteam.org/wiki/DMG";
 	ext        = [".dmg"];
-	priority    = this.PRIORITY.LOW;
+	priority   = this.PRIORITY.LOW;
 	// for some reason, some DMG files identify as ZLIB data
 	magic      = ["zlib compressed data", "ZLIB compressed data", ..._DMG_DISK_IMAGE_MAGIC];
 	weakMagic  = true;
-	converters = ["dmg2img"];
+	converters = ["dmg2img", "sevenZip"];
 }

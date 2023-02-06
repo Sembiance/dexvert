@@ -26,7 +26,15 @@ export default async function buildPrograms(xlog)
 			throw new Error(`program [${programid}] at ${programFilePath} is a duplicate of ${programs[programid]}`);
 
 		// create the class and validate it
-		programs[programid] = progamModule[programid].create();
+		try
+		{
+			programs[programid] = progamModule[programid].create();
+		}
+		catch(err)
+		{
+			xlog.error`Error creating program [${programid}] at [${programFilePath}]`;
+			console.log(err, progamModule[programid]);
+		}
 		if(!(programs[programid] instanceof Program))
 			throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);
 		

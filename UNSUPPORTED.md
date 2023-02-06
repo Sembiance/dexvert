@@ -1,11 +1,11 @@
-# Unsupported File Formats (908)
+# Unsupported File Formats (914)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (56)
+## Archive (57)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -35,6 +35,7 @@ archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/w
 archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://telparia.com/fileFormatSamples/archive/interfaze/)
 archive | MetaCard Stack | .rev | 
 archive | Micrografx Archive | .mda | 
+archive | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
 archive | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 archive | MSX Cassette Tape | .cas | 
 archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
@@ -252,7 +253,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (84)
+## Image (86)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -278,6 +279,7 @@ image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia
 image | Crayola Art Studio | .art | 
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
 image | DesignWorks Drawing |  | [2 sample files](https://telparia.com/fileFormatSamples/image/designWorks/)
+image | Drafix Windows CAD Drawing | .cad .slb | 
 image | [DraftChoice Drawing](http://www.triusinc.com/forums/viewtopic.php?t=11) | .dch | [30 sample files](https://telparia.com/fileFormatSamples/image/draftChoice/)
 image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://telparia.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 image | Drawing Interchange Binary Format | .dxb | 
@@ -319,6 +321,7 @@ image | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/P
 image | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [2 sample files](https://telparia.com/fileFormatSamples/image/pixelPerfect/) - Can't reliably detect this format and recoil2png & view64 will convert almost any file you give it into garbage
 image | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://telparia.com/fileFormatSamples/image/pixie/)
 image | [PMDraw](http://fileformats.archiveteam.org/wiki/PmDraw) | .pmd | [6 sample files](https://telparia.com/fileFormatSamples/image/pmDraw/) - No known converter. OS/2 drawing program. I could emulate OS/2 and run actual PMDraw and export.
+image | Print Magic Graphic | .pmg | 
 image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://telparia.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 image | ProShape Drawing | .psp | [5 sample files](https://telparia.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 image | Quattro Pro Clip Art | .clp | 
@@ -342,7 +345,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (96)
+## Music (97)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -379,6 +382,7 @@ music | [Extended MOD](http://fileformats.archiveteam.org/wiki/Extended_MOD) | .
 music | FAC Soundtracker Module | .mus | 
 music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://telparia.com/fileFormatSamples/music/faceTheMusic/)
 music | FamiTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
+music | Finale Music Score | .mus | 
 music | Flash Tracker | .fls | [5 sample files](https://telparia.com/fileFormatSamples/music/flashTracker/)
 music | FMTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/fmTracker/)
 music | Fred Editor Soundtrack |  | [2 sample files](https://telparia.com/fileFormatSamples/music/fredEditorSoundTrack/)
@@ -444,7 +448,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (438)
+## Other (440)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -618,6 +622,7 @@ other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .
 other | Gettext Machine Object | .gmo | 
 other | GfxLab24 Convolution Matrix |  | 
 other | GfxLab24 Filter |  | 
+other | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://telparia.com/fileFormatSamples/other/glibcLocaleFile/)
 other | GoDot C64 Image Processing |  | 
 other | GW-BASIC Protected Source | .bas | 
 other | Half-Life 2 Save Game | .sav | 
@@ -716,6 +721,7 @@ other | MySQL Index | .myi |
 other | MySQL Table Definition | .frm | 
 other | NeoPaint Palette | .pal | 
 other | NeoPaint Printer Driver | .prd | 
+other | Nero Cover Designer | .bcd | 
 other | NetCDF | .nc | 
 other | Netscape Address Book | .nab | 
 other | NetShield Virus Pattern Library | .dat | 

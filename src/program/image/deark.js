@@ -4,6 +4,11 @@ import {encodeUtil, fileUtil, runUtil} from "xutil";
 import {path} from "std";
 import {quickConvertImages} from "../../dexUtil.js";
 
+const BAD_FILENAMES_TO_SKIP_CHAINING =
+[
+	"binddll.dll"	// Has 43 BMP files which are actually just static (https://github.com/jsummers/deark/issues/55) which super slows everything thing down, so just skip it
+];
+
 function restRenamer(rest, suffix, newName)
 {
 	// if we don't have a period in our rest, then if it's a common extension fall back on our newName
@@ -181,10 +186,8 @@ export class deark extends Program
 	chain = "?resource_dasm -> ?dexvert";
 	chainCheck = (r, chainFile, programid) =>
 	{
-		// very hacky, but this one file BINDDLL.DLL appears on almost every shareware CD and it has 43 BMP files embedded in it
-		// unfortunately each BMP file is just 'static' garbage, and according to deark this is just how they actually are in the file: https://github.com/jsummers/deark/issues/55
-		// and because we have a wide number of programs we try to convert BMP output, this one DLL file can take like 2 hours to process. So we just skip converting any BMP files from this DLL :)
-		if(["binddll.dll"].includes(r.originalInput?.base?.toLowerCase()))
+		// very hacky, but certain files are known to be troublesome for one reason or another, so just skip them
+		if(BAD_FILENAMES_TO_SKIP_CHAINING.includes(r.originalInput?.base?.toLowerCase()))
 			return false;
 
 		if(programid==="resource_dasm")

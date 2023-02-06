@@ -1,5 +1,10 @@
 import {Format} from "../../Format.js";
 
+const BAD_FILENAMES_TO_SKIP_ENTIRELY =
+[
+	"msimsg.dll"	// Produces 6,000+ sub files and often has multiple copies of itself
+];
+
 export class dll extends Format
 {
 	name         = "Microsoft Windows Dynmic Link Library";
@@ -9,7 +14,16 @@ export class dll extends Format
 	metaProvider = ["winedump"];
 
 	// We throw DLLs at deark and 7z which can often extract various embedded cursors, icons and images
-	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+	converters = dexState =>
+	{
+		if(BAD_FILENAMES_TO_SKIP_ENTIRELY.includes(dexState.original?.input?.base?.toLowerCase()))
+		{
+			dexState.processed = true;
+			return [];
+		}
+
+		return (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+	};
 	post  = dexState =>
 	{
 		if(Object.keys(dexState.meta).length>0)

@@ -4,7 +4,7 @@
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|347|473|1145|1260|1280|1488|1555|1556|1562|1575|1616)( |$)/,
+	/^fmt\/(111|134|208|347|473|1145|1260|1280|1381|1488|1555|1556|1562|1575|1616)( |$)/,
 	/^x-fmt\/(8|10|111|157|195|342)( |$)/,
 
 	// dexmagic: WEAK checks
@@ -128,6 +128,7 @@ export const WEAK_VALUES =
 	/jffs2 filesystem data/,
 	/^Java.*KeyStore$/,
 	/^Java serialization data/,
+	/^JPEG-XR$/,
 	/^JSON data$/,
 	/^JVT NAL sequence/,
 	/^Kickstart disk/,
@@ -441,6 +442,7 @@ export const WEAK_VALUES =
 	/^TTComp archive/,
 	/^Turbo Pascal Symbol Table$/,
 	/^tzip compressed file$/,
+	/^VariCAD Drawing \(generic\)$/,
 	/^VGAPaint 386 module$/,
 	/^Videoscape GEO mesh/,
 	/^VisiCalc spreadsheet$/,

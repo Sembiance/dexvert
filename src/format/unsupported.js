@@ -46,6 +46,7 @@ export default
 		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
 		interBaseDB            : {name : "InterBase/Firebird Database", ext : [".gdb", ".fdb"], magic : ["Firebird database"], notes : "In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh."},
 		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
+		microsoftOneNote       : {name : "Microsoft OneNote", ext : [".one"], magic : ["Microsoft OneNote", /^fmt\/673( |$)/]},
 		orCADSchematic         : {name : "OrCAD Schematic", ext : [".sch", ".sht"], magic : ["OrCAD SDT schematic"]},
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},

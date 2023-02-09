@@ -15,5 +15,6 @@ export class tga extends Format
 	converters = ["deark", "corelDRAW", "pv[matchType:magic]", "nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "gimp", "hiJaakExpress", "corelPhotoPaint", "canvas"];
 
 	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy, require more than 1 color
-	verify = ({meta}) => meta.colorCount>1;
+	// Color counts are calculated for images too large, so we exempt large TGAs from this check since those are encountered in the wild
+	verify = ({meta}) => meta.height>2000 || meta.width>2000 || meta.colorCount>1;
 }

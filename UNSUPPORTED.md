@@ -1,4 +1,4 @@
-# Unsupported File Formats (915)
+# Unsupported File Formats (917)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -108,9 +108,10 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (43)
+## Document (44)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+document | Adobe InDesign Document | .indd .ind | 
 document | Alan Interactive Fiction | .acd | 
 document | Amiga Vision Flow | .avf | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaVisionFlow/)
 document | AmigaWriter Documet |  | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
@@ -157,7 +158,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (32)
+## Executable (33)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -170,6 +171,7 @@ executable | BlackBerry Executable | .cod |
 executable | ELF Executable |  | 
 executable | FM-TownsOS App | .exp | [9 sample files](https://telparia.com/fileFormatSamples/executable/fmTownsOSApp/)
 executable | HP Palmtop Executable | .exm | [2 sample files](https://telparia.com/fileFormatSamples/executable/hpPalmtopExecutable/)
+executable | Linux 8086 Executable |  | 
 executable | Linux i386 Executable |  | 
 executable | Linux OMAGIC Executable |  | 
 executable | Linux ZMAGIC Exectutable |  | 

@@ -42,6 +42,7 @@ export default
 
 	document :
 	{
+		adobeInDesignDocument  : {name : "Adobe InDesign Document", ext : [".indd", ".ind"], magic : ["Adobe InDesign Document", "InDesign Document", /^fmt\/196( |$)/]},
 		dBASECompiledForm      : {name : "dBASE Compiled Form", ext : [".fro", ".fmo"], magic : ["dBASE compiled Form", "dBASE compiled Format"]},
 		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
 		interBaseDB            : {name : "InterBase/Firebird Database", ext : [".gdb", ".fdb"], magic : ["Firebird database"], notes : "In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh."},
@@ -66,6 +67,7 @@ export default
 		blackberryExecutable    : {name : "BlackBerry Executable", ext : [".cod"], magic : ["Blackberry Binary Executable"]},
 		com                     : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
 		elf                     : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
+		linux8086Exe            : {name : "Linux 8086 Executable", magic : [/^Linux.*8086.*executable/]},
 		linux386Exe             : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},
 		omagic                  : {name : "Linux OMAGIC Executable", magic : ["Linux i/386 OMAGIC executable", "Linux/i386 impure executable (OMAGIC)"]},
 		macOSXUniversalBinary   : {name : "Mac OS X Universal Binary", magic : ["Mach-O universal binary", "Mac OS X Universal Binary"]},

@@ -7,4 +7,5 @@ export class avsx extends Format
 	ext        = [".avs", ".mbfavs", ".x"];
 	mimeType   = "image/x-avsx";
 	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
+	verify     = ({meta}) => meta.height>1 && meta.width>1;
 }

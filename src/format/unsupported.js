@@ -175,6 +175,7 @@ export default
 		printMagicGraphic         : {name : "Print Magic Graphic", ext : [".pmg"], magic : ["Print Magic Graphic"]},
 		quattroProClipArt         : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
 		skyRoadsBitmap            : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},
+		someraGraphicFormat       : {name : "Somera Graphic Format", ext : [".sgf"], magic : ["Somera Graphic Format"]},
 		winFaxCoverPage           : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]}
 	},
 
@@ -211,6 +212,7 @@ export default
 		electricImage3DFile     : {name : "Electric Image 3D File", ext : [".fact"], magic : ["ElectricImage 3D file"]},
 		halfLifeModel           : {name : "Half Life Model", ext : [".mdl"], magic : ["Half-life Model"]},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
+		kaydaraFilmboxModel     : {name : "Kaydara Filmbox Model", ext : [".fbx"], magic : ["Kaydara FBX model", "Autodesk - Kaydara FBX 3D format", /^fmt\/1009( |$)/]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
 		mobile3DGraphic			: {name : "Mobile 3D Graphic", ext : [".m3g"], magic : ["Mobile 3D Graphics"], website : "http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html"},
 		ogreMesh                : {name : "OGRE Mesh", ext : [".mesh"], magic : ["OGRE Mesh", /^fmt\/1188( |$)/]},

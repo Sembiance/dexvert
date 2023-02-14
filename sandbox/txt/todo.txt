@@ -6,6 +6,13 @@
 /---------------\
 | High Priority |
 \---------------/
+* Add support music/fuxoftAYLanguage and music/ayAMAD
+  Ay_Emul can play both these, but it doesn't have CLI conversion supportso I could do either:
+  1. Add CLI conversion support (see email about building it from svbulba@gmail.com)
+  2. Patch ZXtune (which uses Ay_Emul) to support these formats
+  If I do ZXTune, submit patch here: https://bitbucket.org/zxtune/zxtune/issues/150/ay-amad-support
+  In EITHER CASE, make sure I'm using the latest versions of both the above before trying
+
 * See about installing Director 5 under WINDOWS 2000 and see if I can open Director 5 files: https://winworldpc.com/product/director/50
   https://discord.com/channels/350407629849493504/1033065501984817252/1041666797247664139
   	http://discmaster.textfiles.com/view/10348/MACPOWER-1998-08.ISO.7z/MACPOWER-1998-08.ISO/mac/Shareware%20Paradise/P_%20POCKET/P_%20POCKET(68k).sit/P_%20POCKET(68k)/Pickle'sPocket

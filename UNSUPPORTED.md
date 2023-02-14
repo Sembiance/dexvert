@@ -364,7 +364,7 @@ music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus |
 music | AProSys Module | .amx | [2 sample files](https://telparia.com/fileFormatSamples/music/aProSys/)
 music | Atari Digi-Mix Module | .mix | [3 sample files](https://telparia.com/fileFormatSamples/music/atariDigiMix/)
 music | AXS Module | .axs | [2 sample files](https://telparia.com/fileFormatSamples/music/axsModule/)
-music | AY Amadeus Chiptune | .amad | [7 sample files](https://telparia.com/fileFormatSamples/music/ayAMAD/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. zxtune123 doesn't seem to support them either. I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
+music | AY Amadeus Chiptune | .amad | [7 sample files](https://telparia.com/fileFormatSamples/music/ayAMAD/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself. zxtune123 doesn't seem to support them either. I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
 music | AY STRC Module | .strc | [1 sample file](https://telparia.com/fileFormatSamples/music/aySTRC/)
 music | Beepola Module | .bbsong | [3 sample files](https://telparia.com/fileFormatSamples/music/beepola/)
 music | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Tracker_module) | .pis | [5 sample files](https://telparia.com/fileFormatSamples/music/beniTracker/)
@@ -392,7 +392,7 @@ music | Finale Music Score | .mus |
 music | Flash Tracker | .fls | [5 sample files](https://telparia.com/fileFormatSamples/music/flashTracker/)
 music | FMTracker Module | .fmt | [4 sample files](https://telparia.com/fileFormatSamples/music/fmTracker/)
 music | Fred Editor Soundtrack |  | [2 sample files](https://telparia.com/fileFormatSamples/music/fredEditorSoundTrack/)
-music | Fuxoft AY Language | .fxm | [5 sample files](https://telparia.com/fileFormatSamples/music/fuxoftAYLanguage/)
+music | [Fuxoft AY Language](http://fileformats.archiveteam.org/wiki/Fuxoft_AY_Language) | .fxm | [8 sample files](https://telparia.com/fileFormatSamples/music/fuxoftAYLanguage/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself.
 music | [GMOD Module](http://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 music | GoatTracker Module | .sng | [6 sample files](https://telparia.com/fileFormatSamples/music/goatTracker/)
 music | Improvise Music Data | .imp | [5 sample files](https://telparia.com/fileFormatSamples/unsupported/improviseMusicData/)

@@ -92,6 +92,10 @@
 		https://archive.org/details/InfoMac5Disk1.img
 		https://archive.org/details/InfoMac5Disk2.img
 	No idea what format this is in: http://discmaster.textfiles.com/browse/16425		https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
+	These don't convert for some reason, they both appear to be Mac CDs
+		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
+		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
+
 
 * See if I can extract and of the compression I encountered in sandbox/unknownCompression (maybe try: https://www.sac.sk/files.php?d=7&l=)
   Any I add, will need to do a search of unknown files HTML to find that magic

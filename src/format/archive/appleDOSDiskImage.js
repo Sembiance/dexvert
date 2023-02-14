@@ -6,6 +6,6 @@ export class appleDOSDiskImage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Apple_Disk_Image";
 	ext            = [".dsk"];
 	forbidExtMatch = true;
-	magic          = [/^Apple DOS .*Image/, /^Apple ProDOS .*Image/, /^Apple II DOS .*disk image/];
+	magic          = [/^Apple DOS .*Image/, /^Apple ProDOS .*Image/, /^Apple II DOS .*disk image/, /^Apple II ProDOS .*disk image/];
 	converters     = ["acx"];
 }

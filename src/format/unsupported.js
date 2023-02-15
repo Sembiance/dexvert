@@ -86,9 +86,11 @@ export default
 		palmOSDynamicLibrary    : {name : "Palm OS Dynamic Library", ext : [".prc"], magic : ["Palm OS dynamic library"], weakMagic : true},
 		qDOSExe                 : {name : "QDOS Executable", magic : [/QDOS executable '[\w .,_-]+'/]},
 		riscOSExe               : {name : "RISC OS Executable", magic : ["RISC OS AIF executable"]},
+		sonyPlaystationExe      : {name : "Sony Playstation Executable", ext : [".exe"], magic : ["Sony Playstation Executable", "Sony Playstation executable"]},
 		sparcDemandExe          : {name : "SPARC Demand Paged Exe", magic : ["SPARC demand paged dynamically linked executable not stripped"]},
 		superbaseProgram        : {name : "Superbase Program", ext : [".sbp"], magic : ["Superbase Program"]},
 		tiCalcProgram           : {name : "Texas Instruments Calculator Program", ext : [".73p", ".82p", ".83p", ".85p", ".86p", ".89p", ".92p"], magic : [/^TI-.* Graphing Calculator \(program\)$/]},
+		xBoxExecutable          : {name : "Xbox Executable", ext : [".xbe"], magic : ["Microsoft Xbox executable", "XBOX executable"]},
 		xex                     : {name : "Atari Executable", ext : [".xex"], magic : ["Atari XE Executable"], weakMagic : true},
 		zmagicExe               : {name : "Linux ZMAGIC Exectutable", magic : ["Linux i/386 ZMAGIC executable", "Linux/i386 demand-paged executable (ZMAGIC)"]}
 	},
@@ -229,6 +231,7 @@ export default
 		strataStudioProVis      : {name : "Strata StudioPro Vis", magic : [/^fmt\/1204( |$)/]},
 		superScapeVR			: {name : "SuperScape Virtual Reality", ext : [".svr"], magic : [/^fmt\/734( |$)/]},
 		threeDDGFModel          : {name : "3D Dgf Model", ext : [".dgf", ".3dgfo"], magic : ["3D Dgf model"]},
+		threeDProfessionalScene : {name : "3-D Professional Scene", magic : ["3-D Professional scene"]},
 		threeDStudioLoftObject  : {name : "3D Studio Loft Object", ext : [".lft"], magic : ["3D Studio Loft Object"], weakMagic : true},
 		valveModelVertices      : {name : "Valve Studio Model Vertices", ext : [".vvd"], magic : ["Valve Studio Model Vertex Data"]},
 		virtusVRScene           : {name : "Virtus VR Scene", ext : [".vvr"], magic : ["Virtus VR scene"]}
@@ -433,6 +436,7 @@ export default
 		dreamcastDisc       : {name : "Dreamcast Disc", ext : [".bin"], magic : ["Sega Dreamcast disc image"]},
 		gameBoyROM          : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image"]},
 		gameBoyAdvanceROM   : {name : "Game Boy Advance ROM", ext : [".gba"], magic : ["Game Boy Advance ROM image"]},
+		gameGearROM         : {name : "Game Gear ROM", ext : [".gg"], magic : ["Sega Game Gear ROM image"]},
 		genesisROM          : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
 		nintendoROM         : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
 		n64ROM              : {name : "Nintendo 64 ROM", ext : [".v64"], magic : ["Nintendo 64 ROM", "Doctor V64 ROM dump"]},

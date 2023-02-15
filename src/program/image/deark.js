@@ -37,7 +37,8 @@ export class deark extends Program
 		start         : "Start processing with deark at a specific byte offset",
 		file2         : "An extra file that can be used by deark module to get the correct palette or image names"
 	};
-	bruteFlags = { archive : {}, executable : {}, document : {}, font : { charOutType : "image" }, video : {} };
+	bruteFlags   = { archive : {}, executable : {}, document : {}, font : { charOutType : "image" }, video : {} };
+	checkForDups = true;
 
 	bin    = "deark";
 	outExt = ".png";

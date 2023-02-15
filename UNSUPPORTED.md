@@ -1,4 +1,4 @@
-# Unsupported File Formats (921)
+# Unsupported File Formats (925)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -159,7 +159,7 @@ document | WinFax Document | .fxm .fxr |
 
 
 
-## Executable (33)
+## Executable (35)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 executable | a.out Executable | .o | 
@@ -192,9 +192,11 @@ executable | MSX Terminate and Stay Resident Executable | .tsr |
 executable | Palm OS Dynamic Library | .prc | 
 executable | QDOS Executable |  | 
 executable | RISC OS Executable |  | 
+executable | Sony Playstation Executable | .exe | 
 executable | SPARC Demand Paged Exe |  | 
 executable | Superbase Program | .sbp | 
 executable | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
+executable | Xbox Executable | .xbe | [2 sample files](https://telparia.com/fileFormatSamples/executable/xBoxExecutable/)
 
 
 
@@ -454,7 +456,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (440)
+## Other (441)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -622,6 +624,7 @@ other | Front Page Binary-Tree Index | .btr |
 other | Full Tilt Pinball Data | .dat | 
 other | Game Boy Advance ROM | .gba | 
 other | Game Boy ROM | .gb .gbc | 
+other | Game Gear ROM | .gg | 
 other | GammaCAD Document | .sym .gc1 | 
 other | Gee! Printer Driver | .pdr | 
 other | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
@@ -900,9 +903,10 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (49)
+## Poly (50)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
+poly | 3-D Professional Scene |  | 
 poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | 3D Studio Loft Object | .lft | 
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)

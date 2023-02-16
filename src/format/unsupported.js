@@ -198,6 +198,8 @@ export default
 		koustrackerModule       : {name : "Koustracker Module", ext : [".sok"], magic : ["Koustracker module"]},
 		rolandMIDIMusicRecorder : {name : "Roland MIDI Music Recorder Song", ext : [".sng"], magic : ["Roland Midi Music Recorder song"], weakMagic : true},
 		scrullMusicFile         : {name : "Scrull Music File", ext : [".smf"], magic : ["Scrull Music File"]},
+		sequencerOneSong        : {name : "Sequencer One Song", ext : [".one"], magic : ["Sequencer One song"], weakMagic : true},
+		sweetSixteenSong        : {name : "Sweet Sixteen Song", ext : [".sng"], magic : ["Sweet Sixteen Song"]},
 		technoSoundTurbo2Track  : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
 		wantonPacker            : {name : "Wanton Packer", ext : [".wn"], magic : ["Wanton Packer song/module"]},
 		yamahaESEQ              : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
@@ -215,6 +217,7 @@ export default
 		halfLifeModel           : {name : "Half Life Model", ext : [".mdl"], magic : ["Half-life Model"]},
 		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		kaydaraFilmboxModel     : {name : "Kaydara Filmbox Model", ext : [".fbx"], magic : ["Kaydara FBX model", "Autodesk - Kaydara FBX 3D format", /^fmt\/1009( |$)/]},
+		mayaScene               : {name : "Maya Scene", ext : [".mb"], magic : ["Maya Binary Scene", "Alias Maya Binary File", /^fmt\/861( |$)/]},
 		milkShape3DModel        : {name : "MilkShape 3D Model", ext : [".ms3d"], magic : ["MilkShape 3D model"]},
 		mobile3DGraphic			: {name : "Mobile 3D Graphic", ext : [".m3g"], magic : ["Mobile 3D Graphics"], website : "http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html"},
 		ogreMesh                : {name : "OGRE Mesh", ext : [".mesh"], magic : ["OGRE Mesh", /^fmt\/1188( |$)/]},

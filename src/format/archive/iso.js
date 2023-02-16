@@ -80,6 +80,7 @@ export class iso extends Format
 		delete dexState.meta?.fuseTree;
 
 		const cueFile = await findCUEFile(dexState);
+		let multiBinTracks = false;
 		if(cueFile)
 		{
 			// Check to see if we are have tracks split across multiple .bin files
@@ -99,6 +100,8 @@ export class iso extends Format
 						
 						dataTrackNames.push(file.name);
 					}
+
+					multiBinTracks = true;
 
 					if(dataTrackNames.length>1)
 						return [`cat[outputFilename:merged.iso][inputFilePaths:${base64Encode(JSON.stringify(dataTrackNames.map(dataTrackName => path.join(dexState.original.input.dir, dataTrackName))))}]`];
@@ -142,6 +145,10 @@ export class iso extends Format
 					"uniso[checkMount]"		// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 				];
 
+				// some multi-bin groups (sample/archive/iso/Oh!X 2001 Spring Special CD-ROM (Japan) (Track 1).bin) get messed up with bchunk, so if we have multiple bins, try fuseiso first
+				if(multiBinTracks)
+					r.push("fuseiso");
+
 				// If we haven't't found any nextstep/hfsplus/hfs, then safe to try additional converters that may also handle those formats
 				// If it's a BIN/CUE, run bchunk
 				// This will include 'generated' cue files from .toc entries, thanks to the meta call below running first and it running toc2cue as needed
@@ -149,10 +156,8 @@ export class iso extends Format
 				if(!subState.f.files?.output?.length && cueFile)
 					r.push(`bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`);
 
-				r.push(
-					"uniso[block:512][checkMount]",	// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
-					"fuseiso"
-				);
+				r.push("uniso[block:512][checkMount]");		// Some isos have a 512 byte block size: McGraw-Hill Concise Encyclopedia of Science and Technology (852251-X)(1987).iso
+				r.pushUnique("fuseiso");
 
 				if(!subState.f.files?.output?.length)
 				{

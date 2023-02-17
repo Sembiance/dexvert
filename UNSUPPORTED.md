@@ -1,4 +1,4 @@
-# Unsupported File Formats (928)
+# Unsupported File Formats (930)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -353,7 +353,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (99)
+## Music (101)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -371,6 +371,7 @@ music | AY STRC Module | .strc | [1 sample file](https://telparia.com/fileFormat
 music | Beepola Module | .bbsong | [3 sample files](https://telparia.com/fileFormatSamples/music/beepola/)
 music | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Tracker_module) | .pis | [5 sample files](https://telparia.com/fileFormatSamples/music/beniTracker/)
 music | BeRoTracker Module | .brt | [2 sample files](https://telparia.com/fileFormatSamples/music/beRoTracker/) - A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS and install in QEMU: https://soft.lafibre.info/
+music | Cheese Cutter Song | .ct | [3 sample files](https://telparia.com/fileFormatSamples/music/cheeseCutterSong/) - Player here https://github.com/theyamo/CheeseCutter requires D compiler gdc to build (https://wiki.gentoo.org/wiki/Dlang) but player doesn't seem to convert CLI conversion anyways
 music | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://telparia.com/fileFormatSamples/music/cba/)
 music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://telparia.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 music | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
@@ -408,6 +409,7 @@ music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Ma
 music | Master Tracks Pro | .mts | [1 sample file](https://telparia.com/fileFormatSamples/music/masterTracksPro/)
 music | MaxTrax Module | .mxtx | [8 sample files](https://telparia.com/fileFormatSamples/music/maxTrax/)
 music | Melody Maker Sing | .mm | 
+music | MSX Moon Blaster Music | .mbm | [6 sample files](https://telparia.com/fileFormatSamples/music/msxMBM/) - Conversion works great, but kss2wav will take almost any .mbm file and convert it to garbage. No magic I can find and no current way to check output audio, so since the format is so rare, sadly need to mark it unsupported.
 music | MSX Protracker Module | .pro | 
 music | [Music Studio Song](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .sng | [10 sample files](https://telparia.com/fileFormatSamples/music/musicStudioSong/) - In theory the Atari program 'MIDI Music Maker' can convert .sng files to .midi
 music | [Music-X Performance](http://www.retrocastaway.com/retro-computing/music-x-making-music-on-the-amiga-in-the-80s/) | .mx .perf | [6 sample files](https://telparia.com/fileFormatSamples/music/musicXPerformance/)

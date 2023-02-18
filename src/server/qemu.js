@@ -408,13 +408,13 @@ export class qemu extends Server
 		for(const osid of Object.keys(OS))
 			await Deno.mkdir(path.join(QEMU_INSTANCE_DIR_PATH, osid), {recursive : true});
 
-		this.xlog.info`Ensuring img files are up to date...`;
+		this.xlog.info`Creating img backing files...`;
 		for(const [osid, osInfo] of Object.entries(OS))
 		{
 			for(const imgFilePath of ["hd.img", ...(osInfo.extraImgs || [])].map(imgFilename => path.join(QEMU_DIR_PATH, osid, imgFilename)))
 			{
 				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
-				this.xlog.info`Rsyncing to: ${imgDestFilePath}`;
+				this.xlog.info`Creating backing file: ${imgDestFilePath}`;
 				await runUtil.run("rsync", ["-sa", imgFilePath, imgDestFilePath]);
 			}
 		}

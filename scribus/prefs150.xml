@@ -260,7 +260,7 @@
 			</table>
 		</context>
 		<context name="svgex">
-			<attribute key="wdir" value="/home/sembiance/tmp"/>
+			<attribute key="wdir" value="/mnt/ram/tmp"/>
 		</context>
 	</level>
 </preferences>

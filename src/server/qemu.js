@@ -187,7 +187,7 @@ export class qemu extends Server
 		const imgFilePaths = ["hd.img", ...(OS[osid].extraImgs || [])].map(imgFilename => path.join(QEMU_INSTANCE_DIR_PATH, osid, imgFilename));
 		await imgFilePaths.parallelMap(imgFilePath => Deno.copyFile(imgFilePath, path.join(instance.dirPath, path.basename(imgFilePath))));
 
-		const qemuArgs = ["-drive", `format=raw,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
+		const qemuArgs = ["-drive", `format=qcow2,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
 		if(!instance.debug)
 			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort},share=force-shared`);
 		qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
@@ -205,7 +205,7 @@ export class qemu extends Server
 
 		qemuArgs.push("-device", `${OS[osid].net || "rtl8139"},netdev=nd1`);
 
-		(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=raw,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
+		(OS[osid].extraImgs || []).forEach(extraImg => qemuArgs.push("-drive", `format=qcow2,file=${extraImg}${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`));
 
 		qemuArgs.push(...OS[osid].extraArgs || []);
 
@@ -415,7 +415,7 @@ export class qemu extends Server
 			{
 				const imgDestFilePath = path.join(QEMU_INSTANCE_DIR_PATH, osid, path.basename(imgFilePath));
 				this.xlog.info`Creating backing file: ${imgDestFilePath}`;
-				await runUtil.run("rsync", ["-sa", imgFilePath, imgDestFilePath]);
+				await runUtil.run("qemu-img", ["create", "-f", "qcow2", "-b", imgFilePath, "-F", "raw", imgDestFilePath]);
 			}
 		}
 

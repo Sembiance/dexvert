@@ -16,4 +16,4 @@ echo "hd.img are not normally synchronized to "$1" due to the huge size of it."
 echo "This script will sync it up to the host, run manually after you finish making updates to it."
 
 echo -e "\nSynching hd.img..."
-rsync -av --progress /mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img sembiance@"$1":/mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img
+rsync -av --progress /mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img "$1":/mnt/compendium/DevLab/dexvert/qemu/gentoo/hd.img

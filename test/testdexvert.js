@@ -254,15 +254,17 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
 ];
 
-// Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format
+// Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match
 const UNPROCESSED_ALLOW_NO_IDS =
 [
+	"archive/drRiptideArchive",
 	"archive/irixIDBArchive",
+	"archive/lostVikingsDAT",
 	"archive/rar",
 	"image/bbcDisplayRAM",
 	"image/teletext",
 	"music/richardJoseph",
-	"other/iBrowseCookies",		// Must match filename 'Cookies' but can't have more than 1 with that extension
+	"other/iBrowseCookies",
 	"unsupported/binPatch"
 ];
 
@@ -276,7 +278,7 @@ const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};
-const DATA_FILE_PATH = "/mnt/dexvert/testExpected.json";
+const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "testExpected.json");
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
 const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
 const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.format] : []));

@@ -6,6 +6,6 @@ export class sketchUp extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/SKP";
 	ext            = [".skp"];
 	forbidExtMatch = true;	// Maybe remove this once I convert this format as an actual 3D model
-	magic          = ["SketchUp Model", "SketchUp model", /^fmt\/(1265|1266)( |$)/];
+	magic          = ["SketchUp Model", "SketchUp model", "Google SketchUp Model", /^fmt\/(1265|1266)( |$)/];
 	converters     = ["nconvert"];
 }

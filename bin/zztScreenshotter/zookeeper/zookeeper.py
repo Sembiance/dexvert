@@ -13,14 +13,9 @@ from .element import Element
 from .stat import Stat
 from .flag import Flag
 
-try:
-    from PIL import Image
-    from PIL import ImageColor
-    from PIL import ImageOps
-    constants.IMAGE_SUPPORT = True
-except ImportError:
-    constants.IMAGE_SUPPORT = False
-
+from PIL import Image
+from PIL import ImageColor
+from PIL import ImageOps
 
 class Zookeeper(object):
     def __init__(self, file=None):
@@ -30,12 +25,11 @@ class Zookeeper(object):
         self.world = World()
         self.boards = []
 
-        if constants.IMAGE_SUPPORT:
-            # Palette settings
-            self.load_palette()
+		# Palette settings
+        self.load_palette()
 
-            # Charset settings
-            self.load_charset()
+		# Charset settings
+        self.load_charset()
 
         if file:
             self.load_file(file)
@@ -54,10 +48,7 @@ class Zookeeper(object):
 
     def has_pil(f, *args):
         def has_pil_decorator(self, *args, **kwargs):
-            if constants.IMAGE_SUPPORT:
-                return f(self, *args, **kwargs)
-            else:
-                raise exceptions.PILNotLoadedError
+            return f(self, *args, **kwargs)
         return has_pil_decorator
     """ End Decorators """
 

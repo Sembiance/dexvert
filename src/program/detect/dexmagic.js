@@ -98,6 +98,9 @@ const DEXMAGIC_CHECKS =
 	"VCD Info File"                    : [{offset : 0, match : "VIDEO_CD"}],
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],
 
+	// poly
+	"Google SketchUp Model"            : [{offset : 1, match : "SketchUp Model"}],
+
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],

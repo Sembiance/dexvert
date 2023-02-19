@@ -30,9 +30,21 @@ const OS =
 	amigappc : { qty :  osQty(3), ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
 	gentoo   : { qty :  osQty(4), ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
+
+// reduce instance quantity to fit in available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
 while((Object.values(OS).map(({qty, ram}) => qty*(+ram.at(0))).sum()*xu.GB)>(totalSystemRAM/2))
 	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-1); });
+
+// reduce instance core count and quantity to run with 90% of available cores
+const totalCoreCount = await sysUtil.coreCount();
+while(Object.values(OS).map(({qty, cores}) => qty*cores).sum()>(totalCoreCount*0.9))
+{
+	if(Object.values(OS).some(({cores}) => cores>1))
+		Object.values(OS).forEach(o => { o.cores = Math.max(1, o.cores-1); });
+	else
+		Object.values(OS).forEach(o => { o.qty = Math.max(1, o.qty-1); });
+}
 
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });

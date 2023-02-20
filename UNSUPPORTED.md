@@ -1,4 +1,4 @@
-# Unsupported File Formats (930)
+# Unsupported File Formats (931)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -907,18 +907,19 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (51)
+## Poly (52)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3-D Professional Scene |  | 
 poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | 3D Studio Loft Object | .lft | 
 poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://telparia.com/fileFormatSamples/poly/studioMesh3D/)
+poly | Amapi 3D Model | .a3d .x | 
 poly | AutoShade Rendering Slide | .rnd | 
 poly | Blender 3D | .blend | 
 poly | [Blitz3D Object](http://fileformats.archiveteam.org/wiki/Blitz3D_Model) | .b3d | 
 poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://telparia.com/fileFormatSamples/poly/trueSpace3D/)
-poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [9 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
+poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [12 sample files](https://telparia.com/fileFormatSamples/poly/cinema4D/)
 poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://telparia.com/fileFormatSamples/poly/cyberStudioCAD3D/)
 poly | Direct3D Object | .x | [1 sample file](https://telparia.com/fileFormatSamples/poly/direct3DObject/)

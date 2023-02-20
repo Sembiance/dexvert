@@ -33,7 +33,7 @@ if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 
 xlog.info`Cleaning up previous dexvert RAM installation...`;
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
-await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
+await runUtil.run("/mnt/compendium/DevLab/dexvert/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 

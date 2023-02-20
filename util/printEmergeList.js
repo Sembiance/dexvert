@@ -9,3 +9,6 @@ console.log("emerge -1 glibc");	// to pick up on patch
 console.log("emerge --noreplace -p cifs-utils convmv dosbox mplayer vncsnapshot libpuzzle");
 console.log(`emerge --noreplace -p ${Object.values(programs).flatMap(program => Array.force(program.package)).unique().sortMulti().join(" ").innerTrim()}`);
 console.log("emerge mono libsndfile");
+console.log(`depmod -a`);
+console.log(`modinfo vhba`);
+console.log(`modprobe vhba`);

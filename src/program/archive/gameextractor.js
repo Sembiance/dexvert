@@ -3,9 +3,10 @@ import {Program} from "../../Program.js";
 
 export class gameextractor extends Program
 {
-	website = "http://www.watto.org/game_extractor.html";
-	package = "games-util/gameextractor";
-	bin     = "gameextractor";
+	website      = "http://www.watto.org/game_extractor.html";
+	package      = "games-util/gameextractor";
+	bin          = "gameextractor";
+	checkForDups = true;
 
 	// gameextractor requires full absolute paths
 	args = r => ["-extract", "-input", r.inFile({absolute : true}), "-output", r.outDir({absolute : true})];

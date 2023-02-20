@@ -25,26 +25,21 @@ const OS_DEFAULT =
 const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
 const OS =
 {
-	win2k    : { qty : osQty(14), ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
-	winxp    : { qty : osQty(14), ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores, will break programs that took a hardware id snapshot on install
-	amigappc : { qty :  osQty(3), ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
-	gentoo   : { qty :  osQty(4), ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
+	win2k    : { qty : osQty(12), qtyReduction : 2, ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
+	winxp    : { qty : osQty(14), qtyReduction : 2, ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores! breaks programs that took a hardware id snapshot on install
+	amigappc : { qty :  osQty(3), qtyReduction : 1, ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
+	gentoo   : { qty :  osQty(4), qtyReduction : 1, ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
 
-// reduce instance quantity to fit in available RAM
+// reduce instance quantity to fit in 70% of available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
-while((Object.values(OS).map(({qty, ram}) => qty*(+ram.at(0))).sum()*xu.GB)>(totalSystemRAM/2))
-	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-1); });
+while((Object.values(OS).map(({qty, ram}) => qty*(+ram.at(0))).sum()*xu.GB)>(totalSystemRAM*0.8))
+	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-o.qtyReduction); });
 
-// reduce instance core count and quantity to run with 90% of available cores
+// reduce instance quantity to run with max of 300% of available cores
 const totalCoreCount = await sysUtil.coreCount();
-while(Object.values(OS).map(({qty, cores}) => qty*cores).sum()>(totalCoreCount*0.9))
-{
-	if(Object.values(OS).some(({cores}) => cores>1))
-		Object.values(OS).forEach(o => { o.cores = Math.max(1, o.cores-1); });
-	else
-		Object.values(OS).forEach(o => { o.qty = Math.max(1, o.qty-1); });
-}
+while(Object.values(OS).map(({qty, cores}) => qty*cores).sum()>(totalCoreCount*3))
+	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-o.qtyReduction); });
 
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];
 Object.keys(OS).sortMulti([v => SUBNET_ORDER.indexOf(v)]).forEach(v => { OS[v].subnet = BASE_SUBNET + SUBNET_ORDER.indexOf(v); });
@@ -432,7 +427,16 @@ export class qemu extends Server
 		}
 
 		this.xlog.info`Starting instances...`;
-		await Object.keys(OS).parallelMap(async osid => await [].pushSequence(0, OS[osid].qty-1).parallelMap(instanceid => this.startOS(osid, instanceid)), Object.keys(OS).length);
+		for(const osid of Object.keys(OS))
+		{
+			const atOnce = Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores));
+			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances in batches of ${atOnce}...`;
+			await [].pushSequence(0, OS[osid].qty-1).parallelMap(async instanceid =>
+			{
+				await this.startOS(osid, instanceid);
+				await xu.waitUntil(() => INSTANCES[osid][instanceid].ready);
+			}, atOnce);
+		}
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

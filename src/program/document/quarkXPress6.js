@@ -15,7 +15,7 @@ export class quarkXPress6 extends Program
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "uses fonts not installed", "{TAB}{ENTER}")
 				WindowFailure("[TITLE:QuarkXPress (tm)]", "This file is not a valid Quark", -1, "{ESCAPE}")
 			EndFunc
-			CallUntil("PreOpenWindows", ${xu.SECOND*4})
+			CallUntil("PreOpenWindows", ${xu.SECOND*5})
 
 			SendSlow("!fed")
 
@@ -26,7 +26,7 @@ export class quarkXPress6 extends Program
 			Func PostExportWindows()
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some disk files for", "{ENTER}")
 			EndFunc
-			CallUntil("PostExportWindows", ${xu.SECOND*3})
+			CallUntil("PostExportWindows", ${xu.SECOND*5})
 
 			WinWaitActive($mainWindow, "", 3)
 			

@@ -280,7 +280,7 @@ const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};
 const DATA_FILE_PATH = path.join(xu.dirname(import.meta), "testExpected.json");
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "sample", ...(argv.format ? [argv.format] : []));
-const SAMPLE_DIR_ROOT_PATH = "/mnt/ram/dexvert/sample";
+const SAMPLE_DIR_ROOT_PATH = "/mnt/dexvert/sample";
 const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.format] : []));
 const outputFiles = [];
 
@@ -292,7 +292,7 @@ if(!argv.skipBuild)
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
 xlog.info`Root testing dir: ${fg.deepSkyblue(getWebLink(DEXTEST_ROOT_DIR))}`;
-xlog.info`Rsyncing sample files to RAM...`;
+xlog.info`Rsyncing sample files to scratch area...`;
 await runUtil.run("rsync", ["--delete", "-savL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
 xlog.info`Loading test data and finding sample files...`;

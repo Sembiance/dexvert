@@ -20,6 +20,7 @@
   	http://discmaster.textfiles.com/view/9351/MACPEOPLE-1997-04-15.ISO.7z/MACPEOPLE-1997-04-15.ISO/%E4%BD%93%E9%A8%93%E7%89%88%E3%82%BD%E3%83%95%E3%83%88/The%20Tower%20DEMO%E2%86%B5%E2%86%B5/The%20Tower%20DEMO/The%20Tower%20DEMO
   Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
   Afterwards, reprocess #10348 and potentially other Mac CDs
+  This might help processing Director 5 files, maybe it can make them editable in new director: https://github.com/ProjectorRays/ProjectorRays
 
 * Consider adding 'Detect-It-Easy' as an identifier: https://github.com/horsicq/Detect-It-Easy
 
@@ -68,6 +69,9 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* BitRock installers could in theory, maybe, be extracted: http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
+  Using: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+
 * Creating a Vista SP2 64bit QEMU image would allow running DotNet programs: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
   This ability would allow conversion/extraction of several additional formats:
 	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid

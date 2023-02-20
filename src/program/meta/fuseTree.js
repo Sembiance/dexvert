@@ -1,13 +1,15 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
 
 export class fuseTree extends Program
 {
-	website = "https://sourceforge.net/projects/fuseiso";
-	package = "sys-fs/fuseiso";
-	bin     = "fuseiso";
-	args    = async r =>
+	website    = "https://sourceforge.net/projects/fuseiso";
+	package    = "sys-fs/fuseiso";
+	bin        = "fuseiso";
+	runOptions = ({timeout : xu.SECOND*30});
+	args       = async r =>
 	{
 		r.fuseISOMountDirPath = await fileUtil.genTempPath(r.f.root, "_fuseiso");
 		await Deno.mkdir(r.fuseISOMountDirPath);
@@ -15,13 +17,13 @@ export class fuseTree extends Program
 	};
 	postExec = async r =>
 	{
-		const {stderr} = await runUtil.run("ls", ["-R", r.fuseISOMountDirPath]);
-		if(!stderr.toLowerCase().includes("input/output error"))
-			return;
-		
-		await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
-		await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
-		delete r.fuseISOMountDirPath;
+		const {stderr} = await runUtil.run("ls", ["-R", r.fuseISOMountDirPath], {timeout : xu.SECOND*10});
+		if(stderr?.length)
+		{
+			await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
+			await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
+			delete r.fuseISOMountDirPath;
+		}
 	};
 	post = async r =>
 	{

@@ -49,7 +49,7 @@ async function extractNormalISO()
 
 	if(argv.checkMount)
 	{
-		const {stderr} = await runUtil.run("ls", ["-R", MOUNT_DIR_PATH]);
+		const {stderr} = await runUtil.run("ls", ["-R", MOUNT_DIR_PATH], {timeout : xu.SECOND*20});
 		if(stderr.toLowerCase().includes("input/output error"))
 		{
 			await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);

@@ -427,7 +427,8 @@ export class qemu extends Server
 		}
 
 		this.xlog.info`Starting instances...`;
-		for(const osid of Object.keys(OS))
+		const allAtOnce = Object.values(OS).map(({qty, cores}) => qty*cores).sum()<totalCoreCount;
+		await Object.keys(OS).parallelMap(async osid =>
 		{
 			const atOnce = Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores));
 			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances in batches of ${atOnce}...`;
@@ -436,7 +437,7 @@ export class qemu extends Server
 				await this.startOS(osid, instanceid);
 				await xu.waitUntil(() => INSTANCES[osid][instanceid].ready);
 			}, atOnce);
-		}
+		}, allAtOnce ? Object.keys(OS).length : 1);
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

@@ -13,7 +13,7 @@ rm -rf ./*
 cd /tmp || exit
 rm -f .X*lock
 fd magick -x rm {} \;
-rm -rf cxf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
+rm -rf cxf* scribus* pictto* tmp* temp* clr-debug* dotnet* qtsingle* peazip* calibre* server*.xkm ./*openraster __autograph* __pycache__ ./*.ps uud* gs_* apache-tika-server-forked-tmp*
 
 umount --quiet .mount_ink* 2> /dev/null
 rm -rf .mount_ink*

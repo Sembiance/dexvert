@@ -4,7 +4,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 scratch=400
 ram=$(awk '/MemTotal/{print int($2*0.7/1024)}' /proc/meminfo)
-scratchDir="/tmp"
+tmpDir="/tmp"
 cores=$(( $(nproc) * 90 / 100 ))
 admin=0
 
@@ -15,10 +15,14 @@ show_usage() {
   echo "Usage: $0 [--scratch=<size>] [--ram=<size>] [--scratchDir=<dir>] [--cores=<num>] [--help]"
   echo "  --scratch=<size>     Set the size of the scratch disk in gigabytes (default: 400GB)."
   echo "  --ram=<size>         Set the size of RAM in megabytes (default: 70% of total system RAM)."
-  echo "  --scratchDir=<dir>   Set the scratch directory (default: /tmp)."
+  echo "  --tmpDir=<dir>       Set the tmp directory to use (default: /tmp)."
   echo "  --cores=<num>        Set the number of cores to use (default: 90% of total number of CPUs/cores)."
   echo "  --admin              Run qemu-system-x86_64 interactively in the foreground against the actual HD"
   echo "  --help               Display this help message."
+}
+
+function generate_random_string() {
+	tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 10 | head -n 1
 }
 
 for arg in "$@"; do
@@ -43,8 +47,8 @@ for arg in "$@"; do
       fi
       shift
       ;;
-    --scratchDir=*)
-      scratchDir="${arg#*=}"
+    --tmpDir=*)
+      tmpDir="${arg#*=}"
       shift
       ;;
     --cores=*)
@@ -66,6 +70,9 @@ for arg in "$@"; do
   esac
 done
 
+scratchDir="$tmpDir/$(generate_random_string)"
+mkdir -p "$scratchDir"
+
 echo "Creating scratch.qcow2 file in $scratchDir with size ${scratch}G..."
 scratchFilePath="$scratchDir/scratch.qcow2"
 rm -f "$scratchFilePath"
@@ -75,7 +82,8 @@ hdFilePath="$SCRIPT_DIR/hd.qcow2"
 
 echo "Launching qemu-system-x86_64 with RAM size $ram MB, using $cores cores, and scratch directory $scratchDir..."
 if [ "$admin" -eq 1 ]; then
-	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -display curses 
+	echo "Launching in ADMIN mode..."
+	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -drive format=qcow2,file="$SCRIPT_DIR/admin.qcow2",if=virtio -display curses 
 else
 	echo "Creating backing file of hd.qcow2..."
 	hdBackingFilePath="$scratchDir/hd_backing.qcow2"
@@ -84,7 +92,7 @@ else
 
 	pidFilePath="$scratchDir/qemu.pid"
 	rm -f "$pidFilePath"
-	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdBackingFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -display none -daemonize -pidfile "$pidFilePath"
+	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdBackingFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -daemonize -pidfile "$pidFilePath" -display none
 
 	echo "QEMU starting..."
 	while [ ! -f "$pidFilePath" ]; do
@@ -118,5 +126,5 @@ else
 fi
 
 echo "Cleaning up..."
-rm -f "$scratchFilePath" "$hdBackingFilePath"
+rm -rf "$scratchDir"
 echo "All done!"

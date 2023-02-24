@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# So this script essentially is in charge of starting up a QEMU instance that all dexvert operations take place within
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 scratch=400
@@ -9,7 +11,8 @@ cores=$(( $(nproc) * 90 / 100 ))
 admin=0
 
 # TODO: Add support for changing IP address assigned to VM
-# TODO: Add support for changing cpu it emulates as for some systems 'host' might not work (for example tensor requires avx)
+# TODO: Add support for changing cpu type, as for some systems the default 'host' might not work (for example tensor requires avx)
+# TODO: Add support for a publicHost and publicPort option that will tunnel from public to the VM's ip for remote ssh access
 
 show_usage() {
   echo "Usage: $0 [--scratch=<size>] [--ram=<size>] [--scratchDir=<dir>] [--cores=<num>] [--help]"
@@ -17,7 +20,7 @@ show_usage() {
   echo "  --ram=<size>         Set the size of RAM in megabytes (default: 70% of total system RAM)."
   echo "  --tmpDir=<dir>       Set the tmp directory to use (default: /tmp)."
   echo "  --cores=<num>        Set the number of cores to use (default: 90% of total number of CPUs/cores)."
-  echo "  --admin              Run qemu-system-x86_64 interactively in the foreground against the actual HD"
+  echo "  --admin              Run qemu-system-x86_64 interactively in the foreground against the actual HD image"
   echo "  --help               Display this help message."
 }
 
@@ -83,7 +86,7 @@ hdFilePath="$SCRIPT_DIR/hd.qcow2"
 echo "Launching qemu-system-x86_64 with RAM size $ram MB, using $cores cores, and scratch directory $scratchDir..."
 if [ "$admin" -eq 1 ]; then
 	echo "Launching in ADMIN mode..."
-	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -drive format=qcow2,file="$SCRIPT_DIR/admin.qcow2",if=virtio -display curses 
+	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -drive format=qcow2,file="$SCRIPT_DIR/admin.qcow2",if=virtio -display curses
 else
 	echo "Creating backing file of hd.qcow2..."
 	hdBackingFilePath="$scratchDir/hd_backing.qcow2"

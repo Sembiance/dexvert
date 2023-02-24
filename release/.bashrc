@@ -5,6 +5,8 @@ fi
 
 source /mnt/compendium/sys/.bashrc-common
 
+export PATH="/home/dexvert/bin:$PATH"
+
 if [ $(tty) = "/dev/tty1" ]; then
 	echo "Preparing RAM disk..."
 	ramDiskSize=$(awk '/MemTotal/{print int($2*0.8/1024)}' /proc/meminfo)
@@ -32,6 +34,9 @@ if [ $(tty) = "/dev/tty1" ]; then
 	sudo /etc/init.d/systemd-tmpfiles-setup start
 
 	touch /mnt/ram/tmp/qemuBooted
+
+	echo "Waiting 10 seconds before starting dexserver..."
+	sleep 10
 
 	echo "Starting dexserver..."
 	dexserver

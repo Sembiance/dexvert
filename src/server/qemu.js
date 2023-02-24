@@ -26,9 +26,9 @@ const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsu
 const OS =
 {
 	win2k    : { qty : osQty(12), qtyReduction : 2, ram : "1G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"], extraImgs : ["pagefile.img"] },
-	winxp    : { qty : osQty(14), qtyReduction : 2, ram : "3G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 8, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't reduce cores! breaks programs that took a hardware id snapshot on install
+	winxp    : { qty : osQty(14), qtyReduction : 2, ram : "2G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't change cores! breaks programs that took a hardware id snapshot on install (Total CAD Converter X)
 	amigappc : { qty :  osQty(3), qtyReduction : 1, ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
-	gentoo   : { qty :  osQty(4), qtyReduction : 1, ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 4, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
+	gentoo   : { qty :  osQty(4), qtyReduction : 1, ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 2, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
 
 // reduce instance quantity to fit in 70% of available RAM
@@ -36,9 +36,9 @@ const totalSystemRAM = (await sysUtil.memInfo()).total;
 while((Object.values(OS).map(({qty, ram}) => qty*(+ram.at(0))).sum()*xu.GB)>(totalSystemRAM*0.8))
 	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-o.qtyReduction); });
 
-// reduce instance quantity to run with max of 300% of available cores
+// reduce instance quantity to run with a max of 90% of available cores
 const totalCoreCount = await sysUtil.coreCount();
-while(Object.values(OS).map(({qty, cores}) => qty*cores).sum()>(totalCoreCount*3))
+while(Object.values(OS).map(({qty, cores}) => qty*cores).sum()>(totalCoreCount*0.9))
 	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-o.qtyReduction); });
 
 const SUBNET_ORDER = ["win2k", "winxp", "amigappc", "gentoo"];

@@ -15,8 +15,8 @@ export default async function buildPrograms(xlog)
 
 	for(const programFilePath of programFilePaths)
 	{
-		const progamModule = await import(programFilePath);
-		const programid = Object.keys(progamModule)[0];
+		const programModule = await import(programFilePath);
+		const programid = Object.keys(programModule)[0];
 
 		// class name must match filename
 		assertStrictEquals(programid, path.basename(programFilePath, ".js"), `program file [${programFilePath}] does not have a matching class name [${programid}]`);
@@ -28,12 +28,12 @@ export default async function buildPrograms(xlog)
 		// create the class and validate it
 		try
 		{
-			programs[programid] = progamModule[programid].create();
+			programs[programid] = programModule[programid].create();
 		}
 		catch(err)
 		{
 			xlog.error`Error creating program [${programid}] at [${programFilePath}]`;
-			console.log(err, progamModule[programid]);
+			console.log(err, programModule[programid]);
 		}
 		if(!(programs[programid] instanceof Program))
 			throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);

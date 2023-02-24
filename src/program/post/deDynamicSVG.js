@@ -27,10 +27,9 @@ export class deDynamicSVG extends Program
 		if(r.flags.autoCrop)
 			await runUtil.run("inkscape", ["-g", "--batch-process", "--verb", "FitCanvasToDrawing;FileSave;FileClose", outFilePath], {virtualX : true, ...RUN_OPTIONS});
 
-		// This will take care of deleting any 'empty' elements that totalCADConverter often does
-		// Don't optimize huge SVG files (like image/svg/grandcan.svg) because it will just run almost forever
+		// This will take care of deleting any 'empty' elements
 		const {size} = await Deno.lstat(outFilePath);
-		if(size<xu.MB*3)
+		if(size<xu.MB*3)	// Don't optimize huge SVG files (like image/svg/grandcan.svg) because it will just run almost forever
 			await runUtil.run(Program.binPath("svgo/node_modules/.bin/svgo"), ["--multipass", "--final-newline", outFilePath], RUN_OPTIONS);
 	};
 	renameOut = true;

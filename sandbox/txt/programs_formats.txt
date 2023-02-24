@@ -9268,9 +9268,6 @@ TXTU - Unformatted Text
 WPF6 - WordPerfect 6 or higher, including Corel WordPerfect
 
 
->>> Total CAD ConverterX (Windows XP v???) - VECTOR FORMATS IMAGE (https://www.coolutils.com/TotalCADConverterX)
-dxf, dwg, dwf, plt, hg, hgl, hpg, plo, hp, hpl, hpgl, hp1, hp2, hpgl2, gl2, spl, prn, svg, cgm
-
 
 >>> UniExtract/Universal Extractor (Windows 2000 v161) (https://www.legroom.net/software/uniextract)
 Archive Type	Common File Extension(s)

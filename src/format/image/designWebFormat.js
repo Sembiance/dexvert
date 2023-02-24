@@ -6,5 +6,5 @@ export class designWebFormat extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DWF";
 	ext        = [".dwf", ".dwfx"];
 	magic      = ["Autodesk Design Web Format", /^x-fmt\/49( |$)/];
-	converters = ["totalCADConverterX[outType:pdf] -> pdf2svg", "dwg2bmp", "canvas[matchType:magic][nonRaster]"];
+	converters = ["viewCompanion", "dwg2bmp", "canvas[matchType:magic][nonRaster]"];
 }

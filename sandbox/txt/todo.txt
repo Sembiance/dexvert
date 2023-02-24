@@ -99,6 +99,10 @@
 	These don't convert for some reason, they both appear to be Mac CDs
 		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
 		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
+	Raw mac partition dumps:
+		https://archive.org/details/apple-r-p-lib-internal-v-1.0
+		https://archive.org/details/apple-r-p-lib-internal-v-2.0
+		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 
 
 * See if I can extract and of the compression I encountered in sandbox/unknownCompression (maybe try: https://www.sac.sk/files.php?d=7&l=)

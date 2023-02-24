@@ -11,5 +11,5 @@ export class cgm extends Format
 
 	// soffice SVG output includes crappy <script> code that only allows the SVG to render when viewed as a webpage (not even an <img> tag works)
 	// Thus why it's dead last. It also CUTS OFF visually CGM files (like corvette.cgm)
-	converters = ["totalCADConverterX[outType:pdf] -> pdf2svg", "corelDRAW", "irfanView", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]", "soffice[outType:svg]"];
+	converters = ["viewCompanion", "corelDRAW", "irfanView", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]", "soffice[outType:svg]"];
 }

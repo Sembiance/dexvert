@@ -209,10 +209,10 @@ EndFunc`,
 };
 const AUTO_INCLUDE_FUNCS = ["KillAll"];
 
-export async function run({f, cmd, osid="win2k", args=[], cwd, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
+export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
 	let fullCmd = cmd;
-	const qemuData = {osid, cmd, timeout, outDirPath : f.outDir.absolute};
+	const qemuData = {osid, cmd, meta, timeout, outDirPath : f.outDir.absolute};
 
 	if(RUNTIME.globalFlags.qemuPriority)
 		qemuData.qemuPriority = true;

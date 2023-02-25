@@ -171,6 +171,8 @@ export class Program
 		else if(QEMUIDS.includes(this.loc))
 		{
 			r.qemuData = {f, cmd : this.bin, osid : this.loc, xlog};
+			if(format?.formatid)
+				r.qemuData.meta = `${format.familyid}/${format.formatid}`;
 			r.qemuData.args = this.args ? await this.args(r) : [];
 			if(this.qemuData)
 				Object.assign(r.qemuData, typeof this.qemuData==="function" ? await this.qemuData(r) : this.qemuData);

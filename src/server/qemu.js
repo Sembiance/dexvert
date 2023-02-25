@@ -52,7 +52,8 @@ const INSTANCES = {};
 const RUN_QUEUE = new Set();
 const QEMU_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "qemu");
 const CHECK_QUEUE_INTERVAL = 50;
-const CHECK_QUEUE_TOO_LONG = xu.MINUTE*10;
+const CHECK_QUEUE_TOO_LONG = xu.MINUTE*15;
+const CMD_DURATIONS = {};
 
 function prelog(instance)
 {
@@ -267,6 +268,15 @@ export class qemu extends Server
 		instance.ready = true;
 	}
 
+	abortQueue()
+	{
+		for(const runTask of Array.from(RUN_QUEUE))
+		{
+			runTask.reply(new Response("Error, queue stuck, task aborted"));
+			RUN_QUEUE.delete(runTask);
+		}
+	}
+
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
@@ -274,8 +284,12 @@ export class qemu extends Server
 		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
 
 		let inOutErr = null;
+		const runStartAt = performance.now();
 		await this.IN_OUT_LOGIC[instance.inOutType](instance, runArgs).catch(err => { inOutErr = err; });
-		this.xlog.debug`${prelog(instance)} finished request (${RUN_QUEUE.size} queued)`;
+		const runDuration = performance.now()-runStartAt;
+		CMD_DURATIONS[body.cmd] ||= [];
+		CMD_DURATIONS[body.cmd].push({duration : runDuration, meta : body.meta || path.basename(body.inFilePaths[0])});
+		this.xlog.debug`${prelog(instance)} finished request in ${runDuration}ms (${RUN_QUEUE.size} queued)`;
 		instance.busy = false;
 
 		if(inOutErr)
@@ -324,9 +338,10 @@ export class qemu extends Server
 			this.checkQueueCounter++;
 			if(this.checkQueueCounter>((CHECK_QUEUE_TOO_LONG/CHECK_QUEUE_INTERVAL)))
 			{
-				this.xlog.warn`QEMU queue has been stuck for over 1 minute with ${RUN_QUEUE.size} items in queue. Instance status:`;
+				this.xlog.warn`QEMU queue has been stuck for over ${CHECK_QUEUE_TOO_LONG/xu.MINUTE} minutes with ${RUN_QUEUE.size} items in queue. ${fg.peach("ABORTING QUEUED ITEMS!")} Instance status:`;
 				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
 					this.xlog.warn`${fg.peach("STATUS OF")} ${prelog(subInstance)}: ${{ready : subInstance.ready, busy : subInstance.busy}}`;
+				this.abortQueue();
 
 				this.checkQueueCounter = 0;
 			}
@@ -349,9 +364,16 @@ export class qemu extends Server
 		{
 			const r = {queueSize : RUN_QUEUE.size, activeSize : Object.values(INSTANCES).flatMap(o => Object.values(o)).filter(v => v.ready && v.busy).length};
 			if(RUN_QUEUE.size)
-				r.queue = Array.from(RUN_QUEUE, v => v.body);
+				r.queue = Array.from(RUN_QUEUE, v => { const o = Object.fromEntries(Object.entries(v.body)); delete o.script; return o; });
 				
 			r.instancesAvailable = Object.fromEntries(Object.entries(INSTANCES).map(([osid, instances]) => ([osid, Object.values(instances).filter(v => v.ready && !v.busy).length])));
+			r.cmdDurations = Object.entries(CMD_DURATIONS).map(([cmd, metaDurations]) =>
+			{
+				const durations = metaDurations.map(md => md.duration);
+				const o = {cmd, count : durations.length, avg : durations.average(), median : durations.median(), stdDev : durations.standardDeviation(), variance : durations.variance(), max : durations.max()};
+				o.metas = metaDurations.map(md => md.meta).unique().map(meta => ({meta, count : metaDurations.filter(md => md.meta===meta).length}));
+				return o;
+			}).sortMulti([o => o.count, o => o.cmd], [true, false]);
 			return new Response(JSON.stringify(r));
 		}, {logCheck : () => false});
 

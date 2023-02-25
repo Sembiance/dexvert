@@ -22,7 +22,7 @@ export class pict extends Format
 
 		const clarisClipArtConverters =
 		[
-			"soffice[outType:png]"//, // soffice csometimes produces just text that says "QuickTime and aPh..." which doesn't get detected
+			"soffice[outType:png]"//, // soffice sometimes produces just text that says "QuickTime and a Ph..." which doesn't get detected
 			//"corelPhotoPaint"		// corelPhotoPaint often just produces a 'QuickTime PICT' logo, not useful and not currently detected (see sample/image/pict/01 and sample/image/pict/747_007)
 		];
 
@@ -31,8 +31,8 @@ export class pict extends Format
 			r.push(...clarisClipArtConverters);
 
 		r.push(
-			"qtPicViewer",
 			"canvas",			// canvas seems to properly recombine sub-bitmaps into a final image (sample/image/pict/Daniel  and  2kangaro  and  bbq)
+			"qtPicViewer",
 			"hiJaakExpress",
 			"picturePublisher",
 			"deark[module:macbinary] -> deark",	// Can handle MacBinary-encoded PICT files such as samples 35, 039 and 06

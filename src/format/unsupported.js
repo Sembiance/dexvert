@@ -260,6 +260,7 @@ export default
 		abuseLevel                  : {name : "Abuse Level", ext : [".lvl", ".spe"], magic : ["Abuse Level"]},
 		binaryDeltaCompressedPatch  : {name : "Binary Delta Compressed Patch", magic : ["Binary Delta Compressed Patch"]},
 		blockBreakerPattern         : {name : "Block Breaker Pattern", ext : [".blc"], magic : ["Block Breaker pattern"]},
+		boloMap                     : {name : "Bolo Map", magic : ["Bolo Map"]},
 		callOfDutyMap               : {name : "Call of Duty Map", ext : [".d3dbsp", ".bsp"], magic : ["Call of Duty map"]},
 		chessAssistant              : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},
 		corncob3DData               : {name : "Corncob 3D Data File", ext : [".cct"], magic : ["Corncob 3D Theater-of-operation data"]},

@@ -12,22 +12,12 @@ export class tga extends Format
 	// ImageMagick sometimes doesn't detect that a TGA image has been rotated. These other converters seem to do a better job at that
 	// Only deark, corelDRAW & pv were able to correctly handle flag_b32.tga
 	// picturePublisher also supports TGA but bad TGA's have a tendency to cause the program to freeze so bad that the AutoIt script freezes up too (see sandbox/samples/HangsPicturePublisher.tga)
-	converters = dexState =>
-	{
-		const r = [];
-		r.push("deark");
-		
-		// Some magics like "Targa image data" are VERY weak. So only include 'expensive' converters if we have a strong magic
-		if(dexState.hasMagics(this.magic, {strong : true}))
-			r.push("corelDRAW", "pv[matchType:magic]");
-		
-		r.push("nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "gimp");
-
-		if(dexState.hasMagics(this.magic, {strong : true}))
-			r.push("hiJaakExpress", "corelPhotoPaint", "canvas");
-
-		return r;
-	};
+	converters = [
+		"deark",
+		"corelDRAW[strongMatch]", "pv[strongMatch]",
+		"nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "gimp",
+		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas[strongMatch]"
+	];
 
 	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy, require more than 1 color
 	// Color counts are calculated for images too large, so we exempt large TGAs from this check since those are encountered in the wild

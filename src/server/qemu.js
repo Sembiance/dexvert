@@ -268,15 +268,6 @@ export class qemu extends Server
 		instance.ready = true;
 	}
 
-	abortQueue()
-	{
-		for(const runTask of Array.from(RUN_QUEUE))
-		{
-			runTask.reply(new Response("Error, queue stuck, task aborted"));
-			RUN_QUEUE.delete(runTask);
-		}
-	}
-
 	async performRun(instance, runArgs)
 	{
 		const {body, reply} = runArgs;
@@ -338,11 +329,9 @@ export class qemu extends Server
 			this.checkQueueCounter++;
 			if(this.checkQueueCounter>((CHECK_QUEUE_TOO_LONG/CHECK_QUEUE_INTERVAL)))
 			{
-				this.xlog.warn`QEMU queue has been stuck for over ${CHECK_QUEUE_TOO_LONG/xu.MINUTE} minutes with ${RUN_QUEUE.size} items in queue. ${fg.peach("ABORTING QUEUED ITEMS!")} Instance status:`;
+				this.xlog.warn`QEMU queue has been stuck for over ${CHECK_QUEUE_TOO_LONG/xu.MINUTE} minutes with ${RUN_QUEUE.size} items in queue. Instance status:`;
 				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
 					this.xlog.warn`${fg.peach("STATUS OF")} ${prelog(subInstance)}: ${{ready : subInstance.ready, busy : subInstance.busy}}`;
-				this.abortQueue();
-
 				this.checkQueueCounter = 0;
 			}
 		}

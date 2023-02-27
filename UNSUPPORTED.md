@@ -1,4 +1,4 @@
-# Unsupported File Formats (931)
+# Unsupported File Formats (932)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -460,7 +460,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (441)
+## Other (442)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -538,6 +538,7 @@ other | Binary Delta Compressed Patch |  |
 other | BinPatch Patch | .utp | 
 other | Block Breaker Pattern | .blc | 
 other | BNUPORT Patch Table | .pat | 
+other | Bolo Map |  | 
 other | Borland Delphi Compiled Unit | .dcu | 
 other | Borland Graphics Interface Driver | .bgi | 
 other | Borland Language Library | .bll | 

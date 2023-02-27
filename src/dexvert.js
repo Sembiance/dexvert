@@ -207,6 +207,9 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 				if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
 					return xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`, false;
 				
+				if(progProps.flags?.strongMatch && !dexState.hasMagics(format.magics || [], {strong : true}))
+					return xlog.info`Skipping converter ${prog} due to strongMatch flag and not having any strong matches`, false;
+				
 				xlog.debug`Running converter ${prog}...`;
 
 				const flags = {};

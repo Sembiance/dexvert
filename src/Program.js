@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =

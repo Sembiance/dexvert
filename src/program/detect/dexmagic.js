@@ -88,6 +88,7 @@ const DEXMAGIC_CHECKS =
 
 	// other
 	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],
+	"Bolo Map"                         : [{offset : 0, match : "BMAPBOLO"}],
 	"Director STXT"                    : [{offset : 0, match : [0x00, 0x00, 0x00, 0x0C, 0x00, 0x00]}],
 	"MegaZeux Board"                   : [{offset : 0, match : [0xFF]}, {offset : 1, match : ["M", ["B", 0x02]]}],
 	"MegaZeux Save"                    : [{offset : 0, match : ["M", "Z", ["S", "X"], ["V", "S", 0x02]]}],

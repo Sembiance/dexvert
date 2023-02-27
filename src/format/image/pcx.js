@@ -8,5 +8,8 @@ export class pcx extends Format
 	mimeType     = "image/x-pcx";
 	magic        = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/, /^fmt\/(87|90)( |$)/];
 	metaProvider = ["image"];
-	converters   = ["nconvert", "convert", "deark", "gimp", "imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW"];
+	converters   = [
+		"nconvert", "convert", "deark", "gimp",
+		...["imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW"].map(v => `${v}[strongMatch]`)
+	];
 }

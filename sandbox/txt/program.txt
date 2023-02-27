@@ -13,6 +13,7 @@ There are a few 'global' flags that can be specified for any program:
 	bulkCopyOut				If a chain is likely to produce a ton of files, set this. I think it's safe? rofl
 	filenameEncoding		Which encoding the filenames are likely to be in for proper conversion by convmv
 	matchType               If set, this program won't run unless the match type matches the specified value. Only valid in format 'converters' list.
+	[strongMatch]			If set, this program won't run unless we have a non-weak MAGIC match
 	noAux                   Don't include any aux files in this running of the program
 	osHint					Can set various platforms like commodore:true in order to enable a slightly wider identification scope for matching and converting files
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename

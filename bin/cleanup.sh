@@ -3,11 +3,15 @@
 whoami=$(whoami | tr -d '[:space:]')
 
 killall Xvfb qemu-system-i386 qemu-system-ppc qemu-system-x86_64
-killall -9 at-spi-bus-launcher helpdeco gimp-org-file-pnm identify
+killall -9 at-spi-bus-launcher helpdeco gimp-org-file-pnm identify convert
 
 cd /mnt/ram/tmp || exit
 sudo umount ./*uniso
+sudo umount ./*photocd-info
 sudo umount ./*iso/*fuseiso
+rm -rf ./*
+sudo umount ./*
+sudo umount ./*/*
 rm -rf ./*
 
 cd /tmp || exit

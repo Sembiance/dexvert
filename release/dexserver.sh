@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 scratch=400
 ram=$(awk '/MemTotal/{print int($2*0.7/1024)}' /proc/meminfo)
 tmpDir="/tmp"
-cores=$(( $(nproc) * 90 / 100 ))
+cores=$(( $(nproc) * 95 / 100 ))
 admin=0
 
 # TODO: Add support for changing IP address assigned to VM
@@ -17,10 +17,9 @@ admin=0
 show_usage() {
   echo "Usage: $0 [--scratch=<size>] [--ram=<size>] [--scratchDir=<dir>] [--cores=<num>] [--help]"
   echo "  --scratch=<size>     Set the size of the scratch disk in gigabytes (default: 400GB)."
-  echo "  --ram=<size>         Set the size of RAM in megabytes (default: 70% of total system RAM)."
+  echo "  --ram=<size>         Set the size of RAM in megabytes (eg 100 for 100MB) or 0.7 for 70% of RAM (default 0.8 or 80% of total system RAM)."
   echo "  --tmpDir=<dir>       Set the tmp directory to use (default: /tmp)."
-  echo "  --cores=<num>        Set the number of cores to use (default: 90% of total number of CPUs/cores)."
-  echo "  --admin              Run qemu-system-x86_64 interactively in the foreground against the actual HD image"
+  echo "  --cores=<num>        Set the number of cores to use. Either # like 30 for 30 cores or 0.7 for 70% of cores (default 0.95 or 95%)."
   echo "  --help               Display this help message."
 }
 
@@ -41,13 +40,7 @@ for arg in "$@"; do
       shift
       ;;
     --ram=*)
-      size="${arg#*=}"
-      if [[ "$size" =~ ^([0-9]+)$ ]]; then
-        ram="$size"
-      else
-        show_usage
-        exit 1
-      fi
+	  ram="${arg#*=}"
       shift
       ;;
     --tmpDir=*)
@@ -72,6 +65,15 @@ for arg in "$@"; do
       ;;
   esac
 done
+
+if [[ "$cores" =~ ^[0-9]+\.[0-9]+$ ]]; then
+    cores=$(echo "$(nproc) * $cores" | bc)
+	cores=$(printf "%.0f" "$cores")
+fi
+
+if [[ "$ram" =~ ^[0-9]+\.[0-9]+$ ]]; then
+	ram=$(awk '/MemTotal/{print int($2 * '$ram' / 1024)}' /proc/meminfo)
+fi
 
 scratchDir="$tmpDir/$(generate_random_string)"
 mkdir -p "$scratchDir"
@@ -117,12 +119,12 @@ else
 		sleep 0.2
 	done
 
-	echo "dexserver starting..."
+	echo "dexserver starting (can take up to 10 minutes)..."
 	while ! ssh -i "$SCRIPT_DIR"/dexvert-ssh-key -p 47022 dexvert@127.0.0.1 "[ -e /mnt/ram/dexvert/dexserver.pid ]"; do
 		sleep 0.2
 	done
 	
-	echo "dexserver ready!"
+	echo "dexserver ready!!!"
 	while ps -p "$qemuPID" > /dev/null; do
 		sleep 0.2
 	done

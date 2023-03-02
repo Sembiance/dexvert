@@ -263,6 +263,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/rar",
 	"image/bbcDisplayRAM",
 	"image/teletext",
+	"music/msxBGM",
 	"music/richardJoseph",
 	"other/iBrowseCookies",
 	"unsupported/binPatch"

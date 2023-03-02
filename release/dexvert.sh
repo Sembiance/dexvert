@@ -5,13 +5,13 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 useJSON=0
-recurse=0
+keepGoing=0
 tmpDir="/tmp"
 logLevel="info"
 suffix="§"
 
 showUsage() {
-    echo "Usage: $0 [--json] [--recurse] [--tmpDir <dir>] [--logLevel none fatal error warn info(default) debug trace] [--suffix suffix (default: §)] inputFile outputDir"
+    echo "Usage: $0 [--json] [--keepGoing] [--tmpDir <dir>] [--logLevel none fatal error warn info(default) debug trace] [--suffix suffix (default: §)] inputFile outputDir"
     exit 1
 }
 
@@ -24,8 +24,8 @@ while [[ "$#" -gt 0 ]]; do
         --json)
             useJSON=1
             ;;
-        --recurse)
-            recurse=1
+        --keepGoing)
+            keepGoing=1
             ;;
         --suffix)
             if [[ -n "$2" ]]; then
@@ -122,7 +122,7 @@ cd "$curPWD" || exit
 
 performDexing() {
 	runSSHCmd "mkdir /mnt/dexvert/out/\"$1\"$suffix"
-	if [[ $recurse -eq 1 ]]; then
+	if [[ $keepGoing -eq 1 ]]; then
 		runSSHCmd "/mnt/compendium/.deno/bin/dexrecurse --logLevel=${logLevel} $([ $useJSON -eq 1 ] && echo " --json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out"
 	else
 		runSSHCmd "/mnt/compendium/.deno/bin/dexvert --logLevel=${logLevel} $([ $useJSON -eq 1 ] && echo " --jsonFile=/mnt/dexvert/out/\"$1\"$suffix.json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out/\"$1\"$suffix"

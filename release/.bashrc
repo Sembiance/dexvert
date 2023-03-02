@@ -26,12 +26,17 @@ if [ $(tty) = "/dev/tty1" ]; then
 	sudo mount /dev/vdb1 /mnt/dexvert
 	sudo chown -R dexvert:dexvert /mnt/dexvert
 
-	echo "Preparing /var/tmp..."
+	echo "Preparing directories..."
 	mkdir -p /mnt/dexvert/var/tmp/portage
 	chmod 777 /mnt/dexvert/var/tmp
 	sudo chown portage:portage /mnt/dexvert/var/tmp/portage
 	sudo chmod 775 /mnt/dexvert/var/tmp/portage
 	sudo /etc/init.d/systemd-tmpfiles-setup start
+
+	mkdir /mnt/dexvert/tmp
+	chmod 777 /mnt/dexvert/tmp
+	sudo rm -rf /tmp
+	sudo ln -s /tmp /mnt/dexvert/tmp
 
 	touch /mnt/ram/tmp/qemuBooted
 

@@ -64,7 +64,7 @@ export async function classifyImage(imagePath, modelName)
 		if(!(await fileUtil.exists(tmpImagePath)))
 			continue;
 		
-		const r = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()), {});	 // eslint-disable-line max-len
+		const r = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${TENSORSERV_HOST}:${TENSORSERV_PORT}/classify/${modelName}`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({imagePath : tmpImagePath})}))?.json()), {});
 
 		await fileUtil.unlink(tmpImagePath);
 		

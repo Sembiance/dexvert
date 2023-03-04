@@ -306,7 +306,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	// Here we stick the 'dexvert' matches ahead of other 'detections'
 	const result = [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website})),	// eslint-disable-line max-len
+		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website})),
 		...detections.map(({from, confidence, value, extensions, weak}) => Identification.create({from, confidence, magic : value, extensions, weak : !!weak}))
 	];
 

@@ -7,7 +7,7 @@ import {path} from "std";
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
 // All offsets matches must match (except a match array that has a subarray, the subarry is a list of possible matches for that byte position)
 
-/* eslint-disable unicorn/no-hex-escape, max-len */
+/* eslint-disable unicorn/no-hex-escape */
 const DEXMAGIC_CHECKS =
 {
 	// 3d
@@ -119,7 +119,7 @@ const DEXMAGIC_CHECKS =
 	"VCD Entries File"                 : [{offset : 0, match : "ENTRYVCD"}],
 	"VideoTracker Routine"             : [{offset : 0, match : "PVC!"}]
 };
-/* eslint-enable unicorn/no-hex-escape, max-len */
+/* eslint-enable unicorn/no-hex-escape */
 
 const DEXMAGIC_FILE_META_CHECKS =
 [

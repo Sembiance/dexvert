@@ -1,6 +1,9 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Remove the temporary symlink /usr/lib64/libtiff.so.5 (from dexvert)
+  Re-do the environment for bin/zztScreenshotter as it currently links to libtiff.so.5 which isn't installed
+  Re-sync up to cobbleton-public and then to dexvert
 
 
 /---------------\

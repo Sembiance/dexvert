@@ -31,12 +31,11 @@ if [ $(tty) = "/dev/tty1" ]; then
 	chmod 777 /mnt/dexvert/var/tmp
 	sudo chown portage:portage /mnt/dexvert/var/tmp/portage
 	sudo chmod 775 /mnt/dexvert/var/tmp/portage
-	sudo /etc/init.d/systemd-tmpfiles-setup start
 
 	mkdir /mnt/dexvert/tmp
 	chmod 777 /mnt/dexvert/tmp
 	sudo rm -rf /tmp
-	sudo ln -s /tmp /mnt/dexvert/tmp
+	sudo ln -s /mnt/dexvert/tmp /tmp
 
 	touch /mnt/ram/tmp/qemuBooted
 

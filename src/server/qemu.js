@@ -440,7 +440,7 @@ export class qemu extends Server
 		this.xlog.info`Starting instances...`;
 		for(const osid of Object.keys(OS))
 		{
-			const atOnce = Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores));
+			const atOnce = Math.min(4, Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores)));	// starting more than 4 at once seems to cause issues where qemu doesn't boot properly
 			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances in batches of ${atOnce}...`;
 			await [].pushSequence(0, OS[osid].qty-1).parallelMap(async instanceid =>
 			{

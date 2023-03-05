@@ -32,6 +32,10 @@ if [ $(tty) = "/dev/tty1" ]; then
 	sudo chown portage:portage /mnt/dexvert/var/tmp/portage
 	sudo chmod 775 /mnt/dexvert/var/tmp/portage
 
+	mkdir -p /mnt/dexvert/usr/portage/distfiles
+	sudo chown root:portage /mnt/dexvert/usr/portage/distfiles
+	sudo chmod 775 /mnt/dexvert/usr/portage/distfiles
+
 	mkdir /mnt/dexvert/tmp
 	chmod 777 /mnt/dexvert/tmp
 	sudo rm -rf /tmp

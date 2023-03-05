@@ -93,7 +93,7 @@ hdFilePath="$SCRIPT_DIR/hd.qcow2"
 echo "Launching qemu-system-x86_64 with RAM size $ram MB, using $cores cores, and scratch directory $scratchDir..."
 if [ "$admin" -eq 1 ]; then
 	echo "Launching in ADMIN mode..."
-	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu qemu64,+avx,+avx2,+aes,+mmx,+mmxext,+popcnt,+sse,+sse2,+sse4.1,+sse4.2,+ssse3 -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -drive format=qcow2,file="$SCRIPT_DIR/admin.qcow2",if=virtio -display curses
+	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu qemu64,+aes,+mmx,+mmxext,+popcnt,+sse,+sse2,+sse4.1,+sse4.2,+ssse3 -vga std -drive format=qcow2,file="$hdFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -drive format=qcow2,file="$SCRIPT_DIR/admin.qcow2",if=virtio -display curses
 else
 	echo "Creating backing file of hd.qcow2..."
 	hdBackingFilePath="$scratchDir/hd_backing.qcow2"
@@ -102,7 +102,7 @@ else
 
 	pidFilePath="$scratchDir/qemu.pid"
 	rm -f "$pidFilePath"
-	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu host -vga std -drive format=qcow2,file="$hdBackingFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -daemonize -pidfile "$pidFilePath" -display none
+	qemu-system-x86_64 -monitor telnet::47023,server,nowait -machine accel=kvm,dump-guest-core=off -cpu qemu64,+aes,+mmx,+mmxext,+popcnt,+sse,+sse2,+sse4.1,+sse4.2,+ssse3 -vga std -drive format=qcow2,file="$hdBackingFilePath",if=virtio -device virtio-rng-pci -m size="$ram"M -smp "cores=$cores" -boot order=c -netdev user,net=192.168.47.0/24,dhcpstart=192.168.47.47,hostfwd=tcp:127.0.0.1:47022-192.168.47.47:22,id=nd1 -device virtio-net,netdev=nd1 -drive format=qcow2,file="$scratchFilePath",if=virtio -daemonize -pidfile "$pidFilePath" -display none
 
 	echo "QEMU starting..."
 	while [ ! -f "$pidFilePath" ]; do

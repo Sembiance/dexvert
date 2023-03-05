@@ -12,14 +12,13 @@ const BASE_SUBNET = 50;
 const DELAY_SIZE = xu.MB*50;
 const DELAY_AMOUNT = xu.SECOND/2;
 
-// We specify a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 const OS_DEFAULT =
 {
-	dateTime     : "2021-04-18T10:00:00",
+	dateTime     : "2021-04-18T10:00:00",	// We specify a given dateTime in order to prevent certain old shareware programs from expiring (Awave Studio)
 	smbGuestPort : 445,
 	sshGuestPort : 22,
-	machine      : "accel=kvm",
 	hdOpts       : ",if=ide"
+	// We used to specify machine : "accel=kvm" but this isn't valid with a qemu64 CPU which is needed for portability between Intel and AMD CPUs which is needed for the public release of dexvert
 };
 
 const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
@@ -198,7 +197,7 @@ export class qemu extends Server
 		const qemuArgs = ["-drive", `format=qcow2,file=hd.img${OS[osid].hdOpts || OS_DEFAULT.hdOpts}`];
 		if(!instance.debug)
 			qemuArgs.push("-nographic", "-vnc", `127.0.0.1:${instance.vncPort},share=force-shared`);
-		qemuArgs.push("-machine", `${OS[osid].machine || OS_DEFAULT.machine},dump-guest-core=off`);
+		qemuArgs.push("-machine", `${OS[osid].machine ? `${OS[osid].machine},` : ""}dump-guest-core=off`);
 		qemuArgs.push("-m", `size=${OS[osid].ram}`);
 		qemuArgs.push("-rtc", `base=${OS[osid].dateTime || OS_DEFAULT.dateTime}`);
 		if((OS[osid].cores || 1)>1)
@@ -440,10 +439,11 @@ export class qemu extends Server
 		this.xlog.info`Starting instances...`;
 		for(const osid of Object.keys(OS))
 		{
-			const atOnce = Math.min(4, Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores)));	// starting more than 4 at once seems to cause issues where qemu doesn't boot properly
+			const atOnce = Math.min(OS[osid].qty, Math.floor(totalCoreCount/OS[osid].cores));
 			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances in batches of ${atOnce}...`;
 			await [].pushSequence(0, OS[osid].qty-1).parallelMap(async instanceid =>
 			{
+				await delay(Math.randomInt(0, xu.SECOND*atOnce));	// Starting multiple instances at the exact same time seems to cause very odd behaviors where things don't emulate properly.
 				await this.startOS(osid, instanceid);
 				await xu.waitUntil(() => INSTANCES[osid][instanceid].ready);
 			}, atOnce);

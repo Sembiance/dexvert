@@ -9,10 +9,18 @@ keepGoing=0
 tmpDir="/tmp"
 logLevel="info"
 suffix="§"
+osHint="dos"
 
 showUsage() {
-    echo "Usage: $0 [--json] [--keepGoing] [--tmpDir <dir>] [--logLevel none fatal error warn info(default) debug trace] [--suffix suffix (default: §)] inputFile outputDir"
-    exit 1
+	echo "Usage: $0 [options] inputFile outputDir"
+	echo "  --json               Produce some JSON for each file that is processed that details additional meta information about the file."
+	echo "  --keepGoing          If this is set dexvert will keep converting any files it extracts, recursively."
+	echo "  --tmpDir=<dir>       Set the tmp directory to use (default: /tmp)."
+	echo "  --logLevel=<level>   How verbose to be. Valid: none fatal error warn info(default) debug trace"
+	echo "  --suffix=<suffix>    Set the suffix to use for temporary files (default: §)."
+	echo "  --osHint=<osid>      Provide a hint as to which Operating System this file was from. For options, see the readme.txt file"
+	echo "  --help               Display this help message."
+	exit 1
 }
 
 function generate_random_string() {
@@ -51,6 +59,15 @@ while [[ "$#" -gt 0 ]]; do
                 shift
             else
                 echo "Error: no value specified for --tmpDir"
+                showUsage
+            fi
+            ;;
+        --osHint)
+            if [[ -n "$2" ]]; then
+                osHint="$2"
+                shift
+            else
+                echo "Error: no value specified for --osHint"
                 showUsage
             fi
             ;;
@@ -100,7 +117,6 @@ echo "Preparing QEMU instance..."
 runSSHCmd "rm -rf /mnt/dexvert/in /mnt/dexvert/out /mnt/dexvert/in.tar /mnt/dexvert/out.tar"
 runSSHCmd "mkdir -p /mnt/dexvert/in /mnt/dexvert/out"
 
-echo "Transferring files to QEMU instance..."
 inputDir="$inputFile"
 
 if [[ -f "$inputFile" ]]; then
@@ -111,6 +127,9 @@ inTar="$tmpDir/$(generate_random_string).tar"
 curPWD=$(pwd)
 
 cd "$inputDir" || exit
+totalSize=$(du -c -b --max-depth=1 | tail -n1 | cut -f1)
+fileCount=$(find . -maxdepth 1 -type f | wc -l)
+echo "Transferring $fileCount files totalling $((totalSize / 1024 / 1024)) MB to QEMU instance..."
 tar -cf "$inTar" --no-recursion ./*
 
 scp -q -i "$SCRIPT_DIR"/dexvert-ssh-key -P 47022 "$inTar" dexvert@127.0.0.1:/mnt/dexvert/in.tar
@@ -123,9 +142,9 @@ cd "$curPWD" || exit
 performDexing() {
 	runSSHCmd "mkdir /mnt/dexvert/out/\"$1\"$suffix"
 	if [[ $keepGoing -eq 1 ]]; then
-		runSSHCmd "/mnt/compendium/.deno/bin/dexrecurse --logLevel=${logLevel} $([ $useJSON -eq 1 ] && echo " --json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out"
+		runSSHCmd "/mnt/compendium/.deno/bin/dexrecurse --logLevel=${logLevel} --programFlag=oshint:${osHint}:true $([ $useJSON -eq 1 ] && echo " --json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out"
 	else
-		runSSHCmd "/mnt/compendium/.deno/bin/dexvert --logLevel=${logLevel} $([ $useJSON -eq 1 ] && echo " --jsonFile=/mnt/dexvert/out/\"$1\"$suffix.json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out/\"$1\"$suffix"
+		runSSHCmd "/mnt/compendium/.deno/bin/dexvert --logLevel=${logLevel} --programFlag=oshint:${osHint}:true $([ $useJSON -eq 1 ] && echo " --jsonFile=/mnt/dexvert/out/\"$1\"$suffix.json") \"/mnt/dexvert/in/$1\" /mnt/dexvert/out/\"$1\"$suffix"
 	fi
 }
 

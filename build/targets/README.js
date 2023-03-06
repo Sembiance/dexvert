@@ -18,5 +18,10 @@ See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file 
 
 Utilizes [Deno](https://deno.land/) and **${Object.keys(programs).length.toLocaleString()}** helper programs running on **${QEMUIDS.length}** different operating systems under [QEMU](https://www.qemu.org/)
 
+**THIS PROJECT IS NOT MAINTAINED**<br>
+**IT WILL NOT BE UPDATED**<br>
+**BUGS WILL NOT BE FIXED**<br>
+**PULL REQUESTS WILL BE IGNORED**<br>
+
 ${RELEASE.README_TEXT}`);
 }

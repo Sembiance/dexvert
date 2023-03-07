@@ -1,15 +1,3 @@
-/--------------------\
-| Release Build Info |
-\--------------------/
-* Launch release/dexserver.sh --admin
-
-* Sync to it in /mnt/compendium/sync/upload.js --yes dexvert
-  ENSURE NO NEW SENSITIVE DATA OR EXTRA USELESS DATA WAS SYNCHRONIZED TO IT!
-
-* Make any and all changes and updates necessary to the system
-
-* TODO: Add instructions on how to package up for a versioned .tar.bz2 release
-
 /-------\
 | Other |
 \-------/

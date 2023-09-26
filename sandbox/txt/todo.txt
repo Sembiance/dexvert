@@ -16,7 +16,6 @@ Atari Falcon	BP6, BP8, C06, C08, C16, C24, C32	UIMG			1
 
 * Remove the temporary symlink /usr/lib64/libtiff.so.5 (from dexvert)
   Re-do the environment for bin/zztScreenshotter as it currently links to libtiff.so.5 which isn't installed
-  Re-sync up to cobbleton-public and then to dexvert
 
 * There is a bug in DebLab/app/uniso.js --hfs --macEncoding=japan MACUSER-MACBIN40A-1997-03.ISO out
 From this ISO:
@@ -231,8 +230,12 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
+<<<<<<< HEAD
 * Consider updating IsoBuster to 5.2 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
   Look for additional release notes for more formats I can support (see what version I currently am using and read all notes since that version)
+=======
+* Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP win hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
+>>>>>>> bc381a945c15d7e17bba0da009977fdccba4015f
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
@@ -242,8 +245,6 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Add sparseimage conversion support (requires MacOS X qemu, see archive/sparseImage notes)
-
-* If I've made my Deno TUI lib, re-code dexbrute to use it
 
 * Could add printer support to DOSBox: https://sourceforge.net/p/dosbox/patches/?limit=250
   Then I could 'print' certain things, like EnvisionPublisher documents (look for others)
@@ -258,24 +259,11 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
   To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
 
-* Get other formats reverse engineered. STARTED: https://telparia.com/fileFormatBounties.html
-  Goal: Produce open source code (any language) that can run on Linux that can take an input file and produce one or more output PNG files
-  Could also try posting on reddit r/ReverseEngineering/ or r/INAT
-  Maybe offer a $5,000 bounty on one of the sites linked: https://en.wikipedia.org/wiki/Open-source_bounty
-  Alternatively I can post on reddit.com/r/ReverseEngineering  also ask where else I might post such an offer
-  Could also contact devs directly:
-  https://www.upwork.com/o/profiles/users/~0105d5841f6a52bb2e/
-  https://www.upwork.com/o/profiles/users/~0168f82b6f4a79d7e0/
-  https://www.upwork.com/o/profiles/users/~01ca8e53b73db18365/
-  https://www.upwork.com/o/profiles/users/~017b879ebc3785c685/
-  - Second Nature SNX 	http://fileformats.archiveteam.org/wiki/Second_Nature_Screensaver_Graphic
-  - AOL Art 			http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)
-
 * Ask on IRC OFTC #kernelnewbies and ##linux on freenode about PAYING someone to add support to linux kernel for mounting CDI images:
   https://www.isobuster.com/help/cd-i_and_vcd
   https://encyclopedia2.thefreedictionary.com/Green+Book+CD-ROM
   https://www.lscdweb.com/data/downloadables/2/8/cdi_may94_r2.pdf
-  See smoe tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
+  See some tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
   WARNING! I need to assumed that it will be exploited. So I will want to run dexvert on virtual machines. Not sure if I can run virtual machines like windows from WITHIN a virtual machine running gentoo+dexvert.... hrm...

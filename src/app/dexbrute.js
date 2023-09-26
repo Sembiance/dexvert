@@ -2,13 +2,15 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
-import {programs} from "../program/programs.js";
-import {formats} from "../format/formats.js";
+import {programs, init as initPrograms} from "../program/programs.js";
+import {formats, init as initFormats} from "../src/format/formats.js";
 import {families} from "../family/families.js";
 import {DexFile} from "../DexFile.js";
 import {Identification} from "../Identification.js";
 import {Format} from "../Format.js";
 import {path} from "std";
+
+// TODO Update this to work with the new dexrpc, call out to dexrpc for each one I want to try processing as
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexbrute",
@@ -27,6 +29,9 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 const xlog = new XLog("info");
+
+await initPrograms(xlog);
+await initFormats(xlog);
 
 const EXCLUDE_FAMILIES = ["detect", "meta", "other", "post"];
 const PROGRAM_BASE_PATH = path.join(xu.dirname(import.meta), "..", "program");

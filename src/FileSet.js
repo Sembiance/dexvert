@@ -151,7 +151,7 @@ export class FileSet
 		{
 			const longestType = Object.keys(this.files).map(v => v.length).max();
 			for(const [type, typeFiles] of Object.entries(this.files))
-				r = r.concat(typeFiles.map(f => f.pretty(`\n${prefix}\t${fg.white(`${type.padStart(longestType, " ")}: `)}`)));		// eslint-disable-line sembiance/disfavor-array-concat
+				r = r.concat(typeFiles.map(f => f.pretty(`\n${prefix}\t${fg.white(`${type.padStart(longestType, " ")}: `)}`)));
 		}
 		return r.join("");
 	}

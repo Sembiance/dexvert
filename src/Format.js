@@ -35,7 +35,7 @@ export class Format
 			const progRaw = metaProviderParts[0].trim();
 			const metaProviderKey = metaProviderParts.length===2 ? metaProviderParts[1].trim() : null;
 			
-			if(!(await Program.hasProgram(progRaw)))
+			if(!Program.hasProgram(progRaw))
 				continue;
 
 			const r = await Program.runProgram(progRaw, inputFile, {xlog});
@@ -135,7 +135,7 @@ export class Format
 			// conversion
 			converters   : {types : [Array, "function"]},
 			keepFilename : {type : "boolean"},
-			metaProvider : {type : ["string"], enum : (family.metaids || [])},
+			metaProvider : {type : ["string"], enum : []},
 			safeExt      : {types : ["string", "function"], allowEmpty : true},
 			processed    : {type : "function", length : [0, 1]},
 			pre          : {type : "function", length : [0, 1]},

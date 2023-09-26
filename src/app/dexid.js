@@ -1,8 +1,7 @@
 import {xu, fg} from "xu";
-import {XLog} from "xlog";
-import {cmdUtil, printUtil, runUtil, fileUtil} from "xutil";
+import {cmdUtil, printUtil, fileUtil} from "xutil";
 import {path} from "std";
-import {DexFile} from "../DexFile.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexid",
@@ -13,7 +12,6 @@ const argv = cmdUtil.cmdInit({
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: warn", defaultValue : "warn"},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true},
-		rebuild  : {desc : "Rebuild formats and programs first"},
 		fileMeta : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true}
 	},
 	args :
@@ -21,21 +19,13 @@ const argv = cmdUtil.cmdInit({
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
 
-const xlog = new XLog(argv.logLevel);
-
-if(argv.rebuild)
-	await runUtil.run("./build", ["programs", "formats"], {cwd : path.join(xu.dirname(import.meta), "..", "..", "build"), liveOutput : true});
-
-const {identify} = await import(`../identify.js`);
-
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
 {
-	const inputFile = await DexFile.create(inputFilePath);
-	if(argv.fileMeta)
-		inputFile.meta = xu.parseJSON(argv.fileMeta, {});
-		
-	const rows = await identify(inputFile, {xlog});
+	const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
+	const {r : rows, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+	if(logLines.length)
+		console.log(logLines.join("\n"));
 
 	if(argv.jsonFile)
 		await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(rows));

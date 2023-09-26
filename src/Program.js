@@ -8,6 +8,7 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
+import {programs} from "./program/programs.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
@@ -100,7 +101,7 @@ export class Program
 	// runs the current program with the given input and output FileSets and various options
 	async run(f, {timeout=DEFAULT_TIMEOUT, flags={}, originalInput, chain, suffix="", isChain, chainParent, format, xlog=new XLog()}={})
 	{
-		flags = {...flags, ...RUNTIME.globalFlags[this.programid]};	// eslint-disable-line no-param-reassign
+		flags = {...flags, ...RUNTIME.globalFlags[this.programid]};
 		if(!(f instanceof FileSet))
 			throw new Error(`Program ${fg.orange(this.programid)} run didn't get a FileSet as arg 1`);
 		
@@ -196,7 +197,7 @@ export class Program
 
 			// first we have to run fixPerms in order to ensure we can access the new files
 			xlog.info`Program ${fg.orange(this.programid)} fixing permissions for: ${f.outDir.absolute}...`;
-			await runUtil.run(Program.binPath("fixPerms"), [], {cwd : f.outDir.absolute, liveOutput : true});
+			await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : f.outDir.absolute, liveOutput : true});
 
 			// next we fix any filenames that contain UTF16 or other non-UTF8 characters, converting them to UTF8. This fixes problems with tree/readdir etc. because deno only supports UTF8 encodings
 			// can run `convmv --list` for a list of valid encoding names
@@ -558,7 +559,7 @@ export class Program
 		{
 			const chainParts = progRaw.split("->");
 			progOptions.chain = chainParts.slice(1).join("->");
-			progRaw = chainParts[0].trim();	// eslint-disable-line no-param-reassign
+			progRaw = chainParts[0].trim();
 		}
 
 		const {programid, flags, progOptions : moreProgOptions} = Program.parseProgram(progRaw);
@@ -571,7 +572,6 @@ export class Program
 		progOptions.flags ||= {};
 		Object.assign(progOptions.flags, flags);
 
-		const {programs} = await import("./program/programs.js");
 		const program = programs[programid];
 		if(!program)
 			throw new Error(`Unknown programid: ${programid}`);
@@ -737,9 +737,8 @@ export class Program
 		return {programid, flags, progOptions};
 	}
 
-	static async hasProgram(progRaw)
+	static hasProgram(progRaw)
 	{
-		const {programs} = await import("./program/programs.js");
 		const {programid} = Program.parseProgram(progRaw);
 		return Object.hasOwn(programs, programid);
 	}

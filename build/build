@@ -1,5 +1,0 @@
-#!/bin/sh
-shopt -s expand_aliases
-source /etc/bash/bashrc.d/bash_aliases
-
-dra /mnt/compendium/DevLab/dexvert/build/build.js "$@"

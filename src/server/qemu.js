@@ -300,7 +300,7 @@ export class qemu extends Server
 		const runPair = {};
 
 		// some items have a higher priority than others, but being a Set we can't change the order, so we make a temporary array that has the high priority items first. we also use [].concat instead of rest params to avoid call stack overflow
-		const prioritizedQueueArray = [].concat(Array.from(RUN_QUEUE).filter(v => v.qemuPriority), Array.from(RUN_QUEUE).filter(v => !v.qemuPriority));	// eslint-disable-line sembiance/disfavor-array-concat
+		const prioritizedQueueArray = [].concat(Array.from(RUN_QUEUE).filter(v => v.qemuPriority), Array.from(RUN_QUEUE).filter(v => !v.qemuPriority));
 		for(const runTask of prioritizedQueueArray)
 		{
 			if(seenOSIDs.has(runTask.body.osid))

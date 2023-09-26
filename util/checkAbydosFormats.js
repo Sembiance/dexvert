@@ -1,7 +1,9 @@
 import {xu} from "xu";
-import {DOMParser} from "denoLandX";
-import {formats} from "../src/format/formats.js";
+import {DOMParser} from "../deno/deno-dom/deno-dom-native.ts";
+import {formats, init as initFormats} from "../src/format/formats.js";
 import {runUtil} from "xutil";
+
+await initFormats();
 
 const IGNORED_MIMES =
 [

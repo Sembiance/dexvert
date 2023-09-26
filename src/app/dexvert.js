@@ -1,8 +1,8 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
+import {path} from "std";
 import {cmdUtil, fileUtil} from "xutil";
-import {dexvert} from "../dexvert.js";
-import {DexFile} from "../DexFile.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -57,39 +57,31 @@ async function handleExit(ignored)
 	Deno.exit(0);
 }
 
-const inputFile = await DexFile.create(argv.inputFilePath);
-if(argv.fileMeta)
-	inputFile.meta = xu.parseJSON(argv.fileMeta, {});
+const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
+const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+if(logLines.length)
+	console.log(`${logLines.join("\n")}\n`);
 
-const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
-if(!dexState)
+if(!r)
 	await handleExit(xlog.warn`No processed result.`);
 
-if(argv.jsonFile || argv.json)
-	xlog.debug`Stringifying and serializing state...`;
-const serializedState = (argv.jsonFile || argv.json) ? JSON.stringify(dexState.serialize()) : null;
-
 if(argv.jsonFile)
-	await fileUtil.writeTextFile(argv.jsonFile, serializedState);
+	await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(r.json));
 
 if(argv.json)
-	console.log(serializedState);
+	console.log(JSON.stringify(r.json));
 
 if(xlog.atLeast("fatal"))
 {
 	if(argv.logFile)
 	{
-		xlog.warn`${dexState.pretty()}`;
+		xlog.warn`${r.pretty}`;
 	}
 	else if(!argv.json)
 	{
 		xlog.debug`Outputting prettyfied state to console...`;
-		console.log(`${dexState.pretty()}`);
+		console.log(`${r.pretty}`);
 	}
 }
-
-// if we are not processed, then by default this is our lastTry so output that we have no result
-if(!dexState.processed)
-	xlog.warn`No processed result.`;
 
 await handleExit();

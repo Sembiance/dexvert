@@ -1,10 +1,43 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* I now have a package for grok which decodes JPEG2000 images: https://github.com/GrokImageCompression/grok/wiki/2.-grk_decompress
+  So create a program for it and add it to jpeg2000 format
+
+* Test abydosconvert with JPEG XL images
+  Also I added grok support, so test it with JPEG2000 images
+
+* New recoil formats (maybe can find examples on sourceforge issues/mailing list?):
+MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
+Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1
+Atari ST/STE	IM	Atari Image Manager	up to 256x256	256-level grayscale	1
+Atari ST/STE	GRX	Grafix			1
+Atari Falcon	BP6, BP8, C06, C08, C16, C24, C32	UIMG			1
+
 * Remove the temporary symlink /usr/lib64/libtiff.so.5 (from dexvert)
   Re-do the environment for bin/zztScreenshotter as it currently links to libtiff.so.5 which isn't installed
   Re-sync up to cobbleton-public and then to dexvert
 
+* There is a bug in DebLab/app/uniso.js --hfs --macEncoding=japan MACUSER-MACBIN40A-1997-03.ISO out
+From this ISO:
+http://discmaster.textfiles.com/browse/10406
+https://archive.org/details/macuser-macbin40-1997-03
+If you `hcdi 2403` and then do `hls -albi` you will see messed up entry for Music.DAT.1
+This is because the creator code is 'KS2\r' instead of 'KS2 ' and the carriage return screws up the output causing uniso.js to fail
+I can add code to hfsutils in show_long() in hls.c that will write a char safeCreator[5]; and safeType[5] char by char and only copying over printable ASCII values otherwise specifying '?' and then using that below for both the type and creator
+
+* Ensure all the files from these CDs convert properly:
+iso/Digital Magazine for Photography - Gallery
+iso/Sexual Girls in Magical World
+iso/Natsu Nice Gal Summary '94
+iso/Love Bytes
+
+* I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
+  It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos
+
+* Upload all packages in dexvert to latest versions
+
+* Look into adopting KeyView Pro as more conversion software. See: https://archive.org/details/KeyViewPro
 
 /---------------\
 | High Priority |
@@ -180,6 +213,7 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
 	After added, register rated 4 items: Archive Magazine, Archimedes *, ARM Club, APDL*, Archimedes, RISCafe
 	Including re-registering manually on command line: /mnt/retromission/ia/3/327a4eeb2a6d94439c0d09d381255cabbf223e06
 
+* See if GoADF has a version 4 yet, as that should have an arexx port and I can then add GoADF support to dexvert: http://www.bitplan.pl/goadf/download.html
 
 /--------------\
 | Low Priority |
@@ -197,7 +231,8 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-* Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
+* Consider updating IsoBuster to 5.2 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
+  Look for additional release notes for more formats I can support (see what version I currently am using and read all notes since that version)
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html

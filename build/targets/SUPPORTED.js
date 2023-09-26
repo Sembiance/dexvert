@@ -1,14 +1,13 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
-import {formats} from "../../src/format/formats.js";
+import {formats, init as initFormats} from "../../src/format/formats.js";
 import {DexState} from "../../src/DexState.js";
 import {DexFile} from "../../src/DexFile.js";
 import {FileSet} from "../../src/FileSet.js";
 import {Identification} from "../../src/Identification.js";
-import {programs} from "../../src/program/programs.js";
+import {programs, init as initPrograms} from "../../src/program/programs.js";
 
-const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
 
 const DUMMY_FILE_PATH = await fileUtil.genTempPath();
@@ -18,6 +17,11 @@ await Deno.mkdir(DUMMY_DIR_PATH);
 
 export default async function buildSUPPORTED(xlog)
 {
+	await initPrograms(xlog);
+	await initFormats(xlog);
+
+	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
+
 	xlog.info`Writing SUPPORTED.md to disk...`;
 	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
 Converters are in priority order. That is, early converter entries handle the format better than later converters.

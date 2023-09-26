@@ -13,7 +13,6 @@ export class Family
 		validateClass(family, {
 			// meta
 			verify  : {type : "function", length : 2}, 	// verifies the new files and ensures they are valid
-			metaids : {type : ["string"]},	// list of meta provider id strings
 			meta    : {type : "function", length : [1]}
 		});
 		return family;

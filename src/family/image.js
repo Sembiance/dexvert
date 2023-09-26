@@ -2,8 +2,7 @@ import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
-import {DOMParser} from "denoLandX";
-import {programs} from "../program/programs.js";
+import {DOMParser} from "../../deno/deno-dom/deno-dom-native.ts";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
 const TENSOR_PATH_EXCLUSIONS =
@@ -28,8 +27,6 @@ const SKIP_TENSOR_MAX_IMAGE_SIZE = 6000;
 
 export class image extends Family
 {
-	metaids = ["image", "darkTable", "ansiArt", ...Object.keys(programs)];
-
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
@@ -57,6 +54,7 @@ export class image extends Family
 			return false;
 		}
 
+		const {programs} = await import("../program/programs.js");
 		const isUnsafe = programs[dexState.ran?.at(-1)?.programid]?.unsafe || dexState.ran?.at(-1)?.unsafe;
 
 		if(isUnsafe && meta.width===1 && meta.height===1)
@@ -85,7 +83,8 @@ export class image extends Family
 			return false;
 		}
 		
-		let skipTensor = null;
+		// TODO Either uncomment and get working or REMOVE
+		/*let skipTensor = null;
 
 		// Only classify these image types
 		if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
@@ -115,7 +114,7 @@ export class image extends Family
 		else
 		{
 			xlog.warn`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
-		}
+		}*/
 
 		return {identifications, meta};
 	}

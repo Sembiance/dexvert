@@ -19,7 +19,7 @@ const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["siegfried", "tensor", "qemu"];
+const SERVER_ORDER = ["siegfried", "dexrpc"];	// TODO RE-INTRODUCE: , "tensor", "qemu"];
 
 const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(xu.dirname(import.meta), `../server/${serverid}.js`)))[serverid].create(xlog)]));
 
@@ -33,7 +33,7 @@ if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 
 xlog.info`Cleaning up previous dexvert RAM installation...`;
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
-await runUtil.run("/mnt/compendium/DevLab/dexvert/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
+await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 
@@ -58,7 +58,6 @@ async function stopDexserver(sig)
 	xlog.info`Exiting...`;
 	Deno.exit(0);
 }
-["SIGINT", "SIGTERM"].map(v => Deno.addSignalListener(v, async () => await stopDexserver(v)));
 
 xu.waitUntil(async () =>
 {

@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {identify} from "./identify.js";
-import {formats} from "./format/formats.js";
+import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
 import {DexState} from "./DexState.js";

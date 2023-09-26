@@ -1,12 +1,15 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {path} from "std";
-import {formats} from "../../src/format/formats.js";
+import {formats, init as initFormats} from "../../src/format/formats.js";
 
-const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
 const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
 export default async function buildUNSUPPORTED(xlog)
 {
+	await initFormats(xlog);
+	
+	const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
+
 	xlog.info`Writing UNSUPPORTED.md to disk...`;
 	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>

@@ -75,7 +75,7 @@ if(rtfFilePath && (await Deno.stat(rtfFilePath))?.size)
 	{
 		for(const {regex : imageRefRegex} of IMAGE_REF_REGEXES)
 		{
-			rtfLine = await rtfLine.replaceAsync(imageRefRegex, async (m, filename) =>	// eslint-disable-line no-param-reassign
+			rtfLine = await rtfLine.replaceAsync(imageRefRegex, async (m, filename) =>
 			{
 				const rtfPNG = hex => `\\pard {\\pict\\pngblip\n${hex}}`;
 				const availableFilename = availableFilenames.has(filename) ? filename : (availableFilenames.has(path.basename(filename, path.extname(filename))) ? path.basename(filename, path.extname(filename)) : null);

@@ -3,7 +3,7 @@ import {XLog} from "xlog";
 import {printUtil, cmdUtil} from "xutil";
 import {path} from "std";
 
-const TARGET_NAMES = ["programs", "formats", "README", "SUPPORTED", "UNSUPPORTED", "release"];
+const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED", "release"];
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Builds one or more targets",
@@ -22,7 +22,5 @@ const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES
 for(const [i, targetid] of Object.entries(targetids))
 {
 	xlog.info`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;
-
-	// DO not be tempted to make the import static because the 'formats.js' outtput file might point to files that no longer exist and README/SUPPORTED/UNSUPPORTED targets load this
 	await (await import(path.join(xu.dirname(import.meta), "targets", `${targetid}.js`))).default(xlog);
 }

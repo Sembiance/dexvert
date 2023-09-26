@@ -4,13 +4,15 @@ import {XLog} from "xlog";
 import {runUtil, fileUtil, printUtil, encodeUtil} from "xutil";
 import {path, delay, base64Encode} from "std";
 import {Program} from "../src/Program.js";
-import {formats} from "../src/format/formats.js";
+import {formats, init as initFormats} from "../src/format/formats.js";
 import {DexFile} from "../src/DexFile.js";
 import {FileSet} from "../src/FileSet.js";
 import {getDetections} from "../src/Detection.js";
-import {programs} from "../src/program/programs.js";
+import {programs, init as initPrograms} from "../src/program/programs.js";
 
 const xlog = new XLog("info");
+await initPrograms(xlog);
+await initFormats(xlog);
 
 const programFormats = {};
 const finalProgramFormats = {};

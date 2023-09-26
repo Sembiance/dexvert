@@ -4,14 +4,16 @@ import {XLog} from "xlog";
 import {runUtil, fileUtil, printUtil} from "xutil";
 import {path, delay, base64Encode} from "std";
 import {Program} from "../src/Program.js";
-import {formats} from "../src/format/formats.js";
+import {formats, init as initFormats} from "../src/format/formats.js";
 import {DexFile} from "../src/DexFile.js";
 import {getDetections} from "../src/Detection.js";
-import {programs} from "../src/program/programs.js";
+import {programs, init as initPrograms} from "../src/program/programs.js";
 
 // this program will check all formats for all converters they use and if the family of the converter doesn't match the family of the format, then it is noted and output to console
 
 const xlog = new XLog("info");
+await initPrograms(xlog);
+await initFormats(xlog);
 
 const PROGRAM_BASE_PATH = path.join(xu.dirname(import.meta), "..", "src", "program");
 const programFamilies = Object.fromEntries((await fileUtil.tree(PROGRAM_BASE_PATH, {nodir : true, regex : /.+\/.+\.js$/i})).map(v => path.relative(PROGRAM_BASE_PATH, v)).map(v => ([path.basename(v, ".js"), path.dirname(v)])));

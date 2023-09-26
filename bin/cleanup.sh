@@ -26,7 +26,7 @@ cd .X11-unix || exit
 rm -f ./*
 
 cd /mnt/ram || exit
-/mnt/compendium/DevLab/dexvert/bin/fixPerms
+/mnt/compendium/bin/fixPerms
 rm -rf dexvert
 
 fd . /home/"$whoami"/.dbus/session-bus/ --type=file -x rm {} \;

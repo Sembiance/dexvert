@@ -10,4 +10,3 @@ export class ppm extends Format
 	metaProvider = ["image"];
 	converters   = ["convert", "gimp", "hiJaakExpress", "canvas", "tomsViewer", "pv[matchType:magic]"];
 }
-

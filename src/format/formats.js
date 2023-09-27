@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
 import {path, assertStrictEquals} from "std";
 import {Format} from "../../src/Format.js";
@@ -8,60 +8,58 @@ import {XLog} from "xlog";
 const formats = {};
 export {formats};
 
-let hasInitialized = false;
+let initCalled = false;
 
-export async function init(xlog=new XLog("error"))
+const formatDirPath = path.join(xu.dirname(import.meta), "..", "..", "src", "format");
+
+async function loadFormatFilePath(formatFilePath, {reload}={})
 {
-	if(hasInitialized)
+	if(formatFilePath.endsWith("formats.js"))
 		return;
 
-	const formatDirPath = path.join(xu.dirname(import.meta), "..", "..", "src", "format");
-	xlog.info`Finding format JS files...`;
-	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
-	xlog.info`Processing ${formatFilePaths.length} format files...`;
+	const formatModule = await import(reload ? `${formatFilePath}#${Date.now() + performance.now()}` : formatFilePath);
+	const formatid = Object.keys(formatModule).find(k => k.at(0)!=="_");
+	const familyid = path.basename(path.dirname(formatFilePath));
+	if(!families[familyid])
+		throw new Error(`format [${formatid}] at [${formatFilePath}] is in a directory [${familyid}] that does not have a family class`);
 
-	const existingFormatids = new Set();
+	// class name must match filename
+	assertStrictEquals(formatid, path.basename(formatFilePath, ".js"), `format file [${formatFilePath}] does not have a matching class name [${formatid}]`);
 
-	for(const formatFilePath of formatFilePaths)
+	// check for duplicates
+	if(!reload && formats[formatid])
+		throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate`);
+
+	// create the class and validate it
+	const format = formatModule[formatid].create(families[familyid]);
+	if(!(format instanceof Format))
+		throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
+
+	// some manual checks on meta providers based on what converters are being used
+	for(const [converter, metaProvider] of Object.entries({"convert" : "image", "darktable_cli" : "darkTable", "ansilove" : "ansiArt"}))
 	{
-		if(formatFilePath.endsWith("formats.js"))
-			continue;
-
-		const formatModule = await import(formatFilePath);
-		const formatid = Object.keys(formatModule).find(k => k.at(0)!=="_");
-		const familyid = path.basename(path.dirname(formatFilePath));
-		if(!families[familyid])
-			throw new Error(`format [${formatid}] at [${formatFilePath}] is in a directory [${familyid}] that does not have a family class`);
-
-		// class name must match filename
-		assertStrictEquals(formatid, path.basename(formatFilePath, ".js"), `format file [${formatFilePath}] does not have a matching class name [${formatid}]`);
-
-		// check for duplicates
-		if(existingFormatids.has(formatid.toLowerCase()))
-			throw new Error(`format [${formatid}] at [${formatFilePath}] is a duplicate`);
-
-		// create the class and validate it
-		const format = formatModule[formatid].create(families[familyid]);
-		if(!(format instanceof Format))
-			throw new Error(`format [${formatid}] at [${formatFilePath}] is not of type Format`);
-
-		// some manual checks on meta providers based on what converters are being used
-		for(const [converter, metaProvider] of Object.entries({"convert" : "image", "darktable_cli" : "darkTable", "ansilove" : "ansiArt"}))
-		{
-			const allowFormatsMetaMismatch = ["ttf", "otf", "pcd"];
-			if(Array.isArray(format.converters) && format.converters.some(v => v===converter || (typeof v==="string" && v.startsWith(`${converter}[`))) && !(format.metaProvider || []).includes(metaProvider) && !allowFormatsMetaMismatch.includes(formatid))
-				throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
-		}
-
-		if(Object.hasOwn(format, "forbidExtMatch") && !Object.hasOwn(format, "ext"))
-			xlog.error`format ${formatid} has forbidExtMatch, but no ext`;
-
-		formats[formatid] = format;
-		existingFormatids.add(formatid.toLowerCase());
+		const allowFormatsMetaMismatch = ["ttf", "otf", "pcd"];
+		if(Array.isArray(format.converters) && format.converters.some(v => v===converter || (typeof v==="string" && v.startsWith(`${converter}[`))) && !(format.metaProvider || []).includes(metaProvider) && !allowFormatsMetaMismatch.includes(formatid))
+			throw new Error(`format ${formatid} has ${converter} as a converter, but NOT ${metaProvider} as a metaProvider.`);
 	}
 
-	// process our 'unsupported.js' formats
-	const {default : unsupported} = await import("./unsupported.js");
+	if(Object.hasOwn(format, "forbidExtMatch") && !Object.hasOwn(format, "ext"))
+		throw new Error(`format ${formatid} has forbidExtMatch, but no ext`);
+
+	formats[formatid] = format;
+}
+
+const unsupportedFormatids = new Set();
+async function loadUnsupported({reload}={})
+{
+	if(reload)
+	{
+		for(const formatid of unsupportedFormatids)
+			delete formats[formatid];
+		unsupportedFormatids.clear();
+	}
+
+	const {default : unsupported} = await import(reload ? `./unsupported.js#${Date.now() + performance.now()}` :"./unsupported.js");
 	for(const [familyid, unsupportedFormats] of Object.entries(unsupported))
 	{
 		for(const [formatid, o] of Object.entries(unsupportedFormats))
@@ -88,11 +86,22 @@ export async function init(xlog=new XLog("error"))
 				}
 			});
 			formats[formatid].formatid = formatid;
+			unsupportedFormatids.add(formatid);
 		}
 	}
+}
 
-	// process our 'simple.js' formats
-	const {default : simple} = await import("./simple.js");
+const simpleFormatids = new Set();
+async function loadSimple({reload}={})
+{
+	if(reload)
+	{
+		for(const formatid of simpleFormatids)
+			delete formats[formatid];
+		simpleFormatids.clear();
+	}
+
+	const {default : simple} = await import(reload ? `./simple.js#${Date.now() + performance.now()}` :"./simple.js");
 	for(const [familyid, simpleFormats] of Object.entries(simple))
 	{
 		for(const [formatid, o] of Object.entries(simpleFormats))
@@ -122,8 +131,56 @@ export async function init(xlog=new XLog("error"))
 					format.forbidExtMatch = true;
 			});
 			formats[formatid].formatid = formatid;
+			simpleFormatids.add(formatid);
 		}
 	}
+}
 
-	hasInitialized = true;
+export async function init(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : "info"))
+{
+	if(initCalled)
+		return;
+	initCalled = true;
+
+	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
+	xlog.info`Processing ${formatFilePaths.length} format files...`;
+
+	for(const formatFilePath of formatFilePaths)
+		await loadFormatFilePath(formatFilePath);
+
+	await loadUnsupported();
+	await loadSimple();
+}
+
+export async function monitor(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : "info"))
+{
+	const monitorcb = async ({type, filePath}) =>
+	{
+		if(!filePath || filePath.endsWith("formats.js"))
+			return;
+
+		if(type==="create" || type==="modify")
+		{
+			try
+			{
+				if(filePath.endsWith("unsupported.js"))
+					await loadUnsupported({reload : true});
+				else if(filePath.endsWith("simple.js"))
+					await loadSimple({reload : true});
+				else
+					await loadFormatFilePath(filePath, {reload : true});
+				
+				xlog.info`${fg.violet("RELOADED")} format/${path.relative(formatDirPath, filePath)}`;
+			}
+			catch(err) { xlog.error`FAILED to RELOAD format: ${filePath} error: ${err}`; }
+		}
+		else if(type==="delete")
+		{
+			delete formats[path.basename(filePath, ".js")];
+			xlog.info`${fg.violet("UNLOADED")} format/${path.relative(formatDirPath, filePath)}`;
+		}
+	};
+
+	if(!Deno.env.get("DEXPROD"))
+		await fileUtil.monitor(formatDirPath, monitorcb);
 }

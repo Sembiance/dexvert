@@ -17,7 +17,6 @@ const argv = cmdUtil.cmdInit({
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		report     : {desc : "Output an HTML report of the results."},
 		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."},
-		skipBuild  : {desc : "Skip building dexvert before running tests."},
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
 
@@ -286,9 +285,6 @@ const SAMPLE_DIR_PATH = path.join(SAMPLE_DIR_ROOT_PATH, ...(argv.format ? [argv.
 const outputFiles = [];
 
 await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
-
-if(!argv.skipBuild)
-	await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "build", "build.js"), "programs", "formats"), runUtil.denoRunOpts({liveOutput : true}));
 
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
@@ -604,7 +600,7 @@ if(newSuccesses.length>0)
 	xlog.info`\n${newSuccesses.length.toLocaleString()} new successes. Execute to record: ${recordNewSuccessesScriptFilePath}`;
 	await fileUtil.writeTextFile(recordNewSuccessesScriptFilePath, `#!/bin/bash
 cd /mnt/compendium/DevLab/dexvert/test || exit
-${newSuccesses.map(v => `./testdexvert --skipBuild --record ${v}`).join("\n")}
+${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}
 `);
 	await runUtil.run("chmod", ["755", recordNewSuccessesScriptFilePath]);
 }

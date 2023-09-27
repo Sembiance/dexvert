@@ -11,8 +11,12 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Starts needed background services for dexvert to properly function",
 	opts    :
 	{
+		prod     : {desc : "Run in production mode."},
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
 	}});
+
+if(argv.prod)
+	Deno.env.set("DEXPROD", "1");
 
 const xlog = new XLog(argv.logLevel);
 const startedAt = performance.now();
@@ -83,4 +87,4 @@ await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
 
 while(true)
-	await delay(xu.MONTH);
+	await delay(xu.DAY);

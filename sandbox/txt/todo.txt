@@ -230,12 +230,8 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-<<<<<<< HEAD
 * Consider updating IsoBuster to 5.2 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
   Look for additional release notes for more formats I can support (see what version I currently am using and read all notes since that version)
-=======
-* Consider updating IsoBuster to 5.1 (or later if new version available) (WARNING! BACKUP win hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
->>>>>>> bc381a945c15d7e17bba0da009977fdccba4015f
   NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html

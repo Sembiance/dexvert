@@ -4,14 +4,17 @@ import {dexvert} from "../dexvert.js";
 import {identify} from "../identify.js";
 import {XLog} from "xlog";
 import {DexFile} from "../DexFile.js";
-import {init as initPrograms} from "../program/programs.js";
-import {init as initFormats} from "../format/formats.js";
+import {init as initPrograms, monitor as monitorPrograms} from "../program/programs.js";
+import {init as initFormats, monitor as monitorFormats} from "../format/formats.js";
 
 const DEX_MAX_DURATION = xu.HOUR;
 const DEX_LONG_DURATION_EXTS = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr", ".hlp", ".rsrc"];
 
 await initPrograms();
 await initFormats();
+
+await monitorFormats();
+await monitorPrograms();
 
 await xwork.openConnection();
 

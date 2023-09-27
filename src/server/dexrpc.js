@@ -18,7 +18,10 @@ export class dexrpc extends Server
 		this.xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
 		this.pool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
 
-		await this.pool.start(path.join(xu.dirname(import.meta), "dexWorker.js"), {size : DEX_WORKER_COUNT});
+		const runEnv = {};
+		if(Deno.env.get("DEXPROD"))
+			runEnv.DEXPROD = "1";
+		await this.pool.start(path.join(xu.dirname(import.meta), "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv});
 		this.xlog.info`${DEX_WORKER_COUNT} workers ready!`;
 
 		this.xlog.info`Starting web RPC...`;

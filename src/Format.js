@@ -126,6 +126,7 @@ export class Format
 			meta             : {type : "function", length : [0, 2]},
 			packed           : {type : "boolean"},
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
+			simple           : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			unsupported      : {type : "boolean"},
 			untouched        : {types : ["boolean", "function"]},

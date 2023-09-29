@@ -3,9 +3,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
-import {XWorkerPool} from "XWorkerPool";
-
-const xlog = new XLog();
+import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -16,9 +14,13 @@ const argv = cmdUtil.cmdInit({
 		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		report     : {desc : "Output an HTML report of the results."},
+		json       : {desc : "Output results as JSON"},
 		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."},
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
+
+const xlog = new XLog(argv.json ? "none" : "info");
+const outJSON = {};
 
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
@@ -320,7 +322,7 @@ let failCount=0;
 const failures=[];
 let workercbCount = 0;
 const newSuccesses = [];
-async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
+async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 {
 	if(!sampleFilePath)
 	{
@@ -348,7 +350,8 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 			if(newMark>completedMark)
 			{
 				completedMark = newMark;
-				xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
+				if(!argv.json)
+					xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
 			}
 		}
 
@@ -360,7 +363,8 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 		failCount++;
 
 		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n`);
-		xu.stdoutWrite(xu.c.blink + fg.red("F"));
+		if(!argv.json)
+			xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
 		if(argv.report && !argv.record)
@@ -371,7 +375,8 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 
 	async function pass(c)
 	{
-		xu.stdoutWrite(c);
+		if(!argv.json)
+			xu.stdoutWrite(c);
 
 		if(argv.report && !argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
@@ -383,7 +388,8 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 
 	function newSuccess()
 	{
-		xu.stdoutWrite(xu.c.blink + fg.green("N"));
+		if(!argv.json)
+			xu.stdoutWrite(xu.c.blink + fg.green("N"));
 
 		newSuccesses.push(`--format=${diskFormatid} --file='${path.relative(diskFormatid, sampleSubFilePath)}'`);
 
@@ -551,13 +557,9 @@ async function workercb(workerid, {sampleFilePath, tmpOutDirPath, err, dexData})
 	return await pass(fg.white("·"));
 }
 
-const numWorkers = Math.min(sampleFilePaths.length, NUM_WORKERS);
-xlog.info`Starting testWorker pool of ${numWorkers} workers...`;
-const pool = new XWorkerPool({workercb, xlog});
-await pool.start(path.join(xu.dirname(import.meta), "testWorker.js"), {size : numWorkers});
-
 xlog.info`Testing ${sampleFilePaths.length} sample files...`;
-pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
+//pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
+await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 {
 	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
 	const diskFamily = sampleSubFilePath.split("/")[0];
@@ -565,29 +567,31 @@ pool.process(await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
-	const logFilePath = path.join(path.dirname(tmpOutDirPath), "log.txt");
 
-	const o = {sampleFilePath, tmpOutDirPath, logFilePath, programFlag : {}};
+	const o = {op : "dexvert", inputFilePath : sampleFilePath, outputDirPath : tmpOutDirPath, logLevel : "info", prod : true, dexvertOptions : {programFlag : {}}};
 	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
 	{
-		o.programFlag.osHint = {};
-		o.programFlag.osHint[FORMAT_OS_HINT[diskFormatid]] = true;
+		o.dexvertOptions.programFlag.osHint = {};
+		o.dexvertOptions.programFlag.osHint[FORMAT_OS_HINT[diskFormatid]] = true;
 	}
 	else if(Object.isObject(FORMAT_OS_HINT[diskFormatid]) && FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)])
 	{
-		o.programFlag.osHint = {};
-		o.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
+		o.dexvertOptions.programFlag.osHint = {};
+		o.dexvertOptions.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
 	}
 	if(Object.isObject(FORMAT_PROGRAM_FLAG[diskFormatid]) && FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)])
-		Object.assign(o.programFlag, FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)]);
+		Object.assign(o.dexvertOptions.programFlag, FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)]);
 	if(FORCE_FORMAT_AS.includes(diskFormatid))
-		o.asFormat = diskFormatid;
+		o.dexvertOptions.asFormat = diskFormatid;
 
-	return o;
-}));
+	const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+	if(logLines?.length)
+		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), logLines.join("\n"));
+
+	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});
+}, Math.min(sampleFilePaths.length, NUM_WORKERS));
 
 await xu.waitUntil(() => workercbCount===sampleFilePaths.length);
-await pool.stop();
 
 xlog.info``;	// gets us out of the period stdoud section onto a new line
 
@@ -607,7 +611,8 @@ ${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}
 
 async function writeOutputHTML()
 {
-	await fileUtil.writeTextFile("/mnt/ram/tmp/testdexvert.html", `
+	const reportFilePath = path.join(DEXTEST_ROOT_DIR, "report.html");
+	await fileUtil.writeTextFile(reportFilePath, `
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -715,7 +720,8 @@ async function writeOutputHTML()
 	}).join("")}
 	</body>
 </html>`);
-	xlog.info`\nReport written to: ${getWebLink("/mnt/ram/tmp/testdexvert.html")}`;
+	xlog.info`\nReport written to: ${getWebLink(reportFilePath)}`;
+	outJSON.reportFilePath = reportFilePath;
 }
 
 if(argv.record)
@@ -723,9 +729,13 @@ if(argv.record)
 
 await runUtil.run("find", [DEXTEST_ROOT_DIR, "-type", "d", "-empty", "-delete"]);
 
-xlog.info`\nElapsed time: ${((performance.now()-startTime)/xu.SECOND).secondsAsHumanReadable()}`;
+outJSON.elapsed = performance.now()-startTime;
+xlog.info`\nElapsed time: ${(outJSON.elapsed/xu.SECOND).secondsAsHumanReadable()}`;
 
-xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100))}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;
+outJSON.successPercentage = Math.floor((((sampleFilePaths.length-failCount)/sampleFilePaths.length)*100));
+xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${outJSON.successPercentage}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;
+outJSON.sampleFileCount = sampleFilePaths.length;
+outJSON.failCount = failCount;
 
 if(Object.keys(slowFiles).length>0)
 {
@@ -738,3 +748,6 @@ if(oldDataFormats.length>0)
 
 if(argv.report && !argv.record)
 	await writeOutputHTML();
+
+if(argv.json)
+	console.log(JSON.stringify(outJSON));

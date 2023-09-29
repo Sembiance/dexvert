@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil} from "xutil";
-import {path, readLines} from "std";
+import {path, TextLineStream} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -14,7 +14,8 @@ const argv = cmdUtil.cmdInit({
 const inputFile = await Deno.open(argv.inputFilePath);
 let inHex = false;
 const hexBytes = [];
-for await(const line of readLines(inputFile))
+
+for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(inHex)
 	{
@@ -38,8 +39,6 @@ for await(const line of readLines(inputFile))
 		break;
 	}
 }
-
-inputFile.close();
 
 if(inHex && hexBytes.length>0)	// eslint-disable-line unicorn/prefer-ternary
 	await Deno.writeFile(path.join(argv.outputDirPath, path.basename(argv.inputFilePath, ".txt")), Uint8Array.from(hexBytes));

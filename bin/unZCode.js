@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, runUtil, fileUtil} from "xutil";
-import {readLines, streams} from "std";
+import {TextLineStream} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -21,7 +21,7 @@ const encoder = new TextEncoder();
 const outputFile = await Deno.open(argv.outputFilePath, {create : true, write : true, truncate : true});
 const inputFile = await Deno.open(txdOutFilePath);
 let skip = false;
-for await(const line of readLines(inputFile))
+for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(line.startsWith("[Start of code]"))
 	{
@@ -38,7 +38,7 @@ for await(const line of readLines(inputFile))
 	if(skip)
 		continue;
 	
-	await streams.writeAll(outputFile, encoder.encode(line + "\n"));	// eslint-disable-line prefer-template
+	await new Blob([encoder.encode(line + "\n")]).stream().pipeTo(outputFile.writable, {preventClose : true});	// eslint-disable-line prefer-template
 }
 
 outputFile.close();

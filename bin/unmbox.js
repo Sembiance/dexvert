@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil} from "xutil";
-import {path, readLines} from "std";
+import {path, TextLineStream} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -23,7 +23,7 @@ let msg = {};
 let prevLineEmpty = true;
 
 const inputFile = await Deno.open(argv.inputFilePath);
-for await(const line of readLines(inputFile))
+for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(line.trim().length===0)
 	{

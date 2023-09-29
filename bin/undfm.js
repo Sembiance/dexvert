@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {cmdUtil} from "xutil";
-import {path, readLines, streams} from "std";
+import {path, TextLineStream} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -20,7 +20,7 @@ let imageType = null;
 let imageCounter=0;
 let inImage = false;
 const hexBytes = [];
-for await(const line of readLines(inputFile))
+for await(const line of await inputFile.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TextLineStream()))
 {
 	if(inImage)
 	{
@@ -69,7 +69,7 @@ for await(const line of readLines(inputFile))
 			}
 
 			const imageFilePath = path.join(argv.outputDirPath, `image${imageCounter.toString().padStart(3, "0")}${ext}`);
-			await streams.writeAll(outputFile, encoder.encode(`<${path.basename(imageFilePath)}>}\n`));
+			await new Blob([encoder.encode(`<${path.basename(imageFilePath)}>}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
 
 			await Deno.writeFile(imageFilePath, Uint8Array.from(uintData.subarray(offset)));
 			imageCounter++;
@@ -78,15 +78,14 @@ for await(const line of readLines(inputFile))
 	else if((/^Picture|Icon\.Data = {$/).test(line.trim()))
 	{
 		imageType = line.trim().split(".")[0];
-		await streams.writeAll(outputFile, encoder.encode(line));
+		await new Blob([encoder.encode(line)]).stream().pipeTo(outputFile.writable, {preventClose : true});
 		hexBytes.clear();
 		inImage = true;
 	}
 	else
 	{
-		await streams.writeAll(outputFile, encoder.encode(`${line}\n`));
+		await new Blob([encoder.encode(`${line}\n`)]).stream().pipeTo(outputFile.writable, {preventClose : true});
 	}
 }
 
-inputFile.close();
 outputFile.close();

@@ -9,6 +9,7 @@ import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
 import {programs} from "./program/programs.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
@@ -51,12 +52,13 @@ export class Program
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
-			flags        : {type : Object},
-			notes        : {type : "string"},
-			package      : {types : ["string", Array]},
-			runOptions   : {types : [Object, "function"]},
-			unsafe       : {type : "boolean"},
-			website      : {type : "string", url : true},
+			flags      : {type : Object},
+			exclusive  : {type : "boolean"},
+			notes      : {type : "string"},
+			package    : {types : ["string", Array]},
+			runOptions : {types : [Object, "function"]},
+			unsafe     : {type : "boolean"},
+			website    : {type : "string", url : true},
 
 			// execution
 			args             : {type : "function", length : [0, 1]},
@@ -155,10 +157,22 @@ export class Program
 			if(this.runOptions)
 				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 
+			if(this.exclusive)
+			{
+				xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
+				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
+			}
+
 			xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
 			xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
 			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 			Object.assign(r, {stdout, stderr, status});
+
+			if(this.exclusive)
+			{
+				xlog.debug`Program ${fg.orange(this.programid)} releasing lock...`;
+				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
+			}
 		}
 		else if(this.loc==="dos")
 		{

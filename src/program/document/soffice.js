@@ -3,18 +3,20 @@ import {Program, RUNTIME} from "../../Program.js";
 
 export class soffice extends Program
 {
-	website = "https://www.libreoffice.org";
-	unsafe  = true;
-	flags   = {
+	website   = "https://www.libreoffice.org";
+	package   = "app-office/libreoffice";
+	unsafe    = true;
+	flags     = {
 		format      : "Specify the input file format.",	// Can sometimes use these (didn't work for ClarisWorks): https://cgit.freedesktop.org/libreoffice/core/tree/filter/source/config/fragments/filters
 		outType     : `Which format to convert into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
 		autoCropSVG : "If set to true, the output SVG will be autocropped"
 	};
 	bruteFlags = { image : { outType : "png" } };
 	
-	loc  = "gentoo";
-	bin  = "soffice";
-	args = r =>
+	bin        = "soffice";
+	runOptions = ({virtualX : true});
+	exclusive  = true;
+	args       = r =>
 	{
 		const args = [];
 
@@ -32,7 +34,7 @@ export class soffice extends Program
 			args.push(`--infilter=${format}:${charset}`);
 		}
 		
-		return [...args, "--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", "/out", r.inFile()];
+		return [...args, "--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", r.outDir(), r.inFile()];
 	};
 	qemuData  = ({timeout : xu.MINUTE*2});
 	chain     = r => (r.flags.outType==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);

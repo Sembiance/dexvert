@@ -118,6 +118,7 @@ async function loadSimple({reload}={})
 			{
 				converters = ["strings"];
 				packed     = true;
+				simple     = true;
 			}
 
 			formats[formatid] = Simple.create(families[familyid], format =>
@@ -169,7 +170,7 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : 
 					await loadSimple({reload : true});
 				else
 					await loadFormatFilePath(filePath, {reload : true});
-				
+
 				xlog.info`${fg.violet("RELOADED")} format/${path.relative(formatDirPath, filePath)}`;
 			}
 			catch(err) { xlog.error`FAILED to RELOAD format: ${filePath} error: ${err}`; }

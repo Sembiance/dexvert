@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil, sysUtil} from "xutil";
-import {path, delay, streams} from "std";
+import {path, delay} from "std";
 import {WebServer} from "WebServer";
 import {QEMU_SERVER_HOST, QEMU_SERVER_PORT} from "../qemuUtil.js";
 
@@ -392,7 +392,7 @@ export class qemu extends Server
 				return reply(new Response(null, {status : 404}));
 						
 			const inLHA = await Deno.open(inLHAFilePath, {read : true});
-			reply(new Response(streams.readableStreamFromReader(inLHA), {headers : {"Content-Type" : "application/octet-stream"}}));
+			reply(new Response(inLHA.readable, {headers : {"Content-Type" : "application/octet-stream"}}));	// TODO, this used to be: streams.readableStreamFromReader(inLHA)   not sure I got this syntax correct
 		}, {detached : true, method : "GET", logCheck : () => false});
 
 		this.webServer.add("/qemuPOST", async (request, reply) =>

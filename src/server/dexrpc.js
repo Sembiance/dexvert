@@ -8,6 +8,7 @@ import {XWorkerPool} from "XWorkerPool";
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
 const DEX_WORKER_COUNT = 4;
+const LOCKS = new Set();
 
 export class dexrpc extends Server
 {
@@ -35,9 +36,30 @@ export class dexrpc extends Server
 		{
 			const workerData = await request.json();
 			workerData.rpcid = this.rpcid++;
+			workerData.prod ||= !!Deno.env.get("DEXPROD");
 			this.rpcData[workerData.rpcid] = {reply, workerData};
 			this.pool.process([workerData]);
 		}, {detached : true, method : "POST", logCheck : () => false});
+
+		this.webServer.add("/lock", async request =>
+		{
+			const data = await request.json();
+			if(!data?.lockid?.length || LOCKS.has(data.lockid))
+				return new Response("false");
+				
+			LOCKS.add(data.lockid);
+			return new Response("true");
+		}, {method : "POST", logCheck : () => false});
+
+		this.webServer.add("/unlock", async request =>
+		{
+			const data = await request.json();
+			if(!data?.lockid?.length || !LOCKS.has(data.lockid))
+				return new Response("false");
+				
+			LOCKS.delete(data.lockid);
+			return new Response("true");
+		}, {method : "POST", logCheck : () => false});
 
 		await this.webServer.start();
 

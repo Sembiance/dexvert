@@ -4,7 +4,7 @@ import {Program} from "../../Program.js";
 export class inkscape extends Program
 {
 	website    = "https://inkscape.org/";
-	package    = "media-gfx/inkscape-1.1.2-r99::dexvert";	// Modern versions break the --export headless
+	package    = "media-gfx/inkscape";
 	unsafe     = true;
 	bin        = "inkscape";
 	runOptions = ({virtualX : true});

@@ -10,7 +10,7 @@ export class DirMaster extends Program
 		timeout : "Stop after X ms. Default: 3 minutes"
 	};
 	args     = r => ["--exportall", r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		timeout : (+(r.flags.timeout || xu.MINUTE*3)),
 		cwd     : "c:\\out"
 	});

@@ -9,7 +9,7 @@ export class awaveStudio extends Program
 	bruteFlags = { music : {} };
 	args       = () => ["-BATCH"];
 	loc        = "win2k";
-	qemuData   = r => ({
+	osData     = r => ({
 		script : `
 			WinWaitActive("Select conversion type", "", 10)
 			ControlClick("Select conversion type", "", "[CLASS:Button; TEXT:&Next >]")

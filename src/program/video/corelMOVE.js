@@ -8,7 +8,7 @@ export class corelMOVE extends Program
 	loc      = "win2k";
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELMOV.EXE";
 	args     = r => [r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
 			$mainWindow = WindowRequire("CorelMOVE - ${path.basename(r.inFile()).toUpperCase()}", "", 10)

@@ -8,7 +8,7 @@ export class frameMaker extends Program
 	loc      = "win2k";
 	bin      = "c:\\MAKER5\\FRAME.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("FrameMaker", "", 5)
 			Func PreOpenWindows()

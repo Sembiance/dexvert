@@ -16,7 +16,7 @@ export class macromediaDirector extends Program
 	// So we would have to prune out any custom xtras from ones we already have on windows. We in theory could do that linux side before it gets in by just pre-generating hash sums of all files that ship default with director
 	// But meh. This seems like a lot of work for potentially no payoff. Like how would we even know how to 'handle' an xtra format anyways? We would have to add custom handling code, meh.
 
-	qemuData = r => ({
+	osData = r => ({
 		script : `
 			#include <GuiListView.au3>
 

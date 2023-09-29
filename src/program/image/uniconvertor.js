@@ -12,7 +12,7 @@ export class uniconvertor extends Program
 
 	bin       = "uniconvertor";
 	args      = r => [r.inFile(), `/out/out.${r.flags.outType || "svg"}`];
-	qemuData  = ({timeout : xu.MINUTE*2});
+	osData    = ({timeout : xu.MINUTE*2});
 	chain     = r => ((r.flags.outType || "svg")==="svg" ? `deDynamicSVG${r.flags.autoCrop ? "[autoCrop]" : ""}` : null);
 	renameOut = true;
 }

@@ -7,7 +7,7 @@ export class paperPort extends Program
 	website  = "https://archive.org/details/PaperPort_Deluxe_6.1_Windows_1999";
 	loc      = "win2k";
 	bin      = "c:\\Program Files\\Visioneer\\PaperPort\\Paprport.exe";
-	qemuData = r => ({
+	osData   = r => ({
 		script   : `
 			$mainWindow = WindowRequire("Visioneer PaperPort", "", 10)
 			SendSlow("!fi")

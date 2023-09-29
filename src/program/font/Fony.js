@@ -6,7 +6,7 @@ export class Fony extends Program
 	loc      = "win2k";
 	bin      = "Fony.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		quoteArgs : true,
 		script : `
 			$errorVisible = WinWaitActive("[TITLE:Error Loading Font]", "", 5)

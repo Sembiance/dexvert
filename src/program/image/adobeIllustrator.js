@@ -7,7 +7,7 @@ export class adobeIllustrator extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Adobe\\Illustrator 8.0\\Illustrator.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 		$mainWindow = WindowRequire("Adobe Illustrator", "", 5)
 

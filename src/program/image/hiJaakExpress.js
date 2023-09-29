@@ -7,7 +7,7 @@ export class hiJaakExpress extends Program
 	loc      = "win2k";
 	bin      = "c:\\Program Files\\IMSI\\HiJaak Express\\bin\\hjcvt32.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			Func MainWindowOrFailure()
 				WindowFailure("HiJaak Convert", "Error", 2, "{ESCAPE}")

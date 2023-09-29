@@ -7,7 +7,7 @@ export class replica extends Program
 	loc      = "win2k";
 	bin      = "c:\\REPLICA\\REPLICA.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("[CLASS:DPMDIFrameClass]", "", 20)
 		

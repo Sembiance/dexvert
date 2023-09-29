@@ -12,7 +12,7 @@ export class mencoderWinXP extends Program
 	checkForDups = true;
 	bin          = "c:\\dexvert\\mplayer\\mencoder.exe";
 	args         = r => [r.inFile(), "-o", `out.${r.flags.outType || "avi"}`, "-ovc", "lavc", "-oac", "pcm"];
-	qemuData     = ({
+	osData       = ({
 		cwd : "c:\\out"
 	});
 	chain        = "dexvert";

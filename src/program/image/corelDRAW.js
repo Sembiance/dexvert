@@ -7,7 +7,7 @@ export class corelDRAW extends Program
 	website  = "https://winworldpc.com/product/corel-draw/50";
 	loc      = "win2k";
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELDRW.EXE";
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
 			$mainWindow = WindowRequire("CorelDRAW", "", 10)

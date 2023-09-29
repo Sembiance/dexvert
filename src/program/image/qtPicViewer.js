@@ -3,12 +3,12 @@ import {Program} from "../../Program.js";
 
 export class qtPicViewer extends Program
 {
-	website  = "https://github.com/Sembiance/dexvert/tree/master/qemu/winxp/data/app/qtw2";
+	website  = "https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/qtw2";
 	unsafe   = true;
 	loc      = "winxp";
 	bin      = "C:\\WINDOWS\\VIEWER.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		alsoKill : ["qtnotify.exe", "ntvdm.exe"],
 		script   : `
 			Func ErrorWindows()

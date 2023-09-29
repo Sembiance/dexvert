@@ -7,7 +7,7 @@ export class T3G_T4G extends Program
 	loc      = "win2k";
 	bin      = "c:\\tscad4\\T3G_T4G.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindowVisible = WinWaitActive("[CLASS:ConvertWClass]", "", 5)
 			If $mainWindowVisible Not = 0 Then

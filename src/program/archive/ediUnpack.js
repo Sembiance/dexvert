@@ -3,11 +3,11 @@ import {Program} from "../../Program.js";
 
 export class ediUnpack extends Program
 {
-	website  = "https://github.com/Sembiance/dexvert/blob/master/qemu/win2k/data/app/UNPACK.EXE";
+	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE";
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\UNPACK.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		alsoKill : ["ntvdm.exe"],	// Program tends to hang forever preventing any other instances from running, so we kill this process which kills the program
 		// Sadly, the program crashes instantly as soon as I try and use AutoIt window info to find buttons, so we resort to X/Y screen coordinates and cross our fingers
 		script : `

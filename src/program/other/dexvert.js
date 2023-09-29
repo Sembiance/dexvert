@@ -17,7 +17,7 @@ export class dexvert extends Program
 	{
 		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js"));
 		
-		const dexOpts = {xlog : r.xlog.clone(r.xlog.level==="info" ? "warn" : r.xlog.level), programFlag : {qemuPriority : true}};
+		const dexOpts = {xlog : r.xlog.clone(r.xlog.level==="info" ? "warn" : r.xlog.level), programFlag : {osPriority : true}};
 		if(r.flags.asFormat)
 			dexOpts.asFormat = r.flags.asFormat;
 		if(r.flags.skipVerify)

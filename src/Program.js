@@ -7,12 +7,12 @@ import {RunState} from "./RunState.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
-import {run as runQEMU, QEMUIDS} from "./qemuUtil.js";
+import {run as runOS, OSIDS} from "./osUtil.js";
 import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "noAux", "renameKeepFilename", "renameOut", "osHint", "qemuPriority", "subOutDir"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "noAux", "renameKeepFilename", "renameOut", "osHint", "osPriority", "subOutDir"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -48,7 +48,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "dos", ...QEMUIDS]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", ...OSIDS]},
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
@@ -80,7 +80,7 @@ export class Program
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
-			qemuData         : {types : ["function", Object]},
+			osData           : {types : ["function", Object]},
 			renameIn         : {type : "boolean"},
 			verify           : {type : "function", length : [0, 2]}
 		});
@@ -183,16 +183,16 @@ export class Program
 
 			r.status = await runDOS(r.dosData);
 		}
-		else if(QEMUIDS.includes(this.loc))
+		else if(OSIDS.includes(this.loc))
 		{
-			r.qemuData = {f, cmd : this.bin, osid : this.loc, xlog};
+			r.osData = {f, cmd : this.bin, osid : this.loc, xlog};
 			if(format?.formatid)
-				r.qemuData.meta = `${format.familyid}/${format.formatid}`;
-			r.qemuData.args = this.args ? await this.args(r) : [];
-			if(this.qemuData)
-				Object.assign(r.qemuData, typeof this.qemuData==="function" ? await this.qemuData(r) : this.qemuData);
+				r.osData.meta = `${format.familyid}/${format.formatid}`;
+			r.osData.args = this.args ? await this.args(r) : [];
+			if(this.osData)
+				Object.assign(r.osData, typeof this.osData==="function" ? await this.osData(r) : this.osData);
 
-			r.status = await runQEMU(r.qemuData);
+			r.status = await runOS(r.osData);
 		}
 
 		if(this.postExec)

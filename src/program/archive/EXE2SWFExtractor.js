@@ -8,7 +8,7 @@ export class EXE2SWFExtractor extends Program
 	loc      = "winxp";
 	bin      = "EXE2SWFExtractor.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("Sothink EXE to SWF Extractor", "", 10)
 

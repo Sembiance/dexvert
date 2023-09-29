@@ -7,7 +7,7 @@ export class pageMaker7QuarkConverter extends Program
 	website  = "https://archive.org/details/adobe-page-maker-7.0-with-serial-key-pwd-12345_20221219";
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Adobe\\PageMaker 7.0\\Converter for MSP_QXP\\MSPublisher_Quark Converter.exe";
-	qemuData = r => ({
+	osData   = r => ({
 		dontMaximize : true,
 		script : `
 			$mainWindow = WindowRequire("Converter for Microsoft", "", 5)

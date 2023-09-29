@@ -2,9 +2,9 @@ import {xu, fg} from "xu";
 import {path} from "std";
 import {RUNTIME} from "./Program.js";
 
-export const QEMU_SERVER_HOST = "127.0.0.1";
-export const QEMU_SERVER_PORT = 17735;
-export const QEMUIDS = ["win2k", "winxp", "amigappc", "gentoo"];
+export const OS_SERVER_HOST = "127.0.0.1";
+export const OS_SERVER_PORT = 17735;
+export const OSIDS = ["win2k", "winxp", "amiga"];
 
 // AUTOIT FUNCTIONS: https://www.autoitscript.com/autoit3/docs/functions.htm
 // AUTOIT LIB FUNCTIONS: https://www.autoitscript.com/autoit3/docs/libfunctions.htm
@@ -212,16 +212,16 @@ const AUTO_INCLUDE_FUNCS = ["KillAll"];
 export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {
 	let fullCmd = cmd;
-	const qemuData = {osid, cmd, meta, timeout, outDirPath : f.outDir.absolute};
+	const osData = {osid, cmd, meta, timeout, outDirPath : f.outDir.absolute};
 
-	if(RUNTIME.globalFlags.qemuPriority)
-		qemuData.qemuPriority = true;
+	if(RUNTIME.globalFlags.osPriority)
+		osData.osPriority = true;
 	
 	const inFiles = [f.input];
 	if(!noAuxFiles)
 		inFiles.push(...(f.files.aux || []));
 	const inFilesRel = inFiles.map(v => v.rel);
-	qemuData.inFilePaths = inFiles.map(v => v.absolute);
+	osData.inFilePaths = inFiles.map(v => v.absolute);
 
 	const scriptLines = [];
 	let binAndArgs = "";
@@ -239,10 +239,6 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scr
 		binAndArgs += cmd;
 		if(args.length>0)
 			binAndArgs += ` ${args.map(arg => (inFilesRel.includes(arg) ? (path.basename(arg).includes(" ") ? `"HD:in/${path.basename(arg)}"` : `HD:in/${path.basename(arg)}`) : (arg.includes(" ") && !arg.includes('"') ? `"${arg}"` : arg))).join(" ")}`;
-	}
-	else if(osid.startsWith("gentoo"))
-	{
-		binAndArgs += `${cmd} ${args.map(v => (inFilesRel.includes(v) ? path.basename(v) : v)).map(v => `'${v.replaceAll("'", `'"'"'`)}'`).join(" ")}`;
 	}
 
 	if(osid.startsWith("win"))
@@ -297,7 +293,7 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scr
 			EndFunc
 		`);
 
-		scriptLines.push(`$qemuProgramPID = Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
+		scriptLines.push(`$osProgramPID = Run${script ? "" : (timeout ? "WaitWithTimeout" : "Wait")}('${binAndArgs}', '${cwd || "c:\\in"}'${dontMaximize ? "" : ", @SW_MAXIMIZE"}${script || !timeout ? "" : `, ${timeout}`})`);
 		if(script)
 			scriptLines.push(script);
 	}
@@ -312,22 +308,13 @@ export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scr
 		
 		scriptLines.push("EXIT");
 	}
-	else if(osid.startsWith("gentoo"))
-	{
-		scriptLines.push(`#!/bin/bash`);
-		scriptLines.push(`${timeout ? `timeout ${Math.floor(timeout/xu.SECOND)}s ` : ""}${binAndArgs}`);
-		scriptLines.push("sync");
 
-		if(script)
-			scriptLines.push(script);
-	}
+	osData.script = scriptLines.join("\n");
 
-	qemuData.script = scriptLines.join("\n");
-
-	xlog.info`Running QEMU ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
-	xlog.debug`qemuData: ${qemuData}`;
-	xlog.debug`\tSCRIPT: ${qemuData.script}`;
-	const r = await (await fetch(`http://${QEMU_SERVER_HOST}:${QEMU_SERVER_PORT}/qemuRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(qemuData)})).text();
+	xlog.info`Running OS ${fg.peach(osid)} ${fg.orange(cmd)} ${args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`;
+	xlog.debug`osData: ${osData}`;
+	xlog.debug`\tSCRIPT: ${osData.script}`;
+	const r = await (await fetch(`http://${OS_SERVER_HOST}:${OS_SERVER_PORT}/osRun`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(osData)})).text();
 	if(r!=="ok")
 		throw new Error(r);
 		

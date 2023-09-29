@@ -8,7 +8,7 @@ export class winPack extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\WinPack300b\\WinPack.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		dontMaximize : true,
 		script : `
 			$mainWindowVisible = WinWaitActive("[TITLE:WinPack; CLASS:TisMainForm]", "", 10)

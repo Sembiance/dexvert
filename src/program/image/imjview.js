@@ -4,12 +4,12 @@ import {Program} from "../../Program.js";
 
 export class imjview extends Program
 {
-	website  = "https://github.com/Sembiance/dexvert/blob/master/qemu/winxp/data/app/IMPACJ11.ZIP";
+	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/IMPACJ11.ZIP";
 	unsafe   = true;
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\IMPACJ11\\IMJVIEW.EXE";
 	args     = () => [];
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
 			#include <ScreenCapture.au3>

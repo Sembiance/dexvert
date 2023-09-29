@@ -10,7 +10,7 @@ export class canvas extends Program
 		nonRaster : "Set this to true and the raster enforcement check will be skipped. Warning, this can result in garbage output."
 	};
 	args     = r => [r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["CanvasInTouch2.exe"],
 		script   : `
 		AutoItSetOption("PixelCoordMode", 0)

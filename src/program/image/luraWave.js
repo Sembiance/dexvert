@@ -7,7 +7,7 @@ export class luraWave extends Program
 	loc      = "win2k";
 	bin      = "c:\\Program Files\\LuraWave20\\LuRaWave.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 		$mainWindow = WindowRequire("LURAWAVE for Windows", "", 5)
 		Send("^s")

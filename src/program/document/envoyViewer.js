@@ -6,7 +6,7 @@ export class envoyViewer extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Tumbleweed\\Programs\\envoy7.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindow = WinWaitActive("Envoy Viewer", "", 10)
 			If $mainWindow Not = 0 Then

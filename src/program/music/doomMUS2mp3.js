@@ -17,7 +17,7 @@ export class doomMUS2mp3 extends Program
 		await r.f.add("aux", r.zipFilePath);
 		return [path.basename(r.zipFilePath)];
 	};
-	qemuData = ({
+	osData = ({
 		script : `
 			WinWaitActive("[TITLE:SLADE; CLASS:wxWindowNR]", "", 10)
 			Sleep(4000)

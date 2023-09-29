@@ -8,7 +8,7 @@ export class fifView extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\FIFView\\FIFView.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		dontMaximize : true,
 		alsoKill     : ["ntvdm.exe"],
 		script       : `

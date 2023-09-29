@@ -9,7 +9,7 @@ export class recover_cct extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\recover-cct\\recover-cct.exe";
 	args     = () => [];
-	qemuData = r => ({
+	osData   = r => ({
 		dontMaximize : true,
 		script       : `
 			WinWaitActive("Where is ", "", 10)

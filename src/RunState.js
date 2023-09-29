@@ -87,7 +87,7 @@ export class RunState
 		o.programid = this.programid;
 		o.f = this.f.serialize();
 		o.meta = xu.parseJSON(JSON.stringify(o.meta), {});	// Can include classes and other non-JSON friendly things
-		for(const key of ["bin", "args", "runOptions", "cwd", "dosData", "qemuData"])
+		for(const key of ["bin", "args", "runOptions", "cwd", "dosData", "osData"])
 		{
 			if(Object.hasOwn(this, key))
 				o[key] = this[key];
@@ -113,9 +113,9 @@ export class RunState
 				r.push(`\n${pre}\t${xu.colon(" flags")}${xu.inspect(this.flags || {}).squeeze()}`);
 			}
 		}
-		else if(this.qemuData)
+		else if(this.osData)
 		{
-			r.push(` QEMU ${fg.cyan(this.qemuData.osid)} ${fg.peach(this.qemuData.cmd)} ${(this.qemuData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
+			r.push(`   OS ${fg.cyan(this.osData.osid)} ${fg.peach(this.osData.cmd)} ${(this.osData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
 				r.push(` ${xu.paren(xu.inspect(this.status))}`);
 		}

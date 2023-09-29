@@ -10,6 +10,6 @@ export class irfanView extends Program
 	args    = r => [r.inFile(), "/silent", `/convert="c:\\out\\out.png"`];
 
 	// If it doesn't convert in 1 minute, it's not gonna as irfanview often gets stuck in infinite loops with max cpu usage
-	qemuData  = ({timeout : xu.MINUTE});
+	osData    = ({timeout : xu.MINUTE});
 	renameOut = true;
 }

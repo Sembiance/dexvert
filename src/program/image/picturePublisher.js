@@ -7,7 +7,7 @@ export class picturePublisher extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Micrografx\\Picture Publisher\\Pp70.exe";
 	args     = r => [r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		timeout : xu.MINUTE*2,
 		script  : `
 		$mainWindow = WindowRequire("Micrografx Picture Publisher", "", 5)

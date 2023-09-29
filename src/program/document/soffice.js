@@ -36,7 +36,7 @@ export class soffice extends Program
 		
 		return [...args, "--headless", "--convert-to", (r.flags.outType || "pdf"), "--outdir", r.outDir(), r.inFile()];
 	};
-	qemuData  = ({timeout : xu.MINUTE*2});
+	osData    = ({timeout : xu.MINUTE*2});
 	chain     = r => (r.flags.outType==="svg" ? `deDynamicSVG${r.flags.autoCropSVG ? "[autoCrop]" : ""}` : null);
 	renameOut = true;
 }

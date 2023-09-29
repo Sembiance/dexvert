@@ -110,8 +110,8 @@ You can also return an Object to allow it AND set the key/vals in that object as
 >>> verify = async (r, dexFile) => { return false; }
 Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.
 
->>> qemuData = ({script : ``})  ||  qemuData = async (runState) => ({timeout : XU.MINUTE})
-Can return an object of QEMU specific data to be passed into util.qemu.run():
+>>> osData = ({script : ``})  ||  osData = async (runState) => ({timeout : XU.MINUTE})
+Can return an object of OS specific data to be passed into osUtil.run():
 	>>> cwd				Which directory to run in
 	>>> timeout			Maximum duration to allow it to run before stopping
 	>>> scriptPre       A list of AutoIt commands to run BEFORE the program executes

@@ -7,6 +7,6 @@ export class sqc extends Program
 	loc       = "win2k";
 	bin       = "c:\\Program Files\\SpeedProject\\Squeez 5\\sqc.exe";
 	args      = r => ["x", r.inFile()];
-	qemuData  = ({cwd : "c:\\out", timeout : xu.MINUTE*2});
+	osData    = ({cwd : "c:\\out", timeout : xu.MINUTE*2});
 	renameOut = false;
 }

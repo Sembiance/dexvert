@@ -6,7 +6,7 @@ export class PageStream extends Program
 	loc      = "win2k";
 	bin      = "c:\\PageStream\\PageStream5.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("Select Module...", "", 10)
 			ControlClick("Select Module...", "", "[CLASS:Button; TEXT:OK]")

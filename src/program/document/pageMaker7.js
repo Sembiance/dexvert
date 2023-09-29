@@ -7,7 +7,7 @@ export class pageMaker7 extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Adobe\\PageMaker 7.0\\Pm70.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("Adobe PageMaker 7.0", "", 5)
 			Func PreOpenWindows()

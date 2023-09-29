@@ -7,7 +7,7 @@ export class pageMaker5 extends Program
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\PM5\\PM5.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		alsoKill  : ["ntvdm.exe"],
 		scriptPre : `
 			;DirRemove("c:\\dexvert\\ALDUS", 1)

@@ -11,7 +11,7 @@ export class corelPhotoPaint extends Program
 	};
 	bruteFlags = { poly : {}, video : {} };
 	args     = r => [r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["cdrconv.exe"],
 		script   : `
 		$mainWindow = WindowRequire("Corel PHOTO-PAINT 8", "", 5)

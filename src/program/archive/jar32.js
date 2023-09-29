@@ -6,6 +6,6 @@ export class jar32 extends Program
 	loc       = "win2k";
 	bin       = "c:\\dexvert\\jar102\\jar32.exe";
 	args      = r => ["x", r.inFile()];
-	qemuData  = ({cwd : "c:\\out"});
+	osData    = ({cwd : "c:\\out"});
 	renameOut = false;
 }

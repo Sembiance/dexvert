@@ -6,7 +6,7 @@ export class hcdisk extends Program
 	website  = "https://github.com/0sAND1s/HCDisk";
 	loc      = "winxp";
 	bin      = "HCDisk2.exe";
-	qemuData = r => ({
+	osData   = r => ({
 		cwd : "c:\\out",
 		script : `
 			$mainWindow = WindowRequire("c:\\dexvert\\HCDisk2.exe", "", 5)

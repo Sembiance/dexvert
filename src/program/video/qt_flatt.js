@@ -9,7 +9,7 @@ export class qt_flatt extends Program
 	loc          = "winxp";
 	checkForDups = true;
 	bin          = "c:\\out\\QT-FLATT.BAT";
-	qemuData     = r => ({
+	osData       = r => ({
 		dontMaximize   : true,
 		cwd            : "c:\\out",
 		scriptPre      : `
@@ -25,7 +25,7 @@ export class qt_flatt extends Program
 			FileClose($batFile);`,
 		alsoKill : ["QT-FLATT.EXE"],
 		script   : `
-			WaitForPID($qemuProgramPID, ${xu.MINUTE});
+			WaitForPID($osProgramPID, ${xu.MINUTE});
 			FileDelete("c:\\out\\QT-FLATT.BAT");
 			FileDelete("c:\\out\\QT-FLATT.EXE");`
 	});

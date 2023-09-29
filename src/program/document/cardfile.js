@@ -7,7 +7,7 @@ export class cardfile extends Program
 	loc      = "win2k";
 	bin      = "cardfile.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindowVisible = WinWaitActive("[CLASS:TMain_Form]", "", 7)
 			If $mainWindowVisible = 0 Then

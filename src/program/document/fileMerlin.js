@@ -14,7 +14,7 @@ export class fileMerlin extends Program
 	loc       = "winxp";
 	bin       = "c:\\ACI Programs\\FMerlin\\fmn.exe";
 	args      = r => [`in(${path.basename(r.inFile())})`, `sfrm(${r.flags.type || "AUTO"})`, "out(c:\\out\\*.pdf)", `dfrm(${r.flags.outType || "PDF"})`];
-	qemuData  = ({
+	osData    = ({
 		timeout  : xu.MINUTE,
 		alsoKill : ["drwtsn32.exe"],
 		script   : `

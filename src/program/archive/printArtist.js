@@ -7,7 +7,7 @@ export class printArtist extends Program
 	unsafe   = true;
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\SIERRA\\PA6\\PRTARTST.EXE";
-	qemuData = ({
+	osData   = ({
 		alsoKill  : ["ntvdm.exe"],
 		script : `
 			#include <GuiListBox.au3>

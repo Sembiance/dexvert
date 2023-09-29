@@ -7,7 +7,7 @@ export class clipbrdWin2k extends Program
 	loc      = "win2k";
 	bin      = "c:\\WINNT\\system32\\clipbrd.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			#include <ScreenCapture.au3>
 

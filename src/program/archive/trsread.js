@@ -6,6 +6,6 @@ export class trsread extends Program
 	loc       = "winxp";
 	bin       = "trsread.exe";
 	args      = r => ["-e", "-s", "-i", r.inFile()];
-	qemuData  = ({cwd : "c:\\out"});
+	osData    = ({cwd : "c:\\out"});
 	renameOut = false;
 }

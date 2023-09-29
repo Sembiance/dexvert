@@ -7,7 +7,7 @@ export class fastCAD extends Program
 	unsafe   = true;
 	loc      = "winxp";
 	bin      = "C:\\FCAD32D\\FCW32.EXE";
-	qemuData = r => ({
+	osData   = r => ({
 		script : `
 			WinWaitActive("[CLASS:FCW32]", "", 10)
 			Send("^o")

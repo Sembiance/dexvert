@@ -7,7 +7,7 @@ export class tomsViewer extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\TomsViewer\\TomsViewer.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 		$mainWindow = WindowRequire("Tom's Viewer", "", 5)
 		Send("^s")

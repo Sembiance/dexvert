@@ -7,6 +7,6 @@ export class izArc extends Program
 	loc       = "win2k";
 	bin       = "c:\\Program Files\\IZArc\\IZARCE.exe";
 	args      = r => ["-e", "-d", "-pc:\\out", r.inFile()];
-	qemuData  = ({timeout : xu.MINUTE*2});
+	osData    = ({timeout : xu.MINUTE*2});
 	renameOut = false;
 }

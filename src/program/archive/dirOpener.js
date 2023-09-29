@@ -9,7 +9,7 @@ export class dirOpener extends Program
 	loc      = "winxp";
 	bin      = "dirOpener300-850-1-PC.exe";
 	args     = () => [];
-	qemuData = r => ({
+	osData   = r => ({
 		dontMaximize : true,
 		script       : `
 			WinWaitActive("dirOpener300-850-1-PC", "", 10)

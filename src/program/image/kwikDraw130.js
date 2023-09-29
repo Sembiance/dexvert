@@ -2,12 +2,12 @@ import {Program} from "../../Program.js";
 
 export class kwikDraw130 extends Program
 {
-	website  = "https://github.com/Sembiance/dexvert/blob/master/qemu/winxp/data/app/KDRAW130.EXE";
+	website  = "https://github.com/Sembiance/dexvert/blob/master/os/aux/winxp/app/KDRAW130.EXE";
 	loc      = "winxp";
 	unsafe   = true;
 	bin      = "C:\\dexvert\\KDRAW130.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
 			WindowRequire("KWIKDRAW", "This is a Freeware", 5)

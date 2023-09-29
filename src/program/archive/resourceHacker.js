@@ -7,7 +7,7 @@ export class resourceHacker extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\resource_hacker\\ResourceHacker.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("Resource Hacker", "", 10)
 

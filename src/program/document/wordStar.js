@@ -8,7 +8,7 @@ export class wordStar extends Program
 	unsafe   = true;
 	bin      = "c:\\WSWIN\\WSWIN.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		alsoKill : ["ntvdm.exe"],	// Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
 		script   : `
 			WinWaitActive("[TITLE:WSWin 2.0]", "", 10)

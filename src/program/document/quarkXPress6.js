@@ -7,7 +7,7 @@ export class quarkXPress6 extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Quark\\QuarkXPress 6.1\\QuarkXPress Passport.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("QuarkXPress Passport (tm)", "", 10)
 			Func PreOpenWindows()

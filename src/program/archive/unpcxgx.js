@@ -6,6 +6,6 @@ export class unpcxgx extends Program
 	loc       = "win2k";
 	bin       = "unpcxgx.exe";
 	args      = r => [r.inFile()];
-	qemuData  = ({cwd : "c:\\out"});
+	osData    = ({cwd : "c:\\out"});
 	renameOut = false;
 }

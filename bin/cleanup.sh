@@ -2,8 +2,8 @@
 
 whoami=$(whoami | tr -d '[:space:]')
 
-killall Xvfb qemu-system-i386 qemu-system-ppc qemu-system-x86_64
-killall -9 at-spi-bus-launcher helpdeco gimp-org-file-pnm identify convert
+killall Xvfb 
+killall -9 at-spi-bus-launcher helpdeco gimp-org-file-pnm identify convert 86Box
 
 cd /mnt/ram/tmp || exit
 sudo umount ./*uniso

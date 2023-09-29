@@ -8,7 +8,7 @@ export class graphicWorkshopProfessional extends Program
 	loc      = "win2k";
 	bin      = "c:\\GraphicWorkshopProfessional\\GWSPRO.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			Func MainWindowOrFailure()
 				WindowFailure("[TITLE:Message]", "Error opening file", -1, "{ESCAPE}")

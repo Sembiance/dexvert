@@ -1,4 +1,4 @@
->>> These programs don't work in multiple QEMU environments at once or are unreliable in some other major way
+>>> These programs don't work in multiple OS instances at once or are unreliable in some other major way
 >>> Thus these can't be used
 
 >>> reaConverter (winxp - v7 - 2020-11-12) (https://www.reaconverter.com/features/formats.html)

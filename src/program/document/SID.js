@@ -10,7 +10,7 @@ export class SID extends Program
 	bin      = "c:\\dexvert\\SID\\sid.exe";
 	unsafe   = true;
 	args     = () => [];
-	qemuData = r => ({
+	osData   = r => ({
 		script : `
 			WinWaitActive("[sid] sexy installshield decompiler", "", 10)
 

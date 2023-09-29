@@ -8,7 +8,7 @@ export class MDFtoISO extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\MDF to ISO\\mdftoiso.exe";
 	args     = () => [];
-	qemuData = r => ({
+	osData   = r => ({
 		alsoKill : ["mdf2iso.exe"],	// MDFtoISO uses MDF2ISO behind the scenes
 		script : `
 			WinWaitActive("MDF to ISO", "", 10)

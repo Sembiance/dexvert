@@ -6,7 +6,7 @@ export class fontographer extends Program
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Fontlab\\Fontographer 5\\Fontographer 5.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("Fontographer 5.2", "", 10)
 			Sleep(500)

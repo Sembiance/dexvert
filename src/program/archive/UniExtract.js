@@ -9,7 +9,7 @@ export class UniExtract extends Program
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\uniextract161\\UniExtract.exe";
 	args     = r => [r.inFile()];
-	qemuData = r => ({
+	osData   = r => ({
 		// UniExtract uses a ton of sub-programs to do it's magic, any one of which can 'hang' and keep files locked, so let's kill all potential sub-programs
 		alsoKill : ["UniExtract.exe", "7z.exe", "arc.exe", "arj.exe", "AspackDie.exe", "bin2iso.exe", "BOOZ.EXE", "cdirip.exe", "clit.exe", "cmdTotal.exe", "E_WISE_W.EXE", "Expander.exe", "EXTRACT.EXE", "extractMHT.exe",
 			"helpdeco.exe", "i3comp.exe", "i5comp.exe", "i6comp.exe", "innounp.exe", "IsXunpack.exe", "kgb_arch_decompress.exe", "lzop.exe", "MsiX.exe", "NBHextract.exe", "nrg2iso.exe", "pea.exe", "PEiD.exe",

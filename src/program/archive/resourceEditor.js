@@ -7,7 +7,7 @@ export class resourceEditor extends Program
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\ResourceEditor\\ResourceEditor.exe";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			WinWaitActive("Resource Editor", "", 10)
 

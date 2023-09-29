@@ -7,7 +7,7 @@ export class word97 extends Program
 	loc      = "win2k";
 	bin      = "c:\\Program Files\\Microsoft Office\\Office\\WINWORD.EXE";
 	args     = r => [r.inFile()];
-	qemuData = ({
+	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("[TITLE:Microsoft Word - ]", "", 10)
 			

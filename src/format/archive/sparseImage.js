@@ -8,5 +8,5 @@ export class sparseImage extends Format
 	ext         = [".sparseimage"];
 	magic       = ["Apple Sparse disk image"];
 	unsupported = true;
-	notes       = `No known linux converter that I could find. Could emulate MacOS X with qemu and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187`;
+	notes       = `No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187`;
 }

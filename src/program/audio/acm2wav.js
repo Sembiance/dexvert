@@ -6,7 +6,7 @@ export class acm2wav extends Program
 	loc       = "win2k";
 	bin       = "acm2wav.exe";
 	args      = r => [r.inFile()];
-	qemuData  = ({cwd : "c:\\out"});
+	osData    = ({cwd : "c:\\out"});
 	renameOut = true;
 	chain     = "sox";
 }

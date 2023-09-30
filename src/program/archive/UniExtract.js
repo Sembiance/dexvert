@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class UniExtract extends Program
@@ -15,27 +16,25 @@ export class UniExtract extends Program
 			"helpdeco.exe", "i3comp.exe", "i5comp.exe", "i6comp.exe", "innounp.exe", "IsXunpack.exe", "kgb_arch_decompress.exe", "lzop.exe", "MsiX.exe", "NBHextract.exe", "nrg2iso.exe", "pea.exe", "PEiD.exe",
 			"RAIU.EXE", "STIX_D.EXE", "tee.exe", "trid.exe", "UHARC02.EXE", "UHARC04.EXE", "unlzx.exe", "UnRAR.exe", "UNUHARC06.EXE", "unzip.exe", "upx.exe", "uudeview.exe", "WDOSXLE.EXE", "WUN.EXE", "xace.exe"],
 		script : `
-			Local $mainWindow = WinWaitActive("Universal Extractor", "", 10)
+			$mainWindow = WindowRequire("Universal Extractor", "", 10)
 
-			ControlSetText("Universal Extractor", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out\\")
+			ControlSetText($mainWindow, "", "[CLASS:Edit; INSTANCE:2]", "c:\\out\\")
 			Sleep(200)
 
-			ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&OK]")
-
+			ControlClick($mainWindow, "", "[CLASS:Button; TEXT:&OK]")
 			WinWaitClose($mainWindow, "", 10)
+			
+			Func PostExtractWindows()
+				WindowDismiss("Universal Extractor", "could not be extracted", "{ESCAPE}")
+			EndFunc
+			CallUntil("PostExtractWindows", ${xu.SECOND*5})
 
-			Local $decisionWindow = WinWaitActive("Universal Extractor", "", 5)
-			If $decisionWindow Then
-				${r.flags.type ? `ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:${r.flags.type}]")` : ""}
-				ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&OK]")
-			EndIf
-
-			Local $hasError = WinWaitActive("Universal Extractor", "could not be extracted", 5)
-			If $hasError Then
-				ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&Cancel]")
-			EndIf
-
-			WinWaitClose("Universal Extractor", "", 10)
+			; This is older code, which may still be needed. May need to stick it into PostExtractWindows above
+			;Local $decisionWindow = WinWaitActive("Universal Extractor", "", 5)
+			;If $decisionWindow Then
+			;	${r.flags.type ? `ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:${r.flags.type}]")` : ""}
+			;	ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&OK]")
+			;EndIf
 
 			ProcessWaitClose("UniExtract.exe", 5)`
 	});

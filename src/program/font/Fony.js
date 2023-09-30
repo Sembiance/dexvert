@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class Fony extends Program
@@ -9,30 +10,24 @@ export class Fony extends Program
 	osData   = ({
 		quoteArgs : true,
 		script : `
-			$errorVisible = WinWaitActive("[TITLE:Error Loading Font]", "", 5)
-			If $errorVisible Not = 0 Then
-				ControlClick("[TITLE:Error Loading Font]", "", "[CLASS:TBitBtn; TEXT:OK]")
-			Else
-				WinWaitActive("[CLASS:TFMain]", "", 30)
-				Sleep(1000)
-				SendSlow("!fe{DOWN}{ENTER}")
+			Func MainWindowOrFailure()
+				WindowFailure("[TITLE:Error Loading Font]", "", -1, "{ESCAPE}")
+				return WinActive("[CLASS:TFMain]", "")
+			EndFunc
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*5})
 
-				$exportVisible = WinWaitActive("[CLASS:TFBDFExport; TITLE:BDF Export]", "", 7)
-				If $exportVisible Not = 0 Then
-					ControlClick("[CLASS:TFBDFExport]", "", "[CLASS:TButton; TEXT:OK]")
+			SendSlow("!fe{DOWN}{ENTER}")
 
-					WinWaitActive("[TITLE:Save As]", "", 30)
-					ControlClick("[TITLE:Save As]", "", "[CLASS:Edit]")
+			$exportWindow = WindowRequire("[CLASS:TFBDFExport; TITLE:BDF Export]", "", 5)
+			ControlClick($exportWindow, "", "[CLASS:TButton; TEXT:OK]")
 
-					Send("{HOME}c:\\out\\")
-					ControlClick("[TITLE:Save As]", "", "[CLASS:Button; TEXT:&Save]")
+			$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 5)
+			ControlClick($saveAsWindow, "", "[CLASS:Edit]")
+			Send("{HOME}c:\\out\\")
+			ControlClick($saveAsWindow, "", "[CLASS:Button; TEXT:&Save]")
 
-					WinWaitActive("[CLASS:TFMain]", "", 30)
-					Sleep(200)
-				EndIf
-
-				SendSlow("!fx")
-			EndIf`
+			WinWaitActive($mainWindow, "", 10)
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 	chain = "dexvert[asFormat:font/bdf]";

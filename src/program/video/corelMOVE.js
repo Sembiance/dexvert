@@ -7,11 +7,19 @@ export class corelMOVE extends Program
 	website  = "https://winworldpc.com/product/corel-draw/50";
 	loc      = "win2k";
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELMOV.EXE";
-	args     = r => [r.inFile()];
+	//args     = r => [r.inFile()];
 	osData   = r => ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
-			$mainWindow = WindowRequire("CorelMOVE - ${path.basename(r.inFile()).toUpperCase()}", "", 10)
+			$mainWindow = WindowRequire("CorelMOVE", "", 10)
+			
+			Send("^o")
+			$openWindow = WindowRequire("Open Animation File", "", 5);
+			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
+			WinWaitClose($openWindow);
+
+			WinWaitActive($mainWindow, "", 3)
+
 			SendSlow("!fem")
 			WindowRequire("Export To Movie", "", 5)
 			Send("c:\\out\\out.avi{ENTER}")

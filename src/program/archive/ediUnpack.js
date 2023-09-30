@@ -11,21 +11,27 @@ export class ediUnpack extends Program
 		alsoKill : ["ntvdm.exe"],	// Program tends to hang forever preventing any other instances from running, so we kill this process which kills the program
 		// Sadly, the program crashes instantly as soon as I try and use AutoIt window info to find buttons, so we resort to X/Y screen coordinates and cross our fingers
 		script : `
-			Sleep(2000)
-			MouseClick("left", 316, 86, 2, 0)
-			Sleep(1000)
-			MouseClick("left", 316, 150, 2, 0)
-			Sleep(1000)
+			; There is no keyboard control of the menus here, so we have to determine how many folders before in/out and click on the proper pixel
+			Local $cDirs = ListCDirs()
+
+			$mainWindow = WindowRequire("EDI Unpack - V2.00", "", 10)
+			MouseClick("left", 316, 96, 2, 0)
+			MouseClick("left", 316, 70+((_ArraySearch($cDirs, "out")-1)*14), 2, 0)
+
+			Sleep(200)
 			MouseClick("left", 25, 156, 1, 0)
-			Sleep(1000)
+			Sleep(200)
 			MouseClick("left", 235, 75, 1, 0)
-			Sleep(1000)
+			
+			Sleep(200)
 			MouseClick("left", 1013, 8, 1, 0)
+
 			Local $errorOKControl = WaitForControl("[TITLE:in$]", "", "[CLASS:Button; TEXT:OK]", ${xu.SECOND*3})
 			If $errorOKControl Then
 				ControlClick("[TITLE:in$]", "", "[CLASS:Button; TEXT:OK]")
 			EndIf
-			Sleep(5000)`
+
+			WinWaitClose($mainWindow, "", 10)`
 	});
 	renameOut = false;
 }

@@ -6,13 +6,13 @@ export class printArtist extends Program
 	website  = "https://winworldpc.com/product/instant-artist-print/60";
 	unsafe   = true;
 	loc      = "win2k";
-	bin      = "c:\\dexvert\\SIERRA\\PA6\\PRTARTST.EXE";
+	bin      = "c:\\SIERRA\\PA6\\PRTARTST.EXE";
 	osData   = ({
 		alsoKill  : ["ntvdm.exe"],
 		script : `
 			#include <GuiListBox.au3>
 			
-			$mainWindow = WindowRequire("Print Artist", "", 5)
+			$mainWindow = WindowRequire("Print Artist", "", 15)
 
 			Send("{ESCAPE}^n")
 			$newWindow = WindowRequire("Select New Scrapbook", "", 5)

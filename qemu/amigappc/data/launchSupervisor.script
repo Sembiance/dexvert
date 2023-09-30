@@ -1,5 +1,0 @@
-ECHO "Waiting 3 seconds..."
-WAIT 3
-ECHO $PROCESS > RAM:supervisor.pid
-HD:dexvert
-RX supervisor.rexx

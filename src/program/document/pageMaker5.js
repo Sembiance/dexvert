@@ -5,13 +5,13 @@ export class pageMaker5 extends Program
 {
 	website  = "https://winworldpc.com/product/aldus-pagemaker/50";
 	loc      = "win2k";
-	bin      = "c:\\dexvert\\PM5\\PM5.exe";
+	bin      = "c:\\PM5\\PM5.exe";
 	args     = r => [r.inFile()];
 	osData   = ({
 		alsoKill  : ["ntvdm.exe"],
 		scriptPre : `
-			;DirRemove("c:\\dexvert\\ALDUS", 1)
-			DirCopy("c:\\dexvert\\ALDUS5", "c:\\dexvert\\ALDUS", 1)`,
+			DirRemove("c:\\ALDUS", 1)
+			DirCopy("c:\\dexvert\\ALDUS5", "c:\\ALDUS", 1)`,
 		script : `
 			$mainWindow = WindowRequire("Aldus PageMaker 5.0", "", 5)
 			Func PreOpenWindows()

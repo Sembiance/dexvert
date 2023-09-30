@@ -9,29 +9,19 @@ export class CADDraw extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindowVisible = WinWaitActive("[CLASS:MainWClassToso4]", "", 5)
-			If $mainWindowVisible Not = 0 Then
-				Sleep(500)
-				SendSlow("!fa")
+			$mainWindow = WindowRequire("[CLASS:MainWClassToso4]", "", 10)
 
-				$exportVisible = WinWaitActive("[TITLE:Save Drawing as...]", "", 10)
-				If $exportVisible Not = 0 Then
-					Send("c:\\out\\out.wmf{TAB}w{ENTER}")
+			Sleep(500)
+			SendSlow("!fa")
 
-					WinWaitClose("Save Drawing as...", "", 10)
+			$exportWindow = WindowRequire("[TITLE:Save Drawing as...]", "", 10)
+			Send("c:\\out\\out.wmf{TAB}w{ENTER}")
+			WinWaitClose("Save Drawing as...", "", 10)
 
-					$messageVisible = WinWaitActive("[TITLE:Message]", "", 10)
-					If $messageVisible Not = 0 Then
-						ControlClick("[TITLE:Message]", "", "[CLASS:Button; TEXT:&Yes]")
-						WinWaitClose("Message", "", 10)
-					EndIf
-				EndIf
+			WindowDismissWait("[TITLE:Message]", "", 10, "Y")
+			WinWaitActive($mainWindow, "", 10)
 
-				Sleep(500)
-				SendSlow("!fx")
-
-				WinWaitClose("[CLASS:MainWClassToso4]", "", 10)
-			EndIf`});
+			SendSlow("!fx")`});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/wmf]";
 }

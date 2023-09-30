@@ -9,31 +9,24 @@ export class T3G_T4G extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindowVisible = WinWaitActive("[CLASS:ConvertWClass]", "", 5)
-			If $mainWindowVisible Not = 0 Then
-				Send("{F2}")
+			$mainWindow = WindowRequire("[CLASS:ConvertWClass]", "", 5)
 
-				$exportVisible = WinWaitActive("[TITLE:Select source file]", "", 10)
-				If $exportVisible Not = 0 Then
-					Send("c:\\in{ENTER}")
-					Sleep(200)
-					Send("{TAB}{DOWN}{ENTER}")
-					WinWaitClose("[TITLE:Select source file]", "", 10)
-				EndIf
+			Send("{F2}")
 
-				$exportVisible = WinWaitActive("[TITLE:Select target file]", "", 10)
-				If $exportVisible Not = 0 Then
-					Send("c:\\out{ENTER}")
-					Sleep(200)
-					Send("out.t4g{ENTER}")
-					WinWaitClose("[TITLE:Select target file]", "", 10)
-				EndIf
+			$selectSourceWindow = WindowRequire("[TITLE:Select source file]", "", 10)
+			Send("c:\\in{ENTER}")
+			Sleep(200)
+			Send("{TAB}{DOWN}{ENTER}")
+			WinWaitClose($selectSourceWindow, "", 10)
 
-				Sleep(500)
-				SendSlow("!fx")
+			$selectTargetWindow = WindowRequire("[TITLE:Select target file]", "", 10)
+			Send("c:\\out{ENTER}")
+			Sleep(200)
+			Send("out.t4g{ENTER}")
+			WinWaitClose($selectTargetWindow, "", 10)
 
-				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
-			EndIf`});
+			WinWaitActive($mainWindow, "", 10)
+			SendSlow("!fx")`});
 	renameOut = true;
 	chain     = "CADDraw";
 }

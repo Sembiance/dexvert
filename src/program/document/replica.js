@@ -9,21 +9,23 @@ export class replica extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			WinWaitActive("[CLASS:DPMDIFrameClass]", "", 20)
+			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 15)
 		
-			SendSlow("!fa")
+			SendSlow("!fp")
 
-			WinWaitActive("[TITLE:Save As]", "", 10)
+			$printWindow = WindowRequire("Print", "", 5)
+			Send("{ENTER}")
 
-			Sleep(200)
-			Send("c:\\out\\out.txt{TAB}{TAB}{TAB}t{ENTER}")
+			$savePDFWindow = WindowRequire("Save PDF File As", "", 5)
+			Send("c:\\out\\out.pdf{ENTER}")
+			WinWaitClose($savePDFWindow)
 			
-			WinWaitClose("[TITLE:Save As]", "", 10)
-			Sleep(200)
+			$pleaseWaitWindow = WindowRequire("Please Wait", "", 5)
+			WinWaitClose($pleaseWaitWindow)
 
-			SendSlow("!fx")
-			
-			WinWaitClose("[CLASS:DPMDIFrameClass]", "", 10)`
+			WinWaitActive($mainWindow, "", 5)
+
+			SendSlow("!fx")`
 	});
 	renameOut = true;
 }

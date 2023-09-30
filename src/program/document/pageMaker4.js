@@ -5,13 +5,13 @@ export class pageMaker4 extends Program
 {
 	website  = "https://winworldpc.com/product/aldus-pagemaker/40";
 	loc      = "win2k";
-	bin      = "c:\\dexvert\\PM4\\PM4.exe";
+	bin      = "c:\\PM4\\PM4.exe";
 	args     = r => [r.inFile()];
 	osData   = ({
 		alsoKill  : ["ntvdm.exe"],
 		scriptPre : `
-			;DirRemove("c:\\dexvert\\ALDUS", 1)
-			DirCopy("c:\\dexvert\\ALDUS4", "c:\\dexvert\\ALDUS", 1)`,
+			DirRemove("c:\\ALDUS", 1)
+			DirCopy("c:\\dexvert\\ALDUS4", "c:\\ALDUS", 1)`,
 		script : `
 			$mainWindow = WindowRequire("PageMaker 4.0", "", 5)
 			Func PreOpenWindows()

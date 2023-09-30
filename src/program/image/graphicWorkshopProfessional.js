@@ -38,12 +38,9 @@ export class graphicWorkshopProfessional extends Program
 				Sleep(200)
 			EndIf
 
+			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*3}, ${xu.SECOND*15})
 			WinClose("[CLASS:GraphicWorkshopProfessionalPicture]")
-			
-			Sleep(1000)
-
 			KillAll("GWSPRO.EXE")
-
 			SendSlow("{ESCAPE}{ESCAPE}{ESCAPE}{ESCAPE}{ESCAPE}")`
 	});
 	post      = async r => await r.f.remove("new", path.join(r.f.outDir.absolute, "out.THN"), {unlink : "true"});

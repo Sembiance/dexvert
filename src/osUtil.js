@@ -20,14 +20,37 @@ Func KillAll($program)
 			Sleep(500)
 		EndIf
 	Until $result Not = 1
-EndFunc`,
+EndFunc
+`,
+	ListCDirs : `
+#include <Array.au3>
+Func ListCDirs()
+	Local $cSearch, $cDir, $cDirs[1]
+	$cSearch = FileFindFirstFile("C:\\*.*")
+	If $cSearch <> -1 Then
+		While 1
+			$cDir = FileFindNextFile($cSearch)
+			If @error Then ExitLoop
+
+			If StringInStr(FileGetAttrib("C:\\" & $cDir), "D") Then
+				ReDim $cDirs[UBound($cDirs) + 1]
+				$cDirs[UBound($cDirs) - 1] = $cDir
+			EndIf
+		WEnd
+		FileClose($cSearch)
+	EndIf
+	_ArraySort($cDirs)
+
+	return $cDirs
+EndFunc
+`,
 	MouseClickWin : `
 Func MouseClickWin($title, $button, $x, $y, $clicks=1)
 	Local $winPos = WinGetPos($title)
 	MsgBox(0, "debug", String($winPos[0]) & "x" & String($winPos[1]) & String($winPos[0]+$x))
 	MouseClick($button, $winPos[0]+$x, $winPos[1]+$y, $clicks)
 EndFunc
-	`,
+`,
 	WaitForClipChange : `
 Func WaitForClipChange($max_duration)
 	Local $startValue = ClipGet()
@@ -57,6 +80,24 @@ Func WaitForControl($title, $text, $controlID, $max_duration, $errorWindowTitle=
 	Until TimerDiff($timer) > $max_duration
 
 	return $controlHandle
+EndFunc
+`,
+	WaitForStableFileSize : `
+Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
+	Local $lastSize = FileGetSize($filePath)
+	Local $timer = TimerInit()
+	Local $stableTimer = TimerInit()
+	Do
+		$curSize = FileGetSize($filePath)
+		If $curSize <> $lastSize Then
+			$lastSize = $curSize
+			$stableTimer = TimerInit()
+		ElseIf TimerDiff($stableTimer) > $stableDuration Then
+			ExitLoop
+		EndIf
+
+		Sleep(50)
+	Until TimerDiff($timer) > $maxDuration
 EndFunc
 `,
 	WaitForPID : `

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {identify} from "./identify.js";
+import {identify, flexMatch} from "./identify.js";
 import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
@@ -207,7 +207,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 				if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
 					return xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`, false;
 				
-				if(progProps.flags?.strongMatch && !dexState.hasMagics(format.magics || [], {strong : true}))
+				if(progProps.flags?.strongMatch && !dexState.hasMagics(format.magic || [], {strong : true}))
 					return xlog.info`Skipping converter ${prog} due to strongMatch flag and not having any strong matches`, false;
 				
 				xlog.debug`Running converter ${prog}...`;

@@ -8,33 +8,25 @@ export class MPG_T2G extends Program
 	bin      = "c:\\tscad4\\MPG_T2G.EXE";
 	osData   = ({
 		script : `
-			$mainWindowVisible = WinWaitActive("[CLASS:ConvertWClass]", "", 5)
-			If $mainWindowVisible Not = 0 Then
-				Send("{F2}")
+			$mainWindow = WindowRequire("[CLASS:ConvertWClass]", "", 5)
 
-				$exportVisible = WinWaitActive("[TITLE:Select source file]", "", 10)
-				If $exportVisible Not = 0 Then
-					Sleep(500)
-					MouseClick("left", 462, 390, 1, 0)
-					Sleep(500)
-					Send("in.mpg{ENTER}")
-					WinWaitClose("[TITLE:Select source file]", "", 10)
-				EndIf
+			Send("{F2}")
 
-				$exportVisible = WinWaitActive("[TITLE:Select target file]", "", 10)
-				If $exportVisible Not = 0 Then
-					Sleep(500)
-					MouseClick("left", 467, 430, 1, 0)
-					Sleep(500)
-					Send("out.t2g{ENTER}")
-					WinWaitClose("[TITLE:Select target file]", "", 10)
-				EndIf
+			; There is no keyboard control of the menus here, so we have to determine how many folders before in/out and click on the proper pixel
+			Local $cDirs = ListCDirs()
 
-				Sleep(500)
-				SendSlow("!fx")
+			$selectSourceWindow = WindowRequire("[TITLE:Select source file]", "", 10)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "in")-1)*17), 1, 0)
+			MouseClick("left", 324, 331, 2, 0)
+			WinWaitClose("[TITLE:Select source file]", "", 10)
 
-				WinWaitClose("[CLASS:ConvertWClass]", "", 10)
-			EndIf`});
+			$selectTargetWindow = WindowRequire("[TITLE:Select target file]", "", 10)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "out")-1)*17), 1, 0)
+			Send("out.t2g{ENTER}")
+			WinWaitClose($selectTargetWindow, "", 10)
+
+			WinWaitActive($mainWindow, "", 10)
+			SendSlow("!fx")`});
 	renameOut = true;
 	chain     = "T2G_T3G";
 }

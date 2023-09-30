@@ -1,12 +1,12 @@
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil, sysUtil} from "xutil";
-import {path} from "std";
+import {path, delay} from "std";
 import {WebServer} from "WebServer";
 import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
 
 const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
-
+const OS_INSTANCE_START_INTERVAL = xu.SECOND;
 const DEBUG = true;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 
 const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
@@ -77,8 +77,7 @@ export class os extends Server
 			await runUtil.run("VBoxManage", ["createhd", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_DIR_PATH, osid, v)]);
 
 		await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.txt"), instanceid.toString());
-		await runUtil.run("/mnt/compendium/.deno/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "floppy.img"), path.join(instance.dirPath, "instance.txt")]);
-		await fileUtil.searchReplace(path.join(instance.dirPath, "86box.cfg"), "fdd_01_type = 35_2hd", `fdd_01_type = 35_2hd\nfdd_01_fn = ${path.join(instance.dirPath, "floppy.img")}`);
+		await runUtil.run("/mnt/compendium/.deno/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "instance.img"), path.join(instance.dirPath, "instance.txt")]);
 
 		const emuOpts = {detached : true, cwd : instance.dirPath, env : {}};
 		if(instance.debug)
@@ -92,13 +91,16 @@ export class os extends Server
 			emuOpts.virtualXVNCPort = instance.vncPort;
 		}
 
-		this.xlog.debug`${prelog(instance)} Launching ${OS[osid].emu}  with options ${xu.inspect(emuOpts).squeeze()}`;
+		this.xlog.debug`${prelog(instance)} Launching ${OS[osid].emu} with options ${xu.inspect(emuOpts).squeeze()}`;
 
 		const instanceJSON = JSON.stringify(instance);
 		const {p, cb} = await runUtil.run(OS[osid].emu, [], emuOpts);
 		instance.p = p;
 		cb().then(async r =>
 		{
+			if(instance.debug)
+				return;
+
 			this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : JSON.stringify(r)}`;
 			if(!this.stopping)
 				await this.stopOS(instance);
@@ -192,7 +194,7 @@ export class os extends Server
 				continue;
 			
 			seenOSIDs.add(runTask.body.osid);
-			const instance = Object.values(INSTANCES[runTask.body.osid]).find(o => o.ready && !o.busy);
+			const instance = Object.values(INSTANCES[runTask.body.osid] || {}).find(o => o.ready && !o.busy);
 			if(instance)
 			{
 				runPair.instance = instance;
@@ -227,8 +229,8 @@ export class os extends Server
 	{
 		this.xlog.info`Cleaning up previous instances...`;
 
-		this.xlog.debug`Stopping all existing OS emu procs...`;
-		await runUtil.run("sudo", ["killall", "--wait", "-9", ...Object.values(OS).map(({emu}) => emu).unique()]);
+		//this.xlog.debug`Stopping all existing OS emu procs...`;
+		//await runUtil.run("sudo", ["killall", "--wait", "-9", ...Object.values(OS).map(({emu}) => emu).unique()]);
 
 		this.xlog.debug`Deleting previous instance files...`;
 		await runUtil.run("fixPerms", [], {cwd : OS_INSTANCE_DIR_PATH});
@@ -317,11 +319,13 @@ export class os extends Server
 			await Deno.mkdir(path.join(HTTP_OUT_DIR_PATH, osid), {recursive : true});
 
 			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances...`;
-			await [].pushSequence(0, OS[osid].qty-1).parallelMap(async instanceid =>
+			const instanceids = [].pushSequence(0, OS[osid].qty-1);
+			await instanceids.parallelMap(async (instanceid, i) =>
 			{
+				await delay(OS_INSTANCE_START_INTERVAL*i);
 				await this.startOS(osid, instanceid);
 				await xu.waitUntil(() => INSTANCES[osid][instanceid]?.ready);
-			});
+			}, instanceids.length);
 		}
 
 		this.serversLaunched = true;

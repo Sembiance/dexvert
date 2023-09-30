@@ -11,30 +11,38 @@ export class wordStar extends Program
 	osData   = ({
 		alsoKill : ["ntvdm.exe"],	// Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
 		script   : `
-			WinWaitActive("[TITLE:WSWin 2.0]", "", 10)
-
 			Func DismissWarnings()
-				WindowDismiss("[TITLE:Warning]", "", "{ENTER}")
+				WindowDismiss("[TITLE:Error]", "", "{ENTER}")
+				WindowDismiss("[TITLE:Warning]", "", "{END}{ENTER}")
+				WindowDismiss("[TITLE:Error]", "", "{ENTER}")
+				WindowDismiss("[TITLE:Warning]", "", "{HOME}{ENTER}")
 				WindowDismiss("[TITLE:WSWin 2.0]", "No printer is installed", "{ENTER}")
 			EndFunc
 			CallUntil("DismissWarnings", ${xu.SECOND*3})
 
-			Send("^+e")
+			$mainWindow = WindowRequire("[TITLE:WSWin 2.0]", "", 10)
 
-			WinWaitActive("[TITLE:Export]", "", 10)
+			Send("^p")
+			$printWindow = WindowRequire("Print", "", 10)
+			Send("{ENTER}")
+		
+			$savePDFWindow = WindowRequire("Save PDF File As", "", 5)
+			Send("c:\\out\\out.pdf{ENTER}")
+			WinWaitClose($savePDFWindow)
 
-			Sleep(200)
-			Send("c:\\out\\out.txt{TAB}{TAB}{TAB}{TAB}ansi{ENTER}")
-			WinWaitClose("[TITLE:Export]", "", 10)
+			; There are some windows in-between but they go too fast, so we just sleep
+			WinWaitClose("Print Status", "", 10)
+			WinWaitActive($mainWindow, "", 15)
+
+			; This is the old export to .txt code
+			;Send("^+e")
+			;WinWaitActive("[TITLE:Export]", "", 10)
+			;Sleep(200)
+			;Send("c:\\out\\out.txt{TAB}{TAB}{TAB}{TAB}ansi{ENTER}")
+			;WinWaitClose("[TITLE:Export]", "", 10)
 
 			Send("^q")
-
-			$saveChangesVisible = WinWaitActive("[TITLE:WSWin 2.0]", "Do you want to save", 5)
-			If $saveChangesVisible Not = 0 Then
-				Send("n")
-			EndIf
-			
-			WinWaitClose("[TITLE:WSWin 2.0]", "", 10)`
+			WindowDismissWait("[TITLE:WSWin 2.0]", "Do you want to save", 3, "n")`
 	});
 	renameOut = true;
 }

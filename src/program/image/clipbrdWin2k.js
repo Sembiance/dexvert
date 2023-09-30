@@ -9,29 +9,20 @@ export class clipbrdWin2k extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			#include <ScreenCapture.au3>
+			$mainWindow = WindowRequire("ClipBook Viewer", "", 10)
 
-			$mainWindowVisible = WinWaitActive("ClipBook Viewer", "", 5)
-			If $mainWindowVisible Not = 0 Then
-				; wait for the clear clipboard warning to appear so we can get rid of it
-				$clearVisible = WinWaitActive("Clear Clipboard", "", 15)
-				If $clearVisible Not = 0 Then
-					ControlClick("Clear Clipboard", "", "[CLASS:Button; TEXT:&No]")
-				EndIf
+			WindowDismissWait("Clear Clipboard", "", 20, "N")
 
-				; switch to the actual clip we opened
-				Sleep(500)
-				SendSlow("!w1")
-				Sleep(2000)
+			; switch to the actual clip we opened
+			WinWaitActive($mainWindow, "", 10)
+			SendSlow("!w1")
+			Sleep(2000)
 
-				; open mspaint, paste it and save it as a png
-				SaveClipboardWithMSPaint("WINNT", "c:\\out\\out.png")
+			; open mspaint, paste it and save it as a png
+			SaveClipboardWithMSPaint("WINNT", "c:\\out\\out.png")
 
-				Sleep(500)
-				SendSlow("!fx")
-
-				WinWaitClose("ClipBook Viewer", "", 5)
-			EndIf`});
+			WinWaitActive($mainWindow, "", 10)
+			SendSlow("!fx")`});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp] -> autoCropImage";
 }

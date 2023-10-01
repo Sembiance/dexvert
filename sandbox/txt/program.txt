@@ -118,6 +118,7 @@ Can return an object of OS specific data to be passed into osUtil.run():
 	>>> script			A list of AutoIt or Amiga script commands to run instad of the standard program execution
 	>>> dontMaximize	Pass true to prevent the window from running maximized	
 	>>> quoteArgs		Set to true to quote args
+	>>> noAuxFiles		Set this to true to skip copying any aux files into the QEMU
 
 >>> dosData = ({timeout : xu.SECOND*30})  ||  dosData = async (runState) => ({...})
 An object or a function that returns and object to be passed into dosUtil.run()
@@ -133,4 +134,3 @@ An object or a function that returns and object to be passed into dosUtil.run()
 	>>> arch			Which wine arch to use: win32 or win64  Default: win32
 	>>> base			Which wine prefix base to use. Default: base
 	>>> console			Set this to true to run the program in a 'console' window
-	>>> noAuxFiles		Set this to true to skip copying any aux files into c:\in

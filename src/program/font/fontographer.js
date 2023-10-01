@@ -8,15 +8,19 @@ export class fontographer extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			WinWaitActive("Fontographer 5.2", "", 10)
-			Sleep(500)
+			$mainWindow = WindowRequire("Fontographer 5.2", "", 10)
+			Sleep(250)
 			SendSlow("!fg")
 
-			WinWaitActive("Generate Font Files", "", 10)
+			$generateWindow = WindowRequire("Generate Font Files", "", 10)
 			Sleep(100)
-			Send("{ENTER}")
-			WinWaitClose("Generate Font Files", "", 10)
-			Sleep(500)
+			ControlSetText($generateWindow, "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
+			SendSlow("{ENTER}")
+
+			WinWaitClose($generateWindow, "", 10)
+			
+			$pleaseWaitWindow = WinWaitActive("Please Wait", "", 3)
+			WinWaitClose($pleaseWaitWindow, "", 20)
 
 			SendSlow("!fx")`
 	});

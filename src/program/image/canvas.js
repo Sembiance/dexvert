@@ -16,7 +16,7 @@ export class canvas extends Program
 		AutoItSetOption("PixelCoordMode", 0)
 		AutoItSetOption("SendKeyDelay", 20)
 
-		$mainWindow = WindowRequire("Canvas 14", "", 5)
+		$mainWindow = WindowRequire("Canvas 14", "", 15)
 
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")

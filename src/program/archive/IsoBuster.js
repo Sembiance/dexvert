@@ -7,7 +7,8 @@ export class IsoBuster extends Program
 	unsafe  = true;	// super slow
 	loc     = "winxp";
 	bin     = "c:\\Program Files\\Smart Projects\\IsoBuster\\IsoBuster.exe";
-
+	notes   = "Currently running IsoBuster 4.8  I tried upgrading to IsoBuster 5.2 but it just crashes in 86Box WinXP";
+	
 	// IsoBuster command line options: https://www.isobuster.com/help/use_of_command_line_parameters
 	args = r => ["/ef:all:C:\\out", r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo"];
 	

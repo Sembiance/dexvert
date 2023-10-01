@@ -1,4 +1,4 @@
-import {xu} from "xu";
+import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil} from "xutil";
@@ -59,6 +59,9 @@ async function handleExit(ignored)
 
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
 const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+if(!r && !logLines)
+	Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+
 if(logLines.length)
 	console.log(`${logLines.join("\n")}\n`);
 

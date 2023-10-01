@@ -26,7 +26,7 @@ export class macromediaDirector extends Program
 
 			; Enable out Movie Restorer XTra
 			Send("!x{UP}{UP}{RIGHT}{ENTER}")
-			WinWaitActive("", "Movie Restorer Tool Enabled Successfully", 10)
+			WinWaitActive("", "Movie Restorer is now enabled.", 10)
 			Send("{ENTER}")
 
 			Sleep(200)

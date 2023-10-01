@@ -9,17 +9,24 @@ export class resourceHacker extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			WinWaitActive("Resource Hacker", "", 10)
+			Func PreOpenWindows()
+				$controlHandle = ControlGetHandle("Resource Hacker", "", "[CLASS:TButton; INSTANCE:1; TEXT:&OK]")
+				If $controlHandle Then
+					ControlClick("Resource Hacker", "", $controlHandle)
+					Exit 0
+				EndIf
+			EndFunc
+			CallUntil("PreOpenWindows", ${xu.SECOND*2})
+			
+			$mainWindow = WindowRequire("Resource Hacker", "", 10)
 
 			Send("!a")
 			Sleep(250)
 			Send("{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{ENTER}")
 
-			WinWaitActive("Save resources to", "", 10)
-
+			$saveResourceWindow = WindowRequire("Save resources to", "", 10)
 			Send("c:\\out\\out.rc{ENTER}")
-
-			WinWaitClose("Save resources to", "", 10)
+			WinWaitClose($saveResourceWindow, "", 10)
 
 			Sleep(200)
 			

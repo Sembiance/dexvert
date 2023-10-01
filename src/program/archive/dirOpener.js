@@ -12,6 +12,7 @@ export class dirOpener extends Program
 	osData   = r => ({
 		dontMaximize : true,
 		script       : `
+			WindowDismissWait("dirOpener300-850-1-PC - No Disk", "", 5, "{ESCAPE}")
 			WinWaitActive("dirOpener300-850-1-PC", "", 10)
 
 			; Sometimes dirOpener refuses to save the file to c:\\out and sticks it in C:\\ instead. Sigh.

@@ -84,10 +84,14 @@ EndFunc
 `,
 	WaitForStableFileSize : `
 Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
-	Local $lastSize = FileGetSize($filePath)
+	Local $lastSize = 0
 	Local $timer = TimerInit()
 	Local $stableTimer = TimerInit()
 	Do
+		Sleep(50)
+		
+		If Not FileExists($filePath) Then ContinueLoop
+
 		$curSize = FileGetSize($filePath)
 		If $curSize <> $lastSize Then
 			$lastSize = $curSize
@@ -95,8 +99,6 @@ Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
 		ElseIf TimerDiff($stableTimer) > $stableDuration Then
 			ExitLoop
 		EndIf
-
-		Sleep(50)
 	Until TimerDiff($timer) > $maxDuration
 EndFunc
 `,

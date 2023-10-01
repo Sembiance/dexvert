@@ -24,6 +24,9 @@ for(const inputFilePath of inputFilePaths)
 {
 	const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
 	const {r : rows, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+	if(!rows && !logLines)
+		Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+	
 	if(logLines.length)
 		console.log(logLines.join("\n"));
 

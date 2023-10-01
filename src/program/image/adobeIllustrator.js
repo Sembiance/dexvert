@@ -9,7 +9,7 @@ export class adobeIllustrator extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-		$mainWindow = WindowRequire("Adobe Illustrator", "", 5)
+		$mainWindow = WindowRequire("Adobe Illustrator", "", 10)
 
 		Func PreOpenWindows()
 			WindowFailure("Adobe Illustrator", "Can't open the illustration", -1, "{ENTER}")

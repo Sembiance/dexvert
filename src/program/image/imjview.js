@@ -17,30 +17,25 @@ export class imjview extends Program
 			; extension must be .imj
 			FileMove("c:\\in\\${path.basename(r.inFile())}", "c:\\in\\in.imj")
 
-			$mainWindow = WinWaitActive("Pegasus IMPACJ Demonstration Product", "", 5)
-			If $mainWindow Not = 0 Then
-				Send("{ENTER}");
-				WinWaitClose("Pegasus IMPACJ Demonstration Product", "", 5)
-				SendSlow("!io", 250);
-				Sleep(500);
+			$mainWindow = WindowRequire("Pegasus IMPACJ Demonstration Product", "", 7)
+			Send("{ENTER}");
+			WinWaitClose($mainWindow, "", 5)
+			SendSlow("!io", 250);
+			Sleep(500);
 
-				$openWindow = WinWaitActive("Open", "", 5)
-				If $openWindow Not = 0 Then
-					Send("c:\\in\\in.imj{ENTER}")
-				EndIf
+			$openWindow = WindowRequire("Open", "", 5)
+			Send("c:\\in\\in.imj{ENTER}")
+			WinWaitClose($openWindow, "", 5)
 
-				WinWaitClose("Open", "", 5)
+			WindowFailure("Error", "Unable to display", 3, "{ENTER}")
 
-				WindowFailure("Error", "Unable to display", 3, "{ENTER}")
+			$viewWindowControl = WaitForControl("[CLASS:imjview frame]", "", "[CLASS:imjview child]", ${xu.SECOND*5})
+			If $viewWindowControl Not = 0 Then
+				$viewDim = WinGetClientSize($viewWindowControl)
+				_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", $viewWindowControl, 4, 23, $viewDim[0]-4, $viewDim[1]-4, False)
+			EndIf
 
-				$viewWindowControl = WaitForControl("[CLASS:imjview frame]", "", "[CLASS:imjview child]", ${xu.SECOND*5})
-				If $viewWindowControl Not = 0 Then
-					$viewDim = WinGetClientSize($viewWindowControl)
-					_ScreenCapture_CaptureWnd("c:\\out\\out.bmp", $viewWindowControl, 4, 23, $viewDim[0]-4, $viewDim[1]-4, False)
-				EndIf
-
-				SendSlow("!ix");
-			EndIf`});
+			SendSlow("!ix");`});
 	renameOut = true;
 	chain     = "dexvert[asFormat:image/bmp]";
 }

@@ -6,6 +6,7 @@ export class resourceEditor extends Program
 	website  = "http://melander.dk/reseditor/";
 	loc      = "winxp";
 	bin      = "c:\\dexvert\\ResourceEditor\\ResourceEditor.exe";
+	notes    = "Not currently working, doesn't launch in the 86Box emulated Windowx XP, no idea why.";
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `

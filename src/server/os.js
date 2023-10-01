@@ -12,7 +12,7 @@ const DEBUG = true;	// Set this to true on lostcrag to restrict each VM to just 
 const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
 const OS =
 {
-	win2k :
+	/*win2k :
 	{
 		qty          : osQty(12),
 		qtyReduction : 2,
@@ -22,8 +22,18 @@ const OS =
 		copy         : ["86box.cfg", "nvr"],
 		vhd          : ["hd.vhd"],
 		archiveType  : "zip"
+	},*/
+	winxp :
+	{
+		qty          : osQty(14),
+		qtyReduction : 2,
+		ramGB        : 2,
+		scriptExt    : ".au3",
+		emu          : "86Box",
+		copy         : ["86box.cfg", "nvr"],
+		vhd          : ["hd.vhd"],
+		archiveType  : "zip"
 	}
-	//winxp    : { qty : osQty(14), qtyReduction : 2, ram : "2G", arch :   "i386", inOutType : "mount", scriptExt :  ".au3", cores : 1, extraArgs : ["-nodefaults", "-vga", "cirrus"] },	// don't change cores! breaks programs that took a hardware id snapshot on install (Total CAD Converter X)
 	//amigappc : { qty :  osQty(3), qtyReduction : 1, ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
 	//gentoo   : { qty :  osQty(4), qtyReduction : 1, ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 2, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };

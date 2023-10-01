@@ -1,40 +1,22 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class qtPicViewer extends Program
 {
-	website  = "https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/qtw2";
+	website  = "https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip";
 	unsafe   = true;
 	loc      = "winxp";
-	bin      = "C:\\WINDOWS\\VIEWER.EXE";
+	bin      = "C:\\Program Files\\QuickTime\\PictureViewer.exe";
 	args     = r => [r.inFile()];
-	osData   = ({
-		alsoKill : ["qtnotify.exe", "ntvdm.exe"],
+	osData   = r => ({
 		script   : `
-			Func ErrorWindows()
-				WindowFailure("", "Could not open file", -1, "{ESCAPE}")
-				WindowFailure("", "Could not get picture", -1, "{ESCAPE}")
-				WindowFailure("[CLASS:#32770]", "", -1, "{ESCAPE}")
-			EndFunc
+			$mainWindow = WindowRequire("${path.basename(r.inFile())}", "", 10)
 
-			;Wait for the picture sub window/control to appear
-			$mainWinActive = WinWaitActive("[TITLE:Picture Viewer]", "", 10)
-			If $mainWinActive Not = 0 Then
-				CallUntil("ErrorWindows", ${xu.SECOND*3})
-				
-				WaitForControl("[TITLE:Picture Viewer]", "", "[CLASS:ViewerPictureClass]", ${xu.SECOND*10})
-			
-				Sleep(500)
-
-				SendSlow("!ec")
-
-				Sleep(250)
-
-				SendSlow("!fx")
-
-				WinWaitClose("[TITLE:Picture Viewer]", "", 10)
-
-				SaveClipboardWithMSPaint("WINDOWS", "c:\\out\\out.png")
-			EndIf`});
+			Send("^e")
+			$saveImageWindow = WindowRequire("Save Image as:", "":, 10)
+			Send("c:\\out\\out.png{ENTER}")
+			WinWaitClose($saveImageWindow, "", 10)
+			SendSlow("!fx")`});
 	renameOut = true;
 }

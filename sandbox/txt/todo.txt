@@ -254,9 +254,9 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-* Consider updating IsoBuster to 5.2 (or later if new version available) (WARNING! BACKUP hd.img FIRST, just in case this doesn't work out!): https://www.isobuster.com/news/isobuster_4.9_release_notes
-  Look for additional release notes for more formats I can support (see what version I currently am using and read all notes since that version)
-  NOTE: This is a paid upgrade (see email for link with a 30% discount, which may now be expired)
+* Running IsoBuster 4.8 under winxp because the bought version IsoBuster 5.2 crashes under 86Box winxp
+  Perhaps it would run ok under Vista?
+  If I upgrade, examine all the release notes/news from 4.8 to 5.2 and support any new formats they addded
 
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 
@@ -287,6 +287,11 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
   WARNING! I need to assumed that it will be exploited. So I will want to run dexvert on virtual machines. Not sure if I can run virtual machines like windows from WITHIN a virtual machine running gentoo+dexvert.... hrm...
+
+* Consider switching away from DOSBOX and use an authentic MS-DOS installation under 86Box
+  Pro: Compatability, including with certain dexvert/dos/* programs that didn't work under dosbox. Feels cleaner.
+  Cons: Would need to solve video recording and keyboard control (both of which I wrote custom code patches to DOSBOX to implement)
+  I could maybe add similar code to 86Box, but that would be harder to control from 'within' dos. Would need to give this some thought
 
 
 /----------------\

@@ -10,14 +10,16 @@ export class kwikDraw130 extends Program
 	osData   = ({
 		alsoKill : ["ntvdm.exe"],
 		script   : `
-			WindowRequire("KWIKDRAW", "This is a Freeware", 5)
-			ControlClick("KWIKDRAW", "This is a Freeware", "[CLASS:Button; TEXT:OK]")
-			WinWaitClose("KWIKDRAW", "This is a Freeware", 10)
+			$freewareWindow = WindowRequire("KWIKDRAW", "This is a Freeware", 5)
+			ControlClick($freewareWindow, "", "[CLASS:Button; TEXT:OK]")
+			WinWaitClose($freewareWindow, "", 10)
+
 			$convertWindow = WinWaitActive("KWIKDRAW", "Converting", 3)
 			If $convertWindow Not = 0 Then
 				ControlClick("KWIKDRAW", "Converting", "[CLASS:Button; TEXT:OK]")
 				WinWaitClose("KWIKDRAW", "Converting", 5)
 			EndIf
+			
 			WinWaitActive("[CLASS:KWIKDRAW]", "", 10)
 			SendSlow("!fp")
 			WinWaitActive("PRINT", "", 10)

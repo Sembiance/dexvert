@@ -21,6 +21,7 @@ export class picturePublisher extends Program
 		Func PreOpenWindows()
 			WindowFailure("Micrografx Picture Publisher", "This file type is not supported", -1, "{ESCAPE}")
 			WindowFailure("Micrografx Picture Publisher", "Translation failed", -1, "{ESCAPE}")
+			WindowFailure("Micrografx Picture Publisher", "Error - File signature mismatch.", -1, "{ESCAPE}")
 			WindowDismiss("${r.f.input.base}", "Image Type", "{ENTER}")
 			WindowDismiss("Photo CD Open", "", 0, "PhotoCDOpenDismiss")
 		EndFunc

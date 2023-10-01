@@ -11,34 +11,17 @@ export class winPack extends Program
 	osData   = ({
 		dontMaximize : true,
 		script : `
-			$mainWindowVisible = WinWaitActive("[TITLE:WinPack; CLASS:TisMainForm]", "", 10)
-			If $mainWindowVisible = 0 Then
-				Local $errorVisible = WinWaitActive("Erreur", "", 5)
-				If $errorVisible Not = 0 Then
-					ControlClick("Erreur", "", "[TEXT:OK]")
-				Else
-					Local $errorTwoVisible = WinWaitActive("Avertissement", "", 5)
-					If $errorTwoVisible Not = 0 Then
-						ControlClick("Avertissement", "", "[TEXT:OK]")
-					EndIf
-				EndIf
-			Else
-				Sleep(1000)
+			$mainWindow = WindowRequire("[TITLE:WinPack; CLASS:TisMainForm]", "", 10)
+			Sleep(250)
+			SendSlow("!fu")
 
-				SendSlow("!fu")
+			$browseWindow = WindowRequire("[TITLE:Browse for Folder]", "", 10)
+			Sleep(250)
+			SendSlow("{PGUP}{PGUP}{PGUP}{DOWN}{DOWN}{DOWN}{DOWN}{RIGHT}out{ENTER}")
+			WinWaitClose($browseWindow, "", 15)
+			Sleep(1000)
 
-				WinWaitActive("[TITLE:Browse for Folder]", "", 10)
-
-				Sleep(1000)
-
-				SendSlow("{DOWN}{RIGHT}o{ENTER}")
-
-				WinWaitClose("[TITLE:Browse for Folder]", "", 10)
-
-				Sleep(1000)
-
-				SendSlow("!fx")
-			EndIf
+			SendSlow("!fx")
 
 			WaitForPID("WinPack.exe", ${xu.SECOND*10})`
 	});

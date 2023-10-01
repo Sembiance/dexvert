@@ -13,7 +13,7 @@ export class pageMaker7QuarkConverter extends Program
 			$mainWindow = WindowRequire("Converter for Microsoft", "", 5)
 			SendSlow("!os")
 			$chooseDestinationWindow = WindowRequire("Choose Destination", "", 5)
-			SendSlow("+{TAB}+{TAB}+{TAB}{DOWN}{HOME}{DOWN}{DOWN}{DOWN}{TAB}{TAB}{DOWN}{RIGHT}{ENTER}{TAB}{ENTER}")
+			SendSlow("+{TAB}+{TAB}+{TAB}{DOWN}{HOME}{DOWN}{DOWN}{DOWN}{DOWN}{TAB}{TAB}{DOWN}out{ENTER}{TAB}{ENTER}");
 			WinWaitClose($chooseDestinationWindow, "", 5)
 
 			Send("^o")
@@ -31,7 +31,7 @@ export class pageMaker7QuarkConverter extends Program
 					Return 1
 				EndIf
 			EndFunc
-			CallUntil("WaitForFinish", ${xu.SECOND*50})
+			CallUntil("WaitForFinish", ${xu.MINUTE*2})
 
 			SendSlow("!fx")`
 	});

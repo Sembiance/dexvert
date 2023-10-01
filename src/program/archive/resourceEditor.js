@@ -4,10 +4,25 @@ import {Program} from "../../Program.js";
 export class resourceEditor extends Program
 {
 	website  = "http://melander.dk/reseditor/";
-	loc      = "winxp";
+	loc      = "wine";
 	bin      = "c:\\dexvert\\ResourceEditor\\ResourceEditor.exe";
-	notes    = "Not currently working, doesn't launch in the 86Box emulated Windowx XP, no idea why.";
 	args     = r => [r.inFile()];
+	notes    = "This broke in 86Box. It's flaky in wine too, thanks to xdotool being total utter shit. So currently nothing is using this";
+	wineData = {
+		script :
+		[
+			{ op : "windowRequire", matcher : /^Resource Editor by Anders Melander/, windowid : "mainWindow"},
+			{ op : "delay", duration : xu.SECOND*2},
+			{ op : "type", windowid : "mainWindow", text : `{Alt_L}f` },
+			{ op : "delay", duration : 250},
+			{ op : "type", windowid : "mainWindow", interval : 100, text : `{Down}{Down}{Down}{Down}{Return}` },
+			{ op : "windowRequire", matcher : /^Save resource file/, windowid : "saveWindow"},
+			{ op : "delay", duration : xu.SECOND*2},
+			{ op : "type", windowid : "saveWindow", text : `{Tab}{End}{Return}` },
+			{ op : "delay", duration : xu.SECOND},
+			{ op : "type", windowid : "saveWindow", text : `{Shift_L+Tab}c:\\out.rc{Return}` }
+		]
+	};
 	osData   = ({
 		script : `
 			WinWaitActive("Resource Editor", "", 10)

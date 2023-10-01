@@ -4,15 +4,15 @@ import {Program} from "../../Program.js";
 export class DirMaster extends Program
 {
 	website  = "https://style64.org/dirmaster";
-	loc      = "winxp";
-	bin      = "DirMaster.exe";
+	loc      = "wine";
+	bin      = "c:\\Program Files\\Style\\DirMaster\\DirMaster.exe";
 	flags   = {
 		timeout : "Stop after X ms. Default: 3 minutes"
 	};
 	args     = r => ["--exportall", r.inFile()];
-	osData   = r => ({
-		timeout : (+(r.flags.timeout || xu.MINUTE*3)),
-		cwd     : "c:\\out"
+	cwd      = r => r.outDir();
+	wineData = r => ({
+		timeout : (+(r.flags.timeout || xu.MINUTE*3))
 	});
 	renameOut = {
 		alwaysRename : true,
@@ -23,6 +23,3 @@ export class DirMaster extends Program
 		]
 	};
 }
-
-// NOTE: Node version used to rename all files, sticking any 1 to 3 digit extension prefix at the end as a suffix instead.
-// I have chosen not to do that in this new deno version, as a format can matchPreExt if needed

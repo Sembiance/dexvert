@@ -1,6 +1,5 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {path} from "std";
 
 export class hcdisk extends Program
 {
@@ -12,9 +11,9 @@ export class hcdisk extends Program
 		console : true,
 		script :
 		[
-			{ op : "windowRequire", matcher : /^c:\\dexvert\\HCDisk2.exe/, timeout : xu.SECOND*5, windowid : "mainWindow"},
+			{ op : "windowRequire", matcher : /^c:\\dexvert\\HCDisk2.exe/, windowid : "mainWindow"},
 			{ op : "delay", duration : xu.SECOND},
-			{ op : "type", windowid : "mainWindow", text : `open C:\\in\\${path.basename(r.inFile())}{Return}` },
+			{ op : "type", windowid : "mainWindow", text : `open ${r.inFile()}{Return}` },
 			{ op : "delay", duration : xu.SECOND},
 			{ op : "type", windowid : "mainWindow", text : `get *{Return}` },
 			{ op : "delay", duration : xu.SECOND},

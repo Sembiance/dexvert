@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {path, delay} from "std";
-import {runUtil, fileUtil} from "xutil";
+import {runUtil} from "xutil";
 
 export const WINE_WEB_HOST = "127.0.0.1";
 export const WINE_WEB_PORT = 17737;
@@ -40,13 +40,12 @@ for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""))
 	CAPITAL_KEY_REPLACEMENTS[c] = `${c.toLowerCase()}`;
 
 // Key names: /usr/include/X11/keysymdef.h
-export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, noAuxFiles, script=[], timeout=xu.MINUTE*5, xlog})
+// Wine Guide: https://wiki.winehq.org/Wine_User%27s_Guide
+export async function run({cmd, args=[], cwd, arch="win32", base="base", console, script=[], timeout=xu.MINUTE*5, xlog})
 {
 	const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
 	if(!Object.keys(wineBaseEnv).includes(base))
 		throw new Error(`Invalid wine base '${base}' for cmd [${cmd}] valid bases: [${Object.keys(wineBaseEnv).join("], [")}]`);
-
-	const cDriveDirPath = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c");
 
 	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, xlog};
 	if(xlog.atLeast("trace"))
@@ -61,27 +60,10 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 
 	const prelog = `wine ${fg.orange(base)} ${fg.yellow(cmd)}${fg.cyan(":")}`;
 
-	// copy any files to our c:\in dir
-	const inFiles = f ? [f.input] : [];
-	if(f && !noAuxFiles)
-		inFiles.push(...(f.files.aux || []));
-
-	const prefixInDirPath = path.join(cDriveDirPath, "in");
-	await fileUtil.unlink(prefixInDirPath, {recursive : true});
-	await Deno.mkdir(prefixInDirPath, {recursive : true});
-
-	const prefixOutDirPath = path.join(cDriveDirPath, "out");
-	await fileUtil.unlink(prefixOutDirPath, {recursive : true});
-	await Deno.mkdir(prefixOutDirPath, {recursive : true});
-
-	xlog.debug`${prelog} Copying ${inFiles.length} files to c:\\in...`;
-	for(const inFile of inFiles)
-		await Deno.copyFile(inFile.absolute, path.join(prefixInDirPath, path.basename(inFile.absolute)));
-
 	xlog.info`${prelog} Launching: ${fg.orange(cmd)} ${args.join(" ")}`;
 	xlog.debug`${prelog} wine runOptions: ${runOptions}`;
 
-	cmd = (/^[A-Za-z]:/).test(cmd) ? cmd : `c:\\dexvert\\${cmd}`;
+	cmd = ((/^[A-Za-z]:/).test(cmd) || cmd.startsWith("/")) ? cmd : `c:\\dexvert\\${cmd}`;
 	
 	const {cb, p, xvfbPort, virtualXVNCPort} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
 
@@ -144,7 +126,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		}
 		else if(op==="type")
 		{
-			const {windowid, text} = o;
+			const {windowid, text, interval} = o;
 			
 			const textPieces = [];
 			for(const textPart of text.split(/({[^}]+})/).filter(v => !!v))	// eslint-disable-line prefer-named-capture-group
@@ -165,14 +147,18 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 			for(const textPart of textParts)
 			{
 				const key = textPart.match(/^{(?<key>.+)}$/)?.groups?.key;
+				const xdotoolArgs = ["--window", wids[windowid]];
+				if(interval)
+					xdotoolArgs.push("--delay", interval);
+
 				if(key)
 				{
 					lastKey = key;
-					await runUtil.run("xdotool", ["key", "--window", wids[windowid], key], scriptRunOpts);
+					await runUtil.run("xdotool", ["key", ...xdotoolArgs, key], scriptRunOpts);
 				}
 				else
 				{
-					await runUtil.run("xdotool", ["type", "--window", wids[windowid], textPart], scriptRunOpts);
+					await runUtil.run("xdotool", ["type", ...xdotoolArgs, textPart], scriptRunOpts);
 				}
 			}
 			if(lastKey)

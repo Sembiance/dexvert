@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {cmdUtil} from "xutil";
+import {cmdUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {XLog} from "xlog";
 import {run as wineRun, WINE_PREFIX_SRC, WINE_WEB_HOST, WINE_WEB_PORT} from "../wineUtil.js";
@@ -47,7 +47,7 @@ const webServer = new WebServer(WINE_WEB_HOST, WINE_WEB_PORT, {xlog});
 webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(wineBaseEnv)), {logCheck : () => false});	// eslint-disable-line require-await
 await webServer.start();
 
-const wineData = {cmd : argv.cmd, args : argv.args || [], arch : argv.arch, base : argv.base, console : argv.console, xlog};
+const wineData = {cmd : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd), args : argv.args || [], arch : argv.arch, base : argv.base, console : argv.console, xlog};
 if(argv.program)
 {
 	const programModule = await import(`../program/${argv.program}.js`);

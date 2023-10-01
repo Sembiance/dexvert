@@ -190,7 +190,7 @@ export class Program
 		}
 		else if(this.loc==="wine")
 		{
-			r.wineData = {f, cmd : await getBin(), cwd : r.cwd, xlog};
+			r.wineData = {cmd : await getBin(), cwd : r.cwd, xlog};
 			r.wineData.args = await getArgs();
 			if(this.wineData)
 				Object.assign(r.wineData, typeof this.wineData==="function" ? await this.wineData(r) : this.wineData);

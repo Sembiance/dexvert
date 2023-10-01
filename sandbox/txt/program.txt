@@ -125,3 +125,12 @@ An object or a function that returns and object to be passed into dosUtil.run()
 	>>> timeout			Maximum duration of dosBox
 	>>> runIn			Can be "out" or "prog" to run the executable in the out or prog directory (default is E:\\)
 	>>> keys			An array of keys to press, 100ms interval between key presses. Strings are singles keys (or phrases). Special keys should be sub arrays like ["Enter"]. Can also use {delay : xu.SECOND} to insert extra delays between keys
+
+>>> wineData = ({timeout : xu.SECOND*30})  ||  wineData = async (runState) => ({...})
+An object or a function that returns and object to be passed into dosUtil.run()
+	>>> script			An array of ops or functions to call to 'control' the wine program
+	>>> timeout			Maximum duration of wine
+	>>> arch			Which wine arch to use: win32 or win64  Default: win32
+	>>> base			Which wine prefix base to use. Default: base
+	>>> console			Set this to true to run the program in a 'console' window
+	>>> noAuxFiles		Set this to true to skip copying any aux files into c:\in

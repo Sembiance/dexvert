@@ -10,7 +10,7 @@ import {getDetections} from "../src/Detection.js";
 const xlog = new XLog("error");
 
 const SAMPLE_DIR_PATH_SRC = path.join(xu.dirname(import.meta), "..", "test", "sample");
-const SAMPLE_DIR_PATH = "/mnt/ram/dexvert/sample";
+const SAMPLE_DIR_PATH = "/mnt/dexvert/sample";
 
 console.log("Rsyncing sample files to RAM...");
 await runUtil.run("rsync", ["--delete", "-savL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);

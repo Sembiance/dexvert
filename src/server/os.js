@@ -22,7 +22,7 @@ const OS =
 		copy         : ["86box.cfg", "nvr"],
 		vhd          : ["hd.vhd"],
 		archiveType  : "zip"
-	},*/
+	},
 	winxp :
 	{
 		qty          : osQty(14),
@@ -33,7 +33,7 @@ const OS =
 		copy         : ["86box.cfg", "nvr"],
 		vhd          : ["hd.vhd"],
 		archiveType  : "zip"
-	}
+	}*/
 	//amigappc : { qty :  osQty(3), qtyReduction : 1, ram : "1G", arch :    "ppc", inOutType :  "http", scriptExt : ".rexx", cores : 1, machine : "type=sam460ex", net : "ne2k_pci", hdOpts : ",id=disk", extraArgs : ["-device", "ide-hd,drive=disk,bus=ide.0"]},
 	//gentoo   : { qty :  osQty(4), qtyReduction : 1, ram : "2G", arch : "x86_64", inOutType :   "ssh", scriptExt :   ".sh", cores : 2, hdOpts : ",if=virtio", net : "virtio-net", extraArgs : ["-device", "virtio-rng-pci", "-vga", "std"] }
 };
@@ -345,7 +345,7 @@ export class os extends Server
 	status()
 	{
 		const instances = Object.values(INSTANCES).flatMap(o => Object.values(o));
-		return this.serversLaunched && instances.length>0 && instances.every(instance => instance.p && instance.ready);
+		return this.serversLaunched && (Object.keys(OS).length===0 || (instances.length>0 && instances.every(instance => instance.p && instance.ready)));
 	}
 
 	async stopOS(instance)

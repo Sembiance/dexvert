@@ -8,5 +8,5 @@ export class windowsResource extends Format
 	forbidExtMatch = true;
 	magic          = ["MSVC .res", "Windows compiled resource"];
 	notes          = "There is probably a better way to open these, maybe visual studio?";
-	converters     = ["resourceHacker", "strings[matchType:magic]"];
+	converters     = ["resourceHacker", "resourceEditor", "strings[matchType:magic]"];
 }

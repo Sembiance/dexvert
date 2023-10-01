@@ -8,6 +8,7 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runOS, OSIDS} from "./osUtil.js";
+import {run as runWine} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
@@ -48,7 +49,7 @@ export class Program
 		validateClass(program, {
 			// required
 			programid : {type : "string", required : true},	// automatically set to the constructor name
-			loc       : {type : "string", required : true, enum : ["local", "dos", ...OSIDS]},
+			loc       : {type : "string", required : true, enum : ["local", "dos", "wine", ...OSIDS]},
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
@@ -73,6 +74,8 @@ export class Program
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {type : "number", range : [1]},
 			dosData          : {types : ["function", Object]},
+			wineData         : {types : ["function", Object]},
+			osData           : {types : ["function", Object]},
 			exec             : {type : "function", length : [0, 1]},
 			filenameEncoding : {types : ["function", "string"]},
 			mirrorInToCWD    : {types : ["boolean", "string"]},
@@ -80,7 +83,6 @@ export class Program
 			post             : {type : "function", length : [0, 1]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
-			osData           : {types : ["function", Object]},
 			renameIn         : {type : "boolean"},
 			verify           : {type : "function", length : [0, 2]}
 		});
@@ -140,6 +142,9 @@ export class Program
 		if(this.pre)
 			await this.pre(r);
 
+		const getBin = async () => (typeof this.bin==="function" ? await this.bin(r) : this.bin);
+		const getArgs = async () => (this.args ? await this.args(r) : []).map(arg => arg.toString());
+
 		if(this.exec)
 		{
 			// run arbitrary javascript code
@@ -149,8 +154,8 @@ export class Program
 		else if(this.loc==="local")
 		{
 			// run a program on disk
-			r.bin = this.bin;
-			r.args = (this.args ? await this.args(r) : []).map(arg => arg.toString());
+			r.bin = await getBin();
+			r.args = await getArgs();
 			r.runOptions = {cwd : r.cwd, timeout};
 			if(f.homeDir)
 				r.runOptions.env = {HOME : f.homeDir.absolute};
@@ -176,19 +181,28 @@ export class Program
 		}
 		else if(this.loc==="dos")
 		{
-			r.dosData = {root : f.root, cmd : typeof this.bin==="function" ? await this.bin(r) : this.bin, xlog};
-			r.dosData.args = this.args ? await this.args(r) : [];
+			r.dosData = {root : f.root, cmd : await getBin(), xlog};
+			r.dosData.args = await getArgs();
 			if(this.dosData)
 				Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
 
 			r.status = await runDOS(r.dosData);
 		}
+		else if(this.loc==="wine")
+		{
+			r.wineData = {f, cmd : await getBin(), cwd : r.cwd, xlog};
+			r.wineData.args = await getArgs();
+			if(this.wineData)
+				Object.assign(r.wineData, typeof this.wineData==="function" ? await this.wineData(r) : this.wineData);
+
+			r.status = await runWine(r.wineData);
+		}
 		else if(OSIDS.includes(this.loc))
 		{
-			r.osData = {f, cmd : this.bin, osid : this.loc, xlog};
+			r.osData = {f, cmd : await getBin(), osid : this.loc, xlog};
 			if(format?.formatid)
 				r.osData.meta = `${format.familyid}/${format.formatid}`;
-			r.osData.args = this.args ? await this.args(r) : [];
+			r.osData.args = await getArgs();
 			if(this.osData)
 				Object.assign(r.osData, typeof this.osData==="function" ? await this.osData(r) : this.osData);
 

@@ -3,3 +3,4 @@ dexvert.code-workspace
 .eslintrc.js
 .vscode/
 deno/
+wine/

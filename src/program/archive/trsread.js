@@ -3,9 +3,9 @@ import {Program} from "../../Program.js";
 export class trsread extends Program
 {
 	website   = "http://www.trs-80emulators.com/trsread-trswrite.html";
-	loc       = "winxp";
+	loc       = "wine";
 	bin       = "trsread.exe";
 	args      = r => ["-e", "-s", "-i", r.inFile()];
-	osData    = ({cwd : "c:\\out"});
+	cwd       = r => r.outDir();
 	renameOut = false;
 }

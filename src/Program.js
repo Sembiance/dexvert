@@ -8,7 +8,7 @@ import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {run as runDOS} from "./dosUtil.js";
 import {run as runOS, OSIDS} from "./osUtil.js";
-import {run as runWine} from "./wineUtil.js";
+import {run as runWine, WINE_WEB_HOST, WINE_WEB_PORT} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
@@ -99,6 +99,9 @@ export class Program
 			});
 		}
 
+		if(program.wineData?.script && !program.exclusive)
+			throw new Error(`Program ${fg.orange(program.programid)} has a wineData.script but is not marked exclusive, which is needed to work correctly in parallel executions`);
+
 		return program;
 	}
 
@@ -145,74 +148,80 @@ export class Program
 		const getBin = async () => (typeof this.bin==="function" ? await this.bin(r) : this.bin);
 		const getArgs = async () => (this.args ? await this.args(r) : []).map(arg => arg.toString());
 
-		if(this.exec)
+		if(this.exclusive)
 		{
-			// run arbitrary javascript code
-			xlog.info`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
-			await this.exec(r);
+			xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
+			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
 		}
-		else if(this.loc==="local")
-		{
-			// run a program on disk
-			r.bin = await getBin();
-			r.args = await getArgs();
-			r.runOptions = {cwd : r.cwd, timeout};
-			if(f.homeDir)
-				r.runOptions.env = {HOME : f.homeDir.absolute};
-			if(this.runOptions)
-				Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 
-			if(this.exclusive)
+		try
+		{
+			if(this.exec)
 			{
-				xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
-				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
+				// run arbitrary javascript code
+				xlog.info`Program ${fg.orange(this.programid)} executing ${".exec"} steps`;
+				await this.exec(r);
+			}
+			else if(this.loc==="local")
+			{
+				// run a program on disk
+				r.bin = await getBin();
+				r.args = await getArgs();
+				r.runOptions = {cwd : r.cwd, timeout};
+				if(f.homeDir)
+					r.runOptions.env = {HOME : f.homeDir.absolute};
+				if(this.runOptions)
+					Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
+
+
+				xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
+				xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
+				const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
+				Object.assign(r, {stdout, stderr, status});
+			}
+			else if(this.loc==="dos")
+			{
+				r.dosData = {root : f.root, cmd : await getBin(), xlog};
+				r.dosData.args = await getArgs();
+				if(this.dosData)
+					Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
+
+				r.status = await runDOS(r.dosData);
+			}
+			else if(this.loc==="wine")
+			{
+				r.wineCounter = +(await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getWineCounter`)).text());
+				r.wineData = {f, cmd : await getBin(), cwd : r.cwd, xlog, wineCounter : r.wineCounter};
+				r.wineData.args = await getArgs();
+				if(this.wineData)
+					Object.assign(r.wineData, typeof this.wineData==="function" ? await this.wineData(r) : this.wineData);
+
+				r.status = await runWine(r.wineData);
+			}
+			else if(OSIDS.includes(this.loc))
+			{
+				r.osData = {f, cmd : await getBin(), osid : this.loc, xlog};
+				if(format?.formatid)
+					r.osData.meta = `${format.familyid}/${format.formatid}`;
+				r.osData.args = await getArgs();
+				if(this.osData)
+					Object.assign(r.osData, typeof this.osData==="function" ? await this.osData(r) : this.osData);
+
+				r.status = await runOS(r.osData);
 			}
 
-			xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
-			xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
-			const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
-			Object.assign(r, {stdout, stderr, status});
-
-			if(this.exclusive)
-			{
-				xlog.debug`Program ${fg.orange(this.programid)} releasing lock...`;
-				await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
-			}
+			if(this.postExec)
+				await this.postExec(r);
 		}
-		else if(this.loc==="dos")
+		catch(err)
 		{
-			r.dosData = {root : f.root, cmd : await getBin(), xlog};
-			r.dosData.args = await getArgs();
-			if(this.dosData)
-				Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
-
-			r.status = await runDOS(r.dosData);
-		}
-		else if(this.loc==="wine")
-		{
-			r.wineData = {cmd : await getBin(), cwd : r.cwd, xlog};
-			r.wineData.args = await getArgs();
-			if(this.wineData)
-				Object.assign(r.wineData, typeof this.wineData==="function" ? await this.wineData(r) : this.wineData);
-
-			r.status = await runWine(r.wineData);
-		}
-		else if(OSIDS.includes(this.loc))
-		{
-			r.osData = {f, cmd : await getBin(), osid : this.loc, xlog};
-			if(format?.formatid)
-				r.osData.meta = `${format.familyid}/${format.formatid}`;
-			r.osData.args = await getArgs();
-			if(this.osData)
-				Object.assign(r.osData, typeof this.osData==="function" ? await this.osData(r) : this.osData);
-
-			r.status = await runOS(r.osData);
+			xlog.error`Program ${fg.orange(this.programid)} execution threw error ${err}`;
 		}
 
-		if(this.postExec)
+		if(this.exclusive)
 		{
-			try { await this.postExec(r); }
-			catch(err) { xlog.error`Program postExec ${fg.orange(this.programid)} threw error ${err}`; }
+			xlog.debug`Program ${fg.orange(this.programid)} releasing lock...`;
+			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
 		}
 
 		if(this.mirrorInToCWD)

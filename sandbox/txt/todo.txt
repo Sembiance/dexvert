@@ -253,10 +253,6 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-* Running IsoBuster 4.8 under winxp because the bought version IsoBuster 5.2 crashes under 86Box winxp
-  Perhaps it would run ok under Vista?
-  If I upgrade, examine all the release notes/news from 4.8 to 5.2 and support any new formats they addded
-
 * GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
 
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
@@ -278,12 +274,6 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   For the OpenBoo.sh script, just reference that and run my own command line script. See the qemu.txt doc for a link to update CLI args
   To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
 
-* Ask on IRC OFTC #kernelnewbies and ##linux on freenode about PAYING someone to add support to linux kernel for mounting CDI images:
-  https://www.isobuster.com/help/cd-i_and_vcd
-  https://encyclopedia2.thefreedictionary.com/Green+Book+CD-ROM
-  https://www.lscdweb.com/data/downloadables/2/8/cdi_may94_r2.pdf
-  See some tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
-
 * Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
   WARNING! I need to assumed that it will be exploited. So I will want to run dexvert on virtual machines. Not sure if I can run virtual machines like windows from WITHIN a virtual machine running gentoo+dexvert.... hrm...
 
@@ -298,6 +288,13 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
 /----------------\
 | Probably Never |
 \----------------/
+* Try and get support added to linux kernel for mounting CDI images. Seems like a tall order.
+  Could ask on IRC OFTC #kernelnewbies and ##linux on freenode about where I could find someone who could do this, and maybe pay them to do it
+  https://www.isobuster.com/help/cd-i_and_vcd
+  https://encyclopedia2.thefreedictionary.com/Green+Book+CD-ROM
+  https://www.lscdweb.com/data/downloadables/2/8/cdi_may94_r2.pdf
+  See some tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
+
 * Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
 
 * Convert bitmap fonts to more usable vector fonts by trying to "autotrace" the fonts, or utilize a pro tool like: https://www.fontlab.com/font-editor/bitfonter/   or   https://www.fontlab.com/font-converter/transtype/

@@ -14,7 +14,7 @@ const argv = cmdUtil.cmdInit({
 		base     : {desc : "What base to use", defaultValue : "base"},
 		arch     : {desc : "Which arch to use", defaultValue : "win32"},
 		console  : {desc : "Run the program in a console window"},
-		logLevel : {desc : "Log level to use", defaultValue : "info"},
+		logLevel : {desc : "Log level to use", defaultValue : "trace"},
 		program  : {desc : "Use wineData from this program", hasValue : true}
 	},
 	args :
@@ -25,23 +25,16 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.logLevel);
 
-const runOpts = {
-	liveOutput : true,
-	detached : true,
-	env :
-	{
-		DISPLAY : ":0",
-		WINEARCH : argv.arch,
-		WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
-	}
-};
-
 const existingEnv = await xu.tryFallbackAsync(async () => await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json());
 if(existingEnv)
 	Deno.exit(xlog.error`Can't run this while dexserver is running!`);
 
 const wineBaseEnv = {};
-wineBaseEnv[argv.base] = runOpts.env;
+wineBaseEnv[argv.base] = {
+	DISPLAY : ":0",
+	WINEARCH : argv.arch,
+	WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
+};
 
 const webServer = new WebServer(WINE_WEB_HOST, WINE_WEB_PORT, {xlog});
 webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(wineBaseEnv)), {logCheck : () => false});	// eslint-disable-line require-await

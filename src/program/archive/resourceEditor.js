@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {path} from "std";
 
 export class resourceEditor extends Program
 {
@@ -7,43 +8,48 @@ export class resourceEditor extends Program
 	loc      = "wine";
 	bin      = "c:\\dexvert\\ResourceEditor\\ResourceEditor.exe";
 	args     = r => [r.inFile()];
-	notes    = "This broke in 86Box. It's flaky in wine too, thanks to xdotool being total utter shit. So currently nothing is using this";
-	wineData = {
-		script :
-		[
-			{ op : "windowRequire", matcher : /^Resource Editor by Anders Melander/, windowid : "mainWindow"},
-			{ op : "delay", duration : xu.SECOND*2},
-			{ op : "type", windowid : "mainWindow", text : `{Alt_L}f` },
-			{ op : "delay", duration : 250},
-			{ op : "type", windowid : "mainWindow", interval : 100, text : `{Down}{Down}{Down}{Down}{Return}` },
-			{ op : "windowRequire", matcher : /^Save resource file/, windowid : "saveWindow"},
-			{ op : "delay", duration : xu.SECOND*2},
-			{ op : "type", windowid : "saveWindow", text : `{Tab}{End}{Return}` },
-			{ op : "delay", duration : xu.SECOND},
-			{ op : "type", windowid : "saveWindow", text : `{Shift_L+Tab}c:\\out.rc{Return}` }
-		]
-	};
-	osData   = ({
+	notes    = "This broke in 86Box. It's flaky in wine too, program doesn't seem to be able to export anything without errors. Blegh. So currently nothing is using this";
+	wineData = r => ({
 		script : `
-			WinWaitActive("Resource Editor", "", 10)
-
 			AutoItSetOption("SendKeyDelay", 20)
+			$mainWindow = WindowRequire("Resource Editor", "", 10)
+			
+			; Sometimes the main window appears early but isn't ready for keyboard interaction yet
+			Sleep(2000)
 
-			SendSlow("!f")
-			Sleep(250)
-			Send("{DOWN}{DOWN}{DOWN}{DOWN}{ENTER}")
+			Func OpenSaveWindow()
+				SendSlow("!f")
+				Sleep(200)
+				Send("{DOWN}{DOWN}{DOWN}{DOWN}{ENTER}")
+				Sleep(2000)
+			EndFunc
 
-			WinWaitActive("Save resource file", "", 10)
+			Func PerformSaving($saveWindow)
+				Sleep(500)
+				
+				$dupFileWindow = WinActive("Save resource file", "Do you want to replace it?")
+				If $dupFileWindow Not = 0 Then
+					Send("{ESCAPE}")
+					WinWaitClose($dupFileWindow, "", 2)
+					FileDelete("c:\\${path.basename(r.inFile())}")
+					WinWaitActive($saveWindow, "", 2)
+				EndIf
 
-			Sleep(250)
+				Send("{TAB}{DOWN}{DOWN}{DOWN}+{TAB}c:\\out${r.wineCounter}\\out.rc{TAB}{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}")
+				WinWaitClose($saveWindow, "", 10)
+			EndFunc
 
-			Send("{TAB}{DOWN}{DOWN}{DOWN}{DOWN}{ENTER}")
-			Sleep(100)
-			Send("+{TAB}c:\\out\\out.rc{TAB}{TAB}{TAB}{TAB}{DOWN}{ENTER}")
+			OpenSaveWindow()
+			$saveResourceWindow = WinWaitActive("Save resource file", "", 3)
+			If $saveResourceWindow Then
+				PerformSaving($saveResourceWindow)
+			Else
+				OpenSaveWindow()
+				$saveResourceWindow = WindowRequire("Save resource file", "", 3)
+				PerformSaving($saveResourceWindow)
+			EndIf
 
-			WinWaitClose("Save resource file", "", 10)
-
-			Sleep(200)
+			Sleep(500)
 			
 			SendSlow("!fx", 250)`
 	});

@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
 import {runUtil, fileUtil} from "xutil";
@@ -10,6 +11,7 @@ export class wine extends Server
 	wineserverProcs = [];
 	wineBaseEnv = {};
 	WINE_BASES = [];
+	wineCounter = 0;
 
 	baseKeys = Object.keys(this);
 
@@ -34,16 +36,21 @@ export class wine extends Server
 			const runOpts = {detached : true, stdoutcb : line => this.xlog.info`${xu.colon(fg.orange(wineBase))}${line}`, stderrcb : line => this.xlog.warn`${xu.colon(fg.orange(wineBase))}${line}`};
 			runOpts.env = {WINEPREFIX : path.join(WINE_PREFIX, wineBase)};
 			if(this.xlog.atLeast("trace"))
+			{
 				runOpts.env.DISPLAY = ":0";
+			}
 			else
+			{
 				runOpts.virtualX = true;
+				runOpts.virtualXVNCPort = true;
+			}
 
-			const {p} = await runUtil.run("wineserver", ["--foreground", "--persistent"], runOpts);
+			const {p, xvfbPort, virtualXVNCPort} = await runUtil.run("wineserver", ["--foreground", "--persistent"], runOpts);
 			this.wineserverProcs.push(p);
 
-			this.wineBaseEnv[wineBase] = {WINEPREFIX : runOpts.env.WINEPREFIX};
+			this.wineBaseEnv[wineBase] = {DISPLAY : (this.xlog.atLeast("trace") ? ":0" : `:${xvfbPort}`), WINEPREFIX : runOpts.env.WINEPREFIX};
 
-			this.xlog.info`Wineserver ${fg.orange(wineBase)} started${runOpts.virtualXVNCPort ? ` (VNC Port: ${runOpts.virtualXVNCPort})` : ""}`;
+			this.xlog.info`Wineserver ${fg.orange(wineBase)} started${runOpts.virtualXVNCPort ? ` (VNC Port: ${virtualXVNCPort})` : ""}`;
 		}
 
 		// Despite looking at the source code for wineserver, I couldn't find a definitive good way to determine that wineserver is 'fully loaded' and ready to go, so just sleep
@@ -58,7 +65,14 @@ export class wine extends Server
 
 		this.xlog.info`Starting wine web server...`;
 		this.webServer = new WebServer(WINE_WEB_HOST, WINE_WEB_PORT, {xlog : this.xlog});
-		this.webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(this.wineBaseEnv)), {logCheck : () => false});	// eslint-disable-line require-await
+		this.webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(this.wineBaseEnv)), {logCheck : () => false});
+		this.webServer.add("/getWineCounter", async () =>
+		{
+			const wineCounterNum = `${this.wineCounter++}`;
+			if(this.wineCounter>9000)
+				this.wineCounter = 0;
+			return new Response(wineCounterNum);
+		}, {logCheck : () => false});
 		await this.webServer.start();
 
 		this.xlog.debug`wineBaseEnv: ${this.wineBaseEnv}`;
@@ -67,7 +81,7 @@ export class wine extends Server
 		this.started = true;
 	}
 
-	async status()	// eslint-disable-line require-await
+	async status()
 	{
 		return this.wineserverProcs.length===this.WINE_BASES.length && this.started;
 	}

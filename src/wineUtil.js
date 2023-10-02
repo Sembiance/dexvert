@@ -1,6 +1,7 @@
 import {xu, fg} from "xu";
-import {path, delay} from "std";
-import {runUtil} from "xutil";
+import {path} from "std";
+import {runUtil, fileUtil} from "xutil";
+import {appendCommonFuncs} from "./autoItUtil.js";
 
 export const WINE_WEB_HOST = "127.0.0.1";
 export const WINE_WEB_PORT = 17737;
@@ -9,54 +10,24 @@ export const WINESERVER_VNC_BASE_PORT = 9940;
 export const WINE_PREFIX_SRC = path.join(xu.dirname(import.meta), "..", "wine");
 export const WINE_PREFIX = "/mnt/ram/dexvert/wine";
 
-// For some reason I can't get capital letters to appear in wine apps when running in a virtual xvfb display screen so we do this
-// TODO: Need to determine if this is just console apps or ALL apps
-const CAPITAL_KEY_REPLACEMENTS =
-{
-	"~" : "grave",
-	"!" : "1",
-	"@" : "2",
-	"#" : "3",
-	"$" : "4",
-	"%" : "5",
-	"^" : "6",
-	"&" : "7",
-	"*" : "8",
-	"(" : "9",
-	")" : "0",
-	"_" : "minus",
-	"+" : "equal",
-	"{" : "bracketleft",
-	"}" : "bracketright",
-	"|" : "backslash",
-	'"' : "apostrophe",
-	"<" : "comma",
-	">" : "period",
-	"?" : "slash",
-	":" : "semicolon"
-};
-
-for(const c of "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""))
-	CAPITAL_KEY_REPLACEMENTS[c] = `${c.toLowerCase()}`;
-
 // Key names: /usr/include/X11/keysymdef.h
 // Wine Guide: https://wiki.winehq.org/Wine_User%27s_Guide
-export async function run({cmd, args=[], cwd, arch="win32", base="base", console, script=[], timeout=xu.MINUTE*5, xlog})
+export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, script, wineCounter=0, timeout=xu.MINUTE*5, xlog})
 {
 	const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
 	if(!Object.keys(wineBaseEnv).includes(base))
 		throw new Error(`Invalid wine base '${base}' for cmd [${cmd}] valid bases: [${Object.keys(wineBaseEnv).join("], [")}]`);
 
+	const wineInDirPath = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c", `in${wineCounter}`);
+	await Deno.mkdir(wineInDirPath);
+
+	for(const file of [f.input, ...(f.files.aux || [])])
+		await Deno.copyFile(file.absolute, path.join(wineInDirPath, path.basename(file.absolute)));
+
+	const wineOutDirPath = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c", `out${wineCounter}`);
+	await Deno.mkdir(wineOutDirPath);
+
 	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, xlog};
-	if(xlog.atLeast("trace"))
-	{
-		runOptions.env.DISPLAY = ":0";
-	}
-	else
-	{
-		runOptions.virtualX = true;
-		runOptions.virtualXVNCPort = true;
-	}
 
 	const prelog = `wine ${fg.orange(base)} ${fg.yellow(cmd)}${fg.cyan(":")}`;
 
@@ -65,119 +36,28 @@ export async function run({cmd, args=[], cwd, arch="win32", base="base", console
 
 	cmd = ((/^[A-Za-z]:/).test(cmd) || cmd.startsWith("/")) ? cmd : `c:\\dexvert\\${cmd}`;
 	
-	const {cb, p, xvfbPort, virtualXVNCPort} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
+	const {cb} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
 
-	xlog.debug`${prelog} wine launched with pid ${fg.orange(p.pid)}${virtualXVNCPort ? ` (VNC Port: ${virtualXVNCPort})` : ""}...`;
-	/*if(virtualXVNCPort)
+	if(script)
 	{
-		await runUtil.run("vncviewer", [`localhost:${virtualXVNCPort}`], {detached : true, env : {DISPLAY : ":0"}});
-		await delay(xu.SECOND*5);
-	}*/
+		const scriptLines = [];
+		appendCommonFuncs(scriptLines, {script, timeout, fullCmd : cmd, skipMouseMoving : true});
+		scriptLines.push(script);
 
-	let failed = false;
-	const scriptRunOpts = {env : { DISPLAY : xlog.atLeast("trace") ? ":0" : `:${xvfbPort}` }};
-	const wids = {};
-	for(const o of script)
-	{
-		if(typeof o==="function")
-		{
-			await o();
-			continue;
-		}
+		const tmpScriptFilePath = await fileUtil.genTempPath(undefined, ".au3");
+		await fileUtil.writeTextFile(tmpScriptFilePath, scriptLines.join("\n"));
 
-		const op = o.op;
-
-		if(op==="windowRequire")
-		{
-			const {matcher, timeout : matcherTimeout=xu.SECOND*5, windowid} = o;
-
-			let foundWID = null;
-			await xu.waitUntil(async () =>
-			{
-				const {stdout : windowsRaw} = await runUtil.run("xwininfo", ["-root", "-tree"], scriptRunOpts);
-				for(const window of windowsRaw.trim().split("\n").map(v => v.match(/^\s+(?<wid>\S+)\s+"(?<name>.+)":\s.+$/)))
-				{
-					const {wid, name} = window?.groups || {};
-					if(!wid || !name)
-						continue;
-
-					if(matcher.test(name))
-					{
-						foundWID = wid;
-						break;
-					}
-				}
-
-				return foundWID!==null;
-			}, {timeout : matcherTimeout});
-
-			if(!foundWID)
-			{
-				xlog.error`${prelog} windowRequire ${windowid} failed to find a window matching ${matcher} within ${matcherTimeout}ms`;
-				failed = true;
-				break;
-			}
-
-			wids[windowid] = foundWID;
-		}
-		else if(op==="delay")
-		{
-			await delay(o.duration);
-		}
-		else if(op==="type")
-		{
-			const {windowid, text, interval} = o;
-			
-			const textPieces = [];
-			for(const textPart of text.split(/({[^}]+})/).filter(v => !!v))	// eslint-disable-line prefer-named-capture-group
-			{
-				const key = textPart.match(/^{(?<key>.+)}$/)?.groups?.key;
-				if(key)
-				{
-					textPieces.push(`{${key}}`);
-					continue;
-				}
-				
-				for(const c of textPart.split(""))
-					textPieces.push(CAPITAL_KEY_REPLACEMENTS[c] ? `{Shift_L+${CAPITAL_KEY_REPLACEMENTS[c]}}` : c);
-			}
-
-			const textParts = textPieces.join("").split(/({[^}]+})/).filter(v => !!v);	// eslint-disable-line prefer-named-capture-group
-			let lastKey = null;
-			for(const textPart of textParts)
-			{
-				const key = textPart.match(/^{(?<key>.+)}$/)?.groups?.key;
-				const xdotoolArgs = ["--window", wids[windowid]];
-				if(interval)
-					xdotoolArgs.push("--delay", interval);
-
-				if(key)
-				{
-					lastKey = key;
-					await runUtil.run("xdotool", ["key", ...xdotoolArgs, key], scriptRunOpts);
-				}
-				else
-				{
-					await runUtil.run("xdotool", ["type", ...xdotoolArgs, textPart], scriptRunOpts);
-				}
-			}
-			if(lastKey)
-				await runUtil.run("xdotool", ["keyup", lastKey], scriptRunOpts);	// without this, the last key pressed seems to stay 'held down' if the window closes before the key is released
-		}
-		else
-		{
-			xlog.error`${prelog} Invalid script operation ${o.op} : ${o}`;
-		}
-	}
-
-	if(failed)
-	{
-		xlog.error`${prelog} failed in some way`;
-		await runUtil.run("killall", ["-9", cmd.split("\\").at(-1)], {liveOutput : true});
-		await runUtil.kill(p);
+		xlog.debug`Running AutoIt3 with script...`;
+		await runUtil.run("wine", ["c:\\Program Files\\AutoIt3\\AutoIt3.exe", tmpScriptFilePath], {env : runOptions.env});
+		xlog.debug`AutoIt3 script finished`;
 	}
 	
 	const r = await cb();
 	xlog.debug`${prelog} finished with: ${r}`;
+
+	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(wineOutDirPath, "/"), path.join(f.outDir.absolute, "/")));
+	await fileUtil.unlink(wineOutDirPath, {recursive : true});
+	await fileUtil.unlink(wineInDirPath, {recursive : true});
+
 	return r;
 }

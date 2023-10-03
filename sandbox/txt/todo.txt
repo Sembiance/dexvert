@@ -177,7 +177,7 @@ iso/Love Bytes
 
 * Could create a new garbage detector with this, not sure it would be better or not: https://liner.ai/
 
-* Get the IFF-RGFX datatype installed and working on my Amiga:http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
+* Get the IFF-RGFX datatype installed and working in vamos:http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
   Once it can view pictures, see about how I can convert into PNG, maybe with: https://aminet.net/package/gfx/conv/gfxcon
   Also see if I can add IFF YAFA support
   If either of the above fails, then add to Low Priorty: Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.

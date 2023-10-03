@@ -18,12 +18,11 @@ await monitorPrograms();
 
 await xwork.openConnection();
 
-await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, prod, logLevel="error", fileMeta, op, dexverOptions={}}) =>
+await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, dexverOptions={}}) =>
 {
 	const logLines = [];
 	const xlogOptions = {};
-	if(prod)
-		xlogOptions.logger = v => logLines.push(v);
+	xlogOptions.logger = v => logLines.push(v);
 	const xlog = new XLog(logLevel, xlogOptions);
 
 	let tooLongTimer = null;

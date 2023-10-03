@@ -797,4 +797,10 @@ export class Program
 	{
 		return runUtil.denoEnv();
 	}
+
+	// returns env needed to properly run amiga programs under vamos
+	static vamosArgs(bin)
+	{
+		return ["-c", "/mnt/compendium/DevLab/dexvert/amiga/.vamosrc", "--", path.join("/mnt/compendium/DevLab/dexvert/amiga/System/C", bin)];
+	}
 }

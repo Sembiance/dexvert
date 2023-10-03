@@ -3,13 +3,12 @@ import {Program} from "../../Program.js";
 export class xfdDecrunch extends Program
 {
 	website = "http://aminet.net/package/util/pack/xfdmaster";
-	loc     = "amiga";
 	flags   = {
 		addHeader : "Add an ambk header to the start of the file"
 	};
 
-	bin  = "xfdDecrunch";
-	args = r => [r.inFile(), "HD:out/outfile"];
+	bin  = "vamos";
+	args = async r => [...Program.vamosArgs("xfdDecrunch"), r.inFile(), await r.outFile("outfile")];
 	
 	// some files may be password protected (sample/archive/xpk/G-SpellMoon1.0)
 	// Below I tried to use a simple REXX script that will queue up 'password' as the password input and then run our actual bin, xfdDecrunch, thus preventing it from haning waiting for password input

@@ -4,9 +4,8 @@ export class amiga8SVXtoXXX extends Program
 {
 	website   = "https://aminet.net/package/mus/misc/8SVXtoXXX";
 	unsafe    = true;
-	loc       = "amiga";
 	bin       = "8SVXtoXXX";
-	args      = r => ["INPUT", r.inFile(), "OUTPUT", "HD:out/out.wav"];
+	args      = r => [...Program.vamosArgs("8SVXtoXXX"), "INPUT", r.inFile(), "OUTPUT", "system:out.wav"];
 	chain     = "sox";
 	renameOut = true;
 }

@@ -1,0 +1,4 @@
+>>> docs:
+https://github.com/cnvogelg/amitools/blob/master/docs/vamos.md
+https://github.com/cnvogelg/amitools/blob/master/docs/vamos-lib.md
+

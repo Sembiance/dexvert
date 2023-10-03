@@ -4,10 +4,9 @@ import {path} from "std";
 import {WebServer} from "WebServer";
 import {XWorkerPool} from "XWorkerPool";
 
-// TODO some way to modify all 3 of these when running dexserver
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
-const DEX_WORKER_COUNT = 4;
+const DEX_WORKER_COUNT = Deno.env.get("DEXPROD") ? Math.floor(navigator.hardwareConcurrency*0.80) : 4;		// TODO some way to further modify this when running dexserver, maybe based on an environment variable
 const LOCKS = new Set();
 
 export class dexrpc extends Server
@@ -36,7 +35,6 @@ export class dexrpc extends Server
 		{
 			const workerData = await request.json();
 			workerData.rpcid = this.rpcid++;
-			workerData.prod ||= !!Deno.env.get("DEXPROD");
 			this.rpcData[workerData.rpcid] = {reply, workerData};
 			this.pool.process([workerData]);
 		}, {detached : true, method : "POST", logCheck : () => false});

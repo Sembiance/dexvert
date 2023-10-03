@@ -2,7 +2,7 @@
 
 >>> ******** General
 >>> loc = "local"
-Where to run this program at. One of: local, dos, amigappc, gentoo, win2k, winxp
+Where to run this program at. One of: local, dos, wine, win2k, winxp
 
 >>> website = "https://entropymine.com/deark/"
 A website URL For the program

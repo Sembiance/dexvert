@@ -4,5 +4,5 @@ export class finalWrite extends Format
 {
 	name       = "Final Write Document";
 	magic      = ["Final Write document", "IFF data, SWRT Final Copy/Writer document"];
-	converters = ["WoW", "strings"];
+	converters = ["WoW[outType:asc]", "strings"];
 }

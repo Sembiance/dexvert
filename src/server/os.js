@@ -12,7 +12,7 @@ const OS =
 {
 	win2k :
 	{
-		debug        : true,
+		debug        : false,
 		qty          : 12,
 		ramGB        : 2,
 		scriptExt    : ".au3",
@@ -23,7 +23,7 @@ const OS =
 	},
 	winxp :
 	{
-		debug        : true,
+		debug        : false,
 		qty          : 13,
 		ramGB        : 2,
 		scriptExt    : ".au3",
@@ -34,8 +34,8 @@ const OS =
 	}
 };
 
-// reduce instance quantity to fit in 50% of available cores or 1 each if set to debug
-const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.50);
+// reduce instance quantity to fit in 40% of available cores or 1 each if set to debug
+const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.40);
 const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
 for(const o of Object.values(OS))
 	o.qty = o.debug ? 1 : Math.min(o.qty, Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)));
@@ -334,12 +334,12 @@ export class os extends Server
 			instanceids.push(...[].pushSequence(0, OS[osid].qty-1).map(v => ([osid, v])));
 		}
 
-		await instanceids.parallelMap(async ([osid, instanceid], i) =>
+		await Promise.all(await instanceids.parallelMap(async ([osid, instanceid], i) =>
 		{
 			await delay(OS_INSTANCE_START_INTERVAL*i);
 			await this.startOS(osid, instanceid);
-			await xu.waitUntil(() => INSTANCES[osid][instanceid]?.ready);
-		}, instanceids.length);
+			return xu.waitUntil(() => INSTANCES[osid][instanceid]?.ready);	// note we don't await here
+		}, instanceids.length));
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

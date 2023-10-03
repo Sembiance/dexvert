@@ -101,6 +101,9 @@ const FLEX_SIZE_PROGRAMS =
 	zxtune123                   : 0.1
 };
 
+// these formats have some meta data that can change and so we should just ignore it
+const IGNORED_META_KEYS = {};
+
 const FLEX_SIZE_FORMATS =
 {
 	archive :
@@ -534,6 +537,12 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	{
 		if(!result.meta)
 			return fail(`Expected to have meta ${xu.inspect(prevData.meta).squeeze()} but have none${converterMismatch}`);
+
+		for(const k of IGNORED_META_KEYS[result.family]?.[result.format] || IGNORED_META_KEYS[result.family]?.["*"] || [])
+		{
+			if(prevData.meta[k] && result.meta[k])
+				prevData.meta[k] = result.meta[k];
+		}
 
 		const objDiff = diffUtil.diff(prevData.meta, result.meta);
 		if(objDiff.length>0)

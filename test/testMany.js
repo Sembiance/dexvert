@@ -6,6 +6,15 @@ import {formats, init as initFormats} from "../src/format/formats.js";
 
 const xlog = new XLog();
 
+/* Family durations on ridgeport as of Oct 2023:
+    Format		Duration
+    ------		--------
+      poly		    58s
+      text		    50s
+executable		10m 15s
+      font		
+*/
+
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test multiple formats, creating a report for each",
@@ -39,14 +48,17 @@ console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleSt
 await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
 {
 	underway.add(formatid);
+	const formatStartedAt = performance.now();
 	const {stdout} = await runUtil.run("deno", runUtil.denoArgs("testdexvert.js", `--format=${formatid}`, "--json"), runUtil.denoRunOpts({cwd : xu.dirname(import.meta)}));
+	const formatElapsed = performance.now()-formatStartedAt;
 	const testData = xu.parseJSON(stdout);
 	underway.delete(formatid);
 
 	const line = [];
-	line.push(`Completed ${fg.orange(formatid.padEnd(maxFormatidLength, " ")).replaceAll("/", `${fg.cyan("/")}${xu.c.fg.orange}`)}`);
+	line.push(`${fg.peach(formatElapsed.msAsHumanReadable({short : true, maxParts : 2}).padStart(8))}`);
+	line.push(` ${fg.orange(formatid.padEnd(maxFormatidLength)).replaceAll("/", `${fg.cyan("/")}${xu.c.fg.orange}`)}`);
 	line.push(` ${fg.cyan((formatsToProcess.size-(++formatCount)).toLocaleString().padStart(formatsToProcess.size.toLocaleString().length))} remain `);
-	line.push(` ${fg.cyan(underway.size.toLocaleString())} ${xu.colon("underway")}`);
+	line.push(` ${fg.cyan(underway.size.toLocaleString().padStart(formatsToProcess.size.toLocaleString().length))} ${xu.colon("underway")}`);
 	line.push(fg.green(Array.from(underway).join(" ").innerTruncate(MAX_LINE_LENGTH-line.join("").decolor().length)).replaceAll("…", `${fg.cyan("…")}${xu.c.fg.green}`));
 	console.log(line.join(""));
 
@@ -54,7 +66,7 @@ await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
 		return failures.push(`${fg.orange(formatid.padStart(maxFormatidLength, " "))} ${fg.red("FAILED")}: ${stdout}`);
 
 	reports[formatid] = testData;
-});
+}, 5);
 const elapsed = performance.now()-startedAt;
 
 if(failures.length)
@@ -135,4 +147,6 @@ await fileUtil.writeTextFile(testManReportFilePath, `
 		</table>
 	</body>
 </html>`);
+
+xlog.info`\nElapsed duration: ${fg.peach(elapsed.msAsHumanReadable())}`;
 xlog.info`\nReport written to: file://${testManReportFilePath}`;

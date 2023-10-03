@@ -7,15 +7,13 @@ import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
 
 const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
 const OS_INSTANCE_START_INTERVAL = xu.SECOND;
-const DEBUG = true;	// Set this to true on lostcrag to restrict each VM to just 1 instance and visually show it on screen
 
-const osQty = maxQty => (DEBUG ? 1 : (Math.min(maxQty, ({lostcrag : 4, crystalsummit : 2}[Deno.hostname()] || maxQty))));
 const OS =
 {
-	/*win2k :
+	win2k :
 	{
-		qty          : osQty(12),
-		qtyReduction : 2,
+		debug        : true,
+		qty          : 12,
 		ramGB        : 2,
 		scriptExt    : ".au3",
 		emu          : "86Box",
@@ -25,21 +23,27 @@ const OS =
 	},
 	winxp :
 	{
-		qty          : osQty(14),
-		qtyReduction : 2,
+		debug        : true,
+		qty          : 13,
 		ramGB        : 2,
 		scriptExt    : ".au3",
 		emu          : "86Box",
 		copy         : ["86box.cfg", "nvr"],
 		vhd          : ["hd.vhd"],
 		archiveType  : "zip"
-	}*/
+	}
 };
 
-// reduce instance quantity to fit in 70% of available RAM
+// reduce instance quantity to fit in 50% of available cores or 1 each if set to debug
+const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.50);
+const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
+for(const o of Object.values(OS))
+	o.qty = o.debug ? 1 : Math.min(o.qty, Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)));
+
+// reduce instance quantity to fit in 80% of available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
 while((Object.values(OS).map(({qty, ramGB}) => qty*ramGB).sum()*xu.GB)>(totalSystemRAM*0.8))
-	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-o.qtyReduction); });
+	Object.values(OS).forEach(o => { o.qty = Math.max(2, o.qty-1); });
 
 const HTTP_DIR_PATH = "/mnt/ram/dexvert/http";
 const HTTP_IN_DIR_PATH = path.join(HTTP_DIR_PATH, "in");
@@ -71,7 +75,7 @@ export class os extends Server
 		
 		const instance = {osid, instanceid, ready : false, busy : false};
 		instance.dirPath = path.join(OS_INSTANCE_DIR_PATH, `${osid}-${instanceid}`);
-		instance.debug = DEBUG || OS[osid].debug;
+		instance.debug = OS[osid].debug;
 		instance.vncPort = 7900+(100*OSIDS.indexOf(osid))+instanceid;
 		instance.scriptName = `go${OS[osid].scriptExt}`;
 		INSTANCES[osid][instanceid] = instance;
@@ -321,20 +325,21 @@ export class os extends Server
 		await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 
 		this.xlog.info`Starting instances...`;
+		const instanceids = [];
 		for(const osid of Object.keys(OS))
 		{
 			await Deno.mkdir(path.join(HTTP_IN_DIR_PATH, osid), {recursive : true});
 			await Deno.mkdir(path.join(HTTP_OUT_DIR_PATH, osid), {recursive : true});
 
-			this.xlog.info`Starting ${OS[osid].qty} ${osid} instances...`;
-			const instanceids = [].pushSequence(0, OS[osid].qty-1);
-			await instanceids.parallelMap(async (instanceid, i) =>
-			{
-				await delay(OS_INSTANCE_START_INTERVAL*i);
-				await this.startOS(osid, instanceid);
-				await xu.waitUntil(() => INSTANCES[osid][instanceid]?.ready);
-			}, instanceids.length);
+			instanceids.push(...[].pushSequence(0, OS[osid].qty-1).map(v => ([osid, v])));
 		}
+
+		await instanceids.parallelMap(async ([osid, instanceid], i) =>
+		{
+			await delay(OS_INSTANCE_START_INTERVAL*i);
+			await this.startOS(osid, instanceid);
+			await xu.waitUntil(() => INSTANCES[osid][instanceid]?.ready);
+		}, instanceids.length);
 
 		this.serversLaunched = true;
 		this.checkRunQueue();

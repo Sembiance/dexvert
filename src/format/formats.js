@@ -137,7 +137,7 @@ async function loadSimple({reload}={})
 	}
 }
 
-export async function init(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : "info"))
+export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
 {
 	if(initCalled)
 		return;
@@ -153,7 +153,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : "in
 	await loadSimple();
 }
 
-export async function monitor(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : "info"))
+export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
 {
 	const monitorcb = async ({type, filePath}) =>
 	{
@@ -182,6 +182,6 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEXPROD") ? "error" : 
 		}
 	};
 
-	if(!Deno.env.get("DEXPROD"))
+	if(!Deno.env.get("DEX_PROD"))
 		await fileUtil.monitor(formatDirPath, monitorcb);
 }

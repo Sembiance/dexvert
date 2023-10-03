@@ -62,6 +62,8 @@ iso/Love Bytes
 
 * Look at the various 'notes' fields in all the formats to see if additional/improved support can be added
 
+* Look into these flash decompile/decrypter tools to see if I should use any: https://www.reddit.com/r/RELounge/comments/16iht5d/flash_game_reverse_engineering/
+
 /---------------\
 | High Priority |
 \---------------/

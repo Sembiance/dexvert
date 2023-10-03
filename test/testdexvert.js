@@ -13,7 +13,6 @@ const argv = cmdUtil.cmdInit({
 		format     : {desc : "Only test a single format: archive/zip", hasValue : true},
 		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
-		report     : {desc : "Output an HTML report of the results."},
 		json       : {desc : "Output results as JSON"},
 		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."},
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
@@ -367,7 +366,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			xu.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
-		if(argv.report && !argv.record)
+		if(!argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
 
 		handleComplete();
@@ -378,7 +377,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		if(!argv.json)
 			xu.stdoutWrite(c);
 
-		if(argv.report && !argv.record)
+		if(!argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
 		else
 			await fileUtil.unlink(path.dirname(tmpOutDirPath), {recursive : true});
@@ -393,7 +392,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 		newSuccesses.push(`--format=${diskFormatid} --file='${path.relative(diskFormatid, sampleSubFilePath)}'`);
 
-		if(argv.report && !argv.record)
+		if(!argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
 
 		handleComplete();
@@ -746,7 +745,7 @@ if(Object.keys(slowFiles).length>0)
 if(oldDataFormats.length>0)
 	xlog.info`\n${xu.c.blink + xu.c.bold + fg.red("HAS OLD DATA - NEED TO RE-RECORD")} — ${oldDataFormats.join(" ")}`;
 
-if(argv.report && !argv.record)
+if(!argv.record && await fileUtil.exists(DEXTEST_ROOT_DIR))
 	await writeOutputHTML();
 
 if(argv.json)

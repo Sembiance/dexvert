@@ -24,6 +24,8 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 	const xlogOptions = {};
 	xlogOptions.logger = v => logLines.push(v);
 	const xlog = new XLog(logLevel, xlogOptions);
+	if(xlog.atLeast("debug"))
+		xlog.alwaysEcho = true;
 
 	let tooLongTimer = null;
 	try

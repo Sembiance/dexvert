@@ -6,7 +6,7 @@ import {XWorkerPool} from "XWorkerPool";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
-const DEX_WORKER_COUNT = Deno.env.get("DEXPROD") ? Math.floor(navigator.hardwareConcurrency*0.80) : 4;		// TODO some way to further modify this when running dexserver, maybe based on an environment variable
+const DEX_WORKER_COUNT = Deno.env.get("DEX_PROD") ? Math.floor(navigator.hardwareConcurrency*0.80) : 4;
 const LOCKS = new Set();
 
 export class dexrpc extends Server
@@ -19,8 +19,12 @@ export class dexrpc extends Server
 		this.pool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
 
 		const runEnv = {};
-		if(Deno.env.get("DEXPROD"))
-			runEnv.DEXPROD = "1";
+		for(const [key, value] of Object.entries(Deno.env.toObject()))
+		{
+			if(key.startsWith("DEX_"))
+				runEnv[key] = value;
+		}
+
 		await this.pool.start(path.join(xu.dirname(import.meta), "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv});
 		this.xlog.info`${DEX_WORKER_COUNT} workers ready!`;
 

@@ -11,19 +11,15 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Starts needed background services for dexvert to properly function",
 	opts    :
 	{
-		prod     : {desc : "Run in production mode."},
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
 	}});
-
-if(argv.prod)
-	Deno.env.set("DEXPROD", "1");
 
 const xlog = new XLog(argv.logLevel);
 const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["siegfried", "os", "wine", "dexrpc"];	// TODO RE-INTRODUCE: , "tensor"];
+const SERVER_ORDER = ["siegfried", "os", "wine", "dexrpc"];
 
 const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(xu.dirname(import.meta), `../server/${serverid}.js`)))[serverid].create(xlog)]));
 

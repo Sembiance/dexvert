@@ -17,6 +17,10 @@ export class wine extends Server
 
 	async start()
 	{
+		this.xlog.info`Cleaning up previous wine procs...`;
+		for(const v of ["winedevice.exe", "services.exe", "explorer.exe", "plugplay.exe", "svchost.exe", "rpcss.exe"])
+			await runUtil.run("killall", ["-9", v]);
+
 		this.xlog.info`Preparing prefix bases...`;
 		await fileUtil.unlink(WINE_PREFIX, {recursive : true});
 		await Deno.mkdir(WINE_PREFIX, {recursive : true});

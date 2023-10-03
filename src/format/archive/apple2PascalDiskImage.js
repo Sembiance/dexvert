@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-export class apple2PascallDiskImage extends Format
+export class apple2PascalDiskImage extends Format
 {
 	name           = "Apple II Pascal Disk Image";
 	ext            = [".dsk"];

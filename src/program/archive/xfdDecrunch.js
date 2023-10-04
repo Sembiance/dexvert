@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class xfdDecrunch extends Program
@@ -9,16 +10,13 @@ export class xfdDecrunch extends Program
 
 	bin  = "vamos";
 	args = async r => [...Program.vamosArgs("xfdDecrunch"), r.inFile(), await r.outFile("outfile")];
-	
-	// some files may be password protected (sample/archive/xpk/G-SpellMoon1.0)
-	// Below I tried to use a simple REXX script that will queue up 'password' as the password input and then run our actual bin, xfdDecrunch, thus preventing it from haning waiting for password input
-	// Sadly, while running the generated go.rexx script manually works fine on the amiga, it doesn't work when it's run from the supervisor, and I could not figure out why
-	// so we just run the xfdDecrunch command directly and will just have to wait for the built in supervisor.rexx 60 second timeout. sigh.
-	/*osData = r => ({
-		script : [
-			`QUEUE "password"`,
-			`ADDRESS command xfdDecrunch "HD:in/${r.inFile()}" "HD:out/outfile" "FORCE" "NOASK" "NOXPKPWD"`
-		] });*/
+	runOptions = {
+		timeout : xu.MINUTE,
+		
+		// Without these, runUtil gets all hung up on the process if there is a password prompt, such as for file: ample/archive/xpk/G-SpellMoon1.0
+		stdoutNull    : true,
+		stderrNull    : true
+	};
 	
 	post = async r =>
 	{

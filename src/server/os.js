@@ -294,7 +294,7 @@ export class os extends Server
 		this.webServer.add("/osGET", async (request, reply) =>
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
-			this.xlog.debug`Got osGET from ${body.osid}-${body.instanceid}`;
+			this.xlog.trace`Got osGET from ${body.osid}-${body.instanceid}`;
 			const inArchiveFilePath = path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`);
 			if(!(await fileUtil.exists(inArchiveFilePath)))
 				return reply(new Response(null, {status : 404}));

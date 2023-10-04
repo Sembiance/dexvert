@@ -68,6 +68,11 @@ export class dexrpc extends Server
 		this.running = true;
 	}
 
+	async crashcb(workerid, status, r, logLines)
+	{
+		await this.workercb(workerid, {err : `worker ${workerid} crashed with status code ${status?.code} and logLines: ${logLines.join("\n")}`, ...r});
+	}
+
 	async workercb(workerid, {rpcid, logLines, err, r}={})	// eslint-disable-line require-await
 	{
 		const rpcData = this.rpcData[rpcid];

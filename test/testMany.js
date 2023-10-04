@@ -11,7 +11,7 @@ const xlog = new XLog();
     ------		--------
       poly		    58s
       text		    50s
-executable		10m 15s
+executable		10m 38s
       font		
 */
 

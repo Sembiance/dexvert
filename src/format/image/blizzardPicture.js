@@ -6,5 +6,5 @@ export class blizzardPicture extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/BLP";
 	ext        = [".blp"];
 	magic      = ["Blizzard Picture"];
-	converters = ["nconvert", "uniconvertor[outType:png]"];
+	converters = ["nconvert", "blpngConverter", "uniconvertor[outType:png]"];
 }

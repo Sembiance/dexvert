@@ -31,8 +31,8 @@ if(existingEnv)
 
 const wineBaseEnv = {};
 wineBaseEnv[argv.base] = {
-	DISPLAY : ":0",
-	WINEARCH : argv.arch,
+	DISPLAY    : ":0",
+	WINEARCH   : argv.arch,
 	WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
 };
 

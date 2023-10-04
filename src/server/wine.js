@@ -39,7 +39,7 @@ export class wine extends Server
 		{
 			const runOpts = {detached : true, stdoutcb : line => this.xlog.info`${xu.colon(fg.orange(wineBase))}${line}`, stderrcb : line => this.xlog.warn`${xu.colon(fg.orange(wineBase))}${line}`};
 			runOpts.env = {WINEPREFIX : path.join(WINE_PREFIX, wineBase)};
-			if(this.xlog.atLeast("trace"))
+			if(this.xlog.atLeast("debug"))
 			{
 				runOpts.env.DISPLAY = ":0";
 			}
@@ -52,7 +52,7 @@ export class wine extends Server
 			const {p, xvfbPort, virtualXVNCPort} = await runUtil.run("wineserver", ["--foreground", "--persistent"], runOpts);
 			this.wineserverProcs.push(p);
 
-			this.wineBaseEnv[wineBase] = {DISPLAY : (this.xlog.atLeast("trace") ? ":0" : `:${xvfbPort}`), WINEPREFIX : runOpts.env.WINEPREFIX};
+			this.wineBaseEnv[wineBase] = {DISPLAY : (runOpts.env.DISPLAY || `:${xvfbPort}`), WINEPREFIX : runOpts.env.WINEPREFIX};
 
 			this.xlog.info`Wineserver ${fg.orange(wineBase)} started${runOpts.virtualXVNCPort ? ` (VNC Port: ${virtualXVNCPort})` : ""}`;
 		}

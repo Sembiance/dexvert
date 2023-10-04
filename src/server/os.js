@@ -6,7 +6,7 @@ import {WebServer} from "WebServer";
 import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
 
 const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
-const OS_INSTANCE_START_INTERVAL = xu.SECOND;
+const OS_INSTANCE_START_INTERVAL = 500;
 
 const OS =
 {

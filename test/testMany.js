@@ -12,7 +12,7 @@ const xlog = new XLog();
       poly		    58s
       text		    50s
 executable		10m 38s
-      font		
+      font		 2m 10s
 */
 
 const argv = cmdUtil.cmdInit({

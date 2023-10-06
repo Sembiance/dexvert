@@ -7495,389 +7495,255 @@ WMA, WMV	Windows Media Audio/Video format
 
 
 
->>> Awave Studio () - AUDIO (https://www.fmjsoft.com/awavestudio.html#formats)
-Ext.	R/W	Format description
-32	R	Raw Yamaha DX7 32-voice data. S
-3G2	R+W	3GPP 'project 2' file format. auto wave *
-3GP	R+W	3GPP file format. auto wave *
-404	R+W	Muon DS404 bank file. auto coll
-404	R+W	Muon DS404 patch file. auto inst
-669	R	669 modules. auto
-AAC	R+W	MPEG-2/4 Advanced Audio Coding format (ADTS container format). auto wave *
-AAC	R	MPEG-2/4 Advanced Audio Coding format (ADIF container format). auto *
-AAC	R	MPEG-2/4 Advanced Audio Coding format ('raw' format). *
-AIFC	R	Compressed Audio Interchange File Format. auto
-AIF	R+W	Audio Interchange File Format. auto wave
-AIFF	R+W	Audio Interchange File Format. auto wave
-AIS	R	Velvet Studio instrument. auto
-AKAI	R	AKAI S-series floppy disk image file. auto
-AKP	R+W	AKAI S-5000/S-6000 programs. auto inst
-ALAW	R+W	G.711 A-law european telephony format. wave
-ALW	R+W	G.711 A-law european telephony format. wave
-AMR	R+W	MIME 'AMR file storage' format. auto wave
-AMS	R	Extreme Tracker modules. auto
-AMS	R	Velvet Studio modules. auto
-APE	R+W	Monkey Audio losslessly compressed file. auto wave
-APEX	R+W	AVM Sample Studio bank file. auto coll inst
-ARL	R+W	Aureal 'Aspen' bank file. auto coll inst wave
-ASE	R	Velvet Studio sample. auto
-ASF	R	ActiveMovie streaming format. auto wave
-ATAK??	R+W	Soundscape Audio-Take file. auto wave
-AU	R+W	Sun/NeXT/DEC audio file. auto wave
-AVI	R	Microsoft Audio Video Interleave file. auto
-AVR	R	Audio Visual Research sound file. auto
-BN4	R	Yamaha DX21 / DX27 / DX100 voice SysEx dump. auto S
-BNK	R	Yamaha DX21 / DX27 / DX100 voice SysEx dump. auto S
-BNK	R	Yamaha DX11 / TX81z voice SysEx dump. auto S
-BNK	R	Ad Lib bank. auto S
-BWF	R	Broadcast wave file. auto
-C01	R	Typhoon wave file. auto
-CAF	R+W	Apple CoreAudio file format. auto wave
-CAFF	R+W	Apple CoreAudio file format. auto wave
-CDA	R	Audio CD tracks. auto CD
-CDR	R	Audio CD compatible raw data.
-CMF	R	Creative Labs music file. auto S
-COD	R+W	3GPP 'AMR interface format 2'. wave
-DCM	R	DCM modules. auto
-DEWF	R	SoundCap/SoundEdit instrument.
-DIG	R	Digilink format. auto
-DIG	R	Sound Designer I file.
-DLP	R	DirectMusic Producer DLS file. auto
-DLS	R+W	DownLoadable Sounds level 1. auto coll inst wave
-DLS	R+W	DownLoadable Sounds level 2/2+/2++. auto coll inst wave
-DLS	R+W	Mobile DLS file minimal / full feature set. auto coll inst wave
-DMF	R	Delusion/XTracker digital music format. auto
-DR8	R+W	FXpansion DR-008 drumkits. auto inst
-DRO	R	DOSBox Raw OPL format. auto
-DSF	R	Delusion/XTracker sample format. auto
-DSM	R	Digital Sound Module format. auto
-DSS	R	Olympus DSS file (in 32-bit app only). auto *
-DTM	R	DigiTrekker modules. auto
-DWD	R+W	DiamondWare digitized file. auto
-DVD-16-44	R	Raw ripped DVD LPCM audio format.
-DVD-16-48	R	Raw ripped DVD LPCM audio format.
-DVD-16-96	R	Raw ripped DVD LPCM audio format.
-DVD-16-192	R	Raw ripped DVD LPCM audio format.
-DVD-24-44	R	Raw ripped DVD LPCM audio format.
-DVD-24-48	R	Raw ripped DVD LPCM audio format.
-DVD-24-96	R	Raw ripped DVD LPCM audio format.
-DVD-24-192	R	Raw ripped DVD LPCM audio format.
-DX7	R	Yamaha DX7 voice SysEx dump. auto S
-DX7	R	Raw Yamaha DX7 32-voice data. S
-EDA	R	Ensoniq ASR-10 disk image. auto FD CD
-EDE	R	Ensoniq EPS disk image. auto FD CD
-EDK	R	Ensoniq KT disk image. auto
-EDM	R	Ensoniq Mirage disk image.
-EDQ	R	Ensoniq SQ1/SQ2/KS32 disk image. auto
-EDV	R	Ensoniq VFX-SD disk image. auto
-EFA	R	Ensoniq ASR-10 instrument file. auto FD CD
-EFE	R+W	Ensoniq EPS instrument file. auto inst wave FD CD
-EFK	R	Ensoniq KT instrument file. auto
-EFQ	R	Ensoniq SQ1/SQ2/KS32 instrument file. auto
-EFS	R	Ensoniq SQ80 instrument file. auto
-EFV	R	Ensoniq VFX-SD instrument file. auto
-EMB	R	Everest embedded bank file. auto
-EMD	R	ABT extended modules. auto
-EMY	R+W	EMelody Ericsson mobile ring-tone format. auto midi
-ESPS	R	ESPS audio file. auto
+>>> Awave Studio (win2k v8.8) - AUDIO (https://www.fmjsoft.com/awavestudio.html)
+File extension	R/W	Format description
+
+404	R+W	Muon DS404 Bank File.  
+404	R+W	Muon DS404 Patch File.  
+669	R	669 tracker module. 
+A3S	R	Yamaha A3000 sample files (no extension).  
+AIFC	R	Compressed Audio Interchange File Format. 
+AIF	R+W	Audio Interchange File Format.  
+AIFF	R+W	Audio Interchange File Format.  
+AIS	R	Velvet Studio Instruments. 
+AKP	R+W	Akai S5000/S6000 program file.  
+ALAW	R+W	European telephony format audio. 
+ALW	R+W	European telephony format audio. 
+AMS	R	Extreme's Tracker module format. 
+AMS	R	Velvet Studio Module. 
+APE	R+W	Monkey Audio losslessly compressed files.  
+APEX	R+W	AVM Sample Studio bank file.   
+ARL	R+W	Aureal �Aspen� bank file.    
+ASE	R	Velvet Studio Sample. 
+AU	R+W	Sun/NeXT/DEC Audio file.  
+AVI	R	MS Audio Video Interleave file. 
+AVR	R	Audio Visual Research sound file. 
+BWF	R	Broadcast Wave File. 
+C01	R	Typhoon wave files. 
+CDR	R	Raw Audio-CD data.
+DCM	R	DCM module format. 
+DEWF	R	Macintosh SoundCap/SoundEdit recorded instrument format
+DIG	R	Digilink format. 
+DIG	R	Sound Designer I audio file.
+DLP	R	DirectMusic Producer DLS file. 
+DLS	R+W	DownLoadable Sounds level 1.    
+DLS	R+W	DownLoadable Sounds level 2.    
+DLS	R+W	DownLoadable Sounds level 2+.    
+DMF	R	Delusion/XTracker Digital Music Fileformat. 
+DR8	R+W	FXpansion DR-008 drumkit.  
+DSF	R	Delusion/XTracker Digital Sample Fileformat. 
+DSM	R	Digital Sound Module tracker format. 
+DSS	R	Olympus DSS file. 
+DTM	R	DigiTrekker module. 
+DWD	R+W	DiamondWare Digitized file. 
+EDA	R	Ensoniq ASR disk image. 
+EDE	R	Ensoniq EPS disk image. 
+EDK	R	Ensoniq KT disk image. 
+EDQ	R	Ensoniq SQ1/SQ2/KS32 disk image. 
+EDS	R	Ensoniq SQ80 disk image. 
+EDV	R	Ensoniq VFX-SD disk image. 
+EFA	R	Ensoniq ASR file. 
+EFE	R+W	Ensoniq EPS file.   
+EFK	R	Ensoniq KT file. 
+EFQ	R	Ensoniq SQ1/SQ2/KS32 file. 
+EFS	R	Ensoniq SQ80 file. 
+EFV	R	Ensoniq VFX-SD file. 
+EMB	R	Everest EMBedded bank file. 
+EMD	R	ABT Extended MoDule. 
+EMY	R+W	EMelody Ericsson mobile phone ring-tone format.  
+ESPS	R	ESPS audio files. 
 EUI	R	Ensoniq EPS family compacted disk image.
-EXS	R+W	Logic EXS24 instrument. auto inst
-F2R	R	Farandoyle linear module format. auto
-F3R	R	Farandoyle blocked linear module format. auto
-F32	R+W	Floating point raw 32-bit IEEE data.
-F64	R+W	Floating point raw 64-bit IEEE data.
-FAR	R	Farandoyle module. auto
-FFF	R+W	Gravis UltraSound PnP bank file. auto coll inst
-FLAC	R+W	Free lossless audio codec file. auto wave *
-FNK	R	FunkTracker modules. auto
-FOR	R	Kurzweil Forte files. auto
-FSB	R	FMOD SoundSystem sound bank. auto
-FSM	R	Farandoyle sample format. auto
-FZB	R+W	Casio FZ-1 bank dump format. auto inst
-FZF	R+W	Casio FZ-1 full dump format. auto coll
-FZV	R+W	Casio FZ-1 voice dump format. auto wave
-G721	R+W	G.721 4-bit (32 kbps) ADPCM format data. wave
-G722	R+W	ITU G.722 ADPCM format data. wave
-G722-6	R+W	ITU G.722 6-bit (48 kbps) ADPCM format data. wave
-G722-7	R+W	ITU G.722 7-bit (56 kbps) ADPCM format data. wave
-G722-8	R+W	ITU G.722 8-bit (64 kbps) ADPCM format data. wave
-G723	R+W	G.723 3/5-bit ADPCM format data. wave
-G723-3	R+W	G.723 3-bit (24 kbps) ADPCM format data. wave
-G723-5	R+W	G.723 5-bit (40 kbps) ADPCM format data. wave
-G726	R+W	G.726 2/3/4/5-bit ADPCM format data. wave
-G726-2	R+W	G.726 2-bit (16 kbps) ADPCM format data. wave
-G726-3	R+W	G.726 3-bit (24 kbps) ADPCM format data. wave
-G726-4	R+W	G.726 4-bit (32 kbps) ADPCM format data. wave
-G726-5	R+W	G.726 5-bit (40 kbps) ADPCM format data. wave
-GDM	R	Bells, Whistles, Sound Boards modules. auto
-GI!	R	GigaStudio/GigaSampler file - Split over multiple CD-ROM's. auto
-GIG	R+W	GigaStudio/GigaSampler file - Normal. auto coll inst wave
-GIG	R+W	GigaStudio/GigaSampler file - Compressed. auto coll inst wave
-GKH	R	Ensoniq EPS family disk image file. auto FD CD
-GSM	R+W	Raw GSM 06.10 audio streasm. wave
-GSM	R+W	Raw 'byte aligned' GSM 06.10 audio stream. wave
-GSM	R+W	US Robotics voice modems GSM w.o. header (VoiceGuide, RapidComm). auto wave
-GSM	R+W	US Robotics voice modems GSM w. header (QuickLink). auto wave
-HCOM	R	Sound Tools HCOM format. auto
-HD	R	Sony PS2 SCEI instrument set. auto
-IBK	R	Creative Labs FM bank. auto S
-IFF	R+W	Interchange file format. auto wave
-IMF	R	id Software Music Format (560 Hz). auto
-IMY	R+W	iMelody mobile phone ring-tone format. auto midi
-INI	R+W	Gravis UltraSound.ini bank setup. auto coll
-INI	R	IBM MWave DSP synthesizer bank setup (MWSYNTH.INI). auto
-INRS	R	INRS-Telecommunications audio file.
-INS	R	Ensoniq EPS family instrument file. auto
-INS	R	Ad Lib instrument. auto S
-INS	R+W	Sample Cell II Mac instrument. auto inst
-INS	R+W	Sample Cell II PC instrument. auto inst
-INS	W	Cakewalk instrument definition file. coll
-IST	R	Digitrakker instrument. auto
-IT	R	Impulse Tracker modules. auto
-ITI	R+W	Impulse Tracker instrument. auto inst
-ITS	R+W	Impulse Tracker sample. auto wave
-K25	R	Kurzweil K2500 file. auto CD
-K26	R	Kurzweil K2600 file. auto CD
-KAWAI12	R+W	KAWAI R50/R50E/R50III/R100 ROM-dump. auto wave
-KDT	R	Konami KDT1 song. auto
-KFT	R	Korg T-series waves. auto
-KIT	R+W	Native instrument Batter v1 drum-kit file. auto coll inst
-KMP	R+W	Korg Triton keymap file. auto inst
-KMP	R+W	Korg Trinity keymap file. auto inst
-KMP	R+W	Korg M3 keymap file. auto
-KMP	R+W	Korg Kronos keymap file. auto
-KR1	R+W	Kurzweil K2000/K2500/K2600 split file. auto coll inst wave midi CD
-KRZ	R+W	Kurzweil K2000 file (also K2500 & K2600). auto coll inst wave midi CD
-KSC	R+W	Korg Triton script file. auto coll
-KSC	R+W	Korg Trinity script file. auto coll
-KSC	R+W	Korg M3 script file. auto coll
-KSC	R+W	Korg Kronos script file. auto coll
-KSF	R+W	Korg Triton sample file. auto wave
-KSF	R+W	Korg Trinity sample file. auto wave
-KSF	R+W	Korg M3 sample file. auto
-KSF	R+W	Korg Kronos sample file. auto
-M4A	R+W	iTunes MPEG-4 audio format. auto wave *
-M4R	R+W	iPhone ring-tone. auto wave *
-MAP	R+W	Native instrument Reaktor wavetable file - Embedded waves. auto inst
-MAP	R+W	Native instrument Reaktor wavetable file - Linked waves. auto inst
-MAT	R+W	Matlab variables binary file. auto coll wave
-MAUD	R	MAUD sample format. auto
-MDL	R	Digitrakker modules. auto
-MED	R	OctaMED modules. auto
-MID	R+W	Standard MIDI file. auto midi
-MID	R	Roland D-50 patch SysEx dump. auto S
-MID	R	Roland MT-32 (and compatibles) timbre SysEx dump. auto S
-MID	R	Yamaha DX7 voice SysEx dump. auto S
-MID	R	Yamaha DX7s / DX7II / DX200 voice SysEx dump. auto S
-MID	R	Yamaha DX21 / DX27 / DX100 voice SysEx dump. auto S
-MID	R	Yamaha DX11 / TX81z voice SysEx dump. auto S
-MKA	R	Matroska audio file. auto
-MKV	R	Matroska video file. auto
-MLD	R	MFi/MFi2 songs a.k.a. i-Melody a.k.a. Melody Format for i-Mode. auto
-MLS	R	Miles Sound System compressed DLS file. auto
-MMF	R	SMAF songs, 'Synthetic Music Mobile Application Format'. auto S
-MOD	R	Module file. auto
-MOV	R	Apple QuickTime movie format. auto *
+F2R	R	Farandoyle linear module format. 
+F3R	R	Farandoyle blocked linear module format. 
+F32	R	Raw IEEE 32-bit floating point values.
+F64	R	Raw IEEE 32-bit floating point values.
+FAR	R	Farandoyle tracker module. 
+FFF	R+W	GUS PnP bank file format.   
+FNK	R	FunkTracker module format. 
+FSM	R	Farandoyle Sample format. 
+FZB	R+W	Casio FZ-1 Bank dump.  
+FZF	R+W	Casio FZ-1 Full dump.  
+FZV	R+W	Casio FZ-1 Voice dump.  
+G721	R+W	Raw CCITT G.721 4-bit ADPCM format data. 
+G723	R+W	Raw CCITT G.723 3 or 5-bit ADPCM format data. 
+G726	R+W	Raw CCITT G.726 2, 3, 4 or 5-bit ADPCM format data. 
+GDM	R	Bells, Whistles, and Sound Boards module format. 
+GI!	R	GigaStudio/GigaSampler file � Split over multiple CD-ROM�s. 
+GIG	R+W	GigaStudio/GigaSampler file � Normal.    
+GIG	R+W	GigaStudio/GigaSampler file � Compressed.    
+GKH	R	Ensoniq EPS family disk image file. 
+GSM	R+W	Raw GSM 6.10 audio stream. 
+GSM	R+W	Raw 'byte aligned' GSM 6.10 audio stream. 
+GSM	R+W	US Robotics voice modems GSM w.o. header / VoiceGuide / RapidComm.  
+GSM	R+W	US Robotics voice modems GSM w. header / QuickLink.  
+HCOM	R	Sound Tools HCOM format. 
+IFF	R+W	Interchange file format.  
+IMY	R+W	iMelody mobile phone ring-tone format.  
+INI	R	MWave DSP synth�s mwsynth.ini GM-setup. 
+INI	R+W	Gravis UltraSound bank setup.  
+INRS	R	INRS-Telecommunications audio.
+INS	R	Ensoniq EPS family instrument. 
+INS	R+W	Sample Cell / II Mac instrument.  
+INS	R+W	Sample Cell / II PC instrument.  
+INS	W	Cakewalk Instrument definition file. 
+IST	R	Digitrakker Instrument File. 
+IT	R	Impulse Tracker module. 
+ITI	R+W	Impulse Tracker instrument.  
+ITS	R+W	Impulse Tracker sample.  
+K25	R	Kurzweil K2500 file.  
+K26	R	Kurzweil K2600 file.  
+KFT	R	Kort T-series image file. 
+KIT	R+W	Native Instruments drum Kit file.   
+KMP	R+W	Korg Triton KeyMaP file.  
+KMP	R+W	Korg Trinity KeyMaP file.  
+KR1	R+W	Kurzweil K2000/K2500/K2600 split file.     
+KRZ	R+W	Kurzweil K2000 file (also works with K2000 and K2500).     
+KSC	R+W	Korg Triton SCript file.  
+KSC	R+W	Korg Trinity SCript file.  
+KSF	R+W	Korg Triton Sample File.  
+KSF	R+W	Korg Trinity Sample File.  
+MAP	R+W	Native Instruments Reaktor wavetable file � Embedded waves.  
+MAP	R+W	Native Instruments Reaktor wavetable file � Linked waves.  
+MAT	R+W	Matlab variables binary file.   
+MAUD	R	MAUD sample format. 
+MDL	R	Digitrakker Module. 
+MED	R	OctaMED tracker module. 
+MID	R+W	Standard Midi File.  
+MLD	R	MFi/MFi2 songs- Melody Format for i-Mode, a.k.a. i-Melody.  
+MLS	R	Miles Sound System compressed DLS file. 
+MMF	R	SMAF songs � �Synthetic Music Mobile Application Format�.  
+MOD	R	Amiga and PC tracker module.  
+MOV	R	Apple QuickTime audio. 
 MP1	R	MPEG audio stream, layer I.
-MP2	R+W	MPEG audio stream, layer II. wave *
-MP3	R+W	MPEG audio stream, layer III. wave *
-MP4	R+W	MPEG-4 base media file format. auto wave *
-MPA	R	MPEG audio stream, layer I, II, 'II½' or III.
-MPC	R+W	Musepack audio compression (in 32-bit app only). auto wave
-MPEG	R	MPEG system stream, audio+video. auto
-MPG	R	MPEG system stream, audio+video. auto
-MSS	R+W	Miles Sound System DLS 1 + XMI file. auto midi
-MT2	R	MadTracker 2 modules. auto
-MTI	R+W	MadTracker 2 instrument. auto inst
-MTM	R	MultiTracker modules. auto
-MUS	R	Doom/Heretic music file. auto
-MUS	R+W	Musifile MPEG Layer II audio stream. auto
-MUS10	R	Mus10 audio file. auto
-MWS	W	IBM MWave DSP synth instrument extracts. inst wave
-NIST	R+W	NIST Sphere file. auto
-NKI	R	Native instrument Kontakt instrument. auto
-NKM	R	Native instrument Kontakt multi bank. auto
-NVF	R+W	Creative Labs Nomad voice file. auto wave
-O01	R	Typhoon voice file. auto
-OGG	R+W	Vorbis Ogg stream. auto wave *
-OKT	R	Oktalyzer modules. auto
-OPUS	R+W	Opus audio stream. auto *
-OSP	R+W	Orion Sampler programs. auto inst
-OUT	R	Roland S-5xx series floppy image (S-50,S-51,S-330,W-30,S-500,S-550). auto CD FD
-OUT	R	Roland S-7xx series floppy image (S-70,S-700,S-750,S-760,S-770,S-772). auto CD FD
-P	R	AKAI S900/S950 programs. auto inst CD
-P	R+W	AKAI S1000/S1100/S01 programs. auto inst CD
-P	R+W	AKAI S3000/S3200/S2000/S2800 programs. auto inst CD
-P3K	R	Kurzweil PC3K files. auto
-PAC	R	SB Studio II package file. auto
-PAF	R+W	Ensoniq PARIS audio file. auto wave
-PAT	R+W	Gravis Ultrasound GF1 patch file. auto inst wave
-PBF	R+W	Turtle Beach Pinnacle bank file. auto coll inst
-PCG	R+W	Korg Trinity bank file. auto coll inst
-PCG	R+W	Korg Triton bank file. auto coll inst
-PCG	R+W	Korg Triton LE bank file. auto
-PCG	R+W	Korg M3 bank file. auto coll inst
-PCG	R+W	Korg M50 bank file. auto coll inst
-PCG	R+W	Korg Kronos bank file. auto coll inst
-PCM	R	Korg PA-series sample file. auto
-PCM	R	OKI MSM6376 synth chip PCM format. auto
-PGM	R+W	AKAI MPC-1000 drum set file + .WAV file. auto inst wave
-PGM	R+W	AKAI MPC-2000XL drum set file + .WAV file. auto inst wave
-PGM	R+W	AKAI MPC-2000 drum set file + .SND file. auto inst wave
-PGM	R+W	AKAI MPC-3000 drum set file + .SND file. auto inst wave
-PLM	R	DisorderTracker2 modules. auto
-PLS	R	DisorderTracker2 sample. auto
-PPF	R	Turtle Beach Pinnacle program file. auto
-PRG	R+W	WAVmaker program. auto inst
-PSB	R	Turtle Beach Pinnacle sound bank. auto
-PSION	R	PSION a-law file. auto
-PSM	R	Protracker Studio modules. auto
-PTM	R	Poly Tracker modules. auto
-RA	W	RealAudio file (in 32-bit app only). wave *
-RAW	R	Signed 8-bit PCM data. wave
-RAW	R	Rdos Raw OPL capture format. auto
-RIF	R	Rockwell ADPCM format (Hotfax/Quicklink). auto
-RMI	R+W	RIFF-MIDI file. auto midi coll
-ROCKWELL	R+W	Rockwell 2/3/4-bit ADPCM data. wave
-ROCKWELL-2	R+W	Rockwell 2-bit ADPCM data. wave
-ROCKWELL-3	R+W	Rockwell 3-bit ADPCM data. wave
-ROCKWELL-4	R+W	Rockwell 4-bit ADPCM data. wave
-ROL	R	AdLib Visual Composer songs. auto
-ROM	R	Roland MT-32 / CM32L / LAPC-1 control and PCM ROM dump. auto S
-S	R+W	AKAI S900/950 sample. auto wave
-S	R+W	AKAI S1000/S1100/S01 sample. auto wave CD
-S	R+W	AKAI S3000/S3200/S2000/S2800 sample. auto wave CD
-S1A	R	Yamaha EX5 'all' format. auto
-S1M	R+W	Yamaha EX5 'waveforms' format. auto coll inst wave
-S1V	R+W	Yamaha EX5 'voices' format. auto coll inst wave
-S3I	R+W	ScreamTracker v3 instrument. auto wave
-S3M	R	ScreamTracker v3 modules. auto
-S3P	R+W	AKAI MESA II/PC S-series program. auto inst
-SAM	R	Signed 8-bit PCM file. wave
-SB	R+W	Signed byte (8-bit) data. wave
-SBI	R	Creative Labs FM Instrument. auto S
-SBK	R+W	EMU SoundFont v1.x bank. auto coll inst wave
-SC2	R+W	Sample Cell II PC/Mac instrument. auto inst
-SD	R+W	Sound Designer I file. auto wave
-SD2	R+W	Sound Designer II flattened file. auto wave
-SD2	R+W	Sound Designer II data forks. wave
-SDK	R	Roland S-5xx series floppy disk image (S-50, S-51, S-330, W-30, S-500, S-550). auto CD FD
-SDK	R	Roland S-7xx series floppy disk image (S-70, S-700, S-750, S-760, S-770, S-772). auto CD FD
-SDS	R+W	MIDI SDS sysex dump. auto wave
-SDS	R	SmartSound SDS file.
-SDW	R	Signed dword (32-bit) data.
-SDX	R	SDX compacted MIDI SDS. auto
-SEQ	R+W	Sony Playstation MIDI sequences. auto midi
-SF	R+W	IRCAM / MTU SoundFile format. auto wave
-SF2	R+W	EMU SoundFont v2.x bank. auto coll inst wave
-SF2PACK	R	MIDI Converter Studio packed Sound Font. auto
-SFARK	R	Melody Machine Compressed SoundFonts (in 32-bit app only). *
-SFD	R	SoundStage sound data file.
-SFI	R	SoundStage sound info file. auto
-SFR	R	Sonic Foundry sample resource file. auto
-SFZ	R+W	rgc:audio SFZ v1 instrument. auto inst wave
-SFZ	R	Cakewalk SFZ v2 instrument. auto
-SHN	R+W	Shorten lossless compression. auto wave
-SMD	R	J-Phone / SmdEd mobile songs. auto
-SMP	R	Samplevision file. auto
-SMP	R	Ad Lib Gold sample. auto
-SMP	R+W	Avalon sample. auto wave
-SND	R+W	Unsigned 8-bit PCM data (W as .UB). wave
-SND	R+W	AKAI MPC-60/2000/2000XL/3000 sample file. auto wave
-SNDR	R	Sounder sound file. auto
-SNDT	R	SndTools sound file. auto
-SOU	R	SB Studio II sound file. auto
-SPD	R	Speech data file.
-SPL	R	Digitrakker sample. auto
-SPPACK	R+W	SPPack sound sample. auto wave
-SQ	R	Sony PS2 SCEI sequence. auto
-STM	R	ScreamTracker v2 modules.
-STS	R+W	Creamware STS-series sampler programs. auto coll
-SVQ	R	Roland sequencer file. auto
-SVX	R	Interchange file format. auto
-SW	R+W	Signed word (16-bit) data. wave
-SXT	R+W	Propellerheads Reason NN-XT format. auto inst wave
-SYX	R	Roland D-50 patch SysEx dump. auto S
-SYX	R	Roland MT-32 (and compatibles) timbre SysEx dump. auto S
-SYX	R	Yamaha DX7 voice SysEx dump. auto S
-SYX	R	Yamaha DX7s / DX7II / DX200 voice SysEx dump. auto S
-SYX	R	Yamaha DX21 / DX27 / DX100 voice SysEx dump. auto S
-SYX	R	Yamaha DX11 / TX81z voice SysEx dump. auto S
-SYW	R+W	Yamaha SY-series wave file. auto wave
-TVD	R	Yamaha Tyros 2 custom drum voice file. inst auto
-TVN	R+W	Yamaha Tyros 2 custom voice file. inst auto
-TXT	W	Ascii text parameter descriptions. auto coll inst wave
-TXT	R+W	Ascii text formatted audio data. auto wave
-TXT	R+W	RTTTL / Nokring mobile ring-tone format. auto midi
-TXT	R+W	Steinberg LM-4 bank. auto coll inst
-TXW	R+W	Yamaha TX16W wave file. auto wave
-U255LAW	R+W	Exponential 8-bit format. wave
-UAX	R	Unreal Tournament audio packages. auto
-UB	R+W	Unsigned byte (8-bit) data. wave
-UDW	R	Unsigned dword (32-bit) data.
-UMX	R	Unreal Tournament music package. auto
-ULAW	R+W	G.711 mu-law US telephony format. wave
-ULT	R	UltraTracker modules. auto
-ULW	R+W	G.711 mu-law US telephony format. wave
-UNI	R	MikMod 'UniMod' format. auto
-UVD	R+W	Yamaha Tyros 3 custom drum voice file. auto inst
-UVN	R+W	Yamaha Tyros 3 custom voice file. auto inst
-UW	R+W	Unsigned word (16-bit) data. wave
-UWF	R	UltraTracker wave file. auto
-V8	R	Covox 8-bit audio. auto wave
-VAB	R+W	Sony Playstation / PS2 bank file. auto coll inst
-VAG	R+W	Sony Playstation / PS2 compressed sound file. auto wave
-VAP	R+W	Annotated speech file. coll wave
-VM1	R	Panasonic voice file.
-VOC	R+W	Creative Labs 'newer style' sound file. auto wave
-VOC	R+W	Creative Labs 'older style' sound file. auto wave
-VOX	R+W	Dialogic 4-bit ADPCM file. auto wave
-VOX	R	Talking Technology Incorporated file. auto
-VOX-6K	R+W	Dialogic 4-bit ADPCM file (6000 Hz). auto wave
-VOX-8K	R+W	Dialogic 4-bit ADPCM file (8000 Hz). auto wave
-VSB	R+W	Virtual Sampler Bank file. auto coll inst wave
-W??	R+W	Yamaha TX16W wave file. auto wave
-W??	R+W	Yamaha SY-series wave file. auto wave
-W2A	R	Yamaha Motif 'all' format. auto
-W2V	R+W	Yamaha Motif 'voices' format. auto coll inst wave
-W2W	R+W	Yamaha Motif 'waveforms' format. auto coll inst wave
-W4KSND	R+W	Wusik 4000 instrument. auto inst wave
-W7A	R	Yamaha Motif ES 'all' format. auto
-W7V	R+W	Yamaha Motif ES 'voices' format. auto coll inst wave
-W7W	R+W	Yamaha Motif ES 'waveforms' format. auto coll inst wave
-W64	R+W	Sonic Foundry Wave-64 format. auto wave
-WAV	R+W	Microsoft wave format. auto wave
-WAV	R	Broadcast wave format (EBU BWF). auto wave
-WA!	R+W	GigaStudio/GigaSampler compressed wave file. auto wave
-WFB	R+W	Turtle Beach WaveFront bank format. auto coll
-WFD	R+W	Turtle Beach WaveFront drum set format. auto inst
-WFP	R+W	Turtle Beach WaveFront program format. auto inst wave
-WLF	R	id Software Music Format (700 Hz). auto
-WMA	R+W	Windows Media Audio 4. auto wave *
-WMA	R+W	Windows Media Audio 9 CBR. auto wave *
-WMA	R+W	Windows Media Audio 9 ABR. auto wave *
-WMA	R+W	Windows Media Audio 9 VBR. auto wave *
-WMA	R+W	Windows Media Audio 9 Voice. auto wave *
-WMA	R+W	Windows Media Audio 9 Lossless. auto wave *
-WMA	R+W	Windows Media Audio 9 Pro CBR/ABR/VBR. auto wave *
-WMV	R	Windows Media Video file. auto
-WRF	R+W	Westacott WinRanX instrument file. auto inst
-WRK	R	CakeWalk work file. auto
-WUSIKSND	R+W	Wusikstation sound file. auto inst wave
-WUSIKPACK	R	Wusikstation pack file. auto inst wave
-WV	R+W	WavPack losslessly compressed file. auto wave
-X0A	R	Yamaha Motif XS 'all' format. auto
-X0V	R+W	Yamaha Motif XS 'voices' format. auto
-X0W	R+W	Yamaha Motif XS 'waveforms' format. auto
-X3A	R	Yamaha Motif XF 'all' format. auto
-X3V	R+W	Yamaha Motif XF 'voices' format. auto
-X3W	R+W	Yamaha Motif XF 'waveforms' format. auto
-XI	R+W	FastTracker 2 instrument. auto inst wave
-XM	R	FastTracker 2 extended modules. auto
-XMI	R+W	Miles Sound System extended MIDI file. auto midi
-YADPCM	R+W	Raw Yamaha 4-bit ADPCM format data.
-???	R	Yamaha A3000 sample file. auto wave
-*	R	Unrecognized file types (prompts user to supply info). (auto)
+MP2	R+W	MPEG audio stream, layer II. 
+MP3	R+W	MPEG audio stream, layer III. 
+MPA	R	MPEG audio stream, layer I, II, 'II�' or III. 
+MPEG	R	MPEG system stream, audio+video. 
+MPG	R	MPEG system stream, audio+video. 
+MSS	R+W	Miles Sound System DLS 1 + XMI file.  
+MT2	R	MadTracker 2 Module. 
+MTI	R+W	MadTracker 2 Instrument.  
+MTM	R	MultiTracker Module. 
+MUS	R	Doom/Heretic music file.  
+MUS	R+W	Musifile MPEG Layer II Audio stream. 
+MUS10	R	Mus10 audio. 
+MWS	W	MWave DSP synth�s instrument extract.  
+NIST	R+W	NIST Sphere audio. 
+NVF	R+W	Creative Nomad Voice file.  
+O01	R	Typhoon vOice file. 
+OGG	R+W	Vorbis Ogg stream.  
+OKT	R	Oktalyzer tracker module. 
+P	R+W	Akai S1000/S1100/S01 program.  
+P	R+W	Akai S3000/S3200/S2000/S2800 program.  
+PAC	R	SB Studio II package. 
+PAF	R+W	Ensoniq PARIS audio file.  
+PAT	R+W	Advanced Gravis Ultrasound / Forte tech. Patch.   
+PBF	R+W	Turtle Beach Pinnacle Bank File.   
+PCG	R+W	Korg Triton collection file.   
+PCG	R+W	Korg Trinity collection file.   
+PCM	R	OKI MSM6376 synth chip PCM format. 
+PGM	R+W	AKAI MPC-2000 drum set file.   
+PGM	R+W	AKAI MPC-3000 drum set file.   
+PLM	R	DisorderTracker2 module. 
+PLS	R	DisorderTracker2 sample. 
+PPF	R	Turtle Beach Pinnacle Program File. 
+PRG	R+W	WAVmaker program.  
+PSB	R	Pinnacle Sound Bank. 
+PSION	R	PSION a-law audio. 
+PSM	R	Protracker Studio Module Format. 
+PTM	R	Poly Tracker module. 
+RA	W	RealAudio file. 
+RAW	R+(W)	Raw signed PCM data (W as .SB). 
+RIF	R	Rapidcom Voice/Quicklink Rockwell ADPCM files. 
+RMI	R+W	RIFF-MIDI file, embedded DLS optional.   
+ROCKWELL	R+W	Rockwell 2,3,4-bit ADPCM audio. 
+ROCKWELL-2	R+W	Rockwell 2-bit ADPCM audio. 
+ROCKWELL-3	R+W	Rockwell 3-bit ADPCM audio. 
+ROCKWELL-4	R+W	Rockwell 4-bit ADPCM audio. 
+S	R	Akai S900/950 sample.  
+S	R+W	Akai S1000/S1100/S01 sample.  
+S	R+W	Akai S3000/S3200/S2000/S2800 sample.  
+S3I	R+W	Scream tracker v3 instrument.  
+S3M	Scream tracker v3 module. 
+S3P	R+W	Akai MESA II/PC S-series program.  
+SAM	R+(W)	Signed 8-bit Sample data (W as .SB). 
+SB	R+W	Raw Signed Byte (8-bit) data. 
+SBK	R+W	Emu SoundFont v1.x Bank files / Creative Labs SB AWE 32.    
+SC2	R+(W)	Sample Cell / II PC instrument (W as .INS).  
+SD	R+W	Sound Designer I audio.  
+SD2	R+W	Sound Designer II flattened file.  
+SD2	R+W	Sound Designer II data fork. 
+SDK	R	Roland S-series floppy disk image. 
+SDS	R+W	Raw MIDI Sample Dump Standard file.  
+SDW	R	Raw Signed DWord (32-bit) data.
+SDX	R	MIDI Sample Dump Standard files as compacted by SDX. 
+SEQ	R+W	Sony Playstation MIDI Sequence.  
+SF	R+W	MTU / IRCAM SoundFile format.  
+SF2	R+W	Emu SoundFont v2.x file.     
+SFARK	R	Melody Machine Compressed SoundFont.
+SFD	R	SoundStage Sound File Data.
+SFI	R	SoundStage Sound File Info. 
+SFR	R	Sonic Foundry Sample Resource. 
+SMD	R	SmdEd / J-Phone mobiles songs.  
+SMP	R	Samplevision format. 
+SMP	R	Ad Lib Gold Sample. 
+SMP	R+W	Avalon sample format.  
+SND	R+W	Raw unsigned PCM data (W as .UB). 
+SND	R+W	AKAI MPC-60/2000/2000XL/3000 sample.  
+SNDR	R	Sounder sound file. 
+SNDT	R	Sndtool sound file. 
+SOU	R	SB Studio II sound. 
+SPD	R	Speach Data file.
+SPL	R	Digitrakker Sample. 
+SPPACK	R+W	SPPack sound sample.  
+STM	R	Scream tracker v2 module.
+STS	R+W	Creamware STS-series sampler programs.  
+SVX	R	Interchange file format, 8SVX/16SV. 
+SW	R+W	Raw Signed Word (16-bit) data. 
+SXT	R+W	Reason 2 NN-XT format.   
+SYW	R+(W)	Yamaha SY-series wave files (W as .W01).  
+TXT	W	Ascii Text parameter description.    
+TXT	R+W	Ascii Text formatted audio data.  
+TXT	R+W	RTTTL/Nokring mobile phone ring-tone format.  
+TXT	R+W	Steinberg LM-4 drum-kit.   
+TXW	R+(W)	Yamaha TX16W wave files (W as .W01).  
+UB	R+W	Raw Unsigned Byte (8-bit) data. 
+UAX	R	Unreal Tournament Audio package. 
+UDW	R	Raw Unsigned DWord (32-bit) data.
+ULAW	R+W	US telephony format (CCITT G.711) audio. 
+ULW	R+W	US telephony format (CCITT G.711) audio. 
+ULT	R	UltraTracker modules. 
+UMX	R	Unreal Tournament Music package. 
+UNI	R	MikMod 'UniMod' format. 
+UW	R+W	Raw Unsigned Word (16-bit) data. 
+UWF	R	UltraTracker Wave File. 
+V8	R+(W)	Covox 8-bit audio (W as .UB).  
+VAB	R+W	Sony Playstation/PS2 bank file.   
+VAG	R+W	Sony Playstation/PS2 compressed sound file.  
+VAP	R+W	Annotated speech file.  
+VOC	R+W	Creative labs sound file.  
+VOC	R+W	Creative labs �older format� sound file.  
+VOX	R+W	Dialogic 4-bit ADPCM.  
+VOX	R	Talking Technology Incorporated file. 
+VOX-6K	R+W	Dialogic 4-bit ADPCM, 6000 Hz.  
+VOX-8K	R+W	Dialogic 4-bit ADPCM, 8000 Hz.  
+VSB	R+W	Virtual Sampler Bank file.    
+W01	R+W	Yamaha TX16W wave.  
+W01	R+W	Yamaha SY-series wave.  
+W64	R+W	Sonic Foundry Wave-64 format.  
+WAV	R+W	Ms Windows PCM wave.   
+WA!	R+W	GigaSampler/GigaStudio compressed wave file.  
+WFB	R+W	Turtle Beach WaveFront Bank (Maui/Rio/Monterey).  
+WFD	R+W	Turtle Beach WaveFront Drum set (Maui/Rio/Monterey).  
+WFP	R+W	Turtle Beach WaveFront Program (Maui/Rio/Monterey).   
+WMA	R+W	Windows Media Audio 4.  
+WMA	R+W	Windows Media Audio 9 CBR.  
+WMA	R+W	Windows Media Audio 9 VBR.  
+WMA	R+W	Windows Media Audio 9 Voice.  
+XI	R+W	Fast Tracker 2 instrument.   
+XM	R	Fast Tracker 2 extended module. 
+XMI	R+W	Miles Sound System Extended MIDI file.  
+ *	R	Unrecognized formats prompts user to supply basic info. ()
 
 
 >>> QuickView (Quick View) Plus / QVP Conversion SDK - Documents (http://www.avantstar.com/ittrium/visit/A1xd7x1x66y1x115x1x69y1x116x1x7dy1xa35x1x7d)

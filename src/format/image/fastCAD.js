@@ -6,6 +6,6 @@ export class fastCAD extends Format
 	website    = "https://fastcad2.com/";
 	ext        = [".fcd"];
 	magic      = ["FastCAD drawing"];
-	notes      = "Sample SIDE.FCD converts properly, but is detected as garbage by the tensor model, which is proper in this case, it looks like garbage";
+	notes      = "Sample SIDE.FCD converts properly, but is detected as garbage by the classify garbage model, which is proper in this case, it looks like garbage";
 	converters = ["fastCAD"];
 }

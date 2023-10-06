@@ -6,21 +6,13 @@ import {formats, init as initFormats} from "../src/format/formats.js";
 
 const xlog = new XLog();
 
-/* Family durations on ridgeport as of Oct 2023:
-    Format		Duration
-    ------		--------
-      poly		    58s
-      text		    50s
-executable		10m 38s
-      font		 2m 10s
-*/
-
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Test multiple formats, creating a report for each",
 	opts    :
 	{
-		format : {desc : "Specify one or more formats. Can specify an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
+		reportsDirPath : {desc : "Which directory to write the reports. Default: random"},
+		format         : {desc : "Specify one or more formats. Can specify an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
 
 await initFormats(xlog);
@@ -76,8 +68,9 @@ if(failures.length)
 		xlog.info`${failure}`;
 }
 
-const testManReportFilePath = path.join("/mnt/ram/tmp/testMany.html");
-await fileUtil.writeTextFile(testManReportFilePath, `
+await Deno.mkdir(argv.reportsDirPath || await fileUtil.genTempPath(undefined, "-testMany"), {recursive : true});
+const testManyReportFilePath = path.join(argv.reportsDirPath, `${argv.format.join("_")}.html`);
+await fileUtil.writeTextFile(testManyReportFilePath, `
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -136,7 +129,7 @@ await fileUtil.writeTextFile(testManReportFilePath, `
 				</tr>
 			</thead>
 			<tbody>
-				${Object.entries(reports).sortMulti([([formatid]) => formatid]).map(([formatid, o]) => `<tr>
+				${Object.entries(reports).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
 					<td style="text-align: left;"><a href="${o.reportFilePath}">${formatid.escapeHTML()}</a></td>
 					<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
 					<td class="${+o.failCount ? "bad" : "good"}">${o.successPercentage || "0"}%</td>
@@ -149,4 +142,4 @@ await fileUtil.writeTextFile(testManReportFilePath, `
 </html>`);
 
 xlog.info`\nElapsed duration: ${fg.peach(elapsed.msAsHumanReadable())}`;
-xlog.info`\nReport written to: file://${testManReportFilePath}`;
+xlog.info`\nReport written to: file://${testManyReportFilePath}`;

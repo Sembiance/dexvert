@@ -189,7 +189,7 @@ const FLEX_DIFF_FILES =
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
 const DISK_FAMILY_FORMAT_MAP =
 [
-	// Mis-classified by tensor as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
+	// Mis-classified by classify as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
 	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
 	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
@@ -693,12 +693,27 @@ async function writeOutputHTML()
 				width: 32%;
 				height: 200px;
 			}
+
+			.topRightInfo
+			{
+				position: absolute;
+				right: 8px;
+				top: 8px;
+			}
+
+			a
+			{
+				border: 0;
+			}
 		</style>
 	</head>
 	<body>
-		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.map(v => v.decolor()).join(" ")}<br>` : ""}${outputFiles.length.toLocaleString()} files<br>
+		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.map(v => v.decolor()).join(" ")}<br>` : ""}		
+		${outputFiles.length.toLocaleString()} files<br>
+		<span class="topRightInfo">formats: ${argv.format.escapeHTML() || "all formats"}</span>
 		${outputFiles.sortMulti([filePath => path.basename(filePath)]).map(filePath =>
 	{
+		const titleSafe = path.basename(filePath).escapeHTML();
 		const ext = path.extname(filePath);
 		const filePathSafe = getWebLink(filePath);
 		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
@@ -709,19 +724,19 @@ async function writeOutputHTML()
 			case ".png":
 			case ".webp":
 			case ".svg":
-				return `<img src="${filePathSafe}">`;
+				return `<a href="${filePathSafe}" title="${titleSafe}"><img src="${filePathSafe}"></a>`;
 
 			case ".mp4":
-				return `<span class="media"><label>${relFilePath.escapeHTML()}</label><video controls="" muted="" playsinline="" src="${filePathSafe}"></video></span>`;
+				return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><video controls="" muted="" playsinline="" src="${filePathSafe}"></video></span>`;
 
 			case ".wav":
 			case ".mp3":
-				return `<span class="media"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
+				return `<span class="media" title="${titleSafe}"><label>${relFilePath.escapeHTML()}</label><audio controls src="${filePathSafe}" loop></audio></span>`;
 			
 			case ".txt":
 			case ".pdf":
 			case ".html":
-				return `<iframe src="${filePathSafe}"></iframe>`;
+				return `<iframe src="${filePathSafe}" title="${titleSafe}"></iframe>`;
 		}
 
 		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;

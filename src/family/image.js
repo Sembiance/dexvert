@@ -3,9 +3,11 @@ import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
 import {DOMParser} from "../../deno/deno-dom/deno-dom-native.ts";
+import {classifyImage} from "../classifyUtil.js";
+import {programs} from "../program/programs.js";
 
-// These particular kinds of images often look like noise/static/garbage and are usually caught by the tensorflow garbage model
-const TENSOR_PATH_EXCLUSIONS =
+// These particular kinds of images often look like noise/static/garbage and are usually caught by the classify garbage model
+const CLASSIFY_PATH_EXCLUSIONS =
 [
 	"texture", "textura",
 	"background", "backgrnd",
@@ -23,7 +25,7 @@ const MATCH_MAX_GARBAGE_PROBABILITIES =
 };
 
 const UNSAFE_MAX_IMAGE_SIZE = 25000;
-const SKIP_TENSOR_MAX_IMAGE_SIZE = 6000;
+const SKIP_CLASSIFY_MAX_IMAGE_SIZE = 6000;
 
 export class image extends Family
 {
@@ -54,7 +56,6 @@ export class image extends Family
 			return false;
 		}
 
-		const {programs} = await import("../program/programs.js");
 		const isUnsafe = programs[dexState.ran?.at(-1)?.programid]?.unsafe || dexState.ran?.at(-1)?.unsafe;
 
 		if(isUnsafe && meta.width===1 && meta.height===1)
@@ -83,28 +84,24 @@ export class image extends Family
 			return false;
 		}
 		
-		// TODO Either uncomment and get working or REMOVE
-		/*let skipTensor = null;
+		let skipClassify = null;
 
 		// Only classify these image types
 		if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
-			skipTensor = `Unsupported image formatid: ${dexid.formatid}`;
+			skipClassify = `Unsupported image formatid: ${dexid.formatid}`;
 		
 		// Don't classify if the full original absolute path or formatid includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
-		if(TENSOR_PATH_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || dexState.original.input.absolute.toLowerCase().includes(v)))
-			skipTensor = `Contains a known 'noisy' pattern in original file path`;
+		if(CLASSIFY_PATH_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || dexState.original.input.absolute.toLowerCase().includes(v)))
+			skipClassify = `Contains a known 'noisy' pattern in original file path`;
 		
 		// Don't classify if the dimensions are too big
-		if([meta.width, meta.height].some(v => v>=SKIP_TENSOR_MAX_IMAGE_SIZE))
-			skipTensor = `Width or height is larger than ${SKIP_TENSOR_MAX_IMAGE_SIZE} : ${meta.width}x${meta.height}`;
+		if([meta.width, meta.height].some(v => v>=SKIP_CLASSIFY_MAX_IMAGE_SIZE))
+			skipClassify = `Width or height is larger than ${SKIP_CLASSIFY_MAX_IMAGE_SIZE} : ${meta.width}x${meta.height}`;
 		
-		if(!skipTensor)
+		if(!skipClassify)
 		{
-			// loaded dynamically because tensorUtil requires identify which requires formats and this is a family, anyways, circular dependency seen in util/buildFormats.js
-			const {classifyImage} = await import("../tensorUtil.js");
-
-			// tensorUtil.classifyImage will convert these into PNG before sending to the tensor
-			const garbage = await classifyImage(dexFile.absolute, "garbage");
+			// classifyUtil.classifyImage will convert these into PNG before sending to the model
+			const garbage = await classifyImage(dexFile.absolute, "garbage", xlog);
 			if(typeof garbage!=="number" || garbage<0 || garbage>1)
 				throw new Error(`Got invalid garabge result for ${dexFile.pretty()} ${dexState.original.input.pretty()} ${garbage}`);
 
@@ -113,8 +110,8 @@ export class image extends Family
 		}
 		else
 		{
-			xlog.warn`image.verify is ${fg.orange("SKIPPING")} garbage classification: ${skipTensor}`;
-		}*/
+			xlog.warn`image.verify is ${fg.orange("SKIPPING")} classification: ${skipClassify}`;
+		}
 
 		return {identifications, meta};
 	}

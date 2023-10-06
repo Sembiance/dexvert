@@ -4,8 +4,8 @@ import {path} from "std";
 
 export class awaveStudio extends Program
 {
-	website    = "https://archive.org/details/awave70_zip";
-	bin        = "c:\\Program Files\\Awave Studio\\Awave.exe";
+	website    = "https://archive.org/details/AwaveStudio8.8.zip";
+	bin        = "c:\\Program Files\\Awave Studio\\Awave Studio.exe";
 	bruteFlags = { music : {} };
 	args       = () => ["-BATCH"];
 	loc        = "win2k";
@@ -15,13 +15,12 @@ export class awaveStudio extends Program
 			ControlClick("Select conversion type", "", "[CLASS:Button; TEXT:&Next >]")
 
 			WinWaitActive("Select input files", "", 10)
-			ControlClick("Select input files", "", "[CLASS:Button; TEXT:Add...]")
+			ControlClick("Select input files", "", "[CLASS:Button; TEXT:Add files...]")
 
-			WinWaitActive("Open new file", "", 10)
-
+			$openNewFileWindow = WindowRequire("Open new file", "", 5)
 			Sleep(250)
 			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
-			Sleep(250)
+			WinWaitClose($openNewFileWindow, "", 10)
 
 			Func ErrorWindows()
 				WindowFailure("", "No wave data found!", -1, "{ENTER}")
@@ -30,21 +29,19 @@ export class awaveStudio extends Program
 				WindowFailure("Attention!", "You must add at least one", -1, "{ENTER}")
 				WindowFailure("Unknown file type!", "", -1, "{ENTER}")
 				WindowFailure("", "The file doesn't contain", -1, "{ENTER}")
+				return WinActivate("Select input files", "");
 			EndFunc
-			CallUntil("ErrorWindows", ${xu.SECOND*3})
+			CallUntil("ErrorWindows", ${xu.SECOND*4})
 
-			WinActivate("Select input files", "");
-			WinWaitActive("Select input files", "", 10)
-			ControlClick("Select input files", "", "[CLASS:Button; TEXT:&Next >]")
+			$selectInputWindow = WindowRequire("Select input files", "", 10)
+			ControlClick($selectInputWindow, "", "[CLASS:Button; TEXT:&Next >]")
 
-			WinWaitActive("Select output options", "", 10)
+			$selectOutputWindow = WindowRequire("Select output options", "", 10)
 
-			Local $formatWAV = ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
-			ControlCommand("Select output options", "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
-
-			ControlSetText("Select output options", "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
-
-			ControlClick("Select output options", "", "[CLASS:Button; TEXT:Finish]")
+			$formatWAV = ControlCommand($selectOutputWindow, "", "[CLASS:ComboBox; INSTANCE:2]", "FindString", ".wav - Microsoft Wave file")
+			ControlCommand($selectOutputWindow, "", "[CLASS:ComboBox; INSTANCE:2]", "SetCurrentSelection", $formatWAV)
+			ControlSetText($selectOutputWindow, "", "[CLASS:Edit; INSTANCE:2]", "c:\\out")
+			ControlClick($selectOutputWindow, "", "[CLASS:Button; TEXT:Finish]")
 
 			WaitForPID("Awave.exe", ${xu.MINUTE*5})`
 	});

@@ -1,5 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
+import {serialUtil} from "xpriv";
 
 export class IsoBuster extends Program
 {
@@ -16,12 +17,26 @@ export class IsoBuster extends Program
 		
 		// normally, if the command works, we don't need to do anything at all with the script, but if a bad file is sent it might show an error we need to cancel
 		script : `
-			Local $errorVisible = WinWaitActive("No file systems and/or files found", "", 5)
-			If $errorVisible Not = 0 Then
-				ControlClick("No file systems and/or files found", "", "[TEXT:&Cancel]")
-			EndIf
+			Func PreOpenWindows()
+				$registerWindow = WinGetHandle("Registration will enable IsoBuster PRO functionality", "")
+				If $registerWindow Not = 0 Then
+					WinMove($registerWindow, "", 0, 0)
+					ControlSetText($registerWindow, "", "[CLASS:TEdit; INSTANCE:1]", "${serialUtil.getSerial("isoBuster")["5.2"].email}")
+					ControlSetText($registerWindow, "", "[CLASS:TEdit; INSTANCE:3]", "${serialUtil.getSerial("isoBuster")["5.2"].registrationid}")
+					ControlSetText($registerWindow, "", "[CLASS:TEdit; INSTANCE:2]", "${serialUtil.getSerial("isoBuster")["5.2"].key}")
+					ControlClick($registerWindow, "", "[CLASS:TButton; INSTANCE:4]")
+					WinWaitClose($registerWindow, "", 5)
+				EndIf
 
-			WindowDismissWait("Friendly warning", "", 5, "{ENTER}")
+				WindowDismiss("Friendly warning", "", "{ENTER}")
+
+				$noFilesWindow = WinActive("No file systems and/or files found", "")
+				If $noFilesWindow Not = 0 Then
+					ControlClick($noFilesWindow, "", "[TEXT:&Cancel]")
+					WinWaitClose($noFilesWindow, "", 3)
+				EndIf
+			EndFunc
+			CallUntil("PreOpenWindows", ${xu.SECOND*4})
 			
 			WaitForPID("IsoBuster.exe", ${xu.MINUTE*10})`
 	});

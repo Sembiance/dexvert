@@ -25,6 +25,7 @@ export class tomsViewer extends Program
 	// if the output file is less than 768 bytes we likely failed to convert properly (multiple tiff files fail this way), just delete it
 	// NOTE: This was back from when we were doing PNG output, this may not longer be needed for the BMP method
 	verify    = (r, dexFile) => dexFile.size>=768;
+	classify  = true;
 	renameOut = true;
 	chain     = "convert";
 }

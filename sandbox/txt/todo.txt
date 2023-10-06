@@ -300,4 +300,3 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
 * Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
 
 * Convert bitmap fonts to more usable vector fonts by trying to "autotrace" the fonts, or utilize a pro tool like: https://www.fontlab.com/font-editor/bitfonter/   or   https://www.fontlab.com/font-converter/transtype/
-

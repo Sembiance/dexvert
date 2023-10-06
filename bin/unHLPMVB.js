@@ -30,7 +30,7 @@ const argv = cmdUtil.cmdInit({
 
 const inputFilePath = path.resolve(argv.inputFilePath);
 const inputFileStats = await Deno.stat(inputFilePath);
-const tmpDirPath = await fileUtil.genTempPath();
+const tmpDirPath = await fileUtil.genTempPath(undefined, "-unHLPMVB-tmp");
 
 await Deno.mkdir(tmpDirPath);
 

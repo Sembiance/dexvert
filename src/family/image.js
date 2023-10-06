@@ -84,18 +84,22 @@ export class image extends Family
 			return false;
 		}
 		
-		let skipClassify = null;
+		let skipClassify = false;
+
+		// Only classify images if a program or format specified it specifically
+		if(!dexState.format.classify && !dexState.ran.some(r => programs[r.programid].classify))
+			skipClassify = `Format ${dexState.format.formatid} and no ran programs require classification`;
 
 		// Only classify these image types
-		if(!["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
+		if(!skipClassify && !["gif", "png", "jpg", "webp", "svg"].includes(dexid.formatid))
 			skipClassify = `Unsupported image formatid: ${dexid.formatid}`;
 		
 		// Don't classify if the full original absolute path or formatid includes any of these names as it will likely come back as a false positive as they tend to look like "noise"
-		if(CLASSIFY_PATH_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || dexState.original.input.absolute.toLowerCase().includes(v)))
+		if(!skipClassify && CLASSIFY_PATH_EXCLUSIONS.some(v => dexid.formatid.toLowerCase().includes(v) || dexState.original.input.absolute.toLowerCase().includes(v)))
 			skipClassify = `Contains a known 'noisy' pattern in original file path`;
 		
 		// Don't classify if the dimensions are too big
-		if([meta.width, meta.height].some(v => v>=SKIP_CLASSIFY_MAX_IMAGE_SIZE))
+		if(!skipClassify && [meta.width, meta.height].some(v => v>=SKIP_CLASSIFY_MAX_IMAGE_SIZE))
 			skipClassify = `Width or height is larger than ${SKIP_CLASSIFY_MAX_IMAGE_SIZE} : ${meta.width}x${meta.height}`;
 		
 		if(!skipClassify)
@@ -110,7 +114,7 @@ export class image extends Family
 		}
 		else
 		{
-			xlog.warn`image.verify is ${fg.orange("SKIPPING")} classification: ${skipClassify}`;
+			xlog.info`image.verify is ${fg.orange("SKIPPING")} classification: ${skipClassify}`;
 		}
 
 		return {identifications, meta};

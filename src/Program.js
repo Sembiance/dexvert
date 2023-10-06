@@ -53,6 +53,7 @@ export class Program
 			renameOut : {types : ["function", Object, "boolean"], required : true},
 
 			// meta
+			classify   : {type : "boolean"},
 			flags      : {type : Object},
 			exclusive  : {type : "boolean"},
 			notes      : {type : "string"},

@@ -4,11 +4,12 @@ import {runUtil} from "xutil";
 
 export class abydosconvert extends Program
 {
-	website = "https://github.com/Sembiance/abydosconvert";
-	package = "media-gfx/abydosconvert";
-	unsafe  = true;
-	bin     = "abydosconvert";
-	flags   = {
+	website  = "https://github.com/Sembiance/abydosconvert";
+	package  = "media-gfx/abydosconvert";
+	unsafe   = true;
+	bin      = "abydosconvert";
+	classify = true;
+	flags    = {
 		format  : "Which format to use for conversion. This is a mime type. REQUIRED.",
 		outType : "Which format to output. 'png' is the only allowed option right now. Default: Let abydosconvert decide"
 	};

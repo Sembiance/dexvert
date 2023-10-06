@@ -3,14 +3,12 @@ import {XLog} from "xlog";
 import {cmdUtil, fileUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {programs, init as initPrograms} from "../program/programs.js";
-import {formats, init as initFormats} from "../src/format/formats.js";
+import {formats, init as initFormats} from "../format/formats.js";
 import {families} from "../family/families.js";
 import {DexFile} from "../DexFile.js";
 import {Identification} from "../Identification.js";
 import {Format} from "../Format.js";
 import {path} from "std";
-
-// TODO Update this to work with the new dexrpc, call out to dexrpc for each one I want to try processing as
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexbrute",

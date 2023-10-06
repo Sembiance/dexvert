@@ -92,6 +92,7 @@ export class Format
 
 			// meta
 			charSet  : {type : "string"},
+			classify : {type : "boolean"},
 			mimeType : {type : "string"},
 			notes    : {type : "string"},
 			website  : {type : "string", url : true},

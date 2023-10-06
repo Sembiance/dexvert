@@ -7,6 +7,6 @@ export class theDrawCOM extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	mimeType       = "image/x-thedraw";
-	magic          = ["TheDraw COM file screen save"];
+	magic          = ["TheDraw COM screen save"];
 	converters     = ["dosEXEScreenshot"];
 }

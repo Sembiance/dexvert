@@ -104,6 +104,20 @@ const FLEX_SIZE_PROGRAMS =
 // these formats have some meta data that can change and so we should just ignore it
 const IGNORED_META_KEYS = {};
 
+// these formats have supporting files that should be ignored
+const SUPPORTING_FILES =
+{
+	image :
+	{
+		printMasterShape : /\.sdr$/i
+	},
+	other :
+	{
+		pogNames              : /\.pog$/i,
+		printMasterShapeNames : /\.shp$/i
+	}
+};
+
 const FLEX_SIZE_FORMATS =
 {
 	archive :
@@ -200,6 +214,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
+	[/image\/deskMatePaint\/set_mask\.pnt$/, "image", "prismPaint"],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
@@ -249,12 +264,9 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
 	[/archive\/pog\/.+\.pnm$/i, "other", true],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
-	[/image\/printMasterShape\/.+\.sdr$/i, "other", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
 	[/music\/tfmx\/smpl\..+$/i, true, true],
-	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true],
-	[/other\/pogNames\/.+\.pog$/i, "archive", true],
-	[/other\/printMasterShapeNames\/.+\.shp$/i, "image", true]
+	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true]
 ];
 
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match
@@ -304,11 +316,21 @@ xlog.info`Finding sample files...`;
 const sampleFilePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {nodir : true, depth : 3-(argv.format ? argv.format.split("/").length : 0)});
 sampleFilePaths.filterInPlace(sampleFilePath => !SUPPORTING_DIR_PATHS.some(v => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath).startsWith(v)));
 
+sampleFilePaths.filterInPlace(sampleFilePath =>
+{
+	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath);
+	return !SUPPORTING_FILES?.[sampleSubFilePath.split("/")[0]]?.[sampleSubFilePath.split("/")[1]]?.test(sampleSubFilePath);
+});
+
 if(argv.file)
 	sampleFilePaths.filterInPlace(sampleFilePath => sampleFilePath.toLowerCase().endsWith(argv.file.toString().toLowerCase()));
 
 Object.keys(testData).subtractAll(sampleFilePaths.map(sampleFilePath => path.relative(SAMPLE_DIR_ROOT_PATH, sampleFilePath))).forEach(extraFilePath =>
 {
+	const sampleSubFilePath = path.relative(SAMPLE_DIR_ROOT_PATH, extraFilePath);
+	if(!SUPPORTING_FILES?.[sampleSubFilePath.split("/")[0]]?.[sampleSubFilePath.split("/")[1]]?.test(sampleSubFilePath))
+		return;
+
 	if(!argv?.format?.includes("/") || !extraFilePath.startsWith(path.join(argv.format, "/")) || argv.file)
 		return;
 

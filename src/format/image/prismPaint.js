@@ -8,5 +8,6 @@ export class prismPaint extends Format
 	forbidExtMatch = [".pnt"];	// .pnt is so common an extension and the magic is pretty robust
 	mimeType       = "image/x-prism-paint";
 	magic          = ["Prism Paint bitmap"];
-	converters     = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
+	//priority       = this.PRIORITY.LOW;
+	converters     = ["deark", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

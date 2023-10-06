@@ -10,6 +10,7 @@ export class bsave extends Format
 	forbidExtMatch = true;
 	magic          = ["QuickBasic BSAVE binary data"];
 	weakMagic      = true;
+	classify       = true;
 
 	// deark can't determine what type of BSAVE format it is, so we just try em all. Yah, it produces a lot of bad output, but usually one of them IS right
 	converters = [BSAVE_TYPES.map(t => `deark[opt:bsave:fmt=${t}][suffix:_${t}]`).join(" & ")];

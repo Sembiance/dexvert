@@ -4,6 +4,7 @@ import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
+import {ANSIToHTML} from "thirdParty";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -18,7 +19,10 @@ const argv = cmdUtil.cmdInit({
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
 
-const xlog = new XLog(argv.json ? "none" : "info");
+const xlog = new XLog("info", {alwaysEcho : !argv.json});
+const testLogLines = [];
+xlog.logger = line => testLogLines.push(line);
+
 const outJSON = {};
 
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
@@ -641,6 +645,7 @@ ${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}
 
 async function writeOutputHTML()
 {
+	const a2html = new ANSIToHTML();
 	const reportFilePath = path.join(DEXTEST_ROOT_DIR, "report.html");
 	await fileUtil.writeTextFile(reportFilePath, `
 <html>
@@ -763,6 +768,8 @@ async function writeOutputHTML()
 
 		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;
 	}).join("")}
+	<hr>
+	${testLogLines.flatMap(v => v.split("\n")).map(v => a2html.toHtml(v)).join("<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>")}
 	</body>
 </html>`);
 	xlog.info`\nReport written to: ${getWebLink(reportFilePath)}`;
@@ -781,6 +788,7 @@ outJSON.successPercentage = Math.floor((((sampleFilePaths.length-failCount)/samp
 xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${sampleFilePaths.length.toLocaleString()} ${fg.green("succeded")} (${outJSON.successPercentage}%)${failCount>0 ? ` — ${failCount.toLocaleString()} ${fg.red("failed")} (${Math.floor(((failCount/sampleFilePaths.length)*100))}%)` : ""}`;
 outJSON.sampleFileCount = sampleFilePaths.length;
 outJSON.failCount = failCount;
+outJSON.testLogLines = testLogLines;
 
 if(Object.keys(slowFiles).length>0)
 {

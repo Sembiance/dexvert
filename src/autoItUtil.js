@@ -225,9 +225,9 @@ Func CallUntil($funcName, $max_duration)
 EndFunc`,
 	SendSlow : `
 Func SendSlow($text, $delay=200)
-	AutoItSetOption("SendKeyDelay", $delay)
+	$prevDelay = AutoItSetOption("SendKeyDelay", $delay)
 	Send($text)
-	AutoItSetOption("SendKeyDelay", 5)
+	AutoItSetOption("SendKeyDelay", $prevDelay)
 EndFunc`,
 	Pause : `
 Func Pause($msg="pause")

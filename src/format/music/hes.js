@@ -7,5 +7,5 @@ export class hes extends Format
 	ext          = [".hes"];
 	magic        = ["Hudson Entertainment System Sound Format dump"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123[largeQuota]"];
 }

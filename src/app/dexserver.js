@@ -68,8 +68,7 @@ xu.waitUntil(async () =>
 	await stopDexserver();
 }, {interval : xu.SECOND*2});
 
-xlog.info`Starting ${Object.keys(servers).length} servers...`;
-for(const serverid of SERVER_ORDER)
+async function startServer(serverid)
 {
 	const server = servers[serverid];
 	xlog.info`Starting server ${fg.peach(serverid)}...`;
@@ -78,6 +77,9 @@ for(const serverid of SERVER_ORDER)
 	await xu.waitUntil(async () => (await server.status())===true);
 	xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
 }
+
+xlog.info`Starting ${Object.keys(servers).length} servers...`;
+await Promise.all(SERVER_ORDER.map(startServer));
 
 await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;

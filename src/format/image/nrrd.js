@@ -7,5 +7,5 @@ export class nrrd extends Format
 	ext        = [".nrrd"];
 	magic      = ["Nearly Raw Raster Data", /^fmt\/(1002|1005)( |$)/];
 	mimeType   = "image/x-nrrd";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = ["unu", `abydosconvert[format:${this.mimeType}]`];
 }

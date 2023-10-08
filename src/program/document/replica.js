@@ -9,19 +9,19 @@ export class replica extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 15)
+			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 20)
 		
 			SendSlow("!fp")
 
-			$printWindow = WindowRequire("Print", "", 5)
+			$printWindow = WindowRequire("Print", "", 7)
 			Send("{ENTER}")
 
-			$savePDFWindow = WindowRequire("Save PDF File As", "", 5)
-			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($savePDFWindow)
+			$savePDFWindow = WindowRequire("Save PDF File As", "", 7)
+			SendSlow("c:\\out\\out.pdf{ENTER}")
+			WinWaitClose($savePDFWindow, "", 5)
 			
-			$pleaseWaitWindow = WindowRequire("Please Wait", "", 5)
-			WinWaitClose($pleaseWaitWindow)
+			$pleaseWaitWindow = WindowRequire("Please Wait", "", 7)
+			WinWaitClose($pleaseWaitWindow, "", 5)
 
 			WinWaitActive($mainWindow, "", 5)
 

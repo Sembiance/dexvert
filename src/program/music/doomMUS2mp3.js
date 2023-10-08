@@ -8,7 +8,8 @@ export class doomMUS2mp3 extends Program
 	unsafe    = true;
 	loc       = "wine";
 	bin       = "c:\\dexvert\\slade\\SLADE.exe";
-	exclusive = true;
+	exclusive = "wine";
+	notes     = "This is very flaky. Always has been. SLADE is open source and runs on Linux, so in theory with some work I could build a CLI to convert the .mus to .mid more reliably."
 	args      = async r =>
 	{
 		// SLADE needs the file in a ZIP file
@@ -27,13 +28,13 @@ export class doomMUS2mp3 extends Program
 			$entriesPOS = ControlGetPos($mainWindow, "", $entriesControl)
 			ControlFocus($mainWindow, "", $entriesControl)
 			MouseClick("right", $entriesPOS[0]+20, $entriesPOS[1]+50, 1)
-			Sleep(1000)
+			Sleep(1500)
 			SendSlow("{UP}{UP}{RIGHT}{ENTER}", 200)
-			Sleep(1000)
+			Sleep(1500)
 			Send("^e")
 
 			$exportWindow = WindowRequire("Export Entry", "", 10)
-			Send("^ac:\\out${r.wineCounter}\\out.mid{ENTER}")
+			SendSlow("^ac:\\out${r.wineCounter}\\out.mid{ENTER}")
 			WinWaitClose($exportWindow, "", 10)
 			
 			SendSlow("!fx")

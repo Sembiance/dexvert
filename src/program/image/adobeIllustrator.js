@@ -6,6 +6,7 @@ export class adobeIllustrator extends Program
 	website  = "https://winworldpc.com/product/adobe-illustrator/80";
 	loc      = "winxp";
 	bin      = "c:\\Program Files\\Adobe\\Illustrator 8.0\\Illustrator.exe";
+	unsafe   = true;
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `

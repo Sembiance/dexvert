@@ -9,17 +9,17 @@ export class paperPort extends Program
 	bin      = "c:\\Program Files\\Visioneer\\PaperPort\\Paprport.exe";
 	osData   = r => ({
 		script   : `
-			$mainWindow = WindowRequire("Visioneer PaperPort", "", 10)
+			$mainWindow = WindowRequire("Visioneer PaperPort", "", 15)
 			SendSlow("!fi")
-			$importWindow = WindowRequire("Import", "", 5)
-			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
+			$importWindow = WindowRequire("Import", "", 6)
+			SendSlow("c:\\in\\${path.basename(r.inFile())}{ENTER}")
 			WinWaitClose($importWindow, "", 10)
-			WinWaitActive($mainWindow, "", 5)
+			WinWaitActive($mainWindow, "", 6)
 
 			SendSlow("!fe")
 
-			$exportWindow = WindowRequire("Export", "", 5)
-			Send("c:\\out\\out.png{TAB}{DOWN}{END}{UP}{ENTER}{ENTER}")
+			$exportWindow = WindowRequire("Export", "", 6)
+			SendSlow("c:\\out\\out.png{TAB}{DOWN}{END}{UP}{ENTER}{ENTER}")
 			WinWaitClose($exportWindow, "", 10)
 
 			WinWaitActive($mainWindow, "", 10)

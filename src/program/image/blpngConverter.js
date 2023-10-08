@@ -8,7 +8,7 @@ export class blpngConverter extends Program
 	loc       = "wine";
 	bin       = "BLPNG Converter.exe";
 	cwd       = r => r.outDir();
-	exclusive = true;
+	exclusive = "wine-win64";
 	wineData  = r => ({
 		base    : "win64",
 		arch    : "win64",

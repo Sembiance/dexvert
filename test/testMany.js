@@ -68,8 +68,9 @@ if(failures.length)
 		xlog.info`${failure}`;
 }
 
-const reportsDirPath = argv.reportsDirPath || await fileUtil.genTempPath(undefined, "-testMany");
+const reportsDirPath = argv.reportsDirPath || await fileUtil.genTempPath("/mnt/dexvert/test", "-testMany");
 await Deno.mkdir(reportsDirPath, {recursive : true});
+
 const testManyReportFilePath = path.join(reportsDirPath, `${argv.format.join("_").replaceAll("/", "_")}.html`);
 await fileUtil.writeTextFile(testManyReportFilePath, `
 <html>

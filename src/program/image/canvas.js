@@ -14,9 +14,10 @@ export class canvas extends Program
 		alsoKill : ["CanvasInTouch2.exe"],
 		script   : `
 		AutoItSetOption("PixelCoordMode", 0)
-		AutoItSetOption("SendKeyDelay", 20)
+		AutoItSetOption("SendKeyDelay", 25)
 
-		$mainWindow = WindowRequire("Canvas 14", "", 15)
+		; It can take a while for canvas to open, so we have to wait for it
+		$mainWindow = WindowRequire("Canvas 14", "", 20)
 
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
@@ -33,7 +34,7 @@ export class canvas extends Program
 			WindowDismiss("Open Images", "", "{TAB}1{ENTER}")
 			WindowDismiss("Select Layout", "", "{ENTER}")
 		EndFunc
-		CallUntil("PreOpenWindows", ${xu.SECOND*4})
+		CallUntil("PreOpenWindows", ${xu.SECOND*5})
 
 		${!r.flags?.nonRaster ? `
 			; check to ensure the file was rendered as a raster image

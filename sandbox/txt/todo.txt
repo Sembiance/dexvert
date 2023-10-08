@@ -62,7 +62,6 @@ iso/Love Bytes
 
 * Look at the various 'notes' fields in all the formats to see if additional/improved support can be added
 
-* Look into these flash decompile/decrypter tools to see if I should use any: https://www.reddit.com/r/RELounge/comments/16iht5d/flash_game_reverse_engineering/
 
 /---------------\
 | High Priority |
@@ -237,16 +236,19 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
 	After added, register rated 4 items: Archive Magazine, Archimedes *, ARM Club, APDL*, Archimedes, RISCafe
 	Including re-registering manually on command line: /mnt/retromission/ia/3/327a4eeb2a6d94439c0d09d381255cabbf223e06
 
-* See if GoADF has a version 4 yet, as that should have an arexx port and I can then add GoADF support to dexvert: http://www.bitplan.pl/goadf/download.html
-
-/--------------\
-| Low Priority |
-\--------------/
 * Add image converter support (oiiotool/iconvert) for all formats supprted by: https://github.com/OpenImageIO/oiio
 
 * Add all formats supported by: http://www.seasip.info/Unix/LibDsk/index.html
   Could convert a known RAW diskImage format into another and then use that to help dexid
 
+* Get the 'qemu' image version working with full dexvert, right now just to see IF I can get dextest working 100% within QEMU
+  Ensure the dexserver in the qemu image is ran with --prod
+  Goal: A simple docker command someone can run and have a working dexvert
+
+
+/--------------\
+| Low Priority |
+\--------------/
 * Add support for The Print Shop Deluxe Graphics library:
   http://discmaster.textfiles.com/view/4974/Handwritten%20Fonts.iso/previews/famousmg/famousmg.psg
   http://discmaster.textfiles.com/view/4974/Handwritten%20Fonts.iso/previews/artparts/apsamplr.psg
@@ -255,10 +257,8 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   Full file format details available in sandbox/wip/MSAgentDataSpecification_v1_4.htm
   Bonus points if I actually animate the character in a couple poses/animations into an animated GIF/movie
 
-* GoADF 4.0 will add support for mounting an ADF file via an arexx port. Add this to adfOFS and adfFFS when added: http://www.bitplan.pl/goadf/download.html
-
 * Add 3DO support. Ideally via mount using dexvert/sandbox/app/operafs but I'd need to update that code to compile against modern linux kernel
-  Other 3Do extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0
+  Other 3DO extractor programs: https://forum.uqm.stack.nl/index.php?topic=3535.0
   Some additional OperaFS programs: http://altmer.arts-union.ru/3DO/3do_utils.htm
 
 * Add sparseimage conversion support (requires MacOS X, see archive/sparseImage notes)
@@ -277,12 +277,13 @@ http://discmaster.textfiles.com/view/16485/Saturn.iso/utils/181/181.exe/DISC/CPC
   To run the supervisor.sh script on boot: https://www.karltarvas.com/2020/09/11/macos-run-script-on-startup.html
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files including a REST API
-  WARNING! I need to assumed that it will be exploited. So I will want to run dexvert on virtual machines. Not sure if I can run virtual machines like windows from WITHIN a virtual machine running gentoo+dexvert.... hrm...
+  WARNING! I need to assume that it will be exploited since I run so many programs, many of which likely have exploits.
+  So I will want to research how to run programs within some sort of jailbreak, or leverage the docker image with multiple instances
 
 * Might be fun to try and "run" any windows .scr screensavers in wine and record the output into a preview.mp4 video
 
 * Consider switching away from DOSBOX and use an authentic MS-DOS installation under 86Box
-  Pro: Compatability, including with certain dexvert/dos/* programs that didn't work under dosbox. Feels cleaner.
+  Pro: Compatability with some dexvert/dos/* programs that didn't work under dosbox (of which I don't know of any). Feels cleaner.
   Cons: Would need to solve video recording and keyboard control (both of which I wrote custom code patches to DOSBOX to implement)
   I could maybe add similar code to 86Box, but that would be harder to control from 'within' dos. Would need to give this some thought
 

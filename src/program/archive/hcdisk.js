@@ -8,7 +8,7 @@ export class hcdisk extends Program
 	loc       = "wine";
 	bin       = "HCDisk2.exe";
 	cwd       = r => r.outDir();
-	exclusive = true;
+	exclusive = "wine";
 	wineData  = r => ({
 		console : true,
 		script  : `

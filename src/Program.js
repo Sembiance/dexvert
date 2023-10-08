@@ -55,7 +55,7 @@ export class Program
 			// meta
 			classify   : {type : "boolean"},
 			flags      : {type : Object},
-			exclusive  : {type : "boolean"},
+			exclusive  : {type : "string"},
 			notes      : {type : "string"},
 			package    : {types : ["string", Array]},
 			runOptions : {types : [Object, "function"]},
@@ -73,7 +73,7 @@ export class Program
 			checkForDups     : {type : "boolean"},
 			failOnDups       : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
-			diskQuota        : {type : "number", range : [1]},
+			diskQuota        : {types : ["function", "number"]},
 			dosData          : {types : ["function", Object]},
 			wineData         : {types : ["function", Object]},
 			osData           : {types : ["function", Object]},
@@ -117,10 +117,6 @@ export class Program
 		if(unknownFlags.length>0)
 			throw new Error(`Program ${fg.orange(this.programid)} run got unknown flags: ${unknownFlags.join(" ")}`);
 		
-		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
-		if(this.diskQuota)
-			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${this.diskQuota},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
-
 		// create a RunState to store program results/meta
 		const r = RunState.create({programid : this.programid, f, flags, xlog});
 		r.cwd = f.root;
@@ -133,6 +129,10 @@ export class Program
 			const newCWD = await this.cwd(r);
 			r.cwd = newCWD.startsWith("/") ? newCWD : path.resolve(f.root, newCWD);
 		}
+
+		// restrict the size of our out dir by mounting a RAM disk of a static size to it, that way we can't fill up our entire hard drive with misbehaving programs
+		if(this.diskQuota)
+			await runUtil.run("sudo", ["mount", "-t", "tmpfs", "-o", `size=${typeof this.diskQuota==="function" ? await this.diskQuota(r) : this.diskQuota},mode=0777,nodev,noatime`, "tmpfs", f.outDir.absolute]);
 
 		if(this.mirrorInToCWD)
 		{
@@ -152,7 +152,7 @@ export class Program
 		if(this.exclusive)
 		{
 			xlog.debug`Program ${fg.orange(this.programid)} waiting for lock...`;
-			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
+			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/lock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
 		}
 
 		try
@@ -221,7 +221,7 @@ export class Program
 		if(this.exclusive)
 		{
 			xlog.debug`Program ${fg.orange(this.programid)} releasing lock...`;
-			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.programid})}))?.text())==="true");
+			await xu.waitUntil(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/unlock`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify({lockid : this.exclusive})}))?.text())==="true");
 		}
 
 		if(this.mirrorInToCWD)

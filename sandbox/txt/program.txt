@@ -75,6 +75,9 @@ This will be executed DIRECTLY after the program has finished running (either bi
 >>> post = async (runState) => { ... }
 This will be executed after the program has finished running (either bin or exec) and after Program.js has found new output files and renamed them
 
+>>> exclusive = "lockid"
+This will ensure that no two programs with the same lockid ever run at the same time.
+
 >>> renameOut = {
 >>>             name : "hello", ||  (r, originalInput) => "hello"
 >>>            regex : /^.+?(?<num>\.\d{3})?(?<name>\..+)?(?<ext>\..+)$/,

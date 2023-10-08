@@ -7,5 +7,5 @@ export class digiBooster extends Format
 	ext          = [".digi", ".dbm"];
 	magic        = ["DIGIBooster module", "DIGI Booster module", "DIGI Booster Pro Module", "DigiBoosterPro module"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "uade123"];
+	converters   = ["uade123", "xmp", "openmpt123", "zxtune123"];
 }

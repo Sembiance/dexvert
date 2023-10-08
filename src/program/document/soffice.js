@@ -15,7 +15,7 @@ export class soffice extends Program
 	
 	bin        = "soffice";
 	runOptions = ({virtualX : true});
-	exclusive  = true;
+	exclusive  = "soffice";
 	args       = r =>
 	{
 		const args = [];

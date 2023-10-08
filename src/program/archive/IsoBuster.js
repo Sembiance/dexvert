@@ -7,7 +7,7 @@ export class IsoBuster extends Program
 	website   = "https://www.isobuster.com/isobuster.php";
 	loc       = "wine";
 	bin       = "c:\\Program Files\\Smart Projects\\IsoBuster\\IsoBuster.exe";
-	exclusive = true;
+	exclusive = "wine";
 	
 	// IsoBuster command line options: https://www.isobuster.com/help/use_of_command_line_parameters
 	args = r => [`/ef:all:C:\\out${r.wineCounter}`, r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo"];

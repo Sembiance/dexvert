@@ -6,7 +6,7 @@ import {XWorkerPool} from "XWorkerPool";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
-const DEX_WORKER_COUNT = Deno.env.get("DEX_PROD") ? Math.floor(navigator.hardwareConcurrency*0.50) : 4;
+const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.60);
 const LOCKS = new Set();
 
 export class dexrpc extends Server

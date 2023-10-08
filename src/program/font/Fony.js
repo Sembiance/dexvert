@@ -14,14 +14,14 @@ export class Fony extends Program
 				WindowFailure("[TITLE:Error Loading Font]", "", -1, "{ESCAPE}")
 				return WinActive("[CLASS:TFMain]", "")
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*5})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
 
 			SendSlow("!fe{DOWN}{ENTER}")
 
-			$exportWindow = WindowRequire("[CLASS:TFBDFExport; TITLE:BDF Export]", "", 5)
+			$exportWindow = WindowRequire("[CLASS:TFBDFExport; TITLE:BDF Export]", "", 7)
 			ControlClick($exportWindow, "", "[CLASS:TButton; TEXT:OK]")
 
-			$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 5)
+			$saveAsWindow = WindowRequire("[TITLE:Save As]", "", 7)
 			ControlClick($saveAsWindow, "", "[CLASS:Edit]")
 			Send("{HOME}c:\\out\\")
 			ControlClick($saveAsWindow, "", "[CLASS:Button; TEXT:&Save]")

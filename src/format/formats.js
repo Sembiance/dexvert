@@ -146,11 +146,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "i
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Processing ${formatFilePaths.length} format files...`;
 
-	for(const formatFilePath of formatFilePaths)
-		await loadFormatFilePath(formatFilePath);
-
-	await loadUnsupported();
-	await loadSimple();
+	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple()]));
 }
 
 export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
@@ -182,6 +178,5 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" :
 		}
 	};
 
-	if(!Deno.env.get("DEX_PROD"))
-		await fileUtil.monitor(formatDirPath, monitorcb);
+	await fileUtil.monitor(formatDirPath, monitorcb);
 }

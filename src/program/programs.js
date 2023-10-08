@@ -44,8 +44,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "i
 	const programFilePaths = await fileUtil.tree(programDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Processing ${programFilePaths.length} program files...`;
 
-	for(const programFilePath of programFilePaths)
-		await loadProgramFilePath(programFilePath);
+	await Promise.all(programFilePaths.map(loadProgramFilePath));
 }
 
 export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
@@ -71,6 +70,5 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" :
 		}
 	};
 
-	if(!Deno.env.get("DEX_PROD"))
-		await fileUtil.monitor(programDirPath, monitorcb);
+	await fileUtil.monitor(programDirPath, monitorcb);
 }

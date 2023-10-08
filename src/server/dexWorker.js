@@ -13,8 +13,11 @@ const DEX_LONG_DURATION_EXTS = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr", 
 await initPrograms();
 await initFormats();
 
-await monitorFormats();
-await monitorPrograms();
+if(!Deno.env.get("DEX_PROD"))
+{
+	await monitorFormats();
+	await monitorPrograms();
+}
 
 await xwork.openConnection();
 

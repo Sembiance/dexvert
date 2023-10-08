@@ -61,6 +61,8 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		xlog.debug`Running AutoIt3 with script with env: ${autoItRunOptions}...`;
 		await runUtil.run("wine", [`c:\\Program Files${runOptions.env.WINEARCH==="win64" ? " (x86)" : ""}\\AutoIt3\\AutoIt3${runOptions.env.WINEARCH==="win64" ? "_x64" : ""}.exe`, tmpScriptFilePath], autoItRunOptions);
 		xlog.debug`AutoIt3 script finished`;
+
+		await fileUtil.unlink(tmpScriptFilePath);
 	}
 	
 	const r = await cb();

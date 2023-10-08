@@ -170,7 +170,7 @@ const FLEX_SIZE_FORMATS =
 		fractalImageFormat : 7,
 		naplps             : 20,
 		theDrawCOM         : 5,
-		threeDCK           : 10
+		threeDCK           : 20
 	},
 	video :
 	{
@@ -242,6 +242,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
 
 	// Unsupported files that end up getting matched to other stuff
+	[/audio\/aviAudio\/04mwwk00\.avi/, "archive", "riff"],
 	[/audio\/dataShowSound\/.+/i, "text", true],
 	[/document\/hancomWord\/.+/i, "archive", true],
 	[/document\/hotHelpText\/.+\.txt$/i, "text", true],
@@ -254,6 +255,9 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/excelChart\/.+/i, "document", "xls"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
+	[/image\/picturePublisher\/circus0(1|2|7)\.art/, "image", "pfsFirstPublisher"],
+	[/image\/picturePublisher\/circus06 \(1\)\.art/, "image", "pfsFirstPublisher"],
+	[/image\/teletextPackets\/TETRIS\.T42/, "text", "txt"],
 	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/music\/tss\/.+/i, "text", true],
 	[/other\/installShieldHDR\/.+\.hdr/i, "image", "radiance"],
@@ -262,6 +266,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/poly\/vrml\/.+/i, "text", true],
 	[/poly\/ydl\/.+/i, "text", true],
 	[/unsupported\/emacsCompiledLisp\/FILES\.ELC/i, "text", true],
+	[/video\/acornReplayVideo\/(ducks2|bluegreen|parrot)/, "text", true],
 
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
@@ -281,6 +286,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/lostVikingsDAT",
 	"archive/rar",
 	"image/bbcDisplayRAM",
+	"image/printfox",
 	"image/teletext",
 	"music/msxBGM",
 	"music/richardJoseph",
@@ -293,8 +299,10 @@ function getWebLink(filePath)
 	return `file://${Deno.hostname()==="pax" ? path.join("/mnt/pax", path.relative("/mnt", filePath)) : filePath}`.encodeURLPath().escapeHTML();
 }
 
+const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");
+await Deno.mkdir(DEXTEST_ROOT_DIR, {recursive : true});
+
 const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*0.70);
-const DEXTEST_ROOT_DIR = await fileUtil.genTempPath(undefined, "_dextest");
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};
@@ -467,7 +475,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			delete testData[sampleSubFilePath].inputMeta;
 
 		testData[sampleSubFilePath] = result;
-		return await pass(!dexData?.created?.files?.output?.length ? fg.pink(`${xu.c.blink}r`) : fg.green("r"));		// blinking pink 'r' === no files found
+		return await pass(!dexData?.created?.files?.output?.length ? fg.pink("r") : fg.green("r"));		// pink 'r' === no files found
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
@@ -530,7 +538,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 			const allowedFileSizeDiff = Math.max(FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff, allowedSizeDiff);
 			if(sizeDiff!==0 && sizeDiff>allowedFileSizeDiff)
-				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg.yellow(sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}${converterMismatch}`);
+				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg[sizeDiff<5 ? "green" : (sizeDiff>70 ? "red" : "yellow")](sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}${converterMismatch}`);
 
 			if(allowedFileSizeDiff===0 && prevFile.sum!==sum)
 				return await fail(`Created file ${fg.peach(name)} SHA1 sum differs, but file is the expected size.${converterMismatch}`);
@@ -634,7 +642,7 @@ if(failures.length>0)
 
 if(newSuccesses.length>0)
 {
-	const recordNewSuccessesScriptFilePath = await fileUtil.genTempPath(undefined, ".sh");
+	const recordNewSuccessesScriptFilePath = await fileUtil.genTempPath(DEXTEST_ROOT_DIR, ".sh");
 	xlog.info`\n${newSuccesses.length.toLocaleString()} new successes. Execute to record: ${recordNewSuccessesScriptFilePath}`;
 	await fileUtil.writeTextFile(recordNewSuccessesScriptFilePath, `#!/bin/bash
 cd /mnt/compendium/DevLab/dexvert/test || exit
@@ -731,6 +739,11 @@ async function writeOutputHTML()
 			a
 			{
 				border: 0;
+			}
+
+			hr
+			{
+				clear: both;
 			}
 		</style>
 	</head>

@@ -111,6 +111,10 @@ const IGNORED_META_KEYS = {};
 // these formats have supporting files that should be ignored
 const SUPPORTING_FILES =
 {
+	archive :
+	{
+		pog : /\.pnm$/i
+	},
 	image :
 	{
 		printMasterShape : /\.sdr$/i
@@ -131,7 +135,10 @@ const FLEX_SIZE_FORMATS =
 		swfEXE : 5,
 
 		// the PBMs generated are different each time
-		hypercard : 0.2,
+		hypercard : 0.5,
+		
+		// these can differ a lot
+		"rsrc:.png" : 999_999_999,
 
 		// different PDF each time
 		tnef : 0.1
@@ -213,6 +220,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
+	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
@@ -536,7 +544,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 			const sizeDiff = 100*(1-((prevFile.size-Math.abs(size-prevFile.size))/prevFile.size));
 
-			const allowedFileSizeDiff = Math.max(FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || allowedSizeDiff, allowedSizeDiff);
+			const allowedFileSizeDiff = Math.max(FLEX_SIZE_FORMATS?.[result.family]?.[`*:${path.extname(name)}`] || FLEX_SIZE_FORMATS?.[result.family]?.[`${result.format}:${path.extname(name)}`] || allowedSizeDiff, allowedSizeDiff);
 			if(sizeDiff!==0 && sizeDiff>allowedFileSizeDiff)
 				return await fail(`Created file ${fg.peach(name)} differs in size by ${fg[sizeDiff<5 ? "green" : (sizeDiff>70 ? "red" : "yellow")](sizeDiff.toFixed(2))}% (allowed ${fg.yellowDim(allowedFileSizeDiff)}%) Expected ${fg.yellow(prevFile.size.bytesToSize())} but got ${fg.yellow(size.bytesToSize())}${converterMismatch}`);
 

@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Server} from "../Server.js";
 import {path} from "std";
+import {fileUtil} from "xutil";
 import {WebServer} from "WebServer";
 import {XWorkerPool} from "XWorkerPool";
 import {init as initPrograms} from "../program/programs.js";
@@ -19,6 +20,7 @@ export class dexrpc extends Server
 
 		// we do this once here, because we will be starting like 20+ workers at once and if we don't prime the deno cache here first, the workers get a lot of contention and it's super slow
 		this.xlog.info`Priming deno cache for programs and formats...`;
+		await fileUtil.unlink("/mnt/compendium/.deno/dep_analysis_cache_v1");
 		await initPrograms();
 		await initFormats();
 

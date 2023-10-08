@@ -54,7 +54,7 @@ export class wine extends Server
 
 			this.wineBaseEnv[wineBase] = {DISPLAY : (runOpts.env.DISPLAY || `:${xvfbPort}`), WINEPREFIX : runOpts.env.WINEPREFIX};
 
-			this.xlog.info`Wineserver ${fg.orange(wineBase)} started${runOpts.virtualXVNCPort ? ` (VNC Port: ${virtualXVNCPort})` : ""}`;
+			this.xlog.info`Wineserver ${fg.orange(wineBase)} started (DISPLAY : ${this.wineBaseEnv[wineBase].DISPLAY})${runOpts.virtualXVNCPort ? ` (VNC Port: ${virtualXVNCPort})` : ""}`;
 		}
 
 		// Despite looking at the source code for wineserver, I couldn't find a definitive good way to determine that wineserver is 'fully loaded' and ready to go, so just sleep

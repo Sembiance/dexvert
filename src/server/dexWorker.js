@@ -21,7 +21,7 @@ if(!Deno.env.get("DEX_PROD"))
 
 await xwork.openConnection();
 
-await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, dexverOptions={}}) =>
+await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, dexvertOptions={}}) =>
 {
 	const logLines = [];
 	const xlogOptions = {};
@@ -40,7 +40,7 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 		tooLongTimer = setTimeout(async () =>
 		{
 			tooLongTimer = null;
-			await xwork.send({rpcid, logLines, err : `${op} Took too long to process and was aborted.`});
+			await xwork.send({rpcid, logLines, err : `${op} Took too long to process and was aborted for inputFilePath ${inputFilePath} and outputDirPath ${outputDirPath}`});
 			xwork.recvAbort();
 		}, DEX_MAX_DURATION*(DEX_LONG_DURATION_EXTS.some(ext => inputFilePath.toLowerCase().endsWith(ext)) ? 2 : 1));	// for some extensions (like macromedia directory, allow a much longer duration timeframe)
 
@@ -51,7 +51,7 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 		}
 		else if(op==="dexvert")
 		{
-			const dexState = await dexvert(twigDiskFile, await DexFile.create(outputDirPath), {xlog, ...dexverOptions});
+			const dexState = await dexvert(twigDiskFile, await DexFile.create(outputDirPath), {xlog, ...dexvertOptions});
 			if(dexState)
 				r = {json : dexState.serialize(), pretty : dexState.pretty()};
 		}

@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {cmdUtil, fileUtil, runUtil, encodeUtil} from "xutil";
 import {path, dateParse} from "std";
+import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -12,6 +13,7 @@ const argv = cmdUtil.cmdInit({
 		hfs         : {desc : "If set, CD will be treated as HFS MAC cd"},
 		hfsplus     : {desc : "If set, CD will be treated as HFS+ MAC cd"},
 		nextstep    : {desc : "If set, CD will be treated as NeXTSTEP cd"},
+		logLevel    : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "warn"},
 		ts          : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
 		macEncoding : {desc : "Specify the Mac encoding to decode HFS filenames. Valid: roman | japan", hasValue : true, defaultValue : "roman"},
 		checkMount  : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
@@ -22,6 +24,8 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory to extract to", required : true}
 	]});
 
+const xlog = new XLog(argv.logLevel);
+
 const IN_FILE_PATH = path.resolve(argv.inputFilePath);
 const OUT_DIR_PATH = path.resolve(argv.outputDirPath);
 
@@ -30,6 +34,8 @@ await Deno.mkdir(MOUNT_DIR_PATH);
 
 async function extractNormalISO()
 {
+	xlog.info`Extracting ISO as Normal ISO...`;
+		
 	const mountArgs = [];
 	if(argv.offset || argv.block)
 		mountArgs.push("-o", `loop${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
@@ -38,20 +44,24 @@ async function extractNormalISO()
 	if(argv.hfsplus)
 		mountArgs.push("-t", "hfsplus");
 
-	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH]);
+	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH], {liveOutput : xlog.atLeast("debug")});
 
 	const {stdout : mountStatus} = await runUtil.run("sudo", ["findmnt", "--output", "FSTYPE", "--noheadings", MOUNT_DIR_PATH]);
 
 	// Sometimes an ISO's ISO9660 side is corrupt and fails to mount, then mount falls back automatically to the hfs section if there is one
 	// But we don't want to use mount's built in HFS support, we explicitly handle HFS vs non HFS at a higher level, so we abort the mission here
 	if(mountStatus.trim().toLowerCase().startsWith("hfs") && !argv.hfs && !argv.hfsplus)
+	{
+		xlog.warn`ISO failed to mount: ${mountStatus.trim()}`;
 		return await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
+	}
 
 	if(argv.checkMount)
 	{
 		const {stderr} = await runUtil.run("ls", ["-R", MOUNT_DIR_PATH], {timeout : xu.SECOND*20});
 		if(stderr.toLowerCase().includes("input/output error"))
 		{
+			xlog.warn`ISO has input/output errors: ${stderr}`;
 			await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
 			return;
 		}
@@ -59,7 +69,7 @@ async function extractNormalISO()
 
 	// ALERT! In node, we used to use cp instead of rsync, but I couldn't get the shell /bin/bash thing to work right with cp and sudo under Deno. So I use rsync instead, we'll see if that chokes on certain filenames or not
 	//runUtil.run("sudo", ["cp", "--sparse=never", "--preserve=timestamps", "-r", "*", `"${OUT_DIR_PATH}/"`], {...RUN_OPTIONS, shell : "/bin/bash", cwd : MOUNT_DIR_PATH}, this);
-	await runUtil.run("sudo", ["rsync", "-sa", `${MOUNT_DIR_PATH}/`, `${OUT_DIR_PATH}/`]);
+	await runUtil.run("sudo", ["rsync", "-sa", `${MOUNT_DIR_PATH}/`, `${OUT_DIR_PATH}/`], {liveOutput : xlog.atLeast("debug")});
 
 	await runUtil.run("sudo", ["umount", MOUNT_DIR_PATH]);
 }
@@ -73,6 +83,8 @@ const HFS_RUN_OPTIONS = {env : {"HOME" : MOUNT_DIR_PATH}};
 
 async function extractHFSISO()
 {
+	xlog.info`Extracting ISO as HFS...`;
+
 	const metadata = {fileMeta : {}};
 	const filenameDecodeOpts = {processors : encodeUtil.macintoshProcessors.octal, region : argv.macEncoding};
 	let volumeYear=null;
@@ -90,6 +102,12 @@ async function extractHFSISO()
 		const entries = entriesRaw.split("\n").filter(v => !!v).map(entryRaw => (entryRaw.match(hlsRegex) || {})?.groups);
 		for(const entry of entries)
 		{
+			if(!entry?.type)
+			{
+				const {stdout : curpwdi} = await runUtil.run("hpwdi", [], HFS_RUN_OPTIONS);
+				Deno.exit(xlog.error`Failed to get directory entry for curpwdi ${curpwdi.trim()} and subPath ${subPath} and entry ${entry} with entriesRaw: ${entriesRaw}`);
+			}
+
 			if(entry.type==="d")
 				continue;
 			

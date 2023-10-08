@@ -58,11 +58,10 @@ export class dirOpener extends Program
 			; Now click Open and being
 			MouseClick("left", 255, 440)
 
-			WinWaitActive("[TITLE:Select file(s) to open]", "", 10)
-
+			$openWindow = WindowRequire("[TITLE:Select file(s) to open]", "", 10)
 			Sleep(200)
-			Send("c:\\in\\${path.basename(r.inFile())}{ENTER}")
-			Sleep(200)
+			SendSlow("c:\\in\\${path.basename(r.inFile())}{ENTER}")
+			WinWaitClose($openWindow, "", 10)
 
 			; Some are missing files and ask "Where is" something
 			; Some times errors show up about scripts or other director errors

@@ -51,7 +51,7 @@ export class macromediaDirector extends Program
 				WindowDismiss("Director Player Error", "", "{ENTER}")
 				WindowDismiss("Missing Fonts", "", "{ENTER}")
 			EndFunc
-			CallUntil("DismissWarnings", ${xu.SECOND*3})
+			CallUntil("DismissWarnings", ${xu.SECOND*10})
 
 			${r.inFile().toLowerCase().endsWith(".dir") ? `
 			SendSlow("^4^4")

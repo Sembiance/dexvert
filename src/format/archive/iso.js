@@ -8,6 +8,7 @@ import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_COMPACT_PRO_MAGIC} from "./compactPro.js";
 import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
+import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
 const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image"];
 
@@ -164,10 +165,11 @@ export class iso extends Format
 					if(dexState.original.input.ext.toLowerCase()===".iso")
 						r.push("unar[matchType:magic]"); 	// Magazine Rack.iso can only being extracted with unar, weird
 
-					r.push(
-						"deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]",
-						"IsoBuster[matchType:magic]"
-					);
+					r.push("deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]");
+
+					// IsoBuster outputs crappy :AFP_Reource/:AFP_AfpInfo suffixes for all filenames for Apple images, so don't ever use it for those. Might be a way to disable this, but meh, prefer my own hfsutils method
+					if(!dexState.hasMagics(HFS_MAGICS) && !dexState.hasMagics(_APPLE_DISK_COPY_MAGIC))
+						r.push("IsoBuster[matchType:magic]");
 				}
 
 				if(!dexState.hasMagics(_COMPACT_PRO_MAGIC))	// don't include cabextract if Compact Pro is detected (sample/archive/compactPro/King.img.bin) due to unar needing to be the proper extractor

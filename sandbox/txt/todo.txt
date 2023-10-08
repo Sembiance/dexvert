@@ -1,7 +1,38 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* I now have a package for grok which decodes JPEG2000 images: https://github.com/GrokImageCompression/grok/wiki/2.-grk_decompress
+* Re-code testMany.js allowing --format=all
+  Have it create 1 testMany directory and write reports to that directory per family
+  So you could do --format=image/pcx --format=audio/aif and end up with a image.html and an audio.html
+  It should also make an 'summary.html' that summarizes all and also has a per family link to the report
+  This allows all formats to be shuffled so really long ones just blend in with others
+  Test at first with just a couple of different --format flags, then try two families --format=text --format=poly
+  Finally run `testMany.js --format=all` and see how it does!
+
+* See what sort of files in bin/ util/ src/ etc should be moved to sandbox/legacy or should be kept and ensure they work
+
+* Macromedia Director is prone to not properly extracting all cast members due to various issues/glitches.
+  Code my own Director extractor, basing it on the SCUMMVM code:
+	https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
+	https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
+	https://github.com/scummvm/scummvm/tree/master/engines/director
+  Can also examine how drxtract handles parsing/converting certain cast formats:
+	https://github.com/System25/drxtract
+
+* Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
+  Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way
+
+* Go through the entire list of 'Awave Studio' formats in program_formats.txt and add support for them all to dexvert
+  This is because I upgraded from 7.0 to 8.8
+
+* Seek out new programs I could support now that I have wine and vamos working. This includes .NET and Vista/Win7 programs
+  - Search the dexvert code for any 'TODO' comments
+  - Browse the list of unsupported formats: https://github.com/Sembiance/dexvert/blob/master/UNSUPPORTED.md
+    Search aminet for vamos https://aminet.net/
+  - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos
+  - Go through every 'notes' field on every format and program and see what I can add support for or further strengthen
+
+* I now have a gentoo package for grok which decodes JPEG2000 images: https://github.com/GrokImageCompression/grok/wiki/2.-grk_decompress
   So create a program for it and add it to jpeg2000 format
 
 * Test abydosconvert with JPEG XL images
@@ -28,7 +59,9 @@ SCO Compress LZH (Unix)
 
 * Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926   (diff formats.txt? https://github.com/jsummers/deark)
 
-* drxtract updated from 2021-08-07 to 2023-08-16
+* Now that I'm not using QEMU, maybe I can get certain formats working:
+ greenstreetPublisher
+ zbr
 
 * PeaZip supports lie 234 formats but I'm only using it for 1. Look to extend that support: https://github.com/peazip/PeaZip
 
@@ -43,24 +76,17 @@ If you `hcdi 2403` and then do `hls -albi` you will see messed up entry for Musi
 This is because the creator code is 'KS2\r' instead of 'KS2 ' and the carriage return screws up the output causing uniso.js to fail
 I can add code to hfsutils in show_long() in hls.c that will write a char safeCreator[5]; and safeType[5] char by char and only copying over printable ASCII values otherwise specifying '?' and then using that below for both the type and creator
 
+* I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
+  It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos
+
 * Ensure all the files from these CDs convert properly:
 iso/Digital Magazine for Photography - Gallery
 iso/Sexual Girls in Magical World
 iso/Natsu Nice Gal Summary '94
 iso/Love Bytes
 
-* I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
-  It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos
-
-* Upload all packages in dexvert to latest versions
-
 * Look into adopting KeyView Pro as more conversion software. See: https://archive.org/details/KeyViewPro
 
-* Now that I'm not using QEMU, maybe I can get certain formats working:
- greenstreetPublisher
- zbr
-
-* Look at the various 'notes' fields in all the formats to see if additional/improved support can be added
 
 
 /---------------\

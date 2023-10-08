@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {RUNTIME} from "../../Program.js";
 
 export class zip extends Format
 {
@@ -7,7 +8,20 @@ export class zip extends Format
 	ext            = [".zip", ".exe"];
 	magic          = ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^x-fmt\/263( |$)/];
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
-	converters     = ["sevenZip", "unzip", "deark", "deark[opt:zip:scanmode]", "unar", "sqc", "izArc"];
+	converters   = () =>
+	{
+		const r = ["sevenZip", "unzip", "deark", "deark[opt:zip:scanmode]", "unar", "sqc", "izArc"];
+		
+		// If we are macintoshjp, unar works best
+		if(RUNTIME.globalFlags?.osHint?.macintoshjp)
+		{
+			r.removeOnce("unar");
+			r.unshift("unar");
+		}
+
+		return r;
+	};
+
 	metaProvider   = ["zipInfo"];
 	untouched      = dexState => dexState.hasMagics("Zip archive data (empty)");
 	processed      = dexState =>

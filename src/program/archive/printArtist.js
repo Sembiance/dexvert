@@ -13,8 +13,9 @@ export class printArtist extends Program
 			#include <GuiListBox.au3>
 			
 			$mainWindow = WindowRequire("Print Artist", "", 15)
+			Sleep(5000)
 
-			Send("{ESCAPE}^n")
+			SendSlow("{ESCAPE}{ESCAPE}^n")
 			$newWindow = WindowRequire("Select New Scrapbook", "", 5)
 			Send("{HOME}{ENTER}")
 			WinWaitClose($newWindow, "", 3)

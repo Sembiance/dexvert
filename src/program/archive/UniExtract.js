@@ -26,17 +26,18 @@ export class UniExtract extends Program
 			
 			Func PostExtractWindows()
 				WindowDismiss("Universal Extractor", "could not be extracted", "{ESCAPE}")
+
+				$decisionWindow = WinActive("Universal Extractor")
+				If $decisionWindow Then
+					${r.flags.type ? `ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:${r.flags.type}]")` : ""}
+					ControlClick($decisionWindow, "", "[CLASS:Button; TEXT:&OK]")
+					WinWaitClose($decisionWindow, "", 5)
+				EndIf
 			EndFunc
 			CallUntil("PostExtractWindows", ${xu.SECOND*5})
 
-			; This is older code, which may still be needed. May need to stick it into PostExtractWindows above
-			;Local $decisionWindow = WinWaitActive("Universal Extractor", "", 5)
-			;If $decisionWindow Then
-			;	${r.flags.type ? `ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:${r.flags.type}]")` : ""}
-			;	ControlClick("Universal Extractor", "", "[CLASS:Button; TEXT:&OK]")
-			;EndIf
-
-			ProcessWaitClose("UniExtract.exe", 5)`
+			; Need to wait for files to finish being extracted (archive/installShieldCAB/data1.hdr)
+			ProcessWaitClose("UniExtract.exe", 300)`
 	});
 	checkForDups = true;
 	renameOut    = false;

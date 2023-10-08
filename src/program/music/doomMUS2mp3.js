@@ -9,7 +9,7 @@ export class doomMUS2mp3 extends Program
 	loc       = "wine";
 	bin       = "c:\\dexvert\\slade\\SLADE.exe";
 	exclusive = "wine";
-	notes     = "This is very flaky. Always has been. SLADE is open source and runs on Linux, so in theory with some work I could build a CLI to convert the .mus to .mid more reliably."
+	notes     = "This is very flaky. Always has been. SLADE is open source and runs on Linux, so in theory with some work I could build a CLI to convert the .mus to .mid more reliably.";
 	args      = async r =>
 	{
 		// SLADE needs the file in a ZIP file

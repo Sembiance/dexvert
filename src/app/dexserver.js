@@ -19,7 +19,7 @@ const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
-const SERVER_ORDER = ["siegfried", "os", "wine", "classify", "dexrpc"];
+const SERVER_ORDER = ["dexrpc", "siegfried", "os", "wine", "classify"];
 
 const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(xu.dirname(import.meta), `../server/${serverid}.js`)))[serverid].create(xlog)]));
 
@@ -78,8 +78,10 @@ async function startServer(serverid)
 	xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
 }
 
+// We can't do them all at once because os/86Box is sensitive to CPU fluctuations and they won't boot properly if too much other CPU stuff is going on
 xlog.info`Starting ${Object.keys(servers).length} servers...`;
-await Promise.all(SERVER_ORDER.map(startServer));
+for(const serverid of SERVER_ORDER)
+	await startServer(serverid);
 
 await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;

@@ -3,6 +3,8 @@ import {Server} from "../Server.js";
 import {path} from "std";
 import {WebServer} from "WebServer";
 import {XWorkerPool} from "XWorkerPool";
+import {init as initPrograms} from "../program/programs.js";
+import {init as initFormats} from "../format/formats.js";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
@@ -14,6 +16,11 @@ export class dexrpc extends Server
 	async start()
 	{
 		this.xlog.info`Starting dexrpc server...`;
+
+		// we do this once here, because we will be starting like 20+ workers at once and if we don't prime the deno cache here first, the workers get a lot of contention and it's super slow
+		this.xlog.info`Priming deno cache for programs and formats...`;
+		await initPrograms();
+		await initFormats();
 
 		this.xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
 		this.pool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});

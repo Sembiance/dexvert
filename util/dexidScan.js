@@ -3,8 +3,12 @@ import {XLog} from "xlog";
 import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {path} from "std";
 import {identify} from "../src/identify.js";
+import {init as initFormats} from "../src/format/formats.js";
+import {init as initPrograms} from "../src/program/programs.js";
 
 const xlog = new XLog();
+await initPrograms(xlog);
+await initFormats(xlog);
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",

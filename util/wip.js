@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {runUtil, fileUtil, printUtil, encodeUtil} from "xutil";
+import {runUtil, fileUtil, printUtil, encodeUtil, cmdUtil} from "xutil";
 import {path, delay, base64Encode} from "std";
 import {Program} from "../src/Program.js";
 import {formats, init as initFormats} from "../src/format/formats.js";
@@ -9,7 +9,8 @@ import {DexFile} from "../src/DexFile.js";
 import {FileSet} from "../src/FileSet.js";
 import {getDetections} from "../src/Detection.js";
 import {programs, init as initPrograms} from "../src/program/programs.js";
+import {UInt8ArrayReader} from "UInt8ArrayReader";
 
 const xlog = new XLog("info");
-await initPrograms(xlog);
-await initFormats(xlog);
+//await initPrograms(xlog);
+//await initFormats(xlog);

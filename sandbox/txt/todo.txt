@@ -9,15 +9,12 @@
   Test at first with just a couple of different --format flags, then try two families --format=text --format=poly
   Finally run `testMany.js --format=all` and see how it does!
 
-* See what sort of files in bin/ util/ src/ etc should be moved to sandbox/legacy or should be kept and ensure they work
-
 * Macromedia Director is prone to not properly extracting all cast members due to various issues/glitches.
-  Code my own Director extractor, basing it on the SCUMMVM code:
+  Code my own Director extractor, basing it on the SCUMMVM code.
+  There is a LOT of code there, so best to try and compile against the SCUMMVM code directly what is needed to extract all resources:
 	https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
 	https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
 	https://github.com/scummvm/scummvm/tree/master/engines/director
-  Can also examine how drxtract handles parsing/converting certain cast formats:
-	https://github.com/System25/drxtract
 
 * Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
   Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way

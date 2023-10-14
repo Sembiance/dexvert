@@ -42,12 +42,6 @@
   - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos
   - Go through every 'notes' field on every format and program and see what I can add support for or further strengthen
 
-* I now have a gentoo package for grok which decodes JPEG2000 images: https://github.com/GrokImageCompression/grok/wiki/2.-grk_decompress
-  So create a program for it and add it to jpeg2000 format
-
-* Test abydosconvert with JPEG XL images
-  Also I added grok support, so test it with JPEG2000 images
-
 * New recoil formats (maybe can find examples on sourceforge issues/mailing list?):
 MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
 Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1

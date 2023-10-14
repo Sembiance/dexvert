@@ -1,18 +1,23 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
-  Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way
+* Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
+  'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
-* Go through the entire list of 'Awave Studio' formats in program_formats.txt and add support for them all to dexvert
-  This is because I upgraded from 7.0 to 8.8
+* Go through dos/amiga/win2k/winxp/wine programs and see which ones still get regular updates and add to info.txt
+  Add a every 6 months or every year task to look at this list and update programs that have new updates
 
-* Seek out new programs I could support now that I have wine and vamos working. This includes .NET and Vista/Win7 programs
-  - Search the dexvert code for any 'TODO' comments
-  - Browse the list of unsupported formats: https://github.com/Sembiance/dexvert/blob/master/UNSUPPORTED.md
-    Search aminet for vamos https://aminet.net/
-  - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos
-  - Go through every 'notes' field on every format and program and see what I can add support for or further strengthen
+* There is a bug in DebLab/app/uniso.js --hfs --macEncoding=japan MACUSER-MACBIN40A-1997-03.ISO out
+From this ISO:
+http://discmaster.textfiles.com/browse/10406
+https://archive.org/details/macuser-macbin40-1997-03
+If you `hcdi 2403` and then do `hls -albi` you will see messed up entry for Music.DAT.1
+This is because the creator code is 'KS2\r' instead of 'KS2 ' and the carriage return screws up the output causing uniso.js to fail
+I can add code to hfsutils in show_long() in hls.c that will write a char safeCreator[5]; and safeType[5] char by char and only copying over printable ASCII values otherwise specifying '?' and then using that below for both the type and creator
+
+* Improve recombining of PICT images in deark, some are not doing it properly:
+  Start with:  • Figure 5 Window in List Mode.pict
+  Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
 
 * New recoil formats (maybe can find examples on sourceforge issues/mailing list?):
 MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
@@ -35,25 +40,27 @@ SCO Compress LZH (Unix)
 
 * Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926   (diff formats.txt? https://github.com/jsummers/deark)
 
-* Now that I'm not using QEMU, maybe I can get certain formats working:
- greenstreetPublisher
- zbr
+* Go through the entire list of 'Awave Studio' formats in program_formats.txt and add support for them all to dexvert
+  This is because I upgraded from 7.0 to 8.8
 
 * PeaZip supports lie 234 formats but I'm only using it for 1. Look to extend that support: https://github.com/peazip/PeaZip
 
-* Remove the temporary symlink /usr/lib64/libtiff.so.5 (from dexvert)
-  Re-do the environment for bin/zztScreenshotter as it currently links to libtiff.so.5 which isn't installed
-
-* There is a bug in DebLab/app/uniso.js --hfs --macEncoding=japan MACUSER-MACBIN40A-1997-03.ISO out
-From this ISO:
-http://discmaster.textfiles.com/browse/10406
-https://archive.org/details/macuser-macbin40-1997-03
-If you `hcdi 2403` and then do `hls -albi` you will see messed up entry for Music.DAT.1
-This is because the creator code is 'KS2\r' instead of 'KS2 ' and the carriage return screws up the output causing uniso.js to fail
-I can add code to hfsutils in show_long() in hls.c that will write a char safeCreator[5]; and safeType[5] char by char and only copying over printable ASCII values otherwise specifying '?' and then using that below for both the type and creator
-
 * I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
   It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos
+
+* Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
+  Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way
+
+* Seek out new programs I could support now that I have wine and vamos working. This includes .NET and Vista/Win7 programs
+  - Search the dexvert code for any 'TODO' comments
+  - Browse the list of unsupported formats: https://github.com/Sembiance/dexvert/blob/master/UNSUPPORTED.md
+    Search aminet for vamos https://aminet.net/
+  - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos
+  - Go through every 'notes' field on every format and program and see what I can add support for or further strengthen
+
+* Now that I'm not using QEMU, maybe I can get certain formats working:
+ greenstreetPublisher
+ zbr
 
 * Ensure all the files from these CDs convert properly:
 iso/Digital Magazine for Photography - Gallery
@@ -62,7 +69,6 @@ iso/Natsu Nice Gal Summary '94
 iso/Love Bytes
 
 * Look into adopting KeyView Pro as more conversion software. See: https://archive.org/details/KeyViewPro
-
 
 
 /---------------\
@@ -104,10 +110,6 @@ iso/Love Bytes
   Afterwards, reprocess #10348 and potentially other Mac CDs
 
 * Consider adding 'Detect-It-Easy' as an identifier: https://github.com/horsicq/Detect-It-Easy
-
-* Improve recombining of PICT images in deark, some are not doing it properly:
-  Start with:  • Figure 5 Window in List Mode.pict
-  Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
 
 * Add 3D/Poly support. Can convert everything to GLTF/GLB format and use this viewer on the website: https://modelviewer.dev/
   Or use X3D instead?  https://cadexchanger.com/blog/3d-formats-overview-vrml-and-x3d/

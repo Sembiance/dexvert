@@ -11,6 +11,5 @@ export class zztScreenshotter extends Program
 	unsafe     = true;
 	args       = r => [path.join(progBasePath, "zztScreenshotter.py"), r.inFile(), r.outDir()];
 	runOptions = {env : {VIRTUAL_ENV : path.join(progBasePath, "env")}};
-	notes      = "If this fails to run due to missing libtiff, run as root: cd /usr/lib64 && ln -s libtiff.so.6.0.2 libtiff.so.5";
 	renameOut  = false;
 }

@@ -1,9 +1,14 @@
-/-------\
-| Other |
-\-------/
-Future amiga VNC control: http://s.guillard.free.fr/AmiVNC/AmiVNC.htm
+/---------------------------\
+| App Updates (Non-Portage) |
+\---------------------------/
+App								Last Update		URL
+---								-----------		---
+bin/zztScreenshotter			2020-03-17		https://github.com/DrDos0016/zookeeper
+bin/activemime-format			2019-05-20		https://github.com/idiom/activemime-format
+bin/amiga-bitmap-font-tools		2023-02-03		https://github.com/smugpie/amiga-bitmap-font-tools
+bin/soundFont2tomid				2023-10-07		https://github.com/grimmdude/MidiWriterJS
 
-Windows Updates for Win 2k/Win xp: https://legacyupdate.net/
+
 
 /------------------------------------\
 | Other Converters (see formats.txt) |

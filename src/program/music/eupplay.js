@@ -6,7 +6,7 @@ export class eupplay extends Program
 	package    = "media-sound/eupmini";
 	unsafe     = true;
 	bin        = "eupplay";
-	args       = async r => ["-o", await r.outFile("out.wav"), r.inFile()];
+	args       = async r => ["-d", "1", "-o", await r.outFile("out.wav"), r.inFile()];
 	runOptions = ({env : {SDL_AUDIODRIVER : "disk"}});
 	renameOut  = true;
 	chain      = "sox";

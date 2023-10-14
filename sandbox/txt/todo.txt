@@ -10,11 +10,25 @@
   Finally run `testMany.js --format=all` and see how it does!
 
 * Macromedia Director is prone to not properly extracting all cast members due to various issues/glitches.
-  Code my own Director extractor, basing it on the SCUMMVM code.
-  There is a LOT of code there, so best to try and compile against the SCUMMVM code directly what is needed to extract all resources:
-	https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
-	https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
-	https://github.com/scummvm/scummvm/tree/master/engines/director
+  I should wait for some of the options below to become more "mature" and "available" before proceeding with this task.
+  First, remove protection from Director & Cast files, instead of using DirOpener and recover_cct
+  	https://github.com/ProjectorRays/ProjectorRays runs under linux and says it can do the job
+  Second, need to extract resources more reliably.
+    Option #1: dirry: https://github.com/markhughes/dirry
+	  It didn't work on a test file, but it's VERY new only coming out a few days ago and it's FAQ mentions it's got problems
+	Option #2: drxtract: https://github.com/System25/drxtract
+	  It seems to work, but the code is a bit flimsy and it likely doesn't have deep support for various bitmap formats, etc
+	Option #3: SCUMMVM code: https://github.com/scummvm/scummvm/tree/master/engines/director
+	  SCUMMVM has really good support for the various formats, but not CLI extraction tool
+	  So I'd have to write some C++ code that leverages the code from SCUMMVM to extract & convert the resources
+	  This may be a significant amount of work as the code is designed to work 'within SCUMMVM' and may needs LOTS of massaging
+	  https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
+	  https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
+	Option #4: nosamu's Cast Ripper: https://vinizinho.net/projects/shockwave-rip
+	  An XTra/plugin for Director that allows you to extract resources from within Director.
+	  The author mentioned on Discord that an updated version that works via command line may be "in the works"
+	Option #5: tomysshadow extractor: https://github.com/tomysshadow
+	  Was told that tomysshadow is also working on an extractor too, with potential additional Xtras support
 
 * Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
   Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way

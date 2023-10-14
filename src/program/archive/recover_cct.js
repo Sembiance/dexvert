@@ -43,6 +43,4 @@ export class recover_cct extends Program
 
 	// We rename the file dexvert to ensure we don't collide with an existing filename, seems to fix some problems with 'find by.Dir' sample
 	renameOut = {name : "dexvert"};
-	chain     = "macromediaDirector";
 }
-

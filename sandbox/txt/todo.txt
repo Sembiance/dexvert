@@ -11,24 +11,23 @@
 
 * Macromedia Director is prone to not properly extracting all cast members due to various issues/glitches.
   I should wait for some of the options below to become more "mature" and "available" before proceeding with this task.
-  First, remove protection from Director & Cast files, instead of using DirOpener and recover_cct
-  	https://github.com/ProjectorRays/ProjectorRays runs under linux and says it can do the job
-  Second, need to extract resources more reliably.
-    Option #1: dirry: https://github.com/markhughes/dirry
-	  It didn't work on a test file, but it's VERY new only coming out a few days ago and it's FAQ mentions it's got problems
-	Option #2: drxtract: https://github.com/System25/drxtract
-	  It seems to work, but the code is a bit flimsy and it likely doesn't have deep support for various bitmap formats, etc
-	Option #3: SCUMMVM code: https://github.com/scummvm/scummvm/tree/master/engines/director
-	  SCUMMVM has really good support for the various formats, but not CLI extraction tool
-	  So I'd have to write some C++ code that leverages the code from SCUMMVM to extract & convert the resources
-	  This may be a significant amount of work as the code is designed to work 'within SCUMMVM' and may needs LOTS of massaging
-	  https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
-	  https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
-	Option #4: nosamu's Cast Ripper: https://vinizinho.net/projects/shockwave-rip
-	  An XTra/plugin for Director that allows you to extract resources from within Director.
-	  The author mentioned on Discord that an updated version that works via command line may be "in the works"
-	Option #5: tomysshadow extractor: https://github.com/tomysshadow
-	  Was told that tomysshadow is also working on an extractor too, with potential additional Xtras support
+  Option #1: dirry: https://github.com/markhughes/dirry
+	It didn't work on a test file, but it's VERY new only coming out a few days ago and it's FAQ mentions it's got problems
+	Says it supports EXE files too, so that would be great and may need to be added to 'exe.js' format if I can't detect these
+  Option #2: drxtract: https://github.com/System25/drxtract
+	It seems to work, but the code is a bit flimsy and it likely doesn't have deep support for various bitmap formats, etc
+  Option #3: SCUMMVM code: https://github.com/scummvm/scummvm/tree/master/engines/director
+	SCUMMVM has really good support for the various formats, but not CLI extraction tool
+	It even supports EXE files too, so that would be great, it may need to be added to 'exe.js' format if I can't detect these
+	So I'd have to write some C++ code that leverages the code from SCUMMVM to extract & convert the resources
+	This may be a significant amount of work as the code is designed to work 'within SCUMMVM' and may needs LOTS of massaging
+	https://github.com/scummvm/scummvm/blob/master/engines/director/resource.cpp
+	https://github.com/scummvm/scummvm/blob/master/engines/director/archive.cpp
+  Option #4: nosamu's Cast Ripper: https://vinizinho.net/projects/shockwave-rip
+	An XTra/plugin for Director that allows you to extract resources from within Director.
+	The author mentioned on Discord that an updated version that works via command line may be "in the works"
+  Option #5: tomysshadow extractor: https://github.com/tomysshadow
+	Was told that tomysshadow is also working on an extractor too, with potential additional Xtras support
 
 * Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
   Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way
@@ -117,7 +116,6 @@ iso/Love Bytes
   	http://discmaster.textfiles.com/view/9351/MACPEOPLE-1997-04-15.ISO.7z/MACPEOPLE-1997-04-15.ISO/%E4%BD%93%E9%A8%93%E7%89%88%E3%82%BD%E3%83%95%E3%83%88/The%20Tower%20DEMO%E2%86%B5%E2%86%B5/The%20Tower%20DEMO/The%20Tower%20DEMO
   Also see if I can do some of the director 3 mac files? https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
   Afterwards, reprocess #10348 and potentially other Mac CDs
-  This might help processing Director 5 files, maybe it can make them editable in new director: https://github.com/ProjectorRays/ProjectorRays
 
 * Consider adding 'Detect-It-Easy' as an identifier: https://github.com/horsicq/Detect-It-Easy
 
@@ -203,8 +201,6 @@ iso/Love Bytes
 
 * See if I can extract and of the compression I encountered in sandbox/unknownCompression (maybe try: https://www.sac.sk/files.php?d=7&l=)
   Any I add, will need to do a search of unknown files HTML to find that magic
-
-* Add this as an additional decrypter for Macromedia shockwave files, potentially as the first decrypter: https://github.com/ProjectorRays/ProjectorRays
 
 * See if I could handle extraction of TEXT data better from certain director files:
   http://discmaster.textfiles.com/view/4274/CD-Rom%20now%20n.21.iso/director/stones.dir/00025_Field_25.txt

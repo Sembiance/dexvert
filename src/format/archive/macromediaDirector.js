@@ -16,19 +16,19 @@ export class macromediaDirector extends Format
 	};
 	notes      = "While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js";
 	converters = [
-		// We always start out with passing it to dirOpener
-		// For 'protected' formats like DXR/CXT it will unprotect it
-		// Other files that are really old are updated to a version that the MX 2004 will actually open
-		// It handles both
-		// If it doesn't need to do anything, it ends up producing an identical output file, which it keeps with allowDupOut = true
-		// dirOpener will automatically chain it's result to macromediaDirector
-		"dirOpener",
+		// Often the Director/Cast file will be protected/encrypted
 
-		// Some .cct files (T4.cct) can be converted to un-proceted .cst files and then opened
-		"recover_cct",
+		// projectorRays is the most optimal un-protector
+		"projectorRays -> macromediaDirector",
+		
+		// some files though are old versions like jigsaw.dcr and dirOpener under windows not only un-protects but will also update it to the latest version allowing them to be opened in Director MX 2004
+		"dirOpener -> macromediaDirector",
 
-		// Sometimes dirOpener fails to produce an output file (pbc99.dxr)
-		// So we just try directly with macromediaDirector, which as an Xtra installed that allows opening protected formats: https://github.com/tomysshadow/Movie-Restorer-Xtra
+		// Some .cct files (T4.cct) can be un-proceted to cast .cst files that can then be opened
+		"recover_cct -> macromediaDirector",
+
+		// Lastly, just try directly with macromediaDirector, which as an Xtra installed that allows opening protected formats: https://github.com/tomysshadow/Movie-Restorer-Xtra
+		// This is useful for some files like pbc99.dxr that wouldn't open with dirOpener or recover_cct (but does not work ok with projectorRays)
 		"macromediaDirector"
 	];
 }

@@ -100,7 +100,4 @@ export class dirOpener extends Program
 
 	// We send all macromediaDirector files through dirOpener first to decrypt any that are encrypted. If they are not encrypted, dirOpener outputs the same file, which is fine
 	allowDupOut = true;
-
-	chain = "macromediaDirector";
 }
-

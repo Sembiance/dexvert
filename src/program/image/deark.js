@@ -88,6 +88,7 @@ export class deark extends Program
 		}
 
 		// for some image formats for some images (like PICT Daniel sample) deark will output multiple image files that are actually 1 single image. See: https://github.com/jsummers/deark/issues/41
+		// NOTE: This fails with some files such as: • Figure 5 Window in List Mode.pict
 		if(r.flags.recombine)
 		{
 			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});

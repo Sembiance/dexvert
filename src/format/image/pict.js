@@ -11,7 +11,8 @@ export class pict extends Format
 	metaProvider   = ["image"];
 	converters = dexState =>
 	{
-		const r = [];
+		const r = ["qtPicViewer"];
+		
 		if(dexState.hasMagics("Macintosh Pict image (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.pict]");
 
@@ -32,7 +33,6 @@ export class pict extends Format
 
 		r.push(
 			"canvas",			// canvas seems to properly recombine sub-bitmaps into a final image (sample/image/pict/Daniel  and  2kangaro  and  bbq)
-			"qtPicViewer",
 			"hiJaakExpress",
 			"picturePublisher",
 			"deark[module:macbinary] -> deark",	// Can handle MacBinary-encoded PICT files such as samples 35, 039 and 06

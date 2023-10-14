@@ -4,21 +4,6 @@
 * Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
-* Go through dos/amiga/win2k/winxp/wine programs and see which ones still get regular updates and add to info.txt
-  Add a every 6 months or every year task to look at this list and update programs that have new updates
-
-* There is a bug in DebLab/app/uniso.js --hfs --macEncoding=japan MACUSER-MACBIN40A-1997-03.ISO out
-From this ISO:
-http://discmaster.textfiles.com/browse/10406
-https://archive.org/details/macuser-macbin40-1997-03
-If you `hcdi 2403` and then do `hls -albi` you will see messed up entry for Music.DAT.1
-This is because the creator code is 'KS2\r' instead of 'KS2 ' and the carriage return screws up the output causing uniso.js to fail
-I can add code to hfsutils in show_long() in hls.c that will write a char safeCreator[5]; and safeType[5] char by char and only copying over printable ASCII values otherwise specifying '?' and then using that below for both the type and creator
-
-* Improve recombining of PICT images in deark, some are not doing it properly:
-  Start with:  • Figure 5 Window in List Mode.pict
-  Then do pict/01 (which also needs to convert from .qtif to .png) (After this is done, probably remove the )
-
 * New recoil formats (maybe can find examples on sourceforge issues/mailing list?):
 MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
 Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1

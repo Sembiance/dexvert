@@ -12,7 +12,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		reportsDirPath : {desc : "Which directory to write the reports. Default: random"},
-		format         : {desc : "Specify one or more formats. Can specify an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
+		format         : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
 
 await initFormats(xlog);
@@ -24,7 +24,7 @@ for(const format of Object.values(formats))
 		continue;
 
 	const formatid = `${format.family.familyid}/${format.formatid}`;
-	if(argv.format.some(v => formatid.startsWith(v)))
+	if(argv.format[0]==="all" || argv.format.some(v => formatid.startsWith(v)))
 		formatsToProcess.add(formatid);
 }
 
@@ -71,7 +71,9 @@ if(failures.length)
 const reportsDirPath = argv.reportsDirPath || await fileUtil.genTempPath("/mnt/dexvert/test", "-testMany");
 await Deno.mkdir(reportsDirPath, {recursive : true});
 
-const testManyReportFilePath = path.join(reportsDirPath, `${argv.format.join("_").replaceAll("/", "_")}.html`);
+const families = Object.keys(reports).map(v => v.split("/")[0]).unique();
+const testManyReportFilePath = path.join(reportsDirPath, "index.html");
+
 await fileUtil.writeTextFile(testManyReportFilePath, `
 <html>
 	<head>
@@ -119,29 +121,31 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 		</style>
 	</head>
 	<body>
-		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2><br>
-		<table>
-			<thead>
-				<tr>
-					<th>formatid</th>
-					<th>qty</th>
-					<th>pass</th>
-					<th>fail</th>
-					<th>duration</th>
-				</tr>
-			</thead>
-			<tbody>
-				${Object.entries(reports).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
-					<td style="text-align: left;"><a href="${o.reportFilePath}">${formatid.escapeHTML()}</a></td>
-					<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
-					<td class="${+o.failCount ? "bad" : "good"}">${o.successPercentage || "0"}%</td>
-					<td class="${+o.failCount ? "bad" : "good"}">${o.failCount.toLocaleString()}</td>
-					<td>${o.elapsed.msAsHumanReadable()}</td>
-				</tr>`).join("")}
-			</tbody>
-		</table>
+		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2><hr>
+		${families.map(family => `
+			<h1>${family}</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>formatid</th>
+						<th>qty</th>
+						<th>pass</th>
+						<th>fail</th>
+						<th>duration</th>
+					</tr>
+				</thead>
+				<tbody>
+					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
+						<td style="text-align: left;"><a href="${o.reportFilePath}">${formatid.escapeHTML()}</a></td>
+						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
+						<td class="${+o.failCount ? "bad" : "good"}">${o.successPercentage || "0"}%</td>
+						<td class="${+o.failCount ? "bad" : "good"}">${o.failCount.toLocaleString()}</td>
+						<td>${o.elapsed.msAsHumanReadable()}</td>
+					</tr>`).join("")}
+				</tbody>
+			</table>
+		`).join("<br><br><br><hr>")}
 	</body>
 </html>`);
 
-xlog.info`\nElapsed duration: ${fg.peach(elapsed.msAsHumanReadable())}`;
-xlog.info`\nReport written to: file://${testManyReportFilePath}`;
+xlog.info`\nReports written to: file://${testManyReportFilePath}`;

@@ -22,6 +22,12 @@ const argv = cmdUtil.cmdInit({
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
 {
+	if(!await fileUtil.exists(inputFilePath))
+	{
+		console.error(`File ${fg.cyan(inputFilePath)} does not exist`);
+		continue;
+	}
+	
 	const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
 	const {r : rows, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
 	if(!rows && !logLines)

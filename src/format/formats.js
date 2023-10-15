@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
-import {path, assertStrictEquals} from "std";
+import {path, assertStrictEquals, delay} from "std";
 import {Format} from "../../src/Format.js";
 import {families} from "../../src/family/families.js";
 import {XLog} from "xlog";
@@ -161,11 +161,18 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" :
 			try
 			{
 				if(filePath.endsWith("unsupported.js"))
+				{
 					await loadUnsupported({reload : true});
+				}
 				else if(filePath.endsWith("simple.js"))
+				{
 					await loadSimple({reload : true});
+				}
 				else
-					await loadFormatFilePath(filePath, {reload : true});
+				{
+					await delay(500);	// give the file time to finish writing, most important for newly created files
+					await loadFormatFilePath(filePath, {reload : type==="modify", create : type==="create"});
+				}
 
 				xlog.info`${fg.violet("RELOADED")} format/${path.relative(formatDirPath, filePath)}`;
 			}

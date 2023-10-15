@@ -5,7 +5,7 @@ export class xpk extends Format
 	name       = "Amiga XPK Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/XPK";
 	ext        = [".xpk"];
-	magic      = ["Amiga xpkf.library compressed data", "XPK compressed data", "XPK-SQSH: ", "XPK-NUKE: "];
+	magic      = ["Amiga xpkf.library compressed data", "XPK compressed data", /XPK-.{4}: /, "XPK-NUKE: "];
 	packed     = true;
 	converters = ["ancient", "amigadepacker", "xfdDecrunch"];
 }

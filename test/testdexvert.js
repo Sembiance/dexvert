@@ -49,7 +49,8 @@ const FORMAT_OS_HINT =
 		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
 		"MAC100-1999-02.ISO"                  : "macintoshjp",
 		"MACPEOPLE-1998-03-01.ISO"            : "macintoshjp",
-		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp"	// is dual both PC and Mac but 99% of the stuff is on mac side
+		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp",	// is dual both PC and Mac but 99% of the stuff is on mac side
+		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp"
 	},
 	"archive/sit" :
 	{

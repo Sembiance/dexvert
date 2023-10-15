@@ -245,121 +245,152 @@ XSM: eXtra Simple Music by Davey W Taylor
 
 
 >>> ancient (Linux - June 20, 2020) - ARCHIVE (https://github.com/temisu/ancient)
+bzip2
+both normal and randomized bitstreams
+Compact (Unix)
+Compress (Unix)
+Supports both old and new formats
 CrunchMania by Thomas Schwarz
-	CrM!: Crunch-Mania standard-mode
-	Crm!: Crunch-Mania standard-mode, sampled
-	CrM2: Crunch-Mania LZH-mode
-	Crm2: Crunch-Mania LZH-mode, sampled
+CrM!: Crunch-Mania standard-mode
+Crm!: Crunch-Mania standard-mode, sampled
+CrM2: Crunch-Mania LZH-mode
+Crm2: Crunch-Mania LZH-mode, sampled
+ID 0x18051973 (CrunchMania CrM2 Clone)
+ID CD³¹ (CrunchMania CrM2 Clone)
+ID DCS! (CrunchMania CrM! Clone)
+ID Iron (CrunchMania CrM2 Clone)
+ID MSS! (CrunchMania CrM2 Clone)
+ID mss! (CrunchMania Crm2 Clone)
 Disk Masher System a.k.a. DMS
-	Supports all different compression methods (NONE,SIMPLE,QUICK,MEDIUM,DEEP,HEAVY1,HEAVY2)
-	Supports password bypassing
-File Imploder (and most of its clones)
-	ATN!
-	BDPI
-	CHFI
-	EDAM
-	IMP!
-	M.H.
-	RDC9
-	FLT! (verification missing)
-	Dupa (verification missing)
-	PARA (verification missing)
-LOB's File Compressor
+Supports all different compression methods (NONE,SIMPLE,QUICK,MEDIUM,DEEP,HEAVY1,HEAVY2)
+Supports password bypassing
+File Imploder
+ID ATN! (Imploder Clone)
+ID BDPI (Imploder Clone)
+ID CHFI (Imploder Clone)
+ID EDAM (Imploder Clone)
+ID M.H. (Imploder Clone)
+ID RDC9 (Imploder Clone)
+ID FLT! (Imploder Clone) (verification missing)
+ID Dupa (Imploder Clone) (verification missing)
+ID PARA (Imploder Clone) (verification missing)
+Freeze/Melt
+Supports both old and new formats
+gzip
+LOB's File Compressor (Also known as a Multipak)
+Supports all original 6 modes and their combinations (BMC, HUF, LZW, LZB, MSP, MSS)
+Does not support mode 8 (as defined by some game files)
+Pack (Unix)
+Supports both old and new formats
 PowerPacker
-	PP 1.1 (verification missing)
-	PP 2.0
-	Supports password bypassing (PX20)
+PP 1.1 (verification missing)
+PP 2.0
+PX20: Supports bypassing password protected files.
+ID CHFC (PowerPacker Clone)
+ID DEN! (PowerPacker Clone)
+ID DXS9 (PowerPacker Clone)
+ID H.D. (PowerPacker Clone)
+ID RVV! (PowerPacker Clone)
+Quasijarus Strong Compression
 Rob Northen compressors.
-	RNC1: Both old and formats utilizing the same header. heuristics for detecting the current one
-	RNC2: RNC version 2 stream
+RNC1: Both old and formats utilizing the same header. heuristics for detecting the correct one
+RNC2: RNC version 2 stream
+ID ...1 (RNC1 Clone)
 Turbo Packer by Wolfgang Mayerle.
-Standard gzip
-Standard bzip2, both normal and randomized
-Zip decompressor backend (decompressor only, no Zip file format reading yet)
-	Shrink
-	Reduce
-	Implode
-	Deflate
-	Deflate64
-	Bzip2
-Lha/Lzh decompressor backend (decompressor only, no Lha file format reading yet)
-	LH0: Null compressor
-	LH1: LZRW-compressor with 4kB window
-	LH2: LZRW-compressor with Dynamic Huffman Encoding (experimental)
-	LH3: LZRW-compressor (experimental)
-	LH4: LZRW-compressor with 4kB window
-	LH5: LZRW-compressor with 8kB window
-	LH6: LZRW-compressor with 32kB window
-	LH7: LZRW-compressor with 64kB window
-	LH8: LZRW-compressor with 64kB window (Joe Jared extension)
-	LHX: LZRW-compressor with up to 512kB window (UnLHX extension)
-	LZ4: Null compressor
-	LZ5: LZ-compressor
-	LZS: LZ-compressor
-	PM0: Null compressor
-	PM1: LZ-compressor
-	PM2: LZ-compressor
 MMCMP: Music Module Compressor
+SCO Compress LZH
 StoneCracker
-	SC: StoneCracker v2.69 - v2.81
-	SC: StoneCracker v2.92, v2.99
-	S300: StoneCracker v3.00
-	S310: StoneCracker v3.10, v3.11b
-	S400: StoneCracker pre v4.00
-	S401: StoneCracker v4.01
-	S403: StoneCracker v4.02a
-	S404: StoneCracker v4.10
+SC: StoneCracker v2.69 - v2.81
+SC: StoneCracker v2.92, v2.99
+S300: StoneCracker v3.00
+S310: StoneCracker v3.10, v3.11b
+S400: StoneCracker pre v4.00
+S401: StoneCracker v4.01
+S403: StoneCracker v4.02a
+S404: StoneCracker v4.10
+ID 1AM (StoneCracker S300 Clone)
+ID 2AM (StoneCracker S404 Clone)
+ID AYS! (StoneCracker S404 Clone)
+ID Z&G! (StoneCracker S403 Clone)
+ID ZULU (StoneCracker S403 Clone)
 XPK-encapsulated files
-	ACCA: Andre's Code Compression Algorithm
-	ARTM: Arithmetic encoding compressor
-	BLZW: LZW-compressor
-	BZP2: Bzip2 backend for XPK
-	CBR0: RLE compressor
-	CBR1: RLE compressor
-	CRM2: CrunchMania backend for XPK
-	CRMS: CrunchMania backend for XPK, sampled
-	CYB2: xpkCybPrefs container
-	DLTA: Delta encoding
-	DUKE: NUKE with Delta encoding
-	ELZX: LZX-compressor
-	FAST: LZ77-compressor
-	FBR2: CyberYAFA compressor
-	FRHT: LZ77-compressor
-	FRLE: RLE compressor
-	GZIP: Deflate backend for XPK
-	HUFF: Huffman modeling compressor
-	HFMN: Huffman modeling compressor
-	ILZR: Incremental Lempel-Ziv-Renau compressor
-	IMPL: File Imploder backend for XPK
-	LHLB: LZRW-compressor
-	LIN1: Lino packer
-	LIN2: Lino packer
-	LIN3: Lino packer
-	LIN4: Lino packer
-	LZBS: CyberYAFA compressor
-	LZCB: LZ-compressor
-	LZW2: CyberYAFA compressor
-	LZW3: CyberYAFA compressor
-	LZW4: CyberYAFA compressor
-	LZW5: CyberYAFA compressor
-	MASH: LZRW-compressor
-	NONE: Null compressor
-	NUKE: LZ77-compressor
-	PWPK: PowerPacker backend for XPK
-	RAKE: LZ77-compressor
-	RDCN: Ross Data Compression
-	RLEN: RLE compressor
-	SASC: LZ-compressor with arithmetic encoding
-	SDHC: Sample delta huffman compressor
-	SHR3: LZ-compressor with arithmetic encoding
-	SHRI: LZ-compressor with arithmetic encoding
-	SHSC: Context modeling compressor
-	SLZ3: CyberYAFA compressor
-	SLZX: LZX-compressor with delta encoding
-	SMPL: Huffman compressor with delta encoding
-	SQSH: Compressor for sampled sounds
-	TDCS: LZ77-compressor
-	ZENO: LZW-compressor
+ACCA: Andre's Code Compression Algorithm
+ARTM: Arithmetic encoding compressor
+BLZW: LZW-compressor
+BZP2: Bzip2 backend for XPK
+CBR0: RLE compressor
+CBR1: RLE compressor
+CRM2: CrunchMania backend for XPK
+CRMS: CrunchMania backend for XPK, sampled
+CYB2: xpkCybPrefs container
+DLTA: Delta encoding
+DUKE: NUKE with Delta encoding
+ELZX: LZX-compressor
+FAST: LZ77-compressor
+FBR2: CyberYAFA compressor
+FRHT: LZ77-compressor
+FRLE: RLE compressor
+GZIP: Deflate backend for XPK
+HUFF: Huffman modeling compressor
+HFMN: Huffman modeling compressor
+ILZR: Incremental Lempel-Ziv-Renau compressor
+IMPL: File Imploder backend for XPK
+LHLB: LZRW-compressor
+LIN1: Lino packer
+LIN2: Lino packer
+LIN3: Lino packer
+LIN4: Lino packer
+LZBS: CyberYAFA compressor
+LZCB: LZ-compressor
+LZW2: CyberYAFA compressor
+LZW3: CyberYAFA compressor
+LZW4: CyberYAFA compressor
+LZW5: CyberYAFA compressor
+MASH: LZRW-compressor
+NONE: Null compressor
+NUKE: LZ77-compressor
+PPMQ: PPM compressor
+PWPK: PowerPacker backend for XPK
+RAKE: LZ77-compressor
+RDCN: Ross Data Compression
+RLEN: RLE compressor
+SASC: LZ-compressor with arithmetic encoding
+SDHC: Sample delta huffman compressor
+SHR3: LZ-compressor with arithmetic encoding
+SHRI: LZ-compressor with arithmetic encoding
+SHSC: Context modeling compressor
+SLZ3: CyberYAFA compressor
+SLZX: LZX-compressor with delta encoding
+SMPL: Huffman compressor with delta encoding
+SQSH: Compressor for sampled sounds
+TDCS: LZ77-compressor
+ZENO: LZW-compressor
+There is some support for archival decompressors: However, these are not built in at the moment but the code can be as a reference
+
+Zip decompressor backend (decompressor only, no Zip file format reading yet)
+Shrink
+Reduce
+Implode
+Deflate
+Deflate64
+Bzip2
+Lha/Lzh decompressor backend (decompressor only, no Lha file format reading yet)
+LH0: Null compressor
+LH1: LZRW-compressor with 4kB window
+LH2: LZRW-compressor with Dynamic Huffman Encoding (experimental)
+LH3: LZRW-compressor (experimental)
+LH4: LZRW-compressor with 4kB window
+LH5: LZRW-compressor with 8kB window
+LH6: LZRW-compressor with 32kB window
+LH7: LZRW-compressor with 64kB window
+LH8: LZRW-compressor with 64kB window (Joe Jared extension)
+LHX: LZRW-compressor with up to 512kB window (UnLHX extension)
+LZ4: Null compressor
+LZ5: LZ-compressor
+LZS: LZ-compressor
+PM0: Null compressor
+PM1: LZ-compressor
+PM2: LZ-compressor
 
 
 >>> deark (Linux - v1.5.5 - June 6, 2020) - ARCHIVE, IMAGE (https://github.com/jsummers/deark  https://entropymine.com/deark/)
@@ -462,10 +493,9 @@ XPK-encapsulated files
    -opt bsave:fmt=cga16 - Very low (160x100) resolution
    -opt bsave:fmt=mcga  - 320x200 256-color
    -opt bsave:fmt=wh2   - 2-color, header includes width & height
-   -opt bsave:fmt=wh4   - 4 color, header includes width & height
-   -opt bsave:fmt=wh16  - 16 color, header includes width & height, inter-row
-     interlaced
-   -opt bsave:fmt=wh256 - 256 color, header includes width & height
+   -opt bsave:fmt=wh4   - 4-color, header includes width & height
+   -opt bsave:fmt=wh16  - 16-color, 4-plane, header includes width & height
+   -opt bsave:fmt=wh256 - 256-color, header includes width & height
    -opt bsave:fmt=b265  - Special
    -opt bsave:fmt=2col  - 2-color noninterlaced (experimental)
    -opt bsave:fmt=4col  - 4-color noninterlaced (experimental)
@@ -484,6 +514,9 @@ XPK-encapsulated files
   A format used on some CD-i discs.
 
 * COKE (Atari Falcon) (*.tg1) (module="coke")
+
+* ColoRIX (*.sc?, etc.) (module="colorix")
+  - Supports most formats, including compressed files.
 
 * Compface intermediate format (module="compfacei")
   This is an obscure text-based format related to X-Face, used by the Compface
@@ -563,7 +596,7 @@ XPK-encapsulated files
    -opt atari:palbits=<n> (refer to readme.md)
 
 * GIF (module="gif")
-  - Extract the image, or every frame from an animated or mult-image GIF.
+  - Extract the image, or every frame from an animated or multi-image GIF.
   - Plain text extensions are supported.
   - Extract comments (use -a).
   Options
@@ -594,6 +627,8 @@ XPK-encapsulated files
   - Extracts the color components to a JPEG file, and the alpha component (if
    present) to a PNG file.
 
+* Hemera thumbnails (module="hta")
+
 * HP 100LX / HP 200LX .ICN icon format (module="hpicn")
 
 * HR (TRS-80 High Resolution graphics file) (module="hr")
@@ -602,6 +637,9 @@ XPK-encapsulated files
   Obscure format associated with a program called "POSTERING"
 
 * HSI Raw (module="hsiraw")
+
+* ICA (Icon Manager Archive) (module=iconmgr_ica) (experimental)
+  Related to Icon Manager by Impact Software and L. Gray.
 
 * icns (Apple Icon) (module="icns")
   - Supports uncompressed 1-, 4-, and 8-bit images (with 1-bit mask).
@@ -629,8 +667,13 @@ XPK-encapsulated files
 
 * Inset PIX (module="insetpix") (experimental)
   - Bitmap images only. Character graphics files are not supported.
+  - File extension must be ".pix" (or use "-m insetpix").
 
 * InShape IIM (module="iim")
+
+* Jigsaw (.jig) (module=jigsaw_wk)
+  A Windows 3.x program by Walter A. Kuhn.
+  - Extract the main image.
 
 * Jovian Logic VI bitmap (module="jovianvi") (experimental)
 
@@ -661,10 +704,6 @@ XPK-encapsulated files
 * JPEG XR (HD Photo) (part of module "tiff")
   - Minimal support.
 
-* KQP (Konica) (module="kqp") (incomplete)
-  - Incomplete; almost certainly does not support all KQP files.
-  - Convert to JPEG.
-
 * Lotus Manuscript graphics (.bit, .rle) (module="lotus_mscr") (experimental)
   - Not always autodetected. You may have to use "-m lotus_mscr".
 
@@ -678,7 +717,10 @@ XPK-encapsulated files
   Options
    -opt macpaint:macbinary=<0|1>
 
-* Magic Desk icon (module="mdesk_icn")
+* Magic Desk or ToyBox icon (module="mdesk_icn")
+  Options
+   -opt mdesk_icn:pal=<1|2|3|4> - 1=Use ToyBox palette, 2=Use Magic Desk
+     palette, 3=Prefer ToyBox palette, 4=Prefer Magic Desk palette (default)
 
 * MAKIchan graphics (module="makichan")
   - Supports most 16- and 256-color .MAG images
@@ -757,6 +799,9 @@ XPK-encapsulated files
    -file2 <file.pic> - PIC file to read the palette from
    -opt palfile=<file.pic> - PIC file to read the palette from
 
+* PCPaint compressed BSAVE (module="bsave_cmpr") (experimental)
+  - Decompresses to BSAVE format.
+
 * PCX (module="pcx")
   - Supports most of the common varieties of PCX.
   Options
@@ -768,6 +813,12 @@ XPK-encapsulated files
      guess.
    -file2 <file.p13> - Read the palette from a separate file. Each entry is 3
      bytes (R,G,B); samples range from 0-63.
+
+* PCX2COM (module="pcx2com")
+  - Convert to PCX.
+
+* Pegasus JPEG and KQP (Konica) (module="picjpeg") (experimental)
+  - Convert to JPEG.
 
 * PGC (Portfolio graphics compressed) (module="pgc")
 
@@ -860,6 +911,8 @@ XPK-encapsulated files
   Options
    -opt rsc:fmt=<atari|pc> - Use this byte order. Default is to autodetect.
 
+* SGI image (module="sgiimage") (incomplete)
+
 * SHG and MRB (module="shg")
   Segmented Hypergraphics and Multi-Resolution Bitmap formats are used in
   Windows .HLP files.
@@ -893,7 +946,13 @@ XPK-encapsulated files
    -opt sunras:fmt32=<xbgr|abgr|xrgb|argb|bgrx|bgra|rgbx|rgba> - Specify the
      interpretation of a 32-bit pixel
 
+* Syberia texture (.syj) (module="syberia_syj")
+  - Convert abbreviated JPEG file to JPEG.
+
 * TGA (Targa) (module="tga")
+
+* TheDraw COM (module="thedraw_com")
+  Executable character graphics format made by TheDraw.
 
 * Thumbs.db (Windows thumbnail) (part of module "cfb")
   - Extract thumbnail files (embedded JPEG or PNG files)
@@ -914,6 +973,13 @@ XPK-encapsulated files
   - Extract IPTC-IIM data (use -a).
   Options
    -opt tiff:decode=0 - Do not decode images
+   -opt tiff:dexxa[=0] - Hint about whether file was made by PaintShow or
+     related software.
+   -opt tiff:fillorderstrategy=<0|1|...> - Hint about what to do with an
+     ambiguous FillOrder tag:
+      0 = Default.
+      1 = If in doubt, ignore.
+      2 = If in doubt, decompress, then reverse order of pixels within a byte.
 
 * TIM (Playstation graphics) (module="tim") (experimental/incomplete)
 
@@ -963,7 +1029,7 @@ XPK-encapsulated files
 * YBM (Bennet Yee face format) (module="ybm")
 
 * Young Picasso (.YP) (module="young_picasso")
-  An old paint program by BlueBlueview Software.
+  An old paint program by Blueview Software.
 
 * ZBR ((Zoner) Zebra Metafile) (module="zbr")
   - Extract the preview image.
@@ -1027,7 +1093,8 @@ XPK-encapsulated files
   "ar" archiver by Haruhiko Okumura, first version.
 
 * ARC archive (module="arc")
-  - Some rare compression methods are not supported.
+  - Essentially all compression methods are supported, except for the PAK
+    (NoGate) extensions.
 
 * ArcFS (module="arcfs")
 
@@ -1042,13 +1109,16 @@ XPK-encapsulated files
      security/protection. Use with "-m arj" to convert most any self-extracting
      ARJ archive to plain ARJ.
 
-* ARX (module="arx") (experimental)
+* ARX (module="arx")
   Variant of LHA. Deark tries to convert it to LHA.
 
 * ATR (Atari disk image) (module="atr") (experimental/incomplete)
 
 * BinHex (.hqx) (module="binhex")
   - Extract data and resource forks to separate files.
+
+* BinSCII (.bsc) (module="binscii")
+  - May need to use "-m binscii" in some cases.
 
 * CAB (Microsoft Cabinet) (module="cab")
   - Files can be parsed, but there is usually nothing that can be extracted
@@ -1058,9 +1128,15 @@ XPK-encapsulated files
   Variant of LHA by MylesHi! Software. Deark tries to convert it to LHA.
   - File extension must be ".car" (or use "-m car").
 
+* CAZIP (module="cashrink") (experimental)
+  A compressed file format for software installation.
+
 * CD/raw (module="cd_raw")
   - Extract .ISO and other filesystem data from some raw CD images, such as
     the .BIN file in CUE/BIN format.
+
+* CMZ (module="cmz") (experimental)
+  An old installer archive format used by Lotus.
 
 * compress (legacy Unix .Z format) (module="compress")
 
@@ -1087,10 +1163,16 @@ XPK-encapsulated files
 
 * Deflate (module="deflate")
   Raw Deflate-compressed (not zlib) data.
+  - Not autodetected; must use "-m deflate".
   Options
    -opt deflate:deflate64 - Decode as Deflate64 format.
 
-* DMS (Amiga disk image) (module="amiga_adf") (experimental)
+* DIET (module="diet") (experimental/incomplete)
+  - Supports COM and data files. EXE not properly supported.
+  Options
+   -opt diet:raw - For EXE, write raw decompressed data.
+
+* DMS (Amiga disk image) (module="amiga_dms") (experimental)
   - Decompresses to ADF format.
 
 * Doom WAD (module="wad")
@@ -1102,7 +1184,7 @@ XPK-encapsulated files
 
 * EXEPACK (module="exepack")
   Decompress an EXEPACK-compressed DOS EXE file.
-  - Not automatic; must use "-m exepack".
+  - Not automatic; must use "-m exepack" or "-opt execomp".
 
 * FAT (module="fat") (experimental/incomplete)
   - Limited support, mainly for floppy disk images.
@@ -1115,7 +1197,13 @@ XPK-encapsulated files
 * HFS filesystem image (module="hfs") (experimental/incomplete)
   - Incomplete support, but should be enough for most CD-ROM images.
 
-* InstallShield Z archive (module="is_z") (experimental)
+* InstallShield IBT archive (module="is_ibt")
+  This is usually a file named "setup.ibt".
+
+* InstallShield installer archive (module="is_instarch")
+  This is usually a file named "_inst32i.ex_" or "_inst16_.ex_".
+
+* InstallShield Z archive (module="is_z")
 
 * ISO 9660 or High Sierra CD-ROM image (module="iso9660")
   Options
@@ -1147,12 +1235,23 @@ XPK-encapsulated files
 
 * LZEXE (module="lzexe")
   Decompress an LZEXE-compressed DOS EXE file.
-  - Not automatic; must use "-m lzexe".
+  - Not automatic; must use "-m lzexe" or "-opt execomp".
+  Options
+   -opt lzexe:raw - Instead of an EXE file, write raw decompressed data.
+   -opt execomp:align=<16|512> - Preferred code segment alignment. This may
+     help make the decompressed file more similar to the original.
 
 * LZHUF (module="lzhuf")
   Compression software by Haruyasu Yoshizaki. A bare-bones container for
   LHarc's "lh1" compression.
   - Not autodetected; you must use "-m lzhuf".
+
+* LZS(Stac) (module="lzstac")
+  Raw LZ-Stac compressed data.
+  - Not autodetected; must use "-m lzstac".
+
+* LZS221 (module="lzs221")
+  Compressed file format by Stac.
 
 * LZSS(Okumura) (module="lzss_oku")
   LZSS.C compression software by Haruhiko Okumura.
@@ -1180,6 +1279,9 @@ XPK-encapsulated files
    -opt cfb:fmt=thumbsdb - Treat the file as a Thumbs.db file.
 
 * Microsoft Installation Compression (module="mscompress")
+  - Supports "SZDD" variant, mode "A".
+  - Supports "KWAJ" variant, all known compression methods.
+  - Supports "SZ" variant.
 
 * MOOF (module="moof") (incomplete)
   Macintosh floppy disk image format.
@@ -1192,11 +1294,15 @@ XPK-encapsulated files
      usually a FAT format).
    -opt msa:touncmsa - Instead of decoding, convert to uncompressed MSA.
 
+* NPack (module="npack")
+  Compressed file format by Symantec / Stac.
+
 * NRG (module="nrg") (experimental)
   Nero CD image format.
-  - Extract or decode ISO 9660 data.
+  - Depending on the file structure, operates like the iso9660 module, or the
+    cd_raw module.
 
-* Pack (module="pack") (experimental)
+* Pack (module="pack")
   Old Unix compressed file format (.z).
 
 * PackDir (module="packdir") (experimental)
@@ -1208,7 +1314,7 @@ XPK-encapsulated files
   - Extracted ".palm" files are in Palm BitmapType format. Reprocess them to
     convert to PNG.
   Options
-   -opt timestampfmt=<macbe|unixbe|macle> - The timestamp format to assume.
+   -opt palm:timestampfmt=<macbe|unixbe|macle> - The timestamp format to assume.
 
 * Pasti (.stx) (module="pasti") (experimental)
   - Atari ST disk image format.
@@ -1216,13 +1322,15 @@ XPK-encapsulated files
    -opt pasti:toraw - Instead of decoding, extract to raw ".ST" format (this is
      usually a FAT format).
 
+* PC-Shrink (module="pcshrink") (experimental)
+  PC-Install .SHR compressed archive format.
+
 * PCX Library (module="pcxlib")
   Aggregate format by Genus Microprogramming.
 
 * PKLITE (module="pklite")
   Decompress a PKLITE-compressed DOS EXE file or DOS COM file.
   - For EXE format, you must use "-m pklite" or "-opt execomp".
-  - Not all PKLITE format variants are supported.
   Options
    -opt pklite:raw - Instead of an EXE file, write raw decompressed data
 
@@ -1242,6 +1350,8 @@ XPK-encapsulated files
 * SIS (EPOC/Symbian archive) (module="sis")
   - EPOC release 3/4/5/6
 
+* SOF/RESOF (part of module "zip")
+
 * Spark archive (module="spark")
   Options
    -opt spark:recurse=0 - Extract subdirectories as Spark files
@@ -1253,7 +1363,7 @@ XPK-encapsulated files
   An old compressed file format used mainly on CP/M.
   - SQ2 variant is also supported (experimental).
 
-* Stirling Compressor, The (module="tscomp") (experimental)
+* Stirling Compressor, The (module="tscomp")
 
 * StuffIt (.sit) (module="stuffit")
   - Limited support. Old format only.
@@ -1346,8 +1456,7 @@ XPK-encapsulated files
     ones are control characters.
 
 * CRC (module="crc")
-  Print various CRC hashes and checksums of the file, including the IEEE
-  CRC-32.
+  Print various CRC hashes and checksums of the file, including IEEE CRC-32.
   - You must use "-m crc".
 
 * DS_Store (module="dsstore") (experimental)
@@ -1369,6 +1478,9 @@ XPK-encapsulated files
   - Extract icons and cursors from LX files. Note that these will use OS/2
     format. Reprocess them with Deark to convert to PNG.
   - In some cases, extract the archive from a self-extracting archive.
+  Options
+   -opt execomp - Decompress supported executable compression formats.
+   -opt exe:checksum - Report the correct checksum in the debug info.
 
 * FLAC audio (module="flac")
 
@@ -1388,6 +1500,8 @@ XPK-encapsulated files
 * IFF (Interchange File Format) (module="iff")
   - IFF can be parsed, but in many cases nothing can be extracted from it.
   Options
+   -opt iff:decode=1 - Prefer to decode nested items, instead of extracting
+     them.
    -opt iff:align=<n> - Assume chunks are padded to an n-byte boundary.
 
 * IPTC-IIM metadata (module="iptc")

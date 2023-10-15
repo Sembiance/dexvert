@@ -4,31 +4,71 @@
 * Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
-* New recoil formats (maybe can find examples on sourceforge issues/mailing list?):
-MSX2	MIF	MSX Interchange Format	up to 512x424		1 or 2
-Atari ST/STE	COL	Atari Image Manager	up to 256x256	16777216 colors	1
-Atari ST/STE	IM	Atari Image Manager	up to 256x256	256-level grayscale	1
-Atari ST/STE	GRX	Grafix			1
-Atari Falcon	BP6, BP8, C06, C08, C16, C24, C32	UIMG			1
+* Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926. Ensure we support these deark supported formats:
+	* ColoRIX (*.sc?, etc.) (module="colorix")
+	- Supports most formats, including compressed files.
 
-* Updated 'ancient' compressor formats:
-Compact (Unix)
-Compress (Unix)
-Freeze (Unix)
-LOB Compressor a.k.a. multipac. all 6 modes (Atari)
-Pack (Unix)
-Quasijarus Strong compression (FreeBSD)
-PX20 support - fast bypass of passwords (Amiga)
-DMS improvements for broken files - auto fixup (Amiga)
-XPK PPMQ (This concludes XPK, yay!) (Amiga)
-SCO Compress LZH (Unix)
+	* Hemera thumbnails (module="hta")
 
-* Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926   (diff formats.txt? https://github.com/jsummers/deark)
+	* ICA (Icon Manager Archive) (module=iconmgr_ica) (experimental)
+	Related to Icon Manager by Impact Software and L. Gray.
+
+	* Jigsaw (.jig) (module=jigsaw_wk)
+	A Windows 3.x program by Walter A. Kuhn.
+	- Extract the main image.
+
+	* Magic Desk or ToyBox icon (module="mdesk_icn")
+	Options
+	-opt mdesk_icn:pal=<1|2|3|4> - 1=Use ToyBox palette, 2=Use Magic Desk
+		palette, 3=Prefer ToyBox palette, 4=Prefer Magic Desk palette (default)
+
+	* SGI image (module="sgiimage") (incomplete)
+
+	* Syberia texture (.syj) (module="syberia_syj")
+	- Convert abbreviated JPEG file to JPEG.
+
+	* TheDraw COM (module="thedraw_com")
+	Executable character graphics format made by TheDraw.
+
+	* BinSCII (.bsc) (module="binscii")
+	- May need to use "-m binscii" in some cases.
+
+	* CAZIP (module="cashrink") (experimental)
+	A compressed file format for software installation.
+
+	* CMZ (module="cmz") (experimental)
+	An old installer archive format used by Lotus.
+
+	* DIET (module="diet") (experimental/incomplete)
+	- Supports COM and data files. EXE not properly supported.
+	Options
+	-opt diet:raw - For EXE, write raw decompressed data.
+
+	* InstallShield IBT archive (module="is_ibt")
+	This is usually a file named "setup.ibt".
+
+	* InstallShield installer archive (module="is_instarch")
+	This is usually a file named "_inst32i.ex_" or "_inst16_.ex_".
+
+	* InstallShield Z archive (module="is_z")
+
+	* LZS(Stac) (module="lzstac")
+	Raw LZ-Stac compressed data.
+	- Not autodetected; must use "-m lzstac".
+
+	* LZS221 (module="lzs221")
+	Compressed file format by Stac.
+
+	* NPack (module="npack")
+	Compressed file format by Symantec / Stac.
+
+	* PC-Shrink (module="pcshrink") (experimental)
+	PC-Install .SHR compressed archive format.
 
 * Go through the entire list of 'Awave Studio' formats in program_formats.txt and add support for them all to dexvert
   This is because I upgraded from 7.0 to 8.8
 
-* PeaZip supports lie 234 formats but I'm only using it for 1. Look to extend that support: https://github.com/peazip/PeaZip
+* PeaZip supports like 234 formats but I'm only using it for 1. Look to extend that support: https://github.com/peazip/PeaZip
 
 * I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
   It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos

@@ -170,7 +170,7 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" :
 				}
 				else
 				{
-					await delay(500);	// give the file time to finish writing, most important for newly created files
+					await delay(250);	// give the file time to finish writing, most important for newly created files
 					await loadFormatFilePath(filePath, {reload : type==="modify", create : type==="create"});
 				}
 

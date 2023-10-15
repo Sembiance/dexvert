@@ -11,7 +11,7 @@ export class abydosconvert extends Program
 	classify = true;
 	flags    = {
 		format  : "Which format to use for conversion. This is a mime type. REQUIRED.",
-		outType : "Which format to output. 'png' is the only allowed option right now. Default: Let abydosconvert decide"
+		outType : "Which format to output. 'png' and 'webp' are the allowed options. Default: Let abydosconvert decide"
 	};
 
 	args = r => [...(r.flags.outType==="png" ? ["--png"] : []), "--json", r.flags.format, r.inFile(), r.outDir()];

@@ -7,5 +7,5 @@ export class cmx extends Format
 	ext            = [".cmx"];
 	forbidExtMatch = true;
 	magic          = ["Corel Metafile Exchange Image", "Corel Presentation Exchange File", /^x-fmt\/34( |$)/, /^x-fmt\/35( |$)/];
-	converters     = ["soffice[outType:svg]", "deark", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
+	converters     = ["soffice[outType:svg]", "uniconvertor[autoCrop]", "deark", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
 }

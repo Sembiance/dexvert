@@ -9,8 +9,14 @@ export class png extends Format
 	mimeType         = "image/png";
 	magic            = ["Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", /^fmt\/(11|12|935)( |$)/];
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;
-	verifyUntouched  = dexState => dexState.meta.format!=="PNG";
+	verifyUntouched  = dexState =>
+	{
+		if(dexState.hasMagics(/^fmt\/935( |$)/))
+			dexState.meta.animated = true;
+
+		return dexState.meta.format!=="PNG";
+	};
 	fallback         = true;
-	confidenceAdjust = () => 25;	// Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools
+	confidenceAdjust = () => 25;																							// Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools
 	metaProvider     = ["image"];
 }

@@ -4,6 +4,8 @@
 * Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
+* Finish going through the 16 failures in ~/tmp/new-abydos-testfiles/
+
 * Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926. Ensure we support these deark supported formats:
 	* ColoRIX (*.sc?, etc.) (module="colorix")
 	- Supports most formats, including compressed files.

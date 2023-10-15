@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {fileUtil} from "xutil";
-import {path, assertStrictEquals} from "std";
+import {path, delay, assertStrictEquals} from "std";
 import {Program} from "../../src/Program.js";
 import {XLog} from "xlog";
 
@@ -58,6 +58,7 @@ export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" :
 		{
 			try
 			{
+				await delay(250);	// give the file time to finish writing, most important for newly created files
 				await loadProgramFilePath(filePath, {reload : true});
 				xlog.info`${fg.violet("RELOADED")} program/${path.relative(programDirPath, filePath)}`;
 			}

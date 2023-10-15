@@ -8,5 +8,5 @@ export class mng extends Format
 	mimeType     = "video/x-mng";
 	magic        = ["Multiple-image Network Graphics bitmap", "MNG video data", /^fmt\/528( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert[outType:webp]"];
+	converters   = [`abydosconvert[format:${this.mimeType}][outType:webp]`, "convert[outType:webp]"];
 }

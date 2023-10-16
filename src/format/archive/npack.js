@@ -7,5 +7,5 @@ export class npack extends Format
 	ext            = [".$"];
 	forbidExtMatch = true;
 	magic          = ["NPack archive data"];
-	converters     = ["npack"];
+	converters     = ["npack", "deark[module:npack]"];
 }

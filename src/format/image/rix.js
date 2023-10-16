@@ -7,5 +7,5 @@ export class rix extends Format
 	ext        = [".rix", ".sca", ".scb", ".scc", ".sce", ".scf", ".scg", ".sci", ".sck", ".scl", ".scn", ".sco", ".scp", ".scq", ".scr", ".sct", ".scu", ".scv", ".scw", ".scx", ".scy", ".scz"];
 	weakExt    = [".scr"];
 	magic      = ["ColoRIX bitmap"];
-	converters = ["nconvert", "pv[matchType:magic]"];
+	converters = ["nconvert", "deark[module:colorix]", "pv[matchType:magic]"];
 }

@@ -5,24 +5,10 @@
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
 * Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926. Ensure we support these deark supported formats:
-	* ColoRIX (*.sc?, etc.) (module="colorix")
-	- Supports most formats, including compressed files.
-
-	* Hemera thumbnails (module="hta")
-
-	* ICA (Icon Manager Archive) (module=iconmgr_ica) (experimental)
-	Related to Icon Manager by Impact Software and L. Gray.
-
-	* Jigsaw (.jig) (module=jigsaw_wk)
-	A Windows 3.x program by Walter A. Kuhn.
-	- Extract the main image.
-
 	* Magic Desk or ToyBox icon (module="mdesk_icn")
 	Options
 	-opt mdesk_icn:pal=<1|2|3|4> - 1=Use ToyBox palette, 2=Use Magic Desk
 		palette, 3=Prefer ToyBox palette, 4=Prefer Magic Desk palette (default)
-
-	* SGI image (module="sgiimage") (incomplete)
 
 	* Syberia texture (.syj) (module="syberia_syj")
 	- Convert abbreviated JPEG file to JPEG.
@@ -30,27 +16,10 @@
 	* TheDraw COM (module="thedraw_com")
 	Executable character graphics format made by TheDraw.
 
-	* BinSCII (.bsc) (module="binscii")
-	- May need to use "-m binscii" in some cases.
-
-	* CAZIP (module="cashrink") (experimental)
-	A compressed file format for software installation.
-
-	* CMZ (module="cmz") (experimental)
-	An old installer archive format used by Lotus.
-
 	* DIET (module="diet") (experimental/incomplete)
 	- Supports COM and data files. EXE not properly supported.
 	Options
 	-opt diet:raw - For EXE, write raw decompressed data.
-
-	* InstallShield IBT archive (module="is_ibt")
-	This is usually a file named "setup.ibt".
-
-	* InstallShield installer archive (module="is_instarch")
-	This is usually a file named "_inst32i.ex_" or "_inst16_.ex_".
-
-	* InstallShield Z archive (module="is_z")
 
 	* LZS(Stac) (module="lzstac")
 	Raw LZ-Stac compressed data.
@@ -58,9 +27,6 @@
 
 	* LZS221 (module="lzs221")
 	Compressed file format by Stac.
-
-	* NPack (module="npack")
-	Compressed file format by Symantec / Stac.
 
 	* PC-Shrink (module="pcshrink") (experimental)
 	PC-Install .SHR compressed archive format.

@@ -17,6 +17,7 @@ const DEXMAGIC_CHECKS =
 	"ActiveMime (Base64 Encoded)" : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"          : [{offset : 0, match : "Anna-Marie"}],
 	"Anna-Marie Archive (alt)"    : [{offset : -160, match : "Anna-Marie"}],
+	"BinSCII"                     : [{offset : 0, match : /\s*FiLeStArTfIlEsTaRt/}],
 	"HTTP Response"               : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"IFF CAT file"                : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"               : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],

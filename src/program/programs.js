@@ -31,8 +31,8 @@ async function loadProgramFilePath(programFilePath, {reload}={})
 	if(!(programs[programid] instanceof Program))
 		throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);
 	
-	if(programs[programid].allowDupOut && !programs[programid].chain && !["dirOpener", "unHexACX"].includes(programid))
-		throw new Error(`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion on processing server`);
+	if(programs[programid].allowDupOut && !programs[programid].chain && !["dirOpener", "unHexACX", "binsciiPrepare"].includes(programid))
+		console.warn(`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion on processing server`);
 }
 
 export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))

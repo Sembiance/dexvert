@@ -65,5 +65,5 @@ for(const srcFilePath of argv.inputFilePath)
 		await fileUtil.unlink(srcFilePath);
 
 	if(argv.record)
-		await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "test", "testdexvert.js"), `--format=${argv.familyFormat}`, `--file=${path.basename(destFilePath)}`), runUtil.denoRunOpts({liveOutput : true}));
+		await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "test", "testdexvert.js"), "--record", `--format=${argv.familyFormat}`, `--file=${path.basename(destFilePath)}`), runUtil.denoRunOpts({liveOutput : true}));
 }

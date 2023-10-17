@@ -42,7 +42,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "i
 	initCalled = true;
 
 	const programFilePaths = await fileUtil.tree(programDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
-	xlog.info`Processing ${programFilePaths.length} program files...`;
+	xlog.info`Loading ${programFilePaths.length} program files...`;
 
 	await Promise.all(programFilePaths.map(loadProgramFilePath));
 }

@@ -1,10 +1,11 @@
 import {Format} from "../../Format.js";
+import {TEXT_MAGIC} from "../../Detection.js";
 
 export class qrt extends Format
 {
 	name           = "QRT Ray Tracer Bitmap";
 	website        = "http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap";
 	ext            = [".qrt", ".dis", ".raw"];
-	forbiddenMagic = ["KryoFlux raw stream"];
+	forbiddenMagic = ["KryoFlux raw stream", ...TEXT_MAGIC];
 	converters     = ["nconvert", "tomsViewer"];
 }

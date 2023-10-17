@@ -144,7 +144,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "i
 	initCalled = true;
 
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
-	xlog.info`Processing ${formatFilePaths.length} format files...`;
+	xlog.info`Loading ${formatFilePaths.length} format files...`;
 
 	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple()]));
 }

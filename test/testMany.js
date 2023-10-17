@@ -12,7 +12,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		reportsDirPath : {desc : "Which directory to write the reports. Default: random"},
-		format         : {desc : "Specify one or more formats. Can specify 'all' or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
+		format         : {desc : "Specify one or more formats. Can specify 'all' (DANGEROUS!) or an entire family with just image or partials like image/a", required : true, hasValue : true, multiple : true}
 	}});
 
 await initFormats(xlog);

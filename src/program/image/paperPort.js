@@ -25,7 +25,7 @@ export class paperPort extends Program
 			WinWaitActive($mainWindow, "", 10)
 
 			Send("{DELETE}")	; Importing the file copies it over to some working directory, so let's delete it
-			Sleep(1000)
+			Sleep(2000)
 			
 			SendSlow("!fx")
 			

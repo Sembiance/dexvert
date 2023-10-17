@@ -17,7 +17,6 @@ const DEXMAGIC_CHECKS =
 	"ActiveMime (Base64 Encoded)" : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"          : [{offset : 0, match : "Anna-Marie"}],
 	"Anna-Marie Archive (alt)"    : [{offset : -160, match : "Anna-Marie"}],
-	"BinSCII"                     : [{offset : 0, match : /\s*FiLeStArTfIlEsTaRt/}],
 	"HTTP Response"               : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"IFF CAT file"                : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"               : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
@@ -206,6 +205,23 @@ export class dexmagic extends Program
 				r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
 		}
 
+		const checkMatcher = (data, loc, matcher) =>
+		{
+			if(Array.isArray(matcher))
+			{
+				if(!matcher.map(v => (typeof v==="string" ? v.charCodeAt(0) : v)).includes(data[loc]))
+					return false;
+			}
+			else
+			{
+				const matchByte = typeof matcher==="string" ? matcher.charCodeAt(0) : matcher;
+				if(data[loc]!==matchByte)
+					return false;
+			}
+
+			return true;
+		};
+
 		const buf = await fileUtil.readFileBytes(r.inFile({absolute : true}), DEXMAGIC_BYTES_MAX);
 		
 		for(const [matchid, checks] of Object.entries(DEXMAGIC_CHECKS))
@@ -231,34 +247,18 @@ export class dexmagic extends Program
 						const backBuf = await fileUtil.readFileBytes(r.inFile({absolute : true}), check.match.length, check.offset);
 						for(let i=0;i<check.match.length;i++)
 						{
-							if(backBuf[i]!==check.match[i])
-							{
-								match = false;
+							match = checkMatcher(backBuf, i, check.match[i]);
+							if(!match)
 								break;
-							}
 						}
 					}
 					else
 					{
 						for(let loc=check.offset, i=0;i<check.match.length;loc++, i++)
 						{
-							if(Array.isArray(check.match[i]))
-							{
-								if(!check.match[i].map(v => (typeof v==="string" ? v.charCodeAt(0) : v)).includes(buf[loc]))
-								{
-									match = false;
-									break;
-								}
-							}
-							else
-							{
-								const matchByte = typeof check.match[i]==="string" ? check.match[i].charCodeAt(0) : check.match[i];
-								if(buf[loc]!==matchByte)
-								{
-									match = false;
-									break;
-								}
-							}
+							match = checkMatcher(buf, loc, check.match[i]);
+							if(!match)
+								break;
 						}
 					}
 				}

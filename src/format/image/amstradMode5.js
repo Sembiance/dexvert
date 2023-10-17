@@ -9,7 +9,7 @@ export class amstradMode5 extends Format
 	auxFiles = (input, otherFiles) => otherFiles.filter(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
 
 	// Don't do anything with .gfx files
-	untouched = ({f}) => f.input.ext.toLowerCase()===".pal";
+	untouched = ({f}) => f.input.ext.toLowerCase()===".gfx";
 
 	converters = ["recoil2png"];
 }

@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {path} from "std";
-import {cmdUtil, fileUtil} from "xutil";
+import {cmdUtil, fileUtil, hashUtil} from "xutil";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {XLog} from "xlog";
 
@@ -28,6 +28,8 @@ const reports = [];
 const failures = [];
 const startedAt = performance.now();
 let completed = 0;
+const existingSums = {};
+const allNonNew = [];
 await argv.inputFiles.parallelMap(async inputFile =>
 {
 	if(!await fileUtil.exists(inputFile) || !(await Deno.stat(inputFile)).isFile)
@@ -41,17 +43,31 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	const o = {op : "dexvert", inputFilePath, outputDirPath : outputSubDirPath, logLevel : "info", prod : true};
 	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 	completed++;
-	if(!r?.json?.phase?.format)
+	if(!r?.json?.processed || !r?.json?.phase?.format)
 	{
-		failures.push(inputFilename);
-		return xlog.error`Failed to dexvert ${inputFilePath}`;
+		failures.push({inputFilePath, ids : r.json.ids || []});
+		return xlog.error`Failed to dexvert ${inputFilePath} (${(argv.inputFiles.length-completed).toLocaleString()} remain)`;
 	}
 
 	families.pushUnique(r.json.phase.family);
 
 	const formatid = `${r.json.phase.family}/${r.json.phase.format}`;
+	if(!existingSums[formatid])
+	{
+		const existingSampleFilePaths = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "test", "sample", r.json.phase.family, r.json.phase.format), {nodir : true, depth : 1});
+		existingSums[formatid] = await existingSampleFilePaths.parallelMap(async existingSampleFilePath => await hashUtil.hashFile("blake3", existingSampleFilePath));
+	}
+
+	const sum = await hashUtil.hashFile("blake3", inputFilePath);
+	if(!existingSums[formatid].includes(sum))
+		r.json.newFile = true;
+	else
+		allNonNew.push(inputFilePath);
+
 	r.json.actions = [];
-	r.json.actions.push({text : "stash", value : `dexstash --record --delete ${formatid} '${inputFilePath}'`});
+	r.json.actions.push({text : "stash", value : `dexstash --record ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
+	r.json.actions.push({text : "stash+rm", value : `dexstash --record --delete ${formatid} '${inputFilePath.replaceAll("'", "'\\''")}'`});
+	r.json.actions.push({text : "delete", value : `rm -f '${inputFilePath}'`});
 
 	r.json.originalInputFilename = inputFilename;
 	if(!r.json.created?.files?.output?.length)
@@ -59,7 +75,7 @@ await argv.inputFiles.parallelMap(async inputFile =>
 		r.json.outputLink = path.join(".", inputFilename);
 		r.json.outputLinkText = `no files created`;
 	}
-	else if(r.json.created?.files?.output?.length===1)
+	else if(r.json.created.files.output.length===1)
 	{
 		r.json.outputLink = path.join(".", inputFilename, r.json.created.files.output[0].rel);
 		r.json.outputLinkText = r.json.created.files.output[0].base;
@@ -129,12 +145,61 @@ await fileUtil.writeTextFile(reportFilePath, `
 				border: 0;
 				outline: none;
 			}
+
+			tr td:nth-child(6), tr td:nth-child(2)
+			{
+				white-space: nowrap;
+			}
+
+			tr td:nth-child(4)
+			{
+				color: #00ff00;
+			}
+
+			table.failures tbody tr td:nth-child(1)
+			{
+				vertical-align: top;
+			}
+
+			table.failures tbody tr td:nth-child(2)
+			{
+				padding: 0.5em 0;
+			}
+
+			table.failures tbody tr:nth-child(odd)
+			{
+				background-color: #292929;
+			}
+
+			table.failures tr td .weak
+			{
+				color: rgba(255, 255, 255, 0.1);
+			}
 		</style>
 	</head>
 	<body>
 		<input type="text" id="copyTextInput">
-		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2><hr>
-		${failures.length>0 ? `<h3 style="color: red;">Failures (${failures.length.toLocaleString()})</h3>${failures.sortMulti().map(failure => `<span>${failure}</span><br>`).join("")}<br><hr>` : ""}
+		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2>
+		${allNonNew.length ? `<span data-copy="rm -f ${allNonNew.map(v => `'${v.replaceAll("'", "'\\''")}'`).join(" ")}">delete all existing stash files</span>` : ""}<br>
+		${failures.length ? `<span data-copy="cp ${failures.map(({inputFilePath}) => `'${inputFilePath.replaceAll("'", "'\\''")}'`).join(" ")} ">copy failures to ...</span>` : ""}<br>
+		<hr>
+		${failures.length>0 ? `<h3 style="color: red;">Failures (${failures.length.toLocaleString()})</h3>
+			<table class="failures">
+				<thead>
+					<tr>
+						<th>filename</th>
+						<th>ids</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					${failures.sortMulti([failure => path.extname(failure.inputFilePath), failure => path.basename(failure.inputFilePath)]).map(failure => `<tr>
+						<td>${path.basename(failure.inputFilePath)}</td>
+						<td>${failure.ids.map(({from, magic, weak}) => `<span class="${(from==="file" && magic==="data") || (weak) ? "weak" : ""}">${"&nbsp;".repeat(10-from.length)}${from}: ${magic}</span>`).join("<br>")}</td>
+						<td></td>
+					</tr>`).join("")}
+				</tbody>
+			</table><hr>` : ""}
 		${families.map(family => `
 			<h1>${family}</h1>
 			<table>
@@ -143,15 +208,17 @@ await fileUtil.writeTextFile(reportFilePath, `
 						<th>formatid</th>
 						<th>duration</th>
 						<th>input</th>
+						<th>new?</th>
 						<th>output</th>
 						<th>actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					${reports.filter(o => o.phase.family===family).sortMulti([o => `${o.phase.family}/${o.phase.format}`]).map(o => `<tr>
+					${reports.filter(o => o.phase.family===family).sortMulti([o => !!o.newFile, o => `${o.phase.family}/${o.phase.format}`]).map(o => `<tr>
 						<td>${o.phase.family}/${o.phase.format}</td>
-						<td style="text-align: right;">${o.duration.msAsHumanReadable()}</td>
+						<td style="text-align: right;">${o.duration.msAsHumanReadable({short : true})}</td>
 						<td>${o.originalInputFilename}</td>
+						<td>${o.newFile ? "new" : ""}</td>
 						<td><a href="${o.outputLink.escapeHTML()}">${o.outputLinkText.escapeHTML()}</a></td>
 						<td>${o.actions.map(action => `<span data-copy="${action.value.escapeHTML()}">${action.text.escapeHTML()}</span>`).join(" | ")}</td>
 					</tr>`).join("")}

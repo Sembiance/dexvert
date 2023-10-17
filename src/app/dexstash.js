@@ -58,6 +58,8 @@ for(const srcFilePath of argv.inputFilePath)
 		xlog.info`${logPrefix}  ${fg.yellow("COPIED")}`;
 	}
 
+	existingSampleSums[sum] = destFilePath;
+
 	// we use rsync to preserve file date/time
 	await runUtil.run("rsync", runUtil.rsyncArgs(srcFilePath, destFilePath, {fast : true}));
 

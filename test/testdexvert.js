@@ -167,7 +167,9 @@ const FLEX_SIZE_FORMATS =
 
 		// each running produces slightly different output, not sure why, haven't investigated further
 		ani              : 15,
+		fuzzyBitmap      : 0.1,
 		lottie           : 0.1,
+		odg              : 0.1,
 		pes              : 0.1,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
@@ -228,6 +230,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
 	[/image\/deskMatePaint\/set_mask\.pnt$/, "image", "prismPaint"],
+	[/image\/pfsFirstPublisher\/DOG.ART$/, "image", "asciiArtEditor"],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
@@ -262,6 +265,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/vCard\/.+/i, "text", true],
 	[/image\/a2Sprites\/.+/i, "text", true],
 	[/image\/excelChart\/.+/i, "document", "xls"],
+	[/image\/fiasco\/(b1|large|medium|small).fco/, "text", "txt"],
+	[/image\/graphSaurus\/SNAT-2.SR5/, "image", "msxBASIC"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
 	[/image\/picturePublisher\/circus0(1|2|7)\.art/, "image", "pfsFirstPublisher"],

@@ -4,6 +4,11 @@
 * Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
+* Finish going through sandbox/samples:
+	ImageMagick
+	samples.mplayerhq.hu
+	libxad-testfiles
+
 * Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926. Ensure we support these deark supported formats:
 	* Magic Desk or ToyBox icon (module="mdesk_icn")
 	Options
@@ -49,10 +54,15 @@
   - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos
   - Go through every 'notes' field on every format and program and see what I can add support for or further strengthen
   - Look at sandbox/txt/programs_formats_cant_use.txt
+  - Look at samples in test/sample/unsupported to see if I can add support for them
 
 * Now that I'm not using QEMU, maybe I can get certain formats working:
  greenstreetPublisher
  zbr
+
+* Add POVRAY rendering support, see the notes in povRay.js
+  Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
+  Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
 
 * Ensure all the files from these CDs convert properly:
 iso/Digital Magazine for Photography - Gallery
@@ -156,10 +166,6 @@ iso/Love Bytes
 	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
 	Konverter can support lots of formats: https://www.logipole.com/konvertor-en.htm
 	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
-
-* Add POVRAY rendering support, see the notes in povRay.js
-  Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
-  Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
 
 * Figure out how to better convert clarisWorks/appleWorks documents so they convert to JPY: http://discmaster.textfiles.com/search?formatid=clarisWorks&itemid=10432&itemid=10433&itemid=10414&itemid=10416&itemid=10417&itemid=10419&itemid=10420&itemid=10866&itemid=10423&itemid=10424&itemid=10435&itemid=10445&itemid=10446&itemid=10447&itemid=10448&itemid=10449&itemid=10324&itemid=10325&itemid=10326&itemid=10327&itemid=10329&itemid=10330&itemid=10331&itemid=10332&itemid=10333&itemid=10335&itemid=10336&itemid=10337&itemid=10338&itemid=10340&itemid=10341&itemid=10342&itemid=10343&itemid=10344&itemid=10346&itemid=10348&itemid=10350&itemid=10351&itemid=10352&itemid=10353&itemid=10357&itemid=10365&itemid=10367&itemid=10368&itemid=10451&itemid=10431&itemid=9295&itemid=10429&itemid=10283&itemid=10287&itemid=10308&itemid=10312&itemid=10289&itemid=10294&itemid=10306&itemid=10307&itemid=9412&itemid=14178&itemid=9354&itemid=9355&itemid=9356&itemid=9359&itemid=9365&itemid=9374&itemid=9382&itemid=9383&itemid=9384&itemid=9385&itemid=9386&itemid=9387&itemid=9388&itemid=9389&itemid=9390&itemid=9391&itemid=9392&itemid=9393&itemid=9394&itemid=9395&itemid=9397&itemid=10275&itemid=9398&itemid=9399&itemid=9400&itemid=9401&itemid=9402&itemid=9403&itemid=9404&itemid=9406&itemid=9408&itemid=10395&itemid=10398&itemid=10401&itemid=10402&itemid=10403&itemid=10404&itemid=10407&itemid=10412&itemid=10371&itemid=10372&itemid=10456&itemid=10373&itemid=10374&itemid=10377&itemid=10379&itemid=10380&itemid=10381&itemid=10382&itemid=10383&itemid=10384&itemid=10385&itemid=10386&itemid=10387&itemid=10388&itemid=10389&itemid=10390&itemid=10391&itemid=10392&sortBy=hash&limit=250
 	http://discmaster.textfiles.com/view/9354/MACPEOPLE-1998-03-01.ISO.7z/MACPEOPLE-1998-03-01.ISO/%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%AB%EF%BC%86%E4%BD%93%E9%A8%93%E7%89%88/PHS%E5%AF%BE%E5%BF%9C%E9%80%9A%E4%BF%A1%EF%BC%86%E3%83%95%E3%82%A1%E3%83%83%E3%82%AF%E3%82%B9%E8%A9%A6%E7%94%A8%E7%89%88/Revolver%E7%84%A1%E6%96%99%E9%85%8D%E5%B8%83%E7%89%88/SuperWorks%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E6%96%87%E6%9B%B8/%E5%B7%AE%E8%BE%BC%E3%83%87%E3%83%BC%E3%82%BF

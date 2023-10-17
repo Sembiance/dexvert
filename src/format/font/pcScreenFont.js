@@ -6,5 +6,5 @@ export class pcScreenFont extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PC_Screen_Font";
 	ext        = [".psf", ".psfu"];
 	magic      = [/PC Screen Font/];
-	converters = ["deark"];
+	converters = ["deark[module:psf]"];
 }

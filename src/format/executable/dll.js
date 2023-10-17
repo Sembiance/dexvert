@@ -22,7 +22,7 @@ export class dll extends Format
 			return [];
 		}
 
-		return (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+		return (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark[module:exe]"] : []);
 	};
 	post  = dexState =>
 	{

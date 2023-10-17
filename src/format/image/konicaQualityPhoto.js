@@ -4,7 +4,7 @@ export class konicaQualityPhoto extends Format
 {
 	name       = "Konica Quality Photo";
 	website    = "http://fileformats.archiveteam.org/wiki/KPQ";
-	ext        = [".kqp"];
+	ext        = [".kqp", ".pic"];
 	magic      = ["Konica Quality Photo"];
-	converters = ["deark", "nconvert"];
+	converters = ["deark[module:picjpeg]", "nconvert"];
 }

@@ -8,7 +8,7 @@ export class windowsSCR extends Format
 	magic          = ["Windows New Executable", "MS-DOS executable, NE for MS Windows 3.x", "Win16 NE executable", "Windows screen saver", /^fmt\/899( |$)/, /^x-fmt\/410( |$)/];
 	weakMagic      = true;
 	metaProvider   = ["winedump"];
-	converters     = ["deark"];
+	converters     = ["deark[module:exe]"];
 	
 	post = dexState =>
 	{

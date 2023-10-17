@@ -6,5 +6,5 @@ export class wad extends Format
 	website    = "https://moddingwiki.shikadi.net/wiki/WAD_Format";
 	ext        = [".wad"];
 	magic      = ["id Software's DOOM Patch-WAD", "doom patch PWAD", "doom main IWAD", "id Software's DOOM Internal-WAD"];
-	converters = ["deark", "gamearch", "gameextractor"];
+	converters = ["deark[module:wad]", "gamearch", "gameextractor"];
 }

@@ -6,5 +6,5 @@ export class spectrum512U extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Spectrum_512_formats";
 	ext        = [".spu"];
 	mimeType   = "image/x-spectrum512-uncompressed";
-	converters = ["recoil2png"];
+	converters = ["deark[module:spectrum512u]", "recoil2png"];
 }

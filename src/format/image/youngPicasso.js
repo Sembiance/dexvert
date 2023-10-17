@@ -7,5 +7,5 @@ export class youngPicasso extends Format
 	ext            = [".yp"];
 	forbidExtMatch = true;
 	magic          = ["Young Picasso"];
-	converters     = ["deark"];
+	converters     = ["deark[module:young_picasso]"];
 }

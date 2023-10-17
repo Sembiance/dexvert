@@ -7,5 +7,5 @@ export class psionPIC extends Format
 	ext        = [".pic", ".icn"];
 	weakExt    = [".pic", ".icn"];
 	magic      = ["Psion Serie 3 bitmap"];
-	converters = ["deark", "recoil2png", "nconvert"];
+	converters = ["deark[module:psionpic]", "recoil2png", "nconvert"];
 }

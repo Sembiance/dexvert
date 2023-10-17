@@ -7,5 +7,5 @@ export class amosIcons extends Format
 	ext        = [".abk"];
 	mimeType   = "image/x-amos-iconbank";
 	magic      = ["AMOS Icons Bank"];
-	converters = ["deark"];
+	converters = ["deark[module:abk]"];
 }

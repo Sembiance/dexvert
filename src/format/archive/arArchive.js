@@ -8,5 +8,5 @@ export class arArchive extends Format
 	magic       = ["current ar archive", "ar archive", /^archive$/];
 	unsupported = true;
 	notes       = "We used to convert with deark/ar but all that usually is stored inside is .o object which are not interesting and some .a files like libphobos2.a produce 9,999 files which is a lot of noise.";
-	//converters = ["deark", "ar"];
+	//converters = ["deark[module:ar]", "ar"];
 }

@@ -6,5 +6,5 @@ export class iffACBM extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ILBM#ACBM";
 	ext        = [".lbm", ".ilbm", ".iff", ".acbm"];
 	magic      = ["IFF data, ACBM continuous image", "IFF Amiga Contiguous BitMap"];
-	converters = ["recoil2png", "deark"];
+	converters = ["recoil2png", "deark[module:ilbm]"];
 }

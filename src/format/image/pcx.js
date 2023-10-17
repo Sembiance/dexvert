@@ -9,7 +9,7 @@ export class pcx extends Format
 	magic        = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/, /^fmt\/(87|90)( |$)/];
 	metaProvider = ["image"];
 	converters   = [
-		"nconvert", "convert", "deark", "gimp",
+		"nconvert", "convert", "deark[module:pcx]", "gimp",
 		...["imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW"].map(v => `${v}[strongMatch]`)
 	];
 }

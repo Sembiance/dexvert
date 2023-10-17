@@ -8,5 +8,5 @@ export class spectrum512S extends Format
 	mimeType   = "image/x-spectrum512-smooshed";
 	magic      = ["Spectrum 512 compressed/smooshed bitmap"];
 	notes      = "Some test files fail to convert correctly: AMBER_F, CANDLE, AI_R_010";
-	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert", "deark"];
+	converters = ["deark[module:spectrum512s]", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
 }

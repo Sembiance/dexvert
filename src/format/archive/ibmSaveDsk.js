@@ -7,5 +7,5 @@ export class ibmSaveDsk extends Format
 	ext            = [".dsk"];
 	forbidExtMatch = true;
 	magic          = ["IBM SKF disk image", "floppy image data (IBM SaveDskF"];
-	converters     = ["sevenZip", "deark"];
+	converters     = ["sevenZip", "deark[module:loaddskf]"];
 }

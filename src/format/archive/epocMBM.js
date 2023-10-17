@@ -6,5 +6,5 @@ export class epocMBM extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/EPOC_MBM";
 	ext        = [".mbm"];
 	magic      = ["EPOC/Symbian MultiBitMap", "Psion Series 5 multi-bitmap image"];
-	converters = ["deark"];
+	converters = ["deark[module:epocimage]"];
 }

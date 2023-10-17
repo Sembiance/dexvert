@@ -8,5 +8,5 @@ export class emf extends Format
 	mimeType     = "image/emf";
 	magic        = ["Windows Enhanced Metafile", "Microsoft Windows Enhanced Metafile", /^fmt\/345( |$)/, /^x-fmt\/153( |$)/];
 	metaProvider = ["image"];
-	converters   = ["deark", "convert", `abydosconvert[format:${this.mimeType}]`, "irfanView", "hiJaakExpress", "canvas[matchType:magic][nonRaster]"];
+	converters   = ["deark[module:emf]", "convert", `abydosconvert[format:${this.mimeType}]`, "irfanView", "hiJaakExpress", "canvas[matchType:magic][nonRaster]"];
 }

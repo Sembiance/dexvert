@@ -6,5 +6,5 @@ export class nokiaGroupGraphics extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Nokia_Group_Graphic";
 	ext        = [".ngg"];
 	magic      = ["Nokia Group Graphics bitmap"];
-	converters = ["deark", "nconvert"];
+	converters = ["deark[module:ngg]", "nconvert"];
 }

@@ -6,5 +6,5 @@ export class os2Pointer extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/OS/2_Pointer";
 	ext        = [".ptr"];
 	magic      = ["OS/2 Pointer", /^OS\/2 [12].x color pointer/];
-	converters = ["deark"];
+	converters = ["deark[module:os2bmp]"];
 }

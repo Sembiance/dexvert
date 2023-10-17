@@ -6,5 +6,5 @@ export class gemFont extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GEM_bitmap_font";
 	ext        = [".gft", ".fnt"];
 	magic      = ["GEM GDOS font"];
-	converters = ["deark"];
+	converters = ["deark[module:gemfont]"];
 }

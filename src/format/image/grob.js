@@ -6,5 +6,5 @@ export class grob extends Format
 	website    = "http://justsolve.archiveteam.org/wiki/GROB;";
 	ext        = [".grb", ".gro"];
 	magic      = ["HP 48 binary - Rev D (GROB)", "HP-48 Graphic Object Bitmap", "HP-49 Graphic Object Bitmap", "HP 49 binary - Rev X (GROB)", "HP ASII GROB bitmap"];
-	converters = ["nconvert", "deark", "recoil2png", "imageAlchemy"];
+	converters = ["nconvert", "deark[module:grob]", "recoil2png", "imageAlchemy"];
 }

@@ -6,5 +6,5 @@ export class shg extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics";
 	ext        = [".shg"];
 	magic      = ["Segmented Hypergraphics bitmap"];
-	converters = ["deark"];
+	converters = ["deark[module:shg]"];
 }

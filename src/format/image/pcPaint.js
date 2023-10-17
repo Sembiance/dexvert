@@ -9,5 +9,5 @@ export class pcPaint extends Format
 
 	// deark is the only thing that appears to handle .clp files
 	// nconvert sometimes fails to convert, but sometimes succeeds. same command. weird.
-	converters = ["deark", "nconvert", "pv[matchType:magic]"];
+	converters = ["deark[module:pcpaint]", "nconvert", "pv[matchType:magic]"];
 }

@@ -7,6 +7,6 @@ export class kra extends Format
 	ext        = [".kra"];
 	mimeType   = "application/x-krita";
 	magic      = [/^Krita [Dd]ocument/, /^fmt\/999( |$)/];
-	converters = ["deark"];
+	converters = ["deark[module:zip]"];
 }
 

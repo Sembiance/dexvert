@@ -6,5 +6,5 @@ export class multipleResolutionBitmap extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Segmented_Hypergraphics";
 	ext        = [".mrb"];
 	magic      = ["Multiple Resolution Bitmap"];
-	converters = ["deark"];
+	converters = ["deark[module:shg]"];
 }

@@ -6,5 +6,5 @@ export class printPartnerGraphics extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PrintPartner";
 	ext        = [".gph"];
 	magic      = ["PrintPartner Graphic bitmaps"];
-	converters = ["deark"];
+	converters = ["deark[module:pp_gph]"];
 }

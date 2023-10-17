@@ -7,5 +7,5 @@ export class icns extends Format
 	ext        = [".icns"];
 	mimeType   = "image/x-icns";
 	magic      = ["Mac OS X icon", "Apple Icon Image Format", /^fmt\/1185( |$)/];
-	converters = ["deark", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["deark[module:icns]", `abydosconvert[format:${this.mimeType}]`];
 }

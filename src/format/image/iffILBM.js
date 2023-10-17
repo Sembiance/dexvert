@@ -20,14 +20,14 @@ export class iffILBM extends Format
 	// recoil2png produces the best still images for iffILBM files, with abydosconvert being a runner up
 	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
-	converters = [`recoil2png`, "deark", "ffmpeg[format:iff][outType:png]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert", "hiJaakExpress[matchType:magic]", "pv[matchType:magic]", "canvas[matchType:magic]"];
+	converters = [`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert", "hiJaakExpress[matchType:magic]", "pv[matchType:magic]", "canvas[matchType:magic]"];
 }
 
 /* Other IFF ILBM converters:
 abydosconvert can produce animated WEBP files from color cycling ILBM files, but it handles several files poorly
 So I wrote my own program, ilbm2frames (that uses libiff behind the scenes). ilbm2frames won't produce frames unless there is color cycling
 If you use that, in combination with every converter, you can get both an animated file and a static file:
-  converters = [`recoil2png`, "deark", "ffmpeg[format:iff]", "convert", `abydosconvert[format:${this.mimeType}][outType:png]`].map(v => `ilbm2frames -> *ffmpeg[fps:20][outType:gif] & ${v}`);
+  converters = [`abydosconvert[format:${this.mimeType}][outType:png]`].map(v => `ilbm2frames -> *ffmpeg[fps:20][outType:gif] & ${v}`);
 However, there are a TON of IFF files out there with just truly wacky color cycling, almost like some sort of odd default from some program back in the day.
 So it's not really worth creating the animated versions, just way too much junk.
 

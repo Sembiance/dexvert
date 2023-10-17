@@ -7,5 +7,5 @@ export class os2BitmapArray extends Format
 	magic      = ["OS/2 graphic array", "OS/2 Bitmap Graphics Array"];
 	ext        = [".bga", ".bmp", ".ico"];
 	weakExt    = [".bmp", ".ico"];
-	converters = ["deark"];
+	converters = ["deark[module:os2bmp]"];
 }

@@ -6,5 +6,5 @@ export class rpm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/RPM";
 	ext        = [".rpm"];
 	magic      = ["RPM Package", "RPM ", "Red Hat Package Manager Source", /^fmt\/795( |$)/];
-	converters = ["deark", "sevenZip", "unar"];
+	converters = ["deark[module:rpm]", "sevenZip", "unar"];
 }

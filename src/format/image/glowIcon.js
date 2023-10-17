@@ -6,5 +6,5 @@ export class glowIcon extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GlowIcons";
 	ext        = [".info"];
 	magic      = ["Amiga GlowIcon"];
-	converters = ["deark"];
+	converters = ["deark[module:amigaicon]"];
 }

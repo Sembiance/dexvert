@@ -8,5 +8,5 @@ export class mpo extends Format
 	magic      = ["JPEG image data"];
 	weakMagic  = true;
 	mimeType   = "image/x-mpo";
-	converters = ["deark"];
+	converters = ["deark[module:jpeg]"];
 }

@@ -6,5 +6,5 @@ export class epocAIF extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/EPOC_AIF";
 	ext        = [".aif"];
 	magic      = ["EPOC/Symbian Application Info", "Psion Series 5 application information file"];
-	converters = ["deark"];
+	converters = ["deark[module:epocimage]"];
 }

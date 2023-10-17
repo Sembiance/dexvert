@@ -18,5 +18,5 @@ export class neochromeAnimation extends Format
 		// Assume an NTSC 60Hz display, that's a 16.66ms minimum delay (+1) between frames
 		return {fps : xu.SECOND/(16.66*(frameDelay+1))};
 	};
-	converters = dexState => [`deark -> *ffmpeg[fps:${dexState.meta.fps}]`, "deark"];
+	converters = dexState => [`deark[module:neochrome_ani] -> *ffmpeg[fps:${dexState.meta.fps}]`, "deark[module:neochrome_ani]"];
 }

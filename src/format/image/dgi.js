@@ -7,5 +7,5 @@ export class dgi extends Format
 	ext           = [".dgi"];
 	fileSize      = 64008;
 	matchFileSize = true;
-	converters    = ["deark", "dgiwind"];
+	converters    = ["deark[module:dgi]", "dgiwind"];
 }

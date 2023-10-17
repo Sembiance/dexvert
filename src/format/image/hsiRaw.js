@@ -7,5 +7,5 @@ export class hsiRaw extends Format
 	ext            = [".raw", ".hst"];
 	forbidExtMatch = [".raw"];
 	magic          = ["HSI Raw bitmap"];
-	converters     = ["deark", "nconvert", "imageAlchemy"];
+	converters     = ["deark[module:hsiraw]", "nconvert", "imageAlchemy"];
 }

@@ -6,6 +6,6 @@ export class nokiaOperatorLogo extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Nokia_Operator_Logo";
 	ext        = [".nol"];
 	magic      = ["Nokia Operator Logo bitmap"];
-	converters = ["deark", "nconvert"];
+	converters = ["deark[module:nol]", "nconvert"];
 	verify     = ({meta}) => meta.width<5000 && meta.height<5000;
 }

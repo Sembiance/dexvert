@@ -8,5 +8,5 @@ export class msCompress extends Format
 	forbidExtMatch = true;	// Just too common and we have pretty good magic
 	safeExt        = "_";	// Even self extracting archives need to end in an underscore in order to decompress
 	magic          = ["MS Compress archive data", "Microsoft SZDD compressed", "Microsoft KWAJ compressed", "MS DOS Compression Format", /^fmt\/(462|469)( |$)/];
-	converters     = ["msexpand", "msexpand_win2k", "deark", "UniExtract"];
+	converters     = ["msexpand", "msexpand_win2k", "deark[module:mscompress]", "UniExtract"];
 }

@@ -8,6 +8,6 @@ export class zbr extends Format
 	magic      = ["Zebra metafile"];
 	notes      = "reaConverter is the only program I know of that can convert to SVG but it fails to do so with QEMU WinXP 32bit (used to work in wine). So for now, we just convert to PNG.";
 	trustMagic = true;
-	converters = ["nconvert", "deark"];
+	converters = ["nconvert", "deark[zbr]"];
 	verify     = ({meta}) => meta.colorCount>2;
 }

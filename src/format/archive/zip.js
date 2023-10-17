@@ -10,7 +10,7 @@ export class zip extends Format
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>
 	{
-		const r = ["sevenZip", "unzip", "deark", "deark[opt:zip:scanmode]", "unar", "sqc", "izArc"];
+		const r = ["sevenZip", "unzip", "deark[module:zip]", "deark[module:zip][opt:zip:scanmode]", "unar", "sqc", "izArc"];
 		
 		// If we are macintoshjp, unar works best
 		if(RUNTIME.globalFlags?.osHint?.macintoshjp)

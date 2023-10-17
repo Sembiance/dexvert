@@ -8,5 +8,5 @@ export class corelDrawPattern extends Format
 	forbidExtMatch = true;
 	magic          = [/Corel Draw Pattern/];
 	notes          = "Only the preview image is supported at the moment.";
-	converters     = ["deark"];
+	converters     = ["deark[module:riff]"];
 }

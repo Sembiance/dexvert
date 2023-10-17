@@ -9,5 +9,5 @@ export class xb extends Format
 	mimeType       = "image/x-xbin";
 	magic          = ["XBIN image"];
 	metaProvider   = ["ansiArt"];
-	converters     = ["ansilove[format:xb]", "deark", `abydosconvert[format:${this.mimeType}]`];
+	converters     = ["ansilove[format:xb]", "deark[module:xbin]", `abydosconvert[format:${this.mimeType}]`];
 }

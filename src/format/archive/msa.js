@@ -10,5 +10,5 @@ export class msa extends Format
 	
 	// msa will convert to .st which I can then just mount and extract with uniso and preserves directory structure
 	// deark works, but doesn't preserve directory structure at all
-	converters = ["msa", "deark"];
+	converters = ["msa", "deark[module:msa]"];
 }

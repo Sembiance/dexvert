@@ -8,5 +8,5 @@ export class pcrFont extends Format
 	fileSize       = 3595;
 	forbidExtMatch = true;
 	magic          = ["PCR Font"];
-	converters     = ["deark"];
+	converters     = ["deark[module:pcrfont]"];
 }

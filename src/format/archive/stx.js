@@ -6,5 +6,5 @@ export class stx extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/STX";
 	ext        = [".stx"];
 	magic      = ["PASTI disk image"];
-	converters = ["deark"];
+	converters = ["deark[module:pasti]"];
 }

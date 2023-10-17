@@ -6,5 +6,5 @@ export class arcFS extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ArcFS";
 	ext        = [".arc"];
 	magic      = ["RISC OS archive (ArcFS format)", "Acorn ArcFS Archive"];
-	converters = ["nspark", "deark"];
+	converters = ["nspark", "deark[module:arcfs]"];
 }

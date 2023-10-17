@@ -6,6 +6,6 @@ export class photoDrawMIX extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MIX_(PhotoDraw)";
 	ext        = [".mix"];
 	magic      = ["Microsoft PhotoDraw drawing", /^fmt\/594( |$)/];
-	converters = ["deark", "nconvert"];
+	converters = ["deark[module:cfb]", "nconvert"];
 	notes      = "Only thumbnail extraction is supported.";
 }

@@ -23,7 +23,7 @@ export class exe extends Format
 	// Then we try to process as an NSIS installer
 	// Finally we attempt to just get the resources out before throwing it at deark
 	// Could also 'decompress' packed EXEs by adding "deark[module:exepack]" but that doesn't really provide us with any actual content, so meh.
-	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:zip]", "sevenZip[type:nsis]", "unar[type:nsis]", "sevenZip[type:PE][rsrcOnly]", "deark"] : []);
+	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:zip]", "sevenZip[type:nsis]", "unar[type:nsis]", "sevenZip[type:PE][rsrcOnly]", "deark[module:exe]"] : []);
 
 	post = dexState =>
 	{

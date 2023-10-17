@@ -7,5 +7,5 @@ export class ora extends Format
 	ext        = [".ora"];
 	mimeType   = "image/openraster";
 	magic      = ["OpenRaster Image Format", "OpenRaster bitmap", /^fmt\/998( |$)/];
-	converters = ["deark", "gimp"];
+	converters = ["deark[module:zip]", "gimp"];
 }

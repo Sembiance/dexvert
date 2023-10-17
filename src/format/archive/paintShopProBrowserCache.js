@@ -6,5 +6,5 @@ export class paintShopProBrowserCache extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache";
 	ext        = [".jbf"];
 	magic      = ["PaintShop Pro Browser cache", /^fmt\/217( |$)/];
-	converters = ["deark"];
+	converters = ["deark[module:jbf]"];
 }

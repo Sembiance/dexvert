@@ -8,5 +8,5 @@ export class binHex extends Format
 	ext        = [".hqx", ".hcx", ".hex"];
 	magic      = ["BinHex binary text", "BinHex encoded", /^x-fmt\/416( |$)/, ...TEXT_MAGIC];
 	weakMagic  = TEXT_MAGIC;
-	converters = ["unar", "deark"];
+	converters = ["unar", "deark[module:binhex]"];
 }

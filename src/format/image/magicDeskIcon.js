@@ -6,5 +6,5 @@ export class magicDeskIcon extends Format
 	ext        = [".icn"];
 	fileSize   = 515;
 	magic      = ["MagicDesk Icon"];
-	converters = ["deark"];
+	converters = ["deark[module:mdesk_icn]"];
 }

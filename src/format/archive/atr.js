@@ -12,5 +12,5 @@ export class atr extends Format
 
 	// Alternative: https://www.atarimax.com/jindroush.atari.org/asoft.html   (I got it compiled in sandbox/app/adir_src/
 	// Alternative: https://github.com/robmcmullen/atrcopy
-	converters = ["atr", "deark"];
+	converters = ["atr", "deark[module:atr]"];
 }

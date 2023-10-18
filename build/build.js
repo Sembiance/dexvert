@@ -3,7 +3,7 @@ import {XLog} from "xlog";
 import {printUtil, cmdUtil} from "xutil";
 import {path} from "std";
 
-const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED"];	// TODO add back in: , "release"
+const TARGET_NAMES = ["README", "SUPPORTED", "UNSUPPORTED"];
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
 	desc    : "Builds one or more targets",

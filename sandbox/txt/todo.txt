@@ -4,51 +4,7 @@
 * Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
   'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
 
-* Finish going through sandbox/samples:
-	ImageMagick
-	samples.mplayerhq.hu
-	libxad-testfiles
-
-* Deark updated from 1.6.3_p20221118 to 1.6.5_p20230926. Ensure we support these deark supported formats:
-	* Magic Desk or ToyBox icon (module="mdesk_icn")
-	Options
-	-opt mdesk_icn:pal=<1|2|3|4> - 1=Use ToyBox palette, 2=Use Magic Desk
-		palette, 3=Prefer ToyBox palette, 4=Prefer Magic Desk palette (default)
-
-	* Syberia texture (.syj) (module="syberia_syj")
-	- Convert abbreviated JPEG file to JPEG.
-
-	* TheDraw COM (module="thedraw_com")
-	Executable character graphics format made by TheDraw.
-
-	* DIET (module="diet") (experimental/incomplete)
-	- Supports COM and data files. EXE not properly supported.
-	Options
-	-opt diet:raw - For EXE, write raw decompressed data.
-
-	* LZS(Stac) (module="lzstac")
-	Raw LZ-Stac compressed data.
-	- Not autodetected; must use "-m lzstac".
-
-	* LZS221 (module="lzs221")
-	Compressed file format by Stac.
-
-	* PC-Shrink (module="pcshrink") (experimental)
-	PC-Install .SHR compressed archive format.
-
-* Go through the entire list of 'Awave Studio' formats in program_formats.txt and add support for them all to dexvert
-  This is because I upgraded from 7.0 to 8.8
-
-* PeaZip supports like 234 formats but I'm only using it for 1. Look to extend that support: https://github.com/peazip/PeaZip
-
-* I downloaded Abydos test suite v3. I should b3sum remove any files that I alread have samples for and add support for all new ones
-  It's in: sandbox/samples/abydos-testsuite-3.tar.xz  downloaded from: http://snisurset.net/download.php?d=abydos
-
-* Now that I have quicktime 4 pro installed, see if it can export videos. If so, try using it for some video formats, especially mov
-  Also try audio/aviAudio/04mwwk00.avi as it didn't convert any other way
-
 * Seek out new programs I could support now that I have wine and vamos working. This includes .NET and Vista/Win7 programs
-  - Search the dexvert code for any 'TODO' comments
   - Browse the list of unsupported formats: https://github.com/Sembiance/dexvert/blob/master/UNSUPPORTED.md
     Search aminet for vamos https://aminet.net/
   - Go through the 'Other Converters' list in info.txt for more programs I may be able to adopt now with wine/vamos

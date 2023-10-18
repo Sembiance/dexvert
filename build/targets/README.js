@@ -4,6 +4,7 @@ import {fileUtil} from "xutil";
 import {formats, init as initFormats} from "../../src/format/formats.js";
 import {programs, init as initPrograms} from "../../src/program/programs.js";
 //import {RELEASE} from "../../release/RELEASE.js";	// TODO update RELEASE.js with the new release info
+// TODO add this file back to build.js
 
 export default async function buildREADME(xlog)
 {

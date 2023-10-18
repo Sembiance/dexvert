@@ -9,6 +9,7 @@ export class windowsSCR extends Format
 	weakMagic      = true;
 	metaProvider   = ["winedump"];
 	converters     = ["deark[module:exe]"];
+	notes          = "Could be fun to 'run' these in Wine and record the output into a preview.mp4 video";
 	
 	post = dexState =>
 	{

@@ -10658,3 +10658,13 @@ Zone 66 (partial)
 .mpk
 .mbm
 
+>>> LibDsk
+.DSK files, as used in CPCEMU, JOYCE and other Sinclair/Amstrad emulators.
+MYZ80 hard drive image files.
+NanoWasp floppy image files.
+.CFI (Compressed Floppy Image) files, as created by FDCOPY.COM under DOS.
+CopyQM files
+TeleDisk files
+Compaq QRST files
+APRIDISK image files
+The LDBS format

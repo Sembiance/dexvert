@@ -6,5 +6,8 @@ export class hlp extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HLP";
 	ext        = [".hlp"];
 	magic      = ["Windows HELP File", /^MS Windows 3\.. help/, "Windows Help File", /^fmt\/474( |$)/];
-	converters = ["unHLPMVB[extractExtra]"];	// UniExtract supports this format, but it just runs helpdeco behind the scenes, so we don't need to add that to the converters
+	
+	// UniExtract supports this format, but it just runs helpdeco behind the scenes, so we don't need to add that to the converters
+	// deark also supports this, but just extracts the internal .shg files and that's it (also can output the raw text with a VERY EXPERIMENTAL option)
+	converters = ["unHLPMVB[extractExtra]"];
 }

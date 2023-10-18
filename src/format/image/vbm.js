@@ -6,5 +6,5 @@ export class vbm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/VBM_(VDC_BitMap)";
 	ext        = [".vbm", ".bm"];
 	magic      = ["VDC BitMap"];
-	converters = ["recoil2png", "view64"];
+	converters = ["deark[module:vbm]", "recoil2png", "view64"];
 }

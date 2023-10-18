@@ -9,5 +9,5 @@ export class cbmBasic extends Format
 	forbidExtMatch = true;
 	magic          = ["Commodore 64 BASIC V2 program"];
 	idCheck        = inputFile => inputFile.size<(xu.KB*500);	// Commodore BASIC programs are likely to be smaller than 500KB
-	converters     = ["detox64"];
+	converters     = ["detox64", "deark[module:basic_c64]"];
 }

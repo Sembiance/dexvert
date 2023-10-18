@@ -12,5 +12,5 @@ export class pog extends Format
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.pnm`);
 		return otherFile ? [otherFile] : false;
 	};
-	converters = r => [`deark${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`];
+	converters = r => [`deark[module:newprintshop]${r.f.aux ? `[file2:${r.f.aux.base}]` : ""}`];
 }

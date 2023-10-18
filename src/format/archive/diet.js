@@ -6,5 +6,5 @@ export class diet extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DIET_(compression)";
 	magic      = ["DIET compressed data"];
 	packed     = true;
-	converters = ["diet"];
+	converters = ["deark[module:diet]", "diet"];
 }

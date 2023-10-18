@@ -9,6 +9,7 @@ export default
 		abackupDiskImage             : {name : "ABackup Disk Image", ext : [".adf"], magic : ["ABackup backup disk image"]},
 		aixBackupRestore             : {name : "AIX backup/restore", ext : [".img"], magic : ["AIX backup/restore format file"]},
 		artsAndLettersClipArtLibrary : {name : "Arts and Letters Clip Art Library", ext : [".yal"], magic : ["Arts and Letters clip art library"]},
+		atariCassetteTapeImage       : {name : "Atari Cassette Tape Image", ext : [".cas"], magic : ["Atari Cassette tape image"], weakMagic : true},
 		beOSInstallPackage           : {name : "BeOS Installation Package", ext : [".pkg"], magic : ["BeOS installation package"]},
 		beOSResourceData             : {name : "BeOS Resource Data", ext : [".rsrc"], magic : ["BeOS Resource data"]},
 		c16Tape                      : {name : "Commodore 16 Tape", ext : [".tap"], magic : ["C16 Tape image format"]},
@@ -327,7 +328,6 @@ export default
 		warCraftMap                 : {name : "WarCraft Map", ext : [".pud"], magic : ["WarCraft map"]},
 		warCraft3Map                : {name : "WarCraft III Map", ext : [".w3m"], magic : ["WarCraft III map", "Warcraft III map"]},
 		warCraft3RecordedGame       : {name : "WarCraft III Recorded Game", ext : [".w3g"], magic : ["WarCraft III Recorded Game", "Warcraft III recorded game"]},
-		winzlePuzzle                : {name : "Winzle Puzzle", ext : [".wzl"], magic : ["Winzle puzzle"]},
 		wipeout2097TrackData        : {name : "Wipeout 2097 Track Data", ext : [".wad"], magic : ["Wipeout 2097 track data"]},
 		zsnesSaveSate               : {name : "ZSNES Save State", ext : [".zst"], magic : ["ZSNES Save State"]},
 
@@ -482,7 +482,6 @@ export default
 		artEffectConvolution         : {name : "ArtEffect Convolution", magic : ["ArtEffect convolution"]},
 		asciiFontMetrics             : {name : "ASCII Font Metrics", ext : [".afm"], magic : ["ASCII font metrics", "Outline Font Metric", "Adobe/Outline Font Metric"]},
 		astoundActor                 : {name : "Astound Actor", ext : [".act"], magic : ["Astound Actor"]},
-		atariCassetteTapeImage       : {name : "Atari Cassette Tape Image", ext : [".cas"], magic : ["Atari Cassette tape image"], weakMagic : true},
 		atariCTBFile                 : {name : "Atari CTB File", ext : [".ctb"], magic : ["Atari CTB File"]},
 		authorwareLibrary            : {name : "Authorware Library", ext : [".apl"], magic : ["Authorware Library"]},
 		autoCADCompiledMenu          : {name : "AutoCAD Compiled Menu", ext : [".mnx"], magic : ["AutoCAD compiled Menu"]},

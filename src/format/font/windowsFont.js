@@ -8,5 +8,6 @@ export class windowsFont extends Format
 	magic       = ["Windows Font resource"];
 	weakMagic   = true;
 	unsupported = true;
-	notes       = "Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt";
+	notes       = "Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt";
+	//converters  = ["deark[module:fnt]"];	// deark doesn't support vector fonts
 }

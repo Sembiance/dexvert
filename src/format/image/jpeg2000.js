@@ -6,7 +6,7 @@ export class jpeg2000 extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/JPEG_2000";
 	ext          = [".jp2"];
 	mimeType     = "image/jp2";
-	magic        = ["JPEG 2000", "JP2 (JPEG 2000", "Mac JPEG 2000 bitmap (MacBinary)", /^x-fmt\/392( |$)/];
+	magic        = ["JPEG 2000", "JP2 (JPEG 2000", "Mac JPEG 2000 bitmap (MacBinary)", /^x-fmt\/(392|1794)( |$)/];
 	metaProvider = ["image"];
 	converters   = dexState =>
 	{

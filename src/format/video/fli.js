@@ -7,5 +7,5 @@ export class fli extends Format
 	ext          = [".fli"];
 	magic        = ["FLIC FLI video", "FLI animation", "AutoDesk FLIC Animation", /^x-fmt\/(154|299)( |$)/];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:flic]", "xanim"];
+	converters   = ["ffmpeg[format:flic]", "xanim", "deark[module:fli] -> *ffmpeg[fps:15]"];
 }

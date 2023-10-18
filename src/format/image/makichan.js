@@ -6,5 +6,5 @@ export class makichan extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MAKIchan_Graphics";
 	ext        = [".mag", ".max", ".mki"];
 	magic      = [/^MAKI v1-[ab] bitmap$/, "MAG v2 bitmap", /^fmt\/1469( |$)/];
-	converters = ["recoil2png"];
+	converters = ["recoil2png", "deark[module:makichan]"];	// deark gets some dimensions wrong
 }

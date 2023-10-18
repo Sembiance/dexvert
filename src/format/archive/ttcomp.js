@@ -15,6 +15,5 @@ export class ttcomp extends Format
 	// mac binary files are also sometimes identified as this
 	forbiddenMagic = [/MacBinary/];
 
-	// NOTE: Deark also supports extraction of these, but because deark will also convert so many other formats and TTComp is a VERY weak magic identification, we don't include it here
-	converters = ["ttdecomp"];
+	converters = ["ttdecomp"];	// "deark[module:dclimplode]" also works, but it will take almost any file as input
 }

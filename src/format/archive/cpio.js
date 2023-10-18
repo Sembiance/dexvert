@@ -6,5 +6,5 @@ export class cpio extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Cpio";
 	ext        = [".cpio"];
 	magic      = ["CPIO archive", /cpio archive/];
-	converters = ["cpio", "sevenZip", "unar"];
+	converters = ["cpio", "sevenZip", "unar", "deark[module:cpio]"];
 }

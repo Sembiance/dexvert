@@ -150,7 +150,6 @@ export default
 		deluxePrint                     : {name : "Deluxe Print Document/Project", ext : [".bnr2", ".lbl2", ".lhd2", ".sgn2", ".bnnr", ".labl", ".lthd", ".sign"], magic : ["Deluxe Print"]},
 		developerStudioProject          : {name : "Microsoft Developer Studio Project", ext : [".mdp"], magic : ["Microsoft Developer Studio Project"]},
 		directorSTXT                    : {name : "Director STXT", ext : [".stxt"], magic : ["Director STXT"], weakMagic : true},
-		epocInstallationPackage         : {name : "EPOC Installation Package", ext : [".sis"], magic : ["EPOC Installation package", "Symbian installation file"]},
 		frontRunnerBinaryModule         : {name : "FrontRunner Binary Module", ext : [".frb"], magic : ["FrontRunner Binary module"]},
 		geosConvert                     : {name : "GEOS ConVerT", ext : [".cvt"], magic : ["GEOS ConVerT container format"], website : "http://unusedino.de/ec64/technical/formats/cvt.html"},
 		gfaBASICAmiga                   : {name : "GFA-BASIC Amiga", ext : [".gfa", ".bas"], magic : ["GFA-BASIC Amiga"]},

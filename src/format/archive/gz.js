@@ -9,5 +9,5 @@ export class gz extends Format
 	magic        = ["gzip compressed data", "GZipped data", "gzip: Deflate", /^x-fmt\/266( |$)/];
 	
 	// sevenZip will properly set timestamps. izArc & UniExtract will fully extract, but this is better than not handling at all
-	converters   = ["sevenZip", "gunzip", "ancient", "sqc", "izArc", "UniExtract", "deark[module:pack]"];
+	converters   = ["sevenZip", "gunzip", "ancient", "deark[module:gzip]", "sqc", "izArc", "UniExtract"];
 }

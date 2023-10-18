@@ -6,5 +6,5 @@ export class ftc extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Falcon_True_Color";
 	ext        = [".ftc"];
 	fileSize   = 184_320;
-	converters = ["recoil2png"];
+	converters = ["deark[module:ftc]", "recoil2png"];
 }

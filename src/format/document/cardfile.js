@@ -8,5 +8,5 @@ export class cardfile extends Format
 	ext            = [".crd"];
 	magic          = ["Windows Cardfile database", "Cardfile", /^fmt\/1254( |$)/];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
-	converters     = ["deark & cardfile"];
+	converters     = ["deark[module:cardfile] & cardfile"];
 }

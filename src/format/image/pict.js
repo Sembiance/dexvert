@@ -17,7 +17,7 @@ export class pict extends Format
 			r.push("deark[mac][deleteADF][convertAsExt:.pict]");
 
 		r.push(
-			"deark[mac][recombine]",
+			"deark[module:pict][mac][recombine]",
 			"recoil2png"
 		);
 

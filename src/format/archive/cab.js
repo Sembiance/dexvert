@@ -6,5 +6,5 @@ export class cab extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CAB2";
 	ext        = [".cab"];
 	magic      = [/^Microsoft Cabinet [Aa]rchive/, /^x-fmt\/414( |$)/];
-	converters = ["cabextract", "sqc", "izArc", "UniExtract"];
+	converters = ["cabextract", "sqc", "deark[module:cab]", "izArc", "UniExtract"];
 }

@@ -4,7 +4,7 @@ export class lha extends Format
 {
 	name       = "LHArc Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/LHA";
-	ext        = [".lha", ".lhz", ".lzs", ".exe", ".lzh"];
+	ext        = [".lha", ".lhz", ".lzs", ".exe", ".lzh", ".car"];
 
 	// If it's a self-extracting archive, ensure it has a .exe extension
 	safeExt = dexState => (dexState.hasMagics("LHA self-extracting") ? ".exe" : ".lha");
@@ -14,5 +14,5 @@ export class lha extends Format
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 	// Luckilly 'lha' fails on these, so then I try lhark specific extractor
 	// See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
-	converters = ["lha", "sevenZip", "deark[opt:lha:lhark]", "sqc", "UniExtract[matchType:magic]", "izArc", "sqc", "lhark"];
+	converters = ["lha", "sevenZip", "deark[module:lha][opt:lha:lhark]", "deark[module:car_lha] -> lha", "deark[module:lharc_sfx_com]", "sqc", "UniExtract[matchType:magic]", "izArc", "sqc", "lhark"];
 }

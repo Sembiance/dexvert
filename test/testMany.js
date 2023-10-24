@@ -118,6 +118,21 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 			{
 				color: #ff0000;
 			}
+
+			td.red
+			{
+				color: #ff0000;
+			}
+
+			td.orange
+			{
+				color: #ffa000;
+			}
+
+			td.yellow
+			{
+				color: #ffff00;
+			}
 		</style>
 	</head>
 	<body>
@@ -138,7 +153,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
 						<td style="text-align: left;"><a href="${o.reportFilePath}">${formatid.escapeHTML()}</a></td>
 						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
-						<td class="${+o.failCount ? "bad" : "good"}">${o.successPercentage || "0"}%</td>
+						<td class="${(+o.successPercentage || 0)<10 ? "red" : ((+o.successPercentage || 0) < 40 ? "orange" : ((+o.successPercentage || 0) < 100 ? "yellow" : "good"))}">${o.successPercentage || "0"}%</td>
 						<td class="${+o.failCount ? "bad" : "good"}">${o.failCount.toLocaleString()}</td>
 						<td>${o.elapsed.msAsHumanReadable()}</td>
 					</tr>`).join("")}

@@ -1,11 +1,11 @@
-# Unsupported File Formats (930)
+# Unsupported File Formats (933)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (58)
+## Archive (60)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -49,6 +49,7 @@ archive | OS/2 Installation Package | .pkg .pak | [8 sample files](https://telpa
 archive | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://telparia.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 archive | Pax Archive | .pax | [8 sample files](https://telparia.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 archive | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
+archive | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://telparia.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 archive | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://telparia.com/fileFormatSamples/archive/ps1MemoryCard/)
 archive | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://telparia.com/fileFormatSamples/archive/redArchive/)
 archive | Setup Program Archive | .mva | [6 sample files](https://telparia.com/fileFormatSamples/archive/setupMVA/)
@@ -56,6 +57,7 @@ archive | Shockwave Flash Debug | .swd |
 archive | SNATCH-IT Disk Image | .cp2 .img | 
 archive | SPIS TCompress |  | 
 archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://telparia.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+archive | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://telparia.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. So this can't be safely enabled right now.
 archive | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://telparia.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 archive | Unix Archive - Old | .a | [8 sample files](https://telparia.com/fileFormatSamples/archive/unixArchiveOld/)
 archive | Unreal Package | .ut2 .uasset | 
@@ -116,7 +118,7 @@ document | Adobe InDesign Document | .indd .ind |
 document | Alan Interactive Fiction | .acd | 
 document | Amiga Vision Flow | .avf | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaVisionFlow/)
 document | AmigaWriter Documet |  | [3 sample files](https://telparia.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
-document | Applesoft BASIC Source Code | .bas | [2 sample files](https://telparia.com/fileFormatSamples/document/applesoftBASIC/)
+document | Applesoft BASIC Source Code | .bas | [2 sample files](https://telparia.com/fileFormatSamples/document/applesoftBASIC/) - Maybe I can use something like: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
 document | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://telparia.com/fileFormatSamples/document/astoundPresentation/)
 document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://telparia.com/fileFormatSamples/document/calamusDocument/)
 document | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://telparia.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
@@ -280,7 +282,7 @@ image | Blue Scan Drawing | .blsc |
 image | CAD Vantage Drawing | .dwg | 
 image | Calamus Vector Document | .cvd | 
 image | Chompsters Sprite | .spr | 
-image | Claris Draw | .cdd | 
+image | Claris Draw | .cdd | [1 sample file](https://telparia.com/fileFormatSamples/image/clarisDraw/)
 image | Continuous Edge Graphic Bitmap | .ceg | [1 sample file](https://telparia.com/fileFormatSamples/image/continuousEdge/) - PV says it can convert these, but didn't work on my 1 and only sample file.
 image | Crayola Art Studio | .art | 
 image | DAUB Drawing | .dob | [1 sample file](https://telparia.com/fileFormatSamples/image/daubDrawing/)
@@ -349,11 +351,11 @@ image | Windows FAX Cover | .cpe | [5 sample files](https://telparia.com/fileFor
 image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://telparia.com/fileFormatSamples/image/xCADDrawing/)
 image | [xRes Image](http://fileformats.archiveteam.org/wiki/XRes) | .lrg | [6 sample files](https://telparia.com/fileFormatSamples/image/xRes/)
-image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC2/)
+image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://telparia.com/fileFormatSamples/image/yanagisawaPIC2/) - A request was made to add support to recoil, but that is looking unlikely: https://sourceforge.net/p/recoil/bugs/73/ 		There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
 
 
 
-## Music (101)
+## Music (102)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://telparia.com/fileFormatSamples/music/aceTracker/)
@@ -362,7 +364,7 @@ music | ADrum Track |  |
 music | Aero Studio | .aero | [2 sample files](https://telparia.com/fileFormatSamples/music/aeroStudio/)
 music | All Sound Tracker Module | .ast | [2 sample files](https://telparia.com/fileFormatSamples/music/allSoundTracker/)
 music | AND XSynth Module | .amx | [1 sample file](https://telparia.com/fileFormatSamples/music/andXSynth/)
-music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | 
+music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
 music | AProSys Module | .amx | [2 sample files](https://telparia.com/fileFormatSamples/music/aProSys/)
 music | Atari Digi-Mix Module | .mix | [3 sample files](https://telparia.com/fileFormatSamples/music/atariDigiMix/)
 music | AXS Module | .axs | [2 sample files](https://telparia.com/fileFormatSamples/music/axsModule/)
@@ -440,6 +442,7 @@ music | Sequencer One Song | .one |
 music | ShroomPlayer Module | .sho | [5 sample files](https://telparia.com/fileFormatSamples/music/shroomPlayer/)
 music | Skale Tracker Module | .skm | [5 sample files](https://telparia.com/fileFormatSamples/music/skaleTracker/)
 music | Sound Club Module | .sn .sn2 | [9 sample files](https://telparia.com/fileFormatSamples/music/soundClub/)
+music | [Soundtrakker 128](http://justsolve.archiveteam.org/wiki/Soundtrakker_128_module) | .128 | [3 sample files](https://telparia.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
 music | Squirrel Module | .sqm | [1 sample file](https://telparia.com/fileFormatSamples/music/squirrelModule/)
 music | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php?title=Star_3) | .st3 | [3 sample files](https://telparia.com/fileFormatSamples/music/star3MIDIKaraoke/)
 music | STarKos Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/starkos/)
@@ -447,7 +450,7 @@ music | StoneTracker Module | .spm .sps | [6 sample files](https://telparia.com/
 music | SunVox Module | .psy | [4 sample files](https://telparia.com/fileFormatSamples/music/sunVox/)
 music | [SVArTracker Module](https://www.kvraudio.com/product/svartracker-by-svar-software) | .svar | [3 sample files](https://telparia.com/fileFormatSamples/music/svarTracker/) - I tried using sandbox/app/svartracker_1_22_free_inst.exe under win2k but got lots of errors and couldn't even figure out how to 'render' the file to WAV, VERY clumsy program and only a tiny handful of songs seem to exist for it.
 music | Sweet Sixteen Song | .sng | 
-music | Synder SNG-Player Module | .sng | [5 sample files](https://telparia.com/fileFormatSamples/music/synderSNG/) - An old 3bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install: https://soft.lafibre.info/
+music | Synder SNG-Player Module | .sng | [5 sample files](https://telparia.com/fileFormatSamples/music/synderSNG/) - An old 32bit linux player binary can be found sandbox/app/Synder SNG-Player Linux32 build 2008-05-19.rar   Could get an OLD linux OS and install: https://soft.lafibre.info/
 music | Synder Tracker Module | .sng | [2 sample files](https://telparia.com/fileFormatSamples/music/synderTrackerModule/)
 music | T'SoundSystem Source Module | .tss | [4 sample files](https://telparia.com/fileFormatSamples/music/tss/)
 music | TechnoSound Turbo 2 Track | .track | [1 sample file](https://telparia.com/fileFormatSamples/music/technoSoundTurbo2Track/)
@@ -707,7 +710,7 @@ other | MetaCreations Resource Composite File |  |
 other | Micro Focus File | .dat | 
 other | Micro Focus Index File | .idx | 
 other | Micro Lathe Object | .lat | 
-other | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://telparia.com/fileFormatSamples/other/microsoftAgentCharacter/)
+other | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://telparia.com/fileFormatSamples/other/microsoftAgentCharacter/) - Step 1 would just be extracting the embedded images and audio. Full file format details available in sandbox/txt/MSAgentDataSpecification_v1_4.htm 		Bonus points: Animate the character in a couple poses/animations and create animated GIFs
 other | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://telparia.com/fileFormatSamples/other/microsoftChatCharacter/)
 other | Microsoft DirectInput Force Feedback Effect | .ffe | 
 other | Microsoft DirectMusic Segments Type | .sgt | 

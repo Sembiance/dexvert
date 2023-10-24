@@ -7,5 +7,5 @@ export class sgiVolumeImage extends Format
 	forbidExtMatch = true;
 	magic          = ["SGI volume image", "SGI disk label"];
 	priority       = this.PRIORITY.TOP;
-	converters     = ["uniso"];
+	converters     = ["uniso[block:512][checkMount]"];
 }

@@ -6,6 +6,6 @@ export class corelSHOW extends Format
 	website    = "http://justsolve.archiveteam.org/wiki/SHW_(Corel)";
 	ext        = [".shw"];
 	magic      = ["CorelSHOW presentation"];
-	notes      = "Deark only capable of extracting the thumbnail images for each slide using RIFF module. CorelSHOW is installed on Win2k and can play these, but no easy way to export all slides.";
+	notes      = "Deark only capable of extracting the thumbnail images for each slide using RIFF module. CorelSHOW worked on Win2k and played these, but I saw no easy way to export all slides.";
 	converters = ["deark[module:riff]"];
 }

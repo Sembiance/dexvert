@@ -5,7 +5,7 @@ import {base64Encode, path} from "std";
 
 const SIEGFRIED_HOST = "127.0.0.1";
 const SIEGFRIED_PORT = 15138;
-const WARNINGS_SKIP = ["no match", "match on extension only"];
+const WARNINGS_SKIP = ["no match", "match on extension only", "empty source"];
 const WARNINGS_ALLOW = ["extension mismatch", "match on text only"];
 
 export class siegfried extends Program

@@ -49,7 +49,8 @@ const FORMAT_OS_HINT =
 		"Bandai Visual CD-ROM Previews 3.iso" : "macintoshjp",
 		"MAC100-1999-02.ISO"                  : "macintoshjp",
 		"MACPEOPLE-1998-03-01.ISO"            : "macintoshjp",
-		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp",	// is dual both PC and Mac but 99% of the stuff is on mac side
+		"MACPEOPLE-1999-02-01.ISO"            : "macintoshjp",
+		"MACPEOPLE-2001-06-01.ISO"            : "macintoshjp",
 		"MACUSER-MACBIN40A-1997-03.ISO"       : "macintoshjp"
 	},
 	"archive/sit" :
@@ -131,6 +132,9 @@ const FLEX_SIZE_FORMATS =
 {
 	archive :
 	{
+		// sometimes the SHA1 sum differs
+		annaMarie : 0.01,
+
 		// different each time due to way it generates frames
 		swf    : 5,
 		swfEXE : 5,
@@ -230,6 +234,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
 	[/image\/doodleAtari\/.*\.art$/i, "image", "asciiArtEditor"],
 	[/image\/deskMatePaint\/set_mask\.pnt$/, "image", "prismPaint"],
+	[/image\/paintPro\/SKI\.BIL/, "image", "colorSTar"],
 	[/image\/pfsFirstPublisher\/DOG.ART$/, "image", "asciiArtEditor"],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],

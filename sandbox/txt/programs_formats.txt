@@ -10668,3 +10668,82 @@ TeleDisk files
 Compaq QRST files
 APRIDISK image files
 The LDBS format
+
+
+>>> Graphic Workshop Professional (winxp - v??? - 2021-04-11 - http://www.mindworkshop.com/gwspro.html)
+Adobe DNG (requires RAW plugin)
+Adobe Photoshop PSD/PDD
+AI (requires PostScript plugin)
+ANI animated cursors (play only)
+AOL ART (requires ART plugin)
+AVI Video for Windows
+BGA OS/2 graphic arrays
+CALS Raster
+Canon CRW RAW (requires RAW plugin)
+Casio digital camera CAM
+Corel CDR preview and bitmaps
+Digital Research/Ventura IMG
+DCX FAX files
+Windows enhanced metafiles (EMF)
+EPS (requires PostScript plugin)
+EXE self-displaying pictures
+FITS
+Flash™ SWF web objects
+FlashPix
+FLI/FLC animation files
+GIF (with animated GIF viewing)
+Halo CUT
+HAM — Amiga hold and modify
+HDP HD Photo
+ICO Windows icon files
+IFF/LBM
+Iterated Systems FIF
+JPEG (JPG)
+Konica KQP
+Kodak Digital Science Camera KDC
+Kodak Photo-CD PCD
+Leaf MOS (requires RAW plugin)
+Leica RAW requires RAW plugin)
+MacPaint
+Microsoft Paint MSP
+MIDI music files (play only)
+Minolta MRW (requires RAW plugin)
+MP3 (play only, external player)
+MPEG (play only, external player)
+Nikon NEF (requires RAW plugin)
+Olympus ORF (requires RAW plugin)
+Panasonic RAW requires RAW plugin)
+PC Paintbrush PCX
+PDF (requires PostScript plugin)
+Pegasus PIC files
+Pentax PEF (requires RAW plugin)
+PFS ART files (requires ART plugin)
+PIC (as used by GLpro/GLpaint)
+PICT — Macintosh metafile
+PNG, including animated PNG
+PS (requires PostScript plugin)
+PSP graphic files
+QuickTime MOV
+RAR (view and extract graphics and other files from RAR archives)
+Seattle Film SFW (requires SFW plugin)
+Silicon Graphics workstation SGI
+Slow scan television HRZ files
+Sony SRF (requires RAW plugin)
+Sun Raster RAS files
+Targa Truevision
+Text files
+TIFF
+TTF TrueType font preview
+UUE encoded graphics
+WAP Bitmap WBMP
+WDP Windows digital media photo
+WebP on-line graphics and animation
+Windows BMP, DIB and RLE
+Windows CUR cursors
+Windows metafiles (WMF)
+Windows screen savers (SCR)
+Windows WAV files
+WordPerfect Graphics WPG
+XBM
+WMV (play only, external player)
+ZIP (view and extract from ZIP archives)

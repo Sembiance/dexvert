@@ -38,7 +38,7 @@ async function extractNormalISO()
 		
 	const mountArgs = [];
 	if(argv.offset || argv.block)
-		mountArgs.push("-o", `loop${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
+		mountArgs.push("-o", `loop,ro${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
 	if(argv.nextstep)
 		mountArgs.push("-t", "ufs", "-o", "ufstype=nextstep-cd");
 	if(argv.hfsplus)

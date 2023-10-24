@@ -13,13 +13,6 @@ bin/soundFont2tomid				2023-10-07		https://github.com/grimmdude/MidiWriterJS
 /------------------------------------\
 | Other Converters (see formats.txt) |
 \------------------------------------/
-Better DOSBox that supports Windows 3.x and Windows 95: https://dosbox-x.com/
-
-Type		Name				Platform		Website														Notes
-----		----				--------		-------														-----
-Various		Konvertor			Windows			https://www.logipole.com/konvertor-en.htm
-Various		Filestar*			Online			https://filestar.com/skills/
-
 >>> Maybe possible...
 Archive		http://www.compression.dk/cmview/View?id=10005
 Archive		https://www.sac.sk/files.php?d=7&l=

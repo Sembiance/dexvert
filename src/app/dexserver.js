@@ -31,11 +31,15 @@ if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
 }
 
-xlog.info`Cleaning up previous dexvert RAM installation...`;
+xlog.info`Cleaning up previous dexserver files...`;
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 await runUtil.run("/mnt/compendium/bin/fixPerms", [], {cwd : DEXVERT_RAM_DIR});
 await fileUtil.unlink(DEXVERT_RAM_DIR, {recursive : true});
 await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
+
+// if we don't empty this out on startup, this directory can get really big since testdexvert and testMany both write their results here instead of RAM
+await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
+await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
 
 async function stopDexserver(sig)
 {

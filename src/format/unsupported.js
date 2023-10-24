@@ -158,7 +158,6 @@ export default
 		cadVantageDrawing         : {name : "CAD Vantage Drawing", ext : [".dwg"], magic : ["CAD Vantage drawing"]},
 		calamusVectorDocument     : {name : "Calamus Vector Document", ext : [".cvd"], magic : ["Calamus Vector Document"]},
 		chompstersSprite          : {name : "Chompsters Sprite", ext : [".spr"], magic : ["Chompsters Sprite"]},
-		clarisDraw                : {name : "Claris Draw", ext : [".cdd"], magic : ["Claris Draw document"]},
 		crayolaArtStudio          : {name : "Crayola Art Studio", ext : [".art"], magic : ["Crayola Art Studio graphic Art"], weakMagic : true},
 		drafixWindowsCADDrawing	  : {name : "Drafix Windows CAD Drawing", ext : [".cad", ".slb"], magic : ["Drafix Windows CAD drawing"]},
 		drawingInterchangeBinary  : {name : "Drawing Interchange Binary Format", ext : [".dxb"], magic : ["AutoCAD Drawing Exchange Binary Format", /^fmt\/54( |$)/]},

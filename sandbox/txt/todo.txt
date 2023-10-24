@@ -1,40 +1,13 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once my pull request is merged: https://github.com/smugpie/amiga-bitmap-font-tools/pull/6
-  'git pull' in bin/amiga-bitmap-font-tools/amiga-bitmap-font-tools
-
-* When starting dexserver, I need to delete and recreate /mnt/dexvert/test to avoid it getting too large
-
-* Test files in testsuite/OpenImageIO/OpenImageIO/testsuite/*/ref/*
-
-* Seek out new programs I could support now that I have wine and vamos working. This includes .NET and Vista/Win7 programs
-  For now, research the below and create To-Do items further below for various programs and formats I want to support.
-  For VAMOS, search aminet: https://aminet.net/
-  - Continue browsing the list of unsupported formats: https://github.com/Sembiance/dexvert/blob/master/UNSUPPORTED.md
-    Left off at Document :: Envision Publisher Document
-  - Browse https://github.com/Sembiance/dexvert/blob/master/SUPPORTED.md
-  - Go through the 'Other Converters' list in info.txt
-  - Look at sandbox/txt/programs_formats_cant_use.txt
-  - Look at samples in test/sample/unsupported to see if I can add support for them
-
-* Creating a Vista SP2 64bit OS image would allow running DotNet programs: https://docs.microsoft.com/en-us/dotnet/framework/get-started/system-requirements
-  This ability would allow conversion/extraction of several additional formats:
-	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
-	image/xRes: Using sandbox/app/xRes 3.0.iso  it didn't run in Win2k/WinXP, but might? run under Vista. Only encountered on 1 CD so far
-	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
-	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
-	Konverter can support lots of formats: https://www.logipole.com/konvertor-en.htm
-	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
-	zbr could be converted to SVG with reaConverter program (then delete format note)
-	greenstreetPublisher with Publishing Suite 99, can probably 'Print to File' now that I'm not using QEMU (then delete format note)
-
 * Create a dexrecurse.js app that will take a given starting archive and recurse down into it creating a 'tree' of output
   dexrecurse.js <outputDir> <file> <file> ...
   It will create <outputDir>/file/  <outputDir>/meta/
   Each one will be a directory tree of files/JSON with files that are processed creating a <dir>§ suffix to extract files/meta into
   It should also create a <outputDir>/report.html with new magics, new file samples, etc similar to what retroadmin used to do
+  For new file samples, get a count of each formatid on disk (in dexvert/test/sample). Never copy more than '3' new samples. Never want more than 10 total of each type. So if existingCount[formatid]<10: needCount = Math.min(3, 10-existingCount[formatid]). b3sum existing files of course and only include 'new ones'. Group the new files ext and pick one from each ext up until we have needCount. If still need more (OR IF WE ONLY HAVE 1 EXTENSION), stick all the files into an array (removing those already gonna copy by ext) and sort the array by file size, then take the largest, smallest and one from middle.
+  Group files for that formatid by ex
   Possibly the JSON generated to create report.html, also save that out was <outputDir>/report.json
   Test with CD #3 and some other early items, see how it works.
 
@@ -144,6 +117,11 @@
   https://archive.org/details/cd32gamervolume91xcd			/Disc Dump/CD32Gamer9.dicf
   Then add that converter as an option to all formats that it supports
 
+* Now that Print to File/PDF works better, should now be able to support:
+  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
+
+* Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
+
 * Decide how I'm gonna share dexvert with the world:
   - Could see if I can now get it working within a QEMU/VMWare/VirtualBox image, now that I don't run QEMU anymore within dexvert
     Could maybe then package this image into a docker image for even easier use.
@@ -154,6 +132,15 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Now that wine works and thus .NET and other vista/win7 programs work, try incorporating these programs into dexvert:
+	reaConverter 7		https://www.reaconverter.com/		(see sandbox/app/reaConverter_formats.txt for format list. image/zbr can be converted to SVG with reaConverter)
+	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
+	image/xRes: Using sandbox/app/xRes 3.0.iso
+	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
+	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
+	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
+	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
+
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP
@@ -197,6 +184,11 @@
   Once I have that I could support certain formats like:
 	document/dartHypertext
 	document/envisionPublisherDoc
+	document/ibmStoryboardDocument
+
+* Add Old 32bit Linux support then add (see notes for each format):
+  music/beRoTracker
+  music/synderSNG
 
 * Create dexvert.com with a 'Browse' button that allows you to upload files to convert.
   Bonus points if I make a quick dirty 'dexvert.sh' bash script that folks can use that will convert via wget from CLI via dexvert.com

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil, sysUtil} from "xutil";
+import {fileUtil, runUtil, sysUtil, printUtil} from "xutil";
 import {path} from "std";
 import {validateClass, validateObject} from "validator";
 import {RunState} from "./RunState.js";
@@ -175,7 +175,7 @@ export class Program
 					Object.assign(r.runOptions, typeof this.runOptions==="function" ? await this.runOptions(r) : this.runOptions);
 
 				xlog.info`Program ${fg.orange(this.programid)}${Object.keys(flags).length>0 ? Object.entries(flags).map(([k, v]) => xu.bracket(`${k}:${v}`)).join("") : ""} running as \`${this.bin} ${r.args.map(arg => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}\``;
-				xlog.debug`  with options ${xu.inspect(r.runOptions).squeeze()}`;
+				xlog.debug`  with options ${printUtil.inspect(r.runOptions).squeeze()}`;
 				const {stdout, stderr, status} = await runUtil.run(this.bin, r.args, r.runOptions);
 				Object.assign(r, {stdout, stderr, status});
 			}

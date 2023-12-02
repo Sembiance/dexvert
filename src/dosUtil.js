@@ -1,5 +1,5 @@
 import {xu, fg} from "xu";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
@@ -145,7 +145,7 @@ export async function run({cmd, args=[], root, preExec, autoExec, postExec, time
 		const videoFilePath = ((await fileUtil.tree(dosDirPath, {nodir : true, depth : 1, regex : /\.avi$/})) || []).sortMulti().at(-1);
 		if(!videoFilePath)
 		{
-			xlog.warn`DOS no video found in ${dosDirPath} ${xu.inspect(r).squeeze()}`;
+			xlog.warn`DOS no video found in ${dosDirPath} ${printUtil.inspect(r).squeeze()}`;
 		}
 		else
 		{

@@ -1,4 +1,4 @@
-/* eslint-disable brace-style */
+/* eslint-disable @stylistic/brace-style */
 import {xu, fg} from "xu";
 import {runUtil, cmdUtil, fileUtil, printUtil} from "xutil";
 import {path} from "std";

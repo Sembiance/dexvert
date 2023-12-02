@@ -6,7 +6,7 @@ import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
 import {DexState} from "./DexState.js";
 import {DexFile} from "./DexFile.js";
-import {fileUtil, runUtil} from "xutil";
+import {fileUtil, runUtil, printUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
@@ -354,7 +354,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 		catch(err)
 		{
 			dexState.phase.err = err;
-			xlog.error`${fg.red(`${xu.c.blink}dexvert failed`)} for file ${inputFile.absolute} with error: ${xu.inspect(err)}`;
+			xlog.error`${fg.red(`${xu.c.blink}dexvert failed`)} for file ${inputFile.absolute} with error: ${printUtil.inspect(err)}`;
 		}
 
 		// if we are processed, rsync any "output" files back to our original output directory, making sure we don't include the "out" tmp dir we made

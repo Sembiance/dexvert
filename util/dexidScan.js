@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {fileUtil, runUtil, cmdUtil} from "xutil";
+import {fileUtil, runUtil, cmdUtil, printUtil} from "xutil";
 import {path} from "std";
 import {identify} from "../src/identify.js";
 import {init as initFormats} from "../src/format/formats.js";
@@ -48,13 +48,13 @@ await [].pushSequence(0, atOnce).parallelMap(async partid =>
 			ids[id.magic].push(offset);
 		}
 
-		xu.stdoutWrite(".");
+		printUtil.stdoutWrite(".");
 		completed++;
 		const newMark = Math.floor((completed/FILE_SIZE)*10);
 		if(newMark>completedMark)
 		{
 			completedMark = newMark;
-			xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
+			printUtil.stdoutWrite(fg.yellow(`${completedMark}0%`));
 		}
 	}
 }, atOnce);

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
-import {runUtil, fileUtil, sysUtil} from "xutil";
+import {runUtil, fileUtil, sysUtil, printUtil} from "xutil";
 import {path, delay} from "std";
 import {WebServer} from "WebServer";
 import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
@@ -103,7 +103,7 @@ export class os extends Server
 			emuOpts.virtualXVNCPort = instance.vncPort;
 		}
 
-		this.xlog.debug`${prelog(instance)} Launching ${OS[osid].emu} with options ${xu.inspect(emuOpts).squeeze()}`;
+		this.xlog.debug`${prelog(instance)} Launching ${OS[osid].emu} with options ${printUtil.inspect(emuOpts).squeeze()}`;
 
 		const instanceJSON = JSON.stringify(instance);
 		const {p, cb} = await runUtil.run(OS[osid].emu, [], emuOpts);

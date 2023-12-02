@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {validateClass} from "validator";
 import {FileSet} from "./FileSet.js";
-import {fileUtil} from "xutil";
+import {fileUtil, printUtil} from "xutil";
 import {path} from "std";
 
 export class RunState
@@ -104,30 +104,30 @@ export class RunState
 		{
 			r.push(` ${fg.peach(this.bin)} ${(this.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
-				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+				r.push(` ${xu.paren(printUtil.inspect(this.status))}`);
 			
 			if(this.xlog.atLeast("debug"))
 			{
 				r.push(`\n${pre}\t${xu.colon("   cwd")}${this.cwd}`);
-				r.push(`\n${pre}\t${xu.colon("  opts")}${xu.inspect(this.runOptions || {}).squeeze()}`);
-				r.push(`\n${pre}\t${xu.colon(" flags")}${xu.inspect(this.flags || {}).squeeze()}`);
+				r.push(`\n${pre}\t${xu.colon("  opts")}${printUtil.inspect(this.runOptions || {}).squeeze()}`);
+				r.push(`\n${pre}\t${xu.colon(" flags")}${printUtil.inspect(this.flags || {}).squeeze()}`);
 			}
 		}
 		else if(this.osData)
 		{
 			r.push(`   OS ${fg.cyan(this.osData.osid)} ${fg.peach(this.osData.cmd)} ${(this.osData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
-				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+				r.push(` ${xu.paren(printUtil.inspect(this.status))}`);
 		}
 		else if(this.dosData)
 		{
 			r.push(` DOS ${fg.peach(this.dosData.cmd)} ${(this.dosData.args || []).map(arg => (!arg.includes(" ") ? xu.quote(fg.green(arg)) : fg.green(arg))).join(" ")}`);
 			if(this.status)
-				r.push(` ${xu.paren(xu.inspect(this.status))}`);
+				r.push(` ${xu.paren(printUtil.inspect(this.status))}`);
 		}
 		
 		if(this.xlog.atLeast("info") && Object.keys(this.meta || {}).length>0)
-			r.push(`\n${pre}\t${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${pre}\t${xu.colon("  meta")}${printUtil.inspect(this.meta).squeeze()}`);
 
 		if(this.xlog.atLeast("trace") || (this.xlog.atLeast("debug") && (this.stdout || "").trim().length>0))
 			r.push(`\n${pre}\t${xu.colon("stdout")}${(this.stdout || "").squeeze().innerTruncate(this.xlog.atLeast("trace") ? Number.MAX_SAFE_INTEGER : 200)}`);

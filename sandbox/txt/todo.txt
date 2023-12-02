@@ -1,21 +1,60 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add format: http://fileformats.archiveteam.org/wiki/RCA-VOC
+
+* Try this CD and see if there is a 'Mac' partition that has some weird files on it (https://digipres.club/@sembiance/111342192945605623
+https://archive.org/details/General_Admission_Software_Time_Out_Sports_Basketball_Win31Mac_1994_Eng
+
+* Check sockUtil code and it's tests and ensure it's as simple and modern as can be with fully working and COMPREHENSIVE tests
+  Also do a quick searchCode for sockUtil to see where I may be using it
+
+* Run the xwork and xworkerpool tests, ensure they work.
+GOAL: Make xwork/xworkerpool ROCK SOLID.
+Search all my code for uses of xwork or xworkerpool.
+See what features I actually use and consider simplifying my code by removing features
+Double check work tests full errors and that it covers all possible failure conditions (including a low level timeout feature (at xwork level if possible))
+If I decide to make more major changes, consider making a new lib with a new name
+
 * Create a dexrecurse.js app that will take a given starting archive and recurse down into it creating a 'tree' of output
   dexrecurse.js <outputDir> <file> <file> ...
-  It will create <outputDir>/file/  <outputDir>/meta/
+  It will create <outputDir>/file/  <outputDir>/meta/  and  <outputDir>/log/
   Each one will be a directory tree of files/JSON with files that are processed creating a <dir>§ suffix to extract files/meta into
+  Full directory tree in /log/ as well with a .txt log for each file (so it doesn't have to be loaded with the meta JSON later in retromission)
   It should also create a <outputDir>/report.html with new magics, new file samples, etc similar to what retroadmin used to do
   For new file samples, get a count of each formatid on disk (in dexvert/test/sample). Never copy more than '3' new samples. Never want more than 10 total of each type. So if existingCount[formatid]<10: needCount = Math.min(3, 10-existingCount[formatid]). b3sum existing files of course and only include 'new ones'. Group the new files ext and pick one from each ext up until we have needCount. If still need more (OR IF WE ONLY HAVE 1 EXTENSION), stick all the files into an array (removing those already gonna copy by ext) and sort the array by file size, then take the largest, smallest and one from middle.
   Group files for that formatid by ex
   Possibly the JSON generated to create report.html, also save that out was <outputDir>/report.json
+  Also create in /meta/ a .json for each folder. Do this AFTER it's all done and use the meta files themselves to create summary metas with things needed for retromission to render such as sub counts, etc
   Test with CD #3 and some other early items, see how it works.
+  Need to ensure it's both fault/crash tolerant and also 'a file takes forever' tolerant. On CD 3, find a file type that there is only like 1 or 2 of on the disc and for that type force a crash and see that it handles it properly. Also force it take a LONG time and ensure I have some way of killing sub-procs that take way too long (>1 hour) and either re-try (ONCE ONLY) or just give up on that file
+  Possibly consider making a dexrecurse test case for CD isos so I can test new servers against them in addition to the existing test cases
+
+* Integrate into dexvert: https://github.com/n0samu/DirectorCastRipper
+  See the discord chat from nosamu with some details as to how to use it. Would be great if I could use this instead of macromedia director.
+  Also SEE below the High Priority item that details this task
 
 * Ensure all the files from these CDs convert properly with dexrecurse:
 	iso/Digital Magazine for Photography - Gallery
 	iso/Sexual Girls in Magical World
 	iso/Natsu Nice Gal Summary '94
 	iso/Love Bytes
+
+* Ensure printEmergeList prints out full and accurate instructions to take one of my new virgin servers and bring it up to a fully working dexvert machine
+  Do this with the tier.net server first, and get it fully working, then test it on gthost & serverdime
+
+* Benchmark the test suite on tier.net/gthost/serverdime so I can get an idea on how fast various hardware performs
+  Previously each dexdrone cost $359/month
+  Look into other webhosting talk deals and also wenmx. re;oan;esote/met amd jove;pcoty/met
+
+* Create a 'dexcloud' process that I can run on xeen. It has a manually registered list of hosts (dexdrone#) that I can spawn out dexrecurse jobs to
+  Idea is it keeps track of which hosts are available and which are not. Goal is to have lots of very cheap intel like 48core 72core machines
+  Then dexrecurse jobs (along with their files) can be sent to an API on dexcloud. It holds these on disk in a queue until a dexdrone opens up
+  API consumers will poll the API to get status and find out when it's all done and result files can be downloaded
+  Will need an 'dexcloud.cosmicrealms.com' admin interface that shows the status of all the drones, which are available, current processing status
+  Would be nice to also see a log of recently completed items, things in queue, etc
+  Since the files are copied then copied again in both directions, and on fewer core, slower machines, this will make individual ISOs slower
+  But it'll be a lot cheaper and can spin up more more easily and also might be faster than before with more machines  
 
 
 /---------------\
@@ -223,6 +262,7 @@
   Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
   From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 
+* Pay someone to add more formats to FFMPEG (gl/dl/ANIM/etc) or to improve existing formats: http://www.ffmpeg.org/consulting.html
 
 /----------------\
 | Probably Never |

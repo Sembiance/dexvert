@@ -406,7 +406,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			{
 				completedMark = newMark;
 				if(!argv.json)
-					xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
+					printUtil.stdoutWrite(fg.yellow(`${completedMark}0%`));
 			}
 		}
 
@@ -419,7 +419,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 		failures.push(`${fg.cyan("[")}${xu.c.blink + fg.red("FAIL")}${fg.cyan("]")} ${xu.c.bold + sampleSubFilePath} ${xu.c.reset + msg}\n`);
 		if(!argv.json)
-			xu.stdoutWrite(xu.c.blink + fg.red("F"));
+			printUtil.stdoutWrite(xu.c.blink + fg.red("F"));
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
 		if(!argv.record)
@@ -431,7 +431,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	async function pass(c)
 	{
 		if(!argv.json)
-			xu.stdoutWrite(c);
+			printUtil.stdoutWrite(c);
 
 		if(!argv.record)
 			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
@@ -444,7 +444,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	function newSuccess()
 	{
 		if(!argv.json)
-			xu.stdoutWrite(xu.c.blink + fg.green("N"));
+			printUtil.stdoutWrite(xu.c.blink + fg.green("N"));
 
 		newSuccesses.push(`--format=${diskFormatid} --file='${path.relative(diskFormatid, sampleSubFilePath)}'`);
 
@@ -465,7 +465,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		if(testData[sampleSubFilePath]===false)
 			return pass(fg.whiteDim("."));
 
-		return await fail(`${fg.pink("No dexData result returned")} ${fg.deepSkyblue("but expected")} ${xu.inspect(testData[sampleSubFilePath]).squeeze()} with err ${err}`);
+		return await fail(`${fg.pink("No dexData result returned")} ${fg.deepSkyblue("but expected")} ${printUtil.inspect(testData[sampleSubFilePath]).squeeze()} with err ${err}`);
 	}
 
 	const result = {};
@@ -498,7 +498,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	}
 
 	if(!Object.hasOwn(testData, sampleSubFilePath))
-		return result.processed ? await newSuccess() : await fail(`No test data for this file: ${xu.inspect(result).squeeze().innerTruncate(3000)}`);
+		return result.processed ? await newSuccess() : await fail(`No test data for this file: ${printUtil.inspect(result).squeeze().innerTruncate(3000)}`);
 
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
@@ -589,7 +589,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	if(prevData.meta)
 	{
 		if(!result.meta)
-			return fail(`Expected to have meta ${xu.inspect(prevData.meta).squeeze()} but have none${converterMismatch}`);
+			return fail(`Expected to have meta ${printUtil.inspect(prevData.meta).squeeze()} but have none${converterMismatch}`);
 
 		for(const k of IGNORED_META_KEYS[result.family]?.[result.format] || IGNORED_META_KEYS[result.family]?.["*"] || [])
 		{
@@ -603,7 +603,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	}
 	else if(result.meta && Object.keys(result.meta).length>0)
 	{
-		return fail(`Expected no meta but got ${xu.inspect(result.meta).squeeze()} instead${converterMismatch}`);
+		return fail(`Expected no meta but got ${printUtil.inspect(result.meta).squeeze()} instead${converterMismatch}`);
 	}
 
 	if(prevData.converter && !result.converter)

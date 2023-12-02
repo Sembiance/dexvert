@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil} from "xutil";
+import {cmdUtil, fileUtil, printUtil} from "xutil";
 import {dexvert} from "../dexvert.js";
 import {programs, init as initPrograms} from "../program/programs.js";
 import {formats, init as initFormats} from "../format/formats.js";
@@ -79,7 +79,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	const outputDir = await DexFile.create(outputDirPath);
 
 	if(argv.serial)
-		xu.stdoutWrite(`Program ${familyid}/${programid} `);
+		printUtil.stdoutWrite(`Program ${familyid}/${programid} `);
 	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), programFlag, asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
 	const outputFiles = dexState.f.files.output || [];
 	if(outputFiles.length>0)

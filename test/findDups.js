@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, hashUtil, fileUtil, runUtil} from "xutil";
+import {cmdUtil, hashUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 
 const xlog = new XLog();
@@ -27,10 +27,10 @@ let i=0;
 const hashesByFile = Object.fromEntries(await sampleFilePaths.parallelMap(async sampleFilePath =>
 {
 	const r = [sampleFilePath, await hashUtil.hashFile("blake3", sampleFilePath)];
-	xu.stdoutWrite(".");
+	printUtil.stdoutWrite(".");
 	// Now write out every 10% of the way
 	if(++i%Math.floor(sampleFilePaths.length/10)===0)
-		xu.stdoutWrite(fg.yellow(`${Math.round(i/sampleFilePaths.length*100)}%`));
+		printUtil.stdoutWrite(fg.yellow(`${Math.round(i/sampleFilePaths.length*100)}%`));
 		
 	return r;
 }));

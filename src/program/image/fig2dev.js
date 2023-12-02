@@ -6,7 +6,7 @@ import {path, base64Encode} from "std";
 export class fig2dev extends Program
 {
 	website = "https://www.xfig.org/";
-	package = "media-gfx/transfig";
+	package = "media-gfx/fig2dev";
 	flags   = {
 		outType : `Which image format to convert to (png for example). Default: svg`
 	};

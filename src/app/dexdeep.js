@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil, runUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 
 const argv = cmdUtil.cmdInit({
@@ -46,13 +46,13 @@ xlog.info`Processing ${FILE_SIZE} bytes, doing ${atOnce} ops at once.`;
 		const result = xu.parseJSON(stdout, {});
 		if(!result.processed || !result?.phase?.family || result.phase.family==="text")
 		{
-			xu.stdoutWrite(".");
+			printUtil.stdoutWrite(".");
 			completed++;
 			const newMark = Math.floor((completed/FILE_SIZE)*10);
 			if(newMark>completedMark)
 			{
 				completedMark = newMark;
-				xu.stdoutWrite(fg.yellow(`${completedMark}0%`));
+				printUtil.stdoutWrite(fg.yellow(`${completedMark}0%`));
 			}
 			await fileUtil.unlink(outputDirPath, {recursive : true});
 		}

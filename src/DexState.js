@@ -54,7 +54,7 @@ export class DexPhase
 		const r = [];
 		r.push(`${prefix}${xu.colon("format")}${this.format.pretty(`${prefix}\t`).trim()}`);
 		if(this.xlog.atLeast("info"))
-			r.push(`\n${prefix}${xu.colon("  meta")}${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${prefix}${xu.colon("  meta")}${printUtil.inspect(this.meta).squeeze()}`);
 		if(this.xlog.atLeast("info"))
 			r.push(`\n${prefix}${xu.colon("    id")}${this.id.pretty(`${prefix}\t`).trim()}`);
 		if(this.xlog.atLeast("debug"))
@@ -161,7 +161,7 @@ export class DexState
 		r.push(`\n${prefix}${xu.colon(" orig in")}${this.original.input.pretty()}`);
 		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);
 		if(this.processed)
-			r.push(`\n${prefix}${xu.colon("    meta")}${xu.inspect(this.meta).squeeze()}`);
+			r.push(`\n${prefix}${xu.colon("    meta")}${printUtil.inspect(this.meta).squeeze()}`);
 		if(this.created)
 			r.push(`\n${prefix}${xu.colon(" created")}${this.created.pretty(`${prefix}`).trim()}`);
 		return r.join("");

@@ -45,7 +45,7 @@ export class wine extends Server
 			}
 			else
 			{
-				runOpts.virtualX = true;
+				runOpts.virtualXGLX = true;
 				runOpts.virtualXVNCPort = true;
 			}
 

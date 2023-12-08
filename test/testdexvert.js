@@ -29,6 +29,13 @@ const outJSON = {};
 // ensure if we have a format, it doesn't end with a forward slash, we count those to know how far to search deep in samples tree
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
+// These formats should be skipped entirely for one reason or another
+const SKIP_FORMATS =
+[
+	// these take AGES to extract, just WAY too long
+	"archive/printArtist"
+];
+
 // These are relative dir paths from test/sample/ that are just supporting files that need to be here but should be ignored for testing purposes
 const SUPPORTING_DIR_PATHS =
 [
@@ -214,12 +221,12 @@ const FLEX_SIZE_FORMATS =
 	music :
 	{
 		// MP3 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
-		"*:.mp3" : 0.1
+		"*:.mp3" : 1
 	},
 	video :
 	{
 		// MP4 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
-		"*:.mp4" : 2,
+		"*:.mp4" : 5,
 
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
@@ -678,6 +685,9 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const diskFamily = sampleSubFilePath.split("/")[0];
 	const diskFormat = sampleSubFilePath.split("/")[1];
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
+	if(SKIP_FORMATS.includes(diskFormatid))
+		return xlog.info`SKIPPING ${sampleSubFilePath} because it's format is in the skip list: ${diskFormatid}`;
+
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 

@@ -296,15 +296,23 @@ function parseZXTune(infoRaw="")
 			if(!matchProps)
 				continue;
 			
-			// zxtunes can have multiple subtracts and the timeout can cause later tracks meta info to be cut off. So this ensures we only use the first one of each prop we find
-			if(info[propKey])
-				continue;
-
-			info[propKey] = matchProps.groups.value.trim();
-			if(info[propKey].length===0)
-				delete info[propKey];
+			// zxtunes can have multiple sub tracks, combine em together
+			const value = matchProps.groups.value.trim();
+			if(value.length)
+			{
+				info[propKey] ||= [];
+				info[propKey].pushUnique(value);
+			}
 		}
 	});
+
+	for(const key of Object.keys(info))
+	{
+		if(info[key]?.length>0)
+			info[key] = info[key].join(" ");
+		else
+			delete info[key];
+	}
 
 	return info;
 }

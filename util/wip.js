@@ -14,3 +14,6 @@ import {UInt8ArrayReader} from "UInt8ArrayReader";
 const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
+
+const latestJavaConfigNum = (await fileUtil.tree("/usr/lib/jvm", {depth : 1})).map(v => +v.split("-").at(-1)).sortMulti().at(-1);
+xlog.info`${targetJavaConfig}`;

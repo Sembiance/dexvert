@@ -86,7 +86,7 @@ export class os extends Server
 			await runUtil.run("rsync", runUtil.rsyncArgs(path.join(OS_DIR_PATH, osid, v), path.join(instance.dirPath, "/")));
 
 		for(const v of OS[osid].vhd)
-			await runUtil.run("VBoxManage", ["createhd", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_DIR_PATH, osid, v)]);
+			await runUtil.run("VBoxManage", ["createmedium", "disk", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_INSTANCE_DIR_PATH, osid, v)]);
 
 		await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.txt"), instanceid.toString());
 		await runUtil.run("/mnt/compendium/.deno/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "instance.img"), path.join(instance.dirPath, "instance.txt")]);
@@ -324,16 +324,37 @@ export class os extends Server
 
 		await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 
-		this.xlog.info`Starting instances...`;
 		const instanceids = [];
 		for(const osid of Object.keys(OS))
 		{
+			this.xlog.info`Preparing VHDs for ${osid}...`;
+
 			await Deno.mkdir(path.join(HTTP_IN_DIR_PATH, osid), {recursive : true});
 			await Deno.mkdir(path.join(HTTP_OUT_DIR_PATH, osid), {recursive : true});
 
 			instanceids.push(...[].pushSequence(0, OS[osid].qty-1).map(v => ([osid, v])));
+
+			// we need to copy the parent/backing VHD to the instance dir, because even though it's just a backing VHD VBoxManage still modifies the thing and we don't want to touch the original at all otherwise we have to re-copy it to dexdrones every time
+			const osInstanceDirPath = path.join(OS_INSTANCE_DIR_PATH, osid);
+			await Deno.mkdir(osInstanceDirPath, {recursive : true});
+			for(const v of OS[osid].vhd)
+				await Deno.copyFile(path.join(OS_DIR_PATH, osid, v), path.join(osInstanceDirPath, v));
 		}
 
+		// startOS above calls VBoxManage createmedium which then 'registers' both the parent and child  VHDs in some VBoxManage config. This can cause issues during development if VHD paths change, So we clear out all previous VHDs here just to be safe
+		this.xlog.info`Clearing previous VBoxManaged hdds...`;
+		const {stdout : vboxDiskLines} = await runUtil.run("VBoxManage", ["list", "hdds"]);
+		const vboxDiskPaths = [];
+		for(const vboxDiskLine of vboxDiskLines.trim().split("\n"))
+		{
+			if(vboxDiskLine.startsWith("Location:"))
+				vboxDiskPaths.push(vboxDiskLine.substring("Location:".length+1).trim());
+		}
+
+		for(const vboxDiskPath of vboxDiskPaths.sortMulti([v => Object.keys(OS).some(osid => v.startsWith(path.join(OS_INSTANCE_DIR_PATH, `${osid}-`)))], [true]))
+			await runUtil.run("VBoxManage", ["closemedium", "disk", vboxDiskPath]);
+
+		this.xlog.info`Starting instances...`;
 		await Promise.all(await instanceids.parallelMap(async ([osid, instanceid], i) =>
 		{
 			await delay(OS_INSTANCE_START_INTERVAL*i);

@@ -1,11 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add format: http://fileformats.archiveteam.org/wiki/RCA-VOC
-
-* Try this CD and see if there is a 'Mac' partition that has some weird files on it (https://digipres.club/@sembiance/111342192945605623
-https://archive.org/details/General_Admission_Software_Time_Out_Sports_Basketball_Win31Mac_1994_Eng
-
 * Check sockUtil code and it's tests and ensure it's as simple and modern as can be with fully working and COMPREHENSIVE tests
   Also do a quick searchCode for sockUtil to see where I may be using it
 

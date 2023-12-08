@@ -7,5 +7,5 @@ export class printShopDAT extends Format
 	ext              = [".dat"];
 	converters       = ["deark[module:printshop]"];
 	unsupported      = true;
-	notes            = "Deark will extract almost anything ending in .dat and produce garbage PNG files. So this can't be safely enabled right now.";
+	notes            = "Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.";
 }

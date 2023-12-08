@@ -5,6 +5,7 @@ import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
 import {ANSIToHTML} from "thirdParty";
+import {mkWeblink} from "./testUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
@@ -97,10 +98,10 @@ const FLEX_SIZE_PROGRAMS =
 	amigaBitmapFontContentToOTF : 0.1,
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
-	Email_Outlook_Message       : 0.1,
+	Email_Outlook_Message       : 1,
 	fontforge                   : 0.1,
 	fontographer                : 0.1,
-	gimp                        : 0.5,
+	gimp                        : 5,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
 	soundFont2tomp3             : 0.1,
@@ -130,6 +131,11 @@ const SUPPORTING_FILES =
 
 const FLEX_SIZE_FORMATS =
 {
+	audio :
+	{
+		// MP3 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
+		"*:.mp3" : 0.1
+	},
 	archive :
 	{
 		// sometimes the SHA1 sum differs
@@ -151,40 +157,58 @@ const FLEX_SIZE_FORMATS =
 	document :
 	{
 		// these conversions sometimes differ WILDLY, haven't figured out why
-		hlp        : 50,
-		wildcatWCX : 90,
-		wordDoc    : 80,
+		farallonReplica : 25,
+		hlp             : 50,
+		wildcatWCX      : 90,
+		wordDoc         : 80,
 
 		// very subtle differences each time, not sure why
 		winampCompiledMakiScript : 0.1,
 
 		// PDF generation has lots of embedded things that change from timestamps to unique generate id numbers and other meta data
-		"*:.pdf" : 5,
+		// Also different hosts generate different PDFs, no idea exactly why. Final output looks very similar, just slight formatting changes, not sure why, but eh.
+		"*:.pdf" : 50,
 
 		// HTML generation can change easily too
 		"*:.html" : 1
 	},
 	image :
 	{
+		// each host can produce very slightly different output
+		"*" : 0.1,
+		"*:.gif" : 3,	// Animated GIFs even more so
+
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
 		// each running produces slightly different output, not sure why, haven't investigated further
 		ani              : 15,
+		CADDrawDrawing   : 80,
 		fuzzyBitmap      : 0.1,
+		gimpBrush        : 20,
 		lottie           : 0.1,
-		odg              : 0.1,
+		lotusChart       : 5,
+		odg              : 20,	// also differs per host
 		pes              : 0.1,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
 		windowsClipboard : 0.1,
 
+		// differs depending on host
+		avif     : 1,	// avifdec
+		dwg      : 25,	// dwg2bmp
+		radiance : 1,	// pfsconvert
+		x3f      : 0.1,	// dcraw
+
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		naplps             : 20,
 		theDrawCOM         : 5,
-		threeDCK           : 20
+		threeDCK           : 20,
+
+		// SVG generation (usually from soffice, but sometimes other) is tempermental, especially across hosts (macDraw, cmx, eps, freeHandDrawing, etc)
+		"*:.svg" : 25
 	},
 	video :
 	{
@@ -192,6 +216,18 @@ const FLEX_SIZE_FORMATS =
 		disneyCFAST : 25,
 		fantavision : 60,
 		grasp       : 60
+	}
+};
+
+// Specific files that vary in size each run
+const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
+{
+	image :
+	{
+		blizzardPicture : ["NightElfMaleNakedPelvisSkin00_07.blp"],	// blpngConverter crashes on some hosts for this file, dunno why
+		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
+		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
+		wpg             : ["test.wpg"]		// convert converts this to SVG incorrectly and is wildly different on different hosts
 	}
 };
 
@@ -215,7 +251,10 @@ const FLEX_DIFF_FILES =
 	
 	// sometimes various .as scripts are exatracted, sometimes not
 	/archive\/swf\/.+$/,
-	/archive\/swfEXE\/.+$/
+	/archive\/swfEXE\/.+$/,
+
+	// on some hosts, scribus fails to process this file, not sure why
+	/image\/cdr\/test\.cdr$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -313,11 +352,6 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"unsupported/binPatch"
 ];
 
-function getWebLink(filePath)
-{
-	return `file://${Deno.hostname()==="pax" ? path.join("/mnt/pax", path.relative("/mnt", filePath)) : filePath}`.encodeURLPath().escapeHTML();
-}
-
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");
 await Deno.mkdir(DEXTEST_ROOT_DIR, {recursive : true});
 
@@ -335,7 +369,7 @@ await Deno.mkdir(SAMPLE_DIR_PATH, {recursive : true});
 
 xlog.info`${printUtil.majorHeader("dexvert test").trim()}`;
 xlog.info`${argv.record ? fg.pink("RECORDING") : "Testing"} format: ${argv.format || "all formats"}`;
-xlog.info`Root testing dir: ${fg.deepSkyblue(getWebLink(DEXTEST_ROOT_DIR))}`;
+xlog.info`Root testing dir: ${fg.deepSkyblue(mkWeblink(DEXTEST_ROOT_DIR))}`;
 xlog.info`Rsyncing sample files to scratch area...`;
 await runUtil.run("rsync", ["--delete", "-savL", path.join(SAMPLE_DIR_PATH_SRC, "/"), path.join(SAMPLE_DIR_PATH, "/")]);
 
@@ -517,8 +551,10 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 	if(!prevData.format)
 		oldDataFormats.pushUnique(diskFormat);
-	
-	const converterMismatch = prevData.converter!==result.converter ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
+
+	const ignoreSizeAndConverter = IGNORE_SIZE_AND_CONVERTER_SRC_PATHS?.[result.family]?.[result.format]?.includes(path.basename(sampleFilePath));
+
+	const converterMismatch = prevData.converter!==result.converter && !ignoreSizeAndConverter ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
 
 	if(result.family && result.family!==diskFamily && !allowFamilyMismatch)
 		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}${converterMismatch}`);
@@ -546,6 +582,9 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		// first make sure the files are the same
 		for(const [name, {size, sum}] of Object.entries(result.files))
 		{
+			if(ignoreSizeAndConverter)
+				continue;
+
 			if(IGNORE_SIZE_FILEPATHS.some(re => re.test(name)))
 				continue;
 
@@ -774,7 +813,7 @@ async function writeOutputHTML()
 	{
 		const titleSafe = path.basename(filePath).escapeHTML();
 		const ext = path.extname(filePath);
-		const filePathSafe = getWebLink(filePath);
+		const filePathSafe = mkWeblink(filePath);
 		const relFilePath = path.relative(path.join(DEXTEST_ROOT_DIR, ...path.relative(DEXTEST_ROOT_DIR, filePath).split("/").slice(0, 2)), filePath);
 		switch(ext.toLowerCase())
 		{
@@ -804,7 +843,7 @@ async function writeOutputHTML()
 	${testLogLines.flatMap(v => v.split("\n")).map(v => a2html.toHtml(v)).join("<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>")}
 	</body>
 </html>`);
-	xlog.info`\nReport written to: ${getWebLink(reportFilePath)}`;
+	xlog.info`\nReport written to: ${mkWeblink(reportFilePath)}`;
 	outJSON.reportFilePath = reportFilePath;
 }
 

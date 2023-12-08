@@ -3,6 +3,7 @@ import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {formats, init as initFormats} from "../src/format/formats.js";
+import {mkWeblink} from "./testUtil.js";
 
 const xlog = new XLog();
 
@@ -136,7 +137,9 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 		</style>
 	</head>
 	<body>
-		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2><hr>
+		<h2>Total elapsed duration: ${elapsed.msAsHumanReadable()}</h2>
+		host: ${Deno.hostname()}<br>
+		args: ${argv.format.join(" ")}<hr>
 		${families.map(family => `
 			<h1>${family}</h1>
 			<table>
@@ -151,7 +154,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 				</thead>
 				<tbody>
 					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
-						<td style="text-align: left;"><a href="${o.reportFilePath}">${formatid.escapeHTML()}</a></td>
+						<td style="text-align: left;">${o.reportFilePath ? `<a href="${mkWeblink(o.reportFilePath)}">${formatid.escapeHTML()}</a>` : formatid.escapeHTML()}</td>
 						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
 						<td class="${(+o.successPercentage || 0)<10 ? "red" : ((+o.successPercentage || 0) < 40 ? "orange" : ((+o.successPercentage || 0) < 100 ? "yellow" : "good"))}">${o.successPercentage || "0"}%</td>
 						<td class="${+o.failCount ? "bad" : "good"}">${o.failCount.toLocaleString()}</td>
@@ -163,4 +166,4 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 	</body>
 </html>`);
 
-xlog.info`\nReports written to: file://${testManyReportFilePath}`;
+xlog.info`\nReports written to: ${mkWeblink(testManyReportFilePath)}`;

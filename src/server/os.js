@@ -338,7 +338,7 @@ export class os extends Server
 			const osInstanceDirPath = path.join(OS_INSTANCE_DIR_PATH, osid);
 			await Deno.mkdir(osInstanceDirPath, {recursive : true});
 			for(const v of OS[osid].vhd)
-				await Deno.copyFile(path.join(OS_DIR_PATH, osid, v), path.join(osInstanceDirPath, v));
+				await runUtil.run("rsync", runUtil.rsyncArgs(path.join(OS_DIR_PATH, osid, v), path.join(osInstanceDirPath, v), {fast : true}), {liveOutput : true});
 		}
 
 		// startOS above calls VBoxManage createmedium which then 'registers' both the parent and child  VHDs in some VBoxManage config. This can cause issues during development if VHD paths change, So we clear out all previous VHDs here just to be safe

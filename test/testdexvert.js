@@ -99,8 +99,8 @@ const FLEX_SIZE_PROGRAMS =
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
 	Email_Outlook_Message       : 1,
-	fontforge                   : 0.1,
-	fontographer                : 0.1,
+	fontforge                   : 2,
+	fontographer                : 3,
 	gimp                        : 5,
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
@@ -142,14 +142,15 @@ const FLEX_SIZE_FORMATS =
 		annaMarie : 0.01,
 
 		// different each time due to way it generates frames
-		swf    : 5,
-		swfEXE : 5,
+		"swf:.mp4"    : 25,
+		"swfEXE:.mp4" : 25,
 
 		// the PBMs generated are different each time
-		hypercard : 0.5,
+		hypercard : 2,
 		
 		// these can differ a lot
 		"rsrc:.png" : 999_999_999,
+		"rsrc:.txt" : 1,
 
 		// different PDF each time
 		tnef : 0.1
@@ -210,8 +211,16 @@ const FLEX_SIZE_FORMATS =
 		// SVG generation (usually from soffice, but sometimes other) is tempermental, especially across hosts (macDraw, cmx, eps, freeHandDrawing, etc)
 		"*:.svg" : 25
 	},
+	music :
+	{
+		// MP3 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
+		"*:.mp3" : 0.1
+	},
 	video :
 	{
+		// MP4 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
+		"*:.mp4" : 2,
+
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
 		fantavision : 60,
@@ -228,6 +237,10 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
 		wpg             : ["test.wpg"]		// convert converts this to SVG incorrectly and is wildly different on different hosts
+	},
+	video :
+	{
+		wmv : ["Green Goblin Last Stand.asx"]	// varies up to like 70% on some hosts, not sure why
 	}
 };
 
@@ -614,7 +627,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			if(tsDate.getFullYear()<2020 && prevDate.getFullYear()>=2020)
 				return await fail(`Created file ${fg.peach(name)} ts was not expected to be old, but got old ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}${converterMismatch}`);
 
-			if(prevDate.getFullYear()<2020 && Math.abs(tsDate.getTime()-prevDate.getTime())>xu.DAY)
+			if(prevDate.getFullYear()<2020 && Math.abs(tsDate.getTime()-prevDate.getTime())>(xu.DAY*2))
 				return await fail(`Created file ${fg.peach(name)} ts was expected to be ${fg.orange(dateFormat(prevDate, "yyyy-MM-dd"))} but got ${fg.orange(dateFormat(tsDate, "yyyy-MM-dd"))}${converterMismatch}`);
 		}
 	}

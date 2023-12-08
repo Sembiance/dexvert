@@ -19,7 +19,7 @@ const argv = cmdUtil.cmdInit({
 const musicWAVFilePath = path.join(path.dirname(argv.inputFilePath), "music.wav");
 const noMusicWAV = await fileUtil.exists(musicWAVFilePath);
 
-const runOptions = {timeout : xu.SECOND*10};
+const runOptions = {timeout : xu.SECOND*15};
 
 const {stderr : xmpInfoRaw} = await runUtil.run("xmp", ["-Cv", "-o", "/dev/null", argv.inputFilePath], runOptions);
 const {stdout : uadeInfoRaw} = await runUtil.run("uade123", ["-g", argv.inputFilePath], runOptions);
@@ -296,6 +296,10 @@ function parseZXTune(infoRaw="")
 			if(!matchProps)
 				continue;
 			
+			// zxtunes can have multiple subtracts and the timeout can cause later tracks meta info to be cut off. So this ensures we only use the first one of each prop we find
+			if(info[propKey])
+				continue;
+
 			info[propKey] = matchProps.groups.value.trim();
 			if(info[propKey].length===0)
 				delete info[propKey];

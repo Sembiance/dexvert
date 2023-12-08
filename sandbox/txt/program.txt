@@ -137,3 +137,4 @@ An object or a function that returns and object to be passed into dosUtil.run()
 	>>> arch			Which wine arch to use: win32 or win64  Default: win32
 	>>> base			Which wine prefix base to use. Default: base
 	>>> console			Set this to true to run the program in a 'console' window
+	>>> cwd				Set the CWD for the program to run in. Can prefix with "wine://" to be relative from the WINEPREFIX base

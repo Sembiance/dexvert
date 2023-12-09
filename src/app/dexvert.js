@@ -62,7 +62,7 @@ const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(
 if(!r && !logLines)
 	Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
 
-if(logLines.length)
+if(!argv.json && logLines.length)
 	console.log(`${logLines.join("\n")}\n`);
 
 if(!r)
@@ -78,7 +78,9 @@ if(xlog.atLeast("fatal"))
 {
 	if(argv.logFile)
 	{
-		xlog.warn`${r.pretty}`;
+		xlog.info`${r.pretty}`;
+		if(logLines.length)
+			xlog.info`${logLines.join("\n")}`;
 	}
 	else if(!argv.json)
 	{

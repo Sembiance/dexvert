@@ -8,20 +8,6 @@
   - Check sample: acromediaDirector/The\ Tower DEMO	(which is a MacBinary file, may need to 'unar' into bin/rsrc first, maybe not)
   - Check if it handles Mac Roman text from: https://archive.org/details/cd-rom-now-n-21   /director/stones.dir/00025_Field_25.txt
 
-* Create a dexrecurse.js app that will take a given starting archive and recurse down into it creating a 'tree' of output
-  dexrecurse.js <outputDir> <file> <file> ...
-  It will create <outputDir>/file/  <outputDir>/meta/  and  <outputDir>/log/
-  Each one will be a directory tree of files/JSON with files that are processed creating a <dir>§ suffix to extract files/meta into
-  Full directory tree in /log/ as well with a .txt log for each file (so it doesn't have to be loaded with the meta JSON later in retromission)
-  It should also create a <outputDir>/report.html with new magics, new file samples, etc similar to what retroadmin used to do
-  For new file samples, get a count of each formatid on disk (in dexvert/test/sample). Never copy more than '3' new samples. Never want more than 10 total of each type. So if existingCount[formatid]<10: needCount = Math.min(3, 10-existingCount[formatid]). b3sum existing files of course and only include 'new ones'. Group the new files ext and pick one from each ext up until we have needCount. If still need more (OR IF WE ONLY HAVE 1 EXTENSION), stick all the files into an array (removing those already gonna copy by ext) and sort the array by file size, then take the largest, smallest and one from middle.
-  Group files for that formatid by ex
-  Possibly the JSON generated to create report.html, also save that out was <outputDir>/report.json
-  Also create in /meta/ a .json for each folder. Do this AFTER it's all done and use the meta files themselves to create summary metas with things needed for retromission to render such as sub counts, etc
-  Test with CD #3 and some other early items, see how it works.
-  Need to ensure it's both fault/crash tolerant and also 'a file takes forever' tolerant. On CD 3, find a file type that there is only like 1 or 2 of on the disc and for that type force a crash and see that it handles it properly. Also force it take a LONG time and ensure I have some way of killing sub-procs that take way too long (>1 hour) and either re-try (ONCE ONLY) or just give up on that file
-  Possibly consider making a dexrecurse test case for CD isos so I can test new servers against them in addition to the existing test cases
-
 * Ensure all the files from these CDs convert properly with dexrecurse:
 	iso/Digital Magazine for Photography - Gallery
 	iso/Sexual Girls in Magical World

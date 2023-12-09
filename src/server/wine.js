@@ -45,7 +45,7 @@ export class wine extends Server
 			}
 			else
 			{
-				runOpts.virtualXGLX = true;
+				runOpts.virtualXGLX = true;	// Required for DirectorCastRipper to work (vs just virtualX)
 				runOpts.virtualXVNCPort = true;
 			}
 

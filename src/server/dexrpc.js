@@ -41,6 +41,8 @@ export class dexrpc extends Server
 		this.rpcid = 0;
 
 		this.webServer = new WebServer(DEXRPC_HOST, DEXRPC_PORT, {xlog : this.xlog});
+
+		this.webServer.add("/workerCount", async () => new Response(DEX_WORKER_COUNT.toString()), {logCheck : () => false});	// eslint-disable-line require-await
 		
 		this.webServer.add("/dex", async (request, reply) =>
 		{

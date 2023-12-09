@@ -30,7 +30,7 @@ const outJSON = {};
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
 // These formats should be skipped entirely for one reason or another
-const SKIP_FORMATS =
+export const SKIP_FORMATS =
 [
 	// these take AGES to extract, just WAY too long
 	"archive/printArtist"
@@ -146,7 +146,8 @@ const FLEX_SIZE_FORMATS =
 	archive :
 	{
 		// sometimes the SHA1 sum differs
-		annaMarie : 0.01,
+		annaMarie             : 0.01,
+		prehistorikCURArchive : 0.1,
 
 		// different each time due to way it generates frames
 		"swf:.mp4"    : 25,
@@ -686,7 +687,10 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const diskFormat = sampleSubFilePath.split("/")[1];
 	const diskFormatid = `${diskFamily}/${diskFormat}`;
 	if(SKIP_FORMATS.includes(diskFormatid))
+	{
+		workercbCount++;
 		return xlog.info`SKIPPING ${sampleSubFilePath} because it's format is in the skip list: ${diskFormatid}`;
+	}
 
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});

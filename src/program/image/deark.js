@@ -208,4 +208,5 @@ export class deark extends Program
 
 		return (chainFormat ? {asFormat : `image/${chainFormat}`} : false);
 	};
+	chainFailKeep = (r, chainInputFiles, chainResult, programid) => programid==="dexvert";
 }

@@ -69,6 +69,7 @@ export class Program
 			bruteFlags       : {type : Object},
 			chain            : {types : ["function", "string"]},
 			chainCheck       : {type : "function", length : [0, 3]},
+			chainFailKeep    : {type : "function", length : [0, 4]},
 			chainPost        : {type : "function", length : [0, 1]},
 			checkForDups     : {type : "boolean"},
 			failOnDups       : {type : "boolean"},
@@ -473,7 +474,7 @@ export class Program
 					if(r.processed)
 						continue;
 
-					const handleNewFiles = async (chainResult, inputFiles) =>
+					const handleNewFiles = async (chainResult, inputFiles, chainProgramid) =>
 					{
 						if(!chainResult?.f?.new)
 						{
@@ -486,9 +487,12 @@ export class Program
 							{
 								await chainResult.unlinkHomeOut();
 								
-								xlog.info`Deleting ${inputFiles.length} chain input files!`;
-								for(const inputFile of inputFiles)
-									await f.remove("new", inputFile, {unlink : true});
+								if(!this.chainFailKeep || !(await this.chainFailKeep(r, inputFiles, chainResult, chainProgramid)))
+								{
+									xlog.info`Deleting ${inputFiles.length} chain input files!`;
+									for(const inputFile of inputFiles)
+										await f.remove("new", inputFile, {unlink : true});
+								}
 							}
 							return;
 						}
@@ -565,7 +569,7 @@ export class Program
 								chainProgOpts.flags = chainProgFlags;
 
 							xlog.info`Chaining to ${progRaw} with file ${newFile.rel}`;
-							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile]);
+							await handleNewFiles(await Program.runProgram(progRaw.startsWith("?") ? progRaw.substring(1) : progRaw, newFile, chainProgOpts), [newFile], chainProgramid);
 						}, await sysUtil.optimalParallelism(newFiles.length));
 					}
 				}

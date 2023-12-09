@@ -42,7 +42,7 @@ if((await Deno.stat(argv.inputPath)).isFile)	// eslint-disable-line unicorn/pref
 else
 	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(argv.inputPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
 
-const taskQueue = (await fileUtil.tree(fileDirPath, {nodir : true})).map(v => path.relative(fileDirPath, v));
+const taskQueue = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
 const taskActive = new Set();
 const bar = printUtil.progress({max : taskQueue.length});
 
@@ -61,8 +61,14 @@ async function processNextQueue()
 
 	try
 	{
-		const rpcData = {op : "dexvert", inputFilePath : path.join(fileDirPath, task.relFilePath), outputDirPath : task.fileOutDirPath, logLevel : "info"};
-		const {r, logLines} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION, asJSON : true, json : rpcData});
+		const rpcData = {op : "dexvert", inputFilePath : path.join(fileDirPath, task.relFilePath), outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10)};
+		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION, json : rpcData});
+		if(!dexText)
+			throw new Error(`No data returned from dexrpc for ${task.relFilePath}`);
+
+		const {r, logLines} = xu.parseJSON(dexText, {});
+		if(!r?.json)
+			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${dexText}`);
 
 		const dexData = r.json;
 
@@ -103,7 +109,8 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 	while(taskQueue.length>0 && taskActive.size<WORKER_COUNT)
 		processNextQueue();	// eslint-disable-line no-floating-promise/no-floating-promise
 
-	bar.setStatus(`Active: ${taskActive.size.toLocaleString()} Queued: ${taskQueue.length.toLocaleString()}`);
+	const slowestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
+	bar.setStatus(` A:${taskActive.size.toLocaleString()}  Q:${taskQueue.length.toLocaleString()}  ${(performance.now()-slowestTask.startedAt).msAsHumanReadable({short : true})} ${slowestTask.relFilePath.innerTruncate(30)}`);
 
 	return false;
 }, {interval : 100});
@@ -111,8 +118,6 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 xlog.info`\nTotal Duration: ${(performance.now()-startedAt).msAsHumanReadable()}`;
 
 /*
-  Create a test/recurse/testrecurse.js that will for each 'sample' dir perform a dexrecurse and compare the resulting trees with test/recurse/expected/<sample>/
-
   Create in meta a single  "§.json" which represents the stats for that FOLDER. This is calcualted AFTER everything is all done and contains sub-counts for sub-folders, lists of what is in current folder and everything else needed to rendfer in retromission
 
   It should also create a <outputDir>/report.html with new magics, new file samples, etc similar to what retroadmin used to do
@@ -120,6 +125,4 @@ xlog.info`\nTotal Duration: ${(performance.now()-startedAt).msAsHumanReadable()}
   Group files for that formatid by ex
   Possibly the JSON generated to create report.html, also save that out was <outputDir>/report.json
   Test with CD #3 and some other early items, see how it works.
-  Need to ensure it's both fault/crash tolerant and also 'a file takes forever' tolerant. On CD 3, find a file type that there is only like 1 or 2 of on the disc and for that type force a crash and see that it handles it properly. Also force it take a LONG time and ensure I have some way of killing sub-procs that take way too long (>1 hour) and either re-try (ONCE ONLY) or just give up on that file
-  Possibly consider making a dexrecurse test case for CD isos so I can test new servers against them in addition to the existing test cases
 */

@@ -119,6 +119,7 @@ export class Format
 			weakMagic        : {types : ["boolean", Array]},
 
 			// other
+			alwaysIdentify   : {type : "boolean"},
 			auxFiles         : {type : "function", length : [2, 4]},
 			byteCheck        : {types : [Object, Array]},
 			confidenceAdjust : {type : "function"},

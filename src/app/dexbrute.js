@@ -6,7 +6,6 @@ import {programs, init as initPrograms} from "../program/programs.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {families} from "../family/families.js";
 import {DexFile} from "../DexFile.js";
-import {Identification} from "../Identification.js";
 import {Format} from "../Format.js";
 import {path} from "std";
 
@@ -18,7 +17,8 @@ const argv = cmdUtil.cmdInit({
 	{
 		allowUnsafe : {desc : "Run all programs, even those marked as unsafe"},
 		family      : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
-		serial      : {desc : "Run the programs serially..."}
+		serial      : {desc : "Run the programs serially..."},
+		debug       : {desc : "Debug mode"}
 	},
 	args :
 	[
@@ -63,7 +63,6 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 
 	class ProgramFormat extends Format
 	{
-		unsupported = true;
 		name = programid;
 		converters = [programid];
 	}
@@ -80,7 +79,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 
 	if(argv.serial)
 		printUtil.stdoutWrite(`Program ${familyid}/${programid} `);
-	const dexState = await dexvert(inputFile, outputDir, {xlog : xlog.clone("none"), programFlag, asId : Identification.create({from : "dexvert", family : familyid, formatid, magic : programid, matchType : "magic", confidence : 100})});
+	const dexState = await dexvert(inputFile, outputDir, {xlog : (argv.debug ? xlog : xlog.clone("none")), programFlag, asFormat : `${familyid}/${formatid}`});
 	const outputFiles = dexState.f.files.output || [];
 	if(outputFiles.length>0)
 	{

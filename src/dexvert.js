@@ -10,7 +10,7 @@ import {fileUtil, runUtil, printUtil} from "xutil";
 import {Identification} from "./Identification.js";
 import {path} from "std";
 
-export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
+export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbidProgram=[], programFlag={}, xlog=new XLog()}={})
 {
 	clearRuntime();
 	for(const [programid, flags] of Object.entries(programFlag))
@@ -37,13 +37,15 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 	await runUtil.run("prlimit", ["--pid", Deno.pid, `--core=0`]);
 
 	const ids = [];
+	let getIdentifications = true;
+	let asFormatFormat = null;
 	if(asFormat)
 	{
 		const [asFamilyid, asFormatid] = asFormat.split("/");
 		if(!formats[asFormatid])
 			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);
-		const asFormatFormat = formats[asFormatid];
-		const asFormatId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : asFormatFormat.name, matchType : "magic", confidence : 100};
+		asFormatFormat = formats[asFormatid];
+		const asFormatId = {from : "dexvert", family : asFamilyid, formatid : asFormatid, magic : asFormatFormat.name, matchType : asFormatFormat.alwaysIdentify ? "fallback" : "magic", confidence : 100};
 		for(const k of ["ext", "unsupported"])
 		{
 			if(asFormatFormat[k])
@@ -60,19 +62,20 @@ export async function dexvert(inputFile, outputDir, {asFormat, asId, skipVerify,
 				asFormatId.auxFiles = auxFiles;
 		}
 
+		getIdentifications = !!asFormatFormat.alwaysIdentify;
 		ids.push(Identification.create(asFormatId));
 		xlog.warn`Processing ${inputFile.pretty()} explicitly as format:\n\t${ids[0].pretty()}`;
 	}
-	else if(asId)
-	{
-		ids.push(asId);
-		xlog.warn`Processing ${inputFile.pretty()} explicitly with identification:\n\t${asId.pretty()}`;
-	}
-	else
+	
+	if(getIdentifications)
 	{
 		xlog.info`Getting identifications for ${inputFile.pretty()}`;
 		ids.push(...(await identify(inputFile, {xlog : xlog.clone("error")})));
 	}
+
+	// if we have a specific format, but it's set to always identify, we want to filter out any identifications that don't match our format, so that matchType:magic checks will work (see pict.js)
+	if(asFormatFormat?.alwaysIdentify)
+		ids.filterInPlace(id => id.from==="dexvert" && id.formatid===asFormatFormat.formatid);
 
 	if(ids.some(id => id.from==="dexvert"))
 		xlog.info`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;

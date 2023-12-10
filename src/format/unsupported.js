@@ -336,6 +336,7 @@ export default
 		/////////////////
 		actorImageSnapshot           : {name : "Actor Image Snapshot", ext : [".ima"], magic : ["Actor Image snapshot"], weakMagic : true},
 		aegisImpactSlideshow         : {name : "Aegis Impact! Slideshow", ext : [".sld"], magic : ["Aegis Impact! Slideshow"]},
+		aeSGMLBinaryStyle            : {name : "Author/Editor SGML Binary Style", ext : [".stl"], magic : ["A/E SGML binary styles"]},
 		alphaFourScript              : {name : "Alpha Four Script", ext : [".scp"], magic : ["Alpha Four Script"]},
 		amigaBASICProtectedFile      : {name : "Amiga BASIC Protected File", ext : [".bas"], magic : ["AmigaBASIC source (protected)"]},
 		amigaEModule                 : {name : "Amiga E Module", ext : [".m"], magic : ["Amiga E module", "E module/library"]},

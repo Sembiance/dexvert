@@ -16,6 +16,7 @@ export class macromediaDirector extends Format
 	forbidExtMatch = true;
 	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", /^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/];
 	weakMagic      = ["Generic RIFX container"];
+	unsupported    = true;	// TODO REMOVE THIS!!
 	
 	auxFiles = (input, otherFiles, otherDirs) =>
 	{

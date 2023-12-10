@@ -8,5 +8,6 @@ export class quickTimeAudio extends Format
 	magic            = _MOV_MAGIC;
 	confidenceAdjust = () => -10;	// Reduce by 10 so that mov matches first
 	metaProvider     = ["ffprobe"];
+	notes			 = `HUGE room for improvement here. Several files don't convert like "Demo Music File" and "BOMBER_BGM"`;
 	converters       = ["ffmpeg[outType:mp3]", "qt_flatt"];
 }

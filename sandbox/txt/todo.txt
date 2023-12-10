@@ -8,12 +8,6 @@
   - Check sample: acromediaDirector/The\ Tower DEMO	(which is a MacBinary file, may need to 'unar' into bin/rsrc first, maybe not)
   - Check if it handles Mac Roman text from: https://archive.org/details/cd-rom-now-n-21   /director/stones.dir/00025_Field_25.txt
 
-* Ensure all the files from these CDs convert properly with dexrecurse:
-	iso/Digital Magazine for Photography - Gallery
-	iso/Sexual Girls in Magical World
-	iso/Natsu Nice Gal Summary '94
-	iso/Love Bytes
-
 * Test some EXEs and some CD ISOs and locate some EXE files that have director files embedded in them. Then add support to EXE for this tool:
   https://github.com/n0samu/director-files-extract/blob/master/shock.py  (backed up in sandbox/app/director-files-extract)
 

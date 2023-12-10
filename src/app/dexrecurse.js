@@ -3,8 +3,124 @@ import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {WebServer} from "WebServer";
+import {flexMatch} from "../identify.js";
+import {formats, init as initFormats} from "../format/formats.js";
 
 const MAX_DURATION = xu.HOUR;
+const DECRECURSE_HOST = "127.0.0.1";
+const DECRECURSE_PORT = 17738;
+const DESIRED_SAMPLE_COUNT = 10;
+
+// these formats should not be higlighted for sample inclusion on the admin item page for various resons
+const EXCLUDED_SAMPLE_FORMATS =
+[
+	// too big
+	"archive/cdi",
+	"archive/iso",
+	"archive/mdf",
+	"archive/mdx",
+	"archive/nrg",
+	"archive/sgiVolumeImage",
+
+	// names have to be generic/specific, so can't have more files in the same samples directory
+	"archive/cosmoVolumeFile",
+	"archive/darkAgesMapArchive",
+	"archive/godOfThunderDAT",
+	"archive/installShieldCAB",
+	"archive/lostVikingsDAT",
+	"archive/monsterBashDAT",
+	"archive/mythosSoftwareLIBArchive",
+	"archive/stellar7RESArchive",
+	"archive/vinylGoddessLBR",
+	"archive/wackyWheelsArchive",
+	"text/windowsAutorun",
+
+	// modern formats that are 'generated' from others, so often not original. Also pretty modern so no need for many file samples
+	"archive/sevenZip",
+	"audio/flac",
+	"audio/mp3",
+	"document/json",
+	"document/pdf",
+	"font/otf",
+	"font/pcf",
+	"image/png",
+	"image/svg",
+	"image/webp",
+	"text/cue",
+	"text/csv",
+	"text/css",
+	"text/json",
+	"text/html",
+	"text/toc",
+	"text/xml",
+	"video/mp4",
+
+	// not interesting, or very application specific or have only come across a tiny repeated few over and over
+	"archive/activeMime",
+	"archive/bankGameData",
+	"archive/chasmBINArchive",
+	"archive/corelMOSAIC",
+	"archive/drRiptideArchive",
+	"archive/dynamixGameData",
+	"archive/impactILB",
+	"archive/interstateGameData",
+	"archive/sangoFighterDATArchive",
+	"archive/softdiskLibrary",
+	"archive/stargunnerDLT",
+	"archive/threeDUltraMiniGolfGameData",
+	"archive/youDontKnowJack",
+	"document/bankBookForWindows",
+	"document/centralPointHelp",
+	"document/codeViewHelp",
+	"document/czHelp",
+	"document/dageshDocument",
+	"document/easyCalc",
+	"document/epicITS",
+	"document/hotHelpCatalog",
+	"document/hyperTextVSUM",
+	"document/itsInternational",
+	"document/kamasOutline",
+	"document/newAgeHelp",
+	"document/peterNortonHelp",
+	"document/proText",
+	"document/qAndADocument",
+	"document/stFaxScript",
+	"document/usefulNotesNote",
+	"document/vgaPaint386Help",
+	"document/vipPhonebook",
+	"document/wingzHelp",
+	"image/dataShowGraphic",
+	"image/dataShowSprite",
+	"image/megaPaintPattern",
+	"music/boneShakerArchitect",
+	"music/godOfThunderSong",
+	"other/amiDockConfig",
+	"other/agSIHelpFile",
+	"other/compuserveInformationManagerDB",
+	"other/cWorthyErrorLibrarian",
+	"other/cWorthyOverlay",
+	"other/derCertificate",
+	"other/iBrowseCookies",
+	"other/ibmPCOverlay",
+	"other/maxonMultimediaScript",
+	"other/metaEditMethodDefinition",
+	"other/novellErrorLibrarian",
+	"other/qseqProject",
+	"other/quickPascalUnit",
+	"text/neoBookDocument",
+
+	// totally useless
+	"other/emptyFile",
+	"other/identicalBytes",
+	"other/nullBytes",
+	"other/nullBytesAlternating",
+
+	// rarely encounter this format and unfortuantly garbage tensor doesn't do a good job at detecting the failed conversions
+	"image/electronikaBKPIC",
+	"image/zbr"
+];
+
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -13,7 +129,9 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		programFlag : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
-		suffix      : {desc : "What suffix to use for output directories. This is important to avoid clobbering other output files.", defaultValue : "§"}
+		suffix      : {desc : "What suffix to use for output directories. This is important to avoid clobbering other output files.", defaultValue : "§"},
+		headless    : {desc : "Run headless, no GUI. Instead create a webserver and listen on a port for updates on recursion progress"},
+		report      : {desc : "Generate a report of new magics and new sample files"}
 	},
 	args :
 	[
@@ -21,30 +139,92 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory path", required : true}
 	]});
 
-const xlog = new XLog();
+const xlog = new XLog(argv.headless ? "error" : "info");
 
-if(!(await fileUtil.exists(argv.outputDirPath)))
-	Deno.exit(xlog.error`Output directory ${argv.outputDirPath} does not exist!`);
+const outputDirFullPath = path.resolve(argv.outputDirPath);
+if(!(await fileUtil.exists(outputDirFullPath)))
+	Deno.exit(xlog.error`Output directory ${outputDirFullPath} does not exist!`);
 
-if((await fileUtil.tree(argv.outputDirPath)).length>0)
-	Deno.exit(xlog.error`Output directory ${argv.outputDirPath} is not empty!`);
+if((await fileUtil.tree(outputDirFullPath)).length>0)
+	Deno.exit(xlog.error`Output directory ${outputDirFullPath} is not empty!`);
 
 const WORKER_COUNT = +(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/workerCount`));
 
-const fileDirPath = path.join(argv.outputDirPath, "file");
+const ALL_MAGICS = new Set();
+const EXISTING_SAMPLE_FILES = {};
+const newSampleFiles = {};
+const newMagics = {};
+
+if(argv.report)
+{
+	await initFormats(xlog);
+
+	for(const format of Object.values(formats))
+	{
+		for(const m of Array.force(format.magic || []))
+			ALL_MAGICS.add(m);
+	}
+
+	xlog.info`Finding existing sample files...`;
+	const sampleFilePaths = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "test", "sample"), {nodir : true, relative : true, depth : 3});
+	for(const sampleFilePath of sampleFilePaths)
+	{
+		const parts = sampleFilePath.split("/");
+		const formatid = `${parts[0]}/${parts[1]}`;
+		EXISTING_SAMPLE_FILES[formatid] ||= [];
+		EXISTING_SAMPLE_FILES[formatid].push(parts[2]);
+	}
+}
+
+const isExistingMagic = v =>
+{
+	for(const m of ALL_MAGICS)
+	{
+		if(flexMatch(v, m))
+			return true;
+	}
+
+	return false;
+};
+
+xlog.info`Starting recurse...`;
+
+const fileDirPath = path.join(outputDirFullPath, "file");
 await Deno.mkdir(fileDirPath);
 
-const metaDirPath = path.join(argv.outputDirPath, "meta");
+const metaDirPath = path.join(outputDirFullPath, "meta");
 await Deno.mkdir(metaDirPath);
 
-if((await Deno.stat(argv.inputPath)).isFile)	// eslint-disable-line unicorn/prefer-ternary
-	await runUtil.run("rsync", runUtil.rsyncArgs(argv.inputPath, path.join(fileDirPath, path.basename(argv.inputPath)), {fast : true}));
+const inputFullPath = path.resolve(argv.inputPath);
+if((await Deno.stat(inputFullPath)).isFile)	// eslint-disable-line unicorn/prefer-ternary
+	await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}));
 else
-	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(argv.inputPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
+	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inputFullPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
 
+let taskFinishedCount = 0;
+let taskHandledCount = 0;
 const taskQueue = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
 const taskActive = new Set();
-const bar = printUtil.progress({max : taskQueue.length});
+const bar = argv.headless ? null : printUtil.progress({barWidth : 47, max : taskQueue.length});
+const startedAt = performance.now();
+
+const webServer = argv.headless ? new WebServer(DECRECURSE_HOST, DECRECURSE_PORT, {xlog}) : null;
+if(webServer)
+{
+	webServer.add("/status", async () =>	// eslint-disable-line require-await
+	{
+		const r = {duration : performance.now()-startedAt, taskQueueCount : taskQueue.length, taskActiveCount : taskActive.size, taskFinishedCount, taskHandledCount};
+		const oldestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
+		if(oldestTask)
+		{
+			r.oldestTask = oldestTask;
+			r.oldestTask.duration = performance.now()-oldestTask.startedAt;
+		}
+
+		return new Response(JSON.stringify(r));
+	}, {logCheck : () => false});
+	await webServer.start();
+}
 
 async function processNextQueue()
 {
@@ -76,6 +256,39 @@ async function processNextQueue()
 		await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify(meta));
 		await fileUtil.writeTextFile(task.logFilePath, `${r.pretty}\n${(logLines || []).join("\n")}`);
 
+		const dexid = (dexData.processed && dexData.phase?.id) ? dexData.phase.id : ((dexData.ids || []).find(({from, unsupported, matchType}) => from==="dexvert" && unsupported && ["magic", "filename"].includes(matchType)) || null);
+		if(dexid)
+			taskHandledCount++;
+
+		if(argv.report)
+		{
+			if(dexid)
+			{
+				const dexformatid = `${dexid.family}/${dexid.formatid}`;
+				if(!dexid.unsupported && (EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)<DESIRED_SAMPLE_COUNT && !EXCLUDED_SAMPLE_FORMATS.includes(dexformatid))
+				{
+					newSampleFiles[dexformatid] ||= [];
+					newSampleFiles[dexformatid].push(task.relFilePath);
+				}
+			}
+			else if(dexData.ids?.length)
+			{
+				for(const id of dexData.ids || [])
+				{
+					// We don't include failed dexvert handlings
+					if(id.from==="dexvert" && !id.unsupported)
+						continue;
+
+					// Skip weak identifications, those from dexvert or magics that match an existing format
+					if(id.weak || id.from==="dexvert" || isExistingMagic(id.magic))
+						continue;
+
+					newMagics[id.magic] ||= [];
+					newMagics[id.magic].pushUnique(task.relFilePath);
+				}
+			}
+		}
+
 		if(!dexData?.created?.files?.output?.length)
 		{
 			await fileUtil.unlink(task.fileOutDirPath);
@@ -84,7 +297,7 @@ async function processNextQueue()
 		{
 			for(const file of dexData.created.files.output)
 			{
-				bar.incrementMax();
+				bar?.incrementMax();
 				taskQueue.push(path.relative(fileDirPath, file.absolute));
 			}
 		}
@@ -96,11 +309,11 @@ async function processNextQueue()
 			await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify({failed : true, err : err.toString(), stack : err.stack}));
 	}
 
-	bar.increment();
+	taskFinishedCount++;
+	bar?.increment();
 	taskActive.delete(task);
 }
 
-const startedAt = performance.now();
 await xu.waitUntil(async () =>	// eslint-disable-line require-await
 {
 	if(taskActive.size===0 && taskQueue.length===0)
@@ -110,19 +323,50 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 		processNextQueue();	// eslint-disable-line no-floating-promise/no-floating-promise
 
 	const slowestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
-	bar.setStatus(` A:${taskActive.size.toLocaleString()}  Q:${taskQueue.length.toLocaleString()}  ${(performance.now()-slowestTask.startedAt).msAsHumanReadable({short : true})} ${slowestTask.relFilePath.innerTruncate(30)}`);
+	const queuePart = `${xu.cf.fg.chartreuse("Q")} ${xu.cf.fg.white(taskQueue.length.toString())}`;
+	const activePart = `${xu.cf.fg.chartreuse("A")} ${xu.cf.fg.white(taskActive.size.toString())}`;
+	const handledPart = `${xu.cf.fg.chartreuse("H")} ${((taskHandledCount/taskFinishedCount)*100).toFixed(2)}%`;
+	const slowestPart = `${xu.cf.fg.white((performance.now()-slowestTask.startedAt).msAsHumanReadable({short : true}))} ${slowestTask.relFilePath.innerTruncate(40)}`;
+	bar?.setStatus(` ${queuePart}   ${activePart}   ${handledPart}   ${slowestPart}`);
 
 	return false;
 }, {interval : 100});
 
-xlog.info`\nTotal Duration: ${(performance.now()-startedAt).msAsHumanReadable()}`;
+if(webServer)
+	await webServer.stop();
 
-/*
-  Create in meta a single  "§.json" which represents the stats for that FOLDER. This is calcualted AFTER everything is all done and contains sub-counts for sub-folders, lists of what is in current folder and everything else needed to rendfer in retromission
+const totalDuration = performance.now()-startedAt;
+xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
-  It should also create a <outputDir>/report.html with new magics, new file samples, etc similar to what retroadmin used to do
-  For new file samples, get a count of each formatid on disk (in dexvert/test/sample). Never copy more than '3' new samples. Never want more than 10 total of each type. So if existingCount[formatid]<10: needCount = Math.min(3, 10-existingCount[formatid]). b3sum existing files of course and only include 'new ones'. Group the new files ext and pick one from each ext up until we have needCount. If still need more (OR IF WE ONLY HAVE 1 EXTENSION), stick all the files into an array (removing those already gonna copy by ext) and sort the array by file size, then take the largest, smallest and one from middle.
-  Group files for that formatid by ex
-  Possibly the JSON generated to create report.html, also save that out was <outputDir>/report.json
-  Test with CD #3 and some other early items, see how it works.
-*/
+if(argv.report)
+{
+	const reportData = {duration : totalDuration, newSampleFiles, newMagics};
+	await fileUtil.writeTextFile(path.join(outputDirFullPath, "report.json"), JSON.stringify(reportData));
+
+	if(!argv.headless)
+	{
+		const newSampleFilesEntries = Object.entries(newSampleFiles);
+		if(newSampleFilesEntries.length>0)
+		{
+			console.log(printUtil.majorHeader(`New Sample Files (${newSampleFilesEntries.length.toLocaleString()})`, {prefix : "\n"}));
+			for(const [formatid, files] of Object.entries(newSampleFiles))
+			{
+				xlog.info`${formatid}   (${files.length} files)`;
+				for(const file of files)
+					xlog.info`\t${file}`;
+			}
+		}
+
+		const newMagicsEntries = Object.entries(newMagics);
+		if(newMagicsEntries.length>0)
+		{
+			console.log(printUtil.majorHeader(`New Magics (${newMagicsEntries.length.toLocaleString()})`, {prefix : "\n"}));
+			for(const [magic, files] of Object.entries(newMagics))
+			{
+				xlog.info`${magic}   (${files.length} files)`;
+				for(const file of files)
+					xlog.info`\t${file}`;
+			}
+		}
+	}
+}

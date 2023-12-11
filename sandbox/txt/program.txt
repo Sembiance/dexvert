@@ -37,7 +37,7 @@ Set to true if this program can produce an output file identical to the original
 
 >>> ******** Execute Properties
 >>> bin = "binary_program"
-The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("checkBytes/checkBytes") to get a local dexvert/bin/*
+The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("subDir/binname") to get a local dexvert/bin/*
 If you have 'bin' you can't have 'exec'
 
 >>> args = async (runState) => ([arg1, arg2])

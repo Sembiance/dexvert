@@ -2,9 +2,10 @@ import {Program} from "../../Program.js";
 
 export class td02imd extends Program
 {
-	website = "http://dunfield.classiccmp.org/img42841/teledisk.htm/";
+	website = "http://dunfield.classiccmp.org/img42841/teledisk.htm";
+	package = "app-arch/td02imd";
 	unsafe  = true;
-	bin     = Program.binPath("td02imd/td02imd");
+	bin     = "td02imd";
 	args    = async r => [r.inFile(), `O=${await r.outFile("out.imd")}`];
 	post    = r =>
 	{

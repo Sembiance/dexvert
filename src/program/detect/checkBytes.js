@@ -5,7 +5,8 @@ import {Detection} from "../../Detection.js";
 export class checkBytes extends Program
 {
 	website = "https://github.com/Sembiance/dexvert/";
-	bin     = Program.binPath("checkBytes/checkBytes");
+	package = "app-arch/checkBytes";
+	bin     = "checkBytes";
 	loc     = "local";
 	args    = r => [r.inFile()];
 	post    = r =>

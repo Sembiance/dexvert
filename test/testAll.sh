@@ -1,5 +1,8 @@
 #!/bin/bash
 
+shopt -s expand_aliases
+source /etc/bash/bashrc.d/bash_aliases
+
 # times are from ridgeport Dec 7, 2023
 dra testMany.js --format=executable	#     30s
 dra testMany.js --format=poly		#     39s

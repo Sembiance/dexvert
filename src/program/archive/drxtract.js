@@ -90,10 +90,9 @@ export class drxtract extends Program
 				await fileUtil.writeTextFile(path.join(outDirPath, `${name}.txt`), Object.entries(o).sortMulti([([castid]) => +castid]).map(([, v]) => v).join("\n"));
 		}
 
-		// TODO uncomment
 		// remove our original output files
-		//for(const topLevelFilePath of topLevelFilePaths)
-		//	await fileUtil.unlink(topLevelFilePath, {recursive : true});
+		for(const topLevelFilePath of topLevelFilePaths)
+			await fileUtil.unlink(topLevelFilePath, {recursive : true});
 	};
 	renameOut  = false;
 }

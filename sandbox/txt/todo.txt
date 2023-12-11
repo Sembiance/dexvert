@@ -11,15 +11,6 @@
 * Test some EXEs and some CD ISOs and locate some EXE files that have director files embedded in them. Then add support to EXE for this tool:
   https://github.com/n0samu/director-files-extract/blob/master/shock.py  (backed up in sandbox/app/director-files-extract)
 
-* Create a 'dexcloud' process that I can run on xeen. It has a manually registered list of hosts (dexdrone#) that I can spawn out dexrecurse jobs to
-  Idea is it keeps track of which hosts are available and which are not. Goal is to have lots of very cheap intel like 48core 72core machines
-  Then dexrecurse jobs (along with their files) can be sent to an API on dexcloud. It holds these on disk in a queue until a dexdrone opens up
-  API consumers will poll the API to get status and find out when it's all done and result files can be downloaded
-  Will need an 'dexcloud.cosmicrealms.com' admin interface that shows the status of all the drones, which are available, current processing status
-  Would be nice to also see a log of recently completed items, things in queue, etc
-  Since the files are copied then copied again in both directions, and on fewer core, slower machines, this will make individual ISOs slower
-  But it'll be a lot cheaper and can spin up more more easily and also might be faster than before with more machines  
-
 
 /---------------\
 | High Priority |

@@ -4,3 +4,4 @@ dexvert.code-workspace
 .vscode/
 deno/
 wine/
+aux/

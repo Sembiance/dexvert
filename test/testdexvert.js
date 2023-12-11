@@ -115,8 +115,15 @@ const FLEX_SIZE_PROGRAMS =
 	zxtune123                   : 0.1
 };
 
-// these formats have some meta data that can change and so we should just ignore it
-const IGNORED_META_KEYS = {};
+// these formats have some meta data that can change per host or per upgradeand so we should just ignore it
+const IGNORED_META_KEYS =
+{
+	image :
+	{
+		jng : ["colorCount"],
+		pes : ["colorCount"]
+	}
+};
 
 // these formats have supporting files that should be ignored
 const SUPPORTING_FILES =
@@ -152,6 +159,11 @@ const FLEX_SIZE_FORMATS =
 		// different each time due to way it generates frames
 		"swf:.mp4"    : 25,
 		"swfEXE:.mp4" : 25,
+
+		// different generation per host/version
+		"amosMemoryBank:.mp3" : 1,
+		"iso:.mp3"            : 1,
+		"tnef:.pdf"           : 40,
 
 		// the PBMs generated are different each time
 		hypercard : 2,
@@ -207,6 +219,7 @@ const FLEX_SIZE_FORMATS =
 		// differs depending on host
 		avif     : 1,	// avifdec
 		dwg      : 25,	// dwg2bmp
+		macDraw  : 10,
 		radiance : 1,	// pfsconvert
 		x3f      : 0.1,	// dcraw
 
@@ -221,13 +234,14 @@ const FLEX_SIZE_FORMATS =
 	},
 	music :
 	{
-		// MP3 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
-		"*:.mp3" : 1
+		// MP3 generation changes very easily when packages are updated and on different hosts
+		"*:.mp3" : 25
 	},
 	video :
 	{
 		// MP4 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
-		"*:.mp4" : 5,
+		"*:.mp4"           : 5,
+		"movieSetter:.mp4" : 40,
 
 		// these are screen recordings from DOSBox and can differ a good bit between each run
 		disneyCFAST : 25,
@@ -728,7 +742,7 @@ if(failures.length>0)
 if(newSuccesses.length>0)
 {
 	const recordNewSuccessesScriptFilePath = await fileUtil.genTempPath(DEXTEST_ROOT_DIR, ".sh");
-	xlog.info`\n${newSuccesses.length.toLocaleString()} new successes. Execute to record: ${recordNewSuccessesScriptFilePath}`;
+	xlog.info`\n\n${newSuccesses.length.toLocaleString()} new successes. ${fg.pink("Execute to record")}: ${recordNewSuccessesScriptFilePath}`;
 	await fileUtil.writeTextFile(recordNewSuccessesScriptFilePath, `#!/bin/bash
 cd /mnt/compendium/DevLab/dexvert/test || exit
 ${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}

@@ -15,7 +15,7 @@ export class perlTextCheck extends Program
 	pre = async r =>
 	{
 		r.trimmedFilePath = await fileUtil.genTempPath();
-		await runUtil.run(Program.binPath("trimGarbage/trimGarbage"), ["--newlines", r.inFile({absolute : true}), r.trimmedFilePath]);
+		await runUtil.run("trimGarbage", ["--newlines", r.inFile({absolute : true}), r.trimmedFilePath]);
 		if(!(await fileUtil.exists(r.trimmedFilePath)))
 			delete r.trimmedFilePath;
 	};

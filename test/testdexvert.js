@@ -14,6 +14,7 @@ const argv = cmdUtil.cmdInit({
 	{
 		format     : {desc : "Only test a single format: archive/zip", hasValue : true},
 		file       : {desc : "Only test sample files that end with this value, case insensitive.", hasValue : true},
+		serial     : {desc : "Perform only 1 test at a time, this helps when debugging"},
 		record     : {desc : "Take the results of the conversions and save them as future expected results"},
 		json       : {desc : "Output results as JSON"},
 		liveErrors : {desc : "Report errors live as they are detected instead of waiting until the end."},
@@ -730,7 +731,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), logLines.join("\n"));
 
 	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});
-}, Math.min(sampleFilePaths.length, NUM_WORKERS));
+}, argv.serial ? 1 : Math.min(sampleFilePaths.length, NUM_WORKERS));
 
 await xu.waitUntil(() => workercbCount===sampleFilePaths.length);
 
@@ -782,6 +783,24 @@ async function writeOutputHTML()
 				max-height: 350px;
 			}
 
+			.embed
+			{
+				display: inline-block;
+				width: 32%;
+				margin-right: 10px;
+				margin-bottom: 15px;
+				text-align: center;
+			}
+
+			iframe
+			{
+				background-color: #aaa;
+				border: 0;
+				margin-top: 2px;
+				width: 100%;
+				height: 225px;
+			}
+
 			.media
 			{
 				width: 47%;
@@ -817,15 +836,6 @@ async function writeOutputHTML()
 				0% { visibility: hidden; }
 				50% { visibility: hidden; }
 				100% { visibility: visible; }
-			}
-
-			iframe
-			{
-				background-color: #aaa;
-				margin: 5px;
-				border: 0;
-				width: 32%;
-				height: 200px;
 			}
 
 			.topRightInfo
@@ -875,7 +885,7 @@ async function writeOutputHTML()
 			case ".txt":
 			case ".pdf":
 			case ".html":
-				return `<iframe src="${filePathSafe}" title="${titleSafe}"></iframe>`;
+				return `<span class="embed"><a href="${filePathSafe}" title="${titleSafe}">${titleSafe}</a><br><iframe src="${filePathSafe}" title="${titleSafe}"></iframe></span>`;
 		}
 
 		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;

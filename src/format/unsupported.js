@@ -150,7 +150,6 @@ export default
 	image :
 	{
 		aldusIntelliDrawDrawing   : {name : "Aldus IntelliDraw Drawing", ext : [".idw"], magic : ["Aldus IntelliDraw Drawing"]},
-		amiDrawDrawing            : {name : "AmiDraw Drawing", ext : [".sdw"], magic : ["AmiDraw Drawing"], weakMagic : true},
 		animatorPICCEL            : {name : "Animator PIC/CEL", ext : [".pic", ".cel"], magic : [/^x-fmt\/223( |$)/], weakMagic : true},
 		applausePalette           : {name : "Applause Palette", ext : [".pal"], magic : ["Applause Palette"]},
 		artsAndLettersGraphic     : {name : "Arts and Letters Graphic", ext : [".ged"], magic : ["Arts and Letters Graphics", /^fmt\/1458( |$)/]},

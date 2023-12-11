@@ -15,8 +15,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Look into adopting KeyView Pro as more conversion software: https://archive.org/details/KeyViewPro
-
 * Contact my reverse engineer contact and ask if he would be willing to reverse engineer the AOL art format
 
 /-----------------\

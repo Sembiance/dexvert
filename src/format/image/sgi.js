@@ -8,5 +8,5 @@ export class sgi extends Format
 	mimeType     = "image/x-sgi";
 	magic        = [/^Silicon Graphics.* bitmap/, "SGI image data", /^x-fmt\/140( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "deark[module:sgiimage]", "nconvert", "iconvert", "gimp", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[format:sgi_pipe][outType:png]", "hiJaakExpress", "canvas", "tomsViewer"];
+	converters   = ["convert", "deark[module:sgiimage]", "nconvert", "iconvert", "gimp", `abydosconvert[format:${this.mimeType}]`, "ffmpeg[format:sgi_pipe][outType:png]", "hiJaakExpress", "canvas", "tomsViewer", "keyViewPro"];
 }

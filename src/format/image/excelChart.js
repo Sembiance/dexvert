@@ -8,5 +8,5 @@ export class excelChart extends Format
 	magic       = ["Microsoft Excel", /^fmt\/(553|554)( |$)/, /^x-fmt\/126( |$)/];
 	weakMagic   = ["Microsoft Excel"];
 	unsupported = true;
-	notes       = "Canvas claims support for this, but I couldn't get it to convert any of my samples.";
+	notes       = "Canvas and KeyView Pro both claim support for this, but I couldn't get them to convert any of my samples.";
 }

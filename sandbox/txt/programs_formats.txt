@@ -10747,3 +10747,72 @@ WordPerfect Graphics WPG
 XBM
 WMV (play only, external player)
 ZIP (view and extract from ZIP archives)
+
+
+>>> KeyView Pro (win2k - )
+Documents/Spreadsheets
+	Applix Asterix V2.0
+	Applix Words V4.2
+	ASCII Text
+*	Data General CDS V3.12, 3.20
+*	Data General CeoWrite DOS V2.1, AOS/VS V3.1
+*	DEC WPS Plus Native VMS V4.0/PC V4.1
+*	DECdx (WPS Plus) VMS V2.0, 3.0, 4.0/PC V4.1
+	Executables
+*	HP Word/PC
+	HTML
+*	IBM 1403 Line Printer
+*	IBM DCA-FFT
+*	IBM DCA-RFT
+*	IBM DCF Script V3.2
+*	IBM DisplayWrite V1.0, 1.1
+	Lotus AMI Pro V2.0, 3.0
+*	Lotus Word Pro 96, 97
+*	MASS-11 V7.x to 8.5
+	Microsoft Rich Text Format
+	Microsoft Word 97
+	Microsoft Word for Mac V4.x to 6.x
+	Microsoft Word for PC V2.0 to 5.5
+	Microsoft Word for Windows V2.x, 6.x
+	Microsoft Word for Windows 95 V7.0
+	Microsoft Works V3.0, 4.0
+	Microsoft Write
+*	MultiMate V3.32, 4.0/Adv V3.5, 3.6/Adv II V3.7
+*	Navy DIF
+*	Office Writer V5.0, 6.0
+*	Siemens-Nixdorf Targon Word V2.x
+*	Unicode V2.0
+*	Uniplex II Plus V6.01, 7.0, 8.0
+*	Wang OIS/VS Comm Format
+*	Wang WITA V2.0
+*	WordMARC Composer/Plus
+	WordPerfect for DOS/Windows V5.x, 6.x
+	WordPerfect for Mac V2.0, 3.x
+	WordPerfect for Windows V7.0, 8.0
+*	WordStar V3.4 or less
+	XyWrite for Windows V4.12
+
+
+Images
+	AMI Draw Graphics (SDW) 
+*	CCITT T4/G3 One Dimensional 
+*	CCITT T6/G4 Two Dimensional 
+	Computer Graphics Metafile (CGM)
+	Encapsulated PostScript (TIFF header)
+	Enhanced Metafile (EMF)
+*	Graphics Interchange Format (GIF)
+	JPEG File Interchange Format (JFIF)
+	Mac PICT (raster content)
+	MacPaint
+	Microsoft Excel Charts
+*	Microsoft Windows Animated Cursor 
+	Microsoft Windows Bitmap (BMP)
+*	Microsoft Windows Cursor/Icon Graphics 
+	Microsoft Windows Metafile (WMF)
+	PC PaintBrush (PCX)
+	Portable Network Graphics (PNG)
+	SGI RGB
+	Sun Raster
+	Tagged Image File Format (TIFF)
+	Truevision Targa (TGA)
+	WordPerfect Graphics (WPG) V1.0, 2.0

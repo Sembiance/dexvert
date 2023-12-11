@@ -10,6 +10,6 @@ export class pcx extends Format
 	metaProvider = ["image"];
 	converters   = [
 		"nconvert", "convert", "deark[module:pcx]", "gimp",
-		...["imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW"].map(v => `${v}[strongMatch]`)
+		...["imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW", "keyViewPro"].map(v => `${v}[strongMatch]`)
 	];
 }

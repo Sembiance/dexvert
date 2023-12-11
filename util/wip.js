@@ -15,5 +15,19 @@ const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
 
-const latestJavaConfigNum = (await fileUtil.tree("/usr/lib/jvm", {depth : 1})).map(v => +v.split("-").at(-1)).sortMulti().at(-1);
-xlog.info`${targetJavaConfig}`;
+/*const {cb} = await runUtil.run("wine", ["c:\\dexvert\\DirectorCastRipper_D12/DirectorCastRipper.exe", "--files", "c:\\in77\\in.dir", "--output-folder", "c:\\out77", "--include-names", "--dismiss-dialogs"], {
+	liveOutput : true,
+	detached   : true,
+	timeout    : 300_000,
+	env        :
+	{
+		DISPLAY    : ":6365",
+		WINEPREFIX : "/mnt/ram/dexvert/wine/base",
+		WINEARCH   : "win32"
+	}
+});
+
+const r = await cb();
+xlog.info`${r}`;*/
+
+//DISPLAY=:5347 WINEPREFIX=/mnt/ram/dexvert/wine/base WINARCH=win32 wine "c:\\dexvert\\DirectorCastRipper_D10/DirectorCastRipper.exe" 

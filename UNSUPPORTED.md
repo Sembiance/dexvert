@@ -1,11 +1,11 @@
-# Unsupported File Formats (933)
+# Unsupported File Formats (934)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (60)
+## Archive (62)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://telparia.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -13,6 +13,7 @@ archive | ABackup Disk Image | .adf |
 archive | AIX backup/restore | .img | 
 archive | Aldus Zip Compressed File |  | No known extractor program.
 archive | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://telparia.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
+archive | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://telparia.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 archive | [AR Archive](http://fileformats.archiveteam.org/wiki/AR) | .a .lib | [11 sample files](https://telparia.com/fileFormatSamples/archive/arArchive/) - We used to convert with deark/ar but all that usually is stored inside is .o object which are not interesting and some .a files like libphobos2.a produce 9,999 files which is a lot of noise.
 archive | Arts and Letters Clip Art Library | .yal | 
 archive | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
@@ -34,6 +35,7 @@ archive | IFF LIST File |  | [18 sample files](https://telparia.com/fileFormatSa
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 archive | Interchangeable Preservation Format Floppy Disk Image | .ipf | 
 archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://telparia.com/fileFormatSamples/archive/interfaze/)
+archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [48 sample files](https://telparia.com/fileFormatSamples/archive/macromediaDirector/) - While 'xtras' is included here, it is NOT copied over into Windows with macromediaDirector. See more details in program/archive/macromediaDirector.js
 archive | MetaCard Stack | .rev | 
 archive | Micrografx Archive | .mda | 
 archive | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -42,7 +44,7 @@ archive | MSX Cassette Tape | .cas |
 archive | Netscape SNM Archive | .snm | [5 sample files](https://telparia.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
 archive | Newton Package | .pkg | 
 archive | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://telparia.com/fileFormatSamples/archive/omnisStudio/)
-archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager program can extract these files, but I couldn't get it to run under linux, so meh.
+archive | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://telparia.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 archive | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://telparia.com/fileFormatSamples/archive/oricTape/)
 archive | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://telparia.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
 archive | OS/2 Installation Package | .pkg .pak | [8 sample files](https://telparia.com/fileFormatSamples/archive/os2InstallPackage/) - Could support this with OS/2 unpack if I ever emulated OS/2
@@ -111,7 +113,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://telparia.com/fil
 
 
 
-## Document (44)
+## Document (43)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Adobe InDesign Document | .indd .ind | 
@@ -140,7 +142,6 @@ document | InstallShield Compiled Script | .inx | [10 sample files](https://telp
 document | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
 document | InterSpread Spreadsheet |  | 
 document | Lotus Symphony Worksheet | .wk1 wr1 | 
-document | [Lotus Word Pro](http://fileformats.archiveteam.org/wiki/Lotus_Word_Pro) | .lwp | [1 sample file](https://telparia.com/fileFormatSamples/document/lotusWordPro/)
 document | MasterCook Cookbook | .mcf | [2 sample files](https://telparia.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://telparia.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://telparia.com/fileFormatSamples/document/microsoftAdvisorHelp/)
@@ -261,13 +262,12 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (88)
+## Image (87)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://telparia.com/fileFormatSamples/image/actorObjectGraphic/)
 image | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://telparia.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 image | Aldus IntelliDraw Drawing | .idw | 
-image | AmiDraw Drawing | .sdw | 
 image | Animator PIC/CEL | .pic .cel | 
 image | Applause Palette | .pal | 
 image | Apple II Sprites | .spr | [1 sample file](https://telparia.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
@@ -293,7 +293,7 @@ image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga
 image | Drawing Interchange Binary Format | .dxb | 
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://telparia.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 image | EasyCAD Drawing | .fcd | 
-image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [7 sample files](https://telparia.com/fileFormatSamples/image/excelChart/) - Canvas claims support for this, but I couldn't get it to convert any of my samples.
+image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [7 sample files](https://telparia.com/fileFormatSamples/image/excelChart/) - Canvas and KeyView Pro both claim support for this, but I couldn't get them to convert any of my samples.
 image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://telparia.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://telparia.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | Freelance Graphics Drawing | .drw | 
@@ -463,7 +463,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (440)
+## Other (441)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -524,6 +524,7 @@ other | Atari CTB File | .ctb | [5 sample files](https://telparia.com/fileFormat
 other | Atari GEM OBM File | .obm | [15 sample files](https://telparia.com/fileFormatSamples/unsupported/atariGEMOBM/)
 other | Audio Interface Library 3 Digital audio driver | .dig | 
 other | Audio Interface Library 3 Music/MIDI driver | .mdi | 
+other | Author/Editor SGML Binary Style | .stl | 
 other | Authorware Library | .apl | 
 other | AutoCAD Compiled Menu | .mnx | 
 other | Autocad DOS Real Mode ADI Driver | .exp .ex% | 

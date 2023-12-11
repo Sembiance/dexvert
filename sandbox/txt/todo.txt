@@ -11,11 +11,12 @@
 * Test some EXEs and some CD ISOs and locate some EXE files that have director files embedded in them. Then add support to EXE for this tool:
   https://github.com/n0samu/director-files-extract/blob/master/shock.py  (backed up in sandbox/app/director-files-extract)
 
+* Work Underway: AOL Art file format reverse engineering
 
 /---------------\
 | High Priority |
 \---------------/
-* Contact my reverse engineer contact and ask if he would be willing to reverse engineer the AOL art format
+
 
 /-----------------\
 | Medium Priority |
@@ -35,19 +36,6 @@
   2. Patch ZXtune (which uses Ay_Emul) to support these formats
      If I do ZXTune, submit patch here: https://bitbucket.org/zxtune/zxtune/issues/150/ay-amad-support
      In EITHER CASE, make sure I'm using the latest versions of both the above before trying
-
-* ISOs I was unable to process:
-	No idea what format this is in: https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
-	These don't convert for some reason, they both appear to be Mac CDs
-		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
-		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
-	Raw mac partition dumps:
-		https://archive.org/details/apple-r-p-lib-internal-v-1.0
-		https://archive.org/details/apple-r-p-lib-internal-v-2.0
-		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
-
-* See if I can detect and extract the compressed files in sandbox/fail/unsupportedCompression/*
-  Maybe something from: https://www.sac.sk/files.php?d=7&l=
 
 * Take this 'xv' program that runs in Linux and make a CLI tool that leverages it's support of formats to convert to PNG
   https://gitlab.com/DavidGriffith/xv
@@ -80,16 +68,23 @@
 
 * Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
 
-* Decide how I'm gonna share dexvert with the world:
-  - Could see if I can now get it working within a QEMU/VMWare/VirtualBox image, now that I don't run QEMU anymore within dexvert
-    Could maybe then package this image into a docker image for even easier use.
-  - Could create a hard disk image that is capable of being 'spun' up in cloud instance like amazon/gcp/azure
-  - Could use amazon/gcp/azure or baremetal servers and provide some sort of remote authenticated 'cloud' service.
+* ISOs I was unable to process:
+	No idea what format this is in: https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
+	These don't convert for some reason, they both appear to be Mac CDs
+		https://archive.org/details/800_jeux_pour_mac		This one has an extra 16 bytes at front, removing it doesn't fix it, but did allow UniExtract to extract a TOAST partition, but couldn't process that at all either
+		https://archive.org/details/Lex-C-RomSharewareExpress	no idea on this one
+	Raw mac partition dumps:
+		https://archive.org/details/apple-r-p-lib-internal-v-1.0
+		https://archive.org/details/apple-r-p-lib-internal-v-2.0
+		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 
 
 /--------------\
 | Low Priority |
 \--------------/
+* See if I can detect and extract the compressed files in sandbox/fail/unsupportedCompression/*
+  Maybe something from: https://www.sac.sk/files.php?d=7&l=
+
 * It's possible that video/riffMultimediaMovie is actually a Director 3 Mac file already supported by ScummVM: https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
   This would entail creating a SCUMMVM based CLI tool to process these. See the comments in format/macromediaDirector.js
 

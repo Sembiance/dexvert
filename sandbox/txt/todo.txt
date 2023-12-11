@@ -15,17 +15,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* I have LibDsk installed and program 'dskconv' in dexvert, look at the formats it supports and add support for them:
-	.DSK files, as used in CPCEMU, JOYCE and other Sinclair/Amstrad emulators.
-	MYZ80 hard drive image files.
-	NanoWasp floppy image files.
-	.CFI (Compressed Floppy Image) files, as created by FDCOPY.COM under DOS.
-	CopyQM files
-	TeleDisk files
-	Compaq QRST files
-	APRIDISK image files
-	The LDBS format
-
 * Add program (oiiotool/iconvert) and formats it supports: https://github.com/OpenImageIO/oiio
 
 * Look into adopting KeyView Pro as more conversion software: https://archive.org/details/KeyViewPro

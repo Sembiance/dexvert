@@ -7,5 +7,5 @@ export class imageDisk extends Format
 	ext            = [".imd"];
 	forbidExtMatch = true;
 	magic          = ["ImageDisk disk image"];
-	converters     = ["dskconv"];
+	converters     = ["dskconv[inType:imd]"];
 }

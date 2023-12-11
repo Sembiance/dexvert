@@ -7,5 +7,5 @@ export class copyQMDiskImage extends Format
 	ext            = [".cqm"];
 	forbidExtMatch = true;
 	magic          = ["CopyQM disk image", /^floppy image data.+CopyQM/];
-	converters     = ["dskconv"];
+	converters     = ["dskconv[inType:copyqm]"];
 }

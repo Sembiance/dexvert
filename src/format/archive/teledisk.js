@@ -7,6 +7,6 @@ export class teledisk extends Format
 	ext            = [".td0"];
 	forbidExtMatch = true;
 	magic          = ["Teledisk Disk compressed image", "floppy image data (TeleDisk)"];
-	converters     = ["td02imd", "dskconv"];
+	converters     = ["td02imd", "dskconv[inType:tele]"];
 	post           = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="td02imd")?.meta || {});
 }

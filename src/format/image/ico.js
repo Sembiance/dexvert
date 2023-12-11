@@ -9,5 +9,5 @@ export class ico extends Format
 	trustMagic = true;
 
 	// ICO file has multiple sub icons, which deark handles well. Fallback to nconvert. pv can also convert, but often produces garbage.
-	converters = ["deark[module:ico]", "deark[module:win1ico]", "nconvert", "gimp", "hiJaakExpress", "canvas"];
+	converters = ["deark[module:ico]", "deark[module:win1ico]", "iconvert", "nconvert", "gimp", "hiJaakExpress", "canvas"];
 }

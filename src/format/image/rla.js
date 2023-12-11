@@ -7,5 +7,5 @@ export class rla extends Format
 	ext          = [".rla"];
 	magic        = ["Alias Wavefront Raster bitmap"];
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert"];
+	converters   = ["convert", "nconvert"];	// iconvert also supports this but often just outputs a grey image
 }

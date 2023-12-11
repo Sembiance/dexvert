@@ -17,7 +17,7 @@ export class gif extends Format
 		const r = [];
 		if(dexState.hasMagics("Mac PageMill's GIF bitmap (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.gif]", "deark[module:macbinary]");
-		r.push("nconvert", "deark[module:gif]", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW");
+		r.push("iconvert", "nconvert", "deark[module:gif]", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW");
 		return r;
 	};
 }

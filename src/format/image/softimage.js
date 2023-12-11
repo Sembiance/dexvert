@@ -7,5 +7,5 @@ export class softimage extends Format
 	ext            = [".soft", ".pic"];
 	forbidExtMatch = true;
 	magic          = ["Softimage Picture bitmap", /^fmt\/1167( |$)/];
-	converters     = ["nconvert"];
+	converters     = ["nconvert"];	// iconvert also supports this but often just creates a black image
 }

@@ -7,5 +7,5 @@ export class exr extends Format
 	ext        = [".exr"];
 	mimeType   = "image/x-exr";
 	magic      = ["OpenEXR High Dynamic-Range bitmap", "OpenEXR image data", /^fmt\/1001( |$)/];
-	converters = [`abydosconvert[format:${this.mimeType}]`, "gimp"];
+	converters = [`abydosconvert[format:${this.mimeType}]`, "iconvert", "gimp"];
 }

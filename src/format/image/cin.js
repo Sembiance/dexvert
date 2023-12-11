@@ -7,5 +7,5 @@ export class cin extends Format
 	ext        = [".cin"];
 	mimeType   = "image/x-cineon";
 	magic      = ["Kodak Cineon bitmap", "Cineon image data"];
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["nconvert", "iconvert", `abydosconvert[format:${this.mimeType}]`];
 }

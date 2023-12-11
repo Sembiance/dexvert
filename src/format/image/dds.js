@@ -9,6 +9,6 @@ export class dds extends Format
 	magic        = ["DirectX DirectDraw Surface", "Microsoft DirectDraw Surface", "DirectDraw Surface", /^fmt\/1040( |$)/];
 	metaProvider = ["image"];
 	
-	// Both convert and nconvert sometimes produce an invalid image, but convert usually does better overall
-	converters = ["convert", "nconvert", "gimp"];
+	// Both convert and nconvert sometimes produce an invalid image, but convert usually does better overall and gets the abydos test image better than iconvert does
+	converters = ["convert", "iconvert", "nconvert", "gimp"];
 }

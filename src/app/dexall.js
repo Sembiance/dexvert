@@ -214,7 +214,7 @@ await fileUtil.writeTextFile(reportFilePath, `
 					</tr>
 				</thead>
 				<tbody>
-					${reports.filter(o => o.phase.family===family).sortMulti([o => !!o.newFile, o => `${o.phase.family}/${o.phase.format}`]).map(o => `<tr>
+					${reports.filter(o => o.phase.family===family).sortMulti([o => !!o.newFile, o => `${o.phase.family}/${o.phase.format}`, o => o.originalInputFilename]).map(o => `<tr>
 						<td>${o.phase.family}/${o.phase.format}</td>
 						<td style="text-align: right;">${o.duration.msAsHumanReadable({short : true})}</td>
 						<td>${o.originalInputFilename}</td>

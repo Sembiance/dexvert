@@ -136,9 +136,10 @@ An object or a function that returns and object to be passed into dosUtil.run()
 
 >>> wineData = ({timeout : xu.SECOND*30})  ||  wineData = async (runState) => ({...})
 An object or a function that returns and object to be passed into dosUtil.run()
-	>>> script			An array of ops or functions to call to 'control' the wine program
-	>>> timeout			Maximum duration of wine
 	>>> arch			Which wine arch to use: win32 or win64  Default: win32
 	>>> base			Which wine prefix base to use. Default: base
 	>>> console			Set this to true to run the program in a 'console' window
 	>>> cwd				Set the CWD for the program to run in. Can prefix with "wine://" to be relative from the WINEPREFIX base
+	>>> monitor			A function that will be ran right after the wine program is executed that you can use to monitor stuff
+	>>> script			An array of ops or functions to call to 'control' the wine program
+	>>> timeout			Maximum duration of wine

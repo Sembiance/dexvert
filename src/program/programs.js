@@ -17,7 +17,7 @@ async function loadProgramFilePath(programFilePath, {reload}={})
 		return;
 
 	const programModule = await import(reload ? `${programFilePath}#${Date.now() + performance.now()}` : programFilePath);
-	const programid = Object.keys(programModule)[0];
+	const programid = Object.keys(programModule).find(k => k.at(0)!=="_");
 
 	// class name must match filename
 	assertStrictEquals(programid, path.basename(programFilePath, ".js"), `program file [${programFilePath}] does not have a matching class name [${programid}]`);

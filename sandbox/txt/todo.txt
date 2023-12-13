@@ -1,17 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Continue working on getting the DirectorCastRipper working. Waiting until a --cli flag is added to proceed further.
-  Once working and implemented into dexvert:
-  - Compare it's output with those in ~/tmp/before/
-  - Check sample: macromediaDirector/Pickle'sPocket
-  - Check sample: acromediaDirector/The\ Tower DEMO	(which is a MacBinary file, may need to 'unar' into bin/rsrc first, maybe not)
-  - Check if it handles Mac Roman text from: https://archive.org/details/cd-rom-now-n-21   /director/stones.dir/00025_Field_25.txt
-
-* Test some EXEs and some CD ISOs and locate some EXE files that have director files embedded in them. Then add support to EXE for this tool:
-  https://github.com/n0samu/director-files-extract/blob/master/shock.py  (backed up in sandbox/app/director-files-extract)
-
-* Work Underway: AOL Art file format reverse engineering
+* Look into T4.cct and recover_cct program and figure out why it's not working. May need to pass it thru DirOpener after recover_cct
 
 /---------------\
 | High Priority |

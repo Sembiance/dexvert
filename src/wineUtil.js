@@ -17,7 +17,7 @@ export function getWineDriveC(base)
 
 // Key names: /usr/include/X11/keysymdef.h
 // Wine Guide: https://wiki.winehq.org/Wine_User%27s_Guide
-export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, script, wineCounter, timeout=xu.MINUTE*5, xlog})
+export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, script, wineCounter, timeout=xu.MINUTE*5, xlog, monitor})
 {
 	const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
 	if(!Object.keys(wineBaseEnv).includes(base))
@@ -48,7 +48,8 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 
 	cmd = ((/^[A-Za-z]:/).test(cmd) || cmd.startsWith("/")) ? cmd : `c:\\dexvert\\${cmd}`;
 	
-	const {cb} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
+	const {p, cb} = await runUtil.run(console ? "wineconsole" : "wine", [cmd, ...args], runOptions);
+	const monitorPromise = monitor ? monitor({p, xlog}) : null;
 
 	if(script)
 	{
@@ -68,6 +69,8 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 	}
 	
 	const r = await cb();
+	if(monitorPromise)
+		await monitorPromise;
 	xlog.debug`${prelog} finished with: ${r}`;
 
 	if(wineInDirPath && wineOutDirPath)

@@ -18,12 +18,23 @@ export class exe extends Format
 			Object.clear(dexState.meta);
 	};
 
-	// We throw MSDOS/Win EXESs at deark and 7z which can often extract various embedded cursors, icons and images
-	// We first try to extract as a ZIP file
-	// Then we try to process as an NSIS installer
-	// Finally we attempt to just get the resources out before throwing it at deark
+	// We throw MSDOS/Win EXESs at various programs to try and get something useful out of them like embedded director files, cursors, icons, images, etc
 	// Could also 'decompress' packed EXEs by adding "deark[module:exepack]" but that doesn't really provide us with any actual content, so meh.
-	converters = dexState => (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:zip]", "sevenZip[type:nsis]", "unar[type:nsis]", "sevenZip[type:PE][rsrcOnly]", "deark[module:exe]"] : []);
+	converters = dexState => (Object.keys(dexState.meta).length>0 ? [
+		// Is it just a ZIP file of some sort?
+		"sevenZip[type:zip]",
+		
+		// What about an NSIS installer?
+		"sevenZip[type:nsis]",
+		"unar[type:nsis]",
+
+		// Is it a Projector executable hiding a director file?
+		"director_files_extract",
+
+		// Try some general EXE extractors
+		"sevenZip[type:PE][rsrcOnly]",
+		"deark[module:exe]"
+	] : []);
 
 	post = dexState =>
 	{

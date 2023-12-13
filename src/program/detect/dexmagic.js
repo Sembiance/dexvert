@@ -21,6 +21,8 @@ const DEXMAGIC_CHECKS =
 	"IFF CAT file"                : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"               : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"                    : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
+	"Macromedia Projector (Mac)"  : [{offset : 0, match : "PJ95"}, {offset : 16, match : "RIFX"}, {offset : 24, match : "APPL"}],
+	"Macromedia Projector (Win)"  : [{offset : 0, match : "PJ95"}, {offset : 16, match : "XFIR"}, {offset : 24, match : "LPPA"}],
 	"MINICAT Archive"             : [{offset : 0, match : "MINICAT"}],
 	"NeXT Disk Image Dump"        : [{offset : 46, match : "dlV3"}],
 	"Palm Web Content Record"     : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],

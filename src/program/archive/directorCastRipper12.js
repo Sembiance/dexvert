@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {path} from "std";
+import {fileUtil} from "xutil";
 
 export class directorCastRipper12 extends Program
 {
@@ -8,30 +9,52 @@ export class directorCastRipper12 extends Program
 	loc       = "wine";
 	bin       = "DirectorCastRipper_D12/DirectorCastRipper.exe";
 	exclusive = "wine";
-	args      = r => ["--files", `c:\\in${r.wineCounter}\\${path.basename(r.inFile())}`, "--output-folder", `c:\\out${r.wineCounter}`, "--include-names", "--dismiss-dialogs"];
-	wineData  = ({
-		timeout : xu.MINUTE*5
-	});
+	args      = r => ["--cli", "--formats", "png", "--formats", "rtf", "--files", `c:\\in${r.wineCounter}\\${path.basename(r.inFile())}`, "--output-folder", `c:\\out${r.wineCounter}`, "--include-names"];
+	wineData  = {
+		script : `
+		Func DismissWarnings()
+			;WindowDismiss("[TITLE:Error]", "", "{ENTER}")
+			WindowDismiss("Locate replacement", "", "{ESCAPE}")
+			WindowDismiss("Where is", "", "{ESCAPE}")
+			WindowDismiss("Director Player Error", "", "{ENTER}")
+			;WindowDismiss("Missing Fonts", "", "{ENTER}")
+			return Not ProcessExists("DirectorCastRipper.exe")
+		EndFunc
+		CallUntil("DismissWarnings", ${xu.MINUTE*2})`,
+		timeout : xu.MINUTE*2
+	};
+	postExec = async r =>
+	{
+		const outDirPath = r.outDir({absolute : true});
+		const relFilePaths = await fileUtil.tree(outDirPath, {relative : true, nodir : true});
+		
+		// These 3 CSV files are output even for protected files. So if that's all we have, we delete them which marks this as having failed which then allows other techniques to work (impulse.dir for example needs to be decompiled first)
+		if(relFilePaths.filter(relFilePath => !["Casts.csv", "Members.csv", "Movies.csv"].includes(path.basename(relFilePath))).length===0)
+		{
+			r.xlog.info`No real files found`;
+			await relFilePaths.parallelMap(async relFilePath => await fileUtil.unlink(path.join(outDirPath, relFilePath)));
+			return;
+		}
+
+		// colapse all files into a single directory and ensure files that start with ###_ are at least 5 digits long with leading 0s
+		await relFilePaths.parallelMap(async relFilePath =>
+		{
+			if(!relFilePath.includes("/"))
+				return;
+
+			await Deno.rename(path.join(outDirPath, relFilePath), path.join(outDirPath, path.basename(relFilePath).replace(/^\d+/, v => v.padStart(5, "0"))));
+		});
+	};
+	verify = async (r, dexFile) =>	// eslint-disable-line require-await
+	{
+		// If the Casts.csv file is exactly 33 bytes, it's an empty dummy file that DirectorCastRipper creates and isn't useful to keep
+		if(dexFile.base==="Casts.csv" && dexFile.size===33)
+			return false;
+
+		if(dexFile.base==="Export.log")
+			return false;
+
+		return true;
+	};
 	renameOut = false;
 }
-//c:\dexvert\DirectorCastRipper_D12/DirectorCastRipper.exe --files c:\in0\in.dir                                                  --output-folder c:\out0               --include-names --dismiss-dialogs
-//                                  DirectorCastRipper.exe --files C:\path\to\file1.dxr C:\path\to\file2.cct C:\path\to\file3.dir --output-folder C:\path\to\somefolder --include-names --dismiss-dialogs
-
-/* --help, -h
- --version, -v
- --files <path1> <path2> ...   Director movie or cast files to export from
- --folders <path1> <path2> ... Input folders containing Director files
- --movies <path1> <path2> ...  Director movie files to export from
- --casts <path1> <path2> ...   Director cast files to export from
- --output-folder <path>        Destination folder for exported assets
- --member-types                Member categories or types to export
-    Possible values:            all | image sound flash 3d text | #bitmap #picture #sound ...
-    Default:                    all
- --formats                     Preferred file formats for exported assets
-    Possible values:            png bmp html rtf txt
-    Default:                    png html
- --include-names               Include member & cast names in exported file names
- --decompile                   Decompile protected files with ProjectorRays
- --dismiss-dialogs             Automatically dismiss dialog boxes from the Director Player
- --text-to-images              Export image snapshots of text members
-*/

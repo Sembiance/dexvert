@@ -22,7 +22,13 @@ export class dll extends Format
 			return [];
 		}
 
-		return (Object.keys(dexState.meta).length>0 ? ["sevenZip[type:PE][rsrcOnly]", "deark[module:exe]"] : []);
+		return (Object.keys(dexState.meta).length>0 ? [
+			// first make sure there it's not a Projector file with a director file hidden in it, then we want to extract it for sure
+			"director_files_extract",
+
+			// otheriwse just extract whatever resources we can
+			"sevenZip[type:PE][rsrcOnly]",
+			"deark[module:exe]"] : []);
 	};
 	post  = dexState =>
 	{

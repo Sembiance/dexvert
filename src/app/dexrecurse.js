@@ -125,7 +125,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
 	version : "1.0.0",
-	desc    : "Processes <inputFilePath> converting or extracting files RECURSIVELY into <outputDirPath>",
+	desc    : "Processes <inputPath> converting or extracting files RECURSIVELY",
 	opts    :
 	{
 		programFlag : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
@@ -135,18 +135,36 @@ const argv = cmdUtil.cmdInit({
 	},
 	args :
 	[
-		{argid : "inputPath", desc : "A single file or directory of files to recurse", required : true},
-		{argid : "outputDirPath", desc : "Output directory path", required : true}
+		{argid : "inputPath", desc : "A single file or directory of files to recurse. IF the inputPath is a file that ends with .tar.gz it will be extracted first", required : true},
+		{argid : "outputPath", desc : "Specify a directory to stick it all into the directory. Specify a outputName.tar.gz to stick results into a .tar.gz", required : true}
 	]});
 
 const xlog = new XLog(argv.headless ? "error" : "info");
 
-const outputDirFullPath = path.resolve(argv.outputDirPath);
-if(!(await fileUtil.exists(outputDirFullPath)))
-	Deno.exit(xlog.error`Output directory ${outputDirFullPath} does not exist!`);
+let workDirPath = null;
+const fullOutputPath = path.resolve(argv.outputPath);
+if(fullOutputPath.endsWith(".tar.gz"))
+{
+	if(!(await Deno.stat(path.dirname(fullOutputPath))).isDirectory)
+		Deno.exit(xlog.error`Output path parent directory ${path.dirname(fullOutputPath)} is not a directory!`);
 
-if((await fileUtil.tree(outputDirFullPath)).length>0)
-	Deno.exit(xlog.error`Output directory ${outputDirFullPath} is not empty!`);
+	if(await fileUtil.exists(fullOutputPath))
+		Deno.exit(xlog.error`Output path ${fullOutputPath} already exists!`);
+
+	await Deno.mkdir("/mnt/dexvert/recurse", {recursive : true});
+	workDirPath = await fileUtil.genTempPath("/mnt/dexvert/recurse");
+	await Deno.mkdir(workDirPath, {recursive : true});
+}
+else
+{
+	if(!(await fileUtil.exists(fullOutputPath)))
+		Deno.exit(xlog.error`Output directory ${fullOutputPath} does not exist!`);
+
+	if((await fileUtil.tree(fullOutputPath)).length>0)
+		Deno.exit(xlog.error`Output directory ${fullOutputPath} is not empty!`);
+	
+	workDirPath = fullOutputPath;
+}
 
 const WORKER_COUNT = +(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/workerCount`));
 
@@ -189,17 +207,24 @@ const isExistingMagic = v =>
 
 xlog.info`Starting recurse...`;
 
-const fileDirPath = path.join(outputDirFullPath, "file");
+const fileDirPath = path.join(workDirPath, "file");
 await Deno.mkdir(fileDirPath);
 
-const metaDirPath = path.join(outputDirFullPath, "meta");
+const metaDirPath = path.join(workDirPath, "meta");
 await Deno.mkdir(metaDirPath);
 
 const inputFullPath = path.resolve(argv.inputPath);
-if((await Deno.stat(inputFullPath)).isFile)	// eslint-disable-line unicorn/prefer-ternary
-	await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}));
+if((await Deno.stat(inputFullPath)).isFile)
+{
+	if(inputFullPath.endsWith(".tar.gz"))	// eslint-disable-line unicorn/prefer-ternary
+		await runUtil.run("tar", ["-xf", inputFullPath, "-C", fileDirPath]);
+	else
+		await runUtil.run("rsync", runUtil.rsyncArgs(inputFullPath, path.join(fileDirPath, path.basename(inputFullPath)), {fast : true}));
+}
 else
+{
 	await runUtil.run("rsync", runUtil.rsyncArgs(path.join(inputFullPath, "/"), path.join(fileDirPath, "/"), {fast : true}));
+}
 
 let taskFinishedCount = 0;
 let taskHandledCount = 0;
@@ -341,7 +366,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 if(argv.report)
 {
 	const reportData = {duration : totalDuration, newSampleFiles, newMagics};
-	await fileUtil.writeTextFile(path.join(outputDirFullPath, "report.json"), JSON.stringify(reportData));
+	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)
 	{
@@ -369,4 +394,11 @@ if(argv.report)
 			}
 		}
 	}
+}
+
+if(fullOutputPath.endsWith(".tar.gz"))
+{
+	await runUtil.run("tar", ["-cf", fullOutputPath.substring(0, fullOutputPath.length-3), "-C", workDirPath, "."]);
+	await runUtil.run("pigz", [fullOutputPath.substring(0, fullOutputPath.length-3)]);
+	await fileUtil.unlink(workDirPath, {recursive : true});
 }

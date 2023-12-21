@@ -190,6 +190,7 @@
   https://encyclopedia2.thefreedictionary.com/Green+Book+CD-ROM
   https://www.lscdweb.com/data/downloadables/2/8/cdi_may94_r2.pdf
   See some tools in sandbox/app/CD-i Image Decoding Tools rhdn.zip
+  Additional tools for CD-I from here (including animation stuff): https://archive.org/details/various.cd-i.utilities.3.5hd.os9
 
 * Create native C nodejs module for imagemagick/recoil and other libs (abydos, etc) for speed. Example existing image magick one: https://github.com/elad/node-imagemagick-native
 

@@ -1,8 +1,5 @@
-app/
-legacy/
-samples/
-serials/
-triddefs/
-wip/
-hfsutils_modified/
-fail/
+# Ignore Everything
+* 
+
+# Except
+txt/

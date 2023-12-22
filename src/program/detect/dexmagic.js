@@ -125,7 +125,7 @@ const DEXMAGIC_CHECKS =
 
 const DEXMAGIC_FILE_META_CHECKS =
 [
-	// uniso[hfs] will output the macintosh file type for each output file. This may be fed back into a future dexvert/identifcation as fileMeta. So we check that here
+	// uniso[hfs] will output the macintosh file type for each output file. This gets fed back into a future dexvert/identifcation as fileMeta. So we check that here
 	// file and creator types: sandbox/txt/MacOS_File_Types_and_Creator_Codes.pdf  (originally from https://vintageapple.org/macbooks/pdf/The_Macintosh_System_Fitness_Plan_(system_7.5)_1995.pdf)
 	({macFileType, macCreatorType}) =>	// eslint-disable-line no-unused-vars
 	{

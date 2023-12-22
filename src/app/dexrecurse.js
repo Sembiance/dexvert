@@ -121,7 +121,6 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"image/zbr"
 ];
 
-
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
 	version : "1.0.0",
@@ -228,9 +227,10 @@ else
 
 let taskFinishedCount = 0;
 let taskHandledCount = 0;
-const taskQueue = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
+const originalFiles = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
+const taskQueue = Array.from(originalFiles);
 const taskActive = new Set();
-const bar = argv.headless ? null : printUtil.progress({barWidth : 47, max : taskQueue.length});
+const bar = argv.headless ? null : printUtil.progress({barWidth : 40, max : taskQueue.length});
 const startedAt = performance.now();
 
 const webServer = argv.headless ? new WebServer(DECRECURSE_HOST, DECRECURSE_PORT, {xlog}) : null;
@@ -277,7 +277,7 @@ async function processNextQueue()
 
 		const dexData = r.json;
 
-		const meta = {dexData, dexDuration : performance.now()-task.startedAt, task};
+		const meta = {dexData, dexDuration : performance.now()-task.startedAt, task, originalFile : originalFiles.includes(task.relFilePath)};
 		await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify(meta));
 		await fileUtil.writeTextFile(task.logFilePath, `${r.pretty}\n${(logLines || []).join("\n")}`);
 

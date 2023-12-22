@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Look into T4.cct and recover_cct program and figure out why it's not working. May need to pass it thru DirOpener after recover_cct
+
 
 /---------------\
 | High Priority |

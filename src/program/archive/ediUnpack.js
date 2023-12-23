@@ -8,7 +8,6 @@ export class ediUnpack extends Program
 	bin      = "c:\\dexvert\\UNPACK.exe";
 	args     = r => [r.inFile()];
 	osData   = ({
-		alsoKill : ["ntvdm.exe"],	// Program tends to hang forever preventing any other instances from running, so we kill this process which kills the program
 		// Sadly, the program crashes instantly as soon as I try and use AutoIt window info to find buttons, so we resort to X/Y screen coordinates and cross our fingers
 		script : `
 			; There is no keyboard control of the menus here, so we have to determine how many folders before in/out and click on the proper pixel

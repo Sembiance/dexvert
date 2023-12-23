@@ -8,8 +8,7 @@ export class kwikDraw130 extends Program
 	bin      = "C:\\dexvert\\KDRAW130.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({
-		alsoKill : ["ntvdm.exe"],
-		script   : `
+		script : `
 			$freewareWindow = WindowRequire("KWIKDRAW", "This is a Freeware", 5)
 			ControlClick($freewareWindow, "", "[CLASS:Button; TEXT:OK]")
 			WinWaitClose($freewareWindow, "", 10)

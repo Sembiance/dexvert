@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class replica extends Program
@@ -8,8 +9,13 @@ export class replica extends Program
 	bin      = "c:\\REPLICA\\REPLICA.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({
-		script : `
+		script   : `
 			$mainWindow = WindowRequire("[CLASS:DPMDIFrameClass]", "", 20)
+
+			Func PreOpenWindows()
+				WindowFailure("Replica", "not a Replica document", -1, "{ENTER}")
+			EndFunc
+			CallUntil("PreOpenWindows", ${xu.SECOND*3})
 		
 			SendSlow("!fp")
 

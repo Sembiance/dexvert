@@ -26,6 +26,7 @@ export class UniExtract extends Program
 			
 			Func PostExtractWindows()
 				WindowDismiss("Universal Extractor", "could not be extracted", "{ESCAPE}")
+				WindowDismiss("Universal Extractor", "cannot be extracted", "{ESCAPE}")
 
 				$decisionWindow = WinActive("Universal Extractor")
 				If $decisionWindow Then
@@ -33,11 +34,12 @@ export class UniExtract extends Program
 					ControlClick($decisionWindow, "", "[CLASS:Button; TEXT:&OK]")
 					WinWaitClose($decisionWindow, "", 5)
 				EndIf
-			EndFunc
-			CallUntil("PostExtractWindows", ${xu.SECOND*5})
 
-			; Need to wait for files to finish being extracted (archive/installShieldCAB/data1.hdr)
-			ProcessWaitClose("UniExtract.exe", 300)`
+				return Not ProcessExists("UniExtract.exe")
+			EndFunc
+
+			; Need to wait for files to finish being extracted (archive/installShieldCAB/data1.hdr) so that's why the 5 minute timeout
+			CallUntil("PostExtractWindows", ${xu.MINUTE*5})`
 	});
 	checkForDups = true;
 	renameOut    = false;

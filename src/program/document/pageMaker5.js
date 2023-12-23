@@ -8,7 +8,6 @@ export class pageMaker5 extends Program
 	bin      = "c:\\PM5\\PM5.exe";
 	args     = r => [r.inFile()];
 	osData   = ({
-		alsoKill  : ["ntvdm.exe"],
 		scriptPre : `
 			DirRemove("c:\\ALDUS", 1)
 			DirCopy("c:\\dexvert\\ALDUS5", "c:\\ALDUS", 1)`,

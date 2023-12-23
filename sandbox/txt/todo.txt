@@ -1,27 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* ~tmp/in.rpl isn't an actual replica document and gives an error in program: replica
-  First, test it and see that the window just 'sticks around'.
-  Second, add alsoKill : ["ntvdm.exe"],  to replica.js and see if the window goes away
-  Third, add a kill for ntvdm.exe to autoItUtil.js always
-  Fourth, Update replica script to catch this error and correctly dismiss it
-  Fifth, add it as a text/txt file sample
 
-* I should shore up the farallonReplica format to exclude files that are just 'text'
-
-* ~tmp/in.exe ends up being sent to UniExtract which gives an error that it's not a valid PE file
-  This error just 'sticks around' hanging up the program, so corectly handle and dismiss this error
-  Determine what it really is and add it as a file sample
-
-* ~tmp/in.arj is password protected
-  Make sure all programs properly exit quickly instead of hanging around
-     izArc.js (win2k) waits for password prompt. See if there is CLI option to never ask for a password
-  Add it as a archive/arj sample
-
-* Try adding the linux 'arj' program to arj.js and test to see if it works well, try using only it at first
-
-* Try out the ~/tmp/SWE!GAS.EXE file and see if it's "speed" can be improved at all
 
 /---------------\
 | High Priority |

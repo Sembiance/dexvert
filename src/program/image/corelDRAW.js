@@ -8,8 +8,7 @@ export class corelDRAW extends Program
 	loc      = "win2k";
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELDRW.EXE";
 	osData   = r => ({
-		alsoKill : ["ntvdm.exe"],
-		script   : `
+		script : `
 			$mainWindow = WindowRequire("CorelDRAW", "", 10)
 
 			SendSlow("!fi")

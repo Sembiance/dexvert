@@ -12,4 +12,5 @@ export class fontforge extends Program
 	};
 	args      = async r => ["-c", `import fontforge;fontforge.open("${r.inFile()}").generate("${await r.outFile(`out.${r.flags.outType || "otf"}`)}")`];
 	renameOut = true;
+	chain     = r => `dexvert[asFormat:font/${r.flags.outType || "otf"}]`;
 }

@@ -268,6 +268,7 @@ export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, also
 		Func ExitHandler()
 			; Now kill our program
 			KillAll("${path.basename(fullCmd.replaceAll("\\", "/"))}")
+			KillAll("ntvdm.exe")
 			${alsoKill.map(v => `KillAll("${v}")`).join("\n")}
 
 			AutoItSetOption("WinTitleMatchMode", 2)

@@ -9,8 +9,7 @@ export class corelMOVE extends Program
 	bin      = "c:\\COREL50\\PROGRAMS\\CORELMOV.EXE";
 	//args     = r => [r.inFile()];
 	osData   = r => ({
-		alsoKill : ["ntvdm.exe"],
-		script   : `
+		script : `
 			$mainWindow = WindowRequire("CorelMOVE", "", 10)
 			
 			Send("^o")

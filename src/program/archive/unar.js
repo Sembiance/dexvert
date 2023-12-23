@@ -62,6 +62,11 @@ export class unar extends Program
 		if(Object.keys(r.meta.fileMeta).length===0)
 			delete r.meta.fileMeta;
 	};
+	post = r =>
+	{
+		if(r.stdout.includes("This archive requires a password to unpack"))
+			r.meta.passwordProtected = true;
+	};
 	verify    = r => !r.flags.type || r.stdout?.trim()?.split("\n")?.[0]?.toLowerCase()?.endsWith(`: ${r.flags.type.toLowerCase()}`);
 	renameOut = false;
 }

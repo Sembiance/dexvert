@@ -9,8 +9,7 @@ export class wordStar extends Program
 	bin      = "c:\\WSWIN\\WSWIN.EXE";
 	args     = r => [r.inFile()];
 	osData   = ({
-		alsoKill : ["ntvdm.exe"],	// Sometimes the program is still running, but it's not under WSWIN.EXE so we have to kill this
-		script   : `
+		script : `
 			Func DismissWarnings()
 				WindowDismiss("[TITLE:Error]", "", "{ENTER}")
 				WindowDismiss("[TITLE:Warning]", "", "{END}{ENTER}")

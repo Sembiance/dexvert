@@ -8,7 +8,6 @@ export class printArtist extends Program
 	loc      = "win2k";
 	bin      = "c:\\SIERRA\\PA6\\PRTARTST.EXE";
 	osData   = ({
-		alsoKill  : ["ntvdm.exe"],
 		script : `
 			#include <GuiListBox.au3>
 			

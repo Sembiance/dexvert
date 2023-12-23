@@ -10,8 +10,7 @@ export class imjview extends Program
 	bin      = "c:\\dexvert\\IMPACJ11\\IMJVIEW.EXE";
 	args     = () => [];
 	osData   = r => ({
-		alsoKill : ["ntvdm.exe"],
-		script   : `
+		script : `
 			#include <ScreenCapture.au3>
 
 			; extension must be .imj

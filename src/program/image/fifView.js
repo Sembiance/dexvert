@@ -10,7 +10,6 @@ export class fifView extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		dontMaximize : true,
-		alsoKill     : ["ntvdm.exe"],
 		script       : `
 		#include <ScreenCapture.au3>
 

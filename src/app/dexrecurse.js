@@ -140,6 +140,20 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.headless ? "error" : "info");
 
+const dexvertOptions = {};
+if(argv.programFlag)
+{
+	dexvertOptions.programFlag = {};
+	for(const flagRaw of Array.force(argv.programFlag))
+	{
+		const [programid, flagKey, flagValue] = flagRaw.split(":");
+
+		if(!Object.hasOwn(dexvertOptions.programFlag, programid))
+			dexvertOptions.programFlag[programid] = {};
+		dexvertOptions.programFlag[programid][flagKey] = (flagValue===undefined ? true : flagValue);
+	}
+}
+
 let workDirPath = null;
 const fullOutputPath = path.resolve(argv.outputPath);
 if(fullOutputPath.endsWith(".tar.gz"))
@@ -228,9 +242,9 @@ else
 let taskFinishedCount = 0;
 let taskHandledCount = 0;
 const originalFiles = await fileUtil.tree(fileDirPath, {nodir : true, relative : true});
-const taskQueue = Array.from(originalFiles);
+const taskQueue = originalFiles.map(v => ({rel : v}));
 const taskActive = new Set();
-const bar = argv.headless ? null : printUtil.progress({barWidth : 40, max : taskQueue.length});
+const bar = argv.headless ? null : printUtil.progress({barWidth : 35, max : taskQueue.length});
 const startedAt = performance.now();
 
 const webServer = argv.headless ? new WebServer(DECRECURSE_HOST, DECRECURSE_PORT, {xlog}) : null;
@@ -253,7 +267,8 @@ if(webServer)
 
 async function processNextQueue()
 {
-	const task = {relFilePath : taskQueue.shift(), startedAt : performance.now()};
+	const taskProps = taskQueue.shift();
+	const task = {relFilePath : taskProps.rel, startedAt : performance.now()};
 	taskActive.add(task);
 
 	task.relDirPath = path.dirname(task.relFilePath)==="." ? "" : path.dirname(task.relFilePath);
@@ -266,7 +281,9 @@ async function processNextQueue()
 
 	try
 	{
-		const rpcData = {op : "dexvert", inputFilePath : path.join(fileDirPath, task.relFilePath), outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10)};
+		const rpcData = {op : "dexvert", inputFilePath : path.join(fileDirPath, task.relFilePath), outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10), dexvertOptions};
+		if(taskProps.fileMeta)
+			rpcData.fileMeta = taskProps.fileMeta;
 		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION, json : rpcData});
 		if(!dexText)
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}`);
@@ -323,7 +340,10 @@ async function processNextQueue()
 			for(const file of dexData.created.files.output)
 			{
 				bar?.incrementMax();
-				taskQueue.push(path.relative(fileDirPath, file.absolute));
+				const fileTaskProps = {rel : path.relative(fileDirPath, file.absolute)};
+				if(dexData.phase?.meta?.fileMeta?.[file.rel])
+					fileTaskProps.fileMeta = dexData.phase.meta.fileMeta[file.rel];
+				taskQueue.push(fileTaskProps);
 			}
 		}
 	}
@@ -365,7 +385,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
 if(argv.report)
 {
-	const reportData = {duration : totalDuration, newSampleFiles, newMagics};
+	const reportData = {duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics};
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)

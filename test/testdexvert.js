@@ -303,6 +303,7 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
+	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],

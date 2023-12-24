@@ -8,16 +8,17 @@ export class dexvert extends Program
 {
 	website = "https://github.com/Sembiance/dexvert";
 	flags   = {
-		asFormat   : "Which format to convert as",
-		skipVerify : "Don't verify output file"
+		asFormat      : "Which format to convert as",
+		forbidProgram : "Specify a program to forbid being ran",
+		skipVerify    : "Don't verify output file"
 	};
 	unsafe = true;
 	loc    = "local";
 	exec   = async r =>
 	{
-		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js"));
+		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js#hrm"));
 		
-		const dexOpts = {xlog : r.xlog.clone(r.xlog.level==="info" ? "warn" : r.xlog.level), programFlag : {osPriority : true}};
+		const dexOpts = {xlog : r.xlog, programFlag : {osPriority : true}};
 		if(r.flags.asFormat)
 			dexOpts.asFormat = r.flags.asFormat;
 		if(r.flags.skipVerify)
@@ -27,6 +28,8 @@ export class dexvert extends Program
 		for(let parentRunState=r.chainParent;parentRunState;parentRunState=parentRunState.chainParent)
 			forbidProgram.add(parentRunState.programid);
 		dexOpts.forbidProgram = Array.from(forbidProgram);
+		if(r.flags.forbidProgram)
+			dexOpts.forbidProgram.push(r.flags.forbidProgram);
 
 		const outDirPath = r.outDir({absolute : true});
 		const tmpOutDirPath = await fileUtil.genTempPath(undefined, "_program_other_dexvert");

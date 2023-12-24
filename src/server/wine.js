@@ -96,7 +96,15 @@ export class wine extends Server
 			this.webServer.stop();
 
 		for(const wineBase of this.WINE_BASES)
-			await runUtil.run("wineboot", ["--end-session", "--shutdown", "--kill", "--force"], {env : this.wineBaseEnv[wineBase]});
+		{
+			// try gracefully first
+			const {timedout} = await runUtil.run("wineboot", ["--end-session", "--shutdown", "--kill", "--force"], {env : this.wineBaseEnv[wineBase], timeout : xu.SECOND*10});
+			if(timedout)
+			{
+				this.xlog.infp`Failed to cleanly stop winebase ${wineBase}, killing it...`;
+				await runUtil.run("wineboot", ["--shutdown", "--kill", "--force"], {env : this.wineBaseEnv[wineBase], timeout : xu.SECOND*10});
+			}
+		}
 
 		for(const p of this.wineserverProcs)
 			await runUtil.kill(p);

@@ -30,7 +30,10 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		"app-arch/trimGarbage",
 
 		// wine
-		"app-emulation/wine-vanilla"
+		"app-emulation/wine-vanilla",
+
+		// used by thumbnail creation
+		"media-libs/resvg"
 	].join(" ")}`
 ].forEach(line => console.log(line));
 

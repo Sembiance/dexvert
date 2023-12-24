@@ -10,7 +10,7 @@ export class IsoBuster extends Program
 	exclusive = "wine";
 	
 	// IsoBuster command line options: https://www.isobuster.com/help/use_of_command_line_parameters
-	args = r => [`/ef:all:C:\\out${r.wineCounter}`, r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo"];
+	args = r => [`/ef:all:C:\\out${r.wineCounter}`, r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo", "/nosplash", "/nodrives"];
 	
 	wineData = ({
 		timeout : xu.MINUTE*10,	// IsoBuster can take a LONG time to run, but 10 minutes should be plenty for any file
@@ -38,7 +38,7 @@ export class IsoBuster extends Program
 			EndFunc
 			CallUntil("PreOpenWindows", ${xu.SECOND*4})
 			
-			WaitForPID("IsoBuster.exe", ${xu.MINUTE*10})`
+			WaitForPID("IsoBuster.exe", ${xu.MINUTE*3})`
 	});
 
 	renameOut = false;

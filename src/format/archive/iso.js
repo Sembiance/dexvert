@@ -10,7 +10,7 @@ import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "Apple Partition Map (APM) disk image"];
 
 async function validCUEFile(dexState, cueFile)
 {

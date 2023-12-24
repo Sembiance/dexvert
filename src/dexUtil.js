@@ -5,7 +5,7 @@ import {path} from "std";
 import {DexFile} from "./DexFile.js";
 
 // Based on file extension or an r.flag.convertAsExt hint, will just try to convert the file to a PNG
-// This introduces a slight risk of generating a garbage PNG file, but the speed gains are worth it
+// This introduces a slight risk of generating a garbage PNG file, but the MASSIVE speed gains are worth it
 // Currently only called by other programs that generate lots of sub files like deark and resource_dasm
 export async function quickConvertImages(r, fileOutputPaths)
 {

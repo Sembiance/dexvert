@@ -1,7 +1,19 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Create a Java program that will use Java's imageio to convert other image formats to png
+  Here are the standard formats: https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/package-summary.html
+  I'll want to add these formats: https://github.com/haraldk/TwelveMonkeys
+  For each format, test it as the main converter for image and compare how it does to the current priorities
+  My hope is it's PICT handling is really good (such as PICT_137 and PICT_500) and I can avoid calling out to qtPicViewer first
 
+* Look into taking this program and making it work command line as an image converter: https://github.com/kreativekorp/powerpaint
+  Specifically it has some custom PICT support, so I'd like to see how it handles PICT_137 and PICT_500
+  If I get PICT conversion working, add it as an image handler for all other formats it supports
+
+* See if I can get this to compile and run under linux: https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
+  It has code for PICT conversion, so see how it handles PICT_137 and PICT_500
+  If I get PICT conversion working, add it as an image handler for all other formats it supports
 
 /---------------\
 | High Priority |

@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {runUtil} from "xutil";
+import {runUtil, fileUtil} from "xutil";
 
 export class deDynamicSVG extends Program
 {
@@ -25,7 +25,16 @@ export class deDynamicSVG extends Program
 		
 		// WARNING! DO NOT convert this to some sort of 'autoCrop' program beause inkscape only works with 'FileSave' which overrwrites the input file which then isn't detected on output file detection
 		if(r.flags.autoCrop)
-			await runUtil.run("inkscape", ["-g", "--batch-process", "--verb", "FitCanvasToDrawing;FileSave;FileClose", outFilePath], {virtualX : true, ...RUN_OPTIONS});
+		{
+			const tmpSVGFilePath = await fileUtil.genTempPath(undefined, ".svg");
+			
+			// OLD: inkscape -g --batch-process --verb FitCanvasToDrawing;FileSave;FileClose outFilePath
+			await runUtil.run("inkscape", [`--actions="fit-canvas-to-selection;export-area-drawing;export-filename:${tmpSVGFilePath};export-do`, outFilePath], {virtualX : true, ...RUN_OPTIONS});
+			if(await fileUtil.exists(tmpSVGFilePath))
+				await fileUtil.move(tmpSVGFilePath, outFilePath);
+		}
+
+		//inkscape --actions="fit-canvas-to-selection;export-area-drawing;export-filename:out.svg;export-do" Meeting.svg
 
 		// This will take care of deleting any 'empty' elements
 		const {size} = await Deno.lstat(outFilePath);

@@ -13,7 +13,12 @@
 
 * See if I can get this to compile and run under linux: https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
   It has code for PICT conversion, so see how it handles PICT_137 and PICT_500
-  If I get PICT conversion working, add it as an image handler for all other formats it supports
+  If I get PICT conversion working, add it as an image handler for all other formats it support: https://web.archive.org/web/20060830193615/http://www.sdsc.edu:80/SDSCwire/v1.18/1065.image_tools.html
+  Another page about using it: https://math.nyu.edu/aml/software/imtools.html#:~:text=A%20Suite%20of%20image%20manipulation,(the%20image%20scaling%20tool).
+
+* Possible other PICT conversion software:
+  https://github.com/15831944/ted/blob/master/appFrame/appMacPict.c#L630
+  https://github.com/rsc/ghostscript-9.06/blob/main/base/gdevmacpictop.h
 
 /---------------\
 | High Priority |

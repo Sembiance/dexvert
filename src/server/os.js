@@ -115,7 +115,16 @@ export class os extends Server
 
 			this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has exited with status ${r.status}${this.stopping ? "" : JSON.stringify(r)}`;
 			if(!this.stopping)
+			{
+				if(instance.runTask)
+				{
+					this.xlog[this.stopping ? "debug" : "error"]`${prelog(instance)} has outstanding runTask, re-adding to queue ${JSON.stringify(instance.runTask).squeeze()}`;
+					instance.runTask.osPriority = true;
+					RUN_QUEUE.add(instance.runTask);
+					delete instance.runTask;
+				}
 				await this.stopOS(instance);
+			}
 			instance.ready = false;
 			instance.p = null;
 			delete INSTANCES[osid][instanceid];
@@ -129,6 +138,7 @@ export class os extends Server
 
 	async performRun(instance, runArgs)
 	{
+		const startProcess = instance.p;
 		const {body, reply} = runArgs;
 		this.xlog.debug`${prelog(instance)} run with cmd ${body.cmd} and file ${(body.inFilePaths || [])[0]}`;
 		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
@@ -157,8 +167,8 @@ export class os extends Server
 			await fileUtil.unlink(tmpInDirPath, {recursive : true});
 			await fileUtil.move(tmpInArchiveFilePath, inArchiveFilePath);
 
-			// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE
-			await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))));
+			// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE (or our instance process changes usually due to crashing)
+			await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess);
  
 			if(await fileUtil.exists(outarchiveFilePath))	// only exists if the OS was successful and called /osPOST with the result
 			{
@@ -174,11 +184,19 @@ export class os extends Server
 		{
 			runErr = err;
 		}
+
+		delete instance.runTask;
+		if(instance.p!==startProcess)
+		{
+			this.xlog.error`${prelog(instance)} process changed during run, so aborting run with runArgs ${JSON.stringify(runArgs).squeeze()}`;
+			return;
+		}
 		
 		const runDuration = performance.now()-runStartAt;
 		CMD_DURATIONS[body.cmd] ||= [];
 		CMD_DURATIONS[body.cmd].push({duration : runDuration, meta : body.meta || path.basename(body.inFilePaths[0])});
 		this.xlog.debug`${prelog(instance)} finished request in ${runDuration}ms (${RUN_QUEUE.size} queued)`;
+
 		instance.busy = false;
 
 		if(runErr)
@@ -220,6 +238,7 @@ export class os extends Server
 			this.checkQueueCounter = 0;
 			runPair.instance.busy = true;
 			RUN_QUEUE.delete(runPair.runTask);
+			runPair.instance.runTask = runPair.runTask;
 			this.performRun(runPair.instance, runPair.runTask);
 		}
 		else

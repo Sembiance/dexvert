@@ -59,7 +59,7 @@ await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
 		return failures.push(`${fg.orange(formatid.padStart(maxFormatidLength, " "))} ${fg.red("FAILED")}: ${stdout}`);
 
 	reports[formatid] = testData;
-}, 5);
+}, 4);
 const elapsed = performance.now()-startedAt;
 
 if(failures.length)

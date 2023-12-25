@@ -256,6 +256,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 {
 	image :
 	{
+		avsx            : ["unconst_move.x"],	// small file, not sure it's really an avsx file, drastically changes size
 		blizzardPicture : ["NightElfMaleNakedPelvisSkin00_07.blp"],	// blpngConverter crashes on some hosts for this file, dunno why
 		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
@@ -392,7 +393,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 const DEXTEST_ROOT_DIR = await fileUtil.genTempPath("/mnt/dexvert/test", "_dextest");
 await Deno.mkdir(DEXTEST_ROOT_DIR, {recursive : true});
 
-const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*0.70);
+const NUM_WORKERS = Math.floor(navigator.hardwareConcurrency*0.60);
 const startTime = performance.now();
 const SLOW_DURATION = xu.MINUTE*10;
 const slowFiles = {};

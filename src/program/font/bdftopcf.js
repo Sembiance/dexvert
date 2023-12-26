@@ -7,4 +7,5 @@ export class bdftopcf extends Program
 	bin       = "bdftopcf";
 	args      = async r => ["-o", await r.outFile("out.pcf"), r.inFile()];
 	renameOut = true;
+	chain     = "dexvert[asFormat:font/pcf]";
 }

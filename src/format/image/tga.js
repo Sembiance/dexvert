@@ -13,8 +13,8 @@ export class tga extends Format
 	// Only deark, corelDRAW & pv were able to correctly handle flag_b32.tga
 	// picturePublisher also supports TGA but bad TGA's have a tendency to cause the program to freeze so bad that the AutoIt script freezes up too (see sandbox/samples/HangsPicturePublisher.tga)
 	converters = [
-		"deark[module:tga]",
-		"iconvert", "keyViewPro",
+		"deark[module:tga]", "iio2png", "iconvert",
+		"keyViewPro",
 		"corelDRAW[strongMatch]", "pv[strongMatch]",
 		"nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "gimp",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas[strongMatch]"

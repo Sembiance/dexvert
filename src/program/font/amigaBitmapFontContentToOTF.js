@@ -19,4 +19,5 @@ export class amigaBitmapFontContentToOTF extends Program
 		renamer      : [({newName, originalInput}) => (originalInput ? [path.basename(originalInput.dir), "-", originalInput.name, ".otf"] : [newName, ".otf"])]
 	};
 	postExec = async r => await fileUtil.unlink(r.ufoTmpPath, {recursive : true});
+	chain    = "dexvert[asFormat:font/otf]";
 }

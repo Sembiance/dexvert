@@ -1,12 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create a Java program that will use Java's imageio to convert other image formats to png
-  Here are the standard formats: https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/imageio/package-summary.html
-  I'll want to add these formats: https://github.com/haraldk/TwelveMonkeys
-  For each format, test it as the main converter for image and compare how it does to the current priorities
-  My hope is it's PICT handling is really good (such as PICT_137 and PICT_500) and I can avoid calling out to qtPicViewer first
-
 * Look into taking this program and making it work command line as an image converter: https://github.com/kreativekorp/powerpaint
   Specifically it has some custom PICT support, so I'd like to see how it handles PICT_137 and PICT_500
   If I get PICT conversion working, add it as an image handler for all other formats it supports
@@ -20,19 +14,22 @@
   https://github.com/15831944/ted/blob/master/appFrame/appMacPict.c#L630
   https://github.com/rsc/ghostscript-9.06/blob/main/base/gdevmacpictop.h
 
+
 /---------------\
 | High Priority |
 \---------------/
 * Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
   Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
 
+* Converting DOOM MUS files to MIDI works with the Slade program, but it's very buggy and always has been.
+  It's open source code and runs on Linux, so consider using it's source code to build a custom CLI tool that converts .mus to .mid directly and reliably
+
+* Track down a better, more reliable, hopefully linux based, windows resources extractor for archive/windowsResource
+
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Converting DOOM MUS files to MIDI works with the Slade program, but it's very buggy and always has been.
-  It's open source code and runs on Linux, so consider using it's source code to build a custom CLI tool that converts .mus to .mid directly and reliably
-
 * When DiscMaster was around, encountered several BitRock installers with this search: http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   These may be able to be extracted using: https://gist.github.com/mickael9/0b902da7c13207d1b86e
 

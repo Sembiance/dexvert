@@ -20,6 +20,7 @@ export class pict extends Format
 
 		r.push(
 			"deark[module:pict][mac][recombine]",
+			"iio2png",
 			"recoil2png"
 		);
 

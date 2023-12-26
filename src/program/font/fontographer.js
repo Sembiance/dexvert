@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 
 export class fontographer extends Program
@@ -9,7 +10,12 @@ export class fontographer extends Program
 	osData   = ({
 		script : `
 			$mainWindow = WindowRequire("Fontographer 5.2", "", 10)
-			Sleep(250)
+			$fontWindowControl = WaitForControl($mainWindow, "", "[CLASS:FONTWIN]", ${xu.SECOND*10});
+			If $fontWindowControl = 0 Then
+				SendSlow("!fx")
+				Exit 0
+			EndIf
+			Sleep(1000)
 			SendSlow("!fg")
 
 			$generateWindow = WindowRequire("Generate Font Files", "", 10)
@@ -25,4 +31,5 @@ export class fontographer extends Program
 			SendSlow("!fx")`
 	});
 	renameOut = false;
+	chain     = "dexvert[asFormat:font/otf]";
 }

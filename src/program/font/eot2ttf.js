@@ -7,4 +7,5 @@ export class eot2ttf extends Program
 	bin       = "eot2ttf";
 	args      = async r => [r.inFile(), await r.outFile("out.ttf")];
 	renameOut = true;
+	chain     = "dexvert[asFormat:font/ttf]";
 }

@@ -10816,3 +10816,37 @@ Images
 	Tagged Image File Format (TIFF)
 	Truevision Targa (TGA)
 	WordPerfect Graphics (WPG) V1.0, 2.0
+
+
+
+>>> iio2png (with TwelveMonkeys)
+Format			Description
+------			-----------
+BigTIFF			
+BMP				MS Windows and IBM OS/2 Device Independent Bitmap	
+CUR				MS Windows Cursor Format
+DCX				Multi-page PCX fax document
+HDR				Radiance High Dynamic Range RGBE Format
+ICNS			Apple Icon Image
+ICO				MS Windows Icon Format
+IFF				Commodore Amiga/Electronic Arts Interchange File Format	
+JPEG			Joint Photographers Expert Group
+JPEG Lossless
+PAM				NetPBM Portable Any Map
+PBM				NetPBM Portable Bit Map
+PCX				ZSoft Paintbrush Format
+PFM				Portable Float Map
+PGM				NetPBM Portable Grey Map
+PICT			Apple QuickTime Picture Format
+PNTG			Apple MacPaint Picture Format
+PPM				NetPBM Portable Pix Map
+PSB				Adobe Photoshop Large Document
+PSD				Adobe Photoshop Document
+SGI				Silicon Graphics Image Format
+SVG				Scalable Vector Graphics
+TGA				Truevision TGA Image Format
+ThumbsDB		MS Windows Thumbs DB
+TIFF			Aldus/Adobe Tagged Image File Format
+WebP			Google WebP Format
+WMF				MS Windows Metafile
+XWD				X11 Window Dump Format

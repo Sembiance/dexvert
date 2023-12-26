@@ -8,5 +8,5 @@ export class pam extends Format
 	mimeType     = "image/x-portable-arbitrarymap";
 	magic        = ["Portable Arbitrary Map bitmap", "Portable Any Map", "Netpbm PAM image file", /^fmt\/405( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "tomsViewer"];
+	converters   = ["convert", "iio2png", "tomsViewer"];
 }

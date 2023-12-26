@@ -159,6 +159,7 @@ const FLEX_SIZE_FORMATS =
 
 		// different each time due to way it generates frames
 		"swf:.mp4"    : 25,
+		"swf:.png"    : 25,
 		"swfEXE:.mp4" : 25,
 
 		// different generation per host/version
@@ -203,8 +204,9 @@ const FLEX_SIZE_FORMATS =
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
-		// each running produces slightly different output, not sure why, haven't investigated further
+		// each running sometimes produces slightly different output, not sure why, haven't investigated further
 		ani              : 15,
+		avsx             : 25,
 		CADDrawDrawing   : 80,
 		fuzzyBitmap      : 0.1,
 		gimpBrush        : 20,
@@ -256,7 +258,6 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 {
 	image :
 	{
-		avsx            : ["unconst_move.x"],	// small file, not sure it's really an avsx file, drastically changes size
 		blizzardPicture : ["NightElfMaleNakedPelvisSkin00_07.blp"],	// blpngConverter crashes on some hosts for this file, dunno why
 		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time

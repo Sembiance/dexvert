@@ -8,5 +8,5 @@ export class ppm extends Format
 	mimeType     = "image/x-portable-pixmap";
 	magic        = ["Portable PixMap bitmap", "Portable Pixel Map", /^Netpbm image data .*pixmap$/, /^fmt\/408( |$)/, /^x-fmt\/178( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "gimp", "hiJaakExpress", "canvas", "tomsViewer", "pv[matchType:magic]"];
+	converters   = ["convert", "iio2png", "gimp", "hiJaakExpress", "canvas", "tomsViewer", "pv[matchType:magic]"];
 }

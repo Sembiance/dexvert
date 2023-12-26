@@ -9,9 +9,6 @@
 * Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
   Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
 
-* Converting DOOM MUS files to MIDI works with the Slade program, but it's very buggy and always has been.
-  It's open source code and runs on Linux, so consider using it's source code to build a custom CLI tool that converts .mus to .mid directly and reliably
-
 * Track down a better, more reliable, hopefully linux based, windows resources extractor for archive/windowsResource
 
 

@@ -7,5 +7,5 @@ export class doomMUS extends Format
 	ext            = [".mus"];
 	forbidExtMatch = true;
 	magic          = ["Doom/Heretic music"];
-	converters     = ["doomMUS2mp3"];
+	converters     = ["mus2mid", "doomMUS2mp3"];
 }

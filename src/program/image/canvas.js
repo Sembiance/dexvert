@@ -13,11 +13,9 @@ export class canvas extends Program
 	osData   = r => ({
 		alsoKill : ["CanvasInTouch2.exe"],
 		script   : `
+		// Canvas is preetty slow and so if CPU load is high it can take a long time to open and we need to be a little slower at inputing keys
 		AutoItSetOption("PixelCoordMode", 0)
-		AutoItSetOption("SendKeyDelay", 25)
-
-		; It can take a while for canvas to open, so we have to wait for it
-		$mainWindow = WindowRequire("Canvas 14", "", 20)
+		AutoItSetOption("SendKeyDelay", 35)
 
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
@@ -33,8 +31,14 @@ export class canvas extends Program
 			WindowDismiss("Photoshop Import", "", "+{TAB}{DOWN}{DOWN}{ENTER}")
 			WindowDismiss("Open Images", "", "{TAB}1{ENTER}")
 			WindowDismiss("Select Layout", "", "{ENTER}")
+			return WinActive("Canvas 14", "")
 		EndFunc
-		CallUntil("PreOpenWindows", ${xu.SECOND*5})
+		$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*30})
+
+		$imageViewControl = WaitForControl($mainWindow, "", "[CLASS:ViewClass]", ${xu.SECOND*10});
+		If $imageViewControl = 0 Then
+			Exit 0
+		EndIf
 
 		${!r.flags?.nonRaster ? `
 			; check to ensure the file was rendered as a raster image

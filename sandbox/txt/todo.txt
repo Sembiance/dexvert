@@ -1,18 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Look into taking this program and making it work command line as an image converter: https://github.com/kreativekorp/powerpaint
-  Specifically it has some custom PICT support, so I'd like to see how it handles PICT_137 and PICT_500
-  If I get PICT conversion working, add it as an image handler for all other formats it supports
-
-* See if I can get this to compile and run under linux: https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
-  It has code for PICT conversion, so see how it handles PICT_137 and PICT_500
-  If I get PICT conversion working, add it as an image handler for all other formats it support: https://web.archive.org/web/20060830193615/http://www.sdsc.edu:80/SDSCwire/v1.18/1065.image_tools.html
-  Another page about using it: https://math.nyu.edu/aml/software/imtools.html#:~:text=A%20Suite%20of%20image%20manipulation,(the%20image%20scaling%20tool).
-
-* Possible other PICT conversion software:
-  https://github.com/15831944/ted/blob/master/appFrame/appMacPict.c#L630
-  https://github.com/rsc/ghostscript-9.06/blob/main/base/gdevmacpictop.h
 
 
 /---------------\
@@ -32,6 +20,13 @@
 \-----------------/
 * When DiscMaster was around, encountered several BitRock installers with this search: http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   These may be able to be extracted using: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+
+* Would be nice to take this Java program and make a CLI conversion program from it's code (git cloned a copy into sandbox/app/): https://github.com/kreativekorp/powerpaint
+  I submitted an issue on their GitHub asking if that would be possible, or at least some help in which classes/methods to use to make it happen
+  Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
+
+* Get someone to convert this really old UNIX code to compiled under modern linux (git cloned a copy into sandbox/app/): https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
+  Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
 
 * Add support music/fuxoftAYLanguage and music/ayAMAD
   Ay_Emul can play both these, but it doesn't have CLI conversion supportso I could do either:

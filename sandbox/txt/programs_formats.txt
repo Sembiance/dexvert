@@ -10850,3 +10850,55 @@ TIFF			Aldus/Adobe Tagged Image File Format
 WebP			Google WebP Format
 WMF				MS Windows Metafile
 XWD				X11 Window Dump Format
+
+
+
+>>> ImTools/LibIm (old unix code that doesn't compile on modern linux, sadly)  https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
+     bmp    Microsoft Windows bitmap image file
+     cur    Microsoft Windows cursor image file
+     eps    Adobe Encapsulated PostScript file
+     gif    Compuserve Graphics image file
+     hdf    Hierarchical Data File
+     ico    Microsoft Windows icon image file
+     icon   Sun Icon and Cursor file
+     iff    Sun TAAC Image File Format
+     jpeg   JPEG image file format
+     miff   ImageMagick's image file format
+     mpnt   Apple Macintosh MacPaint file
+     pbm    PBM Portable Bit, Gray, and Pixel Map files
+     pcx    ZSoft IBM PC Paintbrush file
+     pic    PIXAR picture file
+     pict   Apple Macintosh QuickDraw/PICT file
+     pix    Alias image file
+     ps     Adobe PostScript file
+     ras    Sun Rasterfile
+     rgb    SGI RGB image file
+     rla    Wavefront raster image file
+     rle    Utah Run length encoded image file
+     synu   SDSC Synu image file
+     tga    Truevision Targa image file
+     tiff   Tagged image file
+     viff   Khoros Visualization image file
+     x      AVS X image file
+     xbm    X11 bitmap file
+     xpm    X11 pixmap file
+     xwd    X Window System window dump image file
+
+
+
+>>> Kreative PowerPaint  https://github.com/kreativekorp/powerpaint
+PNG
+GIF
+JPEG
+BMP
+WBMP (Wireless BMP)
+PICT
+MacPaint
+SuperPaint
+PBM
+PGM
+PPM
+PNM
+PAM
+SuperPaint
+SIC (Sabine Icon)

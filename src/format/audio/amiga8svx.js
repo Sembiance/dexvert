@@ -4,7 +4,7 @@ import {Format} from "../../Format.js";
 export class amiga8svx extends Format
 {
 	name         = "Amiga 8-bit Sampled Voice";
-	website      = "http://fileformats.archiveteam.org/wiki/8SVX";
+	website      = "http://fileformats.archiveteam.org/wiki/8-Bit_Sampled_Voice";
 	ext          = [".8svx", ".iff"];
 	weakExt      = [".iff"];
 	magic        = ["Amiga IFF 8SVX audio", "IFF data, 8SVX", "Interchange File Format 8-bit Sampled Voice", /^fmt\/339( |$)/];

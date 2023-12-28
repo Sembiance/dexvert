@@ -5,7 +5,7 @@ import {fileUtil} from "xutil";
 export class ani extends Format
 {
 	name       = "Microsoft Windows Animated Cursor";
-	website    = "http://fileformats.archiveteam.org/wiki/ANI";
+	website    = "http://fileformats.archiveteam.org/wiki/Windows_Animated_Cursor";
 	ext        = [".ani"];
 	mimeType   = "application/x-navi-animation";
 	magic      = ["Windows Animated Cursor", /^RIFF .* animated cursor/, /^fmt\/386( |$)/];

@@ -5,7 +5,7 @@ import {TEXT_MAGIC} from "../../Detection.js";
 export class txt extends Format
 {
 	name         = "Text File";
-	website      = "http://fileformats.archiveteam.org/wiki/Text";
+	website      = "http://fileformats.archiveteam.org/wiki/Plain_text";
 	magic        = TEXT_MAGIC;
 	ext          = [".txt"];
 	weakExt      = true;

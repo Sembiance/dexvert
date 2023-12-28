@@ -8,7 +8,7 @@ export {_PS_MAGIC, _PS_EXT};
 export class ps extends Format
 {
 	name           = "PostScript";
-	website        = "http://fileformats.archiveteam.org/wiki/Postscript";
+	website        = "http://fileformats.archiveteam.org/wiki/PostScript";
 	ext            = _PS_EXT;
 	mimeType       = "application/postscript";
 	magic          = _PS_MAGIC;

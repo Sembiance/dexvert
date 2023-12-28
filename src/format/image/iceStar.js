@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class iceStar extends Format
 {
 	name       = "Atari ICE* Image";
-	website    = "http://fileformats.archiveteam.org/wiki/ICE*";
+	website    = "http://fileformats.archiveteam.org/wiki/ICE_(Atari)";
 	ext        = [".icn", ".imn", ".ipc", ".ip2"];
 	converters = ["recoil2png"];
 }

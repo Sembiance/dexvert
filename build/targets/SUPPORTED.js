@@ -42,7 +42,7 @@ ${(await Object.values(supportedFormats).filter(f => f.familyid===familyid).sort
 			if(await fileUtil.exists(formatSampleDirPath))
 			{
 				const formatSamples = await fileUtil.tree(formatSampleDirPath);
-				noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://telparia.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
+				noteParts.push(`[${formatSamples.length.toLocaleString()} sample file${formatSamples.length===1 ? "" : "s"}](https://sembiance.com/fileFormatSamples/${path.relative(SAMPLES_DIR_PATH, formatSampleDirPath)}/)`);
 			}
 
 			let converters = [];

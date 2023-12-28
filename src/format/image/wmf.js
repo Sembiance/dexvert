@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class wmf extends Format
 {
 	name         = "Microsoft Windows Metafile";
-	website      = "http://fileformats.archiveteam.org/wiki/WMF";
+	website      = "http://fileformats.archiveteam.org/wiki/Windows_Metafile";
 	ext          = [".wmf", ".apm", ".wmz"];
 	mimeType     = "image/wmf";
 	magic        = [/^Windows [Mm]etafile/, "Aldus Placeable Metafile", /^x-fmt\/119( |$)/];

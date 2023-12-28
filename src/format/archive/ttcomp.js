@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class ttcomp extends Format
 {
 	name       = "TTComp Archive";
-	website    = "http://fileformats.archiveteam.org/wiki/TTComp_archive";
+	website    = "http://fileformats.archiveteam.org/wiki/TTCOMP";
 	magic      = ["TTComp archive"];	// VERY weak, but alas.
 	trustMagic = true;
 	packed     = true;

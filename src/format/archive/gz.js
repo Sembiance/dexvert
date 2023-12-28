@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class gz extends Format
 {
 	name         = "GZip archive";
-	website      = "http://fileformats.archiveteam.org/wiki/GZ";
+	website      = "http://fileformats.archiveteam.org/wiki/Gzip";
 	ext          = [".gz", ".gzip"];
 	keepFilename = true;
 	magic        = ["gzip compressed data", "GZipped data", "gzip: Deflate", /^x-fmt\/266( |$)/];

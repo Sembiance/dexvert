@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class xps extends Format
 {
 	name       = "Open XML Paper Specification";
-	website    = "http://fileformats.archiveteam.org/wiki/XPS";
+	website    = "http://fileformats.archiveteam.org/wiki/OpenXPS";
 	ext        = [".xps", ".oxps"];
 	mimeType   = "application/oxps";
 	magic      = ["Open XML Paper Specification", /^fmt\/(189|657)( |$)/];

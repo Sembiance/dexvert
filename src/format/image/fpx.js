@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class fpx extends Format
 {
 	name         = "Kodak FlashPix";
-	website      = "http://fileformats.archiveteam.org/wiki/FPX";
+	website      = "http://fileformats.archiveteam.org/wiki/FlashPix";
 	ext          = [".fpx"];
 	mimeType     = "image/vnd.fpx";
 	magic        = ["Kodak FlashPix bitmap", /^OLE 2 Compound Document.*FlashPIX/];

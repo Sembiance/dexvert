@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 
 export class stripGarbage extends Program
 {
-	website   = "https://github.com/Sembiance/dexvert";
+	website   = "https://github.com/Sembiance/stripGarbage";
 	package   = "app-arch/stripGarbage";
 	flags   = {
 		"null"  : "Only strip null bytes",

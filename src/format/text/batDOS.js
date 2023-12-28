@@ -4,7 +4,7 @@ import {TEXT_MAGIC} from "../../Detection.js";
 export class batDOS extends Format
 {
 	name           = "DOS Batch File";
-	website        = "http://fileformats.archiveteam.org/wiki/BAT";
+	website        = "http://fileformats.archiveteam.org/wiki/Batch_file";
 	ext            = [".bat"];
 	forbidExtMatch = true;
 	magic          = ["DOS batch file", ...TEXT_MAGIC, /^data$/];

@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class tar extends Format
 {
 	name           = "Tape Archive";
-	website        = "http://fileformats.archiveteam.org/wiki/Tar";
+	website        = "http://fileformats.archiveteam.org/wiki/Tape_Archive";
 	ext            = [".tar", ".gtar"];
 	magic          = ["TAR - Tape ARchive", "LZMA compressed Tape ARchive", /.* tar archive/, /^tar archive/, /^x-fmt\/265( |$)/];
 	forbiddenMagic = ["TFMX module sound data tar archive"];

@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class webp extends Format
 {
 	name          = "WebP Image";
-	website       = "http://fileformats.archiveteam.org/wiki/Webp";
+	website       = "http://fileformats.archiveteam.org/wiki/WebP";
 	ext           = [".webp"];
 	mimeType      = "image/webp";
 	magic         = ["WebP bitmap", /^WebP$/, /^RIFF.* Web\/P image$/, /^fmt\/(566|567|568)( |$)/];

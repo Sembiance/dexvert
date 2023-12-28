@@ -2,7 +2,7 @@ import {Program} from "../../Program.js";
 
 export class td02imd extends Program
 {
-	website = "http://dunfield.classiccmp.org/img42841/teledisk.htm";
+	website = "https://github.com/Sembiance/td02imd";
 	package = "app-arch/td02imd";
 	unsafe  = true;
 	bin     = "td02imd";

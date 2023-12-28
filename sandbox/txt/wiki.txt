@@ -32,7 +32,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [http://style64.org/dirmaster DirMaster]
 
 == Sample files ==
-* https://telparia.com/fileFormatSamples/image/dpx/
+* {{DexvertSamples|image/dpx}}
 
 == Links ==
 * [[Wikipedia:NewIcons|Wikipedia: NewIcons]] - Also has information about GlowIcons

@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 
 export class irixswextract extends Program
 {
-	website   = "https://gist.github.com/Sgeo/ff7c568e81b7efa09250dc3fc1253569";
+	website   = "https://github.com/Sembiance/irixswextract";
 	package   = "app-arch/irixswextract";
 	bin       = "irixswextract";
 	args      = r => [".", r.inFile(), r.outDir()];

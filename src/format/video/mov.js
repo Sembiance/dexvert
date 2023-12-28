@@ -7,7 +7,7 @@ export {_MOV_MAGIC, _MOV_EXT};
 export class mov extends Format
 {
 	name         = "Apple QuickTime movie";
-	website      = "http://fileformats.archiveteam.org/wiki/MOV";
+	website      = "http://fileformats.archiveteam.org/wiki/QuickTime";
 	ext          = _MOV_EXT;
 	mimeType     = "video/quicktime";
 	magic        = _MOV_MAGIC;

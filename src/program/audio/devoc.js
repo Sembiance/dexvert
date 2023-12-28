@@ -2,7 +2,7 @@ import {Program} from "../../Program.js";
 
 export class devoc extends Program
 {
-	website       = "https://www.dechifro.org/rca/";
+	website       = "https://github.com/Sembiance/devoc";
 	package       = "media-sound/devoc";
 	bin           = "devoc";
 	args          = r => ["-w", r.inFile()];

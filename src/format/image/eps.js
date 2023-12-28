@@ -7,7 +7,7 @@ export {_EPS_MAGIC, _EPS_EXT};
 export class eps extends Format
 {
 	name       = "Encapsulated PostScript";
-	website    = "http://fileformats.archiveteam.org/wiki/EPS";
+	website    = "http://fileformats.archiveteam.org/wiki/Encapsulated_PostScript";
 	ext        = _EPS_EXT;
 	mimeType   = "application/eps";
 	magic      = _EPS_MAGIC;

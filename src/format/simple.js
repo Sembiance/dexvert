@@ -202,7 +202,7 @@ export default
 		verityCollectionIndexDescriptor : {name : "Verity Collection Index Descriptor", ext : [".wld", ".ddd", ".did", ".pdd", ".rsd"], magic : ["Verity Collection Index Descriptor", /^fmt\/461( |$)/], weakMagic : true},
 		vimSwap                         : {name : "Vim Swap", ext : [".swp"], magic : ["Vim swap"]},
 		visualBasicForm                 : {name : "Visual Basic Form", ext : [".frm"], magic : ["Visual Basic Form", /^fmt\/(1541|1542)( |$)/], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_form"},
-		visualBasicProject              : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/Visual_Basic_project_file"},
+		visualBasicProject              : {name : "Visual Basic Project", ext : [".mak"], magic : ["Visual Basic project"], website : "http://fileformats.archiveteam.org/wiki/VisualBasic_project"},
 		windowsHelpFileContent          : {name : "Microsoft Windows Help File Content", ext : [".cnt"], magic : ["Help File Contents", "MS Windows help file Content"], weakMagic : ["Help File Contents"]},
 		windowsProgramGroup             : {name : "Windows Program Group", ext : [".grp"], magic : ["Windows Program Manager Group", "Windows 3.x .GRP file"]},
 		wingzScript                     : {name : "Wingz Script", ext : [".scz"], magic : ["Wingz script", "Wingz compiled script"]},

@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class printArtist extends Format
 {
 	name           = "Print/Instant Artist";
-	website        = "http://fileformats.archiveteam.org/wiki/Instant_Artist_GFX";
+	website        = "http://fileformats.archiveteam.org/wiki/Print_Artist";
 	ext            = [".gfx"];
 	forbidExtMatch = true;
 	magic          = ["Print / Instant Artist"];

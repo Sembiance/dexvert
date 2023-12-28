@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class compress extends Format
 {
 	name       = "Compress Compressed (Unix)";
-	website    = "http://fileformats.archiveteam.org/wiki/Compress";
+	website    = "http://fileformats.archiveteam.org/wiki/Compress_(Unix)";
 	ext        = [".z", ".tz", ".taz"];
 	magic      = ["Compress compressed data", "compress'd data", "UNIX compressed data", "Z: Compress"];
 	packed     = true;

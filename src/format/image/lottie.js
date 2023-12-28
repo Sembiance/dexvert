@@ -6,7 +6,7 @@ import {path} from "std";
 export class lottie extends Format
 {
 	name         = "Lottie";
-	website      = "https://github.com/Samsung/rlottie";
+	website      = "http://fileformats.archiveteam.org/wiki/Lottie";
 	ext          = [".json"];
 	mimeType     = "image/x-lottie+json";
 	keepFilename = true;

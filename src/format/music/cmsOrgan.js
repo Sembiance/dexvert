@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class cmsOrgan extends Format
 {
 	name        = "Creative Music System Intelligent Organ File";
-	website     = "http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)";
+	website     = "https://vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)";
 	ext         = [".org"];
 	magic       = ["Creative Music System Intelligent Organ music"];
 	unsupported = true;

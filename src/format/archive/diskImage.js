@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class diskImage extends Format
 {
 	name    = "Disk Image";
-	website = "http://fileformats.archiveteam.org/wiki/Disk_Image_Formats";
+	website = "http://fileformats.archiveteam.org/wiki/Raw_disk_image";
 	ext     = [".img"];
 	weakExt = true;
 	magic   = ["Generic PC disk image", "FAT Disk Image", "DOS floppy", /^fmt\/1087( |$)/];

@@ -9,7 +9,7 @@ export class printMasterShape extends Format
 	forbidExtMatch = true;
 	auxFiles       = (input, otherFiles) =>
 	{
-		// .neo can convert on it's own, but optionally uses an .rst
+		// .shp can convert on it's own, but optionally uses an .sdr
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.sdr`);
 		return otherFile ? [otherFile] : false;
 	};

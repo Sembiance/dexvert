@@ -8,6 +8,7 @@ const BAD_FILENAMES_TO_SKIP_ENTIRELY =
 export class dll extends Format
 {
 	name         = "Microsoft Windows Dynmic Link Library";
+	website      = "http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)";
 	ext          = [".dll"];
 	forbiddenExt = [".exe"];
 	magic        = ["Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)"];

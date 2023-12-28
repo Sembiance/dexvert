@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class starPainter extends Format
 {
 	name       = "Star Painter";
-	website    = "https://csdb.dk/release/?id=173978";
+	website    = "http://fileformats.archiveteam.org/wiki/Star_Painter";
 	ext        = [".gr", ".cs", ".zs"];
 	converters = ["recoil2png"];
 }

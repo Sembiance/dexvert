@@ -57,12 +57,12 @@ archive | Setup Program Archive | .mva | [6 sample files](https://sembiance.com/
 archive | Shockwave Flash Debug | .swd | 
 archive | SNATCH-IT Disk Image | .cp2 .img | 
 archive | SPIS TCompress |  | 
-archive | [TED5 Archive](http://www.shikadi.net/moddingwiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+archive | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
 archive | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 archive | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 archive | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 archive | Unreal Package | .ut2 .uasset | 
-archive | [Viacom New Media Sprite Archive](http://www.shikadi.net/moddingwiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
+archive | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
 archive | [Warp Disk Image](http://fileformats.archiveteam.org/wiki/WRP) | .wrp | [4 sample files](https://sembiance.com/fileFormatSamples/archive/wrp/) - UnWarp on the amiga wants to write directly to an floppy, which we can't easily support. https://github.com/ipr/qXpkLib has some code to unwarp, but in 10 year old lib format for Qt. However it looks somewhat self contained and so we could use this code as an example: https://github.com/ipr/qUnLZX
 archive | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 archive | WWarp Disk Image | .wwp | 
@@ -375,7 +375,7 @@ music | BeRoTracker Module | .brt | [2 sample files](https://sembiance.com/fileF
 music | Cheese Cutter Song | .ct | [3 sample files](https://sembiance.com/fileFormatSamples/music/cheeseCutterSong/) - Player here https://github.com/theyamo/CheeseCutter requires D compiler gdc to build (https://wiki.gentoo.org/wiki/Dlang) but player doesn't seem to convert CLI conversion anyways
 music | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://sembiance.com/fileFormatSamples/music/cba/)
 music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://sembiance.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
-music | [Creative Music System Intelligent Organ File](http://www.vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
+music | [Creative Music System Intelligent Organ File](https://vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 music | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://sembiance.com/fileFormatSamples/music/cubaseSong/)
 music | CyberTracker 64 Chiptune | .ct | 
 music | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://sembiance.com/fileFormatSamples/music/iffCMUS/)
@@ -397,7 +397,7 @@ music | Flash Tracker | .fls | [5 sample files](https://sembiance.com/fileFormat
 music | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
 music | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)
 music | [Fuxoft AY Language](http://fileformats.archiveteam.org/wiki/Fuxoft_AY_Language) | .fxm | [8 sample files](https://sembiance.com/fileFormatSamples/music/fuxoftAYLanguage/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself.
-music | [GMOD Module](http://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
+music | [GMOD Module](https://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 music | GoatTracker Module | .sng | [6 sample files](https://sembiance.com/fileFormatSamples/music/goatTracker/)
 music | Improvise Music Data | .imp | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/improviseMusicData/)
 music | Ixalance Module | .ixs | [5 sample files](https://sembiance.com/fileFormatSamples/music/ixalance/)
@@ -441,7 +441,7 @@ music | Sequencer One Song | .one |
 music | ShroomPlayer Module | .sho | [5 sample files](https://sembiance.com/fileFormatSamples/music/shroomPlayer/)
 music | Skale Tracker Module | .skm | [5 sample files](https://sembiance.com/fileFormatSamples/music/skaleTracker/)
 music | Sound Club Module | .sn .sn2 | [9 sample files](https://sembiance.com/fileFormatSamples/music/soundClub/)
-music | [Soundtrakker 128](http://justsolve.archiveteam.org/wiki/Soundtrakker_128_module) | .128 | [3 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
+music | [Soundtrakker 128](http://fileformats.archiveteam.org/wiki/Soundtrakker_128_module) | .128 | [3 sample files](https://sembiance.com/fileFormatSamples/music/soundtrakker128/) - No known converter. The sample files identify as Soundtrakker 128, but not sure if they really are or not.
 music | Squirrel Module | .sqm | [1 sample file](https://sembiance.com/fileFormatSamples/music/squirrelModule/)
 music | [Star 3 MIDI Karaoke](https://wiki.multimedia.cx/index.php?title=Star_3) | .st3 | [3 sample files](https://sembiance.com/fileFormatSamples/music/star3MIDIKaraoke/)
 music | STarKos Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/starkos/)

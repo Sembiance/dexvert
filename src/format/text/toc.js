@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class toc extends Format
 {
 	name           = "CDRDAO TOC File";
-	website        = "http://cdrdao.sourceforge.net/example.html#toc-file-example";
+	website        = "http://fileformats.archiveteam.org/wiki/TOC";
 	ext            = [".toc", ".cue"];	// sometimes .toc files are mis-labeled as .cue
 	safeExt        = ".toc";
 	priority       = this.PRIORITY.LOW;

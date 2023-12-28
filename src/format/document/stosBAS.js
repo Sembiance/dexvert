@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class stosBAS extends Format
 {
 	name           = "Atari STOS Basic";
-	website        = "https://temlib.org/AtariForumWiki/index.php/STOS.BAS";
+	website        = "http://fileformats.archiveteam.org/wiki/STOS_memory_bank";
 	ext            = [".bas"];
 	forbidExtMatch = true;
 	magic          = ["STOS Source"];

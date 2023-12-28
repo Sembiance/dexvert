@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class CADDrawDrawing extends Format
 {
 	name           = "TommySoftware CAD/Draw Drawing";
-	website        = "https://archive.org/details/t425l1e_zip";
+	website        = "http://fileformats.archiveteam.org/wiki/CAD/DRAW";
 	ext            = [".t4g", ".t3g", ".t2g", ".mpg"];
 	forbidExtMatch = true;
 	magic          = ["TommySoftware CAD/Draw drawing", "CAD/Draw TVG"];

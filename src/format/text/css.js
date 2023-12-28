@@ -4,7 +4,7 @@ import {TEXT_MAGIC} from "../../Detection.js";
 export class css extends Format
 {
 	name           = "Cascading Style Sheet File";
-	website        = "http://fileformats.archiveteam.org/wiki/CSS";
+	website        = "http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets";
 	ext            = [".css"];
 	mimeType       = "text/css";
 	forbidExtMatch = true;

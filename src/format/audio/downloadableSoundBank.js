@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class downloadableSoundBank extends Format
 {
 	name           = "Downloadable Sound Bank";
-	website        = "https://en.wikipedia.org/wiki/DLS_format";
+	website        = "http://fileformats.archiveteam.org/wiki/Downloadable_Sounds_Banks";
 	ext            = [".dls"];
 	forbidExtMatch = true;
 	magic          = ["DownLoadable Sound bank", /^fmt\/955( |$)/];

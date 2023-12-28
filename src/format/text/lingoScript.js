@@ -4,7 +4,6 @@ import {TEXT_MAGIC} from "../../Detection.js";
 export class lingoScript extends Format
 {
 	name         = "Lingo Script";
-	website      = "http://fileformats.archiveteam.org/wiki/CSS";
 	filename     = [/^lingoScript$/, /^lingoScript_\d+$/];
 	magic        = TEXT_MAGIC;
 	weakMagic    = true;

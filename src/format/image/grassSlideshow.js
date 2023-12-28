@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class grassSlideshow extends Format
 {
 	name       = "Grass' Slideshow";
-	website    = "http://fileformats.archiveteam.org/wiki/Grass%27_Slideshow";
+	website    = "http://fileformats.archiveteam.org/wiki/Grass'_Slideshow";
 	ext        = [".hpm"];
 
 	// HPM from Atari is always 19203 size, but recoil2png does not support it

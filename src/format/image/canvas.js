@@ -2,8 +2,9 @@ import {Format} from "../../Format.js";
 
 export class canvas extends Format
 {
-	name = "Atari Canvas";
-	ext  = [".cpt", ".hbl", ".ful"];
+	name    = "Atari Canvas";
+	website = "http://fileformats.archiveteam.org/wiki/Canvas_(Atari)";
+	ext     = [".cpt", ".hbl", ".ful"];
 	
 	auxFiles = (input, otherFiles) =>
 	{

@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class infoFile extends Format
 {
 	name           = "InfoFile Database File";
+	website        = "http://fileformats.archiveteam.org/wiki/FLR";
 	ext            = [".flr"];
 	forbidExtMatch = true;
 	magic          = ["InfoFile database"];

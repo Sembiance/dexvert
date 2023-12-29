@@ -10,24 +10,11 @@ import {FileSet} from "../src/FileSet.js";
 import {getDetections} from "../src/Detection.js";
 import {programs, init as initPrograms} from "../src/program/programs.js";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
+import {MediaWiki} from "MediaWiki";
 
 const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
 
-/*const {cb} = await runUtil.run("wine", ["c:\\dexvert\\DirectorCastRipper_D12/DirectorCastRipper.exe", "--files", "c:\\in77\\in.dir", "--output-folder", "c:\\out77", "--include-names", "--dismiss-dialogs"], {
-	liveOutput : true,
-	detached   : true,
-	timeout    : 300_000,
-	env        :
-	{
-		DISPLAY    : ":6365",
-		WINEPREFIX : "/mnt/ram/dexvert/wine/base",
-		WINEARCH   : "win32"
-	}
-});
-
-const r = await cb();
-xlog.info`${r}`;*/
-
-//DISPLAY=:5347 WINEPREFIX=/mnt/ram/dexvert/wine/base WINARCH=win32 wine "c:\\dexvert\\DirectorCastRipper_D10/DirectorCastRipper.exe" 
+const wiki = new MediaWiki("http://fileformats.archiveteam.org/", {xlog});
+xlog.info`${await wiki.searchTitles("FLI Designer")}`;

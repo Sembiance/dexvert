@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Add the .mix format found on: https://archive.org/details/microsoft_graphics_studio_-_picture_it_99
 
 /---------------\
 | High Priority |

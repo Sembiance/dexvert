@@ -13,7 +13,7 @@ export class canvas extends Program
 	osData   = r => ({
 		alsoKill : ["CanvasInTouch2.exe"],
 		script   : `
-		// Canvas is preetty slow and so if CPU load is high it can take a long time to open and we need to be a little slower at inputing keys
+		; Canvas is pretty slow and so if CPU load is high it can take a long time to open and we need to be a little slower at inputing keys
 		AutoItSetOption("PixelCoordMode", 0)
 		AutoItSetOption("SendKeyDelay", 35)
 

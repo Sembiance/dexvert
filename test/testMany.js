@@ -35,7 +35,7 @@ const startedAt = performance.now();
 const underway = new Set();
 const maxFormatidLength = Array.from(formatsToProcess, v => v.length).max();
 const failures = [];
-const MAX_LINE_LENGTH = 148;
+const MAX_LINE_LENGTH = 118;
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
 await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
@@ -166,4 +166,5 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 	</body>
 </html>`);
 
-xlog.info`\nReports written to: ${mkWeblink(testManyReportFilePath)}`;
+xlog.info`\nElapsed: ${elapsed.msAsHumanReadable()}`;
+xlog.info`Reports written to: ${mkWeblink(testManyReportFilePath)}`;

@@ -19,14 +19,14 @@ const argv = cmdUtil.cmdInit({
 const musicWAVFilePath = path.join(path.dirname(argv.inputFilePath), "music.wav");
 const noMusicWAV = await fileUtil.exists(musicWAVFilePath);
 
-const runOptions = {timeout : xu.SECOND*15};
+const runOptions = {timeout : xu.SECOND*5};
 
 const {stderr : xmpInfoRaw} = await runUtil.run("xmp", ["-Cv", "-o", "/dev/null", argv.inputFilePath], runOptions);
 const {stdout : uadeInfoRaw} = await runUtil.run("uade123", ["-g", argv.inputFilePath], runOptions);
 const {stdout : openMPTInfoRaw} = await runUtil.run("openmpt123", ["--info", argv.inputFilePath], runOptions);
 const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFilePath], runOptions);
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], runOptions);
-const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], runOptions);
+const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], {stdoutUnbuffer : true, ...runOptions});
 const {stderr : adplayRaw} = await runUtil.run("adplay", ["--once", "--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], runOptions);
 
 if(argv.debug)

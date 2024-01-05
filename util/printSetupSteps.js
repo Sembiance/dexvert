@@ -63,5 +63,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`chown sembiance:sembiance /mnt/dexvert`,
 	`usermod -aG vboxusers sembiance`,
 	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0`,	// required for uniconvertor
-	`cd /usr/bin && ln -s scribus-1.6 scribus`	// require for scribus
+	`cd /usr/bin && ln -s scribus-1.6 scribus`,	// require for scribus
+	`sudo su - sembiance`,
+	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver`
 ].forEach(line => console.log(line));

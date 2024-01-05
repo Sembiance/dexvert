@@ -17,9 +17,6 @@ const argv = cmdUtil.cmdInit({
 const xlog = new XLog(argv.logLevel);
 const startedAt = performance.now();
 
-if(Deno.env.get("DEX_PROD"))
-	xlog.info`RUNNING IN ${xu.cf.blink("PRODUCTION")} MODE!`;
-
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
 const SERVER_ORDER = ["dexrpc", "siegfried", "os", "wine", "classify"];

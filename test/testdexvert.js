@@ -158,9 +158,8 @@ const FLEX_SIZE_FORMATS =
 		prehistorikCURArchive : 0.1,
 
 		// different each time due to way it generates frames
-		"swf:.mp4"    : 25,
-		"swf:.png"    : 25,
-		"swfEXE:.mp4" : 25,
+		swf    : 25,
+		swfEXE : 25,
 
 		// different generation per host/version
 		"amosMemoryBank:.mp3" : 1,

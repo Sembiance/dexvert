@@ -15,6 +15,3 @@ import {MediaWiki} from "MediaWiki";
 const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
-
-const wiki = new MediaWiki("http://fileformats.archiveteam.org/", {xlog});
-xlog.info`${await wiki.searchTitles("FLI Designer")}`;

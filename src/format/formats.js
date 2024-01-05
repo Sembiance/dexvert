@@ -137,7 +137,7 @@ async function loadSimple({reload}={})
 	}
 }
 
-export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
+export async function init(xlog=new XLog(["crystalsummit", "lostcrag"].includes(Deno.hostname()) ? "info" : "error"))
 {
 	if(initCalled)
 		return;
@@ -149,7 +149,7 @@ export async function init(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "i
 	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple()]));
 }
 
-export async function monitor(xlog=new XLog(Deno.env.get("DEX_PROD") ? "error" : "info"))
+export async function monitor(xlog=new XLog(["crystalsummit", "lostcrag"].includes(Deno.hostname()) ? "info" : "error"))
 {
 	const monitorcb = async ({type, filePath}) =>
 	{

@@ -24,9 +24,11 @@
 | Medium Priority |
 \-----------------/
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
-  archive/windowsResource		Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
-  archive/hypercard				Sometimes certain cards/bitmaps don't render
-  font/amigaBitmapFont			Program Fony appears to be sensitive
+  archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
+  archive/hypercard						Sometimes certain cards/bitmaps don't render
+  font/amigaBitmapFont					Program Fony appears to be sensitive
+  document/pageMaker					The program (especially pagemaker7) may be sensitive as often it will end up converting with older converters
+  document/hlp & multimediaViewerBook	Sometimes things don't convert under CPU load, several files just don't show up
 
 * When DiscMaster was around, encountered several BitRock installers with this search: http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   These may be able to be extracted using: https://gist.github.com/mickael9/0b902da7c13207d1b86e

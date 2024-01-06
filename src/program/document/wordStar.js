@@ -29,7 +29,7 @@ export class wordStar extends Program
 			Send("c:\\out\\out.pdf{ENTER}")
 			WinWaitClose($savePDFWindow)
 
-			; There are some windows in-between but they go too fast, so we just sleep
+			; There are some windows in-between but they go too fast
 			WinWaitClose("Print Status", "", 10)
 			WinWaitActive($mainWindow, "", 15)
 

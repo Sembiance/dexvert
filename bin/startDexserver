@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -f /mnt/ram/dexvert/dexserver.pid ]; then
+	echo "dexserver.pid found, server may already be running!"
+	exit 1
+fi
+
+rm -rf /mnt/dexvert/log
+mkdir -p /mnt/dexvert/log
+rm -f /mnt/dexvert/daemonize_dexserver.pid
+daemonize -c /mnt/dexvert/log -e /mnt/dexvert/log/dexserver.err -o /mnt/dexvert/log/dexserver.out -p /mnt/dexvert/daemonize_dexserver.pid /mnt/compendium/.deno/bin/dexserver
+
+tail -f /mnt/dexvert/log/dexserver.out &
+
+echo "Waiting for dexserver to start..."
+while [ ! -f /mnt/ram/dexvert/dexserver.pid ]; do
+	sleep 1
+done
+
+kill $!
+
+echo -e "\nDexserver started!!\n\It will remain running in background, run stopDexserver to stop it cleanly"

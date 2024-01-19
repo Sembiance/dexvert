@@ -17,9 +17,7 @@ export class wine extends Server
 
 	async start()
 	{
-		this.xlog.info`Cleaning up previous wine procs...`;
-		for(const v of ["winedevice.exe", "services.exe", "explorer.exe", "plugplay.exe", "svchost.exe", "rpcss.exe"])
-			await runUtil.run("killall", ["-9", v]);
+		await this.cleanupProcs();
 
 		this.xlog.info`Preparing prefix bases...`;
 		await fileUtil.unlink(WINE_PREFIX, {recursive : true});
@@ -112,6 +110,15 @@ export class wine extends Server
 		this.xlog.debug`Deleting wine prefix bases...`;
 		await fileUtil.unlink(WINE_PREFIX, {recursive : true});
 
+		await this.cleanupProcs();
+
 		this.started = false;
+	}
+
+	async cleanupProcs()
+	{
+		this.xlog.info`Killing wine procs...`;
+		for(const v of ["winedevice.exe", "services.exe", "explorer.exe", "plugplay.exe", "svchost.exe", "rpcss.exe"])
+			await runUtil.run("killall", ["-9", v]);
 	}
 }

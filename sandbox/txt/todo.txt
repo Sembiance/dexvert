@@ -1,13 +1,18 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Add the .mix format:
+	http://fileformats.archiveteam.org/wiki/MIX_(Picture_It!)
+	https://archive.org/details/microsoft_graphics_studio_-_picture_it_99
+
+* Add support for: http://justsolve.archiveteam.org/wiki/InstallIt!
+
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
   If host is omitted or is localhost then open locally.
   If host is a remote host then use vncRemote command
 
-* Add the .mix format found on: https://archive.org/details/microsoft_graphics_studio_-_picture_it_99
-
+* Ensure the games mentioned here I support extract the graphics from: https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
 * Look into various 'Visual Novel' formats. See discmaster search: http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000
   Would use this program (vista required, so hopefully works with wine) to convert: https://github.com/morkt/GARbro
 

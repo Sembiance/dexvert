@@ -1,1 +1,18 @@
+#!/bin/bash
+
+if [ ! -f /mnt/ram/dexvert/dexserver.pid ]; then
+	echo "dexserver.pid not found"
+	exit 1
+fi
+
 touch /mnt/ram/tmp/stopdexserver
+
+echo "Waiting for dexserver to stop..."
+while [ -f /mnt/ram/tmp/stopdexserver ] || [ -f /mnt/ram/dexvert/dexserver.pid ]; do
+	sleep 1
+done
+
+# Cleanup tasks can go here, such as killing possible errant processes
+sudo killall -q -9 winedevice.exe services.exe explorer.exe plugplay.exe svchost.exe rpcss.exe
+
+echo "Dexserver stopped"

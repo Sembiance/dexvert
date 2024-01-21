@@ -1,7 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add the .mix format:
+* Add the .mix format (READ VERY CAREFULLY! 3 different .mix formats, some of which I may already support!):
+    https://preservation.tylerthorsted.com/2023/12/29/picture-it/
 	http://fileformats.archiveteam.org/wiki/MIX_(Picture_It!)
 	https://archive.org/details/microsoft_graphics_studio_-_picture_it_99
 

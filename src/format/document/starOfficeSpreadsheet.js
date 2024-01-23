@@ -7,5 +7,5 @@ export class starOfficeSpreadsheet extends Format
 	ext            = [".sdc", ".stc", ".sxc", ".vor"];
 	forbidExtMatch = true;
 	magic          = ["StarOffice StarCalc spreadsheet", /^OLE 2 Compound Document.* StarCalc.* spreadsheet/, "StarOffice Calc spreadsheet", /^x-fmt\/359( |$)/];
-	converters     = ["soffice"];
+	converters     = ["soffice[format:StarOffice Spreadsheet]"];
 }

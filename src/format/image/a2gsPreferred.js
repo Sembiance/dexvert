@@ -6,5 +6,6 @@ export class a2gsPreferred extends Format
 	ext        = [".gs", ".iigs", ".pnt", ".shr"];
 	magic      = ["Apple IIGS Preferred Format"];
 	converters = ["recoil2png"];
+	priority   = this.PRIORITY.LOW;
 	verify     = ({meta}) => meta.colorCount>1;
 }

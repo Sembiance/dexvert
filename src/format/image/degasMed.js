@@ -11,4 +11,5 @@ export class degasMed extends Format
 
 	// nconvert properly handles aspect ratio
 	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "recoil2png"];
+	classify   = true;
 }

@@ -8,5 +8,5 @@ export class starOfficePresentation extends Format
 	forbidExtMatch = true;
 	magic          = ["StarOffice", /^x-fmt\/360( |$)/];
 	weakMagic      = ["StarOffice"];
-	converters     = ["soffice"];
+	converters     = ["soffice[format:StarOffice Presentation]"];
 }

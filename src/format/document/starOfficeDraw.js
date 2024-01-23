@@ -8,5 +8,5 @@ export class starOfficeDraw extends Format
 	forbidExtMatch = true;
 	magic          = ["StarOffice", /^x-fmt\/401( |$)/];
 	weakMagic      = ["StarOffice"];
-	converters     = ["soffice"];
+	converters     = ["soffice[format:StarOffice Drawing]"];
 }

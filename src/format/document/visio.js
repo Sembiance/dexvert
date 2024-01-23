@@ -7,5 +7,5 @@ export class visio extends Format
 	ext            = [".vsd", ".vss", ".vst", ".vdx", ".vsx", ".vtx"];
 	forbidExtMatch = true;
 	magic          = ["Visio Drawing", "Microsoft Visio Drawing", /^fmt\/(216|443|1510)( |$)/, /^x-fmt\/258( |$)/];
-	converters     = ["soffice"];
+	converters     = ["soffice[format:VisioDocument]"];
 }

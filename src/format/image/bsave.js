@@ -12,5 +12,6 @@ export class bsave extends Format
 	weakMagic      = true;
 
 	// deark can't determine what type of BSAVE format it is, so we just try em all. Yah, it produces a lot of bad output, but usually one of them IS right
-	converters = ["deark[module:bsave]", BSAVE_TYPES.map(t => `deark[module:bsave][opt:bsave:fmt=${t}][suffix:_${t}]`).join(" & ")];
+	converters = [BSAVE_TYPES.map(t => `deark[module:bsave][opt:bsave:fmt=${t}][suffix:_${t}]`).join(" & ")];
+	classify   = true;
 }

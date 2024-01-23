@@ -10,13 +10,20 @@ mkdir -p /mnt/dexvert/log
 rm -f /mnt/dexvert/daemonize_dexserver.pid
 daemonize -c /mnt/dexvert/log -e /mnt/dexvert/log/dexserver.err -o /mnt/dexvert/log/dexserver.out -p /mnt/dexvert/daemonize_dexserver.pid /mnt/compendium/.deno/bin/dexserver
 
+KIDPIDS=()
+
 tail -f /mnt/dexvert/log/dexserver.out &
+KIDPIDS+=($!)
+tail -f /mnt/dexvert/log/dexserver.err &
+KIDPIDS+=($!)
 
 echo "Waiting for dexserver to start..."
 while [ ! -f /mnt/ram/dexvert/dexserver.pid ]; do
 	sleep 1
 done
 
-kill $!
+for pid in "${KIDPIDS[@]}"; do
+    kill "$pid"
+done
 
 echo -e "\nDexserver started!!\n\It will remain running in background, run stopDexserver to stop it cleanly"

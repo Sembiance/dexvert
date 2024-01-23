@@ -7,5 +7,5 @@ export class powerPoint extends Format
 	ext            = [".ppt", ".pp", ".ppsx", ".pptm", ".pptx"];
 	forbidExtMatch = true;
 	magic          = ["Microsoft PowerPoint", "PowerPoint Microsoft Office Open XML Format document", /^fmt\/(126|215)( |$)/, /^x-fmt\/88( |$)/];
-	converters     = ["soffice"];
+	converters     = ["soffice[format:PowerPoint3]", "soffice[format:MS PowerPoint 97]"];
 }

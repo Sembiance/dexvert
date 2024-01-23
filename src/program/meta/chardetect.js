@@ -7,7 +7,7 @@ export class chardetect extends Program
 	package    = "dev-python/chardet";
 	bin        = "chardetect";
 	args       = r => [r.inFile()];
-	runOptions = ({timeout : xu.MINUTE*2});	// Can get hung up on certain files and just spin forever
+	runOptions = ({timeout : xu.MINUTE});	// Can get hung up on certain files and just spin forever
 	post       = r =>
 	{
 		let detectedCharSet = r.stdout.trim().substring(r.inFile().length + 2);

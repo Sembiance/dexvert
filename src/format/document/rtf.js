@@ -9,5 +9,5 @@ export class rtf extends Format
 	magic          = ["Rich Text Format", /^fmt\/(45|355)( |$)/];
 
 	// fileMerlin will convert RTF too, but it produces artifacts (page 30, 31, etc in document/rtf/DIGITIZE.RTF)
-	converters     = ["soffice", "fileMerlin"];
+	converters     = ["soffice[format:Rich Text Format]", "soffice[format:Rich Text Format StarCalc]", "fileMerlin"];
 }

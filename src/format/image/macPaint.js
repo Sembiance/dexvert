@@ -5,11 +5,12 @@ export class macPaint extends Format
 {
 	name           = "MacPaint Image";
 	website        = "http://fileformats.archiveteam.org/wiki/MacPaint";
-	ext            = [".mac", ".pntg", ".pic", ".macp"];
+	ext            = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
 	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", "Macintosh MacPaint", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
 	converters     = ["deark[module:macpaint][mac][matchType:magic]", "iio2png", `abydosconvert[format:${this.mimeType}]`, "convert", "keyViewPro", "hiJaakExpress", "pv[matchType:magic]", "corelPhotoPaint", "tomsViewer"];
+	verify         = ({meta}) => meta.width<8000 && meta.height<8000;
 	notes          = "The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!";
 }

@@ -7,5 +7,5 @@ export class openOfficeWriter extends Format
 	ext            = [".sxw", ".stw"];
 	forbidExtMatch = true;
 	magic          = ["OpenOffice.org 1.x Writer document", /^fmt\/136( |$)/];
-	converters     = ["soffice"];
+	converters     = ["soffice[matchType:magic]"];
 }

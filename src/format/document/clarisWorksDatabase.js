@@ -7,5 +7,5 @@ export class clarisWorksDatabase extends Format
 	ext            = [".db"];
 	forbidExtMatch = true;
 	magic          = [/^fmt\/848( |$)/];
-	converters     = ["soffice", "mwaw2text"];
+	converters     = ["soffice[matchType:magic]", "mwaw2text"];
 }

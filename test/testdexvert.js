@@ -78,6 +78,8 @@ const FORMAT_OS_HINT =
 	"document/wri"         : { "readme2.wri" : "fmtownsjpy"	},
 	"image/macBinaryImage" : { "01-1-tiff-手塚莉絵" : "macintoshjp" },
 	"image/printfox"       : "commodore",
+	"image/spritePad"      : "commodore",
+	"image/shfXLEdit"      : "commodore",
 	"text/html"            : { "apple.html" : "macintoshjp" }
 };
 

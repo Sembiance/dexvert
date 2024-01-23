@@ -7,7 +7,7 @@ export class soffice extends Program
 	package   = "app-office/libreoffice";
 	unsafe    = true;
 	flags     = {
-		format      : "Specify the input file format.",	// Can sometimes use these (didn't work for ClarisWorks): https://cgit.freedesktop.org/libreoffice/core/tree/filter/source/config/fragments/filters
+		format      : "Specify the input file format.",	// https://cgit.freedesktop.org/libreoffice/core/tree/filter/source/config/fragments/filters
 		outType     : `Which format to convert into ("svg", "csv", "pdf", "png", etc). Default is "pdf"`,
 		autoCropSVG : "If set to true, the output SVG will be autocropped"
 	};

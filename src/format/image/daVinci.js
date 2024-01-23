@@ -7,6 +7,6 @@ export class daVinci extends Format
 	ext      = [".img"];
 	mimeType = "image/x-davinci";
 
-	// abydosconvert will also convert these, but unlike recoil2png, abydos will take any garbage .img file and produce garbage output
+	// abydosconvert will also convert these, but abydos will take any garbage .img file and produce garbage output. recoil2png is a little better
 	converters = ["recoil2png"];
 }

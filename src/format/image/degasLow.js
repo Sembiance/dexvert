@@ -9,4 +9,5 @@ export class degasLow extends Format
 	magic      = ["DEGAS low-res compressed bitmap"];
 	byteCheck  = [{offset : 0, match : [0x80, 0x00]}];
 	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`, "nconvert"];
+	classify   = true;
 }

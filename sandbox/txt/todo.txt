@@ -31,6 +31,11 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Add image/telepaint support using the DOS S`HOWSS.EXE /T 5 <file>`  which will show the image for 5 seconds, during which time I can take a screenshot
+
+* image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right. It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
+  Perhaps get deark to add support for this format.
+
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
   archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
   archive/hypercard						Sometimes certain cards/bitmaps don't render

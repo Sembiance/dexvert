@@ -122,7 +122,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 ];
 
 const argv = cmdUtil.cmdInit({
-	cmdid   : "dexvert",
+	cmdid   : "dexrecurse",
 	version : "1.0.0",
 	desc    : "Processes <inputPath> converting or extracting files RECURSIVELY",
 	opts    :

@@ -102,13 +102,13 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 		// NOTE! This rsync may produce FEWER files than we asked it to copy over. This can happy with the 'auxFiles' as an external process may have deleted an otherFile/otherDir
 		const f = await originalInputFileSet.rsyncTo(cwd);
 
-		// create a simple 'out' dir (or a unique name if taken already) and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
-		const outDirPath = (await fileUtil.exists(path.join(cwd, "out")) ? (await fileUtil.genTempPath(cwd, "out")) : path.join(cwd, "out"));
+		// create a unique 'out' dir and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
+		const outDirPath = await fileUtil.genTempPath(cwd, "out");
 		await Deno.mkdir(outDirPath, {recursive : true});
 		await f.add("outDir", outDirPath);
 
-		// create a 'home' dir (or a unique name if taken already) and run programs with a HOME env set to that, this avoids issues when running the same program multiple times at once and it uses some sort of HOME .config lock file
-		const homeFilePath = (await fileUtil.exists(path.join(cwd, "home")) ? (await fileUtil.genTempPath(cwd, "home")) : path.join(cwd, "home"));
+		// create a unique 'home' dir and run programs with a HOME env set to that, this avoids issues when running the same program multiple times at once and it uses some sort of HOME .config lock file
+		const homeFilePath = await fileUtil.genTempPath(cwd, "home");
 		await Deno.mkdir(homeFilePath, {recursive : true});
 		
 		// create the files needed for java to work (needed for program acx (AppleCommander) to work)	NOTE: This used to be explicitly java-17, but I think it's safe to just use the latest java config

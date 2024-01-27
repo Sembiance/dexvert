@@ -9,7 +9,7 @@ source /etc/bash/bashrc.d/bash_aliases
 dra testMany.js --format=poly		#     38s	    48s
 dra testMany.js --format=executable	#  1m 11s	    23s
 dra testMany.js --format=text		#  1m 18s	 1m 19s
-dra testMany.js --format=font		#  1m 29s	 1m 33s
+dra testMany.js --format=font		#  1m 29s	 1m 22s
 dra testMany.js --format=other		#  2m 35s	 2m 30s
 dra testMany.js --format=video		# 10m 27s	11m 59s
 dra testMany.js --format=audio		# 11m 32s	14m 22s

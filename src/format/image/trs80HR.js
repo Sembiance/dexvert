@@ -6,6 +6,5 @@ export class trs80HR extends Format
 	website       = "http://fileformats.archiveteam.org/wiki/HR_(TRS-80)";
 	ext           = [".hr"];
 	fileSize      = [16384, 19200, 19328, 19456];
-	matchFileSize = true;
 	converters    = ["deark[module:hr]", "recoil2png", "nconvert", "tomsViewer"];
 }

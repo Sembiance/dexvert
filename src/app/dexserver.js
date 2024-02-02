@@ -41,11 +41,8 @@ await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
 await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
 
-async function stopDexserver(sig)
+async function stopDexserver()
 {
-	if(sig)
-		xlog.info`Got signal ${sig}`;
-
 	xlog.info`Stopping ${Object.keys(servers).length} servers...`;
 	for(const serverid of SERVER_ORDER.reverse())
 	{

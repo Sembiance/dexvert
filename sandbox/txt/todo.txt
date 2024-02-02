@@ -1,6 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Improve RAG support by updating to latest recoil: https://sourceforge.net/p/recoil/bugs/74/
+  See how it performs against current image/rag samples (specifically rraa9.rag)
+  Sounds like there is no way to auto-detect these files and thus would need to rename the extension of these
+  If that turns out to be the case, that's not really something that can be done in a project like dexvert handling 'unnknown' files
+
+* Add AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
+  Note: Already have some samples
+
 * Add the .mix format (READ VERY CAREFULLY! 3 different .mix formats, some of which I may already support!):
     https://preservation.tylerthorsted.com/2023/12/29/picture-it/
 	http://fileformats.archiveteam.org/wiki/MIX_(Picture_It!)

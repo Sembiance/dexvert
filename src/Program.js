@@ -251,7 +251,7 @@ export class Program
 			await runUtil.run("find", [f.outDir.absolute, "-xtype", "l", "-delete"]);					// delete broken symlinks. make sure we do this last just in case a symlink becomes broken because we have deleted the file it points to above
 			await runUtil.run("find", [f.outDir.absolute, "-type", "l", "!", "-readable", "-delete"]);	// delete unreadable symlinks, this is a workaround for broken symlinks that point to directories that don't exist and thus don't get caught by the above
 
-			// now find any new files on disk in the output dir that we don't yet
+			// now find any new files on disk in the output dir that we don't yet know about
 			xlog.debug`Program ${fg.orange(this.programid)} locating new files...`;
 			const newFilePaths = (await fileUtil.tree(f.outDir.absolute, {nodir : true})).subtractAll([...(f.files.output || []), ...(f.files.prev || []), ...(f.files.new || [])].map(v => v.absolute));
 
@@ -262,9 +262,9 @@ export class Program
 				const newFileRel = path.relative(f.outDir.absolute, newFilePath);
 				const newFile = await DexFile.create({root : f.root, absolute : newFilePath});
 
-				if(newFile.size>xu.GB && f.input.size<xu.GB)
+				if(newFile.size>xu.GB && f.input.size<(xu.GB*0.50))
 				{
-					xlog.warn`Deleting a file produced by ${fg.orange(this.programid)} that is ${newFile.size.bytesToSize()} as it exceeds the arbitrary 1GB size sanity check limit: ${fg.green(newFileRel)}`;
+					xlog.warn`Program ${fg.orange(this.programid)} deleting file that is ${newFile.size.bytesToSize()} as it exceeds arbitrary 1GB size sanity check limit from source file that isn't very big: ${fg.green(newFileRel)}`;
 					await fileUtil.unlink(newFilePath);
 					return;
 				}
@@ -317,6 +317,17 @@ export class Program
 					foundDups = true;
 					await fileUtil.unlink(newFilePath);
 					return;
+				}
+
+				// if the filename >247 characters we rename it to be <=247. This is because 255 is the max filename length on linux ext4 and later processing often adds suffixes such as §.json
+				if(newFile.base.length>247)
+				{
+					let newFilename = newFile.base.innerTrim();
+					if(newFilename.length>247)
+						newFilename = newFile.base.innerTruncate(247);
+					
+					xlog.warn`Program ${fg.orange(this.programid)} encountered filename >247 characters [${newFileRel}] rename to [${newFilename}]`;
+					await newFile.rename(newFilename, {autoRename : true});
 				}
 
 				return newFile;

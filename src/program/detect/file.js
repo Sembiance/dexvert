@@ -12,7 +12,7 @@ export class file extends Program
 	{
 		const fileMatches = [];
 		let fileMatch = null;
-		for(let line of r.stdout.trim().split("\n"))
+		for(let line of r.stdout.trim().replaceAll("\r\n", "\n").split("\n"))
 		{
 			line = line.replace(/^- /g, "");
 			line = line.replace(/^\s*FILE_SIZE=\d+/, "");

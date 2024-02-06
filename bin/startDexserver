@@ -26,4 +26,4 @@ for pid in "${KIDPIDS[@]}"; do
     kill "$pid"
 done
 
-echo -e "\nDexserver started!!\n\It will remain running in background, run stopDexserver to stop it cleanly"
+echo -e "\nDexserver started!!\n\nIt will remain running in background, run stopDexserver to stop it cleanly"

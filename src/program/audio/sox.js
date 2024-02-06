@@ -13,7 +13,8 @@ export class sox extends Program
 		endianness  : "Input endianness. Valid: little || big.",
 		maxDuration : "Trim output file, limiting to maxDuration",
 		rate        : "Input sampling rate",
-		type        : "Input file type. Run `man soxformat` for a list"
+		type        : "Input file type. Run `man soxformat` for a list",
+		trimSilence : "Trim silence from the end"
 	};
 
 	args = async r =>
@@ -36,6 +37,8 @@ export class sox extends Program
 
 		if(r.flags.maxDuration)
 			a.push("trim", "0", Number(+r.flags.maxDuration).toClock());
+		if(r.flags.trimSilence)
+			a.push("reverse", "silence", "5", "0.01", "0.5%", "reverse");
 
 		return a;
 	};

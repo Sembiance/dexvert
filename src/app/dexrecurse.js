@@ -128,6 +128,7 @@ const argv = cmdUtil.cmdInit({
 	opts    :
 	{
 		programFlag : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
+		ignorePath  : {desc : "A path to ignore when encountered and to skip processing and skip recursing into", hasValue : true, multiple : true},
 		suffix      : {desc : "What suffix to use for output directories. This is important to avoid clobbering other output files.", defaultValue : "§"},
 		headless    : {desc : "Run headless, no GUI. Instead create a webserver and listen on a port for updates on recursion progress"},
 		report      : {desc : "Generate a report of new magics and new sample files"}
@@ -268,6 +269,13 @@ if(webServer)
 async function processNextQueue()
 {
 	const taskProps = taskQueue.shift();
+	if((argv.ignorePath || []).some(ignoredPath => taskProps.rel.strip(argv.suffix).startsWith(ignoredPath)))
+	{
+		taskFinishedCount++;
+		bar?.increment();
+		return;
+	}
+	
 	const task = {relFilePath : taskProps.rel, startedAt : performance.now()};
 	taskActive.add(task);
 

@@ -2,7 +2,7 @@ import {xu, fg} from "xu";
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
 import {imageUtil, fileUtil} from "xutil";
-import {DOMParser} from "../../deno/deno-dom/deno-dom-native.ts";
+import {DOMParser} from "/mnt/compendium/DevLab/deno/deno-dom/deno-dom-native.ts";
 import {classifyImage} from "../classifyUtil.js";
 import {programs} from "../program/programs.js";
 

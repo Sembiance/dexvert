@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {path} from "std";
-import {hostUtil} from "xpriv";
+import {hostUtil} from "/mnt/compendium/DevLab/xpriv/xpriv.js";
 
 const isDexdrone = hostUtil.HOSTS[Deno.hostname()].roles.includes("dexdrone");
 export function mkWeblink(diskPath)

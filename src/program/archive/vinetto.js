@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {fileUtil} from "xutil";
 import {Program} from "../../Program.js";
-import {DOMParser} from "../../../deno/deno-dom/deno-dom-native.ts";
+import {DOMParser} from "/mnt/compendium/DevLab/deno/deno-dom/deno-dom-native.ts";
 import {dateParse, path} from "std";
 
 export class vinetto extends Program

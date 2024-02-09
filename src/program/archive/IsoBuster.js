@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
-import {serialUtil} from "xpriv";
+import {serialUtil} from "/mnt/compendium/DevLab/xpriv/xpriv.js";
 
 export class IsoBuster extends Program
 {

@@ -11,6 +11,7 @@ export class hiJaakExpress extends Program
 		script : `
 			Func MainWindowOrFailure()
 				WindowFailure("HiJaak Convert", "Error", 2, "{ESCAPE}")
+				WindowFailure("Application Error", "", -1, "{ENTER}")
 				return WinActive("HiJaak Convert", "Save as")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})

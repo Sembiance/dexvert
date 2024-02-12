@@ -330,12 +330,11 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
-	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "asciiArtEditor"],
-	[/image\/gfaArtist\/.+$/, "image", "asciiArtEditor"],
+	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "gfaArtist"],
 	[/image\/magicDraw\/.+$/, "image", "a2gsSHStar"],
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 	[/image\/pixelPerfect\/.+$/, "image", true],
-	[/image\/pfsFirstPublisher\/.+$/, "image", "artDirector"],
+	[/image\/pfsFirstPublisher\/.+$/, "image", "gfaArtist"],
 
 	// Unsupported files that end up getting matched to other stuff
 	[/audio\/aviAudio\/04mwwk00\.avi/, "archive", "riff"],
@@ -353,8 +352,6 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/graphSaurus\/SNAT-2.SR5/, "image", "msxBASIC"],
 	[/image\/jpegXL\/JXL\.jxl$/i, "text", true],
 	[/image\/neoPaintPattern\/.+/i, "text", true],
-	[/image\/picturePublisher\/circus0(1|2|7)\.art/, "image", "pfsFirstPublisher"],
-	[/image\/picturePublisher\/circus06 \(1\)\.art/, "image", "pfsFirstPublisher"],
 	[/image\/teletextPackets\/TETRIS\.T42/, "text", "txt"],
 	[/music\/renoise\/.+/i, "archive", "zip"],
 	[/music\/tss\/.+/i, "text", true],

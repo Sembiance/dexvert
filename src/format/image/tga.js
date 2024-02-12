@@ -15,8 +15,7 @@ export class tga extends Format
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	converters = [
 		"deark[module:tga]", "iio2png", "iconvert",
-		"keyViewPro",
-		"corelDRAW[strongMatch]", "pv[strongMatch]",
+		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]",
 		"nconvert", "recoil2png", "gimp",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas[strongMatch]"
 	];

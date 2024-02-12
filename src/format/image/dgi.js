@@ -6,6 +6,6 @@ export class dgi extends Format
 	website       = "http://fileformats.archiveteam.org/wiki/DGI_(Digi-Pic)";
 	ext           = [".dgi"];
 	fileSize      = 64008;
-	matchFileSize = true;
-	converters    = ["deark[module:dgi]", "dgiwind"];
+	magic         = ["Digi-Pic 2"];
+	converters    = ["deark[module:dgi][matchType:magic]", "dgiwind"];
 }

@@ -37,7 +37,7 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 		tooLongTimer = setTimeout(async () =>
 		{
 			tooLongTimer = null;
-			await xwork.send({rpcid, logLines, err : `${op} Took too long to process and was aborted for inputFilePath ${inputFilePath} and outputDirPath ${outputDirPath}`});
+			await xwork.send({rpcid, logLines, timedout : true, err : `${op} Took too long to process and was aborted for inputFilePath ${inputFilePath} and outputDirPath ${outputDirPath}`});
 			xwork.recvAbort();
 		}, timeout);
 

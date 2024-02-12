@@ -7,6 +7,6 @@ export class adobeIllustrator extends Format
 	ext        = [".ai"];
 	magic      = ["Adobe Illustrator graphics", /^fmt\/(418|420|422)( |$)/];
 	weakMagic  = true;
-	converters = ["adobeIllustrator", "corelPhotoPaint", "picturePublisher", "hiJaakExpress", "corelDRAW"];
+	converters = ["adobeIllustrator[matchType:magic]", "corelPhotoPaint", "picturePublisher", "hiJaakExpress", "corelDRAW"];
 	verify     = ({meta}) => meta.colorCount>1;
 }

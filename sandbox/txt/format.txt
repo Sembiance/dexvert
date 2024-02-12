@@ -112,6 +112,11 @@ Specify that the file will remain as-is and untouched. Use for formats that brow
 >>> packed = true
 If set to true, this format is a 'packed' format and when running programs renameKeepFilename should be set if the original input file extension isn't part of this formats list of extensions
 
+>>> classify = true
+If this is set on a an image format, then the image will be classified as 'garbage' or 'not garbage'
+This uses a image classification model trained against a bunch of static and non-static images.
+If the image classifies as garbage, it will be deleted.
+
 >>> meta = async inputFile => { return {}; }
 Format specific function that takes in an input DexFile and should return meta about the input file
 

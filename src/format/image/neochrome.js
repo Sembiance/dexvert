@@ -11,7 +11,7 @@ export class neochrome extends Format
 	{
 		// .neo can convert on it's own, but optionally uses an .rst
 		const otherFile = otherFiles.find(file => file.base.toLowerCase()===(input.name.toLowerCase() + this.ext.find(ext => ext!==input.ext.toLowerCase())));
-		return otherFile ? [otherFile] : false;
+		return otherFile ? [otherFile] : (input.ext.toLowerCase()===".rst" ? [] : false);
 	};
 
 	// Don't do anything with .rst files

@@ -9,7 +9,7 @@ export class tomsViewer extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-		$mainWindow = WindowRequire("Tom's Viewer", "", 5)
+		$mainWindow = WindowRequire("Tom's Viewer", "", 7)
 
 		; don't be tempted to save as PNG as the program will only work about 25% of the time then, BMP always seems to work
 		Send("^s")
@@ -17,7 +17,7 @@ export class tomsViewer extends Program
 		Send("out.bmp{ENTER}")
 		WinWaitClose($saveAsWindow, "", 10)
 
-		WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*2}, ${xu.SECOND*7})
+		WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*3}, ${xu.SECOND*12})
 
 		WinClose($mainWindow, "")`
 	});

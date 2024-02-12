@@ -84,10 +84,10 @@ export class image extends Family
 			return false;
 		}
 		
-		let skipClassify = false;
+		let skipClassify = !!dexState.format.skipClassify;
 
 		// Only classify images if a program or format specified it specifically
-		if(!dexState.format.classify && !dexState.ran.some(r => programs[r.programid].classify))
+		if(!skipClassify && !dexState.format.classify && !dexState.ran.some(r => programs[r.programid].classify))
 			skipClassify = `Format ${dexState.format.formatid} and no ran programs require classification`;
 
 		// Only classify these image types
@@ -111,6 +111,8 @@ export class image extends Family
 
 			if((garbage || 0)>MATCH_MAX_GARBAGE_PROBABILITIES[dexState.id.matchType])
 				return xlog.warn`Image failed verification due to being detected as ${fg.peach("garbage")} with val ${garbage} for: ${dexFile.pretty()} ${dexState.original.input.pretty()}`, false;
+
+			xlog.debug`Image passed verification with garbage val ${garbage}`;
 		}
 		else
 		{

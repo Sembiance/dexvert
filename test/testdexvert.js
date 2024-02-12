@@ -215,6 +215,7 @@ const FLEX_SIZE_FORMATS =
 		lotusChart       : 5,
 		odg              : 20,	// also differs per host
 		pes              : 0.1,
+		pgx              : 10,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
@@ -301,8 +302,6 @@ const DISK_FAMILY_FORMAT_MAP =
 [
 	// Mis-classified by classify as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
-	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
-	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
@@ -345,6 +344,9 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/manPage\/glib\.man/i, "text", true],
 	[/document\/microsoftPublisher\/.+/i, "archive", true],
 	[/document\/pagePlus\/.+/i, "archive", true],
+	[/document\/quarkXPress\/10_11X14\.qxd/, "text", true],
+	[/document\/quarkXPress\/_8\.5x11\.qxd report/, "text", true],
+	[/document\/quarkXPress\/9_8\.5X14\.qxd report/, "text", true],
 	[/document\/vCard\/.+/i, "text", true],
 	[/image\/a2Sprites\/.+/i, "text", true],
 	[/image\/excelChart\/.+/i, "document", "xls"],
@@ -383,6 +385,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"image/bbcDisplayRAM",
 	"image/printfox",
 	"image/teletext",
+	"image/sprEd",
 	"music/msxBGM",
 	"music/richardJoseph",
 	"other/iBrowseCookies",

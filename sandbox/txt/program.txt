@@ -19,6 +19,7 @@ There are a few 'global' flags that can be specified for any program:
 	renameKeepFilename		If set to true and there is exactly 1 output file, it will be renamed to the original input filename
 	renameOut				A way to override the renameOut of a program
 	subOutDir				Will cause all program output files to go in a newly created subdirectory
+	skipClassify			Don't classify. Useful on specific formats where the output tends to be confused as 'garbage'
 
 >>> notes = "Blah blah"
 Additional notes about this program
@@ -113,6 +114,11 @@ You can also return an Object to allow it AND set the key/vals in that object as
 >>> chainFailKeep = async (r, chainInputFiles, chainResult, chainProgramid) => { return true; }
 Called only if a chain failed to produce a valid file. Normal behavior is to delete the previous file in the chain.
 However you can return true here to force it to keep the previous file.
+
+>>> classify = true
+If this is set on a program and it's working with an image format, then the image will be classified as 'garbage' or 'not garbage'
+This uses a image classification model trained against a bunch of static and non-static images.
+If the image classifies as garbage, it will be deleted.
 
 >>> verify = async (r, dexFile) => { return false; }
 Custom program specific verification function to ensure output file is proper. Return false if the given dexFile isn't good and should be deleted.

@@ -33,7 +33,7 @@ export class canvas extends Program
 			WindowDismiss("Select Layout", "", "{ENTER}")
 			return WinActive("Canvas 14", "")
 		EndFunc
-		$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*30})
+		$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*40})
 
 		$imageViewControl = WaitForControl($mainWindow, "", "[CLASS:ViewClass]", ${xu.SECOND*10});
 		If $imageViewControl = 0 Then

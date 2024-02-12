@@ -69,3 +69,5 @@ for(const srcFilePath of argv.inputFilePath)
 	if(argv.record)
 		await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "test", "testdexvert.js"), "--record", `--format=${argv.familyFormat}`, `--file=${path.basename(destFilePath)}`), runUtil.denoRunOpts({liveOutput : true}));
 }
+
+xlog.info`\n# Samples: ${(await fileUtil.tree(stashDirPath, {nodir : true, depth : 1})).length.toLocaleString()}`;

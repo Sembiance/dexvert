@@ -7,5 +7,5 @@ export class pack extends Format
 	ext        = [".z"];
 	magic      = ["packed data", "Pack compressed data", "z: Pack"];
 	packed     = true;
-	converters = ["ancient", "deark[module:pack]"];
+	converters = ["ancient", "deark[module:pack][matchType:magic]"];
 }

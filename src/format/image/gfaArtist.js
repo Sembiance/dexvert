@@ -6,5 +6,5 @@ export class gfaArtist extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GFA_Artist";
 	ext        = [".art"];
 	mimeType   = "image/x-gfa-artist";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

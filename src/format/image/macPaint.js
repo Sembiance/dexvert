@@ -6,6 +6,7 @@ export class macPaint extends Format
 	name           = "MacPaint Image";
 	website        = "http://fileformats.archiveteam.org/wiki/MacPaint";
 	ext            = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
+	forbidExtMatch = [".pic"];
 	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", "Macintosh MacPaint", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];

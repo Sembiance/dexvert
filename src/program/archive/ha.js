@@ -9,7 +9,7 @@ export class ha extends Program
 	loc     = "dos";
 	bin     = "HA.EXE";
 	cwd     = r => r.outDir();
-	dosData = r => ({autoExec : ["CD OUT", `..\\dos\\HA.EXE lf ${r.inFile({backslash : true})} > DEXVERTL.TXT`, `..\\dos\\HA.EXE xy ${r.inFile({backslash : true})}`], runIn : "out"});
+	dosData = r => ({autoExec : [`..\\dos\\HA.EXE lf ${r.inFile({backslash : true})} > DEXVERTL.TXT`, `..\\dos\\HA.EXE xy ${r.inFile({backslash : true})}`], runIn : "out"});
 
 	// HA.EXE doesn't set the date/time for each file, but it does know what they are with a list, so we manually set the date and times ourselves
 	postExec = async r =>

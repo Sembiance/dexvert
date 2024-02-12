@@ -10,7 +10,7 @@ export class pco extends Program
 	dosData   = r => ({
 		timeout  : xu.MINUTE*3,
 		autoExec : [`COPY ${r.inFile({backslash : true}).toUpperCase()} DOS\\PCO\\F.PCO`, "CD DOS\\PCO", "PCO.EXE"],
-		keys     : [" ", " ", ["Down"], ["Enter"], ["Enter"], {delay : xu.SECOND*5}, ["Insert"], ["Right"], ["Right"], ["Right"], ["Right"], "d", "a", "g", "E:\\OUT\\OUTFILE.TXT", ["Enter"], ["Escape"], ["Escape"], "y"]
+		keys     : [" ", " ", ["Down"], ["Enter"], ["Enter"], {delay : xu.SECOND*5}, ["Insert"], ["Right"], ["Right"], ["Right"], ["Right"], "d", "a", "g", `E:\\${r.f.outDir.base}\\OUTFILE.TXT`, ["Enter"], ["Escape"], ["Escape"], "y"]
 	});
 	renameOut = true;
 }

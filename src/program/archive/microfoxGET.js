@@ -6,6 +6,6 @@ export class microfoxGET extends Program
 	unsafe    = true;
 	loc       = "dos";
 	bin       = "GET.EXE";
-	args      = r => [r.inFile({backslash : true}), "E:\\OUT", "QUIET"];
+	args      = r => [r.inFile({backslash : true}), `E:\\${r.f.outDir.base}`, "QUIET"];
 	renameOut = false;
 }

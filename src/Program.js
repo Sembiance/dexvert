@@ -182,7 +182,7 @@ export class Program
 			}
 			else if(this.loc==="dos")
 			{
-				r.dosData = {root : f.root, cmd : await getBin(), xlog};
+				r.dosData = {root : f.root, outDir : r.f.outDir, cmd : await getBin(), xlog};
 				r.dosData.args = await getArgs();
 				if(this.dosData)
 					Object.assign(r.dosData, typeof this.dosData==="function" ? await this.dosData(r) : this.dosData);
@@ -677,7 +677,7 @@ export class Program
 
 			f = await FileSet.create(srcFiles[0].root, "input", safeFiles || srcFiles);
 			
-			const outDirPath = await fileUtil.genTempPath(undefined, `${programid}_out`);
+			const outDirPath = await fileUtil.genTempPath(undefined, "");	// an empty suffix ensures no .tmp default suffix and won't generate a path > 8 chars which would be a problem for DOS
 			await Deno.mkdir(outDirPath, {recursive : true});
 			await f.add("outDir", outDirPath);
 

@@ -9,7 +9,7 @@ export class lhark extends Program
 	loc     = "dos";
 	bin     = "LHARK.EXE";
 	cwd     = r => r.outDir();
-	dosData = r => ({autoExec : ["CD OUT", `..\\dos\\LHARK.EXE l ${r.inFile({backslash : true})} > DEXVERTL.TXT`, `..\\dos\\LHARK.EXE e ${r.inFile({backslash : true})}`], runIn : "out"});
+	dosData = r => ({autoExec : [`..\\dos\\LHARK.EXE l ${r.inFile({backslash : true})} > DEXVERTL.TXT`, `..\\dos\\LHARK.EXE e ${r.inFile({backslash : true})}`], runIn : "out"});
 
 	// LHARK.EXE doesn't set the date/time for each file, but it does know what they are with a list, so we manually set the date and times ourselves
 	postExec = async r =>

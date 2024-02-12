@@ -11,7 +11,7 @@ export class swagReader extends Program
 	args    = r => [`..\\..\\${r.inFile({backslash : true})}`];
 	dosData = async r =>
 	{
-		const swagvR = await Program.runProgram("swagv", r.f.input, {xlog : r.xlog, autoUnlink : true});
+		const swagvR = await Program.runProgram(`swagv[outDirname:${r.f.outDir.base}]`, r.f.input, {xlog : r.xlog, autoUnlink : true});
 		const dosKeys = [["Enter"]];
 	
 		r.pasFiles = swagvR.meta?.pasFiles;
@@ -23,7 +23,7 @@ export class swagReader extends Program
 		
 		for(let i=0;i<r.pasFiles.length;i++)
 		{
-			dosKeys.push("E", `E:\\OUT\\${i}.PAS`, ["Enter"]);
+			dosKeys.push("E", `E:\\${r.f.outDir.base}\\${i}.PAS`, ["Enter"]);
 			
 			// Can add this delay and the one further below to help ensure the files get extracted under high system load
 			//dosKeys.push({delay : 200});
@@ -39,7 +39,7 @@ export class swagReader extends Program
 	};
 	post = async r =>
 	{
-		await r.pasFiles.parallelMap(async (pasFile, i) =>
+		await (r.pasFiles || []).parallelMap(async (pasFile, i) =>
 		{
 			const outputFile = r.f.files.new.find(file => file.absolute===path.join(r.outDir({absolute : true}), `${i}.PAS`));
 			if(outputFile)

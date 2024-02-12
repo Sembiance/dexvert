@@ -6,7 +6,7 @@ export class rol2midi extends Program
 	loc       = "dos";
 	bin       = "ROL2MIDI/ROL2MIDI.EXE";
 	unsafe    = true;
-	args      = r => [`..\\..\\${r.inFile()}`, "/BSTANDARD.BNK", "/O..\\..\\OUT\\DEXVERT.MID"];
+	args      = r => [`..\\..\\${r.inFile()}`, "/BSTANDARD.BNK", `/O..\\..\\${r.f.outDir.base}\\DEXVERT.MID`];
 	dosData   = () => ({runIn : "prog"});
 	renameOut = true;
 	chain     = "timidity";

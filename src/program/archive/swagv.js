@@ -7,13 +7,16 @@ export class swagv extends Program
 {
 	website  = "http://fileformats.archiveteam.org/wiki/SWG";
 	unsafe   = true;
+	flags   = {
+		outDirname : "Dirname where the DEXVERTL.TXT file should be output, overrides default"
+	};
 	loc      = "dos";
 	bin      = "SWAG/SWAGV.EXE";
-	args     = r => ["/V", `..\\..\\${r.inFile()}`, ">", "..\\..\\OUT\\DEXVERTL.TXT"];
+	args     = r => ["/V", `..\\..\\${r.inFile()}`, ">", `..\\..\\${r.flags.outDirname || r.f.outDir.base}\\DEXVERTL.TXT`];
 	dosData  = ({runIn : "prog"});
 	postExec = async r =>
 	{
-		const listFilePath = path.join(r.f.root, "out", "DEXVERTL.TXT");
+		const listFilePath = path.join(r.f.root, r.flags.outDirname || r.f.outDir.base, "DEXVERTL.TXT");
 		if(!(await fileUtil.exists(listFilePath)))
 		{
 			r.xlog.warn`Failed to find DEXVERTL.TXT from SWAGV.EXE execution: ${listFilePath}`;

@@ -6,5 +6,5 @@ export class amigaGuide extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AmigaGuide";
 	ext        = [".guide"];
 	magic      = ["Amigaguide hypertext document", "AmigaGuide file"];
-	converters = ["grotag", "guideml", "strings"];
+	converters = ["grotag", "guideml", "strings[matchType:magic]"];
 }

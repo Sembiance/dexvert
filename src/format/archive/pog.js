@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {fileUtil} from "xutil";
 
 export class pog extends Format
 {
@@ -6,6 +7,7 @@ export class pog extends Format
 	website  = "http://fileformats.archiveteam.org/wiki/The_Print_Shop";
 	ext      = [".pog"];
 	magic    = ["The Print Shop graphic"];
+	idCheck = async inputFile => inputFile.size>4 && (await fileUtil.readFileBytes(inputFile.absolute, 4))[3]===0x01;
 	auxFiles = (input, otherFiles) =>
 	{
 		// .pog can convert on it's own, but optionally uses an .pnm

@@ -7,5 +7,5 @@ export class ttf extends Format
 	ext          = [".ttf"];
 	magic        = ["TrueType Font", "TrueType Font data", /^x-fmt\/453( |$)/];
 	metaProvider = ["fc_scan"];
-	converters   = ["convert[format:TTF][background:#C0C0C0]"];
+	converters   = ["convert[format:TTF][background:#C0C0C0][matchType:magic]"];
 }

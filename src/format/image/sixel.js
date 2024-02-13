@@ -12,7 +12,7 @@ export class sixel extends Format
 	weakMagic    = true;
 	idCheck = async inputFile =>
 	{
-		const headerBuf = await fileUtil.readFileBytes(inputFile.absolute, Math.min(200, inputFile.size));
+		const headerBuf = await fileUtil.readFileBytes(inputFile.absolute, Math.min(150, inputFile.size));
 		return headerBuf.indexOfX([0x1B, 0x50])!==-1 || headerBuf.indexOfX([0x1B, 0x5B])!==-1 || headerBuf.indexOfX([0x90])===0;
 	};
 	metaProvider = ["image"];

@@ -6,5 +6,5 @@ export class gsm extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/GSM";
 	ext          = [".gsm"];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]"];
+	converters   = ["sox"];	// ffmpeg[format:gsm][outType:mp3] also works, but it'll convert any ole .gsm file into garbage and sox handles all the file samples without converting garbage, so just use sox
 }

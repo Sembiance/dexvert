@@ -15,7 +15,7 @@ export class canvas extends Program
 		script   : `
 		; Canvas is pretty slow and so if CPU load is high it can take a long time to open and we need to be a little slower at inputing keys
 		AutoItSetOption("PixelCoordMode", 0)
-		AutoItSetOption("SendKeyDelay", 35)
+		AutoItSetOption("SendKeyDelay", 40)
 
 		Func PreOpenWindows()
 			WindowFailure("Canvas Alert", "Error loading document", -1, "{ENTER}")
@@ -33,9 +33,9 @@ export class canvas extends Program
 			WindowDismiss("Select Layout", "", "{ENTER}")
 			return WinActive("Canvas 14", "")
 		EndFunc
-		$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*40})
+		$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*50})
 
-		$imageViewControl = WaitForControl($mainWindow, "", "[CLASS:ViewClass]", ${xu.SECOND*10});
+		$imageViewControl = WaitForControl($mainWindow, "", "[CLASS:ViewClass]", ${xu.SECOND*15});
 		If $imageViewControl = 0 Then
 			Exit 0
 		EndIf
@@ -71,7 +71,7 @@ export class canvas extends Program
 			WindowDismiss("Render Image", "", "{ENTER}")
 			WindowDismiss("Canvas Message", "Would you like to associate the current document with the new file", "n")
 		EndFunc
-		CallUntil("PostExportWindows", ${xu.SECOND*2})
+		CallUntil("PostExportWindows", ${xu.SECOND*3})
 
 		WinWaitActive($mainWindow, "", 3)
 		Send("!x")

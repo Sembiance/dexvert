@@ -6,5 +6,5 @@ export class yamahaTX extends Format
 	ext          = [".txw"];
 	magic        = [" Yamaha TX Wave", "Yamaha TX-16W samples audio"];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "awaveStudio"];
+	converters   = ["sox", "awaveStudio[matchType:magic]"];
 }

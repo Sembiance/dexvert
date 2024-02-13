@@ -6,5 +6,5 @@ export class uhs extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/UHS";
 	ext        = [".uhs"];
 	magic      = ["Universal Hint System"];
-	converters = ["uhs2html"];
+	converters = ["uhs2html[matchType:magic]"];
 }

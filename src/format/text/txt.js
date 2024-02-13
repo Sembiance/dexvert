@@ -6,9 +6,9 @@ export class txt extends Format
 {
 	name         = "Text File";
 	website      = "http://fileformats.archiveteam.org/wiki/Plain_text";
-	magic        = TEXT_MAGIC;
 	ext          = [".txt"];
 	weakExt      = true;
+	magic        = TEXT_MAGIC;
 	priority     = this.PRIORITY.LOWEST;
 	fallback     = true;
 	untouched    = true;

@@ -302,6 +302,8 @@ const DISK_FAMILY_FORMAT_MAP =
 [
 	// Mis-classified by classify as garbage, but they do look like garbage, so we allow it and they get processed as something else instead
 	[/image\/bmp\/WATER5\.BMP$/, "archive", true],
+	[/image\/vzi\/X\.BIN$/, "image", "binaryText"],
+	[/image\/vzi\/Y\.BIN$/, "image", "binaryText"],
 
 	// These are actually mis-identified files, but I haven't come up with a good way to avoid it
 	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
@@ -315,6 +317,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/paintPro\/SKI\.BIL/, "image", "colorSTar"],
 	[/image\/pfsFirstPublisher\/DOG.ART$/, "image", "asciiArtEditor"],
 	[/other\/iBrowseCookies\/.+/, "text", true],
+	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok
@@ -345,7 +348,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/microsoftPublisher\/.+/i, "archive", true],
 	[/document\/pagePlus\/.+/i, "archive", true],
 	[/document\/quarkXPress\/10_11X14\.qxd/, "text", true],
-	[/document\/quarkXPress\/_8\.5x11\.qxd report/, "text", true],
+	[/document\/quarkXPress\/1_8\.5x11\.qxd report/, "text", true],
 	[/document\/quarkXPress\/9_8\.5X14\.qxd report/, "text", true],
 	[/document\/vCard\/.+/i, "text", true],
 	[/image\/a2Sprites\/.+/i, "text", true],

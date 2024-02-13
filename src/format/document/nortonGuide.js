@@ -6,5 +6,5 @@ export class nortonGuide extends Format
 	website    = "https://en.wikipedia.org/wiki/Norton_Guides";
 	ext        = [".ng"];
 	magic      = ["Norton Guide"];
-	converters = ["ng2html"];
+	converters = ["ng2html[matchType:magic]"];
 }

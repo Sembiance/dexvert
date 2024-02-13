@@ -1,0 +1,3 @@
+#!/bin/bash
+
+DENO_DIR=/mnt/compendium/.deno DENO_NO_UPDATE_CHECK=1 DENO_NO_PACKAGE_JSON=1 deno run --v8-flags=--max-old-space-size=32768,--enable-experimental-regexp-engine-on-excessive-backtracks --import-map /mnt/compendium/DevLab/deno/importMap.json --no-check --no-config --no-lock --unstable --allow-all fuzz.js "$@"

@@ -37,5 +37,5 @@ export class rol extends Format
 		});
 	};
 	metaProvider = ["musicInfo"];
-	converters   = ["adplay", "rol2mus", "rol2midi"];
+	converters   = ["adplay", "rol2mus", "rol2midi[matchType:magic]"];
 }

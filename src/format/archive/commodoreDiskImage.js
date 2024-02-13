@@ -11,5 +11,5 @@ export class commodoreDiskImage extends Format
 		".d81" : 819_200
 	};
 	matchFileSize = true;
-	converters    = ["c1541", "deark[module:d64]", "DirMaster"];
+	converters    = ["c1541", "deark[module:d64][matchType:magic]", "DirMaster"];
 }

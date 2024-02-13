@@ -7,5 +7,5 @@ export class psionWVE extends Format
 	ext          = [".wve", ".sdn"];
 	magic        = ["Psion Series 3 audio"];
 	metaProvider = ["soxi"];
-	converters   = ["sox", "ffmpeg[outType:mp3]", "awaveStudio"];
+	converters   = ["sox", "ffmpeg[outType:mp3]", "awaveStudio[matchType:magic]"];
 }

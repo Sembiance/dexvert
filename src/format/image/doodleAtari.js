@@ -7,5 +7,6 @@ export class doodleAtari extends Format
 	ext           = [".doo", ".art"];
 	fileSize      = 32000;
 	matchFileSize = true;
+	classify      = true;
 	converters    = ["deark[module:doodle]", "recoil2png"];
 }

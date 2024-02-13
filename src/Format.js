@@ -105,7 +105,7 @@ export class Format
 			weakExt        : {types : ["boolean", Array]},
 
 			// identification - filename
-			filename     : {type : ["string", RegExp]},
+			filename     : {type : [RegExp]},
 			weakFilename : {type : "boolean"},
 
 			// identification - filename

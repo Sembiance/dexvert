@@ -7,5 +7,5 @@ export class soundFont2 extends Format
 	ext            = [".sf2", ".sbk"];
 	magic          = [/^RIFF \(little-endian\) data,? SoundFont\/Bank/, "Standard SoundFont"];
 	forbiddenMagic = ["Emu Sound Font (v1.0)"];
-	converters     = ["soundFont2tomp3", "awaveStudio"];
+	converters     = ["soundFont2tomp3", "awaveStudio[matchType:magic]"];
 }

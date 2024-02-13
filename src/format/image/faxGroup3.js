@@ -9,6 +9,7 @@ export class faxGroup3 extends Format
 	metaProvider = ["image"];
 	// So all we have is an extension match and garbage .g3 files will convert into garabge sadly. abydosconvert can also convert these but is a bit more loosey goosey. keyViewPro claims support, but doesn't work
 	// There isn't anything else I've found that I can do about it though, we're already checking meta and classifying it for garbage
+	// Just have to put up with .g3 files sometimes being identified as this and translating into garabge
 	converters   = ["gimp", "nconvert", "convert"];
 	classify     = true;
 

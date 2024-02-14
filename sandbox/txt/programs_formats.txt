@@ -10911,3 +10911,20 @@ PNM
 PAM
 SuperPaint
 SIC (Sabine Icon)
+
+>>> Graphic Workshop (dos)  http://discmaster.textfiles.com/view/17093/Technotools%20(Chestnut%20CD-ROM)(1993).ISO/utils/gws/gws.doc
+Macpaint
+GEM/IMG
+PC Paintbrush PCX
+CompuServe GIF
+TIFF
+WordPerfect Graphics WPG
+Deluxe Paint/Amiga IFF/LBM
+PC Paint Pictor PIC
+Truevision Targa TGA
+Windows 3 BMP
+Microsoft Paint MSP
+Encapsulated PostScript EPS
+Self-displaying EXE pictures 
+Text files
+Halo CUT 

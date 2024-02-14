@@ -1,13 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Create a test/fuzz.js
-It will load all formats, that are supported.
-Create a fuzzExt()
-For each format and each extension in each format, it will generate a file with random bytes with a random size between 4k and 32k with the corresponding extension. It will then try to dexvert that file and see if any output is produced.
-I could produce maybe X random files for each attempt so I can better get an idea as to which formats may need to be tightened up.
-Could also do a fuzzByFilesize that would do the same as above but onoy for formats that list file size and will are those file sizes.
-
 * Improve RAG support by updating to latest recoil: https://sourceforge.net/p/recoil/bugs/74/
   See how it performs against current image/rag samples (specifically rraa9.rag)
   Sounds like there is no way to auto-detect these files and thus would need to rename the extension of these

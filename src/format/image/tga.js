@@ -10,12 +10,12 @@ export class tga extends Format
 	metaProvider = ["image"];
 	
 	// ImageMagick sometimes doesn't detect that a TGA image has been rotated. These other converters seem to do a better job at that
-	// Only deark, corelDRAW & pv were able to correctly handle flag_b32.tga
+	// Only deark, corelDRAW, pv and photoDraw were able to correctly handle flag_b32.tga
 	// picturePublisher also supports TGA but bad TGA's have a tendency to cause the program to freeze so bad that the AutoIt script freezes up too (see sandbox/samples/HangsPicturePublisher.tga)
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	converters = [
 		"deark[module:tga]", "iio2png", "iconvert",
-		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]",
+		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
 		"nconvert", "recoil2png", "gimp",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas[strongMatch]"
 	];

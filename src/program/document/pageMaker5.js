@@ -47,4 +47,4 @@ export class pageMaker5 extends Program
 	});
 	renameOut = true;
 }
-// Pptd40nt.exe
+

@@ -10928,3 +10928,27 @@ Encapsulated PostScript EPS
 Self-displaying EXE pictures 
 Text files
 Halo CUT 
+
+
+>>> PhotoDraw 2000 https://archive.org/details/PhotoDraw2000V2
+PhotoDraw 2000 .mix
+AutoCAD Format 2-D .dxf
+Computer Graphics Metafile .cgm
+Corel Draw .cdr
+Encapsulated PostScript .eps
+Flashpix .fpx
+Graphics Interchange Format .gif
+JPEG File Interchange Format .jpg
+Kodak Photo CD .pcd
+Macintosh PICT .pct .pict
+Micrografx Designer/Draw .drw
+Microsoft Image Composer .mic
+PC Painbrush .pcx
+Photoshop Files .psd
+Picture It! Format .MIX
+Portable Network Graphics .png
+Tagged Image File Format .tif .tiff
+Targa .tga
+Windows Bitmap .bmp .dib .rle
+Windows Metafile .wmf .emf
+WordPerfect Graphics .wpg

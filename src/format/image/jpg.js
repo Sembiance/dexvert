@@ -18,7 +18,9 @@ export class jpg extends Format
 		if(dexState.hasMagics("Macintosh JPEG bitmap (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.jpg]");
 		r.push("iconvert", "iio2png");
-		r.push("imageAlchemy", "pv[matchType:magic]");	// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but imageAlchemy/pv are flexible and can handle them
+
+		// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but these programs can handle it
+		r.push("imageAlchemy", "pv[matchType:magic]", "photoDraw");
 		return r;
 	};
 }

@@ -7,6 +7,6 @@ export class micrografxDraw extends Format
 	ext            = [".drw", ".drt", ".ds4", ".dsf"];
 	forbidExtMatch = true;
 	magic          = ["Micrografx Designer Drawing", "Micrografx Designer Graphics", /^x-fmt\/(294|295)( |$)/];
-	converters     = ["scribus", "corelDRAW", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
+	converters     = ["scribus", "corelDRAW", "hiJaakExpress", "photoDraw", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
 	verify         = ({meta}) => meta.colorCount>1;
 }

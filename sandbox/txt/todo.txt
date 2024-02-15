@@ -1,25 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Improve RAG support by updating to latest recoil: https://sourceforge.net/p/recoil/bugs/74/
-  See how it performs against current image/rag samples (specifically rraa9.rag)
-  Sounds like there is no way to auto-detect these files and thus would need to rename the extension of these
-  If that turns out to be the case, that's not really something that can be done in a project like dexvert handling 'unnknown' files
-
 * Add AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Note: Already have some samples
 
-* Add the .mix format (READ VERY CAREFULLY! 3 different .mix formats, some of which I may already support!):
-    https://preservation.tylerthorsted.com/2023/12/29/picture-it/
-	http://fileformats.archiveteam.org/wiki/MIX_(Picture_It!)
-	https://archive.org/details/microsoft_graphics_studio_-_picture_it_99
-
 * Add support for: http://justsolve.archiveteam.org/wiki/InstallIt!
-
-* Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
-  Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
-  If host is omitted or is localhost then open locally.
-  If host is a remote host then use vncRemote command
 
 * See if I can handle these: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
 
@@ -115,6 +100,11 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
+  Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
+  If host is omitted or is localhost then open locally.
+  If host is a remote host then use vncRemote command
+
 * See if I can detect and extract the compressed files in sandbox/fail/unsupportedCompression/*
   Maybe something from: https://www.sac.sk/files.php?d=7&l=
 

@@ -9,5 +9,14 @@ export class dxf extends Format
 	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format", /^fmt\/(63|77|435)( |$)/];
 
 	// corelDRAW often will just output a blank white image
-	converters = ["ezdxf", "irfanView", "soffice[outType:svg][autoCropSVG]", "uniconvertor", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
+	converters = [
+		// vector
+		"ezdxf", "soffice[outType:svg][autoCropSVG]", "uniconvertor",
+		
+		// raster
+		"photoDraw", "irfanView",
+		
+		// raster
+		"corelPhotoPaint", "canvas[matchType:magic][nonRaster]"
+	];
 }

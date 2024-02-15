@@ -17,7 +17,12 @@ export class eps extends Format
 		const r = [];
 		if(dexState.hasMagics("Macintosh Encapsulated Postscript (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.eps]");
-		r.push("ps2pdf[fromEPS][svg]", "inkscape", "deark[module:eps]", "gimp", "nconvert", "corelDRAW", "hiJaakExpress", "canvas[matchType:magic][nonRaster]", "picturePublisher", "keyViewPro");
+		
+		// vector
+		r.push("ps2pdf[fromEPS][svg]", "inkscape");
+		
+		// raster
+		r.push("photoDraw", "deark[module:eps]", "gimp", "nconvert", "corelDRAW", "hiJaakExpress", "canvas[matchType:magic][nonRaster]", "picturePublisher", "keyViewPro");
 		return r;
 	};
 }

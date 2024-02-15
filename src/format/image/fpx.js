@@ -8,5 +8,5 @@ export class fpx extends Format
 	mimeType     = "image/vnd.fpx";
 	magic        = ["Kodak FlashPix bitmap", /^OLE 2 Compound Document.*FlashPIX/];
 	metaProvider = ["image"];
-	converters   = ["convert", "corelPhotoPaint"];	// canvas also supports this format, but only in a non-raster way which I don't trust enough with this generatic magic/ext
+	converters   = ["convert", "photoDraw", "corelPhotoPaint"];	// canvas also supports this format, but only in a non-raster way which I don't trust enough with this generatic magic/ext
 }

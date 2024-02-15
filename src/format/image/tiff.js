@@ -19,7 +19,7 @@ export class tiff extends Format
 		if(dexState.hasMagics("Macintosh TIFF bitmap (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.tiff]");
 		r.push("deark[module:tiff][noThumbs]", "convert", "iconvert", "iio2png");
-		r.push("imageAlchemy", "graphicWorkshopProfessional", "hiJaakExpress", "imjview", "gimp", "corelPhotoPaint", "canvas", "tomsViewer", "picturePublisher", "corelDRAW", "keyViewPro", "pv[matchType:magic]");
+		r.push("imageAlchemy", "graphicWorkshopProfessional", "photoDraw", "hiJaakExpress", "imjview", "gimp", "corelPhotoPaint", "canvas", "tomsViewer", "picturePublisher", "corelDRAW", "keyViewPro", "pv[matchType:magic]");
 		return r;
 	};
 }

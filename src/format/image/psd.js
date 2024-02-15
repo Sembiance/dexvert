@@ -11,5 +11,7 @@ export class psd extends Format
 
 	// I made the decision to just use regular convert, which will extract ALL layers from the PSD.
 	// I could in theory just extract the 'main' image by doing: ensuring convert calls with `${filePath}[0]`
-	converters = ["convert", "iio2png", "gimp", "deark[module:psd]", "iconvert", "hiJaakExpress", "corelPhotoPaint", "canvas", "tomsViewer", "picturePublisher"];
+	converters = [
+		"convert", "iio2png", "gimp", "deark[module:psd]", "iconvert",
+		"hiJaakExpress", "corelPhotoPaint", "photoDraw", "canvas", "tomsViewer", "picturePublisher"];
 }

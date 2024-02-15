@@ -10,7 +10,11 @@ export class wmf extends Format
 	notes        = "Some WMF files like 001.WMF just have an embedded PNG. So the initial programs that convert to SVG will fail, and fall back to convert which will produce a PNG.";
 	metaProvider = ["image"];
 	converters   = [
-		"wmf2svg", "uniconvertor", "soffice[outType:svg]", "convert", "iio2png",
-		"keyViewPro", "corelDRAW", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"
+		// vector
+		"wmf2svg", "uniconvertor", "soffice[outType:svg]",
+
+		// raster
+		"convert", "iio2png",
+		"photoDraw", "keyViewPro", "corelDRAW", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"
 	];
 }

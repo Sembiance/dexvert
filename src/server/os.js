@@ -94,7 +94,7 @@ export class os extends Server
 		const emuOpts = {detached : true, cwd : instance.dirPath, env : {}};
 		if(instance.debug)
 		{
-			emuOpts.env.DISPLAY = (Deno.hostname()==="crystalsummit" ? ":0.1" : ":0");
+			emuOpts.env.DISPLAY = ":0";
 			emuOpts.env.EMU86BOX_MOUSE = "evdev";
 		}
 		else

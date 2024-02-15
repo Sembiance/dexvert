@@ -37,7 +37,7 @@ export class file extends Program
 		}
 
 		fileMatches.push(fileMatch);
-		r.meta.detections = fileMatches.filter(v => !!v).map((v, i) => Detection.create({value : v.trim(), from : "file", confidence : 100-i, file : r.f.input}));
+		r.meta.detections = fileMatches.filter(v => !!v).map((v, i) => Detection.create({value : v.trim().replace(/[^ -~]+/g, ""), from : "file", confidence : 100-i, file : r.f.input}));
 	};
 	renameOut = false;
 }

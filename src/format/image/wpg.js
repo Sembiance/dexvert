@@ -9,5 +9,5 @@ export class wpg extends Format
 	mimeType     = "image/x-wpg";
 	notes        = "It's a vector format, but convert usually fails to produce a usable SVG";
 	metaProvider = ["image"];
-	converters   = ["convert", "deark[module:wpg]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "keyViewPro", "hiJaakExpress", "corelPhotoPaint", "pv[matchType:magic]", "canvas[matchType:magic][nonRaster]"];
+	converters   = ["convert", "deark[module:wpg]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "keyViewPro", "photoDraw", "hiJaakExpress", "corelPhotoPaint", "pv[matchType:magic]", "canvas[matchType:magic][nonRaster]"];
 }

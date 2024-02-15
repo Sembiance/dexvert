@@ -15,8 +15,8 @@ export class bmp extends Format
 		const r = [];
 		if(dexState.hasMagics("Mac BMP bitmap (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.bmp]");
-		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert", "ffmpeg[outType:png]");
-		r.push("keyViewPro", "graphicWorkshopProfessional");
+		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert", "ffmpeg[format:bmp_pipe][outType:png]");
+		r.push("keyViewPro", "graphicWorkshopProfessional", "photoDraw");
 		r.push(...["imageAlchemy", "hiJaakExpress", "corelPhotoPaint", "canvas", "tomsViewer", "pv[strongMatch]"].map(v => `${v}[strongMatch]`));
 		return r;
 	};

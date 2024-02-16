@@ -316,6 +316,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/deskMatePaint\/set_mask\.pnt$/, "image", "prismPaint"],
 	[/image\/paintPro\/SKI\.BIL/, "image", "colorSTar"],
 	[/image\/pfsFirstPublisher\/DOG.ART$/, "image", "asciiArtEditor"],
+	[/image\/rawBitmap\/MMAP14.RAW$/, "text", "txt"],
+	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],

@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {serialUtil} from "/mnt/compendium/DevLab/xpriv/xpriv.js";
+import {fileUtil} from "xutil";
 
 export class IsoBuster extends Program
 {
@@ -40,6 +41,17 @@ export class IsoBuster extends Program
 			
 			WaitForPID("IsoBuster.exe", ${xu.MINUTE*3})`
 	});
+
+	// Some old apple disk copy images like archive/appleDiskCopy/Portal1.image produces these info files which we don't care about
+	postExec = async r =>
+	{
+		const fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
+		for(const fileOutputPath of fileOutputPaths)
+		{
+			if(fileOutputPath.endsWith(":AFP_AfpInfo"))
+				await fileUtil.unlink(fileOutputPath);
+		}
+	};
 
 	renameOut = false;
 }

@@ -6,5 +6,5 @@ export class telepaint extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/TelePaint/Splash_graphics";
 	ext         = [".ss", ".st"];
 	magic       = ["Telepaint canvas/stamp bitmap"];
-	unsupported = true;
+	converters  = ["telepaintConvert"];
 }

@@ -1,0 +1,35 @@
+InstallIt! 2.04: programmer's DOS application installer.                     
+DOS JAN99 UTILITY INSTALLER PROGRAMMER DISTRIBUTION SETUP            
+FILES: ii204.zip
+
+Author: Rick Pedley    
+Registration: $25
+Category: File Utilities
+E-mail: coffeerp@adan.kingston.net
+
+* New in 2.04: Support for languages other than English added,
+  currently Catalan, Dutch, German, Hungarian, and Spanish.
+
+* Now installs to drive partitions larger than 2 GB.
+
+InstallIt! is a small, feature-packed, easy-to-use DOS application
+installer, designed for the programmer who wants a professional-
+looking, hassle-free installation. There is no script language to
+learn; just run the configuration utility and fill in the prompts.
+Online help available at all times. All configuration data is written
+to the INSTALL executable. Supports popular dearchivers and also has
+its own decompression routines built-in -- no need to rely on an
+external utility. Recurses subdirectories up to 20 levels deep. Is
+able to rejoin large files spanning as many as 20 disks. Final size
+of INSTALL.EXE is 49K, 33K compressed with an EXE compressor.
+
+InstallIt! comes with a number of other utilities: a file browser,
+slideshow utility, text screen capture TSR, file chopper, and others.
+Upon purchasing InstallIt!, you receive a registration key that
+enables youto convert any future shareware release to a registered
+version in your name; no nickel-and-diming for updates. Tech support
+by email, snail mail, or voice.
+
+Hardware Requirements: PC-compatible, color monitor preferable.
+
+Other Requirements: DOS, no unusual memory restrictions.

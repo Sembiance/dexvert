@@ -7,6 +7,7 @@ export class anex86FDI extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Anex86_PC98_floppy_image";
 	ext         = [".fdi"];
 	magic       = ["Anex86 PC98 floppy image"];
+	priority    = this.PRIORITY.LOW;
 	notes       = xu.trim`
 		The DiskExplorer/editdisk program is supposed to read these, but it fails on my sample files. 
 		Removing the 4k header and attempting to mount the raw image sometimes fails, likely because of a disk format unique to PC98. But it's better than nothing

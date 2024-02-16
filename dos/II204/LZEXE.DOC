@@ -1,0 +1,97 @@
+Documentation for:
+-------------------
+LZEXE.EXE v0.91 (á-release) (c) 1989 Fabrice BELLARD
+Compressor for EXE files.
+
+
+This program is in the public domain (FREEWARE), and you can therefore
+use, copy and distribute it freely.  You can also utilize it commercially,
+i.e. you can use it on programs you intend to sell.  However, the sale of
+LZEXE.EXE itself is forbidden.
+
+
+Requirements:  PC and compatibles.  80286 or 80386 microprocessors are
+recommended  for greater execution speed.
+
+
+1-Introduction
+--------------
+
+This utility compresses EXE files, namely executable files, while
+leaving them executable!
+
+
+2-Using LZEXE
+-------------
+
+Usage is very simple: just enter the command line
+
+                 LZEXE filename
+
+where filename is the EXE file to be compressed.  The extension .EXE is
+implied by default. "path" is optional: it refers to the directory where
+the compacted file and the temporary working file LZTMP.EXE are to be
+located.
+
+There is a way to force LZEXE to accept a COM file: just use COMTOEXE by the
+same author.  It works like EXE2BIN in reverse.
+
+For greater safety LZEXE does not erase the original EXE file, but it renames
+it with the extension .OLD.  In addition it creates the temporary file
+LZEXE.TMP which is renamed with the name of the original program only at the
+end of the compression process.
+
+3-Usage tips
+------------
+
+Certain files can not be compressed for various reasons:
+
+-  The file is not a true EXE file.  Solution: use COMTOEXE.EXE.
+-  The relocation table is too large. To understand this you need to know
+   the internal structure of an EXE file: such a file can occupy several
+   segments unlike COM files.  Thus it must contain a table specifying where
+   to branch and where to call subprograms, etc... And if the program is
+   rather large  it may confuse the compressor.  I have provided for a table
+   with up to 16,000 relocation addresses, which should suffice for almost
+   all EXE files.
+-  The file you wish to compress has already been compressed by LZEXE.
+   Notice that there exists another compressor:   Microsoft's EXEPACK.EXE,
+   which however is far less efficient than LZEXE.  LZEXE can further
+   compress an EXEPACKed file, if you use UPACKEXE to unpack what EXEPACK
+   has done.
+-  Sometimes the compression factor is not significant.  This may happen with
+   very small files (less than 2K).  Normally the compression is quite
+   substantial.
+
+
+-  A more serious problem: certain compressed EXE file may hang the system:
+
+    -  If the program checks its size (like Turbo Debugger for example).
+    -  If it checks for its integrity on disk.
+    -  If it uses overlays, which must be loaded later and thus must occupy
+       occupy fixed position in the file.  LZEXE 0.91 warns you of the
+       presence of such overlays.
+    -  Programs that require Microsoft's Windows:  they are not true EXE
+       and will not work properly if compressed with LZEXE.
+    -  This list may grow, since I have not experimented with all types
+       of EXE files.
+
+
+-  A less serious problem: Certain programs use configuration options that
+   modify the code (Turbo  Pascal, for example).
+   In this case, first configure the program, then compress it.  (Always
+   keep an uncompressed version for safety.)
+
+
+That's all!!!
+
+    This decompressor is by itself a little jewel of 8086 assembler
+programming. It goes without saying that it was hard work.  But the
+compressor was not much easier, particularly with regard to the updating
+all the pointers that the decompressor needs in order to function.
+
+
+    Fabrice BELLARD
+    451 chemin du mas de Matour
+    34790 GRABELS  (FRANCE)
+

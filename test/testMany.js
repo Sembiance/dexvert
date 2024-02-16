@@ -149,6 +149,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 						<th>qty</th>
 						<th>pass</th>
 						<th>fail</th>
+						<th>new</th>
 						<th>duration</th>
 					</tr>
 				</thead>
@@ -158,6 +159,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
 						<td class="${(+o.successPercentage || 0)<10 ? "red" : ((+o.successPercentage || 0) < 40 ? "orange" : ((+o.successPercentage || 0) < 100 ? "yellow" : "good"))}">${o.successPercentage || "0"}%</td>
 						<td class="${+o.failCount ? "bad" : "good"}">${o.failCount.toLocaleString()}</td>
+						<td class="${+o.newSuccessesCount ? "bad" : "good"}">${(o.newSuccessesCount || 0).toLocaleString()}</td>
 						<td>${o.elapsed.msAsHumanReadable()}</td>
 					</tr>`).join("")}
 				</tbody>

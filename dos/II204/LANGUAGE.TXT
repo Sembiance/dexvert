@@ -1,0 +1,561 @@
+My goal for the next few versions of InstallIt! is to add support for
+languages other than English. In version 2.04 I have provided two
+different methods of offering language selection to the user; the
+programmer chooses the method that best suits his needs. There are
+only six languages available currently, but with your help I hope
+to offer more!
+
+I do not have proficiency in any language other than English, so I need
+the help of those whose native tongue is other than English to translate
+the various prompts, instructions, and error messages in INSTALL. If you
+feel inclined to help with a translation, PLEASE CONTACT ME FIRST at
+coffeerp@adan.kingston.net (Rick Pedley) to find out whether the trans-
+lation for the particular language you had in mind has not already been
+done by someone else. (I especially still need French, but please check
+with me first.)
+
+To each person who first contacts me by email and provides a complete
+translation in a particular language, I will give a free, single-user
+licence registration key for InstallIt!, good for all current and
+future releases of the program.
+
+As new translations are received, they will be included in subsequent
+versions of InstallIt!, beginning with version 2.04. They are freely
+available on the Internet, and a registered user can register them using
+the same key.
+
+This document contains a list of all literal strings inside the INSTALL.EXE
+file that must be translated into another language. I have tried to allow
+a little extra space where possible, realizing that many languages require
+more space than English to say the same thing. Please follow these general
+rules when translating:
+
+1. Use a DOS text editor that allows you to embed ALT-numeric keypad
+   sequences for high-ASCII characters, e.g. ALT-1-6-4 prints "¤" (or
+   key them in directly if your keyboard is set up for the language).
+   Set the cursor to overstrike mode so the spacing is correctly
+   maintained between the > and < delimiting symbols. Save the file as
+   ASCII text, no formatting or printing commands in it. Don't use any
+   characters below ASCII 32 (20 hex).
+
+2. Maintain the same case, upper and lower, YES --> OUI, no --> non
+
+3. Maintain the same punctuation, e.g. a comma or a colon at the end
+   if one appears in the original text.
+
+4. All text must be left-justified, and don't worry about spacing at
+   either end of the text; spaces will be added later, automatically,
+   where needed. So all of the space you see for a particular string
+   is available for text. All text must fit inside the > < symbols below
+   the English text.
+
+5. A translated string can be shorter than the English equivalent, but
+   NOT any longer. If there is not enough room, try a) re-phrasing the
+   text so it has roughly the same meaning; b) omitting words like
+   "the" and "a", e.g. Put a disk in the drive --> Put disk in drive;
+   c) using abbreviations for long words. Below many of the items I
+   offer replacement phrases that are synonyms for the originals;
+   perhaps these will be easier or shorter to translate. Each of these
+   begins with an * and are not intended to be edited.
+
+6. In some cases I have added text inside []'s, to help indicate what
+   a text string refers to. Don't try to translate anything inside the
+   square brackets, and don't worry about adding spaces on either side
+   of them; that is all taken care of. They are there only to provide
+   context.
+   
+7. A translated string must not contain a double quotation mark (").
+   Nor should there be any at either end of the string, just the < and
+   > symbols.
+
+8. Email this entire file as a file attachment, not as part of a message,
+   to coffeerp@adan.kingston.net. Name it SWEDISH.TXT, FRENCH.TXT, etc.
+
+
+==============================================================================
+
+"CANNOT LOCATE A HARD DRIVE ON WHICH TO INSTALL APPLICATION.      "
+>                                                                 <- translation goes in here
+
+* could be "YOUR SYSTEM DOES NOT HAVE A HARD DRIVE." or "NO HARD DRIVE FOUND."
+
+
+
+"SUBDIRECTORY NOT FOUND.      "
+>                             <
+
+* could be "PATH NOT FOUND."
+
+
+
+"DRIVE/DISK NOT READY OR WRONG DISK.      "
+>                                         <
+
+* could be "CHECK DRIVE AND DISK."
+
+
+
+"CANNOT FIND FILE:       "[filename]
+>                        <
+
+
+
+"PATH TOO LONG (EXCEEDS 64 CHARACTERS).       "
+>                                             <
+
+* if space is a problem, shorten to "PATH NAME TOO LONG."
+
+
+
+"INSTALLATION TO SAME DIRECTORY AS SOURCE FILES NOT PERMITTED.      "
+>                                                                   <
+
+* could be "MUST INSTALL TO A DIFFERENT DIRECTORY."
+
+
+
+"HAVING TROUBLE READING       "[filename]
+>                             <
+
+* could be "CANNOT READ"
+
+
+
+"Quit to DOS      "
+>                 <
+
+* could be "Exit to DOS", "Exit to system", "Exit Installer", "Return to system"
+
+
+
+"To abort the installation, press Esc.      "
+>                                           <
+
+* could be "To halt installation, press Esc."
+
+
+
+"Enter a new drive and subdirectory:"
+>                                   <
+
+* sorry, no extra room on this one, it must fit within the same space.
+* Maybe use "Enter new drive and path:"
+
+
+
+"INSTALLATION NOT PERMITTED TO DRIVE       "[C:]
+>                                          <
+
+* could be "CANNOT INSTALL ON DRIVE", or "INSTALLATION PROHIBITED ON DRIVE"
+
+
+
+"INSTALLATION HAS BEEN ABORTED.      "
+>                                    <
+
+* could be "INSTALLATION HAS BEEN HALTED."
+
+
+
+"Use Arrows, Number keys, and Enter to select an item.      "
+>                                                           <
+
+
+
+"DISK/DRIVE NOT READY OR DRIVE NOT AVAILABLE.      "
+>                                                  <
+
+
+
+"SOME SUBDIRECTORIES ARE NESTED TOO DEEPLY TO BE INSTALLED.      "
+>                                                                <
+
+* could be "DIRECTORIES NESTED TOO DEEPLY" if more space is needed.
+
+
+
+"DISK IS FULL.      "
+>                   <
+
+* could be "NO SPACE REMAINING."
+
+
+
+"CANNOT TRANSFER FILE:       "[filename]
+>                            <
+
+* could be "CANNOT COPY FILE:"
+
+
+
+"CANNOT FIND DEARCHIVER:       "[e.g. pkunzip.exe]
+>                              <
+
+* could be "...DECOMPRESSOR:", "...UNPACKER:"
+
+
+
+"FILE NOT FOUND      "
+>                    <
+
+
+
+"PATH NOT FOUND      "
+>                    <
+
+
+
+"ACCESS DENIED      "
+>                   <
+
+
+
+"DRIVE NOT READY      "
+>                     <
+
+
+
+"SEEK ERROR      "
+>                <
+
+* could be "READ ERROR"
+
+
+
+"SECTOR NOT FOUND      "
+>                      <
+
+* could be "READ ERROR"
+
+
+
+"READ FAULT      "
+>                <
+
+* could be "READ ERROR"
+
+
+
+"FATAL ERROR      "
+>                 <
+
+
+
+"CRC ERROR      "
+>               <
+
+
+
+"ARJ SECURITY ERROR      "
+>                        <
+
+* could be "ARJ ERROR"
+
+
+
+"DISK FULL OR WRITE ERROR      "
+>                              <
+
+
+
+"CAN'T OPEN ARCHIVE OR FILE      "
+>                                <
+
+* could be "ERROR READING ARCHIVE"
+
+
+
+"USER ERROR (BAD PARAMETERS)      "
+>                                 <
+
+* could be just "BAD PARAMETERS USED" or "USER ERROR"
+
+
+
+"NOT ENOUGH MEMORY      "
+>                       <
+
+
+
+"NOT AN ARJ ARCHIVE      "
+>                        <
+
+
+
+"NOT A .ZIP FILE OR INTERRUPTED      "
+>                                    <
+
+* could be "ERROR IN .ZIP FILE"
+
+
+
+"ERROR IN SFX .EXE FILE      "
+>                            <
+
+
+
+"UNEXPECTED EOF IN .ZIP FILE      "
+>                                 <
+
+* could be "ERROR IN .ZIP FILE"
+
+
+
+"CTRL-C OR CTRL-BREAK PRESSED      "
+>                                  <
+
+
+
+"FAILED TO WRITE TEMPORARY FILE      "
+>                                    <
+
+* could be "ERROR WRITING FILE"
+
+
+
+"APPLICATION MUST BE INSTALLED FROM A FLOPPY DRIVE.      "
+>                                                        <
+
+* could be "PROGRAM MUST BE INSTALLED FROM DISKETTE."
+
+
+
+"YES    "
+>       <
+
+
+
+"no    "
+>      <
+
+
+
+"P"
+> <
+
+* as in: Press P to Print; the first letter of the word for "Print"
+
+
+
+"Install      "[Program Name]
+>             <
+
+
+
+"<< BE SURE YOU ARE RUNNING THIS INSTALLER FROM DOS OR WINDOWS MS-DOS PROMPT >>"
+>                                                                              <
+
+* could be "DO NOT RUN THIS INSTALLER FROM WINDOWS EXPLORER", "<<" & ">>" optional.
+
+
+
+"I N S T A L L E R   M E N U       "
+>                                  <
+
+* double-spaced letters not absolutely necessary if you need more space.
+
+
+
+"or Esc.     "
+>            <
+
+* as in: Press Enter to continue, or Esc.
+
+
+
+"COULDN'T WRITE BATCH FILE:        "[filename]
+>                                  <
+
+* could be "ERROR WRITING BATCH FILE:"
+
+
+
+"This text is also on disk in the file BANNER.TXT      "
+>                                                      <
+
+
+
+"Press P to print, Enter to continue.       "
+>                                           <
+
+* the letter you choose to replace P should match letter for Print in earlier section.
+
+
+
+"PRINTER IS NOT READY      "
+>                          <
+
+* could be "CHECK PRINTER STATUS"
+
+
+
+"ERROR ACCESSING BANNER.TXT      "
+>                                <
+
+* could be "ERROR READING BANNER.TXT"
+
+
+
+"Read documentation        "
+>                          <
+
+
+
+"Run        "[Program Name]
+>           <
+
+* could be "Execute", "Use", "Go to"
+
+
+
+"I N S T A L L A T I O N   C O M P L E T E      "
+>                                               <
+
+* omit double-spacing if more room needed.
+
+
+
+"Press Enter or Y to continue, N for another path, Esc to abort.           "
+>                                                                          <
+
+
+
+"Press Enter or Y to continue, or Esc to abort.           "
+>                                                         <
+
+
+
+"Transfer program files to       "[D:\THISDIR]
+>                                <
+
+* could be "Copy program files to", "Install program files to"
+
+
+
+"will be created for you if necessary      "
+>                                          <
+
+* for example: [D:\THISDIR]will be created for you if necessary
+
+
+
+"The only option is to install to        "[D:\THISDIR]
+>                                        <
+
+* could be "The application must be installed to"
+
+
+
+"To return to the Main Menu, press Esc.        "
+>                                              <
+
+
+
+"NOT ENOUGH ROOM TO INSTALL THE APPLICATION ON         "[C:]
+>                                                      <
+
+* could be "NOT ENOUGH FREE SPACE ON"
+
+
+
+"FILES/DIRECTORIES ALREADY EXIST HERE. YOU MUST CHOOSE ANOTHER TARGET PATH.    "
+>                                                                              <
+
+* could be "YOU MUST CHOOSE AN EMPTY DIRECTORY TO INSTALL PROGRAM."
+
+
+
+"FILE TO BE REJOINED IS OUT OF ORDER - INSTALLATION ABORTED            "
+>                                                                      <
+
+* could be "FILES IN WRONG ORDER - INSTALLATION HALTED"
+
+
+
+"Insert Disk #        "[1]
+>                     <
+
+
+   "in    "[A:]
+   >      <
+
+
+   "and press Enter.        "
+   >                        <
+
+* Above three are later joined to make one sentence as in
+* "Insert Disk #1 in A: and press Enter."
+
+
+
+"One moment       "
+>                 <
+
+* could be "Please wait"
+
+
+
+"ABORTING INSTALL -- COULDN'T BACKUP ALL ORIGINAL FILES -- CHECK DRIVE SPACE"
+>                                                                           <
+
+* could be "ERROR BACKING UP FILES -- INSTALLATION HALTED"
+
+
+
+"INSTALL ABORTED. CANNOT EXTRACT          "[filename]
+>                                         <
+
+* cannot extract the file from a COMPRESSd archive. Could be "..CANNOT DEARCHIVE..
+
+
+
+"DOS Error #       "[e.g. 53]
+>                  <
+
+
+
+"No new files to install from Disk #            "[1]
+>                                               <
+
+
+
+"ERROR - COULDN'T CREATE SUBDIRECTORY ON           "[C:]
+>                                                  <
+
+
+
+"Transferring  "[filename]
+>              <
+
+* could be "Copying"
+
+
+
+"Dearchiving   "[archived filename]
+>              <
+
+* could be "Decompressing" or "Unpacking" (Note to myself: duplicate this
+                                           line before processing file)
+
+
+"Processing    "[filename]
+>              <
+
+* could be "Installing"
+
+
+
+"Backing up    "[filename]
+>              <
+
+* could be "Archiving" or "Saving"
+
+
+
+"DOS Window     "
+>               <
+
+* could be "DOS Function" or "DOS Operation" or "DOS Activity"
+
+==============================================================================
+

@@ -389,6 +389,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"image/printfox",
 	"image/teletext",
 	"image/sprEd",
+	"music/euphony",
 	"music/msxBGM",
 	"music/richardJoseph",
 	"other/iBrowseCookies",
@@ -918,6 +919,7 @@ xlog.info`\n${(sampleFilePaths.length-failCount).toLocaleString()} out of ${samp
 outJSON.sampleFileCount = sampleFilePaths.length;
 outJSON.failCount = failCount;
 outJSON.testLogLines = testLogLines;
+outJSON.newSuccessesCount = newSuccesses.length;
 
 if(Object.keys(slowFiles).length>0)
 {

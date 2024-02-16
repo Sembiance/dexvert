@@ -272,7 +272,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				
 				if(m.confidenceAdjust)
 				{
-					m.confidence += m.confidenceAdjust(f.input, matchType, m.confidence);
+					m.confidence += m.confidenceAdjust(f.input, matchType, m.confidence, {detections});
 					m.confidence = Math.max(m.confidence, 1);
 					delete m.confidenceAdjust;
 				}

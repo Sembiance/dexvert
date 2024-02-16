@@ -1,30 +1,32 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Add AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
-  Note: Already have some samples
+* Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
+  Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
 
-* Add support for: http://justsolve.archiveteam.org/wiki/InstallIt!
-
-* See if I can handle these: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
-
-* Ensure the games mentioned here I support extract the graphics from: https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
-* Look into various 'Visual Novel' formats. See discmaster search: http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000
-  Would use this program (vista required, so hopefully works with wine) to convert: https://github.com/morkt/GARbro
 
 /---------------\
 | High Priority |
 \---------------/
-* Softdisk GS Apple 2GS files have Icon files that have embedded icons. This program can view them: https://github.com/dmolony/DiskBrowser/blob/master/src/com/bytezone/diskbrowser/applefile/IconFile.java
-  Doesn't look too complicated a format, could potentially convert the icons or maybe could get deark to add support for them
-
 * Track down a better, more reliable, hopefully linux based, windows resources extractor for archive/windowsResource
 
+* Get GARbro to compile with mono & dotnet under linux: https://github.com/morkt/GARbro
+  It doesn't work great under wine. Initial attempts to just 'dotnet build' show that it targets v4.6 which is pretty old.
+  I also specifically want to get this pull request that adds full command line detection & extraction support: https://github.com/morkt/GARbro/pull/394/commits   (https://github.com/Bioruebe/GARbro/tree/2112bde1cc13eb817b8d541c3bcc7a68c4f71883)
+  Then get 'detection' working first as another 'detect' program.
+  Then get extraction working, I have some possible files in test/sample/unsupported/visualNovel/ and also extract and look inside sample/archive/pc98FAT12/ archives
+  Maybe more samples from:
+  	https://archive.org/details/pc-98_20230120
+  	https://www.pc98.org/main.html
+	http://discmaster.textfiles.com/browse/1123
+	https://strangecomforts.com/the-strange-world-of-japans-pc-98-computer/
+	https://archive.org/search?query=visual+novel&and%5B%5D=mediatype%3A%22software%22
+  	Old IADL (http://iadl.retromission.com/items?collectionid=cd-roms&collectionid=cdrom_contributions&collectionid=cdromimages&collectionid=cdromsoftware&collectionid=%40asromix&collectionid=%40gingerbeardman&collectionid=%40iamxray&collectionid=%40pascal_of_irate&collectionid=%40sembiance&collectionid=%40shivashaw&collectionid=adultcdroms&collectionid=ftpsites&collectionid=softwarecapsules&collectionid=softwarelibrary_mature&subject=visual%20novel&title=&priority=999&minfiles=0&maxfiles=0&minsize=0&maxsize=0&limit=1000)
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Add image/telepaint support using the DOS S`HOWSS.EXE /T 5 <file>`  which will show the image for 5 seconds, during which time I can take a screenshot
+* See if I can handle these: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
 
 * image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right. It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
   Perhaps get deark to add support for this format.
@@ -38,8 +40,9 @@
   audio/downloadableSoundBank			Sometimes not all .mp3 files are produced (shell.dls)
   music/smus							Sometimes works, sometimes doesn't. aboutmodern.smus is particularily sensitive
 
-* When DiscMaster was around, encountered several BitRock installers with this search: http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
-  These may be able to be extracted using: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+* Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
+  I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
+  But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
 * Would be nice to take this Java program and make a CLI conversion program from it's code (git cloned a copy into sandbox/app/): https://github.com/kreativekorp/powerpaint
   I submitted an issue on their GitHub asking if that would be possible, or at least some help in which classes/methods to use to make it happen
@@ -64,7 +67,7 @@
   Also see if I can add IFF YAFA support
   If either of the above fails, then add below to Low Priorty: Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
 
-* Add POVRAY rendering support, see the notes in povRay.js
+* Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
   Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
 
@@ -96,6 +99,9 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 
+* Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
+  Right now I just have it as a 'simple' file using strings, of which I already have some samples for
+
 
 /--------------\
 | Low Priority |
@@ -116,7 +122,6 @@
 	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
 	image/xRes: Using sandbox/app/xRes 3.0.iso
 	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	Japanese Visual Novels: A variety of archive formats, many supported by this program: https://github.com/morkt/GARbro    Then reprocess: http://discmaster.textfiles.com/browse/1123
 	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
 	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
 

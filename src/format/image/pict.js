@@ -8,8 +8,8 @@ export class pict extends Format
 	ext            = [".pict", ".pic", ".pct"];
 	forbidExtMatch = true;	// way too common
 	mimeType       = "image/pict";
-	magic          = ["QuickDraw/PICT bitmap", "Macintosh PICT", "Claris clip art", "Macintosh Pict image (MacBinary)", /^fmt\/341( |$)/, /^x-fmt\/80( |$)/];
-	alwaysIdentify = true; // Always identify this format, even if explicitly called with asFormat image/pict, this way the matchType:magic flags below will properly apply
+	magic          = ["QuickDraw/PICT", "Macintosh Quickdraw/PICT", "Macintosh PICT", "Claris clip art", "Macintosh Pict image (MacBinary)", /^fmt\/341( |$)/, /^x-fmt\/80( |$)/];
+	alwaysIdentify = true; // Always identify this format, even if explicitly called with asFormat image/pict, this way the matchType:magic flags below will properly apply.
 	metaProvider   = ["image"];
 	converters = dexState =>
 	{
@@ -36,6 +36,7 @@ export class pict extends Format
 
 		// even though we have forbidExtMatch above, keep the [matchType:magic] here because if dexvert is explictily called with asFormat image/pict we end up here (such as chaining from deark) and we want to avoid so many slow windows program executions
 		r.push(
+			"photoDraw",
 			"canvas[matchType:magic]",		// canvas seems to properly recombine sub-bitmaps into a final image (sample/image/pict/Daniel  and  2kangaro  and  bbq)
 			"hiJaakExpress[matchType:magic]",
 			"picturePublisher[matchType:magic]"

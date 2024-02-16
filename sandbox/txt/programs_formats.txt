@@ -10952,3 +10952,26 @@ Targa .tga
 Windows Bitmap .bmp .dib .rle
 Windows Metafile .wmf .emf
 WordPerfect Graphics .wpg
+
+
+>>> 98ripper
+.hdm HDM headerless disk image
+.dcp Disk Copy Pro
+.dcu Disk Copy Pro
+.dim DIFC image
+.d88 Pasopia floppy disk image
+.fdd Virtual-98 Floppy Disk Dump
+.fdi Floppy Disk Image
+.hdi Hard Disk Image
+.dip Disk image
+.nhd T98-Next Hard Drive
+.nfd T98-Next Floppy Disk
+.fim Wizard98 Floppy Image
+FAT
+FAT8
+FAT12
+FAT16
+Elf DOS
+MAKO-DOS
+YSFS
+ISO-9660

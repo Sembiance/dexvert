@@ -174,6 +174,17 @@ const DEXMAGIC_CUSTOMS =
 		
 		if(await fileUtil.exists(path.join(r.f.input.dir, `${r.f.input.name}.cue`)))
 			return "BIN with CUE";
+	},
+	
+	async function checkInstallIt(r)
+	{
+		const f = await Deno.open(r.f.input.absolute);
+		await f.seek(-43, 2);
+		const suffix = new Uint8Array(6);
+		await f.read(suffix);
+		f.close();
+		if(suffix.indexOfX([0x43, 0x50, 0x32, 0x2E, 0x30, 0x30])===0)	// CP2.00 in hex
+			return "InstallIt! compressed file";
 	}
 ];
 

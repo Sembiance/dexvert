@@ -17,8 +17,3 @@ const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
 
-const maxPidLength = (73728).toString(36).length; // Maximum length of Deno.pid in base 36
-const maxRandomIntLength = (1294).toString(36).length; // Length of 46655 in base 36
-const maxCounterLength = (1294).toString(36).length; // Length of 1294 in base 36
-
-xlog.info`${{maxPidLength, maxRandomIntLength, maxCounterLength}}`;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (933)
+# Unsupported File Formats (931)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -140,7 +140,7 @@ document | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/file
 document | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
 document | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
 document | InterSpread Spreadsheet |  | 
-document | Lotus Symphony Worksheet | .wk1 wr1 | 
+document | Lotus Symphony Worksheet | .wk1 .wr1 | 
 document | MasterCook Cookbook | .mcf | [2 sample files](https://sembiance.com/fileFormatSamples/document/masterCook/) - Was able to open samples with sandbox/app/MasterCook7.iso in WinXP, but couldn't find an easy way to export all recipes to text or PDF. I could write a script that would manually open every recipe, select all the text and copy it and save to disk, like I do with MacroMedia, but meh, overkill for recipes.
 document | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 document | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
@@ -242,7 +242,7 @@ font | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .
 font | PrintPartner Font | .font | 
 font | Psion Font | .fon | 
 font | RIPterm Font | .fnt | 
-font | RISC OS Outline Font Data | outlines | 
+font | RISC OS Outline Font Data | .outlines | 
 font | Signum Font | .e24 | 
 font | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 font | TeX Packed Font | .pf | 
@@ -261,7 +261,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (87)
+## Image (85)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -336,12 +336,10 @@ image | Quattro Pro Clip Art | .clp |
 image | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
 image | Satori Paint | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
-image | SHF-XL Edit | .shx .shf | [2 sample files](https://sembiance.com/fileFormatSamples/image/shfXLEdit/) - Due to no known magic and how recoil2png will convert ANYTHING, we disable this for now.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 image | SkyRoads Bitmap | .lzs | 
 image | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 image | Somera Graphic Format | .sgf | 
-image | Telepaint | .ss .st | [7 sample files](https://sembiance.com/fileFormatSamples/image/telepaint/)
 image | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://sembiance.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 image | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)
 image | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
@@ -682,7 +680,7 @@ other | Linux Kernel |  |
 other | Linux Swap File |  | 
 other | LogicSim Circuit |  | 
 other | Lotus 1-2-3 Formatting Data | .fm3 | 
-other | Lotus 1-2-3 SQZ! Compressed | wq! | 
+other | Lotus 1-2-3 SQZ! Compressed | .wq! | 
 other | Lotus Approach View | .vew | 
 other | Lotus Freelance Presentation | .prz | 
 other | Lotus Magellan Viewer | .vw2 | 
@@ -852,7 +850,7 @@ other | TermInfo |  |
 other | TeX Font Metric Data | .tfm | 
 other | TeX Virtual Font | .vf | 
 other | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
-other | Thunderbyte AV | .dat .eci .ec .sig sig | 
+other | Thunderbyte AV | .dat .eci .ec .sig | 
 other | THX Tracker Instrument | .ins | 
 other | TimeZone Data | .tz | 
 other | Turbo Lightning Environment | .env | 

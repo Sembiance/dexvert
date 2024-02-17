@@ -8,24 +8,10 @@
 /---------------\
 | High Priority |
 \---------------/
-* Take this 'xv' program that runs in Linux and make a CLI tool that leverages it's support of formats to convert to PNG
-  https://gitlab.com/DavidGriffith/xv
-  Specifically I want to convert image/yanagisawaPIC2 into PNG with: https://gitlab.com/DavidGriffith/xv/-/blob/master/xvpic2.c
-  Then add all formats it support to program_formats.txt and also add xv as a converter to all dexvert formats
 
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Get the IFF-RGFX datatype installed and working in vamos: http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
-  Once it can view pictures, see about how I can convert into PNG, maybe with: https://aminet.net/package/gfx/conv/gfxcon
-  Also see if I can add IFF YAFA support
-  If either of the above fails, then add below to Low Priorty: Code my own image converter for IFF RGFX and IFF YAFA that leverages ancient to do unpacking of the data. See deark issues for more details.
-
-* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
-  Once I have that I could support certain formats like:
-	document/dartHypertext
-	document/envisionPublisherDoc
-	document/ibmStoryboardDocument
 
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
@@ -39,7 +25,8 @@
   It's possible that video/riffMultimediaMovie is actually a Director 3 Mac file already supported by ScummVM: https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
   This would entail creating a SCUMMVM based CLI tool to process these. See the comments in format/macromediaDirector.js
 
-* image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right. It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
+* image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
+  It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
   Perhaps get deark to add support for this format.
 
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
@@ -56,11 +43,20 @@
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
 * Add support music/fuxoftAYLanguage and music/ayAMAD
-  Ay_Emul can play both these, but it doesn't have CLI conversion supportso I could do either:
+  Ay_Emul can play both these, but it doesn't have CLI conversion support so I could do either:
   1. Add CLI conversion support to Ay_Emul (see email about building it from svbulba@gmail.com)
   2. Patch ZXtune (which uses Ay_Emul) to support these formats
      If I do ZXTune, submit patch here: https://bitbucket.org/zxtune/zxtune/issues/150/ay-amad-support
      In EITHER CASE, make sure I'm using the latest versions of both the above before trying
+
+* Found a handful of IFF-RGFX files in the wild, but there is no modern converter available for this format.
+  This is mostly because the 'compression' of the data within the image can be different and come from the amiga XPK lib.
+  I had asked about adding support for this to deark here: https://github.com/jsummers/deark/issues/47
+  I also asked about it for recoil: https://sourceforge.net/p/recoil/bugs/95/
+  The 'ancient' library/program supports decompression various XPK schemes, so perhaps that could be leveraged
+  I had thought about installing the datatype under vamos: http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
+  Then using some sort of converter (UltraConv or SuperView (with PNG-Box)) under Vamos, but that seems fragile and maybe won't work.
+  IFF-YAFA frame extraction may also be possible by leveraging ancient
 
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
@@ -103,6 +99,19 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Add DOS printing support to DOSBox with a patch from: https://sourceforge.net/p/dosbox/patches/?limit=250
+  I've downloaded the patch and the required fonts.zip to sandbox/app/virtualPrinter/
+  Once I have that I could support certain formats like:
+	document/dartHypertext
+	document/envisionPublisherDoc
+	document/ibmStoryboardDocument
+
+* So 'xv' claims to have supprt for image/yanagisawaPIC2
+  I compiled the latest version from: https://github.com/jasper-software/xv   (archived copy in sandbox/app/xv.tar.gz)
+  The version above has all the patches that are out there, including the jumbo patches and makes it so it builds on modern linux
+  But it couldn't open any of my sample PIC2 files.
+  If I were to get it to load them, I'd also have to add a command line '-convert' flag to auto convert the picture to .ppm
+
 * Create a util/openVNCWindows.js <host> that will dynamically determine how to open all the VNC windows
   Probably update wine and os to record down in a ram dexvert file which VNC ports are being listened on
   If host is omitted or is localhost then open locally.

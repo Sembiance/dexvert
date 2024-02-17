@@ -11225,3 +11225,37 @@ Compactor
 Zoom
 MacLHa
 DiskDoubler and AutoDoubler
+
+
+>>> xv
+BMP
+FITS
+GIF
+HIPS
+IFF
+IRIS
+JP2K
+JPEG
+MAG
+MAKI
+MGCSFX
+PBM
+PCD
+PCX
+PDS
+PI
+PIC
+PIC2
+PM
+PNG
+PSD
+RLE
+SUNRAS
+TARGA
+TIFF
+WBMP
+WEBP
+XBM
+XPM
+XWD
+ZX

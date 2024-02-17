@@ -6,7 +6,7 @@ export class zip extends Format
 	name           = "PKZip Archive";
 	website        = "http://fileformats.archiveteam.org/wiki/ZIP";
 	ext            = [".zip", ".exe"];
-	magic          = ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^x-fmt\/263( |$)/];
+	magic          = ["ZIP compressed archive", "Zip archive data", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/, "Self-extracting zip", /^x-fmt\/263( |$)/];
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>
 	{

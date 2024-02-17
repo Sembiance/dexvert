@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _COMPACT_PRO_MAGIC = ["Mac Compact Pro archive"];
+const _COMPACT_PRO_MAGIC = ["Mac Compact Pro archive", "Compact Pro"];
 export {_COMPACT_PRO_MAGIC};
 
 export class compactPro extends Format
@@ -10,5 +10,5 @@ export class compactPro extends Format
 	ext        = [".cpt"];
 	magic      = _COMPACT_PRO_MAGIC;
 	priority   = this.PRIORITY.LOW;
-	converters = ["unar[mac]"];
+	converters = ["unar[mac]", "macunpack"];
 }

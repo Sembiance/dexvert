@@ -5,7 +5,7 @@ export class compress extends Format
 	name       = "Compress Compressed (Unix)";
 	website    = "http://fileformats.archiveteam.org/wiki/Compress_(Unix)";
 	ext        = [".z", ".tz", ".taz"];
-	magic      = ["Compress compressed data", "compress'd data", "UNIX compressed data", "Z: Compress"];
+	magic      = ["Compress compressed data", "compress'd data", "UNIX compressed data", "Z: Compress", /^Compress$/];
 	packed     = true;
-	converters = ["ancient", "gunzip", "deark[module:compress]", "xfdDecrunch", "izArc"];
+	converters = ["ancient", "gunzip", "deark[module:compress]", "unar", "xfdDecrunch", "izArc"];
 }

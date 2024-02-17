@@ -5,7 +5,7 @@ export class rar extends Format
 	name         = "Roshal Archive";
 	website      = "http://fileformats.archiveteam.org/wiki/RAR";
 	ext          = [".rar", ".exe"];
-	magic        = ["RAR archive data", "RAR compressed archive", "RAR Archive", /RAR self-extracting archive/, /^fmt\/(411|613)( |$)/, /^x-fmt\/264( |$)/];
+	magic        = ["RAR archive data", "RAR compressed archive", "RAR Archive", /RAR self-extracting archive/, /^RAR$/, /^RAR 5$/, "Embedded RAR", /^fmt\/(411|613)( |$)/, /^x-fmt\/264( |$)/];
 	auxFiles     = (input, otherFiles) =>
 	{
 		// if we are a whatever.r## file and there IS a whatever.rar file, don't do anything further, as the extraction of whatever.rar will get the files
@@ -17,7 +17,7 @@ export class rar extends Format
 		return pieces.length>0 ? pieces : false;
 	};
 
-	converters   = ["unrar", "sqc", "izArc", "UniExtract"];
+	converters   = ["unrar", "unar", "sqc", "izArc", "UniExtract"];
 	metaProvider = ["rarInfo"];
 	untouched    = dexState => !!dexState.meta.passwordProtected;
 	post         = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="unrar")?.meta || {});

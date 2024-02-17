@@ -5,7 +5,7 @@ export class xz extends Format
 	name       = "XZ Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/XZ";
 	ext        = [".xz"];
-	magic      = ["XZ compressed data", "xz compressed container", /^fmt\/1098( |$)/];
+	magic      = ["XZ compressed data", "xz compressed container", /^XZ$/, /^fmt\/1098( |$)/];
 	packed     = true;
 	converters = ["xz", "sevenZip", "unar", "UniExtract"];
 }

@@ -179,6 +179,10 @@ const DEXMAGIC_CUSTOMS =
 	async function checkInstallIt(r)
 	{
 		const f = await Deno.open(r.f.input.absolute);
+		const {size} = await f.stat();
+		if(size<43)
+			return;
+
 		await f.seek(-43, 2);
 		const suffix = new Uint8Array(6);
 		await f.read(suffix);

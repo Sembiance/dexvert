@@ -6,6 +6,6 @@ export class sevenZip extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/7z";
 	ext        = [".7z"];
 	mimeType   = "application/x-7z-compressed";
-	magic      = ["7Zip format", "7-zip archive data", "7-Zip compressed archive", /^fmt\/484( |$)/];
-	converters = ["sevenZip", "sqc", "UniExtract"];
+	magic      = ["7Zip format", "7-zip archive data", "7-Zip compressed archive", /^7-Zip$/, /^fmt\/484( |$)/];
+	converters = ["sevenZip", "unar", "sqc", "UniExtract"];
 }

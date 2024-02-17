@@ -6,7 +6,7 @@ export class lzx extends Format
 	name       = "Lempel-Ziv Archive";
 	website    = "http://fileformats.archiveteam.org/wiki/LZX";
 	ext        = [".lzx"];
-	magic      = ["LZX compressed archive", "LZX Amiga compressed archive"];
+	magic      = ["LZX compressed archive", "LZX Amiga compressed archive", /^LZX$/];
 	converters = ["unar", "unlzx", "UniExtract"];
 	post = async dexState =>
 	{

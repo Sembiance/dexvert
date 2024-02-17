@@ -34,7 +34,7 @@ export class iso extends Format
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
 	forbidExtMatch = [".img", ".bin"];	// way too common
 
-	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "BIN with CUE", /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
+	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "BIN with CUE", /^ISO 9660$/, /^fmt\/468( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
 	weakMagic      = _MACBINARY_MAGIC;
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 

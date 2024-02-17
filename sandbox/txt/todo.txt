@@ -97,7 +97,6 @@
 	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
 	image/xRes: Using sandbox/app/xRes 3.0.iso
 	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	Stuffit Expander for Stuffit-X files might work in 64bit Vista? http://discmaster.textfiles.com/search?q=sitx&qfields=ext&formatid=unknown
 	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
 
 

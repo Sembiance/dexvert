@@ -1946,8 +1946,6 @@ NSIS Supports many different versions, starting from version 1.1o
 EXE Many kinds of .exe self-extracting formats are supported. However, if you find one that is not, please post an issue on the bug tracker. 
 ISO ISO 9660 CDROM filesystem images, and also .bin raw images. 
 Split files Can join files named .001, .002 that do not use any extra wrapper format.
-
-Supported old formats
 StuffIt Can unpack all files I've been able to locate. 
 StuffIt X Can unpack many files, some more obscure features are still unsupported. JPEG compression is also unsupported. 
 DiskDoubler All compression algorithms are implemented, but a few rare ones are untested. If you have some files that do not work, please post them in issue 149 on the bug tracker. 
@@ -11214,3 +11212,16 @@ Supported filesystems that can read
 ├───────────────────────────┤
 │ Symbian Installation File │
 └───────────────────────────┘
+
+>>> macutils https://github.com/wnayes/macutils
+BinHex 5.0, MacBinary 1.0 and UMCP (with caveat)
+Compress It
+ShrinkToFit
+MacCompress
+PackIt
+StuffIt and StuffIt Deluxe
+Diamond
+Compactor
+Zoom
+MacLHa
+DiskDoubler and AutoDoubler

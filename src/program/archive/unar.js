@@ -5,7 +5,7 @@ import {path} from "std";
 
 export class unar extends Program
 {
-	website = "https://unarchiver.c3.cx/";
+	website = "https://github.com/incbee/Unarchiver";
 	package = "app-arch/unar";
 	flags   = {
 		"mac"  : "Set this flag to treat the files extracted as mac files and rename them",

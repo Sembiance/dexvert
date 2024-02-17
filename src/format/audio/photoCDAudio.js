@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class photoCDAudio extends Format
 {
 	name           = "PhotoCD Audio";
+	website        = "http://fileformats.archiveteam.org/wiki/Photo_CD_Audio";
 	ext            = [".pcd"];
 	forbidExtMatch = true;
 	filename       = [/^audio\d+\.pcd$/i];

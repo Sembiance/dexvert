@@ -16,6 +16,8 @@ export class pc98ripper extends Program
 		const outDirs = await fileUtil.tree(outDirPath, {nofile : true, depth : 1});
 		if(outDirs.length!==1)
 			return;
+
+		// rename the root dir to a temp name just to avoid collisions
 		const tmpDirName = await fileUtil.genTempPath(outDirPath);
 		await Deno.rename(outDirs[0], tmpDirName);
 

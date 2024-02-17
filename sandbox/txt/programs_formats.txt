@@ -10863,35 +10863,35 @@ XWD				X11 Window Dump Format
 
 
 >>> ImTools/LibIm (old unix code that doesn't compile on modern linux, sadly)  https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
-     bmp    Microsoft Windows bitmap image file
-     cur    Microsoft Windows cursor image file
-     eps    Adobe Encapsulated PostScript file
-     gif    Compuserve Graphics image file
-     hdf    Hierarchical Data File
-     ico    Microsoft Windows icon image file
-     icon   Sun Icon and Cursor file
-     iff    Sun TAAC Image File Format
-     jpeg   JPEG image file format
-     miff   ImageMagick's image file format
-     mpnt   Apple Macintosh MacPaint file
-     pbm    PBM Portable Bit, Gray, and Pixel Map files
-     pcx    ZSoft IBM PC Paintbrush file
-     pic    PIXAR picture file
-     pict   Apple Macintosh QuickDraw/PICT file
-     pix    Alias image file
-     ps     Adobe PostScript file
-     ras    Sun Rasterfile
-     rgb    SGI RGB image file
-     rla    Wavefront raster image file
-     rle    Utah Run length encoded image file
-     synu   SDSC Synu image file
-     tga    Truevision Targa image file
-     tiff   Tagged image file
-     viff   Khoros Visualization image file
-     x      AVS X image file
-     xbm    X11 bitmap file
-     xpm    X11 pixmap file
-     xwd    X Window System window dump image file
+bmp    Microsoft Windows bitmap image file
+cur    Microsoft Windows cursor image file
+eps    Adobe Encapsulated PostScript file
+gif    Compuserve Graphics image file
+hdf    Hierarchical Data File
+ico    Microsoft Windows icon image file
+icon   Sun Icon and Cursor file
+iff    Sun TAAC Image File Format
+jpeg   JPEG image file format
+miff   ImageMagick's image file format
+mpnt   Apple Macintosh MacPaint file
+pbm    PBM Portable Bit, Gray, and Pixel Map files
+pcx    ZSoft IBM PC Paintbrush file
+pic    PIXAR picture file
+pict   Apple Macintosh QuickDraw/PICT file
+pix    Alias image file
+ps     Adobe PostScript file
+ras    Sun Rasterfile
+rgb    SGI RGB image file
+rla    Wavefront raster image file
+rle    Utah Run length encoded image file
+synu   SDSC Synu image file
+tga    Truevision Targa image file
+tiff   Tagged image file
+viff   Khoros Visualization image file
+x      AVS X image file
+xbm    X11 bitmap file
+xpm    X11 pixmap file
+xwd    X Window System window dump image file
 
 
 
@@ -10975,3 +10975,242 @@ Elf DOS
 MAKO-DOS
 YSFS
 ISO-9660
+
+
+>>> aaru https://github.com/aaru-dps/Aaru
+ filters (9):  
+┌─────────────┐
+│ Filter      │
+├─────────────┤
+│ AppleDouble │
+│ AppleSingle │
+│ BZip2       │
+│ GZip        │
+│ LZip        │
+│ MacBinary   │
+│ No filter   │
+│ PCExchange  │
+│ XZ          │
+└─────────────┘
+
+      Read-only media image formats (24):      
+┌─────────────────────────────────────────────┐
+│ Media image format                          │
+├─────────────────────────────────────────────┤
+│ A2R                                         │
+│ Aaru Format                                 │
+│ ACT Apricot Disk Image                      │
+│ Alcohol 120% Media Descriptor Structure     │
+│ Anex86 Disk Image                           │
+│ Apple ][ Interleaved Disk Image             │
+│ Apple 2IMG                                  │
+│ Apple Disk Archival/Retrieval Tool          │
+│ Apple DiskCopy 4.2                          │
+│ Apple New Disk Image Format                 │
+│ Apple NIB                                   │
+│ Apple Universal Disk Image Format           │
+│ Basic Lisa Utility                          │
+│ BlindWrite 4                                │
+│ BlindWrite 5                                │
+│ CDRDAO tocfile                              │
+│ CDRWin cuesheet                             │
+│ CisCopy Disk Image (DC-File)                │
+│ CloneCD                                     │
+│ CopyTape                                    │
+│ CPCEMU Disk-File and Extended CPC Disk-File │
+│ d2f disk image                              │
+│ D88 Disk Image                              │
+│ Digital Research DiskCopy                   │
+│ DIM Disk Image                              │
+│ DiscFerret                                  │
+│ DiscJuggler                                 │
+│ DiskDupe DDI Disk Image                     │
+│ Dreamcast GDI image                         │
+│ Dunfield's IMD                              │
+│ HD-Copy disk image                          │
+│ IBM SaveDskF                                │
+│ KryoFlux STREAM                             │
+│ MAME Compressed Hunks of Data               │
+│ MAXI Disk image                             │
+│ Microsoft VHDX                              │
+│ Nero Burning ROM image                      │
+│ Parallels disk image                        │
+│ PartClone disk image                        │
+│ Partimage disk image                        │
+│ QEMU Copy-On-Write disk image               │
+│ QEMU Copy-On-Write disk image v2            │
+│ QEMU Enhanced Disk image                    │
+│ Raw Disk Image                              │
+│ Ray Arachelian's Disk IMage                 │
+│ RS-IDE Hard Disk Image                      │
+│ Spectrum Floppy Disk Image                  │
+│ SuperCardPro                                │
+│ Sydex CopyQM                                │
+│ Sydex TeleDisk                              │
+│ T98 Hard Disk Image                         │
+│ T98-Next NHD r0 Disk Image                  │
+│ Virtual PC                                  │
+│ Virtual98 Disk Image                        │
+│ VirtualBox Disk Image                       │
+│ VMware disk image                           │
+└─────────────────────────────────────────────┘
+
+    Read/write media image formats (40):   
+┌─────────────────────────────────────────┐
+│ Media image format                      │
+├─────────────────────────────────────────┤
+│ A2R                                     │
+│ Aaru Format                             │
+│ ACT Apricot Disk Image                  │
+│ Alcohol 120% Media Descriptor Structure │
+│ Anex86 Disk Image                       │
+│ Apple ][ Interleaved Disk Image         │
+│ Apple 2IMG                              │
+│ Apple DiskCopy 4.2                      │
+│ Apple Universal Disk Image Format       │
+│ Atari Lynx                              │
+│ Basic Lisa Utility                      │
+│ CDRDAO tocfile                          │
+│ CDRWin cuesheet                         │
+│ CisCopy Disk Image (DC-File)            │
+│ CloneCD                                 │
+│ CopyTape                                │
+│ Digital Research DiskCopy               │
+│ IBM SaveDskF                            │
+│ iNES                                    │
+│ MAXI Disk image                         │
+│ Nintendo 64                             │
+│ Nintendo Game Boy                       │
+│ Nintendo Game Boy Advance               │
+│ Parallels disk image                    │
+│ QEMU Copy-On-Write disk image           │
+│ QEMU Copy-On-Write disk image v2        │
+│ QEMU Enhanced Disk image                │
+│ Raw Disk Image                          │
+│ Ray Arachelian's Disk IMage             │
+│ RS-IDE Hard Disk Image                  │
+│ Sega Game Gear / Master System          │
+│ Sega Mega Drive / 32X / Pico            │
+│ Super Nintendo                          │
+│ SuperCardPro                            │
+│ T98 Hard Disk Image                     │
+│ T98-Next NHD r0 Disk Image              │
+│ Virtual PC                              │
+│ Virtual98 Disk Image                    │
+│ VirtualBox Disk Image                   │
+│ VMware disk image                       │
+└─────────────────────────────────────────┘
+
+   Supported filesystems for identification and     
+               information only (55):               
+┌──────────────────────────────────────────────────┐
+│ Filesystem                                       │
+├──────────────────────────────────────────────────┤
+│ Acorn Advanced Disc Filing System                │
+│ Alexander Osipov DOS file system                 │
+│ Amiga DOS filesystem                             │
+│ Apple File System                                │
+│ Apple HFS+ filesystem                            │
+│ Apple Hierarchical File System                   │
+│ Apple ProDOS filesystem                          │
+│ AtheOS Filesystem                                │
+│ B-tree file system                               │
+│ Be Filesystem                                    │
+│ BSD Fast File System (aka UNIX File System, UFS) │
+│ Commodore file system                            │
+│ Cram filesystem                                  │
+│ dump(8) Plugin                                   │
+│ ECMA-67                                          │
+│ Extent File System Plugin                        │
+│ F2FS Plugin                                      │
+│ Files-11 On-Disk Structure                       │
+│ Fossil Filesystem Plugin                         │
+│ HAMMER Filesystem                                │
+│ High Performance Optical File System             │
+│ HP Logical Interchange Format Plugin             │
+│ JFS Plugin                                       │
+│ Linux extended Filesystem                        │
+│ Linux extended Filesystem 2, 3 and 4             │
+│ Locus Filesystem Plugin                          │
+│ MicroDOS file system                             │
+│ Microsoft Extended File Allocation Table         │
+│ Minix Filesystem                                 │
+│ New Technology File System (NTFS)                │
+│ NILFS2 Plugin                                    │
+│ Nintendo optical filesystems                     │
+│ OS-9 Random Block File Plugin                    │
+│ OS/2 High Performance File System                │
+│ PC Engine CD Plugin                              │
+│ PC-FX Plugin                                     │
+│ Professional File System                         │
+│ QNX4 Plugin                                      │
+│ QNX6 Plugin                                      │
+│ Reiser Filesystem Plugin                         │
+│ Reiser4 Filesystem Plugin                        │
+│ Resilient File System plugin                     │
+│ RT-11 file system                                │
+│ SmartFileSystem                                  │
+│ Solar_OS filesystem                              │
+│ Squash filesystem                                │
+│ UNICOS Filesystem Plugin                         │
+│ Universal Disk Format                            │
+│ UNIX Boot filesystem                             │
+│ UNIX System V filesystem                         │
+│ Veritas filesystem                               │
+│ VMware filesystem                                │
+│ XFS Filesystem Plugin                            │
+│ Xia filesystem                                   │
+│ ZFS Filesystem Plugin                            │
+└──────────────────────────────────────────────────┘
+
+Supported filesystems that can read
+        their contents (9):        
+┌─────────────────────────────────┐
+│ Filesystem                      │
+├─────────────────────────────────┤
+│ Apple DOS File System           │
+│ Apple Lisa File System          │
+│ Apple Macintosh File System     │
+│ CP/M File System                │
+│ FATX Filesystem Plugin          │
+│ ISO9660 Filesystem              │
+│ Microsoft File Allocation Table │
+│ Opera Filesystem Plugin         │
+│ U.C.S.D. Pascal filesystem      │
+└─────────────────────────────────┘
+
+  Supported partitioning schemes  
+              (21):               
+┌────────────────────────────────┐
+│ Scheme                         │
+├────────────────────────────────┤
+│ Acorn FileCore partitions      │
+│ ACT Apricot partitions         │
+│ Amiga Rigid Disk Block         │
+│ Apple Partition Map            │
+│ Atari partitions               │
+│ BSD disklabel                  │
+│ DEC disklabel                  │
+│ DragonFly BSD 64-bit disklabel │
+│ GUID Partition Table           │
+│ Human 68k partitions           │
+│ Master Boot Record             │
+│ NEC PC-9800 partition table    │
+│ NeXT Disklabel                 │
+│ Plan9 partition table          │
+│ Rio Karma partitioning         │
+│ SGI Disk Volume Header         │
+│ Sun Disklabel                  │
+│ UNIX hardwired                 │
+│ UNIX VTOC                      │
+│ Xbox partitioning              │
+│ XENIX                          │
+└────────────────────────────────┘
+
+ Supported archive formats   
+            (1):             
+┌───────────────────────────┐
+│ Archive format            │
+├───────────────────────────┤
+│ Symbian Installation File │
+└───────────────────────────┘

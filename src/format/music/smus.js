@@ -8,7 +8,7 @@ const STANDARD_INSTRUMENTS_FILE_PATHS = await fileUtil.tree(path.join(xu.dirname
 export class smus extends Format
 {
 	name    = "Simple Musical Score";
-	website = "http://fileformats.archiveteam.org/wiki/Amiga_Module";
+	website = "http://fileformats.archiveteam.org/wiki/SMUS";
 	ext     = [".smus", ".song"];
 	magic   = ["SMUS IFF Simple Musical Score", "IFF data, SMUS simple music"];
 	notes   = xu.trim`

@@ -165,9 +165,10 @@ export class iso extends Format
 					if(dexState.original.input.ext.toLowerCase()===".iso")
 						r.push("unar[matchType:magic]"); 	// Magazine Rack.iso can only being extracted with unar, weird
 
+					r.push("aaru");
 					r.push("deark[module:cd_raw] -> dexvert[skipVerify][bulkCopyOut]");
 
-					// IsoBuster outputs crappy :AFP_Reource/:AFP_AfpInfo suffixes for all filenames for Apple images, so don't ever use it for those. Might be a way to disable this, but meh, prefer my own hfsutils method
+					// IsoBuster works here, but I prefer my own hfsutils implementation
 					if(!dexState.hasMagics(HFS_MAGICS) && !dexState.hasMagics(_APPLE_DISK_COPY_MAGIC))
 						r.push("IsoBuster[matchType:magic]");
 				}

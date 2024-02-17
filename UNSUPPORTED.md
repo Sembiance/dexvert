@@ -152,7 +152,7 @@ document | Pen Pal Database | .flr |
 document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
-document | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Pageplus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
+document | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 document | Storybook Weaver Story | .swd .sts | 
 document | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 document | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://sembiance.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
@@ -334,7 +334,7 @@ image | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/
 image | ProShape Drawing | .psp | [5 sample files](https://sembiance.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 image | Quattro Pro Clip Art | .clp | 
 image | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
-image | Satori Paint | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
+image | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 image | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
 image | [Simple Vector Format](http://fileformats.archiveteam.org/wiki/Simple_Vector_Format) | .svf | [5 sample files](https://sembiance.com/fileFormatSamples/image/simpleVectorFormat/)
 image | SkyRoads Bitmap | .lzs | 
@@ -922,7 +922,7 @@ poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Ca
 poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [12 sample files](https://sembiance.com/fileFormatSamples/poly/cinema4D/)
 poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://sembiance.com/fileFormatSamples/poly/cyberStudioCAD3D/)
-poly | Direct3D Object | .x | [1 sample file](https://sembiance.com/fileFormatSamples/poly/direct3DObject/)
+poly | [Direct3D Object](http://fileformats.archiveteam.org/wiki/X_(DirectX)) | .x | [1 sample file](https://sembiance.com/fileFormatSamples/poly/direct3DObject/)
 poly | DynaCADD Part | .prt .dpt | 
 poly | Electric Image 3D File | .fact | 
 poly | ESRI/ArcView Shape | .shp | 

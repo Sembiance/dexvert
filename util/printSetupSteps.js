@@ -41,6 +41,7 @@ const postPackages =
 [
 	// these require mono which is 'fully' installed later
 	"media-gfx/pablodraw",
+	"app-arch/Aaru",
 
 	// dunno why these don't work in the 'big' emerge, but best done after and in a smaller batch
 	"games-util/EasyRPG-Tools"
@@ -65,5 +66,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0`,	// required for uniconvertor
 	`cd /usr/bin && ln -s scribus-1.6 scribus`,	// require for scribus
 	`sudo su - sembiance`,
+	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
+	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver`
 ].forEach(line => console.log(line));

@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class ediInstallLZSS2 extends Format
 {
 	name           = "EDI Install LZSS2 Compressed Data";
+	website        = "http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file";
 	ext            = ["$"];
 	forbidExtMatch = true;
 	packed         = true;

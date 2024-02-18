@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class a2gsSHStar extends Format
 {
 	name       = "Apple IIGS SH3/SHR";
+	website    = "http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats";
 	ext        = [".sh3", ".shr"];
 	filename   = [/#C0000[012]$/];	// eslint-disable-line unicorn/better-regex
 	fileSize   = {".sh3" : 38400, ".shr" : [38400, "*"]};

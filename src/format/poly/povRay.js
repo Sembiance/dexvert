@@ -15,5 +15,6 @@ export class povRay extends Format
 		I have compiled povray1 as dexvert/bin/povray/povray1
 		Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory
 		Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case
-		POVRAY1 also generates broken TGA output that only seem to convert with nconvert`;
+		POVRAY1 also generates broken TGA output that only seem to convert with nconvert
+		Lastly, it would be ideal to convert to a modern 3D/scene format as part of the 'poly' improvement phase`;
 }

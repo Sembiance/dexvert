@@ -4,6 +4,7 @@ import {_MOV_MAGIC, _MOV_EXT} from "../video/mov.js";
 export class quickTimeAudio extends Format
 {
 	name             = "Apple QuickTime Audio";
+	website          = "http://fileformats.archiveteam.org/wiki/QuickTime";
 	ext              = _MOV_EXT;
 	magic            = _MOV_MAGIC;
 	confidenceAdjust = () => -10;	// Reduce by 10 so that mov matches first

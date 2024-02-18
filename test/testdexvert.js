@@ -353,6 +353,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/document\/quarkXPress\/1_8\.5x11\.qxd report/, "text", true],
 	[/document\/quarkXPress\/9_8\.5X14\.qxd report/, "text", true],
 	[/document\/vCard\/.+/i, "text", true],
+	[/executable\/dll\/emxlibc\.dll/i, "executable", "exe"],
 	[/image\/a2Sprites\/.+/i, "text", true],
 	[/image\/excelChart\/.+/i, "document", "xls"],
 	[/image\/fiasco\/(b1|large|medium|small).fco/, "text", "txt"],

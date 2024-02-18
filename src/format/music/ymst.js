@@ -4,6 +4,7 @@ import {Format} from "../../Format.js";
 export class ymst extends Format
 {
 	name         = "YMST Module";
+	website      = "http://fileformats.archiveteam.org/wiki/YM";
 	ext          = [".ymst", ".ym"];
 	keepFilename = true;	// required because they they may reference _replay files
 	magic        = ["YM2149 song"];

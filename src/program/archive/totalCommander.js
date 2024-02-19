@@ -10,11 +10,11 @@ export class totalCommander extends Program
 	notes   = "Has the plugin: https://totalcmd.net/plugring/resextract.html";
 	osData  = ({
 		script : `
-			Pause()
-			$mainWindow = WindowRequire("Total Commander", "", 10)
-			Send("{END}!{F9}")
+			$mainWindow = WindowRequire("Total Commander 11.02 - ", "", 10)
+			Sleep(500)
+			Send("!{F9}")
 			$unpackWindow = WindowRequire("Unpack files", "", 10)
-			Send("{TAB}{TAB}{TAB}{TAB}O{ENTER}")
+			Send("{ENTER}")
 			WinWaitClose($unpackWindow, "", 15)
 			WinWaitActive($mainWindow, "", 60)
 			Send("!f")

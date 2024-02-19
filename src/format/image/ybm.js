@@ -9,5 +9,5 @@ export class ybm extends Format
 	forbidExtMatch = [".bm"];
 	magic          = ["Bennet Yee's face format bitmap"];
 	forbiddenMagic = TEXT_MAGIC;
-	converters     = ["ybmtopbm[strongMatch]", "deark[module:ybm][matchType:magic][strongMatch]"];
+	converters     = ["ybmtopbm[matchType:magic]", "deark[module:ybm][matchType:magic]"];
 }

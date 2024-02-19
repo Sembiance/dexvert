@@ -31,7 +31,7 @@ const outJSON = {};
 argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.format;
 
 // These formats should be skipped entirely for one reason or another
-export const SKIP_FORMATS =
+const SKIP_FORMATS =
 [
 	// these take AGES to extract, just WAY too long
 	"archive/printArtist"

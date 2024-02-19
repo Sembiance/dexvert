@@ -47,10 +47,10 @@ export class canvas extends Program
 			; I'd love to check this directly with a text check byut 
 			; so I have to resort to using a PxelChecksum. Not sure how fragile this is or not
 			SendSlow("!fi")
-			$propWindow = WindowRequire("Document Properties", "", 5)
+			$propWindow = WindowRequire("Document Properties", "", 10)
 			Send("+{TAB}+{TAB}+{TAB}{HOME}{RIGHT}")
 
-			Sleep(1000)
+			Sleep(1500)
 			
 			Local $propsCheckSum = PixelChecksum(115, 247, 142, 305, 1, $propWindow)
 			Send("{ESCAPE}")

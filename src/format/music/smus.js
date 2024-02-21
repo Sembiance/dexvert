@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 import {fileUtil} from "xutil";
 import {path} from "std";
 
-const STANDARD_INSTRUMENTS_FILE_PATHS = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "..", "music", "smusInstrument"), {nodir : true});
+const STANDARD_INSTRUMENTS_FILE_PATHS = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "..", "music", "smusInstrument"), {nodir : true});
 
 export class smus extends Format
 {

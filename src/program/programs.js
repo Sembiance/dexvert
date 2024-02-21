@@ -9,7 +9,7 @@ export {programs};
 
 let initCalled = false;
 
-const programDirPath = path.join(xu.dirname(import.meta), "..", "..", "src", "program");
+const programDirPath = path.join(import.meta.dirname, "..", "..", "src", "program");
 
 async function loadProgramFilePath(programFilePath, {reload}={})
 {

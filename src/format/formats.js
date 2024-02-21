@@ -10,7 +10,7 @@ export {formats};
 
 let initCalled = false;
 
-const formatDirPath = path.join(xu.dirname(import.meta), "..", "..", "src", "format");
+const formatDirPath = path.join(import.meta.dirname, "..", "..", "src", "format");
 
 async function loadFormatFilePath(formatFilePath, {reload}={})
 {

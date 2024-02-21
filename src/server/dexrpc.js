@@ -32,7 +32,7 @@ export class dexrpc extends Server
 				runEnv[key] = value;
 		}
 
-		await this.pool.start(path.join(xu.dirname(import.meta), "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv});
+		await this.pool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv});
 		this.xlog.info`${DEX_WORKER_COUNT} workers ready!`;
 
 		this.xlog.info`Starting web RPC...`;

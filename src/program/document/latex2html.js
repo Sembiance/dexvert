@@ -24,7 +24,7 @@ export class latex2html extends Program
 		killChildren : true,
 
 		// Specify where our texmf files live
-		env : {TEXINPUTS : path.join(xu.dirname(import.meta), "..", "..", "..", "texmf")}
+		env : {TEXINPUTS : path.join(import.meta.dirname, "..", "..", "..", "texmf")}
 	});
 	args = r => ["-tmp", r.f.root, "-noinfo", "-html_version", "3.2,unicode,frame,math", "-image_type", "png", "-dir", r.outDir(), r.inFile()];
 

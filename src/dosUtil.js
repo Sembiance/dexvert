@@ -3,7 +3,7 @@ import {fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
 import {FileSet} from "./FileSet.js";
 import {Program} from "./Program.js";
-const DOS_SRC_PATH = path.join(xu.dirname(import.meta), "..", "dos");
+const DOS_SRC_PATH = path.join(import.meta.dirname, "..", "dos");
 
 // Keys from: https://sourceforge.net/p/dosbox/code-0/HEAD/tree/dosbox/trunk/include/keyboard.h
 const LOWERCASE = [null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Escape", "Tab", "Backspace", "Enter", " ", "LeftAlt", "RightAlt", "LeftControl", "RightControl", "LeftShift", "RightShift", "CapsLock", "ScrollLock", "NumLock", "`", "-", "=", "\\", "[", "]", ";", '"', ".", ",", "/", null, "PrintScreen", "Pause", "Insert", "Home", "PageUp", "Delete", "End", "PageDown", "Left", "Up", "Down", "Right", "KP1", "KP2", "KP3", "KP4", "KP5", "KP6", "KP7", "KP8", "KP9", "KP0", "KPDivide", "KPMultiply", "KPMinus", "KPPlus", "KPEnter", "KPPeriod"];

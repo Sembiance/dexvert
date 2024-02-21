@@ -42,7 +42,7 @@ await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
 {
 	underway.add(formatid);
 	const formatStartedAt = performance.now();
-	const {stdout} = await runUtil.run("deno", runUtil.denoArgs("testdexvert.js", `--format=${formatid}`, "--json"), runUtil.denoRunOpts({cwd : xu.dirname(import.meta)}));
+	const {stdout} = await runUtil.run("deno", runUtil.denoArgs("testdexvert.js", `--format=${formatid}`, "--json"), runUtil.denoRunOpts({cwd : import.meta.dirname}));
 	const formatElapsed = performance.now()-formatStartedAt;
 	const testData = xu.parseJSON(stdout);
 	underway.delete(formatid);

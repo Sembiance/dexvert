@@ -8,7 +8,7 @@ import {FileSet} from "../../src/FileSet.js";
 import {Identification} from "../../src/Identification.js";
 import {programs, init as initPrograms} from "../../src/program/programs.js";
 
-const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
+const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
 
 const DUMMY_FILE_PATH = await fileUtil.genTempPath();
 await fileUtil.writeTextFile(DUMMY_FILE_PATH, "x");
@@ -23,7 +23,7 @@ export default async function buildSUPPORTED(xlog)
 	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 
 	xlog.info`Writing SUPPORTED.md to disk...`;
-	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
+	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "SUPPORTED.md"), `# Supported File Formats (${Object.keys(supportedFormats).length.toLocaleString()})
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.

@@ -7,7 +7,7 @@ export const WINE_WEB_HOST = "127.0.0.1";
 export const WINE_WEB_PORT = 17737;
 export const WINESERVER_VNC_BASE_PORT = 9940;
 
-export const WINE_PREFIX_SRC = path.join(xu.dirname(import.meta), "..", "wine");
+export const WINE_PREFIX_SRC = path.join(import.meta.dirname, "..", "wine");
 export const WINE_PREFIX = "/mnt/ram/dexvert/wine";
 
 export function getWineDriveC(base)

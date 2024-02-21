@@ -21,7 +21,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog("info");
 
-const stashDirPath = path.join(xu.dirname(import.meta), "..", "..", "test", "sample", argv.familyFormat);
+const stashDirPath = path.join(import.meta.dirname, "..", "..", "test", "sample", argv.familyFormat);
 if(!await fileUtil.exists(stashDirPath))
 {
 	if(!argv.create)
@@ -67,7 +67,7 @@ for(const srcFilePath of argv.inputFilePath)
 		await fileUtil.unlink(srcFilePath);
 
 	if(argv.record)
-		await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "..", "..", "test", "testdexvert.js"), "--record", `--format=${argv.familyFormat}`, `--file=${path.basename(destFilePath)}`), runUtil.denoRunOpts({liveOutput : true}));
+		await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "..", "test", "testdexvert.js"), "--record", `--format=${argv.familyFormat}`, `--file=${path.basename(destFilePath)}`), runUtil.denoRunOpts({liveOutput : true}));
 }
 
 xlog.info`\n# Samples: ${(await fileUtil.tree(stashDirPath, {nodir : true, depth : 1})).length.toLocaleString()}`;

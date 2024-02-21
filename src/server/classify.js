@@ -16,7 +16,7 @@ export class classify extends Server
 			await Deno.mkdir(path.join(CLASSIFY_PATH, name), {recursive : true});
 
 		this.xlog.info`Starting classify server...`;
-		const classifyDirPath = path.join(xu.dirname(import.meta), "..", "..", "classify");
+		const classifyDirPath = path.join(import.meta.dirname, "..", "..", "classify");
 		const runOptions = {detached : true, cwd : classifyDirPath, env : {VIRTUAL_ENV : path.join(classifyDirPath, "env")}};
 		const {p} = await runUtil.run(path.join(classifyDirPath, "env/bin/python3"), ["-X", `pycache_prefix=${path.join(CLASSIFY_PATH, "__pycache__")}`, "classifyServer.py"], runOptions);
 		this.p = p;

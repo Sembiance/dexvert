@@ -4,7 +4,7 @@ import {fileUtil} from "xutil";
 import {path} from "std";
 
 const SCRIBUS_PREF_FILENAMES = [".neversplash", "checkfonts150.xml", "prefs150.xml", "scribus150.rc", "scribusshapes.xml"];
-const SCRIBUS_PREF_SRC = path.join(xu.dirname(import.meta), "../../../scribus");
+const SCRIBUS_PREF_SRC = path.join(import.meta.dirname, "../../../scribus");
 
 export class scribus extends Program
 {

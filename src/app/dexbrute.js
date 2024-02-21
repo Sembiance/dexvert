@@ -32,7 +32,7 @@ await initPrograms(xlog);
 await initFormats(xlog);
 
 const EXCLUDE_FAMILIES = ["detect", "meta", "other", "post"];
-const PROGRAM_BASE_PATH = path.join(xu.dirname(import.meta), "..", "program");
+const PROGRAM_BASE_PATH = path.join(import.meta.dirname, "..", "program");
 const programFamilies = (await fileUtil.tree(PROGRAM_BASE_PATH, {nodir : true, regex : /.+\/.+\.js$/i})).map(v => path.relative(PROGRAM_BASE_PATH, v)).reduce((o, v) =>
 {
 	const familyid = v.split("/")[0];

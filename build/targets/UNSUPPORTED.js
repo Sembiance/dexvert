@@ -3,7 +3,7 @@ import {fileUtil} from "xutil";
 import {path} from "std";
 import {formats, init as initFormats} from "../../src/format/formats.js";
 
-const SAMPLES_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "test", "sample");
+const SAMPLES_DIR_PATH = path.join(import.meta.dirname, "..", "..", "test", "sample");
 export default async function buildUNSUPPORTED(xlog)
 {
 	await initFormats(xlog);
@@ -11,7 +11,7 @@ export default async function buildUNSUPPORTED(xlog)
 	const unsupportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => format.unsupported));
 
 	xlog.info`Writing UNSUPPORTED.md to disk...`;
-	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
+	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "UNSUPPORTED.md"), `# Unsupported File Formats (${Object.keys(unsupportedFormats).length.toLocaleString()})
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.

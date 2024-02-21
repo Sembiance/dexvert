@@ -14,7 +14,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog();
 
-const SAMPLE_DIR_PATH = path.join(xu.dirname(import.meta), "sample");
+const SAMPLE_DIR_PATH = path.join(import.meta.dirname, "sample");
 
 const samplePaths = await fileUtil.tree(SAMPLE_DIR_PATH, {depth : 1, sort : true});
 if(argv.sample)
@@ -30,11 +30,11 @@ async function testSample(samplePath)
 	const outDirPath = await fileUtil.genTempPath(undefined, `-testrecurse-${path.basename(samplePath)}`);
 	await Deno.mkdir(outDirPath);
 
-	await runUtil.run("deno", runUtil.denoArgs("dexrecurse.js", samplePath, outDirPath), runUtil.denoRunOpts({cwd : path.join(xu.dirname(import.meta), "..", "..", "src", "app"), liveOutput : true}));
+	await runUtil.run("deno", runUtil.denoArgs("dexrecurse.js", samplePath, outDirPath), runUtil.denoRunOpts({cwd : path.join(import.meta.dirname, "..", "..", "src", "app"), liveOutput : true}));
 	
 	xlog.info`Finished, gathering results...`;
 
-	const expectedDirPath = path.join(xu.dirname(import.meta), "expected", path.basename(samplePath));
+	const expectedDirPath = path.join(import.meta.dirname, "expected", path.basename(samplePath));
 	const resultFiles = await fileUtil.tree(outDirPath, {relative : true});
 	if(argv.record)
 	{

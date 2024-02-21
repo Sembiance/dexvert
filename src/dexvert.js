@@ -103,7 +103,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 		const f = await originalInputFileSet.rsyncTo(cwd);
 
 		// create a unique 'out' dir and output our files there, this avoids issues where various programs choke on output paths that contain odd characters
-		const outDirPath = await fileUtil.genTempPath(cwd, "");	// we specify an empty string for a suffix to ensure the default .tmp isn't used. This ensures that the length is never more than 8 characters which is max in DOS
+		const outDirPath = await fileUtil.genTempPath(cwd, "", {maxFilenameLength : 8});	// specify an empty string for a suffix to ensure the default .tmp isn't used. Further specify a max filename of 8 to be MS-DOS compatible
 		await Deno.mkdir(outDirPath, {recursive : true});
 		await f.add("outDir", outDirPath);
 

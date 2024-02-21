@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 import {fileUtil} from "xutil";
 import {path} from "std";
 
-const STANDARD_BANK_FILE_PATHS = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "..", "music", "rolBank"), {nodir : true});
+const STANDARD_BANK_FILE_PATHS = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "..", "music", "rolBank"), {nodir : true});
 
 export class rol extends Format
 {

@@ -677,7 +677,7 @@ export class Program
 
 			f = await FileSet.create(srcFiles[0].root, "input", safeFiles || srcFiles);
 			
-			const outDirPath = await fileUtil.genTempPath(undefined, "");	// an empty suffix ensures no .tmp default suffix and won't generate a path > 8 chars which would be a problem for DOS
+			const outDirPath = await fileUtil.genTempPath(undefined, "", {maxFilenameLength : 8});	// an empty suffix ensures no .tmp default suffix and won't generate a path > 8 chars which would be a problem for DOS
 			await Deno.mkdir(outDirPath, {recursive : true});
 			await f.add("outDir", outDirPath);
 
@@ -798,7 +798,7 @@ export class Program
 	// forms a path to dexvert/bin/{rel}
 	static binPath(rel)
 	{
-		return path.join(xu.dirname(import.meta), "..", "bin", rel);
+		return path.join(import.meta.dirname, "..", "bin", rel);
 	}
 
 	// returns args needed to call a sub deno script

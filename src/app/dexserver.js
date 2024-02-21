@@ -3,8 +3,6 @@ import {XLog} from "xlog";
 import {fileUtil, runUtil, cmdUtil} from "xutil";
 import {path, delay} from "std";
 
-await runUtil.checkNumserver();
-
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexserver",
 	version : "1.0.0",
@@ -21,7 +19,7 @@ const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
 const SERVER_ORDER = ["dexrpc", "siegfried", "os", "wine", "classify"];
 
-const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(xu.dirname(import.meta), `../server/${serverid}.js`)))[serverid].create(xlog)]));
+const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(import.meta.dirname, `../server/${serverid}.js`)))[serverid].create(xlog)]));
 
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {

@@ -51,7 +51,7 @@ const HTTP_OUT_DIR_PATH = path.join(HTTP_DIR_PATH, "out");
 
 const INSTANCES = {};
 const RUN_QUEUE = new Set();
-const OS_DIR_PATH = path.join(xu.dirname(import.meta), "..", "..", "os");
+const OS_DIR_PATH = path.join(import.meta.dirname, "..", "..", "os");
 const CHECK_QUEUE_INTERVAL = 50;
 const CHECK_QUEUE_TOO_LONG = xu.MINUTE*15;
 const CMD_DURATIONS = {};

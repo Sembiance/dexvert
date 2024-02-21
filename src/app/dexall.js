@@ -54,7 +54,7 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	const formatid = `${r.json.phase.family}/${r.json.phase.format}`;
 	if(!existingSums[formatid])
 	{
-		const existingSampleFilePaths = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "test", "sample", r.json.phase.family, r.json.phase.format), {nodir : true, depth : 1});
+		const existingSampleFilePaths = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample", r.json.phase.family, r.json.phase.format), {nodir : true, depth : 1});
 		existingSums[formatid] = await existingSampleFilePaths.parallelMap(async existingSampleFilePath => await hashUtil.hashFile("blake3", existingSampleFilePath));
 	}
 

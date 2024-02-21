@@ -40,7 +40,7 @@ xlog.info`Processing ${FILE_SIZE} bytes, doing ${atOnce} ops at once.`;
 		const outputDirPath = path.join(path.resolve(argv.outputDirPath), offset.toString());
 		await Deno.mkdir(outputDirPath, {recursive : true});
 
-		const {stdout} = await runUtil.run("deno", runUtil.denoArgs(path.join(xu.dirname(import.meta), "dexvert.js"), "--logLevel=none", "--json", tmpInputFilePath, outputDirPath), {env : runUtil.denoEnv()});
+		const {stdout} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "dexvert.js"), "--logLevel=none", "--json", tmpInputFilePath, outputDirPath), {env : runUtil.denoEnv()});
 		await fileUtil.unlink(tmpInputFilePath);
 
 		const result = xu.parseJSON(stdout, {});

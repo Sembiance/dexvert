@@ -14,7 +14,7 @@ export default async function buildREADME(xlog)
 	const supportedFormats = Object.fromEntries(Object.entries(formats).filter(([, format]) => !format.unsupported));
 
 	xlog.info`Writing README.md to disk...`;
-	await fileUtil.writeTextFile(path.join(xu.dirname(import.meta), "..", "..", "README.md"), `# dexvert - **D**ecompress **EX**tract con**VERT**
+	await fileUtil.writeTextFile(path.join(import.meta.dirname, "..", "..", "README.md"), `# dexvert - **D**ecompress **EX**tract con**VERT**
 Convert **${Object.keys(supportedFormats).length.toLocaleString()}** file formats (out of **${Object.keys(formats).length.toLocaleString()}** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats

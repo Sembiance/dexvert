@@ -13,7 +13,7 @@ const argv = cmdUtil.cmdInit({
 		family : {desc : "Restrict dup checks to a specific family", hasValue : true}
 	}});
 
-const srcSampleDirPath = path.join(xu.dirname(import.meta), "sample", argv.family || "");
+const srcSampleDirPath = path.join(import.meta.dirname, "sample", argv.family || "");
 const localSampleDirPath = path.join("/mnt/dexvert/sample", argv.family || "");
 
 xlog.info`Rsyncing sample files to local disk...`;

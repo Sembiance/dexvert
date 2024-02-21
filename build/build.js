@@ -22,5 +22,5 @@ const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES
 for(const [i, targetid] of Object.entries(targetids))
 {
 	xlog.info`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;
-	await (await import(path.join(xu.dirname(import.meta), "targets", `${targetid}.js`))).default(xlog);
+	await (await import(path.join(import.meta.dirname, "targets", `${targetid}.js`))).default(xlog);
 }

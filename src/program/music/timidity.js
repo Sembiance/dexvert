@@ -4,7 +4,7 @@ import {path} from "std";
 import {fileUtil} from "xutil";
 
 const INSTRUMENT_NAMES = ["eaw", "fluid", "roland", "creative", "freepats", "windows"];	// Ordered by best sounding
-const INSTRUMENT_DIR_PATH = path.resolve(path.join(xu.dirname(import.meta), "..", "..", "..", "music", "midiFont"));
+const INSTRUMENT_DIR_PATH = path.resolve(path.join(import.meta.dirname, "..", "..", "..", "music", "midiFont"));
 
 export class timidity extends Program
 {

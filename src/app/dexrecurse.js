@@ -198,7 +198,7 @@ if(argv.report)
 	}
 
 	xlog.info`Finding existing sample files...`;
-	const sampleFilePaths = await fileUtil.tree(path.join(xu.dirname(import.meta), "..", "..", "test", "sample"), {nodir : true, relative : true, depth : 3});
+	const sampleFilePaths = await fileUtil.tree(path.join(import.meta.dirname, "..", "..", "test", "sample"), {nodir : true, relative : true, depth : 3});
 	for(const sampleFilePath of sampleFilePaths)
 	{
 		const parts = sampleFilePath.split("/");

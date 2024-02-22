@@ -309,6 +309,8 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/linuxEXTFilesystem\/2940-sbpcd-nonet\.img$/, "archive", "iso"],
 	[/archive\/mdf\/R180 NG Media 1\.mdf$/, "archive", "iso"],
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
+	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
+	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],

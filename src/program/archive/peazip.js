@@ -7,6 +7,6 @@ export class peazip extends Program
 	package    = "app-arch/peazip";
 	bin        = "peazip";
 	runOptions = ({virtualX : true, timeout : xu.SECOND*30, killChildren : true});	// timeout is because there is no way to bypass password prompts
-	args       = r => ["-ext2simplei", r.inFile({absolute : true}), r.outDir({absolute : true})];
+	args       = r => ["-ext2simplei", r.outDir({absolute : true}), r.inFile({absolute : true})];
 	renameOut  = false;
 }

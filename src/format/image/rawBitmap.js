@@ -9,5 +9,6 @@ export class rawBitmap extends Format
 	forbiddenMagic = ["KryoFlux raw stream", ...TEXT_MAGIC];
 	fallback       = true;
 	converters     = ["tomsViewer", "nconvert"];
+	classify       = true;
 	verify         = ({meta}) => meta.height>1 && meta.width>1;
 }

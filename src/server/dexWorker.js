@@ -10,7 +10,7 @@ import {init as initFormats, monitor as monitorFormats} from "../format/formats.
 await initPrograms();
 await initFormats();
 
-if(["crystalsummit", "lostcrag"].includes(Deno.hostname()))
+if(["crystalsummit", "ridgeport"].includes(Deno.hostname()))
 {
 	await monitorFormats();
 	await monitorPrograms();

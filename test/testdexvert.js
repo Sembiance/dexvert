@@ -75,6 +75,7 @@ const FORMAT_OS_HINT =
 		"DEMO.HDB" : "fmtownsjpy"
 	},
 	"document/lotus123"    : { "_ç_[_ß_ñ_î_ñ.123" : "fmtownsjpy" },
+	"document/rtf"         : { "シェアウェア登録メールサンプル.rtf" : "macintoshjp"},
 	"document/wri"         : { "readme2.wri" : "fmtownsjpy"	},
 	"image/macBinaryImage" : { "01-1-tiff-手塚莉絵" : "macintoshjp" },
 	"image/printfox"       : "commodore",

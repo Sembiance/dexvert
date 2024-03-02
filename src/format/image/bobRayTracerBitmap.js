@@ -5,5 +5,8 @@ export class bobRayTracerBitmap extends Format
 	name       = "Bob Ray Tracer Bitmap";
 	website    = "http://fileformats.archiveteam.org/wiki/Bob_ray_tracer_bitmap";
 	ext        = [".bob"];
-	converters = ["deark[module:bob]", "nconvert", "tomsViewer"];
+	converters = [
+		"deark",	// don't specify module:bob because we don't have a strong enough match
+		"nconvert", "tomsViewer"
+	];
 }

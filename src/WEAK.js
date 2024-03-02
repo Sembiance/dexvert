@@ -273,6 +273,7 @@ export const WEAK_VALUES =
 	/^BitKeeper history data$/,
 	/^BSArc compressed archive$/,
 	/^BSC ZX Spectrum tape data$/,
+	/^BSP bitmap$/,
 	/^C64 Hires bitmap$/,
 	/^Calcomp raster bitmap$/,
 	/^Cardwar Cards deck$/,

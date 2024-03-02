@@ -137,7 +137,7 @@ async function loadSimple({reload}={})
 	}
 }
 
-export async function init(xlog=new XLog(["crystalsummit", "lostcrag"].includes(Deno.hostname()) ? "info" : "error"))
+export async function init(xlog=new XLog("info"))
 {
 	if(initCalled)
 		return;
@@ -149,7 +149,7 @@ export async function init(xlog=new XLog(["crystalsummit", "lostcrag"].includes(
 	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple()]));
 }
 
-export async function monitor(xlog=new XLog(["crystalsummit", "lostcrag"].includes(Deno.hostname()) ? "info" : "error"))
+export async function monitor(xlog=new XLog("info"))
 {
 	const monitorcb = async ({type, filePath}) =>
 	{

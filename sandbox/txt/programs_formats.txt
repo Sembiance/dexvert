@@ -7265,7 +7265,7 @@ ctm	Charpad CTM v1-v5
 spd	Spritepad SPD	
 
 
->>> MI-3 (Atari ST - Sep 24, 2019) (https://www.atari-forum.com/viewtopic.php?t=28191  Convert image with: https://convertio.co/ocr/)
+>>> MI-3 (Atari ST - Sep 24, 2019) (https://www.atari-forum.com/viewtopic.php?t=28191)
 MI-3 and MI-9   Low 320*200 16 colors   Medium 640*200 4 colors High 640*400 2 colors
 Arabesque <= 640*400            ABM PUF
 Art Director    I ART
@@ -11259,3 +11259,69 @@ XBM
 XPM
 XWD
 ZX
+
+
+>>> smurf (Atari ST) http://discmaster.textfiles.com/view/22197/TCE_DEMO_CD2.iso/demo_cd_.2/mags/atos/atos9701.arj/atos9701/ATOS/SMURF.HTM
+1st Publisher	.ART
+Adex ChromaGraph	.IMG
+Alpha Microsystems	.BMP
+Amiga IFF/ILBM	.IFF, .LBM
+Art Director	.ART
+Atari PCP	.PCP
+Atari Public Painter	.CMP
+Atari Spectrum 512	.SPC
+Atari-Grafikformat	.PCP
+Autologic Bitmap	.GM
+CAS Fax	.DCX
+Compuserve VIDTEX	.RLE
+Cubicomp Picturemaker	.R8
+Degas	.PI1-.PI3, .PC1-.PC3
+Doodle	.DOO
+Dr. Halo Import	.CUT + .PAL
+EGA-Paint/Colorix	.RIX
+ERDAS-Image	.LAN
+Edsun Labs	.CEG
+Enhanced Simplex	.ESM
+Falcon	.XGA
+Fontasy Bitmap	.BSG
+GEM-IMG	.IMG
+GIF	.GIF
+GOES Satellite Bitmap	.GOE
+HSI-File	.RAW
+Highlight PC-Format	.PIC
+IBM-Picturemaker	.PIC
+Indypaint	.TRU
+Inshape Images	.IIM
+Kodak Photo CD	.PCD
+Kontron IBAS	.IMG
+MTV Raytracer	.MTV
+Mac PICT 2	.PIC
+MacPaint	.MAC
+Macintosh Giffer	.QDV
+Microsoft Paint	.MSP
+NASA-PDS Image	.IBG
+NeoN Mapfile	.MAP
+Neochrome	.NEO
+OS/2 V1.x BMP	.BMP
+OS/2 V2.x BMP	.BMP
+PC-Paint/Picturepage	.PIC
+Photoshop Document	.PSD
+Portable Bitmap	.PPM
+Q0 Japan Image File	.FAL
+QRT Ray Tracer	.RAW
+RIFF Bitmap	.RIF
+Scodl File	.SCD
+Silicon Graphics Image	.SGI
+Stad	.PAC
+Sun Rasterfile	.RAS
+TIFF	.TIF
+Targa	.TGA
+True Paint Image	.TPI
+Turbo Pascal Image	.TPI
+Vivid Raytracer	.IMG
+Windows BMP	.BMP
+Windows Clipboard v	.CLP
+Atari Icons	.ICN
+X Bitmap	.XBM
+ZSoft Paintbrush	.PCX
+Zeiss Bivas	.DTA

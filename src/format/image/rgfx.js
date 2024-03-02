@@ -6,5 +6,5 @@ export class rgfx extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/RGFX";
 	ext         = [".rgfx", ".rgx"];
 	magic       = ["IFF Retargetable Graphics bitmap"];
-	unsupported = true;
+	converters  = ["deark[module:rgfx]"];
 }

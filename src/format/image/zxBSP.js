@@ -7,5 +7,5 @@ export class zxBSP extends Format
 	ext            = [".bsp"];
 	forbidExtMatch = true;
 	magic          = ["ZX Spectrum BSP", "BSP bitmap"];
-	converters     = ["recoil2png"];
+	converters     = ["recoil2png[strongMatch]"];
 }

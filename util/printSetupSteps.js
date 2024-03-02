@@ -29,6 +29,9 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		// used by perlTextCheck.js
 		"app-arch/trimGarbage",
 
+		// vamos
+		"app-arch/amitools",
+
 		// wine
 		"app-emulation/wine-vanilla",
 

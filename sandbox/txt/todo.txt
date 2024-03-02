@@ -46,15 +46,6 @@
      If I do ZXTune, submit patch here: https://bitbucket.org/zxtune/zxtune/issues/150/ay-amad-support
      In EITHER CASE, make sure I'm using the latest versions of both the above before trying
 
-* Found a handful of IFF-RGFX files in the wild, but there is no modern converter available for this format.
-  This is mostly because the 'compression' of the data within the image can be different and come from the amiga XPK lib.
-  I had asked about adding support for this to deark here: https://github.com/jsummers/deark/issues/47
-  I also asked about it for recoil: https://sourceforge.net/p/recoil/bugs/95/
-  The 'ancient' library/program supports decompression various XPK schemes, so perhaps that could be leveraged
-  I had thought about installing the datatype under vamos: http://aminet.net/package/util/dtype/RGFX-DT or http://aminet.net/package/util/dtype/RGFX-DT35
-  Then using some sort of converter (UltraConv or SuperView (with PNG-Box)) under Vamos, but that seems fragile and maybe won't work.
-  IFF-YAFA frame extraction may also be possible by leveraging ancient
-
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
   Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup

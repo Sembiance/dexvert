@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {Program, RUNTIME, CONVERT_PNG_ARGS} from "../../Program.js";
-import {encodeUtil, fileUtil, runUtil} from "xutil";
+import {encodeUtil, fileUtil, runUtil, imageUtil} from "xutil";
 import {path} from "std";
 import {quickConvertImages} from "../../dexUtil.js";
 
@@ -136,6 +136,19 @@ export class deark extends Program
 
 				await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(outDirPath, `${r.originalInput.name}.png`)]);
 			}
+		}
+
+		// so bsave images are very common, unfortunately there isn't a good way to determine what format that image is, so dexvert tries them all
+		// this produces a bunch of junk images. the classify garbage tensor check catches some of them, but here we will try and remove some other junk
+		if(r.flags.module==="bsave")
+		{
+			await (await fileUtil.tree(outDirPath, {nodir : true})).parallelMap(async fileOutputPath =>
+			{
+				const imgInfo = await imageUtil.getInfo(fileOutputPath);
+				// this was mostly used back in the BASIC/DOS/Win95 days, so it's highly unlikely any image should be larger than 1600x1600
+				if(imgInfo.width>1600 || imgInfo.height>1600)
+					await fileUtil.unlink(fileOutputPath);
+			});
 		}
 
 		// now we may be left with certain image formats like .bmp, .pict, .tiff, etc.

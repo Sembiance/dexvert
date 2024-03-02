@@ -260,7 +260,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 							return failValidation(`family ${dexState.format.family.pretty()}`);
 
 						// if still valid, check format level validator
-						if(format.verify && !(await format.verify({dexState, newFile, ...extraValidatorData})))
+						if(format.verify && !(await format.verify({dexState, inputFile, newFile, ...extraValidatorData})))
 							return failValidation(`format ${format.pretty()}`);
 					}
 

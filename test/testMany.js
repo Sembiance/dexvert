@@ -154,7 +154,7 @@ await fileUtil.writeTextFile(testManyReportFilePath, `
 					</tr>
 				</thead>
 				<tbody>
-					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
+					${Object.entries(reports).filter(([formatid]) => formatid.split("/")[0]===family).sortMulti([([, o]) => (+o.failCount)===0, ([, o]) => (+o.newSuccessesCount)===0, ([formatid]) => formatid]).map(([formatid, o]) => `<tr>
 						<td style="text-align: left;">${o.reportFilePath ? `<a href="${mkWeblink(o.reportFilePath)}">${formatid.escapeHTML()}</a>` : formatid.escapeHTML()}</td>
 						<td class="${o.sampleFileCount===0 ? "bad" : ""}">${o.sampleFileCount.toLocaleString()}</td>
 						<td class="${(+o.successPercentage || 0)<10 ? "red" : ((+o.successPercentage || 0) < 40 ? "orange" : ((+o.successPercentage || 0) < 100 ? "yellow" : "good"))}">${o.successPercentage || "0"}%</td>

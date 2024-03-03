@@ -1,4 +1,4 @@
-# Unsupported File Formats (932)
+# Unsupported File Formats (934)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -262,7 +262,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (85)
+## Image (84)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -303,7 +303,6 @@ image | GraphicWorks Vector Drawing | .dvg |
 image | Greenstreet Drawing | .art | [6 sample files](https://sembiance.com/fileFormatSamples/image/greenstreetDrawing/)
 image | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 image | ID Software Sprite | .spr | [3 sample files](https://sembiance.com/fileFormatSamples/image/idSoftwareSprite/)
-image | [IFF Retargetable Graphic](http://fileformats.archiveteam.org/wiki/RGFX) | .rgfx .rgx | [8 sample files](https://sembiance.com/fileFormatSamples/image/rgfx/)
 image | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
 image | Intergraph Raster RGB | .rgb | 
 image | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
@@ -461,7 +460,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (441)
+## Other (444)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -854,6 +853,8 @@ other | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b
 other | Thunderbyte AV | .dat .eci .ec .sig | 
 other | THX Tracker Instrument | .ins | 
 other | TimeZone Data | .tz | 
+other | Trivia Shell Data | .tsd | 
+other | Trivia Shell Index | .tsi | 
 other | Turbo Lightning Environment | .env | 
 other | Turbo Modula-2 Symbol Data | .sym | 
 other | Turbo Pascal Help | .hlp | 
@@ -861,6 +862,7 @@ other | TVPaint Project | .tvpp .deep .aur |
 other | Type Library | .tlb | 
 other | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 other | Valve Source Map | .bsp | 
+other | VB/ISAM Index | .ism | 
 other | VCD Entries File | .vcd | 
 other | Vectrex Game ROM | .vec .gam .bin | 
 other | Vektor Grafix Driver | .drv | 

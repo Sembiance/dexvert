@@ -12,7 +12,7 @@ export class qrt extends Format
 	converters     = ["qrttoppm"];	// nconvert and tomsViewer also handle these, but they will take almost anything and produce garbage. qrttoppm does some sanity checks at least snce we don't have magic for this
 	verify         = async ({inputFile, meta}) =>
 	{
-		if(meta.height<1 || meta.width<1)
+		if(meta.height<2 || meta.width<2)
 			return false;
 
 		const header = await fileUtil.readFileBytes(inputFile.absolute, 6);

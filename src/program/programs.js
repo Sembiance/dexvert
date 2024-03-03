@@ -47,7 +47,7 @@ export async function init(xlog=new XLog(["crystalsummit", "ridgeport"].includes
 	await Promise.all(programFilePaths.map(loadProgramFilePath));
 }
 
-export async function monitor(xlog=new XLog("error"))
+export async function monitor(xlog=new XLog("info"))
 {
 	const monitorcb = async ({type, filePath}) =>
 	{

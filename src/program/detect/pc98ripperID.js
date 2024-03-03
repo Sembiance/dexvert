@@ -7,7 +7,7 @@ export class pc98ripperID extends Program
 	package = "app-arch/98ripper";
 	bin     = "98ripper";
 	loc     = "local";
-	args    = r => ["-i", r.inFile()];
+	args    = r => ["-i", `./${r.inFile()}`];
 	post    = r =>
 	{
 		const matchValue = r.stdout.trim().split("]").at(-1).trim();

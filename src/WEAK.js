@@ -4,13 +4,17 @@
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|347|473|1145|1260|1280|1381|1488|1555|1556|1562|1575|1616)( |$)/,
+	/^fmt\/(111|134|208|347|473|1145|1260|1280|1381|1488|1555|1556|1562|1575|1616|1751)( |$)/,
 	/^x-fmt\/(8|10|111|157|195|342)( |$)/,
 
 	// dexmagic: WEAK checks
 	/^IFF CAT file$/,
 	/^Visual Novel DPK Archive$/,
 	/^ZZT World$/,
+
+	// lsar: WEAK checks
+	/^LZMA_Alone$/,
+	/^Split file$/,
 	
 	// FILE: Very weak checks:
 	/^, /,
@@ -193,6 +197,7 @@ export const WEAK_VALUES =
 	/^Sega FILM\/CPK Multimedia/,
 	/^SHARC COFF binary/,
 	/^shared library TTComp archive data/,
+	/^SIMH tape data$/,
 	/^Sky archive data/,
 	/^SoftQuad DESC or font file binary/,
 	/^SoftQuad troff Context intermediate$/,
@@ -303,6 +308,7 @@ export const WEAK_VALUES =
 	/^DICOM medical imaging bitmap/,
 	/^Digital Micrograph Script$/,
 	/^Digital Video$/,
+	/^Disk eXPress disk image \(v[012]\.x\)$/,
 	/^DiskDupe 5\.12 disk image$/,
 	/^DitPack compressed data$/,
 	/^Doobs database$/,
@@ -429,6 +435,7 @@ export const WEAK_VALUES =
 	/^SQ2 compressed data$/,
 	/^Stunt Island Resource$/,
 	/^SuperCard Pro flux image$/,
+	/^TERSE compressed data \(S?PACK, [UV]\)$/,
 	/^Text - UTF-16/,
 	/^TextEngine document \(generic\)$/,
 	/^That's Write document$/,
@@ -469,6 +476,7 @@ export const WEAK_VALUES =
 	/^3D Studio Shape$/,
 	/^A-Robots Fighting Robot Object$/,
 	/^Acorn RISC OS font/,
+	/^AdLib Timbre Bank Format$/,
 	/^Adobe PhotoShop Brush$/,
 	/^Aquarius Cassette tape image$/,
 	/^Atari NeoChrome bitmap$/,
@@ -495,6 +503,7 @@ export const WEAK_VALUES =
 	/^GnomeVFS$/,
 	/^Gravis UltraSound PnP InterWave patch$/,
 	/^HandStory eBook$/,
+	/^HomeLab\/BraiLab Tape image$/,
 	/^HP Logical Interchange Format disk image$/,
 	/^HP200LX System Application's Help$/,
 	/^Id Software Quake II Cinematic video$/,
@@ -529,6 +538,7 @@ export const WEAK_VALUES =
 	/^QLAY MDV image$/,
 	/^Quarterdeck Installation Package$/,
 	/^Sierra AGI music format$/,
+	/^Sierra patch$/,
 	/^Speccy snapshot$/,
 	/^Stunt Island Resource \(generic\)$/,
 	/^Sybase iAnywhere database files$/,

@@ -48,6 +48,7 @@ Video Game Music: http://www.vgmpf.com/Wiki/index.php?title=MDS
            Games: http://wiki.xentax.com/index.php/Game_File_Format_Central
 	   DOS Games: https://moddingwiki.shikadi.net/wiki/Main_Page
 
+https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml
 https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF
 https://www.fileformat.info/format/cloud.htm
 https://file-extension.net/seeker/file_extension_stc

@@ -1,4 +1,4 @@
-# Unsupported File Formats (934)
+# Unsupported File Formats (941)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -73,7 +73,7 @@ archive | ZX Spectrum TZX Tape | .tzx |
 
 
 
-## Audio (34)
+## Audio (36)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -82,6 +82,8 @@ audio | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/a
 audio | Amiga 16VX Sound |  | [1 sample file](https://sembiance.com/fileFormatSamples/audio/amiga16vx/)
 audio | Art of Noise Instrument | .fm | [5 sample files](https://sembiance.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 audio | AudioWorks Sound Sample |  | 
+audio | [Common Instrument Sample](http://fileformats.archiveteam.org/wiki/Common_Instrument_Format) | .ci1 .ci2 | 
+audio | [Common Loudspeaker](http://fileformats.archiveteam.org/wiki/Common_Loudspeaker_Format) | .cf1 .cf2 | 
 audio | [Creative Labs Instrument Bank](http://fileformats.archiveteam.org/wiki/Instrument_Bank) | .ibk | [2 sample files](https://sembiance.com/fileFormatSamples/audio/creativeLabsInstrumentBank/) - gamemus supports reading this format, but doesn't have a way to convert or extract it
 audio | [DataShow Sound File](http://www.amateur-invest.com/us_datashow.htm) | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/dataShowSound/) - The single sample file I have is a simple text file on how to generate the sound. Probably wouldn't be too hard to create a converter for it. But it's a pretty obscure format, so probably not worth investing any time into it.
 audio | Deluxe Sound Sample | .instr | 
@@ -293,7 +295,7 @@ image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga
 image | Drawing Interchange Binary Format | .dxb | 
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 image | EasyCAD Drawing | .fcd | 
-image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [7 sample files](https://sembiance.com/fileFormatSamples/image/excelChart/) - Canvas and KeyView Pro both claim support for this, but I couldn't get them to convert any of my samples.
+image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [18 sample files](https://sembiance.com/fileFormatSamples/image/excelChart/) - Canvas and KeyView Pro both claim support for this, but I couldn't get them to convert any of my samples.
 image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | Freelance Graphics Drawing | .drw | 
@@ -460,7 +462,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (444)
+## Other (446)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -475,6 +477,7 @@ other | 4D Paint Project | .4dp | [1 sample file](https://sembiance.com/fileForm
 other | Abuse Level | .lvl .spe | 
 other | ActivInspire Flipchart | .flipchart | 
 other | Actor Image Snapshot | .ima | 
+other | Adobe Capture Document |  | 
 other | Adobe Duotone Options | .ado | 
 other | Adobe Hyphenation/Spelling Dictionary | .hyp | 
 other | Adobe Multiple Master Metrics | .mmm | 
@@ -512,6 +515,7 @@ other | AMOS Datas Bank | .abk | [8 sample files](https://sembiance.com/fileForm
 other | AMOS Work Bank | .abk | 
 other | AniMouse Tutorial | .sdemo | 
 other | ApAssist Compressed Data |  | 
+other | ArcSoft Album | .abm .sld | 
 other | ArtEffect Brush |  | 
 other | ArtEffect Convolution |  | 
 other | ASCII Font Metrics | .afm | 
@@ -910,7 +914,7 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (52)
+## Poly (55)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3-D Professional Scene |  | 
@@ -958,6 +962,9 @@ poly | SGI Open Inventor Scene Graph | .iv |
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/)
 poly | Shockwave 3D Scene Export | .w3d | 
 poly | Simply 3D Geometry | .ged | 
+poly | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
+poly | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)
+poly | SolidWorks Part | .sldprt | [10 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksPart/)
 poly | Strata 3D Shape | .ssh | 
 poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 

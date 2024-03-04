@@ -22,7 +22,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [https://sk1project.net/uc2/ UniConvertor]
 * [https://zxtune.bitbucket.io/ zxtune]
 * [[XMP]]
-* [[Unar]]
+* [[The Unarchiver]]
 * [[Calibre]]
 * [https://zakalwe.fi/uade/ UADE]
 * [https://www.fmjsoft.com/awavestudio.html Awave Studio]

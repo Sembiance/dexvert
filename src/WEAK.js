@@ -29,6 +29,7 @@ export const WEAK_VALUES =
 	/^68k Blit/,
 	/^777 archive data$/,
 	/80386 COFF executable/,
+	/^Adobe Photoshop Color swatch/,
 	/^BALANCE NS32000/,
 	/ BCS executable/,
 	/^BIOS \(ia32\) ROM Ext/,

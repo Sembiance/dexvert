@@ -5,6 +5,67 @@
 /---------------\
 | High Priority |
 \---------------/
+* Add this program and all formats it supports: https://download.abime.net/winuae/stuff/uaeunp-0.8.zip
+  Hopefully it'll work in wine or wineconsole
+  Then add support for converting DSQ to ADF for: http://discmaster2.textfiles.com/view/6/SpanishScene1.iso/spanish%20pack%20n%C2%B01%20by%20llfb/juegos/darkness/alan1.dsq/Image.dsq
+
+* Add IFF HEAD support: http://discmaster2.textfiles.com/view/6/SpanishScene1.iso/spanish%20pack%20n%C2%B01%20by%20llfb/--llfb--/docs/docs04.dms/docs04.adf/ptr
+	Make a dexvert/bin/iffUtil.js with a readChunks(filePath|Uint8array)
+	Have it return an array of chunk objects. Each chunk has a type key sting and either a data key or chunks key.
+	So when it encounters FORM it'll auto call r.chunks = readChunks(data) but not return the set/return a data key
+	Make a bin/iffUtil.test.js that uses files from test/sample/
+	Used this for the IFF HEAD file with a bin/iffHEADExtract.js in.iff out.txt
+	Why a separate bin? To help keep memory usage out of dexvert workers
+Also try it on the IFF CAT file and see how it does, maybe ditch my iffCATextract and use JavaScript instead
+
+* See what other formats word97 supports and see about adding support for them.
+  Also, should word97 support an outType of RTF and use that?
+  Also see about using word97 to open 'wordDoc' files too
+
+* Install excel 97 on win2k and see if it can support some of the other excel samples (Worksheet1, 2, 3)
+  Also see how it handles the other XLS files
+  See if it can handle any of the image/excelChart files
+
+* Install Microsoft Office XP on winxp and use it's various programs to support more formats: wordDoc, xls, excelChart, powerpoint, etc
+  See what other formats each program supports and see about adding support for them
+
+* Add this detection program: https://www.helger.com/gt/program.php?tool=gt2
+
+* Add this detection program: http://fileformats.archiveteam.org/wiki/IDArc
+
+* Add this detection program: https://github.com/google/magika
+  For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests
+  Make sure I also put it on info.txt App Updates section
+
+* Add 3D/Poly support.
+  FIRST determine which format to convert into AND which viewer to use in the browser. Test in just a sandbox
+  SECOND Convert some simple objects. Goal is to support viewing in 3D the trumpet and skeleton models mentioned in: https://www.youtube.com/watch?v=-naVu19GMqg
+  Blender might have some great support for old formats and is linux based
+  Can convert everything to GLTF/GLB format and use this viewer on the website: https://modelviewer.dev/
+  Or use X3D instead?  https://cadexchanger.com/blog/3d-formats-overview-vrml-and-x3d/
+  3DS is 3DS Max, so use that to convert things like: http://discmaster.textfiles.com/browse/1268/Graphics%20Plus.iso/media/objects/3ds/ve_space/romulan.zip
+  Software to convert DXF (and others) to GLB: https://github.com/assimp/assimp
+  Other software that works with GLB: https://github.khronos.org/glTF-Project-Explorer/
+  https://castle-engine.io/view3dscene.php
+  Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
+  https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
+- Over 8,000 lightWave3DScenes that have not been properly identified yet : http://discmaster.textfiles.com/search?q=LWSC&qfields=content&family=text&formatid=txt
+- For THUMBNAILS of polys, just a PNG screenshot, but with a line/globe/3d model looking icon in the bottom right corner of the thumbnail
+- Ray Dream Studio 5.5 works ok on Windows XP and loaded some sample RDS files I tried: http://discmaster.textfiles.com/browse/16286/Ray%20Dream%20Studio%205.5%20(MetaCreations)(1999).iso/pc
+  It has multiple export options. Make sure files get the .rds extension, without it they wouldn't open (http://discmaster.textfiles.com/view/16284/Ray%20Dream%20Studio%20(CDRAYD1)%20(Ray%20Dream)%20(1995).iso/Dream%20Models/Lifeform/PENGUIN)
+- Add support for VRML. Possible renderers: https://github.com/castle-engine/view3dscene, Blender, Blaxxun Contact 4.4
+  Would love have it be interactive in the browser. See the 3D/Poly support note below:
+- Would be great if on the 'browse' page each model could be viewed inline in a small thumbnail sized interactive viewer. Though this may be too intensive? Maybe generate thumbs for each one, as we do for images and show the thumbs instead
+  For a Before/After screenshot, can use search results: http://discmaster.textfiles.com/search?q=3dmf&itemid=9374
+- Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
+  Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
+- Would be amazing if other levels (Hexen, Heretic, Unreal, Wolfenstein 3D, Quake, etc) were flyable too
+- Would also be cool if it could convert and render entire levels liek Warcraft maps, warcraft 3 maps, doom, hexen, quake and valve maps, etc
+- poly/rayDreamDesignerScene openable in Corel Draw 7?
+- Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
+  Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
+  From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+
 
 /-----------------\
 | Medium Priority |
@@ -176,31 +237,6 @@
 
 * Add rendering of previews of full game maps supported by 'gamemap': https://github.com/Malvineous/libgamemaps
   Research them here: https://moddingwiki.shikadi.net
-
-* Add 3D/Poly support. Can convert everything to GLTF/GLB format and use this viewer on the website: https://modelviewer.dev/
-  Or use X3D instead?  https://cadexchanger.com/blog/3d-formats-overview-vrml-and-x3d/
-  3DS is 3DS Max, so use that to convert things like: http://discmaster.textfiles.com/browse/1268/Graphics%20Plus.iso/media/objects/3ds/ve_space/romulan.zip
-  Software to convert DXF (and others) to GLB: https://github.com/assimp/assimp
-  Other software that works with GLB: https://github.khronos.org/glTF-Project-Explorer/
-  https://castle-engine.io/view3dscene.php
-  Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
-  https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
-- Over 8,000 lightWave3DScenes that have not been properly identified yet : http://discmaster.textfiles.com/search?q=LWSC&qfields=content&family=text&formatid=txt
-- For THUMBNAILS of polys, just a PNG screenshot, but with a line/globe/3d model looking icon in the bottom right corner of the thumbnail
-- Ray Dream Studio 5.5 works ok on Windows XP and loaded some sample RDS files I tried: http://discmaster.textfiles.com/browse/16286/Ray%20Dream%20Studio%205.5%20(MetaCreations)(1999).iso/pc
-  It has multiple export options. Make sure files get the .rds extension, without it they wouldn't open (http://discmaster.textfiles.com/view/16284/Ray%20Dream%20Studio%20(CDRAYD1)%20(Ray%20Dream)%20(1995).iso/Dream%20Models/Lifeform/PENGUIN)
-- Add support for VRML. Possible renderers: https://github.com/castle-engine/view3dscene, Blender, Blaxxun Contact 4.4
-  Would love have it be interactive in the browser. See the 3D/Poly support note below:
-- Would be great if on the 'browse' page each model could be viewed inline in a small thumbnail sized interactive viewer. Though this may be too intensive? Maybe generate thumbs for each one, as we do for images and show the thumbs instead
-  For a Before/After screenshot, can use search results: http://discmaster.textfiles.com/search?q=3dmf&itemid=9374
-- Then use this doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
-  Then reply to tweet: https://twitter.com/senn_twt/status/1591342713739288576?s=12&t=Y840vTjzTkojj8W_7FWPNw
-- Would be amazing if other levels (Hexen, Heretic, Unreal, Wolfenstein 3D, Quake, etc) were flyable too
-- Would also be cool if it could convert and render entire levels liek Warcraft maps, warcraft 3 maps, doom, hexen, quake and valve maps, etc
-- poly/rayDreamDesignerScene openable in Corel Draw 7?
-- Add support for this 3D format: http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
-  Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
-  From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 
 /----------------\
 | Probably Never |

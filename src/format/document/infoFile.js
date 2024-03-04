@@ -6,7 +6,7 @@ export class infoFile extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/FLR";
 	ext            = [".flr"];
 	forbidExtMatch = true;
-	magic          = ["InfoFile database"];
+	magic          = ["InfoFile database", /^fmt\/1785( |$)/];
 	weakMagic      = true;
 	notes          = "Very obscure amiga database program.";
 	converters     = ["strings"];

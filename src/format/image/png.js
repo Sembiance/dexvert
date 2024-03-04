@@ -7,7 +7,7 @@ export class png extends Format
 	ext              = [".png"];
 	forbidExtMatch   = true;
 	mimeType         = "image/png";
-	magic            = ["Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", /^fmt\/(11|12|935)( |$)/];
+	magic            = ["Portable Network Graphics", "PNG image data", "Mac PNG bitmap (MacBinary)", "PNG Plus", /^fmt\/(11|12|13|935)( |$)/];
 	untouched        = dexState => dexState.meta.width && dexState.meta.height;
 	verifyUntouched  = dexState =>
 	{

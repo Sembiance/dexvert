@@ -5,7 +5,8 @@ export class xls extends Format
 	name       = "Excel Spreadsheet";
 	website    = "http://fileformats.archiveteam.org/wiki/XLS";
 	ext        = [".xls", ".xlsx", ".xlw"];
-	magic      = ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet", "Excel Microsoft Office Open XML Format document", /^fmt\/(56|58|59|61|214|555|556)( |$)/];
+	magic      = ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet", "Excel Microsoft Office Open XML Format document", "Microsoft Excel for Mac", /^fmt\/(55|56|58|59|61|214|555|556)( |$)/];
+	weakMagic  = ["Microsoft Excel sheet"];	// see poly/solidWorksDrawing/kloub.SLDDRW
 	converters = [
 		"soffice[format:MS Excel 2003 XML]", "soffice[format:MS Excel 97]", "soffice[format:MS Excel 95]", "soffice[format:MS Excel 5.0/95]", "soffice[format:MS Excel 4.0]", "soffice[matchType:magic]",
 		"antixls"

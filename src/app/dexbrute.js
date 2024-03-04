@@ -15,10 +15,10 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> trying every safe program on it and saving results in <outputDirPath>",
 	opts    :
 	{
-		allowUnsafe : {desc : "Run all programs, even those marked as unsafe"},
-		family      : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
-		serial      : {desc : "Run the programs serially..."},
-		debug       : {desc : "Debug mode"}
+		unsafe : {desc : "Run all programs, even those marked as unsafe"},
+		family : {desc : "Restrict programs to this family (comma delimited list allowed)", hasValue : true},
+		serial : {desc : "Run the programs serially..."},
+		debug  : {desc : "Debug mode"}
 	},
 	args :
 	[
@@ -56,7 +56,7 @@ await Object.entries(programs).parallelMap(async ([programid, program]) =>
 	if(argv.family && !argv.family.split(",").includesAny([familyid, ...(program.bruteFlags ? Object.keys(program.bruteFlags) : [])]))
 		return;
 	
-	if(program.unsafe && !argv.allowUnsafe)
+	if(program.unsafe && !argv.unsafe)
 		return;
 
 	const formatid = `program${programid}`;

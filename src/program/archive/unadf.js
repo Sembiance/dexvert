@@ -18,7 +18,6 @@ export class unadf extends Program
 		r.meta.fileMeta = {};
 		const fileDates = Object.fromEntries(stdout.split("\n").map(line =>
 		{
-			// Some files like LOADING.ANIM on antiskyn.adf has a 'comment' on the end which 
 			const parts = (line.match(/\s*(?<size>\d*)\s+(?<year>\d{4})\/(?<month>\d\d)\/(?<day>\d\d)\s+(?<hour>\d+):(?<minute>\d+):(?<second>\d+)\s+(?<filePath>[^,]+),?\s*(?<comment>.*)/) || {groups : {}}).groups;
 			if(!parts.filePath)
 				return null;
@@ -37,6 +36,9 @@ export class unadf extends Program
 						
 			return [parts.filePath, dateParse(`${parts.day}.${parts.month}.${parts.year} ${parts.hour.padStart(2, "0")}:${parts.minute.padStart(2, "0")}:${parts.second.padStart(2, "0")}`, "dd.MM.yyyy HH:mm:ss")];
 		}).filter(v => !!v));
+
+		if(!Object.keys(r.meta.fileMeta).length)
+			delete r.meta.fileMeta;
 		
 		for(const outputFile of r.f.files.new || [])
 		{

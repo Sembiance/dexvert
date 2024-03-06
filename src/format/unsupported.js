@@ -15,7 +15,6 @@ export default
 		c16Tape                      : {name : "Commodore 16 Tape", ext : [".tap"], magic : ["C16 Tape image format"]},
 		ccs64Cartridge		 	     : {name : "CCS64 Cartridge", ext : [".crt", ".car"], magic : ["C64 Cartridge image", "Commodore 64 cartridge", /^fmt\/822( |$)/]},
 		coloradoMemorySystemPackage  : {name : "Colorado Memory System Package", ext : [".cmp"], magic : ["Colorado Memory System Compressed Package"]},
-		ipfFloppyDiskImage           : {name : "Interchangeable Preservation Format Floppy Disk Image", ext : [".ipf"], magic : ["Interchangeable Preservation Format floppy disk image"]},
 		metaCardStack                : {name : "MetaCard Stack", ext : [".rev"], magic : ["Revolution MetaCard stack"]},
 		micrografxArchive            : {name : "Micrografx Archive", ext : [".mda"], magic : ["Micrografx Archive"]},
 		msxCassetteTape	             : {name : "MSX Cassette Tape", ext : [".cas"], magic : ["MSX Cassette tape image", "MSX cassette archive"]},

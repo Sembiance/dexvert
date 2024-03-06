@@ -8,5 +8,5 @@ export class adfFFS extends Format
 	fileSize      = 901_120;
 	matchFileSize = true;
 	magic         = ["Amiga Disk image File (FFS", "Amiga FFS disk", "Amiga Inter FFS disk", "Amiga Fastdir FFS disk"];
-	converters    = ["unadf", "xdftool"];
+	converters    = ["unadf", "uaeunp", "xdftool"];
 }

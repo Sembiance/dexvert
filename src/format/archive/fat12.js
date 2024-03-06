@@ -7,5 +7,5 @@ export class fat12 extends Format
 	forbidExtMatch = true;
 	priority       = this.PRIORITY.LOW;	// allow other more specialized formats like stDiskImage and rawPartition to take precedence
 	magic          = ["PC-98 FAT12", "Anex86 PC98 floppy image"];
-	converters     = ["pc98ripper"];
+	converters     = ["pc98ripper", "uaeunp"];
 }

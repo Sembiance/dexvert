@@ -38,7 +38,7 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 	}
 
 	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, xlog};
-	if(runOptions.cwd.startsWith("wine://"))
+	if(runOptions.cwd?.startsWith("wine://"))
 		runOptions.cwd = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c", runOptions.cwd.substring("wine://".length));
 
 	const prelog = `wine ${fg.orange(base)} ${fg.yellow(cmd)}${fg.cyan(":")}`;

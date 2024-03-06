@@ -5,10 +5,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Add this program and all formats it supports: https://download.abime.net/winuae/stuff/uaeunp-0.8.zip
-  Hopefully it'll work in wine or wineconsole
-  Then add support for converting DSQ to ADF for: http://discmaster2.textfiles.com/view/6/SpanishScene1.iso/spanish%20pack%20n%C2%B01%20by%20llfb/juegos/darkness/alan1.dsq/Image.dsq
-
 * Add IFF HEAD support: http://discmaster2.textfiles.com/view/6/SpanishScene1.iso/spanish%20pack%20n%C2%B01%20by%20llfb/--llfb--/docs/docs04.dms/docs04.adf/ptr
 	Make a dexvert/bin/iffUtil.js with a readChunks(filePath|Uint8array)
 	Have it return an array of chunk objects. Each chunk has a type key sting and either a data key or chunks key.
@@ -49,6 +45,7 @@ Also try it on the IFF CAT file and see how it does, maybe ditch my iffCATextrac
   https://castle-engine.io/view3dscene.php
   Converting Shockwave 3D files: https://github.com/tomysshadow/Shockwave-3D-World-Converter
   https://cadexchanger.com/contact-us/licensing-inquiry/#requestFormSection
+- Ensure support for: Truespace, Asymmetric 3dfx, 3d studio mesh .3ds, lightwave 3d .lwo, pov2 models, acuris 3d model format, syndesis interchange (converter on https://archive.org/details/twilight-cd15)
 - Over 8,000 lightWave3DScenes that have not been properly identified yet : http://discmaster.textfiles.com/search?q=LWSC&qfields=content&family=text&formatid=txt
 - For THUMBNAILS of polys, just a PNG screenshot, but with a line/globe/3d model looking icon in the bottom right corner of the thumbnail
 - Ray Dream Studio 5.5 works ok on Windows XP and loaded some sample RDS files I tried: http://discmaster.textfiles.com/browse/16286/Ray%20Dream%20Studio%205.5%20(MetaCreations)(1999).iso/pc
@@ -66,6 +63,7 @@ Also try it on the IFF CAT file and see how it does, maybe ditch my iffCATextrac
   Using blender with a plugin: https://github.com/Skyplayer37/1993-Model-Importer/blob/main/1993-3D.py
   From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
 
+* Now reprocess items 1-29 on discmaster2
 
 /-----------------\
 | Medium Priority |

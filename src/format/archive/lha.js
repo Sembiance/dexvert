@@ -14,5 +14,5 @@ export class lha extends Format
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 	// Luckilly 'lha' fails on these, so then I try lhark specific extractor
 	// See: https://entropymine.wordpress.com/2020/12/24/notes-on-lhark-compression-format/
-	converters = ["lha", "sevenZip", "deark[module:lha][opt:lha:lhark]", "deark[module:car_lha] -> lha", "deark[module:lharc_sfx_com]", "unar", "sqc", "UniExtract[matchType:magic]", "izArc", "lhark"];
+	converters = ["lha", "sevenZip", "deark[module:lha][opt:lha:lhark]", "deark[module:car_lha] -> lha", "deark[module:lharc_sfx_com]", "unar", "sqc", "UniExtract[matchType:magic]", "izArc", "lhark", "uaeunp"];
 }

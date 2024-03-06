@@ -11325,3 +11325,31 @@ Atari Icons	.ICN
 X Bitmap	.XBM
 ZSoft Paintbrush	.PCX
 Zeiss Bivas	.DTA
+
+
+>>> uaeunp v0.8 windows https://www.winuae.net/download/
+Disk images:
+- ADF and HDF (VHD). HDF support currently needs lots of memory.
+- DMS (DiskMasher). Automatically brute-forces encrypted DMS files.
+- DSQ (DiskSqueeze)
+- FDI (Formatted Disk Image)
+- IPF (SPS / CAPS disk images)
+- WRP (Warp, note that there are multiple different "warp" formats. Only one is supported.)
+
+Disk image is internally converted to standard ADF before extraction. Following filesystems
+supported: OFS, FFS, SFS and SFS2 and FAT12. Non-AmigaDOS formatted images are not supported. Block size
+is automatically detected.
+
+Archives:
+- 7Zip
+- LHA/LZH
+- LZX
+- RAR (unrar.dll or archiveaccess.dll required)
+- TAR
+- ZIP
+- ArchiveAccess.DLL
+
+Miscellaneous formats:
+- Amiga RDB (Rigid Disk Block) partition table
+- GZIP compression
+- XZ

@@ -16,5 +16,5 @@ export class adfOFS extends Format
 		These are custom disk formats that demo and game coders came up with to squeeze data out of em.
 		Sadly there isn't really any way to extract files from these disks, as they might not even have a concept of files at all.`;
 	
-	converters =  ["unar[filenameEncoding:iso-8859-1]", "unadf", "extract_adf"];	// unadf handles files better, but doesn't preserve timestamps. unar preserves timestamps well.
+	converters =  ["unar[filenameEncoding:iso-8859-1]", "uaeunp", "unadf", "extract_adf"];	// unadf handles files better, but doesn't preserve all timestamps? unar preserves timestamps well.
 }

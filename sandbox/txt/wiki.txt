@@ -31,6 +31,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [http://sox.sourceforge.net/ SoX]
 * [http://style64.org/dirmaster DirMaster]
 * [https://fontforge.org/ FontForge]
+* [https://www.winuae.net/download/ uaeunp]
 
 == Sample files ==
 * {{DexvertSamples|image/dpx}}

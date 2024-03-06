@@ -740,6 +740,8 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	if(FORCE_FORMAT_AS.includes(diskFormatid))
 		o.dexvertOptions.asFormat = diskFormatid;
 
+	if(argv.serial)
+		xlog.info`Attempting file: ${sampleSubFilePath}`;
 	const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 	if(logLines?.length)
 		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), logLines.join("\n"));

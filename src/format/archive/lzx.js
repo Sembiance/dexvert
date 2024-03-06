@@ -7,7 +7,7 @@ export class lzx extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/LZX";
 	ext        = [".lzx"];
 	magic      = ["LZX compressed archive", "LZX Amiga compressed archive", /^LZX$/];
-	converters = ["unar", "unlzx", "UniExtract"];
+	converters = ["uaeunp", "unar", "unlzx", "UniExtract"];	// uaeunp properly handles setting dates on extracted files, better than unar does
 	post = async dexState =>
 	{
 		await Object.entries(dexState.meta.fileProps).parallelMap(async ([filename, props]) =>

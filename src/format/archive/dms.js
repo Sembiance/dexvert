@@ -7,5 +7,5 @@ export class dms extends Format
 	ext        = [".dms", ".fms"];
 	magic      = ["Disk Masher System compressed disk image", "DMS archive data", "DMS: Disk Masher System", /^DMS$/];
 	packed     = true;
-	converters = ["unar[filenameEncoding:iso-8859-1]", "ancient"];
+	converters = ["uaeunp", "unar[filenameEncoding:iso-8859-1]", "ancient"];	// uaeunp picks up certain extra files like Banners and FILE_ID.DIZ files and can brute-force encrypted DMS files
 }

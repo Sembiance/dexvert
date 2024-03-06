@@ -15,9 +15,11 @@ export class unadf extends Program
 	{
 		const currentYear = new Date().getFullYear();
 		const {stdout} = await runUtil.run("unadf", ["-lr", r.inFile()], {cwd : r.cwd});
+		r.meta.fileMeta = {};
 		const fileDates = Object.fromEntries(stdout.split("\n").map(line =>
 		{
-			const parts = (line.match(/\s*(?<size>\d*)\s+(?<year>\d{4})\/(?<month>\d\d)\/(?<day>\d\d)\s+(?<hour>\d+):(?<minute>\d+):(?<second>\d+)\s+(?<filePath>.+)/) || {groups : {}}).groups;
+			// Some files like LOADING.ANIM on antiskyn.adf has a 'comment' on the end which 
+			const parts = (line.match(/\s*(?<size>\d*)\s+(?<year>\d{4})\/(?<month>\d\d)\/(?<day>\d\d)\s+(?<hour>\d+):(?<minute>\d+):(?<second>\d+)\s+(?<filePath>[^,]+),?\s*(?<comment>.*)/) || {groups : {}}).groups;
 			if(!parts.filePath)
 				return null;
 			
@@ -29,6 +31,9 @@ export class unadf extends Program
 
 			if((+parts.hour)>23 || (+parts.minute)>59 || (+parts.second)>59)
 				return null;
+
+			if(parts.comment?.length)
+				r.meta.fileMeta[parts.filePath] = {comment : parts.comment};
 						
 			return [parts.filePath, dateParse(`${parts.day}.${parts.month}.${parts.year} ${parts.hour.padStart(2, "0")}:${parts.minute.padStart(2, "0")}:${parts.second.padStart(2, "0")}`, "dd.MM.yyyy HH:mm:ss")];
 		}).filter(v => !!v));

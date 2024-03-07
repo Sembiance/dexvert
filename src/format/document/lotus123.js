@@ -6,5 +6,5 @@ export class lotus123 extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Lotus_1-2-3";
 	ext        = [".wks", ".wk1", ".wk2", ".wk3", ".wk4", ".123", ".wkb"];
 	magic      = ["Lotus 123 Worksheet", /^Lotus 1-2-3 Wor[Kk][Ss]heet/, "Lotus 1-2-3/Symphony worksheet", "Lotus 123/Symphony worksheet", /^fmt\/1453( |$)/, /^x-fmt\/(114|115|116|117)( |$)/];
-	converters = ["soffice[format:Lotus]", "soffice[matchType:magic]"];
+	converters = ["soffice[format:Lotus]", "excel97", "soffice[matchType:magic]"];
 }

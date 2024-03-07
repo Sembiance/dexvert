@@ -4,7 +4,7 @@ import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
 import {WEAK_VALUES} from "./WEAK.js";
 
-export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar"];
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2"];
 
 export const TEXT_MAGIC_STRONG =
 [
@@ -25,7 +25,10 @@ export const TEXT_MAGIC_STRONG =
 export const TEXT_MAGIC_WEAK =
 [
 	// perlTextCheck
-	"Likely Text (Perl)"
+	"Likely Text (Perl)",
+
+	// GT2
+	"Textdatei"
 ];
 
 export const TEXT_MAGIC = [...TEXT_MAGIC_STRONG, ...TEXT_MAGIC_WEAK];

@@ -5,6 +5,6 @@ export class swagPacket extends Format
 	name       = "SWAG Packet";
 	website    = "http://fileformats.archiveteam.org/wiki/SWG";
 	ext        = [".swg"];
-	magic      = ["Swag archive data", "Swag Reader Packet"];
+	magic      = ["Swag archive data", "Swag Reader Packet", "SWAG Archiv gefunden"];
 	converters = ["swagReader"];
 }

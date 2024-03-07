@@ -20,7 +20,11 @@ export class iffILBM extends Format
 	// recoil2png produces the best still images for iffILBM files, with abydosconvert being a runner up
 	// abydosconvert also 'stretches' the pixels to 'mimic' how they originally looked, but I don't really like that
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
-	converters = [`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", "iio2png", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert", "hiJaakExpress[matchType:magic]", "pv[matchType:magic]", "canvas[matchType:magic]"];
+	converters = [
+		`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", "iio2png", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert",
+		"hiJaakExpress[matchType:magic]", "pv[matchType:magic]"
+		//"canvas[matchType:magic]",	WAY too slow and also doesn't seem to handle any ILBM's that all the others miss, so skip it
+	];
 }
 
 /* Other IFF ILBM converters:

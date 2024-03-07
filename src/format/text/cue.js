@@ -7,6 +7,6 @@ export class cue extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/CUE_and_BIN";
 	ext          = [".cue"];
 	metaProvider = ["text", "cueInfo=>cue"];
-	magic        = ["ISO CDImage cue", "Cue Sheet", /^fmt\/1069( |$)/];
+	magic        = ["ISO CDImage cue", "Cue Sheet", /^Cue Sheet f.r/, /^fmt\/1069( |$)/];
 	untouched    = dexState => !!dexState.meta.cue;
 }

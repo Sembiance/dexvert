@@ -5,28 +5,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Add IFF HEAD support: http://discmaster2.textfiles.com/view/6/SpanishScene1.iso/spanish%20pack%20n%C2%B01%20by%20llfb/--llfb--/docs/docs04.dms/docs04.adf/ptr
-	Make a dexvert/bin/iffUtil.js with a readChunks(filePath|Uint8array)
-	Have it return an array of chunk objects. Each chunk has a type key sting and either a data key or chunks key.
-	So when it encounters FORM it'll auto call r.chunks = readChunks(data) but not return the set/return a data key
-	Make a bin/iffUtil.test.js that uses files from test/sample/
-	Used this for the IFF HEAD file with a bin/iffHEADExtract.js in.iff out.txt
-	Why a separate bin? To help keep memory usage out of dexvert workers
-Also try it on the IFF CAT file and see how it does, maybe ditch my iffCATextract and use JavaScript instead
-
-* See what other formats word97 supports and see about adding support for them.
-  Also, should word97 support an outType of RTF and use that?
-  Also see about using word97 to open 'wordDoc' files too
-
-* Install excel 97 on win2k and see if it can support some of the other excel samples (Worksheet1, 2, 3)
-  Also see how it handles the other XLS files
-  See if it can handle any of the image/excelChart files
-
-* Install Microsoft Office XP on winxp and use it's various programs to support more formats: wordDoc, xls, excelChart, powerpoint, etc
-  See what other formats each program supports and see about adding support for them
-
-* Add this detection program: https://www.helger.com/gt/program.php?tool=gt2
-
 * Add this detection program: http://fileformats.archiveteam.org/wiki/IDArc
 
 * Add this detection program: https://github.com/google/magika

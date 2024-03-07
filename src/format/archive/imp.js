@@ -6,6 +6,6 @@ export class imp extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/IMP";
 	ext            = [".imp"];
 	forbidExtMatch = true;
-	magic          = ["IMP archive data", "Imp compressed archive"];
+	magic          = ["IMP archive data", "Imp compressed archive", "IMP Archiv gefunden"];
 	converters     = ["imp"];
 }

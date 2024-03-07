@@ -8,7 +8,11 @@ export class xls extends Format
 	magic      = ["Microsoft Excel worksheet", "Microsoft Excel for OS/2 worksheet", "Microsoft Excel sheet", "Excel Microsoft Office Open XML Format document", "Microsoft Excel for Mac", /^fmt\/(55|56|58|59|61|214|555|556)( |$)/];
 	weakMagic  = ["Microsoft Excel sheet"];	// see poly/solidWorksDrawing/kloub.SLDDRW
 	converters = [
-		"soffice[format:MS Excel 2003 XML]", "soffice[format:MS Excel 97]", "soffice[format:MS Excel 95]", "soffice[format:MS Excel 5.0/95]", "soffice[format:MS Excel 4.0]", "soffice[matchType:magic]",
+		"soffice[format:MS Excel 2003 XML]", "soffice[format:MS Excel 97]", "soffice[format:MS Excel 95]", "soffice[format:MS Excel 5.0/95]", "soffice[format:MS Excel 4.0]", "excel97[matchType:magic]",
+	
+		// Mac files don't appear to be openable very easily by anything else and since soffice without a module specified will open any garbage, skip it
+		"soffice[matchType:magic][forbiddenMagic:Microsoft Excel for Mac]",
+		
 		"antixls"
 	];
 }

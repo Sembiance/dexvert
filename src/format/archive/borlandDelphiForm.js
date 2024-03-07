@@ -7,7 +7,7 @@ export class borlandDelphiForm extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Borland_Delphi_form";
 	ext            = [".dfm"];
 	filename       = [/^tform\d+$/i];
-	magic          = ["Delphi compiled form", "Borland Form", "Borland Delphi - C++ Builder Form"];
+	magic          = ["Delphi compiled form", "Borland Form", "Borland Delphi - C++ Builder Form", "Borland Delphi 3/4 Form Modul"];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
 	converters     = ["dfm2txt[type:bin] & dfm2txt[type:res]"];
 }

@@ -7,7 +7,7 @@ export class batDOS extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Batch_file";
 	ext            = [".bat"];
 	forbidExtMatch = true;
-	magic          = ["DOS batch file", ...TEXT_MAGIC, /^data$/];
+	magic          = ["DOS batch file", "BAT/CMD Batch Datei", ...TEXT_MAGIC, /^data$/];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

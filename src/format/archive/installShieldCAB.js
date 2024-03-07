@@ -5,7 +5,7 @@ export class installShieldCAB extends Format
 	name          = "InstallShield CAB";
 	website       = "http://fileformats.archiveteam.org/wiki/InstallShield_CAB";
 	ext           = [".cab"];
-	magic         = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive"];
+	magic         = ["InstallShield CAB", "InstallShield Cabinet archive", "InstallShield Compressed Archive", "ISC Archiv gefunden"];
 	keepFilename  = true;
 	auxFiles     = (input, otherFiles) =>
 	{

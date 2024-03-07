@@ -7,7 +7,7 @@ export class pas extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Pascal";
 	ext            = [".pas", ".tp5"];
 	forbidExtMatch = true;
-	magic          = [...TEXT_MAGIC, "Delphi Project source"];
+	magic          = [...TEXT_MAGIC, "Delphi Project source", "Pascal Programm"];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

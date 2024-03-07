@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
 
-const _AVI_MAGIC = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", /^fmt\/5( |$)/];
+const _AVI_MAGIC = ["AVI Audio Video Interleaved", /^RIFF.* data, AVI.*/, "Audio/Video Interleaved Format", "Animation Video (AVI)", /^fmt\/5( |$)/];
 export {_AVI_MAGIC};
 
 export class avi extends Format

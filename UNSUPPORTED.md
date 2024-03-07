@@ -1,11 +1,11 @@
-# Unsupported File Formats (940)
+# Unsupported File Formats (938)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (61)
+## Archive (60)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 archive | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -31,7 +31,6 @@ archive | Eschalon Setup ARCV Container |  | No known extractor program.
 archive | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 archive | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
 archive | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
-archive | IFF LIST File |  | [18 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. In theory I could parse this file, and "extract" out by creating seperate files for each major FORM entry inside, making sure to also copy into these files the 'shared' entries, adjusting the resulting FORM lengths as needed. Couldn't find any real documentation on the LIST/SSETPROP format. See: https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF
 archive | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [1 sample file](https://sembiance.com/fileFormatSamples/archive/installerVISE/) - Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 archive | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 archive | MetaCard Stack | .rev | 
@@ -263,7 +262,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (84)
+## Image (83)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -294,7 +293,6 @@ image | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga
 image | Drawing Interchange Binary Format | .dxb | 
 image | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
 image | EasyCAD Drawing | .fcd | 
-image | [Excel Chart](http://fileformats.archiveteam.org/wiki/Ascii-Art_Editor) | .xlc | [18 sample files](https://sembiance.com/fileFormatSamples/image/excelChart/) - Canvas and KeyView Pro both claim support for this, but I couldn't get them to convert any of my samples.
 image | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 image | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 image | Freelance Graphics Drawing | .drw | 

@@ -3,11 +3,13 @@ import {Format} from "../../Format.js";
 
 export class iffLIST extends Format
 {
-	name        = "IFF LIST File";
-	magic       = ["IFF List file"];
-	unsupported = true;
-	notes       = xu.trim`
+	name       = "IFF LIST File";
+	website    = "https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF";
+	magic      = ["IFF LIST file", "IFF List"];
+	converters = ["unIFFLIST"];
+	notes      = xu.trim`
 		The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file.
-		In theory I could parse this file, and "extract" out by creating seperate files for each major FORM entry inside, making sure to also copy into these files the 'shared' entries, adjusting the resulting FORM lengths as needed.
-		Couldn't find any real documentation on the LIST/SSETPROP format. See: https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF`;
+		The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties.
+		I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly.
+		But I do properly extract the IFFs from the LIST, so maybe someday I'll find a converter`;
 }

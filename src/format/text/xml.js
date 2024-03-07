@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _XML_MAGIC = ["Extensible Markup Language", "Generic XML", /^XML .*document/];
+const _XML_MAGIC = ["Extensible Markup Language", "Generic XML", /^XML .*document/, "XML Datei"];
 export {_XML_MAGIC};
 
 export class xml extends Format

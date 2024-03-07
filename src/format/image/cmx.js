@@ -6,6 +6,6 @@ export class cmx extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/CMX";
 	ext            = [".cmx"];
 	forbidExtMatch = true;
-	magic          = ["Corel Metafile Exchange Image", "Corel Presentation Exchange File", /^x-fmt\/34( |$)/, /^x-fmt\/35( |$)/];
+	magic          = ["Corel Metafile Exchange Image", "Corel Presentation Exchange File", "RIFF Datei: unbekannter Typ 'CMX1'", /^x-fmt\/34( |$)/, /^x-fmt\/35( |$)/];
 	converters     = ["soffice[outType:svg]", "uniconvertor[autoCrop]", "deark[module:corel_ccx]", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas[matchType:magic][nonRaster]"];
 }

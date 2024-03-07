@@ -116,6 +116,8 @@ async function fuzzByFileSize()
 
 		fileSizes.push(...(Array.isArray(format.fileSize) ? format.fileSize : (Object.isObject(format.fileSize) ? Object.values(format.fileSize) : [format.fileSize])).map(fileSize => ({sourceFormats : [`${format.family.familyid}/${formatid}`], fileSize})));
 	}
+	if(!fileSizes.length)
+		return;
 
 	const failures = [];
 	console.log(printUtil.majorHeader(`Fuzzing ${fileSizes.length} file sizes (from ${formatsToProcess.length} formats)...`, {prefix : "\n"}));
@@ -172,6 +174,8 @@ async function fuzzByFilename()
 			filenames.push({sourceFormats : [`${format.family.familyid}/${formatid}`], filename : randExp.gen()});
 		}
 	}
+	if(!filenames.length)
+		return;
 
 	const failures = [];
 	console.log(printUtil.majorHeader(`Fuzzing ${filenames.length} filenames (from ${formatsToProcess.length} formats)...`, {prefix : "\n"}));

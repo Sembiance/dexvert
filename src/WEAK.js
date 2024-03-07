@@ -15,6 +15,28 @@ export const WEAK_VALUES =
 	// lsar: WEAK checks
 	/^LZMA_Alone$/,
 	/^Split file$/,
+
+	// pc98ripperID: WEAK checks
+	/^PC-98 ElfDOS$/,
+
+	// GT2: WEAK checks
+	/^Borland Object Datei/,
+	/^DOS Ger.tetreiber/,
+	/^Kopftext/,
+	/^JPG Bild/,
+	/^Icon Datei/,
+	/^IFF Datei/,
+	/^INI Datei/,
+	/^Lotus 123 Tabelle/,
+	/^MAC Bilddatei/,
+	/^MPEG \d layer/,
+	/^MPEG Filem/,
+	/^MPEG-4 Audio Datei/,
+	/^PCX Bild/,
+	/^POIFS Dokument/,
+	/^Unicode Textdatei/,
+	/^Windows Maus Cursor Datei\/Works f.r DOS Datei/,
+	/^Wordperfect Dokument Datei/,
 	
 	// FILE: Very weak checks:
 	/^, /,

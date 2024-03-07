@@ -11353,3 +11353,24 @@ Miscellaneous formats:
 - Amiga RDB (Rigid Disk Block) partition table
 - GZIP compression
 - XZ
+
+
+>>> Excel 97  win2k
+Data Interchange Formats *.dif
+dBase Files *.dbf
+Excel
+Excel Add-Ins *.xla, *.xll
+Excel Backup Files *.xlk, *.bak
+Excel Charts *.xlc
+Excel Macros *.xlm, *.xla??
+Excel Templates *.xlt
+Excel Toolbars *.xlb
+Excel Workbooks *.xlw
+Excel Worksheets *.xls
+Excel Workspaces *.xlw
+Lotus 1-2-3 *.wk?
+Microsoft Works 2.0 Files *.wks
+Quattro Pro 1.0/5.0 (Win) *.wb1
+Quattro Pro/DOS Files *.wq1
+SYLK Files *.slk
+

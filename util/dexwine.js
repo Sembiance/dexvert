@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {cmdUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {XLog} from "xlog";
-import {run as wineRun, WINE_PREFIX_SRC, WINE_WEB_HOST, WINE_WEB_PORT} from "../wineUtil.js";
+import {run as wineRun, WINE_PREFIX_SRC, WINE_WEB_HOST, WINE_WEB_PORT} from "../src/wineUtil.js";
 import {WebServer} from "WebServer";
 
 const argv = cmdUtil.cmdInit({

@@ -68,7 +68,7 @@ export default
 		atariCPX                : {name : "Atari Control Panel Extension Module", ext : [".cpx"], magic : ["Atari 68xxx CPX file", "Atari Control Panel applet"], weakMagic : true},
 		atariSTExe              : {name : "Atari ST Executable", magic : ["Atari ST TOS executable", "Atari ST M68K contiguous executable", "Atari ST program/executable"]},
 		blackberryExecutable    : {name : "BlackBerry Executable", ext : [".cod"], magic : ["Blackberry Binary Executable"]},
-		com                     : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM"]},
+		com                     : {name : "MS-DOS COM Executable", ext : [".com", ".c0m"], magic : ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "DOS COM Executable Datei"]},
 		elf                     : {name : "ELF Executable", magic : ["ELF Executable and Linkable format", /^ELF \d\d-bit [LM]SB executable/, "Executable and Linkable Format"]},
 		linux8086Exe            : {name : "Linux 8086 Executable", magic : [/^Linux.*8086.*executable/]},
 		linux386Exe             : {name : "Linux i386 Executable", magic : [/^Linux.*386.*executable/]},

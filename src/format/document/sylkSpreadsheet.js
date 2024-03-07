@@ -7,5 +7,5 @@ export class sylkSpreadsheet extends Format
 	ext            = [".slk", ".sylk"];
 	forbidExtMatch = true;
 	magic          = ["spreadsheet interchange document"];
-	converters     = ["soffice[format:SYLK]"];
+	converters     = ["soffice[format:SYLK]", "excel97"];
 }

@@ -6,6 +6,6 @@ export class installShieldScript extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/InstallShield_INS";
 	ext            = [".ins"];
 	forbidExtMatch = true;
-	magic          = ["InstallShield Script"];
+	magic          = ["InstallShield Script", "Compilierte installShield Script Datei"];
 	converters     = ["strings"];
 }

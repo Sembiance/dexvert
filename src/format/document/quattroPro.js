@@ -7,5 +7,5 @@ export class quattroPro extends Format
 	ext            = [".wq1", ".wq2", ".wb1", ".wb2", ".wb3", ".qpw"];
 	forbidExtMatch = true;
 	magic          = ["Quattro Pro for Windows spreadsheet", /^fmt\/837( |$)/];
-	converters     = ["soffice[format:QPro]"];
+	converters     = ["soffice[format:QPro]", "excel97"];
 }

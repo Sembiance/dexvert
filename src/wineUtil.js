@@ -17,7 +17,7 @@ export function getWineDriveC(base)
 
 // Key names: /usr/include/X11/keysymdef.h
 // Wine Guide: https://wiki.winehq.org/Wine_User%27s_Guide
-export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, script, wineCounter, timeout=xu.MINUTE*5, xlog, monitor})
+export async function run({f, cmd, args=[], cwd, arch="win32", base="base", console, keepOutput, script, wineCounter, timeout=xu.MINUTE*5, xlog, monitor})
 {
 	const wineBaseEnv = await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getBaseEnv`)).json();
 	if(!Object.keys(wineBaseEnv).includes(base))
@@ -37,7 +37,9 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 		await Deno.mkdir(wineOutDirPath);
 	}
 
-	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout, xlog};
+	const runOptions = {detached : true, env : {...wineBaseEnv[base], WINEARCH : arch}, cwd, timeout};
+	if(!keepOutput)
+		runOptions.xlog = xlog;
 	if(runOptions.cwd?.startsWith("wine://"))
 		runOptions.cwd = path.join(wineBaseEnv[base].WINEPREFIX, "drive_c", runOptions.cwd.substring("wine://".length));
 
@@ -75,7 +77,8 @@ export async function run({f, cmd, args=[], cwd, arch="win32", base="base", cons
 
 	if(wineInDirPath && wineOutDirPath)
 	{
-		await runUtil.run("rsync", runUtil.rsyncArgs(path.join(wineOutDirPath, "/"), path.join(f.outDir.absolute, "/")));
+		if(f.outDir)
+			await runUtil.run("rsync", runUtil.rsyncArgs(path.join(wineOutDirPath, "/"), path.join(f.outDir.absolute, "/")));
 		await fileUtil.unlink(wineOutDirPath, {recursive : true});
 		await fileUtil.unlink(wineInDirPath, {recursive : true});
 	}

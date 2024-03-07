@@ -6,9 +6,6 @@ import {path} from "std";
 export class aaru extends Program
 {
 	website = "https://github.com/aaru-dps/Aaru";
-	//flags   = {
-	//	op : `Operation to perform. Default: extract`
-	//};
 	package   = "app-arch/Aaru";
 	bin       = "aaru";
 	args      = r => ["filesystem", "extract", r.inFile(), r.outDir()];

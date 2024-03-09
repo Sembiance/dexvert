@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+    <token name="verexpr" attrs="vercond">
+        Commonly used version expressions.
+        <verexpr token="#DLA#" string="(#VER# #EQ# 15)">Disneyland Adventures</verexpr>
+        <verexpr token="#ZTUAC#" string="(#VER# #EQ# 17)">ZTUAC</verexpr>
+		<verexpr token="#PC#" string="(#VER# #EQ# 18)">PC</verexpr>
+		<verexpr token="#OLD#" string="(#VER# #LT# 19)">PC</verexpr>
+        <verexpr token="#PZ#" string="((! #USER# \ use_djb) #AND# (#VER# #GTE# 19))">PZ</verexpr>
+        <verexpr token="#PZ16#" string="((! #USER# \ use_djb) #AND# (#VER# #EQ# 20))">PZ</verexpr>
+        <verexpr token="#JWE#" string="((#USER# \ use_djb) #AND# (#VER# #EQ# 19))">JWE</verexpr>
+        <verexpr token="#JWE2#" string="((#USER# \ use_djb) #AND# (#VER# #EQ# 20))">JWE2</verexpr>
+    </token>
+
+	<token name="global" attrs="vercond access">
+        Global Tokens.
+        NOTE: These must be listed after the above tokens so that they replace last. For example, `verexpr` uses these tokens.
+        <global token="#USER#" string="user_version" />
+        <global token="#VER#" string="version" />
+        <global token="#FLAG#" string="version_flag" />
+    </token>
+
+	<xi:include href="../base/base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+	<verattr name="version" access="#VER#" index="0" />
+	<verattr name="user_version" access="#USER#" index="1" type="VersionInfo"/>
+	<verattr name="version_flag" access="#FLAG#" index="2" />
+
+    <version id="DLA" version="15">Disneyland Adventures</version>
+    <version id="ZTUAC" version="17">Zoo Tycoon Ultimate Animal Collection</version>
+    <version id="PC" version="18" user_version="8340 8724 8212" version_flag="8">Planet Coaster</version>
+    <version id="PZ" version="19" user_version="8340 8724 8212">Planet Zoo pre-1.6</version>
+    <version id="PZ16" version="20" user_version="8340 8724 8212">Planet Zoo</version>
+    <version id="JWE" version="19" user_version="24724 25108 24596">Jurassic World Evolution</version>
+    <version id="JWE2DEV" version="20" user_version="24724 25108 24596" is_dev="1">Jurassic World Evolution 2 Dev</version>
+    <version id="JWE2" version="20" user_version="24724 25108 24596">Jurassic World Evolution 2</version>
+
+    <!-- Extra basic types -->
+
+    <basic name="bool" integral="true" countable="false" boolean="true" >
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="OffsetString" integral="true" countable="true">
+        An unsigned 32-bit integer.
+    </basic>
+
+    <enum name="Compression" numbytes="4" storage="uint" default="0">
+        <option value="0" name="NONE" />
+        <option value="1" name="ZLIB" />
+        <option value="4" name="OODLE" />
+    </enum>
+
+    <bitfield name="VersionInfo" storage="uint">
+        Determines the format of the OVL file.
+        n.b. pos counts from the end!
+        # compression                         __ _
+		# pc/pz uncompressed	8212	00100000 00010100
+		# pc/pz zlib			8340	00100000 10010100
+		# pc/pz oodle			8724	00100010 00010100
+
+		# JWE (uncomp)	        24596	01100000 00010100
+		# JWE zlib				24724	01100000 10010100
+		# JWE oodle (switch)	25108	01100010 00010100
+        <member width="1" pos="2" name="unk1" type="bool"/>
+        <member width="1" pos="4" name="unk2" type="bool"/>
+        <member width="3" pos="7" name="compression" type="Compression"/>
+        <member width="1" pos="13" name="unk3" type="bool"/>
+        <member width="1" pos="14" name="use_djb" type="bool">makes OVS use DJB internally instead of indices into OVL lists, also affects memory offsets</member>
+    </bitfield>
+
+	<!-- Structs for the OVL file -->
+
+    <compound name="Pointer" >
+        a pointer in an ovl memory layout, can point to a struct or a dependency entry
+        <add name="pool_index" type="int" default="-1">The index of the MemPool this one relates to; OR, for entries referred to from AssetEntries: -1</add>
+        <add name="data_offset" type="uint" >the byte offset relative to the start of the MemPool's data</add>
+    </compound>
+
+    <compound name="Reference" inherit="Pointer" >
+    </compound>
+
+    <compound name="LookupPointer" inherit="Pointer" >
+    </compound>
+
+    <compound name="ArrayPointer" inherit="Pointer" >
+        a pointer to an array in an ovl memory layout
+    </compound>
+
+    <compound name="CondPointer" inherit="Pointer" >
+        a pointer to a data struct that may sometimes be null without a bool
+    </compound>
+
+    <compound name="ForEachPointer" inherit="Pointer" >
+        a pointer to an array in an ovl memory layout
+    </compound>
+
+    <compound name="MemStruct" >
+        this is a struct that is capable of having pointers
+    </compound>
+
+	<compound name="SmartPadding">
+		Grabs 00 bytes only
+	</compound>
+
+    <basic name="ZStringObfuscated" integral="false">
+        A string that ends with a null byte (0x00), and additionally has its bytes modified.
+    </basic>
+
+    <compound name="GenericHeader">
+        Found at the beginning of every OVL file
+        <add name="magic" type="FixedString" arg="4">'FRES' for ovl</add>
+        <add name="version_flag" type="byte" >if 0x08 then 64bit, 0x01 for JWE, PZ, 0x08 for PC, 0x48 for JWE Switch, may be platform</add>
+        <add name="version" type="byte" >0x12 = PC, 0x13 = JWE, PZ</add>
+        <add name="Bitswap" type="byte" >endianness?, usually zero</add>
+        <add name="Seventh Byte" type="byte" default="1" >always = 1</add>
+        <add name="user_version" type="VersionInfo" >determines compression format (none, zlib or oodle) and apparently type of data (additional fields)</add>
+    </compound>
+
+    <compound name="Empty">
+        An empty object, used to reference stream offsets
+    </compound>
+
+    <compound name="ZStringList" inherit="MemStruct">
+        <add name="ptrs" type="Pointer" template="ZString" arr1="#ARG#"/>
+    </compound>
+
+    <compound name="ZStringList" inherit="MemStruct">
+        <add name="ptrs" type="Pointer" template="ZString" arr1="#ARG#"/>
+    </compound>
+
+<!--    <compound name="ZStringPointer" inherit="MemStruct">-->
+<!--        currently not beneficial, perhaps it is better to instead use ZStringArrayPointer-->
+<!--        <add name="string" type="Pointer" template="ZString"/>-->
+<!--    </compound>-->
+
+</niftoolsxml>

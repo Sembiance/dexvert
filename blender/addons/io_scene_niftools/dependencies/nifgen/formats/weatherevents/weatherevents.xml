@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="WeatherEventsRoot" inherit="MemStruct">
+        <add name="resource_name" type="Pointer" template="ZStringObfuscated"/>
+        <add name="default_event_name" type="Pointer" template="ZString"/>
+        # unconfirmed, but most likely
+        <add name="transition_time" type="float" />
+        <add name="unknown1" type="float" />
+
+        <add name="event_list" type="ArrayPointer" template="WeatherEventData" arg="event_count"/>
+        <add name="event_count" type="uint64" />
+        <add name="unknown2" type="uint64" />
+    </compound>
+
+    <compound name="WeatherEventData" inherit="MemStruct">
+        <add name="event_name" type="Pointer" template="ZString"/>
+        <add name="float1" type="float" />
+        <add name="float2" type="float" />
+        <add name="float3" type="float" />
+        <add name="float4" type="float" />
+        <add name="float5" type="float" />
+        <add name="float6" type="float" />
+        <add name="float7" type="float" />
+        <add name="float8" type="float" />
+        <add name="float9" type="float" />
+        <add name="float10" type="float" />
+        <add name="event_curve_name_from_base" type="Pointer" template="ZString"/>
+        <add name="unk1_as_1" type="uint" />
+        <add name="float11" type="float" />
+        <add name="float12" type="float" />
+        <add name="float13" type="float" />
+        <add name="float14" type="float" />
+        <add name="float15" type="float" />
+        <add name="event_curve_clouds" type="Pointer" template="ZString"/>
+
+        <add name="block1unk_as_1" type="uint" />
+        <add name="block1_float1" type="float" />
+        <add name="block1_float2" type="float" />
+        <add name="block1_float3" type="float" />
+        <add name="block1_float4" type="float" />
+        <add name="block1_float5" type="float" />
+        <add name="block1_float6" type="float" />
+        <add name="block1_float7" type="float" />
+
+        <add name="block2unk_as_1" type="uint" />
+        <add name="block2_float1" type="float" />
+        <add name="block2_float2" type="float" />
+        <add name="block2_float3" type="float" />
+        <add name="block2_float4" type="float" />
+        <add name="block2_float5" type="float" />
+        <add name="block2_float6" type="float" />
+        <add name="block2_float7" type="float" />
+
+        <add name="block3unk_as_1" type="uint" />
+        <add name="block3_float1" type="float" />
+        <add name="block3_float2" type="float" />
+        <add name="block3_float3" type="float" />
+        <add name="block3_float4" type="float" />
+        <add name="block3_float5" type="float" />
+
+    </compound>
+
+</niftoolsxml>

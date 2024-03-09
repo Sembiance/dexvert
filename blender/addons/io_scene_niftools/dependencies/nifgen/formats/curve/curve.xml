@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="CurveRoot" inherit="MemStruct">
+        <add name="keys" type="ArrayPointer" template="Key" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="Key" inherit="MemStruct">
+        <add name="time" type="float" />
+        <add name="value" type="float" />
+    </compound>
+
+</niftoolsxml>

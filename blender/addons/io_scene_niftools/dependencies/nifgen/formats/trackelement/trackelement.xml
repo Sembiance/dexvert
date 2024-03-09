@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+	
+
+	
+    <compound name="TrackElementRoot" inherit="MemStruct">
+        PC: 32 bytes
+        <add name="track_data" type="ArrayPointer" arg="count" template="TrackElementData"/>
+        <add name="count" type="uint64" />
+		<add name="unk string1" type="pointer" template="ZString" />
+		<add name="unk string2" type="pointer" template="ZString" />
+    </compound>
+
+    <compound name="TrackElementData" inherit="MemStruct">
+        PC: 80 PZ: 48
+        <add name="loop_name" type="Pointer" template="ZString"/>
+        <add name="ovl_name" type="Pointer" template="ZString"/>
+        <add name="catwalk" type="Pointer" template="TrackElementSub" until="18"/>
+        <add name="unk 0" type="uint64" until="18" />
+        <add name="OptionalCatwalk" type="Pointer" template="ZString"/>
+        <add name="unk 1" type="uint" until="18"/>
+        <add name="unk 2" type="uint" />
+        <add name="unk 3" type="ushort" default="0" />
+        <add name="unk 4" type="ushort" default="32" />
+        <add name="unk 5" type="uint" until="18" default="1024"/>
+        <add name="unk 6" type="uint" default="1"/>
+        <add name="unk 7" type="uint" default="1" />
+        <add name="pad" type="uint64" cond="#ARG# #LT# 2" >8 bytes when count is 1</add>
+    </compound>
+
+    <compound name="TrackElementSub" inherit="MemStruct">
+        PC: 32
+        <add name="CatwalkRight_LSM" type="Pointer" template="ZString"/>
+        <add name="CatwalkLeft_LSM" type="Pointer" template="ZString"/>
+        <add name="CatwalkBoth_LSM" type="Pointer" template="ZString"/>
+        <add name="unk 0" type="uint64" />
+    </compound>
+
+</niftoolsxml>

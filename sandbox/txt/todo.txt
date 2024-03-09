@@ -5,12 +5,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Add this detection program: http://fileformats.archiveteam.org/wiki/IDArc
-
-* Add this detection program: https://github.com/google/magika
-  For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests
-  Make sure I also put it on info.txt App Updates section
-
 * Add 3D/Poly support.
   FIRST determine which format to convert into AND which viewer to use in the browser. Test in just a sandbox
   SECOND Convert some simple objects. Goal is to support viewing in 3D the trumpet and skeleton models mentioned in: https://www.youtube.com/watch?v=-naVu19GMqg
@@ -214,9 +208,19 @@
 * Add rendering of previews of full game maps supported by 'gamemap': https://github.com/Malvineous/libgamemaps
   Research them here: https://moddingwiki.shikadi.net
 
+* Could incorporate a new detectory, the DOS based identification program sandbox/app/idar215.exe (self extractor) http://fileformats.archiveteam.org/wiki/IDArc
+  Due to the overhead with DOSBox, would want to use 'dosemu2' to run this directrly from the linux console: https://github.com/dosemu2/dosemu2
+  I got it to install and compile, but the freedos (fdpp) linking wasn't correct yet and it failed to run IDARCH.EXE
+
+
 /----------------\
 | Probably Never |
 \----------------/
+* Add this detection program: https://github.com/google/magika
+  It only detects a small handful of file formats, more modern ones too.
+  For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests
+  Make sure I also put it on info.txt App Updates section
+
 * Pay someone to add more formats to FFMPEG (gl/dl/ANIM/etc) or to improve existing formats: http://www.ffmpeg.org/consulting.html
 
 * Consider switching away from DOSBOX and use an authentic MS-DOS installation under 86Box

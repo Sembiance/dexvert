@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <enum name="VxlDtype" storage="uint64">
+        <option value="0" name="UBYTE"/>
+        <option value="2" name="FLOAT"/>
+    </enum>
+
+    <compound name="DataSlot">
+        <add name="_offset" type="uint64" >offset into buffer to start of data - only given if some count is nonzero</add>
+        <add name="_count" type="uint64" >count of data</add>
+<!--        <add name="data" type="#T#" arr1="0"/>-->
+    </compound>
+
+    <compound name="VoxelskirtRoot" inherit="MemStruct">
+        # size varies according to game
+        JWE2 - 120 bytes
+        <add name="zero" type="uint64" default="0" optional="True"/>
+        <add name="_data_size" type="uint64" >total size of buffer data</add>
+        <add name="x" type="uint64"/>
+        <add name="y" type="uint64"/>
+        <add name="scale" type="float" >multiply by x or y to get the actual dimension of skirt, eg 512px * 16.0 = 8192.0m</add>
+        <add name="padding" type="uint" default="0" optional="True"/>
+        <add name="_height_offset" type="uint64" vercond="#PC#">zero, for PC only</add>
+        <add name="_weights_offset" type="uint64" vercond="#PC#" >x*y*4, for PC only</add>
+        <add name="layers" type="DataSlot" vercond="!#PC#" template="Layer"/>
+        <add name="areas" type="DataSlot" vercond="!#PC#" template="Area"/>
+        <add name="entity_groups" type="DataSlot" template="EntityGroup"/>
+        <add name="materials" type="DataSlot" template="Material"/>
+        <add name="names" type="DataSlot" template="Name"/>
+    </compound>
+
+    <compound name="Name">
+        <add name="_offset" type="uint64" >address of ZString</add>
+    </compound>
+
+    <compound name="Layer">
+        32 bytes
+        PZ and JWE only, describes a data layer image
+        <add name="_id" type="uint64" >index into name list</add>
+        <add name="dtype" type="VxlDtype"/>
+        <add name="_offset" type="uint64" >address of this data layer</add>
+        <add name="_data_size" type="uint64" >data size of this layer, in bytes</add>
+    </compound>
+
+    <compound name="Area">
+        40 bytes
+        <add name="_id" type="uint64" >index into name list</add>
+        <add name="width 1" type="uint64"/>
+        <add name="height 1" type="uint64"/>
+        <add name="width 2" type="uint64"/>
+        <add name="height 2" type="uint64"/>
+    </compound>
+
+    <compound name="Vector3f">
+        <add name="x" type="float"/>
+        <add name="y" type="float"/>
+        <add name="z" type="float"/>
+    </compound>
+
+    <compound name="EntityInstance">
+        Describes the position of one instanced entity
+        <add name="loc" type="Vector3f"/>
+        <add name="z rot" type="float"/>
+    </compound>
+
+    <compound name="Material">
+        24 bytes
+        <add name="entity_instances" type="DataSlot" template="EntityInstance"/>
+        <add name="_id" type="uint64" >index into name list</add>
+    </compound>
+
+    <compound name="EntityGroup" inherit="Material">
+        32 bytes
+        describes a list of instances of one entity
+        <add name="ff" type="int" >-1</add>
+        <add name="ff or zero" type="int" >-1, 0 for PC</add>
+    </compound>
+
+</niftoolsxml>

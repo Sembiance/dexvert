@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="TerrainDetailLayersRoot" inherit="MemStruct">
+        # 16 bytes
+        <add name="layer_list"  type="ArrayPointer" template="TerrainDetailsLayerItem" arg="layer_count"/>
+        <add name="layer_count" type="uint64" />
+
+    </compound>
+
+    <compound name="TerrainDetailsLayerItem" inherit="MemStruct">
+        # 88 bytes
+
+        <add name="layer_name"  type="Pointer" template="ZString"/>
+        # seems like brushes list or something
+        <add name="info_list"  type="ArrayPointer" template="InfoStruct" arg="info_count"/>
+        <add name="info_count" type="uint" />
+
+        <add name="float1"   type="float" />
+        <add name="float2"   type="float" />
+        <add name="float3"   type="float" />
+        <add name="float4"   type="float" />
+        <add name="float5"   type="float" />
+        <add name="float6"   type="float" />
+        <add name="unk_2"    type="uint" />
+
+        # LOD info
+        <add name="detail_list" type="ArrayPointer" template="DetailStruct" arg="detail_count"/>
+        <add name="detail_count" type="uint" />
+
+        <add name="floata1"   type="float" />
+        <add name="floata2"   type="float" />
+        <add name="floata3"   type="float" />
+        <add name="floata4"   type="float" />
+        <add name="floata5"   type="float" />
+        <add name="floata6"   type="float" />
+        <add name="floata7"   type="float" />
+        <add name="floata8"   type="float" />
+
+        <add name="unk_3_flags"         type="uint" />
+        <add name="unk_count"    type="uint64" />
+        <add name="other_names" type="Pointer" template="ZStringList" arg="other_names_count"/>
+        <add name="other_names_count"    type="uint64" />
+        <add name="second_name"  type="Pointer" template="ZString"/>
+
+        <add name="floatb1"   type="float" />
+        <add name="floatb2"   type="float" />
+
+    </compound>
+
+    # brush list
+    <compound name="InfoStruct" inherit="MemStruct">
+        <add name="brush_list"  type="ArrayPointer" template="brushitemStruct" arg="brush_count"/>
+        <add name="brush_count" type="uint" />
+        <add name="brush_flags" type="uint" />
+        # confirm this is scale or alpha
+        <add name="Scale"        type="float" />
+        # looks like padding
+        <add name="unk_1"        type="float" />
+    </compound>
+
+    <compound name="brushitemStruct" inherit="MemStruct">
+        <add name="brush_name"  type="Pointer" template="ZString"/>
+        <add name="brush_type"  type="uint64"/>
+    </compound>
+
+    # Level Of Detail for the layer
+    <compound name="DetailStruct" inherit="MemStruct">
+        <add name="index"    type="uint" />
+        <add name="x"        type="float" />
+        <add name="y"        type="float" />
+        <add name="z"        type="float" />
+    </compound>
+
+</niftoolsxml>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="Color" inherit="MemStruct">
+        4 bytes
+        <add name="r" type="ubyte"/>
+        <add name="g" type="ubyte"/>
+        <add name="b" type="ubyte"/>
+        <add name="a" type="ubyte"/>
+    </compound>
+
+    <compound name="AttribData" inherit="MemStruct">
+        <add name="value" type="float" arr1="1" cond="#ARG#\dtype #EQ# 0"/>
+        <add name="value" type="float" arr1="2" cond="#ARG#\dtype #EQ# 1"/>
+        <add name="value" type="float" arr1="3" cond="#ARG#\dtype #EQ# 2"/>
+        <add name="value" type="float" arr1="4" cond="#ARG#\dtype #EQ# 3"/>
+        <add name="value" type="int" arr1="1" cond="#ARG#\dtype #EQ# 5"/>
+        <add name="value" type="int" arr1="1" cond="#ARG#\dtype #EQ# 6"/>
+    </compound>
+
+    <enum name="FgmDtype" numbytes="4" storage="uint" default="0">
+		<option value="0" name="Float" />
+		<option value="1" name="Float2" />
+		<option value="2" name="Float3" />
+		<option value="3" name="Float4" />
+		<option value="5" name="Int" />
+		<option value="6" name="Bool" />
+		<option value="7" name="RGBA" />
+		<option value="8" name="Texture" />
+    </enum>
+
+    <compound name="FgmHeader" inherit="MemStruct">
+        # JWE, PZ - 64 bytes
+        # JWE2 - 80 bytes
+		# JWE2 patternset fgms seem to be in pool type 3, everything else in 2
+        <add name="_texture_count" type="uint" until="15"/>
+        <add name="_texture_count" type="uint64" since="17"/>
+        <add name="_attribute_count" type="uint" until="15"/>
+        <add name="_attribute_count" type="uint64" since="17"/>
+        followed by 32 bytes for 4 pointers, which are not always all used
+        <add name="textures" type="ArrayPointer" template="TextureInfo" arg="_texture_count"/>
+        <add name="attributes" type="ArrayPointer" template="AttribInfo" arg="_attribute_count"/>
+        <add name="name_foreach_textures" type="ForEachPointer" template="TextureData" arg="textures"/>
+        <add name="value_foreach_attributes" type="ForEachPointer" template="AttribData" arg="attributes"/>
+        and finally 16 bytes, apparently unused
+        <add name="_unk_0" type="uint64"/>
+        <add name="_unk_1" type="uint64"/>
+        JWE2 has 16 more unused bytes
+        <add name="_unk_2" type="uint64" vercond="#JWE2#"/>
+        <add name="_unk_3" type="uint64" vercond="#JWE2#"/>
+    </compound>
+
+	<compound name="GenericInfo" inherit="MemStruct">
+		<add name="_name_offset" type="uint" >byte offset to name in fgm buffer</add>
+        <add name="dtype" type="FgmDtype"/>
+    </compound>
+
+	<compound name="TexIndex" inherit="MemStruct">
+        stores index into shader and array index of texture
+        <add name="_tex_index" type="uint" />
+        <add name="array_index" type="uint" since="18">index of tile if an array texture is used eg JWE swatches</add>
+    </compound>
+
+	<compound name="TextureInfo" inherit="GenericInfo">
+		part of fgm fragment, per texture involved
+        <add name="value" type="TexIndex" arr1="1" cond="dtype == 8" />
+		<add name="value" type="Color" arr1="2" cond="dtype == 7" since="18">Stores 2 rgba colors</add>
+		<add name="value" type="Color" arr1="1" cond="dtype == 7" until="17">Stores rgba color</add>
+        used in JWE swatches, purpose unknown
+        <add name="some_index_0" type="uint" since="18" default="0" optional="True" />
+        <add name="some_index_1" type="uint" since="18" default="0" optional="True" />
+    </compound>
+
+	<compound name="AttribInfo" inherit="GenericInfo">
+		part of fgm fragment, repeated per attribute
+		<add name="_value_offset" type="uint64" >byte offset to first value in the data_lib pointer, usually or always sorted in stock</add>
+    </compound>
+
+	<compound name="TextureData" inherit="MemStruct">
+		<add name="dependency_name" type="Pointer" cond="#ARG#\dtype #EQ# 8">only present if textured</add>
+    </compound>
+
+</niftoolsxml>

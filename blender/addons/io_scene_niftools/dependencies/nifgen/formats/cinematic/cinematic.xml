@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="CinematicRoot" inherit="MemStruct">
+        <add name="u0" type="uint64" />
+        <add name="u1" type="uint64" />
+        <add name="data" type="Pointer" template="CinematicData" />
+    </compound>
+
+    <compound name="CinematicData" inherit="MemStruct">
+        <add name="default_name" type="Pointer" template="ZString"/>
+        <add name="next_levels" type="ArrayPointer" template="State" arg="next_level_count"/>
+        <add name="next_level_count" type="uint64" />
+    </compound>
+
+    <compound name="State" inherit="MemStruct">
+        JWE2: 64 bytes
+        <add name="abstract_name" type="Pointer" template="ZString"/>
+        <add name="concrete_name" type="Pointer" template="ZString"/>
+        <add name="prefab_name" type="Pointer" template="ZString"/>
+        <add name="a" type="uint64" />
+        <add name="b" type="uint64" />
+        <add name="c" type="uint64" />
+        <add name="events_list" type="Pointer" template="EventsList" />
+        <add name="d" type="uint64" />
+    </compound>
+
+    <compound name="EventsList" inherit="MemStruct">
+        <add name="events" type="ArrayPointer" template="Event" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="Event" inherit="MemStruct">
+        32 bytes
+        <add name="start_time" type="float" />
+        <add name="b" type="float" />
+        <add name="module_name" type="Pointer" template="ZString" />
+        <add name="attributes" type="Pointer" template="EventAttributes" />
+        <add name="duration" type="float" />
+        <add name="d" type="float" />
+    </compound>
+
+    <compound name="EventAttributes" inherit="MemStruct">
+        24 bytes
+        <add name="anim_name" type="Pointer" template="ZString" />
+        <add name="event_name" type="Pointer" template="ZString" />
+        <add name="empty_string" type="Pointer" template="ZString" />
+    </compound>
+
+</niftoolsxml>

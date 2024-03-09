@@ -1,0 +1,36 @@
+from nifgen.array import Array
+from nifgen.formats.nif.imports import name_type_map
+from nifgen.formats.nif.nianimation.niobjects.NiInterpController import NiInterpController
+
+
+class NiMultiTargetTransformController(NiInterpController):
+
+	"""
+	DEPRECATED (20.6)
+	"""
+
+	__name__ = 'NiMultiTargetTransformController'
+
+
+	def __init__(self, context, arg=0, template=None, set_default=True):
+		super().__init__(context, arg, template, set_default=False)
+
+		# The number of target pointers that follow.
+		self.num_extra_targets = name_type_map['Ushort'](self.context, 0, None)
+
+		# NiNode Targets to be controlled.
+		self.extra_targets = Array(self.context, 0, name_type_map['NiAVObject'], (0,), name_type_map['Ptr'])
+		if set_default:
+			self.set_defaults()
+
+	@classmethod
+	def _get_attribute_list(cls):
+		yield from super()._get_attribute_list()
+		yield 'num_extra_targets', name_type_map['Ushort'], (0, None), (False, None), (None, None)
+		yield 'extra_targets', Array, (0, name_type_map['NiAVObject'], (None,), name_type_map['Ptr']), (False, None), (None, None)
+
+	@classmethod
+	def _get_filtered_attribute_list(cls, instance, include_abstract=True):
+		yield from super()._get_filtered_attribute_list(instance, include_abstract)
+		yield 'num_extra_targets', name_type_map['Ushort'], (0, None), (False, None)
+		yield 'extra_targets', Array, (0, name_type_map['NiAVObject'], (instance.num_extra_targets,), name_type_map['Ptr']), (False, None)

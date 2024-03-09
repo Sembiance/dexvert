@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.9.3.0">
+
+    <!-- Basic Types -->
+
+    <basic name="ubyte" boolean="true" integral="true" countable="true" size="1" convertible="ushort uint uint64" >
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="char" integral="true" countable="false" size="1" convertible="byte" >
+        An 8-bit character.
+    </basic>
+
+    <basic name="littleuint32" integral="true" countable="true" size="4" >
+        A little-endian unsigned 32-bit integer.
+    </basic>
+
+    <!-- Struct Types -->
+
+    <struct name="FixedString" >
+        <field name="Data" type="char" length="#ARG#"></field>
+    </struct>
+
+    <struct name="ExportString" >
+        Sized strings in CDF header ending with 00.
+        <field name="Length" type="littleuint32">The string length.</field>
+        <field name="Value" type="char" length="Length">The string itself, null terminated (the null terminator is taken into account in the length uint).</field>
+    </struct>
+
+    <struct name="SizedString" >
+        A string of given length.
+        <field name="Length" type="littleuint32">The string length.</field>
+        <field name="Value" type="char" length="Length">The string itself.</field>
+    </struct>
+
+    <!-- CDF-specific -->
+
+    <struct name="FileObject" >
+        <field name="Path" type="SizedString" ></field>
+        <field name="File Size" type="littleuint32"></field>
+        <field name="File" type="ubyte" length="File Size">Can be any kind of file, type presumably determined by file extension.</field>
+    </struct>
+
+    <struct name="Header" >
+        <field name="Magic" type="FixedString" arg="4">"FACE"</field>
+        <field name="Unknown 1" type="ubyte" length="4">A4 06 00 00, maybe int</field>
+        <field name="Company" type="ExportString">Bethesda Softworks</field>
+        <field name="Game" type="ExportString">Fallout 3</field>
+        <field name="Unknown 2" type="ubyte" length="0x99B">This likely contains substructures, can't be bothered to decode right now.</field>
+        <field name="Num Files" type="littleuint32">Potentially number of files, but could be something else.</field>
+        <field name="Files" type="FileObject" length="Num Files"></field>
+    </struct>
+
+</niftoolsxml>

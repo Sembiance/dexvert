@@ -1,0 +1,61 @@
+from nifgen.base_struct import BaseStruct
+from nifgen.formats.nif.imports import name_type_map
+
+
+class BhkWrappedConstraintData(BaseStruct):
+
+	"""
+	A constraint wrapper for polymorphic hkpConstraintData serialization.
+	"""
+
+	__name__ = 'bhkWrappedConstraintData'
+
+
+	def __init__(self, context, arg=0, template=None, set_default=True):
+		super().__init__(context, arg, template, set_default=False)
+
+		# Type of constraint.
+		self.type = name_type_map['HkConstraintType'](self.context, 0, None)
+		self.constraint_info = name_type_map['BhkConstraintCInfo'](self.context, 0, None)
+		self.ball_and_socket = name_type_map['BhkBallAndSocketConstraintCInfo'](self.context, 0, None)
+		self.hinge = name_type_map['BhkHingeConstraintCInfo'](self.context, 0, None)
+		self.limited_hinge = name_type_map['BhkLimitedHingeConstraintCInfo'](self.context, 0, None)
+		self.prismatic = name_type_map['BhkPrismaticConstraintCInfo'](self.context, 0, None)
+		self.ragdoll = name_type_map['BhkRagdollConstraintCInfo'](self.context, 0, None)
+		self.stiff_spring = name_type_map['BhkStiffSpringConstraintCInfo'](self.context, 0, None)
+		self.malleable = name_type_map['BhkMalleableConstraintCInfo'](self.context, 0, None)
+		if set_default:
+			self.set_defaults()
+
+	@classmethod
+	def _get_attribute_list(cls):
+		yield from super()._get_attribute_list()
+		yield 'type', name_type_map['HkConstraintType'], (0, None), (False, None), (None, None)
+		yield 'constraint_info', name_type_map['BhkConstraintCInfo'], (0, None), (False, None), (None, None)
+		yield 'ball_and_socket', name_type_map['BhkBallAndSocketConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'hinge', name_type_map['BhkHingeConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'limited_hinge', name_type_map['BhkLimitedHingeConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'prismatic', name_type_map['BhkPrismaticConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'ragdoll', name_type_map['BhkRagdollConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'stiff_spring', name_type_map['BhkStiffSpringConstraintCInfo'], (0, None), (False, None), (None, True)
+		yield 'malleable', name_type_map['BhkMalleableConstraintCInfo'], (0, None), (False, None), (None, True)
+
+	@classmethod
+	def _get_filtered_attribute_list(cls, instance, include_abstract=True):
+		yield from super()._get_filtered_attribute_list(instance, include_abstract)
+		yield 'type', name_type_map['HkConstraintType'], (0, None), (False, None)
+		yield 'constraint_info', name_type_map['BhkConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 0:
+			yield 'ball_and_socket', name_type_map['BhkBallAndSocketConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 1:
+			yield 'hinge', name_type_map['BhkHingeConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 2:
+			yield 'limited_hinge', name_type_map['BhkLimitedHingeConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 6:
+			yield 'prismatic', name_type_map['BhkPrismaticConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 7:
+			yield 'ragdoll', name_type_map['BhkRagdollConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 8:
+			yield 'stiff_spring', name_type_map['BhkStiffSpringConstraintCInfo'], (0, None), (False, None)
+		if instance.type == 13:
+			yield 'malleable', name_type_map['BhkMalleableConstraintCInfo'], (0, None), (False, None)

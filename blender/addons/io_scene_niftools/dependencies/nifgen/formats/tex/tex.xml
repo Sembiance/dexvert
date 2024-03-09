@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fileformat>
+<fileformat>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+	<enum name="DdsType" storage="ubyte">
+		maps the OVL's dds type to name of compression format
+		<option value="0" name="UNKNOWN" />
+		<option value="1" name="R32G32B32A32_FLOAT" />
+		<option value="2" name="R32G32B32A32_UINT" />
+		<option value="3" name="R32G32B32A32_SINT" />
+		<option value="4" name="R32G32B32A32_UNORM" custom="True" />
+		<option value="5" name="R32G32B32A32_SNORM" custom="True" />
+		<option value="6" name="R32G32B32_FLOAT" />
+		<option value="7" name="R32G32B32_UINT" />
+		<option value="8" name="R32G32B32_SINT" />
+		<option value="9" name="R32G32B32_UNORM" custom="True" />
+		<option value="10" name="R32G32B32_SNORM" custom="True" />
+		<option value="11" name="R32G32_FLOAT" />
+		<option value="12" name="R32G32_UINT" />
+		<option value="13" name="R32G32_SINT" />
+		<option value="14" name="R32G32_UNORM" custom="True" />
+		<option value="15" name="R32G32_SNORM" custom="True" />
+		<option value="16" name="R32_FLOAT" />
+		<option value="17" name="R32_UINT" />
+		<option value="18" name="R32_SINT" />
+		<option value="19" name="R32_UNORM" custom="True" />
+		<option value="20" name="R32_SNORM" custom="True" />
+		<option value="21" name="R11G11B10_FLOAT" />
+		<option value="22" name="R11G11B10_UINT" custom="True" />
+		<option value="23" name="R11G11B10_SINT" custom="True" />
+		<option value="24" name="R11G11B10_UNORM" custom="True" />
+		<option value="25" name="R11G11B10_SNORM" custom="True" />
+		<option value="26" name="R10G10B10FA2_UNORM" custom="True" />
+		<option value="27" name="R10G10B10A2_UINT" />
+		<option value="28" name="R10G10B10A2_UNORM" />
+		<option value="29" name="R10G10B10X2_UINT" custom="True" />
+		<option value="30" name="R10G10B10X2_SINT" custom="True" />
+		<option value="31" name="R10G10B10X2_UNORM" custom="True" />
+		<option value="32" name="R10G10B10X2_SNORM" custom="True" />
+		<option value="33" name="R8G8B8A8_UINT" />
+		<option value="34" name="R8G8B8A8_SINT" />
+		<option value="35" name="R8G8B8A8_UNORM" />
+		<option value="36" name="R8G8B8A8_SNORM" />
+		<option value="37" name="R8G8B8A8_UNORM_SRGB" />
+		<option value="38" name="R16G16B16A16_FLOAT" />
+<!--		<option value="38" name="D32_FLOAT_S8X24_UINT">atmospherics_stars_data.dds may contradict the official enum</option>-->
+		<option value="39" name="R16G16B16A16_UINT" />
+		<option value="40" name="R16G16B16A16_SINT" />
+		<option value="41" name="R16G16B16A16_UNORM" />
+		<option value="42" name="R16G16B16A16_SNORM" />
+		<option value="43" name="R16G16_FLOAT" />
+		<option value="44" name="R16G16_UINT" />
+		<option value="45" name="R16G16_SINT" />
+		<option value="46" name="R16G16_UNORM" />
+		<option value="47" name="R16G16_SNORM" />
+		<option value="48" name="R16_FLOAT" />
+		<option value="49" name="R16_UINT" />
+		<option value="50" name="R16_SINT" />
+		<option value="51" name="R16_UNORM" />
+		<option value="52" name="R16_SNORM" />
+		<option value="53" name="R8G8_UINT" />
+		<option value="54" name="R8G8_SINT" />
+		<option value="55" name="R8G8_UNORM" />
+		<option value="56" name="R8G8_SNORM" />
+		<option value="57" name="R8_UINT" />
+		<option value="58" name="R8_SINT" />
+		<option value="59" name="R8_UNORM" />
+		<option value="60" name="R8_SNORM" />
+		<option value="61" name="B10G10R10A2_UNORM" custom="True" />
+		<option value="62" name="B10G10R10X2_UNORM" custom="True" />
+		<option value="63" name="B8G8R8A8_UNORM" />
+		<option value="64" name="B8G8R8A8_UNORM_SRGB" />
+		<option value="65" name="B8G8R8X8_UNORM" />
+		<option value="66" name="B8G8_UNORM" custom="True" />
+		<option value="67" name="B8_UNORM" custom="True" />
+		<option value="68" name="D32FS8_UINT" custom="True" />
+		<option value="69" name="D32_UNORM" custom="True" />
+		<option value="70" name="D32_FLOAT" />
+		<option value="71" name="D24UNS8_UINT" custom="True" />
+		<option value="72" name="D24FS8_UINT" custom="True" />
+		<option value="73" name="D24UNX8" custom="True" />
+		<option value="74" name="D24FX8" custom="True" />
+		<option value="75" name="D16_UNORM" />
+		<option value="76" name="D16_FLOAT" custom="True" />
+		<option value="77" name="A8_UNORM" />
+		<option value="78" name="BC1_UNORM" />
+		<option value="79" name="BC1_UNORM_SRGB" />
+		<option value="80" name="BC2_UNORM" />
+		<option value="81" name="BC2_UNORM_SRGB" />
+		<option value="82" name="BC3_UNORM" />
+		<option value="83" name="BC3_UNORM_SRGB" />
+		<option value="84" name="BC4_UNORM" />
+		<option value="85" name="BC4_SNORM" />
+		<option value="86" name="BC5_UNORM" />
+		<option value="87" name="BC5_SNORM" />
+		<option value="88" name="BC6H_UF16" />
+		<option value="89" name="BC6H_SF16" />
+		<option value="90" name="BC7_UNORM" />
+		<option value="91" name="BC7_UNORM_SRGB" />
+		<option value="92" name="FMASK_R8_UINT" custom="True" />
+		<option value="93" name="FMASK_R16_UINT" custom="True" />
+		<option value="94" name="FMASK_R32_UINT" custom="True" />
+		<option value="95" name="FMASK_R32G32_UINT" custom="True" />
+		<option value="96" name="X32_TYPELESS_G8X24_UINT" />
+		<option value="97" name="X24_TYPELESS_G8_UINT" />
+    </enum>
+
+    <enum name="DdsTypeCoaster" storage="ubyte">
+		maps the OVL's dds type to name of compression format
+		<option value="74" name="D24_UNORM_S8_UINT">ZTUAC ele heights textures</option>
+		<option value="76" name="D24_UNORM_S8_UINT_B">?</option>
+		<option value="97" name="BC1_UNORM"></option>
+		<option value="98" name="BC1_UNORM_SRGB"></option>
+		<option value="99" name="BC2_UNORM"></option>
+		<option value="100" name="BC2_UNORM_SRGB"></option>
+		<option value="101" name="BC3_UNORM"></option>
+		<option value="102" name="BC3_UNORM_SRGB"></option>
+		<option value="103" name="BC4_UNORM"></option>
+		<option value="104" name="BC4_SNORM"></option>
+		<option value="105" name="BC5_UNORM"></option>
+		<option value="106" name="BC5_SNORM"></option>
+
+		<option value="121" name="BC4_UNORM_B"></option>
+		<option value="126" name="BC7_UNORM"></option>
+		<option value="127" name="BC7_UNORM_SRGB"></option>
+
+		<option value="250" name="ALL"></option>
+    </enum>
+
+	<compound name="TexBuffer" inherit="MemStruct" >
+		Describes one buffer of a tex / texturestream file.
+		24 bytes per texture buffer
+		<add name="offset" type="uint64">byte offset in the combined buffer</add>
+		<add name="size" type="uint64">byte size of this tex buffer</add>
+		<add name="first_mip" type="ubyte">index of first mip used in this buffer</add>
+		<add name="mip_count" type="ubyte">amount of mip levels included in this buffer</add>
+		<add name="padding0" type="short" default="0" optional="True"/>
+		<add name="padding1" type="int" default="0" optional="True"/>
+    </compound>
+
+	<compound name="TexBufferPc" inherit="MemStruct" >
+		The different tex buffers contain the smallest mip
+		<add name="width" type="ushort"/>
+		<add name="height" type="ushort"/>
+		<add name="num_tiles" type="ushort" since="18">may be depth</add>
+		<add name="num mips" type="ushort">the first ie. biggest levels are clipped off</add>
+    </compound>
+
+	<compound name="Mipmap" inherit="MemStruct">
+		Describes one tex mipmap
+		<add name="offset" type="uint">starting offset into the texture buffer for this mip level</add>
+		<add name="size" type="uint" >bytes for one array tile, including padding</add>
+		<add name="size array" type="uint">bytes for all array tile, including padding</add>
+		<add name="size scan" type="uint" >size of a scan line of blocks, including padding that is added to the end of the line</add>
+		<add name="size data" type="uint">size of all non-empty scanline blocks (including padding), ie. the last mips add an empty scanline which does not count</add>
+    </compound>
+
+	<compound name="SizeInfoRaw" inherit="MemStruct" >
+		Data struct for headers of type 7
+		<add name="zero" type="uint64" default="0" optional="True">zero</add>
+		<add name="data size" type="uint" >total dds buffer size, sum of size_array of all mips</add>
+		<add name="width" type="uint">x size in pixels</add>
+		<add name="height" type="uint" >y size in pixels</add>
+		<add name="depth" type="uint" default="1" optional="True" >may be depth</add>
+		<add name="num_tiles" type="uint" default="1" optional="True"/>
+		<add name="num mips" type="uint">amount of mip map levels</add>
+		<add name="unk_pz" type="uint64" since="20" default="0" optional="True">only found in PZ and JWE2</add>
+		<add name="mip maps" type="Mipmap" arr1="num mips">info about mip levels</add>
+    </compound>
+
+	<compound name="SizeInfo" inherit="MemStruct" >
+		<add name="data" type="SizeInfoRaw"/>
+		<add name="padding" type="ubyte" arr1="320 - (data \ io_size)" vercond="#PZ16# #OR# #PZ# #OR# #JWE2#"/>
+		<add name="padding" type="ubyte" arr1="384 - (data \ io_size)" vercond="#JWE#"/>
+    </compound>
+
+    <compound name="TexHeader" inherit="MemStruct">
+		DLA: 24 bytes, no pointers
+        ZTUAC, PC: 24 bytes, with 1 pointer
+        JWE, PZ, JWE2: 40 bytes, with 2 pointers
+		<add name="zero 0" type="uint" until="15" default="0" optional="True"/>
+		<add name="zero 0" type="uint64" since="17" default="0" optional="True"/>
+		<add name="zero 1" type="uint64" since="19" default="0" optional="True"/>
+
+		<add name="buffer_infos" type="ArrayPointer" since="17" until="18" template="TexBufferPc" arg="stream_count"/>
+		<add name="buffer_infos" type="ArrayPointer" since="19" template="TexBuffer" arg="stream_count"/>
+		<add name="size_info" type="Pointer" since="19" template="SizeInfo"/>
+
+		compression types do not index directly into the official DDS enum
+		<add name="compression type" type="DdsType_Coaster" until="18"/>
+		<add name="compression type" type="DdsType" since="19"/>
+		<add name="one 0" type="ubyte">0 or 1</add>
+		<add name="num mips" type="ushort" until="15"/>
+		<add name="width" type="ushort" until="15"/>
+		<add name="height" type="ushort" until="15"/>
+		<add name="stream_count" type="ubyte" since="17">amount of files combined in this texture, usually 1 or 2, 3 for JWE2 rex</add>
+		<add name="stream_count repeat" type="ubyte" since="17">usually as above</add>
+		<add name="pad" type="uint" default="0" optional="True">0; 1 for PC</add>
+		<add name="pad dla" type="uint64" until="15" default="0" optional="True"/>
+    </compound>
+
+    <compound name="TexturestreamHeader" inherit="MemStruct">
+		JWE, PZ, PC: 8 bytes
+        JWE2: 16 bytes
+		<add name="zero" type="uint64" default="0" optional="True"/>
+		<add name="lod_index" type="uint64" vercond="#JWE2#"/>
+    </compound>
+</fileformat>
+

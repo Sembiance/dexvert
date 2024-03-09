@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="RestaurantSettingsRoot" inherit="MemStruct">
+        <add name="running_cost_base" type="uint64"/>
+        <add name="unk_1" type="uint"/>
+        <add name="unk_2" type="float"/>
+
+        <add name="unk_3" type="float"/>
+        <add name="unk_4" type="float"/>
+        <add name="unk_5" type="float"/>
+        <add name="unk_6" type="float"/>
+
+        <add name="running_cost_per_extension" type="uint64"/>
+        <add name="unk_8" type="uint"/>
+        <add name="unk_9" type="float"/>
+
+        <add name="perks" type="ArrayPointer" template="Perk" arg="count"/>
+        <add name="count" type="uint64"/>
+    </compound>
+
+    <compound name="Perk" inherit="MemStruct">
+        <add name="unk_0" type="uint64"/>
+        <add name="building_cost" type="uint64"/>
+
+        <add name="running_cost_base" type="uint64"/>
+        <add name="running_cost_per_extension" type="uint64"/>
+
+        <add name="unk_4" type="float"/>
+        <add name="unk_5" type="float"/>
+
+        <add name="label" type="Pointer" template="ZString"/>
+        <add name="desc" type="Pointer" template="ZString"/>
+        <add name="icon" type="Pointer" template="ZString"/>
+
+        <add name="unk_6" type="float"/>
+        <add name="appeal_adults" type="float"/>
+        <add name="appeal_families" type="float"/>
+        <add name="appeal_teenagers" type="float"/>
+    </compound>
+
+</niftoolsxml>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="ppuipkgfile" inherit="MemStruct">
+        <add name="file_name" type="Pointer" template="ZString" />
+        <add name="file_size" type="uint64" />
+        <add name="file_content" type="ArrayPointer" template="Char" arg="file_size" />
+    </compound>
+
+    <compound name="UserInterfaceIconData" inherit="MemStruct">
+        <add name="image_name" type="Pointer" template="ZString" />
+        <add name="assetPackage" type="Pointer" template="ZString"  />
+    </compound>
+
+    <compound name="PPUIPKGRoot" inherit="MemStruct">
+        <add name="basic_path" type="Pointer" template="ZString" />
+
+        <add name="file_count" type="uint64" />
+        <add name="files" type="ArrayPointer" template="ppuipkgfile" arg="file_count"/>
+
+        <add name="icondata_count" type="uint64" />
+        <add name="types" type="ArrayPointer" template="UserInterfaceIconData" arg="icondata_count"/>
+    </compound>
+
+</niftoolsxml>

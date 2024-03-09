@@ -14,7 +14,7 @@ export class smus extends Format
 	notes   = xu.trim`
 		The 'SMUS' format was used by many different programs including Sonix and Deluxe Music.
 		This first tries to convert SONIX SMUS with instrument support using uade123.
-		That cna fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples.
+		That can fail though, then falls back to SMUS2MIDI and SMUSMIDI, losing instrument samples.
 		SMUS2MIDI seems to work on more files, but it gets several of them a bit wrong (Rhapsody.smus)`;
 	
 	pre = async dexState =>

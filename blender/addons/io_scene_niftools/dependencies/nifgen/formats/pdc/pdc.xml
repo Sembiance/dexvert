@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.9.3.0">
+
+    <!-- Basic Types -->
+
+    <basic name="biguint32" integral="true" countable="true" size="4" >
+        A big-endian unsigned 32-bit integer.
+    </basic>
+
+    <basic name="bigushort" integral="true" countable="true" size="2" convertible="biguint32" >
+        A big-endian unsigned 16-bit integer.
+    </basic>
+
+    <basic name="ubyte" boolean="true" integral="true" countable="true" size="1" convertible="biguint32 bigushort" >
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="char" integral="true" countable="false" size="1" >
+        An 8-bit character.
+    </basic>
+
+    <basic name="LineString" integral="false" >
+        A variable length string that ends with a newline character (0x0A).
+    </basic>
+
+    <!-- Struct Types -->
+
+    <struct name="FixedString" >
+        <field name="Data" type="char" length="#ARG#"></field>
+    </struct>
+
+    <struct name="SizedString" generic="true" >
+        A string of given length.
+        <field name="Length" type="#T#">The string length.</field>
+        <field name="Value" type="char" length="Length">The string itself.</field>
+    </struct>
+
+    <!-- PDC file-specific -->
+
+    <struct name="CharacterEntry">
+        <field name="Values" type="SizedString" length="4" template="bigushort" ></field>
+    </struct>
+
+    <struct name="G2PB" >
+        G2P likely stands for Grapheme to Phoneme
+        <field name="Magic" type="FixedString" arg="4" >"G2PB"</field>
+        <field name="Unknown 1" type="ubyte" length="7" >20 02 09 05 00 00 00, same in every file</field>
+        <field name="Num Character Map Groups" type="ubyte" >Byte that varies for files. Seemingly always 1 more than alphabet size.</field>
+        <field name="Unknown 2" type="ubyte" length="1" ></field>
+        <field name="Alphabet Size" type="ubyte" ></field>
+        <field name="Alphabet" type="char" length="Alphabet Size" ></field>
+        <field name="Character Map Groups" type="biguint32" length="Num Character Map Groups" >How many character maps per group</field>
+        <field name="Num Words" type="biguint32" ></field>
+        <field name="Unknown Ints 2" type="biguint32" length="1" ></field>
+        <field name="Unknown Byte 2" type="ubyte" ></field>
+        <field name="Character Map" type="CharacterEntry" length="Num Character Map Groups" width="Character Map Groups" ></field>
+        <field name="Small Words" type="SizedString" template="bigushort" length="Num Words" ></field>
+        <field name="Alphabet Groups" type="SizedString" template="bigushort" length="7" >Seemingly always 8 with the last one empty.</field>
+        <field name="Num Word Ends" type="biguint32" ></field>
+        <field name="Word Ends" type="SizedString" template="bigushort" length="Num Word Ends" ></field>
+        <field name="Num Digraphs" type="biguint32" ></field>
+        <field name="Digraphs" type="SizedString" template="bigushort" length="Num Digraphs" >Not really digraphs, contains some single letters, symbols and capital letters.</field>
+        <field name="End" type="FixedString" arg="6" >"ENDG2P"</field>
+    </struct>
+
+    <struct name="Index7Bytes" >
+        A 7-byte struct, appearing to have an index spanning the 4th and 5th byte.
+        <field name="Unknown Bytes 1" type="ubyte" length="3" >3 bytes of which the meaning is not certain</field>
+        <field name="Index" type="bigushort" >Presumably some kind of index into groupings.</field>
+        <field name="Unknown Bytes 2" type="ubyte" length="2" >1 bytes of which the meaning is not certain</field>
+    </struct>
+
+    <struct name="UshortArrayContainer" >
+        <field name="Num Ushorts" type="bigushort" ></field>
+        <field name="Ushorts" type="bigushort" length="Num Ushorts" ></field>
+    </struct>
+
+    <struct name="WordEntry" >
+        Some kind of record presumably used to link words to their pronunciation.
+        <field name="Num Bytes" type="ubyte" ></field>
+        <field name="Value" type="ubyte" length="Num Bytes" >Word, followed by 00, followed by the rest of the data (which can have 00 in it).</field>
+    </struct>
+
+    <struct name="PDCWordList">
+        <field name="Unknown Bytes 1" type="ubyte" length="0xC" ></field>
+        <field name="Num Index7" type="biguint32" ></field>
+        <field name="Index7Array" type="Index7Bytes" length="Num Index7" ></field>
+        <field name="Max Index" type="bigushort" >Highest index value of structs in Index7Array</field>
+        <field name="Unknown Ushort 1" type="bigushort" >Guess it's a ushort, could also be 2 bytes.</field>
+        <field name="Data Size" type="biguint32" >Bytes from start until "END" (so file size - 3)</field>
+        <field name="Unknown Bytes 2" type="ubyte" length="0x4" >20 02 04 03, same in every file</field>
+        <field name="Num Extra Ushorts" type="bigushort" ></field>
+        <field name="Num Ushorts" type="bigushort" ></field>
+        <field name="Ushorts" type="bigushort" length="Num Ushorts" ></field>
+        <field name="Extra Ushorts" type="bigushort" length="Num Extra Ushorts - Num Ushorts" ></field>
+        <field name="Num Digraphs" type="bigushort" ></field>
+        <field name="Unknown Ushort 2" type="bigushort" >Seemingly always 6 less than Num Digraphs</field>
+        <field name="Digraphs" type="SizedString" template="bigushort" length="Num Digraphs" >Again not really digraphs so much as some strings with yet-unspecified purpose.</field>
+        <field name="Ushort Arrays" type="UshortArrayContainer" length="Num Extra Ushorts - Num Digraphs" ></field>
+        <field name="Extra Bytes" type="ubyte" length="Num Extra Ushorts" ></field>
+        <field name="Unknown Bytes 3" type="ubyte" length="3" >Last byte in example files always 1 less than num digraphs.</field>
+        <field name="Num Int Arrays" type="biguint32" ></field>
+        <field name="Int Arrays" type="biguint32" length="Num Int Arrays" width="4" ></field>
+        <field name="Unknown Byte 1" type="ubyte" >Seemingly always 00, possibly unused.</field>
+        <field name="Word Entries" type="WordEntry" length="#ARG#" ></field>
+        <field name="Unknown Byte 2" type="ubyte" >Seemingly always 00, possibly unused.</field>
+        <field name="End" type="FixedString" arg="3" >"END"</field>
+    </struct>
+
+    <struct name="PDCFile" >
+        <field name="Magic" type="LineString">DCC</field>
+        <field name="Version" type="LineString">Version 112</field>
+        <field name="Copyright" type="LineString">Copyright notice</field>
+        <field name="Num Words" type="LineString">String describing number of words.</field>
+        <field name="Rules Included" type="LineString">String saying "Rules Included"</field>
+        <field name="Header End" type="LineString">String saying "END_OF_HEADER"</field>
+        <field name="Unknown Bytes 1" type="ubyte" length="2">1A 01 in all files</field>
+        <field name="G2PB" type="G2PB"></field>
+        <field name="Num Words" type="biguint32">Number of words</field>
+        <field name="Word List" type="PDCWordList" arg="Num Words" cond="Num Words != 0" ></field>
+    </struct>
+
+</niftoolsxml>

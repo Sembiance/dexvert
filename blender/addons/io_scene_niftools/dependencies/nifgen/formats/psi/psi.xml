@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.9.3.0">
+
+    <!-- Tokens -->
+
+    <token name="operator" attrs="cond vercond length width arg">
+        <operator token="#BITAND#" string="&amp;" />
+    </token>
+
+    <!-- Basic Types -->
+
+    <basic name="biguint32" integral="true" countable="true" size="4" >
+        A big-endian unsigned 32-bit integer.
+    </basic>
+
+    <basic name="bigushort" integral="true" countable="true" size="2" convertible="biguint32" >
+        A big-endian unsigned 16-bit integer.
+    </basic>
+
+    <basic name="ubyte" boolean="true" integral="true" countable="true" size="1" convertible="biguint32 bigushort" >
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="char" integral="true" countable="false" size="1" >
+        An 8-bit character.
+    </basic>
+
+    <basic name="LineString" integral="false" >
+        A variable length string that ends with a newline character (0x0A).
+    </basic>
+
+    <!-- Struct Types -->
+
+    <struct name="FixedString" >
+        <field name="Data" type="char" length="#ARG#"></field>
+    </struct>
+
+    <struct name="SizedString" generic="true" >
+        A string of given length.
+        <field name="Length" type="#T#">The string length.</field>
+        <field name="Value" type="char" length="Length">The string itself.</field>
+    </struct>
+
+    <!-- PDC file-specific -->
+
+    <struct name="PhonemeRecord" >
+        Note: order of the arg-dependent fields is not conclusively determined because it's difficult to determine which ushort is which.
+        <field name="Name" type="SizedString" template="bigushort" ></field>
+        <field name="Type" type="ubyte" ></field>
+        <field name="Value" type="bigushort" cond="Type #BITAND# 0x1" ></field>
+        <field name="Ushorts 1" type="bigushort" length="#ARG#" cond="Type #BITAND# 0x2" ></field>
+        <field name="Ushorts 2" type="bigushort" length="#ARG#" cond="Type #BITAND# 0x4" ></field>
+    </struct>
+
+    <struct name="SimilarPhonemeRecord" >
+        <field name="Similar Index" type="bigushort" >Seems to refer to similar phonemes in the Phonemes array (0-index)</field>
+        <field name="Num Phonemes" type="bigushort" ></field>
+        <field name="Phonemes" type="SizedString" length="Num Phonemes" template="bigushort" ></field>
+    </struct>
+
+    <struct name="UnknownStruct" >
+        <field name="Unknown Int 1" type="biguint32" ></field>
+        <field name="Unknown Int 2" type="biguint32" ></field>
+        <field name="Unknown Ushort" type="bigushort" >Judging by the occuring values it maps back to indices in the Phonemes array (except 'any' and 'garbage').</field>
+    </struct>
+
+    <struct name="Header" >
+        <field name="Copyright" type="SizedString" template="bigushort" ></field>
+        <field name="Unknown Bytes 1" type="ubyte" length="0xF8" ></field>
+        <field name="Num Phonemes" type="bigushort" ></field>
+        <field name="Phonemes" type="PhonemeRecord" length="Num Phonemes" arg="Num Phonemes" ></field>
+        <field name="Num Similar Phonemes" type="biguint32" ></field>
+        <field name="Similar Phonemes" type="SimilarPhonemeRecord" length="Num Similar Phonemes" ></field>
+        <field name="Num Unknown Structs" type="bigushort" ></field>
+        <field name="Unknown Structs" type="UnknownStruct" length="Num Unknown Structs" ></field>
+        <field name="Unknown Bytes 2" type="ubyte" length="0xA" >00 00 00 0A 00 00 13 88 00 XX, (last byte varies, rest is the same)</field>
+        <field name="Unknown Bytes 3" type="ubyte" length="0xA" >00 00 00 0A 00 00 13 88 00 XX, (last byte is XX of Unknown Bytes 2 + 1)</field>
+        <field name="Unknown Bytes 4" type="ubyte" length="0x15" >00 00 00 99 99 FF FF FF FF 00 00 00 03 00 00 00 83 00 00 00 C8 in every file</field>
+        <field name="Unknown Uint" type="biguint32" >Seemingly always the same as Num Unknown Structs</field>
+    </struct>
+
+</niftoolsxml>

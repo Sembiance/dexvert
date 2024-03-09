@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="nextRow1" inherit="MemStruct">
+        <add name="unk" type="uint64" />
+        <add name="maybe_hash" type="uint" />used in JWE2
+        <add name="count" type="ushort" />seems to count emitters / particle systems, influences counts for most effects
+        <add name="count_repeat" type="ushort" />
+    </compound>
+
+    <compound name="EffectRef" inherit="MemStruct">
+        <add name="count"   type="ushort" />
+        <add name="offset"   type="ushort" />
+    </compound>
+
+    <compound name="Effect" inherit="MemStruct">
+    </compound>
+
+    <compound name="Effect07" inherit="Effect">
+        might map the different effects per emitter?
+        144 bytes - PZ
+        + 16 bytes for JWE2
+        <add name="zero0" type="int64"/>
+        <add name="a" type="short" />
+        <add name="b" type="short" />
+        <add name="ints" type="int" arr1="30"/>
+        <add name="floats" type="float" arr1="4" since="37"/>
+        <add name="c" type="short" />
+        <add name="d" type="short" />
+        <add name="one" type="int64" />
+    </compound>
+
+    <compound name="Effect08" inherit="Effect">
+        96 bytes - PZ
+        <add name="floats" type="float" arr1="15"/>
+        <add name="minus1" type="int"/>
+        <add name="z2" type="int"/>
+        <add name="z3" type="int"/>
+        <add name="pi" type="float" />
+        <add name="floats2" type="float" arr1="5"/>
+    </compound>
+
+    <compound name="Effect09" inherit="Effect">
+        32 bytes - PZ
+        <add name="floats" type="float" arr1="8"/>
+    </compound>
+
+    <compound name="Effect10" inherit="Effect">
+        48 bytes - PZ
+        <add name="zero_0" type="int64" />
+        <add name="u0" type="short" />
+        <add name="u1" type="short" />
+        <add name="zero_1" type="int" />
+        <add name="index" type="int64" />increments
+        <add name="zero_2" type="int64" />
+        <add name="count" type="int64" />
+        <add name="one_f" type="float" />
+        <add name="zero_3" type="int" />
+    </compound>
+
+    <compound name="Effect11" inherit="Effect">
+        16 bytes - PZ
+        <add name="floats" type="float" arr1="4"/>
+    </compound>
+
+    <compound name="Effect12" inherit="Effect">
+        240 bytes - PZ
+        <add name="zero_0" type="int64" />
+        <add name="u0" type="short" />
+        <add name="u1" type="short" />
+        <add name="zero_1" type="int" />
+        <add name="count1" type="int64" />
+        <add name="zero_2" type="int64" />
+        <add name="count2" type="int64" />
+        <add name="zeros" type="int64" arr1="7"/>
+        <add name="floats1" type="float" arr1="4"/>
+        <add name="pi_rel" type="float"/>
+        <add name="floats2" type="float" arr1="5"/>
+        <add name="ints" type="int" arr1="8"/>
+        <add name="floats3" type="float" arr1="10"/>
+        <add name="bytes" type="byte" arr1="16"/>
+        <add name="float" type="float" />
+        <add name="ints2" type="int" arr1="3"/>
+    </compound>
+
+    <compound name="Effect13" inherit="Effect">
+        32 bytes - PZ
+        <add name="floats" type="float" arr1="8"/>
+    </compound>
+
+    <compound name="Effect14" inherit="Effect">
+        8 bytes - PZ
+        probably indexing
+        <add name="offset" type="int" />
+        <add name="count" type="int" />
+    </compound>
+
+    <compound name="Effect15" inherit="Effect">
+        32 bytes - PZ
+        <add name="floats1" type="float" arr1="4"/>
+        <add name="flags" type="byte" arr1="4"/>
+        <add name="floats2" type="float" arr1="3"/>
+    </compound>
+
+    <compound name="Effect16" inherit="Effect">
+        24 bytes - JWE2
+        <add name="ints" type="int64" arr1="3"/>
+    </compound>
+
+    <compound name="Effect21" inherit="Effect">
+        8 bytes - PZ
+        <add name="a" type="float" />maybe time
+        <add name="b" type="float" />maybe value
+    </compound>
+
+    <compound name="LastRow" inherit="MemStruct">
+        <add name="unk07"   type="ushort" />
+        <add name="unk08"   type="ushort" />
+        <add name="unk09"   type="ushort" />
+        <add name="unk10"   type="ushort" />
+        <add name="unk11"   type="ushort" />
+        <add name="unk12"   type="ushort" />
+    </compound>
+
+    <compound name="ParticleEffectRoot" inherit="MemStruct">
+        <add name="unk64_1" type="uint64" />
+        <add name="unk64_2" type="uint64" />
+        <add name="unk64_3" type="uint64" />
+        <add name="unk64_4" type="uint64" />
+        <add name="unk64_5" type="uint64" />
+        <add name="unk64_6" type="uint64" />
+
+        <add name="unk32_1" type="uint" />
+        <add name="unk32_2_neg" type="int" />
+        <add name="unk32_3" type="uint" />
+        <add name="unk32_4" type="uint" />
+
+        <add name="a_unk32_1" type="uint" />
+        <add name="a_unk32_2" type="uint" />
+        <add name="a_unk32_3_1" type="uint" />
+        <add name="a_unk32_4" type="uint" />
+
+        <add name="atlasinfo_count" type="uint64" />
+        <add name="name_foreach_textures" type="ArrayPointer" template="TextureData" arg="atlasinfo_count"/>
+
+        <add name="nextRow1" type="nextRow1"/>
+        <add name="effect00" type="EffectRef" template="Effect"/>
+        <add name="effect01" type="EffectRef" template="Effect"/>
+        <add name="effect02" type="EffectRef" template="Effect"/>
+        <add name="effect03" type="EffectRef" template="Effect"/>
+        <add name="effect04" type="EffectRef" template="Effect"/>
+        <add name="effect05" type="EffectRef" template="Effect"/>
+        <add name="effect06" type="EffectRef" template="Effect"/>
+        <add name="effect07" type="EffectRef" template="Effect07"/>
+        <add name="effect08" type="EffectRef" template="Effect08"/>
+        <add name="effect09" type="EffectRef" template="Effect09"/>
+        <add name="effect10" type="EffectRef" template="Effect10"/>
+        <add name="effect11" type="EffectRef" template="Effect11"/>
+        <add name="effect12" type="EffectRef" template="Effect12"/>
+        <add name="effect13" type="EffectRef" template="Effect13"/>
+        <add name="effect14" type="EffectRef" template="Effect14"/>
+        <add name="effect15" type="EffectRef" template="Effect15"/>
+        <add name="effect16" type="EffectRef" template="Effect16"/>
+        <add name="effect17" type="EffectRef" template="Effect"/>
+        <add name="effect18" type="EffectRef" template="Effect"/>
+        <add name="effect19" type="EffectRef" template="Effect"/>
+        <add name="effect20" type="EffectRef" template="Effect"/>
+        <add name="effect21" type="EffectRef" template="Effect21"/>
+        <add name="effect22" type="EffectRef" template="Effect"/>
+        <add name="effect23" type="EffectRef" template="Effect"/>
+        <add name="effect24" type="EffectRef" template="Effect"/>
+        <add name="effect25" type="EffectRef" template="Effect"/>
+        <add name="effect26" type="EffectRef" template="Effect"/>
+        <add name="nextRow5" type="LastRow"/>
+    </compound>
+
+    <compound name="TextureInfo" inherit="MemStruct">
+    </compound>
+
+    <compound name="TextureData" inherit="MemStruct">
+        <add name="dependency_name" type="Pointer">only present if textured</add>
+    </compound>
+
+</niftoolsxml>
+

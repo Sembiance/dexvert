@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="WorldHeader" inherit="MemStruct">
+        # NOTE, World struct in JWE has an extra pointer this import/export is not accounting for yet
+        <add name="worldType" type="uint64"/>
+        <add name="asset_pkgs" type="Pointer" template="ZStringList" arg="assetPkgCount"/>
+        <add name="assetPkgCount" type="uint64"/>
+        <add name="lua_name" type="Pointer" template="ZString"/>
+        <add name="ptr_0" type="Pointer"/>
+        <add name="ptr_1" type="Pointer"/>
+        <add name="prefabs" type="Pointer" template="ZStringList" arg="prefabCount"/>
+        <add name="ptr_2" type="Pointer"/>
+        # in JWE at offset 64 there is a ptr to the lighting options
+        <add name="prefabCount" type="uint64"/>
+        <add name="ptr_3" type="Pointer"/>
+    </compound>
+
+</niftoolsxml>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="RideSettingsRoot" inherit="MemStruct">
+        <add name="unk_0" type="float"/>
+        <add name="unk_1" type="uint"/>
+        <add name="array_1" type="ArrayPointer" template="Pair" arg="count"/>
+        <add name="count" type="uint"/>
+        then 12 bytes of padding?
+        <add name="pad_0" type="uint"/>
+        <add name="pad_1" type="uint"/>
+        <add name="pad_2" type="uint"/>
+    </compound>
+
+    <compound name="Pair" inherit="MemStruct">
+        <add name="value_0" type="uint"/>
+        <add name="value_1" type="float"/>
+    </compound>
+
+</niftoolsxml>

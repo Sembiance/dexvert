@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="ResearchRoot" inherit="MemStruct">
+        <add name="levels" type="ArrayPointer" template="Research" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="Research" inherit="MemStruct">
+        <add name="item_name" type="Pointer" template="ZString"/>
+        <add name="unk0" type="uint" />
+        <add name="is_entry_level" type="uint" /> often but not always 1 on first level
+        <add name="unk2" type="uint64" />
+        <add name="next_research" type="Pointer" template="NextResearch" arg="next_research_count" />
+        <add name="next_research_count" type="uint64" />
+        <add name="unk3" type="uint64" />
+        <add name="unk4" type="uint64" />
+    </compound>
+
+    <compound name="NextResearch" inherit="MemStruct">
+        <add name="item_name" type="Pointer" template="ZString" arr1="#ARG#" />
+        <add name="unk1" type="uint64" />
+    </compound>
+
+</niftoolsxml>

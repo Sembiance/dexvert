@@ -3,12 +3,10 @@ import {Format} from "../../Format.js";
 
 export class iffTDDD extends Format
 {
-	name        = "IFF TDDD 3-D Render Document";
+	name        = "TDDD TurboSilver/Imagine 3D Object";
 	website     = "http://fileformats.archiveteam.org/wiki/TDDD";
-	ext         = [".tdd", ".cel", ".obj"];
+	ext         = [".iob", ".tdd", ".cel", ".obj"];
 	magic       = ["IFF data, TDDD 3-D rendering", "3D Data Description object", "Impulse 3D Data Description Object"];
-	unsupported = true;
-	notes       = xu.trim`
-		A 3D rendering file format. Some of these files may have been created by "Impulse 3D"
-		I've never bothered trying to convert or render these into anything else`;
+	converters  = ["blender[format:tddd]"];
+	notes       = xu.trim`The import script does not handle many of the tags from the TDDD format (Spitfire.iob). An initial stab at handling some of the color info (CLST, RLST, TLST) didn't provide any results (see sandbox/legacy/blender/io_import_scene_tddd.py)`;
 }

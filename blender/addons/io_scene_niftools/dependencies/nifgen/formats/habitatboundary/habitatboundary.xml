@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <struct name="HB_DoorCutout" size="12" inherit="MemStruct">
+        Positions to create door cutout in a wall.
+        <field name="height" type="float">Wall cutout height for door.</field>
+        <field name="right" type="float">Wall cutout position for right of door.</field>
+        <field name="left" type="float">Wall cutout position for left of door.</field>
+    </struct>
+
+    <struct name="HB_PostPos" size="8" inherit="MemStruct">
+        <field name="right" type="float">Right post offset from door.</field>
+        <field name="left" type="float">Left Post offset from door.</field>
+    </struct>
+
+    <struct name="HB_PostSize" size="12" inherit="MemStruct">
+        <field name="front_back" type="float">Post size front and back. Affects navcut and selection.</field>
+        <field name="left_right" type="float">Post size left and right. Affects navcut and selection.</field>
+        <field name="top" type="float">Post size above wall. Affects navcut and selection.</field>
+    </struct>
+
+    <struct name="HB_PhysicsOffsets" size="24" inherit="MemStruct">
+        Physics values for barriers.
+        <field name="thickness" type="float">Wall thickness. Affects navcut, selection, and climb nav width. Must be under a certain value or it crashes.</field>
+        <field name="post_size" type="HB_PostSize" />
+        <field name="wall_pad_top" type="float">Wall size above wall_height. Affects navcut, selection, and climb nav height.</field>
+        <field name="wall_post_gap" type="float">Distance between post center and start of wall. Larger values create a visual and nav gap between the post and wall segment.</field>
+    </struct>
+
+    <struct name="HB_Offsets" size="32" inherit="MemStruct">
+        <field name="Physics" type="HB_PhysicsOffsets" />
+        <field name="post_height_offset" type="float">Vertical offset of visible post above wall. Post height = wall_height + post_height_offset.</field>
+        <field name="wall_height" type="float">The starting height of the barrier wall.</field>
+    </struct>
+
+    <struct name="HB_UI_Options" size="2" inherit="MemStruct">
+        <field name="straight_curve" type="bool">Controls the Straight-Curved option for barriers</field>
+        <field name="windows" type="bool">Controls the Windows option for barriers</field>
+    </struct>
+
+    <struct name="HB_PropPhysics" size="24" inherit="MemStruct">
+        <field name="pad_top" type="float">Affects selection area above object.</field>
+        <field name="z_pos" type="float">Z offset of box from prop object.</field>
+        <field name="half_width" type="float">Affects selection area and rejects barrier placement inside area.</field>
+        <field name="pad_bottom" type="float">Affects selection area below object.</field>
+        <field name="half_depth" type="float">Affects selection area and rejects barrier placement inside area.</field>
+        <field name="u6" type="float">Unknown effect. Possibly vertical offset of box, yet testing was inconclusive.</field>
+    </struct>
+
+    <struct name="HabitatBoundaryPropRoot" inherit="MemStruct">
+        144 bytes
+        <field name="Type" type="uint64">0 = Habitat, 1 = Ride, 2 = Guest</field>
+        <field name="Prefab" type="Pointer" template="ZString"/>
+        <field name="u1" type="uint64" />
+        <field name="Post" type="Pointer" template="ZString"/>
+        <field name="Wall" type="Pointer" template="ZString"/>
+        <field name="IsGuest" type="uint" />
+        <field name="PostPosition" type="HB_PostPos" />
+        <field name="u2" type="float" />
+        <field name="DoorPhysics" type="HB_PropPhysics" />
+        <field name="PathPhysics" type="HB_PropPhysics" />
+        <field name="PathJoinPart" type="Pointer" template="ZString"/>
+        <field name="DoorCutout" type="HB_DoorCutout" />
+        <field name="Small" type="uint" />
+        <field name="Height" type="float" default="2.0" />
+    </struct>
+
+    <struct name="HabitatBoundaryDataRoot" inherit="MemStruct">
+        224 bytes
+        <field name="Prefab" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_End" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Top" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Cap_Top" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Bottom" type="Pointer" template="ZString"/>
+        <field name="Walls_Unk_2" type="Pointer" template="ZString"/>
+        <field name="Walls_Unk_3" type="Pointer" template="ZString"/>
+        <field name="Walls_Unk_4" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Door_Cap_Side" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Door_Cap_End" type="Pointer" template="ZString"/>
+        <field name="Walls_Extrusion_Door_Cap_Underside" type="Pointer" template="ZString"/>
+        <field name="ClimbProofData" type="Pointer" template="ZString"/>
+        <field name="Broken_Post" type="Pointer" template="ZString"/>
+        <field name="Broken_Extrusion" type="Pointer" template="ZString"/>
+        <field name="Broken_Extrusion_Pile" type="Pointer" template="ZString"/>
+        <field name="Broken_Ground" type="Pointer" template="ZString"/>
+        <field name="Broken_1m" type="Pointer" template="ZString"/>
+        <field name="Broken_10m" type="Pointer" template="ZString"/>
+        <field name="Post" type="Pointer" template="ZString"/>
+        <field name="Post_Cap" type="Pointer" template="ZString"/>
+        <field name="u1" type="uint" default="3">3 for everything but null barrier which is 0</field>
+        <field name="u2" type="float" />
+        <field name="u3" type="ushort" default="0">0 for everything but wood logs barrier which is 1</field>
+        <field name="ui_options" type="HB_UI_Options" />
+        <field name="u4" type="float" default="1.5" />
+        <field name="u5" type="float" default="2.5" />
+        <field name="Offsets" type="HB_Offsets" />
+        <field name="WallReplaceLevel" type="byte">Posts of N Level can only use Walls of less than N Level</field>
+        <field name="Type" type="byte">0 = Glass, 1 = Null, 3 = Solid Opaques (Brick, Concrete), 4 = 1-Way Glass, 5 = Wire Fences, 7 = Electrified Wire Fence</field>
+        <field name="padding" type="ushort" default="0" optional="True" />
+    </struct>
+
+    <struct name="ClimbproofDataRoot" inherit="MemStruct">
+        48 bytes
+        <field name="Climb_Proof" type="Pointer" template="ZString"/>
+        <field name="Climb_Proof_Cap_Start" type="Pointer" template="ZString"/>
+        <field name="Climb_Proof_Cap_End" type="Pointer" template="ZString"/>
+        <field name="Climb_Proof_Bracket" type="Pointer" template="ZString"/>
+        <field name="Post_Gap" type="float">Distance between post center and start of bracket.</field>
+        <field name="u1" type="float" default="2.0" />
+        <field name="zero" type="uint64" default="0" optional="True" />
+    </struct>
+
+</niftoolsxml>

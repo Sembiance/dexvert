@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+    
+    <compound name="Vector3" size="12" inherit="MemStruct">
+		A vector in 3D space (x,y,z).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+	</compound>
+
+    <compound name="TrackStationRoot" inherit="MemStruct">
+        PC and PZ: 128 bytes
+        <add name="unk floats" type="float" arr1="2"/>
+        <add name="unk ints" type="uint" arr1="2"/>
+        <add name="some_dataa" type="Pointer" template="FirstPointersa"/>
+        <add name="some_datab" type="Pointer" template="FirstPointersb"/>
+		<add name="stationpiece_name0" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name1" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name2" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name3" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name4" type="Pointer" template="ZString"></add>
+        <add name="unk ints2" type="uint" arr1="2"/>
+		<add name="stationpiece_name5" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name6" type="Pointer" template="ZString"></add>
+		<add name="stationpiece_name7" type="Pointer" template="ZString"></add>
+        <add name="unk floats2" type="float" arr1="4"/>
+        <add name="unk ints3" type="uint" arr1="2"/>
+    </compound>
+	
+	<compound name="CommonChunk" inherit="MemStruct">
+		<add name="float1" type="float" ></add>
+		<add name="float2" type="float" ></add>
+		<add name="piece_name0" type="Pointer" template="ZString"></add>
+		<add name="piece_name1" type="Pointer" template="ZString"></add>
+		<add name="piece_name2" type="Pointer" template="ZString"></add>
+		<add name="unk flags0" type="ubyte" arr1="8"></add>
+		<add name="piece_name3" type="Pointer" template="ZString"></add>
+		<add name="piece_name4" type="Pointer" template="ZString"></add>
+		<add name="piece_name5" type="Pointer" template="ZString"></add>
+		<add name="unk flags1" type="ubyte" arr1="8"></add>
+		<add name="piece_name6" type="Pointer" template="ZString"></add>
+		<add name="piece_name7" type="Pointer" template="ZString"></add>
+		<add name="piece_name8" type="Pointer" template="ZString"></add>
+		<add name="zero" type="uint64"></add>
+	</compound>
+	
+	<compound name="FirstPointersa" inherit="MemStruct">
+        PZ and PC: 320 bytes
+
+		<add name="PointerStuff1" type="CommonChunk"></add>
+		<add name="PointerStuff2" type="CommonChunk"></add>
+		<add name="PointerStuff3" type="CommonChunk"></add>
+		<add name="zero" type="uint64"></add>
+    </compound>
+	
+	<compound name="FirstPointersb" inherit="MemStruct">
+        PZ and PC: 112 bytes
+		<add name="PointerStuff" type="CommonChunk"></add>
+		<add name="zero" type="uint64"></add>
+    </compound>
+
+
+</niftoolsxml>

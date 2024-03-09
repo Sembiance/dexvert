@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    # enough to process all the bytes, just no idea yet what is each section.
+ 
+    <compound name="FRenderContextSetRoot" inherit="MemStruct">
+        <add name="ptr1_list"   type="ArrayPointer" template="ContextSet1Item" arg="ptr1_count"/>
+        <add name="ptr1_count"  type="uint64" />
+        <add name="ptr2_list"   type="ArrayPointer" template="ContextSet2Item" arg="ptr2_count"/>
+        <add name="ptr2_count"  type="uint64" />
+        <add name="ptr3_list"   type="ArrayPointer" template="ContextSet3Item" arg="ptr3_count"/>
+        <add name="ptr3_count"  type="uint64" />
+    </compound>
+
+    <compound name="ContextSet1Item" inherit="MemStruct">
+        <add name="stuff1_name"  type="Pointer" template="ZString"/>
+        <add name="stuff11_sub"   type="ArrayPointer" template="ContextSet1SubItem" arg="stuff11_sub_count"/>
+        <add name="stuff11_sub_count"  type="uint64" />
+        <add name="stuff12_sub"   type="ArrayPointer" template="ContextSet1SubItem" arg="stuff12_sub_count"/>
+        <add name="stuff12_sub_count"  type="uint64" />
+        <add name="stuff13_sub"   type="ArrayPointer" template="ContextSet1SubItem" arg="stuff13_sub_count"/>
+        <add name="stuff13_sub_count"  type="uint64" />
+        <add name="stuff14sub_name"  type="Pointer" template="ZString"/>
+        <add name="stuff14sub_name"  type="Pointer" template="ZString"/>
+        <add name="stuff15sub_name"  type="Pointer" template="ZString"/>
+        <add name="stuff1_unknown1"  type="uint64" />
+        <add name="stuff1_unknown2"  type="uint64" />
+    </compound>
+
+    <compound name="ContextSet1SubItem" inherit="MemStruct">
+        <add name="stuff1sub_name"  type="Pointer" template="ZString"/>
+        <add name="stuff1sub_order_or_flags"  type="uint64" />
+    </compound>
+
+
+    <compound name="ContextSet2Item" inherit="MemStruct">
+        <add name="stuff2_name"  type="Pointer" template="ZString"/>
+        <add name="stuff2_id"  type="uint64" />
+    </compound>
+
+    <compound name="ContextSet3Item" inherit="MemStruct">
+        <add name="stuff3_name1"  type="Pointer" template="ZString"/>
+        <add name="stuff3_sub"  type="Pointer" template="ContextSet3SubItem"/>
+        <add name="stuff3_id_allways_1"  type="uint64" />
+    </compound>
+
+    <compound name="ContextSet3SubItem" inherit="MemStruct">
+        <add name="stuff31_name1"  type="Pointer" template="ZString"/>
+        <add name="stuff31_name2"  type="Pointer" template="ZString"/>
+        <add name="stuff31_name3"  type="Pointer" template="ZString"/>
+        # could be another pointer. observer as 0
+        <add name="stuff31_id_allways_0" type="uint64" />
+    </compound>
+
+</niftoolsxml>

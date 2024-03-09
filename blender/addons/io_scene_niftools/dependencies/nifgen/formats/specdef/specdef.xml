@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <enum name="SpecdefDtype" numbytes="4" storage="uint" default="0">
+		<option value="0" name="Boolean" />
+		<option value="1" name="Int8" />
+		<option value="2" name="Int16" />
+		<option value="3" name="Int32" />
+		<option value="4" name="Int64" />
+		<option value="5" name="UInt8" />
+		<option value="6" name="UInt16" />
+		<option value="7" name="UInt32" />
+		<option value="8" name="UInt64" />
+		<option value="9" name="Float" />
+		<option value="10" name="String" />
+		<option value="11" name="Vector2" />
+		<option value="12" name="Vector3" />
+		<option value="13" name="Array" />
+		<option value="14" name="ChildItem" />
+		<option value="15" name="ReferenceToObject" />
+    </enum>
+
+    <compound name="SpecdefRoot" inherit="MemStruct">
+        <add name="attrib_count" type="ushort" />
+        <add name="flags" type="ushort" />
+        <add name="name_count" type="ubyte" />
+        <add name="childspec_count" type="ubyte" />
+        <add name="manager_count" type="ubyte" />
+        <add name="script_count" type="ubyte" />
+        <add name="attribs" type="ArrayPointer" template="Spec" arg="attrib_count"/>
+        <add name="name_foreach_attribs" type="ForEachPointer" template="NamePtr" arg="attribs"/>
+        <add name="data_foreach_attribs" type="ForEachPointer" template="DataPtr" arg="attribs"/>
+
+        <add name="names" type="Pointer" template="ZStringList" arg="name_count"/>
+        <add name="childspecs" type="Pointer" template="ZStringList" arg="childspec_count"/>
+        <add name="managers" type="Pointer" template="ZStringList" arg="manager_count"/>
+        <add name="scripts" type="Pointer" template="ZStringList" arg="script_count"/>
+    </compound>
+
+    <compound name="Spec" inherit="MemStruct">
+        <add name="dtype" type="SpecdefDtype" />
+    </compound>
+
+    <compound name="NamePtr" inherit="MemStruct">
+        <add name="name_ptr" type="Pointer" template="ZString" />
+    </compound>
+
+    <compound name="DataPtr" inherit="MemStruct">
+        #ARG# is dtype
+        <add name="data_ptr" type="Pointer" template="Data" arg="#ARG# \ dtype"/>
+    </compound>
+
+    <compound name="BooleanData" inherit="MemStruct">
+        8 bytes in log
+        <add name="ivalue" type="ubyte"/>
+        <add name="ioptional" type="ubyte"/>
+        <add name="unused" type="ubyte" arr1="6"/>
+    </compound>
+
+    <compound name="Int8Data" inherit="MemStruct">
+        8 bytes
+        <add name="imin" type="byte"/>
+        <add name="imax" type="byte"/>
+        <add name="ivalue" type="byte"/>
+        <add name="ioptional" type="byte"/>
+        <add name="unused" type="ubyte" arr1="4"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Int16Data" inherit="MemStruct">
+        8 bytes
+        <add name="imin" type="short"/>
+        <add name="imax" type="short"/>
+        <add name="ivalue" type="short"/>
+        <add name="ioptional" type="short"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Int32Data" inherit="MemStruct">
+        16 bytes
+        <add name="imin" type="int"/>
+        <add name="imax" type="int"/>
+        <add name="ivalue" type="int"/>
+        <add name="ioptional" type="int"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Int64Data" inherit="MemStruct">
+        48 bytes in log
+        <add name="imin" type="int64"/>
+        <add name="imax" type="int64"/>
+        <add name="ivalue" type="int64"/>
+        <add name="ioptional" type="int64"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Uint8Data" inherit="MemStruct">
+        24 bytes in log
+        <add name="imin" type="ubyte"/>
+        <add name="imax" type="ubyte"/>
+        <add name="ivalue" type="ubyte"/>
+        <add name="ioptional" type="ubyte"/>
+        <add name="unused" type="ubyte" arr1="4"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Uint16Data" inherit="MemStruct">
+        24 bytes in log
+        <add name="imin" type="ushort"/>
+        <add name="imax" type="ushort"/>
+        <add name="ivalue" type="ushort"/>
+        <add name="ioptional" type="ushort"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Uint32Data" inherit="MemStruct">
+        32 in log with enum
+        <add name="imin" type="uint"/>
+        <add name="imax" type="uint"/>
+        <add name="ivalue" type="uint"/>
+        <add name="ioptional" type="uint"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="Uint64Data" inherit="MemStruct">
+        48 bytes in log
+        <add name="imin" type="uint64"/>
+        <add name="imax" type="uint64"/>
+        <add name="ivalue" type="uint64"/>
+        <add name="ioptional" type="uint64"/>
+        <add name="enum" type="Pointer" />
+    </compound>
+
+    <compound name="FloatData" inherit="MemStruct">
+        16 bytes in log
+        <add name="imin" type="float"/>
+        <add name="imax" type="float"/>
+        <add name="ivalue" type="float"/>
+        <add name="ioptional" type="uint"/>
+    </compound>
+
+    <compound name="StringData" inherit="MemStruct">
+        16 bytes in log
+        <add name="str_name" type="Pointer" template="ZString" />
+        <add name="ioptional" type="uint"/>
+    </compound>
+
+    <compound name="Vector2" inherit="MemStruct">
+        16 bytes
+        <add name="x" type="float"/>
+        <add name="y" type="float"/>
+        <add name="ioptional" type="uint"/>
+        <add name="unused" type="uint"/>
+    </compound>
+
+    <compound name="Vector3" inherit="MemStruct">
+        16 bytes in log
+        <add name="x" type="float"/>
+        <add name="y" type="float"/>
+        <add name="z" type="float"/>
+        <add name="ioptional" type="uint"/>
+    </compound>
+
+    <compound name="ArrayData" inherit="MemStruct">
+        16 bytes in log
+        <add name="item" type="Pointer" template="Data" arg="dtype"/>
+        <add name="dtype" type="SpecdefDtype" />
+        <add name="unused" type="uint" />
+    </compound>
+
+    <compound name="ChildSpecData" inherit="MemStruct">
+        8 bytes
+        eg. spineflex.specdef points to dependency for another specdef
+        eg. flatridecontroller.specdef points to SpecdefRoot
+        <add name="specdef" type="Pointer" template="SpecdefRoot"/>
+    </compound>
+
+    <compound name="ReferenceToObjectData" inherit="MemStruct">
+        16 bytes in log
+        <add name="obj_name" type="Pointer" template="ZString" />
+        <add name="ioptional" type="uint"/>
+    </compound>
+
+    <compound name="Data" inherit="MemStruct">
+        #ARG# is dtype
+        todo - enum, grab, implement, fetch
+        <add name="dtype" type="BooleanData" cond="#ARG# #EQ# 0"/>
+        <add name="dtype" type="Int8Data" cond="#ARG# #EQ# 1"/>
+        <add name="dtype" type="Int16Data" cond="#ARG# #EQ# 2"/>
+        <add name="dtype" type="Int32Data" cond="#ARG# #EQ# 3"/>
+        <add name="dtype" type="Int64Data" cond="#ARG# #EQ# 4"/>
+        <add name="dtype" type="Uint8Data" cond="#ARG# #EQ# 5"/>
+        <add name="dtype" type="Uint16Data" cond="#ARG# #EQ# 6"/>
+        <add name="dtype" type="Uint32Data" cond="#ARG# #EQ# 7"/>
+        <add name="dtype" type="Uint64Data" cond="#ARG# #EQ# 8"/>
+        <add name="dtype" type="FloatData" cond="#ARG# #EQ# 9"/>
+        <add name="dtype" type="StringData" cond="#ARG# #EQ# 10"/>
+        <add name="dtype" type="Vector2" cond="#ARG# #EQ# 11"/>
+        <add name="dtype" type="Vector3" cond="#ARG# #EQ# 12"/>
+        <add name="dtype" type="ArrayData" cond="#ARG# #EQ# 13"/>
+        <add name="dtype" type="ChildSpecData" cond="#ARG# #EQ# 14"/>
+        <add name="dtype" type="ReferenceToObjectData" cond="#ARG# #EQ# 15"/>
+    </compound>
+
+</niftoolsxml>

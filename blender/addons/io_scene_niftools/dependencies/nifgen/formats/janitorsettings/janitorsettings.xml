@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="JanitorSettingsRoot" inherit="MemStruct">
+        huge batch of arrays at the head of the file
+        <add name="array_0" type="ArrayPointer" template="UIntPair" arg="count_0"/>
+        <add name="array_1" type="ArrayPointer" template="UIntPair" arg="count_1"/> maybe salary?
+        <add name="array_2" type="ArrayPointer" template="UIntPair" arg="count_2"/>
+        <add name="array_3" type="ArrayPointer" template="UIntPair" arg="count_3"/>
+        <add name="array_4" type="ArrayPointer" template="UIntPair" arg="count_4"/>
+        <add name="array_5" type="ArrayPointer" template="UIntPair" arg="count_5"/>
+        <add name="array_6" type="ArrayPointer" template="uint" arg="count_6"/>
+        <add name="array_7" type="ArrayPointer" template="uint" arg="count_7"/>
+
+        <add name="array_8" type="ArrayPointer" template="uint" arg="count_8"/>
+        <add name="array_9" type="ArrayPointer" template="float" arg="count_9"/>
+
+        <add name="array_10" type="ArrayPointer" template="float" arg="count_10"/>
+        <add name="array_11" type="ArrayPointer" template="float" arg="count_11"/>
+        <add name="array_12" type="ArrayPointer" template="float" arg="count_12"/>
+        <add name="array_13" type="ArrayPointer" template="float" arg="count_13"/> always 4.0?
+        <add name="array_14" type="ArrayPointer" template="float" arg="count_14"/> always 0.5?
+        ---
+
+        and here comes the actual data part
+        <add name="unk_0" type="float"/>
+        <add name="unk_1" type="float"/>
+        <add name="unk_2" type="float"/>
+        <add name="unk_3" type="float"/>
+        <add name="unk_4" type="float"/>
+        <add name="unk_5" type="float"/>
+        <add name="unk_6" type="float"/>
+        <add name="unk_7" type="float"/>
+
+        <add name="unk_8" type="uint"/>
+        <add name="unk_9" type="float"/>
+        <add name="unk_10" type="float"/>
+
+        counters for the arrays
+        <add name="count_0" type="ubyte" />
+        <add name="count_1" type="ubyte" />
+        <add name="count_2" type="ubyte" />
+        <add name="count_3" type="ubyte" />
+        <add name="count_4" type="ubyte" />
+        <add name="count_5" type="ubyte" />
+        <add name="count_6" type="ubyte" />
+        <add name="count_7" type="ubyte" />
+
+        <add name="count_8" type="ubyte" />
+        <add name="count_9" type="ubyte" />
+
+        <add name="count_10" type="ubyte" />
+        <add name="count_11" type="ubyte" />
+        <add name="count_12" type="ubyte" />
+        <add name="count_13" type="ubyte" />
+        <add name="count_14" type="ubyte" />
+
+        <add name="possibly_unused_count_0" type="ubyte" />
+        <add name="possibly_unused_count_1" type="ubyte" />
+        <add name="possibly_unused_count_2" type="ubyte" />
+        <add name="possibly_unused_count_3" type="ubyte" />
+        <add name="possibly_unused_count_4" type="ubyte" />
+
+        back to the "data" part
+        <add name="unk_11" type="float"/>
+        <add name="unk_12" type="float"/>
+        <add name="unk_13" type="float"/>
+        <add name="unk_14" type="float"/>
+        <add name="unk_15" type="float"/>
+        <add name="unk_16" type="float"/>
+        <add name="unk_17" type="float"/>
+        <add name="unk_18" type="float"/>
+
+        <add name="unk_19" type="float"/>
+        <add name="unk_20" type="float"/>
+        <add name="unk_21" type="float"/>
+        <add name="unk_22" type="float"/>
+        <add name="unk_23" type="float"/>
+        <add name="unk_24" type="float"/>
+        <add name="unk_25" type="float"/>
+        <add name="unk_26" type="float"/>
+
+        <add name="unk_27" type="float"/>
+        <add name="unk_28" type="float"/>
+        <add name="unk_29" type="float"/>
+        <add name="unk_30" type="float"/>
+        <add name="unk_31" type="float"/>
+        <add name="unk_32" type="float"/>
+    </compound>
+
+    <compound name="UIntPair" inherit="MemStruct">
+        <add name="value_0" type="uint"/>
+        <add name="value_1" type="uint"/>
+    </compound>
+
+</niftoolsxml>

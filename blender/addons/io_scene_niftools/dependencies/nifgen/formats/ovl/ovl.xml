@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+	<verattr name="mime_version" access="mime version" index="3" />
+
+    <compound name="MimeEntry" allow_np="true" >
+        Description of one mime type or file class.
+		Inside the archive not the stored mime hash is used but the extension hash, has to be generated, eg. djb2("bani") == 2090104799
+        <add name="name" type="OffsetString" arg="context\names"/>
+        <add name="zero_0" type="uint" default="0"/>
+        <add name="Mime Hash" type="uint" since="18">hash of this mime, changes with mime version; not used anywhere else in the ovl</add>
+        <add name="mime version" type="uint" >usually increments with game</add>
+		<add name="file index offset" type="uint">Id of this class type. Later in the file there is a reference to this Id; offset into FileEntry list in number of files</add>
+        <add name="file count" type="uint">Number of entries of this class in the file.; from 'file index offset', this many files belong to this file extension</add>
+        <add name="zero_1" type="uint" until="17"/>
+        <add name="triplet count" type="uint" since="20" >constant per mime, grab this many triplets</add>
+        <add name="triplet offset" type="uint" since="20" >index into triplets list</add>
+    </compound>
+
+    <compound name="Triplet" allow_np="true">
+        3 bytes - constant per mime and version
+        <add name="a" type="ubyte">?</add>
+        <add name="b" type="ubyte">?</add>
+        <add name="c" type="ubyte">?</add>
+    </compound>
+
+    <compound name="FileEntry" allow_np="true" >
+        Description of one file in the archive
+        <add name="basename" type="OffsetString" arg="context\names"/>
+        <add name="file hash" type="uint">this hash is used to retrieve the file name from inside the archive</add>
+        <add name="pool_type" type="byte" >pool type of this file's root pointer, if part of a set, it's usually the same as set pool type</add>
+        <add name="set_pool_type" type="byte" >if this file is part of a set, the set's root entry's pool type, else 0</add>
+        <add name="extension" type="ushort" >index into 'Extensions' array</add>
+    </compound>
+
+    <compound name="ArchiveEntry" >
+        Description of one archive
+        <add name="name" type="OffsetString" arg="context\archive_names"/>
+        <add name="pools_offset" type="uint">starting index in ovl list of pools, this archive's pools continue for num_pools</add>
+        <add name="stream_files_offset" type="uint">starting index into ovl.stream_files</add>
+        <add name="num_pools" type="uint" >Total amount of pools in this archive; sum of all PoolGroup.num_pools</add>
+        <add name="Num Datas" type="ushort" >Amount of Data Entries</add>
+        <add name="num_pool_groups" type="ushort" >Amount of PoolGroup objects at start of this deflated archive.</add>
+        <add name="num_buffer_groups" type="uint"/>
+        <add name="Num Buffers" type="uint">Amount of buffers in the archive</add>
+        <add name="Num Fragments" type="uint" >Amount of Fragments in the archive</add>
+        <add name="num_root_entries" type="uint">Number of files in the archive</add>
+        <add name="read start" type="uint">Seek to pos to get zlib header for this archive</add>
+        <add name="set data size" type="uint" >size of the set and asset entry data</add>
+        <add name="compressed_size" type="uint">size of the compressed data for this archive</add>
+        <add name="uncompressed_size" type="uint64" >size of the uncompressed data for this archive</add>
+        <add name="pools_start" type="uint">byte offset, cumulative size of all pools preceding this archive</add>
+        <add name="pools_end" type="uint" >byte offset, pools_start + sum of this archive's pools' sizes</add>
+        <add name="ovs_offset" type="uint" >Seemingly unused, can be zeroed without effect ingame in JWE</add>
+    </compound>
+
+    <compound name="IncludedOvl" allow_np="true">
+        Description of one included ovl file that is force-loaded by this ovl
+        <add name="basename" type="OffsetString" arg="context\names">path is relative to this ovl's directory; usually points to ovl files</add>
+    </compound>
+
+	<compound name="HeaderPointer" allow_np="true">
+		Not standalone, used by RootEntry, Fragment and DependencyEntry
+        <add name="pool_index" type="int" default="-1">The index of the MemPool this one relates to; OR, for entries referred to from AssetEntries: -1</add>
+        <add name="data offset" type="uint" >the byte offset relative to the start of the MemPool's data</add>
+    </compound>
+
+    <compound name="DependencyEntry" allow_np="true">
+        Description of dependency; links it to an entry from this archive
+        <add name="file hash" type="uint">basename for dependency, for lookup in hash dict. Can be either external or internal.</add>
+        <add name="ext_raw" type="OffsetString" arg="context\names">ext for dependency, use : instead of . at the start, eg. :tex</add>
+        <add name="file index" type="uint" >index into ovl files, points to the file entry using this dependency</add>
+        <add name="link_ptr" type="HeaderPointer" >pointer into flattened list of all archives' pools</add>
+    </compound>
+
+    <compound name="AuxEntry" allow_np="true">
+        describes an external AUX resource
+        <add name="file index" type="uint">index into files list</add>
+        <add name="basename" type="OffsetString" arg="context\names"/>
+        <add name="size" type="uint">byte count of the complete external resource file</add>
+    </compound>
+
+    <compound name="StreamEntry" allow_np="true">
+        Description of one streamed file instance. One for every file stored in an ovs.
+        Links the main pointers of a streamed file to its user, eg. a texturestream to a tex file.
+        --These appear sorted in the order of root entries per ovs.-- only true for lod0, not lod1
+        the order does not seem to be consistent
+        interestingly, the order of root_entry entries per ovs is consistent with decreasing pool offset
+        <add name="stream_offset" type="uint">offset to the stream's root_entry pointer inside the flattened mempools</add>
+        <add name="file_offset" type="uint">offset to the user file's root_entry pointer (in STATIC) inside the flattened mempools</add>
+        <add name="zero" type="uint"/>
+    </compound>
+
+    <compound name="ArchiveMeta" allow_np="true">
+        Apparently sizes or offsets for each archive
+        <add name="unk_0" type="uint">seemingly unused in JWE</add>
+        <add name="unk_1" type="uint">seemingly unused in JWE, subtracting this from ovs uncompressed_size to get length of the uncompressed ovs header</add>
+    </compound>
+
+    <compound name="Header" inherit="GenericHeader">
+        Found at the beginning of every OVL file
+        <add name="num ovs types" type="uint" >counts ovs files with unique paths not matching the ovl name; all LODs of one type count as 1</add>
+        <add name="Len Names" type="uint" >length of the Names block below, including 00 bytes</add>
+        <add name="Zero 2" type="uint"/>
+
+        <add name="Num Aux Entries" type="uint" >count of external aux files, ie audio banks</add>
+        <add name="num_included_ovls" type="ushort" >count of included ovl files that are available to this ovl</add>
+        <add name="Num Mimes" type="ushort" >count of file mime types, aka. extensions with metadata</add>
+        <add name="Num Files" type="uint"/>
+        <add name="Num Files 2" type="uint" >repeat count of files ??</add>
+        <add name="Num Dependencies" type="uint"/>
+        <add name="Num Archives" type="uint" >number of archives</add>
+
+        <add name="num_pool_groups" type="uint" >across all archives</add>
+        <add name="num_pools" type="uint" >across all archives</add>
+        <add name="Num Datas" type="uint" >across all archives</add>
+        <add name="Num Buffers" type="uint" >across all archives</add>
+        <add name="num_stream_files" type="uint" >number of files in external OVS archives</add>
+        <add name="ztuac unk 0" type="uint" >used in ZTUAC elephants</add>
+        <add name="ztuac unk 1" type="uint" >used in ZTUAC elephants</add>
+        <add name="ztuac unk 2" type="uint" >used in ZTUAC elephants</add>
+        <add name="Len Archive Names" type="uint" >length of archive names</add>
+        <add name="Num Files 3" type="uint" >another Num Files</add>
+        <add name="Len Type Names" type="uint" >length of the type names portion inside Names block (usually at the start), not counting 00 bytes</add>
+        <add name="num_triplets" type="uint" >used in PZ1.6 for the first time</add>
+        <add name="Reserved" type="uint" arr1="12">zeros</add>
+
+		<!-- end of fixed header structure -->
+        <add name="Names" type="ZStringBuffer" arg="Len Names">Name buffer for assets and file mime types.</add>
+        <add name="Names_pad" type="ubyte" arr1="(16 - (Len Names #MOD# 16)) #MOD# 16" until="15">used in DLA</add>
+        <add name="Mimes" type="MimeEntry" arr1="Num Mimes"/>
+        <add name="triplets_ref" type="Empty"/>
+        <add name="triplets" type="Triplet" arr1="num_triplets" since="20"/>
+        <add name="triplets_pad" type="PadAlign" template="triplets_ref" arg="4" since="20"/>
+        <add name="Files" type="FileEntry" arr1="Num Files"/>
+        <add name="archive_names" type="ZStringBuffer" arg="Len Archive Names">usually STATIC followed by any external OVS names</add>
+        <add name="Archives" type="ArchiveEntry" arr1="Num Archives"/>
+        <add name="included_ovls" type="IncludedOvl" arr1="num_included_ovls"/>
+        <add name="Dependencies" type="DependencyEntry" arr1="Num Dependencies" since="19"/>
+        <add name="Aux Entries" type="AuxEntry" arr1="Num Aux Entries"/>
+        <add name="Dependencies" type="DependencyEntry" arr1="Num Dependencies" until="18">after aux in ZTUAC and PC</add>
+        <add name="stream_files" type="StreamEntry" arr1="num_stream_files"/>
+        <add name="archives_meta" type="ArchiveMeta" arr1="Num Archives"/>
+    </compound>
+
+    <compound name="NamedEntry" >
+        name is stored in basename and ext attributes
+    </compound>
+
+	<!-- From here, structs are for the deflated stream -->
+
+	<compound name="PoolGroup">
+		Located at start of deflated archive stream
+		<add name="Type" type="ushort" >Type of the pools that follow</add>
+		<add name="num_pools" type="ushort" >Amount of pools of that type that follow the pool types block</add>
+	</compound>
+
+    <compound name="MemPool" >
+        Description of one archive header entry
+        <add name="zero1" type="uint64" since="17"/>
+		<add name="Size" type="uint">the number of bytes inside this mempool</add>
+		<add name="Offset" type="uint">byte offset from the start of the mempools region</add>
+        <add name="zero2" type="uint64" until="15"/>
+		<add name="File Hash" type="uint">djb2 hash of the first file that points into this mempool</add>
+		<add name="Num Files" type="ushort" since="15">unknown count (related to number of files or pointers)</add>
+		<add name="Num datas" type="ushort" since="15">amount of data entries referring to this pool?, may just be an artifact of apparently compressed ovs though</add>
+		<add name="Ext Hash" type="uint" since="19">JWE: djb2 hash for extension, 0 for PZ</add>
+        <add name="zero3" type="uint" since="19"/>
+    </compound>
+	
+	<compound name="DataEntry" >
+		32 bytes
+		<add name="File Hash" type="uint">djb2 hash</add>
+		<add name="Ext Hash" type="uint" since="19">djb2 hash for extension</add>
+		<add name="set index" type="ushort" >1-based indexing into set_header.sets; 0 if data is not part of a set</add>
+		<add name="buffer count" type="ushort">number of buffers that should be read from list for this entry</add>
+        <add name="zero" type="uint" since="19"/>
+		<add name="Size 1" type="uint64">size of first buffer, in the case of the ms2 the size 1 is the size of the first two buffers together</add>
+		<add name="Size 2" type="uint64">size of last buffer; tex and texstream have all size here</add>
+    </compound>
+
+	<compound name="BufferEntry" >
+		8 bytes
+		<add name="index" type="uint" until="19">index of buffer in file; id from sorting of data entries</add>
+		<add name="size" type="uint">in bytes</add>
+		<add name="file_hash" type="uint" since="20">id; index is taken from buffer group</add>
+    </compound>
+
+	<compound name="BufferGroup" >
+		32 bytes
+		<add name="buffer_offset" type="uint">first buffer index</add>
+		<add name="buffer_count" type="uint">number of buffers to grab</add>
+		<add name="ext_index" type="uint">type of extension this entry is for</add>
+		<add name="buffer_index" type="uint">which buffer index to populate</add>
+		<add name="size" type="uint64">cumulative size of all buffers to grab</add>
+		<add name="data_offset" type="uint">first data entry</add>
+		<add name="data_count" type="uint">number of data entries to populate buffers into</add>
+    </compound>
+	
+    <compound name="RootEntry" allow_np="true">
+        Main file entry in the ovs, one per FileEntry
+        <add name="File Hash" type="uint">id (index or djb2) of the file</add>
+        <add name="Ext Hash" type="uint" since="19">djb2 of extension</add>
+        <add name="struct_ptr" type="HeaderPointer" >points to the main struct of this file OR -1 pointer for assets</add>
+    </compound>
+	
+    <compound name="Fragment" allow_np="true">
+		These are to be thought of as instructions for loading. Their order is irrelevant.
+        <add name="link_ptr" type="HeaderPointer" >determines where to write a pointer address</add>
+        <add name="struct_ptr" type="HeaderPointer" >the struct that is pointed to can be found here</add>
+    </compound>
+	
+	<compound name="SetEntry" allow_np="true">
+		the asset indices of two consecutive SetEntries define a set of AssetEntries
+        <add name="File Hash" type="uint"/>
+        <add name="Ext Hash" type="uint" since="19"/>
+		<add name="start" type="uint" >add assets from last set's start up to this index to this set</add>
+    </compound>
+
+	<compound name="AssetEntry" allow_np="true">
+		refers to root entries so they can be grouped into set entries.
+		points to RootEntry with pool_index -1
+        <add name="File Hash" type="uint64"/>
+        <add name="Ext Hash" type="uint64" since="19"/>
+		<add name="root index" type="uint64" >index into root entries array</add>
+    </compound>
+
+	<compound name="SetHeader" >
+		defines amount of sets and assets
+        <add name="set count" type="uint"/>
+        <add name="asset count" type="uint"/>
+		<add name="sig a" type="uint" default="1065336831">must be 1065336831</add>
+		<add name="sig b" type="uint" default="16909320">must be 16909320</add>
+        <add name="sets" type="SetEntry" arr1="set count"/>
+        <add name="assets" type="AssetEntry" arr1="asset count"/>
+    </compound>
+
+    <compound name="OvsHeader" >
+        Description of one archive's content
+        <add name="pool_groups" type="PoolGroup" arr1="#ARG#\num_pool_groups"/>
+        <add name="pools" type="MemPool" arr1="#ARG#\num_pools"/>
+        <add name="data entries" type="DataEntry" arr1="#ARG#\Num Datas"/>
+        <add name="buffer entries" type="BufferEntry" arr1="#ARG#\Num Buffers"/>
+        <add name="buffer groups" type="BufferGroup" arr1="#ARG#\num_buffer_groups"/>
+        <add name="root_entries" type="RootEntry" arr1="#ARG#\num_root_entries"/>
+        <add name="fragments" type="Fragment" arr1="#ARG#\Num Fragments"/>
+        <add name="set header" type="SetHeader"/>
+    </compound>
+
+</niftoolsxml>

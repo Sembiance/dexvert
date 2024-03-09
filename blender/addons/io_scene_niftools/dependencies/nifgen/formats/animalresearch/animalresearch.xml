@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    # todo - levels, next_levels and children actually seem to be terminated by nullptrs not counted with the counts
+
+    <compound name="ResearchRoot" inherit="MemStruct">
+        <add name="levels" type="ArrayPointer" template="ResearchLevel" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="ResearchLevel" inherit="MemStruct">
+        <add name="level_name" type="Pointer" template="ZString"/>
+        <add name="next_levels" type="Pointer" template="ZStringList" arg="next_level_count"/>
+        <add name="next_level_count" type="uint64" />
+        <add name="children" type="Pointer" template="ZStringList" arg="children_count"/>
+        <add name="children_count" type="uint64" />
+    </compound>
+
+    <compound name="UnlockState" inherit="MemStruct">
+        <add name="entity_name" type="Pointer" template="ZString"/>
+        <add name="level_name" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="ResearchStartRoot" inherit="MemStruct">
+        <add name="states" type="ArrayPointer" template="UnlockState" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+</niftoolsxml>

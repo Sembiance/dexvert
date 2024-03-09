@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fileformat>
+<fileformat>
+
+    <!--
+    *******************
+    *** basic types ***
+    *******************
+    -->
+
+    <basic name="ubyte">
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="byte">
+        A signed 8-bit integer.
+    </basic>
+
+    <basic name="ushort">
+        An unsigned 16-bit integer.
+    </basic>
+
+    <basic name="short">
+        A signed 16-bit integer.
+    </basic>
+
+    <basic name="uint">
+        An unsigned 32-bit integer.
+    </basic>
+
+    <basic name="int">
+        A signed 32-bit integer.
+    </basic>
+
+    <basic name="char">
+        An 8-bit character.
+    </basic>
+
+    <basic name="float">
+        A standard 32-bit floating point number.
+    </basic>
+
+    <!--
+    *************
+    *** enums ***
+    *************
+    -->
+
+    <enum name="FileType" storage="uint">
+      <option name="ACTRHEAD" value="0" />
+      <option name="ANIMHEAD" value="1" />
+    </enum>
+
+    <!--
+    ***************
+    *** structs ***
+    ***************
+    -->
+
+    <struct name="ZString20">
+      <add name="Data" type="char" arr1="20" />
+    </struct>
+
+    <struct name="ZString64">
+      <add name="Data" type="char" arr1="64" />
+    </struct>
+
+    <!-- source: http://udn.epicgames.com/Two/rsrc/Two/BinaryFormatSpecifications/UnrealAnimDataStructs.h -->
+
+    <struct name="Quat">
+      <add name="x" type="float" />
+      <add name="y" type="float" />
+      <add name="z" type="float" />
+      <add name="w" type="float" />
+    </struct>
+
+    <struct name="Vector">
+      <add name="x" type="float" />
+      <add name="y" type="float" />
+      <add name="z" type="float" />
+    </struct>
+
+    <!-- not in original source, but convenient to have -->
+    <struct name="TexCoord">
+      <add name="u" type="float" />
+      <add name="v" type="float" />
+    </struct>
+    
+    <!-- originally named JointPos -->
+    <struct name="BonePos">
+      A bone: an orientation, and a position, all relative to their parent.
+      <add name="Orientation" type="Quat" />
+      <add name="Position" type="Vector" />
+      <add name="Length" type="float">
+	For collision testing / debugging drawing (unused).
+      </add>
+      <add name="Size" type="Vector"/>
+    </struct>
+
+
+    <struct name="AnimInfoBinary">
+      Binary animation info format - used to organize raw animation
+      keys into FAnimSeqs on rebuild. Similar to
+      MotionChunkDigestInfo.
+      <add name="Name" type="ZString64">Animation's name</add>
+      <add name="Group" type="ZString64">Animation's group name</add>
+      <add name="Total Bones" type="int">TotalBones * NumRawFrames is number of animation keys to digest.</add>
+      <add name="Root Include" type="int">0=none 1=included (unused).</add>
+      <add name="Key Compression Style" type="int">Reserved: variants in tradeoffs for compression.</add>
+      <add name="Key Quotum" type="int">Max key quotum for compression.</add>
+      <add name="Key Reduction" type="float">Desired compression level?</add>
+      <add name="Track Time" type="float">Explicit - can be overridden by the animation rate.</add>
+      <add name="Anim Rate" type="float">Frames per second.</add>
+      <add name="Start Bone" type="int">Reserved: for partial animations (unused).</add>
+      <add name="First Raw Frame" type="int" />
+      <add name="Num Raw Frames" type="int">NumRawFrames and AnimRate dictate track time.</add>
+    </struct>
+
+    <struct name="ChunkHeader">
+      File header structure.
+      <add name="Chunk Id" type="ZString20">String ID.</add>
+      <add name="Type Flag" type="int" default="1999801">Flags/reserved</add>
+      <add name="Data Size" type="int">Size per struct following</add>
+      <add name="Data Count" type="int">Number of structs</add>
+    </struct>
+
+    <struct name="Material">
+      Raw data material.
+      <add name="Material Name" type="ZString64" />
+      <add name="Texture Index" type="int">Texture index ('multiskin index').</add>
+      <add name="Poly Flags" type="uint">ALL poly's with THIS material will have this flag.</add>
+      <add name="Aux Material" type="int">Reserved: index into another material, eg. detailtexture/shininess/whatever.</add>
+      <add name="Aux Flags" type="uint">Reserved: auxiliary flags.</add>
+      <add name="Lod Bias" type="int">Material-specific lod bias (unused).</add>
+      <add name="Lod Style" type="int">Material-specific lod style (unused).</add>
+    </struct>
+
+    <struct name="Bone">
+      Raw data bone.
+      <add name="Name" type="ZString64" />
+      <add name="Flags" type="uint">Reserved.</add>
+      <add name="Num Children" type="int">Children (not used).</add>
+      <add name="Parent Index" type="int">0/NULL if this is the root bone.</add>
+      <add name="Bone Pos" type="BonePos">Reference position.</add>
+    </struct>
+
+    <!-- not sure why we need this
+    <struct name="NamedBoneBinary" inherit="Bone">
+      Binary bone format to deal with raw animations as generated by
+      various exporters.
+    </struct>
+    -->
+
+    <!-- originally named RawBoneInfluence -->
+    <struct name="Influence">
+      Just weight, vertex, and Bone, sorted later.
+      Raw data bone influence.
+      <add name="Weight" type="float"/>
+      <add name="PointIndex" type="int"/>
+      <add name="BoneIndex" type="int"/>
+    </struct>
+
+    <struct name="QuatAnimKey">
+      An animation key.
+      <add name="Position" type="Vector">Relative to parent.</add>
+      <add name="Orientation" type="Quat">Relative to parent.</add>
+      <add name="Time" type="float">The duration until the next key (end key wraps to first...).</add>
+    </struct>
+
+    <!-- originally named Vertex -->
+    <struct name="Wedge">
+      Vertex with texturing info, akin to Hoppe's 'Wedge' concept - import only.
+      <add name="Point Index" type="ushort">Index into the 3d point table.</add>
+      <add name="Padding 1" type="ubyte" arr1="2" />
+      <add name="UV" type="TexCoord">Texture UV coordinates.</add>
+      <add name="Mat Index" type="ubyte">At runtime, this one will be implied by the face that's pointing to us.</add>
+      <add name="Padding 2" type="ubyte" arr1="3" />
+    </struct>
+
+    <!-- not sure why we need this
+    <struct name="Point" inherit="Vector">
+      Points: regular Vectors 
+    </struct>
+    -->
+
+    <!-- originally named Triangle -->
+    <struct name="Face">
+      Textured triangle.
+      <add name="Wedge Index" type="ushort" arr1="3">Point to three vertices in the vertex list.</add>
+      <add name="Mat Index" type="ubyte">Materials can be anything.</add>
+      <add name="Aux Mat Index" type="ubyte">Second material (unused).</add>
+      <add name="Smoothing Groups" type="uint">32-bit flag for smoothing groups.</add>
+    </struct>
+
+    <!-- structure of psk and psa files -->
+
+    <struct name="Chunk" inherit="ChunkHeader">
+      <add name="Data" type="TEMPLATE" arr1="Data Count"/>
+    </struct>
+
+    <struct name="Data">
+      <add name="File Type" type="FileType" default="0" abstract="1">
+        The file type (abstract, set on inspection).
+      </add>
+      <add name="Header" type="ChunkHeader">
+	When the Typeflag value equals decimal 1999801 or lower it
+	denotes this version 1.0 layout of the PSK file.
+      </add>
+      <!-- psk files -->
+      <add name="Points" type="Chunk" template="Vector" cond="File Type == 0" />
+      <add name="Wedges" type="Chunk" template="Wedge" cond="File Type == 0" />
+      <add name="Faces" type="Chunk" template="Face" cond="File Type == 0" />
+      <add name="Materials" type="Chunk" template="Material" cond="File Type == 0" />
+      <add name="Bones" type="Chunk" template="Bone" cond="File Type == 0" />
+      <add name="Influences" type="Chunk" template="Influence" cond="File Type == 0" />
+      <!-- psa files -->
+      <add name="Bones" type="Chunk" template="Bone" cond="File Type == 1" />
+      <add name="Animations" type="Chunk" template="AnimInfoBinary" cond="File Type == 1" />
+      <add name="Raw Keys" type="Chunk" template="QuatAnimKey" cond="File Type == 1" />
+    </struct>
+      
+</fileformat>

@@ -2,7 +2,7 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
-import {path, dateFormat, dateParse} from "std";
+import {path, dateFormat, dateParse, base64Encode} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
 import {ANSIToHTML} from "thirdParty";
 import {mkWeblink} from "./testUtil.js";
@@ -769,6 +769,7 @@ ${newSuccesses.map(v => `./testdexvert --record ${v}`).join("\n")}
 
 async function writeOutputHTML()
 {
+	xlog.info`Generating HTML report...`;
 	const a2html = new ANSIToHTML();
 	const reportFilePath = path.join(DEXTEST_ROOT_DIR, "report.html");
 	await fileUtil.writeTextFile(reportFilePath, `
@@ -870,13 +871,24 @@ async function writeOutputHTML()
 			{
 				clear: both;
 			}
+
+			model-viewer
+			{
+				display: inline-block;
+				width: 350px;
+				height: 350px;
+				margin: 5px;
+				float: left;
+				border: 2px solid #555;
+			}
 		</style>
 	</head>
 	<body>
+		<script type="module">${await fileUtil.readTextFile("/mnt/compendium/DevLab/dexvert/test/model-viewer.min.js")}</script>
 		${oldDataFormats.length>0 ? `<blink style="font-weight: bold; color: red;">HAS OLD DATA</blink> — ${oldDataFormats.map(v => v.decolor()).join(" ")}<br>` : ""}		
 		${outputFiles.length.toLocaleString()} files<br>
 		<span class="topRightInfo">formats: ${argv.format.escapeHTML() || "all formats"}</span>
-		${outputFiles.sortMulti([filePath => path.basename(filePath)]).map(filePath =>
+		${(await outputFiles.sortMulti([filePath => path.basename(filePath)]).parallelMap(async filePath =>
 	{
 		const titleSafe = path.basename(filePath).escapeHTML();
 		const ext = path.extname(filePath);
@@ -902,10 +914,13 @@ async function writeOutputHTML()
 			case ".pdf":
 			case ".html":
 				return `<span class="embed"><a href="${filePathSafe}" title="${titleSafe}">${titleSafe}</a><br><iframe src="${filePathSafe}" title="${titleSafe}"></iframe></span>`;
+			
+			case ".glb":
+				return `<model-viewer loading="lazy" title="${titleSafe}" interaction-prompt="none" camera-controls touch-action="none" src="data:model/gltf-binary;base64,${base64Encode(await Deno.readFile(filePath))}" shadow-intensity="0"></model-viewer>`;
 		}
 
 		return `<a href="${filePathSafe}">${relFilePath.escapeHTML()}</a><br>`;
-	}).join("")}
+	})).join("")}
 	<hr>
 	${testLogLines.flatMap(v => v.split("\n")).map(v => a2html.toHtml(v)).join("<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>").replaceAll("<br><br>", "<br>")}
 	</body>

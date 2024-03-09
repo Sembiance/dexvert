@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="TerrainIndexedDetailLayersRoot" inherit="MemStruct">
+        # 16 bytes
+        <add name="layer_list"  type="ArrayPointer" template="TerrainDetailsLayerItem" arg="layer_count"/>
+        <add name="layer_count" type="uint64" />
+
+    </compound>
+
+    <compound name="TerrainDetailsLayerItem" inherit="MemStruct">
+        <add name="layer_name"  type="Pointer" template="ZString"/>
+        # seems like layer to brushes list 
+        <add name="info_list"   type="ArrayPointer" template="brushitemStruct" arg="info_count"/>
+        <add name="info_count"  type="uint64" />
+
+    </compound>
+
+    <compound name="brushitemStruct" inherit="MemStruct">
+        <add name="layer_name"  type="Pointer" template="ZString"/>
+        <add name="brush_name"  type="Pointer" template="ZString"/>
+    </compound>
+
+</niftoolsxml>

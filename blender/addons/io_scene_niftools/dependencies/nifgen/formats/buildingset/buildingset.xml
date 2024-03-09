@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="BuildingSetRoot" inherit="MemStruct">
+        <add name="set_id_name"  type="Pointer" template="ZStringObfuscated"/>
+        <add name="set_count_or_type"  type="uint64" />
+        <add name="unk_1_found_as_0"  type="uint64" />
+        <add name="unk_2_found_as_0"  type="uint64" />
+    </compound>
+
+
+</niftoolsxml>

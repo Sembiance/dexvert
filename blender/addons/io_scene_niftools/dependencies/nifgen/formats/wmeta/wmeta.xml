@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="WmetasbRoot" inherit="MemStruct">
+        <add name="levels" type="ArrayPointer" template="JWE2WmetasbMain" arg="count" vercond="#JWE2#"/>
+        <add name="levels" type="ArrayPointer" template="WmetasbMain" arg="count" vercond="!#JWE2#"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="JWE2WmetasbMain" inherit="MemStruct">
+        <add name="block_name" type="Pointer" template="ZString"/>
+        <add name="events" type="ArrayPointer" template="EventEntry" arg="events_count" />
+        <add name="events_count" type="uint" />
+        <add name="hash" type="uint" />
+        <add name="unk1" type="uint" />
+        <add name="unk2" type="uint" />
+    </compound>
+
+    <compound name="WmetasbMain" inherit="MemStruct">
+		# JWE, PC: 112 bytes
+		# PZ, JWE2: 32 bytes
+        todo - versioning that catches JWE, needs wmetasb version from fileentry
+        <add name="hash" type="uint" />
+        <add name="unk" type="uint" />
+        <add name="block_name" type="Pointer" template="ZString"/>
+        <add name="media_name" type="Pointer" template="ZString" until="18"/>
+        <add name="bnk_name" type="Pointer" template="ZString" until="18"/>
+        <add name="events" type="ArrayPointer" template="EventEntry" arg="events_count" />
+        <add name="events_count" type="uint64" />
+        <add name="hashes" type="ArrayPointer" template="uint" arg="hashes_count" until="18" />
+        <add name="hashes_count" type="uint64" until="18" />
+        <add name="media" type="ArrayPointer" template="MediaEntry" until="18" arg="media_count"/>
+        <add name="media_count" type="uint64" until="18"/>
+        <add name="unused 2" type="Pointer" until="18" />
+        <add name="unused 3" type="Pointer" until="18" />
+        <add name="unused 4" type="Pointer" until="18" />
+        <add name="unused 5" type="Pointer" until="18" />
+    </compound>
+
+    <compound name="MediaEntry" inherit="MemStruct">
+        PC: 32 bytes
+        <add name="hash" type="uint" />
+        <add name="zero" type="uint" />
+        <add name="block_name" type="Pointer" template="ZString"/>
+        <add name="wav_name" type="Pointer" template="ZString"/>
+        <add name="wem_name" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="EventEntry" inherit="MemStruct">
+        PC: 56 bytes
+        JWE2: 40 bytes
+        # todo - improve versioning
+        <add name="hash" type="uint" />
+        <add name="zero" type="uint" />
+        <add name="block_name" type="Pointer" template="ZString" until="18"/>
+        <add name="zero2" type="ushort" until="18" />
+        <add name="size" type="ushort" until="18" /> maybe
+        <add name="flag 0" type="uint" />
+        <add name="flag 1" type="uint" />
+        <add name="flag 2" type="uint" />
+        <add name="zero 3" type="uint64" until="18" />
+        <add name="flag 3" type="uint" until="18" />
+
+        <add name="hash b" type="uint" />
+        <add name="hash c" type="uint" />
+        <add name="zero 4" type="uint" />
+
+        <add name="u2" type="uint" since="19"/>
+        <add name="u1" type="uint" since="19" />
+    </compound>
+
+</niftoolsxml>

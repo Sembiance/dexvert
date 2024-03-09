@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="PhysicsSurfaceXMLResRoot" inherit="MemStruct">
+
+        # There is an initial 'default' surface, these params are the same as in SurfacePhysicsInfo
+        <add name="default_surface_name" type="Pointer" template="ZString"/>
+        <add name="float1"   type="float" />
+        <add name="float2"   type="float" />
+
+        <add name="float3"   type="float" />
+        <add name="float4"   type="float" />
+        <add name="unk64_1"  type="uint64" />
+
+        <add name="name1" type="Pointer" template="ZString"/>
+        <add name="name2" type="Pointer" template="ZString"/>
+
+        <add name="ptr1"     type="Pointer" template="EmptyStruct"/>
+        <add name="ptr2"     type="ArrayPointer" template="SurfacePhysicsInfo" arg="count"/>
+
+        # from here starts the rest of the surface definitions
+
+        <add name="count"    type="ushort" />
+        <add name="short2"   type="ushort" />
+        <add name="unk32_1"  type="uint" />
+        <add name="unk64_4"  type="uint64" />
+
+        <add name="unk64_5"  type="uint64" />
+        <add name="unk64_6"  type="uint64" />
+
+        <add name="unk64_7"  type="uint64" />
+        <add name="unk64_8"  type="uint64" />
+
+        <add name="unk64_9"  type="uint64" />
+        <add name="unk64_10" type="uint64" />
+
+    </compound>
+
+    <compound name="SurfacePhysicsInfo" inherit="MemStruct">
+
+        # todo: define the right property name for these values
+        <add name="surface_name" type="Pointer" template="ZString"/>
+        <add name="float1"   type="float" />
+        <add name="float2"   type="float" />
+
+        <add name="float3"   type="float" />
+        <add name="float4"   type="float" />
+        <add name="unk64_1"  type="uint64" />
+
+        # todo: name1 observed as string sometimes, 
+        # todo: name2 observed empty all the times
+        <add name="name1" type="Pointer" template="ZString"/>
+        <add name="name2" type="Pointer" template="ZString"/>
+        <add name="ptr1" type="Pointer" template="EmptyStruct"/>
+
+    </compound>
+
+    # Observed in JWE2 and PZ the pointers to this struct are completely empty
+    <compound name="EmptyStruct" inherit="MemStruct">
+    </compound>
+
+</niftoolsxml>

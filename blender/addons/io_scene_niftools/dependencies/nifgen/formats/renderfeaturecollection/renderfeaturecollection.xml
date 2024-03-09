@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    # enough to process all the bytes, just no idea yet what is each section.
+ 
+    <compound name="RenderFeatureCollectionRoot" inherit="MemStruct">
+        <add name="item_list"   type="ArrayPointer" template="RenderFeatureItem" arg="item_count"/>
+        <add name="item_count"  type="uint64" />
+    </compound>
+
+    # 24 bytes long
+    <compound name="RenderFeatureItem" inherit="MemStruct">
+        <add name="item_name"  type="Pointer" template="ZString"/>
+        <add name="item_data"   type="ArrayPointer" template="RenderFeatureSubItem" arg="item_data_count"/>
+        <add name="item_data_count"  type="uint64" />
+    </compound>
+
+    <compound name="RenderFeatureSubItem" inherit="MemStruct">
+        <add name="sub_item_name"  type="Pointer" template="ZString"/>
+        <add name="sub_item_value_or_flags" type="uint64" />
+    </compound>
+
+
+</niftoolsxml>

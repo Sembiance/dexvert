@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="GuestOnRideAnimSettingsRoot" inherit="MemStruct">
+        <add name="ptr" type="Pointer" template="GuestOnRideAnimSettingsChild"/>
+        <add name="unk_0" type="uint64"/>
+    </compound>
+
+    <compound name="GuestOnRideAnimSettingsChild" inherit="MemStruct">
+        <add name="str_0" type="Pointer" template="ZString"/>
+        <add name="str_1" type="Pointer" template="ZString"/>
+        <add name="str_2" type="Pointer" template="ZString"/>
+        <add name="str_3" type="Pointer" template="ZString"/>
+        <add name="str_4" type="Pointer" template="ZString"/>
+        <add name="str_5" type="Pointer" template="ZString"/>
+        <add name="str_6" type="Pointer" template="ZString"/>
+
+        <add name="bools" type="ubyte" arr1="60" />
+        <add name="float_0" type="float"/>
+
+        <add name="unk_0" type="uint"/>
+        <add name="unk_1" type="uint"/>
+        <add name="unk_2" type="uint"/>
+        <add name="unk_3" type="uint"/>
+        <add name="unk_4" type="uint"/>
+        <add name="unk_5" type="uint"/>
+    </compound>
+
+</niftoolsxml>

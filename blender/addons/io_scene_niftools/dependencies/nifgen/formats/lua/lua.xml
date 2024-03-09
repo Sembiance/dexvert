@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fileformat>
+<fileformat>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="LuaRoot" inherit="MemStruct">
+        ZTUAC: 32 bytes
+        newer: 48 bytes
+        all meta data except lua size seems to just be meta data, can be zeroed
+        <add name="lua_size" type="uint" />
+        <add name="sixteenk" type="uint" />
+        <add name="hash" type="uint" />
+        <add name="zero0" type="uint" />
+        <add name="source_path" type="Pointer" template="ZString" since="18"/>
+        usually points to 00 of source_path
+        <add name="likely_alignment" type="Pointer" template="ZString" since="18" />
+        <add name="zero1" type="uint64" />
+        <add name="zero2" type="uint64" />
+    </compound>
+
+</fileformat>
+

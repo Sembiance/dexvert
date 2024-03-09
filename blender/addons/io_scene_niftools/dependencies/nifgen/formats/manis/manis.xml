@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<token name="verexpr" attrs="vercond">
+
+		<verexpr token="#DLA#" string="(#VER# #EQ# 256)">DLA</verexpr>mock version defined on export
+		<verexpr token="#ZTUAC#" string="(#VER# #EQ# 257)">ZTUAC</verexpr>
+		<verexpr token="#PC#" string="(#VER# #EQ# 257)">PC</verexpr>
+		<verexpr token="#JWE#" string="(#VER# #EQ# 258)">JWE</verexpr>
+		<verexpr token="#PZ#" string="(#VER# #EQ# 260)">PZ all</verexpr>
+		<verexpr token="#JWE2_DEV#" string="(#VER# #EQ# 261)">JWE2</verexpr>
+		<verexpr token="#JWE2#" string="(#VER# #EQ# 262)">JWE2</verexpr>
+	</token>
+
+	<token name="global" attrs="vercond access">
+        Global Tokens.
+        NOTE: These must be listed after the above tokens so that they replace last. For example, `verexpr` uses these tokens.
+        <global token="#VER#" string="version" />
+    </token>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+<!--    <version id="old" version="257" >Old</version>-->
+    <version id="DLA" version="256" >DLA</version>mock version defined on export
+    <version id="ZTUAC" version="257" >ZTUAC</version>
+    <version id="PC" version="257" >PC</version>
+    <version id="JWE" version="258" >JWE</version>
+    <version id="PZ" version="260" >PZ</version>
+    <version id="JWE2_DEV" version="261" >JWE2 Dev Build</version>
+    <version id="JWE2" version="262" >JWE2</version>
+    <version id="WAR" version="262" >WAR</version>version conflict -.-
+
+    <basic name="ChannelName" integral="true" countable="true">
+		<!--    PC uses ushort-->
+		<!--    JWE uses uint-->
+    </basic>
+
+    <basic name="BoneIndex" integral="true" countable="true">
+		<!--    War uses ushort-->
+		<!--    before uses ubyte-->
+    </basic>
+
+    <basic name="int48" integral="true" countable="true">
+    </basic>
+
+	<bitfield name="ManisDtype" storage="uint">
+		# PZ dtypes: 0, 1, 4, 5, 6, 32, 34, 36, 37, 38
+		# JWE2 dev dtypes: 0, 4, 5, 6, 32, 34, 36, 37, 38
+		# JWE2 dtypes: 0, 4, 5, 6, 64, 66, 68, 69, 70
+		ManisDtype: 0 0b0 ['compression = 0', 'use_ushort = 0', 'has_list = 0']
+		ManisDtype: 1 0b1 ['compression = 1', 'use_ushort = 0', 'has_list = 0']
+		ManisDtype: 4 0b100 ['compression = 4', 'use_ushort = 0', 'has_list = 0']
+		ManisDtype: 5 0b101 ['compression = 5', 'use_ushort = 0', 'has_list = 0']
+		ManisDtype: 6 0b110 ['compression = 6', 'use_ushort = 0', 'has_list = 0']
+		ManisDtype: 32 0b100000 ['compression = 0', 'use_ushort = 0', 'has_list = 1']
+		ManisDtype: 34 0b100010 ['compression = 2', 'use_ushort = 0', 'has_list = 1']
+		ManisDtype: 36 0b100100 ['compression = 4', 'use_ushort = 0', 'has_list = 1']
+		ManisDtype: 37 0b100101 ['compression = 5', 'use_ushort = 0', 'has_list = 1']
+		ManisDtype: 38 0b100110 ['compression = 6', 'use_ushort = 0', 'has_list = 1']
+		ManisDtype: 64 0b1000000 ['compression = 0', 'use_ushort = 0', 'has_list = 2']
+		ManisDtype: 66 0b1000010 ['compression = 2', 'use_ushort = 0', 'has_list = 2']
+		ManisDtype: 68 0b1000100 ['compression = 4', 'use_ushort = 0', 'has_list = 2']
+		ManisDtype: 69 0b1000101 ['compression = 5', 'use_ushort = 0', 'has_list = 2']
+		ManisDtype: 70 0b1000110 ['compression = 6', 'use_ushort = 0', 'has_list = 2']
+		ManisDtype: 82 0b1010010 ['compression = 2', 'use_ushort = 1', 'has_list = 2']
+		<member width="4" pos="0" name="compression" type="int"/>
+		<member width="1" pos="4" name="use_ushort" type="int"/>
+		<member width="2" pos="5" name="has_list" type="int"/>
+	</bitfield>
+
+	<bitfield name="PosBaseKey" storage="int48">
+		<member width="15" pos="0" name="x" type="int"/>
+		<member width="15" pos="15" name="y" type="int"/>
+		<member width="15" pos="30" name="z" type="int"/>
+	</bitfield>
+
+	<bitfield name="StoreKeys" storage="ubyte">
+		<member width="1" pos="0" name="x" type="bool"/>
+		<member width="1" pos="1" name="y" type="bool"/>
+		<member width="1" pos="2" name="z" type="bool"/>
+	</bitfield>
+
+    <compound name="ManisRoot" inherit="MemStruct">
+		24 bytes for DLA, ZTUAC, PC, JWE, old PZ
+		32 bytes for PZ1.6+, JWE2
+		<add name="mani files size" type="ushort">16 * mani count</add>
+        <add name="hash block size" type="ushort">4 * string count</add>
+		<add name="zero 0" type="uint"/>
+        <add name="zero 1" type="uint64" />
+        <add name="zero 2" type="uint64" />
+        <add name="zero 3" type="uint64" since="260" />
+    </compound>
+
+	<compound name="ManiInfo" >
+        288 bytes for JWE / PZ
+        304 bytes for PC, ZTUAC (however the last 2 bytes are alignment, and not on the last member of the array)
+        320 bytes for war
+        <add name="ref" type="Empty"/>
+        <add name="duration" type="float"/>
+		<add name="FrameCount" type="uint"/>
+		<add name="dtype" type="ManisDtype" >determines the format of keys data; apparently 4, 5, and 6 are the same</add>
+		<add name="zeros 0 " type="uint" arr1="3"/>
+		<add name="extra pc 1" type="ushort" until="257"/>
+		<add name="PosBoneCount" type="ushort"/>
+		<add name="OriBoneCount" type="ushort"/>
+		<add name="SclBoneCount" type="ushort"/>
+		<add name="unk_count_0" type="ushort"/>JWE2 dev mentions MorphCount and VisCount
+		<add name="unk_count_1" type="ushort"/>
+		<add name="unk_count_2" type="ushort"/>
+		<add name="FloatCount" type="ushort"/>
+		in DLA, these store count * frame_count
+		<add name="PosBoneCount Repeat" type="ushort" until="257"/>
+		<add name="OriBoneCount Repeat" type="ushort" until="257"/>
+		<add name="SclBoneCount Repeat" type="ushort" until="257"/>
+		<add name="unk 0" type="ushort" until="257"/>
+		<add name="unk 1" type="ushort" until="257"/>
+		<add name="root_pos_bone" type="BoneIndex" arg="dtype" default="255"/>
+		<add name="root_ori_bone" type="BoneIndex" arg="dtype" default="255"/>
+		<add name="target bone count" type="uint64" >can include joints, such as in PZ water wheel count 5 vs ms2 2 bones, plus joints</add>
+		<add name="pad1" type="PadAlign" template="ref" arg="16"/>
+		<add name="zeros 2" type="uint64" arr1="28" >224 bytes</add>
+		<add name="extra zeros pc" type="uint" arr1="3" until="257" >12 bytes</add>might be redundant due to pad1?
+		<add name="PosBoneMin" type="BoneIndex" arg="dtype"/>
+		<add name="PosBoneMax" type="BoneIndex" arg="dtype"/>
+		<add name="OriBoneMin" type="BoneIndex" arg="dtype"/>
+		<add name="OriBoneMax" type="BoneIndex" arg="dtype"/>
+		<add name="SclBoneMin" type="BoneIndex" arg="dtype"/>
+		<add name="SclBoneMax" type="BoneIndex" arg="dtype"/>
+		<add name="PosBoneCount Related" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="PosBoneCount Repeat" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="OriBoneCount Related" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="OriBoneCount Repeat" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="SclBoneCount Related" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="SclBoneCount Repeat" type="BoneIndex" arg="dtype" since="258"/>
+		<add name="zero 0 end" type="ushort" since="258"/>
+		<add name="zero 1 end" type="ushort" />for PC, this is alignment and not present at the end of the mani_infos array
+		<add name="pad2" type="PadAlign" template="ref" arg="16"/>
+    </compound>
+
+    <compound name="Buffer1">
+		the game verifies that hash and bone name match
+		if they don't, the target won't be animated
+		<add name="bone hashes" type="uint" arr1="#ARG#"/>
+		<add name="bone names" type="ZString" arr1="#ARG#"/>
+		<add name="bone pad" type="PadAlign" template="bone names" arg="4" since="258"/>not on DLA, may be present on PC
+    </compound>
+
+    <compound name="KeysReader">
+    </compound>
+
+    <compound name="InfoHeader">
+        Custom header struct
+        <add name="version" type="uint"/>
+        <add name="mani count" type="uint"/>
+        <add name="names" type="ZString" arr1="mani count"/>
+        <add name="header" type="ManisRoot"/>
+        <add name="mani infos" type="ManiInfo" arr1="mani count"/>
+        <add name="name buffer" type="Buffer1" arg="header\hash block size / 4"/>
+        <add name="keys buffer" type="KeysReader" arg="mani infos"/>
+    </compound>
+
+	<compound name="Vector4H" size="8">
+		<field name="x" type="normshort"/>
+		<field name="y" type="normshort"/>
+		<field name="z" type="normshort"/>
+		idiosyncratic - w is last!
+		<field name="w" type="normshort"/>
+	</compound>
+
+	<compound name="Vector3H" size="8">
+		<field name="x" type="normshort"/>
+		<field name="y" type="normshort"/>
+		<field name="z" type="normshort"/>
+	</compound>
+
+	<compound name="Vector2" size="8">
+		<field name="x" type="float"/>
+		<field name="y" type="float"/>
+	</compound>
+
+    <compound name="FloatsGrabber" >
+    </compound>
+
+    <compound name="Segment" >
+		<add name="unk a" type="uint" >seen 0 or 2</add>
+		<add name="unk b" type="uint" >seen 0 or 2</add>
+		<add name="ptr_ori_result" type="uint64" />ready for anim_wavelet_data_rel_3
+		<add name="ptr_pos_result" type="uint64" />ready for anim_wavelet_data_rel_3
+		<add name="ptr_scale_0_result" type="uint64" />?
+		<add name="ptr_scale_1_result" type="uint64" />?
+		<add name="ptr_morph_result" type="uint64" />?
+		<add name="ptr_CompressedManiData" type="uint64" />ready for anim_decompress_handler_rel
+		<add name="byte size" type="uint64" >to be read sequentially starting after this array </add>
+		<add name="ptr_compressed_keys" type="uint64" />ready for anim_decompress_handler_rel
+		<add name="zeros 1" type="uint64" />
+    </compound>
+
+    <compound name="String32" >
+		<add name="ref" type="Empty"/>
+		<add name="name" type="ZString"/>
+		<add name="pad" type="PadAlign" template="ref" arg="32"/>
+    </compound>
+
+    <compound name="LocBound" >
+		<add name="loc min" type="Vector3"/>
+		<add name="loc extent" type="Vector3"/>might be extent, but not sure about how it is encoded
+    </compound>
+
+    <compound name="SegmentsReader" >
+    </compound>
+
+	<compound name="CompressedManiData">
+		<add name="FrameCount" type="uint"/>
+		<add name="OriBoneCount" type="uint"/>
+		<add name="PosBoneCount" type="uint"/>
+		<add name="SclBoneCount" type="ushort"/>
+		<add name="MorphBoneCount" type="ushort"/>
+		<add name="zeros 18" type="uint" arr1="8" since="257">fixed 32 bytes</add>
+		<add name="name_a" type="String32" until="256"/>
+<!--		<add name="name_b" type="String32" until="256"/>-->used in DLA when no scales are keyed?
+		used eg in PZ animal boxes, which have scale keys
+		<add name="scale min" type="Vector3" />
+		<add name="scale max" type="Vector3" />
+		<add name="ptr_first_segment" type="uint64" />
+		<add name="unk 1" type="uint" since="257"/>
+		<add name="unk 2" type="uint" since="257" />
+		<add name="SegmentCount" type="ushort" >counts temporal segments</add>
+		<add name="QuantisationLevel" type="ushort" >usually 420 or 52905</add>
+		<add name="unk 1" type="uint" until="256"/>DLA
+		<add name="unk 2" type="uint" until="256" />DLA
+		<add name="ref2" type="Empty"/>
+		<add name="unk 3" type="uint" >?</add>
+		<add name="loc_bound_indices" type="ubyte" arr1="PosBoneCount"/>
+		<add name="anoth pad" type="PadAlign" template="ref2" arg="4"/>
+		<add name="loc_bounds" type="FloatsGrabber" arg="loc_bound_indices">not sure</add>
+		<add name="anoth pad2" type="PadAlign" template="#ARG# \ ref" arg="16"/>
+		<add name="segments" type="Segment" arr1="SegmentCount" >give the byte size of the various temporal segments</add>
+		<add name="segments_data" type="SegmentsReader" arg="segments"/>
+	</compound>
+
+	<compound name="WarExtraPart">
+		<add name="stuff" type="ushort" arr1="24"/>
+	</compound>
+
+	<compound name="WarExtra">
+		<add name="zeros" type="uint" arr1="1"/>
+		<add name="stuff" type="WarExtraPart" arr1="4"/>
+	</compound>
+
+    <compound name="ChunkSizes" >
+		<add name="zeros 0" type="uint64" > </add>
+		<add name="bone" type="uint" ></add>
+		<add name="counta" type="uint" > </add>
+    </compound>
+
+    <compound name="SubChunkReader" >
+    </compound>
+
+    <compound name="UnkChunkList" >
+		<add name="ref" type="Empty"/>
+		<add name="zero 0" type="SmartPadding"/>
+		<add name="subchunk_count" type="ushort"/>
+		<add name="flag" type="ushort" > </add>
+		<add name="zero 1" type="uint" > </add>
+		<add name="chunksize_list" type="ChunkSizes" arr1="subchunk_count" > </add>
+		<add name="subchunk list" type="SubChunkReader" arg="chunksize_list" > </add>
+        <add name="pad" type="PadAlign" template="ref" arg="16" >?</add>
+    </compound>
+
+	<compound name="ManiBlock" >
+		<add name="ref" type="Empty"/>
+		define the channel names
+		<add name="PosBonesNames" type="ChannelName" arr1="#ARG#\PosBoneCount"/>
+		<add name="OriBonesNames" type="ChannelName" arr1="#ARG#\OriBoneCount"/>
+		<add name="SclBonesNames" type="ChannelName" arr1="#ARG#\SclBoneCount"/>
+		<add name="FloatsNames" type="ChannelName" arr1="#ARG#\FloatCount"/>
+		map channel to corresponding bone index
+		<add name="pos_channel_to_bone" type="#T#" arr1="#ARG#\PosBoneCount"/>
+		<add name="ori_channel_to_bone" type="#T#" arr1="#ARG#\OriBoneCount"/>
+		<add name="scl_channel_to_bone" type="#T#" arr1="#ARG#\SclBoneCount"/>
+		map bone to corresponding channel, -1 for bones in range that are not keyed
+		<add name="pos_bone_to_channel" type="#T#" arr1="(#ARG#\PosBoneMax - #ARG#\PosBoneMin) + 1" cond="#ARG#\PosBoneMin #LTE# #ARG#\PosBoneMax"/>
+		<add name="ori_bone_to_channel" type="#T#" arr1="(#ARG#\OriBoneMax - #ARG#\OriBoneMin) + 1" cond="#ARG#\OriBoneMin #LTE# #ARG#\OriBoneMax"/>
+		<add name="scl_bone_to_channel" type="#T#" arr1="(#ARG#\SclBoneMax - #ARG#\SclBoneMin) + 1" cond="#ARG#\SclBoneMin #LTE# #ARG#\SclBoneMax"/>
+		<add name="pad" type="PadAlign" template="ref" arg="4"/>
+		start of uncompressed keyframe data
+		<add name="PosBones" type="Vector3" arr1="#ARG#\FrameCount" arr2="#ARG#\PosBoneCount" cond="#ARG#\dtype\compression #EQ# 0" />
+		<add name="OriBones" type="Vector4H" arr1="#ARG#\FrameCount" arr2="#ARG#\OriBoneCount" cond="#ARG#\dtype\compression #EQ# 0" />
+		found in DLA SpaceMountain animations.manisetd740d135, and PZ crane
+		<add name="ShrBones" type="Vector2" arr1="#ARG#\FrameCount" arr2="#ARG#\SclBoneCount" cond="#ARG#\dtype\compression #EQ# 0" />
+		<add name="SclBones" type="Vector3" arr1="#ARG#\FrameCount" arr2="#ARG#\SclBoneCount" cond="#ARG#\dtype\compression #EQ# 0" />
+		always uncompressed, possibly because ACL didn't support scalars
+		<add name="Floats" type="float" arr1="#ARG#\FrameCount" arr2="#ARG#\FloatCount" />
+		<add name="uncompressed_pad" type="PadAlign" template="ref" arg="16"/>
+		<add name="extra_war" type="WarExtra" arg="#SELF#" cond="#ARG#\dtype\use_ushort #EQ# 1"/>
+		<add name="compressed" type="CompressedManiData" arg="#SELF#" cond="#ARG#\dtype\compression #GT# 0"/>
+		<add name="subchunks" type="UnkChunkList" cond="#ARG#\dtype\has_list #GT# 0"/>
+    </compound>
+	
+    <compound name="WeirdElementOne" >
+		<add name="float 0" type="float"> </add>
+		<add name="vec 0" type="Vector3"/>
+		<add name="zeros 0" type="uint64" arr1="2"> </add>
+		<add name="vec 1" type="Vector3"/>
+		<add name="countb" type="uint"> </add>
+    </compound>
+	
+    <compound name="WeirdElementTwoReader" >
+    </compound>
+	
+    <compound name="SubChunk" >
+		arg is chunksizes
+		<add name="weird list one" type="WeirdElementOne" arr1="#ARG#\counta" >for subchunk_list[n] needs chunksize_list[n]'s counta for array length</add>
+		<add name="weird list two" type="WeirdElementTwoReader" arg="weird list one" >  needs sum of countb's from weird list one</add>
+    </compound>
+	
+    <compound name="WeirdElementTwo" >
+		<add name="many floats" type="float" arr1="7"> </add>
+    </compound>
+
+</niftoolsxml>

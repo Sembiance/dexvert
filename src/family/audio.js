@@ -7,8 +7,7 @@ export async function verifyAudio(dexState, dexFile)
 	const xlog = dexState.xlog;
 	const {identify} = await import("../identify.js");
 	const identifications = await identify(dexFile, {xlog : xlog.clone("error")});
-	const dexid = identifications.find(id => id.from==="dexvert" && id.family==="audio" && id.formatid==="mp3");
-	if(!dexid)
+	if(!identifications.some(id => id.from==="dexvert" && id.family==="audio" && id.formatid==="mp3"))
 	{
 		xlog.warn`DELETING OUTPUT due to not being identified as audio/mp3: ${dexFile.pretty()}`;
 		return false;

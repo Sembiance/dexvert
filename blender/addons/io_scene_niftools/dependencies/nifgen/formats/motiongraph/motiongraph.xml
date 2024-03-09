@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="MotiongraphHeader" inherit="MemStruct">
+        # if self.ovl.context.version > 47:
+        <add name="root_frag" type="Pointer" template="MotiongraphRootFrag"/>
+        points to all data of size 40 used in MRFentry1 if lua is MotionGraph.StateOutput
+        <add name="state output entries" type="Pointer" template="StateArray"/>
+        <add name="MGTwo" type="Pointer" template="MGTwo"/>
+        <add name="MRFMember1" type="Pointer" template="MRFMember1"/>
+
+        <add name="count_0" type="uint"/>
+        <add name="count_1" type="uint"/>
+
+        <add name="LuaModules" type="Pointer" template="LuaModules"/>
+        <add name="lua results" type="Pointer" template="ZString"/>
+        <add name="first_non_transition_state" type="Pointer" template="MRFMember2"/>
+        <add name="empty str" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="LuaModules" inherit="MemStruct">
+        24 bytes
+        <add name="MotionGraph" type="Pointer" template="ZString"/>
+        <add name="MotionGraphEventHandling" type="Pointer" template="ZString"/>
+        <add name="MotionGraphActions" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="MotiongraphRootFrag" inherit="MemStruct">
+        64 bytes
+        <add name="num_activities" type="uint64"/>
+        <add name="activities" type="Pointer" template="Activities" arg="num_activities"/>
+
+        <add name="count_1" type="uint64"/>
+        <add name="ptr_1" type="Pointer" template="MRFArray1" arg="count_1"/>
+
+        <add name="count_2" type="uint64"/>
+        <add name="ptr_2" type="Pointer" template="MRFArray2" arg="count_2"/>
+
+        <add name="num_xmls" type="uint64"/>
+        <add name="ptr_xmls" type="Pointer" template="XMLArray" arg="num_xmls"/>
+    </compound>
+
+    <compound name="ActivityEntry" inherit="MemStruct">
+        8 bytes
+        <add name="value" type="Pointer" template="Activity"/>
+    </compound>
+
+    <compound name="Activities" inherit="MemStruct" >
+        <add name="states" type="ActivityEntry" arr1="#ARG#" />
+    </compound>
+
+    <compound name="Activity" inherit="MemStruct">
+        48 bytes
+        <add name="data_type" type="Pointer" template="ZString"/>
+        <add name="ptr" type="Pointer" >template has to be defined according to data type ie 'AnimationActivity' + 'Data'</add>
+        <add name="count_2" type="uint64"/>
+        <add name="count_3" type="uint64"/>
+        <add name="minus one" type="int64"/>
+        <add name="name b" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="MRFEntry1" inherit="MemStruct">
+        8 bytes
+        <add name="value" type="Pointer" template="MRFMember1"/>
+    </compound>
+
+    <compound name="MRFArray1" inherit="MemStruct" >
+        <add name="states" type="MRFEntry1" arr1="#ARG#" />
+    </compound>
+
+    <compound name="MotiongraphVar" inherit="MemStruct">
+        24 bytes (?)
+        <add name="var_name" type="Pointer" template="ZString"/>
+        <add name="target_name" type="Pointer" template="ZString"/>
+        <add name="unk" type="uint64"/>
+    </compound>
+
+    <compound name="MRFMember1" inherit="MemStruct">
+        72 bytes / 144 bytes ?
+        <add name="LuaMethod" type="Pointer" template="ZString"/>
+
+        <add name="count_0" type="uint64"/>
+        <add name="ptr_0" type="Pointer" />?
+
+        variable size, maybe related to counts
+        apparently, differing data - may be related to LuaMethod or one of the counts as dtype instead
+        <add name="MotiongraphVars" type="Pointer" template="MotiongraphVars" arg="dtype"/>
+        7 = state or scope
+        8 = output
+        <add name="dtype" type="uint64"/>
+
+        <add name="num_children" type="uint64"/>
+        <add name="children" type="ArrayPointer" template="MRFChild" arg="num_children"/>
+
+        <add name="count_4" type="uint64"/>
+        <add name="id" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="MRFEntry2" inherit="MemStruct">
+        8 bytes
+        <add name="value" type="Pointer" template="MRFMember2" />
+    </compound>
+
+    <compound name="MRFArray2" inherit="MemStruct" >
+        <add name="states" type="MRFEntry2" arr1="#ARG#" />
+    </compound>
+
+    <compound name="MRFMember2" inherit="MemStruct">
+        72 bytes
+        only used if transition is in 'id'
+        <add name="transition" type="Pointer" template="Transition"/>
+
+        <add name="count_0" type="uint64"/>
+        <add name="count_1" type="uint64"/>
+
+        <add name="count_2" type="uint64" />
+
+        <add name="count_3a" type="short"/>
+        <add name="count_3b" type="short"/>
+        <add name="count_3c" type="int"/>
+        <add name="count_4" type="uint64"/>
+
+        <add name="count_5" type="uint64" />
+
+        <add name="count_6a" type="short"/>
+        <add name="count_6b" type="short"/>
+        <add name="count_6c" type="int"/>
+        <add name="id" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="Transition" inherit="MemStruct">
+        40 bytes
+        only used if transition is in 'id'
+        <add name="count_0" type="uint"/>
+
+        <add name="count_1" type="uint"/>
+        <add name="ptr 0" type="Pointer" template="PtrList" arg="count_1" />
+
+        <add name="count_2" type="uint64"/>
+        <add name="ptr 1" type="Pointer" template="TransStructArray" arg="count_2"/>
+        <add name="id" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="StateArray" inherit="MemStruct">
+        16 bytes
+        <add name="count" type="uint64"/>
+        <add name="ptr" type="Pointer" template="StateList" arg="count"/>
+    </compound>
+
+    <compound name="TransStruct" inherit="MemStruct">
+        24 bytes
+        <add name="another mrfentry2" type="Pointer" />
+        links to other states
+        <add name="states" type="StateArray" />
+    </compound>
+
+    <compound name="TransStructArray" inherit="MemStruct">
+        <add name="array" type="TransStruct" arr1="#ARG#"/>
+    </compound>
+
+    <compound name="MGTwo" inherit="MemStruct">
+        16 bytes
+        <add name="count" type="uint64"/>
+        <add name="ptr" type="Pointer" template="PtrList" arg="count"/>
+    </compound>
+
+    <compound name="TransStructStop" inherit="MemStruct">
+        24 bytes
+        actually same as above, just don't keep reading here
+        <add name="another mrfentry2" type="Reference" />
+        links to other states,
+        <add name="other states" type="MGTwo" />
+    </compound>
+
+    <compound name="TransStructStopList" inherit="MemStruct">
+        <add name="ptrs" type="TransStructStop" arr1="#ARG#" />
+    </compound>
+
+    <compound name="State" inherit="MemStruct">
+        name uncertain
+        40 bytes
+        <add name="unk" type="uint"/>
+        <add name="activities count" type="uint"/>
+        <add name="activities" type="Pointer" template="RefList" arg="activities count"/>
+        <add name="count 2" type="uint64"/>
+        this one links to other states, infinite recursion danger
+        <add name="array 2" type="Pointer" template="TransStructStopList" arg="count 2"/>
+        <add name="id" type="Pointer" template="ZString"/>
+    </compound>
+
+
+
+
+    <compound name="XMLEntry" inherit="MemStruct">
+        8 bytes
+        <add name="xml_string" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="XMLArray" inherit="MemStruct" >
+        <add name="xmls" type="XMLEntry" arr1="#ARG#" />
+    </compound>
+
+    <bitstruct name="AnimationFlags" numbytes="4" storage="uint">
+        <bits name="Looping" numbits="1" />
+        <bits name="Additive" numbits="1" />
+        <bits name="Mirrored" numbits="1" />
+        <bits name="AffectsMotion" numbits="1" />
+        <bits name="FlagOnLoop" numbits="1" />
+        <bits name="ResetRandomOnLoop" numbits="1" />
+        <bits name="SuppressResourceDataStreams" numbits="1" />
+    </bitstruct>
+
+    <compound name="FloatInputData" inherit="MemStruct">
+        16 bytes
+        <add name="float" type="float"/>
+        <add name="OptionalVarAndCurve count" type="uint" />
+        # todo - check presence and layout
+        <add name="OptionalVarAndCurve" type="uint64" />
+    </compound>
+
+    <enum name="SubCurveType" numbytes="2" storage="ushort" default="0">
+		<option value="0" name="Constant" />
+		<option value="1" name="Linear" />
+		<option value="2" name="Polynomial" />
+		<option value="3" name="Exponential" />
+		<option value="4" name="SCurve" />
+		<option value="5" name="Bezier" />
+    </enum>
+
+    <compound name="CurveDataPoint" inherit="MemStruct">
+        12 bytes
+        <add name="x" type="float"/>
+        <add name="y" type="short"/>
+        <add name="SubCurveType" type="SubCurveType"/>
+        <add name="SubsequentCurveParam" type="short"/>
+        <add name="SubsequentCurveParamB" type="short"/>
+<!--        <add name="Comment" type="Pointer" template="ZString"/>-->
+    </compound>
+
+    <compound name="CurveDataPoints" inherit="MemStruct">
+        array
+        <add name="data" type="CurveDataPoint" arr1="#ARG#" />
+    </compound>
+
+    <compound name="CurveData" inherit="MemStruct">
+        16 bytes
+        <add name="count" type="uint64"/>
+        <add name="Points" type="Pointer" template="CurveDataPoints" arg="count" />
+    </compound>
+
+    <compound name="DataStreamResourceData" inherit="MemStruct">
+        56 bytes
+        <add name="CurveType" type="uint64"/>
+        <add name="DS Name" type="Pointer" template="ZString"/>
+        <add name="Type" type="Pointer" template="ZString"/>
+        <add name="BoneID" type="Pointer" template="ZString"/>
+        <add name="Location" type="Pointer" template="ZString"/>
+        <add name="Curve" type="CurveData" />
+<!--        <add name="Comment" type="Pointer" template="ZString"/>-->
+    </compound>
+
+    <compound name="DataStreamResourceDataPoints" inherit="MemStruct">
+        array
+        <add name="data" type="DataStreamResourceData" arr1="#ARG#" />
+    </compound>
+
+    <compound name="DataStreamResourceDataList" inherit="MemStruct">
+        16 bytes
+        <add name="count" type="uint64"/>
+        <add name="DataStreamResourceData" type="Pointer" template="DataStreamResourceDataPoints" arg="count"/>
+    </compound>
+
+    <compound name="AnimationActivityData" inherit="MemStruct">
+        96 bytes
+        <add name="mani" type="Pointer" template="ZString"/>
+
+        <add name="AnimationFlags" type="AnimationFlags"/>
+        <add name="Priorities" type="uint"/>
+        <add name="Weight" type="FloatInputData"/>
+        <add name="Speed" type="FloatInputData"/>
+        <add name="StartingPropThrough" type="float"/>
+        <add name="LeadOutTime" type="float"/>
+        <add name="SyncPropThroughVariable" type="Pointer" template="ZString"/>
+
+        <add name="count_6" type="uint64"/>
+        <add name="OutputPropThroughVariable" type="Pointer" template="ZString"/>
+
+        <add name="AdditionalDataStreams" type="DataStreamResourceDataList"/>
+    </compound>
+
+    <compound name="CoordinatedAnimationActivityData" inherit="MemStruct">
+        72 bytes
+        <add name="CoordGroup" type="Pointer" template="ZString"/>
+        <add name="WaitingAnim" type="Pointer" template="ZString"/>
+        <add name="WaitingAnimDataStreams" type="DataStreamResourceDataList"/>
+        <add name="CoordinatedAnim" type="Pointer" template="ZString"/>
+        <add name="CoordinatedAnimDataStreams" type="DataStreamResourceDataList"/>
+        <add name="Priorities" type="ubyte"/>
+        <add name="Looping" type="ubyte"/>
+        <add name="_pad" type="ushort"/>
+        <add name="BlendTime" type="float"/>
+        <add name="OutputPropThroughVariable" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="ActivityAnimationInfo" inherit="MemStruct">
+        ?
+        <add name="activity_name" type="Pointer" template="ZString"/>
+        <add name="Offset" type="float"/>
+        <add name="Weight" type="uint"/>
+    </compound>
+
+    <compound name="LoopedAnimationInfo" inherit="MemStruct">
+        ?
+        <add name="activity_name" type="Pointer" template="ZString"/>
+        <add name="Weight" type="uint"/>
+    </compound>
+
+    <compound name="RandomAnimationActivityData" inherit="MemStruct">
+        112 bytes
+        <add name="NumAnimations" type="uint64"/>
+        <add name="Animations" type="ArrayPointer" template="ActivityAnimationInfo" arg="NumAnimations"/>
+        <add name="DataStreams_count" type="uint64"/>
+        <add name="DataStreams" type="ArrayPointer" template="DataStreamResourceDataList" arg="DataStreams_count"/>
+        <add name="NumLoopedAnimations" type="uint64"/>
+        <add name="LoopedAnimations" type="ArrayPointer" template="LoopedAnimationInfo" arg="NumLoopedAnimations"/>
+        <add name="LoopedDataStreams_count" type="uint64"/>
+        <add name="LoopedDataStreams" type="ArrayPointer" template="DataStreamResourceDataList" arg="LoopedDataStreams_count"/>
+        <add name="Duration" type="float"/>
+        <add name="BlendTime" type="float"/>
+        <add name="MinWeight" type="float"/>
+        <add name="MaxWeight" type="float"/>
+        <add name="MinGap" type="float"/>
+        <add name="MaxGap" type="float"/>
+        <add name="Priorities" type="uint"/>
+        <add name="RandomAnimationFlags" type="uint"/>
+        <add name="SyncVariable" type="Pointer" template="ZString"/>
+        <add name="RandomNumberVariable" type="Pointer" template="ZString"/>
+    </compound>
+
+    <bitstruct name="TurnFlags" numbytes="1" storage="ubyte">
+        <bits name="Looping" numbits="1" />
+        <bits name="Clockwise" numbits="1" />
+        <bits name="UseMidpoint" numbits="1" />
+    </bitstruct>
+
+    <compound name="TurnActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="SpotAnimation" type="Pointer" template="ZString"/>
+        <add name="HalfAnimation" type="Pointer" template="ZString"/>
+        <add name="FullAnimation" type="Pointer" template="ZString"/>
+        <add name="OutputPropThroughVariable" type="Pointer" template="ZString"/>
+        <add name="SpotDataStreams" type="DataStreamResourceDataList"/>
+        <add name="HalfDataStreams" type="DataStreamResourceDataList"/>
+        <add name="FullDataStreams" type="DataStreamResourceDataList"/>
+        <add name="SuppressResourceDataStreams" type="ubyte"/>
+        <add name="_pad_0" type="ubyte"/>
+        <add name="Priorities" type="ushort"/>
+        <add name="LeadOutTime" type="float"/>
+        <add name="flags" type="TurnFlags" />
+        <add name="_pad_1" type="ubyte"/>
+        <add name="_pad_2" type="ushort"/>
+        <add name="MaxAngle" type="float"/>
+        <add name="MinCycles" type="uint" />
+        <add name="PlaybackRate" type="float"/>
+    </compound>
+
+    <enum name="UseValueType" numbytes="2" storage="ushort" default="0">
+		<option value="0" name="Property" />
+		<option value="1" name="Override" />
+		<option value="2" name="Detect" />
+    </enum>
+
+    <compound name="ForwardActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="StraightForwardAnimation" type="Pointer" template="ZString"/>
+        <add name="LeftForwardAnimation" type="Pointer" template="ZString"/>
+        <add name="RightForwardAnimation" type="Pointer" template="ZString"/>
+        <add name="StraightSpotAnimation" type="Pointer" template="ZString"/>
+        <add name="OutputPropThroughVariable" type="Pointer" template="ZString"/>
+        <add name="CycledVariable" type="Pointer" template="ZString"/>
+        <add name="StraightForwardDataStreams" type="DataStreamResourceDataList"/>
+        <add name="LeftForwardDataStreams" type="DataStreamResourceDataList"/>
+        <add name="RightForwardDataStreams" type="DataStreamResourceDataList"/>
+        <add name="StraightSpotDataStreams" type="DataStreamResourceDataList"/>
+        <add name="ForwardFlags" type="ubyte"/>
+        <add name="SuppressResourceDataStreams" type="ubyte"/>
+        <add name="Priorities" type="ushort"/>
+        <add name="TurnRadius" type="float"/>
+        <add name="TurnRadiusValueType" type="UseValueType" />
+        <add name="_pad0" type="ushort"/>
+        <add name="StrideLength" type="float"/>
+        <add name="StrideLengthValueType" type="UseValueType" />
+        <add name="_pad1" type="ushort"/>
+        <add name="LeadOutTime" type="float"/>
+        <add name="AnticipationDistance" type="float"/>
+        <add name="UnfusedCycles" type="uint"/>
+        <add name="CycleCount" type="uint"/>
+        <add name="RepeatCount" type="uint"/>
+        <add name="MinCycles" type="uint"/>
+        <add name="PlaybackRate" type="float"/>
+    </compound>
+
+    <bitstruct name="RagdollPhysicsActivityFlags" numbytes="4" storage="uint">
+        <bits name="AutoSleepEnabled" numbits="1" />
+        <bits name="CollisionEnabled" numbits="1" />
+        <bits name="SpatialEnabled" numbits="1" />
+        <bits name="MotorDrivingEnabled" numbits="1" />
+        <bits name="ConstraintProjection" numbits="1" />
+        <bits name="ActivateOnStartup" numbits="1" />
+        <bits name="ActivateOnCollision" numbits="1" />
+        <bits name="ActivateOneTimeOnly" numbits="1" />
+        <bits name="ActivateByDataStream" numbits="1" />
+        <bits name="WakeOnActivation" numbits="1" />
+        <bits name="ActivationDisabled" numbits="1" />
+        <bits name="LockPoseOnActivation" numbits="1" />
+        <bits name="DeactivatePoseMatch" numbits="1" />
+        <bits name="MotorPoseMatching" numbits="1" />
+        <bits name="MotorJointStiffening" numbits="1" />
+        <bits name="ForceSubStepSynch" numbits="1" />
+        <bits name="ForceDisableSynch" numbits="1" />
+        <bits name="ForceCallbacks" numbits="1" />
+    </bitstruct>
+
+    <compound name="RagdollPhysicsActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="flag" type="RagdollPhysicsActivityFlags" />
+        <add name="_flag_pad" type="uint" />
+        <add name="RootBoneName" type="Pointer" template="ZString"/>
+        <add name="CollisionExcludeMask" type="uint64" />8 bit mask + padding
+        <add name="CollisionExclude0" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude1" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude2" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude3" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude4" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude5" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude6" type="Pointer" template="ZString"/>
+        <add name="CollisionExclude7" type="Pointer" template="ZString"/>
+        <add name="MinMotorDrivingForce" type="float"/>
+        <add name="MaxMotorDrivingForce" type="float"/>
+        <add name="MotorWeightVariable" type="Pointer" template="ZString"/>
+        <add name="PoseMatchLinThreshold" type="float"/>
+        <add name="PoseMatchAngThreshold" type="float"/>
+        <add name="BoneChainPriority" type="uint64" />32 bit + padding
+        <add name="DataStreamName" type="Pointer" template="ZString"/>
+        <add name="DataStreamType" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="BlendSpaceAxis" inherit="MemStruct">
+        8 bytes
+        <add name="VariableName" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="Locomotion2BlendSpace" inherit="MemStruct">
+        32 bytes
+        <add name="YAxis" type="BlendSpaceAxis"/>
+        <add name="XAxis" type="BlendSpaceAxis"/>
+        <add name="Nodes_count" type="uint64" />
+        <add name="Nodes" type="ArrayPointer" template="Locomotion2BlendSpaceNode" arg="nodes_count"/>
+    </compound>
+
+    <compound name="Locomotion2ActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="animation_count" type="uint64"/>
+        <add name="animations" type="ArrayPointer" template="Locomotion2AnimationInfo" arg="animation_count"/>
+        <add name="flags" type="uint" />Locomotion2Flags
+        <add name="StoppingDistance" type="float" default="0.0"/>
+        <add name="StrafeTurnBlend" type="float" default="0.2"/>
+        <add name="TurnBlendLimit" type="float" default="1.0"/>
+        <add name="TurnSpeedMultiplier" type="float" default="1.0"/>
+        <add name="FlexSpeedMultiplier" type="float" default="1.0"/>
+        <add name="BlendSpace" type="Locomotion2BlendSpace" />
+        <add name="OutputPropThroughVariable" type="Pointer" template="ZString"/>
+        <add name="SpeedVariable" type="Pointer" template="ZString"/>
+        <add name="OrientationVariable" type="Pointer" template="ZString"/>
+        <add name="DataStreams_count" type="uint64"/>
+        <add name="DataStreams" type="ArrayPointer" template="DataStreamResourceDataList" arg="DataStreams_count"/>
+    </compound>
+
+    <compound name="VariableBlendedAnimationData" inherit="MemStruct">
+        ? bytes
+        <add name="Animation" type="Pointer" template="ZString"/>
+        <add name="Value" type="float" default="0.0"/>
+        <add name="_pad" type="uint" />
+        <add name="AdditionalDataStreams" type="DataStreamResourceDataList"/>
+    </compound>
+
+    <compound name="HeadTargetActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="Weight" type="FloatInputData"/>
+    </compound>
+
+    <compound name="VariableBlendedAnimationActivityData" inherit="MemStruct">
+        ? bytes
+        <add name="Priorities" type="uint"/>
+        <add name="_pad" type="uint"/>
+        <add name="Weight" type="FloatInputData"/>
+        <add name="animations" type="ArrayPointer" template="VariableBlendedAnimationData" arg="animation_count"/>
+        <add name="animation_count" type="uint64"/>
+        <add name="Variable" type="Pointer" template="ZString"/>
+        <add name="VariableBlendedAnimationFlags" type="uint"/>Flags
+    </compound>
+
+    <compound name="Locomotion2AnimationInfo" inherit="MemStruct">
+        16 bytes
+        <add name="anim_name" type="Pointer" template="ZString"/>
+        <add name="PhaseEntryWindow" type="float" default="1.5"/>
+        <add name="Priority" type="ushort" />Priorities
+        <add name="AnimType" type="ubyte" />Locomotion2AnimType
+        <add name="_pad" type="ubyte" />
+    </compound>
+
+    <compound name="Locomotion2BlendSpaceNode" inherit="MemStruct">
+        16 bytes
+        <add name="anim_name" type="Pointer" template="ZString"/>
+        <add name="speed" type="float"/>
+        <add name="orientation" type="float"/>
+    </compound>
+
+    <compound name="FootPlantActivityData" inherit="MemStruct">
+        48 bytes
+        <add name="Weight" type="FloatInputData"/>
+        <add name="RotationNoIKWeight" type="FloatInputData"/>
+        <add name="StickyFeetWeight" type="FloatInputData"/>
+    </compound>
+
+    <enum name="TimeLimitMode" numbytes="4" storage="uint" default="0">
+		<option value="0" name="Wrap" />
+		<option value="1" name="Clamp" />
+    </enum>
+
+    <enum name="SelectActivityActivityMode" numbytes="4" storage="uint" default="0">
+		<option value="0" name="AdvanceChildrenTogether" />
+		<option value="1" name="RestartChildrenOnSelection" />
+		<option value="2" name="ChooseOnceAtStart" />
+    </enum>
+
+    <compound name="DataStreamProducerActivityData" inherit="MemStruct">
+        72 bytes
+        <add name="CurveType" type="uint64"/>
+        <add name="DS Name" type="Pointer" template="ZString"/>
+        <add name="Type" type="Pointer" template="ZString"/>
+        <add name="BoneID" type="Pointer" template="ZString"/>
+        <add name="Location" type="Pointer" template="ZString"/>
+        <add name="Curve" type="CurveData" />
+        <add name="TimeLimitMode" type="TimeLimitMode"/>
+        <add name="DataStreamProducerFlags" type="uint"/>
+        <add name="PropThroughVariable" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="ActivitiesLink" inherit="MemStruct">
+        <add name="linked" type="Pointer" />
+    </compound>
+
+    <compound name="ActivitiesLinks" inherit="MemStruct">
+        <add name="activities" type="ActivitiesLink" arr1="#ARG#" />
+    </compound>
+
+    <compound name="SelectActivityActivityData" inherit="MemStruct">
+        32 bytes
+        <add name="EnumVariable" type="Pointer" template="ZString"/>
+        # points to activities in the main activities array
+        <add name="Activities" type="Pointer" template="ActivitiesLinks" arg="num_activities"/>
+        <add name="num_activities" type="uint64"/>
+        # todo - the following two may be mixed up in the xml spec!!
+        <add name="BlendTime" type="float"/>
+        <add name="Mode" type="SelectActivityActivityMode"/>
+    </compound>
+
+    <compound name="GroupedActivityActivityData" inherit="MemStruct">
+        ? bytes
+        # points to activities in the main activities array
+        <add name="Activities" type="Pointer" template="ActivitiesLinks" arg="num_activities"/>
+        <add name="num_activities" type="uint64"/>
+    </compound>
+
+    <compound name="RandomActivityActivityInfoData" inherit="MemStruct">
+         bytes
+        <add name="EnumVariable" type="Pointer" template="ZString"/>
+        <add name="Activities" type="Pointer" />
+        <add name="Activities count" type="uint64"/>
+        <add name="BlendTime" type="float"/>
+        <add name="Mode" type="SelectActivityActivityMode"/>
+
+
+<!--        								<array def="RandomActivityActivityInfo" name="Activities" type="struct" />-->
+<!--								<count32 name="Activities" />-->
+<!--								<float name="BlendInTime" />-->
+<!--								<float name="BlendOutTime" />-->
+<!--								<uint8 max="1" min="0" name="AllowRestartingActivity">0</uint8>-->
+<!--								<float name="BlockActivityRestartTime">0.0</float>-->
+<!--								<flags32 def="RandomActivityAnimationFlags" name="Flags" />-->
+<!--								<uint8 max="1" min="0" name="AlwaysActive">0</uint8>-->
+<!--								<float name="MinGap">7.0</float>-->
+<!--								<float name="MaxGap">10.0</float>-->
+<!--								<ascii name="RandomNumberVar" />-->
+<!--        <add name="CurveType" type="uint64"/>-->
+<!--        <add name="DS Name" type="Pointer" template="ZString"/>-->
+<!--        <add name="Type" type="Pointer" template="ZString"/>-->
+<!--        <add name="BoneID" type="Pointer" template="ZString"/>-->
+<!--        <add name="Location" type="Pointer" template="ZString"/>-->
+<!--        <add name="Curve" type="CurveData" />-->
+<!--        <add name="TimeLimitMode" type="TimeLimitMode"/>-->
+
+<!--        <add name="AlwaysActive" type="ushort"/>-->
+<!--        <add name="MinGap" type="float"/>-->
+<!--        <add name="MaxGap" type="float"/>-->
+<!--        <add name="RandomNumberVar" type="Pointer" template="ZString"/>-->
+    </compound>
+
+    <compound name="SinglePtr" inherit="MemStruct">
+        8 bytes
+        <add name="ptr" type="Pointer" template="#T#" />
+    </compound>
+
+    <compound name="SingleRef" inherit="MemStruct">
+        8 bytes
+        <add name="pointer" type="Reference" template="#T#" />
+    </compound>
+
+    <compound name="RefList" inherit="MemStruct">
+        8 * arg bytes
+        <add name="ptrs" type="SingleRef" arr1="#ARG#" template="#T#"/>
+    </compound>
+
+    <compound name="PtrList" inherit="MemStruct">
+        8 * arg bytes
+        <add name="ptrs" type="SinglePtr" arr1="#ARG#" template="#T#"/>
+    </compound>
+
+    <compound name="StateList" inherit="MemStruct">
+        8 * arg bytes
+        <add name="ptrs" type="SinglePtr" arr1="#ARG#" template="State"/>
+    </compound>
+
+    <compound name="MotiongraphVars" inherit="MemStruct">
+        16 bytes for arg = 7
+        40 bytes for arg = 8
+        <add name="ptr" type="ArrayPointer" template="MotiongraphVar" arg="count"/>
+        <add name="count" type="uint64"/>
+    </compound>
+
+    <compound name="Something" inherit="MemStruct">
+        16 bytes
+        <add name="ptr" type="Pointer" />usually empty
+        <add name="unk" type="uint64"/>
+    </compound>
+
+    <compound name="MRFChild" inherit="MemStruct">
+        32 bytes
+        <add name="count_0" type="uint64"/>
+
+        <add name="MRFMember" type="Pointer" template="MRFMember1"/>
+        <add name="ptr_1" type="Pointer" template="Something"/>
+
+        <add name="count_1" type="uint64"/>
+    </compound>
+
+</niftoolsxml>

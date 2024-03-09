@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+	
+    <compound name="DataPointer">
+        second Section of a soundbank aux
+        <add name="wem id" type="uint"/>
+        <add name="data section offset" type="uint" >offset into data section</add>
+        <add name="wem filesize" type="uint" >length of the wem file</add>
+    </compound>
+
+    <compound name="BKHDSection">
+        First Section of a soundbank aux
+        <add name="length" type="uint" >length of following data</add>
+        <add name="version" type="uint" ></add>
+        <add name="IdA" type="uint" ></add>
+        <add name="IdB" type="uint" ></add>
+        <add name="constantA" type="uint" ></add>
+        <add name="constantB" type="uint" ></add>
+        <add name="unk" type="uint" ></add>
+        <add name="zeroes" type="ubyte" arr1="length - 24">sometimes present</add>
+    </compound>
+
+    <compound name="DIDXSection">
+        second Section of a soundback aux
+        <add name="length" type="uint" >length of following data</add>
+        <add name="data pointers" type="DataPointer" arr1="length/12"/>
+    </compound>
+
+    <compound name="DATASection">
+        second Section of a soundback aux
+        <add name="length" type="uint" >length of following data</add>
+        <add name="wem datas" type="byte" arr1="length"/>
+    </compound>
+
+    <enum name="HircType" numbytes="1" storage="ubyte" default="0">
+		<option value="0" name="NONE" />
+		<option value="1" name="Settings" />
+		<option value="2" name="SoundSfxVoice" />
+		<option value="3" name="EventAction" />
+		<option value="4" name="Event" />
+		<option value="5" name="RandomOrSequenceContainer" />
+		<option value="6" name="SwitchContainer" />
+		<option value="7" name="ActorMixer" />
+		<option value="8" name="AudioBus" />
+		<option value="9" name="BlendContainer" />
+		<option value="10" name="MusicSegment" />
+		<option value="11" name="MusicTrack" />
+		<option value="12" name="MusicSwitchContainer" />
+		<option value="13" name="MusicPlaylistContainer" />
+		<option value="14" name="Attenuation" />
+		<option value="15" name="DialogueEvent" />
+		<option value="16" name="MotionBus" />
+		<option value="17" name="MotionFX" />
+		<option value="18" name="Effect" />
+		<option value="19" name="UnkType19" />
+		<option value="20" name="AuxiliaryBus" />
+		<option value="21" name="UnkType21" />
+		<option value="22" name="UnkType22" />
+    </enum>
+
+    <compound name="SoundSfxVoice">
+        <add name="length" type="uint">length of this section</add>
+        <add name="id" type="uint" >id of this Sound SFX object</add>
+        <add name="const a" type="uint" >?</add>
+        <add name="const b" type="byte" >?</add>
+        <add name="didx id" type="uint" >?</add>
+        <add name="wem length" type="uint" >?</add>
+        <add name="extra" type="byte" arr1="length - 17" >?</add>
+    </compound>
+
+    <compound name="AkMediaInformation">
+        <add name="sourceID" type="uint"/>
+        <add name="uInMemoryMediaSize" type="uint"/>
+        <add name="uSourceBits" type="ubyte"/>
+    </compound>
+
+    <compound name="AkBankSourceData">
+        <add name="ulPluginID" type="uint"/>
+        <add name="StreamType" type="ubyte"/>
+        <add name="AkMediaInformation" type="AkMediaInformation"/>
+    </compound>
+
+    <compound name="AkTrackSrcInfo">
+        <add name="trackID" type="uint"/>
+        <add name="sourceID" type="uint"/>
+        <add name="eventID" type="uint"/>
+        <add name="fPlayAt" type="double"/>
+        <add name="fBeginTrimOffset" type="double"/>
+        <add name="fEndTrimOffset" type="double"/>
+        <add name="fSrcDuration" type="double"/>
+    </compound>
+
+    <compound name="NodeBaseParams">
+        <add name="raw" type="byte" arr1="30"/>
+    </compound>
+
+    <compound name="MusicTrackInitialValues">
+        <add name="uFlags" type="ubyte"/>
+        <add name="numSources" type="uint"/>
+        <add name="pSource" type="AkBankSourceData" arr1="numSources"/>
+        <add name="numPlaylistItem" type="uint"/>
+        <add name="pPlaylist" type="AkTrackSrcInfo" arr1="numPlaylistItem"/>
+        <add name="numSubTrack" type="uint"/>
+        <add name="numClipAutomationItem" type="uint"/>
+        # todo item struct
+        <add name="pItems" type="uint" arr1="numClipAutomationItem"/>
+        <add name="NodeBaseParams" type="NodeBaseParams"/>
+        <add name="eTrackType" type="ubyte"/>
+        <add name="iLookAheadTime" type="int"/>
+    </compound>
+
+    <compound name="MusicTrack">
+        <add name="length" type="uint">seen 114</add>
+        <add name="id" type="uint"/>
+        <add name="data" type="MusicTrackInitialValues"/>
+    </compound>
+
+    <compound name="TypeOther">
+        generic
+        <add name="length" type="uint">length of this section</add>
+        <add name="raw" type="byte" arr1="length">id of this Sound SFX object</add>
+    </compound>
+
+    <compound name="HircPointer">
+        <add name="id" type="HircType"/>
+<!--        <add name="data" type="TypeOther" />-->
+        <add name="data" type="SoundSfxVoice" cond="id == 2"/>
+<!--        <add name="data" type="TypeOther" cond="id != 2"/>-->
+        <add name="data" type="MusicTrack" cond="id == 11"/>
+        <add name="data" type="TypeOther" cond="(id != 2) #AND# (id != 11)"/>
+    </compound>
+
+    <compound name="HIRCSection">
+        The HIRC section contains all the Wwise objects, including the events, the containers to group sounds, and the references to the sound files.
+        <add name="length" type="uint" >length of following data</add>
+        <add name="count" type="uint"/>
+        <add name="hirc pointers" type="HircPointer" arr1="count"/>
+    </compound>
+    
+    <compound name="StreamInfo" >
+        Describes a wem file in an s type bank stream
+        <add name="offset" type="uint64"/>
+        <add name="size" type="uint64"/>
+        <add name="event id" type="uint">referred to by the events aux file</add>
+        <add name="zero" type="uint"/>
+    </compound>
+
+    <compound name="BnkBufferData">
+        Buffer data of bnk files
+        <add name="size_b" type="uint64" >data size of aux of type b, can be in bnk's buffer 1, and maybe also an external aux b file</add>
+        <add name="external_aux_b_count" type="uint" >1, guess</add>
+        <add name="total_aux_count" type="uint" >1 for PC, 2 for PZ, JWE, 6 for ZTUAC</add>
+        <add name="streams_count" type="uint" >variable</add>
+        <add name="zeros" type="uint" arr1="7">0</add>
+        <add name="zeros_per_buffer" type="uint64" arr1="external_aux_b_count" arr2="2">variable</add>
+        <add name="streams" type="StreamInfo" arr1="streams_count" >data</add>
+        <add name="name" type="ZString" >data</add>
+        <add name="external_b_suffix" type="ZString" cond="external_aux_b_count">ext format subtypes</add>
+        <add name="external_s_suffix" type="ZString" cond="streams_count">ext format subtypes</add>
+    </compound>
+
+    <compound name="BnkFileContainer" inherit="GenericHeader">
+        custom struct
+        <add name="bnk_header" type="BnkBufferData"/>
+    </compound>
+
+</niftoolsxml>

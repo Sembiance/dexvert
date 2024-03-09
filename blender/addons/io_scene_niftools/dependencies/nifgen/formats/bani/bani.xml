@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="Vector3Short" size="6">
+        A signed int16 vector in 3D space (x,y,z).
+        <field name="x" type="short">First coordinate.</field>
+        <field name="y" type="short">Second coordinate.</field>
+        <field name="z" type="short">Third coordinate.</field>
+    </compound>
+
+    <compound name="Vector3Ushort" size="6">
+        A signed int16 vector in 3D space (x,y,z).
+        <field name="x" type="ushort">First coordinate.</field>
+        <field name="y" type="ushort">Second coordinate.</field>
+        <field name="z" type="ushort">Third coordinate.</field>
+    </compound>
+
+    <compound name="Vector4" size="16">
+        A vector in 3D space (x,y,z).
+        <field name="w" type="float">zeroth coordinate.</field>
+        <field name="x" type="float">First coordinate.</field>
+        <field name="y" type="float">Second coordinate.</field>
+        <field name="z" type="float">Third coordinate.</field>
+    </compound>
+
+	<compound name="BaniRoot" inherit="MemStruct">
+		24 bytes This varies per bani animation file and describes the bani's frames and duration
+        <add name="banis" type="Pointer" >points to the banis file used</add>
+        <add name="read start frame" type="uint">The frame in the banis where this bani starts reading</add>
+        <add name="num frames" type="uint">Number of frames in this bani file</add>
+        <add name="animation length" type="float">length of the animation, can easily get keyframe spacing now</add>
+        <add name="LoopFlag" type="uint">if 1381323599 then looped</add>
+    </compound>
+
+    <compound name="BaniInfo">
+        Custom header struct
+        <add name="name" type="ZString"/>
+        <add name="data" type="BaniRoot"/>
+    </compound>
+
+    <compound name="BanisInfoHeader">
+        Custom header struct
+        <add name="num_anims" type="uint"/>
+        <add name="anims" type="BaniInfo" arr1="num_anims"/>
+        <add name="data" type="BanisRoot"/>
+        keyframe data follows
+    </compound>
+
+    <compound name="BanisRoot" inherit="MemStruct">
+        40 bytes
+        <add name="zeros" type="uint64" arr1="2"/>
+        <add name="bytes per frame" type="uint">bytes per bone * num bones</add>
+        <add name="bytes per bone" type="uint">how many bytes for each bone per frame</add>
+        <add name="num frames" type="uint">Number of frames for all bani files in banis buffer</add>
+        <add name="num bones" type="uint">number of bones in data, must correspond to ms2</add>
+        <add name="loc scale" type="float">scale for translation range</add>
+        <add name="loc min" type="float">related to minimum of scaled translations, offsets everything ingame the same across all axes</add>
+    </compound>
+
+</niftoolsxml>

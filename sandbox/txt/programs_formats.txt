@@ -11374,3 +11374,123 @@ Quattro Pro 1.0/5.0 (Win) *.wb1
 Quattro Pro/DOS Files *.wq1
 SYLK Files *.slk
 
+
+>>> assimp - linux https://github.com/assimp/assimp/tree/master
+COMMON INTERCHANGE FORMATS
+	Autodesk ( .fbx )
+	Collada ( .dae, .xml )
+	glTF ( .gltf, .glb )
+	3D Studio Max 3DS (.3ds)
+	3D Studio Max ASE (.ase)
+	Wavefront Object ( .obj )
+	Industry Foundation Classes (IFC/Step) ( .ifc )
+	XGL-3D-Format ( .xgl,.zgl )
+	Stanford Polygon Library ( .ply )
+	AutoCAD/AutoDesk DXF ( .dxf )
+	LightWave ( .lwo )
+	LightWave Scene ( .lws )
+	Modo ( .lxo )
+	Stereolithography ( .stl )
+	DirectX X ( .x )
+	AC3D ( .ac, .ac3d )
+	Milkshape 3D ( .ms3d )
+	TrueSpace ( .cob,.scn )
+
+MOTION CAPTURE FORMATS
+	Biovision BVH ( .bvh )
+	CharacterStudio Motion ( .csm )
+
+GRAPHICS ENGINE FORMATS
+	Ogre ( .mesh.xml, .skeleton.xml, .material )
+	Irrlicht Mesh ( .irrmesh, .xml )
+	Irrlicht Scene ( .irr, .xml )
+
+GAME FILE FORMATS
+	Quake I ( .mdl )
+	Quake II ( .md2 )
+	Quake III Mesh ( .md3 )
+	Quake III Map/BSP ( .pk3 )
+	Return to Castle Wolfenstein RtCW ( .mdc )
+	Doom 3 ( .md5mesh, .md5anim, .md5camera)
+	Valve Model ( .smd,.vta )
+	Open Game Engine Exchange ( .ogex )
+	Unreal ( .3d )
+
+OTHER FILE FORMATS
+	BlitzBasic 3D ( .b3d )
+	Quick3D ( .q3d, .q3o, .q3s )
+	Neutral File Format ( .nff )
+	Sense8 WorldToolKit ( .nff )
+	Object File Format ( .off )
+	PovRAY Raw ( .raw )
+	Raw Triangles (.raw)
+	Terragen Terrain ( .ter )
+	3D GameStudio (3DGS) ( .mdl )
+	3D GameStudio (3DGS) Terrain ( .hmp )
+	Izware Nendo ( .ndo )
+	3D Manufacturing Format ( .3mf)
+	IQM-Format (.iqm)
+	ACC
+	AMJ
+	ASK
+	ENFF
+	HMB
+	M3D
+	MOT
+	PMX
+	PRJ
+	SIB
+	STP
+	UC
+	X3D
+
+
+
+>>> MilkShape 3D 1.8.5 BETA 1  windows https://www.chumba.ch/chumbalum-soft/index.html
+3D Studio ASC
+Alias FBX
+AutoCAD DXF
+Autodesk 3DS
+BioVision Motion Capture BVH
+Call of Duty
+DirectX
+Doom 3 MD5 Mesh
+Elite Force
+GameStudio A5 MDL
+GameStudio MDL7
+Genesis3D 1.0 BDY
+Genesis3D 1.0 MOT
+Genesis3D 1.0 ACT
+Ghoul2 Model GLM
+Half-Life and Half-Life 2 SMD
+Half-Life MDL
+Janes WWII Fighters J3P
+Jedi Knight 3DO
+Kingpin MDX
+LightWave 5.x/6.x
+Lithium UnWrapper
+Lithtech ABC v11, v12 (No One Lives Forever)
+MilkShape 3D ASCII
+MilkShape 3D MS3D
+Max Payne KF2/KFS/SKD
+Maya ASCII (limited support, use trial to test first)
+Playstation TMD
+Quake II MD2
+Quake III: Arena MD3
+RAW Triangles
+Refractor 2 SM
+Return to Castle Wolfenstein MDC
+Roque Spear QOB Models
+Serious Sam MDL
+Serious Sam SKA
+SOFTIMAGE|XSI
+Starfeelt Command/Startrek Armada/Bridge Commander
+Text
+The Movies
+The Sims SKN
+The Sims 2 UniMesh
+Unreal/UT Engine 3D
+Unreal/UT Engine Skeletal Mesh PSK
+Vampire: the Masquerade NOD
+Warcraft III MDX
+Wavefront OBJ

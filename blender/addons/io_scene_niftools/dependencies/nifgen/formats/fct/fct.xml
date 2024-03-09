@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fileformat>
+<fileformat>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="Font" inherit="MemStruct">
+        JWE: 16 bytes
+        <add name="data_size" type="uint64" />
+        <add name="zero" type="uint64" />
+    </compound>
+
+    <compound name="FctRoot" inherit="MemStruct">
+        JWE: 104 bytes
+        <add name="u0" type="short" />
+        <add name="u1" type="short" />
+        <add name="a" type="float" />
+        <add name="b" type="float" />
+        <add name="c" type="float" />
+        <add name="minus_1" type="short" />
+        <add name="z0" type="short" />
+        <add name="z1" type="int" />
+        <add name="z2" type="uint64" />
+        <add name="offset" type="uint64" />usually 1088 into buffer data
+        <add name="fonts" type="Font" arr1="4"/>
+    </compound>
+
+</fileformat>
+

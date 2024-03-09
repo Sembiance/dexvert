@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    # .logicalcontrols need to be in Init.ovl for loading on time.
+    arrays also seem to be nullptr terminated
+
+    <compound name="LogicalControls" inherit="MemStruct">
+        <add name="buttons" type="ArrayPointer" template="Button" arg="button_count"/>
+        <add name="axes" type="ArrayPointer" template="AxisValue" arg="axis_count"/>
+        <add name="axis_buttons" type="ArrayPointer" template="AxisButton" arg="count3"/>
+        <add name="d" type="ArrayPointer" template="Some" arg="count4"/>
+        <add name="button_count" type="ubyte" />
+        <add name="axis_count" type="ubyte" />
+        <add name="count3" type="ubyte" />
+        <add name="count4" type="ubyte" />
+        <add name="flags" type="uint" />
+        <add name="unsure" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="ButtonData" inherit="MemStruct">
+        # Apparently the binding value is from a = 1..
+        # HUD_MapMode:          13  209     m and M
+        # HUD_Notifications:    14  210     n and N
+        <add name="k1a" type="ushort"/>
+        <add name="k1b" type="ushort"/>
+        <add name="k2" type="uint"/>
+        <add name="k3" type="uint"/>
+        <add name="k4" type="uint"/>
+    </compound>
+
+    <compound name="Button" inherit="MemStruct">
+        <add name="button_name" type="Pointer" template="ZString"/>
+        <add name="datas" type="ArrayPointer" template="ButtonData" arg="datas_count"/>
+        <add name="datas_count" type="uint" />
+        <add name="flags" type="uint" />
+    </compound>
+
+    <compound name="AxisValue" inherit="MemStruct">
+        <add name="axis_name" type="Pointer" template="ZString"/>
+        <add name="u0" type="uint64"/>
+        <add name="u1" type="uint64"/>
+        <add name="u2" type="uint64"/>
+        <add name="value_name" type="Pointer" template="ZString"/>
+        <add name="u3" type="uint64"/>
+        <add name="u4" type="uint64"/>
+    </compound>
+
+    <compound name="AxisButton" inherit="MemStruct">
+        24 bytes, can be padded to 32
+        <add name="button_name" type="Pointer" template="ZString"/>
+        <add name="axis_name_x" type="Pointer" template="ZString"/>
+        <add name="axis_name_y" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="Some" inherit="MemStruct">
+        24 bytes
+        <add name="some_name" type="Pointer" template="ZString"/>
+        <add name="some_data" type="ArrayPointer" template="SomeData" arg="some_count"/>
+        <add name="some_count" type="uint64"/>
+    </compound>
+
+    <compound name="SomeData" inherit="MemStruct">
+        16 bytes
+        <add name="key" type="uint"/>
+        <add name="extra" type="uint"/>
+        <add name="a" type="float"/>
+        <add name="b" type="float"/>
+    </compound>
+
+</niftoolsxml>

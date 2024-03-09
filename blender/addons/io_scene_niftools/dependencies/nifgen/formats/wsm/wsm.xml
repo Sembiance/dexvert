@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+	<compound name="Vector3" size="12" inherit="MemStruct">
+		A vector in 3D space (x,y,z).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+	</compound>
+
+	<compound name="Vector4" size="16" inherit="MemStruct">
+		A vector in 3D space (x,y,z).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+		<field name="w" type="float">zeroth coordinate.</field>
+	</compound>
+
+	<compound name="WsmHeader" inherit="MemStruct">
+        56 bytes for JWE2
+        <add name="duration" type="float"/>
+		<add name="frame_count" type="uint" >likely</add>
+		<add name="unknowns" type="float" arr1="8">unk</add>
+        <add name="locs" type="ArrayPointer" template="Vector3" arg="frame_count"/>
+        <add name="quats" type="ArrayPointer" template="Vector4" arg="frame_count"/>
+    </compound>
+
+	<compound name="Wsm" inherit="GenericHeader">
+        <add name="header" type="WsmHeader"/>
+		<add name="locs" type="float" arr1="header \ frame count" arr2="3">xyz</add>
+		<add name="quats" type="float" arr1="header \ frame count" arr2="4">xyzw</add>
+    </compound>
+
+</niftoolsxml>

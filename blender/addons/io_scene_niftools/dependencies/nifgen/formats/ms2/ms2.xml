@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<token name="verexpr" attrs="vercond">
+		<verexpr token="#OLD#" string="(#VER# #LT# 47)">PC, ZTUAC, old JWE</verexpr>
+		<verexpr token="#DLA#" string="(#VER# #EQ# 7)">DLA</verexpr>
+		<verexpr token="#ZTUAC#" string="(#VER# #EQ# 13)">ZTUAC</verexpr>
+		<verexpr token="#PC#" string="(#VER# #EQ# 32)">PC</verexpr>
+		<verexpr token="#JWE#" string="((#VER# #EQ# 47) #OR# (#VER# #EQ# 39))">JWE</verexpr>
+		<verexpr token="#PZ#" string="((#VER# #EQ# 48) #OR# (#VER# #EQ# 50))">PZ all</verexpr>
+		<verexpr token="#PZ16#" string="(#VER# #EQ# 50)">PZ 1.6+</verexpr>
+		<verexpr token="#JWE2#" string="(#VER# #EQ# 51)">JWE2</verexpr>
+		There is a versioning issue introduced by the Biosyn update as the ms2 version has not been incremented immediately
+		<verexpr token="#JWE2_BIO#" string="(#VER# #EQ# 52)">JWE2</verexpr>
+		<verexpr token="#WAR#" string="(#VER# #EQ# 53)">WAR</verexpr>
+	</token>
+
+	<token name="global" attrs="vercond access">
+		Global Tokens.
+		NOTE: These must be listed after the above tokens so that they replace last. For example, `verexpr` uses these tokens.
+		<global token="#VER#" string="version" />
+<!--		<global token="#BIOSYN#" string="biosyn" />-->
+	</token>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+<!--	<verattr name="biosyn" access="#BIOSYN#" index="1" />-->
+
+	set latest first so that that is set
+	<version id="old" version="32 13 7" >Old</version>
+	<version id="DLA" version="7" >Disneyland Adventures</version>
+	<version id="ZTUAC" version="13" >Zoo Tycoon Ultimate Animal Collection</version>
+	<version id="PC" version="32" >Planet Coaster</version>
+	<version id="JWE" version="47 39" >Jurassic World Evolution</version>
+	<version id="PZ" version="50 48" >Planet Zoo (all)</version>
+	<version id="PZ16" version="50" >Planet Zoo (latest)</version>
+	<version id="JWE2" version="52 51" >Jurassic World Evolution 2</version>
+	<version id="WAR" version="53" >Warhammer RoR</version>
+
+	<basic name="BiosynVersion" integral="true" countable="true">
+		An unsigned 32-bit integer.
+	</basic>
+	
+	<basic name="MainVersion" integral="true" countable="true">
+		An unsigned 32-bit integer.
+	</basic>
+
+	<basic name="BonePointerIndex" integral="true" countable="true">
+	</basic>
+
+<!--Count from the end!!!-->
+	<enum name="MeshFormat" storage="ubyte">
+		<option value="0" name="Separate" />
+		<option value="1" name="Interleaved32" />
+		<option value="2" name="Interleaved48" />
+		<option value="3" name="UnkFmt" />
+	</enum>
+
+	<bitfield name="WeightsFlag" storage="ushort">
+		<member width="1" pos="0" name="has_weights" type="bool"/>
+		<member width="8" pos="1" name="bone_index" type="int"/>
+		<member width="7" pos="9" name="mesh_format" type="MeshFormat"/>
+	</bitfield>
+
+	<bitfield name="WeightsFlagMalta" storage="ushort">
+		<member width="2" pos="0" name="mesh_format" type="MeshFormat"/>
+		<member width="1" pos="3" name="has_weights" type="bool"/>
+		<member width="8" pos="4" name="bone_index" type="int"/>
+	</bitfield>
+
+	<bitfield name="ModelFlag" storage="uint">
+		Determines the data held by a mesh.
+		<member width="1" pos="3" name="stripify" type="bool">if true, tris are stored as a tri strip</member>
+		<member width="1" pos="4" name="weights" type="bool">in 528, 529, 533, 565, 821, 853, 885, 1013</member>
+		<member width="1" pos="5" name="repeat tris" type="bool">repeats the tri array 5 times</member>
+		<member width="1" pos="8" name="fur shells" type="bool">active if mesh uses fur shells, may or may not repeat tris</member>
+		<member width="1" pos="9" name="basic info" type="bool">our simplest format is flag 8, simplest format for PC, just 16 bytes</member>
+	</bitfield>
+
+	<bitfield name="ChunkedModelFlag" storage="uint">
+		Determines the data held by a mesh.
+		<member width="1" pos="0" name="flat_arrays" type="bool">vecs, weights, uvs if true, interleaved per vertex if false</member>
+<!--		<member width="1" pos="5" name="repeat tris" type="bool">repeats the tri array 5 times</member>-->
+		so far not sure about these, it is 13 on shell meshes
+		<member width="1" pos="2" name="fur_shells" type="bool">active if mesh uses fur shells, may or may not repeat tris</member>
+		<member width="1" pos="3" name="fur_shells_2" type="bool">active if mesh uses fur shells, may or may not repeat tris</member>
+	</bitfield>
+
+	<bitfield name="ModelFlagZT" storage="uint">
+		Determines the data held by a mesh.
+		<member width="1" pos="6" name="stripify" type="bool">if true, tris are stored as a tri strip</member>
+		<member width="1" pos="9" name="repeat tris" type="bool">repeats the tri array 5 times</member>
+	</bitfield>
+
+	<bitfield name="ModelFlagDLA" storage="uint">
+		Determines the data held by a mesh.
+		<member width="1" pos="1" name="vertex_offset" type="bool">seen in DLA - if false, vertex_offset = -1</member>
+		todo - check if this is stripify, meaning of stripify is different here - currently hacked in MeshData.py triangulate
+		pos 2 would also qualify 36 0b100100, 38 0b100110
+		<member width="1" pos="5" name="stripify" type="bool">if true, tris are stored as a tri strip</member>
+<!--		<member width="1" pos="9" name="repeat tris" type="bool">repeats the tri array 5 times</member>-->
+	</bitfield>
+
+	<bitfield name="RenderFlag" storage="ushort">
+		Determines how the model is rendered.
+		<member width="1" pos="0" name="a" type="bool">?</member>
+		<member width="1" pos="1" name="b" type="bool">?</member>
+		<member width="1" pos="2" name="c" type="bool">?</member>
+		<member width="1" pos="3" name="d" type="bool">?</member>
+		<member width="1" pos="4" name="e" type="bool">?</member>
+	</bitfield>
+
+	<enum name="CollisionType" storage="uint">
+		<option value="0" name="Sphere" />
+		<option value="1" name="BoundingBox" />
+		<option value="2" name="Capsule" />
+		<option value="3" name="Cylinder" />
+		<option value="7" name="ConvexHull" />
+		<option value="8" name="ConvexHullPC" />
+		<option value="10" name="MeshCollision"/>
+		<option value="11" name="UnkRhino" >?</option>
+<!--		<option value="32" name="Unk2Rhino" >?</option>-->
+	</enum>
+	
+	<compound name="AfterJointsPadding">
+	</compound>
+
+	<compound name="Matrix44" size="64">
+		A 4x4 transformation matrix.
+		<field name="data" type="float" arr1="4" arr2="4">Stored in OpenGL column-major format.</field>
+	</compound>
+
+	<compound name="Matrix33" size="36">
+		A 3x3 rotation matrix; M^T M=identity, det(M)=1.
+		<field name="data" type="float" arr1="3" arr2="3">Stored in OpenGL column-major format.</field>
+	</compound>
+
+	<compound name="Vector4" size="16">
+		A vector in 4D space (x,y,z,w).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+		<field name="w" type="float">zeroth coordinate.</field>
+	</compound>
+
+	<compound name="AxisAngle" size="16">
+		<field name="a" type="float" default="1.0"/>
+		when a = 1.0, x,y,z = 0
+		otherwise x,y,z is a normalized vector
+		<field name="x" type="float" default="0.0"/>
+		<field name="y" type="float" default="0.0"/>
+		<field name="z" type="float" default="0.0"/>
+	</compound>
+
+	<compound name="StreamDebugger">
+		logs stream address to debug log
+	</compound>
+
+	<compound name="Bone">
+		32 bytes
+		bones, rot first
+		<add name="loc" type="Vector3" until="47" />
+		<add name="scale" type="float" until="47" />
+		<add name="rot" type="Vector4" until="47" />
+		bones, loc first
+		<add name="rot" type="Vector4" since="48" />
+		<add name="loc" type="Vector3" since="48" />
+		<add name="scale" type="float" since="48" />
+	</compound>
+	
+	<compound name="Ms2Root" inherit="MemStruct">
+		root header of the ms2
+		48 bytes
+		<add name="version" type="MainVersion" >see version tag</add>
+		<add name="vertex_buffer_count" type="ushort" >total count of vertex buffers, including streamed buffers</add>
+		<add name="mdl2 count" type="ushort"/>
+		<add name="name count" type="ushort" >count of names in ms2 buffer0</add>
+		<add name="static_buffer_index" type="short" >-1 if there is no vertex buffer at all; else index of static buffers in total buffers</add>
+		<add name="zeros" type="uint" arr1="3"/>
+		the following two ptrs are not used in PC
+		<add name="buffer_infos" type="ArrayPointer" template="BufferInfo" arg="vertex_buffer_count">ms2's static buffer_info or empty (if no buffers)</add>
+		<add name="model_infos" type="ArrayPointer" template="ModelInfo" arg="mdl2 count">one for each mdl2</add>
+		already used in DLA
+		<add name="buffer_pointers" type="ArrayPointer" template="BufferPresence" arg="vertex_buffer_count">links buffers to ms2 dependencies if they are streamed</add>
+	</compound>
+
+	<compound name="BufferPresence" inherit="MemStruct">
+		<add name="dependency_name" type="Pointer" >in DLA and JWE2, this can be a dependency to a model2stream</add>
+	</compound>
+
+	<compound name="MaterialName">
+		<add name="name index" type="ushort" until="32">index into ms2 names array</add>
+		<add name="name index" type="uint" since="47">index into ms2 names array</add>
+		<add name="blend_mode" type="ushort" until="32"/>
+		<add name="blend_mode" type="uint" since="47">specifies the blend mode, highly consistent to shader type used
+		PZ: 263: {'furshell', 'furpatchworkbaldnessshell', 'furpatchworkshell'}, 6: {'furpatchworkbaldnessfin', 'furfin', 'furpatchworkfin'}, 8: {'animal_whisker'}, 15: {'glass_textured_weather'}
+		JWE2: 7: {'dinosaurfur_vanilla_shell'}, 6: {'dinosaurfur_vanilla_fin'}
+		</add>
+	</compound>
+
+	<compound name="LodInfo">
+		DLA, ZTUAC - 16 bytes
+		JWE, PZ, JWE2 - 20 bytes
+		JWE2 Biosyn - 12 bytes, skips the vert / tris counts
+		<add name="full" type="short" until="13" >FFFF</add>
+		<add name="half" type="short" until="13" >7F7F</add>
+		<add name="lod index" type="ushort" until="13" >increasing</add>
+		<add name="distance" type="float" since="32" >usually first lod is 900</add>
+		<add name="stream_index" type="ushort" since="32" >matches the buffer index used by this LOD's meshes</add>
+		<add name="bone_index" type="ushort" >Last bone that is used by this lod's models; usually decreases with increasing lod index to decimate bones. However: JWE detailobjects - nat_groundcover_searocket_patchy_02 due to dedicated lod nodes</add>
+		<add name="first_object_index" type="ushort" >first object for this lod in objects list</add>
+		# apparent repeats, purpose unknown
+		<add name="first_object_index_1" type="ushort" until="13"/>
+		<add name="first_object_index_2" type="ushort" until="13"/>
+		<add name="last object index" type="ushort" >not included in interval (python style indexing)</add>
+		<add name="vertex count" type="uint" since="32" until="51">vertex count of lod, sum of all vertex counts that are attached to this lod; rendered count, including duped models</add>
+		<add name="tri_index_count" type="uint" since="32" until="51" >number of index entries in the triangle index list; (not: number of triangles, byte count of tri buffer); rendered count, including duped models</add>
+	</compound>
+
+	<compound name="Object">
+		<add name="material index" type="ushort" >index into material name array</add>
+		<add name="mesh index" type="ushort" >index into mesh array</add>
+	</compound>
+
+	<compound name="MeshData" inherit="MemStruct">
+		used for shared functions
+		<add name="stream_index" type="uint64" until="32">index into streamed buffers</add>
+		<add name="stream_info" type="LookupPointer" template="BufferInfo" since="47">PZ and JWE use a ptr instead</add>
+		<add name="some_index" type="uint" until="51">increments somewhat in ZTUAC platypus, apparently unused from JWE onward</add>
+		<add name="some_index_2" type="uint" until="51" vercond="!#PC#">?</add>
+	</compound>
+
+	<compound name="ChunkedMesh" inherit="MeshData">
+		JWE2 after Biosyn update - 48 bytes incl. inheritance
+		<add name="chunks_offset" type="uint" >start index into list of verts / tris chunks</add>
+		<add name="chunks_count" type="uint" >count of verts / tris chunks</add>
+		<add name="tris_count" type="uint" />num triangles in mesh, *3 for byte size
+		<add name="vertex_count" type="uint" >num verts in mesh</add>
+		<add name="zero1" type="uint64">unk, may be used in other models</add>
+		<add name="poweroftwo" type="uint">power of 2 increasing with lod index</add>
+		<add name="unk_floats" type="float" arr1="2">some floats, purpose unknown</add>
+		<add name="flag" type="ChunkedModelFlag">seen 1 or 13</add>
+	</compound>
+
+	<compound name="NewMeshData" inherit="MeshData">
+		PZ, JWE2 - 64 bytes incl. inheritance
+		<add name="vertex_count" type="uint" />
+		<add name="tri_index_count" type="uint" >number of index entries in the triangle index list; (not: number of triangles, byte count of tri buffer)</add>
+		<add name="zero1" type="uint">always zero</add>
+		<add name="poweroftwo" type="uint">power of 2 increasing with lod index</add>
+		<add name="vertex offset" type="uint" >in bytes</add>
+		<add name="size of vertex" type="uint" default="48"/>
+		<add name="tri offset" type="uint">in bytes</add>
+		<add name="zero2" type="uint">always zero</add>
+		<add name="unk_floats" type="float" arr1="2">some floats, purpose unknown</add>
+		<add name="zero3" type="uint">always zero</add>
+		<add name="flag" type="ModelFlag">bitfield, determines vertex format</add>
+	</compound>
+
+	<compound name="PcMeshData" inherit="MeshData">
+		72 bytes total
+		<add name="tri_index_count a" type="uint" >repeat</add>
+		<add name="vertex_count" type="uint" />
+		<add name="tri offset" type="uint">x*16 = offset</add>
+		<add name="tri_index_count" type="uint" >number of index entries in the triangle index list; (not: number of triangles, byte count of tri buffer)</add>
+		<add name="vertex offset" type="uint" >x*16 = offset</add>
+		<add name="weights offset" type="uint">x*16 = offset</add>
+		<add name="uv offset" type="uint" >x*16 = offset</add>
+		<add name="zero a" type="uint" default="0"/>
+		<add name="vertex color offset" type="uint">x*16 = offset</add>
+		<add name="vertex offset within lod" type="uint" >cumulative count of vertices in mesh's lod before this mesh</add>
+		<add name="poweroftwo" type="uint">power of 2 increasing with lod index</add>
+		<add name="zero b" type="uint" default="0"/>
+		<add name="unk_float" type="float"/>
+		<add name="flag" type="ModelFlag">bitfield</add>
+		<add name="zero c" type="uint" default="0"/>this may be padding that might not be on the end of an array?
+	</compound>
+
+	<compound name="ZtMeshData" inherit="MeshData">
+		64 bytes total, same layout for DLA and ZTUAC
+		<add name="tri_index_count" type="uint" >repeat</add>
+		<add name="vertex_count" type="uint" />
+		<add name="tri_info_offset" type="uint">stores count, -1 as ints</add>
+		<add name="vert info offset" type="uint" >stores count, -1 as ints</add>
+		<add name="known ff 0" type="int"/>
+		<add name="tri offset" type="uint"/>
+		<add name="uv offset" type="uint" >variable dtype, can include vertices too</add>
+		<add name="vertex offset" type="uint">if present, blocks of 24 bytes</add>
+		<add name="unk_index" type="short"/>often -1, but not always
+		<add name="one 0" type="ushort"/>
+		<add name="one 1" type="ushort" >?</add>
+		<add name="poweroftwo" type="ushort"/>
+		<add name="flag" type="ModelFlagDLA" until="7">bitfield</add>
+		<add name="flag" type="ModelFlagZT" since="13">bitfield</add>
+		<add name="zero uac" type="uint" >always zero</add>
+	</compound>
+
+	<compound name="MeshDataWrap" inherit="MemStruct">
+		<add name="mesh" type="ChunkedMesh" since="52"/>
+		<add name="mesh" type="NewMeshData" since="47" until="51"/>
+		<add name="mesh" type="PcMeshData" vercond="#PC#"/>
+		<add name="mesh" type="ZtMeshData" vercond="#ZTUAC#"/>
+		<add name="mesh" type="ZtMeshData" vercond="#DLA#"/>
+	</compound>
+
+	<compound name="ZTPreBones">
+		<add name="zeros" type="uint64" arr1="2" />
+		<add name="unks" type="uint" arr1="8" />
+		<add name="unks2" type="uint" arr1="10" />
+		<add name="floats" type="float" arr1="4" />
+		<add name="unks3" type="uint" arr1="2" />
+	</compound>
+
+	<compound name="DLAPreBones">
+		<add name="unk" type="ubyte" arr1="120" />
+	</compound>
+
+	<compound name="FloatsY">
+		<add name="floats" type="float" arr1="8" />
+		<add name="index" type="uint" />
+	</compound>
+
+	<compound name="Model">
+		<add name="start ref" type="Empty"/>
+		<add name="materials" type="MaterialName" arr1="#ARG#\num_materials" >name pointers for each material</add>
+		<add name="lods" type="LodInfo" arr1="#ARG#\num_lods" >lod info for each level, only present if models are present (despite the count sometimes saying otherwise!)</add>
+		<add name="objects" type="Object" arr1="#ARG#\num_objects" >instantiate the meshes with materials</add>
+		<add name="mesh aligner" type="PadAlign" template="start ref" arg="8" until="32"/>
+		<add name="meshes" type="MeshDataWrap" arr1="#ARG#\num_meshes" >mesh data blocks for this model</add>
+		<add name="pre bones" type="ZTPreBones" vercond="#ZTUAC#" cond="#ARG# \ last_count">?</add>
+		<add name="pre bones" type="DLAPreBones" vercond="#DLA#" cond="#ARG# \ last_count">?</add>
+		<add name="floatsy" type="FloatsY" arr1="#ARG#\render flag" until="32">see if it is a flag for ztuac too, so might be totally wrong here</add>
+		alignment here is handled by py code, seems to depend on whether a bone info follows
+	</compound>
+
+	<compound name="ZtTriBlockInfo" >
+		8 bytes total
+		<add name="tri_index_count" type="uint" />
+		<add name="a" type="short" />
+		<add name="unk_index" type="short" />
+	</compound>
+
+	<compound name="ZtVertBlockInfo" >
+		16 bytes total
+		<add name="vertex_count" type="uint" />
+		<add name="flags" type="ubyte" arr1="8" />
+		<add name="zero" type="uint" />
+	</compound>
+
+	<compound name="InfoZTMemPool" >
+		<add name="unk count" type="ushort" >?</add>
+		<add name="unks" type="ushort" arr1="unk count" arr2="2" >?</add>
+	</compound>
+
+	<compound name="StreamsZTHeader" >
+		266 bytes ?
+		very end of buffer 0 after the names list
+		<add name="weird padding" type="SmartPadding">sometimes 00 byte</add>
+		<add name="unks" type="InfoZTMemPool" arr1="#ARG# \ static_buffer_index" >?</add>
+	</compound>
+
+	<compound name="Buffer0" >
+		<add name="name hashes" type="uint" arr1="#ARG#\name count" >djb2 hashes</add>
+		<add name="names" type="ZString" arr1="#ARG#\name count" >names</add>
+		<add name="names padding" type="PadAlign" template="names" arg="4" since="50">align to 4</add>
+		<add name="zt streams header" type="StreamsZTHeader" until="13" arg="#ARG#" />
+	</compound>
+
+	<compound name="BufferInfo" >
+		Fragment data describing a MS2 buffer giving the size of the whole vertex and tri buffer.
+		ZTUAC, DLA: 64 bytes verts, tris, uvs (incl. verts sometimes)
+		PC: 32 bytes, lumps all data (pos, uv, weights, tris) into verts_size
+		JWE: 48 bytes
+		PZ old: 32 bytes?
+		PZ1.6+ and JWE2: 56 bytes
+		JWE2 Biosyn: 88 bytes, with 4 values, order of arrays in buffer is verts, tris, tri_chunks, vert_chunks
+
+		JWE and PC, 16 bytes of 00 padding
+		<add name="u0" type="uint64" since="32" until="47" />
+		<add name="u1" type="uint64" since="32" until="47" />
+
+		<add name="tri_chunks_size" type="uint64" since="52"/>
+		<add name="tri_chunks_ptr" type="uint64" since="52"/>
+		<add name="vert_chunks_size" type="uint64" since="52"/>
+		<add name="vert_chunks_ptr" type="uint64" since="52"/>
+
+		<add name="verts_size" type="uint64"/>
+		<add name="verts_ptr" type="uint64"/>
+		PC ends here
+		PZ+, another 8 empty bytes
+		<add name="u3" type="uint64" since="48" until="52"/>
+		on all games except PC
+
+		at offset 56 in JWE2
+		<add name="tris_size" type="uint64" vercond="!#PC#"/>
+		<add name="tris_ptr" type="uint64" vercond="!#PC#"/>
+		PZ+, another 16 empty bytes
+		<add name="u5" type="uint64" since="48" until="52"/>
+		<add name="u6" type="uint64" since="48" until="52"/>
+		alternative end, ZTUAC style
+		<add name="u5" type="uint64" until="13" />
+		<add name="uvs_size" type="uint64" until="13" >from start of tris buffer</add>
+		<add name="u6" type="uint64" until="13" />
+		<add name="u7" type="uint64" until="13" />
+	</compound>
+
+	<compound name="ModelInfo" inherit="MemStruct">
+		Describes one model, corresponding to a virtual .mdl2 file
+		JWE2 - 192 bytes
+		JWE2 Biosyn - 160 bytes
+		<add name="unk dla" type="uint64" until="7">??</add>
+		<add name="bounds min" type="Vector3">the smallest coordinates across all axes</add>
+		<add name="precision" type="float" since="47" until="51">related to the inverse of pack_base</add>
+		<add name="bounds max" type="Vector3">the biggest coordinates across all axes</add>
+		<add name="pack_base" type="float" since="47" until="51">scale: pack_base / 512, also added as offset</add>
+		<add name="center" type="Vector3">cog? medium of bounds?</add>
+		<add name="radius" type="float" >probably from center to max</add>
+		<add name="num_lods_2" type="uint64" since="48" until="51">seen 6 or 1, matches lod count</add>
+		<add name="zero" type="uint64" since="48" until="51">zero</add>
+		<add name="bounds min repeat" type="Vector3" since="32">verbatim repeat</add>
+		<add name="bounds max repeat" type="Vector3" since="32">verbatim repeat</add>
+<!--		array counts-->
+		<add name="num_materials" type="ushort"/>
+		<add name="num_lods" type="ushort"/>
+		<add name="num_objects" type="ushort"/>
+		<add name="num_meshes" type="ushort">count of MeshData fragments for the mdl2 this struct refers to</add>
+		<add name="last_count" type="ushort">?</add>
+		<add name="render_flag" type="RenderFlag">this has influence on whether newly added shells draw correctly; for PZ usually 4, except for furry animals; ZT african ele female</add>
+		<add name="unks" type="ushort" arr1="7">?</add>
+		<add name="pad" type="ushort" arr1="3" > </add>
+
+		<add name="materials" type="ArrayPointer" template="MaterialName" arg="num_materials"/>
+		<add name="lods" type="ArrayPointer" template="LodInfo" arg="num_lods"/>
+		<add name="objects" type="ArrayPointer" template="Object" arg="num_objects"/>
+		<add name="meshes" type="ArrayPointer" template="MeshDataWrap" arg="num_meshes"/>
+		<add name="first_model" type="Pointer">points to the start of this ModelInfo's model, usually starts at materials
+			stays the same for successive mdl2s in the same model; or points to nil if no models are present</add>
+
+		<add name="zeros" type="uint64" arr1="4" vercond="#ZTUAC#"/>
+		<add name="zeros" type="uint64" arr1="2" vercond="#DLA#"/>
+		<add name="increment flag" type="uint64">used to increment skeleton index</add>
+		<add name="zero 0" type="uint64" vercond="!#DLA#"/>
+		<add name="zero 1" type="uint64" vercond="!#PC#"/>
+		<add name="zero 2" type="uint64" since="47" until="51"/>
+	</compound>
+
+	<compound name="ModelReader">
+		This reads and assigns models to each model_info that is passed to it
+	</compound>
+
+	<compound name="Ms2InfoHeader">
+		Custom header struct
+		<add name="biosyn" type="BiosynVersion"/>
+		<add name="bone_info_size" type="uint"/>
+		<add name="num_streams" type="uint"/>
+		<add name="info" type="Ms2Root"/>
+		<add name="buffer_pointers" type="BufferPresence" arr1="info \ vertex_buffer_count" since="7">used since DLA</add>
+		<add name="mdl2 names" type="ZString" arr1="info \ mdl2_count"/>
+		<add name="modelstream_names" type="ZString" arr1="num_streams" />
+		<add name="buffer 0" type="Buffer0" arg="info" />
+<!--		corresponds to PC buffer 1-->
+		<add name="buffer_infos" type="BufferInfo" arr1="info \ vertex_buffer_count" />
+		<add name="model_infos" type="ModelInfo" arr1="info \ mdl2_count"/>
+		models and bone infos follow, either separate (new) or interleaved for each modelinfo (old)
+		<add name="models_reader" type="ModelReader" arg="model_infos" >handles interleaved (old) or separate (new) styles for models and bone infos</add>
+		many ZTUAC models have a big undecoded array of uints here
+		the vertex and face data buffers follow
+	</compound>
+
+	<compound name="TriChunk" >
+		JWE2 Biosyn: 64 bytes
+		<add name="bounds min" type="Vector3">the smallest coordinates across all axes, min of unpacked vert coords if loc is 0,0,0</add>
+		<add name="material_index" type="ushort"/> 0, 1, 2
+		<add name="tris_count" type="ushort"/>
+		<add name="bounds max" type="Vector3">the biggest coordinates across all axes, max of unpacked vert coords if loc is 0,0,0</add>
+		<add name="tris_offset" type="uint"/>bytes into tris buffer
+		<add name="loc" type="Vector3">can be 0,0,0, no obvious range, not always within range of bounds</add>
+		<add name="rot" type="AxisAngle">can be 1, 0, 0, 0; w always in range -1, +1</add>
+		<add name="shell_index" type="ushort"/> 0, 1, 2 - increments per shell layer
+		<add name="shell_count" type="ushort"/> 0 or 3 in theri
+	</compound>
+	
+	<compound name="VertChunk" >
+		JWE2 Biosyn: 16 bytes
+		<add name="scale" type="float" >apparently also used for scaling the mesh: pack_base / 512 / 2048 = scale</add>
+		<add name="pack_base" type="float" >the usual mesh scale: pack_base / 512, also added as offset during vertex packing</add>
+		<add name="vertex_offset" type="uint" >byte offset from start of vert buffer in bytes</add>
+		<add name="vertex_count" type="ubyte"/>confirmed
+		<add name="weights_flag" type="WeightsFlag" until="51">determines if weights are used by this chunk</add>
+		<add name="weights_flag" type="WeightsFlagMalta" since="52">determines if weights are used by this chunk</add>
+		<add name="zero" type="ubyte"/>always
+	</compound>
+
+	<compound name="MinusPadding">
+		Used in PC
+		<add name="indices" type="short" arr1="#ARG#" >-1</add>
+		<add name="padding" type="byte" arr1="(16 - ((#ARG# * 2) % 16)) % 16" >0</add>
+	</compound>
+
+	<compound name="ZerosPadding">
+		1 bit per bone, padded to 8 bytes, all 00
+		<add name="hier2padding 0" type="uint64"/>
+		<add name="hier2padding 1" type="uint64" cond="64 #LT# #ARG#">128 still has 16 bytes</add>
+		<add name="hier2padding 2" type="uint64" cond="128 #LT# #ARG#">129 is the first with 24 bytes</add>
+	</compound>
+
+	<compound name="UACJoint">
+		36 bytes
+		<add name="unk" type="ushort" arr1="6" >variable</add>
+		<add name="floats" type="float" arr1="6">some at least</add>
+	</compound>
+
+	<compound name="AbstractPointer" abstract="true">
+		forward pointing, of varying size
+	</compound>
+
+	<compound name="BonePointer" inherit="AbstractPointer">
+<!--		<add name="index" type="ubyte" until="52">index into bones</add>-->
+<!--		<add name="index" type="ushort" since="53">index into bones</add>-->
+		<add name="index" type="BonePointerIndex" >index into bones</add>
+	</compound>
+
+	<compound name="RotationRange">
+		tentative interpretation
+		<add name="min" type="float"/>
+		<add name="max" type="float"/>
+	</compound>
+
+	<compound name="IKEntry">
+		60 bytes
+		<add name="child" type="BonePointer"/>
+		<add name="parent" type="BonePointer"/>
+		<add name="unk0" type="ushort" default="0"/>
+		<add name="matrix" type="Matrix33" >no clue what space this is in, defines the orientation for the ranges</add>
+		<add name="yaw" type="RotationRange"/>
+		<add name="pitch" type="RotationRange"/>
+		<add name="unk1" type="uint" default="1"/>
+	</compound>
+
+	<compound name="IKTarget">
+		2 bytes
+		<add name="ik_blend" type="BonePointer"/>
+		<add name="ik_end" type="BonePointer"/>
+	</compound>
+
+	<compound name="IKInfo">
+		<add name="weird padding" type="SmartPadding" until="13" >needed for ZTUAC</add>
+<!--		<add name="zeros start" type="ubyte" until="13" arr1="6">guess for ZTUAC rhino, wrong for afr ele child</add>-->
+		<add name="ik_count" type="uint64">repeat</add>
+		<add name="ik_ptr" type="uint64"/>
+		<add name="ik_targets_count" type="uint64" since="48">seen 0, 2, 4</add>
+		<add name="ik_targets_ptr" type="uint64" since="48"/>
+		<add name="ik ref" type="Empty"/>
+		<add name="ik_list" type="UACJoint" arr1="ik_count" until="13"/>
+		<add name="ik_list" type="IKEntry" arr1="ik_count" since="32"/>
+		<add name="padding 0" type="PadAlign" template="ik ref" arg="8"/>
+		<add name="ik_targets" type="IKTarget" arr1="ik_targets_count" since="50"/>
+		<add name="padding 1" type="PadAlign" template="ik ref" arg="8" since="50"/>
+	</compound>
+
+	<compound name="JointTransform">
+		Describes a joint in armature space.
+		<add name="rot" type="Matrix33" >the rotation of the joint, inverted</add>
+		<add name="loc" type="Vector3" >the location of the joint</add>
+	</compound>
+
+	<compound name="RigidBody">
+		<add name="flag" type="uint">2 kinematic, 0 1 static</add>
+		<add name="loc" type="Vector3" >center of mass - from the head of the bone the collider is attached to</add>
+		<add name="mass" type="float">mass of joint or object</add>
+		<add name="static friction" type="float">coefficient of static friction(small wants to roll, larger wants to slide)</add>
+		<add name="unk 1" type="float">2.0 in unk1 makes the object not to stop ever, it is breakdancing</add>
+		<add name="unk 2" type="float">Related to Bounciness</add>
+		<add name="unknown friction" type="float">NOT air resistance</add>
+		<add name="unk 4" type="float">?</add>
+		<add name="dynamic friction" type="float">coefficient of dynamic friction</add>
+	</compound>
+
+	<compound name="JointPointer" inherit="AbstractPointer">
+		<add name="index" type="ushort" >index into joint_infos</add>
+	</compound>
+
+	<compound name="Constraint">
+		<add name="parent" type="JointPointer"/>
+		<add name="child" type="JointPointer"/>
+	</compound>
+
+	<compound name="PushConstraint" inherit="Constraint">
+		used in JWE Pteranodon
+		no longer used in PZ, JWE2
+		might be some sort of avoidance
+		<add name="floats" type="float" arr1="3"/>
+	</compound>
+
+	<compound name="StretchConstraint" inherit="Constraint">
+		used in JWE dinos
+		no longer used in PZ, JWE2
+		<add name="loc" type="Vector3" >location of the joint</add>
+		<add name="direction" type="Vector3" >normalized</add>
+		<add name="min" type="float">min, le 0</add>
+		<add name="max" type="float">max, ge 0</add>
+	</compound>
+
+	<compound name="RagdollConstraint" inherit="Constraint">
+		probably ragdoll, lots of angles
+		<add name="loc" type="Vector3" >the location of the child joint</add>
+<!--		<add name="rot" type="Matrix33" >the rotation of the joint, inverted?? - first line == first line of child JointTransform</add>-->
+		<add name="floats" type="float" arr1="5" arr2="3" >each of the vec3 components is normalized, these might represent axes for the angles</add>
+		<add name="radians" type="float" arr1="8">radians</add>
+	</compound>
+
+	<compound name="UACJointFF">
+		<add name="eleven" type="uint">must be 11</add>
+		<add name="FFs" type="int" arr1="4">bunch of -1's, and constants</add>
+		<add name="name" type="OffsetString" arg="#ARG#"/>
+		<add name="hitcheck count" type="uint"/>
+		<add name="zeros" type="uint" arr1="3" >12 bytes of zeros</add>
+	</compound>
+
+	<compound name="Sphere">
+		<add name="center" type="Vector3" >center of the sphere</add>
+		<add name="radius" type="float" >radius around the center</add>
+		<add name="zero" type="uint" >apparently unused</add>
+	</compound>
+
+	<compound name="BoundingBox">
+		<add name="rotation" type="Matrix33"/>
+		<add name="center" type="Vector3" >center of the box</add>
+		<add name="extent" type="Vector3" >total width</add>
+		<add name="zeros" type="uint" arr1="3" vercond="#PC#" >probably padding</add>
+	</compound>
+
+	<compound name="Capsule">
+		<add name="offset" type="Vector3" >relative to the armature, ie. not in bone space</add>
+		<add name="direction" type="Vector3" >normalized</add>
+		<add name="radius" type="float" >radius of the caps</add>
+		<add name="extent" type="float" >distance between the center points of the capsule caps, total extent is 2 * radius + extent</add>
+		<add name="zero" type="uint" >apparently unused</add>
+	</compound>
+
+	<compound name="Cylinder" inherit="Capsule">
+		identical data to capsule, just imported differently
+	</compound>
+
+	<compound name="ConvexHull">
+		<add name="vertex count" type="uint" >16 for anubis: 4 hulls * 16 * 12 (size of vert)</add>
+		<add name="rotation" type="Matrix33"/>
+		<add name="offset" type="Vector3" >center of the box</add>
+		<add name="zeros" type="uint" arr1="5" vercond="#PC#" >probably padding</add>
+		<add name="zeros" type="uint" arr1="2" since="48" >probably padding</add>
+	</compound>
+
+	<compound name="SubA">
+		<add name="index" type="ubyte" >increases, starting at 1</add>
+		<add name="a" type="ubyte" default="240">?</add>
+		<add name="b" type="ubyte" default="237">?</add>
+		<add name="c" type="ubyte" default="254">?</add>
+	</compound>
+
+	<compound name="MeshCollisionBit">
+		<add name="a" type="ushort" arr1="24">?</add>
+		<add name="b" type="ushort" arr1="8">incrementing by 16 from 0, or if around 32769: incrementing by 1, mostly</add>
+		<add name="min_of_b" type="ushort" >usually, but not always the first value</add>
+		<add name="c" type="ushort" >?</add>
+		<add name="consts" type="uint" arr1="3">always 2954754766?</add>
+	</compound>
+
+	<compound name="SubCollChunk">
+<!--		<add name="zero" type="uint64"/>-->
+		<add name="bounds min repeat" type="Vector3" >verbatim</add>
+		<add name="bounds max repeat" type="Vector3" >verbatim</add>
+		<add name="tri flags count" type="uint" >seems to repeat tri_count</add>
+		<add name="count bits" type="ushort"  >counts MeshCollisionBit</add>
+		<add name="stuff" type="ushort" arr1="9" >?</add>
+		<add name="collision bits" type="MeshCollisionBit" arr1="count bits" >?</add>
+	</compound>
+
+	<compound name="MeshCollision">
+		JWE2: 188 bytes
+		<add name="rotation" type="Matrix33"/>
+		<add name="offset" type="Vector3" >offset of mesh</add>
+		<add name="unk1" type="SubA" arr1="3" >shared among (all?) redwoods</add>
+		<add name="unk2" type="uint" arr1="3" vercond="#PC#">found in PC FR_GrandCarousel</add>
+		<add name="vertex count" type="uint64" >vertices (3 float)</add>
+		<add name="tri count" type="uint64" >tris?, counts the 25s at the end</add>
+		<add name="bounds min" type="Vector3">the smallest coordinates across all axes</add>
+		<add name="bounds max" type="Vector3">the biggest coordinates across all axes</add>
+		<add name="flag 0" type="uint64" default="1"/>
+		<add name="flag 1" type="uint64" default="1"/>
+		<add name="has_SubCollChunk" type="uint64"/>seen 1 eg PZ widgetball_test_, or 0 in JWE2 characterscale and PZ CM_Common_Roofs
+		<add name="zeros 1" type="uint64" arr1="4"/>
+		<add name="ff" type="int" default="-1"/>
+		<add name="zeros 2" type="int" arr1="7"/>
+		<add name="weird padding" type="SmartPadding" arg="4">sometimes 8 bytes, apparently not part of SubCollChunk (JWE2 dev footplantingtest_ has that but not the padding)</add>
+		<add name="SubCollChunk" type="SubCollChunk" cond="has_SubCollChunk">seems to repeat tri_count</add>
+	</compound>
+
+	<compound name="HitCheck">
+		JWE2: 20 bytes excluding collider
+		<add name="dtype" type="CollisionType"/>
+		<add name="flag_0" type="ushort" default="0">PZ, JWE2 always 0</add>
+		<add name="flag_1" type="ushort" default="0">JWE: 16; PZ, JWE2 always 0</add>
+		<add name="collision_layers" type="uint64" until="47">probably a bitfield, not sure though, might be a list of ubytes too</add>
+		<add name="collision_ignore" type="OffsetString" arg="#ARG#" since="48"/>
+		<add name="collision_use" type="OffsetString" arg="#ARG#" since="48"/>
+		<add name="zero_extra_pc" type="uint" until="32">?</add>
+		<add name="name" type="OffsetString" arg="#ARG#"/>
+
+		<add name="collider" type="Sphere" cond="dtype == 0" />
+		<add name="collider" type="BoundingBox" cond="dtype == 1" />
+		<add name="collider" type="Capsule" cond="dtype == 2" />
+		<add name="collider" type="Cylinder" cond="dtype == 3" />
+		<add name="collider" type="ConvexHull" cond="dtype == 7" />
+		<add name="collider" type="ConvexHull" cond="dtype == 8" />
+		<add name="collider" type="MeshCollision" cond="dtype == 10" />
+		<add name="zero_extra_zt" type="uint" vercond="#ZTUAC#">?</add>
+	</compound>
+
+	<compound name="JointInfo">
+		#ARG# is the names buffer
+		the following defaults are all the same in PZ and JWE2 as of 2022-10-14
+		<add name="eleven" type="uint" default="11"/>
+		<add name="zero_0" type="int" default="0"/>
+		<add name="zero_1" type="int" default="0"/>
+		<add name="minus_1" type="int" default="-1"/>
+		<add name="name" type="OffsetString" arg="#ARG#"/>
+		<add name="hitcheck count" type="uint"/>
+		<add name="zero_2" type="uint64" >8 bytes of zeros</add>
+		<add name="hitcheck_pointers" type="uint64" arr1="hitcheck count">8 bytes of zeros per hitcheck</add>
+		<add name="hitchecks" type="HitCheck" arr1="hitcheck count" arg="#ARG#"/>
+	</compound>
+
+	<compound name="HitcheckReader">
+		This reads and assigns hitchecks to each jointinfo that is passed to it
+	</compound>
+
+	<compound name="JointData">
+		<add name="start_pc" type="SmartPadding" vercond="#PC#">seemingly additional alignment, unsure about the rule</add>
+		<add name="before_dla_0" type="uint64" until="7"/>
+		<add name="before_dla_1" type="uint64" until="7"/>
+		<add name="joint_count" type="uint" >repeat</add>
+		<add name="num_push_constraints" type="uint"/>
+		<add name="num_stretch_constraints" type="uint"/>
+		<add name="num_ragdoll_constraints" type="uint"/>
+		<add name="zero 0" type="uint" until="32"/>
+		<add name="zero 1" type="uint" since="13" until="32"/>
+		<add name="namespace length" type="uint" >size of the name buffer below, including trailing zeros</add>
+		<add name="zeros 0" type="uint" arr1="5" >0s</add>
+		<add name="pc count" type="uint" >0 or 1</add>
+		<add name="zeros 1" type="uint" arr1="7">0s</add>
+		<add name="extra zeros 2" type="uint" arr1="4" since="13" until="32">0s</add>
+		<add name="one_0" type="uint64" since="13" default="1"/>
+		<add name="one_1" type="uint64" since="13" default="1"/>
+		<add name="bone count" type="uint" >matches bone count from bone info</add>
+		<add name="joint entry count" type="uint"/>
+		<add name="zeros 2" type="uint" arr1="4">usually 0s</add>
+		<add name="zeros 3" type="uint" until="7" >usually 0s</add>
+		<add name="names_ref" type="Empty"/>
+		<add name="joint_transforms" type="JointTransform" arr1="joint_count" >corresponds to bone transforms</add>
+
+		<add name="rigid_body_pointers" type="uint64" arr1="joint_count" since="47"/>
+		<add name="rigid_body_list" type="RigidBody" arr1="joint_count" since="47"/>
+		<add name="push_constraints" type="PushConstraint" arr1="num_push_constraints" since="47"/>
+		<add name="stretch_constraints" type="StretchConstraint" arr1="num_stretch_constraints" since="47"/>
+		<add name="ragdoll_constraints" type="RagdollConstraint" arr1="num_ragdoll_constraints" since="47"/>
+
+		todo arg="joint_names" for names reader fails here because joint_names is defined later
+		<add name="joint_infos" type="UACJointFF" arr1="joint count" until="32">old style - joint infos, without hitchecks, they are added later</add>
+		<add name="pc floats" type="float" arr1="pc count" arr2="10" until="32">sometimes an array of floats</add>
+
+		<add name="names_ref_pc" type="Empty"/>
+		<add name="joint_to_bone" type="int" arr1="joint_count" >index into bone info bones for each joint; bone that the joint is attached to</add>
+		<add name="bone_to_joint" type="int" arr1="bone count" >the inverse of the above; for each bone info bone, index of the corresponding joint or -1 if no joint</add>
+		<add name="joint_names" type="ZStringBuffer" arg="namespace length"/>
+		<add name="JointNamesPadding" type="PadAlign" template="names_ref" arg="8"/>known to be valid for JWE, may be present before already
+		<add name="after_names" type="AfterJointsPadding" until="32" arg="8">
+			this seems to be always multiples of 8 bytes
+			fails on PC SP_Scarecrow, because its first hitcheck has collision type 0
+			old, not sure what ms2: the padding goes wrong on 144</add>
+		<add name="joint_infos" type="JointInfo" arr1="joint count" arg="joint_names" since="47">new style - includes name offset, some flags and the hitchecks</add>
+		<add name="hitcheck_reader" type="HitcheckReader" arg="#SELF#" until="32">old style - for each joint, read the hitchecks</add>
+	</compound>
+
+	<compound name="BoneInfo">
+		# 858 in DLA c_cl_thread_.ms2
+		<add name="name count" type="uint"/>
+		<add name="z0" type="ushort" >?</add>
+		<add name="inv_names_count" type="ushort"/>
+		<add name="bone_limits" type="BonePointer" default="-1" arr1="2" since="32" until="52"/>
+		<add name="zero 0" type="short" default="0" since="32" until="52"/>
+		<add name="unknown0c" type="uint" since="32"/>
+		<add name="unk count" type="uint" >almost always 4, 1 for male african lion</add>
+		<add name="unk unused" type="uint"  until="52"/>
+		<add name="war_a" type="ushort" since="53">?</add>
+		<add name="bone_limits" type="BonePointer" default="-1" arr1="2" since="53"/>
+		<add name="war_b" type="ushort" since="53">?</add>
+		<add name="bind matrix count" type="uint64"/>
+		<add name="zeros" type="uint64" arr1="2"/>
+		<add name="inv_data_count" type="uint64" /> if inv_names_count = 1, also 1 for DLA
+		<add name="bone count" type="uint64"/>
+		<add name="unknown40" type="uint64"/>
+		<add name="parents count" type="uint64"/>
+		<add name="extra zero" type="uint64" vercond="!(#PC# #OR# #JWE#)">not PC, JWE</add>
+		<add name="enum count" type="uint64"/>
+		<add name="unknown58" type="uint64" >usually zero</add>
+		<add name="one" type="uint64" default="1" >always 1</add>
+		<add name="zeros count" type="uint64" >this counts the weird padding at the end, usually == bone count, 0 in PZ aardvark</add>
+		<add name="unk_pc_count" type="uint64" vercond="#PC#">matches the other count on dino entertainer, but ik_count is not present</add>
+		<add name="ik_count" type="uint64"/>
+		<add name="joint count" type="uint64"/>
+		<add name="zero 1" type="uint64" default="0"/>
+		<add name="zero 2" type="uint64" default="0" until="13"/>
+		<add name="zero 3" type="uint64" default="0" vercond="#JWE#"/>
+
+		<add name="names ref" type="Empty"/>
+		index into ms2 string table for bones used here
+		<add name="name indices" type="ushort" arr1="name count" until="32"/>
+		<add name="name indices" type="uint" arr1="name count" since="47"/>
+		<add name="inventory name indices" type="ushort" arr1="inv_names_count" until="32"/>
+		<add name="name padding" type="PadAlign" template="names ref" arg="16" >align to 16 bytes</add>
+		# hook size 8256
+		<add name="inverse bind matrices" type="Matrix44" arr1="bind matrix count">used for skinning</add>
+		# hook start at 13153
+		<add name="bones" type="Bone" arr1="bone count"/>
+		<add name="parents" type="ubyte" arr1="parents count" until="52" >255 = root, index in this list is the current bone index, value is the bone's parent index</add>
+		<add name="parents" type="ushort" arr1="parents count" since="53" >255 = root, index in this list is the current bone index, value is the bone's parent index</add>
+		<add name="parents_padding" type="PadAlign" template="names ref" arg="8" since="32">align to 8 bytes</add>
+		<add name="enumeration" type="uint" arr1="enum count" arr2="2" cond="one" since="32" >enumerates all bone indices, 4 may be flags</add>
+		<add name="enumeration" type="ubyte" arr1="enum count" cond="one" until="13" >enumerates all bone indices</add>
+
+		# experimental stuff for DLA cpt. hook model
+		<add name="inventory_datas" type="byte" arr1="inv_data_count" arr2="6" vercond="#DLA#">zeros</add>
+
+		<add name="weirdness" type="short" arr1="8" vercond="#DLA#">-1s and 0s</add>
+		<add name="weirdness" type="short" arr1="10" vercond="#ZTUAC#">zeros</add>
+
+		<add name="inventory_datas_2" type="int" arr1="inv_data_count" arr2="2" vercond="#DLA#">zeros</add>
+
+		<add name="MinusPadding" type="MinusPadding" cond="zeros count" arg="zeros count" until="32">weird -1s</add>
+		# JWE may not have these, apparently they are present in final JWE
+		<add name="ZerosPadding" type="ZerosPadding" cond="zeros count" arg="zeros count" since="47">weird zeros</add>
+
+<!--		<add name="unkPc" type="uint64" cond="unk_pc_count" vercond="#PC#">present in anubis bone info 6</add>-->
+		<add name="ik info" type="IKInfo" cond="ik_count" arg="#SELF#">IK Data</add>
+<!--		<add name="NewPcStruct" type="NewPcStruct" cond="unk_pc_count" >ragdoll links?</add>-->
+<!--		<add name="joint debug" type="StreamDebugger" cond="joint count" >joints</add>-->
+		<add name="joints" type="JointData" cond="joint count" >joints</add>
+<!--		<add name="extra zero pad no joints" type="uint64" cond="! joint count" vercond="#PC#">?</add>-->
+
+
+	</compound>
+
+	<compound name="MeshCollisionData">
+		<add name="tris_salt" type="uint" arr1="4" cond="#ARG#\has_SubCollChunk">usually zero, nonzero in JWE2 dev footplant, [1] used as salt for tri indices</add>
+
+		<add name="vertices addr" type="Empty"/>
+		<add name="vertices" type="float" arr1="#ARG#\vertex count" arr2="3">array of vertices</add>
+		<add name="triangles addr" type="Empty"/>
+		<add name="triangles" type="ushort" arr1="#ARG#\tri count" arr2="3">triangle indices into vertex list</add>
+
+		<add name="const" type="uint" until="47">?</add>
+		<add name="triangle flags" type="uint" arr1="#ARG#\sub_coll_chunk\tri flags count" cond="const" until="47">in JWE redwood: always 37</add>
+		<add name="zero end" type="uint" >might be padding!</add>
+	</compound>
+
+</niftoolsxml>

@@ -1,0 +1,34 @@
+from nifgen.formats.nif.imports import name_type_map
+from nifgen.formats.nif.niparticle.niobjects.NiPSysVolumeEmitter import NiPSysVolumeEmitter
+
+
+class NiPSysBoxEmitter(NiPSysVolumeEmitter):
+
+	"""
+	Particle emitter that uses points within a defined Box shape to emit from.
+	"""
+
+	__name__ = 'NiPSysBoxEmitter'
+
+
+	def __init__(self, context, arg=0, template=None, set_default=True):
+		super().__init__(context, arg, template, set_default=False)
+		self.width = name_type_map['Float'](self.context, 0, None)
+		self.height = name_type_map['Float'](self.context, 0, None)
+		self.depth = name_type_map['Float'](self.context, 0, None)
+		if set_default:
+			self.set_defaults()
+
+	@classmethod
+	def _get_attribute_list(cls):
+		yield from super()._get_attribute_list()
+		yield 'width', name_type_map['Float'], (0, None), (False, None), (None, None)
+		yield 'height', name_type_map['Float'], (0, None), (False, None), (None, None)
+		yield 'depth', name_type_map['Float'], (0, None), (False, None), (None, None)
+
+	@classmethod
+	def _get_filtered_attribute_list(cls, instance, include_abstract=True):
+		yield from super()._get_filtered_attribute_list(instance, include_abstract)
+		yield 'width', name_type_map['Float'], (0, None), (False, None)
+		yield 'height', name_type_map['Float'], (0, None), (False, None)
+		yield 'depth', name_type_map['Float'], (0, None), (False, None)

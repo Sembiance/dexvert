@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="FMVDescRoot" inherit="MemStruct">
+        <add name="asset_path" type="Pointer" template="ZString" />
+        <add name="_zero01"    type="uint64" />
+        <add name="_zero02"    type="uint64" />
+        # found 65 all the time
+        <add name="unk_65"    type="uint" />
+        # found 1.0 in speed all the time, so just a guess
+        <add name="speed"      type="float" />
+        <add name="_zero03"    type="uint64" />
+        <add name="_zero04"    type="uint64" />
+        <add name="_zero05"    type="uint64" />
+        <add name="_zero06"    type="uint64" />
+    </compound>
+
+</niftoolsxml>

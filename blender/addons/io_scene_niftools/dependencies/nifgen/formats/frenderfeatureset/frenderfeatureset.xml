@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="FRenderFeatureSetRoot" inherit="MemStruct">
+        <add name="featureset_list"    type="ArrayPointer" template="FeatureSetItem" arg="featureset_count"/>
+        <add name="featureset_count"   type="uint" />
+        <add name="unknown_always_1"   type="uint" />
+    </compound>
+
+    <compound name="FeatureSetItem" inherit="MemStruct">
+        <add name="feature_name"  type="Pointer" template="ZString"/>
+    </compound>
+
+</niftoolsxml>

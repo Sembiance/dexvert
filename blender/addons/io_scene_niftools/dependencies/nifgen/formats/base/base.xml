@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+	
+    <token name="operator" attrs="cond vercond arr1 arr2 arg">
+        All Operators except for unary not (!), parentheses, and member of (\)
+        NOTE: These can be ignored entirely by string substitution and dealt with directly.
+        NOTE: These must be listed after the above tokens so that they replace last. For example, `verexpr` uses these tokens.
+        <operator token="#ADD#" string="+" />
+        <operator token="#SUB#" string="-" />
+        <operator token="#MUL#" string="*" />
+        <operator token="#DIV#" string="/" />
+        <operator token="#AND#" string="&amp;&amp;" />
+        <operator token="#OR#" string="||" />
+        <operator token="#LT#" string="&lt;" />
+        <operator token="#GT#" string="&gt;" />
+        <operator token="#LTE#" string="&lt;=" />
+        <operator token="#GTE#" string="&gt;=" />
+        <operator token="#EQ#" string="==" />
+        <operator token="#NEQ#" string="!=" />
+        <operator token="#RSH#" string="&gt;&gt;" />
+        <operator token="#LSH#" string="&lt;&lt;" />
+        <operator token="#BITAND#" string="&amp;" />
+        <operator token="#BITOR#" string="|" />
+        <operator token="#MOD#" string="%" />
+    </token>
+
+    <basic name="byte" integral="true" countable="false">
+        An signed 8-bit integer.
+    </basic>
+    <basic name="ubyte" integral="true" countable="true">
+        An unsigned 8-bit integer.
+    </basic>
+
+    <basic name="uint64" integral="true" countable="true">
+        An unsigned 64-bit integer.
+    </basic>
+
+    <basic name="int64" integral="true" countable="true">
+        A signed 64-bit integer.
+    </basic>
+
+    <basic name="uint" integral="true" countable="true">
+        An unsigned 32-bit integer.
+    </basic>
+    <basic name="ushort" integral="true" countable="true">
+        An unsigned 16-bit integer.
+    </basic>
+
+    <basic name="int" integral="true" countable="false">
+        A signed 32-bit integer.
+    </basic>
+
+    <basic name="short" integral="true" countable="false">
+        A signed 16-bit integer.
+    </basic>
+	
+    <basic name="char" integral="true" countable="false">
+        An 8-bit character.
+    </basic>
+	
+    <basic name="normshort" integral="false">
+        Packed float in a short.
+    </basic>
+    <basic name="rangeshort" integral="false">
+        Packed float in a short.
+    </basic>
+
+    <basic name="float" integral="false">
+        A standard 32-bit floating point number.
+    </basic>
+
+    <basic name="double" integral="false">
+        A standard 64-bit floating point number.
+    </basic>
+
+    <basic name="hfloat" integral="false">
+        A standard 16-bit floating point number.
+    </basic>
+
+    <basic name="ZString" integral="false">
+        A string that ends with a null byte (0x00).
+    </basic>
+
+    <compound name="ZStringBuffer" count="0" >
+        Holds a buffer of zero-terminated strings
+    </compound>
+
+    <compound name="PadAlign">
+        Grabs as many bytes as needed to align #ARG# bytes from the start of #TEMPLATE#
+    </compound>
+
+    <compound name="FixedString" count="0" >
+        Holds a string of a fixed size, given as #ARG#.
+    </compound>
+
+    <compound name="Vector2" size="8">
+        A vector in 2D space (x,y).
+        <field name="x" type="float">First coordinate.</field>
+        <field name="y" type="float">Second coordinate.</field>
+    </compound>
+
+	<compound name="Vector3" size="12">
+		A vector in 3D space (x,y,z).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+	</compound>
+
+    <compound name="Vector4" size="16">
+        A vector in 3D space (x,y,z).
+        <field name="x" type="float">First coordinate.</field>
+        <field name="y" type="float">Second coordinate.</field>
+        <field name="z" type="float">Third coordinate.</field>
+        <field name="w" type="float">Fourth coordinate.</field>
+    </compound>
+</niftoolsxml>

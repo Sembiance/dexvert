@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="TrackedRideCarRoot" inherit="MemStruct">
+        48 bytes
+        <add name="sub" type="ArrayPointer" template="TrackedRideCarSub" arg="sub_count"/>
+        <add name="sub_count" type="uint" />
+        <add name="total_vecs_count" type="uint" />probably total of all sub count1
+        <add name="vec" type="float" arr1="3" />
+        <add name="zero0" type="uint" />
+        <add name="some_name" type="Pointer" template="ZString"/>
+        <add name="zero1" type="uint64" />
+    </compound>
+
+    <compound name="TrackedRideCarSub" inherit="MemStruct">
+        32 bytes
+        <add name="float" type="float" />
+        <add name="u0" type="uint" />
+        <add name="vectors" type="ArrayPointer" template="Vector3" arg="vecs_count"/>
+        <add name="vecs_count" type="uint64" />
+        <add name="zero1" type="uint64" />
+    </compound>
+
+    <compound name="Vector3" inherit="MemStruct">
+        12 bytes
+        <add name="floats" type="float" arr1="3" />
+    </compound>
+
+</niftoolsxml>

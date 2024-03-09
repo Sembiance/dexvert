@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="TexAtlasRoot" inherit="MemStruct">
+        <add name="texture_list" type="ArrayPointer" template="TextureData" arg="texture_count"/>
+        <add name="texture_count" type="uint64" />
+        <add name="atlas_list" type="ArrayPointer" template="AtlasItem" arg="atlas_count"/>
+        <add name="atlas_count" type="uint64" />
+    </compound>
+
+    <compound name="TextureData" inherit="MemStruct">
+        <add name="atlas_name" type="Pointer" template="ZString"/>
+        <add name="dependency_name" type="Pointer" >texture</add>
+    </compound>    
+
+    <compound name="AtlasItem" inherit="MemStruct">
+        <add name="atlas_name" type="Pointer" template="ZString"/>
+        <add name="startx" type="float" />
+        <add name="starty" type="float" />
+        <add name="endx" type="float" />
+        <add name="endy" type="float" />
+        <add name="layer" type="uint" />
+        <add name="flags1" type="ushort" />
+        <add name="flags2" type="ushort" />
+
+    </compound>
+
+</niftoolsxml>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="Variant" inherit="MemStruct" >
+        <add name="has_ptr" type="uint64"/>
+        <add name="variant_name" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="VariantArray" inherit="MemStruct" >
+        <add name="variants" type="Variant" arr1="#ARG#"/>
+    </compound>
+
+    <compound name="DinoVariantsHeader" inherit="MemStruct" >
+		# set_count - seen either 0 or 1, could possibly be more, would need refactor in that case
+		# no set_count for rex 93 - has no materialpatterns, so that's probably why it's different
+        <add name="fgm_name" type="Pointer" template="ZStringObfuscated"/>
+        <add name="has_sets" type="uint64"/>
+        <add name="set_name" type="Pointer" template="ZString"/>
+        <add name="variants" type="Pointer" template="VariantArray" arg="variant_count"/>
+        <add name="variant_count" type="uint64"/>
+        <add name="zero" type="uint64"/>
+    </compound>
+
+
+    <compound name="Layer" inherit="MemStruct" >
+        <add name="has_ptr" type="uint64"/> should actually be 'increment'
+        <add name="texture_fgm_name" type="Pointer" template="ZString">defines the tiled texture material to be used</add>
+        <add name="transform_fgm_name" type="Pointer" template="ZString">defines how to transform the texture</add>
+    </compound>
+
+    <compound name="LayerArray" inherit="MemStruct" >
+        <add name="layers" type="Layer" arr1="#ARG#"/>
+    </compound>
+
+    <compound name="DinoLayersHeader" inherit="MemStruct" >
+        <add name="fgm_name" type="Pointer" template="ZStringObfuscated"/>
+        <add name="layers" type="ArrayPointer" template="Layer" arg="layer_count"/>
+        <add name="layer_count" type="uint64"/>
+        <add name="zero" type="uint64"/>
+    </compound>
+
+
+    <compound name="Pattern" inherit="MemStruct" >
+        <add name="has_ptr" type="uint64"/>
+        <add name="pattern_name" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="PatternArray" inherit="MemStruct" >
+        <add name="patterns" type="Pattern" arr1="#ARG#"/>
+    </compound>
+
+    <compound name="DinoPatternsHeader" inherit="MemStruct" >
+        <add name="fgm_name" type="Pointer" template="ZStringObfuscated"/>
+        <add name="set_count" type="uint64"/>
+        <add name="set_name" type="Pointer" template="ZString"/>
+        <add name="patterns" type="Pointer" template="PatternArray" arg="pattern_count"/>
+        <add name="pattern_count" type="uint64"/>
+        <add name="zero" type="uint64"/>
+    </compound>
+
+    <compound name="Vector3f" inherit="MemStruct" >
+        <add name="x" type="float"/>
+        <add name="y" type="float"/>
+        <add name="z" type="float"/>
+    </compound>
+
+    <compound name="DinoEffectsHeader" inherit="MemStruct" >
+<!--"<Q 6f 2I 12f 2I 2f I 39f I f"-->
+        <add name="fgm_name" type="Pointer" template="ZStringObfuscated"/>
+        <add name="vec0" type="Vector3f"/>
+        <add name="vec1" type="Vector3f"/>
+        <add name="a" type="uint"/>
+        <add name="b" type="uint"/>
+        <add name="vec2" type="Vector3f"/>
+        <add name="vec3" type="Vector3f"/>
+        <add name="vec4" type="Vector3f"/>
+        <add name="vec5" type="Vector3f"/>
+        <add name="c" type="uint"/>
+        <add name="d" type="uint"/>
+        <add name="floats1" type="float" arr1="2"/>
+        <add name="e" type="uint"/>
+        <add name="floats2" type="float" arr1="2"/>
+        <add name="f" type="uint"/>
+        <add name="floats3" type="float" arr1="8"/>
+        <add name="g" type="uint"/>
+        <add name="floats4" type="float" arr1="6"/>
+        <add name="h" type="uint"/>
+        <add name="floats5" type="float" arr1="20"/>
+        <add name="i" type="uint"/>
+        <add name="float" type="float"/>
+     </compound>
+
+</niftoolsxml>

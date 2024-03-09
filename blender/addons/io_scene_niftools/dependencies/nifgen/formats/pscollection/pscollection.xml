@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+    <compound name="PscollectionRoot" inherit="MemStruct">
+        <add name="prepared_statements" type="ArrayPointer" template="PreparedStatement" arg="count"/>
+        <add name="count" type="uint64" />
+    </compound>
+
+    <compound name="PreparedStatement" inherit="MemStruct">
+        <add name="args" type="ArrayPointer" template="Arg" arg="arg_count"/>
+        <add name="arg_count" type="uint64" default="0" optional="True" />
+        <add name="statement_name" type="Pointer" template="ZString"/>
+        <add name="sql_query" type="Pointer" template="ZString"/>
+    </compound>
+
+    <compound name="Arg" inherit="MemStruct">
+        <add name="u0" type="ubyte" default="0" optional="True" />
+        <add name="argType" type="ubyte" />
+        <add name="argIndex" type="ubyte" >one-based index</add>
+        <add name="u1" type="ubyte" default="0" optional="True" />
+        <add name="u2" type="uint" default="0" optional="True" />
+        <add name="arg_name" type="Pointer" template="ZString"/>?
+        <add name="u4" type="uint64" default="0" optional="True" />
+    </compound>
+
+</niftoolsxml>

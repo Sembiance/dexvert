@@ -209,7 +209,6 @@ export default
 	{
 		amapi3DModel            : {name : "Amapi 3D Model", ext : [".a3d", ".x"], magic : ["Amapi 3D model"]},
 		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
-		blender3D               : {name : "Blender 3D", ext : [".blend"], magic : ["Blender 3D", "Blender3D", /^fmt\/902( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
 		electricImage3DFile     : {name : "Electric Image 3D File", ext : [".fact"], magic : ["ElectricImage 3D file"]},

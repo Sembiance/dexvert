@@ -11613,3 +11613,7 @@ STEP
 STL
 UG NX 3D
 VDA
+
+
+>>> AYAM https://ayam.sourceforge.net/features.html
+RIB, DXF, 3DM, 3DMF, OBJ, X3D

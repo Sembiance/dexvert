@@ -48,14 +48,15 @@ export class blender extends Program
 
 			bpy.ops.wm.read_factory_settings(use_empty=True)
 
+			${r.flags.format!=="native" ? `
 			${_VALID_FORMATS[r.flags.format].addon ? `bpy.ops.preferences.addon_enable(module="${_VALID_FORMATS[r.flags.format].addon}")` : ""}
 			#print(dir(bpy.ops.import_scene))
 			${_VALID_FORMATS[r.flags.format].importKey ? `bpy.ops.${_VALID_FORMATS[r.flags.format].importKey}(filepath=sys.argv[5])` : `bpy.ops.wm.${r.flags.format}_import(filepath=sys.argv[5])`}
 			
 			bpy.ops.wm.save_as_mainfile(filepath=sys.argv[6])
+			bpy.ops.wm.window_close()` : ""}
 
-			bpy.ops.wm.window_close()
-			bpy.ops.wm.open_mainfile(filepath=sys.argv[6])
+			bpy.ops.wm.open_mainfile(filepath=sys.argv[${r.flags.format==="native" ? "5" : "6"}])
 			bpy.ops.export_scene.gltf(filepath=sys.argv[7])`.trim().split("\n").map(l => l.trim()).join("\n"));
 	};
 	

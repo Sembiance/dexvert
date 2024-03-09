@@ -11445,7 +11445,6 @@ OTHER FILE FORMATS
 	X3D
 
 
-
 >>> MilkShape 3D 1.8.5 BETA 1  windows https://www.chumba.ch/chumbalum-soft/index.html
 3D Studio ASC
 Alias FBX
@@ -11494,3 +11493,123 @@ Unreal/UT Engine Skeletal Mesh PSK
 Vampire: the Masquerade NOD
 Warcraft III MDX
 Wavefront OBJ
+
+
+>>> VCG Library (used by Meshlab)  linux   https://vcg.isti.cnr.it/vcglib/fileformat.html
+import: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
+export: PLY, STL, OFF, OBJ, 3DS, COLLADA, VRML, DXF, GTS, U3D, IDTF, X3D
+
+
+>>> Unreal Engine Datasmith   windows + linux (limited support)   https://docs.unrealengine.com/5.3/en-US/datasmith-supported-software-and-file-types/    https://www.unrealengine.com/marketplace/en-US/product/unreal-datasmith
+Application						Version				Workflow Type		Importer Plugin
+3D ACIS							Up to 2023			Direct				CAD
+3DEXCITE DELTAGEN				2017-2023			Export (FBX only)	FBX
+ArcGIS CityEngine									Export Plugin		Datasmith
+Autodesk 3ds Max				2016-2024			Export Plugin		Datasmith
+Autodesk Alias					Up to 2023			Direct				CAD
+Autodesk AutoCAD									Direct				CAD
+Autodesk Inventor				Up to 2024			Direct				CAD
+Autodesk Revit					2016.3-2023*		Export Plugin		Datasmith
+Autodesk Navisworks				2019-2023			Export Plugin		Datasmith
+Autodesk VRED					2018-2023			Export Plugin		FBX
+Dassault Systèmes CATIA V5		Up to V5_6 R2023	Direct				CAD
+Dassault Systèmes SOLIDWORKS	Up to 2023			Export Plugin		CAD
+Dassault Systèmes SOLIDWORKS	2020-2023			Direct				Datasmith
+Graphisoft Archicad				23-26				Export Plugin		Datasmith
+Maxon Cinema 4D										Direct				C4D
+McNeel Rhinoceros				up to 7				Export Plugin		Datasmith
+McNeel Rhinoceros				up to 6	Direct (.3dm files)				Datasmith
+PTC Creo (Pro/ENGINEER)			Pro/Engineer 19.0 to Creo 10.0	Direct	CAD
+Siemens NX		V				11-V18, NX-NX12, NX1847-NX2212	Direct	CAD
+Trimble SketchUp Pro			2019-2023	Export Plugin, DirectLink	Datasmith
+
+
+>>> Freecad  linux  https://github.com/FreeCAD/FreeCAD	https://wiki.freecad.org/Feature_list
+STEP, IGES, OBJ, STL, DXF, SVG, DAE, IFC or OFF, NASTRAN, VRML, FCStd
+More formats from: https://github.com/FreeCAD/FreeCAD-addons
+
+
+>>> Total CAD ConverterX  windows   https://www.coolutils.com/TotalCADConverterX
+dwf, dwfx, dxf, dwg, plt, hg, hgl, hpg, plo, hp, hpl, hpgl, hp1, hp2, hpgl2, gl2, spl, prn, svg, cgm files
+
+
+>>> CAD Exchange windows https://cadexchanger.com/products/gui/
+It's a subscription software, but you can buy a perptual license.
+But it's locked to a single install, but you can get a 'floating' license but then you need a special 'license server' ugh.
+It's also probably CRAZY Expensive since they don't even list prices on their website
+Proprietary CAD and BIM formats
+	CATIA V5
+	CATIA V6 (3D XML)
+	DWG
+	Inventor
+	PTC Creo
+	Revit
+	Siemens NX
+	Solid Edge
+	SOLIDWORK
+
+Complex CAD and BIM formats
+	3D PDF
+	DXF
+	IFC
+	IGES
+	JT
+	PRC
+	STEP
+
+Geometric modeling kernels
+	ACIS
+	Open CASCADE
+	Parasolid
+	Rhino
+	C3D
+
+Mesh formats
+	3DS
+	3MF
+	Collada
+	FBX
+	glTF
+	OBJ
+	PLY
+	STL
+	U3D
+	USD
+	VRML
+	X3D
+
+
+>>> CrossCad/Ware   https://www.datakit.com/en/crosscad_ware.php
+3DVIA / CATIA / SOLIDWORKS Composer
+3Shape DCM
+ACIS
+CADDS
+CATIA V4 3D
+CATIA V5 3D
+CATIA V6 / 3DEXPERIENCE 3D
+CEREC - Sirona Dental
+CGR
+Creo View
+DWG / DXF 3D
+FBX
+Fusion 360
+glTF
+IFC
+IGES
+Inventor
+JT
+Navisworks
+OBJ
+Parasolid
+PLMXML
+Procera
+ProE / Creo Parametric 3D
+Revit
+Rhino
+Robcad
+Solid Edge 3D
+SOLIDWORKS 3D
+STEP
+STL
+UG NX 3D
+VDA

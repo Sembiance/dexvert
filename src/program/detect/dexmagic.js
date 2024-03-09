@@ -6,12 +6,14 @@ import {path} from "std";
 
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
 // All offsets matches must match (except a match array that has a subarray, the subarry is a list of possible matches for that byte position)
+// You can also specify a size and it will look for the 'match' bytes anywhere in the first 'size' bytes of the file
 
 /* eslint-disable unicorn/no-hex-escape */
 const DEXMAGIC_CHECKS =
 {
 	// 3d
 	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
+	"Cinema 4D XML"      : [{size : 256, match : "<c4d_file"}],
 
 	// archive
 	"ActiveMime (Base64 Encoded)" : [{offset : 0, match : "QWN0aXZlTWltZQ"}],

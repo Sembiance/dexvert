@@ -4,10 +4,15 @@ import {path} from "std";
 
 const _VALID_FORMATS =
 {
-	tddd    : "io_import_scene_tddd",	// https://github.com/wizardgsz/Imagine-T3D-Importer		(modified by me to fix some bugs with some files)
-	nif     : "io_scene_niftools",		// https://github.com/niftools/blender_niftools_addon		(modified by me to fix some bugs with some files)
+	tddd    : "io_import_scene_tddd",	// https://github.com/wizardgsz/Imagine-T3D-Importer				(modified by me to fix some bugs with some files)
+	nif     : "io_scene_niftools",		// https://github.com/niftools/blender_niftools_addon				(modified by me to fix some bugs with some files)
 	smd     : "io_scene_valvesource",	// https://github.com/Artfunkel/BlenderSourceTools
-	collada : null						// built into blender
+	md5mesh : "io_scene_md5_28",		// https://github.com/KozGit/Blender-2.8-MD5-import-export-addon	(modified by me to fix some bugs with some files)
+	
+	// built into blender
+	collada : null,
+	obj     : null,
+	stl     : null
 };
 
 export class blender extends Program
@@ -19,6 +24,7 @@ export class blender extends Program
 		format      : "Specify which format to import. REQUIRED"
 	};
 
+	// API: https://docs.blender.org/api/current/bpy.ops.wm.html
 	pre = async r =>
 	{
 		r.blenderScriptPath = await fileUtil.genTempPath(r.f.root, ".py");
@@ -30,7 +36,7 @@ export class blender extends Program
 
 			bpy.ops.wm.read_factory_settings(use_empty=True)
 
-			${r.flags.format==="collada" ? `bpy.ops.wm.collada_import(filepath=sys.argv[5])` : `
+			${_VALID_FORMATS[r.flags.format]===null ? `bpy.ops.wm.${r.flags.format}_import(filepath=sys.argv[5])` : `
 			bpy.ops.preferences.addon_enable(module="${_VALID_FORMATS[r.flags.format]}")
 			bpy.ops.import_scene.${r.flags.format}(filepath=sys.argv[5])`}
 

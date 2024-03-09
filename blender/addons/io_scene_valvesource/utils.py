@@ -167,6 +167,8 @@ class State(metaclass=_StateMeta):
 	@staticmethod
 	@persistent
 	def _onLoad(_):
+		if not hasattr(bpy.context.scene, 'vs'):
+			return
 		State.update_scene()
 		State._updateEngineBranch()
 		State._validateGamePath()

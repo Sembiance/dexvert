@@ -6,5 +6,5 @@ export class ac3d extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AC3D_Model";
 	ext        = [".ac", ".ac3d"];
 	magic      = ["AC3D geometry/model"];
-	converters = ["assimp"];
+	converters = ["blender[format:ac3d]", "assimp"];
 }

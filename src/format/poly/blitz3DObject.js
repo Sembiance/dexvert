@@ -6,5 +6,5 @@ export class blitz3DObject extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Blitz3D_Model";
 	ext        = [".b3d"];
 	magic      = ["Blitz3d object", /^fmt\/1182( |$)/];
-	converters = ["assimp"];
+	converters = ["blender[format:b3d]", "assimp"];
 }

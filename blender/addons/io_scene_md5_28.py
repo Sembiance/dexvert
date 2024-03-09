@@ -2033,7 +2033,10 @@ def register():
 
 def unregister():
 	for cls in reversed(classes):
-		bpy.utils.unregister_class(cls)
+		try:
+			bpy.utils.unregister_class(cls)
+		except:
+			pass
 	bpy.types.TOPBAR_MT_file_import.remove(menu_func_import_mesh)
 	bpy.types.TOPBAR_MT_file_import.remove(menu_func_import_anim)
 	bpy.types.TOPBAR_MT_file_export.remove(menu_func_export_mesh)

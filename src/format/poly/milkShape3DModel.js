@@ -6,5 +6,5 @@ export class milkShape3DModel extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MilkShape_model";
 	ext        = [".ms3d"];
 	magic      = ["MilkShape 3D model"];
-	converters = ["assimp"];
+	converters = ["assimp", "blender[format:ms3d]"];
 }

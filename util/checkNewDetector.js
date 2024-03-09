@@ -85,7 +85,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 
 	const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");
 	matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).innerTruncate(30), magic : magic.innerTruncate(65)});
-}, navigator.hardwareConcurrency);
+}, -1);
 
 if(argv.unique)
 {

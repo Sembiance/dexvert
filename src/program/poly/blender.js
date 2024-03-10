@@ -19,6 +19,7 @@ const _VALID_FORMATS =
 	smd     : {importKey : "import_scene.smd", addon : "io_scene_valvesource"},		// https://github.com/Artfunkel/BlenderSourceTools
 	tddd    : {importKey : "import_scene.tddd", addon : "io_import_scene_tddd"},	// https://github.com/wizardgsz/Imagine-T3D-Importer
 	x       : {importKey : "import_scene.x", addon : "Blender-XFileImporter"},		// https://github.com/oguna/Blender-XFileImporter
+	x3d     : {importKey : "import_scene.x3d", addon : "io_scene_x3d"},				// blender comes with this addong
 	
 	// built into blender natively
 	collada : {},

@@ -7,10 +7,8 @@ export class quickDraw3D extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/3DMF";
 	ext        = [".3dmf", ".q3d"];
 	magic      = ["QuickDraw 3D Metafile", /^fmt\/1050( |$)/];
-	//converters = ["];
-	unsupported = true;
-	notes       = xu.trim`
-		Working on a converter, have one working, but not yet implemented in dexvert.
+	converters = ["AccuTrans3D"];
+	notes      = xu.trim`
 		Programs that didn't work:
 		Quesa: https://github.com/jwwalker/Quesa 
 			Old program, but has recent updates, but still can't build on linux and is just a viewer.

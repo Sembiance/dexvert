@@ -11617,3 +11617,65 @@ VDA
 
 >>> AYAM https://ayam.sourceforge.net/features.html
 RIB, DXF, 3DM, 3DMF, OBJ, X3D
+
+
+
+>>> AccuTrans3D win2k v2012.1.0 http://www.micromouse.ca/
+3D Metafile				.3dm, .3dmf
+3D Studio				.3ds, .asc, .prj
+ArcInfo ASCII Grid		.asc
+ASCII DEM				.txt
+Binary DEM				.bil,, .bin, .dem, .flt, .hgt
+BMP						.bmp
+CableMod				.xml
+CDED					.dem
+Collada					.dae
+DirectX					.x
+DXF						.dxf
+Google Earth			.kmz
+IFF						.iff
+Imagine					.iob
+Kerkythea				.xml
+Lightscape				.lp, .blk
+LightWave				.lwo
+MaxNC Probe				.txt
+Maya MA					.ma
+Maya RTG				.rtg
+MicroDEM				.dem
+modo					.lxo, .lxl
+NASTRA					.bdf
+Open Inventor			.iv
+Ordinance Survey DTM	.ntf
+PV-Ray					.pov
+RealiMation				.rbs
+RenderWare				.rwx
+Satellite Tool Kit		.mdl
+Scenery Animator		.land
+Sculpt 3D/4D			.scene
+ShopBot Probe			.sbp
+Softimage				.xsi
+StereoLithography		.stl
+Tecplot					.data
+trueSpace				.cob, .coa, .scn
+USGS 1-degree ASCII		.dem
+USGS GPTOPO30/SRTM30	.dem
+USGS SDTS				.ddf
+USGS SRTM-1/SRTM-3		.hgt
+VideoScape				.geo
+Viewpoint				.mtx
+VistaPro				.dem
+VRML					.wrl
+
+
+>>> 3D Object Converter 1.06   win2k   from https://archive.org/details/goldutils124
+support formats listed in sandbox/app/ObjectConveter_Supported.pdf  (couldn't get it copied and pasted in a tabular format, sigh.
+
+
+>>> Cinema 4D 4.27   win2k		https://archive.org/details/maxoncinema4dr4.27.7z
+Cinema 4D 			.c4d
+DEM 				.dem
+DXF 				.dxf
+Imagine 			.iob
+Lightwave 			.lwo
+Lightwave-Szenen 	.lws
+QuickDraw 3D 		.q3d

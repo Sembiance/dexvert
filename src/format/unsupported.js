@@ -690,7 +690,6 @@ export default
 		videoPadProject              : {name : "VideoPad Project", ext : [".vpj"], magic : ["VideoPad project"]},
 		visionaireMesh               : {name : "Visionaire Mesh", ext : [".mesh"], magic : ["Visionaire Mesh"]},
 		visionaireProject            : {name : "Visionaire Project", ext : [".vis"], magic : ["Visionaire project"]},
-		vistaDigitalElevationMap     : {name : "Vista Digital Elevation Map", ext : [".dem"], magic : ["Vista Digital Elevation Map"]},
 		vistaMakepathSession         : {name : "Vista Makepath Session", ext : [".ses"], magic : ["Vista Makepath Session (v1.0)"]},
 		visualFoxProCompoundIndex    : {name : "Visual FoxPro Compound Index", ext : [".cdx"], magic : ["Compound index MS Visual FoxPro"]},
 		vocalEyesSet                 : {name : "Vocal-Eyes Set", ext : [".set"], magic : ["Vocal-Eyes Set"]},

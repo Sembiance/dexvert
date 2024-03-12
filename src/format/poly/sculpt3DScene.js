@@ -6,5 +6,5 @@ export class sculpt3DScene extends Format
 	ext         = [".scene"];
 	magic       = ["Sculpt 3D Scene"];
 	unsupported = true;
-	notes       = "A 3D rendering file format. I didn't bother investigating it.";
+	notes       = "A 3D rendering file format, looks like it's from the amiga.";
 }

@@ -881,6 +881,16 @@ async function writeOutputHTML()
 				float: left;
 				border: 2px solid #555;
 			}
+
+			model-viewer:after
+			{
+				content: attr(title);
+				color: #fff;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 -1px 2px rgba(0, 0, 0, 0.9), -1px 0 2px rgba(0, 0, 0, 0.9), 1px 0 2px rgba(0, 0, 0, 0.9);
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
 		</style>
 	</head>
 	<body>

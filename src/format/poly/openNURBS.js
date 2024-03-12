@@ -7,4 +7,5 @@ export class openNURBS extends Format
 	ext         = [".3dm"];
 	magic       = ["Rhinoceros 3D Model"];
 	unsupported = true;
+	notes       = "Could support in theory, but only found 39 unique files in the wild, so might not be worth the troulbe of loading up openNURBS SDK.";
 }

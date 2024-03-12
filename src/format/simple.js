@@ -179,6 +179,7 @@ export default
 		quickBasicTokenizedSource       : {name : "QuickBASIC Tokenized Source", ext : [".bas"], magic : [/^Microsoft QuickBASIC \d\.\d tokenized source$/, /^QuickBASIC Extended .*Source$/]},
 		quickPascalUnit                 : {name : "Microsoft QuickPascal Unit", ext : [".qpu"], magic : ["Microsoft QuickPascal Unit"]},
 		reSourceControlLanguage         : {name : "ReSource Control Language", ext : [".rcl"], magic : ["ReSource Control Language"], weakMagic : true},
+		rayDreamBrowserFile             : {name : "Ray Dream BRW", ext : [".brw"], magic : ["Ray Dream data"]},
 		rmQuestModule                   : {name : "RM/Quest Module", ext : [".qrm"], magic : ["RM/Quest module"]},
 		sixtyFourNetContainer           : {name : "64Net Container", ext : [".n64"], magic : ["64NET container"], weakMagic : true},
 		sybaseIAnywhereIndex            : {name : "Sybase iAnywhere Index", ext : [".cdx"], magic : ["Sybase iAnywhere index files", "xBase compound index"], weakMagic : ["xBase compound index"]},

@@ -7,5 +7,5 @@ export class real3D extends Format
 	forbidExtMatch = true;
 	magic          = ["Real 3D ", "IFF data, REAL Real3D rendering"];
 	unsupported    = true;
-	notes          = "Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar";
+	notes          = "Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.";
 }

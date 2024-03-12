@@ -7,4 +7,5 @@ export class ydl extends Format
 	ext         = [".ydl"];
 	magic       = ["SGI YAODL 3d vector data"];
 	unsupported = true;
+	notes       = "Very rare format. Less than 20 examples of it in the wild, no known converter for it.";
 }

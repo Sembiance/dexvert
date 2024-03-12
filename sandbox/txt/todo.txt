@@ -107,6 +107,10 @@
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
+* Get Shockwave 3D conversion working. See: shockwave3DWorldConverter.js for notes (backup made to sandbox/app/Shockwave-3D-World-Converter)
+
+* Add moRay support. See format moRay.js for notes
+
 * Now that wine works and thus .NET and other vista/win7 programs work, try incorporating these programs into dexvert:
 	reaConverter 7		https://www.reaconverter.com/		(see sandbox/app/reaConverter_formats.txt for format list. image/zbr can be converted to SVG with reaConverter)
 	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
@@ -216,6 +220,9 @@
 /----------------\
 | Probably Never |
 \----------------/
+* Use a doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
+  I tried DM2VRML.EXE a little bit, it crashes a lot. Also, I had trouble locating Doom 1 WADs, but found lots of DOOM 2 wads.
+
 * Add this detection program: https://github.com/google/magika
   It only detects a small handful of file formats, more modern ones too.
   For that one, I'll need to spin up a server in dexvert that runs in the background as python and responses to web requests

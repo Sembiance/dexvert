@@ -1,4 +1,4 @@
-# Unsupported File Formats (938)
+# Unsupported File Formats (920)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -459,7 +459,7 @@ music | Yamaha e-SEQ Music | .esq .fil |
 
 
 
-## Other (446)
+## Other (445)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 other | 3D Construction Kit Area | .3ad | 
@@ -875,7 +875,6 @@ other | VideoPad Project | .vpj |
 other | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 other | Visionaire Mesh | .mesh | 
 other | Visionaire Project | .vis | 
-other | Vista Digital Elevation Map | .dem | 
 other | Vista Makepath Session | .ses | 
 other | Visual Basic Extension | .vbx | 
 other | Visual Basic Tokenized Source | .bas | 
@@ -911,63 +910,46 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (55)
+## Poly (38)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3-D Professional Scene |  | 
 poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | 3D Studio Loft Object | .lft | 
-poly | [3D Studio Mesh](http://fileformats.archiveteam.org/wiki/3DS) | .3ds | [2 sample files](https://sembiance.com/fileFormatSamples/poly/studioMesh3D/)
 poly | Amapi 3D Model | .a3d .x | 
 poly | AutoShade Rendering Slide | .rnd | 
-poly | Blender 3D | .blend | 
-poly | [Blitz3D Object](http://fileformats.archiveteam.org/wiki/Blitz3D_Model) | .b3d | 
-poly | [Caligari TrueSpace 3D Object](http://fileformats.archiveteam.org/wiki/Caligari_trueSpace) | .sobj | [7 sample files](https://sembiance.com/fileFormatSamples/poly/trueSpace3D/)
-poly | [Cinema 4D](http://fileformats.archiveteam.org/wiki/C4D) | .c4d .mc4d | [12 sample files](https://sembiance.com/fileFormatSamples/poly/cinema4D/)
 poly | Create+Shade 3D Scene | .3d | 
 poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://sembiance.com/fileFormatSamples/poly/cyberStudioCAD3D/)
-poly | [Direct3D Object](http://fileformats.archiveteam.org/wiki/X_(DirectX)) | .x | [1 sample file](https://sembiance.com/fileFormatSamples/poly/direct3DObject/)
+poly | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 poly | DynaCADD Part | .prt .dpt | 
 poly | Electric Image 3D File | .fact | 
 poly | ESRI/ArcView Shape | .shp | 
-poly | Half Life Model | .mdl | [12 sample files](https://sembiance.com/fileFormatSamples/poly/halfLifeModel/)
-poly | [IFF TDDD 3-D Render Document](http://fileformats.archiveteam.org/wiki/TDDD) | .tdd .cel .obj | [18 sample files](https://sembiance.com/fileFormatSamples/poly/iffTDDD/) - A 3D rendering file format. Some of these files may have been created by "Impulse 3D" I've never bothered trying to convert or render these into anything else
 poly | Infini-D Scene | .ids .id4 | 
-poly | Kaydara Filmbox Model | .fbx | 
-poly | [LightWave 3D Object](http://fileformats.archiveteam.org/wiki/LightWave_Object) | .lwo .lw .lightwave | [1 sample file](https://sembiance.com/fileFormatSamples/poly/lightWave/)
-poly | Maya Scene | .mb | 
-poly | MilkShape 3D Model | .ms3d | 
+poly | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
+poly | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/)
 poly | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 
-poly | MoRay 3D Model | .mdl | [18 sample files](https://sembiance.com/fileFormatSamples/poly/moRay/)
-poly | [NetImmerse File](http://fileformats.archiveteam.org/wiki/NIF) | .nif | [5 sample files](https://sembiance.com/fileFormatSamples/poly/netImmerse/)
+poly | MoRay 3D Model | .mdl | [18 sample files](https://sembiance.com/fileFormatSamples/poly/moRay/) - A shareware program that sat 'on top' of a required POV-Ray installation. Just like POV-Ray, MoRay is super sensitive to version changes and using the last release v3.5 yielded an error where it stated to use 3.2 to open DOS moray files.
 poly | NorthCAD-3D | .n3d | 
-poly | OGRE Mesh | .mesh | 
-poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [1 sample file](https://sembiance.com/fileFormatSamples/poly/openNURBS/)
+poly | [OpenNURBS 3D Model](http://fileformats.archiveteam.org/wiki/3DM) | .3dm | [1 sample file](https://sembiance.com/fileFormatSamples/poly/openNURBS/) - Could support in theory, but only found 39 unique files in the wild, so might not be worth the troulbe of loading up openNURBS SDK.
 poly | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/)
-poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [2 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ 		So I'd need to try most recent (system installed version) to oldest until one works 		I have compiled povray1 as dexvert/bin/povray/povray1 		Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory 		Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case 		POVRAY1 also generates broken TGA output that only seem to convert with nconvert 		Lastly, it would be ideal to convert to a modern 3D/scene format as part of the 'poly' improvement phase
-poly | [Quake 2 Model](http://fileformats.archiveteam.org/wiki/MD2) | .md2 | [6 sample files](https://sembiance.com/fileFormatSamples/poly/quake2Model/)
-poly | Quake 3 Model | .md3 | 
+poly | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format. assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
 poly | Rad Cad Drawing | .cad | 
 poly | Raven Object File Format | .rof | 
-poly | Ray Dream BRW | .brw | 
-poly | Ray Dream Designer Scene | .rd4 .rds | 
-poly | Real 3D | .real .obj | [4 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D may be able to view/render these. See linux version in: sandbox/app/realsoft3d-8.2.tar
+poly | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.
 poly | Renderit3D Data | .r3d | 
 poly | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/)
-poly | Sculpt 3D Scene | .scene | [2 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format. I didn't bother investigating it.
+poly | Sculpt 3D Scene | .scene | [2 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format, looks like it's from the amiga.
 poly | SGI Open Inventor Scene Graph | .iv | 
-poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/)
-poly | Shockwave 3D Scene Export | .w3d | 
-poly | Simply 3D Geometry | .ged | 
+poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
+poly | [Shockwave 3D Scene](http://fileformats.archiveteam.org/wiki/Wavefront_OBJ) | .w3d | [7 sample files](https://sembiance.com/fileFormatSamples/poly/shockwave3D/)
 poly | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
 poly | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)
 poly | SolidWorks Part | .sldprt | [10 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksPart/)
 poly | Strata 3D Shape | .ssh | 
 poly | Strata StudioPro Vis |  | 
 poly | SuperScape Virtual Reality | .svr | 
-poly | Valve Studio Model Vertices | .vvd | 
+poly | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
 poly | Vertex Binary 3D Object | .3d | 
-poly | [Virtual Reality Modeling Language](http://fileformats.archiveteam.org/wiki/VRML) | .wrl .wrz | [1 sample file](https://sembiance.com/fileFormatSamples/poly/vrml/) - A 3D rendering file format meant for the web.
 poly | Virtus VR Scene | .vvr | 
 
 

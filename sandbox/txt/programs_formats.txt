@@ -11679,3 +11679,6 @@ Imagine 			.iob
 Lightwave 			.lwo
 Lightwave-Szenen 	.lws
 QuickDraw 3D 		.q3d
+
+
+>>> glTF converters, see big list of formats various programs support here: https://github.khronos.org/glTF-Project-Explorer/

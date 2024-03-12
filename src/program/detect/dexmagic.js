@@ -106,7 +106,9 @@ const DEXMAGIC_CHECKS =
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],
 
 	// poly
+	"Inter-Quake Model"                : [{offset : 0, match : "INTERQUAKEMODEL"}],
 	"Google SketchUp Model"            : [{offset : 1, match : "SketchUp Model"}],
+	"rtcwMDC"                          : [{offset : 0, match : "IDPC"}],
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],

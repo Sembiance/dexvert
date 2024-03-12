@@ -161,6 +161,8 @@ class State(metaclass=_StateMeta):
 	@staticmethod
 	@persistent
 	def _onDepsgraphUpdate(scene):
+		if not hasattr(bpy.context.scene, 'vs'):
+			return
 		if scene == bpy.context.scene and time.time() - State.last_export_refresh > 0.25:
 			State.update_scene(scene)
 

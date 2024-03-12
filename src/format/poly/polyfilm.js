@@ -6,4 +6,5 @@ export class polyfilm extends Format
 	ext         = [".3d"];
 	magic       = ["Polyfilm 3D model"];
 	unsupported = true;
+	notes       = "Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.";
 }

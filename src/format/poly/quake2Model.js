@@ -6,5 +6,5 @@ export class quake2Model extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MD2";
 	ext        = [".md2"];
 	magic      = ["Quake 2 model"];
-	converters = ["assimp", "blender[format:md2]"];
+	converters = ["assimp", "blender[format:md2]", "milkShape3D[format:quake2Model]"];
 }

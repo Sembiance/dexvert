@@ -11682,3 +11682,934 @@ QuickDraw 3D 		.q3d
 
 
 >>> glTF converters, see big list of formats various programs support here: https://github.khronos.org/glTF-Project-Explorer/
+
+
+>>> PolyTrans    https://www.okino.com/conv/conv.htm
+Import Format	Ext
+ 3D Studio R1-R4	.3ds
+ 3MF (3D Manufacturing Format)	.3mf	 	 	 	 	 
+ 3ds Max (via PolyTrans-for-3dsMax native plug-in system)	.max
+ Acclaim Motion Capture	.amc, .asf	 
+ Biovision Motion Capture	.bvh	 
+ CINEMA 4D	.c4d
+ COLLADA (best for Blender)	.dae
+ DirectX	.x
+ DXF R12	.dxf	 	 	 	 
+ Electric Image FACT	.fact	 	 	 	 
+ ESRI ShapeFile	.shp, .cshp	 	 	 	 	 	 	 	 	 
+ FBX v5, v6, v7	.fbx
+ glTF	.gltf, .glB
+ IFC (Industry Foundation Classes)	.ifc	 	 	 	 	 	 
+ Illustrator (Adobe; 2D curves)	.ai	 	 	 	 	 	 	 	 	 
+ Inventor2 (SGI)	.iv	 	 	 	 
+ LightWave	.lwo, .lws	 	 
+ MOL Molecular Database	.mol	 	 	 	 	 	 	 	 
+ Okino Transfer File Format	.bdf
+ PLY	.ply	 	 	 	 	 
+ Protein (Molecular) Database	.pdb	 	 	 	 	 	 	 	 
+ Rhino-3D & OpenNURBS	.3dm	 	 	 
+ SketchUp	.skp	 	 	 	 
+ Stereo Lithography	.stl	 	 	 	 	 	 	 	 	 
+ U3D	.u3d
+ USD	.usd,.usda,.usdc
+ USGS & Gtopo-30 DEM (and
+SDTS with external converter)	.dem	 	 	 	 
+ VRML1	.wrl	 	 	 	 
+ VRML2	.wrl	 	 
+ Wavefront OBJ	.obj	 	 	 
+ X3D	.x3d	 	 
+ XGL & ZGL (for AVEVA PDMS)	.xgl & .zgl	 	 	 	 
+
+CAD/PACK License Only:
+3D CAD Importer	Ext
+ Autodesk Inventor	.iam (assemblies), .ipt (parts)
+ Autodesk DWF-3D (for AutoCAD, Navisworks, Revit & Inventor)	.dwf, .hsf	 
+ Autodesk DXF & DWG (all versions)	.dxf, .dwg	 
+ Solid Edge	.asm (assemblies), .prt (parts)
+ SOLIDWORKS	.sldasm (assemblies), .sldprt (parts)
+
+GRANITE/PACK License Only:
+3D CAD Importer	Extensions	File Format Version
+ Creo Elements (Pro/Engineer)	.asm, .prt, .neu	Current PTC version
+ Creo Elements/View (PTC ProductView)	.pvs, .pvz, .edz, .ed, .ol	Current PTC version
+ DGN (MicroStation)	.dgn	All key versions
+ IGES (all variations)	.igs or .iges	Various
+ STEP	.stp, .step, .ste	AP203 and AP214
+ Parasolid	.xmt, .xmt_txt, .xmt_bin .xmt_neu, .x_t, .x_b, .x_n	Various
+ SAT (ACIS)	.sat	Various
+ Granite "g-plugs"	.g	Various
+
+>>> i3DConverter
+Format Name   Extension   Geometry   Face Material   Vertex Color   Texture U,V   Texture Polygons   Textured View   Bone ; Vertex Bone Weight
+"2 percent" Demo	00x	L / S	L / -	- / -	- / -	- / -	-	-
+25 to Life	DBL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+3D Atelier	3DA	L / -	- / -	- / -	- / -	- -	-	-
+3D CAD Studio	3D	L / S	- / -	- / -	- / -	- / -	-	-
+3D Dudes	IMG	L / S	- / -	- / -	- / -	- / -	-	-
+3dedit	3D	L / S	L / S	- / -	- / -	- / -	-	-
+3D Environment Program Complex	3DS	L / S	- / -	- / -	- / -	- / -	-	-
+3D Environment Program Simple	3D2	L / S	- / -	- / -	- / -	- / -	-	-
+3DField Triangles	DAT	L / -	- / -	- / -	- / -	- / -	-	-
+3DG	3D	- / S	- / -	- / -	- / -	- / -	-	-
+3D Forgastest Editor	KFI	L / -	- / -	- / -	- / -	- / -	-	-
+3D Forgastest Editor	KS3	L / S	- / -	- / -	- / -	- / -	-	-
+3D GameStudio (MDL3,4,5,7)	MDL	L /	L /	- /	L /	L /	Automatic	/
+3D Mars Mission	3DO	L /	- /	- / -	- /	- /	/	/
+3D Object Viewer Screen Saver	3D	L / S	- / -	- / -	- / -	- / -	-	-
+3D Points	TXT;XYZ	L / S	- / -	- / -	- / -	- / -	-	-
+3D Professional	3DP	L / S	L / S	- / -	- / -	- / -	-	-
+3D Raster Viewer Binary RAW (355x461)	RAW	L / -	- / -	- / -	- / -	- / -	-	-
+3DRW	*	L / S	- / -	/	- / -	- / -	-	-
+3D Sprint Compressed STL	CTL	L / -	- / -	- / -	- / -	- / -	-	-
+3D Studio ASCII Mesh	ASC	L / S	- / S	- / -	L / S	Gen. / -	MTFS	/
+3D Studio Binary Mesh	3DS	L / S	L / -	- / -	L / S	Gen. / -	Automatic	/
+3D Studio Max ASCII	ASE	L / S	L / S	L /	L / S	L / S	Automatic	/
+3D Studio Max Script	MS	- / S	- / S	/	- /	/	-	-
+3D Studio Project	PRJ	L / S	L / -	- / -	L / S	Gen. / -	Automatic	/
+3D Systems	SLC	L / -	- / -	- / -	- / -	- / -	-	-
+3D Triangle Irregular Network	TIN	L / S	- / -	- / -	- / -	- / -	-	-
+3D Vertex Model	RVM	L /	L /	- / -	L /	Gen. /	Automatic	/
+3D Vertex Model ASCII	TXT	L /	L /	- / -	L /	Gen. /	Automatic	/
+3D View	PLG	- / S	- / -	- / -	- / -	- / -	-	-
+3D-VIEWER	3DV	- / S	- / -	- / -	- / -	- / -	-	-
+3D Virtual Reality RoomPlanner	PLG	- / S	- / -	- / -	- / -	- / -	-	-
+3D WorkShop	3DW	L / S	- / -	- / -	- / -	- / -	-	-
+3D World Studio	SMF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+3DO Builder	3DT/3DE	L /	- /	- /	- /	- /	-	-
+3DX	3DX	L! / -	- / -	- / -	- / -	- / -	-	-
+4x4 Evolution	SMF	L / S	L / S	- / -	L / S	Gen. / -	Automatic	/
+4x4 Evolution 2	SMF	L / S	L / S	- / -	L / S	Gen. / -	Automatic	/
+7.62 High Calibre	MESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+A3D	A3D	L / S	- / -	- / -	- / -	- / -	-	-
+Abyss Engine (Galaxy On Fire)	AE3	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Abyss Engine (Galaxy On Fire)	AE3MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Abyss Engine (Sports Car Challenge; Galaxy On Fire)	AEM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+AC3D	AC	L / S	L / S	- / -	L / S	L / S	MTFS	/
+Ace Combat X: Skies of Deception	PMD	L / -	- / -	- / -	L / -	Gen. / -	/	L ;
+Additive Manufacturing File Format	AMF	- / S	- / S	- / -	- / -	- / -	-	-
+ADG 3D Scene	ADG	L /	L /	- /	L /	- /	/	/
+Adobe Dimensions	DIM	L! / S	- / -	- / -	- / -	- / -	-	-
+AeroFly /trilist only/	OBJ	L /	L /	- / -	L /	Gen. /	Automatic	/
+AeroFly	TGO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Aika Online	MSH/BON	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Airplay	GEO/MTL	L /	L /	/	L /	Gen. / -	Automatic	/
+AirStrike 3D: Operation W.A.T.; AirStrike II: Gulf Thunder	MDL	L /	L /	/	L /	Gen. / -	Automatic	/
+Alambik script /triangles only/	TV	L /	- /	/	/	/	/	/
+Alias StyleGuide	SG	L /	- / -	- / -	- / -	- / -	-	-
+Alias Quad	QUAD	L /	L /	- / -	/	/	/	/
+Alias Triangle	TRI	L / S	- /	- / -	/	/	/	/
+Alias Upfront	UPF	L / S	L / -	- / -	- / -	- / -	/	/
+Alice ASCII	VFT	L / S	- / -	- / -	L / S	Gen. / -	MTFS	/
+Alice Binary	VFB	L / S	- / -	- / -	L / S	Gen. / -	MTFS	/
+Alice Binary (vertices.bin,indices.bin)	BIN	L /	- /	L /	L /	Gen. /	/	/
+Amira ASCII	SURF	L /	- /	- /	- /	- /	-	-
+Amira Binary	SURF	L /	- /	- /	- /	- /	-	-
+Amorphium	CMF	L /	L /	L /	L /	Gen. / -	/	/
+Ancient Wars: Sparta	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Anim3D	*	- / S	- / S	- / -	- / -	- / -	/	/
+Anim8or	AN8	L /	- /	- / -	L /	/	Checked	/
+Anno2070	RDM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Ansys Macro	MAC	- / S	- / -	- / -	- / -	- / -	-	-
+Antarctica Engine (SuperTuxKart)	SPM	L / -	L / -	L / -	L / -	Gen. / -	Automatic	/
+AOFF	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+Aquadelic GT	BOB/AM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	;
+ARAS 360	A3X	L / -	L / -	- / -	- / -	- / -	-	-
+Archangel	XBN	L / -	L / -	- / -	L / -	Gen. / -	Automatic	;
+ArchiCAD GDL /Polygons only/	GDL	L /	- /	- / -	- / -	- / -	-	-
+Archlord	ECL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+ARC/INFO ASCII Grid	GRD	L / -	- / -	- / -	- / -	- / -	-	-
+ARC/INFO /Polygons only/	SHP	L /	- /	- / -	- / -	- / -	-	-
+ARENA Design	SDA	L /	- /	- / -	- / -	- / -	/	/
+Ark	3D/MAT	L / S	L / -	- / -	L / S	Gen. / -	Checked	/
+Art*lantis	ATL	L /	L /	/	- /	- /	-	-
+Art*lantis	DB/OPT	L / S	L / -	/	- / -	- / -	-	-
+Art-O-Matic	3DZ	L /	- /	/	L /	Gen. /	/	/
+ASK	ASK	L /	L /	- /	L /	L /	/	/
+Aterdux Engine 9 (Legends of Eisenwald)	D3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+ATI Normal Mapper	NMF	L / S	- / -	- / -	L / S	L / S	MTFS	/
+Atlas Boundary	BNA	L / S	- / -	- / -	- / -	- / -	-	-
+Auran Jet (Trainz)	IM,PM/TXT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; -
+AutoCad DXF [2D POLYLINE]	DXF	L / S	- / -	- / -	- / -	- / -	-	-
+AutoCad DXF [3D FACE]	DXF	L / S	- / -	- / -	- / -	- / -	-	-
+AutoCad DXF [3D POINT]	DXF	- / S	- / -	- / -	- / -	- / -	-	-
+AutoCad DXF [3D POLYLINE]	DXF	L / S	- / -	- / -	- / -	- / -	-	-
+Autodesk Animator	PLY	L / -	- / -	- / -	- / -	- / -	-	-
+Autodesk FBX 2011 ASCII	FBX	- / S	- / S	- / -	- / S	- / Gen.	/	/
+Avalon Heroes (packed like _NPC.msh)	MSH/MSH	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Avalon Heroes (unpacked)	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+"B and dbl W" Demo	GEO	L / S	- / -	L / S	- / -	- / -	-	-
+Babes & Balls Xtreme Beach Soccer	KLX	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Banuba Face AR	BSM2/CFG.TOML	L / -	L / -	- / -	L / -	Gen. / -	Automatic	- / L
+Basic4GL Model	BGM	L / S	- / -	L / S	- / -	- / -	/	/
+Battle of the Immortals	M4F	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Beetle Crazy Cup (Beetle Buggin'; Käfer Total)	INF/VER/TRI	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Behemot Editor	BRP/RT	L / S	- / -	- / -	- / -	- / -	-	-
+Bejeweled 3	P3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Believe3D	B3D	L /	- / -	- / -	L /	Gen. /	/	/
+Benchmark for Animated Ray Tracing	AFF	L / S	L / S	- / -	L / -	L / -	Automatic	/
+BigWorld Technology (World of Tanks)	PRIMITIVES/VISUAL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+BigWorld Technology (World of Tanks)	PRIMITIVES_PROCESSED/
+VISUAL_PROCESSED	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Black Desert	MAPDATA	L / -	L / -	- / -	- / -	- / -	-	/
+Black Desert	PAC/PAB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Black Desert	PAM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Black Desert	PCM	L / -	- / -	- / -	- / -	- / -	-	/
+Black Desert Mobile	PAC	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Blade Chronicle: Samurai Online	MBN	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Blade Chronicle: Samurai Online	MDL	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Blender's Videoscape 3D dialect	OBJ	L / S	L / S	/	- / -	- / -	-	-
+Blitz3D	B3D	L / S	L / -	L / S	L / S	Gen. / Gen.	Checked	/
+BMP /1 bit pixelformat only/	BMP	L / -	- / -	- / -	- / -	- / -	-	-
+BrainNet Viewer	NV	L / S	- / -	- / -	- / -	- / -	-	-
+BrainSuite	DFS	L / -	- / -	L / -	L / -	Gen. / -	MTFS	-
+BrainVISA ASCII	TRI	L / S	- / -	- / -	- / -	- / -	-	-
+BrainVISA ASCII	MESH	/ S	/ -	/ -	/ -	/ -	-	-
+BrainVISA Binary	MESH	L / S	- / -	- / -	- / -	- / -	-	-
+BrainVoyager	SRF	L / -	- / -	/ -	- / -	- / -	-	-
+Breed	OBJ	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Breeze Designer	CAD	L / S	- / -	/	- / -	- / -	-	-
+Brender	DAT	L / S	L / S	- / -	- / -	- / -	-	-
+BRL-CAD ASCII	ASC	- / S	- / -	- / -	- / -	- / -	-	-
+Buddha Engine (Costume Quest)	MESH.HEADER/MESH/
+MATERIAL/
+RIG.HEADER/RIG	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Bus Derby	COLL	L / -	- / -	- / -	- / -	- / -	-	-
+Bus Derby	OBJ	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+BZFlag ASCII	BZW	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	-
+Cabela's 4X4 Off-Road Adventure 3	SKIN	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Cabela's Outdoor Adventures 2006	SKIN	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+CableMod	XML	/ S	/ -	/ -	/ -	/ -	-	-
+CAD '3D Points'	CAD	L / -	- / -	- / -	- / -	- / -	-	-
+CAD 'Mesh'	CAD	L / -	- / -	- / -	- / -	- / -	-	-
+CADKEY Advanced Design Language	CDL	- / S	- / -	- / -	- / -	- / -	-	-
+Cage 3D	IGL	L / S	L / S	- / -	L /	/	/	/
+cal3D ASCII Mesh	XMF	L / S	L / S	- / -	L / S	Gen. / Gen.	MTFS	; L / S
+cal3D Binary Mesh	CMF	L / -	L / -	- / -	L / -	Gen. / -	MTFS	; L
+cal3D Binary Mesh (IMVU)	XMF	L / -	L / -	- / -	L / -	Gen. / -	MTFS	; L
+Caligari trueSpace ASCII	COB	L / S	L /	- / -	L /	L /	Automatic	/
+Caligari trueSpace BINARY	COB	L / S	L	- / -	L	L /	Checked	/
+CANVAS Engine (Valkyria Chronicles)	ABR	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+CANVAS Engine (Valkyria Chronicles)	MLX	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Carrara	CAR	L / -	- / -	- / -	L / -	Gen. / -	/	/
+Cartography Shop 4.1	CSM	L / -	L / -	L / -	/ -	/ -	/	/
+Cauldron (Soldier of Fortune: Payback)	MSH/MTL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+C/C++ Code Fragments	C	- / S	- / -	- / -	- / -	- / -	-	-
+Celestia ASCII /trilist only/	CMOD	L /	L /	- /	L /	Gen. /	Automatic	/
+Celestia Binary /trilist,tristrip,trifan only/	CMOD	L /	L /	- /	L /	Gen. /	Checked	/
+Cheetah 3D	C3D	L / S	- / -	- / -	- / -	- / -	/	/
+Child of Light	M3D.CKD/.S3D.CKD	L / -	L / -	- / -	L / -	Gen. / -	MTFS	L ;
+Chuanshuo	MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Cinema 4D XL ASCII	C4D	- / S	- / -	/	- / -	- / -	/	/
+Cipher MDL2	MDL	L / S	L / S	L / S	L / S	Gen. / -	Automatic	/
+Cipher MDL4	MDL	L /	L /	L /	L /	Gen. / -	Automatic	/
+City of Dream (unpacked)	GCF	L / -	L / -	- / -	L / -	L / -	Automatic	/
+City Racing 2; City Racing 3D; Fast and Furious 8; Space Racing 2	ZDO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Clausewitz Engine (Stellaris: Ancient Relics)	MESH	L / -	L / -	- / -	Gen. / -	L / -	Automatic	/
+Colobot ASCII	TXT	L / -	L / -	- / -	L / -	L / -	Automatic	-
+Colobot Binary	MOD	L / -	L / -	- / -	L / -	L / -	Automatic	-
+ComiPo!	CSU	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Command and Conquer 3: Tiberium Wars	W3DM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Commander: Conquest of the Americas	S3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Common Layer Interface Binary (with slice/HPGL save option)	CLI	L /	- /	- / -	- / -	- / -	-	-
+Conquer Online	C3	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Continent of the Ninth (C9)	R3CM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+CorelDREAM 3D /Polygons only/	D3D	L / -	L / -	- / -	- / -	- / -	-	-
+CryENGINE (Aion: Tower of Eternity; Far Cry)	CGF,CHR	L / -	L / -	- / -	L / -	L / -	Automatic	/
+CryENGINE2 (Crysis)	(CGF,CHR)/MTL	L / -	- / -	- / -	L / -	Gen. / -	Checked	/
+CrystalSpace	XML	L / -	- /	- /	- /		/	/
+Custom Maid 3D 2	MODEL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Cyanide Studio's game engine (Aarklash: Legacy; Blood Bowl 2; Confrontation; Dogs of War Online)	CEF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+CyberMotion ASCII	CMO	L /	L /	- / -	- / -	- / -	-	-
+Cyber Studio CAD-3D	3D2	L / S	L / -	- / -	- / -	- / -	-	-
+Dark Planet: Battle for Natrolis	C3D	L /	- / -	- / -	- / -	- / -	/	/
+Darkstone	O3D	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Darwinia	SHP	L / S	- / -	L / S	- / -	- / -	-	-
+DCC Virtual Reality LAB	DCC	L /	- / -	- / -	- / -	- / -	-	-
+Dead Days	WTF	L /	L /	- /	L /	L /	Automatic	/
+Dekaron (2 Moons)	MESH/TPACK	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+DeleD 3D Editor Map	DMF	L / S	L /	- / -	L /	L /	Automatic	/
+DeleD 3D Editor Prefab	DPF	L / S	L /	- / -	L /	L /	Automatic	/
+DeleD 3D Editor XML Scene	DXS	L /	L /	- / -	L /	L /	Automatic	/
+Delta Force Land Warrior	3DI	L /	/	/	/	/	/	/
+DesignWorkshop	DW	L / S	L / S	- / -	- / -	- / -	-	-
+Devil Daggers	*	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Devil Daggers (packed)	dd file/*	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Digistar II.	VLA	- / S	- / -	- / -	- / -	- / -	-	-
+Digital Reality	BMOD	L / -	- / -	- / -	L / -	Gen. / -	Automatic	/
+Digital Reality	DRS	L / -	- / -	- / -	L / -	Gen. / -	Automatic	/
+Dino and Aliens	MSH/CGO	L / -	L / -	- / -	L / -	L / -	Automatic	-
+Dinosaur Fossil Hunter: Prologue	MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+DirectX ASCII Frame	X	L / S	L / S	/	L / S	Gen. / Gen.	Automatic	/
+DirectX ASCII Mesh	X	L / S	L / S	/	L / S	Gen. / Gen.	Automatic	/
+DirectX Binary Mesh	X	L / S	/	/	L / S	Gen. / Gen.	MTFS	/
+DIVE	VR	L / S	- / -	/	- / -	- / -	/	/
+DOGA-L2	SUT/ATR	L / S	- / S	- / -	L / S	L / S	MTFS	/
+DOOM 3	MD5MESH	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Drafix CAD Port /Polygons only/	POR	L / S	- / -	- / -	- / -	- / -	-	-
+Dragonborn Knight	MESH	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Dragonborn Knight	SKIN/SKEL	L / -	L / -	- / -	L / -	Gen. / -	Checked	L; L
+Dragon Star Varnir	GXRESCOLLISIONMESH	L / -	- / -	- / -	- / -	- / -	-	-
+Dragon Star Varnir	GXRESMODEL	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Dragon Star Varnir	GXRESMODELEXT	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Draw 4D	D4D	L / S	- / -	- / -	- / -	- / -	-	-
+Draw 4D Pro	D4P	L / S	L / S	- / -	- / -	- / -	-	-
+Draw3D	3D	L / S	- / -	- / -	- / -	- / -	-	-
+Drawing for Children Symbol	TXT	L /	- /	- / -	- / -	- / -	-	-
+DrawObjects /Polygons, Stars, SolidArrows only/	DOB	L / -	L / -	- / -	- / -	- / -	-	-
+DS2 Engine (You Are Empty)	DS2MD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+DUG Polygon	DUPOLY	L / S	L / -	- / -	- / -	- / -	-	-
+DVS	VGF/VMF	L / S	L / S	/	L / S	L / S	Checked	/
+DWOS CAD	ATT	L / -	L / -	/	- / -	- / -	-	/
+DWOS CAD	CMF	L / -	L / -	/	- / -	- / -	-	/
+DynaCADD Exchange Format	DEF	L / S	- / -	- / -	- / -	- / -	-	-
+Dynamic Visualizer	AMS	/ S	- / S	/ -	/	/ -	/	/
+E2 game engine (Trainz Railroad Simulator 2019)	TRAINZMESH/TEXTURE.TXT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+E3D 3D Model Editor	3DO	L / S	L / S	- / -	- / -	- / -	-	-
+EA Sports Fight Night Champion	GEOM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+EA Sports MMA	*_GEOM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+East India Company	BIN	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+East India Company	S3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Easymodel v1.x Object	OBD	L / S	- / -	/	- / -	- / -	-	-
+Easymodel v2.x Object	OBQ	L / S	L / S	/	L /	L / -	/	/
+Easymodel v2.x Scene	EMD	L /	L /	/	L /	L /	/	/
+EASY-ROB IGRIP Partfile	IGP	L / S	L / -	- / -	- / -	- / -	-	-
+ECGSIM	TRI	L / S	- / -	- / -	- / -	- / -	-	-
+Eclipse Engine (War Inc. Battle Zone; The War Z)	SCB/MAT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Edgebreaker OVtable	OV	L /	- /	- /	- /	- /	-	-
+Effect3D Studio	SCX	L /	L /	L /	L /	Gen. /	/	/
+Electric Image	FACT	L /	- /	/	/	/	/	/
+Elite Force	WPK	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+EMSE Wireframe (minor rev=3)	WFR	L / S	- / -	- / -	- / -	- / -	-	-
+Enemy Territory: QUAKE Wars	MD5B	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Enemy Territory: QUAKE Wars	MD5MESH	L / -	L / -	/ -	L / -	Gen. / -	MTFS	/
+EnSite DIF	XML	L / S	L / S-	- / -	- / -	- / -	-	-
+Espresso3D	E3A	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Espresso3D	E3M	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+ESP Vision Scene	ESC	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Eternal Lands	E3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Eternity (Big Rigs: Over the Road Racing)	SCO/MAT	L / S	L / S	- / -	L / S	L / S	Automatic	-
+Euler 3D Text	ELT	L / -	- / -	- / -	- / -	- / -	-	-
+Extended RAW Triangles	RAX	L /	L /	- / -	L /	L /	Automatic	/
+Facet	FAC	L / S	L / S	- / -	- / -	- / -	-	-
+Fastgraph	TXT	L / S	- / -	- / -	- / -	- / -	-	-
+Ferentus, Herrcot, Xiones	CMH	L / -	- / -	- / -	- / -	- / -	-	-
+Ferentus, Herrcot, Xiones (non character objects)	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Final Exam	GEO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Final Fantasy 7	P	L / -	L / -	L / -	L / -	/ -	/	/
+Flatland Rover	BLOCK	L / S	L / S	- / -	L / S	L / S	Checked	/
+FlatOut 2	BGM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+FlightSim Model	DAT	L / S	L / S	/	/	/	/	/
+Flux Game Engine	PSO	L / -	- / -	/ -	/ -	/ -	/	/
+Fly3D	F3D	L / -	- / -	L /	L /	Gen. / -	/	/
+Forgelight engine (Free Realms; Star Wars: The Clone Wars Adventures)	DME/DSK	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; -
+Forger3D	M3D	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Fractal Detailer ASCII	VTX	L /	L /	- / -	L /	L /	/	/
+Fractal Detailer Binary	VDU	L /	L /	- / -	L /	L /	/	/
+FreeCAD Binary Mesh	BMS	L / S	- / -	- / -	- / -	- / -	-	-
+FreeSurfer "New" Quadrangle Surface Binary	*	L / -	L /	- / -	L /	L /	-	-
+FreeSurfer Quadrangle Surface Binary	*	L / -	- / -	- / -	- / -	- / -	-	-
+FreeSurfer Triangle Surface ASCII	ASC	L / -	- / -	- / -	- / -	- / -	-	-
+FreeSurfer Triangle Surface Binary	*	L / -	- / -	- / -	- / -	- / -	-	-
+FreeSurfer Triangle Surface Patch ASCII	ASC	L / -	- / -	- / -	- / -	- / -	-	-
+Frogger: The Great Quest (triangles only)	VTX;Y6T	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+GAEB REB-VB 22.013 DGM	REB	L / -	- / -	- / -	- / -	- / -	-	-
+GameExchange 2 ASCII	GBF	L /	- /	/	/	/	/	/
+GAMUT /without transformation/	AGT	L /	- /	- / -	- / -	- / -	-	-
+Garfield Kart: Furious Racing	MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Gas Guzzlers Extreme	PEMB/MODEL	L / -	- / -	- / -	L / -	Gen. / -	Automatic	-
+gCAD3D	GCAD	- / S	- / S	- / -	- / -	- / -	-	-
+GDS things object / scene	000/INP	L / S	- / -	- / -	- / -	- / -	-	-
+GEM 2 Engine (Call to Arms - Gates of Hell: Ostfront; Men of War: Vietnam; Men of War: Assault Squad 2)	PLY/MTL	L / -	- / -	- / -	L / -	Gen. / -	Automatic	-
+GEM 2 Engine (Call to Arms - Gates of Hell: Ostfront; Men of War: Vietnam; Men of War: Assault Squad 2)	VOL	L / -	- / -	- / -	- / -	- / -	-	-
+Generic Polygon Clipper (GPC)	GPF	L / -	- / -	- / -	- / -	- / -	-	-
+Genesis Rising	GEOMB/GOBJ	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Genesis World Editor	3DT	L / -	- / -	- / -	- / -	- / -	-	-
+GeoJSON [2D MultiPolygon]	GEOJSON	- / S	- / -	- / -	- / -	- / -	-	-
+Geomview OOGL	OFF	L / S	L / S	L /	- / -	- / -	-	-
+Geoscape3D Heightmap (XxX Short)	RAW	L / -	- / -	- / -	- / -	- / -	-	-
+GEOSTAR	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+GFXFX Vector Object	GVO	L / S	- / -	/	/	/	/	/
+GIANTS Engine Binary (Farming Simulator 2012, 2014)	P3D	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+GiD ASCII Mesh	MSH	/ S	/ S	/ -	/ -	/ -	-	-
+GioGio's Bizarre Adventure (unpacked player, npc models only)	PZZ	L / -	L / -	L / -	L / -	Gen. / -	MTFS	/
+GLBasic ASCII	DDA	L /	L /	- /	L /	L /	Automatic	/
+GLC	GLC	L / S	L / -	- / -	- / -	- / -	-	-
+Glest	G3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+GLF Font	GLF	L / -	- / -	- / -	- / -	- / -	-	-
+GLView	3DV	- / S	- / -	- / -	- / -	- / -	-	-
+Gmsh	POS	L / -	- / -	- / -	- / -	- / -	-	-
+Gmsh ASCII Mesh	MSH	- / S	- / -	- / -	- / -	- / -	-	-
+GNU Triangulated Surface Library	GTS	L /	L /	- / -	- / -	- / -	-	-
+God Summoner	SM/VSM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+God Summoner	SKIN/VSKIN	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Golgotha	GMOD	L / -	- / -	- / -	L / -	L / -	MTFS	/
+Gouraud Shaded Vectors	V10	L / S	- /	- / -	/	/	-	-
+GP 500	DK4	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Granado Espada	LMA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L; /
+Grand Chase	P3M	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+GRASP	SRF	L / -	- / -	- / -	- / -	- / -	-	-
+Gray ASCII	XML	- / S	- / -	- / -	- / -	- / -	-	-
+Gray Binary	BIN	- / S	- / -	- / -	- / -	- / -	-	-
+Greenline Delimited	DLF	L /	- /	- / -	- /	- /	-	-
+Greg Hood's ASCII Triangle	TRIA	L / S	- / -	- / -	- / -	- / -	-	-
+Greg Hood's Binary Triangle	TRIB	L / S	- / -	- / -	- / -	- / -	-	-
+Grin Engine (Bionic Commando, Lead and Gold: Gangs of the Wild West, Terminator Salvation, Wanted: Weapons of Fate)	DIESEL	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Half-Life Studio Model	SMD	L /	L /	- / -	L /	L /	Automatic	/
+Hammer Engine (Crossout, Star Conflict)	MDL-MSH*/MDF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Happy Tree Friends: False Alarm	MDL	L / -	- / -	/ -	- / -	- / -	-	-
+Havok Vision Engine (Azera Online)	MODEL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Haydee	MESH/MTL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+HEAT Online	SCX	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+HeeksCAD (STLSolid only)	HEEKS	L / S	L / S	- / -	- / -	- / -	-	-
+Heightmap Conversion Software (HMCS) Binary	HMB	L / -	L / -	- / -	L / -	Gen. / -	MTFS	-
+Helion	3DF	L / S	- / -	- / -	- / -	- / -	-	-
+Helios Entity	ENT	- / S	- /	- / -	- / -	/	-	-
+Hellgate London	AM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Hellgate London	WM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Hero Online, Knight Online	N3CSKINS	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Hero Online	N3PMESH	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Hexagon	HXN	L / -	- / -	- / -	- / -	- / -	-	-
+Highlight Pro	OBT	L / S	- / -	- / -	- / -	/	-	-
+Homeworld	PEO	L /	- /	- / -	/	/	/	/
+Hot Wheels: World Race	ROM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Hot Wheels: World Race	SHM	L / -	- / -	- / -	- / -	- / -	-	/
+HOOPS 3D Metafile	HMF	/ S	- /	- / -	/	/	-	-
+Horde3D Engine (v5;v6; Blocky Highway; Offroad Legends; Offroad Legends 2)	GEO/SCENE.XML/MATERIAL.XML or GEO/H3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Hostile Waters: Antaeus Rising	S01	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Houdini ASCII	GEO	- / S	- / S	- /	- /	- /	-	-
+Hugues Hoppe's M format	M	L / S	L / S	- / -	/	/	/	/
+iCube Engine (Point Blank)	I3S	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Idea Spectrum Model (Realtime Landscaping Plus, Pro)	ISM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+"II" Demo (TLS)	BIN	L /	- /	- / -	- /	- /	/	/
+IGES (entity 106)	IGS	- / S	- / -	- / -	- / -	- / -	-	-
+IGES (entity 110/102)	IGS	- / S	- / -	- / -	- / -	- / -	-	-
+IGES (entity 116)	IGS	- / S	- / -	- / -	- / -	- / -	-	-
+Illusion Viewer /without transformation/	X	L /	- /	- /	L /	Gen. /	/	/
+Imagemaster shape	ISH	/ S	/ -	- / -	/ -	/ -	-	-
+Imagine	OBJ	L /	L /	- / -	- /	- /	-	-
+Indexed Face Set (IFS)	IFS	L / S	- / -	- / -	L /	Gen. /	/	/
+Insane	FFF	L / -	L / -	- / -	L / -	Gen. /	Automatic	/
+"Insane" Demo	R3D	L / S	- / -	- / -	L / S	Gen. / -	/	/
+InSpeck FAPS	NET	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Interactive Computer Graphics Triangle	TRI	L / S	L / S	- / -	- / -	- / -	-	-
+iOS Activity Achievement Badges	BDG	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+I.T.R.	TER,LST	L / -	- / -	- / -	- / -	- / -	-	-
+I.T.R. ASCII	DAT	- / S	- / -	- / -	- / -	- / -	-	-
+I.T.R. (p1,y1,x1,p2,y2,x2)	DAT	- / S	- / -	- / -	- / -	- / -	-	-
+IRIS Inventor V1.0 ASCII	IV	L / S	- / -	/	/	/	/	/
+IRIS Inventor V2.0 Binary	IV	L / S	- / -	- / -	/	/	/	/
+IRIS Inventor V2.1 Binary	IV	L / S	- / -	- / -	/	/	/	/
+IRIT	DAT	- / S	- / -	- / -	- / -	- / -	-	-
+IRIT	IRT	- / S	- / -	- / -	- / -	- / -	-	-
+"I Want To Be Machine" DEMO	OBJ	L / S	- / -	- / -	- / -	- / -	-	-
+Jane's ® Combat Simulations USAF	P3D	L /	L /	- / -	L /	Gen. /	/	/
+Jane's ® Combat Simulations WW2 Fighters	J3T	L / -	- / -	- / -	- / -	- / -	/	/
+Jane's ® F-18	3DG	L / -	L / -	- / -	L / -	L / -	Automatic	/
+JavaView	JVX	L / -	- / -	- / -	- / -	- / -	-	-
+Jaw3D	JAW	L / S	- / -	- / -	- / -	- / -	-	-
+J-Cad Alpha CSV	*	- / S	- / S	- / -	- / -	- / -	-	-
+Jedi Knight 3DO	3DO	L /	- /	- / -	L /	L /	/	/
+JellyCar	SOFTBODY	L / -	L / -	- / -	- / -	- / -	-	-
+JEZZ 3D ENGINE	JEO	L / S	- / -	- / -	- / -	- / -	-	-
+Joymax (Silkroad Online)	BMS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+JViewer	FAC	L / S	- / -	- / -	- / -	- / -	-	-
+JZB	IFL	/ S	/ S	/ -	/ -	/ -	-	-
+Kerkythea ASCII	XML	L /	L /	- /	L /	Gen. /	Automatic	/
+Keroro Online	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Kill la Kill IF	MDL	L / -	L / -	L / -	L / -	Gen. / -	MTFS	L ; -
+Kingpin Model	MDX	L /	- /	- / -	/	/	/	/
+Kray /Triangles only/	SC	L / S	- / S	- / -	- / -	- / -	-	-
+Laghaim (unprotected .csy)	CSY/BPD	L / -	L / -	- / -	L / -	Gen. / -	Checked	L ; L
+Laghaim	LOL	L / -	L / -	- / -	L / -	Gen. / -	Checked	-
+LandXML TIN Surfaces	XML	L / S	- / -	- / -	- / -	- / -	-	-
+LDraw /Triangles, quads only/	LDR, DAT	L / S	L / -	- / -	- / -	- / -	-	-
+League of Angels � Heaven's Fury	MESH/MTL	L / -	L / -	- / -	L / -	L / -	Automatic	-
+League of Legends	SCO/INIBIN	L / S	L / S	- / -	L / S	L / S	Automatic	-
+League of Legends (the new .skl format is not supported)	SKN/SKL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+League of Legends	WGEO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Legend of Grimrock	MESH/MATERIALS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Legend of Grimrock	MODEL/MATERIALS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Leveller Reference Shapes /Triangles/	LSL	/ S	/ S	/ -	/ -	/ -	-	-
+Life Forms ASCII	LF	L / S	- / -	- / -	- / -	- / -	-	-
+Light Map Maker ASCII Scene	TXT,TSE	L / -	- / -	- / -	L / -	Gen. / -	Checked	/
+Light Map Maker Mesh	TRI	L / S	- / -	- / -	L / S	Gen. / -	Checked	/
+Lightscape	LP	L /	L /	- / -	- /	/	-	-
+LightWave 3D Lscript	LS	- / S	- / -	- / -	- / S	- / Gen.	Checked	/
+LightWave 3D v5.x	LWO	L / S	L / S	- / -	- / -	- / -	-	-
+LightWave 3D v6.x	LWO	L / -	- / -	L / -	L / -	Gen. / -	Checked	/
+Linden Binary Mesh (Second Life)	LLM	L / -	- / -	- / -	L / -	L / -	MTFS	/
+LinuxCAD (3D Face)	DXS	L / -	L / -	- / -	- / -	- / -	-	-
+LithTech ASCII	LTA	L /	L / -	L /	/	/	/	/
+Little Britain: The Video Game	GEO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Live for Speed	CMX	L / -	- / -	L / -	L / -	Gen. / -	/	/
+LONI	TM	L / S	- / -	- / -	- / -	- / -	-	-
+Looking Glass Studios	E	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Loong: The Power of the Dragon	FSCN	L / -	L / -	- / -	L / -	G / -	Automatic	/
+Loong: The Power of the Dragon	FSKIN	L / -	L / -	- / -	L / -	G / -	Automatic	/
+Loong: The Power of the Dragon	FSM	L / -	L / -	- / -	L / -	G / -	Automatic	/
+Lost Saga Online	MSH	L / -	L / -	- / -	L / -	G / -	Automatic	/
+LS-DYNA Keyword ASCII (*NODE,*ELEMENT_SOLID,*ELEMENT_SHELL)	KEY	L / -	L / -	- / -	- / -	- / -	-	-
+Luna Online	MOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Lune of Eden	COL	L / -	- / -	- / -	- / -	- / -	-	-
+Lune of Eden	MES	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Lunia Online	SKINNEDMESH/XML	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Luxology Modo	LXO	L / -	- / -	- / -	L / -	Gen. / -	Checked	
+Mad Virgin Object (Will of Steel)	MVO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Maestia Online	MMF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Maestro 3D Dental Studio	AM;EM;BM;BMK	L / -	- / -	- / -	- / -	- / -	-	-
+Maestro 3D Dental Studio	M	L / S	- / -	- / -	- / -	- / -	-	-
+Magic Camera	MCO	- / S	- / S	- / -	/	/	/	/
+Majesty 2: The Fantasy Kingdom Sim	MESH/MATERIAL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Manchester Scene Description Language	MSDL	L / S	- / -	- / -	- / -	- / -	-	-
+Maple Input	MPL	- / S	- / S	- / -	- / -	- / -	-	-
+MapInfo	MIF	L / -	- / -	- / -	- / -	- / -	-	-
+MarbleCLAY	MCL	L /	L /	/	/	/	/	/
+Marcin Vorbrodt's CMF Format	CMF	L /	- /	- /	/	/	/	/
+Marmoset	MESH	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Marzipan	VTP	L /	- /	- /	L /	L /	Checked	/
+Massive /without transformation/	MASSIVE	L! /	L /	- / -	- /	- /	/	/
+Materialize 3D!	M3D	L / S	- / -	/	/	/	/	/
+Materials and Geometry Format	MGF	- / S	- / -	/	- / -	- / -	-	-
+Mathematica 3-Script (polygons only)	TS	L / S	- / -	- / -	- / -	- / -	-	-
+Matt3D Designer	LL	- / S	- / -	- / -	- / -	- / -	-	-
+Matt3D Designer	Z80	- / S	- / -	- / -	- / -	- / -	-	-
+Maxon Cinema 4D XL v5.x	C4D	L /	/	- /	/	/	/	/
+Medit	MESH/MEDIT	L / S	L / S	- / -	- / -	- / -	-	-
+Megahedron SMPL	SMPL	L / S	L / S	/	- / -	- / -	-	-
+Mercury Steam Engine (Castlevania: Lords of Shadow)	MSH	L / -	- / -	- / -	L / -	Gen. / -	Automatic	/
+Mercury Steam Engine (Castlevania: Lords of Shadow)	SM3	L / -	- / -	- / -	L / -	Gen. / -	Automatic	/
+Mercury Steam Engine (Clive Barker's Jericho; Scrapland)	SM3	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Mercury Steam Engine 2 (Castlevania: Lords of Shadow 2; Raiders of the Broken Planet)	MSH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Metasequoia	MQO	L / S	L / S	- / -	L / S	L / S	Automatic	/
+MetropoLight	MLT/MSL	L / -	L / -	- / -	L / -	L / -	Checked	/
+MH KARTÜ DDM ASCII	ASC	L / -	- / -	- / -	- / -	- / -	-	-
+MH KARTÜ DDM Binary	DDM	L / -	- / -	- / -	- / -	- / -	-	-
+Michael Garland's SMF	SMF	L / S	- / -	L /	- / -	- / -	-	-
+MicroLathe	LAT	L / -	- / -	- / -	- / -	- / -	-	-
+MicroProse (Gunship!)	3DB	L / -	L / -	- / -	L / -	L / -	Automatic	-
+MicroProse (European Air War; Fleet Defender Gold; Gunship!)	3DZ	L / -	L / -	- / -	L / -	L / -	Automatic	-
+MicroStation Command File	*	- / S	- / -	- / -	- / -	- / -	-	-
+MicroStation Macro	BAS	- / S	- / -	- / -	- / -	- / -	-	-
+Midnight Club 3: DUB Edition	EM	L / -	- / -	- / -	- / -	- / -	-	-
+Midnight Club 3: DUB Edition	MESH/TYPE	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Midtown Madness 2	PKG	L /	- /	/	L /	Gen. /	/	/
+Midtown Madness ARTS	GEO	L /	L /	- / -	- /	- /	-	-
+Might & Magic Heroes VI	GOBJ	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+MikuMikuDance	PMD	L / -	L / -	- / -	L / -	Gen. /	Automatic	L ; L
+MikuMikuDance	PMX	L / -	L / -	- / -	L / -	Gen. /	Automatic	L ; L
+MilkShape 3D ASCII	TXT	L /	- /	- / -	L /	Gen. /	Checked	/
+MilkShape 3D Binary	MS3D	L /	- /	- / -	L /	L /	Checked	/
+MilkShape 3D Text	TXT	L /	- /	- / -	L /	L /	MTFS	/
+MiniCAD Text	TXT	L / S	- / -	- / -	- / -	- / -	-	-
+Misfit 3D Model	MM3D	L / -	- / -	- / -	L / -	L / -	MTFS	/
+Monster Trucks Madness 1&2	BIN	L	L	- / -	/	/	/	/
+Moonlight Creator RAW	MLRAW	L / S	- / -	/	- / -	- / -	-	-
+MORAY User Defined Object	UDO	L / S	- / -	- / -	- / -	- / -	-	-
+Morfit World ASCII	WLD	L / S	L / S	L / S	L / S	L / S	Automatic	/
+Mortar Engine (Fruit Ninja)	BINMODEL	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Mortar Engine (Fruit Ninja)	MMD	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Motocross Madness 2	SLT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+MOVIE.BYU	BYU	- / S	- / -	- / -	- / -	- / -	-	-
+MU Archangel	37	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Muhon (Wuhun)	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+MU Online (uncoded simple object)	BMD	L / -	L / -	- / -	L / -	L / -	Automatic	/
+My3DEngine	M3D	L / S	L / S	- / -	- / -	- / -	-	-
+My Hero Academia: The Strongest Hero	AXMD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L / S ; - / -
+Nav N Go iGO 8	MDL	L / S	- / -	L / S	L / S	Gen. / Gen.	Checked	/
+NCsoft (Auto Assault, Tabula Rasa)	GEO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+NeoEngine ASCII	NSCE	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	/
+Neon Grafix 3D	SHP	L / -	- / -	- / -	- / -	- / -	-	-
+NeoX Engine	MESH/GIM/MTG	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Neuro	SMDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Neutral File Format [NFF]	NFF	L / S>	L / S	- / -	- / -	- / -	-	-
+Neverwinter Nights 2	MDB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Neverwinter Nights Enhanced Edition	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+NEX Model	NEX	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Next Limit Scene Data	SD	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Nichimen	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+Nicktoons Racing	GEO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Nihilistic Object Description v7 (Vampire: The Masquerade - Redemption)	NOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Nihilistic Object Description v10 (StarCraft: Ghost)	NOD/3DMATERIALS.NSA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; -
+Nine Dragons Awaken	X3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	- ; L
+Nitroplus (SoniComi)	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Nitroplus (More! SoniComi)	MDL	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+Nocturne Engine ASCII	KFM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Now3D Object	NOB	L /	L /	/	/	/	-	-
+Now3D Scene	NSC	L / S	L /	/	/	/	-	-
+NTT Engine (LEGO Star Wars: The Skywalker Saga)	MODEL	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+NUAGES (with slice/HPGL save option)	CNT	L / -	- / -	- / -	- / -	- / -	-	-
+ObEd	OBJ	L / -	- / -	- / -	- / -	- / -	-	-
+Object File Format [OFF]	OFF	L / S	- / -	/	- / -	- / -	/	/
+ObjectView	3DO	L / S	- / -	- / -	- / -	- / -	-	-
+Ogopogo	3DC;3DD	L /	- /	- / -	/	/	/	/
+Ogre ASCII	XML/MATERIAL	L / S	L / S	L / S	L / S	Gen. / Gen.	Automatic	/
+Ogre Binary	MESH/MATERIAL	L /	L /	L /	L /	Gen. /	Automatic	/
+"Oldskool Trippin" Demo	DBV	L / S	- / -	- / -	- / -	- / -	-	-
+Oleg's B3D format	B3D	L / -	L / -	- / -	L / -	/ -	/	/
+Oleg's RWB format	RWB	L / S	- / -	- / -	- / -	- / -	-	-
+OMSI - The Bus Simulator v1.00	O3D	L / S	L / S	- / -	L / S	G / G	Automatic	/
+OneTwo3DO	3DP	L / -	L / -	- / -	L / -	L / -	Automatic	/
+OneTwo3DO	ASE	L / -	L / -	- / -	L / -	L / -	Automatic	/
+OneTwo3DO	TXT	L / -	- / -	- / -	- / -	- / -	-	-
+OpenCAMLib	PY	- / S	- / -	- / -	- / -	- / -	-	-
+OpenCTM (RAW compression)	CTM	L /	L /	L /	L /	Gen. /	Automatic	/
+OpenFlight Scene Description Database	FLT	L /	- /	L /	L /	Gen. /	Checked	/
+OpenFx	MFX	L /	L /	- / -	/	/	/	/
+OpenGL 'C' code fragments	C	- / S	- / -	- / -	- / -	- / -	-	-
+OpenJSCAD	JSCAD	- / S	- / -	- / -	- / -	Gen. / -	-	-
+Openplane	LOD	L / -	- / -	- / -	L / -	Gen. / -	/	/
+OpenSCAD	SCAD	- / S	- / -	- / -	- / -	Gen. / -	-	-
+Open Universe	BMF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+OpenZone	MSH; SCN	L /	L /	- /	L /	L /	Automatic	/
+Operation Flashpoint (MLOD)	P3D	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Orbiter Space Flight Simulator	MSH	L /	L /	- /	L /	Gen. /	Automatic	/
+Orion Engine v1 (The Stalin Subway; The Stalin Subway: The Red Veil)	MSH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+OrthoModel	ORT	L / -	- / -	- / -	- / -	- / -	-	-
+Outrage Object Format (Descent 3)	OOF	L / -	- / -	- / -	L / -	L / -	Checked	/
+Outrage Room Format	ORF	L / S	- / -	- / -	- / -	- / S	/	/
+oZone3D	XML	L /	L /	- /	L /	Gen. /	Automatic	/
+PAGErender 3D	FAC	L / S	L / S	- / -	- / -	- / -	-	-
+Painkiller	PKMDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Painter 3D	P3D	L /	L /	- / -	L /	/	/	/
+Panda3D	EGG	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Panorama	RT	- / S	- / -	/	- / -	- / -	-	-
+Panzer Elite	RRF	L / -	/ -	- / -	- / -	- / -	-	-
+Path of Exile	SMD/SM/MAT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Patrick Flynn's Poly Format	POLY	L / S	- / -	- / -	- / -	- / -	-	-
+PC Crash ASCII	IN	L / -	L / -	- / -	- / -	- / -	-	-
+Peak3D	ASC	L /	L /	- / -	- / -	- / -	-	-
+Pepakura Designer v2 ASCII	PDO	L /	L /	- / -	L /	L /	MTFS	/
+Perfect World	BMD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Perfect World	MOX	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Perfect World	SKI/BON	L / -	L / -	- / -	L / -	Gen. / -	Checked	L ;
+PGM	PGM	L / -	- / -	- / -	- / -	- / -	-	-
+Pixel 3D	PXL	L / -	- / -	- / -	- / -	- / -	-	-
+PlantStudio	PLA	L / -	- / -	- / -	- / -	- / -	-	-
+PlantStudio	TDO	L / S	- / -	- / -	- / -	- / -	-	-
+PLG	PLG	- / S	/	- / -	- / -	- / -	-	-
+PLY2	PLY2	L / S	- / -	- / -	- / -	- / -	-	-
+PMesh (University of Edinburgh)	OBJ	L / S	- / -	- / -	- / -	- / -	-	-
+Point Orientation Tool (POT)	PWN	- / S	- / -	- / -	- / -	- / -	-	-
+Poisson Surface Reconstructor ASCII	NPTS	L / S	- / -	- / -	- / -	- / -	-	-
+Poisson Surface Reconstructor Binary	BNPTS	L / S	- / -	- / -	- / -	- / -	-	-
+PolyCAD	POL	L / S	L / -	- / -	- / -	- / -	-	-
+PolyCAD (3D Polygon)	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+PolyCAD (3D Polyline)	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+Polygon File Format (Stanford) ASCII	PLY	L / S	- / -	L / S	/	/	/	/
+Polygon File Format (Stanford) Binary	PLY	L / S	L / S	L /	/	/	/	/
+Polygons	RAW	L / S	- / -	- / -	- / -	- / -	-	-
+PolyRay	PI	- / S	- / -	/	- / -	- / -	-	-
+Poser Prop	PP2	L /	L /	- / -	L /	L /	/	/
+POVLAB Lathe	LTH	L / -	- / -	- / -	- / -	- / -	-	-
+POVLAB Scene	SCN	- / S	/	/	- / -	- / -	-	-
+POV-Ray ASCII /triangles only/	POV	- / S	- / -	/	- / -	- / -	-	-
+POV-Ray Binary	POB	L / -	- / -	- / -	/	/	/	/
+Power Render	PRO	L / -	L / -	- / -	L / -	L / -	MTFS	/
+ppModeler Text	3DT	L / -	- / -	- / -	- / -	- / -	-	-
+Prince of Persia 3D	K2A	L / S	L / S	L /	L / S	L / S	Automatic	/
+Prism3D Engine (American Truck Simulator: Wyoming, Euro Truck Simulator)	PMG/PMD/MAT/TOBJ	L / -	L / -	L /	Gen. / -	L / -	Automatic	/
+Prisms ASCII	POLY	L / S	- / -	- / -	- / -	- / -	-	-
+Prisms Binary	BPOLY	L / S	L / S	L /	L / -	Gen. / -	/	/
+PRO/Engineer render	SLP	L / S	L / S	- / -	- / -	- / -	-	-
+Protein Data Bank	PDB,ENT	L / -	L / -	- / -	- / -	- / -	-	-
+ProtoCad 3D Numeric Value	VAL	L! / S	- / -	- / -	- / -	- / -	-	-
+Psychonauts	PLB	L / -	L / -	- / -	L / -	Gen. / -	MTFS	/
+PV3D	TXT	L / S	L / S	- / -	- / -	- / -	-	-
+Qhull Mathematica	M	L / S	- / -	/	- / -	- / -	-	-
+Qhull OFF	TXT	L / S	- / -	/	- / -	- / -	-	-
+QQXY	SKEM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+QQXY	SM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Quake Model	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Quake Pack	PAK	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Quake II. Model	MD2	L / -	- / -	- / -	L / -	L / -	Automatic	/
+Quake II. Pack	PAK	L / -	- / -	- / -	L / -	L / -	MTFS	/
+Quake III. Model	MD3	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+quick3D Object	Q3O	L /	- /	- / -	/	/	/	/
+quick3D Scene	Q3S	L /	- /	- / -	/	/	/	/
+QuickDraw 3D ASCII Mesh	A3D	- / S	- / -	/	- / -	- / -	-	-
+QuickDraw 3D Binary Mesh	3DMF	L / S	- / -	- / -	L / -	Gen. / -	MTFS	-
+QuickSilver Engine (Moonlight Blade)	DAT;.DFONT	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+QuickSilver Engine (Moonlight Blade)	QSG	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+QuickSlice	SLC	L / -	- / -	- / -	- / -	- / -	-	-
+R2: Reign of Revolution	RMB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Race and Drift	M3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Racer	DOF	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Radiance	RAD	L / S	- / -	/	- / -	- / -	-	-
+RadiosGL	MDL	L / S	- / -	- / -	/	/	/	/
+RadiosGL	RGL	L / -	- / -	- / -	/ -	/ -	/	/
+Radiosity	RADIO	L / S	L / S	- / -	- / -	- / -	-	-
+Ragnarok	RSM	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Railroad Tycoon 3	3DP	L / -	- / -	- / -	L / -	L / -	MTFS	/
+Railroad Tycoon 3	PK4/3DP	L / -	- / -	- / -	L / -	L / -	MTFS	/
+RapidForm polygon faces data	FCS	L / S	- / -	L / S	- / -	- / -	-	-
+Raster3D /triangles,spheres,cylinders only/	R3D	L / S	L / S	- / -	- / -	- / -	-	-
+RAW Triangles	RAW	L / S	- / -	- / -	- / -	- / -	-	-
+RAW Triangles, Fractint Color	RAW	L / S	L / S	- / -	- / -	- / -	-	-
+Rayce	R	- / S	- / -	-	- / -	- / -	-	-
+Ray Dream Designer /Polygons only/	R3D	L / -	L / -	- / -	- / -	- / -	-	-
+RayLab	RL	L / S	- / -	/	- / -	- / -	-	-
+RayLathe	DAT	L / -	- / -	/	- / -	- / -	-	-
+RayShade	RAY	L / S	- / -	/	- / -	- / -	-	-
+Reaction Engine (Chain Reaction) /single,non animated object only/	G3D	L / -	- / -	- / -	L / -	Gen. / -	Checked	/
+Real 3D RPL	RPL	L! / S	- / S	/	- / -	- / -	-	-
+RealFlow Binary Mesh	BIN	L / S	- / -	- / -	- / -	- / -	-	-
+Realsoft 3D Javascript	JS	- / S	- / -	- / -	- / -	- / -	-	-
+Redqueen Rendering Tool	RRT	L /	L /	- / -	- / -	- / -	-	-
+RefLandscape Landscape	*	L / -	- / -	- / -	- / -	- / -	-	-
+Reflections	R3D,R4D	L / -	- / -	- / -	- / -	- / -	-	-
+Refractor Engine (Battlefield 1942; Battlefield Vietnam)	SM/RS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Refractor Engine 2 (Battlefield 2142; Battlefield Heroes)	SKINNEDMESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Relic Entertainment	RGM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+REND ASCII	ASC	L / S	- / -	- / -	- / -	- / -	-	-
+REND BINARY	BIN	L / S	- / -	- / -	- / -	- / -	-	-
+Render	SLP	L / S	L / S	- / -	- / -	- / -	-	-
+RenderDotC	RDC	L / S	L / S	/	- / -	- / -	-	-
+RenderMan	RIB	L / S	L / S	/	- / -	- / -	-	-
+RenderMorphics ASCII	XOF	- / S	/	- / -	- / -	- / -	/	/
+RenderMorphics Binary	XOF	L / S	L / -	- / -	- / -	- / -	/	/
+RenderSoft VRML Editor	RSD	L / S	/	- / -	- / -	- / -	-	-
+RenderStar	VOL	L / S	L / -	- / -	- / -	- / -	-	-
+RenderWare Binary	DFF	L /	- /	L /	L /	Gen. /	/	/
+RenderWare Script	RWX	L / S	L / S	- / -	- / -	- / -	-	-
+Revolution3D Graphics Engine	DXE	L / S	- / -	- / -	L / S	L / S	Checked	/
+Re-Volt	PRM	L / -	L / -	- / -	L / -	L / -	MTFS	/
+Re-Volt	W	L / -	L / -	- / -	L / -	L / -	Automatic	-
+RF Online	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Rhinoceros (meshes only)	3DM	L / -	- / -	- / -	L / -	Gen. / -	/	/
+Richard Burns Rally	SGC	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+RISA-3D (plates only)	R3D	L / -	- / -	- / -	- / -	- / -	-	-
+ROBLOX ASCII Mesh 1.0	MESH	- / S	- / -	- / -	- / S	- / Gen.	-	-
+ROBLOX Binary Mesh 2.0	MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Rocket Jockey	RWB	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Rodin4D	BIN (from .R4S)	L / -	- / -	- / -	- / -	- / -	-	-
+Rotater	TXT	- / S	- / -	/	- / -	- / -	-	-
+Royal Quest	MESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Rumble Fighter	NSX	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Rusty Hearts	MGM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Rysk Your Life 2	R3S	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	/
+Rysk Your Life 2	Z3AM	L / S	- / -	- / -	L / S	Gen. / Gen.	MTFS	/
+Rysk Your Life 2 (the save module needs the original .z3m file!)	Z3M/SKEL	L / S	L / -	- / -	L / S	Gen. / Gen.	Automatic	- / S ; - / S
+Satellite Tool Kit (PolygonMesh only)	MDL	L / S	L / S	- / -	L /	Gen. /	Automatic	/
+Scape	STM	L / -	- / -	/	- / -	- / -	-	-
+Sced /without transformation/	BASE/SCN	L / -	L / -	/	- / -	- / -	-	-
+Scene	DAT	L / S	L / S	/	- / -	- / -	-	-
+Scions of Fate	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Scions of Fate	SKIN/BON	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Sculpt 3D/4D Scene	SCENE	L / S	L / S	- / -	- / -	- / -	-	-
+Sculpt 3D Script	SCRIPT	L / S	L / S	- / -	- / -	- / -	-	-
+Sculpt 4D Script	SCRIPT	L / S	L / S	- / -	- / -	- / -	-	-
+SDF (SubDivFormer) 3D	OM;SDF	L / -	L / -	- / -	- / -	- / -	/	/
+SDF	SDF	L / -	- / -	- / -	L / -	L / -	/	/
+Secret Agent Clank	COOKED	L / -	- / -	- / -	L / -	Gen. / -	-	-
+Sega GT 2002	XMX	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Serious Sam: The Second Encounter	MDL	L / -	L / -	- / -	- / -	- / -	-	-
+SFS4 Soaring Simulator	DDD	L /	L /	- / -	L /	L /	Automatic	/
+SGI Polyhedron	PHD	L / S	- / -	- / -	- / -	- / -	-	-
+SGI Radiosity	GFO	L / -	- / -	L / -	- / -	- / -	-	-
+Shade	SHD	L / S	- / -	/	- / -	- / -	-	-
+Shadow Man	MSH	L / -	L / -	- / -	L / -	L / -	MTFS	/
+Shaiya Online (the save module needs the original .3dc file!)	3DC	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	L / S ; L / S
+Shaiya Online	3DE	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Shaiya Online	3DO	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	/
+Shaiya Online	SMOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+ShiVa3D Engine (Dust: Offroad Racing)	MSH	L / -	- / -	- / -	L / -	Gen. / -	Checked	/
+Showcase Ray-Tracer /Tris/Rects only/	SHW	L / S	L / S	/	- / -	- / -	/	/
+Silo	SIA	L / -	L / -	- / -	L / -	L / -	Automatic	-
+SilverScreen	SF	L / S	- / -	- / -	- / -	- / -	-	-
+SIMM (Software for Interactive Musculoskeletal Modeling)	PHD	L / S	- / -	- / -	- / -	- / -	-	-
+Simple 3D	3D	L / S	L / S	- / -	- / -	- / -	-	-
+Simple File Format [SFF] /Polys only/	SCN	L / S	- / -	- / -	- / -	- / -	-	-
+Sin	SAM/SBM	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Sin	SIN	L / -	- / -	- / -	L / -	L / -	/	/
+Sin	PAK	L / -	- / -	- / -	L / -	L / -	/	/
+Sins of a Solar Empire ASCII	MESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Sins of a Solar Empire Binary	MESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Sins of a Solar Empire 2	MESH/MESH_MATERIAL	L / -	L / -	- / -	L / -	Gen. / -	Checked	L ;
+SKELETON 3D	3DB	- / S	- / -	/	- / -	- / -	-	-
+sof3D	SOF	L / S	- / -	- / -	L /	L /	/	/
+Soldier Front 1	LMA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Solid Dinamics ASCII	SDN	L / -	- / -	/	- / -	- / -	-	-
+Softimage 3D ASCII Mesh	HRC	L / S	L / S	- / -	/	/	/	/
+Softimage 3D Binary Mesh	HRC	L / S	- / -	- / -	/	/	/	/
+Softimage XSI v1.x; v3.x ASCII	XSI	L / -	- / -	- / -	L / -	L / -	Checked	/
+Sonalysts Combat Simulations (Dangerous Waters, Fleet Command)	J3D	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Southlogic Studio (Deer Hunter,Trophy Hunter)	J3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Spark Engine (Natural Selection 2)	MODEL/MATERIAL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Spatial Data Modeling Language	SDML	L / S	L / S	- / -	- / -	- / -	-	-
+SPOCK /triangles only/	SPO	L / S	L / S	- / -	- / -	- / -	-	-
+SPX	SPX	L / -	L / -	- / -	L / -	/	/	/
+SRAW Triangles	RAW	L / S	- / -	- / -	- / -	- / -	/	/
+Starshine Legacy	PME	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Stable Online	PME	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Trek: StarFleet Command	MOD	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Star Wars: Battlefront	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Wars: Battlefront	TER	L / -	L / -	L / -	Gen. / -	Gen. / -	Automatic	/
+Star Wars: Empire at War	ALO	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Wars: Galaxies	MGN/SHT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Wars: Galaxies	MSH/SHT	L / -	- / -	- / -	L / -	Gen. / -	Automatic	/
+Star Wars: Starfighter	MSH/MTL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Star Wars: Starfighter /without transformation/	PMDL	L / -	L / -	- / -	/ -	/ -	/	/
+Starshatter	MAG	L / -	L / -	- / -	/ -	/ -	/	/
+StarShip Troopers (single object only)	SBM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+"Start Me Up" Demo	HCR	L / S	- / -	- / -	- / -	- / -	/	/
+Stefan Zerbst's ZFX format	ZFX	L /	L /	- /	L /	Gen. /	Automatic	/
+Stereolithography ASCII	STL	L / S	- / -	- / -	- / -	- / -	-	-
+Stereolithography BINARY	STL	L / S	- / -	- / -	- / -	- / -	-	-
+StlView	SOL	L / S	L / -	- / -	- / -	- / -	-	-
+Storm3D	SOD	L / -	- / -	- / -	L / -	L / -	Automatic	/
+"strange feelings" Demo	OB3	L / S	- / -	- / -	/	/	/	/
+Stratasys Genesys Xs (with slice/HPGL save option)	SSL	L / -	- / -	/	- / -	- / -	-	-
+Strawberry Shortcake: The Sweet Dreams	INS	L / -	- / -	- / -	L / -	L / -	Checked	/
+Strife	MODEL/MATERIAL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; L
+Stripe	OBJF	- / S	- / -	/	/	/	/	/
+Sunflow	SC	L /	L /	- / -	L /	Gen. /	Automatic	/
+SUN "shaded"	DAT	L / S	- / -	/	- / -	- / -	-	-
+Super3D	TXT	- / S	- / S	- / -	- / -	- / -	-	-
+Superficie	SUP	- / S	/	/	/	/	-	-
+"SUPER MEIZE-X32" 4K Intro	32D	L / -	- / -	- / -	L / -	Gen. / -	Checked	/
+SuperViewer	SV	L / -	L / -	- / -	L / -	L / -	Automatic	/
+SUPPA 3D Engine	GEM	L / S	- / -	/	- / -	- / -	-	-
+Supreme Commander	SCM	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Surface Evolver /simplex model only/	DMP	L / -	- / -	- / -	- / -	- / -	-	-
+Surface Evolver /simplex model only/	FE	L / S	- / -	- / -	- / -	- / -	-	-
+Surf Ice /uncompressed/	MZ3	L / S	- / -	L / S-	- / -	- / -	-	-
+SURFMODL	SRF	L / S	L / -	- / -	- / -	- / -	-	-
+SURFER ASCII Grid	GRD	L / -	- / -	- / -	- / -	- / -	-	-
+SURFER Binary Grid	GRD	L / -	- / -	- / -	- / -	- / -	-	-
+Surfstand Surface Data File	SDF	L / -	- / -	- / -	- / -	- / -	-	-
+SurRender 3D	HX	L / -	- / -	- / -	L / -	L / -	Checked	/
+Sutherland VW database	DAT	L / S	- / -	- / -	- / -	- / -	-	-
+Sword and Romance	BMESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	L ; L
+Table Top Racing	AMODEL	L / -	L / -	- / -	L / -	Gen. / -	Checked	/
+Tachyon	DAT	L / S	L / S	/	- / -	- / -	-	-
+Tales of Fantasy	SKEM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Tales of Fantasy	SM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Tales Runner	M1/PT1	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Tecnomatix ROBFACE /Composite Curve only/	RF	- / S	- / S	- / -	- / -	- / -	-	-
+Tecnomatix ROBFACE /Facet Block only/	RF	L / S	- / -	- / -	- / -	- / -	-	-
+Tecplot	TEC	- / S	- / -	- / -	- / -	- / -	-	-
+TerraGear	ATG	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Terminal Reality TRI Tools	S3D	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Terminator 3: War of the Machines	SCA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Terragen /257*257/	TER	L / -	- / -	- / -	- / -	- / -	-	-
+Terragen 2 (unprotected)	TGO	L / -	L / -	- / -	L / -	L / -	Automatic	-
+TetGen	POLY	L / S	L / S	- / -	- / -	- / -	-	-
+TetGen	SMESH	L / S	L / S	- / -	- / -	- / -	-	-
+TexMesh3D	TRI	L / S	- / -	- / -	- / -	- / -	-	-
+Textured Triangles	TRI	L / S	- / -	- / -	L / S	Gen. / -	MTFS	/
+Thang Online	MSH	L / -	- / -	- / -	- / -	- / -	-	/
+TheEngine (King's Bounty: Crossworlds)	BMA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+TheEngine (King's Bounty: Crossworlds)	BMS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+"The Friday Night" Demo	K3D	L /	L /	- / -	L /	Gen. / -	Automatic	/
+The I of the Dragon	MSH	L /	L /	- / -	L /	Gen. / -	Automatic	L ;
+The King of Fighters: World	SKIN/SKEL	L /	L /	- / -	L /	Gen. / -	Checked	L ;
+The Last Dance	MESH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+The Nebula Device 2 ASCII	N3D2	L / S	- / -	- / -	/	/	-	-
+The Nebula Device 2 Binary	NVX2	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+The Thing	MSH	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+The Legend of the Condor Heroes	COL	L / -	- / -	- / -	- / -	- / -	-	/
+The Legend of the Condor Heroes	MESH/MATERIAL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+The Legend of Heroes: Trails in the Sky	_X3	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Third Wire Productions (Strike Fighters: Project 1; Strike Fighters 2)	HFD/INI	L / -	L / -	- / -	Gen. / -	Gen. / -	Automatic	-
+Third Wire Productions (Strike Fighters: Project 1)	LOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; -
+Third Wire Productions (Strike Fighters 2)	LOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ; -
+Third Wire Productions (Strike Fighters: Project 1)	SHD	L / -	- / -	- / -	- / -	- / -	-	-
+Thread	3D	L / -	- / -	- / -	- / -	/	/	/
+Three.js JSON v3 ASCII	JSON	- / S-	- / S-	- / -	- / S-	- / Gen.	Automatic	/
+Tianji Online	MDX2	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Titan Quest	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+TNT Leibniz Universität Hannover	STP	L / S	- / -	- / -	- / -	- / -	-	-
+Topocad Terrain Model	DTM	L / -	- / -	- / -	- / -	- / -	-	-
+TOPOS	3DF	L / S	- / -	- / -	- / -	- / -	-	-
+Total Air War	SH	L / -	- / -	- / -	- / -	- / -	-	-
+Touhou Dokasuka	GSA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+TPOLY	TPOLY	L / S	- / -	/	- / -	- / -	-	-
+Trainz Mesh Importer	XML	/ S	/ S	- / -	/ S	/ Gen.	/	/
+Traktor	TMX	L /	- /	- / -	/	/ -	/	/
+Transport Fever	MSH/BLOB/MTL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Treasure Planet: Battle at Procyon	MDB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Triangles	TRI	L / S	L / S	- / -	- / -	- / -	-	-
+Tsunami 2265	MODEL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Trinigy Vision Engine (Arcania: Gothic 4; Grotesque Tactics: Evil Heroes; Orcs Must Die; Trapped Dead; Soul Worker)	VCOLMESH	L / -	- / -	- / -	- / -	- / -	-	-
+Trinigy Vision Engine (Arcania: Gothic 4; Grotesque Tactics: Evil Heroes; Orcs Must Die; Trapped Dead; Soul Worker)	MODEL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Trinigy Vision Engine (Arcania: Gothic 4; Grotesque Tactics: Evil Heroes; Orcs Must Die; Trapped Dead; Soul Worker)	VMESH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Trinity Online	MMB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Triple Dash Garlic 3D Engine	NFT	L / S	L / S	- / -	L / S	L / S	Automatic	/
+Turbo Silver	OBJ	L /	L /	- / -	- / -	- / -	-	-
+Twelve Sky 2 (extracted *.SOBJECT file)	MDL	L / -	- / -	- / -	L / -	Gen. / -	MTFS	-
+Twente Object	TOF	L /	- /	- / -	- / -	- / -	-	-
+Tycoon City: New York	DM	L / -	- / -	L / -	L / -	Gen. / -	MTFS	/
+Ultimate Ride	MX	L /	L /	- / -	L /	L /	Automatic	/
+Unigine Engine (Oil Rush)	MESH	L / -	- / -	L / -	L / -	Gen. / -	MTFS	/
+Unigraphics Facet	FAC	L / -	L / -	- / -	- / -	- / -	-	-
+University of Minnesota Geometry Center data	TRI	L / S	- / -	- / -	- / -	- / -	-	-
+Unreal	*_D.3D;*_A.3D	L /	- /	/	/	L / -	MTFS	/
+Unreal Engine Skeletal Mesh	PSK	L / -	L / -	- / -	L / -	Gen. / -	MTFS	L / - ; L / -
+UnrealEd	T3D	L / S	- / -	- / -	- / -	- / -	-	-
+UnrealEd 3	T3D	L / S	- / -	- / -	/	/	/	/
+V8 Challenge	XO	L /	- /	/	/	/	/	/
+VDrift	JOE	L / -	L / -	- / -	L / -	L / -	Automatic	/
+Vector Object	VO	L / S	- /	- / -	/	/	/	/
+VectorWorks VectorScript	TXT	- / S	- / -	- / -	- / -	- / -	-	-
+VersaCad 3D Complex Polygon	PLG	- / S	- / -	- / -	- / -	- / -	-	-
+Vertex	VTX	L /	L /	- / -	L /	Gen. / -	Checked	/
+Vertex 3D Model Assembler	V3D	L / S	L / S	- / -	/	/	/	/
+Vertex ASCII	ASC	L / -	L / -	- / -	- / -	- / -	-	-
+Vertex Buffer Object (Windows 8.0 Resource loading sample)	VBO	L / S	- / -	- / -	L / S	Gen. / Gen.	MTFS	-
+Vertex-Edge-Face	VEF	L / -	- / -	- / -	- / -	- / -	-	-
+Vertigo ASCII	POL	/ S	- / -	- / -	- / -	- / -	-	-
+VideoScape 3D ASCII	GEO	L / S	- / -	- / -	- / -	- / -	-	-
+VirtuaLight /Polys and triangles only/	VIB/VB	/ S	/ S	- / -	/	/	/	/
+Virtual Pool 4	DAE	L / -	- / -	- / -	L / -	Gen. / -	MTFS	/
+Virtual Tuning	GEO/MAT	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+Vision3D	TXT	/ S	/ S	- / -	- / -	- / -	-	-
+Vision 3D Engine (Desperados 2: Cooper's Revenge; Emergency 3; Lula 3D) /without transformation/	V3O	L / -	L / -	- / -	L / -	Gen. / -	Automatic	;
+Vista Pro ASCII Elevation Data 258x258	TXT	L! / -	- / -	- / -	- / -	- / -	-	-
+Vista Pro Binary Elevation Data 258x258	BIN	L! / -	- / -	- / -	- / -	- / -	-	-
+Visualization Toolkit ASCII	VTK	/ S	- / -	- / -	/ S	- / -	/	/
+Vivid	V	- / S	- / S	- / -	- / -	- / -	-	-
+V.O.D.K.A.	POB	L / S	L / S	L / S	L / S	L / S	Checked	/
+Voltron: Defender of the Universe	CMFH	L / -	L / -	-	L / -	Gen. / -	Automatic	L ;
+Voltron: Defender of the Universe	RVM	L / -	L / -	-	L / -	Gen. / -	Automatic	-
+VORT	VOR	L / S	L /	-	- / -	- / -	-	-
+Voxblast ASCII /Polygons only/	POLY	L	L	- / -	-	/	-	-
+VRMesh	VRG	L /	- /	- /	L /	Gen. /	Checked	/
+VRML Scene V1.0 ASCII	WRL	L / S	L / S	/	L / S	L / S	Automatic	/
+VRML Scene V2.0 ASCII	WRL	- / S	- / S	/	- / S	- / S	Checked	/
+Vuforia Engine	V3D	L / S	L / S	-	L / S	L / S	Checked	/
+Warcraft III	MDX	L / -	/ -	- / -	L / -	Gen. / -	Checked	/
+Warhammer 40000: Gladius - Relics of War	MSH	L / -	- / -	L / -	L / -	Gen. / -	MTFS	L ;
+Warzone 2100	PIE	L / S	L / S	- / -	L / S	L / S	Automatic	/
+Wavefront	OBJ/MTL	L / S	L / S	- / -	L / S		Automatic	/
+Web3D Consortium Extensible 3D	X3D	- / S	- / S	- / -	- / S	- / S	Checked	/
+WEBOOGL	OOG	L / S	- / -	- / -	- / -	- / -	-	-
+Whale 2 Engine Binary (Starpoint Gemini 2, Starpoint Gemini Warlords)	MDL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Winimages /tri,rect only/	W3D	L / S	- / -	- / -	- / -	- / -	-	-
+With Your Destiny	MSA	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+With Your Destiny	MSH	L / -	L / -	- / -	L / -	Gen. / -	Automatic	L ;
+Worldcraft	MAP	L / -	- / -	- / -	/	/	/	/
+World Render 3D	WRD	L / S	- / -	- / -	-	/	-	-
+WorldToolKit Neutral File Format	NFF	L / S	L / S	L /	L /	Gen. / -	/	/
+X3D	OBJ	L / -	L / -	- / -	- / -	- / -	-	-
+X3 Reality Engine (X3 Terran Conflict)	BOB	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+X3 Reality Engine (X3 Terran Conflict) /converted with x2bc/	BOD	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+XGL	XGL	/ S	/ S	- / -	- / -	- / -	-	-
+XIII Century: Death or Glory	OSM	L / -	- / -	- / -	L / -	L / -	MTFS	/
+XIII Century: Death or Glory	OSS	L / -	- / -	- / -	L / -	L / -	MTFS	/
+XNALara ASCII Mesh	MESH.ASCII	L /	L /	/	L /	Gen. /	Automatic	L ; L
+XNALara Binary Mesh	MESH	L / S	L / S	L / S	L / S	Gen. / Gen.	Automatic	L / S ; L / S
+XNA Posing Studio	XPS	L / -	L / -	L / -	L / -	Gen. / -	Automatic	L / - ; L / -
+XNA Posing Studio Generic Item	OBJ/MTL/ARL	- / S	- / S	- / S	- / S	- / Gen.	-	- / S ; - / S
+xNormal Simple Binary Mesh	SBM	L / S	- / -	/	L / S	L / S	MTFS	;
+X-Plane v7.x	OBJ	L / S	/	- / -	L / S	L / S	Checked	/
+X-Plane v8.x	OBJ	L / S	L / S	- / -	L / S	Gen. / Gen.	Automatic	/
+YafRay	XML	L / S	L / S	- / -	L / -	L / -	Checked	/
+YAODL (SGI PowerFlip)	TXT	/ S	/ S	- / -	- / -	- / -	-	-
+YASRT Raytracer /Polys and tris only/	YST	L / S	L / S	/	- / -	- / -	-	-
+YS Flight	SRF	L /	L /	- / -	- / -	- / -	-	-
+Z Corporation	ZPR	L / -	L / -	- / -	- / -	- / -	-	-
+Zero Escape: Virtue's Last Reward	BM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+Zero Escape: Virtue's Last Reward	BSM	L / -	L / -	- / -	L / -	Gen. / -	Automatic	-
+ZnZin Engine (Rose Online)	ZMS	L / -	L / -	- / -	L / -	Gen. / -	Automatic	- / - ; L / -
+Zu Online	MEX	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/
+_3D

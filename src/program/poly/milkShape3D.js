@@ -4,10 +4,15 @@ import {Program} from "../../Program.js";
 // Get new coordinates for new menu items by looking at sandbox/app/milkShape3D_MenuCoords.png in gimp
 const _FORMATS =
 {
-	dxf       : {menuY : 324, window : {name : "MilkShape 3D 1.8.4", text : "Do you want to delete", dismiss : "Y"}},
-	fbx       : {menuY : 342, window : {name : "FBX Import", dismiss : "{ENTER}"}},
-	lightWave : {menuY : 307, window : {name : "LightWave LWO Import", dismiss : `${"{TAB}".repeat(9)}{SPACE}{TAB}{SPACE}{TAB}{SPACE}{ENTER}`}},
-	wavefront : {menuY : 257}
+	doom3Mesh   : {menuY : 520},
+	dxf         : {menuY : 324, window : {name : "MilkShape 3D 1.8.4", text : "Do you want to delete", dismiss : "Y"}},
+	fbx         : {menuY : 342, window : {name : "FBX Import", dismiss : "{ENTER}"}},
+	lightWave   : {menuY : 307, window : {name : "LightWave LWO Import", dismiss : `${"{TAB}".repeat(9)}{SPACE}{TAB}{SPACE}{TAB}{SPACE}{ENTER}`}},
+	mayaASCII   : {menuY : 504},
+	quake2Model : {menuY : 44},
+	quake3Model : {menuY : 59},
+	rtcwMDC     : {menuY : 538},
+	wavefront   : {menuY : 257}
 };
 
 export class milkShape3D extends Program

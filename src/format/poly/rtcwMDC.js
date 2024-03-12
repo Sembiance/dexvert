@@ -7,5 +7,5 @@ export class rtcwMDC extends Format
 	ext            = [".mdc"];
 	forbidExtMatch = true;
 	magic          = ["rtcwMDC"];
-	converters     = ["assimp"];
+	converters     = ["assimp", "milkShape3D[format:rtcwMDC]"];
 }

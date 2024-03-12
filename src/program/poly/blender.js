@@ -12,7 +12,6 @@ const _VALID_FORMATS =
 	lwo     : {importKey : "import_scene.lwo", addon : "io_scene_lwo"},				// https://github.com/nangtani/blender-import-lwo
 	lxo     : {importKey : "import_scene.lxo", addon : "io_scene_lxo"},				// https://github.com/rockjail/io_scene_lxo
 	md2     : {importKey : "import_md2.some_data", addon : "io_import_md2"},		// https://github.com/lennart-g/blender-md2-importer
-	//md3   : {importKey : "import_scene.md3", addon : "io_scene_md3"},				// https://github.com/hypov8/blender-md3_2.7-3.2		(Couldn't get it to work)
 	md5mesh : {importKey : "import_scene.md5mesh", addon : "io_scene_md5_28"},		// https://github.com/KozGit/Blender-2.8-MD5-import-export-addon
 	ms3d    : {importKey : "import_scene.ms3d", addon : "io_scene_ms3d"},			// https://projects.blender.org/blender/blender-addons/issues/98826  (used to be built into blender in the past)
 	ogre    : {importKey : "ogre.import_mesh", addon : "io_ogre"},					// https://github.com/OGRECave/blender2ogre

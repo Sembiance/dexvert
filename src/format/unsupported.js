@@ -208,16 +208,12 @@ export default
 	poly :
 	{
 		amapi3DModel            : {name : "Amapi 3D Model", ext : [".a3d", ".x"], magic : ["Amapi 3D model"]},
-		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide"]},
+		autoShadeRenderingSlide : {name : "AutoShade Rendering Slide", ext : [".rnd"], magic : ["AutoCAD Autoshade rendering slide", /^fmt\/1044( |$)/]},
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
-		electricImage3DFile     : {name : "Electric Image 3D File", ext : [".fact"], magic : ["ElectricImage 3D file"]},
-		esriShape               : {name : "ESRI/ArcView Shape", ext : [".shp"], magic : ["ArcView Shape", "ESRI Shapefile", /^x-fmt\/235( |$)/], weakMagic : ["ESRI Shapefile"]},
-		infiniDScene            : {name : "Infini-D Scene", ext : [".ids", ".id4"], magic : ["Infini-D Scene File"]},
 		mobile3DGraphic         : {name : "Mobile 3D Graphic", ext : [".m3g"], magic : ["Mobile 3D Graphics"], website : "http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html"},
-		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor"]},
+		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor", /^fmt\/832( |$)/]},
 		radCadDrawing           : {name : "Rad Cad Drawing", ext : [".cad"], magic : ["Rad Cad drawing"]},
-		ravenObjectFileFormat   : {name : "Raven Object File Format", ext : [".rof"], magic : ["ROFF 3D animation"]},
 		renderit3DData          : {name : "Renderit3D Data", ext : [".r3d"], magic : ["Renderit3d data"]},
 		solidWorksAssembly      : {name : "SolidWorks Assembly", ext : [".sldasm"], magic : ["SolidWorks Assembly"]},
 		solidWorksDrawing       : {name : "SolidWorks Drawing", ext : [".slddrw"], magic : ["SolidWorks Drawing"]},

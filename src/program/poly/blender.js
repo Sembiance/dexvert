@@ -56,8 +56,8 @@ export class blender extends Program
 
 			${r.flags.format!=="native" ? `
 			${_VALID_FORMATS[r.flags.format].addon ? `bpy.ops.preferences.addon_enable(module="${_VALID_FORMATS[r.flags.format].addon}")` : ""}
-			print(dir(bpy.ops.import_scene))
-			#print(dir(bpy.ops.ogre))
+			#print(dir(bpy.ops.import_scene))
+			#print(dir(bpy.ops))
 			${_VALID_FORMATS[r.flags.format].importKey ? `bpy.ops.${_VALID_FORMATS[r.flags.format].importKey}(filepath=sys.argv[5])` : `bpy.ops.wm.${r.flags.format}_import(filepath=sys.argv[5])`}
 			
 			bpy.ops.wm.save_as_mainfile(filepath=sys.argv[6])

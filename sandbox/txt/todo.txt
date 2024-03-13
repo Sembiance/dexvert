@@ -107,6 +107,10 @@
 /--------------\
 | Low Priority |
 \--------------/
+* It might be fun to write a parser for this obscure format: https://breakintochat.com/wiki/Instant_Graphics_and_Sound_(IGS)
+  It's documented pretty well in sandbox/app/IGSED25.ZIP  -> MODEMS/MOD_A2L/IGSED25/IGS217.TXT
+  It also does sound and music though, so maybe this is more of an archive producing both images and audio? or maybe a video?
+  
 * PolyTrans supports a lot of different formats that I don't currently support:
 	openNURBS
 	electricImage3DFile (FACT)

@@ -6,6 +6,6 @@ export class pabloPaint extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PabloPaint";
 	ext        = [".pa3", ".ppp"];
 	mimeType   = "image/x-pablo-packed-picture";
-	magic      = ["PabloPaint packed bitmap"];
+	magic      = ["PabloPaint packed bitmap", /^fmt\/1721( |$)/];
 	converters = ["recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

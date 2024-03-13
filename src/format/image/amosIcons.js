@@ -6,6 +6,6 @@ export class amosIcons extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AMOS_Icon_Bank";
 	ext        = [".abk"];
 	mimeType   = "image/x-amos-iconbank";
-	magic      = ["AMOS Icons Bank"];
+	magic      = ["AMOS Icons Bank", "AMOS Basic icon bank"];
 	converters = ["deark[module:abk]"];
 }

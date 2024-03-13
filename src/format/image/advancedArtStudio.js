@@ -7,7 +7,7 @@ export class advancedArtStudio extends Format
 	ext           = [".ocp", ".scr", ".win", ".pal"];
 	fileSize      = {".ocp" : 10018};
 	matchFileSize = true;
-	auxFiles = (input, otherFiles, otherDirs, fileSizeMatchExt) =>
+	auxFiles = (input, otherFiles, otherDirs, {fileSizeMatchExt}) =>
 	{
 		const ourExt = input.ext.toLowerCase();
 

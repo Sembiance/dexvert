@@ -6,7 +6,7 @@ export class cgm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CGM";
 	ext        = [".cgm"];
 	mimeType   = "image/cgm";
-	magic      = ["Computer Graphics Metafile", /^fmt\/(303|306)( |$)/, /^x-fmt\/142( |$)/];
+	magic      = ["Computer Graphics Metafile", "binary Computer Graphics Metafile", "clear text Computer Graphics Metafile", /^fmt\/(303|306)( |$)/, /^x-fmt\/142( |$)/];
 	weakMagic  = true;
 
 	// soffice SVG output includes crappy <script> code that only allows the SVG to render when viewed as a webpage (not even an <img> tag works)

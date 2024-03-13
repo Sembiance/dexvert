@@ -6,6 +6,6 @@ export class manPage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Man_page";
 	ext            = [".man", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8"];
 	forbidExtMatch = true;
-	magic          = ["Man page", "troff or preprocessor input"];
+	magic          = ["Man page", "troff or preprocessor input", "TROFF markup"];
 	converters     = ["man2html"];
 }

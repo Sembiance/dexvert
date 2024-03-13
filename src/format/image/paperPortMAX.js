@@ -6,6 +6,6 @@ export class paperPortMAX extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/PaperPort_(MAX)";
 	ext            = [".max"];
 	forbidExtMatch = true;
-	magic          = ["PaperPort scanned document/image", /^fmt\/(1223|1224|1225|1339)( |$)/];
+	magic          = ["PaperPort scanned document/image", "Visioneer PaperPort", /^fmt\/(1223|1224|1225|1339)( |$)/];
 	converters     = ["paperPort"];
 }

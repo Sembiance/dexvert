@@ -18,9 +18,11 @@ const argv = cmdUtil.cmdInit({
 	{
 		showWeak : {desc : "If you set this to true, even matches marked 'weak' will show up"},
 		unique   : {desc : "Set this to filter out duplicated magic values and only show 1 of each magic string"},
-		program  : {desc : "Which program to run", required : true, hasValue : true, allowed : DETECTOR_PROGRAMS},
+		program  : {desc : "Which program to run (or all)", required : true, hasValue : true, allowed : [...DETECTOR_PROGRAMS, "all"]},
 		format   : {desc : "Specify one or more formats. Can specify 'all' or an entire family like 'image' or partials like 'image/a'", required : true, hasValue : true, multiple : true}
 	}});
+
+const detectorsToTest = argv.program==="all" ? Array.from(DETECTOR_PROGRAMS) : [argv.program];
 
 await initPrograms(xlog);
 await initFormats(xlog);
@@ -65,41 +67,48 @@ const sampleFilePaths = (await Array.from(formatsToProcess).parallelMap(async fo
 	return r;
 })).flat();
 
-console.log(printUtil.minorHeader(`${sampleFilePaths.length.toLocaleString()} samples - Getting detections from: ${argv.program}`, {prefix : "\n"}));
-bar = printUtil.progress({max : sampleFilePaths.length});
-const matches = [];
-await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
+
+async function checkDetector(detectorid)
 {
-	const r = await Program.runProgram(argv.program, await FileSet.create(path.dirname(sampleFilePath), "input", sampleFilePath), {xlog : new XLog("error")});
-	bar.increment();
-	if(!r?.meta?.detections?.length)
-		return;
-
-	const detection = r.meta.detections[0];
-	if(detection.weak && !argv.showWeak)
-		return;
-
-	const magic = detection.value.trim();
-	if(isExistingMagic(magic))
-		return;
-
-	const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");
-	matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).innerTruncate(30), magic : magic.innerTruncate(65)});
-}, -1);
-
-if(argv.unique)
-{
-	const uniqueMagics = [];
-	matches.filterInPlace(o =>
+	console.log(printUtil.majorHeader(`${detectorid}`, {prefix : "\n"}));
+	bar = printUtil.progress({max : sampleFilePaths.length});
+	const matches = [];
+	await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	{
-		if(!uniqueMagics.includes(o.magic))
-		{
-			uniqueMagics.push(o.magic);
-			return true;
-		}
+		const r = await Program.runProgram(detectorid, await FileSet.create(path.dirname(sampleFilePath), "input", sampleFilePath), {xlog : new XLog("error")});
+		bar.increment();
+		if(!r?.meta?.detections?.length)
+			return;
 
-		return false;
-	});
+		const detection = r.meta.detections[0];
+		if(detection.weak && !argv.showWeak)
+			return;
+
+		const magic = detection.value.trim();
+		if(isExistingMagic(magic))
+			return;
+
+		const [family, format] = path.relative(SAMPLES_DIR_PATH, sampleFilePath).split("/");
+		matches.push({formatid : `${family}/${format}`, filename : path.basename(sampleFilePath).innerTruncate(30), magic : magic.innerTruncate(65)});
+	}, -1);
+
+	if(argv.unique)
+	{
+		const uniqueMagics = [];
+		matches.filterInPlace(o =>
+		{
+			if(!uniqueMagics.includes(o.magic))
+			{
+				uniqueMagics.push(o.magic);
+				return true;
+			}
+
+			return false;
+		});
+	}
+
+	console.log(printUtil.columnizeObjects(matches.sortMulti([o => o.formatid.split("/")[0], o => o.formatid.split("/")[1]]), {prefix : "\n\n"}));
 }
 
-console.log(printUtil.columnizeObjects(matches.sortMulti([o => o.formatid.split("/")[0], o => o.formatid.split("/")[1]]), {prefix : "\n\n"}));
+for(const detectorid of detectorsToTest)
+	await checkDetector(detectorid);

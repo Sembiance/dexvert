@@ -6,6 +6,6 @@ export class cpcDisk extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DSK_(CPCEMU)";
 	ext            = [".dsk"];
 	forbidExtMatch = true;
-	magic          = ["Standard CPCEMU style disk image", "Extended CPCEMU style disk image", "Amstrad/Spectrum Extended .DSK data", "CPCEMU Disk image format"];
+	magic          = ["Standard CPCEMU style disk image", "Extended CPCEMU style disk image", "Amstrad/Spectrum Extended .DSK data", "CPCEMU Disk image format", "Amstrad/Spectrum .DSK data"];
 	converters     = ["cpcxfs"];
 }

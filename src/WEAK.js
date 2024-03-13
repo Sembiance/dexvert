@@ -356,6 +356,7 @@ export const WEAK_VALUES =
 	/^Genecyst save state$/,
 	/^GIF bitmap \(generic\)$/,
 	/^Glest 3D model$/,
+	/^GNU Info document$/,
 	/^GNU Privacy Guard public keyring \(generic\)$/,
 	/^GraphiCode Programmable Device Format$/,
 	/^Hrust 1 packed/,

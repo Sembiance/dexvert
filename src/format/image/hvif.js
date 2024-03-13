@@ -6,6 +6,6 @@ export class hvif extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Haiku_Vector_Icon_Format";
 	ext        = [".hvif"];
 	mimeType   = "image/x-hvif";
-	magic      = ["Haiku Vector Icon Format"];
+	magic      = ["Haiku Vector Icon Format", /^fmt\/1791( |$)/];
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

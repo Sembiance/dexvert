@@ -6,6 +6,6 @@ export class warc extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/WARC";
 	ext            = [".warc"];
 	forbidExtMatch = true;
-	magic          = ["WARC Archive version", "Web ARChive File Format"];
+	magic          = ["WARC Archive version", "Web ARChive File Format", /^WARC$/, /^fmt\/1355( |$)/];
 	converters     = ["Warcat"];
 }

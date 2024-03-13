@@ -5,7 +5,7 @@ export class oggTheoraVideo extends Format
 	name         = "Ogg Theora Video";
 	website      = "http://fileformats.archiveteam.org/wiki/Theora";
 	ext          = [".ogg", ".ogv"];
-	magic        = ["Ogg data, Theora video", "Ogg Theora video"];
+	magic        = ["Ogg data, Theora video", "Ogg Theora video", /^fmt\/945( |$)/];
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg"];
 }

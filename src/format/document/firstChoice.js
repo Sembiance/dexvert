@@ -6,6 +6,6 @@ export class firstChoice extends Format
 	ext            = [".doc", ".pfs"];
 	forbidExtMatch = [".doc"];
 	weakExt        = true;
-	magic          = ["First Choice document", /^fmt\/1282( |$)/];
+	magic          = ["First Choice document", /^fmt\/(1282|1283)( |$)/];
 	converters     = ["fileMerlin[type:PFSFC*]"];
 }

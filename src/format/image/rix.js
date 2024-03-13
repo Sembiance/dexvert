@@ -6,6 +6,6 @@ export class rix extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ColoRIX";
 	ext        = [".rix", ".sca", ".scb", ".scc", ".sce", ".scf", ".scg", ".sci", ".sck", ".scl", ".scn", ".sco", ".scp", ".scq", ".scr", ".sct", ".scu", ".scv", ".scw", ".scx", ".scy", ".scz"];
 	weakExt    = [".scr", ".sxr"];
-	magic      = ["ColoRIX bitmap"];
+	magic      = ["ColoRIX bitmap", "ColoRIX Image"];
 	converters = ["nconvert", "deark[module:colorix]", "pv[matchType:magic]"];
 }

@@ -6,6 +6,6 @@ export class mldf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MLDF";
 	ext        = [".mld"];
 	mimeType   = "image/x-mldf";
-	magic      = ["MLDF BMHD file"];
+	magic      = ["MLDF BMHD file", "IFF MLDF bitmap"];
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

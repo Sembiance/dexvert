@@ -5,6 +5,6 @@ export class envoy extends Format
 	name       = "Envoy Document";
 	website    = "http://fileformats.archiveteam.org/wiki/Envoy";
 	ext        = [".evy"];
-	magic      = ["Envoy document", /^fmt\/1286( |$)/];
+	magic      = ["Envoy document", /^fmt\/(1286|1287)( |$)/];
 	converters = ["envoyViewer"];
 }

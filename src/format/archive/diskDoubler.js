@@ -6,6 +6,6 @@ export class diskDoubler extends Format
 	website      = "http://justsolve.archiveteam.org/wiki/DiskDoubler";
 	ext          = [".dd"];
 	keepFilename = true;
-	magic        = ["Disk Doubler compressed data", /^DiskDoubler$/, /^fmt\/1399( |$)/];
+	magic        = ["Disk Doubler compressed data", "DiskDoubler compressed data", /^DiskDoubler$/, /^fmt\/1399( |$)/];
 	converters   = ["unar", "macunpack"];
 }

@@ -7,7 +7,7 @@ export class tundra extends Format
 	ext            = [".tnd"];
 	forbidExtMatch = true;
 	mimeType       = "text/x-tundra";
-	magic          = ["TUNDRA text-mode graphics"];
+	magic          = ["TUNDRA text-mode graphics", /^fmt\/1603( |$)/];
 	metaProvider   = ["ansiArt"];
 	converters     = ["ansilove[format:tnd]", `abydosconvert[format:${this.mimeType}]`];
 }

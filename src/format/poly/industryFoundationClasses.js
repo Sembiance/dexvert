@@ -6,6 +6,6 @@ export class industryFoundationClasses extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/IFC";
 	ext            = [".ifc"];
 	forbidExtMatch = true;	// too modern, unlikely to match
-	magic          = [/^fmt\/700( |$)/];
+	magic          = [/^fmt\/(699|700)( |$)/];
 	converters     = ["assimp"];
 }

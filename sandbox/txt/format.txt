@@ -77,7 +77,7 @@ If a magic is marked as unsafe elsewhere, you can trust it explicitly by setting
 
 
 >>> ******** Other
->>> auxFiles = (inputFile, otherFiles, otherDirs, fileSizeMatchExt) => [file, file] || false
+>>> auxFiles = (inputFile, otherFiles, otherDirs, {fileSizeMatchExt, xlog}) => [file, file] || false
 Some formats require other sibling files/directories to be present in order to convert correctly.
 Return an array of DexFiles (filtered from otherFiles/otherDirs) or false if no files were required.
 If you return an empty array, that is stating the required files were not found and to not match against this format.

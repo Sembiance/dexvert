@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _MACBINARY_MAGIC = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded", "AppleSingle encoded Macintosh file", "MacBinary 3", /^MacBinary$/, /^AppleSingle$/, / \(MacBinary\)$/, /^fmt\/967( |$)/];
+const _MACBINARY_MAGIC = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded", "AppleSingle encoded Macintosh file", "MacBinary 3", /^MacBinary$/, /^AppleSingle$/, / \(MacBinary\)$/, /^fmt\/(967|968|1763)( |$)/];
 export {_MACBINARY_MAGIC};
 
 export class macBinary extends Format

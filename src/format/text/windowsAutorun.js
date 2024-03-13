@@ -7,7 +7,7 @@ export class windowsAutorun extends Format
 	ext            = [".nf"];
 	filename       = [/^autorun.inf$/i];
 	forbidExtMatch = true;
-	magic          = ["Microsoft Windows Autorun file", "AutoRun Info"];
+	magic          = ["Microsoft Windows Autorun file", "AutoRun Info", "INF Datei [AutoRun]"];
 	untouched      = true;
 	metaProvider   = ["text"];
 }

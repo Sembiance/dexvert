@@ -6,6 +6,6 @@ export class stadPAC extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/STAD_PAC";
 	ext        = [".pac", ".seq"];
 	mimeType   = "image/x-stad";
-	magic      = ["STAD hi-res", "Atari ST STAD bitmap image data"];
+	magic      = ["STAD hi-res", "Atari ST STAD bitmap image data", /^fmt\/1653( |$)/];
 	converters = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`];
 }

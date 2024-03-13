@@ -6,6 +6,6 @@ export class avif extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AVIF";
 	ext        = [".avif", ".avifs"];
 	mimeType   = "image/avif";
-	magic      = ["AV1 Image File Format bitmap"];
+	magic      = ["AV1 Image File Format bitmap", "ISO Media, AVIF Image"];
 	converters = ["avifdec", `abydosconvert[format:${this.mimeType}]`];
 }

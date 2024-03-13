@@ -8,6 +8,7 @@ export class lottie extends Format
 	name         = "Lottie";
 	website      = "http://fileformats.archiveteam.org/wiki/Lottie";
 	ext          = [".json"];
+	magic        = ["LottieFiles animation"];
 	mimeType     = "image/x-lottie+json";
 	keepFilename = true;
 	notes        = "Will only match lottie files that include a layers property.";

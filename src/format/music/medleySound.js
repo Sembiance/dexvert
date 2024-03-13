@@ -4,7 +4,7 @@ export class medleySound extends Format
 {
 	name         = "MedleySound Module";
 	ext          = [".mso"];
-	magic        = ["MedlySound module"];	// trid appears to misspell this
+	magic        = ["MedleySound module"];
 	metaProvider = ["musicInfo"];
 	converters   = ["uade123"];
 }

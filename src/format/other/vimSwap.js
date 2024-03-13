@@ -6,6 +6,6 @@ export class vimSwap extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Vim_swap_file";
 	ext            = [".swp"];
 	forbidExtMatch = true;
-	magic          = ["Vim swap"];
+	magic          = ["Vim swap", /^fmt\/1582( |$)/];
 	converters     = ["strings"];
 }

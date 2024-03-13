@@ -10,7 +10,7 @@ export class pokeyNoise extends Format
 	auxFiles = (input, otherFiles) =>
 	{
 		// Can optionally use a .info file
-		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.name.toLowerCase()}.info`);
+		const otherFile = otherFiles.find(file => file.base.toLowerCase()===`${input.base.toLowerCase()}.info`);
 		return otherFile ? [otherFile] : false;
 	};
 	metaProvider = ["musicInfo"];

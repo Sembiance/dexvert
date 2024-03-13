@@ -5,7 +5,7 @@ export class fbi extends Format
 	name       = "FLIP Image";
 	website    = "http://fileformats.archiveteam.org/wiki/FLIP";
 	ext        = [".fbi"];
-	magic      = ["SysEx File"];
+	magic      = ["SysEx File", "FLIP Bitmap"];
 	weakMagic  = true;
 	converters = ["recoil2png"];
 }

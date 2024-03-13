@@ -6,6 +6,6 @@ export class covoxADPCM extends Format
 	website        = "https://wiki.multimedia.cx/index.php/Covox_ADPCM";
 	ext            = [".v8", ".cvx"];
 	forbidExtMatch = true;
-	magic          = ["Covox ADPCM encoded audio"];
+	magic          = ["Covox ADPCM encoded audio", /^fmt\/1676( |$)/];
 	converters     = ["awaveStudio"];
 }

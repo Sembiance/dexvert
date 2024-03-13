@@ -6,5 +6,6 @@ export class aseprite extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Aseprite";
 	ext        = [".ase", ".aseprite"];
 	mimeType   = "image/x-aseprite";
+	magic      = ["Aseprite Animated sprite"];
 	converters = [`abydosconvert[format:${this.mimeType}]`];
 }

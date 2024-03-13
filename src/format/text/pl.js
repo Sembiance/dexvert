@@ -6,7 +6,7 @@ export class pl extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Perl";
 	ext            = [".pl"];
 	forbidExtMatch = true;
-	magic          = ["Perl script", /^Perl\d module source/];
+	magic          = ["Perl script", "a /usr/local/perl script", "Shell Skript: '/usr/local/perl'", "Shell Skript: '/usr/local/bin/perl'", "Shell Skript: '/usr/bin/perl'", /^Perl\d module source/];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

@@ -9,5 +9,5 @@ export class nrg extends Format
 	priority   = this.PRIORITY.TOP;	// NRG is often mis-identified as ISO
 	
 	// According to nrg2iso we just skip the first 307,200 bytes: http://gregory.kokanosky.free.fr/v4/linux/nrg2iso.en.html
-	converters = ["dd[bs:307200][skip:1] -> dexvert", "iat", "UniExtract", "deark[module:nrg]"];
+	converters = ["dd[bs:307200][skip:1] -> dexvert", "UniExtract", "deark[module:nrg]"];
 }

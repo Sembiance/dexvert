@@ -1,9 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* i3DConverter has a linux version that works and support command line conversion: http://www.i3dconverter.com/formats.html
-  It also supports a few formats I don't yet, like electricImage3DFile
-  Sadly it has some bugs that I've emailed them about to see if they can get resolved
+* Move Crowbar.js to win7 for reliablity
+
+* Use 3D Object converter under windows instead of i3DConverter under linux
+  Try to add formats:
+	cyberStudioCAD3D
+	sculpt3DScene
+	threeDStudioASE
+	amapi3DModel
+	real3D (Real 3D RPL, probably something different)
+
+* Add these win7 programs:
+	reaConverter 7		https://www.reaconverter.com/		(see sandbox/app/reaConverter_formats.txt for format list. image/zbr can be converted to SVG with reaConverter)
+	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
+	image/xRes: Using sandbox/app/xRes 3.0.iso
+	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
+	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
+
+* Add this support: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
 
 
 /---------------\
@@ -92,16 +107,8 @@
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
 
-* Get Shockwave 3D conversion working. See: shockwave3DWorldConverter.js for notes (backup made to sandbox/app/Shockwave-3D-World-Converter)
-
 * Add moRay support. See format moRay.js for notes
 
-* Now that wine works and thus .NET and other vista/win7 programs work, try incorporating these programs into dexvert:
-	reaConverter 7		https://www.reaconverter.com/		(see sandbox/app/reaConverter_formats.txt for format list. image/zbr can be converted to SVG with reaConverter)
-	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
-	image/xRes: Using sandbox/app/xRes 3.0.iso
-	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
 
 
 /--------------\

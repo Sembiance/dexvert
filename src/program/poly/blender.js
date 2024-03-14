@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 import {fileUtil} from "xutil";
 import {path} from "std";
 
-const _VALID_FORMATS =
+const _FORMATS =
 {
 	// 3rd party addons: Almost every addon in this list I've modified to fix bugs or ignore errors
 	"3mf"   : {importKey : "import_mesh.threemf", addon : "io_mesh_3mf"},			// https://github.com/Ghostkeeper/Blender3mfFormat
@@ -39,7 +39,7 @@ export class blender extends Program
 	package   = "media-gfx/blender";
 	bin       = "blender-4.0";
 	flags   = {
-		format      : "Specify which format to import. REQUIRED"
+		format : "Specify which format to import. REQUIRED"
 	};
 
 	// API: https://docs.blender.org/api/current/bpy.ops.wm.html
@@ -55,10 +55,10 @@ export class blender extends Program
 			bpy.ops.wm.read_factory_settings(use_empty=True)
 
 			${r.flags.format!=="native" ? `
-			${_VALID_FORMATS[r.flags.format].addon ? `bpy.ops.preferences.addon_enable(module="${_VALID_FORMATS[r.flags.format].addon}")` : ""}
+			${_FORMATS[r.flags.format].addon ? `bpy.ops.preferences.addon_enable(module="${_FORMATS[r.flags.format].addon}")` : ""}
 			#print(dir(bpy.ops.import_scene))
 			#print(dir(bpy.ops))
-			${_VALID_FORMATS[r.flags.format].importKey ? `bpy.ops.${_VALID_FORMATS[r.flags.format].importKey}(filepath=sys.argv[5])` : `bpy.ops.wm.${r.flags.format}_import(filepath=sys.argv[5])`}
+			${_FORMATS[r.flags.format].importKey ? `bpy.ops.${_FORMATS[r.flags.format].importKey}(filepath=sys.argv[5])` : `bpy.ops.wm.${r.flags.format}_import(filepath=sys.argv[5])`}
 			
 			bpy.ops.wm.save_as_mainfile(filepath=sys.argv[6])
 			bpy.ops.wm.window_close()` : ""}

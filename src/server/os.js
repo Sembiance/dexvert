@@ -12,25 +12,41 @@ const OS =
 {
 	win2k :
 	{
-		debug        : false,
-		qty          : 12,
-		ramGB        : 2,
-		scriptExt    : ".au3",
-		emu          : "86Box",
-		copy         : ["86box.cfg", "nvr"],
-		vhd          : ["hd.vhd"],
-		archiveType  : "zip"
+		debug       : false,
+		qty         : 12,
+		ramGB       : 2,
+		scriptExt   : ".au3",
+		emu         : "86Box",
+		copy        : ["86box.cfg", "nvr"],
+		hd          : ["hd.vhd"],
+		archiveType : "zip"
 	},
 	winxp :
 	{
-		debug        : false,
-		qty          : 13,
-		ramGB        : 2,
-		scriptExt    : ".au3",
-		emu          : "86Box",
-		copy         : ["86box.cfg", "nvr"],
-		vhd          : ["hd.vhd"],
-		archiveType  : "zip"
+		debug       : false,
+		qty         : 13,
+		ramGB       : 2,
+		scriptExt   : ".au3",
+		emu         : "86Box",
+		copy        : ["86box.cfg", "nvr"],
+		hd          : ["hd.vhd"],
+		archiveType : "zip"
+	},
+	win7 :
+	{
+		debug     : false,
+		qty       : 3,
+		ramGB     : 16,
+		cores     : 4,
+		scriptExt : ".au3",
+		emu       : "qemu-system-x86_64",
+		emuArgs   : instance => ([
+			"-nodefaults", "-machine", "accel=kvm,dump-guest-core=off", "-rtc", "base=2023-03-01T10:00:00", "-device", "virtio-rng-pci", "-m", "size=16G", "-smp", "cores=4", "-vga", "cirrus",
+			"-drive", "format=qcow2,if=ide,index=0,file=hd.qcow2", "-boot", "order=c",
+			"-netdev", `user,net=192.168.51.0/24,dhcpstart=192.168.51.${20+instance.instanceid},id=nd1`, "-device", "rtl8139,netdev=nd1", "-drive", `if=floppy,media=disk,file=${path.join(instance.dirPath, "instance.img")}`
+		]),
+		hd          : ["hd.qcow2"],
+		archiveType : "zip"
 	}
 };
 
@@ -38,7 +54,7 @@ const OS =
 const maxAvailableCores = Math.floor(navigator.hardwareConcurrency*0.40);
 const totalDesiredCores = Object.values(OS).map(({qty}) => qty).sum();
 for(const o of Object.values(OS))
-	o.qty = o.debug ? 1 : Math.min(o.qty, Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)));
+	o.qty = o.debug ? 1 : Math.min(o.qty, Math.max(Math.floor(o.qty.scale(0, totalDesiredCores, 0, maxAvailableCores)), 2));
 
 // reduce instance quantity to fit in 80% of available RAM
 const totalSystemRAM = (await sysUtil.memInfo()).total;
@@ -82,11 +98,16 @@ export class os extends Server
 
 		await Deno.mkdir(instance.dirPath, {recursive : true});
 		
-		for(const v of OS[osid].copy)
+		for(const v of OS[osid].copy || [])
 			await runUtil.run("rsync", runUtil.rsyncArgs(path.join(OS_DIR_PATH, osid, v), path.join(instance.dirPath, "/")));
 
-		for(const v of OS[osid].vhd)
-			await runUtil.run("VBoxManage", ["createmedium", "disk", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_INSTANCE_DIR_PATH, osid, v)]);
+		for(const v of OS[osid].hd)
+		{
+			if(v.endsWith(".vhd"))
+				await runUtil.run("VBoxManage", ["createmedium", "disk", "--filename", path.join(instance.dirPath, v), "--format", "VHD", "--diffparent", path.join(OS_INSTANCE_DIR_PATH, osid, v)]);
+			else if(v.endsWith(".qcow2"))
+				await runUtil.run("qemu-img", ["create", "-F", "qcow2", "-b", path.join(OS_INSTANCE_DIR_PATH, osid, v), "-f", "qcow2", path.join(instance.dirPath, v)]);
+		}
 
 		await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.txt"), instanceid.toString());
 		await runUtil.run("/mnt/compendium/.deno/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "instance.img"), path.join(instance.dirPath, "instance.txt")]);
@@ -95,7 +116,8 @@ export class os extends Server
 		if(instance.debug)
 		{
 			emuOpts.env.DISPLAY = ":0";
-			emuOpts.env.EMU86BOX_MOUSE = "evdev";
+			if(OS[osid].emu==="86Box")
+				emuOpts.env.EMU86BOX_MOUSE = "evdev";
 		}
 		else
 		{
@@ -103,10 +125,13 @@ export class os extends Server
 			emuOpts.virtualXVNCPort = instance.vncPort;
 		}
 
+		if(this.xlog.atLeast("debug"))
+			emuOpts.liveOutput = true;
+
 		this.xlog.debug`${prelog(instance)} Launching ${OS[osid].emu} with options ${printUtil.inspect(emuOpts).squeeze()}`;
 
 		const instanceJSON = JSON.stringify(instance);
-		const {p, cb} = await runUtil.run(OS[osid].emu, [], emuOpts);
+		const {p, cb} = await runUtil.run(OS[osid].emu, OS[osid].emuArgs ? OS[osid].emuArgs(instance) : [], emuOpts);
 		instance.p = p;
 		cb().then(async r =>
 		{
@@ -276,6 +301,8 @@ export class os extends Server
 		await this.cleanup();
 
 		this.webServer = new WebServer(OS_SERVER_HOST, OS_SERVER_PORT, {xlog : this.xlog});
+
+		const logCheck = () => this.xlog.atLeast("trace");
 		
 		this.webServer.add("/status", async () =>	// eslint-disable-line require-await
 		{
@@ -292,14 +319,14 @@ export class os extends Server
 				return o;
 			}).sortMulti([o => o.count, o => o.cmd], [true, false]);
 			return new Response(JSON.stringify(r));
-		}, {logCheck : () => false});
+		}, {logCheck});
 
 		this.webServer.add("/osRun", async (request, reply) =>
 		{
 			const body = await request.json();
-			this.xlog.debug`Got osRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
+			this.xlog.trace`Got osRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
 			RUN_QUEUE.add({body, request, reply});
-		}, {detached : true, method : "POST", logCheck : () => false});
+		}, {detached : true, method : "POST", logCheck});
 
 		this.webServer.add("/osReady", async request =>	// eslint-disable-line require-await
 		{
@@ -308,19 +335,19 @@ export class os extends Server
 			this.xlog.info`${prelog(instance)} Called /osReady`;
 			instance.ready = true;
 			return new Response("ok");
-		}, {logCheck : () => false});
+		}, {logCheck});
 		
 		this.webServer.add("/osGET", async (request, reply) =>
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
-			this.xlog.trace`Got osGET from ${body.osid}-${body.instanceid}`;
+			this.xlog.debug`Got osGET from ${body.osid}-${body.instanceid}`;
 			const inArchiveFilePath = path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`);
 			if(!(await fileUtil.exists(inArchiveFilePath)))
 				return reply(new Response(null, {status : 404}));
 						
 			const inArchive = await Deno.open(inArchiveFilePath, {read : true});
 			reply(new Response(inArchive.readable, {headers : {"Content-Type" : "application/octet-stream"}}));
-		}, {detached : true, method : "GET", logCheck : () => false});
+		}, {detached : true, method : "GET", logCheck});
 
 		this.webServer.add("/osPOST", async (request, reply) =>
 		{
@@ -329,7 +356,7 @@ export class os extends Server
 			this.xlog.debug`Got osPOST from ${body.osid}-${body.instanceid} with a buffer ${requestArrayBuffer.byteLength} bytes long`;
 			await Deno.writeFile(path.join(HTTP_OUT_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`), new Uint8Array(requestArrayBuffer));
 			reply(new Response("", {status : 200}));
-		}, {detached : true, method : "POST", logCheck : () => false});
+		}, {detached : true, method : "POST", logCheck});
 
 		this.webServer.add("/osDONE", async (request, reply) =>
 		{
@@ -337,7 +364,7 @@ export class os extends Server
 			this.xlog.debug`Got osDONE from ${body.osid}-${body.instanceid}`;
 			await fileUtil.unlink(path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`), {recursive : true});
 			reply(new Response("", {status : 200}));
-		}, {detached : true, method : "GET", logCheck : () => false});
+		}, {detached : true, method : "GET", logCheck});
 
 		await this.webServer.start();
 
@@ -346,21 +373,21 @@ export class os extends Server
 		const instanceids = [];
 		for(const osid of Object.keys(OS))
 		{
-			this.xlog.info`Preparing VHDs for ${osid}...`;
+			this.xlog.info`Preparing HDs for ${osid}...`;
 
 			await Deno.mkdir(path.join(HTTP_IN_DIR_PATH, osid), {recursive : true});
 			await Deno.mkdir(path.join(HTTP_OUT_DIR_PATH, osid), {recursive : true});
 
 			instanceids.push(...[].pushSequence(0, OS[osid].qty-1).map(v => ([osid, v])));
 
-			// we need to copy the parent/backing VHD to the instance dir, because even though it's just a backing VHD VBoxManage still modifies the thing and we don't want to touch the original at all otherwise we have to re-copy it to dexdrones every time
+			// we need to copy the parent/backing HD to the instance dir, because even though it's just a backing HD VBoxManage still modifies the thing and we don't want to touch the original at all otherwise we have to re-copy it to dexdrones every time
 			const osInstanceDirPath = path.join(OS_INSTANCE_DIR_PATH, osid);
 			await Deno.mkdir(osInstanceDirPath, {recursive : true});
-			for(const v of OS[osid].vhd)
+			for(const v of OS[osid].hd)
 				await runUtil.run("rsync", runUtil.rsyncArgs(path.join(OS_DIR_PATH, osid, v), path.join(osInstanceDirPath, v), {fast : true}), {liveOutput : true});
 		}
 
-		// startOS above calls VBoxManage createmedium which then 'registers' both the parent and child  VHDs in some VBoxManage config. This can cause issues during development if VHD paths change, So we clear out all previous VHDs here just to be safe
+		// startOS above calls VBoxManage createmedium which then 'registers' both the parent and child HDs in some VBoxManage config. This can cause issues during development if HD paths change, So we clear out all previous HDs here just to be safe
 		this.xlog.info`Clearing previous VBoxManaged hdds...`;
 		const {stdout : vboxDiskLines} = await runUtil.run("VBoxManage", ["list", "hdds"]);
 		const vboxDiskPaths = [];

@@ -212,7 +212,6 @@ export default
 		createShade3DScene      : {name : "Create+Shade 3D Scene", ext : [".3d"], magic : ["Create+Shade 3D scene"], weakMagic : true},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
 		mobile3DGraphic         : {name : "Mobile 3D Graphic", ext : [".m3g"], magic : ["Mobile 3D Graphics"], website : "http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html"},
-		openInventor            : {name : "SGI Open Inventor Scene Graph", ext : [".iv"], magic : ["SGI Open Inventor Scene Graph", "Open Inventor", "IRIS Inventor", /^fmt\/832( |$)/]},
 		radCadDrawing           : {name : "Rad Cad Drawing", ext : [".cad"], magic : ["Rad Cad drawing"]},
 		renderit3DData          : {name : "Renderit3D Data", ext : [".r3d"], magic : ["Renderit3d data"]},
 		solidWorksAssembly      : {name : "SolidWorks Assembly", ext : [".sldasm"], magic : ["SolidWorks Assembly"]},

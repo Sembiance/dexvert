@@ -14,6 +14,7 @@ export class cinema4D extends Format
 
 		r.pushUnique("cinema4D82");
 		r.pushUnique("cinema4D427");
+		r.pushUnique("polyTrans64[format:cinema4D]");
 		return r;
 	};
 }

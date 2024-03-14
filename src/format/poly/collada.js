@@ -7,5 +7,5 @@ export class collada extends Format
 	ext            = [".dae", ".zae", ".xml"];
 	forbidExtMatch = [".xml"];
 	magic          = ["COLLADA model, XML document", "COLLADA Digital Asset Document", /^fmt\/1209( |$)/];
-	converters     = ["blender[format:collada]", "assimp"];
+	converters     = ["blender[format:collada]", "assimp", "polyTrans64[format:collada]"];
 }

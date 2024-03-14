@@ -7,5 +7,5 @@ export class threeMF extends Format
 	ext            = [".3mf"];
 	forbidExtMatch = true;	// too modern, unlikely to match
 	magic          = ["3D Manufacturing Format model", /^fmt\/829( |$)/];
-	converters     = ["blender[format:3mf]", "assimp"];
+	converters     = ["blender[format:3mf]", "assimp", "polyTrans64[format:threeMF]"];
 }

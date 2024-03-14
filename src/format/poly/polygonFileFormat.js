@@ -6,5 +6,5 @@ export class polygonFileFormat extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PLY";
 	ext        = [".ply"];
 	magic      = ["PLY model", "Polygon File Format", /^fmt\/831( |$)/];
-	converters = ["assimp", "blender[format:ply]"];
+	converters = ["assimp", "blender[format:ply]", "polyTrans64[format:polygonFileFormat]"];
 }

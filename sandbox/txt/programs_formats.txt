@@ -11739,7 +11739,7 @@ GRANITE/PACK License Only:
  SAT (ACIS)	.sat	Various
  Granite "g-plugs"	.g	Various
 
->>> i3DConverter
+>>> i3DConverter (linux) / 3D Object Converter (Windows)	http://3doc.i3dconverter.com/formats.html
 Format Name   Extension   Geometry   Face Material   Vertex Color   Texture U,V   Texture Polygons   Textured View   Bone ; Vertex Bone Weight
 "2 percent" Demo	00x	L / S	L / -	- / -	- / -	- / -	-	-
 25 to Life	DBL	L / -	L / -	- / -	L / -	Gen. / -	Automatic	/

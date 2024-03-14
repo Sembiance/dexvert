@@ -11,5 +11,14 @@ export class vrml extends Format
 		const supportFiles = otherFiles.filter(o => [".gif", ".jpg", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
 		return supportFiles.length===0 ? false : supportFiles;
 	};
-	converters = ["AccuTrans3D", "blender[format:x3d]"];
+	converters = dexState =>
+	{
+		const r = [];
+		if(dexState.hasMagics(/^fmt\/94( |$)/))
+			r.push("polyTrans64[format:vrml2]");
+
+		r.pushUnique("polyTrans64[format:vrml1]");
+		r.push("AccuTrans3D", "blender[format:x3d]");
+		return r;
+	};
 }

@@ -136,6 +136,10 @@ const SUPPORTING_FILES =
 	{
 		pog : /\.pnm$/i
 	},
+	document :
+	{
+		hyperWriter : /\.hw[nt]$/i
+	},
 	image :
 	{
 		printMasterShape : /\.sdr$/i

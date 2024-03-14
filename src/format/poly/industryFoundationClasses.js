@@ -7,5 +7,5 @@ export class industryFoundationClasses extends Format
 	ext            = [".ifc"];
 	forbidExtMatch = true;	// too modern, unlikely to match
 	magic          = [/^fmt\/(699|700)( |$)/];
-	converters     = ["assimp"];
+	converters     = ["polyTrans64[format:industryFoundationClasses]", "assimp"];
 }

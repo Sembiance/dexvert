@@ -62,6 +62,7 @@ for(const srcFilePath of argv.inputFilePath)
 
 	// we use rsync to preserve file date/time
 	await runUtil.run("rsync", runUtil.rsyncArgs(srcFilePath, destFilePath, {fast : true}));
+	await runUtil.run("chmod", ["644", destFilePath]);
 
 	if(argv.delete)
 		await fileUtil.unlink(srcFilePath);

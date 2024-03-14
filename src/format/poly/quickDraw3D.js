@@ -7,7 +7,7 @@ export class quickDraw3D extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/3DMF";
 	ext        = [".3dmf", ".q3d"];
 	magic      = ["QuickDraw 3D Metafile", /^fmt\/(1049|1050)( |$)/];
-	converters = ["AccuTrans3D"];
+	converters = ["polyTrans64[format:quickDraw3D]", "AccuTrans3D"];
 	notes      = xu.trim`
 		Programs that didn't work:
 		Quesa: https://github.com/jwwalker/Quesa 

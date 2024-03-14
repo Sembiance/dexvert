@@ -5,7 +5,7 @@ import {appendCommonFuncs} from "./autoItUtil.js";
 
 export const OS_SERVER_HOST = "127.0.0.1";
 export const OS_SERVER_PORT = 17735;
-export const OSIDS = ["win2k", "winxp"];
+export const OSIDS = ["win2k", "winxp", "win7"];
 
 export async function run({f, cmd, osid="win2k", args=[], cwd, meta, script, scriptPre, timeout=xu.MINUTE*5, dontMaximize, quoteArgs, noAuxFiles, alsoKill=[], xlog})
 {

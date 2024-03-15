@@ -50,12 +50,20 @@ export class polyTrans64 extends Program
 	osData  = r => ({
 		cwd : "c:\\Program Files\\PolyTrans64",
 		script : `
-		$mainWindow = WindowRequire("PolyTrans|CAD 3D Translation", "", 10)
+		WindowRequire("PolyTrans|CAD 3D Translation", "", 10)
 
-		Send("!t")
+		If Not FileExists("c:\\dexvert\\polyTrans64RanOnce.txt") Then
+			FileWrite("c:\\dexvert\\polyTrans64RanOnce.txt", "yes")
+			Sleep(2000)
+		EndIf
+
+		Send("!")
+		Sleep(200)
+		Send("t")
+		Sleep(200)
 		Send("i")
 
-		Send("${_FORMATS[r.flags.format].keys}")
+		SendSlow("${_FORMATS[r.flags.format].keys}", 50)
 		Send("{ENTER}")
 
 		Func PreImportDialogs()
@@ -65,7 +73,7 @@ export class polyTrans64 extends Program
 		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*20})
 
 		Sleep(500)
-		Send("c:\\in\\${r.inFile()}{ENTER}");
+		SendSlow("c:\\in\\${r.inFile()}{ENTER}", 50);
 		WinWaitClose($importWindow, "", 60)
 
 		Func PostImportDialogs()
@@ -82,16 +90,22 @@ export class polyTrans64 extends Program
 			WindowFailure("", "Error enumerating data objects", -1, "{ESCAPE}")
 			WindowFailure("", "version number is not recognized", -1, "{ESCAPE}")
 			WindowFailure("", "premature end of file", -1, "{ESCAPE}")
-			WindowFailure("", "is not in the VRML 2.0 format", -1, "{ESCAPE}")
+			WindowFailure("", "is not in the ", -1, "{ESCAPE}")
 			WindowFailure("", "The file cannot be loaded", -1, "{ESCAPE}")
 			WindowFailure("", "Could not locate or open", -1, "{ESCAPE}")
 			WindowFailure("", "The input file is either not", -1, "{ESCAPE}")
 			WindowFailure("", "cannot be parsed.", -1, "{ESCAPE}")
 			return WinActive("PolyTrans|CAD 3D Translation, Viewing & Composition System - ", "")
 		EndFunc
-		CallUntil("PostImportDialogs", ${xu.MINUTE*2})
+		$mainWindow = CallUntil("PostImportDialogs", ${xu.MINUTE*1.5})
+		If Not $mainWindow Then
+			Exit 0
+		EndIf
 
-		Send("!t")
+		Send("!")
+		Sleep(200)
+		Send("t")
+		Sleep(200)
 		Send("e")
 
 		Send("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].keys}")
@@ -104,7 +118,7 @@ export class polyTrans64 extends Program
 		CallUntil("PreExportDialogs", ${xu.SECOND*10})
 
 		$saveWindow = WindowRequire("${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].saveWindow.title}", "", 10)
-		Send("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}");
+		SendSlow("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}{ENTER}", 50);
 		WinWaitClose($saveWindow, "", 20)
 		$outputStatusWindow = WinWaitActive("Geometry Export Status", "", 4)
 		If $outputStatusWindow Then

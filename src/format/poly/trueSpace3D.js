@@ -6,5 +6,5 @@ export class trueSpace3D extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Caligari_trueSpace";
 	ext        = [".cob", ".sobj"];
 	magic      = ["Caligari TrueSpace", /^fmt\/913( |$)/];
-	converters = ["assimp", "AccuTrans3D", "polyTrans64[format:trueSpace3D]"];
+	converters = ["assimp", "AccuTrans3D", "polyTrans64[format:trueSpace3D]"];	// threeDObjectConverter also claims support but does VERY poorly
 }

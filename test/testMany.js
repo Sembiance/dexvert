@@ -72,7 +72,7 @@ if(failures.length)
 const reportsDirPath = argv.reportsDirPath || await fileUtil.genTempPath("/mnt/dexvert/test", "-testMany");
 await Deno.mkdir(reportsDirPath, {recursive : true});
 
-const families = Object.keys(reports).map(v => v.split("/")[0]).unique();
+const families = Object.keys(reports).map(v => v.split("/")[0]).unique().sortMulti();
 const testManyReportFilePath = path.join(reportsDirPath, "index.html");
 
 await fileUtil.writeTextFile(testManyReportFilePath, `

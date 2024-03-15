@@ -107,6 +107,7 @@ const FLEX_SIZE_PROGRAMS =
 	
 	// Produces different data each time
 	amigaBitmapFontContentToOTF : 0.1,
+	assimp                      : 0.1,
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
 	Email_Outlook_Message       : 1,
@@ -251,6 +252,11 @@ const FLEX_SIZE_FORMATS =
 		// MP3 generation changes very easily when packages are updated and on different hosts
 		"*:.mp3" : 25
 	},
+	poly :
+	{
+		// .glb files produced differ each time, probably some meta data timestamp or something
+		"*" : 0.1
+	},
 	video :
 	{
 		// MP4 generation changes very easily when packages are updated and on different hosts. almost always the same size, but the SHA1 sum differs
@@ -342,8 +348,14 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These files don't convert with my converters and get identified to other things
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
-	[/poly\/ac3d\/forza\.acc$/i, "text", true],
-	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", true],
+	[/poly\/ac3d\/forza\.acc$/i, "text", "txt"],
+	[/poly\/cinema4D\/bomb\.xml$/i, "text", "xml"],
+	[/poly\/collada\/item_flashlight\.dae$/i, "text", "txt"],
+	[/poly\/dxf\/abydos\.r14\.dxf$/i, "image", true],
+	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "txt"],
+	[/poly\/polygonFileFormat\/example1\.ply$/i, "text", "txt"],
+	[/poly\/quickDraw3D\/testn\.3dmf$/i, "text", "txt"],
+	[/poly\/trueSpace3D\/dna\.cob$/i, "text", "txt"],
 	[/poly\/openGEX\/(artifact_advanced|Example|solar_engine)\.ogex$/i, "text", true],
 
 	// These formats share generic .ext only, no magic matches
@@ -388,7 +400,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	// Supporting/AUX files
 	[/archive\/(cdi|iso)\/.+\.(cue|toc)$/i, "text", true],
 	[/archive\/irixIDBArchive\/\.?(books|man|sw|$)/i, true, true],
-	[/archive\/pog\/.+\.pnm$/i, "other", true],
+	[/archive\/pog\/.+\.pnm$/i, "other", "pogNames"],
 	[/image\/fig\/.+\.(gif|jpg|xbm|xpm)$/i, "image", true],
 	[/music\/pokeyNoise\/.+\.info$/i, "image", "info"],
 	[/music\/tfmx\/smpl\..+$/i, true, true],
@@ -618,10 +630,10 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	const converterMismatch = prevData.converter!==result.converter && !ignoreSizeAndConverter ? ` Also, expected converter ${prevData.converter} but instead got ${fg.orange(result.converter)}` : "";
 
 	if(result.family && result.family!==diskFamily && !allowFamilyMismatch)
-		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed family ${result.family}${converterMismatch}`);
+		return await fail(`Disk family ${fg.orange(diskFamily)} does not match processed ${result.family}/${result.format}${converterMismatch}`);
 
 	if(result.format && result.format!==diskFormat && !allowFormatMismatch)
-		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed format ${result.format}${converterMismatch}`);
+		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed ${result.family}/${result.format}${converterMismatch}`);
 
 	if(prevData.files && !result.files)
 		return await fail(`Expected to have ${fg.yellow(Object.keys(prevData.files).length)} files but found ${fg.yellow(0)} instead${converterMismatch}`);

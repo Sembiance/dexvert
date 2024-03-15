@@ -5,3 +5,4 @@ dexvert.code-workspace
 deno/
 wine/
 aux/
+blender/addons/__pycache__/

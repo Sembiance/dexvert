@@ -55,7 +55,7 @@ export class canvas extends Program
 
 			If $propsCheckSum <> 1942773917 Then
 				Send("!x")
-				Exit 1
+				Exit 0
 			EndIf` : ""}
 
 		Send("^+s")

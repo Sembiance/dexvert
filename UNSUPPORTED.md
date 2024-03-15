@@ -1,4 +1,4 @@
-# Unsupported File Formats (916)
+# Unsupported File Formats (913)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -262,7 +262,7 @@ font | X11/NeWS font family | .ff |
 
 
 
-## Image (84)
+## Image (83)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 image | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -347,7 +347,6 @@ image | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Vent
 image | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 image | WinFax CoverPage Image | .cvp .cv | 
 image | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
-image | [xRes Image](http://fileformats.archiveteam.org/wiki/XRes) | .lrg | [6 sample files](https://sembiance.com/fileFormatSamples/image/xRes/)
 image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://sembiance.com/fileFormatSamples/image/yanagisawaPIC2/) - A request was made to add support to recoil, but that is looking unlikely: https://sourceforge.net/p/recoil/bugs/73/ 		There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
 
 
@@ -405,7 +404,7 @@ music | Klystrack Module | .kt | [5 sample files](https://sembiance.com/fileForm
 music | Korg Song | .sng | 
 music | Koustracker Module | .sok | 
 music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://sembiance.com/fileFormatSamples/music/masterTracker/)
-music | Master Tracks Pro | .mts | [1 sample file](https://sembiance.com/fileFormatSamples/music/masterTracksPro/)
+music | Master Tracks Pro | .mts | [1 sample file](https://sembiance.com/fileFormatSamples/music/masterTracksPro/) - Attempts to run Master Trakcks Pro under win2k/winxp/win7 64bit, all failed. Program just doesn't launch.
 music | MaxTrax Module | .mxtx | [8 sample files](https://sembiance.com/fileFormatSamples/music/maxTrax/)
 music | Melody Maker Sing | .mm | 
 music | MSX Moon Blaster Music | .mbm | [6 sample files](https://sembiance.com/fileFormatSamples/music/msxMBM/) - Conversion works great, but kss2wav will take almost any .mbm file and convert it to garbage. No magic I can find and no current way to check output audio, so since the format is so rare, sadly need to mark it unsupported.
@@ -911,16 +910,15 @@ other | ZSNES Save State | .zst |
 
 
 
-## Poly (33)
+## Poly (31)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 poly | 3-D Professional Scene |  | 
 poly | 3D Dgf Model | .dgf .3dgfo | 
 poly | 3D Studio Loft Object | .lft | 
-poly | Amapi 3D Model | .a3d .x | 
+poly | Amapi 3D Model | .a3d .x | [6 sample files](https://sembiance.com/fileFormatSamples/poly/amapi3DModel/)
 poly | AutoShade Rendering Slide | .rnd | 
 poly | Create+Shade 3D Scene | .3d | 
-poly | [Cyber Studio/CAD-3D](http://fileformats.archiveteam.org/wiki/CAD-3D) | .3d2 .3d | [14 sample files](https://sembiance.com/fileFormatSamples/poly/cyberStudioCAD3D/) - Original program was Atari ST and later 'Cyber' version is pretty rare and not sure if there is a 'windows' version. Couldn't find a converter.
 poly | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 poly | DynaCADD Part | .prt .dpt | 
 poly | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
@@ -936,7 +934,6 @@ poly | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) 
 poly | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.
 poly | Renderit3D Data | .r3d | 
 poly | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
-poly | Sculpt 3D Scene | .scene | [2 sample files](https://sembiance.com/fileFormatSamples/poly/sculpt3DScene/) - A 3D rendering file format, looks like it's from the amiga.
 poly | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
 poly | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
 poly | SolidWorks Drawing | .slddrw | [3 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksDrawing/)

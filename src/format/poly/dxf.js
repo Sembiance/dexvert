@@ -7,7 +7,7 @@ export class dxf extends Format
 	ext        = [".dxf"];
 	mimeType   = "image/vnd.dxf";
 	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format", /^fmt\/(63|77|435)( |$)/];
-	converters = ["polyTrans64[format:dxf]", "cinema4D427", "AccuTrans3D", "assimp", "blender[format:dxf]", "milkShape3D[format:dxf]"];
+	converters = ["polyTrans64[format:dxf]", "cinema4D427", "AccuTrans3D", "assimp", "blender[format:dxf]", "milkShape3D[format:dxf]", "threeDObjectConverter"];
 
 	// The converters below are what I used back when this format was treated as an image rather than a 3D model
 	// corelDRAW often will just output a blank white image

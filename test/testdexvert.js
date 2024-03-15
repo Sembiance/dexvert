@@ -144,6 +144,10 @@ const SUPPORTING_FILES =
 	{
 		printMasterShape : /\.sdr$/i
 	},
+	poly :
+	{
+		wavefrontOBJ : /\.mtl$/i
+	},
 	other :
 	{
 		pogNames              : /\.pog$/i,
@@ -338,6 +342,9 @@ const DISK_FAMILY_FORMAT_MAP =
 
 	// These files don't convert with my converters and get identified to other things
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
+	[/poly\/ac3d\/forza\.acc$/i, "text", true],
+	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", true],
+	[/poly\/openGEX\/(artifact_advanced|Example|solar_engine)\.ogex$/i, "text", true],
 
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],

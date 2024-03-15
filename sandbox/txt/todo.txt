@@ -1,40 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Move Crowbar.js to win7 for reliablity
-
-* Use 3D Object converter under windows instead of i3DConverter under linux
-  Try to add formats:
-	cyberStudioCAD3D
-	sculpt3DScene
-	threeDStudioASE
-	amapi3DModel
-	real3D (Real 3D RPL, probably something different)
-
-* Add these win7 programs:
-	reaConverter 7		https://www.reaconverter.com/		(see sandbox/app/reaConverter_formats.txt for format list. image/zbr can be converted to SVG with reaConverter)
-	music/masterTracksPro: Using sandbox/app/master_tracks_pro_full.exe and S/N in email, could convert these to MIDI
-	image/xRes: Using sandbox/app/xRes 3.0.iso
-	*.DAX: Forgotten Realms Gold Box. "Gold Box Explorer" (sandbox/app/gbexplorer-1.2.zip) code from here: https://github.com/simeonpilgrim/goldboxexplorer	http://discmaster.textfiles.com/search?q=dax&qfields=ext&family=unknown&sortBy=itemid
-	SGS.DAT: Main DAT file from the Hyper Animation games. See sandbox/apps/DecomposeSGS		http://discmaster.textfiles.com/search?q=sgs.dat&family=unknown
-
-* Add this support: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
 
 
 /---------------\
 | High Priority |
 \---------------/
-* See about adding this format that someone found on discmaster and wrote a blender plugin for:
-	http://discmaster.textfiles.com/view/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Exo)(1993).ISO/graphics/3d25.zip
-  	https://github.com/Skyplayer37/1993-Model-Importer
-  	From twitter user: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
-	If I add it, make a note for after discmaster 2 launches to reply to her on twitter that it's now browseable on discmaster
-
-* Not all my collada models convert (item_flashlight.dae), see about improving this.
-  Wiki lists a ton of programs that claim support: http://fileformats.archiveteam.org/wiki/COLLADA
-
-* Not all my .nif models convert (GE_ART_17K18_hi_Equip.NIF) see if that can be improved
-  See if nifskope works any better and consider using it: https://github.com/fo76utils/nifskope
 
 
 /-----------------\
@@ -109,6 +80,10 @@
 
 * Add moRay support. See format moRay.js for notes
 
+* With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
+  There are only a handful of these files (14), so it's not a high priority
+
+* See if this Sierra SCI0 extractor has evovled at all to where I may want to use it: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
 
 
 /--------------\

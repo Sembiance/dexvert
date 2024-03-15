@@ -6,5 +6,5 @@ export class neutralFileFormat extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/NFF";
 	ext        = [".nff"];
 	magic      = ["Neutral ASCII File Format"];
-	converters = ["assimp"];
+	converters = ["assimp", "threeDObjectConverter"];
 }

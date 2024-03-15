@@ -6,5 +6,5 @@ export class direct3DObject extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/X_(DirectX)";
 	ext        = [".x"];
 	magic      = ["Microsoft Direct3D Object"];
-	converters = ["assimp", "blender[format:x]", "polyTrans64[format:direct3DObject]"];
+	converters = ["assimp", "blender[format:x]", "polyTrans64[format:direct3DObject]", "threeDObjectConverter"];
 }

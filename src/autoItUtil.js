@@ -296,6 +296,11 @@ export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, also
 					ControlClick("", "has encountered a problem", "[CLASS:Button; TEXT:&Don't Send]")
 				EndIf
 
+				$exitErrorWin = WinActive("Windows", "Check for solution")
+				If $exitErrorWin Not = 0 Then
+					ControlClick("Windows", "Check for solution", "[CLASS:Button; TEXT:Cancel]")
+				EndIf
+
 				Sleep(50)
 			Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
 

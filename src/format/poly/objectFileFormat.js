@@ -6,5 +6,5 @@ export class objectFileFormat extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)";
 	ext        = [".off"];
 	magic      = ["OFF geometry definition"];
-	converters = ["assimp"];
+	converters = ["assimp", "threeDObjectConverter"];
 }

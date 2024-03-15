@@ -78,7 +78,10 @@ export class polyTrans64 extends Program
 			WindowFailure("", ". Aborting.", -1, "{ESCAPE}")
 			WindowFailure("", "This is not supported, only the binary format", -1, "{ESCAPE}")
 			WindowFailure("", "Could not read data from", -1, "{ESCAPE}")
+			WindowFailure("", "is not in the X3D or VRML97 format", -1, "{ESCAPE}")
+			WindowFailure("", "Error enumerating data objects", -1, "{ESCAPE}")
 			WindowFailure("", "version number is not recognized", -1, "{ESCAPE}")
+			WindowFailure("", "premature end of file", -1, "{ESCAPE}")
 			WindowFailure("", "is not in the VRML 2.0 format", -1, "{ESCAPE}")
 			WindowFailure("", "The file cannot be loaded", -1, "{ESCAPE}")
 			WindowFailure("", "Could not locate or open", -1, "{ESCAPE}")
@@ -86,7 +89,7 @@ export class polyTrans64 extends Program
 			WindowFailure("", "cannot be parsed.", -1, "{ESCAPE}")
 			return WinActive("PolyTrans|CAD 3D Translation, Viewing & Composition System - ", "")
 		EndFunc
-		CallUntil("PostImportDialogs", ${xu.MINUTE*3})
+		CallUntil("PostImportDialogs", ${xu.MINUTE*2})
 
 		Send("!t")
 		Send("e")

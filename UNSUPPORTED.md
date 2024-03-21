@@ -1,4 +1,4 @@
-# Unsupported File Formats (913)
+# Unsupported File Formats (914)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -113,7 +113,7 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fi
 
 
 
-## Document (43)
+## Document (44)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Adobe InDesign Document | .indd .ind | 
@@ -153,6 +153,7 @@ document | Pen Pal Database | .flr |
 document | Pen Pal Document | .wtr | 
 document | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 document | PPrint Page | .pag | 
+document | RMP Help | .hlp | 
 document | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 document | Storybook Weaver Story | .swd .sts | 
 document | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)

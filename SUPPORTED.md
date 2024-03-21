@@ -1,11 +1,11 @@
-# Supported File Formats (1,608)
+# Supported File Formats (1,607)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (271)
+## Archive (270)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -85,8 +85,7 @@ archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
 archive | [Dr. Riptide Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dragonVDK/)
-archive | Dynamix Game Data Archive | .dyn | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameData/)
-archive | Dynamix Game Data Archive | .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/threeDUltraMiniGolfGameData/)
+archive | Dynamix Game Data Archive | .dyn .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameData/)
 archive | Earth and Beyond Game Data Archive | .mix | [gameextractor](http://www.watto.org/game_extractor.html) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/earthAndBeyondGameData/)
 archive | [EDI Install LZS Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [ediUnpack](https://github.com/Sembiance/dexvert/blob/master/os/aux/win2k/app/UNPACK.EXE) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZS/)
 archive | [EDI Install LZSS2 Compressed Data](http://fileformats.archiveteam.org/wiki/EDI_Install_packed_file) | $ | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ediInstallLZSS2/)
@@ -636,7 +635,7 @@ image | AMOS Picture Packer | .bin | [abydosconvert](https://github.com/Sembianc
 image | Amstrad CPC Mode 5 Image | .cm5 .gfx | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/amstradMode5/)
 image | [Ani ST](http://fileformats.archiveteam.org/wiki/AniST) | .scr .str | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [13 sample files](https://sembiance.com/fileFormatSamples/image/aniST/)
 image | [Anime 4ever!!! Image](http://fileformats.archiveteam.org/wiki/Anime_4ever_slideshow) | .a4r | [recoil2png](http://recoil.sourceforge.net) | [4 sample files](https://sembiance.com/fileFormatSamples/image/a4r/)
-image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice .ansi .asc .gbs | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) | [49 sample files](https://sembiance.com/fileFormatSamples/image/ans/)
+image | [ANSI Art File](http://fileformats.archiveteam.org/wiki/ANSI_Art) | .ans .drk .ice .ansi .asc .gbs | [ansilove](https://www.ansilove.org/) [deark](https://entropymine.com/deark/) [ffmpeg](https://ffmpeg.org/) | [50 sample files](https://sembiance.com/fileFormatSamples/image/ans/) - Animated ANSI sequences such as KM-TRANSPORTER.ANS only get converted into a single image with ansilove. It would be nice to 'detect' that it's animated and use ffmpeg instead to convert it into an animated MP4
 image | [AOL ART Compressed Image](http://fileformats.archiveteam.org/wiki/ART_(AOL_compressed_image)) | .art | [aolart2ppm2015](https://github.com/Sembiance/dexvert/base/dexvert/aolart2ppm/) [aolart2ppm2007](https://github.com/Sembiance/dexvert/base/dexvert/aolart2ppm/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [40 sample files](https://sembiance.com/fileFormatSamples/image/aolART/)
 image | [Apple II High Res](http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats) | .hgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2HighRes/)
 image | [Apple IIe Double High-Resolution](http://fileformats.archiveteam.org/wiki/Apple_II_graphics_formats) | .dhgr | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2eDoubleHighRes/)

@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Ensure I have support for all these MSX BASIC Graphics formats: http://justsolve.archiveteam.org/wiki/MSX_BASIC_graphics
-  That link has some other converters
 
 
 /---------------\

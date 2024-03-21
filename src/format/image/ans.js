@@ -5,7 +5,7 @@ import {flexMatch} from "../../identify.js";
 
 export class ans extends Format
 {
-	name             = "ANSI Art File";
+	name             = "ANSi Art File";
 	website          = "http://fileformats.archiveteam.org/wiki/ANSI_Art";
 	ext              = [".ans", ".drk", ".ice", ".ansi", ".asc", ".gbs"];
 	weakExt          = [".drk", ".ice", ".asc"];	// .ANS was widely accepted as ANSI, but .drk and .ice less so. .asc is also not widely used.

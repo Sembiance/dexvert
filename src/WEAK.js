@@ -1,5 +1,3 @@
-/* eslint-disable prefer-named-capture-group */
-
 // These magics are VERY untrustworthy and any detections against them should be noted as such
 export const WEAK_VALUES =
 [

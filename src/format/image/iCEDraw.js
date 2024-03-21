@@ -9,7 +9,7 @@ export class iCEDraw extends Format
 	mimeType       = "image/x-icedraw";
 	magic          = ["iCEDraw graphic"];
 	forbiddenMagic = TEXT_MAGIC_STRONG;
-	metaProvider   = ["ansiArt"];
+	metaProvider   = ["ansiloveInfo"];
 	converters     = ["ansilove[format:idf]", `abydosconvert[format:${this.mimeType}]`];
 	verify         = ({meta}) => meta.width>=16 && meta.height>=16;
 }

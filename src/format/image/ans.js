@@ -24,7 +24,7 @@ export class ans extends Format
 		
 		return 0;
 	};
-	metaProvider = ["ansiArt"];
+	metaProvider = ["ansiloveInfo"];
 	converters   = [
 		"ansilove[format:ans]",
 		"deark[module:ansiart]",

@@ -55,6 +55,7 @@ export default
 		penPalDatabase         : {name : "Pen Pal Database", ext : [".flr"], magic : ["Pen Pal data base"]},
 		penPalDocument         : {name : "Pen Pal Document", ext : [".wtr"], magic : ["Pen Pal document"]},
 		pPrintPage             : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]},
+		rmpHelp                : {name : "RMP Help", ext : [".hlp"], magic : ["RMP Help format"]},
 		storybookWeaver		   : {name : "Storybook Weaver Story", ext : [".swd", ".sts"], magic : ["Storybook Weaver Deluxe"]},
 		vizawriteDocument      : {name : "Vizawrite Document", magic : ["Vizawrite document"]},
 		winFaxDocument         : {name : "WinFax Document", ext : [".fxm", ".fxr"], magic : ["WinFax Pro multipage document", "WinFax Sent / Received document"]}

@@ -1,11 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Ensure I have support for all these MSX BASIC Graphics formats: http://justsolve.archiveteam.org/wiki/MSX_BASIC_graphics
+  That link has some other converters
 
 
 /---------------\
 | High Priority |
 \---------------/
+* This person made a Sierra SCI0 pic renderer in JavaScript: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
+  See if I can leverage it to convert/extract SCI0 pics from SCI0 files. May want to reach out on Mastadon/GitHub
 
 
 /-----------------\
@@ -83,7 +87,8 @@
 * With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
   There are only a handful of these files (14), so it's not a high priority
 
-* See if this Sierra SCI0 extractor has evovled at all to where I may want to use it: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
+* Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
+  If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
 
 
 /--------------\

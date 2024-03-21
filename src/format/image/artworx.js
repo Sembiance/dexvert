@@ -10,7 +10,7 @@ export class artworx extends Format
 	magic          = [/^data$/];
 	forbiddenMagic = ["Amiga Disk image File", "AppleDouble encoded Macintosh file", "Mac AppleDouble encoded", ...TEXT_MAGIC];
 	weakMagic      = true;
-	metaProvider   = ["ansiArt", "ffprobe"];
+	metaProvider   = ["ansiloveInfo", "ffprobe"];
 	
 	// .adf can be somewhat common of an image format, so only convert if we have a formatName from ffprobe
 	// ansilove and ffmpeg both do great. deark messes up several images

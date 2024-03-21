@@ -9,24 +9,25 @@ export class goldBoxExplorer extends Program
 	args      = () => [];
 	osData  = {
 		script : `
-			$mainWindow = WindowRequire("Gold Box Explorer", "", 10)
+			$mainWindow = WindowRequire("Gold Box Explorer", "", 15)
 			Send("i{TAB}{TAB}{TAB}{END}")
-			Sleep(1000)
+			Sleep(1500)
 			Send("+{F10}")
+			Sleep(200)
 			Send("E")
 
-			$exportWindow = WindowRequire("Export Image", "", 10)
+			$exportWindow = WindowRequire("Export Image", "", 15)
 			$exportWindowPos = WinGetPos($exportWindow)
 			MouseClick("left", $exportWindowPos[0] + 59, $exportWindowPos[1] + 59, 1, 0)
 
-			$browseWindow = WindowRequire("Browse For Folder", "", 10)
-			Sleep(200)
-			SendSlow("{TAB}{TAB}{HOME}d{LEFT}c{RIGHT}l{RIGHT}o{ENTER}", 100)
+			$browseWindow = WindowRequire("Browse For Folder", "", 15)
+			Sleep(250)
+			SendSlow("{TAB}{TAB}{HOME}d{LEFT}c{RIGHT}l{RIGHT}o{ENTER}", 150)
 			WinWaitClose($browseWindow, 10)
 
-			WinWaitActive($exportWindow, "", 10)
+			WinWaitActive($exportWindow, "", 15)
 			SendSlow("{TAB}{DOWN}{DOWN}{TAB}{TAB}{ENTER}")
-			WindowRequire("", "Exported ", 60)
+			WindowRequire("", "Exported ", 120)
 			Send("{ENTER}")`
 	};
 

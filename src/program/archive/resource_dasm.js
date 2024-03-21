@@ -1,4 +1,3 @@
-/* eslint-disable prefer-named-capture-group */
 import {xu} from "xu";
 import {Program, RUNTIME} from "../../Program.js";
 import {fileUtil, encodeUtil, runUtil} from "xutil";

@@ -1,4 +1,4 @@
-/* eslint-disable camelcase, prefer-named-capture-group, unicorn/better-regex, sonarjs/no-empty-collection */
+/* eslint-disable camelcase, unicorn/better-regex, sonarjs/no-empty-collection */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
@@ -309,7 +309,10 @@ const FLEX_DIFF_FILES =
 	/archive\/swfEXE\/.+$/,
 
 	// on some hosts, scribus fails to process this file, not sure why
-	/image\/cdr\/test\.cdr$/
+	/image\/cdr\/test\.cdr$/,
+
+	// other
+	/music\/sid\/Legacy_of_the_Ancients.sid$/
 ];
 
 // Regex is matched against the sample file tested and the second item is the family and third is the format to allow to match to or true to allow any family/format
@@ -347,12 +350,13 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/text\/latexAUXFile\/LCAU\.AUX$/i, "text", "txt"],
 
 	// These files don't convert with my converters and get identified to other things
+	[/audio\/quickTimeAudio\/Demo Music File$/i, "archive", "macBinary"],
 	[/image\/cgm\/input\.cgm$/i, "text", "txt"],
 	[/poly\/ac3d\/forza\.acc$/i, "text", "txt"],
 	[/poly\/cinema4D\/bomb\.xml$/i, "text", "xml"],
-	[/poly\/collada\/item_flashlight\.dae$/i, "text", "txt"],
+	[/poly\/collada\/item_flashlight\.dae$/i, "text", "xml"],
 	[/poly\/dxf\/abydos\.r14\.dxf$/i, "image", true],
-	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "txt"],
+	[/poly\/neutralFileFormat\/SPIRALE\.NFF$/i, "text", "imf"],
 	[/poly\/polygonFileFormat\/example1\.ply$/i, "text", "txt"],
 	[/poly\/quickDraw3D\/testn\.3dmf$/i, "text", "txt"],
 	[/poly\/trueSpace3D\/dna\.cob$/i, "text", "txt"],

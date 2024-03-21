@@ -8,6 +8,6 @@ export class xb extends Format
 	forbidExtMatch = true;
 	mimeType       = "image/x-xbin";
 	magic          = ["XBIN image", /^fmt\/1612( |$)/];
-	metaProvider   = ["ansiArt"];
+	metaProvider   = ["ansiloveInfo"];
 	converters     = ["ansilove[format:xb]", "deark[module:xbin]", `abydosconvert[format:${this.mimeType}]`];
 }

@@ -50,7 +50,11 @@ export class unar extends Program
 		for(const fileInfo of xu.parseJSON(fileInfoRaw)?.lsarContents || [])
 		{
 			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName || fileInfo.XADIsResourceFork)
+			{
+				if(r.originalInput.base===fileInfo.XADFileName)
+					Object.assign(r.meta, {macFileType : num2str(fileInfo.XADFileType), macFileCreator : num2str(fileInfo.XADFileCreator)});
 				continue;
+			}
 				
 			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileInfo.XADFileName);
 			if(!fileOutputPath)

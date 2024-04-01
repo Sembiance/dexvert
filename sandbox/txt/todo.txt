@@ -6,6 +6,39 @@
 /---------------\
 | High Priority |
 \---------------/
+* MacBinary files should output as meta their type and creator codes
+
+* Expand detection of Canvas support:
+	https://preservation.tylerthorsted.com/2024/03/29/canvas/
+	https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/Canvas
+	http://fileformats.archiveteam.org/wiki/Canvas
+  Ensure the mac versions are properly being detected via their creator codes. Is this something 
+
+* Improve 'cadius' program:
+  Remove the # suffix from all filenames
+  Use 'cadius CATALOG 96.2mg -V' to get a list of all files and their attributes.
+  For the corresponding files, set the appropriate date based on it's modification date
+  Set a r.meta.fileMeta with both file type and AUX type numbers and also the ASCII type too
+ 
+* Add support for Applesoft BASIC file format: https://discmaster.textfiles.com/view/7407/SGDS%2096.2mg/SDGS.96/SDD96/STARTUP%23FC0801
+  Convert to text using one of these detokenizers:	
+  	https://github.com/softwarejanitor/applesoft_detokenizer
+	https://github.com/jtauber/a2disk/blob/master/applesoft.py
+  NOTE: There also appears to be 'Integer' basic too, see:
+	https://github.com/nculwell/retrotools/tree/main/apple2
+    https://github.com/dmolony/DiskBrowser/tree/4b476457d36c26513de96d6222a8342891730755/src/com/bytezone/diskbrowser/applefile
+  Once I see that one works, it doesn't look too hard, so probably convert it into javascript deno
+  Utilizing teh type information from cadius, add a dexmagic match against that meta
+
+* Ensure NeXT format discs are supported by checking some of the CD's here: https://blog.persistent.info/2024/03/infinite-mac-nextstep.html
+  Note that it mentions 2 different filesystem formats, HFS and UFS?
+  Make sure I have oshints for next charset: https://github.com/mihaip/infinite-mac/blob/main/scripts/nextstep.py
+
+* Sort this list of supported formats by library/engine and ensure dexvert supports each engine and every format in that engine
+  Download the samples on this page and add em to mine.
+  Prioritize non-video games
+  http://bzrplayer.blazer.nu/formats.php
+
 * This person made a Sierra SCI0 pic renderer in JavaScript: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
   See if I can leverage it to convert/extract SCI0 pics from SCI0 files. May want to reach out on Mastadon/GitHub
 

@@ -170,6 +170,8 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 		try
 		{
+			if(inputFile.meta && Object.keys(inputFile.meta).length)
+				dexState.meta.inputMeta = inputFile.meta;
 			Object.assign(dexState.meta, await format.getMeta(f.input, dexState));
 			
 			// if we are untouched, mark ourself as processed and cleanup
@@ -343,15 +345,19 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 						break;
 				}
 			}
-
-			// auto assign any meta.fileMeta results from any programs to the runState meta
+			
 			for(const r of dexState.ran || [])
 			{
-				if(!r.meta?.fileMeta)
-					continue;
-				
-				dexState.meta.fileMeta ||= {};
-				Object.assign(dexState.meta.fileMeta, r.meta.fileMeta);
+				// assign any meta.macFileType or meta.macFileCreator results from any programs to the runState meta
+				if(r.meta?.macFileType || r.meta?.macFileCreator)
+					Object.assign(dexState.meta, {macFileType : r.meta.macFileType, macFileCreator : r.meta.macFileCreator});
+
+				// auto assign any meta.fileMeta results from any programs to the runState meta
+				if(r.meta?.fileMeta)
+				{
+					dexState.meta.fileMeta ||= {};
+					Object.assign(dexState.meta.fileMeta, r.meta.fileMeta);
+				}
 			}
 
 			// run any post-converter post format function

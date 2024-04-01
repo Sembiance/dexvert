@@ -4,7 +4,7 @@ export class macOSExecutable extends Format
 {
 	name       = "MacOS Executable";
 	website    = "http://fileformats.archiveteam.org/wiki/MacBinary";
-	magic      = ["Macintosh Application (MacBinary)", "Preferred Executable Format", /^fmt\/1070( |$)/];
+	magic      = ["Macintosh Application", "Preferred Executable Format", /^fmt\/1070( |$)/];
 	converters = [
 		// if it's a projector, then just extract the director files
 		"director_files_extract",

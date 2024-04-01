@@ -6,6 +6,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
+import {_DEXMAGIC_FILE_META_CHECKS} from "../program/detect/dexmagic.js";
 
 const MAX_DURATION = xu.HOUR;
 const DECRECURSE_HOST = "127.0.0.1";
@@ -186,6 +187,7 @@ const ALL_MAGICS = new Set();
 const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
+const newMacTypeCreators = {};
 
 if(argv.report)
 {
@@ -337,6 +339,25 @@ async function processNextQueue()
 					newMagics[id.magic].pushUnique(task.relFilePath);
 				}
 			}
+
+			const macFileType = dexData.phase?.meta?.macFileType || dexData.phase?.meta?.inputMeta?.macFileType;
+			const macFileCreator = dexData.phase?.meta?.macFileCreator || dexData.phase?.meta?.inputMeta?.macFileCreator;
+			if(macFileType || macFileCreator)
+			{
+				let metaCheckerResult = null;
+				for(const metaChecker of _DEXMAGIC_FILE_META_CHECKS)
+				{
+					metaCheckerResult = metaChecker({macFileType, macFileCreator});
+					if(metaCheckerResult!==null)
+						break;
+				}
+				if(metaCheckerResult===null)
+				{
+					const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
+					newMacTypeCreators[macFileTypeCreator] ||= [];
+					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
+				}
+			}
 		}
 
 		if(!dexData?.created?.files?.output?.length)
@@ -393,7 +414,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
 if(argv.report)
 {
-	const reportData = {duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics};
+	const reportData = {duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, newMacTypeCreators};
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)

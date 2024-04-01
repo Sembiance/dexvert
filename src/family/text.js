@@ -35,10 +35,10 @@ export class text extends Family
 
 					// wc undercounts by 1 if the last byte isn't a new line, check and fix that here
 					const f = await Deno.open(inputFile.absolute);
-					await Deno.seek(f.rid, -1, 2);
+					await f.seek(-1, 2);
 					const buf = new Uint8Array(1);
-					await Deno.read(f.rid, buf);
-					Deno.close(f.rid);
+					await f.read(buf);
+					f.close();
 					if(buf[0]!==0x0A && buf[0]!==0x0D)
 						lineCount++;
 				}

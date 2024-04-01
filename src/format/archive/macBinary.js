@@ -1,6 +1,7 @@
 import {Format} from "../../Format.js";
 
-const _MACBINARY_MAGIC = ["MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "Mac AppleSingle encoded", "AppleSingle encoded Macintosh file", "MacBinary 3", /^MacBinary$/, /^AppleSingle$/, / \(MacBinary\)$/, /^fmt\/(967|968|1763)( |$)/];
+const _APPLESINGLE_MAGIC = ["Mac AppleSingle encoded", "AppleSingle encoded Macintosh file", /^AppleSingle$/, /^fmt\/(967|968)( |$)/];
+const _MACBINARY_MAGIC = ["Macintosh MacBinary", "MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "MacBinary 3", ..._APPLESINGLE_MAGIC, /^MacBinary$/, / \(MacBinary\)$/, /^fmt\/(1762|1763)( |$)/];
 export {_MACBINARY_MAGIC};
 
 export class macBinary extends Format
@@ -11,5 +12,13 @@ export class macBinary extends Format
 	forbidExtMatch = true;
 	magic          = _MACBINARY_MAGIC;
 	fallback       = true;
-	converters     = ["unar[mac]", "deark[module:macbinary]", "deark[module:macrsrc]", "deark[module:applesd]"];	// MacBinary 1 files (preview.pix) are technically rsrc files, but only seem to work with macrssrc deark extraction
+	converters = dexState =>
+	{
+		// MacBinary 1 files (preview.pix) are technically rsrc files, but only seem to work with macrssrc deark extraction
+		const r = ["unar[mac]", "deark[module:macbinary]", "deark[module:macrsrc]"];
+		if(dexState.hasMagics(_APPLESINGLE_MAGIC))
+			r.push("deark[module:applesd]");
+		
+		return r;
+	};
 }

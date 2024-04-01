@@ -1,5 +1,5 @@
 import {xu} from "xu";
-import {fileUtil} from "xutil";
+import {fileUtil, encodeUtil} from "xutil";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {path} from "std";
@@ -129,9 +129,9 @@ const DEXMAGIC_CHECKS =
 };
 /* eslint-enable unicorn/no-hex-escape */
 
-export const _DEXMAGIC_FILE_META_CHECKS =
+export const _DEXMAGIC_MAC_CHECKS =
 [
-	// uniso[hfs] will output the macintosh file type for each output file. This gets fed back into a future dexvert/identifcation as fileMeta. So we check that here
+	// uniso[hfs], unar[mac] and dexmagic itself will output the macintosh file type for each output file. This gets fed back into a future dexvert/identifcation as fileMeta. So we check that here
 	// file and creator types: sandbox/txt/MacOS_File_Types_and_Creator_Codes.pdf  (originally from https://vintageapple.org/macbooks/pdf/The_Macintosh_System_Fitness_Plan_(system_7.5)_1995.pdf)
 	({macFileType, macCreatorType}) =>	// eslint-disable-line no-unused-vars
 	{
@@ -155,8 +155,10 @@ export const _DEXMAGIC_FILE_META_CHECKS =
 			case "PNTG":
 				return "Macintosh MacPaint";
 			
+			case "SIT!":
 			case "SIT5":
-				return "Macintosh StuffIt 5 Archive";
+			case "SITD":
+				return "Macintosh StuffIt Archive";
 
 			case "TEXT":
 			case "ttro":
@@ -185,17 +187,47 @@ const DEXMAGIC_CUSTOMS =
 	
 	async function checkInstallIt(r)
 	{
-		const f = await Deno.open(r.f.input.absolute);
-		const {size} = await f.stat();
-		if(size<43)
+		if(r.f.input.size<43)
 			return;
 
-		await f.seek(-43, 2);
-		const suffix = new Uint8Array(6);
-		await f.read(suffix);
-		f.close();
+		const suffix = await fileUtil.readFileBytes(r.f.input.absolute, 6, -43);
 		if(suffix.indexOfX([0x43, 0x50, 0x32, 0x2E, 0x30, 0x30])===0)	// CP2.00 in hex
 			return "InstallIt! compressed file";
+	},
+
+	async function checkMacBinary(r)
+	{
+		if(r.f.input.size<128)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 128);
+		if([0, 74, 82].some(v => header[v]!==0))
+			return;
+
+		if(header[1]<1 || header[1]>63)
+			return;
+
+		const dataForkLength = header.getUInt32BE(83);
+		const resourceForkForkLength = header.getUInt32BE(87);
+		if(dataForkLength===0 && resourceForkForkLength===0)
+			return;
+
+		if((dataForkLength+resourceForkForkLength+128)>r.f.input.size)
+			return;
+
+		// here we check to see if the type or creator have a null byte. I think in theory this is possible, but since this macBinary check is kinda weak in general, we just restrict matches to those with non-null bytes in the type/creator
+		const fileTypeData = header.subarray(65, 69);
+		if(fileTypeData.indexOfX(0)!==-1)
+			return;
+
+		const fileCreatorData = header.subarray(69, 73);
+		if(fileCreatorData.indexOfX(0)!==-1)
+			return;
+
+		r.meta.macFileType = await encodeUtil.decodeMacintosh({data : fileTypeData});
+		r.meta.macCreatorType = await encodeUtil.decodeMacintosh({data : fileCreatorData});
+		
+		return `Macintosh MacBinary ${r.meta.macFileType}/${r.meta.macCreatorType}`;	// WARNING! DO NOT CHANGE the formatting of this return value. It's used in dexvert.js to parse out the macFileType and macCreatorType
 	}
 ];
 
@@ -214,21 +246,24 @@ export class dexmagic extends Program
 	{
 		r.meta.detections = [];
 
-		if(r.f.input.meta)
-		{
-			for(const fmc of _DEXMAGIC_FILE_META_CHECKS)
-			{
-				const value = fmc(r.f.input.meta);
-				if(value)
-					r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
-			}
-		}
-
-		for(const custom of DEXMAGIC_CUSTOMS)
+		for(const custom of DEXMAGIC_CUSTOMS)	// make sure we run this before the MAC_CHECKS below in order to pick up the macFileType and macCreatorType
 		{
 			const value = await custom(r);
 			if(value)
 				r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
+		}
+
+		const macFileType = r.meta.macFileType || r.f.input.meta?.macFileType;
+		const macCreatorType = r.meta.macCreatorType || r.f.input.meta?.macCreatorType;
+
+		if(macFileType || macCreatorType)
+		{
+			for(const macCheck of _DEXMAGIC_MAC_CHECKS)
+			{
+				const value = macCheck({macFileType, macCreatorType});
+				if(value)
+					r.meta.detections.push(Detection.create({value, from : "dexmagic", file : r.f.input}));
+			}
 		}
 
 		const checkMatcher = (data, loc, matcher) =>

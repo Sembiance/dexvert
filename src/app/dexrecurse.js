@@ -6,7 +6,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
-import {_DEXMAGIC_FILE_META_CHECKS} from "../program/detect/dexmagic.js";
+import {_DEXMAGIC_MAC_CHECKS} from "../program/detect/dexmagic.js";
 
 const MAX_DURATION = xu.HOUR;
 const DECRECURSE_HOST = "127.0.0.1";
@@ -345,9 +345,9 @@ async function processNextQueue()
 			if(macFileType || macFileCreator)
 			{
 				let metaCheckerResult = null;
-				for(const metaChecker of _DEXMAGIC_FILE_META_CHECKS)
+				for(const macCheck of _DEXMAGIC_MAC_CHECKS)
 				{
-					metaCheckerResult = metaChecker({macFileType, macFileCreator});
+					metaCheckerResult = macCheck({macFileType, macFileCreator});
 					if(metaCheckerResult!==null)
 						break;
 				}

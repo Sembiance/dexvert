@@ -46,15 +46,11 @@ export class unar extends Program
 
 		// Get our file creator types for better detection of extracted files down the line
 		fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
-		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["--json", r.inFile({absolute : true})]);
+		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
 		for(const fileInfo of xu.parseJSON(fileInfoRaw)?.lsarContents || [])
 		{
 			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName || fileInfo.XADIsResourceFork)
-			{
-				if(r.originalInput.base===fileInfo.XADFileName)
-					Object.assign(r.meta, {macFileType : num2str(fileInfo.XADFileType), macFileCreator : num2str(fileInfo.XADFileCreator)});
 				continue;
-			}
 				
 			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileInfo.XADFileName);
 			if(!fileOutputPath)

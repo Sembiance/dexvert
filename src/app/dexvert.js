@@ -18,7 +18,8 @@ const argv = cmdUtil.cmdInit({
 		programFlag   : {desc : "One or more program:flagName:flagValue values. If set, the given flagName and flagValue will be used for program", hasValue : true, multiple : true},
 		forbidProgram : {desc : "A programid not to run. Used internally to prevent infinite recursions", hasValue : true, multiple : true},
 		skipVerify    : {desc : "Set to true to skip verifications of output files"},
-		fileMeta      : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true}
+		fileMeta      : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true},
+		direct        : {desc : "Skip going through the dex RPC server and directly load dexvert (still requires dexserver to be running, but allows debugging of src/dexvert.js"}
 	},
 	args :
 	[
@@ -55,6 +56,23 @@ async function handleExit(ignored)
 {
 	await xlog.flush();
 	Deno.exit(0);
+}
+
+if(argv.direct)
+{
+	const {init : initPrograms} = await import(path.join(import.meta.dirname, "../program/programs.js"));
+	const {init : initFormats} = await import(path.join(import.meta.dirname, "../format/formats.js"));
+
+	await initPrograms();
+	await initFormats();
+
+	const {DexFile} = await import(path.join(import.meta.dirname, "../DexFile.js"));
+	const {dexvert} = await import(path.join(import.meta.dirname, "../dexvert.js"));
+
+	const dexState = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
+	console.log(dexState.pretty());
+
+	await handleExit();
 }
 
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};

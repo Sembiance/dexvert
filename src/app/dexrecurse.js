@@ -6,7 +6,6 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
-import {_DEXMAGIC_MAC_CHECKS} from "../program/detect/dexmagic.js";
 
 const MAX_DURATION = xu.HOUR;
 const DECRECURSE_HOST = "127.0.0.1";
@@ -188,6 +187,7 @@ const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
 const newMacTypeCreators = {};
+const macMetaCheckers = [];
 
 if(argv.report)
 {
@@ -197,6 +197,9 @@ if(argv.report)
 	{
 		for(const m of Array.force(format.magic || []))
 			ALL_MAGICS.add(m);
+
+		if(format.macMeta)
+			macMetaCheckers.push(format.macMeta);
 	}
 
 	xlog.info`Finding existing sample files...`;
@@ -342,21 +345,11 @@ async function processNextQueue()
 
 			const macFileType = dexData.phase?.meta?.macFileType || dexData.phase?.meta?.inputMeta?.macFileType;
 			const macFileCreator = dexData.phase?.meta?.macFileCreator || dexData.phase?.meta?.inputMeta?.macFileCreator;
-			if(macFileType || macFileCreator)
+			if((macFileType || macFileCreator) && !macMetaCheckers.some(macMetaChecker => macMetaChecker({macFileType, macFileCreator})))
 			{
-				let metaCheckerResult = null;
-				for(const macCheck of _DEXMAGIC_MAC_CHECKS)
-				{
-					metaCheckerResult = macCheck({macFileType, macFileCreator});
-					if(metaCheckerResult!==null)
-						break;
-				}
-				if(metaCheckerResult===null)
-				{
-					const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
-					newMacTypeCreators[macFileTypeCreator] ||= [];
-					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
-				}
+				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
+				newMacTypeCreators[macFileTypeCreator] ||= [];
+				newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
 			}
 		}
 

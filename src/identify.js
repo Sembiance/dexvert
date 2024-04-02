@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {fileUtil} from "xutil";
+import {fileUtil, encodeUtil} from "xutil";
 import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
@@ -16,6 +16,46 @@ export {flexMatch};
 
 // A list of family types. Order is the secondary order they will be matched in the case of multiple 'types' of matches (magic, etc, filename) across multiple categories
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "other"];
+
+// Get mac file type and creator code, either from inputFile meta (passed in fileMeta) or checking if it's a MacBinary file and getting it from that
+export async function getMacMeta(inputFile)
+{
+	if(inputFile.meta?.macFileType || inputFile.meta?.macFileCreator)
+		return {macFileType : inputFile.meta.macFileType, macFileCreator : inputFile.meta.macFileCreator};
+
+	// MacBinary 1 Specs: https://web.archive.org/web/19991103230427/http://www.lazerware.com:80/formats/macbinary/macbinary.html
+	// MacBinary 2 Specs: https://files.stairways.com/other/macbinaryii-standard-info.txt
+
+	// MacBinary header is 128 bytes
+	if(inputFile.size<128)
+		return;
+
+	const header = await fileUtil.readFileBytes(inputFile.absolute, 128);
+	if([0, 74, 82].some(v => header[v]!==0))
+		return;
+
+	if(header[1]<1 || header[1]>63)
+		return;
+
+	const dataForkLength = header.getUInt32BE(83);
+	const resourceForkForkLength = header.getUInt32BE(87);
+	if(dataForkLength===0 && resourceForkForkLength===0)
+		return;
+
+	if((dataForkLength+resourceForkForkLength+128)>inputFile.size)
+		return;
+
+	// here we check to see if the type or creator has a null byte. I think in theory null bytes are allowed and I think I've even encountered it (though I forget where), but since this macBinary check is weak in general, we just restrict matches to those with non-null bytes in the type/creator
+	const fileTypeData = header.subarray(65, 69);
+	if(fileTypeData.indexOfX(0)!==-1)
+		return;
+
+	const fileCreatorData = header.subarray(69, 73);
+	if(fileCreatorData.indexOfX(0)!==-1)
+		return;
+
+	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
+}
 
 export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 {
@@ -41,10 +81,12 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
 	const byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
-	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
+	const macMetaData = await getMacMeta(inputFile);
+
+	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], macMeta : [], fallback : []};
 	for(const familyid of FAMILY_MATCH_ORDER)
 	{
-		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], fallback : []};
+		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], macMeta : [], fallback : []};
 		for(const [formatid, format] of Object.entries(formats).sortMulti([([, vf]) => FAMILY_MATCH_ORDER.indexOf(vf.familyid), ([, vf]) => vf.formatid], [false, false]))	// the sortMulti ensures we have a predictable order
 		{
 			if(!FAMILY_MATCH_ORDER.includes(format.familyid))
@@ -92,7 +134,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
 			const extMatch = (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext) || (format.matchPreExt && ext.toLowerCase()===f.input.preExt.toLowerCase()));
 			const filenameMatch = (format.filename || []).some(mfn => flexMatch(f.input.base, mfn, true));
-			
+			const macMetaMatch = macMetaData && format.macMeta && format.macMeta(macMetaData);
+
+			// check filesize match
 			let hasExpectedFileSize = false;
 			let fileSizeMatch = false;
 			let fileSizeMatchExt = null;
@@ -141,14 +185,14 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				return magicMatched;
 			}));
 
-			const hasAnyMatch = (extMatch || filenameMatch || fileSizeMatch || magicMatch);
+			const hasAnyMatch = (extMatch || filenameMatch || macMetaMatch || fileSizeMatch || magicMatch);
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
 			if(format.website)
 				baseMatch.website = format.website;
 
 			// some formats require some sort of other check to ensure the file is valid
-			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, fileSizeMatch, magicMatch})))
+			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, macMetaMatch, fileSizeMatch, magicMatch})))
 			{
 				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
 				continue;
@@ -188,6 +232,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				baseMatch.matchesFileSize = true;
 			if(filenameMatch)
 				baseMatch.matchesFilename = true;
+			if(macMetaMatch)
+				baseMatch.matchesMacMeta = true;
 
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
@@ -195,7 +241,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const hasWeakFilename = format.weakFilename===true;
 
 			// Non-weak magic matches start at confidence 100.
-			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
+			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || macMetaMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
 			{
 				// Original confidence is a sub-sorter used before assigning proper confidence
 				let originalConfidence = 0;
@@ -208,8 +254,12 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, originalConfidence, hasWeakMagic});
 			}
 
+			// macMeta matches start at confidence 80
+			if(macMetaMatch)
+				familyMatches.macMeta.push({...baseMatch, matchType : "macMeta", hasWeakMagic});
+
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
-			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic))
+			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch || macMetaMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch, hasWeakMagic};
 				if(format.magic)
@@ -218,7 +268,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			}
 
 			// Filename matches start at confidence 44.
-			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch))
+			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch || macMetaMatch))
 				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
 			// fileSize matches start at confidence 20.
@@ -250,7 +300,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			return true;
 		});
 
-		[["magic", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
+		[["magic", 100], ["macMeta", 80], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher
@@ -283,9 +333,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	}
 
 	const matches = [...matchesByFamily.magic,
-		...matchesByFamily.ext.filter(em => !matchesByFamily.magic.some(mm => mm.magic===em.magic)),
-		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
-		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
+		...matchesByFamily.macMeta.filter(em => !Array.from(matchesByFamily.magic).some(mm => mm.magic===em.magic)),
+		...matchesByFamily.ext.filter(em => ![...matchesByFamily.macMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.macMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.macMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
 
 	// Unsupported matches haven't gone through enough testing to warrant any additional confidence than 1
 	matches.forEach(match =>

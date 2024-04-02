@@ -9,6 +9,7 @@ export class txt extends Format
 	ext          = [".txt"];
 	weakExt      = true;
 	magic        = TEXT_MAGIC;
+	macMeta      = ({macFileType}) => ["TEXT", "ttro"].includes(macFileType);
 	priority     = this.PRIORITY.LOWEST;
 	fallback     = true;
 	untouched    = true;

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {identify} from "./identify.js";
+import {identify, getMacMeta} from "./identify.js";
 import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
@@ -390,21 +390,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			break;
 	}
 
-	// dexmagic has a special case for detecting macFileType and macFileCreator from MacBinary files, this is where we handle it, kinda hacky but there is no way for identifications to return meta
 	if(dexState.meta && !dexState.meta.macFileType && !dexState.meta.macFileCreator)
 	{
-		for(const id of ids)
-		{
-			if(!id || id.from!=="dexmagic" || !id.magic?.startsWith("Macintosh MacBinary"))
-				continue;
-
-			const {macFileType, macFileCreator} = id.magic.match(/^Macintosh MacBinary (?<macFileType>.{4})\/(?<macFileCreator>.{4})$/)?.groups || {};
-			if(macFileType && macFileCreator)
-			{
-				xlog.info`meta ${dexState.meta} ${{macFileType, macFileCreator}}`;
-				Object.assign(dexState.meta, {macFileType, macFileCreator});
-			}
-		}
+		const macMeta = await getMacMeta(inputFile) || {};
+		if(macMeta.macFileType || macMeta.macFileCreator)
+			Object.assign(dexState.meta, macMeta);
 	}
 
 	dexState.duration = (performance.now()-startedAt);

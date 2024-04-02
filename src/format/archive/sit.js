@@ -6,5 +6,6 @@ export class sit extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/StuffIt";
 	ext        = [".sit"];
 	magic      = ["StuffIt compressed archive", "Macintosh StuffIt Archive", /^StuffIt$/, /StuffIt Archive/, /^fmt\/1459|1460( |$)/];
+	macMeta    = ({macFileType}) => ["SIT!", "SIT5", "SITD"].includes(macFileType);
 	converters = ["unar[mac]", "deark[module:stuffit][mac]", "macunpack"];
 }

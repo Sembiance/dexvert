@@ -10,9 +10,6 @@ export const TEXT_MAGIC_STRONG =
 [
 	// checkBytes
 	"Printable ASCII",
-
-	// dexMagic
-	"Macintosh Text File",
 	
 	// file
 	"ASCII text", "ISO-8859 text", "UTF-8 Unicode text", "Non-ISO extended-ASCII text", "ReStructuredText file", "International EBCDIC text", "UTF-8 Unicode text", "Unicode text, UTF-8 text",

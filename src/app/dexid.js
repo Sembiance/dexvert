@@ -2,6 +2,7 @@ import {xu, fg} from "xu";
 import {cmdUtil, printUtil, fileUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexid",
@@ -12,12 +13,15 @@ const argv = cmdUtil.cmdInit({
 		logLevel : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: warn", defaultValue : "warn"},
 		json     : {desc : "Output JSON"},
 		jsonFile : {desc : "If set, will output the result JSON to the given filePath", hasValue : true},
-		fileMeta : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true}
+		fileMeta : {desc : "JSON representing extra meta info about this file. For example, a previous run of uniso[hfs] will output additional metadata about the files.", hasValue : true},
+		direct   : {desc : "Skip going through the dex RPC server and directly load dexvert (still requires dexserver to be running, but allows debugging of src/dexvert.js"}
 	},
 	args :
 	[
 		{argid : "inputFilePath", desc : "One or more file paths to identify", required : true, multiple : true}
 	]});
+
+const xlog = new XLog(argv.json && !argv.jsonFile ? "none" : argv.logLevel);
 
 const inputFilePaths = Array.force(argv.inputFilePath);
 for(const inputFilePath of inputFilePaths)
@@ -28,13 +32,36 @@ for(const inputFilePath of inputFilePaths)
 		continue;
 	}
 	
-	const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
-	const {r : rows, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
-	if(!rows && !logLines)
-		Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
-	
-	if(logLines.length)
-		console.log(logLines.join("\n"));
+	let rows = null;
+	if(argv.direct)
+	{
+		const {init : initPrograms} = await import(path.join(import.meta.dirname, "../program/programs.js"));
+		const {init : initFormats} = await import(path.join(import.meta.dirname, "../format/formats.js"));
+
+		await initPrograms();
+		await initFormats();
+
+		const {DexFile} = await import(path.join(import.meta.dirname, "../DexFile.js"));
+		const {identify} = await import(path.join(import.meta.dirname, "../identify.js"));
+
+		const inputFile = await DexFile.create(inputFilePath);
+		if(argv.fileMeta)
+			inputFile.meta = xu.parseJSON(argv.fileMeta);
+
+		rows = await identify(inputFile, {xlog});
+	}
+	else
+	{
+		const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
+		const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+		if(!r && !logLines)
+			Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+
+		rows = r;
+
+		if(logLines.length)
+			console.log(logLines.join("\n"));
+	}
 
 	if(argv.jsonFile)
 		await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(rows));

@@ -1,7 +1,7 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Fix all of dexvert test-suite then re-run each family one at a time and update the testAll.sh times
 
 /---------------\
 | High Priority |

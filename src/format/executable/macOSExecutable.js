@@ -6,12 +6,5 @@ export class macOSExecutable extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MacBinary";
 	magic      = ["Macintosh Application", "Preferred Executable Format", /^fmt\/1070( |$)/];
 	macMeta    = ({macFileType}) => macFileType==="APPL";
-	converters = [
-		// if it's a projector, then just extract the director files
-		"director_files_extract",
-
-		// Otherwise, try to extract the resources
-		"unar[mac]",
-		"deark[mac]"
-	];
+	converters = ["unar[mac]", "deark[mac]"];
 }

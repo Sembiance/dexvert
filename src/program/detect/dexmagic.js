@@ -23,8 +23,7 @@ const DEXMAGIC_CHECKS =
 	"IFF CAT file"                : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"               : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"                    : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
-	"Macromedia Projector (Mac)"  : [{offset : 0, match : "PJ95"}, {offset : 16, match : "RIFX"}, {offset : 24, match : "APPL"}],
-	"Macromedia Projector (Win)"  : [{offset : 0, match : "PJ95"}, {offset : 16, match : "XFIR"}, {offset : 24, match : "LPPA"}],
+	"Macromedia Projector"        : [{offset : 0, match : ["RIFX", "XFIR"]}, {offset : 8, match : ["LPPA", "APPL"]}],
 	"MINICAT Archive"             : [{offset : 0, match : "MINICAT"}],
 	"NeXT Disk Image Dump"        : [{offset : 46, match : "dlV3"}],
 	"Palm Web Content Record"     : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
@@ -150,13 +149,39 @@ const DEXMAGIC_CUSTOMS =
 		const suffix = await fileUtil.readFileBytes(r.f.input.absolute, 6, -43);
 		if(suffix.indexOfX([0x43, 0x50, 0x32, 0x2E, 0x30, 0x30])===0)	// CP2.00 in hex
 			return "InstallIt! compressed file";
+	},
+
+	async function checkMacromediaProjector(r)
+	{
+		if(r.f.input.size<8)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 8);
+		if(!["PJ93", "PJ95", "39JP", "59JP"].includes(header.getString(0, 4)))
+			return;
+
+		const rifxOffset = header.getUInt32BE(4);
+		if(rifxOffset<8 || (rifxOffset+12)>=r.f.input.size)
+			return;
+
+		const rifxHeader = await fileUtil.readFileBytes(r.f.input.absolute, 12, rifxOffset);
+		if(!["RIFX", "XFIR"].includes(rifxHeader.getString(0, 4)))
+			return;
+
+		if(!["LPPA", "APPL"].includes(rifxHeader.getString(8, 4)))
+			return;
+
+		return "Macromedia Projector (alt)";
 	}
 ];
 
+const textEncoder = new TextEncoder();
 Object.values(DEXMAGIC_CHECKS).flat().forEach(check =>
 {
-	if(typeof check.match==="string")
-		check.match = (new TextEncoder()).encode(check.match);
+	if(Array.isArray(check.match))
+		check.match = check.match.map(match => (typeof match==="string" ? Array.from(textEncoder.encode(match)) : match));
+	else if(typeof check.match==="string")
+		check.match = Array.from(textEncoder.encode(check.match));
 });
 const DEXMAGIC_BYTES_MAX = Object.values(DEXMAGIC_CHECKS).flat().map(check => ((check.size || check.offset || 0)+(check.match?.length || 0))).max();
 
@@ -199,11 +224,7 @@ export class dexmagic extends Program
 			let match=true;
 			for(const check of checks)
 			{
-				if(Object.hasOwn(check, "fn"))
-				{
-					match = await check.fn(r);
-				}
-				else if(Object.hasOwn(check, "offset"))
+				if(Object.hasOwn(check, "offset"))
 				{
 					if(check.offset<0)
 					{

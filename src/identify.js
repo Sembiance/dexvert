@@ -251,12 +251,12 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 						originalConfidence = Math.max(originalConfidence, detection.confidence);
 				}));
 
-				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, originalConfidence, hasWeakMagic});
+				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, macMetaMatch, filenameMatch, originalConfidence, hasWeakMagic});
 			}
 
 			// macMeta matches start at confidence 80
 			if(macMetaMatch)
-				familyMatches.macMeta.push({...baseMatch, matchType : "macMeta", hasWeakMagic});
+				familyMatches.macMeta.push({...baseMatch, matchType : "macMeta", extMatch, hasWeakMagic});
 
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
 			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch || macMetaMatch) && !(hasWeakExt && hasWeakMagic))
@@ -300,7 +300,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			return true;
 		});
 
-		[["magic", 100], ["macMeta", 80], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
+		[["magic", 100], ["macMeta", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher
@@ -317,8 +317,11 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				delete m.priority;
 				delete m.originalConfidence;
 
-				if(m.weak && !m.trustMagic && !m.extMatch)
+				if(m.weak && !m.trustMagic && !m.extMatch && !m.macMetaMatch && !m.filenameMatch)
+				{
+					xlog.trace`Reducing confidence of weak match ${m} to 10`;
 					m.confidence = 10;
+				}
 				
 				if(m.confidenceAdjust)
 				{
@@ -351,7 +354,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	// Now sort by confidence
 	// Next, if the confidence is the same, extMatches have a higher priority
 	// Finally sort based on family type
-	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family)], [true, false, false]);
+	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family.familyid)], [true, false, false]);
 
 	// finally, any fallback matches less than 10 go at the very end
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence<10));

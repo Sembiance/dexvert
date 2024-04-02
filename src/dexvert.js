@@ -213,7 +213,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				if(progProps.flags?.matchType && progProps.flags.matchType!==dexState.phase.id.matchType)
 					return xlog.info`Skipping converter ${prog} due to matchType ${dexState.phase.id.matchType} not matching required ${progProps.flags.matchType}`, false;
 				
-				if(progProps.flags?.strongMatch && !dexState.hasMagics(format.magic || [], {strong : true}))
+				if(progProps.flags?.strongMatch && !dexState.hasMagics(format.magic || [], {strong : true, format}))
 					return xlog.info`Skipping converter ${prog} due to strongMatch flag and not having any strong matches`, false;
 
 				if(progProps.flags?.forbiddenMagic && dexState.ids?.some(v => v.magic.startsWith(progProps.flags.forbiddenMagic)))

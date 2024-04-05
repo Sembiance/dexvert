@@ -4,7 +4,7 @@ export class canvasImage extends Format
 {
 	name       = "Canvas Image";
 	website    = "http://fileformats.archiveteam.org/wiki/Canvas";
-	ext        = [".cvi"];
-	magic      = ["Canvas Image File"];
-	converters = ["canvas"];
+	ext        = [".cvs", ".cv5", ".cvx", ".cvi"];
+	magic      = ["Canvas Image File", "Canvas 5 ducment"];
+	converters = ["canvas5", "canvas[matchType:magic]"];
 }

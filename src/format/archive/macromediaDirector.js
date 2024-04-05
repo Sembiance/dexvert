@@ -41,8 +41,3 @@ export class macromediaDirector extends Format
 // Additional format info:
 // https://docs.google.com/document/d/1jDBXE4Wv1AEga-o1Wi8xtlNZY4K2fHxW2Xs8RgARrqk/edit#
 // https://docs.google.com/document/d/18FMRZ0EvR2uF9rKTtvt-TXyIMFIBVg13bUhmV3_iHD0/edit
-
-// Program that scans files for director files: https://github.com/n0samu/director-files-extract/blob/master/shock.py
-// Programs that extract anything that looks like a RIFFX file:
-// https://github.com/irrwahn/riffx
-// https://github.com/PKBeam/RiffExt

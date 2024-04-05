@@ -40,7 +40,7 @@ export class jpg extends Format
 			r.push("deark[mac][deleteADF][convertAsExt:.jpg]");
 		r.push("iconvert", "iio2png");
 
-		// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but these programs can handle it
+		// some jpgs are corrupt (image5.jpg, mpfeif07.jpg, ring_mo4.jpg) but these programs can handle it. 'canvas5' yields static garbage, don't use that.
 		r.push("imageAlchemy", "pv[matchType:magic]", "photoDraw");
 		return r;
 	};

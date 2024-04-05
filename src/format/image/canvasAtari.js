@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-export class canvas extends Format
+export class canvasAtari extends Format
 {
 	name    = "Atari Canvas";
 	website = "http://fileformats.archiveteam.org/wiki/Canvas_(Atari)";

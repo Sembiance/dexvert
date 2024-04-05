@@ -20,7 +20,7 @@ export class gif extends Format
 			r.push("deark[mac][deleteADF][convertAsExt:.gif]", "deark[module:macbinary]");
 		r.push("iconvert", "nconvert", "deark[module:gif]");
 		
-		r.push("keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas", "tomsViewer", "corelDRAW");
+		r.push("keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas5", "canvas", "tomsViewer", "corelDRAW");
 		return r;
 	};
 }

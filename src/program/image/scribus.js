@@ -11,7 +11,7 @@ export class scribus extends Program
 	website = "https://www.scribus.net/";
 	package = "app-office/scribus";
 	unsafe  = true;
-	bin     = "scribus";
+	bin     = "scribus-1.6";
 	outExt  = ".eps";
 
 	pre = async r =>

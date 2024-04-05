@@ -9685,6 +9685,42 @@ XLSX - Microsoft Excel Windows
 XPM - X Pixmap
 
 
+>>> Canvas 5 (win2k)
+Adobe Illustrator
+Adobe PDF
+ADobe IFF
+BMP
+Brooktrout
+CALS
+Canvas 3.5
+Canvas 5.0
+Canvas 5.0 Template
+CGM
+CorelDRAW
+DCX
+DXF
+EMF
+EPSF
+GEM IMG
+GIF
+HALO CUT
+ICON
+IGES
+IOCA
+JPEG
+MacPaint
+Micrografx Draw
+Microsoft Paint
+PCX
+Photoshop
+PICT
+RTF
+TARGA
+TIFF
+WMF
+WPG
+
+
 >>> xine http://xine.sourceforge.net/features
 File formats (System layer / media types)
 	direct DVD playback (of unlocked/unencrypted DVDs, see below)

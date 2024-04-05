@@ -6,16 +6,10 @@
 /---------------\
 | High Priority |
 \---------------/
-* Fix broken JPEGs (see discord conversation):
-https://discmaster.textfiles.com/view/21870/PFY0398.BIN/vollvers/photofin/photolib/1051.jpg
-https://archive.org/details/photolibrary-wordstar
-https://archive.org/details/photo-finish-v-3.0-wordstar-international
-
-* Expand detection of Canvas support:
-	https://preservation.tylerthorsted.com/2024/03/29/canvas/
-	https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/Canvas
-	http://fileformats.archiveteam.org/wiki/Canvas
-  Ensure the mac versions are properly being detected via their creator codes. Is this something 
+* Work on improving MMM support: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
+  Utilize as a starting point: https://github.com/mainframed/HACKERS.EXE
+  It's possible that video/riffMultimediaMovie is actually a Director 3 Mac file already supported by ScummVM: https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
+  This would entail creating a SCUMMVM based CLI tool to process these. See the comments in format/macromediaDirector.js
 
 * Improve 'cadius' program:
   Remove the # suffix from all filenames
@@ -56,10 +50,6 @@ https://archive.org/details/photo-finish-v-3.0-wordstar-international
 	archive/iconHeaven
 	image/pmDraw
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
-
-* See if I can handle these: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
-  It's possible that video/riffMultimediaMovie is actually a Director 3 Mac file already supported by ScummVM: https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
-  This would entail creating a SCUMMVM based CLI tool to process these. See the comments in format/macromediaDirector.js
 
 * image/amosPicturePacker currently is only supported by abydos and it doesn't always get it right.
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
@@ -131,20 +121,6 @@ https://archive.org/details/photo-finish-v-3.0-wordstar-international
 * It might be fun to write a parser for this obscure format: https://breakintochat.com/wiki/Instant_Graphics_and_Sound_(IGS)
   It's documented pretty well in sandbox/app/IGSED25.ZIP  -> MODEMS/MOD_A2L/IGSED25/IGS217.TXT
   It also does sound and music though, so maybe this is more of an archive producing both images and audio? or maybe a video?
-  
-* PolyTrans supports a lot of different formats that I don't currently support:
-	openNURBS
-	electricImage3DFile (FACT)
-	esriShape
-	openInventor
-  It would also be nice to see how it handles others: Cinema 4D, Collada, etc
-  Sadly it only has a 64bit version available and it tends to crash a lot under wine64
-  I found version 2.2k that ran ok under win2k, but it only supported a fraction of the most recent version and no important ones
-  I reached out to them to see if they could sell me a 32bit version.
-  https://www.okino.com/conv/conv.htm
-  https://www.okino.com/conv/filefrmt_3dimport.htm
-  Since I run my own dexdrone servers, I could go back to using a VirtualMachine like qemu and have 64bit windows just for this
-  There are probably some other programs I'd also install into this, but meh.
 
 * So meshlab (https://github.com/cnr-isti-vclab/meshlab) uses vcglib which has support for these 3D formats: PLY, STL, OFF, OBJ, 3DS, COLLADA, PTX, V3D, PTS, APTS, XYZ, GTS, TRI, ASC, X3D, X3DV, VRML, ALN
   Sadly the version in Gentoo as of Mar 2024 is 4 years old and attempts to compile it myself yielded a lost afternoon and lots of frustration

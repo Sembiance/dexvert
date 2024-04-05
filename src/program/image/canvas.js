@@ -32,6 +32,7 @@ export class canvas extends Program
 			WindowDismiss("Photoshop Import", "", "+{TAB}{DOWN}{DOWN}{ENTER}")
 			WindowDismiss("Open Images", "", "{TAB}1{ENTER}")
 			WindowDismiss("Select Layout", "", "{ENTER}")
+			WindowDismiss("Font Matching", "", "{ENTER}")
 			If WinActive("Canvas 14") Then
 				return ControlGetHandle("Canvas 14", "", "[CLASS:ViewClass]")
 			EndIf

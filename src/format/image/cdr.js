@@ -10,6 +10,7 @@ export class cdr extends Format
 	converters     = [
 		// vector
 		"scribus",
+		"canvas5[vector]",
 		
 		// raster
 		"photoDraw", "nconvert", "corelDRAW", "deark[module:cdr_wl]", "hiJaakExpress", "corelPhotoPaint", "picturePublisher", "canvas"

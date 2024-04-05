@@ -17,7 +17,7 @@ export class tga extends Format
 		"deark[module:tga]", "iio2png", "iconvert",
 		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
 		"nconvert", "recoil2png", "gimp",
-		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas[strongMatch]"
+		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas5[strongMatch]", "canvas[strongMatch]"
 	];
 
 	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy, require more than 1 color

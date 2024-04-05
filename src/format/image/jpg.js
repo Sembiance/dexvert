@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class jpg extends Format
@@ -10,12 +11,31 @@ export class jpg extends Format
 	macMeta          = ({macFileType}) => macFileType==="JPEG";
 	fallback         = true;	// Some other formats such as image/a4r can be mistaken for JPEG data by 'file' command, so we ensure we try other formats first before falling back to this
 	confidenceAdjust = () => 25;	// Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools
-	untouched        = dexState => dexState.meta.width && dexState.meta.height;
+	untouched        = dexState => dexState.meta.width && dexState.meta.height && (!dexState.meta?.driOffset || (dexState.meta?.driCount || 0)>0);	// see note below in pre() about the dirOffset/driCount check
 	verifyUntouched  = dexState => dexState.meta.format!=="JPEG";
-	metaProvider     = ["image"];
-	converters       = dexState =>
+	metaProvider     = ["image", "jpeg_exif_dump"];
+	pre              = async dexState =>
+	{
+		// some JPEG files specify a DRI (Define Restart Interval) which is a 16-bit value that specifies the number of MCUs between restart markers
+		// however some are lying and don't actually have restart markers, so we modify those with a DRI count of 0 to ensure the file is processed correctly (samples: 1051.jpg and 1198.jpeg from )
+		if(!dexState.meta?.driOffset || (dexState.meta?.driCount || 0)>0 || dexState.f.input.size>xu.MB*25)
+			return;
+		
+		const rawBytes = await Deno.readFile(dexState.f.input.absolute);
+		rawBytes.setUInt16BE(dexState.meta.driOffset+4, 0);
+		await Deno.writeFile(dexState.f.input.absolute, rawBytes);
+
+		dexState.meta.mustConvert = true;
+	};
+	converters = dexState =>
 	{
 		const r = [];
+		if(dexState.meta.mustConvert)
+		{
+			r.push("convert");
+			delete dexState.meta.mustConvert;
+		}
+
 		if(dexState.hasMagics("Macintosh JPEG bitmap (MacBinary)"))
 			r.push("deark[mac][deleteADF][convertAsExt:.jpg]");
 		r.push("iconvert", "iio2png");

@@ -5,4 +5,6 @@ See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file 
 
 Utilizes [Deno](https://deno.land/) and **422** helper programs running on **4** different operating systems under various emulators.
 
+[discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly or not at all, submit an issue.
+
 This project is not currently ready for public use. Efforts are underway to make it usable by others.

@@ -6,7 +6,10 @@
 /---------------\
 | High Priority |
 \---------------/
-* MacBinary files should output as meta their type and creator codes
+* Fix broken JPEGs (see discord conversation):
+https://discmaster.textfiles.com/view/21870/PFY0398.BIN/vollvers/photofin/photolib/1051.jpg
+https://archive.org/details/photolibrary-wordstar
+https://archive.org/details/photo-finish-v-3.0-wordstar-international
 
 * Expand detection of Canvas support:
 	https://preservation.tylerthorsted.com/2024/03/29/canvas/

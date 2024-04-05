@@ -1,5 +1,5 @@
 # dexvert - **D**ecompress **EX**tract con**VERT**
-Convert **1,607** file formats (out of **2,521** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
+Convert **1,608** file formats (out of **2,522** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 

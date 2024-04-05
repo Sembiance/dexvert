@@ -5,6 +5,7 @@ export class wordMac extends Format
 	name       = "Macintosh Word Document";
 	website    = "http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh";
 	magic      = ["Word for the Macintosh", "Microsoft Word for Macintosh", "Microsoft Word document (MacBinary)", "Mac Microsoft Word document (MacBinary)", /^x-fmt\/(1|64|65)( |$)/];
+	macMeta    = ({macFileType, macFileCreator}) => macFileType==="WDBN" && macFileCreator==="MSWD";
 	converters = dexState =>
 	{
 		const r = [];

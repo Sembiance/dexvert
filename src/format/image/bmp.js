@@ -8,6 +8,7 @@ export class bmp extends Format
 	forbidExtMatch = [".pic"];	// PIC is so very common for weird odd formats, so no need to run it through the converters unless it matches a magic
 	mimeType       = "image/bmp";
 	magic          = ["Windows Bitmap", /^PC bitmap, (Windows 3\.x|OS\/2 \d\.x) format/, /^PC bitmap, Windows (98\/2000|95\/NT4)/, "Device independent bitmap graphic", "Run Length Encoded bitmap", "Mac BMP bitmap (MacBinary)", /Bitmap Bild \(Typ \d/, /^fmt\/(114|115|116|117|118|119)( |$)/];
+	macMeta        = ({macFileType}) => macFileType==="BMPp";
 	weakMagic      = ["Windows Bitmap (generic)"];
 	metaProvider   = ["image"];
 	converters     = dexState =>

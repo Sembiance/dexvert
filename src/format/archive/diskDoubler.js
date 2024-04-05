@@ -7,5 +7,6 @@ export class diskDoubler extends Format
 	ext          = [".dd"];
 	keepFilename = true;
 	magic        = ["Disk Doubler compressed data", "DiskDoubler compressed data", /^DiskDoubler$/, /^fmt\/1399( |$)/];
-	converters   = ["unar", "macunpack"];
+	macMeta      = ({macFileType, macFileCreator}) => ["DDFL", "DD01", "DDF2", "DDF3"].includes(macFileType) && macFileCreator==="DDAP";
+	converters   = ["unar[mac]", "macunpack"];
 }

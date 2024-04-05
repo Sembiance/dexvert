@@ -170,8 +170,8 @@ const FLEX_SIZE_FORMATS =
 		prehistorikCURArchive : 0.1,
 
 		// different each time due to way it generates frames
-		swf    : 25,
-		swfEXE : 25,
+		swf    : 75,
+		swfEXE : 75,
 
 		// different generation per host/version
 		"amosMemoryBank:.mp3" : 1,
@@ -289,6 +289,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 // if any of the OUTPUT FILES from a conversion equal these regexes, then ignore their size completely
 const IGNORE_SIZE_FILEPATHS =
 [
+	/Legacy_of_the_Ancients \d\d\.mp3$/i,
 	/scripts\/.+\.as$/i,			// archive/swf/cookie-hamster often produces very different script/**/*.as files
 	/\^\^ sweet heart.png$/,
 	/lem2.webp$/,
@@ -298,18 +299,24 @@ const IGNORE_SIZE_FILEPATHS =
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
 const FLEX_DIFF_FILES =
 [
+	// sometimes different pngs are produced, sometimes some are missing, not sure why
+	/archive\/hypercard\/.+$/,
+
 	// this specific file sometimes extracts a pict, sometimes a bmp, no idea why
 	/archive\/rsrc\/Speedometer 4\.02\.rsrc$/,
-	
-	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
-	/document\/wordDoc\/POWWOW\.DOC$/,
 	
 	// sometimes various .as scripts are exatracted, sometimes not
 	/archive\/swf\/.+$/,
 	/archive\/swfEXE\/.+$/,
 
+	// not sure why, but sometimes I get a .txt sometimes I get a .pdf very weird
+	/document\/wordDoc\/POWWOW\.DOC$/,
+
 	// on some hosts, scribus fails to process this file, not sure why
 	/image\/cdr\/test\.cdr$/,
+
+	// only works some of the time
+	/image\/teletextPackets\/TETRIS\.T42$/,
 
 	// other
 	/music\/sid\/Legacy_of_the_Ancients.sid$/

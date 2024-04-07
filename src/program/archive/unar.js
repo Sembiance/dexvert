@@ -52,7 +52,7 @@ export class unar extends Program
 			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName)
 				continue;
 			
-			const fileRelPath = `${fileInfo.XADFileName}${fileInfo.XADIsResourceFork ? ".rsrc" : ""}`;
+			const fileRelPath = `${await encodeUtil.decodeMacintosh({data : fileInfo.XADFileName, ...decodeOpts})}${fileInfo.XADIsResourceFork ? ".rsrc" : ""}`;
 			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileRelPath);
 			if(!fileOutputPath)
 				continue;

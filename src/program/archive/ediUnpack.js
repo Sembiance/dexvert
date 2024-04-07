@@ -15,7 +15,7 @@ export class ediUnpack extends Program
 
 			$mainWindow = WindowRequire("EDI Unpack - V2.00", "", 10)
 			MouseClick("left", 316, 96, 2, 0)
-			MouseClick("left", 316, 70+((_ArraySearch($cDirs, "out")-1)*14), 2, 0)
+			MouseClick("left", 316, 70+((_ArraySearch($cDirs, "out")-1)*13), 2, 0)
 
 			Sleep(200)
 			MouseClick("left", 25, 156, 1, 0)

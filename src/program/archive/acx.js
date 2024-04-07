@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {runUtil, fileUtil} from "xutil";
+import {_proDOSTypeCodeToPretty} from "./cadius.js";
 import {dateParse, path} from "std";
 
 export class acx extends Program
@@ -60,7 +61,10 @@ export class acx extends Program
 			const meta = {};
 			
 			if(proDOSType)
+			{
 				meta.proDOSType = proDOSType;
+				meta.proDOSTypePretty = _proDOSTypeCodeToPretty(proDOSType);
+			}
 			if(proDOSTypeAux)
 				meta.proDOSTypeAux = proDOSTypeAux;
 

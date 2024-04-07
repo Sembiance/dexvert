@@ -13,6 +13,6 @@ export class gem extends Format
 	// nconvert messes up some other images colorspaces (as usual for nconvert)
 	converters = [
 		"recoil2png[matchType:magic]", "deark[module:gemras]", `abydosconvert[format:${this.mimeType}]`, "nconvert",
-		"canvas5", "hiJaakExpress[strongMatch]", "pv[strongMatch]", "corelPhotoPaint[strongMatch]"
+		"canvas5[strongMatch]", "hiJaakExpress[strongMatch]", "pv[strongMatch]", "corelPhotoPaint[strongMatch]"
 	];
 }

@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {identify, getFileMeta, FILE_META_INHERIT} from "./identify.js";
+import {identify, ID_META_INHERIT} from "./identify.js";
 import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
@@ -67,10 +67,14 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 		xlog.warn`Processing ${inputFile.pretty()} explicitly as format:\n\t${ids[0].pretty()}`;
 	}
 	
+	let idMeta = {};
 	if(getIdentifications)
 	{
 		xlog.info`Getting identifications for ${inputFile.pretty()}`;
-		ids.push(...(await identify(inputFile, {xlog : xlog.clone("error")})));
+		const identifyResult = await identify(inputFile, {xlog : xlog.clone("error")});
+		if(identifyResult.idMeta)
+			idMeta = identifyResult.idMeta;
+		ids.push(...identifyResult.ids);
 	}
 
 	// if we have a specific format, but it's set to always identify, we want to filter out any identifications that don't match our format, so that matchType:magic checks will work (see pict.js)
@@ -80,7 +84,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 	if(ids.some(id => id.from==="dexvert"))
 		xlog.info`Identifications:\n\t${ids.map(id => id.pretty()).join("\n\t")}`;
 
-	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, xlog});
+	const dexState = DexState.create({original : {input : inputFile, output : outputDir}, ids, idMeta, xlog});
 	for(const id of ids)
 	{
 		if(id.from!=="dexvert" || id.unsupported)
@@ -170,8 +174,6 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 		try
 		{
-			if(inputFile.meta && Object.keys(inputFile.meta).length)
-				dexState.meta.inputMeta = inputFile.meta;
 			Object.assign(dexState.meta, await format.getMeta(f.input, dexState));
 			
 			// if we are untouched, mark ourself as processed and cleanup
@@ -349,10 +351,10 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			for(const r of dexState.ran || [])
 			{
 				// assign certin meta keys from programs to the dexstate meta
-				for(const k of FILE_META_INHERIT)
+				for(const k of ID_META_INHERIT)
 				{
 					if(r.meta?.[k])
-						dexState.meta[k] = r.meta[k];
+						dexState.idMeta[k] = r.meta[k];
 				}
 
 				// auto assign any meta.fileMeta results from any programs to the runState meta
@@ -391,13 +393,6 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 
 		if(dexState.processed)
 			break;
-	}
-
-	if(dexState.meta)
-	{
-		const fileMeta = await getFileMeta(inputFile);
-		if(Object.keys(fileMeta).length>0)
-			Object.assign(dexState.meta, fileMeta);
 	}
 
 	dexState.duration = (performance.now()-startedAt);

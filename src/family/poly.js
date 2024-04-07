@@ -7,7 +7,7 @@ export class poly extends Family
 	{
 		const xlog = dexState.xlog;
 		const {identify} = await import("../identify.js");
-		const identifications = await identify(dexFile, {xlog : xlog.clone("error")});
+		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
 
 		// if it's not a glTF, fail
 		if(!identifications.some(id => id.from==="dexvert" && id.family==="poly" && id.formatid==="glTF"))

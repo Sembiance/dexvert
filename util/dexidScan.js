@@ -39,7 +39,7 @@ await [].pushSequence(0, atOnce).parallelMap(async partid =>
 		const tmpInputFilePath = await fileUtil.genTempPath(undefined, path.extname(argv.inputFilePath));
 		await runUtil.run("dd", ["bs=1", `skip=${offset}`, `if=${argv.inputFilePath}`, `of=${tmpInputFilePath}`]);
 
-		const r = await identify(tmpInputFilePath, {xlog : new XLog("none")});
+		const {ids : r} = await identify(tmpInputFilePath, {xlog : new XLog("none")});
 		for(const id of r)
 		{
 			if(id.matchType!=="magic")

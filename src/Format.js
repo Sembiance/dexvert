@@ -119,7 +119,7 @@ export class Format
 			weakMagic        : {types : ["boolean", Array]},
 
 			// identification - mac file type/creator, prodos file types, etc
-			fileMeta : {type : "function", length : [1]},
+			idMeta : {type : "function", length : [1]},
 
 			// other
 			alwaysIdentify   : {type : "boolean"},

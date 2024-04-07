@@ -6,6 +6,6 @@ export class applesoftBASIC extends Format
 	ext            = [".bas"];
 	forbidExtMatch = true;
 	// don't match against "Applesoft BASIC program data", it's FAR too weak
-	fileMeta       = ({proDOSTypeCode}) => proDOSTypeCode==="BAS";
+	idMeta         = ({proDOSTypeCode}) => proDOSTypeCode==="BAS";
 	converters     = ["applesoftBASIC2txt"];
 }

@@ -16,12 +16,12 @@ export class T2G_T3G extends Program
 			Local $cDirs = ListCDirs()
 
 			$selectSourceWindow = WindowRequire("[TITLE:Select source file]", "", 10)
-			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "in")-1)*17), 2, 0)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "in")-1)*16), 2, 0)
 			MouseClick("left", 298, 331, 2, 0)
 			WinWaitClose("[TITLE:Select source file]", "", 10)
 
 			$selectTargetWindow = WindowRequire("[TITLE:Select target file]", "", 10)
-			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "out")-1)*17), 2, 0)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "out")-1)*16), 2, 0)
 			Send("out.t3g{ENTER}")
 			WinWaitClose($selectTargetWindow, "", 10)
 

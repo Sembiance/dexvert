@@ -7,7 +7,7 @@ export class macDraw extends Format
 	ext            = [".pict", ".drw"];
 	forbidExtMatch = true;
 	magic          = ["MacDraw drawing", /^fmt\/(1426|1427|1428)( |$)/];
-	fileMeta       = ({macFileType}) => macFileType==="DRWG";
+	idMeta         = ({macFileType}) => macFileType==="DRWG";
 	metaProvider   = ["image"];
 	converters     = ["deark[mac]", "nconvert", "soffice[outType:png]", "convert"];	// convert has a habit of producing just a black square
 }

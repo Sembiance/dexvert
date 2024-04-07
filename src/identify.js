@@ -18,18 +18,18 @@ export {flexMatch};
 const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "image", "poly", "font", "text", "executable", "other"];
 
 // list of 'meta' keys that may appear as fileMeta[k] or in the result of a program r.meta[k] that should always be inherited and exposed in the file meta itself
-export const FILE_META_INHERIT = ["macFileType", "macFileCreator", "proDOSType", "proDOSTypeCode", "proDOSTypePretty", "proDOSTypeAux"];
+export const ID_META_INHERIT = ["macFileType", "macFileCreator", "proDOSType", "proDOSTypeCode", "proDOSTypePretty", "proDOSTypeAux"];
 
-// Get mac file type and creator code, either from inputFile meta (passed in fileMeta) or checking if it's a MacBinary file and getting it from that
-export async function getFileMeta(inputFile)
+// Get mac file type and creator code, either from inputFile meta (passed in originally by fileMeta argument) or checking if it's a MacBinary file and getting it from that
+export async function getIdMeta(inputFile)
 {
-	const fileMeta = {};
+	const idMeta = {};
 	
-	// check to see if any of our keys are on our inputFile meta and copy them over as fileMeta
-	for(const k of FILE_META_INHERIT)
+	// check to see if any of our keys are on our inputFile meta and copy them over as idMeta
+	for(const k of ID_META_INHERIT)
 	{
 		if(inputFile.meta?.[k])
-			fileMeta[k] = inputFile.meta[k];
+			idMeta[k] = inputFile.meta[k];
 	}
 
 	const getMacBinaryMeta = async () =>
@@ -68,10 +68,10 @@ export async function getFileMeta(inputFile)
 		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
 	};
 
-	if(!fileMeta.macFileType || !fileMeta.macFileCreator)
-		Object.assign(fileMeta, (await getMacBinaryMeta()) || {});
+	if(!idMeta.macFileType || !idMeta.macFileCreator)
+		Object.assign(idMeta, (await getMacBinaryMeta()) || {});
 
-	return fileMeta;
+	return idMeta;
 }
 
 export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
@@ -80,11 +80,11 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	const inputFile = inputFileRaw instanceof DexFile ? inputFileRaw : await DexFile.create(inputFileRaw);
 	if(inputFile.isDirectory)
-		return [Identification.create({from : "dexvert", confidence : 100, magic : "directory", family : "other", formatid : "directory", matchType : "magic", unsupported : true})];
+		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "directory", family : "other", formatid : "directory", matchType : "magic", unsupported : true})]};
 
 	// if it's a symlink, we're done!
 	if(inputFile.isSymlink)
-		return [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic", unsupported : true})];
+		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic", unsupported : true})]};
 
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = await getDetections(f, {xlog});
@@ -98,12 +98,12 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
 	const byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
-	const fileMetaData = await getFileMeta(inputFile);
+	const idMetaData = await getIdMeta(inputFile);
 
-	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], fileMeta : [], fallback : []};
+	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], idMeta : [], fallback : []};
 	for(const familyid of FAMILY_MATCH_ORDER)
 	{
-		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], fileMeta : [], fallback : []};
+		const familyMatches = {magic : [], ext : [], filename : [], fileSize : [], idMeta : [], fallback : []};
 		for(const [formatid, format] of Object.entries(formats).sortMulti([([, vf]) => FAMILY_MATCH_ORDER.indexOf(vf.familyid), ([, vf]) => vf.formatid], [false, false]))	// the sortMulti ensures we have a predictable order
 		{
 			if(!FAMILY_MATCH_ORDER.includes(format.familyid))
@@ -151,7 +151,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const priority = Object.hasOwn(format, "priority") ? format.priority : format.PRIORITY.STANDARD;
 			const extMatch = (format.ext || []).some(ext => f.input.base.toLowerCase().endsWith(ext) || (format.matchPreExt && ext.toLowerCase()===f.input.preExt.toLowerCase()));
 			const filenameMatch = (format.filename || []).some(mfn => flexMatch(f.input.base, mfn, true));
-			const fileMetaMatch = fileMetaData && format.fileMeta && format.fileMeta(fileMetaData);
+			const idMetaMatch = idMetaData && format.idMeta && format.idMeta(idMetaData);
 
 			// check filesize match
 			let hasExpectedFileSize = false;
@@ -202,14 +202,14 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				return magicMatched;
 			}));
 
-			const hasAnyMatch = (extMatch || filenameMatch || fileMetaMatch || fileSizeMatch || magicMatch);
+			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch);
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};
 			if(format.website)
 				baseMatch.website = format.website;
 
 			// some formats require some sort of other check to ensure the file is valid
-			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, fileMetaMatch, fileSizeMatch, magicMatch})))
+			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch})))
 			{
 				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
 				continue;
@@ -249,8 +249,8 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				baseMatch.matchesFileSize = true;
 			if(filenameMatch)
 				baseMatch.matchesFilename = true;
-			if(fileMetaMatch)
-				baseMatch.matchesFileMeta = true;
+			if(idMetaMatch)
+				baseMatch.matchesIdMeta = true;
 
 			const trustedMagic = (format.magic || []).filter(m => !(Array.isArray(format.weakMagic) ? format.weakMagic : []).some(wm => m.toString()===wm.toString()));
 			const hasWeakExt = format.weakExt===true || (Array.isArray(format.weakExt) && format.weakExt.some(ext => f.input.base.toLowerCase().endsWith(ext)));
@@ -258,7 +258,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			const hasWeakFilename = format.weakFilename===true;
 
 			// Non-weak magic matches start at confidence 100.
-			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || fileMetaMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
+			if(magicMatch && (!hasWeakMagic || extMatch || filenameMatch || idMetaMatch || fileSizeMatch) && !(hasWeakExt && hasWeakMagic) && !format.forbidMagicMatch)
 			{
 				// Original confidence is a sub-sorter used before assigning proper confidence
 				let originalConfidence = 0;
@@ -268,15 +268,15 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 						originalConfidence = Math.max(originalConfidence, detection.confidence);
 				}));
 
-				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, fileMetaMatch, filenameMatch, originalConfidence, hasWeakMagic});
+				familyMatches.magic.push({...baseMatch, matchType : "magic", extMatch, idMetaMatch, filenameMatch, originalConfidence, hasWeakMagic});
 			}
 
-			// fileMeta matches start at confidence 80
-			if(fileMetaMatch)
-				familyMatches.fileMeta.push({...baseMatch, matchType : "fileMeta", extMatch, hasWeakMagic});
+			// metaMatch matches start at confidence 100 as well
+			if(idMetaMatch)
+				familyMatches.idMeta.push({...baseMatch, matchType : "idMeta", extMatch, hasWeakMagic});
 
 			// Extension matches start at confidence 66 (but if we have an expected fileSize we must also match magic or fileSize)
-			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch || fileMetaMatch) && !(hasWeakExt && hasWeakMagic))
+			if(extMatch && (!format.forbidExtMatch || (Array.isArray(format.forbidExtMatch) && !format.forbidExtMatch.some(ext => f.input.base.toLowerCase().endsWith(ext)))) && (!hasExpectedFileSize || magicMatch || fileSizeMatch || idMetaMatch) && !(hasWeakExt && hasWeakMagic))
 			{
 				const extFamilyMatch = {...baseMatch, matchType : "ext", matchesMagic : magicMatch, hasWeakMagic};
 				if(format.magic)
@@ -285,7 +285,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			}
 
 			// Filename matches start at confidence 44.
-			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch || fileMetaMatch))
+			if(filenameMatch && (!hasWeakFilename || extMatch || fileSizeMatch || magicMatch || idMetaMatch))
 				familyMatches.filename.push({...baseMatch, matchType : "filename", hasWeakMagic});
 
 			// fileSize matches start at confidence 20.
@@ -317,7 +317,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			return true;
 		});
 
-		[["magic", 100], ["fileMeta", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
+		[["magic", 100], ["idMeta", 100], ["ext", 66], ["filename", 44], ["fileSize", 20], ["fallback", 1]].forEach(([matchType, startConfidence]) =>
 		{
 			// ext matches that have a magic, but doesn't match the magic should be prioritized lower than ext matches that don't have magic
 			// Also ext matches that also match the expected fileSize should be prioritized higher
@@ -334,7 +334,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				delete m.priority;
 				delete m.originalConfidence;
 
-				if(m.weak && !m.trustMagic && !m.extMatch && !m.fileMetaMatch && !m.filenameMatch)
+				if(m.weak && !m.trustMagic && !m.extMatch && !m.idMetaMatch && !m.filenameMatch)
 				{
 					xlog.trace`Reducing confidence of weak match ${m} to 10`;
 					m.confidence = 10;
@@ -353,10 +353,10 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	}
 
 	const matches = [...matchesByFamily.magic,
-		...matchesByFamily.fileMeta.filter(em => !Array.from(matchesByFamily.magic).some(mm => mm.magic===em.magic)),
-		...matchesByFamily.ext.filter(em => ![...matchesByFamily.fileMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
-		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.fileMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
-		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.fileMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
+		...matchesByFamily.idMeta.filter(em => !Array.from(matchesByFamily.magic).some(mm => mm.magic===em.magic)),
+		...matchesByFamily.ext.filter(em => ![...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.filename.filter(em => ![...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic)),
+		...matchesByFamily.fileSize.filter(em => ![...matchesByFamily.filename, ...matchesByFamily.ext, ...matchesByFamily.idMeta, ...matchesByFamily.magic].some(mm => mm.magic===em.magic))];
 
 	// Unsupported matches haven't gone through enough testing to warrant any additional confidence than 1
 	matches.forEach(match =>
@@ -384,5 +384,5 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	xlog.debug`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
 
-	return result;
+	return {idMeta : idMetaData, ids : result};
 }

@@ -598,6 +598,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		result.files = Object.fromEntries(await dexData.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("SHA-1", absolute)}]));
 	}
 	result.meta = dexData?.phase?.meta || {};
+	result.idMeta = dexData.idMeta || {};
 	if(dexData?.phase)
 	{
 		result.family = dexData.phase.family;
@@ -609,9 +610,6 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	
 	if(argv.record)
 	{
-		if(testData?.[sampleSubFilePath]?.inputMeta)
-			delete testData[sampleSubFilePath].inputMeta;
-
 		testData[sampleSubFilePath] = result;
 		return await pass(!dexData?.created?.files?.output?.length ? fg.pink("r") : fg.green("r"));		// pink 'r' === no files found
 	}
@@ -728,6 +726,20 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	else if(result.meta && Object.keys(result.meta).length>0)
 	{
 		return fail(`Expected no meta but got ${printUtil.inspect(result.meta).squeeze()} instead${converterMismatch}`);
+	}
+
+	if(prevData.idMeta)
+	{
+		if(!result.idMeta)
+			return fail(`Expected to have idMeta ${printUtil.inspect(prevData.idMeta).squeeze()} but have none${converterMismatch}`);
+
+		const objDiff = diffUtil.diff(prevData.idMeta, result.idMeta);
+		if(objDiff.length>0)
+			return fail(`idMeta different: ${objDiff.squeeze()}`);
+	}
+	else if(result.idMeta && Object.keys(result.idMeta).length>0)
+	{
+		return fail(`Expected no idMeta but got ${printUtil.inspect(result.idMeta).squeeze()} instead${converterMismatch}`);
 	}
 
 	if(prevData.converter && !result.converter)

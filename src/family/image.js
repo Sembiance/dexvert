@@ -32,7 +32,7 @@ export class image extends Family
 	{
 		const xlog = dexState.xlog;
 		const {identify} = await import("../identify.js");
-		const identifications = await identify(dexFile, {xlog : xlog.clone("error")});
+		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{

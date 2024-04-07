@@ -73,6 +73,7 @@ export class DexState
 {
 	phase = null;
 	past = [];
+	idMeta = {};
 	baseKeys = Object.keys(this);
 
 	// builder to get around the fact that constructors can't be async
@@ -127,6 +128,8 @@ export class DexState
 			o.phase = this.phase.serialize();
 		o.past = this.past.map(v => v.serialize());
 		o.processed = !!this.processed;
+		if(Object.keys(this.idMeta).length>0)
+			o.idMeta = this.idMeta;
 		if(this.created)
 			o.created = this.created.serialize();
 		for(const key of ["duration"])
@@ -162,6 +165,8 @@ export class DexState
 		r.push(`\n${prefix}${xu.colon("orig out")}${this.original.output.pretty()}`);
 		if(this.processed)
 			r.push(`\n${prefix}${xu.colon("    meta")}${printUtil.inspect(this.meta).squeeze()}`);
+		if(Object.keys(this.idMeta).length>0)
+			r.push(`\n${prefix}${xu.colon("  idMeta")}${printUtil.inspect(this.idMeta).squeeze()}`);
 		if(this.created)
 			r.push(`\n${prefix}${xu.colon(" created")}${this.created.pretty(`${prefix}`).trim()}`);
 		return r.join("");

@@ -16,12 +16,12 @@ export class MPG_T2G extends Program
 			Local $cDirs = ListCDirs()
 
 			$selectSourceWindow = WindowRequire("[TITLE:Select source file]", "", 10)
-			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "in")-1)*17), 1, 0)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "in")-1)*16), 1, 0)
 			MouseClick("left", 324, 331, 2, 0)
 			WinWaitClose("[TITLE:Select source file]", "", 10)
 
 			$selectTargetWindow = WindowRequire("[TITLE:Select target file]", "", 10)
-			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "out")-1)*17), 1, 0)
+			MouseClick("left", 490, 331+((_ArraySearch($cDirs, "out")-1)*16), 1, 0)
 			Send("out.t2g{ENTER}")
 			WinWaitClose($selectTargetWindow, "", 10)
 

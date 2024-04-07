@@ -7,7 +7,7 @@ export class font extends Family
 	{
 		const xlog = dexState.xlog;
 		const {identify} = await import("../identify.js");
-		const identifications = await identify(dexFile, {xlog : xlog.clone("error")});
+		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
 
 		// if it's an OTF, further validate it
 		if(identifications.some(id => id.from==="dexvert" && id.family==="font" && id.formatid==="otf"))

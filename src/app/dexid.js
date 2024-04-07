@@ -48,7 +48,7 @@ for(const inputFilePath of inputFilePaths)
 		if(argv.fileMeta)
 			inputFile.meta = xu.parseJSON(argv.fileMeta);
 
-		rows = await identify(inputFile, {xlog});
+		({ids : rows} = await identify(inputFile, {xlog}));
 	}
 	else
 	{

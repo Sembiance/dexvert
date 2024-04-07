@@ -7,6 +7,6 @@ export class sea extends Format
 	ext        = [".sea"];
 	magic      = ["Macintosh Application (MacBinary)", "Preferred Executable Format"];
 	weakMagic  = true;
-	fileMeta   = ({macFileType, macFileCreator}) => macFileType==="APPL" && macFileCreator==="EXTR";
+	idMeta     = ({macFileType, macFileCreator}) => macFileType==="APPL" && macFileCreator==="EXTR";
 	converters = ["unar[mac]"];
 }

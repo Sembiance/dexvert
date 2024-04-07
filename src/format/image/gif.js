@@ -1,4 +1,5 @@
 import {Format} from "../../Format.js";
+import {_MACBINARY_MAGIC} from "../archive/macBinary.js";
 
 export class gif extends Format
 {
@@ -7,7 +8,7 @@ export class gif extends Format
 	ext          = [".gif"];
 	mimeType     = "image/gif";
 	magic        = ["GIF image data", "GIF animated bitmap", "Mac PageMill's GIF bitmap (MacBinary)", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, /^fmt\/(3|4)( |$)/];
-	fileMeta     = ({macFileType}) => macFileType==="GIFf";
+	idMeta       = ({macFileType}) => macFileType==="GIFf";
 	untouched    = r => r.meta.width && r.meta.height;		// if we were able to get our image meta info, then we are a valid GIF and should leave it alone
 	metaProvider = ["image", "gifsicle_info"];
 
@@ -16,11 +17,11 @@ export class gif extends Format
 	converters = dexState =>
 	{
 		const r = [];
-		if(dexState.hasMagics("Mac PageMill's GIF bitmap (MacBinary)"))
+		if(dexState.hasMagics(["Mac PageMill's GIF bitmap (MacBinary)", ..._MACBINARY_MAGIC]))
 			r.push("deark[mac][deleteADF][convertAsExt:.gif]", "deark[module:macbinary]");
 		r.push("iconvert", "nconvert", "deark[module:gif]");
 		
-		r.push("keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas5", "canvas", "tomsViewer", "corelDRAW");
+		r.push("keyViewPro", "photoDraw", "hiJaakExpress", "picturePublisher", "corelPhotoPaint", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "corelDRAW");
 		return r;
 	};
 }

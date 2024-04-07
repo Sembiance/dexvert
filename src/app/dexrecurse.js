@@ -187,7 +187,7 @@ const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
 const newMacTypeCreators = {};
-const fileMetaCheckers = [];
+const idMetaCheckers = [];
 
 if(argv.report)
 {
@@ -198,8 +198,8 @@ if(argv.report)
 		for(const m of Array.force(format.magic || []))
 			ALL_MAGICS.add(m);
 
-		if(format.fileMeta)
-			fileMetaCheckers.push(format.fileMeta);
+		if(format.idMeta)
+			idMetaCheckers.push(format.idMeta);
 	}
 
 	xlog.info`Finding existing sample files...`;
@@ -343,9 +343,9 @@ async function processNextQueue()
 				}
 			}
 
-			const macFileType = dexData.phase?.meta?.macFileType || dexData.phase?.meta?.inputMeta?.macFileType;
-			const macFileCreator = dexData.phase?.meta?.macFileCreator || dexData.phase?.meta?.inputMeta?.macFileCreator;
-			if((macFileType || macFileCreator) && !fileMetaCheckers.some(fileMetaChecker => fileMetaChecker({macFileType, macFileCreator})))
+			const macFileType = dexData.idMeta?.macFileType;
+			const macFileCreator = dexData.idMeta?.macFileCreator;
+			if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
 			{
 				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
 				newMacTypeCreators[macFileTypeCreator] ||= [];
@@ -431,6 +431,18 @@ if(argv.report)
 			for(const [magic, files] of Object.entries(newMagics))
 			{
 				xlog.info`${magic}   (${files.length} files)`;
+				for(const file of files)
+					xlog.info`\t${file}`;
+			}
+		}
+
+		const newMacTypeCreatorsEntries = Object.entries(newMacTypeCreators);
+		if(newMacTypeCreatorsEntries.length>0)
+		{
+			console.log(printUtil.majorHeader(`New Mac Type/Creators (${newMacTypeCreatorsEntries.length.toLocaleString()})`, {prefix : "\n"}));
+			for(const [macTypeCreator, files] of Object.entries(newMacTypeCreators))
+			{
+				xlog.info`${macTypeCreator}   (${files.length} files)`;
 				for(const file of files)
 					xlog.info`\t${file}`;
 			}

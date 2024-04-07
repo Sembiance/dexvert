@@ -1,4 +1,4 @@
-/* eslint-disable @stylistic/no-multi-spaces, no-bitwise */
+/* eslint-disable no-bitwise */
 import {xu} from "xu";
 import {cmdUtil, fileUtil} from "xutil";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
@@ -16,27 +16,29 @@ const argv = cmdUtil.cmdInit({
 	]});
 
 // inspired by: https://github.com/AppleCommander/AppleCommander/blob/main/lib/ac-api/src/main/java/com/webcodepro/applecommander/util/ApplesoftTokenizer.java
+/* eslint-disable @stylistic/no-multi-spaces, @stylistic/indent */
 const TOKENS =
 [
-	" END ",		" FOR ",	" NEXT ",	" DATA ",	" INPUT ",		" DEL ",
-	" DIM ",		" READ ",	" GR ",		" TEXT ",	" PR# ",		" IN# ",
-	" CALL ",		" PLOT ",	" HLIN ",	" VLIN ",	" HGR2 ",		" HGR ",
-	" HCOLOR= ",	" HPLOT ",	" DRAW ",	" XDRAW ",	" HTAB ",		" HOME ",
-	" ROT= ",		" SCALE= ",	" SHLOAD ",	" TRACE ",	" NOTRACE ",	" NORMAL ",
-	" INVERSE ",	" FLASH ",	" COLOR= ",	" POP ",	" VTAB ",		" HIMEM: ",
-	" LOMEM: ",		" ONERR ",	" RESUME ",	" RECALL ",	" STORE ",		" SPEED= ",
-	" LET ",		" GOTO ",	" RUN ",	" IF ",		" RESTORE ",	" & ",
-	" GOSUB ",		" RETURN ",	" REM ",	" STOP ",	" ON ",			" WAIT ",
-	" LOAD ",		" SAVE ",	" DEF ",	" POKE ",	" PRINT ",		" CONT ",
-	" LIST ",		" CLEAR ",	" GET ",	" NEW ",	" TAB( ",		" TO ",
-	" FN ",			" SPC( ",	"  THEN ",	" AT ",		"  NOT ",		"  STEP ",
-	" +",			" -",		" *",		"/",		" ^",			"  AND ",
-	"  OR ",		" >",		" = ",		" <",		" SGN",			" INT",
-	" ABS",			" USR",		" FRE",		" SCRN( ",	" PDL",			" POS",
-	" SQR",			" RND",		" LOG",		" EXP",		" COS",			" SIN",
-	" TAN",			" ATN",		" PEEK",	" LEN",		" STR$",		" VAL",
-	" ASC",			" CHR$",	" LEFT$",	" RIGHT$",	" MID$ "
+    " END ",		" FOR ",	" NEXT ",	" DATA ",	" INPUT ",		" DEL ",
+    " DIM ",		" READ ",	" GR ",		" TEXT ",	" PR# ",		" IN# ",
+    " CALL ",		" PLOT ",	" HLIN ",	" VLIN ",	" HGR2 ",		" HGR ",
+    " HCOLOR= ",	" HPLOT ",	" DRAW ",	" XDRAW ",	" HTAB ",		" HOME ",
+    " ROT= ",		" SCALE= ",	" SHLOAD ",	" TRACE ",	" NOTRACE ",	" NORMAL ",
+    " INVERSE ",	" FLASH ",	" COLOR= ",	" POP ",	" VTAB ",		" HIMEM: ",
+    " LOMEM: ",		" ONERR ",	" RESUME ",	" RECALL ",	" STORE ",		" SPEED= ",
+    " LET ",		" GOTO ",	" RUN ",	" IF ",		" RESTORE ",	" & ",
+    " GOSUB ",		" RETURN ",	" REM ",	" STOP ",	" ON ",			" WAIT ",
+    " LOAD ",		" SAVE ",	" DEF ",	" POKE ",	" PRINT ",		" CONT ",
+    " LIST ",		" CLEAR ",	" GET ",	" NEW ",	" TAB( ",		" TO ",
+    " FN ",			" SPC( ",	"  THEN ",	" AT ",		"  NOT ",		"  STEP ",
+    " +",			" -",		" *",		"/",		" ^",			"  AND ",
+    "  OR ",		" >",		" = ",		" <",		" SGN",			" INT",
+    " ABS",			" USR",		" FRE",		" SCRN( ",	" PDL",			" POS",
+    " SQR",			" RND",		" LOG",		" EXP",		" COS",			" SIN",
+    " TAN",			" ATN",		" PEEK",	" LEN",		" STR$",		" VAL",
+    " ASC",			" CHR$",	" LEFT$",	" RIGHT$",	" MID$ "
 ];
+/* eslint-enable @stylistic/no-multi-spaces, @stylistic/indent */
 
 const reader = new UInt8ArrayReader(await Deno.readFile(argv.inputFilePath), {endianness : "le"});
 

@@ -46,7 +46,8 @@ const SUPPORTING_DIR_PATHS =
 // these formats have files that won't identify due to not being in the proper disk locations, so we force the format
 const FORCE_FORMAT_AS =
 [
-	"font/amigaBitmapFontContent"
+	"font/amigaBitmapFontContent",
+	"document/applesoftBASIC"
 ];
 
 const FORMAT_OS_HINT =

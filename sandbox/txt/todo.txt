@@ -9,16 +9,6 @@
 * Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
   I've reached out to the deark creator to see if they could possibly add support for this format to deark.
 
-* Add support for Applesoft BASIC file format (already a file format in dexver): https://discmaster.textfiles.com/view/7407/SGDS%2096.2mg/SDGS.96/SDD96/STARTUP%23FC0801
-  Convert to text using one of these detokenizers:	
-  	https://github.com/softwarejanitor/applesoft_detokenizer
-	https://github.com/jtauber/a2disk/blob/master/applesoft.py
-  NOTE: There also appears to be 'Integer' basic too, see:
-	https://github.com/nculwell/retrotools/tree/main/apple2
-    https://github.com/dmolony/DiskBrowser/tree/4b476457d36c26513de96d6222a8342891730755/src/com/bytezone/diskbrowser/applefile
-  Once I see that one works, it doesn't look too hard, so probably convert it into javascript deno
-  Utilizing teh type information from cadius, add a dexmagic match against that meta
-
 * Add fileMeta checks for all these: https://www.kreativekorp.com/miscpages/a2info/filetypes.shtml
 
 * https://preservation.tylerthorsted.com/2024/04/05/shorten/

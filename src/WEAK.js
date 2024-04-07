@@ -70,6 +70,7 @@ export const WEAK_VALUES =
 	/^apollo a88k COFF executable/,
 	/^Apple DiskCopy 4.2 image/,
 	/^Apple QuickTime$/,
+	/^Applesoft BASIC program data/,
 	/^Arhangel archive data/,
 	/^aria2 control file/,
 	/^ARM COFF/,

@@ -5,6 +5,6 @@ export class diskCopyImage extends Format
 	name           = "Apple Disk Copy Image";
 	ext            = [".img", ".image"];
 	forbidExtMatch = true;
-	macMeta        = ({macFileType, macFileCreator}) => (["dimg/ddsk", "dImg/dCpy"].includes(`${macFileType}/${macFileCreator}`));
+	fileMeta       = ({macFileType, macFileCreator}) => (["dimg/ddsk", "dImg/dCpy"].includes(`${macFileType}/${macFileCreator}`));
 	converters     = ["unar[mac]", "macunpack"];
 }

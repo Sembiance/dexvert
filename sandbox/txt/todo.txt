@@ -6,18 +6,10 @@
 /---------------\
 | High Priority |
 \---------------/
-* Work on improving MMM support: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
-  Utilize as a starting point: https://github.com/mainframed/HACKERS.EXE
-  It's possible that video/riffMultimediaMovie is actually a Director 3 Mac file already supported by ScummVM: https://discord.com/channels/350407629849493504/1033065501984817252/1038536366818086963
-  This would entail creating a SCUMMVM based CLI tool to process these. See the comments in format/macromediaDirector.js
+* Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
+  I've reached out to the deark creator to see if they could possibly add support for this format to deark.
 
-* Improve 'cadius' program:
-  Remove the # suffix from all filenames
-  Use 'cadius CATALOG 96.2mg -V' to get a list of all files and their attributes.
-  For the corresponding files, set the appropriate date based on it's modification date
-  Set a r.meta.fileMeta with both file type and AUX type numbers and also the ASCII type too
- 
-* Add support for Applesoft BASIC file format: https://discmaster.textfiles.com/view/7407/SGDS%2096.2mg/SDGS.96/SDD96/STARTUP%23FC0801
+* Add support for Applesoft BASIC file format (already a file format in dexver): https://discmaster.textfiles.com/view/7407/SGDS%2096.2mg/SDGS.96/SDD96/STARTUP%23FC0801
   Convert to text using one of these detokenizers:	
   	https://github.com/softwarejanitor/applesoft_detokenizer
 	https://github.com/jtauber/a2disk/blob/master/applesoft.py
@@ -26,6 +18,14 @@
     https://github.com/dmolony/DiskBrowser/tree/4b476457d36c26513de96d6222a8342891730755/src/com/bytezone/diskbrowser/applefile
   Once I see that one works, it doesn't look too hard, so probably convert it into javascript deno
   Utilizing teh type information from cadius, add a dexmagic match against that meta
+
+* Add fileMeta checks for all these: https://www.kreativekorp.com/miscpages/a2info/filetypes.shtml
+
+* https://preservation.tylerthorsted.com/2024/04/05/shorten/
+  https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/Shorten
+
+* https://github.com/32bitkid/sci.js/tree/main/apps/scibud
+  Detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
 
 * Ensure NeXT format discs are supported by checking some of the CD's here: https://blog.persistent.info/2024/03/infinite-mac-nextstep.html
   Note that it mentions 2 different filesystem formats, HFS and UFS?

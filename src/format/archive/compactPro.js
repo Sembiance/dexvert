@@ -6,7 +6,7 @@ export class compactPro extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Compact_Pro";
 	ext        = [".cpt"];
 	magic      = ["Mac Compact Pro archive", "Compact Pro"];
-	macMeta    = ({macFileType, macFileCreator}) => macFileType==="PACT" && macFileCreator==="CPCT";
+	fileMeta   = ({macFileType, macFileCreator}) => macFileType==="PACT" && macFileCreator==="CPCT";
 	priority   = this.PRIORITY.LOW;
 	converters = ["unar[mac]", "macunpack"];
 }

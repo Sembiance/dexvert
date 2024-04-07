@@ -8,7 +8,7 @@ export class macPaint extends Format
 	ext            = [".mac", ".pntg", ".pic", ".macp", ".pnt"];
 	forbidExtMatch = [".pic"];
 	magic          = ["MacPaint image data", "Mac MacPaint bitmap (MacBinary)", /^fmt\/(161|1429)( |$)/, /^x-fmt\/161( |$)/];
-	macMeta        = ({macFileType}) => macFileType==="PNTG";
+	fileMeta       = ({macFileType}) => macFileType==="PNTG";
 	mimeType       = "image/x-macpaint";
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];

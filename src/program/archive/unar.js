@@ -49,14 +49,15 @@ export class unar extends Program
 		const {stdout : fileInfoRaw} = await runUtil.run("lsar", ["-json", r.inFile({absolute : true})]);
 		for(const fileInfo of xu.parseJSON(fileInfoRaw)?.lsarContents || [])
 		{
-			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName || fileInfo.XADIsResourceFork)
+			if(!fileInfo.XADFileCreator || !fileInfo.XADFileName)
 				continue;
-				
-			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileInfo.XADFileName);
+			
+			const fileRelPath = `${fileInfo.XADFileName}${fileInfo.XADIsResourceFork ? ".rsrc" : ""}`;
+			const fileOutputPath = fileOutputPaths.find(v => path.relative(outDirPath, v)===fileRelPath);
 			if(!fileOutputPath)
 				continue;
 			
-			r.meta.fileMeta[fileInfo.XADFileName] = { macFileType : num2str(fileInfo.XADFileType), macFileCreator : num2str(fileInfo.XADFileCreator) };
+			r.meta.fileMeta[fileRelPath] = { macFileType : num2str(fileInfo.XADFileType), macFileCreator : num2str(fileInfo.XADFileCreator) };
 		}
 
 		if(Object.keys(r.meta.fileMeta).length===0)

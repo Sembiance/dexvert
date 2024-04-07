@@ -7,7 +7,7 @@ export class tiff extends Format
 	ext          = [".tif", ".tiff"];
 	mimeType     = "image/tiff";
 	magic        = ["Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", /^fmt\/353( |$)/];
-	macMeta      = ({macFileType}) => macFileType==="TIFF";
+	fileMeta     = ({macFileType}) => macFileType==="TIFF";
 	priority     = this.PRIORITY.LOW;	// Often other formats are mis-identified as TIFF files such RAW camera files like Sony ARW and kodak*
 	metaProvider = ["image"];
 

@@ -118,8 +118,8 @@ export class Format
 			forbidMagicMatch : {type : "boolean"},
 			weakMagic        : {types : ["boolean", Array]},
 
-			// identification - mac file type/creator
-			macMeta : {type : "function", length : [1]},
+			// identification - mac file type/creator, prodos file types, etc
+			fileMeta : {type : "function", length : [1]},
 
 			// other
 			alwaysIdentify   : {type : "boolean"},

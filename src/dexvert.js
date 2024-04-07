@@ -1,6 +1,6 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
-import {identify, getMacMeta} from "./identify.js";
+import {identify, getFileMeta, FILE_META_INHERIT} from "./identify.js";
 import {formats} from "../src/format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {Program, clearRuntime, RUNTIME} from "./Program.js";
@@ -348,12 +348,15 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			
 			for(const r of dexState.ran || [])
 			{
-				// assign any meta.macFileType or meta.macFileCreator results from any programs to the runState meta
-				if(r.meta?.macFileType || r.meta?.macFileCreator)
-					Object.assign(dexState.meta, {macFileType : r.meta.macFileType, macFileCreator : r.meta.macFileCreator});
+				// assign certin meta keys from programs to the dexstate meta
+				for(const k of FILE_META_INHERIT)
+				{
+					if(r.meta?.[k])
+						dexState.meta[k] = r.meta[k];
+				}
 
 				// auto assign any meta.fileMeta results from any programs to the runState meta
-				if(r.meta?.fileMeta)
+				if(r.meta?.fileMeta && Object.keys(r.meta.fileMeta).length>0)
 				{
 					dexState.meta.fileMeta ||= {};
 					Object.assign(dexState.meta.fileMeta, r.meta.fileMeta);
@@ -390,11 +393,11 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 			break;
 	}
 
-	if(dexState.meta && !dexState.meta.macFileType && !dexState.meta.macFileCreator)
+	if(dexState.meta)
 	{
-		const macMeta = await getMacMeta(inputFile) || {};
-		if(macMeta.macFileType || macMeta.macFileCreator)
-			Object.assign(dexState.meta, macMeta);
+		const fileMeta = await getFileMeta(inputFile);
+		if(Object.keys(fileMeta).length>0)
+			Object.assign(dexState.meta, fileMeta);
 	}
 
 	dexState.duration = (performance.now()-startedAt);

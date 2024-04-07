@@ -187,7 +187,7 @@ const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
 const newMacTypeCreators = {};
-const macMetaCheckers = [];
+const fileMetaCheckers = [];
 
 if(argv.report)
 {
@@ -198,8 +198,8 @@ if(argv.report)
 		for(const m of Array.force(format.magic || []))
 			ALL_MAGICS.add(m);
 
-		if(format.macMeta)
-			macMetaCheckers.push(format.macMeta);
+		if(format.fileMeta)
+			fileMetaCheckers.push(format.fileMeta);
 	}
 
 	xlog.info`Finding existing sample files...`;
@@ -345,7 +345,7 @@ async function processNextQueue()
 
 			const macFileType = dexData.phase?.meta?.macFileType || dexData.phase?.meta?.inputMeta?.macFileType;
 			const macFileCreator = dexData.phase?.meta?.macFileCreator || dexData.phase?.meta?.inputMeta?.macFileCreator;
-			if((macFileType || macFileCreator) && !macMetaCheckers.some(macMetaChecker => macMetaChecker({macFileType, macFileCreator})))
+			if((macFileType || macFileCreator) && !fileMetaCheckers.some(fileMetaChecker => fileMetaChecker({macFileType, macFileCreator})))
 			{
 				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
 				newMacTypeCreators[macFileTypeCreator] ||= [];

@@ -114,7 +114,7 @@ for(const chunk of chunks)
 		meta.dibs[chunk.seq] = {w, h, colorPlanes, bitsPerPixel, compression, sizeImage, xDPI, yDPI, colorsUsed, colorsImportant};
 		
 		await data.writeToDisk(data.remaining(), path.join(argv.outputDirPath, `${chunk.seq}.dib`));
-		//xlog.info`${chunk.seq} ${w}x${h} ${sizeImage} bytes (compressed: ${compression})`;
+		xlog.info`${chunk.seq} ${w}x${h} ${sizeImage} bytes (compressed: ${compression})`;
 	}
 	else if(["SND ", "snd "].includes(chunk.tag))
 	{

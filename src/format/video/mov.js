@@ -11,7 +11,7 @@ export class mov extends Format
 	ext          = _MOV_EXT;
 	mimeType     = "video/quicktime";
 	magic        = _MOV_MAGIC;
-	macMeta      = ({macFileType}) => macFileType==="MooV";
+	fileMeta     = ({macFileType}) => macFileType==="MooV";
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg", "qt_flatt", "mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"];

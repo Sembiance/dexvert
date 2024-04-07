@@ -69,7 +69,11 @@ if(argv.direct)
 	const {DexFile} = await import(path.join(import.meta.dirname, "../DexFile.js"));
 	const {dexvert} = await import(path.join(import.meta.dirname, "../dexvert.js"));
 
-	const dexState = await dexvert(await DexFile.create(argv.inputFilePath), await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
+	const inputFile = await DexFile.create(argv.inputFilePath);
+	if(argv.fileMeta)
+		inputFile.meta = xu.parseJSON(argv.fileMeta);
+
+	const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
 	console.log(dexState.pretty());
 
 	await handleExit();

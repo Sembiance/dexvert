@@ -1,9 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Fix old dates for macromediaProjector:
-[FAIL] archive/macromediaProjector/mub0em33 Created file mub0em33.dxr ts was not expected to be old, but got old 1969-12-31
-[FAIL] archive/macromediaProjector/mub1zse7.2 Created file mub1zse7.dxr ts was not expected to be old, but got old 1969-12-31
 
 
 /---------------\

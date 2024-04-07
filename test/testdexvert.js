@@ -21,7 +21,7 @@ const argv = cmdUtil.cmdInit({
 		debug      : {desc : "Used temporarily when attempting to debug stuff"}
 	}});
 
-const xlog = new XLog("info", {alwaysEcho : !argv.json});
+const xlog = new XLog(argv.debug ? "debug" : "info", {alwaysEcho : !argv.json});
 const testLogLines = [];
 xlog.logger = line => testLogLines.push(line);
 
@@ -771,7 +771,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const tmpOutDirPath = path.join(DEXTEST_ROOT_DIR, diskFamily, diskFormat, path.basename(sampleFilePath), "out");
 	await Deno.mkdir(tmpOutDirPath, {recursive : true});
 
-	const o = {op : "dexvert", inputFilePath : sampleFilePath, outputDirPath : tmpOutDirPath, logLevel : "info", prod : true, dexvertOptions : {programFlag : {}}};
+	const o = {op : "dexvert", inputFilePath : sampleFilePath, outputDirPath : tmpOutDirPath, logLevel : argv.debug ? "debug" : "info", prod : true, dexvertOptions : {programFlag : {}}};
 	if(typeof FORMAT_OS_HINT[diskFormatid]==="string")
 	{
 		o.dexvertOptions.programFlag.osHint = {};
@@ -789,6 +789,7 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 
 	if(argv.serial)
 		xlog.info`Attempting file: ${sampleSubFilePath}`;
+	xlog.debug`Running dex with options: ${o}`;
 	const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
 	if(logLines?.length)
 		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), logLines.join("\n"));

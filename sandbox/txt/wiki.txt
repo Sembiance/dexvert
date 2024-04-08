@@ -21,6 +21,7 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [http://snisurset.net/code/abydos/ abydos]
 * [https://sk1project.net/uc2/ UniConvertor]
 * [https://zxtune.bitbucket.io/ zxtune]
+* [http://hcs64.com/vgmstream.html vgmstream]
 * [[XMP]]
 * [[The Unarchiver]]
 * [[Calibre]]
@@ -32,8 +33,6 @@ GX2 files begin with ASCII "{{magic|GX2}}".
 * [http://style64.org/dirmaster DirMaster]
 * [https://fontforge.org/ FontForge]
 * [https://www.winuae.net/download/ uaeunp]
-
-== Software ==
 * [https://github.com/assimp/assimp assimp]
 
 == Sample files ==

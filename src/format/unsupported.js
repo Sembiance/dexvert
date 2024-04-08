@@ -187,7 +187,6 @@ export default
 		aDrumDrumkit            : {name : "ADrum Drumkit", ext : [".kit"], magic : ["ADrum drumkit"]},
 		aDrumTrack              : {name : "ADrum Track", magic : ["ADrum track"]},
 		cyberTracker64Chiptune  : {name : "CyberTracker 64 Chiptune", ext : [".ct"], magic : ["CyberTracker 64 chiptune"]},
-		directMusicSegment      : {name : "DirectMusic Segment", magic : [/^fmt\/957( |$)/]},
 		directMusicStyle        : {name : "DirectMusic Style", ext : [".sty"], magic : ["Microsoft DirectMusic Style", /^fmt\/958( |$)/]},
 		encoreMusicalNotation   : {name : "Encore Musical Notation", ext : [".enc", ".mus"], magic : ["Encore Musical Notation"]},
 		facSoundtrackerModule   : {name : "FAC Soundtracker Module", ext : [".mus"], magic : ["FAC Soundtracker module"]},
@@ -202,7 +201,6 @@ export default
 		sequencerOneSong        : {name : "Sequencer One Song", ext : [".one"], magic : ["Sequencer One song"], weakMagic : true},
 		sweetSixteenSong        : {name : "Sweet Sixteen Song", ext : [".sng"], magic : ["Sweet Sixteen Song"]},
 		technoSoundTurbo2Track  : {name : "TechnoSound Turbo 2 Track", ext : [".track"], magic : ["TechnoSound Turbo II Track"]},
-		wantonPacker            : {name : "Wanton Packer", ext : [".wn"], magic : ["Wanton Packer song/module"]},
 		yamahaESEQ              : {name : "Yamaha e-SEQ Music", ext : [".esq", ".fil"], magic : ["Yamaha e-SEQ music"]}
 	},
 

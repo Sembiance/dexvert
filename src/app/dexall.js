@@ -195,7 +195,7 @@ await fileUtil.writeTextFile(reportFilePath, `
 				<tbody>
 					${failures.sortMulti([failure => path.extname(failure.inputFilePath), failure => path.basename(failure.inputFilePath)]).map(failure => `<tr>
 						<td>${path.basename(failure.inputFilePath)}</td>
-						<td>${failure.ids.map(({from, magic, weak}) => `<span class="${(from==="file" && magic==="data") || (weak) ? "weak" : ""}">${"&nbsp;".repeat(10-from.length)}${from}: ${magic}</span>`).join("<br>")}</td>
+						<td>${failure.ids.map(({from, magic, weak}) => `<span class="${(from==="file" && magic==="data") || (weak) ? "weak" : ""}">${"&nbsp;".repeat(Math.max(0, 10-from.length))}${from}: ${magic}</span>`).join("<br>")}</td>
 						<td></td>
 					</tr>`).join("")}
 				</tbody>

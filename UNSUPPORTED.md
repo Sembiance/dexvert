@@ -1,4 +1,4 @@
-# Unsupported File Formats (914)
+# Unsupported File Formats (909)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -113,14 +113,13 @@ audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fi
 
 
 
-## Document (44)
+## Document (43)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 document | Adobe InDesign Document | .indd .ind | 
 document | Alan Interactive Fiction | .acd | 
 document | Amiga Vision Flow | .avf | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaVisionFlow/)
 document | AmigaWriter Documet |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
-document | Applesoft BASIC Source Code | .bas | [2 sample files](https://sembiance.com/fileFormatSamples/document/applesoftBASIC/) - Maybe I can use something like: https://github.com/AppleCommander/AppleCommander/search?q=Applesoft
 document | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://sembiance.com/fileFormatSamples/document/astoundPresentation/)
 document | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
 document | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://sembiance.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
@@ -352,7 +351,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (102)
+## Music (98)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -372,7 +371,7 @@ music | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Track
 music | BeRoTracker Module | .brt | [2 sample files](https://sembiance.com/fileFormatSamples/music/beRoTracker/) - A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS emulated: https://soft.lafibre.info/
 music | Cheese Cutter Song | .ct | [3 sample files](https://sembiance.com/fileFormatSamples/music/cheeseCutterSong/) - Player here https://github.com/theyamo/CheeseCutter requires D compiler gdc to build (https://wiki.gentoo.org/wiki/Dlang) but player doesn't seem to convert CLI conversion anyways
 music | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://sembiance.com/fileFormatSamples/music/cba/)
-music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [59 sample files](https://sembiance.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
+music | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [60 sample files](https://sembiance.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 music | [Creative Music System Intelligent Organ File](https://vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 music | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://sembiance.com/fileFormatSamples/music/cubaseSong/)
 music | CyberTracker 64 Chiptune | .ct | 
@@ -380,11 +379,9 @@ music | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://sembiance.com/
 music | DeLuxe Music Score |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
 music | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://sembiance.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
 music | [DigiTrekker](http://fileformats.archiveteam.org/wiki/DigiTrekker_module) | .dtm | [4 sample files](https://sembiance.com/fileFormatSamples/music/digiTrekker/) - DigiTrekker for MSDOS can play these and convert to a 'SND' format, but only in 'realtime' and I couldn't determine the format of the output SND. milkytracker claims support for this format, but I couldn't get it to play any DTM files.
-music | DirectMusic Segment |  | 
 music | DirectMusic Style | .sty | 
 music | DreamStation Module | .dss | [3 sample files](https://sembiance.com/fileFormatSamples/music/dreamStation/)
 music | [Drum Traker Module](http://fileformats.archiveteam.org/wiki/Drum_Traker_module) | .dtl | [15 sample files](https://sembiance.com/fileFormatSamples/music/drumTraker/)
-music | [Dynamic Studio Professional Module](http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module) | .dsm .dsp | [3 sample files](https://sembiance.com/fileFormatSamples/music/dynamicStudio/)
 music | Encore Musical Notation | .enc .mus | [3 sample files](https://sembiance.com/fileFormatSamples/music/encoreMusicalNotation/)
 music | [Extended MOD](http://fileformats.archiveteam.org/wiki/Extended_MOD) | .emd | [2 sample files](https://sembiance.com/fileFormatSamples/music/extendedMOD/)
 music | FAC Soundtracker Module | .mus | 
@@ -401,7 +398,7 @@ music | Improvise Music Data | .imp | [5 sample files](https://sembiance.com/fil
 music | Ixalance Module | .ixs | [5 sample files](https://sembiance.com/fileFormatSamples/music/ixalance/)
 music | JayTrax Module | .jxs | [4 sample files](https://sembiance.com/fileFormatSamples/music/jayTrax/)
 music | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://sembiance.com/fileFormatSamples/music/buzz/)
-music | Klystrack Module | .kt | [5 sample files](https://sembiance.com/fileFormatSamples/music/klystrack/)
+music | [Klystrack Module](http://fileformats.archiveteam.org/wiki/Klystrack_module) | .kt | [6 sample files](https://sembiance.com/fileFormatSamples/music/klystrack/)
 music | Korg Song | .sng | 
 music | Koustracker Module | .sok | 
 music | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://sembiance.com/fileFormatSamples/music/masterTracker/)
@@ -420,7 +417,7 @@ music | NerdTracker Module | .ned | [4 sample files](https://sembiance.com/fileF
 music | NoiseRunner Module | .nr | [1 sample file](https://sembiance.com/fileFormatSamples/music/noiseRunner/)
 music | [NoiseTrekker Module](http://fileformats.archiveteam.org/wiki/Noisetrekker_module) | .ntk | [5 sample files](https://sembiance.com/fileFormatSamples/music/noiseTrekker/)
 music | Onyx Music File Module | .omf | [4 sample files](https://sembiance.com/fileFormatSamples/music/onyxMusicFile/)
-music | Organya Module | .org | [7 sample files](https://sembiance.com/fileFormatSamples/music/organya/)
+music | Organya Module | .org | [8 sample files](https://sembiance.com/fileFormatSamples/music/organya/)
 music | Palladix | .plx | [3 sample files](https://sembiance.com/fileFormatSamples/music/palladix/)
 music | Paragon 5 Gameboy Tracker Module | .mgb | [4 sample files](https://sembiance.com/fileFormatSamples/music/gameboyTracker/)
 music | Piston Collage Module | .ptcop | [6 sample files](https://sembiance.com/fileFormatSamples/music/pistonCollage/)
@@ -433,7 +430,6 @@ music | RamTracker Module | .trk | [4 sample files](https://sembiance.com/fileFo
 music | [Renoise Module](http://fileformats.archiveteam.org/wiki/Renoise_song) | .xrns .rns | [8 sample files](https://sembiance.com/fileFormatSamples/music/renoise/) - The XRNS format is just a ZIP file with samples inside as FLACS and a song XML. The archive/zip format will end up handling that. I tried using renoise program, but it doesn't have CLI conversion nor did it even work anyways to render a song. Sigh.
 music | Roland MIDI Music Recorder Song | .sng | 
 music | Roland Music Sequence | .svq | [7 sample files](https://sembiance.com/fileFormatSamples/music/rolandMusicSequence/) - Awave Studio claims support for these, but I was not able to get it to convert any SVQ files.
-music | SBStudio Module | .pac | [3 sample files](https://sembiance.com/fileFormatSamples/music/sbStudio/)
 music | Scrull Music File | .smf | 
 music | Sequencer One Song | .one | 
 music | ShroomPlayer Module | .sho | [5 sample files](https://sembiance.com/fileFormatSamples/music/shroomPlayer/)
@@ -455,7 +451,6 @@ music | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https:/
 music | TraX Music Track | .mts | [5 sample files](https://sembiance.com/fileFormatSamples/music/traXTrack/)
 music | VGM Music Maker Module | .vge | [4 sample files](https://sembiance.com/fileFormatSamples/music/vgmMusicMaker/)
 music | Vic-Tracker Module | .vt | [5 sample files](https://sembiance.com/fileFormatSamples/music/vicTracker/)
-music | Wanton Packer | .wn | [1 sample file](https://sembiance.com/fileFormatSamples/music/wantonPacker/)
 music | Yamaha e-SEQ Music | .esq .fil | 
 
 
@@ -971,7 +966,7 @@ video | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL
 video | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 video | RATVID Video | .vdo | 
 video | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
-video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [14 sample files](https://sembiance.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
+video | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [15 sample files](https://sembiance.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
 video | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 video | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 video | The Complete Animator Film | .tca | 

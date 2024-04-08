@@ -6,5 +6,5 @@ export class dynamicStudio extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/Dynamic_Studio_Professional_module";
 	ext         = [".dsm", ".dsp"];
 	magic       = ["Dynamic Studio Professional module"];
-	unsupported = true;
+	converters  = ["zxtune123", "vgmstream"];
 }

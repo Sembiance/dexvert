@@ -3,7 +3,7 @@ import {Format} from "../../Format.js";
 export class spectrumSoundTracker extends Format
 {
 	name         = "Spectrum Sound Tracker";
-	ext          = [".st11", ".st13"];
+	ext          = [".st1", ".st3"];
 	magic        = [/^Spectrum Sound Tracker .*chiptune$/];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123"];

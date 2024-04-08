@@ -1,7 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
-
+* Continue going through ~/Assorted/fail and the output of util/wip.js to determine more file formats
+  Go through ~/Assorted/zip/*/ too
 
 /---------------\
 | High Priority |
@@ -11,11 +12,6 @@
 
 * https://github.com/32bitkid/sci.js/tree/main/apps/scibud
   Detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
-
-* Sort this list of supported formats by library/engine and ensure dexvert supports each engine and every format in that engine
-  Download the samples on this page and add em to mine.
-  Prioritize non-video games
-  http://bzrplayer.blazer.nu/formats.php
 
 * This person made a Sierra SCI0 pic renderer in JavaScript: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
   See if I can leverage it to convert/extract SCI0 pics from SCI0 files. May want to reach out on Mastadon/GitHub

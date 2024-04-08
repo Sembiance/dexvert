@@ -9,18 +9,8 @@
 * Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
   I've reached out to the deark creator to see if they could possibly add support for this format to deark.
 
-* Add idMeta checks for all these: https://www.kreativekorp.com/miscpages/a2info/filetypes.shtml
-  Do this by examining how they were handled here: 
-
-* https://preservation.tylerthorsted.com/2024/04/05/shorten/
-  https://github.com/thorsted/PRONOM_Research/tree/main/Submissions/Shorten
-
 * https://github.com/32bitkid/sci.js/tree/main/apps/scibud
   Detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
-
-* Ensure NeXT format discs are supported by checking some of the CD's here: https://blog.persistent.info/2024/03/infinite-mac-nextstep.html
-  Note that it mentions 2 different filesystem formats, HFS and UFS?
-  Make sure I have oshints for next charset: https://github.com/mihaip/infinite-mac/blob/main/scripts/nextstep.py
 
 * Sort this list of supported formats by library/engine and ensure dexvert supports each engine and every format in that engine
   Download the samples on this page and add em to mine.

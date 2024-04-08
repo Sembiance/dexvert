@@ -373,6 +373,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	// These formats share generic .ext only, no magic matches
 	[/image\/asciiArtEditor\/.+$/, "image", "gfaArtist"],
 	[/image\/artistByEaton\/BLINKY\.ART$/, "image", "gfaArtist"],
+	[/image\/canvasImage\/(FALL|PHOTOS)\.CV5$/, "archive", "macBinary"],
 	[/image\/magicDraw\/.+$/, "image", "a2gsSHStar"],
 	[/image\/petsciiSeq\/.+$/, "image", "stadPAC"],
 	[/image\/pixelPerfect\/.+$/, "image", true],

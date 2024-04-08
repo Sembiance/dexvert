@@ -187,6 +187,7 @@ const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
 const newMacTypeCreators = {};
+const newProDOSTypes = {};
 const idMetaCheckers = [];
 
 if(argv.report)
@@ -351,6 +352,14 @@ async function processNextQueue()
 				newMacTypeCreators[macFileTypeCreator] ||= [];
 				newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
 			}
+
+			const proDOSType = dexData.idMeta?.proDOSType;
+			if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})))
+			{
+				const proDOSTypeFull = `[${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`;
+				newProDOSTypes[proDOSTypeFull] ||= [];
+				newProDOSTypes[proDOSTypeFull].pushUnique(task.relFilePath);
+			}
 		}
 
 		if(!dexData?.created?.files?.output?.length)
@@ -443,6 +452,18 @@ if(argv.report)
 			for(const [macTypeCreator, files] of Object.entries(newMacTypeCreators))
 			{
 				xlog.info`${macTypeCreator}   (${files.length} files)`;
+				for(const file of files)
+					xlog.info`\t${file}`;
+			}
+		}
+
+		const newProDOSTypesEntries = Object.entries(newProDOSTypes);
+		if(newProDOSTypesEntries.length>0)
+		{
+			console.log(printUtil.majorHeader(`New ProDOS Types (${newProDOSTypesEntries.length.toLocaleString()})`, {prefix : "\n"}));
+			for(const [proDOSType, files] of Object.entries(newProDOSTypes))
+			{
+				xlog.info`${proDOSType}   (${files.length} files)`;
 				for(const file of files)
 					xlog.info`\t${file}`;
 			}

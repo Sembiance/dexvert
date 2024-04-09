@@ -71,7 +71,7 @@ archive | ZX Spectrum TZX Tape | .tzx |
 
 
 
-## Audio (36)
+## Audio (37)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 audio | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -108,6 +108,7 @@ audio | StoneTracker Sample | .sps | [3 sample files](https://sembiance.com/file
 audio | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
 audio | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [2 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/) - I attempted to use TwinDec from http://www.rarewares.org/rrw/nttvqf.php but it failed to decode my sample files
 audio | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
+audio | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
 audio | [Yamaha Synthetic Music Mobile Application Format](https://lpcwiki.miraheze.org/wiki/Yamaha_SMAF) | .mmf | [1 sample file](https://sembiance.com/fileFormatSamples/audio/yamahaSMAF/)
 audio | ZyXEL Voice Data | .zvd .zyx | [2 sample files](https://sembiance.com/fileFormatSamples/audio/zyxelVoice/)
 
@@ -351,7 +352,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (98)
+## Music (97)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -362,7 +363,6 @@ music | All Sound Tracker Module | .ast | [2 sample files](https://sembiance.com
 music | AND XSynth Module | .amx | [1 sample file](https://sembiance.com/fileFormatSamples/music/andXSynth/)
 music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
 music | AProSys Module | .amx | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
-music | Atari Digi-Mix Module | .mix | [3 sample files](https://sembiance.com/fileFormatSamples/music/atariDigiMix/)
 music | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
 music | AY Amadeus Chiptune | .amad | [7 sample files](https://sembiance.com/fileFormatSamples/music/ayAMAD/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself. zxtune123 doesn't seem to support them either. I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
 music | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)

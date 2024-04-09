@@ -4,6 +4,12 @@
 * Continue going through ~/Assorted/fail and the output of util/wip.js to determine more file formats
   Go through ~/Assorted/zip/*/ too
 
+* Add all from: https://zxart.ee/eng/music/database/
+
+* See if I can support:
+	https://github.com/DrSnuggles/AYSir
+	https://github.com/rofl0r/c-flod
+
 /---------------\
 | High Priority |
 \---------------/

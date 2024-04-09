@@ -5,7 +5,11 @@ import {Detection} from "../../Detection.js";
 import {path} from "std";
 
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
-// All offsets matches must match (except a match array that has a subarray, the subarry is a list of possible matches for that byte position)
+// All offsets matches must match 'match' property
+// match can be a string, which means it has to match that string
+// if match is n array of strings, then it can match any of those strings
+// if match is in array of bytes then it must match those bytes exactly
+// if match has a subarray, then it matches if any of those bytes in that subarray match the loc (NOTE! So if you need to match 0x4A OR 0x4B its match : [[0x4A, 0x4B]]  NOT [[0x4A], [0x4B]])
 // You can also specify a size and it will look for the 'match' bytes anywhere in the first 'size' bytes of the file
 
 /* eslint-disable unicorn/no-hex-escape */
@@ -36,8 +40,10 @@ const DEXMAGIC_CHECKS =
 	"WAD2 file"                   : [{offset : 0, match : "WAD2"}],
 
 	// audio
-	"EA BNK Audio" : [{offset : 0, match : "BNKl"}],
-	"KORG File"    : [{offset : 0, match : "KORG"}],
+	"GameCube Music (IDSP)" : [{offset : 0, match : "IDSP"}],
+	"EA BNK Audio"          : [{offset : 0, match : "BNKl"}],
+	"KORG File"             : [{offset : 0, match : "KORG"}],
+	"RedSpark Audio"        : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 
 	// document
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
@@ -64,7 +70,7 @@ const DEXMAGIC_CHECKS =
 	"CD-I IFF Image"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
-	"Digi-Pic 2"                  : [{offset : 32000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
+	"Digi-Pic 2"                  : [{offset : 32_000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
 	"ECI Graphic Editor"          : [{offset : 0, match : [0x00, 0x40]}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"GoDot Clip"                  : [{offset : 0, match : "GOD1"}],
@@ -88,8 +94,29 @@ const DEXMAGIC_CHECKS =
 	// music
 	"AdLib MUS"                        : [{offset : 0, match : [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0]}],
 	"AMOS Memory Bank, Tracker format" : [{offset : 0, match : "AmBk"}, {offset : 12, match : "Tracker "}],
+	"Ben Daglish"                      : [{offset : 0, match : [0x60, 0x00]}, {offset : 4, match : [0x60, 0x00]}, {offset : 9, match : [0x00, 0x60, 0x00]}],
+	"Chaos Music Composer (CMC)"       : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 6, match : [0xA0, 0xE3, 0xED, 0xE3, 0xA0, 0xE4, 0xE1, 0xF4, 0xE1, 0xA0, 0xE6, 0xE9, 0xEC, 0xE5, 0xA0, 0x8E, 0x95, 0x0D, 0x20]}],
+	"Chaos Music Composer (CMS)"       : [{offset : 6, match : [0x80, 0xA4, 0xEF, 0xF5, 0xE2, 0xEC, 0xE5, 0x80, 0xB3, 0xA3]}],
+	"Delta Music Composer"             : [{offset : 0, match : [0xFF, 0xFF, 0x00, 0x20, 0xFF]}, {offset : 5, match : [[0x4B, 0x4C]]}],
+	"Digital Studio (AY)"              : [{offset : 168, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xAE, 0x7E, 0xAE, 0x7E, 0x51, 0x00, 0x00, 0x00, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20]}],
+	"E-Tracker (Alt)"                  : [{offset : 1213, match : "ETracker (C) BY ESI"}],
+	"Future Composer Atari"            : [{offset : 0, match : [0x26, 0x23]}],
+	"Galaxy Music System"              : [{offset : 0, match : "MUSE"}, {offset : 4, match : [0xDE, 0xAD, [0xBE, 0xBA], [0xAF, 0xBE]]}],
 	"IFF Deluxe Music Score"           : [{offset : 0, match : "FORM"}, {offset : 8, match : "DMCS"}],
+	"Music ProTracker"                 : [{offset : 211, match : [0x78, 0x72, 0x6B, 0x65, 0x5F, 0x5A, 0x55, 0x50, 0x4B, 0x47, 0x43]}],
+	"NTSP-system"                      : [{offset : 0, match : "SPNT"}],
+	"Pha Packer"                       : [{offset : 8, match : [0x00, 0x00, 0x03, 0xC0]}],
+	"The Player 2.2A"                  : [{offset : 0, match : "P22A"}],
+	"The Player 3.0A"                  : [{offset : 0, match : "P30A"}],
+	"Promizer 1.0c/1.8"                : [{offset : 0, match : [0x60, 0x38, 0x60, 0x00, 0x00, 0xA0, 0x60, 0x00, 0x01, 0x3E, 0x60, 0x00, 0x01, 0x0C, 0x48, 0xE7]}],
+	"Promizer 2.0"                     : [{offset : 0, match : [0x60, 0x00, 0x00, 0x16, 0x60, 0x00, 0x01, 0x40, 0x60, 0x00, 0x00, 0xF0, 0x3F, 0x00, 0x10, 0x3A]}],
 	"RIFF MIDS file"                   : [{offset : 0, match : "RIFF"}, {offset : 8, match : "MIDS"}],
+	"SQ Digital Tracker"               : [{offset : 247, match : [0xDD, 0x36, 0x79, 0x00, 0xCD, 0x54, 0xDE, 0xFD, 0x36]}],
+	"Theta Music Composer 1.x"         : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 35, match : [0x20]}],
+	"Theta Music Composer 2.x"         : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 6, match : [0x0E, 0x15, 0x8D, 0xD4, 0xCD, 0xC3, 0xA0, 0xD3, 0xCF, 0xCE, 0xC7, 0xA0, 0xC6, 0xC9, 0xCC, 0xC5, 0xA0, 0xB2, 0xAE, 0xB0, 0x8D, 0x15, 0x0E]}],
+	"Tracker Packer 1/2"               : [{offset : 0, match : "MEXX"}],
+	"TurboFM Dumped"                   : [{offset : 0, match : "TFMDM"}],
+	"WonderSwan WSR Audio"             : [{offset : -32, match : "WSRF"}],
 
 	// other
 	"Atari ST Guide Hypertext"         : [{offset : 0, match : "HDOC"}],

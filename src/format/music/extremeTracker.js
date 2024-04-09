@@ -1,11 +1,13 @@
+import {xu} from "xu";
 import {Format} from "../../Format.js";
 
 export class extremeTracker extends Format
 {
-	name         = "Extreme's Tracker Module";
-	website      = "http://fileformats.archiveteam.org/wiki/Extreme's_Tracker_module";
-	ext          = [".ams"];
-	magic        = ["Extreme Tracker AMS Module", "Extreme's Tracker module"];
-	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	name          = "Extreme Tracker";
+	ext           = [".et1"];
+	fileSize      = 112_640;
+	matchFileSize = true;
+	metaProvider  = ["musicInfo"];
+	converters    = ["zxtune123"];
+	verify        = ({meta}) => meta.duration>=xu.SECOND;
 }

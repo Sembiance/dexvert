@@ -1,11 +1,11 @@
 import {Format} from "../../Format.js";
 
-export class pru2 extends Format
+export class proRunner extends Format
 {
-	name         = "Prorunner Module";
+	name         = "ProRunner Module";
 	website      = "http://fileformats.archiveteam.org/wiki/Prorunner";
-	ext          = [".pru2"];
+	ext          = [".pru2", ".pru1", ".pr1", ".pr2"];
 	magic        = ["Prorunner 2.0 Music"];
 	metaProvider = ["musicInfo"];
-	converters   = ["xmp"];
+	converters   = ["xmp", "uade123"];
 }

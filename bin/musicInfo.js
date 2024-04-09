@@ -18,6 +18,8 @@ const argv = cmdUtil.cmdInit({
 
 const musicWAVFilePath = path.join(path.dirname(argv.inputFilePath), "music.wav");
 const noMusicWAV = await fileUtil.exists(musicWAVFilePath);
+const tmpDirPath = await fileUtil.genTempPath(undefined, "musicInfo");
+await Deno.mkdir(tmpDirPath);
 
 const runOptions = {timeout : xu.SECOND*5};
 
@@ -28,6 +30,7 @@ const {stdout : mikmodInfoRaw} = await runUtil.run("mikmodInfo", [argv.inputFile
 const {stdout : timidityInfoRaw} = await runUtil.run("timidity", ["-Ow", "-o", "/dev/null", argv.inputFilePath], runOptions);
 const {stdout : zxtuneRaw} = await runUtil.run("zxtune123", ["--file", argv.inputFilePath, "--null", "--quiet"], {stdoutUnbuffer : true, ...runOptions});
 const {stderr : adplayRaw} = await runUtil.run("adplay", ["--once", "--instruments", "-O", "disk", "-d", "/dev/null", argv.inputFilePath], runOptions);
+await runUtil.run("asapconv", ["-o", path.join(tmpDirPath, "%n:_:%a.wav"), argv.inputFilePath], runOptions);
 
 if(argv.debug)
 	[["xmpInfoRaw", xmpInfoRaw], ["uadeInfoRaw", uadeInfoRaw], ["openMPTInfoRaw", openMPTInfoRaw], ["mikmodInfoRaw", mikmodInfoRaw], ["timidityInfoRaw", timidityInfoRaw], ["zxtuneRaw", zxtuneRaw], ["adplayRaw", adplayRaw]].forEach(([k, v]) => console.log(`${fg.yellow(k)}\n${v}`));
@@ -42,19 +45,20 @@ try { infos.mikmod = parseMikmod(mikmodInfoRaw); } catch {}
 try { infos.timidity = parseTimidity(timidityInfoRaw); } catch {}
 try { infos.zxtune = parseZXTune(zxtuneRaw); } catch {}
 try { infos.adplay = parseAdplay(adplayRaw); } catch {}
+try { infos.asap = await parseASAP(); } catch {}
 
 if(argv.debug)
 	console.log(infos);
 
 // Earlier program entries produce better meta data and are processed in priority order
-for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "adplay"])
+for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "adplay", "asap"])
 {
 	const subInfo = infos[type];
 
 	// Trim certain properties
 	for(const propName of ["title", "type", "tracker", "author"])
 	{
-		if(subInfo[propName])
+		if(subInfo?.[propName])
 		{
 			if(subInfo[propName].trim().length>0)
 				subInfo[propName] = subInfo[propName].trim();
@@ -69,7 +73,7 @@ for(const type of ["xmp", "uade", "openMPT", "mikmod", "timidity", "zxtune", "ad
 		if(Object.hasOwn(musicInfo, propName))
 			return;
 
-		if(subInfo[propName])
+		if(subInfo?.[propName])
 			musicInfo[propName] = subInfo[propName];
 	});
 }
@@ -84,6 +88,7 @@ for(const type of ["zxtune", "openMPT"])	// in reverse priority since it clobber
 
 if(!noMusicWAV)
 	await fileUtil.unlink(musicWAVFilePath);
+await fileUtil.unlink(tmpDirPath, {recursive : true});
 
 if(argv.jsonOutput)
 	console.log(JSON.stringify(musicInfo));
@@ -364,4 +369,17 @@ function parseAdplay(infoRaw="")
 		delete info.instruments;
 
 	return info;
+}
+
+async function parseASAP()
+{
+	const outputFilePaths = await fileUtil.tree(tmpDirPath, {nodir : true, depth : 1, relative : true, regex : /\.wav$/});
+	if(outputFilePaths.length===0)
+		return;
+	
+	const [title, author] = path.basename(outputFilePaths[0], ".wav").split(":_:");
+	if(title===path.basename(argv.inputFilePath, path.extname(argv.inputFilePath)) && !author?.length)
+		return;
+
+	return {title, author};
 }

@@ -209,7 +209,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				baseMatch.website = format.website;
 
 			// some formats require some sort of other check to ensure the file is valid
-			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch})))
+			if(format.idCheck && hasAnyMatch && !(await format.idCheck(inputFile, detections, {extMatch, filenameMatch, idMetaMatch, fileSizeMatch, magicMatch, xlog})))
 			{
 				xlog.debug`Excluding format ${formatid} due to idCheck not succeeding.`;
 				continue;

@@ -4,6 +4,7 @@ export class sqDigital extends Format
 {
 	name         = "SQ Digital Tracker";
 	ext          = [".m", ".sqd"];
+	weakExt      = [".m"];
 	magic        = ["SQ Digital Tracker"];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123"];

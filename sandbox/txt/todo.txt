@@ -1,20 +1,21 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Continue going through ~/Assorted/fail and the output of util/wip.js to determine more file formats
-  Go through ~/Assorted/zip/*/ too
-
-* Add all from: https://zxart.ee/eng/music/database/
-
-* See if I can support:
-	https://github.com/DrSnuggles/AYSir
-	https://github.com/rofl0r/c-flod
+* Continue going through the formats left in ~/Assorted/fail,  see wip.txt
+  Go through ~/Assorted/zip/*/ too (stick em all in 1 directory, try a dexall)
 
 /---------------\
 | High Priority |
 \---------------/
+* Once the chiptune download/rsync on cobbleton/trove is done, unzipAll and then see if it has any sample files that I need more of
+  Look at description.txt for an ordered list by descending qty for each file type
+  
 * Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
   I've reached out to the deark creator to see if they could possibly add support for this format to deark.
+
+* See if I can support:
+	https://github.com/DrSnuggles/AYSir
+	https://github.com/rofl0r/c-flod
 
 * https://github.com/32bitkid/sci.js/tree/main/apps/scibud
   Detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.

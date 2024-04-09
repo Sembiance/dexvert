@@ -216,6 +216,9 @@ const FLEX_SIZE_FORMATS =
 		// Each iteration generates different clippath ids, sigh.
 		dxf : 1,
 
+		// Depending on if canvas or hiJaakExpress gets it, the file size can be wildly different, since the files are small it can be a huge percentage difference
+		xbm : 200,
+
 		// each running sometimes produces slightly different output, not sure why, haven't investigated further
 		ani              : 15,
 		avsx             : 25,
@@ -421,6 +424,7 @@ const DISK_FAMILY_FORMAT_MAP =
 ];
 
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match
+// So in the future I could look at these files and see if I can determine a pattern to them or in some better way id them
 const UNPROCESSED_ALLOW_NO_IDS =
 [
 	"archive/drRiptideArchive",
@@ -432,8 +436,17 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"image/teletext",
 	"image/sprEd",
 	"music/euphony",
+	"music/moduleProtector",
+	"music/noisePacker",
 	"music/msxBGM",
+	"music/proPacker",
+	"music/proRunner",
+	"music/proTracker",
 	"music/richardJoseph",
+	"music/sampleTracker",
+	"music/starTrekkerPacker",
+	"music/thePlayer",
+	"music/titanics",
 	"other/iBrowseCookies",
 	"unsupported/binPatch"
 ];

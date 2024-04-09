@@ -1,5 +1,5 @@
 import {Format} from "../../Format.js";
-import {TEXT_MAGIC, TEXT_MAGIC_WEAK} from "../../Detection.js";
+import {TEXT_MAGIC} from "../../Detection.js";
 
 // Fallback match for anything that is just text. This will only be matched as a last resort
 export class txt extends Format
@@ -9,7 +9,6 @@ export class txt extends Format
 	ext          = [".txt"];
 	weakExt      = true;
 	magic        = TEXT_MAGIC;
-	weakMagic    = TEXT_MAGIC_WEAK;
 	idMeta       = ({macFileType}) => ["TEXT", "ttro"].includes(macFileType);
 	priority     = this.PRIORITY.LOWEST;
 	fallback     = true;

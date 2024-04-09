@@ -4,7 +4,7 @@ import {Format} from "../../Format.js";
 export class eTracker extends Format
 {
 	name         = "E-Tracker Chiptune";
-	ext          = [".etc", ".cop", ".et", ".t", ".saa"];
+	ext          = [".etc", ".cop", ".et", ".t", ".saa", ".sng"];
 	magic        = ["E-Tracker chiptune", "E-Tracker (Alt)"];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123"];

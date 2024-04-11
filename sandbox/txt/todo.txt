@@ -1,32 +1,25 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Continue going through the formats left in ~/Assorted/fail,  see wip.txt
-  Go through ~/Assorted/zip/*/ too (stick em all in 1 directory, try a dexall)
+
 
 /---------------\
 | High Priority |
 \---------------/
-* Once the chiptune download/rsync on cobbleton/trove is done, unzipAll and then see if it has any sample files that I need more of
+* On cobbleton in /mnt/trove/wip/chiptune, unzipAll and see if it has any sample files that I need more of, use dexall in folders if needed
   Look at description.txt for an ordered list by descending qty for each file type
-  
+
 * Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
   I've reached out to the deark creator to see if they could possibly add support for this format to deark.
-
-* See if I can support:
-	https://github.com/DrSnuggles/AYSir
-	https://github.com/rofl0r/c-flod
-
-* https://github.com/32bitkid/sci.js/tree/main/apps/scibud
-  Detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
-
-* This person made a Sierra SCI0 pic renderer in JavaScript: https://github.com/32bitkid/sci.js/tree/main/apps/scibud
-  See if I can leverage it to convert/extract SCI0 pics from SCI0 files. May want to reach out on Mastadon/GitHub
 
 
 /-----------------\
 | Medium Priority |
 \-----------------/
+* https://github.com/32bitkid/sci.js/tree/main/apps/scibud
+  Utilize this to convert/extract SCI0 pics from Sierra SCI files.
+  The author said this about detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
+
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP
@@ -40,6 +33,7 @@
   Perhaps get deark to add support for this format.
 
 * Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
+  archive/halfLifeModel					Crowbar program seems to be sensisitve
   archive/hypercard						Sometimes certain cards/bitmaps don't render
   archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
   audio/downloadableSoundBank			Sometimes not all .mp3 files are produced (shell.dls)
@@ -52,13 +46,6 @@
 * Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
-
-* Add support music/fuxoftAYLanguage and music/ayAMAD
-  Ay_Emul can play both these, but it doesn't have CLI conversion support so I could do either:
-  1. Add CLI conversion support to Ay_Emul (see email about building it from svbulba@gmail.com)
-  2. Patch ZXtune (which uses Ay_Emul) to support these formats
-     If I do ZXTune, submit patch here: https://bitbucket.org/zxtune/zxtune/issues/150/ay-amad-support
-     In EITHER CASE, make sure I'm using the latest versions of both the above before trying
 
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV

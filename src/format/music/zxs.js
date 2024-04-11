@@ -5,5 +5,5 @@ export class zxs extends Format
 	name         = "ZXS";
 	ext          = [".zxs"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "ayEmul"];
 }

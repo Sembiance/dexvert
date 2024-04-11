@@ -6,5 +6,5 @@ export class spectrumPSG extends Format
 	ext          = [".psg"];
 	magic        = ["PSG chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "ayEmul"];
 }

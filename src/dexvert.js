@@ -302,6 +302,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				return dexState.processed;
 			};
 
+			xlog.debug`Running ${converters.length} converters for ${format.formatid}: ${JSON.stringify(converters)}`;
 			if(converters.some(v => Array.isArray(v)))
 			{
 				// The 'new' approach (see archive/iso.js), an array of arrays

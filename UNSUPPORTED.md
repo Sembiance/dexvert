@@ -1,4 +1,4 @@
-# Unsupported File Formats (909)
+# Unsupported File Formats (906)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -352,7 +352,7 @@ image | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | 
 
 
 
-## Music (97)
+## Music (94)
 Family | Name | Extensions | Notes
 ------ | ---- | ---------- | -----
 music | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -364,7 +364,6 @@ music | AND XSynth Module | .amx | [1 sample file](https://sembiance.com/fileFor
 music | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
 music | AProSys Module | .amx | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
 music | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
-music | AY Amadeus Chiptune | .amad | [7 sample files](https://sembiance.com/fileFormatSamples/music/ayAMAD/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself. zxtune123 doesn't seem to support them either. I tried several other programs like the AY To WAV converter here without luck: https://bulba.untergrund.net/progr_e.htm
 music | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)
 music | Beepola Module | .bbsong | [3 sample files](https://sembiance.com/fileFormatSamples/music/beepola/)
 music | [Beni Tracker Module](http://fileformats.archiveteam.org/wiki/Beni_Tracker_module) | .pis | [5 sample files](https://sembiance.com/fileFormatSamples/music/beniTracker/)
@@ -388,10 +387,8 @@ music | FAC Soundtracker Module | .mus |
 music | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://sembiance.com/fileFormatSamples/music/faceTheMusic/)
 music | FamiTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
 music | Finale Music Score | .mus | 
-music | Flash Tracker | .fls | [5 sample files](https://sembiance.com/fileFormatSamples/music/flashTracker/)
 music | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
 music | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)
-music | [Fuxoft AY Language](http://fileformats.archiveteam.org/wiki/Fuxoft_AY_Language) | .fxm | [8 sample files](https://sembiance.com/fileFormatSamples/music/fuxoftAYLanguage/) - Ay_Emul can play these under linux, but they don't offer a command line conversion option. Source is available (delphi) so I could add support for this feature myself.
 music | [GMOD Module](https://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 music | GoatTracker Module | .sng | [6 sample files](https://sembiance.com/fileFormatSamples/music/goatTracker/)
 music | Improvise Music Data | .imp | [5 sample files](https://sembiance.com/fileFormatSamples/unsupported/improviseMusicData/)

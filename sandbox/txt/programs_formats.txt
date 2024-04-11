@@ -12665,3 +12665,84 @@ Vector Formats: AFF / CGM / DJVU / DRW / DST / HP2 / HPG / MIF / NVA / OBJ / ORB
 3D Formats: 3D / 3DS / 3MF / AC / AC3D / ACC / AMJ / ASE / ASK / B3D / BLEND / BVH / C4D / COB / CSM / DAE / ENFF / FBX / GITF / GLB / HMB / HMP / IRR / IRRMESH / LWO / LWS / LXO / M3D / MD2 / MD3 / MD5 / MDL / MESH / MOT / MS3D / NDO / NFF / OFF / OGEX / PK3 / PLY / PMX / PRJ / Q3D / Q3O / Q3S / SCN / SIB / SMD / STEP / STL / STP / TER / UC / VTA / X3D / XGL / ZGL
 GIS Formats: 000 / BNA / E00 / GEOJSON / GML / GMT / GPX / GTM / GTZ / GXT / KML / KMZ / NTF / REC / SHP / TAB
 Rare Formats: !C / $C / $S / 001 / 2BP / 2D / 301 / 411 / 4BT / 73I / 82I / 83I / 85I / 86I / 89I / 92I / A64 / ABC / ABIC / ABS / ACE / ACORN / ADT / AFP / AFX / AIP / ALIAS / ALS / AMI / ANI / APX / ARF / ARN / ART / ATK / AVS / AWD / B&W / B16 / BFL / BFLI / BFX / BGA / BIF / BIG / BLD / BLK / BM / BMF / BMG / BMX / BN / BOB / BPR / BRK / BRT / BS / BSG / BTN / BUM / BW / B_W / C4 / CALS / CAM / CAN / CAR / CAT / CBM / CDU / CE / CE1 / CE2 / CEL / CIP / CIT / CLO / CLP / CMT / CMU / CMW / CMX / CP8 / CPA / CPC / CPI / CRD / CRG / CT / CUT / CVP / DAT / DBW / DCM / DD / DOL / DOO / DPX / DRZ / DSI / DTA / ECC / EF3 / EFX / EI / EIDI / EPA / ESM / EXR / F96 / FAC / FACE / FBM / FCX / FI / FIT / FLC / FLI / FMF / FP2 / FPG / FPR / FPT / FRE / FRM / FSY / FTF / FTS / FUN / FX3 / FXD / FXM / FXO / FXR / FXS / G16 / G3 / G3N / G4 / GAF / GB / GEO / GG / GIG / GIH / GM / GM2 / GM4 / GMF / GP4 / GRAF / GRB / GRO / GRO2 / GRO4 / GUN / HDP / HDR / HDRU / HED / HF / HIR / HPI / HR / HRZ / I17 / I18 / IB7 / IBG / ICA / ICB / ICL / ICN / ICNS / IDC / IF9 / IFF / IFL / IIM / IIMG / IM1 / IM5 / IMA / IMG / IMI / IMT / INFO / IPG / IPH / IPT / IRIS / ISH / ISM / ISS / ITG / J6I / JBF / JBG / JBIG / JIF / JIG / JJ / JPS / JTF / KAP / KFX / KOA / KPS / KQP / LBM / LDA / LFF / LIF / LVP / LWI / M8 / MAG / MAP / MBFAVS / MBFS / MBM / MGR / MH / MIC / MIFF / MIL / MIM / MNG / MPH / MPNT / MRF / MSK / MSP / NAP / NAV / NCD / NCR / NCT / NEO / NITF / NLM / NMP / NOL / NPM / NSR / OAZ / OCP / OFX / OIL / P64 / P7 / PAC / PAN / PAT / PAX / PBT / PC / PCC / PCP / PD / PDB / PDD / PDS / PDX / PE4 / PFR / PG / PGC / PGF / PH / PHP / PI / PICIO / PICT / PIG / PIX / PIXAR / PM / PMG / PMP / PPP / PPS / PPT / PRC / PRF / PRI / PSA / PSB / PSE / PSF / PSPBRUSH / PSPFRAME / PSPIMAGE / PSPMASK / PST / PTK / PTOCA / PWP / PXA / PXB / PXR / PXS / PZL / PZP / Q0 / QDV / QTI / QTIF / QTL / RAS / RAST / RGB / RGH / RIX / RLB / RLC2 / RLE / RP / RPBM / RPM / RS / RSB / SAR / SC / SC2 / SCI / SCR / SCT / SCX / SD0 / SD1 / SD2 / SDG / SEQ / SFF / SFW / SI / SID / SIM / SIR / SJ1 / SKN / SMP / SNA / SPC / SPS / SPU / SR / SSI / SSP / ST4 / ST5 / ST6 / ST7 / ST8 / STW / STX / SUL / SUN / SUNIFF / SYJ / SYN / SYNU / TAAC / TDI / TDIM / TEX / TG4 / TIL / TIM / TJP / TM2 / TN1 / TN2 / TN3 / TNL / TNY / TRP / TSK / TUB / UNI / UPI / UYVY / V / VDA / VFF / VFX / VI / VIC / VICAR / VID / VIF / VIFF / VIT / VOB / VPB / VST / WAL / WB0 / WDP / WFX / WZL / X / X11 / XAR / XIF / XIM / XV / XWD / YUV / ZBR
+
+
+>>> c-flod   (linux   https://github.com/rofl0r/c-flod)
+Brian Postma's SoundMon 1.0/2.0/3.0
+David Whittaker
+Delta Music 1.0
+Delta Music 2.0/2.2
+Digital Mugician
+Digital Mugician 7 voices
+D.O.C. Soundtracker 9/2.0
+FastTracker II XM (PC)
+FredEd
+Future Composer 1.0/1.3
+Future Composer 1.4
+His Master's NoiseTracker
+Jochen Hippel
+Jochen Hippel COSO
+NoiseTracker 1.0/1.1/2.0
+ProTracker 1.0/1.1/1.2
+Rob Hubbard
+SidMON
+SidMON II
+SoundFX 1.0/1.8/1.9/2.0
+Soundtracker 2.3/2.5
+Ultimate Soundtracker, The (Karsten Obarski)
+
+
+>>> Ay_Emul   https://bulba.untergrund.net/emulator_e.htm
+Dumps (or logs) of sound chip registers recorded in many computers' emulators:
+	OUT (produced by a ZX Spectrum emulator 'Z80' v3.xx by G.A. Lunter);
+	PSG (produced by a ZX Spectrum emulator 'Z80 Stealth' by Mr.Kirill, and in many other emulators);
+	EPSG (recorded in a ZX Spectrum emulator 'Z80 Stealth');
+	YM ('StSound Project' by Leonard/Oxygen files; the supported subtypes are YM2, YM3, YM3b, YM5 and YM6);
+	VTX (files made with 'Vortex Project' by V_Soft);
+	ZXAY (custom-made for Ay_Emul).
+Popular ZX Spectrum musical editors' module formats:
+	ST1: Sound Tracker v1.xx non-compiled;
+	AY type ST11: Sound Tracker v1.1 non-compiled, an analog of ST1;
+	STC, ZXS: Sound Tracker v1.xx, Super Sonic v1.xx;
+	ST3: STC recompiled (in KSA's S.T. Music's Recompiler);
+	PSC: Pro Sound Creator v1.xx;
+	AS0, ASC: ASC Sound Master v0.xx-2.xx;
+	PT1, PT2, PT3: Pro Tracker v1.xx-3.xx, Vortex Tracker II v1.0;
+	STF: Sound Tracker Pro non-compiled;
+	STP: Sound Tracker Pro;
+	FTC: Fast Tracker v1.xx;
+	FLS: Flash Tracker;
+	SQT: SQ-Tracker;
+	GTR: Global Tracker v1.x;
+	FXM: Fuxoft AY Language;
+	AY type AMAD: Amadeus modules, analogous to FXM;
+	PSM: Pro Sound Maker.
+ZX Spectrum, Atari ST/STe or Amstrad CPC's memory dumps which include the player for Z80 or MC68000 processors:
+	AY type EMUL (DeliAY and AYPlay project files);
+	AYM (RDOSPLAY project files);
+	SNDH (Atari ST or Atari STe music files).
+MIDI files:
+	MID, MIDI: MIDI standard format;
+	RMI: MID files wrapped in the RIFF container;
+	KAR: standard MID files with song texts for karaoke;
+	XMI: Miles Design XMIDI format.
+Files played by BASS library:
+	MP3, MP2, MP1: MPEG-1 encoded waveform sound recording;
+	OGG: Vorbis-encoded audio;
+	WAV: any codecs of PCM audio that are installed in the system;
+	WMA: Windows Media encoded audio (via basswma extension);
+	APE: Monkey's Audio records (via bass_ape extension);
+	FLAC: Free Lossless Audio Codec audio (via bassflac extension);
+	WV: WavPack audio (via basswv extension);
+	AC3: multichannel Dolby AC3 encoded audio;
+	AAC: Advanced Audio Coding records;
+	M4A, MP4: MPEG-4 wrapped audio (Advanced Audio Coding, Apple Lossless Audio Codec)
+	DFF, DSF: Direct Stream Digital (Sony/Philips audio format)
+	MO3: modules with MP3/OGG encoded samples;
+	IT: Impulse Tracker;
+	XM: Fast Tracker 2;
+	S3M: Scream Tracker 3;
+	MTM: MultiTracker;
+	MOD: Sound/Noise/Star/Pro/FastTracker (and many more) module format;
+	UMX: Unreal Tournament music package;
+	HTTP:// and FTP:// shoutcast streams (internet radio, etc.).

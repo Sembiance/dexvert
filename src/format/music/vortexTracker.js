@@ -6,5 +6,5 @@ export class vortexTracker extends Format
 	ext          = [".vtx"];
 	magic        = ["Vortex Tracker (AY) chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123"];
+	converters   = ["zxtune123", "ayEmul"];
 }

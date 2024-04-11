@@ -12,13 +12,13 @@ export class Crowbar extends Program
 		script : `
 			$mainWindow = WindowRequire("Crowbar", "", 10)
 			ControlClick($mainWindow, "", "[NAME:BrowseForOutputPathButton]")
-			$browseWindow = WindowRequire("Open the folder you want as Output Folder", "", 10)
-			Sleep(300)
+			$browseWindow = WindowRequire("Open the folder you want as Output Folder", "", 15)
+			Sleep(500)
 			Send("c:\\out{ENTER}")
-			Sleep(1500)
+			Sleep(3000)
 			Send("{ENTER}")
-			WinWaitClose($browseWindow, 10)
-			WinWaitActive($mainWindow, "", 10)
+			WinWaitClose($browseWindow, 15)
+			WinWaitActive($mainWindow, "", 15)
 			ControlClick($mainWindow, "", "[NAME:DecompileButton]")
 
 			Sleep(200)

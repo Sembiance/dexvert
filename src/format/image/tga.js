@@ -14,7 +14,7 @@ export class tga extends Format
 	// picturePublisher also supports TGA but bad TGA's have a tendency to cause the program to freeze so bad that the AutoIt script freezes up too (see sandbox/samples/HangsPicturePublisher.tga)
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	converters = [
-		"deark[module:tga]", "iio2png", "iconvert",
+		"deark[module:tga][strongMatch]", "iio2png", "iconvert",
 		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
 		"nconvert", "recoil2png", "gimp",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas5[strongMatch]", "canvas[strongMatch]"

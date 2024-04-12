@@ -35,6 +35,15 @@ export const WEAK_VALUES =
 	/^Unicode Textdatei/,
 	/^Windows Maus Cursor Datei\/Works f.r DOS Datei/,
 	/^Wordperfect Dokument Datei/,
+
+	// disktype: WEAK checks
+	/^ATARI ST partition map/,
+	/^bar archive$/,
+	/^Blank disk\/medium$/,
+	/^compress-compressed data at /,
+	/^FAT\d{2} file system/,
+	/^First .* are blank$/,
+	/^Windows \/ MS-DOS boot loader/,
 	
 	// FILE: Very weak checks:
 	/^, /,

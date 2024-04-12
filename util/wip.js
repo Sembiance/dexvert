@@ -16,3 +16,4 @@ import {MediaWiki} from "MediaWiki";
 const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
+

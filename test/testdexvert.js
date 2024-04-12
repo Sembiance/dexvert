@@ -282,7 +282,8 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 		blizzardPicture : ["NightElfMaleNakedPelvisSkin00_07.blp"],	// blpngConverter crashes on some hosts for this file, dunno why
 		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
-		wpg             : ["test.wpg"]		// convert converts this to SVG incorrectly and is wildly different on different hosts
+		wpg             : ["test.wpg"],		// convert converts this to SVG incorrectly and is wildly different on different hosts
+		xbm             : ["fig.icon.X", "pirhanna.rm", "world.xbm"]	// sometimes it's hiJaakExpress, sometimes it's canvas
 	},
 	video :
 	{
@@ -439,6 +440,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/moduleProtector",
 	"music/noisePacker",
 	"music/msxBGM",
+	"music/promizer",
 	"music/proPacker",
 	"music/proRunner",
 	"music/proTracker",

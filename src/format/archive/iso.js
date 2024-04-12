@@ -9,7 +9,7 @@ import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "Apple Partition Map (APM) disk image"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", "Apple Partition Map (APM) disk image", "Apple partition map,", "HFS file system"];
 
 async function validCUEFile(dexState, cueFile)
 {
@@ -33,7 +33,13 @@ export class iso extends Format
 	ext            = [".iso", ".bin", ".hfs", ".ugh", ".img", ".toast"];
 	forbidExtMatch = [".img", ".bin"];	// way too common
 
-	magic          = ["ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", /^ISO 9660$/, /^fmt\/(468|1738)( |$)/, ...HFS_MAGICS, ..._MACBINARY_MAGIC];
+	magic          = [
+		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden",
+		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system",
+		/^ISO 9660$/, /^fmt\/(468|1738)( |$)/,
+		...HFS_MAGICS,
+		..._MACBINARY_MAGIC
+	];
 	weakMagic      = _MACBINARY_MAGIC;
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 

@@ -416,7 +416,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
 if(argv.report)
 {
-	const reportData = {duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, newMacTypeCreators};
+	const reportData = {duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, newMacTypeCreators, newProDOSTypes};
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)

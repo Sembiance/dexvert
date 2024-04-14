@@ -244,5 +244,8 @@ export class iso extends Format
 				await Deno.rename(subPath, path.join(path.dirname(type.dirPath), path.basename(subPath)));
 			await fileUtil.unlink(type.dirPath);
 		}
+
+		if(dexState.meta?.fileMeta)
+			dexState.meta.fileMeta = Object.fromEntries(Object.entries(dexState.meta.fileMeta).map(([k, v]) => [k.replaceAll("dexvert_", ""), v]));
 	};
 }

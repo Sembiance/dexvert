@@ -36,6 +36,13 @@ export class uniso extends Program
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};
 	runOptions = ({env : Program.denoEnv()});
-	post       = r => Object.assign(r.meta, xu.parseJSON(r.stdout, {}));
+	post       = r =>
+	{
+		const meta = xu.parseJSON(r.stdout, {});
+		if(r.flags?.subOutDir && meta.fileMeta)
+			meta.fileMeta = Object.fromEntries(Object.entries(meta.fileMeta).map(([k, v]) => [`${r.flags.subOutDir}/${k}`, v]));
+
+		return Object.assign(r.meta, meta);
+	};
 	renameOut  = false;
 }

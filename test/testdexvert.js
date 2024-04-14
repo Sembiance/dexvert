@@ -283,7 +283,7 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 		cdr             : ["test.cdr"],		// on some hosts, scribus fails to process this file and things fallback to nconvert
 		spectrum512S    : ["AI_R_010.SPS"],	// deark produces random garbage for this file, every time
 		wpg             : ["test.wpg"],		// convert converts this to SVG incorrectly and is wildly different on different hosts
-		xbm             : ["fig.icon.X", "pirhanna.rm", "world.xbm"]	// sometimes it's hiJaakExpress, sometimes it's canvas
+		xbm             : ["fig.icon.X", "photon00.m.cbm", "pirhanna.rm", "world.xbm"]	// sometimes it's hiJaakExpress, sometimes it's canvas
 	},
 	video :
 	{
@@ -444,6 +444,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"music/proPacker",
 	"music/proRunner",
 	"music/proTracker",
+	"music/quartetST",	// qts.cadaver is missing it's smp.cadaver file and thus isn't identified as a quartetST file
 	"music/richardJoseph",
 	"music/sampleTracker",
 	"music/starTrekkerPacker",

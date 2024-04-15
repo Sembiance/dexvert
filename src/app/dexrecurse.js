@@ -1,6 +1,6 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
@@ -273,6 +273,24 @@ if(webServer)
 	await webServer.start();
 }
 
+const SAMPLE_PATH_SUMS = {};
+async function isNewSampleFile(dexformatid, sampleFilePath)
+{
+	if((EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)>=DESIRED_SAMPLE_COUNT)
+		return false;
+
+	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid))
+		return false;
+
+	SAMPLE_PATH_SUMS[dexformatid] ||= await (EXISTING_SAMPLE_FILES[dexformatid] || []).parallelMap(async filename => await hashUtil.hashFile("blake3", path.join(import.meta.dirname, "..", "..", "test", "sample", dexformatid, filename)));
+
+	const b3sum = await hashUtil.hashFile("blake3", sampleFilePath);
+	if(SAMPLE_PATH_SUMS[dexformatid].includes(b3sum))
+		return false;
+
+	return true;
+}
+
 async function processNextQueue()
 {
 	const taskProps = taskQueue.shift();
@@ -296,7 +314,8 @@ async function processNextQueue()
 
 	try
 	{
-		const rpcData = {op : "dexvert", inputFilePath : path.join(fileDirPath, task.relFilePath), outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10), dexvertOptions};
+		const inputFilePath = path.join(fileDirPath, task.relFilePath);
+		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10), dexvertOptions};
 		if(taskProps.fileMeta)
 			rpcData.fileMeta = taskProps.fileMeta;
 		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION, json : rpcData});
@@ -322,7 +341,7 @@ async function processNextQueue()
 			if(dexid)
 			{
 				const dexformatid = `${dexid.family}/${dexid.formatid}`;
-				if(!dexid.unsupported && (EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)<DESIRED_SAMPLE_COUNT && !EXCLUDED_SAMPLE_FORMATS.includes(dexformatid))
+				if(!dexid.unsupported && await isNewSampleFile(dexformatid, inputFilePath))
 				{
 					newSampleFiles[dexformatid] ||= [];
 					newSampleFiles[dexformatid].push(task.relFilePath);

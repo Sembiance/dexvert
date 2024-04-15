@@ -7,7 +7,7 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Converts any 'hex' dumps from ACX back into the binary equilivant.",
 	args :
 	[
-		{argid : "inputFilePath", desc : "Input file to check", required : true},
+		{argid : "inputFilePath", desc : "Input file to process", required : true},
 		{argid : "outputDirPath", desc : "Output dir to write to", required : true}
 	]});
 

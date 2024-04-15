@@ -6,5 +6,5 @@ export class spectrumFastTracker extends Format
 	ext          = [".ftc"];
 	magic        = ["Spectrum Fast Tracker chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ayEmul"];
+	converters   = ["zxtune123", "ayEmul[matchType:magic]"];
 }

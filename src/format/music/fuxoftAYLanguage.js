@@ -6,5 +6,5 @@ export class fuxoftAYLanguage extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Fuxoft_AY_Language";
 	ext        = [".fxm"];
 	magic      = ["Fuxoft AY Language module"];
-	converters = ["ayEmul"];
+	converters = ["ayEmul[matchType:magic]"];
 }

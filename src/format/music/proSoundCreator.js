@@ -6,5 +6,5 @@ export class proSoundCreator extends Format
 	ext          = [".psc"];
 	magic        = ["Spectrum Pro Sound Creator chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ayEmul"];
+	converters   = ["zxtune123", "ayEmul[matchType:magic]"];
 }

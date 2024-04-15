@@ -6,5 +6,5 @@ export class globalTracker extends Format
 	ext          = [".gtr"];
 	magic        = ["Spectrum Global Tracker chiptune"];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ayEmul"];
+	converters   = ["zxtune123", "ayEmul[matchType:magic]"];
 }

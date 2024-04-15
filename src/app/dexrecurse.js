@@ -47,6 +47,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"image/png",
 	"image/svg",
 	"image/webp",
+	"poly/glTF",
 	"text/cue",
 	"text/csv",
 	"text/css",

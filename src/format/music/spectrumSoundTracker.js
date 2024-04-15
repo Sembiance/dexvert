@@ -7,5 +7,5 @@ export class spectrumSoundTracker extends Format
 	matchPreExt  = true;
 	magic        = [/^Spectrum Sound Tracker .*chiptune$/];
 	metaProvider = ["musicInfo"];
-	converters   = ["zxtune123", "ayEmul"];
+	converters   = ["zxtune123", "ayEmul[matchType:magic]"];
 }

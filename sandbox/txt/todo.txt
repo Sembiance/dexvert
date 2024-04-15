@@ -86,6 +86,13 @@
 /--------------\
 | Low Priority |
 \--------------/
+* There was a product called Macromedia Authorware (later Adobe Authorware) that could create interactive e-learning stuff
+  It was also oftne used for interactive stuff on CD's, such as: https://discmaster.textfiles.com/view/4/100%20Fonts.iso/FONTMGR/Demos/PtxDemo.exe/Finaldem.exe
+  It could be compiled to an .exe and supported both mac and pc.
+  About 25 or so unique ones can be found on discmaster: https://discmaster.textfiles.com/search?q=%22Authorware+file%22&qfields=filename&qfields=ext&qfields=content&family=text&formatid=txt&dedup=dedup
+  There may be more, as the search term I used may be pretty specific to the particular version 4 that the above example is from
+  It would be great if the authorware content could be 'extracted' from the .exe file somehow (probably protected/compressed) and then further extracted into the original media assets
+
 * It might be fun to write a parser for this obscure format: https://breakintochat.com/wiki/Instant_Graphics_and_Sound_(IGS)
   It's documented pretty well in sandbox/app/IGSED25.ZIP  -> MODEMS/MOD_A2L/IGSED25/IGS217.TXT
   It also does sound and music though, so maybe this is more of an archive producing both images and audio? or maybe a video?

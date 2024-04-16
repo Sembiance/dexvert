@@ -5,7 +5,7 @@ Others are not converted because it was deemed low priority, or there are no kno
 
 
 
-## Archive (60)
+## Archive (61)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -51,6 +51,7 @@ Family/Format | Name | Extensions | Notes
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/redArchive](https://discmaster.textfiles.com/search?formatid=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
+[archive/riffMultimediaMovie](https://discmaster.textfiles.com/search?formatid=riffMultimediaMovie) | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | deark is working on extracting the images, I'm working on extracting the sounds/strings/text
 [archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?formatid=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
@@ -940,7 +941,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (25)
+## Video (24)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -963,7 +964,6 @@ Family/Format | Name | Extensions | Notes
 [video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?formatid=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 [video/ratvidVideo](https://discmaster.textfiles.com/search?formatid=ratvidVideo) | RATVID Video | .vdo | 
 [video/riffANIM](https://discmaster.textfiles.com/search?formatid=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
-[video/riffMultimediaMovie](https://discmaster.textfiles.com/search?formatid=riffMultimediaMovie) | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [15 sample files](https://sembiance.com/fileFormatSamples/video/riffMultimediaMovie/) - Couldn't find a converter or player for it
 [video/screenCamVideo](https://discmaster.textfiles.com/search?formatid=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?formatid=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 [video/completeAnimatorFilm](https://discmaster.textfiles.com/search?formatid=completeAnimatorFilm) | The Complete Animator Film | .tca | 

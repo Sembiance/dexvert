@@ -7,5 +7,5 @@ export class riffMultimediaMovie extends Format
 	ext         = [".mmm"];
 	magic       = ["MultiMedia Movie format video", /RIFF .*multimedia movie$/];
 	unsupported = true;
-	notes       = "Couldn't find a converter or player for it";
+	notes       = "deark is working on extracting the images, I'm working on extracting the sounds/strings/text";
 }

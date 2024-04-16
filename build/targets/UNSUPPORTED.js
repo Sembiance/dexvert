@@ -19,8 +19,8 @@ Others are not converted because it was deemed low priority, or there are no kno
 ${(await Object.values(unsupportedFormats).map(f => f.familyid).unique().sortMulti().parallelMap(async familyid => `
 
 ## ${familyid.toProperCase()} (${Object.values(unsupportedFormats).filter(f => f.familyid===familyid).length.toLocaleString()})
-Family | Name | Extensions | Notes
------- | ---- | ---------- | -----
+Family/Format | Name | Extensions | Notes
+------------- | ---- | ---------- | -----
 ${(await Object.values(unsupportedFormats).filter(f => f.familyid===familyid).sortMulti(f => f.name).parallelMap(async f =>
 		{
 			const noteParts = [];
@@ -36,7 +36,7 @@ ${(await Object.values(unsupportedFormats).filter(f => f.familyid===familyid).so
 			const noteText = (f.notes || "").replaceAll("\n", " ").trim();
 			if(noteText && noteText.length>0)
 				noteParts.push(noteText);
-			return (`${f.familyid} | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
+			return (`[${f.familyid}/${f.formatid}](https://discmaster.textfiles.com/search?formatid=${f.formatid}) | ${f.website ? `[${f.name}](${f.website})` : f.name} | ${(f.ext || []).join(" ")} | ${noteParts.join(" - ")}`);
 		})).join("\n")}
 `)).join("\n")}
 `);

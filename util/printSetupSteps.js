@@ -2,6 +2,7 @@ import {xu} from "xu";
 import {programs, init as initPrograms} from "../src/program/programs.js";
 await initPrograms();
 
+console.log("Install gentoo with: installGentoo --phase=2 --scrubPartitionMap --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
 console.log("Run the following as root on a fresh Gentoo system to be able to run dexvert:\n");
 
 [

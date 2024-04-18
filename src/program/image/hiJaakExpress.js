@@ -17,6 +17,7 @@ export class hiJaakExpress extends Program
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
 			
 			Send("c:\\out\\out.bmp{ENTER}")
+			WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*4}, ${xu.SECOND*30})
 			WinWaitClose($mainWindow, "", 10)
 			
 			KillAll("loco.exe")

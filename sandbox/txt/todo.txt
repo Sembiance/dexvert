@@ -1,7 +1,14 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* See if I can support image/inAVisionDrawing with: https://winworldpc.com/product/micrografx-windows-convert/2x
 
+* Try out these converter programs (temporarily test each on a VNC win2k/winxp):
+  Hijaak Pro (has some 3D support, run on WinXP): https://winworldpc.com/product/hijaak/40
+  Software Bridge: https://winworldpc.com/product/software-bridge%20/3x
+  Ulead iPhoto: https://winworldpc.com/product/ulead-iphoto/4x-plus
+  Micrografx Graphics Suite (check out Picture Publisher, Designer and Simply 3D): https://winworldpc.com/product/micrografx-graphics-suite/2
+  Micrografx Draw: https://winworldpc.com/product/micrografx-draw/60
 
 /---------------\
 | High Priority |

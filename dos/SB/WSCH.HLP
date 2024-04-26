@@ -1,0 +1,27 @@
+OUTPUT CHARACTER SET
+
+    This parameter allows the user
+to choose the character set to be
+supported when creating WordStar
+documents.  This is necessary based
+on different WordStar versions
+which support different character
+sets.
+
+    1) Full WordStar Release 4 set.
+Choose this option when converting
+to WordStar Release 4.
+
+    2) Standard Ascii Set.  Choose
+this option when converting to any
+WordStar version up to and
+including 3.31.
+
+    3) Full DOS set.  This option
+will support the full set of DOS
+extended characters which
+currently is only available in
+WordStar Release 3.4
+
+Default: Full WordStar Release 4
+

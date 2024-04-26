@@ -1,0 +1,23 @@
+CHECK FOR CENTERED LINES
+
+    When this parameter is set to
+YES, the software generates a Line
+Center control code in the
+translated document each time a
+line in the document is centered
+between the columns determined to
+be the left and right margins.
+
+    When set at NO, the software
+does not check for centering.  A
+blank area preceding a line of text
+is attributed to tabbing or
+spacing, and no center codes are
+inserted in the translated
+document.
+
+    The RETURN key toggles between
+YES and NO.
+
+Default: YES
+

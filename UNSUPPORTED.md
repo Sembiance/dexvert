@@ -1,11 +1,11 @@
-# Unsupported File Formats (908)
+# Unsupported File Formats (918)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (61)
+## Archive (60)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -33,6 +33,7 @@ Family/Format | Name | Extensions | Notes
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [1 sample file](https://sembiance.com/fileFormatSamples/archive/installerVISE/) - Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
+[archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -44,14 +45,12 @@ Family/Format | Name | Extensions | Notes
 [archive/oricDisk](https://discmaster.textfiles.com/search?formatid=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?formatid=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 [archive/os2FTCOMP](https://discmaster.textfiles.com/search?formatid=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
-[archive/os2InstallPackage](https://discmaster.textfiles.com/search?formatid=os2InstallPackage) | OS/2 Installation Package | .pkg .pak | [8 sample files](https://sembiance.com/fileFormatSamples/archive/os2InstallPackage/) - Could support this with OS/2 unpack if I ever emulated OS/2
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/redArchive](https://discmaster.textfiles.com/search?formatid=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
-[archive/riffMultimediaMovie](https://discmaster.textfiles.com/search?formatid=riffMultimediaMovie) | [RIFF Multimedia Movie](http://fileformats.archiveteam.org/wiki/RIFF_Multimedia_Movie) | .mmm | [15 sample files](https://sembiance.com/fileFormatSamples/archive/riffMultimediaMovie/) - deark is working on extracting the images, I'm working on extracting the sounds/strings/text
 [archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?formatid=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
@@ -115,7 +114,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (43)
+## Document (52)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/adobeInDesignDocument](https://discmaster.textfiles.com/search?formatid=adobeInDesignDocument) | Adobe InDesign Document | .indd .ind | 
@@ -123,14 +122,18 @@ Family/Format | Name | Extensions | Notes
 [document/amigaVisionFlow](https://discmaster.textfiles.com/search?formatid=amigaVisionFlow) | Amiga Vision Flow | .avf | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaVisionFlow/)
 [document/amigaWriter](https://discmaster.textfiles.com/search?formatid=amigaWriter) | AmigaWriter Documet |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 [document/astoundPresentation](https://discmaster.textfiles.com/search?formatid=astoundPresentation) | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://sembiance.com/fileFormatSamples/document/astoundPresentation/)
+[document/borlandSprint](https://discmaster.textfiles.com/search?formatid=borlandSprint) | [Borland Sprint](https://winworldpc.com/product/borland-sprint) | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/document/borlandSprint/) - DOS based word processor. Haven't investigated it for magic. Not 100% sure my sample file is Borland Sprint, but couldn't find another WordProcessor called sprint.
 [document/calamusDocument](https://discmaster.textfiles.com/search?formatid=calamusDocument) | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
 [document/canDoDeck](https://discmaster.textfiles.com/search?formatid=canDoDeck) | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://sembiance.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
+[document/ceoWrite](https://discmaster.textfiles.com/search?formatid=ceoWrite) | [CEOWrite](https://en.wikipedia.org/wiki/Data_General) | .cw | [1 sample file](https://sembiance.com/fileFormatSamples/document/ceoWrite/) - Old word processor. Haven't investigated it for magic.
 [document/clarionDatabase](https://discmaster.textfiles.com/search?formatid=clarionDatabase) | Clarion Database File | .dat | [49 sample files](https://sembiance.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. soffice didn't do anything with it either.
 [document/cloantoC1Text](https://discmaster.textfiles.com/search?formatid=cloantoC1Text) | Cloanto C1-Text Document | .c1text | [1 sample file](https://sembiance.com/fileFormatSamples/document/cloantoC1Text/) - Have only encountered just 1 file in the wild. If I encounter more, I can get Cloanto C1-Text program, load it into the Amiga and convert it there.
 [document/dartHypertext](https://discmaster.textfiles.com/search?formatid=dartHypertext) | Dart Hypertext |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
 [document/dBASECompiledForm](https://discmaster.textfiles.com/search?formatid=dBASECompiledForm) | dBASE Compiled Form | .fro .fmo | 
+[document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | VAX based word processor. Haven't investigated it for magic.
 [document/envisionPublisherDoc](https://discmaster.textfiles.com/search?formatid=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
 [document/epicTFP](https://discmaster.textfiles.com/search?formatid=epicTFP) | [Epic TFP Document](https://www.vogons.org/viewtopic.php?f=5&t=35657&start=40) | .tfp | Used in EPIC games. Supposedly can contain hyperlinks, graphics and animations all in a single document format
+[document/eurekaMercuryHelp](https://discmaster.textfiles.com/search?formatid=eurekaMercuryHelp) | Eureka/Mercury Help | .hlp | 
 [document/excellenceDocument](https://discmaster.textfiles.com/search?formatid=excellenceDocument) | Excellence! Document | .doc | 
 [document/finalCalcSpreadsheet](https://discmaster.textfiles.com/search?formatid=finalCalcSpreadsheet) | FinalCalc Spreadsheet | .sheet | [1 sample file](https://sembiance.com/fileFormatSamples/document/finalCalcSpreadsheet/)
 [document/flowCharting](https://discmaster.textfiles.com/search?formatid=flowCharting) | [Flow Charting](http://fileformats.archiveteam.org/wiki/Flow_Charting) | .cht .fcd .gfc .pdq .fc5 .fcx | [3 sample files](https://sembiance.com/fileFormatSamples/document/flowCharting/)
@@ -147,6 +150,8 @@ Family/Format | Name | Extensions | Notes
 [document/mediaPaqDCF](https://discmaster.textfiles.com/search?formatid=mediaPaqDCF) | MediaPaq DCF Catalog | .dcf | [5 sample files](https://sembiance.com/fileFormatSamples/document/mediaPaqDCF/) - Metadata and thumbnails archive for MediaClips clip art CDs. NOT related to the DCF camera standard.
 [document/microsoftAdvisorHelp](https://discmaster.textfiles.com/search?formatid=microsoftAdvisorHelp) | Microsoft Advisor Help | .hlp | [4 sample files](https://sembiance.com/fileFormatSamples/document/microsoftAdvisorHelp/)
 [document/microsoftOneNote](https://discmaster.textfiles.com/search?formatid=microsoftOneNote) | Microsoft OneNote | .one | 
+[document/multiMate](https://discmaster.textfiles.com/search?formatid=multiMate) | [MultiMate Document](https://winworldpc.com/product/multimate) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/multiMate/) - DOS based word processor. Not sure if there is magic for this or not, haven't tried gathering samples from the various versions of the software available.
+[document/navyDIF](https://discmaster.textfiles.com/search?formatid=navyDIF) | [NAVY DIF](https://www.govinfo.gov/content/pkg/GOVPUB-C13-54457a38751dd2826804944b2be585f3/pdf/GOVPUB-C13-54457a38751dd2826804944b2be585f3.pdf) | .dif | [1 sample file](https://sembiance.com/fileFormatSamples/document/navyDIF/) - A format from the US NAVY for interchanging word processing files. Haven't investigated it for magic.
 [document/opHelp](https://discmaster.textfiles.com/search?formatid=opHelp) | OPHelp | .hlp | [5 sample files](https://sembiance.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
 [document/orCADSchematic](https://discmaster.textfiles.com/search?formatid=orCADSchematic) | OrCAD Schematic | .sch .sht | 
 [document/pSuite](https://discmaster.textfiles.com/search?formatid=pSuite) | P-Suite |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/pSuite/)
@@ -160,7 +165,10 @@ Family/Format | Name | Extensions | Notes
 [document/turboCalc](https://discmaster.textfiles.com/search?formatid=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/vCard](https://discmaster.textfiles.com/search?formatid=vCard) | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://sembiance.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 [document/vizawriteDocument](https://discmaster.textfiles.com/search?formatid=vizawriteDocument) | Vizawrite Document |  | 
+[document/volkswriter](https://discmaster.textfiles.com/search?formatid=volkswriter) | [Volkswriter](https://winworldpc.com/product/volkswriter) | .vw | [1 sample file](https://sembiance.com/fileFormatSamples/document/volkswriter/) - DOS based word processor. Haven't investigated it for magic.
+[document/wangIWP](https://discmaster.textfiles.com/search?formatid=wangIWP) | [WANG Integrated Word Processor](https://archive.org/details/wangeditor) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/wangIWP/) - DOS based word processor. Haven't investigated it for magic.
 [document/winFaxDocument](https://discmaster.textfiles.com/search?formatid=winFaxDocument) | WinFax Document | .fxm .fxr | 
+[document/wordMARC](https://discmaster.textfiles.com/search?formatid=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.
 
 
 
@@ -305,7 +313,7 @@ Family/Format | Name | Extensions | Notes
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?formatid=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
 [image/idSoftwareSprite](https://discmaster.textfiles.com/search?formatid=idSoftwareSprite) | ID Software Sprite | .spr | [3 sample files](https://sembiance.com/fileFormatSamples/image/idSoftwareSprite/)
 [image/imagineTexture](https://discmaster.textfiles.com/search?formatid=imagineTexture) | [Imagine Texture](http://fileformats.archiveteam.org/wiki/Imagine_Texture_File) | .itx | [5 sample files](https://sembiance.com/fileFormatSamples/image/imagineTexture/)
-[image/inAVisionDrawing](https://discmaster.textfiles.com/search?formatid=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/)
+[image/inAVisionDrawing](https://discmaster.textfiles.com/search?formatid=inAVisionDrawing) | [In-a-Vision Drawing](http://fileformats.archiveteam.org/wiki/In-A-Vision) | .pic | [9 sample files](https://sembiance.com/fileFormatSamples/image/inAVisionDrawing/) - In-a-Vision and the Micrografx Windows Convet program (both on winworld) are both Windows 1.x/2.x programs that don't work in Win2k. Not aware of anything else that can convert these, as Micrografx Designer 4 does not.
 [image/instantGraphicsAndSound](https://discmaster.textfiles.com/search?formatid=instantGraphicsAndSound) | [Instant Graphics and Sound](http://fileformats.archiveteam.org/wiki/IGS) | .igs .ig | [11 sample files](https://sembiance.com/fileFormatSamples/image/instantGraphicsAndSound/) - No known converter yet. Seen a recent resurgenc in interest in 2024
 [image/intergraphRasterRGB](https://discmaster.textfiles.com/search?formatid=intergraphRasterRGB) | Intergraph Raster RGB | .rgb | 
 [image/introCAD](https://discmaster.textfiles.com/search?formatid=introCAD) | [IntroCAD Drawing](https://www.amigafuture.de/asd.php?asd_id=476) | .cad | [3 sample files](https://sembiance.com/fileFormatSamples/image/introCAD/)
@@ -454,7 +462,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (445)
+## Other (447)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -482,6 +490,7 @@ Family/Format | Name | Extensions | Notes
 [other/aegisImpactSlideshow](https://discmaster.textfiles.com/search?formatid=aegisImpactSlideshow) | Aegis Impact! Slideshow | .sld | 
 [other/aegisProMotionGeometry](https://discmaster.textfiles.com/search?formatid=aegisProMotionGeometry) | Aegis Pro Motion Geometry | .geo | 
 [other/aibbLoadModule](https://discmaster.textfiles.com/search?formatid=aibbLoadModule) | AIBB load Module | .module .aibb | 
+[other/alchemyMindworksDriver](https://discmaster.textfiles.com/search?formatid=alchemyMindworksDriver) | Alchemy Mindworks Driver | .drv .pdr | 
 [other/alchemyMindworksResource](https://discmaster.textfiles.com/search?formatid=alchemyMindworksResource) | Alchemy Mindworks Resource | .res | 
 [other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?formatid=allwaysPrinterDriver) | Allways Printer Driver | .apc .apd .apf | 
 [other/alphaFourScript](https://discmaster.textfiles.com/search?formatid=alphaFourScript) | Alpha Four Script | .scp | 
@@ -815,6 +824,7 @@ Family/Format | Name | Extensions | Notes
 [other/simCityCity](https://discmaster.textfiles.com/search?formatid=simCityCity) | SimCity City | .cty | 
 [other/skunnyKartGameData](https://discmaster.textfiles.com/search?formatid=skunnyKartGameData) | Skunny Kart Library Game Data | .lid | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?formatid=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
+[other/slideSavedGame](https://discmaster.textfiles.com/search?formatid=slideSavedGame) | Slide Saved Game | .sld | 
 [other/smartDrawTemplate](https://discmaster.textfiles.com/search?formatid=smartDrawTemplate) | SmartDraw Template | .sdt .sdr | 
 [other/snifferCapture](https://discmaster.textfiles.com/search?formatid=snifferCapture) | Sniffer Capture | .snf .trc | 
 [other/snoopCapture](https://discmaster.textfiles.com/search?formatid=snoopCapture) | Snoop Capture | .snoop | 

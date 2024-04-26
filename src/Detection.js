@@ -60,5 +60,5 @@ export class Detection
 
 export async function getDetections(f, {xlog, detectors=DETECTOR_PROGRAMS}={})
 {
-	return (await Promise.all(detectors.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections);
+	return (await Promise.all(detectors.map(programid => Program.runProgram(programid, f, {xlog, autoUnlink : true})))).flatMap(o => o.meta.detections).filter(detection => !!detection);
 }

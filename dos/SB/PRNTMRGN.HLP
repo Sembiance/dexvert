@@ -1,0 +1,16 @@
+DEFAULT PRINT MARGIN
+ 
+    For word processing packages
+which support a print margin
+(different from the left margin)
+the parameter passes along a value
+as the print margin for the
+translated document.  
+
+    Enter the number of spaces
+desired between the left edge of
+the page and the first print column
+on the page.
+
+Default: 10
+

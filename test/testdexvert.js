@@ -126,7 +126,7 @@ const IGNORED_META_KEYS =
 {
 	image :
 	{
-		jng : ["colorCount"],
+		jng : ["colorCount", "driOffset", "driCount"],
 		pes : ["colorCount"]
 	}
 };

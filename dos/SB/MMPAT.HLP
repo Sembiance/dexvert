@@ -1,0 +1,22 @@
+PRINTER ACTION TABLE
+
+    The Printer Action Table
+(PAT) is one of three tables that
+sends print information and
+commands, contained in your
+document, to your printer.
+
+    PATs contain codes which
+tell your printer how to perform
+MultiMate word processing
+functions.  See your MultiMate
+Printer Guide for additional
+information.
+
+    Enter the name of your
+MultiMate Printer Action Table (up
+to eight characters) and press
+RETURN.
+
+Default: TTYCRLF
+

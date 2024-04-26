@@ -1,0 +1,18 @@
+PAGE LENGTH
+
+    This parameter helps to
+determine where page breaks occur.
+The conversion scans the document
+looking for form feed character. If
+found, a required page break is
+issued. If no form feed is en-
+countered within a number of lines
+specified here, a soft page break
+is issued.
+
+    Enter the number of physical
+lines per printed page, up to the
+maximum of 99.
+
+Default: 66 (lines per page)
+

@@ -1,0 +1,19 @@
+OUTPUT FILE TYPE
+
+    Because of the differences
+in function handling (i.e. footers
+and footnotes) between versions of
+MultiMate, this parameter defines
+the type of output MultiMate
+document to produce.
+
+    The RETURN key toggles
+between "MultiMate Advantage II
+version 1.0" and "MultiMate
+version 3.6".  Choose the version
+you plan to edit and print your
+documents from.
+
+Default: MultiMate Advantage II
+version 1.0
+

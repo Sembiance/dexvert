@@ -1,0 +1,28 @@
+REPLACEMENT CHARACTER
+
+    Valid characters in one word
+processor may not be recognized by
+another.
+
+    This parameter defines a
+character to insert in a translated
+document when a character which
+cannot be translated appears in the
+original. When the translated
+document is edited, these
+characters mark locations which
+might need attention.
+
+    Type the Hex-ASCII
+representation of the desired
+replacement character, and press
+RETURN. (See Appendix 1 for Hex-
+ASCII codes).
+
+Default: 40 (@)
+
+NOTE: For DCA/FFT, DCA/RFT, and
+DisplayWrite 2 and 3 (TXT), the
+replacement character is "7C",
+the "@" in EBCDIC.
+

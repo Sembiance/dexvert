@@ -1,0 +1,14 @@
+SUBSEQUENT PAGE HEADER LENGTH
+
+    This parameter defines the
+number of lines of header text,
+starting from the 2nd page until
+the end of the document.
+
+    The actual page length is
+indicated by the page length
+option. The header length is
+included in the page length.
+
+Default: 0
+

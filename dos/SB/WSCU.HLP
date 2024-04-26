@@ -1,0 +1,25 @@
+CONTINUOUS UNDERLINING SUPPORT
+
+    This parameter defines the
+method the conversion will use when
+supporting continuous underlining.
+Versions of WordStar 3.31 and
+earlier did not support underlining
+white space.  If this parameter is
+set to "Underscore White Space" the
+conversion will replace spaces by
+underscores if continuous
+underlining is on (due to word
+wrapping considerations this is not
+done in paragraphs).
+
+    The second choice "Do Not
+Underscore White Space" should be
+selected for WordStar Version 4.0
+which provides a new dot command
+for use in supporting continuous
+underlining.
+
+Default: Do Not Underscore White
+Space.
+

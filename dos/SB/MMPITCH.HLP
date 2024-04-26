@@ -1,0 +1,21 @@
+DOCUMENT DEFAULT PITCH
+
+    This value will be the default
+pitch put into the Print Options
+Menu of the MultiMate document.
+
+    Values range from 1 to 9
+and will be used to calculate
+the positioning of tabstops and
+margins on the MultiMate format
+lines in the document.
+
+    Changing the default pitch of
+a MultiMate document after it has
+been converted is not suggested
+since the format lines would then
+have to be manually altered to
+preserve the original layout.
+
+Default: 4  (10 chars/inch)
+

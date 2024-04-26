@@ -1,0 +1,25 @@
+PRINTER TYPE
+
+    This parameter works in
+conjunction with the printer type
+that will be used to print out the
+converted Volkswriter document.
+The values that the parameter can
+take can be any value between 1 and
+48, and correspond to the first 48
+printer types available in
+Volkswriter's printer table (see
+Appendix D in your Volkswriter
+manual for the list of printer
+types.)
+
+    For example, if this parameter
+is set to a value of 17, the
+conversion will send this value to
+the Volkswriter document which will
+be automatically configured to
+print using the Epson FX/SX
+printer.
+
+Default : 3 (any printer)
+

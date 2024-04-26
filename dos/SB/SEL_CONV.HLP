@@ -1,0 +1,23 @@
+SYSTEM SETUP/SELECT CONVERSIONS
+
+    "Conversion A" and "Conversion B" are
+the two word processing packages between
+which documents will be translated.
+Translation is not affected by which of the
+pair is identified as A or B.
+
+    To change to different word
+processors: use the up and down arrows to
+scroll through the list of available
+conversions.  To select the currently
+highlighted one, press the left or right
+arrow to identify it as conversion A or B.
+To change or view the system parameters
+press the System Parameters key (F1).
+
+    To change or view the (optional)
+parameters associated with A or B
+conversion, press the Conversion A
+Parameters key (F2) or the Conversion B
+Parameters key (F3), respectively.
+

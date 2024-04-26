@@ -15,6 +15,9 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputDirPath", desc : "Output directory to extract to", required : true}
 	]});
 
+// Sources:
+// https://github.com/mainframed/HACKERS.EXE/blob/main/dump_rmmp.py#L54C16-L54C28
+// https://discmaster.textfiles.com/view/10255/CICA.cdr/win_nt/multimed/samples/mmpf.zip/MMPF.C
 
 const fileSize = (await Deno.stat(argv.inputFilePath)).size;
 const reader = new UInt8ArrayReader(await Deno.readFile(argv.inputFilePath), {endianness : "le"});
@@ -40,7 +43,7 @@ while(reader.pos+16<=cftcLength)
 	chunks.push({tag, length, seq, offset});
 }
 
-const meta = {strs : [], vwci : {}, fonts : [], dibs : {}};
+const meta = {strs : [], vwci : {}, fonts : [], dibs : {}, stxts : []};
 
 for(const chunk of chunks)
 {
@@ -96,10 +99,10 @@ for(const chunk of chunks)
 		for(let i=0;i<numFonts;i++)
 			meta.fonts.push(data.strPascal());
 	}
-	else if (["DIB ", "dib "].includes(chunk.tag))
+	else if(["DIB ", "dib "].includes(chunk.tag))
 	{
-		// todo: right now these just write to disk, but can't be viewed, need to figure out the proper BMP header for this stuff
-		data.skip(6);
+		// skip these, deark handles these
+		/*data.skip(6);
 		const w = data.uint32();
 		const h = data.uint32();
 		const colorPlanes = data.uint16();
@@ -114,7 +117,7 @@ for(const chunk of chunks)
 		meta.dibs[chunk.seq] = {w, h, colorPlanes, bitsPerPixel, compression, sizeImage, xDPI, yDPI, colorsUsed, colorsImportant};
 		
 		await data.writeToDisk(data.remaining(), path.join(argv.outputDirPath, `${chunk.seq}.dib`));
-		xlog.info`${chunk.seq} ${w}x${h} ${sizeImage} bytes (compressed: ${compression})`;
+		xlog.info`${chunk.seq} ${w}x${h} ${sizeImage} bytes (compressed: ${compression})`;*/
 	}
 	else if(["SND ", "snd "].includes(chunk.tag))
 	{
@@ -123,6 +126,16 @@ for(const chunk of chunks)
 		await data.writeToDisk(data.remaining(), tmpRawFilePath);
 		await runUtil.run("sox", ["-t", "raw", "-r", "22050", "-c", "1", "-b", "8", "-e", "unsigned", tmpRawFilePath, path.join(argv.outputDirPath, `${chunk.seq}_${filename}.wav`)]);
 		await fileUtil.unlink(tmpRawFilePath);
+	}
+	else if(["STXT", "stxt"].includes(chunk.tag))
+	{
+		data.skip(8);
+		const textLength = data.uint16(true);
+		if(textLength)
+		{
+			data.skip(4);
+			meta.stxts.push(data.str(textLength));
+		}
 	}
 	else
 	{
@@ -135,5 +148,19 @@ for(const chunk of chunks)
 	//xlog.info`${data.arr.asHex()}`;
 }
 
-await fileUtil.writeTextFile(path.join(argv.outputDirPath, "meta.json"), JSON.stringify(meta));
+const r = [];
+if(meta.name?.length)
+	r.push(`Name\n----\n${meta.name}\n`);
+if(meta.strs.length)
+	r.push(`Strings\n------\n${meta.strs.join("\n")}\n`);
+if(meta.stxts.length)
+	r.push(`stxt\n----\n${meta.stxts.join("\n")}\n`);
+if(meta.vwacStr?.length)
+	r.push(`Script Channel Commands\n--------------------\n${meta.vwacStr}\n`);
+if(Object.keys(meta.vwci).length)
+	r.push(`vwci\n----\n${Object.entries(meta.vwci).map(([id, o]) => `${id}: ${o.other}`).join("\n")}\n`);
+if(meta.fonts.length)
+	r.push(`Fonts\n-----\n${meta.fonts.join("\n")}\n`);
+
+await fileUtil.writeTextFile(path.join(argv.outputDirPath, "meta.txt"), r.join("\n"));
 //xlog.info`${meta}`;

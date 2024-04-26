@@ -1,0 +1,27 @@
+INTERMEDIATE DIRECTORY 
+ 
+    Determines where the 
+intermediate work files are stored 
+during translation.  Although these 
+are erased after each translation, 
+they temporarily require 
+approximately 1 1/2 times the size 
+of the largest document that will 
+be converted. 
+ 
+    This parameter is important 
+when running from a floppy drive, 
+as there must be sufficient space 
+for the input document files, the 
+temporary work files, and the 
+converted files all on a single 
+floppy disk. 
+ 
+    Enter a drive letter or the 
+name of an existing directory on 
+the hard disk, and press RETURN. 
+ 
+Default:  The current drive and 
+directory. 
+ 
+

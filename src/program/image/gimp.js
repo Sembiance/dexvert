@@ -11,10 +11,9 @@ export class gimp extends Program
 
 	pre = async r =>
 	{
-		// Originally I used this GIST for teaching me python 3 syntax for GIMP: https://github.com/nicolalandro/u2net_gimp_plugin/blob/639fd6cb7bed3d7b920c0b0666fcda3c3506e2d4/u2net_gimp_plugin.py
-		// But that GIST is now OUT OF DATE and does not work. I fixed it by examining: https://github.com/GNOME/gimp/blob/196f1d6e9534938d9aa15881857cef56dc721ec6/plug-ins/python/file-openraster.py#L413
-		// I could recode the below with JavaScript if I so chose: https://gitlab.gnome.org/GNOME/gimp/-/blob/master/extensions/goat-exercises/goat-exercise-gjs.js
-		// NOTE: GIMP isn't currently being compiled with JavaScript support so...
+		// DOCUMENTATION: Open gimp and go to Help->Procedure Browser
+		// In there you can look at the various procedures that GIMP has available along with which named arguments to pass and their types
+		// An up to date example of the latest python code is: file:///usr/lib64/gimp/2.99/plug-ins/file-openraster/file-openraster.py
 		await fileUtil.writeTextFile(path.join(r.f.root, "dexvert.py"), `import gi
 from gi.repository import GObject
 from gi.repository import Gimp
@@ -23,49 +22,42 @@ from gi.repository import Gio
 def loadAndSave(inPath, outPath):
 	pdb = Gimp.get_pdb()
 
-	image = pdb.run_procedure(
-        "gimp-file-load",
-        [
-            GObject.Value(Gimp.RunMode, Gimp.RunMode.NONINTERACTIVE),
-            GObject.Value(Gio.File, Gio.File.new_for_path(inPath))
-        ]
-    ).index(1)
+	loadProc = pdb.lookup_procedure("gimp-file-load")
+	loadConfig = loadProc.create_config()
+	loadConfig.set_property("run-mode", Gimp.RunMode.NONINTERACTIVE)
+	loadConfig.set_property("file", Gio.File.new_for_path(inPath))
+	image = loadProc.run(loadConfig).index(1)
 
 	if type(image) is Gimp.Image:
-		drawable = pdb.run_procedure(
-			"gimp-file-load-layer",
-			[
-				GObject.Value(Gimp.RunMode, Gimp.RunMode.NONINTERACTIVE),
-				GObject.Value(Gimp.Image, image),
-				GObject.Value( Gio.File, Gio.File.new_for_path(inPath))
-			]
-		).index(1)
-
+		loadLayerProc = pdb.lookup_procedure("gimp-file-load-layer")
+		loadLayerConfig = loadLayerProc.create_config()
+		loadLayerConfig.set_property("run-mode", Gimp.RunMode.NONINTERACTIVE)
+		loadLayerConfig.set_property("image", image)
+		loadLayerConfig.set_property("file", Gio.File.new_for_path(inPath))
+		drawable = loadLayerProc.run(loadLayerConfig).index(1)
+		
 		if type(drawable) is Gimp.Layer:
-			pdb.run_procedure(
-				"file-png-save",
-				[
-					GObject.Value(Gimp.RunMode, Gimp.RunMode.NONINTERACTIVE),
-					GObject.Value(Gimp.Image, image),
-					GObject.Value(GObject.TYPE_INT, 1),
-					GObject.Value(Gimp.ObjectArray, Gimp.ObjectArray.new(Gimp.Drawable, [drawable], 0)),
-					GObject.Value(Gio.File, Gio.File.new_for_path(outPath)),
-					GObject.Value(GObject.TYPE_BOOLEAN, 0),
-					GObject.Value(GObject.TYPE_INT, 9),
+			saveProc = pdb.lookup_procedure("file-png-save")
+			saveConfig = saveProc.create_config()
+			saveConfig.set_property("run-mode", Gimp.RunMode.NONINTERACTIVE)
+			saveConfig.set_property("image", image)
+			saveConfig.set_property("num-drawables", 1)
+			saveConfig.set_property("drawables", Gimp.ObjectArray.new(Gimp.Drawable, [drawable], 0))
+			saveConfig.set_property("file", Gio.File.new_for_path(outPath))
+			saveConfig.set_property("interlaced", False)
+			saveConfig.set_property("compression", 9)
+			saveConfig.set_property("bkgd", False)
+			saveConfig.set_property("offs", False)
+			saveConfig.set_property("phys", False)
+			saveConfig.set_property("time", False)
+			saveConfig.set_property("save-transparent", False)
+			saveConfig.set_property("optimize-palette", False)
+			saveProc.run(saveConfig)
 
-					GObject.Value(GObject.TYPE_BOOLEAN, False),
-					GObject.Value(GObject.TYPE_BOOLEAN, False),
-					GObject.Value(GObject.TYPE_BOOLEAN, False),
-					GObject.Value(GObject.TYPE_BOOLEAN, False)
-				]
-			)
-
-		pdb.run_procedure(
-			"gimp-quit",
-			[
-				GObject.Value(GObject.TYPE_BOOLEAN, True)
-			]
-		)`);
+		quitProc = pdb.lookup_procedure("gimp-quit")
+		quitConfig = quitProc.create_config()
+		quitConfig.set_property("force", True)
+		quitProc.run(quitConfig)`);
 	};
 
 	args       = async r => ["-ni", "--batch-interpreter", "python-fu-eval", "-b", `import sys;sys.path=['.']+sys.path;import dexvert;dexvert.loadAndSave('${r.inFile()}', '${await r.outFile("out.png")}')`];

@@ -1,0 +1,11 @@
+DEFAULT TAB STOP SETTINGS
+
+    When a tab character (hex 0x09)
+is encountered in the document, the
+conversion uses default tab stop
+settings to assign the number of
+blank spaces prefacing the indented
+text.
+
+Default: Every eighth space  
+9,17,25,33,41,49,57,65,73,81 

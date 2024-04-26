@@ -524,6 +524,7 @@ export const WEAK_VALUES =
 	/^Coordinate 3D \(subset of ADTech File Format\) file \(more generic\)$/,
 	/^CP\/M non-bootable disk image$/,
 	/^Creative C\/MS packed screen$/,
+	/^DOS 2\.0-3\.2 Backup control info/,
 	/^Dr\. Halo Font$/,
 	/^Dyalog APL transfer$/,
 	/^EPOC data store/,

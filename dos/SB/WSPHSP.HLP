@@ -1,0 +1,19 @@
+WORDSTAR PHANTOM SPACE
+
+    Phantom space is unique to
+WordStar: there is no direct
+translation available in other word
+processors.
+
+    This parameter defines a
+character to insert in a translated
+document when a Phantom Space is
+encountered in the WordStar
+original.
+
+    Enter the Hex-ASCII
+representation of the desired
+character, and press RETURN.
+
+Default: 53 ("S")
+

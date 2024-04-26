@@ -1,0 +1,126 @@
+FILE NAMING METHOD
+
+    This parameter determines how
+translated files are named.  The
+RETURN key toggles among five
+possible values:
+
+1.) Original File Name with User
+Defined Extension
+
+    The file name of the source
+document is assigned to the
+translated document in the form:
+
+[Output Directory][Original File
+Name].[User Defined Extension]
+
+    The "Output Directory" and
+"User Defined Extension" parameters
+are also used to build the file
+name.  For example, when a WordStar
+document named: "LETTER.XYZ" is
+translated to MultiMate, and the
+MultiMate parameter values are set
+to:
+
+   a. File Naming Method = Original
+      File Name with User Defined
+      Extension
+   b. Output Directory = A:
+   c. User Defined Extension = ABC
+
+the translated file will be saved
+as: A:\LETTER.ABC
+
+2.) Orignal File Name with Original
+Extension
+
+    The file name of the source
+document is assigned to the
+translated document in the form:
+
+[Output Directory][Original File
+Name].[Original Extension]
+
+    For example, when a WordStar
+document named: "LETTER.ABC" is
+translated to MultiMate and the
+MultiMate parameter values are set
+to:
+   a: File Naming Method = Original
+      File Name with Original
+      Extension
+   b. Output Directory = A:
+
+the translated file will be saved
+as: A:\LETTER.ABC
+
+3.) User Defined File Name with
+User Defined Extension
+
+    A user selected file name is
+assigned to the translated document
+in the form:
+
+[Output Directory][User Defined
+File Name].[User Defined Extension]
+
+The "Output Directory", "User
+Defined File Name" and "User
+Defined Extension" parameters are
+all used to build the file name.
+For example, when a WordStar
+document named "LETTER.ABC" is
+translated to MultiMate and the
+MultiMate parameter values are set
+to:
+   a. File Naming Method = User
+      Defined File Name with User
+      Defined Extension
+   b. Output Directory = C:\MMATE
+   c. User Defined File Name = FILE
+   d. User Defined Extension = DOC
+
+The translated file will be saved
+as: C:\MMATE\FILE.DOC
+
+4.) User Defined File Name with
+Original Extension
+
+    Only the file extension of the
+source document is assigned to the
+translated document in the form:
+
+[Output Directory][User Defined
+File Name].[Original Extension]
+
+    For example, when a WordStar
+document named "LETTER.ABC" is
+translated to MultiMate and the
+MultiMate Parameters are set to:
+
+   a.) File Naming Method = User
+       Defined File Name with
+       Original Extension
+   b.) Output Directory = A:
+   c.) User Defined File Name =
+       FILES
+
+The translated file will be saved
+as: A:\FILES.ABC
+
+5.) Prompt User for File Name
+
+    As each document is translated,
+the user is prompted to enter a
+name.  The user must include any
+desired drive letter or directory,
+and is responsible for appending
+any mandatory file extension.  For
+example: ".DOC" when translating to
+Wang PC or MultiMate.
+
+Default: Original File Name with
+User Defined Extension
+

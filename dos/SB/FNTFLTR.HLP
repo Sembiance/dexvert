@@ -1,0 +1,44 @@
+EDITING THE TYPESTYLE FILTER
+
+     The typestyle filter allows
+you to substitute typestyles from
+the original document with any
+supported typestyle in the conver-
+ted document.  This can be
+beneficial when the word processor
+you are converting to doesn't
+support the same typestyles (fonts)
+that the original word processor
+supports.
+
+     The top window displays the
+list of options.  The middle left
+column displays typestyles sup-
+ported by the original word
+processor.  The middle right
+column displays the list of
+corresponding typestyles supported
+by the word processor to which you
+are converting.  (This is the
+default translation).  The bottom
+window displays a list of the
+typestyles from which you select.
+
+     To substitute a typestyle, use
+the DOWN ARROW key to move the
+cursor to highlight the original
+typestyle.  Use the F2 key to move
+between the middle and bottom
+windows.  With the ARROW keys,
+highlight the typestyle you wish
+to substitute for the original
+typestyle (the original meaning
+the value in the middle right
+column).  Use the F3 key to
+select it as the new typestyle
+you will be converting to.
+
+     To save changes, choose F1.
+To exit without saving changes,
+choose ESC.
+

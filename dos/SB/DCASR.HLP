@@ -1,0 +1,28 @@
+SOFT RETURN REPLACEMENT METHOD
+
+    In DCA/RFT, if a line
+contains only a soft return, this
+soft return will be interpreted as
+a hard return during printing and
+pagination. However, in many word
+processors, such soft returns will
+be ignored because it does not have
+a semantic meaning.
+
+    This parameter is set up to
+allow you to choose a method of
+handling such soft returns.  These
+soft returns can be converted to
+soft returns or hard returns.
+
+Note:  In DCA, soft returns and
+hard returns are called "carrier
+returns" and "required carrier
+returns" respectively.
+
+The RETURN key toggles between
+"Keep as Soft Returns" and "Convert
+to Hard Returns".
+
+Default:  Keep as Soft Returns.
+

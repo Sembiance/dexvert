@@ -1,0 +1,48 @@
+CHARACTER ATTRIBUTE SUPPORT
+
+     The Character Attribute
+Support parameter allows you to
+determine whether bolding, under-
+lining, and overstriking should,
+(for printing purposes), be con-
+verted to the backspace (Hex 08)
+character.
+
+     For example, if the parameter
+value is set to "Support Bold/
+Underline/Overstrike with Backspace
+Character", the ASCII document will
+support bold, underline, and over-
+struck text in the following way:
+
+  a.) Bold =
+
+  "character backspace character"
+	"or A backspace A"
+
+  b.) Underline =
+
+  "character backspace underline"
+	"or A backspace _"
+
+  c.) Overstrike =
+
+  "character backspace overstrike"
+	"or A backspace /~
+
+     If the parameter value is set
+to "Do Not Support Bold/Underline/
+Overstrike Attributes", these
+character attributes will not be
+supported in the converted ASCII
+document.
+
+Default: Do Not Support Bold/Under-
+line/Overstrike Attributes
+
+NOTE:  When converting FROM ASCII,
+the conversion will support these
+character attributes if they exist
+in the original document as
+explained in the example above.
+

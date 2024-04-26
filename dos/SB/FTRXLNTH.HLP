@@ -1,0 +1,21 @@
+SUBSEQUENT PAGE FOOTER LENGTH
+
+    This parameter defines the
+number of lines of footer text,
+starting from the 2nd page until
+the end of the document.
+
+    The actual page length is
+indicated by the page length
+option. Enter the number of lines
+in the bottom margin - the total
+page length minus the line number
+of the last line of text.  This
+number will be constant although
+the text within these lines may
+vary.
+
+Default: 0 (no bottom margin and no
+footers on the 2nd through last
+pages.)
+

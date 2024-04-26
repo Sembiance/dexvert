@@ -1,0 +1,86 @@
+*SYSTEM_NAME Software Bridge Combination
+*SYSTEM_RELEASE 3.12
+*NUMBER_OF_APPLICATIONS 19
+*MATRIX_BEGIN
+*SET_MODE 9 ,0=0 
+*SET_MODE 9 ,1=0 
+*SET_MODE 9 ,2=0 
+*SET_MODE 9 ,3=0 
+*SET_MODE 9 ,4=0 
+*SET_MODE 9 ,5=0 
+*SET_MODE 9 ,6=0 
+*SET_MODE 9 ,7=0 
+*SET_MODE 9 ,8=0 
+*SET_MODE 9 ,9=0 
+*SET_MODE 9 ,10=0 
+*SET_MODE 9 ,11=0 
+*SET_MODE 9 ,12=0 
+*SET_MODE 9 ,13=0 
+*SET_MODE 9 ,14=0 
+*SET_MODE 9 ,15=0 
+*SET_MODE 9 ,16=0 
+*SET_MODE 9 ,17=0 
+*SET_MODE 9 ,18=0 
+*MATRIX_END
+*DIAGNOSTIC_FILE X:\file.dia
+*DIAGNOSTIC_LEVEL 0
+*LOG_FILE X:\file.log
+*LOG_LEVEL 1
+*DISPLAY_OPTIONS 16
+*CONTROL     
+*LRU_TABLE 1 ,2 ,5 
+*PARAMETERS 3
+*PARAMETER_DESCRIPTION 0,System Work Area Directory
+*STRING_PARAMETER 65,
+*PARAMETER_HELP_FILE sysdir.hlp
+*END_PARAMETER_DESCRIPTION
+*PARAMETER_DESCRIPTION 1,Keyboard Type
+*TOGGLE_PARAMETER 3, 0
+*CHOICE US/Group1
+*CHOICE Norwegian/Danish
+*CHOICE Hebrew
+*PARAMETER_FLAG 
+*PARAMETER_HELP_FILE fltrpar.hlp
+*END_PARAMETER_DESCRIPTION
+*PARAMETER_DESCRIPTION 2,Character Filter File
+*STRING_PARAMETER 65,
+*PARAMETER_HELP_FILE tf_file.hlp
+*END_PARAMETER_DESCRIPTION
+*APPLICATION_DEFINITION Microsoft Word,msw,mswapp.def
+*COMMENT---1---------------------------- --------------
+*APPLICATION_DEFINITION MS Word 5,msw5,msw5app.def
+*COMMENT----2---------------------------  --------------
+*APPLICATION_DEFINITION WordPerfect,wpf,wpfapp.def
+*COMMENT-----3-------------------------- --------------
+*APPLICATION_DEFINITION WordPerfect 5,wpf5,wpf5app.def
+*COMMENT -----4------------------------- --------------
+*APPLICATION_DEFINITION MultiMate,mm,mmapp.def
+*COMMENT ------5---------------------------------------
+*APPLICATION_DEFINITION WordStar,ws,wsapp.def
+*COMMENT -------6----------------------- --------------
+*APPLICATION_DEFINITION WordStar 2000,ws2,ws2app.def
+*COMMENT --------7---------------------- --------------
+*APPLICATION_DEFINITION DCA/RFT,rft,rftapp.def
+*COMMENT----------8--------------------- --------------
+*APPLICATION_DEFINITION DW2/3 (TXT),txt,txtapp.def
+*COMMENT ----------9-----------------------------------
+*APPLICATION_DEFINITION DCA/FFT,fft,fftapp.def
+*COMMENT-----------10------------------- --------------
+*APPLICATION_DEFINITION WangIWP,iwp,iwpapp.def
+*COMMENT------------11------------------ --------------
+*APPLICATION_DEFINITION Samna,sm,smapp.def
+*COMMENT--------------12---------------- --------------
+*APPLICATION_DEFINITION Volkswriter 3,vw,vwapp.def
+*COMMENT ---------------13-----------------------------
+*APPLICATION_DEFINITION DX,dx,dxapp.def
+*COMMENT------------------14------------ --------------
+*APPLICATION_DEFINITION WordMarc,wm,wmapp.def
+*COMMENT -------------------15-------------------------
+*APPLICATION_DEFINITION Sprint,sp,spapp.def
+*COMMENT ---------------------16-----------------------
+*APPLICATION_DEFINITION CEOwrite,cw,cwapp.def
+*COMMENT -----------------------17---------------------
+*APPLICATION_DEFINITION DIF,dif,difapp.def
+*COMMENT--------------------------18---- --------------
+*APPLICATION_DEFINITION ASCII,ascii,ssapp.def
+*COMMENT end of file

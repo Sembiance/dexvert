@@ -1,0 +1,15 @@
+MULTIMATE AUTHOR FIELD
+
+    Text entered here appears in
+the Author Field of documents
+translated into MultiMate.
+
+Default: None  (No text is entered
+into the Author Field.)
+
+Note:  If the word processor you
+are converting from has a
+corresponding author field, that
+entry will overwrite the entry in
+this parameter.
+

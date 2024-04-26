@@ -7,5 +7,5 @@ export class wp extends Format
 	ext            = [".wp", ".wpd", ".wp4", ".wp5", ".wp6", ".wp7", ".doc"];
 	forbidExtMatch = true;
 	magic          = [/^WordPerfect.* [Dd]ocument/, /^x-fmt\/(44|393|394)( |$)/];
-	converters     = ["soffice[format:WordPerfect]", "soffice[format:WordPerfect Graphics]", "keyViewPro[outType:pdf]", "fileMerlin"];
+	converters     = ["soffice[format:WordPerfect]", "soffice[format:WordPerfect Graphics]", "keyViewPro[outType:pdf]", "fileMerlin", "softwareBridge[format:wp5]", "softwareBridge[format:wp]"];
 }

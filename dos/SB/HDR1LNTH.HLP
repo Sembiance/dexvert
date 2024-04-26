@@ -1,0 +1,17 @@
+FIRST PAGE HEADER LENGTH
+
+    This parameter defines the
+number of lines of header text on
+the 1st page.
+
+For example:
+    The actual text on the first
+page begins on line 8.	Line 3
+contains a header.  Lines 1, 2 and
+4 through 7 are blank.	The entry
+for First Page Header Length should
+be 7.
+
+Default: 0 (no top margin, and no
+header on the first page.)
+

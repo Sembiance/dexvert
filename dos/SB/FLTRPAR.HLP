@@ -1,0 +1,14 @@
+KEYBOARD TYPE
+
+    This parameter has three pos-
+sible values: US/Group1, Norwegian/
+Danish, and Hebrew, and is deter-
+mined by the type of keyboard
+layout included in your system.
+
+    Unless an alternate keyboard
+layout is being used, this para-
+meter should not be of concern.
+
+Default: US/Group1
+

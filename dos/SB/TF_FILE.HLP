@@ -1,0 +1,14 @@
+CHARACTER FILTER FILE
+
+    This parameter is used to
+specify which previously created
+character filter file (if any) to
+use during the translation.
+
+    Enter the name of the file,
+including drive and directory on
+which the character filter
+file resides, and press RETURN.
+
+Default: NONE
+

@@ -7,5 +7,5 @@ export class wordDocDOS extends Format
 	forbidExtMatch = true;
 	magic          = ["Microsoft Word for DOS Document", /^Microsoft Word f.r DOS\/Write Dokument/];
 	priority       = this.PRIORITY.LOWEST;
-	converters     = ["strings"];
+	converters     = ["softwareBridge[format:word5]", "softwareBridge[format:word]", "strings"];
 }

@@ -1,0 +1,14 @@
+LEFT HOT ZONE WIDTH
+
+    The entry for this parameter
+must be between 0 and 7.
+
+    A right margin change is not
+issued if a line is shorter than
+the specified right margin and
+falls within the specified position
+of the right margin based on the
+surrounding lines.
+
+Default: 2
+

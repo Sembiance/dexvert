@@ -12,7 +12,7 @@ export class wordDoc extends Format
 		"fileMerlin", "keyViewPro[outType:pdf]",
 		"antiword"
 	];
-	processed      = dexState =>
+	processed = dexState =>
 	{
 		Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="antiword")?.meta || {});
 		if(dexState.meta.passwordProtected)

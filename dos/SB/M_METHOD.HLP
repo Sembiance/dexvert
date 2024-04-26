@@ -1,0 +1,30 @@
+MARGIN DETERMINATION METHOD
+
+    The WordStar conversion allows
+the user to choose one of three
+methods for determining the
+margins:
+
+    1) Scan the text. Scan the
+image of each line, generating
+statistics, and make educated
+changes to the left and right
+margin.  This parameter should
+be used if .RR, .LM, and .RM
+commands are not in the WordStar
+file (true for earlier versions of
+WordStar).
+
+    2) Examine dot commands.  Uses
+only the information provided by
+the .LM, .RM, and .RR commands for
+determining margin changes.
+
+    3) Use the user supplied
+defaults.  Use the margin settings
+supplied by the user through
+the "Default Left Margin" and
+"Default Right Margin" parameters.
+
+Default: Examine dot commands
+

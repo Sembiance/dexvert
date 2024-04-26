@@ -1,0 +1,21 @@
+DEFAULT TAB WIDTH
+
+    Each paragraph in a Microsoft
+Word document has preset tab stops
+at half-inch intervals.  The con-
+version allows you to change this
+value.	You may enter a new value
+in tenths of an inch ( for instance
+".6" or "1.0") or in centimeters
+(for example "1 cm" or "1.5 cm").
+
+    To change this value, enter any
+valid measurement unit, and press
+RETURN.  When using the centimeter
+measurement unit there must be a
+space between the number and the
+measurement unit "cm".
+
+Default: .5  (the default
+measurement unit is in inches)
+

@@ -1,0 +1,43 @@
+CHECK FOR LINE SPACING CHANGES
+
+    When the conversion encounters
+a pattern of single lines of text
+separated by blank lines, this
+parameter determines whether to
+translate the text exactly as it
+appears in the ASCII document or
+whether to issue a line spacing
+change (and strip out the blank
+lines.)
+
+For example, this text appears to
+be triple spaced:
+
+    single line of text
+       (blank line)
+       (blank line)
+    single line of text
+       (blank line)
+       (blank line)
+    single line of text
+       (blank line)
+       (blank line)
+    single line of text
+       (blank line)
+       (blank line)
+
+Note: At least four repetitions of
+a pattern of text and blank lines
+are required to trigger a line
+spacing change.  Otherwise, the
+translated text is single spaced.
+
+When this parameter is set to NO,
+single line spacing is retained,
+preserving the lines exactly as
+they appear in the document, and
+terminating each with a hard
+carriage return.
+
+Default: YES
+

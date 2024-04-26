@@ -1,0 +1,22 @@
+OUTPUT DIRECTORY
+
+    This parameter determines where
+the translated files will be
+stored.  To change the current
+entry, you must type the name of an
+existing directory and path
+(including colon), and press
+RETURN.
+
+    For example, the entry:
+
+	 C:\DOCS
+
+will cause all translated documents
+to be sent to the subdirectory
+"DOCS".
+
+Default: None (documents are stored
+in the current DOS default
+directory.)
+

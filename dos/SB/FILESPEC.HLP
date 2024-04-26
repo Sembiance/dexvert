@@ -1,0 +1,45 @@
+USER DEFINED FILE NAME
+
+    The User Defined File Name
+parameter allows you to assign any
+valid DOS name to the converted
+documents.  This parameter works in
+conjunction with "2. File Naming
+Method" parameter when its value is
+set to either "User Defined File
+Name with User Defined Extension"
+or "User Defined File Name with
+Original Extension."
+
+    An entry here has no effect
+when File Naming Method is set to
+either "Prompt User For Output File
+Name", "Original File Name with
+User Defined Extension", or
+"Original File Name with Original
+Extension."
+
+    To enter a name, type in any
+valid DOS name (up to eight
+characters) and press RETURN.
+
+    Note: The plus sign ("+") can
+be included in the file name if you
+wish to automatically increment the
+file names with numbers starting at
+001.
+
+Examples:
+
+    ABC+  =   ABC001, ABC002, ...
+   ABC+X  =   ABC001X, ABC002X, ...
+     +	  =   001, 002, 003, ...
+
+    Because DOS allows eight
+characters for a file name, when
+using the ("+") option, the file
+name is limited to seven
+characters, including the ("+").
+
+Default: "+"
+

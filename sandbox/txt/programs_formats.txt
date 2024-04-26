@@ -9377,7 +9377,7 @@ FontLab Studio font files (.vfb)
 
 
 
->>> HiJaak Express
+>>> HiJaak Express (Hijaak Pro 4.0 supports the same formats except with a few 3D formats which is probably supports very poorly)
 Raster File Formats
 ATT AT&T Group 4
 BMP Windows\OS2 Bitmap
@@ -12746,3 +12746,43 @@ Files played by BASS library:
 	MOD: Sound/Noise/Star/Pro/FastTracker (and many more) module format;
 	UMX: Unreal Tournament music package;
 	HTTP:// and FTP:// shoutcast streams (internet radio, etc.).
+
+
+>>> SoftwareBridge 3.x DOS https://winworldpc.com/product/software-bridge%20/3x
+ASCII
+CEOwrite
+DCA/FFT
+DCA/RFT
+DIF
+DW2/3 (TXT)
+DX
+Microsoft Word
+MS Word 5
+MultiMate
+Samna
+Sprint
+Volkswriter 3
+WangIWP
+WordMarc
+WordPerfect
+WordPerfect 5
+WordStar 2000
+
+
+>>> Ulead iPhoto Plus		https://winworldpc.com/product/ulead-iphoto/4x-plus
+001 (Hayes JT FAX)
+BMP (Windows Bitmap)
+CUR (Widows Cursor)
+DCX (Intel SatisFAXtion)
+FAX (Generic FAX (G3 1-D encoded))
+JPG (JPEG file interchange format)
+PCD (Kodak Photo CD)
+PCX (PC Paintbrush)
+PNG (Portable Network Graphics)
+PSD (Photoshop File Format)
+RLE (Run-Length Encoded)
+SCI (SciFAX)
+TGA (Targa File Format)
+TIF (Tagged Image File Format)
+TPL (Ulead Template File)
+

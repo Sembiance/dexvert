@@ -1,0 +1,36 @@
+TABSTOP DETERMINATION METHOD
+
+    The WordStar conversion allows
+the user to choose one of three
+methods for determining the tabstop
+locations:
+
+    1) Scan the text.  Scan the
+image of each page, generate
+statistics indicating possible
+tabstop locations, and make
+educated choices about the tabstop
+locations for each page of text.
+The information found in .RR
+commands is not used if this method
+is selected.
+
+    2) Examine dot commands.  Use
+only the information found in
+.RR commands for determining
+the location of tabstops.  The
+WordStar default settings will
+be used until a .RR command is
+encountered.
+
+    3) Use the user supplied
+defaults. Use the settings provided
+by the user in the "Default
+Tabstops" parameter as the
+tabstops for the entire document.
+Suggested for users who use only
+one set of tabstops for the entire
+document.
+
+Default: Examine dot commands
+

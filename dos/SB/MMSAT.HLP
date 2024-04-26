@@ -1,0 +1,20 @@
+SHEET FEEDER ACTION TABLE
+
+    One of three printer
+tables, the Sheet Feeder Action
+Table (SAT) contains codes to
+direct your sheet feeder to work
+with your printer and MultiMate.
+
+    As with the Printer Action
+Table, the Sheet Feeder Action
+Table is specified on the Document
+Print Options Screen.
+
+    Enter the name of your
+Sheet Feeder Action Table (up to 8
+characters) and press RETURN.
+
+Default:  None (The parameter value
+is left blank)
+

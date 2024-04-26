@@ -47,6 +47,7 @@ export default
 	{
 		adobeInDesignDocument  : {name : "Adobe InDesign Document", ext : [".indd", ".ind"], magic : ["Adobe InDesign Document", "InDesign Document", /^fmt\/196( |$)/]},
 		dBASECompiledForm      : {name : "dBASE Compiled Form", ext : [".fro", ".fmo"], magic : ["dBASE compiled Form", "dBASE compiled Format"]},
+		eurekaMercuryHelp      : {name : "Eureka/Mercury Help", ext : [".hlp"], magic : ["Eureka/Mercury Help"]},
 		excellenceDocument     : {name : "Excellence! Document", ext : [".doc"], magic : ["Excellence! document"]},
 		interBaseDB            : {name : "InterBase/Firebird Database", ext : [".gdb", ".fdb"], magic : ["Firebird database"], notes : "In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh."},
 		interSpreadSpreadsheet : {name : "InterSpread Spreadsheet", magic : ["InterSpread spreadsheet"]},
@@ -295,6 +296,7 @@ export default
 		simCity2000SaveGameData     : {name : "SimCity 2000 Save Game Data", ext : [".sc", ".sc2"], magic : ["SimCity 2000 save game/map data"]},
 		simCityCity                 : {name : "SimCity City", ext : [".cty"], magic : ["SimCity City"]},
 		skunnyKartGameData          : {name : "Skunny Kart Library Game Data", ext : [".lid"], magic : ["Skunny Kart Library game data"]},
+		slideSavedGame              : {name : "Slide Saved Game", ext : [".sld"], magic : ["Slide saved game"]},
 		slicksNSlidesTrack          : {name : "Slicks 'n' Slide Track", ext : [".ss"], magic : ["Slicks 'n' Slide track data"]},
 		starCraftMap                : {name : "StarCraft Map", ext : [".scm", ".scx"], magic : ["StarCraft Map"]},
 		starCraftReplay             : {name : "StarCraft Replay", ext : [".rep"], magic : ["Starcraft Replay"]},
@@ -395,6 +397,7 @@ export default
 		/////////////
 		ailMidiDriver                 : {name : "Audio Interface Library 3 Music/MIDI driver", ext : [".mdi"], magic : ["Audio Interface Library 3 Music/MIDI driver"]},
 		ailDigitalAudioDriver         : {name : "Audio Interface Library 3 Digital audio driver", ext : [".dig"], magic : ["Audio Interface Library 3 Digital audio driver"]},
+		alchemyMindworksDriver        : {name : "Alchemy Mindworks Driver", ext : [".drv", ".pdr"], magic : ["Alchemy Mindworks video Driver", "Alchemy Mindworks Printer Driver"]},
 		allwaysPrinterDriver          : {name : "Allways Printer Driver", ext : [".apc", ".apd", ".apf"], magic : ["Allways Printer driver"]},
 		autoCADDOSRealModeADIDriver   : {name : "Autocad DOS Real Mode ADI Driver", ext : [".exp", ".ex%"], magic : ["Autocad DOS real mode ADI driver"]},
 		borlandDriver                 : {name : "Borland Graphics Interface Driver", ext : [".bgi"], magic : ["Borland Graphics Interface driver", "Borland device BGI Device Driver", "Borland Graphics printer driver"]},

@@ -1,0 +1,13 @@
+RIGHT HOT ZONE WIDTH
+
+    The entry for this parameter
+must be between 0 and 7.
+
+    A right margin change is not
+issued if a line extends less than
+the specified number of characters
+past the right margin based on the
+surrounding lines.
+
+Default: 0
+

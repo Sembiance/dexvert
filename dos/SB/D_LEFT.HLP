@@ -1,0 +1,14 @@
+DEFAULT LEFT MARGIN
+
+    This parameter is only
+applicable if the "Margin
+Determination Method" parameter is
+set to "Use the user supplied
+defaults" in which case this left
+margin is used, and scanning is not
+performed.  Choose any value to
+999. Note: the value chosen must
+agree with the image of the text.
+
+Default: 1
+

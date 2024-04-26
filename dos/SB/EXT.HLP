@@ -1,0 +1,54 @@
+USER DEFINED EXTENSION
+
+    The User Defined Extension
+parameter allows you to assign any
+valid DOS extension to the converted
+documents.  This parameter works in
+conjunction with the "File Naming
+Method" parameter when its value is
+set to either "Original File Name
+with User Defined Extension" or
+"User Defined file Name with User
+Defined Extension."
+
+    An entry here has no effect
+when File Naming Method is set to
+either "Prompt User For Output File
+Name", "Original File Name with
+Original Extension", or "User
+Defined File Name with Original
+Extension."
+
+    A plus sign ("+") can be
+included in the extension if you
+wish to automatically increment the
+extension names with numbers
+starting at 01.
+
+example:
+
+    A+	 =    .A01, .A02, .A03, ...
+    +	 =    .001, .002, .003, ...
+
+    Because DOS allows only three
+characters for a file extension,
+when using the "+" option, the
+extension is limited to one
+character , including the "+".
+
+Default:  For ASCII (".ASC"),
+CEOwrite (".CW"), DEC WPS Plus
+(".DX"), DCA/FFT (".FFT"), DCA/RFT
+(".RFT"), DisplayWrite 2 & 3
+(".TXT"), Microsoft Word (".MSW"),
+NAVY DIF (".DIF"), Samna (".SAM"),
+Sprint (".SPR"), Volkswriter
+(".VW"), WordMARC (".WM"),
+WordPerfect (".WPF"), WordStar
+(".WS"), and WordStar 2000 (".WS2").
+
+Special extensions are required by
+MultiMate (".DOC") and Wang PC
+(".DOC").  You cannot alter the
+extension for these word processors.
+

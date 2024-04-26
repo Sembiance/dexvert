@@ -1,0 +1,21 @@
+PDF FILE NAME
+
+    The PDF file refers to the
+Printer Description File created by
+WordStar 2000 when you installed
+your printer.
+
+    Enter the name of an existing
+PDF file name, and press RETURN.
+
+NOTE:  If there is no PDF file used
+during the translation to or from
+WordStar 2000, the conversion will
+use default values.  In this case,
+font and line height values created
+during the conversion may not
+correspond to your printer's
+values.
+
+Default:  PRINTER.PDF
+

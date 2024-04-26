@@ -1,0 +1,74 @@
+VW3 LINE SPACING SUPPORT
+
+    The Volkswriter 3 word proces-
+sor provides three ways for users
+to adjust the interline spacing
+(vertical distance from one printed
+line to the next).
+
+    The user may either set the
+"line spacing" or the "lines per
+inch" or both.  The lines per inch
+field is used by the word processor
+to calculate the exact distance
+between printed lines.	The line
+spacing field can be used to modify
+that distance.	For example, a line
+spacing value of 2 means the
+physical distance between lines
+should be doubled.
+
+This parameter allows the user to
+select which of the three methods
+should be used to support interline
+spacing when converting documents
+to Volkswriter 3.
+
+1. Support with line spacing
+changes.
+
+If this method is chosen, then
+documents converted to
+Volkswriter 3 will be set to the
+default 6 lines per inch, and
+changes in interline spacing will
+be supported with "line spacing"
+changes.
+
+Note: Line spacing values are
+limited to whole number increments
+(1,2,3,....) which may result in
+approximation of the true distance.
+
+2. Support with lines per inch
+   changes.
+
+Choosing this method causes
+documents converted to
+Volkswriter 3 to be set to the
+default single line spacing and
+changes in interline spacing will
+be supported with "lines per inch"
+changes.
+
+3. Support with a combination of
+spacing and lines per inch.
+
+This choice causes documents
+converted to Volkswriter 3 to
+use a combination of "line spacing"
+and "lines per inch" changes to
+support interline spacing.
+
+First, an attempt will be made to
+support with 6 lines per inch and
+one of the available values for
+line spacing.  If this results in
+loss of accuracy, then single line
+spacing, with a specific lines per
+inch change will be used to
+increase precision.
+
+Default: Support with a combination
+of spacing and lines per inch.
+

@@ -1,0 +1,16 @@
+CHARACTER WIDTH TABLE
+
+    The third of the three
+printer tables, the Character Width
+Table (CWT) contains character
+information, such as character
+width and character redefinition,
+that will be sent to your printer.
+
+    Enter the name of your
+Character Width Table (up to eight
+characters) and press RETURN.
+
+Default:  None (The parameter is
+left blank)
+

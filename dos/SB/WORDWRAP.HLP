@@ -1,0 +1,13 @@
+WORD WRAP ADJUSTMENT
+
+    Select a value between -4 and
++4 to compensate (respectively
+subtract or add to the right
+margin) for word wrapping anomaly
+that occurs among various word
+processors. This adjustment affects
+only the output document generated
+by the conversion.
+
+Default: A (Automatic Adjustment)
+

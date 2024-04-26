@@ -1,0 +1,24 @@
+TABSTOP DETERMINATION METHOD
+
+    The ASCII conversion allows
+you to choose between two methods
+for determining the tabstop
+locations:
+
+    1) Scan the text to generate
+tab stop information.  Scan the
+image of each page, generate
+statistics indicating possible
+tabstop locations, and make
+educated choices about the tabstop
+locations for each page of text.
+
+    2) Use the user supplied
+defaults. Use the settings provided
+by the user in the "Default
+Tabstops" parameter as the
+tabstops for the entire document.
+
+Default: Scan the text to generate
+tab stop information.
+

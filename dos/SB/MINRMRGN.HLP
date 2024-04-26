@@ -1,0 +1,15 @@
+MINIMUM RIGHT MARGIN
+
+    This parameter can be used to
+tell the conversion process what
+the minimum right margin generated
+by the conversion should be.  This
+can be very useful in keeping the
+conversion from generating word
+wrapped text on short lines.  The
+conversion will never generate a
+right margin (offset including left
+margin) greater than this value.
+
+Default: 40
+

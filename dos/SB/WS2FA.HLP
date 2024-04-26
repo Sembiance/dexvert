@@ -1,0 +1,22 @@
+PDF FILE AVAILABLE
+
+    The PDF file refers to the
+Printer Description File created by
+WordStar 2000 when you installed
+your printer.  If you have a PDF
+file available, set this parameter
+to YES.  (If you set this parameter
+to YES, the PDF file name must be
+entered in the parameter "PDF File
+Name").
+
+    If the printer used to print
+out your WordStar 2000 documents
+doesn't have a PDF file, set this
+parameter to NO.
+
+    The RETURN key toggles between
+YES and NO.
+
+Default:  NO
+

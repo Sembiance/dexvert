@@ -1,0 +1,16 @@
+INPUT FILE TYPE
+
+    This parameter indicates the
+type of document being converted.
+The parameter value for Volkswriter
+toggles between base document and
+merge file.
+
+    The parameter value for
+WordStar toggles between document
+file and data file.
+
+Default value: Base document (For
+Volkswriter) and Document file
+(For WordStar)
+

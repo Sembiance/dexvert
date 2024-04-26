@@ -1,0 +1,34 @@
+EDIT CHARACTER FILTER
+
+    This parameter allows you to
+tailor the conversion by replacing
+a specific character ( or
+characters ) found in the source
+document with any character in the
+converted document.
+
+    This option is useful when the
+destination word processor does not
+contain characters supported by the
+source word processor.
+
+    Values under the "input code"
+column are fixed, and represent
+characters in the source document.
+Values under the "convert to"
+column are the actual replacement
+characters.  These are the only
+values that can be changed. Use the
+up or down arrows to scroll through
+the characters.  Use the left or
+right arrows to move between each
+column.  A character can be changed
+either by entering the new char-
+acter or by entering the number
+associated with the new character
+(see Appendix 2 in the manual).
+
+    To retain the changes press the
+F2 key.  To exit without changes
+press the ESC key.
+

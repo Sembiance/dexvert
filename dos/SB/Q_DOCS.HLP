@@ -1,0 +1,27 @@
+DOCUMENT QUEUEING
+
+    The  system  accepts the DOS
+wildcards "*" and "?" in the names of
+documents to be translated.
+
+    To add an individual document to the
+queue:  Enter the document name, including
+any drive letter or directory path.
+
+    To queue all documents from a disk or
+directory:
+
+    Use the DOS wildcard "*". Examples:
+
+     A:*.*     (queue all documents in the 
+     current directory of drive A.)
+
+     C:\DIR\*.*  (queue all documents in   
+     the directory \DIR on drive C.)
+
+    To quickly select individual documents
+from a list of directory contents, see
+AUTOMATIC DIRECTORY ASSISTANCE on the menu.
+To Delete one or more entries from the
+queue: Press DEL.
+

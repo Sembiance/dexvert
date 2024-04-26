@@ -13,6 +13,12 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 	`USE=minimal emerge -1 libsndfile`,
 	`emerge -1 glibc`,	// to pick up on patch
 	`emerge --noreplace ${[
+		// uniconvertor
+		"media-gfx/libimagequant",
+
+		// monitors for changes to files
+		"sys-fs/inotify-tools",
+		
 		// fixes bad filenames
 		"app-text/convmv",
 
@@ -37,7 +43,10 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		"app-emulation/wine-vanilla",
 
 		// used by thumbnail creation
-		"media-libs/resvg"
+		"media-libs/resvg",
+
+		// needed for fontforge, see package.env/fontforge
+		"sys-devel/clang"
 	].join(" ")}`
 ].forEach(line => console.log(line));
 
@@ -58,7 +67,9 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
+	`# Pabldraw sometimes fails, if so just emerge it again, second time usually works fine`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
+	`emerge pablodraw`,
 	`eix-update`,
 	`depmod -a`,
 	`modinfo vhba`,
@@ -71,5 +82,5 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`sudo su - sembiance`,
 	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
 	`aaru`,
-	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver`
+	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`
 ].forEach(line => console.log(line));

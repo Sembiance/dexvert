@@ -1,0 +1,13 @@
+DEFAULT RIGHT MARGIN
+
+    This parameter is only
+applicable if the "Margin
+Determination Method" is set to
+"Use the user supplied defaults" in
+which case this Right Margin is
+used, and scanning is not
+performed.  Choose any value to
+999.
+
+Default: 65
+

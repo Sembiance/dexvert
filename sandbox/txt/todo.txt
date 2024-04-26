@@ -1,21 +1,16 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* See if I can support image/inAVisionDrawing with: https://winworldpc.com/product/micrografx-windows-convert/2x
 
-* Try out these converter programs (temporarily test each on a VNC win2k/winxp):
-  Hijaak Pro (has some 3D support, run on WinXP): https://winworldpc.com/product/hijaak/40
-  Software Bridge: https://winworldpc.com/product/software-bridge%20/3x
-  Ulead iPhoto: https://winworldpc.com/product/ulead-iphoto/4x-plus
-  Micrografx Graphics Suite (check out Picture Publisher, Designer and Simply 3D): https://winworldpc.com/product/micrografx-graphics-suite/2
-  Micrografx Draw: https://winworldpc.com/product/micrografx-draw/60
 
 /---------------\
 | High Priority |
 \---------------/
-* Continue working on extracting content out of MMM files such as: https://discmaster.textfiles.com/view/1312/Neurodancer.iso/PCND16.MMM
-  I've reached out to the deark creator to see if they could possibly add support for this format to deark.
-  NOTE: If I need to improve my own parser, see: https://discmaster.textfiles.com/view/10255/CICA.cdr/win_nt/multimed/samples/mmpf.zip/MMPF.C
+* Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
+https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
+https://codecs.multimedia.cx/2024/04/a-look-at-more-formats/
+https://codecs.multimedia.cx/2024/04/another-quick-look-at-two-amiga-formats/
+
 
 /-----------------\
 | Medium Priority |
@@ -93,6 +88,10 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Try out these converter programs to see if they support any additional formats (temporarily test each on a VNC win2k/winxp):
+  Micrografx Graphics Suite (check out Picture Publisher, Designer and Simply 3D): https://winworldpc.com/product/micrografx-graphics-suite/2
+  Micrografx Draw: https://winworldpc.com/product/micrografx-draw/60
+
 * There was a product called Macromedia Authorware (later Adobe Authorware) that could create interactive e-learning stuff
   It was also oftne used for interactive stuff on CD's, such as: https://discmaster.textfiles.com/view/4/100%20Fonts.iso/FONTMGR/Demos/PtxDemo.exe/Finaldem.exe
   It could be compiled to an .exe and supported both mac and pc.

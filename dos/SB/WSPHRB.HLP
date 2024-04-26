@@ -1,0 +1,19 @@
+WORDSTAR PHANTOM RUBOUT
+
+    Phantom rubout is unique to
+WordStar: there is no direct trans-
+lation available in other word
+processors.
+
+    This parameter defines a char-
+acter to insert in a translated
+document when a Phantom Rubout is
+encountered in the WordStar
+original.
+
+    Enter the Hex-ASCII
+representation of the desired
+character.
+
+Default: 52 ("R")
+

@@ -1,0 +1,17 @@
+STYLE FILE DIRECTORY
+
+    The Style File Directory refers
+to the directory where a WORD 5
+style sheet is stored.
+
+    Enter the directory where
+the current document's style
+sheet is located.
+
+NOTE:  If there is no Style File
+directory specified the
+document will be converted without
+the style sheet's formatting.
+
+Default:  NONE
+

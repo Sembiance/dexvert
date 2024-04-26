@@ -1,0 +1,23 @@
+FIRST PAGE FOOTER LENGTH
+
+    This parameter defines the
+number of lines of footer text on
+the 1st page.
+
+    Enter the number of lines in
+the bottom margin on the first
+page.  This number equals the total
+page lenth minus the number of the
+last line of text.
+
+    For example:  The actual text
+on the first page ends on line 58.
+Blank lines and footer text are
+found on lines 59 through 66.  The
+entry for First Page Footer Length
+should be 8 (66 lines per page
+minus 58).
+
+Default: 0 (No bottom margin and no
+footer on the first page.)
+

@@ -166,7 +166,9 @@ https://codecs.multimedia.cx/2024/04/another-quick-look-at-two-amiga-formats/
   Add format support:
 	archive/sparseImage
 
-* Add Classic MacOS support so the following can be supported:
+* Add Classic MacOS support, probably use this software: https://macintoshgarden.org/apps/oneclick
+  Probably spin up fresh mac instances each time with a custom HD image with the script and in/out folders pre-prepared
+  After it's working, I can then support 'Graphic Converter' and these formats:
 	These seem to be Disk Copy 5/6, which I may be able to extract/convert with: http://macintoshgarden.org/apps/disk-copy-6
 	  https://archive.org/details/GigaROM2.0.img
 	  https://archive.org/details/InfoMac5Disk1.img

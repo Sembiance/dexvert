@@ -344,7 +344,6 @@ export default
 		creativeSignalMicrocode      : {name : "Creative Signal Processor Microcode", ext : [".csp"], magic : ["Creative Signal Processor microcode"]},
 		cornelHuthComprssedLibrary   : {name : "Cornel Huth Compressed Library", ext : [".li_"], magic : ["Cornel Huth compressed library"]},
 		emacsCompiledLisp            : {name : "Emacs Compiled Lisp", ext : [".elc"], magic : [/^Emacs.*byte-compiled Lisp data$/], notes : "Could decompile it with: https://github.com/rocky/elisp-decompile"},
-		gwBasicProtectedSource       : {name : "GW-BASIC Protected Source", ext : [".bas"], magic : ["GW-BASIC protected source"], weakMagic : true},
 		highSpeedPascalUnit          : {name : "High Speed Pascal Unit", ext : [".unit"], magic : ["High Speed Pascal compiled Unit"]},
 		iffSDBG                      : {name : "Amiga IFF Debug File", ext : [".debug"], magic : ["IFF SDBG file"]},
 		installShieldUninstallScript : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script"]},

@@ -8,6 +8,6 @@ export class gwBasic extends Format
 	website    = "http://justsolve.archiveteam.org/wiki/GW-BASIC_tokenized_file";
 	ext        = [".bas"];
 	magic      = ["GW-BASIC Protected Source"];
-	idCheck    = async inputFile => (await fileUtil.readFileBytes(inputFile.absolute, 1, -1))[0]===0x1A;
+	idCheck    = async inputFile => (inputFile.ext.toLowerCase()===".bas" || (await fileUtil.readFileBytes(inputFile.absolute, 1, -1))[0]===0x1A);
 	converters = ["bascat"];
 }

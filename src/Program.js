@@ -311,7 +311,8 @@ export class Program
 
 				// check to see if the resulting file is identical to our input file (sample/executable/exe/Oidata)
 				// we always check if we have just 1 output file, otherwise we only check if checkForDups is set
-				if(f.input.size<xu.MB*25 && !this.allowDupOut && (this.checkForDups || newFilePaths.length===1) && await fileUtil.areEqual(newFilePath, f.input.absolute))
+				// we skip for files >25MB unless the program has checkForDups set explicitly
+				if((f.input.size<xu.MB*25 || this.checkForDups) && !this.allowDupOut && (this.checkForDups || newFilePaths.length===1) && await fileUtil.areEqual(newFilePath, f.input.absolute))
 				{
 					xlog.warn`Program ${fg.orange(this.programid)} deleting output file ${newFileRel} due to being identical to input file ${f.input.pretty()}`;
 					foundDups = true;

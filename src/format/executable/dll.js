@@ -7,7 +7,7 @@ const BAD_FILENAMES_TO_SKIP_ENTIRELY =
 
 export class dll extends Format
 {
-	name         = "Microsoft Windows Dynmic Link Library";
+	name         = "Microsoft Windows Dynamic Link Library";
 	website      = "http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)";
 	ext          = [".dll"];
 	forbiddenExt = [".exe"];

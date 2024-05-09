@@ -6,7 +6,7 @@ export class bsave extends Format
 {
 	name           = "QuickBasic BSAVE Image";
 	website        = "http://fileformats.archiveteam.org/wiki/BSAVE_Image";
-	ext            = [".art", ".pic", ".scn", ".bsv", ".cgx", ".pix", ".dat", ".pkx", ".drw", ".raw", ".scr"];
+	ext            = [".art", ".pic", ".scn", ".bsv", ".cgx", ".pix", ".dat", ".pkx", ".drw", ".raw", ".scr", ".bas"];
 	forbidExtMatch = true;
 	magic          = ["QuickBasic BSAVE binary data"];
 	weakMagic      = true;

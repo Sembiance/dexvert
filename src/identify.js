@@ -195,6 +195,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			let weakMatch = false;
 			const magicMatch = detections.some(detection => (format.magic || []).some(m =>
 			{
+				if(!detection?.value)
+					return false;
+				
 				const magicMatched = flexMatch(detection.value, m);
 				if(magicMatched && detection.weak)
 					weakMatch = true;

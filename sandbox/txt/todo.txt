@@ -6,6 +6,9 @@
 /---------------\
 | High Priority |
 \---------------/
+* Look on discmaster2 for fMTownsHELBitmap and see if deark/recoil could add support for it
+  Same with townsOSIcon
+
 * Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
 https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
 https://codecs.multimedia.cx/2024/04/a-look-at-more-formats/

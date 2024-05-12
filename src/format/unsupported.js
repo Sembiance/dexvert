@@ -166,6 +166,7 @@ export default
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
+		fMTownsHELBitmap          : {name : "FM Towns HEL bitmap", ext : [".hel"], magic : ["FM Towns HEL bitmap"]},
 		genericCADD				  : {name : "Generic CADD", ext : [".gcd"], magic : ["Generic CADD drawing"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		intergraphRasterRGB       : {name : "Intergraph Raster RGB", ext : [".rgb"], magic : ["Intergraph Raster bitmap (Adaptive RLE RGB)"]},
@@ -180,7 +181,9 @@ export default
 		quattroProClipArt         : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
 		skyRoadsBitmap            : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},
 		someraGraphicFormat       : {name : "Somera Graphic Format", ext : [".sgf"], magic : ["Somera Graphic Format"]},
-		winFaxCoverPage           : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]}
+		townsOSIcon               : {name : "Towns OS Icon", ext : [".icn"], magic : ["Towns OS Icon (ICNFILE)"]},
+		winFaxCoverPage           : {name : "WinFax CoverPage Image", ext : [".cvp", ".cv"], magic : ["WinFax CoverPage image"]},
+		zyxelFAXFormat            : {name : "Zyxel FAX format", ext : [".fax"], magic : ["Zyxel FAX format"]}
 	},
 
 	music :
@@ -227,9 +230,11 @@ export default
 
 	video :
 	{
-		astoundAnimation		: {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
+		astoundAnimation        : {name : "Astound Animation", ext : [".awa"], magic : ["Astound Animation"]},
 		completeAnimatorFilm    : {name : "The Complete Animator Film", ext : [".tca"], magic : ["The Complete Animator Film video"]},
+		fMTownsMovieVideo       : {name : "FM Towns Movie video", ext : [".mov"], magic : ["FM Towns Movie video"]},
 		fujitsuMovie            : {name : "Fujitsu Movie", ext : [".mve"], magic : ["Fujitsu Movie format video"]},
+		invisionDeltaAnimation  : {name : "Invision Delta Animation", ext : [".a01"], magic : ["Invision delta Animation"]},
 		knowledgeAdventureMovie : {name : "Knowledge Adventure MoVie", ext : [".mov"], magic : ["Knowledge Adventure MoVie video"], website : "https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV"},
 		ratvidVideo             : {name : "RATVID Video", ext : [".vdo"], magic : ["RATVID video"]},
 		screenCamVideo          : {name : "ScreenCam Video", ext : [".scm"], magic : ["ScreenCam video"], website : "https://wiki.multimedia.cx/index.php/SCM"}
@@ -379,6 +384,7 @@ export default
 		sgmlCompiled                 : {name : "SGML Compiled", ext : [".mtl"], magic : ["Compiled SGML rules"]},
 		sqlite2Database              : {name : "SQLite2 Database", ext : [".sqlite", ".sqlite2", ".db"], magic : ["SQLite 2.x database", /^fmt\/1135( |$)/]},
 		telixCompiledScript          : {name : "Telix Compiled Script", ext : [".slc"], magic : ["Telix Compiled Script"]},
+		toolmakerProject             : {name : "Toolmaker project", ext : [".tm"], magic : ["Toolmaker project"]},
 		turboLightningEnvironment    : {name : "Turbo Lightning Environment", ext : [".env"], magic : ["Turbo Lightning Environment"]},
 		turboModula2SymbolData       : {name : "Turbo Modula-2 Symbol Data", ext : [".sym"], magic : ["Turbo Modula-2 Symbol data"]},
 		turboPascalHelp              : {name : "Turbo Pascal Help", ext : [".hlp"], magic : ["Turbo Pascal Help"]},
@@ -555,6 +561,7 @@ export default
 		iffGXUI						 : {name : "Amiga IFF GXUI", ext : [".gui"], magic : ["IFF GXUI file"]},
 		iffPrefs                     : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
 		imagineStagingData           : {name : "Imagine Staging Data", ext : [".istg"], magic : ["Imagine Staging data"]},
+		invisionBrushes              : {name : "Invision Brushes", ext : [".bru"], magic : ["Invision Brushes"]},
 		indexerVolumeGUID            : {name : "Index Volume GUID", magic : ["IndexerVolumeGuid"]},
 		internationalPatchingSystem  : {name : "International Patching System", ext : [".ips"], magic : ["International Patching System", "IPS patch file"], weakMagic : true},
 		kaperskyAntiVirusLicenseKey  : {name : "Kapersky Anti-Virus License Key", ext : [".key"], magic : ["Kaspersky Anti-virus for DOS license"]},

@@ -1,4 +1,4 @@
-# Unsupported File Formats (917)
+# Unsupported File Formats (923)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -272,7 +272,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (84)
+## Image (87)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -305,6 +305,7 @@ Family/Format | Name | Extensions | Notes
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?formatid=easyCADDrawing) | EasyCAD Drawing | .fcd | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?formatid=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fpr](https://discmaster.textfiles.com/search?formatid=fpr) | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
+[image/fMTownsHELBitmap](https://discmaster.textfiles.com/search?formatid=fMTownsHELBitmap) | FM Towns HEL bitmap | .hel | 
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
 [image/fxgBitmap](https://discmaster.textfiles.com/search?formatid=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
 [image/genericCADD](https://discmaster.textfiles.com/search?formatid=genericCADD) | Generic CADD | .gcd | 
@@ -353,12 +354,14 @@ Family/Format | Name | Extensions | Notes
 [image/someraGraphicFormat](https://discmaster.textfiles.com/search?formatid=someraGraphicFormat) | Somera Graphic Format | .sgf | 
 [image/teletext](https://discmaster.textfiles.com/search?formatid=teletext) | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://sembiance.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 [image/topDrawDrawing](https://discmaster.textfiles.com/search?formatid=topDrawDrawing) | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)
+[image/townsOSIcon](https://discmaster.textfiles.com/search?formatid=townsOSIcon) | Towns OS Icon | .icn | 
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/venturaPublisher](https://discmaster.textfiles.com/search?formatid=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?formatid=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?formatid=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?formatid=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
 [image/yanagisawaPIC2](https://discmaster.textfiles.com/search?formatid=yanagisawaPIC2) | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://sembiance.com/fileFormatSamples/image/yanagisawaPIC2/) - A request was made to add support to recoil, but that is looking unlikely: https://sourceforge.net/p/recoil/bugs/73/ 		There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
+[image/zyxelFAXFormat](https://discmaster.textfiles.com/search?formatid=zyxelFAXFormat) | Zyxel FAX format | .fax | 
 
 
 
@@ -462,7 +465,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (446)
+## Other (447)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -663,6 +666,7 @@ Family/Format | Name | Extensions | Notes
 [other/installShieldUninstallScript](https://discmaster.textfiles.com/search?formatid=installShieldUninstallScript) | InstallShield Uninstall Script | .isu | 
 [other/intellCOFFObject](https://discmaster.textfiles.com/search?formatid=intellCOFFObject) | Intel Common Object File Format Object | .obj | 
 [other/internationalPatchingSystem](https://discmaster.textfiles.com/search?formatid=internationalPatchingSystem) | International Patching System | .ips | 
+[other/invisionBrushes](https://discmaster.textfiles.com/search?formatid=invisionBrushes) | Invision Brushes | .bru | 
 [other/javaClass](https://discmaster.textfiles.com/search?formatid=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
 [other/javelinPrinterDriver](https://discmaster.textfiles.com/search?formatid=javelinPrinterDriver) | Javelin Printer Driver | .pr .pr2 | 
 [other/jazzJackrabbitFile](https://discmaster.textfiles.com/search?formatid=jazzJackrabbitFile) | Jazz Jackrabbit File | .0sc .0fn | 
@@ -713,7 +717,6 @@ Family/Format | Name | Extensions | Notes
 [other/microFocusIndexFile](https://discmaster.textfiles.com/search?formatid=microFocusIndexFile) | Micro Focus Index File | .idx | 
 [other/microLatheObject](https://discmaster.textfiles.com/search?formatid=microLatheObject) | Micro Lathe Object | .lat | 
 [other/microsoftAgentCharacter](https://discmaster.textfiles.com/search?formatid=microsoftAgentCharacter) | [Microsoft Agent Character](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) | .acs .acf .aca | [4 sample files](https://sembiance.com/fileFormatSamples/other/microsoftAgentCharacter/) - Step 1 would just be extracting the embedded images and audio. Full file format details available in sandbox/txt/MSAgentDataSpecification_v1_4.htm 		Bonus points: Animate the character in a couple poses/animations and create animated GIFs
-[other/microsoftChatCharacter](https://discmaster.textfiles.com/search?formatid=microsoftChatCharacter) | [Microsoft Comic Chat Character](http://fileformats.archiveteam.org/wiki/Microsoft_Comic_Chat) | .avb | [5 sample files](https://sembiance.com/fileFormatSamples/other/microsoftChatCharacter/)
 [other/microsoftDirectInputFFE](https://discmaster.textfiles.com/search?formatid=microsoftDirectInputFFE) | Microsoft DirectInput Force Feedback Effect | .ffe | 
 [other/microsoftDierctMusicSegments](https://discmaster.textfiles.com/search?formatid=microsoftDierctMusicSegments) | Microsoft DirectMusic Segments Type | .sgt | 
 [other/microsoftFastFindIndex](https://discmaster.textfiles.com/search?formatid=microsoftFastFindIndex) | Microsoft FastFind Index | .ffx | 
@@ -858,6 +861,7 @@ Family/Format | Name | Extensions | Notes
 [other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .sig | 
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
+[other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
 [other/triviaShellData](https://discmaster.textfiles.com/search?formatid=triviaShellData) | Trivia Shell Data | .tsd | 
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?formatid=triviaShellIndex) | Trivia Shell Index | .tsi | 
 [other/turboLightningEnvironment](https://discmaster.textfiles.com/search?formatid=turboLightningEnvironment) | Turbo Lightning Environment | .env | 
@@ -951,7 +955,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (25)
+## Video (27)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -965,8 +969,10 @@ Family/Format | Name | Extensions | Notes
 [video/eaMADVideo](https://discmaster.textfiles.com/search?formatid=eaMADVideo) | [Deluxe Video](https://wiki.multimedia.cx/index.php/Electronic_Arts_MAD) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/eaMADVideo/)
 [video/deluxeVideo](https://discmaster.textfiles.com/search?formatid=deluxeVideo) | [Deluxe Video](http://fileformats.archiveteam.org/wiki/VDEO) |  | [1 sample file](https://sembiance.com/fileFormatSamples/video/deluxeVideo/) - Couldn't find a converter for it. Could fire up an amiga with deluxe video program from Electronic Arts.
 [video/dkAnimation](https://discmaster.textfiles.com/search?formatid=dkAnimation) | DK Multimedia Animation | .ani | [7 sample files](https://sembiance.com/fileFormatSamples/video/dkAnimation/)
+[video/fMTownsMovieVideo](https://discmaster.textfiles.com/search?formatid=fMTownsMovieVideo) | FM Towns Movie video | .mov | 
 [video/fujitsuMovie](https://discmaster.textfiles.com/search?formatid=fujitsuMovie) | Fujitsu Movie | .mve | 
 [video/idRoQ](https://discmaster.textfiles.com/search?formatid=idRoQ) | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [3 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
+[video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro

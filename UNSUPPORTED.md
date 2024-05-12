@@ -1,4 +1,4 @@
-# Unsupported File Formats (923)
+# Unsupported File Formats (926)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -222,7 +222,7 @@ Family/Format | Name | Extensions | Notes
 [font/averyFont](https://discmaster.textfiles.com/search?formatid=averyFont) | Avery Font | .ff1 | 
 [font/bannerManiaFont](https://discmaster.textfiles.com/search?formatid=bannerManiaFont) | Banner Mania Font | .fnt | [19 sample files](https://sembiance.com/fileFormatSamples/font/bannerManiaFont/)
 [font/bitmappedSignumFont](https://discmaster.textfiles.com/search?formatid=bitmappedSignumFont) | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
-[font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | Borland Graphics Font | .chr .bgi | 
+[font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
 [font/calamusFont](https://discmaster.textfiles.com/search?formatid=calamusFont) | Calamus Font | .cfn | [10 sample files](https://sembiance.com/fileFormatSamples/font/calamusFont/)
 [font/chiWriterPrinterFont](https://discmaster.textfiles.com/search?formatid=chiWriterPrinterFont) | ChiWriter Printer Font | .pft | 
@@ -465,7 +465,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (447)
+## Other (450)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -628,6 +628,7 @@ Family/Format | Name | Extensions | Notes
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?formatid=fileExpressQuickScan) | File Express Quick Scan | .qss | 
 [other/flashbackObject](https://discmaster.textfiles.com/search?formatid=flashbackObject) | Flashback Object | .obj | 
 [other/flightSimToolkitTerrain](https://discmaster.textfiles.com/search?formatid=flightSimToolkitTerrain) | Flight Sim Toolkit Terrain Data | .ftd | 
+[other/fMailAreaConfiguration](https://discmaster.textfiles.com/search?formatid=fMailAreaConfiguration) | FMail Area configuration | .ard .ar | 
 [other/foxBaseMultipleIndex](https://discmaster.textfiles.com/search?formatid=foxBaseMultipleIndex) | FoxBase Multiple Index | .mdx | 
 [other/foxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=foxProCompoundIndex) | FoxPro Compound Index | .tdx .edx | 
 [other/foxProMemo](https://discmaster.textfiles.com/search?formatid=foxProMemo) | FoxPro Memo File | .fpt | 
@@ -793,6 +794,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickTextTitles](https://discmaster.textfiles.com/search?formatid=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?formatid=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 
+[other/rARConfiguration](https://discmaster.textfiles.com/search?formatid=rARConfiguration) | RAR Configuration | .cfg | 
 [other/ravenSoftCompiledScript](https://discmaster.textfiles.com/search?formatid=ravenSoftCompiledScript) | Raven Software Compiled Script | .ibi | 
 [other/realBasicProject](https://discmaster.textfiles.com/search?formatid=realBasicProject) | RealBasic Project | .rbp | 
 [other/reflectionsCamera](https://discmaster.textfiles.com/search?formatid=reflectionsCamera) | Reflections Camera | .kam | 
@@ -859,6 +861,7 @@ Family/Format | Name | Extensions | Notes
 [other/texVirtualFont](https://discmaster.textfiles.com/search?formatid=texVirtualFont) | TeX Virtual Font | .vf | 
 [other/tiCalcBackup](https://discmaster.textfiles.com/search?formatid=tiCalcBackup) | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
 [other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .sig | 
+[other/thunderbyteRegistrationKey](https://discmaster.textfiles.com/search?formatid=thunderbyteRegistrationKey) | Thunderbyte registration Key | .key | 
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 

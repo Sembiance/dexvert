@@ -50,6 +50,14 @@ const FORCE_FORMAT_AS =
 	"document/applesoftBASIC"
 ];
 
+const FORMAT_FILE_META =
+{
+	"document/wordMac" :
+	{
+		"Compact Pro User’s Guide" : {macFileType : "WORD", macFileCreator : "MACA"}
+	}
+};
+
 const FORMAT_OS_HINT =
 {
 	"archive/iso" :
@@ -799,6 +807,10 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 		o.dexvertOptions.programFlag.osHint = {};
 		o.dexvertOptions.programFlag.osHint[FORMAT_OS_HINT[diskFormatid][path.basename(sampleFilePath)]] = true;
 	}
+
+	if(Object.isObject(FORMAT_FILE_META[diskFormatid]) && FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)])
+		o.fileMeta = FORMAT_FILE_META[diskFormatid][path.basename(sampleFilePath)];
+
 	if(Object.isObject(FORMAT_PROGRAM_FLAG[diskFormatid]) && FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)])
 		Object.assign(o.dexvertOptions.programFlag, FORMAT_PROGRAM_FLAG[diskFormatid][path.basename(sampleFilePath)]);
 	if(FORCE_FORMAT_AS.includes(diskFormatid))

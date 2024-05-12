@@ -25,7 +25,11 @@ export const TEXT_MAGIC_WEAK =
 	"Likely Text (Perl)",
 
 	// GT2
-	"Textdatei"
+	"Textdatei",
+
+	// file
+	"Microsoft HTML Help Project, ISO-8859 text, with CRLF line terminators",
+	"JavaScript source, ISO-8859 text, with CRLF line terminators"
 ];
 
 export const TEXT_MAGIC = [...TEXT_MAGIC_STRONG, ...TEXT_MAGIC_WEAK];

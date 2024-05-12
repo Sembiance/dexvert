@@ -1,11 +1,11 @@
-# Supported File Formats (1,694)
+# Supported File Formats (1,695)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (274)
+## Archive (275)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -84,6 +84,7 @@ archive | [Disk Doubler](http://justsolve.archiveteam.org/wiki/DiskDoubler) | .d
 archive | [Disk Image](http://fileformats.archiveteam.org/wiki/Raw_disk_image) | .img | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/diskImage/)
 archive | [DiskDupe Disk Image](http://fileformats.archiveteam.org/wiki/DDI) | .ddi | [sevenZip](http://p7zip.sourceforge.net/) | [8 sample files](https://sembiance.com/fileFormatSamples/archive/diskDupeDiskImage/)
 archive | DIV GamesStudio Graphcis Library | .fpg | [nconvert](https://www.xnview.com/en/nconvert/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/divGamesStudioGraphicsLibrary/)
+archive | [DOSIMG Disk Image](http://fileformats.archiveteam.org/wiki/IMG_(DOSIMG)) | .img | [aaru](https://github.com/aaru-dps/Aaru) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/dosimg/)
 archive | [Dr. Riptide Archive](https://moddingwiki.shikadi.net/wiki/DAT_Format_(Dr._Riptide)) | .dat | [gamearch](https://github.com/Malvineous/libgamearchive) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/drRiptideArchive/)
 archive | [Dragon DOS VDK Disk Image](http://archive.worldofdragon.org/index.php?title=Tape%5CDisk_Preservation#VDK_File_Format) | .vdk | [dcopy](https://github.com/pulkomandy/ddosutils) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/dragonVDK/)
 archive | Dynamix Game Data Archive | .dyn .rbx | [gameextractor](http://www.watto.org/game_extractor.html) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/dynamixGameData/)
@@ -132,7 +133,7 @@ archive | [Inno Setup installer](http://fileformats.archiveteam.org/wiki/Inno_Se
 archive | [InstallIt! Compressed File](http://justsolve.archiveteam.org/wiki/InstallIt!) | _ | [installIt](http://cd.textfiles.com/simtel/simtel0101/simtel/install/ii204.zip) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/installIt/)
 archive | [InstallShield Archive](http://fileformats.archiveteam.org/wiki/InstallShield_archive_(IBT)) | .ibt | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldArchive/)
 archive | [InstallShield CAB](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .cab | [unshield](https://github.com/twogood/unshield) [winPack](https://web.archive.org/web/20060210083422/http://snoopy81.ifrance.com/snoopy81/en/winpack.htm) [gameextractor](http://www.watto.org/game_extractor.html) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldCAB/)
-archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldInstallerArchive/)
+archive | [InstallShield Installer Archive](http://fileformats.archiveteam.org/wiki/InstallShield_installer_archive) | .ex_ | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldInstallerArchive/)
 archive | [InstallShield Z Archive](http://fileformats.archiveteam.org/wiki/InstallShield_Z) | .z | [isextract](https://github.com/OmniBlade/isextract) [UniExtract](https://www.legroom.net/software/uniextract) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/installShieldZ/)
 archive | [Interchangeable Preservation Format Floppy Disk Image](http://fileformats.archiveteam.org/wiki/IPF) | .ipf | [uaeunp](https://www.winuae.net/download/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ipfFloppyDiskImage/)
 archive | Interstate Series Game Data | .zfs | [gameextractor](http://www.watto.org/game_extractor.html) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/interstateGameData/)
@@ -465,7 +466,7 @@ document | Lotus Manuscript Document | .doc | [strings](https://www.gnu.org/soft
 document | Lotus Notes Storage Facility | .nsf | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/lotusNotes/)
 document | Lotus ScreenCam Caption Script | .scs | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/lotusScreenCamScript/)
 document | [Lotus Word Pro](http://fileformats.archiveteam.org/wiki/Lotus_Word_Pro) | .lwp | [keyViewPro](https://archive.org/details/KeyViewPro/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/lotusWordPro/)
-document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) [keyViewPro](https://archive.org/details/KeyViewPro/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/wordMac/)
+document | [Macintosh Word Document](http://fileformats.archiveteam.org/wiki/Microsoft_Word_for_Macintosh) |  | [soffice](https://www.libreoffice.org) [keyViewPro](https://archive.org/details/KeyViewPro/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/wordMac/)
 document | [MacWrite Document](http://fileformats.archiveteam.org/wiki/MacWrite) | .mcw .doc | [soffice](https://www.libreoffice.org) | [10 sample files](https://sembiance.com/fileFormatSamples/document/macWrite/)
 document | Magnetic Pages Article |  | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/magneticPages/)
 document | [MAN Page](http://fileformats.archiveteam.org/wiki/Man_page) | .man .1 .2 .3 .4 .5 .6 .7 .8 | [man2html](http://primates.ximian.com/~flucifredi/man/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/manPage/)
@@ -1695,7 +1696,7 @@ text | [PHP Script](http://fileformats.archiveteam.org/wiki/PHP) | .php .phps | 
 text | [PostScript Printer Description](http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description) | .ppd .pp |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/ppd/)
 text | [SGML Document](http://fileformats.archiveteam.org/wiki/SGML) | .sgml |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sgml/)
 text | [Text (UTF-16)](http://fileformats.archiveteam.org/wiki/Plain_text) |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/utf16Text/)
-text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [72 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
+text | [Text File](http://fileformats.archiveteam.org/wiki/Plain_text) | .txt |  | [75 sample files](https://sembiance.com/fileFormatSamples/text/txt/)
 text | VENDINFO | .diz |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/vendinfo/)
 text | [Wavefront Material](http://fileformats.archiveteam.org/wiki/Wavefront_MTL) | .mtl |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wavefrontMaterial/)
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/windowsAutorun/)

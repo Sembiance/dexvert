@@ -17,6 +17,6 @@ export class png extends Format
 		return dexState.meta.format!=="PNG";
 	};
 	fallback         = true;
-	confidenceAdjust = () => 25;																							// Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools
+	confidenceAdjust = () => 25; // Adjust confidence so it's above fileSize matches, since being an image many things can convert with the same tools
 	metaProvider     = ["image"];
 }

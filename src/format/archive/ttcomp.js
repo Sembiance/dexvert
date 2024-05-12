@@ -8,7 +8,8 @@ export class ttcomp extends Format
 	priority   = this.PRIORITY.LOW;
 	trustMagic = true;
 	packed     = true;
-	
+	fallback   = true;	// lots of things match to TTComp that shouldn't, so we mark it as a fallback format
+
 	// music/thomasHermann is mis-identified as ttcomp
 	forbiddenExt = [".thm"];
 	idCheck      = inputFile => inputFile.preExt!==".thm";

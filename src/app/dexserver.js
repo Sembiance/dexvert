@@ -82,8 +82,8 @@ xlog.info`Starting ${Object.keys(servers).length} servers...`;
 for(const serverid of SERVER_ORDER)
 	await startServer(serverid);
 
-await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
+await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);
 
 while(true)
 	await delay(xu.DAY);

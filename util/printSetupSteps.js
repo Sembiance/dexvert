@@ -46,7 +46,10 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 		"media-libs/resvg",
 
 		// needed for fontforge, see package.env/fontforge
-		"sys-devel/clang"
+		"sys-devel/clang",
+
+		// ENSURE that perl is re-compiled with latest system, otherwise perlTextCheck fails on detecting text files properly, such as with: perl -le 'print "Reading: ", -s shift, " bytes\n"; print -B _ ? "Binary File" : "Likely Text (Perl)"' -- test/sample/archive/text/txt/VOTER.DOC
+		"dev-lang/perl"
 	].join(" ")}`
 ].forEach(line => console.log(line));
 
@@ -82,5 +85,6 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`sudo su - sembiance`,
 	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
 	`aaru`,
-	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`
+	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
+	"# IMPORTANT: Run a full 'dra testMany.js' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

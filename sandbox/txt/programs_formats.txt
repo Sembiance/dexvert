@@ -12786,3 +12786,83 @@ TGA (Targa File Format)
 TIF (Tagged Image File Format)
 TPL (Ulead Template File)
 
+
+>>> Wombat File tools		https://szevvy.com/
+7 Cities of Gold ('93)						
+Alien Carnage						
+Ancients I: Deathwatch						
+Baron Baldric						
+Battlechess 4000						
+Biomenace						
+Cannon Fodder						
+Captain Comic I						
+Captain Comic II						
+Clyde's Adventure						
+Clyde's Revenge						
+Commander Keen 1-3						
+Commander Keen 4-6						
+Commander Keen Dreams						
+Cosmo's Cosmic Adventure						
+Crystal Caves						
+Dangerous Dave						
+Dangerous Dave 2						
+Dark Ages						
+Desert Strike						
+Dig It!						
+Donald Duck's Playground						
+DOOM						
+Duke Nukem						
+Duke Nukem 2						
+Duke Nukem 3D						
+Dune 2						
+Electranoid						
+Fuzzy's World of Miniature Space Golf						
+Gateworld						
+God of Thunder						
+Gold Rush!						
+Halloween Harry						
+Heroes of Might and Magic I						
+Heroes of Might and Magic II						
+Hocus Pocus						
+Jazz Jackrabbit						
+Jill of the Jungle						
+Jump 'n' Bump						
+Jungle Strike						
+King's Quest						
+King's Quest II: Romancing the Throne						
+King's Quest III: To Heir Is Human						
+King's Quest IV: The Perils of Rosella						
+Laser Light						
+Leisure Suite Larry						
+Major Stryker						
+Manhunter						
+Manhunter 2: San Francisco						
+Math Rescue						
+Mixed-Up Mother Goose						
+Monster Bash						
+Mystic Towers						
+Nitemare 3D (Windows)						
+One Must Fall 2097						
+Oregon Trail						
+Police Quest: In Pursuit of the Death Angel						
+Prehistorik						
+Secret Agent						
+Shadow Knights						
+Simcity 2000						
+Sink or Swim						
+Smurfs						
+Space Quest: The Sarien Encounter						
+Space Quest II: Vohaul's Revenge						
+Star Goose						
+Stargunner						
+Syndicate						
+The Black Cauldron						
+The Lion King						
+Traffic Dept 2192						
+Tyrian						
+Wacky Wheels						
+Wolfenstein 3D						
+Word Rescue						
+Xargon						
+Xatax						
+Zombie Wars						

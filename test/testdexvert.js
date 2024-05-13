@@ -440,6 +440,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/irixIDBArchive",
 	"archive/lostVikingsDAT",
 	"archive/rar",
+	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"image/bbcDisplayRAM",
 	"image/printfox",
 	"image/teletext",

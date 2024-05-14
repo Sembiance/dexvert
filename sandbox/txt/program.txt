@@ -68,7 +68,7 @@ Return the extension files produced by this program should be renamed to
 >>> exec = async (runState) => { ... }
 Instead of bin, you can just run abritrary code for this program.
 
->>> pre = async (runState) => {}
+>>> pre = async (runState, {xlog}) => {}
 This will be executed directly BEFORE the program is run (either in or exec)
 
 >>> postExec = async (runState) => { ... }

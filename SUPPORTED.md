@@ -1,11 +1,11 @@
-# Supported File Formats (1,697)
+# Supported File Formats (1,698)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (277)
+## Archive (278)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -197,6 +197,7 @@ archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |
 archive | [Pack200 Compressed JAR](https://docs.oracle.com/en/java/javase/13/docs/specs/pack-spec.html) | .pack .pack.gz | [unpack200](https://adoptium.net) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/pack200/)
 archive | PackDev DiskSqueeze | .dsq .pkd | [uaeunp](https://www.winuae.net/download/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packDevDSQ/)
 archive | [PackDir Archive](http://fileformats.archiveteam.org/wiki/PackDir) |  | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packDir/)
+archive | Packed C64 PRG |  | [unp64](https://iancoog.altervista.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/packedC64PRG/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packIt/)
 archive | [PaintShop Pro Browser Cache](http://fileformats.archiveteam.org/wiki/PaintShop_Pro_Browser_Cache) | .jbf | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/paintShopProBrowserCache/)
 archive | [PAK/ARC Compressed Archive](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)) | .arc .pak | [unar](https://github.com/incbee/Unarchiver) [arc](http://arc.sourceforge.net) [xarc](http://fileformats.archiveteam.org/wiki/ARC_(compression_format)#ARC_Plus) [deark](https://entropymine.com/deark/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/arc/)

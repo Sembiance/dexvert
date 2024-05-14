@@ -82,7 +82,7 @@ export class Program
 			filenameEncoding : {types : ["function", "string"]},
 			mirrorInToCWD    : {types : ["boolean", "string"]},
 			outExt           : {types : ["function", "string"]},
-			post             : {type : "function", length : [0, 1]},
+			post             : {type : "function", length : [0, 2]},
 			postExec         : {type : "function", length : [0, 1]},
 			pre              : {type : "function", length : [0, 1]},
 			renameIn         : {type : "boolean"},
@@ -357,7 +357,7 @@ export class Program
 
 		if(this.post)
 		{
-			try { await this.post(r); }
+			try { await this.post(r, {xlog}); }
 			catch(err) { xlog.error`Program post ${fg.orange(this.programid)} threw error ${err}`; }
 		}
 

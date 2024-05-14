@@ -6,7 +6,7 @@ export class pcx extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/PCX";
 	ext          = [".pcx", ".pcc"];
 	mimeType     = "image/x-pcx";
-	magic        = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/, /^fmt\/(87|88|90)( |$)/];
+	magic        = ["PCX bitmap", /^PCX ver.* image data/, /^PCX$/, /^fmt\/(86|87|88|90)( |$)/];
 	metaProvider = ["image"];
 	converters   = [
 		"nconvert", "convert", "deark[module:pcx]", "iio2png", "gimp",

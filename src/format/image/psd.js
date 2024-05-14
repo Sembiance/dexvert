@@ -4,9 +4,10 @@ export class psd extends Format
 {
 	name         = "Adobe Photoshop";
 	website      = "http://fileformats.archiveteam.org/wiki/PSD";
+	magic        = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", /^x-fmt\/92( |$)/];
+	idMeta       = ({macFileType}) => macFileType==="8BPS";
 	ext          = [".psd"];
 	mimeType     = "image/vnd.adobe.photoshop";
-	magic        = [/^Adobe Photoshop [Ii]mage/, /^Adobe Photoshop$/, "Photoshop Bild", /^x-fmt\/92( |$)/];
 	metaProvider = ["image"];
 
 	// I made the decision to just use regular convert, which will extract ALL layers from the PSD.

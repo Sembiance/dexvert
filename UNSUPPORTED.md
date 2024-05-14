@@ -1,11 +1,11 @@
-# Unsupported File Formats (926)
+# Unsupported File Formats (948)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (60)
+## Archive (61)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -31,12 +31,13 @@ Family/Format | Name | Extensions | Notes
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/freeArc](https://discmaster.textfiles.com/search?formatid=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
-[archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [1 sample file](https://sembiance.com/fileFormatSamples/archive/installerVISE/) - Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
+[archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [2 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/) - Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
+[archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?formatid=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/mpq](https://discmaster.textfiles.com/search?formatid=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?formatid=msxCassetteTape) | MSX Cassette Tape | .cas | 
 [archive/netscapeSNM](https://discmaster.textfiles.com/search?formatid=netscapeSNM) | Netscape SNM Archive | .snm | [5 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
@@ -71,7 +72,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (37)
+## Audio (38)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -91,6 +92,7 @@ Family/Format | Name | Extensions | Notes
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?formatid=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?formatid=kixtartSPK) | KixTart SPK Notation | .spk | 
 [audio/kurzweilK2Sample](https://discmaster.textfiles.com/search?formatid=kurzweilK2Sample) | Kurzweil K2 Sample | .kr1 .kr2 .krz | 
+[audio/maestroAudio](https://discmaster.textfiles.com/search?formatid=maestroAudio) | Maestro Audio |  | 
 [audio/maxonMagicSoundSample](https://discmaster.textfiles.com/search?formatid=maxonMagicSoundSample) | MaxonMAGIC Sound Sample | .hsn | [8 sample files](https://sembiance.com/fileFormatSamples/audio/maxonMagicSoundSample/)
 [audio/medSynthSound](https://discmaster.textfiles.com/search?formatid=medSynthSound) | MED Synth Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/medSynthSound/)
 [audio/musicStudioSound](https://discmaster.textfiles.com/search?formatid=musicStudioSound) | [Music Studio Sound](http://fileformats.archiveteam.org/wiki/The_Music_Studio) | .snd | [3 sample files](https://sembiance.com/fileFormatSamples/audio/musicStudioSound/)
@@ -114,14 +116,16 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (52)
+## Document (55)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/adobeInDesignDocument](https://discmaster.textfiles.com/search?formatid=adobeInDesignDocument) | Adobe InDesign Document | .indd .ind | 
 [document/alanInteractiveFiction](https://discmaster.textfiles.com/search?formatid=alanInteractiveFiction) | Alan Interactive Fiction | .acd | 
 [document/amigaVisionFlow](https://discmaster.textfiles.com/search?formatid=amigaVisionFlow) | Amiga Vision Flow | .avf | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaVisionFlow/)
+[document/amigaBaseDB](https://discmaster.textfiles.com/search?formatid=amigaBaseDB) | AmigaBase Database |  | 
 [document/amigaWriter](https://discmaster.textfiles.com/search?formatid=amigaWriter) | AmigaWriter Documet |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 [document/astoundPresentation](https://discmaster.textfiles.com/search?formatid=astoundPresentation) | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://sembiance.com/fileFormatSamples/document/astoundPresentation/)
+[document/blackMagicHypertext](https://discmaster.textfiles.com/search?formatid=blackMagicHypertext) | Black Magic hypertext document | .mag | 
 [document/borlandSprint](https://discmaster.textfiles.com/search?formatid=borlandSprint) | [Borland Sprint](https://winworldpc.com/product/borland-sprint) | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/document/borlandSprint/) - DOS based word processor. Haven't investigated it for magic. Not 100% sure my sample file is Borland Sprint, but couldn't find another WordProcessor called sprint.
 [document/calamusDocument](https://discmaster.textfiles.com/search?formatid=calamusDocument) | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
 [document/canDoDeck](https://discmaster.textfiles.com/search?formatid=canDoDeck) | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://sembiance.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
@@ -140,6 +144,7 @@ Family/Format | Name | Extensions | Notes
 [document/folioDatabase](https://discmaster.textfiles.com/search?formatid=folioDatabase) | [Folio Database](http://fileformats.archiveteam.org/wiki/Folio_Infobase) | .nfo .sdw .fff .def | 
 [document/greenstreetPublisher](https://discmaster.textfiles.com/search?formatid=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - I could open these just fine under Win2k with Publishing Suite 99, but it can't save in ANY other format, and print to file crashes QEMU, sigh.
 [document/hancomWord](https://discmaster.textfiles.com/search?formatid=hancomWord) | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://sembiance.com/fileFormatSamples/document/hancomWord/)
+[document/helpSystemIIHypertext](https://discmaster.textfiles.com/search?formatid=helpSystemIIHypertext) | Help System II Hypertext Help | .hs2 | 
 [document/hotHelpText](https://discmaster.textfiles.com/search?formatid=hotHelpText) | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://sembiance.com/fileFormatSamples/document/hotHelpText/)
 [document/iesHyperText](https://discmaster.textfiles.com/search?formatid=iesHyperText) | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/fileFormatSamples/document/iesHyperText/)
 [document/installShieldCompiledScript](https://discmaster.textfiles.com/search?formatid=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
@@ -213,7 +218,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (53)
+## Font (55)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -247,6 +252,7 @@ Family/Format | Name | Extensions | Notes
 [font/maxonCADFont](https://discmaster.textfiles.com/search?formatid=maxonCADFont) | MaconCAD Font | .mcfont | 
 [font/macOSFont](https://discmaster.textfiles.com/search?formatid=macOSFont) | MacOS Font | .fnt | 
 [font/matroxFont](https://discmaster.textfiles.com/search?formatid=matroxFont) | Matrox Font | .fnt | 
+[font/metagraphicsFont](https://discmaster.textfiles.com/search?formatid=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 
 [font/personalFontMakerFont](https://discmaster.textfiles.com/search?formatid=personalFontMakerFont) | Personal Font Maker Font/Character Set | .fnt .set | 
 [font/portableFontResource](https://discmaster.textfiles.com/search?formatid=portableFontResource) | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://sembiance.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
@@ -259,6 +265,7 @@ Family/Format | Name | Extensions | Notes
 [font/texPackedFont](https://discmaster.textfiles.com/search?formatid=texPackedFont) | TeX Packed Font | .pf | 
 [font/texFont](https://discmaster.textfiles.com/search?formatid=texFont) | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [6 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
 [font/theDrawFont](https://discmaster.textfiles.com/search?formatid=theDrawFont) | TheDraw Font | .tdf | [1 sample file](https://sembiance.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
+[font/townsOSFont](https://discmaster.textfiles.com/search?formatid=townsOSFont) | Towns OS Font | .fnt | 
 [font/vFontFont](https://discmaster.textfiles.com/search?formatid=vFontFont) | VFONT Font | .fnt | 
 [font/vgaPaint386Font](https://discmaster.textfiles.com/search?formatid=vgaPaint386Font) | VGAPaint 386 Font | .vfn | 
 [font/westwoodFont](https://discmaster.textfiles.com/search?formatid=westwoodFont) | Westwood Font | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/westwoodFont/)
@@ -272,7 +279,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (87)
+## Image (90)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -345,6 +352,7 @@ Family/Format | Name | Extensions | Notes
 [image/professionalDraw](https://discmaster.textfiles.com/search?formatid=professionalDraw) | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://sembiance.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 [image/proShapeDrawing](https://discmaster.textfiles.com/search?formatid=proShapeDrawing) | ProShape Drawing | .psp | [5 sample files](https://sembiance.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 [image/quattroProClipArt](https://discmaster.textfiles.com/search?formatid=quattroProClipArt) | Quattro Pro Clip Art | .clp | 
+[image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/rleTRE](https://discmaster.textfiles.com/search?formatid=rleTRE) | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
 [image/satoriPaint](https://discmaster.textfiles.com/search?formatid=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
 [image/secondNatureSlideShow](https://discmaster.textfiles.com/search?formatid=secondNatureSlideShow) | Second Nature Slide Show | .cat | [7 sample files](https://sembiance.com/fileFormatSamples/image/secondNatureSlideShow/) - Could probably spy on how the second nature DLL files are called when reading these files and figure out how to call the DLL myself with AutoIt. Meh.
@@ -357,15 +365,17 @@ Family/Format | Name | Extensions | Notes
 [image/townsOSIcon](https://discmaster.textfiles.com/search?formatid=townsOSIcon) | Towns OS Icon | .icn | 
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/venturaPublisher](https://discmaster.textfiles.com/search?formatid=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+[image/wGTSprite](https://discmaster.textfiles.com/search?formatid=wGTSprite) | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr | 
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?formatid=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)
 [image/winFaxCoverPage](https://discmaster.textfiles.com/search?formatid=winFaxCoverPage) | WinFax CoverPage Image | .cvp .cv | 
 [image/xCADDrawing](https://discmaster.textfiles.com/search?formatid=xCADDrawing) | X-CAD Drawing | .xdr | [1 sample file](https://sembiance.com/fileFormatSamples/image/xCADDrawing/)
 [image/yanagisawaPIC2](https://discmaster.textfiles.com/search?formatid=yanagisawaPIC2) | [Yanagisawa PIC2](http://fileformats.archiveteam.org/wiki/PIC2) | .p2 | [7 sample files](https://sembiance.com/fileFormatSamples/image/yanagisawaPIC2/) - A request was made to add support to recoil, but that is looking unlikely: https://sourceforge.net/p/recoil/bugs/73/ 		There is a PIC2 plugin for 'xv' so maybe I could create a CLI program that leverages that to convert: https://github.com/DavidGriffith/xv/blob/master/xvpic2.c
+[image/zSoftPalette](https://discmaster.textfiles.com/search?formatid=zSoftPalette) | ZSoft Palette | .pal | 
 [image/zyxelFAXFormat](https://discmaster.textfiles.com/search?formatid=zyxelFAXFormat) | Zyxel FAX format | .fax | 
 
 
 
-## Music (94)
+## Music (95)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -461,11 +471,12 @@ Family/Format | Name | Extensions | Notes
 [music/traXTrack](https://discmaster.textfiles.com/search?formatid=traXTrack) | TraX Music Track | .mts | [5 sample files](https://sembiance.com/fileFormatSamples/music/traXTrack/)
 [music/vgmMusicMaker](https://discmaster.textfiles.com/search?formatid=vgmMusicMaker) | VGM Music Maker Module | .vge | [4 sample files](https://sembiance.com/fileFormatSamples/music/vgmMusicMaker/)
 [music/vicTracker](https://discmaster.textfiles.com/search?formatid=vicTracker) | Vic-Tracker Module | .vt | [5 sample files](https://sembiance.com/fileFormatSamples/music/vicTracker/)
+[music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
 [music/yamahaESEQ](https://discmaster.textfiles.com/search?formatid=yamahaESEQ) | Yamaha e-SEQ Music | .esq .fil | 
 
 
 
-## Other (450)
+## Other (458)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -602,7 +613,9 @@ Family/Format | Name | Extensions | Notes
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
+[other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
 [other/directoryOpusSettings](https://discmaster.textfiles.com/search?formatid=directoryOpusSettings) | Directory Opus Settings |  | 
+[other/directoryOpusType](https://discmaster.textfiles.com/search?formatid=directoryOpusType) | Directory Opus type |  | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?formatid=diveFileFormat) | Dive File Format | .dff | 
 [other/doomSaveGame](https://discmaster.textfiles.com/search?formatid=doomSaveGame) | DOOM Save Game | .dsg | 
 [other/drHardwareSysInfo](https://discmaster.textfiles.com/search?formatid=drHardwareSysInfo) | Dr. Hardware Sysinfo | .dat | 
@@ -645,6 +658,7 @@ Family/Format | Name | Extensions | Notes
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?formatid=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?formatid=gfxLab24Filter) | GfxLab24 Filter |  | 
+[other/glbGameDataArchive](https://discmaster.textfiles.com/search?formatid=glbGameDataArchive) | GLB game data archive | .glb | 
 [other/glibcLocaleFile](https://discmaster.textfiles.com/search?formatid=glibcLocaleFile) | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://sembiance.com/fileFormatSamples/other/glibcLocaleFile/)
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
@@ -749,6 +763,7 @@ Family/Format | Name | Extensions | Notes
 [other/netShieldVirusPattern](https://discmaster.textfiles.com/search?formatid=netShieldVirusPattern) | NetShield Virus Pattern Library | .dat | 
 [other/netwareLoadableModule](https://discmaster.textfiles.com/search?formatid=netwareLoadableModule) | Netware Loadable Module | .nlm | 
 [other/netwareMessage](https://discmaster.textfiles.com/search?formatid=netwareMessage) | Netware Message | .msg | 
+[other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
@@ -759,6 +774,7 @@ Family/Format | Name | Extensions | Notes
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?formatid=os2DLL) | OS/2 Dynamic Link Library | .dll | 
 [other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?formatid=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
+[other/os2SyslevelInfo](https://discmaster.textfiles.com/search?formatid=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
 [other/os968kModule](https://discmaster.textfiles.com/search?formatid=os968kModule) | OS9/68k Module |  | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/paintersApprenticePrintInfo](https://discmaster.textfiles.com/search?formatid=paintersApprenticePrintInfo) | Painter's Apprentice Printer Info | .pri | 
@@ -817,6 +833,7 @@ Family/Format | Name | Extensions | Notes
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?formatid=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?formatid=sciTechDriver) | SciTech Driver | .drv | 
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?formatid=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 
+[other/screamTrackerInstrumentsLibrary](https://discmaster.textfiles.com/search?formatid=screamTrackerInstrumentsLibrary) | Scream Tracker Instruments Library | .015 .014 .016 .017 | 
 [other/sculpt3DTake](https://discmaster.textfiles.com/search?formatid=sculpt3DTake) | Sculpt 3D Take | .take | 
 [other/scummMainData](https://discmaster.textfiles.com/search?formatid=scummMainData) | SCUMM main data container |  | 
 [other/genesisROM](https://discmaster.textfiles.com/search?formatid=genesisROM) | Sega Genesis/Megadrive/32x ROM | .bin .md | 
@@ -882,6 +899,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoMusicBoxProgression](https://discmaster.textfiles.com/search?formatid=videoMusicBoxProgression) | Video Music Box Progression | .prgn | 
 [other/videoMusicBoxStyle](https://discmaster.textfiles.com/search?formatid=videoMusicBoxStyle) | Video Music Box Style | .stle | 
 [other/videoFX2Sequence](https://discmaster.textfiles.com/search?formatid=videoFX2Sequence) | VideoFX2 Sequence | .seq | 
+[other/videoMaxeFile](https://discmaster.textfiles.com/search?formatid=videoMaxeFile) | VideoMaxe File |  | 
 [other/videoPadProject](https://discmaster.textfiles.com/search?formatid=videoPadProject) | VideoPad Project | .vpj | 
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
@@ -910,6 +928,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectKeyboardFile](https://discmaster.textfiles.com/search?formatid=wordPerfectKeyboardFile) | WordPerfect keyboard file | .wpk | 
 [other/wordPerfectMacro](https://discmaster.textfiles.com/search?formatid=wordPerfectMacro) | WordPerfect Macro File | .wpm .wcm | 
 [other/wordPerfectPrinterData](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterData) | WordPerfect Printer Data | .all .prd | 
+[other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?formatid=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 
 [other/wordStarPrinterDescFile](https://discmaster.textfiles.com/search?formatid=wordStarPrinterDescFile) | WordStar Printer Description File | .pdf | 
 [other/wordWorthPreferences](https://discmaster.textfiles.com/search?formatid=wordWorthPreferences) | WordWorth Preferences |  | 
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
@@ -958,7 +977,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (27)
+## Video (30)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -977,13 +996,16 @@ Family/Format | Name | Extensions | Notes
 [video/idRoQ](https://discmaster.textfiles.com/search?formatid=idRoQ) | [Id Software RoQ Video](https://wiki.thedarkmod.com/index.php?title=Playing_ROQ_Video_Files) | .roq | [3 sample files](https://sembiance.com/fileFormatSamples/video/idRoQ/)
 [video/invisionDeltaAnimation](https://discmaster.textfiles.com/search?formatid=invisionDeltaAnimation) | Invision Delta Animation | .a01 | 
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
+[video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
+[video/phVideo](https://discmaster.textfiles.com/search?formatid=phVideo) | PH Video | .ph | [2 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/) - No known converter or modern player. Could be kinda supported by using 'tmmplay.exe <filename>' in DOS to play the video. But it'll play in real time and sound capture will be hard to do.
 [video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?formatid=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 [video/ratvidVideo](https://discmaster.textfiles.com/search?formatid=ratvidVideo) | RATVID Video | .vdo | 
 [video/riffANIM](https://discmaster.textfiles.com/search?formatid=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format
 [video/screenCamVideo](https://discmaster.textfiles.com/search?formatid=screenCamVideo) | [ScreenCam Video](https://wiki.multimedia.cx/index.php/SCM) | .scm | 
+[video/sierraRobotAnimation](https://discmaster.textfiles.com/search?formatid=sierraRobotAnimation) | Sierra Robot Animation | .rbt | 
 [video/sonyVegas](https://discmaster.textfiles.com/search?formatid=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 [video/completeAnimatorFilm](https://discmaster.textfiles.com/search?formatid=completeAnimatorFilm) | The Complete Animator Film | .tca | 
 [video/theDirector](https://discmaster.textfiles.com/search?formatid=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)

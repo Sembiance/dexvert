@@ -220,7 +220,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 			// some formats require additional files or directories that may be used
 			let auxFiles = null;
-			if(format.auxFiles && (otherFiles.length>0 || otherDirs.length>0) && hasAnyMatch)
+			if(format.auxFiles && hasAnyMatch)
 			{
 				auxFiles = await format.auxFiles(f.input, otherFiles, otherDirs, {fileSizeMatchExt, xlog});
 

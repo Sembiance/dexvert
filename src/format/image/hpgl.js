@@ -6,5 +6,6 @@ export class hpgl extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/HP-GL";
 	ext        = [".hpgl"];
 	magic      = ["Hewlett-Packard Graphics Language"];
+	idMeta     = ({macFileType}) => macFileType==="HPGL";
 	converters = ["viewCompanion", "corelPhotoPaint", "canvas[matchType:magic][nonRaster]"];
 }

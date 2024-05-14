@@ -6,5 +6,6 @@ export class envoy extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Envoy";
 	ext        = [".evy"];
 	magic      = ["Envoy document", /^fmt\/(1286|1287)( |$)/];
+	idMeta     = ({macFileType}) => macFileType==="ENVD";
 	converters = ["envoyViewer"];
 }

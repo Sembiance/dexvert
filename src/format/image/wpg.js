@@ -6,6 +6,7 @@ export class wpg extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics";
 	ext          = [".wpg"];
 	magic        = ["WordPerfect Graphics bitmap", "WordPerfect graphic image", "Wordperfect Bild (WPG) Datei", /^fmt\/1042( |$)/, /^x-fmt\/395( |$)/];
+	idMeta       = ({macFileType}) => macFileType==="WPGf";
 	mimeType     = "image/x-wpg";
 	notes        = "It's a vector format, but convert usually fails to produce a usable SVG and often was used just to store a raster image";
 	metaProvider = ["image"];

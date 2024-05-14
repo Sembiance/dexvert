@@ -162,6 +162,10 @@ const SUPPORTING_FILES =
 	{
 		pogNames              : /\.pog$/i,
 		printMasterShapeNames : /\.shp$/i
+	},
+	video :
+	{
+		phVideo : /tmmplay\.gxl$/i
 	}
 };
 

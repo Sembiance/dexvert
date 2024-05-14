@@ -5,6 +5,7 @@ export class neochrome extends Format
 	name     = "Neochrome";
 	website  = "http://fileformats.archiveteam.org/wiki/NEOchrome";
 	ext      = [".neo", ".rst"];
+	idMeta   = ({macFileType}) => macFileType==="NeoC";
 	mimeType = "image/x-neo";
 	fileSize = {".neo" : 32128};
 	auxFiles = (input, otherFiles) =>

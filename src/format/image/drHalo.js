@@ -6,6 +6,7 @@ export class drHalo extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Dr._Halo";
 	ext            = [".cut", ".pal", ".pic"];
 	magic          = ["Dr. Halo device dependent bitmap", "Dr. Halo Palette", /^fmt\/1186( |$)/];
+	idMeta         = ({macFileType}) => macFileType==="Halo";
 	forbidExtMatch = [".pal", ".pic"];
 	mimeType       = "application/dr-halo";
 	priority       = this.PRIORITY.LOW;

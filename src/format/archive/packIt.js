@@ -6,5 +6,6 @@ export class packIt extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/PackIt";
 	ext        = [".pit"];
 	magic      = ["PackIt compressed archive", "PMWLite", /^PackIt$/];
+	idMeta     = ({macFileType}) => macFileType==="PIT ";
 	converters = ["unar", "macunpack"];
 }

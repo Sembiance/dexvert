@@ -7,6 +7,7 @@ export class cgm extends Format
 	ext        = [".cgm"];
 	mimeType   = "image/cgm";
 	magic      = ["Computer Graphics Metafile", "binary Computer Graphics Metafile", "clear text Computer Graphics Metafile", /^fmt\/(303|306)( |$)/, /^x-fmt\/142( |$)/];
+	idMeta     = ({macFileType}) => macFileType==="CGMm";
 	weakMagic  = true;
 	converters = [
 		// vector

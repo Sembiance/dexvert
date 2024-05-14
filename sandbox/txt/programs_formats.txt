@@ -1971,6 +1971,7 @@ ALZip | No encryption | Archive format which is mainly popular in South Korea. S
 NSA, SAR Game data file. Can unpack all files I've found. If you have ones that do not unpack, please post an issue. 
 NDS Nintendo DS ROM image, which can contain a file system. 
 Zipx  WinZip extended Zip files
+AmiPack
 
 
 >>> amigadepacker (Linux - May 11, 2009) - ARCHIVE (https://github.com/dolfly/amigadepacker)

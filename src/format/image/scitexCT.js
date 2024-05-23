@@ -7,5 +7,5 @@ export class scitexCT extends Format
 	ext            = [".ct"];
 	forbidExtMatch = true;
 	magic          = ["Scitex Continuous Tone bitmap", /^x-fmt\/146( |$)/];
-	converters     = ["nconvert", "corelPhotoPaint[outType:tiff]", "corelDRAW"];
+	converters     = ["nconvert", "corelPhotoPaint[outType:tiff]", "corelDRAW[strongMatch]"];
 }

@@ -4,11 +4,12 @@ import {fileUtil} from "xutil";
 
 export class neochromeAnimation extends Format
 {
-	name       = "NEOchrome Animation";
-	website    = "http://fileformats.archiveteam.org/wiki/NEOchrome_Animation";
-	ext        = [".ani"];
-	magic      = ["Atari NEOchrome animation"];
-	meta       = async inputFile =>
+	name           = "NEOchrome Animation";
+	website        = "http://fileformats.archiveteam.org/wiki/NEOchrome_Animation";
+	ext            = [".ani"];
+	forbidExtMatch = true;
+	magic          = ["Atari NEOchrome animation"];
+	meta           = async inputFile =>
 	{
 		const headerBytes = await fileUtil.readFileBytes(inputFile.absolute, 18);
 		

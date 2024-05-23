@@ -17,6 +17,9 @@ export const WEAK_VALUES =
 	// pc98ripperID: WEAK checks
 	/^PC-98 ElfDOS$/,
 
+	// Detect-It-Easy: WEAK checks
+	/^Installer: Adveractive/,
+
 	// GT2: WEAK checks
 	/^Borland Object Datei/,
 	/^DOS Ger.tetreiber/,

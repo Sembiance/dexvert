@@ -31,6 +31,9 @@ export class exe extends Format
 		// Is it a Projector executable hiding a director file?
 		"director_files_extract",
 
+		// generic installer extractor
+		"cmdTotal[wcx:InstExpl.wcx]",
+
 		// Try some general EXE extractors
 		"sevenZip[type:PE][rsrcOnly]",
 		"deark[module:exe]"
@@ -45,5 +48,3 @@ export class exe extends Format
 
 // Borland Delphi EXE/DLL extractor in sandbox/app/IDR/
 // It's not really needed though, as the delphi forms are usually Resources that get extracted by sevenZip and then handled by my borlandDelphiForm program
-
-// Alternative EXE meta info identifier: https://github.com/horsicq/Detect-It-Easy

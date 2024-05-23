@@ -39,7 +39,6 @@ export default
 		epicITS                  : {name : "Epic ITS", ext : [".int"], magic : ["Epic ITS format"]},
 		epocDatabase             : {name : "EPOC Database", magic : ["Psion Series 5 database Data file", "EPOC Data database"]},
 		expressPublisher		 : {name : "Express Publisher Document", ext : [".epd"], magic : ["Express Publisher document"]},
-		fileMakerPro             : {name : "FileMaker Pro Database", ext : [".fp3"], magic : ["FileMaker Pro 3 database", "Filemaker Pro (generic)", "FileMaker Pro database", /^x-fmt\/318( |$)/, /^fmt\/1059( |$)/], website : "http://fileformats.archiveteam.org/wiki/FileMaker_Pro"},
 		firstChoiceDatabase      : {name : "First Choice Database", ext : [".fol", ".pfs"], magic : ["First Choice database", /^fmt\/1284( |$)/], weakMagic : true},
 		formMasterForm           : {name : "Form Master Form", ext : [".frm"], magic : ["Form Master Form"]},
 		frameMakerBook           : {name : "FrameMaker Book", ext : [".book"], magic : ["FrameMaker book"]},

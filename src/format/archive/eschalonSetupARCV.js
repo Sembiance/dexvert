@@ -4,6 +4,7 @@ export class eschalonSetupARCV extends Format
 {
 	name        = "Eschalon Setup ARCV Container";
 	magic       = ["Eschalon Setup ARCV"];
-	unsupported = true;
+	//unsupported = true;
 	notes       = "No known extractor program.";
+	converters = ["cmdTotal[wcx:InstExpl.wcx]"];
 }

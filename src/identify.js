@@ -334,7 +334,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 			familyMatches[matchType].forEach((m, i) =>
 			{
 				m.confidence = Math.max(startConfidence-i, 0);
-				delete m.priority;
+				//delete m.priority;
 				delete m.originalConfidence;
 
 				if(m.weak && !m.trustMagic && !m.extMatch && !m.idMetaMatch && !m.filenameMatch)
@@ -372,9 +372,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence>=10));
 
 	// Now sort by confidence
-	// Next, if the confidence is the same, extMatches have a higher priority
+	// Next, if the confidence is the same, extMatches have a higher priority (so long as the priority of the format is not lower than standard (>2))
 	// Finally sort based on family type
-	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family.familyid)], [true, false, false]);
+	matches.sortMulti([id => (id.confidence || 0), id => (id.extMatch && id.priority<=2 ? 0 : 1), id => FAMILY_MATCH_ORDER.indexOf(id.family.familyid)], [true, false, false]);
 
 	// finally, any fallback matches less than 10 go at the very end
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence<10));

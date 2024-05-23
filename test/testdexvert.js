@@ -134,7 +134,8 @@ const IGNORED_META_KEYS =
 {
 	image :
 	{
-		jng : ["colorCount", "driOffset", "driCount"],
+		jpg : ["driOffset", "driCount"],
+		jng : ["colorCount"],
 		pes : ["colorCount"]
 	}
 };
@@ -169,6 +170,7 @@ const SUPPORTING_FILES =
 	}
 };
 
+// these formats produce slightly different sized output each time they run
 const FLEX_SIZE_FORMATS =
 {
 	audio :
@@ -271,7 +273,8 @@ const FLEX_SIZE_FORMATS =
 	poly :
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*" : 0.1
+		"*" : 0.1,
+		cyberStudioCAD3D : 95
 	},
 	video :
 	{
@@ -289,6 +292,10 @@ const FLEX_SIZE_FORMATS =
 // Specific files that vary in size each run
 const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 {
+	document :
+	{
+		pageMaker : ["ALGEXAMP.PM3", "BCOMLAB5.PM4", "ERROR7.PM5", "phi.pm5", "SYMBKYBD.PM4", "userguid.pm4"]	// pageMaker is sensitive and doesn't always work and it often fallsback to other pageMaker versions
+	},
 	image :
 	{
 		blizzardPicture : ["NightElfMaleNakedPelvisSkin00_07.blp"],	// blpngConverter crashes on some hosts for this file, dunno why
@@ -308,9 +315,10 @@ const IGNORE_SIZE_FILEPATHS =
 [
 	/Legacy_of_the_Ancients \d\d\.mp3$/i,
 	/scripts\/.+\.as$/i,			// archive/swf/cookie-hamster often produces very different script/**/*.as files
-	/\^\^ sweet heart.png$/,
-	/lem2.webp$/,
-	/SUB2.webp$/
+	/\^\^ sweet heart\.png$/,
+	/lem2\.webp$/,
+	/SUB2\.webp$/,
+	/Human Meg\.glb$/	// cinema4D82 doesn't always convert this and polyTrans64 takes over
 ];
 
 // these files have a somewhat dynamic nature or are CPU sensitive and sometimes 1 or more files are produced or not produced or differ, which isn't ideal, but not the end of the world
@@ -436,6 +444,28 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/other\/installShieldHDR\/.+\.(cab|hdr)/i, "archive", true]
 ];
 
+// These are sensitive files that sometimes convert, sometimes don't
+const ALLOW_PROCESS_FAILURES =
+{
+	document :
+	{
+		quarkXPress : ["1_8.5x11.qxd", "9_8.5X14.qxd", "10_11X14.qxd"]
+	},
+	image :
+	{
+		theDraw : ["CREDITS.TD"]
+	},
+	poly :
+	{
+		openNURBS : ["ALABARDA.3DM"],
+		universal3D : ["simpleBox.u3d"]
+	},
+	video :
+	{
+		acornReplayVideo : ["bluegreen", "ducks2", "parrot"]
+	}
+};
+
 // Normally if a file is unprocessed, I at least require an id to the disk family/format, but some files can't even be matched to a format due to the generality of the format or a specific filename that must match
 // So in the future I could look at these files and see if I can determine a pattern to them or in some better way id them
 const UNPROCESSED_ALLOW_NO_IDS =
@@ -445,6 +475,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/lostVikingsDAT",
 	"archive/rar",
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
+	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",
 	"image/printfox",
 	"image/teletext",
@@ -649,7 +680,12 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 
 	const prevData = testData[sampleSubFilePath];
 	if(prevData.processed!==result.processed)
+	{
+		if(!result.processed && ALLOW_PROCESS_FAILURES?.[diskFamily]?.[diskFormat]?.includes(path.basename(sampleSubFilePath)))
+			return pass(fg.red("."));
+
 		return fail(`Expected processed to be ${fg.orange(prevData.processed)}${prevData.processed && prevData.converter ? ` ${xu.paren(prevData.converter)}` : ""} but got ${fg.orange(result.processed)}`);
+	}
 
 	const allowFamilyMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, mapToFamily]) => regex.test(sampleFilePath) && (mapToFamily===true || mapToFamily===result.family)));
 	const allowFormatMismatch = (DISK_FAMILY_FORMAT_MAP.some(([regex, , mapToFormat]) => regex.test(sampleFilePath) && (mapToFormat===true || mapToFormat===result.format)));

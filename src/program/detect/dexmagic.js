@@ -7,8 +7,8 @@ import {path} from "std";
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
 // All offsets matches must match 'match' property
 // match can be a string, which means it has to match that string
-// if match is n array of strings, then it can match any of those strings
-// if match is in array of bytes then it must match those bytes exactly
+// if match is an array of strings, then it can match any of those strings
+// if match is an array of bytes then it must match those bytes exactly
 // if match has a subarray, then it matches if any of those bytes in that subarray match the loc (NOTE! So if you need to match 0x4A OR 0x4B its match : [[0x4A, 0x4B]]  NOT [[0x4A], [0x4B]])
 // You can also specify a size and it will look for the 'match' bytes anywhere in the first 'size' bytes of the file
 
@@ -36,12 +36,13 @@ const DEXMAGIC_CHECKS =
 	"SCR Package"                 : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File"         : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
 	"Visual Novel DPK Archive"    : [{offset : 0, match : "PA"}],
+	"VICE Installer EXE"          : [{offset : -8, match : "ESIV"}, {offset : -4, match : [0xA0, 0x9A, 0x00, 0x00]}],
 	"Wacky Wheels Archive"        : [{offset : 2, match : "WACKY.ING"}],
 	"WAD2 file"                   : [{offset : 0, match : "WAD2"}],
 
 	// audio
-	"GameCube Music (IDSP)" : [{offset : 0, match : "IDSP"}],
 	"EA BNK Audio"          : [{offset : 0, match : "BNKl"}],
+	"GameCube Music (IDSP)" : [{offset : 0, match : "IDSP"}],
 	"KORG File"             : [{offset : 0, match : "KORG"}],
 	"RedSpark Audio"        : [{offset : 0, match : "RSD"}, {offset : 3, match : [["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]]}],
 
@@ -70,7 +71,7 @@ const DEXMAGIC_CHECKS =
 	"CD-I IFF Image"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
 	"CharPad"                     : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"          : [{offset : 0, match : "PNT"}],
-	"Digi-Pic 2"                  : [{offset : 32_000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
+	"Digi-Pic 2"                  : [{offset : 32000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],
 	"ECI Graphic Editor"          : [{offset : 0, match : [0x00, 0x40]}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"GoDot Clip"                  : [{offset : 0, match : "GOD1"}],
@@ -199,6 +200,26 @@ const DEXMAGIC_CUSTOMS =
 			return;
 
 		return "Macromedia Projector (alt)";
+	},
+
+	async function checkFMTownsSND(r)
+	{
+		if(r.f.input.size<33)
+			return;
+
+		// logic from ggxsnd-0.8.1/snd.h and checkSndHeader in snd_file.c (sandbox/app/)
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 32);
+		if(header.getUInt32LE(12)!==(r.f.input.size-32))
+			return;
+		
+		const rate = header.getUInt16LE(24);
+		if(rate>2024)
+			return;
+
+		if(header.getUInt8(29)!==0 || header.getUInt16LE(30)!==0)
+			return;
+		
+		return "FM-Towns SND";
 	}
 ];
 

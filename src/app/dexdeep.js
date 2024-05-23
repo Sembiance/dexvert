@@ -1,4 +1,4 @@
-import {xu, fg} from "xu";
+import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {path} from "std";
@@ -9,7 +9,8 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Processes <inputFilePath> trying dexvert on every single byte offset and saving results in <outputDirPath>",
 	opts    :
 	{
-		family : {desc : "Restrict results only to this family (comma delimited list allowed)", hasValue : true}
+		identify : {desc : "Only identify the file, don't try to convert it"},	// todo add support for this
+		family   : {desc : "Restrict results only to this family (comma delimited list allowed)", hasValue : true}
 	},
 	args :
 	[
@@ -24,11 +25,11 @@ await Deno.mkdir(path.resolve(argv.outputDirPath));
 
 const {size : FILE_SIZE} = await Deno.stat(argv.inputFilePath);
 
-let completed = 0;
-let completedMark=0;
 const atOnce = navigator.hardwareConcurrency;
 const partSize = Math.floor(FILE_SIZE/atOnce);
 xlog.info`Processing ${FILE_SIZE} bytes, doing ${atOnce} ops at once.`;
+
+const progress = printUtil.progress({max : FILE_SIZE});
 
 [].pushSequence(0, atOnce).parallelMap(async partid =>
 {
@@ -44,16 +45,9 @@ xlog.info`Processing ${FILE_SIZE} bytes, doing ${atOnce} ops at once.`;
 		await fileUtil.unlink(tmpInputFilePath);
 
 		const result = xu.parseJSON(stdout, {});
+		progress.tick();
 		if(!result.processed || !result?.phase?.family || result.phase.family==="text")
 		{
-			printUtil.stdoutWrite(".");
-			completed++;
-			const newMark = Math.floor((completed/FILE_SIZE)*10);
-			if(newMark>completedMark)
-			{
-				completedMark = newMark;
-				printUtil.stdoutWrite(fg.yellow(`${completedMark}0%`));
-			}
 			await fileUtil.unlink(outputDirPath, {recursive : true});
 		}
 		else

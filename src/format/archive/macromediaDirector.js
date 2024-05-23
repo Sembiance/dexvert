@@ -8,6 +8,7 @@ export class macromediaDirector extends Format
 	forbidExtMatch = true;
 	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", /^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/];
 	weakMagic      = ["Generic RIFX container"];
+	idMeta         = ({macFileType, macFileCreator}) => ["M!93", "MV93"].includes(macFileType) && macFileCreator==="MD93";
 	converters     = [
 		// Director CastRipper has fully replaced macromediaDirector.js
 		// Some files must be unprotected first in order to get "all" the files (such as the lingo scripts), thus projectorrays goes first (DREAM3.DXR for example, without projectorrays then cast ripper only gets 14 files, decompiling it first gets 24 total)

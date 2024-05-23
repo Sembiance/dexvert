@@ -5,6 +5,7 @@ import {validateClass} from "validator";
 
 export class Format
 {
+	// warning, don't change these numbers. They are hard-coded used in various places such as identify.js
 	PRIORITY = {
 		TOP      : 0,
 		HIGH     : 1,

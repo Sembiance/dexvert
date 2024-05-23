@@ -1,4 +1,4 @@
-# Unsupported File Formats (948)
+# Unsupported File Formats (951)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -27,11 +27,10 @@ Family/Format | Name | Extensions | Notes
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
-[archive/eschalonSetupARCV](https://discmaster.textfiles.com/search?formatid=eschalonSetupARCV) | Eschalon Setup ARCV Container |  | No known extractor program.
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/freeArc](https://discmaster.textfiles.com/search?formatid=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
-[archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [2 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/) - Haven't found non-mac files yet. They appear to be self extracting, so I could just run them under a MAC emulator to get the files out.
+[archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
@@ -40,6 +39,7 @@ Family/Format | Name | Extensions | Notes
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?formatid=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/mpq](https://discmaster.textfiles.com/search?formatid=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?formatid=msxCassetteTape) | MSX Cassette Tape | .cas | 
+[archive/neoLitePacked](https://discmaster.textfiles.com/search?formatid=neoLitePacked) | NeoLite Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/neoLitePacked/) - Tried (see sandbox/app): RL!dePacker 1.4 & Neo-Executable-Decompressor & neolte20.zip
 [archive/netscapeSNM](https://discmaster.textfiles.com/search?formatid=netscapeSNM) | Netscape SNM Archive | .snm | [5 sample files](https://sembiance.com/fileFormatSamples/archive/netscapeSNM/) - Could convert with: https://github.com/lantaoxu/Windows-Server-2003/blob/5c6fe3db626b63a384230a1aa6b92ac416b0765f/inetcore/outlookexpress/import/netscape/commimp.cpp
 [archive/newtonPackage](https://discmaster.textfiles.com/search?formatid=newtonPackage) | Newton Package | .pkg | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?formatid=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
@@ -72,7 +72,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (38)
+## Audio (39)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -88,6 +88,7 @@ Family/Format | Name | Extensions | Notes
 [audio/deluxeSoundSample](https://discmaster.textfiles.com/search?formatid=deluxeSoundSample) | Deluxe Sound Sample | .instr | 
 [audio/digitalSymphonySoundSample](https://discmaster.textfiles.com/search?formatid=digitalSymphonySoundSample) | Digital Symphony Sound Sample |  | 
 [audio/dmxOP2InstrumentData](https://discmaster.textfiles.com/search?formatid=dmxOP2InstrumentData) | DMS OP2 Instrument Data |  | 
+[audio/fmTownsSND](https://discmaster.textfiles.com/search?formatid=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?formatid=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?formatid=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?formatid=kixtartSPK) | KixTart SPK Notation | .spk | 
@@ -279,7 +280,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (90)
+## Image (91)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -351,6 +352,7 @@ Family/Format | Name | Extensions | Notes
 [image/printMagicGraphic](https://discmaster.textfiles.com/search?formatid=printMagicGraphic) | Print Magic Graphic | .pmg | 
 [image/professionalDraw](https://discmaster.textfiles.com/search?formatid=professionalDraw) | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://sembiance.com/fileFormatSamples/image/professionalDraw/) - No known converter.
 [image/proShapeDrawing](https://discmaster.textfiles.com/search?formatid=proShapeDrawing) | ProShape Drawing | .psp | [5 sample files](https://sembiance.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
+[image/protoCAD3DDrawing](https://discmaster.textfiles.com/search?formatid=protoCAD3DDrawing) | ProtoCAD 3D Drawing | .pcf | 
 [image/quattroProClipArt](https://discmaster.textfiles.com/search?formatid=quattroProClipArt) | Quattro Pro Clip Art | .clp | 
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/rleTRE](https://discmaster.textfiles.com/search?formatid=rleTRE) | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
@@ -476,7 +478,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (458)
+## Other (459)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -604,6 +606,7 @@ Family/Format | Name | Extensions | Notes
 [other/cygnusEdMacros](https://discmaster.textfiles.com/search?formatid=cygnusEdMacros) | Cygnus Editor Macros |  | 
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?formatid=dataStoreDatabase) | Datastore Database |  | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?formatid=dBaseCompiledObjectProgram) | dBase Compiled Object Program | .dbo | 
+[other/dBaseDesign](https://discmaster.textfiles.com/search?formatid=dBaseDesign) | dBase Form | .frm | 
 [other/dBaseIndex](https://discmaster.textfiles.com/search?formatid=dBaseIndex) | dBase Index File | .ntx | 
 [other/dBaseQuery](https://discmaster.textfiles.com/search?formatid=dBaseQuery) | dBase Query | .qbe | 
 [other/dBaseUpdate](https://discmaster.textfiles.com/search?formatid=dBaseUpdate) | dBase Update | .upd | 

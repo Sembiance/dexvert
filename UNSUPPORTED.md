@@ -1,11 +1,11 @@
-# Unsupported File Formats (951)
+# Unsupported File Formats (953)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (61)
+## Archive (62)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -59,6 +59,7 @@ Family/Format | Name | Extensions | Notes
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
+[archive/thumbsUpDatabase](https://discmaster.textfiles.com/search?formatid=thumbsUpDatabase) | ThumbsUp Database |  | 
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?formatid=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?formatid=unrealPackage) | Unreal Package | .ut2 .uasset | 
@@ -478,7 +479,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (459)
+## Other (460)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -675,6 +676,7 @@ Family/Format | Name | Extensions | Notes
 [other/iBrowseGlobalCache](https://discmaster.textfiles.com/search?formatid=iBrowseGlobalCache) | iBrowse Global Cache |  | 
 [other/iccColorMap](https://discmaster.textfiles.com/search?formatid=iccColorMap) | ICC Color Map | .iff | 
 [other/iccColorProfile](https://discmaster.textfiles.com/search?formatid=iccColorProfile) | ICC Color Profile | .icc | 
+[other/iconAuthorFlowchart](https://discmaster.textfiles.com/search?formatid=iconAuthorFlowchart) | IconAuthor Flowchart | .iw .iwm | 
 [other/idaSignatures](https://discmaster.textfiles.com/search?formatid=idaSignatures) | IDA Signatures | .sig | 
 [other/iffBinaryPatch](https://discmaster.textfiles.com/search?formatid=iffBinaryPatch) | IFF Binary Patch | .pch .patch | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 

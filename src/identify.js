@@ -45,7 +45,7 @@ export async function getIdMeta(inputFile)
 		if([0, 74, 82].some(v => header[v]!==0))
 			return;
 
-		if(header[1]<1 || header[1]>63)
+		if(header[1]>63)	// Also used to fail if header[1]<1 but then I discovered a file that has a header[1] of 0 (test/sample/audio/fssdSound/LABSLAB.SOU)
 			return;
 
 		const dataForkLength = header.getUInt32BE(83);
@@ -53,7 +53,7 @@ export async function getIdMeta(inputFile)
 		if(dataForkLength===0 && resourceForkForkLength===0)
 			return;
 
-		if((dataForkLength+resourceForkForkLength+128)>inputFile.size)
+		if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
 			return;
 
 		// here we check to see if the type or creator has a null byte. I think in theory null bytes are allowed and I think I've even encountered it (though I forget where), but since this macBinary check is weak in general, we just restrict matches to those with non-null bytes in the type/creator

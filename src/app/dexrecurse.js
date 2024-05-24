@@ -6,6 +6,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
+import {WEAK_MAC_TYPE_CREATORS} from "../WEAK.js";
 
 const MAX_DURATION = xu.HOUR;
 const DECRECURSE_HOST = "127.0.0.1";
@@ -369,8 +370,11 @@ async function processNextQueue()
 			if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
 			{
 				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
-				newMacTypeCreators[macFileTypeCreator] ||= [];
-				newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
+				if(!WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator))
+				{
+					newMacTypeCreators[macFileTypeCreator] ||= [];
+					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);
+				}
 			}
 
 			const proDOSType = dexData.idMeta?.proDOSType;

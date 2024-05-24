@@ -573,6 +573,7 @@ export default
 		iBrowseGlobalCache              : {name : "iBrowse Global Cache", magic : ["IBrowse Global Cache"]},
 		iccColorMap                     : {name : "ICC Color Map", ext : [".iff"], magic : ["IFF Color Map"]},
 		iccColorProfile                 : {name : "ICC Color Profile", ext : [".icc"], magic : ["ICC Color profile", /^color profile/]},
+		iconAuthorFlowchart             : {name : "IconAuthor Flowchart", ext : [".iw", ".iwm"], magic : ["IconAuthor flowchart (generic)"]},
 		idaSignatures                   : {name : "IDA Signatures", ext : [".sig"], magic : ["IDA Signatures"]},
 		iffBinaryPatch                  : {name : "IFF Binary Patch", ext : [".pch", ".patch"], magic : ["IFF data, PTCH binary patch", "IFF binary Patch"]},
 		iffDTYP                         : {name : "Amiga IFF DTYP", magic : ["Amiga IFF datatype info", "IFF data, DTYP datatype description"]},

@@ -48,7 +48,11 @@ for(const inputFilePath of inputFilePaths)
 		if(argv.fileMeta)
 			inputFile.meta = xu.parseJSON(argv.fileMeta);
 
-		({ids : rows} = await identify(inputFile, {xlog}));
+		let idMeta = null;
+		({ids : rows, idMeta} = await identify(inputFile, {xlog}));
+		
+		if(idMeta && Object.keys(idMeta)?.length)
+			console.log(`idMeta: ${JSON.stringify(idMeta)}`);
 	}
 	else
 	{

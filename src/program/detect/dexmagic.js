@@ -35,6 +35,7 @@ const DEXMAGIC_CHECKS =
 	"POD Archive"                 : [{offset : 4, match : [["Startup", "TV", "Disk", "Fury"]]}],
 	"SCR Package"                 : [{offset : 0, match : "This is SCR Package File"}],
 	"TTW Compressed File"         : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
+	"ThumbsUp Database"           : [{offset : 0, match : [0xBE, 0xBA, 0xDA, 0xBE]}],
 	"Visual Novel DPK Archive"    : [{offset : 0, match : "PA"}],
 	"VICE Installer EXE"          : [{offset : -8, match : "ESIV"}, {offset : -4, match : [0xA0, 0x9A, 0x00, 0x00]}],
 	"Wacky Wheels Archive"        : [{offset : 2, match : "WACKY.ING"}],

@@ -16,25 +16,3 @@ import {MediaWiki} from "MediaWiki";
 const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
-
-const inputFile = {absolute : "/mnt/compendium/DevLab/dexvert/test/sample/document/gwBasic/bach", size : 1408};
-
-async function isValid()
-{
-	const endBytes = (await fileUtil.readFileBytes(inputFile.absolute, Math.min(256, inputFile.size), -(Math.min(256, inputFile.size)))).reverse();
-	for(const b of endBytes)
-	{
-		if(b===0x1A)
-			return true;
-
-		if(b===0x00)
-			continue;
-
-		break;
-	}
-
-	return false;
-}
-
-
-xlog.info`validEnding: ${await isValid()}`;

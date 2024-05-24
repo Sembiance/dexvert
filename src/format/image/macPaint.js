@@ -16,6 +16,6 @@ export class macPaint extends Format
 		"deark[module:macpaint][mac][matchType:magic]", "iio2png", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"keyViewPro", "hiJaakExpress", "pv[matchType:magic]", "canvas5", "corelPhotoPaint", "tomsViewer"
 	];
-	verify         = ({meta}) => meta.width<8000 && meta.height<8000;
-	notes          = "The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!";
+	verify = ({meta}) => meta.width<8000 && meta.height<8000;
+	notes  = "The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!";
 }

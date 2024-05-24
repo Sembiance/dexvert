@@ -1,3 +1,9 @@
+export const WEAK_MAC_TYPE_CREATORS =
+[
+	// these are very generic and can't be acted on
+	"BINA/mdos"
+];
+
 // These magics are VERY untrustworthy and any detections against them should be noted as such
 export const WEAK_VALUES =
 [

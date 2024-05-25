@@ -6,7 +6,7 @@ export class micrografxDraw extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Micrografx_Draw";
 	ext            = [".drw", ".drt", ".ds4", ".dsf"];
 	forbidExtMatch = true;
-	magic          = ["Micrografx Designer Drawing", "Micrografx Designer Graphics", "RIFF Datei: unbekannter Typ 'MGX '", "Windows Draw drawing", /^x-fmt\/(294|295)( |$)/];
+	magic          = ["Micrografx Designer Drawing", "Micrografx Designer Graphics", "RIFF Datei: unbekannter Typ 'MGX '", "Windows Draw drawing", /^x-fmt\/(47|294|295)( |$)/];
 	converters     = [
 		// vector
 		"scribus",

@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {programs, init as initPrograms} from "../src/program/programs.js";
 await initPrograms();
 
-console.log("Install gentoo with: installGentoo --phase=2 --scrubPartitionMap --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
+console.log("Install gentoo with: gentooInstall --phase=2 --scrubPartitionMap --withX --withQEMU --withNode --withSound --gateway=<gateway> <ip> <hostname>");
 console.log("Run the following as root on a fresh Gentoo system to be able to run dexvert:\n");
 
 [
@@ -86,5 +86,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
+	`echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<oor:data xmlns:oor="http://openoffice.org/2001/registry">\n  <dependency file="main"/>\n  <oor:component-data oor:package="org.openoffice.Office" oor:name="Common">\n    <node oor:name="Misc">\n      <prop oor:name="UseLocking">\n        <value>false</value>\n      </prop>\n    </node>\n  </oor:component-data>\n</oor:data>' > /usr/lib64/libreoffice/share/registry/disable-file-locking.xcd`,
+	`find /usr/portage/distfiles/ -mindepth 1 -delete`,
 	"# IMPORTANT: Run a full 'dra testMany.js' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

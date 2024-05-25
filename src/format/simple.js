@@ -72,7 +72,7 @@ export default
 		oberonDocument           : {name : "Oberon Document", ext : [".odc"], magic : ["Oberon/F Document"]},
 		oberonText               : {name : "Oberon Text", ext : [".mod"], magic : ["Oberon V4 text format"]},
 		os2Message               : {name : "OS/2 Message File", ext : [".msg"], magic : [/^OS\/2 help [Mm]essage/], website : "http://fileformats.archiveteam.org/wiki/MSG_(OS/2)"},
-		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro"]},
+		ovationPro               : {name : "Ovation Pro Document", ext : [".dpd"], magic : ["Ovation Pro", "OvationPro document"]},
 		pageSetter               : {name : "PageSetter Document", ext : [".ps"], magic : [/^PageSetter I{0,3} ?document/]},
 		palmTealMeal             : {name : "Palm TealMeal Document", ext : [".pdb"], magic : ["Palm TealMeal", "TealMeal PalmOS document"]},
 		palmThoughtManager       : {name : "Palm ThoughtManager", ext : [".pdb"], magic : ["Palm ThoughtManager"]},
@@ -98,7 +98,7 @@ export default
 		symantecQADatabase       : {name : "Symantec Q&A Database File", ext : [".dtf"], magic : ["Symantec QandA Database File"]},
 		tempusWord               : {name : "Tempus Word Document", ext : [".twd"], magic : ["Tempus Word Document"]},
 		textEngine               : {name : "Text Engine Document", ext : [".std"], magic : ["TextEngine document (generic)", "TextEngine document (v4.0)", "TextEngine document (v5.2)"], weakMagic : ["TextEngine document (generic)"]},
-		textMakerDocument        : {name : "TextMaker Document", ext : [".tmd"], magic : ["TextMaker document"]},
+		textMakerDocument        : {name : "TextMaker Document", ext : [".tmd"], magic : ["TextMaker document", "SoftMaker TextMaker template"]},
 		textPlus                 : {name : "Text Plus Document", ext : [".txp"], magic : ["Text Plus document"]},
 		theWorksSpreadsheet      : {name : "The Works! Spreadsheet", ext : [".sht"], magic : ["The Works! Spreadsheet"]},
 		twistDB                  : {name : "Twist Database file", ext : [".db"], magic : ["Twist DataBase"]},
@@ -113,8 +113,8 @@ export default
 		wingzHelp                : {name : "Wingz Help", magic : [/^Wingz [Hh]elp/]},
 		wingzSpreadsheet         : {name : "Wingz Spreadsheet", ext : [".wkz"], magic : ["Wingz spreadsheet"]},
 		winWorks                 : {name : "WinWorks Document", ext : [".wpd"], magic : ["WinWorks text Document"]},
-		zincData                 : {name : "Zinc Data", ext : [".dat", ".znc", ".z_t"], magic : ["Zinc Data"], website : "https://en.wikipedia.org/wiki/Zinc_Application_Framework"},
-		zxSpectrumDOSBASICSource : {name : "ZX Spectrum DOS BASIC Source Code", ext : [".bas"], magic : ["ZX spectrum +3 DOS BASIC source"]}
+		zincData                 : {name : "Zinc Data", ext : [".dat", ".znc", ".z_t"], magic : ["Zinc Data", "Format: Zinc Data"], website : "https://en.wikipedia.org/wiki/Zinc_Application_Framework"},
+		zxSpectrumDOSBASICSource : {name : "ZX Spectrum DOS BASIC Source Code", ext : [".bas"], magic : ["ZX spectrum +3 DOS BASIC source", "Spectrum +3 data - BASIC program"]}
 	},
 	
 	other :

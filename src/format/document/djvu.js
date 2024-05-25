@@ -6,6 +6,6 @@ export class djvu extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DjVu";
 	ext        = [".djvu", ".djv"];
 	mimeType   = "image/vnd.djvu";
-	magic      = ["DjVu multi-page document", "DjVu File Format", "DjVu multiple page document", "DjVu single-page document", "DjVu image or single page document", /^fmt\/(255|318)( |$)/];
+	magic      = ["DjVu multi-page document", "DjVu File Format", "DjVu multiple page document", "DjVu single-page document", "DjVu image or single page document", "Format: DjVu document", /^fmt\/(255|318)( |$)/];
 	converters = ["ddjvu"];
 }

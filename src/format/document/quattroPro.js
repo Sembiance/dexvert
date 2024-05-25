@@ -6,6 +6,6 @@ export class quattroPro extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Quattro_Pro";
 	ext            = [".wq1", ".wq2", ".wb1", ".wb2", ".wb3", ".qpw"];
 	forbidExtMatch = true;
-	magic          = ["Quattro Pro for Windows spreadsheet", /^fmt\/837( |$)/];
+	magic          = ["Quattro Pro for Windows spreadsheet", "Quattro Pro spreadsheet", /^fmt\/(834|835|836|837)( |$)/, /^x-fmt\/121( |$)/];
 	converters     = ["soffice[format:QPro]", "excel97"];
 }

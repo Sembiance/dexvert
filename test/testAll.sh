@@ -1,7 +1,7 @@
 #!/bin/bash
 
 shopt -s expand_aliases
-source /etc/bash/bashrc.d/bash_aliases
+source /mnt/compendium/sys/bash/bash_aliases
 
 # col1 times are from dexdrone1 Feb 17, 2024
 # col2 times are from dexdrone1 Apr 01, 2024

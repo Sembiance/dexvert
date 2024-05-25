@@ -1,4 +1,4 @@
-# Supported File Formats (1,705)
+# Supported File Formats (1,706)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -646,7 +646,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (568)
+## Image (569)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://sembiance.com/fileFormatSamples/image/threeDCK/)
@@ -820,6 +820,7 @@ image | [FLI Graph Image](http://fileformats.archiveteam.org/wiki/FLI_Graph) | .
 image | [Flickering Flexible Line Interpretation](http://fileformats.archiveteam.org/wiki/FFLI) | .ffli | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/ffli/)
 image | [FLIP Image](http://fileformats.archiveteam.org/wiki/FLIP) | .fbi | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/fbi/)
 image | [Floor Designer](http://fileformats.archiveteam.org/wiki/Floor_Designer) | .fge | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/image/fge/)
+image | FM-Towns HEL Animation | .hel | [hel2tif](https://discmaster.textfiles.com/browse/657/FM%20Towns%20Free%20Software%20Collection%2010.iso/t_os/tool/hel2tif) | 
 image | [Fractal Image and Sequence Codec](http://fileformats.archiveteam.org/wiki/FIASCO) | .fco | [fiascotopnm](http://netpbm.sourceforge.net/) | [14 sample files](https://sembiance.com/fileFormatSamples/image/fiasco/)
 image | [Fractal Image Format](http://fileformats.archiveteam.org/wiki/Fractal_Image_Format) | .fif | [fifView](http://cd.textfiles.com/wthreepack/wthreepack-1/COMPRESS/FIFDEMO.ZIP) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) | [11 sample files](https://sembiance.com/fileFormatSamples/image/fractalImageFormat/) - The 256C versions don't convert with any program I could find. With GenuineFractal 4 (GF-PP4-TR-Win32.exe) and PS7 (app/ps7.zip) I was not able to open any .fif files.
 image | [Free Lossless Image Format](http://fileformats.archiveteam.org/wiki/FLIF) | .flif | [abydosconvert](https://github.com/Sembiance/abydosconvert) | [2 sample files](https://sembiance.com/fileFormatSamples/image/flif/)

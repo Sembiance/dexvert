@@ -5,6 +5,6 @@ export class microsoftWindowsInstaller extends Format
 	name       = "Microsoft Windows Installer";
 	website    = "http://fileformats.archiveteam.org/wiki/Windows_Installer";
 	ext        = [".msi", ".msp"];
-	magic      = ["Microsoft Windows Installer"];
+	magic      = ["Microsoft Windows Installer", "Installer: Microsoft Installer"];
 	converters = ["sevenZip", "cabextract"];
 }

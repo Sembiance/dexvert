@@ -12,6 +12,7 @@ import {getDetections} from "../src/Detection.js";
 import {programs, init as initPrograms} from "../src/program/programs.js";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 import {MediaWiki} from "MediaWiki";
+import {xmlParse} from "denoLandX";
 
 const xlog = new XLog("info");
 //await initPrograms(xlog);

@@ -5,7 +5,7 @@ export class iffLIST extends Format
 {
 	name       = "IFF LIST File";
 	website    = "https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF";
-	magic      = ["IFF LIST file", "IFF List"];
+	magic      = ["IFF LIST file", "IFF List", "Movie Setter Set"];
 	converters = ["unIFFLIST"];
 	notes      = xu.trim`
 		The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file.

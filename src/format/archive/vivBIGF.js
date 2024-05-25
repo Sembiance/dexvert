@@ -5,6 +5,6 @@ export class vivBIGF extends Format
 	name       = "VIV BIGF";
 	website    = "http://fileformats.archiveteam.org/wiki/VIV";
 	ext        = [".viv", ".big"];
-	magic      = ["VIV/BIGF Electronic Arts Game Archive"];
+	magic      = ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"];
 	converters = ["gameextractor"];
 }

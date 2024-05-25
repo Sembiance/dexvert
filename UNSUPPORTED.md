@@ -1,4 +1,4 @@
-# Unsupported File Formats (953)
+# Unsupported File Formats (954)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -479,7 +479,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (460)
+## Other (461)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -615,6 +615,7 @@ Family/Format | Name | Extensions | Notes
 [other/demoManiacVectors](https://discmaster.textfiles.com/search?formatid=demoManiacVectors) | DemoManiac Vectors | .dat | 
 [other/demoShieldDemo](https://discmaster.textfiles.com/search?formatid=demoShieldDemo) | DemoShield Demo | .dbd .bdd | 
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
+[other/desktopDBDF](https://discmaster.textfiles.com/search?formatid=desktopDBDF) | Desktop DB/DF |  | 
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 

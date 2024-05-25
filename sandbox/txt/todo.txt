@@ -1,6 +1,8 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Finish adding support for hel2tif (test it and dexstash samples)
+
 * Update to IsoBuster 5.4
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
@@ -12,7 +14,7 @@
 /---------------\
 | High Priority |
 \---------------/
-* Look on discmaster2 for fMTownsHELBitmap and see if deark/recoil could add support for it
+* Look on discmaster2 for fMTownsHE1Bitmap and see if deark/recoil could add support for it
   Same with townsOSIcon
 
 * Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:

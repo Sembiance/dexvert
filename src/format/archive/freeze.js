@@ -6,7 +6,7 @@ export class freeze extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Freeze/Melt";
 	ext          = [".f", ".lzc"];
 	keepFilename = true;
-	magic        = ["Freeze archive data", "frozen file", "Freeze compressed data", "F: Freeze/Melt"];
+	magic        = ["Freeze archive data", "frozen file", "Freeze compressed data", "F: Freeze/Melt", "Archive: Freeze/Melt"];
 	packed       = true;
 	converters   = ["freeze", "ancient"];
 }

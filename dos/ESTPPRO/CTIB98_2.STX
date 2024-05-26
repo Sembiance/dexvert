@@ -1,0 +1,65 @@
+[Main]
+;*** DO NOT TOUCH! The format of this file WILL change.
+Product=Setup Pro
+Version=1.0
+OEM=Eschalon Release Edition
+Base Directory=e:\
+
+[Settings]
+Application Name=
+Window Title=Setup computer thuis in bedrijf 98_2
+Background Title=Setup computer thuis in bedrijf 98_2
+Directory=c:\ctib
+PM Group=CTIB 98_2
+Prompt PM=TRUE
+Disk Label Mask=Disk #%d
+Background=Dithered Title
+ReadMe Font=Default
+Resize ReadMe=FALSE
+ReadMe At Start=FALSE
+Brand Source=FALSE
+Brand Destination=FALSE
+End Program=
+
+[Branding]
+INI File=
+Section=
+Name=
+Company=
+
+[PM Items]
+Setup Startfleet Academy=0 "%s\academy\autorun\autorun.exe" "%s\academy\autorun" "%s\academy\autorun\autorun.ico" "0"
+Setup Adobe Acrobat 16bit=0 "%s\acrobat\16bit\setup.exe" "%s\acrobat\16bit" "" "0"
+Setup Adobe Acrobat 32bit=0 "%s\acrobat\32bit\setup.exe" "%s\acrobat\32bit" "" "0"
+Blinky Bill 2=0 "%s\demo_bb2\bb2demo.exe" "%s\demo_bb2" "%s\demo_bb2\balloon.ico" "0"
+3d fx drivers=0 "%s\drivers\3dfx\grtvgr.exe" "%s\drivers\3dfx" "" "0"
+Directx5=0 "%s\drivers\directx5\dxsetup.exe" "%s\drivers\directx5" "" "0"
+F1 racing=0 "%s\f1racing\english\f1voo.exe" "%s\f1racing\english" "" "0"
+F22=0 "%s\F22adf\F22.avi" "%s\f22adf" "" "0"
+Free Space=0 "%s\free\fs10eval.exe" "%s\free" "" "0"
+I-war=0 "%s\iwar\iwar.exe" "%s\iwar" "" "0"
+I-war Demo Avi=0 "%s\iwar\iwardemo.avi" "%s\iwar" "" "0"
+pag.1/16 CTIB98_1 PDF=0 "%s\ctib98_1\pag1_16.pdf" "%s\ctib98_1" "" "0"
+pag.17/32 CTIB98_1 PDF=0 "%s\ctib98_1\pag17_32.pdf" "%s\ctib98_1" "" "0"
+pag.33/47 CTIB98_1 PDF=0 "%s\ctib98_1\pag33_47.pdf" "%s\ctib98_1" "" "0"
+pag.48/64 CTIB98_1 PDF=0 "%s\ctib98_1\pag48_64.pdf" "%s\ctib98_1" "" "0"
+Mathcad 7=0 "%s\mathcad7\setup.exe" "%s\mathcad7" "" "0"
+MCAFEE 95=0 "%s\mcafee\win95\setup.exe" "%s\mcafee\win95" "" "0"
+MCAFEE 311=0 "%s\mcafee\win311\setup.exe" "%s\mcafee\win311" "" "0"
+Meatpuppet=0 "%s\meatdemo\meatdemo.exe" "%s\meatdemo" "" "0"
+Pilgrim=0 "%s\pilgrim\pilgrim.avi" "%s\pilgrim" "" "0"
+Poker=0 "%s\poker\pdeval20.exe" "%s\poker" "" "0"
+ARC=0 "%s\sharew\arc\addrmclr.exe" "%s\sharew\arc" "" "0"
+Astromart=0 "%s\sharew\astrom\astrom.exe" "%s\sharew\astrom" "" "0"
+Clean System Directory=0 "%s\sharew\clean\setup.exe" "%s\sharew\clean" "" "0"
+Cliptrakker=0 "%s\sharew\cliptrak\clptrk11.exe" "%s\sharew\cliptrak" "" "0"
+Kalua Cocktails=0 "%s\sharew\kalua\kalua.exe" "%s\sharew\kalua" "" "0"
+Taaltris=0 "%s\taaltris\taaltris.exe" "%s\taaltris" "" "0"
+Toca Touring Car=0 "%s\toca\tourdemo.exe" "%s\toca" "" "0"
+Uprising=0 "%s\uprising\uprising.exe" "%s\uprising" "" "0"
+Active Movie=0 "%s\utils\activem\Ivi_nt95.exe" "%s\utils\activem" "" "0"
+Quicktime 2.1.2=0 "%s\utils\qtw\qt32.exe" "%s\utils\qtw" "" "0"
+Video for Windows 1.1=0 "%s\utils\vfw\setup.exe" "%s\utils\vfw" "" "0"
+Worms 2=0 "%s\worms2\setup.exe" "%s\worms2" "" "0"
+Zipmagic=0 "%s\zipmagic\zm95-10.exe" "%s\zipmagic" "" "0"
+

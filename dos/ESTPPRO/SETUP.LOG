@@ -1,0 +1,28 @@
+[INSTALLED FILES]
+Archive utility=d:\estppro\archive.exe
+Command Line Utilities=d:\estppro\cmdutils.pif
+Extract utility=d:\estppro\extract.exe
+Loader utility=d:\estppro\loader.exe
+NetSetup utility=d:\estppro\netsetup.exe
+ReadMe!=d:\estppro\readme.txt
+Eschalon Setup Pro - Loader=d:\estppro\setup.exe
+Sample Setup Script=d:\estppro\setup.stx
+Eschalon Setup Expert=d:\estppro\setupexp.exe
+Eschalon Setup - Manual=d:\estppro\setupexp.hlp
+Eschalon Setup Pro - Main=d:\estppro\setupmn.exe
+
+[.INI FILES]
+0=Added key "STX=Added key "STX=Added key "STX" in section [Extensions] of file "win.ini"
+1=Added key "First Run=Added key "First Run=Added key "First R" in section [Main] of file "setupexp.ini"
+2=Added key "Custom Level=Added key "Custom Level=Added key "Custom Leve" in section [Settings] of file "setupexp.ini"
+3=Added key "Base Directory=Added key "Base Directory=Added key "Base Directory=Added key" in section [Main] of file "d:\estppro\setup.stx"
+4=Added key "Bitmap File=Added key "Bitmap File=Added key "Bitmap File=Added " in section [Settings] of file "d:\estppro\setup.stx"
+5=Added key "Background=Added key "Background=Added key "Background=Added key "Background=" in section [Settings] of file "d:\estppro\setup.stx"
+
+[PM GROUP]
+PM Group created=Eschalon Setup Pro
+Eschalon Setup Expert=d:\estppro\setupexp.exe
+Eschalon Setup - Manual=d:\estppro\setupexp.hlp
+Command Line Utilities=d:\estppro\cmdutils.pif
+Sample Setup Script=d:\estppro\setup.stx
+ReadMe!=d:\estppro\readme.txt

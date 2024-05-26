@@ -1,0 +1,65 @@
+[Main]
+;*** DO NOT TOUCH! The format of this file WILL change.
+Product=Setup Pro
+Version=1.0
+OEM=Eschalon Release Edition
+Base Directory=d:\estppro
+
+[Settings]
+Application Name=Eschalon Setup Pro
+Window Title=Eschalon Setup Pro - Standard Edition
+Background Title=Eschalon Setup Pro
+Directory=c:\estppro
+PM Group=Eschalon Setup Pro
+Prompt PM=FALSE
+Disk Label Mask=Disk Number %d
+Background=Dithered Titled
+Bitmap File=
+ReadMe File=g:\edi\distrib\estppro\readme.txt
+ReadMe Font=Default
+Resize ReadMe=FALSE
+ReadMe At Start=FALSE
+Brand Source=TRUE
+Brand Destination=TRUE
+End Program=%d\setupexp.exe
+
+[Branding]
+INI File=setupexp.ini
+Section=User Information
+Name=Name
+Company=Company
+
+[Components]
+1=Eschalon Setup Pro
+2=Eschalon Setup Expert
+3=Utilities
+4=Documentation
+
+[Files]
+archive.exe="Archive utility" 22499 A 3 C A
+cmdutils.pif="Command Line Utilities" 545 A 3 C A
+extract.exe="Extract utility" 18619 A 3 C A
+loader.exe="Loader utility" 5595 A 3 C A
+netsetup.exe="NetSetup utility" 4473 A 3 C A
+readme.txt="ReadMe!" 608 A 0 C A
+setup.exe="Eschalon Setup Pro - Loader" 22016 A 1 C A
+setup.stx="Sample Setup Script" 1970 A 4 C A
+setupexp.exe="Eschalon Setup Expert" 544160 A 2 C A
+setupexp.hlp="Eschalon Setup - Manual" 72941 A 4 C A
+setupmn.exe="Eschalon Setup Pro - Main" 110926 A 1 C A
+
+[INI Items]
+0=2 "win.ini" "Extensions" "STX" "%d\setupexp.exe ^.STX"
+1=2 "setupexp.ini" "Main" "First Run" "1"
+2=2 "setupexp.ini" "Settings" "Custom Level" "2"
+3=4 "%d\setup.stx" "Main" "Base Directory" "%d"
+4=4 "%d\setup.stx" "Settings" "Bitmap File" ""
+5=4 "%d\setup.stx" "Settings" "Background" "Dithered Titled"
+
+[PM Items]
+Eschalon Setup Expert=2 "%d\setupexp.exe" "%d" "" "0"
+Eschalon Setup - Manual=4 "%d\setupexp.hlp" "%d" "" "0"
+Command Line Utilities=3 "%d\cmdutils.pif" "%d" "" "0"
+Sample Setup Script=4 "%d\setup.stx" "%d" "" "0"
+ReadMe!=0 "%d\readme.txt" "%d" "" "0"
+

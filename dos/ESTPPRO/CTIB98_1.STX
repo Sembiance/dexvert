@@ -1,0 +1,62 @@
+[Main]
+;*** DO NOT TOUCH! The format of this file WILL change.
+Product=Setup Pro
+Version=1.0
+OEM=Eschalon Release Edition
+Base Directory=
+
+[Settings]
+Application Name=
+Window Title=Setup computer thuis in bedrijf 98_1 
+Background Title=Setup computer thuis in bedrijf 98_1
+Directory=c:\ctib
+PM Group=CTIB 98_1
+Prompt PM=TRUE
+Disk Label Mask=Disk #%d
+Background=Dithered Title
+ReadMe Font=Default
+Resize ReadMe=FALSE
+ReadMe At Start=FALSE
+Brand Source=FALSE
+Brand Destination=FALSE
+End Program=
+
+[Branding]
+INI File=
+Section=
+Name=
+Company=
+
+[PM Items]
+Unzip Glide Drivers=0 "%s\3dfx\grtvgr.exe" "%s\3dfx" "" "0"
+Setup Intel Indeo ActiveMovie support=0 "%s\activem\Ivi_nt95.exe" "%s\activem" "" "0"
+Unzip Business Cards 4.18=0 "%s\buscrds\32bcr418.exe" "%s\buscrds" "" "0"
+Setup Caban=0 "%s\caban\setup.exe" "%s\caban" "" "0"
+Install Cd-rom Explorer Dos=0 "%s\cde_nl\install.exe" "%s\cde_nl" "%s\cde_nl\cde.ico" "0"
+Install Cd-rom Explorer win=0 "%s\cew_nl\install.exe" "%s\cew_nl" "" "0"
+Setup Close Combat 2=0 "%s\combat2\msabtfdx.exe" "%s\combat2" "" "0"
+Setup Compuserve=0 "%s\compu\csi304nl\setup.exe" "%s\compu\csi304nl" "" "0"
+Setup Frontpage 97=0 "%s\compu\fp97\setup.exe" "%s\compu\fp97" "" "0"
+Unzip Sun Culture=0 "%s\culture\scengdem.exe" "%s\culture" "" "0"
+Curve Fit=0 "%s\curfit113\curvefit.exe" "%s\curfit113" "" "0"
+Setup Directx5=0 "%s\directx5\dxsetup.exe" "%s\directx5" "" "0"
+Unzip Directory Printer=0 "%s\dirprint\dirprint.exe" "%s\dirprint" "" "0"
+Setup Dark Earth=0 "%s\earth\setup.exe" "%s\earth" "" "0"
+Setup Mopy Fish=0 "%s\fish\setup.exe" "%s\fish" "" "0"
+Unzip GoSite=0 "%s\gosite\gosite.exe" "%s\gosite" "" "0"
+Setup Duikmanager=0 "%s\manager\setup.exe" "%s\manager" "" "0"
+Install Mormels=0 "%s\mormels\morminst.exe" "%s\mormels" "" "0"
+Setup Netscape 4.03 win311=0 "%s\netscape\win311\cb16e403.exe" "%s\netscape\win311" "" "0"
+Setup Netscape 4.03 win95=0 "%s\netscape\win95\cb32e403.exe" "%s\netscape\win95" "" "0"
+Nijntje=0 "%s\nijntje\nijndemo.exe" "%s\nijntje" "" "0"
+Pajama Sam=0 "%s\pajama\install.exe" "%s\pajama" "%s\pajama\pjs-demo.ico" "0"
+Setup Pink Panther=0 "%s\panther\setup.exe" "%s\panther" "" "0"
+Setup Pax Imperia 2=0 "%s\pax\setup.exe" "%s\pax" "" "0"
+Post97=0 "%s\post97\post97.exe" "%s\post97" "%s\post97\post97.ico" "0"
+Setup Postcode View 1.0=0 "%s\postcode\setup.exe" "%s\postcode" "" "0"
+Setup Quicktime 32=0 "%s\qtw\qt32.exe" "%s\qtw" "" "0"
+ShowToday leesmij=0 "%w\notepad.exe %s\shw2day\leesdit.txt" "%s\shw2day" "" "0"
+Unzip Tomb raider 2=0 "%s\tompr2\tr2demo1.exe" "%s\tompr2" "" "0"
+Setup Video for Windows=0 "%s\vfw\setup.exe" "%s\vfw" "" "0"
+Setup Virtual Pool=0 "%s\vpool\setup.exe" "%s\vpool" "" "0"
+

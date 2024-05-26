@@ -3,7 +3,7 @@ Convert **1,707** file formats (out of **2,662** known) into modern equilivants 
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
-Utilizes [Deno](https://deno.land/) and **445** helper programs running on **4** different operating systems under various emulators.
+Utilizes [Deno](https://deno.land/) and **446** helper programs running on **4** different operating systems under various emulators.
 
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly or not at all, submit an issue.
 

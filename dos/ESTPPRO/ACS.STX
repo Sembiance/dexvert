@@ -1,0 +1,38 @@
+[Main]
+;*** DO NOT TOUCH! The format of this file WILL change.
+Product=Setup Pro
+Version=1.0
+OEM=Eschalon Release Edition
+Base Directory=e:\master\master\new
+
+[Settings]
+Application Name=A.C.S.
+Window Title=SETUP ACCIDENT CONTROL SOFTWARE
+Background Title=Accident Control Software version 1.b
+Directory=c:\acs
+PM Group=ACS
+Prompt PM=FALSE
+Disk Label Mask=Disk #%d
+Background=Centered
+Bitmap File=c:\jrk\install.bmp
+ReadMe File=e:\master\master\inst.txt
+ReadMe Font=System
+Resize ReadMe=TRUE
+ReadMe At Start=FALSE
+Brand Source=FALSE
+Brand Destination=FALSE
+End Program=%s\data\install.exe
+
+[Branding]
+INI File=
+Section=
+Name=
+Company=
+
+[Files]
+acs.exe="acs.exe" 4157952 A 0 N A
+photo.txt="photo.txt" 18136 A 0 C A
+
+[PM Items]
+A.C.S.=0 "%d\acs.exe" "%d" "" "0"
+

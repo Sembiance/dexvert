@@ -15,7 +15,7 @@ const argv = cmdUtil.cmdInit({
 	},
 	args :
 	[
-		{argid : "inputFilePath", desc : "Max VISE Installer package to extract", required : true},
+		{argid : "inputFilePath", desc : "Mac VISE Installer package to extract", required : true},
 		{argid : "outputDirPath", desc : "Output dir to save icons to", required : true}
 	]});
 

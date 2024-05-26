@@ -1,11 +1,11 @@
-# Unsupported File Formats (954)
+# Unsupported File Formats (955)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (62)
+## Archive (64)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -33,6 +33,8 @@ Family/Format | Name | Extensions | Notes
 [archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
 [archive/interfaze](https://discmaster.textfiles.com/search?formatid=interfaze) | [Interfaze Application](http://fileformats.archiveteam.org/wiki/Interfaze) | .app | [8 sample files](https://sembiance.com/fileFormatSamples/archive/interfaze/)
 [archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
+[archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
+[archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -281,7 +283,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (91)
+## Image (90)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -314,7 +316,6 @@ Family/Format | Name | Extensions | Notes
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?formatid=easyCADDrawing) | EasyCAD Drawing | .fcd | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?formatid=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fpr](https://discmaster.textfiles.com/search?formatid=fpr) | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
-[image/fMTownsHELBitmap](https://discmaster.textfiles.com/search?formatid=fMTownsHELBitmap) | FM Towns HEL bitmap | .hel | 
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
 [image/fxgBitmap](https://discmaster.textfiles.com/search?formatid=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
 [image/genericCADD](https://discmaster.textfiles.com/search?formatid=genericCADD) | Generic CADD | .gcd | 
@@ -1006,7 +1007,7 @@ Family/Format | Name | Extensions | Notes
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
-[video/phVideo](https://discmaster.textfiles.com/search?formatid=phVideo) | PH Video | .ph | [2 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/) - No known converter or modern player. Could be kinda supported by using 'tmmplay.exe <filename>' in DOS to play the video. But it'll play in real time and sound capture will be hard to do.
+[video/phVideo](https://discmaster.textfiles.com/search?formatid=phVideo) | PH Video | .ph | [4 sample files](https://sembiance.com/fileFormatSamples/video/phVideo/) - No known converter or modern player. Could be kinda supported by using 'tmmplay.exe <filename>' in DOS to play the video. But it'll play in real time and sound capture will be hard to do.
 [video/psygnosisMultiMedia](https://discmaster.textfiles.com/search?formatid=psygnosisMultiMedia) | [Psygnosis MultiMedia Video](https://wiki.multimedia.cx/index.php?title=PMM) | .pmm | Couldn't locate a converter
 [video/ratvidVideo](https://discmaster.textfiles.com/search?formatid=ratvidVideo) | RATVID Video | .vdo | 
 [video/riffANIM](https://discmaster.textfiles.com/search?formatid=riffANIM) | RIFF ANIM | .paf | [9 sample files](https://sembiance.com/fileFormatSamples/video/riffANIM/) - Couldn't find any evidence of this out in the public. Could very well be a proprietary format

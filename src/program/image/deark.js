@@ -13,7 +13,7 @@ function restRenamer(rest, suffix, newName)
 {
 	// if we don't have a period in our rest, then if it's a common extension fall back on our newName
 	if(!rest.includes("."))
-		return ["gif", "png", "ico", "jpg", "bmp", "eps", "svg", "jp2", "qtif", "tif", "tiff", "bin", "ptr", "icns", "wmf"].includes(rest) && newName ? [newName, suffix, ".", rest] : [suffix, rest];
+		return ["gif", "png", "ico", "jpg", "bmp", "eps", "svg", "jp2", "qtif", "tif", "tiff", "txt", "bin", "ptr", "icns", "wmf"].includes(rest) && newName ? [newName, suffix, ".", rest] : [suffix, rest];
 	
 	const restParts = rest.split(".");
 	return [restParts.slice(0, -1).join("."), suffix, ".", restParts.at(-1)];

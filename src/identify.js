@@ -67,11 +67,16 @@ export async function getIdMeta(inputFile)
 
 		const creationDate = header.getUInt32BE(91);
 		const modifiedDate = header.getUInt32BE(95);
-		if(creationDate>modifiedDate)
-			return;
 
+		// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
+		// ensure our modified date is not more than 2 days after our creation date (we've seen a few in the wild that are off by small amount, like 90 seconds (archive/macBinary/ZEN.HLP))
+		//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
+		//	return;
+
+		// ensure sane timestamps (year between 1960 and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
 		const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-		if([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<1960 || year>(new Date()).getFullYear()))
+		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<1960 || year>(new Date()).getFullYear())) &&
+		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<1960 || d.getFullYear()>(new Date()).getFullYear())))
 			return;
 
 		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};

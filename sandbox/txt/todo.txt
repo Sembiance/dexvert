@@ -1,24 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Update to IsoBuster 5.4
-
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
   I started it in ~/bin/unVISEInstaller.js based on this info: https://pastebin.com/GwQYz2gG
   Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
 
+
 /---------------\
 | High Priority |
 \---------------/
-* Look on discmaster2 for fMTownsHE1Bitmap and see if deark/recoil could add support for it
-  Same with townsOSIcon
-
-* Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
-https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
-https://codecs.multimedia.cx/2024/04/a-look-at-more-formats/
-https://codecs.multimedia.cx/2024/04/another-quick-look-at-two-amiga-formats/
+* Figure out why abydos is crashing in stos.so with PicturePacker* files. Build abydos with debugging symbols:
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Debug ..
+	make
+	gdb src/abydosconvert
+	set args image/x-stos-picturepacker-medres /home/sembiance/tmp/MIDDLE_E.PP2 /home/sembiance/tmp/out/
+	run
 
 
 /-----------------\
@@ -97,6 +97,11 @@ https://codecs.multimedia.cx/2024/04/another-quick-look-at-two-amiga-formats/
 /--------------\
 | Low Priority |
 \--------------/
+* Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
+  https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
+  https://codecs.multimedia.cx/2024/04/a-look-at-more-formats/
+  https://codecs.multimedia.cx/2024/04/another-quick-look-at-two-amiga-formats/
+
 * Try out these converter programs to see if they support any additional formats (temporarily test each on a VNC win2k/winxp):
   Micrografx Graphics Suite (check out Picture Publisher, Designer and Simply 3D): https://winworldpc.com/product/micrografx-graphics-suite/2
   Micrografx Draw: https://winworldpc.com/product/micrografx-draw/60

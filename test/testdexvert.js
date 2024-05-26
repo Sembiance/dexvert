@@ -163,10 +163,6 @@ const SUPPORTING_FILES =
 	{
 		pogNames              : /\.pog$/i,
 		printMasterShapeNames : /\.shp$/i
-	},
-	video :
-	{
-		phVideo : /tmmplay\.gxl$/i
 	}
 };
 
@@ -361,6 +357,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
+	[/document\/wordDocDOS\/CALENDAR.*\.MSW$/, "document", "wri"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
@@ -463,6 +460,15 @@ const ALLOW_PROCESS_FAILURES =
 	video :
 	{
 		acornReplayVideo : ["bluegreen", "ducks2", "parrot"]
+	}
+};
+
+// Sometimes metadata just happens to change every time, so we ignore it
+const ALLOW_METADATA_DIFFERENCES =
+{
+	music :
+	{
+		ay : ["Burnin'Rubber.ay"]
 	}
 };
 
@@ -786,7 +792,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		}
 
 		const objDiff = diffUtil.diff(prevData.meta, result.meta);
-		if(objDiff.length>0)
+		if(objDiff.length>0 && !ALLOW_METADATA_DIFFERENCES?.[diskFamily]?.[diskFormat]?.includes(path.basename(sampleSubFilePath)))
 			return fail(`Meta different: ${objDiff.squeeze()}`);
 	}
 	else if(result.meta && Object.keys(result.meta).length>0)

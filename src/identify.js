@@ -65,6 +65,15 @@ export async function getIdMeta(inputFile)
 		if(fileCreatorData.indexOfX(0)!==-1)
 			return;
 
+		const creationDate = header.getUInt32BE(91);
+		const modifiedDate = header.getUInt32BE(95);
+		if(creationDate>modifiedDate)
+			return;
+
+		const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
+		if([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<1960 || year>(new Date()).getFullYear()))
+			return;
+
 		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
 	};
 

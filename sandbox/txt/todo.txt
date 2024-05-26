@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Finish adding support for hel2tif (test it and dexstash samples)
-
 * Update to IsoBuster 5.4
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup

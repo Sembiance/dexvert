@@ -173,7 +173,6 @@ export default
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
-		fMTownsHELBitmap          : {name : "FM Towns HEL bitmap", ext : [".hel"], magic : ["FM Towns HEL bitmap"]},
 		genericCADD               : {name : "Generic CADD", ext : [".gcd"], magic : ["Generic CADD drawing"]},
 		graphicWorksVectorDrawing : {name : "GraphicWorks Vector Drawing", ext : [".dvg"], magic : ["GraphicWorks Vector Drawing"]},
 		intergraphRasterRGB       : {name : "Intergraph Raster RGB", ext : [".rgb"], magic : ["Intergraph Raster bitmap (Adaptive RLE RGB)"]},

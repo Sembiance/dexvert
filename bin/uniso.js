@@ -15,6 +15,7 @@ const argv = cmdUtil.cmdInit({
 		nextstep    : {desc : "If set, CD will be treated as NeXTSTEP cd"},
 		logLevel    : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "warn"},
 		ts          : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
+		type        : {desc : "If set, specify the type of the CD", hasValue : true},
 		macEncoding : {desc : "Specify the Mac encoding to decode HFS filenames. Valid: roman | japan", hasValue : true, defaultValue : "roman"},
 		checkMount  : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
 	},
@@ -36,13 +37,15 @@ async function extractNormalISO()
 {
 	xlog.info`Extracting ISO as Normal ISO...`;
 		
-	const mountArgs = [];
+	const mountArgs = ["-o", "loop,ro"];
 	if(argv.offset || argv.block)
-		mountArgs.push("-o", `loop,ro${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`);
+		mountArgs[mountArgs.length-1] = `${mountArgs.at(-1)}${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`;
 	if(argv.nextstep)
 		mountArgs.push("-t", "ufs", "-o", "ufstype=nextstep-cd");
-	if(argv.hfsplus)
+	else if(argv.hfsplus)
 		mountArgs.push("-t", "hfsplus");
+	else if(argv.type)
+		mountArgs.push("-t", argv.type);
 
 	await runUtil.run("sudo", ["mount", ...mountArgs, IN_FILE_PATH, MOUNT_DIR_PATH], {liveOutput : xlog.atLeast("debug")});
 

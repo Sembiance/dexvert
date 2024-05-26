@@ -70,9 +70,8 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# Pabldraw sometimes fails, if so just emerge it again, second time usually works fine`,
+	`# pablodraw usually fails to merge the firs time. Just run again: emerge media-gfx/pablodraw`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
-	`emerge pablodraw`,
 	`eix-update`,
 	`depmod -a`,
 	`modinfo vhba`,
@@ -82,11 +81,11 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`chown sembiance:sembiance /mnt/dexvert`,
 	`usermod -aG vboxusers sembiance`,
 	`cd /usr/lib64 && ln -s libimagequant.so libimagequant.so.0`,	// required for uniconvertor
+	`echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<oor:data xmlns:oor="http://openoffice.org/2001/registry">\n  <dependency file="main"/>\n  <oor:component-data oor:package="org.openoffice.Office" oor:name="Common">\n    <node oor:name="Misc">\n      <prop oor:name="UseLocking">\n        <value>false</value>\n      </prop>\n    </node>\n  </oor:component-data>\n</oor:data>' > /usr/lib64/libreoffice/share/registry/disable-file-locking.xcd`,
+	`find /usr/portage/distfiles/ -mindepth 1 -delete`,
 	`sudo su - sembiance`,
 	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
-	`echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<oor:data xmlns:oor="http://openoffice.org/2001/registry">\n  <dependency file="main"/>\n  <oor:component-data oor:package="org.openoffice.Office" oor:name="Common">\n    <node oor:name="Misc">\n      <prop oor:name="UseLocking">\n        <value>false</value>\n      </prop>\n    </node>\n  </oor:component-data>\n</oor:data>' > /usr/lib64/libreoffice/share/registry/disable-file-locking.xcd`,
-	`find /usr/portage/distfiles/ -mindepth 1 -delete`,
 	"# IMPORTANT: Run a full 'dra testMany.js' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

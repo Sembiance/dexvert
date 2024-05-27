@@ -34,6 +34,9 @@ Can be an array of packages. If so, meta.website and meta.bin must be an array t
 >>> unsafe = true
 Set to true if this program isn't safe to use with all input files and may produce 'garbage' output
 
+>>> allowDupOut = true
+Set to true to allow dup output files from the original input files
+
 >>> checkForDups = true
 Set to true if this program can produce an output file identical to the original input, which we should delete to avoid infinite recursions
 

@@ -64,6 +64,8 @@ const DEXMAGIC_CHECKS =
 	"PCR Font" : [{offset : 0, match : "KPG"}, {offset : 5, match : [0x20]}],
 
 	// image
+	"101 Clips Image"             : [{offset : 0, match : [0xFF, 0xFF, 0xFF, 0xFF, [0x02, 0x03]]}],
+	"3D Browser Pro Catalogue"    : [{offset : 0, match : [0x03]}, {offset : 1, match : "obv"}],
 	"Alias PIX"                   : [{offset : 4, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x18]}],
 	"Apple IIGS Preferred Format" : [{offset : 2, match : [0x00, 0x00, 0x04]}, {offset : 5, match : "MAIN"}],
 	"ArtMaster88"                 : [{offset : 0, match : "SS"}, {offset : 2, match : [0x5F]}, {offset : 3, match : "SIF"}],

@@ -1,4 +1,4 @@
-# Unsupported File Formats (955)
+# Unsupported File Formats (954)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -480,7 +480,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (461)
+## Other (460)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -874,7 +874,6 @@ Family/Format | Name | Extensions | Notes
 [other/superZZTFile](https://discmaster.textfiles.com/search?formatid=superZZTFile) | Super ZZT File | .szt | 
 [other/superbaseForm](https://discmaster.textfiles.com/search?formatid=superbaseForm) | Superbase Form | .sbv | 
 [other/superJamFile](https://discmaster.textfiles.com/search?formatid=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
-[other/symlink](https://discmaster.textfiles.com/search?formatid=symlink) | symlink |  | This format is a hardcoded match at the beginning of identify.js
 [other/syslinuxCOM32Module](https://discmaster.textfiles.com/search?formatid=syslinuxCOM32Module) | Syslinux COM32 Module | .c32 | 
 [other/syslinuxLoader](https://discmaster.textfiles.com/search?formatid=syslinuxLoader) | SYSLINUX loader | .sys | 
 [other/tads](https://discmaster.textfiles.com/search?formatid=tads) | TADS | .t .gam | 

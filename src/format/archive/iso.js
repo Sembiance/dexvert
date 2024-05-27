@@ -245,6 +245,28 @@ export class iso extends Format
 			await fileUtil.unlink(type.dirPath);
 		}
 
+		// Now check to see if we have both a 'mac' and a 'pc' directory, and if so delete any 'duplicate' files from the mac side to help save space
+		const outputDirs = await fileUtil.tree(dexState.f.outDir.absolute, {depth : 1, nofile : true, relative : true});
+		if(outputDirs.includes("mac") && outputDirs.includes("pc"))
+		{
+			const macRelPaths = await fileUtil.tree(path.join(dexState.f.outDir.absolute, "mac"), {nodir : true, relative : true});
+			const pcRelPaths = await fileUtil.tree(path.join(dexState.f.outDir.absolute, "pc"), {nodir : true, relative : true});
+			await pcRelPaths.parallelMap(async pcRelPath =>
+			{
+				const macRelPath = macRelPaths.find(v => v.toLowerCase()===pcRelPath.toLowerCase());
+				if(!macRelPath)
+					return;
+
+				const macFilePath = path.join(dexState.f.outDir.absolute, "mac", macRelPath);
+				const pcFilePath = path.join(dexState.f.outDir.absolute, "pc", pcRelPath);
+				if(!await fileUtil.areEqual(macFilePath, pcFilePath))
+					return;
+
+				await fileUtil.unlink(macFilePath);
+				await Deno.symlink(path.relative(path.dirname(macFilePath), pcFilePath), macFilePath);
+			}, 2);
+		}
+
 		if(dexState.meta?.fileMeta)
 			dexState.meta.fileMeta = Object.fromEntries(Object.entries(dexState.meta.fileMeta).map(([k, v]) => [k.replaceAll("dexvert_", ""), v]));
 	};

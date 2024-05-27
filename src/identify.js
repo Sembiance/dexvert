@@ -98,7 +98,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	// if it's a symlink, we're done!
 	if(inputFile.isSymlink)
-		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic", unsupported : true})]};
+		return {ids : [Identification.create({from : "dexvert", confidence : 100, magic : "symlink", family : "other", formatid : "symlink", matchType : "magic"})]};
 
 	const f = await FileSet.create(inputFile.root, "input", inputFile);
 	const detections = await getDetections(f, {xlog});

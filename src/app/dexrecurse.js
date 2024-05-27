@@ -370,7 +370,7 @@ async function processNextQueue()
 			if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
 			{
 				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
-				if(!WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator))
+				if(macFileTypeCreator.trim(macFileTypeCreator).length>1 && !WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator))
 				{
 					newMacTypeCreators[macFileTypeCreator] ||= [];
 					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);

@@ -36,6 +36,7 @@ export class detectItEasy extends Program
 }
 
 // Find out about detected packers from: https://github.com/packing-box/awesome-executable-packing
+// More unpackers available in: /mnt/compendium/DevLab/dexvert/sandbox/app/unpackers
 // It also has links to various unpackers too including:
 // https://github.com/crackinglandia/fuu
 // https://defacto2.net/f/a218ab4?dosmachine=svga&dosspeed=max&dosutils=true

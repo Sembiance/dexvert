@@ -6,9 +6,9 @@ export class cgm extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/CGM";
 	ext        = [".cgm"];
 	mimeType   = "image/cgm";
-	magic      = ["Computer Graphics Metafile", "binary Computer Graphics Metafile", "clear text Computer Graphics Metafile", /^fmt\/(303|306)( |$)/, /^x-fmt\/142( |$)/];
+	magic      = ["Computer Graphics Metafile", "binary Computer Graphics Metafile", "clear text Computer Graphics Metafile", /^fmt\/(303|304|305|306)( |$)/, /^x-fmt\/142( |$)/];
 	idMeta     = ({macFileType}) => macFileType==="CGMm";
-	weakMagic  = true;
+	weakMagic  = true;	// this is a pretty blanket statement, but lots of crap converts as CGM even though it's not, and if it fooled the detectors, well... so we just set this to only convert those that also have .cgm extension. sigh.
 	converters = [
 		// vector
 		"viewCompanion",

@@ -16656,3 +16656,9 @@ Shanda Bambook	(snb)
 Sony eBook	(lrf)
 Zipped HTML eBook	(jtmlz)
 Zipped text	(txtz)
+
+
+>>> Microsoft PowerPoint for Windows 95 (7.0a) https://winworldpc.com/product/powerpoint/95-70
+Lotus Freelance 4.0 for DOS
+Lotus freeland 1.0-2.1 for Windows
+Harvard Graphics 2.3 & 3.0 for DOS

@@ -8,7 +8,7 @@ export const WEAK_MAC_TYPE_CREATORS =
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|347|473|1145|1260|1280|1381|1488|1555|1556|1562|1575|1616|1751)( |$)/,
+	/^fmt\/(111|134|208|304|347|473|1145|1260|1280|1381|1488|1491|1555|1556|1562|1575|1616|1751|1902)( |$)/,
 	/^x-fmt\/(8|10|111|157|195|342)( |$)/,
 
 	// dexmagic: WEAK checks
@@ -24,11 +24,14 @@ export const WEAK_VALUES =
 	/^PC-98 ElfDOS$/,
 
 	// Detect-It-Easy: WEAK checks
+	/^Format: plain text/,
+	/^Format: DBase Database \(\.DBF\)/,
 	/^Installer: Adveractive/,
 
 	// GT2: WEAK checks
 	/^Borland Object Datei/,
 	/^DOS Ger.tetreiber/,
+	/^Eudora Werbungsdatei$/,
 	/^Kopftext/,
 	/^JPG Bild/,
 	/^Icon Datei/,
@@ -43,6 +46,7 @@ export const WEAK_VALUES =
 	/^POIFS Dokument/,
 	/^Unicode Textdatei/,
 	/^Windows Maus Cursor Datei\/Works f.r DOS Datei/,
+	/^Windows Verkn.*fungs Datei$/,
 	/^Wordperfect Dokument Datei/,
 
 	// disktype: WEAK checks
@@ -52,8 +56,13 @@ export const WEAK_VALUES =
 	/^compress-compressed data at /,
 	/^FAT\d{2} file system/,
 	/^First .* are blank$/,
+	/^QNX4 file system$/,
 	/^Windows \/ MS-DOS boot loader/,
 	
+	// FILE: Improper parsing of output
+	/^' (123):$/,
+	/^$/,	// eslint-disable-line no-control-regex
+
 	// FILE: Very weak checks:
 	/^, /,
 	/^\(non-conforming\)$/,
@@ -129,6 +138,7 @@ export const WEAK_VALUES =
 	/^Dyalog APL/,
 	/^Dzip archive data/,
 	/^EBCDIC text/,
+	/^EBU-STL subtitles$/,
 	/ECOFF executable/,
 	/^Encore - version/,
 	/^Encore demand-paged executable/,
@@ -199,6 +209,7 @@ export const WEAK_VALUES =
 	/^MPEG ADTS, layer I(,|$)/,
 	/^MPEG-4 LOAS/,
 	/^MS Windows COFF /,
+	/^MSX ROM, init/,
 	/^MSX-BASIC program/,
 	/^MSXiE archive data/,
 	/^mumps avl|blt global/,
@@ -213,6 +224,7 @@ export const WEAK_VALUES =
 	/^OpenPGP Public Key/,
 	/^OpenPGP Secret Key/,
 	/^OS9\/68K module$/,
+	/^PAK archive data$/,
 	/^Par archive data$/,
 	/^Perkin-Elmer executable/,
 	/^PEX Binary Archive$/,
@@ -223,7 +235,9 @@ export const WEAK_VALUES =
 	/^PGP symmetric key encrypted data/,
 	/^Picasso 64 Image$/,
 	/^PDP-11/,
+	/^Psion Series 5 ROM multi-bitmap image$/,
 	/^Python script, /,
+	/^QDOS object /,
 	/^QL OS dump data/,
 	/^QuArk archive data/,
 	/^RAD Game Tools Smacker Multimedia/,
@@ -237,6 +251,7 @@ export const WEAK_VALUES =
 	/^SBX archive data/,
 	/^Sega FILM\/CPK Multimedia/,
 	/^SHARC COFF binary/,
+	/^shared library$/,
 	/^shared library TTComp archive data/,
 	/^SIMH tape data$/,
 	/^Sky archive data/,
@@ -315,6 +330,7 @@ export const WEAK_VALUES =
 	/Berkeley vfont/,
 	/^Big Crunch compressed file$/,
 	/^Bio-Rad Image\(s\) bitmap$/,
+	/^BIOS ROM Extension \(IA-32\)$/,
 	/^Binary NX Vibration data/,
 	/^Bit Archiver compressed archive$/,
 	/^BitKeeper history data$/,
@@ -361,6 +377,7 @@ export const WEAK_VALUES =
 	/^DRM Content Format - Separate delivery file \(generic\)$/,
 	/^Dzip compressed archive$/,
 	/^eFax Document \(generic\)$/,
+	/^Encrypted Windows App Package \(generic\)$/,
 	/^Error Code Modeler$/,
 	/^eXtended Triton Format$/,
 	/^F64 disk image$/,
@@ -393,6 +410,7 @@ export const WEAK_VALUES =
 	/^Jovian Logic VI bitmap$/,
 	/^Jupiter Ace snapshot$/,
 	/^Koala Paint/,
+	/^Korg SysEx preset command$/,
 	/^Legend text$/,
 	/^Leonard Guides compiled data$/,
 	/^Lepton bitmap/,
@@ -413,6 +431,7 @@ export const WEAK_VALUES =
 	/^MegaZeux world data/,
 	/^Melco embroidery design$/,
 	/^Microsoft Help \(old\)$/,
+	/^Microsoft p-code$/,
 	/^Microsoft Web query$/,
 	/^Mini Office II SpreadSheet$/,
 	/^MosASCII Project Workspace$/,
@@ -433,6 +452,8 @@ export const WEAK_VALUES =
 	/^OMF - Relocatable Object Module Format$/,
 	/^Open Access III Data base$/,
 	/^OpenStreetMap Binary map data$/,
+	/^Organize! Environment$/,
+	/^Orao Tape image$/,
 	/^OS\/2 Bitmap Graphics Array \(generic\)$/,
 	/^Pack compressed data/,
 	/^packMP3 compressed MP3 audio$/,
@@ -447,6 +468,7 @@ export const WEAK_VALUES =
 	/^PEA compressed archive/,
 	/^Persuasion Presentation \(Mac\)/,
 	/^Pervasive Btrieve \(generic\)$/,
+	/^Pfaff Compatible design card$/,
 	/^PGN \(Portable Gaming Notation\) Compressed format$/,
 	/^Philips Respironics M-Series data format$/,
 	/^Pixel image$/,
@@ -469,6 +491,7 @@ export const WEAK_VALUES =
 	/^SCODL image$/,
 	/^ScreenBuilder image$/,
 	/^Siemens archived SMS messages$/,
+	/^Silicon Graphics Object$/,
 	/^Siva archive/,
 	/^SLZ compressed data$/,
 	/^SMS Material$/,
@@ -480,6 +503,7 @@ export const WEAK_VALUES =
 	/^Sprint User Interface$/,
 	/^SPU Playstation log rip$/,
 	/^SQ2 compressed data$/,
+	/^Studio Folio Corsage game data archive$/,
 	/^Stunt Island Resource$/,
 	/^SuperCard Pro flux image$/,
 	/^TERSE compressed data \(S?PACK, [UV]\)$/,
@@ -499,6 +523,7 @@ export const WEAK_VALUES =
 	/^Turbo Pascal Symbol Table$/,
 	/^tzip compressed file$/,
 	/^VariCAD Drawing \(generic\)$/,
+	/^VersaCAD Shade \(MS-DOS\)$/,
 	/^VGAPaint 386 module$/,
 	/^Videoscape GEO mesh/,
 	/^VisiCalc spreadsheet$/,
@@ -517,6 +542,7 @@ export const WEAK_VALUES =
 	/^Z-Artist Picture bitmap$/,
 	/^Z-Code V\d adventure for Infocom Z-Machine$/,
 	/^Zoo filter compressed format$/,
+	/^ZSNES movie capture$/,
 	/^ZX Microdrive cartridge image$/,
 	
 	// TRID: Checks for almost all zeroes or repeating values/patterns:
@@ -551,6 +577,7 @@ export const WEAK_VALUES =
 	/^GnomeVFS$/,
 	/^Gravis UltraSound PnP InterWave patch$/,
 	/^HandStory eBook$/,
+	/^Harvard Graphics Presentation \(v1-3\)$/,
 	/^HomeLab\/BraiLab Tape image$/,
 	/^HP Logical Interchange Format disk image$/,
 	/^HP200LX System Application's Help$/,
@@ -560,6 +587,7 @@ export const WEAK_VALUES =
 	/^Install Maker( Pro)? project$/,
 	/^Intel CPU Microcode$/,
 	/^Inset PIX bitmap$/,
+	/^Kidproof settings \(v1\.0\)$/,
 	/^Lotus 123\/Symphony worksheet\/format\/configuration \(V1-V2\)$/,
 	/^Luigi's Mansion 3D model$/,
 	/^M99 compressed data$/,
@@ -593,6 +621,7 @@ export const WEAK_VALUES =
 	/^Table Apollo \(DBF\) Database Engine$/,
 	/^Take Command: 2nd Manassas game data archive$/,
 	/^TERSE compressed archive$/,
+	/^TeX Font Metric \(0x1[12]\)$/,
 	/^Text - UTF-32 \(BE\) encoded$/,
 	/^Torque Dynamix Three Space model/,
 	/^UbiArt Framework Cooked Asset$/,
@@ -603,10 +632,12 @@ export const WEAK_VALUES =
 	/^VXD Driver$/,
 	/^VZ200\/300 image \(type F1\)$/,
 	/^Warajevo Tape image format$/,
+	/^Warcraft game data archive$/,
 	/^Windows Device Dependent Bitmap$/,
 	/^Windows Jump List$/,
 	/^Windows Icon/,
 	/^Xerox EDMICS-MMR bitmap$/,
+	/^ZealFS disk image$/,
 
 	// TRID: Weak in some other way, such as commonly used word prefix/global/chars string or ascending/descending bytes
 	/^4th Dimension database$/,
@@ -636,6 +667,7 @@ export const WEAK_VALUES =
 	/^Gerber format$/,
 	/^Grand Theft Auto: San Andreas game data archive$/,
 	/^Haines NFF scene/,
+	/^Instant Replay Data File$/,
 	/^LEGO Mindstorms EV3 brick executable code$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
@@ -658,6 +690,8 @@ export const WEAK_VALUES =
 	/^Scalable Vector Graphics \(var\.3\)$/,
 	/^Scribe Markup$/,
 	/^Session Description Protocol \(with rem\)$/,
+	/^Beetris high scores$/,	// Other files use the same magic from this publisher
+	/^SMS Coastline data$/,
 	/^SMS Super File$/,
 	/^SMS XYZ data$/,
 	/^Snowdrop game data archive$/,
@@ -665,6 +699,7 @@ export const WEAK_VALUES =
 	/^Summation Document Image Information Load File$/,
 	/^Super-Card Ami II copier$/,
 	/^TeslaCrypt\/Cryptowall encrypted$/,
+	/^TOPO topographic Data$/,
 	/^UNIMod created by APlayer$/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,

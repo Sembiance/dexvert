@@ -117,6 +117,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"other/identicalBytes",
 	"other/nullBytes",
 	"other/nullBytesAlternating",
+	"other/symlink",
 
 	// rarely encounter this format and unfortuantly garbage tensor doesn't do a good job at detecting the failed conversions
 	"image/electronikaBKPIC",

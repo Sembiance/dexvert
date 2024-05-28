@@ -243,6 +243,14 @@ export class iso extends Format
 			for(const subPath of type.subPaths)
 				await Deno.rename(subPath, path.join(path.dirname(type.dirPath), path.basename(subPath)));
 			await fileUtil.unlink(type.dirPath);
+
+			if(dexState.meta?.fileMeta)
+				dexState.meta.fileMeta = Object.fromEntries(Object.entries(dexState.meta.fileMeta).map(([k, v]) => [k.replace(new RegExp(`^${type.typeid}\\/`), ""), v]));
+		}
+		else
+		{
+			if(dexState.meta?.fileMeta)
+				dexState.meta.fileMeta = Object.fromEntries(Object.entries(dexState.meta.fileMeta).map(([k, v]) => [k.replaceAll("dexvert_", ""), v]));
 		}
 
 		// Now check to see if we have both a 'mac' and a 'pc' directory, and if so delete any 'duplicate' files from the mac side to help save space
@@ -266,8 +274,5 @@ export class iso extends Format
 				await Deno.symlink(path.relative(path.dirname(macFilePath), pcFilePath), macFilePath);
 			}, 2);
 		}
-
-		if(dexState.meta?.fileMeta)
-			dexState.meta.fileMeta = Object.fromEntries(Object.entries(dexState.meta.fileMeta).map(([k, v]) => [k.replaceAll("dexvert_", ""), v]));
 	};
 }

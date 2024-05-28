@@ -274,6 +274,7 @@ export const WEAK_VALUES =
 	/^Targa image data/,
 	/^Tower\/XP rel/,
 	/^Tower32/,
+	/^Turbo Pascal TOUR data$/,
 	/^Unicode text, UTF-32, big-endian$/,
 	/^unicos \(cray\) executable/,
 	/^unknown demand paged pure executable/,
@@ -624,6 +625,7 @@ export const WEAK_VALUES =
 	/^TeX Font Metric \(0x1[12]\)$/,
 	/^Text - UTF-32 \(BE\) encoded$/,
 	/^Torque Dynamix Three Space model/,
+	/^Turbo Pascal Map/,
 	/^UbiArt Framework Cooked Asset$/,
 	/^Ulead color Map$/,	// Often matches to this are correct, but it's not a useful file
 	/^V-Ray Material \(binary\)$/,

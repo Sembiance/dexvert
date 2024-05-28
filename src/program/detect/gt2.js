@@ -18,6 +18,3 @@ export class gt2 extends Program
 	};
 	renameOut = false;
 }
-// /outlinenums
-// /l
-// /bufsize8192

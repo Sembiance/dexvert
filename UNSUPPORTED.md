@@ -1,4 +1,4 @@
-# Unsupported File Formats (993)
+# Unsupported File Formats (998)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -37,6 +37,7 @@ Family/Format | Name | Extensions | Notes
 [archive/lifArchive](https://discmaster.textfiles.com/search?formatid=lifArchive) | [LIF Archive](http://fileformats.archiveteam.org/wiki/LIF_(Knowledge_Dynamics)) | .lif | [3 sample files](https://sembiance.com/fileFormatSamples/archive/lifArchive/)
 [archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
+[archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -57,14 +58,13 @@ Family/Format | Name | Extensions | Notes
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/redArchive](https://discmaster.textfiles.com/search?formatid=redArchive) | [RED Archive](http://fileformats.archiveteam.org/wiki/RED_(Knowledge_Dynamics)) | .red | [5 sample files](https://sembiance.com/fileFormatSamples/archive/redArchive/)
 [archive/rohitCompressedData](https://discmaster.textfiles.com/search?formatid=rohitCompressedData) | Rohit compressed data | .tsi | 
-[archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
+[archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?formatid=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
 [archive/spisTCompress](https://discmaster.textfiles.com/search?formatid=spisTCompress) | SPIS TCompress |  | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
-[archive/thumbsUpDatabase](https://discmaster.textfiles.com/search?formatid=thumbsUpDatabase) | ThumbsUp Database |  | 
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?formatid=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?formatid=unrealPackage) | Unreal Package | .ut2 .uasset | 
@@ -79,13 +79,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (39)
+## Audio (40)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
 [audio/sonixInstrument](https://discmaster.textfiles.com/search?formatid=sonixInstrument) | Aegis Sonix Instrument | .instr | [21 sample files](https://sembiance.com/fileFormatSamples/audio/sonixInstrument/) - The sampled .instr files appear to be 'meta' files that usually point to the .ss files which seems to contain the sampled sounds. These files are used as the instruments in .smus files. In theory I should be able to convert these instruments into .wav's as a sound for each instrument/.ss file. Some of these are actuall "sonix" files, but other .instr files are more generic, like IFF generic
 [audio/amSound](https://discmaster.textfiles.com/search?formatid=amSound) | AM Sound |  | [4 sample files](https://sembiance.com/fileFormatSamples/audio/amSound/)
 [audio/amiga16vx](https://discmaster.textfiles.com/search?formatid=amiga16vx) | Amiga 16VX Sound |  | [1 sample file](https://sembiance.com/fileFormatSamples/audio/amiga16vx/)
+[audio/ariaSamplesBank](https://discmaster.textfiles.com/search?formatid=ariaSamplesBank) | ARIA Samples Bank | .bnk | 
 [audio/artOfNoiseInstrument](https://discmaster.textfiles.com/search?formatid=artOfNoiseInstrument) | Art of Noise Instrument | .fm | [5 sample files](https://sembiance.com/fileFormatSamples/audio/artOfNoiseInstrument/)
 [audio/audioWorksSoundSample](https://discmaster.textfiles.com/search?formatid=audioWorksSoundSample) | AudioWorks Sound Sample |  | 
 [audio/commonInstrumentFile](https://discmaster.textfiles.com/search?formatid=commonInstrumentFile) | [Common Instrument Sample](http://fileformats.archiveteam.org/wiki/Common_Instrument_Format) | .ci1 .ci2 | 
@@ -124,7 +125,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (58)
+## Document (60)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/adobeInDesignDocument](https://discmaster.textfiles.com/search?formatid=adobeInDesignDocument) | Adobe InDesign Document | .indd .ind | 
@@ -141,6 +142,7 @@ Family/Format | Name | Extensions | Notes
 [document/clarionDatabase](https://discmaster.textfiles.com/search?formatid=clarionDatabase) | Clarion Database File | .dat | [49 sample files](https://sembiance.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. soffice didn't do anything with it either.
 [document/cloantoC1Text](https://discmaster.textfiles.com/search?formatid=cloantoC1Text) | Cloanto C1-Text Document | .c1text | [1 sample file](https://sembiance.com/fileFormatSamples/document/cloantoC1Text/) - Have only encountered just 1 file in the wild. If I encounter more, I can get Cloanto C1-Text program, load it into the Amiga and convert it there.
 [document/dartHypertext](https://discmaster.textfiles.com/search?formatid=dartHypertext) | Dart Hypertext |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
+[document/dbVISTADB](https://discmaster.textfiles.com/search?formatid=dbVISTADB) | db_VISTA Database |  | 
 [document/dBASECompiledForm](https://discmaster.textfiles.com/search?formatid=dBASECompiledForm) | dBASE Compiled Form | .fro .fmo | 
 [document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | VAX based word processor. Haven't investigated it for magic.
 [document/envisionPublisherDoc](https://discmaster.textfiles.com/search?formatid=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
@@ -173,6 +175,7 @@ Family/Format | Name | Extensions | Notes
 [document/penPalDocument](https://discmaster.textfiles.com/search?formatid=penPalDocument) | Pen Pal Document | .wtr | 
 [document/perfectForms](https://discmaster.textfiles.com/search?formatid=perfectForms) | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
+[document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
 [document/rmpHelp](https://discmaster.textfiles.com/search?formatid=rmpHelp) | RMP Help | .hlp | 
 [document/pagePlus](https://discmaster.textfiles.com/search?formatid=pagePlus) | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
 [document/storybookWeaver](https://discmaster.textfiles.com/search?formatid=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
@@ -491,7 +494,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (488)
+## Other (490)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -574,6 +577,7 @@ Family/Format | Name | Extensions | Notes
 [other/blockBreakerPattern](https://discmaster.textfiles.com/search?formatid=blockBreakerPattern) | Block Breaker Pattern | .blc | 
 [other/bnuportPatchTable](https://discmaster.textfiles.com/search?formatid=bnuportPatchTable) | BNUPORT Patch Table | .pat | 
 [other/boloMap](https://discmaster.textfiles.com/search?formatid=boloMap) | Bolo Map |  | 
+[other/bootXLearnedBootblocks](https://discmaster.textfiles.com/search?formatid=bootXLearnedBootblocks) | BootX learned bootblocks | .brain | 
 [other/borlandDelphiCompiledUnit](https://discmaster.textfiles.com/search?formatid=borlandDelphiCompiledUnit) | Borland Delphi Compiled Unit | .dcu | 
 [other/borlandDriver](https://discmaster.textfiles.com/search?formatid=borlandDriver) | Borland Graphics Interface Driver | .bgi | 
 [other/borlandLanguageLibrary](https://discmaster.textfiles.com/search?formatid=borlandLanguageLibrary) | Borland Language Library | .bll | 
@@ -617,6 +621,7 @@ Family/Format | Name | Extensions | Notes
 [other/creativeSignalMicrocode](https://discmaster.textfiles.com/search?formatid=creativeSignalMicrocode) | Creative Signal Processor Microcode | .csp | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?formatid=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
 [other/cubaseDrumMap](https://discmaster.textfiles.com/search?formatid=cubaseDrumMap) | Cubase Drum Map | .drm | 
+[other/cubicPlayerAnimation](https://discmaster.textfiles.com/search?formatid=cubicPlayerAnimation) | Cubic Player animation | .dat | 
 [other/cybervisionMonitorInfo](https://discmaster.textfiles.com/search?formatid=cybervisionMonitorInfo) | Cybervision Monitor Info |  | 
 [other/cygnusEdDefaultSettings](https://discmaster.textfiles.com/search?formatid=cygnusEdDefaultSettings) | Cygnus Editor Default Settings |  | 
 [other/cygnusEdMacros](https://discmaster.textfiles.com/search?formatid=cygnusEdMacros) | Cygnus Editor Macros |  | 

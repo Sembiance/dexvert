@@ -8,7 +8,7 @@ export class instantGraphicsAndSound extends Format
 	name        = "Instant Graphics and Sound";
 	website     = "http://fileformats.archiveteam.org/wiki/IGS";
 	ext         = [".igs", ".ig"];
-	magic       = TEXT_MAGIC;
+	magic       = ["Instant Graphics and Sound", ...TEXT_MAGIC];
 	weakMagic   = true;
 	idCheck     = async inputFile => (await fileUtil.readFileBytes(inputFile.absolute, Math.min(xu.KB, inputFile.size))).indexOfX([0x47, 0x23])!==-1;
 	unsupported = true;

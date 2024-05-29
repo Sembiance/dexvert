@@ -4,8 +4,9 @@ import {fileUtil} from "xutil";
 
 export class thumbsUpDatabase extends Format
 {
-	name        = "ThumbsUp Database";
-	magic       = ["ThumbsUp Database"];
-	idCheck     = async inputFile => inputFile.size>=16 && (await fileUtil.readFileBytes(inputFile.absolute, 4, 8)).getUInt32LE()===inputFile.size;
-	unsupported = true;
+	name       = "ThumbsUp/ThumbsPlus! Database";
+	ext        = [".tud"];
+	magic      = ["ThumbsUp Database"];
+	idCheck    = async inputFile => inputFile.size>=16 && (await fileUtil.readFileBytes(inputFile.absolute, 4, 8)).getUInt32LE()===inputFile.size;
+	converters = ["deark[module:thumbsplus"];
 }

@@ -66,7 +66,7 @@ const getMacBinaryMeta = async () =>
 	const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
 	if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<MIN_YEAR || year>(new Date()).getFullYear())) &&
 		([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
-		return xlog.error`creationDate or modifiedDate is out of range (max epoc ${macTSToDate(creationDate)} ${macTSToDate(modifiedDate)}) (unix epoch ${new Date(creationDate*1000)} ${new Date(modifiedDate*1000)})`;
+		return xlog.error`creationDate or modifiedDate is out of range (mac epoc: ${macTSToDate(creationDate)} ${macTSToDate(modifiedDate)}) (unix epoch: ${new Date(creationDate*1000)} ${new Date(modifiedDate*1000)})`;
 
 	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
 };

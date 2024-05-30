@@ -7,5 +7,5 @@ export class txt2comGraham extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = [/Graham's TXT2COM/];
-	converters     = ["deark[module:txt2com]"];
+	converters     = ["deark[module:txt2com][opt:text:encconv=0]"];
 }

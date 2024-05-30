@@ -73,10 +73,11 @@ export async function getIdMeta(inputFile)
 		//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
 		//	return;
 
-		// ensure sane timestamps (year between 1960 and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
+		const MIN_YEAR = 1972;
+		// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
 		const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<1960 || year>(new Date()).getFullYear())) &&
-		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<1960 || d.getFullYear()>(new Date()).getFullYear())))
+		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<MIN_YEAR || year>(new Date()).getFullYear())) &&
+		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
 			return;
 
 		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};

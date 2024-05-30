@@ -18,7 +18,8 @@ const xlog = new XLog("info");
 //await initPrograms(xlog);
 //await initFormats(xlog);
 
-const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/image/macPaint/elvis.mac");
+//const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/image/macPaint/elvis.mac");
+const inputFile = await DexFile.create("/home/sembiance/Assorted/068.SIDEDEFS");
 const getMacBinaryMeta = async () =>
 {
 	// MacBinary 1 Specs: https://web.archive.org/web/19991103230427/http://www.lazerware.com:80/formats/macbinary/macbinary.html
@@ -58,11 +59,13 @@ const getMacBinaryMeta = async () =>
 	// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
 	// ensure our modified date is not more than 2 days after our creation date (we've seen a few in the wild that are off by small amount, like 90 seconds (archive/macBinary/ZEN.HLP))
 	//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
-	//	return xlog.error`creationDate is greater than modifiedDate ${{creationDate, modifiedDate, difference : creationDate-modifiedDate, differenceInMinutes : (creationDate-modifiedDate)/(xu.MINUTE/1000)}}`;
+	//	return;
 
+	const MIN_YEAR = 1972;
+	// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
 	const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-	if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<1960 || year>(new Date()).getFullYear())) &&
-	 ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<1960 || d.getFullYear()>(new Date()).getFullYear())))
+	if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<MIN_YEAR || year>(new Date()).getFullYear())) &&
+		([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
 		return xlog.error`creationDate or modifiedDate is out of range (max epoc ${macTSToDate(creationDate)} ${macTSToDate(modifiedDate)}) (unix epoch ${new Date(creationDate*1000)} ${new Date(modifiedDate*1000)})`;
 
 	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};

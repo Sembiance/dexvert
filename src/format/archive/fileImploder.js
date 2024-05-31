@@ -5,6 +5,6 @@ export class fileImploder extends Format
 	name       = "File Imploder";
 	website    = "http://fileformats.archiveteam.org/wiki/File_Imploder";
 	ext        = [".imp"];
-	magic      = ["File Imploder compressed data", "IMP: File Imploder"];
+	magic      = ["File Imploder compressed data", "IMP: File Imploder", "Archive: File Imploder by Peter Struijk"];
 	converters = ["ancient"];
 }

@@ -11,6 +11,8 @@
 /---------------\
 | High Priority |
 \---------------/
+* Add suport for these older MacroMind Projector files: https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
+
 * Figure out why abydos is crashing in stos.so with PicturePacker* files. Build abydos with debugging symbols:
 	mkdir build
 	cd build

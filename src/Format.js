@@ -108,6 +108,7 @@ export class Format
 			// identification - filename
 			filename     : {type : [RegExp]},
 			weakFilename : {type : "boolean"},
+			weakFileSize : {type : ["number"]},
 
 			// identification - filename
 			fileSize      : {types : ["number", Array, Object]},

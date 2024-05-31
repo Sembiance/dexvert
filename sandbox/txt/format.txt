@@ -56,6 +56,8 @@ If an object, the keys are extensions and files with the given extension must be
 Normally files are not matched against file size because it's a pretty weak match.
 You can opt into file size matching if by setting this to true, only do this if you are sure your converter won't produce garbage from garbage.
 
+>>> weakFileSize = [10800]
+If the file size is one of these, then mark the match as weak as it's likely a different format
 
 >>> ******** Magic
 >>> magic = ["Some Magic", /^More Magic$/]

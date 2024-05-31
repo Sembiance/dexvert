@@ -220,6 +220,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 				return magicMatched;
 			}));
 
+			if((format.weakFileSize || []).includes(f.input.size))
+				weakMatch = true;
+
 			const hasAnyMatch = (extMatch || filenameMatch || idMetaMatch || fileSizeMatch || magicMatch);
 
 			const baseMatch = {family : format.family, formatid, priority, extensions : format.ext, magic : format.name};

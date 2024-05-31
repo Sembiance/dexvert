@@ -8,5 +8,6 @@ export class loadstarSHP extends Format
 	matchPreExt    = true;
 	magic          = ["Interpaint bitmap"];	// not actually this format, but often (always?) identifies as such
 	weakMagic      = true;
+	weakFileSize   = [10018];
 	converters     = ["recoil2png"];
 }

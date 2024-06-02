@@ -12,6 +12,7 @@ export class uniso extends Program
 		hfsplus    : "Set this to true to process the iso as a MacOS HFS+ disc. Default: false",
 		nextstep   : "Set this to true to process the iso as a NeXTSTEP disc. Default: false",
 		type       : "Specify the type of filesystem to extract.",
+		options    : "Additional options to pass to the mount command",
 		checkMount : "Set to true to check the mount for any input/output errors and abort if there are any"
 	};
 	bin  = "deno";
@@ -35,6 +36,8 @@ export class uniso extends Program
 			a.push("--checkMount");
 		if(r.flags.type)
 			a.push(`--type=${r.flags.type}`);
+		if(r.flags.options)
+			a.push(`--options=${r.flags.options}`);
 		a.push(r.inFile(), r.outDir());
 		return Program.denoArgs(Program.binPath("uniso.js"), ...a);
 	};

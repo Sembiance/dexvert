@@ -17,7 +17,8 @@ const argv = cmdUtil.cmdInit({
 		ts          : {desc : "Will be used as the fallback ts in case of messed up HFS dates", hasValue : true, defaultValue : Date.now()},
 		type        : {desc : "If set, specify the type of the CD", hasValue : true},
 		macEncoding : {desc : "Specify the Mac encoding to decode HFS filenames. Valid: roman | japan", hasValue : true, defaultValue : "roman"},
-		checkMount  : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"}
+		checkMount  : {desc : "If set, after mounting it will attempt to run ls on the mount and ensure there are no errors"},
+		options     : {desc : "Additional options to pass to mount command", hasValue : true}
 	},
 	args :
 	[
@@ -40,6 +41,8 @@ async function extractNormalISO()
 	const mountArgs = ["-o", "loop,ro"];
 	if(argv.offset || argv.block)
 		mountArgs[mountArgs.length-1] = `${mountArgs.at(-1)}${argv.offset ? `,offset=${argv.offset}` : ""}${argv.block ? `,block=${argv.block}` : ""}`;
+	if(argv.options)
+		mountArgs[mountArgs.length-1] = `${mountArgs.at(-1)},${argv.options}`;
 	if(argv.nextstep)
 		mountArgs.push("-t", "ufs", "-o", "ufstype=nextstep-cd");
 	else if(argv.hfsplus)

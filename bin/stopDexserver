@@ -12,7 +12,6 @@ while [ -f /mnt/ram/tmp/stopdexserver ] || [ -f /mnt/ram/dexvert/dexserver.pid ]
 	sleep 1
 done
 
-# Cleanup tasks can go here, such as killing possible errant processes
-sudo killall -q -9 winedevice.exe services.exe explorer.exe plugplay.exe svchost.exe rpcss.exe
+/mnt/compendium/DevLab/dexvert/bin/cleanup.sh
 
 echo "Dexserver stopped"

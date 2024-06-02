@@ -4,7 +4,7 @@ export class masterTracksPro extends Format
 {
 	name        = "Master Tracks Pro";
 	ext         = [".mts"];
-	magic       = ["Master Tracks Score"];
+	magic       = ["Master Tracks Score", "Master Tracks Pro Score"];
 	unsupported = true;
 	notes       = "Attempts to run Master Trakcks Pro under win2k/winxp/win7 64bit, all failed. Program just doesn't launch.";
 }

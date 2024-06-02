@@ -145,6 +145,7 @@ const DEXMAGIC_CHECKS =
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
+	"IFF SSAd file"                           : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
 
 	// unsupported
@@ -226,6 +227,38 @@ const DEXMAGIC_CUSTOMS =
 			return;
 		
 		return "FM-Towns SND";
+	},
+
+	async function checkGenericFORMIFF(r)
+	{
+		if(r.f.input.size<12)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
+		if(header.getString(0, 4)!=="FORM")
+			return;
+
+		const formType = header.getString(8, 4);
+		if(!(/^[ -~]{4}$/).test(formType))
+			return;
+
+		return `Generic IFF FORM file ${formType}`;
+	},
+
+	async function checkGenericRIFF(r)
+	{
+		if(r.f.input.size<12)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
+		if(header.getString(0, 4)!=="RIFF")
+			return;
+
+		const riffType = header.getString(8, 4);
+		if(!(/^[ -~]{4}$/).test(riffType))
+			return;
+
+		return `Generic RIFF file ${riffType}`;
 	}
 ];
 

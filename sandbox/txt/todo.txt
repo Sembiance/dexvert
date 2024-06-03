@@ -20,11 +20,6 @@
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
 
-* Could improve symlink handling by loading the actual data it's linked to and showing them in the appropriate section on the browse page 
-  This would make browsing symlinked images, videos, etc. a lot nicer.
-  I should probably also show a little 'symlink' tag on the preview or {symlink} next to the filename or something like that
-  And still when clicking into them it should go to the symlinked content
-
 * Figure out why abydos is crashing in stos.so with PicturePacker* files. Build abydos with debugging symbols:
 	mkdir build
 	cd build

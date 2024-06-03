@@ -19,4 +19,5 @@ export class qtPicViewer extends Program
 			WinWaitClose($saveImageWindow, "", 10)
 			SendSlow("!fx")`});
 	renameOut = true;
+	chain = "convert";	// despite telling PictureViewer to save as PNG, it sometimes saves it as a BMP, so throw the result at convert to ensure it's a PNG
 }

@@ -14,6 +14,7 @@ export class pict extends Format
 	metaProvider   = ["image"];
 	converters = dexState =>
 	{
+		// qtPicViewer is the only convert that handls almost everything correctly. It's unfortunate that this runs under windows, thus PICT's are slower, but it's worth it
 		const r = ["qtPicViewer[matchType:magic]"];
 		
 		if(dexState.hasMagics("Macintosh Pict image (MacBinary)"))

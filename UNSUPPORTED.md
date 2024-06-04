@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,043)
+# Unsupported File Formats (1,046)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -80,7 +80,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (40)
+## Audio (41)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -118,6 +118,7 @@ Family/Format | Name | Extensions | Notes
 [audio/soundFont1](https://discmaster.textfiles.com/search?formatid=soundFont1) | [SoundFont 1.0](http://fileformats.archiveteam.org/wiki/SoundFont_1.0) | .sbk | [1 sample file](https://sembiance.com/fileFormatSamples/audio/soundFont1/) - Awave Studio can technically convert these, but 99.9% of all SBK SoundFond 1 files just contain meta info that points to a samples in ROM, thus there isn't anything really to convert.
 [audio/stoneTrackerSample](https://discmaster.textfiles.com/search?formatid=stoneTrackerSample) | StoneTracker Sample | .sps | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stoneTrackerSample/)
 [audio/stosSample](https://discmaster.textfiles.com/search?formatid=stosSample) | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
+[audio/superscapeSounds](https://discmaster.textfiles.com/search?formatid=superscapeSounds) | Superscape Sounds | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/superscapeSounds/) - Not yet supported. This can convert it: sox -t raw -r 11025 -e signed -b 16 -c 2 sounds.snd b.wav In the UI you can see the 'pitch' which corresponds to the rate: 64===11025hz and 40===44100hz However there are several sounds packed into this file, not just 1 sound, and they may differ in rate/pitch, etc. So ideally the format needs to be figured out so each sound can be extracted separately.
 [audio/vqf](https://discmaster.textfiles.com/search?formatid=vqf) | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [2 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/) - I attempted to use TwinDec from http://www.rarewares.org/rrw/nttvqf.php but it failed to decode my sample files
 [audio/dvsm](https://discmaster.textfiles.com/search?formatid=dvsm) | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?formatid=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
@@ -241,7 +242,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (58)
+## Font (59)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -249,6 +250,7 @@ Family/Format | Name | Extensions | Notes
 [font/amiWriteFont](https://discmaster.textfiles.com/search?formatid=amiWriteFont) | AmiWrite Font |  | 
 [font/averyFont](https://discmaster.textfiles.com/search?formatid=averyFont) | Avery Font | .ff1 | 
 [font/bannerManiaFont](https://discmaster.textfiles.com/search?formatid=bannerManiaFont) | Banner Mania Font | .fnt | [19 sample files](https://sembiance.com/fileFormatSamples/font/bannerManiaFont/)
+[font/bannerManiaBanner](https://discmaster.textfiles.com/search?formatid=bannerManiaBanner) | BannerMania banner | .brm | 
 [font/bitmappedSignumFont](https://discmaster.textfiles.com/search?formatid=bitmappedSignumFont) | Bitmapped Signum! Font | .p24 .e24 .p9 .l30 | 
 [font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
@@ -504,7 +506,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (523)
+## Other (524)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -707,6 +709,7 @@ Family/Format | Name | Extensions | Notes
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
+[other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?formatid=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 

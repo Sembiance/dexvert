@@ -1,11 +1,11 @@
-# Supported File Formats (1,716)
+# Supported File Formats (1,717)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (288)
+## Archive (289)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | [7-Zip Archive](http://fileformats.archiveteam.org/wiki/7z) | .7z | [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [UniExtract](https://www.legroom.net/software/uniextract) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/sevenZip/)
@@ -126,7 +126,7 @@ archive | [HomeBrew Game Data Archive](https://moddingwiki.shikadi.net/wiki/Home
 archive | HTTP Response |  |  | [11 sample files](https://sembiance.com/fileFormatSamples/archive/httpResponse/)
 archive | [HyperCard Stack](http://fileformats.archiveteam.org/wiki/HyperCard_stack) |  | [hypercard_dasm](https://github.com/fuzziqersoftware/resource_dasm) [stackimport](https://github.com/uliwitness/stackimport/) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/hypercard/)
 archive | [IBM SaveDskF SKF Disk Image](http://fileformats.archiveteam.org/wiki/LoadDskF/SaveDskF) | .dsk | [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/ibmSaveDsk/)
-archive | [Icon Manager Icon Archive](http://fileformats.archiveteam.org/wiki/Icon_Manager_icon_archive) | .ica | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/archive/iconManagerIconArchive/)
+archive | [Icon Manager Icon Archive](http://fileformats.archiveteam.org/wiki/Icon_Manager_icon_archive) | .ica | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/iconManagerIconArchive/)
 archive | IFF CAT file | .iff | [iffCATExtract](https://github.com/Sembiance/iffCATExtract) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffCAT/)
 archive | IFF Fantavision |  | [iff_convert](http://www.boomerangsworld.de/cms/tools/iff-convert.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/iffFantavision/) - Don't have support to convert this to a movie yet, so classify it as an archive and just extract what we can from it.
 archive | [IFF LIST File](https://wiki.amigaos.net/wiki/A_Quick_Introduction_to_IFF) |  | [unIFFLIST](https://github.com/Sembiance/dexvert) | [20 sample files](https://sembiance.com/fileFormatSamples/archive/iffLIST/) - The IFF LIST files contain 'shared' entries that are used for all chunks in the remainder of the file. The VAST MAJORITY of these files are for a program called 'Movie Setter' on the Amiga and contain ILBM's with custom 'FACE' properties. I'm not aware of a converter for either the Movie Setter files themselves or the resulting ILBM files sadly. But I do properly extract the IFFs from the LIST, so maybe someday I'll find a converter
@@ -260,6 +260,7 @@ archive | [Stellar 7 RES Archive](https://moddingwiki.shikadi.net/wiki/RES_Forma
 archive | [StoneCracker Archive](http://fileformats.archiveteam.org/wiki/StoneCracker) | .stc | [ancient](https://github.com/temisu/ancient_format_decompressor) [amigadepacker](http://zakalwe.fi/~shd/foss/amigadepacker/) | [42 sample files](https://sembiance.com/fileFormatSamples/archive/stc/)
 archive | [Stuffit Archive](http://fileformats.archiveteam.org/wiki/StuffIt) | .sit | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [macunpack](https://github.com/wnayes/macutils) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/sit/)
 archive | Sun Package Data Stream | .pkg | [sevenZip](http://p7zip.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/sunPackageDataStream/)
+archive | [Superscape World](https://archive.superscape.org/About%20Superscape.txt) | .vrt .xvr .svr | [superscapeVRT](https://archive.superscape.org/Software/VRT/VRT_5.60.0.4112.iso) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/superscapeWorld/)
 archive | [SWAG Packet](http://fileformats.archiveteam.org/wiki/SWG) | .swg | [swagReader](http://fileformats.archiveteam.org/wiki/SWG) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/swagPacket/)
 archive | [Tape Archive](http://fileformats.archiveteam.org/wiki/Tape_Archive) | .tar .gtar | [tar](https://www.gnu.org/software/tar/) [sevenZip](http://p7zip.sourceforge.net/) [deark](https://entropymine.com/deark/) [unar](https://github.com/incbee/Unarchiver) [sqc](https://www.speedproject.com/download/old/) [izArc](https://www.izarc.org/) [UniExtract](https://www.legroom.net/software/uniextract) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/tar/)
 archive | [Teledisk Disk Image](http://fileformats.archiveteam.org/wiki/TD0) | .td0 | [td02imd](https://github.com/Sembiance/td02imd) [dskconv](http://www.seasip.info/Unix/LibDsk/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/teledisk/)

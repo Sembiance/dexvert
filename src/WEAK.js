@@ -546,7 +546,7 @@ export const WEAK_VALUES =
 	/^That's Write document$/,
 	/^The Apprentice: Los Angeles game data Archive$/,
 	/^The Bee Archiver compressed archive$/,
-	/^TheC64 Config\/Joystick\/Mode settings$/,
+	/^TheC64 Config\/Joystick\/Mode settings/,
 	/^THOR compressed data$/,
 	/^Tiny Tafel format$/,
 	/^TriloTracker Sample$/,

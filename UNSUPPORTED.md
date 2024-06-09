@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,046)
+# Unsupported File Formats (1,052)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -506,7 +506,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (524)
+## Other (530)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -538,6 +538,7 @@ Family/Format | Name | Extensions | Notes
 [other/alchemyMindworksResource](https://discmaster.textfiles.com/search?formatid=alchemyMindworksResource) | Alchemy Mindworks Resource | .res | 
 [other/allwaysPrinterDriver](https://discmaster.textfiles.com/search?formatid=allwaysPrinterDriver) | Allways Printer Driver | .apc .apd .apf | 
 [other/alphaFourScript](https://discmaster.textfiles.com/search?formatid=alphaFourScript) | Alpha Four Script | .scp | 
+[other/alphaBaseDataBase](https://discmaster.textfiles.com/search?formatid=alphaBaseDataBase) | AlphaBase data base | .ab | 
 [other/alteraWaveformDesignFile](https://discmaster.textfiles.com/search?formatid=alteraWaveformDesignFile) | Altera Waveform Design File | .wdf | 
 [other/amiAtlasFile](https://discmaster.textfiles.com/search?formatid=amiAtlasFile) | AmiAtlas File | .borders .coasts .index .islands .prefs .rivers .route .town .countries .country | 
 [other/amigaActionReplay3](https://discmaster.textfiles.com/search?formatid=amigaActionReplay3) | Amiga Action Replay 3 Freeze File |  | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/amigaActionReplay3/)
@@ -614,6 +615,7 @@ Family/Format | Name | Extensions | Notes
 [other/callOfDutyMap](https://discmaster.textfiles.com/search?formatid=callOfDutyMap) | Call of Duty Map | .d3dbsp .bsp | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?formatid=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 [other/characterTableLibrary](https://discmaster.textfiles.com/search?formatid=characterTableLibrary) | Character Table Library | .tlb | 
+[other/checksAndBalances](https://discmaster.textfiles.com/search?formatid=checksAndBalances) | Checks and Balances data |  | 
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?formatid=chemViewAnimationData) | Chemview Animation Data | .d | 
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
@@ -776,6 +778,8 @@ Family/Format | Name | Extensions | Notes
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
 [other/mathCadDocument](https://discmaster.textfiles.com/search?formatid=mathCadDocument) | MathCad Document | .mcd | 
 [other/maxonResourceCreationData](https://discmaster.textfiles.com/search?formatid=maxonResourceCreationData) | Maxon Resource Creation Tool Data | .rct | 
+[other/maxonCADHatchPatterns](https://discmaster.textfiles.com/search?formatid=maxonCADHatchPatterns) | MaxonCAD hatch patterns |  | 
+[other/maxonCADLibrary](https://discmaster.textfiles.com/search?formatid=maxonCADLibrary) | MaxonCAD Library | .mclib | 
 [other/mcAfeeVirusScanData](https://discmaster.textfiles.com/search?formatid=mcAfeeVirusScanData) | McAfee VirusScan data | .dat | 
 [other/mcAfeeVShieldData](https://discmaster.textfiles.com/search?formatid=mcAfeeVShieldData) | McAfee VShield data | .dat | 
 [other/mdiffPatchFile](https://discmaster.textfiles.com/search?formatid=mdiffPatchFile) | MDIFF Patch File | .mdf | 
@@ -948,6 +952,7 @@ Family/Format | Name | Extensions | Notes
 [other/superJamFile](https://discmaster.textfiles.com/search?formatid=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
 [other/syslinuxCOM32Module](https://discmaster.textfiles.com/search?formatid=syslinuxCOM32Module) | Syslinux COM32 Module | .c32 | 
 [other/syslinuxLoader](https://discmaster.textfiles.com/search?formatid=syslinuxLoader) | SYSLINUX loader | .sys | 
+[other/sysSpeedModule](https://discmaster.textfiles.com/search?formatid=sysSpeedModule) | SysSpeed Module |  | 
 [other/tads](https://discmaster.textfiles.com/search?formatid=tads) | TADS | .t .gam | 
 [other/tcpdumpCapture](https://discmaster.textfiles.com/search?formatid=tcpdumpCapture) | TCPDUMP Style Capture | .dmp .pcap | 
 [other/telixCompiledScript](https://discmaster.textfiles.com/search?formatid=telixCompiledScript) | Telix Compiled Script | .slc | 
@@ -984,6 +989,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoMusicBoxProgression](https://discmaster.textfiles.com/search?formatid=videoMusicBoxProgression) | Video Music Box Progression | .prgn | 
 [other/videoMusicBoxStyle](https://discmaster.textfiles.com/search?formatid=videoMusicBoxStyle) | Video Music Box Style | .stle | 
 [other/videoFX2Sequence](https://discmaster.textfiles.com/search?formatid=videoFX2Sequence) | VideoFX2 Sequence | .seq | 
+[other/videoMasterData](https://discmaster.textfiles.com/search?formatid=videoMasterData) | VideoMaster data | .vm | 
 [other/videoMaxeFile](https://discmaster.textfiles.com/search?formatid=videoMaxeFile) | VideoMaxe File |  | 
 [other/videoPadProject](https://discmaster.textfiles.com/search?formatid=videoPadProject) | VideoPad Project | .vpj | 
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)

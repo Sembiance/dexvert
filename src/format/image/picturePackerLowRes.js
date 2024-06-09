@@ -7,5 +7,5 @@ export class picturePackerLowRes extends Format
 	ext        = [".pp1"];
 	mimeType   = "image/x-stos-picturepacker-lowres";
 	magic      = ["Picture Packer bitmap"];
-	converters = [`abydosconvert[format:${this.mimeType}]`, "konvertor"];
+	converters = ["deark[module:stos_pp1]", `abydosconvert[format:${this.mimeType}]`, "konvertor"];
 }

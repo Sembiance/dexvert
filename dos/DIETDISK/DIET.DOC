@@ -1,0 +1,152 @@
+
+                            Diet Disk
+
+Introduction
+------------
+
+Diet Disk is a program that helps you conserve space on your hard
+drive.  It is a TSR that intercepts DOS file activity and that allows
+applications to read and write compressed files.  The file compression
+is different from that used by ARC, LHARC, ZOO, or PKZIP.  You tell
+Diet Disk which files should be compressed by either (1) putting
+entries in a file named DIET.DIR or (2) by using the SLIM.EXE utility.
+The compression/decompression is performed "on-the-fly".  When an
+application reads a portion of a compressed file, Diet Disk gets the
+appropriate compressed segment(s) of the file, decompresses each
+segment, and hands the result to the application.  When the application
+writes a portion of the file, Diet Disk compresses the data into one
+or more segments and writes the compressed data to the disk.  The
+amount of compression varies; some files compress better than others.
+Typical compression is about 50%.
+
+Diet Disk is Public Domain software.  Support for Diet Disk is
+available on BIX, in the IBM.Utils conference, Comments topic.
+
+
+Can I Trust Diet Disk?
+----------------------
+
+Make a copy of the file (or files) you typically work with.  Load
+Diet Disk and use SLIM to compress the copy(ies).  Run your
+application on the copy(ies).  Do all the things you would typically
+do in your application, including saving the data to disk.  Exit your
+application and use FATTEN to decompress the file(s).  Run your
+application again; make sure the data is intact and that your
+application behaves normally.  If Diet Disk passes this test, it's
+probably okay to use Diet Disk on a regular basis.  Be aware, though,
+that I can't personally test Diet Disk with every single DOS
+application ever written.  And, since Diet Disk is free, please
+don't come after me if you think it has malfunctioned.  If you're
+really worried, get a larger hard drive.
+
+
+Requirements
+------------
+
+Diet Disk requires a PC, PS/2, or compatible with a hard drive and
+PC/DOS 2.0 or later.
+
+
+Installation
+------------
+
+Copy the files into a directory named in your DOS PATH statement, or
+make a separate directory and change your PATH statement to include
+the new directory.
+
+
+Usage
+-----
+
+Here are the pieces that make up Diet Disk and how to use them:
+
+    DietDisk.Com -- This is the TSR component of Diet Disk.  It
+    takes up about 24K of RAM.  You'll probably want to run it
+    by putting entries in your Autoexec.Bat file.  Here's an
+    example:
+
+         <other Autoexec.Bat statements>
+         C:
+         CD \DIET
+         DIETDISK
+         CD \
+         <more Autoexec.Bat statements>
+
+    If you try to use your application on compressed files and 
+    DietDisk.Com isn't loaded, your application won't work right.
+    DietDisk.Com can be "loaded high" by QEMM or 386^Max, if you 
+    want.  
+
+    Diet.Dir -- A simple text file, Diet.Dir contains entries
+    made up of drive:\path\filespec information.  The filespec
+    can contain wildcards (the "*" and "?" characters).  When
+    a file is created or completely rewritten by an
+    application, Diet Disk looks in this file for a matching
+    entry.  If found, Diet Disk makes the file compressed.  Put
+    the Diet.Dir file in the SAME directory as DietDisk.Com and
+    make that directory CURRENT when you invoke DietDisk.Com.
+    DietDisk.Com always looks in its startup directory for the
+    Diet.Dir file.
+
+    Slim.Exe -- Use SLIM to compress existing files.  Use it
+    like this: SLIM <filespec>.
+
+    Fatten.Exe -- Use FATTEN to decompress files you no longer
+    want compressed.  Use it like this: FATTEN <filespec>.
+
+    DietInfo.Exe -- Use DIETINFO to find out which files are
+    compressed, and by how much.  Use: DIETINFO <filespec>.
+
+    DietOff.Exe -- Normally, a file is decompressed as it's read.
+    You can turn this off with DIETOFF.  Why?  You might want
+    files to remain compressed when you do backups of your disk
+    or when doing file transfers through your modem.  (Make sure
+    the receiver of the file has a copy of Diet Disk!)
+
+    DietOn.Exe -- Turns Diet Disk back on.  Harmless if it's on
+    already.
+
+    DietChk.Exe -- Use DIETCHK to verify the integrity of your
+    compressed files.  Use: DIETCHK <filespec>.  DIETCHK makes
+    sure each compressed file conforms to the following file
+    layout.
+
+
+How It Works
+------------
+
+A file compressed by Diet Disk has the following format:
+
+    Control Record (1 per file, at the beginning)
+         - 6 bytes...Diet Disk footprint
+         - 4 bytes..."virtual" file length data
+         - 6 bytes...reserved filler
+
+    Pointer Record (first one follows the Control Record)
+         - 4 bytes...file location of the next Pointer Record
+         - 4 bytes...the location of the previous Pointer Record
+         - 8 bytes...reserved filler
+         - 250 pairs of location/length data
+              - 4 bytes...file location
+              - 2 bytes...length
+
+    Compressed Data Segments (up to 250, following the Pointer Record)
+         - 4 bytes...file location of the overflow segment
+         - 2 bytes...length of the overflow segment
+         - Compressed data
+
+    Other Pointer Records and Compressed Data Segments, as necessary.
+
+
+DietDisk.Com intercepts DOS file activity, both for file handles
+and FCBs.  When an application seeks into a file and reads a certain
+number of bytes, DietDisk.Com calculates the segment(s) it needs,
+reads the segments, decompresses them, and puts the result into
+the application's read buffer.  When an application writes data,
+DietDisk.Com organizes the data into 2K segments, compresses each
+segment, and writes the compressed data into the file.  Updates to
+the Control Record and the appropriate Pointer Record occur as
+needed.  For more details, see the source code.
+
+
+

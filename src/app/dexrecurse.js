@@ -134,7 +134,8 @@ const argv = cmdUtil.cmdInit({
 		ignorePath  : {desc : "A path to ignore when encountered and to skip processing and skip recursing into", hasValue : true, multiple : true},
 		suffix      : {desc : "What suffix to use for output directories. This is important to avoid clobbering other output files.", defaultValue : "§"},
 		headless    : {desc : "Run headless, no GUI. Instead create a webserver and listen on a port for updates on recursion progress"},
-		report      : {desc : "Generate a report of new magics and new sample files"}
+		report      : {desc : "Generate a report of new magics and new sample files"},
+		logLevel	: {desc : "Log level to use", hasValue : true, defaultValue : "info"}
 	},
 	args :
 	[
@@ -142,7 +143,7 @@ const argv = cmdUtil.cmdInit({
 		{argid : "outputPath", desc : "Specify a directory to stick it all into the directory. Specify a outputName.tar.gz to stick results into a .tar.gz", required : true}
 	]});
 
-const xlog = new XLog(argv.headless ? "error" : "info");
+const xlog = new XLog(argv.headless ? "error" : argv.logLevel);
 
 const dexvertOptions = {};
 if(argv.programFlag)
@@ -317,7 +318,7 @@ async function processNextQueue()
 	try
 	{
 		const inputFilePath = path.join(fileDirPath, task.relFilePath);
-		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : "info", timeout : MAX_DURATION+(xu.SECOND*10), dexvertOptions};
+		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, timeout : MAX_DURATION+(xu.SECOND*10), dexvertOptions};
 		if(taskProps.fileMeta)
 			rpcData.fileMeta = taskProps.fileMeta;
 		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION, json : rpcData});

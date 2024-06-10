@@ -16662,3 +16662,21 @@ Zipped text	(txtz)
 Lotus Freelance 4.0 for DOS
 Lotus freeland 1.0-2.1 for Windows
 Harvard Graphics 2.3 & 3.0 for DOS
+
+
+>>> Flizip for Windows (https://filzip.com/en/index.html)
+ACE
+ARC
+ARJ
+BH (BlakHole)
+CAB (Microsoft Cabinet)
+GZIP (TAR.GZ)
+JAR (JavaARchive)
+LHA (LZH)
+Quake III PK3
+RAR
+TAR
+UUE
+XXE
+ZIP
+ZOO

@@ -6,6 +6,6 @@ export class volkswriter extends Format
 	website     = "https://winworldpc.com/product/volkswriter";
 	ext         = [".vw"];
 	unsupported = true;
-	converters  = ["softwareBridge[format:volkswriter3]"];
+	converters  = ["softwareBridge[format:volkswriter3]", "wordForWord"];
 	notes       = "DOS based word processor. Haven't investigated it for magic.";
 }

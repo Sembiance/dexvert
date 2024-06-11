@@ -6,5 +6,5 @@ export class pfsWrite extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Pfs:Write";
 	ext        = [".pfs"];
 	magic      = ["Professional Write document", /^fmt\/1414( |$)/];
-	converters = ["fileMerlin[type:PFS*]"];
+	converters = ["wordForWord", "fileMerlin[type:PFS*]"];
 }

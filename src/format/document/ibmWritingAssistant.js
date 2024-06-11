@@ -6,5 +6,5 @@ export class ibmWritingAssistant extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/IBM_Writing_Assistant";
 	magic      = ["IBM Writing Assistant document"];
 	priority   = this.PRIORITY.LOW;
-	converters = ["strings"];
+	converters = ["wordForWord", "strings"];
 }

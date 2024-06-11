@@ -6,6 +6,6 @@ export class multiMate extends Format
 	website     = "https://winworldpc.com/product/multimate";
 	ext         = [".doc"];
 	unsupported = true;
-	converters  = ["softwareBridge[format:multiMate]"];
+	converters  = ["softwareBridge[format:multiMate]", "wordForWord"];
 	notes       = "DOS based word processor. Not sure if there is magic for this or not, haven't tried gathering samples from the various versions of the software available.";
 }

@@ -7,5 +7,5 @@ export class firstChoice extends Format
 	forbidExtMatch = [".doc"];
 	weakExt        = true;
 	magic          = ["First Choice document", /^fmt\/(1282|1283)( |$)/];
-	converters     = ["fileMerlin[type:PFSFC*]"];
+	converters     = ["wordForWord", "fileMerlin[type:PFSFC*]"];
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,178)
+# Unsupported File Formats (1,175)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -539,7 +539,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (621)
+## Other (618)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -741,7 +741,6 @@ Family/Format | Name | Extensions | Notes
 [other/dynamixPalette](https://discmaster.textfiles.com/search?formatid=dynamixPalette) | Dynamix Palette | .pal | 
 [other/dynamixSceneDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSceneDataContainer) | Dynamix scene data container | .ttm .tkm | 
 [other/dynamixSoundDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSoundDataContainer) | Dynamix Sound data container | .sx .snd .blk | 
-[other/electronicArtsLibContainer](https://discmaster.textfiles.com/search?formatid=electronicArtsLibContainer) | Electronic Arts LIB container | .lib | 
 [other/emacsCompiledLisp](https://discmaster.textfiles.com/search?formatid=emacsCompiledLisp) | Emacs Compiled Lisp | .elc | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with: https://github.com/rocky/elisp-decompile
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/esriCoverageAnnotation](https://discmaster.textfiles.com/search?formatid=esriCoverageAnnotation) | ESRI ArcInfo Coverage Annotation |  | 
@@ -753,7 +752,6 @@ Family/Format | Name | Extensions | Notes
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?formatid=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?formatid=fileExpressIndexHeader) | File Express Index Header | .ixh | 
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?formatid=fileExpressQuickScan) | File Express Quick Scan | .qss | 
-[other/finalLiberationArchive](https://discmaster.textfiles.com/search?formatid=finalLiberationArchive) | Final Liberation: Warhammer Epic 40K game data archive | .muk | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?formatid=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/flashbackObject](https://discmaster.textfiles.com/search?formatid=flashbackObject) | Flashback Object | .obj | 
 [other/flightCommander2Campaign](https://discmaster.textfiles.com/search?formatid=flightCommander2Campaign) | Flight Commander 2 Campaign | .cam | 
@@ -785,7 +783,6 @@ Family/Format | Name | Extensions | Notes
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?formatid=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
-[other/holisticDesignGameArchive](https://discmaster.textfiles.com/search?formatid=holisticDesignGameArchive) | Holistic Design game data archive | .muk | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 
 [other/homeBrewTile](https://discmaster.textfiles.com/search?formatid=homeBrewTile) | HomeBrew Tile | .hti | 

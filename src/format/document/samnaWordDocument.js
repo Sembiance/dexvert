@@ -6,5 +6,5 @@ export class samnaWordDocument extends Format
 	website    = "https://winworldpc.com/product/samna-word/iii";
 	ext        = [".sam", ".sm"];
 	magic      = ["Samna Word document"];
-	converters = ["softwareBridge[format:samna]"];
+	converters = ["softwareBridge[format:samna]", "wordForWord[matchType:magic]"];
 }

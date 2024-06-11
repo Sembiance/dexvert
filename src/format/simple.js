@@ -42,7 +42,6 @@ export default
 		firstChoiceDatabase      : {name : "First Choice Database", ext : [".fol", ".pfs"], magic : ["First Choice database", /^fmt\/1284( |$)/], weakMagic : true},
 		formMasterForm           : {name : "Form Master Form", ext : [".frm"], magic : ["Form Master Form"]},
 		frameMakerBook           : {name : "FrameMaker Book", ext : [".book"], magic : ["FrameMaker book"]},
-		frameworkDocument        : {name : "FrameworkDocument", ext : [".fw2", ".fw3"], magic : [/^Framework.* document/]},
 		gnuInfo                  : {name : "GNU Info File", ext : [".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info$/]},	// We do NOT include Trid's "GNU Info document" because it's too loose
 		goldDiskSpreadsheet      : {name : "Gold Disk Spreadsheet", ext : [".adv", ".pcf"], magic : ["Gold Disk Office Calc/Graph spreadsheet"]},
 		helmMultimediaBook       : {name : "Helm Multimedia Book", magic : ["Helm multimedia book"]},
@@ -58,7 +57,6 @@ export default
 		itsInternational         : {name : "ITS International Module", ext : [".int"], magic : ["ITS international module"]},
 		kamasOutline             : {name : "KAMAS Outline", ext : [".kam"], magic : ["KAMAS Outline"]},
 		locomotiveBASIC          : {name : "Locomotive BASIC", ext : [".bas"], magic : ["Amstrad CPC Locomotive BASIC tokenized source"]},
-		lotusManuscript          : {name : "Lotus Manuscript Document", ext : [".doc"], magic : ["Lotus Manuscript Document"]},
 		lotusNotes               : {name : "Lotus Notes Storage Facility", ext : [".nsf"], magic : ["Lotus Notes Storage Facility", "Lotus Notes 4.5 Datenbank"]},
 		lotusScreenCamScript     : {name : "Lotus ScreenCam Caption Script", ext : [".scs"], magic : ["Lotus ScreenCam Caption Script"]},
 		maxonWORD                : {name : "MaxonWORD", ext : [".dok"], magic : ["MaxonWORD document"]},

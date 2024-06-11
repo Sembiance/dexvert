@@ -159,6 +159,10 @@ async function loadGameArchive({reload}={})
 				if(formats[formatid])
 					throw new Error(`format [\${formatid}] in gameArchive.js is a duplicate`);
 
+				// dexrecurse relies on the suffix being GameArchive to know if it should skip asking for more file format samples
+				if(!formatid.endsWith("GameArchive"))
+					throw new Error(`format ${familyid}/${formatid} in gameArchive.js needs to end in'GameArchive'`);
+
 				const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
 				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 				if(extraKeys.length>0)

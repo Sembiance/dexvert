@@ -15,7 +15,9 @@ import {MediaWiki} from "MediaWiki";
 import {xmlParse} from "denoLandX";
 
 const xlog = new XLog("info");
-//await initPrograms(xlog);
-//await initFormats(xlog);
+await initPrograms(xlog);
+await initFormats(xlog);
+
+xlog.info`meyerGlassGameArchive: ${formats.meyerGlassGameArchive.constructor.name}`;
 
 //const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/image/macPaint/elvis.mac");

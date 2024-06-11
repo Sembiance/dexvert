@@ -25,16 +25,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/sgiVolumeImage",
 
 	// names have to be generic/specific, so can't have more files in the same samples directory
-	"archive/cosmoVolumeFile",
-	"archive/darkAgesMapArchive",
-	"archive/godOfThunderDAT",
 	"archive/installShieldCAB",
-	"archive/lostVikingsDAT",
-	"archive/monsterBashDAT",
-	"archive/mythosSoftwareLIBArchive",
-	"archive/stellar7RESArchive",
-	"archive/vinylGoddessLBR",
-	"archive/wackyWheelsArchive",
 	"text/windowsAutorun",
 
 	// modern formats that are 'generated' from others, so often not original. Also pretty modern so no need for many file samples
@@ -60,20 +51,10 @@ const EXCLUDED_SAMPLE_FORMATS =
 
 	// not interesting, or very application specific or have only come across a tiny repeated few over and over
 	"archive/activeMime",
-	"archive/bankGameData",
-	"archive/chasmBINArchive",
 	"archive/corelMOSAIC",
-	"archive/darkReignArchive",
-	"archive/drRiptideArchive",
-	"archive/dynamixGameData",
 	"archive/impactILB",
-	"archive/interstateGameData",
-	"archive/paxImperiaEminentDomainArchive",
-	"archive/sangoFighterDATArchive",
 	"archive/softdiskLibrary",
-	"archive/stargunnerDLT",
 	"archive/threeDUltraMiniGolfGameData",
-	"archive/youDontKnowJack",
 	"document/bankBookForWindows",
 	"document/centralPointHelp",
 	"document/codeViewHelp",
@@ -284,7 +265,7 @@ async function isNewSampleFile(dexformatid, sampleFilePath)
 	if((EXISTING_SAMPLE_FILES[dexformatid]?.length || 0)>=DESIRED_SAMPLE_COUNT)
 		return false;
 
-	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid))
+	if(EXCLUDED_SAMPLE_FORMATS.includes(dexformatid) || dexformatid.endsWith("GameArchive"))
 		return false;
 
 	SAMPLE_PATH_SUMS[dexformatid] ||= await (EXISTING_SAMPLE_FILES[dexformatid] || []).parallelMap(async filename => await hashUtil.hashFile("blake3", path.join(import.meta.dirname, "..", "..", "test", "sample", dexformatid, filename)));

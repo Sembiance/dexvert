@@ -4,6 +4,7 @@ export class dietDiskFatten extends Program
 {
 	website       = "http://cd.textfiles.com/nightowl/nopv06/010A/DIETDISC.ZIP";
 	loc           = "dos";
+	unsafe        = true;
 	bin           = "DIETDISK/FATTEN.EXE";
 	args          = r => [r.inFile({backslash : true})];
 	cwd           = r => r.outDir();

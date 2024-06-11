@@ -7,5 +7,5 @@ export class picturePackerMedRes extends Format
 	ext        = [".pp2"];
 	mimeType   = "image/x-stos-picturepacker-medres";
 	magic      = ["Picture Packer bitmap"];
-	converters = ["deark[module:stos_pp2]", `abydosconvert[format:${this.mimeType}]`, "konvertor"];
+	converters = ["deark", `abydosconvert[format:${this.mimeType}]`, "konvertor"];
 }

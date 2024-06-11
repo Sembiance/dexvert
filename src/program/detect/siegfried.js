@@ -19,12 +19,12 @@ export class siegfried extends Program
 
 		const rawText = await xu.tryFallbackAsync(async () => await (await fetch(`http://${SIEGFRIED_HOST}:${SIEGFRIED_PORT}/identify/${base64Encode(r.inFile({absolute : true}))}?base64=true&format=json`)).text());
 		if(!rawText)
-			return;
+			return r.xlog.error`Failed to get siegfried data for file: ${r.f.input.base} got: ${rawText}`;
 			
 		const rawResult = xu.parseJSON(rawText.replaceAll("\t", ""));
 		const matches = (rawResult?.files || []).find(({filename}) => path.basename(filename)===r.f.input.base)?.matches || [];
 		if(matches.length===0)
-			return;
+			return r.xlog.warn`No siegfried matches for file, should always have 1 UNKNOWN match: ${rawResult}`;
 		
 		for(const {format, warning : warningRaw, version, id} of matches)
 		{

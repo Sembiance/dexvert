@@ -1,0 +1,355 @@
+' NOTE:  This an example of how THE FINISHING TOUCH can also be used as
+'        an update program as well as an install program.  Simply rename
+'        INSTALL.EXE to UPDATE.EXE and put UPDATE.FIL on the disk instead
+'        of INSTALL.FIL.
+
+'        This shows how PROMPT OFF / PROMPT ON can be used to create your
+'        own input screens and how to handle LCD screens.
+
+
+' Tower Life 1993 Software Update Script
+' Copyright 1993, ImagiSOFT, Inc.
+' April 1, 1993
+
+' This installation is in 4 parts:
+'   UPDATE.FIL     (This file)
+'   2C.FIL         (Color configurations)
+'   2B.FIL         (LCD configurations)
+'   3.FIL          (loaded upon disk error)
+
+BACKGROUND 0            ' black
+TELESCOPE OFF
+
+WINOPEN 0 2 112         ' black on white
+"      Tower Life"
+""
+"1993 ADVANCED MARKETING"
+"    SOFTWARE UPDATE"
+
+SPACE 100                                ' almost no disk space needed
+
+WINOPEN 0 13 112
+""
+"  Can you see COLOR on your screen   Y or N?  "
+""
+WINUPDATE +16 +2 10
+"C"
+WINUPDATE +17 +2 11
+"O"
+WINUPDATE +18 +2 12
+"L"
+WINUPDATE +19 +2 13
+"O"
+WINUPDATE +20 +2 14
+"R"
+ASK +46 +2
+WINCLOSE
+
+JUMP.NO LOAD_LCD
+SCRIPT ~0\2C.FIL
+
+
+' Tower Life Install Script
+' PART 2:  COLOR SCRIPT
+' Copyright 1992, ImagiSOFT, Inc.
+' January 1, 1993
+
+WINCLOSE
+BACKGROUND 48           ' cyan background
+TELESCOPE OFF
+
+WINOPEN 0 2 111         ' brown w/ white letters
+"      Tower Life"
+""
+"1993 ADVANCED MARKETING"
+"    SOFTWARE UPDATE"
+
+SHADOW ON
+TELESCOPE ON
+
+' -----------------------------
+' Introduction Window
+' -----------------------------
+
+WINOPEN 0 11 31
+"The purpose of this program is to update your computer to"
+"the 1993 Edition of Tower's Advanced Marketing Software."
+"This program is about to do the following:"
+""
+"  Install 1993 Income Tax Information."
+""
+"It will NOT erase your saved client information."
+""
+"Would you like to do this update right now   Y or N?"
+
+WINUPDATE +10 +7 28
+"NOT"
+
+WINUPDATE +47 +9 30
+"Y"
+
+WINUPDATE +52 +9 30
+"N"
+
+ASK +54 +9
+WINCLOSE
+JUMP.NO EXIT
+
+' --------------------------------------------
+' determine where their software is installed
+' --------------------------------------------
+:WHERE
+WINOPEN 0 11 31
+"To do this update, we need to know which disk drive"
+"your Tower Life Software is installed to."
+""
+"             Most people have their software on this"
+"             hard drive. Press [ENTER] if this is OK"
+"             or enter the correct drive letter."
+""
+SHADOW OFF
+PROMPT OFF
+DRIVE C +2 +3 17 14 32 14 79
+WINCLOSE
+
+PROMPT ON
+SHADOW ON
+WINOPEN 0 11 31
+"We also need to know the PATH where your Tower software"
+"is installed."
+"                              Most people have their"
+"                              software in this"
+"                              directory.  Press"
+"                              [ENTER] if this is OK"
+"                              or enter the name of"
+"the directory where your Tower Life Software installed."
+PROMPT OFF
+SHADOW OFF
+PATH \TLI34 +1 +3 17 14 32 14 79
+WINCLOSE
+PROMPT ON
+SHADOW ON
+
+EXIST ~1~2\START.EXE
+JUMP.YES GYM
+
+BEEP
+WINOPEN 0 12 79
+"Your Tower Life Advanced Marketing Software"
+"cannot be found in the ~1~2 Directory."
+"Please try another directory name."
+""
+"Press [ENTER] to continue."
+
+WINUPDATE +25 +2 78
+"~1~2"
+
+WINUPDATE +8 +5 78
+"[ENTER]"
+
+WAIT +29 +5
+WINCLOSE
+RD ~1~2
+JUMP WHERE
+
+
+' ------------------------------------------
+' copy the updated files to their hard drive
+' ------------------------------------------
+:GYM            ' grow your money
+EXIST ~1~2\GYM\GYM.EX?
+JUMP.NO BONUS
+UNPACK GYM.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:BONUS
+EXIST ~1~2\BONUS\BONUS.EX?
+JUMP.NO RSD
+UNPACK BONUS.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:RSD
+EXIST ~1~2\RSD\RSD.EX?
+JUMP.NO DC
+UNPACK RSD.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:DC
+EXIST ~1~2\DC\DC.EX?
+JUMP.NO FPA
+UNPACK DC.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:FPA
+EXIST ~1~2\FPA.EX?
+JUMP.NO SPLIT
+UNPACK FPA.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:SPLIT
+EXIST ~1~2\SPLIT\SPLIT.EX?
+JUMP.NO DONE
+UNPACK SPLIT.PAK 0 12 31 32 14 79
+JUMP.FAIL INSTALL_FAILURE
+
+:DONE
+PROMPT ON
+WINOPEN 0 12 31
+"Your Tower Life Advanced Marketing Software has been"
+"updated for 1993."
+""
+"  THANK YOU FOR CHOOSING OUR SOFTWARE!"
+""
+""
+"Press [ENTER] to continue."
+
+WINUPDATE +4 +4 27
+"THANK YOU FOR CHOOSING OUR SOFTWARE!"
+
+WINUPDATE +8 +7 30
+"[ENTER]"
+
+WAIT +28 +7
+WINCLOSE
+
+:EXIT
+
+END
+
+:INSTALL_FAILURE
+SCRIPT ~0\3.FIL
+
+
+' PART 2:  BLACK AND WHITE SCRIPT
+' --------------------------------
+
+:LOAD_LCD
+
+
+' -----------------------------
+' Introduction Window
+' -----------------------------
+
+WINOPEN 0 11 112
+"The purpose of this program is to update your computer to"
+"the 1993 Edition of Tower's Advanced Marketing Software."
+"This program is about to do the following:"
+""
+"  Install 1993 Income Tax Information."
+""
+"It will NOT erase your saved client information."
+""
+"Would you like to do this update right now   Y or N?"
+
+ASK +54 +9
+WINCLOSE
+JUMP.NO EXIT
+
+' --------------------------------------------
+' determine where their software is installed
+' --------------------------------------------
+:WHERE
+WINOPEN 0 11 112
+"To do this update, we need to know which disk drive"
+"your Tower Life Software is installed to."
+""
+"             Most people have their software on this"
+"             hard drive. Press [ENTER] if this is OK"
+"             or enter the correct drive letter."
+""
+PROMPT OFF
+DRIVE C +2 +3 119 15 32 14 15
+WINCLOSE
+
+PROMPT ON
+WINOPEN 0 11 112
+"We also need to know the path where your Tower Life"
+"software is installed."
+"                              Most people have their"
+"                              software in this"
+"                              directory.  Press"
+"                              [ENTER] if this is OK"
+"                              or enter the name of"
+"the directory where your Tower Software is installed."
+PROMPT OFF
+PATH \TLI34 +1 +3 119 15 32 14 15
+WINCLOSE
+PROMPT ON
+
+EXIST ~1~2\START.EXE
+JUMP.YES GYM
+
+BEEP
+WINOPEN 0 12 112
+"Your Tower Life Advanced Marketing Software"
+"cannot be found in the ~1~2 Directory."
+"Please try another directory name."
+""
+"Press [ENTER] to continue."
+
+WAIT +29 +5
+WINCLOSE
+RD ~1~2
+JUMP WHERE
+
+
+' ------------------------------------------
+' copy the updated files to their hard drive
+' ------------------------------------------
+:GYM            ' grow your money
+EXIST ~1~2\GYM\GYM.EX?
+JUMP.NO BONUS
+UNPACK GYM.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:BONUS
+EXIST ~1~2\BONUS\BONUS.EX?
+JUMP.NO RSD
+UNPACK BONUS.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:RSD
+EXIST ~1~2\RSD\RSD.EX?
+JUMP.NO DC
+UNPACK RSD.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:DC
+EXIST ~1~2\DC\DC.EX?
+JUMP.NO FPA
+UNPACK DC.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:FPA
+EXIST ~1~2\FPA.EX?
+JUMP.NO SPLIT
+UNPACK FPA.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:SPLIT
+EXIST ~1~2\SPLIT\SPLIT.EX?
+JUMP.NO DONE
+UNPACK SPLIT.PAK 0 12 112 32 14 112
+JUMP.FAIL INSTALL_FAILURE
+
+:DONE
+PROMPT ON
+WINOPEN 0 12 112
+"Your Tower Life Advanced Marketing Software has been"
+"updated for 1993."
+""
+"  THANK YOU FOR CHOOSING OUR SOFTWARE!"
+""
+""
+"Press [ENTER] to continue."
+
+WAIT +28 +7
+WINCLOSE
+
+:EXIT
+
+END
+
+:INSTALL_FAILURE
+SCRIPT ~0\3.FIL
+

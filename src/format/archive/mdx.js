@@ -6,6 +6,7 @@ export class mdx extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)";
 	ext        = [".mdx"];
 	magic      = ["Media Descriptor"];
+	weakMagic  = true;
 	priority   = this.PRIORITY.TOP;
 	converters = ["iat"];
 }

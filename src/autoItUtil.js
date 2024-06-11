@@ -218,7 +218,7 @@ Func CallUntil($funcName, $max_duration)
 		$done = Call($funcName)
 
 		If $done Not = 0 Then ExitLoop
-		Sleep(50)
+		Sleep(25)
 	Until TimerDiff($timer) > $max_duration
 
 	return $done

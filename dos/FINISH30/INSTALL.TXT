@@ -1,0 +1,4950 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              THE FINISHING TOUCH
+
+                  Professional Software Installation Utility
+
+                                  Version 3.0
+                                 March 21, 1995
+
+
+
+
+                                 Developed by
+
+                                ImagiSOFT, Inc.
+                          Software Utilities Division
+                                P.O. Box 13208
+                         Albuquerque, NM   87192-3208
+
+                              (800) 767-1978
+                              (505) 275-1920
+                              (505) 275-9696  BBS
+                              (505) 275-9697  FAX
+
+
+                        Copyright 1995, ImagiSOFT, Inc.
+                             All Rights Reserved.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    IMPORTANT  NOTE:   This is a shareware version of The  Finishing  Touch
+    which  may  be  copied  and  distributed  for  evaluation  purposes  as
+    described in the License Agreement below.  The most recent enhancements
+    to this software are found in the file README.TXT.
+
+
+
+
+
+
+
+
+
+
+
+
+                               TABLE OF CONTENTS
+
+
+    The Purpose of The Finishing Touch Software ......................... 4
+
+    What is Shareware? .................................................. 5
+
+    Registration ........................................................ 5
+
+    How to Reach us for Support ......................................... 6
+
+    License Agreement ................................................... 6
+
+    Distributing Shareware Version of The Finishing Touch ............... 7
+
+    How to Make Master Disks of Your Software ........................... 8
+
+      Step 1:  Installing the Software to Your Hard Drive ............... 8
+
+      Step 2:  Batch Files ............................................. 10
+
+      Step 3:  Formatting Floppy Disks ................................. 10
+
+      Step 4:  Making Labels ........................................... 11
+
+      Step 5:  Writing the Script File for INSTALL.EXE ................. 11
+        System Colors .................................................. 12
+        How to Create INSTALL.FIL ...................................... 13
+            BACKGROUND Command Example ................................. 13
+            TELESCOPE Command Example .................................. 13
+            WINOPEN Command Example .................................... 13
+            SHADOW Command Example ..................................... 14
+            SPACE Command Example ...................................... 14
+            DRIVE Command Example ...................................... 14
+            PATH Command Example ....................................... 14
+            UNPACK Command Example ..................................... 14
+            JUMP.FAIL Command Example .................................. 15
+            WAIT Command Example ....................................... 15
+            END Command Example ........................................ 15
+            DELETE Command Example ..................................... 16
+            RD Command Example ......................................... 16
+            WINCLOSE Command Example ................................... 16
+
+      Step 6:  Copy Files to 1st Master Disk ........................... 17
+
+      Step 7:  Use the PACKER Utility .................................. 17
+
+      Step 8:  Test Your Work .......................................... 18
+
+      Step 9:  Write Installation Instructions ......................... 18
+
+    Association of Shareware Professionals Membership .................. 19
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 2
+
+
+
+
+
+
+
+
+
+    APPENDIX A: SCRIPT FILE COMMANDS ................................... 20
+        ASK ............................................................ 20
+        BACKGROUND ..................................................... 21
+        BEEP ........................................................... 22
+        COPY ........................................................... 23
+        CPU ............................................................ 24
+        DELETE ......................................................... 25
+        DISK ........................................................... 26
+        DOS ............................................................ 27
+        DRIVE .......................................................... 28
+        EXIST .......................................................... 30
+        END ............................................................ 31
+        FILE ........................................................... 32
+        FILE.DATE ...................................................... 34
+        FILE.SIZE ...................................................... 35
+        JUMP ........................................................... 36
+        JUMP.FAIL ...................................................... 37
+        JUMP.NO ........................................................ 38
+        JUMP.YES ....................................................... 39
+        LANGUAGE ....................................................... 40
+        MEMORY ......................................................... 41
+        MD ............................................................. 42
+        MOUSE .......................................................... 43
+        PATH ........................................................... 44
+        PRINT .......................................................... 45
+        RD ............................................................. 46
+        REBOOT ......................................................... 47
+        RUN ............................................................ 48
+        SCRIPT ......................................................... 49
+        SET.FILES ...................................................... 50
+        SET.PATH ....................................................... 51
+        SHADOW ......................................................... 52
+        SHELL .......................................................... 53
+        SPACE .......................................................... 54
+        TELESCOPE ...................................................... 55
+        UNPACK ......................................................... 56
+        VIDEO .......................................................... 58
+        VIEW ........................................................... 59
+        WAIT ........................................................... 60
+        WINCLOSE ....................................................... 61
+        WINOPEN ........................................................ 62
+
+    APPENDIX B: OTHER FEATURES OF THE FINISHING TOUCH .................. 63
+      Renaming INSTALL.EXE ............................................. 63
+      Labels ........................................................... 63
+      Internal Variables ............................................... 63
+      Comments ......................................................... 65
+      Hiding Windows ................................................... 65
+
+    The Finishing Touch Registration Form .............................. 67
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 3
+
+
+
+
+
+
+
+
+
+    THE PURPOSE OF THE FINISHING TOUCH INSTALLATION PROGRAM
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    The purpose of The Finishing Touch is two fold:
+         1.  The  Finishing Touch reduces the amount of floppy  disk  space
+             required on the disks you send out by 50 - 75% which will help
+             you  distribute  your  software  on as  few  floppy  disks  as
+             possible.  Depending upon the number of disks in the set,  The
+             Finishing Touch will save you thousands of dollars in software
+             production, mailing, and distribution costs.
+
+         2.  The Finishing Touch gives the end user a simple, friendly, and
+             reliable  way  to install your software.  It  can  test  their
+             hardware  so your installation will go as smooth as  possible.
+             This will please the user and will reduce support costs.   You
+             only have one chance to make a first impression.  Why not make
+             it the best one possible?
+
+
+         The Finishing Touch consists of six files:
+
+         PACKER.EXE   The  utility  which compresses and  copies  files  to
+                      formatted floppy disks.
+
+         INSTALL.EXE  The  program which reads your script  file,  extracts
+                      the  files  from  the PACKED file  on  floppy  disks,
+                      copies  them  to  the end user's  hard  drive,  tests
+                      hardware, displays your messages, and much more.
+
+         INSTALL.FIL  A   commented   sample  script   file   which   tells
+                      INSTALL.EXE what to do.
+
+         INSTALL.TXT  Documentation  for all the above -- this is the  file
+                      you are reading right now.
+
+         ORDER.TXT    The order form to register this software.
+
+         README.TXT   A  file which outlines the bug fixes and enhancements
+                      which have been made to the software since June 1992.
+
+    IMPORTANT  NOTE:  INSTALL.EXE checks for missing or altered files.   If
+    any  of  the above files (except INSTALL.FIL) has been  altered  or  is
+    missing, the program will display an error and exit to DOS.
+
+    The registered version is different in the following ways:
+         1.  The license agreement allows you to distribute INSTALL.EXE and
+             INSTALL.FIL  with your software for the purpose of  installing
+             it to the end user's hard drive.
+
+         2.  The  license  agreement doesn't allow you  to  distribute  the
+             registered version of PACKER.EXE or copy the printed manual.
+
+         3.  INSTALL.EXE  doesn't  check for the  PACKER.EXE,  INSTALL.TXT,
+             ORDER.TXT and README.TXT files.
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 4
+
+
+
+
+
+
+
+
+
+    WHAT IS SHAREWARE?
+    ~~~~~~~~~~~~~~~~~~
+    The Shareware concept gives you a chance to "try"  The Finishing  Touch
+    before  you  "buy" it.  If you try  The Finishing Touch and  decide  to
+    distribute  it  as the installation portion of your  software  you  are
+    required to register.
+
+    Copyright  laws  apply to both Shareware and commercial  software,  and
+    ImagiSOFT,  Inc.  retains  all  rights  to   The  Finishing  Touch.  We
+    specifically grant you the right to copy and distribute this  software,
+    under the limitations of the license agreement found below.
+
+    Shareware is a marketing method, not a type of software.  The Shareware
+    system  makes fitting your needs easier, because you can  "try"  before
+    you  "buy". SHAREWARE HAS THE ULTIMATE MONEY-BACK  GUARANTEE -- IF  YOU
+    DON'T USE THE PRODUCT, YOU DON'T PAY FOR IT!
+
+    The  Finishing  Touch is a "shareware program" and is  provided  at  no
+    charge to you for evaluation.  Feel free to share it with your friends,
+    but  please do not give it away altered or as part of  another  system.
+    The essence of "user-supported" software is to provide you with quality
+    software without high prices, and yet to give us incentive to  continue
+    to develop new products.
+
+
+    REGISTRATION
+    ~~~~~~~~~~~~
+    If  you plan to distribute your software using The Finishing Touch  you
+    should send a registration payment of $69.95 to:
+
+                                ImagiSOFT, Inc.
+                          Software Utilities Division
+                                P.O. Box 13208
+                            Albuquerque, NM   87192
+
+    Your  $69.95 registration will license one copy of The Finishing  Touch
+    which  you  can freely distribute as the installation portion  of  your
+    company's software.  When you register we will send you the most recent
+    version along with printed documentation.  Print an order form by using
+    the DOS command COPY ORDER.TXT LPT1: or send your check along with:
+        - Your Name
+        - Your Company's Name
+        - Mailing Address
+
+    Credit Card orders call (800) 767-1978  US / Canada toll free
+                            (505) 275-1920  local / international
+                    FAX     (505) 275-9697
+                    BBS     (505) 275-9696  preferred ordering method.
+
+    If  you order via our BBS you will be granted access to a special  file
+    area which contains the latest registered version.  Updates to  version
+    2.X are available FREE from our BBS.  If you order via our BBS you will
+    you be able to download the registered version TODAY, and we will  mail
+    you the packaging, documentation, and printed manual.
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 5
+
+
+
+
+
+
+
+
+
+
+
+    HOW TO REACH US FOR SUPPORT
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    We have made  The Finishing Touch as easy to use as possible.  However,
+    if  you have a problem, or find our documentation inadequate, we  would
+    like to hear from you.  You can reach us via U.S. Mail at:
+        ImagiSOFT, Inc.
+        Software Utilities Division
+        P.O. Box 13208
+        Albuquerque, NM 87192
+
+    You will get faster service from us via electronic mail or FAX:
+        Our CompuServe ID number is:   70632,1177
+        Our Prodigy ID number is:      FSWM11A
+        Our BBS number is:             (505) 275-9696
+        Our FAX number is:             (505) 275-9697
+
+
+    LICENSE AGREEMENT
+    ~~~~~~~~~~~~~~~~~
+    The  The Finishing Touch program and its documentation are  copyrighted
+    works  protected  by  U.S. and international  copyright  law.  You  are
+    granted  a license to use your copy of  The Finishing Touch only  under
+    the terms and conditions specified in this license agreement.
+
+    The  Finishing Touch is a commercial software product. It is not  free,
+    nor is it in the public domain.  It is distributed as Shareware,  which
+    means  that you may try the software before you pay for  it.   However,
+    you  must  stop  using  The Finishing Touch and  remove  it  from  your
+    computer if you decide not to pay the license fee.
+
+    You  may  freely copy  The Finishing Touch for personal use.   You  may
+    also  give copies of  The Finishing Touch to others if they also  agree
+    to the terms of this agreement.
+
+    USERS OF THE FINISHING TOUCH MUST ACCEPT THIS DISCLAIMER OF WARRANTY:
+       THE  FINISHING  TOUCH IS PROVIDED AS IS, WITHOUT WARRANTY  OF  ANY
+       KIND,  EXPRESS  OR  IMPLIED, INCLUDING, BUT  NOT  LIMITED  TO  THE
+       IMPLIED   WARRANTIES   OF  MERCHANTABILITY  AND  FITNESS   FOR   A
+       PARTICULAR  PURPOSE.  THE  ENTIRE  RISK  AS  TO  THE  QUALITY  AND
+       PERFORMANCE  IS  WITH  YOU. IMAGISOFT  ASSUMES  NO  LIABILITY  FOR
+       DAMAGES,  DIRECT OR CONSEQUENTIAL, WHICH MAY RESULT FROM THE   USE
+       OF THE FINISHING TOUCH.
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 6
+
+
+
+
+
+
+
+
+
+    DISTRIBUTING THE SHAREWARE VERSION OF THE FINISHING TOUCH
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Anyone  distributing  The Finishing Touch for any kind of  remuneration
+    must   first  contact  ImagiSOFT,  Inc.  at  the  address   below   for
+    authorization.    This  authorization  is  automatically   granted   to
+    distributors  recognized by the Association of Shareware  Professionals
+    (ASP)  as  adhering to its guidelines for shareware  distributors,  and
+    such distributors may begin offering  The Finishing Touch  immediately;
+    however, ImagiSOFT, Inc. must still be advised so that the  distributor
+    can be kept up-to-date with the latest version of  The Finishing Touch.
+
+    If  you  are going to distribute  The Finishing Touch in  a  compressed
+    file, please use the name FINISH.??? (.ZIP, .ARC, .LZH, etc). We  would
+    appreciate  if  you would distribute our original  FINISH.ZIP  whenever
+    possible so that new users can be assured that they aren't receiving  a
+    program infected with a virus.
+
+    Please include the following files in your distribution copy:
+
+        INSTALL.EXE   Main program
+        INSTALL.FIL   Sample The Finishing Touch script file
+        PACKER.EXE    Software packing, archiving utility
+        INSTALL.TXT   Registration info, license agreement, etc.
+        ORDER.TXT     Order form
+        README.TXT    Dozens of changes to the program since June 1992.
+
+    IMPORTANT NOTE:  The  The Finishing Touch program checks for missing or
+    altered  files.   If  any of the above files has  been  altered  or  is
+    missing, the program will exit to DOS.  The registered version does not
+    have this restriction.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 7
+
+
+
+
+
+
+
+
+
+    HOW TO MAKE MASTER DISKS OF YOUR SOFTWARE
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Creating a master set of software for duplication requires nine steps:
+
+         1.  Install  the software to the hard drive of the computer  which
+             you will use to make your master disks.
+
+         2.  Create any BATCH files which the end user will use to run  the
+             software.
+
+         3.  Format enough floppy disks to hold the complete software set.
+
+         4.  Make labels for the master disks.
+
+         5.  Write the script in the file INSTALL.FIL.  This is by far  the
+             most  difficult  step,  and the most in  depth  part  of  this
+             documentation.
+
+         6.  Copy two files, INSTALL.EXE and INSTALL.FIL to the 1st  master
+             disk in the set.
+
+         7.  Use the PACKER utility to compress and copy the software  from
+             the hard drive to the master floppy disks.
+
+         8.  Test your work.
+
+         9.  Write a simple set of instructions for the end user to  follow
+             on how to install your software.
+
+
+
+    Instructions on how to complete each step are as follows:
+
+
+    STEP 1:  INSTALLING THE SOFTWARE TO YOUR HARD DRIVE
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The  master set of software shouldn't reside in the same place as  your
+    test software.  The system colors and printer options must be  generic.
+    Commonly  used files which may be in your PATH such as BRUN30.EXE  must
+    be in the initial directory from which your system runs.
+
+    The  first thing you must decide is whether you want to force the  user
+    into using a certain subdirectory name, or if you want him/her to input
+    their  own  directory  name.  An example of each  method  is  discussed
+    below.
+
+    For  the  ImagiMOVIE Guide system, we want the user  to  install  their
+    software  in  the  \IMOVIE subdirectory, so we  created  the  following
+    directories on our network:
+
+       \MASTER\M\IMOVIE
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 8
+
+
+
+
+
+
+
+
+
+    \MASTER  is  an  empty directory, and is used solely for  the  sake  of
+    organization.
+
+    For  Chinese Checkers we want the user to input their own  subdirectory
+    name, so we created a CHINESE subdirectory off \MASTER as follows:
+
+    \MASTER\CHINESE\
+
+    A graphic representation of our tree structure is as follows:
+
+    |          |--CHINESE
+    |          |             |--DATA
+    R          |             |
+    O--MASTER--|--M--IMOVIE--|--SEARCH
+    O                        |
+    T                        |--CASTPICS
+    |
+    |
+
+    For  The ImagiMOVIE GUIDE, the "M" subdirectory corresponds to the  end
+    user's  root directory, and contains MOVIE.BAT which we want  installed
+    to the end user's root directory so they can run the ImagiMOVIE Guide.
+
+    After  the end user installs the ImagiMOVIE Guide System, the  "IMOVIE"
+    subdirectory, and all subdirectories below it, will be a branch off the
+    root directory of the end user's computer as follows:
+
+    |          |--DATA
+    R          |
+    O--IMOVIE--|--SEARCH
+    O          |
+    T          |--CASTPICS
+
+    MOVIE.BAT will be installed into the root directory.
+
+
+    Chinese Checkers, on the other hand will reside on the end user's  hard
+    drive where he/she decides to put it.  INSTALL.EXE reads a script  file
+    (discussed in depth on pages 10 - 16) which you will write to tell  the
+    end  user what to do to install your software.  The primary  difference
+    between  the script file for The ImagiMOVIE GUIDE and Chinese  Checkers
+    is that the Chinese Checkers script file uses the PATH command and  The
+    ImagiMOVIE   GUIDE  script  file  doesn't.   (See  APPENDIX A  for   an
+    explanation of the PATH command.)
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 9
+
+
+
+
+
+
+
+
+
+    STEP 2:  BATCH FILES
+    ~~~~~~~~~~~~~~~~~~~~
+    As  discussed  on  the preceding page, the  "M"  subdirectory  contains
+    MOVIE.BAT  which  will run the ImagiMOVIE  GUIDE  software.   MOVIE.BAT
+    issues four simple DOS commands:
+       cd \imovie
+       cls
+       movie
+       cd \
+
+    As  mentioned  earlier,  we can include  MOVIE.BAT  with  our  software
+    because we forced the user to install his/her software into the \IMOVIE
+    subdirectory.   If  you are going to allow the user  to  install  their
+    software in the subdirectory of their choosing, skip this step you  may
+    want  to  write  a batch file using the FILE  command.   See  the  FILE
+    command in APPENDIX A for a detailed example.
+
+
+    STEP 3:  FORMATTING FLOPPY DISKS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The  first thing you need to do is determine how much hard  disk  space
+    the  software requires.  Change to the \MASTER\M\ subdirectory of  your
+    hard  disk  and enter the command DIR /S.  Assuming you have  DOS  5.0,
+    after  displaying all the files in all the IMOVIE  subdirectories,  DOS
+    will display something similar to the following:
+
+                  Total files listed:
+                       51 File(s)      2414424 bytes
+
+    (If  you  don't  have  DOS  5.0 you will have  to  do  a  DIR  of  each
+    subdirectory and add the file sizes together.  Good Luck!)
+
+    Unless you are certain that ALL the people you are going to  distribute
+    disks  to have high density floppy disks, it is good practice  to  make
+    your masters on low density diskettes.  Low density disks are also more
+    tolerant of disk drives which are slightly out of alignment.
+
+    If  you are supporting 5.25" disks, make sure you format  your  masters
+    under  DOS 2.1 on a 360K disk drive.  Older DOS versions  have  trouble
+    reading disks formatted with later versions of DOS.  Also, low  density
+    drives  will NOT read a low density disk formatted or offloaded from  a
+    high density drive.
+
+    3.5" diskettes  are much more forgiving.  Since  3.5" diskettes  didn't
+    come into being until DOS 3.1, it doesn't matter as much which  version
+    of  DOS  you use to format the disks.  (To be absolutely sure,  we  use
+    FORMATQM.  Sydex,  P.O. Box 5700, Eugene, OR   97405,  Voice (503) 683-
+    6033, FAX (503) 683-1622) to format our masters just in case, and  have
+    found  it consistently more reliable than DOS's FORMAT.)  You can  also
+    use  a high density drive to format and offload low density  diskettes.
+    To  format  a  low density disk using a high  density  drive,  use  the
+    command:
+       FORMAT A: /N:9 /T:80
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 10
+
+
+
+
+
+
+
+
+
+    As a rule of thumb, PACKER will compress files by 50%.  Calculating how
+    many disks are required is a simple formula:
+       TOTAL SPACE / CAPACITY / 2
+
+    For  our ImagiMOVIE Guide example using low density disks  the  formula
+    is:
+       2414424 / 720000 = 3.35 / 2 = 2
+
+
+    STEP 4:  MAKING LABELS
+    ~~~~~~~~~~~~~~~~~~~~~~
+    You  should  label  the disks (except possibly  the  last  one)  before
+    offloading the software to make ABSOLUTELY certain that the disks don't
+    get mixed up during the offloading process.
+
+
+    STEP 5:  WRITING THE SCRIPT FILE FOR INSTALL.EXE
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    This is by far the most difficult step in creating master disks.   Some
+    knowledge  of programming is helpful in this step, but  not  mandatory.
+    In this step you are writing a computer program in the file INSTALL.FIL
+    which  tells  INSTALL.EXE what to do.  You will need to  use  an  ASCII
+    editor  to  create  INSTALL.FIL.  For a detailed  description  of  each
+    command, see APPENDIX A SCRIPT FILE COMMANDS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 11
+
+
+
+
+
+
+
+
+
+    SYSTEM COLORS
+    ~~~~~~~~~~~~~
+    INSTALL.EXE  detects  monochrome  cards  and  hard-codes  black & white
+    colors.  (Note:  Laptop computers are NOT monochrome, but are black and
+    white  color computers.)  Make sure you test on a laptop to be  certain
+    the colors are visible prior to distribution!
+
+                                  COLOR CHART
+         Color = Background * 16 + Foreground
+
+    ----------------------------------------------------------------------
+    |                             BACKGROUND                             |
+    |---------------------------------------------------------------------
+    |              Black  Blue  Green  Cyan  Red  Magenta  Brown   White |
+    |====================================================================|
+    |   | Black       0    16     32    48    64     80      96     112  |
+    |   |----------------------------------------------------------------|
+    | F | Blue        1    17     33    49    65     81      97     113  |
+    |   |----------------------------------------------------------------|
+    | O | Green       2    18     34    50    66     82      98     114  |
+    |   |----------------------------------------------------------------|
+    | R | Cyan        3    19     35    51    67     83      99     115  |
+    |   |----------------------------------------------------------------|
+    | E | Red         4    20     36    52    68     84     100     116  |
+    |   |----------------------------------------------------------------|
+    | G | Magenta     5    21     37    53    69     85     101     117  |
+    |   |----------------------------------------------------------------|
+    | R | Brown       6    22     38    54    70     86     102     118  |
+    |   |----------------------------------------------------------------|
+    | O | White       7    23     39    55    71     87     103     119  |
+    |   |----------------------------------------------------------------|
+    | U | Gray        8    24     40    56    72     88     104     120  |
+    |   |----------------------------------------------------------------|
+    | N | Lt Blue     9    25     41    57    73     89     105     121  |
+    |   |----------------------------------------------------------------|
+    | D | Lt Green   10    26     42    58    74     90     106     122  |
+    |   |----------------------------------------------------------------|
+    |   | Lt Cyan    11    27     43    59    75     91     107     123  |
+    |   |----------------------------------------------------------------|
+    |   | Lt Red     12    28     44    60    76     92     108     124  |
+    |   |----------------------------------------------------------------|
+    |   | Lt Mag     13    29     45    61    77     93     109     125  |
+    |   |----------------------------------------------------------------|
+    |   | Yellow     14    30     46    62    78     94     110     126  |
+    |   |----------------------------------------------------------------|
+    |   | Lt White   15    31     47    63    79     95     111     127  |
+    ----------------------------------------------------------------------
+
+    If you want the color to flash, add 128 to any of the above numbers.
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 12
+
+
+
+
+
+
+
+
+
+    HOW TO CREATE INSTALL.FIL
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+    The  best  way  to learn how to create INSTALL.FIL is to  look  at  the
+    sample  in  detail.   The  following pages contain  a  listing  of  the
+    INSTALL.FIL  that we created to install the free STAMP utility.  It  is
+    fully  commented, and should provide adequate documentation for  anyone
+    with rudimentary programming experience.
+
+    Note:   empty program lines in INSTALL.FIL or those that begin with  an
+    apostrophe are ignored by the INSTALL.EXE program.
+
+
+    ========================   BEGINNING OF FILE   =======================
+
+    ' Sample Install Script
+    ' Copyright 1992, ImagiSOFT, Inc.
+    ' June 1, 1992
+
+    ' NOTE:  This script file takes a long time to load (and requires more
+    '        disk space because it has lots of comments.  The script files
+    '        you create should well commented, but be sure to remove most
+    '        of the comments on the final distribution copy so it will
+    '        be as small as possible.  There is a 400 line maximum for any
+    '        one script file.  However, this limitation can be overcome
+    '        with the SCRIPT command.
+
+    ' display cyan colored background (see color chart in docs)
+
+    BACKGROUND 63
+
+
+    ' turn off "exploding" or telescoping windows for first window
+    ' this will make the window instantly appear
+
+    TELESCOPE OFF
+
+
+    ' display the heading in a window
+    '   located at 18 characters across
+    '               2 rows down  with a
+    '   magenta background and high intensity white letters
+
+    WINOPEN 18 2 95
+
+    "            ImagiSOFT, Inc."
+    "Where Imagination Brings Software to Life"
+    ""
+    "     Sample Installation Script File"
+    "         (Loads a Free Utility)"
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 13
+
+
+
+
+
+
+
+
+
+    ' WINOPEN 0 2 95                  ' use this command instead
+    '                                   to make sure the window is
+    '                                   centered horizontally on
+
+    ' turn on telescoping windows for the rest of the messages
+
+    TELESCOPE ON
+
+
+    ' display all messages from this point on in a "shadowed" window
+    ' the default is "OFF".  This feature can be turned on and off as many
+    ' times as you want
+
+    SHADOW ON
+
+
+    ' Tell INSTALL the minimum amount of required disk space
+
+    SPACE 12               ' This sample is tiny, only 12K required.
+
+
+    '  Prompt for the drive to install to:
+
+    DRIVE C 28 10 31 15 32 14 79
+    '         C = drive C, the pre-stuffed drive letter
+    '        28 = locate window at  28 characters across
+    '        10 =              and  10  rows down
+    '        31 = blue background and high intensity white foreground
+    '        15 = input on a black background with white letters
+    '        32 = error message located at 32 characters across
+    '        14 =                      and 14 rows down
+    '        79 = any error message will appear in a red window with
+    '             high intensity white letters
+
+
+    ' Prompt with default path \SAMPLE
+
+    ' INSTALL.EXE  will work the same way whether the user enters SAMPLE,
+    ' \SAMPLE\, or \SAMPLE.  Mutiple directories such as \SAMPLE\UTIL\FREE
+    ' are also supported.
+
+    PATH \SAMPLE 12 10 31 15 32 14 79
+
+    ' the numbers above represent window locations and colors.  See the
+    ' documentation for more details
+
+
+    '  Unpack the files from the floppy drive.
+
+    UNPACK SAMPLE.PAK 24 10 31 32 14 79
+
+    ' SAMPLE.PAK was compressed using the enclosed PACKER utility.  This
+    ' utility will compress files 50% or more depending on the file type.
+    ' you should get compression results close to that of PKZIP.
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 14
+
+
+
+
+
+
+
+
+
+
+    ' the numbers above represent window locations and colors.  See the
+    ' documentation for more details
+
+
+    ' just for fun, open the disk drive in the middle of the installation
+    ' and see what happens.
+
+    JUMP.FAIL INSTALL_FAILURE
+
+
+    ' Inform user that software installation is now complete
+
+    WINOPEN 0 10 31
+
+    "A FREE utility is now installed on your computer."
+    "To see what it is, use the following command:"
+    "   CD\SAMPLE   (or the name of the directory you"
+    "entered earlier).  Our way of saying  THANKS for"
+    "taking the time to review The Finishing Touch."
+    ""
+    "Press the [Enter] key to continue."
+
+
+    ' Wait for the user to press the [Enter] key so they can
+    ' read the above window
+
+    WAIT 50 17
+
+    ' the numbers above are the cursor location
+
+
+    ' ------------------------
+    ' exit the system normally
+    ' ------------------------
+
+    ' this will close any open windows and clear the screen
+
+    END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 15
+
+
+
+
+
+
+
+
+
+
+    ' ----------------------
+    ' Installation Failure.
+    ' It is a good idea to
+    ' add a similar routine
+    ' to the bottom of all
+    ' script files.
+    ' ----------------------
+
+    :INSTALL_FAILURE
+
+    ' labels begin with a colon and can be up to 32 characters long.
+
+    WINOPEN 0 11 79
+
+    ' the easiest way to center a message on the screen is to make
+    ' either the x or y coordinates "0".
+    ' 79 is a red window with white letters (good for error messages)
+
+    "THE INSTALLATION PROGRAM FAILED PRIOR TO COMPLETION"
+    ""
+    "Possible reasons:"
+    "   -- The floppy disk was removed prior to completion."
+    "   -- The floppy disk was damaged during shipping."
+    "   -- Your disk drive is out of alignment."
+    ""
+    "Press [Enter] to remove incomplete program files."
+
+    WAIT 62 19
+
+
+    ' delete all partial files using internal variables
+    '   ~1 = the drive the user installed to (C: was the default)
+    '   ~2 = the path the user installed to (\SAMPLE was the default)
+
+    DELETE ~1~2\*.* 0 0 31
+
+    ' now remove the directory
+
+    RD ~1~2
+
+    WINCLOSE
+
+    WINOPEN 0 11 31
+
+    "Partially Installed Files are Now Deleted."
+    ""
+    "      Press [Enter] to Quit."
+
+    WAIT 47 14
+
+    ========================   END OF SCRIPT FILE   =======================
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 16
+
+
+
+
+
+
+
+
+
+    STEP 6:  COPY FILES TO 1ST MASTER DISK
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    COPY  INSTALL.EXE and INSTALL.FIL  (newly  created  above)  to   master
+    diskette number one.  You may want to copy a third file, TEMP.FIL which
+    is  filled with about 2K of "padding" in case you need to make  changes
+    to INSTALL.FIL later.  Delete TEMP.FIL prior to final distribution.
+
+
+    STEP 7: USE THE PACKER UTILITY
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Make sure PACKER.EXE is in your PATH.  We put it in our \UTIL directory
+    which is where we keep all our commonly used utilities such as  PACKER.
+    Again,  using ImagiMOVIE Guide as our example, move to  the  \MASTER\M\
+    subdirectory with the command CD \MASTER\M.  (For Chinese Checkers move
+    to the \MASTER\CHINESE subdirectory with CD \MASTER\CHINESE.)
+
+    Enter the command:
+       PACKER A:IMOVIE.PAK *.* /S
+
+               A:IMOVIE.PAK     is  the name of the file that contains  the
+                                software in a compressed form.  PACKER will
+                                stretch this file across as many  formatted
+                                disks as it needs to.
+
+                                NOTE:  PACKER uses a very safe and reliable
+                                compression  algorithm and writes a 32  bit
+                                CRC  identification in the PACKED  file  to
+                                ensure  that  INSTALL  UNPACKS  each   file
+                                correctly.
+
+               *.*              means  that PACKER will compress  and  copy
+                                all  files into IMOVIE.PAK.  While you  are
+                                testing  your first version of your  edited
+                                INSTALL.FIL,  you  may want  to  substitute
+                                *.EXE  here  so  that  only  a  very  small
+                                IMOVIE.PAK  file will be created  for  your
+                                first round of testing.
+
+               /S               is  PACKER's  instruction  to  include  the
+                                files  in  subdirectories  too.  In   other
+                                words, copy all the software, not just  one
+                                directory.  In general, if you are  PACKING
+                                subdirectories,   use  the  /S  switch   in
+                                conjunction with the other options you have
+                                selected,  including  /L and /X  (see  next
+                                page).
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 17
+
+
+
+
+
+
+
+
+
+
+    OTHER COMMANDS FOR PACKER
+
+               /O               means to overwrite the existing file.   Use
+                                this instruction if you are updating a  set
+                                of Master Disks.
+
+               /L               will  list  the files in the  packed  file.
+                                For example PACKER A:IMOVIE.PAK /L /S  will
+                                list  the  contents  of  the  PACKED  file,
+                                including  file name, date, time, CRC,  and
+                                compression   percentage.   Using  the   /L
+                                switch  will give you a clear idea of  just
+                                how  effective  our  The  Finishing   Touch
+                                utility is in reducing disk space!
+
+               /X               will extract the files in the packed  file.
+                                Use the /X command when you need to extract
+                                files    without    INSTALL.EXE's    pretty
+                                interface.
+
+    STEP 8:  TEST YOUR WORK
+    ~~~~~~~~~~~~~~~~~~~~~~~
+    The last step is to test your work.  Install the software on a AT LEAST
+    ONE computer other than the one you created the masters from.  Ideally,
+    this is a computer with nothing but DOS, CONFIG.SYS, and  AUTOEXEC.BAT,
+    and no PATH or APPEND statements.  This will prevent files in your PATH
+    from  being  found on your computer that probably won't be on  the  end
+    user's computer.  It will also test the alignment of your disk  drives.
+    Sometimes when disks are slightly out of alignment, diskettes formatted
+    and files copied on one computer will work just fine on that  computer,
+    but  the  same  disks tested on another computer will  fail.   (We  use
+    CHECKIT to test our disk drives before offloading masters).  Be sure to
+    test  your  disks on an LCD laptop to ensure that all your  colors  are
+    visible.   Better yet--prompt the user with a window in  the  beginning
+    which asks "Can you see this in color Y/N?" and JUMP.NO to an identical
+    script  using black and white colors.  Try to install your disks  to  a
+    drive that doesn't have enough disk space (such as drive B:), and  test
+    every  option  in  your install script to make sure  your  script  file
+    doesn't have "bugs".
+
+
+    STEP 9:  WRITE INSTALLATION INSTRUCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Your  instructions for the end user should be short, sweet and easy  to
+    find.  Something similar to the following three instructions is usually
+    enough:
+
+         1.  Insert the 1st disk in a floppy drive.
+
+         2.  Enter  the  command  A:INSTALL (or B:INSTALL)  and  press  the
+             [Enter] key.  Follow the simple instructions as they appear on
+             the screen.
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 18
+
+
+
+
+
+
+
+
+
+         3.  After your software is installed, enter the command MOVIE from
+             your root directory to run the ImagiMOVIE GUIDE software.
+
+
+    IN SUMMARY
+    ~~~~~~~~~~
+    The Finishing Touch is a flexible, powerful utility which will save you
+    THOUSANDS  of dollars in diskette duplication fees,  postage,  mailers,
+    and installation support problems.  We hope that you find it to be  the
+    most  useful,  easy to use, and smallest installation  program  on  the
+    market!
+
+
+    ASSOCIATION OF SHAREWARE PROFESSIONALS MEMBERSHIP
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ImagiSOFT,   Inc.  is  a  member  of  the  Association   of   Shareware
+    Professionals  (ASP).   ASP  wants  to make  sure  that  the  shareware
+    principle  works  for you.  If you are unable to resolve  a  shareware-
+    related  problem with an ASP member by contacting the member  directly,
+    ASP may be able to help.  The  ASP Ombudsman can  help  you  resolve  a
+                                             dispute or problem with an ASP
+             _______                         member,  but does not  provide
+        ____|__     |               (r)      technical support for members'
+     --|       |    |-------------------     products.  Please write to the
+       |   ____|__  |  Association of        ASP  Ombudsman  at  545 Grover
+       |  |       |_|  Shareware             Road,  Muskegon,  MI  49442 or
+       |__|   o   |    Professionals         send a CompuServe  message via
+     -----|   |   |---------------------     via  CompuServe  Mail  to  ASP
+          |___|___|                          Ombudsman 70007,3536.
+
+
+    THANK YOU!
+    ~~~~~~~~~~
+    We at ImagiSOFT, Inc. would like to thank you, our customers, for using
+    The Finishing Touch.  The financial support of our loyal customers  has
+    made   The  Finishing Touch possible.   We appreciate  you  very  much.
+    Look  for our graphics-oriented games and other ImagiSOFT  products  on
+    your local BBS or shareware vendor catalog.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  The Finishing Touch                             Page 19
+
+
+
+
+
+
+
+
+
+                                  APPENDIX A
+
+                             SCRIPT FILE COMMANDS
+
+
+
+    ASK Command
+
+    Purpose:     Wait for "Yes" or "No" response from user.
+
+    Parameters:  ASK x y
+                 x = x position of the cursor
+                 y = y position of the cursor
+
+    Remarks:     This  command  generally should be preceded by  a  WINOPEN
+                 command, and will generally be followed by either JUMP.YES
+                 or JUMP.NO.
+
+                 If  the  LANGUAGE command has been issued  in  a  language
+                 other than ENGLISH, ASK will behave slightly  differently;
+                 instead  of "y" or "n" (yes or no), ASK waits for  "o"  or
+                 "n"  (oui / non) if the LANGUAGE FRENCH command  has  been
+                 given.   In Spanish ASK waits until either an "s"  or  "n"
+                 (si / no) key is pressed.  If the LANGUAGE GERMAN  command
+                 has  been  given,  INSTALL  waits  for  the  "j"  or   "n"
+                 (jah / nign) to be pressed.
+
+    Example:     WINOPEN 0 0 31
+                 "     Do You Want to Install"
+                 "Sound Blaster Files     Y or N?"
+                 ASK 49 13
+                 JUMP.NO EXIT_PROGRAM
+
+                 The  example  above centers blue and white window  on  the
+                 screen,  locates  the cursor 49 characters across  and  13
+                 rows down, then waits for the user to press the "Y",  "y",
+                 "N"  or  "n".   If the "Y" key  is  pressed,  the  JUMP.NO
+                 command  is  skipped and INSTALL.EXE processes  the  Sound
+                 Blaster  installation logic.  If the "N" key  is  pressed,
+                 INSTALL.EXE  proceeds  to the label EXIT_PROGRAM  and  the
+                 Sound Blaster installation logic is skipped.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 20
+
+
+
+
+
+
+
+
+
+    BACKGROUND Command
+
+    Purpose:     Sets background color
+
+    Parameters:  BACKGROUND c
+                 c = color numeric value between 0 - 255
+                     (see color chart on page 12)
+
+    Remarks:     Generally, this is the first command in the script file.
+
+    Example:     BACKGROUND 63
+                 Displays  a  cyan background and a  high  intensity  white
+                 foreground.   Since  the high intensity  white  foreground
+                 doesn't show, choosing any of the numbers between  48 - 63
+                 will display a cyan background.
+
+    Errors:      None.   If  INSTALL.EXE  detects a  monochrome  (not  LCD)
+                 monitor it uses a predefined color set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 21
+
+
+
+
+
+
+
+
+
+    BEEP Command
+
+    Purpose:     To cause the computer's internal speaker to "beep".
+
+    Parameters:  BEEP
+
+    Remarks:     You may want to use this command after an error message or
+                 just  prior  to  prompting for a new disk  with  the  DISK
+                 command.   The  trouble with using this  command  is  that
+                 internal messages and errors don't "beep", so your  "beep"
+                 command may appear to be inconsistent with the rest of the
+                 software.
+
+    Example:     BEEP
+                 DISK 4 FOUR.FIL 0 0 31
+
+                 The above example will issue a "beep" just prior to asking
+                 the user to insert disk number 4.
+
+    Errors:      None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 22
+
+
+
+
+
+
+
+
+
+    COPY Command
+
+    Purpose:     To copy files from one disk or directory to another.
+
+    Parameters:  COPY f1 f2 x y c
+                 f1 = the source file name.  globals (*.*, ?) are valid.
+                 f2 = the target file name.
+                 x  = the x position of the upper left corner of the window
+                 y  = the y position of the upper left corner of the window
+                 c  = numeric color value between 0 - 255 (see color chart)
+
+    Remarks:     This  command is similar to the COPY command in DOS.   You
+                 should  generally  include  one or more  of  the  internal
+                 variables as part of the above file names when issuing the
+                 COPY in your script file.  See VARIABLES in APPENDIX B for
+                 more information.
+
+                 You  may want to follow the COPY command with a  JUMP.FAIL
+                 command  just  in case there is something wrong  with  the
+                 user's disk.  The internal "fail" variable will get set if
+                 the  COPY  command fails because of a disk  error  or  the
+                 user's installation disk is full.
+
+    Example 1:   COPY ~3\AUTOEXEC.BAT ~3\AUTOEXEC.BAK
+
+                 You should create a backup of the user's AUTOEXEC.BAT when
+                 you modify it with the FILE or SET.PATH command.   Similar
+                 reasoning applies to modifying the user's CONFIG.SYS  with
+                 the FILE or SET.FILES commands.
+
+    Example 2:   :LCD
+                 DISK 2 CONTROL.LCD 0 0 31
+                 COPY ~0\CONTROL.LCD ~1~2\CONTROL.FIL 0 0 31
+                 JUMP.FAIL LCD
+
+                 In this example the user has previously told us that  they
+                 are  using  an LCD laptop.  We copy the  file  CONTROL.LCD
+                 which has the default laptop screen color configuration on
+                 top  of  the  existing  file  CONTROL.FIL  in  the  user's
+                 selected installation drive and path.
+
+                 Since   at  this  point,  we  have  already   successfully
+                 installed  the software to the user's hard drive,  we  can
+                 assume the only thing that would cause the JUMP.FAIL  flag
+                 to be set if the user prematurely opens the floppy  drive,
+                 which is why you see the above "endless loop" structure.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 23
+
+
+
+
+
+
+
+
+
+    CPU Command
+
+    Purpose:     Test for a minimum required CPU type, 286 or 386.
+
+    Parameters:  CPU p
+                 p = minimum required processor type, 286 or 386
+
+    Remarks:     Some programs are written to take advantage of certain 286
+                 or 386 instructions which can enhance execution speed.  If
+                 your program requires one of these processors (or  higher)
+                 then  use  the CPU command as part  of  your  installation
+                 script.   It should be immediately followed by a  JUMP.YES
+                 or JUMP.NO command.
+
+    Example:     CPU 386
+                 The  above example tests for an 80386 as the  minimum  CPU
+                 required  for the software.  If the computer has an  80386
+                 or  80486  processor,  the internal flag will  be  set  to
+                 "Yes";  if  the computer has an 8088, 8086, or  80286  the
+                 internal flag will be set to "No".
+
+                 The  next command should be JUMP.NO (JUMP.YES  would  work
+                 equally  as  well depending on the logic  of  your  script
+                 file), for example:
+                      JUMP.NO NO_386_CPU
+                 The  label :NO_386_CPU could have a WINOPEN command  which
+                 tells  them that their computer doesn't have  the  minimum
+                 required  hardware,  or it could have  an  UNPACK  command
+                 which contains an alternate program version.
+
+                 See  related commands JUMP.YES and JUMP.NO and  LABELS  in
+                 APPENDIX B.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 24
+
+
+
+
+
+
+
+
+
+    DELETE Command
+
+    Purpose:     Delete files from the installation disk.
+
+    Parameters:  DELETE f x y c
+                 f = the file name.  globals (*.*, ?) are valid.
+                 x = the x position of the upper left corner of the window
+                 y = the y position of the upper left corner of the window
+                 c = numeric color value between 0 - 255 (see color chart)
+
+    Remarks:     This  command is similar to the DEL command in  DOS.   You
+                 should  generally  include  one or more  of  the  internal
+                 variables as part of the file name when issuing the DELETE
+                 in your script file.  See VARIABLES in APPENDIX B for more
+                 information.
+
+                 You may want to follow the DELETE command with a JUMP.FAIL
+                 command  just  in case there is something wrong  with  the
+                 user's  installation disk.  The internal  "fail"  variable
+                 will get set if the DELETE command fails because of a disk
+                 error.
+
+    Example 1:   DELETE ~1~2\DATA\*.* 0 0 31
+                 JUMP.FAIL INSTALL_FAILURE
+
+                 This  example deletes all the files in a directory  called
+                 "DATA"  beneath the main directory the user installed  the
+                 software  to.   The  variable ~1 is  the  drive  the  user
+                 installed to, and ~2 is the path the user installed to.
+
+    Example 2:   VIDEO EGA                       ' test for ega monitor
+                 JUMP.NO CGA_CONFIG              ' no ega, jump to label
+                 DELETE ~1~2\*.CGA 0 0 31        ' delete cga files
+                 JUMP.FAIL INSTALL_FAILURE       ' in case of disk error
+                 JUMP DONE                       ' skip cga configuration
+                 :CGA_CONFIG                     ' label
+                 DELETE ~1~2\*.EGA 0 0 31        ' delete ega files
+                 JUMP.FAIL INSTALL_FAILURE       ' in case of disk error
+                 :DONE                           ' label
+
+                 This is an example where a game manufacturer has both  EGA
+                 and CGA screens for their game.  The EGA screens have  the
+                 extension .EGA whereas the CGA screens have the  extension
+                 .CGA.  The above logic first checks for an EGA (or better)
+                 monitor.   If  it finds EGA it deletes  the  CGA  screens,
+                 otherwise  it "jumps" to CGA_CONFIG which deletes the  EGA
+                 screens.
+
+                 If your programs don't take up too much disk space you can
+                 use a short script file which installs all the files  from
+                 the  PACKED file then deletes any unused files such as  in
+                 the above example.
+
+    Errors:      None.
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 25
+
+
+
+
+
+
+
+
+
+    DISK Command
+
+    Purpose:     Prompt the user to insert one of the installation disks.
+
+    Parameters:  DISK d f x y c
+                 d = a numeric value equal to the disk number
+                 f = the name of a file on the disk for verification
+                 x = x position of the upper left hand corner of message
+                 y = y position of the upper left hand corner of message
+                 c = numeric color value (see color chart on page 12)
+
+    Remarks:     Use  the DISK command when you want to prompt for  a  disk
+                 out  of sequence, such as when using the ASK  command  and
+                 UNPACKing several .PAK files.  See the UNPACK command  for
+                 an example of using DISK to install a word processor which
+                 uses several UNPACK commands.
+
+                 Another  way to use DISK is when you want to COPY a  group
+                 of  files  and  want to ensure that the  correct  disk  is
+                 inserted prior to COPYing them.  A creative combination of
+                 the  commands EXIST, JUMP.YES, DISK and COPY can help  you
+                 keep  the  same  script  file for  both  5.25"  and  3.50"
+                 floppies.
+
+                 If  you  prompt  for  disk  "0",  the  DISK  command  will
+                 increment  the current disk counter by 1.  This is  useful
+                 when you are using the same script file for both 3.5"  and
+                 5.25"  floppies and the disk number is different for  both
+                 disk versions.
+
+                 Note:   When  using the DISK command it is vital  to  have
+                 DISK  search for a unique file name which is not found  on
+                 any  other disk in the installation set.  If  your  script
+                 directs DISK to search for a PACKed file on the disk, make
+                 sure  that the PACKed file does not span across  disks  or
+                 INSTALL will return with a fatal error if the user inserts
+                 the wrong disk!  Create a 1 byte file such as FOUR.FIL  to
+                 tell DISK which disk is disk 4 if you have to!
+
+    Example:     DISK 4 FOUR.FIL 0 0 31
+
+                 The  above command will display a blue window  with  white
+                 letters, centered on the screen which reads:
+
+                     Please insert disk 4.
+
+                     Press the [Enter] key to continue.
+
+                 This  window will remain on the screen until  the  [Enter]
+                 key is pressed and the disk is inserted which contains the
+                 file FOUR.FIL.
+
+    Errors:      None.
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 26
+
+
+
+
+
+
+
+
+
+    DOS Command
+
+    Purpose:     Test for a minimum required DOS version.
+
+    Parameters:  DOS v
+                 v = minimum required DOS version.
+
+    Remarks:     Some  programs  make DOS specific calls which may  not  be
+                 available  on  earlier versions of DOS.  If  your  program
+                 requires a certain DOS version use the DOS command in your
+                 installation script.  It should be immediately followed by
+                 a JUMP.YES or JUMP.NO command.
+
+    Example:     DOS 3.3
+                 The above example tests DOS version 3.3 as the minimum DOS
+                 version required to run the software.  If the computer has
+                 DOS version 3.3 or above the internal flag will be set  to
+                 "Yes"; a lower version will set the internal flag to "No".
+
+                 The  next command should be JUMP.NO (JUMP.YES  would  work
+                 equally  as  well depending on the logic  of  your  script
+                 file), for example:
+                      JUMP.NO OLD_DOS
+                 The  label  :OLD_DOS could have a  WINOPEN  command  which
+                 tells  them  that  their computer doesn't  have  a  recent
+                 enough  DOS  version, or it could have an  UNPACK  command
+                 which contains an alternate program version.
+
+                 See  related commands JUMP.YES and JUMP.NO and  LABELS  in
+                 APPENDIX B.
+
+                 Hint:  If you are using the FILE command to write a  batch
+                 file  use  the DOS command to test for DOS  3.3  or  above
+                 before  writing  the file.  If the DOS version is  3.3  or
+                 higher,  you  can  precede each command with  "@"  so  the
+                 command  in  your  batch file won't be  displayed  on  the
+                 user's screen.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 27
+
+
+
+
+
+
+
+
+
+    DRIVE Command
+
+    Purpose:     Prompt the user for the drive to install to.
+
+    Parameters:  DRIVE d wx wy wc ic mx my mc
+                 d  = the pre-stuffed drive letter (C, D, E, F, etc.)
+                 wx = the x position of the upper left corner of the window
+                 wy = the y position of the upper left corner of the window
+                 wc = the window color (see color chart on page 12)
+                 ic = the input color  (see color chart on page 12)
+                 mx = error message window x position
+                 my = error message window y position
+                 mc = the error message color.  Value between 0 - 255
+                      (see color chart on page 12)
+
+    Remarks:     The drive can be any value from A to Z.  The DRIVE command
+                 should  generally  be  preceded  by  the  SPACE   command.
+                 Issuance of DRIVE sets the variable ~1.  See also the PATH
+                 command.
+
+    Example:     DRIVE C 28 10 31 15 32 14 79
+                 C  = pre-stuff the window with drive C as a default
+                 28 = locate window at 28 characters across
+                 10 = locate window at 10 rows down
+                 31 = blue background window with bright white border
+                 15 = input on black background with bright white letters
+                 32 = error message located at 32 characters across
+                 14 = error message located at 14 rows down
+                 79 = errors displayed in a red window with white letters
+
+                 If the user elects to install to drive C, in the  example
+                 above, the variable ~1 would equal C  This variable  adds
+                 tremendous power to The Finishing Touch; see the  WINOPEN,
+                 MD,  RD, COPY, DELETE, FILE, SHELL, and RUN  commands  for
+                 examples.
+
+    Errors:      Several errors can occur here which is why you must  input
+                 the coordinates and colors of the possible error message.
+
+                 The first thing INSTALL.EXE does is to check to make  sure
+                 that  the  input  drive exists.  If the  user  selects  an
+                 invalid drive the error message
+                      Drive <Drive>: is invalid.
+                 will be displayed in the error message window.
+
+                 If  the SPACE command has been issued, the  DRIVE  command
+                 checks for sufficient disk space.  If there is not  enough
+                 space to install the program, the error message
+                      No space on drive <Drive>.  (<Amount>K needed)
+                 will be displayed in the error message window.
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 28
+
+
+
+
+
+
+
+
+
+    DRIVE Command (Continued)
+
+                 If  the user tries to install to a floppy drive  which  is
+                 not ready the message
+                      Drive <Drive>: is not ready.
+                 will be displayed in the error message window.
+
+                 If  any  of  these errors occur, the  user  must  enter  a
+                 different drive letter, correct the problem, or press  the
+                 [Esc] key to exit installation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 29
+
+
+
+
+
+
+
+
+
+    DRIVE Command (2nd Useage)
+
+    Purpose:     Set the ~1 variable to a specific drive without  prompting
+                 the user.
+
+    Parameters:  DRIVE d
+                 d  = the pre-defined drive letter
+
+    Remarks:     This  is  generally  used in  conjunction  with  the  PATH
+                 command.
+
+    Example:     DRIVE C:                           ' set ~1 variable
+                 PATH  \WINDOWS                     ' set ~2  variable
+                 EXIST ~1~2\WIN.COM                 ' does this file exist?
+                 JUMP.NO INPUT_WIN_PATH             ' not there? jump
+                 FILE ~1~2\WIN.INI                  ' change users win.ini
+                 "; This change was made by ImagiSOFT"
+                 "; in the user's WIN.INI file."
+
+    Errors:      None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 30
+
+
+
+
+
+
+
+
+
+    EXIST Command
+
+    Purpose:     To determine whether or not a file exists.
+
+    Parameters:  EXIST f
+                 f = file name and path.  Globals (*.*, ?) are valid.
+
+    Remarks:     The EXIST combined with the JUMP.NO / JUMP.YES commands is
+                 important   when  the  software  you  are  installing   is
+                 dependent upon the existence of other previously installed
+                 software, such as Microsoft Windows(tm).  You should  also
+                 use  it  when  you are sending an  update  to  a  previous
+                 version.
+
+                 EXIST  looks  for matching entries (both  directories  and
+                 files  will be found), and should always be used prior  to
+                 making  or  deleting  a  directory.  See  the  MD  and  RD
+                 commands for details.
+
+                 EXIST  is  often followed by a JUMP.FAIL command  in  case
+                 there  is  a fatal disk error on any of  the  user's  disk
+                 drives.
+
+    Example 1:   :WINDOWS_PROMPT                 ' label for jump command
+                 TELESCOPE OFF                   ' draw windows quickly
+                 SHADOW ON                       ' shadow the window below
+                 WINOPEN 7 4 31
+                 ""
+                 "  Tetris for Windows will be installed into the GAMES
+                          directory  "          ' (connected to line above)
+                 "  beneath the directory where WINDOWS resides."
+                 "  Please enter the location of your WINDOWS directory:"
+                 ""
+                 ""
+                 ""
+                 ""
+                 ""
+                 SHADOW OFF                      ' don't shadow path window
+                 PATH \WINDOWS 8 9 17 15 32 14 79
+                 EXIST ~1~2\WIN.COM              ' test for proper entry
+                 JUMP.NO WINDOWS_PROMPT          ' wrong: jump back
+
+                 The  example above shows how the EXIST command is used  to
+                 create  an  error trap to ensure that the  user  correctly
+                 informs INSTALL.EXE where the Windows directory is.
+
+                 Hint:   Notice that the above example uses color 17  (blue
+                 on blue) as a technique to "hide" the outline and  install
+                 messages in the window that normally comes by issuing  the
+                 PATH command.
+
+    Errors:      None.
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 31
+
+
+
+
+
+
+
+
+
+    END Command
+
+    Purpose:     To end processing of the script file.
+
+    Parameters:  END
+
+    Remarks:     The  END  command works exactly the way  the  END  command
+                 works  in BASIC -- it clears the screen and drops to  DOS.
+                 The END command is not necessary if your script file  ends
+                 on  the last line, but usually, error messages are  placed
+                 at the end of the script file.
+
+    Example:     .
+                 .
+                 .
+                 END
+
+                 ' ---------------------
+                 ' error message section
+                 ' ---------------------
+
+                 :NOT_ENOUGH_MEMORY
+
+                 The  above example shows the main body of the script  file
+                 preceding  the END command, and having the error  messages
+                 placed  at the bottom.  This is the recommended  structure
+                 for script files.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 32
+
+
+
+
+
+
+
+
+
+    FILE Command
+
+    Purpose:     To  append  the end of a file with instructions  from  the
+                 script  file.   This  command  will  create  the  file  if
+                 necessary,  and  is  useful  for  modifying  AUTOEXEC.BAT,
+                 CONFIG.SYS, WIN.INI, and for creating batch files.
+
+    Parameters:  FILE f
+                 f = the file name
+                 "All commands are held within quotes"
+
+    Remarks:     The  FILE  command will generally be used  in  conjunction
+                 with the internal variables ~0, ~1, ~2, and ~3.  It should
+                 generally be followed by a JUMP.FAIL command in case there
+                 is a problem with one of the user's disks.
+
+                 When  using FILE to modify either the user's  AUTOEXEC.BAT
+                 or CONFIG.SYS file, use the COPY command to make a  backup
+                 file.   You may want to use the VIEW command afterward  so
+                 that  the user can see the changes you have made to  these
+                 files.
+
+    Example 1:   COPY ~3\AUTOEXEC.BAT ~3\AUTOEXEC.BAK
+                 FILE ~3\AUTOEXEC.BAT
+                 "~1"
+                 "cd ~2"
+                 "menu"
+
+                 This  example of a menu program installation  tacks  three
+                 commands  at the bottom of AUTOEXEC.BAT -- after making  a
+                 backup first.  The first command selects the  installation
+                 drive, the second changes to the installed directory,  and
+                 the third runs the menu program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 33
+
+
+
+
+
+
+
+
+
+    FILE Command  (Continued)
+
+    Example 2:   DOS 3.3                         ' check for DOS 3.3+
+                 JUMP.NO OLD_DOS                 ' dos 3.2 or lower, jump
+                 FILE ~1\TSA.BAT                 ' create tsa.bat in root
+                 "@~1"
+                 "@cd ~2"
+                 "@sfpinit -b22 start.exe"
+                 "@cd \"
+                 JUMP DONE                       ' jump over old dos stuff
+                 :OLD_DOS                        ' label
+                 FILE ~1\TSA.BAT                 ' create tsa.bat in root
+                 "~1"
+                 "cd ~2"
+                 "sfpinit -b22 start.exe"
+                 "cd \"
+                 :DONE                           ' finished
+
+                 Example 2 illustrates how the FILE command can be used  to
+                 write  a  batch  file in the root drive  of  the  client's
+                 installation disk so the user can run the software with  a
+                 simple  command,  in this case "TSA".  It checks  for  DOS
+                 version 3.3 or above where the at sign ("@") supresses the
+                 line from being displayed on the screen.  On DOS  versions
+                 3.2 or lower, a batch command beginning with "@" will  not
+                 be processed.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 34
+
+
+
+
+
+
+
+
+
+    FILE.DATE Command
+
+    Purpose:     To check the date of a file.
+
+    Parameters:  FILE.DATE f d
+                 f = file name and path
+                 d = date of file in MM-DD-YYYY format
+
+    Remarks:     FILE.DATE combined with the JUMP.NO / JUMP.YES commands is
+                 useful  when  you  are sending an update  for  a  previous
+                 software  version.   Testing the file date  is  not  "fool
+                 proof",  however, because some backup programs modify  the
+                 time  and  date  of  files.   The  FILE.SIZE  command   is
+                 generally  a  more  reliable method  of  testing  for  the
+                 current software version.
+
+                 FILE.DATE  may be followed by a JUMP.FAIL command in  case
+                 there  is  a fatal disk error on the  user's  installation
+                 disk drive.
+
+    Example:     :TSA_PROMPT                     ' label for jump command
+                 TELESCOPE OFF                   ' draw windows quickly
+                 SHADOW ON                       ' shadow the window below
+                 WINOPEN 15 2 31
+                 "Tax Sheltered Annuity Software Update"
+                 "              July 1, 1992"
+                 ""
+                 "Please enter the location of your TSA directory:"
+                 ""
+                 ""
+                 ""
+                 ""
+                 ""
+                 SHADOW OFF                        ' no shadow path window
+                 PATH \TSA 16 7 17 15 32 14 79     ' prompt for directory
+                 EXIST ~1~2\TSA.EXE                ' test for correct dir
+                 JUMP.NO TSA_PROMPT                ' wrong: jump back
+                 FILE.DATE ~1~2\TSA.EXE 01-01-1992 ' test version
+                 JUMP.NO MISSED_UPDATE             ' wrong version
+
+                 The example above shows one method of using INSTALL.EXE as
+                 a software update program.  If the file date on TSA.EXE is
+                 not  equal  to  January 1, 1992  INSTALL.EXE  jumps  to  a
+                 message  where the user is told that they have  missed  an
+                 update,   and  to  contact  the  home  office   for   more
+                 information.
+
+                 Hint:   Notice that the above example uses color 17  (blue
+                 on blue) as a technique to "hide" the outline and  install
+                 messages in the window that normally comes by issuing  the
+                 PATH command.
+
+    Errors:      None.
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 35
+
+
+
+
+
+
+
+
+
+    FILE.SIZE Command
+
+    Purpose:     To check the size of a file.
+
+    Parameters:  FILE.SIZE f s
+                 f = file name and path
+                 s = size of file in bytes
+
+    Remarks:     FILE.SIZE combined with the JUMP.NO / JUMP.YES commands is
+                 useful  when  you updating a  previous  software  version.
+                 After the EXIST command has been issued to ensure you  are
+                 in  the proper directory, issue the FILE.SIZE  command  to
+                 make sure they have the latest version of the software.
+
+                 You  can  also  run FILE.SIZE on WIN.COM  in  the  Windows
+                 directory to test which version of Windows is installed.
+
+                 FILE.SIZE  may be followed by a JUMP.FAIL command in  case
+                 there  is  a fatal disk error on the  user's  installation
+                 disk drive.
+
+    Example:     :TSA_PROMPT                     ' label for jump command
+                 TELESCOPE OFF                   ' draw windows quickly
+                 SHADOW ON                       ' shadow the window below
+                 WINOPEN 15 2 31
+                 "Tax Sheltered Annuity Software Update"
+                 "              July 1, 1992"
+                 ""
+                 "Please enter the location of your TSA directory:"
+                 ""
+                 ""
+                 ""
+                 ""
+                 ""
+                 SHADOW OFF                        ' no shadow path window
+                 PATH \TSA 16 7 17 15 32 14 79     ' prompt for directory
+                 EXIST ~1~2\TSA.EXE                ' test for correct dir
+                 JUMP.NO TSA_PROMPT                ' wrong: jump back
+                 FILE.SIZE ~1~2\TSA.EXE 65322      ' test version
+                 JUMP.NO MISSED_UPDATE             ' wrong version
+
+                 The example above shows one method of using INSTALL.EXE as
+                 a software update program.  If the file size of TSA.EXE is
+                 not  equal  to 65322 then INSTALL.EXE jumps to  a  message
+                 where  the user is told that they have missed  an  update,
+                 and to contact the home office for more information.
+
+                 Hint:   Notice that the above example uses color 17  (blue
+                 on blue) as a technique to "hide" the outline and  install
+                 messages in the window that normally comes by issuing  the
+                 PATH command.
+
+    Errors:      None.
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 36
+
+
+
+
+
+
+
+
+
+    JUMP Command
+
+    Purpose:     To skip certain instructions by "jumping" over them.
+
+    Parameters:  JUMP l
+                 l = Label in your installation script file
+
+    Remarks:     This  command is similar to the GOTO command in BASIC;  it
+                 is  an  unconditional "jump" to another location  in  your
+                 installation script, called a "label".  It is useful  when
+                 different  parts  of your installation  perform  different
+                 functions.  For example, you might install different files
+                 for  computers  which  have EGA  monitors  than  have  CGA
+                 monitors.
+
+                 Note:   Labels always begin with a colon, reside on  lines
+                 by  themselves, and don't exceed 32 characters in  length.
+                 Any   ASCII  character  greater  than  32   (the   "space"
+                 character)  is valid.  See LABELS in APPENDIX B  for  more
+                 information.
+
+    Example:     JUMP CGA_CONFIG
+                 .
+                 .
+                 .
+                 :CGA_CONFIG
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 37
+
+
+
+
+
+
+
+
+
+    JUMP.FAIL Command
+
+    Purpose:     To   ascertain  whether  a  critical  procedure   in   the
+                 installation process "fails".
+
+    Parameters:  JUMP.FAIL l
+                 l = Label in your installation script file
+
+    Remarks:     This command is similar to a IF FLAG THEN GOTO command  in
+                 BASIC;  it is a conditional "jump" to another location  in
+                 your installation script, called a "label".  This  command
+                 is  useful if the unexpected causes your  installation  to
+                 "fail".   Commands which can set the internal "fail"  flag
+                 are:  COPY, DELETE, EXIST, FILE, FILE.DATE, FILE.SIZE, MD,
+                 RD, SET.FILES, SET.PATH, UNPACK, and VIEW.
+
+                 Note:   Labels always begin with a colon, reside on  lines
+                 by  themselves, and don't exceed 32 characters in  length.
+                 Any   ASCII  character  greater  than  32   (the   "space"
+                 character)  is valid.  See LABELS in APPENDIX B  for  more
+                 information.
+
+    Example:     SET.FILES 32
+                 JUMP.FAIL BAD_FILES
+                 .
+                 .
+                 :BAD_FILES
+                 .
+                 .
+                 END
+
+                 In the above example the SET.FILES command will make  sure
+                 that the FILES statement in CONFIG.SYS is set to at  least
+                 32.  An error could occur due to a number of conditions:
+                   -- CONFIG.SYS is flagged as READ ONLY.
+                   -- The boot disk is not available or ready.
+                   -- The installation disk is full.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 38
+
+
+
+
+
+
+
+
+
+    JUMP.NO Command
+
+    Purpose:     To  skip certain instructions by  conditionally  "jumping"
+                 over them.
+
+    Parameters:  JUMP.NO l
+                 l = Label in your installation script file
+
+    Remarks:     This command is similar to a IF FLAG THEN GOTO command  in
+                 BASIC;  it is a conditional "jump" to another location  in
+                 your installation script, called a "label".  It is  useful
+                 when  you  different parts of  your  installation  perform
+                 different  functions.   For  example,  you  might  install
+                 different files for computers which have EGA monitors than
+                 have CGA monitors.
+
+                 JUMP.NO  should  be preceded by a command which  sets  the
+                 internal variable to either "Yes" or "No".  These commands
+                 are:  ASK,  CPU,  EXIST, MOUSE,  and  VIDEO.    A  closely
+                 related command is the JUMP.YES command.
+
+                 Note:   Labels always begin with a colon, reside on  lines
+                 by  themselves, and don't exceed 32 characters in  length.
+                 Any   ASCII  character  greater  than  32   (the   "space"
+                 character)  is valid.  See LABELS in APPENDIX B  for  more
+                 information.
+
+    Example:     VIDEO EGA                        ' test for EGA or better
+                 JUMP.NO CGA_CONFIG               ' not EGA jump to CGA
+
+                 ' ega system logic resides here
+
+                 JUMP EXIT_INSTALL                ' jump over CGA logic
+
+                 ' configure computer for cga system
+                 :CGA_CONFIG
+
+                 ' cga system logic resides here
+
+                 :EXIT_INSTALL
+
+                 The above example tests whether the computer has an EGA or
+                 better monitor, which sets the internal flag to "YES".  If
+                 the  computer  has an EGA or better monitor,  the  JUMP.NO
+                 command isn't activated, so the script continues with  the
+                 EGA  system logic directly under the JUMP.NO command.   If
+                 the  computer doesn't have an EGA or better  monitor,  the
+                 JUMP.NO  command  "jumps"  to  the  label  CGA_CONFIG  and
+                 continues with the script.
+
+    Errors:      None.
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 39
+
+
+
+
+
+
+
+
+
+    JUMP.YES Command
+
+    Purpose:     To  skip certain instructions by  conditionally  "jumping"
+                 over them.
+
+    Parameters:  JUMP.YES l
+                 l = Label in your installation script file
+
+    Remarks:     This command is similar to a IF FLAG THEN GOTO command  in
+                 BASIC;  it is a conditional "jump" to another location  in
+                 your installation script, called a "label".  It is  useful
+                 when  you  different parts of  your  installation  perform
+                 different  functions.   For  example,  you  might  install
+                 different files for computers which have EGA monitors than
+                 have CGA monitors.
+
+                 JUMP.YES  should be preceded by a command which  sets  the
+                 internal variable to either "Yes" or "No".  These commands
+                 are:  ASK,  CPU,  EXIST, MOUSE,  and  VIDEO.    A  closely
+                 related command is the JUMP.NO command.
+
+                 Note:   Labels always begin with a colon, reside on  lines
+                 by  themselves, and don't exceed 32 characters in  length.
+                 Any   ASCII  character  greater  than  32   (the   "space"
+                 character)  is valid.  See LABELS in APPENDIX B  for  more
+                 information.
+
+    Example:     VIDEO EGA                        ' test for EGA or better
+                 JUMP.YES EGA_CONFIG              ' if EGA jump to EGA
+
+                 ' non-EGA system logic resides here
+
+                 JUMP EXIT_INSTALL                ' jump over EGA logic
+
+                 ' configure computer for ega system
+                 :EGA_CONFIG
+
+                 ' ega system logic resides here
+
+                 :EXIT_INSTALL
+
+                 The above example tests whether the computer has an EGA or
+                 better monitor, which sets the internal flag to "YES".  If
+                 the  computer has an EGA or better monitor,  the  JUMP.YES
+                 command "jumps" to the label EGA_CONFIG and continues with
+                 the script.  If the computer doesn't have at least an EGA,
+                 the script ignores the JUMP.YES command and continues with
+                 the logic under the JUMP.YES command.
+
+    Errors:      None.
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 40
+
+
+
+
+
+
+
+
+
+    LANGUAGE Command
+
+    Purpose:     To display INSTALL.EXE's system and error messages in  the
+                 Danish, English, French, German, or Spanish language.
+
+    Parameters:  LANGUAGE l
+                 l = the desired language.
+
+    Remarks:     The  default  language  is  English,  which  will  be  the
+                 language  of  all INSTALL.EXE's message  if  the  LANGUAGE
+                 command is not given.  If one of the other three supported
+                 languages is being used, the LANGUAGE statement should  be
+                 one of the first commands in the script.
+
+                 The  ASK command works slightly differently  depending  on
+                 the LANGUAGE selected.  See the ASK command for details.
+
+    Examples:    LANGUAGE FRENCH
+                 LANGUAGE GERMAN
+                 LANGUAGE SPANISH
+                 LANGUAGE DANISH
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 41
+
+
+
+
+
+
+
+
+
+    MEMORY Command
+
+    Purpose:     To  make  sure  the computer has  sufficient  base  memory
+                 installed to run the program.
+
+    Parameters:  MEMORY m
+                 m = minimum base memory required in K bytes
+
+    Remarks:     This command is useful, but has its limitations.  It  only
+                 tests the amount of base memory installed in the computer;
+                 it doesn't measure free memory which will be different due
+                 to  TSRs, DOS, FILES, BUFFERS, etc., and it  doesn't  test
+                 for  expanded  or extended memory.  It  should  always  be
+                 followed by either JUMP.YES or JUMP.NO.
+
+    Example:     MEMORY 512
+                 JUMP.NO NOT_ENOUGH_MEMORY
+
+                 The  above  example tests to see if the  computer  has  at
+                 least  512K of memory installed; if the computer has  less
+                 it  jumps  to the label NOT_ENOUGH_MEMORY where  an  error
+                 message is displayed.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 42
+
+
+
+
+
+
+
+
+
+    MD Command
+
+    Purpose:     Make a directory on the installation disk.
+
+    Parameters:  MD d
+                 d = the directory name.
+
+    Remarks:     This  command  is similar to the MD command in  DOS.   You
+                 should  generally  include  one or more  of  the  internal
+                 variables  as part of the directory name when issuing  the
+                 MD  in your script file.  See VARIABLES in APPENDIX B  for
+                 more information.
+
+                 You  may  want to follow the MD command with  a  JUMP.FAIL
+                 command  just  in case there is something wrong  with  the
+                 user's  installation disk.  The internal  "fail"  variable
+                 will  get  set if the MD command fails because of  a  disk
+                 error  or  if you try to make a  directory  which  already
+                 exists.   If there is any possibility that  the  directory
+                 already exists, use the EXIST command prior to issuing the
+                 MD command.
+
+    Example 2:   MD ~1~2\DATA
+                 JUMP.FAIL INSTALL_FAILURE
+
+                 This example creates a new directory called "DATA" beneath
+                 the  main  directory the user installed the  software  to.
+                 The variable ~1 is the drive the user installed to, and ~2
+                 is the path the user installed to.
+
+    Example 2:   EXIST ~1\CHINESE
+                 JUMP.YES SKIP_MD
+                 MD ~1\CHINESE
+                 :SKIP_MD
+
+                 This  example  first tests to see  whether  the  "CHINESE"
+                 directory exists in the root directory of the installation
+                 disk.  If it exists, JUMP.YES "jumps over" the MD command.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 43
+
+
+
+
+
+
+
+
+
+    MOUSE Command
+
+    Purpose:     Test  for  a minimum required Microsoft  mouse  compatible
+                 driver version number.
+
+    Parameters:  MOUSE v
+                 v = minimum required MOUSE version.
+
+    Remarks:     Some  programs make MOUSE specific calls which may not  be
+                 available  on earlier versions of MOUSE.  If your  program
+                 requires a certain MOUSE version use the MOUSE command  in
+                 your  installation  script.  MOUSE should  be  immediately
+                 followed by a JUMP.YES or JUMP.NO command.
+
+    Example:     MOUSE 0.0
+                 The above example tests for the existence of a mouse,  but
+                 doesn't care which version is installed.  This is the most
+                 common use of this command.  If the a Microsoft compatible
+                 mouse is detected the internal flag will be set to  "Yes",
+                 otherwise the flag will be set to "No".
+
+                 The  next command should be JUMP.NO or JUMP.YES  depending
+                 on the logic of your script file.
+
+                 See  related commands JUMP.YES and JUMP.NO and  LABELS  in
+                 APPENDIX B.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 44
+
+
+
+
+
+
+
+
+
+    PATH Command
+
+    Purpose:     Prompt  user for the DOS PATH they want to  install  their
+                 software to.
+
+    Parameters:  PATH p wx wy wc ic mx my
+                 p  = the pre-stuffed path
+                 wx = the x position of the upper left corner of the window
+                 wy = the y position of the upper left corner of the window
+                 wc = numeric window color (see color chart on page 12)
+                 ic = numeric input color  (see color chart on page 12)
+                 mx = error message window x position
+                 my = error message window y position
+                 mc = numeric error message color (see color chart page 12)
+
+    Remarks:     24 characters are allowed at this prompt.  This command is
+                 not  required, but is recommended for most  installations.
+                 It should be preceded with the DRIVE command.  Issuance of
+                 this command sets the variable ~2.
+
+    Example:     PATH IMOVIE 12 10 31 15 32 14 79
+                 IMOVIE = pre-stuff the input with IMOVIE as a default path
+                 12 = locate window at 12 characters across
+                 10 = locate window at 10 rows down
+                 31 = blue background window with bright white border
+                 15 = input on black background with bright white letters
+                 32 = error message located at 32 characters across
+                 14 = error message located at 14 rows down
+                 79 = errors displayed in a red window with white letters
+
+    Errors:      If  the  user backspaces over the default  path  name  and
+                 presses  [Enter] (and thereby entering a null string)  the
+                 error message
+                      Please enter the directory name.
+                 is displayed.
+
+                 If  the  user enters invalid characters or for  any  other
+                 reason the directory cannot be created the error message
+                          The directory cannot be created.
+                 is displayed.
+
+                 If either of these errors occur, the user must re-enter  a
+                 valid   PATH  name  or  press  the  [Esc]  key   to   exit
+                 installation.
+
+                 NOTE:  If the user types in a path name which is too long,
+                 The  Finishing  Touch uses DOS  conventions--it  truncates
+                 everything past the eighth character.  If the user forgets
+                 to  put  a leading "\" or forgets to end with a  "\",  The
+                 Finishing Touch provides it.
+
+                 Some  of  our  users have expressed a need  for  the  PATH
+                 command  to permit installation to the root directory  for
+                 cases involving substituted or network drives.  Currently,
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 45
+
+
+
+
+
+
+
+
+
+                 the  root  directory  is  only  allowed  if  the  user  is
+                 installing  to a floppy disk, otherwise, a directory  name
+                 must be given.
+
+                 We  have  added a "back door" to bypass this  error  trap.
+                 Simply  terminate the pre-stuffed default path (the  first
+                 parameter in the PATH command) with a semi-colon, and  The
+                 Finishing  Touch  will allow the user to access  the  root
+                 directory.  Without the semi-colon, the PATH command  will
+                 function as before.  However, if the terminator is  given,
+                 it  is  stripped from the string prior to input,  and  the
+                 error trap will be bypassed.
+
+                 For example:
+
+                 PATH \WORDPRO; 10 10 31 15 20 12 79
+                              ^
+                 This  semi-colon terminator instructs the PATH command  to
+                 permit installation to the root directory of a hard drive.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 46
+
+
+
+
+
+
+
+
+
+    PATH Command (2nd Useage)
+
+    Purpose:     Set  the ~2 variable to a specific path without  prompting
+                 the user.
+
+    Parameters:  PATH p
+                 p  = the pre-stuffed path
+
+    Remarks:     24  characters are allowed in this string which  sets  the
+                 variable ~2.  It is generally used in conjunction with the
+                 DRIVE command.
+
+    Example:     DRIVE C:                           ' set ~1 variable
+                 PATH \WINDOWS                      ' set ~2 variable
+                 EXIST ~1~2\WIN.COM                 ' does this file exist?
+                 JUMP.NO INPUT_WIN_PATH             ' not there? jump
+                 FILE ~1~2\WIN.INI                  ' change users win.ini
+                 "; This change was made by ImagiSOFT"
+                 "; in the user's WIN.INI file."
+
+    Errors:      None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 47
+
+
+
+
+
+
+
+
+
+    PRINT Command
+
+    Purpose:     Allow the user to print an ASCII file from LPT1.
+
+    Parameters:  PRINT f
+                 f  = file name
+
+    Remarks:     The  PRINT  command gives you an easy way to  print  ASCII
+                 files for the user such as README.TXT and AUTOEXEC.BAT.
+
+                 PRINT sets the JUMP.FAIL flag, if it cannot print the file
+                 to  LPT1.  You should display an error message  displaying
+                 the following possible error conditions:
+                   -- Printer is not turned on
+                   -- Printer is out of paper
+                   -- Printer not attached to LPT1 (parallel port 1)
+                   -- Disk is defective
+                   -- Disk drive is not ready
+
+    Example:     :PRINT_ORDER_FORM          ' label to jump back to
+                 PRINT ~0\ORDER.TXT         ' print file from install drive
+                 JUMP.FAIL ERROR.MESSAGE    ' jump on fatal error
+                 JUMP CONTINUE              ' print successful, skip next
+                 :ERROR.MESSAGE             ' label for error condition
+                 WINOPEN 0 0 31             ' open the following window
+                 "Your printer is not responding.  Possible problems:"
+                 "   -- Printer is not turned on"
+                 "   -- Printer is out of paper"
+                 "   -- Printer is not attached to LPT1 (parallel port 1)"
+                 ""
+                 "Do you want to try to print again  (Y or N)?"
+                 ASK 53 20                  ' prompt for Y or N key
+                 WINCLOSE                   ' close the window
+                 JUMP.YES PRINT_ORDER_FORM  ' y key pressed, print
+                 :CONTINUE                  ' done with printing
+
+                 This  example shows how to use the PRINT command, and  how
+                 to write an error trap for printer failure.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 48
+
+
+
+
+
+
+
+
+
+
+PROMPT On/Off turns windows on or off for the COPY, DELETE, DISK, and UNPACK
+commands.  This is easier than "hiding" windows by making them the same color
+as the background as explained in the documentation.
+    PROMPT Command
+
+    Purpose:     Turns  windows on or off for the COPY, DELETE,  DISK,  and
+                 UNPACK, DRIVE, and PATH commands.
+
+    Parameters:  PROMPT  o
+                 o = on or off.
+
+    Remarks:     Use  the PROMPT command to turn messages on or off.   This
+                 is  especially  useful  when  using  the  COPY  or  DELETE
+                 commands when you don't want the computer to display  what
+                 you  are  doing.  You can also use PROMPT  OFF  to  create
+                 customized  messages  for  the DRIVE  and  PATH  commands.
+                 command.
+
+    Example:     PROMPT OFF
+
+    Example 2:   PROMPT ON
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 49
+
+
+
+
+
+
+
+
+
+
+    RD Command
+
+    Purpose:     Remove a directory.
+
+    Parameters:  RD d
+                 d = the directory name.
+
+    Remarks:     This  command  is similar to the RD command in  DOS.   You
+                 should  generally  include  one or more  of  the  internal
+                 variables  as part of the directory name when issuing  the
+                 RD  in your script file.  See VARIABLES in APPENDIX B  for
+                 more information.
+
+                 RD  is  usually accompanied by DELETE to  avoid  an  error
+                 which  results  from trying to remove  a  directory  which
+                 contains files.
+
+                 You  may  want to follow the RD command with  a  JUMP.FAIL
+                 command  just  in case there is something wrong  with  the
+                 user's  installation disk.  The internal  "fail"  variable
+                 will  get  set if the RD command fails because of  a  disk
+                 error, if you try remove a directory which does not exist,
+                 or  remove a directory which is not empty .  If  there  is
+                 any possibility that the directory does not exist, use the
+                 EXIST command prior to issuing the RD command.
+
+    Example:     DELETE ~1~2\DATA\*.* 0 0 31
+                 RD ~1~2\DATA
+                 JUMP.FAIL INSTALL_FAILURE
+
+                 This  example deletes all the files in a directory  called
+                 "DATA"  beneath the main directory the user installed  the
+                 software to, then removes that directory.  The variable ~1
+                 is the drive the user installed to, and ~2 is the path the
+                 user installed to.
+
+    Example 2:   EXIST ~1\CHINESE
+                 JUMP.NO SKIP_RD
+                 DELETE ~1\CHINESE\*.* 0 0 31
+                 RD ~1\CHINESE
+                 :SKIP_RD
+
+                 This  example  first tests to see  whether  the  "CHINESE"
+                 directory exists in the root directory of the installation
+                 disk. If the directory doesn't exist, JUMP.NO "jumps over"
+                 the  RD command to avoid setting the internal fatal  error
+                 variable.
+
+    Errors:      None.
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 50
+
+
+
+
+
+
+
+
+
+    REBOOT Command
+
+    Purpose:     Instruct the computer to perform a "warm boot".
+
+    Parameters:  REBOOT
+
+    Remarks:     If you use REBOOT it should obviously be the last  command
+                 in your script file.  It is equivalent to instructing  the
+                 user to press the CTRL ALT and DEL keys simultaneously.
+
+                 This  command is only generally only recommended  if  your
+                 script  file  modifies the files in CONFIG.SYS  using  the
+                 SET.FILES  command.   It sometimes makes sense  after  the
+                 script file has changed AUTOEXEC.BAT too.
+
+    Example:     WINOPEN 0 0 79
+                 "This program may have increased the number of files"
+                 "in your CONFIG.SYS file,  and therefore, to prevent"
+                 "errors, it is necessary to REBOOT YOUR COMPUTER."
+                 ""
+                 "To run the TSA software, enter the command"
+                 "   TSA"
+                 "after you turn your computer on."
+                 ""
+                 ""
+                 "Press [Enter] to REBOOT your computer."
+                 WAIT 16 63
+                 REBOOT
+
+                 As you can see from the above example, it is always a good
+                 idea to inform the user that you are about to reboot their
+                 computer and why.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 51
+
+
+
+
+
+
+
+
+
+    RUN Command
+
+    Purpose:     To run a DOS command, utility or program without returning
+                 to the installation script.
+
+    Parameters:  RUN p
+                 p = the name of the program you want to run.
+
+    Remarks:     RUN's most common function is to run the program you  just
+                 installed,  but any program or batch file can be run  with
+                 the RUN command.
+
+    Example:     RUN ~1~2\MYPROG
+
+                 The  above  example  changes to  the  installation  drive,
+                 changes  to  the installation directory,  then  fills  the
+                 keyboard buffer with the command MYPROG then exits to DOS.
+                 See VARIABLES in APPENDIX B for more information.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 52
+
+
+
+
+
+
+
+
+
+    SCRIPT Command
+
+    Purpose:     Load and run a different installation script.
+
+    Parameters:  SCRIPT f
+                 f = the file name.
+
+    Remarks:     Each script file is limited to 400 lines.  We imposed this
+                 limit for the following reasons:
+
+                 - long script files take a long time initially to load
+
+                 - we  didn't  want  The Finishing Touch to  take  so  much
+                 memory the SHELL command wouldn't work.
+
+                 - script  files for large programs are usually  easier  to
+                 debug  and  work  with if they  are  broken  into  several
+                 smaller script files rather than one long one.
+
+    Example:     VIDEO EGA                   ' check for EGA or better
+                 JUMP.NO MCGA_INSTALL        ' no ega, install mcga
+                 EXIST EGA.FIL               ' check for EGA.FIL
+                 JUMP.YES LOAD.EGA           ' found, don't prompt
+                 DISK 2 EGA.FIL 0 0 31       ' prompt to insert disk 2
+                 :LOAD.EGA                   ' label for jump command
+                 SCRIPT EGA.FIL              ' load and process EGA script
+
+                 In  the  above  example, a game company  has  a  different
+                 installation script for EGA, MCGA, and CGA monitors.   The
+                 above  example shows how good error checking and  multiple
+                 script files can make The Finishing Touch an elegant, easy
+                 to use, and truly useful tool!
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 53
+
+
+
+
+
+
+
+
+
+    SET.BUFFERS Command
+
+    Purpose:     Insure that the number of buffers in the BUFFERS statement
+                 of  CONFIG.SYS  is at least equal to a  specified  minimum
+                 number.
+
+    Parameters:  SET.BUFFERS n
+                 n = the minimum number of buffers
+
+    Remarks:     If  the  BUFFERS  statement  exists  in  CONFIG.SYS,   the
+                 SET.BUFFERS  will  evaluate the number of buffers  in  the
+                 existing  BUFFERS  statement.  If the  current  number  of
+                 buffers  exceeds the number specified in  the  SET.BUFFERS
+                 command no change will be made to CONFIG.SYS.  However, if
+                 the  BUFFERS  statement does not exist or  the  number  of
+                 buffers   is  less  than  the  number  specified  in   the
+                 SET.BUFFERS  command, SET.BUFFERS will change the  BUFFERS
+                 statement  in  CONFIG.SYS to the number specified  in  the
+                 SET.BUFFERS command.
+
+                 SET.BUFFERS  is generally followed by a JUMP.FAIL  command
+                 in  case  a  disk error occurs.  See  JUMP.FAIL  for  more
+                 information.
+
+                 SET.BUFFERS is usually followed by REBOOT.  See the REBOOT
+                 command for a detailed example.
+
+    Example:     SET.BUFFERS 16
+                 JUMP.FAIL ABORT_INSTALL
+
+                 This   example  makes  sure  the  BUFFERS   statement   in
+                 CONFIG.SYS is at least equal to 16.  If, for example,  the
+                 user's CONFIG.SYS included the statement BUFFERS = 32,  no
+                 change  would be made to the user's CONFIG.SYS  file.   On
+                 the  other  hand, if there was no BUFFERS command  in  the
+                 user's  CONFIG.SYS,  the statement BUFFERS = 16  would  be
+                 added.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 54
+
+
+
+
+
+
+
+
+
+
+    SET.FILES Command
+
+    Purpose:     Insure that the number of files in the FILES statement  of
+                 CONFIG.SYS  is  at  least equal  to  a  specified  minimum
+                 number.
+
+    Parameters:  SET.FILES n
+                 n = the minimum number of files
+
+    Remarks:     If the FILES statement exists in CONFIG.SYS, the SET.FILES
+                 will  evaluate the number of files in the  existing  FILES
+                 statement.   If  the current number of files  exceeds  the
+                 number  specified in the SET.FILES command no change  will
+                 be  made to CONFIG.SYS.  However, if the  FILES  statement
+                 does  not  exist or the number of files is less  than  the
+                 number specified in the SET.FILES command, SET.FILES  will
+                 change  the  FILES statement in CONFIG.SYS to  the  number
+                 specified in the SET.FILES command.
+
+                 SET.FILES is generally followed by a JUMP.FAIL command  in
+                 case  a  disk  error  occurs.   See  JUMP.FAIL  for   more
+                 information.
+
+                 SET.FILES  is usually followed by REBOOT.  See the  REBOOT
+                 command for a detailed example.
+
+    Example:     SET.FILES 16
+                 JUMP.FAIL ABORT_INSTALL
+
+                 This example makes sure the FILES statement in  CONFIG.SYS
+                 is  at  least equal to 16.  If, for  example,  the  user's
+                 CONFIG.SYS  included the statement FILES = 32,  no  change
+                 would be made to the user's CONFIG.SYS file.  On the other
+                 hand,  if  there  was  no  FILES  command  in  the  user's
+                 CONFIG.SYS, the statement FILES = 16 would be added.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 55
+
+
+
+
+
+
+
+
+
+    SET.PATH Command
+
+    Purpose:     Add   a   directory  name  in  the   PATH   statement   of
+                 AUTOEXEC.BAT.
+
+    Parameters:  SET.PATH d
+                 d = directory name to add to the PATH statement
+
+    Remarks:     If the PATH statement exists in AUTOEXEC.BAT, the SET.PATH
+                 will  add the directory at the end of the PATH  statement.
+                 If the PATH statement does not exist, SET.PATH will create
+                 a  new  PATH  statement  in  AUTOEXEC.BAT  containing  the
+                 specified directory name.  The most common use of SET.PATH
+                 is  to  insert the drive and path where the  software  was
+                 installed  using  the internal variables ~1 and  ~2.   See
+                 VARIABLES in APPENDIX B for details.
+
+                 SET.PATH  is generally followed by a JUMP.FAIL command  in
+                 case  a  disk  error  occurs.   See  JUMP.FAIL  for   more
+                 information.
+
+                 SET.PATH is also sometimes is followed by REBOOT.
+
+    Example:     SET.PATH ~1~2
+                 JUMP.FAIL ABORT_INSTALL
+
+                 The example adds the drive and path where the software was
+                 installed to the PATH statement in AUTOEXEC.BAT.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 56
+
+
+
+
+
+
+
+
+
+    SHADOW Command
+
+    Purpose:     To turn shadowed windows on or off.
+
+    Parameters:  SHADOW o
+                 o = either on or off.
+
+    Remarks:     The  default  is  to have shadowed  windows  "off".   This
+                 command can be issued over and over again.
+
+    Example 1:   SHADOW ON
+
+                 The  above example adds "depth" to the screen display  and
+                 draws the users eye to the current window.
+
+    Example 2:   SHADOW OFF
+
+                 You  should  turn  shadowed windows  "off"  when  you  are
+                 opening  windows on top of one another.  See  the  example
+                 given for the EXIST command for a detailed explanation.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 57
+
+
+
+
+
+
+
+
+
+    SHELL Command
+
+    Purpose:     To  run a DOS command, utility or program then  return  to
+                 the installation script.
+
+    Parameters:  SHELL
+                 "command 1"
+                 "command 2"
+
+    Remarks:     The  shell  command clears the screen,  "shells"  to  DOS,
+                 loads  another copy of COMMAND.COM into memory, then  runs
+                 the  list  of  DOS commands, returns,  then  restores  the
+                 screen.  This command is supported because it is the  only
+                 way to add total flexibility to The Finishing Touch.  Make
+                 sure the utilities and commands that you "shell" require a
+                 small  amount of memory or you may have trouble with  this
+                 command.
+
+    Example:     SHELL
+                 "~1~2\MYUTIL"
+
+                 This   example  clears  the  screen,  runs   the   program
+                 MYUTIL.EXE  which was installed in the installation  drive
+                 and  path  of  the  user's  computer  (see  VARIABLES   in
+                 APPENDIX B), then returns.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 58
+
+
+
+
+
+
+
+
+
+    SPACE Command
+
+    Purpose:     To tell INSTALL the minimum amount of disk space which  is
+                 required by the software being installed.
+
+    Parameters:  SPACE r
+                 r = minimum required disk space in K bytes
+
+    Remarks:     The  SPACE  command  should  precede  the  DRIVE  command.
+                 Remember  that the minimum space required is not  the  sum
+                 total  of the file sizes reported by DOS, it depends  upon
+                 the  hard  drive's minimum allocation unit  (usually  2K).
+                 For  example,  100 10 byte files doesn't  fill  only  1000
+                 bytes  of  disk  space, it fills  200,000  bytes  on  most
+                 systems.   For  an accurate measure of the  required  disk
+                 space use Peter Norton's FI utility on a large hard drive.
+                 It is a good practice to use a liberal SPACE requirement--
+                 especially if your software creates data files after it is
+                 installed.
+
+    Example:     SPACE 1024
+                 This  would indicate that at least a megabyte is  required
+                 on  the  destination  disk or an  error  message  will  be
+                 returned when the DRIVE command is issued.
+
+    Errors:      None reported when this call is issued; insufficient  disk
+                 space is reported after the DRIVE command is issued.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 59
+
+
+
+
+
+
+
+
+
+    TELESCOPE Command
+
+    Purpose:     To turn telescoping (or exploding) windows on or off.
+
+    Parameters:  TELESCOPE o
+                 o = either on or off.
+
+    Remarks:     The  default  is to have telescoping windows  "on".   This
+                 command can be issued as often as is needed.
+
+    Example 1:   TELESCOPE ON
+
+                 The  above example gives windows a little more pizazz  and
+                 draws the users eye to the current window.
+
+    Example 2:   TELESCOPE OFF
+
+                 Turning  telescoping  windows  "off"  makes  them   appear
+                 instantly on the screen, and is especially useful when you
+                 are  opening more than one window at a time or windows  on
+                 top of one another.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 60
+
+
+
+
+
+
+
+
+
+    UNPACK Command
+
+    Purpose:     Unpack a compressed file and copy the contents to the hard
+                 drive  in  the drive and path returned from  the  commands
+                 DRIVE and PATH.
+
+    Parameters:  UNPACK f wx wy wc mx my mc
+                 f  = file name
+                 wx = the x position of the upper left corner of the window
+                 wy = the y position of the upper left corner of the window
+                 wc = numeric window color (see color chart on page 12)
+                 mx = error message window x position
+                 my = error message window y position
+                 mc = numeric error message color (see color chart page 12)
+
+    Remarks:     If  UNPACK is not preceded by the DRIVE and PATH  commands
+                 The  Finishing  Touch will assume drive C:  and  the  PATH
+                 hard-coded into your PACKER file. (The ImagiMOVIE Guide is
+                 a  legitimate  example  of  using  a  hardcoded  PATH   as
+                 discussed  previously in this documentation, but  this  is
+                 the exception rather than the rule).
+
+                 UNPACK  always "unpacks" from the installation drive  (~0)
+                 to the destination drive and path (~1~2).  You cannot  use
+                 variables with the UNPACK command.
+
+                 It  is valid to have more than one UNPACK command in  your
+                 script  if your program has several modules  or  different
+                 configuration  options.  See the ASK command  for  related
+                 information.
+
+    Example:     UNPACK IMOVIE.PAK 24 10 31 32 14 79
+                 IMOVIE.PAK = the name of the PACKED file which contains
+                              the ImagiMOVIE Guide System. This filename
+                              can be any name you want.
+                 24 = locate window at 12 characters across
+                 10 = locate window at 10 rows down
+                 31 = blue background window with bright white border
+                 32 = prompt/error message located at 32 characters across
+                 14 = prompt/error message located at 14 rows down
+                 79 = prompt/errors displayed in a red and white window
+
+    Errors:      UNPACK  does  a  32 bit CRC check on each file  as  it  is
+                 uncompressed.   If the CRC check fails or there is a  disk
+                 error the user will see the message
+                      Cannot unpack files.
+                 displayed  on  their screen.  This means the  user's  disk
+                 media  is  bad,  their disk drives are out  of  alignment,
+                 their  disk is full, or that they opened the floppy  drive
+                 before  being  prompted to insert the next  disk.   If  an
+                 error occurs the internal "fail" variable will be set.  It
+                 a good idea to follow the UNPACK command with a  JUMP.FAIL
+                 command.  See the sample install script on page 14 for  an
+                 example.
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 61
+
+
+
+
+
+
+
+
+
+    UNPACK Command  (Continued)
+
+    Prompt:      UNPACK  knows which is the next disk in the set  and  will
+                 display the prompt
+                      Please insert disk <Number>.
+                 in a message window at the appropriate time.
+
+                 This  is  true even if you have prompted for  a  different
+                 disk  earlier.  For example, the installation  script  for
+                 the  word processor software you are sending  out  UNPACKs
+                 WP.PAK  on disk 1 and 2.  You complete WP.PAK and ASK  the
+                 user if they would like to install "magic fonts" which are
+                 contained  on  disk 2, 3, and 4.  They say "no"  and  your
+                 script  uses the DISK command to prompt for disk  4.   You
+                 issue  another  UNPACK  command and start  to  unpack  the
+                 dictionary  files.   UNPACK  will know when  it  needs  to
+                 prompt for the next disk and that, in this case, it should
+                 ask for disk 5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 62
+
+
+
+
+
+
+
+
+
+    VIDEO Command
+
+    Purpose:     To check for a minimum required monitor type, either  CGA,
+                 EGA, VGA, or MCGA.
+
+    Parameters:  VIDEO m
+                 m  = CGA, EGA, VGA, or MCGA
+
+    Remarks:     This  command should be one of the first commands in  your
+                 script  file,  and  should be followed  immediately  by  a
+                 JUMP.NO  command.   Many  software  programs,   especially
+                 graphics-oriented systems require minimum screen hardware.
+                 Proper  use of the VIDEO command followed by  the  JUMP.NO
+                 command  will  help  the  user  configure  their  computer
+                 properly.   See JUMP.YES and JUMP.NO commands  and  sample
+                 script files for examples of how to use these commands  to
+                 their full potential.
+
+    Example:     VIDEO EGA
+                 Which  tests  for  the existence of  an  EGA  monitor  (or
+                 better).   If  it is found it sets the  internal  flag  to
+                 "Yes", if not, the internal flag is set to "No".
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 63
+
+
+
+
+
+
+
+
+
+    VIEW Command
+
+    Purpose:     Allow the user to view an ASCII file.
+
+    Parameters:  VIEW f c1 c2
+                 f  = file name
+                 c1 = heading color numeric value   (see color chart)
+                 c2 = file text color numeric value (see color chart)
+
+    Remarks:     The  VIEW command will allow the user to view  most  ASCII
+                 files.  A file which is longer than available free  memory
+                 (about 100 - 200K) will not be loaded.
+
+                 This  command is useful when you have modified the  user's
+                 AUTOEXEC.BAT  or CONFIG.SYS and you want the  display  the
+                 new file on the screen.
+
+                 VIEW  displays  the file in 25 line mode.   The  top  line
+                 gives  the  user information about the  file,  it's  name,
+                 date,  time,  number of lines and file length.   The  25th
+                 line  informs the user which keys are valid:  the  arrows,
+                 PgUp, PgDn, and [Enter] or [Esc] to view the next file.
+
+                 VIEW  sets  the  JUMP.FAIL  flag,  but  it  usually  isn't
+                 necessary to error trap after a VIEW statement.
+
+    Example:     VIEW ~3\AUTOEXEC.BAT 79 31
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 64
+
+
+
+
+
+
+
+
+
+    WAIT Command
+
+    Purpose:     Wait  for the [Enter] key, usually so the user  can  read,
+                 and  respond  to  a message in a window  by  pressing  the
+                 [Enter] key.
+
+    Parameters:  WAIT x y
+                 x = x position of the cursor
+                 y = y position of the cursor
+
+    Remarks:     This command should generally follow the WINOPEN command.
+
+    Example:     WAIT 50 17
+                 This  example will locate the cursor 50 characters  across
+                 and 17 rows down will wait for the user to hit the [Enter]
+                 key.
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 65
+
+
+
+
+
+
+
+
+
+    WINCLOSE Command
+
+    Purpose:     To close the last window opened with WINOPEN.
+
+    Parameters:  WINCLOSE
+
+    Remarks:     WINCLOSE  closes  the  last window  opened.   Windows  are
+                 nested,  so that if window 1, window 2, and window 3  were
+                 open,  WINCLOSE would close window 3, then window  2,  and
+                 lastly window 1.  See the WINOPEN command.
+
+                 Note:   If  WINCLOSE is issued without being  preceded  by
+                 WINOPEN,  a  fatal error will occur and  INSTALL.EXE  will
+                 drop to DOS.  As with all programming languages, make sure
+                 you  test  all  possibilities  before  distributing   your
+                 program.
+
+    Example:     WINCLOSE
+
+    Errors:      None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 66
+
+
+
+
+
+
+
+
+
+    WINOPEN Command
+
+    Purpose:     WINOPEN  opens  "windows" to display  messages  from  your
+                 script file to the user.
+
+    Parameters:  WINOPEN x y c
+                 "The next lines contain the contents"
+                 "of the windows you want to display."
+                 x = the x position of the upper left corner of the window
+                 y = the y position of the upper left corner of the window
+                 c = numeric color value between 0 - 255 (see color chart)
+                 These  parameters are followed by a series  of  successive
+                 quoted strings.
+
+    Remarks:     The  width of the window is determined by amount of  space
+                 between the quotes of the longest line.  The height of the
+                 window  is determined by the number of  successive  quoted
+                 strings you put in the script file.
+
+                 You can have up to 20 windows open at the same time.   The
+                 last  window opened is closed with the  WINCLOSE  command.
+                 Windows  are  nested, so that if window 1, window  2,  and
+                 window 3 were open, WINCLOSE would close window 3.
+
+                 All windows are surrounded by a single line.  WINOPEN adds
+                 a space to the right and left edges of the window so  that
+                 visually  the  line appears evenly  spaced.   The  maximum
+                 number of characters that will fit in a window is 76.   To
+                 center  the window on the screen, enter "0" in the x or  y
+                 coordinate, or both.
+
+                 WINOPEN is often followed by the WAIT and ASK commands.
+
+    Examples:    WINOPEN 18 2 95
+                 "            ImagiSOFT, Inc."
+                 "Where Imagination Brings Software to Life"
+                 ""
+                 "      ImagiMOVIE GUIDE Installation"
+
+                 This  example opens a magenta window with  high  intensity
+                 white  letters and border.  The upper left corner  of  the
+                 window will be placed 18 columns across and 2 rows down.
+
+                 WINOPEN 0 2 31
+                 "Installing the ImagiMOVIE GUIDE to ~1~2 . . ."
+
+                 This  example  opens  a blue and  white  window  which  is
+                 located  2  rows  down and centered on  the  screen.   The
+                 variables  ~1  and ~2 represent the drive and  path.   See
+                 VARIABLES in APPENDIX B for details.
+
+    Errors:      If you make your window too wide or two long INSTALL  will
+                 drop to DOS and display "Window too large on line xx".
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 67
+
+
+
+
+
+
+
+
+
+
+    Judy
+
+PAUSE t
+Pause for t hundredths of a second.  Nice if you want to "animate" windows.
+
+WINMOVE x y
+Moves the current window the new x y position.  If you use the command
+WINMOVE +1 +1 it will move the current window relative to its current position
+one row down and one row across.
+
+BORDER t
+   t = type   0 = none
+              1 = single line (default)
+              2 = double line
+
+WINUPDATE x y c
+          x position on the screen
+          y position on the screen
+          c color value
+
+Use WINUPDATE to display a string inside the current open window. For example:
+  WINUPDATE +2 +1 79
+  "This line is displayed in the current"
+  "window with white letters on a red"
+  "background.  It is relative to the"
+  "upper left corner by 2 characters across"
+  "and 1 row down."
+
+
+Relative Cursor / Window Positions
+
+WINOPEN now supports relative cursor positions.  For example, WINOPEN +0 +5 17
+will open a new window 5 rows down from the last window open. Relative
+positioning also works in the UNPACK, PATH, DRIVE, ASK, COPY, DELETE, WINMOVE,
+and WINUPDATE commands.
+
+Relative cursor positioning is especially useful when you are printing the
+selected DRIVE and PATH on the screen with the variables ~1 and ~2.
+For example:
+
+WINOPEN 0 0 79                                           ' red centered window
+"The directory ~1~2 already exists and contains files."
+"Are you sure you want to write over the files in"
+"this directory    Y / N?"
+ASK +26 +3                                               ' position cursor on
+                                                         ' the N character
+                                                         ' no matter how the
+                                                         ' window is centered
+
+INPUT s l x y c
+This command allows the user to input text strings which you can assign to
+the variables ~A through ~Z.  Your script can substitute these codes similar
+to the ~0, ~1, ~2, and ~3 variables as explained in the documentation.
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 68
+
+
+
+
+
+
+
+
+
+
+    s    = String ID ("A" through "Z", your choice).
+    l    = String length, from 1 to 40.
+
+    x, y = Input position on the screen.  It is best to use
+           the + and - here, because the entire input field
+           must be contained within the current open window.
+
+    c    = Input color (see the color chart in the documentation).
+
+Example:
+
+    WINOPEN 0 0 31           ' open a window centered on the screen
+                             ' in color 31 (bright white on blue)
+
+    ""
+    "Please enter the following information:           "
+    ""
+    "Name:"
+    "Address:"
+    "City, State, Zip:"
+    ""
+    "License Number:"
+    ""
+
+    ' input 30 characters in color 15 (bright white on black)
+
+    INPUT N 30 +20 +4 15     ' (Name)             assign to variable "N"
+    INPUT A 30 +20 +5 15     ' (Address)          assign to variable "A"
+    INPUT C 30 +20 +6 15     ' (City, State, Zip) assign to variable "C"
+
+    ' NOTE: the license number is only 15 characters long
+
+    INPUT L 15 +20 +8 15     ' (License Number)   assign to variable "L"
+
+    WINCLOSE                 ' close the window
+
+    ' write the results into an
+    ' ASCII file called USER.FIL
+
+    FILE ~1~2\USER.FIL
+
+    "Name:              ~N"          ' The text that the user input
+    "Address:           ~A"          ' will be substituted for the
+    "City, State, Zip   ~C"          ' appropriate variables ~N, ~A,
+    ""                               ' ~C, and ~L.
+    "License Number     ~L"
+
+CALL l
+     l = Name of the label to call.  The last line of this label must end
+         with RETURN or an error will result.
+
+For example:
+
+
+
+    ImagiSOFT, Inc.  Script File Commands                            Page 69
+
+
+
+
+
+
+
+
+
+CALL TMP_DEL
+
+' --------------------------------
+'   * * * shared routines * * *
+' --------------------------------
+
+' --------------------------
+'   delete temporary file
+'    (don't inform user)
+' --------------------------
+:TMP_DEL
+PROMPT OFF
+DELETE ~A.TMP 0 0 0
+PROMPT ON
+BEEP
+RETURN
+
+The BEEP command has been expanded to allow the following variations:
+
+               BEEP ON
+               BEEP OFF
+
+If the BEEP ON command is issued, all internal error messages that open
+a window will beep the speaker.  The option can be disabled using the
+BEEP OFF command, which is the start-up default.  This feature was added
+at the request of developers who write software for visually impaired users.
+
+
+    FREE X       Where X is the minimum amount of free disk space
+                 required on the target drive.  The value is given in
+                 K bytes (i.e. 1024 = 1,048,576 bytes or 1Mb).  The
+                 internal YES or NO flag is set to YES if the free
+                 disk space is available, and set to NO if it is not.
+
+This function differs from the SPACE command in that FREE can be issued
+at any time in the script file.  The SPACE command must be issued before
+the DRIVE command, and is not tested until the drive letter is entered.
+
+
+
+                                  APPENDIX B
+
+                     OTHER FEATURES OF THE FINISHING TOUCH
+
+
+    RENAMING INSTALL.EXE
+    ~~~~~~~~~~~~~~~~~~~~
+    INSTALL.EXE always loads the first script file with the same name  that
+    it  is named plus the extension ".FIL", so the first thing  INSTALL.EXE
+    tries  to  do  is load the script file INSTALL.FIL  into  memory.   If,
+    you  want to use INSTALL.EXE as an update program, simply rename it  to
+    UPDATE.EXE and name your script file UPDATE.FIL.  If you are writing  a
+    script file in another language, rename INSTALL.EXE to a suitable  file
+    name.  For example, rename INSTALL.EXE to INSTALE.EXE for a script file
+
+
+   ImagiSOFT, Inc.  Other Features of The Finishing Touch           Page 70
+
+
+
+
+
+
+
+
+
+    written in Spanish.
+
+
+    LABELS
+    ~~~~~~
+    Labels  are similar to line numbers in BASIC; they give  INSTALL.EXE  a
+    place  to  "jump" to with the JUMP, JUMP.NO,  JUMP.YES,  and  JUMP.FAIL
+    commands.  Labels have the following attributes:
+
+       -- They always begin with a colon
+       -- Labels must reside on a line all by themselves
+       -- Labels cannot exceed 32 characters in length
+       -- They can use any ASCII character greater than 32 ("space")
+
+    Examples of Valid Labels:
+       :EXIT_TO_DOS
+       :ExitToDOS
+       :Exit.To.DOS
+
+    Examples of Invalid Labels:
+       EXIT_TO_DOS
+       :EXIT TO DOS
+
+    See  the documentation in APPENDIX A for the JUMP,  JUMP.NO,  JUMP.YES,
+    and  JUMP.FAIL  commands  for detailed examples on how  to  use  labels
+    properly.
+
+
+    INTERNAL VARIABLES
+    ~~~~~~~~~~~~~~~~~~
+    INSTALL.EXE keeps track of four internal variables which may be used in
+    your installation script:
+
+       ~0 is the drive and path where the software is being installed from,
+          sometimes  called the "source" directory.  This is usually A:  or
+          B:,  but  INSTALL.EXE and its related files can  just  as  easily
+          reside on a hard drive--especially if those files were downloaded
+          from  a BBS, in which case ~0 might be C:\DOWNLOAD  for  example.
+          COPY is the most likely command to use with ~0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  Other Features of The Finishing Touch           Page 71
+
+
+
+
+
+
+
+
+
+       ~1 is the drive letter that you are installing to, for example,  C:.
+          This variable is necessary to create a file in the root directory
+          of  the  user's installation drive (see the FILE command  for  an
+          example of creating a batch file).  ~1 is also needed to create a
+          subdirectory  on  the user's installation drive (see  MD  for  an
+          example).   This  variable is set by the DRIVE  command.   If  no
+          DRIVE command is issued in the script file ~1 will be set to C:.
+
+       ~2 is the path  where the software is installed, generally  selected
+          by the user with the PATH command.  If no PATH command is  issued
+          in the script file ~2 will be set to the root.
+
+          ~2 is often combined with the variable ~1.  For example:
+
+              COPY ~1~2\CONTROL.LCD ~1~2\CONTROL.FIL 0 0 31
+
+          copies the file CONTROL.LCD on top of the file CONTROL.FIL in the
+          directory where the user installed their software.
+
+
+       ~3 is the boot drive and path of the user's computer, as  determined
+          by  the location COMMAND.COM, and will usually be C:\.   This  is
+          necessary  when  you  are changing  the  user's  AUTOEXEC.BAT  or
+          CONFIG.SYS files.  For example:
+
+              COPY ~3\AUTOEXEC.BAT ~3\AUTOEXEC.BAK 0 0 31
+
+          which makes a backup copy of AUTOEXEC.BAT, which is always a good
+          idea before modifying it with the FILE command.
+
+       Yes/No is set by the ASK, CPU, EXIST, MOUSE, and VIDEO commands  and
+              remains  set  until one of these commands  is  issued.   This
+              variable  allows  INSTALL.EXE to  perform  conditional  jumps
+              based on the information passed from above commands.  See the
+              JUMP.NO and JUMP.YES commands in APPENDIX A.
+
+       FAIL is set by the COPY, DELETE, EXIST, FILE.DATE, FILE.SIZE,  FILE,
+            MD,  RD,  SET.FILES, SET.PATH, VIEW, and UNPACK commands  if  a
+            disk  error occurs.  Disk errors include, disk not ready,  disk
+            full,  sector  not found, etc.  See the  JUMP.FAIL  command  in
+            APPENDIX A for details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  Other Features of The Finishing Touch           Page 72
+
+
+
+
+
+
+
+
+
+    COMMENTS
+    ~~~~~~~~
+    Just  like any other programming language, it is always a good idea  to
+    comment your script file.  Comments begin with the apostrophe character
+    unless  the  apostrophe  is inside a quoted string.   Empty  lines  are
+    ignored.
+
+    Example:
+
+    ' this is an example of a commented line.  It will be ignored by
+    ' INSTALL.EXE because it begins with an apostrophe character.  The
+    ' next line will also be ignored because it is blank.
+
+    ' The next line is a valid line:
+    BACKGROUND 63                          ' cyan background
+
+    ' Everything after the apostrophe will be ignored.
+
+
+    HIDING WINDOWS
+    ~~~~~~~~~~~~~~
+    There will be times when you don't want a window to be displayed on the
+    screen.   The  COPY, DELETE, and PATH commands each  display  a  window
+    which you may want hidden from the end user.  You can "hide" windows by
+    making  them  the  same  color as the background  and  by  issuing  the
+    SHADOW OFF command.
+
+    Example 1:
+
+    BACKGROUND 63                   ' cyan background
+    TELESCOPE ON                    ' draw "exploding" windows
+    SHADOW ON                       ' display shadows
+    WINOPEN 18 2 95
+
+    "            ImagiSOFT, Inc."
+    "Where Imagination Brings Software to Life"
+    ""
+    "      Test Installation Script File"
+    WAIT 56 6
+
+    TELESCOPE OFF                   ' draw windows quickly
+    SHADOW OFF                      ' no shadow
+    DELETE *.BAK 1 24 51            ' cyan on cyan color hidden in corner
+    WINCLOSE                        ' close ImagiSOFT window
+    WINOPEN 0 0 31                  ' open tiny, centered window
+    "PRESS ANY KEY TO QUIT."
+    WAIT 51 13
+
+    The example above uses a background of 63 (cyan) then uses color 51  on
+    the DELETE command (cyan window with cyan letters) located in the lower
+    left hand corner (column 1, row 24).  This way the user never sees  the
+    message "Deleting <FILENAME>".
+
+
+
+
+   ImagiSOFT, Inc.  Other Features of The Finishing Touch           Page 73
+
+
+
+
+
+
+
+
+
+    HIDING WINDOWS  (Continued)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Example 2:
+
+    BACKGROUND 63
+    :WINDOWS_PROMPT                 ' label for jump command
+    TELESCOPE OFF                   ' draw windows quickly
+    SHADOW ON                       ' shadow the window below
+    WINOPEN 7 4 31                  ' window color: blue w/ white letters
+    ""
+    "  Tetris for Windows will be installed into the GAMES directory  "
+    "  beneath the directory where WINDOWS resides."
+    "  Please enter the location of your WINDOWS directory:"
+    ""
+    ""
+    ""
+    ""
+    ""
+    SHADOW OFF                      ' don't shadow path window
+    PATH \WINDOWS 8 9 17 15 32 14 79 ' draw color 17 (blue on blue)
+    EXIST ~1~2\WIN.COM              ' test for proper entry
+    JUMP.NO WINDOWS_PROMPT          ' wrong: jump back
+
+    The  above example shows how to write your own prompt for a  path  name
+    instead of the prompt "Install to drive C: in directory" which comes up
+    with  the PATH command.  This was done by opening a large  blue  window
+    with  white letters (color 31), turning shadows off, then  issuing  the
+    PATH command with a blue window with blue letters (color 17).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ImagiSOFT, Inc.  Other Features of The Finishing Touch           Page 74
+
+
+
+
+                                ImagiSOFT, Inc.
+                              THE FINISHING TOUCH
+                  PROFESSIONAL SOFTWARE INSTALLATION UTILITY
+
+                                  ORDER FORM
+
+         Quantity   Description                   Price       Total
+         -------------------------------------------------------------
+         |      | The Finishing Touch           |  $69.95  |         |
+         -------------------------------------------------------------
+         |      | Sales Tax (NM Residents Only) |    4.07  |         |
+         -------------------------------------------------------------
+         |      | Extra Shipping Outside USA    |    3.00  |         |
+         -------------------------------------------------------------
+         |   1  | Shipping and Handling         |    4.00  |    4.00 |
+         -------------------------------------------------------------
+                                     TOTAL AMOUNT ENCLOSED |         |
+                                                           -----------
+
+         Make checks payable to ImagiSOFT, Inc.  Checks MUST BE  drawn
+         on a US bank.  If ordering outside the United States,  please
+         use  a credit card, send a postal money order payable  in  US
+         funds, or send cash in any currency.
+
+         [ ] Check   [ ] VISA   [ ] Master Card   [ ] American Express
+
+         Card Number:  _____ _____ _____ _____   Exp. Date:  _________
+
+
+         Name: _______________________________________________________
+
+         Company Name: _______________________________________________
+
+         Address: ____________________________________________________
+
+         City / State: _______________________________________________
+
+         Country / Zip / Postal Code: ________________________________
+
+         Telephone Number: ___________________________________________
+
+         FAX Number: _________________________________________________
+
+         CompuServe ID Number: _______________________________________
+
+         I received The Finishing Touch from:
+         Name of BBS, CompuServe forum, etc. _________________________
+
+         GET IT TODAY:  ORDER FROM OUR BBS
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         Call  (505) 275-9696  with your modem and  enter  your  name,
+         address, and credit card information.  The BBS will  increase
+         your  security  level  so you  can  download  the  registered
+         version  immediately.   Call our BBS in the future  for  free
+         updates.  We will  mail  the  packaging,  printed manual, and
+         disks on the next business day after you order.
+
+                  Mail to:              ImagiSOFT, Inc.
+                                        Software Utilities Division
+                                        P.O. Box 13208
+                                        Albuquerque, NM     87192-3208
+
+         Credit Card Orders Call:   (800) 767-1978  or  (505) 275-1920
+         FAX Support / Orders:      (505) 275-9697
+

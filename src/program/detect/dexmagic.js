@@ -20,33 +20,35 @@ const DEXMAGIC_CHECKS =
 	"Cinema 4D XML"      : [{size : 256, match : "<c4d_file"}],
 
 	// archive
-	"ActiveMime (Base64 Encoded)" : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
-	"Anna-Marie Archive"          : [{offset : 0, match : "Anna-Marie"}],
-	"Anna-Marie Archive (alt)"    : [{offset : -160, match : "Anna-Marie"}],
-	"EDI Split File Archive"      : [{offset : 0, match : ["EDISPLIT", "EDISPLI0"]}],
-	"HTTP Response"               : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
-	"IFF CAT file"                : [{offset : 0, match : "CAT "}],
-	"IFF LIST file"               : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
-	"imageUSB"                    : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
-	"Macromedia Projector"        : [{offset : 0, match : ["RIFX", "XFIR"]}, {offset : 8, match : ["LPPA", "APPL"]}],
-	"MINICAT Archive"             : [{offset : 0, match : "MINICAT"}],
-	"NeXT Disk Image Dump"        : [{offset : 46, match : "dlV3"}],
-	"OS/2 PACK (Variant)"         : [{offset : 0, match : [0xA5, 0x96, 0xFF, 0xFF]}],
-	"PACKIT Installation Archive" : [{offset : 0, match : "PACKIT by MJP"}],
-	"Palm Web Content Record"     : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
-	"pcxLib compressed"           : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
-	"POD Archive"                 : [{offset : 4, match : [["Startup", "TV", "Disk", "Fury"]]}],
-	"SCR Package"                 : [{offset : 0, match : "This is SCR Package File"}],
-	"Superscape SVR"              : [{offset : 0, match : "SVR"}],
-	"Superscape VRT"              : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
-	"Superscape XVR"              : [{offset : 0, match : "XVR"}],
-	"Superscape Sounds"           : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file SOUNDS\x2ESND"}],
-	"TTW Compressed File"         : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
-	"ThumbsUp Database"           : [{offset : 0, match : [0xBE, 0xBA, 0xDA, 0xBE]}],
-	"Visual Novel DPK Archive"    : [{offset : 0, match : "PA"}],
-	"VICE Installer EXE"          : [{offset : -8, match : "ESIV"}, {offset : -4, match : [0xA0, 0x9A, 0x00, 0x00]}],
-	"Wacky Wheels Archive"        : [{offset : 2, match : "WACKY.ING"}],
-	"WAD2 file"                   : [{offset : 0, match : "WAD2"}],
+	"ActiveMime (Base64 Encoded)"    : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
+	"Anna-Marie Archive"             : [{offset : 0, match : "Anna-Marie"}],
+	"Anna-Marie Archive (alt)"       : [{offset : -160, match : "Anna-Marie"}],
+	"Authorware APR Archive"         : [{offset : 0, match : "WPLI"}],
+	"EDI Split File Archive"         : [{offset : 0, match : ["EDISPLIT", "EDISPLI0"]}],
+	"HTTP Response"                  : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
+	"IFF CAT file"                   : [{offset : 0, match : "CAT "}],
+	"IFF LIST file"                  : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
+	"imageUSB"                       : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
+	"Macromedia Projector"           : [{offset : 0, match : ["RIFX", "XFIR"]}, {offset : 8, match : ["LPPA", "APPL"]}],
+	"Macromedia Projector PJ00/PJ01" : [{offset : 0, match : ["PJ00", "PJ01"]}],
+	"MINICAT Archive"                : [{offset : 0, match : "MINICAT"}],
+	"NeXT Disk Image Dump"           : [{offset : 46, match : "dlV3"}],
+	"OS/2 PACK (Variant)"            : [{offset : 0, match : [0xA5, 0x96, 0xFF, 0xFF]}],
+	"PACKIT Installation Archive"    : [{offset : 0, match : "PACKIT by MJP"}],
+	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
+	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
+	"POD Archive"                    : [{offset : 4, match : [["Startup", "TV", "Disk", "Fury"]]}],
+	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
+	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
+	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
+	"Superscape XVR"                 : [{offset : 0, match : "XVR"}],
+	"Superscape Sounds"              : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\r file SOUNDS\x2ESND"}],
+	"TTW Compressed File"            : [{offset : 0, match : "TTW!"}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x01]}],
+	"ThumbsUp Database"              : [{offset : 0, match : [0xBE, 0xBA, 0xDA, 0xBE]}],
+	"Visual Novel DPK Archive"       : [{offset : 0, match : "PA"}],
+	"VICE Installer EXE"             : [{offset : -8, match : "ESIV"}, {offset : -4, match : [0xA0, 0x9A, 0x00, 0x00]}],
+	"Wacky Wheels Archive"           : [{offset : 2, match : "WACKY.ING"}],
+	"WAD2 file"                      : [{offset : 0, match : "WAD2"}],
 
 	// audio
 	"EA BNK Audio"          : [{offset : 0, match : "BNKl"}],
@@ -151,8 +153,9 @@ const DEXMAGIC_CHECKS =
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],
-	"IFF SSAd file"                           : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
+	"IFF SSAd file"                            : [{offset : 0, match : "FORM"}, {offset : 8, match : "SSAd"}],
 	"RIFF ANIM file"                           : [{offset : 0, match : "RIFF"}, {offset : 8, match : "ANIM"}],
+	"VPX1 Video Package"                       : [{offset : 0, match : "VPX1  video interflow packing exalter"}],
 
 	// unsupported
 	"Amiga Action Reply 3 Freeze File" : [{offset : 0, match : [0x41, 0x52, 0x50, 0x33, 0x00]}, {offset : 8, match : [0x00]}, {offset : 12, match : [0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00]}, {offset : 22, match : Array(10).fill(0x00)}],
@@ -265,6 +268,23 @@ const DEXMAGIC_CUSTOMS =
 			return;
 
 		return `Generic RIFF file ${riffType}`;
+	},
+
+	async function checkWatcomInstallArchive(r)
+	{
+		if(r.f.input.size<12)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 12);
+		if(header[0]!==0x03 || header[1]!==0x24)
+			return;
+
+		const headerSize = header.getUInt8(6);
+
+		if((r.f.input.size-headerSize)!==header.getUInt32LE(8))
+			return;
+
+		return "WATCOM Install Archive";
 	}
 ];
 

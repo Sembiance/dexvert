@@ -20,8 +20,8 @@ export class directorCastRipper12 extends Program
 			;WindowDismiss("Missing Fonts", "", "{ENTER}")
 			return Not ProcessExists("DirectorCastRipper.exe")
 		EndFunc
-		CallUntil("DismissWarnings", ${xu.MINUTE*2})`,
-		timeout : xu.MINUTE*2
+		CallUntil("DismissWarnings", ${xu.MINUTE*6})`,	// some samples like pok18pc.dir have a TON of dialogs to dismiss and didn't finish in under 2 minutes, so we bump to 6
+		timeout : xu.MINUTE*6
 	};
 	postExec = async r =>
 	{

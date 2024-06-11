@@ -6,5 +6,6 @@ export class picturePackerDAJ extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Picture_Packer";
 	ext        = [".daj"];
 	magic      = ["Picture Packer bitmap"];
+	weakMagic  = true;
 	converters = ["deark[module:stos_daj]", "konvertor"];
 }

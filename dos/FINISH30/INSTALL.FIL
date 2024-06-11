@@ -1,0 +1,364 @@
+' Sample Install Script for
+' The Finishing Touch
+' Professional Software Installation Utility
+' Copyright 1995, ImagiSOFT, Inc.
+' March 21, 1995
+
+' NOTE:  This script file takes a LONG TIME to load because INSTALL.EXE
+'        does a CRC check of the documentation files before proceeding.
+'        The registered version does NOT do this.
+
+'        There is a 400 line maximum for any one script file.  However,
+'        this limitation can be overcome by using the SCRIPT command.
+
+'        This script file doesn't use all the possible commands.
+'        See the documentation for the commands to check hardware,
+'        perform conditional jumps, view ASCII files, run or shell
+'        to DOS programs, change AUTOEXEC.BAT and CONFIG.SYS,
+'        invoke other script files, and more!
+
+BACKGROUND ~0\INSTALL.BIN   ' display binary file as background (see README.TXT)
+
+LANGUAGE ENGLISH
+' French, German, Spanish, Dutch, Danish, and Norwegian are also supported.
+' English is the default
+
+BORDER 1            ' single line borders. 2 = double, 0 = no border
+
+PAUSE 300           ' 3 second delay
+
+TELESCOPE ON        ' turn on telescoping windows for the rest of the messages
+
+SHADOW OFF
+' display all messages from this point on without "shadowed" window
+' the default is "OFF".  This feature can be turned on and off as many
+' times as you want
+
+WINOPEN 11 5 31     ' display the heading in a window
+                    '   located at 11 characters across
+                    '               5 rows down  with a
+                    '   blue background and high intensity white letters
+                    '   (see color chart)
+' WINOPEN 0 5 31    ' use this command instead to make sure the
+                    ' window is centered horizontally on the screen
+
+"THE FINISHING TOUCH WILL SAVE YOU MONEY BY . . .       "
+""
+""
+""
+""
+""
+""
+""
+
+' another nice feature is the ability to write text in a different color
+' within a window.  Most commands can use relative cursor positions, as
+' shown in this example:
+WINUPDATE +36 +1 26
+"MONEY"
+PAUSE 300                                   ' 3 seconds
+WINUPDATE +2 +3 30
+"þ Cutting the number of disks in your program in half."
+"  (see the UNPACK command and PACKER utility)"
+BEEP
+PAUSE 200
+WINUPDATE +2 +3 31
+"þ Cutting the number of disks in your program in half."
+"  (see the UNPACK command and PACKER utility)"
+WINUPDATE +2 +6 30
+"þ Reducing your installation support problems."
+BEEP
+PAUSE 200
+WINUPDATE +2 +6 31
+"þ Reducing your installation support problems."
+WINUPDATE +2 +8 30
+"Press the [Enter] key to continue."
+WAIT +36 +8                                ' wait for the enter key
+WINCLOSE                                   ' close the window
+
+BORDER 2                                   ' double line border
+' window = blue with green border
+WINOPEN 0 5 18
+"                                           "  ' widest message determines
+""                                             ' the width of the window
+""                                             ' this window is nine lines
+""                                             ' long.
+""
+""
+""
+""
+
+' white letters inside window
+WINUPDATE +2 +2 31
+"þ Is Rich with Powerful Features"
+""
+"þ Is Easy to Learn"
+"  (Look at INSTALL.FIL for this script)"
+""
+"þ Can be as simple or complex as you want"
+
+' heading = yellow text on green
+WINUPDATE +14 +0 46               ' +0 = top border
+" THE FINISHING TOUCH "
+
+' bottom of window green / blue letters
+WINUPDATE +16 +9 33               ' +9 = bottom border
+" Press [Enter] "                 ' (good when space is tight)
+WAIT +30 +9                       ' wait for enter key, cursor location
+WINCLOSE                          ' close window
+
+BORDER 1                          ' personally, I like single borders
+WINOPEN 0 5 31
+"This sample installation file will demonstrate some of"
+"THE FINISHING TOUCH'S features by installing a FREE"
+"file date and time stamping utility."
+""
+
+WINUPDATE +49 +2 27                        ' change the color of
+"FREE"                                     ' the word "free" to cyan
+
+WINUPDATE +15 +5 31                         ' write on top of bottom border
+" Press [Enter] to continue "              ' (good when space is tight)
+
+WINUPDATE +22 +5 30                        ' yellow text
+"[Enter]"
+
+WAIT +41 +5                                ' wait for the enter key
+WINCLOSE                                   ' close the window
+
+' Tell INSTALL the minimum amount of required disk space
+SPACE 7                          ' This sample is tiny, only 7K required.
+
+'  Prompt for the drive to install to:
+DRIVE C 0 12 31 15 32 14 79
+'         C = drive C, the pre-stuffed drive letter
+'         0 = center window horizontally
+'        12 =              and  12  rows down
+'        31 = blue background and high intensity white foreground
+'        15 = input on a black background w/ high intensity white letters
+'        32 = error message located at 32 characters across
+'        14 =                      and 14 rows down
+'        79 = any error message will appear in a red window with
+'             high intensity white letters
+
+' After  the user selects a drive and presses [Enter], the first  thing
+' the  DRIVE command does is make sure the drive exists.  Next it  will
+' check  for the required disk space.  If the drive does not exist,  or
+' there is not enough space, an error message appears, and the user  is
+' required to pick a different drive, or quit.
+
+' Prompt with default path \SAMPLE
+' INSTALL.EXE  will work the same way whether the user enters SAMPLE,
+' \SAMPLE\, or \SAMPLE.  Mutiple directories such as \SAMPLE\UTIL\FREE
+' are also supported.
+PATH \SAMPLE 0 12 31 15 32 14 79
+
+' the numbers above represent window locations and colors.  See the
+' documentation for more details
+
+'  Unpack the files from the floppy drive.
+
+UNPACK SAMPLE.PAK 0 12 31 32 14 79
+' SAMPLE.PAK was compressed using the enclosed PACKER utility.  This
+' utility will compress files 50% or more depending on the file type.
+' you should get compression results close to that of PKZIP.
+' the numbers above represent window locations and colors.  See the
+' documentation for more details
+
+' just for fun, open the disk drive right in the middle of the installation
+' and see what happens.  This is only one of four "jump" commands supported.
+' see the documentation for JUMP, JUMP.NO, and JUMP.YES commands.
+
+JUMP.FAIL INSTALL_FAILURE
+
+WINOPEN 0 5 31
+
+"A FREE file stamping utility has been installed on your"
+"computer in the directory"
+""
+"This is our way of saying THANKS for taking the time to"
+"review the THE FINISHING TOUCH!"
+""
+"Press the [Enter] key to continue."
+
+WINUPDATE +28 +2 30                       ' display text in yellow
+"~1~2."
+
+WINUPDATE +28 +4 27                       ' cyan
+"THANKS"
+
+WAIT +36 +7
+' Wait for the user to press the [Enter] key so they can
+' read the above window.
+' The plus signs denote that you want the cursor located relative to
+' the upper left hand corner of the window (position 0, 0) 7 rows down
+' and 36 characters across.
+
+WINCLOSE                         ' close the above window
+
+' ------------------------------------------------------
+' Ask user if they would like to view the utility's docs
+' ------------------------------------------------------
+WINOPEN 0 5 31
+"Would you like to see the new utility's documentation?"
+""                            ' this is necessary so that the winupdate
+                              ' command will have some place to display the
+                              ' (Y or N)
+
+WINUPDATE +25 +2 30           ' yellow text
+"(Y or N)"
+
+ASK +33 +2                    ' one method of providing a "conditional" jump
+                              ' note relative cursor positioning
+
+WINCLOSE                      ' close the above window
+
+JUMP.NO VIEW_INSTALL.TXT      ' skip the view command if the user
+                              ' hits the "N" key from the above
+                              ' ASK statement.
+
+VIEW ~1~2\STAMP.TXT 79 31     ' as you can see, The Finishing Touch
+                              ' has a built-in file viewer
+
+' -----------------------------------------------------
+' Ask user if they would like to view the documentation
+' -----------------------------------------------------
+:VIEW_INSTALL.TXT
+WINOPEN 0 5 31
+"Would you like to SEE the documentation for THE FINISHING TOUCH?"
+""
+
+WINUPDATE +31 +2 30            ' yellow text
+"(Y or N)"
+
+ASK +39 +2                     ' one method of providing a "conditional" jump
+                               ' again, relative cursors are easier
+
+WINCLOSE                       ' close the above window
+
+JUMP.NO PRINT_INSTALL.TXT      ' again, skip the view command if the user
+                               ' hits the "N" key from the above ASK statement.
+
+WINOPEN 0 0 31                ' large file takes a while from floppy ...
+"Loading 67 Pages ..."
+VIEW ~0\INSTALL.TXT 79 31
+VIEW ~0\README.TXT 79 31
+WINCLOSE                      ' close the above window
+
+' -------------------------------------------------------
+' Ask user if they would like to print the documentation
+' -------------------------------------------------------
+:PRINT_INSTALL.TXT
+WINOPEN 0 12 31
+"Would you like to PRINT the documentation for THE FINISHING TOUCH?"
+""
+
+WINUPDATE +31 +2 30           ' yellow text
+"(Y or N)"
+
+ASK +39 +2                    ' one method of providing a "conditional" jump
+
+WINCLOSE                      ' close the above window
+JUMP.NO EXIT
+
+WINOPEN 0 0 31                ' printing large file takes a while ...
+""
+"  Printing 67 Pages ...  "
+""
+PRINT ~0\INSTALL.TXT
+PRINT ~0\README.TXT
+WINCLOSE                      ' close the above window
+JUMP.FAIL PRINTER_ERROR       ' jump on fatal error
+JUMP EXIT                     ' print successful, skip next
+
+:PRINTER_ERROR                ' label for error condition
+WINOPEN 0 5 79                ' open the following window
+"Your printer is not responding.  Possible problems:"
+"   -- Printer is not turned on"
+"   -- Printer is out of paper"
+"   -- Printer is not attached to LPT1 (parallel port 1)"
+""
+"Do you want to try to print again  (Y or N)?"
+ASK 57 18                     ' prompt for Y or N key  (fixed cursor position)
+WINCLOSE                      ' close this window
+JUMP.YES PRINT_INSTALL.TXT    ' y key pressed, print
+
+' ----------------------
+' display closing window
+' ----------------------
+:EXIT
+
+WINOPEN 0 5 31                ' window is centered on screen
+"Thank you for running the installation demonstration for the"
+""
+"                   THE FINISHING TOUCH"
+"          The Professional Installation Program"
+""
+"You have a fully working shareware evaluation copy.  We hope"
+"that you will find THE FINISHING TOUCH is the most powerful,"
+"smallest, easiest to use, software installer with the best"
+"file compression available anywhere.  ENJOY!"
+""
+
+WINUPDATE +21 +3 30
+"THE FINISHING TOUCH"                    ' yellow text
+WINUPDATE +40 +9 27
+"ENJOY!"                                 ' cyan text
+WINUPDATE +12 +11 31                     ' write on top of bottom border
+"´ Press the [Enter] key to continue Ã"  ' (good when space is tight)
+WINUPDATE +24 +11 30
+"[Enter]"
+WAIT +47 +11
+WINCLOSE
+
+' display our bbs phone number
+BORDER 2                                ' double line borders supported
+                                        ' for no border, use BORDER 0
+WINOPEN 0 5 110
+" If you're not sure you have the latest shareware copy of "
+" THE FINISHING TOUCH, call our BBS:"
+""
+""
+""
+""
+""
+"Press the [Enter] key to continue."
+
+WINUPDATE +17 +4 107
+"ImagiSOFT's Free, No Hastle BBS"
+WINUPDATE +20 +5 106
+"On Line 24 Hours per Day!"
+WINUPDATE +17 +6 111                         ' you can winupdate more than
+"(505) 275-9696     2400 - 28.8K"            ' one line at a time
+
+WAIT +36 +8                                  ' wait for the enter key
+
+END            ' exit the system normally
+
+' ---------------------------------------------------
+' Installation Failure. It is a good idea to add a
+' similar routine to the bottom of all script files.
+' ---------------------------------------------------
+:INSTALL_FAILURE
+WINOPEN 0 12 79
+"THE INSTALLATION PROGRAM FAILED PRIOR TO COMPLETION"
+""
+"Possible reasons:"
+"   -- The floppy disk was removed prior to completion."
+"   -- The floppy disk was damaged during shipping."
+"   -- Your disk drive is out of alignment."
+""
+"Press [Enter] to remove incomplete program files."
+WAIT 62 20
+' delete all partial files using internal variables
+'   ~1 = the drive the user installed to (C: was the default)
+'   ~2 = the path the user installed to (\SAMPLE was the default)
+DELETE ~1~2\*.* 0 0 31
+' now remove the directory
+RD ~1~2
+WINCLOSE
+WINOPEN 0 12 31
+"Partially Installed Files are Now Deleted."
+""
+"      Press [Enter] to Quit."
+WAIT 47 15

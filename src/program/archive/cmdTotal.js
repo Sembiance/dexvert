@@ -8,8 +8,8 @@ export class cmdTotal extends Program
 	flags   = {
 		wcx : "Which wcx file to use"
 	};
-	bin     = "c:\\dexvert\\cmdTotal\\cmdTotal.exe";
-	args    = r => [r.flags.wcx, "x", r.inFile(), "c:\\out"];
+	bin       = "c:\\dexvert\\cmdTotal\\cmdTotal.exe";
+	args      = r => [r.flags.wcx, "x", r.inFile(), "c:\\out"];
 	renameOut = false;
 }
 

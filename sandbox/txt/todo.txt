@@ -1,34 +1,24 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once deark finishes: https://github.com/jsummers/deark/issues/80
-  Re-process #216:
-  https://dev.discmaster2.textfiles.com/browse/216/The%20Arsenal%20Files%20(Arsenal%20Computer).ISO/os2_app/cs0054-2.dsk/FIX/CS2
-  https://dev.discmaster2.textfiles.com/browse/216/The%20Arsenal%20Files%20(Arsenal%20Computer).ISO/os2_app/wf2fix10.dsk/FIX/WF2
+* Once wiki fixed:
+  http://fileformats.archiveteam.org/wiki/PACKER_(ImagiSOFT)		archive/packerPFT
+
+
+
+/---------------\
+| High Priority |
+\---------------/
+* Add extraction suport for these older MacroMind Projector files:
+	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
+	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
+	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
 
 * Pay someone to reverse engineer and build an extracter for the 7,600+ unique Mac Installer VISE packages: https://discmaster.textfiles.com/search?formatid=installerVISE&dedup=dedup
   I started it in ~/bin/unVISEInstaller.js based on this info: https://pastebin.com/GwQYz2gG
   Also found: https://github.com/habnabit/delvmod/wiki/Installer_VISE
   Both of those links I archived in sandbox/wip/installerVISE
   But there were too many differences and I'm not the best at reverse engineering so I stopped for now.
-
-
-/---------------\
-| High Priority |
-\---------------/
-* Add suport for these older MacroMind Projector files:
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
-	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
-
-* Figure out why abydos is crashing in stos.so with PicturePacker* files. Build abydos with debugging symbols:
-	mkdir build
-	cd build
-	cmake -DCMAKE_BUILD_TYPE=Debug ..
-	make
-	gdb src/abydosconvert
-	set args image/x-stos-picturepacker-medres /home/sembiance/tmp/MIDDLE_E.PP2 /home/sembiance/tmp/out/
-	run
 
 
 /-----------------\

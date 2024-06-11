@@ -1,0 +1,52 @@
+' Note:  This file is normally called INSTALL.FIL
+'        It is distributed with THE FINISHING TOUCH as an example
+'        of how ImagiSOFT, Inc. uses THE FINISHING TOUCH to distribute
+'        its products.  Feel free to use this script as a learning tool
+'        for writing your own scripts!  Companion files are MOVIES2.FIL
+'        and MOVIES.BAT which is used to create master disks.
+
+
+' MOVIES TO GO!  DOS / WINDOWS Installation Script
+' Copyright 1993, ImagiSOFT, Inc.
+' Version 2.2
+' November 1, 1993
+
+' Note:  This installation script is written for THE FINISHING TOUCH, a
+'        professional installation program which is also an ImagiSOFT
+'        product.  It is distributed with MOVIES TO GO! to make
+'        installation easier, and to reduce our support calls.
+
+'        This script unpacks 6 compressed files (*.PAK) which is a
+'        major feature of the program.  For more information about
+'        THE FINISHING TOUCH, call ImagiSOFT at (505) 275-1920, or call
+'        our personal BBS number at (505) 275-9697  2400 - 9600, N, 8, 1.
+'        It will always have the latest shareware version of
+'        THE FINISHING TOUCH so you can "try before you buy".
+
+BACKGROUND 63
+TELESCOPE OFF
+
+LANGUAGE ENGLISH      ' supports GERMAN, FRENCH, SPANISH, DANISH, and DUTCH
+
+WINOPEN 0 2 111
+
+"             ImagiSOFT, Inc."
+"Where Imagination Brings Software to Life"
+""
+""
+"          Installation Program"
+
+WINUPDATE +16 +4 110
+"MOVIES TO GO!"
+
+TELESCOPE ON
+SHADOW ON
+SPACE 3200              ' if they don't have 3.2 meg free, forget it
+
+' set temporary drive and path for decompression of rest of script file
+PROMPT OFF
+DRIVE C      ' set ~1 to drive c
+PATH \       ' set ~2 path
+UNPACK SCRIPT.PAK 0 12 31 32 15 79      '  files
+
+SCRIPT ~1~2\PART2.FIL                   ' chain to 2nd part of script

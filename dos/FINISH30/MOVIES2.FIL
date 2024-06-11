@@ -1,0 +1,344 @@
+' Note:  This file is called PART2.FIL and is compressed with
+'        MOVIES.BAT to save disk space.  It is distributed with
+'        THE FINISHING TOUCH as an example of how ImagiSOFT, Inc. uses
+'        THE FINISHING TOUCH to distribute its products.  Feel free to
+'        use this script as a learning tool for writing your own scripts!
+
+
+' MOVIES TO GO!
+' Part 2 of Script File (Compressed for security / save disk space)
+
+DELETE ~1~2\PART2.FIL 0 0 0
+PROMPT ON
+
+' display opening menu
+:OPENING
+
+WINOPEN 0 11 31
+"        INSTALLATION OPTIONS MENU"
+""
+"1.  Install as Microsoft Windows Application"
+"2.  Install as DOS Application"
+"3.  QUIT"
+""
+"SELECT ONE OF THE ABOVE:    "
+
+WINUPDATE +10 +1 30
+"INSTALLATION OPTIONS MENU"
+INPUT A 1 +28 +7 15
+WINCLOSE
+
+CALL TEMP_FILE
+
+EXIST ~3\1.TMP
+JUMP.YES WINDOWS_APP
+
+EXIST ~3\2.TMP
+JUMP.YES DOS_APP
+
+EXIST ~3\3.TMP
+JUMP.YES EXIT
+
+BEEP
+CALL TMP_DEL
+JUMP OPENING
+
+' ------------------------
+'   install as a dos app
+' ------------------------
+:DOS_APP
+
+' have user set the drive
+CALL ESC
+DRIVE C 0 12 31 15 32 14 79
+WINCLOSE
+
+' have user set the path
+CALL ESC
+PATH \MOVIES 0 12 31 15 32 14 79
+WINCLOSE
+
+CALL EMPTY_DIR
+CALL UNPACK
+
+' create movies batch file
+PROMPT OFF
+DELETE ~1\MOVIES.BAT 0 0 0
+PROMPT ON
+FILE ~1\MOVIES.BAT
+"~1"
+"cd ~2"
+"MOVIES"
+"cd \"
+
+WINOPEN 0 11 31
+"MOVIES TO GO! has been successfully installed."
+""
+"     To run it, enter the command"
+"     from the root directory of drive ~1."
+""
+""
+""
+""
+"Press the [Enter] key to continue."
+WINUPDATE +36 +3 30
+"MOVIES"
+WINUPDATE +7 +6 27
+"THANK YOU FOR CHOOSING OUR SOFTWARE!"
+WAIT +36 +9
+WINCLOSE
+
+:RUN
+WINOPEN 0 11 30
+"Would you like to run MOVIES TO GO! right now   Y or N?"
+ASK +57 +1
+JUMP.NO EXIT
+RUN ~1\MOVIES.BAT
+
+' --------------------------
+'   install as windows app
+' --------------------------
+:WINDOWS_APP
+
+' these commands set drive and path variables
+DRIVE C
+PATH \WINDOWS
+
+:TEST_WIN
+EXIST ~1~2\WIN.COM
+JUMP.YES WIN_INSTALL
+
+EXIST ~3\1.TMP
+JUMP.YES SKIP_BEEP
+BEEP
+RD ~1~2
+WINOPEN 0 11 79
+"Microsoft Windows is NOT found in the"
+"~1~2 directory.  Please try again."
+""
+"Press ENTER to continue."
+WAIT +26 +4
+WINCLOSE
+
+' windows is in a directory other than C:\WINDOWS
+:SKIP_BEEP
+CALL TMP_DEL
+WINOPEN 0 11 31
+"To install MOVIES TO GO! to Microsoft Windows,"
+"we need to know which hard drive Windows is installed on."
+""
+"             Most people have Windows on this hard drive."
+"             Press ENTER if this is correct, or change to"
+"             the correct drive letter."
+"             (Press ESC to quit.)"
+SHADOW OFF
+PROMPT OFF
+DRIVE C +2 +3 17 14 32 14 79
+WINCLOSE
+
+PROMPT ON
+SHADOW ON
+WINOPEN 0 11 31
+"We also need to know the name of the directory where Microsoft"
+"Windows is installed.  Most people have Windows installed in"
+"                              this directory.  Press ENTER"
+"                              if this is OK, or input the name"
+"                              of the directory where Windows"
+"                              is installed."
+"                              (Press ESC to quit.)"
+PROMPT OFF
+SHADOW OFF
+PATH \WINDOWS +1 +3 17 14 32 14 79
+WINCLOSE
+PROMPT ON
+SHADOW ON
+PROMPT OFF
+JUMP TEST_WIN
+
+' you know the windows directory, now install it
+:WIN_INSTALL
+CALL TMP_DEL
+PROMPT OFF
+RD C:\WINDOWS
+PROMPT ON
+
+FILE ~1~2\PROGMAN.INI
+"Group504=~1\MOVIES\MOVIES.GRP"
+
+PATH \MOVIES
+MD ~1~2
+
+CALL EMPTY_DIR
+
+WINOPEN 0 20 79
+"MOVIES TO GO! is being installed to the ~1~2 directory . . ."
+
+CALL UNPACK
+
+UNPACK WINDOWS.PAK 0 12 31 32 15 79 ' windows pif, ico, and grp files
+JUMP.FAIL INSTALL_FAILURE
+
+WINCLOSE
+
+' --------------------------------
+'  successful install to windows
+' --------------------------------
+WINOPEN 0 11 31
+"MOVIES TO GO! has been successfully installed in your"
+"Windows environment.  However, the changes won't take"
+"effect until you exit Windows, then run Windows again."
+""
+""
+""
+"Press ENTER to return to Windows."
+WINUPDATE +5 +5 27
+"THANK YOU FOR CHOOSING OUR SOFTWARE!"
+WAIT +35 +7
+WINCLOSE
+END
+
+' ------------------
+'   error messages
+' ------------------
+:INSTALL_FAILURE
+WINOPEN 0 11 79
+"MOVIES TO GO! INSTALLATION FAILED BEFORE IT FINISHED!!"
+""
+"Possible reasons:"
+"   -- The floppy disk was damaged during shipping."
+"   -- Your disk drive is out of alignment."
+"   -- The floppy disk was removed prior to completion."
+""
+"Press [Enter] to remove incomplete program files."
+WAIT +51 +8
+DELETE ~1~2\*.* 0 0 0
+RD ~1~2
+DELETE ~1\MOVIES.BAT 0 0 0
+WINCLOSE
+WINOPEN 0 11 31
+"Partially Installed Files are Now Deleted."
+""
+"      Press [Enter] to Quit."
+WAIT +30 +3
+JUMP EXIT
+
+' -----------
+' subroutines
+' -----------
+:EMPTY_DIR
+EXIST ~1~2\*.*
+JUMP.NO SKIP_SURE
+
+EXIST ~1~2\1*.FIL
+JUMP.YES SKIP_SURE
+
+WINOPEN 0 11 79
+"The directory ~1~2 already exists and contains files!"
+""
+"   Installing MOVIES TO GO! in this directory will"
+"                DELETE ALL THE FILES"
+"       in this directory prior to installing."
+""
+""
+WINUPDATE +2 +7 78
+"Are you SURE you want to install it here   Y or N?"
+ASK +52 +7
+WINCLOSE
+JUMP.YES SKIP_SURE
+JUMP DOS_APP
+
+:SKIP_SURE
+PROMPT OFF
+COPY ~1~2\NOTE.FIL ~1\NOTE.FIL 0 0 0
+DELETE ~1~2\*.* 0 0 0
+PROMPT ON
+CALL TMP_DEL
+RETURN
+
+'   delete temporary file (don't inform user)
+:TMP_DEL
+PROMPT OFF
+DELETE ~3\~A.TMP 0 0 0
+PROMPT ON
+RETURN
+
+' unpack data files
+:UNPACK
+SET.FILES 16
+UNPACK DATA.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+UNPACK TEXT.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+VIDEO VGA
+JUMP.NO NO_VGA
+
+:GRAPHICS_INSTALL
+EXIST ~0\GRAPHICS.PAK
+JUMP.YES HD_DISK
+
+WINOPEN 0 11 31
+BEEP
+"Please Insert Disk Number 2 in Drive ~0."
+""
+"Press the [Enter] key to continue."
+WAIT +36 +3
+WINCLOSE
+JUMP GRAPHICS_INSTALL
+
+:HD_DISK
+CPU 386
+JUMP.YES 386
+
+WINOPEN 0 11 31
+"The GRAPHICS VERSION May Be Slow on Your Computer."
+""
+""
+""
+"(If you decide that the graphics version is too slow, simply"
+" install the software again, and answer  N  to this question.)"
+WINUPDATE +2 +3 30
+"Do You Want To Install it Anyway   Y or N?"
+ASK +44 +3
+WINCLOSE
+JUMP.NO NO_VGA
+
+:386
+FREE 1200
+JUMP.NO NO_VGA
+
+COPY ~1\NOTE.FIL ~1~2\NOTE.FIL 0 0 0
+DELETE ~1\NOTE.FIL 0 0 0
+
+UNPACK GRAPHICS.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+FREE 1000
+JUMP.NO DONE_PACK
+UNPACK ICON.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+JUMP DONE_PACK
+
+:NO_VGA
+PROMPT OFF
+COPY ~1~2\TEXT.EXE ~1~2\MOVIES.EXE 0 0 0
+DELETE ~1~2\TEXT.EXE 0 0 0
+PROMPT ON
+:DONE_PACK
+RETURN
+
+' create a temporary file in the default directory with a unique name based on the number input by the user
+:TEMP_FILE
+FILE ~3\~A.TMP
+"Delete this temporary file."
+RETURN
+
+:ESC
+WINOPEN 0 20 31
+"(Press ESC to Quit) "
+RETURN
+
+:EXIT
+CALL TMP_DEL
+END

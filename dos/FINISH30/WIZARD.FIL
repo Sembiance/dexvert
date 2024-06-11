@@ -1,0 +1,367 @@
+' THE COLOR WIZARD  DOS / WINDOWS Installation Script
+' Copyright 1994, ImagiSOFT, Inc.
+' Version 1.0
+' April 1, 1994
+
+' Note:  This installation script is written for THE FINISHING TOUCH, a
+'        professional installation program which is also an ImagiSOFT
+'        product.  It is distributed with THE COLOR WIZARD to make
+'        installation easier, and to reduce our support calls.
+
+'        This script unpacks 6 compressed files (*.PAK) which is a
+'        major feature of the program.  For more information about
+'        THE FINISHING TOUCH, call ImagiSOFT at (505) 275-1920, or call
+'        our personal BBS number with your modem at (505) 275-9697.
+'        It will always have the latest shareware version of
+'        THE FINISHING TOUCH so you can "try before you buy".
+
+BACKGROUND ~0\WIZARD.BIN
+TELESCOPE OFF
+
+LANGUAGE ENGLISH      ' supports GERMAN, FRENCH, SPANISH, DANISH, and DUTCH
+
+BORDER 1
+TELESCOPE ON
+SHADOW OFF
+
+PAUSE 300              ' display screen for 3 seconds
+
+CALL NO_MCGA           ' test for mcga+ monitor
+
+MOUSE 0.0              ' mouse is required
+JUMP.NO NO_MOUSE
+
+FREE 1700              ' if they don't have 1.7 meg free, forget it
+JUMP.NO NO_SPACE
+
+' display opening menu
+:OPENING
+
+WINOPEN 0 4 31
+"        INSTALLATION OPTIONS MENU"
+""
+"1.  Install as Microsoft Windows 3.1 Application"
+"2.  Install as DOS Application"
+"3.  QUIT"
+""
+"SELECT ONE OF THE ABOVE:    "
+
+WINUPDATE +10 +1 30
+"INSTALLATION OPTIONS MENU"
+INPUT A 1 +28 +7 15
+WINCLOSE
+
+CALL TEMP_FILE
+
+EXIST ~3\1.TMP
+JUMP.YES WINDOWS_APP
+
+EXIST ~3\2.TMP
+JUMP.YES DOS_APP
+
+EXIST ~3\3.TMP
+JUMP.YES EXIT
+
+BEEP
+CALL TMP_DEL
+JUMP OPENING
+
+' ------------------------
+'   install as a dos app
+' ------------------------
+:DOS_APP
+CALL TMP_DEL
+
+' have user set the drive
+CALL ESC
+DRIVE C 0 12 31 15 32 14 79
+WINCLOSE
+
+' have user set the path
+CALL ESC
+PATH \WIZARD 0 12 31 15 32 14 79
+WINCLOSE
+
+CALL EMPTY_DIR
+CALL UNPACK
+
+' create color wizard batch file
+PROMPT OFF
+DELETE ~1\WIZARD.BAT 0 0 0
+PROMPT ON
+FILE ~1\WIZARD.BAT
+"~1"
+"cd ~2"
+"WIZARD"
+"cd \"
+
+WINOPEN 0 4 31
+"THE COLOR WIZARD has been successfully installed."
+""
+"     To run it, enter the command"
+"     from the root directory of drive ~1."
+""
+""
+""
+""
+"Press the [Enter] key to continue."
+WINUPDATE +36 +3 30
+"WIZARD"
+WINUPDATE +7 +6 27
+"THANK YOU FOR CHOOSING OUR SOFTWARE!"
+WAIT +36 +9
+WINCLOSE
+
+:RUN
+WINOPEN 0 10 31
+"Would you like to run THE COLOR WIZARD right now   Y or N?"
+ASK +60 +1
+JUMP.NO EXIT
+RUN ~1\WIZARD.BAT
+
+' --------------------------
+'   install as windows app
+' --------------------------
+:WINDOWS_APP
+
+' these commands set drive and path variables
+DRIVE C
+PATH \WINDOWS
+
+:TEST_WIN
+EXIST ~1~2\WIN.COM
+JUMP.YES WIN_INSTALL
+
+EXIST ~3\1.TMP
+JUMP.YES SKIP_BEEP
+BEEP
+RD ~1~2
+WINOPEN 0 4 79
+"Microsoft Windows is NOT found in the"
+"~1~2 directory.  Please try again."
+""
+"Press ENTER to continue."
+WAIT +26 +4
+WINCLOSE
+
+' windows is in a directory other than C:\WINDOWS
+:SKIP_BEEP
+CALL TMP_DEL
+WINOPEN 0 4 31
+"To install THE COLOR WIZARD to Microsoft Windows,"
+"we need to know which hard drive Windows is installed on."
+""
+"             Most people have Windows on this hard drive."
+"             Press ENTER if this is correct, or change to"
+"             the correct drive letter."
+"             (Press ESC to quit.)"
+PROMPT OFF
+DRIVE C +2 +3 17 14 32 14 79
+WINCLOSE
+
+PROMPT ON
+WINOPEN 0 4 31
+"We also need to know the name of the directory where Microsoft"
+"Windows is installed.  Most people have Windows installed in"
+"                              this directory.  Press ENTER"
+"                              if this is OK, or input the name"
+"                              of the directory where Windows"
+"                              is installed."
+"                              (Press ESC to quit.)"
+PROMPT OFF
+PATH \WINDOWS +1 +3 17 14 32 14 79
+WINCLOSE
+PROMPT ON
+PROMPT OFF
+JUMP TEST_WIN
+
+' you know the windows directory, now install it
+:WIN_INSTALL
+CALL TMP_DEL
+
+FILE ~1~2\PROGMAN.INI
+"Group510=~1\WIZARD\WIZARD.GRP"
+
+PATH \WIZARD
+MD ~1~2
+
+CALL EMPTY_DIR
+
+CALL UNPACK
+
+UNPACK WINDOWS.PAK 0 12 31 32 15 79 ' windows pif, ico, and grp files
+JUMP.FAIL INSTALL_FAILURE
+
+
+' --------------------------------
+'  successful install to windows
+' --------------------------------
+WINOPEN 0 4 31
+"THE COLOR WIZARD has been installed in your Windows environment"
+"in the ~1~2 directory.  However, these changes won't"
+"take effect until you exit Windows, then run Windows again."
+""
+""
+""
+"Press ENTER to return to Windows."
+WINUPDATE +12 +5 27
+"THANK YOU FOR CHOOSING OUR SOFTWARE!"
+WAIT +35 +7
+WINCLOSE
+END
+
+' ------------------
+'   error messages
+' ------------------
+:INSTALL_FAILURE
+BEEP
+WINOPEN 0 4 79
+"THE COLOR WIZARD INSTALLATION FAILED BEFORE IT FINISHED!!"
+""
+"Possible reasons:"
+"   -- The floppy disk was damaged during shipping."
+"   -- Your disk drive is out of alignment."
+""
+"You may want to delete the files in the ~1~2 directory."
+""
+"      Press [Enter] to Quit."
+WAIT +30 +9
+WINCLOSE
+JUMP EXIT
+
+' -----------
+' subroutines
+' -----------
+:EMPTY_DIR
+EXIST ~1~2\*.*                 ' brand new directory
+JUMP.NO SKIP_DEL
+
+EXIST ~1~2\WIZARD.EXE          ' existing color wizard software
+JUMP.YES SKIP_DEL
+
+WINOPEN 0 4 79
+"The directory ~1~2 already exists and contains files!"
+""
+"   You will have to DELETE ALL THE FILES in this"
+"   directory prior to installing in here."
+""
+"Press ENTER to Continue."
+WAIT +25 +6
+WINCLOSE
+JUMP OPENING
+
+:SKIP_DEL
+RETURN
+
+' unpack data files
+:UNPACK
+
+SET.FILES 16
+
+COPY ~0\READ.ME ~1\~2\READ.ME 0 12 31
+
+WINOPEN 0 20 47
+" Press the ARTIST icon for a lesson from our professional artists. "
+
+UNPACK WIZARD.PAK 0 12 31 32 15 79          ' main program
+JUMP.FAIL INSTALL_FAILURE
+
+WINUPDATE +2 +1 47
+" Now installing the DINOSAUR coloring book . . .                   "
+UNPACK DINO.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+WINUPDATE +2 +1 47
+" Now installing the SHARKS coloring book . . .  "
+UNPACK SHARKS.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+WINUPDATE +2 +1 47
+" Press the BOOK icon to read the story of Rapunzel . . ."
+UNPACK RAPUN.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+WINCLOSE
+
+:INSERT_DISK                  ' prompt for 2nd disk (if necessary)
+EXIST ~0\AESOP.PAK
+JUMP.YES SKIP_DISK
+
+BEEP
+WINOPEN 0 11 79
+""
+"  Please Insert Disk #2 in Drive ~0  "
+""
+"  Press ENTER when ready . . ."
+""
+WAIT +32 +4
+WINCLOSE
+EXIST ~0\AESOP.PAK
+JUMP.NO INSERT_DISK
+
+:SKIP_DISK
+
+WINOPEN 0 20 47
+" Installing the 2,000 year old classic AESOP'S Fables . . .        "
+UNPACK AESOP.PAK 0 12 31 32 15 79
+JUMP.FAIL INSTALL_FAILURE
+
+WINCLOSE
+
+RETURN
+
+' create a temporary file in the default directory with a unique name based on the number input by the user
+:TEMP_FILE
+FILE ~3\~A.TMP
+"Delete this temporary file."
+RETURN
+
+' delete temporary file created by opening menu
+:TMP_DEL
+PROMPT OFF
+DELETE ~3\~A.TMP 0 0 0
+PROMPT ON
+RETURN
+
+:ESC
+WINOPEN 0 20 31
+"(Press ESC to Quit) "
+RETURN
+
+:NO_MCGA
+VIDEO MCGA             ' vga monitor is required
+JUMP.YES SKIP_VGA
+WINOPEN 0 4 79
+"This software requires a VGA monitor to run."
+"It probably won't run on your computer.  Do"
+"you want to install it anyway        Y or N?"
+ASK +39 +3
+JUMP.YES SKIP_VGA
+JUMP EXIT
+:SKIP_VGA
+RETURN
+
+:NO_MOUSE
+WINOPEN 0 4 79
+"Sorry, but this software requires a mouse to run, and"
+"therefore, it won't currently run on your computer. If"
+"you have a mouse, make sure that your mouse driver is"
+"loaded in AUTOEXEC.BAT or CONFIG.SYS as explained in"
+"the documentation which came with your mouse."
+""
+"Press ENTER to continue."
+WAIT +26 +7
+JUMP EXIT
+
+:NO_SPACE
+WINOPEN 0 4 79
+"This software requires at least 1.7 megabytes of free"
+"hard disk space before you can can install it."
+""
+"Press ENTER to continue."
+WAIT +26 +4
+JUMP EXIT
+
+:EXIT
+CALL TMP_DEL
+END

@@ -1,0 +1,135 @@
+' TSA Install Script
+' PART 2:  LCD SCRIPT
+'   2B.FIL - Black and White
+'   (Same as 2C.FIL except for screen colors)
+' Copyright 1992, ImagiSOFT, Inc.
+' June 1, 1992
+
+WINCLOSE                           ' close ImagiSOFT Window
+BACKGROUND 112                     ' white background
+
+' --------------------------
+' redisplay ImagiSOFT window
+' --------------------------
+TELESCOPE OFF                            ' display 1st window "instantly"
+SHADOW OFF                               ' shadows look wierd on lcd screens
+
+WINOPEN 0 2 15
+"            ImagiSOFT, Inc."
+"Where Imagination Brings Software to Life"
+""
+"        TSA Installation Program"
+
+
+TELESCOPE ON      ' turn on telescoping windows for the rest of the messages
+
+
+' ----------------------------
+' prompt for hard drive / path
+' ----------------------------
+:PROMPT
+DRIVE C 28 10 15 112 32 14 15       ' prompt for the drive to install to
+PATH \TSA 12 10 15 112 32 14 15     ' default path = TSA
+
+' ---------------------------------------
+' test to see if files in directory exist
+' ---------------------------------------
+EXIST ~1~2\*.*
+JUMP.NO UNPACK                     ' new directory
+
+WINOPEN 0 10 15
+"The directory ~1~2 already exists and contains other files!"
+"Are you sure you want to use this directory   Y or N?"
+ASK 63 12
+WINCLOSE
+JUMP.NO PROMPT                    ' ask drive and directory again
+
+' ----------------
+' unpack the files
+' ----------------
+:UNPACK
+UNPACK TSA.PAK 24 10 15 32 14 15   ' unpack files from the floppy drive
+JUMP.FAIL INSTALL_FAILURE          ' trap for fatal disk error
+
+
+' ------------------------------------------
+' make sure CONFIG.SYS has at least 16 files
+' ------------------------------------------
+SET.FILES 16
+
+
+' ------------------------------------------------
+' write $.bat in boot directory to run tsa program
+' ------------------------------------------------
+EXIST ~3\$.BAT                    ' does $.bat exist from previous install?
+JUMP.NO SKIP_DELETE               ' if yes, delete it, no, jump
+DELETE ~3\$.BAT 1 24 119          ' this window will be "invisible"
+                                  '  (white on white color on white background)
+
+:SKIP_DELETE
+DOS 3.3                           ' dos 3.3+ allows @
+JUMP.NO OLD_DOS
+
+FILE ~3\$.BAT                     ' dos 3.3+ compatible file
+"@~1"
+"@cd ~2"
+"@sfpinit -b22 -o start.exe"
+"@~3"
+"@cd \"
+JUMP DONE
+
+:OLD_DOS
+FILE ~3\$.BAT                     ' old dos compatible file
+"~1"
+"cd ~2"
+"sfpinit -b22 -o start.exe"
+"~3"
+"cd \"
+
+' -------------------------
+' installation is complete!
+' -------------------------
+:DONE
+
+WINOPEN 0 10 15
+"ImagiSOFT's TSA Software has been successfully installed."
+"       To run it, enter the command  $"
+"       from the root directory of drive ~3."
+"(The $ helps you to remember why you are running it.)"
+""
+"        THANK YOU FOR CHOOSING OUR SOFTWARE!"
+""
+""
+"Press the [Enter] key to continue."
+
+WAIT 47 19                                  ' wait for enter key
+
+WINCLOSE
+
+' --------------------------
+' option to run software now
+' --------------------------
+
+WINOPEN 0 10 15
+"Would you like to run the TSA Software Right Now   Y or N?"
+ASK 69 11
+JUMP.NO EXIT
+
+RUN ~3\$                                    ' run the software if "yes"
+
+' ------------------------
+' exit the system normally
+' ------------------------
+:EXIT
+
+END
+
+
+' ------------------------
+' Installation Failure.
+'  * *  Run FAIL.FIL  * *
+' ------------------------
+
+:INSTALL_FAILURE
+
+SCRIPT ~0\3.FIL                             ' load from install floppy

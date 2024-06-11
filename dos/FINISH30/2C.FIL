@@ -1,0 +1,115 @@
+' TSA Install Script
+' PART 2:  COLOR SCRIPT
+'   2C.FIL - COLOR
+'   (Same as 2B.FIL except for screen colors)
+' Copyright 1992, ImagiSOFT, Inc.
+' June 1, 1992
+
+:PROMPT
+DRIVE C 28 10 31 15 32 14 79       ' prompt for the drive to install to
+PATH \TSA 12 10 31 15 32 14 79     ' default path = TSA
+
+' ---------------------------------------
+' test to see if files in directory exist
+' ---------------------------------------
+EXIST ~1~2\*.*
+JUMP.NO UNPACK                     ' new directory
+
+WINOPEN 0 10 31
+"The directory ~1~2 already exists and contains other files!"
+"Are you sure you want to use this directory   Y or N?"
+ASK 63 12
+WINCLOSE
+JUMP.NO PROMPT                    ' ask drive and directory again
+
+' ----------------
+' unpack the files
+' ----------------
+:UNPACK
+UNPACK TSA.PAK 24 10 31 32 14 79   ' unpack files from the floppy drive
+JUMP.FAIL INSTALL_FAILURE          ' trap for fatal disk error
+
+
+' ------------------------------------------
+' make sure CONFIG.SYS has at least 16 files
+' ------------------------------------------
+SET.FILES 16
+
+
+' ------------------------------------------------
+' write $.bat in boot directory to run tsa program
+' ------------------------------------------------
+EXIST ~3\$.BAT                    ' does $.bat exist from previous install?
+JUMP.NO SKIP_DELETE               ' if yes, delete it, no, jump
+SHADOW OFF                        ' don't want shadow to appear either
+DELETE ~3\$.BAT 1 24 51           ' this window will be "invisible"
+                                  '    (cyan on cyan color on cyan background)
+SHADOW ON                         ' turn shadows back on
+
+:SKIP_DELETE
+DOS 3.3                           ' dos 3.3+ allows @
+JUMP.NO OLD_DOS
+
+FILE ~3\$.BAT                     ' dos 3.3+ compatible file
+"@~1"
+"@cd ~2"
+"@sfpinit -b22 -o start.exe"
+"@~3"
+"@cd \"
+JUMP DONE
+
+:OLD_DOS
+FILE ~3\$.BAT                     ' old dos compatible file
+"~1"
+"cd ~2"
+"sfpinit -b22 -o start.exe"
+"~3"
+"cd \"
+
+' -------------------------
+' installation is complete!
+' -------------------------
+:DONE
+
+WINOPEN 0 10 31
+"ImagiSOFT's TSA Software has been successfully installed."
+"       To run it, enter the command  $"
+"       from the root directory of drive ~3."
+"(The $ helps you to remember why you are running it.)"
+""
+"        THANK YOU FOR CHOOSING OUR SOFTWARE!"
+""
+""
+"Press the [Enter] key to continue."
+
+WAIT 47 19                                  ' wait for enter key
+
+WINCLOSE
+
+' --------------------------
+' option to run software now
+' --------------------------
+
+WINOPEN 0 10 31
+"Would you like to run the TSA Software Right Now   Y or N?"
+ASK 69 11
+JUMP.NO EXIT
+
+RUN ~3\$                                    ' run the software if "yes"
+
+' ------------------------
+' exit the system normally
+' ------------------------
+:EXIT
+
+END
+
+
+' ------------------------
+' Installation Failure.
+'  * *  Run FAIL.FIL  * *
+' ------------------------
+
+:INSTALL_FAILURE
+
+SCRIPT ~0\3.FIL                             ' load from install floppy

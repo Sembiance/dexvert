@@ -1,0 +1,50 @@
+' TSA Install Script
+' Copyright 1992, ImagiSOFT, Inc.
+' June 1, 1992
+
+' This installation is in 4 parts:
+'   1.FIL    (This file -- renamed to INSTALL.FIL in the actual installation)
+'   2c.FIL   (Color configurations)
+'   2b.FIL   (LCD configurations)
+'   3.FIL    (loaded upon disk error)
+
+' NOTE:  This script is written in 4 parts for faster loading and easier
+'        maintenence.  This script, 1.FIL is the first part, which is
+'        short so that it will load quickly.  It asks the question
+'        "can you see this in color  y/n?".  If "yes" it runs the script
+'        2c.FIL, if "no" it runs 2b.FIL.  These are identical except for
+'        the screen colors.  3.FIL is loaded only if a fatal disk error
+'        occurs.
+
+'        Most of these remarks were removed on the distribution copy for
+'        faster file loading and less disk space.
+
+
+BACKGROUND 63                            ' cyan background
+TELESCOPE OFF                            ' display 1st window "instantly"
+
+WINOPEN 0 2 95
+"            ImagiSOFT, Inc."
+"Where Imagination Brings Software to Life"
+""
+"        TSA Installation Program"
+
+
+TELESCOPE ON      ' turn on telescoping windows for the rest of the messages
+SHADOW ON         ' I like shadowed windows
+SPACE 720         ' 720K required.  Will install to a 3.5" floppy
+
+' -------------------
+' test for LCD screen
+' -------------------
+WINOPEN 0 10 31
+"Can you see the messages on your screen in COLOR   Y or N?"
+ASK 68 11
+WINCLOSE
+
+JUMP.NO LOAD_LCD                    ' jump to lcd label
+
+SCRIPT ~0\2C.FIL                    ' load color script from install floppy
+
+:LOAD_LCD
+SCRIPT ~0\2B.FIL                    ' load lcd script from install floppy

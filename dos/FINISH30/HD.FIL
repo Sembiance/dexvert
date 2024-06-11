@@ -1,0 +1,83 @@
+' -------------------------------------------
+' Sample FINISHING TOUCH Installation Script
+
+' UNPACK from the hard drive
+' To speed up install because
+' hard drive disk I/O is 10 times
+' faster than floppy disk I/O
+
+' To see this script work,
+' Rename this script to INSTALL.FIL
+' and create PROG.PAK which contains
+' a few files.
+
+
+' David Sanders
+' May 10, 1994
+' -------------------------------------------
+
+BACKGROUND 31
+
+SPACE 2000                            ' needs size of .PAK file
+                                      ' plus total of all files in .PAK file
+                                      ' plus largest file in .PAK file
+
+DRIVE C        0 0 95 15 0 0 79       ' ask user for the install drive
+PATH  \TESTING 0 0 95 15 0 0 79       ' ask for the path
+
+WINOPEN 0 0 79
+" COPYING FILES . . . "
+
+PROMPT OFF                            ' don't display any status windows
+
+' ---------------------------------------------------------
+'  write a new script file on the target drive and path
+
+'    The UNPACK command always unpacks files from the
+'    ~0 drive (which is usually A: or B:).  This script
+'    shells a new copy of INSTALL.EXE from the hard drive
+'    which resets the ~0 variable to ~1~2, which is the
+'    drive and path which the user installed from.
+' ---------------------------------------------------------
+
+' copy programs to the hard drive
+
+COPY  ~0\INSTALL.EXE ~1~2\CONTINUE.EXE 0 0 79  ' temporary copy of INSTALL.EXE
+COPY  ~0\PROG.PAK    ~1~2              0 0 79  ' contains installation files
+
+DELETE ~1~2\CONTINUE.FIL 0 0 79       ' remove...just in case it's already there
+
+FILE ~1~2\CONTINUE.FIL                ' write new script file
+"BACKGROUND 31"                       ' reset the screen
+"DRIVE ~1"                            ' give the DRIVE and PATH to the new
+"PATH  ~2"                            ' copy of INSTALL.EXE (copied to CONTINUE.EXE)
+"UNPACK PROG.PAK 0 0 63 0 0 79"       ' contains installation files
+"END"
+
+WINCLOSE                           ' close above window
+
+' shell to temporary copy of install.exe, which runs continue.fil script
+SHELL
+"~1~2\CONTINUE.EXE"
+
+' -----------------------------------
+'  remove files copied to hard drive
+' -----------------------------------
+
+PROMPT OFF                            ' don't display any status windows
+
+DELETE ~1~2\CONTINUE.FIL 0 0 79
+DELETE ~1~2\CONTINUE.EXE 0 0 79
+DELETE ~1~2\PROG.PAK     0 0 79
+
+PROMPT ON                            ' display status windows
+
+WINOPEN 0 0 47
+"Installation is now complete."
+""
+"Press [Enter]"
+
+WAIT +15 +3
+
+' done!
+END

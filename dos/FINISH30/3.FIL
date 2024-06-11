@@ -1,0 +1,40 @@
+' Part 2 of the tsa script runs this script if a fatal error occurs
+' 3.FIL - part 3 of tsa installation
+' copyright 1992, ImagiSOFT, Inc.
+' June 1, 1992
+
+WINOPEN 0 11 79
+
+"THE INSTALLATION PROGRAM FAILED PRIOR TO COMPLETION"
+""
+"Possible reasons:"
+"   -- The floppy disk was damaged during shipping."
+"   -- Your disk drive is out of alignment."
+"   -- The floppy disk was removed prior to completion."
+""
+"Press [Enter] to remove incomplete program files."
+
+WAIT 62 19
+
+' delete all partial files using internal variables
+'   ~1 = the drive the user installed to (C: was the default)
+'   ~2 = the path the user installed to (\TSA was the default)
+
+DELETE ~1~2\*.* 0 0 31
+RD ~1~2                         ' now remove the directory
+DELETE ~3\$.BAT 0 0 31          ' root of boot directory, created batch file
+
+WINCLOSE
+
+WINOPEN 0 11 31
+
+"Partially Installed Files are Now Deleted."
+""
+"Please try to install the software again."
+"If you get this error message again,"
+"call ImagiSOFT, Inc.  (800) 767-1978 for"
+"a new floppy disk."
+""
+"      Press [Enter] to Quit."
+
+WAIT 47 19

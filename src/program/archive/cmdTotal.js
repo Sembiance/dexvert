@@ -4,12 +4,12 @@ import {Program} from "../../Program.js";
 export class cmdTotal extends Program
 {
 	website = "https://totalcmd.net/plugring/cmdtotal.html";
-	loc     = "win2k";
+	loc     = "wine";
 	flags   = {
 		wcx : "Which wcx file to use"
 	};
 	bin       = "c:\\dexvert\\cmdTotal\\cmdTotal.exe";
-	args      = r => [r.flags.wcx, "x", r.inFile(), "c:\\out"];
+	args      = r => [r.flags.wcx, "x", r.inFile(), r.outDir()];
 	renameOut = false;
 }
 

@@ -75,8 +75,9 @@ export async function getIdMeta(inputFile)
 
 		const MIN_YEAR = 1972;
 		// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
+		// we also allow 1904 just because we've seen it in the wild (archive/macromediaProjector/MEGACUTE Vol.2)
 		const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => year<MIN_YEAR || year>(new Date()).getFullYear())) &&
+		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => (year<MIN_YEAR && year!==1904) || year>(new Date()).getFullYear())) &&
 		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
 			return;
 
@@ -114,6 +115,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	const byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
 	const idMetaData = await getIdMeta(inputFile);
+	xlog.debug`idMetaData for ${inputFile.absolute}:\n${idMetaData}`;
 
 	const matchesByFamily = {magic : [], ext : [], filename : [], fileSize : [], idMeta : [], fallback : []};
 	for(const familyid of FAMILY_MATCH_ORDER)

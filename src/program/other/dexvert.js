@@ -16,7 +16,7 @@ export class dexvert extends Program
 	loc    = "local";
 	exec   = async r =>
 	{
-		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js#hrm"));
+		const {dexvert : dexvertFunc} = await import(path.join("..", "..", "dexvert.js"));
 		
 		const dexOpts = {xlog : r.xlog, programFlag : {osPriority : true}};
 		if(r.flags.asFormat)

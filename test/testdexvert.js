@@ -358,6 +358,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
 	[/document\/wordDocDOS\/CALENDAR.*\.MSW$/, "document", "wri"],
+	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
 	[/image\/hiEddi\/05$/, "image", "doodleC64"],
@@ -476,9 +477,9 @@ const ALLOW_METADATA_DIFFERENCES =
 // So in the future I could look at these files and see if I can determine a pattern to them or in some better way id them
 const UNPROCESSED_ALLOW_NO_IDS =
 [
-	"archive/drRiptideArchive",
+	"archive/drRiptideGameArchive",
 	"archive/irixIDBArchive",
-	"archive/lostVikingsDAT",
+	"archive/lostVikingsGameArchive",
 	"archive/rar",
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em

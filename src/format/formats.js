@@ -159,9 +159,8 @@ async function loadGameArchive({reload}={})
 				if(formats[formatid])
 					throw new Error(`format [\${formatid}] in gameArchive.js is a duplicate`);
 
-				// dexrecurse relies on the suffix being GameArchive to know if it should skip asking for more file format samples
-				if(!formatid.endsWith("GameArchive"))
-					throw new Error(`format ${familyid}/${formatid} in gameArchive.js needs to end in'GameArchive'`);
+				const allowExtMatch = !!o.allowExtMatch;
+				delete o.allowExtMatch;
 
 				const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
 				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
@@ -180,7 +179,7 @@ async function loadGameArchive({reload}={})
 						if(Object.hasOwn(o, supportedKey))
 							format[supportedKey] = o[supportedKey];
 					}
-					if(o.ext?.length)
+					if(o.ext?.length && !allowExtMatch)
 						format.forbidExtMatch = true;
 
 					if(["both", "gamearch"].includes(converterType))
@@ -206,6 +205,8 @@ export async function init(xlog=new XLog("info"))
 	xlog.info`Loading ${formatFilePaths.length} format files...`;
 
 	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive()]));
+
+	xlog.info`Loaded ${Object.keys(formats).length} formats`;
 }
 
 export async function monitor(xlog=new XLog("info"))

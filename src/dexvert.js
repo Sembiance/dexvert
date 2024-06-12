@@ -248,6 +248,9 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				const newlyProducedFiles = [];
 				await (dexState.f.files.new || []).parallelMap(async (newFile, newFileNum) =>
 				{
+					if(!await fileUtil.exists(newFile.absolute))
+						return xlog.info`Skipping verification of file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()} as it doesn't exist: ${newFile.absolute}`;
+
 					if(!skipVerify)
 					{
 						xlog.debug`Verifying file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;

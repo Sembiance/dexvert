@@ -157,7 +157,8 @@ const SUPPORTING_FILES =
 	},
 	poly :
 	{
-		wavefrontOBJ : /\.mtl$/i
+		keyCAD3DModel : /\.fnt$/i,
+		wavefrontOBJ  : /\.mtl$/i
 	},
 	other :
 	{

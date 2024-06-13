@@ -7,5 +7,5 @@ export class info extends Format
 	ext        = [".info"];
 	magic      = [/^Amiga Workbench.* icon/, "Amiga Workbench project icon"];
 	mimeType   = "image/x-amiga-icon";
-	converters = ["deark[module:amigaicon]", `abydosconvert[format:${this.mimeType}]`];
+	converters = ["deark[module:amigaicon]", `abydosconvert[format:${this.mimeType}]`, "paintDotNet"];
 }

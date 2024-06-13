@@ -9,6 +9,8 @@ export const gameextractor =
 {
 	archive :
 	{
+		aFSGameArchive                     : {name : "AFS game archive", ext : [".afs"], magic : ["AFS game data archive"], weakMagic : true},
+		americanConquestGameArchive        : {name : "American Conquest game archive", ext : [".gp"], magic : ["American Conquest game data archive"]},
 		bankGameArchive                    : {name : "Bank Game Archive", ext : [".bnk"], magic : ["Bank game data archive"]},
 		boltGameArchive                    : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},
 		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive"]},
@@ -27,12 +29,14 @@ export const gameextractor =
 		lucasArtsGameArchive               : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive"]},
 		madsHAGGameArchive                 : {name : "MADS HAG Game Archive", ext : [".hag"], magic : ["MADS HAG game data archive"]},
 		meyerGlassGameArchive              : {name : "Meyer/Glass Interactive Game Archive", ext : [".mgf"], magic : ["Meyer/Glass Interactive game data Format"]},
+		nASCARHeatGameArchive              : {name : "NASCAR Heat game archive", ext : [".trk", ".car"], magic : ["NASCAR Heat game data archive"]},
 		novalogicGameArchive               : {name : "Novalogic Game Archive", ext : [".pff"], allowExtMatch : true, magic : ["Novalogic game data archive"]},
 		paxImperiaEminentDomainGameArchive : {name : "Pax Imperia: Eminent Domain Game Archive", ext : [".img"], magic : ["Pax Imperia: Eminent Domain game data archive"]},
 		quakePAK                           : {name : "Quake PAK", ext : [".pak"], allowExtMatch : true, magic : ["Quake archive", "Quake I or II world or extension", /^Archive: PACK$/], website : "http://fileformats.archiveteam.org/wiki/Quake_PAK"},
 		scummDigitizedSoundsGameArchive    : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)"]},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
+		surrealSoftwareGameArchive         : {name : "Surreal Software Game Archive", ext : [".adu", ".sdu", ".tdu", ".gdu", ".vdu", ".mdu", ".xdu", ".wdu", ".odu", ".qdu1", ".ldu", ".lvl1", ".qdu", ".lvl", ".rrc"], magic : ["Surreal Software game data container"], weakMagic : true},
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package"], forbiddenMagic : ["Unreal Music"]},
 		vivBIGF                            : {name : "VIV/BIGF EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"]},
 		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], allowExtMatch : true, magic : ["Warcraft game data archive"], weakMagic : true},
@@ -56,7 +60,6 @@ export const gamearch =
 		monsterBashGameArchive    : {name : "Monster Bash Game Archive", ext : [".dat"], filename : [/^bash\d\.dat$/i], website : "https://moddingwiki.shikadi.net/wiki/DAT_Format_(Monster_Bash)"},
 		mysticTowersGameArchive   : {name : "Mystic Towers Game Archive", ext : [".dat"], filename : [/^rgmystus\.dat$/i], website : "https://moddingwiki.shikadi.net/wiki/DAT_Format_(Mystic_Towers)"},
 		mythosSoftwareGameArchive : {name : "Mythos Software Game Archive", ext : [".lib"], magic : ["Mythos Software LIB game data container"], website : "https://moddingwiki.shikadi.net/wiki/LIB_Format_(Mythos_Software)"},
-		podGameArchive            : {name : "POD Game Archive", ext : [".pod"], allowExtMatch : true, magic : ["POD Archive"], weakMagic : true, website : "https://moddingwiki.shikadi.net/wiki/POD_Format"},
 		prehistorikGameArchive    : {name : "Prehistorik Game Archive", filename : [/^files[ab]\.(cur|vga)$/i], website : "https://moddingwiki.shikadi.net/wiki/CUR_Format"},
 		sangoFighterGameArchive   : {name : "Sango Fighter Game Archive", filename : [/^backgd\.pic$/i, /^(bonus|color|pather)\.dat$/i, /^engpic\.pcx$/i, /^(eopen|story|workpage)\.pbn$/i, /^(hunt|stosay)\.pcp$/i, /^music\.mid$/i, /^voice\.pcm$/i, /^br.+\.rlc$/i, /^vs1\.rlc$/i, /message\.pxb$/i], website : "https://moddingwiki.shikadi.net/wiki/DAT_Format_(Sango_Fighter)"},
 		stargunnerGameArchive     : {name : "Stargunner Game Archive", filename : [/^stargun\.dlt$/i], magic : ["DLT game data archive"], website : "https://moddingwiki.shikadi.net/wiki/DLT_Format"},

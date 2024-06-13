@@ -1,4 +1,5 @@
 # Too large. They are mirrored to: https://sembiance.com/fileFormatSamples/
+testExpected.json
 sample/
 recurse/sample/
 recurse/expected/

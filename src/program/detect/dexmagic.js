@@ -7,10 +7,10 @@ import {path} from "std";
 // Most file detections from from 'file', 'TrID' and 'siegfried'. Below are a couple additional detections.
 // All offsets matches must match 'match' property
 // match can be a string, which means it has to match that string
-// if match is an array of strings, then it can match any of those strings
 // if match is an array of bytes then it must match those bytes exactly
 // if match has a subarray, then it matches if any of those bytes in that subarray match the loc (NOTE! So if you need to match 0x4A OR 0x4B its match : [[0x4A, 0x4B]]  NOT [[0x4A], [0x4B]])
 // You can also specify a size and it will look for the 'match' bytes anywhere in the first 'size' bytes of the file
+// WARNING: YOU CANNOT DO: match : ["abc", "xyz"]  only 1 character at a time
 
 /* eslint-disable unicorn/no-hex-escape */
 const DEXMAGIC_CHECKS =
@@ -24,20 +24,20 @@ const DEXMAGIC_CHECKS =
 	"Anna-Marie Archive"             : [{offset : 0, match : "Anna-Marie"}],
 	"Anna-Marie Archive (alt)"       : [{offset : -160, match : "Anna-Marie"}],
 	"Authorware APR Archive"         : [{offset : 0, match : "WPLI"}],
-	"EDI Split File Archive"         : [{offset : 0, match : ["EDISPLIT", "EDISPLI0"]}],
+	"EDI Split File Archive"         : [{offset : 0, match : "EDISPLI"}, {offset : 7, match : [["T", "0"]]}],
 	"HTTP Response"                  : [{offset : 0, match : "HTTP/1."}, {offset : 8, match : " 200 OK\r\n"}],
 	"IFF CAT file"                   : [{offset : 0, match : "CAT "}],
 	"IFF LIST file"                  : [{offset : 0, match : "LIST"}, {offset : 8, match : "SSETPROP"}],
 	"imageUSB"                       : [{offset : 0, match : "i\x00m\x00a\x00g\x00e\x00U\x00S\x00B"}],
-	"Macromedia Projector"           : [{offset : 0, match : ["RIFX", "XFIR"]}, {offset : 8, match : ["LPPA", "APPL"]}],
-	"Macromedia Projector PJ00/PJ01" : [{offset : 0, match : ["PJ00", "PJ01"]}],
+	"Macromedia Projector RIFX"      : [{offset : 0, match : "RIFX"}, {offset : 8, match : "APPL"}],
+	"Macromedia Projector XFIR"      : [{offset : 0, match : "XFIR"}, {offset : 8, match : "LPPA"}],
+	"Macromedia Projector PJ00/PJ01" : [{offset : 0, match : "PJ0"}, {offset : 3, match : [["0", "1"]]}],
 	"MINICAT Archive"                : [{offset : 0, match : "MINICAT"}],
 	"NeXT Disk Image Dump"           : [{offset : 46, match : "dlV3"}],
 	"OS/2 PACK (Variant)"            : [{offset : 0, match : [0xA5, 0x96, 0xFF, 0xFF]}],
 	"PACKIT Installation Archive"    : [{offset : 0, match : "PACKIT by MJP"}],
 	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
-	"POD Archive"                    : [{offset : 4, match : [["Startup", "TV", "Disk", "Fury"]]}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
 	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
 	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],
@@ -87,6 +87,7 @@ const DEXMAGIC_CHECKS =
 	"ECI Graphic Editor"          : [{offset : 0, match : [0x00, 0x40]}],
 	"FM-Towns HEL Animation"      : [{offset : 0, match : "he1"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
+	"GLPaint PIC"                 : [{offset : 0, match : "PIC2"}, {offset : 22, match : "JPGE"}],
 	"GoDot Clip"                  : [{offset : 0, match : "GOD1"}],
 	"IFF ILBM (Generic)"		  : [{offset : 8, match : "ILBMBMHD"}],
 	"Konica Quality Photo"        : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],

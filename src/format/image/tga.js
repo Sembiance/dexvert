@@ -17,6 +17,7 @@ export class tga extends Format
 	// iio2png works really well, except when it doesn't. like 648.TGA and several other hundred TGA's like it, convert as just a transparent image
 	converters = [
 		"deark[module:tga][strongMatch]", "iconvert",
+		"paintDotNet[strongMatch]",
 		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
 		"nconvert", "recoil2png", "gimp", "iio2png",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas5[strongMatch]", "canvas[strongMatch]"

@@ -8,5 +8,5 @@ export class tim extends Format
 	magic        = ["TIM image", "PSX TIM"];
 	weakMagic    = true;
 	metaProvider = ["image"];
-	converters   = ["convert", "deark[module:tim]", "recoil2png"];
+	converters   = ["convert", "deark[module:tim]", "paintDotNet", "recoil2png"];
 }

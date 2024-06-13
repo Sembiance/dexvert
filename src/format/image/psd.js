@@ -14,5 +14,6 @@ export class psd extends Format
 	// I could in theory just extract the 'main' image by doing: ensuring convert calls with `${filePath}[0]`
 	converters = [
 		"convert", "iio2png", "gimp", "deark[module:psd]", "iconvert",
+		"paintDotNet",
 		"hiJaakExpress", "corelPhotoPaint", "photoDraw", "canvas5[strongMatch]", "canvas[strongMatch]", "tomsViewer", "picturePublisher"];
 }

@@ -16977,3 +16977,30 @@ XyWrite III Plus; 1; 0
 XyWrite III; 0; 0
 XyWrite IV for Windows; 4; 0; XYW
 XyWrite IV; 4; 0
+
+
+>>> paint.net  win7   https://archive.org/details/paint.net.4.3.12  (Pugins: https://forums.getpaint.net/topic/15260-plugin-index/)
+Amiga Icon File (*.info)
+AV1 (AVIF) (*.avif)
+BLP image file (*.blp)
+BMP (*.bmp, *.dib, *.rle)
+DICOM File (*.dcm)
+DirectDraw Surface (DDS) ((*.dds))
+GIF (*.gif)
+IFF Animations - Interchange File Format (*.anim)
+IFF Images - Interchange File Format (*.iff, *.ilbm, *.lbm)
+JPEG (*.jpg, *.jpeg, *.jpe, *.jfif, *.exif)
+Jpeg 2000 (*.jp2, *.j2c, *.jpg2, *.jpf)
+paint.net (*.pdn)
+PAM - Portable Arbitrary Map (*.pam)
+PBM - Portable Bit Map (*.pbm)
+PCX (*.pcx)
+PGM - Portable Gray Map (*.pgm)
+Photoshop (*.psd, *.psb)
+PNG (*.png)
+PPM - Portable Pixel Map (*.ppm)
+PSX TIM (*.tim)
+RollerCoaster Tycoon RidePicture (*.TP4)
+TGA (*.tga)
+TIFF (*.tiff, *.tif)
+WebP (*.webp)

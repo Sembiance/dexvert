@@ -23,7 +23,7 @@ export class iffILBM extends Format
 	// abydosconvert also as of v0.2.3 doesn't handle certain images correctly such as GINA and foto57
 	converters = [
 		`recoil2png`, "deark[module:ilbm]", "ffmpeg[format:iff][outType:png]", "convert", "iio2png", `abydosconvert[format:${this.mimeType}][outType:png]`, "iff_convert",
-		"hiJaakExpress[matchType:magic]", "pv[matchType:magic]"
+		"hiJaakExpress[matchType:magic]", "pv[matchType:magic]", "paintDotNet"
 		//"canvas[matchType:magic]",	WAY too slow and also doesn't seem to handle any ILBM's that all the others miss, so skip it
 	];
 }

@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,175)
+# Unsupported File Formats (1,210)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (81)
+## Archive (82)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -64,6 +64,7 @@ Family/Format | Name | Extensions | Notes
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
+[archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?formatid=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
@@ -141,7 +142,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (74)
+## Document (76)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -162,8 +163,9 @@ Family/Format | Name | Extensions | Notes
 [document/cloantoC1Text](https://discmaster.textfiles.com/search?formatid=cloantoC1Text) | Cloanto C1-Text Document | .c1text | [1 sample file](https://sembiance.com/fileFormatSamples/document/cloantoC1Text/) - Have only encountered just 1 file in the wild. If I encounter more, I can get Cloanto C1-Text program, load it into the Amiga and convert it there.
 [document/dartHypertext](https://discmaster.textfiles.com/search?formatid=dartHypertext) | Dart Hypertext |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
 [document/dataPerfectStructure](https://discmaster.textfiles.com/search?formatid=dataPerfectStructure) | DataPerfect Structure | .str | 
-[document/dbVISTADB](https://discmaster.textfiles.com/search?formatid=dbVISTADB) | db_VISTA Database |  | 
+[document/dbVISTADB](https://discmaster.textfiles.com/search?formatid=dbVISTADB) | db_VISTA Database | .dbd | 
 [document/dBASECompiledForm](https://discmaster.textfiles.com/search?formatid=dBASECompiledForm) | dBASE Compiled Form | .fro .fmo | 
+[document/dBASEIVDesign](https://discmaster.textfiles.com/search?formatid=dBASEIVDesign) | dBASE IV design | .frm .scr | 
 [document/wpsPlus](https://discmaster.textfiles.com/search?formatid=wpsPlus) | [DEC WPS-PLUS DX](https://winworldpc.com/product/wps-plus/1x) | .dx | VAX based word processor. Haven't investigated it for magic.
 [document/dVCDataBase](https://discmaster.textfiles.com/search?formatid=dVCDataBase) | DVC data base | .d | 
 [document/envisionPublisherDoc](https://discmaster.textfiles.com/search?formatid=envisionPublisherDoc) | [Envision Publisher Document](http://fileformats.archiveteam.org/wiki/Envision_Publisher) | .evp .evt | [5 sample files](https://sembiance.com/fileFormatSamples/document/envisionPublisherDoc/) - Envision Publisher for MSDOS doesn't have an "Export" option. I could figure out how to 'print to a file' or I could set up DOSBOX PDF Printer emulation: superuser.com/questions/270457/how-can-i-print-with-dosbox
@@ -208,6 +210,7 @@ Family/Format | Name | Extensions | Notes
 [document/storybookWeaver](https://discmaster.textfiles.com/search?formatid=storybookWeaver) | Storybook Weaver Story | .swd .sts | 
 [document/symantecDOSSoftwareHelp](https://discmaster.textfiles.com/search?formatid=symantecDOSSoftwareHelp) | Symantec DOS software help | .hlp | 
 [document/theDataMasterDataBase](https://discmaster.textfiles.com/search?formatid=theDataMasterDataBase) | The DataMaster Data Base | .tdb | 
+[document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?formatid=trueBASICCompiledCode) | True BASIC compiled code |  | 
 [document/turboCalc](https://discmaster.textfiles.com/search?formatid=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/vCard](https://discmaster.textfiles.com/search?formatid=vCard) | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://sembiance.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 [document/venturaPublisherChapter](https://discmaster.textfiles.com/search?formatid=venturaPublisherChapter) | Ventura Publisher Chapter | .chp | 
@@ -264,7 +267,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (62)
+## Font (66)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -282,6 +285,8 @@ Family/Format | Name | Extensions | Notes
 [font/corelWiffenFont](https://discmaster.textfiles.com/search?formatid=corelWiffenFont) | Corel Wiffen Font | .wfn | 
 [font/deluxeFont](https://discmaster.textfiles.com/search?formatid=deluxeFont) | Deluxe Font | .fnt | 
 [font/demoManiacFont](https://discmaster.textfiles.com/search?formatid=demoManiacFont) | DemoManiac Font | .font | 
+[font/digitalRealitySoftwareFont](https://discmaster.textfiles.com/search?formatid=digitalRealitySoftwareFont) | Digital Reality Software font | .chr | 
+[font/dIVGamesStudioFont](https://discmaster.textfiles.com/search?formatid=dIVGamesStudioFont) | DIV Games Studio Font | .fnt | 
 [font/dosCodePageFont](https://discmaster.textfiles.com/search?formatid=dosCodePageFont) | DOS Code Page Font |  | 
 [font/dynaCADDVectorFont](https://discmaster.textfiles.com/search?formatid=dynaCADDVectorFont) | DynaCADD Vector Font | .fnt | 
 [font/electronicArtsFont](https://discmaster.textfiles.com/search?formatid=electronicArtsFont) | Electronic Arts Font | .ffn | 
@@ -310,15 +315,17 @@ Family/Format | Name | Extensions | Notes
 [font/personalFontMakerFont](https://discmaster.textfiles.com/search?formatid=personalFontMakerFont) | Personal Font Maker Font/Character Set | .fnt .set | 
 [font/portableFontResource](https://discmaster.textfiles.com/search?formatid=portableFontResource) | [Portable Font Resource](http://fileformats.archiveteam.org/wiki/PFR) | .pfr | [3 sample files](https://sembiance.com/fileFormatSamples/font/portableFontResource/) - Could create a custom HTML file that references the PFR and load it in Netscape 4.03 and take a screenshot.
 [font/printPartnerFont](https://discmaster.textfiles.com/search?formatid=printPartnerFont) | PrintPartner Font | .font | 
+[font/professionalDrawFont](https://discmaster.textfiles.com/search?formatid=professionalDrawFont) | Professional Draw Font | .pdfont | 
 [font/psionFont](https://discmaster.textfiles.com/search?formatid=psionFont) | Psion Font | .fon | 
 [font/ripTermFont](https://discmaster.textfiles.com/search?formatid=ripTermFont) | RIPterm Font | .fnt | 
-[font/riscOSOutlineFontData](https://discmaster.textfiles.com/search?formatid=riscOSOutlineFontData) | RISC OS Outline Font Data | .outlines | 
+[font/riscOSFontData](https://discmaster.textfiles.com/search?formatid=riscOSFontData) | RISC OS Outline Font Data | .outlines .fnt | 
 [font/signumFont](https://discmaster.textfiles.com/search?formatid=signumFont) | Signum Font | .e24 | 
 [font/speedo](https://discmaster.textfiles.com/search?formatid=speedo) | [Speedo Font](http://fileformats.archiveteam.org/wiki/Speedo) | .spd | [3 sample files](https://sembiance.com/fileFormatSamples/font/speedo/)
 [font/texPackedFont](https://discmaster.textfiles.com/search?formatid=texPackedFont) | TeX Packed Font | .pf | 
 [font/texFont](https://discmaster.textfiles.com/search?formatid=texFont) | [TexFont Texture Mapped Font](http://fileformats.archiveteam.org/wiki/TexFont) | .txf | [6 sample files](https://sembiance.com/fileFormatSamples/font/texFont/) - Using sandbox/app/glut-master/progs/texfont/showtxf.c I can render it to a cube. Could write C code to render the whole test alphabet letters and then save that to an image, but MEH.
 [font/theDrawFont](https://discmaster.textfiles.com/search?formatid=theDrawFont) | TheDraw Font | .tdf | [1 sample file](https://sembiance.com/fileFormatSamples/font/theDrawFont/) - Bitmap font file used by programs like Neopaint for MSDOS and maybe GEM OS. Fontforge doesn't handle it
 [font/townsOSFont](https://discmaster.textfiles.com/search?formatid=townsOSFont) | Towns OS Font | .fnt | 
+[font/turboCFontFile](https://discmaster.textfiles.com/search?formatid=turboCFontFile) | TurboC Font file | .chr | 
 [font/vFontFont](https://discmaster.textfiles.com/search?formatid=vFontFont) | VFONT Font | .fnt | 
 [font/vgaPaint386Font](https://discmaster.textfiles.com/search?formatid=vgaPaint386Font) | VGAPaint 386 Font | .vfn | 
 [font/westwoodFont](https://discmaster.textfiles.com/search?formatid=westwoodFont) | Westwood Font | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/westwoodFont/)
@@ -332,7 +339,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (93)
+## Image (94)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
@@ -417,6 +424,7 @@ Family/Format | Name | Extensions | Notes
 [image/skyRoadsBitmap](https://discmaster.textfiles.com/search?formatid=skyRoadsBitmap) | SkyRoads Bitmap | .lzs | 
 [image/slpImage](https://discmaster.textfiles.com/search?formatid=slpImage) | [SLP Image](http://fileformats.archiveteam.org/wiki/Age_of_Empires_Graphics_File) | .slp | [2 sample files](https://sembiance.com/fileFormatSamples/image/slpImage/) - Could use SLP Editor or SLPCNVT (see sandbox/app) but both had issues opening several files and since it's just for AoE, not worth the effort.
 [image/someraGraphicFormat](https://discmaster.textfiles.com/search?formatid=someraGraphicFormat) | Somera Graphic Format | .sgf | 
+[image/superFlowDiagram](https://discmaster.textfiles.com/search?formatid=superFlowDiagram) | SuperFlow diagram | .sf1 | 
 [image/teletext](https://discmaster.textfiles.com/search?formatid=teletext) | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://sembiance.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 [image/topDrawDrawing](https://discmaster.textfiles.com/search?formatid=topDrawDrawing) | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
@@ -539,7 +547,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (618)
+## Other (644)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -563,6 +571,7 @@ Family/Format | Name | Extensions | Notes
 [other/adobePhotoshopColorBook](https://discmaster.textfiles.com/search?formatid=adobePhotoshopColorBook) | Adobe Photoshop Color Book | .acb | 
 [other/adobePhotoshopCustomShape](https://discmaster.textfiles.com/search?formatid=adobePhotoshopCustomShape) | Adobe Photoshop Custom Shape | .csh | 
 [other/adobePhotoshopGradient](https://discmaster.textfiles.com/search?formatid=adobePhotoshopGradient) | Adobe Photoshop Gradient | .grd | 
+[other/adobePremiereProject](https://discmaster.textfiles.com/search?formatid=adobePremiereProject) | Adobe Premiere Project | .ppj | 
 [other/adobeTypeFontInfo](https://discmaster.textfiles.com/search?formatid=adobeTypeFontInfo) | Adobe Type Manager Font Information | .inf | 
 [other/adoragePreferences](https://discmaster.textfiles.com/search?formatid=adoragePreferences) | Adorage preferences |  | 
 [other/adventureGameToolkitStrings](https://discmaster.textfiles.com/search?formatid=adventureGameToolkitStrings) | Adventure Game Toolkit Strings | .d$$ | 
@@ -654,7 +663,7 @@ Family/Format | Name | Extensions | Notes
 [other/caVisualObjectsApplication](https://discmaster.textfiles.com/search?formatid=caVisualObjectsApplication) | CA Visual Objects Application | .app .ap | 
 [other/caVisualObjectsModuleExportFile](https://discmaster.textfiles.com/search?formatid=caVisualObjectsModuleExportFile) | CA Visual Objects Module Export File | .mef | 
 [other/caVisualObjectsPrefix](https://discmaster.textfiles.com/search?formatid=caVisualObjectsPrefix) | CA Visual Objects Prefix | .pfx | 
-[other/cAVisualObjectsSysAtomTable](https://discmaster.textfiles.com/search?formatid=cAVisualObjectsSysAtomTable) | CA Visual Objects sys atom table | .vo | 
+[other/caVisualObjectsSysAtomTable](https://discmaster.textfiles.com/search?formatid=caVisualObjectsSysAtomTable) | CA Visual Objects sys atom table | .vo | 
 [other/cadDrawLibrary](https://discmaster.textfiles.com/search?formatid=cadDrawLibrary) | CAD/Draw Library | .tbl | 
 [other/cadDrawSettings](https://discmaster.textfiles.com/search?formatid=cadDrawSettings) | CAD/Draw Settings | .mpi | 
 [other/cakewalkStudioWarePanel](https://discmaster.textfiles.com/search?formatid=cakewalkStudioWarePanel) | Cakewalk Studio Ware Panel | .CakewalkStudioWare | 
@@ -666,12 +675,14 @@ Family/Format | Name | Extensions | Notes
 [other/callOfDutyMap](https://discmaster.textfiles.com/search?formatid=callOfDutyMap) | Call of Duty Map | .d3dbsp .bsp | 
 [other/carmageddonSavedGame](https://discmaster.textfiles.com/search?formatid=carmageddonSavedGame) | Carmageddon Saved Game | .ars | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
+[other/chaosToyUniversePalette](https://discmaster.textfiles.com/search?formatid=chaosToyUniversePalette) | CHAOS Toy Universe Palette | .frt | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?formatid=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
 [other/characterTableLibrary](https://discmaster.textfiles.com/search?formatid=characterTableLibrary) | Character Table Library | .tlb | 
 [other/checksAndBalances](https://discmaster.textfiles.com/search?formatid=checksAndBalances) | Checks and Balances data |  | 
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?formatid=chemViewAnimationData) | Chemview Animation Data | .d | 
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
+[other/cLISPMemoryImageData](https://discmaster.textfiles.com/search?formatid=cLISPMemoryImageData) | CLISP memory image data | .mem | 
 [other/cloneCDSubChannelData](https://discmaster.textfiles.com/search?formatid=cloneCDSubChannelData) | CloneCD CDImage SubChannel Data | .sub | 
 [other/codeViewColors](https://discmaster.textfiles.com/search?formatid=codeViewColors) | CodeView colors | .cvw | 
 [other/codeWarriorProject](https://discmaster.textfiles.com/search?formatid=codeWarriorProject) | CodeWarrior Project | .mcp | 
@@ -698,6 +709,7 @@ Family/Format | Name | Extensions | Notes
 [other/cybervisionMonitorInfo](https://discmaster.textfiles.com/search?formatid=cybervisionMonitorInfo) | Cybervision Monitor Info |  | 
 [other/cygnusEdDefaultSettings](https://discmaster.textfiles.com/search?formatid=cygnusEdDefaultSettings) | Cygnus Editor Default Settings |  | 
 [other/cygnusEdMacros](https://discmaster.textfiles.com/search?formatid=cygnusEdMacros) | Cygnus Editor Macros |  | 
+[other/danebaCanvasPalette](https://discmaster.textfiles.com/search?formatid=danebaCanvasPalette) | Daneba Canvas Palette (v3.x) | .pal .pa | 
 [other/darkLegionsColorPalaette](https://discmaster.textfiles.com/search?formatid=darkLegionsColorPalaette) | Dark Legions Color palaette | .col | 
 [other/darkReignMap](https://discmaster.textfiles.com/search?formatid=darkReignMap) | Dark Reign Map | .map | 
 [other/darkReignPalette](https://discmaster.textfiles.com/search?formatid=darkReignPalette) | Dark Reign Palette | .pal | 
@@ -749,6 +761,7 @@ Family/Format | Name | Extensions | Notes
 [other/esriDataBaseIndex](https://discmaster.textfiles.com/search?formatid=esriDataBaseIndex) | ESRI/ArcView DataBase Index | .shx | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
 [other/f1gpEdData](https://discmaster.textfiles.com/search?formatid=f1gpEdData) | F1GP-Ed Data | .events .settings | 
+[other/falloutCompiledScript](https://discmaster.textfiles.com/search?formatid=falloutCompiledScript) | Fallout compiled script | .int | 
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?formatid=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?formatid=fileExpressIndexHeader) | File Express Index Header | .ixh | 
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?formatid=fileExpressQuickScan) | File Express Quick Scan | .qss | 
@@ -764,6 +777,7 @@ Family/Format | Name | Extensions | Notes
 [other/foxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=foxProCompoundIndex) | FoxPro Compound Index | .tdx .edx | 
 [other/foxProMemo](https://discmaster.textfiles.com/search?formatid=foxProMemo) | FoxPro Memo File | .fpt | 
 [other/fractalDesignPaperTexture](https://discmaster.textfiles.com/search?formatid=fractalDesignPaperTexture) | Fractal Design Painter Paper Texture | .pap | 
+[other/fractalDesignPainterResource](https://discmaster.textfiles.com/search?formatid=fractalDesignPainterResource) | Fractal Design Painter Resource | .rsr | 
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/frontPageBTreeIndex](https://discmaster.textfiles.com/search?formatid=frontPageBTreeIndex) | Front Page Binary-Tree Index | .btr | 
 [other/fullTiltPinballData](https://discmaster.textfiles.com/search?formatid=fullTiltPinballData) | Full Tilt Pinball Data | .dat | 
@@ -782,6 +796,7 @@ Family/Format | Name | Extensions | Notes
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
+[other/hexWorkshopCharMapFile](https://discmaster.textfiles.com/search?formatid=hexWorkshopCharMapFile) | Hex Workshop Char Map File | .map | 
 [other/highSpeedPascalUnit](https://discmaster.textfiles.com/search?formatid=highSpeedPascalUnit) | High Speed Pascal Unit | .unit | 
 [other/homeBrewLevel](https://discmaster.textfiles.com/search?formatid=homeBrewLevel) | HomeBrew Level | .hle | 
 [other/homeBrewPalette](https://discmaster.textfiles.com/search?formatid=homeBrewPalette) | HomeBrew Palette | .hpa | 
@@ -804,7 +819,9 @@ Family/Format | Name | Extensions | Notes
 [other/installShieldHDR](https://discmaster.textfiles.com/search?formatid=installShieldHDR) | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://sembiance.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
 [other/installShieldUninstallScript](https://discmaster.textfiles.com/search?formatid=installShieldUninstallScript) | InstallShield Uninstall Script | .isu | 
 [other/intellCOFFObject](https://discmaster.textfiles.com/search?formatid=intellCOFFObject) | Intel Common Object File Format Object | .obj | 
+[other/intelligentGamesResourceData](https://discmaster.textfiles.com/search?formatid=intelligentGamesResourceData) | Intelligent Games resource data | .res | 
 [other/internationalPatchingSystem](https://discmaster.textfiles.com/search?formatid=internationalPatchingSystem) | International Patching System | .ips | 
+[other/invictusGameData](https://discmaster.textfiles.com/search?formatid=invictusGameData) | Invictus game data | .ics | 
 [other/invisionBrushes](https://discmaster.textfiles.com/search?formatid=invisionBrushes) | Invision Brushes | .bru | 
 [other/javaClass](https://discmaster.textfiles.com/search?formatid=javaClass) | Java Class File | .class | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/javaClass/)
 [other/javelinPrinterDriver](https://discmaster.textfiles.com/search?formatid=javelinPrinterDriver) | Javelin Printer Driver | .pr .pr2 | 
@@ -818,6 +835,7 @@ Family/Format | Name | Extensions | Notes
 [other/kickPascalUnitInterface](https://discmaster.textfiles.com/search?formatid=kickPascalUnitInterface) | KICK-Pascal Unit Interface | .u | 
 [other/kissCELColorPalette](https://discmaster.textfiles.com/search?formatid=kissCELColorPalette) | KiSS CEL Color Palette | .kcf | 
 [other/klikNPlayGame](https://discmaster.textfiles.com/search?formatid=klikNPlayGame) | Klik'n'Play Game | .gam | 
+[other/knowledgeAdventureDataArchive](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureDataArchive) | Knowledge Adventure data archive | .rld | 
 [other/kodakPrecisionTransform](https://discmaster.textfiles.com/search?formatid=kodakPrecisionTransform) | Kodak Precision Transform | .pt | 
 [other/kolekoSaveState](https://discmaster.textfiles.com/search?formatid=kolekoSaveState) | KOLEKO Save State | .rom | 
 [other/korgFile](https://discmaster.textfiles.com/search?formatid=korgFile) | KORG File | .pcg .bsq .arr .sty .sng | 
@@ -906,6 +924,7 @@ Family/Format | Name | Extensions | Notes
 [other/milesSoundSystemDriver](https://discmaster.textfiles.com/search?formatid=milesSoundSystemDriver) | Miles Sound System Driver | .adv | 
 [other/moonbaseGameData](https://discmaster.textfiles.com/search?formatid=moonbaseGameData) | Moonbase Game Data | .mb | 
 [other/moriaSavedGame](https://discmaster.textfiles.com/search?formatid=moriaSavedGame) | Moria Saved game |  | 
+[other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?formatid=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
 [other/movieSetterProject](https://discmaster.textfiles.com/search?formatid=movieSetterProject) | Movie Setter Project | .ms | 
 [other/dosCodePage](https://discmaster.textfiles.com/search?formatid=dosCodePage) | MS-DOS Code Page Info | .cp .cpi | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
@@ -930,6 +949,7 @@ Family/Format | Name | Extensions | Notes
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
 [other/nWiperShow](https://discmaster.textfiles.com/search?formatid=nWiperShow) | NWiper Show | .nw | 
 [other/oberonSymbol](https://discmaster.textfiles.com/search?formatid=oberonSymbol) | Oberon Symbol | .sym | 
+[other/ohrrpgceGame](https://discmaster.textfiles.com/search?formatid=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?formatid=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?formatid=os2DLL) | OS/2 Dynamic Link Library | .dll | 
@@ -945,6 +965,7 @@ Family/Format | Name | Extensions | Notes
 [other/partoutResourceData](https://discmaster.textfiles.com/search?formatid=partoutResourceData) | PartoutResource Data | .dat | 
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?formatid=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?formatid=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
+[other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?formatid=pcTalkIIIData) | PC-Talk III data | .dir | 
 [other/pcAnywhere](https://discmaster.textfiles.com/search?formatid=pcAnywhere) | PCAnywhere Data | .bhf | 
 [other/pdcPrologConfiguration](https://discmaster.textfiles.com/search?formatid=pdcPrologConfiguration) | PDC Prolog Configuration | .cfg | 
@@ -984,8 +1005,9 @@ Family/Format | Name | Extensions | Notes
 [other/quickTextTitles](https://discmaster.textfiles.com/search?formatid=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/radixGameData](https://discmaster.textfiles.com/search?formatid=radixGameData) | Radix game data | .dat | 
+[other/rapidFileData](https://discmaster.textfiles.com/search?formatid=rapidFileData) | RapidFile Data | .rpd | 
 [other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?formatid=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 
-[other/rARConfiguration](https://discmaster.textfiles.com/search?formatid=rARConfiguration) | RAR Configuration | .cfg | 
+[other/rarConfiguration](https://discmaster.textfiles.com/search?formatid=rarConfiguration) | RAR Configuration | .cfg | 
 [other/ravenSoftCompiledScript](https://discmaster.textfiles.com/search?formatid=ravenSoftCompiledScript) | Raven Software Compiled Script | .ibi | 
 [other/realBasicProject](https://discmaster.textfiles.com/search?formatid=realBasicProject) | RealBasic Project | .rbp | 
 [other/rebelBookMovesFormat](https://discmaster.textfiles.com/search?formatid=rebelBookMovesFormat) | REBEL book Moves format | .mvs | 
@@ -1006,12 +1028,14 @@ Family/Format | Name | Extensions | Notes
 [other/riscOSARMObjectFile](https://discmaster.textfiles.com/search?formatid=riscOSARMObjectFile) | RISC OS ARM Object File |  | 
 [other/riseOfTheTriadLevel](https://discmaster.textfiles.com/search?formatid=riseOfTheTriadLevel) | Rise of the Triad Level | .rtc .rtl | 
 [other/robouldixLevelData](https://discmaster.textfiles.com/search?formatid=robouldixLevelData) | Robouldix level data |  | 
+[other/rollerCoasterTycoonScenario](https://discmaster.textfiles.com/search?formatid=rollerCoasterTycoonScenario) | RollerCoaster Tycoon Scenario | .sc4 | 
 [other/rotObject3DAction](https://discmaster.textfiles.com/search?formatid=rotObject3DAction) | ROT Object 3D Action | .rotact | 
 [other/rpgMakerMap](https://discmaster.textfiles.com/search?formatid=rpgMakerMap) | RPG Maker Map | .lmu | EasyRPG-Tools has lmu2png but requires lots of aux files and I couldn't get it to work
 [other/rrReportWriterFontInformation](https://discmaster.textfiles.com/search?formatid=rrReportWriterFontInformation) | RR Report Writer Font Information File | .fif | 
 [other/rtPatchFile](https://discmaster.textfiles.com/search?formatid=rtPatchFile) | RTPatch File | .rtp | 
 [other/samplitudeProject](https://discmaster.textfiles.com/search?formatid=samplitudeProject) | Samplitude Project | .rap .vip | 
 [other/sangoFighterConfiguration](https://discmaster.textfiles.com/search?formatid=sangoFighterConfiguration) | Sango Fighter Configuration | .cfg | 
+[other/saveRam2CompressedData](https://discmaster.textfiles.com/search?formatid=saveRam2CompressedData) | SaveRam2 compressed data | .fls | 
 [other/sceneryAnimatorLandscape](https://discmaster.textfiles.com/search?formatid=sceneryAnimatorLandscape) | Scenery Animator Landscape | .scape | 
 [other/sciTechDriver](https://discmaster.textfiles.com/search?formatid=sciTechDriver) | SciTech Driver | .drv | 
 [other/scorchedEarthMountainData](https://discmaster.textfiles.com/search?formatid=scorchedEarthMountainData) | Scorched Earth Mountain Data | .mtn | 
@@ -1034,6 +1058,7 @@ Family/Format | Name | Extensions | Notes
 [other/skunnyKartGameData](https://discmaster.textfiles.com/search?formatid=skunnyKartGameData) | Skunny Kart Library Game Data | .lid | 
 [other/slicksNSlidesTrack](https://discmaster.textfiles.com/search?formatid=slicksNSlidesTrack) | Slicks 'n' Slide Track | .ss | 
 [other/slideSavedGame](https://discmaster.textfiles.com/search?formatid=slideSavedGame) | Slide Saved Game | .sld | 
+[other/slimShowProject](https://discmaster.textfiles.com/search?formatid=slimShowProject) | Slim Show project | .s_ .ss | 
 [other/smartAddressAddressBook](https://discmaster.textfiles.com/search?formatid=smartAddressAddressBook) | Smart Address address book | .tpl .adr | 
 [other/smartAddressDiary](https://discmaster.textfiles.com/search?formatid=smartAddressDiary) | Smart Address Diary | .sdy | 
 [other/smartDrawTemplate](https://discmaster.textfiles.com/search?formatid=smartDrawTemplate) | SmartDraw Template | .sdt .sdr | 
@@ -1060,6 +1085,7 @@ Family/Format | Name | Extensions | Notes
 [other/su27FlankerMission](https://discmaster.textfiles.com/search?formatid=su27FlankerMission) | Su-27 Flanker Mission | .mis | 
 [other/superZZTFile](https://discmaster.textfiles.com/search?formatid=superZZTFile) | Super ZZT File | .szt | 
 [other/superbaseForm](https://discmaster.textfiles.com/search?formatid=superbaseForm) | Superbase Form | .sbv | 
+[other/superFlowTemplate](https://discmaster.textfiles.com/search?formatid=superFlowTemplate) | SuperFlow Template | .stp | 
 [other/superJamFile](https://discmaster.textfiles.com/search?formatid=superJamFile) | SuperJAM! File | .chords .style .section .band .keyboard .patch .drummap | 
 [other/swishEIndex](https://discmaster.textfiles.com/search?formatid=swishEIndex) | Swish-e index | .swi | 
 [other/syslinuxCOM32Module](https://discmaster.textfiles.com/search?formatid=syslinuxCOM32Module) | Syslinux COM32 Module | .c32 | 
@@ -1077,6 +1103,7 @@ Family/Format | Name | Extensions | Notes
 [other/theDataMasterFieldsDefinition](https://discmaster.textfiles.com/search?formatid=theDataMasterFieldsDefinition) | The DataMaster Fields Definition | .fld | 
 [other/theDataMasterForm](https://discmaster.textfiles.com/search?formatid=theDataMasterForm) | The DataMaster Form | .form | 
 [other/theDataMasterPreferences](https://discmaster.textfiles.com/search?formatid=theDataMasterPreferences) | The DataMaster Preferences | .pre | 
+[other/theGamesFactoryGame](https://discmaster.textfiles.com/search?formatid=theGamesFactoryGame) | The Games Factory Game | .gam | 
 [other/theNortonAntiVirusInformation](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusInformation) | The Norton AntiVirus Information | .inf | 
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?formatid=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
@@ -1091,6 +1118,7 @@ Family/Format | Name | Extensions | Notes
 [other/triviaShellIndex](https://discmaster.textfiles.com/search?formatid=triviaShellIndex) | Trivia Shell Index | .tsi | 
 [other/tSIProtected](https://discmaster.textfiles.com/search?formatid=tSIProtected) | TSI Protected | .pwd .pbk | 
 [other/tsunamiMediaGameDataArchive](https://discmaster.textfiles.com/search?formatid=tsunamiMediaGameDataArchive) | Tsunami Media game data archive | .rlb | 
+[other/turboAssemblerHelp](https://discmaster.textfiles.com/search?formatid=turboAssemblerHelp) | Turbo Assembler Help | .tah | 
 [other/turboLightningEnvironment](https://discmaster.textfiles.com/search?formatid=turboLightningEnvironment) | Turbo Lightning Environment | .env | 
 [other/turboModula2SymbolData](https://discmaster.textfiles.com/search?formatid=turboModula2SymbolData) | Turbo Modula-2 Symbol Data | .sym | 
 [other/turboPascalHelp](https://discmaster.textfiles.com/search?formatid=turboPascalHelp) | Turbo Pascal Help | .hlp | 
@@ -1099,12 +1127,14 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/valveSourceMap](https://discmaster.textfiles.com/search?formatid=valveSourceMap) | Valve Source Map | .bsp | 
+[other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?formatid=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
 [other/vbISAMIndex](https://discmaster.textfiles.com/search?formatid=vbISAMIndex) | VB/ISAM Index | .ism | 
 [other/vBDOSForm](https://discmaster.textfiles.com/search?formatid=vBDOSForm) | VBDOS Form | .frm | 
 [other/vcdEntries](https://discmaster.textfiles.com/search?formatid=vcdEntries) | VCD Entries File | .vcd | 
 [other/vectrexGameROM](https://discmaster.textfiles.com/search?formatid=vectrexGameROM) | Vectrex Game ROM | .vec .gam .bin | 
 [other/vektorGrafixDriver](https://discmaster.textfiles.com/search?formatid=vektorGrafixDriver) | Vektor Grafix Driver | .drv | 
 [other/vesaDisplayIdentification](https://discmaster.textfiles.com/search?formatid=vesaDisplayIdentification) | VESA Display Identification File | .vdb | 
+[other/vgaCopyConfiguration](https://discmaster.textfiles.com/search?formatid=vgaCopyConfiguration) | VGA-Copy Configuration | .cfg | 
 [other/videoMusicBoxProgression](https://discmaster.textfiles.com/search?formatid=videoMusicBoxProgression) | Video Music Box Progression | .prgn | 
 [other/videoMusicBoxStyle](https://discmaster.textfiles.com/search?formatid=videoMusicBoxStyle) | Video Music Box Style | .stle | 
 [other/videoFX2Sequence](https://discmaster.textfiles.com/search?formatid=videoFX2Sequence) | VideoFX2 Sequence | .seq | 
@@ -1112,6 +1142,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoMaxeFile](https://discmaster.textfiles.com/search?formatid=videoMaxeFile) | VideoMaxe File |  | 
 [other/videoPadProject](https://discmaster.textfiles.com/search?formatid=videoPadProject) | VideoPad Project | .vpj | 
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
+[other/virToolsFiles](https://discmaster.textfiles.com/search?formatid=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?formatid=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
@@ -1137,16 +1168,19 @@ Family/Format | Name | Extensions | Notes
 [other/windowsShortcut](https://discmaster.textfiles.com/search?formatid=windowsShortcut) | Windows Shortcut | .lnk | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?formatid=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?formatid=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
-[other/wordPerfectDictionary](https://discmaster.textfiles.com/search?formatid=wordPerfectDictionary) | WordPerfect Disctionary | .lex | 
+[other/wordPerfectDictionary](https://discmaster.textfiles.com/search?formatid=wordPerfectDictionary) | WordPerfect Disctionary | .lex .spn | 
 [other/wordPerfectDisplayResource](https://discmaster.textfiles.com/search?formatid=wordPerfectDisplayResource) | WordPerfect Display Resource | .drs | 
 [other/wordPerfectDriver](https://discmaster.textfiles.com/search?formatid=wordPerfectDriver) | WordPerfect Driver | .vrs | 
 [other/wordPerfectButtonBar](https://discmaster.textfiles.com/search?formatid=wordPerfectButtonBar) | WordPerfect for Windows Button Bar | .wwb | 
+[other/wordPerfectHyphenation](https://discmaster.textfiles.com/search?formatid=wordPerfectHyphenation) | WordPerfect Hyphenation | .hyc | 
 [other/wordPerfectInputResource](https://discmaster.textfiles.com/search?formatid=wordPerfectInputResource) | WordPerfect Input Resource | .irs | 
 [other/wordPerfectInstallOptions](https://discmaster.textfiles.com/search?formatid=wordPerfectInstallOptions) | WordPerfect Install options | .ins | 
 [other/wordPerfectKeyboardFile](https://discmaster.textfiles.com/search?formatid=wordPerfectKeyboardFile) | WordPerfect keyboard file | .wpk | 
 [other/wordPerfectMacro](https://discmaster.textfiles.com/search?formatid=wordPerfectMacro) | WordPerfect Macro File | .wpm .wcm | 
 [other/wordPerfectOverlay](https://discmaster.textfiles.com/search?formatid=wordPerfectOverlay) | WordPerfect Overlay | .fil | 
 [other/wordPerfectPrinterData](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterData) | WordPerfect Printer Data | .all .prd | 
+[other/wordPerfectPrinterResource](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterResource) | WordPerfect Printer Resource | .prs | 
+[other/wordPerfectSetupData](https://discmaster.textfiles.com/search?formatid=wordPerfectSetupData) | WordPerfect Setup Data | .set | 
 [other/wordPerfectThesaurus](https://discmaster.textfiles.com/search?formatid=wordPerfectThesaurus) | WordPerfect Thesaurus | .ths | 
 [other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?formatid=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 
 [other/wordsearchManiaConfiguration](https://discmaster.textfiles.com/search?formatid=wordsearchManiaConfiguration) | Wordsearch Mania! Configuration | .cfg | 
@@ -1163,7 +1197,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (32)
+## Poly (33)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1175,12 +1209,13 @@ Family/Format | Name | Extensions | Notes
 [poly/createShade3DScene](https://discmaster.textfiles.com/search?formatid=createShade3DScene) | Create+Shade 3D Scene | .3d | 
 [poly/digitalElevationMap](https://discmaster.textfiles.com/search?formatid=digitalElevationMap) | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?formatid=dynaCADDPart) | DynaCADD Part | .prt .dpt | 
+[poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/infiniDScene](https://discmaster.textfiles.com/search?formatid=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
 [poly/kml](https://discmaster.textfiles.com/search?formatid=kml) | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
 [poly/mayaScene](https://discmaster.textfiles.com/search?formatid=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - So the discmaster site only has like 64 unique maya files. Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/mobile3DGraphic](https://discmaster.textfiles.com/search?formatid=mobile3DGraphic) | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 
 [poly/moRay](https://discmaster.textfiles.com/search?formatid=moRay) | MoRay 3D Model | .mdl | [18 sample files](https://sembiance.com/fileFormatSamples/poly/moRay/) - A shareware program that sat 'on top' of a required POV-Ray installation. Just like POV-Ray, MoRay is super sensitive to version changes and using the last release v3.5 yielded an error where it stated to use 3.2 to open DOS moray files.
-[poly/northCAD3D](https://discmaster.textfiles.com/search?formatid=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. Not worth supporting right now
+[poly/northCAD3D](https://discmaster.textfiles.com/search?formatid=northCAD3D) | NorthCAD-3D | .n3d | Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.
 [poly/polyfilm](https://discmaster.textfiles.com/search?formatid=polyfilm) | Polyfilm 3D Model | .3d | [8 sample files](https://sembiance.com/fileFormatSamples/poly/polyfilm/) - Only 21 unique files on discmaster, all look to be example files from an Atari ST program called Polyfilm.
 [poly/povRay](https://discmaster.textfiles.com/search?formatid=povRay) | [POV-Ray Scene](http://fileformats.archiveteam.org/wiki/POV-Ray_scene_description) | .pov | [4 sample files](https://sembiance.com/fileFormatSamples/poly/povRay/) - POV Ray is not backwards compatible with old versions. So v1.0 files need to ran with 1.0. Old versions available from: http://www.povray.org/ftp/pub/povray/Old-Versions/ So I'd need to detect the version of the file and use that, or try most recent (system installed version) and proceed backwards to oldest I have compiled povray1 as dexvert/bin/povray/povray1 Additionally povray files can include pointers to files in other directories so I'd have to go 'fetch' them and bring them into the same directory These are both 'includes' and pointers to images. Next, includes are 'case sensitive' but originally on things like DOS, they were not, so I'd need to ensure the included files and include directives have the same case POVRAY1 also generates broken TGA output that only seems to convert with nconvert Lastly, I'm not sure how to get it as a poly. My hunch is Pov Ray 1.0 (and maybe later versions too) really are just a 'renderer' and don't have any way to export to another 3D model format. assimp claims support for PovRAY Raw (.raw) and AccuTrans3D says it supports .pov but a few gentle tests on my part yielded no results
 [poly/radCadDrawing](https://discmaster.textfiles.com/search?formatid=radCadDrawing) | Rad Cad Drawing | .cad | 

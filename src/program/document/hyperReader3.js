@@ -8,6 +8,7 @@ export class hyperReader3 extends Program
 	website  = "https://discmaster.textfiles.com/browse/21823/Pegasus_Windows_20.iso/pegasus/w_editor/hrw40.zip";
 	loc      = "win2k";
 	bin      = "c:\\WINNT\\system32\\cmd.exe";	//c:\\dexvert\\HRREAD33\\HR.EXE
+	unsafe   = true;
 	args     = r => [r.inFile()];
 	osData   = r => ({
 		dontMaximize : true,

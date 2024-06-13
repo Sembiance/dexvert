@@ -88,6 +88,7 @@ export default
 		quill                    : {name : "Quill Document", ext : [".doc"], magic : ["Quill Document"], website : "http://www.rwapadventures.com/ql_wiki/index.php?title=Quill"},
 		riscOSBBCBasic           : {name : "RISC OS BBC BASIC V Source", magic : ["RISC OS BBC BASIC V source"]},
 		smartSoftwareDocument    : {name : "Smart Software Document", ext : [".doc"], magic : ["Smart Software Document"]},
+		smartSoftwareWorksheet   : {name : "Smart Software WorkSheet", ext : [".ws"], magic : ["Smart Software WorkSheet"]},
 		sprint                   : {name : "Sprint Document", ext : [".spr"], magic : ["Sprint document"], weakMagic : true},
 		stFaxScript              : {name : "STFax Script", ext : [".script"], magic : ["STFax Script"]},
 		stWriter                 : {name : "ST Writer Document", magic : ["ST Writer document"]},

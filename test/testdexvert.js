@@ -177,8 +177,8 @@ const FLEX_SIZE_FORMATS =
 	archive :
 	{
 		// sometimes the SHA1 sum differs
-		annaMarie             : 0.01,
-		prehistorikCURArchive : 0.1,
+		annaMarie           : 0.01,
+		allowedFileSizeDiff : 0.1,
 
 		// different each time due to way it generates frames
 		swf    : 75,
@@ -357,7 +357,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
-	[/document\/wordDocDOS\/CALENDAR.*\.MSW$/, "document", "wri"],
+	[/document\/wordDocDOS\/.+\.(DOC|doc)$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],

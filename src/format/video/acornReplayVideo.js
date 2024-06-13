@@ -8,5 +8,5 @@ export class acornReplayVideo extends Format
 	magic        = ["ARMovie"];
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:rpl]"];
-	notes        = "3 files don't convert: ducks2, parrot, bluegreen";
+	notes        = "3 files don't convert: ducks2, parrot, bluegreen (many others didn't convert on discmaster)";
 }

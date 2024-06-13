@@ -12,7 +12,7 @@ export class eps extends Format
 	ext        = _EPS_EXT;
 	mimeType   = "application/eps";
 	magic      = _EPS_MAGIC;
-	idMeta     = ({macFileType}) => macFileType==="EPSF";
+	idMeta     = ({macFileType}) => ["EPSF", "EPSP"].includes(macFileType);
 	notes      = "We used to convert to both PNG and SVG using nconvert & inkscape. But ps2pdf[svg] works much better and supports both raster and vector versions. Still, fallback to inkscape for some files like eagle and eagle.001";
 	converters = dexState =>
 	{

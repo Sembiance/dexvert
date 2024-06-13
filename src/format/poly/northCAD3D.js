@@ -6,5 +6,5 @@ export class northCAD3D extends Format
 	ext         = [".n3d"];
 	magic       = ["NorthCAD-3D Drawing"];
 	unsupported = true;
-	notes       = "Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. Not worth supporting right now";
+	notes       = "Only 10 unique files on all of discmaster and all seem to just be samples provided from the program itself. DOS based. No export capability.";
 }

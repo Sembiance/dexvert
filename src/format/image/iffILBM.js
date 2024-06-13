@@ -7,7 +7,7 @@ export class iffILBM extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/ILBM";
 	ext            = [".lbm", ".ilbm", ".iff", ".beam", ".dhr", ".dr", ".mp", ".dctv"];
 	mimeType       = "image/x-ilbm";
-	magic          = ["IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "IFF Packed Bitmap", "DCTV encoded ILBM bitmap", /^fmt\/338( |$)/];
+	magic          = ["IFF InterLeaved BitMap", "IFF data, ILBM interleaved image", "Interchange File Format Interleaved Bitmap", "IFF ILBM bitmap", "IFF Packed Bitmap", "DCTV encoded ILBM bitmap", "IFF ILBM (Generic)", /^fmt\/338( |$)/];
 	forbiddenMagic = ["IFF Amiga Contiguous BitMap"];	// trid likes to identify IFF ACBM files as both ACBM and ILBM, so forbid the magic here and let iffACBM handle that
 	idMeta         = ({macFileType}) => macFileType==="ILBM";
 	metaProvider   = ["image"];

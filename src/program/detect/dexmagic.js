@@ -88,6 +88,7 @@ const DEXMAGIC_CHECKS =
 	"FM-Towns HEL Animation"      : [{offset : 0, match : "he1"}],
 	"Funny Paint"                 : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
 	"GoDot Clip"                  : [{offset : 0, match : "GOD1"}],
+	"IFF ILBM (Generic)"		  : [{offset : 8, match : "ILBMBMHD"}],
 	"Konica Quality Photo"        : [{offset : 0, match : [0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}, {offset : 30, match : [0x4A, 0x50, 0x45, 0x47]}],
 	"MLDF BMHD file"              : [{offset : 0, match : "FORM"}, {offset : 8, match : "MLDFBMHD"}],
 	"multiArtist"                 : [{offset : 0, match : [0x4D, 0x47, 0x48, 0x01]}],

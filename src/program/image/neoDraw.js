@@ -3,7 +3,7 @@ import {Program} from "../../Program.js";
 
 export class neoDraw extends Program
 {
-	website  = "https://archive.org/details/twilight-dvd069";
+	website  = "http://cd.textfiles.com/pier/pier09/cdrom/011/neodrw.zip";
 	unsafe   = true;
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\NEODRAW\\NEODRAW.EXE";

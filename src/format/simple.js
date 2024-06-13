@@ -155,7 +155,7 @@ export default
 		iBrowseCookies                  : {name : "iBrowse Cookies", filename : [/^cookies$/i], magic : ["IBrowse Cookies"]},
 		iffCTLG                         : {name : "Amiga IFF Catalog", ext : [".catalog"], magic : ["IFF data, CTLG message catalog", "Amiga Catalog translation format"], website : "http://fileformats.archiveteam.org/wiki/IFF"},
 		innoSetupLog                    : {name : "Inno Setup Log", ext : [".dat"], magic : ["Inno Setup Uninstall Log", "InnoSetup Log"]},
-		innoSetupMessages               : {name : "Inno Setup Messages", ext : [".msg"], magic : ["Inno Setup Messages"]},
+		innoSetupMessages               : {name : "Inno Setup Messages", ext : [".msg"], magic : ["Inno Setup Messages", "InnoSetup messages"]},
 		installShieldPackage            : {name : "InstallShield Package", ext : [".pkg"], magic : ["InstallShield compiled setup Package", "installShield Paketdatei"]},
 		jamMessageAreaHeaderFile        : {name : "JAM Message Area Header File", ext : [".jhr"], magic : ["JAM message area header file", "JAM message Header"], weakMagic : true},
 		javelinCaseStudy                : {name : "Javelin Case Study", ext : [".cas"], magic : ["Javelin Case study"]},

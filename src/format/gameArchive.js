@@ -20,9 +20,10 @@ export const gameextractor =
 		ensembleStudiosGameArchive         : {name : "Ensemble Studios Game Archive", ext : [".drs"], magic : ["Ensemble Studios Data Resource"]},
 		finalFantasyGameArchive            : {name : "Final Fantasy Game Archive", ext : [".lgp"], magic : ["Final Fantasy Game Archive"]},
 		finalLiberationGameArchive         : {name : "Final Liberation: Warhammer Epic 40K game archive", ext : [".muk"], magic : ["Final Liberation: Warhammer Epic 40K game data archive"]},
+		hmmPackfileGameArchive             : {name : "HMM Packfile Game Archive", ext : [".wdt"], magic : ["Rising Kingdoms game data archive", /^fmt\/1876( |$)/]},
 		interstateGameArchive              : {name : "Interstate Series Game Archive", ext : [".zfs"], magic : ["Interstate serie game data archive", "Zork FileSystem game data archive"], weakMagic : true},
 		janesLongbow2GameArchive           : {name : "Jane's Longbow 2 Game Archive", ext : [".tre"], magic : ["Jane's Longbow 2 game data archive"]},
-		lookingGlassGameArchive            : {name : "Looking Glass Game Archive", ext : [".res"], magic : ["Looking Glass Resource data", "LG Archiv gefunden"]},
+		lookingGlassGameArchive            : {name : "Looking Glass Game Archive", ext : [".res"], allowExtMatch : true, magic : ["Looking Glass Resource data", "LG Archiv gefunden"]},
 		lucasArtsGameArchive               : {name : "Lucas Arts Game Archive", ext : [".gob"], magic : ["LucasArts Game data archive", "Dark Forces Game data archive"]},
 		madsHAGGameArchive                 : {name : "MADS HAG Game Archive", ext : [".hag"], magic : ["MADS HAG game data archive"]},
 		meyerGlassGameArchive              : {name : "Meyer/Glass Interactive Game Archive", ext : [".mgf"], magic : ["Meyer/Glass Interactive game data Format"]},
@@ -32,9 +33,9 @@ export const gameextractor =
 		scummDigitizedSoundsGameArchive    : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)"]},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
-		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package"]},
+		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package"], forbiddenMagic : ["Unreal Music"]},
 		vivBIGF                            : {name : "VIV/BIGF EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"]},
-		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true},
+		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], allowExtMatch : true, magic : ["Warcraft game data archive"], weakMagic : true},
 		wad2GameArchive                    : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		youDontKnowJackGameArchive         : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"]}
 	}

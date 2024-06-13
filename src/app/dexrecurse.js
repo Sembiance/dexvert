@@ -104,7 +104,10 @@ const EXCLUDED_SAMPLE_FORMATS =
 
 	// rarely encounter this format and unfortuantly garbage tensor doesn't do a good job at detecting the failed conversions
 	"image/electronikaBKPIC",
-	"image/zbr"
+	"image/zbr",
+
+	// often identified against, and usually produces a fairly good image, but it's rarely actually this format, just a very similar dump of pixel data
+	"image/imgScan"
 ];
 
 const argv = cmdUtil.cmdInit({

@@ -155,13 +155,13 @@ export class iso extends Format
 			subState =>
 			{
 				const r = [];
-				if(multipleMode1Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseio all seem to handle it ok, but we just pick aaru for now
-					r.push("aaru");
+				if(multipleMode1Tracks)		// Some CD's (Game_Killer.bin) have a ton of MODE1 tracks, not sure why, but the stuff below kinda chokes on them, but aaru/unar/fuseiso all seem to handle it ok, but we just pick aaru and fuseiso for now
+					r.push("aaru", "fusiso");
 				r.push("uniso[checkMount]");	// Will only copy files if there are no input/output errors getting a directory listing (The PC-SIG Library on CD ROM - Ninth Edition.iso)
 
 				// some multi-bin groups (sample/archive/iso/Oh!X 2001 Spring Special CD-ROM (Japan) (Track 1).bin) get messed up with bchunk, so if we have multiple bins, try fuseiso first
 				if(multiBinTracks)
-					r.push("fuseiso");
+					r.pushUnique("fuseiso");
 
 				// If we haven't't found any nextstep/hfsplus/hfs, then safe to try additional converters that may also handle those formats
 				// If it's a BIN/CUE, run bchunk

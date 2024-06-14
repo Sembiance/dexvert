@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,210)
+# Unsupported File Formats (1,221)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -439,7 +439,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (102)
+## Music (104)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -484,9 +484,11 @@ Family/Format | Name | Extensions | Notes
 [music/ixalance](https://discmaster.textfiles.com/search?formatid=ixalance) | Ixalance Module | .ixs | [5 sample files](https://sembiance.com/fileFormatSamples/music/ixalance/)
 [music/jayTrax](https://discmaster.textfiles.com/search?formatid=jayTrax) | JayTrax Module | .jxs | [4 sample files](https://sembiance.com/fileFormatSamples/music/jayTrax/)
 [music/buzz](https://discmaster.textfiles.com/search?formatid=buzz) | Jeskola Buzz Module | .bmx .bmw | [3 sample files](https://sembiance.com/fileFormatSamples/music/buzz/)
+[music/katorzerMusic](https://discmaster.textfiles.com/search?formatid=katorzerMusic) | Katorzer music | .kat | 
 [music/klystrack](https://discmaster.textfiles.com/search?formatid=klystrack) | [Klystrack Module](http://fileformats.archiveteam.org/wiki/Klystrack_module) | .kt | [6 sample files](https://sembiance.com/fileFormatSamples/music/klystrack/)
 [music/korgSong](https://discmaster.textfiles.com/search?formatid=korgSong) | Korg Song | .sng | 
 [music/koustrackerModule](https://discmaster.textfiles.com/search?formatid=koustrackerModule) | Koustracker Module | .sok | 
+[music/logicSong](https://discmaster.textfiles.com/search?formatid=logicSong) | Logic Song | .lso | 
 [music/lucasfilmGamesMIDIMusic](https://discmaster.textfiles.com/search?formatid=lucasfilmGamesMIDIMusic) | Lucasfilm Games MIDI music | .gmd | 
 [music/mMusic](https://discmaster.textfiles.com/search?formatid=mMusic) | M music |  | 
 [music/masterTracker](https://discmaster.textfiles.com/search?formatid=masterTracker) | [Master Tracker AdLib Module](http://fileformats.archiveteam.org/wiki/Master_Tracker_module) | .mtr | [4 sample files](https://sembiance.com/fileFormatSamples/music/masterTracker/)
@@ -547,7 +549,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (644)
+## Other (653)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -653,6 +655,7 @@ Family/Format | Name | Extensions | Notes
 [other/borlandLanguageLibrary](https://discmaster.textfiles.com/search?formatid=borlandLanguageLibrary) | Borland Language Library | .bll | 
 [other/borlandObjectBrowserData](https://discmaster.textfiles.com/search?formatid=borlandObjectBrowserData) | Borland Object Browser data | .obr | 
 [other/borlandOverlay](https://discmaster.textfiles.com/search?formatid=borlandOverlay) | Borland Overlay | .ovr | 
+[other/borlandTLINKSymbolTable](https://discmaster.textfiles.com/search?formatid=borlandTLINKSymbolTable) | Borland TLINK Symbol Table | .tds | 
 [other/borlandTurboDebuggerSettings](https://discmaster.textfiles.com/search?formatid=borlandTurboDebuggerSettings) | Borland Turbo Debugger session-state settings | .trw | 
 [other/boyanActionModule](https://discmaster.textfiles.com/search?formatid=boyanActionModule) | BOYAN Action Model | .bam | 
 [other/buildEngineDemoData](https://discmaster.textfiles.com/search?formatid=buildEngineDemoData) | Build Engine Demo Data | .dem | 
@@ -765,6 +768,7 @@ Family/Format | Name | Extensions | Notes
 [other/fiascoDatabaseFile](https://discmaster.textfiles.com/search?formatid=fiascoDatabaseFile) | Fiasco Database File | .fdat .fidx .frec .fdb .fpr | 
 [other/fileExpressIndexHeader](https://discmaster.textfiles.com/search?formatid=fileExpressIndexHeader) | File Express Index Header | .ixh | 
 [other/fileExpressQuickScan](https://discmaster.textfiles.com/search?formatid=fileExpressQuickScan) | File Express Quick Scan | .qss | 
+[other/fileStar2ToolBar](https://discmaster.textfiles.com/search?formatid=fileStar2ToolBar) | FileStar/2 toolBar | .bar | 
 [other/firstBasicHelp](https://discmaster.textfiles.com/search?formatid=firstBasicHelp) | FirstBasic Help | .fbh | 
 [other/flashbackObject](https://discmaster.textfiles.com/search?formatid=flashbackObject) | Flashback Object | .obj | 
 [other/flightCommander2Campaign](https://discmaster.textfiles.com/search?formatid=flightCommander2Campaign) | Flight Commander 2 Campaign | .cam | 
@@ -813,7 +817,7 @@ Family/Format | Name | Extensions | Notes
 [other/idaSignatures](https://discmaster.textfiles.com/search?formatid=idaSignatures) | IDA Signatures | .sig | 
 [other/iffBinaryPatch](https://discmaster.textfiles.com/search?formatid=iffBinaryPatch) | IFF Binary Patch | .pch .patch | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 
-[other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Advanced Sound Driver | .drv | 
+[other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/infinityEngineFile](https://discmaster.textfiles.com/search?formatid=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 [other/installShieldHDR](https://discmaster.textfiles.com/search?formatid=installShieldHDR) | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://sembiance.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
@@ -831,6 +835,7 @@ Family/Format | Name | Extensions | Notes
 [other/jeepersReferenceDB](https://discmaster.textfiles.com/search?formatid=jeepersReferenceDB) | Jeepers Reference DB | .jpr | 
 [other/junglevisionData](https://discmaster.textfiles.com/search?formatid=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
+[other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 
 [other/kaperskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?formatid=kaperskyAntiVirusLicenseKey) | Kapersky Anti-Virus License Key | .key | 
 [other/kickPascalUnitInterface](https://discmaster.textfiles.com/search?formatid=kickPascalUnitInterface) | KICK-Pascal Unit Interface | .u | 
 [other/kissCELColorPalette](https://discmaster.textfiles.com/search?formatid=kissCELColorPalette) | KiSS CEL Color Palette | .kcf | 
@@ -857,7 +862,8 @@ Family/Format | Name | Extensions | Notes
 [other/lotus123AddInApplication](https://discmaster.textfiles.com/search?formatid=lotus123AddInApplication) | Lotus 1-2-3 Add-In Application | .adn | 
 [other/lotus123FormattingData](https://discmaster.textfiles.com/search?formatid=lotus123FormattingData) | Lotus 1-2-3 Formatting Data | .fm3 | 
 [other/lotus123SQZCompressed](https://discmaster.textfiles.com/search?formatid=lotus123SQZCompressed) | Lotus 1-2-3 SQZ! Compressed | .wq! | 
-[other/lotsApproachView](https://discmaster.textfiles.com/search?formatid=lotsApproachView) | Lotus Approach View | .vew | 
+[other/lotusApproachDatabaseIndex](https://discmaster.textfiles.com/search?formatid=lotusApproachDatabaseIndex) | Lotus Approach Database index | .adx | 
+[other/lotusApproachView](https://discmaster.textfiles.com/search?formatid=lotusApproachView) | Lotus Approach View | .vew | 
 [other/lotusFreelancePresentation](https://discmaster.textfiles.com/search?formatid=lotusFreelancePresentation) | Lotus Freelance Presentation | .prz | 
 [other/lotusMagellanViewer](https://discmaster.textfiles.com/search?formatid=lotusMagellanViewer) | Lotus Magellan Viewer | .vw2 | 
 [other/luaBytecode](https://discmaster.textfiles.com/search?formatid=luaBytecode) | Lua bytecode |  | 
@@ -883,6 +889,7 @@ Family/Format | Name | Extensions | Notes
 [other/mcAfeeVShieldData](https://discmaster.textfiles.com/search?formatid=mcAfeeVShieldData) | McAfee VShield data | .dat | 
 [other/mdiffPatchFile](https://discmaster.textfiles.com/search?formatid=mdiffPatchFile) | MDIFF Patch File | .mdf | 
 [other/mealMasterPrinterDefinition](https://discmaster.textfiles.com/search?formatid=mealMasterPrinterDefinition) | Meal-Master Printer definition | .mmp | 
+[other/mechWarrior2MissionData](https://discmaster.textfiles.com/search?formatid=mechWarrior2MissionData) | MechWarrior 2 mission data | .bwd | 
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?formatid=mediaDescriptorFile) | Media Descriptor File | .mds | 
 [other/megaPaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDriver) | MegaPaint Printer Driver | .trb | 
 [other/megaZeuxBoard](https://discmaster.textfiles.com/search?formatid=megaZeuxBoard) | MegaZeux Board | .mzb | 
@@ -951,6 +958,7 @@ Family/Format | Name | Extensions | Notes
 [other/oberonSymbol](https://discmaster.textfiles.com/search?formatid=oberonSymbol) | Oberon Symbol | .sym | 
 [other/ohrrpgceGame](https://discmaster.textfiles.com/search?formatid=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?formatid=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
+[other/originSystemsIFFPalette](https://discmaster.textfiles.com/search?formatid=originSystemsIFFPalette) | ORIGIN Systems IFF palette | .iff | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?formatid=os2DLL) | OS/2 Dynamic Link Library | .dll | 
 [other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?formatid=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
@@ -1143,6 +1151,7 @@ Family/Format | Name | Extensions | Notes
 [other/videoPadProject](https://discmaster.textfiles.com/search?formatid=videoPadProject) | VideoPad Project | .vpj | 
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 [other/virToolsFiles](https://discmaster.textfiles.com/search?formatid=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
+[other/virtualPascalUnit](https://discmaster.textfiles.com/search?formatid=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?formatid=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
@@ -1167,6 +1176,7 @@ Family/Format | Name | Extensions | Notes
 [other/windowsShimDatabase](https://discmaster.textfiles.com/search?formatid=windowsShimDatabase) | Windows Shim Database | .sdb | 
 [other/windowsShortcut](https://discmaster.textfiles.com/search?formatid=windowsShortcut) | Windows Shortcut | .lnk | 
 [other/windowsTerminalConfiguration](https://discmaster.textfiles.com/search?formatid=windowsTerminalConfiguration) | Windows Terminal Configuration | .trm | 
+[other/winStormStormInfo](https://discmaster.textfiles.com/search?formatid=winStormStormInfo) | WinStorm Storm info | .sto | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?formatid=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
 [other/wordPerfectDictionary](https://discmaster.textfiles.com/search?formatid=wordPerfectDictionary) | WordPerfect Disctionary | .lex .spn | 
 [other/wordPerfectDisplayResource](https://discmaster.textfiles.com/search?formatid=wordPerfectDisplayResource) | WordPerfect Display Resource | .drs | 
@@ -1189,6 +1199,7 @@ Family/Format | Name | Extensions | Notes
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
 [other/xCADOverlay](https://discmaster.textfiles.com/search?formatid=xCADOverlay) | X-CAD Overlay |  | 
 [other/xpcomTypeLibrary](https://discmaster.textfiles.com/search?formatid=xpcomTypeLibrary) | XPCOM Type Library | .xpt | 
+[other/yabBaseballGameData](https://discmaster.textfiles.com/search?formatid=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?formatid=yafaCompressionOptions) | YAFA Compression Options |  | 
 [other/yamahaSysExPresetCommand](https://discmaster.textfiles.com/search?formatid=yamahaSysExPresetCommand) | Yamaha SysEx preset command | .syx .dx7 | 
 [other/zInstallFormsDialogs](https://discmaster.textfiles.com/search?formatid=zInstallFormsDialogs) | Z/Install forms/Dialogs | .vvd | 

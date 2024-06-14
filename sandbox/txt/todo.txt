@@ -1,8 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Once wiki fixed:
-	http://fileformats.archiveteam.org/wiki/PACKER_(ImagiSOFT)		archive/packerPFT
 
 
 /---------------\

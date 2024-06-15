@@ -16,6 +16,9 @@ export class smartDraw6 extends Program
 				return WinActive("SmartDraw Professional - [${path.basename(r.inFile())}]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			Send("!f")
 			Send("e")

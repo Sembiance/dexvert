@@ -15,6 +15,10 @@ export class keyCADDeluxe3D extends Program
 				return WinActive("KeyCAD Deluxe 3D - ", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
+			
 			WindowFailure("Open File", "Error loading", 2, "{ENTER}")
 			Send("!f")
 			Send("E{ENTER}")

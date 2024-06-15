@@ -1,0 +1,255 @@
+The information in this document may, or may not, be correct, but is given
+as a bonus. Someone might find it useful. 1993/01/11
+-------------------------------------------------------------------------------
+
+DOSversion:	3.3 and onwards,
+		2.0 to 3.2 will work as long as you use UPPERCASE in all
+		filenames and don't use SFX/SFXjr.
+
+
+Memory: 	For packing;	÷400 kB, but more than 380 kB
+		Decoding;	÷96 kB
+
+		These figures does not include SQZ itself which requires
+		÷50 kB and filenames which call for their length + 5 bytes
+		in overhead (450/420 : 150).
+
+		These figures can be shrinked at cost of speed.
+
+		It's a real memory eater, ain't it;-)
+
+
+Others: 	Given filespec may result in a maximum of 4096 filenames
+		per run. The archive in itself will handle any number
+		of files.
+
+		A maximum of 64 filespec's for files to skip.
+
+		A maximum of 16 extension's for files to copy.
+
+
+-------------------------------------------------------------------------------
+Archive header:
+    offset  0..4:   Id: 	HLSQZ	    (072d 076d 083d 081d 090d)
+	    5:	    Version:	1	    (049d)
+	    6:	    OS:     76543210
+			    xxxxx000	0   PC-DOS
+			    xxxxx001	1   OS/2
+			    xxxxx010	2   MVS
+			    xxxxx011	3   HPSF(OS/2)
+			    xxxxx100	4   Amiga
+			    xxxxx101	5   Macintosh
+			    xxxxx110	6   *nix
+			    xxxxx111	7   Future use
+			    XXXXXxxx	    Future use
+	    7:	    Flag    76543210
+			    xxxxxxxX	    byte order
+				   0	    Little Endian, Motorola order
+				   1	    Big Endian, Intel order
+			    xxxxxxXx	    Format for Data and time
+				  0	    UNIX format. Number of seconds
+					    since 1:st of january 1970.
+				  1	    DOS format for Date and Time
+					    in file: E8631E19.
+					    Decoded:	1992/08/30 12.31.32
+					    MSB 		    LSB
+					    19	    1E	    63	    E8
+					    76543210765432107654321076543210
+					    00011001000111100110001111101000
+					    YYYYYYYMMMMDDDDDHHHHHMMMMMM22222
+					    12	   8   30   12	 31    16
+					    +=1980		       *=2
+					    1992   08  30   12	 31    32
+			    xxxxx1xx	    Security Envelope
+					    No modifications allowed!
+					    If you do any thing, you'll ruin it
+			    xxxx1xxx	    Whole archive encrypted! Keep OUT
+					    When I say whole, I mean WHOLE.
+					    There's nothing that you can do,
+					    just stay out of trouble.
+					    This archive can't be used until
+					    it's decrypted.
+			    xxx1xxxx	    Unified data
+			    XXXxxxxx	    Future use
+
+
+-------------------------------------------------------------------------------
+File header:
+
+    offset  Size	Comment
+    0	    1		Header size and type
+			0	->  End of archive
+			1..18	Se below (Extra data)
+			19..	->  normal file header
+			if normal file
+    1	    1		Header algebraic sum  & 0FFh
+    0	    1:76543210
+	      xxxxXXXX	Method 0..4(15)
+	      XXXXxxxx	Future use
+    1	    4		Compressed size
+    5	    4		Original size
+    9	    4		Last DateTime
+    13	    1		Attributes
+    14	    4		CRC
+    18..    (size-18)	filename, w/o \0.
+
+
+-------------------------------------------------------------------------------
+How to read a SQZ-archive
+
+Do
+If  > 18. Normal file
+    Read HeaderSum(1 byte)
+    Read size bytes
+    Calculate headersum
+	{short i; unsigned short s = 0U;
+	for(i = 0; i < size; i++)
+	    s += header[i];
+	if(headersum != (unsigned char)s) WRONG HEADERSUM
+    header[size] = '\0';    // just to makes things easier to handle, ie.
+			    // zero terminate filename
+
+If  == 0. End of archive. Terminate
+
+If  <= 18. Extra data, se below
+    switch
+	case 1: COMMENT
+	case 2: PASSWORD
+	case 3: POSTFIX
+	case 4: SECURITY ENVELOPE
+	case 5: VOLUME LABEL
+	case 6: DIRECTORY
+	case 7: COMMENT, version 2
+	else	Read one word and then skip that many bytes.
+    end
+    Read one word (size)
+    skip that many bytes, if you don't know how to handle it.
+
+while not End of archive
+
+
+-------------------------------------------------------------------------------
+Extra data
+
+    00d     END_OF_ARC: Well, what's there to say?
+
+    01d     COMMENT: Created by SQZ 1.08.2
+	0   2		Number of bytes in comment
+			Uncompressed size = this field - 7
+	2   2		Number of bytes compressed
+	4   1:76543210
+	      xxxxXXXX	Method 0..4(15)
+	      XXXXxxxx	Future use
+	5   4		CRC
+	9   size-7	Comment
+
+
+    02d     PASSWORD:
+	0   2		n
+	2   1	76543210
+		xxxxxxx1    Public
+		xxxxxx1x    Not public
+		xxxxx1xx    Signature included
+		XXXXXxxx    Future use
+	3   n-1
+	    **************************************************************
+	    I'm not done thinking about this one yet, so I'll be in touch.
+	    I've been thinking and... see ya l'ter
+	    **************************************************************
+
+    03d     POSTFIX:	This code are among the last one in the archive (<256)
+	0   2		5
+	2   5		HLSQZ
+			Postfix are automatically added when closing a modified
+			archive, but, who knows, it might change in the future
+			so please check the last 256 bytes, just not the last
+			nine ones, 'cause who knows, someone might have been
+			using XModem...
+
+    04d     SECURITY ENVELOPE:
+	0   2		n
+	2   2		SE version (major.minor.test.mask)0010
+		76543210
+		testmask
+		majomino
+	2   2		SE revision.
+	6   n-2 	None of your business
+
+    05d     VOLUME LABEL
+	0   2		Number of bytes
+	2   4		Time for creation of volume
+	6   1		Attribute, bit 3 always set (if DOS)
+	7   4		Serial number, if available, otherwise 00000000h
+       11   n		Label
+			Number of bytes - 9 -> length of label.
+
+    06d     DIRECTORY
+	0   2		Number of bytes
+	2   1		Algebraic sum & 0xFF
+	3   4		Time for creation of directory
+	7   1		Attribute
+	8   n		Path
+			Number of bytes - 6 --> length of path
+
+    07d     COMMENT: Created by SQZ 1.08.3 and later
+	0   2		Number of bytes in field
+			Compressed size = this field - 7
+	2   2		Number of uncompressed bytes
+	4   1:76543210
+	      xxxxXXXX	Method 0..4(15)
+	      XXXXxxxx	Future use
+	5   4		CRC
+	9   size-7	Comment
+
+    ??d     OTHERWISE:
+	0   2		Number of bytes to skip
+
+
+-------------------------------------------------------------------------------
+Errorlevels
+#define EC_NO		    0	    No error
+#define EC_NOMEM	    1	    Out of memory
+#define EC_WRITE_ARC	    2	    Error writing to archive file
+#define EC_WRITE_TMP	    3	    Error writing to temp archive file
+#define EC_WRITE_OUT	    4	    Error writing to extracted file
+#define EC_READ_ARC	    5	    Error reading from archive file
+#define EC_READ_INP	    6	    Error reading from file to archive
+#define EC_OPEN_ARC	    7	    Error opening archive file
+#define EC_OPEN_INP	    8	    Error opening file to archive
+#define EC_OPEN_SFX	    9	    Error opening SFX/SFXjr.exe
+#define EC_OPEN_TMP	    10	    Error opening temp (archive) file
+#define EC_CREATE_ARC	    11	    Error creating archive file
+#define EC_CREATE_TMP	    12	    Error creating temp archive file
+#define EC_CREATE_OUT	    13	    Error creating file to extract
+#define EC_CREATE_SFX	    14	    Error creating archive file EXE
+#define EC_CLOSE_ARC	    15	    Error closing archive file
+#define EC_CLOSE_TMP	    16	    Error closing temp archive file
+#define EC_CLOSE_INP	    17	    Error closing file to archive
+#define EC_CLOSE_OUT	    18	    Error closing extracted file
+#define EC_HEADER_SUM	    19	    Archive corrupted
+#define EC_CORRUPT_HDR	    20	    Archive corrupted
+#define EC_2_MANY_EXT	    21	    Too many extensions to copy (<= 16)
+#define EC_UNKNOWN_SWITCH   22	    Unknown switch given
+#define EC_ILL_COMB_SW	    23	    Illegal combination of switches, eg.
+				    include subdirectories and strip path
+#define EC_CBREAK	    24	    User C-Break
+#define EC_UNKNOWN	    25	    Unknown type of archive file
+#define EC_NOT_ON_SFX	    26	    Those commands not allowed on SFX
+#define EC_NOT_MS_DOS	    27	    Archive file was not for MS-DOS
+#define EC_CRC		    28	    CRC-errors in Extracting/Testing
+#define EC_SQZ_CORRUPT	    29	    Someone has tangled with SQZ,
+				    look out for virii or a hacker.
+#define EC_CORRUPT_ARC	    30	    Corrupted archive file.
+#define EC_OPS_SEC_ARC	    31	    Can't handle this SECURE ARCHIVE
+				    Mostly due to version/revision
+#define EC_SEC_ARC	    32	    Secured Archive, modifications not allowed
+#define EC_NOTHING_2_DO    128	    This one are not considered to be an error!
+				    It's given when no files matches, eg.
+				    SQZ E TST *.PCK and there's no *.PCK to
+				    extract.
+#define EC_NOT_REMOVED	   129	    Couldn't MOVE files.
+
+	    I'm sorry for those of you who check's for != 0, you'll
+	    now have to check for ((ret_code > 0 && ret_code < 0x80))
+	    to catch any errors, again, I'm sorry.
+

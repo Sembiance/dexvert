@@ -29,6 +29,10 @@ export class cinema4D82 extends Program
 				return WinActive("CINEMA 4D - [${path.basename(r.inFile())}]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*30})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
+			
 			Sleep(7000)	; big models like daylight.c4d take a while to load but haven't found a way to detect when it's done loading
 			MouseClick("left", 16, 29, 1, 10)
 			MouseClick("left", 40, 252, 1, 10)

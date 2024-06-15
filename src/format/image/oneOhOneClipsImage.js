@@ -17,5 +17,6 @@ export class oneOhOneClipsImage extends Format
 	ext            = [".img"];
 	forbidExtMatch = true;
 	magic          = [/^101 Clips Image$/];
+	weakMagic      = true;
 	converters     = ["callFunction[formatid:image/oneOhOneClipsImage][functionKey:_forceFormatByte] -> konvertor"];
 }

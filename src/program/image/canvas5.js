@@ -30,6 +30,9 @@ export class canvas5 extends Program
 			EndFunc
 
 			$mainWindow = CallUntil("PreOpenWindows", ${xu.MINUTE})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			Sleep(500)
 			SendSlow("^+s")

@@ -32,12 +32,12 @@ export class SID extends Program
 
 				; Wait for the the progress bar to fill up
 				Local $pixelColor
-				Local $timer = TimerInit()
+				Local $startTime = GetTime()
 				Do
 					$pixelColor = PixelGetColor(1015, 729, $winHandle)
 					If Hex($pixelColor) == "00000080" Then ExitLoop
 					Sleep(50)
-				Until TimerDiff($timer) > ${xu.MINUTE*2}
+				Until TimeDiff($startTime) > ${xu.MINUTE*2}
 
 				Sleep(${xu.SECOND*10})
 

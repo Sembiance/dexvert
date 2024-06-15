@@ -1,0 +1,6 @@
+SQZ is a file-compresser/archiver.
+creating small archives with a good 
+rate of compression.
+32-bit CRC both on files and SQZ itself. 
+New MOVE command. Easy to use; 
+No extraction to COM0..9/CON/AUX.

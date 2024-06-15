@@ -27,6 +27,10 @@ export class rayDreamDesignerStudio55 extends Program
 				return WinActive("Ray Dream Studio", "")
 			EndFunc
 			$mainWindow = CallUntil("PreOpenWindows", ${xu.SECOND*15})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
+			
 			Sleep(3000)
 			Send("!f")
 			Send("a")

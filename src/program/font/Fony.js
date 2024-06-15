@@ -15,6 +15,9 @@ export class Fony extends Program
 				return WinActive("[CLASS:TFMain]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*15})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			SendSlow("!fe{DOWN}{ENTER}")
 

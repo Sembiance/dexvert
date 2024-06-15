@@ -20,6 +20,9 @@ export class graphicWorkshopProfessional extends Program
 				return WinActive("[CLASS:GraphicWorkshopProfessionalPicture]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			Sleep(1000)
 			SendSlow("!pa")

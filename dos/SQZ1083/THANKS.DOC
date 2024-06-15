@@ -1,0 +1,31 @@
+I would like to thank the following persons for their advice, both good
+and bad, and their help in other ways:
+
+    Jonny Bergdahl  for taking his time to give me a reason to implement
+		    MOVE, and an error in SFX.
+
+    Hakan Andersson for noting that the syntax used by GEcho was not the
+		    same as that used by SQZ.
+
+    Lars Ridstrom   for giving me information about things where my know-
+		    ledge was, to be kind, nonexisting.
+		    Pointing to the possibility of disaster if one
+		    extracts to COM1/AUX and so forth.
+
+    Rob Van.hoeven  for taking his time, pointing out some buglets and
+		    supporting it in his products.
+
+    My wife	    for not giving me up and throwing my computer though
+		    the window...
+		    (heard from the left :"Yet...")
+
+    Thomas Petersson for being the one he is
+
+    Andreas Birgersson for information on Security Envelopes.
+
+    Patrik Sjoberg  for the report of a bugg if running in a DOS-box under
+		    OS/2 and extracting to a server. Pointing out that
+		    there might be more than 4096 files on a disc and that
+		    sometimes it's useful to include the drive in the name.
+---<end of "THANKS.DOC">---
+

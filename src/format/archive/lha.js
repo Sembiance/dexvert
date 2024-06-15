@@ -11,7 +11,7 @@ export class lha extends Format
 	safeExt = dexState => (dexState.hasMagics("LHA self-extracting") ? ".exe" : ".lha");
 
 	magic = ["LHARC/LZARK compressed archive", /^LHa .*archive data/, "LHA File Format", "LHARK compressed archive", "LHA self-extracting", "LHarc self-extracting archive", "LZH Archiv gefunden",
-		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^Self-extracting LZH$/, /^LZH$/, /^fmt\/626( |$)/];
+		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, /^fmt\/626( |$)/];
 	
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark
 	// Luckilly 'lha' fails on these, so then I try lhark specific extractor

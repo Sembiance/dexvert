@@ -19,6 +19,7 @@ export class paintDotNet extends Program
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
+			
 			MouseClick("left", 810, 40)	; Window doesn't always "activate" so we click it
 			Send("!f")
 			Send("a")

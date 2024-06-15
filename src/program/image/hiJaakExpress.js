@@ -15,6 +15,9 @@ export class hiJaakExpress extends Program
 				return WinActive("HiJaak Convert", "Save as")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 			
 			Send("c:\\out\\out.bmp{ENTER}")
 			WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*4}, ${xu.SECOND*30})

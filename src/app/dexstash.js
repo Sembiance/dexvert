@@ -21,6 +21,9 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog("info");
 
+if(!argv.familyFormat.includes("/"))
+	Deno.exit(xlog.error`Invalid family/format: ${argv.familyFormat}`);
+
 const stashDirPath = path.join(import.meta.dirname, "..", "..", "test", "sample", argv.familyFormat);
 if(!await fileUtil.exists(stashDirPath))
 {

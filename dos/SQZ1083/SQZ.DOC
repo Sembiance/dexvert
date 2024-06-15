@@ -1,0 +1,1106 @@
+	      SQZ - Squeeze v1.08.3 : Jonas I Hammarberg
+
+
+
+
+
+
+			  SQZ -- Squeeze It!
+
+
+			    version 1.08.3
+
+
+
+
+
+
+
+
+
+      By the way, I'm sorry to have to say that my english is rather poor,
+
+	   so please don't be too upset by my misuse of the language that
+
+		   Shakespeare used with such elegance...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Content.
+1. Contentº
+ÍÍÍÍÍÍÍÍÍÍ¼
+
+     1. Content. . . . . . . . . . . . . . . . . . . . . . . . .    1
+     2. Overview . . . . . . . . . . . . . . . . . . . . . . . .    2
+       2.1. What's SQZ?. . . . . . . . . . . . . . . . . . . . .    2
+       2.2. Why SQZ? . . . . . . . . . . . . . . . . . . . . . .    2
+     3. Getting started. . . . . . . . . . . . . . . . . . . . .    3
+       3.1. To pack a directory and its subdirectories . . . . .    3
+       3.2. To pack a directory and expand path. . . . . . . . .    3
+       3.3. To recreate an archive in a subdirectory . . . . . .    3
+       3.4. To look inside an archive. . . . . . . . . . . . . .    4
+       3.5. To look for specific files . . . . . . . . . . . . .    4
+       3.6. Check that the files are ok. . . . . . . . . . . . .    4
+     4. Commands . . . . . . . . . . . . . . . . . . . . . . . .    5
+       4.1. A - Add files to an archive. . . . . . . . . . . . .    5
+       4.2. U - Updates files in an archive. . . . . . . . . . .    5
+       4.3. D - Remove files from archive. . . . . . . . . . . .    5
+       4.4. S - Create SFX . . . . . . . . . . . . . . . . . . .    5
+       4.5. L/V - List content of archive. . . . . . . . . . . .    5
+       4.6. T - Test the content of archive. . . . . . . . . . .    5
+       4.7. E/X - Recreate files from archive. . . . . . . . . .    6
+       4.8. P - Display file . . . . . . . . . . . . . . . . . .    6
+       4.9. C - Comment archive. . . . . . . . . . . . . . . . .    6
+     5. Switches . . . . . . . . . . . . . . . . . . . . . . . .    7
+       5.1. /s Include subdirectory. . . . . . . . . . . . . . .    7
+       5.2. /p How to store path . . . . . . . . . . . . . . . .    7
+       5.3. /d Date selection. . . . . . . . . . . . . . . . . .    7
+       5.4. /a File attributes during selection. . . . . . . . .    8
+       5.5. /o Overwrite when unpacking. . . . . . . . . . . . .    8
+       5.6. /x Files to exclude during packing . . . . . . . . .    8
+       5.7. /c Copy versus squeezing . . . . . . . . . . . . . .    8
+       5.8. /q Speed versus squeezing. . . . . . . . . . . . . .    9
+       5.9. /m Method for squeezing. . . . . . . . . . . . . . .    9
+       5.10. /z Miscellaneous. . . . . . . . . . . . . . . . . .    9
+       5.11. @ File-list . . . . . . . . . . . . . . . . . . . .   10
+     6. Future plans . . . . . . . . . . . . . . . . . . . . . .   11
+     7. BAT-files. . . . . . . . . . . . . . . . . . . . . . . .   12
+       7.1. U.BAT. . . . . . . . . . . . . . . . . . . . . . . .   12
+       7.2. Q.BAT/QD.BAT . . . . . . . . . . . . . . . . . . . .   12
+       7.3. X.BAT. . . . . . . . . . . . . . . . . . . . . . . .   12
+     8. Other programs . . . . . . . . . . . . . . . . . . . . .   13
+       8.1. Overview . . . . . . . . . . . . . . . . . . . . . .   13
+       8.2. GUS - General Unpack Shell . . . . . . . . . . . . .   13
+       8.3. MTA - Make Them Anything . . . . . . . . . . . . . .   14
+       8.4. VA - View Archive. . . . . . . . . . . . . . . . . .   14
+       8.5. SHROOM - Shell room. . . . . . . . . . . . . . . . .   15
+       8.6. SPAZ - Smart Pak, Arc and Zoo shell. . . . . . . . .   15
+     9. Closing remark . . . . . . . . . . . . . . . . . . . . .   16
+       9.1. Registration . . . . . . . . . . . . . . . . . . . .   16
+       9.2. Licence. . . . . . . . . . . . . . . . . . . . . . .   16
+       9.3. Errors . . . . . . . . . . . . . . . . . . . . . . .   16
+       9.4. Disclaimer . . . . . . . . . . . . . . . . . . . . .   16
+       9.5. Contact. . . . . . . . . . . . . . . . . . . . . . .   16
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<1>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Overview.
+2. Overviewº
+ÍÍÍÍÍÍÍÍÍÍÍ¼
+
+2.1. What's SQZ?
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    Squeeze is a combined file compresser and archiver, like PKZip/LHArc etc.
+
+2.2. Why SQZ?
+ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+    But why should you use SQZ instead? ....
+
+	* Better compression ratio.
+
+	* Supports directories.
+
+	* Support of ™ and other obscure chars.
+
+	* A much smaller archive-file.
+
+	* (the chance for a coffee-break during packing) (not as long).
+
+	* I, the developer, live in the country of "Honour and Heros".
+	  (Check out Donald Duck in the Andes (* == egg...)
+
+	* Payment in SEK or US$, but preferable SEK.
+
+	* Doesn't support MOVE.
+	  (ehh, hum, sorry, I had to include it due to reguests)
+
+	* Versions (will be) developed for
+
+	    + Amiga
+	    + VAX VMS
+	    + UNIX / Coherent / *NIX / XENIX
+	    + MacIntosh
+	    + MS Windows
+	    + OS/2 HPSF
+
+	* Prohibits extraction to AUX, CON and COM0..9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<2>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Getting started.
+3. Getting startedº
+ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+3.1. To pack a directory and its subdirectories
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	Move up a level, i.e. so that the directory will become subdirectory.
+
+	SQZ A directory /SP1 directory\*.*
+
+
+	Ex: To pack  \DATA\AUTOGRAF
+
+	    + CD \DATA
+	    + SQZ A AUTOGRAF /SP1 AUTOGRAF\*.*
+
+
+	To recreate:
+
+
+	SQZ X directory directory\
+
+
+	Ex: Unpack AUTOGRAF.SQZ
+
+	    + CD \DATA
+	    + SQZ X AUTOGRAF AUTOGRAF\
+
+
+3.2. To pack a directory and expand path
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ A archive /SP2 \path\*.*
+
+
+	Ex: Pack \DATA\AUTOGRAF
+
+	    + SQZ A \ARKIV\DATA_AG /SP2 \DATA\AUTOGRAF\*.*
+
+
+	To recreate:
+
+	SQZ X archive
+
+
+	Ex: To unpack \ARKIV\DATA_AG.SQZ
+
+	    + SQZ X \ARKIV\DATA_AG
+
+
+3.3. To recreate an archive in a subdirectory
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ X archive subdirectory\
+
+	Ex: Recreate AUTOGRAF with \DATA\AUTOGRAF\ANNAT as base.
+
+	    + SQZ X AUTOGRAF \DATA\AUTOGRAF\ANNAT\
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<3>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Getting started.
+
+3.4. To look inside an archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ L archive
+
+	Ex:
+	    + SQZ L AUTOGRAF
+	    + SQZ L \ARKIV\DATA_AG
+
+
+3.5. To look for specific files
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ L archive spec1 spec2
+
+	Ex:
+	    + SQZ L AUTOGRAF *.STP *.NLG
+	    + SQZ L \ARKIV\DATA_AG *.?A?
+
+
+3.6. Check that the files are ok
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ T archive
+
+	Ex:
+	    + SQZ T AUTOGRAF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<4>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Commands.
+4. Commandsº
+ÍÍÍÍÍÍÍÍÍÍÍ¼
+
+4.1. A - Add files to an archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ A archive spec
+
+	Adds files to given archive.  If the files already exist they
+	will be overwritten.
+
+	To move files: SQZ AM archive spec
+
+
+4.2. U - Updates files in an archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ U archive spec
+
+	Adds files to the given archive.  If the files already exist
+	they will be overwritten if they have an earlier date.
+
+	To move files: SQZ UM archive spec
+
+
+4.3. D - Remove files from archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	SQZ D archive spec
+
+	Removes given files from archive.
+
+
+4.4. S - Create SFX
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	Sometimes it might be useful to send just one file, and not two.
+	(they might not own SQZ or have an old version or just don't
+	want to give their hard-earned cash to me).  Solution:	Create a
+	SFX (SelF eXtracting archive).	The result will be an EXE-file.
+	When it's executed it will start unpacking itself.  Some
+	commands can be used with SFX, but SFXjr just knows how to
+	unpack.  Both SFX and SFXjr can create directories.
+
+
+4.5. L/V - List content of archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	You can list the contents through L or V.
+	L will give a shorter listing, not including path, whereas V
+	will display the whole path.  LB will give you an even shorter
+	listing, just including date, size and path.
+
+
+4.6. T - Test the content of archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	Sometimes it might be a lousy day when you shouldn't have
+	stepped out of bed and everything goes wrong, eg.  phone lines
+	and floppies.  Therefore you have the possibility to test for
+	errors in your archive, but there's a catch (there always is
+	one!) ...  the CRC-check might pass, unlikely, but...
+
+SQZ.DOK, 1993-01-24		   ---<5>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Commands.
+
+4.7. E/X - Recreate files from archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	You can recreate with path or without.	E ignores stored path
+	information but X will recreate the whole path.  Both understand
+	base-path, i.e.  placing the files in a another directory.
+	Default is current working directory (CWD).
+
+
+4.8. P - Display file
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	Prints a file in the archive to standard output.
+	    - SQZ P archive spec
+
+
+4.9. C - Comment archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+	Gives you the possibility to add a comment describing the content
+	of this specific archive, or just some ads.  The comment will be
+	displayed when Listing/Extracting.
+
+	    - SQZ C archive commentfile     to read from file
+
+	    - SQZ C archive CON 	    to read from stdin
+					    Remember to terminate your
+					    comment with ^Z (ctrl-Z).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<6>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Switches.
+5. Switchesº
+ÍÍÍÍÍÍÍÍÍÍÍ¼
+
+    N.B!    Both '-' and '/' can be used as leading char for switches.
+	    Are '/' used then must '\' be uses as seperator in path, eg:
+		sqz a a /sp1z01 a\*.*
+		sqz a a -sp1z01 a/*.*
+
+    All switches can be grouped together, depending on their arguments.
+
+    Ex: /s /p1 /z0 /z1 /x*.BAK /x*.$$$ -->  /sp1z01x*.BAK /x*.$$$
+
+
+5.1. /s Include subdirectory
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	/s  Include sub-directories during file scanning.  Directories
+	    will be included even if the given files-specification
+	    doesn't give any match.
+
+	/S  Will store the name and attribute of sub-directories in the
+	    archive.  Can be used to recreate empty sub-directories.
+
+
+5.2. /p How to store path
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	/p  0 - As given
+		DATA\PAS\T.INF	-->	DATA\PAS\T.INF
+
+	    1 - Skip first directory
+		DATA\PAS\T.INF	-->	PAS\T.INF
+		Useful if you wish to store a complete directory with
+		sub-directories, while the base directory won't be saved
+		until you have some more bytes ($crooge).
+
+		The example would be called DATA.sqz containing
+		PAS\T.INF instead of XXXXX.SQZ containing
+		DATA\PAS\T.INF.
+
+	    2 - Expand from root
+		DATA\PAS\T.INF	-->	\DIV\DATA\PAS\T.INF
+
+	    3 - Only name, no path.
+		DATA\PAS\T.INF	-->	T.INF
+
+
+5.3. /d Date selection
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	da  Date after YYMMDDHHMMSS
+	    From YYMMDDHHMMSS and onwards.
+	    If not completely specified zeros will be appended.
+		920402 --> 920402000000
+	db  Date before YYMMDDHHMMSS
+	    Before the specified date, otherwise as above.
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<7>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Switches.
+
+5.4. /a File attributes during selection
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	a   Archive flag - set by DOS when a file is written to.  This
+	    flag gives you a easy way just to include those files that
+	    have been changed since last pack/back-up.
+
+	a1  Include only those with A flag set, i.e. changed ones.
+	a?  Don't care about its state, include it either-way.
+	a0  Include only those with A flag not set, i.e. unchanged ones.
+	a 1 Force it high after packing.
+	a = Leave it unchanged in its previous state.
+	a 0 Drop it, so that it will be raised when next updated.
+
+	a10 Include files with flag high and drop it afterwards.
+	a?0 Ignore when including, but clear it afterwards.
+
+
+5.5. /o Overwrite when unpacking
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	o   Overwrite
+	    Overwrite files during unpacking.
+	o0  Only older files.
+	o1  Always overwrite.
+	o2  Prompt first.
+
+
+5.6. /x Files to exclude during packing
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	x   Exclude
+	    Don't include the following file(s).
+
+	    /xGAMMAL.FIL /x*.BAK
+
+	    Don't include GAMMAL.FIL, or any file with the extension .BAK
+
+	    Handles file redirection, i.e. @fil
+
+
+5.7. /c Copy versus squeezing
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	c   Copy files with the following extensions.  Sometimes the
+	    result is not worth the time it takes to squeeze files that
+	    already are compressed.  eeh...  I just wish to state that
+	    SQZ will be able to squeeze some more bytes from the most
+	    other archives.
+
+	    As default the following files will be copied;
+		.ARC .ARJ .LZH .PAK .SQZ .ZIP .ZOO
+
+	    If this option is used you must include all extensions, i.e.
+	    it will not add to its existing list, just replace it.
+
+	    /c.GIF  -> Copy only *.GIF, but squeeze *.ARC etc.
+
+	    Don't know how to handle file redirection.
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<8>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Switches.
+
+5.8. /q Speed versus squeezing
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	q   Speed:  The higher speed the less compressing will occur
+	    (mostly) /q0../q9 och /qì (ASCII 236d)
+
+	    /q0 are slower than /q9 but will compress better.
+
+	    Default: /q5.
+	    N.B. /qì WILL take it's time...           Zzzzzzzzz....
+	    To gain even higher speed use the uppercase version, i.e.
+	    /Q5 are faster than /q5.
+
+	    Fast:	    SQZ A ARCHIVE FILES
+	    Faster:	    SQZ A /Q5 ARCHIVE FILES
+	    Even faster:    SQZ A /q9 ARCHIVE FILES
+	    Fastest:	    SQZ A /Q9 ARCHIVE FILES
+
+
+5.9. /m Method for squeezing
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	m   0	-   Copy, see /c above
+	    1	-   Squeezing using method 1
+	    2	-   "-              method 2, often better, but...
+	    3	-   Even better...
+	    4	-   Even better yet, mostly...
+
+	    Default: /m4
+
+
+5.10. /z Miscellaneous
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	z   0	-   How long time did it take?
+	    1	-   Only total.
+	    2	-   Use SFXJR.exe, not SFX.exe
+	    3	-   Better compression ratio for docs.
+	    4	-   Move files. Combine with command Add and Update
+	    5	-   Brief listing.
+
+	    Can be combined: /z0 /z1 /z2 == /z0z1z2 == z012
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<9>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Switches.
+
+5.11. @ File-list
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	@   file-name
+
+	    The files to pack are often the same and therefor are there
+	    the possibility of creating a "list of files".  This file
+	    includes all files, one per row.
+
+
+	    SQZ A test t1.c t2.c ef.c k*.c  <--> SQZ test @fil.lst
+
+						if the content is
+
+						    t1.c
+						    t2.c
+						    ef.c
+						    k*.c
+
+	    List of file can be used whenever a file-specification can
+	    be given, but it can not be used as input for
+	    archive-specification.
+
+	    SQZ A test @fil.lst 		ok
+	    SQZ A /xskip.lst test @fil.lst	ok
+	    SQZ L @arkiv.lst *.c		Erroneous.
+	    SQZ L * *.c 			ok, list all *.c in all
+						archives that exists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<10>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Future plans.
+6. Future plansº
+ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+    * More assembler
+
+    * Shrink SFX/SFXjr (22 and 16kB are just too MUCH)
+
+    * Just don't return to DOS when there's an error.
+
+    * Change Huffman encoding for another encoding method.
+      This other one is a little more effective but needs more gas.
+
+    * Support more operating-/file-systems
+
+    * For the moment each SQZ only supports its native format, so why
+      not an extended SQZ that understands all of them?
+
+    * Specific method for different types of files.
+      Packing voice/noise is different from packing graphics etc.
+
+    * Exploit 286/386/486(/586), not just 8086.
+
+    * Improved documentation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<11>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : BAT-files.
+7. BAT-filesº
+ÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+7.1. U.BAT
+ÄÄÄÄÄÄÄÄÄÄ
+	    Save new files, should be run once each day.  All new
+	    files/changed ones in given directory will be saved in
+	    REV\YYMMDD, including sub-directories.  The archive will be
+	    call by the name of the given directory.
+
+    Ex.:    If DATE=920508 and you enter U SQZ and are in \DEV\C then
+	    \DEV\C\REV\920508\SQZ.SQZ will be created.
+
+    Needs:  Environment variable DATE must exist.  It gives the date of
+	    the files to include and also in which REV directory the
+	    archive will be placed.
+
+    Result: If no REV directory exists it will be created.  If no
+	    %DATE% directory exists it will be created.  The archive
+	    will be placed in this directory.
+
+	I've written a small program which takes the date and places it
+	in the environment variable DATE.  Source and exe included.
+	N.B!  The program uses the method given by ENVEDT from
+	"Undocumented DOS" Schulman et al.  As some composer said:
+
+	®Mediocre composers borrow ...	 Great composers steal¯
+
+
+7.2. Q.BAT/QD.BAT
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	Will pack a whole directory tree and create an archive with the
+	same name.
+
+	QD.bat tests the archive before removing the directory.
+	Removing of the directories are accomplished with the usage of
+	Norton Utilities NCD.  That command can of course be changed.
+
+7.3. X.BAT
+ÄÄÄÄÄÄÄÄÄÄ
+	Unpacks archives created with Q.BAT/QD.BAT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<12>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Other programs.
+8. Other programsº
+ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+8.1. Overview
+ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    All programs mentioned below either supports SQZ, or, are such a
+    nice utitlites that I included them anyway.
+
+    SHROOM are for those of you who often starts a program and shells
+    out to DOS, just to run into the memory wall. Instead of starting
+    your program as normal, let SHROOM do it. See below.
+
+    Ex: HLE SQZ.C SQZ.H    -->	 SHROOM HLE SQZ.C SQZ.H
+
+
+    GUS and SPAZ are replacements for your unpacker, i.e. instead of
+    having to enter "SQZ X ARCHIVE1" for .SQZ and "LHA X ARCHIVE2" for
+    .LZH, you'll just enter "GUS ARCHIVE1"/"GUS ARCHIVE2" or "SPAX
+    ARCHIVE1"/"SPAZ ARCHIVE2". Which one to use?. I uses none of them,
+    but then I'm not the normal user. GUS is ShareWare from Holland,
+    SPAZ is FreeWare from U.S of A.
+
+
+    MTA is a translator from one archive format to another one. It will
+    handle most of different formats, including GIF's.
+    MTA are most useful for BBS's and they who have all different
+    formats but only wishes to use one, SQZ for an example.
+
+
+    VA are a replacement for DIR. It'll let you peek into a archive as
+    easy as that. Understands most of the formats used.
+
+
+8.2. GUS - General Unpack Shell
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    A substitute for your unarchiver when there are files compressed
+    with different archives and presents a common method of handling
+    them.
+
+  Ûßßß Û  Û Ûßßß  General Unpack Shell ³ Copyright (C) 1992 by TRI-SYSTEMS co.
+  Û ßÛ Û  Û ßßßÛ		       ³       - ALL RIGHTS RESERVED -
+  ÛÜÜÛ ÛÜÜÛ ÜÜÜÛ     version  1.61     ³     Written by Johan Zwiekhorst
+  ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+
+   Syntax:  GUS ®compressed_filespec¯ [filespec(s)] [target_path] [switch(es)]
+      (Entries closed within [] are optional, those within ® ¯ are mandatory.)
+  ®compressed_filespec¯ ::=  specifies where to find the compressed file
+			    (ARC/ARC+/ARJ/DWC/HPK/HYP/LZH
+			    /PAK/SQZ/ZIP/ZOO supported)
+     [filespec(s)]     ::=  specifies which files should be unpacked
+     [target_path]     ::=  specifies where to store unpacked files
+     [switch(es)]      ::=  specifies one or more of the following switches:
+			    /I	   : Identify only, don't shell out
+			    /M	   : unpack Mailarchives (use path for c'file)
+			    /N	   : do Not use embedded paths while unpacking
+			    /P	   : Print file(s) on standard output device
+			    /Q	   : Quiet mode, suppresses shell output
+			    /R	   : Replace existing files
+			    /T	   : Test archive integrity
+			    /Gpswd : supply password for Garbled file
+
+
+
+SQZ.DOK, 1993-01-24		   ---<13>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Other programs.
+
+8.3. MTA - Make Them Anything
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    MTA is a conversion utility to convert almost any archive and/or GIF
+    to another format.	It contains special support for BBS's, exits,
+    doors and such.  Also you can check for virus inside the archives
+    while you convert.	Add-on utilities included !!  15.20 is a major
+    release with support for many new things !
+
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ 		ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+º MTA	    Make Them Anything			³    D.I.S.P.	  ³ÄÄÄÄ¿
+º	    Convert Compressed			³		  ³°°°°³
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ 		³		  ³°°°°³
+º (c) 1992  Robert W.van Hoeven 		³ Dutch 	  ³°°°°³
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ 		³   Independent   ³°°°°³
+º Release : 15.20				³     ShareWare   ³°°°°³
+º Rel.Date: 7th September 1992			³	Programmer³°°°°³
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ 		ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ°°°°³
+º						|    ³°°°°°°°°°°°°°°°°°³
+º ³ MTA.EXE / MTM.EXE				|    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+º ³ MTL.EXE / MTZ.EXE				|	ÚÄÄÄÄÄ¿        |
+º ³ MTA.CTL / MTA.CHx				|	³°°°°°³        |
+º ³						|	ÀÄÄÂÄÄÙ        |
+º ³ MTAOVR.EXE / MTAOVR.OVR (*) 		|     ÚÄÄÄÄÁÄÄÄÄ¿      |
+º ³						------³³³³³³ ÍÍÍ³-------
+º ³ Lines starting with '³' are                       ÀÄÄÄÄÄÄÄÄÄÙ
+º ³ changes to release 15.10
+º ³
+º ³
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+º Address: Robert W. van Hoeven
+º	   PO. Box 131
+º	   1170 AC  Badhoevedorp
+º	   Nederland / Holland
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+
+8.4. VA - View Archive
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ş VA v1.10á6 (c) 1991-93 FenrisUlven Data // 2:205/208@FIDONet
+
+ş Usage :  VA <Archive>
+
+  Where archive is any archive generated by:
+
+  LHArc  1.13-2.13    SFX  <Tm> Yoshi
+  LARC	 3.33	      SFX  <Tm> K.Miki H.Okumura and K.Masuyama
+  AR	 0.20	      SFX  <Tm> Haruhiko Okumura
+  ARJ	 2.30	      SFX  <Tm> Robert K. Jung
+  PKZip  1.10-1.93a   SFX  <Tm> PKWare Inc.
+  PKPak  3.61		   <Tm> PKWare Inc.
+  Hyper  2.50		   <Tm> Peter Sawatzki and Klaus Peter Nischke
+  PAK	 2.51		   <Tm> NoGate Consulting.
+  ARC	 6.02		   <Tm> SEA inc.
+  ZOO	 2.01	      SFX  <Tm> Rahul Dhesi.
+  SQZ	 1.08.3       SFX  <Tm> J I Hammarberg
+
+  The Archives programs with the SFX flag are VA also able to
+  peek into the so called SelF-Xtracting files made by these Archives
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<14>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Other programs.
+
+8.5. SHROOM - Shell room
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    SHROOM is a utility that gives a DOS application's shells more room.
+    It does this by intercepting the shell operation, swapping out the
+    application program, freeing up the memory, and then performing the
+    shell operation.  It also intercepts the exit from the shell, so
+    that it can swap the application back in before returning to it.
+    The program is none the wiser.
+
+SHROOM: Shell Room Utility v1.8g (14sep91).
+Copyright (C) Davis Augustine 1990, 1991.  All rights reserved.
+
+Usage:	 shroom [-?hLnpqv] [-e #] [-s path] [-t targets] [-z #] prog [args]
+       -?h : print this help message
+	-L : display shareware license
+	-n : display program notes (more detailed help)
+	-p : proceed (without asking) with partial swap if disk full
+	-q : quiet mode - display error messages only
+	-v : verbose mode - provide running commentary
+      -e # : set ERRORLEVEL returned if unable to load prog (default = 254)
+   -s path : specify DRIVE:DIR in which to create swap file
+  -t targs : specify which shell programs cause swapping
+      -z # : specify environment size for COMMAND.COM
+      prog : application program to execute
+      args : command line to pass to the application
+
+Example:   shroom  -p  -e 99  -s E:\  -z 800  wp  letter
+
+	"One side will make you grow taller, and the other side will
+    make you grow shorter."    - Lewis Carroll's Caterpillar
+
+
+8.6. SPAZ - Smart Pak, Arc and Zoo shell
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+    A substitute for your unarchiver when there are files compressed
+    with different archives and presents a common method of handling
+    them.
+
+SPAZ 1.61; By Dan Thomson, Andrew Farmer, Jeffrey Nonken, and Joe Jared.
+Copyright (c) 1989-1992 Dan Thomson & Andrew Farmer. All Rights Reserved.
+
+Syntax/Usage: SPAZ [switches] Path\Archive [switches] [files....]
+Square brackets indicate optionals. Switches are set with - or /.
+
+Switches:
+
+  -A	   Will use ONLY "XARC" on standard (ARC Style) archives.
+  -D	   Will delete the archive if the extract was successful.
+  -F	   Will process all Compressed Mail bundles found in Dir.
+  -Maddr   Will calculate Compressed Mail bundle name to show the
+	   sending Net Address.  "addr" is YOUR Net/Node address.
+  -N	   Will NOT attempt to sort the archive prior to extract.
+  -O|-R    Overwrite.  Will NOT prompt if existing file is found.
+  -V	   Verbose Mode.  Will display the runtime configuration.
+
+If -F is used then "Archive" MUST be a Path ONLY, not a Filename.
+Use of -F forces -D and -O to be set TRUE and -N to be set False.
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<15>---
+SQZ - Squeeze v1.08.3 : Jonas I Hammarberg : Closing remark.
+9. Closing remarkº
+ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+9.1. Registration
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	By registering at the address below you will have the right to
+	support and one free upgrade.  Please state version.  The
+	registration fee is for the moment 150SEK/30US$.  Smaller fees
+	will be accepted, but don't entitle you to a free upgrade.
+
+
+9.2. Licence
+ÄÄÄÄÄÄÄÄÄÄÄÄ
+	If you wish to buy more than one copy, check out ORDER.DOC for
+	further information. For commercial usage contact me.
+
+
+9.3. Errors
+ÄÄÄÄÄÄÄÄÄÄÄ
+	None...
+
+	Well, but I can't say that there are a lot of them.  If you run
+	into them please contact me, PPPLLLEEEAAASSSEEE
+
+
+9.4. Disclaimer
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+	This software (SQZ, SFX and SFXJR) is provided on an "as is"
+	basis without warranty of any kind, expressed or implied,
+	including but not limited to the implied warranties of
+	merchantability and fitness for a particular purpose.  The
+	person using the software bears all risk as to the quality and
+	performance of the software.  The author will not be liable for
+	any special, incidental, consequential, indirect or similar
+	damages due to loss of data or any other reason, even if the
+	author or an agent of the author has been advised of the
+	possibility of such damages.
+
+
+9.5. Contact
+ÄÄÄÄÄÄÄÄÄÄÄÄ
+	I can be reached at home (telecommuter...) and through this BBS,
+	which I contact more or less once a week.
+
+	Programmers BBS:	    (+46)40 188 945
+	FSED			    HST DS 1200-14400 baud N-8-1
+				    FidoNet 2:200/107
+				    Lars Ridstrom, SysOp
+
+
+	Jonas I Hammarberg	    (+46)46 730 088
+	Pl 529. St. Harrie 10:2     pg. 621 34 92-9
+	S-244 91 Kaevlinge	    bk. 5635-00 213 53, SE-Banken
+	Sverige/Sweden		    FidoNet: 2:200/107.24
+
+
+
+
+
+
+
+
+
+SQZ.DOK, 1993-01-24		   ---<16>---
+

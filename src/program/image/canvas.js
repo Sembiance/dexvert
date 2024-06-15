@@ -38,6 +38,9 @@ export class canvas extends Program
 			EndIf
 		EndFunc
 		$mainWindow = CallUntil("PreOpenWindows", ${xu.MINUTE})
+		If Not $mainWindow Then
+			Exit 0
+		EndIf
 
 		${!r.flags?.nonRaster ? `
 			; check to ensure the file was rendered as a raster image

@@ -9,6 +9,7 @@ export class excel97 extends Program
 	};
 	loc      = "win2k";
 	bin      = "c:\\Program Files\\Microsoft Office\\Office\\EXCEL.EXE";
+	unsafe   = true;
 	args     = r => [r.inFile()];
 	osData   = r => ({
 		script : `
@@ -17,9 +18,12 @@ export class excel97 extends Program
 				WindowFailure("Microsoft Excel", "This file is not in a recognizable format", -1, "{ESCAPE}")
 				WindowDismiss("Microsoft Excel", "The workbook you opened contains automatic", "{ENTER}")
 				WindowDismiss("File Not Found", "", "{ESCAPE}")
-				return WinActive("[TITLE:Microsoft Excel - ]", "Save as")
+				return WinActive("Microsoft Excel - ", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 			
 			${r.flags.outMethod==="print" ? `
 				Send("^p")

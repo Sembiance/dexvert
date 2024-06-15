@@ -18,6 +18,9 @@ export class neoDraw extends Program
 				return WinActive("NeoDraw - ", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			Send("!f")
 			Send("em")

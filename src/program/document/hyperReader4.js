@@ -8,6 +8,7 @@ export class hyperReader4 extends Program
 	website  = "https://discmaster.textfiles.com/browse/21823/Pegasus_Windows_20.iso/pegasus/w_editor/hrw40.zip";
 	loc      = "win2k";
 	bin      = "c:\\dexvert\\hrw40\\HRW.EXE";
+	unsafe   = true;
 	args     = r => [r.inFile()];
 	osData   = () => ({
 		dontMaximize : true,
@@ -18,6 +19,9 @@ export class hyperReader4 extends Program
 				return WinActive("[CLASS:HRMain]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
 
 			Func SavePage($num)
 				Send("+{F2}")

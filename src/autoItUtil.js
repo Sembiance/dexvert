@@ -7,6 +7,18 @@ import {path} from "std";
 // AUTOIT DLL INFO: https://www.autoitscript.com/forum/topic/93496-tutorial-on-dllcall-dllstructs/
 const AUTOIT_FUNCS =
 {
+	// TimerInit and TimerDiff are 100% NOT TRUSTWORTHY! They will report that 60,000ms has gone by when in reality only 3 or 4 seconds have gone by. AutoIt does warn that it doesn't work on some processors. So we roll our own here
+	GetTime : `
+#include <Date.au3>
+Func GetTime()
+	return _Date_Time_GetTickCount()
+EndFunc
+`,
+	TimeDiff : `
+Func TimeDiff($startTime)
+	return _Date_Time_GetTickCount() - $startTime
+EndFunc
+`,
 	KillAll : `
 Func KillAll($program)
 	Do
@@ -49,17 +61,17 @@ EndFunc
 	WaitForClipChange : `
 Func WaitForClipChange($max_duration)
 	Local $startValue = ClipGet()
-	Local $timer = TimerInit()
+	Local $clipChangeTimer = GetTime()
 	Do
 		If Not (ClipGet() == $startValue) Then ExitLoop
 		Sleep(50)
-	Until TimerDiff($timer) > $max_duration
+	Until TimeDiff($clipChangeTimer) > $max_duration
 EndFunc
 `,
 	WaitForControl : `
 Func WaitForControl($title, $text, $controlID, $max_duration, $errorWindowTitle=0, $errowWindowButton=0, $errorWindowTitleEscape=0)
 	Local $controlHandle
-	Local $timer = TimerInit()
+	Local $controlWaitTimer = GetTime()
 	Do
 		If $errorWindowTitle Then
 			If WinActive($errorWindowTitle, "") Not = 0 Then ControlClick($errorWindowTitle, "", $errowWindowButton)
@@ -72,7 +84,7 @@ Func WaitForControl($title, $text, $controlID, $max_duration, $errorWindowTitle=
 		$controlHandle = ControlGetHandle($title, $text, $controlID)
 		If $controlHandle Then ExitLoop
 		Sleep(50)
-	Until TimerDiff($timer) > $max_duration
+	Until TimeDiff($controlWaitTimer) > $max_duration
 
 	return $controlHandle
 EndFunc
@@ -80,8 +92,8 @@ EndFunc
 	WaitForStableFileSize : `
 Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
 	Local $lastSize = 0
-	Local $timer = TimerInit()
-	Local $stableTimer = TimerInit()
+	Local $stableSizeTimer = GetTime()
+	Local $stableTimer = GetTime()
 	Do
 		Sleep(50)
 		
@@ -90,20 +102,20 @@ Func WaitForStableFileSize($filePath, $stableDuration, $maxDuration)
 		$curSize = FileGetSize($filePath)
 		If $curSize <> $lastSize Then
 			$lastSize = $curSize
-			$stableTimer = TimerInit()
-		ElseIf TimerDiff($stableTimer) > $stableDuration Then
+			$stableTimer = GetTime()
+		ElseIf TimeDiff($stableTimer) > $stableDuration Then
 			ExitLoop
 		EndIf
-	Until TimerDiff($timer) > $maxDuration
+	Until TimeDiff($stableSizeTimer) > $maxDuration
 EndFunc
 `,
 	WaitForPID : `
 Func WaitForPID($pid, $max_duration)
-	Local $timer = TimerInit()
+	Local $pidWaitTimer = GetTime()
 	Do
 		If Not ProcessExists($pid) Then ExitLoop
 		Sleep(50)
-	Until TimerDiff($timer) > $max_duration
+	Until TimeDiff($pidWaitTimer) > $max_duration
 
 	return ProcessExists($pid)
 EndFunc`,
@@ -213,13 +225,13 @@ EndFunc`,
 	CallUntil : `
 Func CallUntil($funcName, $max_duration)
 	Local $done = 0
-	Local $timer = TimerInit()
+	Local $callUntilTimer = GetTime()
 	Do
 		$done = Call($funcName)
 
 		If $done Not = 0 Then ExitLoop
 		Sleep(25)
-	Until TimerDiff($timer) > $max_duration
+	Until TimeDiff($callUntilTimer) > $max_duration
 
 	return $done
 EndFunc`,
@@ -245,7 +257,7 @@ EndFunc`,
 		Next
 	EndFunc`
 };
-const AUTO_INCLUDE_FUNCS = ["KillAll"];
+const AUTO_INCLUDE_FUNCS = ["GetTime", "TimeDiff", "KillAll"];
 
 export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, alsoKill=[], fullCmd, skipMouseMoving})
 {
@@ -274,7 +286,7 @@ export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, also
 			AutoItSetOption("WinTitleMatchMode", 2)
 
 			; We can't do 'CallUntil()' or 'WindowDismiss()' here because we are within the Exit handler and can't call custom functions. sigh.
-			Local $exitDismissTimer = TimerInit()
+			Local $exitDismissTimer = GetTime()
 			Do
 				Local $exitErrorWin = WinActive("Program Error", "")
 				If $exitErrorWin Not = 0 Then
@@ -302,7 +314,7 @@ export function appendCommonFuncs(scriptLines, {script, scriptPre, timeout, also
 				EndIf
 
 				Sleep(50)
-			Until TimerDiff($exitDismissTimer) > ${xu.SECOND}
+			Until TimeDiff($exitDismissTimer) > ${xu.SECOND}
 
 			${!skipMouseMoving ? `; This will move the mouse over the systray area, causing any 'aborted' program icons to be removed
 			MouseMove(312, 756, 1)

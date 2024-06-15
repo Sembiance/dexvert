@@ -1,0 +1,179 @@
+Program:    SQZ - Squeeze.
+Function:   Combined file compresser and archiver.
+Version:    1.08.3
+Datum:	    1993/01/24
+Copyright:  Jonas I Hammarberg
+By:	    Jonas I Hammarberg
+-------------------------------------------------------------------------------
+
+    *	Support for MOVE;
+
+	    Add and move:
+
+		SQZ AM archive filespec
+		SQZ MA archive filespec
+		SQZ A /Z4 archive filespec
+
+
+	    Update and move:
+
+		SQZ UM archive filespec
+		SQZ MU archive filespec
+		SQZ M archive filespec
+		SQZ U /Z4 archive filespec
+
+
+    *	Another type of listing.
+
+	    SQZ LB archive filespec	-   Brief listing
+
+		or
+
+	    SQZ L  /z5 archive filespec
+
+
+	    Modification Date	Uncompressed size   Path and filename
+	    1992-02-15 12.13	.......563	    SQZ1083\TEST.TXT
+	    1992-02-15	5.23	.....10233	    SQZ1083\SVEN.TXT
+		2 files.	    =10796
+
+
+    *	Some speed improvments over 1.08.2, particular in smaller files, eg.
+	less than 30000 bytes.
+
+
+    *	Fixed an error in SFX, which extracted to the root, not the current
+	directory.
+
+
+    *	Some text were changed.
+
+
+    *	Use of Q (capital q) to gain higher speed.
+	The speed, during my testing anyway, equals ARJ 2.30 for q and
+	ARJ 2.39a for Q. Default are still q5 (lower case q).
+	The speed improvents are higher in the lower speeds, i.e. the
+	differance between q9 and Q9 are less than between Q0 and q0.
+
+	"SQZ A /q5 ARC *.*" will compress more than "SQZ A /Q5 ARC *.*", but
+	will take more time (10% to 20% more) to give some 2% better
+	compression.
+
+
+    *	Added support for volume label, /$
+	Doesn't allow extraction of volume label.
+
+
+    *	Prohibits extraction to CLOCK$/CON/AUX/COM0..9.
+
+
+    *	*.* will be used if there's no file specification when issuing Add or
+	Update.
+
+    *	Assignment of work-directory.
+
+	/W, pick work-directory from environment-variable TMP. if TMP doesn't
+	exist SQZ will look for TEMP instead. If none of them exist than the
+	current directory will be used.
+
+	/w<work-directory>, work-directory should follow directly after /w.
+
+	If there's no ending '\', then will it be added.
+
+    *	Storeage for directory if /S used. This can be used for storing
+	empty directories. Date are set to date of extraction, not creation
+	of directory, but attributes are kept.
+
+	To include directories in listings use /s or /S.
+
+
+    *	# - current date.
+
+	#Y#M#D#H  creates a archive name from the current date.
+
+
+	#Y gives current year with two digits.
+
+	#M gives current month with two digits.
+
+	#D gives current day of month with two digits.
+
+	#H gives current hour in 24-hour format (00 to 23).
+
+
+	#M_#D_#Y creates the name, if current date are 30th october 1992,
+	10_30_92.
+
+
+	The use of this function might be to split all post into one archive
+	for each day.
+
+
+	SQZ M \PKT\OUT\PKT_#M#D     - will move all files into the archive of
+				      the current date and you don't have to
+				      worry where all files went.
+
+
+    *	Extended the 'E' command to include embedded path information when
+	extracting, if used in conjuction with /S, i.e. E + /S --> /X
+
+SQZ - Squeeze it, version 1.08.2, release date 1992/09/13
+-------------------------------------------------------------------------------
+	What's new from 1.08.1, 1992/08/22?
+
+	/Z3	Switch which gives a better ratio when packing text-files.
+		Will perform rather poorly on C-files, but ok on TXT/DOC.
+
+
+	The order of options and arcspec is now more free than it used
+	to be, i.e. all below are correct and will work;
+
+
+	    sqz a tcinc /sp1z01 tcinc\*.*
+
+	    sqz a /sp1 tcinc /z01 tcinc\*.*
+
+	    sqz a /sp1z01 tcinc tcinc\*.*
+
+
+	The first parameter, excluding command, without a leading '/' or '-'
+	are considered to be an archive specification.
+
+
+	Support for both '/' and '-' as switchars. The one first occuring
+	will be used, i.e.:
+
+
+	    sqz a tcinc /sp1z01 tcinc\*.*	-   Ok, use /
+						    add tcinc\*.*
+
+	    sqz a tcinc -sp1z01 tcinc/*.*	-   Ok, use -
+						    add tcinc/*.*
+
+	    sqz a tcinc /sp1 -z01 tcinc\*.*	-   Ok, uses /
+						    add -z01. and tcinc\*.*
+
+	Yes, use of '-' as switchar forces use of '/' as directory char.
+
+
+
+	Comments are now implemented.
+
+	    SQZ C archive filespec
+
+		    or
+
+	    SQZ C archive CON		to read from stdin.
+
+
+
+
+
+
+
+
+
+
+
+			---<end of "WHATSNEW.DOC">---
+

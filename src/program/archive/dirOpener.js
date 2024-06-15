@@ -68,7 +68,7 @@ export class dirOpener extends Program
 			; Some files show custom alerts that pop up (pc.dir) some have several in a row
 			; They all are the same window class though, so we just use this loop
 			Local $alertWindow
-			Local $windowOrExitTimer = TimerInit()
+			Local $startTime = GetTime()
 			Do
 				If Not ProcessExists("dirOpener300-850-1-PC.exe") Then ExitLoop
 
@@ -78,7 +78,7 @@ export class dirOpener extends Program
 					ControlClick("[CLASS:#32770]", "", "[CLASS:Button; TEXT:&Yes]")
 					ControlClick("[CLASS:#32770]", "", "[CLASS:Button; TEXT:Cancel]")
 				EndIf
-			Until TimerDiff($windowOrExitTimer) > ${xu.MINUTE*2}
+			Until TimeDiff($startTime) > ${xu.MINUTE*2}
 
 			Sleep(1000)
 

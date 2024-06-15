@@ -71,6 +71,9 @@ export class polyTrans64 extends Program
 			return WinActive("Select One or More Geometry Files to Import", "")
 		EndFunc
 		$importWindow = CallUntil("PreImportDialogs", ${xu.SECOND*20})
+		If Not $importWindow Then
+			Exit 0
+		EndIf
 
 		Sleep(500)
 		SendSlow("c:\\in\\${r.inFile()}{ENTER}", 50);

@@ -34,7 +34,10 @@ argv.format = argv.format?.endsWith("/") ? argv.format.slice(0, -1) : argv.forma
 const SKIP_FORMATS =
 [
 	// these take AGES to extract, just WAY too long
-	"archive/printArtist"
+	"archive/printArtist",
+
+	// these don't make sense to test
+	"other/symlink"
 ];
 
 // These are relative dir paths from test/sample/ that are just supporting files that need to be here but should be ignored for testing purposes
@@ -178,8 +181,8 @@ const FLEX_SIZE_FORMATS =
 	archive :
 	{
 		// sometimes the SHA1 sum differs
-		annaMarie           : 0.01,
-		allowedFileSizeDiff : 0.1,
+		annaMarie              : 0.01,
+		prehistorikGameArchive : 0.1,
 
 		// different each time due to way it generates frames
 		swf    : 75,
@@ -358,7 +361,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/archive\/rawPartition\/example\.img$/, "archive", "iso"],
 	[/audio\/quickTimeAudio\/BOMBER_BGM$/, "archive", "macBinary"],
 	[/audio\/quickTimeAudio\/Demo Music FileM$/, "archive", "macBinary"],
-	[/document\/wordDocDOS\/.+\.(DOC|doc)$/, "document", "wri"],
+	[/document\/wordDocDOS\/.+\.(DOC|doc|MSW)$/, "document", "wri"],
 	[/document\/ibmWritingAssistant\/(CENSUS|CONTIN|LAST|PIC1855)$/, "document", "pfsWrite"],
 	[/image\/artStudio\/.*\.shp$/, "image", "loadstarSHP"],
 	[/image\/binaryText\/goo-metroid\.bin$/, "image", "tga"],
@@ -485,6 +488,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",
+	"image/cgm",	// sadly we don't match on magic alone due to how loose the magic is and how easily non-CGM files convert into garabge and 'family2' has no .cgm extension
 	"image/printfox",
 	"image/teletext",
 	"image/sprEd",

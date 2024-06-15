@@ -15,6 +15,10 @@ export class cinema4D427 extends Program
 				return WinActive("CINEMA 4D - [${path.basename(r.inFile())}]", "")
 			EndFunc
 			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
+			If Not $mainWindow Then
+				Exit 0
+			EndIf
+
 			Sleep(1000)
 
 			Send("!f")
@@ -25,6 +29,10 @@ export class cinema4D427 extends Program
 				return WinActive("Save file", "")
 			EndFunc
 			$saveWindow = CallUntil("WaitForSaveWindow", ${xu.SECOND*10})
+			If Not $saveWindow Then
+				Exit 0
+			EndIf
+
 			Send("c:\\out\\out.q3d{ENTER}")
 			WinWaitClose($saveWindow, "", 10)
 			WaitForStableFileSize("c:\\out\\out.q3d", ${xu.SECOND*3}, ${xu.SECOND*30})` });

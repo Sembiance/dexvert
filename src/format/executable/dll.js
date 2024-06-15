@@ -12,6 +12,7 @@ export class dll extends Format
 	ext          = [".dll"];
 	forbiddenExt = [".exe"];
 	magic        = ["Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)"];
+	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 
 	// We throw DLLs at deark and 7z which can often extract various embedded cursors, icons and images

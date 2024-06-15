@@ -6,5 +6,6 @@ export class gameCubeMusic extends Format
 	name       = "GameCube Music";
 	ext        = [".gcm"];
 	magic      = ["GameCube Music (IDSP)"];
-	converters = ["vgmstream", "zxtune123"];
+	weakMagic  = true;
+	converters = ["vgmstream", "zxtune123[strongMatch]"];
 }

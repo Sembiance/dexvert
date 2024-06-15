@@ -1,0 +1,498 @@
+
+    =======================================================================
+
+    This  version  of  HPACK  is  a  beta  release of the final version.  A
+    previous version, version 0.75 was  released  as  a  prototype  to  get
+    feedback  from users for the final version.  The 0.75 release carried a
+    warning message that it was a prototype only and not for  general  use.
+    The 0.78 release supersedes version 0.75, and includes:
+
+    - Improved portability to all OS's (the Mac port was done in  a  *single
+      day*), and easier portability to different mutations of Unix.
+
+    - Public-key  and  conventional  encryption  of archives or  individual
+      files, legally usable both inside and outside the US.
+
+    - Data  authentication/manipulation   detection   using   RSA   digital
+      signatures, legally usable both inside and outside the US.
+
+    - Multi-disk archive handling (your mileage may vary on this).
+
+    - Improved support for  OS-specific  features  such  as  OS/2  extended
+      attributes.
+
+    - Various small improvements based on suggestions from users.
+
+    - Improved  support for multilingual versions (extended ASCII, Japanese
+      DBCS, Unicode, etc).  Currently HPACK is available in eight different
+      languages and eleven different character sets.
+
+    - High-quality Postscript documentation.
+
+    Note:  HPACK  is  a 100% matter product.  In the unlikely event that it
+    should contact antimatter in any form, a  catastrophic  explosion  will
+    result.
+
+    =======================================================================
+
+
+General Layout
+==============
+
+ The executable distribution of HPACK generally contains the following files:
+
+    readme.1st   - This file.
+    hpack{.exe}  - The HPACK archiver
+    hpack.sig    - Digital signature for executable (Arc, MSDOS, OS/2 only)
+    language.dat - Internationalization information needed by HPACK
+    language.sig - Digital signature for i18n info (Arc, MSDOS, OS/2 only)
+    hpack.doc    - The HPACK documentation.
+    hpackext.doc - The extended documentation for advanced users.
+    register.doc - HPACK registration form.
+    key.asc      - My PGP 2.0 public key (MSDOS, OS/2 only)
+    keycvt{.exe} - HPACK keyring converter
+
+ Some  of  these files may have slightly different names on different systems.
+ The layout of the source distribution is given in the file HPACKSTD.TXT.
+
+
+Running HPACK: MSDOS and OS/2
+=============================
+
+ The OS/2 version is quite similar to the  DOS  version,  except  that  it  is
+ HPFS-aware  and  will handle extended attributes for files and directories if
+ this is specified by the [-a]ttribute switch.  This version will also give an
+ HPACK archive certain extended attributes such as type and icon  information.
+ Apart from that, it behaves as the DOS version.  The archive containing HPACK
+ in fact contains two executables, HPACK_16.EXE and HPACK_32.EXE. HPACK_16.EXE
+ is  a  16-bit version for use with OS/2 versions before 2.0, and HPACK_32.EXE
+ is a 32-bit version for use with OS/2 versions 2.0 and above. The appropriate
+ executable should be renamed to HPACK.EXE before use.
+
+ Bug alert: It has been reported that, in the MSDOS version  when  using  unit
+ compression  and  adding  a  large number (around 2000) of small files, HPACK
+ would crash after processing around 1000 files.  Unfortunately replication of
+ this problem has so far proven impossible.  If anyone plans to create a unit-
+ compressed archive containing thousands of files, be warned that there may be
+ a problem.
+
+ 
+Running HPACK: Unix
+===================
+
+ The  Unix version of HPACK is distributed in source form as hpack78src.tar.Z.
+ It has been tested under AIX (RS6000), AIX 386,  AIX  370,  BSD  386,  Amdahl
+ UTS4,  Convex,  Irix, ISC Unix, Linux, MiNT, NeXT, OSF/1, Posix, SunOs, SVR4,
+ and Ultrix and is known to compile succesfully on these systems (Note that in
+ some cases the code run wasn't the latest, up-to-the-minute release so it may
+ be necessary to tweak a line or two).  Hopefully it  should  be  possible  to
+ compile it on other systems with a minimum amount of modification.
+
+ Before compiling it on a  new  system,  you'll  probably  need  to  edit  the
+ makefile  for  your system (Unix flavour), and depending on your Unix flavour
+ you will probably have to tune  system.h  and  system/unix.c  a  bit  (eg  if
+ you've  got  a  memmove() or not, a rename(), and a few other odds and ends).
+ It took about half an hour for Ultrix (of which about 20  minutes  was  spent
+ waiting  for the compiler), in general it only seems to take a few minutes to
+ adapt it to any new Unix variant.  In addition, you'll have to  set  tabstops
+ to  4  in  whatever  editor  you're using.  Virtually all the editors used on
+ various systems for HPACK have tabs set to 4, but most Unix  editors  default
+ to 8.
+
+ The  only  problems  you may run into is with running it on 64-bit systems, I
+ don't have any experience with them so  maybe  I'm  just  being  pessimistic,
+ certainly  the  move from 16 to 32-bit showed up only one minor problem which
+ was fixed in about 5 minutes.
+
+ Once you get it going, send the diffs to me (pgut1@cs.aukuni.ac.nz) and  I'll
+ integrate  them  into the code.  If you can't get it to compile on one of the
+ above systems, I can probably arrange to mail you an executable -  hassle  me
+ via email.
+
+
+Running HPACK: Mac
+==================
+
+ The  Mac  version  is  currently  a rather simplistic port of the generic CLI
+ code.  When run, it will prompt  for  a  command-line  as  used  by  the  CLI
+ version,  and  display  all  output  on  the  console  window.   A  full  Mac
+ implementation should eventually  become  available,  based  on  the  Windows
+ version.  To compile HPACK for the Mac, use the BinHex'd project and resource
+ files in the system subdirectory.
+
+ The  Mac port was done in a single day, mainly to demonstrate how easy it was
+ to move it to virtually any  OS,  even  one  whose  filesystem  interface  is
+ radically  different from the generic Unix-like one assumed by the high-level
+ code.  The fact that it was done in one day shows when the program is run, if
+ anyone wants to add the usual GUI paraphernalia let me know.
+
+ THIS IS NOT THE FINAL FORM OF THE MACINTOSH VERSION OF HPACK.  IN  ITS  FINAL
+ FORM  HPACK  WILL  HAVE  THE  USUAL MACINTOSH USER INTERFACE, NOT THE CURRENT
+ COMMAND-LINE ONE.  THE CURRENT VERSION HAS BEEN RELEASED MAINLY TO PROVIDE  A
+ MEANS  OF TRANSFERRING ARCHIVES TO/FROM THE MAC (and also to persuade someone
+ to add a Mac interface to it :-).
+
+ Important note: When working on a  port  like  this,  never  promise  to  buy
+ everyone in the room pizza if it works the first time you run it.
+
+
+Running HPACK: Amiga
+====================
+
+ The Amiga HPACK is virtually identical to the generic Unix-like  command-line
+ version.   Unfortunately,  due  to  lack  of  access  to Amiga hardware, this
+ version hasn't been tested much (if someone gives me an A4000 I'll test it to
+ death, I promise).
+
+ When compiling the code, Lattice C will give about half a dozen warnings  per
+ file  about  function  return  value  mismatches,  and  conversion from const
+ pointer to non-const or volatile blah blah blah.  These are  just  Lattice  C
+ being Lattice C and can be ignored.  The problem can be fixed by removing all
+ 'const'  keywords,  not using any of the compiler built-in functions (memset,
+ strcpy, etc), and ignoring the fact that it doesn't like returning an  int  +
+ constant from an int-valued function.  In addition, Lattice C has a number of
+ code generation bugs which HPACK must work around.  Basically the Amiga HPACK
+ exists  despite  of  Lattice  C rather than because of it.  Newer versions of
+ SAS/C are somewhat better in this respect.
+
+
+Running HPACK: Archimedes
+=========================
+
+ The  Archimedes  HPACK  is  virtually  identical  to  the  generic  Unix-like
+ command-line  version.  The main extra feature is the addition of the +invert
+ command which will convert paths like dir/file.c and dir/file.h to dir.c.file
+ and dir.h.file, saving a lot of manual work when extracting archives  created
+ on other systems.
+
+ When compiling the code, Arm C will give  several  warnings  for  some  files
+ about  type  conversions,  which can either be worked around with expressions
+ like a = ( int ) ( ( int ) b + ( int ) c ) ), or ignored.  As with the  Amiga
+ version, I couldn't do too much testing on this one.
+
+
+Running HPACK: Atari ST
+=======================
+
+ This  version  is,  like  most other versions, identical to the standard Unix
+ command-line version.  There are in  fact  two  executables,  one  for  68000
+ systems  and  one  for 68030 systems.  To compile HPACK for the Atari ST, use
+ the Pure C project files in the system directory.
+
+
+Ghod it's slow!
+===============
+
+ I know - it's difficult to have both speed and portability (or to  rehash  an
+ old saying: "Fast, portable, good - choose any two").  HPACK can never really
+ compete  with  'one-platform  wonder'  archivers which are highly tuned for a
+ particular system.  HPACK has been tuned  for  compression  performance,  not
+ speed  -  it  is  recommended  that,  if the OS supports it, it be run in the
+ background with the [-s]tealth mode switch.
+
+
+Where to get HPACK:
+===================
+
+ The latest version of HPACK should always be available from the following BBS
+ systems and archive sites:
+
+   Phone:        +49 234 770457
+   Connection:   V.32bis/V.42bis + fax G3 incl. v.17
+   Sysop:        Peter Sowa
+   FIDO address: 2:245/302.7
+   Comment:      This  BBS  contains  the  German  versions  of   the  HPACK
+                 executables.   Note  that  since  communcation  is by snail
+                 mail, new releases may take a while to appear.
+
+   Name:         Fire&Ice CBCS
+   Phone:        +61 2 339 5545
+   Connection:   Telebit Trailblaser TR100 Mk2
+   Sysop:        Jonathan Michaels <jonathan@asstdc.oz.au>
+   Location:     Sydney, NSW, Australia
+
+   The src.doc.ic.ac.uk (146.169.2.1) archive site.  This site contains  the
+   complete HPACK collection and is probably the best place to look for it.
+
+   The  garbo.uwasa.fi  (128.214.87.1)  archive  site  and  all garbo mirror
+   sites worldwide.  This is updated a few weeks after the UK site to  allow
+   potential bugfixes to be made.
+
+
+Availability of HPACK for Other Systems:
+========================================
+
+ Anyone want to port HPACK to their particular pet system?  It's about 900K of
+ ANSI C code, with some low-level system I/O thrown in to confuse you (through
+ some mysterious process this amount increases by about 10K a week, so get  it
+ now  before  it gets too much).  A knowledge of assembly language is probably
+ necessary on low-end systems to speed  up  a  few  of  the  core  compression
+ routines.  If you want to port it to any other system, drop me a line.....
+
+
+International Versions of HPACK:
+================================
+
+ All the text strings contained within HPACK are generated from a  definitions
+ file  via  a  preprocessing  tool.   To  create  versions  of  HPACK in other
+ languages, all that is necessary is to translate the text in the  definitions
+ file  and  run  it  through  the preprocessor.  HPACK will dynamically adjust
+ itself at runtime to the currently selected locale.  The definitions file  is
+ available  on request from the HPACK author, or as part of the generic source
+ code distribution.  Currently  Bavarian,  English,  German,  Dutch,  Italian,
+ Polish, Spanish, and Swiss versions exist.
+
+
+Security of HPACK Authentication/Encryption:
+============================================
+
+ There  has  been  some  talk  recently  on  how  trivial  it  is to break the
+ authentication/encryption  used  by   many   archivers   (for   example   the
+ "authentication" used in the long-awaited version 2 of a popular archiver was
+ touted  as  being  "greatly  strengthened", meaning it took all of an hour to
+ break after it first appeared).  To answer any worries about the security  of
+ HPACK  encryption/authentication,  I  have  included  with  the  source  code
+ distribution two sample archives,  data/crypt.hpk  and  data/secure.hpk,  for
+ which I offer the following challenge:
+
+    SECURE.HPK contains a single stored file called SAMPLE.TXT dated 1st May
+      1992, with the file itself containing the text '01234567890123456789'.
+      I challenge anyone to alter this archive in any way and yet retain the
+      valid signature (that is, HPACK when checking it should report that it
+      still contains my valid signature).  Alternatively, I challenge anyone
+      to create an HPACK archive which contains a forged signature from  me.
+      Sample  signature  generation/checking  code  is included in the HPACK
+      source.
+
+    CRYPT.HPK contains twenty conventional-key encrypted  text  files  which
+      contain  2  lines  each  of  HPACK.DOC,  beginning at the start of the
+      document (for a total of 40 lines worth of plaintext).  The encryption
+      password is a simple lowercase-only English phrase, and  is  identical
+      for  all twenty files.  The nature of the data is such that most of it
+      won't even be compressed - it'll be stored as  is.   These  conditions
+      reflect the absolute worst-case situation in archive encryption, where
+      the attacker knows the encrypted plaintext, the password is relatively
+      simple,  and  HPACK's  most  insecure encryption method is used  (this
+      provides a realistic basis for  an  attack  on  the  encryption.   Any
+      encryption  method, no matter how bad, can be made to appear secure if
+      the initial conditions are biased enough).
+
+      I challenge anyone to provide me with either the  passphrase  used  to
+      encrypt  the data, or to encrypt the next 2 lines of HPACK.DOC in such
+      a  way  that  they  can  be  decrypted  with  the  password.    Sample
+      en/decryption  code  is  available  as part of HPACK or a I will email
+      anyone who requests it a reference implementation in C.
+
+ In  addition  I  will encrypt any data you like with the given passphrase, if
+ this will help in trying to break the encryption.  In fact I'll  do  anything
+ short  of  revealing  the  password  if  this  helps  with  an  attack on the
+ encryption.   Finally,  I  will  make  the  password  available  after   some
+ reasonable  period  of  time,  say 6 months, so users can reassure themselves
+ that it is indeed a genuine password and not some fake garbled mess cooked up
+ just to make the encryption look good.
+
+ The attacks can be mounted on any computer system using  any  amount  of  CPU
+ power   and/or   custom   hardware.   More  details  on  the  merits  of  the
+ encryption/authentication algorithms, along with possible methods of  attack,
+ are given in the file hpackext.doc.
+
+
+Credits:
+========
+
+ Thanks to the following people for helping in HPACK:
+
+ Stuart Woolford for the Unix port and endless arguments about the code.
+ Conrad Bullock and John Burnell for the OS/2 port.
+ Martin Braschler for the Atari ST port
+
+ Stuart  Woolford and John Burnell for tirelessly finding bugs and making many
+   helpful suggestions.
+
+ All the people listed in the makefile for moving it to their version of  Unix
+   and providing feedback.
+
+ Steven  Perreau, Hexen Hammer, and  David  Dix  for  providing  a  discussion
+   (read: flaming argument) forum for HPACK developers on their BBS's over the
+   years.
+
+ Arrigo Triulzi for providing the Italian translation of HPACK.
+ Peter de Vocht for providing the Dutch translation of HPACK.
+ Peter Sowa for providing the German translation of HPACK.
+ Rafal Mazkowski for providing the Polish translation of HPACK.
+ Eduardo Jacob for providing the Spanish translation of HPACK.
+ Martin Braschlet for providing the Swiss German translation of HPACK.
+
+ DaviD W. Sanderson for cleaning up and improving the original  HPACK  manpage
+   and getting it to work properly.
+
+ PurpleX for putting up with many silly questions and sarcastic remarks  about
+   the Mac API.
+
+ Nick Little for compiling HPACK on an Amiga 500 using Lattice C (wow!)
+
+ TMOTA and Edouard Poor for compiling HPACK on the Archimedes.
+ Chris Gransden for finding all the bugs I put into the  Archimedes  port  and
+   for testing the constant stream of fixes I sent him.
+
+ Philip Zimmermann  for  letting  me  steal his ideas (and in some cases code)
+   from the PGP encryption program.
+
+ Lutz Frank for letting me use his 680x0 assembly-language primitives.
+
+ Joerg Plate for getting the code going with SAS/C 6.2 on the Amiga and making
+   all sorts of changes and fixes.
+
+ Bancroft Scott provided much technical assistance on ASN.1 and its various
+   encoding rules (BER/DER/CER/PER).
+
+ All kcbbs users for putting up with endless stirring about HPACK.
+
+
+The HPACK Curse:
+================
+
+ In early June 1992 one of the Mac HPACKers downloaded a new  release  of  the
+ code  from  a  BBS.   Shortly thereafter his hard drive died, taking multiple
+ megabytes of data with it and incapacitating his Mac.  He logged onto another
+ BBS which had an HPACK forum and complained about this.  After he logged off,
+ the VT100 he was using to complain also expired.
+
+ In mid-August 1992 an attempt was made to place  a  copy  of  the  DOS  HPACK
+ executable  on  an  ftp site for pickup by someone interested in it.  Shortly
+ before it was to take  place,  the  machines  which  were  to  be  used  were
+ unexpectedly  shut  down for four days for power maintenance.  Once they were
+ back up, the comms machine which handled all ftp traffic became unstable  due
+ to  a  mysterious  hardware  problem.   This problem remained in evidence for
+ several weeks.
+
+ In late September 1992 the Amiga 500 being used to compile  the  Amiga  HPACK
+ was  destroyed  by a power-line spike, and was only brought back to life some
+ months later.
+
+ In October 1992 the Atari ST hard drive on which the Atari  HPACK  was  being
+ stored  crashed  for the last time.  This is an interesting case in which the
+ hardware exhibited a limited degree of precognizance, having crashed  several
+ times even before HPACK was installed.
+
+ In November 1992 the Imperial College Maths RS6000 cluster crashed 7 times in
+ a row while the Italian translation of the text was being prepared - and then
+ the  IBM  field  circus  that came to upgrade the systems couldn't because it
+ didn't look like the picture in their manuals.
+
+ In January 1993 the HPACK curse hit the I/O controller on the Atari ST  being
+ used  to  redo  the  Atari  port,  disabling  the keyboard and mouse and thus
+ rendering it inoperative.
+
+ In February 1993 the person who did the HPACK Unix port was at work when  one
+ of  the  secretaries  tried  to  reboot her machine after a system crash.  It
+ refused to reboot - the hard  drive  had  died.   Shortly  thereafter,  their
+ network   went   down.   Someone  (or  something)  had  removed  an  ethernet
+ terminator....  but there was noone in the room at the time.  A little later,
+ another one of the secretaries couldn't read any  data  off  a  backup  disk.
+ Closer  inspection  revealed  that the drive had been mounted upside down....
+ but it was working fine a few hours earlier, and noone capable of  doing  the
+ job had been near the machine.
+ Then  he realised it: He was carrying a Zoo'd (not HPACK'd) copy of the HPACK
+ source code around with him....
+
+ Does  this mean HPACK is cursed?  Find out more in the next release (and wait
+ with baited breath for the full story of a  5am  logon  on  a  local  BBS  by
+ someone  (or  something) which would only identify itself as 'hpack', and for
+ which the call came from no known phone number).
+
+
+HPACK as a Compiler Test:
+=========================
+
+ The HPACK source code may be useful as a benchmark for compilers, as  it  has
+ displayed  an  amazing  ability to unearth compiler bugs.  It has turned up a
+ bug in TurboC/TurboC++/BorlandC++  under  MSDOS,  bugs  all  over  Lattice  C
+ (mainly in the code generator) on the Amiga, a bug in the Sun acc compiler, a
+ bug in the Xenix cc, a bug in the RS6000 cc optimizer, a  bug  in  the  Amiga
+ DICE  compiler  preprocessor,  and  has  managed  to  break the optimizers in
+ TopSpeed C, Watcom C, the Irix cc, Ultrix vcc, and Arm C.  Various  sarcastic
+ comments  on  the  compilers  in  question are present in code workarounds at
+ various places (except for the RS6000 cc, whose optimzer is  too  awesome  to
+ criticize even if it does generate incorrect code).
+
+ It  has  been  suggested that all C compilers should be made to carry a "Safe
+ for use with HPACK" rating.
+
+
+The HPACK Warranty:
+===================
+
+1. Customer Obligations
+-----------------------
+
+ 1.1.   Customer  assumes  full  responsibility  that  this  program meets the
+ specifications,  capacity,  capabilities,  and  other  requirements  of  said
+ customer, and agrees not to bother the author if the program does not perform
+ as expected, or performs other than expected, or does not perform at all.
+
+ 1.2.   Customer  assumes  full responsibility for any deaths or injuries that
+ may result from the normal or abnormal operation of  this  program.   In  the
+ event  of  casualties  exceeding 1000 persons or property damage in excess of
+ $10 million, customer agrees that he or she has stolen  the  program  and  we
+ didn't even know he or she had it.
+
+ 1.3.   Customer  agrees not to say bad things about the program or the author
+ to anyone claiming to be from "60 Minutes".
+
+2. Very Limited Warranty and Conditions of Sale
+------------------------------------------------
+
+ 2.1.  For a period of 90 minutes, commencing from the time you first  thought
+ about  getting  this  program, we warrant that this program may or may not be
+ free of any manufacturing defects.  It will be replaced during  the  warranty
+ period  upon  payment  of an amount equal to the original purchase price plus
+ $10.00 for handling.  This warranty is void if the program has been  examined
+ or run by the user, or if the manual has been read.
+
+ 2.2.   This program is sold on an AS WAS basis.  The author makes no warranty
+ that it is, in fact, what we say it is in our propaganda,  or  that  it  will
+ perform  any useful function.  We have no obligation whatsoever other than to
+ provide you with this fine disclaimer.
+
+ 2.3.  Some countries do not allow limitations  as  to  how  long  an  implied
+ warranty lasts, so we refuse to imply anything.
+
+ 2.4.   There is an extremely small but nonzero chance that, through a process
+ known as "tunnelling", this program  may  spontaneously  disappear  from  its
+ present  location and reappear at any random place in the universe, including
+ your neighbours computer system.  The author will not be responsible for  any
+ damages or inconvenience that may result.
+
+3. Limitation of Liability
+--------------------------
+
+ 3.1.   We  have no liability or responsibility to the customer, the customers
+ agents, our creditors, your creditors, or anyone else.
+
+                            -------------------------
+
+Testimony from one of our satisfied customers:
+
+  "I hear this crash and I find a rock, wrapped in paper, next  to  my  living
+   room window.  I open up the note and it says, 'You want it in writing?  You
+   got  it.   Next  time,  use  a  *real* archiver.  HPACK.  We know where you
+   live'."
+
+So why aren't *you* using HPACK?
+
+                            -------------------------
+
+Here's what reviewers have been saying about HPACK:
+
+  "Version 0.79 has several of the advanced features  recommended  in  version
+   0.78,  but  not  all of the ones I'd like to see in version 0.80.  So, it's
+   pretty good except when it's not.  Three stars.
+
+   You  probably  won't  use  half the original features anyway.  I'm a little
+   ticked off that it clashes with my most  exotic  memory-resident  programs,
+   but  otherwise  the  software runs just fine on my Turbo Rambuster 486.  It
+   will probably run like molasses on your XT.
+
+   It's  great  value at $25, and I recommend you register it, although that's
+   easy for me to say because reviewers get freebies".

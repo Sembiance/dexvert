@@ -59,6 +59,7 @@
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
   Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
+* Add moRay support. See format moRay.js for notes
 
 * InstallShield cab extraction can be problematic as unshield doesn't work correctly with everything.
   For example CABS from: https://archive.org/details/250TCF
@@ -85,8 +86,6 @@
 
 * Add 'proper' AskSam support: https://preservation.tylerthorsted.com/2024/01/26/asksam/
   Right now I just have it as a 'simple' file using strings, of which I already have some samples for
-
-* Add moRay support. See format moRay.js for notes
 
 * With wine (or win7) I can add support for the 'sgs.dat' file from the 'Hyper Animation games (sandbox/app/DecomposeSGS)'
   There are only a handful of these files (14), so it's not a high priority

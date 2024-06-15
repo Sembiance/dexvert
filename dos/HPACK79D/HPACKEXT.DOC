@@ -1,0 +1,812 @@
+
+                         -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+  Ver:0.79a0             HPACK - Extended Documentation             1 May 1993
+                         -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+   The following represents the extended documentation for the HPACK archiver.
+ It  contains  information not generally needed in the day-to-day use of HPACK
+ and is intended mainly for the more experienced user,  covering  among  other
+ things  HPACK  return  codes,  more  details on the encryption system used in
+ HPACK, and details on the availability of HPACK for other systems.
+
+HPACK Configuration and Script Files:
+
+ Whenever  HPACK  encounters  a  filename  beginning  with an '@' character it
+ treats the rest of the filename as a  script  file  which  contains  commands
+ which  control the operation of HPACK.  In addition when HPACK is run it will
+ initially look for a default script file called HPACK.CFG in the  directories
+ pointed  to  by  the HPACKPATH environment variable.  This configuration file
+ can be used to set certain basic options for HPACK to be used whenever it  is
+ run,  although  these settings can be overridden with command-line options if
+ desired.
+
+ HPACK configuration/script files have the following basic layout:
+
+   - Leading spaces/tabs (whitespace) are ignored.
+
+   - Any characters following a '#' character are treated as  comments  and
+     ignored
+
+   - Any  remaining characters are treated by HPACK as commands.  These are
+     handled in a non-case-sensitive manner and can, in  the  case  of  the
+     more complex ADD and EXTRACT commands, be spread over several lines.
+
+   - Lines  may  be  terminated  by  either linefeeds, carriage returns, or
+     carriage return/linefeed pairs, HPACK isn't particular.
+
+ Script files can contain two types of commands, those  which  modify  HPACK's
+ basic operation, and those which control the archiving/unarchiving process.
+
+ HPACK Variables
+
+ HPACK  variables are ones which modify its basic mode of operation.  Commands
+ to manipulate variables have the form:
+
+     SET <variable> [= <setting>]
+
+ HPACK uses three types of variables:
+
+   - Boolean variables which can be set to TRUE or FALSE (if no setting  is
+     given  a  default  value  of  TRUE  is assumed).  Examples of commands
+     involving boolean variables are:
+
+     SET crypt = true
+     SET Force-Move
+     SET store-only = false
+
+   - Numeric variables.  An  example  of  a  command  involving  a  numeric
+     variable is:
+
+     SET Crypt.ivCount = 100
+
+   - String  variables.   The  settings  for  these  can  be  surrounded by
+     quotation marks  or  simply  given  verbatim.   Examples  of  commands
+     involving string variables are:
+
+     SET SignerID = "Hoffa, James"
+     SET basePath = /usr/bin/local
+
+ Some  variables are divided into a base class and a subclass.  The base class
+ is the basic class which represents a generalized form of that variable type.
+ For example the USERID variable is a base class of various  types  associated
+ with userID's needed for public-key operations.
+
+ The  subclass  is  derived  from  the  base  class  and  represents  specific
+ instantiations of the basic variable class.  For example the USERID.MAIN  and
+ USERID.SECONDARY  variables  are  subclasses  of  the  USERID  base class and
+ represent the  main  and  secondary  userID's  to  be  used  when  encrypting
+ archives.  Subclasses are denoted by a period '.' when attached to their base
+ class.
+
+ The following boolean variables are  recognised  by  HPACK.   All  correspond
+ directly to standard command-line options:
+
+     CRYPT                  Encrypt entire archive, -c
+     CRYPT-ALL              Encrypt entire archive, -ca
+        CRYPT.SECONDARY     Encrypt archive with secondary password, -cs
+        CRYPT-ALL.SECONDARY Encrypt archive with secondary password, -cas
+     CRYPT-INDIVIDUAL       Encrypt individual files in archive, -ci
+     FORCE-MOVE             Force file move into/out of an archive, -f
+     INTERACTIVE-MODE       Interactive move (prompt for all actions), -i
+     MULTIPART-ARCHIVE      Create a multipart archive, -m
+     OVERWRITE-EXISTING     Overwrite existing archive, -k
+     PUBCRYPT               Public-key encrypt entire archive, -cp
+     PUBCRYPT-ALL           Public-key encrypt entire archive, -cpa
+        PUBCRYPT.SECONDARY  Public-key encrypt archive with secondary public
+                            key, -cps
+        PUBCRYPT-ALL.SECONDARY Public-key encrypt archive with secondary
+                            public key, -cps
+     PUBCRYPT-INDIVIDUAL    Public-key encrypt individual files in archive,
+                            -cpi
+     RECURSE-DIRECTORIES    Recurse through subdirectories
+     SIGN                   Secure entire archive, -l
+     SIGN-ALL               Secure entire archive, -l
+     SIGN-INDIVIDUAL        Secure invidual files in archive, -li
+     STEALTH-MODE           Run in stealth mode, -s
+     STORE-ATTRIBUTES       Store file attributes, -a.
+     STORE-ONLY             Store files without attempting any compression -0.
+     TOUCH-FILES            Touch files on extraction, -t
+     UNIT-COMPRESSION-MODE  Unified compression mode, -u
+     VIEW-DIRECTORIES-ONLY  Display information only on matching directories,
+                            -vd
+     VIEW-FILES-ONLY        Display information only on matching files, -vf
+
+ The following string variables are recognised by HPACK:
+
+     BASEPATH               Specify the base pathname for files.
+     SIGNERID               Specify the userID for the public key to use
+                            when securing an archive
+     USERID                 Specify the userID for the public key to encrypt
+                            an archive with
+        USERID.MAIN         Specify the main userID for the public key to
+                            encrypt an archive with
+        USERID.SECONDARY    Specify the secondary userID for the public key
+                            to encrypt an archive with
+
+ A sample HPACK configuration file which sets various default settings is:
+
+     ########################################################################
+     #                                                                      #
+     #                      HPACK Configuration File                        #
+     #                                                                      #
+     ########################################################################
+
+     # Set userID for securing archives
+
+     SET signerID = "Henry Akely"
+
+     # Default options: Always overwrite existing archives, secure archive,
+     # don't create multipart archive
+
+     SET Overwrite-Source
+     SET Sign = true
+     SET MultiPart = false          # Default setting is false anyway
+
+ HPACK Script Commands
+
+ The  second  type of command which can be found in HPACK configuration/script
+ files are  ones  which  control  the  archiving/unarchiving  process.   These
+ commands  are  usually found only in script files - while adding a command of
+ this type to a configuration file where it  will  always  be  executed  isn't
+ terribly  useful,  it  could be used for example to always include a standard
+ header file in any archive created on the system.
+
+ Currently the only script commands supported by HPACK are the ADD and EXTRACT
+ commands.  For simplicity the ADD command  will  be  used  in  the  following
+ discussion  since  its  operation  is mostly identical to that of the EXTRACT
+ command - the main difference is that the ADD command only takes effect  when
+ HPACK is adding data to an archive, and the EXTRACT command only takes effect
+ when  HPACK  is  extracting  data  from  an archive.  The basic form of these
+ commands is:
+
+     ADD { <file-list> }
+     EXTRACT { <file-list> }
+
+ The file list block can be preceded by a modifier list of the form:
+
+     WITH attribute
+     [AND attribute]
+     ...
+
+ The  attributes,  like  HPACK  variables,  are  of three basic types: Boolean
+ attributes, numeric attributes, and string attributes.   These  are  provided
+ solely  for  forward  compatibility  with  the HPACK Level 2 format and their
+ settings  will  be  ignored  by  the  current  version  of  HPACK.    Further
+ information  on  using these attributes will be provided in the Level 2 HPACK
+ documentation.
+
+ The file list is simply a list of files to add.  More than one  name  can  be
+ given  per  line  if  the  names are seperated by commas.  As is the case for
+ string variables, the filenames can  be  surrounded  by  quotation  marks  or
+ simply given verbatim.
+
+ An  HPACK  script  file which creates an encryted archive with authentication
+ information and which extracts the files from the archive with smart filename
+ translation could look as follows:
+
+     ########################################################################
+     #                                                                      #
+     #                       Sample HPACK Script File                       #
+     #                                                                      #
+     ########################################################################
+
+     # The userID to use when adding authentication information
+
+     SET SignerID = Nathan Pickman   # Overrides option given in config.file
+
+     # The options for adding the files: Sign and encrypt the entire archive,
+     # and add a miscellaneous set of files to it.
+
+     SET Crypt-All
+     SET Sign-All
+     ADD WITH charset = iso8859-1
+         AND language = finnish
+         AND texttype = lf
+         AND error-correction
+         {
+         *.txt, "Data Report of 05/02/93"
+         FILE.DOC
+         .cshrc
+         }
+     ADD { readme.1st }
+
+     # The options for extracting the files: Perform smart translation of file-
+     # names to eliminate naming conflicts.
+
+     SET Overwrite.Smart = True
+     EXTRACT { * }
+
+ Note that the script files themselves are not subject to being overridden  by
+ the  base  path  specified  with the [-b]ase path option (see "HPACK Options"
+ above).  However filenames given within the script file will be overridden by
+ the base path.
+
+ Example: To add files to the archive ARCHIVE.HPK entirely under  the  control
+ of the script file SCRIPT:
+
+     HPACK A ARCHIVE @SCRIPT
+
+
+HPACK SQL Commands
+
+ As  the  number of attributes and options available for a piece of data in an
+ archive grows, manipulating the data based on these attributes  becomes  more
+ and  more  complex.   The  simple  collection-of-files  model used in current
+ archivers becomes inadequate, and an archive needs to be  viewed  as  a  much
+ more complex information database model.
+
+ In order to manage the information in an archive, HPACK uses Structured Query
+ Language  (SQL)  to specify which information is to be accessed and how it is
+ to be displayed.  SQL is an established set of statements that can be used to
+ manage information which is stored in a database.  Using these statements, it
+ is possible to add, delete, or update information in a database,  or  request
+ information  from  the  database.   Since HPACK already includes features for
+ modifying archives, the only SQL  statement  which  is  used  is  the  SELECT
+ statement, which allows a database to be queried for special information.
+
+ A SELECT statement has the following syntax:
+
+     SELECT [DISTINCT] name [,name ...]
+     FROM archive
+     [WHERE expression]
+     [GROUP BY name [,name ...]
+     [HAVING criteria]
+     [ORDER BY name [DESC] [,name [DESC] ...]
+
+ The SELECT statement specifies the names of specific properties of a piece of
+ data  such as size, date, time, name, and so on.  An asterisk '*' will select
+ all properties.  The DISTINCT keyword eliminates  duplicate  entries  in  the
+ resulting  information.   Since  the only logical use for this is to suppress
+ duplicate filenames, and since all filenames are unique  anyway,  HPACK  will
+ accept, but ignore, the DISTINCT keyword.
+
+ The  FROM statement specifies the name of the archive to read the information
+ from.  Since this has already been specified, HPACK will accept, but  ignore,
+ the FROM statement.
+
+ To  select  all  properties  of each piece of data in an archive, the command
+ would be:
+
+     SELECT *
+     FROM archive
+
+ which in fact corresponds to the SQL command:
+
+     SELECT system, length, size, ratio, date, time, name
+     FROM archive
+
+ and will produce the following output:
+
+     System Length   Size   Ratio   Date     Time    Name
+     ------ ------- ------- ----- -------- --------  --------------
+     Amiga     1601     705  57%  26/04/91 21:30:11  Makefile
+     Amiga    17532    4910  72%  23/02/93 18:54:33  What.iff
+     Amiga     1097     495  55%  21/06/92 17:45:08  Installer
+     Amiga     2728    1039  62%  12/07/92 11:11:34  ReadMeFirst
+     Amiga     5263    1792  66%  14/03/91 17:59:37  Overview
+     Amiga     1576     705  56%  16/12/92 16:45:42  IFF Basics
+     Amiga     1836     798  57%  21/03/91 23:20:41  IFF Intro
+     Amiga     6600    2284  66%  23/03/93 23:23:34  AISB Manifesto
+     Amiga    38285    6733  83%  20/01/93 10:48:09  Templates
+            ------- ------- -----                    --------------
+              76518   19462  75%                     9 files
+
+ To select specific properties, the names of the desired properties  would  be
+ used  in  place  of  the asterisk.  Possible properties are date, time, size,
+ length, name, ratio, and system.  To display the date, time, size,  and  name
+ of each file in the archive, the command would be:
+
+     SELECT date, time, size, name
+     FROM archive
+
+ with the following output:
+
+       Date     Time    Size    Name
+     -------- -------- -------  --------------
+     26/04/91 21:30:11     705  Makefile
+     23/02/93 18:54:33    4910  What.iff
+     21/06/92 17:45:08     495  Installer
+     12/07/92 11:11:34    1039  ReadMeFirst
+     14/03/91 17:59:37    1792  Overview
+     16/12/92 16:45:42     705  IFF Basics
+     21/03/91 23:20:41     798  IFF Intro
+     23/03/93 23:23:34    2284  AISB Manifesto
+     20/01/93 10:48:09    6733  Templates
+                       -------  --------------
+                         19462  9 files
+
+ The  ORDER BY statement specifies the order in which the output data is to be
+ displayed.  This statement must be the last one in the entire SELECT command,
+ and will order the output in ascending order based on the  specified  fields.
+ More  than one field can be specified, with the one which is most significant
+ for the ordering being given first.  To  display  the  output  in  descending
+ instead  of  ascending  order,  the field name should be followed by the DESC
+ keyword.
+
+ To display the previous listing and order the output  by  name,  the  command
+ would be:
+
+     SELECT date, time, size, name
+     FROM archive
+     ORDER BY name
+
+ with the following output:
+
+       Date     Time    Size    Name
+     -------- -------- -------  --------------
+     23/03/93 23:23:34    2284  AISB Manifesto
+     16/12/92 16:45:42     705  IFF Basics
+     21/03/91 23:20:41     798  IFF Intro
+     21/06/92 17:45:08     495  Installer
+     26/04/91 21:30:11     705  Makefile
+     14/03/91 17:59:37    1792  Overview
+     12/07/92 11:11:34    1039  ReadMeFirst
+     20/01/93 10:48:09    6733  Templates
+     23/02/93 18:54:33    4910  What.iff
+                       -------  --------------
+                         19462  9 files
+
+ To display the listing in descending order by size, with a secondary ordering
+ criterion of date and time, the command would be:
+
+     SELECT date, time, size, name
+     FROM archive
+     ORDER BY size DESC, date, time
+
+ with the output:
+
+       Date     Time    Size    Name
+     -------- -------- -------  --------------
+     20/01/93 10:48:09    6733  Templates
+     23/02/93 18:54:33    4910  What.iff
+     23/03/93 23:23:34    2284  AISB Manifesto
+     14/03/91 17:59:37    1792  Overview
+     12/07/92 11:11:34    1039  ReadMeFirst
+     21/03/91 23:20:41     798  IFF Intro
+     26/04/91 21:30:11     705  Makefile
+     16/12/92 16:45:42     705  IFF Basics
+     21/06/92 17:45:08     495  Installer
+                       -------  --------------
+                         19462  9 files
+
+ The WHERE, GROUP BY, and HAVING statements are relevant mainly in the Level 2
+ HPACK format and are not used in the current version.
+
+ Currently  SQL  commands  can  only  be  given  on the command-line using the
+ +select option, although in the Level 2 version their  use  in  script  files
+ will be allowed.
+
+
+More on Archive Comments:
+
+ To  make  plain  text  archive  comments  portable  across multiple operating
+ systems it is recommended that they not be hardcoded for  some  fixed  screen
+ size  (such  as 80 x 24) but instead use HPACK's built-in formatting commands
+ as part of the text.   HPACK  will  then  format  the  text  of  the  comment
+ according to these commands when displaying it.
+
+ In  order  to support this, HPACK supports, in addition to the standard plain
+ ASCII text format, a text format called richtext,  defined  in  Internet  RFC
+ 1341  "Multipurpose  Internet  Mail  Extensions",  June  1992.   The richtext
+ format is compatible with SGML (Standard Generalized  Markup  Language),  the
+ ISO  document  formatting  standard.  Using an appropriate DTD (Document Type
+ Definition), an SGML parser can parse a richtext document.
+
+ The syntax of richtext is very simple, and at the top level consists  of  the
+ standard ASCII character set, with special embedded formatting commands being
+ denoted by the angle bracket characters "<" and ">".  Formatting commands are
+ simple  keywords which ascribe certain properties to any following text.  The
+ forward slash "/" negates these properties.  So for  example  "<bold>"  would
+ set  all following text in a boldface font, and "</bold>" would return to the
+ normal font.
+
+ Three special-case formatting commands are defined:
+
+    <lt> represents a literal "<" character.
+    <nl> represents a line break
+    <np> represents a page break
+
+ Currently  defined  richtext  formatting  commands  (not  all  of  which  are
+ implemented by HPACK) are:
+
+    Command:        Action on subsequent text
+    --------        -------------------------
+    <bold>          Text is set in a boldface font
+    <italic>        Text is set in an italic font
+    <fixed>         Text is set in a fixed-width font
+    <smaller>       Text is set in a smaller font
+    <bigger>        Text is set in a larger font
+    <underline>     Text is underlined
+    <center>        Text is centered
+    <flushLeft>     Text is left-justified
+    <flushRight>    Text is right-justified
+    <indent>        Text is indented at the left margin
+    <indentRight>   Text is indented at the right margin
+    <outdent>       Text is outdented at the left margin
+    <outdentRight>  Text is outdented at the right margin
+    <samePage>      Text is grouped, if possible, on the same page
+    <subscript>     Text is interpreted as a subscript
+    <superscript>   Text is interpreted as a superscript
+    <heading>       Text is printed as a page heading
+    <footing>       Text is printed as a page footing
+    <iso-8859-x>    Text is interpreted as being in the appropriate ISO 8859-x
+                    character set.
+    <us-ascii>      Text is interpreted as being in the US-ASCII character set
+    <excerpt>       Text  is  interpreted  as  a  textual excerpt from another
+                    source.    Typically   this   will   be   displayed  using
+                    indentation and an alternate font.
+    <paragraph>     Text is interpreted as a single paragraph with appropriate
+                    paragraph breaks
+    <signature>     Text is interpreted as a "signature".  Sometimes this will
+                    be displayed in a smaller font or set apart from the  main
+                    text of the message
+    <comment>       Text is interpreted as a comment
+
+ Each formatting command remains  in  effect  until  undone  by  the  matching
+ negative  formatting  command.  For example bold italic text can be specified
+ as:
+
+    <bold><italic>text</italic></bold>
+
+ or:
+
+    <italic><bold>text</bold></italic>
+
+ Richtext also distinguishes between "hard" and "soft" line breaks.  A  normal
+ line  break  in  the richtext data is interpreted as a "soft" line break, one
+ which is included only to make editing the richtext source easier  but  which
+ is  not  displayed  when  the  richtext  is output.  To include a "hard" line
+ break (one which is displayed when the richtext is  viewed),  the  "<nl>"  or
+ "<paragraph>" commands should be used instead.
+
+ An example richtext archive comment is:
+
+    <bold>HPACK</bold> - a portable archive format for the 1990's.<nl><nl>
+    <indent>Unlike previous archivers which have used <italic>ad hoc</italic>
+    formats with no attempt at portability and internationalization,
+    <bold>HPACK</bold> attempts to be compatible with numerous
+    <fixed>ISO</fixed>, <fixed>Internet</fixed>, and <fixed>ECMA</fixed>
+    standards.
+
+ When displayed after formatting has been performed, the text looks as follows
+ (and you'll need the proper version of the documentation to see this):
+
+ *HPACK* - a portable archive format for the 1990's.
+
+    Unlike previous archivers which have used ad hoc formats with no attempt at
+    portability and internationalization, *HPACK* attempts to be compatible
+    with numerous _ISO_, _Internet_, and _ECMA_ standards.
+
+ Note  that  many  of  the  text  types will not be available on some systems.
+ HPACK will do the best with what's available.
+
+
+HPACK Return Codes:
+
+ If an error occurs during archive processing, HPACK will return one  of  four
+ sets of return values.  These are:
+
+   0         No error
+   001-099   Severe error
+   100-199   Error
+   201-255   Warning
+
+ The error types can thus be quickly grouped into one  of  three  classes  and
+ handled appropriately.  The actual values of these error return values are:
+
+     Type:             Value:      Description:
+     -----             ------      ------------
+
+   EXIT_OK               0         No error
+
+   EXIT_INT_ERR          1         Internal error
+   EXIT_NO_MEM           2         Out of memory
+   EXIT_NO_DISK          3         Out of disk space
+   EXIT_NO_ARCH          4         Can't open archive file
+   EXIT_NO_TEMP          5         Can't open temporary file
+   EXIT_NO_PATH          6         Can't find path
+   EXIT_NO_BASE          7         Can't access base directory
+   EXIT_NO_MKDIR         8         Can't create directory
+   EXIT_BREAK            9         User interrupt
+   EXIT_FILE_ERR        10         Unknown file error
+   EXIT_DIR_CORRUPT     11         Archive directory corrupted
+
+   EXIT_LONG_PATH      100         Path too long
+   EXIT_NO_OVERRIDE    101         Can't override base path
+   EXIT_NEST           102         Directories nested too deeply
+   EXIT_SCRIPT_ERR     103         Error(s) in script file
+   EXIT_NOT_ARCH       104         Not an HPACK archive
+   EXIT_BAD_KEYFILE    105         Bad keyfile
+   EXIT_NOTHING        106         Nothing to do
+   EXIT_COMMAND        107         Unknown command
+   EXIT_OPTION         108         Unknown option
+
+   EXIT_PASS           200         Differing or incorrect password(s)
+   EXIT_CHANGE         201         Bad attempt to change archive (eg attempt
+                                    to change a block-encrypted archive)
+   EXIT_NOLONG         202         Long arg.format not supported
+   EXIT_BADWILD        203         Bad wildcard format or inappropriate use of
+                                    wildcards
+   EXIT_SECURITY       204         General security/encryption error
+   EXIT_NOCRYPT        205         Cannot process encrypted archive
+
+ Under  VMS  return  values are handled in a somewhat different manner.  HPACK
+ will return the error code as above in the facility number field, as well  as
+ a  status  of  success,  warning, error, or severe error corresponding to the
+ above categories of error.
+
+ For  more  details on the error types, see the section "HPACK Error Messages"
+ in the main HPACK documentation HPACK.DOC.
+
+
+General Archive Information:
+
+ HPACK uses a central directory structure contained at the end of the archive,
+ with the option of including directory information headers with each archived
+ file  for improved error recovery.  All data stored in HPACK archives is left
+ unchanged - there is no need for any truncation of filenames, translation  of
+ file attributes, or omission of OS-dependant information from a file in order
+ to  archive  it.   All  information  about  a  file (such as attributes, file
+ datestamps,  attached  comments,  icons,   graphics   information,   security
+ information,  user-defined  file  attributes,  and so on), is stored with the
+ file and is translated on extraction if necessary.  HPACK includes  a  fairly
+ complete   set  of  internal  filesystem  management  routines  which  handle
+ operations such as creating directories, adding and  deleting  files  to/from
+ directories,  and  so  on.   Filenames  and directory names of any length and
+ containing  any  characters  are  supported,   as   are   special   operating
+ system-dependant  files  such  as  links, volume labels/ID's, and so on.  All
+ versions of HPACK will handle all the extra information which can be added to
+ a file, but due to differences between various operating systems some of  the
+ information  may  not  be used on some systems (for example MSDOS, a somewhat
+ complex bootstrap loader used on many 80x86 systems, will ignore most of  the
+ extra information it finds in an archive).
+
+
+HPACK Data Authentication/Encryption:
+
+ HPACK  allows  files  to  be  encrypted  using  a variety of either public or
+ conventional-key cryptosystems.   At  the  moment  only  the  RSA  public-key
+ cryptosystem  is  used  for data authentication, and the MDC conventional-key
+ and RSA public-key cryptosystems are used for file or archive encryption. The
+ RSA key format used in HPACK is compatible with  version  2.0  or  higher  of
+ Philip Zimmermann's excellent PGP encryption package.
+
+ In  public-key  encryption,  each  user  choses  a pair of keys, a public key
+ (which as the name suggests is made available publicly), and  a  private  key
+ which only the user knows.  This allows a complete stranger to use the public
+ key  to encrypt a message to the user which only the user can decrypt, unlike
+ conventional-key encryption which requires that the encryption key  be  first
+ somehow communicated to the user.
+
+ HPACK  uses  the  RSA  Data  Security  Inc.   MD5 message digest algorithm to
+ generate a unique 'fingerprint'  of  the  data  to  be  authenticated.   This
+ fingerprint consists of a cryptographically strong 128-bit one-way hash value
+ which  it is computationally infeasible to invert.  This is a bit like a CRC,
+ but unlike a CRC it is *very* difficult for an attacker to bypass:  Not  only
+ is  the  MD5  function  specifically designed for this purpose (which the CRC
+ function is not), but it is also generally agreed that a  message  digest  of
+ this sort should be a minimum of 128 bits long: A 32-bit CRC will take around
+ 65,000  attempts  to  defeat  using  a so-called 'birthday attack', a 128-bit
+ message digest will take in the order of 20,000,000,000,000,000,000  attempts
+ to  break  (in  fact CRC's are even easier to defeat than that - it is a very
+ simple matter to generate a message with an arbitrary CRC value, making CRC's
+ worthless for detecting deliberate manipulation of data).   MD5  has  so  far
+ resisted  attack,  although  a  greatly-reduced  form  of  MD5  was broken at
+ Eurocrypt  '92  in  2^13  attempts  with  a  chosen  plaintext  attack  using
+ differential  cryptanalysis,  and  another   version,   run   under   special
+ circumstances  which cannot occur in practice, was broken at Eurocrypt '93 in
+ 2^16 attempts using differential cryptanalysis.
+
+ This  message  digest  is  then  signed  using  the RSA public-key encryption
+ algorithm, with the option of using  a  commercial-grade  (512  bits  or  155
+ digits)  or  military-grade (1024 bits or 310 digits) key (HPACK will in fact
+ use keys of any length up to 2048 bits or 620 digits, the  two  values  given
+ above are simply the default key lengths used by PGP 2.0).  The exact size of
+ the  key  to  use depends on how long the secret must be kept secure, and how
+ large an amount of resources your opponent is prepared to commit to  breaking
+ (factoring)  the  key.   In  "Public-Key  Cryptography,  State of the Art and
+ Future Directions", a report from a workshop involving  the  world's  leading
+ experts in the field, the authors state:
+
+ "For most applications a modulus size of 1024 bits for RSA should  achieve  a
+  sufficient  level of security for 'tactical' secrets for the next ten years.
+  This is for long term secrecy purposes, for short term authenticity purposes
+  512 bits might suffice in this century".
+
+ RSA Data Security's frequently-asked-question list contains the statement:
+
+ "Rivest  estimates  that a 512-bit modulus, currently the most common modulus
+  length,  can  be  factored  with  an  $8.2 million effort today, less in the
+  future.   Those with extremely valuable data (or large potential damage from
+  digital forgery) should use a modulus of, say 700 or 800 bits in length.   A
+  certifying authority should use a modulus of 1000 bits or more, because  the
+  validity  of  many  other  key  pairs depends on the security of one central
+  key."
+
+ The $8.2 million figure is actually somewhat optimistic, in reality it should
+ be somewhat more difficult than that.  For an example from real life, in 1977
+ RSA Data Security published a  129-digit  (or  430-bit)  number  which  is  a
+ product of two primes, and offered a $100 prize to the first person to factor
+ it.  In spite of fifteen years of work on it, noone has done so (at least not
+ publicly), although  an attempt using approximately 10,000 workstations and a
+ 16,384 processor MasPar machine are currently under way and should produce  a
+ result within a few months.
+
+ The following table gives another estimate of the amount of money  needed  to
+ break an RSA key of a given length over the next 20 years:
+
+       Budget    Year |   1993   |    2003   |   2013
+      ================+==========+===========+===========
+          $25,000     | 400 bits |  450 bits |  550 bits
+      ----------------+----------+-----------+-----------
+        $25,000,000   | 600 bits |  700 bits |  850 bits
+      ----------------+----------+-----------+-----------
+      $25,000,000,000 | 900 bits | 1050 bits | 1200 bits
+      ----------------+----------+-----------+-----------
+
+ As the power of computer hardware  and  software  increases,  the  investment
+ necessary  to  break a key of a given length becomes less and less, such that
+ the shortest keys (512  bits)  which  currently  offer  borderline  security,
+ become  quite  insecure  after  around a decade.  Even 1000-bit keys would be
+ risky if faced with a big-budget opponent willing to spend the  money.   2000
+ to  3000-bit RSA keys seem prudent to protect any data that you are seriously
+ concerned might be attacked by a big-budget (or very patient) opponent.
+
+ Finally, the US government allows export of RSA encryption code provided  the
+ key  size  is  limited  to less than 512 bits.  You are left to draw your own
+ conclusions from this fact.
+
+ The encryption routine used by HPACK employs the MDC algorithm run in  cipher
+ feedback  mode,  a  128-bit  block cipher derived from the MD5 message digest
+ algorithm with a key size of up to 2048 bits (though HPACK limits this to  80
+ ASCII  characters  or  around  560  bits  of effective key information). This
+ algorithm  has  been  designed  to  make  encryption  relatively   fast   and
+ brute-force  attacks  slow and painful.  Once the initial password management
+ is done, en/decryption proceeds at  a  fairly  rapid  pace,  however  if  the
+ password  is  changed  constantly (as it would be for a brute-force attack) a
+ lot of time is spent in password management after each change.   MDC  has  so
+ far  not  been seriouly attacked, and it is highly unlikely that generalizing 
+ the MD5 attack to MDC is possible.
+
+ In  comparison, the US Data Encryption Standard (DES) can be broken much more
+ quickly using a simple brute-force attack involving trying all possible  keys
+ until the correct one is found.  DES keysearch machines can be bought off the
+ shelf  for  approximately  $500,000  but aren't usually sold by that name.  A
+ commercial circuit emulation machine (eg. Quickturn) containing a  number  of
+ FPGAs,  (say 500 to 1000 3090's) can be programmed to be a DES search engine.
+ With 500 chips, running at 10Mhz, this device can perform 5 billion  tests  a
+ second.   The  time  to  derive  one  key  is thus is a maximum of 14 million
+ seconds or 23 weeks, with an average time of 12 weeks.  Anyone who needs  the
+ answer faster than that can simply buy a bigger machine - a  paper  presented
+ at  Crypto '93  provides complete constructional details for a machine which,
+ for a once-only investment of $100 million, will break DES in  2  minutes.  A
+ scaled-down  $1 million  machine  for those with smaller budgets takes around
+ 3.5 hours  to  perform  the  same task, or 1 1/2 days for the bargain-basment
+ $100,000 version.
+
+ Due to the layout of an HPACK archive all encrypted data  blocks  begin  with
+ raw  compressed  data,  greatly  reducing  the  chances  of a so-called known
+ plaintext attack (in which the attacker knows, or  can  guess,  some  of  the
+ unencrypted  data).   HPACK  overwrites any sensitive data in memory once the
+ encryption/decryption/authentication  process  has  completed,  and  contains
+ extensive  error trapping and handling to ensure that even if a serious error
+ were to occur, the program stack and data areas would be wiped on exit.
+
+ The code for the encryption and authentication  routines  used  in  HPACK  is
+ freely  available  in  source  form  (see  the next section, "Verification of
+ HPACK's Encryption/Authentication").  In this way it is possible  to  compile
+ the  code  and  independantly  verify  that HPACK is indeed using the correct
+ algorithms and encryption/authentication techniques, and thus  eliminate  any
+ fears of trapdoors hidden in the code/encrypted data.
+
+
+Verification of HPACK's Encryption/Authentication:
+
+ The  encryption  and authentication code used by HPACK can be freely examined
+ by anyone wishing to reassure themselves of its security.   The  MD5  message
+ digest algorithm is described in the following source:
+
+   Internet  RFC 1321, "The MD5 Message-Digest Algorithm", Internet Activities
+     Board, 1992.  Obtainable from ftp.nisc.sri.com in the rfc directory.
+
+ The mode of operation of the MDC cipher is described in the following federal
+ and international standards:
+
+   National Bureau of Standards FIPS publication 81: "DES Modes of Operation",
+     December 1980.
+
+   ISO/IEC 10116:1991 "Information technology - Modes  of  operations  for  an
+     n-bit block cipher algorithm", 1991.
+
+   ISO 10126-2:1991 "Banking - Procedures for message encipherment (wholesale)
+     - Part 2", 1991
+
+ The RSA algorithm is described in many texts, among them:
+
+   Brassard,  G.  "Modern  Cryptology",  Lecture  Notes  in  Computer  Science
+     vol.325, 1988.
+
+   Rivest,  R.,  Shamir,  A.,  and Adleman, L. "A method for obtaining digital
+     signatures and public-key cryptosystems", CACM vol.21, no.2, Feb.1978
+
+   RSA Data Security Inc. "PKCS  #1:  RSA  Encryption  Standard",  June  1991,
+     Version 1.4.
+
+ It is also a part of the following standards:
+
+   AS 2805.6.5.3 "Electronic Funds Transfer - Key Management", 1990.
+
+   ISO  9796:1988  "Information  technology,  security  techniques  -  Digital
+     signature scheme giving message recovery", 1988
+
+   RSA Data Security Inc. "PKCS  #1:  RSA  Encryption  Standard",  June  1991,
+     Version 1.4.
+
+ In all cases the above algorithms can be derived from the relevant standards,
+ and all code used in  HPACK  checked  against  official  implementations  for
+ accuracy.
+
+
+An Analysis of HPACK Encryption Security:
+
+ Much  has  been  made recently of the dangerously insecure encryption methods
+ used by some archivers fnord.  HPACK goes to great lengths to  try  and  make
+ breaking  of  its encryption system as difficult as possible.  An analysis of
+ possible weak points in the encryption is given below:
+
+ Encryption of individual files:
+   Slow  and  reasonably safe.  Since a different 64-bit initialization vector
+   is used to rekey the MDC algorithm for each file, performing a  brute-force
+   attack  on  a  collection of files would involve rekeying the algorithm for
+   each file being attacked.  Very difficult to attack unless the plaintext is
+   known.
+
+ Encryption of the entire archive:
+   Faster  than  encrypting  individual  files,  and  more secure for the data
+   portion of the archive since only the start of the first file is  available
+   to  be  attacked.   However  the  encryption  of  the directory information
+   provides partially-known plaintext in the form of  the  directory  headers.
+   The  information content is probably enough to allow at least a preliminary
+   form of automatic checking.
+
+ Encryption of the entire archive with a secondary password:
+   About the same speed as encrypting the entire archive, and the most  secure
+   of  the  encryption  schemes.   Even if the encryption for the directory is
+   broken, the main data is still protected by a second  password,  and  again
+   only the start of the first file is available to be attacked.
+
+ There  are two possible methods of attack, either a known-plaintext attack on
+ the archive data, or a partially-known-plaintext attack on the directory data.
+ If  the  uncompressed,  unencrypted  contents of the archive are known, HPACK
+ can be used to compress them without encryption and provide  plaintext  which
+ can  be  used  in  a  brute-force  or dictionary-based attack.  Similary, the
+ archive directory contains a relatively fixed format which can be  parsed  as
+ part of a brute-force attack to narrow down the search range considerably.
+
+ Using  public-key  encryption  offers  more security against dictionary-based
+ cracking programs since the hybrid method employed by HPACK  uses  a  128-bit
+ binary  MDC key encrypted with an RSA public key.  Breaking this system would
+ entail a brute-force search on the entire 128-bit key space, a total of 1.7 x
+ 10^38 keys assuming a match is found after half the keys have been scanned.
+
+
+Availability of HPACK for Other Systems:
+
+ HPACK  is  currently available in Amiga, Archimedes, Atari ST/TT, MSDOS, OS/2
+ (16 and 32 bit), Unix,  and  Windows  versions,  with  other  ports  becoming
+ available as access to the relevant hardware and software permits.  If anyone
+ wants  a version for their particular system, they are welcome to try to port
+ it across.  The code consists of around 500K of mostly ANSI C code with  some
+ low-level  system  I/O  thrown in, and a knowledge of assembly language being
+ useful on low-end systems to speed up a  few  of  the  core  compression  and
+ encryption  routines.   Anyone  interested  in porting HPACK to any system is
+ urged to contact the author...
+
+ All  code  contained  in  HPACK,  with  the  exception of the RSA encryption/
+ decryption routines and the MD5 message  digest  routines,  is  entirely  the
+ result  of original research and is not patented, nor do I have any intention
+ of ever patenting it.  The only code in HPACK which falls under any  sort  of
+ restrictions  is  the  RSA code.  MD5 has been placed in the public domain by
+ its  authors.   Since  HPACK originates from outside the US and since I don't
+ believe in crippleware, there is no "restricted" or "crippled" version - full
+ encryption and authentication capabilities are available to everyone.

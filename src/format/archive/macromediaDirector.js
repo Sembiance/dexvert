@@ -20,7 +20,10 @@ export class macromediaDirector extends Format
 		// Some files like easyData.dxr are not properly handled by directorCastRipper12. So we use 'dirOpener' which actually re-packs the file as a modern director file, and then pass that to directorCastRipper12
 		// This isn't super ideal because dirOpener can mess up assets, but it's better than having nothing at all
 		"projectorRays -> dirOpener -> directorCastRipper12",
-		"dirOpener -> directorCastRipper12"
+		"dirOpener -> directorCastRipper12",
+
+		// Some files directorCatRipper12 chokes on (julie) so we just fallback to macromediaDrector itself
+		"recover_cct -> macromediaDirector"
 
 		/* Other extractors are available. Some were tried in the past (see sandbox/legacy/program/), some haven't been:
 		macromediaDirector	Used to use this for all extraction, but now thanks to Director Cast Ripper, it's not needed anymore

@@ -11,5 +11,6 @@ export class wavefrontOBJ extends Format
 		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
 		return supportFiles.length===0 ? false : supportFiles;
 	};
-	converters = ["blender[format:obj]", "assimp", "milkShape3D[matchType:magic][format:wavefront]"];
+	keepFilename = true;
+	converters   = ["blender[format:obj]", "assimp", "milkShape3D[matchType:magic][format:wavefront]"];
 }

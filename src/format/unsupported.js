@@ -1022,6 +1022,7 @@ export default
 		watcomProfilerSamplingData       : {name : "Watcom Profiler Sampling Data", ext : [".smp"], magic : ["Watcom Profiler Sampling data"]},
 		whackerTrackerAudioDriver        : {name : "Whacker Tracker audio Driver", ext : [".drv"], magic : ["Whacker Tracker audio Driver"]},
 		winampAdvVisStudioStyle          : {name : "Winamp Advanced Visualization Studio File", ext : [".avs"], magic : ["Winamp Advanced Visualization Studio File"]},
+		windows9XBootLoader              : {name : "Windows 9X boot loader", magic : ["Windows 95/98/ME boot loader"]},
 		windows98Passwords               : {name : "Windows 98 passwords", ext : [".pwl"], magic : ["Windows 98 passwords"], weakMagic : true},
 		windowsCalendar                  : {name : "Windows Calendar", ext : [".cal"], magic : ["Windows Calendar"]},
 		windowsHelpSearchIndex           : {name : "Windows Help Full Text Search Index", ext : [".fts"], magic : ["Windows Help Full-Text Search index file", "MS Windows help Full Text Search index"]},

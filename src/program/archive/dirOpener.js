@@ -70,6 +70,8 @@ export class dirOpener extends Program
 			Local $alertWindow
 			Local $startTime = GetTime()
 			Do
+				WindowFailure("Macromedia Projector", "encountered a problem", -1, "D")
+				WindowFailure("dirOpener", "Cannot parse", -1, "{ESCAPE}")
 				If Not ProcessExists("dirOpener300-850-1-PC.exe") Then ExitLoop
 
 				$alertWindow = WinWaitActive("[CLASS:#32770]", "", 5)

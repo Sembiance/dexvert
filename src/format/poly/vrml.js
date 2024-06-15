@@ -11,7 +11,8 @@ export class vrml extends Format
 		const supportFiles = otherFiles.filter(o => [".gif", ".jpg", ".tiff", ".tif"].includes(o.ext.toLowerCase()));
 		return supportFiles.length===0 ? false : supportFiles;
 	};
-	converters = dexState =>
+	keepFilename = true;
+	converters   = dexState =>
 	{
 		const r = [];
 		if(dexState.hasMagics(/^fmt\/94( |$)/))

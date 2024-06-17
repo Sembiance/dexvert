@@ -8,7 +8,7 @@ import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {WEAK_MAC_TYPE_CREATORS} from "../WEAK.js";
 
-const MAX_DURATION = xu.HOUR;
+const MAX_DURATION = xu.HOUR + (xu.MINUTE*15);
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
 const DESIRED_SAMPLE_COUNT = 10;

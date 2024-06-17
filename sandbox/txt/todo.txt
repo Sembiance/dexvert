@@ -29,6 +29,8 @@
   Utilize this to convert/extract SCI0 pics from Sierra SCI files.
   The author said this about detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
 
+* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
+
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP

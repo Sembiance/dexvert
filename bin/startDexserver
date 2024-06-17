@@ -11,7 +11,6 @@ rm -f /mnt/dexvert/daemonize_dexserver.pid
 daemonize -c /mnt/dexvert/log -e /mnt/dexvert/log/dexserver.err -o /mnt/dexvert/log/dexserver.out -p /mnt/dexvert/daemonize_dexserver.pid /mnt/compendium/.deno/bin/dexserver
 
 KIDPIDS=()
-
 tail -f /mnt/dexvert/log/dexserver.out &
 KIDPIDS+=($!)
 tail -f /mnt/dexvert/log/dexserver.err &
@@ -27,3 +26,19 @@ for pid in "${KIDPIDS[@]}"; do
 done
 
 echo -e "\nDexserver started!!\n\nIt will remain running in background, run stopDexserver to stop it cleanly"
+
+if [ "$(hostname)" == "ridgeport" ]; then
+	KIDPIDS=()
+	tail -n 0 -f /mnt/dexvert/log/dexserver.out &
+	KIDPIDS+=($!)
+	tail -n 0 -f /mnt/dexvert/log/dexserver.err &
+	KIDPIDS+=($!)
+
+	while [ -f /mnt/ram/dexvert/dexserver.pid ]; do
+		sleep 1
+	done
+
+	for pid in "${KIDPIDS[@]}"; do
+		kill "$pid"
+	done
+fi

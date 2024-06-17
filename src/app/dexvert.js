@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
-import {cmdUtil, fileUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil} from "xutil";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 
 const argv = cmdUtil.cmdInit({
@@ -32,6 +32,13 @@ if(argv.logFile)
 	xlogOptions.logFilePath = argv.logFile;
 const xlog = new XLog(argv.json && !argv.logFile ? "none" : argv.logLevel, xlogOptions);
 
+const tailProcs = [];
+if(!argv.logFile && xlog.atLeast("debug"))
+{
+	tailProcs.push(await runUtil.run("tail", ["-n", "0", "-f", "/mnt/dexvert/log/dexserver.out"], {detached : true, liveOutput : true}));
+	tailProcs.push(await runUtil.run("tail", ["-n", "0", "-f", "/mnt/dexvert/log/dexserver.err"], {detached : true, liveOutput : true}));
+}
+
 const dexvertOptions = {};
 if(argv.programFlag)
 {
@@ -55,6 +62,7 @@ if(argv.programFlag)
 async function handleExit(ignored)
 {
 	await xlog.flush();
+	await tailProcs.parallelMap(async o => await runUtil.kill(o.p));
 	Deno.exit(0);
 }
 
@@ -82,7 +90,7 @@ if(argv.direct)
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
 const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
 if(!r && !logLines)
-	Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+	await handleExit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
 
 if(!argv.json && logLines.length)
 	console.log(`${logLines.join("\n")}\n`);

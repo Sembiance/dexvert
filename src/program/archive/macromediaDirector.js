@@ -17,6 +17,8 @@ export class macromediaDirector extends Program
 	// But meh. This seems like a lot of work for potentially no payoff since the script below would not know how to 'handle' an xtra format anyways. Movies are the common xtra handler and those are usually external standalone files
 
 	osData = r => ({
+		timeout : xu.MINUTE*45,	// Some files can take a LOOONG time to extract. We stop after 45 minutes, which allows at least some of the files to be extracted. This also prevents the possibility of it hanging forever due to a bug or something
+
 		script : `
 			#include <GuiListView.au3>
 

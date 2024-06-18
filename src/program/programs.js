@@ -9,7 +9,7 @@ export {programs};
 
 let initCalled = false;
 
-const programDirPath = path.join(import.meta.dirname, "..", "..", "src", "program");
+export const programDirPath = path.join(import.meta.dirname, "..", "..", "src", "program");
 
 async function loadProgramFilePath(programFilePath, {reload}={})
 {
@@ -43,33 +43,28 @@ export async function init(xlog=new XLog(["crystalsummit", "ridgeport"].includes
 
 	const programFilePaths = await fileUtil.tree(programDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Loading ${programFilePaths.length} program files...`;
-
 	await Promise.all(programFilePaths.map(loadProgramFilePath));
+	xlog.debug`Loaded ${Object.keys(programs).length} programs`;
 }
 
-export async function monitor(xlog=new XLog("info"))
+export async function programChanged({type, filePath}, xlog=new XLog("info"))
 {
-	const monitorcb = async ({type, filePath}) =>
+	if(!filePath || filePath.endsWith("programs.js"))
+		return;
+	
+	if(type==="create" || type==="modify")
 	{
-		if(!filePath || filePath.endsWith("programs.js"))
-			return;
-		
-		if(type==="create" || type==="modify")
+		try
 		{
-			try
-			{
-				await delay(250);	// give the file time to finish writing, most important for newly created files
-				await loadProgramFilePath(filePath, {reload : true});
-				xlog.info`${fg.violet("RELOADED")} program/${path.relative(programDirPath, filePath)}`;
-			}
-			catch(err) { xlog.error`FAILED to RELOAD program: ${filePath} error: ${err}`; }
+			await delay(250);	// give the file time to finish writing, most important for newly created files
+			await loadProgramFilePath(filePath, {reload : true});
+			xlog.info`${fg.violet("RELOADED")} program/${path.relative(programDirPath, filePath)}`;
 		}
-		else if(type==="delete")
-		{
-			delete programs[path.basename(filePath, ".js")];
-			xlog.info`${fg.violet("UNLOADED")} program/${path.relative(programDirPath, filePath)}`;
-		}
-	};
-
-	await fileUtil.monitor(programDirPath, monitorcb);
+		catch(err) { xlog.error`FAILED to RELOAD program: ${filePath} error: ${err}`; }
+	}
+	else if(type==="delete")
+	{
+		delete programs[path.basename(filePath, ".js")];
+		xlog.info`${fg.violet("UNLOADED")} program/${path.relative(programDirPath, filePath)}`;
+	}
 }

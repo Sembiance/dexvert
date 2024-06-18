@@ -1,11 +1,12 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
 import {fileUtil, encodeUtil} from "xutil";
-import {formats} from "../src/format/formats.js";
+import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
 import {Identification} from "./Identification.js";
 import {getDetections} from "./Detection.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
 // matches the given value against the matcher. If 'matcher' is a string, then value just needs to start with matcher, unless fullStringMatch is set then the entire string must be a case insensitive match. If 'matcher' is a regexp, it must regex match value.
 function flexMatch(value, matcher, fullStringMatch)
@@ -409,3 +410,11 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	return {idMeta : idMetaData, ids : result};
 }
+
+export async function rpcidentify(inputFile, {logLevel="error"}={})
+{
+	const rpcData = {op : "dexid", inputFilePath : inputFile.absolute, logLevel};
+	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+	return r;
+}
+

@@ -3,12 +3,14 @@ import {Server} from "../Server.js";
 import {path} from "std";
 import {WebServer} from "WebServer";
 import {XWorkerPool} from "XWorkerPool";
-import {init as initPrograms} from "../program/programs.js";
-import {init as initFormats} from "../format/formats.js";
+import {init as initPrograms, programDirPath} from "../program/programs.js";
+import {init as initFormats, formatDirPath} from "../format/formats.js";
+import {fileUtil} from "xutil";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
 const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.60);
+const DEX_WORKER_ID_COUNT = Math.floor(navigator.hardwareConcurrency*0.30);
 const LOCKS = new Set();
 
 export class dexrpc extends Server
@@ -23,7 +25,8 @@ export class dexrpc extends Server
 		await initFormats();
 
 		this.xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
-		this.pool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
+		this.dexPool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
+		this.idPool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
 
 		const runEnv = {};
 		for(const [key, value] of Object.entries(Deno.env.toObject()))
@@ -32,8 +35,27 @@ export class dexrpc extends Server
 				runEnv[key] = value;
 		}
 
-		await this.pool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv});
-		this.xlog.info`${DEX_WORKER_COUNT} workers ready!`;
+		await Promise.all([
+			this.dexPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv}),
+			this.idPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_ID_COUNT, runEnv})]);
+
+		this.xlog.info`${DEX_WORKER_COUNT} dex workers and ${DEX_WORKER_ID_COUNT} id workers ready!`;
+
+		this.xlog.info`Starting format & program monitors...`;
+		const monitorsReady = [];
+		const changeHandler = async (op, change) =>
+		{
+			if(change.type==="ready")
+				return monitorsReady.push(op);
+
+			await [this.idPool, this.dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
+		};
+		
+		this.monitors = [
+			await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)),
+			await fileUtil.monitor(programDirPath, async change => await changeHandler("programChange", change))];
+		
+		await xu.waitUntil(() => monitorsReady.length===this.monitors.length);
 
 		this.xlog.info`Starting web RPC...`;
 
@@ -49,7 +71,7 @@ export class dexrpc extends Server
 			const workerData = await request.json();
 			workerData.rpcid = this.rpcid++;
 			this.rpcData[workerData.rpcid] = {reply, workerData};
-			this.pool.process([workerData]);
+			this[workerData.op==="dexid" ? "idPool" : "dexPool"].process([workerData]);
 		}, {detached : true, method : "POST", logCheck : () => false});
 
 		this.webServer.add("/lock", async request =>
@@ -104,8 +126,9 @@ export class dexrpc extends Server
 	{
 		if(this.webServer)
 			this.webServer.stop();
-			
-		await this.pool?.stop();
+
+		await this.monitors.parallelMap(async monitor => await monitor?.stop());
+		await [this.dexPool, this.idPool].parallelMap(async pool => await pool?.stop());
 
 		this.running = false;
 	}

@@ -232,7 +232,7 @@ export default
 		drafixWindowsCADDrawing   : {name : "Drafix Windows CAD Drawing", ext : [".cad", ".slb"], magic : ["Drafix Windows CAD drawing"]},
 		drawingInterchangeBinary  : {name : "Drawing Interchange Binary Format", ext : [".dxb"], magic : ["AutoCAD Drawing Exchange Binary Format", /^fmt\/54( |$)/]},
 		easyCADDrawing            : {name : "EasyCAD Drawing", ext : [".fcd"], magic : ["EasyCAD drawing"]},
-		eASeattlePictureGameData  : {name : "EA Seattle picture game data", ext : [".pic"], magic : ["EA Seattle picture game data (UNCP)"], weakMagic : true},
+		eaSeattlePictureGameData  : {name : "EA Seattle picture game data", ext : [".pic"], magic : ["EA Seattle picture game data (UNCP)"], weakMagic : true},
 		freelanceGraphicsDrawing  : {name : "Freelance Graphics Drawing", ext : [".drw"], magic : ["Freelance Graphics Drawing"]},
 		fxgBitmap                 : {name : "FXG Bitmap", ext : [".fxg"], magic : ["FXG bitmap"]},
 		genericCADD               : {name : "Generic CADD", ext : [".gcd"], magic : ["Generic CADD drawing"]},

@@ -10,7 +10,7 @@ export {formats};
 
 let initCalled = false;
 
-const formatDirPath = path.join(import.meta.dirname, "..", "..", "src", "format");
+export const formatDirPath = path.join(import.meta.dirname, "..", "..", "src", "format");
 
 async function loadFormatFilePath(formatFilePath, {reload}={})
 {
@@ -203,51 +203,44 @@ export async function init(xlog=new XLog("info"))
 
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Loading ${formatFilePaths.length} format files...`;
-
 	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive()]));
-
-	xlog.info`Loaded ${Object.keys(formats).length} formats`;
+	xlog.debug`Loaded ${Object.keys(formats).length} formats`;
 }
 
-export async function monitor(xlog=new XLog("info"))
+export async function formatChanged({type, filePath}, xlog=new XLog("info"))
 {
-	const monitorcb = async ({type, filePath}) =>
+	if(!filePath || filePath.endsWith("formats.js"))
+		return;
+
+	if(type==="create" || type==="modify")
 	{
-		if(!filePath || filePath.endsWith("formats.js"))
-			return;
-
-		if(type==="create" || type==="modify")
+		try
 		{
-			try
+			if(path.basename(filePath)==="unsupported.js")
 			{
-				if(path.basename(filePath)==="unsupported.js")
-				{
-					await loadUnsupported({reload : true});
-				}
-				else if(path.basename(filePath)==="simple.js")
-				{
-					await loadSimple({reload : true});
-				}
-				else if(path.basename(filePath)==="gameArchive.js")
-				{
-					await loadGameArchive({reload : true});
-				}
-				else
-				{
-					await delay(250);	// give the file time to finish writing, most important for newly created files
-					await loadFormatFilePath(filePath, {reload : type==="modify", create : type==="create"});
-				}
-
-				xlog.info`${fg.violet("RELOADED")} format/${path.relative(formatDirPath, filePath)}`;
+				await loadUnsupported({reload : true});
 			}
-			catch(err) { xlog.error`FAILED to RELOAD format: ${filePath} error: ${err}`; }
-		}
-		else if(type==="delete")
-		{
-			delete formats[path.basename(filePath, ".js")];
-			xlog.info`${fg.violet("UNLOADED")} format/${path.relative(formatDirPath, filePath)}`;
-		}
-	};
+			else if(path.basename(filePath)==="simple.js")
+			{
+				await loadSimple({reload : true});
+			}
+			else if(path.basename(filePath)==="gameArchive.js")
+			{
+				await loadGameArchive({reload : true});
+			}
+			else
+			{
+				await delay(250);	// give the file time to finish writing, most important for newly created files
+				await loadFormatFilePath(filePath, {reload : type==="modify", create : type==="create"});
+			}
 
-	await fileUtil.monitor(formatDirPath, monitorcb);
+			xlog.info`${fg.violet("RELOADED")} format/${path.relative(formatDirPath, filePath)}`;
+		}
+		catch(err) { xlog.error`FAILED to RELOAD format: ${filePath} error: ${err}`; }
+	}
+	else if(type==="delete")
+	{
+		delete formats[path.basename(filePath, ".js")];
+		xlog.info`${fg.violet("UNLOADED")} format/${path.relative(formatDirPath, filePath)}`;
+	}
 }

@@ -13,6 +13,7 @@ There are a few 'global' flags that can be specified for any program:
 	bulkCopyOut				If a chain is likely to produce a ton of files, set this. I think it's safe? rofl
 	filenameEncoding		Which encoding the filenames are likely to be in for proper conversion by convmv
 	forbiddenMagic			If set, this program won't run if any of the identifications magic values start with this value
+	hasExtMatch				If set, only run this program if we have a match to one of our extensions (even if a magic match overall). This is a way to kind fake 'weakMagic' if you combine with [matchType:magic] without specifying weakMagic, useful if one program is troublesome with a format
 	matchType               If set, this program won't run unless the match type matches the specified value. Only valid in format 'converters' list.
 	strongMatch				If set, this program won't run unless we have a non-weak MAGIC match
 	noAux                   Don't include any aux files in this running of the program

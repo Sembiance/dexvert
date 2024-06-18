@@ -4,6 +4,7 @@ import {Program} from "../Program.js";
 import {imageUtil} from "xutil";
 import {classifyImage} from "../classifyUtil.js";
 import {programs} from "../program/programs.js";
+import {rpcidentify} from "../identify.js";
 
 // These particular kinds of images often look like noise/static/garbage and are usually caught by the classify garbage model
 const CLASSIFY_PATH_EXCLUSIONS =
@@ -31,8 +32,7 @@ export class image extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const {identify} = await import("../identify.js");
-		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
+		const identifications = await rpcidentify(dexFile);
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{

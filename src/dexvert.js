@@ -264,14 +264,22 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 							return false;
 						};
 
-						// first, check family level validators
-						const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
-						if(extraValidatorData===false)
-							return failValidation(`family ${dexState.format.family.pretty()}`);
+						try
+						{
+							// first, check family level validators
+							const extraValidatorData = dexState.format.family.verify ? (await dexState.format.family.verify(dexState, newFile)) : {};
+							if(extraValidatorData===false)
+								return failValidation(`family ${dexState.format.family.pretty()}`);
 
-						// if still valid, check format level validator
-						if(format.verify && !(await format.verify({dexState, inputFile, newFile, ...extraValidatorData})))
-							return failValidation(`format ${format.pretty()}`);
+							// if still valid, check format level validator
+							if(format.verify && !(await format.verify({dexState, inputFile, newFile, ...extraValidatorData})))
+								return failValidation(`format ${format.pretty()}`);
+						}
+						catch(err)
+						{
+							xlog.error`Exception caught verifying file ${newFile.absolute}: ${err}`;
+							return failValidation(`exception: ${err.toString()}`);
+						}
 					}
 
 					// if a produced file is older than 2020, then we assume it's the proper date

@@ -4,19 +4,21 @@ import {dexvert} from "../dexvert.js";
 import {identify} from "../identify.js";
 import {XLog} from "xlog";
 import {DexFile} from "../DexFile.js";
-import {init as initPrograms, monitor as monitorPrograms} from "../program/programs.js";
-import {init as initFormats, monitor as monitorFormats} from "../format/formats.js";
+import {init as initPrograms, programChanged} from "../program/programs.js";
+import {init as initFormats, formatChanged} from "../format/formats.js";
 
 await initPrograms();
 await initFormats();
 
-await monitorFormats();
-await monitorPrograms();
-
 await xwork.openConnection();
 
-await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, timeout=xu.HOUR, dexvertOptions={}}) =>
+await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout=xu.HOUR, dexvertOptions={}}) =>
 {
+	if(op==="formatChange")
+		return await formatChanged(change);
+	if(op==="programChange")
+		return await programChanged(change);
+
 	const logLines = [];
 	const xlogOptions = {};
 	xlogOptions.logger = v => logLines.push(v);

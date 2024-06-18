@@ -1,13 +1,13 @@
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
+import {rpcidentify} from "../identify.js";
 
 export class font extends Family
 {
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const {identify} = await import("../identify.js");
-		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
+		const identifications = await rpcidentify(dexFile);
 
 		// if it's an OTF, further validate it
 		if(identifications.some(id => id.from==="dexvert" && id.family==="font" && id.formatid==="otf"))

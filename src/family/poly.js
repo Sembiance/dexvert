@@ -1,13 +1,13 @@
 import {Family} from "../Family.js";
 import {Program} from "../Program.js";
+import {rpcidentify} from "../identify.js";
 
 export class poly extends Family
 {
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const {identify} = await import("../identify.js");
-		const {ids : identifications} = await identify(dexFile, {xlog : xlog.clone("error")});
+		const identifications = await rpcidentify(dexFile);
 
 		// if it's not a glTF, fail
 		if(!identifications.some(id => id.from==="dexvert" && id.family==="poly" && id.formatid==="glTF"))

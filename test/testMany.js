@@ -37,8 +37,19 @@ const maxFormatidLength = Array.from(formatsToProcess, v => v.length).max();
 const failures = [];
 const MAX_LINE_LENGTH = 118;
 
+// these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
+const SLOW_FORMATS =
+[
+	"archive/mcromediaDirector",
+	"font/amigaBitmapFontContent",
+	"other/pogNames",
+	"poly/rayDreamDesignerScene", "poly/dxf",
+	"text/txt",
+	"video/avi", "video/mov"
+];
+
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
-await Array.from(formatsToProcess).shuffle().parallelMap(async formatid =>
+await Array.from(formatsToProcess).shuffle().sortMulti([formatid => SLOW_FORMATS.includes(formatid)], [true]).parallelMap(async formatid =>
 {
 	underway.add(formatid);
 	const formatStartedAt = performance.now();

@@ -12,7 +12,7 @@ await initFormats();
 
 await xwork.openConnection();
 
-await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout=xu.HOUR, dexvertOptions={}}) =>
+await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout=xu.HOUR*2, dexvertOptions={}}) =>
 {
 	if(op==="formatChange")
 		return await formatChanged(change);

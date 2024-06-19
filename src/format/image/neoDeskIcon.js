@@ -7,7 +7,7 @@ export class neoDeskIcon extends Format
 	ext        = [".nic"];
 	magic      = ["NeoDesk icon", /^fmt\/1540( |$)/];
 	mimeType   = "image/x-neodesk-icon";
-	converters = [`abydosconvert[format:${this.mimeType}]`];
+	converters = [`abydosconvert[format:${this.mimeType}][skipVerify]`];	// we skip verification often these files have THOUSANDS of sub-icons (eg, 1741_icn.nic) and it takes waaay to long to very them all and they are likely to be all good anyways
 
 	idCheck = (inputFile, detections) =>
 	{

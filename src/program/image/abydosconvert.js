@@ -39,7 +39,7 @@ export class abydosconvert extends Program
 	// We run webp output a little longer since those animations can take some time to finish rendering
 	runOptions = r => ({timeout : (r.flags.outType==="webp" ? xu.MINUTE*3 : xu.MINUTE)});
 	renameOut = {
-		regex : /.+?(?<num>\.\d{3})?(?<ext>\.(?:png|svg|webp))$/,
+		regex : /.+?(?<num>\.\d{3,4})?(?<ext>\.(?:png|svg|webp))$/,
 		renamer :
 		[
 			({suffix, newName}, {ext}) => [newName, suffix, ext],

@@ -41,7 +41,9 @@ const MAX_LINE_LENGTH = 118;
 const SLOW_FORMATS =
 [
 	"archive/mcromediaDirector",
+	"audio/photoCDAudio",
 	"font/amigaBitmapFontContent",
+	"document/chm",
 	"other/pogNames",
 	"poly/rayDreamDesignerScene", "poly/dxf",
 	"text/txt",

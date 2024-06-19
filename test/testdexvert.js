@@ -244,6 +244,7 @@ const FLEX_SIZE_FORMATS =
 		odg              : 20,	// also differs per host
 		pes              : 0.1,
 		pgx              : 10,
+		qpcImage         : 10,
 		rekoCardset      : 0.1,
 		ssiTLB           : 0.1,
 		theDraw          : 0.1,
@@ -489,6 +490,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",
 	"image/cgm",	// sadly we don't match on magic alone due to how loose the magic is and how easily non-CGM files convert into garabge and 'family2' has no .cgm extension
+	"image/lotusManuscriptGraphic",
 	"image/printfox",
 	"image/teletext",
 	"image/sprEd",

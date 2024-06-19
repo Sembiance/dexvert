@@ -241,7 +241,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 				if(r.processed)
 					dexState.processed = true;
 
-				if(!skipVerify)
+				if(!skipVerify && !progProps.flags?.skipVerify)
 					xlog.info`Verifying ${(dexState.f.files.new || []).length.toLocaleString()} new files...`;
 
 				// verify output files
@@ -251,7 +251,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 					if(!await fileUtil.exists(newFile.absolute))
 						return xlog.info`Skipping verification of file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()} as it doesn't exist: ${newFile.absolute}`;
 
-					if(!skipVerify)
+					if(!skipVerify && !progProps.flags?.skipVerify)
 					{
 						xlog.debug`Verifying file #${newFileNum.toLocaleString()} of ${dexState.f.files.new.length.toLocaleString()}: ${newFile.base}`;
 

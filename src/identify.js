@@ -51,7 +51,7 @@ export async function getIdMeta(inputFile)
 
 		const dataForkLength = header.getUInt32BE(83);
 		const resourceForkForkLength = header.getUInt32BE(87);
-		if(dataForkLength===0 && resourceForkForkLength===0)
+		if(dataForkLength===0 && resourceForkForkLength===0)	// according to the docs, there is also an upper limit to these sizes, but I don't currently check that
 			return;
 
 		if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
@@ -81,6 +81,12 @@ export async function getIdMeta(inputFile)
 		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => (year<MIN_YEAR && year!==1904) || year>(new Date()).getFullYear())) &&
 		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
 			return;
+
+		// the 16-bit CRC value at offset 124 is a 16-bit CRC-CCITT (XMODEM) of the first 124 bytes of the header
+		// this works for most files, but I've encountered too many files where the CRC isn't correct, likely was calculated incorrectly or used an incorrect algo, so we just skip this check entirely for now
+		//const crcValue = header.getUInt16BE(124);
+		//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
+		//	return;
 
 		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
 	};

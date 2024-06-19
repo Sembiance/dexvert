@@ -9,8 +9,8 @@ import {fileUtil} from "xutil";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
-const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.60);
-const DEX_WORKER_ID_COUNT = Math.floor(navigator.hardwareConcurrency*0.30);
+const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.65);
+const DEX_WORKER_ID_COUNT = Math.floor(navigator.hardwareConcurrency*0.20);
 const LOCKS = new Set();
 
 export class dexrpc extends Server

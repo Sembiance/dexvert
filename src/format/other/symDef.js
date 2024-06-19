@@ -6,5 +6,5 @@ export class symDef extends Format
 	ext        = [".symdef"];
 	magic      = [/^data$/];
 	weakMagic  = true;
-	converters = ["strings"];
+	converters = ["strings[strongMatch]"];
 }

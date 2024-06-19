@@ -13,7 +13,7 @@ import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "forbiddenMagic", "noAux", "renameKeepFilename", "renameOut", "osHint", "osPriority", "subOutDir"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "forbiddenMagic", "noAux", "renameKeepFilename", "skipVerify", "renameOut", "osHint", "osPriority", "subOutDir"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =

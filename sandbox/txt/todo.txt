@@ -7,9 +7,6 @@
 /---------------\
 | High Priority |
 \---------------/
-* Find a video converter for old quicktime movies:
-  https://dev.discmaster2.textfiles.com/search?qfields=name&family=unknown&detection=QuickTime+Movie+%28old%29
-
 * Add extraction suport for these older MacroMind Projector files:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD

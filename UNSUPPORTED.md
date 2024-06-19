@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,281)
+# Unsupported File Formats (1,282)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -378,7 +378,7 @@ Family/Format | Name | Extensions | Notes
 [image/draw256](https://discmaster.textfiles.com/search?formatid=draw256) | [Draw 256 Image](http://fileformats.archiveteam.org/wiki/Draw256) | .vga | [4 sample files](https://sembiance.com/fileFormatSamples/image/draw256/) - Unsupported because .vga ext is too common, no known magic and converters can't be trusted to verify input file is correct before outputting garbage
 [image/drawingInterchangeBinary](https://discmaster.textfiles.com/search?formatid=drawingInterchangeBinary) | Drawing Interchange Binary Format | .dxb | 
 [image/drawStudio](https://discmaster.textfiles.com/search?formatid=drawStudio) | [DrawStudio Drawing](http://fileformats.archiveteam.org/wiki/DrawStudio) | .dsdr | [8 sample files](https://sembiance.com/fileFormatSamples/image/drawStudio/) - Amiga program DrawStudio creates these. No known converter. DrawStudio demo available: https://aminet.net/package/gfx/edit/DrawStudioFPU
-[image/eASeattlePictureGameData](https://discmaster.textfiles.com/search?formatid=eASeattlePictureGameData) | EA Seattle picture game data | .pic | 
+[image/eaSeattlePictureGameData](https://discmaster.textfiles.com/search?formatid=eaSeattlePictureGameData) | EA Seattle picture game data | .pic | 
 [image/easyCADDrawing](https://discmaster.textfiles.com/search?formatid=easyCADDrawing) | EasyCAD Drawing | .fcd | 
 [image/fastgraphPRF](https://discmaster.textfiles.com/search?formatid=fastgraphPRF) | [Fastgraph Pixel Run Format](http://fileformats.archiveteam.org/wiki/Fastgraph_Pixel_Run_Format) | .prf | [12 sample files](https://sembiance.com/fileFormatSamples/image/fastgraphPRF/) - No known converter. IMPROCES (see website) can load these images and save as GIF/PCX but sadly it's a mouse driven interface which dexvert can't automate yet.
 [image/fpr](https://discmaster.textfiles.com/search?formatid=fpr) | [FLI Profi](http://fileformats.archiveteam.org/wiki/FLI_Profi) | .fpr .flp | [1 sample file](https://sembiance.com/fileFormatSamples/image/fpr/) - Due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
@@ -563,7 +563,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (699)
+## Other (700)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -1224,6 +1224,7 @@ Family/Format | Name | Extensions | Notes
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?formatid=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?formatid=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/windows98Passwords](https://discmaster.textfiles.com/search?formatid=windows98Passwords) | Windows 98 passwords | .pwl | 
+[other/windows9XBootLoader](https://discmaster.textfiles.com/search?formatid=windows9XBootLoader) | Windows 9X boot loader |  | 
 [other/windowsCalendar](https://discmaster.textfiles.com/search?formatid=windowsCalendar) | Windows Calendar | .cal | 
 [other/windowsHelpSearchIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpSearchIndex) | Windows Help Full Text Search Index | .fts | 
 [other/windowsHelpGIDIndex](https://discmaster.textfiles.com/search?formatid=windowsHelpGIDIndex) | Windows Help Global Index Data | .gid | 

@@ -7,7 +7,7 @@ export class font extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const identifications = await rpcidentify(dexFile);
+		const {ids : identifications} = await rpcidentify(dexFile);
 
 		// if it's an OTF, further validate it
 		if(identifications.some(id => id.from==="dexvert" && id.family==="font" && id.formatid==="otf"))

@@ -1,7 +1,15 @@
 /--------------\
 | TOP Priority |
 \--------------/
+*   Then check for anything else calling unar[mac]  (note, I already checked, all uses of 'mac' flag are the first flag, so it's good)
+  Use infinite mac, upload the bill gaes.sea file, extract it, re-create it as a .sit and see how it does with macunpack and deark
+  Then CONSIDER possibly having those two programs work the same way. FIRST double check to see if they have built in MacBinary support
 
+* Examine this code and ensure that all the various extractors it uses, I am also using in dexvert:
+  https://github.com/Bioruebe/UniExtract2/blob/master/UniExtract.au3
+  Some extractors need extra care:
+	https://github.com/Bioruebe/UniExtract2/issues/291
+	https://github.com/Bioruebe/UniExtract2/issues
 
 
 /---------------\

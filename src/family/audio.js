@@ -6,7 +6,7 @@ import {rpcidentify} from "../identify.js";
 export async function verifyAudio(dexState, dexFile)
 {
 	const xlog = dexState.xlog;
-	const identifications = await rpcidentify(dexFile);
+	const {ids : identifications} = await rpcidentify(dexFile);
 	if(!identifications.some(id => id.from==="dexvert" && id.family==="audio" && id.formatid==="mp3"))
 	{
 		xlog.warn`DELETING OUTPUT due to not being identified as audio/mp3: ${dexFile.pretty()}`;

@@ -7,7 +7,7 @@ export class document extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const identifications = await rpcidentify(dexFile);
+		const {ids : identifications} = await rpcidentify(dexFile);
 
 		// if it's not a PDF, just accept the result
 		if(!identifications.some(id => id.from==="dexvert" && id.family==="document" && id.formatid==="pdf"))

@@ -43,7 +43,7 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 		let r = null;
 		if(op==="dexid")
 		{
-			({ids : r} = await identify(twigDiskFile, {xlog}));
+			r = await identify(twigDiskFile, {xlog});
 		}
 		else if(op==="dexvert")
 		{

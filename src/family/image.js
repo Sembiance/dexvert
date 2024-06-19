@@ -32,7 +32,7 @@ export class image extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const identifications = await rpcidentify(dexFile);
+		const {ids : identifications} = await rpcidentify(dexFile);
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="image");
 		if(!dexid)
 		{

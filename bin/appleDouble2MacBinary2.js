@@ -87,8 +87,8 @@ outHeader.set(macFilename, 2);
 
 // finder info detailed as 'TYPE FInfo = RECORD' on page 139 of: file:///mnt/compendium/documents/books/InsideMacintosh/Inside_Macintosh_Volume_II_1985.pdf
 const finderInfo = entries.find(entry => entry.entryType==="finderInfo");
-outHeader.set(65, finderInfo.data.subarray(0, 4));	// file type
-outHeader.set(69, finderInfo.data.subarray(4, 8));	// file creator
+outHeader.set(finderInfo.data.subarray(0, 4), 65);	// file type
+outHeader.set(finderInfo.data.subarray(4, 8), 69);	// file creator
 const finderInfoFlags = finderInfo.data.getUInt16BE(8);
 const oldFlags = (finderInfoFlags >> 8) & 0xFF;
 outHeader.setUInt8(73, oldFlags);	// original finder flags

@@ -20,7 +20,9 @@ export class unar extends Program
 		if(!r.flags.mac)
 			return;
 
-		const decodeOpts = {processors : encodeUtil.macintoshProcessors.percentHex, region : RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman"};
+		const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
+
+		const decodeOpts = {processors : encodeUtil.macintoshProcessors.percentHex, region};
 		const outDirPath = r.outDir({absolute : true});
 		let fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		await fileOutputPaths.parallelMap(async fileOutputPath =>
@@ -34,6 +36,9 @@ export class unar extends Program
 			await Deno.mkdir(path.join(outDirPath, path.dirname(newSubPath)), {recursive : true});
 			await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
 		});
+
+		fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true, regex : /\.rsrc$/});
+		await fileOutputPaths.parallelMap(async fileOutputPath => await runUtil.run("deno", runUtil.denoArgs(Program.binPath("appleDouble2MacBinary2.js"), `--region=${region}`, fileOutputPath), runUtil.denoRunOpts()), 6);
 		
 		r.meta.fileMeta = {};
 

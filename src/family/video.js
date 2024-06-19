@@ -7,7 +7,7 @@ export class video extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const identifications = await rpcidentify(dexFile);
+		const {ids : identifications} = await rpcidentify(dexFile);
 		const dexid = identifications.find(id => id.from==="dexvert" && id.family==="video" && id.formatid==="mp4");
 		if(!dexid)
 		{

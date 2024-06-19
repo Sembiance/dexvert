@@ -32,6 +32,7 @@ for(const inputFilePath of inputFilePaths)
 		continue;
 	}
 	
+	let idMeta = null;
 	let rows = null;
 	if(argv.direct)
 	{
@@ -48,11 +49,7 @@ for(const inputFilePath of inputFilePaths)
 		if(argv.fileMeta)
 			inputFile.meta = xu.parseJSON(argv.fileMeta);
 
-		let idMeta = null;
 		({ids : rows, idMeta} = await identify(inputFile, {xlog}));
-		
-		if(idMeta && Object.keys(idMeta)?.length)
-			console.log(`idMeta: ${JSON.stringify(idMeta)}`);
 	}
 	else
 	{
@@ -61,7 +58,7 @@ for(const inputFilePath of inputFilePaths)
 		if(!r && !logLines)
 			Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
 
-		rows = r;
+		({ids : rows, idMeta} = r);
 
 		if(logLines.length)
 			console.log(logLines.join("\n"));
@@ -77,7 +74,11 @@ for(const inputFilePath of inputFilePaths)
 	}
 
 	if(inputFilePaths)
-		console.log(`${xu.colon(fg.peach("File"))} ${inputFilePath}`);
+		console.log(`${xu.colon(fg.peach("  File"))} ${inputFilePath}`);
+
+	if(idMeta && Object.keys(idMeta)?.length)
+		console.log(`${xu.colon(fg.orange("idMeta"))} ${printUtil.inspect(idMeta)}\n`);
+
 	const maxes =
 	{
 		matchType : rows.map(({matchType}) => (matchType || "").length).max(),

@@ -7,7 +7,7 @@ export class poly extends Family
 	async verify(dexState, dexFile)
 	{
 		const xlog = dexState.xlog;
-		const identifications = await rpcidentify(dexFile);
+		const {ids : identifications} = await rpcidentify(dexFile);
 
 		// if it's not a glTF, fail
 		if(!identifications.some(id => id.from==="dexvert" && id.family==="poly" && id.formatid==="glTF"))

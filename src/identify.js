@@ -1,6 +1,7 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
 import {fileUtil, encodeUtil} from "xutil";
+import {RUNTIME} from "./Program.js";
 import {formats} from "./format/formats.js";
 import {FileSet} from "./FileSet.js";
 import {DexFile} from "./DexFile.js";
@@ -88,7 +89,8 @@ export async function getIdMeta(inputFile)
 		//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
 		//	return;
 
-		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData})};
+		const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
+		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};
 	};
 
 	if(!idMeta.macFileType || !idMeta.macFileCreator)

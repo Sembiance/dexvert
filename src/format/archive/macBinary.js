@@ -6,13 +6,13 @@ export {_MACBINARY_MAGIC};
 
 export class macBinary extends Format
 {
-	name           = "MacBinary";
+	name           = "MacBinary/AppleSingle";
 	website        = "http://fileformats.archiveteam.org/wiki/MacBinary";
 	ext            = [".bin"];
 	forbidExtMatch = true;
 	magic          = _MACBINARY_MAGIC;
 	fallback       = true;
-	converters = dexState =>
+	converters     = dexState =>
 	{
 		// MacBinary 1 files (preview.pix) are technically rsrc files, but only seem to work with macrssrc deark extraction
 		const r = ["unar[mac]", "deark[module:macbinary]", "deark[module:macrsrc]"];
@@ -21,4 +21,5 @@ export class macBinary extends Format
 		
 		return r;
 	};
+	notes = "We include MacBinary 1, 2, 3 and AppleSingle into this single format";
 }

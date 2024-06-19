@@ -8,7 +8,7 @@ export class mp3 extends Format
 	forbidExtMatch = [".mpg"];
 	mimeType       = "audio/mpeg";
 	magic          = ["LAME encoded MP3 audio", /^Audio file.* layer III/, "MPEG ADTS, layer III", "MPEG 1/2 Audio Layer 3", "Audio file with ID3 version 2.3.0"];
-	weakMagic      = ["LAME encoded MP3 audio"];
+	weakMagic      = ["LAME encoded MP3 audio", "MPEG ADTS, layer III"];
 	untouched      = true;
 	metaProvider   = ["soxi"];
 }

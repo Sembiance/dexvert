@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
 import {xu} from "xu";
-import {cmdUtil, fileUtil, encodeUtil, hashUtil} from "xutil";
+import {cmdUtil, fileUtil, encodeUtil, hashUtil, runUtil} from "xutil";
 import {UInt8ArrayReader} from "UInt8ArrayReader";
 import {XLog} from "xlog";
 import {assert, path, writeAll} from "std";
@@ -10,7 +10,8 @@ const argv = cmdUtil.cmdInit({
 	desc    : "Converts an AppleDouble file into a MacBinary 2 file. It will DELETE the file, and over-write the datafork file (non .rsrc) with the new macbinary file",
 	opts :
 	{
-		region : {desc : "Which region for filename encoding", hasValue : true, defaultValue : "roman"}
+		region           : {desc : "Which region for filename encoding", hasValue : true, defaultValue : "roman"},
+		originalFilePath : {desc : "The original file path that the AppleDouble file was created from, important to ensure we don't infinite loop the same MacBinary file over and over", hasValue : true, required : true}
 	},
 	args :
 	[
@@ -132,6 +133,26 @@ if(paddingLength>0)
 	await writeAll(tmpOutFile, (new Uint8Array(paddingLength)).fill(0));
 
 tmpOutFile.close();
+
+// Make sure our resulting file isn't basically the same thing as the original file
+if((await Deno.stat(tmpOutFilePath)).size===(await Deno.stat(argv.originalFilePath)).size)
+{
+	const beforeFilePath = await fileUtil.genTempPath();
+	await runUtil.run("dd", [`if=${tmpOutFilePath}`, `of=${beforeFilePath}`, "bs=128", "skip=1"]);
+
+	const afterFilePath = await fileUtil.genTempPath();
+	await runUtil.run("dd", [`if=${argv.originalFilePath}`, `of=${afterFilePath}`, "bs=128", "skip=1"]);
+
+	const areEqual = await fileUtil.areEqual(beforeFilePath, afterFilePath);
+	await fileUtil.unlink(beforeFilePath);
+	await fileUtil.unlink(afterFilePath);
+
+	if(areEqual)
+	{
+		await fileUtil.unlink(tmpOutFilePath);
+		Deno.exit(0);
+	}
+}
 
 await fileUtil.unlink(inputFilePath);
 await fileUtil.unlink(dataFilePath);

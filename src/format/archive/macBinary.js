@@ -15,7 +15,7 @@ export class macBinary extends Format
 	converters     = dexState =>
 	{
 		// MacBinary 1 files (preview.pix) are technically rsrc files, but only seem to work with macrssrc deark extraction
-		const r = ["unar[mac]", "deark[module:macbinary]", "deark[module:macrsrc]"];
+		const r = ["unar[mac][skipMacBinaryConversion]", "deark[module:macbinary]", "deark[module:macrsrc]"];
 		if(dexState.hasMagics(_APPLESINGLE_MAGIC))
 			r.push("deark[module:applesd]");
 		

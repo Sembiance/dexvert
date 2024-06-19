@@ -8,8 +8,9 @@ export class unar extends Program
 	website = "https://github.com/incbee/Unarchiver";
 	package = "app-arch/unar";
 	flags   = {
-		"mac"  : "Set this flag to treat the files extracted as mac files and rename them",
-		"type" : "What type to process the file as. Kinda hacky, relies on this string being present at the end of the first line as : <type>"
+		"mac"                     : "Set this flag to treat the files extracted as mac files and rename them",
+		"type"                    : "What type to process the file as. Kinda hacky, relies on this string being present at the end of the first line as : <type>",
+		"skipMacBinaryConversion" : "Set this flag to skip the macbinary conversion step"
 	};
 	bruteFlags = { executable : {} };
 
@@ -37,8 +38,12 @@ export class unar extends Program
 			await Deno.rename(path.join(outDirPath, subPath), path.join(outDirPath, newSubPath));
 		});
 
-		fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true, regex : /\.rsrc$/});
-		await fileOutputPaths.parallelMap(async fileOutputPath => await runUtil.run("deno", runUtil.denoArgs(Program.binPath("appleDouble2MacBinary2.js"), `--region=${region}`, fileOutputPath), runUtil.denoRunOpts()), 6);
+		if(!r.flags.skipMacBinaryConversion)
+		{
+			// NOTE: We can't rely on this entirely because sometimes files appear as somethign else (archive/diskDoubler) but when passed to unar it extracts as a macbinary file, so the script below actually double-checks we don't create the same thing over and over
+			fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true, regex : /\.rsrc$/});
+			await fileOutputPaths.parallelMap(async fileOutputPath => await runUtil.run("deno", runUtil.denoArgs(Program.binPath("appleDouble2MacBinary2.js"), `--originalFilePath=${r.inFile({absolute : true})}`, `--region=${region}`, fileOutputPath), runUtil.denoRunOpts()), 6);
+		}
 		
 		r.meta.fileMeta = {};
 

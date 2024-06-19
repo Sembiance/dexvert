@@ -115,7 +115,7 @@ if(!info)
 	Deno.exit(0);
 
 // This code copied from: https://github.com/jsummers/deark/blob/master/modules/exe.c#L695
-const curBuf =new Uint8Array(info.totalSize+22);
+const curBuf = new Uint8Array(info.totalSize+22);
 curBuf.setUInt16LE(0, 0);	// Reserved
 curBuf.setUInt16LE(2, 2);	// Resource ID
 curBuf.setUInt16LE(4, 1);	// # of cursors

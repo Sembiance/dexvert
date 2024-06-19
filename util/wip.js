@@ -67,6 +67,7 @@ const getMacBinaryMeta = async () =>
 	// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
 	// we also allow 1904 just because we've seen it in the wild (archive/macromediaProjector/MEGACUTE Vol.2)
 	const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
+	xlog.info`creationDateRaw : ${creationDate}, creationDate : ${macTSToDate(creationDate)}, modifiedDateRaw : ${modifiedDate}, modifiedDate : ${macTSToDate(modifiedDate)}`;
 	if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => (year<MIN_YEAR && year!==1904) || year>(new Date()).getFullYear())) &&
 		([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
 		return xlog.error`Creation date (${macTSToDate(creationDate).getFullYear()}) or modified date (${macTSToDate(modifiedDate).getFullYear()}) is out of range`;

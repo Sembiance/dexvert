@@ -29,7 +29,7 @@ export default
 		corelPresentations       : {name : "Corel/WordPerfect Presentations", ext : [".shw", ".mst", ".prt"], magic : ["WordPerfect Presentations", "WordPerfect/Corel Presentations", /^fmt\/878( |$)/]},
 		dageshDocument           : {name : "Dagesh Document", ext : [".dgs"], magic : ["Dagesh document"]},
 		dataBaseProfessional     : {name : "DataBase Professional Database", ext : [".db"], magic : ["DataBase Professional database"]},
-		dBASEMultipleIndex       : {name : "dBASE Multiple Index", ext : [".mdx"], magic : ["dBASE IV Multiple index", "FoxBase MDX"]},
+		dBaseMultipleIndex       : {name : "dBase Multiple Index", ext : [".mdx"], magic : ["dBASE IV Multiple index", "FoxBase MDX"]},
 		decisionPadWorksheet     : {name : "Decision Pad Worksheet", ext : [".dpw"], magic : ["Decision Pad Worksheet"]},
 		demoManiacScript         : {name : "DemoManiac SCript", ext : [".script"], magic : ["DemoManiac Script"], weakMagic : true},
 		deScribe                 : {name : "DeScribe Document", ext : [".doc", ".des"], magic : ["DeScribe document"]},

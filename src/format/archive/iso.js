@@ -5,7 +5,6 @@ import {Program} from "../../Program.js";
 import {path, base64Encode} from "std";
 import {XLog} from "xlog";
 import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
-import {_MACBINARY_MAGIC} from "./macBinary.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
@@ -37,10 +36,10 @@ export class iso extends Format
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660",
 		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system",
 		/^ISO 9660$/, /^fmt\/(468|1738)( |$)/,
-		...HFS_MAGICS,
-		..._MACBINARY_MAGIC
+		/^First .* are blank$/,
+		...HFS_MAGICS
 	];
-	weakMagic      = _MACBINARY_MAGIC;
+	weakMagic = [/^First .* are blank$/];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	priority     = this.PRIORITY.HIGH;

@@ -73,7 +73,6 @@ export const WEAK_VALUES =
 	/^Blank disk\/medium$/,
 	/^compress-compressed data at /,
 	/^FAT\d{2} file system/,
-	/^First .* are blank$/,
 	/^FreeBSD boot manager/,
 	/^MFS file system$/,
 	/^Minix file system/,

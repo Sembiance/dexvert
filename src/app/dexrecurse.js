@@ -26,6 +26,8 @@ const EXCLUDED_SAMPLE_FORMATS =
 
 	// names have to be generic/specific, so can't have more files in the same samples directory
 	"archive/installShieldCAB",
+	"other/desktopDB",
+	"other/desktopDF",
 	"text/windowsAutorun",
 
 	// modern formats that are 'generated' from others, so often not original. Also pretty modern so no need for many file samples

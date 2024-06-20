@@ -42,32 +42,30 @@ async function getMacBinaryMeta(inputFile, debug)
 		return debug ? `First byte of filename cannot be 0` : false;
 
 	const dataForkLength = header.getUInt32BE(83);
-	const resourceForkForkLength = header.getUInt32BE(87);
-	if(dataForkLength===0 && resourceForkForkLength===0)	// according to the docs, there is also an upper limit to these sizes, but I don't currently check that
-		return debug ? `Data fork length (${dataForkLength}) and resource fork length (${resourceForkForkLength}) cannot both be 0` : false;
+	const resourceForkLength = header.getUInt32BE(87);
+	if(dataForkLength===0 && resourceForkLength===0)	// according to the docs, there is also an upper limit to these sizes, but I don't currently check that
+		return debug ? `Data fork length (${dataForkLength}) and resource fork length (${resourceForkLength}) cannot both be 0` : false;
 
 	if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
 		return debug ? `Data fork length (${dataForkLength}) + 128 header extends beyond file size (${inputFile.size})` : false;
+
+	const suspectForkSizes = (dataForkLength+resourceForkLength+128)>inputFile.size || (dataForkLength+128+resourceForkLength+128+128)<inputFile.size;	// later half extra 128's are to align on 128 byte boundaries
 
 	// we used to check and forbid any null bytes in type/creator, but I've encountered macbinary files that have no type/creator (archive/macBinary/Icon↵) so we'll allow it
 	// instead we detect if it's suspect and then later on if some other checks also look suspect we return false
 	const fileTypeData = header.subarray(65, 69);
 	const suspectFileType = fileTypeData.indexOfX(0)!==-1;
-	/*if(fileTypeData.indexOfX(0)!==-1)
-		return debug ? `File type data contains null byte` : false;*/
 
 	const fileCreatorData = header.subarray(69, 73);
 	const suspectFileCreator = fileCreatorData.indexOfX(0)!==-1;
-	/*if(fileCreatorData.indexOfX(0)!==-1)
-		return debug ? `File creator data contains null byte` : false;*/
 
 	const creationDate = header.getUInt32BE(91);
 	const modifiedDate = header.getUInt32BE(95);
 
-	// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
 	// ensure our modified date is not more than 2 days after our creation date (we've seen a few in the wild that are off by small amount, like 90 seconds (archive/macBinary/ZEN.HLP))
-	//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
-	//	return debug ? `Modified date ${modifiedDate} is more than 2 days after creation date ${creationDate}` : false;
+	// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
+	// so now we just use this as another point of information that a file is suspect
+	const suspectDateDifference = (creationDate-modifiedDate)>((xu.DAY*2)/1000);
 
 	const MIN_YEAR = 1972;
 	// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both
@@ -75,12 +73,12 @@ async function getMacBinaryMeta(inputFile, debug)
 	// we also allow files that have a zero date because we've seen that in the wild too (archive/macBinary/Desktop)
 	const currentYear = (new Date()).getFullYear();
 	const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-	let suspectDates = false;
+	const suspectDates = {Creation : false, Modified : false};
 	const validateDate = (v, type) =>
 	{
 		if(v===0)
 		{
-			suspectDates= true;
+			suspectDates[type] = true;
 			return true;
 		}
 
@@ -91,7 +89,7 @@ async function getMacBinaryMeta(inputFile, debug)
 			return debug ? `${type} date (${v} mac: ${dateMacYear} unix: ${dateUnixYear}) is out of range` : false;
 		
 		if((dateMacYear<MIN_YEAR || dateUnixYear<MIN_YEAR))
-			suspectDates = true;
+			suspectDates[type] = true;
 
 		return true;
 	};
@@ -110,10 +108,9 @@ async function getMacBinaryMeta(inputFile, debug)
 	//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
 	//	return debug ? `Header CRC (${crcValue}) mismatch` : false;
 
-	// so we let suspect file types/creator and dates slide above because we've found them in the wild, but if we have too many suspect things, return false here so we don't match things that are not macbinary (like archive/appleSingle/mod.Sirkustunnelmaan)
-	// we could add additional suspect checks above (such as a combined data fork + resource fork + header size (suspectLength) or modifiedDate>creationDate+wiggle, etc. and check them here. CRC could also be added, but that slows things down a little
-	if(suspectDates && (suspectFileType || suspectFileCreator))
-		return debug ? `Suspect dates and suspect type or creator` : false;
+	// check to see if we have too many 'suspect' things (2 or more) and return false in that case (image/paintPro/AGIGATE.RSC)
+	if([suspectForkSizes, suspectFileType || suspectFileCreator, suspectDateDifference || suspectDates.Creation || suspectDates.Modified].filter(Boolean).length>=2)
+		return debug ? `Too many suspect parts: suspectForkSizes:${suspectForkSizes} suspectFileType:${suspectFileType} suspectFileCreator:${suspectFileCreator} suspectDates:${Object.entries(suspectDates).map(([k, v]) => `suspectDates.${k}:${v}`).join(", ")} suspectDateDifference:${suspectDateDifference}` : false;
 
 	const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
 	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};

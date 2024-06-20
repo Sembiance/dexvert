@@ -15,7 +15,7 @@ export class rsrc extends Format
 		const a = [];
 
 		if(dexState.hasMagics(APPLE_DOUBLE_MAGIC))
-			a.push("deark[opt:applesd:extractrsrc=1]");
+			a.push("deark[module:applesd][opt:applesd:extractrsrc=1]");
 
 		return [...a, "resource_dasm", "deark[module:macrsrc]"];	// , "unar"
 	};

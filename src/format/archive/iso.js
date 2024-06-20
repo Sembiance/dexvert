@@ -8,7 +8,7 @@ import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", /^Apple HFS Plus Extended/, "Apple Partition Map (APM) disk image", "Apple partition map,", "HFS file system"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", /^Apple HFS Plus Extended/, "Apple Partition Map (APM) disk image", "Apple partition map,"];
 
 async function validCUEFile(dexState, cueFile)
 {
@@ -45,6 +45,7 @@ export class iso extends Format
 	priority     = this.PRIORITY.HIGH;
 	keepFilename = true;
 	notes        = xu.trim`
+	    This is a pretty big catch-all for many iso-like formats.
 		Multiple CD formats are supported including: Photo CD, Video CD, Audio CD and CD-ROM (including HFS Mac filesystem support w/ resource forks).
 		Multi-track (such as Audio and Data) are also supported.
 		PC-ENGINE CD BIN/CUE files can't extract data, because there is no filesystem for PCE CDs as each CD's data tracks are different per game.

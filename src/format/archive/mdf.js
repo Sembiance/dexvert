@@ -6,7 +6,7 @@ export class mdf extends Format
 	name           = "Alcohol 120% MDF Image";
 	website        = "http://fileformats.archiveteam.org/wiki/MDF_and_MDS";
 	ext            = [".mdf"];
-	magic          = ["ISO 9660 CD image"];
+	magic          = ["ISO 9660 CD image", "Raw CD image"];
 	weakMagic      = true;
 	forbiddenMagic = TEXT_MAGIC;
 	priority       = this.PRIORITY.TOP;

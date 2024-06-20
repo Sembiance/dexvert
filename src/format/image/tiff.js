@@ -19,7 +19,7 @@ export class tiff extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Macintosh TIFF bitmap (MacBinary)"))
-			r.push("deark[mac][deleteADF][convertAsExt:.tiff]");
+			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.tiff]");
 		r.push("deark[module:tiff][noThumbs]", "convert", "iconvert", "iio2png");
 
 		// only include certain long-running windows based converters if we're not dealing with a MacBinary file (archive/macBinary/1Sled Ride.EPS)

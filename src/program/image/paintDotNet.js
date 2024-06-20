@@ -15,12 +15,13 @@ export class paintDotNet extends Program
 				WindowDismiss("Loading..", "Extract water into separate layer?", "n")
 				return WinExists("${path.basename(r.inFile())} - paint.net", "")
 			EndFunc
-			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*7})
+			$mainWindow = CallUntil("MainWindowOrFailure", ${xu.SECOND*10})
 			If Not $mainWindow Then
 				Exit 0
 			EndIf
 			
 			MouseClick("left", 810, 40)	; Window doesn't always "activate" so we click it
+			Sleep(500)
 			Send("!f")
 			Send("a")
 			$saveAsWindow = WindowRequire("Save As", "", 10)

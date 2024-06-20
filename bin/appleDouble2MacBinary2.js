@@ -7,7 +7,7 @@ import {assert, path, writeAll} from "std";
 
 const argv = cmdUtil.cmdInit({
 	version : "1.0.0",
-	desc    : "Converts an AppleDouble file into a MacBinary 2 file. It will DELETE the file, and over-write the datafork file (non .rsrc) with the new macbinary file",
+	desc    : "Converts an AppleDouble file into a MacBinary 2 file. It will DELETE the file, and over-write the datafork file (non .rsrc/.adf) with the new macbinary file",
 	opts :
 	{
 		region           : {desc : "Which region for filename encoding", hasValue : true, defaultValue : "roman"},
@@ -26,7 +26,7 @@ if(!await fileUtil.exists(argv.inputFilePath))
 	Deno.exit(xlog.error`Input file does not exist: ${argv.inputFilePath}`);
 
 const inputFilePath = path.resolve(argv.inputFilePath);
-if(!inputFilePath.toLowerCase().endsWith(".rsrc"))
+if(![".rsrc", ".adf"].some(v => inputFilePath.toLowerCase().endsWith(v)))
 	Deno.exit(xlog.error`Only AppleDouble files ending in .rsrc are supported right now, this is easily expandable if needed`);
 
 const dataFilePath = inputFilePath.slice(0, -".rsrc".length);

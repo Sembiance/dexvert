@@ -1,17 +1,12 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Hide the 'download' icon for top level of items
-
-* Then check for anything else calling unar[mac]  (note, I already checked, all uses of 'mac' flag are the first flag, so it's good)
-  Use infinite mac, upload the bill gaes.sea file, extract it, re-create it as a .sit and see how it does with macunpack and deark
-  Then CONSIDER possibly having those two programs work the same way. FIRST double check to see if they have built in MacBinary support
 
 
 /---------------\
 | High Priority |
 \---------------/
-* Add extraction suport for these older MacroMind Projector files:
+* Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=MMDR
@@ -101,6 +96,8 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
+
 * Add all formats the Konvertor supports, warning, it's a LOT (copy-paste the list of each category from programs_formats.txt)
 
 * Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:

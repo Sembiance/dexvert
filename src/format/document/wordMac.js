@@ -10,7 +10,7 @@ export class wordMac extends Format
 	{
 		const r = [];
 		if(dexState.hasMagics("Microsoft Word document (MacBinary)") || dexState.hasMagics("Mac Microsoft Word document (MacBinary)"))
-			r.push("deark[mac][deleteADF] -> soffice");
+			r.push("deark[module:macbinary][mac][deleteADF] -> soffice");
 		r.push("soffice[format:Mac Word]", "keyViewPro[outType:pdf]");
 		return r;
 	};

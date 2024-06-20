@@ -35,7 +35,7 @@ const startedAt = performance.now();
 const underway = new Set();
 const maxFormatidLength = Array.from(formatsToProcess, v => v.length).max();
 const failures = [];
-const MAX_LINE_LENGTH = 118;
+const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
 
 // these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
 const SLOW_FORMATS =
@@ -65,7 +65,9 @@ await Array.from(formatsToProcess).shuffle().sortMulti([formatid => SLOW_FORMATS
 	line.push(` ${fg.orange(formatid.padEnd(maxFormatidLength)).replaceAll("/", `${fg.cyan("/")}${xu.c.fg.orange}`)}`);
 	line.push(` ${fg.cyan((formatsToProcess.size-(++formatCount)).toLocaleString().padStart(formatsToProcess.size.toLocaleString().length))} remain `);
 	line.push(` ${fg.cyan(underway.size.toLocaleString().padStart(formatsToProcess.size.toLocaleString().length))} ${xu.colon("underway")}`);
-	line.push(fg.green(Array.from(underway).join(" ").innerTruncate(MAX_LINE_LENGTH-line.join("").decolor().length)).replaceAll("…", `${fg.cyan("…")}${xu.c.fg.green}`));
+	
+	const underwayFormatted = (argv.format.length===1 && argv.format[0]!=="all" && !argv.format[0].includes("/")) ? Array.from(underway, o => o.split("/")[1]).join(" ") : Array.from(underway).join(" ");
+	line.push(fg.green(underwayFormatted.innerTruncate(MAX_LINE_LENGTH-line.join("").decolor().length)).replaceAll("…", `${fg.cyan("…")}${xu.c.fg.green}`));
 	console.log(line.join(""));
 
 	if(!testData)

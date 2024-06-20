@@ -18,7 +18,7 @@ export class pict extends Format
 		const r = ["qtPicViewer[matchType:magic]"];
 		
 		if(dexState.hasMagics("Macintosh Pict image (MacBinary)"))
-			r.push("deark[mac][deleteADF][convertAsExt:.pict]");
+			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.pict]");
 
 		r.push(
 			"deark[module:pict][mac][recombine]",

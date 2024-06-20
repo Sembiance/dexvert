@@ -9,5 +9,11 @@ export class macDraw extends Format
 	magic          = ["MacDraw drawing", /^fmt\/(1426|1427|1428)( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="DRWG";
 	metaProvider   = ["image"];
-	converters     = ["deark[mac]", "nconvert", "soffice[outType:png]", "convert"];	// convert has a habit of producing just a black square
+	converters     = [
+		// soffice handles it the best, especially with files: grundriss & ][_-_Mac cable (print me!)
+		"soffice[outType:png]"
+
+		// deark and nconvert will both 'seemingly' convert MacDraw files, but what they are really doing is extracting embedded PICT files from within them
+		// in many cases this appears to work just fine, but it fails with the files mentioend above for soffice
+	];
 }

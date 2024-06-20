@@ -36,7 +36,10 @@ export class hpgl extends Format
 	idMeta         = ({macFileType}) => macFileType==="HPGL";
 	converters     = [
 		// svg
-		"viewCompanion", "corelPhotoPaint",
+		"viewCompanion",
+
+		// png
+		"corelPhotoPaint",
 		
 		// svg, but super slow, so we only do it if we have both ext and magic match
 		"canvas[strongMatch][nonRaster]"

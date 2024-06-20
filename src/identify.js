@@ -22,6 +22,104 @@ const FAMILY_MATCH_ORDER = ["archive", "document", "audio", "music", "video", "i
 // list of 'meta' keys that may appear as fileMeta[k] or in the result of a program r.meta[k] that should always be inherited and exposed in the file meta itself
 export const ID_META_INHERIT = ["macFileType", "macFileCreator", "proDOSType", "proDOSTypeCode", "proDOSTypePretty", "proDOSTypeAux"];
 
+async function getMacBinaryMeta(inputFile, debug)
+{
+	// MacBinary 1 Specs: https://web.archive.org/web/19991103230427/http://www.lazerware.com:80/formats/macbinary/macbinary.html
+	// MacBinary 2 Specs: https://files.stairways.com/other/macbinaryii-standard-info.txt
+
+	// MacBinary header is 128 bytes
+	if(inputFile.size<128)
+		return debug ? `File size ${inputFile.size} is less than 128 bytes` : false;
+
+	const header = await fileUtil.readFileBytes(inputFile.absolute, 128);
+	if([0, 74, 82].some(v => header[v]!==0))
+		return debug ? `Header bytes 0, 74, and 82 must be 0` : false;
+
+	if(header[1]>63)	// Also used to fail if header[1]<1 but then I discovered a file that has a header[1] of 0 (test/sample/audio/fssdSound/LABSLAB.SOU)
+		return debug ? `Header byte 1 must be between 1 and 63` : false;
+
+	if(header[2]===0)	// don't allow the first byte of the filename to be zero
+		return debug ? `First byte of filename cannot be 0` : false;
+
+	const dataForkLength = header.getUInt32BE(83);
+	const resourceForkForkLength = header.getUInt32BE(87);
+	if(dataForkLength===0 && resourceForkForkLength===0)	// according to the docs, there is also an upper limit to these sizes, but I don't currently check that
+		return debug ? `Data fork length (${dataForkLength}) and resource fork length (${resourceForkForkLength}) cannot both be 0` : false;
+
+	if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
+		return debug ? `Data fork length (${dataForkLength}) + 128 header extends beyond file size (${inputFile.size})` : false;
+
+	// we used to check and forbid any null bytes in type/creator, but I've encountered macbinary files that have no type/creator (archive/macBinary/Icon↵) so we'll allow it
+	// instead we detect if it's suspect and then later on if some other checks also look suspect we return false
+	const fileTypeData = header.subarray(65, 69);
+	const suspectFileType = fileTypeData.indexOfX(0)!==-1;
+	/*if(fileTypeData.indexOfX(0)!==-1)
+		return debug ? `File type data contains null byte` : false;*/
+
+	const fileCreatorData = header.subarray(69, 73);
+	const suspectFileCreator = fileCreatorData.indexOfX(0)!==-1;
+	/*if(fileCreatorData.indexOfX(0)!==-1)
+		return debug ? `File creator data contains null byte` : false;*/
+
+	const creationDate = header.getUInt32BE(91);
+	const modifiedDate = header.getUInt32BE(95);
+
+	// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
+	// ensure our modified date is not more than 2 days after our creation date (we've seen a few in the wild that are off by small amount, like 90 seconds (archive/macBinary/ZEN.HLP))
+	//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
+	//	return debug ? `Modified date ${modifiedDate} is more than 2 days after creation date ${creationDate}` : false;
+
+	const MIN_YEAR = 1972;
+	// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both
+	// we also allow anything in the year 1904/1970 just because we've seen it in the wild (archive/macromediaProjector/MEGACUTE Vol.2) (also 1903 because sometimes the date conversion ends up being that, probably timezone thing on linux? dunno.)
+	// we also allow files that have a zero date because we've seen that in the wild too (archive/macBinary/Desktop)
+	const currentYear = (new Date()).getFullYear();
+	const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
+	let suspectDates = false;
+	const validateDate = (v, type) =>
+	{
+		if(v===0)
+		{
+			suspectDates= true;
+			return true;
+		}
+
+		const dateMacYear = macTSToDate(v).getFullYear();
+		const dateUnixYear = new Date(v*1000).getFullYear();
+		if(((dateMacYear<MIN_YEAR && ![1903, 1904].includes(dateMacYear)) || dateMacYear>(currentYear+1)) &&
+		   ((dateUnixYear<MIN_YEAR && ![1969, 1970].includes(dateUnixYear)) || dateUnixYear>(currentYear+1)))
+			return debug ? `${type} date (${v} mac: ${dateMacYear} unix: ${dateUnixYear}) is out of range` : false;
+		
+		if((dateMacYear<MIN_YEAR || dateUnixYear<MIN_YEAR))
+			suspectDates = true;
+
+		return true;
+	};
+
+	const creationDateValid = validateDate(creationDate, "Creation");
+	if(creationDateValid!==true)
+		return creationDateValid;
+
+	const modifiedDateValid = validateDate(modifiedDate, "Modified");
+	if(modifiedDateValid!==true)
+		return modifiedDateValid;
+
+	// the 16-bit CRC value at offset 124 is a 16-bit CRC-CCITT (XMODEM) of the first 124 bytes of the header
+	// this works for most files, but I've encountered too many files where the CRC isn't correct, likely was calculated incorrectly or used an incorrect algo, so we just skip this check entirely for now
+	//const crcValue = header.getUInt16BE(124);
+	//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
+	//	return debug ? `Header CRC (${crcValue}) mismatch` : false;
+
+	// so we let suspect file types/creator and dates slide above because we've found them in the wild, but if we have too many suspect things, return false here so we don't match things that are not macbinary (like archive/appleSingle/mod.Sirkustunnelmaan)
+	// we could add additional suspect checks above (such as a combined data fork + resource fork + header size (suspectLength) or modifiedDate>creationDate+wiggle, etc. and check them here. CRC could also be added, but that slows things down a little
+	if(suspectDates && (suspectFileType || suspectFileCreator))
+		return debug ? `Suspect dates and suspect type or creator` : false;
+
+	const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
+	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};
+}
+export {getMacBinaryMeta};
+
 // Get mac file type and creator code, either from inputFile meta (passed in originally by fileMeta argument) or checking if it's a MacBinary file and getting it from that
 export async function getIdMeta(inputFile)
 {
@@ -34,67 +132,8 @@ export async function getIdMeta(inputFile)
 			idMeta[k] = inputFile.meta[k];
 	}
 
-	const getMacBinaryMeta = async () =>
-	{
-		// MacBinary 1 Specs: https://web.archive.org/web/19991103230427/http://www.lazerware.com:80/formats/macbinary/macbinary.html
-		// MacBinary 2 Specs: https://files.stairways.com/other/macbinaryii-standard-info.txt
-
-		// MacBinary header is 128 bytes
-		if(inputFile.size<128)
-			return;
-
-		const header = await fileUtil.readFileBytes(inputFile.absolute, 128);
-		if([0, 74, 82].some(v => header[v]!==0))
-			return;
-
-		if(header[1]>63)	// Also used to fail if header[1]<1 but then I discovered a file that has a header[1] of 0 (test/sample/audio/fssdSound/LABSLAB.SOU)
-			return;
-
-		const dataForkLength = header.getUInt32BE(83);
-		const resourceForkForkLength = header.getUInt32BE(87);
-		if(dataForkLength===0 && resourceForkForkLength===0)	// according to the docs, there is also an upper limit to these sizes, but I don't currently check that
-			return;
-
-		if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
-			return;
-
-		// here we check to see if the type or creator has a null byte. I think in theory null bytes are allowed and I think I've even encountered it (though I forget where), but since this macBinary check is weak in general, we just restrict matches to those with non-null bytes in the type/creator
-		const fileTypeData = header.subarray(65, 69);
-		if(fileTypeData.indexOfX(0)!==-1)
-			return;
-
-		const fileCreatorData = header.subarray(69, 73);
-		if(fileCreatorData.indexOfX(0)!==-1)
-			return;
-
-		const creationDate = header.getUInt32BE(91);
-		const modifiedDate = header.getUInt32BE(95);
-
-		// I used to do the following check, but I've encountered files (image/macPaint/elvis.mac) where the creation date is after the modified date by a lot, so we'll skip this check
-		// ensure our modified date is not more than 2 days after our creation date (we've seen a few in the wild that are off by small amount, like 90 seconds (archive/macBinary/ZEN.HLP))
-		//if((creationDate-modifiedDate)>((xu.DAY*2)/1000))
-		//	return;
-
-		const MIN_YEAR = 1972;
-		// ensure sane timestamps (year between MIN_YEAR and current year) the format is secs since Mac epoch of 1904, but I've seen unix epoch instead (archive/sit/fixer.sit && archive/diskCopyImage/King.img.bin) so check both and both have to fail in order to abort
-		// we also allow 1904 just because we've seen it in the wild (archive/macromediaProjector/MEGACUTE Vol.2)
-		const macTSToDate = v => (new Date((v * 1000) + (new Date("1904-01-01T00:00:00Z")).getTime()));
-		if(([macTSToDate(creationDate).getFullYear(), macTSToDate(modifiedDate).getFullYear()].some(year => (year<MIN_YEAR && year!==1904) || year>(new Date()).getFullYear())) &&
-		   ([new Date(creationDate*1000), new Date(modifiedDate*1000)].some(d => d.getFullYear()<MIN_YEAR || d.getFullYear()>(new Date()).getFullYear())))
-			return;
-
-		// the 16-bit CRC value at offset 124 is a 16-bit CRC-CCITT (XMODEM) of the first 124 bytes of the header
-		// this works for most files, but I've encountered too many files where the CRC isn't correct, likely was calculated incorrectly or used an incorrect algo, so we just skip this check entirely for now
-		//const crcValue = header.getUInt16BE(124);
-		//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
-		//	return;
-
-		const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
-		return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};
-	};
-
 	if(!idMeta.macFileType || !idMeta.macFileCreator)
-		Object.assign(idMeta, (await getMacBinaryMeta()) || {});
+		Object.assign(idMeta, (await getMacBinaryMeta(inputFile)) || {});
 
 	return idMeta;
 }

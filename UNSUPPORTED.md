@@ -1,13 +1,14 @@
-# Unsupported File Formats (1,281)
+# Unsupported File Formats (1,285)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (87)
+## Archive (88)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[archive/sixTwoFourPacked](https://discmaster.textfiles.com/search?formatid=sixTwoFourPacked) | 624 Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sixTwoFourPacked/) - No known unpacker. Source code for the program, including assembly for decompression available here: https://discmaster.textfiles.com/browse/20219/hornet.scene.org%20FTP%2011-25-2012.zip/hornet.scene.org%20FTP%2011-25-2012/code/compress/plp_624.zip
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?formatid=abackupDiskImage) | ABackup Disk Image | .adf | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?formatid=actionPresentation) | Action! presentation | .acp .act .sta | 
@@ -563,7 +564,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (699)
+## Other (702)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -757,6 +758,8 @@ Family/Format | Name | Extensions | Notes
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
 [other/descentPlayer](https://discmaster.textfiles.com/search?formatid=descentPlayer) | Descent Player | .plr | 
 [other/deScribeMacro](https://discmaster.textfiles.com/search?formatid=deScribeMacro) | DeScribe Macro |  | 
+[other/desktopDB](https://discmaster.textfiles.com/search?formatid=desktopDB) | Desktop DB |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDB/)
+[other/desktopDF](https://discmaster.textfiles.com/search?formatid=desktopDF) | Desktop DF |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDF/)
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
@@ -1251,6 +1254,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectSetupData](https://discmaster.textfiles.com/search?formatid=wordPerfectSetupData) | WordPerfect Setup Data | .set | 
 [other/wordPerfectThesaurus](https://discmaster.textfiles.com/search?formatid=wordPerfectThesaurus) | WordPerfect Thesaurus | .ths | 
 [other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?formatid=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 
+[other/wordPerfectWordlist](https://discmaster.textfiles.com/search?formatid=wordPerfectWordlist) | WordPerfect Wordlist | .spw | 
 [other/wordsearchManiaConfiguration](https://discmaster.textfiles.com/search?formatid=wordsearchManiaConfiguration) | Wordsearch Mania! Configuration | .cfg | 
 [other/wordStarPrinterDescFile](https://discmaster.textfiles.com/search?formatid=wordStarPrinterDescFile) | WordStar Printer Description File | .pdf | 
 [other/wordWorthPreferences](https://discmaster.textfiles.com/search?formatid=wordWorthPreferences) | WordWorth Preferences |  | 

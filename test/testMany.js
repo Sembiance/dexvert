@@ -51,7 +51,10 @@ const SLOW_FORMATS =
 ];
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
-await Array.from(formatsToProcess).shuffle().sortMulti([formatid => SLOW_FORMATS.includes(formatid)], [true]).parallelMap(async formatid =>
+const orderedFormatsToProcess = Array.from(formatsToProcess).shuffle();
+if(argv.format!=="all")
+	orderedFormatsToProcess.sortMulti([formatid => SLOW_FORMATS.includes(formatid)], [true]);
+await orderedFormatsToProcess.parallelMap(async formatid =>
 {
 	underway.add(formatid);
 	const formatStartedAt = performance.now();

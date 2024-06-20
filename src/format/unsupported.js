@@ -1050,6 +1050,7 @@ export default
 		wordPerfectSetupData             : {name : "WordPerfect Setup Data", ext : [".set"], magic : ["Wordperfect Setup Datei", "Corel WordPerfect: Unknown filetype 17"], weakMagic : true},
 		wordPerfectThesaurus             : {name : "WordPerfect Thesaurus", ext : [".ths"], magic : ["WordPerfect thesaurus", "Wordperfect Thesaurus Datei"], weakMagic : true},
 		wordPerfectVideoResource         : {name : "WordPerfect Video Resource", ext : [".vrs"], magic : ["WordPerfect Video Resource"]},
+		wordPerfectWordlist              : {name : "WordPerfect Wordlist", ext : [".spw"], magic : ["WordPerfect wordlist, v5.0"], weakMagic : true},
 		wordStarPrinterDescFile          : {name : "WordStar Printer Description File", ext : [".pdf"], magic : ["WordStar Printer Description File"]},
 		wordWorthPreferences             : {name : "WordWorth Preferences", magic : ["WordWorth preferences"]},
 		yafaCompressionOptions           : {name : "YAFA Compression Options", magic : ["YAFA compression options"]},

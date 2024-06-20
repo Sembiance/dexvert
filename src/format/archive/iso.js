@@ -36,7 +36,7 @@ export class iso extends Format
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660",
 		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system",
 		/^ISO 9660$/, /^fmt\/(468|1738)( |$)/,
-		/^First .* are blank$/,
+		/^First .*are blank$/,
 		...HFS_MAGICS
 	];
 	weakMagic = [/^First .* are blank$/];

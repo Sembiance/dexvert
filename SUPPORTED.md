@@ -1,4 +1,4 @@
-# Supported File Formats (1,753)
+# Supported File Formats (1,751)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -175,7 +175,7 @@ archive | Lucas Arts Game Archive | .gob | [gameextractor](http://www.watto.org/
 archive | [LyNX Archive](http://fileformats.archiveteam.org/wiki/Lynx_archive) | .lnx | [DirMaster](https://style64.org/dirmaster) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/lynxArchive/)
 archive | [LZEXE Packed](http://fileformats.archiveteam.org/wiki/LZEXE) |  | [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/lzexePacked/)
 archive | [Mac Compact Pro Archive](http://fileformats.archiveteam.org/wiki/Compact_Pro) | .cpt | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/compactPro/)
-archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
+archive | [MacBinary](http://fileformats.archiveteam.org/wiki/MacBinary) | .bin | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/macBinary/) - We include MacBinary 1, 2, 3 into this single format
 archive | [MacOS Resource Fork](http://fileformats.archiveteam.org/wiki/Macintosh_resource_file) | .rsrc .rs | [resource_dasm](https://github.com/fuzziqersoftware/resource_dasm) [deark](https://entropymine.com/deark/) | [33 sample files](https://sembiance.com/fileFormatSamples/archive/rsrc/)
 archive | [Macromedia Director](http://fileformats.archiveteam.org/wiki/Shockwave_(Director)) | .dir .dxr .drx .cxt .cst .dcr | [projectorRays](https://github.com/ProjectorRays/ProjectorRays) [directorCastRipper12](https://github.com/n0samu/DirectorCastRipper) [dirOpener](https://www.buraks.com/swifty/xena.html) [recover_cct](https://archive.org/details/recover_cct) | [59 sample files](https://sembiance.com/fileFormatSamples/archive/macromediaDirector/)
 archive | [Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
@@ -1542,7 +1542,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (109)
+## Other (107)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1577,8 +1577,6 @@ other | DB2 Bind | .bnd | [strings](https://www.gnu.org/software/binutils/) | [1
 other | dBase Label Design | .lbl | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/dBaseLabelDesign/)
 other | Deluxe Print Document/Project | .bnr2 .lbl2 .lhd2 .sgn2 .bnnr .labl .lthd .sign | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/other/deluxePrint/)
 other | [DER Encoded Certificate](http://fileformats.archiveteam.org/wiki/DER_encoded_certificate) | .cer .der .crt | [openssl](https://www.openssl.org/) | [1 sample file](https://sembiance.com/fileFormatSamples/other/derCertificate/)
-other | Desktop DB |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDB/)
-other | Desktop DF |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/desktopDF/)
 other | Director STXT | .stxt | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/directorSTXT/)
 other | EA Localized Strings game data | .loc | [strings](https://www.gnu.org/software/binutils/) | 
 other | Empty File |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/emptyFile/)

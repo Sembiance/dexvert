@@ -49,7 +49,7 @@ async function getMacBinaryMeta(inputFile, debug)
 	if((dataForkLength+128)>inputFile.size)	// I used to add resourceForkForkLength+128 but I encountered a file where that's not true (test/sample/audio/fssdSound/IFALLEN.SOU)
 		return debug ? `Data fork length (${dataForkLength}) + 128 header extends beyond file size (${inputFile.size})` : false;
 
-	const suspectForkSizes = (dataForkLength+resourceForkLength+128)>inputFile.size || (dataForkLength+128+resourceForkLength+128+128)<inputFile.size;	// later half extra 128's are to align on 128 byte boundaries
+	const suspectForkSizes = (dataForkLength+resourceForkLength+128)>inputFile.size || (dataForkLength+128+resourceForkLength+128+128+4096)<inputFile.size;	// later half extra 128's are to align on 128 byte boundaries, extra 4096 is just to allow some allowances
 
 	// we used to check and forbid any null bytes in type/creator, but I've encountered macbinary files that have no type/creator (archive/macBinary/Icon↵) so we'll allow it
 	// instead we detect if it's suspect and then later on if some other checks also look suspect we return false
@@ -102,15 +102,21 @@ async function getMacBinaryMeta(inputFile, debug)
 	if(modifiedDateValid!==true)
 		return modifiedDateValid;
 
-	// the 16-bit CRC value at offset 124 is a 16-bit CRC-CCITT (XMODEM) of the first 124 bytes of the header
-	// this works for most files, but I've encountered too many files where the CRC isn't correct, likely was calculated incorrectly or used an incorrect algo, so we just skip this check entirely for now
-	//const crcValue = header.getUInt16BE(124);
-	//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
-	//	return debug ? `Header CRC (${crcValue}) mismatch` : false;
 
 	// check to see if we have too many 'suspect' things (2 or more) and return false in that case (image/paintPro/AGIGATE.RSC)
-	if([suspectForkSizes, suspectFileType || suspectFileCreator, suspectDateDifference || suspectDates.Creation || suspectDates.Modified].filter(Boolean).length>=2)
-		return debug ? `Too many suspect parts: suspectForkSizes:${suspectForkSizes} suspectFileType:${suspectFileType} suspectFileCreator:${suspectFileCreator} suspectDates:${Object.entries(suspectDates).map(([k, v]) => `suspectDates.${k}:${v}`).join(", ")} suspectDateDifference:${suspectDateDifference}` : false;
+	const suspects = [suspectForkSizes, suspectFileType || suspectFileCreator, suspectDateDifference || suspectDates.Creation || suspectDates.Modified].filter(Boolean);
+	if(suspects.length>0)	// eslint-disable-line sonarjs/no-collapsible-if
+	{
+		// the 16-bit CRC value at offset 124 is a 16-bit CRC-CCITT (XMODEM) of the first 124 bytes of the header
+		// this works for most files, but I've encountered too many files where the CRC isn't correct, likely was calculated incorrectly or used an incorrect algo
+		// a LOT of files don't have a valid CRC, so we don't check it anymore
+		//const crcValue = header.getUInt16BE(124);
+		//if(crcValue!==0 && crcValue!==await hashUtil.hashData("CRC-16/XMODEM", header.subarray(0, 124)))
+		//	suspects.push(true);
+
+		if(suspects.length>=2)	// eslint-disable-line unicorn/no-lonely-if
+			return debug ? `Too many suspect parts: suspectForkSizes:${suspectForkSizes} (${dataForkLength}+${resourceForkLength} : ${inputFile.size}) suspectFileType:${suspectFileType} suspectFileCreator:${suspectFileCreator} suspectDates:${Object.entries(suspectDates).map(([k, v]) => `suspectDates.${k}:${v}`).join(", ")} suspectDateDifference:${suspectDateDifference}` : false;
+	}
 
 	const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
 	return { macFileType : await encodeUtil.decodeMacintosh({data : fileTypeData, region}), macFileCreator : await encodeUtil.decodeMacintosh({data : fileCreatorData, region})};

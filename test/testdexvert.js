@@ -274,8 +274,9 @@ const FLEX_SIZE_FORMATS =
 	poly :
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*" : 0.1,
-		cyberStudioCAD3D : 95
+		"*"              : 0.1,
+		cyberStudioCAD3D : 95,
+		keyCAD3DModel    : 40
 	},
 	video :
 	{
@@ -307,7 +308,8 @@ const IGNORE_SIZE_AND_CONVERTER_SRC_PATHS =
 	},
 	video :
 	{
-		wmv : ["Green Goblin Last Stand.asx"]	// varies up to like 70% on some hosts, not sure why
+		wmv : ["Green Goblin Last Stand.asx"],	// varies up to like 70% on some hosts, not sure why
+		mov : ["FAN3SEX.MOV"]	// varies a lot from run to run
 	}
 };
 
@@ -330,6 +332,9 @@ const FLEX_DIFF_FILES =
 
 	// this specific file sometimes extracts a pict, sometimes a bmp, no idea why
 	/archive\/rsrc\/Speedometer 4\.02\.rsrc$/,
+
+	// this archive is corrupted and differing stuff is extracted each time
+	/archive\/rsrc\/MoviePlayer\.rsrc$/,
 	
 	// sometimes various .as scripts are exatracted, sometimes not
 	/archive\/swf\/.+$/,

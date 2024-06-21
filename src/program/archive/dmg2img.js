@@ -9,6 +9,6 @@ export class dmg2img extends Program
 	args    = async r => [r.inFile(), await r.outFile("out.img")];
 
 	// Convert with dexvert any resulting files
-	chain     = "dexvert";
+	chain     = "dexvert[asFormat:archive/iso]";
 	renameOut = true;
 }

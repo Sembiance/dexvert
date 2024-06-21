@@ -52,7 +52,7 @@ const SLOW_FORMATS =
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
 const orderedFormatsToProcess = Array.from(formatsToProcess).shuffle();
-if(argv.format!=="all")
+if(argv.format[0]!=="all")
 	orderedFormatsToProcess.sortMulti([formatid => SLOW_FORMATS.includes(formatid)], [true]);
 await orderedFormatsToProcess.parallelMap(async formatid =>
 {

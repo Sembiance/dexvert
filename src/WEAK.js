@@ -314,6 +314,7 @@ export const WEAK_VALUES =
 	/^Palm OS operating system patch data/,
 	/^Par archive data$/,
 	/^PARity archive data - Index file$/,
+	/^PCX for Windows image data.*\d{5}/,
 	/^Perkin-Elmer executable/,
 	/^PEX Binary Archive$/,
 	/^PFT archive data/,

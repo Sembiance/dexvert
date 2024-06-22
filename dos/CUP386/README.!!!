@@ -1,0 +1,4 @@
+Important: /l switch control reversed.
+
+/l switch now functions as following:
+   by default CUP386 won't perform led flashing until you specify this switch.

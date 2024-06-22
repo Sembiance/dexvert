@@ -1,0 +1,609 @@
+                                                              Manual revision:
+                                                                    [17.08.97]
+
+
+               ÜÛÛÛÜßÛÛÛÛÝßÛÛÛÛÝ
+              ÜÛÛ ßßÞÞÛÛÛ  ÞÛÛÛ
+              ÛÛÛÛÜÜÛÝÛÛÝ Ü ÛÛÝ    CúyúbúeúrúWúaúrúe
+              ßÛÛÛÛÛÛÞÛÛÛÛÛÛÛß
+                ßßßß   ßßßßß
+                                    featured by
+
+                                    uNITED cRACKING fORCE [uCF]
+
+
+                                    proudly presents
+
+
+                   The ultimate executables unpacker
+
+
+                  CUP386 v3.4 - The Final DOS Version
+
+
+
+1. Introduction
+   ~~~~~~~~~~~~
+
+    Yes, we know -- you're  too short  of time  and too busy to read  long
+  and  sophisticated readmes, so,  willing to make  your acquaintance with
+  our new product  as quick  and easy  as possible, we  won't describe its
+  advantages and features. We'll just ask you some questions:
+
+    After spending some hours you've finally discover THAT phuken bit,
+     (you know what i'm talking about), but you may not alter either
+     protected or packed executable file?
+    You've found a program wich shows an art of coding; you'd like to
+     see how it has been coded and how it works. Oops! the program was
+     encrypted and you'll see only the garbage!
+    You're looking for a powerful debugger?
+
+  Well, if  you've  answered "Yes!"  at least once - congratulations, this
+  is exactly what  you want,  so you may proceed  with the rest  of readme,
+  it won't take long and may come in handy.
+
+
+2. Standard disclaimer, Distribution notice and Legal stuff
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Now goes the traditional phrase that program provided 'as is', without
+  warranty  of  any kind neither  expressed nor implied.  The  only  thing
+  CyberWare guarantees is that  we'll take  to our  consideration all your
+  flame, wishes, notices and congratulations.
+
+    As a major part of CyberWare noncommercial products, CUP386  should be
+  distributed under "AnyWare" concept.  That means that  it's up to you to
+  choose *any* concept you like and  it's for you to  decide on what terms
+  and conditions you receive CUP386 and what to do then.
+
+    *But* it's  forbidden to  modify CUP386.COM  itself  and  this manual,
+  moreover, every  instruction of this  proggy is  copyrighted property of
+  CyberWare.  Disassembling,  single-stepping   or  inserting  breakpoints
+  while in run-time is strictly prohibited  and may cause severe civil and
+  criminal penalties.
+
+3. Overview
+   ~~~~~~~~
+
+     CyberWare Universal Unpacker  unpacks  old  M$-DOS  executable  files
+   processed  with *any*  EXE- or COM- file packer (cryptor or protector),
+   thus  making them  easy  for  further  analyzing,  hacking  or  reverse 
+   engineering.  Version 3.4  of  CyberWare  Universal  Unpacker  has been
+   carefully tested with follwing:
+
+    PkLite v1.xx+  by PkWare, Inc.
+    Diet vx.x      by Teddy Matsumoto
+    LzExe vx.x     by Fabrice Bellard
+    TinyProg vx.x  by unknown Singapoure extermist
+    PgmPak vx.x    by Todor Todorov
+    HackStop v1.15 by Rose
+    WWPack v3.0+   by Piotr Warezak
+    Countless heap of packers who forgotten introduce themselves
+
+   The enumeration above does not mean  that CUP386 won't work  with other
+   packers.  Moreover, CUP386  was  designed  to unpack executables packed
+   with *unknown* software.
+
+
+4. How does CUP386 work?
+   ~~~~~~~~~~~~~~~~~~~~~
+   
+     A packed program cannot be  executed by CPU directly.  It requires to
+   be decompressed before. So, there always should be a code wich performs
+   such decompression (decryption or unprotection). 
+     CUP386 creates  a  virtual  DOS  environment  for  a  victim program; 
+   then it  performs single  stepping  (tracing)  through the  decryptor / 
+   decompressor / unprotector  until the  beginning of the  first original
+   program  opcode. Then it  will drop  unpacked  memory image  onto disk.
+   However,  because of specific structure of EXE files there is a need to
+   make at least  two such images  (taken from different  address spaces); 
+   CUP386  will perform  the second pass.  Finally, destination executable 
+   will be created using theese memory images.
+
+   Note: An address  of the first opcode  related to the  original program
+         is called 'EntryPoint'.
+
+
+5. How to use CUP386?
+   ~~~~~~~~~~~~~~~~~~
+
+   CyberWare  Universal  Unpacker  must  be started  from  a command  line
+   according to the following syntax:
+
+   cup386.com [d:][/path]Infile [[d:][/path]Outfile] /switch[es]
+
+   where:
+
+    InFile           = obligatory filename of source (packed) file;
+                       InFile has no default extension, it's up to you to
+                       supply a filename with valid extension.
+
+    OutFile          = optional destination filename the file'll be expaned
+                       into; the default extension for OutFile is .CUP
+
+    /switch[es]      = switches /1, /3 and /7 select the tracer type,
+                       you must specify ONE of them to get CUP386 working;
+                       other switches are optional.
+
+6. Command line switches
+   ~~~~~~~~~~~~~~~~~~~~~
+
+   CyberWare Universal Unpacker v3.4 accepts the following switches:
+
+      /1  = step by step real mode limitations tracer:
+            real mode int 01 tracer with interrupts redirection;
+            no antidebugging code handling, no advanced debugging;
+            apparently used for unpacking only;
+
+      /3  = step by step 80386+ full featured tracer, V86 mode:
+            advanced multitasking tracer;
+            DRx registers emulation, allows trace external interrupts;
+            antidebugging code handling;
+
+      /5  = SMM (System Management Mode) debugging:
+            unavailable in this version of CUP386;
+
+      /7  = real mode Intel 80386 chip emulator:
+            about 200 times slower in compare to original CPU speed;
+            allows trace almost all realmode programs;
+            supports any kind of breakpoints;
+            cpu queue virtualization; 
+
+   optional switches:
+
+      //  = all symbols after double slash will be threated as a command
+            line for victim program.
+
+      /l  = Enable "I'm Alive feature": CUP386 will flash NumLock led
+            while unpacking specified program.
+
+      /d  = interactive tracer using built in debugger:
+            invokes a built in CyberWare Code Digger wich allows you
+            to find out an EntryPoint location by yourself.
+
+      /p  = preserve general registers set at the EntryPoint:
+            creates an additional  code past the end  of unpacked program
+            using VIRI concept; such code will restore selected registers
+            before  resuming  execution  of  that program.
+            usage:
+
+            /p000000001222222
+              ³³³³³³³³³³³³³³ÀÄ gs             ¿
+              ³³³³³³³³³³³³³ÀÄÄ fs             ³
+              ³³³³³³³³³³³³ÀÄÄÄ ds             ÃÄ group A
+              ³³³³³³³³³³³ÀÄÄÄÄ ss             ³
+              ³³³³³³³³³³ÀÄÄÄÄÄ cs             ³
+              ³³³³³³³³³ÀÄÄÄÄÄÄ es             ³
+              ³³³³³³³³ÀÄÄÄÄÄÄÄ flags          Ù
+              ³³³³³³³ÀÄÄÄÄÄÄÄÄ edi/di         ¿
+              ³³³³³³ÀÄÄÄÄÄÄÄÄÄ esi/si         ÃÄ group B
+              ³³³³³ÀÄÄÄÄÄÄÄÄÄÄ esp/sp         ³
+              ³³³³ÀÄÄÄÄÄÄÄÄÄÄÄ ebp/bp         Ù
+              ³³³ÀÄÄÄÄÄÄÄÄÄÄÄÄ ebx/bx/bl/bh   ¿
+              ³³ÀÄÄÄÄÄÄÄÄÄÄÄÄÄ edx/dx/dl/dh   ÃÄ group C
+              ³ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ ecx/cx/cl/ch   ³
+              ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ eax/ax/al/ah   Ù
+
+            each  digit position  after  /p  switch represents respective
+            register  (e.g. the  3rd  position represents  EDX  register)
+            depending  on  digit value CUP386 will  backup different part
+            of  selected  register:
+
+              0 - register does not require backup
+              1 - backup only the low byte of a register (e.g. AL)
+              2 - backup low word of a register (e.g. CX)
+              3 - backup high byte of a register (e.g. DH)
+              4 - backup entire 80386 dword register (e.g. EBX)
+
+            registers group A accept values 0 and 2
+            registers group B accept values 0, 2 and 4
+            registers group C accept the following: 0, 1, 2, 3 and 4
+
+            for example, the following will backup CX, BH, ESP and FS:
+            /p02030400000002
+
+            Note:   This switch  should be used when  original program is
+                    dependant  upon  startup  values  of  some  registers.
+
+      /e  = use specified address (relative PSP) as an entry point:
+            forces  CUP386 to  make an entry point at  specified location.
+            usage:
+
+            /e[XXXX:]YYYY[,passcount]
+
+            YYYY -                hexadecimal offset value
+            XXXX -                hexadecimal segment value
+            passcount -           amount of times entry point should
+                                  be skiped.
+
+            for example, /e0:100 (or /e100 or /e10:0) represent a default 
+            COM file entrypoint.
+
+      /c  = use specified sequence of bytes to validate entry point:
+            this switch is used to validate entry point code.
+            usage:
+
+            /c#xx[#xx...]
+
+            each sequental #xx represents another byte of code
+            e.g. /c#B8#03#00 eqals MOV AX, 03h instruction.
+
+            Hint:  Turbo Pascal programs have #9A as the first opcode of
+                   the program; Turbo C RTL has #BA instead. etc.
+
+      /s  = use another method to determine executable image size:
+            forces CUP386 to use another method of image size calculation;
+            use  this switch  if CUP386 screws  up with  an error message:
+            CUP386 - Fatal Error: Couldn't compute the length of the file.
+            usage:
+
+            /s
+
+            you may specify the image size by yourself:
+
+            /s????
+
+      /r  = don't write overlay data to the destination:
+            EXE files have an  EXE header  wich one supplies the loadable 
+            image size (as well as another useful) information.  Any data
+            past the loadable EXE image is called Overlay Data.  It could
+            contain program resources such as images,  additional program 
+            code or whatever.  /r switch forces CUP386  do not  copy this 
+            data to the  destination executable.
+
+            Note:   This gets only applied to EXE files.
+
+      /t  = don't erase temporary files from the disk:
+            CUP386 will leave temporarry files ASAP.$1 and ASAP.$2 on the
+            disk; since these  files contain  native executable images --
+            expirienced  people  can examine  them to  determine precious
+            image length as well.
+
+      /u  = don't update file attributes & date time:
+            by default CUP386 will update destination file attributes and
+            date/time so they will match source file. /u switch allows to
+            avoid this - destination file will receive an archive-bit and
+            current date/time stamp.
+
+      /h  = don't remove irrelevant header data:
+            EXE files have  an EXE header wich  can   contain some  space
+            that usually is not used by anyone.  An example of irrelevant
+            header data is the following  string in the beginning of some
+            PkLited files:
+
+                "PKLITE Copr. 1990-91 PKWARE Inc. All Rights Reserved"
+
+            Use this switch  only if original  program is  dependant upon
+            irrelevant data contents.
+
+      /x  = produce an EXE file at destination:
+            by default CUP386 will autodetect the destination file type:
+            if   (image_len  <=  0FEFEh)  and   (entry_IP  =   100h)  and
+            (entry_CS  =  PSP) and (relocations  =  0) then this is a COM
+            file.  /x  switch  forces  CUP386 to  build  an  EXE file  at
+            destination  regardless  of  autodetection  result.
+
+      /k  = don't reset keyboard.
+            normally,  you should never use this switch,  unless you have 
+            serious keyboard troubles; so, with some keyboard controllers 
+            this  switch  could be useful.
+
+      /v  = load current video state and font instead of using predefined;
+            use this switch if you have incompatible VGA adaptor or if you
+            wish to use current memory font (e.g. to see national language
+            letters when browsing CCD data window)
+
+            NOTE: used in conjunction with /d switch.
+
+      /?  = display usage screen.
+
+7. Archive information and requirements
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   CyberWare Universal Unpacker v3.4 archive contains following files:
+
+   FILE_ID.DIZ             773  Description text file
+   CUP386.COM            37738  CyberWare Universal Unpacker executable
+   LOADFIX.COM             810  MS-DOS Loadfix utility for EXE-PACK
+   README.CUP            27010  Readme file you're currently reading
+
+   CyberWare Universal Unpacker v3.4 requires the following:
+
+       At least 80386 CPU;
+       MS-DOS version 5.0 or above;
+       VGA card is required for integrated debugger;
+       CUP386 takes about 60kb of conventional memory;
+
+8. Integrated debugger
+   ~~~~~~~~~~~~~~~~~~~
+
+     The moment the decryptor is  giving control  to the original program
+   can  not be  100%  auto-detected.  That  why CUP386  has an integrated
+   debugger.   Expirienced   people   can    trace   trough   decryptor /
+   decompressor  /  unprotector  manually,   even  sometimes  faking  the
+   comparsion results  and redirecting  codeflow;  as soon as  EntryPoint
+   has  been  reached and manually  marked - CUP386 will  take care about
+   the rest of unpack process.
+
+   þ shortcuts
+     ~~~~~~~~~
+      BP     = breakpoint
+      BPX    = breakpoint on Exec
+      BPM    = breakpoint on Memory access
+      BPR    = breakpoint on Memory Range access
+      BPIO   = breakpoint on Ports access
+      BPINT  = breakpoint on Int Occurance
+
+     CyberWare  Code  Digger  is similar to the Turbo Debugger by Borland
+   International,  so we won't describe  all the basic  debugger features
+   from the scratch, we'll just note some advantages instead:
+
+     CCD has an implemented multitracers interface,  thus it is possible
+      to use different tracers within the same visual environment. As was
+      mentioned  before there  are three  different tracers  implemented:
+
+       realmode tracer
+         + allows BIOS BPX, can run under any EMM
+         - supports only BPX, rather slow
+
+       V86 multitasking (VMM386)
+         + supports BPX, BPM, BPIO, BPINT, advanced multitasking, fast!
+         - only four BPX supported
+
+       i80386 CPU emulator (EMU386)
+         + supports any BP, CPU queue emulation, DRx emulation
+         - FPU opcodes aren't supported: emulates no FPU presence.
+
+     CCD has an implemented  DOS MCB chains browser -- you will be able
+      to monitor any MCB allocation.
+
+     CCD has an implemented Create Executable feature. It allows you to
+      create a working executable file from two memory dumps.
+
+     CCD has an implemented  Data Tracking feature.  You can specify an
+      expression  -  the  data window  cursor  will always  follow  this
+      expression result.
+
+     CCD  has  an  implemented  Operands Tracking feature.  Just  press
+      gray '/'  or  gray '*'  for  fast  navigate  data  cursor  to  the
+      Destinaton or Source operand address respectivelly.
+
+     CCD disassembler has a smart recognization of JE (JNE) & JZ (JNZ).
+      While these  instructions  have  the  same opcodes they  will  be 
+      displayed in a different manner depending on prior instructions.
+
+     CCD hooks no interrupts (except for RM tracer), thus allowing you
+      to trace any interrupt handler.
+
+     Almost all Value Input Lines accept expressions.
+
+     a lot of other advantages...
+
+   þ debugger keys
+     ~~~~~~~~~~~~~
+       F2        - toggle BPX at CPU window cursor location.
+       F4        - go to cursor:  place an unconditional BPX at CPU cursor
+                   location & run program.
+       F7        - trace   instruction.  goes   into  CALLS,   INTS,  etc.
+       F8        - step over  opcode. single step CALLS, INTS,  REPS, etc.
+       F9        - run program.
+       F10       - go to menu.
+     +
+     +
+       Alt-F2    - setup any allowed breakpoint.
+       Alt-F4    - back tracing. can be only activated after TRACE command.
+       Alt-F5    - switch to the user screen. press any key to switch back
+                   to the debugger.
+       Alt-F8    - run until return. Will work correct only when currently
+                   executing any procedure or software interrupt.
+       Alt-F9    - execute  to specified address:  place BPX there and RUN.
+       Alt-Lttr  - Alt-highlight  letter   activates   respective  menu or
+                   dialog  control.
+       Alt-X     - exit to OS immediatelly.
+     +
+     +
+       Ctrl-R    - position code cursor, following stack far frame (dword).
+       Ctrl-T    - tracking.  for DATA window only.  This one equals 'DEX' 
+                   command in WinICE.
+       Ctrl-Y    - clears contents of current input line.
+       Ctrl-O    - goto   origin.  cpu   window   -   using  CS:IP,  stack
+                   window  -  SS:SP.
+       Ctrl-P    - goto  previous  cpu position.  cursor keys do  not swap
+                   position.
+       Ctrl-F    - follow  code or data.  cpu window - try on JMPS, CALLS,
+                   INTS, etc.
+       Ctrl-G    - position cursor of current window to the specified addr.
+       Ctrl-C    - search for a caller. look through stack for return addr.
+       Ctrl-B    - position code cursor, following stack near frame (word).
+       Ctrl-N    - set up  CS:IP or SS:SP to  the  cursor position address
+     +
+     +
+       Ctrl-F2   - reset  program.  reload  program  from  the disk & goto
+                   the beginning.
+       Ctrl-F4   - invoke  calculator.   see  'calculator'  'expression'
+                   for details.
+       Ctrl-Brk  - equal to  Alt-F2  wihle  debugger is running, otherwise
+                   popup the debugger.
+     +
+     +
+       ScrollLock  - when debugger is not active - popup the debugger.
+     +
+     +
+       gray '/'  - selects destination (first) operand  of an instruction,
+                   depending   on   operand  type,  position  data  cursor
+                   according to:  operand  address  (for memory operands),
+                   register  value  (for registers),  native  offset  (for
+                   values).  for  JUMPS,  CALLS,  INTS  this  keypress  is
+                   equal to Ctrl-F.
+       gray '*'  - tries to apply the  above method to the source (second)
+                   operand; if second operand is absent - acts as gray '/'
+       gray '+'  - position data window cursor so it will match CPU window
+                   cursor address.
+
+   þ calculator and expressions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+       built in calculator (Ctrl-F4) accepts any expression that is
+       complainant with Turbo Pascal standart. You can use any register
+       in expression (e.g. AX + 1) as well as String values (e.g. 'DM');
+       also you can use following additional operations:
+
+         |       binary OR two operands
+         or      the same
+         &       binary AND two operands
+         and     the same
+         xor     binary XOR two operands
+         shl     shift [left operand] to left by [right operand]
+         shr     shift [left operand] to right by [right operand]
+
+       logical operations:
+
+         =       Compares left and right values, result will be set to
+                 True (1) if they're equal. Otherwise it'll be False.
+         >=      True if left operand is greater than or equal to right
+                 operand. unsigned comparsion.
+         =>      The same as above, but signed comparsion.
+         <=      True if left operand is less than or equal to right
+                 operand. unsigned comparsion.
+         =<      The same as above, but signed comparsion.
+         >       True if left operand is greater than right operand.
+                 unsigned comparsion.
+         <       True if left operand is less than right operand.
+                 unsigned comparsion.
+         <>      True if operands aren't equal.
+
+       examples of logical expressions and results:
+         (24 / 4) * 2 <= 12                                 result:  1
+         (2 = 2) and (4 - 1 = 3) and (6 * 2 = 12)           result:  1
+         ((CX and 0) * 5 > 0) * 3                           result:  0
+
+       Note:     by default  any vaule will  be threated  as hexadecimal
+                 value,  unless the last digit appears as 'd' character;
+                 in such  case it'll be  recognized as  decimal integer.
+
+   þ debugger notes / hints
+     ~~~~~~~~~~~~~~~~~~~~~~
+
+       a. when adding MEMORY breakpoint while in V86 tracer - keep in mind,
+          that CPU requires such breaks to be dword aligned. Avoiding this
+          rule  may  cause unpredictible  breaks as  well  as no breaks at
+          specified location.
+
+       b. when manually changing current CS:IP location wihle in EMU386 --
+          take that fact: virtual CPU queue will be reloaded.
+
+       c. when tracing  HW interrupts,  'search caller'  and 'until return'
+          features won't work correctly, beacuse there could be no CALL or
+          INT  opcodes  followed   by  return  address.  To  determine  an
+          interrupted  opcode  address press  Ctrl-R. note, that  it won't
+          work  correct as  soon  as  any 'push'es  were made  since first
+          instruction of interrupt handler.  i.e. you may use this feature
+          when  return address  appears to  be exactly at SS:[SP]
+
+       d. when  creating  executable, leaving 'Image Length'  field  empty
+          forces CUP386  to make additional  pass in order to determine an
+          executable image size automatically. otherwise, memory drop will
+          occur  according  specified  size  and  no extra  pass  will  be
+          performed.
+
+       e. any  hexadecimal  value  could be  written without  zero  prefix,
+          except the  following: (they  will be threated as registers, not
+          values)  ah,  dh,  ch,  bh.  To  specify  a  value,  for example,
+          twelve - place  zero  before i.e. 0ch  or type it  as in decimal
+          form: 12d, etc.
+
+9. How to contact us
+   ~~~~~~~~~~~~~~~~~
+
+   Latest  revision  of  CyberWare  Universal  Unpacker is  available  at
+   CyberQuest and other H-Net boards. You may as well request it by alias
+   GIMMECUP  from  its  origin   at  CyberQuest,  FidoNet   2:5020/1000.2
+   (published, 7+ (095) 377-6825).  You're  welcome  to send your notices
+   and wishes via netmail there as well as to sage386@hotmail.com.
+
+   author: Alex Petroukine 2:5020/1000.2@fidonet, search for sage386 on IRC
+   voice: +7 (095) 550-3599, +7 (095) 377-6825
+   email: sage386@hotmail.com
+
+
+10. Revision history
+    ~~~~~~~~~~~~~~~~
+
+   dd-mmm-yy: CUP v1.2
+
+
+   dd-mmm-yy: CUP386 v2.9 - not publicy released
+               - first advanced version of CUP. uses 80386 specific opcodes
+               - reimplements CUP v1.2 with interrupts redirections in RM
+               - added EMU386 real mode intel i80386 chip emulator.
+               - added VMM386 multitasking V86 manager
+
+   dd-mmm-yy: CUP386 v3.0 beta
+              - added DBG386 multi-tracers debugger wich uses MicroVision
+                video library (~4kb) and has ala TurboDebugger interface.
+              - EMU386 was completely rewritten, improvements are amazing.
+              - VMM386 now implements full featured V86 debug kernel.
+              - some anti-antidebugging procedures are commented for beta
+                release. 
+
+   01-Sep-96: CUP386 v3.2
+              - fixed some major EMU386 bugs as well as other minor bugs
+              - added DRx regs emulation code (both VMM386 and EMU386)
+              - in compare to BETA release: uncommented some important
+                anti-antidebugging procedures such as RUNNING LINE support
+              - reboot (not so useful though) and memory map features added
+              - both VMM386 and EMU386 allows trace external hardware ints
+              - VMM386 redirects bad opcode exception to the real mode
+
+   24-Apr-97: CUP386 v3.3
+              - author birthday release! (applauses accepted ;)
+              - fixed 13 major bugs; (e.g. /c switch was absolutely ignored
+                when tracing via EMU386, the real mode tracer /e switch was
+                working wrong)
+              - VMM386 was rewritten. now it implements true advanced
+                multitasking. (actually there're four different tasks
+                running when tracing via VMM386).
+              - both VMM386 and EMU386 have been upgraded with enchanced
+                DRX emulation and were carefully tested against most known
+                dbg-trap methods.
+              - BPM, BPR, BPIO, BPINT setup dialog implemented.
+              - keyboard bugfix, now it is unblockable while single stepping.
+              - you may turn on 'Interactive Second Pass' mode.
+              - disassembler fixes as well as improvements:
+                JE/JNE vs JZ/JNZ selection;
+
+|   18-Aug-97: CUP386 v3.4
+|             - This is BUGFIX version, no new features were added.
+|             - This is the FINAL DOS version of CUP386.
+|               I won't support it anymore.
+
+11. Additional last minute info
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   All products mentioned above are trademarks and copyrighted by their
+   respective owners.
+
+|  Note that lines marked with "|" are updates to previous manual revisions.
+
+   Authour would like to thank following persons:
+
+    - Doctor (Yuri Romantsov // cyberware)
+    - Sandro (Oleg Pleshivtsev // cyberware)
+    - Sammy Hackee (Oleg Samohvalov // cyberware)
+
+   greetings goes to:
+
+    - CUP386 testers team
+    - MeteO, Professor Nimnul, Solar Designer, Kab, Rose
+    - All UCF members
+
+   personal greetings:
+
+    - Yuri Igumnoff
+    - Roman Magon
+    - Marquis de Soire
+    - Random (you frog!)
+
+                                       kind regards Sage // CyberWare, UCF
+
+<readme.cup Eof>

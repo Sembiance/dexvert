@@ -27,7 +27,8 @@ export class eps extends Format
 		if(!dexState.hasMagics(_MACBINARY_MAGIC))
 			r.push("photoDraw");
 
-		r.push("deark[module:eps]", "gimp", "nconvert");
+		// We used to use "deark[module:eps]", but it can produce just a 'white box' (ny.eps) for some files
+		r.push("gimp", "nconvert");
 		
 		// only include certain long-running windows based converters if we're not dealing with a MacBinary file (archive/macBinary/1Sled Ride.EPS)
 		if(!dexState.hasMagics(_MACBINARY_MAGIC))

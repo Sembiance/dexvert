@@ -5,5 +5,5 @@ export class dietPacked extends Format
 	name       = "Diet Packed";
 	magic      = ["Packer: Diet"];
 	packed     = true;
-	converters = ["unp"];
+	converters = ["unp", "cup386"];
 }

@@ -6,5 +6,6 @@ export class winzlePuzzle extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Winzle_Puzzle";
 	ext        = [".wzl"];
 	magic      = ["Winzle puzzle"];
+	weakMagic  = true;
 	converters = ["deark[module:winzle]"];
 }

@@ -5,10 +5,9 @@ Others are not converted because it was deemed low priority, or there are no kno
 
 
 
-## Archive (88)
+## Archive (87)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
-[archive/sixTwoFourPacked](https://discmaster.textfiles.com/search?formatid=sixTwoFourPacked) | 624 Packed |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sixTwoFourPacked/) - No known unpacker. Source code for the program, including assembly for decompression available here: https://discmaster.textfiles.com/browse/20219/hornet.scene.org%20FTP%2011-25-2012.zip/hornet.scene.org%20FTP%2011-25-2012/code/compress/plp_624.zip
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?formatid=abackupDiskImage) | ABackup Disk Image | .adf | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?formatid=actionPresentation) | Action! presentation | .acp .act .sta | 
@@ -452,7 +451,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (106)
+## Music (107)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -470,6 +469,7 @@ Family/Format | Name | Extensions | Notes
 [music/beRoTracker](https://discmaster.textfiles.com/search?formatid=beRoTracker) | BeRoTracker Module | .brt | [2 sample files](https://sembiance.com/fileFormatSamples/music/beRoTracker/) - A 32bit linux 1997 player in: sandbox/app/BeRoLinuxPlayer v1.0.rar  Could get an OLD linux OS emulated: https://soft.lafibre.info/
 [music/cheeseCutterSong](https://discmaster.textfiles.com/search?formatid=cheeseCutterSong) | Cheese Cutter Song | .ct | [3 sample files](https://sembiance.com/fileFormatSamples/music/cheeseCutterSong/) - Player here https://github.com/theyamo/CheeseCutter requires D compiler gdc to build (https://wiki.gentoo.org/wiki/Dlang) but player doesn't seem to convert CLI conversion anyways
 [music/cba](https://discmaster.textfiles.com/search?formatid=cba) | Chuck Biscuits/Black Artist Module | .cba | [3 sample files](https://sembiance.com/fileFormatSamples/music/cba/)
+[music/concertWare](https://discmaster.textfiles.com/search?formatid=concertWare) | ConcertWare |  | 
 [music/cms](https://discmaster.textfiles.com/search?formatid=cms) | [Creative Music System File](http://fileformats.archiveteam.org/wiki/CMS_(Creative_Music_System)) | .cms | [60 sample files](https://sembiance.com/fileFormatSamples/music/cms/) - Creative Music System. Couldn't locate any information on the file format itself, nor can I find any 'converters' for it. Only way to play them is within DOSBOX by setting this in the DOSBOX config: [sblaster] sbtype  = gb sbbase  = 220 irq     = 7 dma     = 1 hdma    = 5 sbmixer = true oplmode = cms oplemu  = default oplrate = 22050 Then going into CMSPLAY, running CMSDRV.COM and then PLAYER.EXE However that just plays the file, on an infinite loop, in real time. So while in theory I could maybe make a virtual WAV sound driver under linux and then have DOSBOX play to that driver and then record the music that way, I'd have to wait for the song to play in real time and there is no info on how long the song is
 [music/cmsOrgan](https://discmaster.textfiles.com/search?formatid=cmsOrgan) | [Creative Music System Intelligent Organ File](https://vgmpf.com/Wiki/index.php?title=Creative_Music_System_(DOS)) | .org | No modern converter known. The linked website states that there is a converter to convert to CMS, but I couldn't locate it.
 [music/cubaseSong](https://discmaster.textfiles.com/search?formatid=cubaseSong) | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://sembiance.com/fileFormatSamples/music/cubaseSong/)
@@ -564,7 +564,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (702)
+## Other (701)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -845,7 +845,6 @@ Family/Format | Name | Extensions | Notes
 [other/ibmAntiVirusVirusSignatures](https://discmaster.textfiles.com/search?formatid=ibmAntiVirusVirusSignatures) | IBM AntiVirus virus signatures | .lst | 
 [other/ibmBookManagerBook](https://discmaster.textfiles.com/search?formatid=ibmBookManagerBook) | IBM BookManager Book | .boo | 
 [other/iBrowseGlobalCache](https://discmaster.textfiles.com/search?formatid=iBrowseGlobalCache) | iBrowse Global Cache |  | 
-[other/iccColorMap](https://discmaster.textfiles.com/search?formatid=iccColorMap) | ICC Color Map | .iff | 
 [other/iccColorProfile](https://discmaster.textfiles.com/search?formatid=iccColorProfile) | ICC Color Profile | .icc | 
 [other/iconAuthorFlowchart](https://discmaster.textfiles.com/search?formatid=iconAuthorFlowchart) | IconAuthor Flowchart | .iw .iwm | 
 [other/idaSerialKey](https://discmaster.textfiles.com/search?formatid=idaSerialKey) | IDA serial key | .key | 
@@ -1311,7 +1310,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (33)
+## Video (34)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -1333,6 +1332,7 @@ Family/Format | Name | Extensions | Notes
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
+[video/movieSetterSet](https://discmaster.textfiles.com/search?formatid=movieSetterSet) | MovieSetter Set | .set | 
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0
 [video/pcAnimatePlusAnimation](https://discmaster.textfiles.com/search?formatid=pcAnimatePlusAnimation) | PC Animate Plus Animation | .ani | 

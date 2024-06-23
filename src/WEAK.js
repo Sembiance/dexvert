@@ -1,5 +1,9 @@
 export const WEAK_MAC_TYPE_CREATORS =
 [
+	// fallthroughs
+	"????/????",
+	"□□□□/□□□□",
+
 	// these are very generic and can't be acted on
 	"BINA/mdos"
 ];
@@ -203,6 +207,7 @@ export const WEAK_VALUES =
 	/^firmware .*revision/,
 	/^FIT image data/,
 	/^FreeBSD\/i386/,
+	/^FoxBase\+\/Dbase III/,
 	/^fsav macro virus signatures/,
 	/^GDSII Stream file/,
 	/^gfxboot compiled html help/,
@@ -263,6 +268,7 @@ export const WEAK_VALUES =
 	/^MacBinary.* INVALID date/,
 	/^MacBinary, ID [^,]+,/,
 	/^MacBinary II,/,
+	/^Macintosh MFS data/,
 	/^Mach-O architecture/,
 	/^magic text fragment/,
 	/^Maple help database$/,
@@ -845,6 +851,7 @@ export const WEAK_VALUES =
 	/^Grand Theft Auto: San Andreas game data archive$/,
 	/^Haines NFF scene/,
 	/^HTTP Archive format$/,
+	/^IFF Color Map$/,	// Just because it has a CMAP as the first entry, doesn't mean that's what this file is, it sometimes has additional chunks. Since we can't do anything with this file anyways right now, we just mark it as weak
 	/^Instant Replay Data File$/,
 	/^LEGO Mindstorms EV3 brick executable code$/,
 	/^Macromedia Director Java Resource - Video$/,

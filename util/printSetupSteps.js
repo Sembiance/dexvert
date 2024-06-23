@@ -7,6 +7,7 @@ console.log("Run the following as root on a fresh Gentoo system to be able to ru
 
 [
 	`cd /etc/portage/package.use && ln -s /mnt/compendium/overlay/dexvert/package.use/wine-32 && ln -s /mnt/compendium/overlay/dexvert/package.use/xanim`,
+	`cd`,
 	`USE="-harfbuzz" emerge -1 media-libs/freetype`,
 	`emerge -uDN world`,
 	`USE=minimal emerge mono`,
@@ -89,5 +90,5 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
-	"# IMPORTANT: Run a full 'dra testMany.js' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
+	"# IMPORTANT: Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

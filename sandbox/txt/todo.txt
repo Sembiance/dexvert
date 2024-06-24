@@ -22,16 +22,11 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
-* https://github.com/32bitkid/sci.js/tree/main/apps/scibud
-  Utilize this to convert/extract SCI0 pics from Sierra SCI files.
-  The author said this about detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
-
 * Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
 
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP
-	archive/os2InstallPackage
 	archive/iconHeaven
 	image/pmDraw
 	document/os2Help	(https://hobbes.nmsu.edu/?path=%2Fpub%2Fos2%2Futil%2Fconvert)
@@ -227,6 +222,11 @@
 /----------------\
 | Probably Never |
 \----------------/
+* https://github.com/32bitkid/sci.js/tree/main/apps/scibud
+  Utilize this to convert/extract SCI0 pics from Sierra SCI files.
+  The author said this about detection: the most simplistic heuristic for SCI games would be the existence of a RESOURCE.MAP file with one or more files "pack", like RESOURCE.001. There are other checks/fingerprinting to use to be more specific, but that's usually a pretty good sign that it's an SCI game.
+  However, due to the fact that 99% of the CD's are actually just the installers and they are often split across files, I wasn't able to get the script to work well, as it's designed to work on the files after they've been installed, requiring things like RESOURCE.MAP and RESOURCE.001, etc. supporting files
+
 * Use a doom2vrml program to make doom levels browseable: http://discmaster.textfiles.com/browse/6095/WIN95_09962.iso/vrml/dm2v-10.zip  or  http://www.ocnus.com/doom.html
   I tried DM2VRML.EXE a little bit, it crashes a lot. Also, I had trouble locating Doom 1 WADs, but found lots of DOOM 2 wads.
 

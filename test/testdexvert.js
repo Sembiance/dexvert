@@ -111,9 +111,6 @@ const SINGLE_FILE_DYNAMIC_NAMES =
 
 const FLEX_SIZE_PROGRAMS =
 {
-	// the ILBM color shifting program generates different frames each time
-	ilbm2frames : 10,
-
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 	

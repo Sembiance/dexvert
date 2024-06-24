@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,285)
+# Unsupported File Formats (1,286)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -564,7 +564,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (701)
+## Other (702)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -1250,6 +1250,7 @@ Family/Format | Name | Extensions | Notes
 [other/wordPerfectOverlay](https://discmaster.textfiles.com/search?formatid=wordPerfectOverlay) | WordPerfect Overlay | .fil | 
 [other/wordPerfectPrinterData](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterData) | WordPerfect Printer Data | .all .prd | 
 [other/wordPerfectPrinterResource](https://discmaster.textfiles.com/search?formatid=wordPerfectPrinterResource) | WordPerfect Printer Resource | .prs | 
+[other/wordPerfectSettings](https://discmaster.textfiles.com/search?formatid=wordPerfectSettings) | WordPerfect settings | .wcl | 
 [other/wordPerfectSetupData](https://discmaster.textfiles.com/search?formatid=wordPerfectSetupData) | WordPerfect Setup Data | .set | 
 [other/wordPerfectThesaurus](https://discmaster.textfiles.com/search?formatid=wordPerfectThesaurus) | WordPerfect Thesaurus | .ths | 
 [other/wordPerfectVideoResource](https://discmaster.textfiles.com/search?formatid=wordPerfectVideoResource) | WordPerfect Video Resource | .vrs | 

@@ -1,4 +1,4 @@
-# Supported File Formats (1,753)
+# Supported File Formats (1,754)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -33,7 +33,7 @@ archive | [Amstrad CPC Disk](http://fileformats.archiveteam.org/wiki/DSK_(CPCEMU
 archive | Anna-Marie Archive | .dat | [foremost](http://foremost.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/annaMarie/)
 archive | Apple 2 Icons Archive |  | [unApple2Icons](https://github.com/Sembiance/dexvert) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/apple2Icons/)
 archive | [Apple 2MG Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .2mg | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/apple2MG/)
-archive | Apple Disk Copy Image | .img .image .bin | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/diskCopyImage/)
+archive | Apple Disk Copy Image | .img .image .bin | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/diskCopyImage/)
 archive | [Apple Disk Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) | .dmg | [dmg2img](http://vu1tur.eu.org/tools) [sevenZip](http://p7zip.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/dmg/)
 archive | [Apple DiskCopy](https://www.discferret.com/wiki/Apple_DiskCopy_4.2) |  | [dd](https://www.gnu.org/software/coreutils/) [IsoBuster](https://www.isobuster.com/isobuster.php) | [13 sample files](https://sembiance.com/fileFormatSamples/archive/appleDiskCopy/)
 archive | [Apple DOS Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Apple_II)) | .dsk .po .hdv | [cadius](https://github.com/mach-kernel/cadius) [acx](https://github.com/AppleCommander/AppleCommander) | [17 sample files](https://sembiance.com/fileFormatSamples/archive/appleDOSDiskImage/)
@@ -219,7 +219,7 @@ archive | [Pack-Ice Archive](http://fileformats.archiveteam.org/wiki/Pack-Ice) |
 archive | [Pack200 Compressed JAR](https://docs.oracle.com/en/java/javase/13/docs/specs/pack-spec.html) | .pack .pack.gz | [unpack200](https://adoptium.net) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/pack200/)
 archive | PackDev DiskSqueeze | .dsq .pkd | [uaeunp](https://www.winuae.net/download/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packDevDSQ/)
 archive | [PackDir Archive](http://fileformats.archiveteam.org/wiki/PackDir) |  | [deark](https://entropymine.com/deark/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packDir/)
-archive | Packed C64 PRG |  | [unp64](https://iancoog.altervista.org/) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/packedC64PRG/)
+archive | Packed C64 PRG |  | [unp64](https://iancoog.altervista.org/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/packedC64PRG/)
 archive | [PACKED/PFT Compressed Archive](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .pak | [packerPFT](http://cd.textfiles.com/psl/pslv3nv08/PRGMMING/DOS/GEN_INST/FINISH30.ZIP) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/packedPFT/)
 archive | Packer JES //CORE Packed |  | [cup386](undefined) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/packerJESCOREPacked/)
 archive | [PackIt Archive](http://fileformats.archiveteam.org/wiki/PackIt) | .pit | [unar](https://github.com/incbee/Unarchiver) [macunpack](https://github.com/wnayes/macutils) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/packIt/)
@@ -311,7 +311,7 @@ archive | [WAD](http://fileformats.archiveteam.org/wiki/Doom_WAD) | .wad | [dear
 archive | [WAD2 Game Archive](http://fileformats.archiveteam.org/wiki/Quake_WAD) | .wad | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/wad2GameArchive/)
 archive | [WARC Archive](http://fileformats.archiveteam.org/wiki/WARC) | .warc | [Warcat](https://pypi.org/project/Warcat) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/warc/)
 archive | Warcraft 2 Game Archive | .war | [gameextractor](http://www.watto.org/game_extractor.html) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/warcraft2GameArchive/)
-archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
+archive | WATCOM Install Archive |  | [wpack](https://discmaster.textfiles.com/view/227/Gamers%20Arsenal%202%20(Arsenal%20Computer).ISO/faqs/gg2_aug.zip/WSQL.ZIP/WPACK.EXE) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/watcomInstallArchive/)
 archive | [Windows Imaging Format](http://fileformats.archiveteam.org/wiki/Windows_Imaging_Format) | .wim .swm .esd .wim2 .ppkg | [wimapply](https://wimlib.net) [sevenZip](http://p7zip.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/wim/)
 archive | [Windows Resource](http://fileformats.archiveteam.org/wiki/Windows_resource) | .res | [totalCommander](https://totalcmd.net/plugring/totalcmd.html) [resourceHacker](http://www.angusj.com/resourcehacker/) [strings](https://www.gnu.org/software/binutils/) | [23 sample files](https://sembiance.com/fileFormatSamples/archive/windowsResource/) - There is probably a better way to open these, maybe visual studio?
 archive | [Windows Thumbnail Database](http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache) | .db | [vinetto](https://github.com/AtesComp/Vinetto) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/windowsThumbDB/)
@@ -451,7 +451,7 @@ document | [CorelSHOW Presentation](http://fileformats.archiveteam.org/wiki/SHW_
 document | [CZ Help](http://fileformats.archiveteam.org/wiki/CZ_Help) | .hlp | [strings](https://www.gnu.org/software/binutils/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/czHelp/)
 document | Dagesh Document | .dgs | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/dageshDocument/)
 document | DataBase Professional Database | .db | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/dataBaseProfessional/)
-document | dBase Multiple Index | .mdx | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/document/dBaseMultipleIndex/)
+document | dBase Multiple Index | .mdx | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/dBaseMultipleIndex/)
 document | [dBase/FoxBase/XBase/FoxPro Database File](http://fileformats.archiveteam.org/wiki/DBF) | .dbf .frx .dbt .db$ | [soffice](https://www.libreoffice.org) [excel97](https://archive.org/details/office97standard_201912/) [strings](https://www.gnu.org/software/binutils/) | [23 sample files](https://sembiance.com/fileFormatSamples/document/dbf/)
 document | Decision Pad Worksheet | .dpw | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/decisionPadWorksheet/)
 document | DemoManiac SCript | .script | [strings](https://www.gnu.org/software/binutils/) | [12 sample files](https://sembiance.com/fileFormatSamples/document/demoManiacScript/)
@@ -681,7 +681,7 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (576)
+## Image (577)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
@@ -1111,6 +1111,7 @@ image | [Public  Painter](http://fileformats.archiveteam.org/wiki/Public_Painter
 image | [PVR Texture](http://fileformats.archiveteam.org/wiki/PVR_Texture) | .pvr | [pvr2png](https://fabiensanglard.net/Mykaruga/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/pvrTexture/)
 image | QPC Image | .qpc | [qpcvga](undefined) | [8 sample files](https://sembiance.com/fileFormatSamples/image/qpcImage/)
 image | [QRT Ray Tracer Bitmap](http://fileformats.archiveteam.org/wiki/QRT_Ray_Tracer_bitmap) | .qrt .dis .raw | [qrttoppm](http://netpbm.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/image/qrt/)
+image | [Quake 2D Graphic LMP](https://quakewiki.org/wiki/.lmp) | .lmp | [lmp2ppm](https://github.com/Sembiance/dexvert) | [4 sample files](https://sembiance.com/fileFormatSamples/image/quakeGFXLMP/)
 image | [Quake Texture](http://fileformats.archiveteam.org/wiki/Quake_2_Texture) | .wal | [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/quakeTexture/)
 image | [Quantum Paint](http://fileformats.archiveteam.org/wiki/QuantumPaint) | .pbx | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/quantumPaint/)
 image | [QuickBasic BSAVE Image](http://fileformats.archiveteam.org/wiki/BSAVE_Image) | .art .pic .scn .bsv .cgx .pix .dat .pkx .drw .raw .scr .bas | [deark](https://entropymine.com/deark/) | [20 sample files](https://sembiance.com/fileFormatSamples/image/bsave/)

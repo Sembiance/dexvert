@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,286)
+# Unsupported File Formats (1,290)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (87)
+## Archive (88)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -29,6 +29,7 @@ Family/Format | Name | Extensions | Notes
 [archive/authorwareAPRArchive](https://discmaster.textfiles.com/search?formatid=authorwareAPRArchive) | Authorware APR Archive | .apr | [7 sample files](https://sembiance.com/fileFormatSamples/archive/authorwareAPRArchive/) - Would be great to support extracting the assets out of these. Seems to be an earlier Macromedia Authorware format.
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?formatid=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?formatid=beOSResourceData) | BeOS Resource Data | .rsrc | 
+[archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?formatid=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
 [archive/bzip](https://discmaster.textfiles.com/search?formatid=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?formatid=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
@@ -564,7 +565,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (702)
+## Other (705)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -929,6 +930,7 @@ Family/Format | Name | Extensions | Notes
 [other/mealMasterPrinterDefinition](https://discmaster.textfiles.com/search?formatid=mealMasterPrinterDefinition) | Meal-Master Printer definition | .mmp | 
 [other/mechWarrior2MissionData](https://discmaster.textfiles.com/search?formatid=mechWarrior2MissionData) | MechWarrior 2 mission data | .bwd | 
 [other/mediaDescriptorFile](https://discmaster.textfiles.com/search?formatid=mediaDescriptorFile) | Media Descriptor File | .mds | 
+[other/megaPaintKeyboardLayout](https://discmaster.textfiles.com/search?formatid=megaPaintKeyboardLayout) | MegaPaint keyboard layout | .ttb | 
 [other/megaPaintPrinterDriver](https://discmaster.textfiles.com/search?formatid=megaPaintPrinterDriver) | MegaPaint Printer Driver | .trb | 
 [other/megaZeuxBoard](https://discmaster.textfiles.com/search?formatid=megaZeuxBoard) | MegaZeux Board | .mzb | 
 [other/megaZeuxSave](https://discmaster.textfiles.com/search?formatid=megaZeuxSave) | MegaZeux Save | .sav | 
@@ -1007,6 +1009,7 @@ Family/Format | Name | Extensions | Notes
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?formatid=os2DLL) | OS/2 Dynamic Link Library | .dll | 
 [other/os2ExtendedFileAttributes](https://discmaster.textfiles.com/search?formatid=os2ExtendedFileAttributes) | OS/2 Extended File Attributes |  | 
+[other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?formatid=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?formatid=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
 [other/os968kModule](https://discmaster.textfiles.com/search?formatid=os968kModule) | OS9/68k Module |  | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
@@ -1019,6 +1022,7 @@ Family/Format | Name | Extensions | Notes
 [other/partoutResourceData](https://discmaster.textfiles.com/search?formatid=partoutResourceData) | PartoutResource Data | .dat | 
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?formatid=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?formatid=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
+[other/paxImperiaSavedGame](https://discmaster.textfiles.com/search?formatid=paxImperiaSavedGame) | Pax Imperia Saved Game |  | 
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
 [other/pcTalkIIIData](https://discmaster.textfiles.com/search?formatid=pcTalkIIIData) | PC-Talk III data | .dir | 
 [other/pcAnywhere](https://discmaster.textfiles.com/search?formatid=pcAnywhere) | PCAnywhere Data | .bhf | 

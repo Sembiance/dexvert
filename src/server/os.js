@@ -110,7 +110,7 @@ export class os extends Server
 		}
 
 		await fileUtil.writeTextFile(path.join(instance.dirPath, "instance.txt"), instanceid.toString());
-		await runUtil.run("/mnt/compendium/.deno/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "instance.img"), path.join(instance.dirPath, "instance.txt")]);
+		await runUtil.run("/mnt/compendium/bin/mkFloppyFromFiles", [path.join(instance.dirPath, "instance.img"), path.join(instance.dirPath, "instance.txt")]);
 
 		const emuOpts = {detached : true, cwd : instance.dirPath, env : {}};
 		if(instance.debug)

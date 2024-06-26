@@ -6,7 +6,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
-import {WEAK_MAC_TYPE_CREATORS} from "../WEAK.js";
+import {WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
 
 const MAX_DURATION = xu.HOUR*2;
 const DECRECURSE_HOST = "127.0.0.1";
@@ -360,7 +360,7 @@ async function processNextQueue()
 			if((macFileType || macFileCreator) && !idMetaCheckers.some(idMetaChecker => idMetaChecker({macFileType, macFileCreator})))
 			{
 				const macFileTypeCreator = `${macFileType || "????"}/${macFileCreator || "????"}`;
-				if(macFileTypeCreator.trim(macFileTypeCreator).length>1 && !WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator))
+				if(macFileTypeCreator.trim(macFileTypeCreator).length>1 && !WEAK_MAC_TYPE_CREATORS.includes(macFileTypeCreator) && !WEAK_MAC_TYPES.includes(macFileType || "????"))
 				{
 					newMacTypeCreators[macFileTypeCreator] ||= [];
 					newMacTypeCreators[macFileTypeCreator].pushUnique(task.relFilePath);

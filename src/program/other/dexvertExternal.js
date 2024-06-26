@@ -10,7 +10,7 @@ export class dexvertExternal extends Program
 	};
 	unsafe = true;
 
-	bin  = "/mnt/compendium/.deno/bin/dexvert";
+	bin  = "/mnt/compendium/bin/dexvert";
 	args = r =>
 	{
 		const a = [`--logLevel=${r.xlog.level}`, `--programFlag=osPriority:true`];

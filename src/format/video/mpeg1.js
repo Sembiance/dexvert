@@ -8,6 +8,7 @@ export class mpeg1 extends Format
 	filename     = [/^avseq[^.]+\.dat/i];
 	mimeType     = "video/mpeg";
 	magic        = ["MPEG-1 Elementary Stream", "MPEG-1 Program Stream", "MPEG sequence, v1", /^MPEG video$/, /^fmt\/649( |$)/, /^x-fmt\/385( |$)/];
+	idMeta       = ({macFileType}) => macFileType==="MPGx";
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg"];
 }

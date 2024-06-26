@@ -6,7 +6,7 @@ export class proDigi extends Format
 	name          = "ProDigi Tracker Module";
 	ext           = [".m", ".pdt"];
 	weakExt       = [".m"];
-	fileSize      = 99_072;
+	fileSize      = 99072;
 	matchFileSize = true;
 	metaProvider  = ["musicInfo"];
 	converters    = ["zxtune123"];

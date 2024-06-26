@@ -20,6 +20,7 @@ export class dll extends Format
 	{
 		if(BAD_FILENAMES_TO_SKIP_ENTIRELY.includes(dexState.original?.input?.base?.toLowerCase()))
 		{
+			dexState.xlog.warn`SKIPPING THIS FILE ENTIRELY because it's a known filename that is intentionally skipped!`;
 			dexState.processed = true;
 			return [];
 		}

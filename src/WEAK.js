@@ -1,11 +1,35 @@
 export const WEAK_MAC_TYPE_CREATORS =
 [
+	// common mac type/creators
+	"BTFL/pds ",		// AppleShare PDS
+	"BTFL/ugbt",		// AppleShare PDS
+	"dtpl/dcdc",		// DesktopPrinters DB
+	"icon/MACS",		// Icon
+	"FFIL/DMOV",		// TTF Font (usually)	(we don't match as a ttf.js because then we don't get the other data that's within the MacBinary font format)
+	"FNDR/ERIK",		// Desktop
+	"FOLD/MACS",		// OpenFolderListDF
+	"rsrc/RSED",		// Resource Editor Resource
+	
+	// application specific
+	"8BIF/8BIM",		// Adobe Photoshop Plugin/Pattern
+	"Fltr/Clrs",		// ClarisWorks Translator
+	"LINK/MSIE",		// MSIE Link/Shorcut
+	"Xtra/Xown",		// Macromedia Director Xtra
+	
 	// fallthroughs
 	"????/????",
 	"□□□□/□□□□",
 
 	// these are very generic and can't be acted on
 	"BINA/mdos"
+];
+
+export const WEAK_MAC_TYPES =
+[
+	// common Mac types
+	"cdev",		// Control Panel
+	"INIT",
+	"thng"		// Extension (Component)
 ];
 
 // These magics are VERY untrustworthy and any detections against them should be noted as such
@@ -106,6 +130,7 @@ export const WEAK_VALUES =
 	/80386 COFF executable/,
 	/^a\.out/,
 	/^a .+ script, /,
+	/^a .+ script executable/,
 	/^ABComp archive data/,
 	/^Adobe Photoshop, \d{5}/,
 	/^Adobe Photoshop Color swatch/,
@@ -503,7 +528,7 @@ export const WEAK_VALUES =
 	/^Dr\. Halo IV Printer driver$/,
 	/^DRM Content Format - Separate delivery file \(generic\)$/,
 	/^DURILCA compressed file$/,
-	/^Dzip compressed archive$/,
+	/^Dzip compressed archive/,
 	/^eFax Document \(generic\)$/,
 	/^Encrypted Windows App Package \(generic\)$/,
 	/^Error Code Modeler$/,
@@ -539,6 +564,7 @@ export const WEAK_VALUES =
 	/^Janome NH10000 Sewing Machine Stitch$/,	// eslint-disable-line unicorn/better-regex
 	/^Java serialized data$/,	// It's just 2 bytes and haven't been able to find a reliable way to convert into something else like JSON
 	/^JCALG1 compressed data$/,
+	/^JCL script \(with rem\)$/,
 	/^JMP data table \(v5\)$/,
 	/^Jovian Logic VI bitmap$/,
 	/^Jupiter Ace snapshot$/,
@@ -553,6 +579,7 @@ export const WEAK_VALUES =
 	/^Lotus Manuscript bitmap$/,
 	/^LTAC compressed audio/,
 	/^LTP Nuclear ZX tape image$/,
+	/^LogicWorks circuit \(generic\)$/,
 	/^Lucid 3-D Macro$/,
 	/^Luxor ABC80 tokenized BASIC source$/,
 	/^LZMA compressed archive$/,
@@ -723,6 +750,7 @@ export const WEAK_VALUES =
 	/^DOS 2\.0-3\.2 Backup control info/,
 	/^Dr\. Halo Font$/,
 	/^Dyalog APL transfer$/,
+	/^Darkmere game data$/,
 	/^EPOC data store/,
 	/^FastCopy DIM disk image$/,
 	/^FastDir-like quick directory lookup data$/,
@@ -840,7 +868,7 @@ export const WEAK_VALUES =
 	/^EASE data \(generic\)$/,
 	/^Easy Reading Electronic Book format content$/,
 	/^EbSynth project$/,
-	/^EISA add-on card Configuration \(with CR\)$/,
+	/^EISA add-on card Configuration \(with (CR|rem)\)$/,
 	/^Encrypted Blender 3D data$/,
 	/^EVE Online data \(generic\)$/,
 	/^Falcon Sequence \(old\)$/,
@@ -857,6 +885,7 @@ export const WEAK_VALUES =
 	/^IFF Color Map$/,	// Just because it has a CMAP as the first entry, doesn't mean that's what this file is, it's often a Movie Setter file with FACE and BODY elements. If it is a CMAP, IFF ILBM ends up handling it and creates a png
 	/^Instant Replay Data File$/,
 	/^LEGO Mindstorms EV3 brick executable code$/,
+	/^Mac ICOL colors LUT$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
 	/^MapInfo Sea Chart$/,

@@ -5,7 +5,7 @@ export class fmTownsOSApp extends Format
 {
 	name        = "FM-TownsOS App";
 	ext         = [".exp"];
-	magic       = ["FM-TownsOS EXP"];
+	magic       = ["FM-TownsOS EXP", "Towns OS Executable"];
 	weakMagic   = true;
 	unsupported = true;
 

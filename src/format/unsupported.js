@@ -100,6 +100,7 @@ export default
 		popupDOSHelp            : {name : "POP-UP DOS Help", ext : [".hlp"], magic : ["POP-UP DOS Help"]},
 		pPrintPage              : {name : "PPrint Page", ext : [".pag"], magic : ["PPrint Page"]},
 		purePascalHelp          : {name : "Pure Pascal Help", ext : [".hlp"], magic : ["Pure Pascal Help (v1.x)"], weakMagic : true},
+		quickHelp               : {name : "Quick Help", ext : [".hlp"], magic : ["Format: Quick Help"]},
 		raimaDataManager        : {name : "Raima Data Manager", magic : ["Raima Data Manager Data Base", "Raima Data Manager Key"]},
 		rmpHelp                 : {name : "RMP Help", ext : [".hlp"], magic : ["RMP Help format"]},
 		starAmPlanSpreadsheet   : {name : "StarAm Plan Spreadsheet", ext : [".sab"], magic : ["StarAm Plan Spreadsheet"]},

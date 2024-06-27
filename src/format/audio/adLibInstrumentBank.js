@@ -6,7 +6,7 @@ export class adLibInstrumentBank extends Format
 	name        = "AdLib Instrument Bank";
 	website     = "http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank";
 	ext         = [".bnk"];
-	magic       = ["Adlib instruments/sound bank"];
+	magic       = ["Adlib instruments/sound bank", "AdLib instrument data"];
 	weakMagic   = true;
 	unsupported = true;
 	notes       = xu.trim`

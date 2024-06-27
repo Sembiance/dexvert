@@ -10,8 +10,11 @@ export class resource_dasm extends Program
 {
 	website = "https://github.com/fuzziqersoftware/resource_dasm";
 	package = "app-arch/resource-dasm";
+	flags   = {
+		"format" : "Which format to parse as. Default: resource-fork  Valid: as/ad, macbinary, mohawk, hirf, dc-data, cbag (see resource-dasm --help)"
+	};
 	bin     = "resource_dasm";
-	args    = r => ["--skip-external-decoders", "--image-format=png", "--data-fork", r.inFile(), r.outDir()];
+	args    = r => [`--index-format=${r.flags.format || "resource-fork"}`, "--skip-external-decoders", "--image-format=png", "--data-fork", r.inFile(), r.outDir()];
 
 	// If need to understand some resource types better: https://whitefiles.org/mac/pgs/t02.htm
 	// Also: https://github.com/fuzziqersoftware/resource_dasm/blob/master/README.md

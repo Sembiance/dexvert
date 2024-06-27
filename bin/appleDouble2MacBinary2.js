@@ -11,7 +11,8 @@ const argv = cmdUtil.cmdInit({
 	opts :
 	{
 		region           : {desc : "Which region for filename encoding", hasValue : true, defaultValue : "roman"},
-		originalFilePath : {desc : "The original file path that the AppleDouble file was created from, important to ensure we don't infinite loop the same MacBinary file over and over", hasValue : true, required : true}
+		originalFilePath : {desc : "The original file path that the AppleDouble file was created from, important to ensure we don't infinite loop the same MacBinary file over and over", hasValue : true, required : true},
+		logLevel         : {desc : "The log level to use", hasValue : true, defaultValue : "info"}
 	},
 	args :
 	[
@@ -20,7 +21,7 @@ const argv = cmdUtil.cmdInit({
 
 // BIG THANKS to eientei for this script which helped a LOT: https://raw.githubusercontent.com/einstein95/py_scripts/main/deadf.py
 
-const xlog = new XLog();
+const xlog = new XLog(argv.logLevel);
 
 if(!await fileUtil.exists(argv.inputFilePath))
 	Deno.exit(xlog.error`Input file does not exist: ${argv.inputFilePath}`);
@@ -123,13 +124,14 @@ const tmpOutFile = await Deno.open(tmpOutFilePath, {create : true, write : true,
 await writeAll(tmpOutFile, outHeader);
 
 await writeAll(tmpOutFile, await Deno.readFile(dataFilePath));
+
 let paddingLength = 128-(dataForkStat.size%128);
-if(paddingLength>0)
+if(paddingLength>0 && paddingLength!==128)
 	await writeAll(tmpOutFile, (new Uint8Array(paddingLength)).fill(0));
 
 await writeAll(tmpOutFile, resourceFork.data);
 paddingLength = 128-(resourceFork.length%128);
-if(paddingLength>0)
+if(paddingLength>0 && paddingLength!==128)
 	await writeAll(tmpOutFile, (new Uint8Array(paddingLength)).fill(0));
 
 tmpOutFile.close();

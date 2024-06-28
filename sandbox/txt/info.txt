@@ -56,3 +56,4 @@ https://www.digipres.org/formats/sources/trid/
 /sandbox/websites/wotsit.org/default.html
 https://fileinfo.com/
 https://www.amiga-stuff.com/crunchers-id.html
+https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml

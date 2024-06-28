@@ -109,6 +109,12 @@ export const WEAK_VALUES =
 	/^QNX4 file system$/,
 	/Volume size off the scale/,
 	/^Windows \/ MS-DOS boot loader/,
+
+	// binwalkID: WEAK checks
+	/^Executable script, /,
+	/^LZ4 compressed data$/,
+	/^OGG audio data$/,
+	/^WMA audio data$/,
 	
 	// FILE: Improper parsing of output
 	/^' (123):$/,
@@ -938,6 +944,7 @@ export const WEAK_VALUES =
 	/^TeslaCrypt\/Cryptowall encrypted$/,
 	/^The Witcher 2 game data archive$/,
 	/^TOPO topographic Data$/,
+	/^TriSound Voice Set$/,
 	/^Ultimo Primo SnapShot$/,
 	/^UNIMod created by APlayer$/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,

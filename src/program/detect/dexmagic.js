@@ -39,6 +39,7 @@ const DEXMAGIC_CHECKS =
 	"PACKIT Installation Archive"    : [{offset : 0, match : "PACKIT by MJP"}],
 	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],
+	"PFS Filesystem"                 : [{offset : 0, match : "PFS/"}],
 	"SCR Package"                    : [{offset : 0, match : "This is SCR Package File"}],
 	"Superscape SVR"                 : [{offset : 0, match : "SVR"}],
 	"Superscape VRT"                 : [{offset : 0, match : "SuperScape (c) New Dimension International Ltd\x2E\x00\n\n\rVRT"}],

@@ -450,15 +450,24 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	// finally, any fallback matches less than 10 go at the very end
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence<10));
 
-	// Here we stick the 'dexvert' matches ahead of other 'detections'
-	const result = [
-		...matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website})),
-		...detections.map(({from, confidence, value, extensions, weak}) => Identification.create({from, confidence, magic : value, extensions, weak : !!weak}))
-	];
+	// Finally we create our return ids. First start out with all 'dexvert' matches
+	let ids = matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website}));
 
-	xlog.debug`matches/identifications for ${inputFile.absolute}:\n${result.map(v => v.pretty("\t")).join("\n")}`;
+	// Then stick on the 'unknown' format
+	// ids.push(Identification.create({from : "dexvert", confidence : 1, magic : "unknown", family : "other", formatid : "unknown", matchType : "fallback"}));
 
-	return {idMeta : idMetaData, ids : result};
+	// Finally add all other detections
+	ids = ids.concat(detections.map(({from, confidence, value, extensions, weak}) => Identification.create({from, confidence, magic : value, extensions, weak : !!weak})));
+
+	if(xlog.atLeast("trace"))
+	{
+		for(const o of ids)
+			xlog.trace`RAW MATCH: ${o}`;
+	}
+
+	xlog.debug`matches/identifications for ${inputFile.absolute}:\n${ids.map(v => v.pretty("\t")).join("\n")}`;
+
+	return {idMeta : idMetaData, ids};
 }
 
 export async function rpcidentify(inputFile, {logLevel="error"}={})

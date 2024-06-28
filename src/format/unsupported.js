@@ -54,20 +54,21 @@ export default
 
 	audio :
 	{
-		audioWorksSoundSample       : {name : "AudioWorks Sound Sample", magic : ["AudioWorks sound sample"]},
-		commonInstrumentFile        : {name : "Common Instrument Sample", ext : [".ci1", ".ci2"], magic : ["Common Instrument File", /^fmt\/1887( |$)/], website : "http://fileformats.archiveteam.org/wiki/Common_Instrument_Format"},
-		commonLoudspeaker           : {name : "Common Loudspeaker", ext : [".cf1", ".cf2"], magic : ["Common Loudspeaker", /^fmt\/1944( |$)/], website : "http://fileformats.archiveteam.org/wiki/Common_Loudspeaker_Format"},
-		covoxSpeechThingAudioSample : {name : "Covox Speech Thing audio sample", ext : [".v8"], magic : ["Covox Speech Thing audio sample"]},
-		deluxeSoundSample           : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
-		digitalSymphonySoundSample  : {name : "Digital Symphony Sound Sample", magic : [/^Digital Symphony sound sample/]},
-		dmxOP2InstrumentData        : {name : "DMS OP2 Instrument Data", magic : ["DMX OP2 instrument data"]},
-		dynamixSSMSoundAndMusic     : {name : "Dynamix SSM sound and music", ext : [".sng"], magic : ["Dynamix SSM sound and music data container"]},
-		kixtartSPK                  : {name : "KixTart SPK Notation", ext : [".spk"], magic : ["KiXtart SPK notation format"]},
-		kurzweilK2Sample            : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
-		magicOfEndoriaSoundSample   : {name : "Magic of Endoria Sound Sample", ext : [".snd", ".smp"], magic : ["Magic of Endoria Sound Sample"]},
-		maestroAudio                : {name : "Maestro Audio", magic : ["Maestro audio"]},
-		performanceMusicBank        : {name : "Performance Music Bank", magic : ["Performance music bank"]},
-		richMusicFormat             : {name : "Rich Music Format", ext : [".rmf"], magic : ["Rich Music Format"]}
+		audioWorksSoundSample        : {name : "AudioWorks Sound Sample", magic : ["AudioWorks sound sample"]},
+		commonInstrumentFile         : {name : "Common Instrument Sample", ext : [".ci1", ".ci2"], magic : ["Common Instrument File", /^fmt\/1887( |$)/], website : "http://fileformats.archiveteam.org/wiki/Common_Instrument_Format"},
+		commonLoudspeaker            : {name : "Common Loudspeaker", ext : [".cf1", ".cf2"], magic : ["Common Loudspeaker", /^fmt\/1944( |$)/], website : "http://fileformats.archiveteam.org/wiki/Common_Loudspeaker_Format"},
+		covoxSpeechThingAudioSample  : {name : "Covox Speech Thing audio sample", ext : [".v8"], magic : ["Covox Speech Thing audio sample"]},
+		deluxeSoundSample            : {name : "Deluxe Sound Sample", ext : [".instr"], magic : ["Deluxe Sound sampled instrument"]},
+		digitalSymphonySoundSample   : {name : "Digital Symphony Sound Sample", magic : [/^Digital Symphony sound sample/]},
+		dmxOP2InstrumentData         : {name : "DMS OP2 Instrument Data", magic : ["DMX OP2 instrument data"]},
+		dynamixSSMSoundAndMusic      : {name : "Dynamix SSM sound and music", ext : [".sng"], magic : ["Dynamix SSM sound and music data container"]},
+		kixtartSPK                   : {name : "KixTart SPK Notation", ext : [".spk"], magic : ["KiXtart SPK notation format"]},
+		kurzweilK2Sample             : {name : "Kurzweil K2 Sample", ext : [".kr1", ".kr2", ".krz"], magic : ["Kurzweil K2-serie sample"], weakMagic : true},
+		magicOfEndoriaSoundSample    : {name : "Magic of Endoria Sound Sample", ext : [".snd", ".smp"], magic : ["Magic of Endoria Sound Sample"]},
+		maestroAudio                 : {name : "Maestro Audio", magic : ["Maestro audio"]},
+		performanceMusicBank         : {name : "Performance Music Bank", magic : ["Performance music bank"]},
+		richMusicFormat              : {name : "Rich Music Format", ext : [".rmf"], magic : ["Rich Music Format"]},
+		voxWareMetaVoiceEncodedAudio : {name : "VoxWare MetaVoice encoded audio", ext : [".vox"], magic : ["VoxWare MetaVoice encoded audio"]}
 	},
 
 	document :
@@ -585,6 +586,7 @@ export default
 		vbISAMIndex                  : {name : "VB/ISAM Index", ext : [".ism"], magic : ["VB/ISAM index"]},
 		visualBasicExtension         : {name : "Visual Basic Extension", ext : [".vbx"], magic : ["Visual Basic eXtension/Custom Control"]},
 		visualBasicTokenizedSource   : {name : "Visual Basic Tokenized Source", ext : [".bas"], magic : [/^Visual Basic \d source \(tokenized\)$/]},
+		visualBasicProjectWorkspace  : {name : "Visual Basic Project Workspace", ext : [".frm"], magic : [/^fmt\/1574( |$)/], weakMagic : true},
 		visualCLibrary               : {name : "Microsoft Visual C Library", ext : [".lib"], magic : ["Microsoft Visual C Library", "Microsoft Visual C/OMF library"]},
 		virtualPascalUnit            : {name : "Virtual Pascal Unit", ext : [".vpi"], magic : ["Virtual Pascal Unit v3"], weakMagic : true},
 		visualSmalltalkLibrary       : {name : "Visual Smalltalk Enterprise Objects Library", ext : [".sll"], magic : ["Visual Smalltalk Enterprise objects Library"]},
@@ -645,6 +647,7 @@ export default
 		// Other //
 		///////////
 		activInspireFlipchart            : {name : "ActivInspire Flipchart", ext : [".flipchart"], magic : ["ActivInspire Flipchart"]},
+		actionTemplate                   : {name : "Action! Template", ext : [".tpl"], magic : ["Action! Template"]},
 		adoragePreferences               : {name : "Adorage preferences", magic : ["Adorage preferences"]},
 		adobeCaptureDocument             : {name : "Adobe Capture Document", magic : ["Adobe Capture Document"]},
 		adobeDuotoneOptions              : {name : "Adobe Duotone Options", ext : [".ado"], magic : ["Adobe Duotone Options"]},
@@ -923,6 +926,8 @@ export default
 		polyfilmPrefs                    : {name : "Polyfilm Preferences", ext : [".prf"], magic : ["Polyfilm Preferences"]},
 		powerBASICDOSConfigurationFile   : {name : "PowerBASIC/DOS configuration file", ext : [".pb"], magic : ["PowerBASIC/DOS configuration file"]},
 		powerUpAlbumProject              : {name : "Power Up! Album Project", ext : [".alb"], magic : ["Power Up! Album project"]},
+		premiereMotionSettings           : {name : "Premiere Motion settings", ext : [".ptm"], magic : ["Premiere Motion settings (v1.x-4.x, Win)"], weakMagic : true},
+		premiereTitleData                : {name : "Premiere Title data", ext : [".ptl"], magic : ["Premiere Title data (v1.x-4.x, Win)"]},
 		printerFontMetrics               : {name : "Printer Font Metrics", ext : [".pfm"], magic : ["Adobe Printer Font Metrics", "Printer Font Metrics"]},
 		professionalDrawColors           : {name : "Professional Draw colors definitions", ext : [".complete", ".colours", ".dflt"], magic : ["Professional Draw colors definitions"]},
 		proximityTechLexicon             : {name : "Proximity Technology Lexicon/Thesaurus", ext : [".lex", ".ths"], magic : ["Proximity Technology Lexicon/Thesaurus"]},

@@ -6,7 +6,7 @@ export class flac extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/FLAC";
 	ext          = [".flac"];
 	mimeType     = "audio/x-flac";
-	magic        = ["FLAC audio bitstream data", "FLAC lossless compressed audio", "FLAC (Free Lossless Audio Codec)", /^fmt\/279( |$)/];
+	magic        = ["FLAC audio bitstream data", "FLAC lossless compressed audio", "FLAC (Free Lossless Audio Codec)", "FLAC audio data", /^fmt\/279( |$)/];
 	metaProvider = ["soxi"];
 	converters   = ["sox"];
 }

@@ -30,7 +30,6 @@ Additional notes about this program
 Which Gentoo package contains this program.
 Can be an array of packages. If so, meta.website and meta.bin must be an array too.
 
-
 >>> ******** Properties
 >>> unsafe = true
 Set to true if this program isn't safe to use with all input files and may produce 'garbage' output

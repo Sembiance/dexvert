@@ -4,7 +4,7 @@ import {DexFile} from "./DexFile.js";
 import {Program} from "./Program.js";
 import {WEAK_VALUES} from "./WEAK.js";
 
-export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy"];
+export const DETECTOR_PROGRAMS = ["file", "trid", "checkBytes", "dexmagic", "perlTextCheck", "ancientID", "amigaBitmapFontContentDetector", "siegfried", "pc98ripperID", "lsar", "gt2", "disktype", "unp64ID", "detectItEasy", "binwalkID"];
 
 export const TEXT_MAGIC_STRONG =
 [

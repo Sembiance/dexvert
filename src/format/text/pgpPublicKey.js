@@ -6,7 +6,7 @@ export class pgpPublicKey extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/PGP_public_key";
 	ext            = [".asc", ".aexpk", ".pgp", ".pub"];
 	forbidExtMatch = true;
-	magic          = ["PGP public key block"];
+	magic          = ["PGP public key block", "PGP armored data, public key block"];
 	untouched      = true;
 	metaProvider   = ["text"];
 }

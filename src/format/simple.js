@@ -167,7 +167,7 @@ export default
 		moneyMatters                    : {name : "Money Matters Data", ext : [".mm"], magic : ["Money Matters"]},
 		msvcPCH                         : {name : "Microsoft Visual C PCH file", magic : ["Microsoft Visual C .pch"]},
 		msVisualFoxProApp               : {name : "MS Visual FoxPro App", ext : [".app", ".fxp"], magic : ["Generated application MS Visual FoxPro 7"]},
-		msWinCEInstallHeader            : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header"]},
+		msWinCEInstallHeader            : {name : "Microsoft WinCE Install Header", ext : [".000"], magic : ["Microsoft WinCE install header", "Microsoft WinCE installer"]},
 		noteWorthyComposure             : {name : "NoteWorthy Composure", ext : [".nw"], magic : ["NoteWorthy song"]},
 		novellErrorLibrarian            : {name : "Novell Error Librarian", ext : [".dat", ".idx"], magic : ["Novell Error Librarian Data"]},
 		nsFileWrapperSerializedData     : {name : "NSFileWrapper Serialized Data", magic : ["NSFileWrapper serialized data"]},

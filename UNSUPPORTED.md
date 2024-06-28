@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,290)
+# Unsupported File Formats (1,297)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -99,7 +99,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (44)
+## Audio (45)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -141,6 +141,7 @@ Family/Format | Name | Extensions | Notes
 [audio/stoneTrackerSample](https://discmaster.textfiles.com/search?formatid=stoneTrackerSample) | StoneTracker Sample | .sps | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stoneTrackerSample/)
 [audio/stosSample](https://discmaster.textfiles.com/search?formatid=stosSample) | [STOS Sample](https://en.wikipedia.org/wiki/STOS_BASIC) | .sam | [3 sample files](https://sembiance.com/fileFormatSamples/audio/stosSample/)
 [audio/superscapeSounds](https://discmaster.textfiles.com/search?formatid=superscapeSounds) | Superscape Sounds | .snd | [1 sample file](https://sembiance.com/fileFormatSamples/audio/superscapeSounds/) - Not yet supported. This can convert it: sox -t raw -r 11025 -e signed -b 16 -c 2 sounds.snd b.wav In the UI you can see the 'pitch' which corresponds to the rate: 64===11025hz and 40===44100hz However there are several sounds packed into this file, not just 1 sound, and they may differ in rate/pitch, etc. So ideally the format needs to be figured out so each sound can be extracted separately.
+[audio/voxWareMetaVoiceEncodedAudio](https://discmaster.textfiles.com/search?formatid=voxWareMetaVoiceEncodedAudio) | VoxWare MetaVoice encoded audio | .vox | 
 [audio/vqf](https://discmaster.textfiles.com/search?formatid=vqf) | [VQF TwinVQ](https://wiki.multimedia.cx/index.php/VQF) | .vqf | [2 sample files](https://sembiance.com/fileFormatSamples/audio/vqf/) - I attempted to use TwinDec from http://www.rarewares.org/rrw/nttvqf.php but it failed to decode my sample files
 [audio/dvsm](https://discmaster.textfiles.com/search?formatid=dvsm) | [WinRec DVSM](https://temlib.org/AtariForumWiki/index.php/DVSM) | .dvs | [6 sample files](https://sembiance.com/fileFormatSamples/audio/dvsm/) - No known linux/windows/amiga converter
 [audio/wonderSwanWSR](https://discmaster.textfiles.com/search?formatid=wonderSwanWSR) | [WonderSwan WSR Audio](http://fileformats.archiveteam.org/wiki/WSR) | .wsr | [1 sample file](https://sembiance.com/fileFormatSamples/audio/wonderSwanWSR/)
@@ -149,7 +150,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (77)
+## Document (78)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -211,6 +212,7 @@ Family/Format | Name | Extensions | Notes
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?formatid=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
 [document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
+[document/quickHelp](https://discmaster.textfiles.com/search?formatid=quickHelp) | Quick Help | .hlp | 
 [document/raimaDataManager](https://discmaster.textfiles.com/search?formatid=raimaDataManager) | Raima Data Manager |  | 
 [document/rmpHelp](https://discmaster.textfiles.com/search?formatid=rmpHelp) | RMP Help | .hlp | 
 [document/pagePlus](https://discmaster.textfiles.com/search?formatid=pagePlus) | [Serif PagePlus Publication](http://fileformats.archiveteam.org/wiki/Serif_PagePlus) | .ppp .ppx .ppb .ppt | [9 sample files](https://sembiance.com/fileFormatSamples/document/pagePlus/) - Could probably very easily install PagePlus 9 or 10 (NOT X9) and use it to convert to RTF/PDF, but have only encountered a single CD with these files on it so far.
@@ -565,7 +567,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (705)
+## Other (710)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -580,6 +582,7 @@ Family/Format | Name | Extensions | Notes
 [other/threeDFXGlideDriver](https://discmaster.textfiles.com/search?formatid=threeDFXGlideDriver) | 3DFX Glide driver | .dxe | 
 [other/fourDPaintProject](https://discmaster.textfiles.com/search?formatid=fourDPaintProject) | 4D Paint Project | .4dp | [1 sample file](https://sembiance.com/fileFormatSamples/other/fourDPaintProject/)
 [other/abuseLevel](https://discmaster.textfiles.com/search?formatid=abuseLevel) | Abuse Level | .lvl .spe | 
+[other/actionTemplate](https://discmaster.textfiles.com/search?formatid=actionTemplate) | Action! Template | .tpl | 
 [other/activInspireFlipchart](https://discmaster.textfiles.com/search?formatid=activInspireFlipchart) | ActivInspire Flipchart | .flipchart | 
 [other/actorImageSnapshot](https://discmaster.textfiles.com/search?formatid=actorImageSnapshot) | Actor Image Snapshot | .ima | 
 [other/adobeCaptureDocument](https://discmaster.textfiles.com/search?formatid=adobeCaptureDocument) | Adobe Capture Document |  | 
@@ -1041,6 +1044,8 @@ Family/Format | Name | Extensions | Notes
 [other/powerBasicHelp](https://discmaster.textfiles.com/search?formatid=powerBasicHelp) | PowerBASIC Help | .pbh | 
 [other/powerBASICDOSConfigurationFile](https://discmaster.textfiles.com/search?formatid=powerBASICDOSConfigurationFile) | PowerBASIC/DOS configuration file | .pb | 
 [other/powerBuilderDynamicLibrary](https://discmaster.textfiles.com/search?formatid=powerBuilderDynamicLibrary) | PowerBuilder Dynamic Library | .pbd | 
+[other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
+[other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?formatid=protextConfiguration) | Protext Configuration | .cfg | 
@@ -1191,6 +1196,7 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
+[other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealMap](https://discmaster.textfiles.com/search?formatid=unrealMap) | Unreal Map | .unr | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?formatid=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?formatid=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 
@@ -1215,6 +1221,7 @@ Family/Format | Name | Extensions | Notes
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
 [other/vistaMakepathSession](https://discmaster.textfiles.com/search?formatid=vistaMakepathSession) | Vista Makepath Session | .ses | 
 [other/visualBasicExtension](https://discmaster.textfiles.com/search?formatid=visualBasicExtension) | Visual Basic Extension | .vbx | 
+[other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?formatid=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?formatid=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 
 [other/visualFoxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=visualFoxProCompoundIndex) | Visual FoxPro Compound Index | .cdx | 
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?formatid=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 

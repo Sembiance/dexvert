@@ -135,9 +135,9 @@ async function extractHFSISO()
 			// if we are a text file, we should always extract as raw and let programs further up the stack worry about decoding it properly. this way if a raw output text file is viewed on an actual Mac, it would render just fine
 			await runUtil.run("hcopyi", [...(["text", "ttro"].includes(entry?.fileType?.toLowerCase()) ? ["-r"] : []), entry.id, safeFilePath], {...HFS_RUN_OPTIONS, liveOutput : true});
 			const entryFileMeta = {};
-			if(entry.fileType?.length)
+			if(entry.fileType?.trim()?.length)
 				entryFileMeta.macFileType = entry.fileType;
-			if(entry.fileCreator?.length && entry.fileCreator!=="/")
+			if(entry.fileCreator?.trim()?.length && entry.fileCreator!=="/")
 				entryFileMeta.macFileCreator = entry.fileCreator;
 			if(Object.keys(entryFileMeta).length>0)
 				metadata.fileMeta[path.relative(OUT_DIR_PATH, entry.destFilePath)] = entryFileMeta;

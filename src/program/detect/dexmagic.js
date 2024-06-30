@@ -15,10 +15,6 @@ import {path} from "std";
 /* eslint-disable unicorn/no-hex-escape */
 const DEXMAGIC_CHECKS =
 {
-	// 3d
-	"IFF Cinema 4D file" : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
-	"Cinema 4D XML"      : [{size : 256, match : "<c4d_file"}],
-
 	// archive
 	"ActiveMime (Base64 Encoded)"    : [{offset : 0, match : "QWN0aXZlTWltZQ"}],
 	"Anna-Marie Archive"             : [{offset : 0, match : "Anna-Marie"}],
@@ -89,6 +85,7 @@ const DEXMAGIC_CHECKS =
 	"ECI Graphic Editor"            : [{offset : 0, match : [0x00, 0x40]}],
 	"FM-Towns HEL Animation"        : [{offset : 0, match : "he1"}],
 	"Funny Paint"                   : [{offset : 0, match : [0x00, 0x0A, 0xCF, 0xE2]}],
+	"Glide 3DFX Texture"            : [{offset : 0, match : "3df v"}],
 	"GLPaint PIC"                   : [{offset : 0, match : "PIC2"}, {offset : 22, match : "JPGE"}],
 	"GoDot Clip"                    : [{offset : 0, match : "GOD1"}],
 	"IFF ILBM (Generic)"            : [{offset : 8, match : "ILBMBMHD"}],
@@ -152,9 +149,12 @@ const DEXMAGIC_CHECKS =
 	"ZZT World"                        : [{offset : 0, match : [0xFF, 0xFF]}, {offset : 3, match : [0x00]}],
 
 	// poly
-	"Inter-Quake Model"                : [{offset : 0, match : "INTERQUAKEMODEL"}],
-	"Google SketchUp Model"            : [{offset : 1, match : "SketchUp Model"}],
-	"rtcwMDC"                          : [{offset : 0, match : "IDPC"}],
+	"Cinema 4D XML"         : [{size : 256, match : "<c4d_file"}],
+	"Google SketchUp Model" : [{offset : 1, match : "SketchUp Model"}],
+	"IFF Cinema 4D file"    : [{offset : 0, match : "FORM"}, {offset : 8, match : "FRAY"}],
+	"Inter-Quake Model"     : [{offset : 0, match : "INTERQUAKEMODEL"}],
+	"Quake Model"           : [{offset : 0, match : "IDPO"}, {offset : 4, match : [0x06]}],
+	"rtcwMDC"               : [{offset : 0, match : "IDPC"}],
 
 	// video
 	"Disney Animation Studio Secure Animation" : [{offset : 0, match : "SSFFANM"}],

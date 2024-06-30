@@ -302,6 +302,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 					xlog.debug`Excluding format ${formatid} due to requiredFiles not being present.`;
 					continue;
 				}
+
+				if(auxFiles && Array.isArray(auxFiles) && auxFiles.length && xlog.atLeast("debug"))
+					xlog.debug`Identified auxFiles for ${formatid}:\n\t${auxFiles.map(v => v.base).join("\n\t")}`;
 			}
 			if(auxFiles)
 				baseMatch.auxFiles = auxFiles;

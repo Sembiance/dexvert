@@ -39,19 +39,13 @@ export const WEAK_VALUES =
 	/^fmt\/(111|134|208|304|347|473|692|1029|1030|1031|1032|1033|1034|1035|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1740|1751|1812|1902)( |$)/,
 	/^x-fmt\/(8|10|53|111|157|195|342)( |$)/,
 
-	// dexmagic: WEAK checks
-	/^Generic IFF FORM file /,
-	/^Generic RIFF file /,
-	/^IFF CAT file$/,
-	/^Visual Novel DPK Archive$/,
-	/^ZZT World$/,
-
-	// lsar: WEAK checks
-	/^LZMA_Alone$/,
-	/^Split file$/,
-
-	// pc98ripperID: WEAK checks
-	/^PC-98 ElfDOS$/,
+	// binwalkID: WEAK checks
+	/^Copyright string: /,
+	/^CRC32 polynomial table/,
+	/^Executable script, /,
+	/^LZ4 compressed data$/,
+	/^OGG audio data$/,
+	/^WMA audio data$/,
 
 	// Detect-It-Easy: WEAK checks
 	/^Archive: INSA$/,
@@ -60,13 +54,34 @@ export const WEAK_VALUES =
 	/^Format: DBase Database \(\.DBF\)/,
 	/^Installer: Adveractive/,
 
+	// dexmagic: WEAK checks
+	/^Generic IFF FORM file /,
+	/^Generic RIFF file /,
+	/^IFF CAT file$/,
+	/^Visual Novel DPK Archive$/,
+	/^ZZT World$/,
+
+	// disktype: WEAK checks
+	/^ATARI ST partition map/,
+	/^bar archive$/,
+	/^Blank disk\/medium$/,
+	/^compress-compressed data at /,
+	/^FAT\d{2} file system/,
+	/^FreeBSD boot manager/,
+	/^MFS file system$/,
+	/^Minix file system/,
+	/^Old-style Apple partition map$/,
+	/^QNX4 file system$/,
+	/Volume size off the scale/,
+	/^Windows \/ MS-DOS boot loader/,
+
 	// GT2: WEAK checks
 	/^Borland Object Datei/,
 	/^BSA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Common Object File Format \(COFF\) i386/,
 	/^DOS Ger.tetreiber/,
 	/^Eudora Werbungsdatei$/,
-	/^Kopftext/,
+	/^Kopftext:/,
 	/^Java Source Code$/,
 	/^JPG Bild/,
 	/^Icon Datei/,
@@ -77,6 +92,7 @@ export const WEAK_VALUES =
 	/^MAC Bilddatei/,
 	/^Microsoft Debug Information$/,
 	/^Microsoft Source Referenz Datei \(SBR\)$/,
+	/^Microsoft Visual C\+\+ Hilfedatei$/,
 	/^MP3 TAG$/,
 	/^MPEG \d layer/,
 	/^MPEG Filem/,
@@ -96,25 +112,12 @@ export const WEAK_VALUES =
 	/^Wordperfect Dokument Datei/,
 	/^Wordperfect Makro Datei$/,
 
-	// disktype: WEAK checks
-	/^ATARI ST partition map/,
-	/^bar archive$/,
-	/^Blank disk\/medium$/,
-	/^compress-compressed data at /,
-	/^FAT\d{2} file system/,
-	/^FreeBSD boot manager/,
-	/^MFS file system$/,
-	/^Minix file system/,
-	/^Old-style Apple partition map$/,
-	/^QNX4 file system$/,
-	/Volume size off the scale/,
-	/^Windows \/ MS-DOS boot loader/,
+	// lsar: WEAK checks
+	/^LZMA_Alone$/,
+	/^Split file$/,
 
-	// binwalkID: WEAK checks
-	/^Executable script, /,
-	/^LZ4 compressed data$/,
-	/^OGG audio data$/,
-	/^WMA audio data$/,
+	// pc98ripperID: WEAK checks
+	/^PC-98 ElfDOS$/,
 	
 	// FILE: Improper parsing of output
 	/^' (123):$/,
@@ -186,6 +189,7 @@ export const WEAK_VALUES =
 	/^CBM BASIC, SYS/,
 	/^CDC Codec archive data$/,
 	/^Clarion Developer/,
+	/^Claris works dictionary/,
 	/^CLIPPER COFF executable/,
 	/^CMP archive data/,
 	/^COFF DSP21k/,
@@ -326,6 +330,7 @@ export const WEAK_VALUES =
 	/^MPEG-4 LOAS/,
 	/^MS, \d+ bytes$/,
 	/^MS Windows COFF /,
+	/^MS Windows y\.z help/,
 	/^MSX ROM, init/,
 	/^MSX-BASIC program/,
 	/^MSXiE archive data/,
@@ -902,6 +907,7 @@ export const WEAK_VALUES =
 	/^Microsoft Help compiler Project \(with rem\)$/,
 	/^Midtown Madness game data archive$/,
 	/^Midtown Madness 2 game data archive$/,
+	/^MIT CADR Lisp Machine disk image$/,
 	/^Motorhead game data rchive$/,
 	/^Music Macro Language$/,
 	/^Navitel/,
@@ -916,6 +922,7 @@ export const WEAK_VALUES =
 	/^Pacific Warrior 2: Dogfight game data archive$/,
 	/^PackDir compressed archive$/,
 	/^PC Secure encrypted \(V6\)$/,
+	/^Portable Image File bitmap$/,
 	/^Poser pose$/,
 	/^Psion Organiser Block data$/,
 	/^PPrint Image$/,

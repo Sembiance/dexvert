@@ -1,9 +1,9 @@
 # dexvert - **D**ecompress **EX**tract con**VERT**
-Convert **1,755** file formats (out of **3,052** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
+Convert **1,760** file formats (out of **3,068** known) into modern equilivants (png/svg/pdf/mp3/mp4/etc.)
 
 See the lists of [SUPPORTED](SUPPORTED.md) & [UNSUPPORTED](UNSUPPORTED.md) file formats
 
-Utilizes [Deno](https://deno.land/) and **475** helper programs running on **4** different operating systems under various emulators.
+Utilizes [Deno](https://deno.land/) and **478** helper programs running on **4** different operating systems under various emulators.
 
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly or not at all, submit an issue.
 

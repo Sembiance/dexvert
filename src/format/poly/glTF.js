@@ -7,5 +7,5 @@ export class glTF extends Format
 	ext          = [".glb", ".gltf"];
 	magic        = ["GL Transmission Format", "glTF binary model", /^fmt\/(1315|1316)( |$)/];
 	untouched    = true;
-	metaProvider = ["assimpInfo"];
+	metaProvider = ["glTFValidator", "assimpInfo"];
 }

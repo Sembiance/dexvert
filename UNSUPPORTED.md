@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,297)
+# Unsupported File Formats (1,308)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (88)
+## Archive (89)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -36,6 +36,7 @@ Family/Format | Name | Extensions | Notes
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/cpmHUFArchive](https://discmaster.textfiles.com/search?formatid=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
+[archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
@@ -351,9 +352,10 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (97)
+## Image (98)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
 [image/actorObjectGraphic](https://discmaster.textfiles.com/search?formatid=actorObjectGraphic) | Actor Object Graphic | .ogl | [2 sample files](https://sembiance.com/fileFormatSamples/image/actorObjectGraphic/)
 [image/afl](https://discmaster.textfiles.com/search?formatid=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?formatid=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
@@ -567,7 +569,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (710)
+## Other (716)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -662,6 +664,7 @@ Family/Format | Name | Extensions | Notes
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
 [other/berkeleyDB](https://discmaster.textfiles.com/search?formatid=berkeleyDB) | Berkeley DB | .db | 
 [other/bethesdaGameMap](https://discmaster.textfiles.com/search?formatid=bethesdaGameMap) | Bethesda game Map | .mif | 
+[other/bigRedRacingLevel](https://discmaster.textfiles.com/search?formatid=bigRedRacingLevel) | Big Red Racing Level | .lev | 
 [other/billOfMaterials](https://discmaster.textfiles.com/search?formatid=billOfMaterials) | Bill of Materials | .bom | 
 [other/binaryColorFormat](https://discmaster.textfiles.com/search?formatid=binaryColorFormat) | Binary Color Format | .bcf | 
 [other/binaryDeltaCompressedPatch](https://discmaster.textfiles.com/search?formatid=binaryDeltaCompressedPatch) | Binary Delta Compressed Patch |  | 
@@ -704,6 +707,7 @@ Family/Format | Name | Extensions | Notes
 [other/caligariTrueSpaceData](https://discmaster.textfiles.com/search?formatid=caligariTrueSpaceData) | Caligari TrueSpace Data |  | 
 [other/callOfDutyMap](https://discmaster.textfiles.com/search?formatid=callOfDutyMap) | Call of Duty Map | .d3dbsp .bsp | 
 [other/carmageddonSavedGame](https://discmaster.textfiles.com/search?formatid=carmageddonSavedGame) | Carmageddon Saved Game | .ars | 
+[other/ccmfResourceCompositeFile](https://discmaster.textfiles.com/search?formatid=ccmfResourceCompositeFile) | CCmF / Resource Composite File | .dat | 
 [other/cedarLakeSoftwareGameData](https://discmaster.textfiles.com/search?formatid=cedarLakeSoftwareGameData) | Cedar Lake Software game data | .cl1 | 
 [other/chaosToyUniversePalette](https://discmaster.textfiles.com/search?formatid=chaosToyUniversePalette) | CHAOS Toy Universe Palette | .frt | 
 [other/chaosultdGEMParameters](https://discmaster.textfiles.com/search?formatid=chaosultdGEMParameters) | CHAOSultdGEM Parameters | .chs | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/chaosultdGEMParameters/)
@@ -999,6 +1003,7 @@ Family/Format | Name | Extensions | Notes
 [other/neXTStepWMWindowAttribute](https://discmaster.textfiles.com/search?formatid=neXTStepWMWindowAttribute) | NeXTStep Workspace Manager window attributes | .wmd | 
 [other/n64ROM](https://discmaster.textfiles.com/search?formatid=n64ROM) | Nintendo 64 ROM | .v64 | 
 [other/nintendoROM](https://discmaster.textfiles.com/search?formatid=nintendoROM) | Nintendo ROM | .nes | 
+[other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonFileInfoData](https://discmaster.textfiles.com/search?formatid=nortonFileInfoData) | Norton FileInfo data | .fi | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?formatid=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
@@ -1047,6 +1052,7 @@ Family/Format | Name | Extensions | Notes
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
+[other/proThrottleConfiguration](https://discmaster.textfiles.com/search?formatid=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 
 [other/protextConfiguration](https://discmaster.textfiles.com/search?formatid=protextConfiguration) | Protext Configuration | .cfg | 
 [other/proximityTechLexicon](https://discmaster.textfiles.com/search?formatid=proximityTechLexicon) | Proximity Technology Lexicon/Thesaurus | .lex .ths | 
@@ -1170,6 +1176,7 @@ Family/Format | Name | Extensions | Notes
 [other/theDataMasterForm](https://discmaster.textfiles.com/search?formatid=theDataMasterForm) | The DataMaster Form | .form | 
 [other/theDataMasterPreferences](https://discmaster.textfiles.com/search?formatid=theDataMasterPreferences) | The DataMaster Preferences | .pre | 
 [other/theGamesFactoryGame](https://discmaster.textfiles.com/search?formatid=theGamesFactoryGame) | The Games Factory Game | .gam | 
+[other/houseOfTheDeadGameDataContainer](https://discmaster.textfiles.com/search?formatid=houseOfTheDeadGameDataContainer) | The House of the Dead game data container | .rbh | 
 [other/theNortonAntiVirusInformation](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusInformation) | The Norton AntiVirus Information | .inf | 
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?formatid=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
@@ -1229,6 +1236,7 @@ Family/Format | Name | Extensions | Notes
 [other/vocalEyesHelp](https://discmaster.textfiles.com/search?formatid=vocalEyesHelp) | Vocal-Eyes Help | .hlp | 
 [other/vocalEyesSet](https://discmaster.textfiles.com/search?formatid=vocalEyesSet) | Vocal-Eyes Set | .set | 
 [other/volkovCommanderConfiguration](https://discmaster.textfiles.com/search?formatid=volkovCommanderConfiguration) | Volkov Commander configuration | .ini | 
+[other/warBirdsAirplaneArt](https://discmaster.textfiles.com/search?formatid=warBirdsAirplaneArt) | WarBirds airplane art | .vew | 
 [other/warCraft3Map](https://discmaster.textfiles.com/search?formatid=warCraft3Map) | WarCraft III Map | .w3m | 
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?formatid=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
 [other/warCraftMap](https://discmaster.textfiles.com/search?formatid=warCraftMap) | WarCraft Map | .pud | 
@@ -1283,7 +1291,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (33)
+## Poly (35)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1308,6 +1316,7 @@ Family/Format | Name | Extensions | Notes
 [poly/ravenObjectFileFormat](https://discmaster.textfiles.com/search?formatid=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | [4 sample files](https://sembiance.com/fileFormatSamples/poly/ravenObjectFileFormat/)
 [poly/real3D](https://discmaster.textfiles.com/search?formatid=real3D) | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.
 [poly/renderit3DData](https://discmaster.textfiles.com/search?formatid=renderit3DData) | Renderit3D Data | .r3d | 
+[poly/residentEvilPlayerModel](https://discmaster.textfiles.com/search?formatid=residentEvilPlayerModel) | Resident Evil player model | .emw .emd | 
 [poly/rotObject](https://discmaster.textfiles.com/search?formatid=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
 [poly/ydl](https://discmaster.textfiles.com/search?formatid=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.
 [poly/solidWorksAssembly](https://discmaster.textfiles.com/search?formatid=solidWorksAssembly) | SolidWorks Assembly | .sldasm | [8 sample files](https://sembiance.com/fileFormatSamples/poly/solidWorksAssembly/)
@@ -1319,10 +1328,11 @@ Family/Format | Name | Extensions | Notes
 [poly/valveModelVertices](https://discmaster.textfiles.com/search?formatid=valveModelVertices) | [Valve Studio Model Vertices](http://fileformats.archiveteam.org/wiki/Valve_Vertex_Data) | .vvd | [5 sample files](https://sembiance.com/fileFormatSamples/poly/valveModelVertices/) - I think this is only useful when paired with some aux files, but I didn't really investigate any further.
 [poly/vertexBinary](https://discmaster.textfiles.com/search?formatid=vertexBinary) | Vertex Binary 3D Object | .3d | Only 5 uniques of these files are on discmaster, all samples from an Amiga app called Vertex.
 [poly/virtusVRScene](https://discmaster.textfiles.com/search?formatid=virtusVRScene) | Virtus VR Scene | .vvr | 
+[poly/xCar3DModel](https://discmaster.textfiles.com/search?formatid=xCar3DModel) | XCar 3D model | .3d | 
 
 
 
-## Video (34)
+## Video (35)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -1359,4 +1369,5 @@ Family/Format | Name | Extensions | Notes
 [video/theDirector](https://discmaster.textfiles.com/search?formatid=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
 [video/vpx1VideoPackage](https://discmaster.textfiles.com/search?formatid=vpx1VideoPackage) | VPX1 Video Package | .vpx | 
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?formatid=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
+[video/zorkRLFVideo](https://discmaster.textfiles.com/search?formatid=zorkRLFVideo) | Zork RLF video | .rlf | 
 

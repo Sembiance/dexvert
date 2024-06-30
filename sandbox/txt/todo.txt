@@ -22,6 +22,9 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
+* Could create a DOOM TITLEPIC converter for files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
+  Format: https://doomwiki.org/wiki/Picture_format   (COLORMAP: https://doomwiki.org/wiki/COLORMAP)
+
 * Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
 
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0

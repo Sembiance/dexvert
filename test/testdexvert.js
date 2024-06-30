@@ -153,7 +153,8 @@ const SUPPORTING_FILES =
 	},
 	image :
 	{
-		printMasterShape : /\.sdr$/i
+		printMasterShape : /\.sdr$/i,
+		quakeGFXLMP : /palette\.lmp$/
 	},
 	poly :
 	{

@@ -40,7 +40,7 @@ const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
 // these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
 const SLOW_FORMATS =
 [
-	"archive/mcromediaDirector",
+	"archive/macromediaDirector",
 	"audio/photoCDAudio",
 	"font/amigaBitmapFontContent",
 	"document/chm",

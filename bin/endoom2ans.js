@@ -46,9 +46,7 @@ for(let y=0;y<25;y++)
 		const fg = colorRaw.bitsToNum(4, 0);
 		const bg = colorRaw.bitsToNum(3, 4);
 		const blink = colorRaw.getBit(7);
-		if(blink)
-			xlog.info`blink: ${blink}`;
-		const escapeCode = `\x1B[${BG_TO_ANSI[bg]};${FG_TO_ANSI[fg]}m`;	// eslint-disable-line unicorn/no-hex-escape
+		const escapeCode = `\x1B[${blink ? "5;" : ""}${BG_TO_ANSI[bg]};${FG_TO_ANSI[fg]}m`;	// eslint-disable-line unicorn/no-hex-escape
 		await writeAll(outANS, new Uint8Array([...encoder.encode(escapeCode), charRaw, ...encoder.encode(xu.c.reset)]));
 		if(argv.debug)
 			printUtil.stdoutWrite(`${escapeCode}${char}${xu.c.reset}`);

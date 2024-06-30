@@ -35,7 +35,7 @@ const OS =
 	win7 :
 	{
 		debug     : false,
-		qty       : 3,
+		qty       : 4,
 		ramGB     : 16,
 		cores     : 4,
 		scriptExt : ".au3",
@@ -164,7 +164,7 @@ export class os extends Server
 	async performRun(instance, runArgs)
 	{
 		const startProcess = instance.p;
-		const {body, reply} = runArgs;
+		const {body, reply, timeout} = runArgs;
 		this.xlog.debug`${prelog(instance)} run with cmd ${body.cmd} and file ${(body.inFilePaths || [])[0]}`;
 		this.xlog.debug`${prelog(instance)} run with request: ${body} and script ${body.script}`;
 
@@ -193,7 +193,7 @@ export class os extends Server
 			await fileUtil.move(tmpInArchiveFilePath, inArchiveFilePath);
 
 			// Wait for the OS to finish, which happens when the VM deletes the archive file via http calling /osDONE (or our instance process changes usually due to crashing)
-			await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess);
+			const finishedOK = await xu.waitUntil(async () => (!(await fileUtil.exists(inArchiveFilePath))) || instance.p!==startProcess, {timeout : (timeout ? timeout*1.5 : xu.HOUR*3)});
  
 			if(await fileUtil.exists(outarchiveFilePath))	// only exists if the OS was successful and called /osPOST with the result
 			{
@@ -204,6 +204,12 @@ export class os extends Server
 
 				await fileUtil.unlink(outarchiveFilePath, {recursive : true});
 			}
+			else if(!finishedOK)
+			{
+				this.xlog.error`${prelog(instance)} timed out after ${timeout.msAsHumanReadable({short : true})} waiting for runArgs to finish: ${JSON.stringify(runArgs).squeeze()}`;
+				await runUtil.kill(instance.p, "SIGKILL").catch(() => {});
+				await xu.waitUntil(() => instance.p!==startProcess);
+			}
 		}
 		catch(err)
 		{
@@ -213,7 +219,7 @@ export class os extends Server
 		delete instance.runTask;
 		if(instance.p!==startProcess)
 		{
-			this.xlog.error`${prelog(instance)} process changed during run, so aborting run with runArgs ${JSON.stringify(runArgs).squeeze()}`;
+			this.xlog.error`${prelog(instance)} process changed during run (crash? timeout w/kill?), so aborting run with runArgs ${JSON.stringify(runArgs).squeeze()}`;
 			return;
 		}
 		
@@ -221,7 +227,6 @@ export class os extends Server
 		CMD_DURATIONS[body.cmd] ||= [];
 		CMD_DURATIONS[body.cmd].push({duration : runDuration, meta : body.meta || path.basename(body.inFilePaths[0])});
 		this.xlog.debug`${prelog(instance)} finished request in ${runDuration}ms (${RUN_QUEUE.size} queued)`;
-
 		instance.busy = false;
 
 		if(runErr)

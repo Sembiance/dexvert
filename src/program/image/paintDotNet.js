@@ -30,7 +30,7 @@ export class paintDotNet extends Program
 			WinWaitClose($saveAsWindow, "", 10)
 			WindowDismissWait("Save Configuration", "", 4, "{ENTER}")
 			WindowDismissWait("Save", "flattened", 2, "{ENTER}")
-			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*2}, ${xu.SECOND*20})
+			WaitForStableFileSize("c:\\out\\out.png", ${xu.SECOND*2}, ${xu.SECOND*14})
 			Send("!f")
 			Send("x")
 			WindowDismissWait("Unsaved Changes", "", 2, "{DOWN}{ENTER}")`

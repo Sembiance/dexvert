@@ -128,7 +128,7 @@ export class polyTrans64 extends Program
 			WinWaitClose($outputStatusWindow, "", 240)
 		EndIf
 		WaitForStableFileSize("c:\\out\\out${_OUT_TYPES[r.flags.outType || _OUT_TYPE_DEFAULT].ext}", ${xu.SECOND*2}, ${xu.MINUTE*3})`,
-		timeout : xu.MINUTE*5
+		timeout : xu.MINUTE*15
 	});
 	renameOut = {
 		alwaysRename : true,

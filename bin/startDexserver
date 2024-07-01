@@ -5,6 +5,13 @@ if [ -f /mnt/ram/dexvert/dexserver.pid ]; then
 	exit 1
 fi
 
+if [ -s /mnt/dexvert/log/dexserver.err ]; then
+	mkdir -p /mnt/dexvert/oldLogs
+	ts="$(date +%Y%m%d_%H%M%S)"
+	cp /mnt/dexvert/log/dexserver.err /mnt/dexvert/oldLogs/dexserver-"$ts".err
+	cp /mnt/dexvert/log/dexserver.out /mnt/dexvert/oldLogs/dexserver-"$ts".out
+fi
+
 rm -rf /mnt/dexvert/log
 mkdir -p /mnt/dexvert/log
 rm -f /mnt/dexvert/daemonize_dexserver.pid

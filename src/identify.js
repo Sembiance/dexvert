@@ -454,7 +454,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 	matches.push(...matchesByFamily.fallback.filter(id => id.confidence<10));
 
 	// Finally we create our return ids. First start out with all 'dexvert' matches
-	let ids = matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, website}));
+	let ids = matches.map(({family, confidence, magic, extensions, matchType, formatid, unsupported, auxFiles, fileSizeMatchExt, extMatch, website}) => Identification.create({from : "dexvert", confidence, magic, family : family.familyid, formatid, extensions, matchType, unsupported, auxFiles, fileSizeMatchExt, extMatch, website}));
 
 	// Then stick on the 'unknown' format
 	// ids.push(Identification.create({from : "dexvert", confidence : 1, magic : "unknown", family : "other", formatid : "unknown", matchType : "fallback"}));

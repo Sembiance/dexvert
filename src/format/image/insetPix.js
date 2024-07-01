@@ -7,5 +7,5 @@ export class insetPix extends Format
 	ext        = [".pix"];
 	weakExt    = true;
 	magic      = ["Inset PIX bitmap"];
-	converters = ["deark[module:insetpix]", "hiJaakExpress"];
+	converters = ["deark[module:insetpix]", "hiJaakExpress[matchType:magic][hasExtMatch]"];
 }

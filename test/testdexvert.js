@@ -36,6 +36,9 @@ const SKIP_FORMATS =
 	// these take AGES to extract, just WAY too long
 	"archive/printArtist",
 
+	// sample files are hundreds of megabytes, so we don't have any samples, so skip it
+	"archive/hmmPackfileGameArchive",
+
 	// these don't make sense to test
 	"other/symlink"
 ];

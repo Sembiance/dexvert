@@ -6,6 +6,6 @@ export class windowsProgramGroup extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Windows_program_group";
 	ext            = [".grp"];
 	forbidExtMatch = true;
-	magic          = ["Windows Program Manager Group", "Windows 3.x .GRP file", "Windows 3.x Gruppendatei"];
+	magic          = ["Windows Program Manager Group", "Windows 3.x .GRP file", "Windows 3.x Gruppendatei", "MS Windows 3.1 group files"];
 	converters     = ["strings"];
 }

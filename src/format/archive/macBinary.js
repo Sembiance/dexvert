@@ -1,7 +1,7 @@
 import {Format} from "../../Format.js";
 import {getMacBinaryMeta} from "../../identify.js";
 
-const _MACBINARY_MAGIC = ["Macintosh MacBinary", "MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "MacBinary 3", /^MacBinary$/, / \(MacBinary\)$/, /^fmt\/(1762|1763)( |$)/];
+const _MACBINARY_MAGIC = ["Macintosh MacBinary", "MacBinary 2", "MacBinary II", "MacBinary, inited", "MacBinary 1", "MacBinary 3", /^MacBinary$/, /^MacBinary, .*199\d, modified .*199\d/, / \(MacBinary\)$/, /^fmt\/(1762|1763)( |$)/];
 export {_MACBINARY_MAGIC};
 
 export class macBinary extends Format

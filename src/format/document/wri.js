@@ -6,6 +6,6 @@ export class wri extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Microsoft_Write";
 	ext            = [".wri", ".wr", ".doc"];
 	forbidExtMatch = true;
-	magic          = ["Windows Write Document", /^Microsoft Write.* Document/, "Write for Windows Document", /^x-fmt\/12( |$)/];
+	magic          = ["Windows Write Document", /^Microsoft Write.* Document/, "Write for Windows Document", "Format: Windows Write document", /^x-fmt\/(4|12)( |$)/];
 	converters     = ["soffice[format:MS Write]", "fileMerlin[type:MSWR]", "keyViewPro[outType:pdf]", "word97"];
 }

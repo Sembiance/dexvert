@@ -5,7 +5,7 @@ export class ultraTracker extends Format
 	name         = "Ultra Tracker Module";
 	website      = "http://fileformats.archiveteam.org/wiki/Ultra_Tracker";
 	ext          = [".ult"];
-	magic        = [/^ultratracker .*module sound data$/i, "Ultra Tracker module"];
+	magic        = [/^ultratracker .*module sound data$/i, "Ultra Tracker module", "ULT(imate) Module sound data"];
 	metaProvider = ["musicInfo"];
 	converters   = ["zxtune123", "openmpt123", "xmp"];
 }

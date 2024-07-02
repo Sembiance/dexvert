@@ -6,7 +6,7 @@ export class reg extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Windows_Registry";
 	ext            = [".reg", ".dat"];
 	forbidExtMatch = true;
-	magic          = [/^Windows Registry (Data|text)/, "Windows Registry Datei"];
+	magic          = [/^Windows Registry (Data|text)/, "Windows Registry Datei", "MS Windows 95/98/ME registry file"];
 	untouched      = true;
 	metaProvider   = ["text"];
 }

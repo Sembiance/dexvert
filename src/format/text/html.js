@@ -10,7 +10,7 @@ export class html extends Format
 	filename       = [/htm/];
 	weakFilename   = true;
 	mimeType       = "text/html";
-	magic          = ["HyperText Markup Language with DOCTYPE", "HTML (Hyper Text Markup Language) Datei", /^Hyper[Tt]ext Markup Language/, /^HTML document/, /^fmt\/(96|97|98|99|100|102|471)( |$)/];
+	magic          = ["HyperText Markup Language with DOCTYPE", "HTML (Hyper Text Markup Language) Datei", "Netscape Bookmark-file-1 format", /^Hyper[Tt]ext Markup Language/, /^HTML document/, /^fmt\/(96|97|98|99|100|102|471|1132)( |$)/];
 	weakMagic      = true;
 	trustMagic     = true;
 	untouched      = true;

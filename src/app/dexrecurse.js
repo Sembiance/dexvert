@@ -178,6 +178,7 @@ const ALL_MAGICS = new Set();
 const EXISTING_SAMPLE_FILES = {};
 const newSampleFiles = {};
 const newMagics = {};
+const improvedMagics = {};
 const newMacTypeCreators = {};
 const newProDOSTypes = {};
 const idMetaCheckers = [];
@@ -338,20 +339,18 @@ async function processNextQueue()
 					newSampleFiles[dexformatid].push(task.relFilePath);
 				}
 			}
-			else if(dexData.ids?.length)
+			
+			if(dexData.ids?.length)
 			{
 				for(const id of dexData.ids || [])
 				{
-					// We don't include failed dexvert handlings
-					if(id.from==="dexvert" && !id.unsupported)
-						continue;
-
 					// Skip weak identifications, those from dexvert or magics that match an existing format
 					if(id.weak || id.from==="dexvert" || isExistingMagic(id.magic))
 						continue;
 
-					newMagics[id.magic] ||= [];
-					newMagics[id.magic].pushUnique(task.relFilePath);
+					const magicsBucket = dexid ? newMagics : improvedMagics;
+					magicsBucket[id.magic] ||= [];
+					magicsBucket[id.magic].pushUnique(task.relFilePath);
 				}
 			}
 
@@ -430,7 +429,7 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
 if(argv.report)
 {
-	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, newMacTypeCreators, newProDOSTypes};
+	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newProDOSTypes};
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)
@@ -452,6 +451,18 @@ if(argv.report)
 		{
 			console.log(printUtil.majorHeader(`New Magics (${newMagicsEntries.length.toLocaleString()})`, {prefix : "\n"}));
 			for(const [magic, files] of Object.entries(newMagics))
+			{
+				xlog.info`${magic}   (${files.length} files)`;
+				for(const file of files)
+					xlog.info`\t${file}`;
+			}
+		}
+
+		const improvedMagicsEntries = Object.entries(improvedMagics);
+		if(improvedMagicsEntries.length>0)
+		{
+			console.log(printUtil.majorHeader(`Improved Magics (${improvedMagicsEntries.length.toLocaleString()})`, {prefix : "\n"}));
+			for(const [magic, files] of Object.entries(improvedMagics))
 			{
 				xlog.info`${magic}   (${files.length} files)`;
 				for(const file of files)

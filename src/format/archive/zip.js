@@ -8,7 +8,8 @@ export class zip extends Format
 	ext            = [".zip", ".exe"];
 	magic          =[
 		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/,
-		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", /^x-fmt\/263( |$)/];
+		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", "QWK offline mail packet (ZIP compressed)",
+		/^x-fmt\/263( |$)/];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>

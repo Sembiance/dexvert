@@ -6,7 +6,7 @@ export class ini extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/INI";
 	ext            = [".ini", ".inf", ".cfg", ".conf", ".nfo"];
 	forbidExtMatch = [".cfg", ".conf", ".nfo"];
-	magic          = ["Generic INI configuration", "Windows desktop.ini", "InstallShield Setup config"];
+	magic          = ["Generic INI configuration", "Windows desktop.ini", "InstallShield Setup config", "INF Datei", "Microsoft Setup Toolkit for Windows files List", "LapLink 5 settings"];
 	priority       = this.PRIORITY.LOW;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;
 	metaProvider   = ["text", "iniInfo"];

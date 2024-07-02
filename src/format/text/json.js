@@ -7,6 +7,8 @@ export class json extends Format
 	name             = "JavaScript Object Notation";
 	website          = "http://fileformats.archiveteam.org/wiki/JSON";
 	ext              = [".json"];
+	magic            = ["JSON text data"];
+	weakMagic        = true;
 	mimeType         = "application/json";
 	untouched        = dexState => !!dexState.meta.type;
 	confidenceAdjust = (inputFile, matchType, curConfidence) => -(curConfidence-60);	// JSON is used for other formats (such as image/lottie) so we should always process same match types with a lower priority

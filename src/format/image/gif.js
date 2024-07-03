@@ -7,7 +7,7 @@ export class gif extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/GIF";
 	ext          = [".gif"];
 	mimeType     = "image/gif";
-	magic        = ["GIF image data", "GIF animated bitmap", "Mac PageMill's GIF bitmap (MacBinary)", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, /^fmt\/(3|4)( |$)/];
+	magic        = ["GIF image data", "GIF animated bitmap", "Mac PageMill's GIF bitmap (MacBinary)", "Fractint saved bitmap", /^GIF8[79]a bitmap$/, /^GIF8[79]-Bild/, /^fmt\/(3|4)( |$)/];
 	idMeta       = ({macFileType}) => macFileType==="GIFf";
 	untouched    = r => r.meta.width && r.meta.height;		// if we were able to get our image meta info, then we are a valid GIF and should leave it alone
 	metaProvider = ["image", "gifsicle_info"];

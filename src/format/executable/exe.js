@@ -6,10 +6,10 @@ export class exe extends Format
 	website = "http://fileformats.archiveteam.org/wiki/EXE";
 	ext     = [".exe"];
 	magic   = [
-		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS Executable$/, "DOS Executable (alternate ZM id)", "16bit DOS EXE PKLite compressed", /^Microsoft .*DOS Executable/,
-		"DOS Executable Borland C++", "DOS Borland compiled Executable (generic)", "Graphic Workshop self-displaying picture executable", "OS/2 Executable", "32bit DOS Executable", "DOS/4G DOS Extender Executable",
+		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS Executable$/, "16bit DOS EXE PKLite compressed", /^Microsoft .*DOS Executable/,
+		"DOS Executable", "DOS Borland compiled Executable (generic)", "Graphic Workshop self-displaying picture executable", "OS/2 Executable", "32bit DOS Executable", "DOS/4G DOS Extender Executable",
 		"Microsoft executable", "PE32 executable", /^Win\d\d Executable/, "Win16 NE executable", "InstallShield setup", "OS/2 Presentation Manager Executable", "DOS Turbo Basic executable", "Win16 EDI Install Pro executable",
-		/^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/, "Microsoft Pascal 16-bit executable",
+		/^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/, "Microsoft Pascal 16-bit executable", "16bit DOS EXE PowerBatch (v1.4)", "Microsoft BASIC Compiler runtime",
 		/^NSIS$/, /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/899( |$)/, /^x-fmt\/(409|410|411)( |$)/];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

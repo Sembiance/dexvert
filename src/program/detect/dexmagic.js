@@ -32,6 +32,7 @@ const DEXMAGIC_CHECKS =
 	"NeXT Disk Image Dump"           : [{offset : 46, match : "dlV3"}],
 	"OS/2 PACK Variant"              : [{offset : 0, match : [0xA5, 0x96, 0xFF, 0xFF]}],
 	"OS/2 PACK Variant 2"            : [{offset : 0, match : [0xA5, 0x96, 0x00, 0x14]}],
+	"OS/2 PACK Variant 3"            : [{offset : 0, match : [0xA5, 0x96, 0x14, 0x0A]}],
 	"PACKIT Installation Archive"    : [{offset : 0, match : "PACKIT by MJP"}],
 	"Palm Web Content Record"        : [{offset : 0, match : [0x00, 0x00, 0x00, 0x14]}, {offset : 0x0C, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}, {offset : 0x0D, match : [[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06]]}],
 	"pcxLib compressed"              : [{offset : 0, match : "pcxLib"}, {offset : 10, match : "Copyright (c) Genus Microprogramming, Inc."}],

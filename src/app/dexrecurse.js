@@ -348,7 +348,7 @@ async function processNextQueue()
 					if(id.weak || id.from==="dexvert" || isExistingMagic(id.magic))
 						continue;
 
-					const magicsBucket = dexid ? newMagics : improvedMagics;
+					const magicsBucket = dexid ? improvedMagics : newMagics;
 					magicsBucket[id.magic] ||= [];
 					magicsBucket[id.magic].pushUnique(task.relFilePath);
 				}

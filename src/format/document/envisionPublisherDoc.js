@@ -6,7 +6,7 @@ export class envisionPublisherDoc extends Format
 	name        = "Envision Publisher Document";
 	website     = "http://fileformats.archiveteam.org/wiki/Envision_Publisher";
 	ext         = [".evp", ".evt"];
-	magic       = ["EnVision Publisher DTP document"];
+	magic       = ["EnVision Publisher DTP document", /^fmt\/1580( |$)/];
 	unsupported = true;
 	notes       = xu.trim`
 		Envision Publisher for MSDOS doesn't have an "Export" option.

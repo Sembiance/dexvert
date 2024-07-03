@@ -195,6 +195,51 @@ async function loadGameArchive({reload}={})
 	}
 }
 
+const textFormatids = new Set();
+async function loadText({reload}={})
+{
+	if(reload)
+	{
+		for(const formatid of textFormatids)
+			delete formats[formatid];
+		textFormatids.clear();
+	}
+
+	const {default : text} = await import(reload ? `./text.js#${Date.now() + performance.now()}` :"./text.js");
+	for(const [familyid, textFormats] of Object.entries(text))
+	{
+		for(const [formatid, o] of Object.entries(textFormats))
+		{
+			if(formats[formatid])
+				throw new Error(`format [\${formatid}] in text.js is a duplicate`);
+
+			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
+			const extraKeys = Object.keys(o).subtractAll(supportedKeys);
+			if(extraKeys.length>0)
+				throw new Error(`text format ${familyid}/${formatid} has extra keys that are not currently copied over to the Text class, add them: ${extraKeys}`);
+			
+			class Text extends Format
+			{
+				untouched    = true;
+				metaProvider = ["text"];
+			}
+
+			formats[formatid] = Text.create(families[familyid], format =>
+			{
+				for(const supportedKey of supportedKeys)
+				{
+					if(Object.hasOwn(o, supportedKey))
+						format[supportedKey] = o[supportedKey];
+				}
+				if(o.ext?.length && o.magic?.length)
+					format.forbidExtMatch = true;
+			});
+			formats[formatid].formatid = formatid;
+			textFormatids.add(formatid);
+		}
+	}
+}
+
 export async function init(xlog=new XLog("info"))
 {
 	if(initCalled)
@@ -203,7 +248,7 @@ export async function init(xlog=new XLog("info"))
 
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Loading ${formatFilePaths.length} format files...`;
-	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive()]));
+	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive(), loadText()]));
 	xlog.debug`Loaded ${Object.keys(formats).length} formats`;
 }
 
@@ -227,6 +272,10 @@ export async function formatChanged({type, filePath}, xlog=new XLog("info"))
 			else if(path.basename(filePath)==="gameArchive.js")
 			{
 				await loadGameArchive({reload : true});
+			}
+			else if(path.basename(filePath)==="text.js")
+			{
+				await loadText({reload : true});
 			}
 			else
 			{

@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,339)
+# Unsupported File Formats (1,341)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (90)
+## Archive (91)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -39,6 +39,7 @@ Family/Format | Name | Extensions | Notes
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
+[archive/exePackerPacked](https://discmaster.textfiles.com/search?formatid=exePackerPacked) | EXE Packer Packed |  | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/foxProArchive](https://discmaster.textfiles.com/search?formatid=foxProArchive) | FoxPro Archive | .pak | 
 [archive/freeArc](https://discmaster.textfiles.com/search?formatid=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
@@ -576,7 +577,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (740)
+## Other (741)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -1271,6 +1272,7 @@ Family/Format | Name | Extensions | Notes
 [other/warCraftMap](https://discmaster.textfiles.com/search?formatid=warCraftMap) | WarCraft Map | .pud | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?formatid=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?formatid=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
+[other/whdLoadSlave](https://discmaster.textfiles.com/search?formatid=whdLoadSlave) | WHDLoad Slave | .slave | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?formatid=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 
 [other/windows98Passwords](https://discmaster.textfiles.com/search?formatid=windows98Passwords) | Windows 98 passwords | .pwl | 
 [other/windows9XBootLoader](https://discmaster.textfiles.com/search?formatid=windows9XBootLoader) | Windows 9X boot loader |  | 

@@ -1,6 +1,10 @@
 /--------------\
 | TOP Priority |
 \--------------/
+
+/---------------\
+| High Priority |
+\---------------/
 * Create a Duke Nukem 3D ART extractor/convertor, see sandbox/wip/dukeART
   The BAFed jar (java -jar BAFed.jar) can load and show the ART files, with animation, but can't really export
   The 'test.py' script comes from: http://justsolve.archiveteam.org/wiki/ART_(Duke_Nukem_3D)
@@ -12,9 +16,6 @@
   http://dev.discmaster2.textfiles.com/search?q=TILES000.ART&qfields=name
   Have dexvert match *.art extension, with auxFiles req that palette.dat exists in dir and idCheck that file starts with 0x01 00 00 00
 
-/---------------\
-| High Priority |
-\---------------/
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD

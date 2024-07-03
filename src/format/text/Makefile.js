@@ -7,7 +7,7 @@ export class Makefile extends Format
 	ext            = [".mak", ".mk"];
 	forbidExtMatch = true;
 	filename       = [/^[Mm]ake[Ff]ile[._-].*/, /^[Mm]ake[Ff]ile$/, /.*[Mm]ake[Ff]ile$/];
-	magic          = ["makefile script"];
+	magic          = ["makefile script", "automake makefile script"];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

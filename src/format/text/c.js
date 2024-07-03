@@ -8,7 +8,7 @@ export class c extends Format
 	forbidExtMatch = true;
 	filename       = [/source/, /src/];
 	weakFilename   = true;
-	magic          = ["C source", "C++ source", "C/C++ Source Code", "C program text"];
+	magic          = ["C source", "C++ source", "C/C++ Source Code", "C program text", "Algol 68 source text C source"];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

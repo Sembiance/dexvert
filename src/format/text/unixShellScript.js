@@ -7,7 +7,7 @@ export class unixShellScript extends Format
 	ext            = [".sh", ".x11", ".gnu", ".csh", ".tsch"];
 	forbidExtMatch = true;
 	magic          = ["Linux/UNIX shell script", "POSIX shell script", "C shell script", "a /bin/csh script", "a /bin/sh script", "script text executable for", "Bourne-Again shell script text executable", "Shell Skript: '/bin/sh",
-		"Shell Skript: '/bin/bash", "Shell Skript: '/bin/csh"];
+		"Shell Skript: '/bin/bash", "Shell Skript: '/bin/csh", "Tenex C shell script text executable"];
 	weakMagic      = true;
 	untouched      = true;
 	metaProvider   = ["text"];

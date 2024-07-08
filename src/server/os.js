@@ -207,7 +207,7 @@ export class os extends Server
 			}
 			else if(!finishedOK)
 			{
-				this.xlog.error`${prelog(instance)} timed out after ${timeout.msAsHumanReadable({short : true})} waiting for runArgs to finish with files ${(body.inFilePaths || [])[0]} and runArgs: ${JSON.stringify(runArgs).squeeze()}`;
+				this.xlog.error`${prelog(instance)} timed out after ${timeout?.msAsHumanReadable({short : true})} waiting for runArgs to finish with files ${(body.inFilePaths || [])[0]} and runArgs: ${JSON.stringify(runArgs).squeeze()}`;
 				instance.timedOut = true;	// this will prevent this file from being re-queued, assuming that if it timed out once it'll just do so again
 				await runUtil.kill(instance.p, "SIGKILL").catch(() => {});
 				await xu.waitUntil(() => instance.p!==startProcess);

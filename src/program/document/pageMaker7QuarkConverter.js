@@ -10,10 +10,16 @@ export class pageMaker7QuarkConverter extends Program
 	osData   = r => ({
 		dontMaximize : true,
 		script : `
-			$mainWindow = WindowRequire("Converter for Microsoft", "", 5)
+			$mainWindow = WindowRequire("Converter for Microsoft", "", 10)
 			SendSlow("!os")
 			$chooseDestinationWindow = WindowRequire("Choose Destination", "", 5)
-			SendSlow("+{TAB}+{TAB}+{TAB}{DOWN}{HOME}{DOWN}{DOWN}{DOWN}{DOWN}{TAB}{TAB}{DOWN}out{ENTER}{TAB}{ENTER}");
+			Send("+{TAB}")
+			Sleep(500)
+			Send("+{TAB}")
+			Sleep(500)
+			Send("+{TAB}")
+			Sleep(500)
+			SendSlow("{DOWN}{HOME}{DOWN}{DOWN}{DOWN}{DOWN}{TAB}{TAB}{DOWN}out{ENTER}{TAB}{ENTER}");
 			WinWaitClose($chooseDestinationWindow, "", 5)
 
 			Send("^o")

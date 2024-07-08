@@ -6,6 +6,6 @@ export class ibmSaveDsk extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/LoadDskF/SaveDskF";
 	ext            = [".dsk"];
 	forbidExtMatch = true;
-	magic          = ["IBM SKF disk image", "floppy image data (IBM SaveDskF"];
+	magic          = ["IBM SKF disk image", "floppy image data (IBM SaveDskF", "Archive: SaveDskF"];
 	converters     = ["sevenZip", "deark[module:loaddskf]"];
 }

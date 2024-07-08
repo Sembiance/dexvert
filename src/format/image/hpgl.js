@@ -42,7 +42,7 @@ export class hpgl extends Format
 		"corelPhotoPaint",
 		
 		// svg, but super slow, so we only do it if we have both ext and magic match
-		"canvas[strongMatch][nonRaster]"
+		"canvas[strongMatch][hasExtMatch][nonRaster]"
 		
 		// "irfanView" // this will just output a PNG, but it'll take almost anything and output garbage
 	];

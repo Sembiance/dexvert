@@ -6,7 +6,7 @@ export class cab extends Format
 	website  = "http://fileformats.archiveteam.org/wiki/Cabinet";
 	ext      = [".cab"];
 	filename = [/^cabinet$/, /^_cabinet$/i];
-	magic    = [/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", /^CAB$/, /^x-fmt\/414( |$)/];
+	magic    = [/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", "Win32 MS Cabinet Self-Extractor", /^CAB$/, /^x-fmt\/414( |$)/];
 	auxFiles = (input, otherFiles) =>
 	{
 		// include any other files named the same as the input file but with a different extension so long as the extension is a number

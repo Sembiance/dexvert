@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,341)
+# Unsupported File Formats (1,347)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (91)
+## Archive (95)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -22,6 +22,7 @@ Family/Format | Name | Extensions | Notes
 [archive/artsAndLettersClipArtLibrary](https://discmaster.textfiles.com/search?formatid=artsAndLettersClipArtLibrary) | Arts and Letters Clip Art Library | .yal | 
 [archive/asdgFileSplit](https://discmaster.textfiles.com/search?formatid=asdgFileSplit) | [ASDG's File Split](https://wiki.amigaos.net/wiki/SPLT_IFF_File_Splitting) |  | 
 [archive/aSetup](https://discmaster.textfiles.com/search?formatid=aSetup) | ASetup Installer Archive | .arv | [4 sample files](https://sembiance.com/fileFormatSamples/archive/aSetup/) - No known extractor program.
+[archive/asPackPacked](https://discmaster.textfiles.com/search?formatid=asPackPacked) | ASPack Packed |  | 
 [archive/asymetrixToolbookArchive](https://discmaster.textfiles.com/search?formatid=asymetrixToolbookArchive) | Asymetrix Toolbook Archive |  | 
 [archive/atariCassetteTapeImage](https://discmaster.textfiles.com/search?formatid=atariCassetteTapeImage) | Atari Cassette Tape Image | .cas | [4 sample files](https://sembiance.com/fileFormatSamples/unsupported/atariCassetteTapeImage/)
 [archive/authorware](https://discmaster.textfiles.com/search?formatid=authorware) | Authorware Application/Package | .app .apw | [9 sample files](https://sembiance.com/fileFormatSamples/archive/authorware/) - Installed the latest Authorware 7.02 (sandbox/app/) but it wouldn't open the sample files, probably because they are 'packaged'. Couldn't locate a decompilier/depackager.
@@ -35,6 +36,7 @@ Family/Format | Name | Extensions | Notes
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/cpmHUFArchive](https://discmaster.textfiles.com/search?formatid=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
+[archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
@@ -69,6 +71,7 @@ Family/Format | Name | Extensions | Notes
 [archive/os2FTCOMP](https://discmaster.textfiles.com/search?formatid=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
+[archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
@@ -96,6 +99,7 @@ Family/Format | Name | Extensions | Notes
 [archive/wraptor](https://discmaster.textfiles.com/search?formatid=wraptor) | WRAptor Archive | .wra .wr3 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/wraptor/) - DirMaster says it supports WR3, but couldn't get anything useful from it.
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?formatid=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/xelaSoftArchive](https://discmaster.textfiles.com/search?formatid=xelaSoftArchive) | XelaSoft Archive | .xsa | 
+[archive/xpackPacked](https://discmaster.textfiles.com/search?formatid=xpackPacked) | XPACK Packed |  | 
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?formatid=zipscrubPacked) | ZIPSCRUB Packed |  | 
 [archive/zoomDiskImage](https://discmaster.textfiles.com/search?formatid=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 [archive/zxSpectrumTZXTape](https://discmaster.textfiles.com/search?formatid=zxSpectrumTZXTape) | ZX Spectrum TZX Tape | .tzx | 
@@ -284,7 +288,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (69)
+## Font (70)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -297,6 +301,7 @@ Family/Format | Name | Extensions | Notes
 [font/borlandGraphicsFont](https://discmaster.textfiles.com/search?formatid=borlandGraphicsFont) | [Borland Graphics Font](http://fileformats.archiveteam.org/wiki/CHR_(Borland_font)) | .chr .bgi | 
 [font/bradfordFont](https://discmaster.textfiles.com/search?formatid=bradfordFont) | Bradford Font | .bf2 | 
 [font/calamusFont](https://discmaster.textfiles.com/search?formatid=calamusFont) | Calamus Font | .cfn | [10 sample files](https://sembiance.com/fileFormatSamples/font/calamusFont/)
+[font/chaosMetafontFont](https://discmaster.textfiles.com/search?formatid=chaosMetafontFont) | CHAOS Metafont Font | .fnt | 
 [font/chiWriterPrinterFont](https://discmaster.textfiles.com/search?formatid=chiWriterPrinterFont) | ChiWriter Printer Font | .pft | 
 [font/chiWriterScreenFont](https://discmaster.textfiles.com/search?formatid=chiWriterScreenFont) | ChiWriter Screen Font | .sft | 
 [font/corelWiffenFont](https://discmaster.textfiles.com/search?formatid=corelWiffenFont) | Corel Wiffen Font | .wfn | 
@@ -577,7 +582,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (741)
+## Other (742)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -982,7 +987,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftMailServerForPCScript](https://discmaster.textfiles.com/search?formatid=microsoftMailServerForPCScript) | Microsoft Mail Server for PC Script | .scr | 
 [other/microsoftPrinterDefinition](https://discmaster.textfiles.com/search?formatid=microsoftPrinterDefinition) | Microsoft Printer Definition | .prd | 
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?formatid=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
-[other/microsoftProgramDatabase](https://discmaster.textfiles.com/search?formatid=microsoftProgramDatabase) | Microsoft Program Database | .pdb | 
+[other/microsoftProgramDatabase](https://discmaster.textfiles.com/search?formatid=microsoftProgramDatabase) | Microsoft Program Database | .pdb .ncb | 
 [other/microsoftSecurityCatalog](https://discmaster.textfiles.com/search?formatid=microsoftSecurityCatalog) | Microsoft Security Catalog | .cat | 
 [other/microsoftDebug](https://discmaster.textfiles.com/search?formatid=microsoftDebug) | Microsoft Separate Debug Format | .dbg | 
 [other/microsoftCertificateStore](https://discmaster.textfiles.com/search?formatid=microsoftCertificateStore) | Microsoft Serialized Certificate Store | .sst | 
@@ -1288,6 +1293,7 @@ Family/Format | Name | Extensions | Notes
 [other/winStormStormInfo](https://discmaster.textfiles.com/search?formatid=winStormStormInfo) | WinStorm Storm info | .sto | 
 [other/wintertreeThesaurusEngineDB](https://discmaster.textfiles.com/search?formatid=wintertreeThesaurusEngineDB) | Wintertree Thesaurus Engine DB | .tdb | 
 [other/wipeout2097TrackData](https://discmaster.textfiles.com/search?formatid=wipeout2097TrackData) | Wipeout 2097 Track Data | .wad | 
+[other/wordPerfectCaracterFontResource](https://discmaster.textfiles.com/search?formatid=wordPerfectCaracterFontResource) | WordPerfect Caracter/Font resource | .crs | 
 [other/wordPerfectDictionaryAdvise](https://discmaster.textfiles.com/search?formatid=wordPerfectDictionaryAdvise) | WordPerfect dictionary advise | .adv | 
 [other/wordPerfectDictionary](https://discmaster.textfiles.com/search?formatid=wordPerfectDictionary) | WordPerfect Disctionary | .lex .spn | 
 [other/wordPerfectDisplayResource](https://discmaster.textfiles.com/search?formatid=wordPerfectDisplayResource) | WordPerfect Display Resource | .drs | 

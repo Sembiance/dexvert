@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {Format} from "../../Format.js";
 
-const _IMF_MAGIC = ["E-Mail message", "news or mail", "news, ASCII text", "SMTP mail text"];
+const _IMF_MAGIC = ["E-Mail message", "news or mail", "news, ASCII text", "SMTP mail text", "SMTP mail,", "RFC 822 mail"];
 export {_IMF_MAGIC};
 
 export class imf extends Format

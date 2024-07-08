@@ -9,7 +9,7 @@ export class quarkXPress6 extends Program
 	args     = r => [r.inFile()];
 	osData   = ({
 		script : `
-			$mainWindow = WindowRequire("QuarkXPress Passport (tm)", "", 10)
+			$mainWindow = WindowRequire("QuarkXPress Passport (tm)", "", 20)
 			Func PreOpenWindows()
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some settings saved with this project are different", "{ENTER}")
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "uses fonts not installed", "{TAB}{ENTER}")
@@ -21,14 +21,15 @@ export class quarkXPress6 extends Program
 
 			$exportWindow = WindowRequire("Export as PDF", "", 5)
 			Send("c:\\out\\out.pdf{ENTER}")
-			WinWaitClose($exportWindow, "", 5)
+			WinWaitClose($exportWindow, "", 15)
 
 			Func PostExportWindows()
 				WindowDismiss("[TITLE:QuarkXPress (tm)]", "Some disk files for", "{ENTER}")
 			EndFunc
 			CallUntil("PostExportWindows", ${xu.SECOND*5})
+			WaitForStableFileSize("c:\\out\\out.pdf", ${xu.SECOND*2}, ${xu.SECOND*30})
 
-			WinWaitActive($mainWindow, "", 3)
+			WinWaitActive($mainWindow, "", 10)
 			
 			Send("^q")
 			

@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,347)
+# Unsupported File Formats (1,353)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (95)
+## Archive (100)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -30,6 +30,7 @@ Family/Format | Name | Extensions | Notes
 [archive/beOSInstallPackage](https://discmaster.textfiles.com/search?formatid=beOSInstallPackage) | BeOS Installation Package | .pkg | 
 [archive/beOSResourceData](https://discmaster.textfiles.com/search?formatid=beOSResourceData) | BeOS Resource Data | .rsrc | 
 [archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?formatid=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
+[archive/bsqEncodedData](https://discmaster.textfiles.com/search?formatid=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?formatid=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?formatid=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
@@ -54,6 +55,7 @@ Family/Format | Name | Extensions | Notes
 [archive/macOSInstallTome](https://discmaster.textfiles.com/search?formatid=macOSInstallTome) | [MacOS Installer Tome](http://fileformats.archiveteam.org/wiki/Tome) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/macOSInstallTome/) - Deark is working on adding this format.
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
+[archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?formatid=maximusInstallerArchive) | Maximus installer archive | .fiz | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -73,6 +75,7 @@ Family/Format | Name | Extensions | Notes
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
+[archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
@@ -89,8 +92,10 @@ Family/Format | Name | Extensions | Notes
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+[archive/thePatcherPacked](https://discmaster.textfiles.com/search?formatid=thePatcherPacked) | The Patcher Packed | .exe | 
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
+[archive/turboBatPacked](https://discmaster.textfiles.com/search?formatid=turboBatPacked) | TurboBat Packed | .com | 
 [archive/unixArchiveOld](https://discmaster.textfiles.com/search?formatid=unixArchiveOld) | Unix Archive - Old | .a | [8 sample files](https://sembiance.com/fileFormatSamples/archive/unixArchiveOld/)
 [archive/unrealPackage](https://discmaster.textfiles.com/search?formatid=unrealPackage) | Unreal Package | .ut2 .uasset | 
 [archive/viacomNewMedia](https://discmaster.textfiles.com/search?formatid=viacomNewMedia) | [Viacom New Media Sprite Archive](https://moddingwiki.shikadi.net/wiki/Viacom_New_Media_Graphics_File_Format) | .vnm .000 | [49 sample files](https://sembiance.com/fileFormatSamples/archive/viacomNewMedia/) - An obscure format that packs multiple bitmaps and sprites into a single archive. Found the following two projects that extract them: https://github.com/jmcclell/vnmgf-exporter Sadly neither one can correctly process/extract the VNM files I encountered. The github link is much closer and is in modern Go.
@@ -469,7 +474,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (107)
+## Music (108)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -493,6 +498,7 @@ Family/Format | Name | Extensions | Notes
 [music/cubaseSong](https://discmaster.textfiles.com/search?formatid=cubaseSong) | [Cubase Song](http://fileformats.archiveteam.org/wiki/ALL) | .all | [1 sample file](https://sembiance.com/fileFormatSamples/music/cubaseSong/)
 [music/cyberTracker64Chiptune](https://discmaster.textfiles.com/search?formatid=cyberTracker64Chiptune) | CyberTracker 64 Chiptune | .ct | 
 [music/iffCMUS](https://discmaster.textfiles.com/search?formatid=iffCMUS) | DeLuxe Music CMUS | .dmcs .iff | [2 sample files](https://sembiance.com/fileFormatSamples/music/iffCMUS/)
+[music/deluxeMusicConstructionSetMusic](https://discmaster.textfiles.com/search?formatid=deluxeMusicConstructionSetMusic) | Deluxe Music Construction Set music |  | 
 [music/deLuxeMusicScore](https://discmaster.textfiles.com/search?formatid=deLuxeMusicScore) | DeLuxe Music Score |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/deLuxeMusicScore/) - Likely from the Deluxe Music Construction Set
 [music/diamondWareDigitizedMusic](https://discmaster.textfiles.com/search?formatid=diamondWareDigitizedMusic) | [DiamondWare Digitized Music](http://fileformats.archiveteam.org/wiki/DiamondWare_Digitized) | .dwm | [7 sample files](https://sembiance.com/fileFormatSamples/music/diamondWareDigitizedMusic/) - Some kind of wrapped MIDI modified for OPL commands. Can be played with DOS PLAYDWM.EXE but no known converter back to midi or .wav
 [music/digitalSoundInterfaceKit](https://discmaster.textfiles.com/search?formatid=digitalSoundInterfaceKit) | Digital Sound Interface Kit Module | .dsm | [1 sample file](https://sembiance.com/fileFormatSamples/music/digitalSoundInterfaceKit/)
@@ -996,7 +1002,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftTutorialData](https://discmaster.textfiles.com/search?formatid=microsoftTutorialData) | Microsoft tutorial data | .sob | 
 [other/microsoftTutorialScreens](https://discmaster.textfiles.com/search?formatid=microsoftTutorialScreens) | Microsoft tutorial Screens | .scn | 
 [other/microsoftVisualCFiles](https://discmaster.textfiles.com/search?formatid=microsoftVisualCFiles) | Microsoft Visual C Files | .bsc .sbr .wsp | 
-[other/visualCLibrary](https://discmaster.textfiles.com/search?formatid=visualCLibrary) | Microsoft Visual C Library | .lib | 
+[other/visualCLibrary](https://discmaster.textfiles.com/search?formatid=visualCLibrary) | Microsoft Visual C/Basic Library | .lib | 
 [other/windowsProgramInfo](https://discmaster.textfiles.com/search?formatid=windowsProgramInfo) | Microsoft Windows Program Information File | .pif | 
 [other/microsoftWordGlossary](https://discmaster.textfiles.com/search?formatid=microsoftWordGlossary) | Microsoft Word Glossary | .gly | 
 [other/microsoftWordStyleSheet](https://discmaster.textfiles.com/search?formatid=microsoftWordStyleSheet) | Microsoft Word Style Sheet | .sty | 

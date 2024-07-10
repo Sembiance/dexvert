@@ -143,6 +143,7 @@ An object or a function that returns and object to be passed into dosUtil.run()
 	>>> timeout			Maximum duration of dosBox
 	>>> runIn			Can be "out" or "prog" to run the executable in the out or prog directory (default is E:\\)
 	>>> keys			An array of keys to press, 100ms interval between key presses. Strings are singles keys (or phrases). Special keys should be sub arrays like ["Enter"]. Can also use {delay : xu.SECOND} to insert extra delays between keys
+	>>> screenshot
 
 >>> wineData = ({timeout : xu.SECOND*30})  ||  wineData = async (runState) => ({...})
 An object or a function that returns and object to be passed into dosUtil.run()

@@ -15,7 +15,7 @@ export class foremost extends Program
 
 		// check to see if we just have a single subdir output, if so, move all files in that one up one dir
 		const dirNames = r.f.files.new.map(file => path.dirname(file.rel)).unique();
-		if(dirNames.length===1 && dirNames[0].split("/").length===2)
+		if(dirNames.length===1 && dirNames[0].replace(/^(\.\.\/)+/, "").split("/").length===2)
 			await r.f.files.new.parallelMap(async file => await file.moveUp(1));
 	};
 	renameOut = true;

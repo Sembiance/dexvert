@@ -105,6 +105,7 @@ const DEXMAGIC_CHECKS =
 	"Second Nature Slide Show"      : [{offset : 0, match : "Second Nature Software\r\nSlide Show\r\nCollection"}],
 	"SLP Image"                     : [{offset : 0, match : "2.0N"}],
 	"Universal BitMap Format"       : [{offset : 0, match : "UBF92a"}],
+	"Wiz Solitaire Deck"            : [{offset : 0, match : "WizSolitaireDeck"}],
 	"Young Picasso"                 : [{offset : 0, match : [0x50, 0x00, 0x00, 0x50, 0x00, 0x00, 0x52, 0x00, 0x00]}],
 	"ZX Spectrum BSP"               : [{offset : 0, match : "bsp"}, {offset : 3, match : [0xC0]}],
 	"ZX Spectrum CHR"               : [{offset : 0, match : "chr"}, {offset : 3, match : [0x24]}],

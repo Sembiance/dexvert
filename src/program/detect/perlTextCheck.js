@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {Detection} from "../../Detection.js";
 import {fileUtil, runUtil} from "xutil";
@@ -15,7 +16,8 @@ export class perlTextCheck extends Program
 	pre = async r =>
 	{
 		r.trimmedFilePath = await fileUtil.genTempPath();
-		await runUtil.run("trimGarbage", ["--newlines", r.inFile({absolute : true}), r.trimmedFilePath]);
+		if(r.f.input.size<xu.MB*15)
+			await runUtil.run("trimGarbage", ["--newlines", r.inFile({absolute : true}), r.trimmedFilePath]);
 		if(!(await fileUtil.exists(r.trimmedFilePath)))
 			delete r.trimmedFilePath;
 	};

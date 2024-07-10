@@ -13,6 +13,10 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.logLevel);
+
+if(!Deno.env.has("daemonized"))
+	Deno.exit(xlog.error`This program should only be run with startDexserver!`);
+
 const startedAt = performance.now();
 
 const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";

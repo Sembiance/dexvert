@@ -195,6 +195,62 @@ async function loadGameArchive({reload}={})
 	}
 }
 
+const packedFormatids = new Set();
+async function loadPacked({reload}={})
+{
+	if(reload)
+	{
+		for(const formatid of packedFormatids)
+			delete formats[formatid];
+		packedFormatids.clear();
+	}
+
+	const packedImport = await import(reload ? `./packed.js#${Date.now() + performance.now()}` :"./packed.js");
+
+	for(const converterType of ["unp", "cup386", "both"])
+	{
+		const packedFamilyFormats = packedImport[converterType];
+		for(const [familyid, packedFormats] of Object.entries(packedFamilyFormats))
+		{
+			for(const [formatid, o] of Object.entries(packedFormats))
+			{
+				if(formats[formatid])
+					throw new Error(`format [\${formatid}] in packed.js is a duplicate`);
+
+				const supportedKeys = ["filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
+				const extraKeys = Object.keys(o).subtractAll(supportedKeys);
+				if(extraKeys.length>0)
+					throw new Error(`packed format ${familyid}/${formatid} has extra keys that are not currently copied over to the Packed class, add them: ${extraKeys}`);
+				
+				class Packed extends Format
+				{
+					converters     = [];
+					ext            = [".exe", ".com"];
+					packed         = true;
+					forbidExtMatch = true;
+				}
+
+				formats[formatid] = Packed.create(families[familyid], format =>
+				{
+					for(const supportedKey of supportedKeys)
+					{
+						if(Object.hasOwn(o, supportedKey))
+							format[supportedKey] = o[supportedKey];
+					}
+
+					if(["both", "unp"].includes(converterType))
+						format.converters.push("unp");
+					if(["both", "cup386"].includes(converterType))
+						format.converters.push("cup386");
+				});
+
+				formats[formatid].formatid = formatid;
+				packedFormatids.add(formatid);
+			}
+		}
+	}
+}
+
 const textFormatids = new Set();
 async function loadText({reload}={})
 {
@@ -248,7 +304,7 @@ export async function init(xlog=new XLog("info"))
 
 	const formatFilePaths = await fileUtil.tree(formatDirPath, {nodir : true, regex : /[^/]+\/.+\.js$/});
 	xlog.info`Loading ${formatFilePaths.length} format files...`;
-	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive(), loadText()]));
+	await Promise.all(formatFilePaths.map(loadFormatFilePath).concat([loadUnsupported(), loadSimple(), loadGameArchive(), loadPacked(), loadText()]));
 	xlog.debug`Loaded ${Object.keys(formats).length} formats`;
 }
 
@@ -272,6 +328,10 @@ export async function formatChanged({type, filePath}, xlog=new XLog("info"))
 			else if(path.basename(filePath)==="gameArchive.js")
 			{
 				await loadGameArchive({reload : true});
+			}
+			else if(path.basename(filePath)==="packed.js")
+			{
+				await loadPacked({reload : true});
 			}
 			else if(path.basename(filePath)==="text.js")
 			{

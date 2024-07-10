@@ -234,7 +234,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 					if(!(format.ext || []).includes(inputFile.ext.toLowerCase()))
 						flags.renameKeepFilename = true;
 					else
-						flags.renameOut = true;
+						flags.renameOut = {ext : "", outExt : ""};	// this is to prevent a default program.outExt (like deark's .png) from being applied when working with a packed format like archive/exePackPacked/MAC2GIF.EXE
 				}
 
 				const r = await Program.runProgram(prog, dexState.f, {originalInput : dexState.original.input, isChain, format, xlog, flags});

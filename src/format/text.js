@@ -85,7 +85,7 @@ export default
 		pgpMessage                            : {name : "PGP Message", website : "http://fileformats.archiveteam.org/wiki/PGP", magic : ["PGP signed message", "PGP clear text signed message", "PGP ASCII-Armor", "PGP message, ASCII text", "PGP message Signature", "PGP armored data", "PGP signature", "PGP Nachricht", /^PGP message$/, /^PGP armored data, (signed )?message/]},
 		php                                   : {name : "PHP Script", website : "http://fileformats.archiveteam.org/wiki/PHP", ext : [".php", ".phps"], magic : ["PHP source", "PHP script"], weakMagic : true},
 		ppd                                   : {name : "PostScript Printer Description", website : "http://fileformats.archiveteam.org/wiki/PostScript_Printer_Description", ext : [".ppd", ".pp"], magic : ["PPD file", "PostScript Printer Description"]},
-		prologSourceCode                      : {name : "Prolog Source Code", ext : [".pro"], magic : ["Prolog Source Code"], weakMagic : true},
+		prologSource                          : {name : "Prolog Source", ext : [".pro"], magic : ["Prolog Source Code"], weakMagic : true},
 		ps2MicroChannelAdapterDescription     : {name : "PS/2 MicroChannel Adapter Description", ext : [".adf"], magic : ["PS/2 MicroChannel Adapter Description File"], weakMagic : true},
 		qrtRayTracerSceneDescription          : {name : "QRT Ray Tracer scene description", ext : [".qrt"], magic : ["QRT Ray Tracer scene description (with rem)"]},
 		reg                                   : {name : "Windows Registry Data", website : "http://fileformats.archiveteam.org/wiki/Windows_Registry", ext : [".reg", ".dat"], magic : [/^Windows Registry (Data|text)/, "Windows Registry Datei", "MS Windows 95/98/ME registry file"]},

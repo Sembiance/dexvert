@@ -239,9 +239,9 @@ async function loadPacked({reload}={})
 					}
 
 					if(["both", "unp"].includes(converterType))
-						format.converters.push("unp");
+						format.converters.push("unp[renameKeepFilename]");
 					if(["both", "cup386"].includes(converterType))
-						format.converters.push("cup386");
+						format.converters.push("cup386[renameKeepFilename]");
 				});
 
 				formats[formatid].formatid = formatid;

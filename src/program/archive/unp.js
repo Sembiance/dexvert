@@ -6,5 +6,5 @@ export class unp extends Program
 	loc       = "dos";
 	bin       = "UNP.EXE";
 	args      = async r => ["e", r.inFile({backslash : true}), await r.outFile("OUTFILE", {backslash : true})];
-	renameOut = true;
+	renameOut = false;
 }

@@ -381,6 +381,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
+	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
 	// These are actually a fallback packed archive, but the other converters are so flexible at handling things they get picked up first, which is ok

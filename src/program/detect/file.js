@@ -20,6 +20,8 @@ export class file extends Program
 		//     archive/rawPartition/Madame X Game.bin
 		//     archive/iso/The Girls of GLITZ.iso
 		//     text/txt/2.emlx
+		//	   archive/zip/neopnt21.zip		<-- This shows how bad file is. The '-  to extract' line is a continuation of the previous match, but the '-  Zip archive data' is a new match. We just can't really handle this, checking case of first letter is unsafe
+		//     document/dBaseMultipleIndex/CLIENT.MDX
 
 		r.meta.detections = [];
 		let confidence = 100;

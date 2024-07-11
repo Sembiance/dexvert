@@ -3,7 +3,7 @@
 //             ext : [".exe", ".com"]
 //	forbidExtMatch : true
 //          packed : true
-//	converters     : ["unp"] or ["cup386"] or ["unp", "cup386"]
+//	converters     : ["unp[renameKeepFilename]"] or ["cup386[renameKeepFilename]"] or ["unp[renameKeepFilename]", "cup386[renameKeepFilename]"]
 export const unp =
 {
 	archive :

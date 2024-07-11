@@ -148,6 +148,7 @@ export const WEAK_VALUES =
 	/^$/,	// eslint-disable-line no-control-regex
 	/^P;/,
 	/^[\d."']+$/,
+	/^to extract,/,
 
 	// FILE: Very weak checks:
 	/^, /,

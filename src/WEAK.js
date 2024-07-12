@@ -148,7 +148,6 @@ export const WEAK_VALUES =
 	/^$/,	// eslint-disable-line no-control-regex
 	/^P;/,
 	/^[\d."']+$/,
-	/^to extract,/,
 
 	// FILE: Very weak checks:
 	/^, /,
@@ -347,6 +346,7 @@ export const WEAK_VALUES =
 	/^locale data table/,
 	/^Logitech Compress archive data/,
 	/^Lotus 1-2-3 unknown formatting data/,
+	/^Lotus 1-2-3 CoNFiguration/,
 	/^LX executable/,
 	/^LZMA compressed data/,
 	/^MacBinary, /,
@@ -515,7 +515,7 @@ export const WEAK_VALUES =
 	/^x86 executable( \(TV\))?( not stripped)?/,
 	/^x86 OpenFirmware FORTH Dictionary/,
 	/^xBase index/,
-	/^xBase \(0x60\) MDX/,
+	/^xBase \([^)+]\) MDX/,
 	/^xBase, root pointer/,
 	/^YAC archive data/,
 	/^YAFFS filesystem root entry/,
@@ -863,7 +863,7 @@ export const WEAK_VALUES =
 	/^GnomeVFS$/,
 	/^Gravis UltraSound PnP InterWave patch$/,
 	/^HandStory eBook$/,
-	/^Harvard Graphics Presentation \(v[^)]+\)$/,
+	/^Harvard Graphics [Pp]resentation \(v[^)]+\)/,
 	/^HomeLab\/BraiLab Tape image$/,
 	/^HP Logical Interchange Format disk image$/,
 	/^HP200LX System Application's Help$/,

@@ -9,5 +9,5 @@ export class gifexe extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/GIFEXE";
 	magic      = _GIFEXE_MAGIC;
 	priority   = this.PRIORITY.HIGH;
-	converters = ["unp -> foremost", "cup386 -> foremost"];
+	converters = ["unp -> foremost", "cup386 -> foremost", "dosEXEScreenshot"];
 }

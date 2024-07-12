@@ -7,5 +7,5 @@ export class arc extends Format
 	ext        = [".arc", ".pak"];
 	magic      = ["PAK/ARC Compressed archive", "ARC archive data", "16bit DOS EXE ARC self extracting archive", /^ARC$/, /^ARC\+ archive data/];
 	idMeta     = ({macFileType}) => macFileType==="mArc";
-	converters = ["unar", "arc", "xarc", "deark[module:arc]", "deark[module:arcmac]", "izArc", "UniExtract[matchType:magic]"];
+	converters = ["unar", "arc", "xarc", "deark[module:arc]", "deark[module:arcmac]", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];
 }

@@ -7,5 +7,5 @@ export class bz2 extends Format
 	ext        = [".bz2", ".bzip2"];
 	packed     = true;
 	magic      = ["bzip2 compressed data", "bzip2 compressed archive", "BZIP2 Compressed Archive", "bz2: bzip2", "BZ Archiv gefunden", "bzip2-compressed data", "Archive: BZip2", /^Bzip2$/, /^x-fmt\/268( |$)/];
-	converters = ["bunzip2", "sevenZip", "ancient", "unar", "sqc", "izArc", "UniExtract"];	// izArc & UniExtract will fully extract, but this is better than not handling at all
+	converters = ["bunzip2", "sevenZip", "ancient", "unar", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];	// izArc & UniExtract will fully extract, but this is better than not handling at all
 }

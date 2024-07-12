@@ -7,5 +7,5 @@ export class compress extends Format
 	ext        = [".z", ".tz", ".taz"];
 	magic      = ["Compress compressed data", "compress'd data", "UNIX compressed data", "Z: Compress", "COMP16 Archiv gefunden", "Archive: Compress", /^compress-compressed data$/, /^Compress$/, /^fmt\/1671( |$)/];
 	packed     = true;
-	converters = ["ancient", "gunzip", "deark[module:compress]", "unar", "xfdDecrunch", "izArc"];
+	converters = ["ancient", "gunzip", "deark[module:compress]", "unar", "xfdDecrunch", "izArc[matchType:magic]"];
 }

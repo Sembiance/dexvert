@@ -13,7 +13,8 @@ export class trid extends Program
 	{
 		// trid is SUPER sensitive to certain filenames, so we copy it to a tmp file and run trid against that
 		r.tridTmpFilePath = await fileUtil.genTempPath();
-		await Deno.copyFile(r.inFile({absolute : true}), r.tridTmpFilePath);
+		if(await fileUtil.exists(r.inFile({absolute : true})))
+			await Deno.copyFile(r.inFile({absolute : true}), r.tridTmpFilePath);
 	};
 
 	args = r => [r.tridTmpFilePath, "-n:5"];

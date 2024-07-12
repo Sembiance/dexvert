@@ -2,10 +2,11 @@ import {Format} from "../../Format.js";
 
 export class rar extends Format
 {
-	name         = "Roshal Archive";
-	website      = "http://fileformats.archiveteam.org/wiki/RAR";
-	ext          = [".rar", ".exe"];
-	magic        = ["RAR archive data", "RAR compressed archive", "RAR Archive", "DOS RAR SFX Executable", "Installer: WinRAR Installer", /RAR self-extracting archive/, /^RAR$/, /^RAR 5$/,
+	name           = "Roshal Archive";
+	website        = "http://fileformats.archiveteam.org/wiki/RAR";
+	ext            = [".rar", ".exe"];
+	forbidExtMatch = [".exe"];
+	magic          = ["RAR archive data", "RAR compressed archive", "RAR Archive", "DOS RAR SFX Executable", "Installer: WinRAR Installer", /RAR self-extracting archive/, /^RAR$/, /^RAR 5$/,
 		"Embedded RAR", "RAR Archiv gefunden", "Archive: RAR", "OS/2 RAR SFXjr executable", /^fmt\/(411|613)( |$)/, /^x-fmt\/264( |$)/];
 	auxFiles     = (input, otherFiles) =>
 	{
@@ -18,7 +19,7 @@ export class rar extends Format
 		return pieces.length>0 ? pieces : false;
 	};
 
-	converters   = ["unrar", "unar", "sqc", "izArc", "UniExtract"];
+	converters   = ["unrar", "unar", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];
 	metaProvider = ["rarInfo"];
 	untouched    = dexState => !!dexState.meta.passwordProtected;
 	post         = dexState => Object.assign(dexState.meta, dexState.ran.find(({programid}) => programid==="unrar")?.meta || {});

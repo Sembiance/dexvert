@@ -12,6 +12,7 @@ const MAX_DURATION = xu.HOUR*2;
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
 const DESIRED_SAMPLE_COUNT = 10;
+const RECURSE_WORK_DIR_PATH = "/mnt/dexvert/recurse";
 
 // these formats should not be higlighted for sample inclusion on the admin item page for various resons
 const EXCLUDED_SAMPLE_FORMATS =
@@ -157,6 +158,8 @@ if(fullOutputPath.endsWith(".tar.gz"))
 	if(await fileUtil.exists(fullOutputPath))
 		Deno.exit(xlog.error`Output path ${fullOutputPath} already exists!`);
 
+	if(await fileUtil.exists(RECURSE_WORK_DIR_PATH))
+		await fileUtil.unlink(RECURSE_WORK_DIR_PATH, {recursive : true});
 	await Deno.mkdir("/mnt/dexvert/recurse", {recursive : true});
 	workDirPath = await fileUtil.genTempPath("/mnt/dexvert/recurse");
 	await Deno.mkdir(workDirPath, {recursive : true});

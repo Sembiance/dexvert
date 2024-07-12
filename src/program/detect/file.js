@@ -17,25 +17,60 @@ export class file extends Program
 		// The file source code itself is VERY messy and gross, so trying to modify/patch it to output a better seperator when --keep-going (MAGIC_CONTINUE) is used would be painful, I couldn't figure out where it's even happening at exactly
 		// So in the end we just do our best here, knowing that we'll get some grossness in the detections for some files, but hopefully this will improve with time as I discover more edge cases. Sigh.
 		// Other problematic files to use to test logic:
-		//     archive/rawPartition/Madame X Game.bin
 		//     archive/iso/The Girls of GLITZ.iso
-		//     text/txt/2.emlx
-		//	   archive/zip/neopnt21.zip		<-- This shows how bad file is. The '-  to extract' line is a continuation of the previous match, but the '-  Zip archive data' is a new match. We just can't really handle this, checking case of first letter is unsafe
+		//     archive/macBinary/Click
+		//     archive/rawPartition/Madame X Game.bin
+		//	   archive/zip/neopnt21.zip		<-- This shows how bad 'file' is. The '-  to extract' line is a continuation of the previous match, but the '-  Zip archive data' is a new match. We can't really handle this as checking case of 1st letter is unsafe
+		//     archive/zip/wresv111.zip
 		//     document/dBaseMultipleIndex/CLIENT.MDX
+		//     document/dbf/NUMEROS.DBF
+		//     document/dbf/STAMPS.DAT
+		//     executable/amigaExe/PowerPacker.pp
+		//     executable/elf/D3D.UC
+		//     image/gif/eb399.gif
+		//     text/txt/2.emlx
+		//     other/unknown/Bonus1.bin
 
 		r.meta.detections = [];
 		let confidence = 100;
 		let fileText =  r.stdout.trim();
+		r.xlog.debug`START fileText: ${fileText}`;
 
-		// First, replace things we know are the start of a new match
+		// Multi-line edgecases. First item of the array is the prefix and the second is a list of possible subsequent line prefixes that are a continuation of the match
+		const MULTI_LINE_PREFIXES =
+		[
+			[["FoxBase", "xBase"], ["DBF", "MDX"]],
+			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]]
+		];
+		for(const [prefixes, subfixes] of MULTI_LINE_PREFIXES)
+		{
+			for(const prefix of Array.force(prefixes))
+			{
+				for(const subfix of Array.force(subfixes))
+					fileText = fileText.replace(new RegExp(`(\n-  ?)?${prefix[0]}([^\n]+)\n-  ?${subfix}`, "g"), `$1${prefix[0]}$2 ${subfix}`);
+			}
+		}
+		r.xlog.debug`A fileText: ${fileText}`;
+
+		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
+		for(const prefix of ["to extract,", `[;:)(\\]["']`])
+			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
+		r.xlog.debug`B fileText: ${fileText}`;
+
+		// Replace things that are "usually" the start of a new match (but not always, sigh)
 		fileText = fileText.replace(/\n- {2}/g, "§");
+		r.xlog.debug`C fileText: ${fileText}`;
 
-		// Next things we are pretty certain are just an extension of the match from the previous line, combine those up with the previous line match text
+		// Things we are pretty sure are just an extension of the match from the previous line, combine those up with the previous line match text
 		fileText = fileText.replace(/\n[^ -]/g, "");
+		r.xlog.debug`D fileText: ${fileText}`;
+
 		fileText = fileText.replace(/\n- (.?),/g, "$1,");
+		r.xlog.debug`E fileText: ${fileText}`;
 
 		// Now handle remaining newline prefixes as a match seperator
 		fileText = fileText.replace(/\n- /g, "§");
+		r.xlog.debug`Z fileText: ${fileText}`;
 
 		if(fileText.includes("\n"))
 			r.xlog.error`Unhandled newline in file output, add support for this edge case in detect/file.js: ${JSON.stringify(fileText)}`;

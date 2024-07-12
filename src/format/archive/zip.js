@@ -6,7 +6,8 @@ export class zip extends Format
 	name           = "PKZip Archive";
 	website        = "http://fileformats.archiveteam.org/wiki/ZIP";
 	ext            = [".zip", ".exe"];
-	magic          =[
+	forbidExtMatch = [".exe"];
+	magic          = [
 		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/,
 		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", "QWK offline mail packet (ZIP compressed)", "End of Zip archive",
 		"Installer: Wise Installer[ZIP]", "Adventure Game Toolkit game package", /^x-fmt\/263( |$)/];
@@ -14,7 +15,7 @@ export class zip extends Format
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>
 	{
-		const r = ["sevenZip", "unzip", "deark[module:zip]", "deark[module:pklite]", "deark[module:zip][opt:zip:scanmode]", "unar", "sqc", "izArc"];
+		const r = ["sevenZip", "unzip", "deark[module:zip]", "deark[module:pklite]", "deark[module:zip][opt:zip:scanmode]", "unar", "sqc", "izArc[matchType:magic]"];
 		
 		// If we are macintoshjp, unar works best
 		if(RUNTIME.globalFlags?.osHint?.macintoshjp)

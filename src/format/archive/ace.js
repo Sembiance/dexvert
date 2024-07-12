@@ -6,5 +6,5 @@ export class ace extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/ACE";
 	ext        = [".ace"];
 	magic      = ["ACE archive data", "ACE compressed archive", "ACE Archiv gefunden", "Archive: ACE", /^Ace$/];
-	converters = ["unace", "sqc", "izArc"];
+	converters = ["unace", "sqc", "izArc[matchType:magic]"];
 }

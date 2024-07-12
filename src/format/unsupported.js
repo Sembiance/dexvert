@@ -579,7 +579,7 @@ export default
 		idaSerialKey                 : {name : "IDA serial key", ext : [".key"], magic : ["IDA serial key"]},
 		iffSDBG                      : {name : "Amiga IFF Debug File", ext : [".debug"], magic : ["IFF SDBG file"]},
 		installShieldUninstallScript : {name : "InstallShield Uninstall Script", ext : [".isu"], magic : ["InstallShield Uninstall Script", "installShield Uninstall Datei"]},
-		intellCOFFObject             : {name : "Intel Common Object File Format Object", ext : [".obj"], magic : [/^Intel .*Common Object File Format (COFF) object/, /^Intel .*COFF object file/]},
+		intellCOFFObject             : {name : "Intel Common Object File Format Object", ext : [".obj"], magic : [/^Intel .*Common Object File Format (COFF) object/, /^Intel .*COFF object file/], weakMagic : [/^Intel .*COFF object file/]},
 		javaClass                    : {name : "Java Class File", ext : [".class"], magic : ["Java Compiled Object Code", "compiled Java class data", "Java bytecode", "Format: Java Class File", "Kompilierter Java Bytecode", /^x-fmt\/415( |$)/]},
 		kickPascalUnitInterface      : {name : "KICK-Pascal Unit Interface", ext : [".u"], magic : ["KICK-Pascal Unit Interface"]},
 		linux8086ObjectFile          : {name : "Linux 8086 Object File", ext : [".o"], magic : ["Linux-8086 object file"]},

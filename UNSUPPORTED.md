@@ -254,13 +254,13 @@ Family/Format | Name | Extensions | Notes
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
 [executable/adventureGameExecutable](https://discmaster.textfiles.com/search?formatid=adventureGameExecutable) | Adventure Game eXecutable | .agx | 
 [executable/amigaDatatype](https://discmaster.textfiles.com/search?formatid=amigaDatatype) | Amiga Datatype | .datatype | 
-[executable/amigaExe](https://discmaster.textfiles.com/search?formatid=amigaExe) | AmigaOS Executable |  | 
+[executable/amigaExe](https://discmaster.textfiles.com/search?formatid=amigaExe) | AmigaOS Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/amigaExe/)
 [executable/atariCPX](https://discmaster.textfiles.com/search?formatid=atariCPX) | Atari Control Panel Extension Module | .cpx | [10 sample files](https://sembiance.com/fileFormatSamples/executable/atariCPX/)
 [executable/xex](https://discmaster.textfiles.com/search?formatid=xex) | Atari Executable | .xex | [4 sample files](https://sembiance.com/fileFormatSamples/executable/xex/)
 [executable/atariSTExe](https://discmaster.textfiles.com/search?formatid=atariSTExe) | Atari ST Executable |  | [11 sample files](https://sembiance.com/fileFormatSamples/executable/atariSTExe/)
 [executable/blackberryExecutable](https://discmaster.textfiles.com/search?formatid=blackberryExecutable) | BlackBerry Executable | .cod | 
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?formatid=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
-[executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable |  | 
+[executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?formatid=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
 [executable/hpPalmtopExecutable](https://discmaster.textfiles.com/search?formatid=hpPalmtopExecutable) | HP Palmtop Executable | .exm | [2 sample files](https://sembiance.com/fileFormatSamples/executable/hpPalmtopExecutable/)
 [executable/linux8086Exe](https://discmaster.textfiles.com/search?formatid=linux8086Exe) | Linux 8086 Executable |  | 
@@ -1243,7 +1243,7 @@ Family/Format | Name | Extensions | Notes
 [other/typeLibrary](https://discmaster.textfiles.com/search?formatid=typeLibrary) | Type Library | .tlb | 
 [other/uleadImageiioThumbnailInfo](https://discmaster.textfiles.com/search?formatid=uleadImageiioThumbnailInfo) | Ulead Imageioo Thumbnail Info | .pe3 .pe4 | [5 sample files](https://sembiance.com/fileFormatSamples/other/uleadImageiioThumbnailInfo/)
 [other/ultrabotsXenobotsScenery](https://discmaster.textfiles.com/search?formatid=ultrabotsXenobotsScenery) | Ultrabots/Xenobots Scenery | .usg | 
-[other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
+[other/unknown](https://discmaster.textfiles.com/search?formatid=unknown) | Unknown File |  | [1 sample file](https://sembiance.com/fileFormatSamples/other/unknown/) - I entertained this idea of a catch-all fallback format that would then use various tools to try and 'extract' out various sub-files like images, audio, etc. However these tools are very 'loose' and will extract a LOT of junk. So I'm leaving this out for now. If I ever add this back, other tools to consider adding in ADDITION to binwalk & foremost: photorec, testdisk, sleuthkit, magicrescue
 [other/unrealMap](https://discmaster.textfiles.com/search?formatid=unrealMap) | Unreal Map | .unr | 
 [other/valveSourceMap](https://discmaster.textfiles.com/search?formatid=valveSourceMap) | Valve Source Map | .bsp | 
 [other/vangeliSTeamAudioLibraryDevice](https://discmaster.textfiles.com/search?formatid=vangeliSTeamAudioLibraryDevice) | VangeliSTeam audio library Device | .swp .dev | 

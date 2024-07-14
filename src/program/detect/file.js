@@ -39,7 +39,9 @@ export class file extends Program
 		// Multi-line edgecases. First item of the array is the prefix and the second is a list of possible subsequent line prefixes that are a continuation of the match
 		const MULTI_LINE_PREFIXES =
 		[
-			[["FoxBase", "xBase"], ["DBF", "MDX"]],
+			[["dBase", "FoxBase", "xBase"], ["DBF", "MDX"]],
+			["Maco-O", ["executable", "object"]],
+			["PGP symmetric key encrypted data", "salted"],
 			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]]
 		];
 		for(const [prefixes, subfixes] of MULTI_LINE_PREFIXES)
@@ -53,7 +55,7 @@ export class file extends Program
 		r.xlog.debug`A fileText: ${fileText}`;
 
 		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
-		for(const prefix of ["to extract,", `[;:)(\\]["']`])
+		for(const prefix of ["at byte", "last modified", "to extract,", "version \\d", `[;:)(\\]["']`])
 			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
 		r.xlog.debug`B fileText: ${fileText}`;
 
@@ -70,6 +72,9 @@ export class file extends Program
 
 		// Now handle remaining newline prefixes as a match seperator
 		fileText = fileText.replace(/\n- /g, "§");
+		r.xlog.debug`F fileText: ${fileText}`;
+
+		fileText = fileText.replace(/§§/g, "§");
 		r.xlog.debug`Z fileText: ${fileText}`;
 
 		if(fileText.includes("\n"))

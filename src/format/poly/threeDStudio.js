@@ -5,6 +5,6 @@ export class threeDStudio extends Format
 	name       = "3D Studio Mesh";
 	website    = "http://fileformats.archiveteam.org/wiki/3DS";
 	ext        = [".3ds", ".max"];
-	magic      = ["3D Studio model", "3D Studio mesh", /^x-fmt\/19( |$)/];
+	magic      = ["3D Studio model", "3D Studio mesh", "3D Studio Max Scene", /^x-fmt\/19( |$)/];
 	converters = ["blender[format:3ds]", "polyTrans64[format:threeDStudio]", "assimp"];
 }

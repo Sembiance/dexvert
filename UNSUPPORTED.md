@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,353)
+# Unsupported File Formats (1,366)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (100)
+## Archive (110)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -33,19 +33,25 @@ Family/Format | Name | Extensions | Notes
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?formatid=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?formatid=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?formatid=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
+[archive/ciphatorProtectedV46](https://discmaster.textfiles.com/search?formatid=ciphatorProtectedV46) | cIPHATOR Protected | .exe | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
+[archive/comPackPacked](https://discmaster.textfiles.com/search?formatid=comPackPacked) | COM-Pack Packed | .com | 
 [archive/c16Tape](https://discmaster.textfiles.com/search?formatid=c16Tape) | Commodore 16 Tape | .tap | 
 [archive/corelThumbnails](https://discmaster.textfiles.com/search?formatid=corelThumbnails) | [Corel Thumbnails Archive](http://fileformats.archiveteam.org/wiki/CorelDRAW) |  | [8 sample files](https://sembiance.com/fileFormatSamples/archive/corelThumbnails/) - Contains a bunch of 'CDX' files that each start with CDRCOMP1. Wasn't able to locate anything on the internet that can process or open them. Even went so far as to install Corel ArtShow and tried to reverse engineer the DLL it uses (CDRFLT40.DLL) but failed. Sent an email to the libcdr creators, to see if they know of any info on the format, but never heard back. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/cpmHUFArchive](https://discmaster.textfiles.com/search?formatid=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
+[archive/cackrightPacked](https://discmaster.textfiles.com/search?formatid=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
+[archive/exeManagerProtected](https://discmaster.textfiles.com/search?formatid=exeManagerProtected) | EXE Manager protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?formatid=exePackerPacked) | EXE Packer Packed |  | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/foxProArchive](https://discmaster.textfiles.com/search?formatid=foxProArchive) | FoxPro Archive | .pak | 
 [archive/freeArc](https://discmaster.textfiles.com/search?formatid=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
+[archive/hackStopProtected](https://discmaster.textfiles.com/search?formatid=hackStopProtected) | HackStop Protected | .exe | 
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?formatid=imageLibrarianArchive) | Image Librarian archive | .ril | 
 [archive/installerVISE](https://discmaster.textfiles.com/search?formatid=installerVISE) | [Installer VISE Package](https://en.wikipedia.org/wiki/Installer_VISE) | .mac | [5 sample files](https://sembiance.com/fileFormatSamples/archive/installerVISE/)
@@ -67,6 +73,7 @@ Family/Format | Name | Extensions | Notes
 [archive/newtonPackage](https://discmaster.textfiles.com/search?formatid=newtonPackage) | Newton Package | .pkg | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?formatid=nortonBackupFile) | Norton Backup file | .001 | 
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
+[archive/ntShellProtected](https://discmaster.textfiles.com/search?formatid=ntShellProtected) | NTShell protected | .exe | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?formatid=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
 [archive/oricDisk](https://discmaster.textfiles.com/search?formatid=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?formatid=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
@@ -74,6 +81,7 @@ Family/Format | Name | Extensions | Notes
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
+[archive/petitePacked](https://discmaster.textfiles.com/search?formatid=petitePacked) | Petite Packed | .exe | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
@@ -92,6 +100,7 @@ Family/Format | Name | Extensions | Notes
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/ted5Archive](https://discmaster.textfiles.com/search?formatid=ted5Archive) | [TED5 Archive](https://moddingwiki.shikadi.net/wiki/TED5) | .wl1 .ck4 .ck6 | [4 sample files](https://sembiance.com/fileFormatSamples/archive/ted5Archive/) - An archive format created by TED5. Used for games like Commander Keen. The format is detailed on the wiki link above, so in theory I could create an extractor for it.
+[archive/theBuilderPacked](https://discmaster.textfiles.com/search?formatid=theBuilderPacked) | The Builder Packed | .exe | 
 [archive/thePatcherPacked](https://discmaster.textfiles.com/search?formatid=thePatcherPacked) | The Patcher Packed | .exe | 
 [archive/printShopDAT](https://discmaster.textfiles.com/search?formatid=printShopDAT) | [The Print Shop DAT](http://fileformats.archiveteam.org/wiki/The_Print_Shop) | .dat | [1 sample file](https://sembiance.com/fileFormatSamples/archive/printShopDAT/) - Deark will extract almost anything ending in .dat and produce garbage PNG files. Since we don't have a better way to identify these files, this can't be safely enabled right now.
 [archive/topDrawShapes](https://discmaster.textfiles.com/search?formatid=topDrawShapes) | [Top Draw Shapes Archive](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tds .td | [3 sample files](https://sembiance.com/fileFormatSamples/archive/topDrawShapes/) - No known extractor. I could probably use the original program and figure out a way to get them out, but meh.
@@ -105,6 +114,7 @@ Family/Format | Name | Extensions | Notes
 [archive/wwarpDiskImage](https://discmaster.textfiles.com/search?formatid=wwarpDiskImage) | WWarp Disk Image | .wwp | 
 [archive/xelaSoftArchive](https://discmaster.textfiles.com/search?formatid=xelaSoftArchive) | XelaSoft Archive | .xsa | 
 [archive/xpackPacked](https://discmaster.textfiles.com/search?formatid=xpackPacked) | XPACK Packed |  | 
+[archive/yodasCrypterProtected](https://discmaster.textfiles.com/search?formatid=yodasCrypterProtected) | Yoda's Crypte Protected | .exe | 
 [archive/zipscrubPacked](https://discmaster.textfiles.com/search?formatid=zipscrubPacked) | ZIPSCRUB Packed |  | 
 [archive/zoomDiskImage](https://discmaster.textfiles.com/search?formatid=zoomDiskImage) | ZOOM Disk Image | .zom | [1 sample file](https://sembiance.com/fileFormatSamples/archive/zoomDiskImage/) - No known modern converter/extractor. Amiga program ZOOM to create and write to floppy: http://aminet.net/package/misc/fish/fish-0459
 [archive/zxSpectrumTZXTape](https://discmaster.textfiles.com/search?formatid=zxSpectrumTZXTape) | ZX Spectrum TZX Tape | .tzx | 
@@ -248,7 +258,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (39)
+## Executable (40)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -289,6 +299,7 @@ Family/Format | Name | Extensions | Notes
 [executable/superbaseProgram](https://discmaster.textfiles.com/search?formatid=superbaseProgram) | Superbase Program | .sbp | 
 [executable/tiCalcProgram](https://discmaster.textfiles.com/search?formatid=tiCalcProgram) | Texas Instruments Calculator Program | .73p .82p .83p .85p .86p .89p .92p | 
 [executable/vmsVAXExecutable](https://discmaster.textfiles.com/search?formatid=vmsVAXExecutable) | VMS VAX executable | .vxe | 
+[executable/windowsAudioCompressionManagerDriver](https://discmaster.textfiles.com/search?formatid=windowsAudioCompressionManagerDriver) | Windows Audio Compression Manager driver | .acm | 
 [executable/xBoxExecutable](https://discmaster.textfiles.com/search?formatid=xBoxExecutable) | Xbox Executable | .xbe | [2 sample files](https://sembiance.com/fileFormatSamples/executable/xBoxExecutable/)
 
 
@@ -484,7 +495,7 @@ Family/Format | Name | Extensions | Notes
 [music/allSoundTracker](https://discmaster.textfiles.com/search?formatid=allSoundTracker) | All Sound Tracker Module | .ast | [2 sample files](https://sembiance.com/fileFormatSamples/music/allSoundTracker/)
 [music/andXSynth](https://discmaster.textfiles.com/search?formatid=andXSynth) | AND XSynth Module | .amx | [1 sample file](https://sembiance.com/fileFormatSamples/music/andXSynth/)
 [music/ansiMusic](https://discmaster.textfiles.com/search?formatid=ansiMusic) | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
-[music/aProSys](https://discmaster.textfiles.com/search?formatid=aProSys) | AProSys Module | .amx | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
+[music/aProSys](https://discmaster.textfiles.com/search?formatid=aProSys) | AProSys Module | .amx .aps | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
 [music/axsModule](https://discmaster.textfiles.com/search?formatid=axsModule) | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
 [music/aySTRC](https://discmaster.textfiles.com/search?formatid=aySTRC) | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)
 [music/beepola](https://discmaster.textfiles.com/search?formatid=beepola) | Beepola Module | .bbsong | [3 sample files](https://sembiance.com/fileFormatSamples/music/beepola/)
@@ -1077,6 +1088,7 @@ Family/Format | Name | Extensions | Notes
 [other/pkcsCryptographicMessageFile](https://discmaster.textfiles.com/search?formatid=pkcsCryptographicMessageFile) | PKCS Cryptographic Message File |  | 
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
 [other/platinenLayoutBibliotheken](https://discmaster.textfiles.com/search?formatid=platinenLayoutBibliotheken) | Platinen Layout Programm Bibliotheken/library | .bib | 
+[other/platinenLayoutProgrammMacro](https://discmaster.textfiles.com/search?formatid=platinenLayoutProgrammMacro) | Platinen Layout Programm Macro | .mac | 
 [other/plbmGamesGameData](https://discmaster.textfiles.com/search?formatid=plbmGamesGameData) | PLBM Games game data | .lcr | 
 [other/polyfilmPrefs](https://discmaster.textfiles.com/search?formatid=polyfilmPrefs) | Polyfilm Preferences | .prf | 
 [other/portsOfCallSaveGame](https://discmaster.textfiles.com/search?formatid=portsOfCallSaveGame) | Ports of Call Save Game | .trp | 
@@ -1218,8 +1230,7 @@ Family/Format | Name | Extensions | Notes
 [other/theNortonAntiVirusSignatures](https://discmaster.textfiles.com/search?formatid=theNortonAntiVirusSignatures) | The Norton AntiVirus Virus Signatures | .dat | 
 [other/thePerfectGeneralFile](https://discmaster.textfiles.com/search?formatid=thePerfectGeneralFile) | The Perfect General File | .scn .cfg .mdt .mgr | 
 [other/theirFinestHourMission](https://discmaster.textfiles.com/search?formatid=theirFinestHourMission) | Their Finest Hour: The Battle of Britain mission | .flt | 
-[other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .sig | 
-[other/thunderbyteRegistrationKey](https://discmaster.textfiles.com/search?formatid=thunderbyteRegistrationKey) | Thunderbyte registration Key | .key | 
+[other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .key .sig | 
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 
@@ -1336,12 +1347,13 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (35)
+## Poly (37)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
 [poly/threeDDGFModel](https://discmaster.textfiles.com/search?formatid=threeDDGFModel) | 3D Dgf Model | .dgf .3dgfo | 
 [poly/threeDStudioLoftObject](https://discmaster.textfiles.com/search?formatid=threeDStudioLoftObject) | 3D Studio Loft Object | .lft | 
+[poly/aegisAnimatorPolygon](https://discmaster.textfiles.com/search?formatid=aegisAnimatorPolygon) | Aegis Animator Polygon | .poly | 
 [poly/amapi3DModel](https://discmaster.textfiles.com/search?formatid=amapi3DModel) | Amapi 3D Model | .a3d .x | [6 sample files](https://sembiance.com/fileFormatSamples/poly/amapi3DModel/)
 [poly/autoRENDER3DModel](https://discmaster.textfiles.com/search?formatid=autoRENDER3DModel) | AutoRENDER 3D model | .a3d | 
 [poly/autoShadeRenderingSlide](https://discmaster.textfiles.com/search?formatid=autoShadeRenderingSlide) | AutoShade Rendering Slide | .rnd | 
@@ -1350,6 +1362,7 @@ Family/Format | Name | Extensions | Notes
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?formatid=dynaCADDPart) | DynaCADD Part | .prt .dpt | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/infiniDScene](https://discmaster.textfiles.com/search?formatid=infiniDScene) | [Infini-D Scene](http://fileformats.archiveteam.org/wiki/Infini-D) | .ids .id4 | [7 sample files](https://sembiance.com/fileFormatSamples/poly/infiniDScene/) - Most of it's life was a Mac only app. Later a version was released for windows, but it crashes in my 86box vms due to 'not enough RAM' which is likely a bug because it has too much RAM available.
+[poly/irit3DModel](https://discmaster.textfiles.com/search?formatid=irit3DModel) | IRIT 3D model | .irt .dat | 
 [poly/kml](https://discmaster.textfiles.com/search?formatid=kml) | [Keyhole Markup Language](http://fileformats.archiveteam.org/wiki/KML) | .kml .kmz | [4 sample files](https://sembiance.com/fileFormatSamples/poly/kml/)
 [poly/mayaScene](https://discmaster.textfiles.com/search?formatid=mayaScene) | [Maya Scene](http://fileformats.archiveteam.org/wiki/Maya_scene) | .mb .ma | [7 sample files](https://sembiance.com/fileFormatSamples/poly/mayaScene/) - So the discmaster site only has like 64 unique maya files. Maya 5 would only open 1 of my sample files, the others being newer than that. Assimp claims some ASCII version support, but didn't handle any of my samples. MilkShape3D also says limited support for ASCII, but it crashed on all my samples. It's also a massive pain to get Maya running and due to the tiny number of files in the wild, just not worth supporting right now.
 [poly/mobile3DGraphic](https://discmaster.textfiles.com/search?formatid=mobile3DGraphic) | [Mobile 3D Graphic](http://www.j2megame.org/j2meapi/JSR_184_Mobile_3D_Graphics_API_1_1/file-format.html) | .m3g | 

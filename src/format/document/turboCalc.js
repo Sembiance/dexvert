@@ -4,6 +4,6 @@ export class turboCalc extends Format
 {
 	name        = "TurboCalc Document";
 	ext         = [".tcd"];
-	magic       = ["TurboCalc Document"];
+	magic       = ["TurboCalc Document", /^fmt\/1585( |$)/];
 	unsupported = true;
 }

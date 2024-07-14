@@ -44,6 +44,7 @@ export const both =
 		axePacked         : {name : "AXE Packed", magic : ["16bit DOS AXE compressed Executable", "16bit DOS EXE AXE compressed"]},
 		cheatPackerPacked : {name : "Cheat Packer Packed", magic : ["Packer: Cheat packer"]},
 		dietPacked        : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed"]},
+		neobookPacked     : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},
 		packwinPacked     : {name : "PACKWIN Packed", magic : ["16bit DOS EXE PACKWIN compressed"]},
 		pmgpakPacked      : {name : "PMGPAK Packed", magic : ["Packer: PGMPAK"]},
 		scrnchPacked      : {name : "SCRNCH Packed", magic : ["Packer: SCRNCH", "SCRNCH compressed"]},

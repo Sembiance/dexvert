@@ -8,5 +8,5 @@ export class grabber extends Format
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
 	magic          = [/16bit DOS (EXE|COM) GRABBER/];
-	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:85]`];
+	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
 }

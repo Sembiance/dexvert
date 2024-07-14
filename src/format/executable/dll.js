@@ -11,7 +11,9 @@ export class dll extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/Dynamic-link_library_(Windows)";
 	ext          = [".dll"];
 	forbiddenExt = [".exe"];
-	magic        = ["Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)"];
+	magic        = ["Win32 Dynamic Link Library", "PE32 executable (DLL)", "PE32+ executable (DLL)", /^MS-DOS executable, NE for MS Windows .*\(DLL or font\)/, "PE Unknown PE signature 0 (DLL)",
+		"Photoshop filter plug-in", "PhotoShop plug-in", "NT5 Migrate DLL"
+	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

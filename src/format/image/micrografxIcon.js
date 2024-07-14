@@ -5,7 +5,7 @@ export class micrografxIcon extends Format
 	name        = "Micrografx Icon";
 	website     = "http://fileformats.archiveteam.org/wiki/Micrografx_Icon";
 	ext         = [".icn"];
-	magic       = ["Micrografx Icon"];
+	magic       = ["Micrografx Icon", /^fmt\/1907( |$)/];
 	unsupported = true;
 	notes       = "No known converter.";
 }

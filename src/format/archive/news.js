@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class news extends Format
 {
 	name       = "Newsgroup Content";
-	magic      = ["saved news"];	// These additional magics match test/sample/text/txt/*.NN  [/^news, /, /^news$/]  but it's just a single article each so unnews doesn't work on them right now
+	magic      = ["saved news", /^(old )?news(, ASCII|ISO-8859 )?( text)?/, /^batched news text/];
 	converters = ["unnews"];
+	notes      = "Converter currently doesn't handle when just a single newsgroup message is saved in a file";
 }

@@ -8,7 +8,9 @@ import {_DMG_DISK_IMAGE_MAGIC} from "./dmg.js";
 import {_NULL_BYTES_MAGIC} from "../other/nullBytes.js";
 import {_APPLE_DISK_COPY_MAGIC} from "./appleDiskCopy.js";
 
-const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image", /^Apple HFS Plus Extended/, "Apple Partition Map (APM) disk image", "Apple partition map,"];
+const HFS_MAGICS = ["Apple ISO9660/HFS hybrid CD image", /^Apple Driver Map.*Apple_HFS/, "PC formatted floppy with no filesystem", "High Sierra CD-ROM", "HFS+ / Mac OS Extended disk image",
+	/^Apple HFS Plus/, /^HFS Plus/, "Apple Partition Map (APM) disk image", "Apple partition map,"
+];
 
 async function validCUEFile(dexState, cueFile)
 {
@@ -39,7 +41,7 @@ export class iso extends Format
 		/^First .*are blank$/,
 		...HFS_MAGICS
 	];
-	weakMagic = [/^First .* are blank$/];
+	weakMagic      = [/^First .* are blank$/, /^Apple HFS Plus/, /^HFS Plus/];
 	forbiddenMagic = [..._NULL_BYTES_MAGIC, ..._DMG_DISK_IMAGE_MAGIC];
 
 	priority     = this.PRIORITY.HIGH;

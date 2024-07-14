@@ -6,12 +6,21 @@ export class exe extends Format
 	website = "http://fileformats.archiveteam.org/wiki/EXE";
 	ext     = [".exe"];
 	magic   = [
-		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS [Ee]xecutable$/, /^Microsoft .*DOS Executable/,
-		"DOS Executable", "DOS Borland compiled Executable (generic)", "Graphic Workshop self-displaying picture executable", "OS/2 Executable", "32bit DOS Executable", "DOS/4G DOS Extender Executable", "GFA BASIC Win 3.x compiled Executable",
-		"Microsoft executable", "PE32 executable", /^Win\d\d Executable/, "Win16 NE executable", "InstallShield setup", "OS/2 Presentation Manager Executable", "DOS Turbo Basic executable", "Win16 EDI Install Pro executable",
-		/^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/, "Microsoft Pascal 16-bit executable", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable",
-		"Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", "JEMM memory manager",
-		/^NSIS$/, /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/899( |$)/, /^x-fmt\/(409|410|411)( |$)/];	// TODO: Once most packers are supported, add to this magic list as a fallback: , "16bit DOS EXE"
+		// general exe type
+		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS [Ee]xecutable$/, /^Microsoft .*DOS Executable/, "DOS Executable", "OS/2 Executable", "32bit DOS Executable",
+		"Microsoft executable", "PE32 executable", /^Win\d\d Executable/, "Win16 NE executable", /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/899( |$)/, /^x-fmt\/(409|410|411)( |$)/,
+
+		// specific exe types
+		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
+		"Graphic Workshop self-displaying picture executable",
+
+		// created by
+		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
+		"Microsoft Pascal 16-bit executable",
+		
+		// installers
+		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer",
+		"Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", "Installer: AOLSetup", /^NSIS$/];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

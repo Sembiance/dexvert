@@ -267,7 +267,7 @@ async function loadText({reload}={})
 		for(const [formatid, o] of Object.entries(textFormats))
 		{
 			if(formats[formatid])
-				throw new Error(`format [\${formatid}] in text.js is a duplicate`);
+				throw new Error(`format [${formatid}] in text.js is a duplicate`);
 
 			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
 			const extraKeys = Object.keys(o).subtractAll(supportedKeys);

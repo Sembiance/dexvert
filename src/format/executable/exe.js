@@ -12,14 +12,14 @@ export class exe extends Format
 
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
-		"Graphic Workshop self-displaying picture executable",
+		"Graphic Workshop self-displaying picture executable", "MOZART tune",
 
 		// created by
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
-		"Microsoft Pascal 16-bit executable",
+		/^Microsoft Pascal (v[\d.]+ )?16-bit executable$/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable	",
 		
-		// installers
-		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer",
+		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers
+		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable",
 		"Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", "Installer: AOLSetup", /^NSIS$/];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

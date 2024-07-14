@@ -6,8 +6,16 @@ export class com extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/DOS_executable_(.com)";
 	ext            = [".com", ".c0m"];
 	forbidExtMatch = true;
-	magic          = ["DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "ASIC compiled DOS COM", "DOS COM Executable Datei", "Borland Turbo Pascal 3.0x DOS Command", "ZBASIC MS-DOS COM executable",
-		"Borland Turbo Pascal 2.0x DOS Command", "P-Screen COM Screen", "XEQ executable Command library", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver"];
+	magic          = [
+		// general com types
+		"DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "DOS COM Executable Datei",
+
+		// specific com types
+		"XEQ executable Command library", "P-Screen COM Screen", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver",
+
+		// compiled by
+		"ASIC compiled DOS COM", /^Borland Turbo Pascal [\d.x]+ DOS Command/, "ZBASIC MS-DOS COM executable", "16bit COM ZBasic compiled"
+	];
 	unsupported    = true;
 }
 

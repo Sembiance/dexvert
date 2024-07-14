@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,366)
+# Unsupported File Formats (1,373)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (110)
+## Archive (111)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -41,6 +41,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cpmHUFArchive](https://discmaster.textfiles.com/search?formatid=cpmHUFArchive) | [CP/M HUF Archive](http://fileformats.archiveteam.org/wiki/HUF_(CP/M)) | .huf | [4 sample files](https://sembiance.com/fileFormatSamples/archive/cpmHUFArchive/)
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?formatid=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
+[archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE encrypted | .exe | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
@@ -172,7 +173,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (80)
+## Document (81)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -214,6 +215,7 @@ Family/Format | Name | Extensions | Notes
 [document/hotHelpText](https://discmaster.textfiles.com/search?formatid=hotHelpText) | [HotHelp Text](http://fileformats.archiveteam.org/wiki/HotHelp) | .txt .hdr | [6 sample files](https://sembiance.com/fileFormatSamples/document/hotHelpText/)
 [document/hyperSlidePresentation](https://discmaster.textfiles.com/search?formatid=hyperSlidePresentation) | HyperSlide presentation | .hsl | 
 [document/iesHyperText](https://discmaster.textfiles.com/search?formatid=iesHyperText) | I.E.S. HyperText | .hyp | [6 sample files](https://sembiance.com/fileFormatSamples/document/iesHyperText/)
+[document/ibmDisplayWriteDocument](https://discmaster.textfiles.com/search?formatid=ibmDisplayWriteDocument) | IBM DisplayWrite Document | .doc | 
 [document/improvSpreadsheet](https://discmaster.textfiles.com/search?formatid=improvSpreadsheet) | Improv spreadsheet | .imp | 
 [document/installShieldCompiledScript](https://discmaster.textfiles.com/search?formatid=installShieldCompiledScript) | InstallShield Compiled Script | .inx | [10 sample files](https://sembiance.com/fileFormatSamples/document/installShieldCompiledScript/) - We used to decompile this using SID, but it produces nearly useless boilerplate content
 [document/interBaseDB](https://discmaster.textfiles.com/search?formatid=interBaseDB) | InterBase/Firebird Database | .gdb .fdb | In theory I could import it into a running FireBird instance and then export to CSV/SQL, but meh.
@@ -258,7 +260,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (40)
+## Executable (41)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -272,6 +274,7 @@ Family/Format | Name | Extensions | Notes
 [executable/digiPAKAudioDriver](https://discmaster.textfiles.com/search?formatid=digiPAKAudioDriver) | DIGIPAK audio driver | .com | 
 [executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?formatid=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
+[executable/geoWorksGEOSApplication](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSApplication) | GeoWorks GEOS application | .geo | 
 [executable/hpPalmtopExecutable](https://discmaster.textfiles.com/search?formatid=hpPalmtopExecutable) | HP Palmtop Executable | .exm | [2 sample files](https://sembiance.com/fileFormatSamples/executable/hpPalmtopExecutable/)
 [executable/linux8086Exe](https://discmaster.textfiles.com/search?formatid=linux8086Exe) | Linux 8086 Executable |  | 
 [executable/linux386Exe](https://discmaster.textfiles.com/search?formatid=linux386Exe) | Linux i386 Executable |  | 
@@ -380,7 +383,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (99)
+## Image (100)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -419,6 +422,7 @@ Family/Format | Name | Extensions | Notes
 [image/freelanceGraphicsDrawing](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsDrawing) | Freelance Graphics Drawing | .drw | 
 [image/fxgBitmap](https://discmaster.textfiles.com/search?formatid=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
 [image/genericCADD](https://discmaster.textfiles.com/search?formatid=genericCADD) | Generic CADD | .gcd | 
+[image/geoWorksGeoDrawDrawing](https://discmaster.textfiles.com/search?formatid=geoWorksGeoDrawDrawing) | GeoWorks GeoDraw drawing | .000 | 
 [image/graphicWorksVectorDrawing](https://discmaster.textfiles.com/search?formatid=graphicWorksVectorDrawing) | GraphicWorks Vector Drawing | .dvg | 
 [image/greenstreetDrawing](https://discmaster.textfiles.com/search?formatid=greenstreetDrawing) | Greenstreet Drawing | .art | [6 sample files](https://sembiance.com/fileFormatSamples/image/greenstreetDrawing/)
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?formatid=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
@@ -599,7 +603,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (742)
+## Other (744)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -868,6 +872,7 @@ Family/Format | Name | Extensions | Notes
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gdsIIStream](https://discmaster.textfiles.com/search?formatid=gdsIIStream) | GDSII stream | .gds | 
 [other/geePrinterDriver](https://discmaster.textfiles.com/search?formatid=geePrinterDriver) | Gee! Printer Driver | .pdr | 
+[other/geoWorksDirectoryInfo](https://discmaster.textfiles.com/search?formatid=geoWorksDirectoryInfo) | GeoWorks directory info | .000 | 
 [other/geoWorksGEOSData](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSData) | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?formatid=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
@@ -990,7 +995,6 @@ Family/Format | Name | Extensions | Notes
 [other/mgpaFileGameArchive](https://discmaster.textfiles.com/search?formatid=mgpaFileGameArchive) | MGPA-file game archive | .dat | 
 [other/microFocusCobolLibrary](https://discmaster.textfiles.com/search?formatid=microFocusCobolLibrary) | Micro Focus Cobol library | .lbr | 
 [other/microFocusCOBOLLibrary](https://discmaster.textfiles.com/search?formatid=microFocusCOBOLLibrary) | Micro Focus COBOL Library | .lbr | 
-[other/microFocusFile](https://discmaster.textfiles.com/search?formatid=microFocusFile) | Micro Focus File | .dat | 
 [other/microFocusIndexFile](https://discmaster.textfiles.com/search?formatid=microFocusIndexFile) | Micro Focus Index File | .idx | 
 [other/microLatheObject](https://discmaster.textfiles.com/search?formatid=microLatheObject) | Micro Lathe Object | .lat | 
 [other/microProSpellStarDictionary](https://discmaster.textfiles.com/search?formatid=microProSpellStarDictionary) | MicroPro SpellStar dictionary | .dct | 
@@ -1012,6 +1016,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftTutorialCourseText](https://discmaster.textfiles.com/search?formatid=microsoftTutorialCourseText) | Microsoft tutorial Course Text | .ctx | 
 [other/microsoftTutorialData](https://discmaster.textfiles.com/search?formatid=microsoftTutorialData) | Microsoft tutorial data | .sob | 
 [other/microsoftTutorialScreens](https://discmaster.textfiles.com/search?formatid=microsoftTutorialScreens) | Microsoft tutorial Screens | .scn | 
+[other/microsoftVBDOSQuickLibrary](https://discmaster.textfiles.com/search?formatid=microsoftVBDOSQuickLibrary) | Microsoft VBDOS Quick library | .qlb | 
 [other/microsoftVisualCFiles](https://discmaster.textfiles.com/search?formatid=microsoftVisualCFiles) | Microsoft Visual C Files | .bsc .sbr .wsp | 
 [other/visualCLibrary](https://discmaster.textfiles.com/search?formatid=visualCLibrary) | Microsoft Visual C/Basic Library | .lib | 
 [other/windowsProgramInfo](https://discmaster.textfiles.com/search?formatid=windowsProgramInfo) | Microsoft Windows Program Information File | .pif | 
@@ -1050,6 +1055,7 @@ Family/Format | Name | Extensions | Notes
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonFileInfoData](https://discmaster.textfiles.com/search?formatid=nortonFileInfoData) | Norton FileInfo data | .fi | 
+[other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?formatid=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 
 [other/novellSystemPrintDef](https://discmaster.textfiles.com/search?formatid=novellSystemPrintDef) | Novell System PrintDef Device Definition | .pdf | 
 [other/numberMunchersConfiguration](https://discmaster.textfiles.com/search?formatid=numberMunchersConfiguration) | Number Munchers Configuration | .cfg | 
 [other/nuMegaSymbolFormat](https://discmaster.textfiles.com/search?formatid=nuMegaSymbolFormat) | NuMega Symbol format | .nms | 
@@ -1347,7 +1353,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (37)
+## Poly (38)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1357,6 +1363,7 @@ Family/Format | Name | Extensions | Notes
 [poly/amapi3DModel](https://discmaster.textfiles.com/search?formatid=amapi3DModel) | Amapi 3D Model | .a3d .x | [6 sample files](https://sembiance.com/fileFormatSamples/poly/amapi3DModel/)
 [poly/autoRENDER3DModel](https://discmaster.textfiles.com/search?formatid=autoRENDER3DModel) | AutoRENDER 3D model | .a3d | 
 [poly/autoShadeRenderingSlide](https://discmaster.textfiles.com/search?formatid=autoShadeRenderingSlide) | AutoShade Rendering Slide | .rnd | 
+[poly/blizzard3DModelBinary](https://discmaster.textfiles.com/search?formatid=blizzard3DModelBinary) | Blizzard 3D Model (binary) | .mdx | 
 [poly/createShade3DScene](https://discmaster.textfiles.com/search?formatid=createShade3DScene) | Create+Shade 3D Scene | .3d | 
 [poly/digitalElevationMap](https://discmaster.textfiles.com/search?formatid=digitalElevationMap) | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?formatid=dynaCADDPart) | DynaCADD Part | .prt .dpt | 

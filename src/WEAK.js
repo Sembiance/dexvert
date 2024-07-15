@@ -36,7 +36,7 @@ export const WEAK_MAC_TYPES =
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|304|328|347|473|583|639|692|1029|1030|1031|1032|1033|1034|1035|1113|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1740|1751|1812|1902)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|473|583|639|692|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1740|1751|1812|1902)( |$)/,
 	/^x-fmt\/(8|10|53|111|157|195|324|342)( |$)/,
 
 	// binwalkID: WEAK checks
@@ -153,6 +153,8 @@ export const WEAK_VALUES =
 	
 	// FILE: Improper parsing of output
 	/^' (123):$/,
+	/^\.mp3$/,
+	/^Invalid name\.$/,
 	/^# define/,
 	/^$/,	// eslint-disable-line no-control-regex
 	/^P;/,
@@ -387,7 +389,7 @@ export const WEAK_VALUES =
 	/^MegaPaint (INF|POP|VIN|VPO)$/,	// these MegaPaint's are here instead of unsupported because the magic matches the extension, so weakMagic wouldn't ensure a non-match
 	/^MegaPaint plug-in Module$/,
 	/^MegaPaint symbols Library$/,
-	/^Message Sequence Chart \(chart\)$/,
+	/^Message Sequence Chart \(chart\)/,
 	/^Micro Focus File with Header/,
 	/^Microsoft a\.out/,
 	/^Microsoft HTML Help Project/,
@@ -420,6 +422,7 @@ export const WEAK_VALUES =
 	/^New Line Delimited JSON text data/,
 	/^NeXT version 1 disklabel/,
 	/^Nim source code/,
+	/^Nintendo Gameboy Music\/Audio Data/,
 	/^Novell LANalyzer capture file/,
 	/^NSQ archive data/,
 	/^Oak Technologies printer stream/,
@@ -603,11 +606,14 @@ export const WEAK_VALUES =
 	/^Calcomp raster bitmap$/,
 	/^Cardwar Cards deck$/,
 	/^CauseWay Compressor compressed data$/,
+	/^CBI document$/,
 	/^Chasm CEL bitmap$/,
 	/^CheeseCutter Tune$/,
 	/^Chromadrome 2 game data archive/,
 	/^Commodore .*BASIC .*program/,
 	/^Compact compressed data/,
+	/^Complete Statistica\(l\) System spreadsheet \(v5\)$/,
+	/^Compressed VGM music$/,
 	/^Continuous Wave Accelerometry data$/,
 	/^Corel Color Palette$/,
 	/^Cosmigo Pro Motion SPRites sequence/,
@@ -673,6 +679,7 @@ export const WEAK_VALUES =
 	/^Genecyst save state$/,
 	/^Genital Save state \(v1\.2\+\)$/,
 	/^GEOS Revision$/,
+	/^GFX9000 Movie Format$/,
 	/^GIF bitmap \(generic\)$/,
 	/^Glest 3D model$/,
 	/^GLF 3D Font File Format$/,
@@ -838,6 +845,7 @@ export const WEAK_VALUES =
 	/^TTA True Audio lossless compressed audio$/,
 	/^TTComp archive/,
 	/^tzip compressed file$/,
+	/^V9990 font format$/,
 	/^VariCAD Drawing \(generic\)$/,
 	/^VersaCAD Shade \(MS-DOS\)$/,
 	/^VGAPaint 386 module$/,
@@ -997,9 +1005,11 @@ export const WEAK_VALUES =
 	/^Amiga Disk image File \(generic\)$/,
 	/^Amiga PACK_scn1\.library compressed data$/,
 	/^Amulets and Armor Map$/,
+	/^Anachronox game data archive$/,
 	/^AOS File Format$/,
 	/^Apocalyptica game data archive$/,
 	/^Apricot Character set$/,
+	/^Aqualead LZSS compressed game data$/,
 	/^Aquaplus P\/ECE Executable$/,
 	/^Arc System Works game data package$/,
 	/^ArcD compressed data$/,
@@ -1028,6 +1038,7 @@ export const WEAK_VALUES =
 	/^context diff output/,
 	/^Cookeo recipe$/,
 	/^Copper Colourz! File$/,	// Found correct matches, but magic 'CCF' (and string 'CCF FILE') are too generic given that the extension is .ccf
+	/^CryEngine Project \(generic\)$/,
 	/^Cryptx encrypted data$/,
 	/^Cydonia game video format$/,
 	/^Dan Bricklin's Demo/,
@@ -1038,6 +1049,7 @@ export const WEAK_VALUES =
 	/^Destruction Derby game data$/,	// Actually found matches that were correct, but the id just arters with "PACKED" which is way too weak to match, even with an extension since it just uses .000 and .RAW
 	/^Diagram-Master Diagram$/,
 	/^Die Total Verruckte Rallye game data$/,
+	/^Digitals\/Delta Map$/,
 	/^DirectShow filter$/,
 	/^Dired ls-like directory listing/,
 	/^Disney Animation Studio eXposure Sheet$/,
@@ -1057,6 +1069,7 @@ export const WEAK_VALUES =
 	/^Falcon Sequence \(old\)$/,
 	/^FCE Ultra FC0 savestate$/,
 	/^FGT virus infected 16-bit COM executable$/,
+	/^FileGateway Server configuration$/,
 	/^Fine Artist Chunked format/,
 	/^foobar2000 component$/,
 	/^Game Boy Advance ROM$/,
@@ -1121,7 +1134,7 @@ export const WEAK_VALUES =
 	/^Pacific Warrior 2: Dogfight game data archive$/,
 	/^PackDir compressed archive$/,
 	/^Palm Markup Language$/,
-	/^PC Secure encrypted \(V6\)$/,
+	/^PC Secure encrypted \(V\d\)$/,	// so I actually found files that ARE this, but it's a pretty weak magic and we can't do anything with em, so we just mark it weak
 	/^Photogenics matrix data$/,
 	/^PlayStation RSD Material \(gen\)$/,
 	/^PNG Animation$/,
@@ -1145,6 +1158,7 @@ export const WEAK_VALUES =
 	/^Sentry Spelling-Checker user dictionary$/,
 	/^Session Description Protocol \(with rem\)$/,
 	/^Sinclair TR-DOS disk image$/,
+	/^Slayer engine Texture$/,
 	/^SMAC compressed data$/,
 	/^SMS Coastline data$/,
 	/^SMS Super File$/,
@@ -1158,6 +1172,7 @@ export const WEAK_VALUES =
 	/^Summation Document Image Information Load File$/,
 	/^Super-Card Ami II copier$/,
 	/^Super Data Format$/,
+	/^Surfer Grid$/,
 	/^Sweet Home 3D design \(generic\)$/,
 	/^Synchronized Multimedia Integration Language$/,
 	/^Synu bitmap$/,
@@ -1198,7 +1213,9 @@ export const WEAK_VALUES =
 	/^Wii Model Animation$/,
 	/^wxWindows - wxPython Resource$/,
 	/^Xbox 360 LIVE container data file$/,
+	/^Xbox Game Profile Data$/,
 	/^Xilinx User Constraints File$/,
+	/^XMOD format module$/,
 	/^XTrkCAD parameters$/,
 	/^YSFlight Surface$/,
 	/^Z-Axis game data archive$/,

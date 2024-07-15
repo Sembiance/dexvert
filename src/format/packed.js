@@ -11,7 +11,6 @@ export const unp =
 		compackPacked  : {name : "COMPACK Packed", magic : ["Packer: COMPACK", "16bit DOS EXE COMPACK compressed"]},
 		icePacked      : {name : "ICE Packed", magic : ["ICE compressed/scrambled DOS Command", "Packer: ICE"]},
 		optlinkPacked  : {name : "OPTLINK Packed", magic : ["Packer: Optlink"]},
-		pgmpakPacked   : {name : "PGMPAK Packed", magic : ["16bit DOS EXE PGMPAK compressed"]},
 		tinyProgPacked : {name : "TinyProg Packed", magic : ["16bit DOS EXE TinyProg compressed"]}
 	}
 };
@@ -23,11 +22,13 @@ export const cup386 =
 		ainexePacked        : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
 		amisetupPacked      : {name : "Amisetup Packed", magic : ["Packer: Amisetup loader[by Robert Muchsel]"]},
 		aPACKPacked         : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
+		avPackPacked        : {name : "AVPACK Packed", magic : ["Packer: AVPACK(1.22)[Andrei Volkov]"]},
 		cruncherPacked      : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
 		exeLITEPacked       : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable"]},
 		lglzPacked          : {name : "LGLZ Packed", magic : ["16bit DOS EXE LGLZ compressed"]},
 		packerJESCOREPacked : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
 		packerPacked        : {name : "Packer Packed", magic : ["Packer: Packer"]},
+		pktinyPacked        : {name : "PKTINY Packed", magic : ["16bit DOS EXE PKTINY compressed"]},
 		rjCrushPacked       : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable"]},
 		rleCOMPackerPacked  : {name : "RLE com-packer Packed", magic : ["Packer: RLE com-packer"]},
 		sixTwoFourPacked    : {name : "624 Packed", magic : ["Packer: Six-2-Fou", "Six-2-Four (624) packed DOS Command"]},
@@ -48,8 +49,8 @@ export const both =
 		dietPacked               : {name : "Diet Packed", magic : ["Packer: Diet", "16bit DOS EXE DIET compressed"]},
 		neobookPacked            : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},
 		packwinPacked            : {name : "PACKWIN Packed", magic : ["16bit DOS EXE PACKWIN compressed"]},
-		pmgpakPacked             : {name : "PMGPAK Packed", magic : ["Packer: PGMPAK"]},
-		proPackPackedExe         : {name : "Pro-Pack Packed Executable", magic : ["Packer: PRO-PACK", "16bit DOS EXE RNC / PRO-PACK compressed"]},
+		pgmpakPacked             : {name : "PGMPAK Packed", magic : ["Packer: PGMPAK", "16bit DOS EXE PGMPAK compressed"]},
+		proPackPackedExe         : {name : "Pro-Pack Packed Executable", magic : ["Packer: PRO-PACK", /^16bit DOS EXE R[MN]C \/ PRO-PACK compressed/]},
 		scrnchPacked             : {name : "SCRNCH Packed", magic : ["Packer: SCRNCH", "SCRNCH compressed"]},
 		shrinkPacked             : {name : "Shrink Packed", magic : ["Shrink packed", "Packer: SHRINK"]},
 		ucexePacked              : {name : "UCEXE Packed", magic : ["Packer: UCEXE", "UCEXE compressed 16bit DOS executable"]},

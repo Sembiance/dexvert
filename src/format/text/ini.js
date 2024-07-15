@@ -12,7 +12,7 @@ export class ini extends Format
 
 		// specific INI Types
 		"InstallShield Setup config", "Windows Dial-Up Networking configuration", "Microsoft Setup Toolkit for Windows files List", "LapLink 5 settings", "InstallShield Language Identifier", "TagInfo data", "TagInfo, ASCII text", "Delphi project Options",
-		"BRIEF session info", "Windows Explorer Command Shell File", "Windows Explorer Shell Command File", "AOL Modem parameters", "McAfee VirusScan for Windows settings"
+		"BRIEF session info", "Windows Explorer Command Shell File", "Windows Explorer Shell Command File", "AOL Modem parameters", "McAfee VirusScan for Windows settings", "Microsoft C/C++ project Status info", "Blob Sculptor for Windows model"
 	];
 	priority       = this.PRIORITY.LOW;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;

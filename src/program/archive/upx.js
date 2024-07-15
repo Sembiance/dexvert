@@ -7,5 +7,5 @@ export class upx extends Program
 	package   = "app-arch/upx-bin";
 	bin       = "upx";
 	args      = async r => ["-d", r.inFile(), "-o", await r.outFile("outfile")];
-	renameOut = false;
+	renameOut = true;
 }

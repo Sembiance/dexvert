@@ -6,6 +6,7 @@ export class rar extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/RAR";
 	ext            = [".rar", ".exe"];
 	forbidExtMatch = [".exe"];
+	priority       = this.PRIORITY.HIGH;
 	magic          = ["RAR archive data", "RAR compressed archive", "RAR Archive", "DOS RAR SFX Executable", "Installer: WinRAR Installer", /RAR self-extracting archive/, /^RAR$/, /^RAR 5$/,
 		"Embedded RAR", "RAR Archiv gefunden", "Archive: RAR", "OS/2 RAR SFXjr executable", /^fmt\/(411|613)( |$)/, /^x-fmt\/264( |$)/];
 	auxFiles     = (input, otherFiles) =>

@@ -3,8 +3,6 @@ import {path} from "std";
 import {fileUtil} from "xutil";
 import {formats, init as initFormats} from "../../src/format/formats.js";
 import {programs, init as initPrograms} from "../../src/program/programs.js";
-//import {RELEASE} from "../../release/RELEASE.js";	// TODO update RELEASE.js with the new release info
-// TODO add this file back to build.js
 
 export default async function buildREADME(xlog)
 {
@@ -23,6 +21,6 @@ Utilizes [Deno](https://deno.land/) and **${Object.keys(programs).length.toLocal
 
 [discmaster.textfiles.com](http://discmaster.textfiles.com/) utilizes this to convert and extract old files. If you find a file that does not convert properly or not at all, submit an issue.
 
-This project is not currently ready for public use. Efforts are underway to make it usable by others.
-`);	// TODO Add back in ${RELEASE.README_TEXT}
+This project is not currently ready for public use.
+`);
 }

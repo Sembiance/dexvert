@@ -18,7 +18,7 @@ const argv = cmdUtil.cmdInit({
 
 const xlog = new XLog(argv.silent ? "none" : "info");
 
-const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES.subtractAll(["release"]) : argv.target);
+const targetids = (argv.target.some(v => v.toLowerCase()==="all") ? TARGET_NAMES : argv.target);
 for(const [i, targetid] of Object.entries(targetids))
 {
 	xlog.info`${printUtil.majorHeader(targetid, +i>0 ? {prefix : "\n"} : {})}`;

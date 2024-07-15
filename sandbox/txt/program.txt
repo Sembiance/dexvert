@@ -40,6 +40,9 @@ Set to true to allow dup output files from the original input files
 >>> checkForDups = true
 Set to true if this program can produce an output file identical to the original input, which we should delete to avoid infinite recursions
 
+>>> forbidChildRun = true
+Set to true if this program should never be ran again directly on the children it produces because of potential infinite loops
+
 >>> ******** Execute Properties
 >>> bin = "binary_program"
 The name of the binary to run. Can specifcy an absolute path to the binary. Can use Program.binPath("subDir/binname") to get a local dexvert/bin/*

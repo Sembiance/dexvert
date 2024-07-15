@@ -16,7 +16,7 @@ export class exe extends Format
 
 		// created by
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
-		/^Microsoft Pascal (v[\d.]+ )?16-bit executable$/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable	",
+		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable	",
 		
 		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers
 		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable",

@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,373)
+# Unsupported File Formats (1,372)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -173,7 +173,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (81)
+## Document (82)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -208,6 +208,7 @@ Family/Format | Name | Extensions | Notes
 [document/firstChoicePublication](https://discmaster.textfiles.com/search?formatid=firstChoicePublication) | First Choice Publication | .pub | 
 [document/flowCharting](https://discmaster.textfiles.com/search?formatid=flowCharting) | [Flow Charting](http://fileformats.archiveteam.org/wiki/Flow_Charting) | .cht .fcd .gfc .pdq .fc5 .fcx | [3 sample files](https://sembiance.com/fileFormatSamples/document/flowCharting/)
 [document/folioDatabase](https://discmaster.textfiles.com/search?formatid=folioDatabase) | [Folio Database](http://fileformats.archiveteam.org/wiki/Folio_Infobase) | .nfo .sdw .fff .def | 
+[document/geoWorksGEOSHelp](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSHelp) | GeoWorks GEOS help | .000 | 
 [document/geoWorksWriterDocument](https://discmaster.textfiles.com/search?formatid=geoWorksWriterDocument) | GeoWorks Writer document | .000 | 
 [document/greenstreetPublisher](https://discmaster.textfiles.com/search?formatid=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - I could open these just fine under Win2k with Publishing Suite 99, but it can't save in ANY other format, and print to file crashes QEMU, sigh.
 [document/hancomWord](https://discmaster.textfiles.com/search?formatid=hancomWord) | [Hancom Word](http://fileformats.archiveteam.org/wiki/HWP) | .hwp | [1 sample file](https://sembiance.com/fileFormatSamples/document/hancomWord/)
@@ -260,7 +261,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (41)
+## Executable (40)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -295,7 +296,6 @@ Family/Format | Name | Extensions | Notes
 [executable/msdosPMODEExtenderExecutable](https://discmaster.textfiles.com/search?formatid=msdosPMODEExtenderExecutable) | MS-DOS PMODE extender executable | .exe .bin | 
 [executable/msxTSR](https://discmaster.textfiles.com/search?formatid=msxTSR) | MSX Terminate and Stay Resident Executable | .tsr | 
 [executable/palmOSDynamicLibrary](https://discmaster.textfiles.com/search?formatid=palmOSDynamicLibrary) | Palm OS Dynamic Library | .prc | 
-[executable/proPackPackedExe](https://discmaster.textfiles.com/search?formatid=proPackPackedExe) | Pro-Pack Packed Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/proPackPackedExe/)
 [executable/riscOSExe](https://discmaster.textfiles.com/search?formatid=riscOSExe) | RISC OS Executable |  | 
 [executable/sonyPlaystationExe](https://discmaster.textfiles.com/search?formatid=sonyPlaystationExe) | Sony Playstation Executable | .exe | 
 [executable/sparcDemandExe](https://discmaster.textfiles.com/search?formatid=sparcDemandExe) | SPARC Demand Paged Exe |  | 
@@ -307,7 +307,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (70)
+## Font (69)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -350,7 +350,6 @@ Family/Format | Name | Extensions | Notes
 [font/lotusRasterFont](https://discmaster.textfiles.com/search?formatid=lotusRasterFont) | Lotus Raster Font | .lrf | 
 [font/lotusVectorFont](https://discmaster.textfiles.com/search?formatid=lotusVectorFont) | Lotus Vector Font | .lvf | 
 [font/maxonCADFont](https://discmaster.textfiles.com/search?formatid=maxonCADFont) | MaconCAD Font | .mcfont | 
-[font/macOSFont](https://discmaster.textfiles.com/search?formatid=macOSFont) | MacOS Font | .fnt | 
 [font/matroxFont](https://discmaster.textfiles.com/search?formatid=matroxFont) | Matrox Font | .fnt | 
 [font/metagraphicsFont](https://discmaster.textfiles.com/search?formatid=metagraphicsFont) | Metagraphics Font | .fnt | 
 [font/msxKanjiFont](https://discmaster.textfiles.com/search?formatid=msxKanjiFont) | MSX Kanji Font |  | 

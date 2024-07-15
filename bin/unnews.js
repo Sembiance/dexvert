@@ -13,7 +13,7 @@ const argv = cmdUtil.cmdInit({
 
 const SEP_REGS =
 [
-	/^Article (?<num>\d+) of (?<newsgroup>[^:]+):$/
+	/^Article:? (?<num>\d+) of (?<newsgroup>[^:]+):?$/
 ];
 
 let msgCount = 0;
@@ -59,5 +59,3 @@ for await(const line of inputFile.readable.pipeThrough(new TextDecoderStream()).
 	if(msg.lines)
 		msg.lines.push(line);
 }
-
-inputFile.close();

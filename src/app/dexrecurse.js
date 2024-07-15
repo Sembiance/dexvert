@@ -310,9 +310,11 @@ async function processNextQueue()
 	try
 	{
 		const inputFilePath = path.join(fileDirPath, task.relFilePath);
-		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, timeout : MAX_DURATION, dexvertOptions};
+		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, timeout : MAX_DURATION, dexvertOptions : xu.clone(dexvertOptions)};
 		if(taskProps.fileMeta)
 			rpcData.fileMeta = taskProps.fileMeta;
+		if(taskProps.forbidProgram)
+			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
 		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION+(xu.MINUTE*10), json : rpcData});
 		if(!dexText)
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
@@ -384,10 +386,15 @@ async function processNextQueue()
 		}
 		else
 		{
+			const lastRan = dexData.phase?.ran?.at(-1);	// Could potentially change this to include ALL ran programs with forbidChildRun instead of just the last...
+			const forbidProgram = (lastRan?.forbidChildRun && lastRan.programid===dexData.phase.converter) ? [lastRan.programid] : null;
+
 			for(const file of dexData.created.files.output)
 			{
 				bar?.incrementMax();
 				const fileTaskProps = {rel : path.relative(fileDirPath, file.absolute)};
+				if(forbidProgram)
+					fileTaskProps.forbidProgram = forbidProgram;
 				if(dexData.phase?.meta?.fileMeta?.[file.rel])
 					fileTaskProps.fileMeta = dexData.phase.meta.fileMeta[file.rel];
 				taskQueue.push(fileTaskProps);

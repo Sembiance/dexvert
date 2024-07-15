@@ -13,7 +13,7 @@ import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
-const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "matchType", "strongMatch", "forbiddenMagic", "noAux", "renameKeepFilename", "skipVerify", "renameOut", "osHint", "osPriority", "subOutDir", "hasExtMatch"];
+const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir"];
 
 // A global variable that contains certain flags and properties to adhere to until clearRuntime is called
 const RUNTIME =
@@ -73,6 +73,7 @@ export class Program
 			chainPost        : {type : "function", length : [0, 1]},
 			checkForDups     : {type : "boolean"},
 			failOnDups       : {type : "boolean"},
+			forbidChildRun   : {type : "boolean"},
 			cwd              : {type : "function", length : [0, 1]},
 			diskQuota        : {types : ["function", "number"]},
 			dosData          : {types : ["function", Object]},
@@ -468,6 +469,9 @@ export class Program
 		// check to see if we need to chain to another program
 		if(f.files.new?.length>0)
 		{
+			if(this.forbidChildRun)
+				r.forbidChildRun = true;
+			
 			const chainParts = [];
 			if(this.chain)
 			{

@@ -49,6 +49,7 @@ export const both =
 		neobookPacked            : {name : "Neobook Packed", magic : ["Neobook compiled book executable"]},
 		packwinPacked            : {name : "PACKWIN Packed", magic : ["16bit DOS EXE PACKWIN compressed"]},
 		pmgpakPacked             : {name : "PMGPAK Packed", magic : ["Packer: PGMPAK"]},
+		proPackPackedExe         : {name : "Pro-Pack Packed Executable", magic : ["Packer: PRO-PACK", "16bit DOS EXE RNC / PRO-PACK compressed"]},
 		scrnchPacked             : {name : "SCRNCH Packed", magic : ["Packer: SCRNCH", "SCRNCH compressed"]},
 		shrinkPacked             : {name : "Shrink Packed", magic : ["Shrink packed", "Packer: SHRINK"]},
 		ucexePacked              : {name : "UCEXE Packed", magic : ["Packer: UCEXE", "UCEXE compressed 16bit DOS executable"]},

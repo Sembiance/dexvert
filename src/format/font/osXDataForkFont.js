@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-const _OSX_DATA_FORK_FONT_MAGIC = ["Macintosh OS X Data Fork Font"];
+const _OSX_DATA_FORK_FONT_MAGIC = ["Macintosh OS X Data Fork Font", "Mac OSX datafork font, 'FONT'"];
 export {_OSX_DATA_FORK_FONT_MAGIC};
 
 export class osXDataForkFont extends Format

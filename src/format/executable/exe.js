@@ -19,8 +19,8 @@ export class exe extends Format
 		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable", "16bit DOS EXE BasicBasic", "Turbo Pascal for Windows 1.0 executable",
 		
 		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers
-		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable",
-		"Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", "Installer: AOLSetup", /^NSIS$/];
+		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
+		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];
 

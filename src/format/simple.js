@@ -13,7 +13,7 @@ export default
 		actWordProcessorDocument : {name : "ACT! Word Processor Document", ext : [".wpa", ".tpl", ".rep", ".wpd"], magic : ["ACT! word processor document"], weakMagic : true},
 		adorageScript            : {name : "Adorage Script", ext : [".scp"], magic : ["Adorage Script"]},
 		amigaProWrite            : {name : "Amiga ProWrite Document", magic : ["Amiga ProWrite document", "IFF data, ProWrite document"]},
-		amiProWordProDocument    : {name : "Ami Pro/Word Pro document", ext : [".sam"], magic : ["Ami Pro/Word Pro document", /^x-fmt\/191( |$)/], weakMagic : true},
+		amiProWordProDocument    : {name : "Ami Pro/Word Pro document", ext : [".sam"], magic : ["Ami Pro/Word Pro document", "Lotus AmiPro Dokument", /^x-fmt\/191( |$)/], weakMagic : true},
 		appleWorksDocument       : {name : "AppleWorks Document", magic : ["AppleWorks Word Processor"], forbiddenMagic : TEXT_MAGIC},
 		askSamDatabase           : {name : "askSam Database", ext : [".ask"], magic : ["askSam data base", "askSam for Windows data base", "askSam DB"]},
 		atariWorks               : {name : "Atari Works Document", ext : [".stw"], magic : ["Atari Works Wordprocessor document"]},

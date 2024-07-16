@@ -9,7 +9,8 @@ export class csv extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/CSV";
 	ext          = [".csv"];
 	mimeType     = "application/json";
-	magic        = ["CSV text", "CSV ASCII text"];	// CSV Unicode text < from file, too loose?
+	magic        = ["CSV text", "CSV ASCII text", "CSV Unicode text"];	// CSV Unicode text < from file, too loose?
+	weakMagic    = ["CSV Unicode text"];
 	priority     = this.PRIORITY.LOW;
 	untouched    = dexState => dexState.meta.entryCount;
 	metaProvider = ["text"];

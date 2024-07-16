@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,372)
+# Unsupported File Formats (1,377)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (111)
+## Archive (112)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
@@ -63,6 +63,7 @@ Family/Format | Name | Extensions | Notes
 [archive/macOSSelfMountingImage](https://discmaster.textfiles.com/search?formatid=macOSSelfMountingImage) | [MacOS Self Mounting Image](http://fileformats.archiveteam.org/wiki/Apple_Disk_Image) |  | [1 sample file](https://sembiance.com/fileFormatSamples/archive/macOSSelfMountingImage/)
 [archive/macroMindProjector](https://discmaster.textfiles.com/search?formatid=macroMindProjector) | MacroMind Projector/Director |  | [2 sample files](https://sembiance.com/fileFormatSamples/archive/macroMindProjector/) - This is an older Macromedia Projector file, Macintosh version
 [archive/maximusInstallerArchive](https://discmaster.textfiles.com/search?formatid=maximusInstallerArchive) | Maximus installer archive | .fiz | 
+[archive/mbpSHRINK](https://discmaster.textfiles.com/search?formatid=mbpSHRINK) | mbp SHRINK Packed | .exe | 
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard Stack | .rev | 
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
@@ -173,7 +174,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (82)
+## Document (83)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -238,6 +239,7 @@ Family/Format | Name | Extensions | Notes
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?formatid=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
 [document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
+[document/quattroForDOSSpreadsheet](https://discmaster.textfiles.com/search?formatid=quattroForDOSSpreadsheet) | Quattro for DOS spreadsheet | .wkq | 
 [document/quickHelp](https://discmaster.textfiles.com/search?formatid=quickHelp) | Quick Help | .hlp | 
 [document/raimaDataManager](https://discmaster.textfiles.com/search?formatid=raimaDataManager) | Raima Data Manager |  | 
 [document/rmpHelp](https://discmaster.textfiles.com/search?formatid=rmpHelp) | RMP Help | .hlp | 
@@ -602,7 +604,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (744)
+## Other (747)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -871,6 +873,9 @@ Family/Format | Name | Extensions | Notes
 [other/gammaCAD](https://discmaster.textfiles.com/search?formatid=gammaCAD) | GammaCAD Document | .sym .gc1 | 
 [other/gdsIIStream](https://discmaster.textfiles.com/search?formatid=gdsIIStream) | GDSII stream | .gds | 
 [other/geePrinterDriver](https://discmaster.textfiles.com/search?formatid=geePrinterDriver) | Gee! Printer Driver | .pdr | 
+[other/gemViewLoadModule](https://discmaster.textfiles.com/search?formatid=gemViewLoadModule) | GEM-View Load module | .gvl | 
+[other/gemViewPrintModule](https://discmaster.textfiles.com/search?formatid=gemViewPrintModule) | GEM-View Print module | .gvp | 
+[other/gemViewSaveModule](https://discmaster.textfiles.com/search?formatid=gemViewSaveModule) | GEM-View Save module | .gvs | 
 [other/geoWorksDirectoryInfo](https://discmaster.textfiles.com/search?formatid=geoWorksDirectoryInfo) | GeoWorks directory info | .000 | 
 [other/geoWorksGEOSData](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSData) | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 

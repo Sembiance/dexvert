@@ -104,6 +104,9 @@ file it's converting well enough, often producing garbage or something when a fi
 >>> fallback = true
 Specify that this match should be processed DEAD LAST as a match of last resort, a fallback. Use with EXTREME CAUTION.
 
+>>> slow = true
+Specify true if this format historically is a very slow format and extra time should be allotted for it's processing
+
 >>> priority = C.PRIORITY.HIGH
 If a file matches multiple formats in a single family, this is the priority order for processing.
 Options include: TOP, HIGH, STANDARD (default), LOW, VERYLOW

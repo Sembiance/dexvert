@@ -3,21 +3,26 @@ import {xwork} from "xwork";
 import {dexvert} from "../dexvert.js";
 import {identify} from "../identify.js";
 import {XLog} from "xlog";
+import {path} from "std";
 import {DexFile} from "../DexFile.js";
 import {init as initPrograms, programChanged} from "../program/programs.js";
-import {init as initFormats, formatChanged} from "../format/formats.js";
+import {init as initFormats, formatChanged, formats} from "../format/formats.js";
 
 await initPrograms();
 await initFormats();
 
+const slowExtensions = Object.values(formats).filter(format => format.slow && format.ext?.length).flatMap(format => format.ext).unique();
+
 await xwork.openConnection();
 
-await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout=xu.HOUR*2, dexvertOptions={}}) =>
+await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", fileMeta, op, change={}, timeout, dexvertOptions={}}) =>
 {
 	if(op==="formatChange")
 		return await formatChanged(change);
 	if(op==="programChange")
 		return await programChanged(change);
+	
+	timeout ||= xu.HOUR*(slowExtensions.includes(path.extname(inputFilePath)?.toLowerCase()) ? 4 : 1.5);	// for slow formats, if we match the extension, give a little more time
 
 	const logLines = [];
 	const xlogOptions = {};

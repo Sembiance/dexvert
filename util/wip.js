@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars, no-bitwise */
+/* eslint-disable no-unused-vars */
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {runUtil, fileUtil, printUtil, encodeUtil, cmdUtil, hashUtil} from "xutil";
@@ -17,10 +17,8 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
 
 const xlog = new XLog("info");
 
-//await initPrograms(xlog);
-//await initFormats(xlog);
+await initPrograms(xlog);
+await initFormats(xlog);
 
 //const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/archive/macBinary/Icon↵");
-const inputFile = await DexFile.create(Deno.args[0]);
-
-xlog.info`${await getMacBinaryMeta(inputFile, true)}`;
+//const inputFile = await DexFile.create(Deno.args[0]);

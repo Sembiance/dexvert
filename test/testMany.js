@@ -38,17 +38,7 @@ const failures = [];
 const MAX_LINE_LENGTH = Deno.hostname()==="crystalsummit" ? 118 : 145;
 
 // these formats are slow, make sure to run them first, otherwise they might randomly not start until after all the rest and then prolong the total time. Don't put more than 2 formats per family
-const SLOW_FORMATS =
-[
-	"archive/macromediaDirector",
-	"audio/photoCDAudio",
-	"font/amigaBitmapFontContent",
-	"document/chm",
-	"other/pogNames",
-	"poly/rayDreamDesignerScene", "poly/dxf",
-	"text/txt",
-	"video/avi", "video/mov"
-];
+const SLOW_FORMATS = Object.values(formats).filter(format => format.slow).map(format => `${format.familyid}/${format.formatid}`).sortMulti();
 
 console.log(printUtil.minorHeader(`Processing ${formatsToProcess.size.toLocaleString()} formats...`, {prefix : "\n"}));
 const orderedFormatsToProcess = Array.from(formatsToProcess).shuffle();

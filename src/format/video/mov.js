@@ -16,6 +16,7 @@ export class mov extends Format
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = r => ["ffmpeg", (r.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), "mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"];
+	slow         = true;
 	notes        = xu.trim`
 		So quicktime movies require both a 'moov' section that contains movie metadata and info about the movie and a 'mdat' section that contains the actual movie contents.
 		Early quicktime movies had the 'moov' section in the resource fork of the file and the 'mdat' section in the data fork.

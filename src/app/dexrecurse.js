@@ -8,7 +8,6 @@ import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
 
-const MAX_DURATION = xu.HOUR*2;
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
 const DESIRED_SAMPLE_COUNT = 10;
@@ -310,12 +309,12 @@ async function processNextQueue()
 	try
 	{
 		const inputFilePath = path.join(fileDirPath, task.relFilePath);
-		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, timeout : MAX_DURATION, dexvertOptions : xu.clone(dexvertOptions)};
+		const rpcData = {op : "dexvert", inputFilePath, outputDirPath : task.fileOutDirPath, logLevel : argv.logLevel, dexvertOptions : xu.clone(dexvertOptions)};
 		if(taskProps.fileMeta)
 			rpcData.fileMeta = taskProps.fileMeta;
 		if(taskProps.forbidProgram)
 			rpcData.dexvertOptions.forbidProgram = taskProps.forbidProgram;
-		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {timeout : MAX_DURATION+(xu.MINUTE*10), json : rpcData});
+		const dexText = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, timeout : (xu.HOUR*5)+(xu.MINUTE*10)});
 		if(!dexText)
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
 

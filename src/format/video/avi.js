@@ -18,5 +18,6 @@ export class avi extends Format
 
 	magic        = _AVI_MAGIC;
 	metaProvider = ["mplayer"];
+	slow         = true;
 	converters   = r => ["ffmpeg", "mencoderWinXP", `xanim[fps:${r.meta.fps || 10}]`];
 }

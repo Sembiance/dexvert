@@ -7,5 +7,6 @@ export class rayDreamDesignerScene extends Format
 	ext        = [".rds", ".rd4", ".rd3"];
 	safeExt    = ".rds";
 	magic      = ["Ray Dream Designer scene", "Ray Dream Studio"];
+	slow       = true;
 	converters = ["rayDreamDesignerStudio55"];
 }

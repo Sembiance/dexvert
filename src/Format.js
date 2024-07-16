@@ -135,6 +135,7 @@ export class Format
 			priority         : {type : "number", enum : Object.values(format.PRIORITY)},
 			simple           : {type : "boolean"},
 			skipClassify     : {type : "boolean"},
+			slow             : {type : "boolean"},
 			trustMagic       : {type : "boolean"},
 			unsupported      : {type : "boolean"},
 			untouched        : {types : ["boolean", "function"]},

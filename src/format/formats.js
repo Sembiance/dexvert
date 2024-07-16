@@ -269,7 +269,7 @@ async function loadText({reload}={})
 			if(formats[formatid])
 				throw new Error(`format [${formatid}] in text.js is a duplicate`);
 
-			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakMagic", "website"];
+			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "trustMagic", "weakFilename", "weakMagic", "website"];
 			const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 			if(extraKeys.length>0)
 				throw new Error(`text format ${familyid}/${formatid} has extra keys that are not currently copied over to the Text class, add them: ${extraKeys}`);

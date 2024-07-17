@@ -22,7 +22,7 @@ await xwork.recv(async ({rpcid, inputFilePath, outputDirPath, logLevel="error", 
 	if(op==="programChange")
 		return await programChanged(change);
 	
-	timeout ||= xu.HOUR*(slowExtensions.includes(path.extname(inputFilePath)?.toLowerCase()) ? 4 : 1.5);	// for slow formats, if we match the extension, give a little more time
+	timeout ||= xu.HOUR*(slowExtensions.includes(path.extname(inputFilePath)?.toLowerCase()) ? 5 : 3);	// for slow formats, if we match the extension, give a little more time
 
 	const logLines = [];
 	const xlogOptions = {};

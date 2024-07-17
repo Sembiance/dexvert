@@ -1,17 +1,19 @@
-# Unsupported File Formats (1,377)
+# Unsupported File Formats (1,385)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (112)
+## Archive (117)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
+[archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
 [archive/sixtyFourLANContainer](https://discmaster.textfiles.com/search?formatid=sixtyFourLANContainer) | 64LAN Container | .l64 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sixtyFourLANContainer/)
 [archive/abackupDiskImage](https://discmaster.textfiles.com/search?formatid=abackupDiskImage) | ABackup Disk Image | .adf | 
 [archive/actionPresentation](https://discmaster.textfiles.com/search?formatid=actionPresentation) | Action! presentation | .acp .act .sta | 
 [archive/activeMARKProtectedArchive](https://discmaster.textfiles.com/search?formatid=activeMARKProtectedArchive) | ActiveMARK-protected archive | .cs .dso | 
+[archive/adysGLUEPacked](https://discmaster.textfiles.com/search?formatid=adysGLUEPacked) | Ady's GLUE Packed) | .exe | 
 [archive/aixBackupRestore](https://discmaster.textfiles.com/search?formatid=aixBackupRestore) | AIX backup/restore | .img | 
 [archive/aldusLZWCompressedData](https://discmaster.textfiles.com/search?formatid=aldusLZWCompressedData) | Aldus LZW compressed data |  | 
 [archive/aldusZip](https://discmaster.textfiles.com/search?formatid=aldusZip) | Aldus Zip Compressed File |  | No known extractor program.
@@ -83,11 +85,13 @@ Family/Format | Name | Extensions | Notes
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
+[archive/peCompactPacked](https://discmaster.textfiles.com/search?formatid=peCompactPacked) | PECompact Packed | .scr | 
 [archive/petitePacked](https://discmaster.textfiles.com/search?formatid=petitePacked) | Petite Packed | .exe | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
+[archive/protectorProtected](https://discmaster.textfiles.com/search?formatid=protectorProtected) | protector Protected | .exe | 
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?formatid=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
 [archive/quadrupleDArchiverArchive](https://discmaster.textfiles.com/search?formatid=quadrupleDArchiverArchive) | Quadruple D Archiver archive | .qda | 
@@ -97,6 +101,7 @@ Family/Format | Name | Extensions | Notes
 [archive/sabDisketteUtilityDiskImage](https://discmaster.textfiles.com/search?formatid=sabDisketteUtilityDiskImage) | SAB Diskette Utility disk image | .sdu | Program only supports writing it to a real floppy, which I suppose I could emulate with 86Box, but meh.
 [archive/setupMVA](https://discmaster.textfiles.com/search?formatid=setupMVA) | Setup Program Archive | .mva .mvb | [6 sample files](https://sembiance.com/fileFormatSamples/archive/setupMVA/)
 [archive/shockwaveFlashDebug](https://discmaster.textfiles.com/search?formatid=shockwaveFlashDebug) | Shockwave Flash Debug | .swd | 
+[archive/simis](https://discmaster.textfiles.com/search?formatid=simis) | Simis | .s .ace .t .dat .mis | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
 [archive/spisTCompress](https://discmaster.textfiles.com/search?formatid=spisTCompress) | SPIS TCompress |  | 
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
@@ -604,7 +609,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (747)
+## Other (749)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -753,6 +758,7 @@ Family/Format | Name | Extensions | Notes
 [other/chem3DFormat](https://discmaster.textfiles.com/search?formatid=chem3DFormat) | Chem3D Format | .c3 | 
 [other/chemViewAnimationData](https://discmaster.textfiles.com/search?formatid=chemViewAnimationData) | Chemview Animation Data | .d | 
 [other/chessAssistant](https://discmaster.textfiles.com/search?formatid=chessAssistant) | Chess Assistant File | .bic .bid .bim .bis .lib .bfi .dsc .ndx .bdy | 
+[other/cineMorphProject](https://discmaster.textfiles.com/search?formatid=cineMorphProject) | CineMorph Project | .project | 
 [other/clipperPreLinkedLibrary](https://discmaster.textfiles.com/search?formatid=clipperPreLinkedLibrary) | Clipper Pre-Linked Library | .pll | 
 [other/clispMemoryImageData](https://discmaster.textfiles.com/search?formatid=clispMemoryImageData) | CLISP memory image data | .mem | 
 [other/cloneCDSubChannelData](https://discmaster.textfiles.com/search?formatid=cloneCDSubChannelData) | CloneCD CDImage SubChannel Data | .sub | 
@@ -802,6 +808,7 @@ Family/Format | Name | Extensions | Notes
 [other/demoManiacVectors](https://discmaster.textfiles.com/search?formatid=demoManiacVectors) | DemoManiac Vectors | .dat | 
 [other/demoShieldDemo](https://discmaster.textfiles.com/search?formatid=demoShieldDemo) | DemoShield Demo | .dbd .bdd | 
 [other/depthDwellersGameData](https://discmaster.textfiles.com/search?formatid=depthDwellersGameData) | Depth Dwellers Resource/game data | .res | 
+[other/derEncodedData](https://discmaster.textfiles.com/search?formatid=derEncodedData) | DER Encoded Data | .rsa | 
 [other/descentGameSave](https://discmaster.textfiles.com/search?formatid=descentGameSave) | Descent Game Save | .sg0 | 
 [other/descentLevel](https://discmaster.textfiles.com/search?formatid=descentLevel) | Descent Level | .rdl | 
 [other/descentPlayer](https://discmaster.textfiles.com/search?formatid=descentPlayer) | Descent Player | .plr | 
@@ -1357,7 +1364,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (38)
+## Poly (39)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1385,6 +1392,7 @@ Family/Format | Name | Extensions | Notes
 [poly/ravenObjectFileFormat](https://discmaster.textfiles.com/search?formatid=ravenObjectFileFormat) | [Raven Object File Format](http://fileformats.archiveteam.org/wiki/ROFF) | .rof | [4 sample files](https://sembiance.com/fileFormatSamples/poly/ravenObjectFileFormat/)
 [poly/real3D](https://discmaster.textfiles.com/search?formatid=real3D) | Real 3D | .real .obj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/real3D/) - Realsoft 3D 4.5 for windows (https://archive.org/details/onyxdvd-14) was able to open 1 of my test files (Klingon), but promptly crashed when attempting to save as 3DS. Not aware of any other converter.
 [poly/renderit3DData](https://discmaster.textfiles.com/search?formatid=renderit3DData) | Renderit3D Data | .r3d | 
+[poly/renderManRIB](https://discmaster.textfiles.com/search?formatid=renderManRIB) | RenderMan RIB | .rib | i3dconverter claims support, but resulting .glb files are not useful
 [poly/residentEvilPlayerModel](https://discmaster.textfiles.com/search?formatid=residentEvilPlayerModel) | Resident Evil player model | .emw .emd | 
 [poly/rotObject](https://discmaster.textfiles.com/search?formatid=rotObject) | ROT! Object | .rotobj | [5 sample files](https://sembiance.com/fileFormatSamples/poly/rotObject/) - Only 27 unique files on discmaster. Not sure what program created these files.
 [poly/ydl](https://discmaster.textfiles.com/search?formatid=ydl) | [SGI Yet Another Object Description Language](http://fileformats.archiveteam.org/wiki/SGI_YAODL) | .ydl | [3 sample files](https://sembiance.com/fileFormatSamples/poly/ydl/) - Very rare format. Less than 20 examples of it in the wild, no known converter for it.

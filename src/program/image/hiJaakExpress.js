@@ -21,11 +21,11 @@ export class hiJaakExpress extends Program
 			
 			Send("c:\\out\\out.bmp{ENTER}")
 			AutoItSetOption("WinTitleMatchMode", 2)
-			$failureWindow = WinWait("Application Error", "", 5)
+			$failureWindow = WinWait("Application Error", "", 10)
 			If $failureWindow Then
 				Exit 0
 			EndIf
-			WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*3}, ${xu.SECOND*25})
+			WaitForStableFileSize("c:\\out\\out.bmp", ${xu.SECOND*3}, ${xu.SECOND*15})
 			WinWaitClose($mainWindow, "", 10)
 			
 			KillAll("loco.exe")

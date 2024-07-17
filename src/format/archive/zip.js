@@ -8,9 +8,14 @@ export class zip extends Format
 	ext            = [".zip", ".exe"];
 	forbidExtMatch = [".exe"];
 	magic          = [
-		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /^PKZIP (mini-)?self-extracting 16bit DOS executable$/, /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/,
-		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", "QWK offline mail packet (ZIP compressed)", "End of Zip archive",
-		"Installer: Wise Installer[ZIP]", "Adventure Game Toolkit game package", /^x-fmt\/263( |$)/];
+		// general zip magic
+		"ZIP compressed archive", "Zip data", "Zip archive", "ZIP Format", /ZIP self-extracting archive/, "Zip multi-volume archive data", /^Zip$/,
+		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "End of Zip archive", /^x-fmt\/263( |$)/,
+
+		// specific zip magic
+		/^PKZIP (mini-)?self-extracting 16bit DOS executable$/, "Winzip Win32 self-extracting archive", "WinZip Self-Extractor",
+		"Adventure Game Toolkit game package", "Installer: Alchemy Mindworks installer", "Installer: Wise Installer[ZIP]", "QWK offline mail packet (ZIP compressed)"
+	];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>

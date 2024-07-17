@@ -18,13 +18,23 @@ export class unar extends Program
 	args     = r => [...(r.flags.filenameEncoding ? ["-e", r.flags.filenameEncoding] : []), "-f", "-D", "-o", r.outDir(), r.inFile()];
 	postExec = async r =>
 	{
+		const outDirPath = r.outDir({absolute : true});
+
+		// For some files (archive/arArchive/STRMBASE.LIB) unar will produce massively deep directories. We make sure out paths are not too long (4096, but since that's total path, we use a lower amount, 3840)
+		const longPaths = (await fileUtil.tree(outDirPath, {relative : true})).filter(v => v.length>3840).sortMulti([v => v.length], [false]);
+		for(const longPath of longPaths)
+		{
+			const fullLongPath = path.join(outDirPath, longPath);
+			r.xlog.debug`Deleting too long path: ${fullLongPath}`;
+			await runUtil.run("rm", ["-rf", fullLongPath]);	// have to use rm here because fileUtil.unlink/Deno.remove doesn't work on too long paths
+		}
+
 		if(!r.flags.mac)
 			return;
 
 		const region = RUNTIME.globalFlags?.osHint?.macintoshjp ? "japan" : "roman";
 
 		const decodeOpts = {processors : encodeUtil.macintoshProcessors.percentHex, region};
-		const outDirPath = r.outDir({absolute : true});
 		let fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
 		await fileOutputPaths.parallelMap(async fileOutputPath =>
 		{

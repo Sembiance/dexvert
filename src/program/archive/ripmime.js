@@ -5,6 +5,7 @@ export class ripmime extends Program
 	website        = "https://github.com/inflex/ripMIME";
 	package        = "net-mail/ripmime";
 	bin            = "ripmime";
+	unsafe         = true;
 	forbidChildRun = true;
 	args           = r => ["-e", "__headers__.txt", "-i", r.inFile(), "-d", r.outDir(), "-p", "part", "--mailbox", "--name-by-type"];
 	renameOut      = {

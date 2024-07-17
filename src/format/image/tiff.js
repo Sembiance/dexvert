@@ -7,7 +7,13 @@ export class tiff extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/TIFF";
 	ext          = [".tif", ".tiff"];
 	mimeType     = "image/tiff";
-	magic        = ["Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", /^fmt\/353( |$)/];
+	magic        = [
+		// Generic TIFF files
+		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", /^fmt\/353( |$)/,
+
+		// App-Specific TIFF files
+		"CorelChart chart", /^fmt\/1312( |$)/
+	];
 	idMeta       = ({macFileType}) => macFileType==="TIFF";
 	priority     = this.PRIORITY.LOW;	// Often other formats are mis-identified as TIFF files such RAW camera files like Sony ARW and kodak*
 	metaProvider = ["image"];

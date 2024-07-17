@@ -6,7 +6,7 @@ export class rtf extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/RTF";
 	ext            = [".rtf"];
 	forbidExtMatch = true;
-	magic          = ["Rich Text Format", "Format: RTF", /^fmt\/(45|50|355|969)( |$)/];
+	magic          = ["Rich Text Format", "Format: RTF", "Marcel document", /^fmt\/(45|50|52|355|969)( |$)/];
 	idMeta         = ({macFileType}) => macFileType==="RTF ";
 
 	// fileMerlin will convert RTF too, but it produces artifacts (page 30, 31, etc in document/rtf/DIGITIZE.RTF)

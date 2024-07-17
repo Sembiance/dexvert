@@ -6,7 +6,7 @@ export class upxPacked extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/UPX";
 	ext            = [".exe", ".com"];
 	forbidExtMatch = true;
-	magic          = ["Packer: UPX", "UPX compressed Win32 Executable", "UPX - NRV compressed"];
+	magic          = ["Packer: UPX", "UPX compressed Win32 Executable", "UPX - NRV compressed", /UPX compressed/];
 	packed         = true;
 	converters     = ["upx[renameKeepFilename]"];
 }

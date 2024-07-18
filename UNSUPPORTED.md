@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,385)
+# Unsupported File Formats (1,391)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (117)
+## Archive (119)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -82,12 +82,14 @@ Family/Format | Name | Extensions | Notes
 [archive/oricDisk](https://discmaster.textfiles.com/search?formatid=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
 [archive/oricTape](https://discmaster.textfiles.com/search?formatid=oricTape) | [ORIC Tape Image](http://fileformats.archiveteam.org/wiki/TAP_(Oric)) | .dat .tap | [4 sample files](https://sembiance.com/fileFormatSamples/archive/oricTape/)
 [archive/os2FTCOMP](https://discmaster.textfiles.com/search?formatid=os2FTCOMP) | [OS/2 FTCOMP Archive](http://fileformats.archiveteam.org/wiki/FTCOMP) |  | [6 sample files](https://sembiance.com/fileFormatSamples/archive/os2FTCOMP/) - OS/2 packed file. Can be unpackde by UNPACK.EXE or UNPACK2.EXE under OS/2. Available in OS/2 Warp, so I could support these by setting up a OS emulated OS/2 machine. Maybe some day.
+[archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack MasterPacked | .exe | 
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
 [archive/peCompactPacked](https://discmaster.textfiles.com/search?formatid=peCompactPacked) | PECompact Packed | .scr | 
 [archive/petitePacked](https://discmaster.textfiles.com/search?formatid=petitePacked) | Petite Packed | .exe | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
+[archive/pklite32Packed](https://discmaster.textfiles.com/search?formatid=pklite32Packed) | PKLITE32 Packed | .exe | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
@@ -128,7 +130,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (45)
+## Audio (46)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -148,6 +150,7 @@ Family/Format | Name | Extensions | Notes
 [audio/dmxOP2InstrumentData](https://discmaster.textfiles.com/search?formatid=dmxOP2InstrumentData) | DMS OP2 Instrument Data |  | 
 [audio/dynamixSSMSoundAndMusic](https://discmaster.textfiles.com/search?formatid=dynamixSSMSoundAndMusic) | Dynamix SSM sound and music | .sng | 
 [audio/fmTownsSND](https://discmaster.textfiles.com/search?formatid=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
+[audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?formatid=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?formatid=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?formatid=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?formatid=kixtartSPK) | KixTart SPK Notation | .spk | 
@@ -609,7 +612,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (749)
+## Other (752)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -709,6 +712,7 @@ Family/Format | Name | Extensions | Notes
 [other/billOfMaterials](https://discmaster.textfiles.com/search?formatid=billOfMaterials) | Bill of Materials | .bom | 
 [other/binaryColorFormat](https://discmaster.textfiles.com/search?formatid=binaryColorFormat) | Binary Color Format | .bcf | 
 [other/binaryDeltaCompressedPatch](https://discmaster.textfiles.com/search?formatid=binaryDeltaCompressedPatch) | Binary Delta Compressed Patch |  | 
+[other/binaryManagedObjectFile](https://discmaster.textfiles.com/search?formatid=binaryManagedObjectFile) | Binary Managed Object File | .bmf | 
 [other/binPatchPatch](https://discmaster.textfiles.com/search?formatid=binPatchPatch) | BinPatch Patch | .utp | 
 [other/bioForgeMotion](https://discmaster.textfiles.com/search?formatid=bioForgeMotion) | BioForge Motion | .mtn | 
 [other/bioForgeSkeleton](https://discmaster.textfiles.com/search?formatid=bioForgeSkeleton) | BioForge Skeleton | .skl | 
@@ -935,6 +939,7 @@ Family/Format | Name | Extensions | Notes
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 
 [other/kaperskyAntiVirusLicenseKey](https://discmaster.textfiles.com/search?formatid=kaperskyAntiVirusLicenseKey) | Kapersky Anti-Virus License Key | .key | 
+[other/karmaAsset](https://discmaster.textfiles.com/search?formatid=karmaAsset) | Karma Asset | .ka | 
 [other/kickPascalUnitInterface](https://discmaster.textfiles.com/search?formatid=kickPascalUnitInterface) | KICK-Pascal Unit Interface | .u | 
 [other/kissCELColorPalette](https://discmaster.textfiles.com/search?formatid=kissCELColorPalette) | KiSS CEL Color Palette | .kcf | 
 [other/klikNPlayGame](https://discmaster.textfiles.com/search?formatid=klikNPlayGame) | Klik'n'Play Game | .gam | 
@@ -1298,6 +1303,7 @@ Family/Format | Name | Extensions | Notes
 [other/visualBasicExtension](https://discmaster.textfiles.com/search?formatid=visualBasicExtension) | Visual Basic Extension | .vbx | 
 [other/visualBasicProjectWorkspace](https://discmaster.textfiles.com/search?formatid=visualBasicProjectWorkspace) | Visual Basic Project Workspace | .frm | 
 [other/visualBasicTokenizedSource](https://discmaster.textfiles.com/search?formatid=visualBasicTokenizedSource) | Visual Basic Tokenized Source | .bas | 
+[other/visualCPPExportLibrary](https://discmaster.textfiles.com/search?formatid=visualCPPExportLibrary) | Visual C++ Export Library | .exp | 
 [other/visualFoxProCompoundIndex](https://discmaster.textfiles.com/search?formatid=visualFoxProCompoundIndex) | Visual FoxPro Compound Index | .cdx | 
 [other/visualSmalltalkLibrary](https://discmaster.textfiles.com/search?formatid=visualSmalltalkLibrary) | Visual Smalltalk Enterprise Objects Library | .sll | 
 [other/visualSourceSafeControlFile](https://discmaster.textfiles.com/search?formatid=visualSourceSafeControlFile) | Visual SourceSafe Control File | .scc | 

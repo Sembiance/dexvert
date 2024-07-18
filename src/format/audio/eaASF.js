@@ -8,7 +8,7 @@ export class eaASF extends Format
 	ext              = [".asf", ".as4"];
 	forbidExtMatch   = true;
 	confidenceAdjust = () => -10;	// Reduce by 10 so that video/eaTQI matches first
-	magic            = ["Electronic Arts ASF video", /^x-fmt\/137( |$)/];
+	magic            = ["Electronic Arts ASF video", "'Need for Speed: Underground' soundtrack", /^x-fmt\/137( |$)/];
 	converters       = ["vgmstream"];
 	verify           = ({meta}) => meta.duration>=(xu.SECOND*2);
 }

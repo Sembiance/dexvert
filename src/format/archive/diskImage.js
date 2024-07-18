@@ -6,7 +6,7 @@ export class diskImage extends Format
 	website = "http://fileformats.archiveteam.org/wiki/Raw_disk_image";
 	ext     = [".img"];
 	weakExt = true;
-	magic   = ["Generic PC disk image", "FAT Disk Image", "DOS floppy", /^fmt\/1087( |$)/];
+	magic   = ["Generic PC disk image", "FAT Disk Image", "DOS floppy", "Old DOS disk image", /^fmt\/1087( |$)/];
 
 	// 7z isn't a very reliable program with unknown data, so if we've only matched on extension, lower our confidence a lot so other format families like images have a chance
 	confidenceAdjust = (inputFile, matchType) => (matchType==="ext" ? -20 : 0);

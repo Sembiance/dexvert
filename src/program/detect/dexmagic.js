@@ -80,6 +80,7 @@ const DEXMAGIC_CHECKS =
 	"Auto/FX Image"                 : [{offset : 0, match : [0x89, 0x41, 0x46, 0x58]}],
 	"CAD/Draw TVG"                  : [{offset : 0, match : "TommySoftware TVG"}],
 	"CD-I IFF Image"                : [{offset : 0, match : "FORM"}, {offset : 8, match : "IMAGIHDR"}],
+	"CDView Encrypted JPG"		    : [{offset : 0, match : "Z}Z"}],
 	"CharPad"                       : [{offset : 0, match : "CTM"}, {offset : 3, match : [0x05]}],
 	"DeskMate Paint Alt"            : [{offset : 0, match : "PNT"}],
 	"Digi-Pic 2"                    : [{offset : 32000, match : [0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]}],

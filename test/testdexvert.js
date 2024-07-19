@@ -182,7 +182,9 @@ const FLEX_SIZE_FORMATS =
 	archive :
 	{
 		// sometimes the SHA1 sum differs
-		annaMarie              : 0.01,
+		annaMarie              : 0.1,
+		axePacked              : 0.1,
+		cruncherPacked         : 0.1,
 		prehistorikGameArchive : 0.1,
 
 		// different each time due to way it generates frames

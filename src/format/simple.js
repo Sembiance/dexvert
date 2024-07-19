@@ -44,7 +44,6 @@ export default
 		formMasterForm           : {name : "Form Master Form", ext : [".frm"], magic : ["Form Master Form"]},
 		frameMakerBook           : {name : "FrameMaker Book", ext : [".book"], magic : ["FrameMaker book"]},
 		geoWorksGeoWriteDocument : {name : "GeoWorks GeoWrite document", ext : [".000"], magic : ["GeoWorks GeoWrite document"]},
-		gnuInfo                  : {name : "GNU Info File", ext : [".info-1", ".info-2", ".info-3", ".info-4", ".info-5", ".info-6", ".info-7", ".info-8", ".info-9"], magic : [/^GNU Info(, (ASCII|ISO-8859))?( text)?$/]}, // We do NOT include Trid's "GNU Info document" because it's too loose
 		goldDiskSpreadsheet      : {name : "Gold Disk Spreadsheet", ext : [".adv", ".pcf"], magic : ["Gold Disk Office Calc/Graph spreadsheet"]},
 		helmMultimediaBook       : {name : "Helm Multimedia Book", magic : ["Helm multimedia book"]},
 		helpLibrarian            : {name : "Help Librarian Help File", ext : [".hlp"], magic : ["C-Worthy Help Librarian Data", /^fmt\/1790( |$)/], website : "http://fileformats.archiveteam.org/wiki/Help_Librarian"},

@@ -31,7 +31,7 @@ async function loadProgramFilePath(programFilePath, {reload}={})
 	if(!(programs[programid] instanceof Program))
 		throw new Error(`program [${programid}] at [${programFilePath}] is not of type Program`);
 	
-	if(programs[programid].allowDupOut && !programs[programid].chain && !["binsciiPrepare", "callFunction", "dirOpener", "unHexACX"].includes(programid))
+	if(programs[programid].allowDupOut && !programs[programid].chain && !["binsciiPrepare", "callFunction", "dirOpener", "strings", "unHexACX"].includes(programid))
 		console.warn(`program ${programid} has ${"allowDupOut"} set to true, but does not have a ${"chain"} this is quite dangerous! Could lead to infinite recursion on processing server`);
 }
 

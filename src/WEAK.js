@@ -32,12 +32,25 @@ export const WEAK_MAC_TYPES =
 	"thng"		// Extension (Component)
 ];
 
+// these magics should be ignored in terms of reporting 'new magic' discoveries in things like dexrecurse, but are used by various formats so should not explictly be marked as weak
+export const IGNORE_MAGICS =
+[
+	// dexmagic
+	/^Generic RIFF file /,
+
+	// GT2
+	/^RIFF Datei: unbekannter Typ/,
+
+	// file
+	/^RIFF \((big|little)-endian\) data$/
+];
+
 // These magics are VERY untrustworthy and any detections against them should be noted as such
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
 	/^fmt\/(111|134|208|304|328|347|473|583|639|692|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1704|1708|1740|1751|1812|1902)( |$)/,
-	/^x-fmt\/(8|10|53|111|157|195|324|342)( |$)/,
+	/^x-fmt\/(8|10|53|157|195|324|342)( |$)/,
 
 	// binwalkID: WEAK checks
 	/^Copyright string: /,
@@ -73,7 +86,6 @@ export const WEAK_VALUES =
 
 	// dexmagic: WEAK checks
 	/^Generic IFF FORM file /,
-	/^Generic RIFF file /,
 	/^IFF CAT file$/,
 	/^Visual Novel DPK Archive$/,
 	/^ZZT World$/,
@@ -137,7 +149,6 @@ export const WEAK_VALUES =
 	/^Phar Lap \.EXP Datei$/,
 	/^PHP Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^POIFS Dokument/,
-	/^RIFF Datei: unbekannter Typ/,
 	/^RKive \(\d\) Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Scheint eine GIF-Datei zu sein$/,
 	/^Shell Skript:/,
@@ -371,7 +382,7 @@ export const WEAK_VALUES =
 	/^Linux LVM1 volume/,
 	/^Linux\/i386 core file/,
 	/^Linux-Dev86 executable, headerless/,
-	/^little|big endian ispell/,
+	/^(little|big) endian ispell/,
 	/^LN03 output/,
 	/^locale data table/,
 	/^Logitech Compress archive data/,
@@ -421,7 +432,7 @@ export const WEAK_VALUES =
 	/^MSX ROM/,
 	/^MSX-BASIC program/,
 	/^MSXiE archive data/,
-	/^mumps avl|blt global/,
+	/^mumps (avl|blt) global/,
 	/^MySQL table definition file Version 0/,
 	/^MySQL table definition file.* type UNKNOWN, MySQL version 0/,
 	/^National Instruments,/,
@@ -486,7 +497,6 @@ export const WEAK_VALUES =
 	/^Redis RDB file/,
 	/^RenderWare collision data \(COL\)/,
 	/^RenderWare data, v/,
-	/^RIFF \((big|little)-endian\) data$/,
 	/^RISC OS outline font data/,
 	/^ROOT file/,
 	/^Ruby script, ASCII text/,
@@ -537,7 +547,7 @@ export const WEAK_VALUES =
 	/^Tower\/XP rel/,
 	/^Tower32/,
 	/^Turbo Pascal TOUR data$/,
-	/^Unicode text, UTF-32, big|little-endian/,
+	/^Unicode text, UTF-32, (big|little-endian)/,
 	/^unicos \(cray\) executable/,
 	/^unified diff output/,
 	/^Unix-like shebang/,
@@ -1226,6 +1236,7 @@ export const WEAK_VALUES =
 	/^TOPO topographic Data$/,
 	/^Tornado mission Data$/,
 	/^Total Commander Lister extension \(plugin\)$/,
+	/^Transform compressed$/,
 	/^TriSound Voice Set$/,
 	/^TurboCALC SpreadSheet$/,
 	/^Trilobyte SVGA FLICK\/Groovie Player Script$/,

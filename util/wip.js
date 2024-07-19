@@ -14,6 +14,7 @@ import {UInt8ArrayReader} from "UInt8ArrayReader";
 import {MediaWiki} from "MediaWiki";
 import {xmlParse} from "denoLandX";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
+import {WEAK_VALUES} from "../src/WEAK.js";
 
 const xlog = new XLog("info");
 
@@ -22,5 +23,3 @@ const xlog = new XLog("info");
 
 //const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/archive/macBinary/Icon↵");
 //const inputFile = await DexFile.create(Deno.args[0]);
-
-

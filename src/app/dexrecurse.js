@@ -6,7 +6,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
 import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
-import {WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
+import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
 
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
@@ -159,8 +159,8 @@ if(fullOutputPath.endsWith(".tar.gz"))
 
 	if(await fileUtil.exists(RECURSE_WORK_DIR_PATH))
 		await fileUtil.unlink(RECURSE_WORK_DIR_PATH, {recursive : true});
-	await Deno.mkdir("/mnt/dexvert/recurse", {recursive : true});
-	workDirPath = await fileUtil.genTempPath("/mnt/dexvert/recurse");
+	await Deno.mkdir(RECURSE_WORK_DIR_PATH, {recursive : true});
+	workDirPath = await fileUtil.genTempPath(RECURSE_WORK_DIR_PATH);
 	await Deno.mkdir(workDirPath, {recursive : true});
 }
 else
@@ -188,6 +188,9 @@ const idMetaCheckers = [];
 if(argv.report)
 {
 	await initFormats(xlog);
+
+	for(const magic of IGNORE_MAGICS)
+		ALL_MAGICS.add(magic);
 
 	for(const format of Object.values(formats))
 	{

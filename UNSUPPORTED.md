@@ -922,7 +922,7 @@ Family/Format | Name | Extensions | Notes
 [other/indexerVolumeGUID](https://discmaster.textfiles.com/search?formatid=indexerVolumeGUID) | Index Volume GUID |  | 
 [other/infinityEngineFile](https://discmaster.textfiles.com/search?formatid=infinityEngineFile) | Infinity Engine File | .dlg .cre .itm .are .tlk .spl .sto | 
 [other/installShieldHDR](https://discmaster.textfiles.com/search?formatid=installShieldHDR) | [InstallShield HDR](http://fileformats.archiveteam.org/wiki/InstallShield_CAB) | .hdr | [2 sample files](https://sembiance.com/fileFormatSamples/other/installShieldHDR/) - HDR files are meta data for installShieldCAB files and are not processed directly.
-[other/installShieldISN](https://discmaster.textfiles.com/search?formatid=installShieldISN) | InstallShield ISN |  | 
+[other/installShieldSupportingFile](https://discmaster.textfiles.com/search?formatid=installShieldSupportingFile) | InstallShield Supporting File | .installscript | 
 [other/installShieldUninstallScript](https://discmaster.textfiles.com/search?formatid=installShieldUninstallScript) | InstallShield Uninstall Script | .isu | 
 [other/intellCOFFObject](https://discmaster.textfiles.com/search?formatid=intellCOFFObject) | Intel Common Object File Format Object | .obj | 
 [other/intelligentGamesResourceData](https://discmaster.textfiles.com/search?formatid=intelligentGamesResourceData) | Intelligent Games resource data | .res | 

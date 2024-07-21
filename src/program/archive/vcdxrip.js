@@ -1,3 +1,4 @@
+import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
 import {path} from "std";
@@ -25,13 +26,16 @@ export class vcdxrip extends Program
 	cwd      = r => r.outDir();
 	postExec = async r =>
 	{
+		const avseqFileCount = (await fileUtil.tree(r.outDir({absolute : true}), {nodir : true, regex : /avseq\d+\.mpg$/})).length;
 		const avseqFilePath = path.join(r.outDir({absolute : true}), "avseq01.mpg");
 		
 		// We used to check for this error: (r.stdout + r.stderr).includes("encountered non-form2 sector -- leaving loop")
 		// If it was present, we assumed a complete failure and exited early. But *something* is better than *nothing*
 		// This is the case with http://discmaster.textfiles.com/browse/15859
-		// So now we proceed so long as we have an mpg file that is not empty
-		if(!await fileUtil.exists(avseqFilePath) && (await Deno.stat(avseqFilePath)).size)	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
+		// So we used to proceed just so long as we have an mpg file that is not empty
+		// However then I encountered this one: http://dev.discmaster2.textfiles.com/view/375/VolumeLabel.bin/avseq01.mpg
+		// Where it produce just a 120kb file. so now we also check if the file is larger than 5MB when there is only a single avseq result file
+		if(!(await fileUtil.exists(avseqFilePath)) || ((await Deno.stat(avseqFilePath)).size || 0)<(avseqFileCount===1 ? xu.MB*5 : 1))	// If the output includes this message then the processing of the VCD failed somewhere and left an incomplete .mpg file
 		{
 			if(r.tmpBINCUEDirPath)
 				await fileUtil.unlink(r.tmpBINCUEDirPath, {recursive : true});

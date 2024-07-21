@@ -1087,6 +1087,7 @@ export const WEAK_VALUES =
 	/^Destruction Derby game data$/,	// Actually found matches that were correct, but the id just arters with "PACKED" which is way too weak to match, even with an extension since it just uses .000 and .RAW
 	/^Diagram-Master Diagram$/,
 	/^Die Total Verruckte Rallye game data$/,
+	/^Digita Organiser text$/,
 	/^Digitals\/Delta Map$/,
 	/^DirectShow filter$/,
 	/^Dired ls-like directory listing/,
@@ -1204,6 +1205,7 @@ export const WEAK_VALUES =
 	/^ROOT format$/,
 	/^Safari Cookies$/,
 	/^SAPI Sound Driver$/,
+	/^SBStudio II song$/,
 	/^Scalable Vector Graphics \(var\.3\)$/,
 	/^Scribe Markup$/,
 	/^Sentry Spelling-Checker user dictionary$/,
@@ -1250,6 +1252,7 @@ export const WEAK_VALUES =
 	/^VHSIC Hardware Description Language \(with rem\)$/,
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,
+	/^VP-Planner Plus spreadsheet$/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,
 	/^Westwood game data Archive$/,

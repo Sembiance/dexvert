@@ -902,7 +902,7 @@ export default
 		iffPrefs                         : {name : "Amiga Preferences", ext : [".prefs"], magic : ["Amiga Preferences", "IFF data, PREF preferences"]},
 		imagineStagingData               : {name : "Imagine Staging Data", ext : [".istg"], magic : ["Imagine Staging data"]},
 		impulseTrackerSoundDriver        : {name : "Impulse Tracker Sound Driver", ext : [".drv"], magic : ["Impulse Tracker Advanced Sound Driver", "Impulse Tracker sound Driver"]},
-		installShieldISN                 : {name : "InstallShield ISN", magic : ["Archive: InstallShield ISN"]},
+		installShieldSupportingFile      : {name : "InstallShield Supporting File", ext : [".installscript"], magic : ["Archive: InstallShield ISN", "Archive: InstallShield INX"]},
 		invisionBrushes                  : {name : "Invision Brushes", ext : [".bru"], magic : ["Invision Brushes"]},
 		indexerVolumeGUID                : {name : "Index Volume GUID", magic : ["IndexerVolumeGuid"]},
 		internationalPatchingSystem      : {name : "International Patching System", ext : [".ips"], magic : ["International Patching System", "IPS patch file"], weakMagic : true},

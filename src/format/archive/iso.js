@@ -140,7 +140,7 @@ export class iso extends Format
 
 		// If it's a VideoCD, rip video using 'vcdxrip'
 		if(dexState.meta?.vcd?.isVCD && cueFile)
-			return ["vcdxrip", "IsoBuster", `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
+			return ["vcdxrip", "aaru", "IsoBuster", `bchunk[cueFilePath:${base64Encode(cueFile.absolute)}]`];
 		else if(fuseTree.some(v => v.toLowerCase().startsWith("mpegav/avseq")))
 			return ["vcdxrip[reRip]"];
 

@@ -2,7 +2,7 @@
 import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {runUtil, fileUtil, printUtil, encodeUtil, cmdUtil, hashUtil} from "xutil";
-import {path, delay, base64Encode, csvParse} from "std";
+import {path, delay, base64Encode, csvParse, ascii85Decode} from "std";
 import {Program} from "../src/Program.js";
 import {formats, init as initFormats} from "../src/format/formats.js";
 import {DexFile} from "../src/DexFile.js";
@@ -23,3 +23,4 @@ const xlog = new XLog("info");
 
 //const inputFile = await DexFile.create("/mnt/compendium/DevLab/dexvert/test/sample/archive/macBinary/Icon↵");
 //const inputFile = await DexFile.create(Deno.args[0]);
+

@@ -91,7 +91,7 @@ export const WEAK_VALUES =
 	/^ZZT World$/,
 
 	// disktype: WEAK checks
-	/^Amiga AFS file system Type "AFS\0"$/,
+	/^Amiga AFS file system Type "AFS\\0"$/,
 	/^Amiga Kickstart disk Type "KICK"$/,
 	/^Amiga type code /,
 	/^ATARI ST partition map/,
@@ -125,7 +125,7 @@ export const WEAK_VALUES =
 	/^JPG Bild/,
 	/^IBM Hilfedatei$/,
 	/^Icon Datei/,
-	/^ID3v2\.0\.0 Tag/,
+	/^ID3v[\d.]+ Tag/,
 	/^IFF Datei/,
 	/^INI Datei/,
 	/^Lotus 123 Tabelle/,
@@ -229,6 +229,7 @@ export const WEAK_VALUES =
 	/^ARM Thumb COFF/,
 	/^ARMv7 Thumb/,
 	/^ASD archive data/,
+	/^Aster\*x Version 2/,
 	/^Atari DEGAS/,
 	/^Award BIOS Logo, \d+ x \d+/,
 	/^ASCII font (bits|metrics)/,
@@ -400,6 +401,7 @@ export const WEAK_VALUES =
 	/^Map file for the AssaultCube FPS game/,
 	/^Maple help database$/,
 	/^Maple something/,
+	/^Maple worksheet, but weird$/,
 	/^Mathematica 3.0 notebook/,
 	/^Matlab v(4|Mat)/,
 	/^mc68k COFF/,
@@ -579,6 +581,7 @@ export const WEAK_VALUES =
 	/^YAC archive data/,
 	/^YAFFS filesystem root entry/,
 	/^Zebra Metafile graphic/,
+	/^ZZip archive data/,
 
 	// TRID: Checks just 1-3 bytes:
 	/^1ST Word Plus Document$/,
@@ -624,6 +627,7 @@ export const WEAK_VALUES =
 	/^Bit Archiver compressed archive$/,
 	/^BitKeeper history data$/,
 	/^Borland Client Dataset data$/,
+	/^BRender (ASF|BRP)$/,
 	/^BSArc compressed archive$/,
 	/^BSC ZX Spectrum tape data$/,
 	/^BSP bitmap$/,
@@ -1077,6 +1081,7 @@ export const WEAK_VALUES =
 	/^Copper Colourz! File$/,	// Found correct matches, but magic 'CCF' (and string 'CCF FILE') are too generic given that the extension is .ccf
 	/^CryEngine Project \(generic\)$/,
 	/^Cryptx encrypted data$/,
+	/^Cyberboard Gamebox$/,
 	/^Cydonia game video format$/,
 	/^Dagor Engine game data archive$/,
 	/^Dan Bricklin's Demo/,

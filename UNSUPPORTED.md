@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,392)
+# Unsupported File Formats (1,393)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -499,7 +499,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (108)
+## Music (109)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -537,6 +537,7 @@ Family/Format | Name | Extensions | Notes
 [music/facSoundtrackerModule](https://discmaster.textfiles.com/search?formatid=facSoundtrackerModule) | FAC Soundtracker Module | .mus | 
 [music/faceTheMusic](https://discmaster.textfiles.com/search?formatid=faceTheMusic) | [Face The Music Module](http://eab.abime.net/showthread.php?t=62254) | .ftm | [5 sample files](https://sembiance.com/fileFormatSamples/music/faceTheMusic/)
 [music/famiTracker](https://discmaster.textfiles.com/search?formatid=famiTracker) | FamiTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/famiTracker/) - I tried using FamiTracker under WinXP http://famitracker.com/ but it just created a WAV of zero bytes long. Maybe because I'm not emulating a sound card...
+[music/ffmModule](https://discmaster.textfiles.com/search?formatid=ffmModule) | FFM module | .ffm | 
 [music/finaleMusicScore](https://discmaster.textfiles.com/search?formatid=finaleMusicScore) | Finale Music Score | .mus | 
 [music/fmTracker](https://discmaster.textfiles.com/search?formatid=fmTracker) | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
 [music/fredEditorSoundTrack](https://discmaster.textfiles.com/search?formatid=fredEditorSoundTrack) | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)

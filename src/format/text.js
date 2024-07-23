@@ -121,6 +121,7 @@ export default
 		// Other //
 		///////////
 		autoCADPlotterConfiguration             : {name : "AutoCAD Plotter Configuration", ext : [".pcp"], magic : ["AutoCAD Plotter Configuration"], weakMagic : true},
+		acrobatFormsData                        : {name : "Acrobat Forms Data", ext : [".fdf", ".acrodata"], magic : ["Acrobat Forms Data Format", "Adobe PDF Form Daten Datei", /^FDF document/, /^fmt\/1500( |$)/]},
 		adobeFontList                           : {name : "Adobe Font List", ext : [".lst"], magic : [/^fmt\/526( |$)/]},
 		aegisAnimatorScript                     : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
 		aibbResultsLog                          : {name : "AIBB results log", magic : ["AIBB results log"]},
@@ -134,6 +135,7 @@ export default
 		batMenuConfiguration                    : {name : "BatMenu configuration", ext : [".mnu"], magic : ["BatMenu configuration"]},
 		berndWetzelOS2InstallData               : {name : "Bernd Wetzel OS/2 Install Data", ext : [".dat"], magic : ["Bernd Wetzel OS/2 Install Data"]},
 		bibTeXStyle                             : {name : "BibTeX style", ext : [".bst"], magic : [/^BibTeX ((custom|standard) bibliography )?style text file/]},
+		bifBitmapASCIIInfo                      : {name : "BIF bitmap ASCII info", ext : [".bif"], magic : ["BIF bitmap ASCII info"], weakMagic : true},
 		brikChecksums                           : {name : "Brik checksums", magic : ["Brik checksums"]},
 		brutusApplicationDefinition             : {name : "Brutus Application Definition", ext : [".bad"], magic : ["Brutus Application Definition"]},
 		bucketOTabTablature                     : {name : "Bucket 'o Tab tablature", ext : [".tbs", ".bot"], magic : ["Bucket 'o Tab tablature"]},
@@ -227,6 +229,7 @@ export default
 		pv3DValueData                           : {name : "PV3D Value data", ext : [".val"], magic : ["PV3D Value data"], weakMagic : true},
 		quickenInterchangeFormat                : {name : "Quicken Interchange Format", ext : [".qif"], magic : ["Quicken Interchange Format"], weakMagic : true},
 		realNumbersTape                         : {name : "REAL Numbers Tape", ext : [".tap"], magic : ["REAL Numbers Tape"], weakMagic : true},
+		rebelSpreadsheet                        : {name : "Rebel spreadsheet (v2)", ext : [".rb2"], magic : ["Rebel spreadsheet"], weakMagic : true},
 		reg                                     : {name : "Windows Registry Data", website : "http://fileformats.archiveteam.org/wiki/Windows_Registry", ext : [".reg", ".dat"], magic : [/^Windows Registry (Data|text)/, "Windows Registry Datei", "MS Windows 95/98/ME registry file"]},
 		renderizeProject                        : {name : "Renderize Project", ext : [".bin"], magic : ["Renderize Project"]},
 		rtPatchDocumentation                    : {name : "RTPatch Documentation", ext : [".rtd"], magic : ["RTPatch Documentation"]},
@@ -241,6 +244,7 @@ export default
 		svgaVESAConfiguration                   : {name : "SVGAVESA configuration", ext : [".svc"], magic : ["SVGAVESA configuration"]},
 		terminateSmartnote                      : {name : "Terminate Smartnote", ext : [".not"], magic : ["Terminate Smartnote"]},
 		texTranscript                           : {name : "TeX transcript", ext : [".log"], magic : ["TeX transcript"]},
+		timeworksWordWriterDocument             : {name : "Timeworks Word Writer document", magic : ["Timeworks Word Writer document"]},
 		totalCommanderButtonBarConfig           : {name : "Total Commander button Bar config", ext : [".bar"], magic : ["Total Commander button Bar config"], weakMagic : true},
 		tplotGraphSource                        : {name : "TPLOT graph source", ext : [".plt"], magic : ["TPLOT graph source"], weakMagic : true},
 		traconSectorInfo                        : {name : "Tracon Sector info", ext : [".sec"], magic : ["Tracon Sector info"]},

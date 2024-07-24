@@ -30,6 +30,7 @@ export const cup386 =
 		packerJESCOREPacked : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
 		packerPacked        : {name : "Packer Packed", magic : ["Packer: Packer"]},
 		pktinyPacked        : {name : "PKTINY Packed", magic : ["16bit DOS EXE PKTINY compressed"]},
+		rdtCompressorPacked : {name : "RDT Compressor Packed", magic : ["Packer: RDT_Compressor"]},
 		rjCrushPacked       : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable"]},
 		rleCOMPackerPacked  : {name : "RLE com-packer Packed", magic : ["Packer: RLE com-packer"]},
 		sixTwoFourPacked    : {name : "624 Packed", magic : ["Packer: Six-2-Fou", "Six-2-Four (624) packed DOS Command"]},

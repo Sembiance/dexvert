@@ -290,6 +290,7 @@ async function loadText({reload}={})
 				if(o.ext?.length && o.magic?.length)
 					format.forbidExtMatch = true;
 			});
+			formats[formatid].priority = formats[formatid].PRIORITY.LOW;
 			formats[formatid].formatid = formatid;
 			textFormatids.add(formatid);
 		}

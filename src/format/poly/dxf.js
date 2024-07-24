@@ -6,7 +6,7 @@ export class dxf extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/DXF";
 	ext        = [".dxf"];
 	mimeType   = "image/vnd.dxf";
-	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format", /^fmt\/(63|73|74|75|76|77|435)( |$)/];
+	magic      = [/^AutoCAD Drawing [Ee][Xx]change Format/, "Drawing Interchange File Format", /^fmt\/(63|69|71|73|74|75|76|77|435)( |$)/];
 	slow       = true;
 	converters = ["polyTrans64[format:dxf]", "cinema4D427", "AccuTrans3D", "assimp", "blender[format:dxf]", "milkShape3D[format:dxf]", "threeDObjectConverter"];
 

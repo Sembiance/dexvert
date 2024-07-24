@@ -1,6 +1,6 @@
 import {Format} from "../../Format.js";
 
-export class botaEncoded extends Format
+export class btoaEncoded extends Format
 {
 	name           = "BTOA Encoded";
 	website        = "http://fileformats.archiveteam.org/wiki/Ascii85";

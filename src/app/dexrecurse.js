@@ -96,6 +96,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"other/qseqProject",
 	"other/quickPascalUnit",
 	"text/neoBookDocument",
+	"text/neoPaintHelp",
 
 	// totally useless
 	"other/emptyFile",

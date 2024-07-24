@@ -6,7 +6,7 @@ export class q4d extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/XLD4";
 	ext            = [".q4d"];
 	forbidExtMatch = true;
-	magic          = ["XLD4 Graphic Data Document bitmap"];
+	magic          = ["XLD4 Graphic Data Document bitmap", /^fmt\/1448( |$)/];
 	charSet        = "IBM-943";
 	untouched      = true;
 	metaProvider   = ["text"];

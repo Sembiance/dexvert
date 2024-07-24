@@ -28,7 +28,7 @@ export const TEXT_MAGIC_WEAK =
 	"Textdatei",
 
 	// file
-	"Microsoft HTML Help Project, ISO-8859 text, with CRLF line terminators", /^text\/plain/,
+	"Microsoft HTML Help Project, ISO-8859 text, with CRLF line terminators", /^text\/plain/, "TEXT/PLAIN; CHARSET=us-ascii", /^Unicode text, UTF-8 (\(with BOM\) )?text/,
 
 	// Detect It Easy
 	"Format: plain text[CRLF]",

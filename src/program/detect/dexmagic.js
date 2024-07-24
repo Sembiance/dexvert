@@ -278,6 +278,22 @@ const DEXMAGIC_CUSTOMS =
 		return `Generic RIFF file ${riffType}`;
 	},
 
+	async function checkVCard(r)
+	{
+		if(r.f.input.size<11)
+			return;
+
+		const header = await fileUtil.readFileBytes(r.f.input.absolute, 6);
+		if(header.getString(0, 6).toLowerCase()!=="begin:")
+			return;
+		
+		const moreBytes = await fileUtil.readFileBytes(r.f.input.absolute, Math.min(r.f.input.size-6, 64), 6);
+		if(!(/^\s*vcard/i).test((new TextDecoder()).decode(moreBytes).toLowerCase()))
+			return;
+
+		return `vCard`;
+	},
+
 	async function checkWatcomInstallArchive(r)
 	{
 		if(r.f.input.size<12)

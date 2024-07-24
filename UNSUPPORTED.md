@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,393)
+# Unsupported File Formats (1,405)
 These formats can still be **identified** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (119)
+## Archive (125)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -18,6 +18,7 @@ Family/Format | Name | Extensions | Notes
 [archive/aldusLZWCompressedData](https://discmaster.textfiles.com/search?formatid=aldusLZWCompressedData) | Aldus LZW compressed data |  | 
 [archive/aldusZip](https://discmaster.textfiles.com/search?formatid=aldusZip) | Aldus Zip Compressed File |  | No known extractor program.
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?formatid=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
+[archive/apple2DiskImage](https://discmaster.textfiles.com/search?formatid=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?formatid=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
 [archive/apriDisk](https://discmaster.textfiles.com/search?formatid=apriDisk) | [ApriDisk](http://fileformats.archiveteam.org/wiki/ApriDisk) | .dsk | [3 sample files](https://sembiance.com/fileFormatSamples/archive/apriDisk/) - The apridisk.exe program can write these to a real floppy, so maybe I could use DOSBOX and an inserted blank floppy to try and write these and then convert, but meh.
 [archive/artisoftInstallationPackage](https://discmaster.textfiles.com/search?formatid=artisoftInstallationPackage) | Artisoft installation Package | .pak | 
@@ -34,6 +35,7 @@ Family/Format | Name | Extensions | Notes
 [archive/bootableMacHFSDiskImage](https://discmaster.textfiles.com/search?formatid=bootableMacHFSDiskImage) | Bootable Mac HFS Disk image |  | 
 [archive/bsqEncodedData](https://discmaster.textfiles.com/search?formatid=bsqEncodedData) | BSQ encoded data | .bsq | 
 [archive/bzip](https://discmaster.textfiles.com/search?formatid=bzip) | BZIP Compressed Archive | .bz | [2 sample files](https://sembiance.com/fileFormatSamples/archive/bzip/) - Was only in use for a very brief time and the only files I've encountered are the two samples that shipped with bzip-0.21
+[archive/causeWayCompressorPacked](https://discmaster.textfiles.com/search?formatid=causeWayCompressorPacked) | CauseWay Compressor Packed | .exe | 
 [archive/ccs64Cartridge](https://discmaster.textfiles.com/search?formatid=ccs64Cartridge) | CCS64 Cartridge | .crt .car | 
 [archive/ciphatorProtectedV46](https://discmaster.textfiles.com/search?formatid=ciphatorProtectedV46) | cIPHATOR Protected | .exe | 
 [archive/coloradoMemorySystemPackage](https://discmaster.textfiles.com/search?formatid=coloradoMemorySystemPackage) | Colorado Memory System Package | .cmp | 
@@ -51,9 +53,11 @@ Family/Format | Name | Extensions | Notes
 [archive/emmaCompress](https://discmaster.textfiles.com/search?formatid=emmaCompress) | EmmaCompress |  | 
 [archive/exeManagerProtected](https://discmaster.textfiles.com/search?formatid=exeManagerProtected) | EXE Manager protected | .exe | 
 [archive/exePackerPacked](https://discmaster.textfiles.com/search?formatid=exePackerPacked) | EXE Packer Packed |  | 
+[archive/exe32PackPacked](https://discmaster.textfiles.com/search?formatid=exe32PackPacked) | Exe32Pack Packed | .exe | 
 [archive/fizArchive](https://discmaster.textfiles.com/search?formatid=fizArchive) | FIZ Archive | .fiz | [8 sample files](https://sembiance.com/fileFormatSamples/archive/fizArchive/) - Could not locate any info on this archive
 [archive/foxProArchive](https://discmaster.textfiles.com/search?formatid=foxProArchive) | FoxPro Archive | .pak | 
 [archive/freeArc](https://discmaster.textfiles.com/search?formatid=freeArc) | [FreeArc Archive](http://fileformats.archiveteam.org/wiki/ARC_(FreeArc)) | .arc | [1 sample file](https://sembiance.com/fileFormatSamples/archive/freeArc/) - I have the bz2 linux source code, but I don't trust it to be free of malware, so haven't compiled it. Pretty rare format I imagine and it didn't really exist until 2010, so not important to support at this time.
+[archive/fsgPacked](https://discmaster.textfiles.com/search?formatid=fsgPacked) | FSG Packed | .exe | 
 [archive/hackStopProtected](https://discmaster.textfiles.com/search?formatid=hackStopProtected) | HackStop Protected | .exe | 
 [archive/iconHeaven](https://discmaster.textfiles.com/search?formatid=iconHeaven) | [Icon Heavn](http://fileformats.archiveteam.org/wiki/Icon_Heaven_library) | .fim | [7 sample files](https://sembiance.com/fileFormatSamples/archive/iconHeaven/) - Could support it by using icon heaven under an emulated OS/2 instance. NOTE, if the only thing in this is images, then it should be moved to image family
 [archive/imageLibrarianArchive](https://discmaster.textfiles.com/search?formatid=imageLibrarianArchive) | Image Librarian archive | .ril | 
@@ -85,9 +89,11 @@ Family/Format | Name | Extensions | Notes
 [archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack MasterPacked | .exe | 
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
+[archive/peDiminisherPacked](https://discmaster.textfiles.com/search?formatid=peDiminisherPacked) | PE Diminisher Packed | .exe | 
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
 [archive/peCompactPacked](https://discmaster.textfiles.com/search?formatid=peCompactPacked) | PECompact Packed | .scr | 
 [archive/petitePacked](https://discmaster.textfiles.com/search?formatid=petitePacked) | Petite Packed | .exe | 
+[archive/pexPacked](https://discmaster.textfiles.com/search?formatid=pexPacked) | PeX Packed | .exe | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/pklite32Packed](https://discmaster.textfiles.com/search?formatid=pklite32Packed) | PKLITE32 Packed | .exe | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
@@ -217,6 +223,7 @@ Family/Format | Name | Extensions | Notes
 [document/firstChoicePublication](https://discmaster.textfiles.com/search?formatid=firstChoicePublication) | First Choice Publication | .pub | 
 [document/flowCharting](https://discmaster.textfiles.com/search?formatid=flowCharting) | [Flow Charting](http://fileformats.archiveteam.org/wiki/Flow_Charting) | .cht .fcd .gfc .pdq .fc5 .fcx | [3 sample files](https://sembiance.com/fileFormatSamples/document/flowCharting/)
 [document/folioDatabase](https://discmaster.textfiles.com/search?formatid=folioDatabase) | [Folio Database](http://fileformats.archiveteam.org/wiki/Folio_Infobase) | .nfo .sdw .fff .def | 
+[document/geoWorksGeoCalcSpreadsheet](https://discmaster.textfiles.com/search?formatid=geoWorksGeoCalcSpreadsheet) | GeoWorks GeoCalc spreadsheet | .000 | 
 [document/geoWorksGEOSHelp](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSHelp) | GeoWorks GEOS help | .000 | 
 [document/geoWorksWriterDocument](https://discmaster.textfiles.com/search?formatid=geoWorksWriterDocument) | GeoWorks Writer document | .000 | 
 [document/greenstreetPublisher](https://discmaster.textfiles.com/search?formatid=greenstreetPublisher) | [Greenstreet Publisher Document/Snippet](http://fileformats.archiveteam.org/wiki/Greenstreet_Publisher) | .dtp .srp | [10 sample files](https://sembiance.com/fileFormatSamples/document/greenstreetPublisher/) - I could open these just fine under Win2k with Publishing Suite 99, but it can't save in ANY other format, and print to file crashes QEMU, sigh.
@@ -259,7 +266,6 @@ Family/Format | Name | Extensions | Notes
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?formatid=trueBASICCompiledCode) | True BASIC compiled code |  | 
 [document/turboCalc](https://discmaster.textfiles.com/search?formatid=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/upShotManual](https://discmaster.textfiles.com/search?formatid=upShotManual) | UpShot Manual | .mnl | 
-[document/vCard](https://discmaster.textfiles.com/search?formatid=vCard) | [vCard](http://fileformats.archiveteam.org/wiki/VCard) | .vcf .vcard | [1 sample file](https://sembiance.com/fileFormatSamples/document/vCard/) - Could write my own parser/converter using package libvformat
 [document/venturaPublisherChapter](https://discmaster.textfiles.com/search?formatid=venturaPublisherChapter) | Ventura Publisher Chapter | .chp | 
 [document/vizawriteDocument](https://discmaster.textfiles.com/search?formatid=vizawriteDocument) | Vizawrite Document |  | 
 [document/volkswriter](https://discmaster.textfiles.com/search?formatid=volkswriter) | [Volkswriter](https://winworldpc.com/product/volkswriter) | .vw | [1 sample file](https://sembiance.com/fileFormatSamples/document/volkswriter/) - DOS based word processor. Haven't investigated it for magic.
@@ -271,7 +277,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Executable (40)
+## Executable (41)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [executable/aDotOutExecutable](https://discmaster.textfiles.com/search?formatid=aDotOutExecutable) | a.out Executable | .o | 
@@ -286,6 +292,7 @@ Family/Format | Name | Extensions | Notes
 [executable/elf](https://discmaster.textfiles.com/search?formatid=elf) | ELF Executable |  | [1 sample file](https://sembiance.com/fileFormatSamples/executable/elf/)
 [executable/fmTownsOSApp](https://discmaster.textfiles.com/search?formatid=fmTownsOSApp) | FM-TownsOS App | .exp | [9 sample files](https://sembiance.com/fileFormatSamples/executable/fmTownsOSApp/)
 [executable/geoWorksGEOSApplication](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSApplication) | GeoWorks GEOS application | .geo | 
+[executable/geoWorksGEOSPrinterDriver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSPrinterDriver) | GeoWorks GEOS printer driver | .geo | 
 [executable/hpPalmtopExecutable](https://discmaster.textfiles.com/search?formatid=hpPalmtopExecutable) | HP Palmtop Executable | .exm | [2 sample files](https://sembiance.com/fileFormatSamples/executable/hpPalmtopExecutable/)
 [executable/linux8086Exe](https://discmaster.textfiles.com/search?formatid=linux8086Exe) | Linux 8086 Executable |  | 
 [executable/linux386Exe](https://discmaster.textfiles.com/search?formatid=linux386Exe) | Linux i386 Executable |  | 
@@ -392,7 +399,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (101)
+## Image (103)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -412,6 +419,7 @@ Family/Format | Name | Extensions | Notes
 [image/bbcDisplayRAM](https://discmaster.textfiles.com/search?formatid=bbcDisplayRAM) | BBC Display RAM Dump |  | [1 sample file](https://sembiance.com/fileFormatSamples/image/bbcDisplayRAM/) - While supported by abydos, due to no extension and no magic, it's impossible to detect accurately.
 [image/blueScanDrawing](https://discmaster.textfiles.com/search?formatid=blueScanDrawing) | Blue Scan Drawing | .blsc | 
 [image/cadVantageDrawing](https://discmaster.textfiles.com/search?formatid=cadVantageDrawing) | CAD Vantage Drawing | .dwg | 
+[image/cadlogicInstinctDrawing](https://discmaster.textfiles.com/search?formatid=cadlogicInstinctDrawing) | Cadlogic Instinct Drawing | .dp | 
 [image/calamusVectorDocument](https://discmaster.textfiles.com/search?formatid=calamusVectorDocument) | Calamus Vector Document | .cvd | 
 [image/chompstersSprite](https://discmaster.textfiles.com/search?formatid=chompstersSprite) | Chompsters Sprite | .spr | 
 [image/clarisDraw](https://discmaster.textfiles.com/search?formatid=clarisDraw) | Claris Draw | .cdd | [1 sample file](https://sembiance.com/fileFormatSamples/image/clarisDraw/)
@@ -433,6 +441,7 @@ Family/Format | Name | Extensions | Notes
 [image/fxgBitmap](https://discmaster.textfiles.com/search?formatid=fxgBitmap) | FXG Bitmap | .fxg | [3 sample files](https://sembiance.com/fileFormatSamples/image/fxgBitmap/)
 [image/genericCADD](https://discmaster.textfiles.com/search?formatid=genericCADD) | Generic CADD | .gcd | 
 [image/geoWorksGeoDrawDrawing](https://discmaster.textfiles.com/search?formatid=geoWorksGeoDrawDrawing) | GeoWorks GeoDraw drawing | .000 | 
+[image/geoWorksGEOSBackground](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSBackground) | GeoWorks GEOS background | .000 .geo | 
 [image/graphicWorksVectorDrawing](https://discmaster.textfiles.com/search?formatid=graphicWorksVectorDrawing) | GraphicWorks Vector Drawing | .dvg | 
 [image/greenstreetDrawing](https://discmaster.textfiles.com/search?formatid=greenstreetDrawing) | Greenstreet Drawing | .art | [6 sample files](https://sembiance.com/fileFormatSamples/image/greenstreetDrawing/)
 [image/homeBrewIcon](https://discmaster.textfiles.com/search?formatid=homeBrewIcon) | HomeBrew Icon | .hic | [1 sample file](https://sembiance.com/fileFormatSamples/image/homeBrewIcon/)
@@ -614,7 +623,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (752)
+## Other (755)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -811,6 +820,7 @@ Family/Format | Name | Extensions | Notes
 [other/decisionProProject](https://discmaster.textfiles.com/search?formatid=decisionProProject) | Decision/pro project | .dp | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?formatid=deHackEdPatch) | DeHackEd Patch | .deh | 
 [other/deluxeSkiJump2Replay](https://discmaster.textfiles.com/search?formatid=deluxeSkiJump2Replay) | Deluxe Ski Jump 2 Replay | .rpl | 
+[other/demoGeneratorShowScreen](https://discmaster.textfiles.com/search?formatid=demoGeneratorShowScreen) | Demo Generator Show screen | .sho | 
 [other/demoManiacVectors](https://discmaster.textfiles.com/search?formatid=demoManiacVectors) | DemoManiac Vectors | .dat | 
 [other/demoShieldDemo](https://discmaster.textfiles.com/search?formatid=demoShieldDemo) | DemoShield Demo | .dbd .bdd | 
 [other/depthDwellersGameData](https://discmaster.textfiles.com/search?formatid=depthDwellersGameData) | Depth Dwellers Resource/game data | .res | 
@@ -847,6 +857,7 @@ Family/Format | Name | Extensions | Notes
 [other/dynamixSceneDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSceneDataContainer) | Dynamix scene data container | .ttm .tkm | 
 [other/dynamixSoundDataContainer](https://discmaster.textfiles.com/search?formatid=dynamixSoundDataContainer) | Dynamix Sound data container | .sx .snd .blk | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?formatid=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
+[other/elfCoreFile](https://discmaster.textfiles.com/search?formatid=elfCoreFile) | ELF Core File | .core | 
 [other/emacsCompiledLisp](https://discmaster.textfiles.com/search?formatid=emacsCompiledLisp) | Emacs Compiled Lisp | .elc | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with (maybe): https://github.com/rocky/elisp-decompile
 [other/ensoniqVFXPatchFile](https://discmaster.textfiles.com/search?formatid=ensoniqVFXPatchFile) | Ensoniq VFX Patch File | .vfx | 
 [other/esriCoverageAnnotation](https://discmaster.textfiles.com/search?formatid=esriCoverageAnnotation) | ESRI ArcInfo Coverage Annotation |  | 
@@ -896,6 +907,7 @@ Family/Format | Name | Extensions | Notes
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?formatid=gfxLab24Filter) | GfxLab24 Filter |  | 
 [other/glbGameDataArchive](https://discmaster.textfiles.com/search?formatid=glbGameDataArchive) | GLB game data archive | .glb | 
 [other/glibcLocaleFile](https://discmaster.textfiles.com/search?formatid=glibcLocaleFile) | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://sembiance.com/fileFormatSamples/other/glibcLocaleFile/)
+[other/gnuGettextMachineObject](https://discmaster.textfiles.com/search?formatid=gnuGettextMachineObject) | GNU Gettext Machine Objec | .gmo | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?formatid=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 

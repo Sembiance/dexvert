@@ -17,7 +17,7 @@ export class dll extends Format
 
 		// specific DLL types
 		"Photoshop filter plug-in", "PhotoShop plug-in", "NT5 Migrate DLL", "DLL PowerBASIC PB/DLL 6.x", "OllyDbg plugin", "Borland component", "Python Dynamic module", "Adobe Acrobat Reader Plugin", "Borland Package Library",
-		"WinAmp 2.x Input plugin", "WinAmp 2.x Output plugin", "Winconv conversion module"
+		"WinAmp 2.x Input plugin", "WinAmp 2.x Output plugin", "Winconv conversion module", "BRender Device Driver"
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

@@ -5,7 +5,8 @@ const _XML_MAGIC = [
 	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", /^fmt\/101( |$)/,
 	
 	// specific XML
-	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location"
+	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
+	/^fmt\/(979|983)( |$)/
 ];
 export {_XML_MAGIC};
 

@@ -9,9 +9,10 @@ export class msCompound extends Format
 		"Generic OLE2 / Multistream Compound", "Composite Document File V2 Document", "OLE2 Compound Document Format", "OLE 2 Compound Document", /^CFBF$/,
 		
 		// app specific
-		"Shell Scrap object"
+		"Shell Scrap object", "Ulead PhotoImpact Object(s)", /^fmt\/1303( |$)/, /^x-fmt\/243( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these
 	confidenceAdjust = (input, matchType, curConfidence) => -(curConfidence-40);	// MS Word/Excel files and Thumbs.db are also Compound Documents. Usually archive/* goes first, but let's reduce confidence here so others can go first instead like document/wordDoc
 	converters       = ["sevenZip", "unar", "deark[module:cfb][opt:cfb:extractstreams]"];
+	notes            = "The app specific msCompound files cound be improved to handle the specific sub-files contained within each type.";
 }

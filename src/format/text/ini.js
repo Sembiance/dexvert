@@ -13,7 +13,7 @@ export class ini extends Format
 		// specific INI Types: We keep these identified as 'ini' due to the untouch and 'metaProvider' check. I could in the future create a new format for each of these, but I'd have to include thoses checks below (maybe after I update formats.js to better handle this)
 		"InstallShield Setup config", "Windows Dial-Up Networking configuration", "Microsoft Setup Toolkit for Windows files List", "LapLink 5 settings", "InstallShield Language Identifier", "TagInfo data", "TagInfo, ASCII text", "Delphi project Options",
 		"BRIEF session info", "Windows Explorer Command Shell File", "Windows Explorer Shell Command File", "AOL Modem parameters", "McAfee VirusScan for Windows settings", "Microsoft C/C++ project Status info", "Blob Sculptor for Windows model", "TagInfo",
-		"WinAmp/SHOUTcast PlayList", "Delphi Options File", "KDE/GNOME desktop entry", "WS_FTP configuration",
+		"WinAmp/SHOUTcast PlayList", "Delphi Options File", "KDE/GNOME desktop entry", "WS_FTP configuration", "Iavadraw Wizard",
 		/^PLS playlist/, /^Windows [Cc]odepage translator/
 	];
 	priority       = this.PRIORITY.LOW;

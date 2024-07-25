@@ -19,7 +19,7 @@ export class tga extends Format
 		"deark[module:tga][strongMatch]", "iconvert",
 		"paintDotNet[strongMatch]",
 		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
-		"nconvert", "recoil2png", "gimp", "iio2png",
+		"nconvert[strongMatch]", "recoil2png", "gimp", "iio2png",
 		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas5[strongMatch]", "canvas[strongMatch]"
 	];
 

@@ -117,9 +117,10 @@ const FLEX_SIZE_PROGRAMS =
 	// Produces slightly different output on archive/powerPlayerMusicCruncher/TESLA GIRLS file, but I imagine it's a general issue with the program
 	xfdDecrunch : 0.1,
 	
-	// Produces different data each time
+	// Can sometimes produce different data each time
 	amigaBitmapFontContentToOTF : 0.1,
 	assimp                      : 0.1,
+	cup386                      : 0.1,
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
 	Email_Outlook_Message       : 1,
@@ -129,6 +130,7 @@ const FLEX_SIZE_PROGRAMS =
 	sidplay2                    : 0.1,
 	sndh2raw                    : 0.1,
 	soundFont2tomp3             : 0.1,
+	unp                         : 0.1,
 	zxtune123                   : 0.1
 };
 
@@ -183,8 +185,6 @@ const FLEX_SIZE_FORMATS =
 	{
 		// sometimes the SHA1 sum differs
 		annaMarie              : 0.1,
-		axePacked              : 0.1,
-		cruncherPacked         : 0.1,
 		prehistorikGameArchive : 0.1,
 
 		// different each time due to way it generates frames
@@ -262,6 +262,7 @@ const FLEX_SIZE_FORMATS =
 
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
+		gifexe             : 25,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,
@@ -495,6 +496,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/drRiptideGameArchive",
 	"archive/irixIDBArchive",
 	"archive/lostVikingsGameArchive",
+	"archive/pixfolioCatalog",
 	"archive/rar",
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em

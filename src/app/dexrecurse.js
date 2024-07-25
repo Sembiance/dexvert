@@ -33,7 +33,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"text/lingoScript",
 	"text/linuxKernelSymbolMap",
 	"text/linuxMakeConfig",
-	"Text/magicTextFile",
+	"text/magicTextFile",
 	"text/windowsAutorun",
 
 	// modern formats that are 'generated' from others, so often not original. Also pretty modern so no need for many file samples

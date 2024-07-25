@@ -7,5 +7,5 @@ export class krisCard extends Format
 	ext            = [".com"];
 	forbidExtMatch = true;
 	magic          = ["16bit COM self displaying KrisCard"];
-	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*10}]`];
+	converters     = [`dosEXEScreenshot[timeout:${xu.SECOND*15}][frameLoc:95]`];
 }

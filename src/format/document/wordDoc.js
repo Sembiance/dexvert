@@ -9,7 +9,7 @@ export class wordDoc extends Format
 	magic          = ["Microsoft WinWord", "Microsoft Word document", "Microsoft Word for Windows", "CDFV2 Microsoft Word", "Format: MS Office 97-2003", "Format: Microsoft Word 2 document", "Archive: Microsoft Compound(MS Office", /^Microsoft Word [\d.]+ Document/, /^fmt\/(37|38|39|40|609|754)( |$)/, /^x-fmt\/45( |$)/];
 	converters     = [
 		"soffice[format:MS Word 97]", "soffice[format:MS Word 95]", "soffice[format:MS WinWord 6.0]", "soffice[format:MS WinWord 5]",
-		"fileMerlin", "keyViewPro[outType:pdf]", "wordForWord",
+		"fileMerlin", "keyViewPro[outType:pdf]", "wordForWord[matchType:magic][hasExtMatch]",
 		"antiword"
 	];
 	processed = dexState =>

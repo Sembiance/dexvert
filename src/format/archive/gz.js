@@ -10,5 +10,5 @@ export class gz extends Format
 	idMeta       = ({macFileType}) => ["Gzip"].includes(macFileType);
 	
 	// sevenZip will properly set timestamps. izArc & UniExtract will fully extract, but this is better than not handling at all
-	converters   = ["sevenZip", "gunzip", "ancient", "deark[module:gzip]", "unar", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];
+	converters   = ["sevenZip", "gunzip", "ancient", "deark[module:gzip]", "unar", "sqc", "izArc[matchType:magic][hasExtMatch]", "UniExtract[matchType:magic][hasExtMatch]"];
 }

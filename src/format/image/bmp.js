@@ -20,8 +20,8 @@ export class bmp extends Format
 		if(dexState.hasMagics("Mac BMP bitmap (MacBinary)"))
 			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.bmp]");
 		r.push("convert", "iio2png", "deark[module:bmp]", "iconvert", "gimp", "nconvert", "ffmpeg[format:bmp_pipe][outType:png]");
-		r.push("canvas5", "graphicWorkshopProfessional", "photoDraw", "paintDotNet");
-		r.push(...["keyViewPro", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint", "canvas", "tomsViewer", "pv[strongMatch]"].map(v => `${v}[strongMatch]`));
+		r.push(...["canvas5", "graphicWorkshopProfessional", "photoDraw", "paintDotNet"].map(v => `${v}[matchType:magic]`));
+		r.push(...["keyViewPro", "imageAlchemy", "hiJaakExpress", "corelPhotoPaint", "canvas[matchType:magic][hasExtMatch]", "tomsViewer", "pv[strongMatch]"].map(v => `${v}[strongMatch]`));
 		return r;
 	};
 }

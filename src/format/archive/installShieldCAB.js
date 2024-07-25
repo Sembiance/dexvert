@@ -21,5 +21,5 @@ export class installShieldCAB extends Format
 		const hdrAndCabFiles = otherFiles.filter(file => [".hdr", ".cab"].includes(file.ext.toLowerCase()));
 		return hdrAndCabFiles.length>0 ? hdrAndCabFiles : false;
 	};
-	converters = ["unshield", "unshield[oldCompression]", "winPack", "gameextractor", "UniExtract"];
+	converters = ["unshield", "unshield[oldCompression]", "winPack", "gameextractor", "UniExtract[matchType:magic][hasExtMatch]"];
 }

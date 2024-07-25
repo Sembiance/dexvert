@@ -250,7 +250,7 @@ export default
 		pdsPanel                                : {name : "PDS Panel", ext : [".pnl"], magic : ["PDS Panel"]},
 		pdtStructureDefinition                  : {name : "PDT structure definition", ext : [".pdt", ".dat"], magic : ["PDT structure definition"]},
 		pemCertificate                          : {name : "PEM Certificate", ext : [".cer"], magic : ["PEM certificate", "Internet Security Certificate"]},
-		pemPrivateKey                           : {name : "PEM DSA private key", ext : [".pem"], magic : ["ASCII armored RSA Private Key", /^PEM [DR]SA private key/]},
+		pemPrivateKey                           : {name : "PEM private key", ext : [".pem"], magic : ["ASCII armored RSA Private Key", /^PEM [DR]SA private key/]},
 		picsRatingSystem                        : {name : "PICS Rating System", ext : [".rat"], magic : ["PICS Rating System"], weakMagic : true},
 		pgpPublicKey                            : {name : "PGP Public Key", website : "http://fileformats.archiveteam.org/wiki/PGP_public_key", ext : [".asc", ".aexpk", ".pgp", ".pub"], magic : ["PGP public key block", "PGP armored data, public key block"]},
 		pgpMessage                              : {name : "PGP Message", website : "http://fileformats.archiveteam.org/wiki/PGP", magic : ["PGP ASCII-Armor", "PGP armored data", "PGP signature", "PGP Nachricht", /^PGP (clear text )?(signed )?message/, /^PGP armored data, (signed )?message/]},

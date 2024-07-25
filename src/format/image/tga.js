@@ -16,12 +16,13 @@ export class tga extends Format
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	// iio2png works really well, except when it doesn't. like 648.TGA and several other hundred TGA's like it, convert as just a transparent image
 	converters = [
-		"deark[module:tga][strongMatch]", "iconvert",
-		"paintDotNet[strongMatch]",
-		"keyViewPro[strongMatch]", "corelDRAW[strongMatch]", "pv[strongMatch]", "photoDraw[strongMatch]",
-		"nconvert[strongMatch]", "recoil2png", "gimp", "iio2png",
-		"hiJaakExpress[strongMatch]", "corelPhotoPaint[strongMatch]", "canvas5[strongMatch]", "canvas[strongMatch]"
-	];
+		"deark[module:tga][strongMatch]", "deark[module:tga][matchType:magic][hasExtMatch]", "iconvert",
+		"paintDotNet",
+		"keyViewPro", "corelDRAW", "pv", "photoDraw",
+		"nconvert", "recoil2png", "gimp", "iio2png",
+		"hiJaakExpress", "corelPhotoPaint", "canvas5", "canvas"
+	].map(converter => (["deark", "recoil2png", "iio2png"].some(v => converter.startsWith(v)) ? converter : `${converter}[strongMatch]`));
+	// many converters will produce garbage with weak TGA magics. deark too, but if we have an extension+magic match, make an exception. recoil2png and iio2png seem to be pretty strict, so allow those as-is
 
 	// Often files are confused as TGA and it results in just a single solid image. Since TGA's don't appear to have transparecy, require more than 1 color
 	// Color counts are calculated for images too large, so we exempt large TGAs from this check since those are encountered in the wild

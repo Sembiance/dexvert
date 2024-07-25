@@ -9,5 +9,5 @@ export class tar extends Format
 	weakMagic      = [/^Tar$/];
 	idMeta         = ({macFileType}) => macFileType==="TARF";
 	forbiddenMagic = ["TFMX module sound data tar archive"];
-	converters     = ["tar", "sevenZip", "deark[module:tar]", "unar[strongMatch]", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic]"];
+	converters     = ["tar", "sevenZip", "deark[module:tar]", "unar[strongMatch]", "sqc", "izArc[matchType:magic]", "UniExtract[matchType:magic][hasExtMatch]"];
 }

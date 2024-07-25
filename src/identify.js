@@ -163,7 +163,9 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 
 	// find the largest byteChecks check and read that many bytes in
 	const byteCheckMaxSize = Object.values(formats).flatMap(format => Array.force(format.byteCheck || [])).map(byteCheck => byteCheck.offset+byteCheck.match.length).max();
-	const byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
+	let byteCheckBuf = null;
+	if(await fileUtil.exists(f.input.absolute))
+		byteCheckBuf = await fileUtil.readFileBytes(f.input.absolute, byteCheckMaxSize);
 
 	const idMetaData = await getIdMeta(inputFile);
 	xlog.debug`idMetaData for ${inputFile.absolute}:\n${idMetaData}`;
@@ -198,7 +200,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 						
 					for(let loc=byteCheck.offset, i=0;i<byteCheck.match.length;loc++, i++)
 					{
-						if(!Array.force(byteCheck.match[i]).includes(byteCheckBuf[loc]))
+						if(byteCheckBuf===null || !Array.force(byteCheck.match[i]).includes(byteCheckBuf[loc]))
 						{
 							match = false;
 							break;

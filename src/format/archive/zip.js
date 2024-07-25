@@ -16,11 +16,12 @@ export class zip extends Format
 		/^PKZIP (mini-)?self-extracting 16bit DOS executable$/, "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", /^Quake 3 game data$/,
 		"Adventure Game Toolkit game package", "Installer: Alchemy Mindworks installer", "Installer: Wise Installer[ZIP]", "QWK offline mail packet (ZIP compressed)"
 	];
+	weakMagic = ["Zip archive, with extra data prepended"];
 	idMeta         = ({macFileType}) => ["pZIP", "ZIP "].includes(macFileType);
 	forbiddenMagic = ["SVArTracker module"];	// often mis-identified as a passworded zip file
 	converters   = () =>
 	{
-		const r = ["sevenZip", "unzip", "deark[module:zip]", "deark[module:pklite]", "deark[module:zip][opt:zip:scanmode]", "unar", "sqc", "izArc[matchType:magic]"];
+		const r = ["sevenZip", "unzip", "deark[module:zip]", "deark[module:pklite]", "deark[module:zip][opt:zip:scanmode][strongMatch]", "unar", "sqc", "izArc[strongMatch][matchType:magic]"];
 		
 		// If we are macintoshjp, unar works best
 		if(RUNTIME.globalFlags?.osHint?.macintoshjp)

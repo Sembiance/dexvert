@@ -11,5 +11,6 @@ export class css extends Format
 	magic          = [...TEXT_MAGIC, "assembler source"];	// Sadly file often detects it as assembler source and no other indentifiers come back with magic
 	weakMagic      = true;
 	untouched      = true;
+	priority       = this.PRIORITY.LOWEST;
 	metaProvider   = ["text"];
 }

@@ -7,5 +7,6 @@ export class visualNovelDPK extends Format
 	ext            = [".dpk"];
 	forbidExtMatch = true;
 	magic          = ["Visual Novel DPK Archive"];
+	weakMagic      = true;
 	converters     = ["undpk"];
 }

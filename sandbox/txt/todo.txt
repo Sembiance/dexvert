@@ -1,6 +1,11 @@
 /--------------\
 | TOP Priority |
 \--------------/
+* Some sort of bug in text identification. Run this over and over: ./testdexvert --format=text/microsoftMapData
+  Sometimes it'll identify things as text/txt, other times as text/microsoftMapData
+  Seemingly at random. Will need to produce a bunch of log files and really dig into it.
+  Note that this happens with a lot of other text formats too
+
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD

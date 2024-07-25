@@ -7,7 +7,7 @@ export class fileList extends Format
 	name           = "File List";
 	magic          = TEXT_MAGIC;
 	weakMagic      = true;
-	priority       = this.PRIORITY.LOW;
+	priority       = this.PRIORITY.LOWEST;
 	ext            = [".bbs", ".lst", ".lis", ".dir", ".ind"];
 	forbidExtMatch = true;
 	filename       = [/^dir\.?\d+$/i, /files.\d+$/i, /^files\.txt$/i, /^\d+_index.txt$/, /^[a-zA-Z]_index.txt$/];

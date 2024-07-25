@@ -383,6 +383,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/image\/rawBitmap\/texture_logo.raw$/, "text", true],
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
+	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
 	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 

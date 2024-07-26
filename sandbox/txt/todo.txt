@@ -117,6 +117,11 @@
 
 * Add all formats the Konvertor supports, warning, it's a LOT (copy-paste the list of each category from programs_formats.txt)
 
+* Contact @Skyplayer37 on twitter to see if they are up for updating their blender code to work with blender 4.0
+  Github code (backed up to sandbox/app/1993-Model-Importer): https://github.com/Skyplayer37/1993-Model-Importer
+  3D files: https://discmaster.textfiles.com/browse/2020/The%20640%20Meg%20Shareware%20Studio%20CD-ROM%20Volume%20II%20(Data%20Express)(1993).ISO/graphics/3d25.zip
+  Original Post: https://twitter.com/Skyplayer37/status/1593440006261321729?s=20&t=ZJ4V5KTiA_rfV0YHnjJdYg
+
 * Look at these blog posts and see about adding support for some of those formats. At the very least link to these articles from the notes field of each format:
   https://codecs.multimedia.cx/2024/04/a-quick-look-at-gold-disk-animation/
   https://codecs.multimedia.cx/2024/04/a-look-at-more-formats/

@@ -42,7 +42,8 @@ export const IGNORE_MAGICS =
 	/^RIFF Datei: unbekannter Typ/,
 
 	// file
-	/^RIFF \((big|little)-endian\) data$/
+	/^RIFF \((big|little)-endian\) data$/,
+	/^text\/isl/
 ];
 
 // These magics are VERY untrustworthy and any detections against them should be noted as such
@@ -387,6 +388,7 @@ export const WEAK_VALUES =
 	/^IRIS Showcase template/,
 	/^ISO Media, ASCII text/,
 	/jffs2 filesystem data/,
+	/^Java JCE KeyStore/,
 	/^Java.*KeyStore$/,
 	/^Java serialization data/,
 	/^JavaScript source, (ASCII|ISO-8859) text/,
@@ -459,7 +461,7 @@ export const WEAK_VALUES =
 	/^MS Windows COFF /,
 	/^MS Windows y\.z/,
 	/^MSVC \.ide$/,
-	/^MSX ROM/,
+	/^MSX (extension )?ROM/,
 	/^MSX-BASIC program/,
 	/^MSXiE archive data/,
 	/^mumps (avl|blt) global/,
@@ -522,6 +524,7 @@ export const WEAK_VALUES =
 	/^RAD Game Tools Smacker Multimedia/,
 	/^RAGE Package Format/,
 	/^raw G3/,
+	/^raw modem data/,
 	/^RCS\/CVS diff output/,
 	/^RDI Acoustic Doppler Current Profiler/,
 	/^REDCode Video/,
@@ -984,7 +987,7 @@ export const WEAK_VALUES =
 	/^FastCopy DIM disk image$/,
 	/^FastDir-like quick directory lookup data$/,
 	/^File List Creator list$/,
-	/^Final Data r1 data$/,
+	/^Final Data r\d data$/,
 	/^FleetStreet Installation archive$/,
 	/^Form Memo MS Visual FoxPro 7$/,
 	/^ForthCMP compiled 16bit executable$/,
@@ -1315,6 +1318,7 @@ export const WEAK_VALUES =
 	/^Sony SELF - SPRX format$/,
 	/^SoundTool audio$/,
 	/^Starlink Data Format$/,
+	/^Streaming Progressive Image Format bitmap$/,
 	/^Stunt Island Film$/,
 	/^STW disk image$/,
 	/^Sudden Strike 2 game data archive$/,
@@ -1358,6 +1362,7 @@ export const WEAK_VALUES =
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,
 	/^Virtual Home Space Builder 3D Space/,
+	/^Virtual TI skin/,
 	/^VP-Planner Plus spreadsheet$/,
 	/^Vue D'Esprit 4 Atmosphere Preset$/,
 	/^WebAssembly module \(binary\)$/,

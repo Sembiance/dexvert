@@ -6,7 +6,7 @@ const _XML_MAGIC = [
 	
 	// specific XML
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
-	"Compass and Ruler geometry",
+	"Compass and Ruler geometry", "RSS web feed",
 	/^fmt\/(979|983)( |$)/
 ];
 export {_XML_MAGIC};

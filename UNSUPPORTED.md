@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,439)
+# Unsupported File Formats (1,443)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -138,7 +138,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (46)
+## Audio (47)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -161,6 +161,7 @@ Family/Format | Name | Extensions | Notes
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?formatid=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?formatid=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?formatid=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
+[audio/jetPilotAudio](https://discmaster.textfiles.com/search?formatid=jetPilotAudio) | JETPilot audio |  | 
 [audio/kixtartSPK](https://discmaster.textfiles.com/search?formatid=kixtartSPK) | KixTart SPK Notation | .spk | 
 [audio/kurzweilK2Sample](https://discmaster.textfiles.com/search?formatid=kurzweilK2Sample) | Kurzweil K2 Sample | .kr1 .kr2 .krz | 
 [audio/maestroAudio](https://discmaster.textfiles.com/search?formatid=maestroAudio) | Maestro Audio |  | 
@@ -637,7 +638,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (771)
+## Other (774)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -970,8 +971,11 @@ Family/Format | Name | Extensions | Notes
 [other/jeepersConfiguration](https://discmaster.textfiles.com/search?formatid=jeepersConfiguration) | Jeepers Configuration | .cfg | 
 [other/jeepersKeyIndex](https://discmaster.textfiles.com/search?formatid=jeepersKeyIndex) | Jeepers Key/index | .jpk | 
 [other/jeepersReferenceDB](https://discmaster.textfiles.com/search?formatid=jeepersReferenceDB) | Jeepers Reference DB | .jpr | 
+[other/jetPilotScenery](https://discmaster.textfiles.com/search?formatid=jetPilotScenery) | JETPilot scenery |  | 
 [other/jetPilotScreen](https://discmaster.textfiles.com/search?formatid=jetPilotScreen) | JETPilot screen | .pssl | 
+[other/jetPilotSegmentData](https://discmaster.textfiles.com/search?formatid=jetPilotSegmentData) | JETPilot segment data |  | 
 [other/jetPilotSprite](https://discmaster.textfiles.com/search?formatid=jetPilotSprite) | JETPilot sprite | .pssp .pssm | 
+[other/jetPilotSUPData](https://discmaster.textfiles.com/search?formatid=jetPilotSUPData) | JETPilot SUP data |  | 
 [other/junglevisionData](https://discmaster.textfiles.com/search?formatid=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 

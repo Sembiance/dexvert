@@ -10,7 +10,13 @@ export class html extends Format
 	filename       = [/htm/];
 	weakFilename   = true;
 	mimeType       = "text/html";
-	magic          = ["HyperText Markup Language with DOCTYPE", "HTML (Hyper Text Markup Language) Datei", "Netscape Bookmark", "broken XHTML document text", /^Hyper[Tt]ext Markup Language/, /^X?HTML document/, /^fmt\/(96|97|98|99|100|102|471|1132)( |$)/];
+	magic          = [
+		// generic HTML
+		"HyperText Markup Language with DOCTYPE", "HTML (Hyper Text Markup Language) Datei", "broken XHTML document text", /^Hyper[Tt]ext Markup Language/, /^X?HTML document/, /^text\/html$/, /^fmt\/(96|97|98|99|100|102|471|1132)( |$)/,
+
+		// app specific HTML
+		"IBrowse Hotlist / bookmark (v2)", "Netscape Bookmark"
+	];
 	weakMagic      = true;
 	trustMagic     = true;
 	untouched      = true;

@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,443)
+# Unsupported File Formats (1,451)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -191,7 +191,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (85)
+## Document (86)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -251,7 +251,7 @@ Family/Format | Name | Extensions | Notes
 [document/multiMate](https://discmaster.textfiles.com/search?formatid=multiMate) | [MultiMate Document](https://winworldpc.com/product/multimate) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/multiMate/) - DOS based word processor. Not sure if there is magic for this or not, haven't tried gathering samples from the various versions of the software available.
 [document/navyDIF](https://discmaster.textfiles.com/search?formatid=navyDIF) | [NAVY DIF](https://www.govinfo.gov/content/pkg/GOVPUB-C13-54457a38751dd2826804944b2be585f3/pdf/GOVPUB-C13-54457a38751dd2826804944b2be585f3.pdf) | .dif | [1 sample file](https://sembiance.com/fileFormatSamples/document/navyDIF/) - A format from the US NAVY for interchanging word processing files. Haven't investigated it for magic.
 [document/opHelp](https://discmaster.textfiles.com/search?formatid=opHelp) | OPHelp | .hlp | [5 sample files](https://sembiance.com/fileFormatSamples/document/opHelp/) - Couldn't locate additional info for it
-[document/orCADSchematic](https://discmaster.textfiles.com/search?formatid=orCADSchematic) | OrCAD Schematic | .sch .sht | 
+[document/orCADSchematic](https://discmaster.textfiles.com/search?formatid=orCADSchematic) | OrCAD Schematic | .sch .sht .dsn .dbk | 
 [document/pSuite](https://discmaster.textfiles.com/search?formatid=pSuite) | P-Suite |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/pSuite/)
 [document/penPalDatabase](https://discmaster.textfiles.com/search?formatid=penPalDatabase) | Pen Pal Database | .flr | 
 [document/penPalDocument](https://discmaster.textfiles.com/search?formatid=penPalDocument) | Pen Pal Document | .wtr | 
@@ -269,6 +269,7 @@ Family/Format | Name | Extensions | Notes
 [document/symantecDOSSoftwareHelp](https://discmaster.textfiles.com/search?formatid=symantecDOSSoftwareHelp) | Symantec DOS software help | .hlp | 
 [document/theDataMasterDataBase](https://discmaster.textfiles.com/search?formatid=theDataMasterDataBase) | The DataMaster Data Base | .tdb | 
 [document/trueBASICCompiledCode](https://discmaster.textfiles.com/search?formatid=trueBASICCompiledCode) | True BASIC compiled code |  | 
+[document/turboBaseDB](https://discmaster.textfiles.com/search?formatid=turboBaseDB) | TurboBase DB | .tbp | 
 [document/turboCalc](https://discmaster.textfiles.com/search?formatid=turboCalc) | TurboCalc Document | .tcd | [4 sample files](https://sembiance.com/fileFormatSamples/document/turboCalc/)
 [document/upShotManual](https://discmaster.textfiles.com/search?formatid=upShotManual) | UpShot Manual | .mnl | 
 [document/venturaPublisherChapter](https://discmaster.textfiles.com/search?formatid=venturaPublisherChapter) | Ventura Publisher Chapter | .chp | 
@@ -638,7 +639,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (774)
+## Other (781)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/threeDCKArea](https://discmaster.textfiles.com/search?formatid=threeDCKArea) | 3D Construction Kit Area | .3ad | 
@@ -762,6 +763,7 @@ Family/Format | Name | Extensions | Notes
 [other/boyanActionModule](https://discmaster.textfiles.com/search?formatid=boyanActionModule) | BOYAN Action Model | .bam | 
 [other/bryceObjectPresets](https://discmaster.textfiles.com/search?formatid=bryceObjectPresets) | Bryce Object Presets | .obp | 
 [other/buildEngineDemoData](https://discmaster.textfiles.com/search?formatid=buildEngineDemoData) | Build Engine Demo Data | .dem | 
+[other/bullfrogObjectData](https://discmaster.textfiles.com/search?formatid=bullfrogObjectData) | Bullfrog Object Data | .dat | 
 [other/butcherShape](https://discmaster.textfiles.com/search?formatid=butcherShape) | Butcher Shape | .shape | 
 [other/buttonsButtonDefinition](https://discmaster.textfiles.com/search?formatid=buttonsButtonDefinition) | Buttons! Button definition | .but | 
 [other/bwsbMusicSoundDriver](https://discmaster.textfiles.com/search?formatid=bwsbMusicSoundDriver) | BWSB Music and Sound Engine Driver | .mse | 
@@ -833,6 +835,7 @@ Family/Format | Name | Extensions | Notes
 [other/dBaseIndex](https://discmaster.textfiles.com/search?formatid=dBaseIndex) | dBase Index File | .ntx | 
 [other/dBasePrintForm](https://discmaster.textfiles.com/search?formatid=dBasePrintForm) | dBase Print Form | .prf | 
 [other/dBaseQuery](https://discmaster.textfiles.com/search?formatid=dBaseQuery) | dBase Query | .qbe | 
+[other/dBaseScreen](https://discmaster.textfiles.com/search?formatid=dBaseScreen) | dBASE Screen | .scr | 
 [other/dBaseUpdate](https://discmaster.textfiles.com/search?formatid=dBaseUpdate) | dBase Update | .upd | 
 [other/decisionProProject](https://discmaster.textfiles.com/search?formatid=decisionProProject) | Decision/pro project | .dp | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?formatid=deHackEdPatch) | DeHackEd Patch | .deh | 
@@ -851,6 +854,7 @@ Family/Format | Name | Extensions | Notes
 [other/diablo1ItemSafe](https://discmaster.textfiles.com/search?formatid=diablo1ItemSafe) | Diablo 1 Item Safe | .itm | 
 [other/digitaORganiserTheme](https://discmaster.textfiles.com/search?formatid=digitaORganiserTheme) | Digita Organiser Theme |  | 
 [other/directoryOpusButton](https://discmaster.textfiles.com/search?formatid=directoryOpusButton) | Directory Opus button |  | 
+[other/directoryOpusEnvironment](https://discmaster.textfiles.com/search?formatid=directoryOpusEnvironment) | Directory Opus environment |  | 
 [other/directoryOpusSettings](https://discmaster.textfiles.com/search?formatid=directoryOpusSettings) | Directory Opus Settings |  | 
 [other/directoryOpusType](https://discmaster.textfiles.com/search?formatid=directoryOpusType) | Directory Opus type |  | 
 [other/diveFileFormat](https://discmaster.textfiles.com/search?formatid=diveFileFormat) | Dive File Format | .dff | 
@@ -1091,6 +1095,7 @@ Family/Format | Name | Extensions | Notes
 [other/dosCodePage](https://discmaster.textfiles.com/search?formatid=dosCodePage) | MS-DOS Code Page Info | .cp .cpi | 
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
+[other/musicXVoices](https://discmaster.textfiles.com/search?formatid=musicXVoices) | Music-X Voices | .voices | 
 [other/myFamilyTreeData](https://discmaster.textfiles.com/search?formatid=myFamilyTreeData) | My Family Tree data | .tre | 
 [other/mySQLIndexFile](https://discmaster.textfiles.com/search?formatid=mySQLIndexFile) | MySQL Index | .myi | 
 [other/mySQLTableDefinition](https://discmaster.textfiles.com/search?formatid=mySQLTableDefinition) | MySQL Table Definition | .frm | 
@@ -1125,6 +1130,7 @@ Family/Format | Name | Extensions | Notes
 [other/oberonSymbol](https://discmaster.textfiles.com/search?formatid=oberonSymbol) | Oberon Symbol | .sym | 
 [other/ohrrpgceGame](https://discmaster.textfiles.com/search?formatid=ohrrpgceGame) | OHRRPGCE game | .rpg | 
 [other/olbLib](https://discmaster.textfiles.com/search?formatid=olbLib) | OLB Library |  | [7 sample files](https://sembiance.com/fileFormatSamples/unsupported/olbLib/)
+[other/orCADProject](https://discmaster.textfiles.com/search?formatid=orCADProject) | OrCAD Project | .opj | 
 [other/originSystemsIFFPalette](https://discmaster.textfiles.com/search?formatid=originSystemsIFFPalette) | ORIGIN Systems IFF palette | .iff | 
 [other/os2DeviceDriver](https://discmaster.textfiles.com/search?formatid=os2DeviceDriver) | OS/2 Device Driver | .sys | 
 [other/os2DLL](https://discmaster.textfiles.com/search?formatid=os2DLL) | OS/2 Dynamic Link Library | .dll | 
@@ -1142,6 +1148,7 @@ Family/Format | Name | Extensions | Notes
 [other/paradoxSortDefinition](https://discmaster.textfiles.com/search?formatid=paradoxSortDefinition) | Paradox sort definition | .sor | 
 [other/partoutResourceData](https://discmaster.textfiles.com/search?formatid=partoutResourceData) | PartoutResource Data | .dat | 
 [other/pascalCompiledUnit](https://discmaster.textfiles.com/search?formatid=pascalCompiledUnit) | Pascal Compiled Unit | .tpu .ppu | 
+[other/pascalScriptBinary](https://discmaster.textfiles.com/search?formatid=pascalScriptBinary) | Pascal Script binary | .bin | 
 [other/patchMeisterDriver](https://discmaster.textfiles.com/search?formatid=patchMeisterDriver) | PatchMeister Driver | .pmdriver | 
 [other/paxImperiaSavedGame](https://discmaster.textfiles.com/search?formatid=paxImperiaSavedGame) | Pax Imperia Saved Game |  | 
 [other/pcLabelLabel](https://discmaster.textfiles.com/search?formatid=pcLabelLabel) | PC-Label Label | .lbl | 
@@ -1364,6 +1371,7 @@ Family/Format | Name | Extensions | Notes
 [other/warCraft3RecordedGame](https://discmaster.textfiles.com/search?formatid=warCraft3RecordedGame) | WarCraft III Recorded Game | .w3g | 
 [other/warCraftMap](https://discmaster.textfiles.com/search?formatid=warCraftMap) | WarCraft Map | .pud | 
 [other/watcomProfilerSamplingData](https://discmaster.textfiles.com/search?formatid=watcomProfilerSamplingData) | Watcom Profiler Sampling Data | .smp | 
+[other/wbWortSavedGame0](https://discmaster.textfiles.com/search?formatid=wbWortSavedGame0) | WB-Wort saved game |  | 
 [other/whackerTrackerAudioDriver](https://discmaster.textfiles.com/search?formatid=whackerTrackerAudioDriver) | Whacker Tracker audio Driver | .drv | 
 [other/whdLoadSlave](https://discmaster.textfiles.com/search?formatid=whdLoadSlave) | WHDLoad Slave | .slave | 
 [other/winampAdvVisStudioStyle](https://discmaster.textfiles.com/search?formatid=winampAdvVisStudioStyle) | Winamp Advanced Visualization Studio File | .avs | 

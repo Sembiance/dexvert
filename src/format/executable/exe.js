@@ -8,7 +8,7 @@ export class exe extends Format
 	magic   = [
 		// general exe type
 		"Generic Win/DOS Executable", /MS-DOS [Ee]xecutable/, /^Win\d\d Executable/, /(compressed|compiled) DOS [Ee]xecutable$/, /^Microsoft .*DOS Executable/, "DOS Executable", "OS/2 Executable", "32bit DOS Executable",
-		"Microsoft executable", "PE32 executable", /^Win\d\d Executable/, "Win16 NE executable", /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/899( |$)/, /^x-fmt\/(409|410|411)( |$)/,
+		"Microsoft executable", /^PE32\+? executable/, /^Win\d\d Executable/, "Win16 NE executable", /^Ist eine ausf.hrbare (OS\/2|Win 3\.x|DOS|Win32)/, /^fmt\/(899|900)( |$)/, /^x-fmt\/(409|410|411)( |$)/,
 
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
@@ -21,7 +21,7 @@ export class exe extends Format
 		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal and things below, double check before looking deep)
 		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
 		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
-		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer",
+		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
 
 		// installers: These actually do convert ok already with things like cmdTotal below
 		"Installer: Vise"

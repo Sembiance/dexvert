@@ -2,12 +2,12 @@ import {Format} from "../../Format.js";
 
 const _XML_MAGIC = [
 	// generic XML
-	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", /^fmt\/101( |$)/,
+	"Extensible Markup Language", "Generic XML", "broken XML document", /^XML .*document/, "XML Datei", "XML Property List", "XML Schema", /^fmt\/101( |$)/, /^x-fmt\/280( |$)/,
 	
 	// specific XML
 	"VCDImager Video CD description", "Windows Manifest - Visual Stylesheet XML file", "Portable Application Description (PAD)", "Apple Interface Builder NIB archive (XML)", "macOS Website Location", "Interface Builder UI resource data (object)",
-	"Compass and Ruler geometry", "RSS web feed",
-	/^fmt\/(979|983)( |$)/
+	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets",
+	/^fmt\/(979|983|1677)( |$)/
 ];
 export {_XML_MAGIC};
 

@@ -11,7 +11,7 @@ export class com extends Format
 		"DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "DOS COM Executable Datei",
 
 		// specific com types
-		"XEQ executable Command library", "P-Screen COM Screen", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver", "16bit COM NoStrAdAmuS - LineZer0 patch",
+		"XEQ executable Command library", "P-Screen COM Screen", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver", "16bit COM NoStrAdAmuS - LineZer0 patch", "16bit COM Reanimator Of Lash patch",
 
 		// compiled by
 		"ASIC compiled DOS COM", /^Borland Turbo Pascal [\d.x]+ DOS Command/, "ZBASIC MS-DOS COM executable", "16bit COM ZBasic compiled"

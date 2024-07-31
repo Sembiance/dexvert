@@ -3,6 +3,7 @@ import {Format} from "../../Format.js";
 export class flashAuthoringFile extends Format
 {
 	name           = "Flash Authoring File";
+	website        = "http://fileformats.archiveteam.org/wiki/FLA";
 	magic          = ["Flash Authoring / source material"];
 	weakMagic      = true;
 	ext            = [".fla"];

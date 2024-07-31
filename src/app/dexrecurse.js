@@ -298,7 +298,7 @@ async function isNewSampleFile(dexformatid, sampleFilePath)
 async function processNextQueue()
 {
 	const taskProps = taskQueue.shift();
-	if((argv.ignorePath || []).some(ignoredPath => taskProps.rel.strip(argv.suffix).startsWith(ignoredPath)))
+	if((argv.ignorePath || []).some(ignoredPath => taskProps.rel.strip(argv.suffix).startsWith(ignoredPath)) || path.basename(taskProps.rel, path.extname(taskProps.rel)).endsWith(argv.suffix))
 	{
 		taskFinishedCount++;
 		bar?.increment();

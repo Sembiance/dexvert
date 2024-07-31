@@ -39,6 +39,7 @@ export const IGNORE_MAGICS =
 	/^Generic RIFF file /,
 
 	// GT2
+	/^DPA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^RIFF Datei: unbekannter Typ/,
 
 	// file
@@ -46,11 +47,11 @@ export const IGNORE_MAGICS =
 	/^text\/isl/
 ];
 
-// These magics are VERY untrustworthy and any detections against them should be noted as such
+// These magics are untrustworthy and any detections against them should be noted as such
 export const WEAK_VALUES =
 [
 	// siegfried: WEAK checks
-	/^fmt\/(111|134|208|304|328|347|473|583|639|692|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1701|1704|1708|1740|1751|1812|1902)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|473|583|584|639|692|819|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1260|1276|1280|1381|1488|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1704|1708|1740|1751|1812|1902)( |$)/,
 	/^x-fmt\/(8|10|53|157|195|324|342)( |$)/,
 
 	// binwalkID: WEAK checks
@@ -106,7 +107,7 @@ export const WEAK_VALUES =
 	/^ISOLINUX boot loader$/,
 	/^MFS file system$/,
 	/^Minix file system/,
-	/^Old-style Apple partition map$/,
+	/^Old-style Apple partition map/,
 	/^QNX4 file system$/,
 	/^Solaris SPARC disklabel/,
 	/^Statistica Cube LiesMich1/,
@@ -232,6 +233,7 @@ export const WEAK_VALUES =
 	/^apollo a88k COFF executable/,
 	/^Apple DiskCopy 4.2 image/,
 	/^Apple QuickTime$/,
+	/^Apple QuickTime multiple URLs$/,
 	/^Applesoft BASIC program data/,
 	/^Arhangel archive data/,
 	/^aria2 control file/,
@@ -303,6 +305,7 @@ export const WEAK_VALUES =
 	/^dBase I[IV]I? DBT/,
 	/^ddis\/dots archive/,
 	/^ddis\/dtif table data/,
+	/^Delta ISO data version/,
 	/^DIF \(/,
 	/^Disintegrator archive data/,
 	/^disk quotas file/,
@@ -312,6 +315,7 @@ export const WEAK_VALUES =
 	/^DOS .*backed up sequence/,
 	/^DOS 2\.0 backup id file/,
 	/^DOS [\d.]+ backup control file/,
+	/^DPA archive data/,
 	/^DRAGEN ORA file,/,
 	/^DSF audio bitstream data/,
 	/^DuckDB database file/,
@@ -373,6 +377,7 @@ export const WEAK_VALUES =
 	/^HPA archive data/,
 	/^hp\d00/,
 	/^HP s\d+ ((demand-load|relocatable|pure|old) )?executable/,
+	/^huf output$/,
 	/^HYP archive data/,
 	/^i386 COFF object$/,
 	/^i960 b\.out relocatable object/,
@@ -908,6 +913,7 @@ export const WEAK_VALUES =
 	/^SubRip subtitles$/,
 	/^Superbase Query definition$/,
 	/^SuperCard Pro flux image$/,
+	/^Taxman's Retro Engine v5 Configuration$/,
 	/^TERSE compressed data \(S?PACK, [UV]\)$/,
 	/^Text - UTF-(16|32)/,
 	/^TextEngine document \(generic\)$/,
@@ -1108,9 +1114,10 @@ export const WEAK_VALUES =
 	/^Aleph One Marathon Markup Language$/,
 	/^AMAS Sequence$/,
 	/^Ambisonic B-Format audio$/,
-	/^Amiga Disk image File \(generic\)$/,
 	/^Amiga Action Replay Freezed snapshot$/,
+	/^Amiga Disk image File \(generic\)$/,
 	/^Amiga PACK_scn1\.library compressed data$/,
+	/^AmigaKonto account$/,
 	/^Amulets and Armor Map$/,
 	/^AMX Mod X plugin$/,
 	/^Anachronox game data archive$/,
@@ -1174,6 +1181,7 @@ export const WEAK_VALUES =
 	/^Disney Animation Studio eXposure Sheet$/,
 	/^Dockerfile$/,
 	/^DuckDB database$/,
+	/^Dynamix Music data container$/,
 	/^Dynamix Screen data container$/,
 	/^EarthSiege 1\/2 game data archive$/,
 	/^EA Seattle game data \(UNCS\)$/,
@@ -1238,6 +1246,7 @@ export const WEAK_VALUES =
 	/^Mac ICOL colors LUT$/,
 	/^Macromedia Director Java Resource - Video$/,
 	/^Magic and Mayhem sprites$/,
+	/^MAGIX music studio (Drum kit|Window layout)$/,	// So these have weak magics, and their extensions are very close to the magic, so it could have mis-identifications so just skip it since there isn't much we can do with them anyways
 	/^Maker Interchange Format Book$/,
 	/^MAME plugin config$/,
 	/^MAME TACO tape image$/,
@@ -1256,6 +1265,7 @@ export const WEAK_VALUES =
 	/^Microsoft Visio Template$/,
 	/^Midtown Madness game data archive$/,
 	/^Midtown Madness 2 game data archive$/,
+	/^MIME Base64 encoded MP4 video$/,
 	/^Mind Games - Checkers saved game$/,
 	/^MIT CADR Lisp Machine disk image$/,
 	/^MLT XML$/,
@@ -1272,6 +1282,7 @@ export const WEAK_VALUES =
 	/^Nintendo Binary Revolution SEQuence$/,
 	/^NTFS Master File Table$/,
 	/^Novastorm Media audio$/,
+	/^NPS Image Editor Script$/,
 	/^OpenSceneGraph (legacy|native) binary format$/,
 	/^OpenVPN profile/,
 	/^Orda: Severnyi Veter game data$/,
@@ -1294,6 +1305,7 @@ export const WEAK_VALUES =
 	/^Portable Image File bitmap$/,
 	/^Portfolio BASIC compiled 16 bit MS-DOS binary$/,
 	/^Poser pose$/,
+	/^Prisoner Of Ice game data archive$/,
 	/^ProductView Packaged Structure and Drawing$/,
 	/^Project Dogwaffle mixing palette \(type 2\)$/,
 	/^Psion Organiser Block data$/,

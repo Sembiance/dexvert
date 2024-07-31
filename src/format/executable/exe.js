@@ -22,6 +22,7 @@ export class exe extends Format
 		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
 		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
 		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
+		"Installer: Aeco Systems installer",
 
 		// installers: These actually do convert ok already with things like cmdTotal below
 		"Installer: Vise"

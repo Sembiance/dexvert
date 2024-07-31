@@ -42,6 +42,8 @@ const ALLOWED_OTHER_WEBSITE =
 	"video/quake2Cinematic"
 ];
 
+const COMMON_EXTENSIONS = [".cat", ".dbf", ".doc", ".ins", ".lib", ".msg", ".pat", ".txt"];
+
 for(const [formatid, format] of Object.entries(formats))
 {
 	const familyFormat = `${formats[formatid].familyid}/${formatid}`;
@@ -136,8 +138,6 @@ async function checkFileFormatsArchiveTeamWiki()
 	}
 }
 
-await checkFileFormatsArchiveTeamWiki();
-
 async function lookForWebsite()
 {
 	const results = [];
@@ -147,11 +147,11 @@ async function lookForWebsite()
 	{
 		const format = formats[familyFormat.split("/")[1]];
 		let possibleTitles = await wiki.searchTitles(format.name);
-		if(!possibleTitles?.length && format.ext?.length)
-			 possibleTitles = await wiki.searchTitles(format.ext[0]);
+		if(!possibleTitles?.length && format.ext?.some(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())))
+			 possibleTitles = await wiki.searchTitles(format.ext.find(v => !COMMON_EXTENSIONS.includes(v.toLowerCase())));
 
 		if(possibleTitles?.length)
-			results.push({familyFormat, possibleTitles : possibleTitles.length>2 ? `${possibleTitles.length} possibilities` : `[${possibleTitles.map(v => `http://fileformats.archiveteam.org/wiki/${encodeURIComponent(v)}`).join("] [")}]`});
+			results.push({familyFormat, possibleTitles : possibleTitles.length>3 ? `${possibleTitles.length} possibilities` : `[${possibleTitles.map(v => `http://fileformats.archiveteam.org/wiki/${encodeURIComponent(v)}`).join("] [")}]`});
 		bar.tick();
 	}
 
@@ -162,4 +162,6 @@ async function lookForWebsite()
 	}
 }
 
+// Best to only run 1 check at a time, you choose, uncomment the one you want to run, then swap and run the other
+//await checkFileFormatsArchiveTeamWiki();
 //await lookForWebsite();

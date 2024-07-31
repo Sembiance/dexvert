@@ -13,7 +13,7 @@ export class zip extends Format
 		"Self-extracting zip", "ZIP Archiv gefunden", "Archive: Zip", "Zip archive, with extra data prepended", "End of Zip archive", /^x-fmt\/263( |$)/,
 
 		// specific zip magic
-		/^PKZIP (mini-)?self-extracting 16bit DOS executable$/, "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", /^Quake 3 game data$/,
+		/^PKZIP (mini-)?self-extracting 16bit DOS executable$/, "Winzip Win32 self-extracting archive", "WinZip Self-Extractor", /^Quake 3 game data$/, "WinAmp 2.x Skin", "DivX Skin",
 		"Adventure Game Toolkit game package", "Installer: Alchemy Mindworks installer", "Installer: Wise Installer[ZIP]", "QWK offline mail packet (ZIP compressed)"
 	];
 	weakMagic = ["Zip archive, with extra data prepended"];

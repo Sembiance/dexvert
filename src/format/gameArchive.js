@@ -13,7 +13,7 @@ export const gameextractor =
 		boltGameArchive                    : {name : "BOLT Game Archive", ext : [".blt"], magic : ["BOLT game data archive"]},
 		broderbundMohawkGameArchive        : {name : "Broderbund Mohawk Game Archive", ext : [".mhk"], magic : ["Broderbund Mohawk game data archive"]},
 		chasmGameArchive                   : {name : "Chasm Game Archive", ext : [".bin"], magic : ["Chasm BIN archive"]},
-		darkReignGameArchive               : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true},
+		darkReignGameArchive               : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},
 		dynamixGameArchive                 : {name : "Dynamix Game Archive", ext : [".dyn", ".rbx"], magic : ["Dynamix game data archive", "Dynamix Volume File game data archive"]},
 		earthAndBeyondGameArchive          : {name : "Earth and Beyond Game Archive", ext : [".mix"], magic : ["Earth And Beyond game data archive"]},
 		electronicArtsLibGameArchive       : {name : "Electronic Arts LIB Game Archive", ext : [".lib"], magic : ["Electronic Arts LIB container"]},
@@ -36,7 +36,7 @@ export const gameextractor =
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package"], forbiddenMagic : ["Unreal Music"]},
-		vivBIGF                            : {name : "VIV/BIGF EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"]},
+		vivBIGF                            : {name : "VIV/BIGF EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"], website : "http://fileformats.archiveteam.org/wiki/VIV"},
 		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true},
 		wad2GameArchive                    : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		youDontKnowJackGameArchive         : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"]}
@@ -72,7 +72,7 @@ export const both =
 {
 	archive :
 	{
-		buildEngineGroupGameArchive : {name : "Build Engine Group Game Archive", ext : [".grp", ".dat"], magic : ["Build engine group file", "Build Engine GRP container"]},
+		buildEngineGroupGameArchive : {name : "Build Engine Group Game Archive", ext : [".grp", ".dat"], magic : ["Build engine group file", "Build Engine GRP container"], website : "http://fileformats.archiveteam.org/wiki/GRP_(Duke_Nukem_3D)"},
 		descentGameArchive          : {name : "Descent Game Archive", ext : [".hog"], magic : ["Descent game data archive"]},
 		epfGameArchive 			    : {name : "EPF Game Archive", ext : [".epf"], magic : ["EPF game data archive"], website : "https://moddingwiki.shikadi.net/wiki/EPF_Format"}
 	}

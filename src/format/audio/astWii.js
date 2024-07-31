@@ -4,7 +4,7 @@ import {Format} from "../../Format.js";
 export class astWii extends Format
 {
 	name       = "AST Wii Audio";
-	website    = "http://fileformats.archiveteam.org/wiki/AST_(Wii)";
+	website    = "http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_AST";
 	ext        = [".ast"];
 	magic      = ["Wii sound data", "FIFA 2004 audio file"];
 	converters = ["zxtune123", "vgmstream"];

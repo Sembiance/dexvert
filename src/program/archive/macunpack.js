@@ -8,6 +8,7 @@ export class macunpack extends Program
 	website  = "https://github.com/wnayes/macutils";
 	package  = "app-arch/macutils";
 	bin      = "macunpack";
+	unsafe   = true;
 	args     = r => [r.inFile()];
 	cwd      = r => r.outDir();
 	postExec = async r =>

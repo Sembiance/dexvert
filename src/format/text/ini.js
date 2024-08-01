@@ -14,7 +14,8 @@ export class ini extends Format
 		"InstallShield Setup config", "Windows Dial-Up Networking configuration", "Microsoft Setup Toolkit for Windows files List", "LapLink 5 settings", "InstallShield Language Identifier", "TagInfo data", "TagInfo, ASCII text", "Delphi project Options",
 		"BRIEF session info", "Windows Explorer Command Shell File", "Windows Explorer Shell Command File", "AOL Modem parameters", "McAfee VirusScan for Windows settings", "Microsoft C/C++ project Status info", "Blob Sculptor for Windows model", "TagInfo",
 		"WinAmp/SHOUTcast PlayList", "Delphi Options File", "KDE/GNOME desktop entry", "WS_FTP configuration", "Iavadraw Wizard", "Wired For Sound configuration", "Karaoke track info", "Superbase printer driver", "KDE desktop entry",
-		/^PLS playlist/, /^Windows [Cc]odepage translator/
+		"CloneCD CDImage (description)", "MOdule (play)List",
+		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^fmt\/1760( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;

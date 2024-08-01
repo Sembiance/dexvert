@@ -16,13 +16,14 @@ export class rawPartition extends Format
 		{
 			const startSector = (dosMBRID.magic.match(/startsector (?<startSector>\d+)/) || {groups : {}}).groups.startSector;
 			if(startSector && (+startSector)>0)
-				return [`uniso[offset:${(+startSector)*512}]`];
+				return [`uniso[offset:${(+startSector)*512}]`, "sevenZip"];
 		}
 
 		const isHFS = dexState.hasMagics(HFS_MAGICS);
 		const converters = [`uniso${isHFS ? "[hfs]" : ""}`];
 		if(isHFS)
 			converters.push("deark[module:hfs]");
+		converters.push("sevenZip");
 		return converters;
 	};
 }

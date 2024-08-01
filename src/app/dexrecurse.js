@@ -18,6 +18,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 [
 	// too big
 	"archive/cdi",
+	"archive/hemeraThumbnailsArchive",
 	"archive/iso",
 	"archive/mdf",
 	"archive/mdx",
@@ -116,7 +117,10 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"image/zbr",
 
 	// often identified against, and usually produces a fairly good image, but it's rarely actually this format, just a very similar dump of pixel data
-	"image/imgScan"
+	"image/imgScan",
+
+	// uhm?
+	"archive/appleSingle"
 ];
 
 const argv = cmdUtil.cmdInit({

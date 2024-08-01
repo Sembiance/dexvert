@@ -16,7 +16,7 @@ export class lha extends Format
 		/^LHarc .*archive data/, "LArc compressed archive", "Archive: LHA archive", /^MS-DOS .*LHarc self-extracting archive/, /^Self-extracting LZH$/, /^LZH$/, /^fmt\/626( |$)/,
 
 		// app specific LHA
-		"Amiga WHDLoad package (lha compressed)", "CAR compressed archive", "SDS Software SFX"
+		"Amiga WHDLoad package (lha compressed)", "CAR compressed archive", "SDS Software SFX", "Atari ST LHArc SFX archive"
 	];
 	
 	// Some files are 'LHARK' files that look almost identical to LHA files and can only be identified by trying them as lhark

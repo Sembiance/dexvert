@@ -6,5 +6,6 @@ export class impulseTrackerSample extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Impulse_Tracker_sample";
 	ext        = [".its"];
 	magic      = ["Impulse Tracker Sample"];
+	weakMagic  = true;
 	converters = ["awaveStudio[matchType:magic]"];
 }

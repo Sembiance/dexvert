@@ -63,7 +63,7 @@ export const gamearch =
 		stargunnerGameArchive     : {name : "Stargunner Game Archive", filename : [/^stargun\.dlt$/i], magic : ["DLT game data archive"], website : "https://moddingwiki.shikadi.net/wiki/DLT_Format"},
 		stellar7GameArchive       : {name : "Stellar 7 Game Archive", ext : [".res"], filename : [/^(stellar|cockpit|draxon|voice|stelart|scenex|level\d+)\.res$/i], website : "https://moddingwiki.shikadi.net/wiki/RES_Format_(Stellar_7)"},
 		vinylGoddessGameArchive   : {name : "Vinyl Goddess from Mars Game Archive", filename : [/^goddess\.lbr$/i], website : "https://moddingwiki.shikadi.net/wiki/LBR_Format"},
-		wackyWheelsGameArchive    : {name : "Wacky Wheels Game Archive", filename : [/^wacky\.(dat|lid)$/i], website : "https://moddingwiki.shikadi.net/wiki/DAT_Format_(Wacky_Wheels)"}
+		wackyWheelsGameArchive    : {name : "Wacky Wheels Game Archive", filename : [/^wacky\.(dat|lid)$/i], magic : [/^Wacky Wheels Archive$/], website : "https://moddingwiki.shikadi.net/wiki/DAT_Format_(Wacky_Wheels)"}
 	}
 	
 };

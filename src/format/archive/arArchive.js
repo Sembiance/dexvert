@@ -8,7 +8,7 @@ export class arArchive extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/AR";
 	ext            = [".deb", ..._WEAK_EXT];
 	forbidExtMatch = _WEAK_EXT;
-	magic          = ["current ar archive", "ar archive", "Debian binary package", "Debian Linux Package", "Archive: Debian Software package", "BSD library", "Archive: The archiver", /^MIPS archive /, /^Ar$/, /^archive$/, /^fmt\/1835( |$)/];
+	magic          = ["current ar archive", "ar archive", "Debian binary package", "Debian Linux Package", "Archive: Debian Software package", "BSD library", "Archive: The archiver", /^MIPS archive /, /^Ar$/, /^archive$/, /^Alpha archive$/, /^fmt\/1835( |$)/];
 	converters     = ["ar", "unar", "deark[module:ar]"];
 	verify         = ({dexState, newFile}) =>
 	{

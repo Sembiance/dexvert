@@ -85,9 +85,9 @@ export class RunState
 	{
 		const o = {};
 		o.programid = this.programid;
-		o.f = this.f.serialize();
+		//o.f = this.f.serialize();	// Not included for brevity
 		o.meta = xu.parseJSON(JSON.stringify(o.meta), {});	// Can include classes and other non-JSON friendly things
-		for(const key of ["args", "bin", "cwd", "dosData", "forbidChildRun", "osData", "runOptions"])
+		for(const key of ["args", "bin", "cwd", "dosData", "forbidChildRun", "osData"])
 		{
 			if(Object.hasOwn(this, key))
 				o[key] = this[key];

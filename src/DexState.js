@@ -36,7 +36,7 @@ export class DexPhase
 	serialize()
 	{
 		const o = {};
-		for(const key of ["f", "format", "family", "id"])
+		for(const key of ["format", "family", "id"])
 			o[key] = this[key].serialize();
 		o.meta = xu.parseJSON(JSON.stringify(this.meta), {});
 		o.ran = this.ran.map(v => v.serialize());

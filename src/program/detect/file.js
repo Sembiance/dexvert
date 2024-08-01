@@ -57,7 +57,7 @@ export class file extends Program
 		r.xlog.trace`A fileText:\n ${fileText}`;
 
 		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
-		for(const prefix of ["at byte", "block device driver", "filetype=", "last modified", "to extract,", "version \\d", `[;:)(\\]["']`])
+		for(const prefix of ["at byte", "block device driver", "filetype=", "last modified", "of \\d+ bytes", "to extract,", "version \\d", `[;:)(\\]["']`])
 			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
 		r.xlog.trace`B fileText:\n${fileText}`;
 

@@ -82,7 +82,10 @@ if(argv.direct)
 		inputFile.meta = xu.parseJSON(argv.fileMeta);
 
 	const dexState = await dexvert(inputFile, await DexFile.create(argv.outputDirPath), {xlog, ...dexvertOptions});
-	console.log(dexState.pretty());
+	if(argv.jsonFile)
+		await fileUtil.writeTextFile(argv.jsonFile, JSON.stringify(dexState.serialize()));
+	else
+		console.log(dexState.pretty());
 
 	await handleExit();
 }

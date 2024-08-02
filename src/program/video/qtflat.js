@@ -7,6 +7,9 @@ export class qtflat extends Program
 {
 	website       = "https://samples.mplayerhq.hu/V-codecs/601P/";
 	loc           = "wine";
+	flags   = {
+		chainAs : "Chain as a particular format"
+	};
 	checkForDups  = true;
 	bin           = "c:\\dexvert\\qtflat\\QT-Flattener.exe";
 	mirrorInToCWD = "copy";
@@ -32,6 +35,6 @@ export class qtflat extends Program
 
 		await Deno.rename(outputOldFilePath, path.join(r.outDir({absolute : true}), "out.mov"));
 	};
-	chain     = "dexvert";
+	chain     = r => (r.flags.chainAs?.length ? `dexvert[asFormat:${r.flags.chainAs}]` : "dexvert");
 	renameOut = true;
 }

@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,534)
+# Unsupported File Formats (1,548)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -198,7 +198,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (88)
+## Document (89)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -215,6 +215,7 @@ Family/Format | Name | Extensions | Notes
 [document/calamusDocument](https://discmaster.textfiles.com/search?formatid=calamusDocument) | [Calamus Document](http://fileformats.archiveteam.org/wiki/Calamus) | .cdk | [12 sample files](https://sembiance.com/fileFormatSamples/document/calamusDocument/)
 [document/canDoDeck](https://discmaster.textfiles.com/search?formatid=canDoDeck) | [CanDo Deck](https://cando.amigacity.xyz/index.php/downloads/category/7-cando-software) | .deck | [1 sample file](https://sembiance.com/fileFormatSamples/document/canDoDeck/) - Could use 'DeckViewer' from above, or something else to view/convert. More info: https://randocity.com/2018/03/27/cando-an-amiga-programming-language/
 [document/ceoWrite](https://discmaster.textfiles.com/search?formatid=ceoWrite) | [CEOWrite](https://en.wikipedia.org/wiki/Data_General) | .cw | [1 sample file](https://sembiance.com/fileFormatSamples/document/ceoWrite/) - Old word processor. Haven't investigated it for magic.
+[document/cicalcSpreadsheet](https://discmaster.textfiles.com/search?formatid=cicalcSpreadsheet) | CICALC spreadsheet | .cic | 
 [document/clarionDatabase](https://discmaster.textfiles.com/search?formatid=clarionDatabase) | Clarion Database File | .dat | [49 sample files](https://sembiance.com/fileFormatSamples/document/clarionDatabase/) - Did a Google search, couldn't find anything about it. soffice didn't do anything with it either.
 [document/cloantoC1Text](https://discmaster.textfiles.com/search?formatid=cloantoC1Text) | Cloanto C1-Text Document | .c1text | [1 sample file](https://sembiance.com/fileFormatSamples/document/cloantoC1Text/) - Have only encountered just 1 file in the wild. If I encounter more, I can get Cloanto C1-Text program, load it into the Amiga and convert it there.
 [document/dartHypertext](https://discmaster.textfiles.com/search?formatid=dartHypertext) | Dart Hypertext |  | [5 sample files](https://sembiance.com/fileFormatSamples/document/dartHypertext/) - The DART/DART.EXE program in sandbox/apps/ can open these, it's a text format. It has no way to export as text. It can 'print' the file, but the dosbox I'm using doesn't support printing. Thus this format isn't currently supported.
@@ -339,7 +340,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (70)
+## Font (71)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -407,6 +408,7 @@ Family/Format | Name | Extensions | Notes
 [font/westwoodFont](https://discmaster.textfiles.com/search?formatid=westwoodFont) | Westwood Font | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/westwoodFont/)
 [font/wildfire3DFont](https://discmaster.textfiles.com/search?formatid=wildfire3DFont) | Wildfire 3D Font | .3dfont | 
 [font/windowsFont](https://discmaster.textfiles.com/search?formatid=windowsFont) | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
+[font/wordPerfectFont](https://discmaster.textfiles.com/search?formatid=wordPerfectFont) | WordPerfect Font | .wfa | 
 [font/wordUpToolkitFont](https://discmaster.textfiles.com/search?formatid=wordUpToolkitFont) | WordUp Graphics Toolkit Font | .wfn | 
 [font/xCADFont](https://discmaster.textfiles.com/search?formatid=xCADFont) | X-CAD Font |  | 
 [font/serverNaturalFormatFont](https://discmaster.textfiles.com/search?formatid=serverNaturalFormatFont) | X11 Server Natural Format font | .snf | 
@@ -415,7 +417,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (117)
+## Image (118)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -483,6 +485,7 @@ Family/Format | Name | Extensions | Notes
 [image/lotusSmartIcon](https://discmaster.textfiles.com/search?formatid=lotusSmartIcon) | Lotus Smart Icon | .smi | 
 [image/maxonCADDrawing](https://discmaster.textfiles.com/search?formatid=maxonCADDrawing) | MaconCAD Drawing | .mc2 | [1 sample file](https://sembiance.com/fileFormatSamples/image/maxonCADDrawing/)
 [image/madStudio](https://discmaster.textfiles.com/search?formatid=madStudio) | [Mad Studio](http://fileformats.archiveteam.org/wiki/Mad_Studio) | .gr1 .gr2 .gr3 .gr0 .mpl .msl .spr .an2 .an4 .an5 .tl4 | [12 sample files](https://sembiance.com/fileFormatSamples/image/madStudio/) - Only thing that identifies it are extensions. Also the program didn't come out until 2016, so not worth supporting.
+[image/magneticGraphics](https://discmaster.textfiles.com/search?formatid=magneticGraphics) | Magnetic Graphics | .gfx | 
 [image/megaPaintVector](https://discmaster.textfiles.com/search?formatid=megaPaintVector) | MegaPaint Vector | .vek | 
 [image/microIllustrator](https://discmaster.textfiles.com/search?formatid=microIllustrator) | Micro Illustrator | .mic | [1 sample file](https://sembiance.com/fileFormatSamples/image/microIllustrator/) - NOT the same as image/mil Micro Illustrator. Sadly. due to no known magic and how recoil2png/view64 will convert ANYTHING, we disable this for now.
 [image/micrografxIcon](https://discmaster.textfiles.com/search?formatid=micrografxIcon) | [Micrografx Icon](http://fileformats.archiveteam.org/wiki/Micrografx_Icon) | .icn | [4 sample files](https://sembiance.com/fileFormatSamples/image/micrografxIcon/) - No known converter.
@@ -538,7 +541,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (113)
+## Music (114)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -653,11 +656,12 @@ Family/Format | Name | Extensions | Notes
 [music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
 [music/winSongComposerSong](https://discmaster.textfiles.com/search?formatid=winSongComposerSong) | WinSong Composer Song | .sng | 
 [music/xlr8SentryChipComposorMusic](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorMusic) | XLR8 - Sentry Chip Composor Music | .xms | 
+[music/xlr8SentryChipComposorSong](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorSong) | XLR8 - Sentry Chip Composor Song | .xng | 
 [music/yamahaESEQ](https://discmaster.textfiles.com/search?formatid=yamahaESEQ) | Yamaha e-SEQ Music | .esq .fil | 
 
 
 
-## Other (843)
+## Other (852)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -737,6 +741,7 @@ Family/Format | Name | Extensions | Notes
 [other/ansiINCIT378FingerprintsFormat](https://discmaster.textfiles.com/search?formatid=ansiINCIT378FingerprintsFormat) | ANSI/INCIT 378 fingerprints format (gen) | .dat .fmrpiv | 
 [other/aolPreferencesOrFilingCabinet](https://discmaster.textfiles.com/search?formatid=aolPreferencesOrFilingCabinet) | AOL Preferences/Personal Filing Cabinet | .pfc .org | 
 [other/apAssistCompressedData](https://discmaster.textfiles.com/search?formatid=apAssistCompressedData) | ApAssist Compressed Data |  | 
+[other/arcMasterColorSet](https://discmaster.textfiles.com/search?formatid=arcMasterColorSet) | ArcMaster color Set | .set | 
 [other/arcSoftAlbumOrSlideshow](https://discmaster.textfiles.com/search?formatid=arcSoftAlbumOrSlideshow) | ArcSoft Album | .abm .sld | 
 [other/artEffectBrush](https://discmaster.textfiles.com/search?formatid=artEffectBrush) | ArtEffect Brush |  | 
 [other/artEffectConvolution](https://discmaster.textfiles.com/search?formatid=artEffectConvolution) | ArtEffect Convolution |  | 
@@ -977,12 +982,14 @@ Family/Format | Name | Extensions | Notes
 [other/geoffHamiltonsGardenDesignerProject](https://discmaster.textfiles.com/search?formatid=geoffHamiltonsGardenDesignerProject) | Geoff Hamilton's Garden Designer project | .grd | 
 [other/geoWorksDirectoryInfo](https://discmaster.textfiles.com/search?formatid=geoWorksDirectoryInfo) | GeoWorks directory info | .000 | 
 [other/geoWorksGEOSData](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSData) | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
+[other/geoWorksGEOSSoundDriver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSSoundDriver) | GeoWorks GEOS sound driver | .geo | 
 [other/geoWorksWriterScrapbook](https://discmaster.textfiles.com/search?formatid=geoWorksWriterScrapbook) | GeoWorks Writer scrapbook | .000 | 
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?formatid=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
 [other/gfxLab24Filter](https://discmaster.textfiles.com/search?formatid=gfxLab24Filter) | GfxLab24 Filter |  | 
 [other/glbGameDataArchive](https://discmaster.textfiles.com/search?formatid=glbGameDataArchive) | GLB game data archive | .glb | 
 [other/glibcLocaleFile](https://discmaster.textfiles.com/search?formatid=glibcLocaleFile) | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://sembiance.com/fileFormatSamples/other/glibcLocaleFile/)
+[other/gnuFindutilsLocateDatabase](https://discmaster.textfiles.com/search?formatid=gnuFindutilsLocateDatabase) | GNU findutils locate database |  | 
 [other/gnuGettextMachineObject](https://discmaster.textfiles.com/search?formatid=gnuGettextMachineObject) | GNU Gettext Machine Objec | .gmo | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
@@ -1088,6 +1095,7 @@ Family/Format | Name | Extensions | Notes
 [other/maestroMusic](https://discmaster.textfiles.com/search?formatid=maestroMusic) | Maestro Music |  | 
 [other/magicC64Preferences](https://discmaster.textfiles.com/search?formatid=magicC64Preferences) | MagiC64 Preferences | .prefs | 
 [other/magixSamplitudeVirtualProject](https://discmaster.textfiles.com/search?formatid=magixSamplitudeVirtualProject) | Magix Samplitude Virtual Project | .vip | 
+[other/magneticGame](https://discmaster.textfiles.com/search?formatid=magneticGame) | Magnetic Game | .mag | 
 [other/mapBrowserVectorData](https://discmaster.textfiles.com/search?formatid=mapBrowserVectorData) | MapBrowser/MapWriter Vector Map Data | cbd | 
 [other/mapleCommonBinary](https://discmaster.textfiles.com/search?formatid=mapleCommonBinary) | Maple Common Binary | .m | 
 [other/masiMusicDriver](https://discmaster.textfiles.com/search?formatid=masiMusicDriver) | MASI Music Driver | .mus | 
@@ -1253,6 +1261,7 @@ Family/Format | Name | Extensions | Notes
 [other/psionPrinterDriver](https://discmaster.textfiles.com/search?formatid=psionPrinterDriver) | Psion Printer Driver | .wdr | 
 [other/psm2Configuration](https://discmaster.textfiles.com/search?formatid=psm2Configuration) | PSM 2 configuration (v1.00) | .dat | 
 [other/pureCProjectDB](https://discmaster.textfiles.com/search?formatid=pureCProjectDB) | Pure C Project DB | .pdb | 
+[other/pureBasicResidentData](https://discmaster.textfiles.com/search?formatid=pureBasicResidentData) | PureBasic resident data |  | 
 [other/puzzleBusterPuzzle](https://discmaster.textfiles.com/search?formatid=puzzleBusterPuzzle) | Puzzle Buster Puzzle | .puz | 
 [other/qlPluginROM](https://discmaster.textfiles.com/search?formatid=qlPluginROM) | QL Plugin-ROM |  | 
 [other/qtMessage](https://discmaster.textfiles.com/search?formatid=qtMessage) | Qt Message | .qm | 
@@ -1261,6 +1270,7 @@ Family/Format | Name | Extensions | Notes
 [other/quake3Map](https://discmaster.textfiles.com/search?formatid=quake3Map) | Quake III Map | .bsp | 
 [other/quakeMap](https://discmaster.textfiles.com/search?formatid=quakeMap) | Quake Map | .bsp | 
 [other/qualitasHelp](https://discmaster.textfiles.com/search?formatid=qualitasHelp) | Qualitas Help | .hlp | 
+[other/quattroProAddInFunctionsLibrary](https://discmaster.textfiles.com/search?formatid=quattroProAddInFunctionsLibrary) | Quattro Pro add-in functions library | .qll | 
 [other/quickTextTitles](https://discmaster.textfiles.com/search?formatid=quickTextTitles) | QuickText Titles |  | 
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/radixGameData](https://discmaster.textfiles.com/search?formatid=radixGameData) | Radix game data | .dat | 
@@ -1306,6 +1316,7 @@ Family/Format | Name | Extensions | Notes
 [other/segaMasterSystemROM](https://discmaster.textfiles.com/search?formatid=segaMasterSystemROM) | Sega Master System ROM | .sms | 
 [other/sentrySpellingEngineLexicon](https://discmaster.textfiles.com/search?formatid=sentrySpellingEngineLexicon) | Sentry Spelling-Checker Engine Lexicon | .clx | 
 [other/settlers2Map](https://discmaster.textfiles.com/search?formatid=settlers2Map) | Settlers II Map | .swd .wld | 
+[other/sfxDocumentTemplateDirectory](https://discmaster.textfiles.com/search?formatid=sfxDocumentTemplateDirectory) | Sfx Document Template Directory |  | 
 [other/sgmlCompiled](https://discmaster.textfiles.com/search?formatid=sgmlCompiled) | SGML Compiled | .mtl | 
 [other/showPartnerMasteredShow](https://discmaster.textfiles.com/search?formatid=showPartnerMasteredShow) | Show Partner Mastered Show | .pro | 
 [other/civilizationFile](https://discmaster.textfiles.com/search?formatid=civilizationFile) | Sid Meier's Civilization File | .pal .pic | 
@@ -1493,6 +1504,8 @@ Family/Format | Name | Extensions | Notes
 [other/xCADModifierTable](https://discmaster.textfiles.com/search?formatid=xCADModifierTable) | X-CAD Modifier Table | .obj | 
 [other/xCADOverlay](https://discmaster.textfiles.com/search?formatid=xCADOverlay) | X-CAD Overlay |  | 
 [other/x11XauthorityData](https://discmaster.textfiles.com/search?formatid=x11XauthorityData) | X11 Xauthority data |  | 
+[other/xlr8SentryChipComposorInstrument](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorInstrument) | XLR8 - Sentry Chip Composor Instrument | .xin | 
+[other/xlr8SentryChipComposorVoiceSet](https://discmaster.textfiles.com/search?formatid=xlr8SentryChipComposorVoiceSet) | XLR8 - Sentry Chip Composor VoiceSet | .xvs | 
 [other/xpcomTypeLibrary](https://discmaster.textfiles.com/search?formatid=xpcomTypeLibrary) | XPCOM Type Library | .xpt | 
 [other/yabBaseballGameData](https://discmaster.textfiles.com/search?formatid=yabBaseballGameData) | YAB! Baseball game data | .dat | 
 [other/yafaCompressionOptions](https://discmaster.textfiles.com/search?formatid=yafaCompressionOptions) | YAFA Compression Options |  | 
@@ -1554,7 +1567,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (39)
+## Video (40)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -1579,6 +1592,7 @@ Family/Format | Name | Extensions | Notes
 [video/knowledgeAdventureMovie](https://discmaster.textfiles.com/search?formatid=knowledgeAdventureMovie) | [Knowledge Adventure MoVie](https://wiki.multimedia.cx/index.php?title=Space_Adventure_MOV) | .mov | 
 [video/magicCarpetFlicVideo](https://discmaster.textfiles.com/search?formatid=magicCarpetFlicVideo) | Magic Carpet Flic video | .dat | 
 [video/magicLanternDIFF](https://discmaster.textfiles.com/search?formatid=magicLanternDIFF) | Magic Lantern DIFF Animation | .diff | No known converter
+[video/metaStream3DObject](https://discmaster.textfiles.com/search?formatid=metaStream3DObject) | MetaStream 3D object | .mts | 
 [video/movieSetterSet](https://discmaster.textfiles.com/search?formatid=movieSetterSet) | MovieSetter Set | .set | 
 [video/ntitler](https://discmaster.textfiles.com/search?formatid=ntitler) | NTitler Animation | .nt | [8 sample files](https://sembiance.com/fileFormatSamples/video/ntitler/) - Couldn't locate a converter or extractor. Original Amiga program is here: http://aminet.net/package/gfx/misc/ntpro
 [video/iffVAXL](https://discmaster.textfiles.com/search?formatid=iffVAXL) | [Optonica Videostream VAXL](http://fileformats.archiveteam.org/wiki/VAXL) | .vaxl | [15 sample files](https://sembiance.com/fileFormatSamples/video/iffVAXL/) - Could only find this potential viewer, but no download link: https://www.ultimateamiga.com/index.php?topic=9605.0

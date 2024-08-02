@@ -262,7 +262,8 @@ const FLEX_SIZE_FORMATS =
 
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
-		gifexe             : 25,
+		grabber            : 7,
+		gifexe             : 35,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,

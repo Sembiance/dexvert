@@ -7,6 +7,9 @@ export class qt_flatt extends Program
 	website      = "https://www.macdisk.com/quickten.php";
 	unsafe       = true;
 	loc          = "winxp";
+	flags   = {
+		chainAs : "Chain as a particular format"
+	};
 	checkForDups = true;
 	bin          = "c:\\out\\QT-FLATT.BAT";
 	osData       = r => ({
@@ -29,6 +32,6 @@ export class qt_flatt extends Program
 			FileDelete("c:\\out\\QT-FLATT.BAT");
 			FileDelete("c:\\out\\QT-FLATT.EXE");`
 	});
-	chain     = "dexvert";
+	chain     = r => (r.flags.chainAs?.length ? `dexvert[asFormat:${r.flags.chainAs}]` : "dexvert");
 	renameOut = true;
 }

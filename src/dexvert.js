@@ -41,6 +41,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 	let asFormatFormat = null;
 	if(asFormat)
 	{
+		RUNTIME.asFormat = asFormat;
 		const [asFamilyid, asFormatid] = asFormat.split("/");
 		if(!formats[asFormatid])
 			throw new Error(`Invalid asFormat option specified, no such format: ${asFormatid}`);

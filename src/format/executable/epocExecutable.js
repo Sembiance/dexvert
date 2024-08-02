@@ -7,7 +7,7 @@ export class epocExecutable extends Format
 	ext            = [".app", ".opx", ".opo", ".opl", ".dll"];
 	forbidExtMatch = true;
 	magic          = [
-		"Psion Series 5 OPL application", "EPOC/Symbian OPL Application", "EPOC OPL Object module", "Psion Series 5 OPO module", "EPOC OPL eXtension", /^Psion Series 5 binary: (application|DLL|OPX|printer definition)/,
+		"Psion Series 5 OPL application", "EPOC/Symbian OPL Application", "EPOC OPL Object module", "Psion Series 5 OPO module", "EPOC OPL eXtension", /^Psion Series 5 binary: (application|DLL|OPX|logical device driver|printer definition)/,
 		"EPOC binary", "EPOC/Symbian Library", /^Psion Series 5 binary: comms (hardware|protocol) library$/
 	];
 	converters     = ["strings"];

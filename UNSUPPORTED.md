@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,548)
+# Unsupported File Formats (1,561)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (133)
+## Archive (134)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -106,6 +106,7 @@ Family/Format | Name | Extensions | Notes
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
+[archive/protectIt2Encrypted](https://discmaster.textfiles.com/search?formatid=protectIt2Encrypted) | ProtectIt/2 Encrypted | .zie | 
 [archive/protectorProtected](https://discmaster.textfiles.com/search?formatid=protectorProtected) | protector Protected | .exe | 
 [archive/ps1MemoryCard](https://discmaster.textfiles.com/search?formatid=ps1MemoryCard) | [PS1 Memory Card](https://www.psdevwiki.com/ps3/PS1_Savedata) | .mcr .mcd | [3 sample files](https://sembiance.com/fileFormatSamples/archive/ps1MemoryCard/)
 [archive/ptsDOSDiskImage](https://discmaster.textfiles.com/search?formatid=ptsDOSDiskImage) | PTS-DOS disk image | .dsk .img .pt7 | 
@@ -287,7 +288,7 @@ Family/Format | Name | Extensions | Notes
 [document/wangIWP](https://discmaster.textfiles.com/search?formatid=wangIWP) | [WANG Integrated Word Processor](https://archive.org/details/wangeditor) | .doc | [1 sample file](https://sembiance.com/fileFormatSamples/document/wangIWP/) - DOS based word processor. Haven't investigated it for magic.
 [document/winFaxDocument](https://discmaster.textfiles.com/search?formatid=winFaxDocument) | WinFax Document | .fxm .fxr | 
 [document/wordMARC](https://discmaster.textfiles.com/search?formatid=wordMARC) | [WordMARC](https://en.wikipedia.org/wiki/WordMARC) | .wm | [1 sample file](https://sembiance.com/fileFormatSamples/document/wordMARC/) - VAX based word processor. Haven't investigated it for magic.
-[document/wordPerfectHelp](https://discmaster.textfiles.com/search?formatid=wordPerfectHelp) | WordPerfect help | .fil | 
+[document/wordPerfectHelp](https://discmaster.textfiles.com/search?formatid=wordPerfectHelp) | WordPerfect help | .fil .hlp | 
 [document/wordPerfectNotebook](https://discmaster.textfiles.com/search?formatid=wordPerfectNotebook) | WordPerfect Notebook | .nb | 
 [document/xTextCompiledHypertext](https://discmaster.textfiles.com/search?formatid=xTextCompiledHypertext) | xText compiled Hypertext/Help | .xdb .hlp | 
 
@@ -417,7 +418,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (118)
+## Image (119)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -428,6 +429,7 @@ Family/Format | Name | Extensions | Notes
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?formatid=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
 [image/applausePalette](https://discmaster.textfiles.com/search?formatid=applausePalette) | Applause Palette | .pal | 
 [image/a2Sprites](https://discmaster.textfiles.com/search?formatid=a2Sprites) | Apple II Sprites | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
+[image/applixBitmap](https://discmaster.textfiles.com/search?formatid=applixBitmap) | Applix bitmap | .im | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?formatid=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
 [image/artWorks](https://discmaster.textfiles.com/search?formatid=artWorks) | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
 [image/artworxDrawing](https://discmaster.textfiles.com/search?formatid=artworxDrawing) | Artworx Drawing | .cwg | 
@@ -541,7 +543,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (114)
+## Music (115)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -651,6 +653,7 @@ Family/Format | Name | Extensions | Notes
 [music/technoSoundTurbo2Track](https://discmaster.textfiles.com/search?formatid=technoSoundTurbo2Track) | TechnoSound Turbo 2 Track | .track | [1 sample file](https://sembiance.com/fileFormatSamples/music/technoSoundTurbo2Track/)
 [music/t0ast](https://discmaster.textfiles.com/search?formatid=t0ast) | The 0ok Amazing Synth Tracker Module | .t0ast | [4 sample files](https://sembiance.com/fileFormatSamples/music/t0ast/)
 [music/traXTrack](https://discmaster.textfiles.com/search?formatid=traXTrack) | TraX Music Track | .mts | [5 sample files](https://sembiance.com/fileFormatSamples/music/traXTrack/)
+[music/triSoundModule](https://discmaster.textfiles.com/search?formatid=triSoundModule) | TriSound module | .tri | 
 [music/vgmMusicMaker](https://discmaster.textfiles.com/search?formatid=vgmMusicMaker) | VGM Music Maker Module | .vge | [4 sample files](https://sembiance.com/fileFormatSamples/music/vgmMusicMaker/)
 [music/vicTracker](https://discmaster.textfiles.com/search?formatid=vicTracker) | Vic-Tracker Module | .vt | [5 sample files](https://sembiance.com/fileFormatSamples/music/vicTracker/)
 [music/voyetraSequencerSong](https://discmaster.textfiles.com/search?formatid=voyetraSequencerSong) | Voyetra Sequencer Song | .sng | 
@@ -661,7 +664,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (852)
+## Other (861)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -790,6 +793,7 @@ Family/Format | Name | Extensions | Notes
 [other/bootXLearnedBootblocks](https://discmaster.textfiles.com/search?formatid=bootXLearnedBootblocks) | BootX learned bootblocks | .brain | 
 [other/borlandDelphiCompiledUnit](https://discmaster.textfiles.com/search?formatid=borlandDelphiCompiledUnit) | Borland Delphi Compiled Unit | .dcu | 
 [other/borlandDriver](https://discmaster.textfiles.com/search?formatid=borlandDriver) | Borland Graphics Interface Driver | .bgi | 
+[other/borlandHelpSystem](https://discmaster.textfiles.com/search?formatid=borlandHelpSystem) | Borland Help System | .hlp | 
 [other/borlandLanguageLibrary](https://discmaster.textfiles.com/search?formatid=borlandLanguageLibrary) | Borland Language Library | .bll | 
 [other/borlandObjectBrowserData](https://discmaster.textfiles.com/search?formatid=borlandObjectBrowserData) | Borland Object Browser data | .obr | 
 [other/borlandOverlay](https://discmaster.textfiles.com/search?formatid=borlandOverlay) | Borland Overlay | .ovr | 
@@ -991,6 +995,7 @@ Family/Format | Name | Extensions | Notes
 [other/glibcLocaleFile](https://discmaster.textfiles.com/search?formatid=glibcLocaleFile) | [glibc Locale File](http://fileformats.archiveteam.org/wiki/Microsoft_Agent_character) |  | [9 sample files](https://sembiance.com/fileFormatSamples/other/glibcLocaleFile/)
 [other/gnuFindutilsLocateDatabase](https://discmaster.textfiles.com/search?formatid=gnuFindutilsLocateDatabase) | GNU findutils locate database |  | 
 [other/gnuGettextMachineObject](https://discmaster.textfiles.com/search?formatid=gnuGettextMachineObject) | GNU Gettext Machine Objec | .gmo | 
+[other/gnuGprofPerformanceData](https://discmaster.textfiles.com/search?formatid=gnuGprofPerformanceData) | GNU gprof performance data | .out | 
 [other/goDotC64ImageProcessing](https://discmaster.textfiles.com/search?formatid=goDotC64ImageProcessing) | GoDot C64 Image Processing |  | 
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?formatid=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
@@ -1028,7 +1033,12 @@ Family/Format | Name | Extensions | Notes
 [other/intellCOFFObject](https://discmaster.textfiles.com/search?formatid=intellCOFFObject) | Intel Common Object File Format Object | .obj | 
 [other/intelligentGamesResourceData](https://discmaster.textfiles.com/search?formatid=intelligentGamesResourceData) | Intelligent Games resource data | .res | 
 [other/interactiveAVIData](https://discmaster.textfiles.com/search?formatid=interactiveAVIData) | Interactive AVI data | .ivd | 
+[other/interBaseEnvironment](https://discmaster.textfiles.com/search?formatid=interBaseEnvironment) | InterBase Environment | .mil | 
+[other/interBaseLayout](https://discmaster.textfiles.com/search?formatid=interBaseLayout) | InterBase Layout | .lot | 
+[other/interBasePacking](https://discmaster.textfiles.com/search?formatid=interBasePacking) | InterBase Packing | .pkt | 
+[other/interBaseTableDefinition](https://discmaster.textfiles.com/search?formatid=interBaseTableDefinition) | InterBase Table Definition | .tdf | 
 [other/internationalPatchingSystem](https://discmaster.textfiles.com/search?formatid=internationalPatchingSystem) | International Patching System | .ips | 
+[other/interwordPrinterDefinition](https://discmaster.textfiles.com/search?formatid=interwordPrinterDefinition) | Interword printer definition |  | 
 [other/invictusGameData](https://discmaster.textfiles.com/search?formatid=invictusGameData) | Invictus game data | .ics | 
 [other/invisionBrushes](https://discmaster.textfiles.com/search?formatid=invisionBrushes) | Invision Brushes | .bru | 
 [other/ispellHashFile](https://discmaster.textfiles.com/search?formatid=ispellHashFile) | ispell hash file | .dic | 
@@ -1161,6 +1171,8 @@ Family/Format | Name | Extensions | Notes
 [other/dosCodePage](https://discmaster.textfiles.com/search?formatid=dosCodePage) | MS-DOS Code Page Info | .cp .cpi | 
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
+[other/musicXKeymap](https://discmaster.textfiles.com/search?formatid=musicXKeymap) | Music-X Keymap | .kmap | 
+[other/musicXPatchEditor](https://discmaster.textfiles.com/search?formatid=musicXPatchEditor) | Music-X patch Editor | .editor | 
 [other/musicXPatchLibrary](https://discmaster.textfiles.com/search?formatid=musicXPatchLibrary) | Music-X patch Library | .libr | 
 [other/musicXVoices](https://discmaster.textfiles.com/search?formatid=musicXVoices) | Music-X Voices | .voices | 
 [other/musicMatchJukeBoxVisualization](https://discmaster.textfiles.com/search?formatid=musicMatchJukeBoxVisualization) | MusicMatch JukeBox Visualization | .mvs | 
@@ -1567,7 +1579,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Video (40)
+## Video (41)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [video/accentDemoMakerSequence](https://discmaster.textfiles.com/search?formatid=accentDemoMakerSequence) | Accent Software DemoMaker Sequence | .seq | [2 sample files](https://sembiance.com/fileFormatSamples/video/accentDemoMakerSequence/)
@@ -1607,6 +1619,7 @@ Family/Format | Name | Extensions | Notes
 [video/sonyVegas](https://discmaster.textfiles.com/search?formatid=sonyVegas) | [Sony Vegas Video](https://en.wikipedia.org/wiki/Vegas_Pro) | .veg | [1 sample file](https://sembiance.com/fileFormatSamples/video/sonyVegas/)
 [video/completeAnimatorFilm](https://discmaster.textfiles.com/search?formatid=completeAnimatorFilm) | The Complete Animator Film | .tca | 
 [video/theDirector](https://discmaster.textfiles.com/search?formatid=theDirector) | [The Director Animation/Slideshow](https://www.computinghistory.org.uk/det/63951/The-Director/) | .film | [1 sample file](https://sembiance.com/fileFormatSamples/video/theDirector/)
+[video/vis5DDatasetObject](https://discmaster.textfiles.com/search?formatid=vis5DDatasetObject) | Vis5D dataset object | .v5d | 
 [video/vpx1VideoPackage](https://discmaster.textfiles.com/search?formatid=vpx1VideoPackage) | VPX1 Video Package | .vpx | 
 [video/zoetropeAnimation](https://discmaster.textfiles.com/search?formatid=zoetropeAnimation) | [Zoetrope Animation](https://elisoftware.org/w/index.php/Zoetrope_(Amiga,_3_1/2%22_Disk)_Antic_Software_-_1988_USA,_Canada_Release) | .rif | [4 sample files](https://sembiance.com/fileFormatSamples/video/zoetropeAnimation/)
 [video/zorkRLFVideo](https://discmaster.textfiles.com/search?formatid=zorkRLFVideo) | Zork RLF video | .rlf | 

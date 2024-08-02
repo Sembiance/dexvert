@@ -96,6 +96,8 @@
 		https://archive.org/details/apple-r-p-lib-internal-v-2.0
 		https://archive.org/details/apple-r-p-lib-reseller-v-1.0_202007
 
+* Add some of these video game video formats: https://nihav.org/game_tool.html   (v0.1.0 in sandbox/app/na_game_tool-0.1.0.tar.bz2)
+
 * Would be nice to convert additional UTX formats, such as textures: http://dev.discmaster2.textfiles.com/browse/542/EJV8_CD1.ISO/ejv8-cd1/data/shoot/Unreal%20Tournament%202003/UT%202003.exe/Textures
   The 'real' solution is probably to load up a period-appropriate UnrealEngine editor in winxp and have it import the UTX file itself and then export all the contents within
   Similar to how MacromediaDirector does it.

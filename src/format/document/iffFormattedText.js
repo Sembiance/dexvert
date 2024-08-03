@@ -6,6 +6,6 @@ export class iffFormattedText extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/FTXT";
 	ext            = [".iff", ".ftxt"];
 	forbidExtMatch = true;
-	magic          = ["IFF data, FTXT formatted text", "IFF-Text document", "TextCraft Plus document"];
+	magic          = ["IFF data, FTXT formatted text", "IFF-Text document", "TextCraft Plus document", "Cloanto C1-Text document"];
 	converters     = ["iff_convert"];
 }

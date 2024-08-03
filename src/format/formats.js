@@ -67,7 +67,7 @@ async function loadUnsupported({reload}={})
 			if(formats[formatid])
 				throw new Error(`format [${formatid}] in unsupported.js is a duplicate of ${formats[formatid]}`);
 
-			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "name", "notes", "weakFilename", "weakMagic", "website"];
+			const supportedKeys = ["ext", "filename", "forbiddenMagic", "magic", "matchPreExt", "name", "notes", "weakFilename", "weakMagic", "website"];
 			const extraKeys = Object.keys(o).subtractAll(supportedKeys);
 			if(extraKeys.length>0)
 				throw new Error(`unsupported format ${familyid}/${formatid} has extra keys that are not currently copied over to the Unknown class, add them: ${extraKeys}`);

@@ -37,6 +37,7 @@ export const gameextractor =
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},
 		unrealEngine3Package               : {name : "Unreal Engine 3 Package", ext : [".u", ".uasset", ".utx", ".uax", ".umx", ".unr", ".ut3", ".upk"], magic : ["UE3 Unreal Package (LE)", "Format: UnrealEngine\\Unreal Package", "Unreal Engine package"], forbiddenMagic : ["Unreal Music"]},
 		vivBIGF                            : {name : "VIV/BIGF EA Game Archive", ext : [".viv", ".big"], allowExtMatch : true, magic : ["VIV/BIGF Electronic Arts Game Archive", "Archive: BIGF"], website : "http://fileformats.archiveteam.org/wiki/VIV"},
+		volitionPackageGameArchive         : {name : "Volition Package game archive", ext : [".vp"], magic : ["Volition Package game archive data"], weakMagic : true},
 		warcraft2GameArchive               : {name : "Warcraft 2 Game Archive", ext : [".war"], magic : ["Warcraft game data archive"], weakMagic : true},
 		wad2GameArchive                    : {name : "WAD2 Game Archive", ext : [".wad"], magic : ["WAD2 file"], website : "http://fileformats.archiveteam.org/wiki/Quake_WAD"},
 		youDontKnowJackGameArchive         : {name : "You Don't Know Jack Game Archive", ext : [".srf"], magic : ["You Don't Know Jack game data archive"]}

@@ -1390,6 +1390,7 @@ export const WEAK_VALUES =
 	/^Parquet storage format$/,
 	/^PC Secure encrypted \(V\d\)$/,	// so I actually found files that ARE this, but it's a pretty weak magic and we can't do anything with em, so we just mark it weak
 	/^PC-Calc spreadsheet \(gen\)$/,
+	/^Peak audio info$/,
 	/^Pepakura Designer work$/,
 	/^PFS File database$/,
 	/^Photogenics matrix data$/,
@@ -1400,6 +1401,7 @@ export const WEAK_VALUES =
 	/^Portfolio BASIC compiled 16 bit MS-DOS binary$/,
 	/^Poser pose$/,
 	/^Prisoner Of Ice game data archive$/,
+	/^PRO-NTO Application$/,
 	/^ProductView Packaged Structure and Drawing$/,
 	/^Project Dogwaffle mixing palette \(type 2\)$/,
 	/^Psion Organiser Block data$/,

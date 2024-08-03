@@ -1,7 +1,6 @@
 import {xu} from "xu";
 import {Program} from "../../Program.js";
 import {fileUtil, runUtil} from "xutil";
-import {path} from "std";
 
 export class fuseTree extends Program
 {
@@ -17,9 +16,23 @@ export class fuseTree extends Program
 	};
 	postExec = async r =>
 	{
-		const {stderr} = await runUtil.run("ls", ["-R", r.fuseISOMountDirPath], {timeout : xu.SECOND*10});
-		if(stderr?.length)
+		r.xlog.debug`retrieving 'ls -R' output from fuseiso mounted ISO as a test to see if it mounted correctly...`;
+
+		let stderrDataExists = false;
+		const stderrcb = (line, p) =>
 		{
+			if(stderrDataExists || !line?.trim()?.length)
+				return;
+
+			stderrDataExists = true;
+			runUtil.kill(p);
+		};
+		const {status} = await runUtil.run("ls", ["-R", r.fuseISOMountDirPath], {stdoutNull : true, stderrcb, timeout : xu.SECOND*8});
+		r.xlog.debug`'ls -R' result: ${{status, stderrDataExists}}`;
+
+		if(stderrDataExists)
+		{
+			r.xlog.debug`fuseiso mount point ${r.fuseISOMountDirPath} did not mount correctly, unmounting...`;
 			await runUtil.run("fusermount", ["-u", r.fuseISOMountDirPath]);
 			await fileUtil.unlink(r.fuseISOMountDirPath, {recursive : true});
 			delete r.fuseISOMountDirPath;
@@ -30,7 +43,8 @@ export class fuseTree extends Program
 		if(!r.fuseISOMountDirPath)
 			return;
 
-		r.meta.tree = ((await fileUtil.tree(r.fuseISOMountDirPath)) || []).map(v => path.relative(r.fuseISOMountDirPath, v));
+		r.xlog.debug`retrieving file tree of fuseiso mount point ${r.fuseISOMountDirPath}...`;
+		r.meta.tree = ((await fileUtil.tree(r.fuseISOMountDirPath, {relative : true, depth : 3})) || []);
 		if(!r.meta.tree?.length)
 			delete r.meta.tree;
 

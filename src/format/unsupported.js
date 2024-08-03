@@ -1138,6 +1138,7 @@ export default
 		novellSystemPrintDef                 : {name : "Novell System PrintDef Device Definition", ext : [".pdf"], magic : ["Novell System PrintDef Device Definition"]},
 		nuMegaSymbolFormat                   : {name : "NuMega Symbol format", ext : [".nms"], magic : ["NuMega Symbol format"]},
 		nWiperShow                           : {name : "NWiper Show", ext : [".nw"], magic : ["NWiper show"]},
+		officeAutoCorrectList                : {name : "Office AutoCorrect List", ext : [".acl"], magic : ["Office AutoCorrect List"]},
 		orCADProject                         : {name : "OrCAD Project", ext : [".opj"], magic : ["OrCAD Project", /^fmt\/1572( |$)/], weakMagic : true},
 		os2ExtendedFileAttributes            : {name : "OS/2 Extended File Attributes", magic : ["OS/2 EA Extended file Attributes"]},
 		os2DLL                               : {name : "OS/2 Dynamic Link Library", ext : [".dll"], magic : ["OS/2 Dynamic Link Library"]},

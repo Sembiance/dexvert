@@ -312,6 +312,9 @@ async function processNextQueue()
 	const task = {relFilePath : taskProps.rel, startedAt : performance.now()};
 	taskActive.add(task);
 
+	//const taskLogPrefix = `\n${xu.bracket(`${xu.colon("TASK")}${task.relFilePath}`)}`;
+	//xlog.debug`${taskLogPrefix} dexverting...`;
+
 	task.relDirPath = path.dirname(task.relFilePath)==="." ? "" : path.dirname(task.relFilePath);
 	task.fileOutDirPath = path.join(fileDirPath, task.relDirPath, `${path.basename(task.relFilePath)}${argv.suffix}`);
 	await Deno.mkdir(task.fileOutDirPath, {recursive : true});
@@ -332,6 +335,7 @@ async function processNextQueue()
 		if(!dexText)
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
 
+		//xlog.debug`${taskLogPrefix} dexvert finished with ${dexText.length.toLocaleString()} bytes (${dexText.length.bytesToSize()}). Parsing...`;
 		const {r, logLines} = xu.parseJSON(dexText, {});
 		if(!r?.json)
 			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${dexText}`);
@@ -348,6 +352,7 @@ async function processNextQueue()
 
 		if(argv.report)
 		{
+			//xlog.debug`${taskLogPrefix} Gathering data for report...`;
 			if(dexid)
 			{
 				const dexformatid = `${dexid.family}/${dexid.formatid}`;
@@ -402,6 +407,7 @@ async function processNextQueue()
 			const lastRan = dexData.phase?.ran?.at(-1);	// Could potentially change this to include ALL ran programs with forbidChildRun instead of just the last...
 			const forbidProgram = (lastRan?.forbidChildRun && lastRan.programid===dexData.phase.converter) ? [lastRan.programid] : null;
 
+			//xlog.debug`${taskLogPrefix} Adding ${dexData.created.files.output.length.toLocaleString()} output files to task queue...`;
 			for(const file of dexData.created.files.output)
 			{
 				bar?.incrementMax();
@@ -452,7 +458,10 @@ xlog.info`\nTotal Duration: ${totalDuration.msAsHumanReadable()}`;
 
 if(argv.report)
 {
+	xlog.debug`Preparing reportData...`;
 	const reportData = {host : Deno.hostname(), duration : totalDuration, finished : taskFinishedCount, handled : taskHandledCount, newSampleFiles, newMagics, improvedMagics, newMacTypeCreators, newProDOSTypes};
+
+	xlog.debug`Writing reportData to: ${path.join(workDirPath, "report.json")}`;
 	await fileUtil.writeTextFile(path.join(workDirPath, "report.json"), JSON.stringify(reportData));
 
 	if(!argv.headless)
@@ -521,7 +530,12 @@ if(argv.report)
 
 if(fullOutputPath.endsWith(".tar.gz"))
 {
+	xlog.debug`Creating output tarball...`;
 	await runUtil.run("tar", ["-cf", fullOutputPath.substring(0, fullOutputPath.length-3), "-C", workDirPath, "."]);
+
+	xlog.debug`Compressing output tarball...`;
 	await runUtil.run("pigz", [fullOutputPath.substring(0, fullOutputPath.length-3)]);
+
+	xlog.debug`Cleaning up workDirPath ${workDirPath}...`;
 	await fileUtil.unlink(workDirPath, {recursive : true});
 }

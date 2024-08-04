@@ -6,7 +6,7 @@ export class wav extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/WAV";
 	ext          = [".wav", ".bwf"];
 	mimeType     = "audio/x-wav";
-	magic        = [/^RIFF.*WAV[Ee].*[aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", "Wave Musikdatei (WAV)", "Broadcast Wave File audio", "RIFF audio data (WAV)", /^fmt\/(6|141|142|703)( |$)/];
+	magic        = [/^RIFF.*WAV[Ee].*[aA]udio/, "Waveform Audio (PCMWAVEFORMAT)", "Wave Musikdatei (WAV)", "Broadcast Wave File audio", "RIFF audio data (WAV)", "Rockwell ADPCM audio", /^fmt\/(6|141|142|703)( |$)/];
 	idMeta       = ({macFileType}) => macFileType==="WAVE";
 	metaProvider = ["soxi"];
 	converters   = ["sox", "ffmpeg[format:wav][outType:mp3]", "awaveStudio"];

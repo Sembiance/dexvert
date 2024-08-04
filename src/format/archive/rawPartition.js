@@ -4,10 +4,13 @@ const HFS_MAGICS = ["Macintosh HFS data", "HFS file system"];
 
 export class rawPartition extends Format
 {
-	name       = "Raw Partition";
-	magic      = [
-		/^DOS\/MBR boot sector/, ...HFS_MAGICS, "UDF filesystem data", "romfs image", "romfs filesystem", "LILO boot loader Minix file system", "Linux romfs", "LILO boot loader", "Linux/i386 LILO", "DOS/MBR partition map", /^fmt\/(468|1087|1105|1739)( |$)/,
-		"eXtended Density Format disk image", "LILO bootloader disk image", /^GPT partition table/, /^SYSLINUX boot loader/, /^Syslinux bootloader/
+	name           = "Raw Partition";
+	ext            = [".raw", ".hd", ".img", ".vhd"];
+	forbidExtMatch = true;
+	magic          = [
+		/^DOS\/MBR boot sector/, ...HFS_MAGICS, "UDF filesystem data", "romfs image", "romfs filesystem", "LILO boot loader Minix file system", "Linux romfs", "LILO boot loader", "Linux/i386 LILO", "DOS/MBR partition map",
+		"FAT16 file system", "eXtended Density Format disk image", "LILO bootloader disk image", /^GPT partition table/, /^SYSLINUX boot loader/, /^Syslinux bootloader/,
+		/^fmt\/(468|1087|1105|1739)( |$)/
 	];
 	converters = dexState =>
 	{

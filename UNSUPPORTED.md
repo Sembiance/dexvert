@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,583)
+# Unsupported File Formats (1,587)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (135)
+## Archive (136)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -97,6 +97,7 @@ Family/Format | Name | Extensions | Notes
 [archive/packMasterPacked](https://discmaster.textfiles.com/search?formatid=packMasterPacked) | Pack MasterPacked | .exe | 
 [archive/palmWebContentRecord](https://discmaster.textfiles.com/search?formatid=palmWebContentRecord) | [Palm Web Content Record](http://fileformats.archiveteam.org/wiki/Compressed_Markup_Language) |  | [3 sample files](https://sembiance.com/fileFormatSamples/archive/palmWebContentRecord/) - I could create an extractor for this format, as there doesn't appear to be any out there. These come from extracted palmQueryApplication files from deark. 		See spec here: https://lauriedavis9.tripod.com/copilot/download/Palm_File_Format_Specs.pdf#page=36 		Extra constans here: https://github.com/jichu4n/palm-os-sdk/blob/2592eaafadd803833296dad6bda4b5728ec962d8/sdk-5r4/include/Core/System/CMLConst.h
 [archive/paxArchive](https://discmaster.textfiles.com/search?formatid=paxArchive) | Pax Archive | .pax | [8 sample files](https://sembiance.com/fileFormatSamples/archive/paxArchive/) - Used in Atari ST program GEM-View
+[archive/pciGeomaticsFormat](https://discmaster.textfiles.com/search?formatid=pciGeomaticsFormat) | PCI Geomatics format | .pix | 
 [archive/peDiminisherPacked](https://discmaster.textfiles.com/search?formatid=peDiminisherPacked) | PE Diminisher Packed | .exe | 
 [archive/pePackPacked](https://discmaster.textfiles.com/search?formatid=pePackPacked) | PE-PACK Packed |  | 
 [archive/peCompactPacked](https://discmaster.textfiles.com/search?formatid=peCompactPacked) | PECompact Packed | .scr | 
@@ -420,7 +421,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (122)
+## Image (123)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -520,6 +521,7 @@ Family/Format | Name | Extensions | Notes
 [image/proShapeDrawing](https://discmaster.textfiles.com/search?formatid=proShapeDrawing) | ProShape Drawing | .psp | [5 sample files](https://sembiance.com/fileFormatSamples/image/proShapeDrawing/) - No known converter.
 [image/protoCAD3DDrawing](https://discmaster.textfiles.com/search?formatid=protoCAD3DDrawing) | ProtoCAD 3D Drawing | .pcf | 
 [image/quattroProClipArt](https://discmaster.textfiles.com/search?formatid=quattroProClipArt) | Quattro Pro Clip Art | .clp | 
+[image/quickLinkFaxCover](https://discmaster.textfiles.com/search?formatid=quickLinkFaxCover) | QuickLink Fax Cover | .cvr | 
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/rleTRE](https://discmaster.textfiles.com/search?formatid=rleTRE) | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
 [image/satoriPaint](https://discmaster.textfiles.com/search?formatid=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
@@ -670,7 +672,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (876)
+## Other (878)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1377,6 +1379,7 @@ Family/Format | Name | Extensions | Notes
 [other/spelToolSupplementalDictionary](https://discmaster.textfiles.com/search?formatid=spelToolSupplementalDictionary) | SpelTool Supplemental Dictionary (v1.0) | .spl | 
 [other/spiderManCartoonMakerMovie](https://discmaster.textfiles.com/search?formatid=spiderManCartoonMakerMovie) | Spider-Man Cartoon Maker movie | .mtm | 
 [other/sqlite2Database](https://discmaster.textfiles.com/search?formatid=sqlite2Database) | SQLite2 Database | .sqlite .sqlite2 .db | 
+[other/starWarsJediKnightJediAcademyMap](https://discmaster.textfiles.com/search?formatid=starWarsJediKnightJediAcademyMap) | Star Wars Jedi Knight: Jedi Academy map | .bsp | 
 [other/starAmPlanGraphData](https://discmaster.textfiles.com/search?formatid=starAmPlanGraphData) | StarAm Plan graph data | .gein | 
 [other/starCraftMap](https://discmaster.textfiles.com/search?formatid=starCraftMap) | StarCraft Map | .scm .scx | 
 [other/starCraftReplay](https://discmaster.textfiles.com/search?formatid=starCraftReplay) | StarCraft Replay | .rep | 
@@ -1423,6 +1426,7 @@ Family/Format | Name | Extensions | Notes
 [other/theSoftwareToolworksResourcesArchive](https://discmaster.textfiles.com/search?formatid=theSoftwareToolworksResourcesArchive) | The Software Toolworks resources archive | .vgh .lst .v2l .res | 
 [other/theirFinestHourMission](https://discmaster.textfiles.com/search?formatid=theirFinestHourMission) | Their Finest Hour: The Battle of Britain mission | .flt | 
 [other/thunderbyteAV](https://discmaster.textfiles.com/search?formatid=thunderbyteAV) | Thunderbyte AV | .dat .eci .ec .key .sig | 
+[other/thunderstrike2Data](https://discmaster.textfiles.com/search?formatid=thunderstrike2Data) | Thunderstrike 2 data | .wad | 
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 

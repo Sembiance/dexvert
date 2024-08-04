@@ -127,6 +127,7 @@ export default
 		pas                                    : {name : "Pascal/Delphi Source File", website : "http://fileformats.archiveteam.org/wiki/Pascal", ext : [".pas", ".tp5"], magic : [...TEXT_MAGIC, "Delphi Project source", "Pascal Programm", "Pascal Source Code 'DOS'", "Pascal source"], weakMagic : true},
 		perlPODDocument                        : {name : "Perl POD Document", ext : [".pm"], magic : ["Perl POD document", "Perl Packet", "Plain Old Documentation format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Perl"},
 		php                                    : {name : "PHP Script", website : "http://fileformats.archiveteam.org/wiki/PHP", ext : [".php", ".phps", ".php3t", ".tst"], magic : ["PHP source", "PHP script", /^PHP core test/], weakMagic : true},
+		piXCLSource                            : {name : "PiXCL source", ext : [".pxl", ".px"], magic : ["PiXCL source"], weakMagic : true},
 		plan9RCShellScript                     : {name : "Plan 9 rc shell script", magic : ["Plan 9 rc shell script text executable", "Shell Skript: '/bin/rc", `Executable script, shebang: "/bin/rc"`, /^a \/bin\rc script/]},
 		prologSource                           : {name : "Prolog Source", ext : [".pro"], magic : ["Prolog Source Code"], weakMagic : true},
 		pythonSource                           : {name : "Python Source", ext : [".py"], magic : [/^a python.* script text executable$/, /^Python script/], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Python"},

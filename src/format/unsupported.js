@@ -2,6 +2,7 @@ import {TEXT_MAGIC} from "../Detection.js";
 
 // All of the formats in this file are automatically 'unsupported' and are not processed, but can still be 'identified'
 // NOTE: Not ALL unsupported formats are listed here. Some are marked as 'unsupported' in the various format/family/subfiles.js
+// NOTE: Due to these not having a second verification step of trying to be converted, the weakMagic flag is used liberally to avoid false positive matches. Probably remove this in most cases if converting these to something supported.
 export default
 {
 	archive :
@@ -84,6 +85,7 @@ export default
 		nortonBackupFile                  : {name : "Norton Backup file", ext : [".001"], magic : ["Norton Backup file"]},
 		nortonUtilitiesImageFATBackup     : {name : "Norton Utilities Image FAT backup", ext : [".dat"], magic : ["Norton Utilities Image FAT backup"]},
 		originSystemsSetupArchive         : {name : "Origin Systems's setup Archive", ext : [".a01", ".cam", ".flx"], magic : ["Origin Systems's setup Archive"]},
+		pciGeomaticsFormat                : {name : "PCI Geomatics format", ext : [".pix"], magic : ["PCI Geomatics format"], weakMagic : true},
 		pgnPackArchive                    : {name : "PGNPack Archive", ext : [".ppk"], magic : ["PGNPack archive"], website : "http://fileformats.archiveteam.org/wiki/PGNPack"},
 		powerCDMultimediaFormat           : {name : "PowerCD Multimedia format", ext : [".zci"], magic : ["PowerCD Multimedia format"], weakMagic : true},
 		ptsDOSDiskImage                   : {name : "PTS-DOS disk image", ext : [".dsk", ".img", ".pt7"], magic : ["PTS-DOS disk image"]},
@@ -205,7 +207,7 @@ export default
 		machOHPPAExe                         : {name : "Mach-O HPPA Executable", magic : [/Mach-O hppa .*executable/]},
 		machOIntelExe                        : {name : "Mach-O Intel Executable", magic : [/Mac OS X Mach-O 32-bit Intel .*executable/]},
 		machOm68kExe                         : {name : "Mach-O m68k Executable", magic : [/^Mach-O m68k .*executable/, "Mach-O i386", "NeXT Mach-O m68k executable"]},
-		machOPPCExe                          : {name : "Mach-O PPC Executable", magic : [/^Mach-O ppc .*executable/, /^Mac OS X Mach-O 32-bit PPC .*executable/]},
+		machOPPCExe                          : {name : "Mach-O PPC Executable", magic : [/^Mach-O ppc/, /^Mac OS X Mach-O 32-bit PPC .*executable/]},
 		machOSPARCExe                        : {name : "Mach-O SPARC Executable", magic : [/^Mach-O SPARC .*executable/]},
 		microsoftCompiledHelp2               : {name : "Microsoft Compiled Help 2", ext : [".HxS", ".HxI"], magic : ["Microsoft compiled help format 2"], website : "http://fileformats.archiveteam.org/wiki/Microsoft_Help_2"},
 		mipsECOFFExe                         : {name : "MIPSL ECOFF Executable", magic : [/^MIPSE[LB] ECOFF executable/]},
@@ -349,6 +351,7 @@ export default
 		printPartnerBorder             : {name : "PrintPartner Border", ext : [".bdr"], magic : ["PrintPartner Borders"]},
 		protoCAD3DDrawing              : {name : "ProtoCAD 3D Drawing", ext : [".pcf"], magic : ["ProtoCAD 3D drawing (v2.00)"]},
 		quattroProClipArt              : {name : "Quattro Pro Clip Art", ext : [".clp"], magic : ["Quattro Pro Clip art"]},
+		quickLinkFaxCover              : {name : "QuickLink Fax Cover", ext : [".cvr"], magic : ["QuickLink Fax Cover"]},
 		reflectionsMonzoom             : {name : "Reflections/Monzoom", ext : [".r3"], magic : ["Reflections/Monzoom IFF data (generic)"]},
 		signumBitmap                   : {name : "Signum! bitmap", ext : [".imc", ".pac"], magic : ["Signum! bitmap"]},
 		skyRoadsBitmap                 : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},
@@ -621,6 +624,7 @@ export default
 		starCraftMap                      : {name : "StarCraft Map", ext : [".scm", ".scx"], magic : ["StarCraft Map"]},
 		starCraftReplay                   : {name : "StarCraft Replay", ext : [".rep"], magic : ["Starcraft Replay"]},
 		starlancerForceData               : {name : "Starlancer Force data", ext : [".frc"], magic : ["Starlancer Force data"]},
+		starWarsJediKnightJediAcademyMap  : {name : "Star Wars Jedi Knight: Jedi Academy map", ext : [".bsp"], magic : ["Star Wars Jedi Knight: Jedi Academy map"], weakMagic : true},
 		steelPanthersShapesData           : {name : "Steel Panthers Shapes data", ext : [".shp"], magic : ["Steel Panthers Shapes data"], weakMagic : true},
 		stuntIslandTake                   : {name : "Stunt Island Take", ext : [".tke"], magic : ["Stunt Island Take"], weakMagic : true},
 		su27FlankerMission                : {name : "Su-27 Flanker Mission", ext : [".mis"], magic : ["Su-27 Flanker Mission"]},
@@ -640,6 +644,7 @@ export default
 		threeDCKShapeData                 : {name : "3D Construction Kit Shape Data", ext : [".3sd"], magic : ["3D Construction Kit Shape data", /^3D Construction Kit \d? ?Shape data$/]},
 		threeDCKWorldData                 : {name : "3D Construction Kit World Data", ext : [".kwd", ".kit"], magic : ["3D Construction Kit World data", /^3D Construction Kit \d? ?World [Dd]ata/]},
 		threeDPinballTableData            : {name : "3D-Pinball for Windows table Data", ext : [".dat"], magic : ["3D-Pinball for Windows - Space Cadet table Data"]},
+		thunderstrike2Data                : {name : "Thunderstrike 2 data", ext : [".wad"], magic : [/^Thunderstrike 2 (briefing|campaign) data/]},
 		triviaShellData                   : {name : "Trivia Shell Data", ext : [".tsd"], magic : ["Trivia Shell Data"]},
 		triviaShellIndex                  : {name : "Trivia Shell Index", ext : [".tsi"], magic : ["Trivia Shell Index"]},
 		tsunamiMediaGameDataArchive       : {name : "Tsunami Media game data archive", ext : [".rlb"], magic : ["Tsunami Media game data archive"], weakMagic : true},
@@ -825,7 +830,7 @@ export default
 		gameBoyROM          : {name : "Game Boy ROM", ext : [".gb", ".gbc"], magic : ["GameBoy Color ROM File", "Game Boy ROM image", "Gameboy ROM"]},
 		gameBoyAdvanceROM   : {name : "Game Boy Advance ROM", ext : [".gba"], magic : ["Game Boy Advance ROM image"]},
 		gameGearROM         : {name : "Game Gear ROM", ext : [".gg"], magic : ["Sega Game Gear ROM image"]},
-		genesisROM          : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", "Sega Mega Drive / Genesis ROM image"]},
+		genesisROM          : {name : "Sega Genesis/Megadrive/32x ROM", ext : [".bin", ".md"], magic : ["Sega Genesis / Megadrive / 32x ROM image", /^Sega Mega ?Drive ?\/ ?Genesis (raw )?ROM/]},
 		nintendoROM         : {name : "Nintendo ROM", ext : [".nes"], magic : ["NES ROM image", "Nintendo Entertainment System ROM"]},
 		n64ROM              : {name : "Nintendo 64 ROM", ext : [".v64"], magic : ["Nintendo 64 ROM", "Doctor V64 ROM dump"]},
 		qlPluginROM         : {name : "QL Plugin-ROM", magic : [/QL plugin-ROM data, named: [\w ;'"\][():/,._-]+$/]},

@@ -45,6 +45,7 @@ export const IGNORE_MAGICS =
 
 	// file
 	/^a .+ script text executable$/,
+	/^IFF data, /,
 	/^RIFF \((big|little)-endian\) data$/,
 	/^text\/isl/
 ];
@@ -367,6 +368,7 @@ export const WEAK_VALUES =
 	/^Ext3 file system Volume/,
 	/^Extended display identification data dump/,
 	/^Exuberant Ctags tag file/,
+	/^FGDC-STD-001-1998$/,
 	/^FIGlet controlfile/,
 	/^firmware .*revision/,
 	/^First Choice device file/,
@@ -1404,6 +1406,7 @@ export const WEAK_VALUES =
 	/^PC-Calc spreadsheet \(gen\)$/,
 	/^Peak audio info$/,
 	/^Pepakura Designer work$/,
+	/^PERQemu Hard Disk image$/,
 	/^PFS File database$/,
 	/^Photogenics matrix data$/,
 	/^PlayStation RSD (animation|Coordinates|Material) \(gen\)$/,

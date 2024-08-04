@@ -319,8 +319,8 @@ async function processNextQueue()
 	task.fileOutDirPath = path.join(fileDirPath, task.relDirPath, `${path.basename(task.relFilePath)}${argv.suffix}`);
 	await Deno.mkdir(task.fileOutDirPath, {recursive : true});
 
-	task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.json`);
-	task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.txt`);
+	task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath).innerTrim(247)}.json`);
+	task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath).innerTrim(247)}.txt`);
 	await Deno.mkdir(path.dirname(task.metaFilePath), {recursive : true});
 
 	try

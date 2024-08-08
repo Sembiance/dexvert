@@ -319,8 +319,8 @@ async function processNextQueue()
 	task.fileOutDirPath = path.join(fileDirPath, task.relDirPath, `${path.basename(task.relFilePath)}${argv.suffix}`);
 	await Deno.mkdir(task.fileOutDirPath, {recursive : true});
 
-	task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath).innerTrim(247)}.json`);
-	task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath).innerTrim(247)}.txt`);
+	task.metaFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.json`);
+	task.logFilePath = path.join(metaDirPath, task.relDirPath, `${path.basename(task.relFilePath)}.txt`);
 	await Deno.mkdir(path.dirname(task.metaFilePath), {recursive : true});
 
 	try
@@ -422,9 +422,18 @@ async function processNextQueue()
 	}
 	catch(err)
 	{
-		await fileUtil.writeTextFile(task.logFilePath, err.toString(), {append : true});
-		if(!(await fileUtil.exists(task.metaFilePath)))
-			await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify({failed : true, err : err.toString(), stack : err.stack}));
+		try
+		{
+			await fileUtil.writeTextFile(task.logFilePath, err.toString(), {append : true});
+			if(!(await fileUtil.exists(task.metaFilePath)))
+				await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify({failed : true, err : err.toString(), stack : err.stack}));
+		}
+		catch(err2)	// eslint-disable-line unicorn/catch-error-name
+		{
+			xlog.error`Dexrecurse failed to handle file: ${task.relFilePath}`;
+			xlog.error`Got exception: ${err}`;
+			xlog.error`Failed to write error to log due to error: ${err2}`;
+		}
 	}
 
 	taskFinishedCount++;

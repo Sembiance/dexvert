@@ -39,7 +39,7 @@ export class file extends Program
 		// Multi-line edgecases. First item of the array is the prefix and the second is a list of possible subsequent line prefixes that are a continuation of the match
 		const MULTI_LINE_PREFIXES =
 		[
-			[["Apollo", "dBase", "FoxBase", "VISUAL OBJECTS", "xBase"], ["DBF", "MDX"]],
+			[["Apollo", "dBase", "FoxBase", "Visual FoxPro", "VISUAL OBJECTS", "xBase"], ["DBF", "MDX", "DataBaseContainer"]],
 			["BIOS", "device="],
 			["Mach-O", ["bundle", "executable", "dynamically linked", "object"]],
 			["] [", "i386:"],

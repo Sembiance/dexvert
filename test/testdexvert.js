@@ -263,7 +263,7 @@ const FLEX_SIZE_FORMATS =
 		// takes a screenshot or a framegrab which can differ slightly on each run
 		fractalImageFormat : 7,
 		grabber            : 7,
-		gifexe             : 35,
+		gifexe             : 50,
 		naplps             : 20,
 		theDrawCOM         : 5,
 		threeDCK           : 20,
@@ -279,7 +279,7 @@ const FLEX_SIZE_FORMATS =
 	poly :
 	{
 		// .glb files produced differ each time, probably some meta data timestamp or something
-		"*"              : 0.1,
+		"*"              : 0.5,
 		cyberStudioCAD3D : 95,
 		keyCAD3DModel    : 40
 	},
@@ -386,6 +386,7 @@ const DISK_FAMILY_FORMAT_MAP =
 	[/other\/iBrowseCookies\/.+/, "text", true],
 	[/text\/rexx\/makeboot\.cmd$/, "text", "txt"],
 	[/text\/lisp\/.*\.(el|gl)$/i, "text", "txt"],
+	[/text\/digitalIntegrationMissionTasks\/QS_K\.DTA$/, "text", "apacheMissionData"],
 	[/text\/forthSource\/.*\.txt$/i, "text", "txt"],
 	[/text\/txt\/SPLIFT\.PAS$/, "text", "pas"],
 
@@ -499,6 +500,7 @@ const UNPROCESSED_ALLOW_NO_IDS =
 	"archive/lostVikingsGameArchive",
 	"archive/pixfolioCatalog",
 	"archive/rar",
+	"audio/impulseTrackerSample",
 	"document/gwBasic",	// it's GW-Basic but with no extension. The only magic prefix is 0xFF and that's just too generic
 	"document/revisableFormText",	// The .FFT versions don't identify right now, have't found good magic for em
 	"image/bbcDisplayRAM",

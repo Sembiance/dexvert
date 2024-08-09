@@ -35,7 +35,7 @@ export default
 		jetPilotDocsText                   : {name : "JETPilot docs/text", ext : [".001"], magic : ["JETPilot docs/text"]},
 		lifeCellularAutomataFormat         : {name : "Life cellular automata format", ext : [".lif"], magic : ["Life cellular automata format"], weakMagic : true},
 		plbmGamesDataBaseIndex             : {name : "PLBM Games Data Base index", ext : [".dbk"], magic : ["PLBM Games Data Base index"], weakMagic : true},
-		portableDraughtsNotation           : {name : "Portable Draughts Notation", ext : [".pdn"], magic : ["Portable Draughts Notation"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files"},
+		portableDraughtsNotation           : {name : "Portable Draughts Notation", ext : [".pdn"], magic : ["Portable Draughts Notation"], website : "http://fileformats.archiveteam.org/wiki/Portable_Draughts_Notation#Sample_files"},
 		portableGamingNotation             : {name : "Portable Gaming Notation", ext : [".pgn"], magic : ["Portable Gaming Notation"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/PGN"},
 		rexxAdventureGameSource            : {name : "Rexx-Adventure game source", ext : [".rad"], magic : ["Rexx-Adventure game source"], weakMagic : true},
 		rexxAdventureSavedGame             : {name : "Rexx-Adventure Saved game", ext : [".ras"], magic : ["Rexx-Adventure Saved game"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Rexx-Adventure_saved_game"},
@@ -68,6 +68,7 @@ export default
 		wavefrontMaterial                      : {name : "Wavefront Material", website : "http://fileformats.archiveteam.org/wiki/Wavefront_MTL", ext : [".mtl"], magic : ["Alias|Wavefront material", /^fmt\/1211( |$)/]},
 		wgt3DModel                             : {name : "WGT 3D model", ext : [".3d"], magic : ["WGT 3D model"]},
 		windowsDesktopTheme                    : {name : "Windows Desktop Theme", ext : [".theme"], magic : ["Windows 98-7 Desktop Theme", "Windows Desktop Theme"]},
+		xaraGraphics                           : {name : "Xara graphics", ext : [".wix"], magic : ["Xara graphics"]},
 
 		/////////////////
 		// Programming //
@@ -167,7 +168,7 @@ export default
 		autoCADPlotterConfiguration             : {name : "AutoCAD Plotter Configuration", ext : [".pcp"], magic : ["AutoCAD Plotter Configuration"], weakMagic : true},
 		acrobatDistillerJobOptions              : {name : "Acrobat Distiller Job Options", ext : [".joboptions1", ".joboptions", ".joboption2", ".joboptions2", ".joboption", ".joboptions12"], magic : ["Acrobat Distiller Job Options"]},
 		acrobatFormsData                        : {name : "Acrobat Forms Data", ext : [".fdf", ".acrodata"], magic : ["Acrobat Forms Data Format", "Adobe PDF Form Daten Datei", /^FDF document/, /^fmt\/1500( |$)/], website : "http://fileformats.archiveteam.org/wiki/FDF"},
-		adobeFontList                           : {name : "Adobe Font List", ext : [".lst"], magic : [/^fmt\/526( |$)/], website : "http://fileformats.archiveteam.org/wiki/Adobe_Font_List"},
+		adobeFontList                           : {name : "Adobe Font List", ext : [".lst"], magic : ["Adobe FontList", /^fmt\/526( |$)/], website : "http://fileformats.archiveteam.org/wiki/Adobe_Font_List"},
 		adobePortableDocumentCatalogIndex       : {name : "Adobe Portable Document Catalog Index", ext : [".pdx"], magic : ["Adobe Portable Document Catalog Index", /^fmt\/446( |$)/], weakMagic : true},
 		advancedStreamRedirector                : {name : "Advanced Stream Redirector", ext : [".asx"], magic : ["Advanced Stream Redirector"], weakMagic : true},
 		aegisAnimatorScript                     : {name : "Aegis Animator Script", ext : [".script"], magic : ["Aegis Animator Script"]},
@@ -209,6 +210,7 @@ export default
 		corelWordPerfectSetupInformation        : {name : "Corel/WordPerfect Setup information", ext : [".csw"], magic : ["Corel/WordPerfect Setup information"], weakMagic : true},
 		cPBackupInfo                            : {name : "CPBackup info", ext : [".set"], magic : ["CPBackup info"]},
 		cpBackupSettings                        : {name : "CPBackup Settings", ext : [".set"], magic : ["CPBackup backup Settings"], weakMagic : true},
+		csoundOrchestra                         : {name : "Csound Orchestra", ext : [".orc"], magic : ["Csound Orchestra"], weakMagic : true},
 		cuplPLDProgramFormat                    : {name : "CUPL PLD Program format", ext : [".pld"], magic : ["CUPL PLD Program format"], weakMagic : true},
 		dataInterchangeFormat                   : {name : "Data Interchange Format", ext : [".dif"], magic : ["Data Interchange Format", /^x-fmt\/41( |$)/], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Data_Interchange_Format"},
 		dbaseWindowsFormFile                    : {name : "dBASE Windows Form File", ext : [".mnu", ".wfm"], magic : [/^fmt\/1728( |$)/]},
@@ -252,6 +254,7 @@ export default
 		htmlHelpCollection                      : {name : "HTML Help Collection", ext : [".col"], magic : ["HTML Help Collection"]},
 		iafaPackageInfo                         : {name : "IAFA Package info", ext : [".pkg", ".age"], magic : ["IAFA Package info"]},
 		iesnaPhotometricData                    : {name : "IESNA Photometric data", ext : [".ies"], magic : ["IESNA Photometric data", /^fmt\/1288( |$)/], weakMagic : true},
+		impaticaOnCueProject                    : {name : "Impatica OnCue Project", ext : [".ipj"], magic : ["Impatica OnCue Project"]},
 		informationPresentationFacilityMarkup   : {name : "Information Presentation Facility markup", ext : [".ipf"], magic : ["Information Presentation Facility markup"], weakMagic : true},
 		installProfessionalProject              : {name : "INSTALL Professional project", ext : [".dat"], magic : ["INSTALL Professional project"]},
 		installShieldResponseFile               : {name : "InstallShield Response File", ext : [".iss"], magic : ["InstallShield Response File"]},
@@ -300,6 +303,7 @@ export default
 		moduleDescriptionFile                   : {name : "Module Description File", website : "http://fileformats.archiveteam.org/wiki/MDZ", ext : [".mdz"], magic : ["Open Cubic Player Module Information MDZ"]},
 		mosaicHotlist                           : {name : "Mosaic Hotlist", ext : [".hot"], magic : ["Mosaic Hotlist"], weakMagic : true},
 		multiFaxTemplate                        : {name : "MultiFax Template", ext : [".tem"], magic : ["MultiFax Template"], weakMagic : true},
+		musicAssistantScale                     : {name : "Music Assistant scale", ext : [".dat"], magic : ["Music Assistant scale"], weakMagic : true},
 		naviPressNaviDocData                    : {name : "NaviPress NaviDoc Data", ext : [".nvd"], magic : ["NaviPress NaviDoc Data"]},
 		neoBookDocument                         : {name : "NeoBook Document", ext : [".pub"], magic : [/^NeoBook for (DOS|Windows) document/]},
 		neoPaintHelp                            : {name : "NeoPaint Help", ext : [".hlp"], magic : ["NeoPaint Help"]},
@@ -375,6 +379,7 @@ export default
 		softICEInitializationData               : {name : "SoftICE initialization data", ext : [".dat"], magic : ["SoftICE initialization data (DOS)"], weakMagic : true},
 		spanItPersonalityDefinition             : {name : "Span-It! Personality definition", ext : [".per"], magic : ["Span-It! Personality definition"]},
 		starcatDisksCatalogue                   : {name : "Starcat disks catalogue", ext : [".cat"], magic : ["Starcat disks catalogue"], weakMagic : true},
+		starryNightDocument                     : {name : "Starry Night Document", ext : [".sno", ".snf"], magic : ["Starry Night Document"], weakMagic : true},
 		stormEdSettings                         : {name : "StormEd settings", ext : [".ed"], magic : ["StormEd settings"]},
 		studioPrinterDitherMethod               : {name : "Studio Printer Dither method", ext : [".dit"], magic : ["Studio Printer Dither method"]},
 		svgaVESAConfiguration                   : {name : "SVGAVESA configuration", ext : [".svc"], magic : ["SVGAVESA configuration"]},
@@ -430,6 +435,8 @@ export default
 		xantippeProject                         : {name : "Xantippe project", ext : [".xan"], magic : ["Xantippe project"]},
 		xaosPositionFile                        : {name : "XaoS Position File", ext : [".z", ".xpf"], magic : ["XaoS Position File"], weakMagic : true},
 		xaraResourcesIndex                      : {name : "Xara resources index", ext : [".txt"], magic : ["Xara resources index"], weakMagic : true},
-		xmcdCDInformation                       : {name : "XMCD CD information", ext : [".db", ".z", ".xmcd"], magic : [/^xmcd database file/, /^CDDB\(tm\) format CD text data/, "XMCD CD information"]}
+		xaraWebStyleFile                        : {name : "Xara WebStyle file", ext : [".xws"], magic : ["Xara WebStyle file"]},
+		xmcdCDInformation                       : {name : "XMCD CD information", ext : [".db", ".z", ".xmcd"], magic : [/^xmcd database file/, /^CDDB\(tm\) format CD text data/, "XMCD CD information"]},
+		xSetupPlugin                            : {name : "XSetup plugin", ext : [".xpl"], magic : ["XSetup - plugin"]}
 	}
 };

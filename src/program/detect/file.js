@@ -36,12 +36,21 @@ export class file extends Program
 		let fileText =  r.stdout.trim();
 		r.xlog.trace`START fileText:\n${fileText}`;
 
+		// Single-line edgecases: These should always remove the newline and include the next line as part of the match
+		const SINGLE_LINE_PREFIXES =
+		[
+			[/^ERROR: \n- /, "ERROR: "]
+		];
+		for(const [prefexRegexp, prefixReplacement] of SINGLE_LINE_PREFIXES)
+			fileText = fileText.replace(prefexRegexp, prefixReplacement);
+		r.xlog.trace`A fileText:\n${fileText}`;
+
 		// Multi-line edgecases. First item of the array is the prefix and the second is a list of possible subsequent line prefixes that are a continuation of the match
 		const MULTI_LINE_PREFIXES =
 		[
 			[["Apollo", "dBase", "FoxBase", "Visual FoxPro", "VISUAL OBJECTS", "xBase"], ["DBF", "MDX", "DataBaseContainer"]],
 			["BIOS", "device="],
-			["Mach-O", ["bundle", "executable", "dynamically linked", "object"]],
+			["Mach-O", ["bundle", "executable", "dynamically linked", "i386", "object", "ppc"]],
 			["] [", "i386:"],
 			["PGP symmetric key encrypted data", "salted"],
 			["Zip archive data, made by", ["Amiga", "OpenVMS", "UNIX", "VM/CMS", "OS/2", "Macintosh", "MVS", "Acorn Risc", "BeOS", "Tandem", "Atari ST", "Z-System", "CP/M", "Windows NTFS", "VSE", "VFAT", "alternate MVS", "OS/400", "OS X"]]
@@ -54,27 +63,27 @@ export class file extends Program
 					fileText = fileText.replace(new RegExp(`(\n-  ?)?${prefix[0]}([^\n]+)\n-  ?${subfix}`, "g"), `$1${prefix[0]}$2 ${subfix}`);
 			}
 		}
-		r.xlog.trace`A fileText:\n ${fileText}`;
+		r.xlog.trace`B fileText:\n${fileText}`;
 
 		// Prefix edgecases. Magics where a '-  ?<text>' is a continuation and not a new match. Since some of them start with '-  ' we need to deal with this first before the next step
 		for(const prefix of ["at byte", "block device driver", "filetype=", "last modified", "of \\d+ bytes", "to extract,", "version \\d", `[;:)(\\]["']`])
 			fileText = fileText.replace(new RegExp(`\n-  ?(${prefix})`, "g"), " $1");
-		r.xlog.trace`B fileText:\n${fileText}`;
+		r.xlog.trace`C fileText:\n${fileText}`;
 
 		// Replace things that are "usually" the start of a new match (but not always, sigh)
 		fileText = fileText.replace(/\n- {2}/g, "§");
-		r.xlog.trace`C fileText:\n${fileText}`;
+		r.xlog.trace`D fileText:\n${fileText}`;
 
 		// Things we are pretty sure are just an extension of the match from the previous line, combine those up with the previous line match text
 		fileText = fileText.replace(/\n[^ -]/g, "");
-		r.xlog.trace`D fileText:\n${fileText}`;
+		r.xlog.trace`E fileText:\n${fileText}`;
 
 		fileText = fileText.replace(/\n- (.?),/g, "$1,");
-		r.xlog.trace`E fileText:\n${fileText}`;
+		r.xlog.trace`F fileText:\n${fileText}`;
 
 		// Now handle remaining newline prefixes as a match seperator
 		fileText = fileText.replace(/\n- /g, "§");
-		r.xlog.trace`F fileText:\n${fileText}`;
+		r.xlog.trace`G fileText:\n${fileText}`;
 
 		fileText = fileText.replace(/§§/g, "§");
 		r.xlog.trace`Z fileText:\n${fileText}`;

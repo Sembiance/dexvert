@@ -69,6 +69,7 @@ export const WEAK_VALUES =
 	/^ESP Image \(ESP/,
 	/^Executable script, /,
 	/^IMG0 \(VxWorks\) header/,
+	/^JBOOT STAG header/,
 	/^LZ4 compressed data$/,
 	/^Linux kernel version [\d.]+$/,
 	/^Neighborly text/,
@@ -177,6 +178,7 @@ export const WEAK_VALUES =
 	/^SBC Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Scheint eine GIF-Datei zu sein$/,
 	/^Shell Skript:/,
+	/^SZIP Archiv gefunden \(Auflistung ist deaktiviert\)$/,
 	/^Unicode Textdatei/,
 	/^Windows Maus Cursor Datei\/Works f.r DOS Datei/,
 	/^Windows Verkn.*fungs Datei$/,
@@ -196,14 +198,16 @@ export const WEAK_VALUES =
 	// pc98ripperID
 	/^PC-98 ElfDOS$/,
 	
-	// FILE: Improper parsing of output
-	/^' (123):$/,
-	/^\.mp3$/,
-	/^Invalid name\.$/,
-	/^# define/,
-	/^$/,	// eslint-disable-line no-control-regex
-	/^P;/,
+	// FILE: Improper parsing of output or other file errors
 	/^[\d."'\s)(-]+$/,
+	/^' (123):$/,
+	/^# define/,
+	/^\.mp3$/,
+	/^$/,	// eslint-disable-line no-control-regex
+	/^/,	// eslint-disable-line no-control-regex
+	/^ERROR: /,
+	/^Invalid name\.$/,
+	/^P;/,
 
 	// FILE: Very weak checks:
 	/^, /,
@@ -345,7 +349,7 @@ export const WEAK_VALUES =
 	/^DSF audio bitstream data/,
 	/^DuckDB database file/,
 	/^dump format, /,
-	/^dump: Convex Storage Manager/,
+	/^dump: (4\.1BSD|Convex Storage Manager)/,
 	/^Dyalog APL/,
 	/^Dzip archive data/,
 	/^EBCDIC text/,
@@ -421,6 +425,7 @@ export const WEAK_VALUES =
 	/^IFF data, (Non-ISO )?(extended-ASCII|ASCII|ISO-8859) text/,
 	/^Impulse Tracker Instrument/,
 	/^Intel ia64 COFF/,
+	/^Interleaf saved data$/,
 	/^(AIX|Intel).* Common Object File Format/,
 	/^IRIS Showcase file/,
 	/^IRIS Showcase template/,
@@ -440,6 +445,7 @@ export const WEAK_VALUES =
 	/^LaTeX raw glossary/,
 	/^LaTeX raw index file/,
 	/^LaTeX sorted index/,
+	/^lEEt\/OS Application$/,
 	/^LFS filesystem image/,
 	/^libfprint fingerprint data V\d/,
 	/^lif file/,
@@ -491,9 +497,7 @@ export const WEAK_VALUES =
 	/^Motorola S-Record; binary data in text format/,
 	/^MPEG ADTS, layer I(,|$)/,
 	/^MPEG sequence, H.264 video/,
-	/^MPEG sequence, v4$/,
-	/^MPEG sequence, v4, simple/,
-	/^MPEG sequence, \d+ fps$/,
+	/^MPEG sequence, (v4|Constrained|v4, simpl|\d+ fps)$/,
 	/^MPEG-4 LOAS/,
 	/^MS, \d+ bytes$/,
 	/^MS-DOS (CONFIG|MSDOS)\.SYS/,
@@ -516,8 +520,9 @@ export const WEAK_VALUES =
 	/^New Line Delimited JSON text data/,
 	/^NeXT version 1 disklabel/,
 	/^Nim source code/,
-	/^Nintendo Gameboy Music\/Audio Data/,
 	/^Nintendo Badge Arcade badge/,
+	/^Nintendo DS MPEG Video$/,
+	/^Nintendo Gameboy Music\/Audio Data/,
 	/^Norton GHost image/,
 	/^Novell LANalyzer capture file/,
 	/^NSQ archive data/,
@@ -649,6 +654,7 @@ export const WEAK_VALUES =
 	/^Unix-like shebang/,
 	/^unknown demand paged pure executable/,
 	/^unknown readable demand paged pure executable/,
+	/^v8 bytecode/,
 	/^VAX COFF (pure )?executable/,
 	/^VAX single precision APL workspace$/,
 	/^VAX-order/,
@@ -1230,8 +1236,10 @@ export const WEAK_VALUES =
 	/^BibTeX references$/,
 	/^Big Mutha Truckers 2 game data Archive$/,
 	/^BioForge IFF objects$/,	// Found these, but it's just for a game, so mark as weak as it's kinda weak
+	/^BIS Binarized Rtm animation$/,
 	/^BlueEyes Animation$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
+	/^Carrara Environment$/,
 	/^Chain format$/,
 	/^Chasys Draw IES convolution Matrix$/,
 	/^Chasys Draw IES Gradient$/,
@@ -1477,6 +1485,7 @@ export const WEAK_VALUES =
 	/^Stata Data format \(v114, BE\)$/,
 	/^Streaming Progressive Image Format bitmap$/,
 	/^STT disk image$/,
+	/^Studio Folio Corsage compressed palette archive$/,
 	/^Stunt Island Film$/,
 	/^STW disk image$/,
 	/^Sublime Text Menu$/,
@@ -1522,6 +1531,7 @@ export const WEAK_VALUES =
 	/^VHSIC Hardware Description Language \(with rem\)$/,
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,
+	/^Visual CertExam Simulator Exam$/,	// this is some sort of weird match that seems to match files that are not anywhere close to this format, not sure why
 	/^Virtual Home Space Builder 3D Space/,
 	/^Virtual TI skin/,
 	/^Vivaldi Music Dump format$/,	// found these in item #1392 but no converter and magic is weak and no ext

@@ -54,10 +54,11 @@ export const IGNORE_MAGICS =
 export const WEAK_VALUES =
 [
 	// siegfried
-	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1260|1276|1280|1381|1385|1461|1488|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1740|1751|1812|1874|1902)( |$)/,
+	/^fmt\/(111|134|208|304|328|347|452|473|583|584|639|692|819|869|1029|1030|1031|1032|1033|1034|1035|1093|1113|1145|1241|1260|1276|1280|1381|1385|1461|1488|1491|1555|1556|1562|1575|1616|1651|1672|1701|1702|1703|1704|1708|1740|1751|1812|1874|1902)( |$)/,
 	/^x-fmt\/(8|10|53|157|195|324|342)( |$)/,
 
 	// ancientID
+	/^<invalid>$/,
 	/^Vice: Huffman compressor with RLE$/,
 
 	// binwalkID
@@ -390,6 +391,7 @@ export const WEAK_VALUES =
 	/^GEM NOSIG/,
 	/^GEOS VMFile/,
 	/^GeoSwath RDF/,
+	/^Git blob c$/,
 	/^Git index, version/,
 	/^Git tree/,
 	/^GLF_BINARY_LSB_FIRST/,
@@ -496,8 +498,8 @@ export const WEAK_VALUES =
 	/^MMDF mailbox/,
 	/^Motorola S-Record; binary data in text format/,
 	/^MPEG ADTS, layer I(,|$)/,
-	/^MPEG sequence, H.264 video/,
-	/^MPEG sequence, (v4|Constrained|v4, simpl|\d+ fps)$/,
+	/^MPEG sequence, (H\.264 video|v4, simpl)/,
+	/^MPEG sequence, (v4|Constrained|\d+ fps)$/,
 	/^MPEG-4 LOAS/,
 	/^MS, \d+ bytes$/,
 	/^MS-DOS (CONFIG|MSDOS)\.SYS/,
@@ -703,6 +705,7 @@ export const WEAK_VALUES =
 	/^AAX compressed data$/,
 	/^ABC notation \(old\)$/,
 	/^Access Video$/,
+	/^Adaptive Prediction Tree \(APT\) encoded bitmap$/,
 	/^Adobe PRC 3D model$/,
 	/^Advanced DB Master data/,
 	/^Affix file$/,
@@ -1305,6 +1308,7 @@ export const WEAK_VALUES =
 	/^FAR TC\.Packer PlugIn$/,
 	/^FCE Ultra FC0 savestate$/,
 	/^FGT virus infected 16-bit COM executable$/,
+	/^Fibonacci crunched data$/,
 	/^File-Type Image$/,
 	/^FileGateway Server configuration$/,
 	/^Fine Artist Chunked format/,
@@ -1431,6 +1435,7 @@ export const WEAK_VALUES =
 	/^Peak audio info$/,
 	/^Pepakura Designer work$/,
 	/^PERQemu Hard Disk image$/,
+	/^Personal Paint encrypted bitmap$/,	// Found these in the wild, distrubuted with demo version of program, but it's weak magic and can't decrypt them easily anyways
 	/^PFS File database$/,
 	/^Photogenics matrix data$/,
 	/^PlayStation RSD (animation|Coordinates|Material) \(gen\)$/,
@@ -1445,6 +1450,7 @@ export const WEAK_VALUES =
 	/^Project Dogwaffle mixing palette \(type 2\)$/,
 	/^Psion Organiser Block data$/,
 	/^Psion OVAL Control$/,
+	/^PPrint Color map$/,
 	/^PPrint Image$/,
 	/^Qt Resource Collection$/,
 	/^Quartus Symbols data$/,

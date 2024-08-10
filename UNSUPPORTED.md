@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,641)
+# Unsupported File Formats (1,650)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (142)
+## Archive (143)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -51,6 +51,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cackrightPacked](https://discmaster.textfiles.com/search?formatid=cackrightPacked) | Crackright Packed | .com | 
 [archive/crackStopProtected](https://discmaster.textfiles.com/search?formatid=crackStopProtected) | CrackStop Protected |  | 
 [archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE encrypted | .exe | 
+[archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
@@ -435,7 +436,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (125)
+## Image (126)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -443,6 +444,7 @@ Family/Format | Name | Extensions | Notes
 [image/aegisDrawDrawing](https://discmaster.textfiles.com/search?formatid=aegisDrawDrawing) | Aegis Draw drawing | .draw1 | 
 [image/afl](https://discmaster.textfiles.com/search?formatid=afl) | [AFLI-Editor Image](http://fileformats.archiveteam.org/wiki/AFLI-Editor) | .afl .afli | [1 sample file](https://sembiance.com/fileFormatSamples/image/afl/) - Due to not having any 'MAGIC' identification or specific file size? and the rarity of any user files in the wild and that recoil+view64 will convert almost any .afl into a garbage output, dexvert doesn't support converting this file.
 [image/aldusIntelliDrawDrawing](https://discmaster.textfiles.com/search?formatid=aldusIntelliDrawDrawing) | Aldus IntelliDraw Drawing | .idw | 
+[image/amiBlitz2Bitmap](https://discmaster.textfiles.com/search?formatid=amiBlitz2Bitmap) | AmiBlitz2 bitmap | .ab2i | 
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?formatid=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
 [image/applausePalette](https://discmaster.textfiles.com/search?formatid=applausePalette) | Applause Palette | .pal | 
 [image/a2Sprites](https://discmaster.textfiles.com/search?formatid=a2Sprites) | Apple II Sprites | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
@@ -566,7 +568,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (119)
+## Music (121)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -610,6 +612,7 @@ Family/Format | Name | Extensions | Notes
 [music/ffmModule](https://discmaster.textfiles.com/search?formatid=ffmModule) | FFM module | .ffm | 
 [music/finaleMusicScore](https://discmaster.textfiles.com/search?formatid=finaleMusicScore) | Finale Music Score | .mus | 
 [music/fmTracker](https://discmaster.textfiles.com/search?formatid=fmTracker) | FMTracker Module | .fmt | [4 sample files](https://sembiance.com/fileFormatSamples/music/fmTracker/)
+[music/forgottenWorldsMusic](https://discmaster.textfiles.com/search?formatid=forgottenWorldsMusic) | Forgotten Worlds music | .fw | 
 [music/fredEditorSoundTrack](https://discmaster.textfiles.com/search?formatid=fredEditorSoundTrack) | Fred Editor Soundtrack |  | [2 sample files](https://sembiance.com/fileFormatSamples/music/fredEditorSoundTrack/)
 [music/gmod](https://discmaster.textfiles.com/search?formatid=gmod) | [GMOD Module](https://www.exotica.org.uk/wiki/MultiPlayer) | .gmod | 
 [music/goatTracker](https://discmaster.textfiles.com/search?formatid=goatTracker) | GoatTracker Module | .sng | [6 sample files](https://sembiance.com/fileFormatSamples/music/goatTracker/)
@@ -654,6 +657,7 @@ Family/Format | Name | Extensions | Notes
 [music/psycle](https://discmaster.textfiles.com/search?formatid=psycle) | Psycle Module | .psy | [4 sample files](https://sembiance.com/fileFormatSamples/music/psycle/)
 [music/quartet4V](https://discmaster.textfiles.com/search?formatid=quartet4V) | [Quartet 4V Module](http://fileformats.archiveteam.org/wiki/4v) | .4v | [9 sample files](https://sembiance.com/fileFormatSamples/music/quartet4V/)
 [music/ramTracker](https://discmaster.textfiles.com/search?formatid=ramTracker) | RamTracker Module | .trk | [4 sample files](https://sembiance.com/fileFormatSamples/music/ramTracker/)
+[music/rbsSongdByReBirth](https://discmaster.textfiles.com/search?formatid=rbsSongdByReBirth) | RBS Song created by ReBirth | .rbs | 
 [music/realTimeSectionPattern](https://discmaster.textfiles.com/search?formatid=realTimeSectionPattern) | RealTime Section/pattern | .rtp .rts | 
 [music/renoise](https://discmaster.textfiles.com/search?formatid=renoise) | [Renoise Module](http://fileformats.archiveteam.org/wiki/Renoise_song) | .xrns .rns | [8 sample files](https://sembiance.com/fileFormatSamples/music/renoise/) - The XRNS format is just a ZIP file with samples inside as FLACS and a song XML. The archive/zip format will end up handling that. I tried using renoise program, but it doesn't have CLI conversion nor did it even work anyways to render a song. Sigh.
 [music/rolandMIDIMusicRecorder](https://discmaster.textfiles.com/search?formatid=rolandMIDIMusicRecorder) | Roland MIDI Music Recorder Song | .sng | 
@@ -691,7 +695,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (912)
+## Other (917)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -721,6 +725,7 @@ Family/Format | Name | Extensions | Notes
 [other/actionTemplate](https://discmaster.textfiles.com/search?formatid=actionTemplate) | Action! Template | .tpl | 
 [other/activInspireFlipchart](https://discmaster.textfiles.com/search?formatid=activInspireFlipchart) | ActivInspire Flipchart | .flipchart | 
 [other/actorImageSnapshot](https://discmaster.textfiles.com/search?formatid=actorImageSnapshot) | Actor Image Snapshot | .ima | 
+[other/addictCompiledDictionary](https://discmaster.textfiles.com/search?formatid=addictCompiledDictionary) | Addict compiled dictionary | .adm | 
 [other/addictThesaurus](https://discmaster.textfiles.com/search?formatid=addictThesaurus) | Addict Thesaurus | .thr | 
 [other/adobeAfterEffectsProject](https://discmaster.textfiles.com/search?formatid=adobeAfterEffectsProject) | Adobe After Effects Project | .aep | 
 [other/adobeCaptureDocument](https://discmaster.textfiles.com/search?formatid=adobeCaptureDocument) | Adobe Capture Document |  | 
@@ -917,6 +922,7 @@ Family/Format | Name | Extensions | Notes
 [other/darkLegionsColorPalaette](https://discmaster.textfiles.com/search?formatid=darkLegionsColorPalaette) | Dark Legions Color palaette | .col | 
 [other/darkReignMap](https://discmaster.textfiles.com/search?formatid=darkReignMap) | Dark Reign Map | .map | 
 [other/darkReignPalette](https://discmaster.textfiles.com/search?formatid=darkReignPalette) | Dark Reign Palette | .pal | 
+[other/datAGIDataBase](https://discmaster.textfiles.com/search?formatid=datAGIDataBase) | DatAGI data base |  | 
 [other/dataStoreDatabase](https://discmaster.textfiles.com/search?formatid=dataStoreDatabase) | Datastore Database |  | 
 [other/dBaseCompiledObjectProgram](https://discmaster.textfiles.com/search?formatid=dBaseCompiledObjectProgram) | dBase Compiled File | .dbo .qbo | 
 [other/dBaseCompiledLabel](https://discmaster.textfiles.com/search?formatid=dBaseCompiledLabel) | dBase compiled Label | .lbo | 
@@ -1222,7 +1228,9 @@ Family/Format | Name | Extensions | Notes
 [other/mortalKombat3GameArchive](https://discmaster.textfiles.com/search?formatid=mortalKombat3GameArchive) | Mortal Kombat 3 game archive | .ftr | 
 [other/movieSetterProject](https://discmaster.textfiles.com/search?formatid=movieSetterProject) | Movie Setter Project | .ms | 
 [other/movieShopMacros](https://discmaster.textfiles.com/search?formatid=movieShopMacros) | MovieShop Macros | .macros | 
+[other/movieShopOperators](https://discmaster.textfiles.com/search?formatid=movieShopOperators) | MovieShop Operators | .ext | 
 [other/movieShopPreferences](https://discmaster.textfiles.com/search?formatid=movieShopPreferences) | MovieShop Preferences | .prefs | 
+[other/movieShopTimeline](https://discmaster.textfiles.com/search?formatid=movieShopTimeline) | MovieShop timeline |  | 
 [other/dosCodePage](https://discmaster.textfiles.com/search?formatid=dosCodePage) | MS-DOS Code Page Info | .cp .cpi | 
 [other/msDOSKEYBoardLayoutFile](https://discmaster.textfiles.com/search?formatid=msDOSKEYBoardLayoutFile) | MS-DOS KEYBoard Layout file | .sys | 
 [other/muiBuilderProject](https://discmaster.textfiles.com/search?formatid=muiBuilderProject) | MUI Builder Project | .muib | 
@@ -1326,6 +1334,7 @@ Family/Format | Name | Extensions | Notes
 [other/powerBuilderDynamicLibrary](https://discmaster.textfiles.com/search?formatid=powerBuilderDynamicLibrary) | PowerBuilder Dynamic Library | .pbd | 
 [other/premiereMotionSettings](https://discmaster.textfiles.com/search?formatid=premiereMotionSettings) | Premiere Motion settings | .ptm | 
 [other/premiereTitleData](https://discmaster.textfiles.com/search?formatid=premiereTitleData) | Premiere Title data | .ptl | 
+[other/presentationMasterSlideShow](https://discmaster.textfiles.com/search?formatid=presentationMasterSlideShow) | Presentation Master slide Show | .vshow | 
 [other/printerFontMetrics](https://discmaster.textfiles.com/search?formatid=printerFontMetrics) | Printer Font Metrics | .pfm | 
 [other/proThrottleConfiguration](https://discmaster.textfiles.com/search?formatid=proThrottleConfiguration) | Pro Throttle Configuration | .ptc | 
 [other/professionalDrawColors](https://discmaster.textfiles.com/search?formatid=professionalDrawColors) | Professional Draw colors definitions | .complete .colours .dflt | 

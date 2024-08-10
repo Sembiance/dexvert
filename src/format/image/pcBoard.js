@@ -9,6 +9,7 @@ export class pcBoard extends Format
 	mimeType         = "text/x-pcboard";
 	magic            = [/^data$/, "ISO-8859 text"];
 	weakMagic        = true;
+	forbiddenMagic   = ["PCB 3.0 Binary file"];
 	confidenceAdjust = () => -70;	// Reduce by 70 so that pretty much everything else matches first, since I can only match really to extension and ansilove will convert almost anything
 	metaProvider     = ["ansiloveInfo"];
 	

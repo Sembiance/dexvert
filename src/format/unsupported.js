@@ -934,6 +934,7 @@ export default
 		atariCTBFile                         : {name : "Atari CTB File", ext : [".ctb"], magic : ["Atari CTB File"]},
 		auroraEditorCompiledMacro            : {name : "Aurora Editor compiled macro", ext : [".x"], magic : ["Aurora Editor compiled macro"], weakMagic : true},
 		authorwareLibrary                    : {name : "Authorware Library", ext : [".apl"], magic : ["Authorware Library"]},
+		authorwarePackagedLibrary            : {name : "Authorware Packaged library", ext : [".a4e", ".a5e", ".a6e"], magic : ["Authorware Packaged library"], weakMagic : true},
 		autoCADCompiledMenu                  : {name : "AutoCAD Compiled Menu", ext : [".mnx"], magic : ["AutoCAD compiled Menu"]},
 		autoCADAutoShadeFilmRoll             : {name : "AutoCAD/AutoShade Film roll", ext : [".flm"], magic : ["AutoCAD/AutoShade Film roll"]},
 		autoDesk3DStudioMaterialLib          : {name : "AutoDesk 3D-Studio Material Library", ext : [".mli"], magic : ["AutoDesk 3D-Studio Material-Library"]},

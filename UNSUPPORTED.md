@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,650)
+# Unsupported File Formats (1,651)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -695,7 +695,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (917)
+## Other (918)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -804,6 +804,7 @@ Family/Format | Name | Extensions | Notes
 [other/auroraEditorCompiledMacro](https://discmaster.textfiles.com/search?formatid=auroraEditorCompiledMacro) | Aurora Editor compiled macro | .x | 
 [other/aeSGMLBinaryStyle](https://discmaster.textfiles.com/search?formatid=aeSGMLBinaryStyle) | Author/Editor SGML Binary Style | .stl | 
 [other/authorwareLibrary](https://discmaster.textfiles.com/search?formatid=authorwareLibrary) | Authorware Library | .apl | 
+[other/authorwarePackagedLibrary](https://discmaster.textfiles.com/search?formatid=authorwarePackagedLibrary) | Authorware Packaged library | .a4e .a5e .a6e | 
 [other/autoCADCompiledMenu](https://discmaster.textfiles.com/search?formatid=autoCADCompiledMenu) | AutoCAD Compiled Menu | .mnx | 
 [other/autoCADDOSRealModeADIDriver](https://discmaster.textfiles.com/search?formatid=autoCADDOSRealModeADIDriver) | Autocad DOS Real Mode ADI Driver | .exp .ex% | 
 [other/autoCADProtectedLISP](https://discmaster.textfiles.com/search?formatid=autoCADProtectedLISP) | AutoCAD Protected LISP | .lsp | 

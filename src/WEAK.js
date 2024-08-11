@@ -321,6 +321,7 @@ export const WEAK_VALUES =
 	/^Corel Presentation/,
 	/^CPE executable/,
 	/^CRAM version/,
+	/^CRAM,/,
 	/^Crush archive data/,
 	/^(CSV )?((ISO-8859|Non-ISO extended-ASCII) text,? ?)+/,
 	/^Cytovision FISH Probe file/,

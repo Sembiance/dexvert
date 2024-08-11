@@ -1,11 +1,11 @@
-# Supported File Formats (2,222)
+# Supported File Formats (2,223)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
 
 
 
-## Archive (363)
+## Archive (364)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 archive | 4kZIP Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/fourKZIPPacked/)
@@ -364,6 +364,7 @@ archive | X68000 Floppy Disk Image | .xdf | [uniso](https://github.com/Sembiance
 archive | XPACK/LZCOM Packed | .exe .com | cup386 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/xpackLZCOMPacked/)
 archive | [XX34](http://fileformats.archiveteam.org/wiki/XX34) |  | [xx34](https://www.sac.sk/download/utilfile/xx3402.zip) | [9 sample files](https://sembiance.com/fileFormatSamples/archive/xx34/)
 archive | [XZ Archive](http://fileformats.archiveteam.org/wiki/XZ) | .xz | [xz](https://tukaani.org/xz/) [sevenZip](http://p7zip.sourceforge.net/) [unar](https://github.com/incbee/Unarchiver) [UniExtract](https://www.legroom.net/software/uniextract) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xz/)
+archive | YBS Archive | .ybs | [ybs](https://www.sac.sk/download/pack/ybs003fd.zip) | 
 archive | [yEnc Encoded Archive](http://fileformats.archiveteam.org/wiki/YEnc) | .ync .yenc | [yydecode](http://yydecode.sourceforge.net/) [UniExtract](https://www.legroom.net/software/uniextract) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/yEnc/)
 archive | You Don't Know Jack Game Archive | .srf | [gameextractor](http://www.watto.org/game_extractor.html) | [6 sample files](https://sembiance.com/fileFormatSamples/archive/youDontKnowJackGameArchive/)
 archive | [ZLIB Compressed Data](http://fileformats.archiveteam.org/wiki/Zlib) |  | [gameextractor](http://www.watto.org/game_extractor.html) [zlib_flate](https://qpdf.sourceforge.net/) [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/zlib/)
@@ -1289,7 +1290,7 @@ image | [Webshots Picture](http://fileformats.archiveteam.org/wiki/Webshots_pict
 image | [WhyPic](http://fileformats.archiveteam.org/wiki/WhyPic) | .ypc | [konvertor](https://www.logipole.com/konvertor-en.htm) | [1 sample file](https://sembiance.com/fileFormatSamples/image/whyPic/)
 image | [Wigmore Artist 64](http://fileformats.archiveteam.org/wiki/Wigmore_Artist_64) | .a64 .wig | [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) [tomsViewer](https://tomseditor.com/blog/viewer) | [2 sample files](https://sembiance.com/fileFormatSamples/image/artist64/)
 image | [Windows Clipboard](http://fileformats.archiveteam.org/wiki/Windows_clipboard) | .clp | [deark](https://entropymine.com/deark/) [clipbrdWin2k](https://microsoft.com) [nconvert](https://www.xnview.com/en/nconvert/) [irfanView](https://www.irfanview.com/) [hiJaakExpress](https://archive.org/details/hijaak-express) | [10 sample files](https://sembiance.com/fileFormatSamples/image/windowsClipboard/)
-image | [Winzle Puzzle](http://fileformats.archiveteam.org/wiki/Winzle_Puzzle) | .wzl | [deark](https://entropymine.com/deark/) | [6 sample files](https://sembiance.com/fileFormatSamples/image/winzlePuzzle/)
+image | [Winzle Puzzle](http://fileformats.archiveteam.org/wiki/Winzle_Puzzle) | .wzl | [deark](https://entropymine.com/deark/) | [16 sample files](https://sembiance.com/fileFormatSamples/image/winzlePuzzle/)
 image | [Wireless Bitmap](http://fileformats.archiveteam.org/wiki/WBMP) | .wbmp .wap .wbm | [convert](https://www.imagemagick.org/) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [tomsViewer](https://tomseditor.com/blog/viewer) | [10 sample files](https://sembiance.com/fileFormatSamples/image/wirelessBMP/)
 image | [Wiz Solitaire Deck](http://fileformats.archiveteam.org/wiki/Wiz_Solitaire) | .deck | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/wizSolitaireDeck/)
 image | [WordPerfect Graphic](http://fileformats.archiveteam.org/wiki/WordPerfect_Graphics) | .wpg | [convert](https://www.imagemagick.org/) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [keyViewPro](https://archive.org/details/KeyViewPro/) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) | [18 sample files](https://sembiance.com/fileFormatSamples/image/wpg/) - It's a vector format, but convert usually fails to produce a usable SVG and often was used just to store a raster image, so we don't even bother trying to convert to SVG
@@ -1803,7 +1804,7 @@ text | Acrobat Distiller Job Options | .joboptions1 .joboptions .joboption2 .job
 text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
 text | Actor Library Definition Language | .ldl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/actorLibraryDefinitionLanguage/)
 text | [Adobe Font List](http://fileformats.archiveteam.org/wiki/Adobe_Font_List) | .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeFontList/)
-text | Adobe Portable Document Catalog Index | .pdx |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
+text | Adobe Portable Document Catalog Index | .pdx |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
 text | Advanced Gravis Phoenix configuration | .phx |  | [9 sample files](https://sembiance.com/fileFormatSamples/text/advancedGravisPhoenixConfiguration/)
 text | Advanced Stream Redirector | .asx |  | 
 text | Adventure Game Toolkit Messages | .msg |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/adventureGameToolkitMessages/)
@@ -2185,11 +2186,11 @@ text | Ventura Font Metrics | .vfm |  | [2 sample files](https://sembiance.com/f
 text | Ventura Publisher Caption | .cap |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/venturaPublisherCaption/)
 text | Verity Collection Document Index Descriptor Style Set | .did |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionDocumentIndex/)
 text | Verity Collection Index About | .abt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexAbout/)
-text | Verity Collection Index Pending Transaction | .trn |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexPendingTransaction/)
-text | Verity Collection Index Style Policy | .plc |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexStylePolicy/)
+text | Verity Collection Index Pending Transaction | .trn |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexPendingTransaction/)
+text | Verity Collection Index Style Policy | .plc |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionIndexStylePolicy/)
 text | Verity Collection Partition Definition Descriptor Style Set | .pdd |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionPartitionDefinition/)
 text | Verity Collection Stop List | .stp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionStopList/)
-text | Verity Collection Word List Descriptor Style Set | .wld |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/verityCollectionWordList/)
+text | Verity Collection Word List Descriptor Style Set | .wld |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/verityCollectionWordList/)
 text | VICAR label file | .pal |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/vicarLabelFile/)
 text | Vice Palette | .vpl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/vicePalette/)
 text | VICE Rom Set | .vrs |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/viceRomSet/)
@@ -2222,7 +2223,7 @@ text | WinFlash Flashcard Source | .fls |  | [4 sample files](https://sembiance.
 text | WinJack for MS Win | .bj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/winJackForMSWin/)
 text | WinUAE Configuration | .uae |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/winUAEConfiguration/)
 text | Wise Installer log | .log |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/wiseInstallerLog/)
-text | Wise script | .wse |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
+text | Wise script | .wse |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
 text | Xantippe project | .xan |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)
 text | XaoS Position File | .z .xpf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaosPositionFile/)
 text | Xara graphics | .wix |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xaraGraphics/)

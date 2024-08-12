@@ -6,7 +6,10 @@ export class macromediaDirector extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Shockwave_(Director)";
 	ext            = [".dir", ".dxr", ".drx", ".cxt", ".cst", ".dcr"];
 	forbidExtMatch = true;
-	magic          = ["Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", /^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/];
+	magic          = [
+		"Macromedia Director project", "Adobe Director Protected Cast", "Macromedia Director Protected Movie", "Director - Shockwave movie", "Generic RIFX container", "Macromedia Director Shockwave Cast", "Director Cast data",
+		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
+	];
 	weakMagic      = ["Generic RIFX container"];
 	idMeta         = ({macFileType, macFileCreator}) => ([3, 4, 5, 6, 7].some(num => ([`M*9${num}`, `M!9${num}`, `MV9${num}`].includes(macFileType) && macFileCreator===`MD9${num}`)) ||
 		(macFileType==="FGDM" && macFileCreator==="MD00") ||

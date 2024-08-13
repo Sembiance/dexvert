@@ -1,9 +1,8 @@
 import {xu} from "xu";
-import {cmdUtil, fileUtil} from "xutil";
+import {cmdUtil, fileUtil, webUtil} from "xutil";
 import {path} from "std";
 import {XLog} from "xlog";
 import {run as wineRun, WINE_PREFIX_SRC, WINE_WEB_HOST, WINE_WEB_PORT} from "../src/wineUtil.js";
-import {WebServer} from "WebServer";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexwine",
@@ -36,9 +35,9 @@ wineBaseEnv[argv.base] = {
 	WINEPREFIX : path.join(WINE_PREFIX_SRC, argv.base)
 };
 
-const webServer = new WebServer(WINE_WEB_HOST, WINE_WEB_PORT, {xlog});
-webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(wineBaseEnv)), {logCheck : () => false});	// eslint-disable-line require-await
-await webServer.start();
+const routes = new Map();
+routes.set("/getBaseEnv", async () => new Response(JSON.stringify(wineBaseEnv)));	// eslint-disable-line require-await
+const webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT, xlog}, await webUtil.route(routes));
 
 const wineData = {cmd : (await fileUtil.exists(argv.cmd) ? path.resolve(argv.cmd) : argv.cmd), args : argv.args || [], arch : argv.arch, base : argv.base, console : argv.console, xlog};
 if(argv.program)

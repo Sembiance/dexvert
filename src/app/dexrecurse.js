@@ -1,9 +1,8 @@
 import {xu} from "xu";
 import {XLog} from "xlog";
-import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil} from "xutil";
+import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil} from "xutil";
 import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
-import {WebServer} from "WebServer";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
@@ -264,10 +263,11 @@ const taskActive = new Set();
 const bar = argv.headless ? null : printUtil.progress({barWidth : 35, max : taskQueue.length});
 const startedAt = performance.now();
 
-const webServer = argv.headless ? new WebServer(DECRECURSE_HOST, DECRECURSE_PORT, {xlog}) : null;
-if(webServer)
+let webServer = null;
+if(argv.headless)
 {
-	webServer.add("/status", async () =>	// eslint-disable-line require-await
+	const routes = new Map();
+	routes.set("/status", async () =>	// eslint-disable-line require-await
 	{
 		const r = {duration : performance.now()-startedAt, taskQueueCount : taskQueue.length, taskActiveCount : taskActive.size, taskFinishedCount, taskHandledCount};
 		const oldestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];
@@ -278,8 +278,9 @@ if(webServer)
 		}
 
 		return new Response(JSON.stringify(r));
-	}, {logCheck : () => false});
-	await webServer.start();
+	});
+
+	webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT, xlog}, await webUtil.route(routes));
 }
 
 const SAMPLE_PATH_SUMS = {};

@@ -6,6 +6,6 @@ export class kissCel extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/KiSS_CEL";
 	ext        = [".cel", ".kcf"];
 	mimeType   = "image/x-kiss-cel";
-	magic      = ["KiSS CEL bitmap", "KISS/GS cell"];
+	magic      = ["KiSS CEL bitmap", "KISS/GS"];
 	converters = ["recoil2png", "nconvert", `abydosconvert[format:${this.mimeType}]`, "gimp"];
 }

@@ -1,8 +1,7 @@
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
-import {runUtil, fileUtil, sysUtil, printUtil} from "xutil";
+import {runUtil, fileUtil, sysUtil, printUtil, webUtil} from "xutil";
 import {path, delay} from "std";
-import {WebServer} from "WebServer";
 import {OS_SERVER_HOST, OS_SERVER_PORT, OSIDS} from "../osUtil.js";
 
 const OS_INSTANCE_DIR_PATH = "/mnt/dexvert/os";
@@ -69,7 +68,6 @@ const INSTANCES = {};
 const RUN_QUEUE = new Set();
 const OS_DIR_PATH = path.join(import.meta.dirname, "..", "..", "os");
 const CHECK_QUEUE_INTERVAL = 50;
-const CHECK_QUEUE_TOO_LONG = xu.MINUTE*15;
 const CMD_DURATIONS = {};
 
 function prelog(instance)
@@ -79,7 +77,6 @@ function prelog(instance)
 
 export class os extends Server
 {
-	checkQueueCounter = 0;
 	serversLaunched = false;
 
 	baseKeys = Object.keys(this);
@@ -222,6 +219,7 @@ export class os extends Server
 		if(instance.p!==startProcess)
 		{
 			this.xlog.error`${prelog(instance)} process changed during run (crash? timeout w/kill?), so aborting run with runArgs ${JSON.stringify(runArgs).squeeze()}`;
+			reply(new Response("ERROR os process changed during run due to crash or timeout, run aborted"));
 			return;
 		}
 		
@@ -240,10 +238,7 @@ export class os extends Server
 	checkRunQueue()
 	{
 		if(RUN_QUEUE.size===0)
-		{
-			this.checkQueueCounter = 0;
 			return setTimeout(() => this.checkRunQueue(), CHECK_QUEUE_INTERVAL);
-		}
 
 		const seenOSIDs = new Set();
 		const runPair = {};
@@ -267,22 +262,10 @@ export class os extends Server
 
 		if(runPair.instance && runPair.runTask)
 		{
-			this.checkQueueCounter = 0;
 			runPair.instance.busy = true;
 			RUN_QUEUE.delete(runPair.runTask);
 			runPair.instance.runTask = runPair.runTask;
 			this.performRun(runPair.instance, runPair.runTask);
-		}
-		else
-		{
-			this.checkQueueCounter++;
-			if(this.checkQueueCounter>((CHECK_QUEUE_TOO_LONG/CHECK_QUEUE_INTERVAL)))
-			{
-				this.xlog.warn`OS queue has been stuck for over ${CHECK_QUEUE_TOO_LONG/xu.MINUTE} minutes with ${RUN_QUEUE.size} items in queue. Instance status:`;
-				for(const subInstance of Object.values(INSTANCES).flatMap(o => Object.values(o)))
-					this.xlog.warn`${fg.peach("STATUS OF")} ${prelog(subInstance)}: ${{ready : subInstance.ready, busy : subInstance.busy}}`;
-				this.checkQueueCounter = 0;
-			}
 		}
 
 		setTimeout(() => this.checkRunQueue(), 0);
@@ -307,11 +290,8 @@ export class os extends Server
 	{
 		await this.cleanup();
 
-		this.webServer = new WebServer(OS_SERVER_HOST, OS_SERVER_PORT, {xlog : this.xlog});
-
-		const logCheck = () => this.xlog.atLeast("trace");
-		
-		this.webServer.add("/status", async () =>	// eslint-disable-line require-await
+		const routes = new Map();
+		routes.set("/status", async () =>	// eslint-disable-line require-await
 		{
 			const r = {queueSize : RUN_QUEUE.size, activeSize : Object.values(INSTANCES).flatMap(o => Object.values(o)).filter(v => v.ready && v.busy).length};
 			if(RUN_QUEUE.size)
@@ -326,54 +306,57 @@ export class os extends Server
 				return o;
 			}).sortMulti([o => o.count, o => o.cmd], [true, false]);
 			return new Response(JSON.stringify(r));
-		}, {logCheck});
+		});
 
-		this.webServer.add("/osRun", async (request, reply) =>
+		routes.set("/osRun", async request =>
 		{
 			const body = await request.json();
 			this.xlog.trace`Got osRun request for ${body.osid} adding to queue (${RUN_QUEUE.size+1} queued)`;
-			RUN_QUEUE.add({body, request, reply});
-		}, {detached : true, method : "POST", logCheck});
+			let response = null;
+			RUN_QUEUE.add({body, request, reply : v => { response = v; }});
+			await xu.waitUntil(() => !!response);
+			return response;
+		});
 
-		this.webServer.add("/osReady", async request =>	// eslint-disable-line require-await
+		routes.set("/osReady", async request =>	// eslint-disable-line require-await
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
 			const instance = Object.values(INSTANCES[body.osid]).find(v => v.instanceid===+body.instanceid);
 			this.xlog.info`${prelog(instance)} Called /osReady`;
 			instance.ready = true;
 			return new Response("ok");
-		}, {logCheck});
+		});
 		
-		this.webServer.add("/osGET", async (request, reply) =>
+		routes.set("/osGET", async request =>
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
 			this.xlog.trace`Got osGET from ${body.osid}-${body.instanceid}`;
 			const inArchiveFilePath = path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`);
 			if(!(await fileUtil.exists(inArchiveFilePath)))
-				return reply(new Response(null, {status : 404}));
+				return new Response(null, {status : 404});
 						
 			const inArchive = await Deno.open(inArchiveFilePath, {read : true});
-			reply(new Response(inArchive.readable, {headers : {"Content-Type" : "application/octet-stream"}}));
-		}, {detached : true, method : "GET", logCheck});
+			return new Response(inArchive.readable, {headers : {"Content-Type" : "application/octet-stream"}});
+		});
 
-		this.webServer.add("/osPOST", async (request, reply) =>
+		routes.set("/osPOST", async request =>
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
 			const requestArrayBuffer = await request.arrayBuffer();
 			this.xlog.debug`Got osPOST from ${body.osid}-${body.instanceid} with a buffer ${requestArrayBuffer.byteLength} bytes long`;
 			await Deno.writeFile(path.join(HTTP_OUT_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`), new Uint8Array(requestArrayBuffer));
-			reply(new Response("", {status : 200}));
-		}, {detached : true, method : "POST", logCheck});
+			return new Response("", {status : 200});
+		});
 
-		this.webServer.add("/osDONE", async (request, reply) =>
+		routes.set("/osDONE", async request =>
 		{
 			const body = Object.fromEntries(["osid", "instanceid"].map(k => ([k, new URL(request.url).searchParams.get(k)])));
 			this.xlog.debug`Got osDONE from ${body.osid}-${body.instanceid}`;
 			await fileUtil.unlink(path.join(HTTP_IN_DIR_PATH, body.osid, `${body.instanceid}.${OS[body.osid].archiveType}`), {recursive : true});
-			reply(new Response("", {status : 200}));
-		}, {detached : true, method : "GET", logCheck});
+			return new Response("", {status : 200});
+		});
 
-		await this.webServer.start();
+		this.webServer = webUtil.serve({hostname : OS_SERVER_HOST, port : OS_SERVER_PORT, xlog : this.xlog}, await webUtil.route(routes));
 
 		await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 

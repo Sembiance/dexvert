@@ -1,10 +1,9 @@
 /* eslint-disable require-await */
 import {xu, fg} from "xu";
 import {Server} from "../Server.js";
-import {runUtil, fileUtil} from "xutil";
+import {runUtil, fileUtil, webUtil} from "xutil";
 import {path, delay} from "std";
 import {WINE_PREFIX_SRC, WINE_PREFIX, WINE_WEB_HOST, WINE_WEB_PORT} from "../wineUtil.js";
-import {WebServer} from "WebServer";
 
 export class wine extends Server
 {
@@ -66,16 +65,18 @@ export class wine extends Server
 		}
 
 		this.xlog.info`Starting wine web server...`;
-		this.webServer = new WebServer(WINE_WEB_HOST, WINE_WEB_PORT, {xlog : this.xlog});
-		this.webServer.add("/getBaseEnv", async () => new Response(JSON.stringify(this.wineBaseEnv)), {logCheck : () => false});
-		this.webServer.add("/getWineCounter", async () =>
+		
+		const routes = new Map();
+		routes.set("/getBaseEnv", async () => new Response(JSON.stringify(this.wineBaseEnv)));
+		routes.set("/getWineCounter", async () =>
 		{
 			const wineCounterNum = `${this.wineCounter++}`;
 			if(this.wineCounter>9000)
 				this.wineCounter = 0;
 			return new Response(wineCounterNum);
-		}, {logCheck : () => false});
-		await this.webServer.start();
+		});
+
+		this.webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT, xlog : this.xlog}, await webUtil.route(routes));
 
 		this.xlog.debug`wineBaseEnv: ${this.wineBaseEnv}`;
 		this.xlog.info`Wine started`;

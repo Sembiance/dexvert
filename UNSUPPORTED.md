@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,701)
+# Unsupported File Formats (1,706)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -157,7 +157,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (53)
+## Audio (54)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -177,6 +177,7 @@ Family/Format | Name | Extensions | Notes
 [audio/digitalSymphonySoundSample](https://discmaster.textfiles.com/search?formatid=digitalSymphonySoundSample) | Digital Symphony Sound Sample |  | 
 [audio/dmxOP2InstrumentData](https://discmaster.textfiles.com/search?formatid=dmxOP2InstrumentData) | DMS OP2 Instrument Data |  | 
 [audio/dynamixSSMSoundAndMusic](https://discmaster.textfiles.com/search?formatid=dynamixSSMSoundAndMusic) | Dynamix SSM sound and music | .sng | 
+[audio/ensoniqWaveSetFormat](https://discmaster.textfiles.com/search?formatid=ensoniqWaveSetFormat) | Ensoniq WaveSet Format | .ecw | 
 [audio/fmTownsSND](https://discmaster.textfiles.com/search?formatid=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?formatid=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?formatid=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
@@ -701,7 +702,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (959)
+## Other (963)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -1059,7 +1060,10 @@ Family/Format | Name | Extensions | Notes
 [other/geoffHamiltonsGardenDesignerProject](https://discmaster.textfiles.com/search?formatid=geoffHamiltonsGardenDesignerProject) | Geoff Hamilton's Garden Designer project | .grd | 
 [other/geoWorksDirectoryInfo](https://discmaster.textfiles.com/search?formatid=geoWorksDirectoryInfo) | GeoWorks directory info | .000 | 
 [other/geoWorksGEOSData](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSData) | GeoWorks GEOS Data | .000 .001 .002 .003 .004 .005 .006 .007 .008 .009 .010 .011 .012 .geo | 
+[other/geoWorksGEOSPreferences](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSPreferences) | GeoWorks GEOS preferences | .geo | 
+[other/geoWorksGEOSScreenSaver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSScreenSaver) | GeoWorks GEOS screen saver | .geo | 
 [other/geoWorksGEOSSoundDriver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSSoundDriver) | GeoWorks GEOS sound driver | .geo | 
+[other/geoWorksGEOSVideoDriver](https://discmaster.textfiles.com/search?formatid=geoWorksGEOSVideoDriver) | GeoWorks GEOS video driver | .geo | 
 [other/geoWorksWriterScrapbook](https://discmaster.textfiles.com/search?formatid=geoWorksWriterScrapbook) | GeoWorks Writer scrapbook | .000 | 
 [other/gettextMachineObject](https://discmaster.textfiles.com/search?formatid=gettextMachineObject) | Gettext Machine Object | .gmo | 
 [other/gfxLab24ConvolutionMatrix](https://discmaster.textfiles.com/search?formatid=gfxLab24ConvolutionMatrix) | GfxLab24 Convolution Matrix |  | 
@@ -1226,6 +1230,7 @@ Family/Format | Name | Extensions | Notes
 [other/microsoftGolfReplay](https://discmaster.textfiles.com/search?formatid=microsoftGolfReplay) | Microsoft Golf Replay | .rpl | 
 [other/microsoftIncrementalLinker](https://discmaster.textfiles.com/search?formatid=microsoftIncrementalLinker) | Microsoft Incremental Linker Data | .ilk | 
 [other/microsoftMailServerForPCScript](https://discmaster.textfiles.com/search?formatid=microsoftMailServerForPCScript) | Microsoft Mail Server for PC Script | .scr | 
+[other/microsoftMoneyAutoSavedData](https://discmaster.textfiles.com/search?formatid=microsoftMoneyAutoSavedData) | Microsoft Money auto saved data | .mny | 
 [other/microsoftPrinterDefinition](https://discmaster.textfiles.com/search?formatid=microsoftPrinterDefinition) | Microsoft Printer Definition | .prd | 
 [other/microsoftPrivateKey](https://discmaster.textfiles.com/search?formatid=microsoftPrivateKey) | Microsoft Private Key | .pkv | 
 [other/microsoftProgramDatabase](https://discmaster.textfiles.com/search?formatid=microsoftProgramDatabase) | Microsoft Program Database | .pdb .ncb .idb | 

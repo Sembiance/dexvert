@@ -1,11 +1,10 @@
 import {xu} from "xu";
 import {Server} from "../Server.js";
 import {path} from "std";
-import {WebServer} from "WebServer";
 import {XWorkerPool} from "XWorkerPool";
 import {init as initPrograms, programDirPath} from "../program/programs.js";
 import {init as initFormats, formatDirPath} from "../format/formats.js";
-import {fileUtil} from "xutil";
+import {fileUtil, webUtil} from "xutil";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
@@ -62,19 +61,23 @@ export class dexrpc extends Server
 		this.rpcData = {};
 		this.rpcid = 0;
 
-		this.webServer = new WebServer(DEXRPC_HOST, DEXRPC_PORT, {xlog : this.xlog});
+		const routes = new Map();
 
-		this.webServer.add("/workerCount", async () => new Response(DEX_WORKER_COUNT.toString()), {logCheck : () => false});	// eslint-disable-line require-await
+		routes.set("/workerCount", async () => new Response(DEX_WORKER_COUNT.toString()), {logCheck : () => false});	// eslint-disable-line require-await
 		
-		this.webServer.add("/dex", async (request, reply) =>
+		routes.set("/dex", async request =>
 		{
 			const workerData = await request.json();
 			workerData.rpcid = this.rpcid++;
-			this.rpcData[workerData.rpcid] = {reply, workerData};
-			this[workerData.op==="dexid" ? "idPool" : "dexPool"].process([workerData]);
-		}, {detached : true, method : "POST", logCheck : () => false});
 
-		this.webServer.add("/lock", async request =>
+			let response = null;
+			this.rpcData[workerData.rpcid] = {reply : v => { response = v; }, workerData};
+			this[workerData.op==="dexid" ? "idPool" : "dexPool"].process([workerData]);
+			await xu.waitUntil(() => !!response);
+			return response;
+		});
+
+		routes.set("/lock", async request =>
 		{
 			const data = await request.json();
 			if(!data?.lockid?.length || LOCKS.has(data.lockid))
@@ -82,9 +85,9 @@ export class dexrpc extends Server
 				
 			LOCKS.add(data.lockid);
 			return new Response("true");
-		}, {method : "POST", logCheck : () => false});
+		});
 
-		this.webServer.add("/unlock", async request =>
+		routes.set("/unlock", async request =>
 		{
 			const data = await request.json();
 			if(!data?.lockid?.length || !LOCKS.has(data.lockid))
@@ -92,9 +95,9 @@ export class dexrpc extends Server
 				
 			LOCKS.delete(data.lockid);
 			return new Response("true");
-		}, {method : "POST", logCheck : () => false});
+		});
 
-		await this.webServer.start();
+		this.webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT, xlog : this.xlog}, await webUtil.route(routes));
 
 		this.running = true;
 	}

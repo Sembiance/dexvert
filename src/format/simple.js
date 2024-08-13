@@ -181,6 +181,7 @@ export default
 		objectVisionDatafile            : {name : "ObjectVision Datafile", ext : [".ovd"], magic : ["ObjectVision Datafile"]},
 		polytronVCSLogfile              : {name : "Polytron VCS logfile", ext : [".pmv"], magic : ["Polytron VCS logfile"]},
 		parsonsTechnologyResourceData   : {name : "Parsons Technology resource data", ext : [".us5", ".ovl", ".cfg", ".wrk"], magic : ["Parsons Technology resource data"]},
+		playStationRSD3DModelInfo       : {name : "PlayStation RSD 3D model info", ext : [".rsd"], magic : ["PlayStation RSD 3D model info"], weakMagic : true},
 		powerWindowsProject             : {name : "PowerWindows Project", ext : [".pw"], magic : ["PowerWindows Project"]},
 		qseqProject                     : {name : "QSEQ Project", ext : [".qsq"], magic : ["QSEQ project"]},
 		quickBasicTokenizedSource       : {name : "QuickBASIC Tokenized Source", ext : [".bas"], magic : [/^Microsoft QuickBASIC \d\.\d tokenized source$/, /^QuickBASIC Extended .*Source$/]},

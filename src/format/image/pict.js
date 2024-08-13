@@ -38,7 +38,7 @@ export class pict extends Format
 
 		// even though we have forbidExtMatch above, keep the [matchType:magic] here because if dexvert is explictily called with asFormat image/pict we end up here (such as chaining from deark) and we want to avoid so many slow windows program executions
 		r.push(
-			"photoDraw",
+			"photoDraw[matchType:magic]",
 			"canvas[matchType:magic]",		// canvas seems to properly recombine sub-bitmaps into a final image (sample/image/pict/Daniel  and  2kangaro  and  bbq)
 			"hiJaakExpress[matchType:magic]",
 			"picturePublisher[matchType:magic]"

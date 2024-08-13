@@ -28,7 +28,7 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 	if(inputFile.isDirectory)
 		throw new Error(`Invalid input file, expected a file, got a directory: ${inputFile.absolute}`);
 	if(!inputFile.isFile && !inputFile.isSymlink)
-		throw new Error(`Invalid input file, expected a file ${inputFile.absolute} stats: ${JSON.stringify(await Deno.lstat(inputFile.absolute))}`);
+		throw new Error(`Invalid input file, expected a file ${inputFile.absolute} stats: ${JSON.stringify(await xu.tryFallbackAsync(async () => await Deno.lstat(inputFile.absolute)))}`);
 	if(!outputDir.isDirectory)
 		throw new Error(`Invalid output directory, expected a directory. ${outputDir.absolute}`);
 	
@@ -146,7 +146,14 @@ export async function dexvert(inputFile, outputDir, {asFormat, skipVerify, forbi
 					cwdExt = inputFile.ext;
 			}
 			
-			await f.input.rename(cwdFilename + cwdExt);
+			try
+			{
+				await f.input.rename(cwdFilename + cwdExt);
+			}
+			catch(err)
+			{
+				xlog.warn`Failed to rename input file to ${cwdFilename}${cwdExt}: ${err}`;
+			}
 
 			// by default we rename the aux files to match, unless keepFilename is set to true
 			if(f.aux)

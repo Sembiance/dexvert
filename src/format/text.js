@@ -27,6 +27,7 @@ export default
 		flightSimToolkitModel              : {name : "Flight Sim Toolkit Model", ext : [".fmd"], magic : ["Flight Sim Toolkit Model"]},
 		flightSimToolkitPlaces             : {name : "Flight Sim Toolkit Places", ext : [".fst"], magic : ["Flight Sim Toolkit Places"]},
 		flightSimToolkitShape              : {name : "Flight Sim Toolkit Shape", ext : [".fsd"], magic : ["Flight Sim Toolkit Shape"]},
+		grandTheftAutoKeyboardConfig       : {name : "Grand Theft Auto keyboard Configuration", ext : [".cfg"], magic : ["Grand Theft Auto 2 keyboard Configuration"], weakMagic : true},
 		gravisFirebirdConfiguration        : {name : "Gravis Firebird configuration", ext : [".fbd"], magic : ["Gravis Firebird configuration"]},
 		indyCarRacingDriversInfo           : {name : "IndyCar Racing drivers info", ext : [".txt"], magic : ["IndyCar Racing drivers info", "IndyCar Racing II drivers info"], weakMagic : true},
 		indyCarRacingTrackInfo             : {name : "IndyCar Racing track info", ext : [".txt"], magic : ["IndyCar Racing II track info"], weakMagic : true},
@@ -43,6 +44,7 @@ export default
 		smartGameFormat                    : {name : "Smart Game Format", ext : [".sgf"], magic : ["Smart Game Format"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/Smart_Game_Format"},
 		theNeedForSpeedCarPerformanceSpecs : {name : "The Need for Speed car Performance Specs", ext : [".pbs"], magic : ["The Need for Speed car Performance Specs"], weakMagic : true},
 		theNeedForSpeedWindshieldShape     : {name : "The Need For Speed windshield shape", ext : [".fmm"], magic : ["The Need For Speed windshield shape"], weakMagic : true},
+		tornadoMissionInfo                 : {name : "Tornado Mission info", ext : [".mis"], magic : ["Tornado Mission info"], weakMagic : true},
 
 		/////////////////////////////////////
 		// Image or Poly or other 'Visual' //	Could potentially try and render/convert these into something visual in the future
@@ -439,6 +441,7 @@ export default
 		windowsSetupTableFile                   : {name : "Windows Setup Table File", ext : [".stf"], magic : ["Windows Setup Table File"]},
 		windowsURLShortcut                      : {name : "Windows URL shortcut", ext : [".url"], magic : ["Windows URL shortcut", "URL Datei", "MS Windows 95 Internet shortcut", /^x-fmt\/(428|454)( |$)/], weakMagic : ["Windows URL shortcut"]},
 		winJackForMSWin                         : {name : "WinJack for MS Win", ext : [".bj"], magic : ["WinJack for MS Win game variant"]},
+		winSFV32Checksum                        : {name : "WIN-SFV32 checksum ", ext : [".txt"], magic : ["WIN-SFV32 checksum"]},
 		winUAEConfiguration                     : {name : "WinUAE Configuration", ext : [".uae"], magic : ["UAE - WinUAE Configuration"], weakMagic : true},
 		wiseInstallerLog                        : {name : "Wise Installer log", ext : [".log"], magic : ["Wise Installer log"]},
 		wiseScript                              : {name : "Wise script", ext : [".wse"], magic : ["Wise script"]},

@@ -5,6 +5,6 @@ export class wad extends Format
 	name       = "WAD";
 	website    = "http://fileformats.archiveteam.org/wiki/Doom_WAD";
 	ext        = [".wad"];
-	magic      = ["id Software's DOOM Patch-WAD", "doom patch PWAD", "doom main IWAD", "id Software's DOOM Internal-WAD", "WAD3 game data"];
+	magic      = ["id Software's DOOM Patch-WAD", "doom patch PWAD", "doom main IWAD", "id Software's DOOM Internal-WAD", "WAD3 game data", "Dungeon Keeper 2 game data archive"];
 	converters = ["deark[module:wad]", "gamearch", "gameextractor"];
 }

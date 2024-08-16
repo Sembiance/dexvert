@@ -5,12 +5,17 @@ if [ ! -f /mnt/ram/dexvert/dexserver.pid ]; then
 	exit 1
 fi
 
-touch /mnt/ram/tmp/stopdexserver
+# if pid is not running, remove pid file
+if ! ps -p $(cat /mnt/ram/dexvert/dexserver.pid) > /dev/null; then
+	rm /mnt/ram/dexvert/dexserver.pid
+else
+	touch /mnt/ram/tmp/stopdexserver
 
-echo "Waiting for dexserver to stop..."
-while [ -f /mnt/ram/tmp/stopdexserver ] || [ -f /mnt/ram/dexvert/dexserver.pid ]; do
-	sleep 1
-done
+	echo "Waiting for dexserver to stop..."
+	while [ -f /mnt/ram/tmp/stopdexserver ] || [ -f /mnt/ram/dexvert/dexserver.pid ]; do
+		sleep 1
+	done
+fi
 
 /mnt/compendium/DevLab/dexvert/bin/cleanup.sh
 

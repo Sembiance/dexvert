@@ -12,7 +12,7 @@ export class mov extends Format
 	ext          = _MOV_EXT;
 	mimeType     = "video/quicktime";
 	magic        = _MOV_MAGIC;
-	idMeta      = ({macFileType}) => macFileType==="MooV";
+	idMeta      = ({macFileType}) => macFileType?.toLowerCase()==="moov";	// I've encountered MooV and Moov, so just lowercase it
 	trustMagic   = true;
 	metaProvider = ["mplayer"];
 	converters   = r => ["ffmpeg", (r.f.input.size<(xu.MB*25) ? "qt_flatt" : "qtflat"), "mencoderWinXP", "quickTimePlayer", "corelPhotoPaint[outType:avi]", "xanim"];

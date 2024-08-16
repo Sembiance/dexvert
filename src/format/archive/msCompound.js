@@ -10,7 +10,7 @@ export class msCompound extends Format
 		
 		// app specific: I could look into these more and support these better
 		"Shell Scrap object", "StormFront skin", "Ulead PhotoImpact Object(s)", "Designworks Template (v3.5)", "Easy CD Creator's Jewel case", "STATISTICA Workbook", "Ulead iPhoto Template", "iPublish document", "Quattro Pro 7 spreadsheet",
-		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project",
+		"Creative Witer document", "3D Studio Max Material Library", "Windows Movie Maker project", "Roxio/MGI PhotoSuite Album", "Roxio/MGI PhotoSuite Project",
 		/^fmt\/(1303|1648)( |$)/, /^x-fmt\/243( |$)/
 	];
 	forbiddenExt     = [".fpx"];	// Allow image/fpx to handle these

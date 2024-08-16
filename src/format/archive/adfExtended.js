@@ -6,6 +6,6 @@ export class adfExtended extends Format
 	ext            = [".adf"];
 	forbidExtMatch = true;
 	priority       = this.PRIORITY.LOW;
-	magic          = ["EXT2 Extended Amiga Disk image File"];
+	magic          = [/^EXT\d Extended Amiga Disk image File/];
 	converters     = ["uaeunp -> dexvert"];
 }

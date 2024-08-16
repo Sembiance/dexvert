@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,706)
+# Unsupported File Formats (1,721)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (146)
+## Archive (147)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -130,6 +130,7 @@ Family/Format | Name | Extensions | Notes
 [archive/simis](https://discmaster.textfiles.com/search?formatid=simis) | Simis | .s .ace .t .dat .mis | 
 [archive/snatchItDiskImage](https://discmaster.textfiles.com/search?formatid=snatchItDiskImage) | SNATCH-IT Disk Image | .cp2 .img | 
 [archive/spisTCompress](https://discmaster.textfiles.com/search?formatid=spisTCompress) | SPIS TCompress |  | 
+[archive/sqwezArchive](https://discmaster.textfiles.com/search?formatid=sqwezArchive) | [SQWEZ Archive](http://fileformats.archiveteam.org/wiki/SQWEZ) | .sqz | 
 [archive/stackerCompressedVolume](https://discmaster.textfiles.com/search?formatid=stackerCompressedVolume) | Stacker compressed volume | .dsk | 
 [archive/stuffitX](https://discmaster.textfiles.com/search?formatid=stuffitX) | [Stuffit X Archive](http://fileformats.archiveteam.org/wiki/StuffIt_X) | .sitx | [6 sample files](https://sembiance.com/fileFormatSamples/archive/stuffitX/) - Haven't found a linux or windows based tool that can extract these yet. Neither unar nor Stuffit Expander on windows can handle any of the sample .sitx files. Might need real stuffit expander on Mac
 [archive/syneticAArchive](https://discmaster.textfiles.com/search?formatid=syneticAArchive) | Synetic Archive | .syn | 
@@ -217,7 +218,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (91)
+## Document (92)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -285,6 +286,7 @@ Family/Format | Name | Extensions | Notes
 [document/penPalDatabase](https://discmaster.textfiles.com/search?formatid=penPalDatabase) | Pen Pal Database | .flr | 
 [document/penPalDocument](https://discmaster.textfiles.com/search?formatid=penPalDocument) | Pen Pal Document | .wtr | 
 [document/perfectForms](https://discmaster.textfiles.com/search?formatid=perfectForms) | [Perfect Forms](https://winworldpc.com/product/expert-perfect-forms/300) | .frm | [8 sample files](https://sembiance.com/fileFormatSamples/document/perfectForms/)
+[document/persuasionPresentation](https://discmaster.textfiles.com/search?formatid=persuasionPresentation) | Persuasion presentation | .at3 .at4 .pr3 .pn4 | 
 [document/popupDOSHelp](https://discmaster.textfiles.com/search?formatid=popupDOSHelp) | POP-UP DOS Help | .hlp | 
 [document/pPrintPage](https://discmaster.textfiles.com/search?formatid=pPrintPage) | PPrint Page | .pag | 
 [document/purePascalHelp](https://discmaster.textfiles.com/search?formatid=purePascalHelp) | Pure Pascal Help | .hlp | 
@@ -443,7 +445,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (126)
+## Image (127)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -523,6 +525,7 @@ Family/Format | Name | Extensions | Notes
 [image/mvpPaintAnimation](https://discmaster.textfiles.com/search?formatid=mvpPaintAnimation) | MVP Paint Animation | .af | 
 [image/needForSpeedTextures](https://discmaster.textfiles.com/search?formatid=needForSpeedTextures) | Need For Speed textures | .fam | 
 [image/neoPaintPattern](https://discmaster.textfiles.com/search?formatid=neoPaintPattern) | NeoPaint Pattern | .pat | [2 sample files](https://sembiance.com/fileFormatSamples/image/neoPaintPattern/) - While identified via magic as a "NeoPaint Palette" they appear to be "patterns" used as stamps in the MSDOS Neopaint program. Short of reverse engineering it, in theory dexvert could convert these to images by opening up DOS Neopaint, selecting the pattern, stamping it or filling a canvas with it and saving the image. Don't plan on bothing to actually do that though, it's a relatively obscure program and file format.
+[image/openTTDGraphicsResource](https://discmaster.textfiles.com/search?formatid=openTTDGraphicsResource) | OpenTTD Graphics Resource | .grf | 
 [image/pOSWorkbenchIcon](https://discmaster.textfiles.com/search?formatid=pOSWorkbenchIcon) | p.OS Workbench Icon | .info | 
 [image/painterRIF](https://discmaster.textfiles.com/search?formatid=painterRIF) | [Painter Raster Image Format](http://fileformats.archiveteam.org/wiki/Painter_RIFF) | .rif | [2 sample files](https://sembiance.com/fileFormatSamples/image/painterRIF/)
 [image/paintproBitmap](https://discmaster.textfiles.com/search?formatid=paintproBitmap) | Paintpro Bitmap | .tb1 .ppp | 
@@ -702,7 +705,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (963)
+## Other (975)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -849,6 +852,8 @@ Family/Format | Name | Extensions | Notes
 [other/borlandLanguageLibrary](https://discmaster.textfiles.com/search?formatid=borlandLanguageLibrary) | Borland Language Library | .bll | 
 [other/borlandObjectBrowserData](https://discmaster.textfiles.com/search?formatid=borlandObjectBrowserData) | Borland Object Browser data | .obr | 
 [other/borlandOverlay](https://discmaster.textfiles.com/search?formatid=borlandOverlay) | Borland Overlay | .ovr | 
+[other/borlandReflex2ColorSettings](https://discmaster.textfiles.com/search?formatid=borlandReflex2ColorSettings) | Borland Reflex 2 color settings | .r2z | 
+[other/borlandReflex2Database](https://discmaster.textfiles.com/search?formatid=borlandReflex2Database) | Borland Reflex 2 Database | .r2d | 
 [other/borlandTLINKSymbolTable](https://discmaster.textfiles.com/search?formatid=borlandTLINKSymbolTable) | Borland TLINK Symbol Table | .tds | 
 [other/borlandTurboDebuggerSettings](https://discmaster.textfiles.com/search?formatid=borlandTurboDebuggerSettings) | Borland Turbo Debugger session-state settings | .trw | 
 [other/boyanActionModule](https://discmaster.textfiles.com/search?formatid=boyanActionModule) | BOYAN Action Model | .bam | 
@@ -911,6 +916,7 @@ Family/Format | Name | Extensions | Notes
 [other/coreFile](https://discmaster.textfiles.com/search?formatid=coreFile) | Core File | .core | 
 [other/corelCatalog](https://discmaster.textfiles.com/search?formatid=corelCatalog) | Corel Catalog | .clc | 
 [other/corelEditorMacro](https://discmaster.textfiles.com/search?formatid=corelEditorMacro) | Corel Editor Macro | .edm | 
+[other/corelMailArchivedMessageDatabase](https://discmaster.textfiles.com/search?formatid=corelMailArchivedMessageDatabase) | Corel Mail archived message database/mailbox | .db | 
 [other/corelPhotoPaintUserFilter](https://discmaster.textfiles.com/search?formatid=corelPhotoPaintUserFilter) | COREL Photo Paint User Defined Filter | .usr | 
 [other/corelPhotoPaintToneCurve](https://discmaster.textfiles.com/search?formatid=corelPhotoPaintToneCurve) | Corel PhotoPaint Tone Curve | .crv | 
 [other/corelShellMacro](https://discmaster.textfiles.com/search?formatid=corelShellMacro) | Corel Shell Macro | .shm | 
@@ -949,6 +955,7 @@ Family/Format | Name | Extensions | Notes
 [other/dBaseUpdate](https://discmaster.textfiles.com/search?formatid=dBaseUpdate) | dBase Update | .upd | 
 [other/decisionProProject](https://discmaster.textfiles.com/search?formatid=decisionProProject) | Decision/pro project | .dp | 
 [other/deHackEdPatch](https://discmaster.textfiles.com/search?formatid=deHackEdPatch) | DeHackEd Patch | .deh | 
+[other/delphiDiagramPortfolio](https://discmaster.textfiles.com/search?formatid=delphiDiagramPortfolio) | Delphi Diagram Portfolio | .ddp | 
 [other/deluxeSkiJump2Replay](https://discmaster.textfiles.com/search?formatid=deluxeSkiJump2Replay) | Deluxe Ski Jump 2 Replay | .rpl | 
 [other/demoGeneratorShowScreen](https://discmaster.textfiles.com/search?formatid=demoGeneratorShowScreen) | Demo Generator Show screen | .sho | 
 [other/demoManiacVectors](https://discmaster.textfiles.com/search?formatid=demoManiacVectors) | DemoManiac Vectors | .dat | 
@@ -996,6 +1003,7 @@ Family/Format | Name | Extensions | Notes
 [other/eclipseHelp](https://discmaster.textfiles.com/search?formatid=eclipseHelp) | Eclipse Help | .hlp | 
 [other/eclipseImage](https://discmaster.textfiles.com/search?formatid=eclipseImage) | Eclipse Image | .img | 
 [other/eclipseTutorial](https://discmaster.textfiles.com/search?formatid=eclipseTutorial) | Eclipse Tutorial | .tut | 
+[other/ecxModule](https://discmaster.textfiles.com/search?formatid=ecxModule) | ECX module | .m | 
 [other/eicarAntivirusTestFile](https://discmaster.textfiles.com/search?formatid=eicarAntivirusTestFile) | EICAR antivirus test file | .com | 
 [other/electronicArtsInteractiveSequence](https://discmaster.textfiles.com/search?formatid=electronicArtsInteractiveSequence) | Electronic Arts interactive sequence | .map .lin | 
 [other/emacsCompiledLisp](https://discmaster.textfiles.com/search?formatid=emacsCompiledLisp) | Emacs Compiled Lisp | .elc | [8 sample files](https://sembiance.com/fileFormatSamples/unsupported/emacsCompiledLisp/) - Could decompile it with (maybe): https://github.com/rocky/elisp-decompile
@@ -1077,6 +1085,7 @@ Family/Format | Name | Extensions | Notes
 [other/gPatchPatch](https://discmaster.textfiles.com/search?formatid=gPatchPatch) | GPatch Patch | .patch .gpatch .gpch | 
 [other/grandTheftAutoFakeText](https://discmaster.textfiles.com/search?formatid=grandTheftAutoFakeText) | Grand Theft Auto Fake Text | .fxt | 
 [other/gravisGrIPLibrary](https://discmaster.textfiles.com/search?formatid=gravisGrIPLibrary) | Gravis GrIP Library | .vol | 
+[other/groupWiseAdminHostDatabase](https://discmaster.textfiles.com/search?formatid=groupWiseAdminHostDatabase) | GroupWise admin host database | .db | 
 [other/halfLife2SaveGame](https://discmaster.textfiles.com/search?formatid=halfLife2SaveGame) | Half-Life 2 Save Game | .sav | 
 [other/halloweenHarryGameData](https://discmaster.textfiles.com/search?formatid=halloweenHarryGameData) | Halloween Harry game data | .bnk .-0 | 
 [other/handyCalcData](https://discmaster.textfiles.com/search?formatid=handyCalcData) | Handy Calc data | .clc | 
@@ -1134,6 +1143,7 @@ Family/Format | Name | Extensions | Notes
 [other/jetPilotSegmentData](https://discmaster.textfiles.com/search?formatid=jetPilotSegmentData) | JETPilot segment data |  | 
 [other/jetPilotSprite](https://discmaster.textfiles.com/search?formatid=jetPilotSprite) | JETPilot sprite | .pssp .pssm | 
 [other/jetPilotSUPData](https://discmaster.textfiles.com/search?formatid=jetPilotSUPData) | JETPilot SUP data |  | 
+[other/jniLibrary](https://discmaster.textfiles.com/search?formatid=jniLibrary) | JNI Library | .jnilib | 
 [other/junglevisionData](https://discmaster.textfiles.com/search?formatid=junglevisionData) | Junglevision data | .op3 | 
 [other/junoClientLicenseKey](https://discmaster.textfiles.com/search?formatid=junoClientLicenseKey) | Juno client license Key | .key | 
 [other/kChessSavedGame](https://discmaster.textfiles.com/search?formatid=kChessSavedGame) | K-Chess saved game | .kch .kc | 
@@ -1517,6 +1527,8 @@ Family/Format | Name | Extensions | Notes
 [other/texFontMetricData](https://discmaster.textfiles.com/search?formatid=texFontMetricData) | TeX Font Metric Data | .tfm | 
 [other/texVirtualFont](https://discmaster.textfiles.com/search?formatid=texVirtualFont) | TeX Virtual Font | .vf | 
 [other/tiCalcBackup](https://discmaster.textfiles.com/search?formatid=tiCalcBackup) | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
+[other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?formatid=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
+[other/catacombAbyssSavedGame](https://discmaster.textfiles.com/search?formatid=catacombAbyssSavedGame) | The Catacomb Abyss saved game | .sav | 
 [other/chessmaster4000ClassicGamesLibrary](https://discmaster.textfiles.com/search?formatid=chessmaster4000ClassicGamesLibrary) | The Chessmaster 4000 classic games library | .cml .dat | 
 [other/theChessmasterOpeningBook](https://discmaster.textfiles.com/search?formatid=theChessmasterOpeningBook) | The Chessmaster opening book | .obk | 
 [other/civilWarBattleData](https://discmaster.textfiles.com/search?formatid=civilWarBattleData) | The Civil War Battle data | .btl | 
@@ -1536,6 +1548,7 @@ Family/Format | Name | Extensions | Notes
 [other/thxTrackerInstrument](https://discmaster.textfiles.com/search?formatid=thxTrackerInstrument) | THX Tracker Instrument | .ins | 
 [other/timeZoneData](https://discmaster.textfiles.com/search?formatid=timeZoneData) | TimeZone Data | .tz | 
 [other/tmmScreen](https://discmaster.textfiles.com/search?formatid=tmmScreen) | TMM Screen | .scr | 
+[other/tmtPascalForOS2ObjectCode](https://discmaster.textfiles.com/search?formatid=tmtPascalForOS2ObjectCode) | TMT Pascal for OS/2 object code | .fpd .fpl .fpu | 
 [other/toolmakerProject](https://discmaster.textfiles.com/search?formatid=toolmakerProject) | Toolmaker project | .tm | 
 [other/triTrystGameData](https://discmaster.textfiles.com/search?formatid=triTrystGameData) | TriTryst game Data | .dat | 
 [other/triviaShellData](https://discmaster.textfiles.com/search?formatid=triviaShellData) | Trivia Shell Data | .tsd | 
@@ -1579,7 +1592,9 @@ Family/Format | Name | Extensions | Notes
 [other/videoTrackerRoutine](https://discmaster.textfiles.com/search?formatid=videoTrackerRoutine) | VideoTracker Routine | .rot | [10 sample files](https://sembiance.com/fileFormatSamples/unsupported/videoTrackerRoutine/)
 [other/virToolsFiles](https://discmaster.textfiles.com/search?formatid=virToolsFiles) | Virtools files | .cmo .nmo .vmo .nms | 
 [other/virtualPascalUnit](https://discmaster.textfiles.com/search?formatid=virtualPascalUnit) | Virtual Pascal Unit | .vpi | 
+[other/virusExecutorPatchBrain](https://discmaster.textfiles.com/search?formatid=virusExecutorPatchBrain) | VirusExecutor Patch Brain | .patchbrain | 
 [other/virusZIIArchiversInfo](https://discmaster.textfiles.com/search?formatid=virusZIIArchiversInfo) | VirusZ II Archivers info | .archivers | 
+[other/virusZIIIBootblocksData](https://discmaster.textfiles.com/search?formatid=virusZIIIBootblocksData) | VirusZ III Bootblocks data | .bootblocks | 
 [other/visionaireMesh](https://discmaster.textfiles.com/search?formatid=visionaireMesh) | Visionaire Mesh | .mesh | 
 [other/visionaireProject](https://discmaster.textfiles.com/search?formatid=visionaireProject) | Visionaire Project | .vis | 
 [other/vistaMakepathSession](https://discmaster.textfiles.com/search?formatid=vistaMakepathSession) | Vista Makepath Session | .ses | 

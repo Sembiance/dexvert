@@ -63,7 +63,7 @@ export class dexrpc extends Server
 
 		const routes = new Map();
 
-		routes.set("/workerCount", async () => new Response(DEX_WORKER_COUNT.toString()), {logCheck : () => false});	// eslint-disable-line require-await
+		routes.set("/workerCount", () => new Response(DEX_WORKER_COUNT.toString()));
 		
 		routes.set("/dex", async request =>
 		{

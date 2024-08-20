@@ -76,7 +76,7 @@ export class wine extends Server
 			return new Response(wineCounterNum);
 		});
 
-		this.webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT, xlog : this.xlog}, await webUtil.route(routes));
+		this.webServer = webUtil.serve({hostname : WINE_WEB_HOST, port : WINE_WEB_PORT}, await webUtil.route(routes), {xlog : this.xlog});
 
 		this.xlog.debug`wineBaseEnv: ${this.wineBaseEnv}`;
 		this.xlog.info`Wine started`;

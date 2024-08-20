@@ -18,15 +18,15 @@ export class exe extends Format
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
 		/^Microsoft Pascal (v[\d.]+ )?16-bit executable/, "16bit DOS EXE ApBasic", "MicroFocus COBOL DOS Executable", "16bit DOS EXE BasicBasic", "Turbo Pascal for Windows 1.0 executable", "MinGW32 C/C++ Executable", "Generic CIL Executable",
 		"DOS Metaware Professional Pascal Executable",
-		
-		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal and things below, double check before looking deep)
+
+		// installers: These actually do convert ok already with things like cmdTotal below
+		"Installer: Vise",
+
+		// installers - NOTE: It would be nice to find a way to 'properly' extract the contents of all these installers (note: some of these may already be handled correctly with cmdTotal extensions)
 		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
 		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
 		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
-		"Installer: Aeco Systems installer", "Installer: Winamp Installer",
-
-		// installers: These actually do convert ok already with things like cmdTotal below
-		"Installer: Vise"
+		"Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer"
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

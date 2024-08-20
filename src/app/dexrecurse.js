@@ -280,7 +280,7 @@ if(argv.headless)
 		return new Response(JSON.stringify(r));
 	});
 
-	webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT, xlog}, await webUtil.route(routes));
+	webServer = webUtil.serve({hostname : DECRECURSE_HOST, port : DECRECURSE_PORT}, await webUtil.route(routes), {xlog});
 }
 
 const SAMPLE_PATH_SUMS = {};
@@ -410,14 +410,14 @@ async function processNextQueue()
 			const forbidProgram = (lastRan?.forbidChildRun && lastRan.programid===dexData.phase.converter) ? [lastRan.programid] : null;
 
 			//xlog.debug`${taskLogPrefix} Adding ${dexData.created.files.output.length.toLocaleString()} output files to task queue...`;
-			for(const file of dexData.created.files.output)
+			for(const fileRel of dexData.created.files.output)
 			{
 				bar?.incrementMax();
-				const fileTaskProps = {rel : path.relative(fileDirPath, file.absolute)};
+				const fileTaskProps = {rel : path.relative(fileDirPath, path.join(dexData.created.root, fileRel))};
 				if(forbidProgram)
 					fileTaskProps.forbidProgram = forbidProgram;
-				if(dexData.phase?.meta?.fileMeta?.[file.rel])
-					fileTaskProps.fileMeta = dexData.phase.meta.fileMeta[file.rel];
+				if(dexData.phase?.meta?.fileMeta?.[fileRel])
+					fileTaskProps.fileMeta = dexData.phase.meta.fileMeta[fileRel];
 				taskQueue.push(fileTaskProps);
 			}
 		}

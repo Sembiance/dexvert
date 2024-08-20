@@ -8,5 +8,5 @@ export class sar extends Format
 	mimeType   = "image/x-saracen-paint";
 	magic      = ["Saracen Paint Image"];
 	weakMagic  = true;
-	converters = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64"];
+	converters = ["nconvert", "recoil2png", `abydosconvert[format:${this.mimeType}]`, "view64[matchType:magic]"];
 }

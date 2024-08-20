@@ -139,7 +139,7 @@ export class FileSet
 	{
 		const o = {};
 		o.root = this.root;
-		o.files = Object.fromEntries(Object.entries(this.files).map(([k, v]) => ([k, v.map(dexFile => dexFile.serialize())])));
+		o.files = Object.fromEntries(Object.entries(this.files).map(([k, v]) => ([k, v.map(dexFile => dexFile.rel)])));
 		return o;
 	}
 

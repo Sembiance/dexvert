@@ -5,16 +5,13 @@
   Have it generate an HTML report that compares expected time to actual, # files vs actual each output files size vs actual etc
   Maybe divide the files into two sections, those with a high degree of difference vs little or none
   Also show which files are missing or new/unexpected
-
-* Dexdaemon shouldn't be getting status from every dexdrone every 3 seconds. Instead it should only get status when it's own
-  /status is called with an extra verbose:true flag is set, which itself is only done when actually viewing the 'item' page
-
-
-
+  
 * Some sort of bug in text identification. Run this over and over: ./testdexvert --format=text/microsoftMapData
   Sometimes it'll identify things as text/txt, other times as text/microsoftMapData
   Seemingly at random. Will need to produce a bunch of log files and really dig into it.
   Note that this happens with a lot of other text formats too
+
+* Get 'sandbox/app/imtools_v3.0.tar.gz' to compile
 
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
@@ -181,9 +178,6 @@
   If host is omitted or is localhost then open locally.
   If host is a remote host then use vncRemote command
 
-* Get someone to convert this really old UNIX code to compiled under modern linux (git cloned a copy into sandbox/app/): https://github.com/hkaiser/TRiAS/tree/master/Kartenverarbeitung/Imtools
-  Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
-
 * Would be nice to take this Java program and make a CLI conversion program from it's code (git cloned a copy into sandbox/app/): https://github.com/kreativekorp/powerpaint
   I submitted an issue on their GitHub asking if that would be possible, or at least some help in which classes/methods to use to make it happen
   Go through formats it supports (see programs_formats.txt) and try them out against dexvert test cases and consider adding to dexvert
@@ -226,6 +220,7 @@
 	  https://archive.org/details/GigaROM2.0.img
 	  https://archive.org/details/InfoMac5Disk1.img
 	  https://archive.org/details/InfoMac5Disk2.img
+	  http://dev.discmaster2.textfiles.com/view/5525/Apple%20Media%20Image%20Disc%20Vol.%205.smi.bin
 
 * Add RISC OS support, with one of these emulators:
 	https://www.marutan.net/rpcemu/index.php

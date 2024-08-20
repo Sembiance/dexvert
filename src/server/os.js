@@ -356,7 +356,7 @@ export class os extends Server
 			return new Response("", {status : 200});
 		});
 
-		this.webServer = webUtil.serve({hostname : OS_SERVER_HOST, port : OS_SERVER_PORT, xlog : this.xlog}, await webUtil.route(routes));
+		this.webServer = webUtil.serve({hostname : OS_SERVER_HOST, port : OS_SERVER_PORT}, await webUtil.route(routes), {xlog : this.xlog});
 
 		await Deno.mkdir(path.join(OS_INSTANCE_DIR_PATH), {recursive : true});
 

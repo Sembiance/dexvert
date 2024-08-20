@@ -632,7 +632,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		if(argv.liveErrors)
 			xlog.info`\n${failures.at(-1)}`;
 		if(!argv.record)
-			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
+			outputFiles.push(...dexData?.created?.files?.output || []);
 
 		handleComplete();
 	}
@@ -643,7 +643,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 			printUtil.stdoutWrite(c);
 
 		if(!argv.record)
-			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
+			outputFiles.push(...dexData?.created?.files?.output || []);
 		else
 			await fileUtil.unlink(path.dirname(tmpOutDirPath), {recursive : true});
 
@@ -658,7 +658,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		newSuccesses.push(`--format=${diskFormatid} --file='${path.relative(diskFormatid, sampleSubFilePath)}'`);
 
 		if(!argv.record)
-			outputFiles.push(...dexData?.created?.files?.output?.map(v => v.absolute) || []);
+			outputFiles.push(...dexData?.created?.files?.output || []);
 
 		handleComplete();
 	}
@@ -681,11 +681,20 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	result.processed = dexData.processed;
 	if(dexData?.created?.files?.output?.length)
 	{
-		const misingFiles = (await dexData.created.files.output.parallelMap(async ({absolute}) => ((await fileUtil.exists(absolute)) ? false : absolute))).filter(v => !!v);
+		dexData.created.files.output.mapInPlace(v => path.join(dexData.created.root, v));
+		const misingFiles = (await dexData.created.files.output.parallelMap(async absolute => ((await fileUtil.exists(absolute)) ? false : absolute))).filter(v => !!v);
 		if(misingFiles.length>0)
 			return await fail(`Some reported output files are missing from disk: ${misingFiles.join(" ")}`);
 
-		result.files = Object.fromEntries(await dexData.created.files.output.parallelMap(async ({rel, size, absolute, ts}) => [rel, {size, ts, sum : await hashUtil.hashFile("SHA-1", absolute)}]));
+		result.files = Object.fromEntries(await dexData.created.files.output.parallelMap(async absolute =>
+		{
+			const r = {};
+			const statData = await Deno.lstat(absolute);
+			r.size = statData.size;
+			r.ts = statData.mtime.getTime();
+			r.sum = await hashUtil.hashFile("SHA-1", absolute);
+			return [path.relative(dexData.created.root, absolute), r];
+		}));
 	}
 	result.meta = dexData?.phase?.meta || {};
 	result.idMeta = dexData.idMeta || {};

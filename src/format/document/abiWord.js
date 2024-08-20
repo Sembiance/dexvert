@@ -6,6 +6,6 @@ export class abiWord extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/AbiWord";
 	ext            = [".abw", ".zabw", ".doc"];
 	forbidExtMatch = true;
-	magic          = ["AbiWord document"];
+	magic          = ["AbiWord document", /^fmt\/(890|891)( |$)/];
 	converters     = ["soffice"];
 }

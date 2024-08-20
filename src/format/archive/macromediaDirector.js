@@ -11,7 +11,7 @@ export class macromediaDirector extends Format
 		/^fmt\/(317|486)( |$)/, /^x-fmt\/341( |$)/
 	];
 	weakMagic      = ["Generic RIFX container"];
-	idMeta         = ({macFileType, macFileCreator}) => ([3, 4, 5, 6, 7].some(num => ([`M*9${num}`, `M!9${num}`, `MV9${num}`].includes(macFileType) && macFileCreator===`MD9${num}`)) ||
+	idMeta         = ({macFileType, macFileCreator}) => ([3, 4, 5, 6, 7].some(num => ([`M*9${num}`, `M!9${num}`, `MV9${num}`, `MC9${num}`].includes(macFileType) && macFileCreator===`MD9${num}`)) ||
 		(macFileType==="FGDM" && macFileCreator==="MD00") ||
 		(macFileType==="M!85" && macFileCreator==="MD03")
 	);

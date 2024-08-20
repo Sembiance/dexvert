@@ -6,6 +6,6 @@ export class mrSIDImage extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/MrSID";
 	ext            = [".sid"];
 	forbidExtMatch = true;
-	magic          = ["LizardTech MrSID photo"];
+	magic          = ["LizardTech MrSID photo", /^fmt\/392( |$)/];
 	converters     = ["mrsiddecode"];
 }

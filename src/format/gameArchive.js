@@ -17,6 +17,7 @@ export const gameextractor =
 		darkReignGameArchive               : {name : "Dark Reign Game Archive", ext : [".ftg"], magic : ["Dark Reign game data archive"], weakMagic : true, website : "http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)"},
 		dynamixGameArchive                 : {name : "Dynamix Game Archive", ext : [".dyn", ".rbx"], magic : ["Dynamix game data archive", "Dynamix Volume File game data archive"]},
 		earthAndBeyondGameArchive          : {name : "Earth and Beyond Game Archive", ext : [".mix"], magic : ["Earth And Beyond game data archive"]},
+		etherlords2GameDataArchive         : {name : "Etherlords 2 game data archive", ext : [".res"], magic : ["Etherlords 2 game data archive"]},
 		electronicArtsLibGameArchive       : {name : "Electronic Arts LIB Game Archive", ext : [".lib"], magic : ["Electronic Arts LIB container"]},
 		ensembleStudiosGameArchive         : {name : "Ensemble Studios Game Archive", ext : [".drs"], magic : ["Ensemble Studios Data Resource"]},
 		finalFantasyGameArchive            : {name : "Final Fantasy Game Archive", ext : [".lgp"], magic : ["Final Fantasy Game Archive"]},

@@ -6,7 +6,7 @@ export class fli extends Format
 	website      = "http://fileformats.archiveteam.org/wiki/FLIC";
 	ext          = [".fli"];
 	magic        = ["FLIC FLI video", "FLI animation", "AutoDesk FLIC Animation", "Autodesk Animator", /^x-fmt\/154( |$)/, /^fmt\/(299)( |$)/];
-	idMeta       = ({macFileType}) => macFileType==="FLI ";
+	idMeta       = ({macFileType}) => ["pFLI", "FLI "].includes(macFileType);
 	metaProvider = ["mplayer"];
 	converters   = ["ffmpeg[format:flic]", "xanim", "deark[module:fli] -> *ffmpeg[fps:15]"];
 }

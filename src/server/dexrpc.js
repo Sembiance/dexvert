@@ -97,7 +97,7 @@ export class dexrpc extends Server
 			return new Response("true");
 		});
 
-		this.webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT, xlog : this.xlog}, await webUtil.route(routes));
+		this.webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT}, await webUtil.route(routes), {xlog : this.xlog});
 
 		this.running = true;
 	}

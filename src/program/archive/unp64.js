@@ -11,6 +11,6 @@ export class unp64 extends Program
 	mirrorInToCWD  = true;
 	checkForDups   = true;
 	unsafe         = true;
-	forbidChildRun = true;
+	//forbidChildRun = true;	// infinite loop with: archive/packedC64PRG/happy birthday		(worked around it in that format by excluding a packer format)
 	renameOut      = true;
 }

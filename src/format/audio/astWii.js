@@ -7,5 +7,5 @@ export class astWii extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_AST";
 	ext        = [".ast"];
 	magic      = ["Wii sound data", "FIFA 2004 audio file"];
-	converters = ["zxtune123", "vgmstream"];
+	converters = ["zxtune123[matchType:magic]", "vgmstream"];
 }

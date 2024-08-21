@@ -11,7 +11,8 @@ export class cab extends Format
 		/^Microsoft Cabinet [Aa]rchive/, "CAB Archiv gefunden", "Archive: Microsoft Cabinet File", "Self-extracting CAB", "Win32 MS Cabinet Self-Extractor",  /^CAB$/, /^fmt\/1839( |$)/, /^x-fmt\/(216|414)( |$)/,
 		
 		// app specific cabs
-		"Microsoft Update - Self Extracting Cabinet", "Installer: PackageForTheWeb", "Installer: Wise Installer[CAB]", "Microsoft Windows CE installation Cabinet Archive", "Diagnostic Cabinet", "Windows Installer Merge Module (CAB)"
+		"Microsoft Update - Self Extracting Cabinet", "Installer: PackageForTheWeb", "Installer: Wise Installer[CAB]", "Microsoft Windows CE installation Cabinet Archive", "Diagnostic Cabinet", "Windows Installer Merge Module (CAB)",
+		"Skin / Theme for Pocket PC PDAs"
 	];
 	auxFiles = (input, otherFiles) =>
 	{

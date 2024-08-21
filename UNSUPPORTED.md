@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,779)
+# Unsupported File Formats (1,789)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (150)
+## Archive (154)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -53,6 +53,7 @@ Family/Format | Name | Extensions | Notes
 [archive/cryptexeProtected](https://discmaster.textfiles.com/search?formatid=cryptexeProtected) | CRYPTEXE encrypted | .exe | 
 [archive/datacompCompressedArchive](https://discmaster.textfiles.com/search?formatid=datacompCompressedArchive) | DATACOMP compressed archive | .emd | 
 [archive/debianFloppySplit](https://discmaster.textfiles.com/search?formatid=debianFloppySplit) | Debian floppy split | .bin | 
+[archive/distributionPackageArchive](https://discmaster.textfiles.com/search?formatid=distributionPackageArchive) | Distribution Package archive | .pac | 
 [archive/djpPacked](https://discmaster.textfiles.com/search?formatid=djpPacked) | DJP Packed | .exe | 
 [archive/dosEmulatorImage](https://discmaster.textfiles.com/search?formatid=dosEmulatorImage) | DOS Emulator image | .dist | 
 [archive/ediSplitFileArchive](https://discmaster.textfiles.com/search?formatid=ediSplitFileArchive) | EDI Split File Archive |  | 
@@ -98,6 +99,7 @@ Family/Format | Name | Extensions | Notes
 [archive/newtonPackage](https://discmaster.textfiles.com/search?formatid=newtonPackage) | Newton Package | .pkg | 
 [archive/nortonBackupFile](https://discmaster.textfiles.com/search?formatid=nortonBackupFile) | Norton Backup file | .001 | 
 [archive/nortonUtilitiesImageFATBackup](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesImageFATBackup) | Norton Utilities Image FAT backup | .dat | 
+[archive/nsPacKPacked](https://discmaster.textfiles.com/search?formatid=nsPacKPacked) | NsPacK Packed |  | 
 [archive/ntShellProtected](https://discmaster.textfiles.com/search?formatid=ntShellProtected) | NTShell protected | .exe | 
 [archive/omnisStudio](https://discmaster.textfiles.com/search?formatid=omnisStudio) | [Omnis Studio Application](https://en.wikipedia.org/wiki/Omnis_Studio) | .dap | [1 sample file](https://sembiance.com/fileFormatSamples/archive/omnisStudio/)
 [archive/oricDisk](https://discmaster.textfiles.com/search?formatid=oricDisk) | [ORIC Disk Image](http://fileformats.archiveteam.org/wiki/DSK_(Oric)) | .dsk | [6 sample files](https://sembiance.com/fileFormatSamples/archive/oricDisk/) - The sandbox/app/oric-dsk-manager Java program can extract these files, but I couldn't get it to run under linux, so meh.
@@ -115,6 +117,8 @@ Family/Format | Name | Extensions | Notes
 [archive/pexPacked](https://discmaster.textfiles.com/search?formatid=pexPacked) | PeX Packed | .exe | 
 [archive/pgnPackArchive](https://discmaster.textfiles.com/search?formatid=pgnPackArchive) | [PGNPack Archive](http://fileformats.archiveteam.org/wiki/PGNPack) | .ppk | 
 [archive/pklite32Packed](https://discmaster.textfiles.com/search?formatid=pklite32Packed) | PKLITE32 Packed | .exe | 
+[archive/pocketExcelSheet](https://discmaster.textfiles.com/search?formatid=pocketExcelSheet) | Pocket Excel sheet |  | 
+[archive/pocketWordDocument](https://discmaster.textfiles.com/search?formatid=pocketWordDocument) | Pocket Word document | .058 | 
 [archive/powerBatchPacked](https://discmaster.textfiles.com/search?formatid=powerBatchPacked) | PowerBatch Packed | .exe | 
 [archive/powerCDMultimediaFormat](https://discmaster.textfiles.com/search?formatid=powerCDMultimediaFormat) | PowerCD Multimedia format | .zci | 
 [archive/printShopDeluxeGraphicsLibrary](https://discmaster.textfiles.com/search?formatid=printShopDeluxeGraphicsLibrary) | Print Shop Deluxe Graphics Library | .psg | [2 sample files](https://sembiance.com/fileFormatSamples/archive/printShopDeluxeGraphicsLibrary/) - No known extractor program.
@@ -716,7 +720,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,016)
+## Other (1,022)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -841,6 +845,7 @@ Family/Format | Name | Extensions | Notes
 [other/autoDesk3DStudioMaterialLib](https://discmaster.textfiles.com/search?formatid=autoDesk3DStudioMaterialLib) | AutoDesk 3D-Studio Material Library | .mli | 
 [other/autodeskExternalMessage](https://discmaster.textfiles.com/search?formatid=autodeskExternalMessage) | Autodesk External Message | .xmx | 
 [other/avsVideoEditorProject](https://discmaster.textfiles.com/search?formatid=avsVideoEditorProject) | AVS Video Editor Project | .vep | 
+[other/axialisProScreensaverProducerProject](https://discmaster.textfiles.com/search?formatid=axialisProScreensaverProducerProject) | Axialis Professional Screensaver Producer project | .ssp | 
 [other/babbleData](https://discmaster.textfiles.com/search?formatid=babbleData) | Babble! Data | .bab | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
 [other/beOSCodeWarriorProject](https://discmaster.textfiles.com/search?formatid=beOSCodeWarriorProject) | BeOS CodeWarrior Project | .proj | 
@@ -1140,6 +1145,7 @@ Family/Format | Name | Extensions | Notes
 [other/idaSignatures](https://discmaster.textfiles.com/search?formatid=idaSignatures) | IDA Signatures | .sig | 
 [other/idMASConfiguration](https://discmaster.textfiles.com/search?formatid=idMASConfiguration) | idMAS Configuration | .cfg | 
 [other/iffBinaryPatch](https://discmaster.textfiles.com/search?formatid=iffBinaryPatch) | IFF Binary Patch | .pch .patch | 
+[other/iliumEWalletData](https://discmaster.textfiles.com/search?formatid=iliumEWalletData) | Ilium eWallet data |  | 
 [other/imagineStagingData](https://discmaster.textfiles.com/search?formatid=imagineStagingData) | Imagine Staging Data | .istg | 
 [other/impulseTrackerSoundDriver](https://discmaster.textfiles.com/search?formatid=impulseTrackerSoundDriver) | Impulse Tracker Sound Driver | .drv | 
 [other/indexApolloDatabaseEngine](https://discmaster.textfiles.com/search?formatid=indexApolloDatabaseEngine) | Index Apollo Database Engine | .nsx | 
@@ -1204,6 +1210,7 @@ Family/Format | Name | Extensions | Notes
 [other/linuxi386ObjectFile](https://discmaster.textfiles.com/search?formatid=linuxi386ObjectFile) | Linux i386 Object File | .o | 
 [other/linuxKernel](https://discmaster.textfiles.com/search?formatid=linuxKernel) | Linux Kernel |  | 
 [other/linuxSwapFile](https://discmaster.textfiles.com/search?formatid=linuxSwapFile) | Linux Swap File |  | 
+[other/listProData](https://discmaster.textfiles.com/search?formatid=listProData) | ListPro data |  | 
 [other/lithTechResourceData](https://discmaster.textfiles.com/search?formatid=lithTechResourceData) | LithTech Resource data | .rez | 
 [other/logicSimCircuit](https://discmaster.textfiles.com/search?formatid=logicSimCircuit) | LogicSim Circuit |  | 
 [other/logitechModula2LoadableSymbols](https://discmaster.textfiles.com/search?formatid=logitechModula2LoadableSymbols) | Logitech Modula-2 Loadable Symbols | .sym | 
@@ -1410,6 +1417,7 @@ Family/Format | Name | Extensions | Notes
 [other/plbmGamesHighScores](https://discmaster.textfiles.com/search?formatid=plbmGamesHighScores) | PLBM Games high scores | .dat | 
 [other/plotter3DFunction](https://discmaster.textfiles.com/search?formatid=plotter3DFunction) | Plotter3D Function | .func | 
 [other/plotter3DLight](https://discmaster.textfiles.com/search?formatid=plotter3DLight) | Plotter3D Light | .light | 
+[other/pocketAccessDatabase](https://discmaster.textfiles.com/search?formatid=pocketAccessDatabase) | Pocket Access database |  | 
 [other/polyfilmPrefs](https://discmaster.textfiles.com/search?formatid=polyfilmPrefs) | Polyfilm Preferences | .prf | 
 [other/ponyProgDeviceFile](https://discmaster.textfiles.com/search?formatid=ponyProgDeviceFile) | PonyProg device file |  | 
 [other/portsOfCallSaveGame](https://discmaster.textfiles.com/search?formatid=portsOfCallSaveGame) | Ports of Call Save Game | .trp | 
@@ -1452,6 +1460,7 @@ Family/Format | Name | Extensions | Notes
 [other/quickTimeInstallerCache](https://discmaster.textfiles.com/search?formatid=quickTimeInstallerCache) | QuickTime Installer Cache | .qdat .qda | 
 [other/radixGameData](https://discmaster.textfiles.com/search?formatid=radixGameData) | Radix game data | .dat | 
 [other/radixLevelGameDesign](https://discmaster.textfiles.com/search?formatid=radixLevelGameDesign) | Radix Level Game Design | .lgd | 
+[other/raimaDataManagerLock](https://discmaster.textfiles.com/search?formatid=raimaDataManagerLock) | Raima Data Manager lock | .taf | 
 [other/rapidFileData](https://discmaster.textfiles.com/search?formatid=rapidFileData) | RapidFile Data | .rpd | 
 [other/raptorGLBEncryptedContainer](https://discmaster.textfiles.com/search?formatid=raptorGLBEncryptedContainer) | Raptor GLB Encrypted Container | .glb | 
 [other/rarConfiguration](https://discmaster.textfiles.com/search?formatid=rarConfiguration) | RAR Configuration | .cfg | 
@@ -1466,6 +1475,7 @@ Family/Format | Name | Extensions | Notes
 [other/reflex2Report](https://discmaster.textfiles.com/search?formatid=reflex2Report) | Reflex 2 Report | .r2r | 
 [other/relocatableObjectModule](https://discmaster.textfiles.com/search?formatid=relocatableObjectModule) | Relocatable Object Module | .obj .o | 
 [other/rend386VideoDriver](https://discmaster.textfiles.com/search?formatid=rend386VideoDriver) | Rend386 video driver | .rvd | 
+[other/repliGoVirtualPrint](https://discmaster.textfiles.com/search?formatid=repliGoVirtualPrint) | RepliGo virtual print | .rgo | 
 [other/reportSmithReport](https://discmaster.textfiles.com/search?formatid=reportSmithReport) | ReportSmith report | .rpt | 
 [other/rfFlowDiagram](https://discmaster.textfiles.com/search?formatid=rfFlowDiagram) | RFFlow Diagram | .flo | 
 [other/riffMSXF](https://discmaster.textfiles.com/search?formatid=riffMSXF) | RIFF MSFX File | .sfx | Just contains meta info about a given soundeffect usually distributed alongside it as a .wav

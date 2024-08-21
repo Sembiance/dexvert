@@ -93,15 +93,15 @@ if(argv.direct)
 xlog.trace`Making RPC call to dexserver...`;
 
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
-const fetchResult = await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)});
-if(fetchResult?.status!==200)
-	await handleExit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running? Status: ${fetchResult.status}`));
-const {r, logLines} = await xu.tryFallbackAsync(async () => (await fetchResult?.json()), {});
-if(!r && !logLines)
-	await handleExit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
+if(err)
+	Deno.exit(console.error(`${log.join("\n")}\n${err}`.trim()));
 
-if(!argv.json && logLines.length)
-	console.log(`${logLines.join("\n")}\n`);
+if(!r && !log)
+	Deno.exit(console.error(`Failed to retrieve dexvert data from dexrpc server. Is it running?`));
+
+if(!argv.json && log.length)
+	console.log(`${log.join("\n")}\n`);
 
 if(!r)
 	await handleExit(xlog.warn`No processed result.`);
@@ -117,8 +117,8 @@ if(xlog.atLeast("fatal"))
 	if(argv.logFile)
 	{
 		xlog.info`${r.pretty}`;
-		if(logLines.length)
-			xlog.info`${logLines.join("\n")}`;
+		if(log.length)
+			xlog.info`${log.join("\n")}`;
 	}
 	else if(!argv.json)
 	{

@@ -478,7 +478,7 @@ export async function identify(inputFileRaw, {xlog : _xlog, logLevel="info"}={})
 export async function rpcidentify(inputFile, {logLevel="error"}={})
 {
 	const rpcData = {op : "dexid", inputFilePath : inputFile.absolute, logLevel};
-	const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+	const {r} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
 	return r;
 }
 

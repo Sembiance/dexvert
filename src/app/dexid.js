@@ -54,14 +54,17 @@ for(const inputFilePath of inputFilePaths)
 	else
 	{
 		const rpcData = {op : "dexid", inputFilePath : path.resolve(inputFilePath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta)};
-		const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
-		if(!r && !logLines)
-			Deno.exit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
+		const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : rpcData, asJSON : true});
+		if(err)
+			Deno.exit(console.error(`${log.join("\n")}\n${err}`.trim()));
+
+		if(!r && !log)
+			Deno.exit(console.error(`Failed to retrieve dexid data from dexrpc server. Is it running?`));
 
 		({ids : rows, idMeta} = r);
 
-		if(logLines.length)
-			console.log(logLines.join("\n"));
+		if(log.length)
+			console.log(log.join("\n"));
 	}
 
 	if(argv.jsonFile)

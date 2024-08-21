@@ -63,7 +63,7 @@ export class Detection
 
 	pretty(prefix="")
 	{
-		return `${prefix}${fg.orange(this.from.padStart(8, " "))} ${fg.white(this.confidence.toString().padStart(3, " "))}% ${fg.magenta(this.value)}${this.weak ? fg.deepSkyblue("weak") : ""}`;
+		return `${prefix}${fg.orange(this.from.padStart(8, " "))} ${fg.white(this.confidence.toString().padStart(3, " "))}% ${fg.magenta(this.value)}${this.weak ? ` ${fg.deepSkyblue("weak")}` : ""}`;
 	}
 }
 

@@ -7,6 +7,7 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
 import {mkWeblink} from "./testUtil.js";
 import RandExp from "npm:randexp@0.5.3";
 
+Deno.exit(console.error(`This hasn't been updated for the new AgentPool based server. Should be pretty simple to update. The 'timedout' property is no longer returned`));
 const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({

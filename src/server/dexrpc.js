@@ -1,10 +1,10 @@
 import {xu} from "xu";
 import {path} from "std";
-import {XWorkerPool} from "XWorkerPool";
 import {init as initPrograms, programDirPath} from "../program/programs.js";
 import {init as initFormats, formatDirPath} from "../format/formats.js";
 import {fileUtil, webUtil, cmdUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {DEXRPC_HOST, DEXRPC_PORT, DEV_MACHINE} from "../dexUtil.js";
+import {AgentPool} from "AgentPool";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({
@@ -19,11 +19,11 @@ const argv = cmdUtil.cmdInit({
 	}});
 
 const xlog = new XLog(argv.logLevel);
-const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.65);
-const DEX_WORKER_ID_COUNT = Math.floor(navigator.hardwareConcurrency*0.20);
+const DEXVERT_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.65);
+const DEXID_AGENT_COUNT = Math.floor(navigator.hardwareConcurrency*0.20);
 const LOCKS = new Set();
-const RPC_DATA = {};
-let RPCID_COUNTER = 0;
+const RPC_RESPONSES = new Map();
+let RPCID_COUNTER = 1;
 
 xlog.info`Starting dexrpc server...`;
 
@@ -32,27 +32,28 @@ xlog.info`Priming deno cache for programs and formats...`;
 await initPrograms();
 await initFormats();
 
-const workercb = async (workerid, {rpcid, logLines, err, r}={}) =>	// eslint-disable-line require-await
+const onSuccess = ({changeResult, err, r}, {log, msg}) =>
 {
-	const rpcData = RPC_DATA[rpcid];
+	if(changeResult)
+		return console.log(changeResult);
 
-	if(err)
-		xlog.error`worker ${workerid}: error: ${err} for rpcid ${rpcid}`;
+	if(!msg?.rpcid)
+		return xlog.error`rpcid not set for agent response: ${{msg, err, r, log}}`;
 
-	if(!rpcData?.reply)
-		return xlog.error`worker ${workerid}: no rpcData.reply for rpcid ${rpcid} and r ${r} and logLines ${logLines}`;
-
-	rpcData.reply(new Response(err ? `Error: ${err}` : JSON.stringify({logLines, r}), {status : err ? 500 : 200}));
+	RPC_RESPONSES.set(msg.rpcid, err ? {log, err} : {log, r});
 };
 
-/*const crashcb = async (workerid, status, r, logLines) =>
+const onFail = ({reason, error}, {log, msg}) =>
 {
-	await workercb(workerid, {err : `worker ${workerid} crashed with status code ${status?.code} and logLines: ${logLines.join("\n")}`, ...r});
-};*/
+	xlog.error`agent failed: ${reason}: ${error} ${log} ${msg}`;
+	return RPC_RESPONSES.set(msg.rpcid, {err : `${reason}: ${error}`, log});
+};
 
-xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
-const dexPool = new XWorkerPool({workercb, xlog, crashRecover : true});
-const idPool = new XWorkerPool({workercb, xlog, crashRecover : true});
+const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
+const idPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
+
+await dexPool.init();
+await idPool.init();
 
 const runEnv = {};
 for(const [key, value] of Object.entries(Deno.env.toObject()))
@@ -61,44 +62,48 @@ for(const [key, value] of Object.entries(Deno.env.toObject()))
 		runEnv[key] = value;
 }
 
-await Promise.all([
-	dexPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv}),
-	idPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_ID_COUNT, runEnv})]);
+xlog.info`Starting ${DEXVERT_AGENT_COUNT} dexvert agents...`;
+await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv, liveOutput : xlog.atLeast("trace")});
 
-xlog.info`${DEX_WORKER_COUNT} dex workers and ${DEX_WORKER_ID_COUNT} id workers ready!`;
+xlog.info`Starting ${DEXID_AGENT_COUNT} dexid agents...`;
+await idPool.start({qty : DEXID_AGENT_COUNT, runEnv, liveOutput : xlog.atLeast("trace")});
 
-xlog.info`Starting format & program monitors...`;
-const monitorsReady = [];
-const changeHandler = async (op, change) =>
+const monitors = [];
+if(DEV_MACHINE)
 {
-	if(change.type==="ready")
-		return monitorsReady.push(op);
+	xlog.info`Starting format & program monitors...`;
+	const monitorsReady = [];
+	const changeHandler = async (op, change) =>
+	{
+		if(change.type==="ready")
+			return monitorsReady.push(op);
 
-	await [idPool, dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
-};
+		await [idPool, dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
+	};
 
-const monitors = [
-	await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)),
-	await fileUtil.monitor(programDirPath, async change => await changeHandler("programChange", change))];
-
-await xu.waitUntil(() => monitorsReady.length===monitors.length);
+	monitors.push(await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)));
+	monitors.push(await fileUtil.monitor(programDirPath, async change => await changeHandler("programChange", change)));
+	await xu.waitUntil(() => monitorsReady.length===monitors.length);
+}
 
 xlog.info`Starting web RPC...`;
 
 const routes = new Map();
 
-routes.set("/workerCount", () => new Response(DEX_WORKER_COUNT.toString()));
+routes.set("/agentCount", () => new Response(DEXVERT_AGENT_COUNT.toString()));
 
 routes.set("/dex", async request =>
 {
 	const workerData = await request.json();
 	workerData.rpcid = RPCID_COUNTER++;
+	if(RPCID_COUNTER>10_000_000)
+		RPCID_COUNTER = 1;
 
-	let response = null;
-	RPC_DATA[workerData.rpcid] = {reply : v => { response = v; }, workerData};
 	(workerData.op==="dexid" ? idPool : dexPool).process([workerData]);
-	await xu.waitUntil(() => !!response);
-	return response;
+	await xu.waitUntil(() => RPC_RESPONSES.has(workerData.rpcid));
+	const response = RPC_RESPONSES.get(workerData.rpcid);
+	RPC_RESPONSES.delete(workerData.rpcid);
+	return new Response(JSON.stringify(response));
 });
 
 routes.set("/lock", async request =>

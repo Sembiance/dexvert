@@ -898,9 +898,12 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	if(argv.serial)
 		xlog.info`Attempting file: ${sampleSubFilePath}`;
 	xlog.debug`Running dex with options: ${o}`;
-	const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
-	if(logLines?.length)
-		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), logLines.join("\n"));
+
+	const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : o, asJSON : true});
+	if(err)
+		console.error(`${log.join("\n")}\n${err}`.trim());
+	if(log?.length)
+		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), log.join("\n"));
 
 	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});
 }, argv.serial ? 1 : Math.min(sampleFilePaths.length, NUM_WORKERS));

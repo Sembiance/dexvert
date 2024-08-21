@@ -185,7 +185,7 @@ else
 	workDirPath = fullOutputPath;
 }
 
-const WORKER_COUNT = +(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/workerCount`));
+const AGENT_COUNT = +(await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/agentCount`));
 
 const ALL_MAGICS = new Set();
 const EXISTING_SAMPLE_FILES = {};
@@ -338,7 +338,7 @@ async function processNextQueue()
 			throw new Error(`No data returned from dexrpc for ${task.relFilePath}, possible timeout, possible failure`);
 
 		//xlog.debug`${taskLogPrefix} dexvert finished with ${dexText.length.toLocaleString()} bytes (${dexText.length.bytesToSize()}). Parsing...`;
-		const {r, logLines} = xu.parseJSON(dexText, {});
+		const {r, log} = xu.parseJSON(dexText, {});
 		if(!r?.json)
 			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${dexText}`);
 
@@ -346,7 +346,7 @@ async function processNextQueue()
 
 		const meta = {dexData, dexDuration : performance.now()-task.startedAt, task, originalFile : originalFiles.includes(task.relFilePath)};
 		await fileUtil.writeTextFile(task.metaFilePath, JSON.stringify(meta));
-		await fileUtil.writeTextFile(task.logFilePath, `${r.pretty}\n${(logLines || []).join("\n")}`);
+		await fileUtil.writeTextFile(task.logFilePath, `${r.pretty}\n${(log || []).join("\n")}`);
 
 		const dexid = (dexData.processed && dexData.phase?.id) ? dexData.phase.id : ((dexData.ids || []).find(({from, unsupported, matchType}) => from==="dexvert" && unsupported && ["magic", "filename"].includes(matchType)) || null);
 		if(dexid)
@@ -448,7 +448,7 @@ await xu.waitUntil(async () =>	// eslint-disable-line require-await
 	if(taskActive.size===0 && taskQueue.length===0)
 		return true;
 
-	while(taskQueue.length>0 && taskActive.size<WORKER_COUNT)
+	while(taskQueue.length>0 && taskActive.size<AGENT_COUNT)
 		processNextQueue();	// eslint-disable-line no-floating-promise/no-floating-promise
 
 	const slowestTask = Array.from(taskActive).sortMulti([v => v.startedAt])[0];

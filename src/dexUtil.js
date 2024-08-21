@@ -6,6 +6,7 @@ import {DexFile} from "./DexFile.js";
 
 export const DEXRPC_HOST = "127.0.0.1";
 export const DEXRPC_PORT = 17750;
+export const DEV_MACHINE = ["crystalsummit", "ridgeport"].includes(Deno.hostname());
 
 // Based on file extension or an r.flag.convertAsExt hint, will just try to convert the file to a PNG
 // This introduces a slight risk of generating a garbage PNG file, but the MASSIVE speed gains are worth it

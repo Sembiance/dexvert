@@ -1,7 +1,7 @@
 import {xu} from "xu";
 import {path} from "std";
 import {cmdUtil, fileUtil, hashUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {XLog} from "xlog";
 
 const xlog = new XLog();

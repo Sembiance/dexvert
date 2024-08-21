@@ -3,7 +3,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, printUtil, runUtil, hashUtil, diffUtil} from "xutil";
 import {path, dateFormat, dateParse, base64Encode} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
 import {ANSIToHTML} from "thirdParty";
 import {mkWeblink} from "./testUtil.js";
 

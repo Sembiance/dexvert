@@ -1,33 +1,46 @@
 import {xu} from "xu";
-import {Server} from "../Server.js";
-import {runUtil} from "xutil";
+import {runUtil, cmdUtil, fileUtil} from "xutil";
+import {XLog} from "xlog";
 
-export class siegfried extends Server
+const argv = cmdUtil.cmdInit({
+	cmdid   : "dexserver-siegfried",
+	version : "1.0.0",
+	desc    : "Runs and monitors the siegfried daemon which is used to help identify files",
+	opts    :
+	{
+		startedFilePath : {desc : "Path to write a file to when the server has started", hasValue : true, required : true},
+		stopFilePath    : {desc : "Path to watch for a file to be created to stop the server", hasValue : true, required : true},
+		logLevel        : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
+	}});
+
+const xlog = new XLog(argv.logLevel);
+
+let stopping = false;
+
+let p = null;
+let start = null;
+
+const exitHandler = async ({success, code, signal}) =>
 {
-	async start()
-	{
-		this.xlog.info`Starting siegfried server...`;
-		const {p} = await runUtil.run("sf", ["-home", "/opt/siegfried-bin/siegfried/", "-nr", "-serve", "127.0.0.1:15138"], {detached : true, exitcb : async o => await this.exitHandler(o), stdoutcb : line => this.xlog.info`${line}`, stderrcb : line => this.xlog.warn`${line}`});
-		this.p = p;
-	}
+	if(stopping)
+		return;
 
-	async exitHandler({success, code, signal})
-	{
-		if(this.stopping)
-			return;
+	xlog.error`Siegfried server exited unexpectedly (success: ${success}) with code: ${code}, signal: ${signal}`;
+	await start();
+};
 
-		this.xlog.error`Siegfried server exited unexpectedly (success: ${success}) with code: ${code}, signal: ${signal}`;
-		await this.start();
-	}
+start = async () =>
+{
+	xlog.info`Starting siegfried server...`;
+	({p} = await runUtil.run("sf", ["-home", "/opt/siegfried-bin/siegfried/", "-nr", "-serve", "127.0.0.1:15138"], {detached : true, exitcb : async o => await exitHandler(o), stdoutcb : line => xlog.info`${line}`, stderrcb : line => xlog.warn`${line}`}));
+};
 
-	async status()	// eslint-disable-line require-await
-	{
-		return !!this.p;
-	}
+await start();
+await fileUtil.writeTextFile(argv.startedFilePath, "");
 
-	async stop()
-	{
-		this.stopping = true;
-		await runUtil.kill(this.p);
-	}
-}
+// wait until we are told to stop
+await xu.waitUntil(async () => await fileUtil.exists(argv.stopFilePath));
+xlog.info`Stopping...`;
+stopping = true;
+await runUtil.kill(p);
+await fileUtil.unlink(argv.stopFilePath);

@@ -23,8 +23,6 @@ const DEXVERT_RAM_DIR = "/mnt/ram/dexvert";
 const DEXSERVER_PID_FILE_PATH = path.join(DEXVERT_RAM_DIR, "dexserver.pid");
 const SERVER_ORDER = ["dexrpc", "siegfried", "os", "wine", "classify"];
 
-const servers = Object.fromEntries(await SERVER_ORDER.parallelMap(async serverid => [serverid, (await import(path.join(import.meta.dirname, `../server/${serverid}.js`)))[serverid].create(xlog)]));
-
 if(await fileUtil.exists(DEXSERVER_PID_FILE_PATH))
 {
 	xlog.info`Killing previous dexserver instance...`;
@@ -43,20 +41,23 @@ await Deno.mkdir(DEXVERT_RAM_DIR, {recursive : true});
 await fileUtil.unlink("/mnt/dexvert/test", {recursive : true});
 await Deno.mkdir("/mnt/dexvert/test", {recursive : true});
 
+const serverStatusDirPath = await fileUtil.genTempPath(undefined, "dexserver-serverStatus");
+await Deno.mkdir(serverStatusDirPath);
+
+const serverProcs = {};
 async function stopDexserver()
 {
-	xlog.info`Stopping ${Object.keys(servers).length} servers...`;
-	for(const serverid of SERVER_ORDER.reverse())
+	xlog.info`Stopping ${SERVER_ORDER.length} servers...`;
+	for(const serverid of Array.from(SERVER_ORDER).reverse())
 	{
 		xlog.info`Stopping server ${fg.peach(serverid)}...`;
-		try
-		{
-			await servers[serverid].stop();
-		}
-		catch {}
-		xlog.info`Server ${fg.peach(serverid)} stopped.`;
+		const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
+		await fileUtil.writeTextFile(stopFilePath, "");
+		await xu.waitUntil(async () => !(await fileUtil.exists(stopFilePath)), {timeout : xu.SECOND*20});
+		await runUtil.kill(serverProcs[serverid]);
 	}
 
+	await fileUtil.unlink(serverStatusDirPath, {recursive : true});
 	await fileUtil.unlink(DEXSERVER_PID_FILE_PATH);
 	xlog.info`Exiting...`;
 	Deno.exit(0);
@@ -71,20 +72,23 @@ xu.waitUntil(async () =>
 	await stopDexserver();
 }, {interval : xu.SECOND*2});
 
-async function startServer(serverid)
+// We can't do them all at once because os/86Box is sensitive to CPU fluctuations and they won't boot properly if too much other CPU stuff is going on
+xlog.info`Starting ${SERVER_ORDER.length} servers...`;
+for(const serverid of SERVER_ORDER)
 {
-	const server = servers[serverid];
+	const xlogServer = xlog.clone();
+	xlogServer.mapper = v => `${xu.colon(fg.peach(serverid))}${v}`;
+
+	const startedFilePath = path.join(serverStatusDirPath, `started-${serverid}`);
+	const stopFilePath = path.join(serverStatusDirPath, `stop-${serverid}`);
+
 	xlog.info`Starting server ${fg.peach(serverid)}...`;
-	await server.start();
+	const {p} = await runUtil.run("deno", runUtil.denoArgs(path.join(import.meta.dirname, "..", "server", `${serverid}.js`), `--logLevel=${argv.logLevel}`, `--stopFilePath=${stopFilePath}`, `--startedFilePath=${startedFilePath}`), runUtil.denoRunOpts({detached : true, xlog : xlogServer}));
+	serverProcs[serverid] = p;
 	xlog.info`Server ${fg.peach(serverid)} started, waiting for fully loaded...`;
-	await xu.waitUntil(async () => (await server.status())===true);
+	await xu.waitUntil(async () => (await fileUtil.exists(startedFilePath)));
 	xlog.info`Server ${fg.peach(serverid)} fully loaded!`;
 }
-
-// We can't do them all at once because os/86Box is sensitive to CPU fluctuations and they won't boot properly if too much other CPU stuff is going on
-xlog.info`Starting ${Object.keys(servers).length} servers...`;
-for(const serverid of SERVER_ORDER)
-	await startServer(serverid);
 
 xlog.info`\nServers fully loaded! Took: ${((performance.now()-startedAt)/xu.SECOND).secondsAsHumanReadable()}`;
 await fileUtil.writeTextFile(DEXSERVER_PID_FILE_PATH, `${Deno.pid}`);

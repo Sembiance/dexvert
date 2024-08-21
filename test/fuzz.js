@@ -3,7 +3,7 @@ import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil, printUtil} from "xutil";
 import {formats, init as initFormats} from "../src/format/formats.js";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../src/server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
 import {mkWeblink} from "./testUtil.js";
 import RandExp from "npm:randexp@0.5.3";
 

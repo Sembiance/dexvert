@@ -2,7 +2,7 @@ import {xu, fg} from "xu";
 import {XLog} from "xlog";
 import {path} from "std";
 import {cmdUtil, fileUtil, runUtil} from "xutil";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 
 const argv = cmdUtil.cmdInit({
 	cmdid   : "dexvert",
@@ -93,7 +93,10 @@ if(argv.direct)
 xlog.trace`Making RPC call to dexserver...`;
 
 const rpcData = {op : "dexvert", inputFilePath : path.resolve(argv.inputFilePath), outputDirPath : path.resolve(argv.outputDirPath), logLevel : argv.logLevel, fileMeta : xu.parseJSON(argv.fileMeta), dexvertOptions};
-const {r, logLines} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)}))?.json()), {});
+const fetchResult = await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(rpcData)});
+if(fetchResult?.status!==200)
+	await handleExit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running? Status: ${fetchResult.status}`));
+const {r, logLines} = await xu.tryFallbackAsync(async () => (await fetchResult?.json()), {});
 if(!r && !logLines)
 	await handleExit(console.error(`Failed to contact dexserver at ${fg.cyan(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`)} is it running?`));
 

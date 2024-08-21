@@ -10,7 +10,7 @@ import {run as runDOS} from "./dosUtil.js";
 import {run as runOS, OSIDS} from "./osUtil.js";
 import {run as runWine, WINE_WEB_HOST, WINE_WEB_PORT} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
-import {DEXRPC_HOST, DEXRPC_PORT} from "./server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
 
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir"];

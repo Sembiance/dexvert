@@ -2,7 +2,7 @@ import {xu} from "xu";
 import {XLog} from "xlog";
 import {cmdUtil, fileUtil, runUtil, printUtil, hashUtil, webUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
 import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";

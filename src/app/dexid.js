@@ -1,7 +1,7 @@
 import {xu, fg} from "xu";
 import {cmdUtil, printUtil, fileUtil} from "xutil";
 import {path} from "std";
-import {DEXRPC_HOST, DEXRPC_PORT} from "../server/dexrpc.js";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {XLog} from "xlog";
 
 const argv = cmdUtil.cmdInit({

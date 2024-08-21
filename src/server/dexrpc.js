@@ -1,138 +1,134 @@
 import {xu} from "xu";
-import {Server} from "../Server.js";
 import {path} from "std";
 import {XWorkerPool} from "XWorkerPool";
 import {init as initPrograms, programDirPath} from "../program/programs.js";
 import {init as initFormats, formatDirPath} from "../format/formats.js";
-import {fileUtil, webUtil} from "xutil";
+import {fileUtil, webUtil, cmdUtil} from "xutil";
+import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
+import {XLog} from "xlog";
 
-export const DEXRPC_HOST = "127.0.0.1";
-export const DEXRPC_PORT = 17750;
+const argv = cmdUtil.cmdInit({
+	cmdid   : "dexserver-dexrpcz",
+	version : "1.0.0",
+	desc    : "Pre-starts a bunch of dexvert and dexid agents to be able to evenly distribute CPU load and handle crashes, etc",
+	opts    :
+	{
+		startedFilePath : {desc : "Path to write a file to when the server has started", hasValue : true, required : true},
+		stopFilePath    : {desc : "Path to watch for a file to be created to stop the server", hasValue : true, required : true},
+		logLevel        : {desc : "What level to use for logging. Valid: none fatal error warn info debug trace. Default: info", defaultValue : "info"}
+	}});
+
+const xlog = new XLog(argv.logLevel);
 const DEX_WORKER_COUNT = Math.floor(navigator.hardwareConcurrency*0.65);
 const DEX_WORKER_ID_COUNT = Math.floor(navigator.hardwareConcurrency*0.20);
 const LOCKS = new Set();
+const RPC_DATA = {};
+let RPCID_COUNTER = 0;
 
-export class dexrpc extends Server
+xlog.info`Starting dexrpc server...`;
+
+// we do this once here, because we will be starting like 20+ workers at once and if we don't prime the deno cache here first, the workers get a lot of contention and it's super slow
+xlog.info`Priming deno cache for programs and formats...`;
+await initPrograms();
+await initFormats();
+
+const workercb = async (workerid, {rpcid, logLines, err, r}={}) =>	// eslint-disable-line require-await
 {
-	async start()
-	{
-		this.xlog.info`Starting dexrpc server...`;
+	const rpcData = RPC_DATA[rpcid];
 
-		// we do this once here, because we will be starting like 20+ workers at once and if we don't prime the deno cache here first, the workers get a lot of contention and it's super slow
-		this.xlog.info`Priming deno cache for programs and formats...`;
-		await initPrograms();
-		await initFormats();
+	if(err)
+		xlog.error`worker ${workerid}: error: ${err} for rpcid ${rpcid}`;
 
-		this.xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
-		this.dexPool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
-		this.idPool = new XWorkerPool({workercb : this.workercb.bind(this), xlog : this.xlog, crashRecover : true});
+	if(!rpcData?.reply)
+		return xlog.error`worker ${workerid}: no rpcData.reply for rpcid ${rpcid} and r ${r} and logLines ${logLines}`;
 
-		const runEnv = {};
-		for(const [key, value] of Object.entries(Deno.env.toObject()))
-		{
-			if(key.startsWith("DEX_"))
-				runEnv[key] = value;
-		}
+	rpcData.reply(new Response(err ? `Error: ${err}` : JSON.stringify({logLines, r}), {status : err ? 500 : 200}));
+};
 
-		await Promise.all([
-			this.dexPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv}),
-			this.idPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_ID_COUNT, runEnv})]);
+/*const crashcb = async (workerid, status, r, logLines) =>
+{
+	await workercb(workerid, {err : `worker ${workerid} crashed with status code ${status?.code} and logLines: ${logLines.join("\n")}`, ...r});
+};*/
 
-		this.xlog.info`${DEX_WORKER_COUNT} dex workers and ${DEX_WORKER_ID_COUNT} id workers ready!`;
+xlog.info`Starting ${DEX_WORKER_COUNT} workers...`;
+const dexPool = new XWorkerPool({workercb, xlog, crashRecover : true});
+const idPool = new XWorkerPool({workercb, xlog, crashRecover : true});
 
-		this.xlog.info`Starting format & program monitors...`;
-		const monitorsReady = [];
-		const changeHandler = async (op, change) =>
-		{
-			if(change.type==="ready")
-				return monitorsReady.push(op);
-
-			await [this.idPool, this.dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
-		};
-		
-		this.monitors = [
-			await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)),
-			await fileUtil.monitor(programDirPath, async change => await changeHandler("programChange", change))];
-		
-		await xu.waitUntil(() => monitorsReady.length===this.monitors.length);
-
-		this.xlog.info`Starting web RPC...`;
-
-		this.rpcData = {};
-		this.rpcid = 0;
-
-		const routes = new Map();
-
-		routes.set("/workerCount", () => new Response(DEX_WORKER_COUNT.toString()));
-		
-		routes.set("/dex", async request =>
-		{
-			const workerData = await request.json();
-			workerData.rpcid = this.rpcid++;
-
-			let response = null;
-			this.rpcData[workerData.rpcid] = {reply : v => { response = v; }, workerData};
-			this[workerData.op==="dexid" ? "idPool" : "dexPool"].process([workerData]);
-			await xu.waitUntil(() => !!response);
-			return response;
-		});
-
-		routes.set("/lock", async request =>
-		{
-			const data = await request.json();
-			if(!data?.lockid?.length || LOCKS.has(data.lockid))
-				return new Response("false");
-				
-			LOCKS.add(data.lockid);
-			return new Response("true");
-		});
-
-		routes.set("/unlock", async request =>
-		{
-			const data = await request.json();
-			if(!data?.lockid?.length || !LOCKS.has(data.lockid))
-				return new Response("false");
-				
-			LOCKS.delete(data.lockid);
-			return new Response("true");
-		});
-
-		this.webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT}, await webUtil.route(routes), {xlog : this.xlog});
-
-		this.running = true;
-	}
-
-	async crashcb(workerid, status, r, logLines)
-	{
-		await this.workercb(workerid, {err : `worker ${workerid} crashed with status code ${status?.code} and logLines: ${logLines.join("\n")}`, ...r});
-	}
-
-	async workercb(workerid, {rpcid, logLines, err, r}={})	// eslint-disable-line require-await
-	{
-		const rpcData = this.rpcData[rpcid];
-
-		if(err)
-			this.xlog.error`worker ${workerid}: error: ${err} for rpcid ${rpcid}`;
-
-		if(!rpcData?.reply)
-			return this.xlog.error`worker ${workerid}: no rpcData.reply for rpcid ${rpcid} and r ${r} and logLines ${logLines}`;
-
-		rpcData.reply(new Response(err ? `Error: ${err}` : JSON.stringify({logLines, r}), {status : err ? 500 : 200}));
-	}
-
-	async status()	// eslint-disable-line require-await
-	{
-		return this.running;
-	}
-
-	async stop()
-	{
-		if(this.webServer)
-			this.webServer.stop();
-
-		await this.monitors.parallelMap(async monitor => await monitor?.stop());
-		await [this.dexPool, this.idPool].parallelMap(async pool => await pool?.stop());
-
-		this.running = false;
-	}
+const runEnv = {};
+for(const [key, value] of Object.entries(Deno.env.toObject()))
+{
+	if(key.startsWith("DEX_"))
+		runEnv[key] = value;
 }
+
+await Promise.all([
+	dexPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_COUNT, runEnv}),
+	idPool.start(path.join(import.meta.dirname, "dexWorker.js"), {size : DEX_WORKER_ID_COUNT, runEnv})]);
+
+xlog.info`${DEX_WORKER_COUNT} dex workers and ${DEX_WORKER_ID_COUNT} id workers ready!`;
+
+xlog.info`Starting format & program monitors...`;
+const monitorsReady = [];
+const changeHandler = async (op, change) =>
+{
+	if(change.type==="ready")
+		return monitorsReady.push(op);
+
+	await [idPool, dexPool].parallelMap(async pool => await pool.broadcast({op, change}));
+};
+
+const monitors = [
+	await fileUtil.monitor(formatDirPath, async change => await changeHandler("formatChange", change)),
+	await fileUtil.monitor(programDirPath, async change => await changeHandler("programChange", change))];
+
+await xu.waitUntil(() => monitorsReady.length===monitors.length);
+
+xlog.info`Starting web RPC...`;
+
+const routes = new Map();
+
+routes.set("/workerCount", () => new Response(DEX_WORKER_COUNT.toString()));
+
+routes.set("/dex", async request =>
+{
+	const workerData = await request.json();
+	workerData.rpcid = RPCID_COUNTER++;
+
+	let response = null;
+	RPC_DATA[workerData.rpcid] = {reply : v => { response = v; }, workerData};
+	(workerData.op==="dexid" ? idPool : dexPool).process([workerData]);
+	await xu.waitUntil(() => !!response);
+	return response;
+});
+
+routes.set("/lock", async request =>
+{
+	const data = await request.json();
+	if(!data?.lockid?.length || LOCKS.has(data.lockid))
+		return new Response("false");
+		
+	LOCKS.add(data.lockid);
+	return new Response("true");
+});
+
+routes.set("/unlock", async request =>
+{
+	const data = await request.json();
+	if(!data?.lockid?.length || !LOCKS.has(data.lockid))
+		return new Response("false");
+		
+	LOCKS.delete(data.lockid);
+	return new Response("true");
+});
+
+const webServer = webUtil.serve({hostname : DEXRPC_HOST, port : DEXRPC_PORT}, await webUtil.route(routes), {xlog});
+await fileUtil.writeTextFile(argv.startedFilePath, "");
+
+// wait until we are told to stop
+await xu.waitUntil(async () => await fileUtil.exists(argv.stopFilePath));
+xlog.info`Stopping...`;
+webServer.stop();
+await monitors.parallelMap(async monitor => await monitor?.stop());
+await [dexPool, idPool].parallelMap(async pool => await pool?.stop());
+
+await fileUtil.unlink(argv.stopFilePath);

@@ -46,7 +46,7 @@ const onSuccess = ({changeResult, err, r}, {log, msg}) =>
 const onFail = ({reason, error}, {log, msg}) =>
 {
 	xlog.error`agent failed: ${reason}: ${error} ${log} ${msg}`;
-	return RPC_RESPONSES.set(msg.rpcid, {err : `${reason}: ${error}`, log});
+	RPC_RESPONSES.set(msg.rpcid, {err : `${reason}: ${error}`, log});
 };
 
 const dexPool = new AgentPool(path.join(import.meta.dirname, "dex.agent.js"), {onSuccess, onFail, xlog});
@@ -63,10 +63,10 @@ for(const [key, value] of Object.entries(Deno.env.toObject()))
 }
 
 xlog.info`Starting ${DEXVERT_AGENT_COUNT} dexvert agents...`;
-await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv, liveOutput : xlog.atLeast("trace")});
+await dexPool.start({qty : DEXVERT_AGENT_COUNT, runEnv});
 
 xlog.info`Starting ${DEXID_AGENT_COUNT} dexid agents...`;
-await idPool.start({qty : DEXID_AGENT_COUNT, runEnv, liveOutput : xlog.atLeast("trace")});
+await idPool.start({qty : DEXID_AGENT_COUNT, runEnv});
 
 const monitors = [];
 if(DEV_MACHINE)
@@ -96,6 +96,8 @@ routes.set("/dex", async request =>
 {
 	const workerData = await request.json();
 	workerData.rpcid = RPCID_COUNTER++;
+	if(["trace", "debug"].includes(workerData.logLevel))
+		workerData.liveOutput = true;
 	if(RPCID_COUNTER>10_000_000)
 		RPCID_COUNTER = 1;
 

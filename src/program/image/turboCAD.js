@@ -12,6 +12,7 @@ export class turboCAD extends Program
 	osData   = r => ({
 		script : `
 			Func MainWindowOrFailure()
+				WindowDismiss("FindNews", "", "{ENTER}")
 				WindowFailure("SWiSH", "This file appears to have been", -1, "{ENTER}")
 				return WinActive("TurboCAD v9.0 - [${path.basename(r.inFile())}", "")
 			EndFunc

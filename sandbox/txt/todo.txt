@@ -13,6 +13,9 @@
 
 * Get 'sandbox/app/imtools_v3.0.tar.gz' to compile
 
+* See about converting this Java code to javascript to extract archive/innoSetupArchive: https://github.com/d0k/ednaunpack
+  Then search for detections and reprocess
+
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD

@@ -12,7 +12,7 @@ export class cab extends Format
 		
 		// app specific cabs
 		"Microsoft Update - Self Extracting Cabinet", "Installer: PackageForTheWeb", "Installer: Wise Installer[CAB]", "Microsoft Windows CE installation Cabinet Archive", "Diagnostic Cabinet", "Windows Installer Merge Module (CAB)",
-		"Skin / Theme for Pocket PC PDAs"
+		"Skin / Theme for Pocket PC PDAs", "MS generic-sfx Cabinet File Unpacker"
 	];
 	auxFiles = (input, otherFiles) =>
 	{

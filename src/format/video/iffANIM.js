@@ -7,5 +7,5 @@ export class iffANIM extends Format
 	ext          = [".anim", ".anm", ".sndanim"];
 	magic        = ["IFF data, ANIM animation", "IFF ANIM", "AnimBrush", "Deluxe Paint AnimBrush"];
 	metaProvider = ["mplayer"];
-	converters   = ["ffmpeg[format:iff]", "xanim[fps:12]", "iff_convert[framesOnly] -> *ffmpeg[fps:15]", "deark[module:anim] -> *ffmpeg[fps:15]"];
+	converters   = ["ffmpeg[format:iff]", "xanim[matchType:magic][fps:12]", "iff_convert[framesOnly] -> *ffmpeg[fps:15]", "deark[module:anim] -> *ffmpeg[fps:15]"];
 }

@@ -12,6 +12,7 @@ import {run as runWine, WINE_WEB_HOST, WINE_WEB_PORT} from "./wineUtil.js";
 import {programs} from "./program/programs.js";
 import {DEXRPC_HOST, DEXRPC_PORT} from "./dexUtil.js";
 
+const MAX_FILENAME_LENGTH = 245;
 const DEFAULT_TIMEOUT = xu.MINUTE*5;
 const GLOBAL_FLAGS = ["bulkCopyOut", "filenameEncoding", "forbidChildRun", "forbiddenMagic", "hasExtMatch", "matchType", "noAux", "osHint", "osPriority", "renameKeepFilename", "renameOut", "skipVerify", "strongMatch", "subOutDir"];
 
@@ -322,14 +323,14 @@ export class Program
 					return;
 				}
 
-				// if the filename >247 characters we rename it to be <=247. This is because 255 is the max filename length on linux ext4 and later processing often adds suffixes such as §.json
-				if(newFile.base.length>247)
+				// if the filename >MAX_FILENAME_LENGTH characters we rename it to be <=MAX_FILENAME_LENGTH. This is because later processing adds suffixes such as §.json and thus we need to ensure it's short enough (archive/swf/10003)
+				if(newFile.base.length>MAX_FILENAME_LENGTH)
 				{
 					let newFilename = newFile.base.innerTrim();
-					if(newFilename.length>247)
-						newFilename = newFile.base.innerTruncate(247);
+					if(newFilename.length>MAX_FILENAME_LENGTH)
+						newFilename = newFile.base.innerTruncate(MAX_FILENAME_LENGTH);
 					
-					xlog.warn`Program ${fg.orange(this.programid)} encountered filename >247 characters [${newFileRel}] rename to [${newFilename}]`;
+					xlog.warn`Program ${fg.orange(this.programid)} encountered filename >${MAX_FILENAME_LENGTH} characters [${newFileRel}] rename to [${newFilename}]`;
 					await newFile.rename(newFilename, {autoRename : true});
 				}
 

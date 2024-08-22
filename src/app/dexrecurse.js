@@ -340,7 +340,7 @@ async function processNextQueue()
 		//xlog.debug`${taskLogPrefix} dexvert finished with ${dexText.length.toLocaleString()} bytes (${dexText.length.bytesToSize()}). Parsing...`;
 		const {r, log} = xu.parseJSON(dexText, {});
 		if(!r?.json)
-			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${dexText}`);
+			throw new Error(`Invalid JSON response from dexrpc for ${task.relFilePath}:\n${dexText.decolor()}`);
 
 		const dexData = r.json;
 

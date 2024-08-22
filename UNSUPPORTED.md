@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,803)
+# Unsupported File Formats (1,805)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -458,7 +458,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (131)
+## Image (133)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -550,6 +550,7 @@ Family/Format | Name | Extensions | Notes
 [image/pcDraftCAD](https://discmaster.textfiles.com/search?formatid=pcDraftCAD) | PC-Draft-CAD Drawing | .dwg | 
 [image/pcrImage](https://discmaster.textfiles.com/search?formatid=pcrImage) | [PCR Image](http://fileformats.archiveteam.org/wiki/PCR_image) | .pcr | [1 sample file](https://sembiance.com/fileFormatSamples/image/pcrImage/)
 [image/petsciiSeq](https://discmaster.textfiles.com/search?formatid=petsciiSeq) | [PETSCII Screen Code Sequence](http://fileformats.archiveteam.org/wiki/PETSCII) | .seq | [1 sample file](https://sembiance.com/fileFormatSamples/image/petsciiSeq/) - Can't reliably detect this format and abydosconvert will convert a lot of things that end in .seq thare are not PETSCII code sequences
+[image/pictrisPicture](https://discmaster.textfiles.com/search?formatid=pictrisPicture) | Pictris Picture | .pic | 
 [image/pixelPerfect](https://discmaster.textfiles.com/search?formatid=pixelPerfect) | [Pixel Perfect](http://fileformats.archiveteam.org/wiki/Pixel_Perfect) | .pp .ppp | [1 sample file](https://sembiance.com/fileFormatSamples/image/pixelPerfect/) - Can't reliably detect this format and recoil2png & view64 will convert almost any file you give it into garbage
 [image/pixie](https://discmaster.textfiles.com/search?formatid=pixie) | [Pixie Vector](http://fileformats.archiveteam.org/wiki/Pixie_(vector_graphics)) | .pxi .pxs | [2 sample files](https://sembiance.com/fileFormatSamples/image/pixie/)
 [image/playstation3Icon](https://discmaster.textfiles.com/search?formatid=playstation3Icon) | PlayStation 3 Icon | .gim | 
@@ -583,6 +584,7 @@ Family/Format | Name | Extensions | Notes
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?formatid=unrealTexture) | Unreal Texture | .utx .u .unr | 
 [image/venturaPublisher](https://discmaster.textfiles.com/search?formatid=venturaPublisher) | [Ventura Publisher Graphic](http://fileformats.archiveteam.org/wiki/Ventura_Publisher) | .vgr | [4 sample files](https://sembiance.com/fileFormatSamples/image/venturaPublisher/) - Tried both Ventura Publisher 4.1 and Corel Draw 5 (which includes it) and neither could open the sample VGR files I have.
+[image/visualCADDDrawing](https://discmaster.textfiles.com/search?formatid=visualCADDDrawing) | Visual CADD Drawing | .vcd | 
 [image/visualCADDSymbol](https://discmaster.textfiles.com/search?formatid=visualCADDSymbol) | Visual CADD Symbol | .vcs | 
 [image/wgtSprite](https://discmaster.textfiles.com/search?formatid=wgtSprite) | [WGT Sprite](http://fileformats.archiveteam.org/wiki/WGT_Sprite) | .spr | 
 [image/windowsFAXCover](https://discmaster.textfiles.com/search?formatid=windowsFAXCover) | Windows FAX Cover | .cpe | [5 sample files](https://sembiance.com/fileFormatSamples/image/windowsFAXCover/)

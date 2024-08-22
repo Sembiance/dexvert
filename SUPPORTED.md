@@ -1,4 +1,4 @@
-# Supported File Formats (2,268)
+# Supported File Formats (2,273)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -129,7 +129,7 @@ archive | [EPOC Installation Package](http://fileformats.archiveteam.org/wiki/SI
 archive | [EPOC MultiBitmap](http://fileformats.archiveteam.org/wiki/EPOC_MBM) | .mbm | [deark](https://entropymine.com/deark/) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/epocMBM/)
 archive | [Error Code Modeler](http://fileformats.archiveteam.org/wiki/Error_Code_Modeler) | .ecm | [unecm](https://web.archive.org/web/20140330233023/http://www.neillcorlett.com/cmdpack/) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/errorCodeModeler/)
 archive | Eschalon Setup ARCV Container | .arv | [arcvExtractor](https://ia801900.us.archive.org/view_archive.php?archive=/29/items/ctib98_3/ctib98_3.zip) | [16 sample files](https://sembiance.com/fileFormatSamples/archive/eschalonSetupARCV/) - Not all formats are supported by the converter
-archive | Etherlords 2 game data archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | 
+archive | Etherlords 2 game data archive | .res | [gameextractor](http://www.watto.org/game_extractor.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/etherlords2GameDataArchive/)
 archive | ExeLITE Packed | .exe .com | cup386 | [2 sample files](https://sembiance.com/fileFormatSamples/archive/exeLITEPacked/)
 archive | [EXEPACK Packed](http://fileformats.archiveteam.org/wiki/EXEPACK) | .exe .com | [deark](https://entropymine.com/deark/) | [12 sample files](https://sembiance.com/fileFormatSamples/archive/exePackPacked/)
 archive | [eXtensible ARchive](http://fileformats.archiveteam.org/wiki/Xar_(Extensible_Archive)) | .xar | [xar](https://github.com/apple-oss-distributions/xar) [unar](https://github.com/incbee/Unarchiver) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/xar/)
@@ -311,7 +311,7 @@ archive | [Self-Extracting LHA](http://fileformats.archiveteam.org/wiki/SFX) | .
 archive | [SEMONE Archive](http://fileformats.archiveteam.org/wiki/SEMONE) | .one | [semone](https://www.sac.sk/download/pack/semone06.zip) | [1 sample file](https://sembiance.com/fileFormatSamples/archive/semone/)
 archive | SGI Volume Image | .img | [uniso](https://github.com/Sembiance/dexvert/) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/sgiVolumeImage/)
 archive | [SHell self-extracting ARchive](http://fileformats.archiveteam.org/wiki/Shar) | .shar .sha | [unshar](https://www.gnu.org/software/sharutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/shar/)
-archive | [Shockwave/Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
+archive | [Shockwave/Macromedia Flash](http://fileformats.archiveteam.org/wiki/SWF) | .swf | [ffdec](https://github.com/jindrapetrik/jpexs-decompiler) [swfextract](http://www.swftools.org/) [ffmpeg](https://ffmpeg.org/) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/swf/)
 archive | Shrink Packed | .exe .com | [unp](https://sites.google.com/view/f1gpwc/file-archive/miscellaneous/exe-unpacker) cup386 | [3 sample files](https://sembiance.com/fileFormatSamples/archive/shrinkPacked/)
 archive | SimTex Game Archive | .lbx | [gameextractor](http://www.watto.org/game_extractor.html) | [11 sample files](https://sembiance.com/fileFormatSamples/archive/simTexGameArchive/)
 archive | [Softdisk LIBrary Game Data Archive](https://moddingwiki.shikadi.net/wiki/Softdisk_Library_Format) | .cmb .shl | [softlib](http://files.shikadi.net/moddingwiki/tools/kdreams/softlib.exe) | [4 sample files](https://sembiance.com/fileFormatSamples/archive/softdiskLibrary/)
@@ -396,7 +396,7 @@ audio | [Audio Visual Research](http://fileformats.archiveteam.org/wiki/AVR) | .
 audio | [AVI Audio](http://fileformats.archiveteam.org/wiki/AVI) | .avi | [ffmpeg](https://ffmpeg.org/) [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/aviAudio/)
 audio | [Beam Software SIFF Sound](http://fileformats.archiveteam.org/wiki/SIFF) | .son | [ffmpeg](https://ffmpeg.org/) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/siff/) - The .son test files are technically supported by libavformat and ffmpeg/cvlc, yet it often produces very distored WAVs. My hunch is the decompression algo doesn't quite work with my particular test SIFF files. I couldn't locate ANY OTHER converters.
 audio | [BRSTM Wii Audio](http://fileformats.archiveteam.org/wiki/Nintendo_GameCube_/_Wii_BRSTM) | .brstm | [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/brstm/)
-audio | Cavewar Sounds | .dbs | [foremost](http://foremost.sourceforge.net/) | 
+audio | Cavewar Sounds | .dbs | [foremost](http://foremost.sourceforge.net/) | [1 sample file](https://sembiance.com/fileFormatSamples/audio/cavewarsSounds/)
 audio | [CoreAudio Format](http://fileformats.archiveteam.org/wiki/Core_Audio_Format) | .caf | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/coreAudio/)
 audio | [Covox ADPCM Encoded Audio](https://wiki.multimedia.cx/index.php/Covox_ADPCM) | .v8 .cvx | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/covoxADPCM/)
 audio | [Creative Voice](http://fileformats.archiveteam.org/wiki/Creative_Voice_File) | .voc | [sox](http://sox.sourceforge.net) [ffmpeg](https://ffmpeg.org/) | [17 sample files](https://sembiance.com/fileFormatSamples/audio/voc/)
@@ -407,7 +407,7 @@ audio | DirectMusic Segment | .dmsg | [vgmstream](https://github.com/vgmstream/v
 audio | [Dolby Digital AC-3 ATSC A/52](https://wiki.multimedia.cx/index.php/A52) | .ac3 | [ffmpeg](https://ffmpeg.org/) [zxtune123](https://zxtune.bitbucket.io/) [vgmstream](https://github.com/vgmstream/vgmstream) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/ac3/)
 audio | [Dolby Lossless Predictive Audio](https://wiki.multimedia.cx/index.php?title=Lossless_Predictive_Audio_Coding) | .mlp | [ffmpeg](https://ffmpeg.org/) | [4 sample files](https://sembiance.com/fileFormatSamples/audio/mlpAudio/)
 audio | [Downloadable Sound Bank](http://fileformats.archiveteam.org/wiki/Downloadable_Sounds_Banks) | .dls | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [10 sample files](https://sembiance.com/fileFormatSamples/audio/downloadableSoundBank/)
-audio | Elecbyte M.U.G.E.N. Sound | .snd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [3 sample files](https://sembiance.com/fileFormatSamples/audio/elecbyteMUGENSound/) - awaveStudio doesn't reallly support this format, but it happens to produce some understandable output, but it messes up some parts for sure
+audio | Elecbyte M.U.G.E.N. Sound | .snd | [awaveStudio](https://archive.org/details/AwaveStudio8.8.zip) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/elecbyteMUGENSound/) - awaveStudio doesn't reallly support this format, but it happens to produce some understandable output, but it messes up some parts for sure
 audio | [Electronic Arts ASF](http://fileformats.archiveteam.org/wiki/Electronic_Arts_AS4_/_ASF_Music) | .asf .as4 | [vgmstream](https://github.com/vgmstream/vgmstream) | [12 sample files](https://sembiance.com/fileFormatSamples/audio/eaASF/)
 audio | Electronic Arts BNK File | .bnk | [vgmstream](https://github.com/vgmstream/vgmstream) | [14 sample files](https://sembiance.com/fileFormatSamples/audio/eaBNK/)
 audio | [Electronic Arts Sound hEADer](http://fileformats.archiveteam.org/wiki/Electronic_Arts_TGV) | .tgv | [vgmstream](https://github.com/vgmstream/vgmstream) | [8 sample files](https://sembiance.com/fileFormatSamples/audio/eaSEAD/)
@@ -469,7 +469,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 
 
 
-## Document (221)
+## Document (225)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | 
@@ -487,6 +487,7 @@ document | AmigaBASIC Source Code | .bas | [ab2ascii](http://aminet.net/package/
 document | [Amigaguide Document](http://fileformats.archiveteam.org/wiki/AmigaGuide) | .guide | [grotag](http://grotag.sourceforge.net/) [guideml](http://aminet.net/package/text/hyper/guideml) [strings](https://www.gnu.org/software/binutils/) | [17 sample files](https://sembiance.com/fileFormatSamples/document/amigaGuide/)
 document | Applesoft BASIC Source Code | .bas | [applesoftBASIC2txt](https://github.com/Sembiance/dexvert) | [5 sample files](https://sembiance.com/fileFormatSamples/document/applesoftBASIC/)
 document | AppleWorks Document |  | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/appleWorksDocument/)
+document | [Asc2Com (MorganSoft)](http://fileformats.archiveteam.org/wiki/Asc2Com_(MorganSoft)) | .com | [deark](https://entropymine.com/deark/) | [3 sample files](https://sembiance.com/fileFormatSamples/document/asc2com/)
 document | askSam Database | .ask | [strings](https://www.gnu.org/software/binutils/) | [17 sample files](https://sembiance.com/fileFormatSamples/document/askSamDatabase/)
 document | [Atari STOS Basic](http://fileformats.archiveteam.org/wiki/STOS_memory_bank) | .bas | [stosBAS2txt](https://github.com/Sembiance/dexvert) | [12 sample files](https://sembiance.com/fileFormatSamples/document/stosBAS/) - I tried using STOSBAS_detokenize.pl and chkbas and both failed. So I just wrote my own.
 document | Atari Works Database | .std | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/atariWorksDatabase/)
@@ -520,6 +521,8 @@ document | DeScribe Document | .doc .des | [strings](https://www.gnu.org/softwar
 document | DeskMate Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/deskMate/)
 document | [Device Independent File](http://fileformats.archiveteam.org/wiki/DVI_(Device_Independent_File_Format)) | .dvi | [dvi2pdf](http://tug.org/texlive/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/deviceIndependentFile/)
 document | [DjVu Document](http://fileformats.archiveteam.org/wiki/DjVu) | .djvu .djv | [ddjvu](http://djvu.sourceforge.net/) | [10 sample files](https://sembiance.com/fileFormatSamples/document/djvu/)
+document | [DOC2COM (Dan K. Nelson)](http://fileformats.archiveteam.org/wiki/DOC2COM_(Dan_K._Nelson)) | .com | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/document/doc2comDKN/)
+document | [DOC2COM (Gerald DePyper)](http://fileformats.archiveteam.org/wiki/DOC2COM_(Gerald_DePyper)) | .com | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/document/doc2comGerald/)
 document | [DocBook](http://fileformats.archiveteam.org/wiki/DocBook) | .dbk .xml | [dblatex](http://dblatex.sourceforge.net/) | [11 sample files](https://sembiance.com/fileFormatSamples/document/docBook/)
 document | EasyCalc Spreadsheet file | .calc | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/document/easyCalc/)
 document | Enable Document | .wpf | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/enableDocument/)
@@ -642,6 +645,7 @@ document | RISC OS BBC BASIC V Source |  | [strings](https://www.gnu.org/softwar
 document | [Rocket eBook](http://fileformats.archiveteam.org/wiki/Rocket_eBook) | .rb | [ebook_convert](https://calibre-ebook.com/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/rocketeBook/)
 document | [Samna Word Document](https://winworldpc.com/product/samna-word/iii) | .sam .sm | [softwareBridge](https://winworldpc.com/product/software-bridge%20/3x) [wordForWord](https://archive.org/details/adobe-file-utilities-mac-win-1996) | [5 sample files](https://sembiance.com/fileFormatSamples/document/samnaWordDocument/)
 document | [Shanda Bambook](http://fileformats.archiveteam.org/wiki/Shanda_Bambook) | .snb .bek | [ebook_convert](https://calibre-ebook.com/) | [2 sample files](https://sembiance.com/fileFormatSamples/document/shandaBambook/)
+document | [SHOW (Gary M. Raymond)](http://fileformats.archiveteam.org/wiki/SHOW_(Gary_M._Raymond)) | .com | [deark](https://entropymine.com/deark/) | [4 sample files](https://sembiance.com/fileFormatSamples/document/showCOM/)
 document | Smart Software Document | .doc | [strings](https://www.gnu.org/software/binutils/) | [6 sample files](https://sembiance.com/fileFormatSamples/document/smartSoftwareDocument/)
 document | Smart Software WorkSheet | .ws | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/smartSoftwareWorksheet/)
 document | [Softdisk Text Compressor Document](http://fileformats.archiveteam.org/wiki/Softdisk_Text_Compressor) | .ctx | [ctx_decompress](https://git.fsfe.org/art1pirat/ctxer) | [13 sample files](https://sembiance.com/fileFormatSamples/document/softdiskTextCompressed/)
@@ -747,12 +751,13 @@ font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforg
 
 
 
-## Image (591)
+## Image (592)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 image | [101 Clips Image](https://archive.org/details/tucows_370916_101_Clips_Pro) | .img | [callFunction](https://github.com/Sembiance/dexvert) | [18 sample files](https://sembiance.com/fileFormatSamples/image/oneOhOneClipsImage/)
 image | [3D Browser Pro Catalogue](https://free.softking.com.tw/dl/17696/3D%20Browser%20Pro%206.0.html) | .obv | [konvertor](https://www.logipole.com/konvertor-en.htm) | [2 sample files](https://sembiance.com/fileFormatSamples/image/threeDBrowserProCatalogue/)
 image | [3D Construction Kit](http://fileformats.archiveteam.org/wiki/3D_Construction_Kit) | .run | [runvga](https://en.wikipedia.org/wiki/3D_Construction_Kit) | [11 sample files](https://sembiance.com/fileFormatSamples/image/threeDCK/)
+image | [ACiDDraw COM](http://fileformats.archiveteam.org/wiki/ACiDDraw_COM_file) | .com | [deark](https://entropymine.com/deark/) | [5 sample files](https://sembiance.com/fileFormatSamples/image/aciddrawCOM/)
 image | [Acorn (RISC OS) Sprite](http://fileformats.archiveteam.org/wiki/Acorn_Sprite) | .acorn | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/acornSprite/)
 image | [Acorn/RISC-OS Draw](http://fileformats.archiveteam.org/wiki/Acorn_Draw) |  | [drawview](http://www.keelhaul.me.uk/acorn/drawview/) | [10 sample files](https://sembiance.com/fileFormatSamples/image/acornDraw/)
 image | [Adobe Illustrator](http://fileformats.archiveteam.org/wiki/Adobe_Illustrator_Artwork) | .ai | [adobeIllustrator](https://winworldpc.com/product/adobe-illustrator/80) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [hiJaakExpress](https://archive.org/details/hijaak-express) [corelDRAW](https://winworldpc.com/product/corel-draw/50) | [12 sample files](https://sembiance.com/fileFormatSamples/image/adobeIllustrator/)
@@ -1868,7 +1873,7 @@ text | [C/C++ Source or Header](http://fileformats.archiveteam.org/wiki/C) | .c 
 text | C++ Builder XML Project | .bpr |  | 
 text | Cartoon Studio Script | .css |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/cartoonStudioScript/)
 text | [Cascading Style Sheet File](http://fileformats.archiveteam.org/wiki/Cascading_Style_Sheets) | .css |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/css/)
-text | Cashflow Help | .hlp |  | 
+text | Cashflow Help | .hlp |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/cashflowHelp/)
 text | CauseWay DOS Extender exception | .err |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/causeWayDOSExtenderException/)
 text | [CDRDAO TOC File](http://fileformats.archiveteam.org/wiki/TOC) | .toc .cue | [toc2cue](http://cdrdao.sourceforge.net/) | [3 sample files](https://sembiance.com/fileFormatSamples/text/toc/)
 text | CheckIt Pro Performances data | .prf |  | 
@@ -1994,7 +1999,7 @@ text | Interleaf document | .doc |  | [11 sample files](https://sembiance.com/fi
 text | Internet Data Query File | .idq |  | 
 text | [Internet Message Format](http://fileformats.archiveteam.org/wiki/Internet_e-mail_message_format) | .eml .msg |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/imf/) - With several RFC files describing the format, you'd think this would be straight forward to parse, but it's a total nightmare. I had spent some time looking for a good program to parse it, and failed. I spent more time trying to code my own that would output JSON, but there are just a ton of edge cases and I gave up. In addition to the website link above, more details here: https://mailformat.dan.info/ Once I get working, update program Email_Outlook_Message to chain to convert the resulting .eml into this format handler (to handle attachments). Then re-process document/outlookMessage CDs
 text | IntroCAD Printer Definition |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/introCADPrinterDefinition/)
-text | Ishi Format Go game | .go .prb |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/ishiFormatGoGame/)
+text | Ishi Format Go game | .go .prb |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/ishiFormatGoGame/)
 text | IslandWrite document | .iwrite |  | 
 text | [ISO CUE Sheet](http://fileformats.archiveteam.org/wiki/CUE_and_BIN) | .cue |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/cue/)
 text | IT8.7/1 target descriptor |  |  | 

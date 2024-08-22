@@ -77,8 +77,8 @@ await argv.inputFiles.parallelMap(async inputFile =>
 	}
 	else if(r.json.created.files.output.length===1)
 	{
-		r.json.outputLink = path.join(".", inputFilename, r.json.created.files.output[0].rel);
-		r.json.outputLinkText = r.json.created.files.output[0].base;
+		r.json.outputLink = path.join(".", inputFilename, r.json.created.files.output[0]);
+		r.json.outputLinkText = path.basename(r.json.created.files.output[0]);
 	}
 	else
 	{

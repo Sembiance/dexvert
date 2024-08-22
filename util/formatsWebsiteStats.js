@@ -124,7 +124,7 @@ async function checkFileFormatsArchiveTeamWiki()
 		{
 			bar.tick();
 			if(!ALLOWED_NO_SEMBIANCE_LINKS.includes(familyFormat))
-				results.push(({familyFormat, websiteURL, why : "No telparia links found"}));
+				results.push(({familyFormat, websiteURL, why : "No dexvert links found"}));
 			continue;
 		}
 

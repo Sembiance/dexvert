@@ -169,7 +169,6 @@ export default
 		///////////
 		// Other //
 		///////////
-		accelProtelPrintedCircuitBoard          : {name : "ACCEL/Protel Printed Circuit Board", ext : [".pcb"], magic : ["ACCEL or Protel Printed Circuit Board file"], weakMagic : true},
 		autoCADPlotterConfiguration             : {name : "AutoCAD Plotter Configuration", ext : [".pcp"], magic : ["AutoCAD Plotter Configuration"], weakMagic : true},
 		acrobatDistillerJobOptions              : {name : "Acrobat Distiller Job Options", ext : [".joboptions1", ".joboptions", ".joboption2", ".joboptions2", ".joboption", ".joboptions12"], magic : ["Acrobat Distiller Job Options"]},
 		acrobatFormsData                        : {name : "Acrobat Forms Data", ext : [".fdf", ".acrodata"], magic : ["Acrobat Forms Data Format", "Adobe PDF Form Daten Datei", /^FDF document/, /^fmt\/1500( |$)/], website : "http://fileformats.archiveteam.org/wiki/FDF"},
@@ -256,6 +255,7 @@ export default
 		fredFishProductInfo                     : {name : "Fred Fish's Product-Info", magic : ["Fred Fish's Product-Info"]},
 		freePCBNetlist                          : {name : "FreePCB Netlist", ext : [".asc"], magic : ["FreePCB Netlist"]},
 		frodoPreferences                        : {name : "Frodo Preferences", magic : ["Frodo Preferences"]},
+		gapfile                                 : {name : "GAPFile", ext : [".gap"], magic : ["GAPFile (v1.0)"]},
 		gedcom                                  : {name : "GEDCOM Genealogy Text", website : "http://fileformats.archiveteam.org/wiki/GEDCOM", ext : [".ged"], magic : ["GEDCOM genealogy text", "GEDCOM Family History", /^GEDCOM genealogy, .*text/, /^fmt\/851( |$)/]},
 		genBankSequenceRecord                   : {name : "GenBank sequence record", ext : [".dna"], magic : ["GenBank sequence record"]},
 		genSurfMap                              : {name : "Gen Surf map", ext : [".map"], magic : ["Gen Surf map"], weakMagic : true},
@@ -331,6 +331,7 @@ export default
 		naviPressNaviDocData                    : {name : "NaviPress NaviDoc Data", ext : [".nvd"], magic : ["NaviPress NaviDoc Data"]},
 		naviPressNaviMapData                    : {name : "NaviPress NaviMap data", ext : [".nvm"], magic : ["NaviPress NaviMap data"], weakMagic : true},
 		neoBookDocument                         : {name : "NeoBook Document", ext : [".pub"], magic : [/^NeoBook for (DOS|Windows) document/]},
+		neoBookSettings                         : {name : "NeoBook Settings", ext : [".set"], magic : [/^NeoBook for (DOS|Windows) Settings/]},
 		neoPaintHelp                            : {name : "NeoPaint Help", ext : [".hlp"], magic : ["NeoPaint Help"]},
 		netscapeCookies                         : {name : "Netscape cookies", ext : [".txt"], magic : ["Netscape cookies", /^Netscape cookie/]},
 		nmeaGPSLogData                          : {name : "NMEA GPS log data", ext : [".nme", ".n20", ".nmea", ".nma"], magic : ["NMEA GPS log data"], weakMagic : true},

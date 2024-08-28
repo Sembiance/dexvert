@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,805)
+# Unsupported File Formats (1,811)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (155)
+## Archive (156)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -20,6 +20,7 @@ Family/Format | Name | Extensions | Notes
 [archive/aldusLZWCompressedData](https://discmaster.textfiles.com/search?formatid=aldusLZWCompressedData) | Aldus LZW compressed data |  | 
 [archive/aldusZip](https://discmaster.textfiles.com/search?formatid=aldusZip) | Aldus Zip Compressed File |  | No known extractor program.
 [archive/amigaHardDiskPFS](https://discmaster.textfiles.com/search?formatid=amigaHardDiskPFS) | Amiga Hard Disk Image (PFS) | .hdf .adf | Have not found a linux extractor for this format yet.
+[archive/amigaKickstartDiskImage](https://discmaster.textfiles.com/search?formatid=amigaKickstartDiskImage) | Amiga Kickstart disk image | .adf | 
 [archive/amigaRigidDiskBlockImage](https://discmaster.textfiles.com/search?formatid=amigaRigidDiskBlockImage) | Amiga Rigid Disk block / Hard Disk File image | .rdb .hdf | 
 [archive/apple2DiskImage](https://discmaster.textfiles.com/search?formatid=apple2DiskImage) | Apple 2 Disk Image | .dsk | 
 [archive/sparseImage](https://discmaster.textfiles.com/search?formatid=sparseImage) | [Apple Sparse Disk Image](https://en.wikipedia.org/wiki/Sparse_image) | .sparseimage | [1 sample file](https://sembiance.com/fileFormatSamples/archive/sparseImage/) - No known linux converter that I could find. Could emulate MacOS X and do: https://github.com/torarnv/sparsebundlefs/issues/7#issuecomment-326625187
@@ -727,7 +728,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,029)
+## Other (1,033)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -750,6 +751,7 @@ Family/Format | Name | Extensions | Notes
 [other/aeSGMLDocumentBinary](https://discmaster.textfiles.com/search?formatid=aeSGMLDocumentBinary) | A/E SGML DocumentBinary | .ae | 
 [other/abuseDemoData](https://discmaster.textfiles.com/search?formatid=abuseDemoData) | Abuse demo Data | .dat | 
 [other/abuseLevel](https://discmaster.textfiles.com/search?formatid=abuseLevel) | Abuse Level | .lvl .spe | 
+[other/accelProtelPrintedCircuitBoard](https://discmaster.textfiles.com/search?formatid=accelProtelPrintedCircuitBoard) | ACCEL/Protel Printed Circuit Board | .pcb | 
 [other/actContactLayoutV30](https://discmaster.textfiles.com/search?formatid=actContactLayoutV30) | ACT! Contact Layout | .cly | 
 [other/actContactMapV30](https://discmaster.textfiles.com/search?formatid=actContactMapV30) | ACT! contact Map | .map | 
 [other/actDataBaseBlobV30](https://discmaster.textfiles.com/search?formatid=actDataBaseBlobV30) | ACT! data base Blob | .blb | 
@@ -1212,6 +1214,7 @@ Family/Format | Name | Extensions | Notes
 [other/labelerTemplate](https://discmaster.textfiles.com/search?formatid=labelerTemplate) | Labeler/Labels Unlimited Template | .tpl | 
 [other/labVIEWData](https://discmaster.textfiles.com/search?formatid=labVIEWData) | LabVIEW data | .lsb | 
 [other/labViewVirtualInstrument](https://discmaster.textfiles.com/search?formatid=labViewVirtualInstrument) | LabView Virtual Instrument | .vi | 
+[other/ldSoHintsFile](https://discmaster.textfiles.com/search?formatid=ldSoHintsFile) | ld.so hints file | .hints | 
 [other/ldiffDifferencesData](https://discmaster.textfiles.com/search?formatid=ldiffDifferencesData) | LDIFF Differences Data | .lzd | 
 [other/legendOfKyrandiaEMCFile](https://discmaster.textfiles.com/search?formatid=legendOfKyrandiaEMCFile) | Legend of Kyrandia EMC File | .emc | 
 [other/lernoutAndHauspieData](https://discmaster.textfiles.com/search?formatid=lernoutAndHauspieData) | Lernout and Hauspie data | .lim | 
@@ -1422,6 +1425,7 @@ Family/Format | Name | Extensions | Notes
 [other/pgpRSAEncryptedSessionKey](https://discmaster.textfiles.com/search?formatid=pgpRSAEncryptedSessionKey) | PGP RSA encrypted session key | .pgp | 
 [other/photoImpressionsAlbum](https://discmaster.textfiles.com/search?formatid=photoImpressionsAlbum) | PhotoImpressions Album | .abm | 
 [other/photoStylerColorsDefinition](https://discmaster.textfiles.com/search?formatid=photoStylerColorsDefinition) | PhotoStyler Colors definition | .clr | 
+[other/pixelBenderBytecode](https://discmaster.textfiles.com/search?formatid=pixelBenderBytecode) | Pixel Bender bytecode |  | 
 [other/pkcsCryptographicMessageFile](https://discmaster.textfiles.com/search?formatid=pkcsCryptographicMessageFile) | PKCS Cryptographic Message File |  | 
 [other/platinenLayoutLayout](https://discmaster.textfiles.com/search?formatid=platinenLayoutLayout) | Platinen Layout Program Layout | .pla | 
 [other/platinenLayoutBibliotheken](https://discmaster.textfiles.com/search?formatid=platinenLayoutBibliotheken) | Platinen Layout Programm Bibliotheken/library | .bib | 
@@ -1598,6 +1602,7 @@ Family/Format | Name | Extensions | Notes
 [other/tiCalcBackup](https://discmaster.textfiles.com/search?formatid=tiCalcBackup) | Texas Instruments Calculator Backup | .73b .82b .83b .85b .86b .89b .92b | 
 [other/americanHeritageDictionaryIndex](https://discmaster.textfiles.com/search?formatid=americanHeritageDictionaryIndex) | The American Heritage Dictionary Index | .wx | 
 [other/catacombAbyssSavedGame](https://discmaster.textfiles.com/search?formatid=catacombAbyssSavedGame) | The Catacomb Abyss saved game | .sav | 
+[other/chessmasterSavedGame](https://discmaster.textfiles.com/search?formatid=chessmasterSavedGame) | The Chessmaster 2000 saved game |  | 
 [other/chessmasterClassicGamesLibrary](https://discmaster.textfiles.com/search?formatid=chessmasterClassicGamesLibrary) | The Chessmaster classic games library | .cml .dat | 
 [other/chessmasterOpeningBook](https://discmaster.textfiles.com/search?formatid=chessmasterOpeningBook) | The Chessmaster opening book | .dat | 
 [other/theChessmasterOpeningBook](https://discmaster.textfiles.com/search?formatid=theChessmasterOpeningBook) | The Chessmaster opening book | .obk | 
@@ -1762,7 +1767,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Poly (49)
+## Poly (50)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [poly/threeDProfessionalScene](https://discmaster.textfiles.com/search?formatid=threeDProfessionalScene) | 3-D Professional Scene |  | 
@@ -1780,6 +1785,7 @@ Family/Format | Name | Extensions | Notes
 [poly/digitalElevationMap](https://discmaster.textfiles.com/search?formatid=digitalElevationMap) | [Digital Elevation Map](http://fileformats.archiveteam.org/wiki/DEM) | .dem | [11 sample files](https://sembiance.com/fileFormatSamples/poly/digitalElevationMap/)
 [poly/dynaCADDPart](https://discmaster.textfiles.com/search?formatid=dynaCADDPart) | DynaCADD Part | .prt .dpt | 
 [poly/elasticRealityShape](https://discmaster.textfiles.com/search?formatid=elasticRealityShape) | Elastic Reality Shape | .er | 
+[poly/fastRayObject](https://discmaster.textfiles.com/search?formatid=fastRayObject) | FastRay object |  | 
 [poly/fastRayScene](https://discmaster.textfiles.com/search?formatid=fastRayScene) | FastRay scene |  | 
 [poly/floorPlanPlus3DDrawing](https://discmaster.textfiles.com/search?formatid=floorPlanPlus3DDrawing) | FloorPlan Plus/3D Drawing | .fp3 | 
 [poly/ghoulEngineModel](https://discmaster.textfiles.com/search?formatid=ghoulEngineModel) | GHOUL Engine model | .ghb | 

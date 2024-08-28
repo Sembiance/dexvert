@@ -56,6 +56,7 @@ export default
 		afxCompressedData                           : {name : "AFX compressed data", magic : ["AFX compressed data", /^AFX compressed file data/]},
 		aixBackupRestore                            : {name : "AIX backup/restore", ext : [".img"], magic : ["AIX backup/restore format file"]},
 		aldusLZWCompressedData                      : {name : "Aldus LZW compressed data", magic : ["Aldus LZW compressed data"]},
+		amigaKickstartDiskImage                     : {name : "Amiga Kickstart disk image", ext : [".adf"], magic : ["Amiga Kickstart disk"]},
 		amigaRigidDiskBlockImage                    : {name : "Amiga Rigid Disk block / Hard Disk File image", ext : [".rdb", ".hdf"], magic : ["Amiga Rigid Disk block / Hard Disk File image", "Amiga Rigid Disk partition map", /^Rigid Disk Block/], weakMagic : true},
 		apple2DiskImage                             : {name : "Apple 2 Disk Image", ext : [".dsk"], magic : ["Apple ][ Disk Image"]},
 		artisoftInstallationPackage                 : {name : "Artisoft installation Package", ext : [".pak"], magic : ["Artisoft installation Package"]},
@@ -471,6 +472,7 @@ export default
 		deathDrome3DModel       : {name : "Death Drome 3D model", ext : [".gam"], magic : ["Death Drome 3D model"]},
 		designIt3DObjectLibrary : {name : "Design It! 3-D object Library", ext : [".wlb"], magic : ["Design It! 3-D 3D object Library"]},
 		dynaCADDPart            : {name : "DynaCADD Part", ext : [".prt", ".dpt"], magic : ["DynaCADD part"]},
+		fastRayObject           : {name : "FastRay object", magic : ["FastRay object"]},
 		fastRayScene            : {name : "FastRay scene", magic : ["FastRay scene"]},
 		elasticRealityShape     : {name : "Elastic Reality Shape", ext : [".er"], magic : ["Elastic Reality Shape"]},
 		floorPlanPlus3DDrawing  : {name : "FloorPlan Plus/3D Drawing", ext : [".fp3"], magic : ["FloorPlan Plus/3D Drawing"]},
@@ -567,6 +569,7 @@ export default
 		chessAssistant                     : {name : "Chess Assistant File", ext : [".bic", ".bid", ".bim", ".bis", ".lib", ".bfi", ".dsc", ".ndx", ".bdy"], magic : ["Chess Assistant "]},
 		chessmasterClassicGamesLibrary     : {name : "The Chessmaster classic games library", ext : [".cml", ".dat"], magic : [/^The Chessmaster \d+ classic games library/]},
 		chessmasterOpeningBook             : {name : "The Chessmaster opening book", ext : [".dat"], magic : [/^The Chessmaster \d+ opening book/]},
+		chessmasterSavedGame               : {name : "The Chessmaster 2000 saved game", magic : ["The Chessmaster 2000 saved game"]},
 		chessmasterUserSettings            : {name : "The Chessmaster user settings", ext : [".dat"], magic : [/The Chessmaster \d+ user settings/]},
 		civilizationFile                   : {name : "Sid Meier's Civilization File", ext : [".pal", ".pic"], magic : ["Sid Meier's Civilization Palette"]},
 		civilWarBattleData                 : {name : "The Civil War Battle data", ext : [".btl"], magic : ["The Civil War Battle data"]},
@@ -976,6 +979,7 @@ export default
 		///////////
 		// Other //
 		///////////
+		accelProtelPrintedCircuitBoard           : {name : "ACCEL/Protel Printed Circuit Board", ext : [".pcb"], magic : ["ACCEL or Protel Printed Circuit Board file"], weakMagic : true},
 		actContactLayoutV30                      : {name : "ACT! Contact Layout", ext : [".cly"], magic : ["ACT! Contact Layout"]},
 		actContactMapV30                         : {name : "ACT! contact Map", ext : [".map"], magic : ["ACT! contact Map"]},
 		actDataBaseBlobV30                       : {name : "ACT! data base Blob", ext : [".blb"], magic : ["ACT! data base Blob"]},
@@ -1260,6 +1264,7 @@ export default
 		labVIEWData                              : {name : "LabVIEW data", ext : [".lsb"], magic : ["LabVIEW data (generic)", /^National Instruments, LabVIEW File, Code Resource File/]},
 		labViewVirtualInstrument                 : {name : "LabView Virtual Instrument", ext : [".vi"], magic : ["National Instruments, LabVIEW File, Virtual Instrument", "LABView Virtual Instrument"]},
 		ldiffDifferencesData                     : {name : "LDIFF Differences Data", ext : [".lzd"], magic : ["LDIFF differences data"]},
+		ldSoHintsFile                            : {name : "ld.so hints file", ext : [".hints"], magic : ["ld.so hints file"], weakMagic : true},
 		lernoutAndHauspieData                    : {name : "Lernout and Hauspie data", ext : [".lim"], magic : ["Lernout and Hauspie data"]},
 		life3000Status                           : {name : "LIFE 3000 Status", ext : [".lif"], magic : ["LIFE 3000 status"]},
 		linkBootableCodeForTransputerNetwork     : {name : "Link Bootable code for transputer network", ext : [".btl"], magic : ["Link Bootable code for transputer network"]},
@@ -1386,6 +1391,7 @@ export default
 		pkcsCryptographicMessageFile             : {name : "PKCS Cryptographic Message File", magic : [/^fmt\/670( |$)/]},
 		pgpKeyRing                               : {name : "PGP Key Ring", ext : [".key", ".pgp"], magic : [/^Pretty Good Privacy.*\s*Public Keyring/, "OpenPGP Public Key Version"]},
 		pgpRSAEncryptedSessionKey                : {name : "PGP RSA encrypted session key", ext : [".pgp"], magic : ["PGP RSA encrypted session key"], weakMagic : true},
+		pixelBenderBytecode                      : {name : "Pixel Bender bytecode", magic : ["Pixel Bender bytecode"]},
 		platinenLayoutBibliotheken               : {name : "Platinen Layout Programm Bibliotheken/library", ext : [".bib"], magic : ["Platinen Layout Programm Bibliotheken/library"]},
 		platinenLayoutLayout                     : {name : "Platinen Layout Program Layout", ext : [".pla"], magic : ["Platinen Layout Programm Layout"]},
 		platinenLayoutProgrammMacro              : {name : "Platinen Layout Programm Macro", ext : [".mac"], magic : ["Platinen Layout Programm Macro"], weakMagic : true},

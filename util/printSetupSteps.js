@@ -71,7 +71,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge mono`,
 	`emerge -1 libsndfile`,
 	`emerge -uDN world`,
-	`# pablodraw usually fails to merge the first time. Just run again: emerge media-gfx/pablodraw`,
+	`# pablodraw below usually fails to merge the first time. After the following line, just run again: emerge media-gfx/pablodraw`,
 	`emerge --noreplace ${postPackages.sortMulti().join(" ")}`,
 	`depmod -a`,
 	`modinfo vhba`,
@@ -86,9 +86,12 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`emerge --depclean`,
 	`revdep-rebuild -pi`,
 	`eix-update`,
+	`mkdir -p /mnt/dexdrone`,
+	`chown sembiance:sembiance /mnt/dexdrone`,
 	`sudo su - sembiance`,
-	`echo "Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decription and 'n' to all others."`,
+	`# Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
-	"# IMPORTANT: Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
+	`# Ensure 'startDexserver' works. May need to run it twice in order for the deno JSR packages to download properly.`,
+	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

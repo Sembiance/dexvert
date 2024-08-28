@@ -4,11 +4,12 @@ import {path} from "std";
 
 export class gt2 extends Program
 {
-	website = "https://www.helger.com/gt/gt2.htm";
-	loc     = "wine";
-	bin     = "c:\\Program Files\\GT2\\gt2.exe";
-	args    = r => ["/noarcs", "/nu", "/noerrbox", "/nologo", "/nocolor", "/noscanname", "/noscanext", "/outlinenums", `c:\\in${r.wineCounter}\\${path.basename(r.inFile())}`];
-	wineData = {
+	website   = "https://www.helger.com/gt/gt2.htm";
+	loc       = "wine";
+	bin       = "c:\\Program Files\\GT2\\gt2.exe";
+	args      = r => ["/noarcs", "/nu", "/noerrbox", "/nologo", "/nocolor", "/noscanname", "/noscanext", "/outlinenums", `c:\\in${r.wineCounter}\\${path.basename(r.inFile())}`];
+	exclusive = "gt2";	// can't run more than 1 copy, it messes up (to test, can comment this out and run this test over and over: ./testdexvert.js --format=text/microsoftMapData)
+	wineData  = {
 		keepOutput : true
 	};
 	post    = r =>

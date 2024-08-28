@@ -194,7 +194,7 @@ export class Program
 			}
 			else if(this.loc==="wine")
 			{
-				r.wineCounter = +(await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getWineCounter`)).text());
+				r.wineCounter = +(await (await fetch(`http://${WINE_WEB_HOST}:${WINE_WEB_PORT}/getWineCounter`)).text());	// we don't use xu.randStr() because we append to c:\out<counter> and thus need full path to be < 8 chars
 				r.wineData = {f, cmd : await getBin(), cwd : r.cwd, xlog, wineCounter : r.wineCounter};
 				r.wineData.args = await getArgs();
 				if(this.wineData)

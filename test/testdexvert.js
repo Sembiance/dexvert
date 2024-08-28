@@ -902,9 +902,8 @@ await sampleFilePaths.shuffle().parallelMap(async sampleFilePath =>
 	const {r, log, err} = await xu.fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {json : o, asJSON : true});
 	if(err)
 		console.error(`${log.join("\n")}\n${err}`.trim());
-	if(log?.length)
-		await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), log.join("\n"));
-
+	await fileUtil.writeTextFile(path.join(path.dirname(tmpOutDirPath), "log.txt"), log?.length ? log.join("\n") : (r.pretty?.length ? r.pretty : ""));
+		
 	await workercb({sampleFilePath, tmpOutDirPath, dexData : r.json});
 }, argv.serial ? 1 : Math.min(sampleFilePaths.length, NUM_WORKERS));
 

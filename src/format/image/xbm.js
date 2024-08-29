@@ -9,5 +9,8 @@ export class xbm extends Format
 	idMeta       = ({macFileType}) => macFileType==="XBM ";
 	mimeType     = "image/x-xbitmap";
 	metaProvider = ["image"];
-	converters   = ["convert", "gimp", "hiJaakExpress", "canvas", "tomsViewer"];
+	converters   = [
+		"convert", "gimp", "imconv[format:xbm]",
+		"hiJaakExpress[matchType:magic]", "canvas[matchType:magic]", "tomsViewer[matchType:magic]"
+	];
 }

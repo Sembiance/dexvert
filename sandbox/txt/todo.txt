@@ -1,11 +1,6 @@
 /--------------\
 | TOP Priority |
 \--------------/
-* Get 'sandbox/app/imtools_v3.0.tar.gz' to compile
-
-* See about converting this Java code to javascript to extract archive/innoSetupArchive: https://github.com/d0k/ednaunpack
-  Then search for detections and reprocess
-
 * Add extraction suport for these older MacroMind Projector files. No known converter or extractor:
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=macroMindProjector
 	https://dev.discmaster2.textfiles.com/search?qfields=name&detection=VWMD
@@ -26,7 +21,7 @@
 * Create a Duke Nukem 3D ART extractor/convertor, see sandbox/wip/dukeART
   The BAFed jar (java -jar BAFed.jar) can load and show the ART files, with animation, but can't really export
   The 'test.py' script comes from: http://justsolve.archiveteam.org/wiki/ART_(Duke_Nukem_3D)
-  That link also has a brief overview of th format.
+  That link also has a brief overview of the format.
   The test.py script claims it can extract the files, and it does extract SOME of the PNGs from: TILES005.ART
   But I could use that as the starting point for my own deno based script. It should also create animated GIFs for animated tiles
   Can convert these: http://dev.discmaster2.textfiles.com/browse/849/boot-disc-1996-08.iso/content/demos/games/duke3d/duke3d.grp
@@ -38,11 +33,6 @@
 /-----------------\
 | Medium Priority |
 \-----------------/
-* Could create a DOOM TITLEPIC converter for files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
-  Format: https://doomwiki.org/wiki/Picture_format   (COLORMAP: https://doomwiki.org/wiki/COLORMAP)
-
-* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
-
 * Add OS/2 support by either using OS/2 Warp 4.5.2 (winworld) on 86Box or by using ArcaOS (was blue lion) in vbox/vmware: https://www.youtube.com/watch?v=Utse8P_L8k0
   Then add format support for:
 	archive/os2FTCOMP
@@ -69,6 +59,9 @@
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
 
+* Now that Print to File/PDF works better, should now be able to support:
+  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
+
 * Add POVRAY rendering support (see the extensive notes in povRay.js)
   Example files: http://discmaster.textfiles.com/browse/15720/Disk18.iso/ZIPS/POV@.EXE/POV
   Other POV files: http://discmaster.textfiles.com/search?q=pov&qfields=ext&family=text&dedup=dedup
@@ -81,11 +74,6 @@
   Or maybe try installing Install Shield authoring itself to see if I can open them or build an extractor or something:
 	https://archive.org/details/install-shield-6.2-pro-std.-7z
 	https://archive.org/details/installshield1150premier
-
-* Now that Print to File/PDF works better, should now be able to support:
-  document/greenstreetPublisher (Open in win2k (or winxp) with Publishing Suite 99)
-
-* Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
 
 * ISOs I was unable to process:
 	No idea what format this is in: https://archive.org/details/Royal_Tyrrell_Museum_Virtual_Tour_2003_WIN98
@@ -113,11 +101,21 @@
 * Might be fun to detect MacOS kalideoscope themes and grab the individual images and render some sort of 'preview' of it: http://discmaster.textfiles.com/search?q=%22Minimum+Kaleidoscope+version%22&qfields=content&family=text&dedup=dedup
   If I name the preview something like kalideoscope_preview_dexvert.png then I can find them more easily
 
+* Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
+
+* Could create a DOOM TITLEPIC converter for files like: https://dev.discmaster2.textfiles.com/view/223/The%20Arsenal%20Files%20Collection%20%238%20(Arsenal%20Computer)%20(1996).ISO/g_doom/a1-snp2.zip/A1-SNP2.WAD/023.TITLEPIC
+  Format: https://doomwiki.org/wiki/Picture_format   (COLORMAP: https://doomwiki.org/wiki/COLORMAP)
+
+* See about converting this Java code to javascript to extract archive/innoSetupArchive: https://github.com/d0k/ednaunpack
+  Right now it wants a specific CD/DVD, but maybe it's flexible enough to handle any archive file like: setup*.bin  https://dev.discmaster2.textfiles.com/browse/6096/UFO_OfficeGames_DVD.iso
+
 
 /--------------\
 | Low Priority |
 \--------------/
-* Audio not getting extracted from some multi-track ISOs: https://discmaster.textfiles.com/browse/517
+* Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
+
+* Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0
 
 * Add all formats the Konvertor supports, warning, it's a LOT (copy-paste the list of each category from programs_formats.txt)
 

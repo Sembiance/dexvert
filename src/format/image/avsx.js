@@ -6,6 +6,6 @@ export class avsx extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/AVS_X_image";
 	ext        = [".avs", ".mbfavs", ".x"];
 	mimeType   = "image/x-avsx";
-	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
-	verify     = ({meta}) => meta.height>1 && meta.width>1;
+	converters = ["nconvert", `abydosconvert[format:${this.mimeType}]`, "imconv[format:x]", "tomsViewer"];
+	verify     = ({meta}) => meta.height>1 && meta.width>1 && meta.colorCount>1;
 }

@@ -8,5 +8,5 @@ export class miff extends Format
 	mimeType     = "image/x-miff";
 	magic        = ["MIFF image data", "ImageMagick Machine independent File Format bitmap", /^fmt\/930( |$)/];
 	metaProvider = ["image"];
-	converters   = ["convert", "nconvert"];
+	converters   = ["imconv[format:miff]", "convert", "nconvert"];
 }

@@ -9,5 +9,5 @@ export class sunIcon extends Format
 	magic      = TEXT_MAGIC;
 	weakMagic  = true;
 	notes      = "Color currently isn't supported. Don't know of a converter that supports it due to palettes not being embedded within the file.";
-	converters = ["nconvert"];
+	converters = ["nconvert", "imconv[format:icon]"];
 }

@@ -11,11 +11,11 @@ export class xwd extends Format
 	weakMagic    = ["X-Windows Screen Dump"];
 	metaProvider = ["image"];
 
-	// GIMP does the best for most input files. It doesn't get the colors right on MARBLE.XPM, but it does well with bettyboop
+	// GIMP does the best for most input files
 	// iio2png also does great
 	// nconvert handles the color of MARBLE.XPM well but messes up bettyboop and woman-with-ban.
 	// All the other converters do less well
-	converters = ["gimp", "iio2png", "nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
+	converters = ["gimp", "iio2png", "imconv[format:xwd]", "nconvert", `abydosconvert[format:${this.mimeType}]`, "convert", "hiJaakExpress[matchType:magic][hasExtMatch]"];
 
 	// Some files are confused for XWD files and produce just a black image
 	verify = ({meta}) => meta.colorCount>1;

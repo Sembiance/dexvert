@@ -396,7 +396,6 @@ export default
 		signumBitmap                   : {name : "Signum! bitmap", ext : [".imc", ".pac"], magic : ["Signum! bitmap"]},
 		skyRoadsBitmap                 : {name : "SkyRoads Bitmap", ext : [".lzs"], magic : ["SkyRoads bitmap"], weakMagic : true},
 		someraGraphicFormat            : {name : "Somera Graphic Format", ext : [".sgf"], magic : ["Somera Graphic Format"]},
-		sunTAACBitmap                  : {name : "Sun TAAC bitmap", ext : [".vff"], magic : ["Sun TAAC bitmap"], weakMagic : true},
 		superFlowDiagram               : {name : "SuperFlow diagram", ext : [".sf1"], magic : ["SuperFlow diagram (v1.00)"]},
 		teenyWeenyGamesGraphic         : {name : "Teeny Weeny Games Graphic", ext : [".gra"], magic : ["Teeny Weeny Games Graphics data"], weakMagic : true},
 		tgif                           : {name : "TGIF", ext : [".obj"], magic : [/^Tgif file/, /^fmt\/1588( |$)/], weakMagic : true, notes : "These open in media-gfx/tgif but no CLI conversion supported"},

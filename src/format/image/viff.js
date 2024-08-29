@@ -8,5 +8,5 @@ export class viff extends Format
 	mimeType     = "image/x-viff";
 	magic        = ["Khoros Visualization Image File Format"];
 	metaProvider = ["image"];
-	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "tomsViewer"];
+	converters   = ["convert", `abydosconvert[format:${this.mimeType}]`, "imconv[format:viff]", "tomsViewer"];
 }

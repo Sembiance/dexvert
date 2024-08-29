@@ -16,7 +16,8 @@ export class ini extends Format
 		"WinAmp/SHOUTcast PlayList", "Delphi Options File", "KDE/GNOME desktop entry", "WS_FTP configuration", "Iavadraw Wizard", "Wired For Sound configuration", "Karaoke track info", "Superbase printer driver", "KDE desktop entry", "UltraEdit Project",
 		"CloneCD CDImage (description)", "MOdule (play)List", "Exchange Extended Configuration File - Office Add-in", "JBuilder Beans Descriptor", "Premiere Motion settings", "Microsoft ODBC Data Source", "Premiere project", "Bloodshed Dev-C++ project",
 		"3ds UI colors", "NextSTART Theme", "The Chessmaster 4000 layout", "MS Flight Simulator aircraft configuration file", "Spring Engine unit Info", "Total Annihilation Main Unit Definition", "Winamp Signal Processing Studio DSP-Effect", "WinZip Job File",
-		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^fmt\/1760( |$)/
+		"SpyBot-Search-and-Destroy malware info", "ArcExplorer Project",
+		/^CloneCD CD-image Description/, /^PLS playlist/, /^Windows [Cc]odepage translator/, /^InstallShield Project$/, /^fmt\/(1614|1760)( |$)/
 	];
 	priority       = this.PRIORITY.LOWEST;
 	untouched      = dexState => dexState.meta.valid && (dexState.meta.sectionNames || []).length>0;

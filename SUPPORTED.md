@@ -1,4 +1,4 @@
-# Supported File Formats (2,278)
+# Supported File Formats (2,291)
 Converters are in priority order. That is, early converter entries handle the format better than later converters.
 
 Extensions are in order of importance, with the format's primary extension appearing first.
@@ -98,7 +98,7 @@ archive | [CPIO](http://fileformats.archiveteam.org/wiki/Cpio) | .cpio | [cpio](
 archive | [CrLZH Compressed](http://fileformats.archiveteam.org/wiki/CrLZH) | .yyy | [unar](https://github.com/incbee/Unarchiver) [deark](https://entropymine.com/deark/) [lbrate](http://www.svgalib.org/rus/lbrate.html) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crLZH/)
 archive | [Crunch Archive](http://fileformats.archiveteam.org/wiki/Crunch) |  | [unar](https://github.com/incbee/Unarchiver) [lbrate](http://www.svgalib.org/rus/lbrate.html) [deark](https://entropymine.com/deark/) | [10 sample files](https://sembiance.com/fileFormatSamples/archive/crunch/)
 archive | [Crunch-Mania Archive](http://fileformats.archiveteam.org/wiki/Crunch-Mania) | .crm .crm2 | [decrmtool](http://aminet.net/package/util/pack/decrunchmania-mos) [ancient](https://github.com/temisu/ancient_format_decompressor) [xfdDecrunch](http://aminet.net/package/util/pack/xfdmaster) | [15 sample files](https://sembiance.com/fileFormatSamples/archive/crunchMania/)
-archive | Cruncher Packed | .exe .com | cup386 | [5 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
+archive | Cruncher Packed | .exe .com | cup386 | [6 sample files](https://sembiance.com/fileFormatSamples/archive/cruncherPacked/)
 archive | [Daemon Tools Media Data eXtended Image](http://fileformats.archiveteam.org/wiki/MDX_(Daemon_Tools)) | .mdx | [iat](https://www.berlios.de/software/iso9660-analyzer-tool/) | [3 sample files](https://sembiance.com/fileFormatSamples/archive/mdx/)
 archive | [Dark Ages Map Game Archive](https://moddingwiki.shikadi.net/wiki/Dark_Ages_Map_Format) |  | [gamearch](https://github.com/Malvineous/libgamearchive) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkAgesMapGameArchive/)
 archive | [Dark Reign Game Archive](http://fileformats.archiveteam.org/wiki/FTG_(Dark_Reign)) | .ftg | [gameextractor](http://www.watto.org/game_extractor.html) | [2 sample files](https://sembiance.com/fileFormatSamples/archive/darkReignGameArchive/)
@@ -472,7 +472,7 @@ audio | Yamaha TX Wave Sample | .txw | [sox](http://sox.sourceforge.net) [awaveS
 ## Document (225)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
-document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | 
+document | 4D Write document |  | [strings](https://www.gnu.org/software/binutils/) | [1 sample file](https://sembiance.com/fileFormatSamples/document/fourDWriteDocument/)
 document | [4DOS Compressed Batch-To-Memory File](http://fileformats.archiveteam.org/wiki/4DOS_compressed_batch_file) | .btm | [fourDecomp](https://dosbox-x.com/wiki/Guide%3ASetting-up-networking-in-DOSBox%E2%80%90X) | [11 sample files](https://sembiance.com/fileFormatSamples/document/batchToMemory4DOS/)
 document | [AbiWord Document](http://fileformats.archiveteam.org/wiki/AbiWord) | .abw .zabw .doc | [soffice](https://www.libreoffice.org) | [9 sample files](https://sembiance.com/fileFormatSamples/document/abiWord/)
 document | [Across Crossword Puzzle](http://fileformats.archiveteam.org/wiki/PUZ_(crossword_puzzles)) | .puz | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/document/acrossCrosswordPuzzle/)
@@ -713,7 +713,7 @@ executable | Windows Screensaver | .scr | [deark](https://entropymine.com/deark/
 
 
 
-## Font (32)
+## Font (33)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 font | [Adobe Type 1 Font](http://fileformats.archiveteam.org/wiki/Adobe_Type_1) | .pfa .pfb | [fontforge](https://fontforge.org) | [27 sample files](https://sembiance.com/fileFormatSamples/font/adobeType1/)
@@ -747,6 +747,7 @@ font | Super-IRG | .sif | [recoil2png](http://recoil.sourceforge.net) | [1 sampl
 font | The Last Word Font | .f80 | [recoil2png](http://recoil.sourceforge.net) | [1 sample file](https://sembiance.com/fileFormatSamples/font/f80/)
 font | [TrueType Font](http://fileformats.archiveteam.org/wiki/TrueType) | .ttf | [convert](https://www.imagemagick.org/) | [19 sample files](https://sembiance.com/fileFormatSamples/font/ttf/)
 font | [Web Open Font Format](http://fileformats.archiveteam.org/wiki/WOFF) | .woff .woff2 | [fontforge](https://fontforge.org) | [10 sample files](https://sembiance.com/fileFormatSamples/font/woff/)
+font | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [deark](https://entropymine.com/deark/) | [7 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
 font | ZX Spectrum Font | .ch4 .ch6 .ch8 | [recoil2png](http://recoil.sourceforge.net) | [3 sample files](https://sembiance.com/fileFormatSamples/font/zxFont/)
 
 
@@ -1066,7 +1067,7 @@ image | [Lotus Manuscript Graphic](http://fileformats.archiveteam.org/wiki/Lotus
 image | [Ludek Maker](http://fileformats.archiveteam.org/wiki/Ludek_Maker) | .ldm | [recoil2png](http://recoil.sourceforge.net) | [11 sample files](https://sembiance.com/fileFormatSamples/image/ldm/)
 image | [LuRaWave Bitmap](http://fileformats.archiveteam.org/wiki/LuraWave) | .lwf | [luraWave](https://archive.org/download/plug-in-power-pack-for-netscape-communicator/Plug-In%20Power%20Pack%20for%20Netscape%20Communicator.iso/plugins%2Flw20free.exe) | [2 sample files](https://sembiance.com/fileFormatSamples/image/luraWave/)
 image | [MacDraw](http://fileformats.archiveteam.org/wiki/MacDraw) | .pict .drw | [soffice](https://www.libreoffice.org) | [17 sample files](https://sembiance.com/fileFormatSamples/image/macDraw/)
-image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [recoil2png](http://recoil.sourceforge.net) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [keyViewPro](https://archive.org/details/KeyViewPro/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [soffice](https://www.libreoffice.org) [tomsViewer](https://tomseditor.com/blog/viewer) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [55 sample files](https://sembiance.com/fileFormatSamples/image/pict/)
+image | [Macintosh Picture Format](http://fileformats.archiveteam.org/wiki/PICT) | .pict .pic .pct | [qtPicViewer](https://github.com/Sembiance/dexvert/tree/master/os/aux/winxp/app/quicktimeplayer412.zip) [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [recoil2png](http://recoil.sourceforge.net) [photoDraw](https://archive.org/details/PhotoDraw2000V2) [canvas](http://fileformats.archiveteam.org/wiki/Canvas) [hiJaakExpress](https://archive.org/details/hijaak-express) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [keyViewPro](https://archive.org/details/KeyViewPro/) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [corelDRAW](https://winworldpc.com/product/corel-draw/50) [soffice](https://www.libreoffice.org) [tomsViewer](https://tomseditor.com/blog/viewer) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [56 sample files](https://sembiance.com/fileFormatSamples/image/pict/)
 image | [MacOS Icon](http://fileformats.archiveteam.org/wiki/ICNS) | .icns | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [11 sample files](https://sembiance.com/fileFormatSamples/image/icns/)
 image | [MacPaint Image](http://fileformats.archiveteam.org/wiki/MacPaint) | .mac .pntg .pic .macp .pnt | [deark](https://entropymine.com/deark/) [iio2png](http://github.com/Sembiance/iio2png/) [imconv](ftp://ftp.sdsc.edu/pub/sdsc/graphics/imtools) [abydosconvert](https://github.com/Sembiance/abydosconvert) [convert](https://www.imagemagick.org/) [keyViewPro](https://archive.org/details/KeyViewPro/) [hiJaakExpress](https://archive.org/details/hijaak-express) [pv](https://github.com/Sembiance/dexvert/tree/master/dos/PV.EXE) [canvas5](https://winworldpc.com/product/deneba-canvas/5x) [corelPhotoPaint](https://archive.org/details/Corel_Photo-Paint_8_-_Win95_Eng) [tomsViewer](https://tomseditor.com/blog/viewer) | [29 sample files](https://sembiance.com/fileFormatSamples/image/macPaint/) - The MacBinary header is entirely optional, which makes this format really hard to properly detect, like those here: http://discmaster.textfiles.com/browse/8166/Educorp1Compilation.sit/educorp1/Clip%20Art_Pictures%20(4000,%207200)/4009%20Celebs%20v.2/The%20Pics!
 image | [Macro Pixel Editor](http://fileformats.archiveteam.org/wiki/Marco_Pixel_Editor) | .cpi | [recoil2png](http://recoil.sourceforge.net) | [5 sample files](https://sembiance.com/fileFormatSamples/image/cpi/)
@@ -1162,7 +1163,7 @@ image | PETSCII Editor | .scr .col | [recoil2png](http://recoil.sourceforge.net)
 image | PETSCII Editor | .pet | [recoil2png](http://recoil.sourceforge.net) | [2 sample files](https://sembiance.com/fileFormatSamples/image/pet/)
 image | [PFS First Publisher](http://fileformats.archiveteam.org/wiki/ART_(PFS:_First_Publisher)) | .art | [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) [convert](https://www.imagemagick.org/) | [17 sample files](https://sembiance.com/fileFormatSamples/image/pfsFirstPublisher/)
 image | [PhotoChrome](http://fileformats.archiveteam.org/wiki/PhotoChrome) | .pcs | [recoil2png](http://recoil.sourceforge.net) [abydosconvert](https://github.com/Sembiance/abydosconvert) | [10 sample files](https://sembiance.com/fileFormatSamples/image/photoChrome/)
-image | [PhotoDraw](http://fileformats.archiveteam.org/wiki/MIX_(PhotoDraw)) | .mix | [photoDraw](https://archive.org/details/PhotoDraw2000V2) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [8 sample files](https://sembiance.com/fileFormatSamples/image/photoDraw/)
+image | [PhotoDraw](http://fileformats.archiveteam.org/wiki/MIX_(PhotoDraw)) | .mix | [photoDraw](https://archive.org/details/PhotoDraw2000V2) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/photoDraw/)
 image | [PhotoStudio PSF](http://fileformats.archiveteam.org/wiki/PSF_(PhotoStudio)) | .psf | [nconvert](https://www.xnview.com/en/nconvert/) [imageAlchemy](http://fileformats.archiveteam.org/wiki/Image_Alchemy) [graphicWorkshopProfessional](http://www.mindworkshop.com/gwspro.html) [picturePublisher](https://winworldpc.com/product/micrografx-graphics-suite/2) [tomsViewer](https://tomseditor.com/blog/viewer) | [11 sample files](https://sembiance.com/fileFormatSamples/image/photoStudio/)
 image | [Picasso 64](http://fileformats.archiveteam.org/wiki/Picasso_64) | .p64 | [recoil2png](http://recoil.sourceforge.net) [nconvert](https://www.xnview.com/en/nconvert/) [abydosconvert](https://github.com/Sembiance/abydosconvert) [view64](http://view64.sourceforge.net/) | [12 sample files](https://sembiance.com/fileFormatSamples/image/p64/)
 image | [Picture It!](http://fileformats.archiveteam.org/wiki/MIX_(Picture_It!)) | .mix | [photoDraw](https://archive.org/details/PhotoDraw2000V2) [deark](https://entropymine.com/deark/) [nconvert](https://www.xnview.com/en/nconvert/) | [11 sample files](https://sembiance.com/fileFormatSamples/image/pictureIt/) - Only thumbnail extraction is supported.
@@ -1635,7 +1636,7 @@ music | ZXS | .zxs | [zxtune123](https://zxtune.bitbucket.io/) [ayEmul](https://
 
 
 
-## Other (117)
+## Other (119)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 other | 64Net Container | .n64 | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/sixtyFourNetContainer/)
@@ -1692,10 +1693,12 @@ other | InstallShield Package | .pkg | [strings](https://www.gnu.org/software/bi
 other | [InstallShield Script](http://fileformats.archiveteam.org/wiki/InstallShield_INS) | .ins | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/installShieldScript/)
 other | JAM Message Area Header File | .jhr | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/jamMessageAreaHeaderFile/)
 other | Javelin Case Study | .cas | [strings](https://www.gnu.org/software/binutils/) | [11 sample files](https://sembiance.com/fileFormatSamples/other/javelinCaseStudy/)
+other | LapLink Help | .hlp | [strings](https://www.gnu.org/software/binutils/) | 
 other | Mac OS X Folder Info | .ds_store | [dsstoreinfo](https://github.com/gehaxelt/Python-dsstore) | [10 sample files](https://sembiance.com/fileFormatSamples/other/dsstore/)
 other | Maxon Multimedia Script |  | [strings](https://www.gnu.org/software/binutils/) | [4 sample files](https://sembiance.com/fileFormatSamples/other/maxonMultimediaScript/)
 other | MetaEdit Method Definition | .mof | [strings](https://www.gnu.org/software/binutils/) | [3 sample files](https://sembiance.com/fileFormatSamples/other/metaEditMethodDefinition/)
 other | Microsoft Developer Studio Project | .mdp | [strings](https://www.gnu.org/software/binutils/) | [10 sample files](https://sembiance.com/fileFormatSamples/other/developerStudioProject/)
+other | Microsoft Project exported data | .mpx | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/microsoftProjectExportedData/)
 other | Microsoft QuickPascal Unit | .qpu | [strings](https://www.gnu.org/software/binutils/) | [8 sample files](https://sembiance.com/fileFormatSamples/other/quickPascalUnit/)
 other | Microsoft Visual C Binary Resource | .aps | [strings](https://www.gnu.org/software/binutils/) | [13 sample files](https://sembiance.com/fileFormatSamples/other/microsoftVisualCBinaryResource/)
 other | Microsoft Visual C/C++ Precompiled Header file | .pch .dbg | [strings](https://www.gnu.org/software/binutils/) | [9 sample files](https://sembiance.com/fileFormatSamples/other/msvcPCH/)
@@ -1775,7 +1778,7 @@ poly | [Direct3D Object](http://fileformats.archiveteam.org/wiki/X_(DirectX)) | 
 poly | [Doom 3 Mesh](https://modwiki.dhewm3.org/MD5MESH_(file_format)) | .md5mesh | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [6 sample files](https://sembiance.com/fileFormatSamples/poly/doom3Mesh/)
 poly | [Drawing Exchange Format](http://fileformats.archiveteam.org/wiki/DXF) | .dxf | [polyTrans64](https://www.okino.com/conv/conv.htm) [cinema4D427](https://archive.org/details/maxoncinema4dr4.27.7z) [AccuTrans3D](http://www.micromouse.ca/) [assimp](https://github.com/assimp/assimp) [blender](https://www.blender.org) [milkShape3D](http://www.milkshape3d.com/) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [13 sample files](https://sembiance.com/fileFormatSamples/poly/dxf/)
 poly | [Electric Image 3D File](http://fileformats.archiveteam.org/wiki/FACT) | .fact .fac | [polyTrans64](https://www.okino.com/conv/conv.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/electricImage3DFile/)
-poly | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [polyTrans64](https://www.okino.com/conv/conv.htm) | [7 sample files](https://sembiance.com/fileFormatSamples/poly/esriShape/)
+poly | [ESRI/ArcView Shape](http://fileformats.archiveteam.org/wiki/Shapefile) | .shp | [polyTrans64](https://www.okino.com/conv/conv.htm) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/esriShape/)
 poly | [Extensible 3D](http://fileformats.archiveteam.org/wiki/X3D) | .x3d .x3db .x3dv .x3dz .x3dbz .x3dvz | [blender](https://www.blender.org) [assimp](https://github.com/assimp/assimp) [polyTrans64](https://www.okino.com/conv/conv.htm) | [3 sample files](https://sembiance.com/fileFormatSamples/poly/x3d/)
 poly | [Geomview Object File Format](http://fileformats.archiveteam.org/wiki/OFF_(Geomview_Object_File_Format)) | .off | [assimp](https://github.com/assimp/assimp) [threeDObjectConverter](http://3doc.i3dconverter.com/) | [10 sample files](https://sembiance.com/fileFormatSamples/poly/objectFileFormat/)
 poly | [GL Transmission Format](http://fileformats.archiveteam.org/wiki/GlTF) | .glb .gltf |  | [3 sample files](https://sembiance.com/fileFormatSamples/poly/glTF/)
@@ -1816,7 +1819,7 @@ poly | [XGL](https://people.math.sc.edu/Burkardt/data/xgl/xgl_spec.html) | .xgl 
 
 
 
-## Text (468)
+## Text (478)
 Family | Name | Extensions | Converters | Notes
 ------ | ---- | ---------- | ---------- | -----
 text | 22DISK | .def |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/twentyTwoDisk/)
@@ -1826,10 +1829,11 @@ text | Acrobat Distiller Job Options | .joboptions1 .joboptions .joboption2 .job
 text | [Acrobat Forms Data](http://fileformats.archiveteam.org/wiki/FDF) | .fdf .acrodata |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/acrobatFormsData/)
 text | ActiveX License Package file | .lpk |  | 
 text | Actor Library Definition Language | .ldl |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/actorLibraryDefinitionLanguage/)
+text | Adobe Download Manager | .aom |  | 
 text | [Adobe Font List](http://fileformats.archiveteam.org/wiki/Adobe_Font_List) | .lst |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/adobeFontList/)
 text | Adobe Portable Document Catalog Index | .pdx |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/adobePortableDocumentCatalogIndex/)
 text | Advanced Gravis Phoenix configuration | .phx |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/advancedGravisPhoenixConfiguration/)
-text | Advanced Stream Redirector | .asx |  | 
+text | Advanced Stream Redirector | .asx |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/advancedStreamRedirector/)
 text | Adventure Game Toolkit Messages | .msg |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/adventureGameToolkitMessages/)
 text | Aegis Animator Script | .script |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/aegisAnimatorScript/)
 text | Aegis VideoSEG Script | .script |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/aegisVideoSEGScript/)
@@ -1840,7 +1844,7 @@ text | Amiga Symbolizer Function Definition | .sfd |  | [10 sample files](https:
 text | [AmigaDOS Script File](https://amigasourcecodepreservation.gitlab.io/mastering-amigados-scripts/) |  |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/amigaDOSScript/)
 text | AMOS Source Code | .amossourcecode |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/amosSource/)
 text | AMS Language |  |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/amsLanguage/)
-text | Anacreon: Reconstruction Scenery | .scn |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/anacreonReconstructionScenery/)
+text | Anacreon: Reconstruction Scenery | .scn |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/anacreonReconstructionScenery/)
 text | Apache mission Data | .dta |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/apacheMissionData/)
 text | Apple Xcode User data | .pbxuser |  | 
 text | Applix spreadsheet | .as |  | 
@@ -1935,6 +1939,11 @@ text | Elastic Reality project data | .er |  | [10 sample files](https://sembian
 text | Emacs RMAIL |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/emacsRMAIL/)
 text | eMbedded Visual Basic Project | .ebp |  | 
 text | Enriched Text Document |  |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/enrichedText/)
+text | ESRI Arc/Info Export | .e00 |  | 
+text | ESRI Arc/Info interchange format | .e00 .x00 |  | 
+text | ESRI Arc/View Project | .apr |  | 
+text | ESRI ArcInfo DAT File (External) | .dat |  | 
+text | ESRI Shapefile Projection | .prj |  | 
 text | ESS-Code Filter | .flt |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/essCodeFilter/)
 text | Eureka/Mercury Report | .rpt |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/eurekaMercuryReport/)
 text | Executor Configuration File | .ecf |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/executorConfigurationFile/)
@@ -1944,6 +1953,7 @@ text | ExpressGraph Graph | .grf |  | [12 sample files](https://sembiance.com/fi
 text | Expression Design drawing | .xpr |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/expressionDesignDrawing/)
 text | Expression Strokes | .sks |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/expressionStrokes/)
 text | [Extensible Markup Language](http://fileformats.archiveteam.org/wiki/XML) | .xml |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/xml/)
+text | FGDC metadata | .met |  | 
 text | File List | .bbs .lst .lis .dir .ind |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/fileList/) - Some day I should try and parse these.
 text | Flight Sim Toolkit airplane parameters |  |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitAirplaneParameters/)
 text | Flight Sim Toolkit Gauges | .fgd |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/flightSimToolkitGauges/)
@@ -1973,7 +1983,7 @@ text | GIMP Script-Fu Script | .scm |  | [11 sample files](https://sembiance.com
 text | GNAT Ada Library Information | .ali |  | [18 sample files](https://sembiance.com/fileFormatSamples/text/gnatAdaLibraryInformation/)
 text | GNU Bison Grammar | .yy .y |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/gnuBisonGrammar/)
 text | GNU Info File | .info-1 .info-2 .info-3 .info-4 .info-5 .info-6 .info-7 .info-8 .info-9 |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/gnuInfo/)
-text | Grand Theft Auto keyboard Configuration | .cfg |  | 
+text | Grand Theft Auto keyboard Configuration | .cfg |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/grandTheftAutoKeyboardConfig/)
 text | Graphmatica Graph | .gr |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/graphmaticaGraph/)
 text | Gravis Firebird 2 configuration | .fbd |  | 
 text | Gravis Firebird configuration | .fbd |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/gravisFirebirdConfiguration/)
@@ -2048,6 +2058,7 @@ text | Magnetic Scrolls Collection Layout | .lay |  |
 text | [Makefile](http://fileformats.archiveteam.org/wiki/Makefile) | .mak .mk |  | [13 sample files](https://sembiance.com/fileFormatSamples/text/Makefile/)
 text | Makeindex log file | .ilg |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/makeindexLogFile/)
 text | [Maker Interchange Format](http://fileformats.archiveteam.org/wiki/Maker_Interchange_Format) | .mif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/makerInterchangeFormat/)
+text | Manhattan Printer Description | .mpd |  | 
 text | Marcel Printer Driver | .prd |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/marcelPrinterDriver/)
 text | MarxMenu script | .mnu .inc |  | [15 sample files](https://sembiance.com/fileFormatSamples/text/marxMenuScript/)
 text | Mathematica notebook | .nb .nbp .ma |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/mathematicaNotebook/)
@@ -2070,7 +2081,6 @@ text | Microsoft Help compiler Project | .hpj |  | [13 sample files](https://sem
 text | Microsoft Map Data | .map |  | [14 sample files](https://sembiance.com/fileFormatSamples/text/microsoftMapData/)
 text | [Microsoft Object Description Language](http://fileformats.archiveteam.org/wiki/ODL_(Microsoft_Object_Description_Language)) | .odl |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftObjectDescriptionLanguage/)
 text | Microsoft Programmer's Workbench Status | .sts |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftProgrammersWorkbenchStatus/)
-text | Microsoft Project exported data | .mpx |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/microsoftProjectExportedData/)
 text | Microsoft PRX |  |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftPRX/)
 text | Microsoft Visual C++ Workspace | .vcw |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/microsoftVisualCPPWorkspace/)
 text | Microsoft Visual Studio Solution | .sln |  | 
@@ -2095,6 +2105,7 @@ text | Netscape cookies | .txt |  |
 text | NMEA GPS log data | .nme .n20 .nmea .nma |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/nmeaGPSLogData/)
 text | Nota Bene Printer definition | .prn |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/notaBenePrinterDefinition/)
 text | Novell 16-bit LAN driver Installer data | .ins |  | [20 sample files](https://sembiance.com/fileFormatSamples/text/novell16BitLANDriverInstallerData/)
+text | Oberon System 3 text document | .text .tool .mod |  | 
 text | Oleo spreadsheet | .oleo |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/oleoSpreadsheet/)
 text | Opera Hotlist/bookmark | .adr |  | [4 sample files](https://sembiance.com/fileFormatSamples/text/operaHotlist/)
 text | OS/2 Install Catalog File | .icf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/os2InstallCatalogFile/)
@@ -2173,6 +2184,7 @@ text | Scala Multimedia Script | .script |  | [14 sample files](https://sembianc
 text | Scooter circuit layout | .plt |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/scooterCircuitLayout/)
 text | sendmail m4 | .m4 |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/sendmailM4/)
 text | [SGML Document](http://fileformats.archiveteam.org/wiki/SGML) | .sgml |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sgml/)
+text | Shapefile Projection metadata Geographic Coords | .prj |  | 
 text | Shareware Information File | .sif |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sharewareInformationFile/)
 text | Siag spreadsheet | .siag |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/siagSpreadsheet/)
 text | SIDPLAY Info | .sid .si |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/sidPLAYInfo/)
@@ -2185,7 +2197,7 @@ text | [Smart Game Format](http://fileformats.archiveteam.org/wiki/Smart_Game_Fo
 text | SNNS network definition | .net |  | 
 text | SNNS pattern definition | .pat |  | 
 text | SNNS result | .res |  | 
-text | SoftICE initialization data | .dat |  | 
+text | SoftICE initialization data | .dat |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/softICEInitializationData/)
 text | Span-It! Personality definition | .per |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/spanItPersonalityDefinition/)
 text | Speedo font Typeface Definition | .tdf |  | 
 text | SPSS Portable Data Format | .por |  | 
@@ -2217,7 +2229,7 @@ text | Tornado Mission info | .mis |  |
 text | Total Commander button Bar config | .bar |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/totalCommanderButtonBarConfig/)
 text | TPLOT graph source | .plt |  | [12 sample files](https://sembiance.com/fileFormatSamples/text/tplotGraphSource/)
 text | Track Row Column markers data format | .trc |  | 
-text | Tracon Sector info | .sec |  | [2 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
+text | Tracon Sector info | .sec |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/traconSectorInfo/)
 text | Tracon Simulation data | .dem .sim |  | [6 sample files](https://sembiance.com/fileFormatSamples/text/traconSimulationData/)
 text | Trumpet Windsock settings | .ini |  | [10 sample files](https://sembiance.com/fileFormatSamples/text/trumpetWindsockSettings/)
 text | TUMMY Configuration | .config |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/tummyConfiguration/)
@@ -2264,6 +2276,7 @@ text | WGT 3D model | .3d |  | [3 sample files](https://sembiance.com/fileFormat
 text | Wildfire Benoit Coordinates | .coords |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/wildfireBenoitCoordinates/)
 text | Wildfire Session | .session |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/wildfireSession/)
 text | WIN-SFV32 checksum  | .txt |  | 
+text | Windows application log | .lge .lgc .lgd |  | 
 text | [Windows Autorun File](http://fileformats.archiveteam.org/wiki/INF_(Windows)) | .nf |  | [1 sample file](https://sembiance.com/fileFormatSamples/text/windowsAutorun/)
 text | Windows Desktop Theme | .theme |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/windowsDesktopTheme/)
 text | Windows Explorer UIFILE |  |  | 
@@ -2278,7 +2291,7 @@ text | WinFlash Flashcard Source | .fls |  | [4 sample files](https://sembiance.
 text | WinJack for MS Win | .bj |  | [3 sample files](https://sembiance.com/fileFormatSamples/text/winJackForMSWin/)
 text | WinUAE Configuration | .uae |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/winUAEConfiguration/)
 text | Wise Installer log | .log |  | [8 sample files](https://sembiance.com/fileFormatSamples/text/wiseInstallerLog/)
-text | Wise script | .wse |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
+text | Wise script | .wse |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/wiseScript/)
 text | Xantippe project | .xan |  | [7 sample files](https://sembiance.com/fileFormatSamples/text/xantippeProject/)
 text | XaoS Position File | .z .xpf |  | [11 sample files](https://sembiance.com/fileFormatSamples/text/xaosPositionFile/)
 text | Xara graphics | .wix |  | [5 sample files](https://sembiance.com/fileFormatSamples/text/xaraGraphics/)

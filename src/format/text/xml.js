@@ -9,9 +9,9 @@ const _XML_MAGIC = [
 	"Compass and Ruler geometry", "RSS web feed", "Microsoft .NET XML Resource template", "MSBuild Targets", "Logiqx XML Format", "Glyph Interchange Format", "Web Services Description Language", "Fontconfig Configuration", "Visual Studio .NET Visual C Project",
 	"Visual Studio Project User Options", "Visual Studio C++ project Filters (UTF-8)", "Visual Studio Visual C++ Project (UTF-8)", "JavaHelp TOC", "JBuilder Project", "JavaHelp map", "Wireless Markup Language", "NetBeans project Attributes",
 	"Tag Library Descriptor", "Channel Definition Format", "QuickTime Media Link", "Interface Builder UI resource data (archive)", "Mozilla XML User interface Language", "GPS eXchange format", "Glade UI design", "Internet Archive book scan data",
-	"RoboHelp / FlashHelp skin",
+	"RoboHelp / FlashHelp skin", "Entity and Attribute Information", "Shapefile Geospatial metadata", "NuGet Specification",
 	/^Tiled Tiles (Map|Set) XML$/,
-	/^fmt\/(979|983|1677|1796)( |$)/
+	/^fmt\/(979|983|1677|1729|1796)( |$)/
 ];
 export {_XML_MAGIC};
 

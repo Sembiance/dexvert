@@ -1,11 +1,11 @@
-# Unsupported File Formats (1,810)
+# Unsupported File Formats (1,822)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
 
 
 
-## Archive (156)
+## Archive (157)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [archive/thirtyTwoLitePacked](https://discmaster.textfiles.com/search?formatid=thirtyTwoLitePacked) | 32Lite Packed | .exe | 
@@ -92,6 +92,7 @@ Family/Format | Name | Extensions | Notes
 [archive/metaCardStack](https://discmaster.textfiles.com/search?formatid=metaCardStack) | MetaCard/Revolution Stack | .rev | [4 sample files](https://sembiance.com/fileFormatSamples/archive/metaCardStack/)
 [archive/micrografxArchive](https://discmaster.textfiles.com/search?formatid=micrografxArchive) | Micrografx Archive | .mda | 
 [archive/msieCache](https://discmaster.textfiles.com/search?formatid=msieCache) | Microsoft Internet Explorer Cache | .dat | Can use this to list contents, but to extract needs to connect to the cache files which is tricky: https://github.com/libyal/libmsiecf
+[archive/microsoftOutLookPersonalFolder](https://discmaster.textfiles.com/search?formatid=microsoftOutLookPersonalFolder) | Microsoft OutLook Personal Folder | .pst | 
 [archive/mjwinMahjonggTISTileSet](https://discmaster.textfiles.com/search?formatid=mjwinMahjonggTISTileSet) | MJWIN/VGA Mahjongg TileSet | .tis | 
 [archive/mpq](https://discmaster.textfiles.com/search?formatid=mpq) | MoPaQ Archive | .mpq | Need some sample archives. Can use this to extract: https://github.com/Kanma/MPQExtractor or https://github.com/uakfdotb/umpqx
 [archive/msxCassetteTape](https://discmaster.textfiles.com/search?formatid=msxCassetteTape) | MSX Cassette Tape | .cas | 
@@ -377,7 +378,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (76)
+## Font (75)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
@@ -448,7 +449,6 @@ Family/Format | Name | Extensions | Notes
 [font/vgaPaint386Font](https://discmaster.textfiles.com/search?formatid=vgaPaint386Font) | VGAPaint 386 Font | .vfn | 
 [font/westwoodFont](https://discmaster.textfiles.com/search?formatid=westwoodFont) | Westwood Font | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/westwoodFont/)
 [font/wildfire3DFont](https://discmaster.textfiles.com/search?formatid=wildfire3DFont) | Wildfire 3D Font | .3dfont | 
-[font/windowsFont](https://discmaster.textfiles.com/search?formatid=windowsFont) | [Windows Font](http://fileformats.archiveteam.org/wiki/FNT_(Windows_Font)) | .fnt | [3 sample files](https://sembiance.com/fileFormatSamples/font/windowsFont/) - Rumor has it Fony supports bitmap fonts, but I know it doesn't support vector ones like ROMAN.fnt and MODERN.fnt
 [font/wordPerfectFont](https://discmaster.textfiles.com/search?formatid=wordPerfectFont) | WordPerfect Font | .wfa | 
 [font/wordUpToolkitFont](https://discmaster.textfiles.com/search?formatid=wordUpToolkitFont) | WordUp Graphics Toolkit Font | .wfn | 
 [font/xCADFont](https://discmaster.textfiles.com/search?formatid=xCADFont) | X-CAD Font |  | 
@@ -459,7 +459,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (132)
+## Image (133)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -566,6 +566,7 @@ Family/Format | Name | Extensions | Notes
 [image/protoCAD3DDrawing](https://discmaster.textfiles.com/search?formatid=protoCAD3DDrawing) | ProtoCAD 3D Drawing | .pcf | 
 [image/quattroProClipArt](https://discmaster.textfiles.com/search?formatid=quattroProClipArt) | Quattro Pro Clip Art | .clp | 
 [image/quickLinkFaxCover](https://discmaster.textfiles.com/search?formatid=quickLinkFaxCover) | QuickLink Fax Cover | .cvr | 
+[image/quickLinkIIFaxBitmap](https://discmaster.textfiles.com/search?formatid=quickLinkIIFaxBitmap) | QuickLink II Fax bitmap | .qfx | 
 [image/reflectionsMonzoom](https://discmaster.textfiles.com/search?formatid=reflectionsMonzoom) | Reflections/Monzoom | .r3 | 
 [image/rleTRE](https://discmaster.textfiles.com/search?formatid=rleTRE) | [Run Length Encoded True Colour Picture](http://fileformats.archiveteam.org/wiki/Spooky_Sprites) | .tre | [5 sample files](https://sembiance.com/fileFormatSamples/image/rleTRE/)
 [image/satoriPaint](https://discmaster.textfiles.com/search?formatid=satoriPaint) | [Satori Paint](http://fileformats.archiveteam.org/wiki/Spaceward_Graphics) | .cvs .rir | [6 sample files](https://sembiance.com/fileFormatSamples/image/satoriPaint/) - Only sample files I've encountered shipped with the actual program, thus doesn't seem worthwhile to support this image format if the files weren't really distributed.
@@ -727,7 +728,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,033)
+## Other (1,044)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -969,6 +970,10 @@ Family/Format | Name | Extensions | Notes
 [other/creativeDskVoiceDriver](https://discmaster.textfiles.com/search?formatid=creativeDskVoiceDriver) | Creative DskVoice Driver | .drv | 
 [other/creativeGraphicsLibraryDriver](https://discmaster.textfiles.com/search?formatid=creativeGraphicsLibraryDriver) | Creative Graphics Library Driver | .cgl | 
 [other/creativeSignalMicrocode](https://discmaster.textfiles.com/search?formatid=creativeSignalMicrocode) | Creative Signal Processor Microcode | .csp | 
+[other/crosstalkDriver](https://discmaster.textfiles.com/search?formatid=crosstalkDriver) | Crosstalk Driver | .xtd | 
+[other/crosstalkFilter](https://discmaster.textfiles.com/search?formatid=crosstalkFilter) | Crosstalk Filter | .xtf | 
+[other/crosstalkProtocol](https://discmaster.textfiles.com/search?formatid=crosstalkProtocol) | Crosstalk Protocol | .xtp | 
+[other/crosstalkTerminal](https://discmaster.textfiles.com/search?formatid=crosstalkTerminal) | Crosstalk Terminal | .xtt | 
 [other/crystalAtariBrowserModule](https://discmaster.textfiles.com/search?formatid=crystalAtariBrowserModule) | Crystal Atari Browser Module | .mdl | 
 [other/ctVOICEDriver](https://discmaster.textfiles.com/search?formatid=ctVOICEDriver) | CT-VOICE Driver | .drv | 
 [other/cubaseDrumMap](https://discmaster.textfiles.com/search?formatid=cubaseDrumMap) | Cubase Drum Map | .drm | 
@@ -1059,6 +1064,8 @@ Family/Format | Name | Extensions | Notes
 [other/erdasImagineHierarchicalFileArchitecture](https://discmaster.textfiles.com/search?formatid=erdasImagineHierarchicalFileArchitecture) | ERDAS Imagine Hierarchical File Architecture |  | 
 [other/esriCoverageAnnotation](https://discmaster.textfiles.com/search?formatid=esriCoverageAnnotation) | ESRI ArcInfo Coverage Annotation |  | 
 [other/esriGridNIT](https://discmaster.textfiles.com/search?formatid=esriGridNIT) | ESRI ArcInfo Grid NIT | .nit | 
+[other/esriAttributeIndexFiles](https://discmaster.textfiles.com/search?formatid=esriAttributeIndexFiles) | ESRI Attribute Index Files | .ain | 
+[other/esriShapefileHeaderIndex](https://discmaster.textfiles.com/search?formatid=esriShapefileHeaderIndex) | ESRI Shapefile Header Index | .aih | 
 [other/esriSpatialIndex](https://discmaster.textfiles.com/search?formatid=esriSpatialIndex) | ESRI Spatial Index |  | 
 [other/esriDataBaseIndex](https://discmaster.textfiles.com/search?formatid=esriDataBaseIndex) | ESRI/ArcView DataBase Index | .shx | 
 [other/expresswarePrinterDefFile](https://discmaster.textfiles.com/search?formatid=expresswarePrinterDefFile) | Expressware Printer Definition File | .pdf | 
@@ -1095,6 +1102,7 @@ Family/Format | Name | Extensions | Notes
 [other/fractalWeaveParameters](https://discmaster.textfiles.com/search?formatid=fractalWeaveParameters) | Fractal Weave Parameters | .wwv | 
 [other/freelanceGraphicsSmartmaster](https://discmaster.textfiles.com/search?formatid=freelanceGraphicsSmartmaster) | Freelance Graphics Smartmaster | .mas .pre | 
 [other/frontPageBTreeIndex](https://discmaster.textfiles.com/search?formatid=frontPageBTreeIndex) | Front Page Binary-Tree Index | .btr | 
+[other/frontierFirstEncountersSavedCommander](https://discmaster.textfiles.com/search?formatid=frontierFirstEncountersSavedCommander) | Frontier: First Encounters saved commander | ._01 | 
 [other/fullTiltPinballData](https://discmaster.textfiles.com/search?formatid=fullTiltPinballData) | Full Tilt Pinball Data | .dat | 
 [other/gPoliceGameData](https://discmaster.textfiles.com/search?formatid=gPoliceGameData) | G-Police game data | .rdt | 
 [other/gadToolsBoxUIData](https://discmaster.textfiles.com/search?formatid=gadToolsBoxUIData) | GadToolsBox UI data | .gui | 
@@ -1375,7 +1383,11 @@ Family/Format | Name | Extensions | Notes
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonDiskDoctorUnDoFile](https://discmaster.textfiles.com/search?formatid=nortonDiskDoctorUnDoFile) | Norton Disk Doctor UnDo file | .dat | 
 [other/nortonFileInfoData](https://discmaster.textfiles.com/search?formatid=nortonFileInfoData) | Norton FileInfo data | .fi | 
+[other/nortonPCAnywhereCallersList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereCallersList) | Norton pcAnywhere Callers list | .ci6 | 
+[other/nortonPCAnywhereHardwareConfigurations](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereHardwareConfigurations) | Norton pcAnywhere Hardware configurations | .hw6 | 
+[other/nortonPCAnywhereHostList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereHostList) | Norton pcAnywhere host list | .pc6 | 
 [other/nortonPCAnywhereModemList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereModemList) | Norton pcAnywhere Modem list | .md6 | 
+[other/nortonPCAnywhereOnlineServicesList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereOnlineServicesList) | Norton pcAnywhere Online Services list | .os6 | 
 [other/nortonUtilitiesImageBackupIndex](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesImageBackupIndex) | Norton Utilities Image backup index | .idx | 
 [other/nortonUtilitiesLibrary](https://discmaster.textfiles.com/search?formatid=nortonUtilitiesLibrary) | Norton Utilities Library | .rtl | 
 [other/novellNetwareVirtualLoadableModule](https://discmaster.textfiles.com/search?formatid=novellNetwareVirtualLoadableModule) | Novell Netware Virtual Loadable Module | .vlm .exe | 

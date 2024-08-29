@@ -44,17 +44,6 @@
   It also doesn't associated .pal palette files: https://discmaster.textfiles.com/browse/2209/Assassins%203%20-%20The%20Ultimate%20Games%20CD%20(1997)(Weird%20Science)[!][Amiga-CD32-CDTV].iso/play_zone/animal_pairs/pictures
   Perhaps get deark to add support for this format.
 
-* Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
-  archive/halfLifeModel					Crowbar program seems to be sensisitve
-  archive/hypercard						Sometimes certain cards/bitmaps don't render
-  archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
-  audio/downloadableSoundBank			Sometimes not all .mp3 files are produced (shell.dls)
-  document/hlp & multimediaViewerBook	Sometimes things don't convert under CPU load, several files just don't show up
-  document/pageMaker					The program (especially pagemaker7) may be sensitive as often it will end up converting with older converters
-  font/amigaBitmapFont					Program Fony appears to be sensitive, sometimes it converts, sometimes not.
-  image/harvardGraphicsChart			When running tests, I only get an output image about 50% of the time
-  music/smus							Sometimes works, sometimes doesn't. aboutmodern.smus is particularily sensitive
-
 * Found several BitRock installers on DiscMaster:http://discmaster.textfiles.com/search?q=BitRock+Installer&qfields=content&formatid=xml
   I tried using this extractor: https://gist.github.com/mickael9/0b902da7c13207d1b86e
   But failed to get it to extract anything. See my progress and overlay ebuilds in sandbox/app/bitrock-unpacker/
@@ -113,6 +102,17 @@
 /--------------\
 | Low Priority |
 \--------------/
+* Improve 'fragile' formats (these are very sensitive and sometimes convert OK, sometimes don't. May be CPU load related, may be something else):
+  archive/halfLifeModel					Crowbar program seems to be sensisitve
+  archive/hypercard						Sometimes certain cards/bitmaps don't render
+  archive/windowsResource				Converter program is sensitive, would like to find a better resource ripper, maybe even code my own
+  audio/downloadableSoundBank			Sometimes not all .mp3 files are produced (shell.dls)
+  document/hlp & multimediaViewerBook	Sometimes things don't convert under CPU load, several files just don't show up
+  document/pageMaker					The program (especially pagemaker7) may be sensitive as often it will end up converting with older converters
+  font/amigaBitmapFont					Program Fony appears to be sensitive, sometimes it converts, sometimes not.
+  image/harvardGraphicsChart			When running tests, I only get an output image about 50% of the time
+  music/smus							Sometimes works, sometimes doesn't. aboutmodern.smus is particularily sensitive
+
 * Now that I emulate a real sound card with 86Box, I may be able to support music/famiTracker in winxp. See note
 
 * Consider updating the b3d plugin script for blender: https://github.com/joric/io_scene_b3d/issues/11  &  https://github.com/joric/io_scene_b3d/tree/4.0

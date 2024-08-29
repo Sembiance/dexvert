@@ -12,7 +12,7 @@ export class tiff extends Format
 		"Tagged Image File Format", "TIFF image data", "Macintosh TIFF bitmap (MacBinary)", /^fmt\/353( |$)/,
 
 		// App-Specific TIFF files
-		"CorelChart chart", /^fmt\/1312( |$)/
+		"CorelChart chart", "QuickLink II Fax bitmap (new)", /^fmt\/1312( |$)/
 	];
 	idMeta       = ({macFileType}) => macFileType==="TIFF";
 	priority     = this.PRIORITY.LOW;	// Often other formats are mis-identified as TIFF files such RAW camera files like Sony ARW and kodak*

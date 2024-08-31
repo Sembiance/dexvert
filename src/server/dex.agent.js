@@ -26,7 +26,7 @@ await agentInit(async ({inputFilePath, outputDirPath, logLevel="error", fileMeta
 		return {changeResult : changeLogLines.join("\n")};
 	}
 
-	timeout ||= xu.HOUR*(slowExtensions.has(path.extname(inputFilePath)?.toLowerCase()) ? 5 : 3);	// for slow formats, if we match the extension, give a little more time
+	timeout ||= xu.HOUR*(slowExtensions.has(path.extname(inputFilePath)?.toLowerCase()) ? 5 : 2);	// for slow formats, if we match the extension, give a little more time
 
 	const xlog = new XLog(logLevel);
 

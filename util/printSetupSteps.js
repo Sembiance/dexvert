@@ -92,6 +92,7 @@ const programPackages = Object.values(programs).flatMap(program => Array.force(p
 	`# Aaru needs to build a database and ask some questions, run it once. Answer 'y' to question #1 about decryption and 'n' to all others.`,
 	`aaru`,
 	`cd ~/bin && ln -s /mnt/compendium/DevLab/dexvert/bin/dextry && ln -s /mnt/compendium/DevLab/dexvert/bin/stopDexserver && ln -s /mnt/compendium/DevLab/dexvert/bin/startDexserver`,
+	`cd /mnt/compendium/DevLab/dexvert/util && dra wip.js`,
 	`# Ensure 'startDexserver' works. May need to run it twice in order for the deno JSR packages to download properly.`,
 	"# Run a full 'dra testMany.js --format=all' to ENSURE that the new dexdrone is functioning properly! DO NOT SKIP THIS STEP"
 ].forEach(line => console.log(line));

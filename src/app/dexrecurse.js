@@ -21,6 +21,7 @@ const EXCLUDED_SAMPLE_FORMATS =
 	"archive/iso",
 	"archive/mdf",
 	"archive/mdx",
+	"archive/mTropolisArchive",
 	"archive/nrg",
 	"archive/sgiVolumeImage",
 	"archive/thumbsUpDatabase",

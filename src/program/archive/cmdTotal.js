@@ -10,6 +10,9 @@ export class cmdTotal extends Program
 	};
 	bin       = "c:\\dexvert\\cmdTotal\\cmdTotal.exe";
 	args      = r => [r.flags.wcx, "x", r.inFile(), r.outDir()];
+	wineData  = {
+		timeout : xu.MINUTE*10
+	};
 	renameOut = false;
 }
 

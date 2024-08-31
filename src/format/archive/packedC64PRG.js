@@ -6,7 +6,10 @@ export class packedC64PRG extends Format
 	magic          = ["P64 "];
 	forbiddenMagic = [
 		"P64 Guessed", "P64 NRZI flux pulse disk image",
-		"P64 TBC Multicompactor"	// infinite loop with: archive/packedC64PRG/happy birthday
+		
+		// infinite loops
+		"P64 TBC Multicompactor",	// archive/packedC64PRG/happy birthday
+		"P64 CruelCrunch"			// archive/packedC64PRG/turrican part 2_
 	];
 	priority       = this.PRIORITY.LOWEST;
 	converters     = ["unp64"];

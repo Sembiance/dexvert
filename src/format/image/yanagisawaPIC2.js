@@ -6,6 +6,7 @@ export class yanagisawaPIC2 extends Format
 	website     = "http://fileformats.archiveteam.org/wiki/PIC2";
 	ext         = [".p2"];
 	magic       = ["PIC2 bitmap"];
+	idMeta      = ({macFileType, macFileCreator}) => macFileType==="Pic2" && macFileCreator==="xPIC";
 	weakMagic   = true;
 	unsupported = true;
 	notes       = `

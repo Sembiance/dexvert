@@ -45,6 +45,7 @@ export const IGNORE_MAGICS =
 
 	// file
 	/^a .+ script text executable$/,
+	/^Apple Driver Map/,
 	/^IFF data, /,
 	/^RIFF \((big|little)-endian\) data$/,
 	/^text\/isl/
@@ -232,6 +233,7 @@ export const WEAK_VALUES =
 	/^a .*script executable/,
 	/^ABComp archive data/,
 	/^ACE\/gr ascii file/,
+	/^Adobe PageMaker, big-endian, version [\d.]+$/,
 	/^Adobe Photoshop, \d{5}/,
 	/^Adobe Photoshop Color swatch/,
 	/^AES with 256-bit key$/,
@@ -257,6 +259,7 @@ export const WEAK_VALUES =
 	/^(apl|APL) workspace/,
 	/^Apollo m68k COFF executable/,
 	/^apollo a88k COFF executable/,
+	/^Apollo DBF,/,
 	/^Apple DiskCopy 4.2 image/,
 	/^Apple QuickTime$/,
 	/^Apple QuickTime multiple URLs$/,
@@ -1134,6 +1137,7 @@ export const WEAK_VALUES =
 	/^JOC Screen Designer screen$/,
 	/^KeyCAD drawing \(v1\.x\)$/,
 	/^Kidproof settings \(v1\.0\)$/,
+	/^KT-Tech compressed audio$/,
 	/^Lombard RAC Rally Track$/,
 	/^Lotus 123 configuration/,
 	/^Lotus 123\/Symphony worksheet\/format\/configuration \(V1-V2\)$/,

@@ -13,7 +13,7 @@ export class IsoBuster extends Program
 	// IsoBuster command line options: https://www.isobuster.com/help/use_of_command_line_parameters
 	args = r => [`/ef:all:C:\\out${r.wineCounter}`, r.inFile(), "/c", "/ep:ren", "/ep:rei", "/ep:oeo", "/nosplash", "/nodrives"];
 	
-	wineData = ({
+	wineData = {
 		timeout : xu.MINUTE*10,	// IsoBuster can take a LONG time to run, but 10 minutes should be plenty for any file
 		
 		// normally, if the command works, we don't need to do anything at all with the script, but if a bad file is sent it might show an error we need to cancel
@@ -40,7 +40,7 @@ export class IsoBuster extends Program
 			CallUntil("PreOpenWindows", ${xu.SECOND*4})
 			
 			WaitForPID("IsoBuster.exe", ${xu.MINUTE*3})`
-	});
+	};
 
 	// Some old apple disk copy images like archive/appleDiskCopy/Portal1.image produces these info files which we don't care about
 	postExec = async r =>

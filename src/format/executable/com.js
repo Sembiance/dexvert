@@ -8,7 +8,7 @@ export class com extends Format
 	forbidExtMatch = true;
 	magic          = [
 		// general com types
-		"DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "DOS COM Executable Datei",
+		"DOS executable (COM", /^COM executable for (MS-)?DOS/, "16bit COM executable", "16bit DOS COM", "DOS COM Executable Datei", "DR-DOS executable (COM)",
 
 		// specific com types
 		"XEQ executable Command library", "P-Screen COM Screen", "OPTIKS Quick View / Self Scrolling COM", "MIDIPAK audio driver", "16bit COM NoStrAdAmuS - LineZer0 patch", "16bit COM Reanimator Of Lash patch",

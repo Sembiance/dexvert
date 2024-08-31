@@ -7,9 +7,9 @@ export class ogreXMLConveter120 extends Program
 	loc      = "wine";
 	bin      = "ogreXMLConveter120/OgreXMLConverter.exe";
 	args     = async r => [r.inFile(), await r.outFile("out.mesh.xml")];
-	wineData = ({
+	wineData = {
 		base : "win64",
 		arch : "win64"
-	});
+	};
 	renameOut = false;
 }

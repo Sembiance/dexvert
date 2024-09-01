@@ -13,7 +13,7 @@ export class macPaint extends Format
 	forbiddenMagic = ["Installer VISE Mac package", ...TEXT_MAGIC];
 	metaProvider   = ["image"];
 	converters     = [
-		"deark[module:macpaint][mac][matchType:magic]", "iio2png", "imconv[format:mpnt]", `abydosconvert[format:${this.mimeType}]`, "convert",
+		"deark[module:macpaint][mac][matchType:magic]", "iio2png", "imconv[format:mpnt][matchType:magic]", `abydosconvert[format:${this.mimeType}]`, "convert",
 		"keyViewPro",
 		...["hiJaakExpress[strongMatch][hasExtMatch]", "pv", "canvas5", "corelPhotoPaint", "tomsViewer"].map(v => `${v}[matchType:magic]`)
 	];

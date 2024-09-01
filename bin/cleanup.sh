@@ -18,8 +18,8 @@ sudo umount ./*uniso
 sudo umount ./*photocd-info
 sudo umount ./*iso/*fuseiso
 rm -rf ./*
-sudo umount ./*
 sudo umount ./*/*
+sudo umount ./*
 rm -rf ./*
 
 cd /tmp || exit

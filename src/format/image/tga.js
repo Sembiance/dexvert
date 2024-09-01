@@ -16,7 +16,7 @@ export class tga extends Format
 	// abydosconvert sometimes takes garbage files like 'HangsPicturePublisher.tga' and produces garbage output, so we skip that converter too
 	// iio2png works really well, except when it doesn't. like 648.TGA and several other hundred TGA's like it, convert as just a transparent image
 	converters = [
-		"imconv[format:tga]", "deark[module:tga][strongMatch]", "deark[module:tga][matchType:magic][hasExtMatch]", "iconvert",
+		"imconv[format:tga][matchType:magic]", "deark[module:tga][strongMatch]", "deark[module:tga][matchType:magic][hasExtMatch]", "iconvert",
 		"imageAlchemy", "paintDotNet",
 		"keyViewPro", "corelDRAW", "pv", "photoDraw",
 		"nconvert", "recoil2png", "gimp", "iio2png",

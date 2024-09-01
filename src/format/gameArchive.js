@@ -36,6 +36,7 @@ export const gameextractor =
 		quakePAK                           : {name : "Quake PAK", ext : [".pak"], allowExtMatch : true, magic : ["Quake archive", "Quake I or II world or extension", /^Archive: PACK$/], website : "http://fileformats.archiveteam.org/wiki/Quake_PAK"},
 		realityBytesGameArchive            : {name : "Reality Bytes game archive", ext : [".rbd"], magic : ["Reality Bytes game Data archive"]},
 		redengineGameArchive               : {name : "REDengine game Archive", ext : [".rda"], magic : ["REDengine game data Archive"]},
+		riffBACKGameArchive                : {name : "RIFF BACK Game Archive", ext : [".res"], magic : ["Generic RIFF file BACK"]},
 		scummDigitizedSoundsGameArchive    : {name : "SCUMM Digitized Sounds Game Archive", ext : [".sou"], magic : ["SCUMM digitized Sounds (v5-6)", "Lucasfilm Games VOC Sound"]},
 		simTexGameArchive                  : {name : "SimTex Game Archive", ext : [".lbx"], magic : ["SimTex LBX game data container"]},
 		starsiegeGameArchive               : {name : "Starsiege Game Archive", ext : [".vol"], magic : ["Starsiege game data archive", "Starsiege Tribes game data archive"]},

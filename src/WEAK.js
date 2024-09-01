@@ -272,6 +272,7 @@ export const WEAK_VALUES =
 	/^ARMv7 Thumb/,
 	/^ARRI ARI image data/,
 	/^ASD archive data/,
+	/^ASF_Extended_Content_Description_Object$/,
 	/^Aster\*x,? /,
 	/^Atari DEGAS/,
 	/^Award BIOS Logo, \d+ x \d+/,
@@ -501,6 +502,7 @@ export const WEAK_VALUES =
 	/^Microsoft a\.out/,
 	/^Microsoft HTML Help Project/,
 	/^Microsoft Visual C\/OMF library$/,
+	/^Microsoft Xbox 360 package/,
 	/^Microsoft Xbox XPR0 texture$/,
 	/^Mini DuMP crash report/,
 	/^Minix filesystem/,
@@ -667,6 +669,7 @@ export const WEAK_VALUES =
 	/^TOC sound file/,
 	/^Tower\/XP rel/,
 	/^Tower32/,
+	/^TripleDES$/,
 	/^Turbo Pascal TOUR data$/,
 	/^Unicode text, UTF-32, (big|little-endian)/,
 	/^unicos \(cray\) executable/,
@@ -712,6 +715,7 @@ export const WEAK_VALUES =
 	/^YAFFS filesystem root entry/,
 	/^YARA 3\.x compiled rule set/,
 	/^Zebra Metafile graphic/,
+	/^Zope Object Database File Storage/,
 	/^ZZip archive data/,
 
 	// TRID: Checks just 1-3 bytes:
@@ -1283,6 +1287,7 @@ export const WEAK_VALUES =
 	/^binpatch format$/,
 	/^BioForge IFF objects$/,	// Found these, but it's just for a game, so mark as weak as it's kinda weak
 	/^BIS Binarized Rtm animation$/,
+	/^BitCom Emulation settings$/,
 	/^BlueEyes Animation$/,
 	/^Buzzwords On-Line Manual Program Text\/topic$/,
 	/^Carrara Environment$/,
@@ -1604,6 +1609,7 @@ export const WEAK_VALUES =
 	/^Universal Scene Description Zipped AR format \(generic\)$/,
 	/^Vaulty obscured$/,
 	/^Verilog source code \(with rem 2\)$/,
+	/^VersaCAD 2D Library \(MS-DOS\)$/,
 	/^VHSIC Hardware Description Language \(with rem\)$/,
 	/^Vice HotKeys$/,
 	/^Vice Keyboard Mapping$/,

@@ -7,7 +7,6 @@ import {DEXRPC_HOST, DEXRPC_PORT} from "../src/dexUtil.js";
 import {mkWeblink} from "./testUtil.js";
 import RandExp from "npm:randexp@0.5.3";
 
-Deno.exit(console.error(`This hasn't been updated for the new AgentPool based server. Should be pretty simple to update. The 'timedout' property is no longer returned`));
 const xlog = new XLog();
 
 const argv = cmdUtil.cmdInit({
@@ -83,8 +82,8 @@ async function fuzzByExt()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r, timedout} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
-		if(r?.json?.processed || timedout)
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");
 			await fileUtil.writeTextFile(logFilePath, (r?.pretty || "").decolor());
@@ -92,7 +91,7 @@ async function fuzzByExt()
 			const jsonFilePath = await fileUtil.genTempPath(dirPath, ".json");
 			await fileUtil.writeTextFile(jsonFilePath, JSON.stringify(r?.json || {}));
 
-			failures.push({sourceFormats, what : ext, fileSize, r, timedout, dirPath, duration : performance.now()-startedAt});
+			failures.push({sourceFormats, what : ext, fileSize, r, dirPath, duration : performance.now()-startedAt});
 		}
 		else
 		{
@@ -137,8 +136,8 @@ async function fuzzByFileSize()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r, timedout} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
-		if(r?.json?.processed || timedout)
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");
 			await fileUtil.writeTextFile(logFilePath, (r?.pretty || "").decolor());
@@ -146,7 +145,7 @@ async function fuzzByFileSize()
 			const jsonFilePath = await fileUtil.genTempPath(dirPath, ".json");
 			await fileUtil.writeTextFile(jsonFilePath, JSON.stringify(r?.json || {}));
 
-			failures.push({sourceFormats, what : fileSize, fileSize, r, timedout, dirPath, duration : performance.now()-startedAt});
+			failures.push({sourceFormats, what : fileSize, fileSize, r, dirPath, duration : performance.now()-startedAt});
 		}
 		else
 		{
@@ -196,8 +195,8 @@ async function fuzzByFilename()
 		//	o.dexvertOptions.asFormat = diskFormatid;
 
 		const startedAt = performance.now();
-		const {r, timedout} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
-		if(r?.json?.processed || timedout)
+		const {r} = await xu.tryFallbackAsync(async () => (await (await fetch(`http://${DEXRPC_HOST}:${DEXRPC_PORT}/dex`, {method : "POST", headers : { "content-type" : "application/json" }, body : JSON.stringify(o)}))?.json()), {});
+		if(r?.json?.processed)
 		{
 			const logFilePath = await fileUtil.genTempPath(dirPath, ".log.txt");
 			await fileUtil.writeTextFile(logFilePath, (r?.pretty || "").decolor());
@@ -205,7 +204,7 @@ async function fuzzByFilename()
 			const jsonFilePath = await fileUtil.genTempPath(dirPath, ".json");
 			await fileUtil.writeTextFile(jsonFilePath, JSON.stringify(r?.json || {}));
 
-			failures.push({sourceFormats, what : filename, fileSize, r, timedout, dirPath, duration : performance.now()-startedAt});
+			failures.push({sourceFormats, what : filename, fileSize, r, dirPath, duration : performance.now()-startedAt});
 		}
 		else
 		{
@@ -288,7 +287,7 @@ async function writeReport(reportFilePath, failures)
 					<td>${o.sourceFormats.join("<br>")}</td>
 					<td>${o.what}</td>
 					<td style="text-align: right;">${o.fileSize}</td>
-					<td style="text-align: right;">${o.timedout ? "timed out" : o.duration.msAsHumanReadable()}</td>
+					<td style="text-align: right;">${o.duration?.msAsHumanReadable()}</td>
 					<td>${o.r?.json?.phase?.family || ""}/${o.r?.json?.phase?.format || ""}</td>
 					<td>${o.r?.json?.phase?.converter}</td>
 					<td><a href="${mkWeblink(o.dirPath)}">${path.basename(o.dirPath)}</a></td>

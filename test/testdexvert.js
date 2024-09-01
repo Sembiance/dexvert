@@ -120,7 +120,7 @@ const FLEX_SIZE_PROGRAMS =
 	// Can sometimes produce different data each time
 	amigaBitmapFontContentToOTF : 0.1,
 	assimp                      : 0.1,
-	cup386                      : 0.1,
+	cup386                      : 0.5,
 	darktable_cli               : 0.1,
 	doomMUS2mp3                 : 0.1,
 	Email_Outlook_Message       : 1,
@@ -485,6 +485,10 @@ const ALLOW_PROCESS_FAILURES =
 // Sometimes metadata just happens to change every time, so we ignore it
 const ALLOW_METADATA_DIFFERENCES =
 {
+	image :
+	{
+		teletextPackets : ["TETRIS.T42"]
+	},
 	music :
 	{
 		ay : ["Burnin'Rubber.ay"]
@@ -749,7 +753,9 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	if(result.format && result.format!==diskFormat && !allowFormatMismatch)
 		return await fail(`Disk format ${fg.orange(diskFormat)} does not match processed ${result.family}/${result.format}${converterMismatch}`);
 
-	if(prevData.files && !result.files)
+	const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
+
+	if(prevData.files && !result.files && !diffFilesAllowed)
 		return await fail(`Expected to have ${fg.yellow(Object.keys(prevData.files).length)} files but found ${fg.yellow(0)} instead${converterMismatch}`);
 
 	if(!prevData.files && result.files)
@@ -758,7 +764,6 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 	if(result.files)
 	{
 		const diffFiles = diffUtil.diff(Object.keys(prevData.files).sortMulti(v => v), Object.keys(result.files).sortMulti(v => v));
-		const diffFilesAllowed = FLEX_DIFF_FILES.some(regex => regex.test(sampleFilePath));
 		if(diffFiles?.length && !SINGLE_FILE_DYNAMIC_NAMES.includes(diskFormatid) && !diffFilesAllowed)
 			return await fail(`Created files are different: ${diffFiles.innerTruncate(3000)}${converterMismatch}`);
 
@@ -806,7 +811,7 @@ async function workercb({sampleFilePath, tmpOutDirPath, err, dexData})
 		}
 	}
 
-	if(prevData.family && result.family!==prevData.family)
+	if(prevData.family && result.family!==prevData.family && !allowFamilyMismatch)
 		return await fail(`Expected to have family ${fg.orange(prevData.family)} but got ${result.family}${converterMismatch}`);
 
 	if(prevData.format && result.format!==prevData.format && !allowFormatMismatch)

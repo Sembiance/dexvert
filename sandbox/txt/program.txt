@@ -159,3 +159,4 @@ An object or a function that returns and object to be passed into dosUtil.run()
 	>>> monitor			A function that will be ran right after the wine program is executed that you can use to monitor stuff
 	>>> script			An array of ops or functions to call to 'control' the wine program
 	>>> timeout			Maximum duration of wine
+	>>> timeoutSignal	Signal to use to kill the wine program

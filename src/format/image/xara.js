@@ -7,5 +7,5 @@ export class xara extends Format
 	ext            = [".xar", ".web"];
 	forbidExtMatch = [".web"];
 	magic          = ["Xara graphics file", "Corel Xara Web document", "Xara drawing", /^fmt\/922( |$)/];
-	converters     = ["nconvert", "graphicWorkshopProfessional", "tomsViewer"];
+	converters     = ["uniconvertor[autoCrop]", "nconvert", "graphicWorkshopProfessional", "tomsViewer"];
 }

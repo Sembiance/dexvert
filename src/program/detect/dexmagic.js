@@ -67,6 +67,8 @@ const DEXMAGIC_CHECKS =
 	"DOC2COM (Dan K. Nelson) Variant"         : [{offset : 18, match : "<Press  Home  PgDn  PgUp  Down Arrow  End  Q=Print>"}],
 	"DocBook"                                 : [{size : 256, match : "DOCTYPE book"}],
 	"GNU Info"                                : [{offset : 0, match : "This is Info file"}],
+	"GTXT"                                    : [{offset : 105, match : "GTXT1.1"}],
+	"GTXT (CP/M Variant)"                     : [{offset : 107, match : "GTXT1.1"}],
 	"MacWrite Document"                       : [{offset : 0, match : [0x00, 0x06, 0x00]}, {offset : 4, match : [0x00, 0x06, 0x00, 0x02]}],
 	"Microsoft Publisher v1"                  : [{offset : 0, match : [0xE7, 0xAC, 0x2C, 0x00]}],
 	"PageStream Document"                     : [{offset : 0, match : [0x07, 0x23, 0x19, 0x92, 0x00, 0x0D, 0x02, 0x00, 0x00]}],

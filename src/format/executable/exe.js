@@ -12,7 +12,7 @@ export class exe extends Format
 
 		// specific exe types
 		"JEMM memory manager", "Microsoft BASIC Compiler runtime", "DeskPic Screen Saver Module", "MS-DOS DJGPP go32 DOS extender executable", "OS/2 Presentation Manager Executable", "DOS/4G DOS Extender Executable",
-		"Graphic Workshop self-displaying picture executable", "MOZART tune", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)",
+		"Graphic Workshop self-displaying picture executable", "MOZART tune", "PE Unknown PE signature 0 (Control Panel Item)", "GIMP Plugin (Win)", "Total Commander Packer extension (plugin)",
 
 		// created by
 		"Format: AutoIt(3.XX)", "DOS Turbo Basic executable", "REALbasic Win32 Executable", "GFA BASIC Win 3.x compiled Executable", "DOS Borland compiled Executable (generic)", /^(16-bit )?Microsoft (C|Visual C\+\+) compiled executable/,
@@ -26,7 +26,7 @@ export class exe extends Format
 		"InstallShield setup", "Win16 EDI Install Pro executable", "Installer: Gentee Installer", "Easy SFX Installer 16-bit DOS executable", "Installer: Eschalon Installer", "Win16 InstallShield Self-Extracting Executable", "Installer: AOLSetup",
 		"Installer: LucasArts Update Installer", "Installer: CreateInstall", "Installer: PCInstall", "Installer: Setup-Specialist", "Installer: O'Setup95", /^Installer: Wise Installer$/, "Wise Installer executable", "Installer: Setup Factory", /^NSIS$/,
 		"Installer: InstallAnywhere", "Installer: ClickTeam", "Installer: GPInstall", "Installer: Silver Creek Entertainment[zlib]", "JRchive self-extracting 16bit DOS executable", "Installer: CSDD's installer", "Installer: RNsetup",
-		"Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer"
+		"Installer: Aeco Systems installer", "Installer: Winamp Installer", "Installer: PIMP Installer", "Installer: Spoon Installer", "Installer: NOS Installer", "Installer: Ghost Installer", "Installer: Tarma Installer"
 	];
 	priority     = this.PRIORITY.LOW;
 	metaProvider = ["winedump"];

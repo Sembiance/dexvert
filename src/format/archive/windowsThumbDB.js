@@ -6,6 +6,13 @@ export class windowsThumbDB extends Format
 	website    = "http://fileformats.archiveteam.org/wiki/Windows_thumbnail_cache";
 	ext        = [".db"];
 	filename   = [/^Thumbs\.db$/];
-	magic      = ["Windows Thumbnail Database", /^fmt\/682( |$)/];
+	magic      = [
+		// generic
+		"Windows Thumbnail Database", /^fmt\/682( |$)/,
+
+		// app specific
+		"Corel PrintHouse image", "Corel Print Office image",
+		/^fmt\/(1419|1420|1421)( |$)/
+	];
 	converters = ["vinetto", "deark[module:cfb]", "iio2png"];
 }

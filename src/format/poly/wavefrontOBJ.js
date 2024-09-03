@@ -5,7 +5,7 @@ export class wavefrontOBJ extends Format
 	name       = "Wavefront OBJ";
 	website    = "http://fileformats.archiveteam.org/wiki/Wavefront_OBJ";
 	ext        = [".obj"];
-	magic      = ["Wavefront Object", "UVMapper object", /^fmt\/1210( |$)/];
+	magic      = ["Wavefront Object", "UVMapper object", /^fmt\/(1|1210)( |$)/];
 	auxFiles   = (input, otherFiles) =>
 	{
 		const supportFiles = otherFiles.filter(o => [".mtl", ".tiff", ".tif"].includes(o.ext.toLowerCase()));

@@ -30,6 +30,7 @@ export class deark extends Program
 		opt           : "An array of additional -opt <option> arguments to pass to deark. For list see: https://github.com/jsummers/deark",
 		noThumbs      : "Don't extract any thumb files found",
 		recombine     : "Try to recombine multiple output images back into a single output image",
+		onlyIfOne     : "Only 'succeed' if there is just a single output file",
 		deleteADF     : "Set this to delete the output ADF file as it's not needed. This is mainly used when a simple image format like TIFF is wrapped as a MacBinary file.",
 		convertAsExt  : "Use this ext as a hint as to what to convert as",
 		alwaysConvert : "Always convert output files using convert[removeAlpha]",
@@ -69,6 +70,17 @@ export class deark extends Program
 	{
 		const outDirPath = r.outDir({absolute : true});
 
+		// fail fast if we have more than 1 output file, if we were told to
+		if(r.flags.onlyIfOne)
+		{
+			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
+			if(fileOutputPaths?.length>1)
+			{
+				await fileOutputPaths.parallelMap(async fileOutputPath => await fileUtil.unlink(fileOutputPath));
+				return;
+			}
+		}
+
 		// deark doesn't correctly decode Mac Japan encoded filenames
 		if(r.flags.mac && RUNTIME.globalFlags?.osHint?.macintoshjp)
 		{
@@ -89,6 +101,7 @@ export class deark extends Program
 
 		// for some image formats for some images (like PICT Daniel sample) deark will output multiple image files that are actually 1 single image. See: https://github.com/jsummers/deark/issues/41
 		// NOTE: This fails with some files such as: • Figure 5 Window in List Mode.pict
+		// NOTE!!! THIS IS A HUGE HACK. An attempt at re-writing it was started below in chainPost but ran into more roadblocks. So meh, this works for now
 		if(r.flags.recombine)
 		{
 			const fileOutputPaths = await fileUtil.tree(outDirPath, {nodir : true});
@@ -222,4 +235,140 @@ export class deark extends Program
 		return (chainFormat ? {asFormat : `image/${chainFormat}`} : false);
 	};
 	chainFailKeep = (r, chainInputFiles, chainResult, programid) => programid==="dexvert";
+
+	/*chainPost = async r =>
+	{
+		if(r.flags.recombine)
+		{
+			const fileOutputPaths = await fileUtil.tree(r.outDir({absolute : true}), {nodir : true});
+
+			const dearkData = {opCodes : [], files : []};
+			let activeData = dearkData;
+			let activeOpCode = null;
+			let curFile = null;
+			for(const line of r.stdout.split("\n"))
+			{
+				const {writing} = (/Writing (?<writing>.+)$/).exec(line)?.groups || {};
+				if(writing?.length)
+				{
+					curFile = path.relative(r.outDir(), writing);
+					curFile = r.quickConvertMap[curFile] || curFile;
+					curFile = r.renameMap[curFile] || curFile;
+					activeData = {filename : curFile, opCodes : []};
+					dearkData.files.push(activeData);
+					continue;
+				}
+				
+				const {lineContent} = (/^DEBUG: (?<lineContent>.+)$/).exec(line)?.groups || {};
+				if(!lineContent?.length)
+					continue;
+
+				//r.xlog.info`${lineContent}`;
+
+				const {opCode, opCodeDesc} = (/^opcode (?<opCode>[\dxabcdef]+) \((?<opCodeDesc>[^)]+)\)/).exec(lineContent)?.groups || {};
+				if(opCode)
+				{
+					if(activeOpCode)
+						activeData.opCodes.push(activeOpCode);
+					activeOpCode = {code : parseInt(opCode, 16), desc : opCodeDesc};
+					continue;
+				}
+
+				const matchers =
+				[
+					{key : "inputFile", m : "Input file"},
+					{key : "size", m : "picSize", type : "number"},
+					{key : "version", m : "[Vv]ersion", type : "number"},
+					{key : "extended", m : "extended v2", type : "boolean"},
+					{key : "frame", m : "picFrame", type : "xywh"},
+					{key : "src", m : "srcRect", type : "xywh"},
+					{key : "dest", m : "dstRect", type : "xywh"},
+					{key : "rect", m : "rect", type : "xywh"},
+					{key : "regionSize", m : "region size", type : "number"},
+					{key : "compressionType", m : "compression type", type : "string"},
+					{key : "rowBytes", m : "rowBytes", type : "number"},
+					{key : "pixmapFlag", m : "pixmap flag", type : "number"},
+					{key : "dpi", m : "dpi", type : "wh"},
+					{key : "transferMode", m : "transfer mode", type : "number"},
+					{key : "pixDataSize", m : "PixData size", type : "number"},
+					{key : "payload", m : "payload", type : "poslen"},
+					{key : "idsc", m : "idsc", type : "poslen"},
+					{key : "idat", m : "idat", type : "poslen"}
+				];
+
+				const active = activeOpCode || activeData;
+				let handled = false;
+
+				for(const {key, m, type} of matchers)
+				{
+					const val = (new RegExp(`\\s*${m}:\\s+(?<val>.+)$`)).exec(lineContent)?.groups?.val;
+					if(!val?.length)
+						continue;
+
+					let valResult = null;
+					if(type==="xywh")
+						valResult = Object.map({...(val.match(/^\((?<x>[\d.-]+),(?<y>[\d.-]+)\)-\((?<w>[\d.-]+),(?<h>[\d.-]+)\)$/) || {})?.groups}, (k, v) => (+v));
+					else if(type==="wh")
+						valResult = Object.map({...(val.match(/^\((?<w>[\d.-]+)×(?<h>[\d.-]+)\)$/) || {})?.groups}, (k, v) => (+v));
+					else if(type==="poslen")
+						valResult = Object.map({...(val.match(/^pos=(?<pos>[\d.-]+),\s+len=(?<len>[\d.-]+)$/) || {})?.groups}, (k, v) => (+v));
+					else
+						valResult = type==="number" ? +val : (type==="boolean" ? val==="yes" : (type==="string" ? xu.parseJSON(val) : val));
+
+					active[key] = valResult;
+					handled = true;
+					break;
+				}
+
+				if(handled)
+					continue;
+
+				active.unhandled ||= [];
+				active.unhandled.push(lineContent);
+			}
+
+			let maxWidth = 0;
+			let maxHeight = 0;
+			for(const file of dearkData.files)
+			{
+				for(const opCode of file.opCodes)
+				{
+					if([0x98].includes(opCode.code))
+					{
+						maxWidth = Math.max(maxWidth, opCode.src.w);
+						maxHeight = Math.max(maxHeight, opCode.src.h);
+					}
+				}
+			}
+
+			const combinedFilePath = await fileUtil.genTempPath(undefined, ".png");
+			await runUtil.run("convert", ["-size", `${maxWidth}x${maxHeight}`, "xc:white", `PNG32:${combinedFilePath}`]);
+
+			for(const file of dearkData.files)
+			{
+				for(const opCode of file.opCodes)
+				{
+					if([0x98].includes(opCode.code))
+					{
+						const srcFilePath = fileOutputPaths.find(fileOutputPath => fileOutputPath.endsWith(path.basename(file.filename)));
+						if(!srcFilePath)
+						{
+							r.xlog.warn`Unable to find deark sub image part ${file.filename} from possibles: [${fileOutputPaths.join("] [")}]`;
+							continue;
+						}
+
+						//r.xlog.info`${{srcFilePath, opCode}}`;
+						await runUtil.run("composite", ["-gravity", "NorthWest", "-geometry", `+${opCode.src.x}+${opCode.src.y}`, srcFilePath, combinedFilePath, combinedFilePath]);
+						await fileUtil.unlink(srcFilePath);
+					}
+				}
+			}
+
+			await fileUtil.move(combinedFilePath, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input).name}.png`));
+			//await runUtil.run("convert", [combinedFilePath, "-trim", "+repage", ...CONVERT_PNG_ARGS, path.join(r.outDir({absolute : true}), `${(r.originalInput || r.f.input.name).name}.png`)]);
+
+			//r.xlog.info`${dearkData}`;
+			//r.xlog.info`${{combinedFilePath, maxWidth, maxHeight}}`;
+		}
+	};*/
 }

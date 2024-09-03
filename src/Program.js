@@ -427,6 +427,7 @@ export class Program
 					break;
 				}
 
+				r.renameMap = {};
 				if(renamer===null)
 				{
 					xlog.info`${fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names`;
@@ -439,6 +440,7 @@ export class Program
 					{
 						const replacementName = renamer({fn : newFile.base, ...restreamerOpts}, newFile.base.match(ro.regex)?.groups || {}).join("");
 						xlog.info`${fg.orange(this.programid)} renaming output file ${newFile.base} to ${replacementName}`;
+						r.renameMap[newFile.base] = replacementName;
 						await newFile.rename(replacementName, {replaceExisting : !!isChain});
 					}
 				}
@@ -449,6 +451,7 @@ export class Program
 				if(newFilename!==f.new.base)
 				{
 					xlog.info`${fg.orange(this.programid)} renaming single output file ${f.new.base} to ${newFilename}`;
+					r.renameMap[f.new.base] = newFilename;
 					await f.new.rename(newFilename, {replaceExisting : !!isChain});
 				}
 			}

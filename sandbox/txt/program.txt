@@ -124,6 +124,9 @@ You can also return an Object to allow it AND set the key/vals in that object as
 Called only if a chain failed to produce a valid file. Normal behavior is to delete the previous file in the chain.
 However you can return true here to force it to keep the previous file.
 
+>>> chainPost = async (r) => {}
+Called AFTER all chaining is complete
+
 >>> classify = true
 If this is set on a program and it's working with an image format, then the image will be classified as 'garbage' or 'not garbage'
 This uses a image classification model trained against a bunch of static and non-static images.

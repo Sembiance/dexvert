@@ -14,11 +14,18 @@ export class pict extends Format
 	metaProvider   = ["image"];
 	converters = dexState =>
 	{
-		// qtPicViewer is the only convert that handls almost everything correctly. It's unfortunate that this runs under windows, thus PICT's are slower, but it's worth it
-		const r = ["qtPicViewer[matchType:magic]"];
-		
+		// first, try deark, if it's just a single image output, then that'll work. PICT has a lot of 'drawing' calls within it and sub-images that get 'composed' into the final image, so this is the best way to handle that
+		const r = ["deark[module:pict][mac][onlyIfOne]"];
+
 		if(dexState.hasMagics("Macintosh Pict image (MacBinary)"))
-			r.push("deark[module:macbinary][mac][deleteADF][convertAsExt:.pict]");
+		{
+			// we do this instead of dexvert[asFormat:image/pict] due to forbidProgram and fallback matches, etc
+			r.push("deark[module:macbinary][mac][deleteADF] -> deark[module:pict][mac][onlyIfOne]");
+			r.push("deark[module:macbinary][mac][deleteADF] -> qtPicViewer");
+		}
+
+		// qtPicViewer is the only converter that handls almost everything correctly (tide.16, Figure 5 Window in List Mode, etc). It's unfortunate that this runs under windows, thus PICT's are slower, but it's worth it
+		r.push("qtPicViewer[matchType:magic]");
 
 		r.push(
 			"deark[module:pict][mac][recombine]",

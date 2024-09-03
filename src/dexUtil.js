@@ -13,6 +13,7 @@ export const DEV_MACHINE = ["crystalsummit", "ridgeport"].includes(Deno.hostname
 // Currently only called by other programs that generate lots of sub files like deark and resource_dasm
 export async function quickConvertImages(r, fileOutputPaths)
 {
+	r.quickConvertMap ||= {};
 	const runOpts = {timeout : xu.MINUTE};
 	const outDirPath = r.outDir({absolute : true});
 	const filePathsToRemove = [];
@@ -90,6 +91,8 @@ export async function quickConvertImages(r, fileOutputPaths)
 
 		if(await fileUtil.exists(convertedFilePath))
 		{
+			r.quickConvertMap[path.relative(outDirPath, fileOutputPath)] = path.relative(outDirPath, convertedFilePath);
+
 			const fileInfo = await Deno.lstat(fileOutputPath).catch(() => {});
 			if(fileInfo)
 				await Deno.utime(convertedFilePath, Math.floor(fileInfo.mtime.getTime()/xu.SECOND), Math.floor(fileInfo.mtime.getTime()/xu.SECOND));

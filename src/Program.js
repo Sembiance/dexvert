@@ -399,6 +399,7 @@ export class Program
 			const restreamerOpts = {r, newName, newExt, suffix, numFiles : f.files.new.length, originalExt, originalInput};
 
 			// See if we have more advanced renaming
+			r.renameMap = {};
 			if(ro.renamer && (f.files.new.length>1 || ro.alwaysRename))
 			{
 				let renamer = null;
@@ -427,7 +428,6 @@ export class Program
 					break;
 				}
 
-				r.renameMap = {};
 				if(renamer===null)
 				{
 					xlog.info`${fg.pink("Failed")} to pick a renamer for ${f.files.new.length} files, keeping original names`;

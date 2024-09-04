@@ -351,6 +351,7 @@ export const WEAK_VALUES =
 	/^ddis\/dtif table data/,
 	/^DEC SRC Virtual Paper Lectern file/,
 	/^Delta ISO data/,
+	/^Delta RPM$/,
 	/^DIF \(/,
 	/^Disintegrator archive data/,
 	/^disk quotas file/,

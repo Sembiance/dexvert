@@ -25,6 +25,18 @@ export const WEAK_MAC_TYPE_CREATORS =
 	"BINA/mdos"
 ];
 
+export const WEAK_PRODOS_TYPES =
+[
+	// specific types that aren't useful to act upon
+	"FND",		// [C9] Apple IIgs Finder Data
+
+	// these are very generic and can't be acted on
+	"BIN",		// [06] Binary File
+	"OVL",		// [F1] User Defined 1
+	"PRG",		// [F8] User Defined 8
+	"SYS" 		// [FF] ProDOS-8 System File
+];
+
 export const WEAK_MAC_TYPES =
 [
 	// common Mac types
@@ -52,6 +64,7 @@ export const IGNORE_MAGICS =
 ];
 
 // These magics are untrustworthy and any detections against them should be noted as such
+// Note: Some may not be especially weak, they may just be so application-specific that I didn't want to deal with them anymore as they wouldn't be useful to support. Probably should have created an ignored.js file for these, but too late now
 export const WEAK_VALUES =
 [
 	// siegfried
@@ -374,7 +387,7 @@ export const WEAK_VALUES =
 	/ECOFF executable/,
 	/^EDID data/,
 	/^eCos RTOS string reference/,
-	/^ELI 5750 (compressed )?archive$/,
+	/^ELI 5750 (compressed )?archive/,
 	/^Encore( -)?$/,
 	/^Encore - version/,
 	/^Encore demand-paged executable/,
@@ -495,7 +508,7 @@ export const WEAK_VALUES =
 	/^Maple worksheet version/,
 	/^Mathematica 3.0 notebook/,
 	/^Matlab v(4|Mat)/,
-	/^Matlab (vDIF|vsta) mat-file/,
+	/^Matlab (vDIF|vis|vsta) mat-file/,
 	/^MAR archive data$/,
 	/^mc68k COFF/,
 	/^mc68k executable/,
@@ -552,6 +565,7 @@ export const WEAK_VALUES =
 	/^Norton GHost image/,
 	/^Novell LANalyzer capture file/,
 	/^NSQ archive data/,
+	/^o65 (executable|library|object)/,
 	/^Oak Technologies printer stream/,
 	/^Objective-C source/,
 	/^Old EZD Electron Density Map$/,
@@ -1130,6 +1144,7 @@ export const WEAK_VALUES =
 	/^FleetStreet Installation archive$/,
 	/^Form Memo MS Visual FoxPro 7$/,
 	/^ForthCMP compiled 16bit executable$/,
+	/^FoxGraph Data$/,
 	/^Generic RIFF container$/,
 	/^GnomeVFS$/,
 	/^Gravis UltraSound PnP InterWave patch$/,
@@ -1236,6 +1251,7 @@ export const WEAK_VALUES =
 	/^A-10 Tank Killer game data archive$/,
 	/^Aard Dictionary$/,
 	/^Abacus spreadsheet$/,
+	/^Ability document$/,
 	/^Abomination: The Nemesis Project game data archive$/,
 	/^Adorage scene$/,
 	/^AceMoney data$/,
@@ -1286,6 +1302,7 @@ export const WEAK_VALUES =
 	/^Attack of the PETSCII Robots Amiga module$/,
 	/^Attribute-Relation File Format$/,
 	/^Audio Disk Jockey (bank|session)$/,
+	/^AWE Productions game data$/,
 	/^AX-SHELL Group$/,
 	/^Axon Raw Format bitmap \(big endian\)$/,
 	/^Axon Text File format$/,
@@ -1478,6 +1495,7 @@ export const WEAK_VALUES =
 	/^Motorhead game data rchive$/,
 	/^Mozilla Archive Format \(gen\)$/,
 	/^Mozilla Firefox browser extension$/,
+	/^Multiplan spreadsheet \(v1\.0x\)$/,
 	/^Music Macro Language$/,
 	/^MS-DOS Backup Control data \(v3\.30-5\.xx\)$/,
 	/^Navitel/,
@@ -1501,6 +1519,7 @@ export const WEAK_VALUES =
 	/^Orda: Severnyi Veter game data$/,
 	/^Org-mode$/,
 	/^Organize! Form$/,
+	/^Origin Project$/,
 	/^OS\/2 Installable File System$/,
 	/^OS\/2 Network Information File$/,
 	/^OziExplorer Map$/,
@@ -1515,6 +1534,7 @@ export const WEAK_VALUES =
 	/^Palm Markup Language$/,
 	/^PALASM \(var\.2\)$/,
 	/^Parquet storage format$/,
+	/^Particles format \((big|little)-endian\)$/,
 	/^PC Secure encrypted \(V\d\)$/,	// so I actually found files that ARE this, but it's a pretty weak magic and we can't do anything with em, so we just mark it weak
 	/^PC-Calc spreadsheet \(gen\)$/,
 	/^PCjr Speech Adapter CVSD audio$/,
@@ -1604,6 +1624,7 @@ export const WEAK_VALUES =
 	/^TeslaCrypt\/Cryptowall encrypted$/,
 	/^Text602 document \(v1\.x\)$/,
 	/^The Riddle of Master Lu game data archive$/,
+	/^The Terminator: Dawn of Fate game data archive$/,
 	/^The Ur-Quan Masters game data archive$/,
 	/^The Witcher 2 game data archive$/,
 	/^Tim Newport-Peace's Special Use Airspace Format$/,
@@ -1626,6 +1647,8 @@ export const WEAK_VALUES =
 	/^Universal Data Format \(lower case\)$/,
 	/^Universal Scene Description Zipped AR format \(generic\)$/,
 	/^Vaulty obscured$/,
+	/^VBIN container$/,
+	/^VCOM Web Easy album$/,
 	/^Verilog source code \(with rem 2\)$/,
 	/^VersaCAD 2D Library \(MS-DOS\)$/,
 	/^VHSIC Hardware Description Language \(with rem\)$/,
@@ -1647,6 +1670,8 @@ export const WEAK_VALUES =
 	/^Win16\/32 Executable Delphi generic$/,
 	/^Win32 EXE PECompact compressed \(generic\)$/,
 	/^Winamp EQ Settings File$/,
+	/^WinArcadia Recording\/macro$/,
+	/^Windows 95 passwords$/,
 	/^Windows ActiveX control$/,
 	/^Windows Control Panel Item \(generic\)$/,
 	/^Windows Installer Merge Module$/,
@@ -1668,6 +1693,7 @@ export const WEAK_VALUES =
 	/^Xbox 360 (CON|LIVE) container data file$/,
 	/^Xbox Game Profile Data$/,
 	/^Xbox Packed Resource$/,
+	/^XFBIN CPK game data container$/,
 	/^Xilam DERF video$/,
 	/^Xilinx User Constraints File$/,
 	/^XML-Data Reduced$/,
@@ -1678,5 +1704,6 @@ export const WEAK_VALUES =
 	/^Z-Axis game data archive$/,
 	/^Zing! directory tree$/,
 	/^Zip Chunker fragment$/,
+	/^Zoot information processor database$/,
 	/^ZZT Game Creation System/
 ];

@@ -5,7 +5,8 @@ import {path} from "std";
 import {DEXRPC_HOST, DEXRPC_PORT} from "../dexUtil.js";
 import {flexMatch} from "../identify.js";
 import {formats, init as initFormats} from "../format/formats.js";
-import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES} from "../WEAK.js";
+import {IGNORE_MAGICS, WEAK_MAC_TYPE_CREATORS, WEAK_MAC_TYPES, WEAK_PRODOS_TYPES} from "../WEAK.js";
+import {_PRO_DOS_TYPE_CODE} from "../program/archive/cadius.js";
 
 const DECRECURSE_HOST = "127.0.0.1";
 const DECRECURSE_PORT = 17738;
@@ -393,9 +394,11 @@ async function processNextQueue()
 			}
 
 			const proDOSType = dexData.idMeta?.proDOSType;
-			if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})))
+			const proDOSTypeCode = _PRO_DOS_TYPE_CODE[proDOSType];
+			if(proDOSType && !idMetaCheckers.some(idMetaChecker => idMetaChecker({proDOSType, proDOSTypeCode, proDOSTypePretty : dexData.idMeta?.proDOSTypePretty, proDOSTypeAux : dexData.idMeta?.proDOSTypeAux})) &&
+			   (!proDOSTypeCode?.length || !WEAK_PRODOS_TYPES.includes(proDOSTypeCode)))
 			{
-				const proDOSTypeFull = `[${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`;
+				const proDOSTypeFull = `${proDOSTypeCode || ""} [${proDOSType}] ${dexData.idMeta?.proDOSTypePretty || ""}${dexData.idMeta?.proDOSTypeAux ? ` (0x${dexData.idMeta?.proDOSTypeAux})` : ""}`.trim();
 				newProDOSTypes[proDOSTypeFull] ||= [];
 				newProDOSTypes[proDOSTypeFull].pushUnique(task.relFilePath);
 			}

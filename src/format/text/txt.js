@@ -9,7 +9,7 @@ export class txt extends Format
 	ext          = [".txt"];
 	weakExt      = true;
 	magic        = TEXT_MAGIC;
-	idMeta       = ({macFileType}) => ["TEXT", "ttro"].includes(macFileType);
+	idMeta       = ({macFileType, proDOSTypeCode}) => ["TEXT", "ttro"].includes(macFileType) || ["TXT"].includes(proDOSTypeCode);
 	filename     = [/^file_id\.diz$/i];
 	priority     = this.PRIORITY.LOWEST;
 	fallback     = true;

@@ -36,7 +36,7 @@ export class iso extends Format
 
 	magic          = [
 		"ISO 9660 CD image", "ISO 9660 CD-ROM filesystem data", "ISO Disk Image File", "CD-I disk image", "UDF disc image", "BIN with CUE", "ISO Archiv gefunden", "Format: ISO 9660", "PC-98 ISO",
-		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image",
+		/^Raw CD image, Mode [12]/, "ISO9660 file system", "UDF file system", "FM Towns bootable disk image", "Toast disk image", "BeOS BFS",
 		/^ISO 9660$/, /^UDF recognition sequence.*ISO9660/, /^fmt\/(468|1738)( |$)/,
 		/^First .*are blank$/,
 		...HFS_MAGICS

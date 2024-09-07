@@ -36,7 +36,7 @@ const OS =
 	winxp :
 	{
 		debug       : false,
-		qty         : 13,
+		qty         : 14,
 		ramGB       : 2,
 		scriptExt   : ".au3",
 		emu         : "86Box",

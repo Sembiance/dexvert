@@ -12,7 +12,7 @@ export class windowsThumbDB extends Format
 
 		// app specific
 		"Corel PrintHouse image", "Corel Print Office image",
-		/^fmt\/(1419|1420|1421)( |$)/
+		/^fmt\/(1418|1419|1420|1421)( |$)/
 	];
 	converters = ["vinetto", "deark[module:cfb]", "iio2png"];
 }

@@ -19,25 +19,26 @@ export const cup386 =
 {
 	archive :
 	{
-		ainexePacked        : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
-		amisetupPacked      : {name : "Amisetup Packed", magic : ["Packer: Amisetup loader[by Robert Muchsel]"]},
-		aPACKPacked         : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
-		avPackPacked        : {name : "AVPACK Packed", magic : ["Packer: AVPACK(1.22)[Andrei Volkov]"]},
-		comRLEPackerPacked  : {name : "com RLE packer Packed", magic : ["Packer: com RLE packer[by NOP/PC]"]},
-		cruncherPacked      : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
-		exeLITEPacked       : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable"]},
-		fourKZIPPacked      : {name : "4kZIP Packed", magic : ["Packer: 4kZIP[by pascal //Digital Nightmare]"]},
-		lglzPacked          : {name : "LGLZ Packed", magic : ["16bit DOS EXE LGLZ compressed"]},
-		packerJESCOREPacked : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
-		packerPacked        : {name : "Packer Packed", magic : ["Packer: Packer"]},
-		pktinyPacked        : {name : "PKTINY Packed", magic : ["16bit DOS EXE PKTINY compressed"]},
-		rdtCompressorPacked : {name : "RDT Compressor Packed", magic : ["Packer: RDT_Compressor"]},
-		rjCrushPacked       : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable"]},
-		rleCOMPackerPacked  : {name : "RLE com-packer Packed", magic : ["Packer: RLE com-packer"]},
-		sixTwoFourPacked    : {name : "624 Packed", magic : ["Packer: Six-2-Fou", "Six-2-Four (624) packed DOS Command"]},
-		spaceMakerPacked    : {name : "SpaceMaker Packed", magic : ["16bit DOS EXE Spacemaker compressed"]},
-		tpackPacked         : {name : "T-PACK Packed", magic : ["Packer: TPACK", "16bit DOS COM T-PACK compressed"]},
-		xpackLZCOMPacked    : {name : "XPACK/LZCOM Packed", magic : ["Packer: XPACK/LZCOM"]}
+		ainexePacked                : {name : "AINEXE Packed", magic : ["AINEXE compressed 16bit DOS executable", "Packer: AINEXE"]},
+		amisetupPacked              : {name : "Amisetup Packed", magic : ["Packer: Amisetup loader[by Robert Muchsel]"]},
+		aPACKPacked                 : {name : "aPACK Packed", magic : ["Packer: aPACK", "16bit DOS EXE aPACK compressed"]},
+		avPackPacked                : {name : "AVPACK Packed", magic : ["Packer: AVPACK(1.22)[Andrei Volkov]"]},
+		comRLEPackerPacked          : {name : "com RLE packer Packed", magic : ["Packer: com RLE packer[by NOP/PC]"]},
+		cruncherPacked              : {name : "Cruncher Packed", magic : ["Cruncher compressed DOS executable"]},
+		exeLITEPacked               : {name : "ExeLITE Packed", magic : ["ExeLITE compressed 16bit DOS executable"]},
+		fourKZIPPacked              : {name : "4kZIP Packed", magic : ["Packer: 4kZIP[by pascal //Digital Nightmare]"]},
+		lglzPacked                  : {name : "LGLZ Packed", magic : ["16bit DOS EXE LGLZ compressed"]},
+		packerJESCOREPacked         : {name : "Packer JES //CORE Packed", magic : ["Packer: Packer[1997 by JES //CORE]"]},
+		packerPacked                : {name : "Packer Packed", magic : ["Packer: Packer"]},
+		pktinyPacked                : {name : "PKTINY Packed", magic : ["16bit DOS EXE PKTINY compressed"]},
+		rdtCompressorPacked         : {name : "RDT Compressor Packed", magic : ["Packer: RDT_Compressor"]},
+		rjCrushPacked               : {name : "RJCrush Packed", magic : ["RJCrush compressed 16bit DOS executable"]},
+		rleCOMPackerPacked          : {name : "RLE com-packer Packed", magic : ["Packer: RLE com-packer"]},
+		sixTwoFourPacked            : {name : "624 Packed", magic : ["Packer: Six-2-Fou", "Six-2-Four (624) packed DOS Command"]},
+		spaceMakerPacked            : {name : "SpaceMaker Packed", magic : ["16bit DOS EXE Spacemaker compressed"]},
+		tenthPlanetSoftPackerPacked : {name : "Tenth Planet Soft Packer Packed", magic : ["Packer: Tenth Planet Soft packer[1996]"]},
+		tpackPacked                 : {name : "T-PACK Packed", magic : ["Packer: TPACK", "16bit DOS COM T-PACK compressed"]},
+		xpackLZCOMPacked            : {name : "XPACK/LZCOM Packed", magic : ["Packer: XPACK/LZCOM"]}
 	}
 	
 };

@@ -27,14 +27,26 @@ export const WEAK_MAC_TYPE_CREATORS =
 
 export const WEAK_PRODOS_TYPES =
 [
-	// specific types that aren't useful to act upon
-	"FND",		// [C9] Apple IIgs Finder Data
-
-	// these are very generic and can't be acted on
+	// these are very generic or system level stuff and are not useful to act on
+	"BAT",		// [F5] User Defined 5
 	"BIN",		// [06] Binary File
+	"CFG",		// [5A] Configuration
+	"DRV",		// [BB] Apple IIgs Device Driver
+	"ENT",		// [5D] Entertainment
+	"FND",		// [C9] Apple IIgs Finder Data
+	"FST", 		// [BD] Apple IIgs File System Translator
+	"FTD",		// [42] File Type Definitions
 	"OVL",		// [F1] User Defined 1
+	"LDF",		// [BC] Apple IIgs Generic Load File
+	"P16",		// [F9] ProDOS-16 System File
+	"PIF",		// [B6] Apple IIgs Permanent INIT
 	"PRG",		// [F8] User Defined 8
-	"SYS" 		// [FF] ProDOS-8 System File
+	"SYS", 		// [FF] ProDOS-8 System File
+	"TIF",		// [B7] Apple IIgs Temporary INIT
+	"UD2",		// [F2] User Defined 2
+	"UD4",		// [F4] User Defined 4
+	"UNK",		// [00] Unknown
+	"VAR"		// [FD] Applesoft BASIC Variables
 ];
 
 export const WEAK_MAC_TYPES =
@@ -53,6 +65,7 @@ export const IGNORE_MAGICS =
 
 	// GT2
 	/^DPA Archiv gefunden \(Auflistung ist deaktiviert\)$/,
+	/^NSIS 1\.60-2\.0 Archiv gefunden \(Auflistung ist deaktiviert\)$/,		// The installer itself is properly extracted, but some sort of 'meta' file is left behind that is identifed as this, but it's always pretty small thus we just ignore it
 	/^RIFF Datei: unbekannter Typ/,
 
 	// file
@@ -87,6 +100,7 @@ export const WEAK_VALUES =
 	/^JBOOT STAG header/,
 	/^LZ4 compressed data$/,
 	/^Linux kernel version [\d.]+$/,
+	/^MLD sequence date,$/,
 	/^Neighborly text/,
 	/^OGG audio data$/,
 	/^QNX4 Boot Block$/,
@@ -225,6 +239,7 @@ export const WEAK_VALUES =
 	/^$/,	// eslint-disable-line no-control-regex
 	/^/,	// eslint-disable-line no-control-regex
 	/^ERROR: /,
+	/^NTFS$/,
 	/^Invalid name\.$/,
 	/^P;/,
 
@@ -729,6 +744,7 @@ export const WEAK_VALUES =
 	/^x86 executable( \(TV\))?( not stripped)?/,
 	/^x86 OpenFirmware FORTH Dictionary/,
 	/^xBase \(0xa\)$/,
+	/^xBase \(0xa\) .*no records/,
 	/^xBase \([^)]+\) MDX/,
 	/^xBase index/,
 	/^xBase, root pointer/,

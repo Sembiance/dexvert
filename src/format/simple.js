@@ -130,6 +130,7 @@ export default
 		amiDockConfig                   : {name : "AmiDock Configuration", ext : [".config"], magic : ["AmiDock Configuration"], weakMagic : true},
 		amigaGuideIndex                 : {name : "Amigaguide Index", ext : [".index"], magic : ["Amigaguide Index"]},
 		amosMenuBank                    : {name : "AMOS Menu Bank", ext : [".abk"], magic : ["AMOS Menu Bank"]},
+		appleIIgsShellScript            : {name : "Apple IIgs Shell Script", idMeta : ({proDOSTypeCode}) => proDOSTypeCode==="EXE"},
 		atariSTGuideHypertext           : {name : "Atari ST Guide Hypertext", ext : [".hyp"], magic : ["Atari ST Guide Hypertext document", "Atari ST Guide Hypertext"]},
 		atariSTGuideREF                 : {name : "Atari ST Guide REF Links", ext : [".ref"], magic : ["Atari ST Guide ref links"]},
 		averyDesignClipartIndex         : {name : "Avery Design clipart index", ext : [".zdx"], magic : ["Avery Design clipart index"], weakMagic : true},

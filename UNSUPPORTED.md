@@ -1,4 +1,4 @@
-# Unsupported File Formats (1,957)
+# Unsupported File Formats (1,974)
 These formats can still be **detected** by dexvert, they just are not converted into modern ones.<br>
 Some are not converted because they are not very useful, or are specific to a single application.<br>
 Others are not converted because it was deemed low priority, or there are no known programs to do so.
@@ -179,7 +179,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Audio (63)
+## Audio (64)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [audio/adLibInstrumentBank](https://discmaster.textfiles.com/search?formatid=adLibInstrumentBank) | [AdLib Instrument Bank](http://fileformats.archiveteam.org/wiki/AdLib_instrument_bank) | .bnk | [3 sample files](https://sembiance.com/fileFormatSamples/audio/adLibInstrumentBank/) - These .bnk files include sounds/instruments used by adlib ROL/SNG/SX files to make music. Technically the sounds could be extracted, maybe with 'Bank Manager' for DOS, but meh. Awave Studio claims to support these, but under version 7 I couldn't get them to load.
@@ -204,6 +204,7 @@ Family/Format | Name | Extensions | Notes
 [audio/fmTownsSND](https://discmaster.textfiles.com/search?formatid=fmTownsSND) | [FM-Towns SND](https://wiki.multimedia.cx/index.php/FM_TOWNS_SND) | .snd | [9 sample files](https://sembiance.com/fileFormatSamples/audio/fmTownsSND/) - Was kinda able to convert with SOX as RAW 8-bit mono PCM, but there is a lot of static and garbled-ness and some don't sound right at all. More infoo in: https://github.com/Sembiance/dexvert/issues/25
 [audio/headspaceSoundBanks](https://discmaster.textfiles.com/search?formatid=headspaceSoundBanks) | Headspace Sound Banks | .hsb | 
 [audio/homeBrewSound](https://discmaster.textfiles.com/search?formatid=homeBrewSound) | HomeBrew Sound | .hse | [1 sample file](https://sembiance.com/fileFormatSamples/audio/homeBrewSound/)
+[audio/hyperStudioSampledSound](https://discmaster.textfiles.com/search?formatid=hyperStudioSampledSound) | HyperStudio sampled sound |  | 
 [audio/iffSampledAudio](https://discmaster.textfiles.com/search?formatid=iffSampledAudio) | [IFF Sampled audio](https://wiki.amigaos.net/wiki/SAMP_IFF_Sampled_Sound) |  | 
 [audio/inverseFrequency](https://discmaster.textfiles.com/search?formatid=inverseFrequency) | [Inverse Frequency Sound Format](http://fileformats.archiveteam.org/wiki/Inverse_Frequency_Sound_format) |  | [3 sample files](https://sembiance.com/fileFormatSamples/audio/inverseFrequency/) - Used in various APOGEE games like commander keen. Didn't look that hard for a player/converter.
 [audio/jetPilotAudio](https://discmaster.textfiles.com/search?formatid=jetPilotAudio) | JETPilot audio |  | 
@@ -248,7 +249,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Document (105)
+## Document (110)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [document/fourDOSHelp](https://discmaster.textfiles.com/search?formatid=fourDOSHelp) | 4DOS Help | .hlp | 
@@ -258,10 +259,15 @@ Family/Format | Name | Extensions | Notes
 [document/amigaBaseDB](https://discmaster.textfiles.com/search?formatid=amigaBaseDB) | AmigaBase Database |  | 
 [document/amigaWriter](https://discmaster.textfiles.com/search?formatid=amigaWriter) | AmigaWriter Documet |  | [3 sample files](https://sembiance.com/fileFormatSamples/document/amigaWriter/) - Could probably convert this with the actual AmigaWriter program (sandbox/app/amiwrite.rar) but it's manual doesn't mention anything about CLI conversion.
 [document/aolAddressBook](https://discmaster.textfiles.com/search?formatid=aolAddressBook) | AOL Address Book | .idx | 
+[document/appleIIgsDatabase](https://discmaster.textfiles.com/search?formatid=appleIIgsDatabase) | Apple IIgs Database |  | 
 [document/appleIIgsDesktopPublishing](https://discmaster.textfiles.com/search?formatid=appleIIgsDesktopPublishing) | Apple IIgs Desktop Publishing |  | 
 [document/appleIIgsDocument](https://discmaster.textfiles.com/search?formatid=appleIIgsDocument) | Apple IIgs Document |  | 
+[document/appleIIgsHyperMedia](https://discmaster.textfiles.com/search?formatid=appleIIgsHyperMedia) | Apple IIgs HyperMedia |  | 
 [document/appleIIgsSpreadsheet](https://discmaster.textfiles.com/search?formatid=appleIIgsSpreadsheet) | Apple IIgs Spreadsheet |  | 
 [document/appleIIgsWordProcessing](https://discmaster.textfiles.com/search?formatid=appleIIgsWordProcessing) | Apple IIgs Word Processing |  | 
+[document/appleWorksDatabase](https://discmaster.textfiles.com/search?formatid=appleWorksDatabase) | AppleWorks Database |  | 
+[document/appleWorksSpreadsheet](https://discmaster.textfiles.com/search?formatid=appleWorksSpreadsheet) | AppleWorks Spreadsheet |  | 
+[document/appleWorksWordProcessing](https://discmaster.textfiles.com/search?formatid=appleWorksWordProcessing) | AppleWorks Word Processing |  | 
 [document/astoundPresentation](https://discmaster.textfiles.com/search?formatid=astoundPresentation) | [Astound Presentation](http://fileformats.archiveteam.org/wiki/Astound_Presentation) | .asd .smp .asv | [1 sample file](https://sembiance.com/fileFormatSamples/document/astoundPresentation/)
 [document/asymetrixCompelPresentation](https://discmaster.textfiles.com/search?formatid=asymetrixCompelPresentation) | Asymetrix Compel Presentation | .cpl | [1 sample file](https://sembiance.com/fileFormatSamples/document/asymetrixCompelPresentation/)
 [document/asyncProfessionalFax](https://discmaster.textfiles.com/search?formatid=asyncProfessionalFax) | [Async Profesional Fax](http://fileformats.archiveteam.org/wiki/Async_Professional_Fax) | .apf | [2 sample files](https://sembiance.com/fileFormatSamples/document/asyncProfessionalFax/)
@@ -407,13 +413,14 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Font (80)
+## Font (81)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [font/threeDCKFont](https://discmaster.textfiles.com/search?formatid=threeDCKFont) | 3D Construction Kit Font | .3fd | 
 [font/amigaOSOutlineFont](https://discmaster.textfiles.com/search?formatid=amigaOSOutlineFont) | AmigaOS Outline Font | .ofnt .font | 
 [font/amiWriteFont](https://discmaster.textfiles.com/search?formatid=amiWriteFont) | AmiWrite Font |  | 
 [font/appleIIgsFont](https://discmaster.textfiles.com/search?formatid=appleIIgsFont) | Apple IIgs Font |  | 
+[font/appleIIIFont](https://discmaster.textfiles.com/search?formatid=appleIIIFont) | Apple III Font |  | 
 [font/averyFont](https://discmaster.textfiles.com/search?formatid=averyFont) | Avery Font | .ff1 | 
 [font/bannerManiaFont](https://discmaster.textfiles.com/search?formatid=bannerManiaFont) | Banner Mania Font | .fnt | [19 sample files](https://sembiance.com/fileFormatSamples/font/bannerManiaFont/)
 [font/bannerManiaBanner](https://discmaster.textfiles.com/search?formatid=bannerManiaBanner) | BannerMania banner | .brm | 
@@ -493,7 +500,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Image (140)
+## Image (143)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [image/threeDStudio2DShape](https://discmaster.textfiles.com/search?formatid=threeDStudio2DShape) | 3D Studio 2D Shape | .shp | 
@@ -505,6 +512,7 @@ Family/Format | Name | Extensions | Notes
 [image/animatorPICCEL](https://discmaster.textfiles.com/search?formatid=animatorPICCEL) | Animator PIC/CEL | .pic .cel | 
 [image/applausePalette](https://discmaster.textfiles.com/search?formatid=applausePalette) | Applause Palette | .pal | 
 [image/a2Sprites](https://discmaster.textfiles.com/search?formatid=a2Sprites) | Apple II Sprites | .spr | [1 sample file](https://sembiance.com/fileFormatSamples/image/a2Sprites/) - Currently marked as unsupported because I can only really match extension and recoil2png isn't picky about what it converts resulting in a lot of 'garbage' output. Only have 1 sample file, so pretty rare format.
+[image/appleIIgsObjectOrientedGraphic](https://discmaster.textfiles.com/search?formatid=appleIIgsObjectOrientedGraphic) | Apple IIgs Object Oriented Graphic |  | 
 [image/applixBitmap](https://discmaster.textfiles.com/search?formatid=applixBitmap) | Applix bitmap | .im | 
 [image/artsAndLettersGraphic](https://discmaster.textfiles.com/search?formatid=artsAndLettersGraphic) | Arts and Letters Graphic | .ged | 
 [image/artWorks](https://discmaster.textfiles.com/search?formatid=artWorks) | [ArtWorks Drawing](http://fileformats.archiveteam.org/wiki/Artworks) |  | [12 sample files](https://sembiance.com/fileFormatSamples/image/artWorks/) - Viewer/Renderer: http://mw-software.com/software/awmodules/awrender.html
@@ -599,6 +607,7 @@ Family/Format | Name | Extensions | Notes
 [image/printShopDeluxeBorder](https://discmaster.textfiles.com/search?formatid=printShopDeluxeBorder) | Print Shop Deluxe Border | .pbr | 
 [image/printShopDeluxeColumnsGraphic](https://discmaster.textfiles.com/search?formatid=printShopDeluxeColumnsGraphic) | Print Shop Deluxe Columns Graphic | .pcg | 
 [image/printShopDeluxeRowsGraphic](https://discmaster.textfiles.com/search?formatid=printShopDeluxeRowsGraphic) | Print Shop Deluxe Rows Graphic | .prg | 
+[image/printShopGSGraphic](https://discmaster.textfiles.com/search?formatid=printShopGSGraphic) | Print Shop GS Graphic |  | 
 [image/printMasterDocument](https://discmaster.textfiles.com/search?formatid=printMasterDocument) | PrintMaster Document | .car | 
 [image/printPartnerBorder](https://discmaster.textfiles.com/search?formatid=printPartnerBorder) | PrintPartner Border | .bdr | 
 [image/professionalDraw](https://discmaster.textfiles.com/search?formatid=professionalDraw) | [Professional Draw Image](http://www.classicamiga.com/content/view/5037/62/) | .clips | [10 sample files](https://sembiance.com/fileFormatSamples/image/professionalDraw/) - No known converter.
@@ -622,6 +631,7 @@ Family/Format | Name | Extensions | Notes
 [image/teletext](https://discmaster.textfiles.com/search?formatid=teletext) | [Teletext](http://snisurset.net/code/abydos/teletext.html) | .bin | [2 sample files](https://sembiance.com/fileFormatSamples/image/teletext/) - Can't determine any reliable way to determine if a file is RAW teletext. Abydos will convert any garbage and .bin is far too generic an extension to match on.
 [image/tgif](https://discmaster.textfiles.com/search?formatid=tgif) | TGIF | .obj | These open in media-gfx/tgif but no CLI conversion supported
 [image/theCivilWarSpriteLibrary](https://discmaster.textfiles.com/search?formatid=theCivilWarSpriteLibrary) | The Civil War Sprite library | .spr | 
+[image/theDrawPascalScreenImage](https://discmaster.textfiles.com/search?formatid=theDrawPascalScreenImage) | TheDraw Pascal screen Image | .pas | 
 [image/topDrawDrawing](https://discmaster.textfiles.com/search?formatid=topDrawDrawing) | [Top Draw Drawing](http://fileformats.archiveteam.org/wiki/Top_Draw) | .tdr .td | [3 sample files](https://sembiance.com/fileFormatSamples/image/topDrawDrawing/)
 [image/universalBitMapFormat](https://discmaster.textfiles.com/search?formatid=universalBitMapFormat) | [Universal BitMap Format](http://discmaster.textfiles.com/browse/749/HACKER2.mdf/tsoft/bjim040.zip) | .ubf | [9 sample files](https://sembiance.com/fileFormatSamples/image/universalBitMapFormat/)
 [image/unrealTexture](https://discmaster.textfiles.com/search?formatid=unrealTexture) | Unreal Texture | .utx .u .unr | 
@@ -639,7 +649,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Music (129)
+## Music (131)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [music/aceTracker](https://discmaster.textfiles.com/search?formatid=aceTracker) | Ace Tracker Module | .am | [3 sample files](https://sembiance.com/fileFormatSamples/music/aceTracker/)
@@ -650,6 +660,8 @@ Family/Format | Name | Extensions | Notes
 [music/allSoundTracker](https://discmaster.textfiles.com/search?formatid=allSoundTracker) | All Sound Tracker Module | .ast | [2 sample files](https://sembiance.com/fileFormatSamples/music/allSoundTracker/)
 [music/andXSynth](https://discmaster.textfiles.com/search?formatid=andXSynth) | AND XSynth Module | .amx | [1 sample file](https://sembiance.com/fileFormatSamples/music/andXSynth/)
 [music/ansiMusic](https://discmaster.textfiles.com/search?formatid=ansiMusic) | [ANSI Music](http://artscene.textfiles.com/ansimusic/) | .mus | No known converter. Maybe easiest would be converting to MIDI? More info and samples from: http://artscene.textfiles.com/ansimusic/
+[music/appleIIgsMusic](https://discmaster.textfiles.com/search?formatid=appleIIgsMusic) | Apple IIgs Music |  | 
+[music/appleIIgsMusicStudioSong](https://discmaster.textfiles.com/search?formatid=appleIIgsMusicStudioSong) | Apple IIgs Music Studio song | .sng | [5 sample files](https://sembiance.com/fileFormatSamples/music/appleIIgsMusicStudioSong/)
 [music/aProSys](https://discmaster.textfiles.com/search?formatid=aProSys) | AProSys Module | .amx .aps | [2 sample files](https://sembiance.com/fileFormatSamples/music/aProSys/)
 [music/axsModule](https://discmaster.textfiles.com/search?formatid=axsModule) | AXS Module | .axs | [2 sample files](https://sembiance.com/fileFormatSamples/music/axsModule/)
 [music/aySTRC](https://discmaster.textfiles.com/search?formatid=aySTRC) | AY STRC Module | .strc | [1 sample file](https://sembiance.com/fileFormatSamples/music/aySTRC/)
@@ -774,7 +786,7 @@ Family/Format | Name | Extensions | Notes
 
 
 
-## Other (1,130)
+## Other (1,135)
 Family/Format | Name | Extensions | Notes
 ------------- | ---- | ---------- | -----
 [other/theSimsObject](https://discmaster.textfiles.com/search?formatid=theSimsObject) | "The Sims" object | .flr .wll .iff | 
@@ -887,7 +899,9 @@ Family/Format | Name | Extensions | Notes
 [other/apAssistCompressedData](https://discmaster.textfiles.com/search?formatid=apAssistCompressedData) | ApAssist Compressed Data |  | 
 [other/apBasicChainFileModule](https://discmaster.textfiles.com/search?formatid=apBasicChainFileModule) | ApBasic Chain file/module | .chn | 
 [other/appleIIgsClassicDeskAccessory](https://discmaster.textfiles.com/search?formatid=appleIIgsClassicDeskAccessory) | Apple IIgs Classic Desk Accessory |  | 
+[other/appleIIgsInstrument](https://discmaster.textfiles.com/search?formatid=appleIIgsInstrument) | Apple IIgs Instrument |  | 
 [other/appleIIgsNewDeskAccessory](https://discmaster.textfiles.com/search?formatid=appleIIgsNewDeskAccessory) | Apple IIgs New Desk Accessory |  | 
+[other/appleIIgsTool](https://discmaster.textfiles.com/search?formatid=appleIIgsTool) | Apple IIgs Tool |  | 
 [other/appliedBiosystemsIncFormat](https://discmaster.textfiles.com/search?formatid=appliedBiosystemsIncFormat) | Applied Biosystems Inc. Format (ABIF) | .s1 .ab1 .fsa | 
 [other/arcMasterColorSet](https://discmaster.textfiles.com/search?formatid=arcMasterColorSet) | ArcMaster color Set | .set | 
 [other/arcSoftAlbumOrSlideshow](https://discmaster.textfiles.com/search?formatid=arcSoftAlbumOrSlideshow) | ArcSoft Album | .abm .sld | 
@@ -919,6 +933,7 @@ Family/Format | Name | Extensions | Notes
 [other/aviraAntiVirVirusDatabase](https://discmaster.textfiles.com/search?formatid=aviraAntiVirVirusDatabase) | Avira AntiVir Virus Database | .vdf | 
 [other/avsVideoEditorProject](https://discmaster.textfiles.com/search?formatid=avsVideoEditorProject) | AVS Video Editor Project | .vep | 
 [other/axialisProScreensaverProducerProject](https://discmaster.textfiles.com/search?formatid=axialisProScreensaverProducerProject) | Axialis Professional Screensaver Producer project | .ssp | 
+[other/axisGameEnhancementModules](https://discmaster.textfiles.com/search?formatid=axisGameEnhancementModules) | Axis Game Enhancement Modules | .fil | 
 [other/babbleData](https://discmaster.textfiles.com/search?formatid=babbleData) | Babble! Data | .bab | 
 [other/babylonGlossary](https://discmaster.textfiles.com/search?formatid=babylonGlossary) | Babylon Glossary | .bgl | 
 [other/barsAndPipesFile](https://discmaster.textfiles.com/search?formatid=barsAndPipesFile) | Bars and Pipes File | .gchone .gchord .song | 
@@ -1486,6 +1501,7 @@ Family/Format | Name | Extensions | Notes
 [other/normalityGameDataArchive](https://discmaster.textfiles.com/search?formatid=normalityGameDataArchive) | Normality game data archive | .das | 
 [other/nortonChangeDirInfo](https://discmaster.textfiles.com/search?formatid=nortonChangeDirInfo) | Norton Change Directory Info | .ncd | 
 [other/nortonDiskDoctorUnDoFile](https://discmaster.textfiles.com/search?formatid=nortonDiskDoctorUnDoFile) | Norton Disk Doctor UnDo file | .dat | 
+[other/nortonDiskreetEncryptedData](https://discmaster.textfiles.com/search?formatid=nortonDiskreetEncryptedData) | Norton Diskreet encrypted data | .sec | 
 [other/nortonFileInfoData](https://discmaster.textfiles.com/search?formatid=nortonFileInfoData) | Norton FileInfo data | .fi | 
 [other/nortonPCAnywhereCallersList](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereCallersList) | Norton pcAnywhere Callers list | .ci6 | 
 [other/nortonPCAnywhereHardwareConfigurations](https://discmaster.textfiles.com/search?formatid=nortonPCAnywhereHardwareConfigurations) | Norton pcAnywhere Hardware configurations | .hw6 | 
@@ -1518,6 +1534,7 @@ Family/Format | Name | Extensions | Notes
 [other/os2PresentationManagerMetafile](https://discmaster.textfiles.com/search?formatid=os2PresentationManagerMetafile) | OS/2 Presentation Manager Metafile | .met | 
 [other/os2SyslevelInfo](https://discmaster.textfiles.com/search?formatid=os2SyslevelInfo) | OS/2 SYSLEVEL info | .pem .x25 .nfs | 
 [other/os968kModule](https://discmaster.textfiles.com/search?formatid=os968kModule) | OS9/68k Module |  | 
+[other/outlookExpressDatabase](https://discmaster.textfiles.com/search?formatid=outlookExpressDatabase) | Outlook Express Database |  | 
 [other/paRISCObjectCode](https://discmaster.textfiles.com/search?formatid=paRISCObjectCode) | PA-RISC Object Code | .o | 
 [other/pageFocusData](https://discmaster.textfiles.com/search?formatid=pageFocusData) | PageFocus Data | .1 | 
 [other/paiVirtuosoResourceData](https://discmaster.textfiles.com/search?formatid=paiVirtuosoResourceData) | PAI Virtuoso Resource data | .rsc .rsi | 

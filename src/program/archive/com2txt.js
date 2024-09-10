@@ -7,7 +7,5 @@ export class com2txt extends Program
 	loc       = "dos";
 	bin       = "COM2TXT.EXE";
 	args      = async r => ["-r", r.inFile({backslash : true}), await r.outFile("out.com")];
-	//cwd       = r => r.outDir();
-	//dosData   = () => ({runIn : "out"});
 	renameOut = true;
 }

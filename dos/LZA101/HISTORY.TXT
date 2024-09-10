@@ -1,0 +1,18 @@
+
+HISTORY FILE FOR LZA
+--------------------
+
+1. January 1999 - released v1.00
+2. January 1999 - released v1.01 - 
+	* changed the order of parameters for command line archiver
+          (archive name now comes as the FIRST parameter)
+	* added support for using LIST files (switch = /LST:listfile)
+	* multiple filenames (not file specifications) can be supplied
+          for archving - filenames must be joined by the "+" sign
+	* added a command line Win16 "CRT" program - lza16.exe
+          - this is run like the other command line versions, but it is
+            a 16-bit Windows (non-gui) program
+        * attribute bit for archive comment files changed
+	* command line programs can now mark a file as a comment file
+          with the new /COMMENT parameter.
+

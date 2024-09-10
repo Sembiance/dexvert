@@ -6,6 +6,7 @@ export class hyperWriter extends Format
 	website        = "http://fileformats.archiveteam.org/wiki/Hyperwriter";
 	ext            = [".hw4", ".hw3"];
 	forbidExtMatch = true;
+	forbiddenExt   = [".txt"];	// to prevent infinite recursion
 	magic          = ["HyperWriter document"];
 	auxFiles = (input, otherFiles) =>
 	{
